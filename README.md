@@ -9,13 +9,20 @@ Requirements are R (>= 3.6.0) and [CHNOSZ](http://chnosz.net) (>= 1.3.3).
 First install the **remotes** package from CRAN.
 
 ```R
-install.packages("devtools")
+install.packages("remotes")
+```
+
+Also install **knitr**, which is needed to build the vignettes.
+
+```R
+install.packages("knitr")
 ```
 
 Then install **JMDplots** from Github including the vignettes.
+(This will also install CHNOSZ if it is not installed already.)
 
 ```R
-devtools::install_github("jedick/JMDplots", build_vignettes = TRUE)
+remotes::install_github("jedick/JMDplots", build_vignettes = TRUE)
 ```
 
 Finally open the vignettes to see the plots
