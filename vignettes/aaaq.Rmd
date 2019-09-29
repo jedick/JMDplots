@@ -1,0 +1,47 @@
+---
+title: "One plot from group additivity paper (2006)"
+output: 
+  rmarkdown::html_vignette:
+    mathjax: null
+vignette: >
+  %\VignetteIndexEntry{One plot from group additivity paper (2006)}
+  %\VignetteEngine{knitr::rmarkdown}
+  \usepackage[utf8]{inputenc}
+---
+
+This vignette from the R package JMDplots contains one plot from the paper by <a href="https://doi.org/10.5194/bg-3-311-2006" title="Temperature, pressure, and electrochemical constraints on protein speciation: Group additivity calculation of the standard molal thermodynamic properties of ionized unfolded proteins">Dick et al. (2006)</a>.
+The code here depends on the CHNOSZ package.
+
+```{r CHNOSZ, message = FALSE, results = "hide"}
+library(CHNOSZ)
+```
+
+This plot, showing the relative stabilities of extracellular α-amylase on an Eh-pH diagram, is similar to Fig. 13 of Dick et al. (2006).
+Points are added for Eh-pH values from soils ([Baas Becking et al., 1960](https://www.jstor.org/stable/30059218)) and hot springs in Yellowstone (+) ([Spear et al., 2005](https://doi.org/10.1073.pnas.0409574102)) and Iceland (N) ([Stefánsson and Arnórsson, 2002](https://doi.org/10.1016/S0009-2541(02)00119-5)).
+Note that the symbols for Yellowstone and Iceland were swapped in the figure caption of Dick et al. (2006).
+
+## Eh-pH diagram for extracellular α-amylases (Figure 13)
+```{r amylaseplot, message = FALSE, results = "hide", fig.align='center', out.width='100%', fig.width = 6, fig.height = 6}
+# make the first plot without names
+add.obigt("OldAA")
+basis("CHNOSe")
+basis(c("NH3", "H2S"), c(-6, -3))
+species(c("AMY_BACSU", "O08452_PYRFU"))
+a <- affinity(pH = c(2, 10, 500), Eh = c(-1, 1, 500))
+diagram(a, balance = "CO2", lwd = 2, names = "")
+water.lines(a)
+# plot the points
+BKMdat <- read.csv(system.file("extdata/aaaq/BKM60_Fig7.csv", package = "JMDplots"))
+points(BKMdat$pH, BKMdat$Eh, pch = 20)
+points(c(8.5, 6.2, 4.2, 6.7), c(0.018, 0.223, 0.022, 0.067), pch = 3, col = "red")
+points(c(8.24, 7.17, 8.11), c(-0.44, -0.41, -0.49), pch = 17, col = "red")
+# overlay the next plot (higher T, names on top of points)
+a <- affinity(pH = c(2, 10, 500), Eh = c(-1, 1, 500), T = 100)
+diagram(a, balance = "CO2", lwd = 2, col = "red", add = TRUE, cex.names = 1.5, col.names = "slateblue1", font = 2)
+water.lines(a, col = "red")
+# add legends
+ltext <- c(describe.property("T", 25), describe.property("T", 100))
+legend("topright", legend = ltext, lty = 1, col = c("black", "red"))
+ltext <- c("Soils (Bass Becking et al., 1960)", "Yellowstone (Spear et al., 2005)", "Iceland (Stefánsson and Arnórsson, 2002)")
+legend("bottomleft", legend = ltext, pch = c(20, 3, 17))
+```

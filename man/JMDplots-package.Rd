@@ -8,16 +8,19 @@
 \description{
 This package contains data and code used to make the plots in different papers by the author.
 The code is not identical to that used in the papers, but has been adapted to be usable in this package.
-Each paper is identified with a project name.
-These names are summarized in the table below and are used for the function names and installed directories under \code{extdata}.
-The specific function names have the figure numbers appended, as in e.g. \code{\link{gradox1}}.
+Each paper is identified with a project name, as listed in the table below.
+The plots are available the corresponding vignettes in the package.
 }
 
 \details{
   \itemize{
     \item \code{\link{chnszten}} - CHNOSZ, ten years after first CRAN submission (Dick, 2019)
     \item \code{\link{gradox}} - Carbon oxidation state of metagenomes in redox gradients (Dick et al., 2019)
+    \item \code{aaaq} - Amino acid group additivity for ionized proteins (Dick et al., 2006)
   }
+  These names are used for the vignettes, functions, and data directories under \code{extdata}.
+  The function names have figure numbers appended, as in e.g. \code{\link{gradox1}}.
+  Note that \code{aaaq} has a vignette but no functions.
   The data directories are described below.
 }
 
@@ -33,12 +36,22 @@ The specific function names have the figure numbers appended, as in e.g. \code{\
   }
 }
 
+\section{aaaq}{
+  \describe{
+    \item{BKM60_Fig7.csv}{Eh-pH values for normal, wet and waterlogged soils from Fig. 7 of Baas Becking et al. (1960).}
+  }
+}
+
 \section{Requirements}{
 Requires R 3.6.0 for the \code{gap.axis} argument in \code{\link{axis}}.
 Requires CHNOSZ 1.3.3 for updated format of OBIGT database.
 }
 
 \references{
+Baas Becking, L. G. M., Kaplan, I. R. and Moore, D. (1960) Limits of the natural environment in terms of pH and oxidation-reduction potentials. \emph{Journal of Geology} \bold{68}, 243--284. \url{http://www.jstor.org/stable/30059218}
+
+Dick, J. M., LaRowe, D. E. and Helgeson, H. C. (2006) Temperature, pressure, and electrochemical constraints on protein speciation: Group additivity calculation of the standard molal thermodynamic properties of ionized unfolded proteins. \emph{Biogeosciences} \bold{3}, 311--336. \doi{10.5194/bg-3-311-2006}
+
 Dick, J. M. (2019) CHNOSZ: Thermodynamic calculations and diagrams for geochemistry. \emph{Front. Earth Sci.} \bold{7}:180. \doi{10.3389/feart.2019.00180}
 
 Dick, J. M., Yu, M., Tan, J. and Lu, A. (2019) Changes in carbon oxidation state of metagenomes along geochemical redox gradients. \emph{Front. Microbiol.} \bold{10}, 120. \doi{10.3389/fmicb.2019.00120}
