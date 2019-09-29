@@ -1,19 +1,34 @@
 # exports for JMDplots package
 export(
-# gradox project 20190928
-  "gradox1", "gradox2", "gradoxS1", "gradoxS2", "gradox3", "gradox4", "gradox5"
+  # gradox paper 20190928
+  "gradox1", "gradox2", "gradoxS1", "gradoxS2", "gradox3", "gradox4", "gradox5",
+  # chnszten paper 20190929
+  "chnszten1", "chnszten4", "chnszten5", "chnszten6", "chnszten7",
+  "chnsztenS1", "chnsztenS2", "chnsztenS3", "chnsztenS4", "chnsztenS5", "chnsztenS6A", "chnsztenS6B", "chnsztenS7", "chnsztenS8", "chnsztenS9", "chnsztenS10"
 )
 
 # imports from CHNOSZ
-importFrom("CHNOSZ", "ZC", "affinity", "aminoacids", "as.chemical.formula", 
+importFrom("CHNOSZ",
+  # first batch: gradox
+  "ZC", "affinity", "aminoacids", "as.chemical.formula", 
   "basis", "diagram", "info", "label.figure", "makeup", "mod.obigt",
-  "species", "swap.basis", "thermo", "thermo.axis", "today")
+  "species", "swap.basis", "thermo", "thermo.axis", "today",
+  # second batch: chnszten
+  "DGtr", "add.obigt", "axis.label", "bgamma", "describe.basis", "describe.property",
+  "describe.reaction", "equilibrate", "expr.property", "expr.species", "findit",
+  "list2array", "mass", "maxdiff", "mod.buffer", "mosaic",
+  "nonideal", "obigt", "ratlab", "reset", "solubility",
+  "subcrt", "thermo.plot.new", "water")
 
-# imports from recommended packages
-importFrom("grDevices", "dev.off")
+# imports from other packages
+importFrom("shiny", "fluidPage", "includeCSS", "shinyApp")
+importFrom("timevis", "renderTimevis", "timevis", "timevisOutput")
+
+# imports from standard packages
+importFrom("grDevices", "dev.off", "cairo_pdf", "pdf")
 importFrom("graphics", "abline", "arrows", "axis", "box", "layout",
            "legend", "lines", "mtext", "par", "plot", "plot.new",
            "points", "rect", "text", "title")
 importFrom("stats", "lm", "na.omit", "predict", "sd")
-importFrom("utils", "read.csv")
+importFrom("utils", "read.csv", "demo", "packageVersion", "tail")
 

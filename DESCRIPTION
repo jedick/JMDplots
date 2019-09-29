@@ -9,7 +9,8 @@ Authors@R: c(
 Author: Jeffrey Dick [aut, cre] (0000-0002-0687-5890)
 Maintainer: Jeffrey Dick <jeff@chnosz.net>
 Depends: R (>= 3.6.0), CHNOSZ (>= 1.3.3)
-Suggests: knitr
+Imports: shiny, timevis
+Suggests: knitr, rmarkdown
 Description: Code and data for plots from papers and preprints.
 Encoding: UTF-8
 License: GPL-2

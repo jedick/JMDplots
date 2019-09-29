@@ -1,0 +1,41 @@
+---
+title: "Plots from CHNOSZ paper"
+output: 
+  rmarkdown::html_vignette:
+    mathjax: null
+vignette: >
+  %\VignetteIndexEntry{Plots from CHNOSZ paper}
+  %\VignetteEngine{knitr::rmarkdown}
+  \usepackage[utf8]{inputenc}
+---
+
+This vignette from the R package JMDplots contains plots from the paper by <a href="https://doi.org/10.3389/feart.2019.00180" title="CHNOSZ: Thermodynamic calculations and diagrams for geochemistry">Dick (2019)</a>.
+
+```{r JMDplots, message = FALSE, results = "hide"}
+library(JMDplots)
+```
+
+## Mosaic Eh-pH diagram (Figure 4)
+```{r chnszten4, message = FALSE, echo = 1, fig.align='center', out.width='100%', out.height='300px'}
+chnszten4()
+knitr::include_graphics("chnszten4.pdf")
+```
+
+## Corundum solubility diagram (Figure 5)
+```{r chnszten5, message = FALSE, echo = 1, fig.align='center', out.width='50%', out.height='300px'}
+chnszten5()
+knitr::include_graphics("chnszten5.pdf")
+```
+
+## <a href="http://www.dewcommunity.org/" title="Deep Earth Water Community">DEW</a> model (based on Fig. 3 of [Sverjensky et al., 2014](http://www.nature.com/doifinder/10.1038/ngeo2291)) (Figure 6)
+```{r chnszten6, message = FALSE, echo = 1, fig.align='center', out.width='50%', out.height='350px'}
+chnszten6()
+knitr::include_graphics("chnszten6.pdf")
+```
+
+## Thermodynamic properties of reactions involving Al-bearing minerals (Figure 7)
+```{r chnszten7, message = FALSE, echo = 1, fig.align='center', out.width='100%', out.height='650px'}
+chnszten7()
+knitr::include_graphics("chnszten7.pdf")
+```
+
