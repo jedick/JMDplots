@@ -1,0 +1,72 @@
+---
+title: "gradox plots"
+output: 
+  rmarkdown::html_vignette:
+    mathjax: null
+vignette: >
+  %\VignetteIndexEntry{gradox plots}
+  %\VignetteEngine{knitr::rmarkdown}
+  \usepackage[utf8]{inputenc}
+---
+
+```{r HTML, include=FALSE}
+## some frequently used HTML expressions
+# use lowercase here because these tend to be variable names in the examples
+zc <- "<i>Z</i><sub>C</sub>"
+```
+
+This vignette from the R package JMDplots contains plots from the paper by [Dick et al. (2019)](https://doi.org/10.3389/fmicb.2019.00120).
+For a closer reproduction of the figures in the paper, all plots here are made as PDF files (TRUE in arguments).
+
+```{r JMDplots, message = FALSE, results = "hide"}
+library(JMDplots)
+```
+
+## Some general characteristics of `r zc` of DNA, RNA, and proteins (Figure 1)
+```{r gradox1, message = FALSE, echo = 1, fig.align='center', out.width='100%', out.height='550px'}
+gradox1(TRUE)
+knitr::include_graphics("gradox1.pdf")
+```
+
+## Selected plots of DNA, RNA, and protein `r zc` (Figure 2)
+```{r gradox2, message = FALSE, echo = 1, fig.align='center', out.width='100%', out.height='400px'}
+gradox2(TRUE)
+knitr::include_graphics("gradox2.pdf")
+```
+
+## All plots of DNA and RNA `r zc` (Figure S1)
+```{r gradoxS1, message = FALSE, echo = 1, fig.align='center', out.width='100%', out.height='200px'}
+mout <- gradoxS1(TRUE)
+knitr::include_graphics("gradoxS1.pdf")
+```
+
+## All plots of protein `r zc` (Figure S2)
+```{r gradoxS2, message = FALSE, echo = 1, fig.align='center', out.width='100%', out.height='200px'}
+pout <- gradoxS2(TRUE)
+knitr::include_graphics("gradoxS2.pdf")
+```
+
+## `r zc` of proteins vs DNA (metagenomes and metatranscriptomes) (Figure 3)
+```{r gradox3, message = FALSE, echo = 1, fig.align='center', out.width='100%', out.height='500px'}
+gradox3(mout, pout, TRUE)
+knitr::include_graphics("gradox3.pdf")
+```
+
+## Thermodynamic calculations of relative stabilities along redox gradients (Figure 4)
+```{r gradox4, message = FALSE, echo = 1, fig.align='center', out.width='100%', out.height='500px'}
+gradox4(mout, pout, TRUE)
+knitr::include_graphics("gradox4.pdf")
+```
+
+## `r zc` of reads classified to selected abundant species (Figure 5)
+```{r gradox5, message = FALSE, echo = 1, fig.align='center', out.width='100%', out.height='500px'}
+gradox5(TRUE)
+knitr::include_graphics("gradox5.pdf")
+```
+
+## `r zc` of reads classified to selected abundant species (including deeper samples) (Figure S3)
+```{r gradoxS3, message = FALSE, echo = 1, fig.align='center', out.width='100%', out.height='500px'}
+gradox5(TRUE, NULL)
+knitr::include_graphics("gradoxS3.pdf")
+```
+

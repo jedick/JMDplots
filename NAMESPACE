@@ -1,0 +1,19 @@
+# exports for JMDplots package
+export(
+# gradox project 20190928
+  "gradox1", "gradox2", "gradoxS1", "gradoxS2", "gradox3", "gradox4", "gradox5"
+)
+
+# imports from CHNOSZ
+importFrom("CHNOSZ", "ZC", "affinity", "aminoacids", "as.chemical.formula", 
+  "basis", "diagram", "info", "label.figure", "makeup", "mod.obigt",
+  "species", "swap.basis", "thermo", "thermo.axis", "today")
+
+# imports from recommended packages
+importFrom("grDevices", "dev.off")
+importFrom("graphics", "abline", "arrows", "axis", "box", "layout",
+           "legend", "lines", "mtext", "par", "plot", "plot.new",
+           "points", "rect", "text", "title")
+importFrom("stats", "lm", "na.omit", "predict", "sd")
+importFrom("utils", "read.csv")
+
