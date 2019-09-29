@@ -7,17 +7,18 @@
 
 \description{
 This package contains data and code used to make the plots in different papers by the author.
-The code is not identical to that used in the papers, but has been adapted from scripts to be usable in this package.
+The code is not identical to that used in the papers, but has been adapted to be usable in this package.
 Each paper is identified with a project name.
-These are summarized in the table below and are used for the installed directories under \code{extdata} and function names.
+These names are summarized in the table below and are used for the function names and installed directories under \code{extdata}.
 The specific function names have the figure numbers appended, as in e.g. \code{\link{gradox1}}.
 }
 
 \details{
   \itemize{
-    \item \code{\link{gradox}} - redox gradients (Dick et al., 2019)
+    \item \code{\link{chnszten}} - CHNOSZ, ten years after first CRAN submission (Dick, 2019)
+    \item \code{\link{gradox}} - Carbon oxidation state of metagenomes in redox gradients (Dick et al., 2019)
   }
-  The data directories for each of these papers are described below.
+  The data directories are described below.
 }
 
 \section{gradox}{
@@ -34,10 +35,12 @@ The specific function names have the figure numbers appended, as in e.g. \code{\
 
 \section{Requirements}{
 Requires R 3.6.0 for the \code{gap.axis} argument in \code{\link{axis}}.
-Requires CHNOSZ 1.3.3 for updated format of OBIGT data frame.
+Requires CHNOSZ 1.3.3 for updated format of OBIGT database.
 }
 
 \references{
+Dick, J. M. (2019) CHNOSZ: Thermodynamic calculations and diagrams for geochemistry. \emph{Front. Earth Sci.} \bold{7}:180. \doi{10.3389/feart.2019.00180}
+
 Dick, J. M., Yu, M., Tan, J. and Lu, A. (2019) Changes in carbon oxidation state of metagenomes along geochemical redox gradients. \emph{Front. Microbiol.} \bold{10}, 120. \doi{10.3389/fmicb.2019.00120}
 
 Rho, M., Tang, H. and Ye, Y. (2010) FragGeneScan: predicting genes in short and error-prone reads. \emph{Nucleic Acids Res.} \bold{38}, e191. \doi{10.1093/nar/gkq747}

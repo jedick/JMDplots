@@ -8,9 +8,9 @@
 \alias{gradox3}
 \alias{gradox4}
 \alias{gradox5}
-\title{Plots for \dQuote{gradox} paper}
+\title{Plots from redox gradients paper}
 \description{
-Plots for the paper by Dick et al. (2019).
+Plots from the paper by Dick et al. (2019).
 }
 
 \usage{

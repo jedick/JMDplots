@@ -50,7 +50,7 @@ This table gives a brief description of each function.
   \code{chnszten5} \tab Corundum solubility diagram \cr
   \code{chnszten6} \tab DEW model (based on Fig. 3 of Sverjensky et al., 2014) \cr
   \code{chnszten7} \tab Thermodynamic properties of reactions involving Al-bearing minerals \cr
-  \code{chnsztenS1} \tab Comparison of logK and maximum affinity methods \cr
+  \code{chnsztenS1} \tab Comparison of \logK and maximum affinity methods \cr
   \code{chnsztenS2} \tab Eh-pH diagram like Fig. 5A of Caporuscio et al. (2017) \cr
   \code{chnsztenS3} \tab Gibbs energy of transformation for an assemblage of n-alkanes \cr
   \code{chnsztenS4} \tab \code{\link[CHNOSZ]{findit}} calculations for sulfur species \cr
@@ -81,6 +81,6 @@ shinyOK <- require("shiny", quietly = TRUE)
 timevisOK <- require("timevis", quietly = TRUE)
 if(interactive() & shinyOK & timevisOK) chnszten1()
 
-# Mosaic Eh-pH diagram
-chnszten4()
+# Mosaic Eh-pH diagram (creates a PDF file)
+if(interactive()) chnszten4()
 }
