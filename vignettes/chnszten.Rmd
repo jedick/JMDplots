@@ -1,10 +1,10 @@
 ---
-title: "Plots from CHNOSZ paper"
+title: "Four plots from CHNOSZ paper (2019)"
 output: 
   rmarkdown::html_vignette:
     mathjax: null
 vignette: >
-  %\VignetteIndexEntry{Plots from CHNOSZ paper}
+  %\VignetteIndexEntry{Four plots from CHNOSZ paper (2019)}
   %\VignetteEngine{knitr::rmarkdown}
   \usepackage[utf8]{inputenc}
 ---

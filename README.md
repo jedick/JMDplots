@@ -6,7 +6,7 @@ Requirements are R (>= 3.6.0) and [CHNOSZ](http://chnosz.net) (>= 1.3.3).
 
 ## Installation from Github
 
-First install some required package from CRAN.
+First install some required packages from CRAN.
 **remotes** provides the `install_github` function.
 **knitr** is needed to build the vignettes.
 **rmarkdown** creates self-contained HTML vignettes.
