@@ -5,9 +5,7 @@
 # or ZC of metagenomic proteins 20180228
 # NOTE: dataset should end in "_MG" or "_MT" (plot DNA and RNA compositions)
 # or "_MGP" or "_MTP" (plot protein compositions)
-## optional: vioplotx is needed for split violin plots
-## (plottype="violin")
-#library(vioplotx)
+## optional: vioplotx package is needed for split violin plots
 plotMG <- function(dataset="Guerrero_Negro_IMG_MG", plottype="bars",
   samples=formatC(10:1, width=2, flag="0"), labels=formatC(10:1, width=2, flag="0"),
   group="mat", xlab="layer", ylim=c(1.67, 1.77), abbrev=NULL, dsDNA=TRUE, plot.RNA=TRUE,
@@ -123,9 +121,9 @@ plotMG <- function(dataset="Guerrero_Negro_IMG_MG", plottype="bars",
       lines(at[!isdeep], ZCmean[!isdeep], col=col)
       lines(at[!isdeep], ZChi[!isdeep], col=col, lty=3)
     }
-    if(plottype=="violin") {
-      vioplotx(ZC~sample, DNA, add=TRUE, col = "palevioletred", plotCentre = "line", side = "left", pchMed = 21, colMed = "palevioletred4", colMed2 = "palevioletred2")
-    }
+#    if(plottype=="violin") {
+#      vioplotx(ZC~sample, DNA, add=TRUE, col = "palevioletred", plotCentre = "line", side = "left", pchMed = 21, colMed = "palevioletred4", colMed2 = "palevioletred2")
+#    }
     if(plottype=="bars") {
       # error bar plots 20180515
       # apply small offset to x-position to separate DNA and RNA
@@ -181,10 +179,10 @@ plotMG <- function(dataset="Guerrero_Negro_IMG_MG", plottype="bars",
         lines(at, RNA_ZCmean + dZC, col="blue")
         lines(at, RNA_ZChi + dZC, col="blue", lty=3)
       }
-      if(plottype=="violin") {
-        RNA$ZC <- RNA$ZC + dZC
-        vioplotx(ZC~sample, RNA, add=TRUE, col = "lightblue", plotCentre = "line", side = "right", pchMed = 21, colMed = "lightblue4", colMed2 = "lightblue2")
-      }
+#      if(plottype=="violin") {
+#        RNA$ZC <- RNA$ZC + dZC
+#        vioplotx(ZC~sample, RNA, add=TRUE, col = "lightblue", plotCentre = "line", side = "right", pchMed = 21, colMed = "lightblue4", colMed2 = "lightblue2")
+#      }
       if(plottype=="bars") {
         # apply small offset to x-position to separate DNA and RNA
         dx <- abs(diff(par("usr")[1:2])) / 200

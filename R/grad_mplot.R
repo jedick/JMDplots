@@ -1,6 +1,6 @@
 # JMDplots/grad_mplot.R
 # plot chemical compositions of metagenomes
-# 20180214 first version (MG.R: jmd in chiang mai, thailand)
+# 20180214 first version (MG.R)
 # 20180831 updated for paper submission
 # 20181215 updated for paper revision
 # 20181222 gradH2O branched from gradox/MG.R
