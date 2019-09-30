@@ -49,7 +49,6 @@ gradH2O1 <- function(pdf = FALSE) {
       lm.QEC <- lm(residue.basis[, "H2O"] ~ ZC)
       nH2O.pred <- predict.lm(lm.QEC, data.frame(ZC = c(-1, 1)))
       lines(c(-1, 1), nH2O.pred, lty = 2, lwd = 3, col = "grey40")
-      print(nH2O.pred)
     }
   }
   if(pdf) invisible(dev.off())
@@ -66,6 +65,45 @@ gradH2O2 <- function(pdf = FALSE) {
   label.figure("B", cex = 2, yfrac = 0.9)
   mplot("Guerrero_Negro", "IMG_MGP", add.label = FALSE)
   label.figure("C", cex = 2, yfrac = 0.9)
+  if(pdf) invisible(dev.off())
+}
+
+
+# nH2O-ZC scatterplots for redox gradients and Baltic Sea 20190713
+gradH2O3 <- function(pdf = FALSE) {
+  if(pdf) pdf("gradH2O3.pdf", width = 13, height = 5.6)
+  par(mfrow = c(1, 3))
+  par(mar = c(4, 4.5, 1, 1), las = 1, cex = 1.2)
+  # compare ZC and nH2O of proteins in datasets from gradox paper
+  mgradox <- ppage("gradoxGS", plot.it = FALSE)
+  pgradox <- ppage("gradoxGS", H2O = TRUE, plot.it = FALSE)
+  pcomp(mgradox, pgradox, type = "both", reorder = FALSE, plot.techtype = FALSE)
+  # overlay general trend from human proteins (printed in basis_comparison())
+  lines(c(-1, 1), c(-0.61, -0.98), lty = 2, lwd = 3, col = "grey40")
+  legend("topleft", c("redox", "gradients"), bty = "n", text.font = 2)
+  # add legend for environment type
+  legend("topright", c("vent fluids", "plume", "seawater", "hot spring", "phototrophic", "mat > 3 mm", "mat 1-3 mm"),
+         pch = c(19, 19, 19, 15, 15, 15, 15), col = c("red", "purple1", "purple1", "orange", "orange", "green3", "green3"), bty = "n")
+  # overlay symbols for seawater, phototrophic and mat surface
+  legend(-0.1627, -0.7176, lty=0, lwd=0, bty="n", pt.cex=1.6, pt.lwd=1,
+           pch = c(1, 1, 1, 0, 0, 0, 0),
+           legend=c("", "", "", "", "", "", ""),
+           col=c(NA, NA, "purple1", NA, "green3", NA, "green3"))
+  # compare ZC and nH2O of proteins in Baltic Sea surface
+  mbaltics <- ppage("balticsurface", plot.it = FALSE)
+  pbaltics <- ppage("balticsurface", H2O = TRUE, plot.it = FALSE)
+  pcomp(mbaltics, pbaltics, type = "both", reorder = FALSE, plot.techtype = FALSE)
+  lines(c(-1, 1), c(-0.61, -0.98), lty = 2, lwd = 3, col = "grey40")
+  legend("topleft", c("Baltic Sea", "surface"), bty = "n", text.font = 2)
+  # compare ZC and nH2O of proteins in Baltic Sea deep
+  mbalticd <- ppage("balticdeep", plot.it = FALSE)
+  pbalticd <- ppage("balticdeep", H2O = TRUE, plot.it = FALSE)
+  pcomp(mbalticd, pbalticd, type = "both", reorder = FALSE, plot.techtype = FALSE)
+  lines(c(-1, 1), c(-0.61, -0.98), lty = 2, lwd = 3, col = "grey40")
+  legend("topleft", c("Baltic Sea", "10-20 m"), bty = "n", text.font = 2)
+  # add legend for particle size
+  legend("topright", legend = as.expression(c(quote("0.1-0.8"~mu*m))),
+         pch = c(17), col = c("black"), bty = "n")
   if(pdf) invisible(dev.off())
 }
 

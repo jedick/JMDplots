@@ -69,15 +69,15 @@ gradox2 <- function(pdf=FALSE) {
   text(0.5, 0.5, "     microbial mat", srt=90, cex=1.5, font=2)
   # plot the data
   par(mar=c(4, 3.5, 2, 1), mgp=c(2.5, 1, 0))
-  mpage(set.par=FALSE)
-  ppage(set.par=FALSE)
+  mpage("gradoxMS", set.par=FALSE)
+  ppage("gradoxMS", set.par=FALSE)
   if(pdf) invisible(dev.off())
 }
 
 # all plots of DNA and RNA ZC on a single page
 gradoxS1 <- function(pdf=FALSE) {
   if(pdf) pdf("gradoxS1.pdf", width=6.5, height=10)
-  mout <- mpage(forSI=TRUE)
+  mout <- mpage()
   if(pdf) dev.off()
   invisible(mout)
 }
@@ -85,7 +85,7 @@ gradoxS1 <- function(pdf=FALSE) {
 # all plots of protein ZC on a single page
 gradoxS2 <- function(pdf=FALSE) {
   if(pdf) pdf("gradoxS2.pdf", width=6.5, height=10)
-  pout <- ppage(forSI=TRUE)
+  pout <- ppage()
   if(pdf) dev.off()
   invisible(pout)
 }

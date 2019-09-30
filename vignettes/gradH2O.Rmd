@@ -13,6 +13,7 @@ vignette: >
 ## some frequently used HTML expressions
 # use lowercase here because these tend to be variable names in the examples
 zc <- "<i>Z</i><sub>C</sub>"
+nh2o <- "<i>n</i><sub>H<sub>2</sub>O</sub>"
 ```
 
 This vignette from the R package JMDplots contains plots from the paper by Dick et al. (2019) (preprint).
@@ -22,7 +23,7 @@ library(JMDplots)
 ```
 
 ## Basis species comparison (Figure 1)
-```{r gradH2O1, message = FALSE, echo = 1, fig.align='center', out.width='100%', out.height='550px'}
+```{r gradH2O1, message = FALSE, echo = 1, fig.align='center', out.width='100%', out.height='370px'}
 gradH2O1(TRUE)
 knitr::include_graphics("gradH2O1.pdf")
 ```
@@ -31,5 +32,11 @@ knitr::include_graphics("gradH2O1.pdf")
 ```{r gradH2O2, message = FALSE, echo = 1, fig.align='center', out.width='100%', out.height='300px'}
 gradH2O2(TRUE)
 knitr::include_graphics("gradH2O2.pdf")
+```
+
+## `r nh2o`-`r zc` scatterplots for redox gradients and the Baltic Sea (Figure 3)
+```{r gradH2O3, message = FALSE, echo = 1, fig.align='center', out.width='100%', out.height='350px'}
+gradH2O3(TRUE)
+knitr::include_graphics("gradH2O3.pdf")
 ```
 
