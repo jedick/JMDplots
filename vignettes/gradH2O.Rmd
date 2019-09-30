@@ -27,3 +27,9 @@ gradH2O1(TRUE)
 knitr::include_graphics("gradH2O1.pdf")
 ```
 
+## `r zc` for selected redox gradients (Figure 2)
+```{r gradH2O2, message = FALSE, echo = 1, fig.align='center', out.width='100%', out.height='300px'}
+gradH2O2(TRUE)
+knitr::include_graphics("gradH2O2.pdf")
+```
+

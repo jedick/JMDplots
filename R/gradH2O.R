@@ -52,6 +52,20 @@ gradH2O1 <- function(pdf = FALSE) {
       print(nH2O.pred)
     }
   }
-  if(pdf) dev.off()
+  if(pdf) invisible(dev.off())
+}
+
+# plot ZC for selected redox gradients 20190715
+gradH2O2 <- function(pdf = FALSE) {
+  if(pdf) pdf("gradH2O2.pdf", width = 6, height = 2.3)
+  par(mfrow = c(1, 3))
+  par(mar = c(4, 4, 4, 1), mgp = c(2.5, 0.7, 0))
+  mplot("Bison_Pool", "IMG_MGP", add.label = FALSE)
+  label.figure("A", cex = 2, yfrac = 0.9)
+  mplot("Diffuse_Vents", "SRA_MGP", add.label = FALSE)
+  label.figure("B", cex = 2, yfrac = 0.9)
+  mplot("Guerrero_Negro", "IMG_MGP", add.label = FALSE)
+  label.figure("C", cex = 2, yfrac = 0.9)
+  if(pdf) invisible(dev.off())
 }
 
