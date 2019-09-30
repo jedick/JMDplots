@@ -1,0 +1,29 @@
+---
+title: "Plots from salinity gradients paper (2019)"
+output: 
+  rmarkdown::html_vignette:
+    mathjax: null
+vignette: >
+  %\VignetteIndexEntry{Plots from salinity gradients paper (2019)}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r HTML, include=FALSE}
+## some frequently used HTML expressions
+# use lowercase here because these tend to be variable names in the examples
+zc <- "<i>Z</i><sub>C</sub>"
+```
+
+This vignette from the R package JMDplots contains plots from the paper by Dick et al. (2019) (preprint).
+
+```{r JMDplots, message = FALSE, results = "hide"}
+library(JMDplots)
+```
+
+## Basis species comparison (Figure 1)
+```{r gradH2O1, message = FALSE, echo = 1, fig.align='center', out.width='100%', out.height='550px'}
+gradH2O1(TRUE)
+knitr::include_graphics("gradH2O1.pdf")
+```
+

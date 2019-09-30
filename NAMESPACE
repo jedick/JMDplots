@@ -4,7 +4,9 @@ export(
   "gradox1", "gradox2", "gradoxS1", "gradoxS2", "gradox3", "gradox4", "gradox5",
   # chnszten paper 20190929
   "chnszten1", "chnszten4", "chnszten5", "chnszten6", "chnszten7",
-  "chnsztenS1", "chnsztenS2", "chnsztenS3", "chnsztenS4", "chnsztenS5", "chnsztenS6A", "chnsztenS6B", "chnsztenS7", "chnsztenS8", "chnsztenS9", "chnsztenS10"
+  "chnsztenS1", "chnsztenS2", "chnsztenS3", "chnsztenS4", "chnsztenS5", "chnsztenS6A", "chnsztenS6B", "chnsztenS7", "chnsztenS8", "chnsztenS9", "chnsztenS10",
+  # gradH2O paper 20190930
+  "gradH2O1"
 )
 
 # imports from CHNOSZ
@@ -20,15 +22,18 @@ importFrom("CHNOSZ",
   "nonideal", "obigt", "ratlab", "reset", "solubility",
   "subcrt", "thermo.plot.new", "water")
 
+# imports from canprot (for gradH2O 20190930)
+importFrom("canprot", "canprot")
+
 # imports from other packages
 importFrom("shiny", "fluidPage", "includeCSS", "shinyApp")
 importFrom("timevis", "renderTimevis", "timevis", "timevisOutput")
 
 # imports from standard packages
-importFrom("grDevices", "dev.off", "cairo_pdf", "pdf")
+importFrom("grDevices", "dev.off", "cairo_pdf", "pdf", "blues9", "colorRampPalette")
 importFrom("graphics", "abline", "arrows", "axis", "box", "layout",
            "legend", "lines", "mtext", "par", "plot", "plot.new",
-           "points", "rect", "text", "title")
-importFrom("stats", "lm", "na.omit", "predict", "sd")
+           "points", "rect", "text", "title", "smoothScatter")
+importFrom("stats", "lm", "na.omit", "predict", "sd", "predict.lm")
 importFrom("utils", "read.csv", "demo", "packageVersion", "tail")
 
