@@ -77,7 +77,7 @@ gradH2O3 <- function(pdf = FALSE) {
   # compare ZC and nH2O of proteins in datasets from gradox paper
   mgradox <- ppage("gradoxGS", plot.it = FALSE)
   pgradox <- ppage("gradoxGS", H2O = TRUE, plot.it = FALSE)
-  pcomp(mgradox, pgradox, type = "both", reorder = FALSE, plot.techtype = FALSE)
+  pcomp(mgradox, pgradox, type = "both", reorder = FALSE, yline = 3.5)
   # overlay general trend from human proteins (printed in basis_comparison())
   lines(c(-1, 1), c(-0.61, -0.98), lty = 2, lwd = 3, col = "grey40")
   legend("topleft", c("redox", "gradients"), bty = "n", text.font = 2)
@@ -89,21 +89,24 @@ gradH2O3 <- function(pdf = FALSE) {
            pch = c(1, 1, 1, 0, 0, 0, 0),
            legend=c("", "", "", "", "", "", ""),
            col=c(NA, NA, "purple1", NA, "green3", NA, "green3"))
+  label.figure("A", cex = 2, xfrac = 0.035)
   # compare ZC and nH2O of proteins in Baltic Sea surface
   mbaltics <- ppage("balticsurface", plot.it = FALSE)
   pbaltics <- ppage("balticsurface", H2O = TRUE, plot.it = FALSE)
-  pcomp(mbaltics, pbaltics, type = "both", reorder = FALSE, plot.techtype = FALSE)
+  pcomp(mbaltics, pbaltics, type = "both", reorder = FALSE, yline = 3.5)
   lines(c(-1, 1), c(-0.61, -0.98), lty = 2, lwd = 3, col = "grey40")
   legend("topleft", c("Baltic Sea", "surface"), bty = "n", text.font = 2)
+  label.figure("B", cex = 2, xfrac = 0.035)
   # compare ZC and nH2O of proteins in Baltic Sea deep
   mbalticd <- ppage("balticdeep", plot.it = FALSE)
   pbalticd <- ppage("balticdeep", H2O = TRUE, plot.it = FALSE)
-  pcomp(mbalticd, pbalticd, type = "both", reorder = FALSE, plot.techtype = FALSE)
+  pcomp(mbalticd, pbalticd, type = "both", reorder = FALSE, yline = 3.5)
   lines(c(-1, 1), c(-0.61, -0.98), lty = 2, lwd = 3, col = "grey40")
   legend("topleft", c("Baltic Sea", "10-20 m"), bty = "n", text.font = 2)
   # add legend for particle size
   legend("topright", legend = as.expression(c(quote("0.1-0.8"~mu*m))),
          pch = c(17), col = c("black"), bty = "n")
+  label.figure("C", cex = 2, xfrac = 0.035)
   if(pdf) invisible(dev.off())
 }
 

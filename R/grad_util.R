@@ -172,7 +172,7 @@ plotMG <- function(dataset="Guerrero_Negro_IMG_MG", plottype="bars",
       RNA$sample[istart:iend] <- paste0("X", letters[i])
     }
     if(plot.RNA & length(RNA_ZCmean) > 0 & plot.it) {
-      # offset to apply to ZC of RNA
+      # subtract offset for ZC of RNA
       dZC <- -0.28
       if(plottype=="lines") {
         lines(at, RNA_ZClo + dZC, col="blue", lty=3)

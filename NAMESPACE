@@ -8,7 +8,7 @@ export(
   # gradH2O paper 20190930
   "gradH2O1", "gradH2O2", "gradH2O3",
   # grad_util 20190930
-  "mplot", "mpage", "ppage"
+  "mplot", "mpage", "ppage", "mcomp", "pcomp"
 )
 
 # imports from CHNOSZ

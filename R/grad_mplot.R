@@ -41,8 +41,11 @@ usedin <- list(gradoxSI=names(gradox),
 )
 
 # mfrow setting for mpage() and ppage() (plot all ZC comparisons on a single page)
-mfrow <- list(gradoxSI=c(6, 3),
-              gradoxMS=c(2, 5))
+mfrow <- list(gradoxSI = c(6, 3),
+              gradoxMS = c(2, 5),
+              gradoxGS = c(2, 2),
+              balticsurface = c(1, 1),
+              balticdeep = c(1, 1))
 
 # function to plot sampled compositions for indicated study and sequence type 20180222
 # e.g. mplot("Columbia_River", "IMG_MT")
@@ -106,7 +109,7 @@ mplot <- function(study, seqtype, plottype = "bars", ylim = NULL, plot.RNA = TRU
 # add subset and H2O arguments 20181231
 mpage <- function(subset="gradoxSI", H2O=FALSE, plottype="bars", dsDNA=TRUE, set.par=TRUE) {
   mfrow <- mfrow[[subset]]
-  if(set.par) par(mfrow=mfrow, mar=c(4, 3.5, 2, 1), mgp=c(2.5, 1, 0))
+  if(set.par) opar <- par(mfrow=mfrow, mar=c(4, 3.5, 2, 1), mgp=c(2.5, 1, 0))
   # initialize output of ZC values
   mout <- list()
   # extract only the datasets used for the paper
@@ -135,6 +138,7 @@ mpage <- function(subset="gradoxSI", H2O=FALSE, plottype="bars", dsDNA=TRUE, set
       iletter <- iletter + 2
     }
   }
+  if(set.par) par(opar)
   mout
 }
 
@@ -168,7 +172,7 @@ mcomp <- function(mout, yvar="RNA") {
 # add plot.it argument 20190711
 ppage <- function(subset = "gradoxSI", H2O = FALSE, set.par = TRUE, plot.it = TRUE, basis = "QEC") {
   mfrow <- mfrow[[subset]]
-  if(set.par & plot.it) par(mfrow = mfrow, mar = c(4, 3.5, 2, 1), mgp = c(2.5, 1, 0))
+  if(set.par & plot.it) opar <- par(mfrow = mfrow, mar = c(4, 3.5, 2, 1), mgp = c(2.5, 1, 0))
   # initialize output of ZC or H2O values
   pout <- list()
   # extract only the datasets used for the paper
@@ -204,6 +208,7 @@ ppage <- function(subset = "gradoxSI", H2O = FALSE, set.par = TRUE, plot.it = TR
       iletter <- iletter + 2
     }
   }
+  if(set.par & plot.it) par(opar)
   pout
 }
 
@@ -211,7 +216,8 @@ ppage <- function(subset = "gradoxSI", H2O = FALSE, set.par = TRUE, plot.it = TR
 # mout <- mpage(); pout <- ppage(); pcomp(mout, pout, type="ZC")
 # mout <- ppage(); pout <- ppage(H2O=TRUE); pcomp(mout, pout, type="both")
 # mout <- mpage(H2O=TRUE); pout <- ppage(H2O=TRUE); pcomp(mout, pout, type="H2O")
-pcomp <- function(mout, pout, seqtype="MG", type="ZC", parts=c("plot", "legend"), yline = 3.5, xlim = NULL, ylim = NULL, reorder = TRUE, plot.techtype = TRUE) {
+pcomp <- function(mout, pout, seqtype="MG", type="ZC", parts=c("plot", "legend"), yline = 2,
+                  xlim = NULL, ylim = NULL, reorder = TRUE, plot.techtype = FALSE, add = FALSE) {
   if("plot" %in% parts) {
     # set up plot
     if(type=="ZC") {
@@ -231,8 +237,10 @@ pcomp <- function(mout, pout, seqtype="MG", type="ZC", parts=c("plot", "legend")
 #    if(xaxis=="RNA") {xlim <- c(1.85, 1.92); xlab <- "ZC(RNA)"; dx <- -0.004}
 #    if(xaxis=="CM") {xlim <- c(0.024, 0.037); xlab <- "Cys+Met fraction"; dx <- -0.0003}
 #    if(yaxis=="CM") {ylim <- c(0.024, 0.037); ylab <- "Cys+Met fraction"}
-    plot(xlim, ylim, xlab=xlab, ylab=NA, type="n")
-    mtext(ylab, side=2, line=yline, las=0, cex=par("cex"))
+    if(!add) {
+      plot(xlim, ylim, xlab=xlab, ylab=NA, type="n")
+      mtext(ylab, side=2, line=yline, las=0, cex=par("cex"))
+    }
     for(ipout in 1:length(pout)) {
       # get study name and change MGP or MTP to MG or MT
       study <- names(pout[ipout])
