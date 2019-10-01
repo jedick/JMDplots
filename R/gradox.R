@@ -69,8 +69,8 @@ gradox2 <- function(pdf=FALSE) {
   text(0.5, 0.5, "     microbial mat", srt=90, cex=1.5, font=2)
   # plot the data
   par(mar=c(4, 3.5, 2, 1), mgp=c(2.5, 1, 0))
-  mpage("gradoxMS", set.par=FALSE)
-  ppage("gradoxMS", set.par=FALSE)
+  mpage("gradoxMS", set.par=FALSE, add.label = FALSE)
+  ppage("gradoxMS", set.par=FALSE, add.label = FALSE)
   if(pdf) invisible(dev.off())
 }
 

@@ -107,7 +107,7 @@ mplot <- function(study, seqtype, plottype = "bars", ylim = NULL, plot.RNA = TRU
 
 # make page of plots for MG/MT 20180225
 # add subset and H2O arguments 20181231
-mpage <- function(subset="gradoxSI", H2O=FALSE, plottype="bars", dsDNA=TRUE, set.par=TRUE) {
+mpage <- function(subset="gradoxSI", H2O=FALSE, plottype="bars", dsDNA=TRUE, set.par=TRUE, add.label = TRUE) {
   mfrow <- mfrow[[subset]]
   if(set.par) opar <- par(mfrow=mfrow, mar=c(4, 3.5, 2, 1), mgp=c(2.5, 1, 0))
   # initialize output of ZC values
@@ -128,7 +128,7 @@ mpage <- function(subset="gradoxSI", H2O=FALSE, plottype="bars", dsDNA=TRUE, set
          seqtype=="abbrev" | seqtype=="group" | seqtype=="dx" | seqtype=="dy" | seqtype=="plot_real_x" | seqtype == "techtype") next
       # for the figure in the paper, take only one dataset for each study (i.e. metagenome, except for Mono Lake)
       if(subset=="gradoxMS" & (grepl("_MT", seqtype) & study!="Mono_Lake")) next
-      ZC <- list(mplot(study, seqtype, plottype, dsDNA=dsDNA, add.label=grepl("SI", subset), H2O=H2O))
+      ZC <- list(mplot(study, seqtype, plottype, dsDNA=dsDNA, add.label=add.label, H2O=H2O))
       names(ZC) <- paste0(study, "_", seqtype)
       mout <- c(mout, ZC)
     }
@@ -170,7 +170,7 @@ mcomp <- function(mout, yvar="RNA") {
 # make page of plots for MGP/MTP 20180225
 # add subset and H2O arguments 20181231
 # add plot.it argument 20190711
-ppage <- function(subset = "gradoxSI", H2O = FALSE, set.par = TRUE, plot.it = TRUE, basis = "QEC") {
+ppage <- function(subset = "gradoxSI", H2O = FALSE, set.par = TRUE, plot.it = TRUE, basis = "QEC", add.label = TRUE) {
   mfrow <- mfrow[[subset]]
   if(set.par & plot.it) opar <- par(mfrow = mfrow, mar = c(4, 3.5, 2, 1), mgp = c(2.5, 1, 0))
   # initialize output of ZC or H2O values
@@ -198,7 +198,7 @@ ppage <- function(subset = "gradoxSI", H2O = FALSE, set.par = TRUE, plot.it = TR
       if(subset=="eiler" & !grepl("_MG", seqtype)) next
       # add "P" for proteins
       seqtype <- paste0(seqtype, "P")
-      X <- list(mplot(study, seqtype, add.label = grepl("SI", subset), H2O = H2O, plot.it = plot.it, basis = basis))
+      X <- list(mplot(study, seqtype, add.label = add.label, H2O = H2O, plot.it = plot.it, basis = basis))
       names(X) <- paste0(study, "_", seqtype)
       pout <- c(pout, X)
     }

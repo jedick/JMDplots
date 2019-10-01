@@ -17,8 +17,10 @@ The functions are exported in the package so they are available to user scripts.
     taxid = NULL, dsDNA = TRUE, abbrev = NULL, col = NULL, add.label = TRUE,
     maxdepth = NULL, H2O = FALSE, plot.it = TRUE, add.title = TRUE, yline = 2,
     basis = "QEC")
-  mpage(subset = "gradoxSI", H2O = FALSE, plottype = "bars", dsDNA = TRUE, set.par = TRUE)
-  ppage(subset = "gradoxSI", H2O = FALSE, set.par = TRUE, plot.it = TRUE, basis = "QEC")
+  mpage(subset = "gradoxSI", H2O = FALSE, plottype = "bars", dsDNA = TRUE,
+    set.par = TRUE, add.label = TRUE)
+  ppage(subset = "gradoxSI", H2O = FALSE, set.par = TRUE, plot.it = TRUE,
+    basis = "QEC", add.label = TRUE)
   mcomp(mout, yvar = "RNA")
   pcomp(mout, pout, seqtype = "MG", type = "ZC", parts = c("plot", "legend"),
     yline = 2, xlim = NULL, ylim = NULL, reorder = TRUE,
@@ -35,7 +37,7 @@ The functions are exported in the package so they are available to user scripts.
   \item{dsDNA}{logical, use chemical composition of double-stranded DNA?}
   \item{abbrev}{character, abbreviations for studies}
   \item{col}{character, line color}
-  \item{add.label}{logical, label the plot?}
+  \item{add.label}{logical, label the plot with MG (metagenome) or MT (metatranscriptome)?}
   \item{maxdepth}{numeric, maximum sample depth (meters)}
   \item{H2O}{logical, plot \nH2O instead of \ZC?}
   \item{plot.it}{logical, make a plot (use FALSE to return processed data without plotting)?}
@@ -58,18 +60,18 @@ The functions are exported in the package so they are available to user scripts.
 \details{
 The \code{study} is composed of two names for the locality separated by an underscore.
 The \code{seqtype} contains the name of the database followed by an underscore and MG (metagenome) or MT (metatranscriptome), i.e. \samp{[SRA|IMG|MGRAST|GenBank]_[MG|MT]}.
-These are changed to \samp{_MGP} and \samp{_MTP} to indicate protein sequences.
+These can be changed to \samp{_MGP} and \samp{_MTP} to indicate protein sequences.
 
 \code{mplot} plots values of \ZC for a particular combination of \code{study} and \code{seqtype}.
 \ZC of both DNA and RNA are plotted, with an offset of -0.28 applied to that of RNA, so that values can be shown on the same scale (see Dick et al., 2019).
 
 \code{mcomp} makes a scatterplot of (\ZC of RNA - \ZC of DNA) vs \ZC of DNA.
-Set \code{yvar} to \samp{GC} to change the y-axis to GC-ratio of DNA.
+Set \code{yvar} to \samp{GC} to change the y-axis to GC ratio of DNA.
 (For double-stranded DNA, this should be a linear function of \ZC.)
 }
 
 \references{
-Dick, J. M., Yu, M., Tan, J. and Lu, A. (2019a) Changes in carbon oxidation state of metagenomes along geochemical redox gradients. \emph{Front. Microbiol.} \bold{10}, 120. \doi{10.3389/fmicb.2019.00120}
+Dick, J. M., Yu, M., Tan, J. and Lu, A. (2019) Changes in carbon oxidation state of metagenomes along geochemical redox gradients. \emph{Front. Microbiol.} \bold{10}, 120. \doi{10.3389/fmicb.2019.00120}
 }
 
 \examples{
@@ -101,7 +103,7 @@ pcomp(mout, pout, "MT")
 mout <- ppage("gradoxGS")
 pout <- ppage("gradoxGS", H2O = TRUE)
 pcomp(mout, pout, type = "both", reorder = FALSE, yline = 2)
-# overlay data for protein from Baltic Sea
+# overlay data for protein from the Baltic Sea
 mout <- ppage("balticsurface", plot.it = FALSE)
 pout <- ppage("balticsurface", H2O = TRUE, plot.it = FALSE)
 pcomp(mout, pout, type = "both", reorder = FALSE, add = TRUE)
