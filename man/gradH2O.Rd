@@ -4,6 +4,7 @@
 \alias{gradH2O1}
 \alias{gradH2O2}
 \alias{gradH2O3}
+\alias{gradH2O4}
 \title{Plots from salinity gradients paper}
 \description{
 Plots from the paper by Dick et al. (2019).
@@ -13,6 +14,7 @@ Plots from the paper by Dick et al. (2019).
   gradH2O1(pdf = FALSE)
   gradH2O2(pdf = FALSE)
   gradH2O3(pdf = FALSE)
+  gradH2O4(pdf = FALSE)
 }
 
 \arguments{
@@ -26,6 +28,7 @@ This table gives a brief description of each function.
   \code{gradH2O1} \tab Basis species comparison \cr
   \code{gradH2O2} \tab \ZC of proteins for selected redox gradients \cr
   \code{gradH2O3} \tab \nH2O-\ZC scatterplots for redox gradients and the Baltic Sea \cr
+  \code{gradH2O4} \tab \nH2O for Baltic Sea size fractions \cr
 }
 }
 

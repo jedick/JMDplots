@@ -54,7 +54,7 @@ gradH2O1 <- function(pdf = FALSE) {
   if(pdf) invisible(dev.off())
 }
 
-# plot ZC for selected redox gradients 20190715
+# ZC for selected redox gradients 20190715
 gradH2O2 <- function(pdf = FALSE) {
   if(pdf) pdf("gradH2O2.pdf", width = 6, height = 2.3)
   par(mfrow = c(1, 3))
@@ -106,6 +106,23 @@ gradH2O3 <- function(pdf = FALSE) {
   # add legend for particle size
   legend("topright", legend = as.expression(c(quote("0.1-0.8"~mu*m))),
          pch = c(17), col = c("black"), bty = "n")
+  label.figure("C", cex = 2, xfrac = 0.035)
+  if(pdf) invisible(dev.off())
+}
+
+# nH2O for Baltic Sea size fractions 20190715
+gradH2O4 <- function(pdf = FALSE) {
+  if(pdf) pdf("gradH2O4.pdf", width = 6, height = 2.5)
+  par(mfrow = c(1, 3))
+  par(mar = c(5, 4, 1, 1), mgp = c(3, 0.7, 0), las = 1)
+  mplot("Baltic_Sea-0.1s", "iMicrobe_MGP", add.title = FALSE, H2O = TRUE, yline = 2.7)
+  legend("topright", legend = quote("0.1-0.8"~mu*m), bty = "n")
+  label.figure("A", cex = 2, xfrac = 0.04)
+  mplot("Baltic_Sea-0.8s", "iMicrobe_MGP", add.title = FALSE, H2O = TRUE, yline = 2.7)
+  legend("topright", legend = quote("0.8-3.0"~mu*m), bty = "n")
+  label.figure("B", cex = 2, xfrac = 0.035)
+  mplot("Baltic_Sea-3.0s", "iMicrobe_MGP", add.title = FALSE, H2O = TRUE, yline = 2.7)
+  legend("topright", legend = quote("3.0-200"~mu*m), bty = "n")
   label.figure("C", cex = 2, xfrac = 0.035)
   if(pdf) invisible(dev.off())
 }
