@@ -310,6 +310,13 @@ pcomp <- function(mout, pout, seqtype="MG", type="ZC", parts=c("plot", "legend")
 #      if(xaxis=="CM") xvals <- pout[[i]]$CM
 #      if(yaxis=="CM") yvals <- pout[[i]]$CM
       group <- mout[[imout]]$group
+      if(reorder) {
+        # order points by increasing DNA/RNA ZC value
+        ord <- order(xvals)
+        xvals <- xvals[ord]
+        yvals <- yvals[ord]
+        group <- group[ord]
+      }
       # color: by group
       col <- "black"
       col[group %in% c("yellowstone", "yellowstone1")] <- "orange"
@@ -324,13 +331,6 @@ pcomp <- function(mout, pout, seqtype="MG", type="ZC", parts=c("plot", "legend")
       col[group %in% c("river", "riverPA")] <- "green3"
       col[group %in% c("lake")] <- "yellowgreen"
       col[group %in% c("HSsediment", "HSsediment0")] <- "slategrey"
-      if(reorder) {
-        # order points by increasing DNA/RNA ZC value
-        ord <- order(xvals)
-        xvals <- xvals[ord]
-        yvals <- yvals[ord]
-        group <- group[ord]
-      }
       # plot lines and points
       # for lines, use the color of most of the points 20180501
       # change this to gray 20181114
