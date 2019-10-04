@@ -317,31 +317,3 @@ gradox <- list(
 
 studies <- c(gradox, gradH2O)
 
-# get metadata (location names and sequencing IDs) for a study
-# extracted from mprep/mplot 20180312
-mdata <- function(studies, study, seqtype) {
-  samples <- studies[[study]][[1]]
-  if(is.null(samples)) stop("metadata for ", study, " study not available")
-  xlabels <- studies[[study]]$xlabels
-  if(is.null(xlabels)) xlabels <- samples
-  group <- studies[[study]][["group"]]
-  seqtype.for.ID <- seqtype
-  # change e.g. SRA_MGP to SRA_MG
-  seqtype.for.ID <- gsub("_MG.$", "_MG", seqtype.for.ID)
-  seqtype.for.ID <- gsub("_MT.$", "_MT", seqtype.for.ID)
-  IDs <- studies[[study]][[seqtype.for.ID]]
-  if(is.null(IDs)) stop(seqtype.for.ID, " IDs not available for ", study, " study")
-  # remove NA IDs and corresponding samples, xlabels, and groups
-  samples[is.na(IDs)] <- NA
-  samples <- na.omit(samples)
-  xlabels[is.na(IDs)] <- NA
-  xlabels <- na.omit(xlabels)
-  if(length(group) > 1) {
-    group[is.na(IDs)] <- NA
-    group <- na.omit(group)
-  }
-  IDs <- na.omit(IDs)
-  abbrev <- studies[[study]][["abbrev"]]
-  techtype <- studies[[study]][["techtype"]]
-  return(list(samples=samples, xlabels=xlabels, IDs=IDs, group=group, abbrev=abbrev, techtype = techtype))
-}

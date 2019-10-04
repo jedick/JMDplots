@@ -1,6 +1,37 @@
 # JMDplots/grad_util.R
 # utility functions for gradox and gradH2O papers
 
+# get metadata (location names and sequencing IDs) for a study
+# extracted from mprep/mplot 20180312
+get.mdata <- function(studies, study, seqtype) {
+  samples <- studies[[study]][[1]]
+  if(is.null(samples)) stop("metadata for ", study, " study not available")
+  xlabels <- studies[[study]]$xlabels
+  if(is.null(xlabels)) xlabels <- samples
+  group <- studies[[study]][["group"]]
+  seqtype.for.ID <- seqtype
+  # change e.g. SRA_MGP to SRA_MG
+  seqtype.for.ID <- gsub("_MG.$", "_MG", seqtype.for.ID)
+  seqtype.for.ID <- gsub("_MT.$", "_MT", seqtype.for.ID)
+  IDs <- studies[[study]][[seqtype.for.ID]]
+  if(is.null(IDs)) stop(seqtype.for.ID, " IDs not available for ", study, " study")
+  # remove NA IDs and corresponding samples, xlabels, and groups
+  samples[is.na(IDs)] <- NA
+  samples <- na.omit(samples)
+  xlabels[is.na(IDs)] <- NA
+  xlabels <- na.omit(xlabels)
+  if(length(group) > 1) {
+    group[is.na(IDs)] <- NA
+    group <- na.omit(group)
+  }
+  IDs <- na.omit(IDs)
+  abbrev <- studies[[study]][["abbrev"]]
+  techtype <- studies[[study]][["techtype"]]
+  dx <- studies[[study]][["dx"]]
+  dy <- studies[[study]][["dy"]]
+  return(list(samples=samples, xlabels=xlabels, IDs=IDs, group=group, abbrev=abbrev, techtype = techtype, dx = dx, dy = dy))
+}
+
 # function to plot ZC of metagenomic DNA 20180215
 # or ZC of metagenomic proteins 20180228
 # NOTE: dataset should end in "_MG" or "_MT" (plot DNA and RNA compositions)
@@ -11,7 +42,7 @@ plotMG <- function(dataset="Guerrero_Negro_IMG_MG", plottype="bars",
   group="mat", xlab="layer", ylim=c(1.67, 1.77), abbrev=NULL, dsDNA=TRUE, plot.RNA=TRUE,
   taxid=NULL, lwd=1, lty=2, lwd.bars=2, col=NULL, extendrange=FALSE, add.label=TRUE,
   plot_real_x=FALSE, maxdepth=NULL, H2O=FALSE, plot.it = TRUE, add.title = TRUE, yline = 2,
-  basis = "QEC", techtype = NULL, datadir = NULL) {
+  basis = "QEC", techtype = NULL, dx = NULL, dy = NULL, datadir = NULL) {
   # samples: (used for suffixes on file names)
   # labels: (used for labeling x-axis ticks)
   # xlab: "layer", ...
@@ -128,13 +159,13 @@ plotMG <- function(dataset="Guerrero_Negro_IMG_MG", plottype="bars",
     if(plottype=="bars") {
       # error bar plots 20180515
       # apply small offset to x-position to separate DNA and RNA
-      if(!is.null(taxid)) dx <- 0
-      else dx <- abs(diff(par("usr")[1:2])) / 120
+      if(!is.null(taxid)) xx <- 0
+      else xx <- abs(diff(par("usr")[1:2])) / 120
       # bars (whiskers) at one SD from mean (arrows trick from https://stackoverflow.com/questions/13032777/scatter-plot-with-error-bars)
-      arrows(at-dx, ZClo, at-dx, ZChi, length = 0.03, angle = 90, code = 3, col=col, lwd=lwd.bars)
+      arrows(at-xx, ZClo, at-xx, ZChi, length = 0.03, angle = 90, code = 3, col=col, lwd=lwd.bars)
       # remove NAs so we can draw lines between all sites 20180529
       iNA <- is.na(ZCmean)
-      lines((at)[!iNA & !isdeep]-dx, ZCmean[!iNA & !isdeep], col=col, lty=lty, lwd=lwd)
+      lines((at)[!iNA & !isdeep]-xx, ZCmean[!iNA & !isdeep], col=col, lty=lty, lwd=lwd)
     }
     # add points to show > 1% species abundance 20181118
     if(!is.null(taxid) & !identical(taxid, 0)) {
@@ -157,7 +188,7 @@ plotMG <- function(dataset="Guerrero_Negro_IMG_MG", plottype="bars",
     for(i in 1:length(samples)) {
       sample <- samples[i]
       # gradox or gradH2O data location in JMDplots package 20190928
-      datadir <- system.file(paste0("extdata/", paper), package = "JMDplots")
+      if(is.null(datadir)) datadir <- system.file(paste0("extdata/", paper), package = "JMDplots")
       file <- paste0(datadir, "/MGR/", dataset, "R_", sample, ".csv")
       if(file.exists(file)) {
         myRNA <- read.csv(file, as.is=TRUE)
@@ -186,15 +217,15 @@ plotMG <- function(dataset="Guerrero_Negro_IMG_MG", plottype="bars",
 #      }
       if(plottype=="bars") {
         # apply small offset to x-position to separate DNA and RNA
-        dx <- abs(diff(par("usr")[1:2])) / 200
-        arrows(at+dx, RNA_ZClo + dZC, at+dx, RNA_ZChi + dZC, length = 0.03, angle = 90, code = 3, col="blue", lwd=lwd.bars)
-        lines(at+dx, RNA_ZCmean + dZC, col="blue", lty=2, lwd=lwd)
+        xx <- abs(diff(par("usr")[1:2])) / 200
+        arrows(at+xx, RNA_ZClo + dZC, at+xx, RNA_ZChi + dZC, length = 0.03, angle = 90, code = 3, col="blue", lwd=lwd.bars)
+        lines(at+xx, RNA_ZCmean + dZC, col="blue", lty=2, lwd=lwd)
       }
     }
     # return ZC values
-    outval <- list(DNA=ZCmean, RNA=RNA_ZCmean, GC=GC, group=group, meancomp=meancomp, abbrev=abbrev, techtype = techtype)
+    outval <- list(DNA=ZCmean, RNA=RNA_ZCmean, GC=GC, group=group, meancomp=meancomp, abbrev=abbrev, techtype = techtype, dx = dx, dy = dy)
   } else {
-    outval <- list(AA=ZCmean, CM=CM, group=group, meancomp=meancomp, abbrev=abbrev, techtype = techtype)
+    outval <- list(AA=ZCmean, CM=CM, group=group, meancomp=meancomp, abbrev=abbrev, techtype = techtype, dx = dx, dy = dy)
   }
   # add title 20180225
   if((is.null(taxid) | identical(taxid, 0)) & plot.it & add.title) {

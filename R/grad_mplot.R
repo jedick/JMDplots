@@ -51,13 +51,15 @@ usedin <- list(
 mplot <- function(study, seqtype, plottype = "bars", ylim = NULL, plot.RNA = TRUE, taxid = NULL,
   dsDNA = TRUE, abbrev = NULL, col = NULL, add.label = TRUE, maxdepth = NULL, H2O = FALSE,
   plot.it = TRUE, add.title = TRUE, yline = 2, basis = "QEC", datadir = NULL, mdata = studies) {
-  md <- mdata(mdata, study, seqtype)
+  md <- get.mdata(mdata, study, seqtype)
   # get labels, groups, and abbreviation
   samples <- md$samples
   xlabels <- md$xlabels
   group <- md$group
   if(missing(abbrev)) abbrev <- md$abbrev
   techtype <- md$techtype
+  dx <- md$dx
+  dy <- md$dy
   xlab <- names(mdata[[study]][1])
   # get ZC range
   if(is.null(ylim)) {
@@ -95,13 +97,13 @@ mplot <- function(study, seqtype, plottype = "bars", ylim = NULL, plot.RNA = TRU
       plotMG(paste0(study, "_", seqtype), plottype, samples, xlabels, group, xlab, ylim, abbrev, dsDNA,
              plot.RNA = FALSE, taxid = taxid[i], lwd = lwd, lty = lty, lwd.bars = lwd.bars, col = col, extendrange = TRUE,
              add.label = add.label, plot_real_x = mdata[[study]][["plot_real_x"]], maxdepth = maxdepth, H2O = H2O,
-             plot.it = plot.it, add.title = add.title, yline = yline, basis = basis, techtype = techtype, datadir = datadir)
+             plot.it = plot.it, add.title = add.title, yline = yline, basis = basis, techtype = techtype, dx = dx, dy = dy, datadir = datadir)
     }
   } 
   else plotMG(paste0(study, "_", seqtype), plottype, samples, xlabels, group, xlab, ylim, abbrev, dsDNA,
               plot.RNA, taxid, col = col,
               add.label = add.label, plot_real_x = mdata[[study]][["plot_real_x"]], maxdepth = maxdepth, H2O = H2O,
-              plot.it = plot.it, add.title = add.title, yline = yline, basis = basis, techtype = techtype, datadir = datadir)
+              plot.it = plot.it, add.title = add.title, yline = yline, basis = basis, techtype = techtype, dx = dx, dy = dy, datadir = datadir)
 }
 
 # make page of plots for MG/MT 20180225
@@ -148,13 +150,13 @@ mpage <- function(subset="gradoxSI", H2O=FALSE, plottype="bars", dsDNA=TRUE, set
       if(j==1 | grepl("xlabels", seqtype) | grepl("range", seqtype) |
          seqtype=="abbrev" | seqtype=="group" | seqtype=="dx" | seqtype=="dy" | seqtype=="plot_real_x" | seqtype == "techtype") next
       # for the figure in the paper, take only one dataset for each study (i.e. metagenome, except for Mono Lake)
-      if(subset=="gradoxMS" & (grepl("_MT", seqtype) & study!="Mono_Lake")) next
+      if(identical(subset, "gradoxMS") & (grepl("_MT", seqtype) & study!="Mono_Lake")) next
       ZC <- list(mplot(study, seqtype, plottype, dsDNA=dsDNA, add.label=add.label, H2O=H2O, datadir = datadir, mdata = studies))
       names(ZC) <- paste0(study, "_", seqtype)
       mout <- c(mout, ZC)
     }
     # add figure label 20181210
-    if(subset == "gradoxMS") {
+    if(identical(subset, "gradoxMS")) {
       label.figure(LETTERS[iletter], cex=1.6, font=2, yfrac=0.936)
       iletter <- iletter + 2
     }
@@ -348,10 +350,9 @@ pcomp <- function(mout, pout, seqtype="MG", type="ZC", parts=c("plot", "legend")
         pch[group %in% c("riverPA", "plumePA")] <- 15
       }
       studyname <- paste(strsplit(study, "_")[[1]][1:2], collapse="_")
-      istudy <- match(studyname, names(studies))
       if(plot.techtype) {
         # use open symbols for 454 or Sanger techtypes 20190723
-        techtype <- studies[[istudy]][["techtype"]]
+        techtype <- pout[[ipout]][["techtype"]]
         techtype <- rep(techtype, length(xvals))
         pch[pch==19 & techtype %in% c("454", "Sanger")] <- 1
         pch[pch==15 & techtype %in% c("454", "Sanger")] <- 0
@@ -368,9 +369,9 @@ pcomp <- function(mout, pout, seqtype="MG", type="ZC", parts=c("plot", "legend")
       i1 <- grepl("1", group)
       if(any(i1)) points(xvals[i1], yvals[i1], pch=pch0[i1], col="green3", cex=cex0[i1])
       # get abbreviation for this study
-      abbrev <- studies[[istudy]][["abbrev"]]
-      dx <- studies[[istudy]][["dx"]][[seqtype]]
-      dy <- studies[[istudy]][["dy"]][[seqtype]]
+      abbrev <- pout[[ipout]][["abbrev"]]
+      dx <- pout[[ipout]][["dx"]][[seqtype]]
+      dy <- pout[[ipout]][["dy"]][[seqtype]]
       if(is.null(dx) | type!="ZC") dx <- 0
       if(is.null(dy) | type!="ZC") {
         if(type=="both") dy <- 0.002
