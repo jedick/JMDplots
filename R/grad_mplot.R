@@ -51,23 +51,23 @@ mfrow <- list(gradoxSI = c(6, 3),
 # e.g. mplot("Columbia_River", "IMG_MT")
 mplot <- function(study, seqtype, plottype = "bars", ylim = NULL, plot.RNA = TRUE, taxid = NULL,
   dsDNA = TRUE, abbrev = NULL, col = NULL, add.label = TRUE, maxdepth = NULL, H2O = FALSE,
-  plot.it = TRUE, add.title = TRUE, yline = 2, basis = "QEC") {
-  md <- mdata(study, seqtype)
+  plot.it = TRUE, add.title = TRUE, yline = 2, basis = "QEC", datadir = NULL, mdata = studies) {
+  md <- mdata(mdata, study, seqtype)
   # get labels, groups, and abbreviation
   samples <- md$samples
   xlabels <- md$xlabels
   group <- md$group
   if(missing(abbrev)) abbrev <- md$abbrev
   techtype <- md$techtype
-  xlab <- names(studies[[study]][1])
+  xlab <- names(mdata[[study]][1])
   # get ZC range
   if(is.null(ylim)) {
-    if(grepl("_MGP", seqtype)) ylim <- studies[[study]][["MGP_range"]]
-    else if(grepl("_MTP", seqtype)) ylim <- studies[[study]][["MTP_range"]]
-    else if(grepl("_MG", seqtype) & is.null(taxid)) ylim <- studies[[study]][["MG_range"]]
-    else if(grepl("_MG", seqtype) & !is.null(taxid)) ylim <- studies[[study]][["MG_srange"]]
-    else if(grepl("_MT", seqtype) & is.null(taxid)) ylim <- studies[[study]][["MT_range"]]
-    else if(grepl("_MT", seqtype) & !is.null(taxid)) ylim <- studies[[study]][["MT_srange"]]
+    if(grepl("_MGP", seqtype)) ylim <- mdata[[study]][["MGP_range"]]
+    else if(grepl("_MTP", seqtype)) ylim <- mdata[[study]][["MTP_range"]]
+    else if(grepl("_MG", seqtype) & is.null(taxid)) ylim <- mdata[[study]][["MG_range"]]
+    else if(grepl("_MG", seqtype) & !is.null(taxid)) ylim <- mdata[[study]][["MG_srange"]]
+    else if(grepl("_MT", seqtype) & is.null(taxid)) ylim <- mdata[[study]][["MT_range"]]
+    else if(grepl("_MT", seqtype) & !is.null(taxid)) ylim <- mdata[[study]][["MT_srange"]]
     else stop("invalid seqtype:", seqtype)
     if(is.null(ylim)) stop("ylim range not available for ", study, " ", seqtype)
   }
@@ -95,26 +95,40 @@ mplot <- function(study, seqtype, plottype = "bars", ylim = NULL, plot.RNA = TRU
       add.label <- ifelse(taxid[i]==0, FALSE, add.label)
       plotMG(paste0(study, "_", seqtype), plottype, samples, xlabels, group, xlab, ylim, abbrev, dsDNA,
              plot.RNA = FALSE, taxid = taxid[i], lwd = lwd, lty = lty, lwd.bars = lwd.bars, col = col, extendrange = TRUE,
-             add.label = add.label, plot_real_x = studies[[study]][["plot_real_x"]], maxdepth = maxdepth, H2O = H2O,
-             plot.it = plot.it, add.title = add.title, yline = yline, basis = basis, techtype = techtype)
+             add.label = add.label, plot_real_x = mdata[[study]][["plot_real_x"]], maxdepth = maxdepth, H2O = H2O,
+             plot.it = plot.it, add.title = add.title, yline = yline, basis = basis, techtype = techtype, datadir = datadir)
     }
   } 
   else plotMG(paste0(study, "_", seqtype), plottype, samples, xlabels, group, xlab, ylim, abbrev, dsDNA,
               plot.RNA, taxid, col = col,
-              add.label = add.label, plot_real_x = studies[[study]][["plot_real_x"]], maxdepth = maxdepth, H2O = H2O,
-              plot.it = plot.it, add.title = add.title, yline = yline, basis = basis, techtype = techtype)
+              add.label = add.label, plot_real_x = mdata[[study]][["plot_real_x"]], maxdepth = maxdepth, H2O = H2O,
+              plot.it = plot.it, add.title = add.title, yline = yline, basis = basis, techtype = techtype, datadir = datadir)
 }
 
 # make page of plots for MG/MT 20180225
 # add subset and H2O arguments 20181231
 mpage <- function(subset="gradoxSI", H2O=FALSE, plottype="bars", dsDNA=TRUE, set.par=TRUE, add.label = TRUE) {
-  mfrow <- mfrow[[subset]]
+  if(is.list(subset)) {
+    # when subset is a list, it gives the studies and mfrow
+    studies <- subset$studies
+    mfrow <- subset$mfrow
+    # use user's directory for data
+    datadir <- "data/"
+  } else {
+    # extract only the datasets used for the paper
+    studies <- studies[match(usedin[[subset]], names(studies))]
+    # if studies is empty, we have a problem
+    if(length(studies)==0) stop("no data for ", subset, "; available groups are ", paste(names(mfrow), collapse = " "))
+    mfrow <- mfrow[[subset]]
+    # use NULL datadir for mplot() (gets data from JMDplots/extdata)
+    datadir <- NULL
+  }
+  # plot setup
   if(set.par) opar <- par(mfrow=mfrow, mar=c(4, 3.5, 2, 1), mgp=c(2.5, 1, 0))
+  # variable for labeling plots
+  iletter <- 1
   # initialize output of ZC values
   mout <- list()
-  # extract only the datasets used for the paper
-  studies <- studies[match(usedin[[subset]], names(studies))]
-  iletter <- 1
   for(i in 1:length(studies)) {
     # name of the study without seqtype (e.g. Guerrero_Negro)
     study <- names(studies[i])
@@ -128,7 +142,7 @@ mpage <- function(subset="gradoxSI", H2O=FALSE, plottype="bars", dsDNA=TRUE, set
          seqtype=="abbrev" | seqtype=="group" | seqtype=="dx" | seqtype=="dy" | seqtype=="plot_real_x" | seqtype == "techtype") next
       # for the figure in the paper, take only one dataset for each study (i.e. metagenome, except for Mono Lake)
       if(subset=="gradoxMS" & (grepl("_MT", seqtype) & study!="Mono_Lake")) next
-      ZC <- list(mplot(study, seqtype, plottype, dsDNA=dsDNA, add.label=add.label, H2O=H2O))
+      ZC <- list(mplot(study, seqtype, plottype, dsDNA=dsDNA, add.label=add.label, H2O=H2O, datadir = datadir, mdata = studies))
       names(ZC) <- paste0(study, "_", seqtype)
       mout <- c(mout, ZC)
     }
@@ -171,13 +185,27 @@ mcomp <- function(mout, yvar="RNA") {
 # add subset and H2O arguments 20181231
 # add plot.it argument 20190711
 ppage <- function(subset = "gradoxSI", H2O = FALSE, set.par = TRUE, plot.it = TRUE, basis = "QEC", add.label = TRUE) {
-  mfrow <- mfrow[[subset]]
+  if(is.list(subset)) {
+    # when subset is a list, it gives the studies and mfrow
+    studies <- subset$studies
+    mfrow <- subset$mfrow
+    # use user's directory for data
+    datadir <- "data/"
+  } else {
+    # extract only the datasets used for the paper
+    studies <- studies[match(usedin[[subset]], names(studies))]
+    # if studies is empty, we have a problem
+    if(length(studies)==0) stop("no data for ", subset, "; available groups are ", paste(names(mfrow), collapse = " "))
+    mfrow <- mfrow[[subset]]
+    # use NULL datadir for mplot() (gets data from JMDplots/extdata)
+    datadir <- NULL
+  }
+  # plot setup
   if(set.par & plot.it) opar <- par(mfrow = mfrow, mar = c(4, 3.5, 2, 1), mgp = c(2.5, 1, 0))
+  # variable for labeling plots (starts at B for protein plots in gradox paper SI figure)
+  iletter <- 2
   # initialize output of ZC or H2O values
   pout <- list()
-  # extract only the datasets used for the paper
-  studies <- studies[match(usedin[[subset]], names(studies))]
-  iletter <- 2
   for(i in 1:length(studies)) {
     # name of the study without seqtype (e.g. Columbia_River)
     study <- names(studies[i])
@@ -190,20 +218,20 @@ ppage <- function(subset = "gradoxSI", H2O = FALSE, set.par = TRUE, plot.it = TR
       if(j==1 | grepl("xlabels", seqtype) | grepl("range", seqtype) |
          seqtype=="abbrev" | seqtype=="group" | seqtype=="dx" | seqtype=="dy" | seqtype=="plot_real_x" | seqtype=="techtype") next
       # for the figure in the paper, take only one dataset for each study (i.e. metagenome, except for Mono Lake)
-      if(subset=="gradoxMS" & (grepl("_MT", seqtype) & study!="Mono_Lake")) next
+      if(identical(subset, "gradoxMS") & (grepl("_MT", seqtype) & study!="Mono_Lake")) next
       # for Baltic Sea, use either MG or MT 20190713
-      if(subset=="balticMG" & !grepl("_MG", seqtype)) next
-      if(subset=="balticMT" & !grepl("_MT", seqtype)) next
+      if(identical(subset, "balticMG") & !grepl("_MG", seqtype)) next
+      if(identical(subset, "balticMT") & !grepl("_MT", seqtype)) next
       # for comparison with Eiler et al. data, use only metagenomes 20190720
-      if(subset=="eiler" & !grepl("_MG", seqtype)) next
+      if(identical(subset, "eiler") & !grepl("_MG", seqtype)) next
       # add "P" for proteins
       seqtype <- paste0(seqtype, "P")
-      X <- list(mplot(study, seqtype, add.label = add.label, H2O = H2O, plot.it = plot.it, basis = basis))
+      X <- list(mplot(study, seqtype, add.label = add.label, H2O = H2O, plot.it = plot.it, basis = basis, datadir = datadir, mdata = studies))
       names(X) <- paste0(study, "_", seqtype)
       pout <- c(pout, X)
     }
     # add figure label 20181210
-    if(subset == "gradoxMS" & plot.it) {
+    if(identical(subset, "gradoxMS") & plot.it) {
       label.figure(LETTERS[iletter], cex = 1.6, font = 2, yfrac = 0.936)
       iletter <- iletter + 2
     }

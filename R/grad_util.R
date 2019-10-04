@@ -10,7 +10,8 @@ plotMG <- function(dataset="Guerrero_Negro_IMG_MG", plottype="bars",
   samples=formatC(10:1, width=2, flag="0"), labels=formatC(10:1, width=2, flag="0"),
   group="mat", xlab="layer", ylim=c(1.67, 1.77), abbrev=NULL, dsDNA=TRUE, plot.RNA=TRUE,
   taxid=NULL, lwd=1, lty=2, lwd.bars=2, col=NULL, extendrange=FALSE, add.label=TRUE,
-  plot_real_x=FALSE, maxdepth=NULL, H2O=FALSE, plot.it = TRUE, add.title = TRUE, yline = 2, basis = "QEC", techtype = NULL) {
+  plot_real_x=FALSE, maxdepth=NULL, H2O=FALSE, plot.it = TRUE, add.title = TRUE, yline = 2,
+  basis = "QEC", techtype = NULL, datadir = NULL) {
   # samples: (used for suffixes on file names)
   # labels: (used for labeling x-axis ticks)
   # xlab: "layer", ...
@@ -21,7 +22,7 @@ plotMG <- function(dataset="Guerrero_Negro_IMG_MG", plottype="bars",
   if(any(sapply(names(gradox), grepl, dataset))) paper <- "gradox"
   if(any(sapply(names(gradH2O), grepl, dataset))) paper <- "gradH2O"
   # gradox or gradH2O data location in JMDplots package 20190928
-  datadir <- system.file(paste0("extdata/", paper), package = "JMDplots")
+  if(is.null(datadir)) datadir <- system.file(paste0("extdata/", paper), package = "JMDplots")
   # set up for proteins or DNA
   if(isprotein) {
     filestart <- paste0(datadir, "/MGP/", dataset)

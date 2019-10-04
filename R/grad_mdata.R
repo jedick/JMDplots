@@ -319,7 +319,7 @@ studies <- c(gradox, gradH2O)
 
 # get metadata (location names and sequencing IDs) for a study
 # extracted from mprep/mplot 20180312
-mdata <- function(study, seqtype) {
+mdata <- function(studies, study, seqtype) {
   samples <- studies[[study]][[1]]
   if(is.null(samples)) stop("metadata for ", study, " study not available")
   xlabels <- studies[[study]]$xlabels

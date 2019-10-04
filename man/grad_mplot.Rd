@@ -16,7 +16,7 @@ The functions are exported in the package so they are available to user scripts.
   mplot(study, seqtype, plottype = "bars", ylim = NULL, plot.RNA = TRUE,
     taxid = NULL, dsDNA = TRUE, abbrev = NULL, col = NULL, add.label = TRUE,
     maxdepth = NULL, H2O = FALSE, plot.it = TRUE, add.title = TRUE, yline = 2,
-    basis = "QEC")
+    basis = "QEC", datadir = NULL, mdata = studies)
   mpage(subset = "gradoxSI", H2O = FALSE, plottype = "bars", dsDNA = TRUE,
     set.par = TRUE, add.label = TRUE)
   ppage(subset = "gradoxSI", H2O = FALSE, set.par = TRUE, plot.it = TRUE,
@@ -55,6 +55,8 @@ The functions are exported in the package so they are available to user scripts.
   \item{reorder}{logical, put points in order of increasing x value?}
   \item{plot.techtype}{logical, identify 454 or Sanger datasets by open symbols?}
   \item{add}{logical, add to existing plot?}
+  \item{datadir}{character, location of data directory (default is from package)}
+  \item{mdata}{list, metadata for studies (default is from package)}
 }
 
 \details{
@@ -68,6 +70,9 @@ These can be changed to \samp{_MGP} and \samp{_MTP} to indicate protein sequence
 \code{mcomp} makes a scatterplot of (\ZC of RNA - \ZC of DNA) vs \ZC of DNA.
 Set \code{yvar} to \samp{GC} to change the y-axis to GC ratio of DNA.
 (For double-stranded DNA, this should be a linear function of \ZC.)
+
+\code{datadir} and \code{mdata} are used to specify alternate location of compositional data and metadata for metagenomic studies.
+This permits the processing of user-provided data sets; see \code{\link{subsurface}} for some examples.
 }
 
 \references{

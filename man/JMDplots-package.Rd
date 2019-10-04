@@ -37,6 +37,11 @@ The plots are available the corresponding vignettes in the package.
   }
 }
 
+\section{subsurface}{
+  This directory has additional files of amino acid compositions for two subsurface environments.
+  These files are provided to illustrate the usage of user-provided data sets; see \code{\link{subsurface}}.
+}
+
 \section{aaaq}{
   \describe{
     \item{BKM60_Fig7.csv}{Eh-pH values for normal, wet and waterlogged soils from Fig. 7 of Baas Becking et al. (1960).}
