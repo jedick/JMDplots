@@ -31,7 +31,7 @@ str(subsurface)
 
 # make plot for one data set
 datadir <- system.file("extdata/subsurface/data", package = "JMDplots")
-mplot("North_Pond", "SRA_MGP", datadir = datadir, mdata = subsurface$studies)
+mplot("North_Pond", "SRA_MGP", datadir = datadir, mdata = subsurface)
 
 # make plots for multiple data sets
 WD <- setwd(system.file("extdata/subsurface", package = "JMDplots"))

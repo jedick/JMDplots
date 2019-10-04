@@ -18,9 +18,9 @@ The functions are exported in the package so they are available to user scripts.
     maxdepth = NULL, H2O = FALSE, plot.it = TRUE, add.title = TRUE, yline = 2,
     basis = "QEC", datadir = NULL, mdata = studies)
   mpage(subset = "gradoxSI", H2O = FALSE, plottype = "bars", dsDNA = TRUE,
-    set.par = TRUE, add.label = TRUE)
+    set.par = TRUE, add.label = TRUE, mfrow = NULL)
   ppage(subset = "gradoxSI", H2O = FALSE, set.par = TRUE, plot.it = TRUE,
-    basis = "QEC", add.label = TRUE)
+    basis = "QEC", add.label = TRUE, mfrow = NULL)
   mcomp(mout, yvar = "RNA")
   pcomp(mout, pout, seqtype = "MG", type = "ZC", parts = c("plot", "legend"),
     yline = 2, xlim = NULL, ylim = NULL, reorder = TRUE,
@@ -46,6 +46,7 @@ The functions are exported in the package so they are available to user scripts.
   \item{basis}{character, description of basis species to use}
   \item{subset}{character, name of subset of studies to plot}
   \item{set.par}{logical, set up plot with \code{\link{par}} commands?}
+  \item{mfrow}{numeric, optional setting for \code{\link{par}(mfrow)}}
   \item{mout}{list, output from \code{mpage} or \code{ppage}}
   \item{yvar}{character, y-axis variable (\samp{RNA} or \samp{GC})}
   \item{pout}{list, output from \code{ppage}}

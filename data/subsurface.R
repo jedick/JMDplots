@@ -3,7 +3,6 @@
 # used to exemplify user-provided data sets 20191004
 
 subsurface <- list(
-  studies = list(
   Peru_Margin = list( # 20180313 [OECB13]
     depth = c("5m", "30m", "50m", "70m", "91m", "159m"),
     # FIXME: read.fasta() has spurious unrecognized letters in SRX187180, SRX330851, SRX331958
@@ -26,6 +25,4 @@ subsurface <- list(
               "oxygenated", "oxygenated", "oxygenated", "oxygenated", "oxygenated0"),
     plot_real_x = FALSE
   )
-  ),
-  mfrow = c(1, 2)
 )

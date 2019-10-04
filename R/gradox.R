@@ -77,7 +77,7 @@ gradox2 <- function(pdf=FALSE) {
 # all plots of DNA and RNA ZC on a single page
 gradoxS1 <- function(pdf=FALSE) {
   if(pdf) pdf("gradoxS1.pdf", width=6.5, height=10)
-  mout <- mpage()
+  mout <- mpage("gradoxSI", mfrow = c(6, 3))
   if(pdf) dev.off()
   invisible(mout)
 }
@@ -85,7 +85,7 @@ gradoxS1 <- function(pdf=FALSE) {
 # all plots of protein ZC on a single page
 gradoxS2 <- function(pdf=FALSE) {
   if(pdf) pdf("gradoxS2.pdf", width=6.5, height=10)
-  pout <- ppage()
+  pout <- ppage("gradoxSI", mfrow = c(6, 3))
   if(pdf) dev.off()
   invisible(pout)
 }

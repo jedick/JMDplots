@@ -46,15 +46,6 @@ usedin <- list(
                "Baltic_Sea-0.1d", "Baltic_Sea-0.8d", "Baltic_Sea-3.0d")
 )
 
-# mfrow setting for mpage() and ppage() (plot all ZC comparisons on a single page)
-mfrow <- list(gradoxSI = c(6, 3),
-              gradoxMS = c(2, 5),
-              gradoxGS = c(2, 2),
-              balticsurface = c(1, 1),
-              balticdeep = c(1, 1),
-              balticMG = c(2, 3),
-              balticMT = c(2, 3))
-
 # function to plot sampled compositions for indicated study and sequence type 20180222
 # e.g. mplot("Columbia_River", "IMG_MT")
 mplot <- function(study, seqtype, plottype = "bars", ylim = NULL, plot.RNA = TRUE, taxid = NULL,
@@ -115,23 +106,31 @@ mplot <- function(study, seqtype, plottype = "bars", ylim = NULL, plot.RNA = TRU
 
 # make page of plots for MG/MT 20180225
 # add subset and H2O arguments 20181231
-mpage <- function(subset="gradoxSI", H2O=FALSE, plottype="bars", dsDNA=TRUE, set.par=TRUE, add.label = TRUE) {
+mpage <- function(subset="gradoxSI", H2O=FALSE, plottype="bars", dsDNA=TRUE, set.par=TRUE, add.label = TRUE, mfrow = NULL) {
   if(is.list(subset)) {
-    # when subset is a list, it gives the studies and mfrow
-    studies <- subset$studies
-    mfrow <- subset$mfrow
+    # when subset is a list, it gives the studies
+    studies <- subset
     # use user's directory for data
     datadir <- "data/"
   } else {
     # extract only the datasets used for the paper
     studies <- studies[match(usedin[[subset]], names(studies))]
     # if studies is empty, we have a problem
-    if(length(studies)==0) stop("no data for ", subset, "; available groups are ", paste(names(mfrow), collapse = " "))
-    mfrow <- mfrow[[subset]]
+    if(length(studies)==0) stop("no data for ", subset, "; available groups are ", paste(names(usedin), collapse = " "))
     # use NULL datadir for mplot() (gets data from JMDplots/extdata)
     datadir <- NULL
   }
   # plot setup
+  if(is.null(mfrow)) {
+    mfrow <- c(1, 1)
+    if(length(studies) > 1) mfrow <- c(1, 2)
+    if(length(studies) > 2) mfrow <- c(2, 2)
+    if(length(studies) > 4) mfrow <- c(2, 3)
+    if(length(studies) > 6) mfrow <- c(3, 3)
+    if(length(studies) > 9) mfrow <- c(3, 4)
+    if(length(studies) > 12) mfrow <- c(3, 5)
+    if(length(studies) > 15) mfrow <- c(4, 5)
+  }
   if(set.par) opar <- par(mfrow=mfrow, mar=c(4, 3.5, 2, 1), mgp=c(2.5, 1, 0))
   # variable for labeling plots
   iletter <- 1
@@ -192,23 +191,31 @@ mcomp <- function(mout, yvar="RNA") {
 # make page of plots for MGP/MTP 20180225
 # add subset and H2O arguments 20181231
 # add plot.it argument 20190711
-ppage <- function(subset = "gradoxSI", H2O = FALSE, set.par = TRUE, plot.it = TRUE, basis = "QEC", add.label = TRUE) {
+ppage <- function(subset = "gradoxSI", H2O = FALSE, set.par = TRUE, plot.it = TRUE, basis = "QEC", add.label = TRUE, mfrow = NULL) {
   if(is.list(subset)) {
-    # when subset is a list, it gives the studies and mfrow
-    studies <- subset$studies
-    mfrow <- subset$mfrow
+    # when subset is a list, it gives the studies
+    studies <- subset
     # use user's directory for data
     datadir <- "data/"
   } else {
     # extract only the datasets used for the paper
     studies <- studies[match(usedin[[subset]], names(studies))]
     # if studies is empty, we have a problem
-    if(length(studies)==0) stop("no data for ", subset, "; available groups are ", paste(names(mfrow), collapse = " "))
-    mfrow <- mfrow[[subset]]
+    if(length(studies)==0) stop("no data for ", subset, "; available groups are ", paste(names(usedin), collapse = " "))
     # use NULL datadir for mplot() (gets data from JMDplots/extdata)
     datadir <- NULL
   }
   # plot setup
+  if(is.null(mfrow)) {
+    mfrow <- c(1, 1)
+    if(length(studies) > 1) mfrow <- c(1, 2)
+    if(length(studies) > 2) mfrow <- c(2, 2)
+    if(length(studies) > 4) mfrow <- c(2, 3)
+    if(length(studies) > 6) mfrow <- c(3, 3)
+    if(length(studies) > 9) mfrow <- c(3, 4)
+    if(length(studies) > 12) mfrow <- c(3, 5)
+    if(length(studies) > 15) mfrow <- c(4, 5)
+  }
   if(set.par & plot.it) opar <- par(mfrow = mfrow, mar = c(4, 3.5, 2, 1), mgp = c(2.5, 1, 0))
   # variable for labeling plots (starts at B for protein plots in gradox paper SI figure)
   iletter <- 2
