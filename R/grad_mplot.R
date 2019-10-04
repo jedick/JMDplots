@@ -26,18 +26,24 @@
 # append [D|R|P] to seqtype to indicate processed data (DNA, RNA, protein)
 
 # identify the datasets used for different figures in the papers
-# (all datasets are shown in the Supporting Information)
-usedin <- list(gradoxSI=names(gradox),
-               gradoxMS=c("BalticSea_Sediment", "Shimokita_Peninsula",  # sediment
-                          "Diffuse_Vents", "Menez_Gwen",                # hydrothermal
-                          "ETNP_OMZ", "ETSP_OMZ",                       # ocean
-                          "Mono_Lake", "Organic_Lake",                  # hypersaline
-                          "Bison_Pool", "Guerrero_Negro"),              # microbial mat
-               # for goldschmidt poster 20190713
-               gradoxGS=c("Diffuse_Vents",                              # hydrothermal
-                          "Bison_Pool", "Guerrero_Negro"),              # microbial mat
-               balticsurface=c("Baltic_Sea-0.1s"),
-               balticdeep=c("Baltic_Sea-0.1d")
+usedin <- list(
+  # for figures in gradox paper
+  gradoxMS = c("BalticSea_Sediment", "Shimokita_Peninsula",  # sediment
+               "Diffuse_Vents", "Menez_Gwen",                # hydrothermal
+               "ETNP_OMZ", "ETSP_OMZ",                       # ocean
+               "Mono_Lake", "Organic_Lake",                  # hypersaline
+               "Bison_Pool", "Guerrero_Negro"),              # microbial mat
+  # for supporting information of gradox paper
+  gradoxSI = names(gradox),
+  # for goldschmidt poster 20190713
+  gradoxGS = c("Diffuse_Vents", "Bison_Pool", "Guerrero_Negro"),              
+  balticsurface = c("Baltic_Sea-0.1s"),
+  balticdeep = c("Baltic_Sea-0.1d"),
+  # all metagenomic data sets for Baltic Sea 20191004
+  balticMG = c("Baltic_Sea-0.1s", "Baltic_Sea-0.8s", "Baltic_Sea-3.0s",
+               "Baltic_Sea-0.1d", "Baltic_Sea-0.8d", "Baltic_Sea-3.0d"),
+  balticMT = c("Baltic_Sea-0.1s", "Baltic_Sea-0.8s", "Baltic_Sea-3.0s",
+               "Baltic_Sea-0.1d", "Baltic_Sea-0.8d", "Baltic_Sea-3.0d")
 )
 
 # mfrow setting for mpage() and ppage() (plot all ZC comparisons on a single page)
@@ -45,7 +51,9 @@ mfrow <- list(gradoxSI = c(6, 3),
               gradoxMS = c(2, 5),
               gradoxGS = c(2, 2),
               balticsurface = c(1, 1),
-              balticdeep = c(1, 1))
+              balticdeep = c(1, 1),
+              balticMG = c(2, 3),
+              balticMT = c(2, 3))
 
 # function to plot sampled compositions for indicated study and sequence type 20180222
 # e.g. mplot("Columbia_River", "IMG_MT")
