@@ -262,7 +262,7 @@ ppage <- function(subset = "gradoxSI", H2O = FALSE, set.par = TRUE, plot.it = TR
 # mout <- ppage(); pout <- ppage(H2O=TRUE); pcomp(mout, pout, type="both")
 # mout <- mpage(H2O=TRUE); pout <- ppage(H2O=TRUE); pcomp(mout, pout, type="H2O")
 pcomp <- function(mout, pout, seqtype="MG", type="ZC", parts=c("plot", "legend"), yline = 2,
-                  xlim = NULL, ylim = NULL, reorder = TRUE, plot.techtype = FALSE, add = FALSE) {
+                  xlim = NULL, ylim = NULL, reorder = TRUE, plot.techtype = FALSE, add = FALSE, pch = NULL) {
   if("plot" %in% parts) {
     # set up plot
     if(type=="ZC") {
@@ -309,7 +309,7 @@ pcomp <- function(mout, pout, seqtype="MG", type="ZC", parts=c("plot", "legend")
 #      if(xaxis=="RNA") xvals <- mout[[imout]]$RNA
 #      if(xaxis=="CM") xvals <- pout[[i]]$CM
 #      if(yaxis=="CM") yvals <- pout[[i]]$CM
-      group <- mout[[imout]]$group
+      group <- rep(mout[[imout]]$group, length.out = length(xvals))
       if(reorder) {
         # order points by increasing DNA/RNA ZC value
         ord <- order(xvals)
@@ -318,7 +318,7 @@ pcomp <- function(mout, pout, seqtype="MG", type="ZC", parts=c("plot", "legend")
         group <- group[ord]
       }
       # color: by group
-      col <- "black"
+      col <- rep("black", length(group))
       col[group %in% c("yellowstone", "yellowstone1")] <- "orange"
       col[group %in% c("rock", "rock0")] <- "brown"
       col[group %in% c("vent", "vent0")] <- "red"
@@ -337,27 +337,27 @@ pcomp <- function(mout, pout, seqtype="MG", type="ZC", parts=c("plot", "legend")
       lines(xvals, yvals, col="dimgray", lwd=0.8, lty=2)
       if(grepl("Baltic_Sea", study)) {
         # filled triangle, circle, square for 0.1, 0.8, 3.0 size fractions
-        if(grepl("0.1", study)) pch <- 17
-        if(grepl("0.8", study)) pch <- 16
-        if(grepl("3.0", study)) pch <- 15
-        # also use blue for 0.8 size fraction
-        if(grepl("0.8", study)) col <- "blue"
+        if(grepl("0.1", study)) mypch <- 17
+        if(grepl("0.8", study)) mypch <- 16
+        if(grepl("3.0", study)) mypch <- 15
       } else {
         # filled circles for marine, filled squares for terrestrial 20181114
-        pch <- rep(19, length(xvals))
-        pch[group %in% c("yellowstone", "yellowstone1", "rock", "rock0", "mat", "mat1", "hypersaline", "hypersaline0")] <- 15
+        mypch <- rep(19, length(xvals))
+        mypch[group %in% c("yellowstone", "yellowstone1", "rock", "rock0", "mat", "mat1", "hypersaline", "hypersaline0")] <- 15
         # filled squares for Amazon River particle associated 20190723
-        pch[group %in% c("riverPA", "plumePA")] <- 15
+        mypch[group %in% c("riverPA", "plumePA")] <- 15
       }
       studyname <- paste(strsplit(study, "_")[[1]][1:2], collapse="_")
       if(plot.techtype) {
         # use open symbols for 454 or Sanger techtypes 20190723
         techtype <- pout[[ipout]][["techtype"]]
         techtype <- rep(techtype, length(xvals))
-        pch[pch==19 & techtype %in% c("454", "Sanger")] <- 1
-        pch[pch==15 & techtype %in% c("454", "Sanger")] <- 0
+        mypch[mypch==19 & techtype %in% c("454", "Sanger")] <- 1
+        mypch[mypch==15 & techtype %in% c("454", "Sanger")] <- 0
       }
-      points(xvals, yvals, col=col, pch=pch)
+      # use pch from argument, otherwise mypch as determined here
+      if(is.null(pch)) thispch <- mypch else thispch <- pch[ipout]
+      points(xvals, yvals, col=col, pch=thispch)
       # outline circle or square for groups with "0" (upper part of OMZ etc)
       pch0 <- rep(1, length(xvals))
       pch0[group %in% c("yellowstone1", "rock0", "mat1", "hypersaline0")] <- 0

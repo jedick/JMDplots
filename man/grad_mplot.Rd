@@ -24,7 +24,7 @@ The functions are exported in the package so they are available to user scripts.
   mcomp(mout, yvar = "RNA")
   pcomp(mout, pout, seqtype = "MG", type = "ZC", parts = c("plot", "legend"),
     yline = 2, xlim = NULL, ylim = NULL, reorder = TRUE,
-    plot.techtype = FALSE, add = FALSE)
+    plot.techtype = FALSE, add = FALSE, pch = NULL)
 }
 
 \arguments{
@@ -58,6 +58,7 @@ The functions are exported in the package so they are available to user scripts.
   \item{add}{logical, add to existing plot?}
   \item{datadir}{character, location of data directory (default is from package)}
   \item{mdata}{list, metadata for studies (default is from package)}
+  \item{pch}{numeric, plot symbol (default is determined from sample type)}
 }
 
 \details{
