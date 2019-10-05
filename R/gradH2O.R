@@ -59,15 +59,14 @@ gradH2O2 <- function(pdf = FALSE) {
   if(pdf) pdf("gradH2O2.pdf", width = 6, height = 2.3)
   par(mfrow = c(1, 3))
   par(mar = c(4, 4, 4, 1), mgp = c(2.5, 0.7, 0))
-  mplot("Bison_Pool", "IMG_MGP", add.label = FALSE)
+  mplot("Bison_Pool", "IMG_MGP", add.label = FALSE, plottype = "#FF000030", col = "red")
   label.figure("A", cex = 2, yfrac = 0.9)
-  mplot("Diffuse_Vents", "SRA_MGP", add.label = FALSE)
+  mplot("Diffuse_Vents", "SRA_MGP", add.label = FALSE, plottype = "#FF000030", col = "red")
   label.figure("B", cex = 2, yfrac = 0.9)
-  mplot("Guerrero_Negro", "IMG_MGP", add.label = FALSE)
+  mplot("Guerrero_Negro", "IMG_MGP", add.label = FALSE, plottype = "#FF000030", col = "red")
   label.figure("C", cex = 2, yfrac = 0.9)
   if(pdf) invisible(dev.off())
 }
-
 
 # nH2O-ZC scatterplots for redox gradients and Baltic Sea 20190713
 gradH2O3 <- function(pdf = FALSE) {
@@ -115,15 +114,22 @@ gradH2O4 <- function(pdf = FALSE) {
   if(pdf) pdf("gradH2O4.pdf", width = 6, height = 2.5)
   par(mfrow = c(1, 3))
   par(mar = c(5, 4, 1, 1), mgp = c(3, 0.7, 0), las = 1)
-  mplot("Baltic_Sea-0.1s", "iMicrobe_MGP", add.title = FALSE, H2O = TRUE, yline = 2.7)
+
+  mplot("Baltic_Sea-0.1s", "iMicrobe_MGP", H2O = TRUE, plottype = "#FF000030", col = "red", add.title = FALSE, ylim = c(-0.8, -0.7), yline = 2.7)
+  mplot("Baltic_Sea-0.1s", "SRA_MTP", H2O = TRUE, plottype = "#0000FF30", col = "blue", add.title = FALSE, add = TRUE, pch = 1)
   legend("topright", legend = quote("0.1-0.8"~mu*m), bty = "n")
   label.figure("A", cex = 2, xfrac = 0.04)
-  mplot("Baltic_Sea-0.8s", "iMicrobe_MGP", add.title = FALSE, H2O = TRUE, yline = 2.7)
+
+  mplot("Baltic_Sea-0.8s", "iMicrobe_MGP", H2O = TRUE, plottype = "#FF000030", col = "red", add.title = FALSE, ylim = c(-0.8, -0.7), yline = 2.7)
+  mplot("Baltic_Sea-0.8s", "SRA_MTP", H2O = TRUE, plottype = "#0000FF30", col = "blue", add.title = FALSE, add = TRUE, pch = 1)
   legend("topright", legend = quote("0.8-3.0"~mu*m), bty = "n")
   label.figure("B", cex = 2, xfrac = 0.035)
-  mplot("Baltic_Sea-3.0s", "iMicrobe_MGP", add.title = FALSE, H2O = TRUE, yline = 2.7)
+
+  mplot("Baltic_Sea-3.0s", "iMicrobe_MGP", H2O = TRUE, plottype = "#FF000030", col = "red", add.title = FALSE, ylim = c(-0.8, -0.7), yline = 2.7)
+  mplot("Baltic_Sea-3.0s", "SRA_MTP", H2O = TRUE, plottype = "#0000FF30", col = "blue", add.title = FALSE, add = TRUE, pch = 1)
   legend("topright", legend = quote("3.0-200"~mu*m), bty = "n")
   label.figure("C", cex = 2, xfrac = 0.035)
+
   if(pdf) invisible(dev.off())
 }
 
