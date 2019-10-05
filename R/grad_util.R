@@ -335,6 +335,28 @@ ZCnuc <- function(nuccomp, sugar="deoxyribose") {
   Ztot / nCtot
 }
 
+# function to convert ssDNA base counts to dsDNA 20180318
+make_dsDNA <- function(nuccomp) {
+  nuccomp[, c("A", "C", "G", "T")] <- nuccomp[, c("A", "C", "G", "T")] + nuccomp[, c("T", "G", "C", "A")]
+  nuccomp
+}
+
+# calculate Cys+Met fraction of amino acid compositions 20180324
+CMAA <- function(AAcomp) {
+  # find columns with names for the amino acids
+  AA <- c("Ala", "Cys", "Asp", "Glu", "Phe", "Gly", "His", "Ile", "Lys",
+    "Leu", "Met", "Asn", "Pro", "Gln", "Arg", "Ser", "Thr", "Val", "Trp", "Tyr")
+  isAA <- colnames(AAcomp) %in% AA
+  # columns for Cys and Met
+  isCM <- colnames(AAcomp) %in% c("Cys", "Met")
+  # calculate (Cys+Met) / (total AA)
+  sum(AAcomp[, isCM]) / sum(AAcomp[, isAA])
+}
+
+#########################################
+### newly exported functions 20191005 ###
+#########################################
+
 # calculate ZC for amino acid compositions 20180228
 ZCAA <- function(AAcomp, nothing=NULL) {
   # a dummy second argument is needed because of how this function is used in plotMG()
@@ -364,36 +386,23 @@ ZCAA <- function(AAcomp, nothing=NULL) {
 
 # calculate nH2O for amino acid compositions 20181228
 H2OAA <- function(AAcomp, basis = "QEC") {
-  ## how to use CHNOSZ to get the number of H2O in reactions
-  ## to form amino acid residues from the "QEC" basis:
-  # basis("QEC")
-  # species(aminoacids(3))
-  # nH2O_AA <- species()[["H2O"]]
-  ## subtract one H2O to make residues
-  # nH2O_AA <- nH2O_AA - 1
-  # names(nH2O_AA) <- aminoacids(3)
-  # dput(nH2O_AA)
+  # how to use CHNOSZ to get the number of H2O in reactions
+  # to form amino acid residues from the "QEC" basis:
+  ## basis("QEC")
+  ## species(aminoacids(3))
+  ## nH2O_AA <- species()[["H2O"]]
+  # subtract one H2O to make residues
+  ## nH2O_AA <- nH2O_AA - 1
+  ## names(nH2O_AA) <- aminoacids(3)
+  ## dput(nH2O_AA)
   if(basis == "QEC") {
     nH2O_AA <- c( Ala = -0.4, Cys =   -1, Asp = -1.2, Glu =   -1, Phe = -3.2, Gly = -0.6, His = -2.8,
       Ile =  0.2, Lys =  0.2, Leu =  0.2, Met = -0.6, Asn = -1.2, Pro =   -1, Gln =   -1,
       Arg = -0.8, Ser = -0.4, Thr = -0.2, Val =    0, Trp = -4.8, Tyr = -3.2)
   }
-  # residual water content, calculated as in aminoacid_H2O/plot.R/calculate_RWC()
-  if(basis == "RWC") {
-    nH2O_AA <- c(Ala = -0.746, Cys = -0.488, Asp = 1.141, Glu = 1.009, Phe = 0.415,
-      Gly = 0.141, His = -1.488, Ile = 0.367, Lys = -0.004, Leu = 0.367,
-      Met = -0.501, Asn = 0.141, Pro = -0.501, Gln = 0.009, Arg = -1.117,
-      Ser = 0.512, Thr = 0.254, Val = -0.256, Trp = -0.089, Tyr = 0.835)
-  }
-  # residual water content in biological synthesis pathway
-  if(basis == "RWCbio") {
-    nH2O_AA <- c(Ala = 0.011, Cys = 0.171, Asp = 1.75, Glu = 0.707, Phe = -1.761,
-      Gly = 0.75, His = -2.829, Ile = 1.273, Lys = 0.852, Leu = 1.273,
-      Met = 0.316, Asn = 0.75, Pro = -0.684, Gln = -0.293, Arg = -1.409,
-      Ser = 1.171, Thr = 1.011, Val = 0.62, Trp = -2.305, Tyr = -1.375)
-  }
   # residual water content with QEC basis
-  if(basis == "RWCqec") {
+  ## round(residuals(lm(nH2O_AA ~ ZC(species()$ispecies))), 3)
+  if(basis == "rQEC") {
     nH2O_AA <- c(Ala = 0.724, Cys = 0.33, Asp = 0.233, Glu = 0.248, Phe = -2.213,
       Gly = 0.833, His = -1.47, Ile = 1.015, Lys = 1.118, Leu = 1.015,
       Met = 0.401, Asn = 0.233, Pro = 0.001, Gln = 0.248, Arg = 0.427,
@@ -416,20 +425,3 @@ H2OAA <- function(AAcomp, basis = "QEC") {
   #  stopifnot(H2O.ref == H2O.fun)
 }
 
-# function to convert ssDNA base counts to dsDNA 20180318
-make_dsDNA <- function(nuccomp) {
-  nuccomp[, c("A", "C", "G", "T")] <- nuccomp[, c("A", "C", "G", "T")] + nuccomp[, c("T", "G", "C", "A")]
-  nuccomp
-}
-
-# calculate Cys+Met fraction of amino acid compositions 20180324
-CMAA <- function(AAcomp) {
-  # find columns with names for the amino acids
-  AA <- c("Ala", "Cys", "Asp", "Glu", "Phe", "Gly", "His", "Ile", "Lys",
-    "Leu", "Met", "Asn", "Pro", "Gln", "Arg", "Ser", "Thr", "Val", "Trp", "Tyr")
-  isAA <- colnames(AAcomp) %in% AA
-  # columns for Cys and Met
-  isCM <- colnames(AAcomp) %in% c("Cys", "Met")
-  # calculate (Cys+Met) / (total AA)
-  sum(AAcomp[, isCM]) / sum(AAcomp[, isAA])
-}
