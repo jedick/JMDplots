@@ -16,7 +16,7 @@ The functions are exported in the package so they are available to user scripts.
   mplot(study, seqtype, plottype = "bars", ylim = NULL, plot.RNA = TRUE,
     taxid = NULL, dsDNA = TRUE, abbrev = NULL, col = NULL, add.label = TRUE,
     maxdepth = NULL, H2O = FALSE, plot.it = TRUE, add.title = TRUE, yline = 2,
-    basis = "QEC", datadir = NULL, mdata = studies)
+    basis = "QEC", datadir = NULL, mdata = studies, add = FALSE, pch= 19)
   mpage(subset = "gradoxSI", H2O = FALSE, plottype = "bars", dsDNA = TRUE,
     set.par = TRUE, add.label = TRUE, mfrow = NULL)
   ppage(subset = "gradoxSI", H2O = FALSE, set.par = TRUE, plot.it = TRUE,
@@ -63,11 +63,15 @@ The functions are exported in the package so they are available to user scripts.
 
 \details{
 The \code{study} is composed of two names for the locality separated by an underscore.
-The \code{seqtype} contains the name of the database followed by an underscore and MG (metagenome) or MT (metatranscriptome), i.e. \samp{[SRA|IMG|MGRAST|GenBank]_[MG|MT]}.
+For \code{mplot}, the \code{seqtype} contains the name of the database followed by an underscore and MG (metagenome) or MT (metatranscriptome), i.e. \samp{[SRA|IMG|MGRAST|GenBank]_[MG|MT]}.
 These can be changed to \samp{_MGP} and \samp{_MTP} to indicate protein sequences.
+For \code{pcomp}, \code{seqtype} is just \samp{MG} or \samp{MT}.
 
 \code{mplot} plots values of \ZC for a particular combination of \code{study} and \code{seqtype}.
 \ZC of both DNA and RNA are plotted, with an offset of -0.28 applied to that of RNA, so that values can be shown on the same scale (see Dick et al., 2019).
+The default value of \code{plottype}, \samp{bars}, specifies a plot with mean values connected by dashed lines and error bars for each sample.
+A polygon plot (shaded area instead of error bars) is made if the first character of \code{plottype} is \samp{#}.
+In this case, \code{plottype} is interpreted as the fill color for the polygon.
 
 \code{mcomp} makes a scatterplot of (\ZC of RNA - \ZC of DNA) vs \ZC of DNA.
 Set \code{yvar} to \samp{GC} to change the y-axis to GC ratio of DNA.

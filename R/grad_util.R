@@ -3,7 +3,7 @@
 
 # get metadata (location names and sequencing IDs) for a study
 # extracted from mprep/mplot 20180312
-get.mdata <- function(studies, study, seqtype) {
+get.mdata <- function(studies, study, seqtype, remove.NA = TRUE) {
   samples <- studies[[study]][[1]]
   if(is.null(samples)) stop("metadata for ", study, " study not available")
   xlabels <- studies[[study]]$xlabels
@@ -16,15 +16,17 @@ get.mdata <- function(studies, study, seqtype) {
   IDs <- studies[[study]][[seqtype.for.ID]]
   if(is.null(IDs)) stop(seqtype.for.ID, " IDs not available for ", study, " study")
   # remove NA IDs and corresponding samples, xlabels, and groups
-  samples[is.na(IDs)] <- NA
-  samples <- na.omit(samples)
-  xlabels[is.na(IDs)] <- NA
-  xlabels <- na.omit(xlabels)
-  if(length(group) > 1) {
-    group[is.na(IDs)] <- NA
-    group <- na.omit(group)
+  if(remove.NA) {
+    samples[is.na(IDs)] <- NA
+    samples <- na.omit(samples)
+    xlabels[is.na(IDs)] <- NA
+    xlabels <- na.omit(xlabels)
+    if(length(group) > 1) {
+      group[is.na(IDs)] <- NA
+      group <- na.omit(group)
+    }
+    IDs <- na.omit(IDs)
   }
-  IDs <- na.omit(IDs)
   abbrev <- studies[[study]][["abbrev"]]
   techtype <- studies[[study]][["techtype"]]
   dx <- studies[[study]][["dx"]]
@@ -39,13 +41,14 @@ get.mdata <- function(studies, study, seqtype) {
 ## optional: vioplotx package is needed for split violin plots
 plotMG <- function(dataset="Guerrero_Negro_IMG_MG", plottype="bars",
   samples=formatC(10:1, width=2, flag="0"), labels=formatC(10:1, width=2, flag="0"),
-  group="mat", xlab="layer", ylim=c(1.67, 1.77), abbrev=NULL, dsDNA=TRUE, plot.RNA=TRUE,
+  group="mat", xlab="layer", ylim=NULL, abbrev=NULL, dsDNA=TRUE, plot.RNA=TRUE,
   taxid=NULL, lwd=1, lty=2, lwd.bars=2, col=NULL, extendrange=FALSE, add.label=TRUE,
   plot_real_x=FALSE, maxdepth=NULL, H2O=FALSE, plot.it = TRUE, add.title = TRUE, yline = 2,
-  basis = "QEC", techtype = NULL, dx = NULL, dy = NULL, datadir = NULL) {
+  basis = "QEC", techtype = NULL, dx = NULL, dy = NULL, datadir = NULL,
+  add = FALSE, all.labels = NULL, pch = 19) {
   # samples: (used for suffixes on file names)
   # labels: (used for labeling x-axis ticks)
-  # xlab: "layer", ...
+  # xlab: axis label: "layer", "depth", ...
   isprotein <- grepl("_MGP$", dataset) | grepl("_MTP$", dataset)
   # where to keep mean and high/lo (+/- SD) of ZC at each site
   CM <- GC <- ZClo <- ZCmean <- ZChi <- numeric()
@@ -58,7 +61,7 @@ plotMG <- function(dataset="Guerrero_Negro_IMG_MG", plottype="bars",
   if(isprotein) {
     filestart <- paste0(datadir, "/MGP/", dataset)
     if(H2O) ZCfun <- H2OAA else ZCfun <- ZCAA
-    col <- "darkgreen"
+    if(is.null(col)) col <- "darkgreen"
   } else {
     # data directory for DNA
     filestart <- paste0(datadir, "/MGD/", dataset, "D")
@@ -113,46 +116,47 @@ plotMG <- function(dataset="Guerrero_Negro_IMG_MG", plottype="bars",
   # make plot
   if(plot.it) {
     isdeep <- logical(length(labels))
+    if(is.null(all.labels)) all.labels <- labels
     if(plot_real_x) {
       if(!is.null(maxdepth)) isdeep <- labels > maxdepth
       xlim <- range(labels[!isdeep])
       if(extendrange) xlim <- extendrange(xlim)
       if(!grepl("Bison_Pool", dataset) & !grepl("Menez_Gwen", dataset)) xlim <- rev(xlim)
-      at <- labels
+      atx <- labels
     } else {
-      nsamp <- length(samples)
+      nsamp <- length(all.labels)
       xlim <- c(1, nsamp)
       if(extendrange) xlim <- extendrange(xlim)
       if(plottype=="violin") xlim[1] <- xlim[1] - 0.5
       if(plottype=="violin") xlim[length(xlim)] <- xlim[length(xlim)] + 0.5
-      at <- 1:nsamp
+      # for polygon plots: find the correct x-values (may not be 1:nsamp because of missing data) 20191005
+      atx <- match(labels, all.labels)
     }
-    if(H2O) ylim <- c(-0.78, -0.71)
-    if(is.null(taxid) | identical(taxid, 0)) {
+    if(!add & (is.null(taxid) | identical(taxid, 0))) {
       plot(0, 0, xlim=xlim, ylim=ylim, xlab=xlab, ylab=NA, xaxt="n")
       # loop over non-numeric labels so that R doesn't omit any (because they're crowded)
       # for numeric labels, lower gap.axis to show more labels 20181215 (requires R 3.6.0)
       srt <- 45
-      if(!is.numeric(labels)) {
+      if(!is.numeric(all.labels)) {
         # rotate labels 20190113
         if(!is.na(srt)) {
           # tweak to remove "GS" from Baltic Sea labels 20190715
-          if(grepl("^GS", labels[1])) labels <- gsub("^GS", "", labels)
+          if(grepl("^GS", all.labels[1])) all.labels <- gsub("^GS", "", all.labels)
           # https://www.r-bloggers.com/rotated-axis-labels-in-r-plots/
           # modified to use offset calculated with strheight 20191004
-          text(x=1:nsamp, y=par()$usr[3]-1.5*strheight("A"), labels=labels, srt=srt, adj=1, xpd=TRUE)
+          text(x=1:nsamp, y=par()$usr[3]-1.5*strheight("A"), labels=all.labels, srt=srt, adj=1, xpd=TRUE)
           # add tick marks 
           axis(1, at=1:nsamp, labels=NA)
-        } else for(i in 1:nsamp) axis(1, at=i, labels=labels[i])
-      } else axis(1, at=at, labels=labels, gap.axis=0.02)
+        } else for(i in 1:nsamp) axis(1, at=i, labels=all.labels[i])
+      } else axis(1, at=atx, labels=all.labels, gap.axis=0.02)
       # add y-axis: ZC (or nH2O 20181231)
       if(H2O) mtext(quote(italic(n)[H[2]*O]), side=2, line=yline, las=0)
       else mtext(quote(italic(Z)[C]), side=2, line=yline, las=0)
     }
     if(plottype=="lines") {
-      lines(at[!isdeep], ZClo[!isdeep], col=col, lty=3)
-      lines(at[!isdeep], ZCmean[!isdeep], col=col)
-      lines(at[!isdeep], ZChi[!isdeep], col=col, lty=3)
+      lines(atx[!isdeep], ZClo[!isdeep], col=col, lty=3)
+      lines(atx[!isdeep], ZCmean[!isdeep], col=col)
+      lines(atx[!isdeep], ZChi[!isdeep], col=col, lty=3)
     }
 #    if(plottype=="violin") {
 #      vioplotx(ZC~sample, DNA, add=TRUE, col = "palevioletred", plotCentre = "line", side = "left", pchMed = 21, colMed = "palevioletred4", colMed2 = "palevioletred2")
@@ -163,10 +167,19 @@ plotMG <- function(dataset="Guerrero_Negro_IMG_MG", plottype="bars",
       if(!is.null(taxid)) xx <- 0
       else xx <- abs(diff(par("usr")[1:2])) / 120
       # bars (whiskers) at one SD from mean (arrows trick from https://stackoverflow.com/questions/13032777/scatter-plot-with-error-bars)
-      arrows(at-xx, ZClo, at-xx, ZChi, length = 0.03, angle = 90, code = 3, col=col, lwd=lwd.bars)
+      arrows(atx-xx, ZClo, atx-xx, ZChi, length = 0.03, angle = 90, code = 3, col=col, lwd=lwd.bars)
       # remove NAs so we can draw lines between all sites 20180529
       iNA <- is.na(ZCmean)
-      lines((at)[!iNA & !isdeep]-xx, ZCmean[!iNA & !isdeep], col=col, lty=lty, lwd=lwd)
+      lines((atx)[!iNA & !isdeep]-xx, ZCmean[!iNA & !isdeep], col=col, lty=lty, lwd=lwd)
+    }
+    if(substr(plottype, 1, 1)=="#") {
+      # polygon plots 20191005
+      # assemble top and bottom coordinates of polygon
+      polygon(c(atx, rev(atx)), c(ZChi, rev(ZClo)), col = plottype, border = NA)
+      # remove NAs so we can draw lines between all sites 20180529
+      iNA <- is.na(ZCmean)
+      lines((atx)[!iNA & !isdeep], ZCmean[!iNA & !isdeep], col=col, lty=lty, lwd=lwd)
+      points((atx)[!iNA & !isdeep], ZCmean[!iNA & !isdeep], pch = pch, col=col)
     }
     # add points to show > 1% species abundance 20181118
     if(!is.null(taxid) & !identical(taxid, 0)) {
@@ -178,7 +191,7 @@ plotMG <- function(dataset="Guerrero_Negro_IMG_MG", plottype="bars",
       dat <- dat[dat$taxid==taxid, ]
       dat <- dat[dat$percentage >= 1, ]
       ioneperc <- samples %in% dat$sample
-      points(at[ioneperc], ZCmean[ioneperc], pch=19, cex=0.5, col=col)
+      points(atx[ioneperc], ZCmean[ioneperc], pch=pch, cex=0.5, col=col)
     }
   }
   # now do it for RNA
@@ -208,9 +221,9 @@ plotMG <- function(dataset="Guerrero_Negro_IMG_MG", plottype="bars",
       # subtract offset for ZC of RNA
       dZC <- -0.28
       if(plottype=="lines") {
-        lines(at, RNA_ZClo + dZC, col="blue", lty=3)
-        lines(at, RNA_ZCmean + dZC, col="blue")
-        lines(at, RNA_ZChi + dZC, col="blue", lty=3)
+        lines(atx, RNA_ZClo + dZC, col="blue", lty=3)
+        lines(atx, RNA_ZCmean + dZC, col="blue")
+        lines(atx, RNA_ZChi + dZC, col="blue", lty=3)
       }
 #      if(plottype=="violin") {
 #        RNA$ZC <- RNA$ZC + dZC
@@ -219,8 +232,8 @@ plotMG <- function(dataset="Guerrero_Negro_IMG_MG", plottype="bars",
       if(plottype=="bars") {
         # apply small offset to x-position to separate DNA and RNA
         xx <- abs(diff(par("usr")[1:2])) / 200
-        arrows(at+xx, RNA_ZClo + dZC, at+xx, RNA_ZChi + dZC, length = 0.03, angle = 90, code = 3, col="blue", lwd=lwd.bars)
-        lines(at+xx, RNA_ZCmean + dZC, col="blue", lty=2, lwd=lwd)
+        arrows(atx+xx, RNA_ZClo + dZC, atx+xx, RNA_ZChi + dZC, length = 0.03, angle = 90, code = 3, col="blue", lwd=lwd.bars)
+        lines(atx+xx, RNA_ZCmean + dZC, col="blue", lty=2, lwd=lwd)
       }
     }
     # return ZC values
@@ -229,7 +242,7 @@ plotMG <- function(dataset="Guerrero_Negro_IMG_MG", plottype="bars",
     outval <- list(AA=ZCmean, CM=CM, group=group, meancomp=meancomp, abbrev=abbrev, techtype = techtype, dx = dx, dy = dy)
   }
   # add title 20180225
-  if((is.null(taxid) | identical(taxid, 0)) & plot.it & add.title) {
+  if((is.null(taxid) | identical(taxid, 0)) & plot.it & add.title & !add) {
     main <- dataset2main(dataset, abbrev)
     title(main=main, font.main=1)
     # add in-plot label: MG or MT 20180829

@@ -50,7 +50,8 @@ usedin <- list(
 # e.g. mplot("Columbia_River", "IMG_MT")
 mplot <- function(study, seqtype, plottype = "bars", ylim = NULL, plot.RNA = TRUE, taxid = NULL,
   dsDNA = TRUE, abbrev = NULL, col = NULL, add.label = TRUE, maxdepth = NULL, H2O = FALSE,
-  plot.it = TRUE, add.title = TRUE, yline = 2, basis = "QEC", datadir = NULL, mdata = studies) {
+  plot.it = TRUE, add.title = TRUE, yline = 2, basis = "QEC", datadir = NULL, mdata = studies, add = FALSE, pch = 19) {
+  # get metadata
   md <- get.mdata(mdata, study, seqtype)
   # get labels, groups, and abbreviation
   samples <- md$samples
@@ -61,9 +62,13 @@ mplot <- function(study, seqtype, plottype = "bars", ylim = NULL, plot.RNA = TRU
   dx <- md$dx
   dy <- md$dy
   xlab <- names(mdata[[study]][1])
+  # include all samples (even missing ones) for polygon plots
+  all.labels <- NULL
+  if(substr(plottype, 1, 1) == "#") all.labels <- get.mdata(mdata, study, seqtype, remove.NA = FALSE)$xlabels
   # get ZC range
   if(is.null(ylim)) {
-    if(grepl("_MGP", seqtype)) ylim <- mdata[[study]][["MGP_range"]]
+    if(H2O) ylim <- c(-0.78, -0.71)
+    else if(grepl("_MGP", seqtype)) ylim <- mdata[[study]][["MGP_range"]]
     else if(grepl("_MTP", seqtype)) ylim <- mdata[[study]][["MTP_range"]]
     else if(grepl("_MG", seqtype) & is.null(taxid)) ylim <- mdata[[study]][["MG_range"]]
     else if(grepl("_MG", seqtype) & !is.null(taxid)) ylim <- mdata[[study]][["MG_srange"]]
@@ -78,6 +83,7 @@ mplot <- function(study, seqtype, plottype = "bars", ylim = NULL, plot.RNA = TRU
     xlabels <- rev(md$xlabels)
     ylim <- rev(ylim)
     group <- rev(group)
+    all.labels <- rev(all.labels)
   }
   # if taxids are given, plot total ZC first (DNA, not RNA) and add ZC for each species
   if(!is.null(taxid)) {
@@ -103,7 +109,8 @@ mplot <- function(study, seqtype, plottype = "bars", ylim = NULL, plot.RNA = TRU
   else plotMG(paste0(study, "_", seqtype), plottype, samples, xlabels, group, xlab, ylim, abbrev, dsDNA,
               plot.RNA, taxid, col = col,
               add.label = add.label, plot_real_x = mdata[[study]][["plot_real_x"]], maxdepth = maxdepth, H2O = H2O,
-              plot.it = plot.it, add.title = add.title, yline = yline, basis = basis, techtype = techtype, dx = dx, dy = dy, datadir = datadir)
+              plot.it = plot.it, add.title = add.title, yline = yline, basis = basis, techtype = techtype, dx = dx, dy = dy, datadir = datadir,
+              add = add, all.labels = all.labels, pch = pch)
 }
 
 # make page of plots for MG/MT 20180225

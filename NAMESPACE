@@ -35,7 +35,7 @@ importFrom("timevis", "renderTimevis", "timevis", "timevisOutput")
 importFrom("grDevices", "dev.off", "cairo_pdf", "pdf", "blues9", "colorRampPalette")
 importFrom("graphics", "abline", "arrows", "axis", "box", "layout",
            "legend", "lines", "mtext", "par", "plot", "plot.new",
-           "points", "rect", "text", "title", "smoothScatter", "strheight")
+           "points", "rect", "text", "title", "smoothScatter", "strheight", "polygon")
 importFrom("stats", "lm", "na.omit", "predict", "sd", "predict.lm")
 importFrom("utils", "read.csv", "demo", "packageVersion", "tail")
 
