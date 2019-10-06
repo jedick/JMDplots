@@ -24,7 +24,10 @@ importFrom("CHNOSZ",
   "describe.reaction", "equilibrate", "expr.property", "expr.species", "findit",
   "list2array", "mass", "maxdiff", "mod.buffer", "mosaic",
   "nonideal", "obigt", "ratlab", "reset", "solubility",
-  "subcrt", "thermo.plot.new", "water")
+  "subcrt", "thermo.plot.new", "water",
+  # third batch: gradH2O
+  "protein.formula"
+)
 
 # imports from canprot (for gradH2O 20190930)
 importFrom("canprot", "canprot")
@@ -38,6 +41,6 @@ importFrom("grDevices", "dev.off", "cairo_pdf", "pdf", "blues9", "colorRampPalet
 importFrom("graphics", "abline", "arrows", "axis", "box", "layout",
            "legend", "lines", "mtext", "par", "plot", "plot.new",
            "points", "rect", "text", "title", "smoothScatter", "strheight", "polygon")
-importFrom("stats", "lm", "na.omit", "predict", "sd", "predict.lm")
+importFrom("stats", "lm", "na.omit", "predict", "sd", "predict.lm", "residuals")
 importFrom("utils", "read.csv", "demo", "packageVersion", "tail")
 
