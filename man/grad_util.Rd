@@ -10,7 +10,7 @@ These functions calculate the carbon oxidation state (\ZC) and stoichiometric wa
 
 \usage{
   ZCAA(AAcomp, nothing = NULL)
-  H2OAA(AAcomp, basis = "QEC")
+  H2OAA(AAcomp, basis = "rQEC")
 }
 
 \arguments{
@@ -23,8 +23,8 @@ These functions calculate the carbon oxidation state (\ZC) and stoichiometric wa
 These functions are written to enable rapid calculations of \ZC and per-residue \nH2O of proteins.
 For general calculations of \ZC, use the \code{\link[CHNOSZ]{ZC}} function in \pkg{CHNOSZ}.
 
-The default for \code{basis} stands for the \samp{QEC} basis species, i.e. glutamine - glutamic acid - cysteine - H2O - O2.
-This can be changed to \samp{rQEC} to get the relative water content (residuals from a linear fit of \nH2O vs \ZC of the 20 common amino acids).
+The default for \code{basis} stands for relative water content, calculated as residuals of a linear model for \nH2O vs \ZC of the 20 common amino acids using the basis species glutamine - glutamic acid - cysteine - H2O - O2.
+This can be changed to \samp{QEC} to use the stoichiometric water content (calculated directly from the basis species; not the residuals of the model).
 See Dick et al. (2019) for more information.
 
 Note that \ZC is a per-carbon average, but \nH2O is a per-residue average.
@@ -57,6 +57,6 @@ nH2O.GAG <- species("Gly-Ala-Gly")$H2O
 # divide by the length to get residue average (we keep the terminal H-OH)
 nH2O.residue <- nH2O.GAG / 3
 # compare with the value calculated by H2OAA() (-0.2)
-nH2O.H2OAA <- H2OAA(AAcomp)
+nH2O.H2OAA <- H2OAA(AAcomp, "QEC")
 stopifnot(all.equal(nH2O.residue, nH2O.H2OAA))
 }

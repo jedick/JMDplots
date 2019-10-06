@@ -50,7 +50,7 @@ usedin <- list(
 # e.g. mplot("Columbia_River", "IMG_MT")
 mplot <- function(study, seqtype, plottype = "bars", ylim = NULL, plot.RNA = TRUE, taxid = NULL,
   dsDNA = TRUE, abbrev = NULL, col = NULL, add.label = TRUE, maxdepth = NULL, H2O = FALSE,
-  plot.it = TRUE, add.title = TRUE, yline = 2, basis = "QEC", datadir = NULL, mdata = studies, add = FALSE, pch = 19) {
+  plot.it = TRUE, add.title = TRUE, yline = 2, basis = "rQEC", datadir = NULL, mdata = studies, add = FALSE, pch = 19) {
   # get metadata
   md <- get.mdata(mdata, study, seqtype)
   # get labels, groups, and abbreviation
@@ -67,7 +67,7 @@ mplot <- function(study, seqtype, plottype = "bars", ylim = NULL, plot.RNA = TRU
   if(substr(plottype, 1, 1) == "#") all.labels <- get.mdata(mdata, study, seqtype, remove.NA = FALSE)$xlabels
   # get ZC range
   if(is.null(ylim)) {
-    if(H2O) ylim <- c(-0.78, -0.71)
+    if(H2O) ylim <- c(0.34, 0.4)
     else if(grepl("_MGP", seqtype)) ylim <- mdata[[study]][["MGP_range"]]
     else if(grepl("_MTP", seqtype)) ylim <- mdata[[study]][["MTP_range"]]
     else if(grepl("_MG", seqtype) & is.null(taxid)) ylim <- mdata[[study]][["MG_range"]]
@@ -200,7 +200,7 @@ mcomp <- function(mout, yvar="RNA") {
 # make page of plots for MGP/MTP 20180225
 # add subset and H2O arguments 20181231
 # add plot.it argument 20190711
-ppage <- function(subset = "gradoxSI", H2O = FALSE, set.par = TRUE, plot.it = TRUE, basis = "QEC", add.label = TRUE, mfrow = NULL) {
+ppage <- function(subset = "gradoxSI", H2O = FALSE, set.par = TRUE, plot.it = TRUE, basis = "rQEC", add.label = TRUE, mfrow = NULL) {
   if(is.list(subset)) {
     # when subset is a list, it gives the studies
     studies <- subset
@@ -283,7 +283,7 @@ pcomp <- function(mout, pout, seqtype="MG", type="ZC", parts=c("plot", "legend")
     if(type=="both") {
       if(is.null(xlim)) xlim <- c(-0.22, -0.098)
       xlab <- quote(italic(Z)[C]~of~protein)
-      if(is.null(ylim)) ylim <- c(-0.78, -0.72)
+      if(is.null(ylim)) ylim <- c(0.34, 0.4)
       ylab <- quote(italic(n)[H[2]*O])
     }
 #    if(xaxis=="RNA") {xlim <- c(1.85, 1.92); xlab <- "ZC(RNA)"; dx <- -0.004}

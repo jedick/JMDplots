@@ -134,12 +134,11 @@ gradH2O3 <- function(pdf = FALSE) {
   if(pdf) pdf("gradH2O3.pdf", width = 13, height = 5.6)
   par(mfrow = c(1, 3))
   par(mar = c(4, 4.5, 1, 1), las = 1, cex = 1.2)
+
   # compare ZC and nH2O of proteins in datasets from gradox paper
   mgradox <- ppage("gradoxGS", plot.it = FALSE)
   pgradox <- ppage("gradoxGS", H2O = TRUE, plot.it = FALSE)
   pcomp(mgradox, pgradox, type = "both", reorder = FALSE, yline = 3.5)
-  # overlay general trend from human proteins (printed in basis_comparison())
-  lines(c(-1, 1), c(-0.61, -0.98), lty = 2, lwd = 3, col = "grey40")
   legend("topleft", c("redox", "gradients"), bty = "n", text.font = 2)
   # add legend for environment type
   legend("topright", c("vent fluids", "plume", "seawater", "hot spring", "phototrophic", "mat > 3 mm", "mat 1-3 mm"),
@@ -150,23 +149,24 @@ gradH2O3 <- function(pdf = FALSE) {
            legend=c("", "", "", "", "", "", ""),
            col=c(NA, NA, "purple1", NA, "green3", NA, "green3"))
   label.figure("A", cex = 2, xfrac = 0.035)
+
   # compare ZC and nH2O of proteins in Baltic Sea surface
   mbaltics <- ppage("balticsurface", plot.it = FALSE)
   pbaltics <- ppage("balticsurface", H2O = TRUE, plot.it = FALSE)
   pcomp(mbaltics, pbaltics, type = "both", reorder = FALSE, yline = 3.5)
-  lines(c(-1, 1), c(-0.61, -0.98), lty = 2, lwd = 3, col = "grey40")
   legend("topleft", c("Baltic Sea", "surface"), bty = "n", text.font = 2)
   label.figure("B", cex = 2, xfrac = 0.035)
+
   # compare ZC and nH2O of proteins in Baltic Sea deep
   mbalticd <- ppage("balticdeep", plot.it = FALSE)
   pbalticd <- ppage("balticdeep", H2O = TRUE, plot.it = FALSE)
   pcomp(mbalticd, pbalticd, type = "both", reorder = FALSE, yline = 3.5)
-  lines(c(-1, 1), c(-0.61, -0.98), lty = 2, lwd = 3, col = "grey40")
   legend("topleft", c("Baltic Sea", "10-20 m"), bty = "n", text.font = 2)
   # add legend for particle size
   legend("topright", legend = as.expression(c(quote("0.1-0.8"~mu*m))),
          pch = c(17), col = c("black"), bty = "n")
   label.figure("C", cex = 2, xfrac = 0.035)
+
   if(pdf) invisible(dev.off())
 }
 
@@ -176,17 +176,17 @@ gradH2O4 <- function(pdf = FALSE) {
   par(mfrow = c(1, 3))
   par(mar = c(5, 4, 1, 1), mgp = c(3, 0.7, 0), las = 1)
 
-  mplot("Baltic_Sea-0.1s", "iMicrobe_MGP", H2O = TRUE, plottype = "#FF000030", col = "red", add.title = FALSE, ylim = c(-0.8, -0.7), yline = 2.7)
+  mplot("Baltic_Sea-0.1s", "iMicrobe_MGP", H2O = TRUE, plottype = "#FF000030", col = "red", add.title = FALSE, ylim = c(0.34, 0.4), yline = 2.7)
   mplot("Baltic_Sea-0.1s", "SRA_MTP", H2O = TRUE, plottype = "#0000FF30", col = "blue", add.title = FALSE, add = TRUE, pch = 1)
   legend("topright", legend = quote("0.1-0.8"~mu*m), bty = "n")
   label.figure("A", cex = 2, xfrac = 0.04)
 
-  mplot("Baltic_Sea-0.8s", "iMicrobe_MGP", H2O = TRUE, plottype = "#FF000030", col = "red", add.title = FALSE, ylim = c(-0.8, -0.7), yline = 2.7)
+  mplot("Baltic_Sea-0.8s", "iMicrobe_MGP", H2O = TRUE, plottype = "#FF000030", col = "red", add.title = FALSE, ylim = c(0.34, 0.4), yline = 2.7)
   mplot("Baltic_Sea-0.8s", "SRA_MTP", H2O = TRUE, plottype = "#0000FF30", col = "blue", add.title = FALSE, add = TRUE, pch = 1)
   legend("topright", legend = quote("0.8-3.0"~mu*m), bty = "n")
   label.figure("B", cex = 2, xfrac = 0.035)
 
-  mplot("Baltic_Sea-3.0s", "iMicrobe_MGP", H2O = TRUE, plottype = "#FF000030", col = "red", add.title = FALSE, ylim = c(-0.8, -0.7), yline = 2.7)
+  mplot("Baltic_Sea-3.0s", "iMicrobe_MGP", H2O = TRUE, plottype = "#FF000030", col = "red", add.title = FALSE, ylim = c(0.34, 0.4), yline = 2.7)
   mplot("Baltic_Sea-3.0s", "SRA_MTP", H2O = TRUE, plottype = "#0000FF30", col = "blue", add.title = FALSE, add = TRUE, pch = 1)
   legend("topright", legend = quote("3.0-200"~mu*m), bty = "n")
   label.figure("C", cex = 2, xfrac = 0.035)
