@@ -3,7 +3,7 @@
 \alias{JMDplots-package}
 \alias{JMDplots}
 \docType{package}
-\title{Plots from Papers by Jeffrey M. Dick}
+\title{Plots from papers by Jeffrey M. Dick}
 
 \description{
 This package contains data and code used to make the plots in different papers by the author.
@@ -37,14 +37,25 @@ The plots are available the corresponding vignettes in the package.
   }
 }
 
-\section{subsurface}{
-  This directory has additional files of amino acid compositions for two subsurface environments.
-  These files are provided to illustrate the usage of user-provided data sets; see \code{\link{subsurface}}.
-}
-
 \section{aaaq}{
   \describe{
     \item{BKM60_Fig7.csv}{Eh-pH values for normal, wet and waterlogged soils from Fig. 7 of Baas Becking et al. (1960).}
+  }
+}
+
+\section{Other Data}{
+Besides the above directories for the papers, there are additional directories with data to support examples or specific functions.
+
+  \describe{
+    \item{subsurface}{
+      Metagenome-derived amino acid compositions for two subsurface environments.
+      These files are provided to illustrate the usage of user-provided data sets; see \code{\link{subsurface}}.
+    }
+
+    \item{organisms}{
+      Amino acid compositions of proteins in E. coli, used in \code{\link{gradH2O1}}.
+      See \code{\link{organisms}}.
+    }
   }
 }
 

@@ -30,8 +30,6 @@ This table gives a brief description of each function.
   \code{gradH2O3} \tab \nH2O-\ZC scatterplots for redox gradients and the Baltic Sea \cr
   \code{gradH2O4} \tab \nH2O for Baltic Sea size fractions \cr
 }
-
-\code{gradH2O1} depends on the amino acid compositions of proteins from \code{\link{ecoli}}.
 }
 
 \references{
@@ -39,6 +37,5 @@ Dick, J. M., Tan, J. and Yu, M. (2019) Geochemistry of metagenomes: Distinct com
 }
 
 \examples{
-data(ecoli)
 gradH2O1()
 }

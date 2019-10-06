@@ -11,9 +11,6 @@
 # basis species comparison 20190713 / relative water content 20191005
 gradH2O1 <- function(pdf = FALSE) {
 
-  # check if E. coli data is available
-  if(!exists("ecoli")) stop("please load amino acid compositions of E. coli proteins with data(ecoli)")
-
   # set up figure
   if(pdf) pdf("gradH2O1.pdf", width = 6, height = 6)
   par(mfrow = c(3, 3))

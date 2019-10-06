@@ -24,7 +24,6 @@ library(JMDplots)
 
 ## Basis species comparison and relative water content (Figure 1)
 ```{r gradH2O1, message = FALSE, echo = 1, fig.align='center', out.width='100%', out.height='500px'}
-data(ecoli)
 gradH2O1(TRUE)
 knitr::include_graphics("gradH2O1.pdf")
 ```

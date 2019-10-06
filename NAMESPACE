@@ -10,7 +10,9 @@ export(
   # grad_mplot 20190930
   "mplot", "mpage", "ppage", "mcomp", "pcomp",
   # grad_util 20191005
-  "ZCAA", "H2OAA"
+  "ZCAA", "H2OAA",
+  # organisms 20191006
+  "ecoli"
 )
 
 # imports from CHNOSZ
