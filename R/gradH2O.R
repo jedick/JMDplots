@@ -144,7 +144,7 @@ gradH2O3 <- function(pdf = FALSE) {
   legend("topright", c("vent fluids", "plume", "seawater", "hot spring", "phototrophic", "mat > 3 mm", "mat 1-3 mm"),
          pch = c(19, 19, 19, 15, 15, 15, 15), col = c("red", "purple1", "purple1", "orange", "orange", "green3", "green3"), bty = "n")
   # overlay symbols for seawater, phototrophic and mat surface
-  legend(-0.1627, -0.7176, lty=0, lwd=0, bty="n", pt.cex=1.6, pt.lwd=1,
+  legend(-0.1627, 0.4024, lty=0, lwd=0, bty="n", pt.cex=1.6, pt.lwd=1,
            pch = c(1, 1, 1, 0, 0, 0, 0),
            legend=c("", "", "", "", "", "", ""),
            col=c(NA, NA, "purple1", NA, "green3", NA, "green3"))

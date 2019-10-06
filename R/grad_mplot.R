@@ -65,25 +65,26 @@ mplot <- function(study, seqtype, plottype = "bars", ylim = NULL, plot.RNA = TRU
   # include all samples (even missing ones) for polygon plots
   all.labels <- NULL
   if(substr(plottype, 1, 1) == "#") all.labels <- get.mdata(mdata, study, seqtype, remove.NA = FALSE)$xlabels
-  # get ZC range
-  if(is.null(ylim)) {
-    if(H2O) ylim <- c(0.34, 0.4)
-    else if(grepl("_MGP", seqtype)) ylim <- mdata[[study]][["MGP_range"]]
-    else if(grepl("_MTP", seqtype)) ylim <- mdata[[study]][["MTP_range"]]
-    else if(grepl("_MG", seqtype) & is.null(taxid)) ylim <- mdata[[study]][["MG_range"]]
-    else if(grepl("_MG", seqtype) & !is.null(taxid)) ylim <- mdata[[study]][["MG_srange"]]
-    else if(grepl("_MT", seqtype) & is.null(taxid)) ylim <- mdata[[study]][["MT_range"]]
-    else if(grepl("_MT", seqtype) & !is.null(taxid)) ylim <- mdata[[study]][["MT_srange"]]
-    else stop("invalid seqtype:", seqtype)
-    if(is.null(ylim)) stop("ylim range not available for ", study, " ", seqtype)
-  }
-  # reverse the scale?
-  if(diff(ylim) < 0) {
+  # get ylim range for ZC from metadata
+  if(grepl("_MGP", seqtype)) mylim <- mdata[[study]][["MGP_range"]]
+  else if(grepl("_MTP", seqtype)) mylim <- mdata[[study]][["MTP_range"]]
+  else if(grepl("_MG", seqtype) & is.null(taxid)) mylim <- mdata[[study]][["MG_range"]]
+  else if(grepl("_MG", seqtype) & !is.null(taxid)) mylim <- mdata[[study]][["MG_srange"]]
+  else if(grepl("_MT", seqtype) & is.null(taxid)) mylim <- mdata[[study]][["MT_range"]]
+  else if(grepl("_MT", seqtype) & !is.null(taxid)) mylim <- mdata[[study]][["MT_srange"]]
+  else stop("invalid seqtype:", seqtype)
+  if(is.null(mylim)) stop("ylim range not available for ", study, " ", seqtype)
+  # reverse the order of samples if mylim is decreasing
+  if(diff(mylim) < 0) {
     samples <- rev(md$samples)
     xlabels <- rev(md$xlabels)
-    ylim <- rev(ylim)
+    mylim <- rev(mylim)
     group <- rev(group)
     all.labels <- rev(all.labels)
+  }
+  # get ylim from mylim, argument, or default value for H2O
+  if(is.null(ylim)) {
+    if(H2O) ylim <- c(0.34, 0.4) else ylim <- mylim
   }
   # if taxids are given, plot total ZC first (DNA, not RNA) and add ZC for each species
   if(!is.null(taxid)) {
