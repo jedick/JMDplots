@@ -194,3 +194,91 @@ gradH2O4 <- function(pdf = FALSE) {
   if(pdf) invisible(dev.off())
 }
 
+# nH2O vs ZC for freshwater, marine, and hypersaline environments 20191004
+# make separate plot for sediments 20191006
+# add Amazon River 20191007
+gradH2O5 <- function(pdf = FALSE) {
+
+  if(pdf) pdf("gradH2O5.pdf", width = 8, height = 6)
+  layout(matrix(1:4, nrow = 2))
+  par(las = 1, mar = c(4, 4, 2, 1), mgp = c(2.5, 1, 0))
+  xlim <- c(-0.2, -0.08)
+  ylim <- c(0.32, 0.4)
+
+  # plots 1-2: Amazon river
+  mout <- ppage("amazon", plot.it = FALSE)
+  pout <- ppage("amazon", H2O = TRUE, plot.it = FALSE)
+  pcomp(mout, pout, type = "both", xlim = xlim, ylim = ylim, lty = 0, yline = 2.8)
+  hullfun(mout, pout, c(1, 3), "green3", c("river", "riverPA"))
+  hullfun(mout, pout, c(1, 3), "purple1", c("plume", "plumePA"))
+  title("Amazon River metagenome", font.main = 1)
+  label.figure("A", xfrac = 0.1, cex = 1.7)
+
+  pcomp(mout, pout, "MT", type = "both", xlim = xlim, ylim = ylim, lty = 0, yline = 2.8)
+  hullfun(mout, pout, c(2, 4), "green3", c("river", "riverPA"))
+  hullfun(mout, pout, c(2, 4), "purple1", c("plume", "plumePA"))
+  title("Amazon River metatranscriptome", font.main = 1)
+  label.figure("B", xfrac = 0.1, cex = 1.7)
+
+  # start plot 3: Eiler et al. (freshwater vs marine)
+  mout <- ppage("eiler", plot.it = FALSE)
+  pout <- ppage("eiler", H2O = TRUE, plot.it = FALSE)
+  pcomp(mout, pout, type = "both", xlim = xlim, ylim = ylim, lty = 0, yline = 2.8)
+  hullfun(mout, pout, 1, "yellowgreen")
+  hullfun(mout, pout, 2, "blue")
+  title("Freshwater - marine - hypersaline", font.main = 1)
+  label.figure("C", xfrac = 0.1, cex = 1.7)
+
+  # add hypersaline water data
+  mout <- ppage("hypersaline", plot.it = FALSE)
+  pout <- ppage("hypersaline", H2O = TRUE, plot.it = FALSE)
+  # include Organic Lake data
+  mout <- c(mout, list("Organic_Lake_SRA_MGP" = mplot("Organic_Lake", "SRA_MGP", plot.it = FALSE)))
+  pout <- c(pout, list("Organic_Lake_SRA_MGP" = mplot("Organic_Lake", "SRA_MGP", H2O = TRUE, plot.it = FALSE)))
+  pcomp(mout, pout, type = "both", reorder = FALSE, add = TRUE)
+  hullfun(mout, pout, 1:4, "turquoise3")
+
+  # start plot 4: Baltic Sea and Shimokita Peninsula sediment
+  BS_ZC <- list("BalticSea_Sediment_SRA_MGP" = mplot("BalticSea_Sediment", "SRA_MGP", plot.it = FALSE))
+  BS_nH2O <- list("BalticSea_Sediment_SRA_MGP" = mplot("BalticSea_Sediment", "SRA_MGP", H2O = TRUE, plot.it = FALSE))
+  SP_ZC <- list("Shimokita_Peninsula_GenBank_MGP" = mplot("Shimokita_Peninsula", "GenBank_MGP", plot.it = FALSE))
+  SP_nH2O <- list("Shimokita_Peninsula_GenBank_MGP" = mplot("Shimokita_Peninsula", "GenBank_MGP", H2O = TRUE, plot.it = FALSE))
+  mout <- c(BS_ZC, SP_ZC)
+  pout <- c(BS_nH2O, SP_nH2O)
+  pcomp(mout, pout, type = "both", reorder = FALSE, xlim = xlim, ylim = ylim, yline = 2.8)
+  hullfun(mout, pout, 1:2, "slategrey")
+  title("Marine and hypersaline sediment", font.main = 1)
+  label.figure("D", xfrac = 0.1, cex = 1.7)
+
+  # add hypersaline sediment data
+  mout <- ppage("HSsediment", plot.it = FALSE)
+  pout <- ppage("HSsediment", H2O = TRUE, plot.it = FALSE)
+  hullfun(mout, pout, 1:2, "turquoise3")
+  pcomp(mout, pout, type = "both", reorder = FALSE, add = TRUE)
+
+  if(pdf) invisible(dev.off())
+}
+
+############################
+### UNEXPORTED FUNCTIONS ###
+############################
+
+# function to add convex hulls 20191007
+hullfun <- function(mout, pout, istudy, basecol, group = NULL) {
+  x <- y <- numeric()
+  for(ist in istudy) {
+    thisx <- mout[[ist]]$AA
+    thisy <- pout[[ist]]$AA
+    if(!is.null(group)) {
+      thisx <- thisx[mout[[ist]]$group %in% group]
+      thisy <- thisy[mout[[ist]]$group %in% group]
+    }
+    x <- c(x, thisx)
+    y <- c(y, thisy)
+  }
+  i <- chull(x, y)
+  r <- as.numeric(col2rgb(basecol))
+  col <- rgb(r[1], r[2], r[3], 80, maxColorValue=255)
+  polygon(x[i], y[i], col = col, border = NA)
+}
+
