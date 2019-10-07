@@ -6,7 +6,7 @@ output:
 vignette: >
   %\VignetteIndexEntry{Eight plots from redox gradients paper (2019)}
   %\VignetteEngine{knitr::rmarkdown}
-  \usepackage[utf8]{inputenc}
+  %\VignetteEncoding{UTF-8}
 ---
 
 ```{r HTML, include=FALSE}

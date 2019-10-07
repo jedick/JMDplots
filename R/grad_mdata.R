@@ -116,7 +116,7 @@ gradH2O <- list(
     SRA_MG = c("SRR944625", "SRR328982", "SRR979792", "SRR328983"),
     MG_range = c(0.61, 0.64),
     MGP_range = c(-0.13, -0.08),
-    abbrev = "SP",
+    abbrev = "SA",
     group = c("hypersaline", "hypersaline", "hypersaline", "hypersaline"),
     plot_real_x = FALSE,
     techtype = "454"
@@ -126,7 +126,7 @@ gradH2O <- list(
     SRA_MG = c("SRR4030050", "SRR4030051", "SRR4030044"),
     MG_range = c(0.61, 0.65),
     MGP_range = c(-0.15, -0.09),
-    abbrev = "SBW",
+    abbrev = "SB",
     group = c("hypersaline", "hypersaline", "hypersaline"),
     plot_real_x = FALSE,
     techtype = "Illumina"
@@ -156,7 +156,7 @@ gradH2O <- list(
     SRA_MG = c("SRR6194934", "SRR6195247", "SRR6194920"),
     MG_range = c(0.61, 0.65),
     MGP_range = c(-0.15, -0.09),
-    abbrev = "SBS",
+    abbrev = "SB",
     group = c("hypersaline", "hypersaline", "hypersaline"),
     plot_real_x = FALSE,
     techtype = "Illumina"

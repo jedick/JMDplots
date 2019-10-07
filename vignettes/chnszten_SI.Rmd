@@ -6,7 +6,7 @@ output:
 vignette: >
   %\VignetteIndexEntry{Ten supplementary plots from CHNOSZ paper (2019)}
   %\VignetteEngine{knitr::rmarkdown}
-  \usepackage[utf8]{inputenc}
+  %\VignetteEncoding{UTF-8}
 ---
 
 This vignette from the R package JMDplots contains supplementary plots from the paper by <a href="https://doi.org/10.3389/feart.2019.00180" title="CHNOSZ: Thermodynamic calculations and diagrams for geochemistry">Dick (2019)</a>.
