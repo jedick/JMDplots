@@ -46,7 +46,11 @@ usedin <- list(
                "Baltic_Sea-0.1d", "Baltic_Sea-0.8d", "Baltic_Sea-3.0d"),
   # freshwater and marine metagenomes (Eiler et al., 2014)
   eiler = c("Eiler_Freshwater", "Eiler_Marine"),
-  hypersaline = c("Santa_Pola", "SouthBay_Water", "Kulunda_Steppe")
+  # hypersaline water and sediment
+  hypersaline = c("Santa_Pola", "SouthBay_Water", "Kulunda_Steppe"),
+  HSsediment = c("Coorong_Lagoon", "SouthBay_Sediment"),
+  # Amazon River free-living and particle-associated
+  amazon = c("Amazon_River-FL", "Amazon_River-PA")
 )
 
 # function to plot sampled compositions for indicated study and sequence type 20180222

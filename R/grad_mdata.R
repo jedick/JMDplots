@@ -140,6 +140,58 @@ gradH2O <- list(
     group = c("hypersaline", "hypersaline", "hypersaline", "hypersaline"),
     plot_real_x = FALSE,
     techtype = "Illumina"
+  ),
+  Coorong_Lagoon = list( # 20181224 [JSN+12]
+    salinity_psu = c("36", "105", "132", "136"),
+    MGRAST_MG = c("mgm4440984.3", "mgm4441020.3", "mgm4441021.3", "mgm4441022.3"),
+    MG_range = c(0.61, 0.64),
+    MGP_range = c(-0.15, -0.12),
+    abbrev = "CL",
+    group = c("hypersaline", "hypersaline", "hypersaline", "hypersaline"),
+    plot_real_x = FALSE,
+    techtype = "454"
+  ),
+  SouthBay_Sediment = list( # 20181225 [KBW+18]
+    pond = c("2C", "1C", "A23"),
+    SRA_MG = c("SRR6194934", "SRR6195247", "SRR6194920"),
+    MG_range = c(0.61, 0.65),
+    MGP_range = c(-0.15, -0.09),
+    abbrev = "SBS",
+    group = c("hypersaline", "hypersaline", "hypersaline"),
+    plot_real_x = FALSE,
+    techtype = "Illumina"
+  ),
+  `Amazon_River-FL` = list( # 20190101 [SFD+15, SZD+14]
+    site = c("OB", "TAPS", "TAPD", "MCPN", "MCPS", "BLM", "S10", "S3", "S2", "S23", "S25", "S27"),
+    SRA_MG = c("SRR1790676", "SRR1796116", "SRR1792674", "SRR1786279", "SRR1788318", "SRR1790489",
+               "SRR1199271", "SRR1205253", "SRR1199270", "SRR1186214", "SRR1204581", "SRR1202091"),
+    SRA_MT = c("SRR1781945", "SRR1777513", "SRR1781714", "SRR1785351", "SRR1784305", "SRR1781804",
+               "SRR1186930", "SRR1199283", "SRR1193205", "SRR1193632", "SRR1205247", "SRR1193627"),
+    MG_range = c(0.56, 0.62),
+    MGP_range = c(-0.20, -0.14),
+    MT_range = c(0.60, 0.63),
+    MTP_range = c(-0.16, -0.12),
+    abbrev = "ARF",
+    group = c("river", "river", "river", "river", "river", "river",
+              "plume", "plume", "plume", "plume", "plume", "plume"),
+    plot_real_x = FALSE,
+    techtype = "Illumina"
+  ),
+  `Amazon_River-PA` = list( # 20190101 [SFD+15, SZD+14]
+    site = c("OB", "TAPS", "TAPD", "MCPN", "MCPS", "BLM", "S10", "S3", "S2", "S23", "S25", "S27"),
+    SRA_MG = c("SRR1790678", "SRR1796118", "SRR1792852", "SRR1786281", "SRR1790487", "SRR1790644",
+               "SRR1209978", "SRR1199272", "SRR1202081", "SRR1202089", "SRR1209976", "SRR1202095"),
+    SRA_MT = c("SRR1782579", "SRR1778024", "SRR1781802", "SRR1785352", "SRR1785207", "SRR1781811",
+               "SRR1193190", "SRR1199284", "SRR1193177", "SRR1193237", "SRR1205800", "SRR1193629"),
+    MG_range = c(0.58, 0.63),
+    MGP_range = c(-0.18, -0.13),
+    MT_range = c(0.60, 0.63),
+    MTP_range = c(-0.16, -0.12),
+    abbrev = "ARP",
+    group = c("riverPA", "riverPA", "riverPA", "riverPA", "riverPA", "riverPA",
+              "plumePA", "plumePA", "plumePA", "plumePA", "plumePA", "plumePA"),
+    plot_real_x = FALSE,
+    techtype = "Illumina"
   )
 )
 
