@@ -45,7 +45,8 @@ usedin <- list(
   balticMT = c("Baltic_Sea-0.1s", "Baltic_Sea-0.8s", "Baltic_Sea-3.0s",
                "Baltic_Sea-0.1d", "Baltic_Sea-0.8d", "Baltic_Sea-3.0d"),
   # freshwater and marine metagenomes (Eiler et al., 2014)
-  eiler = c("Eiler_Freshwater", "Eiler_Marine")
+  eiler = c("Eiler_Freshwater", "Eiler_Marine"),
+  hypersaline = c("Santa_Pola", "SouthBay_Water", "Kulunda_Steppe")
 )
 
 # function to plot sampled compositions for indicated study and sequence type 20180222

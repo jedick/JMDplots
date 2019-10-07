@@ -110,6 +110,36 @@ gradH2O <- list(
     group = c("oxic"),
     plot_real_x = FALSE,
     techtype = "454"
+  ),
+  Santa_Pola = list( # 20181224 [GPF+11, FGM+13]
+    sample = c("SS13", "SS19", "SS33", "SS37"),
+    SRA_MG = c("SRR944625", "SRR328982", "SRR979792", "SRR328983"),
+    MG_range = c(0.61, 0.64),
+    MGP_range = c(-0.13, -0.08),
+    abbrev = "SP",
+    group = c("hypersaline", "hypersaline", "hypersaline", "hypersaline"),
+    plot_real_x = FALSE,
+    techtype = "454"
+  ),
+  SouthBay_Water = list( # 20181225 [KBW+18]
+    pond = c("2C", "1C", "A23"),
+    SRA_MG = c("SRR4030050", "SRR4030051", "SRR4030044"),
+    MG_range = c(0.61, 0.65),
+    MGP_range = c(-0.15, -0.09),
+    abbrev = "SBW",
+    group = c("hypersaline", "hypersaline", "hypersaline"),
+    plot_real_x = FALSE,
+    techtype = "Illumina"
+  ),
+  Kulunda_Steppe = list( # 20190104 [VGR+16]
+    Lake = c("T5", "PL", "Tc", "B1"),
+    SRA_MG = c("SRR490135", "SRR490126", "SRR490146", "SRR490137"),
+    MG_range = c(0.61, 0.65),
+    MGP_range = c(-0.15, -0.09),
+    abbrev = "KS",
+    group = c("hypersaline", "hypersaline", "hypersaline", "hypersaline"),
+    plot_real_x = FALSE,
+    techtype = "Illumina"
   )
 )
 
