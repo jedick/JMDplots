@@ -273,7 +273,8 @@ ppage <- function(subset = "gradoxSI", H2O = FALSE, set.par = TRUE, plot.it = TR
 # mout <- ppage(); pout <- ppage(H2O=TRUE); pcomp(mout, pout, type="both")
 # mout <- mpage(H2O=TRUE); pout <- ppage(H2O=TRUE); pcomp(mout, pout, type="H2O")
 pcomp <- function(mout, pout, seqtype="MG", type="ZC", parts=c("plot", "legend"), yline = 2,
-                  xlim = NULL, ylim = NULL, reorder = TRUE, plot.techtype = FALSE, add = FALSE, pch = NULL) {
+                  xlim = NULL, ylim = NULL, reorder = TRUE, plot.techtype = FALSE, add = FALSE,
+                  pch = NULL, lty = 2) {
   if("plot" %in% parts) {
     # set up plot
     if(type=="ZC") {
@@ -339,7 +340,7 @@ pcomp <- function(mout, pout, seqtype="MG", type="ZC", parts=c("plot", "legend")
       # plot lines and points
       # for lines, use the color of most of the points 20180501
       # change this to gray 20181114
-      lines(xvals, yvals, col="dimgray", lwd=0.8, lty=2)
+      lines(xvals, yvals, col="dimgray", lwd=0.8, lty = lty)
       if(grepl("Baltic_Sea", study)) {
         # filled triangle, circle, square for 0.1, 0.8, 3.0 size fractions
         if(grepl("0.1", study)) mypch <- 17
