@@ -43,7 +43,9 @@ usedin <- list(
   balticMG = c("Baltic_Sea-0.1s", "Baltic_Sea-0.8s", "Baltic_Sea-3.0s",
                "Baltic_Sea-0.1d", "Baltic_Sea-0.8d", "Baltic_Sea-3.0d"),
   balticMT = c("Baltic_Sea-0.1s", "Baltic_Sea-0.8s", "Baltic_Sea-3.0s",
-               "Baltic_Sea-0.1d", "Baltic_Sea-0.8d", "Baltic_Sea-3.0d")
+               "Baltic_Sea-0.1d", "Baltic_Sea-0.8d", "Baltic_Sea-3.0d"),
+  # freshwater and marine metagenomes (Eiler et al., 2014)
+  eiler = c("Eiler_Freshwater", "Eiler_Marine")
 )
 
 # function to plot sampled compositions for indicated study and sequence type 20180222
@@ -283,13 +285,10 @@ pcomp <- function(mout, pout, seqtype="MG", type="ZC", parts=c("plot", "legend")
     }
     if(type=="both") {
       if(is.null(xlim)) xlim <- c(-0.22, -0.098)
-      xlab <- quote(italic(Z)[C]~of~protein)
+      xlab <- quote(italic(Z)[C])
       if(is.null(ylim)) ylim <- c(0.34, 0.4)
       ylab <- quote(italic(n)[H[2]*O])
     }
-#    if(xaxis=="RNA") {xlim <- c(1.85, 1.92); xlab <- "ZC(RNA)"; dx <- -0.004}
-#    if(xaxis=="CM") {xlim <- c(0.024, 0.037); xlab <- "Cys+Met fraction"; dx <- -0.0003}
-#    if(yaxis=="CM") {ylim <- c(0.024, 0.037); ylab <- "Cys+Met fraction"}
     if(!add) {
       plot(xlim, ylim, xlab=xlab, ylab=NA, type="n")
       mtext(ylab, side=2, line=yline, las=0, cex=par("cex"))
@@ -314,9 +313,6 @@ pcomp <- function(mout, pout, seqtype="MG", type="ZC", parts=c("plot", "legend")
         xvals <- mout[[imout]]$AA
         yvals <- pout[[ipout]]$AA
       }
-#      if(xaxis=="RNA") xvals <- mout[[imout]]$RNA
-#      if(xaxis=="CM") xvals <- pout[[i]]$CM
-#      if(yaxis=="CM") yvals <- pout[[i]]$CM
       group <- rep(mout[[imout]]$group, length.out = length(xvals))
       if(reorder) {
         # order points by increasing DNA/RNA ZC value

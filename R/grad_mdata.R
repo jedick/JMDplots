@@ -86,6 +86,30 @@ gradH2O <- list(
     group = c("ocean"),
     plot_real_x = FALSE,
     techtype = "454" # note: MT is Illumina
+  ),
+  Eiler_Freshwater = list( # 20190719 [EZM+14]
+    sample = c("DamariscottaSP", "DamariscottaSU", "Ekoln", "Erken", "Lanier", "MendotaSP", "MendotaSU",
+               "Spark", "Trout", "Vattern", "Yellowstone1", "Yellowstone2"),
+    SRA_MG = c("ERR358545", "ERR358546", "ERR358543", "ERR358542", "SRR063691", "ERR358550", "ERR358549",
+               "ERR358548", "ERR358547", "ERR358544", "SRR077348", "SRR078855"),
+    MG_range = c(0.57, 0.64),
+    MGP_range = c(-0.20, -0.13),
+    abbrev = "EF",
+    group = c("lake"),
+    plot_real_x = FALSE,
+    techtype = "454"
+  ),
+  Eiler_Marine = list( # 20190719 [EZM+14]
+    sample = c("BATS0", "BATS200", "BATS250", "BATS40", "EqDP35155", "NPTG35179", "PNEq35163", "PNEqCc35171",
+               "SPSG35131", "SPSG35139", "SPSG35147", "WChannelApr", "WChannelJan"),
+    iMicrobe_MG = c("BATS0", "BATS200", "BATS250", "BATS40", "EqDP35155", "NPTG35179", "PNEq35163", "PNEqCc35171",
+               "SPSG35131", "SPSG35139", "SPSG35147", "WChannelApr", "WChannelJan"),
+    MG_range = c(0.57, 0.64),
+    MGP_range = c(-0.20, -0.13),
+    abbrev = "EM",
+    group = c("oxic"),
+    plot_real_x = FALSE,
+    techtype = "454"
   )
 )
 
