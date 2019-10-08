@@ -5,8 +5,8 @@ export(
   # chnszten paper 20190929
   "chnszten1", "chnszten4", "chnszten5", "chnszten6", "chnszten7",
   "chnsztenS1", "chnsztenS2", "chnsztenS3", "chnsztenS4", "chnsztenS5", "chnsztenS6A", "chnsztenS6B", "chnsztenS7", "chnsztenS8", "chnsztenS9", "chnsztenS10",
-  # gradH2O paper 20190930
-  "gradH2O1", "gradH2O2", "gradH2O3", "gradH2O4", "gradH2O5",
+  # gradH2O paper 20190930-20191008
+  "gradH2O1", "gradH2O2", "gradH2O3", "gradH2O4", "gradH2O5", "gradH2O6",
   # grad_mplot 20190930
   "mplot", "mpage", "ppage", "mcomp", "pcomp",
   # grad_util 20191005
@@ -31,8 +31,13 @@ importFrom("CHNOSZ",
   "protein.formula"
 )
 
-# imports from canprot (for gradH2O 20190930)
-importFrom("canprot", "canprot")
+# imports from canprot
+importFrom("canprot",
+  # first batch: gradH2O1 20190930
+  "canprot",
+  # second batch: gradH2O6 20191008
+  "diffplot", "get_comptab", "get_pdat", "lapply_canprot", "pdat_osmotic"
+)
 
 # imports from other packages
 importFrom("shiny", "fluidPage", "includeCSS", "shinyApp")

@@ -1,12 +1,6 @@
 # JMDplots/gradH2O.R
-# make plots for Goldschmidt poster 20190711
-# added to JMDplots starting 20190930
-
-#source("mplot.R")
-
-## load required packages
-#library(canprot)
-#library(CHNOSZ)
+# R file started for Goldschmidt poster 20190711
+# moved to JMDplots for salinity gradients paper starting 20190930
 
 # basis species comparison 20190713 / relative water content 20191005
 gradH2O1 <- function(pdf = FALSE) {
@@ -256,6 +250,22 @@ gradH2O5 <- function(pdf = FALSE) {
   hullfun(mout, pout, 1:2, "turquoise3")
   pcomp(mout, pout, type = "both", reorder = FALSE, add = TRUE)
 
+  if(pdf) invisible(dev.off())
+}
+
+# mean differences of nH2O and ZC for differentially expressed proteins in hyperosmotic stress
+# adapted from canprot/hyperosmotic.Rmd 20190717-20191007
+gradH2O6 <- function(pdf = FALSE) {
+  if(pdf) pdf("gradH2O6.pdf", width = 5, height = 4)
+  # generate compositional table
+  datasets <- pdat_osmotic()
+  comptab <- lapply_canprot(datasets, function(dataset) {
+    pdat <- get_pdat(dataset, "pdat_osmotic", basis = "rQEC")
+    get_comptab(pdat, plot.it=FALSE, mfun="mean")
+  })
+  col <- rep("black", length(datasets))
+  par(mar = c(4, 4, 1, 1), mgp = c(2.5, 1, 0))
+  diffplot(comptab, col=col, pt.text = NA, oldstyle = FALSE)
   if(pdf) invisible(dev.off())
 }
 

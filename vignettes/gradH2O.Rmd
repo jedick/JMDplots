@@ -52,3 +52,9 @@ gradH2O5(TRUE)
 knitr::include_graphics("gradH2O5.pdf")
 ```
 
+## Mean differences of `r nh2o` and `r zc` for differentially expressed proteins in hyperosmotic stress (Figure 6)
+```{r gradH2O6, message = FALSE, echo = 1, fig.align='center', out.width='100%', out.height='400px'}
+gradH2O6(TRUE)
+knitr::include_graphics("gradH2O6.pdf")
+```
+
