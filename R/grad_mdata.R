@@ -55,7 +55,7 @@ gradH2O <- list(
     MT_range = c(0.59, 0.63),
     MTP_range = c(-0.17, -0.13),
     abbrev = "GS",
-    group = c("ocean"),
+    group = c("lake", "lake", "lake", "lake", "lake", "lake", "oxic", "oxic", "oxic", "oxic", "oxic", "oxic"),
     plot_real_x = FALSE,
     techtype = "454" # note: MT is Illumina
   ),
@@ -69,7 +69,7 @@ gradH2O <- list(
     MT_range = c(0.59, 0.63),
     MTP_range = c(-0.17, -0.13),
     abbrev = "GS",
-    group = c("ocean"),
+    group = c("lake", "lake", "lake", "lake", "lake", "lake", "oxic", "oxic", "oxic", "oxic", "oxic", "oxic"),
     plot_real_x = FALSE,
     techtype = "454" # note: MT is Illumina
   ),
@@ -83,7 +83,7 @@ gradH2O <- list(
     MT_range = c(0.59, 0.63),
     MTP_range = c(-0.17, -0.13),
     abbrev = "GS",
-    group = c("ocean"),
+    group = c("lake", "lake", "lake", "lake", "lake", "lake", "oxic", "oxic", "oxic", "oxic", "oxic", "oxic"),
     plot_real_x = FALSE,
     techtype = "454" # note: MT is Illumina
   ),
