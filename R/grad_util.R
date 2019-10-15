@@ -430,3 +430,40 @@ H2OAA <- function(AAcomp, basis = "rQEC") {
   #  stopifnot(H2O.ref == H2O.fun)
 }
 
+# calculate ZC and nH2O of proteomes encoding different Nif homologs (Poudel et al., 2018)
+# 20191014
+NifProteomes <- function() {
+  # read file with Nif genome classifications and taxids
+  Niffile <- system.file("extdata/gradH2O/Nif_homolog_genomes.csv", package = "JMDplots")
+  Nif <- read.csv(Niffile, as.is = TRUE)
+  # drop NA taxids
+  Nif <- Nif[!is.na(Nif$taxid), ]
+  # read refseq data
+  RSfile <- system.file("extdata/refseq/protein_refseq.csv.xz", package = "JMDplots")
+  refseq <- read.csv(RSfile, as.is = TRUE)
+  # the Nif types, arranged from anaerobic to aerobic
+  types <- c("Nif-D", "Nif-C", "Nif-B", "Nif-A")
+  # assemble the compositional metrics
+  ZC <- ZC.SD <- nH2O <- nH2O.SD <- numeric()
+  for(type in types) {
+    # get the taxids for genomes with this type of Nif
+    iNif <- Nif$Type == type
+    taxid <- Nif$taxid[iNif]
+    # get the row number in the refseq data frame
+    irefseq <- match(taxid, refseq$organism)
+    # include only organisms with at least 1000 protein sequences
+    i1000 <- refseq$chains[irefseq] >= 1000
+    irefseq <- irefseq[i1000]
+    print(paste(type, "represented by", length(irefseq), "genomes with at least 1000 protein sequences"))
+    # get the amino acid composition from refseq
+    AAcomp <- refseq[irefseq, ]
+    # calculate ZC and nH2O
+    ZC <- c(ZC, mean(ZCAA(AAcomp)))
+    ZC.SD <- c(ZC.SD, sd(ZCAA(AAcomp)))
+    nH2O <- c(nH2O, mean(H2OAA(AAcomp)))
+    nH2O.SD <- c(nH2O.SD, sd(H2OAA(AAcomp)))
+  }
+  # return values
+  list(types = types, ZC = ZC, ZC.SD = ZC.SD, nH2O = nH2O, nH2O.SD = nH2O.SD)
+}
+

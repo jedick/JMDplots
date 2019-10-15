@@ -3,6 +3,7 @@
 \alias{grad_util}
 \alias{H2OAA}
 \alias{ZCAA}
+\alias{NifProteomes}
 \title{Utility functions for chemical composition of proteins}
 \description{
 These functions calculate the carbon oxidation state (\ZC) and stoichiometric water content (\nH2O) of proteins given a data frame of amino acid compositions.
@@ -11,6 +12,7 @@ These functions calculate the carbon oxidation state (\ZC) and stoichiometric wa
 \usage{
   ZCAA(AAcomp, nothing = NULL)
   H2OAA(AAcomp, basis = "rQEC")
+  NifProteomes()
 }
 
 \arguments{
@@ -31,10 +33,16 @@ Note that \ZC is a per-carbon average, but \nH2O is a per-residue average.
 The contribution of \H2O from the terminal groups of proteins is counted, so shorter proteins have very slightly greater \nH2O.
 
 \code{nothing} is a dummy argument so that these functions can be called with the same numbers of arguments (used internally by some plotting functions).
+
+\code{NifProteomes} calculates the mean and standard deviation of \ZC and \nH2O for proteomes encoding different homologs of nitrogenas (Nif-D, Nif-C, Nif-B, or Nif-A), as listed by Poudel et al. (2018).
+The organisms are limited to those that have at least 1000 RefSeq protein sequences.
+See \code{\link{JMDplots-package}} for documentation of the data files.
 }
 
 \references{
 Dick, J. M., Tan, J. and Yu, M. (2019) Geochemistry of metagenomes: Distinct compositional signatures of environmental redox and salinity gradients. \emph{(preprint)}
+
+Poudel, S. et al. (2018) Electron transfer to nitrogenase in different genomic and metabolic backgrounds. \emph{J. Bacteriol.} \bold{200}, e00757-17. \doi{10.1128/JB.00757-17}
 }
 
 \examples{
@@ -59,4 +67,7 @@ nH2O.residue <- nH2O.GAG / 3
 # compare with the value calculated by H2OAA() (-0.2)
 nH2O.H2OAA <- H2OAA(AAcomp, "QEC")
 stopifnot(all.equal(nH2O.residue, nH2O.H2OAA))
+
+# list ZC and nH2O of proteomes for Nif-encoding genomes
+NifProteomes()
 }
