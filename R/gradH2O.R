@@ -111,55 +111,87 @@ gradH2O1 <- function(pdf = FALSE) {
 
 # ZC for selected redox gradients 20190715
 gradH2O2 <- function(pdf = FALSE) {
-  if(pdf) pdf("gradH2O2.pdf", width = 6, height = 2.3)
-  par(mfrow = c(1, 3))
-  par(mar = c(4, 4, 4, 1), mgp = c(2.5, 0.7, 0))
+  if(pdf) pdf("gradH2O2.pdf", width = 7, height = 5)
+  par(mfrow = c(2, 2))
+  par(mar = c(4, 4, 2, 1), mgp = c(2.5, 0.7, 0))
   mplot("Bison_Pool", "IMG_MGP", add.label = FALSE, plottype = "#FF000030", col = "red")
-  label.figure("A", cex = 2, yfrac = 0.9)
+  label.figure("A", cex = 2, yfrac = 0.92)
   mplot("Diffuse_Vents", "SRA_MGP", add.label = FALSE, plottype = "#FF000030", col = "red")
-  label.figure("B", cex = 2, yfrac = 0.9)
+  label.figure("B", cex = 2, yfrac = 0.92)
   mplot("Guerrero_Negro", "IMG_MGP", add.label = FALSE, plottype = "#FF000030", col = "red")
-  label.figure("C", cex = 2, yfrac = 0.9)
+  label.figure("C", cex = 2, yfrac = 0.92)
+  # add proteomes from Nif-encoding genomes 20191014
+  # get mean and SD of ZC values
+  np <- NifProteomes()
+  ZCmean <- np$ZC
+  ZChi <- ZCmean + np$ZC.SD
+  ZClo <- ZCmean - np$ZC.SD
+  nn <- length(ZCmean)
+  # set up plot
+  plot(0, 0, xlim = c(1, nn), ylim = c(-0.24, -0.13), xlab = "Nif type", ylab = NA, xaxt = "n")
+  mtext(quote(italic(Z)[C]), side = 2, line = 2, las = 0)
+  axis(1, 1:nn, np$type)
+  # draw polygon (filled area)
+  polygon(c(1:nn, nn:1), c(ZChi, rev(ZClo)), col = "#FF000030", border = NA)
+  # draw lines and points
+  lines(1:nn, ZCmean, col = "red", lty = 2)
+  points(1:nn, ZCmean, pch = 19, col = "red")
+  # add title
+  title("Nif-bearing genomes (NF)", font.main = 1)
+  label.figure("D", cex = 2, yfrac = 0.92)
+  # done!
   if(pdf) invisible(dev.off())
 }
 
 # nH2O-ZC scatterplots for redox gradients and Baltic Sea 20190713
 gradH2O3 <- function(pdf = FALSE) {
-  if(pdf) pdf("gradH2O3.pdf", width = 13, height = 5.6)
-  par(mfrow = c(1, 3))
-  par(mar = c(4, 4.5, 1, 1), las = 1, cex = 1.2)
+  if(pdf) pdf("gradH2O3.pdf", width = 12, height = 5.6)
+  par(mfrow = c(1, 2))
+  par(mar = c(4, 4.5, 2, 1), las = 1, cex = 1.2)
 
-  # compare ZC and nH2O of proteins in datasets from gradox paper
+  # plot 1: compare ZC and nH2O of proteins in datasets from gradox paper
   mgradox <- ppage("gradoxGS", plot.it = FALSE)
   pgradox <- ppage("gradoxGS", H2O = TRUE, plot.it = FALSE)
   pcomp(mgradox, pgradox, type = "both", reorder = FALSE, yline = 3.5)
-  legend("topleft", c("redox", "gradients"), bty = "n", text.font = 2)
-  # add legend for environment type
-  legend("topright", c("vent fluids", "plume", "seawater", "hot spring", "phototrophic", "mat > 3 mm", "mat 1-3 mm"),
-         pch = c(19, 19, 19, 15, 15, 15, 15), col = c("red", "purple1", "purple1", "orange", "orange", "green3", "green3"), bty = "n")
-  # overlay symbols for seawater, phototrophic and mat surface
-  legend(-0.1627, 0.4024, lty=0, lwd=0, bty="n", pt.cex=1.6, pt.lwd=1,
-           pch = c(1, 1, 1, 0, 0, 0, 0),
-           legend=c("", "", "", "", "", "", ""),
-           col=c(NA, NA, "purple1", NA, "green3", NA, "green3"))
+  # add proteomes from Nif-encoding genomes 20191014
+  np <- NifProteomes()
+  points(np$ZC, np$nH2O, pch = 15)
+  lines(np$ZC, np$nH2O, col = "dimgray", lwd = 0.8, lty = 2)
+  # add text labels
+  text(-0.21, 0.348, "hot spring")
+  text(-0.21, 0.3455, "source")
+  text(-0.157, 0.349, "photo-", adj = 0)
+  text(-0.157, 0.3465, "trophic", adj = 0)
+  text(-0.157, 0.344, "zone", adj = 0)
+  text(-0.127, 0.353, "> 3 mm", adj = 0)
+  text(-0.138, 0.356, "3 mm", adj = 0)
+  text(-0.134, 0.3585, "2 mm", adj = 0)
+  text(-0.131, 0.367, "1 mm", adj = 0)
+  text(-0.205, 0.364, "vent")
+  text(-0.205, 0.3615, "fluids")
+  text(-0.157, 0.368, "plume")
+  text(-0.163, 0.3595, "sea-", adj = 0)
+  text(-0.163, 0.357, "water", adj = 0)
+  text(c(-0.193, -0.212, -0.187, -0.157), c(0.399, 0.3892, 0.3803, 0.3803), c("Nif-D", "Nif-C", "Nif-B", "Nif-A"), adj = 0)
+  text(-0.217, 0.3865, "NF", cex=0.7)
+  title("redox gradients", font.main = 1)
   label.figure("A", cex = 2, xfrac = 0.035)
 
-  # compare ZC and nH2O of proteins in Baltic Sea surface
+  # plot 2: compare ZC and nH2O of proteins in Baltic Sea surface
   mbaltics <- ppage("balticsurface", plot.it = FALSE)
   pbaltics <- ppage("balticsurface", H2O = TRUE, plot.it = FALSE)
   pcomp(mbaltics, pbaltics, type = "both", reorder = FALSE, yline = 3.5)
-  legend("topleft", c("Baltic Sea", "surface"), bty = "n", text.font = 2)
-  label.figure("B", cex = 2, xfrac = 0.035)
-
-  # compare ZC and nH2O of proteins in Baltic Sea deep
+  # compare ZC and nH2O of proteins in Baltic Sea 10-20 m
   mbalticd <- ppage("balticdeep", plot.it = FALSE)
   pbalticd <- ppage("balticdeep", H2O = TRUE, plot.it = FALSE)
-  pcomp(mbalticd, pbalticd, type = "both", reorder = FALSE, yline = 3.5)
-  legend("topleft", c("Baltic Sea", "10-20 m"), bty = "n", text.font = 2)
-  # add legend for particle size
-  legend("topright", legend = as.expression(c(quote("0.1-0.8"~mu*m))),
-         pch = c(17), col = c("black"), bty = "n")
-  label.figure("C", cex = 2, xfrac = 0.035)
+  pcomp(mbalticd, pbalticd, type = "both", reorder = FALSE, yline = 3.5, add = TRUE, lty = 3, pch = 6)
+  # add text labels
+  text(-0.14, 0.392, "surface\n< 6 PSU")
+  text(-0.135, 0.381, "surface\n> 6 PSU")
+  text(-0.185, 0.386, "10-20 m\n< 6 PSU")
+  text(-0.18, 0.370, "10-20 m\n> 6 PSU")
+  title("Baltic Sea", font.main = 1)
+  label.figure("B", cex = 2, xfrac = 0.035)
 
   if(pdf) invisible(dev.off())
 }
