@@ -134,8 +134,6 @@ plotMG <- function(dataset="Guerrero_Negro_IMG_MG", plottype="bars",
     }
     if(!add & (is.null(taxid) | identical(taxid, 0))) {
       plot(0, 0, xlim=xlim, ylim=ylim, xlab=xlab, ylab=NA, xaxt="n")
-      # loop over non-numeric labels so that R doesn't omit any (because they're crowded)
-      # for numeric labels, lower gap.axis to show more labels 20181215 (requires R 3.6.0)
       srt <- 45
       if(!is.numeric(all.labels)) {
         # rotate labels 20190113
@@ -147,8 +145,15 @@ plotMG <- function(dataset="Guerrero_Negro_IMG_MG", plottype="bars",
           text(x=1:nsamp, y=par()$usr[3]-1.5*strheight("A"), labels=all.labels, srt=srt, adj=1, xpd=TRUE)
           # add tick marks 
           axis(1, at=1:nsamp, labels=NA)
-        } else for(i in 1:nsamp) axis(1, at=i, labels=all.labels[i])
-      } else axis(1, at=atx, labels=all.labels, gap.axis=0.02)
+        } else {
+          # loop over labels so that R doesn't omit any (because they're crowded)
+          for(i in 1:nsamp) axis(1, at=i, labels=all.labels[i])
+        }
+      } else {
+        # for numeric labels, lower gap.axis to show more labels 20181215 (requires R 3.6.0)
+        if(getRversion() >= "3.6.0") axis(1, at=atx, labels=all.labels, gap.axis=0.02)
+        else axis(1, at=atx, labels=all.labels)
+      }
       # add y-axis: ZC (or nH2O 20181231)
       if(H2O) mtext(quote(italic(n)[H[2]*O]), side=2, line=yline, las=0)
       else mtext(quote(italic(Z)[C]), side=2, line=yline, las=0)

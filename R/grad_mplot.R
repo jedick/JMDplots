@@ -287,7 +287,7 @@ pcomp <- function(mout, pout, seqtype="MG", type="ZC", parts=c("plot", "legend")
       xlab <- quote(italic(Z)[C]~of~DNA)
       if(seqtype=="MG" & is.null(ylim)) ylim <- c(-0.22, -0.098)
       if(seqtype=="MT" & is.null(ylim)) ylim <- c(-0.21, -0.14)
-      ylab <- quote(italic(Z)[C]~of~protein)
+      ylab <- quote(italic(Z)[C])
     }
     if(type=="both") {
       if(is.null(xlim)) xlim <- c(-0.22, -0.098)

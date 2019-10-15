@@ -60,7 +60,6 @@ Besides the above directories for the papers, there are additional directories w
 }
 
 \section{Requirements}{
-Requires R 3.6.0 for the \code{gap.axis} argument in \code{\link{axis}}.
 Requires CHNOSZ 1.3.3 for updated format of OBIGT database.
 Requires canprot > 0.1.2 for updated plotting style in \code{\link[canprot]{diffplot}}.
 }
