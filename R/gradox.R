@@ -20,7 +20,7 @@
 # NOTE: Fig5() generates some expected messages about
 # missing files, indicating samples where data are not available.
 
-## requires CHNOSZ 1.1.3 and R 3.6.0 (for 'gap.axis' argument in axis())
+## requires CHNOSZ 1.1.3
 #library(CHNOSZ)
 #data(thermo)
 #
@@ -576,7 +576,9 @@ seqcomp2obigt <- function(seqcomp, type="DNA") {
     mkp <- makeup(monomer_obigt$formula, multiplier=monocomp, sum=TRUE)
     obigt_out$formula[i] <- as.chemical.formula(mkp)
     # thermodynamic properties (G, H, S, and HKF parameters)
-    obigt_out[i, 8:20] <- colSums(monomer_obigt[, 9:21] * monocomp)
+    # the format of OBIGT changed in CHNOSZ 1.3.3; get different columns for previous versions 20191015
+    if(packageVersion("CHNOSZ") >= "1.3.3") obigt_out[i, 9:21] <- colSums(monomer_obigt[, 9:21] * monocomp)
+    else obigt_out[i, 8:20] <- colSums(monomer_obigt[, 8:20] * monocomp)
   }
   obigt_out
 }

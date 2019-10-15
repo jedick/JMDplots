@@ -60,7 +60,7 @@ Besides the above directories for the papers, there are additional directories w
 }
 
 \section{Requirements}{
-Requires CHNOSZ 1.3.3 for updated format of OBIGT database.
+Requires CHNOSZ 1.3.2 for functionality used in \code{\link{chnszten}}.
 Requires canprot > 0.1.2 for updated plotting style in \code{\link[canprot]{diffplot}}.
 }
 
