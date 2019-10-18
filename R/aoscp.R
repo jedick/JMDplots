@@ -96,3 +96,73 @@ aoscp1 <- function(pdf = FALSE) {
   #print(summary(lm(aa.ZC ~ hydropathy)))
 }
 
+# histograms of ZC of all human proteins and human membrane proteins
+aoscp2 <- function(pdf = FALSE) {
+  # read the HUMAN data file
+  file <- system.file("/extdata/aoscp/ZC_HUMAN.csv.xz", package = "JMDplots")
+  HUMAN <- read.csv(file)
+  # only take sequences containing at least 50 amino acids
+  i50.HUMAN <- HUMAN$length >= 50
+  ZC.HUMAN <- HUMAN$ZC[i50.HUMAN]
+  # read the membrane data file
+  file <- system.file("/extdata/aoscp/ZC_membrane.csv", package = "JMDplots")
+  membrane <- read.csv(file)
+  # only take sequences containing at least 50 amino acids
+  i50.membrane <- membrane$length >= 50
+  ZC.membrane <- membrane$ZC[i50.membrane]
+  # setup plot
+  if(pdf) pdf("aoscp2.pdf", width=6.6, height=4.4, family="Times")
+  layout(matrix(1:4, 2, 2, byrow=TRUE), widths=c(3, 1.5))
+  par(mgp=c(2.3, 1, 0))
+  par(mar=c(4, 4, 1, 1))
+  xlim <- range(c(ZC.HUMAN, ZC.membrane))
+  # compute breakpoints: start with a range beyond all ZC values
+  breaks <- seq(-1, 1, by=0.02)
+  # which of these breaks are within the range for membrane ZC
+  i.membrane <- which(breaks > min(ZC.membrane) & breaks < max(ZC.membrane))
+  # grow it by one break to include the extreme values
+  i.membrane <- c(i.membrane[1]-1, i.membrane, rev(i.membrane)[1]+1)
+  breaks.membrane <- breaks[i.membrane]
+  # repeat for HUMAN
+  i.HUMAN <- which(breaks > min(ZC.HUMAN) & breaks < max(ZC.HUMAN))
+  i.HUMAN <- c(i.HUMAN[1]-1, i.HUMAN, rev(i.HUMAN)[1]+1)
+  breaks.HUMAN <- breaks[i.HUMAN]
+  # HUMAN plot: histogram
+  ZC.lab <- expression(italic(Z)[C])
+  hist(ZC.HUMAN, breaks=breaks.HUMAN, xlim=xlim, xlab=ZC.lab, main="")
+  legend("topright", legend="all human proteins        ", bty="n")
+  label.figure("a", paren = TRUE, italic = TRUE)
+  # HUMAN QQ plot
+  # to reduce file size, plot only ~10% of the points between the 5% and 95% quantiles
+  len <- length(ZC.HUMAN)
+  # indices for 10% of all the points
+  isamp <- sample(sample(len), round(len/10))
+  # ensure all points beyond the 5% and 95% quantiles are included
+  isamp <- unique(c(isamp, 1:round(len/20), round(19*len/20):len))
+  # calculate the quantiles (full data set), but don't plot them
+  qqn <- qqnorm(ZC.HUMAN, plot.it=FALSE)
+  # now make the plot with selection of points
+  plot(sort(qqn$x)[isamp], sort(qqn$y)[isamp], xlab="Theoretical Quantiles", ylab=ZC.lab, type="p", cex=0.15)
+  # draw line through 1st and 3rd quartiles
+  probs <- c(25, 75)/100
+  qqline(ZC.HUMAN, probs=probs)
+  points(quantile(qqn$x, probs), quantile(qqn$y, probs), pch=3, cex=1.5)
+  label.figure("b", paren = TRUE, italic = TRUE)
+  # membrane plot: histogram
+  hist(ZC.membrane, breaks=breaks.membrane, xlim=xlim, xlab=ZC.lab, main="")
+  legend("topright", legend="human membrane proteins", bty="n")
+  label.figure("c", paren = TRUE, italic = TRUE)
+  # membrane QQ plot
+  len <- length(ZC.membrane)
+  isamp <- sample(sample(len), round(len/10))
+  isamp <- unique(c(isamp, 1:round(len/20), round(19*len/20):len))
+  qqn <- qqnorm(ZC.membrane, plot.it=FALSE)
+  plot(sort(qqn$x)[isamp], sort(qqn$y)[isamp], xlab="Theoretical Quantiles", ylab=ZC.lab, type="p", cex=0.15)
+  qqline(ZC.membrane, probs=probs)
+  points(quantile(qqn$x, probs), quantile(qqn$y, probs), pch=3, cex=1.5)
+  label.figure("d", paren = TRUE, italic = TRUE)
+  if(pdf) invisible(dev.off())
+  ## run a t-test
+  #print(t.test(ZC.HUMAN, ZC.membrane))
+}
+

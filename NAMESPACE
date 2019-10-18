@@ -16,7 +16,7 @@ export(
   # Nif-encoding genomes 20191015
   "NifProteomes",
   # aoscp paper 20191018
-  "aoscp1"
+  "aoscp1", "aoscp2"
 )
 
 # imports from CHNOSZ
@@ -54,7 +54,9 @@ importFrom("grDevices", "dev.off", "cairo_pdf", "pdf", "blues9", "colorRampPalet
            "chull", "col2rgb", "rgb")
 importFrom("graphics", "abline", "arrows", "axis", "box", "layout",
            "legend", "lines", "mtext", "par", "plot", "plot.new",
-           "points", "rect", "text", "title", "smoothScatter", "strheight", "polygon")
-importFrom("stats", "lm", "na.omit", "predict", "sd", "predict.lm", "residuals")
+           "points", "rect", "text", "title", "smoothScatter", "strheight",
+           "polygon", "hist")
+importFrom("stats", "lm", "na.omit", "predict", "sd", "predict.lm", "residuals",
+           "qqline", "qqnorm", "quantile")
 importFrom("utils", "read.csv", "demo", "packageVersion", "tail")
 

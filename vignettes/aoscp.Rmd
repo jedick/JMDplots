@@ -25,3 +25,9 @@ library(JMDplots)
 aoscp1(TRUE)
 knitr::include_graphics("aoscp1.pdf")
 ```
+
+## Histograms of `r ZC` of all human proteins and human membrane proteins (Figure 2)
+```{r aoscp2, message = FALSE, echo = 1, fig.align='center', out.width='100%', out.height='450px'}
+aoscp2(TRUE)
+knitr::include_graphics("aoscp2.pdf")
+```

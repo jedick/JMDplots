@@ -2,6 +2,7 @@
 \name{aoscp}
 \alias{aoscp}
 \alias{aoscp1}
+\alias{aoscp2}
 \title{Plots from oxidation state of carbon paper}
 \description{
 Plots from the paper by Dick (2014).
@@ -20,6 +21,7 @@ This table gives a brief description of each function.
 
 \tabular{ll}{
   \code{aoscp1} \tab \ZC of amino acids vs \ZC of RNA codons and hydropathy index of amino acids \cr
+  \code{aoscp2} \tab histograms of \ZC of all human proteins and human membrane proteins \cr
 }
 }
 
