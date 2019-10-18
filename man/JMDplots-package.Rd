@@ -41,7 +41,7 @@ The plots are available in the corresponding vignettes in the package.
 \section{gradH2O}{
   \describe{
     \item{\code{MGP}}{Amino acid compositions sampled from metagenomically derived protein sequences, generated as described above.}
-    \item{\code{Nif_homolog_genomes.csv}}{Names of genomes (organisms) containing different nitrogenase (Nif) homologs, extracted from Supplemental Table 1A of Poudel et al. (2018). To the source table have been added the columns \samp{Refseq.name} and \samp{taxid}, which contain the closest matching genome name in the RefSeq database (see below) and corresponding taxonomic ID.}
+    \item{\code{Nif_homolog_genomes.csv}, \code{Nif_homolog_genomes.R}}{Names of genomes (organisms) containing different nitrogenase (Nif) homologs, extracted from Supplemental Table 1A of Poudel et al. (2018). To the source table have been added the columns \samp{Refseq.name} and \samp{taxid}, which contain the closest matching genome name in the RefSeq database (see below) and corresponding taxonomic ID. The R file is the script used to make \code{Nif_homolog_genomes.csv} from the source table.}
   }
 }
 
