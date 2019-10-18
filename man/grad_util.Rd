@@ -35,7 +35,7 @@ The contribution of \H2O from the terminal groups of proteins is counted, so sho
 \code{nothing} is a dummy argument so that these functions can be called with the same numbers of arguments (used internally by some plotting functions).
 
 \code{NifProteomes} calculates the mean and standard deviation of \ZC and \nH2O for proteomes encoding different homologs of nitrogenas (Nif-D, Nif-C, Nif-B, or Nif-A), as listed by Poudel et al. (2018).
-The organisms are limited to those that have at least 1000 RefSeq protein sequences.
+The organisms are limited to those that have at least 1000 RefSeq protein sequences, and any duplicated organism names are removed.
 See \code{\link{JMDplots-package}} for documentation of the data files.
 }
 

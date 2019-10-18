@@ -172,7 +172,7 @@ gradH2O3 <- function(pdf = FALSE) {
   text(-0.157, 0.368, "plume")
   text(-0.163, 0.3595, "sea-", adj = 0)
   text(-0.163, 0.357, "water", adj = 0)
-  text(c(-0.193, -0.212, -0.187, -0.157), c(0.399, 0.3892, 0.3803, 0.3803), c("Nif-D", "Nif-C", "Nif-B", "Nif-A"), adj = 0)
+  text(c(-0.188, -0.212, -0.186, -0.161), c(0.4005, 0.3894, 0.3807, 0.3798), c("Nif-D", "Nif-C", "Nif-B", "Nif-A"), adj = 0)
   text(-0.217, 0.3865, "NF", cex=0.7)
   title("redox gradients", font.main = 1)
   label.figure("A", cex = 2, xfrac = 0.035)

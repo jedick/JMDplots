@@ -449,12 +449,14 @@ NifProteomes <- function() {
     # get the taxids for genomes with this type of Nif
     iNif <- Nif$Type == type
     taxid <- Nif$taxid[iNif]
+    # remove duplicated taxids 20191018
+    taxid <- taxid[!duplicated(taxid)]
     # get the row number in the refseq data frame
     irefseq <- match(taxid, refseq$organism)
     # include only organisms with at least 1000 protein sequences
     i1000 <- refseq$chains[irefseq] >= 1000
     irefseq <- irefseq[i1000]
-    print(paste(type, "represented by", length(irefseq), "genomes with at least 1000 protein sequences"))
+    print(paste(type, "represented by", length(irefseq), "nonredundant genomes with at least 1000 protein sequences"))
     # get the amino acid composition from refseq
     AAcomp <- refseq[irefseq, ]
     # calculate ZC and nH2O
