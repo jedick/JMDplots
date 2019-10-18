@@ -17,7 +17,7 @@ The plots are available in the corresponding vignettes in the package.
     \item \code{\link{gradH2O}} - Hydration state of metagenomes in salinity gradients (Dick et al., 2019b)
     \item \code{\link{chnszten}} - CHNOSZ, ten years after first CRAN submission (Dick, 2019)
     \item \code{\link{gradox}} - Carbon oxidation state of metagenomes in redox gradients (Dick et al., 2019a)
-    \item \code{aoscp} - Average oxidation state of carbon in proteins (Dick, 2014)
+    \item \code{\link{aoscp}} - Average oxidation state of carbon in proteins (Dick, 2014)
     \item \code{aaaq} - Amino acid group additivity for ionized proteins (Dick et al., 2006)
   }
   These names are used for the vignettes and functions, as well as some data directories under \code{extdata}.
@@ -48,7 +48,7 @@ The plots are available in the corresponding vignettes in the package.
 
 \section{aoscp (2014)}{
   \describe{
-    \item{\code{protein_refseq61.csv.xz}}{Amino acid compositions of proteins in different organisms, based on RefSeq release 61 (see below for an updated file). A trimmed version of this file was previously present in \pkg{CHNOSZ} (versions to 1.3.3). Here, the columns are \code{protein} (\dQuote{refseq}), \code{organism} (taxonomic id), \code{ref} (names of RefSeq source files (followed by number of sequences and number of amino acids) [organism name in square brackets]), \code{abbrv} (total number of amino acids), \code{chains} (1). The remaining columns have the average frequency of each amino acid in the proteins.}
+    \item{\code{protein_refseq61.csv.xz}}{Amino acid compositions of proteins in different organisms, based on RefSeq release 61 (see below for an updated file). A trimmed version of this file was previously present in \pkg{CHNOSZ} (to version 1.3.3). Here, the columns are \code{protein} (\dQuote{refseq}), \code{organism} (taxonomic id), \code{ref} (names of RefSeq source files (followed by number of sequences and number of amino acids) [organism name in square brackets]), \code{abbrv} (total number of amino acids), \code{chains} (1). The remaining columns have the average frequency of each amino acid in the proteins.}
     \item{\code{prep.R}}{Code use to prepare the data files from various sources.}
   }
 }

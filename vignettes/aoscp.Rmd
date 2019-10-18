@@ -1,0 +1,27 @@
+---
+title: "Plots from oxidation state of carbon paper (2014)"
+output: 
+  rmarkdown::html_vignette:
+    mathjax: null
+vignette: >
+  %\VignetteIndexEntry{Plots from oxidation state of carbon paper (2014)}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r HTML, include=FALSE}
+## some frequently used HTML expressions
+ZC <- "<i>Z</i><sub>C</sub>"
+```
+
+This vignette from the R package JMDplots contains plots from the paper by [Dick (2014)](https://doi.org/10.1098/rsif.2013.1095).
+
+```{r JMDplots, message = FALSE, results = "hide"}
+library(JMDplots)
+```
+
+## `r ZC` of amino acids vs `r ZC` of RNA codons and hydropathy index of amino acids (Figure 1)
+```{r aoscp1, message = FALSE, echo = 1, fig.align='center', out.width='100%', out.height='350px'}
+aoscp1(TRUE)
+knitr::include_graphics("aoscp1.pdf")
+```

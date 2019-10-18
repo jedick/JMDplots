@@ -14,7 +14,9 @@ export(
   # organisms 20191006
   "ecoli",
   # Nif-encoding genomes 20191015
-  "NifProteomes"
+  "NifProteomes",
+  # aoscp paper 20191018
+  "aoscp1"
 )
 
 # imports from CHNOSZ
@@ -30,7 +32,9 @@ importFrom("CHNOSZ",
   "nonideal", "obigt", "ratlab", "reset", "solubility",
   "subcrt", "thermo.plot.new", "water",
   # third batch: gradH2O
-  "protein.formula"
+  "protein.formula",
+  # fourth batch: aoscp
+  "nucleic.formula"
 )
 
 # imports from canprot
