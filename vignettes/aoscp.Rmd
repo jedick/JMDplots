@@ -59,3 +59,9 @@ aoscp6(TRUE)
 knitr::include_graphics("aoscp6.pdf")
 ```
 
+## `r ZC` of ferredoxin, thioredoxin, and glutaredoxin vs midpoint reduction potential (unpublished)
+```{r aoscp99, message = FALSE, echo = 1, fig.align='center', out.width='75%', out.height='400px'}
+aoscp99(TRUE)
+knitr::include_graphics("aoscp99.pdf")
+```
+

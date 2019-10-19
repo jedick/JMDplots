@@ -7,6 +7,7 @@
 \alias{aoscp4}
 \alias{aoscp5}
 \alias{aoscp6}
+\alias{aoscp99}
 \title{Plots from oxidation state of carbon paper}
 \description{
 Plots from the paper by Dick (2014).
@@ -19,6 +20,7 @@ Plots from the paper by Dick (2014).
   aoscp4(pdf = FALSE)
   aoscp5(pdf = FALSE)
   aoscp6(pdf = FALSE)
+  aoscp99(pdf = FALSE)
 }
 
 \arguments{
@@ -37,6 +39,7 @@ This table gives a brief description of each function.
   \code{aoscp4} \tab \ZC and Eh ranges in yeast and ER-cytoplasm electron-transfer scheme \cr
   \code{aoscp5} \tab Average oxidation state of carbon in proteins from different organisms \cr
   \code{aoscp6} \tab \ZC and Topt of different rubiscos and thermodynamic comparison \cr
+  \code{aoscp99} \tab \ZC of ferredoxin, thioredoxin, and glutaredoxin vs midpoint reduction potential (unpublished) \cr
 }
 }
 
@@ -48,6 +51,8 @@ This table gives a brief description of each function.
     \item{\code{rubisco.csv}}{UniProt IDs for Rubisco and optimal growth temperatures of organisms.}
     \item{\code{rubisco/*.fasta}}{FASTA sequence files for each Rubisco identified in table 3.}
     \item{\code{cell/*.png}}{PNG images for each of the cellular components used in \code{aoscp3}.}
+    \item{\code{midpoint.csv}}{List of protein names, UniProt IDs and standard midpoint reduction potentials of ferredoxin and thioredoxin in spinach and glutaredoxin in \emph{E. coli}. Start and stop positions, taken from UniProt, identify the protein chain excluding initiator methionines or signal peptides.}
+    \item{\code{midpoint/*.fasta}}{FASTA sequence files for the redoxins.}
     \item{\code{protein_refseq61.csv.xz}}{Amino acid compositions of proteins in different organisms, based on RefSeq release 61 (see \code{extdata/refseq} for an updated file). A trimmed version of this file was previously present in \pkg{CHNOSZ} (to version 1.3.3). Here, the columns are \code{protein} (\dQuote{refseq}), \code{organism} (taxonomic id), \code{ref} (names of RefSeq source files (followed by number of sequences and number of amino acids) [organism name in square brackets]), \code{abbrv} (total number of amino acids), \code{chains} (1). The remaining columns have the average frequency of each amino acid in the proteins.}
     \item{\code{prep.R}}{Code use to prepare the data files from various sources.}
   }

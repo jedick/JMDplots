@@ -12,6 +12,7 @@ aoscp1 <- function(pdf = FALSE) {
   # start plot
   if(pdf) pdf("aoscp1.pdf", width=10, height=5, family="Times")
   par(mfrow=c(1, 2))
+  par(las = 1)
 
   ## the codon stuff
   file <- system.file("/extdata/aoscp/codons.csv", package = "JMDplots")
@@ -133,6 +134,7 @@ aoscp2 <- function(pdf = FALSE) {
   legend("topright", legend="all human proteins        ", bty="n")
   label.figure("a", paren = TRUE, italic = TRUE)
   # HUMAN QQ plot
+  par(las = 1)
   # to reduce file size, plot only ~10% of the points between the 5% and 95% quantiles
   len <- length(ZC.HUMAN)
   # indices for 10% of all the points
@@ -468,3 +470,49 @@ aoscp6 <- function(pdf = FALSE) {
   if(pdf) invisible(dev.off())
 }
 
+# ZC of ferredoxin, thioredoxin, and glutaredoxin vs midpoint reduction potential
+aoscp99 <- function(pdf = FALSE) {
+  # read data
+  file <- system.file("extdata/aoscp/midpoint.csv", package = "JMDplots")
+  dat <- read.csv(file, as.is=TRUE)
+  # add proteins, with start-stop arguments to drop signal sequences
+  aa <- thermo()$protein[0, ]
+  for(i in 1:nrow(dat)) {
+    file <- system.file(paste("extdata/aoscp/midpoint/", dat$id[i] ,".fasta", sep=""), package = "JMDplots")
+    aa <- rbind(aa, read.fasta(file, start=dat$start[i], stop=dat$stop[i]))
+  }
+  # make ferredoxin-thioredoxin reductase dimer (variable chain/catalytic chain)
+  iFTR <- grep("FTR", dat$protein)
+  aa[iFTR[1], 6:24] <- colSums(aa[iFTR, 6:24])
+  aa <- aa[-iFTR[2], ]
+  dat$protein[iFTR[1]] <- paste(dat$protein[iFTR], collapse=":")
+  dat <- dat[-iFTR[2], ]
+  # calculate ZC
+  ZC <- ZC(protein.formula(aa))
+  # use different pch for E. coli and spinach
+  pch <- rep(19, length(ZC))
+  pch[dat$organism=="spinach"] <- 0
+  # start plot
+  if(pdf) pdf("aoscp99.pdf", width=6, height=5, family="Times")
+  par(las = 1)
+  plot(dat$E0, ZC, pch=pch, xlim=c(-450, -100), ylim=c(-0.28, -0.04),
+    xlab=expression(list(italic(E)*degree*"'", mV)),
+    ylab=expression(italic(Z)[C]))
+  # add dashed lines
+  lines(dat$E0[dat$organism=="ecoli"], ZC[dat$organism=="ecoli"], lty=2)
+  lines(dat$E0[dat$organism=="spinach"], ZC[dat$organism=="spinach"], lty=2)
+  # add labels
+  pos <- numeric(length(ZC))
+  pos[dat$organism=="ecoli"] <- 4
+  pos[dat$organism=="spinach"] <- 2
+  dx <- dy <- numeric(length(ZC))
+  dx[dat$protein=="DsbA"] <- -10
+  dy[dat$protein=="DsbA"] <- -0.012
+  dx[dat$protein=="DsbC"] <- -20
+  dy[dat$protein=="DsbC"] <- -0.012
+  text(dat$E0+dx, ZC+dy, dat$protein, pos=pos)
+  # add legend
+  legend("bottomright", pch=c(19, 0), legend=c(expression(italic("E. coli")), "spinach"))
+  # done!
+  if(pdf) invisible(dev.off())
+}
