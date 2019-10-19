@@ -22,7 +22,7 @@ Note that the symbols for Yellowstone and Iceland were swapped in the figure cap
 
 ## Eh-pH diagram for extracellular α-amylases (Figure 13)
 ```{r amylaseplot, message = FALSE, results = "hide", fig.align='center', out.width='100%', fig.width = 6, fig.height = 6}
-# make the first plot without names
+# use old data for methionine sidechain
 add.obigt("OldAA")
 basis("CHNOSe")
 basis(c("NH3", "H2S"), c(-6, -3))
@@ -44,4 +44,6 @@ ltext <- c(describe.property("T", 25), describe.property("T", 100))
 legend("topright", legend = ltext, lty = 1, col = c("black", "red"))
 ltext <- c("Soils (Bass Becking et al., 1960)", "Yellowstone (Spear et al., 2005)", "Iceland (Stefánsson and Arnórsson, 2002)")
 legend("bottomleft", legend = ltext, pch = c(20, 3, 17))
+# reset the database to use current parameters for later vignettes
+reset()
 ```

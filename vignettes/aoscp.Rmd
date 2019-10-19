@@ -12,6 +12,7 @@ vignette: >
 ```{r HTML, include=FALSE}
 ## some frequently used HTML expressions
 ZC <- "<i>Z</i><sub>C</sub>"
+Topt <- "<i>T</i><sub>opt</sub>"
 ```
 
 This vignette from the R package [JMDplots](https://github.com/jedick/JMDplots) contains plots from the paper by <a href="https://doi.org/10.1098/rsif.2013.1095" title="Average oxidation state of carbon in proteins">Dick (2014)</a>.
@@ -50,5 +51,11 @@ knitr::include_graphics("aoscp4.pdf")
 ```{r aoscp5, message = FALSE, echo = 1, fig.align='center', out.width='100%', out.height='420px'}
 aoscp5(TRUE)
 knitr::include_graphics("aoscp5.pdf")
+```
+
+## `r ZC` and `r Topt` of different rubiscos and thermodynamic comparison (Figure 6)
+```{r aoscp6, message = FALSE, echo = 1, fig.align='center', out.width='100%', out.height='420px'}
+aoscp6(TRUE)
+knitr::include_graphics("aoscp6.pdf")
 ```
 

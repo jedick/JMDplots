@@ -16,7 +16,7 @@ export(
   # Nif-encoding genomes 20191015
   "NifProteomes",
   # aoscp paper 20191018
-  "aoscp1", "aoscp2", "aoscp3", "aoscp4", "aoscp5",
+  "aoscp1", "aoscp2", "aoscp3", "aoscp4", "aoscp5", "aoscp6",
   "yeast.aa", "yeastgfp", "yeast.ZC",
   # scsc paper 20191019
   "scsc2", "scsc3"
@@ -37,7 +37,7 @@ importFrom("CHNOSZ",
   # third batch: gradH2O
   "protein.formula",
   # fourth batch: aoscp
-  "nucleic.formula",
+  "nucleic.formula", "convert", "protein.length", "read.fasta",
   # fifth batch: scsc
   "aasum", "add.protein", "label.plot"
 )

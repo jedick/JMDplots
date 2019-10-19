@@ -395,3 +395,76 @@ aoscp5 <- function(pdf = FALSE) {
   if(pdf) invisible(dev.off())
 }
 
+# ZC and Topt of different rubiscos and thermodynamic comparison
+aoscp6 <- function(pdf = FALSE) {
+  # start plot
+  if(pdf) pdf("aoscp6.pdf", width=8, height=5, family="Times")
+  layout(matrix(c(rep(c(1,1,1,1,1,2,2,2), 2), rep(c(1,1,1,1,1,3,3,3), 3)), 5, byrow=TRUE))
+  par(mar=c(5, 5, 4, 3))
+  par(mgp=c(2.8, 1, 0))
+  par(cex=0.9)
+  par(las = 1)
+  ## rubisco ZC: read ID's and T ranges
+  file <- system.file("extdata/aoscp/rubisco.csv", package = "JMDplots")
+  dat <- read.csv(file)
+  Topt <- (dat$T1 + dat$T2)/2
+  # add proteins
+  aa <- thermo()$protein[0, ]
+  for(ID in dat$ID) {
+    file <- system.file(paste("extdata/aoscp/rubisco/", ID ,".fasta", sep=""), package = "JMDplots")
+    aa <- rbind(aa, read.fasta(file))
+  }
+  # calculate ZC
+  ZC <- ZC(protein.formula(aa))
+  # plot symbols according to domain
+  pch <- ZC
+  pch[dat$domain=="A"] <- 2
+  pch[dat$domain=="B"] <- 1
+  pch[dat$domain=="E"] <- 0
+  plot(Topt, ZC, pch=pch, cex=2,
+    xlab=expression(list(italic(T)[opt], degree*C)),
+    ylab=expression(italic(Z)[C])
+  )
+  # add numeric points
+  text(Topt, ZC, rep(1:9, 3), cex=0.8)
+  # add legend
+  legend("topright", legend=c("Archaea", "Bacteria", "Eukaryota"), pch=c(2, 1, 0), pt.cex=2)
+  label.figure("a", paren = TRUE, italic = TRUE)
+  ## Gibbs energy of formation of selected RuBisCO as a function of Eh
+  # grab some proteins from organisms in the 23-30 degC range
+  IDs <- c("Q12TQ0", "Q9ZI34", "P0C916", "P00874")
+  aa <- thermo()$protein[0, ]
+  for(ID in IDs) {
+    file <- system.file(paste("extdata/aoscp/rubisco/", ID ,".fasta", sep=""), package = "JMDplots")
+    aa <- rbind(aa, read.fasta(file))
+  }
+  ip <- add.protein(aa)
+  # set up basis species and calculate affinities
+  basis("CHNOSe")
+  a <- affinity(Eh=c(-0.4, 0), iprotein=ip)
+  # plot 1: Gibbs energy per residue
+  a.res <- mapply("/", a$values, protein.length(aa))
+  G.res <- convert(a.res, "G")
+  par(mar=c(4, 4, 1, 1))
+  plot(c(-0.4, 0.0), c(-50, 200), type="n", xlab=axis.label("Eh"),
+    ylab=expression(list(Delta*italic(G), kcal~"(mol residue)"^{-1})~"  "), las=1)
+  for(i in 1:length(IDs)) lines(a$vals[[1]], G.res[, i]/1000, lty=i)
+  label.figure("b", paren = TRUE, italic = TRUE)
+  # plot 2: Gibbs energy per residue, minus that of T. ferrooxidans
+  G.res.mean <- G.res - G.res[, 3]
+  plot(c(-0.4, 0.0), c(-1, 2), type="n", xlab=axis.label("Eh"),
+    ylab=expression(list(Delta*Delta*italic(G), kcal~"(mol residue)"^{-1})), las=1)
+  # identify the minimum
+  imin <- max.col(-G.res.mean)
+  # highlight the minimum value
+  for(i in 1:length(IDs)) lines(a$vals[[1]][i==imin], G.res.mean[, i][i==imin]/1000, col="lightgrey", lwd=8)
+  # plot all the lines
+  for(i in 1:length(IDs)) lines(a$vals[[1]], G.res.mean[, i]/1000, lty=i, lwd=1.5)
+  label.figure("c", paren = TRUE, italic = TRUE)
+  # add legend
+  legend("topleft", lty=1:4, lwd=1.5, bty="n", legend=c(expression(italic(M.~burtonii)), expression(italic(B.~japonicum)),
+    expression(italic(T.~ferrooxidans)), expression(italic(Z.~mays))))
+  # done!
+  if(pdf) invisible(dev.off())
+}
+
