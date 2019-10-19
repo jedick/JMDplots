@@ -38,7 +38,23 @@ Please refer to the supporting information of the papers for the original script
       These files are provided to illustrate the usage of user-provided data sets; see \code{\link{subsurface}}.
     }
 
-    \item{\code{organisms}}{
+    \item{\code{organisms/Sce.csv.xz}}{
+      Data frame of amino acid composition of 6716 proteins from the \emph{Saccharomyces} Genome Database (SGD).
+      Values in the first three columns are the \code{ORF} names of proteins, \code{SGDID}, and \code{GENE} names.
+      The remaining twenty columns (\code{ALA}..\code{VAL}) contain the numbers of the respective amino acids in each protein.
+      The sources of data for \samp{Sce.csv} are the files \samp{protein_properties.tab} and \samp{SGD_features.tab} (for the gene names), downloaded from \url{http://www.yeastgenome.org} on 2013-08-24.
+      A shorter version of this file was previously present in \pkg{CHNOSZ} (to version 1.3.3).
+      See \code{\link{yeast.aa}}
+    }
+
+    \item{\code{organisms/yeastgfp.csv.xz}}{
+      Has 28 columns; the names of the first five are \code{yORF}, \code{gene name}, \code{GFP tagged?}, \code{GFP visualized?}, and \code{abundance}.
+      The remaining columns correspond to the 23 subcellular localizations considered in the YeastGFP project (Huh et al., 2003 and Ghaemmaghami et al., 2003) and hold values of either \code{T} or \code{F} for each protein.
+      \samp{yeastgfp.csv} was downloaded on 2007-02-01 from http://yeastgfp.ucsf.edu using the Advanced Search, setting options to download the entire dataset and to include localization table and abundance, sorted by orf number.
+      See \code{\link{yeastgfp}}.
+    }
+
+    \item{\code{organisms/ecoli.rds}}{
       Amino acid compositions of proteins from \emph{E. coli}, used in \code{\link{gradH2O1}}.
       See \code{\link{organisms}}.
     }

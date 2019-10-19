@@ -166,22 +166,6 @@ aoscp2 <- function(pdf = FALSE) {
   #print(t.test(ZC.HUMAN, ZC.membrane))
 }
 
-# calculate ZC of proteins in given subcellular location
-yeast.ZC <- function(location) {
-  # get proteins from SGD_associations.csv
-  file <- system.file("/extdata/aoscp/SGD_associations.csv", package = "JMDplots")
-  w <- read.csv(file, as.is=TRUE)
-  ip <- grep(location, w$associations)
-  accession <- w$accession[ip]
-  aa <- yeast.aa(accession)
-  # take out NAs - accession not found
-  ina <- is.na(aa$chains) 
-  aa <- aa[!ina, ]
-  # calculate ZC
-  ZC <- ZC(protein.formula(aa))
-  return(ZC)
-}
-
 # draw yeast cell color-coded with median ZC of proteins in different locations
 aoscp3 <- function(png=FALSE, outline=FALSE) {
   # set 'png' to TRUE to make the base plot (no labels)
@@ -214,8 +198,7 @@ aoscp3 <- function(png=FALSE, outline=FALSE) {
   #  "median", round(ZC.median[i], 3), "mean", round(ZC.mean[i], 3)))
   # convert ZC median in a given min/max range to the interval [0, 1]
   ZCmin <- -0.21
-#  ZCmax <- -0.095
-  ZCmax <- -0.08
+  ZCmax <- -0.095
   ZC01 <- (ZC.median-ZCmin)/(ZCmax-ZCmin)
   # adjust bias so cytoplasm is close to white
   cR <- colorRamp(c("black", "red", "white", "blue"), bias=1.085)
@@ -230,12 +213,12 @@ aoscp3 <- function(png=FALSE, outline=FALSE) {
     plot.new()
     # get dimensions from outline PNG
     file <- system.file("/extdata/aoscp/cell/outline.png", package = "JMDplots")
-    img <- readPNG(file)
+    img <- png::readPNG(file)
     if(outline) ZC <- list(outline=NULL, extracellular=NULL)
     # loop over locations
     for(j in 1:length(ZC)) {
       file <- system.file(paste0("/extdata/aoscp/cell/", names(ZC)[j], ".png"), package = "JMDplots")
-      img <- readPNG(file)
+      img <- png::readPNG(file)
       if(!outline) {
         # points are where the alpha is not zero
         isthere <- img[, , 4]!=0

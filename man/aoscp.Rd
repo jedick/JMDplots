@@ -4,7 +4,6 @@
 \alias{aoscp1}
 \alias{aoscp2}
 \alias{aoscp3}
-\alias{yeast.ZC}
 \title{Plots from oxidation state of carbon paper}
 \description{
 Plots from the paper by Dick (2014).
@@ -14,14 +13,12 @@ Plots from the paper by Dick (2014).
   aoscp1(pdf = FALSE)
   aoscp2(pdf = FALSE)
   aoscp3(png = FALSE, outline = FALSE)
-  yeast.ZC(location)
 }
 
 \arguments{
   \item{pdf}{logical, make a PDF file?}
   \item{png}{logical, make a PNG file?}
   \item{outline}{logical, draw only the outlines?}
-  \item{location}{character, one-letter code for subcellular location from the \emph{Saccharomyces} Genome Database}
 }
 
 \details{

@@ -16,7 +16,8 @@ export(
   # Nif-encoding genomes 20191015
   "NifProteomes",
   # aoscp paper 20191018
-  "aoscp1", "aoscp2", "yeast.ZC", "aoscp3"
+  "aoscp1", "aoscp2", "aoscp3",
+  "yeast.aa", "yeastgfp", "yeast.ZC"
 )
 
 # imports from CHNOSZ
@@ -34,7 +35,7 @@ importFrom("CHNOSZ",
   # third batch: gradH2O
   "protein.formula",
   # fourth batch: aoscp
-  "nucleic.formula", "yeast.aa"
+  "nucleic.formula"
 )
 
 # imports from canprot
