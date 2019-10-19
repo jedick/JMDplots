@@ -11,8 +11,6 @@ export(
   "mplot", "mpage", "ppage", "mcomp", "pcomp",
   # grad_util 20191005
   "ZCAA", "H2OAA",
-  # organisms 20191006
-  "ecoli",
   # Nif-encoding genomes 20191015
   "NifProteomes",
   # aoscp paper 20191018

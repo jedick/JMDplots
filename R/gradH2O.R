@@ -60,6 +60,7 @@ gradH2O1 <- function(pdf = FALSE) {
   ZC.human <- ZC(pf.human)
 
   # get amino acid compositions of E. coli proteins (UniProt)
+  ecoli <- read.csv(system.file("/extdata/organisms/ecoli.csv.xz", package = "JMDplots"), as.is = TRUE)
   pf.ecoli <- protein.formula(ecoli)
   ZC.ecoli <- ZC(pf.ecoli)
 

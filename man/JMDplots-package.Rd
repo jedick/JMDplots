@@ -40,12 +40,7 @@ Please refer to the supporting information of the papers for the original script
     }
     \item{\code{organisms}}{
       Amino acid compositions of yeast and \emph{E. coli}, and subcellular location data for yeast.
-      See \code{\link{yeast}} and \code{\link{organisms}}.
-    }
-
-    \item{\code{organisms/ecoli.rds}}{
-      Amino acid compositions of proteins from \emph{E. coli}, used in \code{\link{gradH2O1}}.
-      See \code{\link{organisms}}.
+      See \code{\link{yeast}} and \code{\link{gradH2O}}.
     }
 
     \item{\code{refseq}}{
