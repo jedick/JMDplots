@@ -1,0 +1,3 @@
+revisit-yeast   Demo for revisit() with yeast proteins
+run.wjd-yeast   Demo for run.wjd() with yeast proteins
+test-wjd-yeast  Test for wjd() with yeast proteins

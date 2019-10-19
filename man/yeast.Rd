@@ -42,6 +42,31 @@ For \code{yeastgfp}, a list with elements named \code{protein} (names of protein
 If \code{location} is NULL, \code{yeastgfp} returns the names of all known locations, and if the length of \code{location} is >1, the \code{protein} and \code{abundance} values are lists of the results for each location.
 }
 
+\section{extdata/organisms}{
+  \describe{
+    \item{\code{Sce.csv.xz}}{
+      Data frame of amino acid composition of 6716 proteins from the \emph{Saccharomyces} Genome Database (SGD).
+      Values in the first three columns are the \code{ORF} names of proteins, \code{SGDID}, and \code{GENE} names.
+      The remaining twenty columns (\code{ALA}..\code{VAL}) contain the numbers of the respective amino acids in each protein.
+      The sources of data for \samp{Sce.csv} are the files \samp{protein_properties.tab} and \samp{SGD_features.tab} (for the gene names), downloaded from \url{http://www.yeastgenome.org} on 2013-08-24.
+      A shorter version of this file was previously present in \pkg{CHNOSZ} (to version 1.3.3).
+      Used in \code{yeast.aa}
+    }
+
+    \item{\code{yeastgfp.csv.xz}}{
+      Has 28 columns; the names of the first five are \code{yORF}, \code{gene name}, \code{GFP tagged?}, \code{GFP visualized?}, and \code{abundance}.
+      The remaining columns correspond to the 23 subcellular localizations considered in the YeastGFP project (Huh et al., 2003 and Ghaemmaghami et al., 2003) and hold values of either \code{T} or \code{F} for each protein.
+      \samp{yeastgfp.csv} was downloaded on 2007-02-01 from http://yeastgfp.ucsf.edu using the Advanced Search, setting options to download the entire dataset and to include localization table and abundance, sorted by orf number.
+      Used in \code{yeastgfp}.
+    }
+
+    \item{\code{TBD+05.csv}}{
+      lists genes with transcriptomic expression changes in carbon limitation stress response experiments in yeast (Tai et al., 2005). Used in an example in this help page.
+    }
+  }
+}
+
+
 \seealso{
 \code{\link{scsc}}
 }
@@ -71,7 +96,7 @@ basis(c("glucose", "H2O", "NH4+", "hydrogen", "SO4-2", "H+"),
 # the names of the experiments in TBD+05.csv
 expt <- c("Clim.aerobic.down", "Clim.aerobic.up",
   "Clim.anaerobic.down", "Clim.anaerobic.up")
-file <- system.file("extdata/abundance/TBD+05.csv", package="CHNOSZ")
+file <- system.file("extdata/organisms/TBD+05.csv", package="JMDplots")
 dat <- read.csv(file, as.is=TRUE)
 # yeast.aa: get the amino acid compositions
 # aasum: average them together
@@ -112,6 +137,6 @@ Ghaemmaghami, S., Huh, W., Bower, K., Howson, R. W., Belle, A., Dephoure, N., O'
 Huh, W. K., Falvo, J. V., Gerke, L. C., Carroll, A. S., Howson, R. W., Weissman, J. S. and O'Shea, E. K. (2003) Global analysis of protein localization in budding yeast. \emph{Nature} \bold{425}(6959), 686--691. \url{https://doi.org/10.1038/nature02026}
 
 Tai, S. L., Boer, V. M., Daran-Lapujade, P., Walsh, M. C., de Winde, J. H., Daran, J.-M. and Pronk, J. T. (2005) Two-dimensional transcriptome analysis in chemostat cultures: Combinatorial effects of oxygen availability and macronutrient limitation in \emph{Saccharomyces cerevisiae}. \emph{J. Biol. Chem.} \bold{280}, 437--447. \url{https://doi.org/10.1074/jbc.M410573200}
-}
 
-\concept{Protein properties}
+YeastGFP project. Yeast GFP Fusion Localization Database, http://yeastgfp.ucsf.edu; Current location: \url{http://yeastgfp.yeastgenome.org}
+}

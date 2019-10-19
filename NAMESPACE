@@ -17,7 +17,9 @@ export(
   "NifProteomes",
   # aoscp paper 20191018
   "aoscp1", "aoscp2", "aoscp3",
-  "yeast.aa", "yeastgfp", "yeast.ZC"
+  "yeast.aa", "yeastgfp", "yeast.ZC",
+  # scsc paper 20191019
+  "scsc2", "scsc3"
 )
 
 # imports from CHNOSZ
@@ -35,7 +37,9 @@ importFrom("CHNOSZ",
   # third batch: gradH2O
   "protein.formula",
   # fourth batch: aoscp
-  "nucleic.formula"
+  "nucleic.formula",
+  # fifth batch: scsc
+  "aasum", "add.protein", "label.plot"
 )
 
 # imports from canprot
@@ -53,7 +57,7 @@ importFrom("png", "readPNG")
 
 # imports from standard packages
 importFrom("grDevices", "dev.off", "cairo_pdf", "pdf", "blues9", "colorRampPalette",
-           "chull", "col2rgb", "rgb", "colorRamp")
+           "chull", "col2rgb", "rgb", "colorRamp", "heat.colors", "topo.colors")
 importFrom("graphics", "abline", "arrows", "axis", "box", "layout",
            "legend", "lines", "mtext", "par", "plot", "plot.new",
            "points", "rect", "text", "title", "smoothScatter", "strheight",

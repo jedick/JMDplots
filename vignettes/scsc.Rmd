@@ -1,0 +1,31 @@
+---
+title: "Two plots from yeast subcellular location paper (2009)"
+output: 
+  rmarkdown::html_vignette:
+    mathjax: null
+vignette: >
+  %\VignetteIndexEntry{Two plots from yeast subcellular location paper (2009)}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r HTML, include=FALSE}
+## some frequently used HTML expressions
+H2O <- "H<sub>2</sub>O"
+```
+
+This vignette from the R package JMDplots contains plots from the paper by [Dick (2009)](https://doi.org/10.1186/1752-0509-3-75).
+
+```{r JMDplots, message = FALSE, results = "hide"}
+library(JMDplots)
+```
+
+## Oxygen fugacity - activity of `r H2O` predominance diagrams (Figure 2)
+```{r scsc2, message = FALSE, echo = 1, fig.align='center', fig.width = 7, fig.height = 7, out.width='100%'}
+scsc2()
+```
+
+## Relative equilibrium abundances of proteins as a function of oxygen fugacity (Figure 3)
+```{r scsc3, message = FALSE, echo = 1, fig.align='center', fig.width = 7, fig.height = 5, out.width='100%'}
+scsc3()
+```
