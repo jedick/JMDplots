@@ -456,7 +456,7 @@ NifProteomes <- function() {
     # include only organisms with at least 1000 protein sequences
     i1000 <- refseq$chains[irefseq] >= 1000
     irefseq <- irefseq[i1000]
-    print(paste(type, "represented by", length(irefseq), "nonredundant genomes with at least 1000 protein sequences"))
+    #print(paste(type, "represented by", length(irefseq), "nonredundant genomes with at least 1000 protein sequences"))
     # get the amino acid composition from refseq
     AAcomp <- refseq[irefseq, ]
     # calculate ZC and nH2O

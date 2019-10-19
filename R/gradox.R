@@ -106,10 +106,10 @@ gradox3 <- function(mout, pout, pdf=FALSE) {
   # legend
   opar <- par(mar=c(1, 0.2, 1, 0.2))
   plot.new()
-  pcomp(parts="legend")
+  pcomp(parts="legend", yline = 3.4)
   par(opar)
   # metatranscriptomes
-  pcomp(mout, pout, "MT", parts="plot")
+  pcomp(mout, pout, "MT", parts="plot", yline = 3.4)
   title(main="Metatranscriptomes")
   label.figure("B", font=2, cex=1.7, yfrac=0.955)
   if(pdf) invisible(dev.off())
