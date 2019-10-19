@@ -344,3 +344,54 @@ aoscp4 <- function(pdf = FALSE) {
   if(pdf) invisible(dev.off())
 }
 
+# average oxidation state of carbon in proteins from different organisms
+# adapted from ?protein.formula
+aoscp5 <- function(pdf = FALSE) {
+  if(pdf) pdf("aoscp5.pdf", width=10, height=6, family="Times")
+  par(mar=c(7, 4.5, 2, 2))
+  par(las = 1)
+  # get amino acid compositions of microbial proteins 
+  # generated from the RefSeq database 
+  file <- system.file("/extdata/aoscp/protein_refseq61.csv.xz", package = "JMDplots")
+  aa <- read.csv(file, as.is = TRUE)
+  # calculate ZC
+  ip <- add.protein(aa)
+  pf <- protein.formula(ip)
+  zc <- ZC(pf)
+  ## save the calculated values in out/ZC_refseq.csv
+  #name <- gsub("]$","",unlist(lapply(lapply(strsplit(aa$ref, ")[", fixed=TRUE), rev), "[", 1)))
+  #out <- data.frame(taxid=aa$organism, name=name, length=aa$abbrv, ZC=round(zc, 4))
+  #write.csv(out, "out/ZC_refseq.csv", row.names=FALSE, quote=2)
+  # only use those organisms with a minimum
+  # number of sequenced bases
+  ibig <- as.numeric(aa$abbrv) >= 50000
+  ip <- ip[ibig]
+  aa <- aa[ibig, ]
+  zc <- zc[ibig]
+  # the organism names we search for
+  # "" matches all organisms
+  terms <- c("Natr", "Halo", "Rhodo", "Acido", "Methylo",
+    "Chloro", "Nitro", "Desulfo", "Geo", "Methano",
+    "Thermo", "Pyro", "Sulfo",
+    "Streptomyces", "Mycobacterium", "Pseudomonas", "Escherichia", "Salmonella", 
+    "Vibrio", "Bacteroides", "Lactobacillus", "Staphylococcus", "Streptococcus",
+    "Listeria", "Bacillus", "Clostridium", "Mycoplasma", "Buchnera", "")
+  nterms <- length(terms)
+  tps <- thermo()$protein$ref[ip]
+  plot(0, 0, xlim=c(1, nterms), ylim=c(-0.35, -0.05), pch="",
+    ylab=expression(italic(Z)[C]),
+    xlab="", xaxt="n", mar=c(6, 3, 1, 1))
+  # set seed for reproducible jitter
+  set.seed(101)
+  for(i in 1:nterms) {
+    it <- grep(terms[i], tps)
+    zct <- zc[it]
+    #print(paste(terms[i], round(mean(zct), 3)))
+    if(i < 14) factor <- 1 else factor <- 0.5
+    points(jitter(rep(i, length(zct)), factor), zct, pch=20, cex=0.7)
+  }
+  terms[terms==""] <- paste("all", length(ip))
+  axis(1, 1:nterms, terms, las=2)
+  if(pdf) invisible(dev.off())
+}
+

@@ -16,7 +16,7 @@ export(
   # Nif-encoding genomes 20191015
   "NifProteomes",
   # aoscp paper 20191018
-  "aoscp1", "aoscp2", "aoscp3", "aoscp4",
+  "aoscp1", "aoscp2", "aoscp3", "aoscp4", "aoscp5",
   "yeast.aa", "yeastgfp", "yeast.ZC",
   # scsc paper 20191019
   "scsc2", "scsc3"

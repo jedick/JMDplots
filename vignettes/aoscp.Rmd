@@ -46,3 +46,9 @@ aoscp4(TRUE)
 knitr::include_graphics("aoscp4.pdf")
 ```
 
+## Average oxidation state of carbon in proteins from different organisms (Figure 5)
+```{r aoscp5, message = FALSE, echo = 1, fig.align='center', out.width='100%', out.height='420px'}
+aoscp5(TRUE)
+knitr::include_graphics("aoscp5.pdf")
+```
+
