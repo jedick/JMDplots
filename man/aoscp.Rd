@@ -4,6 +4,7 @@
 \alias{aoscp1}
 \alias{aoscp2}
 \alias{aoscp3}
+\alias{aoscp4}
 \title{Plots from oxidation state of carbon paper}
 \description{
 Plots from the paper by Dick (2014).
@@ -28,6 +29,7 @@ This table gives a brief description of each function.
   \code{aoscp1} \tab \ZC of amino acids vs \ZC of RNA codons and hydropathy index of amino acids \cr
   \code{aoscp2} \tab Histograms of \ZC of all human proteins and human membrane proteins \cr
   \code{aoscp3} \tab Drawing of yeast cell color-coded with median ZC of proteins in different locations \cr
+  \code{aoscp4} \tab \ZC and Eh ranges in yeast and ER-cytoplasm electron-transfer scheme \cr
 }
 }
 

@@ -286,3 +286,61 @@ aoscp3 <- function(png=FALSE, outline=FALSE) {
     invisible(dev.off())
   }
 }
+
+# ZC and Eh ranges in yeast and ER-cytoplasm electron-transfer scheme
+aoscp4 <- function(pdf = FALSE) {
+  ## start plot
+  if(pdf) pdf("aoscp4.pdf", width=8, height=4, family="Times")
+  par(mfrow=c(1, 2))
+  par(mgp=c(2.8, 1, 0))
+  par(mar=c(4, 4, 1, 1))
+  par(las = 1)
+  ## make ZC-Eh plot for cell compartments
+  dat <- data.frame(
+    location = c("C", "M", "E", "V", "X"),
+    Eh.min = c(-320, -360, -208, -160, -150),
+    Eh.max = c(-240, -255, -133, 100, 160)
+  )
+  plot(c(-350, 0), c(-0.25, -0.05), type="n", 
+    xlab="Eh, mV", ylab=expression(italic(Z)[C]))
+  for(i in 1:nrow(dat)) {
+    ZC <- yeast.ZC(dat$location[i])
+    rect(dat$Eh.min[i], fivenum(ZC)[2], dat$Eh.max[i], fivenum(ZC)[4])
+  }
+  # it's easier just to place the labels manually
+  text(-320, -0.086, "cytoplasm", adj=0)
+  text(-360, -0.196, "mitochondrion", adj=0)
+  text(-178, -0.245, "ER", adj=1)
+  text(-120, -0.228, "vacuole", adj=0)
+  text(-150, -0.048, "extracellular", adj=0)
+  # add plot label (a)
+  par(xpd=NA)
+  label.figure("a", paren = TRUE, italic = TRUE)
+  ## to plot protein electron donating scheme ER-cytoplasm
+  par(mar=c(0, 1, 0, 0))
+  plot.new()
+  plot.window(c(-2, 2), c(-1.7, 1.7))
+  draw.arc(-0.5, -1.2, deg1=10, deg2=170)
+  draw.arc(-0.5, 1.2, deg1=190, deg2=350)
+  # separate and label compartments
+  lines(c(-0.5, -0.5), c(-1.5, 1.5), lty=2)
+  text(-1.5, 0, "ER")
+  text(0.5, 0, "cytoplasm")
+  # label Eh
+  text(-1.5, 1.2, "-208 mV")
+  text(0.5, 1.2, "-320 mV")
+  text(1, 1.2, "Eh (GSH)", adj=0)
+  # label ZC
+  text(-1.5, -1.2, "-0.19")
+  text(0.5, -1.2, "-0.14")
+  text(1, -1.2, expression(italic(Z)[C]~"(protein)"), adj=0)
+  # add electron arrow
+  arrows(-0.9, -0.4, -0.1, 0.4, length=0.2)
+  text(-0.3, 0, expression(italic(e)^-phantom()))
+  # add plot label (b)
+  par(xpd=NA)
+  label.figure("b", paren = TRUE, italic = TRUE)
+  ## done!
+  if(pdf) invisible(dev.off())
+}
+
