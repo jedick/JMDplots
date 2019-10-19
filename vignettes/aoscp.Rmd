@@ -31,3 +31,11 @@ knitr::include_graphics("aoscp1.pdf")
 aoscp2(TRUE)
 knitr::include_graphics("aoscp2.pdf")
 ```
+
+## Drawing of yeast cell color-coded with median `r ZC` of proteins in different locations (Figure 3)
+```{r aoscp3, message = FALSE, echo = 1:3, fig.align='center', out.width='100%', out.height='450px'}
+# first make a PNG with colored areas, then PDF with labels
+aoscp3(TRUE)
+aoscp3()
+knitr::include_graphics("aoscp3.pdf")
+```

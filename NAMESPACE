@@ -16,7 +16,7 @@ export(
   # Nif-encoding genomes 20191015
   "NifProteomes",
   # aoscp paper 20191018
-  "aoscp1", "aoscp2"
+  "aoscp1", "aoscp2", "yeast.ZC", "aoscp3"
 )
 
 # imports from CHNOSZ
@@ -34,7 +34,7 @@ importFrom("CHNOSZ",
   # third batch: gradH2O
   "protein.formula",
   # fourth batch: aoscp
-  "nucleic.formula"
+  "nucleic.formula", "yeast.aa"
 )
 
 # imports from canprot
@@ -48,15 +48,16 @@ importFrom("canprot",
 # imports from other packages
 importFrom("shiny", "fluidPage", "includeCSS", "shinyApp")
 importFrom("timevis", "renderTimevis", "timevis", "timevisOutput")
+importFrom("png", "readPNG")
 
 # imports from standard packages
 importFrom("grDevices", "dev.off", "cairo_pdf", "pdf", "blues9", "colorRampPalette",
-           "chull", "col2rgb", "rgb")
+           "chull", "col2rgb", "rgb", "colorRamp")
 importFrom("graphics", "abline", "arrows", "axis", "box", "layout",
            "legend", "lines", "mtext", "par", "plot", "plot.new",
            "points", "rect", "text", "title", "smoothScatter", "strheight",
-           "polygon", "hist")
+           "polygon", "hist", "plot.window", "rasterImage")
 importFrom("stats", "lm", "na.omit", "predict", "sd", "predict.lm", "residuals",
-           "qqline", "qqnorm", "quantile")
+           "qqline", "qqnorm", "quantile", "median")
 importFrom("utils", "read.csv", "demo", "packageVersion", "tail")
 
