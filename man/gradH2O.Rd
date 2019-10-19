@@ -38,8 +38,17 @@ This table gives a brief description of each function.
 }
 }
 
+\section{extdata/gradH2O}{
+  \describe{
+    \item{\code{MGP}}{Amino acid compositions sampled from metagenomically derived protein sequences, generated as described in \code{\link{gradox}}.}
+    \item{\code{Nif_homolog_genomes.csv}, \code{Nif_homolog_genomes.R}}{Names of genomes (organisms) containing different nitrogenase (Nif) homologs, extracted from Supplemental Table 1A of Poudel et al. (2018). To the source table have been added the columns \samp{Refseq.name} and \samp{taxid}, which contain the closest matching genome name in the RefSeq database (see \code{\link{JMDplots-package}}) and corresponding taxonomic ID. The R file is the script used to make \code{Nif_homolog_genomes.csv} from the source table.}
+  }
+}
+
 \references{
 Dick, J. M., Tan, J. and Yu, M. (2019) Geochemistry of metagenomes: Distinct compositional signatures of environmental redox and salinity gradients. \emph{(preprint)}
+
+Poudel, S. et al. (2018) Electron transfer to nitrogenase in different genomic and metabolic backgrounds. \emph{J. Bacteriol.} \bold{200}, e00757-17. \doi{10.1128/JB.00757-17}
 }
 
 \examples{
