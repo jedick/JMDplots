@@ -9,7 +9,7 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
-This vignette from the R package JMDplots contains plots from the paper by <a href="https://doi.org/10.3389/feart.2019.00180" title="CHNOSZ: Thermodynamic calculations and diagrams for geochemistry">Dick (2019)</a>.
+This vignette from the R package [JMDplots](https://github.com/jedick/JMDplots) contains plots from the paper by <a href="https://doi.org/10.3389/feart.2019.00180" title="CHNOSZ: Thermodynamic calculations and diagrams for geochemistry">Dick (2019)</a>.
 
 ```{r JMDplots, message = FALSE, results = "hide"}
 library(JMDplots)

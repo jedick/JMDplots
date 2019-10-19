@@ -1,15 +1,15 @@
 ---
-title: "One plot from group additivity paper (2006)"
+title: "One plot from amino acid group additivity paper (2006)"
 output: 
   rmarkdown::html_vignette:
     mathjax: null
 vignette: >
-  %\VignetteIndexEntry{One plot from group additivity paper (2006)}
+  %\VignetteIndexEntry{One plot from amino acid group additivity paper (2006)}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
 
-This vignette from the R package JMDplots contains one plot from the paper by <a href="https://doi.org/10.5194/bg-3-311-2006" title="Temperature, pressure, and electrochemical constraints on protein speciation: Group additivity calculation of the standard molal thermodynamic properties of ionized unfolded proteins">Dick et al. (2006)</a>.
+This vignette from the R package [JMDplots](https://github.com/jedick/JMDplots) contains one plot from the paper by <a href="https://doi.org/10.5194/bg-3-311-2006" title="Temperature, pressure, and electrochemical constraints on protein speciation: Group additivity calculation of the standard molal thermodynamic properties of ionized unfolded proteins">Dick et al. (2006)</a>.
 The code here depends on the CHNOSZ package.
 
 ```{r CHNOSZ, message = FALSE, results = "hide"}
