@@ -26,7 +26,7 @@ This table gives a brief description of each function.
 }
 }
 
-\section{\code{extdata/aaaq}}{
+\section{extdata/aaaq}{
   \describe{
     \item{\code{BKM60_Fig7.csv}}{Eh-pH values for normal, wet and waterlogged soils from Fig. 7 of Baas Becking et al. (1960).}
   }

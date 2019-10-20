@@ -11,9 +11,8 @@ vignette: >
 
 ```{r HTML, include=FALSE}
 ## some frequently used HTML expressions
-# use lowercase here because these tend to be variable names in the examples
-zc <- "<i>Z</i><sub>C</sub>"
-nh2o <- "<i>n</i><sub>H<sub>2</sub>O</sub>"
+ZC <- "<i>Z</i><sub>C</sub>"
+nH2O <- "<i>n</i><sub>H<sub>2</sub>O</sub>"
 ```
 
 This vignette from the R package [JMDplots](https://github.com/jedick/JMDplots) contains plots from the paper by <a href="gradH2O.html" title="Geochemistry of metagenomes: Distinct compositional signatures of environmental redox and salinity gradients">Dick et al. (2019)</a> (preprint).
@@ -28,31 +27,31 @@ gradH2O1(TRUE)
 knitr::include_graphics("gradH2O1.pdf")
 ```
 
-## `r zc` for selected redox gradients (Figure 2)
+## `r ZC` for selected redox gradients (Figure 2)
 ```{r gradH2O2, message = FALSE, echo = 1, fig.align='center', out.width='100%', out.height='450px'}
 gradH2O2(TRUE)
 knitr::include_graphics("gradH2O2.pdf")
 ```
 
-## `r nh2o`-`r zc` scatterplots for redox gradients and the Baltic Sea (Figure 3)
+## `r nH2O`-`r ZC` scatterplots for redox gradients and the Baltic Sea (Figure 3)
 ```{r gradH2O3, message = FALSE, echo = 1, fig.align='center', out.width='100%', out.height='350px'}
 gradH2O3(TRUE)
 knitr::include_graphics("gradH2O3.pdf")
 ```
 
-## `r nh2o` for Baltic Sea size fractions (Figure 4)
+## `r nH2O` for Baltic Sea size fractions (Figure 4)
 ```{r gradH2O4, message = FALSE, echo = 1, fig.align='center', out.width='100%', out.height='350px'}
 gradH2O4(TRUE)
 knitr::include_graphics("gradH2O4.pdf")
 ```
 
-## `r nh2o`-`r zc` for freshwater, marine, and hypersaline environments (Figure 5)
+## `r nH2O`-`r ZC` for freshwater, marine, and hypersaline environments (Figure 5)
 ```{r gradH2O5, message = FALSE, echo = 1, fig.align='center', out.width='100%', out.height='500px'}
 gradH2O5(TRUE)
 knitr::include_graphics("gradH2O5.pdf")
 ```
 
-## Mean differences of `r nh2o` and `r zc` for differentially expressed proteins in hyperosmotic stress (Figure 6)
+## Mean differences of `r nH2O` and `r ZC` for differentially expressed proteins in hyperosmotic stress (Figure 6)
 ```{r gradH2O6, message = FALSE, echo = 1, fig.align='center', out.width='100%', out.height='400px'}
 gradH2O6(TRUE)
 knitr::include_graphics("gradH2O6.pdf")

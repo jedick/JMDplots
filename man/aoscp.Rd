@@ -43,7 +43,7 @@ This table gives a brief description of each function.
 }
 }
 
-\section{\code{extdata/aoscp}}{
+\section{extdata/aoscp}{
   \describe{
     \item{\code{SGD_associations.csv}}{For yeast genes, this table lists the accessions, SGDID, and the association to cellular components in the Gene Ontology, derived from gene_association.sgd.gz, protein_properties.tab and go_terms.tab downloaded from \url{http://www.yeastgenome.org} on 2013-08-24. All gene associations with the NOT qualifier were removed, as were those without a matching entry in protein_properties.tab (e.g. RNA-coding genes).}
     \item{\code{ZC_HUMAN.csv}, \code{ZC_membrane.csv}}{Compilations of the values of \ZC for human proteins and human membrane proteins. Values in \code{ZC_HUMAN.csv} were calculated from protein sequences in HUMAN.fasta.gz, downloaded from \url{ftp://ftp.uniprot.org/pub/databases/uniprot/current_release/knowledgebase/proteomes/HUMAN.fasta.gz} on 2013-08-24 (file dated 2013-07-24). Values in \code{ZC_membrane.csv} were calculated from protein sequences in all *.fa files in Additional File 2 of Almén et al. (2009)}
