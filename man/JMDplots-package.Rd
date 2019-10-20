@@ -10,10 +10,6 @@ This package contains data and code used to make the plots in different papers b
 Each paper is identified with a project name, as listed in the table below.
 The plots are available in the corresponding vignettes in the package.
 
-Some papers are not included in this package.
-Many plots from the papers by Dick and Shock (2011 and 2013) are shown in the vignette \dQuote{Hot-spring proteins in CHNOSZ} (\url{../../CHNOSZ/doc/hotspring.pdf}).
-Most plots from the papers by Dick (2016 and 2017) are in the vignettes for \pkg{canprot} (\url{../../canprot/doc/index.html}).
-
 Note that the code in this package is not identical to that used in the papers, but has been minimally modified to be included in this package.
 Please refer to the supporting information of the papers for the original scripts.
 }
@@ -25,15 +21,13 @@ Please refer to the supporting information of the papers for the original script
     \item \code{\link{gradox}} - Carbon oxidation state of metagenomes in redox gradients (Dick et al., 2019a)
     \item \code{\link{aoscp}} - Average oxidation state of carbon in proteins (Dick, 2014)
     \item \code{\link{scsc}} - Subcellular locations of \emph{Saccharomyces cerevisiae} (Dick, 2009)
-    \item \code{aaaq} - Amino acid group additivity for ionized proteins (Dick et al., 2006)
+    \item \code{\link{aaaq}} - Amino acid group additivity for ionized proteins (Dick et al., 2006)
   }
   These names are used for the vignettes and functions; the function names have figure numbers appended, as in \code{\link{gradox1}}.
-  Note that \code{aaaq} has a vignette but no functions.
   Data for each of the papers are stored in the corresponding directories under \code{extdata}; see the documentation page for each paper for more details.
   There are some additional directories, described below, with other data.
 
   \describe{
-    \item{\code{aaaq/BKM60_Fig7.csv}}{Eh-pH values for normal, wet and waterlogged soils from Fig. 7 of Baas Becking et al. (1960).}
     \item{\code{subsurface}}{
       Metagenome-derived amino acid compositions for two subsurface environments.
       These files are provided to illustrate the usage of user-provided data sets; see \code{\link{subsurface}}.
@@ -54,19 +48,35 @@ Please refer to the supporting information of the papers for the original script
 
 }
 
+\section{Other Papers}{
+
+Some papers are not included in this package.
+Many plots from the papers by Dick and Shock (2011 and 2013) are shown in the vignette \dQuote{Hot-spring proteins in CHNOSZ} (\url{../../CHNOSZ/doc/hotspring.pdf}).
+See also \code{demo("bison", "CHNOSZ")} for a colorful version of the \ZC plot for phyla in Bison Pool.
+Most plots from the papers by Dick (2016 and 2017) are in the vignettes for \pkg{canprot} (\url{../../canprot/doc/index.html}).
+See \code{demo("bugstab", "CHNOSZ")} for the relative stability diagram of microbial proteins in colorectal cancer.
+
+}
+
 \section{Requirements}{
 Requires \pkg{CHNOSZ} 1.3.2 for functionality used in \code{\link{chnszten}}.
 Requires \pkg{canprot} > 0.1.2 for updated plotting style in \code{\link[canprot]{diffplot}}.
 }
 
 \references{
-Baas Becking, L. G. M., Kaplan, I. R. and Moore, D. (1960) Limits of the natural environment in terms of pH and oxidation-reduction potentials. \emph{Journal of Geology} \bold{68}, 243--284. \url{http://www.jstor.org/stable/30059218}
-
 Dick, J. M., LaRowe, D. E. and Helgeson, H. C. (2006) Temperature, pressure, and electrochemical constraints on protein speciation: Group additivity calculation of the standard molal thermodynamic properties of ionized unfolded proteins. \emph{Biogeosciences} \bold{3}, 311--336. \doi{10.5194/bg-3-311-2006}
 
-Dick, J. M. (2009) Calculation of the relative metastabilities of proteins in subcellular compartments of \emph{Saccharomyces cerevisiae}. \emph{BMC Syst. Biol.} \bold{3},75. \doi{10.1186/1752-0509-3-75}
+Dick, J. M. (2009) Calculation of the relative metastabilities of proteins in subcellular compartments of \emph{Saccharomyces cerevisiae}. \emph{BMC Syst. Biol.} \bold{3}, 75. \doi{10.1186/1752-0509-3-75}
+
+Dick, J. M. and Shock, E. L. (2011) Calculation of the relative chemical stabilities of proteins as a function of temperature and redox chemistry in a hot spring. \emph{PLoS ONE} \bold{6}, e22782. \doi{10.1371/journal.pone.0022782}
+
+Dick, J. M. and Shock, E. L. (2013) A metastable equilibrium model for the relative abundance of microbial phyla in a hot spring. \emph{PLoS ONE} \bold{8}, e72395. \doi{10.1371/journal.pone.0072395}
 
 Dick, J. M. (2014) Average oxidation state of carbon in proteins. \emph{J. R. Soc. Interface} \bold{11}, 20131095. \doi{10.1098/rsif.2013.1095}
+
+Dick, J. M. (2016) Proteomic indicators of oxidation and hydration state in colorectal cancer. \emph{PeerJ} \bold{4}, e2238. \doi{10.7717/peerj.2238}
+
+Dick, J. M. (2017) Chemical composition and the potential for proteomic transformation in cancer, hypoxia, and hyperosmotic stress. \emph{PeerJ} \bold{5}, e3421 \doi{10.7717/peerj.3421}
 
 Dick, J. M. (2019) CHNOSZ: Thermodynamic calculations and diagrams for geochemistry. \emph{Front. Earth Sci.} \bold{7}:180. \doi{10.3389/feart.2019.00180}
 

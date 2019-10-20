@@ -17,7 +17,9 @@ export(
   "aoscp1", "aoscp2", "aoscp3", "aoscp4", "aoscp5", "aoscp6", "aoscp99",
   "yeast.aa", "yeastgfp", "yeast.ZC",
   # scsc paper 20191019
-  "scsc2", "scsc3"
+  "scsc2", "scsc3",
+  # aaaq paper 20191020
+  "aaaq4", "aaaq13"
 )
 
 # imports from CHNOSZ
@@ -37,7 +39,9 @@ importFrom("CHNOSZ",
   # fourth batch: aoscp
   "nucleic.formula", "convert", "protein.length", "read.fasta",
   # fifth batch: scsc
-  "aasum", "add.protein", "label.plot"
+  "aasum", "add.protein", "label.plot",
+  # sixth batch: aaaq
+  "water.lines"
 )
 
 # imports from canprot
