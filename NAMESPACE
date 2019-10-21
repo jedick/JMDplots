@@ -19,7 +19,7 @@ export(
   # scsc paper 20191019
   "scsc2", "scsc3",
   # aaaq paper 20191020
-  "aaaq4", "aaaq13"
+  "aaaq4", "aaaq10", "aaaq13"
 )
 
 # imports from CHNOSZ
@@ -41,7 +41,7 @@ importFrom("CHNOSZ",
   # fifth batch: scsc
   "aasum", "add.protein", "label.plot",
   # sixth batch: aaaq
-  "water.lines"
+  "water.lines", "pinfo", "ionize.aa"
 )
 
 # imports from canprot

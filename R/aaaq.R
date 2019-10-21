@@ -93,6 +93,64 @@ aaaq4 <- function(pdf = FALSE) {
   if(pdf) invisible(dev.off())
 }
 
+# net charge of proteins as a function of pH and T
+# moved from CHNOSZ/ionize.aa.Rd (LYSC_CHICK) and expanded 20191020
+aaaq10 <- function(pdf = FALSE) {
+  # set up plot
+  if(pdf) pdf("aaaq10.pdf", width = 6, height = 5)
+  layout(matrix(c(1, 2, 4, 3), nrow = 2))
+  par(mar = c(3, 3, 1.5, 1))
+  par(mgp = c(2, 0.5, 0))
+  par(xaxs = "i", yaxs = "i")
+  par(tcl = 0.4, las = 1)
+  # list with per-plot metadata
+  pldat <- list(
+    protein = c("LYSC_CHICK", "RNAS1_BOVIN", "NUC_STAAU"),
+    ymin = c(-25, -25, -30),
+    ymax = c(25, 25, 35),
+    expt = c("RT71", "NT67", "WG00"),
+    ref = c("Roxby and Tanford (1971)", "Nozaki and Tanford (1967)", "Whitten and Garc\u00EDa-\nMoreno E. (2000)")
+  )
+
+  for(i in 1:3) {
+    # start plot
+    plot(c(0, 14), c(pldat$ymin[i], pldat$ymax[i]), type = "n", xlab = "pH", ylab = "net charge (Z)")
+
+    # the rownumber of the protein in thermo()$protein
+    ip <- pinfo(pldat$protein[i])
+    # its amino acid composition
+    aa <- pinfo(ip)
+
+    # additive charges of unfolded protein at 25, 100, 150 degrees C, as a function of pH
+    pH <- seq(0, 14, 0.1)
+    Z.25 <- ionize.aa(aa, T = 25, pH = pH)[, 1]
+    Z.100 <- ionize.aa(aa, T = 100, pH = pH)[, 1]
+    Z.150 <- ionize.aa(aa, T = 150, pH = pH)[, 1]
+    lines(pH, Z.25)
+    lines(pH, Z.100, col="red")
+    lines(pH, Z.150, col="orange")
+
+    # suppress ionization of cysteine as if it was oxidized to form non-ionizable cystine disulfide bonds
+    Z.25.ox <- ionize.aa(aa, T = 25, pH = pH, suppress.Cys = TRUE)[, 1]
+    lines(pH, Z.25.ox, lty = 3, lwd = 2)
+
+    # add experimental points
+    file <- system.file(paste0("extdata/aaaq/", pldat$expt[i], ".csv"), package = "JMDplots")
+    expt <- read.csv(file)
+    points(expt$pH, expt$Z)
+    legend("topright", pch = 1, legend = pldat$ref[i], bty = "n")
+
+    title(main = pldat$protein[i], font.main = 1)
+    label.figure(letters[i], paren = TRUE, italic = TRUE)
+  }
+
+  # add figure legend
+  plot.new()
+  ltxt <- c("25 \u00B0C, oxidized Cys", "25 \u00B0C", "100 \u00B0C", "150 \u00B0C")
+  legend("center", ltxt, lty = c(3, 1, 1, 1), col = c(1, 1, 2, "orange"), cex = 1.2, lwd = 2, bty = "n")
+  if(pdf) invisible(dev.off())
+}
+
 # Eh-pH diagram for extracellular alpha-amylases
 aaaq13 <- function(pdf = FALSE) {
   if(pdf) pdf("aaaq13.pdf", width = 5, height = 4)

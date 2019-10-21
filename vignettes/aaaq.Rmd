@@ -1,10 +1,10 @@
 ---
-title: "Two plots from amino acid group additivity paper (2006)"
+title: "Three plots from amino acid group additivity paper (2006)"
 output: 
   rmarkdown::html_vignette:
     mathjax: null
 vignette: >
-  %\VignetteIndexEntry{Two plots from amino acid group additivity paper (2006)}
+  %\VignetteIndexEntry{Three plots from amino acid group additivity paper (2006)}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -24,6 +24,12 @@ library(JMDplots)
 ```{r aaaq4, message = FALSE, echo = 1, fig.align='center', out.width='80%', out.height='450px'}
 aaaq4(TRUE)
 knitr::include_graphics("aaaq4.pdf")
+```
+
+## Net charge of proteins as a function of pH and *T* (Figure 10)
+```{r aaaq10, message = FALSE, echo = 1, fig.align='center', out.width='90%', out.height='550px'}
+aaaq10(TRUE)
+knitr::include_graphics("aaaq10.pdf")
 ```
 
 ## Eh-pH diagram for extracellular α-amylases (Figure 13)
