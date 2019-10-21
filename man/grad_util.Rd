@@ -36,7 +36,16 @@ The contribution of \H2O from the terminal groups of proteins is counted, so sho
 
 \code{NifProteomes} calculates the mean and standard deviation of \ZC and \nH2O for proteomes encoding different homologs of nitrogenas (Nif-D, Nif-C, Nif-B, or Nif-A), as listed by Poudel et al. (2018).
 The organisms are limited to those that have at least 1000 RefSeq protein sequences, and any duplicated organism names are removed.
-See \code{\link{JMDplots-package}} for documentation of the data files.
+}
+
+\section{Files in extdata/gradH2O}{
+  \describe{
+    \item{\code{Nif_homolog_genomes.csv}, \code{Nif_homolog_genomes.R}}{
+      Names of genomes (organisms) containing different nitrogenase (Nif) homologs, extracted from Supplemental Table 1A of Poudel et al. (2018).
+      To the source table have been added the columns \samp{Refseq.name} and \samp{taxid}, which contain the closest matching genome name in release 95 of the RefSeq database (see \code{\link{JMDplots-package}}) and corresponding taxonomic ID.
+      The R file is the script used to make \code{Nif_homolog_genomes.csv} from the source table.
+    }
+  }
 }
 
 \references{

@@ -41,7 +41,10 @@ Please refer to the supporting information of the papers for the original script
       Total amino acid compositions of all proteins for each taxon (bacteria, archaea, and viral) in the NCBI Reference Sequence database, based on RefSeq release 95 of 2019-07-12 (O'Leary et al., 2016).
       This directory contains the scripts used to process the RefSeq files and resulting CSV file with amino acid compositions.
       \describe{
-        \item{\code{protein_refseq.csv.xz}}{The columns are arranged as follows: \code{protein} (\dQuote{refseq}), \code{organism} (taxonomic id), \code{ref} (organism name), \code{abbrv} (empty), \code{chains} (number of protein sequences for this organism). The remaining columns have the total counts of amino acids.}
+        \item{\code{protein_refseq.csv.xz}}{
+          The columns are arranged as follows: \code{protein} (\dQuote{refseq}), \code{organism} (taxonomic id), \code{ref} (organism name), \code{abbrv} (empty), \code{chains} (number of protein sequences for this organism).
+          The remaining columns have the total counts of amino acids.
+        }
       }
     }
   }

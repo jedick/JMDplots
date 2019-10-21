@@ -42,7 +42,7 @@ For \code{yeastgfp}, a list with elements named \code{protein} (names of protein
 If \code{location} is NULL, \code{yeastgfp} returns the names of all known locations, and if the length of \code{location} is >1, the \code{protein} and \code{abundance} values are lists of the results for each location.
 }
 
-\section{extdata/organisms}{
+\section{Files in extdata/organisms}{
   \describe{
     \item{\code{Sce.csv.xz}}{
       Data frame of amino acid composition of 6716 proteins from the \emph{Saccharomyces} Genome Database (SGD).
