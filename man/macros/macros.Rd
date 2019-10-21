@@ -9,3 +9,4 @@
 \newcommand{\pKa}{\ifelse{latex}{\eqn{\mathrm{p}K_\mathrm{a}}}{\ifelse{html}{\out{p<i>K</i><sub>a</sub>}}{pKa}}}
 % 20191021
 \newcommand{\T}{\ifelse{latex}{\eqn{T}}{\ifelse{html}{\out{<I>T</I>}}{T}}}
+\newcommand{\Topt}{\ifelse{latex}{\eqn{T_\mathrm{opt}}}{\ifelse{html}{\out{<I>T</I><sub>opt</sub>}}{Topt}}}
