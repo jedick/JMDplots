@@ -41,6 +41,7 @@ This table gives a brief description of each function.
 \section{Files in extdata/gradH2O}{
   \describe{
     \item{\code{MGP}}{Amino acid compositions sampled from metagenomically derived protein sequences, generated as described in \code{\link{gradox}}.}
+    \item{\code{mkrds.R}}{Script to make the RDS files from multiple CSV files produced by the \dQuote{ARAST} workflow.}
   }
 }
 

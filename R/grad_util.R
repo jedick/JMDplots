@@ -52,37 +52,55 @@ plotMG <- function(dataset="Guerrero_Negro_IMG_MG", plottype="bars",
   isprotein <- grepl("_MGP$", dataset) | grepl("_MTP$", dataset)
   # where to keep mean and high/lo (+/- SD) of ZC at each site
   CM <- GC <- ZClo <- ZCmean <- ZChi <- numeric()
-  # which paper is this dataset from?
-  if(any(sapply(names(gradox), grepl, dataset))) paper <- "gradox"
-  if(any(sapply(names(gradH2O), grepl, dataset))) paper <- "gradH2O"
-  # gradox or gradH2O data location in JMDplots package 20190928
-  if(is.null(datadir)) datadir <- system.file(paste0("extdata/", paper), package = "JMDplots")
+  # are we using user-supplied data?
+  user_data <- TRUE
+  if(is.null(datadir)) {
+    # which paper is this dataset from?
+    if(any(sapply(names(gradox), grepl, dataset))) paper <- "gradox"
+    if(any(sapply(names(gradH2O), grepl, dataset))) paper <- "gradH2O"
+    # gradox or gradH2O data location in JMDplots package 20190928
+    datadir <- system.file(paste0("extdata/", paper), package = "JMDplots")
+    user_data <- FALSE
+  }
   # set up for proteins or DNA
   if(isprotein) {
-    filestart <- paste0(datadir, "/MGP/", dataset)
+    if(user_data) filestart <- paste0(datadir, "/MGP/", dataset)
+    else {
+      rdsfile <- file.path(datadir, "MGP.rds")
+      filestart <- dataset
+    }
     if(H2O) ZCfun <- H2OAA else ZCfun <- ZCAA
     if(is.null(col)) col <- "darkgreen"
   } else {
     # data directory for DNA
-    filestart <- paste0(datadir, "/MGD/", dataset, "D")
+    if(user_data) filestart <- paste0(datadir, "/MGD/", dataset, "D")
+    else {
+      rdsfile <- file.path(datadir, "MGD.rds")
+      filestart <- paste0(dataset, "D")
+    }
     ZCfun <- ZCnuc
     if(is.null(col)) col <- "red"
   }
   # keep sample values for violin plot 20180515
   DNA <- data.frame(ZC=numeric(length(samples)*100), sample=character(length(samples)*100), stringsAsFactors=FALSE)
   meancomp <- NULL
+  # read the data from the RDS file 20191022
+  if(!user_data) RDS <- readRDS(rdsfile)
   for(i in 1:length(samples)) {
     sample <- samples[i]
     if(!is.null(taxid)) file <- paste0(filestart, "_", sample, "-", taxid, ".csv")
     else file <- paste0(filestart, "_", sample, ".csv")
     # use NA if the file is missing 20180529
-    if(!file.exists(file)) {
+    if(user_data) fexists <- file.exists(file)
+    else fexists <- file %in% names(RDS)
+    if(!fexists) {
       ZCmean <- c(ZCmean, NA)
       ZClo <- c(ZClo, NA)
       ZChi <- c(ZChi, NA)
       message(paste("missing file", file))
     } else {
-      mycomp <- read.csv(file, as.is=TRUE)
+      if(user_data) mycomp <- read.csv(file, as.is=TRUE)
+      else mycomp <- RDS[[file]]
       if(isprotein) {
         # calculate Cys+Met fraction 20180324
         CM <- c(CM, CMAA(mycomp))
@@ -204,13 +222,25 @@ plotMG <- function(dataset="Guerrero_Negro_IMG_MG", plottype="bars",
     RNA_ZClo <- RNA_ZCmean <- RNA_ZChi <- numeric()
     # keep sample values for violin plot 20180515
     RNA <- data.frame(ZC=numeric(length(samples)*100), sample=character(length(samples)*100), stringsAsFactors=FALSE)
+    # gradox or gradH2O data location in JMDplots package 20190928
+    if(!user_data) {
+      datadir <- system.file(paste0("extdata/", paper), package = "JMDplots")
+      rdsfile <- file.path(datadir, "MGR.rds")
+      RDS <- readRDS(rdsfile)
+      filestart <- paste0(dataset, "R")
+    }
     for(i in 1:length(samples)) {
       sample <- samples[i]
-      # gradox or gradH2O data location in JMDplots package 20190928
-      if(is.null(datadir)) datadir <- system.file(paste0("extdata/", paper), package = "JMDplots")
-      file <- paste0(datadir, "/MGR/", dataset, "R_", sample, ".csv")
-      if(file.exists(file)) {
-        myRNA <- read.csv(file, as.is=TRUE)
+      if(user_data) {
+        file <- paste0(datadir, "/MGR/", dataset, "R_", sample, ".csv")
+        fexists <- file.exists(file)
+      } else {
+        file <- paste0(filestart, "_", sample, ".csv")
+        fexists <- file %in% names(RDS)
+      }
+      if(fexists) {
+        if(user_data) myRNA <- read.csv(file, as.is=TRUE)
+        else myRNA <- RDS[[file]]
         myZC <- ZCfun(myRNA, "ribose")
         RNA_ZCmean <- c(RNA_ZCmean, mean(myZC))
         RNA_ZClo <- c(RNA_ZClo, mean(myZC) - sd(myZC))
