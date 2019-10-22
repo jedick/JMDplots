@@ -106,7 +106,7 @@ yeastgfp <- function(location=NULL, exclusive=TRUE) {
 # calculate ZC of proteins in given subcellular location
 yeast.ZC <- function(location) {
   # get proteins from SGD_associations.csv
-  file <- system.file("/extdata/aoscp/SGD_associations.csv", package = "JMDplots")
+  file <- system.file("/extdata/aoscp/SGD_associations.csv.xz", package = "JMDplots")
   w <- read.csv(file, as.is=TRUE)
   ip <- grep(location, w$associations)
   accession <- w$accession[ip]

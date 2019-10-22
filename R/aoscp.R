@@ -103,14 +103,18 @@ aoscp2 <- function(pdf = FALSE) {
   file <- system.file("/extdata/aoscp/ZC_HUMAN.csv.xz", package = "JMDplots")
   HUMAN <- read.csv(file)
   # only take sequences containing at least 50 amino acids
-  i50.HUMAN <- HUMAN$length >= 50
-  ZC.HUMAN <- HUMAN$ZC[i50.HUMAN]
+  if("length" %in% colnames(HUMAN)) {
+    i50.HUMAN <- HUMAN$length >= 50
+    ZC.HUMAN <- HUMAN$ZC[i50.HUMAN]
+  } else ZC.HUMAN <- HUMAN$ZC
   # read the membrane data file
-  file <- system.file("/extdata/aoscp/ZC_membrane.csv", package = "JMDplots")
+  file <- system.file("/extdata/aoscp/ZC_membrane.csv.xz", package = "JMDplots")
   membrane <- read.csv(file)
   # only take sequences containing at least 50 amino acids
-  i50.membrane <- membrane$length >= 50
-  ZC.membrane <- membrane$ZC[i50.membrane]
+  if("length" %in% colnames(membrane)) {
+    i50.membrane <- membrane$length >= 50
+    ZC.membrane <- membrane$ZC[i50.membrane]
+  } else ZC.membrane <- membrane$ZC
   # setup plot
   if(pdf) pdf("aoscp2.pdf", width=6.6, height=4.4, family="Times")
   layout(matrix(1:4, 2, 2, byrow=TRUE), widths=c(3, 1.5))
