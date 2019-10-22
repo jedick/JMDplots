@@ -11,7 +11,7 @@ Maintainer: Jeffrey Dick <jeff@chnosz.net>
 Depends: R (>= 3.1.0), CHNOSZ (>= 1.3.2), canprot (>= 0.1.2)
 Imports: shiny, timevis, png, plotrix
 Suggests: knitr, rmarkdown, KernSmooth
-Description: Code and data used to make plots in various papers by the author.
+Description: Code and data used to make plots from various papers by the author.
     The plots are shown in vignettes for each paper.
 Encoding: UTF-8
 License: GPL-2

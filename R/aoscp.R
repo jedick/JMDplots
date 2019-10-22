@@ -348,28 +348,38 @@ aoscp4 <- function(pdf = FALSE) {
 
 # average oxidation state of carbon in proteins from different organisms
 # adapted from ?protein.formula
-aoscp5 <- function(pdf = FALSE) {
+aoscp5 <- function(pdf = FALSE, file = NULL) {
   if(pdf) pdf("aoscp5.pdf", width=10, height=6, family="Times")
   par(mar=c(7, 4.5, 2, 2))
   par(las = 1)
-  # get amino acid compositions of microbial proteins 
-  # generated from the RefSeq database 
-  file <- system.file("/extdata/aoscp/protein_refseq61.csv.xz", package = "JMDplots")
-  aa <- read.csv(file, as.is = TRUE)
-  # calculate ZC
-  ip <- add.protein(aa)
-  pf <- protein.formula(ip)
-  zc <- ZC(pf)
-  ## save the calculated values in out/ZC_refseq.csv
-  #name <- gsub("]$","",unlist(lapply(lapply(strsplit(aa$ref, ")[", fixed=TRUE), rev), "[", 1)))
-  #out <- data.frame(taxid=aa$organism, name=name, length=aa$abbrv, ZC=round(zc, 4))
-  #write.csv(out, "out/ZC_refseq.csv", row.names=FALSE, quote=2)
-  # only use those organisms with a minimum
-  # number of sequenced bases
-  ibig <- as.numeric(aa$abbrv) >= 50000
-  ip <- ip[ibig]
-  aa <- aa[ibig, ]
-  zc <- zc[ibig]
+
+  # get amino acid compositions of microbial proteins generated from the RefSeq database 
+  #file <- "protein_refseq.csv.xz"
+  if(!is.null(file)) {
+    aa <- read.csv(file, as.is = TRUE)
+    # calculate ZC
+    ip <- add.protein(aa)
+    pf <- protein.formula(ip)
+    zc <- ZC(pf)
+    # get organism names
+    name <- gsub("]$","",unlist(lapply(lapply(strsplit(aa$ref, ")[", fixed=TRUE), rev), "[", 1)))
+    # get number of amino acids
+    naa <- as.numeric(aa$abbrv)
+    # save the calculated values in ZC_refseq.csv
+    out <- data.frame(taxid=aa$organism, name=name, length=naa, ZC=round(zc, 4))
+    write.csv(out, "ZC_refseq.csv", row.names=FALSE, quote=2)
+  } else {
+    # read the calculated values from ZC_refseq.csv
+    file <- system.file("extdata/aoscp/ZC_refseq.csv.xz", package = "JMDplots")
+    dat <- read.csv(file, as.is = TRUE)
+    name <- dat$name
+    naa <- dat$length
+    zc <- dat$ZC
+  }
+  # only use those organisms with a minimum sequence length
+  imin <- naa >= 50000
+  zc <- zc[imin]
+  name <- name[imin]
   # the organism names we search for
   # "" matches all organisms
   terms <- c("Natr", "Halo", "Rhodo", "Acido", "Methylo",
@@ -379,20 +389,19 @@ aoscp5 <- function(pdf = FALSE) {
     "Vibrio", "Bacteroides", "Lactobacillus", "Staphylococcus", "Streptococcus",
     "Listeria", "Bacillus", "Clostridium", "Mycoplasma", "Buchnera", "")
   nterms <- length(terms)
-  tps <- thermo()$protein$ref[ip]
   plot(0, 0, xlim=c(1, nterms), ylim=c(-0.35, -0.05), pch="",
     ylab=expression(italic(Z)[C]),
     xlab="", xaxt="n", mar=c(6, 3, 1, 1))
   # set seed for reproducible jitter
   set.seed(101)
   for(i in 1:nterms) {
-    it <- grep(terms[i], tps)
+    it <- grep(terms[i], name)
     zct <- zc[it]
     #print(paste(terms[i], round(mean(zct), 3)))
     if(i < 14) factor <- 1 else factor <- 0.5
     points(jitter(rep(i, length(zct)), factor), zct, pch=20, cex=0.7)
   }
-  terms[terms==""] <- paste("all", length(ip))
+  terms[terms==""] <- paste("all", length(zc))
   axis(1, 1:nterms, terms, las=2)
   if(pdf) invisible(dev.off())
 }

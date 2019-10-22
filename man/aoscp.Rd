@@ -18,7 +18,7 @@ Plots from the paper by Dick (2014).
   aoscp2(pdf = FALSE)
   aoscp3(png = FALSE, outline = FALSE)
   aoscp4(pdf = FALSE)
-  aoscp5(pdf = FALSE)
+  aoscp5(pdf = FALSE, file = NULL)
   aoscp6(pdf = FALSE)
   aoscp99(pdf = FALSE)
 }
@@ -27,6 +27,7 @@ Plots from the paper by Dick (2014).
   \item{pdf}{logical, make a PDF file?}
   \item{png}{logical, make a PNG file?}
   \item{outline}{logical, draw only the outlines?}
+  \item{file}{character, file with amino acid compositions of organisms}
 }
 
 \details{
@@ -41,6 +42,9 @@ This table gives a brief description of each function.
   \code{aoscp6} \tab \ZC and \Topt of different rubiscos and thermodynamic comparison \cr
   \code{aoscp99} \tab \ZC of ferredoxin, thioredoxin, and glutaredoxin vs midpoint reduction potential (unpublished) \cr
 }
+
+NOTE: for the default \code{file} = NULL in \code{aoscp5}, values of \ZC are taken from the packaged file \code{ZC_refseq.csv.xz} (see below).
+If \code{file} is not NULL, then value of \ZC are calculated from the amino acid compositions and the file \code{ZC_refseq.csv} is written to the working directory.
 }
 
 \section{Files in extdata/aoscp}{
@@ -63,10 +67,11 @@ This table gives a brief description of each function.
       Start and stop positions, taken from UniProt, identify the protein chain excluding initiator methionines or signal peptides.
     }
     \item{\code{midpoint/*.fasta}}{FASTA sequence files for the redoxins.}
-    \item{\code{protein_refseq61.csv.xz}}{
-      Amino acid compositions of proteins in different organisms, based on RefSeq release 61 (see \code{extdata/refseq} for an updated file).
-      A trimmed version of this file was previously present in \pkg{CHNOSZ} (to version 1.3.3).
-      Here, the columns are \code{protein} (\dQuote{refseq}), \code{organism} (taxonomic id), \code{ref} (names of RefSeq source files (followed by number of sequences and number of amino acids) [organism name in square brackets]), \code{abbrv} (total number of amino acids), \code{chains} (1).
+    \item{\code{ZC_refseq.csv.xz}}{
+      This file has the taxid, organism name, number of amino acids, and calculated \ZC in 6758 microbial organisms.
+      This file was created using \code{aoscp5(file = "protein_refseq.csv")}, where \code{"protein_refseq.csv"} has the average amino acid compositions of proteins in different organisms.
+      That file, which is based on RefSeq release 61, is in the Supplementary data of Dick (2014) (\url{https://royalsocietypublishing.org/doi/suppl/10.1098/rsif.2013.1095}); a trimmed version of the file was previously present in \pkg{CHNOSZ} (to version 1.3.3).
+      In that file, the columns are \code{protein} (\dQuote{refseq}), \code{organism} (taxonomic id), \code{ref} (names of RefSeq source files (followed by number of sequences and number of amino acids) [organism name in square brackets]), \code{abbrv} (total number of amino acids), \code{chains} (1).
       The remaining columns have the average frequency of each amino acid in the proteins.
     }
     \item{\code{prep.R}}{Code use to prepare the data files from various sources.}
