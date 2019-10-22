@@ -1,0 +1,18 @@
+CHANGES IN JMDplots 0.0.1
+-------------------------
+
+- 20190928 Started package with plots from gradox paper.
+
+- 20190929 Initial commit on GitHub. Added plots from chnszten paper.
+  (Supplementary plots are in second vignette.)
+
+- 20190930 Started adding plots from gradH2O paper.
+
+- 20191018 Added plots from aoscp paper.
+
+- 20191019 Added plots from scsc paper.
+
+- 20191020 Added plots from aaaq paper.
+
+- 20191021 Vignettes first posted on http://chnosz.net/JMDplots.
+  Forty plots in seven vignettes.
