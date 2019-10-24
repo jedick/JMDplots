@@ -51,7 +51,7 @@ plotMG <- function(dataset="Guerrero_Negro_IMG_MG", plottype="bars",
   # xlab: axis label: "layer", "depth", ...
   isprotein <- grepl("_MGP$", dataset) | grepl("_MTP$", dataset)
   # where to keep mean and high/lo (+/- SD) of ZC at each site
-  CM <- GC <- ZClo <- ZCmean <- ZChi <- numeric()
+  GRAVY <- GC <- ZClo <- ZCmean <- ZChi <- numeric()
   # are we using user-supplied data?
   user_data <- TRUE
   if(is.null(datadir)) {
@@ -102,8 +102,8 @@ plotMG <- function(dataset="Guerrero_Negro_IMG_MG", plottype="bars",
       if(user_data) mycomp <- read.csv(file, as.is=TRUE)
       else mycomp <- RDS[[file]]
       if(isprotein) {
-        # calculate Cys+Met fraction 20180324
-        CM <- c(CM, CMAA(mycomp))
+        # calculate GRAVY 20191024
+        GRAVY <- c(GRAVY, GRAVY(mycomp))
         # add basis argument (QEC or rQEC) here
         myZC <- ZCfun(mycomp, basis)
       } else {
@@ -274,7 +274,7 @@ plotMG <- function(dataset="Guerrero_Negro_IMG_MG", plottype="bars",
     # return ZC values
     outval <- list(DNA=ZCmean, RNA=RNA_ZCmean, GC=GC, group=group, meancomp=meancomp, abbrev=abbrev, techtype = techtype, dx = dx, dy = dy)
   } else {
-    outval <- list(AA=ZCmean, CM=CM, group=group, meancomp=meancomp, abbrev=abbrev, techtype = techtype, dx = dx, dy = dy)
+    outval <- list(AA=ZCmean, GRAVY=GRAVY, group=group, meancomp=meancomp, abbrev=abbrev, techtype = techtype, dx = dx, dy = dy)
   }
   # add title 20180225
   if((is.null(taxid) | identical(taxid, 0)) & plot.it & add.title & !add) {
@@ -374,18 +374,6 @@ ZCnuc <- function(nuccomp, sugar="deoxyribose") {
 make_dsDNA <- function(nuccomp) {
   nuccomp[, c("A", "C", "G", "T")] <- nuccomp[, c("A", "C", "G", "T")] + nuccomp[, c("T", "G", "C", "A")]
   nuccomp
-}
-
-# calculate Cys+Met fraction of amino acid compositions 20180324
-CMAA <- function(AAcomp) {
-  # find columns with names for the amino acids
-  AA <- c("Ala", "Cys", "Asp", "Glu", "Phe", "Gly", "His", "Ile", "Lys",
-    "Leu", "Met", "Asn", "Pro", "Gln", "Arg", "Ser", "Thr", "Val", "Trp", "Tyr")
-  isAA <- colnames(AAcomp) %in% AA
-  # columns for Cys and Met
-  isCM <- colnames(AAcomp) %in% c("Cys", "Met")
-  # calculate (Cys+Met) / (total AA)
-  sum(AAcomp[, isCM]) / sum(AAcomp[, isAA])
 }
 
 #########################################
@@ -499,3 +487,19 @@ NifProteomes <- function() {
   list(types = types, ZC = ZC, ZC.SD = ZC.SD, nH2O = nH2O, nH2O.SD = nH2O.SD)
 }
 
+# calculate GRAVY for amino acid compositions 20191024
+GRAVY <- function(AAcomp) {
+  # values of the hydropathy index from Kyte and Doolittle, 1982
+  # doi:10.1016/0022-2836(82)90515-0
+  Hind <- c(Ala =  1.8, Cys =  2.5, Asp = -3.5, Glu = -3.5, Phe =  2.8,
+            Gly = -0.4, His = -3.2, Ile =  4.5, Lys = -3.9, Leu =  3.8,
+            Met =  1.9, Asn = -3.5, Pro = -1.6, Gln = -3.5, Arg = -4.5,
+            Ser = -0.8, Thr = -0.7, Val =  4.2, Trp = -0.9, Tyr = -1.3)
+  # find columns with names for the amino acids
+  isAA <- colnames(AAcomp) %in% names(Hind)
+  iAA <- match(colnames(AAcomp)[isAA], names(Hind))
+  # calculate total of hydropathy values for each protein
+  sumHind <- rowSums(t(t(AAcomp[, isAA]) * Hind[iAA]))
+  # divide by length of proteins to get grand average of hydropathy (GRAVY)
+  sumHind / rowSums(AAcomp[, isAA])
+}

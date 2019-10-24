@@ -10,7 +10,7 @@ export(
   # grad_mplot 20190930
   "mplot", "mpage", "ppage", "mcomp", "pcomp",
   # grad_util 20191005
-  "ZCAA", "H2OAA",
+  "ZCAA", "H2OAA", "GRAVY",
   # Nif-encoding genomes 20191015
   "NifProteomes",
   # aoscp paper 20191018

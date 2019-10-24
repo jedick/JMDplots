@@ -10,3 +10,5 @@
 % 20191021
 \newcommand{\T}{\ifelse{latex}{\eqn{T}}{\ifelse{html}{\out{<I>T</I>}}{T}}}
 \newcommand{\Topt}{\ifelse{latex}{\eqn{T_\mathrm{opt}}}{\ifelse{html}{\out{<I>T</I><sub>opt</sub>}}{Topt}}}
+% 20191024
+\newcommand{\O2}{\ifelse{latex}{\eqn{\mathrm{O_{2}}}}{\ifelse{html}{\out{O<sub>2</sub>}}{O2}}}
