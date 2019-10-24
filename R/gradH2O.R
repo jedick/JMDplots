@@ -153,7 +153,7 @@ gradH2O3 <- function(pdf = FALSE) {
   # plot 1: compare ZC and nH2O of proteins in datasets from gradox paper
   mgradox <- ppage("gradoxGS", plot.it = FALSE)
   pgradox <- ppage("gradoxGS", H2O = TRUE, plot.it = FALSE)
-  pcomp(mgradox, pgradox, type = "both", reorder = FALSE, yline = 3.5)
+  pcomp(mgradox, pgradox, reorder = FALSE, yline = 3.5)
   # add proteomes from Nif-encoding genomes 20191014
   np <- NifProteomes()
   points(np$ZC, np$nH2O, pch = 15)
@@ -181,11 +181,11 @@ gradH2O3 <- function(pdf = FALSE) {
   # plot 2: compare ZC and nH2O of proteins in Baltic Sea surface
   mbaltics <- ppage("balticsurface", plot.it = FALSE)
   pbaltics <- ppage("balticsurface", H2O = TRUE, plot.it = FALSE)
-  pcomp(mbaltics, pbaltics, type = "both", reorder = FALSE, yline = 3.5)
+  pcomp(mbaltics, pbaltics, reorder = FALSE, yline = 3.5)
   # compare ZC and nH2O of proteins in Baltic Sea 10-20 m
   mbalticd <- ppage("balticdeep", plot.it = FALSE)
   pbalticd <- ppage("balticdeep", H2O = TRUE, plot.it = FALSE)
-  pcomp(mbalticd, pbalticd, type = "both", reorder = FALSE, yline = 3.5, add = TRUE, lty = 3, pch = 6)
+  pcomp(mbalticd, pbalticd, reorder = FALSE, yline = 3.5, add = TRUE, lty = 3, pch = 6)
   # add text labels
   text(-0.14, 0.392, "surface\n< 6 PSU")
   text(-0.135, 0.381, "surface\n> 6 PSU")
@@ -235,13 +235,13 @@ gradH2O5 <- function(pdf = FALSE) {
   # plots 1-2: Amazon river
   mout <- ppage("amazon", plot.it = FALSE)
   pout <- ppage("amazon", H2O = TRUE, plot.it = FALSE)
-  pcomp(mout, pout, type = "both", xlim = xlim, ylim = ylim, lty = 0, yline = 2.8)
+  pcomp(mout, pout, xlim = xlim, ylim = ylim, lty = 0, yline = 2.8)
   hullfun(mout, pout, c(1, 3), "green3", c("river", "riverPA"))
   hullfun(mout, pout, c(1, 3), "purple1", c("plume", "plumePA"))
   title("Amazon River metagenome", font.main = 1)
   label.figure("A", xfrac = 0.1, cex = 1.7)
 
-  pcomp(mout, pout, "MT", type = "both", xlim = xlim, ylim = ylim, lty = 0, yline = 2.8)
+  pcomp(mout, pout, "MT", xlim = xlim, ylim = ylim, lty = 0, yline = 2.8)
   hullfun(mout, pout, c(2, 4), "green3", c("river", "riverPA"))
   hullfun(mout, pout, c(2, 4), "purple1", c("plume", "plumePA"))
   title("Amazon River metatranscriptome", font.main = 1)
@@ -250,7 +250,7 @@ gradH2O5 <- function(pdf = FALSE) {
   # start plot 3: Eiler et al. (freshwater vs marine)
   mout <- ppage("eiler", plot.it = FALSE)
   pout <- ppage("eiler", H2O = TRUE, plot.it = FALSE)
-  pcomp(mout, pout, type = "both", xlim = xlim, ylim = ylim, lty = 0, yline = 2.8)
+  pcomp(mout, pout, xlim = xlim, ylim = ylim, lty = 0, yline = 2.8)
   hullfun(mout, pout, 1, "yellowgreen")
   hullfun(mout, pout, 2, "blue")
   title("Freshwater - marine - hypersaline", font.main = 1)
@@ -262,7 +262,7 @@ gradH2O5 <- function(pdf = FALSE) {
   # include Organic Lake data
   mout <- c(mout, list("Organic_Lake_SRA_MGP" = mplot("Organic_Lake", "SRA_MGP", plot.it = FALSE)))
   pout <- c(pout, list("Organic_Lake_SRA_MGP" = mplot("Organic_Lake", "SRA_MGP", H2O = TRUE, plot.it = FALSE)))
-  pcomp(mout, pout, type = "both", reorder = FALSE, add = TRUE)
+  pcomp(mout, pout, reorder = FALSE, add = TRUE)
   hullfun(mout, pout, 1:4, "turquoise3")
 
   # start plot 4: Baltic Sea and Shimokita Peninsula sediment
@@ -272,7 +272,7 @@ gradH2O5 <- function(pdf = FALSE) {
   SP_nH2O <- list("Shimokita_Peninsula_GenBank_MGP" = mplot("Shimokita_Peninsula", "GenBank_MGP", H2O = TRUE, plot.it = FALSE))
   mout <- c(BS_ZC, SP_ZC)
   pout <- c(BS_nH2O, SP_nH2O)
-  pcomp(mout, pout, type = "both", reorder = FALSE, xlim = xlim, ylim = ylim, yline = 2.8)
+  pcomp(mout, pout, reorder = FALSE, xlim = xlim, ylim = ylim, yline = 2.8)
   hullfun(mout, pout, 1:2, "slategrey")
   title("Marine and hypersaline sediment", font.main = 1)
   label.figure("D", xfrac = 0.1, cex = 1.7)
@@ -281,7 +281,7 @@ gradH2O5 <- function(pdf = FALSE) {
   mout <- ppage("HSsediment", plot.it = FALSE)
   pout <- ppage("HSsediment", H2O = TRUE, plot.it = FALSE)
   hullfun(mout, pout, 1:2, "turquoise3")
-  pcomp(mout, pout, type = "both", reorder = FALSE, add = TRUE)
+  pcomp(mout, pout, reorder = FALSE, add = TRUE)
 
   if(pdf) invisible(dev.off())
 }
@@ -307,10 +307,11 @@ gradH2O6 <- function(pdf = FALSE) {
 ############################
 
 # function to add convex hulls 20191007
-hullfun <- function(mout, pout, istudy, basecol, group = NULL) {
+hullfun <- function(mout, pout, istudy, basecol, group = NULL, type = "ZC") {
   x <- y <- numeric()
   for(ist in istudy) {
-    thisx <- mout[[ist]]$AA
+    if(type == "ZC") thisx <- mout[[ist]]$AA
+    if(type == "GRAVY") thisx <- mout[[ist]]$GRAVY
     thisy <- pout[[ist]]$AA
     if(!is.null(group)) {
       thisx <- thisx[mout[[ist]]$group %in% group]

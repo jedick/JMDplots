@@ -273,15 +273,32 @@ ppage <- function(subset = "gradoxSI", H2O = FALSE, set.par = TRUE, plot.it = TR
 }
 
 # scatterplot of DNA and protein ZC 20180307
-# mout <- mpage(); pout <- ppage(); pcomp(mout, pout, type="ZC")
-# mout <- ppage(); pout <- ppage(H2O=TRUE); pcomp(mout, pout, type="both")
-# mout <- mpage(H2O=TRUE); pout <- ppage(H2O=TRUE); pcomp(mout, pout, type="H2O")
-pcomp <- function(mout, pout, seqtype="MG", type="ZC", parts=c("plot", "legend"), yline = 2,
+## ZC of protein vs DNA
+# mout <- mpage(); pout <- ppage(); pcomp(mout, pout)
+## nH2O vs ZC of protein
+## mout <- ppage(); pout <- ppage(H2O=TRUE); pcomp(mout, pout)
+## nH2O vs GRAVY of protein
+## mout <- ppage(); pout <- ppage(H2O=TRUE); pcomp(mout, pout, type = "GRAVY")
+# nH2O of protein vs DNA (not yet implemented)
+# mout <- mpage(H2O=TRUE); pout <- ppage(H2O=TRUE); pcomp(mout, pout)
+pcomp <- function(mout, pout, seqtype="MG", type = NULL, parts=c("plot", "legend"), yline = 2,
                   xlim = NULL, ylim = NULL, reorder = TRUE, plot.techtype = FALSE, add = FALSE,
                   pch = NULL, lty = 2) {
+  # determine plot type: 20191024
+  # ZC - ZC of protein vs DNA
+  # both - nH2O vs ZC of protein
+  # H2O - nH2O of protein vs DNA
+  # GRAVY - nH2O vs GRAVY of protein
+  if(is.null(type)) {
+    if(missing(mout)) type <- "ZC" else {
+      if(!mout[[1]]$H2O & !pout[[1]]$H2O) type <- "ZC"
+      if(!mout[[1]]$H2O & pout[[1]]$H2O) type <- "both"
+      if(mout[[1]]$H2O & pout[[1]]$H2O) type <- "H2O"
+    }
+  }
   if("plot" %in% parts) {
     # set up plot
-    if(type=="ZC") {
+    if(type == "ZC") {
       if(seqtype=="MG" & is.null(xlim)) xlim <- c(0.58, 0.65)
       if(seqtype=="MT" & is.null(xlim)) xlim <- c(0.585, 0.63)
       xlab <- quote(italic(Z)[C]~of~DNA)
@@ -289,9 +306,14 @@ pcomp <- function(mout, pout, seqtype="MG", type="ZC", parts=c("plot", "legend")
       if(seqtype=="MT" & is.null(ylim)) ylim <- c(-0.21, -0.14)
       ylab <- quote(italic(Z)[C]~of~protein)
     }
-    if(type=="both") {
-      if(is.null(xlim)) xlim <- c(-0.22, -0.098)
-      xlab <- quote(italic(Z)[C])
+    if(type %in% c("both", "GRAVY")) {
+      if(type == "GRAVY") {
+        xlim <- c(-0.3, 0)
+        xlab <- "GRAVY"
+      } else {
+        if(is.null(xlim)) xlim <- c(-0.22, -0.098)
+        xlab <- quote(italic(Z)[C])
+      }
       if(is.null(ylim)) ylim <- c(0.34, 0.4)
       ylab <- quote(italic(n)[H[2]*O])
     }
@@ -314,9 +336,10 @@ pcomp <- function(mout, pout, seqtype="MG", type="ZC", parts=c("plot", "legend")
         xvals <- mout[[imout]]$DNA
         yvals <- pout[[ipout]]$AA
       }
-      if(type=="both") {
+      if(type %in% c("both", "GRAVY")) {
         imout <- ipout
-        xvals <- mout[[imout]]$AA
+        if(type == "GRAVY") xvals <- mout[[imout]]$GRAVY
+        else xvals <- mout[[imout]]$AA
         yvals <- pout[[ipout]]$AA
       }
       group <- rep(mout[[imout]]$group, length.out = length(xvals))

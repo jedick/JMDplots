@@ -103,7 +103,7 @@ plotMG <- function(dataset="Guerrero_Negro_IMG_MG", plottype="bars",
       else mycomp <- RDS[[file]]
       if(isprotein) {
         # calculate GRAVY 20191024
-        GRAVY <- c(GRAVY, GRAVY(mycomp))
+        GRAVY <- c(GRAVY, mean(GRAVY(mycomp)))
         # add basis argument (QEC or rQEC) here
         myZC <- ZCfun(mycomp, basis)
       } else {
@@ -272,9 +272,9 @@ plotMG <- function(dataset="Guerrero_Negro_IMG_MG", plottype="bars",
       }
     }
     # return ZC values
-    outval <- list(DNA=ZCmean, RNA=RNA_ZCmean, GC=GC, group=group, meancomp=meancomp, abbrev=abbrev, techtype = techtype, dx = dx, dy = dy)
+    outval <- list(DNA=ZCmean, RNA=RNA_ZCmean, GC=GC, group=group, meancomp=meancomp, abbrev=abbrev, techtype = techtype, dx = dx, dy = dy, H2O = H2O)
   } else {
-    outval <- list(AA=ZCmean, GRAVY=GRAVY, group=group, meancomp=meancomp, abbrev=abbrev, techtype = techtype, dx = dx, dy = dy)
+    outval <- list(AA=ZCmean, GRAVY=GRAVY, group=group, meancomp=meancomp, abbrev=abbrev, techtype = techtype, dx = dx, dy = dy, H2O = H2O)
   }
   # add title 20180225
   if((is.null(taxid) | identical(taxid, 0)) & plot.it & add.title & !add) {
@@ -462,7 +462,7 @@ NifProteomes <- function() {
   # the Nif types, arranged from anaerobic to aerobic
   types <- c("Nif-D", "Nif-C", "Nif-B", "Nif-A")
   # assemble the compositional metrics
-  ZC <- ZC.SD <- nH2O <- nH2O.SD <- numeric()
+  ZC <- ZC.SD <- nH2O <- nH2O.SD <- GRAVY <- GRAVY.SD <- numeric()
   for(type in types) {
     # get the taxids for genomes with this type of Nif
     iNif <- Nif$Type == type
@@ -482,9 +482,11 @@ NifProteomes <- function() {
     ZC.SD <- c(ZC.SD, sd(ZCAA(AAcomp)))
     nH2O <- c(nH2O, mean(H2OAA(AAcomp)))
     nH2O.SD <- c(nH2O.SD, sd(H2OAA(AAcomp)))
+    GRAVY <- c(GRAVY, mean(GRAVY(AAcomp)))
+    GRAVY.SD <- c(GRAVY.SD, sd(GRAVY(AAcomp)))
   }
   # return values
-  list(types = types, ZC = ZC, ZC.SD = ZC.SD, nH2O = nH2O, nH2O.SD = nH2O.SD)
+  list(types = types, ZC = ZC, ZC.SD = ZC.SD, nH2O = nH2O, nH2O.SD = nH2O.SD, GRAVY = GRAVY, GRAVY.SD = GRAVY.SD)
 }
 
 # calculate GRAVY for amino acid compositions 20191024

@@ -22,7 +22,7 @@ The functions are exported in the package so they are available to user scripts.
   ppage(subset = "gradoxSI", H2O = FALSE, set.par = TRUE, plot.it = TRUE,
     basis = "rQEC", add.label = TRUE, mfrow = NULL)
   mcomp(mout, yvar = "RNA")
-  pcomp(mout, pout, seqtype = "MG", type = "ZC", parts = c("plot", "legend"),
+  pcomp(mout, pout, seqtype = "MG", type = NULL, parts = c("plot", "legend"),
     yline = 2, xlim = NULL, ylim = NULL, reorder = TRUE,
     plot.techtype = FALSE, add = FALSE, pch = NULL, lty = 2)
 }
@@ -50,7 +50,7 @@ The functions are exported in the package so they are available to user scripts.
   \item{mout}{list, output from \code{mpage} or \code{ppage}}
   \item{yvar}{character, y-axis variable (\samp{RNA} or \samp{GC})}
   \item{pout}{list, output from \code{ppage}}
-  \item{type}{character, type of plot (\samp{ZC} or \samp{both})}
+  \item{type}{character, type of plot (\samp{ZC} or \samp{both} or \samp{GRAVY})}
   \item{parts}{character, parts of figure to include}
   \item{xlim}{numeric, x-axis limits}
   \item{reorder}{logical, put points in order of increasing x value?}
@@ -66,7 +66,6 @@ The functions are exported in the package so they are available to user scripts.
 The \code{study} is composed of two names for the locality separated by an underscore.
 For \code{mplot}, the \code{seqtype} contains the name of the database followed by an underscore and MG (metagenome) or MT (metatranscriptome), i.e. \samp{[SRA|IMG|MGRAST|GenBank]_[MG|MT]}.
 These can be changed to \samp{_MGP} and \samp{_MTP} to indicate protein sequences.
-For \code{pcomp}, \code{seqtype} is just \samp{MG} or \samp{MT}.
 
 \code{mplot} plots values of \ZC for a particular combination of \code{study} and \code{seqtype}.
 \ZC of both DNA and RNA are plotted, with an offset of -0.28 applied to that of RNA, so that values can be shown on the same scale (see Dick et al., 2019).
@@ -77,6 +76,10 @@ In this case, \code{plottype} is interpreted as the fill color for the polygon.
 \code{mcomp} makes a scatterplot of (\ZC of RNA - \ZC of DNA) vs \ZC of DNA.
 Set \code{yvar} to \samp{GC} to change the y-axis to GC ratio of DNA.
 (For double-stranded DNA, this should be a linear function of \ZC.)
+
+For \code{pcomp}, \code{seqtype} is just \samp{MG} or \samp{MT}.
+The \code{type} is automatically determined based on the values of \code{mout} and \code{pout}.
+The exception is \code{type = "GRAVY"}, which plots the values of \code{\link{GRAVY}} instead of \code{\link{ZCAA}}.
 
 \code{datadir} and \code{mdata} are used to specify alternate location of compositional data and metadata for metagenomic studies.
 This permits the processing of user-provided data sets; see \code{\link{subsurface}} for some examples.
@@ -101,22 +104,25 @@ mcomp(mout, yvar = "GC")
 
 # make a page of plots of ZC of proteins
 pout <- ppage()
-# compare ZC of protein and DNA for the metagenomes
+# plot ZC of DNA vs proteins for the metagenomes
 pcomp(mout, pout)
-# compare ZC of protein and DNA for the metatranscriptomes
+# plot ZC of DNA vs proteins for the metatranscriptomes
 pcomp(mout, pout, "MT")
 
-## TODO: compare nH2O of protein and DNA
+## TODO: plot nH2O of DNA vs proteins
 #mout <- mpage(H2O = TRUE)
 #pout <- ppage(H2O = TRUE)
-#pcomp(mout, pout, type = "H2O")
+#pcomp(mout, pout)
 
-# compare ZC and nH2O of protein in a few redox gradients
+# plot nH2O vs ZC of proteins in a few redox gradients
 mout <- ppage("gradoxGS")
 pout <- ppage("gradoxGS", H2O = TRUE)
-pcomp(mout, pout, type = "both", reorder = FALSE, yline = 2)
+pcomp(mout, pout, reorder = FALSE, yline = 2)
 # overlay data for protein from the Baltic Sea
 mout <- ppage("balticsurface", plot.it = FALSE)
 pout <- ppage("balticsurface", H2O = TRUE, plot.it = FALSE)
-pcomp(mout, pout, type = "both", reorder = FALSE, add = TRUE)
+pcomp(mout, pout, reorder = FALSE, add = TRUE)
+
+# plot nH2O vs GRAVY of proteins
+pcomp(mout, pout, type = "GRAVY")
 }
