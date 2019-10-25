@@ -236,14 +236,14 @@ gradH2O5 <- function(pdf = FALSE) {
   mout <- ppage("amazon", plot.it = FALSE)
   pout <- ppage("amazon", H2O = TRUE, plot.it = FALSE)
   pcomp(mout, pout, xlim = xlim, ylim = ylim, lty = 0, yline = 2.8)
-  hullfun(mout, pout, c(1, 3), "green3", c("river", "riverPA"))
-  hullfun(mout, pout, c(1, 3), "purple1", c("plume", "plumePA"))
+  hullfun(mout, pout, c(1, 3), "green3", c("riverFL", "riverPA"))
+  hullfun(mout, pout, c(1, 3), "purple1", c("plumeFL", "plumePA"))
   title("Amazon River metagenome", font.main = 1)
   label.figure("A", xfrac = 0.1, cex = 1.7)
 
   pcomp(mout, pout, "MT", xlim = xlim, ylim = ylim, lty = 0, yline = 2.8)
-  hullfun(mout, pout, c(2, 4), "green3", c("river", "riverPA"))
-  hullfun(mout, pout, c(2, 4), "purple1", c("plume", "plumePA"))
+  hullfun(mout, pout, c(2, 4), "green3", c("riverFL", "riverPA"))
+  hullfun(mout, pout, c(2, 4), "purple1", c("plumeFL", "plumePA"))
   title("Amazon River metatranscriptome", font.main = 1)
   label.figure("B", xfrac = 0.1, cex = 1.7)
 

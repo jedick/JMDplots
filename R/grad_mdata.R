@@ -172,8 +172,8 @@ gradH2O <- list(
     MT_range = c(0.60, 0.63),
     MTP_range = c(-0.16, -0.12),
     abbrev = "ARF",
-    group = c("river", "river", "river", "river", "river", "river",
-              "plume", "plume", "plume", "plume", "plume", "plume"),
+    group = c("riverFL", "riverFL", "riverFL", "riverFL", "riverFL", "riverFL",
+              "plumeFL", "plumeFL", "plumeFL", "plumeFL", "plumeFL", "plumeFL"),
     plot_real_x = FALSE,
     techtype = "Illumina"
   ),

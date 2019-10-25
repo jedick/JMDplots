@@ -308,7 +308,7 @@ pcomp <- function(mout, pout, seqtype="MG", type = NULL, parts=c("plot", "legend
     }
     if(type %in% c("both", "GRAVY")) {
       if(type == "GRAVY") {
-        xlim <- c(-0.3, 0)
+        if(is.null(xlim)) xlim <- c(-0.3, 0)
         xlab <- "GRAVY"
       } else {
         if(is.null(xlim)) xlim <- c(-0.22, -0.098)
@@ -359,9 +359,9 @@ pcomp <- function(mout, pout, seqtype="MG", type = NULL, parts=c("plot", "legend
       col[group %in% c("oxic", "oxic0")] <- "blue"
       col[group %in% c("hypersaline", "hypersaline0")] <- "turquoise3"
       col[group %in% c("OMZ", "OMZ0")] <- "black"
-      col[group %in% c("plume", "plume0", "plumePA")] <- "purple1"
+      col[group %in% c("plume", "plume0", "plumePA", "plumeFL")] <- "purple1"
       col[group %in% c("sediment", "sediment0")] <- "slategrey"
-      col[group %in% c("river", "riverPA")] <- "green3"
+      col[group %in% c("river", "riverPA", "riverFL")] <- "green3"
       col[group %in% c("lake")] <- "yellowgreen"
       col[group %in% c("HSsediment", "HSsediment0")] <- "slategrey"
       # plot lines and points
@@ -379,6 +379,8 @@ pcomp <- function(mout, pout, seqtype="MG", type = NULL, parts=c("plot", "legend
         mypch[group %in% c("yellowstone", "yellowstone1", "rock", "rock0", "mat", "mat1", "hypersaline", "hypersaline0")] <- 15
         # filled squares for Amazon River particle associated 20190723
         mypch[group %in% c("riverPA", "plumePA")] <- 15
+        # smaller filled circles for Amazon River and plume free-living 20191025
+        mypch[group %in% c("riverFL", "plumeFL")] <- 20
       }
       studyname <- paste(strsplit(study, "_")[[1]][1:2], collapse="_")
       if(plot.techtype) {
