@@ -1,5 +1,5 @@
 # JMDplots/grad_util.R
-# utility functions for gradox and gradH2O papers
+# utility functions (not exported) for gradox and gradH2O papers
 
 # get metadata (location names and sequencing IDs) for a study
 # extracted from mprep/mplot 20180312
@@ -51,7 +51,7 @@ plotMG <- function(dataset="Guerrero_Negro_IMG_MG", plottype="bars",
   # xlab: axis label: "layer", "depth", ...
   isprotein <- grepl("_MGP$", dataset) | grepl("_MTP$", dataset)
   # where to keep mean and high/lo (+/- SD) of ZC at each site
-  GRAVY <- GC <- ZClo <- ZCmean <- ZChi <- numeric()
+  pI <- GRAVY <- GC <- ZClo <- ZCmean <- ZChi <- numeric()
   # are we using user-supplied data?
   user_data <- TRUE
   if(is.null(datadir)) {
@@ -104,6 +104,8 @@ plotMG <- function(dataset="Guerrero_Negro_IMG_MG", plottype="bars",
       if(isprotein) {
         # calculate GRAVY 20191024
         GRAVY <- c(GRAVY, mean(GRAVY(mycomp)))
+        # calculate isoelectric point 20191027
+        pI <- c(pI, mean(pI(mycomp)))
         # add basis argument (QEC or rQEC) here
         myZC <- ZCfun(mycomp, basis)
       } else {
@@ -274,7 +276,7 @@ plotMG <- function(dataset="Guerrero_Negro_IMG_MG", plottype="bars",
     # return ZC values
     outval <- list(DNA=ZCmean, RNA=RNA_ZCmean, GC=GC, group=group, meancomp=meancomp, abbrev=abbrev, techtype = techtype, dx = dx, dy = dy, H2O = H2O)
   } else {
-    outval <- list(AA=ZCmean, GRAVY=GRAVY, group=group, meancomp=meancomp, abbrev=abbrev, techtype = techtype, dx = dx, dy = dy, H2O = H2O)
+    outval <- list(AA=ZCmean, GRAVY=GRAVY, pI=pI, group=group, meancomp=meancomp, abbrev=abbrev, techtype = techtype, dx = dx, dy = dy, H2O = H2O)
   }
   # add title 20180225
   if((is.null(taxid) | identical(taxid, 0)) & plot.it & add.title & !add) {
@@ -376,132 +378,3 @@ make_dsDNA <- function(nuccomp) {
   nuccomp
 }
 
-#########################################
-### newly exported functions 20191005 ###
-#########################################
-
-# calculate ZC for amino acid compositions 20180228
-ZCAA <- function(AAcomp, nothing=NULL) {
-  # a dummy second argument is needed because of how this function is used in plotMG()
-  # the number of carbons of the amino acids
-  nC_AA <- c(Ala = 3, Cys = 3, Asp = 4, Glu = 5, Phe = 9, Gly = 2, His = 6, 
-    Ile = 6, Lys = 6, Leu = 6, Met = 5, Asn = 4, Pro = 5, Gln = 5, 
-    Arg = 6, Ser = 3, Thr = 4, Val = 5, Trp = 11, Tyr = 9)
-  # the Ztot of the amino acids == CHNOSZ::ZC(info(info(aminoacids("")))$formula) * nC_AA
-  Ztot_AA <- c(Ala = 0, Cys = 2, Asp = 4, Glu = 2, Phe = -4, Gly = 2, His = 4, 
-    Ile = -6, Lys = -4, Leu = -6, Met = -2, Asn = 4, Pro = -2, Gln = 2, 
-    Arg = 2, Ser = 2, Thr = 0, Val = -4, Trp = -2, Tyr = -2)
-  # the ZC of the amino acids == CHNOSZ::ZC(info(info(aminoacids("")))$formula)
-  ZC_AA <- Ztot_AA / nC_AA
-  # find columns with names for the amino acids
-  isAA <- colnames(AAcomp) %in% c("Ala", "Cys", "Asp", "Glu", "Phe", "Gly", "His", "Ile", "Lys", 
-    "Leu", "Met", "Asn", "Pro", "Gln", "Arg", "Ser", "Thr", "Val", "Trp", "Tyr")
-  iAA <- match(colnames(AAcomp)[isAA], names(ZC_AA))
-  # calculate the nC for all occurrences of each amino acid
-  multC <- t(t(AAcomp[, isAA]) * nC_AA[iAA])
-  # multiply nC by ZC
-  multZC <- t(t(multC) * ZC_AA[iAA])
-  # calculate the total ZC and nC, then the overall ZC
-  ZCtot <- rowSums(multZC)
-  nCtot <- rowSums(multC)
-  ZCtot / nCtot
-}
-
-# calculate nH2O for amino acid compositions 20181228
-H2OAA <- function(AAcomp, basis = "rQEC") {
-  # how to use CHNOSZ to get the number of H2O in reactions
-  # to form amino acid residues from the "QEC" basis:
-  ## basis("QEC")
-  ## species(aminoacids(3))
-  ## nH2O_AA <- species()[["H2O"]]
-  # subtract one H2O to make residues
-  ## nH2O_AA <- nH2O_AA - 1
-  ## names(nH2O_AA) <- aminoacids(3)
-  ## dput(nH2O_AA)
-  if(basis == "QEC") {
-    nH2O_AA <- c( Ala = -0.4, Cys =   -1, Asp = -1.2, Glu =   -1, Phe = -3.2, Gly = -0.6, His = -2.8,
-      Ile =  0.2, Lys =  0.2, Leu =  0.2, Met = -0.6, Asn = -1.2, Pro =   -1, Gln =   -1,
-      Arg = -0.8, Ser = -0.4, Thr = -0.2, Val =    0, Trp = -4.8, Tyr = -3.2)
-  }
-  # residual water content with QEC basis
-  ## round(residuals(lm(nH2O_AA ~ ZC(species()$ispecies))), 3)
-  if(basis == "rQEC") {
-    nH2O_AA <- c(Ala = 0.724, Cys = 0.33, Asp = 0.233, Glu = 0.248, Phe = -2.213,
-      Gly = 0.833, His = -1.47, Ile = 1.015, Lys = 1.118, Leu = 1.015,
-      Met = 0.401, Asn = 0.233, Pro = 0.001, Gln = 0.248, Arg = 0.427,
-      Ser = 0.93, Thr = 0.924, Val = 0.877, Trp = -3.732, Tyr = -2.144)
-  }
-  # find columns with names for the amino acids
-  isAA <- colnames(AAcomp) %in% names(nH2O_AA)
-  iAA <- match(colnames(AAcomp)[isAA], names(nH2O_AA))
-  # calculate total number of H2O in reactions to form proteins
-  nH2O <- rowSums(t(t(AAcomp[, isAA]) * nH2O_AA[iAA]))
-  # add one to account for terminal groups
-  nH2O <- nH2O + 1
-  # divide by number of residues (length of protein)
-  nH2O / rowSums(AAcomp[, isAA])
-  # to check this function:
-  #  basis("QEC")
-  #  H2O.ref <- protein.basis(1:6)[, "H2O"] / protein.length(1:6)
-  #  AAcomp <- thermo()$protein[1:6, ]
-  #  H2O.fun <- H2OAA(AAcomp, "QEC")
-  #  stopifnot(H2O.ref == H2O.fun)
-}
-
-# calculate ZC and nH2O of proteomes encoding different Nif homologs (Poudel et al., 2018)
-# 20191014
-NifProteomes <- function() {
-  # read file with Nif genome classifications and taxids
-  Niffile <- system.file("extdata/gradH2O/Nif_homolog_genomes.csv", package = "JMDplots")
-  Nif <- read.csv(Niffile, as.is = TRUE)
-  # drop NA taxids
-  Nif <- Nif[!is.na(Nif$taxid), ]
-  # read refseq data
-  RSfile <- system.file("extdata/refseq/protein_refseq.csv.xz", package = "JMDplots")
-  refseq <- read.csv(RSfile, as.is = TRUE)
-  # the Nif types, arranged from anaerobic to aerobic
-  types <- c("Nif-D", "Nif-C", "Nif-B", "Nif-A")
-  # assemble the compositional metrics
-  ZC <- ZC.SD <- nH2O <- nH2O.SD <- GRAVY <- GRAVY.SD <- numeric()
-  for(type in types) {
-    # get the taxids for genomes with this type of Nif
-    iNif <- Nif$Type == type
-    taxid <- Nif$taxid[iNif]
-    # remove duplicated taxids 20191018
-    taxid <- taxid[!duplicated(taxid)]
-    # get the row number in the refseq data frame
-    irefseq <- match(taxid, refseq$organism)
-    # include only organisms with at least 1000 protein sequences
-    i1000 <- refseq$chains[irefseq] >= 1000
-    irefseq <- irefseq[i1000]
-    #print(paste(type, "represented by", length(irefseq), "nonredundant genomes with at least 1000 protein sequences"))
-    # get the amino acid composition from refseq
-    AAcomp <- refseq[irefseq, ]
-    # calculate ZC and nH2O
-    ZC <- c(ZC, mean(ZCAA(AAcomp)))
-    ZC.SD <- c(ZC.SD, sd(ZCAA(AAcomp)))
-    nH2O <- c(nH2O, mean(H2OAA(AAcomp)))
-    nH2O.SD <- c(nH2O.SD, sd(H2OAA(AAcomp)))
-    GRAVY <- c(GRAVY, mean(GRAVY(AAcomp)))
-    GRAVY.SD <- c(GRAVY.SD, sd(GRAVY(AAcomp)))
-  }
-  # return values
-  list(types = types, ZC = ZC, ZC.SD = ZC.SD, nH2O = nH2O, nH2O.SD = nH2O.SD, GRAVY = GRAVY, GRAVY.SD = GRAVY.SD)
-}
-
-# calculate GRAVY for amino acid compositions 20191024
-GRAVY <- function(AAcomp) {
-  # values of the hydropathy index from Kyte and Doolittle, 1982
-  # doi:10.1016/0022-2836(82)90515-0
-  Hind <- c(Ala =  1.8, Cys =  2.5, Asp = -3.5, Glu = -3.5, Phe =  2.8,
-            Gly = -0.4, His = -3.2, Ile =  4.5, Lys = -3.9, Leu =  3.8,
-            Met =  1.9, Asn = -3.5, Pro = -1.6, Gln = -3.5, Arg = -4.5,
-            Ser = -0.8, Thr = -0.7, Val =  4.2, Trp = -0.9, Tyr = -1.3)
-  # find columns with names for the amino acids
-  isAA <- colnames(AAcomp) %in% names(Hind)
-  iAA <- match(colnames(AAcomp)[isAA], names(Hind))
-  # calculate total of hydropathy values for each protein
-  sumHind <- rowSums(t(t(AAcomp[, isAA]) * Hind[iAA]))
-  # divide by length of proteins to get grand average of hydropathy (GRAVY)
-  sumHind / rowSums(AAcomp[, isAA])
-}

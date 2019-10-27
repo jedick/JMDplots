@@ -7,6 +7,7 @@
 \alias{gradH2O4}
 \alias{gradH2O5}
 \alias{gradH2O6}
+\alias{NifProteomes}
 \title{Plots from salinity gradients paper}
 \description{
 Plots from the paper by Dick et al. (2019).
@@ -19,6 +20,7 @@ Plots from the paper by Dick et al. (2019).
   gradH2O4(pdf = FALSE)
   gradH2O5(pdf = FALSE)
   gradH2O6(pdf = FALSE)
+  NifProteomes()
 }
 
 \arguments{
@@ -36,12 +38,20 @@ This table gives a brief description of each function.
   \code{gradH2O5} \tab \nH2O-\ZC for freshwater, marine, and hypersaline environments \cr
   \code{gradH2O6} \tab Mean differences of \nH2O and \ZC for differentially expressed proteins in hyperosmotic stress \cr
 }
+
+\code{NifProteomes}, which is used in \code{gradH2O2}, calculates the mean and standard deviation of \ZC and \nH2O for proteomes encoding different homologs of nitrogenase (Nif-D, Nif-C, Nif-B, or Nif-A), as listed by Poudel et al. (2018).
+The organisms are limited to those that have at least 1000 RefSeq protein sequences, and any duplicated organism names are removed.
 }
 
 \section{Files in extdata/gradH2O}{
   \describe{
     \item{\code{MGP}}{Amino acid compositions sampled from metagenomically derived protein sequences, generated as described in \code{\link{gradox}}.}
     \item{\code{mkrds.R}}{Script to make the RDS files from multiple CSV files produced by the \dQuote{ARAST} workflow.}
+    \item{\code{Nif_homolog_genomes.csv}, \code{Nif_homolog_genomes.R}}{
+      Names of genomes (organisms) containing different nitrogenase (Nif) homologs, extracted from Supplemental Table 1A of Poudel et al. (2018).
+      To the source table have been added the columns \samp{Refseq.name} and \samp{taxid}, which contain the closest matching genome name in release 95 of the RefSeq database (see \code{\link{JMDplots-package}}) and corresponding taxonomic ID.
+      The R file is the script used to make \code{Nif_homolog_genomes.csv} from the source table.
+    }
   }
 }
 
@@ -63,4 +73,7 @@ Poudel, S. et al. (2018) Electron transfer to nitrogenase in different genomic a
 
 \examples{
 gradH2O1()
+
+# list ZC and nH2O of proteomes for Nif-encoding genomes
+NifProteomes()
 }

@@ -279,6 +279,10 @@ ppage <- function(subset = "gradoxSI", H2O = FALSE, set.par = TRUE, plot.it = TR
 ## mout <- ppage(); pout <- ppage(H2O=TRUE); pcomp(mout, pout)
 ## nH2O vs GRAVY of protein
 ## mout <- ppage(); pout <- ppage(H2O=TRUE); pcomp(mout, pout, type = "GRAVY")
+## nH2O vs isoelectric point of protein
+## mout <- ppage(); pout <- ppage(H2O=TRUE); pcomp(mout, pout, type = "pI")
+## isoelectric point vs GRAVY of protein
+## mout <- ppage(); pout <- ppage(H2O=TRUE); pcomp(mout, pout, type = "pIG")
 # nH2O of protein vs DNA (not yet implemented)
 # mout <- mpage(H2O=TRUE); pout <- ppage(H2O=TRUE); pcomp(mout, pout)
 pcomp <- function(mout, pout, seqtype="MG", type = NULL, parts=c("plot", "legend"), yline = 2,
@@ -289,6 +293,8 @@ pcomp <- function(mout, pout, seqtype="MG", type = NULL, parts=c("plot", "legend
   # both - nH2O vs ZC of protein
   # H2O - nH2O of protein vs DNA
   # GRAVY - nH2O vs GRAVY of protein
+  # pI - nH2O vs isoelectric point of protein
+  # pIG - GRAVY vs isoelectric point of protein
   if(is.null(type)) {
     if(missing(mout)) type <- "ZC" else {
       if(!mout[[1]]$H2O & !pout[[1]]$H2O) type <- "ZC"
@@ -306,16 +312,24 @@ pcomp <- function(mout, pout, seqtype="MG", type = NULL, parts=c("plot", "legend
       if(seqtype=="MT" & is.null(ylim)) ylim <- c(-0.21, -0.14)
       ylab <- quote(italic(Z)[C]~of~protein)
     }
-    if(type %in% c("both", "GRAVY")) {
+    if(type %in% c("both", "GRAVY", "pI")) {
       if(type == "GRAVY") {
         if(is.null(xlim)) xlim <- c(-0.3, 0)
         xlab <- "GRAVY"
+      } else if(type == "pI") {
+        if(is.null(xlim)) xlim <- c(4, 9)
+        xlab <- "pI"
       } else {
         if(is.null(xlim)) xlim <- c(-0.22, -0.098)
         xlab <- quote(italic(Z)[C])
       }
       if(is.null(ylim)) ylim <- c(0.34, 0.4)
       ylab <- quote(italic(n)[H[2]*O])
+    } else if(type=="pIG") {
+      if(is.null(xlim)) xlim <- c(4, 9)
+      if(is.null(ylim)) ylim <- c(-0.3, 0)
+      xlab <- "pI"
+      ylab <- "GRAVY"
     }
     if(!add) {
       plot(xlim, ylim, xlab=xlab, ylab=NA, type="n")
@@ -336,11 +350,16 @@ pcomp <- function(mout, pout, seqtype="MG", type = NULL, parts=c("plot", "legend
         xvals <- mout[[imout]]$DNA
         yvals <- pout[[ipout]]$AA
       }
-      if(type %in% c("both", "GRAVY")) {
+      if(type %in% c("both", "GRAVY", "pI")) {
         imout <- ipout
         if(type == "GRAVY") xvals <- mout[[imout]]$GRAVY
+        else if(type == "pI") xvals <- mout[[imout]]$pI
         else xvals <- mout[[imout]]$AA
         yvals <- pout[[ipout]]$AA
+      } else if(type=="pIG") {
+        imout <- ipout
+        xvals <- pout[[ipout]]$pI
+        yvals <- mout[[imout]]$GRAVY
       }
       group <- rep(mout[[imout]]$group, length.out = length(xvals))
       if(reorder) {
