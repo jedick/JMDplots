@@ -24,7 +24,7 @@ The functions are exported in the package so they are available to user scripts.
   mcomp(mout, yvar = "RNA")
   pcomp(mout, pout, seqtype = "MG", type = NULL, parts = c("plot", "legend"),
     yline = 2, xlim = NULL, ylim = NULL, reorder = TRUE,
-    plot.techtype = FALSE, add = FALSE, pch = NULL, lty = 2)
+    plot.techtype = FALSE, add = FALSE, pch = NULL, lty = 2, labels.at = "max")
 }
 
 \arguments{
@@ -60,6 +60,7 @@ The functions are exported in the package so they are available to user scripts.
   \item{mdata}{list, metadata for studies (default is from package)}
   \item{pch}{numeric, plot symbol (default is determined from sample type)}
   \item{lty}{numeric, line type}
+  \item{labels.at}{character, plot labels at \samp{max} or \samp{min} values (use NA to omit labels)}
 }
 
 \details{

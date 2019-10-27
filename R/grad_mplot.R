@@ -46,9 +46,8 @@ usedin <- list(
                "Baltic_Sea-0.1d", "Baltic_Sea-0.8d", "Baltic_Sea-3.0d"),
   # freshwater and marine metagenomes (Eiler et al., 2014)
   eiler = c("Eiler_Freshwater", "Eiler_Marine"),
-  # hypersaline water and sediment
-  hypersaline = c("Santa_Pola", "SouthBay_Water", "Kulunda_Steppe"),
-  HSsediment = c("Coorong_Lagoon", "SouthBay_Sediment"),
+  # hypersaline water
+  hypersaline = c("Kulunda_Steppe", "Santa_Pola", "SouthBay_Water"),
   # Amazon River free-living and particle-associated
   amazon = c("Amazon_River-FL", "Amazon_River-PA")
 )
@@ -287,7 +286,7 @@ ppage <- function(subset = "gradoxSI", H2O = FALSE, set.par = TRUE, plot.it = TR
 # mout <- mpage(H2O=TRUE); pout <- ppage(H2O=TRUE); pcomp(mout, pout)
 pcomp <- function(mout, pout, seqtype="MG", type = NULL, parts=c("plot", "legend"), yline = 2,
                   xlim = NULL, ylim = NULL, reorder = TRUE, plot.techtype = FALSE, add = FALSE,
-                  pch = NULL, lty = 2) {
+                  pch = NULL, lty = 2, labels.at = "max") {
   # determine plot type: 20191024
   # ZC - ZC of protein vs DNA
   # both - nH2O vs ZC of protein
@@ -327,7 +326,7 @@ pcomp <- function(mout, pout, seqtype="MG", type = NULL, parts=c("plot", "legend
       ylab <- quote(italic(n)[H[2]*O])
     } else if(type=="pIG") {
       if(is.null(xlim)) xlim <- c(4, 9)
-      if(is.null(ylim)) ylim <- c(-0.3, 0)
+      if(is.null(ylim)) ylim <- c(-0.3, -0.05)
       xlab <- "pI"
       ylab <- "GRAVY"
     }
@@ -375,13 +374,12 @@ pcomp <- function(mout, pout, seqtype="MG", type = NULL, parts=c("plot", "legend
       col[group %in% c("rock", "rock0")] <- "brown"
       col[group %in% c("vent", "vent0")] <- "red"
       col[group %in% c("mat", "mat1")] <- "green3"
-      col[group %in% c("oxic", "oxic0")] <- "blue"
-      col[group %in% c("hypersaline", "hypersaline0")] <- "turquoise3"
+      col[group %in% c("oxic", "oxic0", "plumePA", "plumeFL")] <- "blue"
+      col[group %in% c("hypersaline", "hypersaline0", "hypersaline_low")] <- "turquoise3"
       col[group %in% c("OMZ", "OMZ0")] <- "black"
-      col[group %in% c("plume", "plume0", "plumePA", "plumeFL")] <- "purple1"
+      col[group %in% c("plume", "plume0")] <- "purple1"
       col[group %in% c("sediment", "sediment0")] <- "slategrey"
-      col[group %in% c("river", "riverPA", "riverFL")] <- "green3"
-      col[group %in% c("lake")] <- "yellowgreen"
+      col[group %in% c("lake", "riverPA", "riverFL")] <- "green3"
       col[group %in% c("HSsediment", "HSsediment0")] <- "slategrey"
       # plot lines and points
       # for lines, use the color of most of the points 20180501
@@ -400,6 +398,9 @@ pcomp <- function(mout, pout, seqtype="MG", type = NULL, parts=c("plot", "legend
         mypch[group %in% c("riverPA", "plumePA")] <- 15
         # smaller filled circles for Amazon River and plume free-living 20191025
         mypch[group %in% c("riverFL", "plumeFL")] <- 20
+        # filled triangles for freshwater, open squares for hypersaline_low 20191027
+        mypch[group %in% "lake"] <- 17
+        mypch[group %in% "hypersaline_low"] <- 0
       }
       studyname <- paste(strsplit(study, "_")[[1]][1:2], collapse="_")
       if(plot.techtype) {
@@ -429,12 +430,20 @@ pcomp <- function(mout, pout, seqtype="MG", type = NULL, parts=c("plot", "legend
       if(is.null(dx) | type!="ZC") dx <- 0
       if(is.null(dy) | type!="ZC") {
         if(type=="both") dy <- 0.002
+        else if(type=="pIG") dy <- 0.005
         else dy <- 0.003
       }
       # add text label
-      #text(xvals[1] + dx, yvals[1], abbrev, cex=0.7)
-      imax <- which.max(yvals)
-      if(abbrev != "GS") text(xvals[imax] + dx, yvals[imax] + dy, abbrev, cex=0.7)
+      if(!is.na(labels.at)) {
+        if(labels.at=="max") {
+          imax <- which.max(yvals)
+          text(xvals[imax] + dx, yvals[imax] + dy, abbrev, cex=0.7)
+        }
+        if(labels.at=="min") {
+          imin <- which.min(yvals)
+          text(xvals[imin] + dx, yvals[imin] - dy, abbrev, cex=0.7)
+        }
+      }
     }
   }
   # add legend

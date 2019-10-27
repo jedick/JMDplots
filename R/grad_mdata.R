@@ -102,8 +102,10 @@ gradH2O <- list(
   Eiler_Marine = list( # 20190719 [EZM+14]
     sample = c("BATS0", "BATS200", "BATS250", "BATS40", "EqDP35155", "NPTG35179", "PNEq35163", "PNEqCc35171",
                "SPSG35131", "SPSG35139", "SPSG35147", "WChannelApr", "WChannelJan"),
-    iMicrobe_MG = c("BATS0", "BATS200", "BATS250", "BATS40", "EqDP35155", "NPTG35179", "PNEq35163", "PNEqCc35171",
-               "SPSG35131", "SPSG35139", "SPSG35147", "WChannelApr", "WChannelJan"),
+    iMicrobe_MG = c("BATS_SMPL_BATS-167-0", "BATS_SMPL_BATS-167-200", "BATS_SMPL_BATS-167-250", "BATS_SMPL_BATS-167-40",
+                    "BACTERIOPLANKTON_SMPL_S_35155", "BACTERIOPLANKTON_SMPL_S_35179", "BACTERIOPLANKTON_SMPL_S_35163", "BACTERIOPLANKTON_SMPL_S_35171",
+                    "BACTERIOPLANKTON_SMPL_S_35131", "BACTERIOPLANKTON_SMPL_S_35139", "BACTERIOPLANKTON_SMPL_S_35147",
+                    "WESTERNCHANNELOMM_SMPL_APR_DAY", "WESTERNCHANNELOMM_SMPL_JAN_DAY"),
     MG_range = c(0.57, 0.64),
     MGP_range = c(-0.20, -0.13),
     abbrev = "EM",
@@ -117,7 +119,7 @@ gradH2O <- list(
     MG_range = c(0.61, 0.64),
     MGP_range = c(-0.13, -0.08),
     abbrev = "SA",
-    group = c("hypersaline", "hypersaline", "hypersaline", "hypersaline"),
+    group = c("hypersaline_low", "hypersaline_low", "hypersaline", "hypersaline"),
     plot_real_x = FALSE,
     techtype = "454"
   ),
@@ -127,7 +129,7 @@ gradH2O <- list(
     MG_range = c(0.61, 0.65),
     MGP_range = c(-0.15, -0.09),
     abbrev = "SB",
-    group = c("hypersaline", "hypersaline", "hypersaline"),
+    group = c("hypersaline_low", "hypersaline_low", "hypersaline"),
     plot_real_x = FALSE,
     techtype = "Illumina"
   ),
@@ -137,27 +139,7 @@ gradH2O <- list(
     MG_range = c(0.61, 0.65),
     MGP_range = c(-0.15, -0.09),
     abbrev = "KS",
-    group = c("hypersaline", "hypersaline", "hypersaline", "hypersaline"),
-    plot_real_x = FALSE,
-    techtype = "Illumina"
-  ),
-  Coorong_Lagoon = list( # 20181224 [JSN+12]
-    salinity_psu = c("36", "105", "132", "136"),
-    MGRAST_MG = c("mgm4440984.3", "mgm4441020.3", "mgm4441021.3", "mgm4441022.3"),
-    MG_range = c(0.61, 0.64),
-    MGP_range = c(-0.15, -0.12),
-    abbrev = "CL",
-    group = c("hypersaline", "hypersaline", "hypersaline", "hypersaline"),
-    plot_real_x = FALSE,
-    techtype = "454"
-  ),
-  SouthBay_Sediment = list( # 20181225 [KBW+18]
-    pond = c("2C", "1C", "A23"),
-    SRA_MG = c("SRR6194934", "SRR6195247", "SRR6194920"),
-    MG_range = c(0.61, 0.65),
-    MGP_range = c(-0.15, -0.09),
-    abbrev = "SB",
-    group = c("hypersaline", "hypersaline", "hypersaline"),
+    group = c("hypersaline_low", "hypersaline_low", "hypersaline", "hypersaline"),
     plot_real_x = FALSE,
     techtype = "Illumina"
   ),

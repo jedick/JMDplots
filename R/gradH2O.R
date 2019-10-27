@@ -181,11 +181,11 @@ gradH2O3 <- function(pdf = FALSE) {
   # plot 2: compare ZC and nH2O of proteins in Baltic Sea surface
   mbaltics <- ppage("balticsurface", plot.it = FALSE)
   pbaltics <- ppage("balticsurface", H2O = TRUE, plot.it = FALSE)
-  pcomp(mbaltics, pbaltics, reorder = FALSE, yline = 3.5)
+  pcomp(mbaltics, pbaltics, reorder = FALSE, yline = 3.5, labels.at = NA)
   # compare ZC and nH2O of proteins in Baltic Sea 10-20 m
   mbalticd <- ppage("balticdeep", plot.it = FALSE)
   pbalticd <- ppage("balticdeep", H2O = TRUE, plot.it = FALSE)
-  pcomp(mbalticd, pbalticd, reorder = FALSE, yline = 3.5, add = TRUE, lty = 3, pch = 6)
+  pcomp(mbalticd, pbalticd, reorder = FALSE, yline = 3.5, add = TRUE, lty = 3, pch = 6, labels.at = NA)
   # add text labels
   text(-0.14, 0.392, "surface\n< 6 PSU")
   text(-0.135, 0.381, "surface\n> 6 PSU")
@@ -224,64 +224,74 @@ gradH2O4 <- function(pdf = FALSE) {
 # nH2O vs ZC for freshwater, marine, and hypersaline environments 20191004
 # make separate plot for sediments 20191006
 # add Amazon River 20191007
+# remove sediments and add GRAVY - pI plots 20191027
 gradH2O5 <- function(pdf = FALSE) {
 
-  if(pdf) pdf("gradH2O5.pdf", width = 8, height = 6)
-  layout(matrix(1:4, nrow = 2))
+  if(pdf) pdf("gradH2O5.pdf", width = 8, height = 5)
+  layout(matrix(1:6, nrow = 2))
   par(las = 1, mar = c(4, 4, 2, 1), mgp = c(2.5, 1, 0))
   xlim <- c(-0.2, -0.08)
   ylim <- c(0.32, 0.4)
 
-  # plots 1-2: Amazon river
+  # plots 1-2: Amazon river metagenome
   mout <- ppage("amazon", plot.it = FALSE)
   pout <- ppage("amazon", H2O = TRUE, plot.it = FALSE)
-  pcomp(mout, pout, xlim = xlim, ylim = ylim, lty = 0, yline = 2.8)
+  pcomp(mout, pout, xlim = xlim, ylim = ylim, lty = 0, yline = 2.8, labels.at = NA)
   hullfun(mout, pout, c(1, 3), "green3", c("riverFL", "riverPA"))
-  hullfun(mout, pout, c(1, 3), "purple1", c("plumeFL", "plumePA"))
+  hullfun(mout, pout, c(1, 3), "blue", c("plumeFL", "plumePA"))
+  text(c(-0.13, -0.13), c(0.365, 0.35), c("river", "plume"))
+  legend("topleft", c("free-living", "particle-associated"), pch = c(20, 15), bty = "n")
   title("Amazon River metagenome", font.main = 1)
   label.figure("A", xfrac = 0.1, cex = 1.7)
-
-  pcomp(mout, pout, "MT", xlim = xlim, ylim = ylim, lty = 0, yline = 2.8)
-  hullfun(mout, pout, c(2, 4), "green3", c("riverFL", "riverPA"))
-  hullfun(mout, pout, c(2, 4), "purple1", c("plumeFL", "plumePA"))
-  title("Amazon River metatranscriptome", font.main = 1)
+  # plot 2: GRAVY - pI
+  pcomp(mout, pout, lty = 0, yline = 3, type = "pIG", labels.at = NA)
+  hullfun(mout, pout, c(1, 3), "green3", c("riverFL", "riverPA"), type = "pIG")
+  hullfun(mout, pout, c(1, 3), "blue", c("plumeFL", "plumePA"), type = "pIG")
+  text(c(7.2, 8.1), c(-0.14, -0.175), c("river", "plume"))
+  title("Amazon River metagenome", font.main = 1)
   label.figure("B", xfrac = 0.1, cex = 1.7)
 
-  # start plot 3: Eiler et al. (freshwater vs marine)
-  mout <- ppage("eiler", plot.it = FALSE)
-  pout <- ppage("eiler", H2O = TRUE, plot.it = FALSE)
-  pcomp(mout, pout, xlim = xlim, ylim = ylim, lty = 0, yline = 2.8)
-  hullfun(mout, pout, 1, "yellowgreen")
-  hullfun(mout, pout, 2, "blue")
-  title("Freshwater - marine - hypersaline", font.main = 1)
+  # plots 3-4: Amazon river metatranscriptome
+  pcomp(mout, pout, "MT", xlim = xlim, ylim = ylim, lty = 0, yline = 2.8, labels.at = NA)
+  hullfun(mout, pout, c(2, 4), "green3", c("riverFL", "riverPA"))
+  hullfun(mout, pout, c(2, 4), "blue", c("plumeFL", "plumePA"))
+  text(c(-0.125, -0.12), c(0.38, 0.36), c("river", "plume"))
+  title("Amazon River metatranscriptome", font.main = 1)
   label.figure("C", xfrac = 0.1, cex = 1.7)
-
-  # add hypersaline water data
-  mout <- ppage("hypersaline", plot.it = FALSE)
-  pout <- ppage("hypersaline", H2O = TRUE, plot.it = FALSE)
-  # include Organic Lake data
-  mout <- c(mout, list("Organic_Lake_SRA_MGP" = mplot("Organic_Lake", "SRA_MGP", plot.it = FALSE)))
-  pout <- c(pout, list("Organic_Lake_SRA_MGP" = mplot("Organic_Lake", "SRA_MGP", H2O = TRUE, plot.it = FALSE)))
-  pcomp(mout, pout, reorder = FALSE, add = TRUE)
-  hullfun(mout, pout, 1:4, "turquoise3")
-
-  # start plot 4: Baltic Sea and Shimokita Peninsula sediment
-  BS_ZC <- list("BalticSea_Sediment_SRA_MGP" = mplot("BalticSea_Sediment", "SRA_MGP", plot.it = FALSE))
-  BS_nH2O <- list("BalticSea_Sediment_SRA_MGP" = mplot("BalticSea_Sediment", "SRA_MGP", H2O = TRUE, plot.it = FALSE))
-  SP_ZC <- list("Shimokita_Peninsula_GenBank_MGP" = mplot("Shimokita_Peninsula", "GenBank_MGP", plot.it = FALSE))
-  SP_nH2O <- list("Shimokita_Peninsula_GenBank_MGP" = mplot("Shimokita_Peninsula", "GenBank_MGP", H2O = TRUE, plot.it = FALSE))
-  mout <- c(BS_ZC, SP_ZC)
-  pout <- c(BS_nH2O, SP_nH2O)
-  pcomp(mout, pout, reorder = FALSE, xlim = xlim, ylim = ylim, yline = 2.8)
-  hullfun(mout, pout, 1:2, "slategrey")
-  title("Marine and hypersaline sediment", font.main = 1)
+  # plot 4: GRAVY - pI
+  pcomp(mout, pout, "MT", lty = 0, yline = 3, type = "pIG", labels.at = NA)
+  hullfun(mout, pout, c(2, 4), "green3", c("riverFL", "riverPA"), type = "pIG")
+  hullfun(mout, pout, c(2, 4), "blue", c("plumeFL", "plumePA"), type = "pIG")
+  text(c(8.2, 6.5), c(-0.105, -0.11), c("river", "plume"))
+  title("Amazon River metatranscriptome", font.main = 1)
   label.figure("D", xfrac = 0.1, cex = 1.7)
 
-  # add hypersaline sediment data
-  mout <- ppage("HSsediment", plot.it = FALSE)
-  pout <- ppage("HSsediment", H2O = TRUE, plot.it = FALSE)
-  hullfun(mout, pout, 1:2, "turquoise3")
-  pcomp(mout, pout, reorder = FALSE, add = TRUE)
+  # start plot 5: Eiler et al. (freshwater vs marine)
+  moutE <- ppage("eiler", plot.it = FALSE)
+  poutE <- ppage("eiler", H2O = TRUE, plot.it = FALSE)
+  pcomp(moutE, poutE, xlim = xlim, ylim = ylim, lty = 0, yline = 2.8, labels.at = NA)
+  hullfun(moutE, poutE, 1, "green3")
+  hullfun(moutE, poutE, 2, "blue")
+
+  # add hypersaline water data
+  moutH <- ppage("hypersaline", plot.it = FALSE)
+  poutH <- ppage("hypersaline", H2O = TRUE, plot.it = FALSE)
+  pcomp(moutH, poutH, reorder = FALSE, add = TRUE)
+  hullfun(moutH, poutH, 1:3, "turquoise3")
+  text(c(-0.16, -0.16, -0.12), c(0.393, 0.348, 0.353), c("freshwater", "marine", "hypersaline"))
+  legend("bottomright", c("lower salinity", "higher salinity"), pch = c(0, 15), col = "turquoise3", bty = "n")
+  title("Freshwater - marine - hypersaline", font.main = 1)
+  label.figure("E", xfrac = 0.1, cex = 1.7)
+
+  # plot 6: GRAVY - pI
+  pcomp(moutE, poutE, lty = 0, yline = 3, type = "pIG", labels.at = NA)
+  hullfun(moutE, poutE, 1, "green3", type = "pIG")
+  hullfun(moutE, poutE, 2, "blue", type = "pIG")
+  pcomp(moutH, poutH, reorder = FALSE, add = TRUE, type = "pIG", labels.at = "min")
+  hullfun(moutH, poutH, 1:3, "turquoise3", type = "pIG")
+  text(c(7.5, 7.4, 6.3), c(-0.14, -0.20, -0.27), c("freshwater", "marine", "hypersaline"))
+  title("Freshwater - marine - hypersaline", font.main = 1)
+  label.figure("F", xfrac = 0.1, cex = 1.7)
 
   if(pdf) invisible(dev.off())
 }
@@ -351,9 +361,14 @@ NifProteomes <- function() {
 hullfun <- function(mout, pout, istudy, basecol, group = NULL, type = "ZC") {
   x <- y <- numeric()
   for(ist in istudy) {
-    if(type == "ZC") thisx <- mout[[ist]]$AA
-    if(type == "GRAVY") thisx <- mout[[ist]]$GRAVY
+    thisx <- mout[[ist]]$AA
     thisy <- pout[[ist]]$AA
+    if(type == "GRAVY") thisx <- mout[[ist]]$GRAVY
+    if(type == "pI") thisx <- mout[[ist]]$pI
+    if(type == "pIG") {
+      thisx <- mout[[ist]]$pI
+      thisy <- pout[[ist]]$GRAVY
+    }
     if(!is.null(group)) {
       thisx <- thisx[mout[[ist]]$group %in% group]
       thisy <- thisy[mout[[ist]]$group %in% group]
