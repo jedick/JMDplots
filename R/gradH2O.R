@@ -151,7 +151,7 @@ gradH2O2 <- function(pdf = FALSE) {
 }
 
 # nH2O-ZC scatterplots for redox gradients and the Baltic Sea 20190713
-gradH2O3 <- function(pdf = FALSE) {
+gradH2O3 <- function(pdf = FALSE, type = "H2O-ZC") {
   if(pdf) pdf("gradH2O3.pdf", width = 12, height = 5.6)
   par(mfrow = c(1, 2))
   par(mar = c(4, 4.5, 2, 1), las = 1, cex = 1.2)
@@ -159,44 +159,54 @@ gradH2O3 <- function(pdf = FALSE) {
   # plot 1: compare ZC and nH2O of proteins in datasets from gradox paper
   mgradox <- ppage("gradoxGS", plot.it = FALSE)
   pgradox <- ppage("gradoxGS", H2O = TRUE, plot.it = FALSE)
-  pcomp(mgradox, pgradox, reorder = FALSE, yline = 3.5)
+  pcomp(mgradox, pgradox, reorder = FALSE, yline = 3.5, type = type)
   # add proteomes from Nif-encoding genomes 20191014
   np <- NifProteomes()
-  points(np$ZC, np$nH2O, pch = 15)
-  lines(np$ZC, np$nH2O, col = "dimgray", lwd = 0.8, lty = 2)
+  if(type == "H2O-ZC") {
+    points(np$ZC, np$nH2O, pch = 15)
+    lines(np$ZC, np$nH2O, col = "dimgray", lwd = 0.8, lty = 2)
+  }
+  if(type == "pIG") {
+    points(np$pI, np$GRAVY, pch = 15)
+    lines(np$pI, np$GRAVY, col = "dimgray", lwd = 0.8, lty = 2)
+  }
   # add text labels
-  text(-0.21, 0.348, "hot spring")
-  text(-0.21, 0.3455, "source")
-  text(-0.157, 0.349, "photo-", adj = 0)
-  text(-0.157, 0.3465, "trophic", adj = 0)
-  text(-0.157, 0.344, "zone", adj = 0)
-  text(-0.127, 0.353, "> 3 mm", adj = 0)
-  text(-0.138, 0.356, "3 mm", adj = 0)
-  text(-0.134, 0.3585, "2 mm", adj = 0)
-  text(-0.131, 0.367, "1 mm", adj = 0)
-  text(-0.205, 0.364, "vent")
-  text(-0.205, 0.3615, "fluids")
-  text(-0.157, 0.368, "plume")
-  text(-0.163, 0.3595, "sea-", adj = 0)
-  text(-0.163, 0.357, "water", adj = 0)
-  text(c(-0.188, -0.212, -0.186, -0.161), c(0.4005, 0.3894, 0.3807, 0.3798), c("Nif-D", "Nif-C", "Nif-B", "Nif-A"), adj = 0)
-  text(-0.217, 0.3865, "NF", cex=0.7)
+  if(type == "H2O-ZC") {
+    text(-0.21, 0.348, "hot spring")
+    text(-0.21, 0.3455, "source")
+    text(-0.157, 0.349, "photo-", adj = 0)
+    text(-0.157, 0.3465, "trophic", adj = 0)
+    text(-0.157, 0.344, "zone", adj = 0)
+    text(-0.127, 0.353, "> 3 mm", adj = 0)
+    text(-0.138, 0.356, "3 mm", adj = 0)
+    text(-0.134, 0.3585, "2 mm", adj = 0)
+    text(-0.131, 0.367, "1 mm", adj = 0)
+    text(-0.205, 0.364, "vent")
+    text(-0.205, 0.3615, "fluids")
+    text(-0.157, 0.368, "plume")
+    text(-0.163, 0.3595, "sea-", adj = 0)
+    text(-0.163, 0.357, "water", adj = 0)
+    text(c(-0.188, -0.212, -0.186, -0.161), c(0.4005, 0.3894, 0.3807, 0.3798), c("Nif-D", "Nif-C", "Nif-B", "Nif-A"), adj = 0)
+    text(-0.217, 0.3865, "NF", cex=0.7)
+  }
   title("redox gradients", font.main = 1)
   label.figure("A", cex = 2, xfrac = 0.035)
 
   # plot 2: compare ZC and nH2O of proteins in Baltic Sea surface
   mbaltics <- ppage("balticsurface", plot.it = FALSE)
   pbaltics <- ppage("balticsurface", H2O = TRUE, plot.it = FALSE)
-  pcomp(mbaltics, pbaltics, reorder = FALSE, yline = 3.5, labels.at = NA)
+  pcomp(mbaltics, pbaltics, reorder = FALSE, yline = 3.5, labels.at = NA, type = type)
   # compare ZC and nH2O of proteins in Baltic Sea 10-20 m
   mbalticd <- ppage("balticdeep", plot.it = FALSE)
   pbalticd <- ppage("balticdeep", H2O = TRUE, plot.it = FALSE)
-  pcomp(mbalticd, pbalticd, reorder = FALSE, yline = 3.5, add = TRUE, lty = 3, pch = 6, labels.at = NA)
+  pcomp(mbalticd, pbalticd, reorder = FALSE, yline = 3.5, add = TRUE, lty = 3, pch = 6, labels.at = NA, type = type)
   # add text labels
-  text(-0.14, 0.392, "surface\n< 6 PSU")
-  text(-0.135, 0.381, "surface\n> 6 PSU")
-  text(-0.185, 0.386, "10-20 m\n< 6 PSU")
-  text(-0.18, 0.370, "10-20 m\n> 6 PSU")
+  if(type == "H2O-ZC") {
+    text(-0.14, 0.392, "surface\n< 6 PSU")
+    text(-0.135, 0.381, "surface\n> 6 PSU")
+    text(-0.185, 0.386, "10-20 m\n< 6 PSU")
+    text(-0.18, 0.370, "10-20 m\n> 6 PSU")
+  }
   title("Baltic Sea", font.main = 1)
   label.figure("B", cex = 2, xfrac = 0.035)
 
@@ -206,30 +216,39 @@ gradH2O3 <- function(pdf = FALSE) {
   }
 }
 
-# nH2O for Baltic Sea size fractions 20190715
-gradH2O4 <- function(pdf = FALSE) {
+# nH2O for Baltic Sea metagenome and metatranscriptome in different size fractions 20190715
+gradH2O4 <- function(pdf = FALSE, type = NULL) {
   if(pdf) pdf("gradH2O4.pdf", width = 6, height = 2.5)
-  par(mfrow = c(1, 3))
+  ntype <- ifelse(is.null(type), 1, length(type))
+  if(ntype==2) par(mfrow = c(2, 3))
+  else par(mfrow = c(1, 3))
   par(mar = c(5, 4, 1, 1), mgp = c(3, 0.7, 0), las = 1)
 
-  mplot("Baltic_Sea-0.1s", "iMicrobe_MGP", H2O = TRUE, plottype = "#FF000030", col = "red", add.title = FALSE, ylim = c(0.34, 0.4), yline = 2.7)
-  mplot("Baltic_Sea-0.1s", "SRA_MTP", H2O = TRUE, plottype = "#0000FF30", col = "blue", add.title = FALSE, add = TRUE, pch = 1)
-  legend("topright", legend = quote("0.1-0.8"~mu*m), bty = "n")
-  label.figure("A", cex = 2, xfrac = 0.04)
+  for(i in 1:ntype) {
+    ylim <- NULL
+    if(identical(type[i], "pI")) ylim <- c(5, 7.5)
+    figlab <- c("A", "B", "C")
+    if(i==2) figlab <- c("D", "E", "F")
 
-  mplot("Baltic_Sea-0.8s", "iMicrobe_MGP", H2O = TRUE, plottype = "#FF000030", col = "red", add.title = FALSE, ylim = c(0.34, 0.4), yline = 2.7)
-  mplot("Baltic_Sea-0.8s", "SRA_MTP", H2O = TRUE, plottype = "#0000FF30", col = "blue", add.title = FALSE, add = TRUE, pch = 1)
-  legend("topright", legend = quote("0.8-3.0"~mu*m), bty = "n")
-  label.figure("B", cex = 2, xfrac = 0.035)
+    mplot("Baltic_Sea-0.1s", "iMicrobe_MGP", H2O = TRUE, plottype = "#FF000030", col = "red", add.title = FALSE, ylim = ylim, yline = 2.7, type = type[i])
+    mplot("Baltic_Sea-0.1s", "SRA_MTP", H2O = TRUE, plottype = "#0000FF30", col = "blue", add.title = FALSE, add = TRUE, pch = 1, type = type[i])
+    legend("topright", legend = quote("0.1-0.8"~mu*m), bty = "n")
+    label.figure(figlab[1], cex = 2, xfrac = 0.04)
 
-  mplot("Baltic_Sea-3.0s", "iMicrobe_MGP", H2O = TRUE, plottype = "#FF000030", col = "red", add.title = FALSE, ylim = c(0.34, 0.4), yline = 2.7)
-  mplot("Baltic_Sea-3.0s", "SRA_MTP", H2O = TRUE, plottype = "#0000FF30", col = "blue", add.title = FALSE, add = TRUE, pch = 1)
-  legend("topright", legend = quote("3.0-200"~mu*m), bty = "n")
-  label.figure("C", cex = 2, xfrac = 0.035)
+    mplot("Baltic_Sea-0.8s", "iMicrobe_MGP", H2O = TRUE, plottype = "#FF000030", col = "red", add.title = FALSE, ylim = ylim, yline = 2.7, type = type[i])
+    mplot("Baltic_Sea-0.8s", "SRA_MTP", H2O = TRUE, plottype = "#0000FF30", col = "blue", add.title = FALSE, add = TRUE, pch = 1, type = type[i])
+    legend("topright", legend = quote("0.8-3.0"~mu*m), bty = "n")
+    label.figure(figlab[2], cex = 2, xfrac = 0.035)
+
+    mplot("Baltic_Sea-3.0s", "iMicrobe_MGP", H2O = TRUE, plottype = "#FF000030", col = "red", add.title = FALSE, ylim = ylim, yline = 2.7, type = type[i])
+    mplot("Baltic_Sea-3.0s", "SRA_MTP", H2O = TRUE, plottype = "#0000FF30", col = "blue", add.title = FALSE, add = TRUE, pch = 1, type = type[i])
+    legend("topright", legend = quote("3.0-200"~mu*m), bty = "n")
+    label.figure(figlab[3], cex = 2, xfrac = 0.035)
+  }
 
   if(pdf) {
     dev.off()
-    addexif("gradH2O4", "nH2O for Baltic Sea size fractions", "Dick et al. (2019) (preprint)")
+    addexif("gradH2O4", "nH2O for Baltic Sea metagenome and metatranscriptome in different size fractions", "Dick et al. (2019) (preprint)")
   }
 }
 
@@ -344,7 +363,7 @@ NifProteomes <- function() {
   # the Nif types, arranged from anaerobic to aerobic
   types <- c("Nif-D", "Nif-C", "Nif-B", "Nif-A")
   # assemble the compositional metrics
-  ZC <- ZC.SD <- nH2O <- nH2O.SD <- GRAVY <- GRAVY.SD <- numeric()
+  ZC <- ZC.SD <- nH2O <- nH2O.SD <- GRAVY <- GRAVY.SD <- pI <- pI.SD <- numeric()
   for(type in types) {
     # get the taxids for genomes with this type of Nif
     iNif <- Nif$Type == type
@@ -366,9 +385,31 @@ NifProteomes <- function() {
     nH2O.SD <- c(nH2O.SD, sd(H2OAA(AAcomp)))
     GRAVY <- c(GRAVY, mean(GRAVY(AAcomp)))
     GRAVY.SD <- c(GRAVY.SD, sd(GRAVY(AAcomp)))
+    pI <- c(pI, mean(pI(AAcomp)))
+    pI.SD <- c(pI.SD, sd(pI(AAcomp)))
   }
   # return values
-  list(types = types, ZC = ZC, ZC.SD = ZC.SD, nH2O = nH2O, nH2O.SD = nH2O.SD, GRAVY = GRAVY, GRAVY.SD = GRAVY.SD)
+  list(types = types, ZC = ZC, ZC.SD = ZC.SD, nH2O = nH2O, nH2O.SD = nH2O.SD, GRAVY = GRAVY, GRAVY.SD = GRAVY.SD, pI = pI, pI.SD = pI.SD)
+}
+
+# Supplementary Figure S1 20191028
+gradH2OS1 <- function(pdf = FALSE) {
+  if(pdf) pdf("gradH2OS1.pdf", width = 12, height = 5.6)
+  gradH2O3(type = "pIG")
+  if(pdf) {
+    dev.off()
+    addexif("gradH2OS1", "GRAVY-pI scatterplots for redox gradients and the Baltic Sea", "Dick et al. (2019) (preprint)")
+  }
+}
+
+# Supplementary Figure S2 20191028
+gradH2OS2 <- function(pdf = FALSE) {
+  if(pdf) pdf("gradH2OS2.pdf", width = 6, height = 2.5)
+  gradH2O4(type = c("GRAVY", "pI"))
+  if(pdf) {
+    dev.off()
+    addexif("gradH2OS2", "GRAVY and SI for Baltic Sea metagenome and metatranscriptome in different size fractions", "Dick et al. (2019) (preprint)")
+  }
 }
 
 ############################

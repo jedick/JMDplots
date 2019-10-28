@@ -16,7 +16,7 @@ The functions are exported in the package so they are available to user scripts.
   mplot(study, seqtype, plottype = "bars", ylim = NULL, plot.RNA = TRUE,
     taxid = NULL, dsDNA = TRUE, abbrev = NULL, col = NULL, add.label = TRUE,
     maxdepth = NULL, H2O = FALSE, plot.it = TRUE, add.title = TRUE, yline = 2,
-    basis = "rQEC", datadir = NULL, mdata = studies, add = FALSE, pch= 19)
+    basis = "rQEC", datadir = NULL, mdata = studies, add = FALSE, pch= 19, type = NULL)
   mpage(subset = "gradoxSI", H2O = FALSE, plottype = "bars", dsDNA = TRUE,
     set.par = TRUE, add.label = TRUE, mfrow = NULL)
   ppage(subset = "gradoxSI", H2O = FALSE, set.par = TRUE, plot.it = TRUE,
@@ -50,7 +50,7 @@ The functions are exported in the package so they are available to user scripts.
   \item{mout}{list, output from \code{mpage} or \code{ppage}}
   \item{yvar}{character, y-axis variable (\samp{RNA} or \samp{GC})}
   \item{pout}{list, output from \code{ppage}}
-  \item{type}{character, type of plot (\samp{ZC} or \samp{both} or \samp{GRAVY})}
+  \item{type}{character, type of plot (\samp{ZC}, \samp{H2O-ZC}, \samp{GRAVY}, or \samp{pI})}
   \item{parts}{character, parts of figure to include}
   \item{xlim}{numeric, x-axis limits}
   \item{reorder}{logical, put points in order of increasing x value?}
@@ -68,7 +68,8 @@ The \code{study} is composed of two names for the locality separated by an under
 For \code{mplot}, the \code{seqtype} contains the name of the database followed by an underscore and MG (metagenome) or MT (metatranscriptome), i.e. \samp{[SRA|IMG|MGRAST|GenBank]_[MG|MT]}.
 These can be changed to \samp{_MGP} and \samp{_MTP} to indicate protein sequences.
 
-\code{mplot} plots values of \ZC for a particular combination of \code{study} and \code{seqtype}.
+\code{mplot} plots a compositional variable for a particular combination of \code{study} and \code{seqtype}.
+The variable plotted is \ZC by default, but this can be changed to \nH2O with \code{H2O = TRUE} or GRAVY or pI (specified in the \code{type} argument).
 \ZC of both DNA and RNA are plotted, with an offset of -0.28 applied to that of RNA, so that values can be shown on the same scale (see Dick et al., 2019).
 The default value of \code{plottype}, \samp{bars}, specifies a plot with mean values connected by dashed lines and error bars for each sample.
 A polygon plot (shaded area instead of error bars) is made if the first character of \code{plottype} is \samp{#}.

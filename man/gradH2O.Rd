@@ -16,8 +16,8 @@ Plots from the paper by Dick et al. (2019).
 \usage{
   gradH2O1(pdf = FALSE)
   gradH2O2(pdf = FALSE)
-  gradH2O3(pdf = FALSE)
-  gradH2O4(pdf = FALSE)
+  gradH2O3(pdf = FALSE, type = "H2O-ZC")
+  gradH2O4(pdf = FALSE, type = NULL)
   gradH2O5(pdf = FALSE)
   gradH2O6(pdf = FALSE)
   NifProteomes()
@@ -25,6 +25,7 @@ Plots from the paper by Dick et al. (2019).
 
 \arguments{
   \item{pdf}{logical, make a PDF file?}
+  \item{type}{character, plot variables (passed to \code{\link{pcomp}} or \code{\link{mplot}})}
 }
 
 \details{
@@ -34,7 +35,7 @@ This table gives a brief description of each function.
   \code{gradH2O1} \tab Basis species comparison \cr
   \code{gradH2O2} \tab \ZC of proteins for selected redox gradients \cr
   \code{gradH2O3} \tab \nH2O-\ZC scatterplots for redox gradients and the Baltic Sea \cr
-  \code{gradH2O4} \tab \nH2O for Baltic Sea size fractions \cr
+  \code{gradH2O4} \tab \nH2O for Baltic Sea metagenome and metatranscriptome in different size fractions \cr
   \code{gradH2O5} \tab \nH2O-\ZC for freshwater, marine, and hypersaline environments \cr
   \code{gradH2O6} \tab Mean differences of \nH2O and \ZC for differentially expressed proteins in hyperosmotic stress \cr
 }

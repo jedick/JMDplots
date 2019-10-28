@@ -45,13 +45,13 @@ plotMG <- function(dataset="Guerrero_Negro_IMG_MG", plottype="bars",
   taxid=NULL, lwd=1, lty=2, lwd.bars=2, col=NULL, extendrange=FALSE, add.label=TRUE,
   plot_real_x=FALSE, maxdepth=NULL, H2O=FALSE, plot.it = TRUE, add.title = TRUE, yline = 2,
   basis = "rQEC", techtype = NULL, dx = NULL, dy = NULL, datadir = NULL,
-  add = FALSE, all.labels = NULL, pch = 19) {
+  add = FALSE, all.labels = NULL, pch = 19, type = NULL) {
   # samples: (used for suffixes on file names)
   # labels: (used for labeling x-axis ticks)
   # xlab: axis label: "layer", "depth", ...
   isprotein <- grepl("_MGP$", dataset) | grepl("_MTP$", dataset)
   # where to keep mean and high/lo (+/- SD) of ZC at each site
-  pI <- GRAVY <- GC <- ZClo <- ZCmean <- ZChi <- numeric()
+  pI <- pI.SD <- GRAVY <- GRAVY.SD <- GC <- Xlo <- Xmean <- Xhi <- numeric()
   # are we using user-supplied data?
   user_data <- TRUE
   if(is.null(datadir)) {
@@ -69,7 +69,7 @@ plotMG <- function(dataset="Guerrero_Negro_IMG_MG", plottype="bars",
       rdsfile <- file.path(datadir, "MGP.rds")
       filestart <- dataset
     }
-    if(H2O) ZCfun <- H2OAA else ZCfun <- ZCAA
+    if(H2O) Xfun <- H2OAA else Xfun <- ZCAA
     if(is.null(col)) col <- "darkgreen"
   } else {
     # data directory for DNA
@@ -78,7 +78,7 @@ plotMG <- function(dataset="Guerrero_Negro_IMG_MG", plottype="bars",
       rdsfile <- file.path(datadir, "MGD.rds")
       filestart <- paste0(dataset, "D")
     }
-    ZCfun <- ZCnuc
+    Xfun <- ZCnuc
     if(is.null(col)) col <- "red"
   }
   # keep sample values for violin plot 20180515
@@ -94,30 +94,34 @@ plotMG <- function(dataset="Guerrero_Negro_IMG_MG", plottype="bars",
     if(user_data) fexists <- file.exists(file)
     else fexists <- file %in% names(RDS)
     if(!fexists) {
-      ZCmean <- c(ZCmean, NA)
-      ZClo <- c(ZClo, NA)
-      ZChi <- c(ZChi, NA)
+      Xmean <- c(Xmean, NA)
+      Xlo <- c(Xlo, NA)
+      Xhi <- c(Xhi, NA)
       message(paste("missing file", file))
     } else {
       if(user_data) mycomp <- read.csv(file, as.is=TRUE)
       else mycomp <- RDS[[file]]
       if(isprotein) {
         # calculate GRAVY 20191024
-        GRAVY <- c(GRAVY, mean(GRAVY(mycomp)))
+        myGRAVY <- GRAVY(mycomp)
+        GRAVY <- c(GRAVY, mean(myGRAVY))
+        GRAVY.SD <- c(GRAVY.SD, sd(myGRAVY))
         # calculate isoelectric point 20191027
-        pI <- c(pI, mean(pI(mycomp)))
+        mypI <- pI(mycomp)
+        pI <- c(pI, mean(mypI))
+        pI.SD <- c(pI.SD, sd(mypI))
         # add basis argument (QEC or rQEC) here
-        myZC <- ZCfun(mycomp, basis)
+        myX <- Xfun(mycomp, basis)
       } else {
         # use base-paired (double-stranded) DNA
         if(dsDNA) mycomp <- make_dsDNA(mycomp)
         # calculate GC ratio 20180309
         if(!isprotein) GC <- c(GC, GCnuc(mycomp))
-        myZC <- ZCfun(mycomp, "deoxyribose")
+        myX <- Xfun(mycomp, "deoxyribose")
       }
-      ZCmean <- c(ZCmean, mean(myZC))
-      ZClo <- c(ZClo, mean(myZC) - sd(myZC))
-      ZChi <- c(ZChi, mean(myZC) + sd(myZC))
+      Xmean <- c(Xmean, mean(myX))
+      Xlo <- c(Xlo, mean(myX) - sd(myX))
+      Xhi <- c(Xhi, mean(myX) + sd(myX))
       # initialize data frame for mean compositions
       if(is.null(meancomp)) {
         meancomp <- mycomp[1:length(samples), ]
@@ -129,12 +133,26 @@ plotMG <- function(dataset="Guerrero_Negro_IMG_MG", plottype="bars",
       # keep sample values for violin plot 20180515
       istart <- (i-1) * 100 + 1
       iend <- istart + 99
-      DNA$ZC[istart:iend] <- myZC
+      DNA$ZC[istart:iend] <- myX
       DNA$sample[istart:iend] <- paste0("X", letters[i])
     }
   }
   # make plot
   if(plot.it) {
+    # replace "X" (ZC or nH2O) with GRAVY or pI 20191028
+    plotXmean <- Xmean
+    plotXhi <- Xhi
+    plotXlo <- Xlo
+    if(identical(type, "GRAVY")) {
+      plotXmean <- GRAVY
+      plotXhi <- GRAVY + GRAVY.SD
+      plotXlo <- GRAVY - GRAVY.SD
+    }
+    if(identical(type, "pI")) {
+      plotXmean <- pI
+      plotXhi <- pI + pI.SD
+      plotXlo <- pI - pI.SD
+    }
     isdeep <- logical(length(labels))
     if(is.null(all.labels)) all.labels <- labels
     if(plot_real_x) {
@@ -175,13 +193,15 @@ plotMG <- function(dataset="Guerrero_Negro_IMG_MG", plottype="bars",
         else axis(1, at=atx, labels=all.labels)
       }
       # add y-axis: ZC (or nH2O 20181231)
-      if(H2O) mtext(quote(italic(n)[H[2]*O]), side=2, line=yline, las=0)
+      if(identical(type, "GRAVY")) mtext("GRAVY", side = 2, line = yline, las = 0)
+      else if(identical(type, "pI")) mtext("pI", side = 2, line = yline, las = 0)
+      else if(H2O) mtext(quote(italic(n)[H[2]*O]), side=2, line=yline, las=0)
       else mtext(quote(italic(Z)[C]), side=2, line=yline, las=0)
     }
     if(plottype=="lines") {
-      lines(atx[!isdeep], ZClo[!isdeep], col=col, lty=3)
-      lines(atx[!isdeep], ZCmean[!isdeep], col=col)
-      lines(atx[!isdeep], ZChi[!isdeep], col=col, lty=3)
+      lines(atx[!isdeep], plotXlo[!isdeep], col=col, lty=3)
+      lines(atx[!isdeep], plotXmean[!isdeep], col=col)
+      lines(atx[!isdeep], plotXhi[!isdeep], col=col, lty=3)
     }
 #    if(plottype=="violin") {
 #      vioplotx(ZC~sample, DNA, add=TRUE, col = "palevioletred", plotCentre = "line", side = "left", pchMed = 21, colMed = "palevioletred4", colMed2 = "palevioletred2")
@@ -192,19 +212,19 @@ plotMG <- function(dataset="Guerrero_Negro_IMG_MG", plottype="bars",
       if(!is.null(taxid)) xx <- 0
       else xx <- abs(diff(par("usr")[1:2])) / 120
       # bars (whiskers) at one SD from mean (arrows trick from https://stackoverflow.com/questions/13032777/scatter-plot-with-error-bars)
-      arrows(atx-xx, ZClo, atx-xx, ZChi, length = 0.03, angle = 90, code = 3, col=col, lwd=lwd.bars)
+      arrows(atx-xx, plotXlo, atx-xx, plotXhi, length = 0.03, angle = 90, code = 3, col=col, lwd=lwd.bars)
       # remove NAs so we can draw lines between all sites 20180529
-      iNA <- is.na(ZCmean)
-      lines((atx)[!iNA & !isdeep]-xx, ZCmean[!iNA & !isdeep], col=col, lty=lty, lwd=lwd)
+      iNA <- is.na(plotXmean)
+      lines((atx)[!iNA & !isdeep]-xx, plotXmean[!iNA & !isdeep], col=col, lty=lty, lwd=lwd)
     }
     if(substr(plottype, 1, 1)=="#") {
       # polygon plots 20191005
       # assemble top and bottom coordinates of polygon
-      polygon(c(atx, rev(atx)), c(ZChi, rev(ZClo)), col = plottype, border = NA)
+      polygon(c(atx, rev(atx)), c(plotXhi, rev(plotXlo)), col = plottype, border = NA)
       # remove NAs so we can draw lines between all sites 20180529
-      iNA <- is.na(ZCmean)
-      lines((atx)[!iNA & !isdeep], ZCmean[!iNA & !isdeep], col=col, lty=lty, lwd=lwd)
-      points((atx)[!iNA & !isdeep], ZCmean[!iNA & !isdeep], pch = pch, col=col)
+      iNA <- is.na(plotXmean)
+      lines((atx)[!iNA & !isdeep], plotXmean[!iNA & !isdeep], col=col, lty=lty, lwd=lwd)
+      points((atx)[!iNA & !isdeep], plotXmean[!iNA & !isdeep], pch = pch, col=col)
     }
     # add points to show > 1% species abundance 20181118
     if(!is.null(taxid) & !identical(taxid, 0)) {
@@ -216,12 +236,12 @@ plotMG <- function(dataset="Guerrero_Negro_IMG_MG", plottype="bars",
       dat <- dat[dat$taxid==taxid, ]
       dat <- dat[dat$percentage >= 1, ]
       ioneperc <- samples %in% dat$sample
-      points(atx[ioneperc], ZCmean[ioneperc], pch=pch, cex=0.5, col=col)
+      points(atx[ioneperc], plotXmean[ioneperc], pch=pch, cex=0.5, col=col)
     }
   }
   # now do it for RNA
   if(!isprotein) {
-    RNA_ZClo <- RNA_ZCmean <- RNA_ZChi <- numeric()
+    RNA_Xlo <- RNA_Xmean <- RNA_Xhi <- numeric()
     # keep sample values for violin plot 20180515
     RNA <- data.frame(ZC=numeric(length(samples)*100), sample=character(length(samples)*100), stringsAsFactors=FALSE)
     # gradox or gradH2O data location in JMDplots package 20190928
@@ -243,24 +263,24 @@ plotMG <- function(dataset="Guerrero_Negro_IMG_MG", plottype="bars",
       if(fexists) {
         if(user_data) myRNA <- read.csv(file, as.is=TRUE)
         else myRNA <- RDS[[file]]
-        myZC <- ZCfun(myRNA, "ribose")
-        RNA_ZCmean <- c(RNA_ZCmean, mean(myZC))
-        RNA_ZClo <- c(RNA_ZClo, mean(myZC) - sd(myZC))
-        RNA_ZChi <- c(RNA_ZChi, mean(myZC) + sd(myZC))
+        myX <- Xfun(myRNA, "ribose")
+        RNA_Xmean <- c(RNA_Xmean, mean(myX))
+        RNA_Xlo <- c(RNA_Xlo, mean(myX) - sd(myX))
+        RNA_Xhi <- c(RNA_Xhi, mean(myX) + sd(myX))
       }
       # keep sample values for violin plot 20180515
       istart <- (i-1) * 100 + 1
       iend <- istart + 99
-      RNA$ZC[istart:iend] <- myZC
+      RNA$ZC[istart:iend] <- myX
       RNA$sample[istart:iend] <- paste0("X", letters[i])
     }
-    if(plot.RNA & length(RNA_ZCmean) > 0 & plot.it) {
+    if(plot.RNA & length(RNA_Xmean) > 0 & plot.it) {
       # subtract offset for ZC of RNA
       dZC <- -0.28
       if(plottype=="lines") {
-        lines(atx, RNA_ZClo + dZC, col="blue", lty=3)
-        lines(atx, RNA_ZCmean + dZC, col="blue")
-        lines(atx, RNA_ZChi + dZC, col="blue", lty=3)
+        lines(atx, RNA_Xlo + dZC, col="blue", lty=3)
+        lines(atx, RNA_Xmean + dZC, col="blue")
+        lines(atx, RNA_Xhi + dZC, col="blue", lty=3)
       }
 #      if(plottype=="violin") {
 #        RNA$ZC <- RNA$ZC + dZC
@@ -269,14 +289,14 @@ plotMG <- function(dataset="Guerrero_Negro_IMG_MG", plottype="bars",
       if(plottype=="bars") {
         # apply small offset to x-position to separate DNA and RNA
         xx <- abs(diff(par("usr")[1:2])) / 200
-        arrows(atx+xx, RNA_ZClo + dZC, atx+xx, RNA_ZChi + dZC, length = 0.03, angle = 90, code = 3, col="blue", lwd=lwd.bars)
-        lines(atx+xx, RNA_ZCmean + dZC, col="blue", lty=2, lwd=lwd)
+        arrows(atx+xx, RNA_Xlo + dZC, atx+xx, RNA_Xhi + dZC, length = 0.03, angle = 90, code = 3, col="blue", lwd=lwd.bars)
+        lines(atx+xx, RNA_Xmean + dZC, col="blue", lty=2, lwd=lwd)
       }
     }
     # return ZC values
-    outval <- list(DNA=ZCmean, RNA=RNA_ZCmean, GC=GC, group=group, meancomp=meancomp, abbrev=abbrev, techtype = techtype, dx = dx, dy = dy, H2O = H2O)
+    outval <- list(DNA=Xmean, RNA=RNA_Xmean, GC=GC, group=group, meancomp=meancomp, abbrev=abbrev, techtype = techtype, dx = dx, dy = dy, H2O = H2O)
   } else {
-    outval <- list(AA=ZCmean, GRAVY=GRAVY, pI=pI, group=group, meancomp=meancomp, abbrev=abbrev, techtype = techtype, dx = dx, dy = dy, H2O = H2O)
+    outval <- list(AA=Xmean, GRAVY=GRAVY, pI=pI, group=group, meancomp=meancomp, abbrev=abbrev, techtype = techtype, dx = dx, dy = dy, H2O = H2O)
   }
   # add title 20180225
   if((is.null(taxid) | identical(taxid, 0)) & plot.it & add.title & !add) {

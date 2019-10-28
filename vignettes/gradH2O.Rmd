@@ -39,7 +39,7 @@ gradH2O3(TRUE)
 knitr::include_graphics("gradH2O3.pdf")
 ```
 
-## `r nH2O` for Baltic Sea size fractions (Figure 4)
+## `r nH2O` for Baltic Sea metagenome and metatranscriptome in different size fractions (Figure 4)
 ```{r gradH2O4, message = FALSE, echo = 1, fig.align='center', out.width='100%', out.height='350px'}
 gradH2O4(TRUE)
 knitr::include_graphics("gradH2O4.pdf")
