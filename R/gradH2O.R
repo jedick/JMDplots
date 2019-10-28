@@ -280,7 +280,7 @@ gradH2O5 <- function(pdf = FALSE) {
   hullfun(mout, pout, c(1, 3), "blue", c("plumeFL", "plumePA"), type = "pIG")
   text(c(7.2, 8.1), c(-0.14, -0.175), c("river", "plume"))
   title("Amazon River metagenome", font.main = 1)
-  label.figure("B", xfrac = 0.1, cex = 1.7)
+  label.figure("D", xfrac = 0.1, cex = 1.7)
 
   # plots 3-4: Amazon river metatranscriptome
   pcomp(mout, pout, "MT", xlim = xlim, ylim = ylim, lty = 0, yline = 2.8, labels.at = NA)
@@ -288,14 +288,14 @@ gradH2O5 <- function(pdf = FALSE) {
   hullfun(mout, pout, c(2, 4), "blue", c("plumeFL", "plumePA"))
   text(c(-0.125, -0.12), c(0.38, 0.36), c("river", "plume"))
   title("Amazon River metatranscriptome", font.main = 1)
-  label.figure("C", xfrac = 0.1, cex = 1.7)
+  label.figure("B", xfrac = 0.1, cex = 1.7)
   # plot 4: GRAVY - pI
   pcomp(mout, pout, "MT", lty = 0, yline = 3, type = "pIG", labels.at = NA)
   hullfun(mout, pout, c(2, 4), "green3", c("riverFL", "riverPA"), type = "pIG")
   hullfun(mout, pout, c(2, 4), "blue", c("plumeFL", "plumePA"), type = "pIG")
   text(c(8.2, 6.5), c(-0.105, -0.11), c("river", "plume"))
   title("Amazon River metatranscriptome", font.main = 1)
-  label.figure("D", xfrac = 0.1, cex = 1.7)
+  label.figure("E", xfrac = 0.1, cex = 1.7)
 
   # start plot 5: Eiler et al. (freshwater vs marine)
   moutE <- ppage("eiler", plot.it = FALSE)
@@ -312,7 +312,7 @@ gradH2O5 <- function(pdf = FALSE) {
   text(c(-0.16, -0.16, -0.12), c(0.393, 0.348, 0.353), c("freshwater", "marine", "hypersaline"))
   legend("bottomright", c("lower salinity", "higher salinity"), pch = c(0, 15), col = "turquoise3", bty = "n")
   title("Freshwater - marine - hypersaline", font.main = 1)
-  label.figure("E", xfrac = 0.1, cex = 1.7)
+  label.figure("C", xfrac = 0.1, cex = 1.7)
 
   # plot 6: GRAVY - pI
   pcomp(moutE, poutE, lty = 0, yline = 3, type = "pIG", labels.at = NA)
@@ -330,22 +330,30 @@ gradH2O5 <- function(pdf = FALSE) {
   }
 }
 
-# mean differences of nH2O and ZC for differentially expressed proteins in hyperosmotic stress
+# mean differences of compositional metrics for differentially expressed proteins in hyperosmotic stress
 # adapted from canprot/hyperosmotic.Rmd 20190717-20191007
+# add GRAVY and pI plot 20191028
 gradH2O6 <- function(pdf = FALSE) {
-  if(pdf) pdf("gradH2O6.pdf", width = 5, height = 4)
+  if(pdf) pdf("gradH2O6.pdf", width = 8, height = 4)
+  par(mfrow = c(1, 2))
+  par(mar = c(4, 4, 1, 1), mgp = c(2.5, 1, 0))
   # generate compositional table
   datasets <- pdat_osmotic()
-  comptab <- lapply_canprot(datasets, function(dataset) {
-    pdat <- get_pdat(dataset, "pdat_osmotic", basis = "rQEC")
-    get_comptab(pdat, plot.it=FALSE, mfun="mean")
+  pdat <- lapply_canprot(datasets, function(dataset) {
+    get_pdat(dataset, "pdat_osmotic", basis = "rQEC")
   })
-  col <- rep("black", length(datasets))
-  par(mar = c(4, 4, 1, 1), mgp = c(2.5, 1, 0))
-  diffplot(comptab, col=col, pt.text = NA, oldstyle = FALSE)
+  # get the nH2O - ZC values
+  comptab1 <- lapply_canprot(pdat, get_comptab, plot.it = FALSE, mfun = "mean")
+  # get the GRAVY - pI values
+  comptab2 <- lapply_canprot(pdat, get_comptab, var1 = "pI", var2 = "GRAVY", plot.it = FALSE, mfun = "mean")
+  # make the plots
+  diffplot(comptab1, pt.text = NA, oldstyle = FALSE)
+  label.figure("A", cex = 1.7)
+  diffplot(comptab2, vars = c("pI", "GRAVY"), pt.text = NA, oldstyle = FALSE)
+  label.figure("B", cex = 1.7)
   if(pdf) {
     dev.off()
-    addexif("gradH2O6", "Mean differences of nH2O and ZC for differentially expressed proteins in hyperosmotic stress", "Dick et al. (2019) (preprint)")
+    addexif("gradH2O6", "Mean differences of compositional metrics for differentially expressed proteins in hyperosmotic stress", "Dick et al. (2019) (preprint)")
   }
 }
 
