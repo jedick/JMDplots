@@ -35,7 +35,7 @@ This table gives a brief description of each function.
 
 \tabular{ll}{
   \code{gradox1} \tab Some general characteristics of \ZC of DNA, RNA, and proteins \cr
-  \code{gradox2} \tab Selected plots of DNA, RNA, and protein \ZC \cr
+  \code{gradox2} \tab Selected plots of metagenomic DNA, RNA, and protein \ZC \cr
   \code{gradoxS1} \tab All plots of DNA and RNA \ZC \cr
   \code{gradoxS2} \tab All plots of protein \ZC \cr
   \code{gradox3} \tab \ZC of proteins vs DNA (metagenomes and metatranscriptomes) \cr

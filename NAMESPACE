@@ -17,7 +17,9 @@ export(
   # scsc paper 20191019
   "scsc2", "scsc3",
   # aaaq paper 20191020
-  "aaaq4", "aaaq10", "aaaq13"
+  "aaaq4", "aaaq10", "aaaq13",
+  # utilities 20191027
+  "addexif"
 )
 
 # imports from CHNOSZ

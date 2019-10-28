@@ -15,7 +15,7 @@ This vignette from the R package [JMDplots](https://github.com/jedick/JMDplots) 
 library(JMDplots)
 ```
 
-## Mosaic Eh-pH diagram (Figure 4)
+## Mosaic Eh-pH diagram for the Cu-S-Cl-O-H system (Figure 4)
 ```{r chnszten4, message = FALSE, echo = 1, fig.align='center', out.width='100%', out.height='300px'}
 chnszten4()
 knitr::include_graphics("chnszten4.pdf")

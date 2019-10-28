@@ -91,7 +91,10 @@ aoscp1 <- function(pdf = FALSE) {
   label.figure("b", paren = TRUE, italic = TRUE)
 
   # done!
-  if(pdf) invisible(dev.off())
+  if(pdf) {
+    dev.off()
+    addexif("aoscp1", "Carbon oxidation state (ZC) of amino acids vs ZC of RNA codons and hydropathy index of amino acids", "https://doi.org/10.1098/rsif.2013.1095")
+  }
   ## we can print some statistics
   #print(summary(lm(ZC.aminoacid ~ ZC.codon)))
   #print(summary(lm(aa.ZC ~ hydropathy)))
@@ -167,7 +170,10 @@ aoscp2 <- function(pdf = FALSE) {
   qqline(ZC.membrane, probs=probs)
   points(quantile(qqn$x, probs), quantile(qqn$y, probs), pch=3, cex=1.5)
   label.figure("d", paren = TRUE, italic = TRUE)
-  if(pdf) invisible(dev.off())
+  if(pdf) {
+    dev.off()
+    addexif("aoscp2", "Histograms of carbon oxidation state of all human proteins and human membrane proteins", "https://doi.org/10.1098/rsif.2013.1095")
+  }
   ## run a t-test
   #print(t.test(ZC.HUMAN, ZC.membrane))
 }
@@ -289,7 +295,8 @@ aoscp3 <- function(png=FALSE, outline=FALSE) {
     # use angle=180 to get the right orientation
     rasterImage(rst, -1, ZCmin, 1, ZCmax)
     title(main=expression(italic(Z)[C]))
-    invisible(dev.off())
+    dev.off()
+    addexif("aoscp3", "Yeast cell color-coded with median carbon oxidation state of proteins in different locations", "https://doi.org/10.1098/rsif.2013.1095")
   }
 }
 
@@ -347,7 +354,10 @@ aoscp4 <- function(pdf = FALSE) {
   par(xpd=NA)
   label.figure("b", paren = TRUE, italic = TRUE)
   ## done!
-  if(pdf) invisible(dev.off())
+  if(pdf) {
+    dev.off()
+    addexif("aoscp4", "Carbon oxidation state and Eh ranges in yeast and ER-cytoplasm electron-transfer scheme", "https://doi.org/10.1098/rsif.2013.1095")
+  }
 }
 
 # average oxidation state of carbon in proteins from different organisms
@@ -407,7 +417,10 @@ aoscp5 <- function(pdf = FALSE, file = NULL) {
   }
   terms[terms==""] <- paste("all", length(zc))
   axis(1, 1:nterms, terms, las=2)
-  if(pdf) invisible(dev.off())
+  if(pdf) {
+    dev.off()
+    addexif("aoscp5", "Average oxidation state of carbon in proteins from different organisms", "https://doi.org/10.1098/rsif.2013.1095")
+  }
 }
 
 # ZC and Topt of different rubiscos and thermodynamic comparison
@@ -480,7 +493,10 @@ aoscp6 <- function(pdf = FALSE) {
   legend("topleft", lty=1:4, lwd=1.5, bty="n", legend=c(expression(italic(M.~burtonii)), expression(italic(B.~japonicum)),
     expression(italic(T.~ferrooxidans)), expression(italic(Z.~mays))))
   # done!
-  if(pdf) invisible(dev.off())
+  if(pdf) {
+    dev.off()
+    addexif("aoscp6", "ZC and Topt of different rubiscos and thermodynamic comparison", "https://doi.org/10.1098/rsif.2013.1095")
+  }
 }
 
 # ZC of ferredoxin, thioredoxin, and glutaredoxin vs midpoint reduction potential
@@ -527,5 +543,8 @@ aoscp99 <- function(pdf = FALSE) {
   # add legend
   legend("bottomright", pch=c(19, 0), legend=c(expression(italic("E. coli")), "spinach"))
   # done!
-  if(pdf) invisible(dev.off())
+  if(pdf) {
+    dev.off()
+    addexif("aoscp99", "ZC of ferredoxin, thioredoxin, and glutaredoxin vs midpoint reduction potential", "Dick (2014) (unpublished)")
+  }
 }

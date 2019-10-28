@@ -105,7 +105,10 @@ gradH2O1 <- function(pdf = FALSE) {
   nH2O.ecoli <- H2OAA(ecoli, basis = "rQEC")
   scatterfun(ZC.ecoli, nH2O.ecoli, "E. coli proteins (rQEC)", "I")
 
-  if(pdf) invisible(dev.off())
+  if(pdf) {
+    dev.off()
+    addexif("gradH2O1", "Basis species comparison and stoichiometric hydration state", "Dick et al. (2019) (preprint)")
+  }
   ## output value of rQEC for checking code of H2OAA()
   #rQEC
 }
@@ -141,10 +144,13 @@ gradH2O2 <- function(pdf = FALSE) {
   title("Nif-bearing genomes (NF)", font.main = 1)
   label.figure("D", cex = 2, yfrac = 0.92)
   # done!
-  if(pdf) invisible(dev.off())
+  if(pdf) {
+    dev.off()
+    addexif("gradH2O2", "Carbon oxidation state for selected redox gradients", "Dick et al. (2019) (preprint)")
+  }
 }
 
-# nH2O-ZC scatterplots for redox gradients and Baltic Sea 20190713
+# nH2O-ZC scatterplots for redox gradients and the Baltic Sea 20190713
 gradH2O3 <- function(pdf = FALSE) {
   if(pdf) pdf("gradH2O3.pdf", width = 12, height = 5.6)
   par(mfrow = c(1, 2))
@@ -194,7 +200,10 @@ gradH2O3 <- function(pdf = FALSE) {
   title("Baltic Sea", font.main = 1)
   label.figure("B", cex = 2, xfrac = 0.035)
 
-  if(pdf) invisible(dev.off())
+  if(pdf) {
+    dev.off()
+    addexif("gradH2O3", "nH2O-ZC scatterplots for redox gradients and the Baltic Sea", "Dick et al. (2019) (preprint)")
+  }
 }
 
 # nH2O for Baltic Sea size fractions 20190715
@@ -218,7 +227,10 @@ gradH2O4 <- function(pdf = FALSE) {
   legend("topright", legend = quote("3.0-200"~mu*m), bty = "n")
   label.figure("C", cex = 2, xfrac = 0.035)
 
-  if(pdf) invisible(dev.off())
+  if(pdf) {
+    dev.off()
+    addexif("gradH2O4", "nH2O for Baltic Sea size fractions", "Dick et al. (2019) (preprint)")
+  }
 }
 
 # nH2O vs ZC for freshwater, marine, and hypersaline environments 20191004
@@ -293,7 +305,10 @@ gradH2O5 <- function(pdf = FALSE) {
   title("Freshwater - marine - hypersaline", font.main = 1)
   label.figure("F", xfrac = 0.1, cex = 1.7)
 
-  if(pdf) invisible(dev.off())
+  if(pdf) {
+    dev.off()
+    addexif("gradH2O5", "nH2O vs ZC for freshwater, marine, and hypersaline environments", "Dick et al. (2019) (preprint)")
+  }
 }
 
 # mean differences of nH2O and ZC for differentially expressed proteins in hyperosmotic stress
@@ -309,7 +324,10 @@ gradH2O6 <- function(pdf = FALSE) {
   col <- rep("black", length(datasets))
   par(mar = c(4, 4, 1, 1), mgp = c(2.5, 1, 0))
   diffplot(comptab, col=col, pt.text = NA, oldstyle = FALSE)
-  if(pdf) invisible(dev.off())
+  if(pdf) {
+    dev.off()
+    addexif("gradH2O6", "Mean differences of nH2O and ZC for differentially expressed proteins in hyperosmotic stress", "Dick et al. (2019) (preprint)")
+  }
 }
 
 # calculate ZC and nH2O of proteomes encoding different Nif homologs (Poudel et al., 2018)

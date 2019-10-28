@@ -46,7 +46,7 @@ This table gives a brief description of each function.
 
 \tabular{ll}{
   \code{chnszten1} \tab Timeline of CHNOSZ development \cr
-  \code{chnszten4} \tab Mosaic Eh-pH diagram \cr
+  \code{chnszten4} \tab Mosaic Eh-pH diagram for the Cu-S-Cl-O-H system \cr
   \code{chnszten5} \tab Corundum solubility diagram \cr
   \code{chnszten6} \tab DEW model (based on Fig. 3 of Sverjensky et al., 2014) \cr
   \code{chnszten7} \tab Thermodynamic properties of reactions involving Al-bearing minerals \cr

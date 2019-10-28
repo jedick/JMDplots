@@ -39,10 +39,13 @@ gradox1 <- function(pdf=FALSE) {
   label.figure("C", xfrac=0.035, yfrac=0.93, cex=1.6, font=2)
   AA_codon(300852)
   label.figure("D", xfrac=0.035, yfrac=0.93, cex=1.6, font=2)
-  if(pdf) invisible(dev.off())
+  if(pdf) {
+    dev.off()
+    addexif("gradox1", "General characteristics of carbon oxidation state of DNA, RNA, and proteins", "https://doi.org/10.3389/fmicb.2019.00120")
+  }
 }
 
-# selected plots of DNA, RNA, and protein ZC in one figure 20181113
+# selected plots of metagenomic DNA, RNA, and protein ZC in one figure 20181113
 gradox2 <- function(pdf=FALSE) {
   if(pdf) pdf("gradox2.pdf", width=9, height=9)
   mat <- matrix(c(0, 1, 2, 3, 4, 5, 10, 20, 11, 21, 6, 12, 22, 13, 23, 7, 14, 24, 15, 25, 8, 16, 26, 17, 27, 9, 18, 28, 19, 29), byrow=TRUE, nrow=6)
@@ -71,14 +74,20 @@ gradox2 <- function(pdf=FALSE) {
   par(mar=c(4, 3.5, 2, 1), mgp=c(2.5, 1, 0))
   mpage("gradoxMS", set.par=FALSE, add.label = FALSE)
   ppage("gradoxMS", set.par=FALSE, add.label = FALSE)
-  if(pdf) invisible(dev.off())
+  if(pdf) {
+    dev.off()
+    addexif("gradox2", "Selected plots of metagenomic DNA, RNA, and protein ZC", "https://doi.org/10.3389/fmicb.2019.00120")
+  }
 }
 
 # all plots of DNA and RNA ZC on a single page
 gradoxS1 <- function(pdf=FALSE) {
   if(pdf) pdf("gradoxS1.pdf", width=6.5, height=10)
   mout <- mpage("gradoxSI", mfrow = c(6, 3))
-  if(pdf) dev.off()
+  if(pdf) {
+    dev.off()
+    addexif("gradoxS1", "All plots of DNA and RNA ZC", "https://doi.org/10.3389/fmicb.2019.00120")
+  }
   invisible(mout)
 }
 
@@ -86,7 +95,10 @@ gradoxS1 <- function(pdf=FALSE) {
 gradoxS2 <- function(pdf=FALSE) {
   if(pdf) pdf("gradoxS2.pdf", width=6.5, height=10)
   pout <- ppage("gradoxSI", mfrow = c(6, 3))
-  if(pdf) dev.off()
+  if(pdf) {
+    dev.off()
+    addexif("gradoxS2", "All plots of protein ZC", "https://doi.org/10.3389/fmicb.2019.00120")
+  }
   invisible(pout)
 }
 
@@ -112,7 +124,10 @@ gradox3 <- function(mout, pout, pdf=FALSE) {
   pcomp(mout, pout, "MT", parts="plot", yline = 3.4)
   title(main="Metatranscriptomes")
   label.figure("B", font=2, cex=1.7, yfrac=0.955)
-  if(pdf) invisible(dev.off())
+  if(pdf) {
+    dev.off()
+    addexif("gradox3", "Carbon oxidation state of proteins vs DNA (metagenomes and metatranscriptomes)", "https://doi.org/10.3389/fmicb.2019.00120")
+  }
 }
 
 # thermodynamic calculations of relative stabilities along redox gradients
@@ -175,7 +190,10 @@ gradox4 <- function(mout, pout, pdf=FALSE) {
   text(-0.1, 1.1, "reducing")
   text(0.4, 1.1, "oxidizing")
   par(opar)
-  if(pdf) invisible(dev.off())
+  if(pdf) {
+    dev.off()
+    addexif("gradox4", "Thermodynamic calculations of relative stabilities along redox gradients", "https://doi.org/10.3389/fmicb.2019.00120")
+  }
 }
 
 # ZC of reads classified to selected abundant species in different datasets 20180529
@@ -266,7 +284,11 @@ gradox5 <- function(pdf=FALSE, maxdepth=500) {
   text(-0.03, leg$text$y, c(1:9, NA))
 
   # done!
-  if(pdf) invisible(dev.off())
+  if(pdf) {
+    dev.off()
+    if(!is.null(maxdepth)) addexif("gradox5", "ZC of reads classified to selected abundant species", "https://doi.org/10.3389/fmicb.2019.00120")
+    else addexif("gradoxS3", "ZC of reads classified to selected abundant species (including deeper samples)", "https://doi.org/10.3389/fmicb.2019.00120")
+  }
 }
 
 ############################

@@ -21,13 +21,13 @@ For a closer reproduction of the figures in the paper, all plots here are made a
 library(JMDplots)
 ```
 
-## Some general characteristics of `r ZC` of DNA, RNA, and proteins (Figure 1)
+## General characteristics of `r ZC` of DNA, RNA, and proteins (Figure 1)
 ```{r gradox1, message = FALSE, echo = 1, fig.align='center', out.width='100%', out.height='550px'}
 gradox1(TRUE)
 knitr::include_graphics("gradox1.pdf")
 ```
 
-## Selected plots of DNA, RNA, and protein `r ZC` (Figure 2)
+## Selected plots of metagenomic DNA, RNA, and protein `r ZC` (Figure 2)
 ```{r gradox2, message = FALSE, echo = 1, fig.align='center', out.width='100%', out.height='400px'}
 gradox2(TRUE)
 knitr::include_graphics("gradox2.pdf")

@@ -90,7 +90,10 @@ aaaq4 <- function(pdf = FALSE) {
   ## add a title
   #title("Ionizable Groups in Proteins", font.main = 1, cex.main = 0.8)
 
-  if(pdf) invisible(dev.off())
+  if(pdf) {
+    dev.off()
+    addexif("aaaq4", "pKa of sidechain and amino acid backbone groups", "https://doi.org/10.5194/bg-3-311-2006")
+  }
 }
 
 # net charge of proteins as a function of pH and T
@@ -148,7 +151,10 @@ aaaq10 <- function(pdf = FALSE) {
   plot.new()
   ltxt <- c("25 \u00B0C, oxidized Cys", "25 \u00B0C", "100 \u00B0C", "150 \u00B0C")
   legend("center", ltxt, lty = c(3, 1, 1, 1), col = c(1, 1, 2, "orange"), cex = 1.2, lwd = 2, bty = "n")
-  if(pdf) invisible(dev.off())
+  if(pdf) {
+    dev.off()
+    addexif("aaaq10", "Net charge of proteins as a function of pH and T", "https://doi.org/10.5194/bg-3-311-2006")
+  }
 }
 
 # Eh-pH diagram for extracellular alpha-amylases
@@ -191,5 +197,8 @@ aaaq13 <- function(pdf = FALSE) {
   legend("bottomleft", legend = ltext, pch = c(20, 3, 17), col = c(1, 2, 2), bty = "n")
   # reset the database to use current parameters for later vignettes
   reset()
-  if(pdf) invisible(dev.off())
+  if(pdf) {
+    dev.off()
+    addexif("aaaq13", "Eh-pH diagram for extracellular alpha-amylases", "https://doi.org/10.5194/bg-3-311-2006")
+  }
 }

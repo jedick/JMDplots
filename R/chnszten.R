@@ -113,7 +113,8 @@ chnszten4 <- function() {
   text(9.5, -0.62, "copper", srt=-22, cex=0.9)
   text(9, -0.33, "cuprite", srt=-21, cex=0.9)
   label.figure("B", cex=1.3)
-  invisible(dev.off())
+  dev.off()
+  addexif("chnszten4", "Mosaic Eh-pH diagram for the Cu-S-Cl-O-H system", "https://doi.org/10.3389/feart.2019.00180")
 }
 
 ####################################
@@ -162,7 +163,8 @@ chnszten5 <- function() {
   # add labels
   #text(7.15, -3, "water", srt = 90, cex = 0.7, col = "gray50")
   text(6.55, -3, "equilibrium pH", srt = 90, cex = 0.7, col = "gray50")
-  invisible(dev.off())
+  dev.off()
+  addexif("chnszten5", "Corundum solubility diagram", "https://doi.org/10.3389/feart.2019.00180")
 }
 
 ###########################
@@ -225,7 +227,8 @@ chnszten6 <- function() {
 
   ## clear settings for next calculation
   reset()
-  invisible(dev.off())
+  dev.off()
+  addexif("chnszten6", "DEW model (based on Fig. 3 of Sverjensky et al., 2014)", "https://doi.org/10.3389/feart.2019.00180 and https://doi.org/10.1038/ngeo2291")
 }
 
 #####################################
@@ -400,7 +403,8 @@ chnszten7 <- function() {
   text(3.5, 7.17, "C", cex = 1.5)
   text(5.4, 7.17, "D", cex = 1.5)
   par(xpd = FALSE)
-  invisible(dev.off())
+  dev.off()
+  addexif("chnszten7", "Thermodynamic properties of reactions involving Al-bearing minerals", "https://doi.org/10.3389/feart.2019.00180")
 }
 
 ############################
@@ -470,7 +474,8 @@ chnsztenS1 <- function() {
   text(O_2-dx, -5, expression(CH[3]*COOH), srt=90, cex=0.9)
   text(O_2+dx, -5, expression(CO[2]), srt=90, cex=0.9)
   legend(-71.8, 12, legend=c(expression(italic(T)==25~degree*C), expression(italic(P)==1~bar)), bty="n", cex=0.9)
-  invisible(dev.off())
+  dev.off()
+  addexif("chnsztenS1", "Comparison of logK and maximum affinity methods", "https://doi.org/10.3389/feart.2019.00180")
 }
 
 # Figure4B modified to reproduce Fig. 5A of Caporuscio et al. (2017)
@@ -493,7 +498,8 @@ chnsztenS2 <- function() {
   legend("topright", legend=c(expression(italic(T)==200~degree*C), expression(italic(P)==15.5~bar)), bty="n", cex=0.8)
   legend(-0.5, -0.4, legend=c(expression(sum(S)==10^-6~M), expression(sum(Cl)==0.2~M)), bty="n", cex=0.8)
   reset()
-  invisible(dev.off())
+  dev.off()
+  addexif("chnsztenS2", "Eh-pH diagram like Fig. 5A of Caporuscio et al. (2017)", "https://doi.org/10.3389/feart.2019.00180 and https://doi.org/10.1016/j.jnucmat.2016.12.036")
 }
 
 # calculate Gibbs energy of transformation for an assemblage of n-alkanes 20190604
@@ -531,7 +537,8 @@ chnsztenS3 <- function() {
   text(-8.15, 0.1, "reference state", srt = 90)
   lines(a$vals[[1]], DGtr.out)
   label.figure("B", cex = 1.5)
-  invisible(dev.off())
+  dev.off()
+  addexif("chnsztenS3", "Gibbs energy of transformation for an assemblage of n-alkanes", "https://doi.org/10.3389/feart.2019.00180")
 }
 
 # findit() calculations for sulfur species 20190604
@@ -586,14 +593,16 @@ chnsztenS4 <- function() {
   legend("center", ltxt, ncol = 5)
   text(0.5, 0.7, "Optimized parameters")
   par(opar)
-  invisible(dev.off())
+  dev.off()
+  addexif("chnsztenS4", "findit() calculations for sulfur species", "https://doi.org/10.3389/feart.2019.00180")
 }
 
 # Debye-Hückel extended term parameter extrapolated from plots of Manning et al., 2013
 chnsztenS5 <- function() {
   pdf("chnsztenS5.pdf", width = 6, height = 6)
   bgamma(showsplines = "T")
-  invisible(dev.off())
+  dev.off()
+  addexif("chnsztenS5", "Debye-H\u00FCckel extended term parameter extrapolated from plots of Manning et al. (2013)", "https://doi.org/10.3389/feart.2019.00180 and https://doi.org/10.2138/rmg.2013.75.5")
 }
 
 # Figure 6 modified to exclude DEW data for acetate
@@ -682,7 +691,8 @@ chnsztenS6A <- function() {
   
   ## clear settings for next calculation
   reset()
-  invisible(dev.off())
+  dev.off()
+  addexif("chnsztenS6A", "chnszten6 modified to exclude DEW data for acetate", "https://doi.org/10.3389/feart.2019.00180")
 }
 
 # Figure S6A modified to use default bgamma equation (non-zero extended term parameter extrapolated from Manning et al., 2013)
@@ -746,7 +756,8 @@ chnsztenS6B <- function() {
 
   ## clear settings for next calculation
   reset()
-  invisible(dev.off())
+  dev.off()
+  addexif("chnsztenS6B", "chnszten6A modified to use default bgamma equation", "https://doi.org/10.3389/feart.2019.00180")
 }
 
 # logK of NaCl dissociation
@@ -754,7 +765,8 @@ chnsztenS7 <- function() {
   # use cairo_pdf for better handling of symbols (e.g. reaction double arrow)
   cairo_pdf("chnsztenS7.pdf", width = 7, height = 7)
   demo("NaCl", ask = FALSE)
-  invisible(dev.off())
+  dev.off()
+  addexif("chnsztenS7", "logK of NaCl dissociation", "https://doi.org/10.3389/feart.2019.00180")
 }
 
 # calcite solubility: comparison with Manning et al., 2013
@@ -791,7 +803,8 @@ chnsztenS8 <- function() {
   calfun(2)
   mtext("reactions considered individually")
   label.figure("B", cex = 1.7)
-  invisible(dev.off())
+  dev.off()
+  addexif("chnsztenS8", "Calcite solubility: comparison with Manning et al. (2013)", "https://doi.org/10.3389/feart.2019.00180 and https://doi.org/10.2138/rmg.2013.75.5")
 }
 
 # compare gold solubility in HCh and CHNOSZ - hematite-magnetite buffer
@@ -944,7 +957,8 @@ chnsztenS9 <- function() {
 
   # close plot and reset obigt
   obigt()
-  invisible(dev.off())
+  dev.off()
+  addexif("chnsztenS9", "Compare gold solubility in HCh and CHNOSZ: hematite-magnetite buffer", "https://doi.org/10.3389/feart.2019.00180")
 }
 
 # compare gold solubility in HCh and CHNOSZ - pyrite-pyrrhotite-magnetite buffer
@@ -1086,7 +1100,8 @@ chnsztenS10 <- function() {
 
   # close plot and reset obigt
   obigt()
-  invisible(dev.off())
+  dev.off()
+  addexif("chnsztenS10", "Compare gold solubility in HCh and CHNOSZ: pyrite-pyrrhotite-magnetite buffer", "https://doi.org/10.3389/feart.2019.00180")
 }
 
 ############################
