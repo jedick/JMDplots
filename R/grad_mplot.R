@@ -389,23 +389,16 @@ pcomp <- function(mout, pout, seqtype="MG", type = NULL, parts=c("plot", "legend
       # for lines, use the color of most of the points 20180501
       # change this to gray 20181114
       lines(xvals, yvals, col="dimgray", lwd=0.8, lty = lty)
-      if(grepl("Baltic_Sea", study)) {
-        # filled triangle, circle, square for 0.1, 0.8, 3.0 size fractions
-        if(grepl("0.1", study)) mypch <- 17
-        if(grepl("0.8", study)) mypch <- 16
-        if(grepl("3.0", study)) mypch <- 15
-      } else {
-        # filled circles for marine, filled squares for terrestrial 20181114
-        mypch <- rep(19, length(xvals))
-        mypch[group %in% c("yellowstone", "yellowstone1", "rock", "rock0", "mat", "mat1", "hypersaline", "hypersaline0")] <- 15
-        # filled squares for Amazon River particle associated 20190723
-        mypch[group %in% c("riverPA", "plumePA")] <- 15
-        # smaller filled circles for Amazon River and plume free-living 20191025
-        mypch[group %in% c("riverFL", "plumeFL")] <- 20
-        # filled triangles for freshwater, open squares for hypersaline_low 20191027
-        mypch[group %in% "lake"] <- 17
-        mypch[group %in% "hypersaline_low"] <- 0
-      }
+      # filled circles for marine, filled squares for terrestrial 20181114
+      mypch <- rep(19, length(xvals))
+      mypch[group %in% c("yellowstone", "yellowstone1", "rock", "rock0", "mat", "mat1", "hypersaline", "hypersaline0")] <- 15
+      # filled squares for Amazon River particle associated 20190723
+      mypch[group %in% c("riverPA", "plumePA")] <- 15
+      # smaller filled circles for Amazon River and plume free-living 20191025
+      mypch[group %in% c("riverFL", "plumeFL")] <- 20
+      # filled triangles for freshwater, open squares for hypersaline_low 20191027
+      mypch[group %in% "lake"] <- 17
+      mypch[group %in% "hypersaline_low"] <- 0
       studyname <- paste(strsplit(study, "_")[[1]][1:2], collapse="_")
       if(plot.techtype) {
         # use open symbols for 454 or Sanger techtypes 20190723
@@ -415,8 +408,8 @@ pcomp <- function(mout, pout, seqtype="MG", type = NULL, parts=c("plot", "legend
         mypch[mypch==15 & techtype %in% c("454", "Sanger")] <- 0
       }
       # use pch from argument, otherwise mypch as determined here
-      if(is.null(pch)) thispch <- mypch else thispch <- pch[ipout]
-      points(xvals, yvals, col=col, pch=thispch)
+      if(is.null(pch)) thispch <- mypch else thispch <- pch[[ipout]]
+      points(xvals, yvals, col=col, pch=thispch, bg = col)
       # outline circle or square for groups with "0" (upper part of OMZ etc)
       pch0 <- rep(1, length(xvals))
       pch0[group %in% c("yellowstone1", "rock0", "mat1", "hypersaline0")] <- 0

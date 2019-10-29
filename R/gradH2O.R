@@ -195,11 +195,11 @@ gradH2O3 <- function(pdf = FALSE, type = "H2O-ZC") {
   # plot 2: compare ZC and nH2O of proteins in Baltic Sea surface
   mbaltics <- ppage("balticsurface", plot.it = FALSE)
   pbaltics <- ppage("balticsurface", H2O = TRUE, plot.it = FALSE)
-  pcomp(mbaltics, pbaltics, reorder = FALSE, yline = 3.5, labels.at = NA, type = type)
+  pcomp(mbaltics, pbaltics, reorder = FALSE, yline = 3.5, labels.at = NA, type = type, pch = list(c(2, 2, 2, 2, 17, 17, 17, 17, 17, 17)))
   # compare ZC and nH2O of proteins in Baltic Sea 10-20 m
   mbalticd <- ppage("balticdeep", plot.it = FALSE)
   pbalticd <- ppage("balticdeep", H2O = TRUE, plot.it = FALSE)
-  pcomp(mbalticd, pbalticd, reorder = FALSE, yline = 3.5, add = TRUE, lty = 3, pch = 6, labels.at = NA, type = type)
+  pcomp(mbalticd, pbalticd, reorder = FALSE, yline = 3.5, add = TRUE, lty = 3, labels.at = NA, type = type, pch = list(c(6, 6, 6, 6, 25, 25, 25, 25, 25)))
   # add text labels
   if(type == "H2O-ZC") {
     text(-0.14, 0.392, "surface\n< 6 PSU")
