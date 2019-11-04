@@ -51,7 +51,9 @@ importFrom("canprot",
   # second batch: gradH2O6 20191008
   "diffplot", "get_comptab", "get_pdat", "lapply_canprot", "pdat_osmotic",
   # moved to canprot 20191027
-  "ZCAA", "H2OAA", "GRAVY", "pI"
+  "ZCAA", "H2OAA", "GRAVY", "pI",
+  # new protein expression data 20191104
+  "pdat_osmotic2"
 )
 
 # imports from other packages

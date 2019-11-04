@@ -330,30 +330,71 @@ gradH2O5 <- function(pdf = FALSE) {
   }
 }
 
-# mean differences of compositional metrics for differentially expressed proteins in hyperosmotic stress
+# mean differences of compositional metrics for differentially expressed proteins in osmotic stress
 # adapted from canprot/hyperosmotic.Rmd 20190717-20191007
 # add GRAVY and pI plot 20191028
+# use different symbols for eukaryotes and add more bacteria and archaea (osmotic2) 20191102-20191103
 gradH2O6 <- function(pdf = FALSE) {
   if(pdf) pdf("gradH2O6.pdf", width = 8, height = 4)
   par(mfrow = c(1, 2))
   par(mar = c(4, 4, 1, 1), mgp = c(2.5, 1, 0))
+
   # generate compositional table
-  datasets <- pdat_osmotic()
-  pdat <- lapply_canprot(datasets, function(dataset) {
+  datasets1 <- pdat_osmotic()
+  pdat1 <- lapply_canprot(datasets1, function(dataset) {
     get_pdat(dataset, "pdat_osmotic", basis = "rQEC")
   })
+  # use filled square for eukaryotes, open circle for bacteria, open triangle for gene expression 20191102
+  pch1 <- rep(15, length(datasets1))
+  igene1 <- grepl("trans", datasets1)
+  pch1[igene1] <- 2
+  ibact1 <- (grepl("KKG\\+12", datasets1) | grepl("KLB\\+15", datasets1)) & !igene1
+  pch1[ibact1] <- 1
+  pt1 <- rep(NA, length(datasets1))
+  col1 <- rep("slategray3", length(datasets1))
+  cex1 <- rep(0.5, length(datasets1))
+  cex1[ibact1] <- 1.5
+  cex1[igene1] <- 1.2
+
+  # get new data (added for this paper)
+  datasets2 <- pdat_osmotic2()
+  pdat2 <- lapply_canprot(datasets2, function(dataset) {
+    get_pdat(dataset, "pdat_osmotic2", basis = "rQEC")
+  })
+  # use open circle except open triangle for gene expression and open square for hypo-osmotic conditions 20191103
+  pch2 <- rep(1, length(datasets2))
+  igene2 <- grepl("trans", datasets2)
+  pch2[igene2] <- 2
+  ihypo2 <- datasets2 %in% c("LRB+09_2.6", "ZLZ+16_10", "LLYL17_0", "JSP+19_LoS")
+  pch2[ihypo2] <- 0
+  pt2 <- LETTERS[1:length(datasets2)]
+  col2 <- rep("black", length(datasets1))
+  cex2 <- rep(2, length(datasets2))
+  # include non-eukaryotes and non-transcriptomes in kde2d contours
+  contour <- c(ibact1, !(igene2 | ihypo2))
+
+  # put the data together
+  pdat <- c(pdat1, pdat2)
+  datasets <- c(datasets1, datasets2)
+  pch <- c(pch1, pch2)
+  pt.text <- c(pt1, pt2)
+  col <- c(col1, col2)
+  cex <- c(cex1, cex2)
+
   # get the nH2O - ZC values
   comptab1 <- lapply_canprot(pdat, get_comptab, plot.it = FALSE, mfun = "mean")
   # get the GRAVY - pI values
   comptab2 <- lapply_canprot(pdat, get_comptab, var1 = "pI", var2 = "GRAVY", plot.it = FALSE, mfun = "mean")
   # make the plots
-  diffplot(comptab1, pt.text = NA, oldstyle = FALSE)
+  diffplot(comptab1, pt.text = pt.text, oldstyle = FALSE, pch = pch, col = col,
+           contour = contour, cex = cex, col.contour = "maroon3", cex.text = 0.75)
   label.figure("A", cex = 1.7)
-  diffplot(comptab2, vars = c("pI", "GRAVY"), pt.text = NA, oldstyle = FALSE)
+  diffplot(comptab2, vars = c("pI", "GRAVY"), pt.text = pt.text, oldstyle = FALSE, pch = pch, col = col,
+           contour = contour, cex = cex, col.contour = "maroon3", cex.text = 0.75)
   label.figure("B", cex = 1.7)
   if(pdf) {
     dev.off()
-    addexif("gradH2O6", "Mean differences of compositional metrics for differentially expressed proteins in hyperosmotic stress", "Dick et al. (2019) (preprint)")
+    addexif("gradH2O6", "Mean differences of compositional metrics for differentially expressed proteins in osmotic stress", "Dick et al. (2019) (preprint)")
   }
 }
 
