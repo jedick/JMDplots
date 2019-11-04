@@ -204,8 +204,8 @@ gradH2O3 <- function(pdf = FALSE, type = "H2O-ZC") {
   if(type == "H2O-ZC") {
     text(-0.14, 0.392, "surface\n< 6 PSU")
     text(-0.135, 0.381, "surface\n> 6 PSU")
-    text(-0.185, 0.386, "10-20 m\n< 6 PSU")
-    text(-0.18, 0.370, "10-20 m\n> 6 PSU")
+    text(-0.185, 0.386, "chl a max\n< 6 PSU")
+    text(-0.18, 0.370, "chl a max\n> 6 PSU")
   }
   title("Baltic Sea", font.main = 1)
   label.figure("B", cex = 2, xfrac = 0.035)
