@@ -151,7 +151,7 @@ gradH2O2 <- function(pdf = FALSE) {
 }
 
 # nH2O-ZC scatterplots for redox gradients and the Baltic Sea 20190713
-gradH2O3 <- function(pdf = FALSE, type = "H2O-ZC") {
+gradH2O3 <- function(pdf = FALSE, vars = "H2O-ZC") {
   if(pdf) pdf("gradH2O3.pdf", width = 12, height = 5.6)
   par(mfrow = c(1, 2))
   par(mar = c(4, 4.5, 2, 1), las = 1, cex = 1.2)
@@ -159,19 +159,19 @@ gradH2O3 <- function(pdf = FALSE, type = "H2O-ZC") {
   # plot 1: compare ZC and nH2O of proteins in datasets from gradox paper
   mgradox <- ppage("gradoxGS", plot.it = FALSE)
   pgradox <- ppage("gradoxGS", H2O = TRUE, plot.it = FALSE)
-  pcomp(mgradox, pgradox, reorder = FALSE, yline = 3.5, type = type)
+  pcomp(mgradox, pgradox, reorder = FALSE, yline = 3.5, vars = vars)
   # add proteomes from Nif-encoding genomes 20191014
   np <- NifProteomes()
-  if(type == "H2O-ZC") {
+  if(vars == "H2O-ZC") {
     points(np$ZC, np$nH2O, pch = 15)
     lines(np$ZC, np$nH2O, col = "dimgray", lwd = 0.8, lty = 2)
   }
-  if(type == "pIG") {
+  if(vars == "pIG") {
     points(np$pI, np$GRAVY, pch = 15)
     lines(np$pI, np$GRAVY, col = "dimgray", lwd = 0.8, lty = 2)
   }
   # add text labels
-  if(type == "H2O-ZC") {
+  if(vars == "H2O-ZC") {
     text(-0.21, 0.348, "hot spring")
     text(-0.21, 0.3455, "source")
     text(-0.157, 0.349, "photo-", adj = 0)
@@ -195,13 +195,13 @@ gradH2O3 <- function(pdf = FALSE, type = "H2O-ZC") {
   # plot 2: compare ZC and nH2O of proteins in Baltic Sea surface
   mbaltics <- ppage("balticsurface", plot.it = FALSE)
   pbaltics <- ppage("balticsurface", H2O = TRUE, plot.it = FALSE)
-  pcomp(mbaltics, pbaltics, reorder = FALSE, yline = 3.5, labels.at = NA, type = type, pch = list(c(2, 2, 2, 2, 17, 17, 17, 17, 17, 17)))
+  pcomp(mbaltics, pbaltics, reorder = FALSE, yline = 3.5, labels.at = NA, vars = vars, pch = list(c(2, 2, 2, 2, 17, 17, 17, 17, 17, 17)))
   # compare ZC and nH2O of proteins in Baltic Sea 10-20 m
   mbalticd <- ppage("balticdeep", plot.it = FALSE)
   pbalticd <- ppage("balticdeep", H2O = TRUE, plot.it = FALSE)
-  pcomp(mbalticd, pbalticd, reorder = FALSE, yline = 3.5, add = TRUE, lty = 3, labels.at = NA, type = type, pch = list(c(6, 6, 6, 6, 25, 25, 25, 25, 25)))
+  pcomp(mbalticd, pbalticd, reorder = FALSE, yline = 3.5, add = TRUE, lty = 3, labels.at = NA, vars = vars, pch = list(c(6, 6, 6, 6, 25, 25, 25, 25, 25)))
   # add text labels
-  if(type == "H2O-ZC") {
+  if(vars == "H2O-ZC") {
     text(-0.14, 0.392, "surface\n< 6 PSU")
     text(-0.135, 0.381, "surface\n> 6 PSU")
     text(-0.185, 0.386, "chl a max\n< 6 PSU")
@@ -217,31 +217,31 @@ gradH2O3 <- function(pdf = FALSE, type = "H2O-ZC") {
 }
 
 # nH2O for Baltic Sea metagenome and metatranscriptome in different size fractions 20190715
-gradH2O4 <- function(pdf = FALSE, type = NULL) {
+gradH2O4 <- function(pdf = FALSE, var = NULL) {
   if(pdf) pdf("gradH2O4.pdf", width = 6, height = 2.5)
-  ntype <- ifelse(is.null(type), 1, length(type))
-  if(ntype==2) par(mfrow = c(2, 3))
+  nvar <- ifelse(is.null(var), 1, length(var))
+  if(nvar==2) par(mfrow = c(2, 3))
   else par(mfrow = c(1, 3))
   par(mar = c(5, 4, 1, 1), mgp = c(3, 0.7, 0), las = 1)
 
-  for(i in 1:ntype) {
+  for(i in 1:nvar) {
     ylim <- NULL
-    if(identical(type[i], "pI")) ylim <- c(5, 7.5)
+    if(identical(var[i], "pI")) ylim <- c(5, 7.5)
     figlab <- c("A", "B", "C")
     if(i==2) figlab <- c("D", "E", "F")
 
-    mplot("Baltic_Sea-0.1s", "iMicrobe_MGP", H2O = TRUE, plottype = "#FF000030", col = "red", add.title = FALSE, ylim = ylim, yline = 2.7, type = type[i])
-    mplot("Baltic_Sea-0.1s", "SRA_MTP", H2O = TRUE, plottype = "#0000FF30", col = "blue", add.title = FALSE, add = TRUE, pch = 1, type = type[i])
+    mplot("Baltic_Sea-0.1s", "iMicrobe_MGP", H2O = TRUE, plottype = "#FF000030", col = "red", add.title = FALSE, ylim = ylim, yline = 2.7, var = var[i])
+    mplot("Baltic_Sea-0.1s", "SRA_MTP", H2O = TRUE, plottype = "#0000FF30", col = "blue", add.title = FALSE, add = TRUE, pch = 1, var = var[i])
     legend("topright", legend = quote("0.1-0.8"~mu*m), bty = "n")
     label.figure(figlab[1], cex = 2, xfrac = 0.04)
 
-    mplot("Baltic_Sea-0.8s", "iMicrobe_MGP", H2O = TRUE, plottype = "#FF000030", col = "red", add.title = FALSE, ylim = ylim, yline = 2.7, type = type[i])
-    mplot("Baltic_Sea-0.8s", "SRA_MTP", H2O = TRUE, plottype = "#0000FF30", col = "blue", add.title = FALSE, add = TRUE, pch = 1, type = type[i])
+    mplot("Baltic_Sea-0.8s", "iMicrobe_MGP", H2O = TRUE, plottype = "#FF000030", col = "red", add.title = FALSE, ylim = ylim, yline = 2.7, var = var[i])
+    mplot("Baltic_Sea-0.8s", "SRA_MTP", H2O = TRUE, plottype = "#0000FF30", col = "blue", add.title = FALSE, add = TRUE, pch = 1, var = var[i])
     legend("topright", legend = quote("0.8-3.0"~mu*m), bty = "n")
     label.figure(figlab[2], cex = 2, xfrac = 0.035)
 
-    mplot("Baltic_Sea-3.0s", "iMicrobe_MGP", H2O = TRUE, plottype = "#FF000030", col = "red", add.title = FALSE, ylim = ylim, yline = 2.7, type = type[i])
-    mplot("Baltic_Sea-3.0s", "SRA_MTP", H2O = TRUE, plottype = "#0000FF30", col = "blue", add.title = FALSE, add = TRUE, pch = 1, type = type[i])
+    mplot("Baltic_Sea-3.0s", "iMicrobe_MGP", H2O = TRUE, plottype = "#FF000030", col = "red", add.title = FALSE, ylim = ylim, yline = 2.7, var = var[i])
+    mplot("Baltic_Sea-3.0s", "SRA_MTP", H2O = TRUE, plottype = "#0000FF30", col = "blue", add.title = FALSE, add = TRUE, pch = 1, var = var[i])
     legend("topright", legend = quote("3.0-200"~mu*m), bty = "n")
     label.figure(figlab[3], cex = 2, xfrac = 0.035)
   }
@@ -275,9 +275,9 @@ gradH2O5 <- function(pdf = FALSE) {
   title("Amazon River metagenome", font.main = 1)
   label.figure("A", xfrac = 0.1, cex = 1.7)
   # plot 2: GRAVY - pI
-  pcomp(mout, pout, lty = 0, yline = 3, type = "pIG", labels.at = NA)
-  hullfun(mout, pout, c(1, 3), "green3", c("riverFL", "riverPA"), type = "pIG")
-  hullfun(mout, pout, c(1, 3), "blue", c("plumeFL", "plumePA"), type = "pIG")
+  pcomp(mout, pout, lty = 0, yline = 3, vars = "pIG", labels.at = NA)
+  hullfun(mout, pout, c(1, 3), "green3", c("riverFL", "riverPA"), vars = "pIG")
+  hullfun(mout, pout, c(1, 3), "blue", c("plumeFL", "plumePA"), vars = "pIG")
   text(c(7.2, 8.1), c(-0.14, -0.175), c("river", "plume"))
   title("Amazon River metagenome", font.main = 1)
   label.figure("D", xfrac = 0.1, cex = 1.7)
@@ -290,9 +290,9 @@ gradH2O5 <- function(pdf = FALSE) {
   title("Amazon River metatranscriptome", font.main = 1)
   label.figure("B", xfrac = 0.1, cex = 1.7)
   # plot 4: GRAVY - pI
-  pcomp(mout, pout, "MT", lty = 0, yline = 3, type = "pIG", labels.at = NA)
-  hullfun(mout, pout, c(2, 4), "green3", c("riverFL", "riverPA"), type = "pIG")
-  hullfun(mout, pout, c(2, 4), "blue", c("plumeFL", "plumePA"), type = "pIG")
+  pcomp(mout, pout, "MT", lty = 0, yline = 3, vars = "pIG", labels.at = NA)
+  hullfun(mout, pout, c(2, 4), "green3", c("riverFL", "riverPA"), vars = "pIG")
+  hullfun(mout, pout, c(2, 4), "blue", c("plumeFL", "plumePA"), vars = "pIG")
   text(c(8.2, 6.5), c(-0.105, -0.11), c("river", "plume"))
   title("Amazon River metatranscriptome", font.main = 1)
   label.figure("E", xfrac = 0.1, cex = 1.7)
@@ -315,11 +315,11 @@ gradH2O5 <- function(pdf = FALSE) {
   label.figure("C", xfrac = 0.1, cex = 1.7)
 
   # plot 6: GRAVY - pI
-  pcomp(moutE, poutE, lty = 0, yline = 3, type = "pIG", labels.at = NA)
-  hullfun(moutE, poutE, 1, "green3", type = "pIG")
-  hullfun(moutE, poutE, 2, "blue", type = "pIG")
-  pcomp(moutH, poutH, reorder = FALSE, add = TRUE, type = "pIG", labels.at = "min")
-  hullfun(moutH, poutH, 1:3, "turquoise3", type = "pIG")
+  pcomp(moutE, poutE, lty = 0, yline = 3, vars = "pIG", labels.at = NA)
+  hullfun(moutE, poutE, 1, "green3", vars = "pIG")
+  hullfun(moutE, poutE, 2, "blue", vars = "pIG")
+  pcomp(moutH, poutH, reorder = FALSE, add = TRUE, vars = "pIG", labels.at = "min")
+  hullfun(moutH, poutH, 1:3, "turquoise3", vars = "pIG")
   text(c(7.5, 7.4, 6.3), c(-0.14, -0.20, -0.27), c("freshwater", "marine", "hypersaline"))
   title("Freshwater - marine - hypersaline", font.main = 1)
   label.figure("F", xfrac = 0.1, cex = 1.7)
@@ -441,39 +441,39 @@ NifProteomes <- function() {
   list(types = types, ZC = ZC, ZC.SD = ZC.SD, nH2O = nH2O, nH2O.SD = nH2O.SD, GRAVY = GRAVY, GRAVY.SD = GRAVY.SD, pI = pI, pI.SD = pI.SD)
 }
 
-# Supplementary Figure S1 20191028
+############################
+### UNEXPORTED FUNCTIONS ###
+############################
+
+# Supplementary Figure S1 20191028 (provisional, not in final paper)
 gradH2OS1 <- function(pdf = FALSE) {
   if(pdf) pdf("gradH2OS1.pdf", width = 12, height = 5.6)
-  gradH2O3(type = "pIG")
+  gradH2O3(vars = "pIG")
   if(pdf) {
     dev.off()
     addexif("gradH2OS1", "GRAVY-pI scatterplots for redox gradients and the Baltic Sea", "Dick et al. (2019) (preprint)")
   }
 }
 
-# Supplementary Figure S2 20191028
+# Supplementary Figure S2 20191028 (provisional, not in final paper)
 gradH2OS2 <- function(pdf = FALSE) {
   if(pdf) pdf("gradH2OS2.pdf", width = 6, height = 2.5)
-  gradH2O4(type = c("GRAVY", "pI"))
+  gradH2O4(var = c("GRAVY", "pI"))
   if(pdf) {
     dev.off()
     addexif("gradH2OS2", "GRAVY and SI for Baltic Sea metagenome and metatranscriptome in different size fractions", "Dick et al. (2019) (preprint)")
   }
 }
 
-############################
-### UNEXPORTED FUNCTIONS ###
-############################
-
 # function to add convex hulls 20191007
-hullfun <- function(mout, pout, istudy, basecol, group = NULL, type = "ZC") {
+hullfun <- function(mout, pout, istudy, basecol, group = NULL, vars = "ZC") {
   x <- y <- numeric()
   for(ist in istudy) {
     thisx <- mout[[ist]]$AA
     thisy <- pout[[ist]]$AA
-    if(type == "GRAVY") thisx <- mout[[ist]]$GRAVY
-    if(type == "pI") thisx <- mout[[ist]]$pI
-    if(type == "pIG") {
+    if(vars == "GRAVY") thisx <- mout[[ist]]$GRAVY
+    if(vars == "pI") thisx <- mout[[ist]]$pI
+    if(vars == "pIG") {
       thisx <- mout[[ist]]$pI
       thisy <- pout[[ist]]$GRAVY
     }

@@ -57,7 +57,7 @@ usedin <- list(
 mplot <- function(study, seqtype, plottype = "bars", ylim = NULL, plot.RNA = TRUE, taxid = NULL,
   dsDNA = TRUE, abbrev = NULL, col = NULL, add.label = TRUE, maxdepth = NULL, H2O = FALSE,
   plot.it = TRUE, add.title = TRUE, yline = 2, basis = "rQEC", datadir = NULL, mdata = studies,
-  add = FALSE, pch = 19, type = NULL) {
+  add = FALSE, pch = 19, var = NULL) {
   # get metadata
   md <- get.mdata(mdata, study, seqtype)
   # get labels, groups, and abbreviation
@@ -91,8 +91,8 @@ mplot <- function(study, seqtype, plottype = "bars", ylim = NULL, plot.RNA = TRU
   }
   # get ylim from mylim, argument, or default value for H2O
   if(is.null(ylim)) {
-    if(identical(type, "GRAVY")) ylim <- c(-0.3, -0.05)
-    else if(identical(type, "pI")) ylim <- c(4, 9)
+    if(identical(var, "GRAVY")) ylim <- c(-0.3, -0.05)
+    else if(identical(var, "pI")) ylim <- c(4, 9)
     else if(H2O) ylim <- c(0.34, 0.4)
     else ylim <- mylim
   }
@@ -121,7 +121,7 @@ mplot <- function(study, seqtype, plottype = "bars", ylim = NULL, plot.RNA = TRU
               plot.RNA, taxid, col = col,
               add.label = add.label, plot_real_x = mdata[[study]][["plot_real_x"]], maxdepth = maxdepth, H2O = H2O,
               plot.it = plot.it, add.title = add.title, yline = yline, basis = basis, techtype = techtype, dx = dx, dy = dy, datadir = datadir,
-              add = add, all.labels = all.labels, pch = pch, type = type)
+              add = add, all.labels = all.labels, pch = pch, var = var)
 }
 
 # make page of plots for MG/MT 20180225
@@ -288,7 +288,7 @@ ppage <- function(subset = "gradoxSI", H2O = FALSE, set.par = TRUE, plot.it = TR
 ## mout <- ppage(); pout <- ppage(H2O=TRUE); pcomp(mout, pout, type = "pIG")
 # nH2O of protein vs DNA (not yet implemented)
 # mout <- mpage(H2O=TRUE); pout <- ppage(H2O=TRUE); pcomp(mout, pout)
-pcomp <- function(mout, pout, seqtype="MG", type = NULL, parts=c("plot", "legend"), yline = 2,
+pcomp <- function(mout, pout, seqtype="MG", vars = NULL, parts=c("plot", "legend"), yline = 2,
                   xlim = NULL, ylim = NULL, reorder = TRUE, plot.techtype = FALSE, add = FALSE,
                   pch = NULL, lty = 2, labels.at = "max") {
   # determine plot type: 20191024
@@ -298,16 +298,16 @@ pcomp <- function(mout, pout, seqtype="MG", type = NULL, parts=c("plot", "legend
   # GRAVY - nH2O vs GRAVY of protein
   # pI - nH2O vs isoelectric point of protein
   # pIG - GRAVY vs isoelectric point of protein
-  if(is.null(type)) {
-    if(missing(mout)) type <- "ZC" else {
-      if(!mout[[1]]$H2O & !pout[[1]]$H2O) type <- "ZC"
-      if(!mout[[1]]$H2O & pout[[1]]$H2O) type <- "H2O-ZC"
-      if(mout[[1]]$H2O & pout[[1]]$H2O) type <- "H2O"
+  if(is.null(vars)) {
+    if(missing(mout)) vars <- "ZC" else {
+      if(!mout[[1]]$H2O & !pout[[1]]$H2O) vars <- "ZC"
+      if(!mout[[1]]$H2O & pout[[1]]$H2O) vars <- "H2O-ZC"
+      if(mout[[1]]$H2O & pout[[1]]$H2O) vars <- "H2O"
     }
   }
   if("plot" %in% parts) {
     # set up plot
-    if(type == "ZC") {
+    if(vars == "ZC") {
       if(seqtype=="MG" & is.null(xlim)) xlim <- c(0.58, 0.65)
       if(seqtype=="MT" & is.null(xlim)) xlim <- c(0.585, 0.63)
       xlab <- quote(italic(Z)[C]~of~DNA)
@@ -315,11 +315,11 @@ pcomp <- function(mout, pout, seqtype="MG", type = NULL, parts=c("plot", "legend
       if(seqtype=="MT" & is.null(ylim)) ylim <- c(-0.21, -0.14)
       ylab <- quote(italic(Z)[C]~of~protein)
     }
-    if(type %in% c("H2O-ZC", "GRAVY", "pI")) {
-      if(type == "GRAVY") {
+    if(vars %in% c("H2O-ZC", "GRAVY", "pI")) {
+      if(vars == "GRAVY") {
         if(is.null(xlim)) xlim <- c(-0.3, 0)
         xlab <- "GRAVY"
-      } else if(type == "pI") {
+      } else if(vars == "pI") {
         if(is.null(xlim)) xlim <- c(4, 9)
         xlab <- "pI"
       } else {
@@ -328,7 +328,7 @@ pcomp <- function(mout, pout, seqtype="MG", type = NULL, parts=c("plot", "legend
       }
       if(is.null(ylim)) ylim <- c(0.34, 0.4)
       ylab <- quote(italic(n)[H[2]*O])
-    } else if(type=="pIG") {
+    } else if(vars=="pIG") {
       if(is.null(xlim)) xlim <- c(4, 9)
       if(is.null(ylim)) ylim <- c(-0.3, -0.05)
       xlab <- "pI"
@@ -347,19 +347,19 @@ pcomp <- function(mout, pout, seqtype="MG", type = NULL, parts=c("plot", "legend
       if(seqtype=="MG" & !grepl("_MG$", study)) next
       if(seqtype=="MT" & !grepl("_MT$", study)) next
       # assemble ZC or nH2O values and get environment group
-      if(type=="ZC") {
+      if(vars=="ZC") {
         # find this study in mout
         imout <- match(study, names(mout))
         xvals <- mout[[imout]]$DNA
         yvals <- pout[[ipout]]$AA
       }
-      if(type %in% c("H2O-ZC", "GRAVY", "pI")) {
+      if(vars %in% c("H2O-ZC", "GRAVY", "pI")) {
         imout <- ipout
-        if(type == "GRAVY") xvals <- mout[[imout]]$GRAVY
-        else if(type == "pI") xvals <- mout[[imout]]$pI
+        if(vars == "GRAVY") xvals <- mout[[imout]]$GRAVY
+        else if(vars == "pI") xvals <- mout[[imout]]$pI
         else xvals <- mout[[imout]]$AA
         yvals <- pout[[ipout]]$AA
-      } else if(type=="pIG") {
+      } else if(vars=="pIG") {
         imout <- ipout
         xvals <- pout[[ipout]]$pI
         yvals <- mout[[imout]]$GRAVY
@@ -424,10 +424,10 @@ pcomp <- function(mout, pout, seqtype="MG", type = NULL, parts=c("plot", "legend
       abbrev <- pout[[ipout]][["abbrev"]]
       dx <- pout[[ipout]][["dx"]][[seqtype]]
       dy <- pout[[ipout]][["dy"]][[seqtype]]
-      if(is.null(dx) | type!="ZC") dx <- 0
-      if(is.null(dy) | type!="ZC") {
-        if(type=="H2O-ZC") dy <- 0.002
-        else if(type=="pIG") dy <- 0.005
+      if(is.null(dx) | vars!="ZC") dx <- 0
+      if(is.null(dy) | vars!="ZC") {
+        if(vars=="H2O-ZC") dy <- 0.002
+        else if(vars=="pIG") dy <- 0.005
         else dy <- 0.003
       }
       # add text label
@@ -444,7 +444,7 @@ pcomp <- function(mout, pout, seqtype="MG", type = NULL, parts=c("plot", "legend
     }
   }
   # add legend
-  if(type=="ZC" & "legend" %in% parts) {
+  if(vars=="ZC" & "legend" %in% parts) {
     if("plot" %in% parts) {
       marine.x <- "topleft"
       terrestrial.x <- "bottomright"

@@ -45,7 +45,7 @@ plotMG <- function(dataset="Guerrero_Negro_IMG_MG", plottype="bars",
   taxid=NULL, lwd=1, lty=2, lwd.bars=2, col=NULL, extendrange=FALSE, add.label=TRUE,
   plot_real_x=FALSE, maxdepth=NULL, H2O=FALSE, plot.it = TRUE, add.title = TRUE, yline = 2,
   basis = "rQEC", techtype = NULL, dx = NULL, dy = NULL, datadir = NULL,
-  add = FALSE, all.labels = NULL, pch = 19, type = NULL) {
+  add = FALSE, all.labels = NULL, pch = 19, var = NULL) {
   # samples: (used for suffixes on file names)
   # labels: (used for labeling x-axis ticks)
   # xlab: axis label: "layer", "depth", ...
@@ -143,12 +143,12 @@ plotMG <- function(dataset="Guerrero_Negro_IMG_MG", plottype="bars",
     plotXmean <- Xmean
     plotXhi <- Xhi
     plotXlo <- Xlo
-    if(identical(type, "GRAVY")) {
+    if(identical(var, "GRAVY")) {
       plotXmean <- GRAVY
       plotXhi <- GRAVY + GRAVY.SD
       plotXlo <- GRAVY - GRAVY.SD
     }
-    if(identical(type, "pI")) {
+    if(identical(var, "pI")) {
       plotXmean <- pI
       plotXhi <- pI + pI.SD
       plotXlo <- pI - pI.SD
@@ -193,8 +193,8 @@ plotMG <- function(dataset="Guerrero_Negro_IMG_MG", plottype="bars",
         else axis(1, at=atx, labels=all.labels)
       }
       # add y-axis: ZC (or nH2O 20181231)
-      if(identical(type, "GRAVY")) mtext("GRAVY", side = 2, line = yline, las = 0)
-      else if(identical(type, "pI")) mtext("pI", side = 2, line = yline, las = 0)
+      if(identical(var, "GRAVY")) mtext("GRAVY", side = 2, line = yline, las = 0)
+      else if(identical(var, "pI")) mtext("pI", side = 2, line = yline, las = 0)
       else if(H2O) mtext(quote(italic(n)[H[2]*O]), side=2, line=yline, las=0)
       else mtext(quote(italic(Z)[C]), side=2, line=yline, las=0)
     }

@@ -16,13 +16,13 @@ The functions are exported in the package so they are available to user scripts.
   mplot(study, seqtype, plottype = "bars", ylim = NULL, plot.RNA = TRUE,
     taxid = NULL, dsDNA = TRUE, abbrev = NULL, col = NULL, add.label = TRUE,
     maxdepth = NULL, H2O = FALSE, plot.it = TRUE, add.title = TRUE, yline = 2,
-    basis = "rQEC", datadir = NULL, mdata = studies, add = FALSE, pch= 19, type = NULL)
+    basis = "rQEC", datadir = NULL, mdata = studies, add = FALSE, pch = 19, var = NULL)
   mpage(subset = "gradoxSI", H2O = FALSE, plottype = "bars", dsDNA = TRUE,
     set.par = TRUE, add.label = TRUE, mfrow = NULL)
   ppage(subset = "gradoxSI", H2O = FALSE, set.par = TRUE, plot.it = TRUE,
     basis = "rQEC", add.label = TRUE, mfrow = NULL)
   mcomp(mout, yvar = "RNA")
-  pcomp(mout, pout, seqtype = "MG", type = NULL, parts = c("plot", "legend"),
+  pcomp(mout, pout, seqtype = "MG", vars = NULL, parts = c("plot", "legend"),
     yline = 2, xlim = NULL, ylim = NULL, reorder = TRUE,
     plot.techtype = FALSE, add = FALSE, pch = NULL, lty = 2, labels.at = "max")
 }
@@ -44,13 +44,14 @@ The functions are exported in the package so they are available to user scripts.
   \item{add.title}{logical, add a title to the plot?}
   \item{yline}{numeric, margin position for y-axis label}
   \item{basis}{character, description of basis species to use}
+  \item{var}{character, other variable to plot (\samp{GRAVY} or \samp{pI})}
   \item{subset}{character, name of subset of studies to plot}
   \item{set.par}{logical, set up plot with \code{\link{par}} commands?}
   \item{mfrow}{numeric, optional setting for \code{\link{par}(mfrow)}}
   \item{mout}{list, output from \code{mpage} or \code{ppage}}
   \item{yvar}{character, y-axis variable (\samp{RNA} or \samp{GC})}
   \item{pout}{list, output from \code{ppage}}
-  \item{type}{character, type of plot (\samp{ZC}, \samp{H2O-ZC}, \samp{GRAVY}, or \samp{pI})}
+  \item{vars}{character, variables to plot (\samp{ZC}, \samp{H2O-ZC}, \samp{GRAVY}, \samp{pI}, or \samp{pIG})}
   \item{parts}{character, parts of figure to include}
   \item{xlim}{numeric, x-axis limits}
   \item{reorder}{logical, put points in order of increasing x value?}
@@ -69,7 +70,7 @@ For \code{mplot}, the \code{seqtype} contains the name of the database followed 
 These can be changed to \samp{_MGP} and \samp{_MTP} to indicate protein sequences.
 
 \code{mplot} plots a compositional variable for a particular combination of \code{study} and \code{seqtype}.
-The variable plotted is \ZC by default, but this can be changed to \nH2O with \code{H2O = TRUE} or GRAVY or pI (specified in the \code{type} argument).
+The variable plotted is \ZC by default, but this can be changed to \nH2O with \code{H2O = TRUE} or GRAVY or pI (specified in the \code{var} argument).
 \ZC of both DNA and RNA are plotted, with an offset of -0.28 applied to that of RNA, so that values can be shown on the same scale (see Dick et al., 2019).
 The default value of \code{plottype}, \samp{bars}, specifies a plot with mean values connected by dashed lines and error bars for each sample.
 A polygon plot (shaded area instead of error bars) is made if the first character of \code{plottype} is \samp{#}.
@@ -80,8 +81,9 @@ Set \code{yvar} to \samp{GC} to change the y-axis to GC ratio of DNA.
 (For double-stranded DNA, this should be a linear function of \ZC.)
 
 For \code{pcomp}, \code{seqtype} is just \samp{MG} or \samp{MT}.
-The \code{type} is automatically determined based on the values of \code{mout} and \code{pout}.
-The exception is \code{type = "GRAVY"}, which plots the values of \code{\link{GRAVY}} instead of \code{\link{ZCAA}}.
+The variables (\code{vars}) are automatically determined based on the values of \code{mout} and \code{pout}.
+Use \code{vars = "GRAVY"} or \code{vars = "pI"} to plot the values of \code{\link{GRAVY}} or \code{\link{pI}} instead of \code{\link{ZCAA}}.
+Use \code{vars = "pIG"} to make a \code{\link{GRAVY}}-\code{\link{pI}} plot.
 
 \code{datadir} and \code{mdata} are used to specify alternate location of compositional data and metadata for metagenomic studies.
 This permits the processing of user-provided data sets; see \code{\link{subsurface}} for some examples.
@@ -126,5 +128,5 @@ pout <- ppage("balticsurface", H2O = TRUE, plot.it = FALSE)
 pcomp(mout, pout, reorder = FALSE, add = TRUE)
 
 # plot nH2O vs GRAVY of proteins
-pcomp(mout, pout, type = "GRAVY")
+pcomp(mout, pout, vars = "GRAVY")
 }

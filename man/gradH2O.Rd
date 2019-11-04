@@ -16,8 +16,8 @@ Plots from the paper by Dick et al. (2019).
 \usage{
   gradH2O1(pdf = FALSE)
   gradH2O2(pdf = FALSE)
-  gradH2O3(pdf = FALSE, type = "H2O-ZC")
-  gradH2O4(pdf = FALSE, type = NULL)
+  gradH2O3(pdf = FALSE, vars = "H2O-ZC")
+  gradH2O4(pdf = FALSE, var = NULL)
   gradH2O5(pdf = FALSE)
   gradH2O6(pdf = FALSE)
   NifProteomes()
@@ -25,7 +25,8 @@ Plots from the paper by Dick et al. (2019).
 
 \arguments{
   \item{pdf}{logical, make a PDF file?}
-  \item{type}{character, plot variables (passed to \code{\link{pcomp}} or \code{\link{mplot}})}
+  \item{vars}{character, variables to plot (passed to \code{\link{pcomp}})}
+  \item{var}{character, variable to plot (passed to \code{\link{mplot}})}
 }
 
 \details{
