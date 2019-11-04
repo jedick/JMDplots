@@ -2,6 +2,46 @@
 # R file started for Goldschmidt poster 20190711
 # moved to JMDplots for salinity gradients paper starting 20190930
 
+# number of reactions for each amino acid in E. coli metabolic recconstruction 20191101
+# (data from Feist et al., 2007; doi:10.1038/msb4100155)
+gradH2O0 <- function() {
+  # define compound names used for amino acids
+  # (from "compounds" table of FHR+07 spreadsheet)
+  AAnames <- list(
+    Ala = " ala-L ",
+    Cys = " cys-L ", # but not hcys-l
+    Asp = " asp-L ",
+    Glu = " glu-L ",
+    Phe = " phe-L ",
+    Gly = " gly ",   # but not glyald, glyb, glyc, ...
+    His = " his-L ",
+    Ile = " ile-L ",
+    Lys = " lys-L ",
+    Leu = " leu-L ",
+    Met = " met-L ",
+    Asn = " asn-L ",
+    Pro = " pro-L ",
+    Gln = " gln-L ",
+    Arg = " arg-L ",
+    Ser = " ser-L ", # but not pser-L
+    Thr = " thr-L ", # but not athr-L
+    Val = " val-L ",
+    Trp = " trp-L ",
+    Tyr = " tyr-L "
+  )
+  # read reaction list
+  file <- system.file("extdata/gradH2O/reaction_equations.csv", package = "JMDplots")
+  dat <- read.csv(file, as.is = TRUE)
+  rxn <- dat$equation
+  # add spaces before and after each reaction
+  rxn <- paste0(" ", rxn, " ")
+  # replace [ with space (e.g. [c] after compound name)
+  rxn <- gsub("[", " ", rxn, fixed = TRUE)
+  # count the number of reactions with each amino acid
+  sort(sapply(lapply(AAnames, grepl, rxn, fixed = TRUE), sum), decreasing = TRUE)
+}
+
+
 # basis species comparison 20190713 / relative water content 20191005
 gradH2O1 <- function(pdf = FALSE) {
 

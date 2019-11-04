@@ -1,6 +1,7 @@
 \encoding{UTF-8}
 \name{gradH2O}
 \alias{gradH2O}
+\alias{gradH2O0}
 \alias{gradH2O1}
 \alias{gradH2O2}
 \alias{gradH2O3}
@@ -14,6 +15,7 @@ Plots from the paper by Dick et al. (2019).
 }
 
 \usage{
+  gradH2O0()
   gradH2O1(pdf = FALSE)
   gradH2O2(pdf = FALSE)
   gradH2O3(pdf = FALSE, vars = "H2O-ZC")
@@ -33,6 +35,7 @@ Plots from the paper by Dick et al. (2019).
 This table gives a brief description of each function.
 
 \tabular{ll}{
+  \code{gradH2O0} \tab Number of reactions for each amino acid in \emph{E. coli} metabolic reconstruction (no plot) \cr
   \code{gradH2O1} \tab Basis species comparison \cr
   \code{gradH2O2} \tab \ZC of proteins for selected redox gradients \cr
   \code{gradH2O3} \tab \nH2O-\ZC scatterplots for redox gradients and the Baltic Sea \cr
@@ -54,6 +57,10 @@ The organisms are limited to those that have at least 1000 RefSeq protein sequen
       To the source table have been added the columns \samp{Refseq.name} and \samp{taxid}, which contain the closest matching genome name in release 95 of the RefSeq database (see \code{\link{JMDplots-package}}) and corresponding taxonomic ID.
       The R file is the script used to make \code{Nif_homolog_genomes.csv} from the source table.
     }
+    \item{\code{reaction_equations.csv}}{
+      Equations for metabolic reactions in \emph{E. coli} from the \samp{reactions_GPRs} worksheet from Supplementary Information 1 of Feist et al. (2007).
+      This is used in \code{gradH2O0}.
+    }
   }
 }
 
@@ -69,6 +76,8 @@ The organisms are limited to those that have at least 1000 RefSeq protein sequen
 
 \references{
 Dick, J. M., Tan, J. and Yu, M. (2019) Geochemistry of metagenomes: Distinct compositional signatures of environmental redox and salinity gradients. \emph{(preprint)}
+
+Feist, A. M. et al. (2007) A genome-scale metabolic reconstruction for \emph{Escherichia coli} K-12 MG1655 that accounts for 1260 ORFs and thermodynamic information. \emph{Mol. Syst. Biol.} \bold{3}, 121. \doi{10.1038/msb4100155}
 
 Poudel, S. et al. (2018) Electron transfer to nitrogenase in different genomic and metabolic backgrounds. \emph{J. Bacteriol.} \bold{200}, e00757-17. \doi{10.1128/JB.00757-17}
 }

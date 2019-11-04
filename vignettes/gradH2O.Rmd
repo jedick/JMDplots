@@ -9,6 +9,10 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
+```{r options, include=FALSE}
+options(width = 40)
+```
+
 ```{r HTML, include=FALSE}
 ## some frequently used HTML expressions
 ZC <- "<i>Z</i><sub>C</sub>"
@@ -19,6 +23,12 @@ This vignette from the R package [JMDplots](https://github.com/jedick/JMDplots) 
 
 ```{r JMDplots, message = FALSE, results = "hide"}
 library(JMDplots)
+```
+
+## Number of reactions for each amino acid in _E. coli_ metabolic reconstruction
+Reaction equations used for this calculation are from <a href="https://doi.org/10.1038/msb4100155" title="A genome-scale metabolic reconstruction for Escherichia coli K-12 MG1655 that accounts for 1260 ORFs and thermodynamic information">Feist et al. (2007)</a>.
+```{r gradH2O0, message = FALSE, echo = 1}
+gradH2O0()
 ```
 
 ## Basis species comparison and relative water content (Figure 1)
