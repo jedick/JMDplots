@@ -290,7 +290,7 @@ ppage <- function(subset = "gradoxSI", H2O = FALSE, set.par = TRUE, plot.it = TR
 # mout <- mpage(H2O=TRUE); pout <- ppage(H2O=TRUE); pcomp(mout, pout)
 pcomp <- function(mout, pout, seqtype="MG", vars = NULL, parts=c("plot", "legend"), yline = 2,
                   xlim = NULL, ylim = NULL, reorder = TRUE, plot.techtype = FALSE, add = FALSE,
-                  pch = NULL, lty = 2, labels.at = "max") {
+                  pch = NULL, lty = 2, labels.at = "max", cex.ylab = 1) {
   # determine plot type: 20191024
   # ZC - ZC of protein vs DNA
   # H2O-ZC - nH2O vs ZC of protein
@@ -336,7 +336,7 @@ pcomp <- function(mout, pout, seqtype="MG", vars = NULL, parts=c("plot", "legend
     }
     if(!add) {
       plot(xlim, ylim, xlab=xlab, ylab=NA, type="n")
-      mtext(ylab, side=2, line=yline, las=0, cex=par("cex"))
+      mtext(ylab, side=2, line=yline, las=0, cex = cex.ylab)
     }
     for(ipout in 1:length(pout)) {
       # get study name and change MGP or MTP to MG or MT
