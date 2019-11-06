@@ -283,17 +283,18 @@ gradH2O4 <- function(pdf = FALSE, var = NULL) {
     if(i==2) figlab <- c("D", "E", "F")
 
     mplot("Baltic_Sea-0.1s", "iMicrobe_MGP", H2O = TRUE, plottype = "#FF000030", col = "red", add.title = FALSE, ylim = ylim, yline = 2.7, var = var[i])
-    mplot("Baltic_Sea-0.1s", "SRA_MTP", H2O = TRUE, plottype = "#0000FF30", col = "blue", add.title = FALSE, add = TRUE, pch = 1, var = var[i])
+    mplot("Baltic_Sea-0.1s", "SRA_MTP", H2O = TRUE, plottype = "#0000FF30", col = "blue", add.title = FALSE, add = TRUE, pch = 15, var = var[i])
     legend("topright", legend = quote("0.1-0.8"~mu*m), bty = "n")
+    legend("bottomleft", c("metagenome", "metatranscriptome"), pch = c(19, 15), col = c("red", "blue"), lty = c(2, 2), bty = "n")
     label.figure(figlab[1], cex = 1.8, xfrac = 0.04)
 
     mplot("Baltic_Sea-0.8s", "iMicrobe_MGP", H2O = TRUE, plottype = "#FF000030", col = "red", add.title = FALSE, ylim = ylim, yline = 2.7, var = var[i])
-    mplot("Baltic_Sea-0.8s", "SRA_MTP", H2O = TRUE, plottype = "#0000FF30", col = "blue", add.title = FALSE, add = TRUE, pch = 1, var = var[i])
+    mplot("Baltic_Sea-0.8s", "SRA_MTP", H2O = TRUE, plottype = "#0000FF30", col = "blue", add.title = FALSE, add = TRUE, pch = 15, var = var[i])
     legend("topright", legend = quote("0.8-3.0"~mu*m), bty = "n")
     label.figure(figlab[2], cex = 1.8, xfrac = 0.035)
 
     mplot("Baltic_Sea-3.0s", "iMicrobe_MGP", H2O = TRUE, plottype = "#FF000030", col = "red", add.title = FALSE, ylim = ylim, yline = 2.7, var = var[i])
-    mplot("Baltic_Sea-3.0s", "SRA_MTP", H2O = TRUE, plottype = "#0000FF30", col = "blue", add.title = FALSE, add = TRUE, pch = 1, var = var[i])
+    mplot("Baltic_Sea-3.0s", "SRA_MTP", H2O = TRUE, plottype = "#0000FF30", col = "blue", add.title = FALSE, add = TRUE, pch = 15, var = var[i])
     legend("topright", legend = quote("3.0-200"~mu*m), bty = "n")
     label.figure(figlab[3], cex = 1.8, xfrac = 0.035)
   }
