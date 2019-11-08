@@ -32,7 +32,7 @@ gradH2O0()
 ```
 
 ## Basis species comparison and relative water content (Figure 1)
-```{r gradH2O1, message = FALSE, echo = 1, fig.align='center', out.width='100%', out.height='500px'}
+```{r gradH2O1, message = FALSE, echo = 1, fig.align='center', out.width='100%', out.height='480px'}
 gradH2O1(TRUE)
 knitr::include_graphics("gradH2O1.pdf")
 ```
@@ -56,13 +56,13 @@ knitr::include_graphics("gradH2O4.pdf")
 ```
 
 ## `r nH2O`-`r ZC` for freshwater, marine, and hypersaline environments (Figure 5)
-```{r gradH2O5, message = FALSE, echo = 1, fig.align='center', out.width='100%', out.height='500px'}
+```{r gradH2O5, message = FALSE, echo = 1, fig.align='center', out.width='100%', out.height='480px'}
 gradH2O5(TRUE)
 knitr::include_graphics("gradH2O5.pdf")
 ```
 
 ## Mean differences of compositional metrics for differentially expressed proteins in osmotic stress (Figure 6)
-```{r gradH2O6, message = FALSE, echo = 1, fig.align='center', out.width='100%', out.height='400px'}
+```{r gradH2O6, message = FALSE, echo = 1, fig.align='center', out.width='100%', out.height='480px'}
 gradH2O6(TRUE)
 knitr::include_graphics("gradH2O6.pdf")
 ```

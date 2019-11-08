@@ -139,7 +139,7 @@ gradH2O1 <- function(pdf = FALSE) {
 
   # plot 6: nH2O-ZC of E. coli proteins (QEC)
   nH2O.ecoli <- H2OAA(ecoli, basis = "QEC")
-  scatterfun(ZC.ecoli, nH2O.ecoli, "E. coli proteins (QEC)", "F")
+  scatterfun(ZC.ecoli, nH2O.ecoli, quote(italic(E.~coli)*" proteins (QEC)"), "F")
 
   # plot 7: nH2O-ZC of amino acids (rQEC)
   par(mgp = c(2, 0.7, 0))
@@ -152,7 +152,7 @@ gradH2O1 <- function(pdf = FALSE) {
 
   # plot 9: nH2O-ZC of E. coli proteins (rQEC)
   nH2O.ecoli <- H2OAA(ecoli, basis = "rQEC")
-  scatterfun(ZC.ecoli, nH2O.ecoli, "E. coli proteins (rQEC)", "I")
+  scatterfun(ZC.ecoli, nH2O.ecoli, quote(italic(E.~coli)*" proteins (rQEC)"), "I")
 
   if(pdf) {
     dev.off()
@@ -389,9 +389,29 @@ gradH2O5 <- function(pdf = FALSE) {
 # add GRAVY and pI plot 20191028
 # use different symbols for eukaryotes and add more bacteria and archaea (osmotic2) 20191102-20191103
 gradH2O6 <- function(pdf = FALSE) {
-  if(pdf) pdf("gradH2O6.pdf", width = 8, height = 4)
-  par(mfrow = c(1, 2))
+  if(pdf) pdf("gradH2O6.pdf", width = 8, height = 5.2)
+  layout(matrix(c(0,0,1,1,1,1,1,1,0,0, 2,2,2,2,2,3,3,3,3,3), nrow = 2, byrow = TRUE), heights = c(0.3, 1))
+  par(cex = 1)
+
+  # make legend
+  par(mar = c(0.5, 1, 0, 1))
+  plot.new()
+  plot.window(c(1, 12), c(1, 5.3))
+  par(xpd = NA)
+  points(rep(1, 3), 1:3, pch = c(15, 2, 1), cex = c(0.5, 1.2, 1.5), col = "slategray3")
+  points(rep(3, 3), 2:4, pch = c(2, 1, 0), cex = 2)
+  text(rep(3, 3), 2:4, c("E", "C", "A"), cex = 0.75)
+  text(c(1, 3), c(5.3, 5.3), c("Ref. 19", "This study"), adj = c(0.5, 1))
+  text(4.5, 5.3, "Domain, method, conditions", adj = c(0, 1))
+  text(4.5, 4, "Bacteria/Archaea, proteomics, optimal vs hypoosmotic", adj = 0)
+  text(4.5, 3, "Bacteria/Archaea, proteomics, hyperosmotic", adj = 0)
+  text(4.5, 2, "Bacteria/Archaea, transcriptomics, hyperosmotic", adj = 0)
+  text(4.5, 1, "Eukaryotes, proteomics, hyperosmotic", adj = 0)
+  z <- kde2d(rep(c(0.5, 1, 1.5, 2, 2.5, 3, 3.5), 5), rep(c(2.6, 2.8, 3, 3.2, 3.4), each = 7))
+  contour(z, drawlabels = FALSE, levels = 0.22, lty = 2, add = TRUE, col = "maroon3")
+  # adjust plot parameters for main plots
   par(mar = c(4, 4, 1, 1), mgp = c(2.5, 1, 0))
+  par(xpd = FALSE)
 
   # generate compositional table
   datasets1 <- pdat_osmotic()

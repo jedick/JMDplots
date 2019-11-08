@@ -63,6 +63,7 @@ importFrom("shiny", "fluidPage", "includeCSS", "shinyApp")
 importFrom("timevis", "renderTimevis", "timevis", "timevisOutput")
 importFrom("png", "readPNG")
 importFrom("plotrix", "draw.arc")
+importFrom("MASS", "kde2d")
 
 # imports from standard packages
 importFrom("grDevices", "dev.off", "cairo_pdf", "pdf", "blues9", "colorRampPalette",
