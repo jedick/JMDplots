@@ -240,6 +240,10 @@ gradH2O3 <- function(pdf = FALSE, vars = "H2O-ZC") {
     text(c(-0.188, -0.212, -0.186, -0.161), c(0.4005, 0.3894, 0.3807, 0.3798), c("Nif-D", "Nif-C", "Nif-B", "Nif-A"), adj = 0)
     text(-0.217, 0.3865, "NF", cex=0.7)
   }
+  if(vars == "pIG") {
+    text(c(5.00, 7.49, 5.65, 5.68), c(-0.123, -0.130, -0.109, -0.066), c("Nif-D", "Nif-C", "Nif-B", "Nif-A"), adj = 0)
+    text(c(5.37, 5.42, 5.57), c(-0.158, -0.176, -0.216), c("1 mm", "2 mm", "3 mm"), adj = 1)
+  }
   title("redox gradients", font.main = 1)
   label.figure("A", cex = 2, xfrac = 0.035)
 
@@ -285,7 +289,7 @@ gradH2O4 <- function(pdf = FALSE, var = NULL) {
     mplot("Baltic_Sea-0.1s", "iMicrobe_MGP", H2O = TRUE, plottype = "#FF000030", col = "red", add.title = FALSE, ylim = ylim, yline = 2.7, var = var[i])
     mplot("Baltic_Sea-0.1s", "SRA_MTP", H2O = TRUE, plottype = "#0000FF30", col = "blue", add.title = FALSE, add = TRUE, pch = 15, var = var[i])
     legend("topright", legend = quote("0.1-0.8"~mu*m), bty = "n")
-    legend("bottomleft", c("metagenome", "metatranscriptome"), pch = c(19, 15), col = c("red", "blue"), lty = c(2, 2), bty = "n")
+    legend("bottomleft", c("metagenomes", "metatranscriptomes"), pch = c(19, 15), col = c("red", "blue"), lty = c(2, 2), bty = "n")
     label.figure(figlab[1], cex = 1.8, xfrac = 0.04)
 
     mplot("Baltic_Sea-0.8s", "iMicrobe_MGP", H2O = TRUE, plottype = "#FF000030", col = "red", add.title = FALSE, ylim = ylim, yline = 2.7, var = var[i])

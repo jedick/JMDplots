@@ -85,7 +85,7 @@ Dick, J. M. (2019) CHNOSZ: Thermodynamic calculations and diagrams for geochemis
 
 Dick, J. M., Yu, M., Tan, J. and Lu, A. (2019a) Changes in carbon oxidation state of metagenomes along geochemical redox gradients. \emph{Front. Microbiol.} \bold{10}, 120. \doi{10.3389/fmicb.2019.00120}
 
-Dick, J. M., Tan, J. and Yu, M. (2019b) Geochemistry of metagenomes: Distinct compositional signatures of environmental redox and salinity gradients. \emph{(preprint)}
+Dick, J. M., Tan, J. and Yu, M. (2019b) Geochemistry of metagenomes: Redox and salinity gradients and the chemical compositions of proteins. \emph{(preprint)}
 
 O'Leary, N. A. et al. (2016) Reference sequence (RefSeq) database at NCBI: current status, taxonomic expansion, and functional annotation. \emph{Nucleic Acids Res.} \bold{44}, D733-D745. \doi{10.1093/nar/gkv1189}
 }
