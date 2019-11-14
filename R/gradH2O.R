@@ -67,7 +67,7 @@ gradH2O1 <- function(pdf = FALSE) {
     lines(xlim, predict(mylm, data.frame(ZC = xlim)), ...)
     # add R-squared text
     if(!is.null(legend.x)) {
-      R2 <- round(summary(mylm)$r.squared, 2)
+      R2 <- format(round(summary(mylm)$r.squared, 2), nsmall = 2)
       R2txt <- substitute(italic(R)^2 == R2, list(R2 = R2))
       legend(legend.x, legend = R2txt, bty = "n")
     }
@@ -127,9 +127,11 @@ gradH2O1 <- function(pdf = FALSE) {
   aaplot(ZC.aa, species()$O2, nO2lab, "bottomright", "Amino acids (QEC)", "C")
 
   # plot 4: nH2O-ZC of amino acids (QEC)
-  # save the residuals here
   par(mgp = c(2, 0.7, 0))
-  rQEC <- aaplot(ZC.aa, species()$H2O, nH2Olab, "bottomright", "Amino acids (QEC)", "D")
+  # save the residuals here
+  # subtract 0.355 so mean of human proteins = 0 20191114
+  # (see canprot::H2OAA)
+  rQEC <- aaplot(ZC.aa, species()$H2O, nH2Olab, "bottomright", "Amino acids (QEC)", "D") - 0.355
   names(rQEC) <- aminoacids(3)
 
   # plot 5: nH2O-ZC of human proteins (QEC)
@@ -143,7 +145,7 @@ gradH2O1 <- function(pdf = FALSE) {
 
   # plot 7: nH2O-ZC of amino acids (rQEC)
   par(mgp = c(2, 0.7, 0))
-  aaplot(ZC.aa, rQEC, nH2Olab, NULL, "Amino acids (rQEC)", "G")
+  aaplot(ZC.aa, rQEC, nH2Olab, "bottomright", "Amino acids (rQEC)", "G")
 
   # plot 8: nH2O-ZC of human proteins (rQEC)
   par(mgp = c(2.2, 0.7, 0))
@@ -172,7 +174,7 @@ gradH2O2 <- function(pdf = FALSE) {
   label.figure("A", cex = 1.7, yfrac = 0.93)
   mplot("Diffuse_Vents", "SRA_MGP", add.label = FALSE, plottype = "#FF000030", col = "red")
   label.figure("B", cex = 1.7, yfrac = 0.93)
-  mplot("Guerrero_Negro", "IMG_MGP", add.label = FALSE, plottype = "#FF000030", col = "red")
+  mplot("Guerrero_Negro", "IMG_MGP", add.label = FALSE, plottype = "#FF000030", col = "red", ylim = c(-0.150, -0.125))
   label.figure("C", cex = 1.7, yfrac = 0.93)
   # add proteomes from Nif-encoding genomes 20191014
   # get mean and SD of ZC values
@@ -210,7 +212,7 @@ gradH2O3 <- function(pdf = FALSE, vars = "H2O-ZC") {
   # plot 1: compare ZC and nH2O of proteins in datasets from gradox paper
   mgradox <- ppage("gradoxGS", plot.it = FALSE)
   pgradox <- ppage("gradoxGS", H2O = TRUE, plot.it = FALSE)
-  pcomp(mgradox, pgradox, reorder = FALSE, yline = 3.2, vars = vars, cex.ylab = 1.8)
+  pcomp(mgradox, pgradox, reorder = FALSE, yline = 3.2, vars = vars, cex.ylab = 1.8, font = 2)
   # add proteomes from Nif-encoding genomes 20191014
   np <- NifProteomes()
   if(vars == "H2O-ZC") {
@@ -223,22 +225,24 @@ gradH2O3 <- function(pdf = FALSE, vars = "H2O-ZC") {
   }
   # add text labels
   if(vars == "H2O-ZC") {
-    text(-0.21, 0.348, "hot spring")
-    text(-0.21, 0.3455, "source")
-    text(-0.157, 0.349, "photo-", adj = 0)
-    text(-0.157, 0.3465, "trophic", adj = 0)
-    text(-0.157, 0.344, "zone", adj = 0)
-    text(-0.127, 0.353, "> 3 mm", adj = 0)
-    text(-0.138, 0.356, "3 mm", adj = 0)
-    text(-0.134, 0.3585, "2 mm", adj = 0)
-    text(-0.131, 0.367, "1 mm", adj = 0)
-    text(-0.205, 0.364, "vent")
-    text(-0.205, 0.3615, "fluids")
-    text(-0.157, 0.368, "plume")
-    text(-0.163, 0.3595, "sea-", adj = 0)
-    text(-0.163, 0.357, "water", adj = 0)
-    text(c(-0.188, -0.212, -0.186, -0.161), c(0.4005, 0.3894, 0.3807, 0.3798), c("Nif-D", "Nif-C", "Nif-B", "Nif-A"), adj = 0)
-    text(-0.217, 0.3865, "NF", cex=0.7)
+    text(-0.21, -0.007, "hot spring", cex = 0.8)
+    text(-0.21, -0.0095, "source", cex = 0.8)
+    text(-0.157, -0.006, "photo-", adj = 0, cex = 0.8)
+    text(-0.157, -0.0085, "trophic", adj = 0, cex = 0.8)
+    text(-0.157, -0.011, "zone", adj = 0, cex = 0.8)
+    text(-0.17, -0.015, "photosynthetic", cex = 0.8)
+    text(-0.17, -0.018, "fringe", cex = 0.8)
+    text(-0.127, -0.002, "> 3 mm", adj = 0, cex = 0.8)
+    text(-0.138, 0.001, "3 mm", adj = 0, cex = 0.8)
+    text(-0.134, 0.0035, "2 mm", adj = 0, cex = 0.8)
+    text(-0.131, 0.012, "1 mm", adj = 0, cex = 0.8)
+    text(-0.205, 0.011, "vent", cex = 0.8)
+    text(-0.205, 0.0085, "fluids", cex = 0.8)
+    text(-0.157, 0.013, "plume", cex = 0.8)
+    text(-0.1615, 0.005, "sea-", adj = 0, cex = 0.8)
+    text(-0.1615, 0.0025, "water", adj = 0, cex = 0.8)
+    text(c(-0.188, -0.212, -0.186, -0.161), c(0.0455, 0.0344, 0.0257, 0.0248), c("Nif-D", "Nif-C", "Nif-B", "Nif-A"), adj = 0, cex = 0.8)
+    text(-0.217, 0.0315, "NF", cex=0.7, font = 2)
   }
   if(vars == "pIG") {
     text(c(5.00, 7.49, 5.65, 5.68), c(-0.123, -0.130, -0.109, -0.066), c("Nif-D", "Nif-C", "Nif-B", "Nif-A"), adj = 0)
@@ -257,10 +261,10 @@ gradH2O3 <- function(pdf = FALSE, vars = "H2O-ZC") {
   pcomp(mbalticd, pbalticd, reorder = FALSE, add = TRUE, lty = 3, labels.at = NA, vars = vars, pch = list(c(6, 6, 6, 6, 25, 25, 25, 25, 25)))
   # add text labels
   if(vars == "H2O-ZC") {
-    text(-0.14, 0.392, "surface\n< 6 PSU")
-    text(-0.135, 0.381, "surface\n> 6 PSU")
-    text(-0.185, 0.386, "chl a max\n< 6 PSU")
-    text(-0.18, 0.370, "chl a max\n> 6 PSU")
+    text(-0.14, 0.037, "surface\n< 6 PSU")
+    text(-0.135, 0.026, "surface\n> 6 PSU")
+    text(-0.185, 0.031, "chl a max\n< 6 PSU")
+    text(-0.18, 0.015, "chl a max\n> 6 PSU")
   }
   title("Baltic Sea", font.main = 1)
   label.figure("B", cex = 2, xfrac = 0.035)
@@ -320,7 +324,7 @@ gradH2O5 <- function(pdf = FALSE) {
   par(las = 1, mar = c(4, 4.2, 2, 1), mgp = c(2.5, 1, 0))
   par(cex.lab = 1.5)
   xlim <- c(-0.2, -0.08)
-  ylim <- c(0.32, 0.4)
+  ylim <- c(-0.04, 0.04)
 
   # plots 1-2: Amazon river metagenome
   mout <- ppage("amazon", plot.it = FALSE)
@@ -328,7 +332,7 @@ gradH2O5 <- function(pdf = FALSE) {
   pcomp(mout, pout, xlim = xlim, ylim = ylim, lty = 0, yline = 2.8, labels.at = NA)
   hullfun(mout, pout, c(1, 3), "green3", c("riverFL", "riverPA"))
   hullfun(mout, pout, c(1, 3), "blue", c("plumeFL", "plumePA"))
-  text(c(-0.13, -0.13), c(0.365, 0.35), c("river", "plume"))
+  text(c(-0.13, -0.13), c(0.010, -0.005), c("river", "plume"))
   legend("topleft", c("free-living", "particle-associated"), pch = c(20, 15), bty = "n")
   title("Amazon River metagenome", font.main = 1)
   label.figure("A", xfrac = 0.1, cex = 1.8)
@@ -344,7 +348,7 @@ gradH2O5 <- function(pdf = FALSE) {
   pcomp(mout, pout, "MT", xlim = xlim, ylim = ylim, lty = 0, yline = 2.8, labels.at = NA)
   hullfun(mout, pout, c(2, 4), "green3", c("riverFL", "riverPA"))
   hullfun(mout, pout, c(2, 4), "blue", c("plumeFL", "plumePA"))
-  text(c(-0.125, -0.12), c(0.38, 0.36), c("river", "plume"))
+  text(c(-0.125, -0.12), c(0.025, 0.005), c("river", "plume"))
   title("Amazon River metatranscriptome", font.main = 1)
   label.figure("B", xfrac = 0.1, cex = 1.8)
   # plot 4: GRAVY - pI
@@ -367,7 +371,7 @@ gradH2O5 <- function(pdf = FALSE) {
   poutH <- ppage("hypersaline", H2O = TRUE, plot.it = FALSE)
   pcomp(moutH, poutH, reorder = FALSE, add = TRUE)
   hullfun(moutH, poutH, 1:3, "turquoise3")
-  text(c(-0.16, -0.16, -0.12), c(0.393, 0.348, 0.353), c("freshwater", "marine", "hypersaline"))
+  text(c(-0.16, -0.16, -0.12), c(0.037, -0.007, -0.002), c("freshwater", "marine", "hypersaline"))
   legend("bottomright", c("lower salinity", "higher salinity"), pch = c(0, 15), col = "turquoise3", bty = "n")
   title("Freshwater - marine - hypersaline", font.main = 1)
   label.figure("C", xfrac = 0.1, cex = 1.8)
@@ -411,7 +415,7 @@ gradH2O6 <- function(pdf = FALSE) {
   text(4.5, 3, "Bacteria/Archaea, proteomics, hyperosmotic", adj = 0)
   text(4.5, 2, "Bacteria/Archaea, transcriptomics, hyperosmotic", adj = 0)
   text(4.5, 1, "Eukaryotes, proteomics, hyperosmotic", adj = 0)
-  z <- kde2d(rep(c(0.5, 1, 1.5, 2, 2.5, 3, 3.5), 5), rep(c(2.6, 2.8, 3, 3.2, 3.4), each = 7))
+  z <- MASS::kde2d(rep(c(0.5, 1, 1.5, 2, 2.5, 3, 3.5), 5), rep(c(2.6, 2.8, 3, 3.2, 3.4), each = 7))
   contour(z, drawlabels = FALSE, levels = 0.22, lty = 2, add = TRUE, col = "maroon3")
   # adjust plot parameters for main plots
   par(mar = c(4, 4, 1, 1), mgp = c(2.5, 1, 0))

@@ -25,7 +25,7 @@ The functions are exported in the package so they are available to user scripts.
   pcomp(mout, pout, seqtype = "MG", vars = NULL, parts = c("plot", "legend"),
     yline = 2, xlim = NULL, ylim = NULL, reorder = TRUE,
     plot.techtype = FALSE, add = FALSE, pch = NULL, lty = 2,
-    labels.at = "max", cex.ylab = 1)
+    labels.at = "max", cex.ylab = 1, font = 1)
 }
 
 \arguments{
@@ -62,8 +62,9 @@ The functions are exported in the package so they are available to user scripts.
   \item{mdata}{list, metadata for studies (default is from package)}
   \item{pch}{numeric, plot symbol (default is determined from sample type)}
   \item{lty}{numeric, line type}
-  \item{labels.at}{character, plot labels at \samp{max} or \samp{min} values (use NA to omit labels)}
+  \item{labels.at}{character, plot study labels at \samp{max} or \samp{min} values (use NA to omit labels)}
   \item{cex.ylab}{numeric, size of y-axis label}
+  \item{font}{integer, font to use for study labels (see \code{\link{par}})}
 }
 
 \details{

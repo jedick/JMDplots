@@ -93,7 +93,7 @@ mplot <- function(study, seqtype, plottype = "bars", ylim = NULL, plot.RNA = TRU
   if(is.null(ylim)) {
     if(identical(var, "GRAVY")) ylim <- c(-0.3, -0.05)
     else if(identical(var, "pI")) ylim <- c(4, 9)
-    else if(H2O) ylim <- c(0.34, 0.4)
+    else if(H2O) ylim <- c(-0.02, 0.05)
     else ylim <- mylim
   }
   # if taxids are given, plot total ZC first (DNA, not RNA) and add ZC for each species
@@ -290,7 +290,7 @@ ppage <- function(subset = "gradoxSI", H2O = FALSE, set.par = TRUE, plot.it = TR
 # mout <- mpage(H2O=TRUE); pout <- ppage(H2O=TRUE); pcomp(mout, pout)
 pcomp <- function(mout, pout, seqtype="MG", vars = NULL, parts=c("plot", "legend"), yline = 2,
                   xlim = NULL, ylim = NULL, reorder = TRUE, plot.techtype = FALSE, add = FALSE,
-                  pch = NULL, lty = 2, labels.at = "max", cex.ylab = 1) {
+                  pch = NULL, lty = 2, labels.at = "max", cex.ylab = 1, font = 1) {
   # determine plot type: 20191024
   # ZC - ZC of protein vs DNA
   # H2O-ZC - nH2O vs ZC of protein
@@ -326,7 +326,7 @@ pcomp <- function(mout, pout, seqtype="MG", vars = NULL, parts=c("plot", "legend
         if(is.null(xlim)) xlim <- c(-0.22, -0.098)
         xlab <- quote(italic(Z)[C])
       }
-      if(is.null(ylim)) ylim <- c(0.34, 0.4)
+      if(is.null(ylim)) ylim <- c(-0.02, 0.05)
       ylab <- quote(italic(n)[H[2]*O])
     } else if(vars=="pIG") {
       if(is.null(xlim)) xlim <- c(4, 9)
@@ -434,11 +434,11 @@ pcomp <- function(mout, pout, seqtype="MG", vars = NULL, parts=c("plot", "legend
       if(!is.na(labels.at)) {
         if(labels.at=="max") {
           imax <- which.max(yvals)
-          text(xvals[imax] + dx, yvals[imax] + dy, abbrev, cex=0.7)
+          text(xvals[imax] + dx, yvals[imax] + dy, abbrev, cex=0.7, font = font)
         }
         if(labels.at=="min") {
           imin <- which.min(yvals)
-          text(xvals[imin] + dx, yvals[imin] - dy, abbrev, cex=0.7)
+          text(xvals[imin] + dx, yvals[imin] - dy, abbrev, cex=0.7, font = font)
         }
       }
     }
