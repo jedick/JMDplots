@@ -392,10 +392,15 @@ pcomp <- function(mout, pout, seqtype="MG", vars = NULL, parts=c("plot", "legend
       # filled circles for marine, filled squares for terrestrial 20181114
       mypch <- rep(19, length(xvals))
       mypch[group %in% c("yellowstone", "yellowstone1", "rock", "rock0", "mat", "mat1", "hypersaline", "hypersaline0")] <- 15
-      # filled squares for Amazon River particle associated 20190723
-      mypch[group %in% c("riverPA", "plumePA")] <- 15
-      # smaller filled circles for Amazon River and plume free-living 20191025
-      mypch[group %in% c("riverFL", "plumeFL")] <- 20
+      # filled squares for Amazon particle associated 20190723
+      mypch[group %in% c("riverPA", "plumePA")] <- 22
+      # smaller circles for Amazon free-living 20191025
+      mypch[group %in% c("riverFL", "plumeFL")] <- 21
+      cex <- rep(1, length(xvals))
+      cex[group %in% c("riverFL", "plumeFL")] <- 0.7
+      # open symbols for Amazon river
+      bg <- col
+      bg[group %in% c("riverPA", "riverFL")] <- "transparent"
       # filled triangles for freshwater, open squares for hypersaline_low 20191027
       mypch[group %in% "lake"] <- 17
       mypch[group %in% "hypersaline_low"] <- 0
@@ -409,7 +414,7 @@ pcomp <- function(mout, pout, seqtype="MG", vars = NULL, parts=c("plot", "legend
       }
       # use pch from argument, otherwise mypch as determined here
       if(is.null(pch)) thispch <- mypch else thispch <- pch[[ipout]]
-      points(xvals, yvals, col=col, pch=thispch, bg = col)
+      points(xvals, yvals, col = col, pch = thispch, bg = bg, cex = cex)
       # outline circle or square for groups with "0" (upper part of OMZ etc)
       pch0 <- rep(1, length(xvals))
       pch0[group %in% c("yellowstone1", "rock0", "mat1", "hypersaline0")] <- 0

@@ -176,8 +176,6 @@ plotMG <- function(dataset="Guerrero_Negro_IMG_MG", plottype="bars",
       if(!is.numeric(all.labels)) {
         # rotate labels 20190113
         if(!is.na(srt)) {
-          # tweak to remove "GS" from Baltic Sea labels 20190715
-          if(grepl("^GS", all.labels[1])) all.labels <- gsub("^GS", "", all.labels)
           # https://www.r-bloggers.com/rotated-axis-labels-in-r-plots/
           # modified to use offset calculated with strheight 20191004
           text(x=1:nsamp, y=par()$usr[3]-1.5*strheight("A"), labels=all.labels, srt=srt, adj=1, xpd=TRUE)

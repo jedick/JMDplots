@@ -5,7 +5,7 @@
 gradH2O <- list(
   `Baltic_Sea-0.1s` = list( # 20181228 [DLY+14], 20190104 [ZMI+17]
     # surface 0.1 um samples
-    site = c("GS667", "GS665", "GS669", "GS673", "GS675", "GS659", "GS679", "GS681", "GS683", "GS685", "GS687", "GS694"),
+    station = c("GS667", "GS665", "GS669", "GS673", "GS675", "GS659", "GS679", "GS681", "GS683", "GS685", "GS687", "GS694"),
     iMicrobe_MG = c("GS667_0.1", "GS665_0.1", NA, "GS673_0.1", NA, "GS659_0.1", "GS679_0.1", "GS681_0.1", "GS683_0.1", "GS685_0.1", "GS687_0.1", "GS694_0.1"),
     SRA_MT = c("SRR3747412", NA, "SRR3747762", NA, "SRR3747289", NA, "SRR3747362", NA, "SRR3747402", NA, NA, "SRR3747415"),
     MG_range = c(0.59, 0.63),
@@ -19,7 +19,7 @@ gradH2O <- list(
   ),
   `Baltic_Sea-0.8s` = list( # 20181228 [DLY+14], 20190104 [ZMI+17]
     # surface 0.8 um samples
-    site = c("GS667", "GS665", "GS669", "GS673", "GS675", "GS659", "GS679", "GS681", "GS683", "GS685", "GS687", "GS694"),
+    station = c("GS667", "GS665", "GS669", "GS673", "GS675", "GS659", "GS679", "GS681", "GS683", "GS685", "GS687", "GS694"),
     iMicrobe_MG = c("GS667_0.8", "GS665_0.8", NA, "GS673_0.8", NA, "GS659_0.8", "GS679_0.8", "GS681_0.8", "GS683_0.8", "GS685_0.8", "GS687_0.8", "GS694_0.8"),
     SRA_MT = c("SRR3747359", NA, "SRR3747763", NA, "SRR3747315", NA, "SRR3747363", NA, "SRR3747403", NA, NA, "SRR3747416"),
     MG_range = c(0.59, 0.63),
@@ -33,7 +33,7 @@ gradH2O <- list(
   ),
   `Baltic_Sea-3.0s` = list( # 20181228 [DLY+14], 20190104 [ZMI+17]
     # surface 3.0 um samples
-    site = c("GS667", "GS665", "GS669", "GS673", "GS675", "GS659", "GS679", "GS681", "GS683", "GS685", "GS687", "GS694"),
+    station = c("GS667", "GS665", "GS669", "GS673", "GS675", "GS659", "GS679", "GS681", "GS683", "GS685", "GS687", "GS694"),
     iMicrobe_MG = c("GS667_3.0", "GS665_3.0", NA, "GS673_3.0", NA, "GS659_3.0", "GS679_3.0", "GS681_3.0", "GS683_3.0", "GS685_3.0", "GS687_3.0", "GS694_3.0"),
     SRA_MT = c("SRR3747331", NA, "SRR3747764", NA, "SRR3746048", NA, "SRR3747364", NA, "SRR3747404", NA, NA, "SRR3747417"),
     MG_range = c(0.59, 0.63),
@@ -47,7 +47,7 @@ gradH2O <- list(
   ),
   `Baltic_Sea-0.1d` = list( # 20181228 [DLY+14], 20190104 [ZMI+17]
     # deep 0.1 um samples
-    site = c("GS666", "GS670", "GS674", "GS660", "GS676", "GS677", "GS680", "GS682", "GS684", "GS686", "GS688", "GS695"),
+    station = c("GS666", "GS670", "GS674", "GS660", "GS676", "GS677", "GS680", "GS682", "GS684", "GS686", "GS688", "GS695"),
     iMicrobe_MG = c("GS666_0.1", NA, "GS674_0.1", "GS660_0.1", NA, "GS677_0.1", NA, "GS682_0.1", "GS684_0.1", "GS686_0.1", "GS688_0.1", "GS695_0.1"),
     SRA_MT = c(NA, "SRR3747765", NA, NA, "SRR3747324", "SRR3747327", "SRR3747368", NA, "SRR3747413", NA, NA, "SRR3747418"),
     MG_range = c(0.59, 0.63),
@@ -61,7 +61,7 @@ gradH2O <- list(
   ),
   `Baltic_Sea-0.8d` = list( # 20181228 [DLY+14], 20190104 [ZMI+17]
     # deep 0.8 um samples
-    site = c("GS666", "GS670", "GS674", "GS660", "GS676", "GS677", "GS680", "GS682", "GS684", "GS686", "GS688", "GS695"),
+    station = c("GS666", "GS670", "GS674", "GS660", "GS676", "GS677", "GS680", "GS682", "GS684", "GS686", "GS688", "GS695"),
     iMicrobe_MG = c("GS666_0.8", NA, "GS674_0.8", "GS660_0.8", NA, "GS677_0.8", NA, "GS682_0.8", "GS684_0.8", "GS686_0.8", "GS688_0.8", "GS695_0.8"),
     SRA_MT = c(NA, "SRR3747775", NA, NA, "SRR3747325", "SRR3747328", "SRR3747400", NA, "SRR3747414", NA, NA, "SRR3747419"),
     MG_range = c(0.59, 0.63),
@@ -75,7 +75,7 @@ gradH2O <- list(
   ),
   `Baltic_Sea-3.0d` = list( # 20181228 [DLY+14], 20190104 [ZMI+17]
     # deep 3.0 um samples
-    site = c("GS666", "GS670", "GS674", "GS660", "GS676", "GS677", "GS680", "GS682", "GS684", "GS686", "GS688", "GS695"),
+    station = c("GS666", "GS670", "GS674", "GS660", "GS676", "GS677", "GS680", "GS682", "GS684", "GS686", "GS688", "GS695"),
     iMicrobe_MG = c("GS666_3.0", NA, "GS674_3.0", "GS660_3.0", NA, "GS677_3.0", NA, "GS682_3.0", "GS684_3.0", "GS686_3.0", "GS688_3.0", "GS695_3.0"),
     SRA_MT = c(NA, "SRR3747777", NA, NA, "SRR3747326", "SRR3747329", "SRR3747401", NA, "SRR3747405", NA, NA, "SRR3747420"),
     MG_range = c(0.59, 0.63),
