@@ -528,23 +528,72 @@ NifProteomes <- function() {
 ### UNEXPORTED FUNCTIONS ###
 ############################
 
-# Supplementary Figure S1 20191028 (provisional, not in final paper)
+# Supplementary Figure S1: scatterplots of GRAVY vs ZC and nH2O 20191117
 gradH2OS1 <- function(pdf = FALSE) {
-  if(pdf) pdf("gradH2OS1.pdf", width = 12, height = 5.6)
-  gradH2O3(vars = "pIG")
+  if(pdf) pdf("gradH2OS1.pdf", width = 7, height = 7)
+  # get amino acid compositions of human and E.coli proteins (UniProt)
+  human <- get("human_base", canprot)
+  ecoli <- read.csv(system.file("/extdata/organisms/ecoli.csv.xz", package = "JMDplots"), as.is = TRUE)
+  ZC <- ZCAA(human)
+  nH2O <- H2OAA(human)
+  GRAVY <- GRAVY(human)
+  scatterfun <- function(xvar, yvar, AAcomp) {
+    if(xvar=="ZC") {
+      x <- ZCAA(AAcomp)
+      xlab <- expression(italic(Z)[C])
+    }
+    if(xvar=="nH2O") {
+      x <- H2OAA(AAcomp)
+      xlab <- expression(italic(n)[H[2] * O])
+    }
+    if(yvar=="GRAVY") {
+      y <- GRAVY(AAcomp)
+      ylab <- "GRAVY"
+    }
+    # make scatterplot
+    smoothScatter(x, y, xlab = xlab, ylab = ylab, colramp = colorRampPalette(c("transparent", blues9)))
+    # add linear fit
+    mylm <- lm(y ~ x)
+    xs <- par("usr")[1:2]
+    ys <- predict(mylm, data.frame(x = xs))
+    lines(xs, ys, lty = 2, lwd = 2, col = "grey40")
+    # add legend with R-squared value
+    R2 <- format(round(summary(mylm)$r.squared, 2), nsmall = 2)
+    R2txt <- substitute(italic(R)^2 == R2, list(R2 = R2))
+    legend("bottomleft", legend = R2txt, bty = "n")
+  }
+  par(mfrow = c(2, 2))
+  scatterfun("ZC", "GRAVY", human)
+  title("Human proteins", font.main = 1)
+  scatterfun("nH2O", "GRAVY", human)
+  title("Human proteins (rQEC)", font.main = 1)
+  scatterfun("ZC", "GRAVY", ecoli)
+  title(quote(italic(E.~coli)*" proteins"), font.main = 1)
+  scatterfun("nH2O", "GRAVY", ecoli)
+  title(quote(italic(E.~coli)*" proteins (rQEC)"), font.main = 1)
   if(pdf) {
     dev.off()
-    addexif("gradH2OS1", "GRAVY-pI scatterplots for redox gradients and the Baltic Sea", "Dick et al. (2019) (preprint)")
+    addexif("gradH2OS1", "Scatterplots of GRAVY vs ZC and nH2O", "Dick et al. (2019) (preprint)")
   }
 }
 
 # Supplementary Figure S2 20191028 (provisional, not in final paper)
 gradH2OS2 <- function(pdf = FALSE) {
-  if(pdf) pdf("gradH2OS2.pdf", width = 6, height = 2.5)
+  if(pdf) pdf("gradH2OS2.pdf", width = 12, height = 5.6)
+  gradH2O3(vars = "pIG")
+  if(pdf) {
+    dev.off()
+    addexif("gradH2OS2", "GRAVY-pI scatterplots for redox gradients and the Baltic Sea", "Dick et al. (2019) (preprint)")
+  }
+}
+
+# Supplementary Figure S3 20191028 (provisional, not in final paper)
+gradH2OS3 <- function(pdf = FALSE) {
+  if(pdf) pdf("gradH2OS3.pdf", width = 6, height = 2.5)
   gradH2O4(var = c("GRAVY", "pI"))
   if(pdf) {
     dev.off()
-    addexif("gradH2OS2", "GRAVY and SI for Baltic Sea metagenome and metatranscriptome in different size fractions", "Dick et al. (2019) (preprint)")
+    addexif("gradH2OS3", "GRAVY and pI for Baltic Sea metagenome and metatranscriptome in different size fractions", "Dick et al. (2019) (preprint)")
   }
 }
 

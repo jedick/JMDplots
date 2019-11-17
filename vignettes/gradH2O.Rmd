@@ -1,10 +1,10 @@
 ---
-title: "Six plots from salinity gradients paper (2019)"
+title: "Seven plots from salinity gradients paper (2019)"
 output: 
   rmarkdown::html_vignette:
     mathjax: null
 vignette: >
-  %\VignetteIndexEntry{Six plots from salinity gradients paper (2019)}
+  %\VignetteIndexEntry{Seven plots from salinity gradients paper (2019)}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -65,5 +65,11 @@ knitr::include_graphics("gradH2O5.pdf")
 ```{r gradH2O6, message = FALSE, echo = 1, fig.align='center', out.width='100%', out.height='480px'}
 gradH2O6(TRUE)
 knitr::include_graphics("gradH2O6.pdf")
+```
+
+## Scatterplots of GRAVY vs ZC and nH2O (Figure S1)
+```{r gradH2OS1, message = FALSE, echo = 1, fig.align='center', out.width='100%', out.height='400px'}
+gradH2OS1(TRUE)
+knitr::include_graphics("gradH2OS1.pdf")
 ```
 
