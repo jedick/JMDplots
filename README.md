@@ -1,3 +1,5 @@
+[![DOI](https://zenodo.org/badge/211601502.svg)](https://zenodo.org/badge/latestdoi/211601502)
+
 # JMDplots
 
 This R package has code and data for plots from papers by [Jeffrey M. Dick](http://chnosz.net/jeff).
