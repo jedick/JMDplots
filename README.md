@@ -2,7 +2,7 @@
 
 This R package has code and data for plots from papers by [Jeffrey M. Dick](http://chnosz.net/jeff).
 
-Requirements are R (>= 3.1.0), [CHNOSZ](http://chnosz.net) (>= 1.3.2), and [canprot](https://github.com/jedick/canprot) (> 0.1.2, i.e. the current development version).
+Requirements are R (>= 3.1.0), [CHNOSZ](http://chnosz.net) (>= 1.3.2), and [canprot](https://github.com/jedick/canprot) (>= 0.1.3).
 knitr and rmarkdown (and a pandoc installation) are needed to build the vignettes.
 
 ## Installation from Github

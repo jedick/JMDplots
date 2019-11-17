@@ -1,4 +1,4 @@
-CHANGES IN JMDplots 0.0.1
+CHANGES IN JMDplots 1.0.0
 -------------------------
 
 - 20190928 Started package with plots from gradox paper.
@@ -16,3 +16,5 @@ CHANGES IN JMDplots 0.0.1
 
 - 20191021 Vignettes first posted on http://chnosz.net/JMDplots.
   Forty plots in seven vignettes.
+
+- 20191118 First release.
