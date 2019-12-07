@@ -410,7 +410,7 @@ gradH2O6 <- function(pdf = FALSE) {
   points(rep(0.5, 3), 1:3, pch = c(15, 2, 1), cex = c(0.5, 1.2, 1.5), col = "slategray3")
   points(rep(2.5, 3), 2:4, pch = c(2, 1, 0), cex = 2)
   text(rep(2.5, 3), 2:4, c("E", "C", "A"), cex = 0.75)
-  text(c(0.5, 2.5), c(5.3, 5.3), c("Ref. 11", "This study"), adj = c(0.5, 1))
+  text(c(0.5, 2.5), c(5.3, 5.3), c("Ref. 16", "This study"), adj = c(0.5, 1))
   text(4, 5.3, "Domain, method, conditions", adj = c(0, 1))
   text(4, 4, "Bacteria and Archaea, proteomics, optimal vs hypoosmotic", adj = 0)
   text(4, 3, "Bacteria and Archaea, proteomics, hyperosmotic", adj = 0)
@@ -425,7 +425,7 @@ gradH2O6 <- function(pdf = FALSE) {
   # generate compositional table
   datasets1 <- pdat_osmotic()
   pdat1 <- lapply_canprot(datasets1, function(dataset) {
-    get_pdat(dataset, "pdat_osmotic", basis = "rQEC")
+    pdat_osmotic(dataset, basis = "rQEC")
   })
   # use filled square for eukaryotes, open circle for bacteria, open triangle for gene expression 20191102
   pch1 <- rep(15, length(datasets1))
@@ -442,7 +442,7 @@ gradH2O6 <- function(pdf = FALSE) {
   # get new data (added for this paper)
   datasets2 <- pdat_osmotic2()
   pdat2 <- lapply_canprot(datasets2, function(dataset) {
-    get_pdat(dataset, "pdat_osmotic2", basis = "rQEC")
+    pdat_osmotic2(dataset, basis = "rQEC")
   })
   # use open circle except open triangle for gene expression and open square for hypo-osmotic conditions 20191103
   pch2 <- rep(1, length(datasets2))
@@ -469,10 +469,10 @@ gradH2O6 <- function(pdf = FALSE) {
   # get the GRAVY - pI values
   comptab2 <- lapply_canprot(pdat, get_comptab, var1 = "pI", var2 = "GRAVY", plot.it = FALSE, mfun = "mean")
   # make the plots
-  diffplot(comptab1, pt.text = pt.text, oldstyle = FALSE, pch = pch, col = col,
+  diffplot(comptab1, pt.text = pt.text, pch = pch, col = col,
            contour = contour, cex = cex, col.contour = "maroon3", cex.text = 0.75)
   label.figure("A", cex = 1.7)
-  diffplot(comptab2, vars = c("pI", "GRAVY"), pt.text = pt.text, oldstyle = FALSE, pch = pch, col = col,
+  diffplot(comptab2, vars = c("pI", "GRAVY"), pt.text = pt.text, pch = pch, col = col,
            contour = contour, cex = cex, col.contour = "maroon3", cex.text = 0.75)
   label.figure("B", cex = 1.7)
   if(pdf) {
