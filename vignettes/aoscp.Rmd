@@ -9,6 +9,15 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
+```{r setup, include=FALSE}
+library(knitr)
+## use pngquant to reduce size of PNG images
+knit_hooks$set(pngquant = hook_pngquant)
+pngquant <- "--speed=1 --quality=0-25"
+# in case pngquant isn't available
+if (!nzchar(Sys.which("pngquant"))) pngquant <- NULL 
+```
+
 ```{r HTML, include=FALSE}
 ## some frequently used HTML expressions
 ZC <- "<i>Z</i><sub>C</sub>"
@@ -22,46 +31,39 @@ library(JMDplots)
 ```
 
 ## `r ZC` of amino acids vs `r ZC` of RNA codons and hydropathy index of amino acids (Figure 1)
-```{r aoscp1, message = FALSE, echo = 1, fig.align='center', out.width='100%', out.height='350px'}
-aoscp1(TRUE)
-knitr::include_graphics("aoscp1.pdf")
+```{r aoscp1, message = FALSE, fig.align='center', out.width='100%', fig.width = 10, fig.height = 5, pngquant = pngquant}
+aoscp1()
 ```
 
 ## Histograms of `r ZC` of all human proteins and human membrane proteins (Figure 2)
-```{r aoscp2, message = FALSE, echo = 1, fig.align='center', out.width='100%', out.height='450px'}
-aoscp2(TRUE)
-knitr::include_graphics("aoscp2.pdf")
+```{r aoscp2, message = FALSE, fig.align='center', out.width='100%', fig.width = 6.6, fig.height = 4.4, pngquant = pngquant}
+aoscp2()
 ```
 
 ## Drawing of yeast cell color-coded with median `r ZC` of proteins in different locations (Figure 3)
-```{r aoscp3, message = FALSE, echo = 1:3, fig.align='center', out.width='100%', out.height='450px'}
-# first make a PNG with colored areas, then PDF with labels
+```{r aoscp3, message = FALSE, fig.align='center', out.width='100%', fig.width = 12, fig.height = 8, pngquant = pngquant}
+# first make the base plot, then add labels
 aoscp3(TRUE)
 aoscp3()
-knitr::include_graphics("aoscp3.pdf")
 ```
 
 ## `r ZC` and Eh ranges in yeast and ER-cytoplasm electron-transfer scheme (Figure 4)
-```{r aoscp4, message = FALSE, echo = 1, fig.align='center', out.width='100%', out.height='400px'}
-aoscp4(TRUE)
-knitr::include_graphics("aoscp4.pdf")
+```{r aoscp4, message = FALSE, fig.align='center', out.width='100%', fig.width = 8, fig.height = 4, pngquant = pngquant}
+aoscp4()
 ```
 
 ## Average oxidation state of carbon in proteins from different organisms (Figure 5)
-```{r aoscp5, message = FALSE, echo = 1, fig.align='center', out.width='100%', out.height='420px'}
-aoscp5(TRUE)
-knitr::include_graphics("aoscp5.pdf")
+```{r aoscp5, message = FALSE, fig.align='center', out.width='100%', fig.width = 10, fig.height = 6, pngquant = pngquant}
+aoscp5()
 ```
 
 ## `r ZC` and `r Topt` of different rubiscos and thermodynamic comparison (Figure 6)
-```{r aoscp6, message = FALSE, echo = 1, fig.align='center', out.width='100%', out.height='420px'}
-aoscp6(TRUE)
-knitr::include_graphics("aoscp6.pdf")
+```{r aoscp6, message = FALSE, fig.align='center', out.width='100%', fig.width = 8, fig.height = 5, pngquant = pngquant}
+aoscp6()
 ```
 
 ## `r ZC` of ferredoxin, thioredoxin, and glutaredoxin vs midpoint reduction potential (unpublished)
-```{r aoscp99, message = FALSE, echo = 1, fig.align='center', out.width='75%', out.height='400px'}
-aoscp99(TRUE)
-knitr::include_graphics("aoscp99.pdf")
+```{r aoscp99, message = FALSE, fig.align='center', out.width='75%', fig.width = 6, fig.height = 5, pngquant = pngquant}
+aoscp99()
 ```
 

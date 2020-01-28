@@ -24,21 +24,25 @@ Plots from the paper by Dick (2019).
 
 \usage{
   chnszten1()
-  chnszten4()
-  chnszten5()
-  chnszten6()
-  chnszten7()
-  chnsztenS1()
-  chnsztenS2()
-  chnsztenS3()
-  chnsztenS4()
-  chnsztenS5()
-  chnsztenS6A()
-  chnsztenS6B()
-  chnsztenS7()
-  chnsztenS8()
-  chnsztenS9()
-  chnsztenS10()
+  chnszten4(pdf = FALSE)
+  chnszten5(pdf = FALSE)
+  chnszten6(pdf = FALSE)
+  chnszten7(pdf = FALSE)
+  chnsztenS1(pdf = FALSE)
+  chnsztenS2(pdf = FALSE)
+  chnsztenS3(pdf = FALSE)
+  chnsztenS4(pdf = FALSE)
+  chnsztenS5(pdf = FALSE)
+  chnsztenS6A(pdf = FALSE)
+  chnsztenS6B(pdf = FALSE)
+  chnsztenS7(pdf = FALSE)
+  chnsztenS8(pdf = FALSE)
+  chnsztenS9(pdf = FALSE)
+  chnsztenS10(pdf = FALSE)
+}
+
+\arguments{
+  \item{pdf}{logical, make a PDF file?}
 }
 
 \details{

@@ -9,6 +9,15 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
+```{r setup, include=FALSE}
+library(knitr)
+## use pngquant to reduce size of PNG images
+knit_hooks$set(pngquant = hook_pngquant)
+pngquant <- "--speed=1 --quality=0-25"
+# in case pngquant isn't available
+if (!nzchar(Sys.which("pngquant"))) pngquant <- NULL 
+```
+
 ```{r HTML, include=FALSE}
 ## some frequently used HTML expressions
 pKa <- "p<i>K</i><sub>a</sub>"
@@ -21,15 +30,13 @@ library(JMDplots)
 ```
 
 ## `r pKa` of sidechain and amino acid backbone groups (Figure 4)
-```{r aaaq4, message = FALSE, echo = 1, fig.align='center', out.width='80%', out.height='450px'}
-aaaq4(TRUE)
-knitr::include_graphics("aaaq4.pdf")
+```{r aaaq4, message = FALSE, fig.align='center', out.width='80%', fig.width = 8, fig.height = 6, pngquant = pngquant}
+aaaq4()
 ```
 
 ## Net charge of proteins as a function of pH and *T* (Figure 10)
-```{r aaaq10, message = FALSE, echo = 1, fig.align='center', out.width='90%', out.height='550px'}
-aaaq10(TRUE)
-knitr::include_graphics("aaaq10.pdf")
+```{r aaaq10, message = FALSE, fig.align='center', out.width='90%', fig.width = 6, fig.height = 5, pngquant = pngquant}
+aaaq10()
 ```
 
 ## Eh-pH diagram for extracellular α-amylases (Figure 13)
@@ -37,7 +44,6 @@ This plot, showing the relative stabilities of extracellular α-amylases from tw
 Points are added for Eh-pH values from soils ([Baas Becking et al., 1960](https://www.jstor.org/stable/30059218)) and hot springs in Yellowstone ([Spear et al., 2005](https://doi.org/10.1073.pnas.0409574102)) and Iceland ([Stefánsson and Arnórsson, 2002](https://doi.org/10.1016/S0009-2541(02)00119-5)).
 Note that the symbols for Yellowstone and Iceland were incorrectly swapped in the figure caption of Dick et al. (2006).
 
-```{r aaaq13, message = FALSE, echo = 1, fig.align='center', out.width='80%', out.height='480px'}
-aaaq13(TRUE)
-knitr::include_graphics("aaaq13.pdf")
+```{r aaaq13, message = FALSE, fig.align='center', out.width='80%', fig.width = 5, fig.height = 4, pngquant = pngquant}
+aaaq13()
 ```

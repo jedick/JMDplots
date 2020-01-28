@@ -9,6 +9,15 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
+```{r setup, include=FALSE}
+library(knitr)
+## use pngquant to reduce size of PNG images
+knit_hooks$set(pngquant = hook_pngquant)
+pngquant <- "--speed=1 --quality=0-25"
+# in case pngquant isn't available
+if (!nzchar(Sys.which("pngquant"))) pngquant <- NULL 
+```
+
 ```{r HTML, include=FALSE}
 ## some frequently used HTML expressions
 H2O <- "H<sub>2</sub>O"
@@ -21,11 +30,11 @@ library(JMDplots)
 ```
 
 ## Oxygen fugacity - activity of `r H2O` predominance diagrams (Figure 2)
-```{r scsc2, message = FALSE, echo = 1, fig.align='center', fig.width = 7, fig.height = 7, out.width='100%'}
+```{r scsc2, message = FALSE, fig.align='center', fig.width = 7, fig.height = 7, out.width='100%', pngquant = pngquant}
 scsc2()
 ```
 
 ## Relative equilibrium abundances of proteins as a function of oxygen fugacity (Figure 3)
-```{r scsc3, message = FALSE, echo = 1, fig.align='center', fig.width = 7, fig.height = 5, out.width='100%'}
+```{r scsc3, message = FALSE, fig.align='center', fig.width = 7, fig.height = 5, out.width='100%', pngquant = pngquant}
 scsc3()
 ```

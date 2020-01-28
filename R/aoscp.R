@@ -179,7 +179,7 @@ aoscp2 <- function(pdf = FALSE) {
 }
 
 # draw yeast cell color-coded with median ZC of proteins in different locations
-aoscp3 <- function(png=FALSE, outline=FALSE) {
+aoscp3 <- function(png=FALSE, pdf=FALSE, outline=FALSE) {
   # set 'png' to TRUE to make the base plot (no labels)
   # set 'outline' to TRUE to skip plotting the cell components
   # (in order to quickly test outline, labels and color bar)
@@ -247,7 +247,7 @@ aoscp3 <- function(png=FALSE, outline=FALSE) {
     invisible(dev.off())
   } else {
     # to make labeled plot (PDF)
-    pdf("aoscp3.pdf", width=12, height=8, family="Times")
+    if(pdf) pdf("aoscp3.pdf", width=12, height=8, family="Times")
     layout(t(matrix(c(1, 1, 1, 1, 1, 2))))
     # plot base
     img <- readPNG("aoscp3.png")
@@ -295,8 +295,10 @@ aoscp3 <- function(png=FALSE, outline=FALSE) {
     # use angle=180 to get the right orientation
     rasterImage(rst, -1, ZCmin, 1, ZCmax)
     title(main=expression(italic(Z)[C]))
-    dev.off()
-    addexif("aoscp3", "Yeast cell color-coded with median carbon oxidation state of proteins in different locations", "https://doi.org/10.1098/rsif.2013.1095")
+    if(pdf) {
+      dev.off()
+      addexif("aoscp3", "Yeast cell color-coded with median carbon oxidation state of proteins in different locations", "https://doi.org/10.1098/rsif.2013.1095")
+    }
   }
 }
 

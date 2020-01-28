@@ -1,13 +1,22 @@
 ---
-title: "Seven plots from salinity gradients paper (2019)"
+title: "Seven plots from salinity gradients paper (2020)"
 output: 
   rmarkdown::html_vignette:
     mathjax: null
 vignette: >
-  %\VignetteIndexEntry{Seven plots from salinity gradients paper (2019)}
+  %\VignetteIndexEntry{Seven plots from salinity gradients paper (2020)}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
+
+```{r setup, include=FALSE}
+library(knitr)
+## use pngquant to reduce size of PNG images
+knit_hooks$set(pngquant = hook_pngquant)
+pngquant <- "--speed=1 --quality=0-25"
+# in case pngquant isn't available
+if (!nzchar(Sys.which("pngquant"))) pngquant <- NULL 
+```
 
 ```{r options, include=FALSE}
 options(width = 40)
@@ -19,7 +28,7 @@ ZC <- "<i>Z</i><sub>C</sub>"
 nH2O <- "<i>n</i><sub>H<sub>2</sub>O</sub>"
 ```
 
-This vignette from the R package [JMDplots](https://github.com/jedick/JMDplots) contains plots from the paper by <a href="gradH2O.html" title="Geochemistry of metagenomes: Redox and salinity gradients and the chemical compositions of proteins">Dick et al. (2019)</a> (preprint).
+This vignette from the R package [JMDplots](https://github.com/jedick/JMDplots) contains plots from the paper by <a href="gradH2O.html" title="Geochemistry of metagenomes: Redox and salinity gradients and the chemical compositions of proteins">Dick et al. (2020)</a> (preprint).
 
 ```{r JMDplots, message = FALSE, results = "hide"}
 library(JMDplots)
@@ -32,44 +41,37 @@ gradH2O0()
 ```
 
 ## Basis species comparison and relative water content (Figure 1)
-```{r gradH2O1, message = FALSE, echo = 1, fig.align='center', out.width='100%', out.height='480px'}
-gradH2O1(TRUE)
-knitr::include_graphics("gradH2O1.pdf")
+```{r gradH2O1, message = FALSE, fig.align='center', out.width='100%', fig.width = 6, fig.height = 6, pngquant = pngquant}
+gradH2O1()
 ```
 
 ## `r ZC` for selected redox gradients (Figure 2)
-```{r gradH2O2, message = FALSE, echo = 1, fig.align='center', out.width='100%', out.height='450px'}
-gradH2O2(TRUE)
-knitr::include_graphics("gradH2O2.pdf")
+```{r gradH2O2, message = FALSE, fig.align='center', out.width='100%', fig.width = 7, fig.height = 5, pngquant = pngquant}
+gradH2O2()
 ```
 
 ## `r nH2O`-`r ZC` scatterplots for redox gradients and the Baltic Sea (Figure 3)
-```{r gradH2O3, message = FALSE, echo = 1, fig.align='center', out.width='100%', out.height='350px'}
-gradH2O3(TRUE)
-knitr::include_graphics("gradH2O3.pdf")
+```{r gradH2O3, message = FALSE, fig.align='center', out.width='100%', fig.width = 12, fig.height = 5.6, pngquant = pngquant}
+gradH2O3()
 ```
 
 ## `r nH2O` for Baltic Sea metagenome and metatranscriptome in different size fractions (Figure 4)
-```{r gradH2O4, message = FALSE, echo = 1, fig.align='center', out.width='100%', out.height='350px'}
-gradH2O4(TRUE)
-knitr::include_graphics("gradH2O4.pdf")
+```{r gradH2O4, message = FALSE, fig.align='center', out.width='100%', fig.width = 7, fig.height = 3, pngquant = pngquant}
+gradH2O4()
 ```
 
 ## `r nH2O`-`r ZC` for freshwater, marine, and hypersaline environments (Figure 5)
-```{r gradH2O5, message = FALSE, echo = 1, fig.align='center', out.width='100%', out.height='480px'}
-gradH2O5(TRUE)
-knitr::include_graphics("gradH2O5.pdf")
+```{r gradH2O5, message = FALSE, fig.align='center', out.width='100%', fig.width = 8, fig.height = 5, pngquant = pngquant}
+gradH2O5()
 ```
 
 ## Mean differences of compositional metrics for differentially expressed proteins in osmotic stress (Figure 6)
-```{r gradH2O6, message = FALSE, echo = 1, fig.align='center', out.width='100%', out.height='480px'}
-gradH2O6(TRUE)
-knitr::include_graphics("gradH2O6.pdf")
+```{r gradH2O6, message = FALSE, fig.align='center', out.width='100%', fig.width = 8, fig.height = 5.2, pngquant = pngquant}
+gradH2O6()
 ```
 
 ## Scatterplots of GRAVY vs ZC and nH2O (Figure S1)
-```{r gradH2OS1, message = FALSE, echo = 1, fig.align='center', out.width='100%', out.height='400px'}
-gradH2OS1(TRUE)
-knitr::include_graphics("gradH2OS1.pdf")
+```{r gradH2OS1, message = FALSE, fig.align='center', out.width='100%', fig.width = 7, fig.height = 7, pngquant = pngquant}
+gradH2OS1()
 ```
 

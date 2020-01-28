@@ -9,6 +9,15 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
+```{r setup, include=FALSE}
+library(knitr)
+## use pngquant to reduce size of PNG images
+knit_hooks$set(pngquant = hook_pngquant)
+pngquant <- "--speed=1 --quality=0-25"
+# in case pngquant isn't available
+if (!nzchar(Sys.which("pngquant"))) pngquant <- NULL 
+```
+
 ```{r HTML, include=FALSE}
 ## some frequently used HTML expressions
 ZC <- "<i>Z</i><sub>C</sub>"
@@ -22,50 +31,42 @@ library(JMDplots)
 ```
 
 ## General characteristics of `r ZC` of DNA, RNA, and proteins (Figure 1)
-```{r gradox1, message = FALSE, echo = 1, fig.align='center', out.width='100%', out.height='550px'}
-gradox1(TRUE)
-knitr::include_graphics("gradox1.pdf")
+```{r gradox1, message = FALSE, fig.align='center', out.width='100%', fig.width = 8, fig.height = 6, pngquant = pngquant}
+gradox1()
 ```
 
 ## Selected plots of metagenomic DNA, RNA, and protein `r ZC` (Figure 2)
-```{r gradox2, message = FALSE, echo = 1, fig.align='center', out.width='100%', out.height='400px'}
-gradox2(TRUE)
-knitr::include_graphics("gradox2.pdf")
+```{r gradox2, message = FALSE, fig.align='center', out.width='100%', fig.width = 9, fig.height = 9, pngquant = pngquant}
+gradox2()
 ```
 
 ## All plots of DNA and RNA `r ZC` (Figure S1)
-```{r gradoxS1, message = FALSE, echo = 1, fig.align='center', out.width='100%', out.height='200px'}
-mout <- gradoxS1(TRUE)
-knitr::include_graphics("gradoxS1.pdf")
+```{r gradoxS1, message = FALSE, fig.align='center', out.width='100%', fig.width = 6.5, fig.height = 10, pngquant = pngquant}
+mout <- gradoxS1()
 ```
 
 ## All plots of protein `r ZC` (Figure S2)
-```{r gradoxS2, message = FALSE, echo = 1, fig.align='center', out.width='100%', out.height='200px'}
-pout <- gradoxS2(TRUE)
-knitr::include_graphics("gradoxS2.pdf")
+```{r gradoxS2, message = FALSE, fig.align='center', out.width='100%', fig.width = 6.5, fig.height = 10, pngquant = pngquant}
+pout <- gradoxS2()
 ```
 
 ## `r ZC` of proteins vs DNA (metagenomes and metatranscriptomes) (Figure 3)
-```{r gradox3, message = FALSE, echo = 1, fig.align='center', out.width='100%', out.height='500px'}
-gradox3(mout, pout, TRUE)
-knitr::include_graphics("gradox3.pdf")
+```{r gradox3, message = FALSE, fig.align='center', out.width='100%', fig.width = 8, fig.height = 5, pngquant = pngquant}
+gradox3(mout, pout)
 ```
 
 ## Thermodynamic calculations of relative stabilities along redox gradients (Figure 4)
-```{r gradox4, message = FALSE, echo = 1, fig.align='center', out.width='100%', out.height='500px'}
-gradox4(mout, pout, TRUE)
-knitr::include_graphics("gradox4.pdf")
+```{r gradox4, message = FALSE, fig.align='center', out.width='100%', fig.width = 7.5, fig.height = 6.5, pngquant = pngquant}
+gradox4(mout, pout)
 ```
 
 ## `r ZC` of reads classified to selected abundant species (Figure 5)
-```{r gradox5, message = FALSE, echo = 1, fig.align='center', out.width='100%', out.height='500px'}
-gradox5(TRUE)
-knitr::include_graphics("gradox5.pdf")
+```{r gradox5, message = FALSE, fig.align='center', out.width='100%', fig.width = 8, fig.height = 5, pngquant = pngquant}
+gradox5()
 ```
 
 ## `r ZC` of reads classified to selected abundant species (including deeper samples) (Figure S3)
-```{r gradoxS3, message = FALSE, echo = 1, fig.align='center', out.width='100%', out.height='500px'}
-gradox5(TRUE, NULL)
-knitr::include_graphics("gradoxS3.pdf")
+```{r gradoxS3, message = FALSE, fig.align='center', out.width='100%', fig.width = 8, fig.height = 5, pngquant = pngquant}
+gradox5(maxdepth = NULL)
 ```
 

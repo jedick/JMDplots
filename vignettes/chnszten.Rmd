@@ -9,6 +9,15 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
+```{r setup, include=FALSE}
+library(knitr)
+## use pngquant to reduce size of PNG images
+knit_hooks$set(pngquant = hook_pngquant)
+pngquant <- "--speed=1 --quality=0-25"
+# in case pngquant isn't available
+if (!nzchar(Sys.which("pngquant"))) pngquant <- NULL 
+```
+
 This vignette from the R package [JMDplots](https://github.com/jedick/JMDplots) contains plots from the paper by <a href="https://doi.org/10.3389/feart.2019.00180" title="CHNOSZ: Thermodynamic calculations and diagrams for geochemistry">Dick (2019)</a>.
 
 ```{r JMDplots, message = FALSE, results = "hide"}
@@ -16,26 +25,21 @@ library(JMDplots)
 ```
 
 ## Mosaic Eh-pH diagram for the Cu-S-Cl-O-H system (Figure 4)
-```{r chnszten4, message = FALSE, echo = 1, fig.align='center', out.width='100%', out.height='300px'}
+```{r chnszten4, message = FALSE, fig.align='center', out.width='100%', fig.width = 8, fig.height = 3, pngquant = pngquant}
 chnszten4()
-knitr::include_graphics("chnszten4.pdf")
 ```
 
 ## Corundum solubility diagram (Figure 5)
-```{r chnszten5, message = FALSE, echo = 1, fig.align='center', out.width='50%', out.height='300px'}
+```{r chnszten5, message = FALSE, fig.align='center', out.width='50%', fig.width = 4, fig.height = 3, pngquant = pngquant}
 chnszten5()
-knitr::include_graphics("chnszten5.pdf")
 ```
 
 ## <a href="http://www.dewcommunity.org/" title="Deep Earth Water Community">DEW</a> model (based on Fig. 3 of [Sverjensky et al., 2014](http://www.nature.com/doifinder/10.1038/ngeo2291)) (Figure 6)
-```{r chnszten6, message = FALSE, echo = 1, fig.align='center', out.width='50%', out.height='350px'}
+```{r chnszten6, message = FALSE, fig.align='center', out.width='50%', fig.width = 5, fig.height = 5, pngquant = pngquant}
 chnszten6()
-knitr::include_graphics("chnszten6.pdf")
 ```
 
 ## Thermodynamic properties of reactions involving Al-bearing minerals (Figure 7)
-```{r chnszten7, message = FALSE, echo = 1, fig.align='center', out.width='100%', out.height='650px'}
+```{r chnszten7, message = FALSE, fig.align='center', out.width='100%', fig.width = 7.2, fig.height = 7.2, pngquant = pngquant}
 chnszten7()
-knitr::include_graphics("chnszten7.pdf")
 ```
-
