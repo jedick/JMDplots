@@ -1,0 +1,40 @@
+---
+title: "One plot from water in cancer paper (2020)"
+output: 
+  rmarkdown::html_vignette:
+    mathjax: null
+vignette: >
+  %\VignetteIndexEntry{One plot from water in cancer paper (2020)}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include=FALSE}
+library(knitr)
+## use pngquant to reduce size of PNG images
+knit_hooks$set(pngquant = hook_pngquant)
+pngquant <- "--speed=1 --quality=0-25"
+# in case pngquant isn't available
+if (!nzchar(Sys.which("pngquant"))) pngquant <- NULL 
+```
+
+```{r options, include=FALSE}
+options(width = 40)
+```
+
+```{r HTML, include=FALSE}
+## some frequently used HTML expressions
+ZC <- "<i>Z</i><sub>C</sub>"
+nH2O <- "<i>n</i><sub>H<sub>2</sub>O</sub>"
+```
+
+This vignette from the R package [JMDplots](https://github.com/jedick/JMDplots) contains plots from the paper by <a href="canH2O.html" title="Water as a reactant in the differential expression of proteins in cancer">Dick (2020)</a> (preprint).
+
+```{r JMDplots, message = FALSE, results = "hide"}
+library(JMDplots)
+```
+
+## Study overview plot (Figure 1)
+```{r canH2O1, message = FALSE, fig.align='center', out.width='75%', fig.width = 7, fig.height = 7, pngquant = pngquant}
+canH2O1()
+```

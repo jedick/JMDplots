@@ -1,6 +1,8 @@
 CHANGES IN JMDplots 1.0.1
 -------------------------
 
+- 20200203 Started adding plots from canH2O paper.
+
 - 20200128 Use PNG (not PDF) images in vignettes.
 
 CHANGES IN JMDplots 1.0.0

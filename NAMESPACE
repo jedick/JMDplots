@@ -21,7 +21,9 @@ export(
   # aaaq paper 20191020
   "aaaq4", "aaaq10", "aaaq13",
   # utilities 20191027
-  "addexif"
+  "addexif",
+  # canH2O paper 20200203
+  "canH2O1"
 )
 
 # imports from CHNOSZ
@@ -64,10 +66,12 @@ importFrom("timevis", "renderTimevis", "timevis", "timevisOutput")
 importFrom("png", "readPNG")
 importFrom("plotrix", "draw.arc")
 importFrom("MASS", "kde2d")
+importFrom("diagram", "openplotmat", "coordinates", "straightarrow", "curvedarrow", "textrect", "textplain")
 
 # imports from standard packages
 importFrom("grDevices", "dev.off", "cairo_pdf", "pdf", "blues9", "colorRampPalette",
-           "chull", "col2rgb", "rgb", "colorRamp", "heat.colors", "topo.colors")
+           "chull", "col2rgb", "rgb", "colorRamp", "heat.colors", "topo.colors",
+           "palette.colors")
 importFrom("graphics", "abline", "arrows", "axis", "box", "layout",
            "legend", "lines", "mtext", "par", "plot", "plot.new",
            "points", "rect", "text", "title", "smoothScatter", "strheight",

@@ -57,7 +57,7 @@ If \code{file} is not NULL, then value of \ZC are calculated from the amino acid
       Compilations of the values of \ZC for human proteins and human membrane proteins.
       Values in \code{ZC_HUMAN.csv} were calculated from protein sequences in HUMAN.fasta.gz, downloaded from \url{ftp://ftp.uniprot.org/pub/databases/uniprot/current_release/knowledgebase/proteomes/HUMAN.fasta.gz} on 2013-08-24 (file dated 2013-07-24).
       Values in \code{ZC_membrane.csv} were calculated from protein sequences in all *.fa files in Additional File 2 of Almén et al. (2009).
-      NOTE: To save space in the package, the accession and length columns have been removed from these files; the complete files are present in the Supplementary data of Dick (2014) (\url{https://royalsocietypublishing.org/doi/suppl/10.1098/rsif.2013.1095}).
+      NOTE: To save space in the package, the accession and length columns have been removed from these files; the complete files are present in the Supplementary data of Dick (2014).
     }
     \item{\code{codons.csv}}{In the first column, the three-letter abbreviations for each of the RNA codons; in the second column, the names of the corresponding amino acids.}
     \item{\code{rubisco.csv}}{UniProt IDs for Rubisco and optimal growth temperatures of organisms.}
