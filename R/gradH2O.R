@@ -158,7 +158,7 @@ gradH2O1 <- function(pdf = FALSE) {
 
   if(pdf) {
     dev.off()
-    addexif("gradH2O1", "Basis species comparison and stoichiometric hydration state", "Dick et al. (2019) (preprint)")
+    addexif("gradH2O1", "Basis species comparison and stoichiometric hydration state", "Dick et al. (2020) (preprint)")
   }
   ## output value of rQEC for checking code of H2OAA()
   #rQEC
@@ -198,7 +198,7 @@ gradH2O2 <- function(pdf = FALSE) {
   # done!
   if(pdf) {
     dev.off()
-    addexif("gradH2O2", "Carbon oxidation state for selected redox gradients", "Dick et al. (2019) (preprint)")
+    addexif("gradH2O2", "Carbon oxidation state for selected redox gradients", "Dick et al. (2020) (preprint)")
   }
 }
 
@@ -271,7 +271,7 @@ gradH2O3 <- function(pdf = FALSE, vars = "H2O-ZC") {
 
   if(pdf) {
     dev.off()
-    addexif("gradH2O3", "nH2O-ZC scatterplots for redox gradients and the Baltic Sea", "Dick et al. (2019) (preprint)")
+    addexif("gradH2O3", "nH2O-ZC scatterplots for redox gradients and the Baltic Sea", "Dick et al. (2020) (preprint)")
   }
 }
 
@@ -309,7 +309,7 @@ gradH2O4 <- function(pdf = FALSE, var = NULL) {
 
   if(pdf) {
     dev.off()
-    addexif("gradH2O4", "nH2O for Baltic Sea metagenome and metatranscriptome in different size fractions", "Dick et al. (2019) (preprint)")
+    addexif("gradH2O4", "nH2O for Baltic Sea metagenome and metatranscriptome in different size fractions", "Dick et al. (2020) (preprint)")
   }
 }
 
@@ -389,7 +389,7 @@ gradH2O5 <- function(pdf = FALSE) {
 
   if(pdf) {
     dev.off()
-    addexif("gradH2O5", "nH2O vs ZC for freshwater, marine, and hypersaline environments", "Dick et al. (2019) (preprint)")
+    addexif("gradH2O5", "nH2O vs ZC for freshwater, marine, and hypersaline environments", "Dick et al. (2020) (preprint)")
   }
 }
 
@@ -477,7 +477,7 @@ gradH2O6 <- function(pdf = FALSE) {
   label.figure("B", cex = 1.7)
   if(pdf) {
     dev.off()
-    addexif("gradH2O6", "Mean differences of compositional metrics for differentially expressed proteins in osmotic stress", "Dick et al. (2019) (preprint)")
+    addexif("gradH2O6", "Mean differences of compositional metrics for differentially expressed proteins in osmotic stress", "Dick et al. (2020) (preprint)")
   }
 }
 
@@ -573,7 +573,7 @@ gradH2OS1 <- function(pdf = FALSE) {
   title(quote(italic(E.~coli)*" proteins (rQEC)"), font.main = 1)
   if(pdf) {
     dev.off()
-    addexif("gradH2OS1", "Scatterplots of GRAVY vs ZC and nH2O", "Dick et al. (2019) (preprint)")
+    addexif("gradH2OS1", "Scatterplots of GRAVY vs ZC and nH2O", "Dick et al. (2020) (preprint)")
   }
 }
 
@@ -583,7 +583,7 @@ gradH2OS2 <- function(pdf = FALSE) {
   gradH2O3(vars = "pIG")
   if(pdf) {
     dev.off()
-    addexif("gradH2OS2", "GRAVY-pI scatterplots for redox gradients and the Baltic Sea", "Dick et al. (2019) (preprint)")
+    addexif("gradH2OS2", "GRAVY-pI scatterplots for redox gradients and the Baltic Sea", "Dick et al. (2020) (preprint)")
   }
 }
 
@@ -593,7 +593,7 @@ gradH2OS3 <- function(pdf = FALSE) {
   gradH2O4(var = c("GRAVY", "pI"))
   if(pdf) {
     dev.off()
-    addexif("gradH2OS3", "GRAVY and pI for Baltic Sea metagenome and metatranscriptome in different size fractions", "Dick et al. (2019) (preprint)")
+    addexif("gradH2OS3", "GRAVY and pI for Baltic Sea metagenome and metatranscriptome in different size fractions", "Dick et al. (2020) (preprint)")
   }
 }
 

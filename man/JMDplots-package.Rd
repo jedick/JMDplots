@@ -16,16 +16,17 @@ Please refer to the supporting information of the papers for the original script
 
 \details{
   \itemize{
-    \item \code{\link{gradH2O}} - Hydration state of metagenomes in salinity gradients (Dick et al., 2019b)
+    \item \code{\link{canH2O}} - Water as a reactant in the differential expression of proteins in cancer (Dick, 2020)
+    \item \code{\link{gradH2O}} - Hydration state of metagenomes in salinity gradients (Dick et al., 2020)
     \item \code{\link{chnszten}} - CHNOSZ, ten years after first CRAN submission (Dick, 2019)
-    \item \code{\link{gradox}} - Carbon oxidation state of metagenomes in redox gradients (Dick et al., 2019a)
+    \item \code{\link{gradox}} - Carbon oxidation state of metagenomes in redox gradients (Dick et al., 2019)
     \item \code{\link{aoscp}} - Average oxidation state of carbon in proteins (Dick, 2014)
     \item \code{\link{scsc}} - Subcellular locations of \emph{Saccharomyces cerevisiae} (Dick, 2009)
     \item \code{\link{aaaq}} - Amino acid group additivity for ionized proteins (Dick et al., 2006)
   }
   These names are used for the vignettes and functions; the function names have figure numbers appended, as in \code{\link{gradox1}}.
   Data for each of the papers are stored in the corresponding directories under \code{extdata}; see the documentation page for each paper for more details.
-  There are some additional directories, described below, with other data.
+  There are some other directories, described below.
 
   \describe{
     \item{\code{subsurface}}{
@@ -34,7 +35,7 @@ Please refer to the supporting information of the papers for the original script
     }
     \item{\code{organisms}}{
       Amino acid compositions of yeast and \emph{E. coli}, and subcellular location data for yeast.
-      See \code{\link{yeast}} and \code{\link{gradH2O}}.
+      See \code{\link{yeast}}, \code{\link{scsc}} and \code{\link{gradH2O}}.
     }
 
     \item{\code{refseq}}{
@@ -44,6 +45,7 @@ Please refer to the supporting information of the papers for the original script
         \item{\code{protein_refseq.csv.xz}}{
           The columns are arranged as follows: \code{protein} (\dQuote{refseq}), \code{organism} (taxonomic id), \code{ref} (organism name), \code{abbrv} (empty), \code{chains} (number of protein sequences for this organism).
           The remaining columns have the total counts of amino acids.
+          Used in \code{\link{gradH2O}}.
         }
       }
     }
@@ -58,17 +60,12 @@ Please refer to the supporting information of the papers for the original script
 
 \section{Other Papers}{
 
-Some papers are not included in this package.
-Many plots from the papers by Dick and Shock (2011 and 2013) are shown in the vignette \dQuote{Hot-spring proteins in CHNOSZ} (\url{../../CHNOSZ/doc/hotspring.pdf}).
-See also \code{demo("bison", "CHNOSZ")} for a colorful version of the \ZC plot for phyla in Bison Pool.
-Most plots from the papers by Dick (2016 and 2017) are in the vignettes for \pkg{canprot} (\url{../../canprot/doc/index.html}).
-See \code{demo("bugstab", "CHNOSZ")} for the relative stability diagram of microbial proteins in colorectal cancer.
+This package does not include plots from \emph{all} papers by the author.
+Many plots from the papers by Dick and Shock (2011 and 2013) are available in the vignette \dQuote{Hot-spring proteins in CHNOSZ} (\url{../../CHNOSZ/doc/hotspring.pdf}).
+See also \code{demo("bison", "CHNOSZ")} for a colorful version of Figure 1 of Dick and Shock (2013) (\ZC plot for phyla in Bison Pool).
+The plots from Dick (2017) are in the vignettes for \pkg{canprot} (\url{../../canprot/doc/index.html}).
+See \code{demo("bugstab", "CHNOSZ")} for Figure 4 of Dick (2016) (relative stability diagram of microbial proteins in colorectal cancer) and \code{oldvignettes/colorectal.Rmd} in \pkg{canprot} for Figure 6 of Dick (2016) (relative stability diagram for differentially expressed proteins in various colorectal cancer datasets).
 
-}
-
-\section{Requirements}{
-Requires \pkg{CHNOSZ} 1.3.2 for functionality used in \code{\link{chnszten}}.
-Requires \pkg{canprot} > 0.1.2 for updated plotting style in \code{\link[canprot]{diffplot}}.
 }
 
 \section{Acknowledgements}{
@@ -90,11 +87,13 @@ Dick, J. M. (2016) Proteomic indicators of oxidation and hydration state in colo
 
 Dick, J. M. (2017) Chemical composition and the potential for proteomic transformation in cancer, hypoxia, and hyperosmotic stress. \emph{PeerJ} \bold{5}, e3421 \doi{10.7717/peerj.3421}
 
+Dick, J. M., Yu, M., Tan, J. and Lu, A. (2019) Changes in carbon oxidation state of metagenomes along geochemical redox gradients. \emph{Front. Microbiol.} \bold{10}, 120. \doi{10.3389/fmicb.2019.00120}
+
 Dick, J. M. (2019) CHNOSZ: Thermodynamic calculations and diagrams for geochemistry. \emph{Front. Earth Sci.} \bold{7}:180. \doi{10.3389/feart.2019.00180}
 
-Dick, J. M., Yu, M., Tan, J. and Lu, A. (2019a) Changes in carbon oxidation state of metagenomes along geochemical redox gradients. \emph{Front. Microbiol.} \bold{10}, 120. \doi{10.3389/fmicb.2019.00120}
+Dick, J. M., Tan, J. and Yu, M. (2020) Geochemistry of metagenomes: Redox and salinity gradients and the chemical compositions of proteins. \emph{(preprint)}
 
-Dick, J. M., Tan, J. and Yu, M. (2019b) Geochemistry of metagenomes: Redox and salinity gradients and the chemical compositions of proteins. \emph{(preprint)}
+Dick, J. M. (2020) Water as a reactant in the differential expression of proteins in cancer. \emph{(preprint)}
 
 O'Leary, N. A. et al. (2016) Reference sequence (RefSeq) database at NCBI: current status, taxonomic expansion, and functional annotation. \emph{Nucleic Acids Res.} \bold{44}, D733-D745. \doi{10.1093/nar/gkv1189}
 }
