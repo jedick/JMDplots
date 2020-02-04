@@ -23,7 +23,7 @@ export(
   # utilities 20191027
   "addexif",
   # canH2O paper 20200203-20200204
-  "canH2O1", "pdat_HPA", "pdat_TCGA", "canH2O2", "canH2O3", "canH2O4"
+  "canH2O1", "pdat_HPA", "pdat_TCGA", "canH2O2", "canH2O3", "canH2O4", "canH2O5"
 )
 
 # imports from CHNOSZ

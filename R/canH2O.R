@@ -2,6 +2,7 @@
 # make plots for the paper:
 # Water as a reactant in the differential expression of proteins in cancer
 # 20191126 jmd first version
+# 20200203 started moving functions to JMDplots
 
 # study overview 20191203
 canH2O1 <- function(pdf = FALSE) {
@@ -399,6 +400,55 @@ canH2O4 <- function(pdf = FALSE) {
   if(pdf) {
     dev.off()
     addexif("canH2O4", "Compositional analysis of phylostrata and phylostrata-nAA plots for cancer tissue", "Dick (2020) (preprint)")
+  }
+}
+
+# plots with nH2O and nO2 of amino acid biosynthesis reactions 20191205
+canH2O5 <- function(pdf = FALSE) {
+  if(pdf) pdf("canH2O5.pdf", width = 6, height = 6)
+  par(mar = c(4, 4.1, 1.5, 1), mgp = c(2.8, 1, 0), las = 1)
+  par(mfrow = c(2, 2))
+
+  # plot nO2(biosynth) vs ZC for TCGA data
+  ZClab <- quote(Delta*italic(Z)[C]~"(carbon oxidation state)")
+  O2lab <- quote(Delta*italic(n)[O[2]]~"(AA biosynthesis)")
+  dat <- read.csv(system.file("extdata/vignette_output/TCGA.csv", package = "JMDplots"), as.is = TRUE)
+  plot(dat$ZC.diff, dat$nO2_biosynth.diff, xlab = ZClab, ylab = O2lab)
+  abline(h = 0, v = 0, lty = 3, col = "grey30")
+  title("TCGA/GTEx", font.main = 1)
+  label.figure("A", font = 2, cex = 1.7, yfrac = 0.97, xfrac = 0.03)
+
+  # plot nH2O(biosynth) vs nH2O(rQEC) for TCGA data
+  rQEClab <- quote(Delta*italic(n)[H[2] * O]~"(stoichiometric hydration state)    ")
+  biolab <- quote(Delta*italic(n)[H[2] * O]~"(AA biosynthesis)")
+  plot(dat$nH2O_rQEC.diff, dat$nH2O_biosynth.diff, xlab = rQEClab, ylab = biolab)
+  abline(h = 0, v = 0, lty = 3, col = "grey30")
+  title("TCGA/GTEx", font.main = 1)
+  label.figure("B", font = 2, cex = 1.7, yfrac = 0.97, xfrac = 0.03)
+
+  vigout <- system.file("extdata/vignette_output", package = "canprot")
+  conddat <- function(cond) read.csv(paste0(vigout, "/", cond, ".csv"), as.is = TRUE)
+
+  cond2 <- c("colorectal", "pancreatic", "breast", "lung", "prostate")
+  cancer <- lapply(cond2, conddat); names(cancer) <- cond2
+  col2 <- palette.colors(8, "Classic Tableau")[c(6, 5, 7, 8, 4)]
+  contplot(cancer, "Cancer", col2, "nO2_biosynth", "nH2O_biosynth", xlim = c(-0.15, 0.1), ylim = c(-0.1, 0.1),
+           dx = c(-0.05, 0.05, 0.052, -0.06, 0.045), dy = c(-0.03, -0.065, 0.022, -0.012, 0.05), labtext = "AA biosynthesis")
+  label.figure("C", font = 2, cex = 1.7, yfrac = 0.97, xfrac = 0.03)
+
+  cond1 <- c("hypoxia", "hyperosmotic", "secreted", "3D")
+  culture <- lapply(cond1, conddat); names(culture) <- cond1
+  col1 <- palette.colors(8, "Okabe-Ito")[c(2:4, 6)]
+  names <- names(culture)
+  names[1] <- "hyp-\noxia"
+  names[2] <- "hyper-\nosmotic"
+  contplot(culture, "Cell culture", col1, "nO2_biosynth", "nH2O_biosynth", xlim = c(-0.15, 0.1), ylim = c(-0.1, 0.1),
+           dx = c(-0.05, 0.05, -0.1, 0.004), dy = c(0.072, -0.06, -0.025, 0.01), labtext = "AA biosynthesis", names = names)
+  label.figure("D", font = 2, cex = 1.7, yfrac = 0.97, xfrac = 0.03)
+
+  if(pdf) {
+    dev.off()
+    addexif("canH2O5", "Plots with nH2O and nO2 of amino acid biosynthesis reactions", "Dick (2020) (preprint)")
   }
 }
 

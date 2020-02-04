@@ -1,10 +1,10 @@
 ---
-title: "Three plots from water in cancer paper (2020)"
+title: "Five plots from water in cancer paper (2020)"
 output: 
   rmarkdown::html_vignette:
     mathjax: null
 vignette: >
-  %\VignetteIndexEntry{Three plots from water in cancer paper (2020)}
+  %\VignetteIndexEntry{Five plots from water in cancer paper (2020)}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -27,6 +27,7 @@ options(width = 40)
 ZC <- "<i>Z</i><sub>C</sub>"
 nH2O <- "<i>n</i><sub>H<sub>2</sub>O</sub>"
 nAA <- "<i>n</i><sub>AA</sub>"
+nO2 <- "<i>n</i><sub>O<sub>2</sub></sub>"
 ```
 
 This vignette from the R package [JMDplots](https://github.com/jedick/JMDplots) contains plots from the paper by <a href="canH2O.html" title="Water as a reactant in the differential expression of proteins in cancer">Dick (2020)</a> (preprint).
@@ -50,7 +51,12 @@ canH2O2()
 canH2O3()
 ```
 
-## Compositional analysis of phylostrata and phylostrata-`r nAA` plots for cancer tissue (Figure 3)
+## Compositional analysis of phylostrata and phylostrata-`r nAA` plots for cancer tissue (Figure 4)
 ```{r canH2O4, message = FALSE, results = "hide", fig.align='center', out.width='100%', fig.width = 9, fig.height = 5, pngquant = pngquant}
 canH2O4()
+```
+
+## Plots with `r nH2O` and `r nO2` of amino acid biosynthesis reactions (Figure 5)
+```{r canH2O5, message = FALSE, results = "hide", fig.align='center', out.width='75%', fig.width = 6, fig.height = 6, pngquant = pngquant}
+canH2O5()
 ```
