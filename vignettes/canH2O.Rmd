@@ -45,7 +45,12 @@ canH2O1()
 canH2O2()
 ```
 
-## `r nH2O`-`r ZC` and phylostrata-`r nAA` plots for TCGA and HPA datasets (Figure 3)
+## `r nH2O`-`r ZC` and phylostrata plots for TCGA and HPA datasets (Figure 3)
 ```{r canH2O3, message = FALSE, fig.align='center', out.width='100%', fig.width = 10, fig.height = 6.2, pngquant = pngquant}
 canH2O3()
+```
+
+## Compositional analysis of phylostrata and phylostrata-`r nAA` plots for cancer tissue (Figure 3)
+```{r canH2O4, message = FALSE, results = "hide", fig.align='center', out.width='100%', fig.width = 9, fig.height = 5, pngquant = pngquant}
+canH2O4()
 ```

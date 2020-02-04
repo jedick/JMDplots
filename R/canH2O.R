@@ -223,7 +223,7 @@ canH2O2 <- function(pdf = FALSE) {
   }
 }
 
-# nH2O-ZC and phylostrata-nAA plots for TCGA and HPA datasets 20191126
+# nH2O-ZC and phylostrata plots for TCGA and HPA datasets 20191126
 canH2O3 <- function(pdf = FALSE) {
   vigout2 <- system.file("extdata/vignette_output", package = "JMDplots")
   HPA <- read.csv(file.path(vigout2, "HPA.csv"), as.is = TRUE)
@@ -321,8 +321,85 @@ canH2O3 <- function(pdf = FALSE) {
   ml <- gridExtra::marrangeGrob(c(pl1, pl2, pl3), layout_matrix = mat, top = NULL, heights = c(2.5, 2))
   if(pdf) {
     ggsave("canH2O3.pdf", ml, width = 10, height = 6.2)
-    addexif("canH2O3", "nH2O-ZC and phylostrata-nAA plots for TCGA and HPA datasets", "Dick (2020) (preprint)")
+    addexif("canH2O3", "nH2O-ZC and phylostrata plots for TCGA and HPA datasets", "Dick (2020) (preprint)")
   } else ml
+}
+
+# compositional analysis of phylostrata and phylostrata-nAA plots for cancer tissue 20191201
+canH2O4 <- function(pdf = FALSE) {
+  if(pdf) pdf("canH2O4.pdf", width = 9, height = 5)
+  par(mar = c(4, 3, 1, 1), mgp = c(2, 1, 0))
+  mat <- matrix(1:10, byrow = TRUE, nrow = 2)
+  layout(mat, widths = c(1, 1, 1, 1.3, 1.5))
+
+  # plots 1-3: ZC, nH2O, nAA for Trigos et al. phylostrata
+  memo <- plotphylo("ZC", PS_source = "TPPG17")
+  label.figure("A", font = 2, cex = 1.7, yfrac = 0.96, xfrac = 0.05)
+  plotphylo("nH2O", PS_source = "TPPG17", memo = memo)
+  label.figure("B", font = 2, cex = 1.7, yfrac = 0.96, xfrac = 0.05)
+  plotphylo("nAA", PS_source = "TPPG17", memo = memo)
+  label.figure("C", font = 2, cex = 1.7, yfrac = 0.96, xfrac = 0.05)
+
+  # legend for phylostrata (Trigos et al., 2017)
+  plot.new()
+  par(xpd = NA)
+  ys <- seq(0.8, 0, length.out = 8)
+  text1 <- c("Cellular organisms", "Eukaryota", "Opisthokonta", "Metazoa", "Eumetazoa", "Bilateria", "Chordata", "Euteleostomi")
+  text2 <- c("Ammiota", "Mammalia", "Theria", "Eutheria", "Euarchontoglires", "Catarrhini", "Homininae", "")
+  text(-0.25, ys, 1:8, adj = c(1, 0.5))
+  text(-0.2, ys, text1, adj = c(0, 0.5))
+  text(0.55, ys, 9:16, adj = c(1, 0.5))
+  text(0.6, ys, text2, adj = c(0, 0.5))
+  text(0.6, ys[8], "Homo sapiens", font = 3, adj = c(0, 0.5))
+  text(0.35, 1, "Phylostrata\n(Trigos et al., 2017)", cex = 1.2)
+  par(xpd = FALSE)
+
+  # plot 4: 50 percentile contours for nAA-PS of proteomics datasets 20191201
+  cond2 <- c("colorectal", "pancreatic", "breast", "lung", "prostate")
+  vigout <- system.file("extdata/vignette_output", package = "canprot")
+  conddat <- function(cond) read.csv(paste0(vigout, "/", cond, ".csv"), as.is = TRUE)
+  cancer <- lapply(cond2, conddat)
+  names(cancer) <- cond2
+  col2 <- palette.colors(8, "Classic Tableau")[c(6, 5, 7, 8, 4)]
+  opar <- par(mar = c(4, 4, 1, 1), mgp = c(2.3, 1, 0), las = 1)
+  contplot(cancer, "", col2,
+           xvar = "nAA", yvar = "PS_TPPG17", xlim = c(-250, 200), ylim = c(-5, 5),
+           dx = c(-130, 60, 140, -130, -190), dy = c(1.7, 2.5, -1.9, 0.7, -1.3))
+  label.figure("D", cex = 1.7, font = 2, yfrac = 0.96, xfrac = 0.05)
+  par(opar)
+
+  # plots 5-7: ZC, nH2O, nAA for Liebeskin et al. phylostrata
+  memo <- plotphylo("ZC", PS_source = "LMM16")
+  label.figure("E", font = 2, cex = 1.7, yfrac = 0.96, xfrac = 0.05)
+  plotphylo("nH2O", PS_source = "LMM16", memo = memo)
+  label.figure("F", font = 2, cex = 1.7, yfrac = 0.96, xfrac = 0.05)
+  plotphylo("nAA", PS_source = "LMM16", memo = memo)
+  label.figure("G", font = 2, cex = 1.7, yfrac = 0.96, xfrac = 0.05)
+
+  # legend for phylostrata (Liebeskind et al., 2016)
+  plot.new()
+  par(xpd = NA)
+  ys <- seq(0.8, 0, length.out = 8)
+  text1 <- c("Cellular_organisms", "Euk_Archaea", "Euk+Bac", "Eukaryota", "Opisthokonta", "Eumetazoa", "Vertebrata", "Mammalia")
+  text(0.15, ys, 1:8, adj = c(1, 0.5))
+  text(0.2, ys, text1, adj = c(0, 0.5))
+  text(0.35, 1, "Phylostrata\n(Liebeskind et al., 2016)", cex = 1.2)
+  par(xpd = FALSE)
+
+  # plot 8: 50 percentile contours for nAA-PS of proteomics datasets 20191201
+  names <- names(cancer)
+  names[1] <- "colo-\nrectal"
+  opar <- par(mar = c(4, 4, 1, 1), mgp = c(2.3, 1, 0), las = 1)
+  contplot(cancer, "", col2,
+           xvar = "nAA", yvar = "PS_LMM16", xlim = c(-250, 200), ylim = c(-2, 2),
+           dx = c(130, 50, 10, -90, 120), dy = c(-0.7, 1.25, 0.3, 0.85, -0.7), names = names)
+  par(opar)
+  label.figure("H", cex = 1.7, font = 2, yfrac = 0.96, xfrac = 0.05)
+
+  if(pdf) {
+    dev.off()
+    addexif("canH2O4", "Compositional analysis of phylostrata and phylostrata-nAA plots for cancer tissue", "Dick (2020) (preprint)")
+  }
 }
 
 #########################
@@ -598,3 +675,56 @@ function (..., bw = "SJ-dpi", kernel = "gaussian", cut = 3, cutmin = -Inf,
 
 # 20191121 https://stackoverflow.com/questions/24331690/modify-package-function
 environment(beanplot_mod) <- asNamespace("beanplot")
+
+# mean ZC and nH2O of phylostrata 20191122
+# extracted from canH2O4 20191205
+plotphylo <- function(vars = c("ZC", "nH2O"), basis = "rQEC", PS_source = "TPPG17", memo = NULL) {
+  if(is.null(memo)) {
+    dat <- read.csv(system.file("extdata/phylostrata/TPPG17.csv.xz", package = "canprot"), as.is = TRUE)
+    if(PS_source == "LMM16") {
+      dat <- read.csv(system.file("extdata/phylostrata/LMM16.csv.xz", package = "canprot"), as.is = TRUE)
+      colnames(dat)[c(1,3)] <- c("Entry", "Phylostrata")
+      # remove entries that have ENSP instead of UniProt IDs
+      dat <- dat[!grepl("^ENSP", dat$Entry), ]
+    }
+    dat <- check_IDs(dat, "Entry")
+    dat <- cleanup(dat, "Entry")
+    pcomp <- protcomp(dat$Entry, basis = basis)
+  } else {
+    dat <- memo$dat
+    pcomp <- memo$pcomp
+  }
+  nH2O <- pcomp$residue.basis[, "H2O"]
+  ZC <- pcomp$ZC
+  nAA <- pcomp$protein.length
+  # get mean ZC and nH2O for each phylostratum
+  Phylostratum <- sort(unique(dat$Phylostrata))
+  cum.ZC <- cum.nH2O <- cum.nAA <- mean.ZC <- mean.nH2O <- mean.nAA <- numeric()
+  for(p in Phylostratum) {
+    # point mean
+    mean.ZC <- c(mean.ZC, mean(ZC[dat$Phylostrata == p]))
+    mean.nH2O <- c(mean.nH2O, mean(nH2O[dat$Phylostrata == p]))
+    mean.nAA <- c(mean.nAA, mean(nAA[dat$Phylostrata == p]))
+    # cumulative mean
+    cum.ZC <- c(cum.ZC, mean(ZC[dat$Phylostrata <= p]))
+    cum.nH2O <- c(cum.nH2O, mean(nH2O[dat$Phylostrata <= p]))
+    cum.nAA <- c(cum.nAA, mean(nAA[dat$Phylostrata <= p]))
+  }
+  if("ZC" %in% vars) {
+    plot(Phylostratum, mean.ZC, type = "b", ylab = expression(italic(Z)[C]))
+    lines(Phylostratum, cum.ZC, col = 2)
+  }
+  if("nH2O" %in% vars) {
+    if(basis=="rQEC") ylab <- expression(italic(n)[H[2] * O])
+    if(basis=="biosynth") ylab <- expression(italic(n)[H[2] * O]~"(AA biosynthetic reactions)")
+    plot(Phylostratum, mean.nH2O, type = "b", ylab = ylab)
+    lines(Phylostratum, cum.nH2O, col = 2)
+  }
+  if("nAA" %in% vars) {
+    plot(Phylostratum, mean.nAA, type = "b", ylab = expression(italic(n)[AA]))
+    lines(Phylostratum, cum.nAA, col = 2)
+  }
+  # return the dat and pcomp for memoization 20191211
+  invisible(list(dat = dat, pcomp = pcomp))
+}
+

@@ -23,7 +23,7 @@ export(
   # utilities 20191027
   "addexif",
   # canH2O paper 20200203-20200204
-  "canH2O1", "pdat_HPA", "pdat_TCGA", "canH2O2", "canH2O3"
+  "canH2O1", "pdat_HPA", "pdat_TCGA", "canH2O2", "canH2O3", "canH2O4"
 )
 
 # imports from CHNOSZ
@@ -59,7 +59,9 @@ importFrom("canprot",
   # new protein expression data 20191104
   "pdat_osmotic2",
   # for pdat_HPA() and pdat_TCGA() 20200204
-  "cleanup", "protcomp"
+  "cleanup", "protcomp",
+  # for plotphylo() 20200204
+  "check_IDs"
 )
 
 # imports from other packages
