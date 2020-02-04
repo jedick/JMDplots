@@ -12,3 +12,5 @@
 \newcommand{\Topt}{\ifelse{latex}{\eqn{T_\mathrm{opt}}}{\ifelse{html}{\out{<I>T</I><sub>opt</sub>}}{Topt}}}
 % 20191024
 \newcommand{\O2}{\ifelse{latex}{\eqn{\mathrm{O_{2}}}}{\ifelse{html}{\out{O<sub>2</sub>}}{O2}}}
+% 20200204
+\newcommand{\nAA}{\ifelse{latex}{\eqn{n_{\mathrm{AA}}}}{\ifelse{html}{\out{<i>n</i><sub>AA</sub>}}{nAA}}}

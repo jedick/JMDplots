@@ -22,8 +22,8 @@ export(
   "aaaq4", "aaaq10", "aaaq13",
   # utilities 20191027
   "addexif",
-  # canH2O paper 20200203
-  "canH2O1", "pdat_HPA", "pdat_TCGA", "canH2O2"
+  # canH2O paper 20200203-20200204
+  "canH2O1", "pdat_HPA", "pdat_TCGA", "canH2O2", "canH2O3"
 )
 
 # imports from CHNOSZ
@@ -69,6 +69,10 @@ importFrom("png", "readPNG")
 importFrom("plotrix", "draw.arc")
 importFrom("MASS", "kde2d")
 importFrom("diagram", "openplotmat", "coordinates", "straightarrow", "curvedarrow", "textrect", "textplain")
+importFrom("ggplot2", "theme_bw", "xlab", "ylab", "geom_hline", "geom_vline", "theme",
+           "element_text", "ggplot", "aes", "geom_point", "ggtitle", "labs", "xlim", "ylim",
+           "theme_void", "geom_text", "annotate", "unit",
+           "ggplot_gtable", "ggplot_build", "theme_classic", "element_rect", "ggsave")
 
 # imports from standard packages
 importFrom("grDevices", "dev.off", "cairo_pdf", "pdf", "blues9", "colorRampPalette",

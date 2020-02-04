@@ -223,6 +223,134 @@ canH2O2 <- function(pdf = FALSE) {
   }
 }
 
+# nH2O-ZC and phylostrata-nAA plots for TCGA and HPA datasets 20191126
+canH2O3 <- function(pdf = FALSE) {
+  vigout2 <- system.file("extdata/vignette_output", package = "JMDplots")
+  HPA <- read.csv(file.path(vigout2, "HPA.csv"), as.is = TRUE)
+  TCGA <- read.csv(file.path(vigout2, "TCGA.csv"), as.is = TRUE)
+  TCGA_labels <- TCGA$description
+  HPA_labels <- HPA$description
+  HPA_labels <- sapply(strsplit(HPA_labels, " "), "[", 1)
+  HPA_labels[grepl("head", HPA_labels)] <- "head and neck"
+
+  # get colors for five cancers in paper 20191208
+  cond2 <- c("colorectal", "pancreatic", "breast", "lung", "prostate")
+  col2 <- palette.colors(8, "Classic Tableau")[c(6, 5, 7, 8, 4)]
+  jHPA <- match(cond2, sapply(strsplit(HPA$description, " "), "[", 1))
+  colHPA <- rep("slateblue4", nrow(HPA))
+  colHPA[jHPA] <- col2
+  sizeHPA <- rep(1.5, nrow(HPA))
+  sizeHPA[jHPA] <- 2
+  shapeHPA <- rep(15, nrow(HPA))
+  shapeHPA[jHPA] <- 1
+  # now do TCGA
+  TCGAnames <- names(HTmap)[match(cond2, sapply(strsplit(HTmap, " "), "[", 1))]
+  jTCGA <- match(TCGAnames, TCGA$description)
+  colTCGA <- rep("slateblue4", nrow(TCGA))
+  colTCGA[jTCGA] <- col2
+  sizeTCGA <- rep(1.5, nrow(TCGA))
+  sizeTCGA[jTCGA] <- 2
+  shapeTCGA <- rep(15, nrow(TCGA))
+  shapeTCGA[jTCGA] <- 1
+
+  # median differences of nH2O-ZC for HPA and TCGA datasets
+  # common elements for both plots
+  pl1.common <- list(
+    theme_bw(),
+    xlab(canprot::cplab$DZC),
+    ylab(canprot::cplab$DnH2O),
+#    coord_cartesian(xlim = range(HPA$ZC.diff, TCGA$ZC.diff),
+#                    ylim = range(HPA$nH2O_rQEC.diff, TCGA$nH2O_rQEC.diff)),
+    geom_hline(yintercept = 0, linetype = 3, colour = "gray30"),
+    geom_vline(xintercept = 0, linetype = 3, colour = "gray30"),
+    theme(plot.tag = element_text(size = 20), plot.title = element_text(hjust = 0.5))
+  )
+  # create plots
+  nudge_x <- ifelse(TCGA_labels %in% c("SKCM"), 0.001, 0)
+  pl1 <- list(
+    ggplot(TCGA, aes(TCGA$ZC.diff, TCGA$nH2O_rQEC.diff, label = TCGA_labels)) + ggrepel::geom_text_repel(size = 2.5, nudge_x = nudge_x) +
+      pl1.common + geom_point(color = colTCGA, size = sizeTCGA, shape = shapeTCGA, stroke = 1.5) + ggtitle("TCGA/GTEx") + labs(tag = expression(bold(A))),
+    ggplot(HPA, aes(HPA$ZC.diff, HPA$nH2O_rQEC.diff, label = HPA_labels)) + ggrepel::geom_text_repel(size = 3) +
+      pl1.common + geom_point(color = colHPA, size = sizeHPA, shape = shapeHPA, stroke = 1.5) + ggtitle("HPA") + labs(tag = expression(bold(B)))
+  )
+
+  # table of HPA-TCGA mappings
+  iHPA <- match(HTmap, HPA$description)
+  iTCGA <- match(names(HTmap), TCGA$description)
+  df <- data.frame(x = rep(c(0.8, 2.2), each = 9), y = rep(8:0, 2))
+  pl2 <- ggplot(df, aes(df$x, df$y, label = TCGA_labels[iTCGA])) + xlim(-0.2, 2.8) + ylim(-1.5, 9.5) +
+           theme_void() + geom_text(hjust = 1, nudge_x = -0.03) +
+           annotate("text", label = HPA_labels[iHPA], x = df$x, y = df$y, hjust = 0) +
+           annotate("text", label = "TCGA - HPA pairs", x = 1.5, y = 9, vjust = 0, size = 5) +
+           theme(plot.margin = unit(c(0, 0, 0, 5.5), "pt"), plot.tag = element_text(size = 20))
+  pl2 <- ggplot_gtable(ggplot_build(pl2))
+  pl2$layout$clip[pl2$layout$name == "panel"] <- "off"
+  pl2 <- list(pl2)
+
+  # HPA-TCGA scatterplot for PS
+  colname <- "PS_TPPG17.diff"
+  dat <- data.frame(TCGA = TCGA[iTCGA, colname], HPA = HPA[iHPA, colname])
+  # use different symbols for 5 cancers in this paper
+  TCGAnames <- names(HTmap)[match(cond2, sapply(strsplit(HTmap, " "), "[", 1))]
+  kTCGA <- match(TCGAnames, TCGA$description[iTCGA])
+  col <- rep("slateblue4", nrow(dat))
+  col[kTCGA] <- col2
+  size <- rep(1.5, nrow(dat))
+  size[kTCGA] <- 2
+  shape <- rep(15, nrow(dat))
+  shape[kTCGA] <- 21
+  # use bold labels for cancers studied in Trigos et al., 2017
+  labels <- TCGA_labels[iTCGA]
+  fontface <- ifelse(labels %in% c("LUAD", "LUSC", "BRCA", "PRAD", "LIHC", "COAD", "STAD"), "bold.italic", "plain")
+
+  pl3 <- ggplot(dat, aes(x = TCGA, y = HPA, label = labels)) +
+    theme_classic() +
+    xlab(quote(Delta*"PS (TCGA/GTEx)")) +
+    ylab(quote(Delta*"PS (HPA)")) +
+    geom_hline(yintercept = 0, linetype = 3, colour = "gray30") +
+    geom_vline(xintercept = 0, linetype = 3, colour = "gray30") +
+    geom_point(shape = shape, size = size, col = col, stroke = 1.5) +
+    ggrepel::geom_text_repel(size = 3, fontface = fontface, seed = 42) +
+    labs(tag = expression(bold(C))) +
+    theme(plot.tag = element_text(size = 20), plot.title = element_text(hjust = 0.5),
+          panel.border = element_rect(colour = "black", fill=NA))
+  pl3 <- list(pl3)
+
+  # put together the figure
+  mat <- matrix(c(1, 1, 2, 2, 3, 3, 4, 4), byrow = TRUE, nrow = 2)
+  ml <- gridExtra::marrangeGrob(c(pl1, pl2, pl3), layout_matrix = mat, top = NULL, heights = c(2.5, 2))
+  if(pdf) {
+    ggsave("canH2O3.pdf", ml, width = 10, height = 6.2)
+    addexif("canH2O3", "nH2O-ZC and phylostrata-nAA plots for TCGA and HPA datasets", "Dick (2020) (preprint)")
+  } else ml
+}
+
+#########################
+### UNEXPORTED OBJECT ###
+#########################
+
+# mapping between HPA and TCGA names
+HTmap <- c(
+  BRCA = "breast cancer / breast",
+  CESC = "cervical cancer / cervix, uterine",
+  COAD = "colorectal cancer / colon",
+  UCEC = "endometrial cancer / endometrium 1",
+  GBM = "glioma / cerebral cortex",
+  HNSC = "head and neck cancer / salivary gland",
+  LIHC = "liver cancer / liver",
+  LUAD = "lung cancer / lung",
+  DLBC = "lymphoma / lymph node",
+  SKCM = "melanoma / skin 1",
+  OV = "ovarian cancer / ovary",
+  PAAD = "pancreatic cancer / pancreas",
+  PRAD = "prostate cancer / prostate",
+  KIRC = "renal cancer / kidney",
+  STAD = "stomach cancer / stomach 1",
+  TGCT = "testis cancer / testis",
+  THCA = "thyroid cancer / thyroid gland",
+  BLCA = "urothelial cancer / urinary bladder"
+)
+
 ############################
 ### UNEXPORTED FUNCTIONS ###
 ############################

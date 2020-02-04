@@ -1,10 +1,10 @@
 ---
-title: "One plot from water in cancer paper (2020)"
+title: "Three plots from water in cancer paper (2020)"
 output: 
   rmarkdown::html_vignette:
     mathjax: null
 vignette: >
-  %\VignetteIndexEntry{One plot from water in cancer paper (2020)}
+  %\VignetteIndexEntry{Three plots from water in cancer paper (2020)}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -26,6 +26,7 @@ options(width = 40)
 ## some frequently used HTML expressions
 ZC <- "<i>Z</i><sub>C</sub>"
 nH2O <- "<i>n</i><sub>H<sub>2</sub>O</sub>"
+nAA <- "<i>n</i><sub>AA</sub>"
 ```
 
 This vignette from the R package [JMDplots](https://github.com/jedick/JMDplots) contains plots from the paper by <a href="canH2O.html" title="Water as a reactant in the differential expression of proteins in cancer">Dick (2020)</a> (preprint).
@@ -42,4 +43,9 @@ canH2O1()
 ## Median differences of protein length, `r nH2O` and `r ZC` for cell culture and cancer (Figure 2)
 ```{r canH2O2, message = FALSE, fig.align='center', out.width='100%', fig.width = 9, fig.height = 6, pngquant = pngquant}
 canH2O2()
+```
+
+## `r nH2O`-`r ZC` and phylostrata-`r nAA` plots for TCGA and HPA datasets (Figure 3)
+```{r canH2O3, message = FALSE, fig.align='center', out.width='100%', fig.width = 10, fig.height = 6.2, pngquant = pngquant}
+canH2O3()
 ```
