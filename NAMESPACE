@@ -23,7 +23,7 @@ export(
   # utilities 20191027
   "addexif",
   # canH2O paper 20200203
-  "canH2O1"
+  "canH2O1", "pdat_HPA", "pdat_TCGA", "canH2O2"
 )
 
 # imports from CHNOSZ
@@ -57,7 +57,9 @@ importFrom("canprot",
   # moved to canprot 20191027
   "ZCAA", "H2OAA", "GRAVY", "pI",
   # new protein expression data 20191104
-  "pdat_osmotic2"
+  "pdat_osmotic2",
+  # for pdat_HPA() and pdat_TCGA() 20200204
+  "cleanup", "protcomp"
 )
 
 # imports from other packages
@@ -77,6 +79,7 @@ importFrom("graphics", "abline", "arrows", "axis", "box", "layout",
            "points", "rect", "text", "title", "smoothScatter", "strheight",
            "polygon", "hist", "plot.window", "rasterImage")
 importFrom("stats", "lm", "na.omit", "predict", "sd", "predict.lm", "residuals",
-           "qqline", "qqnorm", "quantile", "median", "fivenum")
+           "qqline", "qqnorm", "quantile", "median", "fivenum",
+           "density")
 importFrom("utils", "read.csv", "demo", "packageVersion", "tail", "write.csv")
 

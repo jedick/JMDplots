@@ -2,6 +2,7 @@
 \name{canH2O}
 \alias{canH2O}
 \alias{canH2O1}
+\alias{canH2O2}
 \title{Plots from water in cancer paper}
 \description{
 Plots from the paper by Dick (2020).
@@ -9,6 +10,7 @@ Plots from the paper by Dick (2020).
 
 \usage{
   canH2O1(pdf = FALSE)
+  canH2O2(pdf = FALSE)
 }
 
 \arguments{
@@ -19,7 +21,8 @@ Plots from the paper by Dick (2020).
 This table gives a brief description of each function.
 
 \tabular{ll}{
-  \code{canH2O1} \tab Study overview plot \cr
+  \code{canH2O1} \tab Study overview \cr
+  \code{canH2O2} \tab Median differences of protein length, nH2O and ZC for cell culture and cancer \cr
 }
 
 }

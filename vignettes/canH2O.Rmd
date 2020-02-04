@@ -34,7 +34,12 @@ This vignette from the R package [JMDplots](https://github.com/jedick/JMDplots) 
 library(JMDplots)
 ```
 
-## Study overview plot (Figure 1)
+## Study overview (Figure 1)
 ```{r canH2O1, message = FALSE, fig.align='center', out.width='75%', fig.width = 7, fig.height = 7, pngquant = pngquant}
 canH2O1()
+```
+
+## Median differences of protein length, `r nH2O` and `r ZC` for cell culture and cancer (Figure 2)
+```{r canH2O2, message = FALSE, fig.align='center', out.width='100%', fig.width = 9, fig.height = 6, pngquant = pngquant}
+canH2O2()
 ```

@@ -1,0 +1,78 @@
+---
+title: "Compositional analysis of The Cancer Genome Atlas"
+output:
+  html_vignette:
+    mathjax: null
+vignette: >
+  %\VignetteIndexEntry{Compositional analysis of The Cancer Genome Atlas}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include=FALSE}
+library(JMDplots)
+library(knitr)
+## use pngquant to reduce size of PNG images
+knit_hooks$set(pngquant = hook_pngquant)
+pngquant <- "--speed=1 --quality=0-25"
+# in case pngquant isn't available (R-Forge?)
+if (!nzchar(Sys.which("pngquant"))) pngquant <- NULL 
+```
+
+This vignette shows compositional metrics and phylostrata for proteins associated with transcripts that are differentially expressed in cancer compared to normal tissue (data from [The Cancer Genome Atlas](https://www.genome.gov/Funded-Programs-Projects/Cancer-Genome-Atlas) and [Genotype-Tissue Expression Project](https://www.genome.gov/Funded-Programs-Projects/Genotype-Tissue-Expression-Project) via [GEPIA2](http://gepia2.cancer-pku.cn/)).
+Abbreviations:
+
+  * <i>Z</i><sub>C</sub> &ndash; carbon oxidation state; <i>n</i><sub>H<sub>2</sub>O</sub> &ndash; stoichiometric hydration state; <i>n</i><sub>O<sub>2</sub></sub> &ndash; stoichiometric oxidation state. Stoichiometric values are derived from basis species using the rQEC method (Dick et al., 2020) or from amino acid biosynthetic reactions.
+  * <i>n</i><sub>AA</sub> &ndash; protein length; PS &ndash; phylostrata. References for gene ages: [Trigos et al. (2017)](https://doi.org/10.1073/pnas.1617743114) (TPPG17); [Liebeskind et al. (2016)](https://doi.org/10.1093/gbe/evw113) (LMM16).
+  * <i>n</i><sub>down</sub> &ndash; number of down-regulated proteins; <i>n</i><sub>up</sub> &ndash; number of up-regulated proteins.
+
+```{r options, echo=FALSE}
+options(width = 90)
+```
+
+<style type="text/css">
+body {
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+</style>
+
+```{r datasets}
+datasets <- pdat_TCGA()
+```
+
+```{r comptab, results="hide", message=FALSE, echo = FALSE}
+pdat1 <- lapply_canprot(datasets, pdat_TCGA)
+comptab1 <- lapply(pdat1, get_comptab)
+pdat2 <- lapply(pdat1, pdat_recomp, "biosynth")
+comptab2 <- lapply(pdat2, get_comptab, "nO2")
+comptab3 <- lapply(pdat1, get_comptab, "nAA", "PS")
+comptab4 <- lapply(pdat1, get_comptab, "nAA", "PS", PS_source = "LMM16")
+```
+
+Dashed contour lines in the plots outline the 50% credible region for highest probability density.
+
+```{r diffplot, fig.width=8, fig.height=8, fig.align = "center", echo = FALSE}
+par(mfrow = c(2, 2), mar = c(4, 4, 2, 2), mgp = c(2.5, 1, 0))
+diffplot(comptab1)
+title(quote("rQEC"~italic(n)[H[2]*O]), font.main = 1)
+diffplot(comptab2, c("nO2", "nH2O"))
+title(quote("Biosynthetic"~italic(n)[H[2]*O]~"and"~italic(n)[O[2]]), font.main = 1)
+diffplot(comptab3, c("nAA", "PS"))
+title("Trigos et al. (2017) ages", font.main = 1)
+diffplot(comptab4, c("nAA", "PS"))
+title("Liebeskind et al. (2016) ages", font.main = 1)
+```
+
+In the table, values of &Delta;<i>Z</i><sub>C</sub>, &Delta;<i>n</i><sub>H<sub>2</sub>O</sub> and &Delta;<i>n</i><sub>O<sub>2</sub></sub> are multiplied by 1000, values of &Delta;PS are multiplied by 100, and negative values are shown in bold.
+
+```{r xsummary, results="asis", echo = FALSE}
+library(xtable)
+out <- xsummary2(comptab1, comptab2, comptab3, comptab4)
+# round values and include dataset tags
+tags <- sapply(sapply(strsplit(datasets, "="), "[", -1), paste, collapse = ";")
+out <- cbind(out[, 1:2], tags = tags, out[, 3:25])
+out[, 6:26] <- round(out[, 6:26], 4)
+write.csv(out, "TCGA.csv", row.names = FALSE, quote = 2)
+```

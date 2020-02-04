@@ -70,7 +70,7 @@ The organisms are limited to those that have at least 1000 RefSeq protein sequen
 \section{Files in extdata/organisms}{
   \describe{
     \item{\code{ecoli.csv.xz}}{
-      This data file has amino acid compositions of proteins in the UniProt reference proteome of E. coli K12 (\url{https://www.uniprot.org/proteomes/UP000000625}).
+      This data file has amino acid compositions of proteins in the UniProt reference proteome of \emph{E. coli} K12 (\url{https://www.uniprot.org/proteomes/UP000000625}).
       The data frame was created by running \code{ecoli <- CHNOSZ::read.fasta("UP000000625_83333.fasta.gz")} and moving \samp{ECOLI} from the protein name to the \code{organism} column.
       This is used in \code{gradH2O1}.
     }
