@@ -579,6 +579,185 @@ canH2OT4 <- function() {
   out
 }
 
+# rQEC derivation and comparison with biosynthetic reactions 20190713
+canH2OS1 <- function(pdf = FALSE) {
+  # set up figure
+  if(pdf) pdf("canH2OS1.pdf", width = 6, height = 6)
+  par(mfrow = c(2, 2))
+  par(mar = c(3.2, 3.2, 1, 1))
+  par(mgp = c(2, 0.7, 0))
+  par(las = 1)
+  par(cex.lab = 1.2)
+
+  # define axis labels
+  nH2Olab.QEC <- expression(italic(n)[H[2] * O]~"(QEC)")
+  nH2Olab.rQEC <- expression(italic(n)[H[2] * O]~"(rQEC)")
+  nO2lab <- expression(italic(n)[O[2]])
+  ZClab <- expression(italic(Z)[C])
+
+  # function to plot linear model
+  lmfun <- function(ZC, nH2O, legend.x = NULL, lmlim = c(-1, 1), ...) {
+    mylm <- lm(nH2O ~ ZC)
+    lines(lmlim, predict(mylm, data.frame(ZC = lmlim)), ...)
+    # add R-squared text
+    if(!is.null(legend.x)) {
+      R2 <- format(round(summary(mylm)$r.squared, 2), nsmall = 2)
+      R2txt <- substitute(italic(R)^2 == R2, list(R2 = R2))
+      legend(legend.x, legend = R2txt, bty = "n")
+    }
+    invisible(round(residuals(mylm), 3))
+  }
+
+  # function to plot values for amino acids
+  aaplot <- function(x, y, xlab, ylab, legend.x, lmlim = c(-1, 1)) {
+    plot(x, y, type = "p", pch = aminoacids(1), xlab = xlab, ylab = NA)
+    mtext(ylab, side = 2, line = 1.8, las = 0)
+    lmfun(x, y, legend.x, lmlim)
+  }
+
+  # set up amino acid compositions to get compositional values for residues
+  AAcomp <- as.data.frame(diag(20))
+  names(AAcomp) <- aminoacids(3)
+
+  # plot 1: nH2O-ZC of amino acid residues (QEC)
+  # subtract 1 to make residues
+  aaplot(ZCAA(AAcomp), H2OAA(AAcomp, "QEC") - 1, ZClab, nH2Olab.QEC, "bottomright") - 0.355
+  label.figure("A", cex = 1.7, font = 2)
+
+  # plot 2: nH2O-ZC of amino acid residues (rQEC)
+  par(mgp = c(2, 0.7, 0))
+  aaplot(ZCAA(AAcomp), H2OAA(AAcomp, "rQEC") - 1, ZClab, nH2Olab.rQEC, "bottomright")
+  label.figure("B", cex = 1.7, font = 2)
+
+  # plot nO2(biosynth) vs ZC for amino acids
+  nO2lab.bio <- quote(italic(n)[O[2]]~"(biosynthetic)")
+  aaplot(ZCAA(AAcomp), O2AA(AAcomp, "biosynth"), ZClab, nO2lab.bio, "bottomright")
+  label.figure("C", cex = 1.7, font = 2)
+
+  # plot nH2O(biosynth) vs nH2O(rQEC) for amino acid residues
+  nH2Olab.bio <- quote(italic(n)[H[2] * O]~"(biosynthetic)")
+  aaplot(H2OAA(AAcomp, "rQEC") - 1, H2OAA(AAcomp, "biosynth") - 1, nH2Olab.rQEC, nH2Olab.bio, "bottomright", lmlim = H2OAA(AAcomp, "rQEC") - 1)
+  label.figure("D", cex = 1.7, font = 2)
+
+  if(pdf) {
+    dev.off()
+    addexif("canH2OS1", "rQEC derivation and comparison with biosynthetic reactions", "Dick (2020) (preprint)")
+  }
+}
+
+# HPA-TCGA scatterplots for ZC and nH2O 20200127
+canH2OS2 <- function(pdf = FALSE) {
+  vigout2 <- system.file("extdata/vignette_output", package = "JMDplots")
+  HPA <- read.csv(file.path(vigout2, "HPA.csv"), as.is = TRUE)
+  TCGA <- read.csv(file.path(vigout2, "TCGA.csv"), as.is = TRUE)
+  TCGA_labels <- TCGA$description
+  HPA_labels <- HPA$description
+  HPA_labels <- sapply(strsplit(HPA_labels, " "), "[", 1)
+  HPA_labels[grepl("head", HPA_labels)] <- "head and neck"
+
+  # get colors for 5 cancers in paper 20191208
+  cond2 <- c("colorectal", "pancreatic", "breast", "lung", "prostate")
+  col2 <- palette.colors(8, "Classic Tableau")[c(6, 5, 7, 8, 4)]
+  jHPA <- match(cond2, sapply(strsplit(HPA$description, " "), "[", 1))
+  colHPA <- rep("slateblue4", nrow(HPA))
+  colHPA[jHPA] <- col2
+  sizeHPA <- rep(1.5, nrow(HPA))
+  sizeHPA[jHPA] <- 2
+  shapeHPA <- rep(15, nrow(HPA))
+  shapeHPA[jHPA] <- 1
+  # now do TCGA
+  TCGAnames <- names(HTmap)[match(cond2, sapply(strsplit(HTmap, " "), "[", 1))]
+  jTCGA <- match(TCGAnames, TCGA$description)
+  colTCGA <- rep("slateblue4", nrow(TCGA))
+  colTCGA[jTCGA] <- col2
+  sizeTCGA <- rep(1.5, nrow(TCGA))
+  sizeTCGA[jTCGA] <- 2
+  shapeTCGA <- rep(15, nrow(TCGA))
+  shapeTCGA[jTCGA] <- 1
+
+  # HPA-TCGA mappings
+  iHPA <- match(HTmap, HPA$description)
+  iTCGA <- match(names(HTmap), TCGA$description)
+
+  # HPA-TCGA scatterplots for ZC and nH2O
+  ZC <- data.frame(TCGA = TCGA$ZC.diff[iTCGA], HPA = HPA$ZC.diff[iHPA])
+  nH2O <- data.frame(TCGA = TCGA$nH2O_rQEC.diff[iTCGA], HPA = HPA$nH2O_rQEC.diff[iHPA])
+
+  labels <- TCGA_labels[iTCGA]
+  col <- "slateblue4"
+  size <- 1.5
+  shape <- 15
+
+  r.squared.ZC <- format(summary(lm(HPA ~ TCGA, ZC))$r.squared, digits = 2)
+  ZC.title <- substitute(italic(R)^2 == r.squared, list(r.squared = r.squared.ZC))
+  pl1 <- ggplot(ZC, aes(x = TCGA, y = HPA, label = labels)) +
+    theme_classic() + geom_smooth(method = "lm") +
+    annotate("text", -Inf, Inf, label = ZC.title, hjust = -0.2, vjust = 1.5) +
+    xlab(quote(Delta*italic(Z)[C]*" (TCGA/GTEx)")) +
+    ylab(quote(Delta*italic(Z)[C]*" (HPA)")) +
+    geom_hline(yintercept = 0, linetype = 3, colour = "gray30") +
+    geom_vline(xintercept = 0, linetype = 3, colour = "gray30") +
+    geom_point(shape = shape, size = size, col = col, stroke = 1.5) +
+    ggrepel::geom_text_repel(size = 3, seed = 42) +
+    labs(tag = expression(bold(A))) +
+    theme(plot.tag = element_text(size = 20), plot.title = element_text(hjust = 0.5),
+          panel.border = element_rect(colour = "black", fill=NA))
+  pl1 <- list(pl1)
+
+  r.squared.nH2O <- format(summary(lm(HPA ~ TCGA, nH2O))$r.squared, digits = 2)
+  nH2O.title <- substitute(italic(R)^2 == r.squared, list(r.squared = r.squared.nH2O))
+  pl2 <- ggplot(nH2O, aes(x = TCGA, y = HPA, label = labels)) +
+    theme_classic() + geom_smooth(method = "lm") +
+    annotate("text", -Inf, Inf, label = nH2O.title, hjust = -0.2, vjust = 1.5) +
+    xlab(quote(Delta*italic(n)[H[2]*O]*" (TCGA/GTEx)")) +
+    ylab(quote(Delta*italic(n)[H[2]*O]*" (HPA)")) +
+    geom_hline(yintercept = 0, linetype = 3, colour = "gray30") +
+    geom_vline(xintercept = 0, linetype = 3, colour = "gray30") +
+    geom_point(shape = shape, size = size, col = col, stroke = 1.5) +
+    ggrepel::geom_text_repel(size = 3, seed = 42) +
+    labs(tag = expression(bold(B))) +
+    theme(plot.tag = element_text(size = 20), plot.title = element_text(hjust = 0.5),
+          panel.border = element_rect(colour = "black", fill=NA))
+  pl2 <- list(pl2)
+
+  # put together the figure
+  mat <- matrix(1:2, nrow = 1)
+  ml <- gridExtra::marrangeGrob(c(pl1, pl2), layout_matrix = mat, top = NULL)
+  if(pdf) {
+    ggsave("canH2OS2.pdf", ml, width = 8, height = 4)
+    addexif("canH2OS2", "HPA-TCGA scatterplots for ZC and nH2O", "Dick (2020) (preprint)")
+  }
+  else ml
+}
+
+# Trigos and Liebeskind phylostrata against ZC and nH2O for cancer tissue 20191211
+canH2OS3 <- function(pdf = FALSE) {
+  if(pdf) pdf("canH2OS3.pdf", width = 6, height = 6)
+  # get data
+  cond2 <- c("colorectal", "pancreatic", "breast", "lung", "prostate")
+  vigout <- system.file("extdata/vignette_output", package = "canprot")
+  conddat <- function(cond) read.csv(paste0(vigout, "/", cond, ".csv"), as.is = TRUE)
+  cancer <- lapply(cond2, conddat)
+  names(cancer) <- cond2
+  col2 <- palette.colors(8, "Classic Tableau")[c(6, 5, 7, 8, 4)]
+  # setup plot
+  par(mfrow = c(2, 2))
+  par(mar = c(4, 4, 2, 1), mgp = c(2.3, 1, 0), las = 1)
+
+  contplot(cancer, "Trigos Phylostrata", col2, xvar = "ZC", yvar = "PS_TPPG17", ylim = c(-4, 4))
+  label.figure("A", cex = 1.7, font = 2, yfrac = 0.96, xfrac = 0.05)
+  contplot(cancer, "Trigos Phylostrata", col2, xvar = "nH2O_rQEC", yvar = "PS_TPPG17", ylim = c(-4, 4), xlim = c(-0.02, 0.05))
+  label.figure("B", cex = 1.7, font = 2, yfrac = 0.96, xfrac = 0.05)
+  contplot(cancer, "Liebeskind Phylostrata", col2, xvar = "ZC", yvar = "PS_LMM16", ylim = c(-2, 2))
+  label.figure("C", cex = 1.7, font = 2, yfrac = 0.96, xfrac = 0.05)
+  contplot(cancer, "Liebeskind Phylostrata", col2, xvar = "nH2O_rQEC", yvar = "PS_LMM16", ylim = c(-2, 2), xlim = c(-0.02, 0.05))
+  label.figure("D", cex = 1.7, font = 2, yfrac = 0.96, xfrac = 0.05)
+  if(pdf) {
+    dev.off()
+    addexif("canH2OS3", "Trigos and Liebeskind phylostrata against ZC and nH2O for cancer tissue", "Dick (2020) (preprint)")
+  }
+}
+
 #########################
 ### UNEXPORTED OBJECT ###
 #########################

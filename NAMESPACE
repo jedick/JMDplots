@@ -26,7 +26,8 @@ export(
   # canH2O paper 20200203-20200204
   "canH2O1", "pdat_HPA", "pdat_TCGA", "canH2O2", "canH2O3", "canH2O4", "canH2O5",
   # canH2O supplementary tables and figures 20200205
-  "canH2OT1", "canH2OT2", "canH2OT4"
+  "canH2OT1", "canH2OT2", "canH2OT4",
+  "canH2OS1", "canH2OS2", "canH2OS3"
 )
 
 # imports from CHNOSZ
@@ -79,7 +80,7 @@ importFrom("diagram", "openplotmat", "coordinates", "straightarrow", "curvedarro
 importFrom("ggplot2", "theme_bw", "xlab", "ylab", "geom_hline", "geom_vline", "theme",
            "element_text", "ggplot", "aes", "geom_point", "ggtitle", "labs", "xlim", "ylim",
            "theme_void", "geom_text", "annotate", "unit",
-           "ggplot_gtable", "ggplot_build", "theme_classic", "element_rect", "ggsave")
+           "ggplot_gtable", "ggplot_build", "theme_classic", "element_rect", "ggsave", "geom_smooth")
 
 # imports from standard packages
 importFrom("grDevices", "dev.off", "cairo_pdf", "pdf", "blues9", "colorRampPalette",
