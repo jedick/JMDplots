@@ -133,7 +133,7 @@ canH2O1 <- function(pdf = FALSE) {
   }
 }
 
-# median differences of protein length, nH2O and ZC for cell culture and cancer 20191126
+# median differences of protein length, nH2O and ZC for cell culture and cancer tissue 20191126
 canH2O2 <- function(pdf = FALSE) {
   if(pdf) pdf("canH2O2.pdf", width = 9, height = 6)
   # layout with spaces between groups of plots
@@ -220,7 +220,7 @@ canH2O2 <- function(pdf = FALSE) {
 
   if(pdf) {
     dev.off()
-    addexif("canH2O2", "Median differences of protein length, nH2O and ZC for cell culture and cancer", "Dick (2020) (preprint)")
+    addexif("canH2O2", "Median differences of protein length, nH2O and ZC for cell culture and cancer tissue", "Dick (2020) (preprint)")
   }
 }
 
@@ -450,6 +450,133 @@ canH2O5 <- function(pdf = FALSE) {
     dev.off()
     addexif("canH2O5", "Plots with nH2O and nO2 of amino acid biosynthesis reactions", "Dick (2020) (preprint)")
   }
+}
+
+#############################
+### SI TABLES AND FIGURES ###
+#############################
+
+# stoichiometric matrix for amino acids with QEC basis species 20200104
+canH2OT1 <- function() {
+  basis("QEC")
+  species(aminoacids(""))
+  out <- species()[, c(9, 1:5)]
+  # subtract 1 H2O to make residues
+  out$H2O <- out$H2O - 1
+  # adjustments for pretty kable output
+  rownames(out) <- out[, 1]
+  out <- out[, -1]
+  colnames(out) <- gsub("([[:digit:]])", "~\\1~", colnames(out))
+  out
+}
+
+# mean differences and p-values across all datasets 20200125
+canH2OT2 <- function() {
+  cond1 <- c("hypoxia", "hyperosmotic", "secreted", "3D")
+  cond2 <- c("colorectal", "pancreatic", "breast", "lung", "prostate")
+  cond3 <- c("HPA", "TCGA")
+  vigout <- system.file("extdata/vignette_output", package = "canprot")
+  conddat <- function(cond) read.csv(paste0(vigout, "/", cond, ".csv"), as.is = TRUE)
+  culture <- lapply(cond1, conddat); names(culture) <- cond1
+  cancer <- lapply(cond2, conddat); names(cancer) <- cond2
+  vigout2 <- system.file("extdata/vignette_output", package = "JMDplots")
+  conddat <- function(cond) read.csv(paste0(vigout2, "/", cond, ".csv"))
+  pancan <- lapply(cond3, conddat); names(pancan) <- cond3
+  # make data frames for mean differences and p-values
+  # include comparison of up- and down-regulated proteins for "Secreted" in hypoxia compared to "Hypoxia" (whole-cell)
+  pdat <- mdat <- data.frame(condition = c(names(culture), names(cancer), names(pancan), "up", "down"))
+  for(property in c("ZC", "nH2O_rQEC", "nO2_biosynth", "nH2O_biosynth", "nAA")) {
+    pvals <- mvals <- numeric()
+    idn <- grep(paste0(property, ".down"), colnames(culture[[1]]))
+    iup <- grep(paste0(property, ".up"), colnames(culture[[1]]))
+    for(type in c("culture", "cancer", "pancan", "up", "down")) {
+      if(type %in% c("up", "down")) {
+        if(type=="up") idiff <- iup
+        if(type=="down") idiff <- idn
+        hypoxia <- culture$hypoxia[, idiff]
+        secreted <- culture$secreted[, idiff]
+        mvals <- c(mvals, mean(secreted) - mean(hypoxia))
+        pvals <- c(pvals, t.test(hypoxia, secreted)$p.value)
+      } else {
+        thisdat <- get(type)
+        for(i in 1:length(thisdat)) {
+          dn <- thisdat[[i]][, idn]
+          up <- thisdat[[i]][, iup]
+          mvals <- c(mvals, mean(up) - mean(dn))
+          pvals <- c(pvals, t.test(dn, up)$p.value)
+        }
+      }
+    }
+    mcol <- data.frame(X = mvals)
+    pcol <- data.frame(X = round(log10(pvals), 1))
+    colnames(mcol)[1] <- property
+    colnames(pcol)[1] <- property
+    mdat <- cbind(mdat, mcol)
+    pdat <- cbind(pdat, pcol)
+  }
+  # round and combine values
+  mdat[, 2:5] <- round(mdat[, 2:5], 3)
+  for(icol in 2:5) mdat[, icol] <- paste0(sprintf("%.3f", mdat[, icol]), " (", sprintf("%.1f", pdat[, icol]), ")")
+  mdat[, 6] <- round(mdat[, 6], 1)
+  for(icol in 6) mdat[, icol] <- paste0(sprintf("%.1f", mdat[, icol]), " (", sprintf("%.1f", pdat[, icol]), ")")
+#  write.csv(mdat, "TableS2.csv", row.names = FALSE, quote = FALSE)
+  # adjustments for pretty kable output
+  rownames(mdat) <- mdat[, 1]
+  mdat <- mdat[, -1]
+  colnames(mdat) <- c("*Z*~C~", "*n*~H2O~ (rQEC)", "*n*~O2~ (biosynth)", "*n*~H2O~ (biosynth)", "*n*~AA~")
+  mdat
+}
+
+# biosynthetic reactions for amino acids 20200104
+# adapted from ?canprot::metrics
+canH2OT4 <- function() {
+  # This shows how the stoichiometric coefficients of H2O and O2
+  # in biosynthetic reactions were obtained. The list of precursors is based on
+  # https://upload.wikimedia.org/wikipedia/commons/2/21/Amino_acid_biosynthesis_overview.png
+  file <- system.file("extdata/misc/aminoacid_precursors.csv", package = "canprot")
+  precursors <- read.csv(file, as.is = TRUE)
+  # balance the reactions using CHNOPS basis (including H+)
+  basis("CHNOPS+")
+  # but use ionized forms of NH4+, HS-, and HPO4-
+  swap.basis("NH3", "NH4+")
+  swap.basis("H2S", "HS-")
+  swap.basis("H3PO4", "H2PO4-")
+  # add precursors not in OBIGT
+  mod.obigt("chorismate", formula = "C10H8O6-2")
+  mod.obigt("3-phosphoglycerate", formula = "C3H5O7P-2")
+  mod.obigt("ribose 5-phosphate", formula = "C5H10O8P-")
+  allAA <- aminoacids("")
+  names(allAA) <- aminoacids(3)
+  out <- lapply(allAA, function(AA) {
+    ipre <- match(AA, precursors$amino.acid)
+    # react precursor and amino acid in 1:1 proportion
+    sres <- suppressMessages(subcrt(c(precursors$precursor[ipre], AA), c(-1, 1)))
+    rxn <- describe.reaction(sres$reaction, iname = 1:nrow(sres$reaction))
+    # get the text into a character object and do so cleaning up 20200205
+    rxn <- capture.output(print(rxn))
+    rxn <- paste(rxn, collapse = "") # some are in 2 pieces... why?
+    rxn <- gsub("    ", "", gsub("\\)", "", gsub("\\(", "", gsub("~ ", "", gsub('\"', '', rxn)))))
+    nH2O <- subset(sres$reaction, formula == "H2O")$coeff
+    nO2 <- subset(sres$reaction, formula == "O2")$coeff
+    if(length(nH2O) == 0) nH2O <- 0
+    if(length(nO2) == 0) nO2 <- 0
+    # note negative sign here (reactants are "added" to the species)
+    list(rxn = rxn, nH2O = -nH2O, nO2 = -nO2)
+  })
+  out <- data.frame(
+    reaction = sapply(out, "[[", 1),
+    nH2O = sapply(out, "[[", 2),
+    nO2 = sapply(out, "[[", 3)
+  )
+  # sanity check: make sure the values calculated here are the
+  # same as those used in canprot::O2AA and canprot::H2OAA
+  AAcomp <- as.data.frame(diag(20))
+  names(AAcomp) <- aminoacids(3)
+  stopifnot(all.equal(out$nO2, O2AA(AAcomp, "biosynth"), check.attributes = FALSE))
+  stopifnot(all.equal(out$nH2O, H2OAA(AAcomp, "biosynth") - 1, check.attributes = FALSE))
+  # adjustments for pretty kable output
+  colnames(out) <- c("reaction", "*n*~H2O~", "*n*~O2~")
+  out
 }
 
 #########################

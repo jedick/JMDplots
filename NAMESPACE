@@ -4,7 +4,8 @@ export(
   "gradox1", "gradox2", "gradoxS1", "gradoxS2", "gradox3", "gradox4", "gradox5",
   # chnszten paper 20190929
   "chnszten1", "chnszten4", "chnszten5", "chnszten6", "chnszten7",
-  "chnsztenS1", "chnsztenS2", "chnsztenS3", "chnsztenS4", "chnsztenS5", "chnsztenS6A", "chnsztenS6B", "chnsztenS7", "chnsztenS8", "chnsztenS9", "chnsztenS10",
+  "chnsztenS1", "chnsztenS2", "chnsztenS3", "chnsztenS4", "chnsztenS5",
+  "chnsztenS6A", "chnsztenS6B", "chnsztenS7", "chnsztenS8", "chnsztenS9", "chnsztenS10",
   # gradH2O paper 20190930-20191008
   "gradH2O1", "gradH2O2", "gradH2O3", "gradH2O4", "gradH2O5", "gradH2O6",
   # 20191104, 20191117
@@ -23,7 +24,9 @@ export(
   # utilities 20191027
   "addexif",
   # canH2O paper 20200203-20200204
-  "canH2O1", "pdat_HPA", "pdat_TCGA", "canH2O2", "canH2O3", "canH2O4", "canH2O5"
+  "canH2O1", "pdat_HPA", "pdat_TCGA", "canH2O2", "canH2O3", "canH2O4", "canH2O5",
+  # canH2O supplementary tables and figures 20200205
+  "canH2OT1", "canH2OT2", "canH2OT4"
 )
 
 # imports from CHNOSZ
@@ -61,7 +64,9 @@ importFrom("canprot",
   # for pdat_HPA() and pdat_TCGA() 20200204
   "cleanup", "protcomp",
   # for plotphylo() 20200204
-  "check_IDs"
+  "check_IDs",
+  # for canH2OT4() 20200205
+  "O2AA"
 )
 
 # imports from other packages
@@ -86,6 +91,6 @@ importFrom("graphics", "abline", "arrows", "axis", "box", "layout",
            "polygon", "hist", "plot.window", "rasterImage")
 importFrom("stats", "lm", "na.omit", "predict", "sd", "predict.lm", "residuals",
            "qqline", "qqnorm", "quantile", "median", "fivenum",
-           "density")
-importFrom("utils", "read.csv", "demo", "packageVersion", "tail", "write.csv")
+           "density", "formula", "t.test")
+importFrom("utils", "read.csv", "demo", "packageVersion", "tail", "write.csv", "capture.output")
 

@@ -6,9 +6,13 @@
 \alias{canH2O3}
 \alias{canH2O4}
 \alias{canH2O5}
+\alias{canH2OT1}
+\alias{canH2OT2}
+\alias{canH2OT4}
 \title{Plots from water in cancer paper}
 \description{
 Plots from the paper by Dick (2020).
+Function names ending with \samp{T*} and \samp{S*} refer to supplementary tables and figures.
 }
 
 \usage{
@@ -17,6 +21,9 @@ Plots from the paper by Dick (2020).
   canH2O3(pdf = FALSE)
   canH2O4(pdf = FALSE)
   canH2O5(pdf = FALSE)
+  canH2OT1()
+  canH2OT2()
+  canH2OT4()
 }
 
 \arguments{
@@ -28,10 +35,13 @@ This table gives a brief description of each function.
 
 \tabular{ll}{
   \code{canH2O1} \tab Study overview \cr
-  \code{canH2O2} \tab Median differences of protein length, \nH2O and \ZC for cell culture and cancer \cr
+  \code{canH2O2} \tab Median differences of protein length, \nH2O and \ZC for cell culture and cancer tissue \cr
   \code{canH2O3} \tab \nH2O-\ZC and phylostrata plots for TCGA and HPA datasets \cr
   \code{canH2O4} \tab Compositional analysis of phylostrata and phylostrata-nAA plots for cancer tissue \cr
   \code{canH2O5} \tab Plots with \nH2O and \nO2 of amino acid biosynthesis reactions \cr
+  \code{canH2OT1} \tab Stoichiometric matrix for amino acids with QEC basis species \cr
+  \code{canH2OT2} \tab Mean differences and \emph{p}-values across all datasets \cr
+  \code{canH2OT4} \tab Biosynthetic reactions for amino acids \cr
 }
 
 }

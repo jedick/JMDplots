@@ -41,7 +41,7 @@ library(JMDplots)
 canH2O1()
 ```
 
-## Median differences of protein length, `r nH2O` and `r ZC` for cell culture and cancer (Figure 2)
+## Median differences of protein length, `r nH2O` and `r ZC` for cell culture and cancer tissue (Figure 2)
 ```{r canH2O2, message = FALSE, fig.align='center', out.width='100%', fig.width = 9, fig.height = 6, pngquant = pngquant}
 canH2O2()
 ```
@@ -57,6 +57,25 @@ canH2O4()
 ```
 
 ## Plots with `r nH2O` and `r nO2` of amino acid biosynthesis reactions (Figure 5)
-```{r canH2O5, message = FALSE, results = "hide", fig.align='center', out.width='75%', fig.width = 6, fig.height = 6, pngquant = pngquant}
+```{r canH2O5, message = FALSE, fig.align='center', out.width='75%', fig.width = 6, fig.height = 6, pngquant = pngquant}
 canH2O5()
+```
+
+# Supplementary Tables and Figures
+
+## Stoichiometric matrix for amino acids with QEC basis species (Table S1)
+```{r canH2OT1}
+kable(canH2OT1())
+```
+
+## Mean differences and _p_-values across all datasets (Table S2)
+Mean differences are followed by log~10~ of _p_-value in parentheses.
+```{r canH2OT2}
+kable(canH2OT2(), align = "r")
+```
+
+## Biosynthetic reactions for amino acids (Table S4)
+Note: nH2O and nO2 are compositional amounts (opposite of the reaction coefficients).
+```{r canH2OT4, message = FALSE}
+kable(canH2OT4())
 ```
