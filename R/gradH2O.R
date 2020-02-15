@@ -125,7 +125,7 @@ gradH2O2 <- function(pdf = FALSE, vars = "H2O-ZC") {
     text(c(5.00, 7.49, 5.65, 5.68), c(-0.123, -0.130, -0.109, -0.066), c("Nif-D", "Nif-C", "Nif-B", "Nif-A"), adj = 0)
     text(c(5.37, 5.42, 5.57), c(-0.158, -0.176, -0.216), c("1 mm", "2 mm", "3 mm"), adj = 1)
   }
-  title("redox gradients", font.main = 1)
+  title("Redox gradients", font.main = 1)
   label.figure("A", cex = 2, xfrac = 0.035)
 
   # plot 2: compare ZC and nH2O of proteins in Baltic Sea surface
@@ -247,10 +247,11 @@ gradH2O4 <- function(pdf = FALSE) {
   # add hypersaline water data
   moutH <- ppage("hypersaline", plot.it = FALSE)
   poutH <- ppage("hypersaline", H2O = TRUE, plot.it = FALSE)
-  pcomp(moutH, poutH, reorder = FALSE, add = TRUE)
+  pcomp(moutH, poutH, reorder = FALSE, add = TRUE, labdx = 0.006, labdy = 0.004)
   hullfun(moutH, poutH, 1:3, "turquoise3")
   text(c(-0.16, -0.16, -0.12), c(0.037, -0.007, -0.002), c("freshwater", "marine", "hypersaline"))
   legend("bottomright", c("lower salinity", "higher salinity"), pch = c(0, 15), col = "turquoise3", bty = "n")
+  legend("bottomright", c("hypersaline datasets", "", ""), bty = "n")
   title("Freshwater - marine - hypersaline", font.main = 1)
   label.figure("C", xfrac = 0.1, cex = 1.8)
 
@@ -258,7 +259,7 @@ gradH2O4 <- function(pdf = FALSE) {
   pcomp(moutE, poutE, lty = 0, yline = 3, vars = "pIG", labels.at = NA, cex.ylab = 0.9)
   hullfun(moutE, poutE, 1, "green3", vars = "pIG")
   hullfun(moutE, poutE, 2, "blue", vars = "pIG")
-  pcomp(moutH, poutH, reorder = FALSE, add = TRUE, vars = "pIG", labels.at = "min")
+  pcomp(moutH, poutH, reorder = FALSE, add = TRUE, vars = "pIG", labels.at = "min", labdx = -0.25)
   hullfun(moutH, poutH, 1:3, "turquoise3", vars = "pIG")
   text(c(7.5, 7.4, 6.3), c(-0.14, -0.20, -0.27), c("freshwater", "marine", "hypersaline"))
   title("Freshwater - marine - hypersaline", font.main = 1)

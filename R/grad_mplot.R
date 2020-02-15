@@ -290,7 +290,7 @@ ppage <- function(subset = "gradoxSI", H2O = FALSE, set.par = TRUE, plot.it = TR
 # mout <- mpage(H2O=TRUE); pout <- ppage(H2O=TRUE); pcomp(mout, pout)
 pcomp <- function(mout, pout, seqtype="MG", vars = NULL, parts=c("plot", "legend"), yline = 2,
                   xlim = NULL, ylim = NULL, reorder = TRUE, plot.techtype = FALSE, add = FALSE,
-                  pch = NULL, lty = 2, labels.at = "max", cex.ylab = 1, font = 1) {
+                  pch = NULL, lty = 2, labels.at = "max", cex.ylab = 1, font = 1, labdx = NULL, labdy = NULL) {
   # determine plot type: 20191024
   # ZC - ZC of protein vs DNA
   # H2O-ZC - nH2O vs ZC of protein
@@ -427,14 +427,18 @@ pcomp <- function(mout, pout, seqtype="MG", vars = NULL, parts=c("plot", "legend
       if(any(i1)) points(xvals[i1], yvals[i1], pch=pch0[i1], col="green3", cex=cex0[i1])
       # get abbreviation for this study
       abbrev <- pout[[ipout]][["abbrev"]]
-      dx <- pout[[ipout]][["dx"]][[seqtype]]
-      dy <- pout[[ipout]][["dy"]][[seqtype]]
-      if(is.null(dx) | vars!="ZC") dx <- 0
-      if(is.null(dy) | vars!="ZC") {
-        if(vars=="H2O-ZC") dy <- 0.002
-        else if(vars=="pIG") dy <- 0.005
-        else dy <- 0.003
-      }
+      if(is.null(labdx)) {
+        dx <- pout[[ipout]][["dx"]][[seqtype]]
+        if(is.null(dx) | vars!="ZC") dx <- 0
+      } else dx <- labdx
+      if(is.null(labdy)) {
+        dy <- pout[[ipout]][["dy"]][[seqtype]]
+        if(is.null(dy) | vars!="ZC") {
+          if(vars=="H2O-ZC") dy <- 0.002
+          else if(vars=="pIG") dy <- 0.005
+          else dy <- 0.003
+        }
+      } else dy <- labdy
       # add text label
       if(!is.na(labels.at)) {
         if(labels.at=="max") {

@@ -20,13 +20,6 @@
 # NOTE: Fig5() generates some expected messages about
 # missing files, indicating samples where data are not available.
 
-## requires CHNOSZ 1.1.3
-#library(CHNOSZ)
-#data(thermo)
-#
-## code for mpage/ppage/pcomp/mplot (Figures 2, 3, 4, 5)
-#source("MG.R")
-
 # general characteristics of ZC of DNA, RNA and proteins
 gradox1 <- function(pdf=FALSE) {
   if(pdf) pdf("gradox1.pdf", width=8, height=6)
@@ -112,7 +105,7 @@ gradox3 <- function(mout, pout, pdf=FALSE) {
   layout(mat)
   par(mar=c(4, 5, 2, 1), cex=0.8, las=1)
   # metagenomes
-  pcomp(mout, pout, parts="plot")
+  pcomp(mout, pout, parts="plot", yline = 3.4)
   title(main="Metagenomes")
   label.figure("A", font=2, cex=1.7, yfrac=0.97)
   # legend
