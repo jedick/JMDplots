@@ -621,7 +621,7 @@ canH2OS1 <- function(pdf = FALSE) {
 
   # plot 1: nH2O-ZC of amino acid residues (QEC)
   # subtract 1 to make residues
-  aaplot(ZCAA(AAcomp), H2OAA(AAcomp, "QEC") - 1, ZClab, nH2Olab.QEC, "bottomright") - 0.355
+  aaplot(ZCAA(AAcomp), H2OAA(AAcomp, "QEC") - 1, ZClab, nH2Olab.QEC, "bottomright")
   label.figure("A", cex = 1.7, font = 2)
 
   # plot 2: nH2O-ZC of amino acid residues (rQEC)
@@ -629,12 +629,12 @@ canH2OS1 <- function(pdf = FALSE) {
   aaplot(ZCAA(AAcomp), H2OAA(AAcomp, "rQEC") - 1, ZClab, nH2Olab.rQEC, "bottomright")
   label.figure("B", cex = 1.7, font = 2)
 
-  # plot nO2(biosynth) vs ZC for amino acids
+  # plot 3: nO2(biosynth) vs ZC for amino acids
   nO2lab.bio <- quote(italic(n)[O[2]]~"(biosynthetic)")
   aaplot(ZCAA(AAcomp), O2AA(AAcomp, "biosynth"), ZClab, nO2lab.bio, "bottomright")
   label.figure("C", cex = 1.7, font = 2)
 
-  # plot nH2O(biosynth) vs nH2O(rQEC) for amino acid residues
+  # plot 4: nH2O(biosynth) vs nH2O(rQEC) for amino acid residues
   nH2Olab.bio <- quote(italic(n)[H[2] * O]~"(biosynthetic)")
   aaplot(H2OAA(AAcomp, "rQEC") - 1, H2OAA(AAcomp, "biosynth") - 1, nH2Olab.rQEC, nH2Olab.bio, "bottomright", lmlim = H2OAA(AAcomp, "rQEC") - 1)
   label.figure("D", cex = 1.7, font = 2)
