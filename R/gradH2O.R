@@ -89,7 +89,7 @@ gradH2O2 <- function(pdf = FALSE, vars = "H2O-ZC") {
   # plot 1: compare ZC and nH2O of proteins in datasets from gradox paper
   mgradox <- ppage("gradoxGS", plot.it = FALSE)
   pgradox <- ppage("gradoxGS", H2O = TRUE, plot.it = FALSE)
-  pcomp(mgradox, pgradox, reorder = FALSE, yline = 3.2, vars = vars, cex.ylab = 1.8, font = 2)
+  pcomp(mgradox, pgradox, reorder = FALSE, yline = 3.2, vars = vars, cex.ylab = 1.8, font = 2, labdy = 0.003)
   # add proteomes from Nif-encoding genomes 20191014
   np <- NifProteomes()
   if(vars == "H2O-ZC") {
@@ -119,7 +119,7 @@ gradH2O2 <- function(pdf = FALSE, vars = "H2O-ZC") {
     text(-0.1615, 0.005, "sea-", adj = 0, cex = 0.8)
     text(-0.1615, 0.0025, "water", adj = 0, cex = 0.8)
     text(c(-0.188, -0.212, -0.186, -0.161), c(0.0455, 0.0344, 0.0257, 0.0248), c("Nif-D", "Nif-C", "Nif-B", "Nif-A"), adj = 0, cex = 0.8)
-    text(-0.217, 0.0315, "NF", cex=0.7, font = 2)
+    text(-0.218, 0.0365, "NF", cex=0.7, font = 2)
   }
   if(vars == "pIG") {
     text(c(5.00, 7.49, 5.65, 5.68), c(-0.123, -0.130, -0.109, -0.066), c("Nif-D", "Nif-C", "Nif-B", "Nif-A"), adj = 0)
