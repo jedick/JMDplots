@@ -43,7 +43,7 @@ This table gives a brief description of each function.
   \code{gradH2O3} \tab \nH2O for Baltic Sea metagenome and metatranscriptome in different size fractions \cr
   \code{gradH2O4} \tab \nH2O-\ZC for freshwater, marine, and hypersaline environments \cr
   \code{gradH2O5} \tab Mean differences of compositional metrics for differentially expressed proteins in osmotic stress \cr
-  \code{gradH2O6} \tab Basis species comparison \cr
+  \code{gradH2O6} \tab Derivation of stoichiometric hydration state \cr
   \code{gradH2OS1} \tab Scatterplots of GRAVY vs \ZC and \nH2O \cr
 }
 
@@ -53,6 +53,7 @@ The organisms are limited to those that have at least 1000 RefSeq protein sequen
 
 \section{Files in extdata/gradH2O}{
   \describe{
+    \item{\code{Table_S1.xlsx}}{Accession numbers used and sequence processing statistics.}
     \item{\code{MGP}}{Amino acid compositions sampled from metagenomically derived protein sequences, generated as described in \code{\link{gradox}}.}
     \item{\code{mkrds.R}}{Script to make the RDS files from multiple CSV files produced by the \dQuote{ARAST} workflow.}
     \item{\code{Nif_homolog_genomes.csv}, \code{Nif_homolog_genomes.R}}{

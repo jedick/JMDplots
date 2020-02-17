@@ -475,7 +475,7 @@ gradH2O6 <- function(pdf = FALSE) {
 
   if(pdf) {
     dev.off()
-    addexif("gradH2O6", "Basis species comparison and stoichiometric hydration state", "Dick et al. (2020) (preprint)")
+    addexif("gradH2O6", "Derivation of stoichiometric hydration state", "Dick et al. (2020) (preprint)")
   }
   ## output value of rQEC for checking code of H2OAA()
   #rQEC
