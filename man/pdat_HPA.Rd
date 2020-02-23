@@ -40,7 +40,6 @@ Uhlen, M. et al. (2015) A pathology atlas of the human cancer transcriptome. \em
 }
 
 \examples{
-library(CHNOSZ)
 # list names of datasets for cancer types
 pdat_HPA(2020)
 # process one dataset (breast cancer)

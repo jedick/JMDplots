@@ -1,7 +1,7 @@
 \encoding{UTF-8}
 \name{pdat_TCGA}
 \alias{pdat_TCGA}
-\title{Get Protein Expression Data}
+\title{Get Protein (from Gene) Expression Data}
 \description{
   Calculate chemical composition for proteins corresponding to differentially expressed genes listed by GEPIA2 (Tang et al., 2019).
   Expression levels for normal tissue and cancer are from the Genotype-Tissue Expression project (GTEx Consortium, 2017) and The Cancer Genome Atlas (TCGA Research Network et al., 2013; Hutter and Zenklusen, 2018).
@@ -46,7 +46,6 @@ The Cancer Genome Atlas Research Network et al. (2013) The Cancer Genome Atlas P
 }
 
 \examples{
-library(CHNOSZ)
 # list names of datasets for each cancer type
 pdat_TCGA(2020)
 # process one dataset (adrenocortical carcinoma)

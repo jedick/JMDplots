@@ -27,7 +27,9 @@ export(
   "canH2O1", "pdat_HPA", "pdat_TCGA", "canH2O2", "canH2O3", "canH2O4", "canH2O5",
   # canH2O supplementary tables and figures 20200205
   "canH2OT1", "canH2OT2", "canH2OT4",
-  "canH2OS1", "canH2OS2", "canH2OS3"
+  "canH2OS1", "canH2OS2", "canH2OS3",
+  # canH2O paper 20200223
+  "pdat_CH16"
 )
 
 # imports from CHNOSZ

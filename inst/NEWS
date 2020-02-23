@@ -1,3 +1,8 @@
+CHANGES IN JMDplots 1.0.2
+-------------------------
+
+- 20200223 Add pdat_CH16(), used in canH2O2().
+
 CHANGES IN JMDplots 1.0.1
 -------------------------
 

@@ -216,7 +216,11 @@ canH2O2 <- function(pdf = FALSE) {
   contplot(culture, "Cell culture", col1, ylim = c(-0.06, 0.04), dx = c(0.023, 0.022, 0.015, -0.012), dy = c(-0.005, -0.025, 0.028, -0.01), names = names)
   label.figure("C", cex = 2, font = 2)
   contplot(cancer, "Cancer tissue", col2, ylim = c(-0.04, 0.06), dx = c(0.015, 0.012, -0.005, -0.025, -0.006), dy = c(0.025, -0.035, -0.035, 0.035, -0.02))
-  contplot(pancan, "Pan-cancer", c("darkslategray4", "slateblue4"), dx = c(0.015, -0.02), dy = c(0.012, 0.012))
+  contplot(pancan, "Pan-cancer", c("darkslategray4", "slateblue4"), dx = c(0.02, -0.02), dy = c(-0.003, 0.012))
+  # add point for common gene expression changes in cancer (Chen and He, 2016) 20200223
+  ct <- get_comptab(pdat_CH16("CH16"))
+  points(ct$ZC.diff, ct$nH2O.diff, pch = 8, cex = 1.2)
+  text(ct$ZC.diff, ct$nH2O.diff, "CH16", adj = -0.25)
 
   if(pdf) {
     dev.off()
