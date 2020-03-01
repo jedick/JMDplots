@@ -1,5 +1,5 @@
 ---
-title: "Five plots from water in cancer paper (2020)"
+title: "Eight plots from water in cancer paper (2020)"
 output: 
   rmarkdown::html_vignette:
     mathjax: null
