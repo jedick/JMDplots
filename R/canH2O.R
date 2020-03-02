@@ -599,19 +599,6 @@ canH2OS1 <- function(pdf = FALSE) {
   nO2lab <- expression(italic(n)[O[2]])
   ZClab <- expression(italic(Z)[C])
 
-  # function to plot linear model
-  lmfun <- function(ZC, nH2O, legend.x = NULL, lmlim = c(-1, 1), ...) {
-    mylm <- lm(nH2O ~ ZC)
-    lines(lmlim, predict(mylm, data.frame(ZC = lmlim)), ...)
-    # add R-squared text
-    if(!is.null(legend.x)) {
-      R2 <- format(round(summary(mylm)$r.squared, 2), nsmall = 2)
-      R2txt <- substitute(italic(R)^2 == R2, list(R2 = R2))
-      legend(legend.x, legend = R2txt, bty = "n")
-    }
-    invisible(round(residuals(mylm), 3))
-  }
-
   # function to plot values for amino acids
   aaplot <- function(x, y, xlab, ylab, legend.x, lmlim = c(-1, 1)) {
     plot(x, y, type = "p", pch = aminoacids(1), xlab = xlab, ylab = NA)
@@ -759,6 +746,45 @@ canH2OS3 <- function(pdf = FALSE) {
   if(pdf) {
     dev.off()
     addexif("canH2OS3", "Trigos and Liebeskind phylostrata against ZC and nH2O for cancer tissue", "Dick (2020) (preprint)")
+  }
+}
+
+# Scatterplots of hypoxia scores and ZC or nH2O for TCGA or HPA datasets 20200224
+canH2OS4 <- function(pdf = FALSE) {
+  if(pdf) pdf("canH2OS4.pdf", width = 6, height = 6)
+  # get TCGA and HPA data
+  vigout2 <- system.file("extdata/vignette_output", package = "JMDplots")
+  HPA <- read.csv(file.path(vigout2, "HPA.csv"), as.is = TRUE)
+  TCGA <- read.csv(file.path(vigout2, "TCGA.csv"), as.is = TRUE)
+  # map HPA datasets to TCGA abbreviations
+  iHPA <- match(HTmap, HPA$description)
+  iTCGA <- match(names(HTmap), TCGA$description)
+  HPA$description[iHPA] <- TCGA$description[iTCGA]
+  # read hypoxia scores
+  file <- system.file("extdata/canH2O/BHL+19_Fig1a.csv", package = "JMDplots")
+  scores <- read.csv(file, as.is = TRUE)
+
+  # function to plot values and regression line
+  myplot <- function(x, y, xlab, ylab, main = NULL, legend.x = NULL, lmlim = NULL) {
+    plot(x, y, type = "p", xlab = xlab, ylab = ylab, main = main)
+    lmfun(x, y, legend.x, lmlim)
+  }
+  # scatterplots of TCGA and HPA metrics vs hypoxia score
+  par(mfrow = c(2, 2))
+  par(mar = c(4, 4, 2, 1), mgp = c(2.3, 1, 0))
+  iTCGA <- match(scores$cancer, TCGA$description)
+  myplot(scores$score, TCGA$ZC.diff[iTCGA], xlab = "hypoxia score", ylab = canprot::cplab$DZC, legend.x = "bottomright")
+  label.figure("A", cex = 1.7, font = 2, yfrac = 0.96, xfrac = 0.05)
+  myplot(scores$score, TCGA$nH2O_rQEC.diff[iTCGA], xlab = "hypoxia score", ylab = canprot::cplab$DnH2O, legend.x = "bottomleft")
+  label.figure("B", cex = 1.7, font = 2, yfrac = 0.96, xfrac = 0.05)
+  iHPA <- match(scores$cancer, HPA$description)
+  myplot(scores$score, HPA$ZC.diff[iHPA], xlab = "hypoxia score", ylab = canprot::cplab$DZC, legend.x = "topleft")
+  label.figure("C", cex = 1.7, font = 2, yfrac = 0.96, xfrac = 0.05)
+  myplot(scores$score, HPA$nH2O_rQEC.diff[iHPA], xlab = "hypoxia score", ylab = canprot::cplab$DnH2O, legend.x = "topright")
+  label.figure("D", cex = 1.7, font = 2, yfrac = 0.96, xfrac = 0.05)
+  if(pdf) {
+    dev.off()
+    addexif("canH2OS4", "Scatterplots of hypoxia scores and ZC or nH2O for TCGA or HPA datasets", "Dick (2020) (preprint)")
   }
 }
 
@@ -1088,3 +1114,17 @@ plotphylo <- function(vars = c("ZC", "nH2O"), basis = "rQEC", PS_source = "TPPG1
   invisible(list(dat = dat, pcomp = pcomp))
 }
 
+# function to plot linear model
+# extracted from canH2OS1 20200224
+lmfun <- function(x, y, legend.x = NULL, lmlim = NULL, ...) {
+  mylm <- lm(y ~ x)
+  if(is.null(lmlim)) lmlim <- range(x)
+  lines(lmlim, predict(mylm, data.frame(x = lmlim)), ...)
+  # add R-squared text
+  if(!is.null(legend.x)) {
+    R2 <- format(round(summary(mylm)$r.squared, 2), nsmall = 2)
+    R2txt <- substitute(bolditalic(R)^bold("2")*bold(" = "*R2), list(R2 = R2))
+    legend(legend.x, legend = R2txt, bty = "n")
+  }
+  invisible(round(residuals(mylm), 3))
+}

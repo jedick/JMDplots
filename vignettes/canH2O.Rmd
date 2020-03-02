@@ -95,3 +95,8 @@ canH2OS2()
 canH2OS3()
 ```
 
+## Scatterplots of hypoxia scores and `r ZC` or `r nH2O` for TCGA or HPA datasets (Figure S4)
+```{r canH2OS4, message = FALSE, fig.align='center', out.width='75%', fig.width = 6, fig.height = 6, pngquant = pngquant}
+canH2OS4()
+```
+

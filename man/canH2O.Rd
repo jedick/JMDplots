@@ -12,6 +12,7 @@
 \alias{canH2OS1}
 \alias{canH2OS2}
 \alias{canH2OS3}
+\alias{canH2OS4}
 \title{Plots from water in cancer paper}
 \description{
 Plots from the paper by Dick (2020).
@@ -30,6 +31,7 @@ Function names ending with \samp{T*} and \samp{S*} refer to supplementary tables
   canH2OS1(pdf = FALSE)
   canH2OS2(pdf = FALSE)
   canH2OS3(pdf = FALSE)
+  canH2OS4(pdf = FALSE)
 }
 
 \arguments{
@@ -51,11 +53,20 @@ This table gives a brief description of each function.
   \code{canH2OS1} \tab rQEC derivation and comparison with biosynthetic reactions \cr
   \code{canH2OS2} \tab HPA-TCGA scatterplots for \ZC and \nH2O \cr
   \code{canH2OS3} \tab Trigos and Liebeskind phylostrata against \ZC and \nH2O for cancer tissue \cr
+  \code{canH2OS4} \tab Scatterplots of hypoxia scores and \ZC or \nH2O for TCGA or HPA datasets \cr
+}
 }
 
+\section{Files in extdata/canH2O}{
+  \describe{
+    \item{\code{BHL+19_Fig1a.csv}}{Median hypoxia scores for different cancer types, digitized from Figure 1a of Bhandari et al. (2019).}
+  }
 }
+
 
 \references{
+Bhandari, V. et al. (2019) Molecular landmarks of tumor hypoxia across cancer types. \emph{Nat. Genet.} \bold{51}, 308--318. \doi{10.1038/s41588-018-0318-2}
+
 Dick, J. M. (2020) Water as a reactant in the differential expression of proteins in cancer. \emph{(preprint)}
 }
 
