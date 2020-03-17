@@ -8,7 +8,7 @@
 \alias{canH2O5}
 \alias{canH2OT1}
 \alias{canH2OT2}
-\alias{canH2OT4}
+\alias{canH2OT3}
 \alias{canH2OS1}
 \alias{canH2OS2}
 \alias{canH2OS3}
@@ -27,7 +27,7 @@ Function names ending with \samp{T*} and \samp{S*} refer to supplementary tables
   canH2O5(pdf = FALSE)
   canH2OT1()
   canH2OT2()
-  canH2OT4()
+  canH2OT3()
   canH2OS1(pdf = FALSE)
   canH2OS2(pdf = FALSE)
   canH2OS3(pdf = FALSE)
@@ -49,7 +49,7 @@ This table gives a brief description of each function.
   \code{canH2O5} \tab Plots with \nH2O and \nO2 of amino acid biosynthesis reactions \cr
   \code{canH2OT1} \tab Stoichiometric matrix for amino acids with QEC basis species \cr
   \code{canH2OT2} \tab Mean differences and \emph{p}-values across all datasets \cr
-  \code{canH2OT4} \tab Biosynthetic reactions for amino acids \cr
+  \code{canH2OT3} \tab Biosynthetic reactions for amino acids \cr
   \code{canH2OS1} \tab rQEC derivation and comparison with biosynthetic reactions \cr
   \code{canH2OS2} \tab HPA-TCGA scatterplots for \ZC and \nH2O \cr
   \code{canH2OS3} \tab Trigos and Liebeskind phylostrata against \ZC and \nH2O for cancer tissue \cr

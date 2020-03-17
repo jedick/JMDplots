@@ -68,12 +68,12 @@ canH2O1 <- function(pdf = FALSE) {
   textplain(pos[p4, ] + c(0, 0.2), lab = c("Cancer", "vs normal"), font = 2, height = 0.04)
 
   textrect(pos[p5, ] + c(0, 0.08), r5, ry, lab = "", cex = cex, box.col = cols[3])
-  # write "secreted in hypoxia" and "3D growth" 20200118
+  # write "secreted in hypoxia" and "3D culture" 20200118
   culab <- paste(sapply(culture, nrow), cond1)
   shlab <- c(paste(culab[3], "in"), "hypoxia")
   textplain(pos[p5, ] + c(0, 0.065), lab = shlab, height = 0.038, cex = cex)
   culab <- c(culab[1:2], "", "", culab[4])
-  culab[5] <- paste(culab[5], "growth")
+  culab[5] <- paste(culab[5], "culture")
   textplain(pos[p5, ] + c(0, 0.08), lab = culab, height = 0.09, cex = cex)
   textplain(pos[p5, ] + c(0, 0.2), lab = c("Cell", "culture"), font = 2, height = 0.04)
 
@@ -272,10 +272,12 @@ canH2O3 <- function(pdf = FALSE) {
   )
   # create plots
   nudge_x <- ifelse(TCGA_labels %in% c("SKCM"), 0.001, 0)
+  # workaround for "no visible binding for global variable ‘ZC.diff’" etc. in R CMD check 20200317
+  ZC.diff <- nH2O_rQEC.diff <- NULL
   pl1 <- list(
-    ggplot(TCGA, aes(TCGA$ZC.diff, TCGA$nH2O_rQEC.diff, label = TCGA_labels)) + ggrepel::geom_text_repel(size = 2.5, nudge_x = nudge_x) +
+    ggplot(TCGA, aes(ZC.diff, nH2O_rQEC.diff, label = TCGA_labels)) + ggrepel::geom_text_repel(size = 2.5, nudge_x = nudge_x) +
       pl1.common + geom_point(color = colTCGA, size = sizeTCGA, shape = shapeTCGA, stroke = 1.5) + ggtitle("TCGA/GTEx") + labs(tag = expression(bold(A))),
-    ggplot(HPA, aes(HPA$ZC.diff, HPA$nH2O_rQEC.diff, label = HPA_labels)) + ggrepel::geom_text_repel(size = 3) +
+    ggplot(HPA, aes(ZC.diff, nH2O_rQEC.diff, label = HPA_labels)) + ggrepel::geom_text_repel(size = 3) +
       pl1.common + geom_point(color = colHPA, size = sizeHPA, shape = shapeHPA, stroke = 1.5) + ggtitle("HPA") + labs(tag = expression(bold(B)))
   )
 
@@ -283,7 +285,8 @@ canH2O3 <- function(pdf = FALSE) {
   iHPA <- match(HTmap, HPA$description)
   iTCGA <- match(names(HTmap), TCGA$description)
   df <- data.frame(x = rep(c(0.8, 2.2), each = 9), y = rep(8:0, 2))
-  pl2 <- ggplot(df, aes(df$x, df$y, label = TCGA_labels[iTCGA])) + xlim(-0.2, 2.8) + ylim(-1.5, 9.5) +
+  x <- y <- NULL
+  pl2 <- ggplot(df, aes(x, y, label = TCGA_labels[iTCGA])) + xlim(-0.2, 2.8) + ylim(-1.5, 9.5) +
            theme_void() + geom_text(hjust = 1, nudge_x = -0.03) +
            annotate("text", label = HPA_labels[iHPA], x = df$x, y = df$y, hjust = 0) +
            annotate("text", label = "TCGA - HPA pairs", x = 1.5, y = 9, vjust = 0, size = 5) +
@@ -447,7 +450,7 @@ canH2O5 <- function(pdf = FALSE) {
   names[1] <- "hyp-\noxia"
   names[2] <- "hyper-\nosmotic"
   contplot(culture, "Cell culture", col1, "nO2_biosynth", "nH2O_biosynth", xlim = c(-0.15, 0.1), ylim = c(-0.1, 0.1),
-           dx = c(-0.05, 0.05, -0.1, 0.004), dy = c(0.072, -0.06, -0.025, 0.01), labtext = "AA biosynthesis", names = names)
+           dx = c(-0.066, 0.05, -0.1, 0.004), dy = c(0.078, -0.06, -0.025, 0.01), labtext = "AA biosynthesis", names = names)
   label.figure("D", font = 2, cex = 1.7, yfrac = 0.97, xfrac = 0.03)
 
   if(pdf) {
@@ -456,23 +459,9 @@ canH2O5 <- function(pdf = FALSE) {
   }
 }
 
-#############################
-### SI TABLES AND FIGURES ###
-#############################
-
-# stoichiometric matrix for amino acids with QEC basis species 20200104
-canH2OT1 <- function() {
-  basis("QEC")
-  species(aminoacids(""))
-  out <- species()[, c(9, 1:5)]
-  # subtract 1 H2O to make residues
-  out$H2O <- out$H2O - 1
-  # adjustments for pretty kable output
-  rownames(out) <- out[, 1]
-  out <- out[, -1]
-  colnames(out) <- gsub("([[:digit:]])", "~\\1~", colnames(out))
-  out
-}
+###############
+### TABLE 2 ###
+###############
 
 # mean differences and p-values across all datasets 20200125
 canH2OT2 <- function() {
@@ -531,9 +520,27 @@ canH2OT2 <- function() {
   mdat
 }
 
+#############################
+### SI TABLES AND FIGURES ###
+#############################
+
+# stoichiometric matrix for amino acids with QEC basis species 20200104
+canH2OT1 <- function() {
+  basis("QEC")
+  species(aminoacids(""))
+  out <- species()[, c(9, 1:5)]
+  # subtract 1 H2O to make residues
+  out$H2O <- out$H2O - 1
+  # adjustments for pretty kable output
+  rownames(out) <- out[, 1]
+  out <- out[, -1]
+  colnames(out) <- gsub("([[:digit:]])", "~\\1~", colnames(out))
+  out
+}
+
 # biosynthetic reactions for amino acids 20200104
 # adapted from ?canprot::metrics
-canH2OT4 <- function() {
+canH2OT3 <- function() {
   # This shows how the stoichiometric coefficients of H2O and O2
   # in biosynthetic reactions were obtained. The list of precursors is based on
   # https://upload.wikimedia.org/wikipedia/commons/2/21/Amino_acid_biosynthesis_overview.png
@@ -680,10 +687,10 @@ canH2OS2 <- function(pdf = FALSE) {
   shape <- 15
 
   r.squared.ZC <- format(summary(lm(HPA ~ TCGA, ZC))$r.squared, digits = 2)
-  ZC.title <- substitute(italic(R)^2 == r.squared, list(r.squared = r.squared.ZC))
+  ZC.title <- paste0("italic(R)^2 == '", r.squared.ZC, "'")
   pl1 <- ggplot(ZC, aes(x = TCGA, y = HPA, label = labels)) +
     theme_classic() + geom_smooth(method = "lm") +
-    annotate("text", -Inf, Inf, label = ZC.title, hjust = -0.2, vjust = 1.5) +
+    annotate("text", -Inf, Inf, label = ZC.title, parse = TRUE, hjust = -0.2, vjust = 1.5) +
     xlab(quote(Delta*italic(Z)[C]*" (TCGA/GTEx)")) +
     ylab(quote(Delta*italic(Z)[C]*" (HPA)")) +
     geom_hline(yintercept = 0, linetype = 3, colour = "gray30") +
@@ -696,10 +703,10 @@ canH2OS2 <- function(pdf = FALSE) {
   pl1 <- list(pl1)
 
   r.squared.nH2O <- format(summary(lm(HPA ~ TCGA, nH2O))$r.squared, digits = 2)
-  nH2O.title <- substitute(italic(R)^2 == r.squared, list(r.squared = r.squared.nH2O))
+  nH2O.title <- paste0("italic(R)^2 == '", r.squared.nH2O, "'")
   pl2 <- ggplot(nH2O, aes(x = TCGA, y = HPA, label = labels)) +
     theme_classic() + geom_smooth(method = "lm") +
-    annotate("text", -Inf, Inf, label = nH2O.title, hjust = -0.2, vjust = 1.5) +
+    annotate("text", -Inf, Inf, label = nH2O.title, parse = TRUE, hjust = -0.2, vjust = 1.5) +
     xlab(quote(Delta*italic(n)[H[2]*O]*" (TCGA/GTEx)")) +
     ylab(quote(Delta*italic(n)[H[2]*O]*" (HPA)")) +
     geom_hline(yintercept = 0, linetype = 3, colour = "gray30") +

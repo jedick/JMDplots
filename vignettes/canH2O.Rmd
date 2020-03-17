@@ -61,6 +61,14 @@ canH2O4()
 canH2O5()
 ```
 
+## Mean differences and _p_-values across all datasets (Table 2)
+Mean differences are followed by log~10~ of _p_-value in parentheses.
+Mean differences are computed as (mean of median values for up-regulated proteins in each dataset) - (mean of median values for down-regulated proteins in each dataset).
+The rows labelled "up" and "down" refer to (mean of median values for [up- or down-]regulated proteins in secreted proteins in hypoxia) - (mean of median values for [up-or down-]regulated proteins in whole-cell extracts in hypoxia).
+```{r canH2OT2}
+kable(canH2OT2(), align = "r")
+```
+
 # Supplementary Tables and Figures
 
 ## Stoichiometric matrix for amino acids with QEC basis species (Table S1)
@@ -68,16 +76,10 @@ canH2O5()
 kable(canH2OT1())
 ```
 
-## Mean differences and _p_-values across all datasets (Table S2)
-Mean differences are followed by log~10~ of _p_-value in parentheses.
-```{r canH2OT2}
-kable(canH2OT2(), align = "r")
-```
-
-## Biosynthetic reactions for amino acids (Table S4)
+## Biosynthetic reactions for amino acids (Table S3)
 Note: nH2O and nO2 are compositional amounts (opposite of the reaction coefficients).
-```{r canH2OT4, message = FALSE}
-kable(canH2OT4())
+```{r canH2OT3, message = FALSE}
+kable(canH2OT3())
 ```
 
 ## rQEC derivation and comparison with biosynthetic reactions (Figure S1)
