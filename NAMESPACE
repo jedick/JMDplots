@@ -84,7 +84,8 @@ importFrom("diagram", "openplotmat", "coordinates", "straightarrow", "curvedarro
 importFrom("ggplot2", "theme_bw", "xlab", "ylab", "geom_hline", "geom_vline", "theme",
            "element_text", "ggplot", "aes", "geom_point", "ggtitle", "labs", "xlim", "ylim",
            "theme_void", "geom_text", "annotate", "unit",
-           "ggplot_gtable", "ggplot_build", "theme_classic", "element_rect", "ggsave", "geom_smooth")
+           "ggplot_gtable", "ggplot_build", "theme_classic", "element_rect", "ggsave",
+           "geom_smooth", "geom_contour")
 
 # imports from standard packages
 importFrom("grDevices", "dev.off", "cairo_pdf", "pdf", "blues9", "colorRampPalette",
@@ -96,6 +97,6 @@ importFrom("graphics", "abline", "arrows", "axis", "box", "layout",
            "polygon", "hist", "plot.window", "rasterImage")
 importFrom("stats", "lm", "na.omit", "predict", "sd", "predict.lm", "residuals",
            "qqline", "qqnorm", "quantile", "median", "fivenum",
-           "density", "formula", "t.test")
+           "density", "formula", "t.test", "approx")
 importFrom("utils", "read.csv", "demo", "packageVersion", "tail", "write.csv", "capture.output")
 

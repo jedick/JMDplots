@@ -242,21 +242,51 @@ canH2O3 <- function(pdf = FALSE) {
   cond2 <- c("colorectal", "pancreatic", "breast", "lung", "prostate")
   col2 <- palette.colors(8, "Classic Tableau")[c(6, 5, 7, 8, 4)]
   jHPA <- match(cond2, sapply(strsplit(HPA$description, " "), "[", 1))
-  colHPA <- rep("slateblue4", nrow(HPA))
+  colHPA <- rep("darkslategray", nrow(HPA))
   colHPA[jHPA] <- col2
-  sizeHPA <- rep(1.5, nrow(HPA))
-  sizeHPA[jHPA] <- 2
   shapeHPA <- rep(15, nrow(HPA))
   shapeHPA[jHPA] <- 1
   # now do TCGA
   TCGAnames <- names(HTmap)[match(cond2, sapply(strsplit(HTmap, " "), "[", 1))]
   jTCGA <- match(TCGAnames, TCGA$description)
-  colTCGA <- rep("slateblue4", nrow(TCGA))
+  colTCGA <- rep("darkslategray", nrow(TCGA))
   colTCGA[jTCGA] <- col2
-  sizeTCGA <- rep(1.5, nrow(TCGA))
-  sizeTCGA[jTCGA] <- 2
   shapeTCGA <- rep(15, nrow(TCGA))
   shapeTCGA[jTCGA] <- 1
+
+  # calculate 2D density and 50% probability level 20200318
+  densfun <- function(x, y) {
+    n <- 200
+    dens <- kde2d(x, y, n = n)
+    # find 50% probability level
+    # https://stackoverflow.com/questions/16225530/contours-of-percentiles-on-level-plot
+    # (snippet from emdbook::HPDregionplot from @benbolker)
+    dx <- diff(dens$x[1:2])
+    dy <- diff(dens$y[1:2])
+    sz <- sort(dens$z)
+    c1 <- cumsum(sz) * dx * dy
+    probs <- 0.5
+    levels <- sapply(probs, function(x) {
+      approx(c1, sz, xout = 1 - x)$y
+    })
+    # turn density into data frame for ggplot
+    # get x- and y- values
+    xr <- range(x)
+    xs <- seq(xr[1], xr[2], length.out = n)
+    yr <- range(y)
+    ys <- seq(yr[1], yr[2], length.out = n)
+    dat <- expand.grid(xs, ys)
+    colnames(dat) <- c("x", "y")
+    dat <- cbind(dat, z = as.vector(dens$z))
+    list(levels = levels, dat = dat)
+  }
+
+  TCGAstuff <- densfun(TCGA$ZC.diff, TCGA$nH2O_rQEC.diff)
+  TCGAdens <- TCGAstuff$dat
+  TCGAlevels <- TCGAstuff$levels
+  HPAstuff <- densfun(HPA$ZC.diff, HPA$nH2O_rQEC.diff)
+  HPAdens <- HPAstuff$dat
+  HPAlevels <- HPAstuff$levels
 
   # median differences of nH2O-ZC for HPA and TCGA datasets
   # common elements for both plots
@@ -264,8 +294,6 @@ canH2O3 <- function(pdf = FALSE) {
     theme_bw(),
     xlab(canprot::cplab$DZC),
     ylab(canprot::cplab$DnH2O),
-#    coord_cartesian(xlim = range(HPA$ZC.diff, TCGA$ZC.diff),
-#                    ylim = range(HPA$nH2O_rQEC.diff, TCGA$nH2O_rQEC.diff)),
     geom_hline(yintercept = 0, linetype = 3, colour = "gray30"),
     geom_vline(xintercept = 0, linetype = 3, colour = "gray30"),
     theme(plot.tag = element_text(size = 20), plot.title = element_text(hjust = 0.5))
@@ -273,12 +301,18 @@ canH2O3 <- function(pdf = FALSE) {
   # create plots
   nudge_x <- ifelse(TCGA_labels %in% c("SKCM"), 0.001, 0)
   # workaround for "no visible binding for global variable ‘ZC.diff’" etc. in R CMD check 20200317
-  ZC.diff <- nH2O_rQEC.diff <- NULL
+  ZC.diff <- nH2O_rQEC.diff <- z <- NULL
   pl1 <- list(
-    ggplot(TCGA, aes(ZC.diff, nH2O_rQEC.diff, label = TCGA_labels)) + ggrepel::geom_text_repel(size = 2.5, nudge_x = nudge_x) +
-      pl1.common + geom_point(color = colTCGA, size = sizeTCGA, shape = shapeTCGA, stroke = 1.5) + ggtitle("TCGA/GTEx") + labs(tag = expression(bold(A))),
-    ggplot(HPA, aes(ZC.diff, nH2O_rQEC.diff, label = HPA_labels)) + ggrepel::geom_text_repel(size = 3) +
-      pl1.common + geom_point(color = colHPA, size = sizeHPA, shape = shapeHPA, stroke = 1.5) + ggtitle("HPA") + labs(tag = expression(bold(B)))
+    ggplot(TCGA, aes(ZC.diff, nH2O_rQEC.diff, label = TCGA_labels)) + 
+      pl1.common + geom_point(color = colTCGA, size = 1.5, shape = shapeTCGA, stroke = 1.5) + 
+      geom_contour(data = TCGAdens, aes(x, y, z = z), breaks = TCGAlevels, inherit.aes = FALSE, color = "slateblue4", lty = 2) +
+      ggrepel::geom_text_repel(size = 2.5, nudge_x = nudge_x, seed = 42, box.padding = 0.12, point.padding = 0.1) +
+      ggtitle("TCGA/GTEx") + labs(tag = expression(bold(A))),
+    ggplot(HPA, aes(ZC.diff, nH2O_rQEC.diff, label = HPA_labels)) + 
+      pl1.common + geom_point(color = colHPA, size = 1.5, shape = shapeHPA, stroke = 1.5) + 
+      geom_contour(data = HPAdens, aes(x, y, z = z), breaks = HPAlevels, inherit.aes = FALSE, color = "darkslategray4", lty = 2) +
+      ggrepel::geom_text_repel(size = 3, seed = 42) +
+      ggtitle("HPA") + labs(tag = expression(bold(B)))
   )
 
   # table of HPA-TCGA mappings
@@ -301,10 +335,8 @@ canH2O3 <- function(pdf = FALSE) {
   # use different symbols for 5 cancers in this paper
   TCGAnames <- names(HTmap)[match(cond2, sapply(strsplit(HTmap, " "), "[", 1))]
   kTCGA <- match(TCGAnames, TCGA$description[iTCGA])
-  col <- rep("slateblue4", nrow(dat))
+  col <- rep("darkslategray", nrow(dat))
   col[kTCGA] <- col2
-  size <- rep(1.5, nrow(dat))
-  size[kTCGA] <- 2
   shape <- rep(15, nrow(dat))
   shape[kTCGA] <- 21
   # use bold labels for cancers studied in Trigos et al., 2017
@@ -317,7 +349,7 @@ canH2O3 <- function(pdf = FALSE) {
     ylab(quote(Delta*"PS (HPA)")) +
     geom_hline(yintercept = 0, linetype = 3, colour = "gray30") +
     geom_vline(xintercept = 0, linetype = 3, colour = "gray30") +
-    geom_point(shape = shape, size = size, col = col, stroke = 1.5) +
+    geom_point(shape = shape, size = 1.5, col = col, stroke = 1.5) +
     ggrepel::geom_text_repel(size = 3, fontface = fontface, seed = 42) +
     labs(tag = expression(bold(C))) +
     theme(plot.tag = element_text(size = 20), plot.title = element_text(hjust = 0.5),
