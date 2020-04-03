@@ -12,7 +12,7 @@
 \alias{NifProteomes}
 \title{Plots from salinity gradients paper}
 \description{
-Plots from the paper by Dick et al. (2019).
+Plots from the paper by Dick et al. (2020).
 }
 
 \usage{
@@ -79,7 +79,7 @@ The organisms are limited to those that have at least 1000 RefSeq protein sequen
 }
 
 \references{
-Dick, J. M., Tan, J. and Yu, M. (2020) Geochemistry of metagenomes: Redox and salinity gradients and the chemical compositions of proteins. \emph{(preprint)}
+Dick, J. M., Yu, M. and Tan, J. (2020) Distinct trends in chemical composition of proteins from metagenomes in redox and salinity gradients. \emph{bioRxiv}. \doi{10.1101/2020.04.01.020008}
 
 Feist, A. M. et al. (2007) A genome-scale metabolic reconstruction for \emph{Escherichia coli} K-12 MG1655 that accounts for 1260 ORFs and thermodynamic information. \emph{Mol. Syst. Biol.} \bold{3}, 121. \doi{10.1038/msb4100155}
 

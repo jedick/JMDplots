@@ -17,7 +17,7 @@ Please refer to the supporting information of the papers for the original script
 \details{
   \itemize{
     \item \code{\link{canH2O}} - Water as a reactant in the differential expression of proteins in cancer (Dick, 2020)
-    \item \code{\link{gradH2O}} - Hydration state of metagenomes in salinity gradients (Dick et al., 2020)
+    \item \code{\link{gradH2O}} - Stoichiometric hydration state of metagenomes in salinity gradients (Dick et al., 2020)
     \item \code{\link{chnszten}} - CHNOSZ, ten years after first CRAN submission (Dick, 2019)
     \item \code{\link{gradox}} - Carbon oxidation state of metagenomes in redox gradients (Dick et al., 2019)
     \item \code{\link{aoscp}} - Average oxidation state of carbon in proteins (Dick, 2014)
@@ -91,7 +91,7 @@ Dick, J. M., Yu, M., Tan, J. and Lu, A. (2019) Changes in carbon oxidation state
 
 Dick, J. M. (2019) CHNOSZ: Thermodynamic calculations and diagrams for geochemistry. \emph{Front. Earth Sci.} \bold{7}:180. \doi{10.3389/feart.2019.00180}
 
-Dick, J. M., Tan, J. and Yu, M. (2020) Geochemistry of metagenomes: Redox and salinity gradients and the chemical compositions of proteins. \emph{(preprint)}
+Dick, J. M., Yu, M. and Tan, J. (2020) Distinct trends in chemical composition of proteins from metagenomes in redox and salinity gradients. \emph{bioRxiv}. \doi{10.1101/2020.04.01.020008}
 
 Dick, J. M. (2020) Water as a reactant in the differential expression of proteins in cancer. \emph{(preprint)}
 
