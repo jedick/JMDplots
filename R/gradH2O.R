@@ -1,6 +1,7 @@
 # JMDplots/gradH2O.R
-# R file started for Goldschmidt poster 20190711
-# moved to JMDplots for salinity gradients paper starting 20190930
+# 20190711 R file started for Goldschmidt poster
+# 20190930 started move to JMDplots for salinity gradients paper
+# 20200402 paper now on bioRxiv (doi:10.1101/2020.04.01.020008)
 
 # number of reactions for each amino acid in E. coli metabolic recconstruction 20191101
 # (data from Feist et al., 2007; doi:10.1038/msb4100155)

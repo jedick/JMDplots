@@ -1,4 +1,4 @@
-Date: 2020-03-01
+Date: 2020-04-04
 Package: JMDplots
 Version: 1.0.2
 Title: Plots from Papers by Jeffrey M. Dick
@@ -9,7 +9,7 @@ Authors@R: c(
 Author: Jeffrey Dick [aut, cre] (0000-0002-0687-5890)
 Maintainer: Jeffrey Dick <jeff@chnosz.net>
 Depends: R (>= 3.1.0), CHNOSZ (>= 1.3.2), canprot (>= 0.1.5)
-Imports: shiny, timevis, png, plotrix, MASS, diagram, xtable, beanplot, ggplot2, ggrepel, gridExtra
+Imports: shiny, timevis, png, plotrix, MASS, diagram, xtable, ggplot2, ggrepel, gridExtra
 Suggests: knitr, rmarkdown, KernSmooth
 Description: Code and data used to make plots from various papers by the author.
     The plots are shown in vignettes for each paper.

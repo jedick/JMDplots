@@ -1,6 +1,8 @@
 CHANGES IN JMDplots 1.0.2
 -------------------------
 
+- 20200404 Add liver cancer and move prostate cancer plot to canH2O2().
+
 - 20200223 Add pdat_CH16(), used in canH2O2().
 
 CHANGES IN JMDplots 1.0.1
