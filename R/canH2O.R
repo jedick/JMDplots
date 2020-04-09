@@ -446,52 +446,34 @@ canH2O4 <- function(pdf = FALSE) {
   }
 }
 
-# plots with nH2O and nO2 of amino acid biosynthesis reactions 20191205
+# nH2O from stoichiometric hydration state and amino acid biosynthesis reactions 20200409
 canH2O5 <- function(pdf = FALSE) {
-  if(pdf) pdf("canH2O5.pdf", width = 6, height = 6)
-  par(mar = c(4, 4.1, 1.5, 1), mgp = c(2.8, 1, 0), las = 1)
-  par(mfrow = c(2, 2))
+  if(pdf) pdf("canH2O5.pdf", width = 6, height = 3)
+  par(mar = c(4, 4.1, 1.5, 1), mgp = c(3, 1, 0), las = 1)
+  par(mfrow = c(1, 2))
 
-  # plot nO2(biosynth) vs ZC for TCGA data
-  ZClab <- quote(Delta*italic(Z)[C]~"(carbon oxidation state)")
-  O2lab <- quote(Delta*italic(n)[O[2]]~"(AA biosynthesis)")
-  dat <- read.csv(system.file("extdata/vignette_output/TCGA.csv", package = "JMDplots"), as.is = TRUE)
-  plot(dat$ZC.diff, dat$nO2_biosynth.diff, xlab = ZClab, ylab = O2lab)
-  abline(h = 0, v = 0, lty = 3, col = "grey30")
-  title("TCGA/GTEx", font.main = 1)
-  label.figure("A", font = 2, cex = 1.7, yfrac = 0.97, xfrac = 0.03)
+  # read data
+  TCGA <- read.csv(system.file("extdata/vignette_output/TCGA.csv", package = "JMDplots"), as.is = TRUE)
+  HPA <- read.csv(system.file("extdata/vignette_output/HPA.csv", package = "JMDplots"), as.is = TRUE)
+  # define labels
+  rQEClab <- quote(Delta*italic(n)[H[2] * O]~"(stoichiometric hydration state)        ")
+  biolab <- quote(Delta*italic(n)[H[2] * O]~"(AA biosynthesis)")
 
   # plot nH2O(biosynth) vs nH2O(rQEC) for TCGA data
-  rQEClab <- quote(Delta*italic(n)[H[2] * O]~"(stoichiometric hydration state)    ")
-  biolab <- quote(Delta*italic(n)[H[2] * O]~"(AA biosynthesis)")
-  plot(dat$nH2O_rQEC.diff, dat$nH2O_biosynth.diff, xlab = rQEClab, ylab = biolab)
+  plot(TCGA$nH2O_rQEC.diff, TCGA$nH2O_biosynth.diff, xlab = rQEClab, ylab = biolab)
   abline(h = 0, v = 0, lty = 3, col = "grey30")
   title("TCGA/GTEx", font.main = 1)
-  label.figure("B", font = 2, cex = 1.7, yfrac = 0.97, xfrac = 0.03)
+  label.figure("A", font = 2, cex = 1.5)
 
-  vigout <- system.file("extdata/vignette_output", package = "canprot")
-  conddat <- function(cond) read.csv(paste0(vigout, "/", cond, ".csv"), as.is = TRUE)
-
-  cond2 <- c("colorectal", "pancreatic", "breast", "lung", "prostate", "liver")
-  cancer <- lapply(cond2, conddat); names(cancer) <- cond2
-  col2 <- palette.colors(8, "Classic Tableau")[c(6, 5, 7, 8, 4, 2)]
-  contplot(cancer, "Cancer", col2, "nO2_biosynth", "nH2O_biosynth", xlim = c(-0.15, 0.1), ylim = c(-0.1, 0.1),
-           dx = c(-0.05, 0.05, -0.06, -0.06, 0.04, 0.05), dy = c(-0.03, -0.065, 0.042, -0.012, 0.05, 0.02), labtext = "AA biosynthesis")
-  label.figure("C", font = 2, cex = 1.7, yfrac = 0.97, xfrac = 0.03)
-
-  cond1 <- c("hypoxia", "hyperosmotic", "secreted", "3D")
-  culture <- lapply(cond1, conddat); names(culture) <- cond1
-  col1 <- palette.colors(8, "Okabe-Ito")[c(2:4, 6)]
-  names <- names(culture)
-  names[1] <- "hyp-\noxia"
-  names[2] <- "hyper-\nosmotic"
-  contplot(culture, "Cell culture", col1, "nO2_biosynth", "nH2O_biosynth", xlim = c(-0.15, 0.1), ylim = c(-0.1, 0.1),
-           dx = c(-0.05, 0.055, 0.025, -0.005), dy = c(0.066, -0.07, 0.08, 0.01), labtext = "AA biosynthesis", names = names)
-  label.figure("D", font = 2, cex = 1.7, yfrac = 0.97, xfrac = 0.03)
+  # plot nH2O(biosynth) vs nH2O(rQEC) for HPA data
+  plot(HPA$nH2O_rQEC.diff, HPA$nH2O_biosynth.diff, xlab = rQEClab, ylab = biolab)
+  abline(h = 0, v = 0, lty = 3, col = "grey30")
+  title("HPA", font.main = 1)
+  label.figure("B", font = 2, cex = 1.5)
 
   if(pdf) {
     dev.off()
-    addexif("canH2O5", "Plots with nH2O and nO2 of amino acid biosynthesis reactions", "Dick (2020) (preprint)")
+    addexif("canH2O5", "nH2O from stoichiometric hydration state and amino acid biosynthesis reactions", "Dick (2020) (preprint)")
   }
 }
 
@@ -791,9 +773,53 @@ canH2OS3 <- function(pdf = FALSE) {
   }
 }
 
-# Scatterplots of hypoxia scores and ZC or nH2O for TCGA or HPA datasets 20200224
+# plots with nH2O and nO2 of amino acid biosynthesis reactions 20191205
 canH2OS4 <- function(pdf = FALSE) {
   if(pdf) pdf("canH2OS4.pdf", width = 6, height = 6)
+  par(mar = c(4, 4.1, 1.5, 1), mgp = c(2.8, 1, 0), las = 1)
+  par(mfrow = c(2, 2))
+
+  # read data
+  TCGA <- read.csv(system.file("extdata/vignette_output/TCGA.csv", package = "JMDplots"), as.is = TRUE)
+  HPA <- read.csv(system.file("extdata/vignette_output/HPA.csv", package = "JMDplots"), as.is = TRUE)
+  # define labels
+  ZClab <- quote(Delta*italic(Z)[C]~"(carbon oxidation state)")
+  O2lab <- quote(Delta*italic(n)[O[2]]~"(AA biosynthesis)")
+  H2Olab <- quote(Delta*italic(n)[H[2] * O]~"(AA biosynthesis)")
+
+  # plot nO2(biosynth) vs ZC for TCGA data
+  plot(TCGA$ZC.diff, TCGA$nO2_biosynth.diff, xlab = ZClab, ylab = O2lab)
+  abline(h = 0, v = 0, lty = 3, col = "grey30")
+  title("TCGA/GTEx", font.main = 1)
+  label.figure("A", font = 2, cex = 1.7, yfrac = 0.97, xfrac = 0.03)
+
+  # plot nO2(biosynth) vs ZC for HPA data
+  plot(HPA$ZC.diff, HPA$nO2_biosynth.diff, xlab = ZClab, ylab = O2lab)
+  abline(h = 0, v = 0, lty = 3, col = "grey30")
+  title("HPA", font.main = 1)
+  label.figure("B", font = 2, cex = 1.7, yfrac = 0.97, xfrac = 0.03)
+
+  # plot nH2O(biosynth) vs nO2(biosynth) for TCGA data
+  plot(TCGA$nO2_biosynth.diff, TCGA$nH2O_biosynth.diff, xlab = O2lab, ylab = H2Olab)
+  abline(h = 0, v = 0, lty = 3, col = "grey30")
+  title("TCGA/GTEx", font.main = 1)
+  label.figure("C", font = 2, cex = 1.7, yfrac = 0.97, xfrac = 0.03)
+
+  # plot nH2O(biosynth) vs nO2(biosynth) for HPA data
+  plot(HPA$nO2_biosynth.diff, HPA$nH2O_biosynth.diff, xlab = O2lab, ylab = H2Olab)
+  abline(h = 0, v = 0, lty = 3, col = "grey30")
+  title("HPA", font.main = 1)
+  label.figure("D", font = 2, cex = 1.7, yfrac = 0.97, xfrac = 0.03)
+
+  if(pdf) {
+    dev.off()
+    addexif("canH2OS4", "Plots with nH2O and nO2 of amino acid biosynthesis reactions", "Dick (2020) (preprint)")
+  }
+}
+
+# Scatterplots of hypoxia scores and ZC or nH2O for TCGA or HPA datasets 20200224
+canH2OS5 <- function(pdf = FALSE) {
+  if(pdf) pdf("canH2OS5.pdf", width = 6, height = 6)
   # get TCGA and HPA data
   vigout2 <- system.file("extdata/vignette_output", package = "JMDplots")
   HPA <- read.csv(file.path(vigout2, "HPA.csv"), as.is = TRUE)
@@ -826,9 +852,10 @@ canH2OS4 <- function(pdf = FALSE) {
   label.figure("D", cex = 1.7, font = 2, yfrac = 0.96, xfrac = 0.05)
   if(pdf) {
     dev.off()
-    addexif("canH2OS4", "Scatterplots of hypoxia scores and ZC or nH2O for TCGA or HPA datasets", "Dick (2020) (preprint)")
+    addexif("canH2OS5", "Scatterplots of hypoxia scores and ZC or nH2O for TCGA or HPA datasets", "Dick (2020) (preprint)")
   }
 }
+
 
 #########################
 ### UNEXPORTED OBJECT ###
