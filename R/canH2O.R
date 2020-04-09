@@ -21,7 +21,7 @@ canH2O1 <- function(pdf = FALSE) {
   p2 <- 5; r2 <- 0.1
   p3 <- 9; r3 <- 0.15
   p4 <- 19; r4 <- 0.115
-  p5 <- 16; r5 <- 0.125
+  p5 <- 16; r5 <- 0.15
   p6 <- 13; r6 <- 0.07
   p7 <- 28; r7 <- 0.09
   pP <- p3 + 2*npos[1] # the position for prostate cancer plot --> changed to phylostratigraphy box
@@ -64,43 +64,45 @@ canH2O1 <- function(pdf = FALSE) {
 
   textrect(pos[p4, ] + c(0, 0.065), r4, ry + 0.015, lab = "", cex = cex, box.col = cols[4])
   calab <- paste(sapply(cancer, nrow), cond2)
-  textplain(pos[p4, ] + c(0, 0.065), lab = calab, height = 0.105, cex = cex)
+  textplain(pos[p4, ] + c(-0.1, 0.065), lab = calab, height = 0.105, cex = cex, adj = c(0, 0.5))
   textplain(pos[p4, ] + c(0, 0.2), lab = c("Cancer", "vs normal"), font = 2, height = 0.04)
 
-  textrect(pos[p5, ] + c(0, 0.08), r5, ry, lab = "", cex = cex, box.col = cols[3])
+  textrect(pos[p5, ] + c(-0.02, 0.08), r5, ry, lab = "", cex = cex, box.col = cols[3])
   # write "secreted in hypoxia" and "3D culture" 20200118
   culab <- paste(sapply(culture, nrow), cond1)
-  shlab <- c(paste(culab[3], "in"), "hypoxia")
-  textplain(pos[p5, ] + c(0, 0.065), lab = shlab, height = 0.038, cex = cex)
+  shlab <- c(paste(culab[3], "in"), "     hypoxia")
+  textplain(pos[p5, ] + c(-0.16, 0.065), lab = shlab, height = 0.038, cex = cex, adj = c(0, 0.5))
   culab <- c(culab[1:2], "", "", culab[4])
-  culab[5] <- paste(culab[5], "culture")
-  textplain(pos[p5, ] + c(0, 0.08), lab = culab, height = 0.09, cex = cex)
-  textplain(pos[p5, ] + c(0, 0.2), lab = c("Cell", "culture"), font = 2, height = 0.04)
+  culab[5] <- paste(culab[5], "vs 2D culture")
+  textplain(pos[p5, ] + c(-0.16, 0.08), lab = culab, height = 0.09, cex = cex, adj = c(0, 0.5))
+  textplain(pos[p5, ] + c(-0.02, 0.2), lab = c("Cell", "culture"), font = 2, height = 0.04)
 
   textrect(pos[p6, ] + c(0, 0.08), r6, ry, lab = c("GEPIA", "(TCGA/", "GTEx)", "HPA"), cex = cex, box.col = cols[1])
   textplain(pos[p6, ] + c(0, 0.2), lab = c("Pan-cancer", "comparison"), font = 2, height = 0.04)
 
-  textplain(pos[21, ] + c(-0.04, 0.08), lab = c(paste("Total", total), "datasets", paste("from", nstudies), "studies"), adj = c(0, 0.5), font = 3, height = 0.06)
+  textplain(pos[21, ] + c(-0.035, 0.1), lab = c(paste("Total:", total), "datasets", paste("from", nstudies), "studies"),
+            adj = c(0, 0.5), font = 3, height = 0.07, cex = 1.2)
 
   textrect(pos[pP, ] + c(0.02, 0.095), r7 + 0.015, ry, lab = c("Evolutionary", "trends of", "composition"), cex = cex, box.col = cols[1])
   textplain(pos[pP, ] + c(0.02, 0.215), lab = c("Phylostratigraphic", "analysis"), font = 2, height = 0.04)
 
-  textplain(pos[24, ] + c(0.12, 0.28), lab = "Main finding", font = 2)
-  cantext1 <- "Up-regulated proteins in most"
-  cantext2 <- "cancers are relatively hydrated."
-  cantext <- c(cantext1, cantext2)
-  textplain(pos[24, ] + c(0.12, 0.23), lab = cantext, height = 0.04, font = 4)
+  textplain(pos[24, ] + c(0.12, 0.29), lab = "Main finding", font = 2)
+  cantext1 <- "Most cancer types have higher"
+  cantext2 <- "hydration state of proteins"
+  cantext3 <- "compared to normal tissue."
+  cantext <- c(cantext1, cantext2, cantext3)
+  textplain(pos[24, ] + c(0.12, 0.235), lab = cantext, height = 0.05, font = 4)
 
-  textplain(pos[25, ] + c(0.22, 0.1), lab = "Other findings", font = 2)
-  hyptext1 <- quote(italic("Oxidation state of proteins is usually"))
-  hyptext2 <- quote(italic("not lower in hypoxic conditions."))
+  textplain(pos[25, ] + c(0.21, 0.085), lab = "Other findings", font = 2)
+  hyptext1 <- quote(italic("Hypoxia experiments show no consistent"))
+  hyptext2 <- quote(italic("difference in oxidation state of proteins."))
   hyptext <- as.expression(c(hyptext1, hyptext2))
-  textplain(pos[25, ] + c(0.24, 0.05), lab = hyptext, height = 0.04)
+  textplain(pos[25, ] + c(0.21, 0.03), lab = hyptext, height = 0.04)
 
-  hydtext1 <- quote(italic("Hydration state of proteins decreases"))
-  hydtext2 <- quote(italic("in hyperosmotic and 3D culture."))
+  hydtext1 <- quote(italic("Most hyperosmotic and 3D culture"))
+  hydtext2 <- quote(italic("experiments yield lower hydration state of proteins."))
   hydtext <- as.expression(c(hydtext1, hydtext2))
-  textplain(pos[25, ] + c(0.2, -0.03), lab = hydtext, height = 0.04)
+  textplain(pos[25, ] + c(0.19, -0.045), lab = hydtext, height = 0.04)
 
   ## make diffplot for prostate cancer
   # no longer - just make empty plot to fill space 20200404
@@ -182,6 +184,8 @@ canH2O2 <- function(pdf = FALSE) {
       # use open/filled symbols for cancer/non-cancer cells 20200103
       pch <- rep(21, nrow(alldat[[i]]))
       pch[grepl("cancer", alldat[[i]]$tags)] <- 19
+      # use squares for microbial (yeast and bacteria) datasets 20200407
+      pch[grepl("microbial", alldat[[i]]$tags)] <- 0
     } else {
       pch <- rep(19, nrow(alldat[[i]]))
     }
@@ -192,6 +196,11 @@ canH2O2 <- function(pdf = FALSE) {
     if(i==3) title("secreted in", font.main = 1, line = 1.2, xpd = NA)
     if(i==1) label.figure("A", cex = 2, font = 2, yfrac = 1)
     if(i==5) label.figure("B", cex = 2, font = 2, yfrac = 1)
+    # make dotted points for glucose in hyperosmotic stress 20200407
+    if(i==2) {
+      pch <- ifelse(grepl("glucose", alldat$hyperosmotic$tags), 19, NA)
+      diffplot(alldat[i], pch = pch, pt.text = NA, col = col[i], cex = 0.25, labtext = NA, add = TRUE)
+    }
   })
   
   # compare density contours for cell culture, cancer types, and TCGA and HPA data 20191126
@@ -207,7 +216,7 @@ canH2O2 <- function(pdf = FALSE) {
   pancan <- lapply(cond3, conddat); names(pancan) <- cond3
   names <- names(culture)
   names[1] <- "hyp-\noxia"
-  contplot(culture, "Cell culture", col1, ylim = c(-0.06, 0.04), dx = c(0.025, 0.022, 0.01, -0.012), dy = c(-0.005, -0.025, 0.029, -0.01), names = names)
+  contplot(culture, "Cell culture", col1, ylim = c(-0.06, 0.04), dx = c(0.027, 0.022, 0.01, -0.012), dy = c(-0.005, -0.037, 0.03, -0.01), names = names)
   label.figure("C", cex = 2, font = 2)
   contplot(cancer, "Cancer tissue", col2, ylim = c(-0.04, 0.06), dx = c(NA, 0.012, -0.005, -0.022, -0.006, -0.008), dy = c(NA, -0.035, -0.035, 0.035, -0.02, 0.035))
   text(0.025, -0.008, "CRC", col = col2[1])
@@ -467,7 +476,7 @@ canH2O5 <- function(pdf = FALSE) {
   cancer <- lapply(cond2, conddat); names(cancer) <- cond2
   col2 <- palette.colors(8, "Classic Tableau")[c(6, 5, 7, 8, 4, 2)]
   contplot(cancer, "Cancer", col2, "nO2_biosynth", "nH2O_biosynth", xlim = c(-0.15, 0.1), ylim = c(-0.1, 0.1),
-           dx = c(-0.05, 0.05, 0.052, -0.06, 0.045, 0.05), dy = c(-0.03, -0.065, 0.022, -0.012, 0.05, 0.02), labtext = "AA biosynthesis")
+           dx = c(-0.05, 0.05, -0.06, -0.06, 0.04, 0.05), dy = c(-0.03, -0.065, 0.042, -0.012, 0.05, 0.02), labtext = "AA biosynthesis")
   label.figure("C", font = 2, cex = 1.7, yfrac = 0.97, xfrac = 0.03)
 
   cond1 <- c("hypoxia", "hyperosmotic", "secreted", "3D")
@@ -477,7 +486,7 @@ canH2O5 <- function(pdf = FALSE) {
   names[1] <- "hyp-\noxia"
   names[2] <- "hyper-\nosmotic"
   contplot(culture, "Cell culture", col1, "nO2_biosynth", "nH2O_biosynth", xlim = c(-0.15, 0.1), ylim = c(-0.1, 0.1),
-           dx = c(-0.05, 0.055, -0.09, 0.004), dy = c(0.058, -0.065, -0.025, 0.01), labtext = "AA biosynthesis", names = names)
+           dx = c(-0.05, 0.055, 0.025, -0.005), dy = c(0.066, -0.07, 0.08, 0.01), labtext = "AA biosynthesis", names = names)
   label.figure("D", font = 2, cex = 1.7, yfrac = 0.97, xfrac = 0.03)
 
   if(pdf) {
