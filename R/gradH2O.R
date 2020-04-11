@@ -275,7 +275,7 @@ gradH2O4 <- function(pdf = FALSE) {
 # mean differences of compositional metrics for differentially expressed proteins in osmotic stress
 # adapted from canprot/hyperosmotic.Rmd 20190717-20191007
 # add GRAVY and pI plot 20191028
-# use different symbols for eukaryotes and add more bacteria and archaea (osmotic2) 20191102-20191103
+# use different symbols for eukaryotes and add halophilic bacteria and archaea 20191102-20191103
 gradH2O5 <- function(pdf = FALSE) {
   if(pdf) pdf("gradH2O5.pdf", width = 8, height = 5.2)
   layout(matrix(c(0,0,1,1,1,1,1,1,0,0, 2,2,2,2,2,3,3,3,3,3), nrow = 2, byrow = TRUE), heights = c(0.3, 1))
@@ -319,9 +319,9 @@ gradH2O5 <- function(pdf = FALSE) {
   cex1[igene1] <- 1.2
 
   # get new data (added for this paper)
-  datasets2 <- pdat_osmotic2()
+  datasets2 <- pdat_halophilic()
   pdat2 <- lapply_canprot(datasets2, function(dataset) {
-    pdat_osmotic2(dataset, basis = "rQEC")
+    pdat_halophilic(dataset, basis = "rQEC")
   })
   # use open circle except open triangle for gene expression and open square for hypo-osmotic conditions 20191103
   pch2 <- rep(1, length(datasets2))

@@ -65,7 +65,7 @@ importFrom("canprot",
   # moved to canprot 20191027
   "ZCAA", "H2OAA", "GRAVY", "pI",
   # new protein expression data 20191104
-  "pdat_osmotic2",
+  "pdat_halophilic",
   # for pdat_HPA() and pdat_TCGA() 20200204
   "cleanup", "protcomp",
   # for plotphylo() 20200204
