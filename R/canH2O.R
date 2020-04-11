@@ -50,7 +50,7 @@ canH2O1 <- function(pdf = FALSE) {
   textplain(pos[p3, ] + c(0, 0.12), lab = c("Compositional", "Analysis"), font = 2, height = 0.04)
 
   # show numbers of datasets 
-  cond1 <- c("hypoxia", "hyperosmotic", "secreted", "3D")
+  cond1 <- c("hypoxia", "secreted", "hyperosmotic", "glucose", "3D")
   cond2 <- c("colorectal", "pancreatic", "breast", "lung", "prostate", "liver")
   vigout <- system.file("extdata/vignette_output", package = "canprot")
   conddat <- function(cond) read.csv(paste0(vigout, "/", cond, ".csv"), as.is = TRUE)
@@ -68,11 +68,15 @@ canH2O1 <- function(pdf = FALSE) {
   textplain(pos[p4, ] + c(0, 0.2), lab = c("Cancer", "vs normal"), font = 2, height = 0.04)
 
   textrect(pos[p5, ] + c(-0.02, 0.08), r5, ry, lab = "", cex = cex, box.col = cols[3])
+  # sum salt and glucose datasets for hyperosmotic stress 20200411
+  culab <- sapply(culture, nrow)
+  culab["hyperosmotic"] <-  culab["hyperosmotic"] + culab["glucose"]
+  culab <- culab[-4]
   # write "secreted in hypoxia" and "3D culture" 20200118
-  culab <- paste(sapply(culture, nrow), cond1)
-  shlab <- c(paste(culab[3], "in"), "     hypoxia")
-  textplain(pos[p5, ] + c(-0.16, 0.065), lab = shlab, height = 0.038, cex = cex, adj = c(0, 0.5))
-  culab <- c(culab[1:2], "", "", culab[4])
+  culab <- paste(culab, names(culab))
+  shlab <- c(paste(culab[2], "in"), "     hypoxia")
+  textplain(pos[p5, ] + c(-0.16, 0.095), lab = shlab, height = 0.038, cex = cex, adj = c(0, 0.5))
+  culab <- c(culab[1], "", "", culab[3:4])
   culab[5] <- paste(culab[5], "vs 2D culture")
   textplain(pos[p5, ] + c(-0.16, 0.08), lab = culab, height = 0.09, cex = cex, adj = c(0, 0.5))
   textplain(pos[p5, ] + c(-0.02, 0.2), lab = c("Cell", "culture"), font = 2, height = 0.04)
@@ -102,7 +106,7 @@ canH2O1 <- function(pdf = FALSE) {
   hydtext1 <- quote(italic("Most hyperosmotic and 3D culture"))
   hydtext2 <- quote(italic("experiments yield lower hydration state of proteins."))
   hydtext <- as.expression(c(hydtext1, hydtext2))
-  textplain(pos[25, ] + c(0.19, -0.045), lab = hydtext, height = 0.04)
+  textplain(pos[25, ] + c(0.25, -0.045), lab = hydtext, height = 0.04)
 
   ## make diffplot for prostate cancer
   # no longer - just make empty plot to fill space 20200404
@@ -117,11 +121,11 @@ canH2O1 <- function(pdf = FALSE) {
   axis(2, tck = 0, labels = FALSE)
   mtext("oxidation state", 1, 0.5)
   mtext("hydration state", 2, 0.5)
-  col1 <- palette.colors(8, "Okabe-Ito")[c(2:4, 6)]
+  col1 <- palette.colors(8, "Okabe-Ito")[c(2, 4, 3, 1, 6)]
   col2 <- palette.colors(8, "Classic Tableau")[c(6, 5, 7, 8, 4, 2)]
   # draw arrows to mean values
   # offset x = -0.1 to make room for text
-  for(i in 1:4) arrows(-0.1, 0, 35*mean(culture[[i]]$ZC.diff) - 0.1, 35*mean(culture[[i]]$nH2O_rQEC.diff), col = col1[i], lwd = 3, length = 0.15)
+  for(i in 5:1) arrows(-0.1, 0, 35*mean(culture[[i]]$ZC.diff) - 0.1, 35*mean(culture[[i]]$nH2O_rQEC.diff), col = col1[i], lwd = 3, length = 0.15)
   for(i in 1:6) arrows(-0.1, 0, 35*mean(cancer[[i]]$ZC.diff) - 0.1, 35*mean(cancer[[i]]$nH2O_rQEC.diff), col = col2[i], lwd = 3, length = 0.15)
 
   # restore these defaults to be able to re-run this script with expected results
@@ -134,36 +138,30 @@ canH2O1 <- function(pdf = FALSE) {
 
 # median differences of nH2O and ZC for cell culture and cancer tissue 20191126
 canH2O2 <- function(pdf = FALSE) {
-  if(pdf) pdf("canH2O2.pdf", width = 9, height = 6)
+  if(pdf) pdf("canH2O2.pdf", width = 8, height = 6)
   # layout with spaces between groups of plots
   # spaces
   p00 <- rep(0, 2); p0 <- rep(0, 15)
   # (A) cell culture
-  p1 <- rep(1, 15); p2 <- rep(2, 15); p3 <- rep(3, 15); p4 <- rep(4, 15)
+  p1 <- rep(1, 15); p2 <- rep(2, 15); p3 <- rep(3, 15); p4 <- rep(4, 15); p5 <- rep(5, 15)
   # (B) cancer
-  p5 <- rep(5, 15); p6 <- rep(6, 15); p7 <- rep(7, 15)
-  p8 <- rep(8, 15); p9 <- rep(9, 15); p10 <- rep(10, 15)
+  p6 <- rep(6, 15); p7 <- rep(7, 15); p8 <- rep(8, 15)
+  p9 <- rep(9, 15); p10 <- rep(10, 15); p11 <- rep(11, 15)
   # (C) credible regions
-  p11 <- rep(11, 16); p12 <- rep(12, 16); p13 <- rep(13, 16)
+  p12 <- rep(12, 16); p13 <- rep(13, 16)
   # assemble columns (each one is 48 units high)
-  c1 <- c(0, p1, p00, p0, p0)
-  c2 <- c(0, p1, p00, p5, p8)
-  c3 <- c(0, p2, p00, p5, p8)
-  c4 <- c(0, p2, p00, p6, p9)
-  c5 <- c(0, p3, p00, p6, p9)
-  c6 <- c(0, p3, p00, p7, p10)
-  c7 <- c(0, p4, p00, p7, p10)
-  c8 <- c(0, p4, p00, p0, p0)
-  c9 <- c(0, p0, p00, p0, p0)
-  c10 <- c(p11, p12, p13)
-  mat <- matrix(c(c1, c2, c3, c4, c5, c6, c7, c8, c9, c10), nrow = 48)
-  #mat <- matrix(c(p1, p0, p3, p7, p1, p0, p4, p8, p2, p0, p5, p9, p2, p0, p6, p10, rep(0, 48), p11, p12, p13), nrow = 48)
-  #layout(mat, widths = c(1, 1, 1, 1, 0.2, 1.3))
-  layout(mat, widths = c(0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.2, 1.3))
+  c1 <- c(0, p1, p00, p6, p9)
+  c2 <- c(0, p2, p00, p7, p10)
+  c3 <- c(0, p3, p00, p8, p11)
+  c4 <- c(0, p4, p00, p0, p0)
+  c5 <- c(0, p4, p12, p13)
+  c6 <- c(0, p5, p12, p13)
+  mat <- matrix(c(c1, c2, c3, c4, c5, c6), nrow = 48)
+  layout(mat, widths = c(1, 1, 1, 0.5, 0.5, 1))
   par(mar = c(4, 4, 1.5, 1), mgp = c(2, 1, 0))
 
   # read data for all conditions
-  cond1 <- c("hypoxia", "hyperosmotic", "secreted", "3D")
+  cond1 <- c("hypoxia", "secreted", "hyperosmotic", "glucose", "3D")
   cond2 <- c("colorectal", "pancreatic", "breast", "lung", "prostate", "liver")
   conds <- c(cond1, cond2)
   vigout <- system.file("extdata/vignette_output", package = "canprot")
@@ -173,14 +171,15 @@ canH2O2 <- function(pdf = FALSE) {
   })
   names(alldat) <- conds
 
-  col1 <- palette.colors(8, "Okabe-Ito")[c(2:4, 6)]
+  col1 <- palette.colors(8, "Okabe-Ito")[c(2, 4, 3, 1, 6)]
   col2 <- palette.colors(8, "Classic Tableau")[c(6, 5, 7, 8, 4, 2)]
   col <- c(col1, col2)
 
   # make scatter plots for nH2O and ZC in cell culture and cancer types
   par(mgp = c(2.5, 1, 0))
-  lapply(1:10, function(i) {
-    if(i %in% 1:4) {
+  lapply(1:length(alldat), function(i) {
+    thisone <- names(alldat)[i]
+    if(thisone %in% cond1) {
       # use open/filled symbols for cancer/non-cancer cells 20200103
       pch <- rep(21, nrow(alldat[[i]]))
       pch[grepl("cancer", alldat[[i]]$tags)] <- 19
@@ -191,40 +190,29 @@ canH2O2 <- function(pdf = FALSE) {
     }
     diffplot(alldat[i], pch = pch, pt.text = NA, col = col[i], cex = 1, labtext = NA)
     main <- names(alldat)[i]
-    if(i==3) main <- "hypoxia"
+    if(thisone == "secreted") main <- "hypoxia"
+    if(thisone == "hyperosmotic") main <- "(salt)"
+    if(thisone == "glucose") main <- "(glucose)"
     title(main, font.main = 1)
-    if(i==3) title("secreted in", font.main = 1, line = 1.2, xpd = NA)
-    if(i==1) label.figure("A", cex = 2, font = 2, yfrac = 1)
-    if(i==5) label.figure("B", cex = 2, font = 2, yfrac = 1)
-    # make dotted points for glucose in hyperosmotic stress 20200407
-    if(i==2) {
-      pch <- ifelse(grepl("glucose", alldat$hyperosmotic$tags), 19, NA)
-      diffplot(alldat[i], pch = pch, pt.text = NA, col = col[i], cex = 0.25, labtext = NA, add = TRUE)
-    }
+    if(thisone == "secreted") title("secreted in", font.main = 1, line = 1.4, xpd = NA)
+    if(thisone %in% c("hyperosmotic", "glucose")) title("hyperosmotic", font.main = 1, line = 1.4, xpd = NA)
+    if(thisone == "hypoxia") label.figure("A", cex = 2, font = 2, yfrac = 1)
+    if(thisone == "colorectal") label.figure("B", cex = 2, font = 2, yfrac = 1)
   })
   
-  # compare density contours for cell culture, cancer types, and TCGA and HPA data 20191126
-  cond3 <- c("HPA", "TCGA")
+  # compare density contours for cell culture and cancer types 20191126
   # CSV files generated by running the cancer and cell culture vignettes
   vigout <- system.file("extdata/vignette_output", package = "canprot")
   conddat <- function(cond) read.csv(paste0(vigout, "/", cond, ".csv"), as.is = TRUE)
   culture <- lapply(cond1, conddat); names(culture) <- cond1
   cancer <- lapply(cond2, conddat); names(cancer) <- cond2
-  # CSV files generated by running the TCGA and HPA vignettes
-  vigout2 <- system.file("extdata/vignette_output", package = "JMDplots")
-  conddat <- function(cond) read.csv(paste0(vigout2, "/", cond, ".csv"))
-  pancan <- lapply(cond3, conddat); names(pancan) <- cond3
   names <- names(culture)
   names[1] <- "hyp-\noxia"
-  contplot(culture, "Cell culture", col1, ylim = c(-0.06, 0.04), dx = c(0.027, 0.022, 0.01, -0.012), dy = c(-0.005, -0.037, 0.03, -0.01), names = names)
+  names[3] <- "salt"
+  contplot(culture, "Cell culture", col1, ylim = c(-0.06, 0.04), dx = c(0.027, 0.01, 0.022, 0, -0.02), dy = c(-0.005, 0.03, -0.037, -0.025, -0.03), names = names)
   label.figure("C", cex = 2, font = 2)
   contplot(cancer, "Cancer tissue", col2, ylim = c(-0.04, 0.06), dx = c(NA, 0.012, -0.005, -0.022, -0.006, -0.008), dy = c(NA, -0.035, -0.035, 0.035, -0.02, 0.035))
   text(0.025, -0.008, "CRC", col = col2[1])
-  contplot(pancan, "Pan-cancer", c("darkslategray4", "slateblue4"), dx = c(0.02, -0.02), dy = c(-0.003, 0.012))
-  # add point for common gene expression changes in cancer (Chen and He, 2016) 20200223
-  ct <- get_comptab(pdat_CH16("CH16"))
-  points(ct$ZC.diff, ct$nH2O.diff, pch = 8, cex = 1.2)
-  text(ct$ZC.diff, ct$nH2O.diff, "CH16", adj = -0.25)
 
   if(pdf) {
     dev.off()
@@ -483,7 +471,7 @@ canH2O5 <- function(pdf = FALSE) {
 
 # mean differences and p-values across all datasets 20200125
 canH2OT2 <- function() {
-  cond1 <- c("hypoxia", "hyperosmotic", "secreted", "3D")
+  cond1 <- c("hypoxia", "secreted", "hyperosmotic", "glucose", "3D")
   cond2 <- c("colorectal", "pancreatic", "breast", "lung", "prostate", "liver")
   cond3 <- c("HPA", "TCGA")
   vigout <- system.file("extdata/vignette_output", package = "canprot")
