@@ -319,9 +319,9 @@ gradH2O5 <- function(pdf = FALSE) {
   cex1[igene1] <- 1.2
 
   # get new data (added for this paper)
-  datasets2 <- pdat_halophilic()
+  datasets2 <- pdat_halophiles()
   pdat2 <- lapply_canprot(datasets2, function(dataset) {
-    pdat_halophilic(dataset, basis = "rQEC")
+    pdat_halophiles(dataset, basis = "rQEC")
   })
   # use open circle except open triangle for gene expression and open square for hypo-osmotic conditions 20191103
   pch2 <- rep(1, length(datasets2))

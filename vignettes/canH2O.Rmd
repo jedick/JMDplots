@@ -1,10 +1,10 @@
 ---
-title: "Eight plots from water in cancer paper (2020)"
+title: "Ten plots from water in cancer paper (2020)"
 output: 
   rmarkdown::html_vignette:
     mathjax: null
 vignette: >
-  %\VignetteIndexEntry{Five plots from water in cancer paper (2020)}
+  %\VignetteIndexEntry{Ten plots from water in cancer paper (2020)}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -30,7 +30,7 @@ nAA <- "<i>n</i><sub>AA</sub>"
 nO2 <- "<i>n</i><sub>O<sub>2</sub></sub>"
 ```
 
-This vignette from the R package [JMDplots](https://github.com/jedick/JMDplots) contains plots from the paper by <a href="canH2O.html" title="Water as a reactant in the differential expression of proteins in cancer">Dick (2020)</a> (preprint).
+This vignette from the R package [JMDplots](https://github.com/jedick/JMDplots) version `r packageDescription("JMDplots")$Version` contains plots from the paper by [<span title="Water as a reactant in the differential expression of proteins in cancer">Dick (2020)</span>](https://doi.org/10.1101/2020.04.09.035022).
 
 ```{r JMDplots, message = FALSE, results = "hide"}
 library(JMDplots)

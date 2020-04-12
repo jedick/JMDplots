@@ -18,7 +18,7 @@ pngquant <- "--speed=1 --quality=0-25"
 if (!nzchar(Sys.which("pngquant"))) pngquant <- NULL 
 ```
 
-This vignette from the R package [JMDplots](https://github.com/jedick/JMDplots) contains plots from the paper by <a href="https://doi.org/10.3389/feart.2019.00180" title="CHNOSZ: Thermodynamic calculations and diagrams for geochemistry">Dick (2019)</a>.
+This vignette from the R package [JMDplots](https://github.com/jedick/JMDplots) version `r packageDescription("JMDplots")$Version` contains plots from the paper by [<span title="CHNOSZ: Thermodynamic calculations and diagrams for geochemistry">Dick (2019)</span>](https://doi.org/10.3389/feart.2019.00180).
 
 ```{r JMDplots, message = FALSE, results = "hide"}
 library(JMDplots)

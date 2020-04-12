@@ -24,7 +24,7 @@ ZC <- "<i>Z</i><sub>C</sub>"
 Topt <- "<i>T</i><sub>opt</sub>"
 ```
 
-This vignette from the R package [JMDplots](https://github.com/jedick/JMDplots) contains plots from the paper by <a href="https://doi.org/10.1098/rsif.2013.1095" title="Average oxidation state of carbon in proteins">Dick (2014)</a>.
+This vignette from the R package [JMDplots](https://github.com/jedick/JMDplots) version `r packageDescription("JMDplots")$Version` contains plots from the paper by <a href="https://doi.org/10.1098/rsif.2013.1095" title="Average oxidation state of carbon in proteins">Dick (2014)</a>.
 
 ```{r JMDplots, message = FALSE, results = "hide"}
 library(JMDplots)
