@@ -50,7 +50,7 @@ canH2O1 <- function(pdf = FALSE) {
   textplain(pos[p3, ] + c(0, 0.12), lab = c("Compositional", "Analysis"), font = 2, height = 0.04)
 
   # show numbers of datasets 
-  cond1 <- c("hypoxia", "secreted", "hyperosmotic", "glucose", "3D")
+  cond1 <- c("hypoxia", "secreted", "osmotic", "glucose", "3D")
   cond2 <- c("colorectal", "pancreatic", "breast", "lung", "prostate", "liver")
   vigout <- system.file("extdata/vignette_output", package = "canprot")
   conddat <- function(cond) read.csv(paste0(vigout, "/", cond, ".csv"), as.is = TRUE)
@@ -68,10 +68,12 @@ canH2O1 <- function(pdf = FALSE) {
   textplain(pos[p4, ] + c(0, 0.2), lab = c("Cancer", "vs normal"), font = 2, height = 0.04)
 
   textrect(pos[p5, ] + c(-0.02, 0.08), r5, ry, lab = "", cex = cex, box.col = cols[3])
-  # sum salt and glucose datasets for hyperosmotic stress 20200411
+  # sum osmotic (salt) and glucose datasets for hyperosmotic stress 20200411
   culab <- sapply(culture, nrow)
-  culab["hyperosmotic"] <-  culab["hyperosmotic"] + culab["glucose"]
+  culab["osmotic"] <-  culab["osmotic"] + culab["glucose"]
   culab <- culab[-4]
+  # change "osmotic" as "hyperosmotic" 20200414
+  names(culab)[3] <- "hyperosmotic"
   # write "secreted in hypoxia" and "3D culture" 20200118
   culab <- paste(culab, names(culab))
   shlab <- c(paste(culab[2], "in"), "     hypoxia")
@@ -161,7 +163,7 @@ canH2O2 <- function(pdf = FALSE) {
   par(mar = c(4, 4, 1.5, 1), mgp = c(2, 1, 0))
 
   # read data for all conditions
-  cond1 <- c("hypoxia", "secreted", "hyperosmotic", "glucose", "3D")
+  cond1 <- c("hypoxia", "secreted", "osmotic", "glucose", "3D")
   cond2 <- c("colorectal", "pancreatic", "breast", "lung", "prostate", "liver")
   conds <- c(cond1, cond2)
   vigout <- system.file("extdata/vignette_output", package = "canprot")
@@ -191,11 +193,11 @@ canH2O2 <- function(pdf = FALSE) {
     diffplot(alldat[i], pch = pch, pt.text = NA, col = col[i], cex = 1, labtext = NA)
     main <- names(alldat)[i]
     if(thisone == "secreted") main <- "hypoxia"
-    if(thisone == "hyperosmotic") main <- "(salt)"
+    if(thisone == "osmotic") main <- "(salt)"
     if(thisone == "glucose") main <- "(glucose)"
     title(main, font.main = 1)
     if(thisone == "secreted") title("secreted in", font.main = 1, line = 1.4, xpd = NA)
-    if(thisone %in% c("hyperosmotic", "glucose")) title("hyperosmotic", font.main = 1, line = 1.4, xpd = NA)
+    if(thisone %in% c("osmotic", "glucose")) title("hyperosmotic", font.main = 1, line = 1.4, xpd = NA)
     if(thisone == "hypoxia") label.figure("A", cex = 2, font = 2, yfrac = 1)
     if(thisone == "colorectal") label.figure("B", cex = 2, font = 2, yfrac = 1)
   })
@@ -471,7 +473,7 @@ canH2O5 <- function(pdf = FALSE) {
 
 # mean differences and p-values across all datasets 20200125
 canH2OT2 <- function() {
-  cond1 <- c("hypoxia", "secreted", "hyperosmotic", "glucose", "3D")
+  cond1 <- c("hypoxia", "secreted", "osmotic", "glucose", "3D")
   cond2 <- c("colorectal", "pancreatic", "breast", "lung", "prostate", "liver")
   cond3 <- c("HPA", "TCGA")
   vigout <- system.file("extdata/vignette_output", package = "canprot")

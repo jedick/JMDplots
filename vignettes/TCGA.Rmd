@@ -49,7 +49,7 @@ datasets <- pdat_TCGA()
 ```{r comptab, results="hide", message=FALSE, echo = FALSE}
 pdat1 <- lapply_canprot(datasets, pdat_TCGA)
 comptab1 <- lapply(pdat1, get_comptab)
-pdat2 <- lapply(pdat1, pdat_recomp, "biosynth")
+pdat2 <- lapply(pdat1, recomp, "biosynth")
 comptab2 <- lapply(pdat2, get_comptab, "nO2")
 comptab3 <- lapply(pdat1, get_comptab, "nAA", "PS")
 comptab4 <- lapply(pdat1, get_comptab, "nAA", "PS", PS_source = "LMM16")

@@ -302,7 +302,7 @@ gradH2O5 <- function(pdf = FALSE) {
   par(xpd = FALSE)
 
   # generate compositional table
-  datasets1 <- pdat_osmotic()
+  datasets1 <- pdat_osmotic(2017)
   pdat1 <- lapply_canprot(datasets1, function(dataset) {
     pdat_osmotic(dataset, basis = "rQEC")
   })
