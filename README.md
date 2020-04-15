@@ -6,7 +6,7 @@ This R package has code and data for plots from papers by [Jeffrey M. Dick](http
 Required R packages are [CHNOSZ](http://chnosz.net), and [canprot](https://github.com/jedick/canprot).
 Both of these packages are available on CRAN, but the development version of **canprot** (from GitHub) is required.
 
-## Installation from GitHub
+## Installation
 
 First install the **remotes** packages from CRAN.
 
@@ -14,14 +14,15 @@ First install the **remotes** packages from CRAN.
 install.packages("remotes")
 ```
 
-Then install **canprot** and **JMDplots** from GitHub, including all dependencies needed to build the vignettes.
+Although it may be possible to build the vignettes without pandoc, having pandoc available will make them look better.
+See rmarkdown's [Install Pandoc](https://cran.r-project.org/web/packages/rmarkdown/vignettes/pandoc.html) vignette for tips on installing pandoc.
+Then install **JMDplots** from GitHub (including its dependencies).
 
 ```R
-remotes::install_github("jedick/canprot", dependencies = TRUE, build_vignettes = TRUE)
-remotes::install_github("jedick/JMDplots", dependencies = TRUE, build_vignettes = TRUE)
+remotes::install_github("jedick/JMDplots", build_vignettes = TRUE)
 ```
 
-Finally open the vignettes to view the plots.
+Finally, open the vignettes index page to see the plots for the different papers.
 
 ```R
 browseVignettes("JMDplots")
@@ -29,4 +30,4 @@ browseVignettes("JMDplots")
 
 ## Online vignettes
 
-The HTML vignettes are available at [http://chnosz.net/JMDplots/doc](http://chnosz.net/JMDplots/doc).
+The vignettes are available at <http://chnosz.net/JMDplots/doc>.
