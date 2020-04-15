@@ -40,38 +40,38 @@ Reaction equations used for this calculation are from <a href="https://doi.org/1
 gradH2O0()
 ```
 
-## `r ZC` for selected redox gradients (Figure 1)
-```{r gradH2O1, message = FALSE, fig.align='center', out.width='100%', fig.width = 7, fig.height = 5, pngquant = pngquant}
+## Derivation of stoichiometric hydration state (Figure 1)
+```{r gradH2O1, message = FALSE, fig.align='center', out.width='100%', fig.width = 6, fig.height = 6, pngquant = pngquant}
 gradH2O1()
 ```
 
-## `r nH2O`-`r ZC` scatterplots for redox gradients and the Baltic Sea (Figure 2)
-```{r gradH2O2, message = FALSE, fig.align='center', out.width='100%', fig.width = 12, fig.height = 5.6, pngquant = pngquant}
+## `r ZC` for selected redox gradients (Figure 2)
+```{r gradH2O2, message = FALSE, fig.align='center', out.width='100%', fig.width = 7, fig.height = 5, pngquant = pngquant}
 gradH2O2()
 ```
 
-## `r nH2O` for Baltic Sea metagenome and metatranscriptome in different size fractions (Figure 3)
-```{r gradH2O3, message = FALSE, fig.align='center', out.width='100%', fig.width = 7, fig.height = 3, pngquant = pngquant}
+## `r nH2O`-`r ZC` scatterplots for redox gradients and the Baltic Sea (Figure 3)
+```{r gradH2O3, message = FALSE, fig.align='center', out.width='100%', fig.width = 12, fig.height = 5.6, pngquant = pngquant}
 gradH2O3()
 ```
 
-## `r nH2O`-`r ZC` for freshwater, marine, and hypersaline environments (Figure 4)
-```{r gradH2O4, message = FALSE, fig.align='center', out.width='100%', fig.width = 8, fig.height = 5, pngquant = pngquant}
+## `r nH2O` for Baltic Sea metagenome and metatranscriptome in different size fractions (Figure 4)
+```{r gradH2O4, message = FALSE, fig.align='center', out.width='100%', fig.width = 7, fig.height = 3, pngquant = pngquant}
 gradH2O4()
 ```
 
-## Mean differences of compositional metrics for differentially expressed proteins in osmotic stress (Figure 5)
-```{r gradH2O5, message = FALSE, fig.align='center', out.width='100%', fig.width = 8, fig.height = 5.2, pngquant = pngquant}
+## `r nH2O`-`r ZC` for freshwater, marine, and hypersaline environments (Figure 5)
+```{r gradH2O5, message = FALSE, fig.align='center', out.width='100%', fig.width = 8, fig.height = 5, pngquant = pngquant}
 gradH2O5()
 ```
 
-## Derivation of stoichiometric hydration state (Figure 6)
-```{r gradH2O6, message = FALSE, fig.align='center', out.width='100%', fig.width = 6, fig.height = 6, pngquant = pngquant}
+## Scatterplots of GRAVY vs ZC and nH2O (Figure 6)
+```{r gradH2O6, message = FALSE, fig.align='center', out.width='100%', fig.width = 7, fig.height = 3.2, pngquant = pngquant}
 gradH2O6()
 ```
 
-## Scatterplots of GRAVY vs ZC and nH2O (Figure S1)
-```{r gradH2OS1, message = FALSE, fig.align='center', out.width='100%', fig.width = 7, fig.height = 7, pngquant = pngquant}
-gradH2OS1()
+## Mean differences of compositional metrics for differentially expressed proteins in osmotic stress (Figure 7)
+```{r gradH2O7, message = FALSE, fig.align='center', out.width='100%', fig.width = 8, fig.height = 5.2, pngquant = pngquant, results = "hide"}
+gradH2O7()
 ```
 
