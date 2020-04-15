@@ -194,7 +194,9 @@ canH2O2 <- function(pdf = FALSE) {
       # use squares for microbial (yeast and bacteria) datasets 20200407
       pch[grepl("microbial", alldat[[i]]$tags)] <- 0
     } else {
+      # use filled/open symbols for human/mouse cancer 20200415
       pch <- rep(19, nrow(alldat[[i]]))
+      pch[grepl("mouse", alldat[[i]]$tags)] <- 21
     }
     diffplot(alldat[i], pch = pch, pt.text = NA, col = col[i], cex = 1, labtext = NA)
     main <- names(alldat)[i]

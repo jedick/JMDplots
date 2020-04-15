@@ -2,6 +2,7 @@
 # present in CHNOSZ/man/wjd.Rd before 20130327
 # moved to CHNOSZ/demo/wjd.R before 20171001
 # moved from CHNOSZ to JMDplots 20191019
+require("JMDplots")
 
 ## run.wjd with proteins: cell periphery of yeast
 # get the proteins in the requested location

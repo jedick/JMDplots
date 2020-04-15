@@ -2,6 +2,7 @@
 ## CV of equilibrium activities of proteins in subcellular compartments
 # added to CHNOSZ/demo/revisit.R 20150519 
 # moved from CHNOSZ to JMDplots 20191019
+require("JMDplots")
 
 # get the proteins in the requested location
 loc <- "cell.periphery"

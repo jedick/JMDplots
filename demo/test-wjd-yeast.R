@@ -2,6 +2,7 @@
 ## (uses yeast proteins)
 # present in CHNOSZ/test/test-wjd.Rd before 20130110
 # moved from CHNOSZ to JMDplots 20191019
+require("JMDplots")
 
 ### FIXME: equil.potentials(w) returns NULL unless we use group additivity parameters from DLH06 20190206
 ### (issue appears with MKL and OpenBLAS CRAN checks)
