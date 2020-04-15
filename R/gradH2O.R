@@ -508,9 +508,9 @@ gradH2O7 <- function(pdf = FALSE) {
   cex <- c(cex1, cex2)
 
   # get the nH2O - ZC values
-  comptab1 <- lapply_canprot(pdat, get_comptab, plot.it = FALSE, mfun = "median")
+  comptab1 <- lapply(pdat, get_comptab, plot.it = FALSE, mfun = "median")
   # get the GRAVY - pI values
-  comptab2 <- lapply_canprot(pdat, get_comptab, var1 = "pI", var2 = "GRAVY", plot.it = FALSE, mfun = "median")
+  comptab2 <- lapply(pdat, get_comptab, var1 = "pI", var2 = "GRAVY", plot.it = FALSE, mfun = "median")
   # make the plots
   diffplot(comptab1, pt.text = pt.text, pch = pch, col = col,
            contour = contour, cex = cex, col.contour = "maroon3", cex.text = 0.75)

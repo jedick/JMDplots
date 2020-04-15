@@ -47,7 +47,7 @@ datasets <- pdat_HPA()
 ```
 
 ```{r comptab, results="hide", message=FALSE, echo = FALSE}
-pdat1 <- lapply_canprot(datasets, pdat_HPA)
+pdat1 <- lapply(datasets, pdat_HPA)
 comptab1 <- lapply(pdat1, get_comptab)
 pdat2 <- lapply(pdat1, recomp, "biosynth")
 comptab2 <- lapply(pdat2, get_comptab, "nO2")

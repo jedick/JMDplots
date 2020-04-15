@@ -3,7 +3,7 @@
 # JMDplots
 
 This R package has code and data for plots from papers by [Jeffrey M. Dick](http://chnosz.net/jeff).
-Required R packages are [CHNOSZ](http://chnosz.net), and [canprot](https://github.com/jedick/canprot).
+Required R packages are [CHNOSZ](http://chnosz.net) and [canprot](https://github.com/jedick/canprot).
 Both of these packages are available on CRAN, but the development version of **canprot** (from GitHub) is required.
 
 ## Installation
