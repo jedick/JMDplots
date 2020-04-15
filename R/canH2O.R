@@ -35,7 +35,9 @@ canH2O1 <- function(pdf = FALSE) {
   curvedarrow(from = pos[p4, ] + c(-0.13, -0.01), to = pos[pO, ] + c(0.05, 0.27), curve = -0.2, arr.pos = 0.35, endhead = TRUE)
   curvedarrow(from = pos[p6, ] + c(-0.07, 0), to = pos[pO, ] + c(-0.02, 0.23), curve = 0.3, arr.pos = 0.55, endhead = TRUE)
 
-  cols <- palette.colors(8, "Set 2")
+  # hard-coded colors (palette.colors is not available in R < 4.0.0) 20200415
+  #cols <- palette.colors(8, "Set 2")
+  cols <- c("#66C2A5", "#FC8D62", "#8DA0CB", "#E78AC3", "#A6D854", "#FFD92F", "#E5C494", "#B3B3B3")
   cex <- 1.3
   ry <- 0.08
   textrect(pos[p1, ], r1, ry, lab = c("Papers", "SI Tables"), cex = cex, box.col = cols[1])
@@ -123,8 +125,10 @@ canH2O1 <- function(pdf = FALSE) {
   axis(2, tck = 0, labels = FALSE)
   mtext("oxidation state", 1, 0.5)
   mtext("hydration state", 2, 0.5)
-  col1 <- palette.colors(8, "Okabe-Ito")[c(2, 4, 3, 1, 6)]
-  col2 <- palette.colors(8, "Classic Tableau")[c(6, 5, 7, 8, 4, 2)]
+  #col1 <- palette.colors(8, "Okabe-Ito")[c(2, 4, 3, 1, 6)]
+  col1 <- c(orange = "#E69F00", bluishgreen = "#009E73", skyblue = "#56B4E9", black = "#000000", blue = "#0072B2")
+  #col2 <- palette.colors(8, "Classic Tableau")[c(6, 5, 7, 8, 4, 2)]
+  col2 <- c("#8C564B", "#9467BD", "#E377C2", "#7F7F7F", "#D62728", "#FF7F0E")
   # draw arrows to mean values
   # offset x = -0.1 to make room for text
   for(i in 5:1) arrows(-0.1, 0, 35*mean(culture[[i]]$ZC.diff) - 0.1, 35*mean(culture[[i]]$nH2O_rQEC.diff), col = col1[i], lwd = 3, length = 0.15)
@@ -173,8 +177,10 @@ canH2O2 <- function(pdf = FALSE) {
   })
   names(alldat) <- conds
 
-  col1 <- palette.colors(8, "Okabe-Ito")[c(2, 4, 3, 1, 6)]
-  col2 <- palette.colors(8, "Classic Tableau")[c(6, 5, 7, 8, 4, 2)]
+  #col1 <- palette.colors(8, "Okabe-Ito")[c(2, 4, 3, 1, 6)]
+  col1 <- c(orange = "#E69F00", bluishgreen = "#009E73", skyblue = "#56B4E9", black = "#000000", blue = "#0072B2")
+  #col2 <- palette.colors(8, "Classic Tableau")[c(6, 5, 7, 8, 4, 2)]
+  col2 <- c("#8C564B", "#9467BD", "#E377C2", "#7F7F7F", "#D62728", "#FF7F0E")
   col <- c(col1, col2)
 
   # make scatter plots for nH2O and ZC in cell culture and cancer types
@@ -234,7 +240,8 @@ canH2O3 <- function(pdf = FALSE) {
 
   # get colors for six cancers in paper 20191208
   cond2 <- c("colorectal", "pancreatic", "breast", "lung", "prostate", "liver")
-  col2 <- palette.colors(8, "Classic Tableau")[c(6, 5, 7, 8, 4, 2)]
+  #col2 <- palette.colors(8, "Classic Tableau")[c(6, 5, 7, 8, 4, 2)]
+  col2 <- c("#8C564B", "#9467BD", "#E377C2", "#7F7F7F", "#D62728", "#FF7F0E")
   jHPA <- match(cond2, sapply(strsplit(HPA$description, " "), "[", 1))
   colHPA <- rep("darkslategray", nrow(HPA))
   colHPA[jHPA] <- col2
@@ -394,7 +401,8 @@ canH2O4 <- function(pdf = FALSE) {
   conddat <- function(cond) read.csv(paste0(vigout, "/", cond, ".csv"), as.is = TRUE)
   cancer <- lapply(cond2, conddat)
   names(cancer) <- cond2
-  col2 <- palette.colors(8, "Classic Tableau")[c(6, 5, 7, 8, 4, 2)]
+  #col2 <- palette.colors(8, "Classic Tableau")[c(6, 5, 7, 8, 4, 2)]
+  col2 <- c("#8C564B", "#9467BD", "#E377C2", "#7F7F7F", "#D62728", "#FF7F0E")
   opar <- par(mar = c(4, 4, 1, 1), mgp = c(2.3, 1, 0), las = 1)
   contplot(cancer, "", col2,
            xvar = "nAA", yvar = "PS_TPPG17", xlim = c(-250, 200), ylim = c(-5, 5),
@@ -662,7 +670,8 @@ canH2OS2 <- function(pdf = FALSE) {
 
   # get colors for 5 cancers in paper 20191208
   cond2 <- c("colorectal", "pancreatic", "breast", "lung", "prostate", "liver")
-  col2 <- palette.colors(8, "Classic Tableau")[c(6, 5, 7, 8, 4, 2)]
+  #col2 <- palette.colors(8, "Classic Tableau")[c(6, 5, 7, 8, 4, 2)]
+  col2 <- c("#8C564B", "#9467BD", "#E377C2", "#7F7F7F", "#D62728", "#FF7F0E")
   jHPA <- match(cond2, sapply(strsplit(HPA$description, " "), "[", 1))
   colHPA <- rep("slateblue4", nrow(HPA))
   colHPA[jHPA] <- col2
@@ -744,7 +753,8 @@ canH2OS3 <- function(pdf = FALSE) {
   conddat <- function(cond) read.csv(paste0(vigout, "/", cond, ".csv"), as.is = TRUE)
   cancer <- lapply(cond2, conddat)
   names(cancer) <- cond2
-  col2 <- palette.colors(8, "Classic Tableau")[c(6, 5, 7, 8, 4, 2)]
+  #col2 <- palette.colors(8, "Classic Tableau")[c(6, 5, 7, 8, 4, 2)]
+  col2 <- c("#8C564B", "#9467BD", "#E377C2", "#7F7F7F", "#D62728", "#FF7F0E")
   # setup plot
   par(mfrow = c(2, 2))
   par(mar = c(4, 4, 2, 1), mgp = c(2.3, 1, 0), las = 1)
