@@ -8,7 +8,6 @@
 \alias{gradH2O4}
 \alias{gradH2O5}
 \alias{gradH2O6}
-\alias{gradH2O7}
 \alias{NifProteomes}
 \title{Plots from salinity gradients paper}
 \description{
@@ -18,12 +17,11 @@ Plots from the paper by Dick et al. (2020).
 \usage{
   gradH2O0()
   gradH2O1(pdf = FALSE)
-  gradH2O2(pdf = FALSE)
-  gradH2O3(pdf = FALSE, vars = "H2O-ZC")
-  gradH2O4(pdf = FALSE, var = NULL)
+  gradH2O2(pdf = FALSE, vars = "H2O-ZC")
+  gradH2O3(pdf = FALSE, var = NULL)
+  gradH2O4(pdf = FALSE)
   gradH2O5(pdf = FALSE)
   gradH2O6(pdf = FALSE)
-  gradH2O7(pdf = FALSE)
   NifProteomes()
 }
 
@@ -39,15 +37,14 @@ This table gives a brief description of each function.
 \tabular{ll}{
   \code{gradH2O0} \tab Number of reactions for each amino acid in \emph{E. coli} metabolic reconstruction (no plot) \cr
   \code{gradH2O1} \tab Derivation of stoichiometric hydration state \cr
-  \code{gradH2O2} \tab \ZC of proteins for selected redox gradients \cr
-  \code{gradH2O3} \tab \nH2O-\ZC scatterplots for redox gradients and the Baltic Sea \cr
-  \code{gradH2O4} \tab \nH2O for Baltic Sea metagenome and metatranscriptome in different size fractions \cr
-  \code{gradH2O5} \tab \nH2O-\ZC for freshwater, marine, and hypersaline environments \cr
-  \code{gradH2O6} \tab Scatterplots of GRAVY vs \ZC and \nH2O \cr
-  \code{gradH2O7} \tab Mean differences of compositional metrics for differentially expressed proteins in osmotic stress \cr
+  \code{gradH2O2} \tab \nH2O-\ZC scatterplots for redox gradients and the Baltic Sea \cr
+  \code{gradH2O3} \tab \nH2O for Baltic Sea metagenome and metatranscriptome in different size fractions \cr
+  \code{gradH2O4} \tab \nH2O-\ZC for freshwater, marine, and hypersaline environments \cr
+  \code{gradH2O5} \tab Scatterplots of GRAVY vs \ZC and \nH2O \cr
+  \code{gradH2O6} \tab Mean differences of compositional metrics for differentially expressed proteins in osmotic stress \cr
 }
 
-\code{NifProteomes}, which is used in \code{gradH2O2} and \code{gradH2O3}, calculates the mean and standard deviation of \ZC and \nH2O for proteomes encoding different homologs of nitrogenase (Nif-D, Nif-C, Nif-B, or Nif-A), as listed by Poudel et al. (2018).
+\code{NifProteomes}, which is used in \code{gradH2O2}, calculates the mean and standard deviation of \ZC and \nH2O for proteomes encoding different homologs of nitrogenase (Nif-D, Nif-C, Nif-B, or Nif-A), as listed by Poudel et al. (2018).
 The organisms are limited to those that have at least 1000 RefSeq protein sequences, and any duplicated organism names are removed.
 }
 
@@ -87,7 +84,7 @@ Poudel, S. et al. (2018) Electron transfer to nitrogenase in different genomic a
 }
 
 \examples{
-gradH2O1()
+gradH2O2()
 
 # list ZC and nH2O of proteomes for Nif-encoding genomes
 NifProteomes()

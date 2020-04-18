@@ -164,47 +164,9 @@ gradH2O1 <- function(pdf = FALSE) {
   #rQEC
 }
 
-# ZC for selected redox gradients 20190715
-gradH2O2 <- function(pdf = FALSE) {
-  if(pdf) pdf("gradH2O2.pdf", width = 7, height = 5)
-  par(mfrow = c(2, 2))
-  par(mar = c(4, 4, 2, 1), mgp = c(2.5, 0.7, 0))
-  par(cex.lab = 1)
-  mplot("Bison_Pool", "IMG_MGP", add.label = FALSE, plottype = "#FF000030", col = "red")
-  label.figure("A", cex = 1.7, yfrac = 0.93)
-  mplot("Diffuse_Vents", "SRA_MGP", add.label = FALSE, plottype = "#FF000030", col = "red")
-  label.figure("B", cex = 1.7, yfrac = 0.93)
-  mplot("Guerrero_Negro", "IMG_MGP", add.label = FALSE, plottype = "#FF000030", col = "red", ylim = c(-0.150, -0.125))
-  label.figure("C", cex = 1.7, yfrac = 0.93)
-  # add proteomes from Nif-encoding genomes 20191014
-  # get mean and SD of ZC values
-  np <- NifProteomes()
-  ZCmean <- np$ZC
-  ZChi <- ZCmean + np$ZC.SD
-  ZClo <- ZCmean - np$ZC.SD
-  nn <- length(ZCmean)
-  # set up plot
-  plot(0, 0, xlim = c(1, nn), ylim = c(-0.24, -0.13), xlab = "Nif type", ylab = NA, xaxt = "n")
-  mtext(quote(italic(Z)[C]), side = 2, line = 2, las = 0)
-  axis(1, 1:nn, np$type)
-  # draw polygon (filled area)
-  polygon(c(1:nn, nn:1), c(ZChi, rev(ZClo)), col = "#FF000030", border = NA)
-  # draw lines and points
-  lines(1:nn, ZCmean, col = "red", lty = 2)
-  points(1:nn, ZCmean, pch = 19, col = "red")
-  # add title
-  title("Nif-bearing genomes (NF)", font.main = 1)
-  label.figure("D", cex = 1.7, yfrac = 0.93)
-  # done!
-  if(pdf) {
-    dev.off()
-    addexif("gradH2O2", "Carbon oxidation state for selected redox gradients", "Dick et al. (2020) (preprint)")
-  }
-}
-
 # nH2O-ZC scatterplots for redox gradients and the Baltic Sea 20190713
-gradH2O3 <- function(pdf = FALSE, vars = "H2O-ZC") {
-  if(pdf) pdf("gradH2O3.pdf", width = 12, height = 5.6)
+gradH2O2 <- function(pdf = FALSE, vars = "H2O-ZC") {
+  if(pdf) pdf("gradH2O2.pdf", width = 12, height = 5.6)
   par(mfrow = c(1, 2))
   par(mar = c(4, 4.5, 2, 1), las = 1, cex = 1.2)
   par(cex.lab = 1.5)
@@ -271,13 +233,13 @@ gradH2O3 <- function(pdf = FALSE, vars = "H2O-ZC") {
 
   if(pdf) {
     dev.off()
-    addexif("gradH2O3", "nH2O-ZC scatterplots for redox gradients and the Baltic Sea", "Dick et al. (2020) (preprint)")
+    addexif("gradH2O2", "nH2O-ZC scatterplots for redox gradients and the Baltic Sea", "Dick et al. (2020) (preprint)")
   }
 }
 
 # nH2O for Baltic Sea metagenome and metatranscriptome in different size fractions 20190715
-gradH2O4 <- function(pdf = FALSE, var = NULL) {
-  if(pdf) pdf("gradH2O4.pdf", width = 7, height = 3)
+gradH2O3 <- function(pdf = FALSE, var = NULL) {
+  if(pdf) pdf("gradH2O3.pdf", width = 7, height = 3)
   nvar <- ifelse(is.null(var), 1, length(var))
   if(nvar==2) par(mfrow = c(2, 3))
   else par(mfrow = c(1, 3))
@@ -309,7 +271,7 @@ gradH2O4 <- function(pdf = FALSE, var = NULL) {
 
   if(pdf) {
     dev.off()
-    addexif("gradH2O4", "nH2O for Baltic Sea metagenome and metatranscriptome in different size fractions", "Dick et al. (2020) (preprint)")
+    addexif("gradH2O3", "nH2O for Baltic Sea metagenome and metatranscriptome in different size fractions", "Dick et al. (2020) (preprint)")
   }
 }
 
@@ -317,9 +279,9 @@ gradH2O4 <- function(pdf = FALSE, var = NULL) {
 # make separate plot for sediments 20191006
 # add Amazon River 20191007
 # remove sediments and add GRAVY - pI plots 20191027
-gradH2O5 <- function(pdf = FALSE) {
+gradH2O4 <- function(pdf = FALSE) {
 
-  if(pdf) pdf("gradH2O5.pdf", width = 8, height = 5)
+  if(pdf) pdf("gradH2O4.pdf", width = 8, height = 5)
   layout(matrix(1:6, nrow = 2))
   par(las = 1, mar = c(4, 4.2, 2, 1), mgp = c(2.5, 1, 0))
   par(cex.lab = 1.5)
@@ -390,13 +352,13 @@ gradH2O5 <- function(pdf = FALSE) {
 
   if(pdf) {
     dev.off()
-    addexif("gradH2O5", "nH2O vs ZC for freshwater, marine, and hypersaline environments", "Dick et al. (2020) (preprint)")
+    addexif("gradH2O4", "nH2O vs ZC for freshwater, marine, and hypersaline environments", "Dick et al. (2020) (preprint)")
   }
 }
 
 # scatterplots of GRAVY vs ZC and nH2O 20191117
-gradH2O6 <- function(pdf = FALSE) {
-  if(pdf) pdf("gradH2O6.pdf", width = 7, height = 3.2)
+gradH2O5 <- function(pdf = FALSE) {
+  if(pdf) pdf("gradH2O5.pdf", width = 7, height = 3.2)
   par(las = 1, mar = c(4, 4.2, 1, 1), mgp = c(2.5, 1, 0))
   scatterfun <- function(xvar, yvar, AAcomp) {
     if(xvar=="ZC") {
@@ -432,7 +394,7 @@ gradH2O6 <- function(pdf = FALSE) {
   label.figure("B", cex = 1.8)
   if(pdf) {
     dev.off()
-    addexif("gradH2O6", "Scatterplots of GRAVY vs ZC and nH2O", "Dick et al. (2020) (preprint)")
+    addexif("gradH2O5", "Scatterplots of GRAVY vs ZC and nH2O", "Dick et al. (2020) (preprint)")
   }
 }
 
@@ -440,8 +402,8 @@ gradH2O6 <- function(pdf = FALSE) {
 # adapted from canprot/hyperosmotic.Rmd 20190717-20191007
 # add GRAVY and pI plot 20191028
 # use different symbols for eukaryotes and add halophilic bacteria and archaea 20191102-20191103
-gradH2O7 <- function(pdf = FALSE) {
-  if(pdf) pdf("gradH2O7.pdf", width = 8, height = 5.2)
+gradH2O6 <- function(pdf = FALSE) {
+  if(pdf) pdf("gradH2O6.pdf", width = 8, height = 5.2)
   layout(matrix(c(0,0,1,1,1,1,1,1,0,0, 2,2,2,2,2,3,3,3,3,3), nrow = 2, byrow = TRUE), heights = c(0.3, 1))
   par(cex = 1)
 
@@ -520,7 +482,7 @@ gradH2O7 <- function(pdf = FALSE) {
   label.figure("B", cex = 1.7)
   if(pdf) {
     dev.off()
-    addexif("gradH2O7", "Mean differences of compositional metrics for differentially expressed proteins in osmotic stress", "Dick et al. (2020) (preprint)")
+    addexif("gradH2O6", "Mean differences of compositional metrics for differentially expressed proteins in osmotic stress", "Dick et al. (2020) (preprint)")
   }
 }
 
@@ -574,7 +536,7 @@ NifProteomes <- function() {
 # Supplementary Figure S1 20191028 (provisional, not in final paper)
 gradH2OS1 <- function(pdf = FALSE) {
   if(pdf) pdf("gradH2OS1.pdf", width = 12, height = 5.6)
-  gradH2O3(vars = "pIG")
+  gradH2O2(vars = "pIG")
   if(pdf) {
     dev.off()
     addexif("gradH2OS1", "GRAVY-pI scatterplots for redox gradients and the Baltic Sea", "Dick et al. (2020) (preprint)")
@@ -584,7 +546,7 @@ gradH2OS1 <- function(pdf = FALSE) {
 # Supplementary Figure S2 20191028 (provisional, not in final paper)
 gradH2OS2 <- function(pdf = FALSE) {
   if(pdf) pdf("gradH2OS2.pdf", width = 6, height = 2.5)
-  gradH2O4(var = c("GRAVY", "pI"))
+  gradH2O3(var = c("GRAVY", "pI"))
   if(pdf) {
     dev.off()
     addexif("gradH2OS2", "GRAVY and pI for Baltic Sea metagenome and metatranscriptome in different size fractions", "Dick et al. (2020) (preprint)")
