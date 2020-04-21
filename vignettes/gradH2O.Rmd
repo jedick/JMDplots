@@ -1,10 +1,10 @@
 ---
-title: "Six plots from salinity gradients paper (2020)"
+title: "Eight plots from salinity gradients paper (2020)"
 output: 
   rmarkdown::html_vignette:
     mathjax: null
 vignette: >
-  %\VignetteIndexEntry{Six plots from salinity gradients paper (2020)}
+  %\VignetteIndexEntry{Eight plots from salinity gradients paper (2020)}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -70,8 +70,12 @@ gradH2O5()
 gradH2O6()
 ```
 
-## Mean differences of compositional metrics for differentially expressed proteins in osmotic stress (Figure 7)
-```{r gradH2O7, message = FALSE, fig.align='center', out.width='100%', fig.width = 8, fig.height = 5.2, pngquant = pngquant, results = "hide"}
+## Differential gene and protein expression, time-course and NaCl vs organic solutes (Figure 7)
+```{r gradH2O7, message = FALSE, fig.align='center', out.width='100%', fig.width = 8, fig.height = 4, pngquant = pngquant, results = "hide"}
 gradH2O7()
 ```
 
+## Mean differences of compositional metrics for differentially expressed proteins in osmotic stress (Figure 8)
+```{r gradH2O8, message = FALSE, fig.align='center', out.width='100%', fig.width = 8, fig.height = 5.2, pngquant = pngquant, results = "hide"}
+gradH2O8()
+```

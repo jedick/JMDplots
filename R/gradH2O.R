@@ -409,24 +409,152 @@ gradH2O6 <- function(pdf = FALSE) {
   mout <- ppage("balticsurface", plot.it = FALSE)
   pout <- ppage("balticsurface", H2O = TRUE, plot.it = FALSE)
   pcomp(mout, pout, reorder = FALSE, yline = 3.2, cex.ylab = 1.8, font = 2, labdy = 0.003, labels.at = NA, xlim = c(-0.2, -0.08))
-  label.figure("A", cex = 2, xfrac = 0.035)
+  label.figure("A", cex = 1.8, xfrac = 0.035)
   title("Baltic Sea")
   # Baltic Sea GRAVY - pI
   pcomp(mout, pout, reorder = FALSE, vars = "pIG", yline = 3.2, cex.ylab = 1.8, font = 2, labdy = 0.003, labels.at = NA)
-  label.figure("C", cex = 2, xfrac = 0.035)
+  label.figure("C", cex = 1.8, xfrac = 0.035)
 
   # Rodriguez-Brito et al. nH2O - ZC
   mout <- ppage("socal", plot.it = FALSE)
   pout <- ppage("socal", H2O = TRUE, plot.it = FALSE)
   pcomp(mout, pout, reorder = FALSE, yline = 3.2, cex.ylab = 1.8, font = 2, labdy = 0.003, labels.at = NA, xlim = c(-0.2, -0.08))
   title("Rodriguez-Brito et al.")
-  label.figure("B", cex = 2, xfrac = 0.035)
+  label.figure("B", cex = 1.8, xfrac = 0.035)
   # Rodriguez-Brito et al. GRAVY - pI
   pcomp(mout, pout, reorder = FALSE, vars = "pIG", yline = 3.2, cex.ylab = 1.8, font = 2, labdy = 0.003, labels.at = NA)
-  label.figure("D", cex = 2, xfrac = 0.035)
+  label.figure("D", cex = 1.8, xfrac = 0.035)
   if(pdf) {
     dev.off()
     addexif("gradH2O6", "nH2O-ZC and GRAVY-pI plots for Baltic Sea and Rodriguez-Brito et al. data", "Dick et al. (2020) (preprint)")
+  }
+}
+
+# differential gene and protein expression, time-course and NaCl vs organic solutes 20200420
+gradH2O7 <- function(pdf = FALSE) {
+  if(pdf) pdf("gradH2O7.pdf", width = 8, height = 5)
+  layout(matrix(0:11, nrow = 3, byrow = TRUE), widths = c(0.2, 1, 1, 1), heights = c(0.2, 1, 1))
+  # add titles
+  par(mar = c(0, 0, 0, 0))
+  plot.new()
+  text(0.57, 0.5, "All compiled datasets\nfor Bacteria and yeast", font = 2)
+  plot.new()
+  text(0.57, 0.5, "Time-course experiments", font = 2)
+  plot.new()
+  text(0.57, 0.5, "NaCl or organic solutes", font = 2)
+  plot.new()
+  text(0.5, 0.6, "Proteins Coded By\nDifferentially Expressed Transcripts", srt = 90, font = 2)
+  par(mar = c(4, 4, 0.2, 1), mgp = c(2.5, 1, 0))
+
+  # function to plot an arrow partway along a line
+  mkarrow <- function(row1, ct, frac = 0.5) {
+    # row1 is the starting point
+    x1 <- ct$ZC.diff[row1]
+    y1 <- ct$nH2O_rQEC.diff[row1]
+    # the next row is the end of the full line (not the arrow)
+    x2 <- ct$ZC.diff[row1 + 1]
+    y2 <- ct$nH2O_rQEC.diff[row1 + 1]
+    # calculate slope
+    m <- (y2 - y1) / (x2 - x1)
+    # calculate value of x and y on the line (arrow tip)
+    x <- x1 + (x2 - x1) * frac
+    y <- y1 + m * (x - x1)
+    # calculate value of x0 and y0 (start of arrow - just a short line)
+    x0 <- x1 + (x2 - x1) * frac * 0.99
+    y0 <- y1 + m * (x0 - x1)
+    # draw the arrow
+    suppressWarnings(arrows(x0, y0, x, y, length = 0.1, angle = 20, lwd = 2))
+  }
+
+  # function to make diff plot with arrows and points
+  mkdiff <- function(ct, ndat, ...) {
+    # make an empty plot, add lines, then add points
+    diffplot(ct, pch = NA, pt.text = NA, contour = FALSE)
+    n <- 0
+    for(i in 1:length(ndat)) {
+      idat <- n + 1:ndat[i]
+      lines(ct$ZC.diff[idat], ct$nH2O_rQEC.diff[idat])
+      lapply(head(idat, -1), mkarrow, ct = ct)
+      n <- n + ndat[i]
+    }
+    par(bg = "white")
+    diffplot(ct, pch = 21, add = TRUE, contour = FALSE, cex.text = 0.8, ...)
+  }
+
+  # plot A: transcriptomes compilation
+  saltygenes <- read.csv(system.file("vignettes/saltygenes.csv", package = "JMDplots"))
+  diffplot(saltygenes, pt.text = NA, contour = FALSE, cex = 1.5)
+  points(mean(saltygenes$ZC.diff), mean(saltygenes$nH2O_rQEC.diff), pch = 19, cex = 2)
+  label.figure("A", cex = 1.8, xfrac = 0.12, yfrac = 1.05)
+
+  # plot C: transcriptomics: increasing time
+  Ttime <- list(
+    LTH = c("LTH+11_RNA_30", "LTH+11_RNA_60", "LTH+11_RNA_90", "LTH+11_RNA_120", "LTH+11_RNA_240"),
+#    BWBW = c("BBWB12_37_2.5", "BBWB12_37_5", "BBWB12_37_10", "BBWB12_37_20"),
+    KKG = c("KKG+14_Gene_30min", "KKG+14_Gene_80min", "KKG+14_Gene_310min"),
+    SLM = c("SLM+14_5", "SLM+14_30", "SLM+14_60"),
+    FRH = c("FRH+15_NaCl_1h", "FRH+15_NaCl_6h", "FRH+15_NaCl_24h"),
+    HLL = c("HLL17_45min", "HLL17_14h")
+  )
+  comptab <- saltygenes[match(unlist(Ttime), saltygenes$dataset), ]
+  ndat <- sapply(Ttime, length)
+  mkdiff(comptab, ndat)
+  label.figure("C", cex = 1.8, xfrac = 0.12, yfrac = 1.05)
+
+  # plot E: transcriptomics: NaCl or organic solutes
+  Tsolute <- list(
+    KSA = c("KSA+02_NaCl", "KSA+02_sorbitol"),
+    HZP = c("HZP+05_HSS", "HZP+05_HOS"),
+    KLB = c("KLB+15_trans-NaCl", "KLB+15_trans-suc"),
+    FRH_1 = c("FRH+15_NaCl_1h", "FRH+15_glycerol_1h"),
+    FRH_6 = c("FRH+15_NaCl_6h", "FRH+15_glycerol_6h")
+  )
+  comptab <- saltygenes[match(unlist(Tsolute), saltygenes$dataset), ]
+  ndat <- sapply(Tsolute, length)
+  mkdiff(comptab, ndat, pt.text = c("A", "B", "C", "D", "E", "F", "G", "H", "I", "J"))
+  label.figure("E", cex = 1.8, xfrac = 0.12, yfrac = 1.05)
+
+  par(mar = c(0, 0, 0, 0))
+  plot.new()
+  text(0.5, 0.6, "Differentially Expressed Proteins", srt = 90, font = 2)
+  par(mar = c(4, 4, 0.2, 1), mgp = c(2.5, 1, 0))
+
+  # plot B: proteomes compilation
+  osmotic_bact <- read.csv(system.file("extdata/vignette_output/osmotic_bact.csv", package = "canprot"))
+  diffplot(osmotic_bact, pt.text = NA, contour = FALSE, cex = 1.5)
+  points(mean(osmotic_bact$ZC.diff), mean(osmotic_bact$nH2O_rQEC.diff), pch = 19, cex = 2)
+  label.figure("B", cex = 1.8, xfrac = 0.12, yfrac = 1.05)
+
+  # plot D: proteomics: increasing time
+  osmotic_euk <- read.csv(system.file("extdata/vignette_output/osmotic_euk.csv", package = "canprot"))
+  Ptime <- list(
+    LTH = c("LTH+11_Protein_30", "LTH+11_Protein_60", "LTH+11_Protein_90", "LTH+11_Protein_120", "LTH+11_Protein_240"),
+    KKG = c("KKG+14_Protein_30min", "KKG+14_Protein_80min", "KKG+14_Protein_310min"),
+    QHT = c("QHT+13_24.h", "QHT+13_48.h"),
+    SCG = c("SCG+15_nodelay", "SCG+15_delayed")
+  )
+  LTHtab <- osmotic_euk[match(Ptime$LTH, osmotic_euk$dataset), ]
+  KKGtab <- osmotic_bact[match(Ptime$KKG, osmotic_bact$dataset), ]
+  QHTtab <- osmotic_bact[match(Ptime$QHT, osmotic_bact$dataset), ]
+  SCGtab <- osmotic_euk[match(Ptime$SCG, osmotic_euk$dataset), ]
+  comptab <- rbind(LTHtab, KKGtab, QHTtab, SCGtab)
+  ndat <- sapply(Ptime, length)
+  mkdiff(comptab, ndat, pt.text = c("a", "b", "c", "d", "e", "f", "g", "h", "q", "r", "s", "t"))
+  label.figure("D", cex = 1.8, xfrac = 0.12, yfrac = 1.05)
+
+  # plot F: proteomics: NaCl or organic solutes
+  Psolute <- list(
+    KLB = c("KLB+15_prot-NaCl", "KLB+15_prot-suc"),
+    SKV = c("SKV+16_Osmotic.stress.glucose_LB", "SKV+16_Glucose_LB")
+  )
+  comptab <- osmotic_bact[match(unlist(Psolute), osmotic_bact$dataset), ]
+  ndat <- sapply(Psolute, length)
+  mkdiff(comptab, ndat, pt.text = c("G", "H", "I", "J"))
+  label.figure("F", cex = 1.8, xfrac = 0.12, yfrac = 1.05)
+
+  if(pdf) {
+    dev.off()
+    addexif("gradH2O7", "differential gene and protein expression, time-course and NaCl vs organic solutes", "Dick et al. (2020) (preprint)")
   }
 }
 
@@ -434,8 +562,8 @@ gradH2O6 <- function(pdf = FALSE) {
 # adapted from canprot/hyperosmotic.Rmd 20190717-20191007
 # add GRAVY and pI plot 20191028
 # use different symbols for eukaryotes and add halophilic bacteria and archaea 20191102-20191103
-gradH2O7 <- function(pdf = FALSE) {
-  if(pdf) pdf("gradH2O7.pdf", width = 8, height = 5.2)
+gradH2O8 <- function(pdf = FALSE) {
+  if(pdf) pdf("gradH2O8.pdf", width = 8, height = 5.2)
   layout(matrix(c(0,0,1,1,1,1,1,1,0,0, 2,2,2,2,2,3,3,3,3,3), nrow = 2, byrow = TRUE), heights = c(0.3, 1))
   par(cex = 1)
 
@@ -507,7 +635,7 @@ gradH2O7 <- function(pdf = FALSE) {
   label.figure("B", cex = 1.7)
   if(pdf) {
     dev.off()
-    addexif("gradH2O7", "Mean differences of compositional metrics for differentially expressed proteins in osmotic stress", "Dick et al. (2020) (preprint)")
+    addexif("gradH2O8", "Mean differences of compositional metrics for differentially expressed proteins in osmotic stress", "Dick et al. (2020) (preprint)")
   }
 }
 

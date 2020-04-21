@@ -9,6 +9,7 @@
 \alias{gradH2O5}
 \alias{gradH2O6}
 \alias{gradH2O7}
+\alias{gradH2O8}
 \alias{NifProteomes}
 \title{Plots from salinity gradients paper}
 \description{
@@ -24,6 +25,7 @@ Plots from the paper by Dick et al. (2020).
   gradH2O5(pdf = FALSE)
   gradH2O6(pdf = FALSE)
   gradH2O7(pdf = FALSE)
+  gradH2O8(pdf = FALSE)
   NifProteomes()
 }
 
@@ -44,7 +46,8 @@ This table gives a brief description of each function.
   \code{gradH2O4} \tab \nH2O-\ZC for freshwater, marine, and hypersaline environments \cr
   \code{gradH2O5} \tab Scatterplots of GRAVY vs \ZC and \nH2O \cr
   \code{gradH2O6} \tab \nH2O-\ZC and GRAVY-pI plots for Baltic Sea and Rodriguez-Brito et al. data \cr
-  \code{gradH2O7} \tab Mean differences of compositional metrics for differentially expressed proteins in osmotic stress \cr
+  \code{gradH2O7} \tab Differential gene and protein expression, time-course and NaCl vs organic solutes \cr
+  \code{gradH2O8} \tab Mean differences of compositional metrics for differentially expressed proteins in osmotic stress \cr
 }
 
 \code{NifProteomes}, which is used in \code{gradH2O2}, calculates the mean and standard deviation of \ZC and \nH2O for proteomes encoding different homologs of nitrogenase (Nif-D, Nif-C, Nif-B, or Nif-A), as listed by Poudel et al. (2018).
