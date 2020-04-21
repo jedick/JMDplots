@@ -2,7 +2,6 @@
 \name{pdat_}
 \alias{pdat_TCGA}
 \alias{pdat_HPA}
-\alias{pdat_CH16}
 \alias{pdat_saltygenes}
 \title{Get Protein Expression Data}
 \description{
@@ -14,7 +13,6 @@
 \usage{
   pdat_TCGA(dataset = 2020, basis = "rQEC")
   pdat_HPA(dataset = 2020, basis = "rQEC")
-  pdat_CH16(dataset = 2020, basis = "rQEC")
   pdat_saltygenes(dataset = 2020, basis = "rQEC")
 }
 
@@ -28,9 +26,6 @@
 Expression levels for normal tissue and cancer are from the Genotype-Tissue Expression project (GTEx Consortium, 2017) and The Cancer Genome Atlas (TCGA Research Network et al., 2013; Hutter and Zenklusen, 2018).
 
 \code{pdat_HPA} calculates chemical composition for protein expression data from the Human Protein Atlas (Uhlen et al., 2015).
-
-\code{pdat_CH16} calculates chemical composition for proteins corresponding to 302 genes with common expression changes across cancer types, defined as genes with unidirectional expression changes in at least 13 of 32 cancer data sets (Chen and He, 2016).
-This function is used in \code{\link{canH2O2}}.
 
 \code{pdat_saltygenes} gets data for differentially expressed genes in transcriptomic experiments for bacteria.
 }
@@ -48,16 +43,10 @@ This function is used in \code{\link{canH2O2}}.
       Ensembl Gene IDs were converted to UniProt IDs using the UniProt mapping tool (\url{https://www.uniprot.org/mapping/}).
     }
 
-    \item{\code{CH16.csv}}{
-      Ensembl Gene IDs, UniProt IDs, and regulation in cancer, from Supplementary Table S3 of Chen and He (2016).
-      Ensembl Gene IDs were converted to UniProt IDs using the UniProt mapping tool (\url{https://www.uniprot.org/mapping/}).
-    }
   }
 }
 
 \references{
-Chen, H. and He, X. (2016) The convergent cancer evolution toward a single cellular destination. \emph{Mol. Biol. Evol.} \bold{33}, 4--12. \doi{10.1093/molbev/msv212}
-
 GTEx Consortium (2017) Genetic effects on gene expression across human tissues. \emph{Nature} \bold{550}, 204--213. \doi{10.1038/nature24277}
 
 Hutter, C. and Zenklusen, J. C. (2018) The Cancer Genome Atlas: Creating lasting value beyond its data. \emph{Cell} \bold{173}, 283--285. \doi{10.1016/j.cell.2018.03.042}
@@ -78,14 +67,13 @@ Uhlen, M. et al. (2015) A pathology atlas of the human cancer transcriptome. \em
 pdat_TCGA(2020)
 # process one dataset (adrenocortical carcinoma)
 pdat_TCGA("GEPIA2_ACC")
+# show the median values and differences of
+# ZC and nH2O between groups of proteins
+# corresponding to up- and down-regulated genes
+(get_comptab(pdat_TCGA("GEPIA2_ACC")))
 
 # list datasets for cancer types in HPA
 pdat_HPA(2020)
 # process one dataset (breast cancer)
 pdat_HPA("HPA19_1")
-
-# show the median values and differences of
-# ZC and nH2O between groups of proteins
-# corresponding to up- and down-regulated genes
-(get_comptab(pdat_CH16("CH16")))
 }

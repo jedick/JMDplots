@@ -22,7 +22,7 @@ pngquant <- "--speed=1 --quality=0-25"
 if (!nzchar(Sys.which("pngquant"))) pngquant <- NULL 
 ```
 
-This vignette from the R package [canprot](https://github.com/jedick/canprot) version `r packageDescription("canprot")$Version` shows compositional metrics and phylostrata for proteins coded by genes that are differentially expressed in hyperosmotic compared to control conditions.
+This vignette from the R package [JMDplots](https://github.com/jedick/JMDplots) version `r packageDescription("JMDplots")$Version` shows compositional metrics and phylostrata for proteins coded by genes that are differentially expressed in hyperosmotic compared to control conditions.
 Abbreviations:
 
   * <i>Z</i><sub>C</sub> &ndash; carbon oxidation state; <i>n</i><sub>H<sub>2</sub>O</sub> &ndash; stoichiometric hydration state; <i>n</i><sub>O<sub>2</sub></sub> &ndash; stoichiometric oxidation state.

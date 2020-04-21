@@ -233,7 +233,7 @@ canH2O2 <- function(pdf = FALSE) {
 
 # nH2O-ZC and phylostrata plots for TCGA and HPA datasets 20191126
 canH2O3 <- function(pdf = FALSE) {
-  vigout2 <- system.file("extdata/vignette_output", package = "JMDplots")
+  vigout2 <- system.file("vignettes", package = "JMDplots")
   HPA <- read.csv(file.path(vigout2, "HPA.csv"), as.is = TRUE)
   TCGA <- read.csv(file.path(vigout2, "TCGA.csv"), as.is = TRUE)
   TCGA_labels <- TCGA$description
@@ -454,8 +454,8 @@ canH2O5 <- function(pdf = FALSE) {
   par(mfrow = c(1, 2))
 
   # read data
-  TCGA <- read.csv(system.file("extdata/vignette_output/TCGA.csv", package = "JMDplots"), as.is = TRUE)
-  HPA <- read.csv(system.file("extdata/vignette_output/HPA.csv", package = "JMDplots"), as.is = TRUE)
+  TCGA <- read.csv(system.file("vignettes/TCGA.csv", package = "JMDplots"), as.is = TRUE)
+  HPA <- read.csv(system.file("vignettes/HPA.csv", package = "JMDplots"), as.is = TRUE)
   # define labels
   rQEClab <- quote(Delta*italic(n)[H[2] * O]~"(stoichiometric hydration state)        ")
   biolab <- quote(Delta*italic(n)[H[2] * O]~"(AA biosynthesis)")
@@ -491,7 +491,7 @@ canH2OT2 <- function() {
   conddat <- function(cond) read.csv(paste0(vigout, "/", cond, ".csv"), as.is = TRUE)
   culture <- lapply(cond1, conddat); names(culture) <- cond1
   cancer <- lapply(cond2, conddat); names(cancer) <- cond2
-  vigout2 <- system.file("extdata/vignette_output", package = "JMDplots")
+  vigout2 <- system.file("vignettes", package = "JMDplots")
   conddat <- function(cond) read.csv(paste0(vigout2, "/", cond, ".csv"))
   pancan <- lapply(cond3, conddat); names(pancan) <- cond3
   # make data frames for mean differences and p-values
@@ -663,7 +663,7 @@ canH2OS1 <- function(pdf = FALSE) {
 
 # HPA-TCGA scatterplots for ZC and nH2O 20200127
 canH2OS2 <- function(pdf = FALSE) {
-  vigout2 <- system.file("extdata/vignette_output", package = "JMDplots")
+  vigout2 <- system.file("vignettes", package = "JMDplots")
   HPA <- read.csv(file.path(vigout2, "HPA.csv"), as.is = TRUE)
   TCGA <- read.csv(file.path(vigout2, "TCGA.csv"), as.is = TRUE)
   TCGA_labels <- TCGA$description
@@ -783,8 +783,8 @@ canH2OS4 <- function(pdf = FALSE) {
   par(mfrow = c(2, 2))
 
   # read data
-  TCGA <- read.csv(system.file("extdata/vignette_output/TCGA.csv", package = "JMDplots"), as.is = TRUE)
-  HPA <- read.csv(system.file("extdata/vignette_output/HPA.csv", package = "JMDplots"), as.is = TRUE)
+  TCGA <- read.csv(system.file("vignettes/TCGA.csv", package = "JMDplots"), as.is = TRUE)
+  HPA <- read.csv(system.file("vignettes/HPA.csv", package = "JMDplots"), as.is = TRUE)
   # define labels
   ZClab <- quote(Delta*italic(Z)[C]~"(carbon oxidation state)")
   O2lab <- quote(Delta*italic(n)[O[2]]~"(AA biosynthesis)")
@@ -824,7 +824,7 @@ canH2OS4 <- function(pdf = FALSE) {
 canH2OS5 <- function(pdf = FALSE) {
   if(pdf) pdf("canH2OS5.pdf", width = 6, height = 6)
   # get TCGA and HPA data
-  vigout2 <- system.file("extdata/vignette_output", package = "JMDplots")
+  vigout2 <- system.file("vignettes", package = "JMDplots")
   HPA <- read.csv(file.path(vigout2, "HPA.csv"), as.is = TRUE)
   TCGA <- read.csv(file.path(vigout2, "TCGA.csv"), as.is = TRUE)
   # map HPA datasets to TCGA abbreviations

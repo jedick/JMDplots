@@ -427,11 +427,8 @@ gradH2O6 <- function(pdf = FALSE) {
   par(mar = c(4, 4, 1, 1), mgp = c(2.5, 1, 0))
   par(xpd = FALSE)
 
-  # generate compositional table
-  datasets1 <- pdat_osmotic_bact(2020)
-  pdat1 <- lapply(datasets1, function(dataset) {
-    pdat_osmotic_bact(dataset, basis = "rQEC")
-  })
+  # get names of hyperosmotic stress datasets in canprot
+  datasets1 <- pdat_osmotic_bact()
   # use filled square for eukaryotes, open circle for bacteria, open triangle for gene expression 20191102
   pch1 <- rep(15, length(datasets1))
   igene1 <- grepl("trans", datasets1)
@@ -446,9 +443,6 @@ gradH2O6 <- function(pdf = FALSE) {
 
   # get new data (added for this paper)
   datasets2 <- pdat_osmotic_halo()
-  pdat2 <- lapply(datasets2, function(dataset) {
-    pdat_osmotic_halo(dataset, basis = "rQEC")
-  })
   # use open circle except open triangle for gene expression and open square for hypo-osmotic conditions 20191103
   pch2 <- rep(1, length(datasets2))
   igene2 <- grepl("trans", datasets2)
@@ -462,22 +456,21 @@ gradH2O6 <- function(pdf = FALSE) {
   contour <- c(ibact1, !(igene2 | ihypo2))
 
   # put the data together
-  pdat <- c(pdat1, pdat2)
   datasets <- c(datasets1, datasets2)
   pch <- c(pch1, pch2)
   pt.text <- c(pt1, pt2)
   col <- c(col1, col2)
   cex <- c(cex1, cex2)
 
-  # get the nH2O - ZC values
-  comptab1 <- lapply(pdat, get_comptab, plot.it = FALSE, mfun = "median")
-  # get the GRAVY - pI values
-  comptab2 <- lapply(pdat, get_comptab, var1 = "pI", var2 = "GRAVY", plot.it = FALSE, mfun = "median")
+  # get the nH2O - ZC and GRAVY - pI values
+  comptab1 <- read.csv(system.file("extdata/vignette_output/osmotic_bact.csv", package = "canprot"))
+  comptab2 <- read.csv(system.file("extdata/vignette_output/osmotic_halo.csv", package = "canprot"))
+  comptab <- rbind(comptab1, comptab2)
   # make the plots
-  diffplot(comptab1, pt.text = pt.text, pch = pch, col = col,
+  diffplot(comptab, pt.text = pt.text, pch = pch, col = col,
            contour = contour, cex = cex, col.contour = "maroon3", cex.text = 0.75)
   label.figure("A", cex = 1.7)
-  diffplot(comptab2, vars = c("pI", "GRAVY"), pt.text = pt.text, pch = pch, col = col,
+  diffplot(comptab, vars = c("pI", "GRAVY"), pt.text = pt.text, pch = pch, col = col,
            contour = contour, cex = cex, col.contour = "maroon3", cex.text = 0.75)
   label.figure("B", cex = 1.7)
   if(pdf) {

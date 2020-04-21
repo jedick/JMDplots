@@ -30,8 +30,10 @@ export(
   # canH2O supplementary tables and figures 20200205
   "canH2OT1", "canH2OT3",
   "canH2OS1", "canH2OS2", "canH2OS3",
-  # canH2O paper 20200223, 20200301, 20200409, 20200420
-  "pdat_CH16", "canH2OS4", "canH2OS5", "pdat_saltygenes"
+  # canH2O paper 20200301, 20200409, 20200420
+  "canH2OS4", "canH2OS5", "pdat_saltygenes",
+  # 20200421
+  "makevig"
 )
 
 # imports from CHNOSZ
@@ -99,5 +101,6 @@ importFrom("graphics", "abline", "arrows", "axis", "box", "layout",
 importFrom("stats", "lm", "na.omit", "predict", "sd", "predict.lm", "residuals",
            "qqline", "qqnorm", "quantile", "median", "fivenum",
            "density", "formula", "t.test", "approx")
-importFrom("utils", "read.csv", "demo", "packageVersion", "tail", "write.csv", "capture.output")
+importFrom("utils", "read.csv", "demo", "packageVersion", "tail", "write.csv",
+           "capture.output", "browseURL")
 
