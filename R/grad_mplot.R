@@ -49,7 +49,9 @@ usedin <- list(
   # hypersaline water
   hypersaline = c("Kulunda_Steppe", "Santa_Pola", "SouthBay_Water"),
   # Amazon River free-living and particle-associated
-  amazon = c("Amazon_River-FL", "Amazon_River-PA")
+  amazon = c("Amazon_River-FL", "Amazon_River-PA"),
+  # southern California salinity gradient - microbes (Rodriguez-Brito et al., 2010)
+  socal = c("Rodriguez_Brito-mic")
 )
 
 # function to plot sampled compositions for indicated study and sequence type 20180222

@@ -174,6 +174,46 @@ gradH2O <- list(
               "plumePA", "plumePA", "plumePA", "plumePA", "plumePA", "plumePA"),
     plot_real_x = FALSE,
     techtype = "Illumina"
+  ),
+  `Rodriguez_Brito-mic` = list( # 20190723 [RLW+10]
+    sample = c("A-M", "B-M", "C-M", "B2-M",
+               "D-M", "E-M", "F-M",
+               "G-M", "H-M", "I-M", "K-M",
+               "P-M", "M-M"),
+    MGRAST_MG = c("mgm4440440.3", "mgm4440413.3", "mgm4440422.3", "mgm4440411.3",
+                  "mgm4440437.3", "mgm4440324.3", "mgm4440426.3",
+                  "mgm4440435.3", "mgm4440434.3", "mgm4440425.3", "mgm4440416.3",
+                  "mgm4440438.3", "mgm4440419.3"
+    ),
+    MG_range = c(0.57, 0.64),
+    MGP_range = c(-0.20, -0.13),
+    abbrev = "RM",
+    group = c("lake", "lake", "lake", "lake",
+              "oxic", "oxic", "oxic",
+              "hypersaline", "hypersaline", "hypersaline", "hypersaline",
+              "hypersaline", "hypersaline"),
+    plot_real_x = FALSE,
+    techtype = "454"
+  ),
+  `Rodriguez_Brito-vir` = list( # 20190723 [RLW+10]
+    sample = c("A-V", "B-V", "C-V", "B2-V",
+               "D-V", "E-V", "F-V",
+               "G-V", "H-V", "I-V", "J-V", "K-V",
+               "L-V", "M-V", "N-V"),
+    MGRAST_MG = c("mgm4440439.3", "mgm4440412.3", "mgm4440424.3", "mgm4440414.3",
+                  "mgm4440436.3", "mgm4440432.3", "mgm4440420.3",
+                  "mgm4440431.3", "mgm4440325.3", "mgm4440428.3", "mgm4440417.3", "mgm4440427.3",
+                  "mgm4440421.3", "mgm4440144.4", "mgm4440145.4"
+    ),
+    MG_range = c(0.57, 0.64),
+    MGP_range = c(-0.20, -0.13),
+    abbrev = "RV",
+    group = c("lake", "lake", "lake", "lake",
+              "oxic", "oxic", "oxic",
+              "hypersaline", "hypersaline", "hypersaline", "hypersaline", "hypersaline",
+              "hypersaline", "hypersaline", "hypersaline"),
+    plot_real_x = FALSE,
+    techtype = "454"
   )
 )
 

@@ -398,12 +398,44 @@ gradH2O5 <- function(pdf = FALSE) {
   }
 }
 
+# nH2O-ZC and GRAVY-pI plots for Baltic Sea and Rodriguez-Brito et al. data 20200421
+gradH2O6 <- function(pdf = FALSE) {
+  if(pdf) pdf("gradH2O6.pdf", width = 8, height = 8)
+  layout(matrix(1:4, nrow = 2))
+  par(mar = c(4, 4.5, 2, 1), las = 1, cex = 1.2)
+  par(cex.lab = 1.5)
+
+  # Baltic Sea nH2O - ZC
+  mout <- ppage("balticsurface", plot.it = FALSE)
+  pout <- ppage("balticsurface", H2O = TRUE, plot.it = FALSE)
+  pcomp(mout, pout, reorder = FALSE, yline = 3.2, cex.ylab = 1.8, font = 2, labdy = 0.003, labels.at = NA, xlim = c(-0.2, -0.08))
+  label.figure("A", cex = 2, xfrac = 0.035)
+  title("Baltic Sea")
+  # Baltic Sea GRAVY - pI
+  pcomp(mout, pout, reorder = FALSE, vars = "pIG", yline = 3.2, cex.ylab = 1.8, font = 2, labdy = 0.003, labels.at = NA)
+  label.figure("C", cex = 2, xfrac = 0.035)
+
+  # Rodriguez-Brito et al. nH2O - ZC
+  mout <- ppage("socal", plot.it = FALSE)
+  pout <- ppage("socal", H2O = TRUE, plot.it = FALSE)
+  pcomp(mout, pout, reorder = FALSE, yline = 3.2, cex.ylab = 1.8, font = 2, labdy = 0.003, labels.at = NA, xlim = c(-0.2, -0.08))
+  title("Rodriguez-Brito et al.")
+  label.figure("B", cex = 2, xfrac = 0.035)
+  # Rodriguez-Brito et al. GRAVY - pI
+  pcomp(mout, pout, reorder = FALSE, vars = "pIG", yline = 3.2, cex.ylab = 1.8, font = 2, labdy = 0.003, labels.at = NA)
+  label.figure("D", cex = 2, xfrac = 0.035)
+  if(pdf) {
+    dev.off()
+    addexif("gradH2O6", "nH2O-ZC and GRAVY-pI plots for Baltic Sea and Rodriguez-Brito et al. data", "Dick et al. (2020) (preprint)")
+  }
+}
+
 # median differences of compositional metrics for differentially expressed proteins in osmotic stress
 # adapted from canprot/hyperosmotic.Rmd 20190717-20191007
 # add GRAVY and pI plot 20191028
 # use different symbols for eukaryotes and add halophilic bacteria and archaea 20191102-20191103
-gradH2O6 <- function(pdf = FALSE) {
-  if(pdf) pdf("gradH2O6.pdf", width = 8, height = 5.2)
+gradH2O7 <- function(pdf = FALSE) {
+  if(pdf) pdf("gradH2O7.pdf", width = 8, height = 5.2)
   layout(matrix(c(0,0,1,1,1,1,1,1,0,0, 2,2,2,2,2,3,3,3,3,3), nrow = 2, byrow = TRUE), heights = c(0.3, 1))
   par(cex = 1)
 
@@ -475,7 +507,7 @@ gradH2O6 <- function(pdf = FALSE) {
   label.figure("B", cex = 1.7)
   if(pdf) {
     dev.off()
-    addexif("gradH2O6", "Mean differences of compositional metrics for differentially expressed proteins in osmotic stress", "Dick et al. (2020) (preprint)")
+    addexif("gradH2O7", "Mean differences of compositional metrics for differentially expressed proteins in osmotic stress", "Dick et al. (2020) (preprint)")
   }
 }
 

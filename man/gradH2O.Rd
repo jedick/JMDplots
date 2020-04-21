@@ -8,6 +8,7 @@
 \alias{gradH2O4}
 \alias{gradH2O5}
 \alias{gradH2O6}
+\alias{gradH2O7}
 \alias{NifProteomes}
 \title{Plots from salinity gradients paper}
 \description{
@@ -22,6 +23,7 @@ Plots from the paper by Dick et al. (2020).
   gradH2O4(pdf = FALSE)
   gradH2O5(pdf = FALSE)
   gradH2O6(pdf = FALSE)
+  gradH2O7(pdf = FALSE)
   NifProteomes()
 }
 
@@ -41,7 +43,8 @@ This table gives a brief description of each function.
   \code{gradH2O3} \tab \nH2O for Baltic Sea metagenome and metatranscriptome in different size fractions \cr
   \code{gradH2O4} \tab \nH2O-\ZC for freshwater, marine, and hypersaline environments \cr
   \code{gradH2O5} \tab Scatterplots of GRAVY vs \ZC and \nH2O \cr
-  \code{gradH2O6} \tab Mean differences of compositional metrics for differentially expressed proteins in osmotic stress \cr
+  \code{gradH2O6} \tab \nH2O-\ZC and GRAVY-pI plots for Baltic Sea and Rodriguez-Brito et al. data \cr
+  \code{gradH2O7} \tab Mean differences of compositional metrics for differentially expressed proteins in osmotic stress \cr
 }
 
 \code{NifProteomes}, which is used in \code{gradH2O2}, calculates the mean and standard deviation of \ZC and \nH2O for proteomes encoding different homologs of nitrogenase (Nif-D, Nif-C, Nif-B, or Nif-A), as listed by Poudel et al. (2018).
@@ -80,7 +83,9 @@ Dick, J. M., Yu, M. and Tan, J. (2020) Distinct trends in chemical composition o
 
 Feist, A. M. et al. (2007) A genome-scale metabolic reconstruction for \emph{Escherichia coli} K-12 MG1655 that accounts for 1260 ORFs and thermodynamic information. \emph{Mol. Syst. Biol.} \bold{3}, 121. \doi{10.1038/msb4100155}
 
-Poudel, S. et al. (2018) Electron transfer to nitrogenase in different genomic and metabolic backgrounds. \emph{J. Bacteriol.} \bold{200}, e00757-17. \doi{10.1128/JB.00757-17}
+Poudel, S. et al. (2018) Electron transfer to nitrogenase in different genomic and metabolic backgrounds. \emph{J. Bacteriol.} \bold{200}, e00710.1038/ismej.2010.157-17. \doi{10.1128/JB.00757-17}
+
+Rodriguez-Brito, B. et al. (2010) Viral and microbial community dynamics in four aquatic environments. \emph{ISME J.} \bold{4}, 739--751. \doi{10.1038/ismej.2010.1}
 }
 
 \examples{
