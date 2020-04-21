@@ -428,9 +428,9 @@ gradH2O6 <- function(pdf = FALSE) {
   par(xpd = FALSE)
 
   # generate compositional table
-  datasets1 <- pdat_osmotic(2017)
+  datasets1 <- pdat_osmotic_bact(2020)
   pdat1 <- lapply(datasets1, function(dataset) {
-    pdat_osmotic(dataset, basis = "rQEC")
+    pdat_osmotic_bact(dataset, basis = "rQEC")
   })
   # use filled square for eukaryotes, open circle for bacteria, open triangle for gene expression 20191102
   pch1 <- rep(15, length(datasets1))
@@ -445,9 +445,9 @@ gradH2O6 <- function(pdf = FALSE) {
   cex1[igene1] <- 1.2
 
   # get new data (added for this paper)
-  datasets2 <- pdat_halophiles()
+  datasets2 <- pdat_osmotic_halo()
   pdat2 <- lapply(datasets2, function(dataset) {
-    pdat_halophiles(dataset, basis = "rQEC")
+    pdat_osmotic_halo(dataset, basis = "rQEC")
   })
   # use open circle except open triangle for gene expression and open square for hypo-osmotic conditions 20191103
   pch2 <- rep(1, length(datasets2))

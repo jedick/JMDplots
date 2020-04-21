@@ -3,6 +3,7 @@
 \alias{pdat_TCGA}
 \alias{pdat_HPA}
 \alias{pdat_CH16}
+\alias{pdat_saltygenes}
 \title{Get Protein Expression Data}
 \description{
   These functions are used to calculate compositional metrics, including carbon oxidation state and stoichiometric hydration state, for differentially expressed proteins or proteins corresponding to differentially expressed genes.
@@ -14,6 +15,7 @@
   pdat_TCGA(dataset = 2020, basis = "rQEC")
   pdat_HPA(dataset = 2020, basis = "rQEC")
   pdat_CH16(dataset = 2020, basis = "rQEC")
+  pdat_saltygenes(dataset = 2020, basis = "rQEC")
 }
 
 \arguments{
@@ -29,6 +31,8 @@ Expression levels for normal tissue and cancer are from the Genotype-Tissue Expr
 
 \code{pdat_CH16} calculates chemical composition for proteins corresponding to 302 genes with common expression changes across cancer types, defined as genes with unidirectional expression changes in at least 13 of 32 cancer data sets (Chen and He, 2016).
 This function is used in \code{\link{canH2O2}}.
+
+\code{pdat_saltygenes} gets data for differentially expressed genes in transcriptomic experiments for bacteria.
 }
 
 \section{Files in extdata/expression/pancan}{
