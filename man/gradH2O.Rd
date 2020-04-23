@@ -47,7 +47,7 @@ This table gives a brief description of each function.
   \code{gradH2O5} \tab Scatterplots of GRAVY vs \ZC and \nH2O \cr
   \code{gradH2O6} \tab \nH2O-\ZC and GRAVY-pI plots for Baltic Sea and Rodriguez-Brito et al. data \cr
   \code{gradH2O7} \tab Differential gene and protein expression, time-course and NaCl vs organic solutes \cr
-  \code{gradH2O8} \tab Mean differences of compositional metrics for differentially expressed proteins in osmotic stress \cr
+  \code{gradH2O8} \tab Differentially expressed proteins in halophiles under hypo- and hyperosmotic stress \cr
 }
 
 \code{NifProteomes}, which is used in \code{gradH2O2}, calculates the mean and standard deviation of \ZC and \nH2O for proteomes encoding different homologs of nitrogenase (Nif-D, Nif-C, Nif-B, or Nif-A), as listed by Poudel et al. (2018).

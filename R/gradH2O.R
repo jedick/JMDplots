@@ -169,12 +169,12 @@ gradH2O2 <- function(pdf = FALSE, vars = "H2O-ZC") {
   if(pdf) pdf("gradH2O2.pdf", width = 12, height = 5.6)
   par(mfrow = c(1, 2))
   par(mar = c(4, 4.5, 2, 1), las = 1, cex = 1.2)
-  par(cex.lab = 1.5)
+  par(cex.lab = 1.3)
 
   # plot 1: compare ZC and nH2O of proteins in datasets from gradox paper
   mgradox <- ppage("gradoxGS", plot.it = FALSE)
   pgradox <- ppage("gradoxGS", H2O = TRUE, plot.it = FALSE)
-  pcomp(mgradox, pgradox, reorder = FALSE, yline = 3.2, vars = vars, cex.ylab = 1.8, font = 2, labdy = 0.003)
+  pcomp(mgradox, pgradox, reorder = FALSE, yline = 3.2, vars = vars, cex.ylab = 1.5, font = 2, labdy = 0.003)
   # add proteomes from Nif-encoding genomes 20191014
   np <- NifProteomes()
   if(vars == "H2O-ZC") {
@@ -358,7 +358,7 @@ gradH2O4 <- function(pdf = FALSE) {
 
 # scatterplots of GRAVY vs ZC and nH2O 20191117
 gradH2O5 <- function(pdf = FALSE) {
-  if(pdf) pdf("gradH2O5.pdf", width = 7, height = 3.2)
+  if(pdf) pdf("gradH2O5.pdf", width = 7, height = 5)
   par(las = 1, mar = c(4, 4.2, 1, 1), mgp = c(2.5, 1, 0))
   scatterfun <- function(xvar, yvar, AAcomp) {
     if(xvar=="ZC") {
@@ -373,6 +373,10 @@ gradH2O5 <- function(pdf = FALSE) {
       y <- GRAVY(AAcomp)
       ylab <- "GRAVY"
     }
+    if(yvar=="pI") {
+      y <- pI(AAcomp)
+      ylab <- "pI"
+    }
     # make scatterplot
     smoothScatter(x, y, xlab = xlab, ylab = ylab, colramp = colorRampPalette(c("transparent", blues9)))
     # add linear fit
@@ -385,13 +389,17 @@ gradH2O5 <- function(pdf = FALSE) {
     R2txt <- substitute(italic(R)^2 == R2, list(R2 = R2))
     legend("bottomleft", legend = R2txt, bty = "n")
   }
-  par(mfrow = c(1, 2))
+  par(mfrow = c(2, 2))
   # get amino acid compositions of E.coli proteins (UniProt)
   ecoli <- read.csv(system.file("/extdata/organisms/ecoli.csv.xz", package = "JMDplots"), as.is = TRUE)
   scatterfun("ZC", "GRAVY", ecoli)
   label.figure("A", cex = 1.8)
   scatterfun("nH2O", "GRAVY", ecoli)
   label.figure("B", cex = 1.8)
+  scatterfun("ZC", "pI", ecoli)
+  label.figure("C", cex = 1.8)
+  scatterfun("nH2O", "pI", ecoli)
+  label.figure("D", cex = 1.8)
   if(pdf) {
     dev.off()
     addexif("gradH2O5", "Scatterplots of GRAVY vs ZC and nH2O", "Dick et al. (2020) (preprint)")
@@ -403,26 +411,30 @@ gradH2O6 <- function(pdf = FALSE) {
   if(pdf) pdf("gradH2O6.pdf", width = 8, height = 8)
   layout(matrix(1:4, nrow = 2))
   par(mar = c(4, 4.5, 2, 1), las = 1, cex = 1.2)
-  par(cex.lab = 1.5)
+  par(cex.lab = 1.3)
 
   # Baltic Sea nH2O - ZC
   mout <- ppage("balticsurface", plot.it = FALSE)
   pout <- ppage("balticsurface", H2O = TRUE, plot.it = FALSE)
-  pcomp(mout, pout, reorder = FALSE, yline = 3.2, cex.ylab = 1.8, font = 2, labdy = 0.003, labels.at = NA, xlim = c(-0.2, -0.08))
+  pcomp(mout, pout, reorder = FALSE, yline = 3.2, cex.ylab = 1.5, font = 2, labdy = 0.003, labels.at = NA, xlim = c(-0.2, -0.08))
+  text(c(-0.126, -0.124), c(0.04, 0.02), c("< 6 PSU", "> 6 PSU"))
   label.figure("A", cex = 1.8, xfrac = 0.035)
   title("Baltic Sea")
   # Baltic Sea GRAVY - pI
-  pcomp(mout, pout, reorder = FALSE, vars = "pIG", yline = 3.2, cex.ylab = 1.8, font = 2, labdy = 0.003, labels.at = NA)
+  pcomp(mout, pout, reorder = FALSE, vars = "pIG", yline = 3.2, cex.ylab = 1.5, font = 2, labdy = 0.003, labels.at = NA)
+  text(c(7.5, 7.2), c(-0.11, -0.23), c("< 6 PSU", "> 6 PSU"))
   label.figure("C", cex = 1.8, xfrac = 0.035)
 
   # Rodriguez-Brito et al. nH2O - ZC
   mout <- ppage("socal", plot.it = FALSE)
   pout <- ppage("socal", H2O = TRUE, plot.it = FALSE)
-  pcomp(mout, pout, reorder = FALSE, yline = 3.2, cex.ylab = 1.8, font = 2, labdy = 0.003, labels.at = NA, xlim = c(-0.2, -0.08))
+  pcomp(mout, pout, reorder = FALSE, yline = 3.2, cex.ylab = 1.5, font = 2, labdy = 0.003, labels.at = NA, xlim = c(-0.2, -0.08))
+  text(c(-0.155, -0.125, -0.115), c(-0.005, 0.015, 0.03), c("FW", "LS", "HS"))
   title("Rodriguez-Brito et al.")
   label.figure("B", cex = 1.8, xfrac = 0.035)
   # Rodriguez-Brito et al. GRAVY - pI
-  pcomp(mout, pout, reorder = FALSE, vars = "pIG", yline = 3.2, cex.ylab = 1.8, font = 2, labdy = 0.003, labels.at = NA)
+  pcomp(mout, pout, reorder = FALSE, vars = "pIG", yline = 3.2, cex.ylab = 1.5, font = 2, labdy = 0.003, labels.at = NA)
+  text(c(8.3, 6, 4.5), c(-0.18, -0.19, -0.12), c("FW", "LS", "HS"))
   label.figure("D", cex = 1.8, xfrac = 0.035)
   if(pdf) {
     dev.off()
@@ -443,7 +455,7 @@ gradH2O7 <- function(pdf = FALSE) {
   plot.new()
   text(0.57, 0.5, "NaCl or organic solutes", font = 2)
   plot.new()
-  text(0.5, 0.6, "Proteins Coded By\nDifferentially Expressed Transcripts", srt = 90, font = 2)
+  text(0.5, 0.6, "Proteins Coded By\nDifferentially Expressed Genes", srt = 90, font = 2)
   par(mar = c(4, 4, 0.2, 1), mgp = c(2.5, 1, 0))
 
   # function to plot an arrow partway along a line
@@ -486,6 +498,10 @@ gradH2O7 <- function(pdf = FALSE) {
   diffplot(saltygenes, pt.text = NA, contour = FALSE, cex = 1.5)
   points(mean(saltygenes$ZC.diff), mean(saltygenes$nH2O_rQEC.diff), pch = 19, cex = 2)
   label.figure("A", cex = 1.8, xfrac = 0.12, yfrac = 1.05)
+  # print the p-values
+  p.ZC <- round(t.test(saltygenes$ZC.down, saltygenes$ZC.up)$p.value, 3)
+  p.nH2O <- round(t.test(saltygenes$nH2O_rQEC.down, saltygenes$nH2O_rQEC.up)$p.value, 3)
+  print(paste("p-values for transcriptomics:", p.ZC, "(ZC),", p.nH2O, "(nH2O)"))
 
   # plot C: transcriptomics: increasing time
   Ttime <- list(
@@ -524,6 +540,10 @@ gradH2O7 <- function(pdf = FALSE) {
   diffplot(osmotic_bact, pt.text = NA, contour = FALSE, cex = 1.5)
   points(mean(osmotic_bact$ZC.diff), mean(osmotic_bact$nH2O_rQEC.diff), pch = 19, cex = 2)
   label.figure("B", cex = 1.8, xfrac = 0.12, yfrac = 1.05)
+  # print the p-values
+  p.ZC <- round(t.test(osmotic_bact$ZC.down, osmotic_bact$ZC.up)$p.value, 3)
+  p.nH2O <- round(t.test(osmotic_bact$nH2O_rQEC.down, osmotic_bact$nH2O_rQEC.up)$p.value, 3)
+  print(paste("p-values for proteomics:", p.ZC, "(ZC),", p.nH2O, "(nH2O)"))
 
   # plot D: proteomics: increasing time
   osmotic_euk <- read.csv(system.file("extdata/vignette_output/osmotic_euk.csv", package = "canprot"))
@@ -558,7 +578,7 @@ gradH2O7 <- function(pdf = FALSE) {
   }
 }
 
-# median differences of compositional metrics for differentially expressed proteins in osmotic stress
+# differentially expressed proteins in halophiles under hypo- and hyperosmotic stress
 # adapted from canprot/hyperosmotic.Rmd 20190717-20191007
 # add GRAVY and pI plot 20191028
 # use different symbols for eukaryotes and add halophilic bacteria and archaea 20191102-20191103
@@ -635,7 +655,7 @@ gradH2O8 <- function(pdf = FALSE) {
   label.figure("B", cex = 1.7)
   if(pdf) {
     dev.off()
-    addexif("gradH2O8", "Mean differences of compositional metrics for differentially expressed proteins in osmotic stress", "Dick et al. (2020) (preprint)")
+    addexif("gradH2O8", "Differentially expressed proteins in halophiles under hypo- and hyperosmotic stress", "Dick et al. (2020) (preprint)")
   }
 }
 
