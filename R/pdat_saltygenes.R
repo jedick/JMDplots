@@ -13,7 +13,9 @@ pdat_saltygenes <- function(dataset=2020, basis="rQEC") {
              "LB12_NaCl",
              "BBWB12_37_2.5", "BBWB12_37_5", "BBWB12_37_10", "BBWB12_37_20", #"BBWB12_37_exp", 29 up, 6 down
              "ADW+14_Gene", "KKG+14_Gene_30min", "KKG+14_Gene_80min", "KKG+14_Gene_310min",
-             "KSM+14_NaCl", "KSM+14_GB", "SLM+14_5", "SLM+14_30", "SLM+14_60",
+             "KSM+14_NaCl", "KSM+14_GB",
+             "MGM+14_3.5", "MGM+14_4.5", "MGM+14_5", "MGM+14_5.5",
+             "SLM+14_5", "SLM+14_30", "SLM+14_60",
              "FRH+15_NaCl_1h", "FRH+15_NaCl_6h", "FRH+15_NaCl_24h",
              "FRH+15_KCl_1h", "FRH+15_KCl_6h", "FRH+15_KCl_24h",
              "FRH+15_glycerol_1h", "FRH+15_glycerol_6h", "FRH+15_glycerol_24h",
@@ -175,6 +177,16 @@ pdat_saltygenes <- function(dataset=2020, basis="rQEC") {
     up2 <- dat[, icol] > 1
     dat <- cleanup(dat, "Entry", up2)
     pcomp <- protcomp(dat$Entry, basis = basis, aa_file = file.path(extdatadir, "aa/bacteria/FRH+15_aa.csv.xz"))
+  } else if(study=="MGM+14") {
+    # 20200423 E. coli, Metris et al., 2014
+    # MGM+14_3.5, MGM+14_4.5, MGM+14_5, MGM+14_5.5 
+    dat <- read.csv(file.path(datadir, "MGM+14.csv.xz"), as.is=TRUE)
+    description <- paste("E. coli in", stage, "vs 2 % NaCl (with glycine betaine)")
+    icol <- grep(paste0("_", stage, "_"), colnames(dat))
+    dat <- dat[abs(dat[, icol]) > 1, ]
+    up2 <- dat[, icol] > 1
+    dat <- cleanup(dat, "Entry", up2)
+    pcomp <- protcomp(dat$Entry, basis, aa_file = file.path(extdatadir, "aa/bacteria/MGM+14_aa.csv.xz"))
   } else stop(paste("saltygenes dataset", dataset, "not available"))
   print(paste0("pdat_saltygenes: ", description, " [", dataset, "]"))
   # use the up2 from the cleaned-up data, if it exists 20190407

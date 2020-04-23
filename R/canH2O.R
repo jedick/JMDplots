@@ -107,7 +107,7 @@ canH2O1 <- function(pdf = FALSE) {
   hyptext <- as.expression(c(hyptext1, hyptext2))
   textplain(pos[25, ] + c(0.21, 0.03), lab = hyptext, height = 0.04)
 
-  hydtext1 <- quote(italic("Most hyperosmotic and 3D culture"))
+  hydtext1 <- quote(italic("Most high-glucose (hyperosmotic) and 3D culture"))
   hydtext2 <- quote(italic("experiments yield lower hydration state of proteins."))
   hydtext <- as.expression(c(hydtext1, hydtext2))
   textplain(pos[25, ] + c(0.25, -0.045), lab = hydtext, height = 0.04)

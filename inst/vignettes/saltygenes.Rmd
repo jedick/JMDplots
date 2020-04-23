@@ -92,10 +92,11 @@ __t__. Table S2 of @LB12, filtered to include genes with _p_-value < 0.05 and fo
 __u__. Table S2 of @ADW+14
 __v__. __w__. __x__. Table S2 of @KKG+14
 __y__. __z__. Tables S5--S6 of @KSM+14.
-__A__. __B__. __C__. Table S2 of @SLM+14.
-__D__. __E__. __F__. __G__. __H__. __I__. __J__. __K__. __L__. Tables S1--S3 of @FRH+15.
-__M__. __N__. Table S2 of @KLB+15.
-__O__. __P__. Tables S5--S8 of @HLL17.
-__Q__. Table S6 of @MWZ+18.
+__A__. __B__. __C__. __D__. Supplemental Table S1 of @MGM+14, filtered to include genes with differences of Normalized ln(cDNA/gDNA) > 1 or < 1 between 2 % and higher NaCl concentration.
+__E__. __F__. __G__. Table S2 of @SLM+14.
+__H__. __I__. __J__. __K__. __L__. __M__. __N__. __O__. __P__. Tables S1--S3 of @FRH+15.
+__Q__. __R__. Table S2 of @KLB+15.
+__S__. __T__. Tables S5--S8 of @HLL17.
+__U__. Table S6 of @MWZ+18.
 
 ## References
