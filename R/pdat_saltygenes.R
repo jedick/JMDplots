@@ -13,12 +13,13 @@ pdat_saltygenes <- function(dataset=2020, basis="rQEC") {
              "LTH+11_RNA_30", "LTH+11_RNA_60", "LTH+11_RNA_90", "LTH+11_RNA_120", "LTH+11_RNA_240",
              "LB12_NaCl",
              "BBWB12_37_2.5", "BBWB12_37_5", "BBWB12_37_10", "BBWB12_37_20", #"BBWB12_37_exp", 29 up, 6 down
+             "WGB+13_N", "WGB+13_U",
              "ADW+14_Gene", "KKG+14_Gene_30min", "KKG+14_Gene_80min", "KKG+14_Gene_310min",
              "KSM+14_NaCl", "KSM+14_GB",
              "MGM+14_3.5", "MGM+14_4.5", "MGM+14_5", "MGM+14_5.5",
              "SLM+14_5", "SLM+14_30", "SLM+14_60",
              "FRH+15_NaCl_1h", "FRH+15_NaCl_6h", "FRH+15_NaCl_24h",
-#             "FRH+15_KCl_1h", "FRH+15_KCl_6h", "FRH+15_KCl_24h",
+             #"FRH+15_KCl_1h", "FRH+15_KCl_6h", "FRH+15_KCl_24h",
              "FRH+15_glycerol_1h", "FRH+15_glycerol_6h", "FRH+15_glycerol_24h",
              "KLB+15_trans-NaCl", "KLB+15_trans-suc",
              "HLL17_45min", "HLL17_14h",
@@ -198,6 +199,17 @@ pdat_saltygenes <- function(dataset=2020, basis="rQEC") {
     up2 <- dat[, icol] == "up"
     dat <- cleanup(dat, "Entry", up2)
     pcomp <- protcomp(dat$Entry, basis, aa_file = file.path(extdatadir, "aa/bacteria/SBB+09_aa.csv.xz"))
+  } else if(study=="WGB+13") {
+    # 20200423 E. coli in NaCl or urea, Withman et al., 2013
+    # WGB+13_N, WGB+13_U
+    dat <- read.csv(file.path(datadir, "WGB+13.csv.xz"), as.is=TRUE)
+    if(stage=="N") description <- "Escherichia coli in 0.3 M NaCl vs control"
+    if(stage=="U") description <- "Escherichia coli in 0.6 M urea vs control"
+    icol <- grep(paste0(stage, ".vs.K"), colnames(dat))
+    dat <- dat[!is.na(dat[, icol]), ]
+    up2 <- dat[, icol] > 0
+    dat <- cleanup(dat, "Entry", up2)
+    pcomp <- protcomp(dat$Entry, basis, aa_file = file.path(extdatadir, "aa/bacteria/WGB+13_aa.csv.xz"))
   } else stop(paste("saltygenes dataset", dataset, "not available"))
   print(paste0("pdat_saltygenes: ", description, " [", dataset, "]"))
   # use the up2 from the cleaned-up data, if it exists 20190407

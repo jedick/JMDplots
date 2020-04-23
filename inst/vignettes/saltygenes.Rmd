@@ -90,14 +90,15 @@ __l__. Table S2 (sheet "S2_Table_3") of @HMO+10.
 __m__. __n__. __o__. __p__. __q__. Dataset S3 of @LTH+11, filtered to include genes with _q_-value < 0.05, same direction of change in all 3 replicates for each condition, and median fold change > 2 or < 0.5.
 __r__. __s__. __t__. __u__. Table S5 of @BBWB12, filtered to include genes with log~2~ fold change > 1 or < -1.
 __v__. Table S2 of @LB12, filtered to include genes with _p_-value < 0.05 and fold change > 2 or < 0.5.
-__w__. Table S2 of @ADW+14
-__x__. __y__. __z__. Table S2 of @KKG+14
-__A__. __B__. Tables S5--S6 of @KSM+14.
-__C__. __D__. __E__. __F__. Supplemental Table S1 of @MGM+14, filtered to include genes with differences of Normalized ln(cDNA/gDNA) > 1 or < 1 between 2 % and higher NaCl concentration.
-__G__. __H__. __I__. Table S2 of @SLM+14.
-__J__. __K__. __L__. __M__. __N__. __O__. Tables S1--S3 of @FRH+15.
-__P__. __Q__. Table S2 of @KLB+15.
-__R__. __S__. Tables S5--S8 of @HLL17.
-__T__. Table S6 of @MWZ+18.
+__w__. __x__. [Dataset.txt](http://www.wright.edu/~oleg.paliy/Papers/UTI_Osmo/Dataset.txt) of @WGB+13, filtered to include proteins with log fold change (column "N vs K Wmean [M]" for NaCl and "U vs K Wmean [M]" for urea) > 1 or < 1 and _p_-value less than 0.05.
+__y__. Table S2 of @ADW+14
+__z__. __A__. __B__. Table S2 of @KKG+14
+__C__. __D__. Tables S5--S6 of @KSM+14.
+__E__. __F__. __G__. __H__. Supplemental Table S1 of @MGM+14, filtered to include genes with differences of Normalized ln(cDNA/gDNA) > 1 or < 1 between 2 % and higher NaCl concentration.
+__I__. __J__. __K__. Table S2 of @SLM+14.
+__L__. __M__. __N__. __O__. __P__. __Q__. Tables S1--S3 of @FRH+15.
+__R__. __S__. Table S2 of @KLB+15.
+__T__. __U__. Tables S5--S8 of @HLL17.
+__V__. Table S6 of @MWZ+18.
 
 ## References

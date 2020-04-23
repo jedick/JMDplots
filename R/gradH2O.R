@@ -455,7 +455,7 @@ gradH2O7 <- function(pdf = FALSE) {
   plot.new()
   text(0.57, 0.5, "NaCl or organic solutes", font = 2)
   plot.new()
-  text(0.5, 0.6, "Proteins coded By\ndifferentially expressed genes", srt = 90, font = 2)
+  text(0.5, 0.6, "Proteins coded by\ndifferentially expressed genes", srt = 90, font = 2)
   par(mar = c(4, 4, 0.2, 1), mgp = c(2.5, 1, 0))
 
   # function to plot an arrow partway along a line
@@ -479,7 +479,7 @@ gradH2O7 <- function(pdf = FALSE) {
   }
 
   # function to make diff plot with arrows and points
-  mkdiff <- function(ct, ndat, ...) {
+  mkdiff <- function(ct, ndat, pch = 21, ...) {
     # make an empty plot, add lines, then add points
     diffplot(ct, pch = NA, pt.text = NA, contour = FALSE)
     n <- 0
@@ -490,7 +490,7 @@ gradH2O7 <- function(pdf = FALSE) {
       n <- n + ndat[i]
     }
     par(bg = "white")
-    diffplot(ct, pch = 21, add = TRUE, contour = FALSE, cex.text = 0.8, ...)
+    diffplot(ct, pch = pch, add = TRUE, contour = FALSE, cex.text = 0.8, ...)
   }
 
   # plot A: transcriptomes compilation
@@ -523,11 +523,14 @@ gradH2O7 <- function(pdf = FALSE) {
     HZP = c("HZP+05_HSS", "HZP+05_HOS"),
     KLB = c("KLB+15_trans-NaCl", "KLB+15_trans-suc"),
     FRH_1 = c("FRH+15_NaCl_1h", "FRH+15_glycerol_1h"),
-    FRH_6 = c("FRH+15_NaCl_6h", "FRH+15_glycerol_6h")
+    FRH_6 = c("FRH+15_NaCl_6h", "FRH+15_glycerol_6h"),
+    SBB = c("SBB+09_NaCl", "SBB+09_Sucrose"),
+    WGB = c("WGB+13_N", "WGB+13_U")
   )
   comptab <- saltygenes[match(unlist(Tsolute), saltygenes$dataset), ]
   ndat <- sapply(Tsolute, length)
-  mkdiff(comptab, ndat, pt.text = c("A", "B", "C", "D", "E", "F", "G", "H", "I", "J"))
+  mkdiff(comptab, ndat, pt.text = LETTERS[1:sum(ndat)], pch = c(21, 22))
+  legend("topleft", c("NaCl", "organic"), pch = c(21, 22), bty = "n")
   label.figure("E", cex = 1.8, xfrac = 0.12, yfrac = 1.05)
 
   par(mar = c(0, 0, 0, 0))
@@ -569,7 +572,7 @@ gradH2O7 <- function(pdf = FALSE) {
   )
   comptab <- osmotic_bact[match(unlist(Psolute), osmotic_bact$dataset), ]
   ndat <- sapply(Psolute, length)
-  mkdiff(comptab, ndat, pt.text = c("G", "H", "I", "J"))
+  mkdiff(comptab, ndat, pt.text = c("O", "P", "Q", "R"), pch = c(21, 22))
   label.figure("F", cex = 1.8, xfrac = 0.12, yfrac = 1.05)
 
   if(pdf) {
