@@ -11,8 +11,9 @@ pdat_saltygenes <- function(dataset=2020, basis="rQEC") {
              "SBB+09_NaCl", "SBB+09_Sucrose",
              "HMO+10_transcriptomics",
              "LTH+11_RNA_30", "LTH+11_RNA_60", "LTH+11_RNA_90", "LTH+11_RNA_120", "LTH+11_RNA_240",
-             "LB12_NaCl",
              "BBWB12_37_2.5", "BBWB12_37_5", "BBWB12_37_10", "BBWB12_37_20", #"BBWB12_37_exp", 29 up, 6 down
+             "LB12_NaCl",
+             "QHT+13_Gene.24.h", "QHT+13_Gene.48.h", "QHT+13_Gene.72.h",
              "WGB+13_N", "WGB+13_U",
              "ADW+14_Gene", "KKG+14_Gene_30min", "KKG+14_Gene_80min", "KKG+14_Gene_310min",
              "KSM+14_NaCl", "KSM+14_GB",
@@ -33,7 +34,7 @@ pdat_saltygenes <- function(dataset=2020, basis="rQEC") {
   stage <- paste(strsplit(dataset, "_")[[1]][-1], collapse="_")
   extdatadir <- system.file("extdata", package="JMDplots")
   datadir <- paste0(extdatadir, "/expression/osmotic/")
-  if(study %in% c("KLB+15", "KKG+14", "ADW+14")) {
+  if(study %in% c("KLB+15", "KKG+14", "ADW+14", "QHT+13")) {
     return(pdat_osmotic_bact(dataset, basis))
   } else if(study =="LTH+11") {
     return(pdat_osmotic_euk(dataset, basis))

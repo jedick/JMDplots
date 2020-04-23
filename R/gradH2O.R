@@ -243,7 +243,7 @@ gradH2O3 <- function(pdf = FALSE, var = NULL) {
   nvar <- ifelse(is.null(var), 1, length(var))
   if(nvar==2) par(mfrow = c(2, 3))
   else par(mfrow = c(1, 3))
-  par(mar = c(5, 4, 1, 1), mgp = c(3, 0.7, 0), las = 1)
+  par(mar = c(5, 4, 1, 1), mgp = c(3.5, 0.7, 0), las = 1)
   par(cex.lab = 1.5)
 
   for(i in 1:nvar) {
@@ -510,7 +510,8 @@ gradH2O7 <- function(pdf = FALSE) {
     KKG = c("KKG+14_Gene_30min", "KKG+14_Gene_80min", "KKG+14_Gene_310min"),
     SLM = c("SLM+14_5", "SLM+14_30", "SLM+14_60"),
     FRH = c("FRH+15_NaCl_1h", "FRH+15_NaCl_6h", "FRH+15_NaCl_24h"),
-    HLL = c("HLL17_45min", "HLL17_14h")
+    HLL = c("HLL17_45min", "HLL17_14h"),
+    QHT = c("QHT+13_Gene.24.h", "QHT+13_Gene.48.h", "QHT+13_Gene.72.h")
   )
   comptab <- saltygenes[match(unlist(Ttime), saltygenes$dataset), ]
   ndat <- sapply(Ttime, length)
@@ -562,7 +563,7 @@ gradH2O7 <- function(pdf = FALSE) {
   SCGtab <- osmotic_euk[match(Ptime$SCG, osmotic_euk$dataset), ]
   comptab <- rbind(LTHtab, KKGtab, QHTtab, SCGtab)
   ndat <- sapply(Ptime, length)
-  mkdiff(comptab, ndat, pt.text = c("a", "b", "c", "d", "e", "f", "g", "h", "q", "r", "s", "t"))
+  mkdiff(comptab, ndat, pt.text = c("a", "b", "c", "d", "e", "f", "g", "h", "q", "r", "t", "u"))
   label.figure("D", cex = 1.8, xfrac = 0.12, yfrac = 1.05)
 
   # plot F: proteomics: NaCl or organic solutes
