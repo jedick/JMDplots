@@ -8,6 +8,7 @@ pdat_saltygenes <- function(dataset=2020, basis="rQEC") {
              "KSA+02_NaCl", "KSA+02_sorbitol", "WJ02",
              "HZP+05_HSS", "HZP+05_HOS", "LGW+05", "SLA+05",
              "GCP08_30", "GCP08_43",
+             "SBB+09_NaCl", "SBB+09_Sucrose",
              "HMO+10_transcriptomics",
              "LTH+11_RNA_30", "LTH+11_RNA_60", "LTH+11_RNA_90", "LTH+11_RNA_120", "LTH+11_RNA_240",
              "LB12_NaCl",
@@ -17,7 +18,7 @@ pdat_saltygenes <- function(dataset=2020, basis="rQEC") {
              "MGM+14_3.5", "MGM+14_4.5", "MGM+14_5", "MGM+14_5.5",
              "SLM+14_5", "SLM+14_30", "SLM+14_60",
              "FRH+15_NaCl_1h", "FRH+15_NaCl_6h", "FRH+15_NaCl_24h",
-             "FRH+15_KCl_1h", "FRH+15_KCl_6h", "FRH+15_KCl_24h",
+#             "FRH+15_KCl_1h", "FRH+15_KCl_6h", "FRH+15_KCl_24h",
              "FRH+15_glycerol_1h", "FRH+15_glycerol_6h", "FRH+15_glycerol_24h",
              "KLB+15_trans-NaCl", "KLB+15_trans-suc",
              "HLL17_45min", "HLL17_14h",
@@ -187,6 +188,16 @@ pdat_saltygenes <- function(dataset=2020, basis="rQEC") {
     up2 <- dat[, icol] > 1
     dat <- cleanup(dat, "Entry", up2)
     pcomp <- protcomp(dat$Entry, basis, aa_file = file.path(extdatadir, "aa/bacteria/MGM+14_aa.csv.xz"))
+  } else if(study=="SBB+09") {
+    # 20200423 E. coli, Shabala et al., 2009
+    # SBB+09_NaCl, SBB+09_Sucrose
+    dat <- read.csv(file.path(datadir, "SBB+09.csv.xz"), as.is=TRUE)
+    description <- paste("Escherichia coli in ~2.7 Os/kg", gsub("Sucrose", "sucrose", stage), "vs control")
+    icol <- grep(stage, colnames(dat))
+    dat <- dat[!is.na(dat[, icol]), ]
+    up2 <- dat[, icol] == "up"
+    dat <- cleanup(dat, "Entry", up2)
+    pcomp <- protcomp(dat$Entry, basis, aa_file = file.path(extdatadir, "aa/bacteria/SBB+09_aa.csv.xz"))
   } else stop(paste("saltygenes dataset", dataset, "not available"))
   print(paste0("pdat_saltygenes: ", description, " [", dataset, "]"))
   # use the up2 from the cleaned-up data, if it exists 20190407

@@ -449,13 +449,13 @@ gradH2O7 <- function(pdf = FALSE) {
   # add titles
   par(mar = c(0, 0, 0, 0))
   plot.new()
-  text(0.57, 0.5, "All compiled datasets\nfor Bacteria and yeast", font = 2)
+  text(0.57, 0.5, "All compiled datasets\nfor bacteria and yeast", font = 2)
   plot.new()
   text(0.57, 0.5, "Time-course experiments", font = 2)
   plot.new()
   text(0.57, 0.5, "NaCl or organic solutes", font = 2)
   plot.new()
-  text(0.5, 0.6, "Proteins Coded By\nDifferentially Expressed Genes", srt = 90, font = 2)
+  text(0.5, 0.6, "Proteins coded By\ndifferentially expressed genes", srt = 90, font = 2)
   par(mar = c(4, 4, 0.2, 1), mgp = c(2.5, 1, 0))
 
   # function to plot an arrow partway along a line
@@ -532,7 +532,7 @@ gradH2O7 <- function(pdf = FALSE) {
 
   par(mar = c(0, 0, 0, 0))
   plot.new()
-  text(0.5, 0.6, "Differentially Expressed Proteins", srt = 90, font = 2)
+  text(0.5, 0.6, "Differentially expressed proteins", srt = 90, font = 2)
   par(mar = c(4, 4, 0.2, 1), mgp = c(2.5, 1, 0))
 
   # plot B: proteomes compilation
