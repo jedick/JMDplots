@@ -51,7 +51,7 @@ gradH2O2()
 ```
 
 ## `r nH2O` for Baltic Sea metagenome and metatranscriptome in different size fractions (Figure 3)
-```{r gradH2O3, message = FALSE, fig.align='center', out.width='100%', fig.width = 7, fig.height = 3, pngquant = pngquant}
+```{r gradH2O3, message = FALSE, fig.align='center', out.width='100%', fig.width = 6, fig.height = 3.5, pngquant = pngquant}
 gradH2O3()
 ```
 
@@ -61,7 +61,7 @@ gradH2O4()
 ```
 
 ## Scatterplots of GRAVY vs ZC and nH2O (Figure 5)
-```{r gradH2O5, message = FALSE, fig.align='center', out.width='100%', fig.width = 7, fig.height = 5, pngquant = pngquant}
+```{r gradH2O5, message = FALSE, fig.align='center', out.width='100%', fig.width = 7, fig.height = 6, pngquant = pngquant}
 gradH2O5()
 ```
 
@@ -71,11 +71,11 @@ gradH2O6()
 ```
 
 ## Differential gene and protein expression, time-course and NaCl vs organic solutes (Figure 7)
-```{r gradH2O7, message = FALSE, fig.align='center', out.width='100%', fig.width = 8, fig.height = 5, pngquant = pngquant}
+```{r gradH2O7, message = FALSE, fig.align='center', out.width='100%', fig.width = 8, fig.height = 4.5, pngquant = pngquant}
 gradH2O7()
 ```
 
 ## Differentially expressed proteins in halophiles under hypo- and hyperosmotic stress (Figure 8)
-```{r gradH2O8, message = FALSE, fig.align='center', out.width='100%', fig.width = 8, fig.height = 5.2, pngquant = pngquant}
+```{r gradH2O8, message = FALSE, fig.align='center', out.width='100%', fig.width = 5, fig.height = 4, pngquant = pngquant}
 gradH2O8()
 ```

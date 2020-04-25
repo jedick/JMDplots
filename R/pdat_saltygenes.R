@@ -10,7 +10,8 @@ pdat_saltygenes <- function(dataset=2020, basis="rQEC") {
              "GCP08_30", "GCP08_43",
              "SBB+09_NaCl", "SBB+09_Sucrose",
              "HMO+10_transcriptomics",
-             "LTH+11_RNA_30", "LTH+11_RNA_60", "LTH+11_RNA_90", "LTH+11_RNA_120", "LTH+11_RNA_240",
+             # don't include yeast 20200424
+             #"LTH+11_RNA_30", "LTH+11_RNA_60", "LTH+11_RNA_90", "LTH+11_RNA_120", "LTH+11_RNA_240",
              "BBWB12_37_2.5", "BBWB12_37_5", "BBWB12_37_10", "BBWB12_37_20", #"BBWB12_37_exp", 29 up, 6 down
              "LB12_NaCl",
              "QHT+13_Gene.24.h", "QHT+13_Gene.48.h", "QHT+13_Gene.72.h",
@@ -20,7 +21,7 @@ pdat_saltygenes <- function(dataset=2020, basis="rQEC") {
              "MGM+14_3.5", "MGM+14_4.5", "MGM+14_5", "MGM+14_5.5",
              "SLM+14_5", "SLM+14_30", "SLM+14_60",
              "FRH+15_NaCl_1h", "FRH+15_NaCl_6h", "FRH+15_NaCl_24h",
-             #"FRH+15_KCl_1h", "FRH+15_KCl_6h", "FRH+15_KCl_24h",
+             "FRH+15_KCl_1h", "FRH+15_KCl_6h", "FRH+15_KCl_24h",
              "FRH+15_glycerol_1h", "FRH+15_glycerol_6h", "FRH+15_glycerol_24h",
              "KLB+15_trans-NaCl", "KLB+15_trans-suc",
              "HLL17_45min", "HLL17_14h",
@@ -36,8 +37,8 @@ pdat_saltygenes <- function(dataset=2020, basis="rQEC") {
   datadir <- paste0(extdatadir, "/expression/osmotic/")
   if(study %in% c("KLB+15", "KKG+14", "ADW+14", "QHT+13")) {
     return(pdat_osmotic_bact(dataset, basis))
-  } else if(study =="LTH+11") {
-    return(pdat_osmotic_euk(dataset, basis))
+  #} else if(study =="LTH+11") {
+  #  return(pdat_osmotic_euk(dataset, basis))
   } else if(study=="HMO+10") {
     # 20191102 Bacillus subtilis, Hahne et al., 2010
     # HMO+10_prot-cytosol, HMO+10_prot-membrane, HMO+10_transcriptomics

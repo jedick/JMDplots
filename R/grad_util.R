@@ -45,7 +45,7 @@ plotMG <- function(dataset="Guerrero_Negro_IMG_MG", plottype="bars",
   taxid=NULL, lwd=1, lty=2, lwd.bars=2, col=NULL, extendrange=FALSE, add.label=TRUE,
   plot_real_x=FALSE, maxdepth=NULL, H2O=FALSE, plot.it = TRUE, add.title = TRUE, yline = 2,
   basis = "rQEC", techtype = NULL, dx = NULL, dy = NULL, datadir = NULL,
-  add = FALSE, all.labels = NULL, pch = 19, var = NULL) {
+  add = FALSE, all.labels = NULL, pch = 19, var = NULL, srt = 45, ilabel = NULL) {
   # samples: (used for suffixes on file names)
   # labels: (used for labeling x-axis ticks)
   # xlab: axis label: "layer", "depth", ...
@@ -172,23 +172,24 @@ plotMG <- function(dataset="Guerrero_Negro_IMG_MG", plottype="bars",
     }
     if(!add & (is.null(taxid) | identical(taxid, 0))) {
       plot(0, 0, xlim=xlim, ylim=ylim, xlab=xlab, ylab=NA, xaxt="n")
-      srt <- 45
-      if(!is.numeric(all.labels)) {
+      plot.labels <- all.labels
+      if(!is.null(ilabel)) plot.labels[-ilabel] <- ""
+      if(!is.numeric(plot.labels)) {
         # rotate labels 20190113
         if(!is.na(srt)) {
           # https://www.r-bloggers.com/rotated-axis-labels-in-r-plots/
           # modified to use offset calculated with strheight 20191004
-          text(x=1:nsamp, y=par()$usr[3]-1.5*strheight("A"), labels=all.labels, srt=srt, adj=1, xpd=TRUE)
+          text(x=1:nsamp, y=par()$usr[3]-1.5*strheight("A"), labels=plot.labels, srt=srt, adj=1, xpd=TRUE)
           # add tick marks 
           axis(1, at=1:nsamp, labels=NA)
         } else {
           # loop over labels so that R doesn't omit any (because they're crowded)
-          for(i in 1:nsamp) axis(1, at=i, labels=all.labels[i])
+          for(i in 1:nsamp) axis(1, at=i, labels=plot.labels[i])
         }
       } else {
         # for numeric labels, lower gap.axis to show more labels 20181215 (requires R 3.6.0)
-        if(getRversion() >= "3.6.0") axis(1, at=atx, labels=all.labels, gap.axis=0.02)
-        else axis(1, at=atx, labels=all.labels)
+        if(getRversion() >= "3.6.0") axis(1, at=atx, labels=plot.labels, gap.axis=0.02)
+        else axis(1, at=atx, labels=plot.labels)
       }
       # add y-axis: ZC (or nH2O 20181231)
       if(identical(var, "GRAVY")) mtext("GRAVY", side = 2, line = yline, las = 0)

@@ -59,11 +59,8 @@ gradH2O1 <- function(pdf = FALSE) {
   ZClab <- expression(italic(Z)[C])
 
   # function to plot linear model
-  lmfun <- function(ZC, nH2O, legend.x = NULL, ...) {
-    mylm <- lm(nH2O ~ ZC)
-    xlim <- par("usr")[1:2]
-    # for amino acid plots, draw line from -1 to +1
-    if(!is.null(legend.x)) xlim <- c(-1, 1)
+  lmfun <- function(ZC, y, xlim = par("usr")[1:2], legend.x = NULL, ...) {
+    mylm <- lm(y ~ ZC)
     lines(xlim, predict(mylm, data.frame(ZC = xlim)), ...)
     # add R-squared text
     if(!is.null(legend.x)) {
@@ -84,12 +81,12 @@ gradH2O1 <- function(pdf = FALSE) {
   aaplot <- function(ZC, y, ylab, legend.x, main, lab) {
     plot(ZC, y, type = "p", pch = aminoacids(1), xlab = ZClab, ylab = ylab)
     mainlab(main, lab)
-    lmfun(ZC, y, legend.x)
+    lmfun(ZC, y, c(-1, 1), legend.x)
   }
 
-  scatterfun <- function(ZC, nH2O, main, lab) {
+  scatterfun <- function(ZC, nH2O, legend.x, main, lab) {
     smoothScatter(ZC, nH2O, xlab = ZClab, ylab = nH2Olab, colramp = colorRampPalette(c("transparent", blues9)))
-    lmfun(ZC, nH2O, lty = 2, lwd = 2, col = "grey40")
+    lmfun(ZC, nH2O, par("usr")[1:2], legend.x, lty = 2, lwd = 2, col = "grey40")
     mainlab(main, lab)
   }
 
@@ -113,48 +110,48 @@ gradH2O1 <- function(pdf = FALSE) {
   species(aa)
 
   # plot 1: nH2O-ZC of amino acids (CHNOS)
-  aaplot(ZC.aa, species()$H2O, nH2Olab, "bottomleft", "Amino acids (CHNOS)", "A")
+  aaplot(ZC.aa, species()$H2O, nH2Olab, "bottomleft", "Amino acids (CHNOS)", "(a)")
 
   # plot 2: nO2-ZC of amino acids (CHNOS)
   par(mgp = c(2.2, 0.7, 0), xpd = NA)
-  aaplot(ZC.aa, species()$O2, nO2lab, "bottomright", "Amino acids (CHNOS)", "B")
+  aaplot(ZC.aa, species()$O2, nO2lab, "bottomright", "Amino acids (CHNOS)", "(b)")
 
   # calculate nH2O and nO2 with QEC basis
   basis("QEC")
   species(aa)
 
   # plot 3: nO2-ZC of amino acids (QEC)
-  aaplot(ZC.aa, species()$O2, nO2lab, "bottomright", "Amino acids (QEC)", "C")
+  aaplot(ZC.aa, species()$O2, nO2lab, "bottomright", "Amino acids (QEC)", "(c)")
 
   # plot 4: nH2O-ZC of amino acids (QEC)
   par(mgp = c(2, 0.7, 0))
   # save the residuals here
   # subtract 0.355 so mean of human proteins = 0 20191114
   # (see canprot::H2OAA)
-  rQEC <- aaplot(ZC.aa, species()$H2O, nH2Olab, "bottomright", "Amino acids (QEC)", "D") - 0.355
+  rQEC <- aaplot(ZC.aa, species()$H2O, nH2Olab, "bottomright", "Amino acids (QEC)", "(d)") - 0.355
   names(rQEC) <- aminoacids(3)
 
   # plot 5: nH2O-ZC of human proteins (QEC)
   par(mgp = c(2.2, 0.7, 0))
   nH2O.human <- H2OAA(human, basis = "QEC")
-  scatterfun(ZC.human, nH2O.human, "Human proteins (QEC)", "E")
+  scatterfun(ZC.human, nH2O.human, "bottomleft", "Human proteins (QEC)", "(e)")
 
   # plot 6: nH2O-ZC of E. coli proteins (QEC)
   nH2O.ecoli <- H2OAA(ecoli, basis = "QEC")
-  scatterfun(ZC.ecoli, nH2O.ecoli, quote(italic(E.~coli)*" proteins (QEC)"), "F")
+  scatterfun(ZC.ecoli, nH2O.ecoli, "bottomleft", quote(italic(E.~coli)*" proteins (QEC)"), "(f)")
 
   # plot 7: nH2O-ZC of amino acids (rQEC)
   par(mgp = c(2, 0.7, 0))
-  aaplot(ZC.aa, rQEC, nH2Olab, "bottomright", "Amino acids (rQEC)", "G")
+  aaplot(ZC.aa, rQEC, nH2Olab, "bottomright", "Amino acids (rQEC)", "(g)")
 
   # plot 8: nH2O-ZC of human proteins (rQEC)
   par(mgp = c(2.2, 0.7, 0))
   nH2O.human <- H2OAA(human, basis = "rQEC")
-  scatterfun(ZC.human, nH2O.human, "Human proteins (rQEC)", "H")
+  scatterfun(ZC.human, nH2O.human, "bottomleft", "Human proteins (rQEC)", "(h)")
 
   # plot 9: nH2O-ZC of E. coli proteins (rQEC)
   nH2O.ecoli <- H2OAA(ecoli, basis = "rQEC")
-  scatterfun(ZC.ecoli, nH2O.ecoli, quote(italic(E.~coli)*" proteins (rQEC)"), "I")
+  scatterfun(ZC.ecoli, nH2O.ecoli, "bottomleft", quote(italic(E.~coli)*" proteins (rQEC)"), "(i)")
 
   if(pdf) {
     dev.off()
@@ -211,7 +208,7 @@ gradH2O2 <- function(pdf = FALSE, vars = "H2O-ZC") {
     text(c(5.37, 5.42, 5.57), c(-0.158, -0.176, -0.216), c("1 mm", "2 mm", "3 mm"), adj = 1)
   }
   title("Redox gradients", font.main = 1)
-  label.figure("A", cex = 2, xfrac = 0.035)
+  label.figure("(a)", cex = 2, xfrac = 0.035)
 
   # plot 2: compare ZC and nH2O of proteins in Baltic Sea surface
   mbaltics <- ppage("balticsurface", plot.it = FALSE)
@@ -229,7 +226,7 @@ gradH2O2 <- function(pdf = FALSE, vars = "H2O-ZC") {
     text(-0.18, 0.015, "chl a max\n> 6 PSU")
   }
   title("Baltic Sea", font.main = 1)
-  label.figure("B", cex = 2, xfrac = 0.035)
+  label.figure("(b)", cex = 2, xfrac = 0.035)
 
   if(pdf) {
     dev.off()
@@ -239,34 +236,40 @@ gradH2O2 <- function(pdf = FALSE, vars = "H2O-ZC") {
 
 # nH2O for Baltic Sea metagenome and metatranscriptome in different size fractions 20190715
 gradH2O3 <- function(pdf = FALSE, var = NULL) {
-  if(pdf) pdf("gradH2O3.pdf", width = 7, height = 3)
+  if(pdf) pdf("gradH2O3.pdf", width = 6, height = 3.5)
   nvar <- ifelse(is.null(var), 1, length(var))
   if(nvar==2) par(mfrow = c(2, 3))
   else par(mfrow = c(1, 3))
-  par(mar = c(5, 4, 1, 1), mgp = c(3.5, 0.7, 0), las = 1)
+  par(mar = c(3, 4, 2, 1), mgp = c(3.5, 0.7, 0), las = 1)
   par(cex.lab = 1.5)
 
   for(i in 1:nvar) {
     ylim <- NULL
     if(identical(var[i], "pI")) ylim <- c(5, 7.5)
-    figlab <- c("A", "B", "C")
-    if(i==2) figlab <- c("D", "E", "F")
+    figlab <- c("(a)", "(b)", "(c)")
+    if(i==2) figlab <- c("(d)", "(e)", "(f)")
 
-    mplot("Baltic_Sea-0.1s", "iMicrobe_MGP", H2O = TRUE, plottype = "#FF000030", col = "red", add.title = FALSE, ylim = ylim, yline = 2.7, var = var[i])
-    mplot("Baltic_Sea-0.1s", "SRA_MTP", H2O = TRUE, plottype = "#0000FF30", col = "blue", add.title = FALSE, add = TRUE, pch = 15, var = var[i])
-    legend("topright", legend = quote("0.1-0.8"~mu*m), bty = "n")
+    mplot("Baltic_Sea-0.1s", "iMicrobe_MGP", H2O = TRUE, plottype = "#FF000030",
+          col = "red", add.title = FALSE, ylim = ylim, yline = 2.7, var = var[i], srt = NA, ilabel = c(1, 12))
+    mplot("Baltic_Sea-0.1s", "SRA_MTP", H2O = TRUE, plottype = "#0000FF30",
+          col = "blue", add.title = FALSE, add = TRUE, pch = 15, var = var[i])
+    title(quote("0.1-0.8"~mu*m))
     legend("bottomleft", c("metagenomes", "metatranscriptomes"), pch = c(19, 15), col = c("red", "blue"), lty = c(2, 2), bty = "n")
-    label.figure(figlab[1], cex = 1.8, xfrac = 0.04)
+    label.figure(figlab[1], cex = 1.7)
 
-    mplot("Baltic_Sea-0.8s", "iMicrobe_MGP", H2O = TRUE, plottype = "#FF000030", col = "red", add.title = FALSE, ylim = ylim, yline = 2.7, var = var[i])
-    mplot("Baltic_Sea-0.8s", "SRA_MTP", H2O = TRUE, plottype = "#0000FF30", col = "blue", add.title = FALSE, add = TRUE, pch = 15, var = var[i])
-    legend("topright", legend = quote("0.8-3.0"~mu*m), bty = "n")
-    label.figure(figlab[2], cex = 1.8, xfrac = 0.035)
+    mplot("Baltic_Sea-0.8s", "iMicrobe_MGP", H2O = TRUE, plottype = "#FF000030",
+          col = "red", add.title = FALSE, ylim = ylim, yline = 2.7, var = var[i], srt = NA, ilabel = c(1, 12))
+    mplot("Baltic_Sea-0.8s", "SRA_MTP", H2O = TRUE, plottype = "#0000FF30",
+          col = "blue", add.title = FALSE, add = TRUE, pch = 15, var = var[i])
+    title(quote("0.8-3.0"~mu*m))
+    label.figure(figlab[2], cex = 1.7)
 
-    mplot("Baltic_Sea-3.0s", "iMicrobe_MGP", H2O = TRUE, plottype = "#FF000030", col = "red", add.title = FALSE, ylim = ylim, yline = 2.7, var = var[i])
-    mplot("Baltic_Sea-3.0s", "SRA_MTP", H2O = TRUE, plottype = "#0000FF30", col = "blue", add.title = FALSE, add = TRUE, pch = 15, var = var[i])
-    legend("topright", legend = quote("3.0-200"~mu*m), bty = "n")
-    label.figure(figlab[3], cex = 1.8, xfrac = 0.035)
+    mplot("Baltic_Sea-3.0s", "iMicrobe_MGP", H2O = TRUE, plottype = "#FF000030",
+          col = "red", add.title = FALSE, ylim = ylim, yline = 2.7, var = var[i], srt = NA, ilabel = c(1, 12))
+    mplot("Baltic_Sea-3.0s", "SRA_MTP", H2O = TRUE, plottype = "#0000FF30",
+          col = "blue", add.title = FALSE, add = TRUE, pch = 15, var = var[i])
+    title(quote("3.0-200"~mu*m))
+    label.figure(figlab[3], cex = 1.7)
   }
 
   if(pdf) {
@@ -298,14 +301,14 @@ gradH2O4 <- function(pdf = FALSE) {
   legend("topleft", c("free-living", "particle-associated"), pch = c(20, 15), bty = "n", inset = c(0.05, 0))
   legend("topleft", legend = c(NA, NA), pch = c(21, 22), pt.cex = c(0.7, 1), bty = "n")
   title("Amazon River metagenomes", font.main = 1)
-  label.figure("A", xfrac = 0.1, cex = 1.8)
+  label.figure("(a)", xfrac = 0.1, cex = 1.8)
   # plot 2: GRAVY - pI
   pcomp(mout, pout, lty = 0, yline = 3, vars = "pIG", labels.at = NA, cex.ylab = 0.9)
   hullfun(mout, pout, c(1, 3), "green3", c("riverFL", "riverPA"), vars = "pIG")
   hullfun(mout, pout, c(1, 3), "blue", c("plumeFL", "plumePA"), vars = "pIG")
   text(c(7.2, 8.1), c(-0.14, -0.175), c("river", "plume"))
   title("Amazon River metagenomes", font.main = 1)
-  label.figure("D", xfrac = 0.1, cex = 1.8)
+  label.figure("(d)", xfrac = 0.1, cex = 1.8)
 
   # plots 3-4: Amazon river metatranscriptome
   pcomp(mout, pout, "MT", xlim = xlim, ylim = ylim, lty = 0, yline = 2.8, labels.at = NA)
@@ -313,14 +316,14 @@ gradH2O4 <- function(pdf = FALSE) {
   hullfun(mout, pout, c(2, 4), "blue", c("plumeFL", "plumePA"))
   text(c(-0.125, -0.12), c(0.025, 0.005), c("river", "plume"))
   title("Amazon River metatranscriptomes", font.main = 1)
-  label.figure("B", xfrac = 0.1, cex = 1.8)
+  label.figure("(b)", xfrac = 0.1, cex = 1.8)
   # plot 4: GRAVY - pI
   pcomp(mout, pout, "MT", lty = 0, yline = 3, vars = "pIG", labels.at = NA, cex.ylab = 0.9)
   hullfun(mout, pout, c(2, 4), "green3", c("riverFL", "riverPA"), vars = "pIG")
   hullfun(mout, pout, c(2, 4), "blue", c("plumeFL", "plumePA"), vars = "pIG")
   text(c(8.2, 6.5), c(-0.105, -0.11), c("river", "plume"))
   title("Amazon River metatranscriptomes", font.main = 1)
-  label.figure("E", xfrac = 0.1, cex = 1.8)
+  label.figure("(e)", xfrac = 0.1, cex = 1.8)
 
   # start plot 5: Eiler et al. (freshwater vs marine)
   moutE <- ppage("eiler", plot.it = FALSE)
@@ -338,7 +341,7 @@ gradH2O4 <- function(pdf = FALSE) {
   legend("bottomright", c("lower salinity", "higher salinity"), pch = c(0, 15), col = "turquoise3", bty = "n")
   legend("bottomright", c("hypersaline datasets", "", ""), bty = "n")
   title("Freshwater - marine - hypersaline", font.main = 1)
-  label.figure("C", xfrac = 0.1, cex = 1.8)
+  label.figure("(c)", xfrac = 0.1, cex = 1.8)
 
   # plot 6: GRAVY - pI
   pcomp(moutE, poutE, lty = 0, yline = 3, vars = "pIG", labels.at = NA, cex.ylab = 0.9)
@@ -348,7 +351,7 @@ gradH2O4 <- function(pdf = FALSE) {
   hullfun(moutH, poutH, 1:3, "turquoise3", vars = "pIG")
   text(c(7.5, 7.4, 6.3), c(-0.14, -0.20, -0.27), c("freshwater", "marine", "hypersaline"))
   title("Freshwater - marine - hypersaline", font.main = 1)
-  label.figure("F", xfrac = 0.1, cex = 1.8)
+  label.figure("(f)", xfrac = 0.1, cex = 1.8)
 
   if(pdf) {
     dev.off()
@@ -356,26 +359,27 @@ gradH2O4 <- function(pdf = FALSE) {
   }
 }
 
-# scatterplots of GRAVY vs ZC and nH2O 20191117
+# scatterplots of ZC and nH2O vs GRAVY and pI 20191117
 gradH2O5 <- function(pdf = FALSE) {
-  if(pdf) pdf("gradH2O5.pdf", width = 7, height = 5)
+  if(pdf) pdf("gradH2O5.pdf", width = 7, height = 6)
   par(las = 1, mar = c(4, 4.2, 1, 1), mgp = c(2.5, 1, 0))
+  par(cex.lab = 1.3)
   scatterfun <- function(xvar, yvar, AAcomp) {
-    if(xvar=="ZC") {
-      x <- ZCAA(AAcomp)
-      xlab <- expression(italic(Z)[C])
+    if(yvar=="ZC") {
+      y <- ZCAA(AAcomp)
+      ylab <- expression(italic(Z)[C])
     }
-    if(xvar=="nH2O") {
-      x <- H2OAA(AAcomp)
-      xlab <- expression(italic(n)[H[2] * O])
+    if(yvar=="nH2O") {
+      y <- H2OAA(AAcomp)
+      ylab <- expression(italic(n)[H[2] * O])
     }
-    if(yvar=="GRAVY") {
-      y <- GRAVY(AAcomp)
-      ylab <- "GRAVY"
+    if(xvar=="GRAVY") {
+      x <- GRAVY(AAcomp)
+      xlab <- "GRAVY"
     }
-    if(yvar=="pI") {
-      y <- pI(AAcomp)
-      ylab <- "pI"
+    if(xvar=="pI") {
+      x <- pI(AAcomp)
+      xlab <- "pI"
     }
     # make scatterplot
     smoothScatter(x, y, xlab = xlab, ylab = ylab, colramp = colorRampPalette(c("transparent", blues9)))
@@ -392,14 +396,14 @@ gradH2O5 <- function(pdf = FALSE) {
   par(mfrow = c(2, 2))
   # get amino acid compositions of E.coli proteins (UniProt)
   ecoli <- read.csv(system.file("/extdata/organisms/ecoli.csv.xz", package = "JMDplots"), as.is = TRUE)
-  scatterfun("ZC", "GRAVY", ecoli)
-  label.figure("A", cex = 1.8)
-  scatterfun("nH2O", "GRAVY", ecoli)
-  label.figure("B", cex = 1.8)
-  scatterfun("ZC", "pI", ecoli)
-  label.figure("C", cex = 1.8)
-  scatterfun("nH2O", "pI", ecoli)
-  label.figure("D", cex = 1.8)
+  scatterfun("GRAVY", "ZC", ecoli)
+  label.figure("(a)", cex = 1.8)
+  scatterfun("GRAVY", "nH2O", ecoli)
+  label.figure("(b)", cex = 1.8)
+  scatterfun("pI", "ZC", ecoli)
+  label.figure("(c)", cex = 1.8)
+  scatterfun("pI", "nH2O", ecoli)
+  label.figure("(d)", cex = 1.8)
   if(pdf) {
     dev.off()
     addexif("gradH2O5", "Scatterplots of GRAVY vs ZC and nH2O", "Dick et al. (2020) (preprint)")
@@ -418,24 +422,26 @@ gradH2O6 <- function(pdf = FALSE) {
   pout <- ppage("balticsurface", H2O = TRUE, plot.it = FALSE)
   pcomp(mout, pout, reorder = FALSE, yline = 3.2, cex.ylab = 1.5, font = 2, labdy = 0.003, labels.at = NA, xlim = c(-0.2, -0.08))
   text(c(-0.126, -0.124), c(0.04, 0.02), c("< 6 PSU", "> 6 PSU"))
-  label.figure("A", cex = 1.8, xfrac = 0.035)
   title("Baltic Sea")
+  label.figure("(a)", cex = 1.7)
   # Baltic Sea GRAVY - pI
   pcomp(mout, pout, reorder = FALSE, vars = "pIG", yline = 3.2, cex.ylab = 1.5, font = 2, labdy = 0.003, labels.at = NA)
   text(c(7.5, 7.2), c(-0.11, -0.23), c("< 6 PSU", "> 6 PSU"))
-  label.figure("C", cex = 1.8, xfrac = 0.035)
+  title("Baltic Sea")
+  label.figure("(c)", cex = 1.7)
 
   # Rodriguez-Brito et al. nH2O - ZC
   mout <- ppage("socal", plot.it = FALSE)
   pout <- ppage("socal", H2O = TRUE, plot.it = FALSE)
   pcomp(mout, pout, reorder = FALSE, yline = 3.2, cex.ylab = 1.5, font = 2, labdy = 0.003, labels.at = NA, xlim = c(-0.2, -0.08))
-  text(c(-0.155, -0.125, -0.115), c(-0.005, 0.015, 0.03), c("FW", "LS", "HS"))
+  text(c(-0.155, -0.125, -0.115), c(-0.005, 0.015, 0.027), c("FW", "LS", "MS-HS"))
   title("Rodriguez-Brito et al.")
-  label.figure("B", cex = 1.8, xfrac = 0.035)
+  label.figure("(b)", cex = 1.7)
   # Rodriguez-Brito et al. GRAVY - pI
   pcomp(mout, pout, reorder = FALSE, vars = "pIG", yline = 3.2, cex.ylab = 1.5, font = 2, labdy = 0.003, labels.at = NA)
-  text(c(8.3, 6, 4.5), c(-0.18, -0.19, -0.12), c("FW", "LS", "HS"))
-  label.figure("D", cex = 1.8, xfrac = 0.035)
+  text(c(8.3, 6, 4.5), c(-0.18, -0.19, -0.115), c("FW", "LS", "MS-HS"))
+  title("Rodriguez-Brito et al.")
+  label.figure("(d)", cex = 1.7)
   if(pdf) {
     dev.off()
     addexif("gradH2O6", "nH2O-ZC and GRAVY-pI plots for Baltic Sea and Rodriguez-Brito et al. data", "Dick et al. (2020) (preprint)")
@@ -444,12 +450,12 @@ gradH2O6 <- function(pdf = FALSE) {
 
 # differential gene and protein expression, time-course and NaCl vs organic solutes 20200420
 gradH2O7 <- function(pdf = FALSE) {
-  if(pdf) pdf("gradH2O7.pdf", width = 8, height = 5)
+  if(pdf) pdf("gradH2O7.pdf", width = 8, height = 4.5)
   layout(matrix(0:11, nrow = 3, byrow = TRUE), widths = c(0.2, 1, 1, 1), heights = c(0.2, 1, 1))
   # add titles
   par(mar = c(0, 0, 0, 0))
   plot.new()
-  text(0.57, 0.5, "All compiled datasets\nfor bacteria and yeast", font = 2)
+  text(0.57, 0.5, "All compiled datasets for bacteria", font = 2)
   plot.new()
   text(0.57, 0.5, "Time-course experiments", font = 2)
   plot.new()
@@ -496,17 +502,16 @@ gradH2O7 <- function(pdf = FALSE) {
   # plot A: transcriptomes compilation
   saltygenes <- read.csv(system.file("vignettes/saltygenes.csv", package = "JMDplots"))
   diffplot(saltygenes, pt.text = NA, contour = FALSE, cex = 1.5)
-  points(mean(saltygenes$ZC.diff), mean(saltygenes$nH2O_rQEC.diff), pch = 19, cex = 2)
-  label.figure("A", cex = 1.8, xfrac = 0.12, yfrac = 1.05)
+  points(mean(saltygenes$ZC.diff), mean(saltygenes$nH2O_rQEC.diff), pch = 19, cex = 1.7)
+  legend("topleft", c("dataset", "mean"), pch = c(1, 19), bty = "n")
+  label.figure("(a)", cex = 1.8, xfrac = 0.12, yfrac = 1.05)
   # print the p-values
-  p.ZC <- round(t.test(saltygenes$ZC.down, saltygenes$ZC.up)$p.value, 3)
-  p.nH2O <- round(t.test(saltygenes$nH2O_rQEC.down, saltygenes$nH2O_rQEC.up)$p.value, 3)
+  p.ZC <- round(t.test(saltygenes$ZC.down, saltygenes$ZC.up, paired = TRUE)$p.value, 3)
+  p.nH2O <- round(t.test(saltygenes$nH2O_rQEC.down, saltygenes$nH2O_rQEC.up, paired = TRUE)$p.value, 3)
   print(paste("p-values for transcriptomics:", p.ZC, "(ZC),", p.nH2O, "(nH2O)"))
 
   # plot C: transcriptomics: increasing time
   Ttime <- list(
-    LTH = c("LTH+11_RNA_30", "LTH+11_RNA_60", "LTH+11_RNA_90", "LTH+11_RNA_120", "LTH+11_RNA_240"),
-#    BWBW = c("BBWB12_37_2.5", "BBWB12_37_5", "BBWB12_37_10", "BBWB12_37_20"),
     KKG = c("KKG+14_Gene_30min", "KKG+14_Gene_80min", "KKG+14_Gene_310min"),
     SLM = c("SLM+14_5", "SLM+14_30", "SLM+14_60"),
     FRH = c("FRH+15_NaCl_1h", "FRH+15_NaCl_6h", "FRH+15_NaCl_24h"),
@@ -516,7 +521,7 @@ gradH2O7 <- function(pdf = FALSE) {
   comptab <- saltygenes[match(unlist(Ttime), saltygenes$dataset), ]
   ndat <- sapply(Ttime, length)
   mkdiff(comptab, ndat)
-  label.figure("C", cex = 1.8, xfrac = 0.12, yfrac = 1.05)
+  label.figure("(c)", cex = 1.8, xfrac = 0.12, yfrac = 1.05)
 
   # plot E: transcriptomics: NaCl or organic solutes
   Tsolute <- list(
@@ -532,39 +537,36 @@ gradH2O7 <- function(pdf = FALSE) {
   ndat <- sapply(Tsolute, length)
   mkdiff(comptab, ndat, pt.text = LETTERS[1:sum(ndat)], pch = c(21, 22))
   legend("topleft", c("NaCl", "organic"), pch = c(21, 22), bty = "n")
-  label.figure("E", cex = 1.8, xfrac = 0.12, yfrac = 1.05)
+  label.figure("(e)", cex = 1.8, xfrac = 0.12, yfrac = 1.05)
 
   par(mar = c(0, 0, 0, 0))
+  par(xpd = NA)
   plot.new()
   text(0.5, 0.6, "Differentially expressed proteins", srt = 90, font = 2)
   par(mar = c(4, 4, 0.2, 1), mgp = c(2.5, 1, 0))
+  par(xpd = FALSE)
 
   # plot B: proteomes compilation
   osmotic_bact <- read.csv(system.file("extdata/vignette_output/osmotic_bact.csv", package = "canprot"))
   diffplot(osmotic_bact, pt.text = NA, contour = FALSE, cex = 1.5)
-  points(mean(osmotic_bact$ZC.diff), mean(osmotic_bact$nH2O_rQEC.diff), pch = 19, cex = 2)
-  label.figure("B", cex = 1.8, xfrac = 0.12, yfrac = 1.05)
+  points(mean(osmotic_bact$ZC.diff), mean(osmotic_bact$nH2O_rQEC.diff), pch = 19, cex = 1.7)
+  legend("topleft", c("dataset", "mean"), pch = c(1, 19), bty = "n")
+  label.figure("(b)", cex = 1.8, xfrac = 0.12, yfrac = 1.05)
   # print the p-values
-  p.ZC <- round(t.test(osmotic_bact$ZC.down, osmotic_bact$ZC.up)$p.value, 3)
-  p.nH2O <- round(t.test(osmotic_bact$nH2O_rQEC.down, osmotic_bact$nH2O_rQEC.up)$p.value, 3)
+  p.ZC <- round(t.test(osmotic_bact$ZC.down, osmotic_bact$ZC.up, paired = TRUE)$p.value, 3)
+  p.nH2O <- round(t.test(osmotic_bact$nH2O_rQEC.down, osmotic_bact$nH2O_rQEC.up, paired = TRUE)$p.value, 3)
   print(paste("p-values for proteomics:", p.ZC, "(ZC),", p.nH2O, "(nH2O)"))
 
   # plot D: proteomics: increasing time
   osmotic_euk <- read.csv(system.file("extdata/vignette_output/osmotic_euk.csv", package = "canprot"))
   Ptime <- list(
-    LTH = c("LTH+11_Protein_30", "LTH+11_Protein_60", "LTH+11_Protein_90", "LTH+11_Protein_120", "LTH+11_Protein_240"),
     KKG = c("KKG+14_Protein_30min", "KKG+14_Protein_80min", "KKG+14_Protein_310min"),
-    QHT = c("QHT+13_24.h", "QHT+13_48.h"),
-    SCG = c("SCG+15_nodelay", "SCG+15_delayed")
+    QHT = c("QHT+13_24.h", "QHT+13_48.h")
   )
-  LTHtab <- osmotic_euk[match(Ptime$LTH, osmotic_euk$dataset), ]
-  KKGtab <- osmotic_bact[match(Ptime$KKG, osmotic_bact$dataset), ]
-  QHTtab <- osmotic_bact[match(Ptime$QHT, osmotic_bact$dataset), ]
-  SCGtab <- osmotic_euk[match(Ptime$SCG, osmotic_euk$dataset), ]
-  comptab <- rbind(LTHtab, KKGtab, QHTtab, SCGtab)
+  comptab <- osmotic_bact[match(unlist(Ptime), osmotic_bact$dataset), ]
   ndat <- sapply(Ptime, length)
-  mkdiff(comptab, ndat, pt.text = c("a", "b", "c", "d", "e", "f", "g", "h", "q", "r", "t", "u"))
-  label.figure("D", cex = 1.8, xfrac = 0.12, yfrac = 1.05)
+  mkdiff(comptab, ndat, pt.text = c("a", "b", "c", "l", "m"))
+  label.figure("(d)", cex = 1.8, xfrac = 0.12, yfrac = 1.05)
 
   # plot F: proteomics: NaCl or organic solutes
   Psolute <- list(
@@ -574,7 +576,7 @@ gradH2O7 <- function(pdf = FALSE) {
   comptab <- osmotic_bact[match(unlist(Psolute), osmotic_bact$dataset), ]
   ndat <- sapply(Psolute, length)
   mkdiff(comptab, ndat, pt.text = c("O", "P", "Q", "R"), pch = c(21, 22))
-  label.figure("F", cex = 1.8, xfrac = 0.12, yfrac = 1.05)
+  label.figure("(f)", cex = 1.8, xfrac = 0.12, yfrac = 1.05)
 
   if(pdf) {
     dev.off()
@@ -586,77 +588,46 @@ gradH2O7 <- function(pdf = FALSE) {
 # adapted from canprot/hyperosmotic.Rmd 20190717-20191007
 # add GRAVY and pI plot 20191028
 # use different symbols for eukaryotes and add halophilic bacteria and archaea 20191102-20191103
+# separate plots for halophiles and non-halophiles (no eukaryotes) 20200424
 gradH2O8 <- function(pdf = FALSE) {
-  if(pdf) pdf("gradH2O8.pdf", width = 8, height = 5.2)
-  layout(matrix(c(0,0,1,1,1,1,1,1,0,0, 2,2,2,2,2,3,3,3,3,3), nrow = 2, byrow = TRUE), heights = c(0.3, 1))
-  par(cex = 1)
+  if(pdf) pdf("gradH2O8.pdf", width = 5, height = 4)
+  layout(matrix(c(1, 1, 2, 2, 0, 3, 3, 0), nrow = 2, byrow = 2))
+  par(mar = c(3.2, 3.2, 2, 1))
+  par(mgp = c(1.9, 0.6, 0))
+  par(cex.lab = 1.2)
 
-  # make legend
-  par(mar = c(0.5, 1, 0, 1))
-  plot.new()
-  plot.window(c(1, 12), c(1, 5.3))
-  par(xpd = NA)
-  points(rep(0.5, 3), 1:3, pch = c(15, 2, 1), cex = c(0.5, 1.2, 1.5), col = "slategray3")
-  points(rep(2.5, 2), 3:4, pch = c(1, 0), cex = 2)
-  text(rep(2.5, 2), 3:4, c("B", "A"), cex = 0.75)
-  text(c(0.3, 2.7), c(5.3, 5.3), c("Dick (2017)", "This study"), adj = c(0.5, 1))
-  text(4, 5.3, "Domain, method, conditions", adj = c(0, 1))
-  text(4, 4, "Bacteria and Archaea, proteomics, optimal vs hypoosmotic", adj = 0)
-  text(4, 3, "Bacteria and Archaea, proteomics, hyperosmotic", adj = 0)
-  text(4, 2, "Bacteria and Archaea, transcriptomics, hyperosmotic", adj = 0)
-  text(4, 1, "Eukaryotes, proteomics, hyperosmotic", adj = 0)
-  z <- MASS::kde2d(rep(c(0, 0.5, 1, 1.5, 2, 2.5, 3), 5), rep(c(2.6, 2.8, 3, 3.2, 3.4), each = 7))
-  contour(z, drawlabels = FALSE, levels = 0.22, lty = 2, add = TRUE, col = "maroon3")
-  # adjust plot parameters for main plots
-  par(mar = c(4, 4, 1, 1), mgp = c(2.5, 1, 0))
-  par(xpd = FALSE)
+  # get proteomic data for halophiles
+  osmotic_halo <- read.csv(system.file("extdata/vignette_output/osmotic_halo.csv", package = "canprot"))
+  # use triangles for hyperosmotic, squares for hypoosmotic
+  pch <- ifelse(grepl("hypoosmotic", osmotic_halo$tags), 0, 2)
+  # make nH2O-ZC plot
+  diffplot(osmotic_halo, pch = pch, contour = FALSE, cex.text = 0.75, labtext = NA)
+  legend("topleft", c("hypoosmotic", "hyperosmotic"), pch = c(0, 2), bty = "n")
+  title("Halophile proteomics")
+  label.figure("(a)", cex = 1.7, yfrac = 0.93)
+  # make GRAVY-pI plot
+  diffplot(osmotic_halo, vars = c("pI", "GRAVY"), pch = pch, contour = FALSE, cex.text = 0.75, labtext = NA)
+  legend("topleft", c("hypoosmotic", "hyperosmotic"), pch = c(0, 2), bty = "n")
+  title("Halophile proteomics")
+  label.figure("(b)", cex = 1.7, yfrac = 0.93)
 
-  # get names of hyperosmotic stress datasets in canprot
-  datasets1 <- pdat_osmotic_bact()
-  # use filled square for eukaryotes, open circle for bacteria, open triangle for gene expression 20191102
-  pch1 <- rep(15, length(datasets1))
-  igene1 <- grepl("trans", datasets1)
-  pch1[igene1] <- 2
-  ibact1 <- (grepl("KKG\\+12", datasets1) | grepl("KLB\\+15", datasets1)) & !igene1
-  pch1[ibact1] <- 1
-  pt1 <- rep(NA, length(datasets1))
-  col1 <- rep("slategray3", length(datasets1))
-  cex1 <- rep(0.5, length(datasets1))
-  cex1[ibact1] <- 1.5
-  cex1[igene1] <- 1.2
+  # get proteomic data for non-halophiles in hyperosmotic stress
+  osmotic_bact <- read.csv(system.file("extdata/vignette_output/osmotic_bact.csv", package = "canprot"))
+  # combine halophile and non-halophile data for hyperosmotic stress
+  osmotic_halo <- osmotic_halo[osmotic_halo$tags!="hypoosmotic", ]
+  alldat <- rbind(osmotic_bact, osmotic_halo)
+  pch <- c(rep(1, nrow(osmotic_bact)), rep(2, nrow(osmotic_halo)))
+  # make GRAVY-pI plot
+  diffplot(alldat, vars = c("pI", "GRAVY"), pt.text = NA, contour = FALSE, pch = pch, labtext = NA, cex = 1.5)
+  points(mean(alldat$pI.diff), mean(alldat$GRAVY.diff), pch = 19, cex = 1.7)
+  legend("topleft", c("non-halophiles", "halophiles", "mean"), pch = c(1, 2, 19), bty = "n")
+  title("All hyperosmotic proteomic data")
+  label.figure("(c)", cex = 1.7, yfrac = 0.93)
+  # print the p-values
+  p.pI <- round(t.test(alldat$pI.down, alldat$pI.up, paired = TRUE)$p.value, 3)
+  p.GRAVY <- round(t.test(alldat$GRAVY.down, alldat$GRAVY.up, paired = TRUE)$p.value, 3)
+  print(paste("p-values for non-halophile proteomics:", p.pI, "(pI),", p.GRAVY, "(GRAVY)"))
 
-  # get new data (added for this paper)
-  datasets2 <- pdat_osmotic_halo()
-  # use open circle except open triangle for gene expression and open square for hypo-osmotic conditions 20191103
-  pch2 <- rep(1, length(datasets2))
-  igene2 <- grepl("trans", datasets2)
-  pch2[igene2] <- 2
-  ihypo2 <- datasets2 %in% c("LRB+09_2.6", "ZLZ+16_10", "LLYL17_0", "JSP+19_LoS")
-  pch2[ihypo2] <- 0
-  pt2 <- LETTERS[1:length(datasets2)]
-  col2 <- rep("black", length(datasets1))
-  cex2 <- rep(2, length(datasets2))
-  # include non-eukaryotes and non-transcriptomes in kde2d contours
-  contour <- c(ibact1, !(igene2 | ihypo2))
-
-  # put the data together
-  datasets <- c(datasets1, datasets2)
-  pch <- c(pch1, pch2)
-  pt.text <- c(pt1, pt2)
-  col <- c(col1, col2)
-  cex <- c(cex1, cex2)
-
-  # get the nH2O - ZC and GRAVY - pI values
-  comptab1 <- read.csv(system.file("extdata/vignette_output/osmotic_bact.csv", package = "canprot"))
-  comptab2 <- read.csv(system.file("extdata/vignette_output/osmotic_halo.csv", package = "canprot"))
-  comptab <- rbind(comptab1, comptab2)
-  # make the plots
-  diffplot(comptab, pt.text = pt.text, pch = pch, col = col,
-           contour = contour, cex = cex, col.contour = "maroon3", cex.text = 0.75)
-  label.figure("A", cex = 1.7)
-  diffplot(comptab, vars = c("pI", "GRAVY"), pt.text = pt.text, pch = pch, col = col,
-           contour = contour, cex = cex, col.contour = "maroon3", cex.text = 0.75)
-  label.figure("B", cex = 1.7)
   if(pdf) {
     dev.off()
     addexif("gradH2O8", "Differentially expressed proteins in halophiles under hypo- and hyperosmotic stress", "Dick et al. (2020) (preprint)")
@@ -710,26 +681,6 @@ NifProteomes <- function() {
 ### UNEXPORTED FUNCTIONS ###
 ############################
 
-# Supplementary Figure S1 20191028 (provisional, not in final paper)
-gradH2OS1 <- function(pdf = FALSE) {
-  if(pdf) pdf("gradH2OS1.pdf", width = 12, height = 5.6)
-  gradH2O2(vars = "pIG")
-  if(pdf) {
-    dev.off()
-    addexif("gradH2OS1", "GRAVY-pI scatterplots for redox gradients and the Baltic Sea", "Dick et al. (2020) (preprint)")
-  }
-}
-
-# Supplementary Figure S2 20191028 (provisional, not in final paper)
-gradH2OS2 <- function(pdf = FALSE) {
-  if(pdf) pdf("gradH2OS2.pdf", width = 6, height = 2.5)
-  gradH2O3(var = c("GRAVY", "pI"))
-  if(pdf) {
-    dev.off()
-    addexif("gradH2OS2", "GRAVY and pI for Baltic Sea metagenome and metatranscriptome in different size fractions", "Dick et al. (2020) (preprint)")
-  }
-}
-
 # function to add convex hulls 20191007
 hullfun <- function(mout, pout, istudy, basecol, group = NULL, vars = "ZC") {
   x <- y <- numeric()
@@ -754,4 +705,3 @@ hullfun <- function(mout, pout, istudy, basecol, group = NULL, vars = "ZC") {
   col <- rgb(r[1], r[2], r[3], 80, maxColorValue=255)
   polygon(x[i], y[i], col = col, border = NA)
 }
-

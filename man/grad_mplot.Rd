@@ -16,7 +16,8 @@ The functions are exported in the package so they are available to user scripts.
   mplot(study, seqtype, plottype = "bars", ylim = NULL, plot.RNA = TRUE,
     taxid = NULL, dsDNA = TRUE, abbrev = NULL, col = NULL, add.label = TRUE,
     maxdepth = NULL, H2O = FALSE, plot.it = TRUE, add.title = TRUE, yline = 2,
-    basis = "rQEC", datadir = NULL, mdata = studies, add = FALSE, pch = 19, var = NULL)
+    basis = "rQEC", datadir = NULL, mdata = studies, add = FALSE, pch = 19,
+    var = NULL, srt = 45, ilabel = NULL)
   mpage(subset = "gradoxSI", H2O = FALSE, plottype = "bars", dsDNA = TRUE,
     set.par = TRUE, add.label = TRUE, mfrow = NULL)
   ppage(subset = "gradoxSI", H2O = FALSE, set.par = TRUE, plot.it = TRUE,
@@ -46,6 +47,8 @@ The functions are exported in the package so they are available to user scripts.
   \item{yline}{numeric, margin position for y-axis label}
   \item{basis}{character, description of basis species to use}
   \item{var}{character, other variable to plot (\samp{GRAVY} or \samp{pI})}
+  \item{srt}{numeric, string rotation for non-numeric labels}
+  \item{ilabel}{numeric, which labels to include on plot}
   \item{subset}{character, name of subset of studies to plot}
   \item{set.par}{logical, set up plot with \code{\link{par}} commands?}
   \item{mfrow}{numeric, optional setting for \code{\link{par}(mfrow)}}

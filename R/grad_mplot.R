@@ -59,7 +59,7 @@ usedin <- list(
 mplot <- function(study, seqtype, plottype = "bars", ylim = NULL, plot.RNA = TRUE, taxid = NULL,
   dsDNA = TRUE, abbrev = NULL, col = NULL, add.label = TRUE, maxdepth = NULL, H2O = FALSE,
   plot.it = TRUE, add.title = TRUE, yline = 2, basis = "rQEC", datadir = NULL, mdata = studies,
-  add = FALSE, pch = 19, var = NULL) {
+  add = FALSE, pch = 19, var = NULL, srt = 45, ilabel = NULL) {
   # get metadata
   md <- get.mdata(mdata, study, seqtype)
   # get labels, groups, and abbreviation
@@ -71,7 +71,7 @@ mplot <- function(study, seqtype, plottype = "bars", ylim = NULL, plot.RNA = TRU
   dx <- md$dx
   dy <- md$dy
   xlab <- names(mdata[[study]][1])
-  # include all samples (even missing ones) for polygon plots
+  # include all samples (even missing ones) for polygon plots - which are indicated by a plottype defining a color ("#...")
   all.labels <- NULL
   if(substr(plottype, 1, 1) == "#") all.labels <- get.mdata(mdata, study, seqtype, remove.NA = FALSE)$xlabels
   # get ylim range for ZC from metadata
@@ -123,7 +123,7 @@ mplot <- function(study, seqtype, plottype = "bars", ylim = NULL, plot.RNA = TRU
               plot.RNA, taxid, col = col,
               add.label = add.label, plot_real_x = mdata[[study]][["plot_real_x"]], maxdepth = maxdepth, H2O = H2O,
               plot.it = plot.it, add.title = add.title, yline = yline, basis = basis, techtype = techtype, dx = dx, dy = dy, datadir = datadir,
-              add = add, all.labels = all.labels, pch = pch, var = var)
+              add = add, all.labels = all.labels, pch = pch, var = var, srt = srt, ilabel = ilabel)
 }
 
 # make page of plots for MG/MT 20180225
