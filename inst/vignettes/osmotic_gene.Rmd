@@ -1,13 +1,13 @@
 ---
-title: "Salty Genes"
+title: "Hyperosmotic Gene Expression"
 output:
   html_vignette:
     mathjax: null
 vignette: >
-  %\VignetteIndexEntry{Salty Genes}
+  %\VignetteIndexEntry{Hyperosmotic Gene Expression}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
-bibliography: saltygenes.bib
+bibliography: osmotic_gene.bib
 csl: peerj.csl
 ---
 
@@ -44,11 +44,11 @@ body {
 </style>
 
 ```{r datasets}
-datasets <- pdat_saltygenes(2020)
+datasets <- pdat_osmotic_gene(2020)
 ```
 
 ```{r comptab, results="hide", message=FALSE, echo = FALSE}
-pdat1 <- lapply(datasets, pdat_saltygenes)
+pdat1 <- lapply(datasets, pdat_osmotic_gene)
 comptab1 <- lapply(pdat1, get_comptab)
 pdat2 <- lapply(pdat1, recomp, "biosynth")
 comptab2 <- lapply(pdat2, get_comptab, "nO2")
@@ -74,7 +74,7 @@ out <- xsummary3(comptab1, comptab2, comptab3, comptab4)
 tags <- sapply(sapply(strsplit(datasets, "="), "[", -1), paste, collapse = ";")
 out <- cbind(out[, 1:2], tags = tags, out[, 3:25])
 out[, 6:26] <- round(out[, 6:26], 4)
-write.csv(out, "saltygenes.csv", row.names = FALSE, quote = 2)
+write.csv(out, "osmotic_gene.csv", row.names = FALSE, quote = 2)
 ```
 
 ## Data Sources

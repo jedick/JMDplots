@@ -1,0 +1,1 @@
+makevig("osmotic_gene")

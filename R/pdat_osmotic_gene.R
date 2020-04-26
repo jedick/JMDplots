@@ -1,8 +1,8 @@
-# JMDplots/pdat_saltygenes.R
+# JMDplots/pdat_osmotic_gene.R
 # retrieve protein IDs for differentially expressed genes in osmotic stress
 # 20200418 jmd
 
-pdat_saltygenes <- function(dataset=2020, basis="rQEC") {
+pdat_osmotic_gene <- function(dataset=2020, basis="rQEC") {
   if(identical(dataset, 2020)) {
     return(c(
              "KSA+02_NaCl", "KSA+02_sorbitol", "WJ02",
@@ -216,8 +216,8 @@ pdat_saltygenes <- function(dataset=2020, basis="rQEC") {
     up2 <- dat[, icol] > 0
     dat <- cleanup(dat, "Entry", up2)
     pcomp <- protcomp(dat$Entry, basis, aa_file = file.path(extdatadir, "aa/bacteria/WGB+13_aa.csv.xz"))
-  } else stop(paste("saltygenes dataset", dataset, "not available"))
-  print(paste0("pdat_saltygenes: ", description, " [", dataset, "]"))
+  } else stop(paste("osmotic_gene dataset", dataset, "not available"))
+  print(paste0("pdat_osmotic_gene: ", description, " [", dataset, "]"))
   # use the up2 from the cleaned-up data, if it exists 20190407
   if("up2" %in% colnames(dat)) up2 <- dat$up2
   return(list(dataset=dataset, basis=basis, pcomp=pcomp, up2=up2, description=description))

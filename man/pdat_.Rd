@@ -2,7 +2,7 @@
 \name{pdat_}
 \alias{pdat_TCGA}
 \alias{pdat_HPA}
-\alias{pdat_saltygenes}
+\alias{pdat_osmotic_gene}
 \title{Get Protein Expression Data}
 \description{
   These functions are used to calculate compositional metrics, including carbon oxidation state and stoichiometric hydration state, for differentially expressed proteins or proteins corresponding to differentially expressed genes.
@@ -13,7 +13,7 @@
 \usage{
   pdat_TCGA(dataset = 2020, basis = "rQEC")
   pdat_HPA(dataset = 2020, basis = "rQEC")
-  pdat_saltygenes(dataset = 2020, basis = "rQEC")
+  pdat_osmotic_gene(dataset = 2020, basis = "rQEC")
 }
 
 \arguments{
@@ -27,7 +27,7 @@ Expression levels for normal tissue and cancer are from the Genotype-Tissue Expr
 
 \code{pdat_HPA} calculates chemical composition for protein expression data from the Human Protein Atlas (Uhlen et al., 2015).
 
-\code{pdat_saltygenes} gets data for differentially expressed genes in transcriptomic experiments for bacteria.
+\code{pdat_osmotic_gene} gets data for differentially expressed genes in transcriptomic experiments for bacteria.
 }
 
 \section{Files in extdata/expression/pancan}{

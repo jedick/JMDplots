@@ -500,14 +500,14 @@ gradH2O7 <- function(pdf = FALSE) {
   }
 
   # plot A: transcriptomes compilation
-  saltygenes <- read.csv(system.file("vignettes/saltygenes.csv", package = "JMDplots"))
-  diffplot(saltygenes, pt.text = NA, contour = FALSE, cex = 1.5)
-  points(mean(saltygenes$ZC.diff), mean(saltygenes$nH2O_rQEC.diff), pch = 19, cex = 1.7)
+  osmotic_gene <- read.csv(system.file("vignettes/osmotic_gene.csv", package = "JMDplots"))
+  diffplot(osmotic_gene, pt.text = NA, contour = FALSE, cex = 1.5)
+  points(mean(osmotic_gene$ZC.diff), mean(osmotic_gene$nH2O_rQEC.diff), pch = 19, cex = 1.7)
   legend("topleft", c("dataset", "mean"), pch = c(1, 19), bty = "n")
   label.figure("(a)", cex = 1.8, xfrac = 0.12, yfrac = 1.05)
   # print the p-values
-  p.ZC <- round(t.test(saltygenes$ZC.down, saltygenes$ZC.up, paired = TRUE)$p.value, 3)
-  p.nH2O <- round(t.test(saltygenes$nH2O_rQEC.down, saltygenes$nH2O_rQEC.up, paired = TRUE)$p.value, 3)
+  p.ZC <- round(t.test(osmotic_gene$ZC.down, osmotic_gene$ZC.up, paired = TRUE)$p.value, 3)
+  p.nH2O <- round(t.test(osmotic_gene$nH2O_rQEC.down, osmotic_gene$nH2O_rQEC.up, paired = TRUE)$p.value, 3)
   print(paste("p-values for transcriptomics:", p.ZC, "(ZC),", p.nH2O, "(nH2O)"))
 
   # plot C: transcriptomics: increasing time
@@ -518,7 +518,7 @@ gradH2O7 <- function(pdf = FALSE) {
     HLL = c("HLL17_45min", "HLL17_14h"),
     QHT = c("QHT+13_Gene.24.h", "QHT+13_Gene.48.h", "QHT+13_Gene.72.h")
   )
-  comptab <- saltygenes[match(unlist(Ttime), saltygenes$dataset), ]
+  comptab <- osmotic_gene[match(unlist(Ttime), osmotic_gene$dataset), ]
   ndat <- sapply(Ttime, length)
   mkdiff(comptab, ndat)
   label.figure("(c)", cex = 1.8, xfrac = 0.12, yfrac = 1.05)
@@ -533,7 +533,7 @@ gradH2O7 <- function(pdf = FALSE) {
     SBB = c("SBB+09_NaCl", "SBB+09_Sucrose"),
     WGB = c("WGB+13_N", "WGB+13_U")
   )
-  comptab <- saltygenes[match(unlist(Tsolute), saltygenes$dataset), ]
+  comptab <- osmotic_gene[match(unlist(Tsolute), osmotic_gene$dataset), ]
   ndat <- sapply(Tsolute, length)
   mkdiff(comptab, ndat, pt.text = LETTERS[1:sum(ndat)], pch = c(21, 22))
   legend("topleft", c("NaCl", "organic"), pch = c(21, 22), bty = "n")

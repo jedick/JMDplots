@@ -1,7 +1,7 @@
 CHANGES IN JMDplots 1.2.1
 -------------------------
 
-- 20200421 Add pdat_saltygenes(), used in gradH2O paper.
+- 20200421 Add pdat_osmotic_gene(), used in gradH2O paper.
   Add makevig(). Remove pdat_CH16().
 
 CHANGES IN JMDplots 1.2.0
