@@ -148,10 +148,12 @@ gradH2O1 <- function(pdf = FALSE) {
   par(mgp = c(2.2, 0.7, 0))
   nH2O.human <- H2OAA(human, basis = "rQEC")
   scatterfun(ZC.human, nH2O.human, "bottomleft", "Human proteins (rQEC)", "(h)")
+  print(paste("mean nH2O for human:", round(mean(nH2O.human), 3)))
 
   # plot 9: nH2O-ZC of E. coli proteins (rQEC)
   nH2O.ecoli <- H2OAA(ecoli, basis = "rQEC")
   scatterfun(ZC.ecoli, nH2O.ecoli, "bottomleft", quote(italic(E.~coli)*" proteins (rQEC)"), "(i)")
+  print(paste("mean nH2O for E. coli:", round(mean(nH2O.ecoli), 3)))
 
   if(pdf) {
     dev.off()
@@ -547,7 +549,7 @@ gradH2O7 <- function(pdf = FALSE) {
   par(xpd = FALSE)
 
   # plot B: proteomes compilation
-  osmotic_bact <- read.csv(system.file("extdata/vignette_output/osmotic_bact.csv", package = "canprot"))
+  osmotic_bact <- read.csv(system.file("vignettes/osmotic_bact.csv", package = "canprot"))
   diffplot(osmotic_bact, pt.text = NA, contour = FALSE, cex = 1.5)
   points(mean(osmotic_bact$ZC.diff), mean(osmotic_bact$nH2O_rQEC.diff), pch = 19, cex = 1.7)
   legend("topleft", c("dataset", "mean"), pch = c(1, 19), bty = "n")
@@ -558,7 +560,7 @@ gradH2O7 <- function(pdf = FALSE) {
   print(paste("p-values for proteomics:", p.ZC, "(ZC),", p.nH2O, "(nH2O)"))
 
   # plot D: proteomics: increasing time
-  osmotic_euk <- read.csv(system.file("extdata/vignette_output/osmotic_euk.csv", package = "canprot"))
+  osmotic_euk <- read.csv(system.file("vignettes/osmotic_euk.csv", package = "canprot"))
   Ptime <- list(
     KKG = c("KKG+14_Protein_30min", "KKG+14_Protein_80min", "KKG+14_Protein_310min"),
     QHT = c("QHT+13_24.h", "QHT+13_48.h")
@@ -597,7 +599,7 @@ gradH2O8 <- function(pdf = FALSE) {
   par(cex.lab = 1.2)
 
   # get proteomic data for halophiles
-  osmotic_halo <- read.csv(system.file("extdata/vignette_output/osmotic_halo.csv", package = "canprot"))
+  osmotic_halo <- read.csv(system.file("vignettes/osmotic_halo.csv", package = "canprot"))
   # use triangles for hyperosmotic, squares for hypoosmotic
   pch <- ifelse(grepl("hypoosmotic", osmotic_halo$tags), 0, 2)
   # make nH2O-ZC plot
@@ -612,7 +614,7 @@ gradH2O8 <- function(pdf = FALSE) {
   label.figure("(b)", cex = 1.7, yfrac = 0.93)
 
   # get proteomic data for non-halophiles in hyperosmotic stress
-  osmotic_bact <- read.csv(system.file("extdata/vignette_output/osmotic_bact.csv", package = "canprot"))
+  osmotic_bact <- read.csv(system.file("vignettes/osmotic_bact.csv", package = "canprot"))
   # combine halophile and non-halophile data for hyperosmotic stress
   osmotic_halo <- osmotic_halo[osmotic_halo$tags!="hypoosmotic", ]
   alldat <- rbind(osmotic_bact, osmotic_halo)

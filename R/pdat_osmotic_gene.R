@@ -96,7 +96,7 @@ pdat_osmotic_gene <- function(dataset=2020, basis="rQEC") {
     # 20200419 Methylocystis, Han et al., 2017
     # HLL17_45min, HLL17_14h
     dat <- read.csv(paste0(datadir, "HLL17.csv.xz"), as.is=TRUE)
-    description <- paste("_Methylocystis_ sp. strain SC2 in 0.75 % NaCl vs control at", stage)
+    description <- paste("_Methylocystis_ sp. strain SC2 in 0.75% NaCl vs control at", stage)
     icol <- grep(stage, colnames(dat))
     dat <- dat[!is.na(dat[, icol]), ]
     up2 <- dat[, icol] > 0
@@ -107,7 +107,7 @@ pdat_osmotic_gene <- function(dataset=2020, basis="rQEC") {
     dat <- read.csv(paste0(datadir, "BBWB12.csv.xz"), as.is=TRUE)
     temp <- strsplit(stage, "_")[[1]][1]
     phase <- strsplit(stage, "_")[[1]][2]
-    description <- paste("_Listeria monocytogenes_ strain H7858 in 6 % NaCl at", phase, "% lag-phase duration")
+    description <- paste0("_Listeria monocytogenes_ strain H7858 in 6% NaCl at ", phase, "% lag-phase duration")
     icol <- grep(paste0("X", stage), colnames(dat))
     dat <- dat[abs(dat[, icol]) > 1, ]
     up2 <- dat[, icol] > 1
@@ -128,7 +128,7 @@ pdat_osmotic_gene <- function(dataset=2020, basis="rQEC") {
     # 20200419 Enterococcus faecalis, Solheim et al., 2014
     # SLM+14_5, SLM+14_30, SLM+14_60
     dat <- read.csv(paste0(datadir, "SLM+14.csv.xz"), as.is=TRUE)
-    description <- paste("_Enterococcus faecalis_ in 6.5 % NaCl vs control at", stage, "min")
+    description <- paste("_Enterococcus faecalis_ in 6.5% NaCl vs control at", stage, "min")
     icol <- grep(stage, colnames(dat))
     dat <- dat[!is.na(dat[, icol]), ]
     up2 <- dat[, icol] > 0
@@ -177,8 +177,8 @@ pdat_osmotic_gene <- function(dataset=2020, basis="rQEC") {
     # FRH+15_KCl_1h, FRH+15_KCl_6h, FRH+15_KCl_24h
     # FRH+15_glycerol_1h, FRH+15_glycerol_6h, FRH+15_glycerol_24h
     dat <- read.csv(paste0(datadir, "FRH+15.csv.xz"), as.is=TRUE)
-    solute <- strsplit(stage, "_")[[1]][2]
-    time <- strsplit(stage, "_")[[1]][3]
+    solute <- strsplit(stage, "_")[[1]][1]
+    time <- strsplit(stage, "_")[[1]][2]
     description <- paste("_Salmonella enterica_ in", solute, "vs control for", time, "h")
     icol <- grep(stage, colnames(dat))
     dat <- dat[!is.na(dat[, icol]), ]
@@ -189,7 +189,7 @@ pdat_osmotic_gene <- function(dataset=2020, basis="rQEC") {
     # 20200423 E. coli, Metris et al., 2014
     # MGM+14_3.5, MGM+14_4.5, MGM+14_5, MGM+14_5.5 
     dat <- read.csv(file.path(datadir, "MGM+14.csv.xz"), as.is=TRUE)
-    description <- paste("_Escherichia coli_ in", stage, "vs 2 % NaCl (with glycine betaine)")
+    description <- paste("_Escherichia coli_ in", stage, "vs 2% NaCl (with glycine betaine)")
     icol <- grep(paste0("_", stage, "_"), colnames(dat))
     dat <- dat[abs(dat[, icol]) > 1, ]
     up2 <- dat[, icol] > 1
