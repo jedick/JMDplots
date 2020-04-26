@@ -148,12 +148,12 @@ gradH2O1 <- function(pdf = FALSE) {
   par(mgp = c(2.2, 0.7, 0))
   nH2O.human <- H2OAA(human, basis = "rQEC")
   scatterfun(ZC.human, nH2O.human, "bottomleft", "Human proteins (rQEC)", "(h)")
-  print(paste("mean nH2O for human:", round(mean(nH2O.human), 3)))
 
   # plot 9: nH2O-ZC of E. coli proteins (rQEC)
   nH2O.ecoli <- H2OAA(ecoli, basis = "rQEC")
   scatterfun(ZC.ecoli, nH2O.ecoli, "bottomleft", quote(italic(E.~coli)*" proteins (rQEC)"), "(i)")
-  print(paste("mean nH2O for E. coli:", round(mean(nH2O.ecoli), 3)))
+  print(paste0("mean ZC for human, E.coli: ", round(mean(ZC.human), 3), ", ", round(mean(ZC.ecoli), 3)))
+  print(paste0("mean nH2O for human, E.coli: ", round(mean(nH2O.human), 3), ", ", round(mean(nH2O.ecoli), 3)))
 
   if(pdf) {
     dev.off()
@@ -510,6 +510,7 @@ gradH2O7 <- function(pdf = FALSE) {
   # print the p-values
   p.ZC <- round(t.test(osmotic_gene$ZC.down, osmotic_gene$ZC.up, paired = TRUE)$p.value, 3)
   p.nH2O <- round(t.test(osmotic_gene$nH2O_rQEC.down, osmotic_gene$nH2O_rQEC.up, paired = TRUE)$p.value, 3)
+  print(paste("number of transcriptomics datasets:", nrow(osmotic_gene)))
   print(paste("p-values for transcriptomics:", p.ZC, "(ZC),", p.nH2O, "(nH2O)"))
 
   # plot C: transcriptomics: increasing time
@@ -557,7 +558,13 @@ gradH2O7 <- function(pdf = FALSE) {
   # print the p-values
   p.ZC <- round(t.test(osmotic_bact$ZC.down, osmotic_bact$ZC.up, paired = TRUE)$p.value, 3)
   p.nH2O <- round(t.test(osmotic_bact$nH2O_rQEC.down, osmotic_bact$nH2O_rQEC.up, paired = TRUE)$p.value, 3)
+  print(paste("number of proteomics datasets:", nrow(osmotic_bact)))
   print(paste("p-values for proteomics:", p.ZC, "(ZC),", p.nH2O, "(nH2O)"))
+  # print total number of studies
+  osmotic_gene_studies <- sapply(strsplit(osmotic_gene$dataset, "_"), "[", 1)
+  osmotic_bact_studies <- sapply(strsplit(osmotic_bact$dataset, "_"), "[", 1)
+  nstudies <- length(unique(c(osmotic_gene_studies, osmotic_bact_studies)))
+  print(paste("total number of studies (transcriptomics and proteomics):", nstudies))
 
   # plot D: proteomics: increasing time
   osmotic_euk <- read.csv(system.file("vignettes/osmotic_euk.csv", package = "canprot"))
@@ -628,7 +635,7 @@ gradH2O8 <- function(pdf = FALSE) {
   # print the p-values
   p.pI <- round(t.test(alldat$pI.down, alldat$pI.up, paired = TRUE)$p.value, 3)
   p.GRAVY <- round(t.test(alldat$GRAVY.down, alldat$GRAVY.up, paired = TRUE)$p.value, 3)
-  print(paste("p-values for non-halophile proteomics:", p.pI, "(pI),", p.GRAVY, "(GRAVY)"))
+  print(paste("p-values for all hyperosmotic proteomic data:", p.pI, "(pI),", p.GRAVY, "(GRAVY)"))
 
   if(pdf) {
     dev.off()

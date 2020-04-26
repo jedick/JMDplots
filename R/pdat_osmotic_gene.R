@@ -37,8 +37,6 @@ pdat_osmotic_gene <- function(dataset=2020, basis="rQEC") {
   datadir <- paste0(extdatadir, "/expression/osmotic/")
   if(study %in% c("KLB+15", "KKG+14", "ADW+14", "QHT+13")) {
     return(pdat_osmotic_bact(dataset, basis))
-  #} else if(study =="LTH+11") {
-  #  return(pdat_osmotic_euk(dataset, basis))
   } else if(study=="HMO+10") {
     # 20191102 Bacillus subtilis, Hahne et al., 2010
     # HMO+10_prot-cytosol, HMO+10_prot-membrane, HMO+10_transcriptomics
