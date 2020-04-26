@@ -5,7 +5,6 @@
 
 # package dependencies:
 # png (used in aoscp3())
-# plotrix (using in potential())
 
 # ZC of amino acids vs ZC of RNA codons and hydropathy index of amino acids
 aoscp1 <- function(pdf = FALSE) {
@@ -335,8 +334,19 @@ aoscp4 <- function(pdf = FALSE) {
   par(mar=c(0, 1, 0, 0))
   plot.new()
   plot.window(c(-2, 2), c(-1.7, 1.7))
-  draw.arc(-0.5, -1.2, deg1=10, deg2=170)
-  draw.arc(-0.5, 1.2, deg1=190, deg2=350)
+  #draw.arc(-0.5, -1.2, deg1=10, deg2=170)
+  #draw.arc(-0.5, 1.2, deg1=190, deg2=350)
+  # drawing half-circles
+  # https://stat.ethz.ch/pipermail/r-help/2004-May/051218.html
+  # added 20200426 to remove plotrix::draw.arc (needs R >= 3.5.0)
+  halfCircle <- function(x, y, r, start = 0, end = pi, nsteps = 30, ...){
+   rs <- seq(start, end, len = nsteps)
+   xc <- x + r * cos(rs)
+   yc <- y + r * sin(rs)
+   lines(xc, yc, ...)
+  }
+  halfCircle(-0.5, 1.2, 0.8, start = pi + pi / 12, end = 2*pi - pi / 12)
+  halfCircle(-0.5, -1.2, 0.8, start = 0 + pi / 12, end = pi - pi / 12)
   # separate and label compartments
   lines(c(-0.5, -0.5), c(-1.5, 1.5), lty=2)
   text(-1.5, 0, "ER")

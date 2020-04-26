@@ -80,7 +80,6 @@ importFrom("canprot",
 importFrom("shiny", "fluidPage", "includeCSS", "shinyApp")
 importFrom("timevis", "renderTimevis", "timevis", "timevisOutput")
 importFrom("png", "readPNG")
-importFrom("plotrix", "draw.arc")
 importFrom("MASS", "kde2d")
 importFrom("diagram", "openplotmat", "coordinates", "straightarrow", "curvedarrow", "textrect", "textplain")
 importFrom("ggplot2", "theme_bw", "xlab", "ylab", "geom_hline", "geom_vline", "theme",
