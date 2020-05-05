@@ -1,8 +1,7 @@
 CHANGES IN JMDplots 1.2.2
 -------------------------
 
-- 20200505 Remove biosynthesis calculations and make new version of
-  canH2OS4().
+- 20200505 Remove biosynthesis calculations and remake canH2OS4().
 
 CHANGES IN JMDplots 1.2.1
 -------------------------

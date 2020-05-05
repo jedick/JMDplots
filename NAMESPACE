@@ -27,10 +27,10 @@ export(
   "canH2OT2",
   # canH2O supplementary tables and figures 20200205
   "canH2OT1", "canH2OS1", "canH2OS2", "canH2OS3",
-  # canH2O paper 20200301, 20200420, 20200505
-  "canH2OS5", "pdat_osmotic_gene", "canH2OS4",
-  # 20200421
-  "makevig"
+  # canH2O paper 20200301, 20200420, 20200421
+  "canH2OS5", "pdat_osmotic_gene", "makevig",
+  # 20200505
+  "canH2OS4", "pdat_aneuploidy", "canH2O5"
 )
 
 # imports from CHNOSZ
@@ -70,7 +70,9 @@ importFrom("canprot",
   # for plotphylo() 20200204
   "check_IDs",
   # for pdat_osmotic_gene() 20200421
-  "pdat_osmotic_euk"
+  "pdat_osmotic_euk",
+  # for canH2O5() 20200505
+  "qdiff"
 )
 
 # imports from other packages

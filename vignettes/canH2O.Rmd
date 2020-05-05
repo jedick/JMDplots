@@ -56,6 +56,11 @@ canH2O3()
 canH2O4()
 ```
 
+## Quantile plot for proteins coded by differentially expressed genes in aneuploid yeast cells (Figure 4)
+```{r canH2O5, message = FALSE, results = "hide", fig.align='center', out.width='100%', fig.width = 6, fig.height = 3, pngquant = pngquant}
+canH2O5()
+```
+
 ## Mean differences and _p_-values across all datasets (Table 2)
 Mean differences are followed by log~10~ of _p_-value in parentheses.
 Mean differences are computed as (mean of median values for up-regulated proteins in each dataset) - (mean of median values for down-regulated proteins in each dataset).

@@ -1,6 +1,7 @@
 # JMDplots/pdat_.R
 # get protein IDs for differentially expressed proteins or genes
 # combined pdat_TCGA.R and pdat_HPA.R 20200301
+# pdat_aneuploidy added 20200505
 
 # retrieve protein IDs for differentially expressed genes in TCGA / GTEx [via GEPIA2] 20111123 jmd
 pdat_TCGA <- function(dataset = 2020, basis = "rQEC") {
@@ -107,4 +108,28 @@ pdat_HPA <- function(dataset = 2020, basis = "rQEC") {
   # use the up2 from the cleaned-up data, if it exists 20190429
   if("up2" %in% colnames(dat)) up2 <- dat$up2
   return(list(dataset=dataset, pcomp=pcomp, up2=up2, description=description))
+}
+
+pdat_aneuploidy <- function(dataset = 2020, basis = "rQEC") {
+  if(identical(dataset, 2020)) {
+    return("TNC+19")
+  }
+  # remove tags
+  dataset <- strsplit(dataset, "=")[[1]][1]
+  # get study and stage/condition
+  study <- strsplit(dataset, "_")[[1]][1]
+  stage <- paste(strsplit(dataset, "_")[[1]][-1], collapse = "_")
+  extdatadir <- system.file("extdata", package="JMDplots")
+  datadir <- paste0(extdatadir, "/expression/aneuploidy/")
+  if(study=="TNC+19") {
+    # 20200425 yeast aneuploidy, Tsai et al., 2019
+    dat <- read.csv(paste0(datadir, "TNC+19.csv.xz"), as.is=TRUE)
+    description <- "yeast aneuploidy"
+    up2 <- dat$log2FoldChange > 0
+    pcomp <- protcomp(dat$Entry, basis, aa_file = paste0(extdatadir, "/aa/yeast/TNC+19_aa.csv.xz"))
+  } else stop(paste("aneuploidy dataset", dataset, "not available"))
+  print(paste0("pdat_aneuploidy: ", description, " [", dataset, "]"))
+  # use the up2 from the cleaned-up data, if it exists 20190407
+  if("up2" %in% colnames(dat)) up2 <- dat$up2
+  return(list(dataset = dataset, basis = basis, pcomp = pcomp, up2 = up2, description = description))
 }

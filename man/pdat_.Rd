@@ -3,6 +3,7 @@
 \alias{pdat_TCGA}
 \alias{pdat_HPA}
 \alias{pdat_osmotic_gene}
+\alias{pdat_aneuploidy}
 \title{Get Protein Expression Data}
 \description{
   These functions are used to calculate compositional metrics, including carbon oxidation state and stoichiometric hydration state, for differentially expressed proteins or proteins corresponding to differentially expressed genes.
@@ -14,6 +15,7 @@
   pdat_TCGA(dataset = 2020, basis = "rQEC")
   pdat_HPA(dataset = 2020, basis = "rQEC")
   pdat_osmotic_gene(dataset = 2020, basis = "rQEC")
+  pdat_aneuploidy(dataset = 2020, basis = "rQEC")
 }
 
 \arguments{
@@ -28,6 +30,8 @@ Expression levels for normal tissue and cancer are from the Genotype-Tissue Expr
 \code{pdat_HPA} calculates chemical composition for protein expression data from the Human Protein Atlas (Uhlen et al., 2015).
 
 \code{pdat_osmotic_gene} gets data for differentially expressed genes in transcriptomic experiments for bacteria.
+
+\code{pdat_aneuploidy} gets data for differentially expressed genes in aneuploid vs haploid yeast cells (Tsai et al., 2019).
 }
 
 \section{Files in extdata/expression/pancan}{
@@ -54,6 +58,8 @@ Hutter, C. and Zenklusen, J. C. (2018) The Cancer Genome Atlas: Creating lasting
 Tang, Z., Kang, B., Li, C., Chen, T. and Zhang, Z. (2019) GEPIA2: an enhanced web server for large-scale expression profiling and interactive analysis. \emph{Nucleic Acids Res.} \bold{47}, W556--W560. \doi{10.1093/nar/gkz430}
 
 The Cancer Genome Atlas Research Network et al. (2013) The Cancer Genome Atlas Pan-Cancer analysis project. \emph{Nat. Genetics} \bold{45}, 1113--1120. \doi{10.1038/ng.2764}
+
+Tsai, H.-J. et al. (2019) Hypo-osmotic-like stress underlies general cellular defects of aneuploidy. \emph{Nature} \bold{570}, 117--121. \doi{10.1038/s41586-019-1187-2}
 
 Uhlen, M. et al. (2015) A pathology atlas of the human cancer transcriptome. \emph{Science} \bold{357}, eaan2507. \doi{10.1126/science.aan2507}
 }
