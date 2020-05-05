@@ -447,37 +447,6 @@ canH2O4 <- function(pdf = FALSE) {
   }
 }
 
-# nH2O from stoichiometric hydration state and amino acid biosynthesis reactions 20200409
-canH2O5 <- function(pdf = FALSE) {
-  if(pdf) pdf("canH2O5.pdf", width = 6, height = 3)
-  par(mar = c(4, 4.1, 1.5, 1), mgp = c(3, 1, 0), las = 1)
-  par(mfrow = c(1, 2))
-
-  # read data
-  TCGA <- read.csv(system.file("vignettes/TCGA.csv", package = "JMDplots"), as.is = TRUE)
-  HPA <- read.csv(system.file("vignettes/HPA.csv", package = "JMDplots"), as.is = TRUE)
-  # define labels
-  rQEClab <- quote(Delta*italic(n)[H[2] * O]~"(stoichiometric hydration state)        ")
-  biolab <- quote(Delta*italic(n)[H[2] * O]~"(AA biosynthesis)")
-
-  # plot nH2O(biosynth) vs nH2O(rQEC) for TCGA data
-  plot(TCGA$nH2O_rQEC.diff, TCGA$nH2O_biosynth.diff, xlab = rQEClab, ylab = biolab)
-  abline(h = 0, v = 0, lty = 3, col = "grey30")
-  title("TCGA/GTEx", font.main = 1)
-  label.figure("A", font = 2, cex = 1.5)
-
-  # plot nH2O(biosynth) vs nH2O(rQEC) for HPA data
-  plot(HPA$nH2O_rQEC.diff, HPA$nH2O_biosynth.diff, xlab = rQEClab, ylab = biolab)
-  abline(h = 0, v = 0, lty = 3, col = "grey30")
-  title("HPA", font.main = 1)
-  label.figure("B", font = 2, cex = 1.5)
-
-  if(pdf) {
-    dev.off()
-    addexif("canH2O5", "nH2O from stoichiometric hydration state and amino acid biosynthesis reactions", "Dick (2020) (preprint)")
-  }
-}
-
 ###############
 ### TABLE 2 ###
 ###############
@@ -497,7 +466,7 @@ canH2OT2 <- function() {
   # make data frames for mean differences and p-values
   # include comparison of up- and down-regulated proteins for "Secreted" in hypoxia compared to "Hypoxia" (whole-cell)
   pdat <- mdat <- data.frame(condition = c(names(culture), names(cancer), names(pancan), "up", "down"))
-  for(property in c("ZC", "nH2O_rQEC", "nO2_biosynth", "nH2O_biosynth", "nAA")) {
+  for(property in c("ZC", "nH2O_rQEC", "PS_TPPG17", "PS_LMM16", "nAA")) {
     pvals <- mvals <- numeric()
     idn <- grep(paste0(property, ".down"), colnames(culture[[1]]))
     iup <- grep(paste0(property, ".up"), colnames(culture[[1]]))
@@ -505,15 +474,15 @@ canH2OT2 <- function() {
       if(type %in% c("up", "down")) {
         if(type=="up") idiff <- iup
         if(type=="down") idiff <- idn
-        hypoxia <- culture$hypoxia[, idiff]
-        secreted <- culture$secreted[, idiff]
+        hypoxia <- na.omit(culture$hypoxia[, idiff])
+        secreted <- na.omit(culture$secreted[, idiff])
         mvals <- c(mvals, mean(secreted) - mean(hypoxia))
         pvals <- c(pvals, t.test(hypoxia, secreted)$p.value)
       } else {
         thisdat <- get(type)
         for(i in 1:length(thisdat)) {
-          dn <- thisdat[[i]][, idn]
-          up <- thisdat[[i]][, iup]
+          dn <- na.omit(thisdat[[i]][, idn])
+          up <- na.omit(thisdat[[i]][, iup])
           mvals <- c(mvals, mean(up) - mean(dn))
           pvals <- c(pvals, t.test(dn, up)$p.value)
         }
@@ -527,14 +496,16 @@ canH2OT2 <- function() {
     pdat <- cbind(pdat, pcol)
   }
   # round and combine values
-  mdat[, 2:5] <- round(mdat[, 2:5], 3)
-  for(icol in 2:5) mdat[, icol] <- paste0(sprintf("%.3f", mdat[, icol]), " (", sprintf("%.1f", pdat[, icol]), ")")
+  mdat[, 2:3] <- round(mdat[, 2:3], 3)
+  for(icol in 2:3) mdat[, icol] <- paste0(sprintf("%.3f", mdat[, icol]), " (", sprintf("%.1f", pdat[, icol]), ")")
+  mdat[, 4:5] <- round(mdat[, 4:5], 2)
+  for(icol in 4:5) mdat[, icol] <- paste0(sprintf("%.2f", mdat[, icol]), " (", sprintf("%.1f", pdat[, icol]), ")")
   mdat[, 6] <- round(mdat[, 6], 1)
   for(icol in 6) mdat[, icol] <- paste0(sprintf("%.1f", mdat[, icol]), " (", sprintf("%.1f", pdat[, icol]), ")")
   # adjustments for pretty kable output
   rownames(mdat) <- mdat[, 1]
   mdat <- mdat[, -1]
-  colnames(mdat) <- c("*Z*~C~", "*n*~H2O~ (rQEC)", "*n*~O2~ (biosynth)", "*n*~H2O~ (biosynth)", "*n*~AA~")
+  colnames(mdat) <- c("*Z*~C~", "*n*~H2O~ (rQEC)", "PS (TPPG17)", "PS (LMM16)", "*n*~AA~")
   mdat
 }
 
@@ -556,63 +527,11 @@ canH2OT1 <- function() {
   out
 }
 
-# biosynthetic reactions for amino acids 20200104
-# adapted from ?canprot::metrics
-canH2OT3 <- function() {
-  # This shows how the stoichiometric coefficients of H2O and O2
-  # in biosynthetic reactions were obtained. The list of precursors is based on
-  # https://upload.wikimedia.org/wikipedia/commons/2/21/Amino_acid_biosynthesis_overview.png
-  file <- system.file("extdata/misc/aminoacid_precursors.csv", package = "canprot")
-  precursors <- read.csv(file, as.is = TRUE)
-  # balance the reactions using CHNOPS basis (including H+)
-  basis("CHNOPS+")
-  # but use ionized forms of NH4+, HS-, and HPO4-
-  swap.basis("NH3", "NH4+")
-  swap.basis("H2S", "HS-")
-  swap.basis("H3PO4", "H2PO4-")
-  # add precursors not in OBIGT
-  mod.obigt("chorismate", formula = "C10H8O6-2")
-  mod.obigt("3-phosphoglycerate", formula = "C3H5O7P-2")
-  mod.obigt("ribose 5-phosphate", formula = "C5H10O8P-")
-  allAA <- aminoacids("")
-  names(allAA) <- aminoacids(3)
-  out <- lapply(allAA, function(AA) {
-    ipre <- match(AA, precursors$amino.acid)
-    # react precursor and amino acid in 1:1 proportion
-    sres <- suppressMessages(subcrt(c(precursors$precursor[ipre], AA), c(-1, 1)))
-    rxn <- describe.reaction(sres$reaction, iname = 1:nrow(sres$reaction))
-    # get the text into a character object and do so cleaning up 20200205
-    rxn <- capture.output(print(rxn))
-    rxn <- paste(rxn, collapse = "") # some are in 2 pieces... why?
-    rxn <- gsub("    ", "", gsub("\\)", "", gsub("\\(", "", gsub("~ ", "", gsub('\"', '', rxn)))))
-    nH2O <- subset(sres$reaction, formula == "H2O")$coeff
-    nO2 <- subset(sres$reaction, formula == "O2")$coeff
-    if(length(nH2O) == 0) nH2O <- 0
-    if(length(nO2) == 0) nO2 <- 0
-    # note negative sign here (reactants are "added" to the species)
-    list(rxn = rxn, nH2O = -nH2O, nO2 = -nO2)
-  })
-  out <- data.frame(
-    reaction = sapply(out, "[[", 1),
-    nH2O = sapply(out, "[[", 2),
-    nO2 = sapply(out, "[[", 3)
-  )
-  # sanity check: make sure the values calculated here are the
-  # same as those used in canprot::O2AA and canprot::H2OAA
-  AAcomp <- as.data.frame(diag(20))
-  names(AAcomp) <- aminoacids(3)
-  stopifnot(all.equal(out$nO2, O2AA(AAcomp, "biosynth"), check.attributes = FALSE))
-  stopifnot(all.equal(out$nH2O, H2OAA(AAcomp, "biosynth") - 1, check.attributes = FALSE))
-  # adjustments for pretty kable output
-  colnames(out) <- c("reaction", "*n*~H2O~", "*n*~O2~")
-  out
-}
-
-# rQEC derivation and comparison with biosynthetic reactions 20190713
+# rQEC derivation 20190713
 canH2OS1 <- function(pdf = FALSE) {
   # set up figure
-  if(pdf) pdf("canH2OS1.pdf", width = 6, height = 6)
-  par(mfrow = c(2, 2))
+  if(pdf) pdf("canH2OS1.pdf", width = 6, height = 3)
+  par(mfrow = c(1, 2))
   par(mar = c(3.2, 3.2, 1, 1))
   par(mgp = c(2, 0.7, 0))
   par(las = 1)
@@ -621,7 +540,6 @@ canH2OS1 <- function(pdf = FALSE) {
   # define axis labels
   nH2Olab.QEC <- expression(italic(n)[H[2] * O]~"(QEC)")
   nH2Olab.rQEC <- expression(italic(n)[H[2] * O]~"(rQEC)")
-  nO2lab <- expression(italic(n)[O[2]])
   ZClab <- expression(italic(Z)[C])
 
   # function to plot values for amino acids
@@ -645,19 +563,9 @@ canH2OS1 <- function(pdf = FALSE) {
   aaplot(ZCAA(AAcomp), H2OAA(AAcomp, "rQEC") - 1, ZClab, nH2Olab.rQEC, "bottomright")
   label.figure("B", cex = 1.7, font = 2)
 
-  # plot 3: nO2(biosynth) vs ZC for amino acids
-  nO2lab.bio <- quote(italic(n)[O[2]]~"(biosynthetic)")
-  aaplot(ZCAA(AAcomp), O2AA(AAcomp, "biosynth"), ZClab, nO2lab.bio, "bottomright")
-  label.figure("C", cex = 1.7, font = 2)
-
-  # plot 4: nH2O(biosynth) vs nH2O(rQEC) for amino acid residues
-  nH2Olab.bio <- quote(italic(n)[H[2] * O]~"(biosynthetic)")
-  aaplot(H2OAA(AAcomp, "rQEC") - 1, H2OAA(AAcomp, "biosynth") - 1, nH2Olab.rQEC, nH2Olab.bio, "bottomright", lmlim = H2OAA(AAcomp, "rQEC") - 1)
-  label.figure("D", cex = 1.7, font = 2)
-
   if(pdf) {
     dev.off()
-    addexif("canH2OS1", "rQEC derivation and comparison with biosynthetic reactions", "Dick (2020) (preprint)")
+    addexif("canH2OS1", "rQEC derivation", "Dick (2020) (preprint)")
   }
 }
 
@@ -776,49 +684,120 @@ canH2OS3 <- function(pdf = FALSE) {
   }
 }
 
-# plots with nH2O and nO2 of amino acid biosynthesis reactions 20191205
+# scatterplots of ZC and nH2O vs phylostrata for HPA datasets 20200505
 canH2OS4 <- function(pdf = FALSE) {
-  if(pdf) pdf("canH2OS4.pdf", width = 6, height = 6)
-  par(mar = c(4, 4.1, 1.5, 1), mgp = c(2.8, 1, 0), las = 1)
-  par(mfrow = c(2, 2))
+  # read files and get labels
+  vigout2 <- system.file("vignettes", package = "JMDplots")
+  HPA <- read.csv(file.path(vigout2, "HPA.csv"), as.is = TRUE)
+  TCGA <- read.csv(file.path(vigout2, "TCGA.csv"), as.is = TRUE)
+  TCGA_labels <- TCGA$description
+  HPA_labels <- HPA$description
+  HPA_labels <- sapply(strsplit(HPA_labels, " "), "[", 1)
+  HPA_labels[grepl("head", HPA_labels)] <- "head and neck"
 
-  # read data
-  TCGA <- read.csv(system.file("vignettes/TCGA.csv", package = "JMDplots"), as.is = TRUE)
-  HPA <- read.csv(system.file("vignettes/HPA.csv", package = "JMDplots"), as.is = TRUE)
-  # define labels
-  ZClab <- quote(Delta*italic(Z)[C]~"(carbon oxidation state)")
-  O2lab <- quote(Delta*italic(n)[O[2]]~"(AA biosynthesis)")
-  H2Olab <- quote(Delta*italic(n)[H[2] * O]~"(AA biosynthesis)")
+  # ZC, nH2O and PS values
+  HPAdat <- data.frame(ZC = HPA$ZC.diff, nH2O = HPA$nH2O_rQEC.diff, PS = HPA$PS_TPPG17.diff)
+  TCGAdat <- data.frame(ZC = TCGA$ZC.diff, nH2O = TCGA$nH2O_rQEC.diff, PS = TCGA$PS_TPPG17.diff)
 
-  # plot nO2(biosynth) vs ZC for TCGA data
-  plot(TCGA$ZC.diff, TCGA$nO2_biosynth.diff, xlab = ZClab, ylab = O2lab)
-  abline(h = 0, v = 0, lty = 3, col = "grey30")
-  title("TCGA/GTEx", font.main = 1)
-  label.figure("A", font = 2, cex = 1.7, yfrac = 0.97, xfrac = 0.03)
+  # get colors for 5 cancers in paper 20191208
+  cond2 <- c("colorectal", "pancreatic", "breast", "lung", "prostate", "liver")
+  #col2 <- palette.colors(8, "Classic Tableau")[c(6, 5, 7, 8, 4, 2)]
+  col2 <- c("#8C564B", "#9467BD", "#E377C2", "#7F7F7F", "#D62728", "#FF7F0E")
+  jHPA <- match(cond2, sapply(strsplit(HPA$description, " "), "[", 1))
+  colHPA <- rep("slateblue4", nrow(HPA))
+  colHPA[jHPA] <- col2
+  sizeHPA <- rep(1.5, nrow(HPA))
+  sizeHPA[jHPA] <- 2
+  shapeHPA <- rep(15, nrow(HPA))
+  shapeHPA[jHPA] <- 1
 
-  # plot nO2(biosynth) vs ZC for HPA data
-  plot(HPA$ZC.diff, HPA$nO2_biosynth.diff, xlab = ZClab, ylab = O2lab)
-  abline(h = 0, v = 0, lty = 3, col = "grey30")
-  title("HPA", font.main = 1)
-  label.figure("B", font = 2, cex = 1.7, yfrac = 0.97, xfrac = 0.03)
+  # workaround for "no visible binding for global variable" in R CMD check 20200505
+  PS <- ZC <- nH2O <- NULL
 
-  # plot nH2O(biosynth) vs nO2(biosynth) for TCGA data
-  plot(TCGA$nO2_biosynth.diff, TCGA$nH2O_biosynth.diff, xlab = O2lab, ylab = H2Olab)
-  abline(h = 0, v = 0, lty = 3, col = "grey30")
-  title("TCGA/GTEx", font.main = 1)
-  label.figure("C", font = 2, cex = 1.7, yfrac = 0.97, xfrac = 0.03)
+  r.squared.ZC <- format(summary(lm(ZC ~ PS, HPAdat))$r.squared, digits = 2)
+  ZC.title <- paste0("italic(R)^2 == '", r.squared.ZC, "'")
+  pl1 <- ggplot(HPAdat, aes(x = PS, y = ZC, label = HPA_labels)) +
+    theme_classic() + geom_smooth(method = "lm") +
+    annotate("text", -Inf, Inf, label = ZC.title, parse = TRUE, hjust = -0.2, vjust = 1.5) +
+    xlab(quote(Delta*PS*" (HPA)")) +
+    ylab(quote(Delta*italic(Z)[C]*" (HPA)")) +
+    geom_hline(yintercept = 0, linetype = 3, colour = "gray30") +
+    geom_vline(xintercept = 0, linetype = 3, colour = "gray30") +
+    geom_point(shape = shapeHPA, size = sizeHPA, col = colHPA, stroke = 1.5) +
+    ggrepel::geom_text_repel(size = 3, seed = 42) +
+    labs(tag = expression(bold(A))) +
+    theme(plot.tag = element_text(size = 20), plot.title = element_text(hjust = 0.5),
+          panel.border = element_rect(colour = "black", fill=NA))
+  pl1 <- list(pl1)
 
-  # plot nH2O(biosynth) vs nO2(biosynth) for HPA data
-  plot(HPA$nO2_biosynth.diff, HPA$nH2O_biosynth.diff, xlab = O2lab, ylab = H2Olab)
-  abline(h = 0, v = 0, lty = 3, col = "grey30")
-  title("HPA", font.main = 1)
-  label.figure("D", font = 2, cex = 1.7, yfrac = 0.97, xfrac = 0.03)
+  r.squared.nH2O <- format(summary(lm(nH2O ~ PS, HPAdat))$r.squared, digits = 2)
+  nH2O.title <- paste0("italic(R)^2 == '", r.squared.nH2O, "'")
+  pl2 <- ggplot(HPAdat, aes(x = PS, y = nH2O, label = HPA_labels)) +
+    theme_classic() + geom_smooth(method = "lm") +
+    annotate("text", -Inf, Inf, label = nH2O.title, parse = TRUE, hjust = -0.2, vjust = 1.5) +
+    xlab(quote(Delta*PS*" (HPA)")) +
+    ylab(quote(Delta*italic(n)[H[2]*O]*" (HPA)")) +
+    geom_hline(yintercept = 0, linetype = 3, colour = "gray30") +
+    geom_vline(xintercept = 0, linetype = 3, colour = "gray30") +
+    geom_point(shape = shapeHPA, size = sizeHPA, col = colHPA, stroke = 1.5) +
+    ggrepel::geom_text_repel(size = 3, seed = 42) +
+    labs(tag = expression(bold(B))) +
+    theme(plot.tag = element_text(size = 20), plot.title = element_text(hjust = 0.5),
+          panel.border = element_rect(colour = "black", fill=NA))
+  pl2 <- list(pl2)
 
+  # now do TCGA
+  TCGAnames <- c("COAD", "PAAD", "BRCA", "LUAD", "PRAD", "LIHC")
+  jTCGA <- match(TCGAnames, TCGA$description)
+  colTCGA <- rep("slateblue4", nrow(TCGA))
+  colTCGA[jTCGA] <- col2
+  sizeTCGA <- rep(1.5, nrow(TCGA))
+  sizeTCGA[jTCGA] <- 2
+  shapeTCGA <- rep(15, nrow(TCGA))
+  shapeTCGA[jTCGA] <- 1
+
+  r.squared.ZC <- format(summary(lm(ZC ~ PS, TCGAdat))$r.squared, digits = 2)
+  ZC.title <- paste0("italic(R)^2 == '", r.squared.ZC, "'")
+  pl3 <- ggplot(TCGAdat, aes(x = PS, y = ZC, label = TCGA_labels)) +
+    theme_classic() + geom_smooth(method = "lm") +
+    annotate("text", -Inf, -Inf, label = ZC.title, parse = TRUE, hjust = -0.2, vjust = -1.5) +
+    xlab(quote(Delta*PS*" (TCGA)")) +
+    ylab(quote(Delta*italic(Z)[C]*" (TCGA)")) +
+    geom_hline(yintercept = 0, linetype = 3, colour = "gray30") +
+    geom_vline(xintercept = 0, linetype = 3, colour = "gray30") +
+    geom_point(shape = shapeTCGA, size = sizeTCGA, col = colTCGA, stroke = 1.5) +
+    ggrepel::geom_text_repel(size = 3, seed = 42) +
+    labs(tag = expression(bold(C))) +
+    theme(plot.tag = element_text(size = 20), plot.title = element_text(hjust = 0.5),
+          panel.border = element_rect(colour = "black", fill=NA))
+  pl3 <- list(pl3)
+
+  r.squared.nH2O <- format(summary(lm(nH2O ~ PS, TCGAdat))$r.squared, digits = 2)
+  nH2O.title <- paste0("italic(R)^2 == '", r.squared.nH2O, "'")
+  pl4 <- ggplot(TCGAdat, aes(x = PS, y = nH2O, label = TCGA_labels)) +
+    theme_classic() + geom_smooth(method = "lm") +
+    annotate("text", -Inf, -Inf, label = nH2O.title, parse = TRUE, hjust = -0.2, vjust = -1.5) +
+    xlab(quote(Delta*PS*" (TCGA)")) +
+    ylab(quote(Delta*italic(n)[H[2]*O]*" (TCGA)")) +
+    geom_hline(yintercept = 0, linetype = 3, colour = "gray30") +
+    geom_vline(xintercept = 0, linetype = 3, colour = "gray30") +
+    geom_point(shape = shapeTCGA, size = sizeTCGA, col = colTCGA, stroke = 1.5) +
+    ggrepel::geom_text_repel(size = 3, seed = 42) +
+    labs(tag = expression(bold(D))) +
+    theme(plot.tag = element_text(size = 20), plot.title = element_text(hjust = 0.5),
+          panel.border = element_rect(colour = "black", fill=NA))
+  pl4 <- list(pl4)
+
+  # put together the figure
+  mat <- matrix(1:4, nrow = 2, byrow = TRUE)
+  ml <- gridExtra::marrangeGrob(c(pl1, pl2, pl3, pl4), layout_matrix = mat, top = NULL)
   if(pdf) {
-    dev.off()
-    addexif("canH2OS4", "Plots with nH2O and nO2 of amino acid biosynthesis reactions", "Dick (2020) (preprint)")
+    ggsave("canH2OS4.pdf", ml, width = 8, height = 8)
+    addexif("canH2OS4", "Scatterplots of ZC and nH2O vs phylostrata for HPA datasets", "Dick (2020) (preprint)")
   }
+  else ml
 }
+
 
 # Scatterplots of hypoxia scores and ZC or nH2O for TCGA or HPA datasets 20200224
 canH2OS5 <- function(pdf = FALSE) {
@@ -952,8 +931,7 @@ plotphylo <- function(vars = c("ZC", "nH2O"), basis = "rQEC", PS_source = "TPPG1
     lines(Phylostratum, cum.ZC, col = 2)
   }
   if("nH2O" %in% vars) {
-    if(basis=="rQEC") ylab <- expression(italic(n)[H[2] * O])
-    if(basis=="biosynth") ylab <- expression(italic(n)[H[2] * O]~"(AA biosynthetic reactions)")
+    ylab <- expression(italic(n)[H[2] * O])
     plot(Phylostratum, mean.nH2O, type = "b", ylab = ylab)
     lines(Phylostratum, cum.nH2O, col = 2)
   }

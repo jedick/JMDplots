@@ -22,12 +22,11 @@ if (!nzchar(Sys.which("pngquant"))) pngquant <- NULL
 This vignette from the R package [JMDplots](https://github.com/jedick/JMDplots) version `r packageDescription("JMDplots")$Version` shows compositional metrics and phylostrata for proteins that are differentially expressed in cancer compared to normal tissue (data from [The Human Protein Atlas](https://www.proteinatlas.org)).
 Abbreviations:
 
-  * <i>Z</i><sub>C</sub> &ndash; carbon oxidation state; <i>n</i><sub>H<sub>2</sub>O</sub> &ndash; stoichiometric hydration state; <i>n</i><sub>O<sub>2</sub></sub> &ndash; stoichiometric oxidation state.
-  * <i>n</i><sub>AA</sub> &ndash; protein length; PS &ndash; phylostrata.
-  * <i>n</i><sub>down</sub> &ndash; number of down-regulated proteins; <i>n</i><sub>up</sub> &ndash; number of up-regulated proteins.
+  * <i>Z</i><sub>C</sub> &ndash; carbon oxidation state; <i>n</i><sub>H<sub>2</sub>O</sub> &ndash; stoichiometric hydration state per residue.
+  * PS &ndash; phylostratum; <i>n</i><sub>AA</sub> &ndash; protein length; MW &ndash; molecular weight per residue.
 
-Stoichiometric values are calculated using basis species (rQEC derivation) or amino acid biosynthetic reactions ([<span title="Distinct trends in chemical composition of proteins from metagenomes in redox and salinity gradients">Dick et al., 2020</span>](https://doi.org/10.1101/2020.04.01.020008); [<span title="Water as a reactant in the differential expression of proteins in cancer">Dick, 2020</a>](https://doi.org/10.1101/2020.04.09.035022)).
-Gene ages, expressed as phylostrata numbers, are taken from [<span title="Altered interactions between unicellular and multicellular genes drive hallmarks of transformation in a diverse range of solid tumors">Trigos et al., 2017</span>](https://doi.org/10.1073/pnas.1617743114) (TPPG17) or [<span title="Towards consensus gene ages ">Liebeskind et al, 2016</span>](https://doi.org/10.1093/gbe/evw113) (LMM16).
+Stoichiometric values are calculated using basis species (rQEC derivation; [<span title="Distinct trends in chemical composition of proteins from metagenomes in redox and salinity gradients">Dick et al., 2020</span>](https://doi.org/10.1101/2020.04.01.020008); [<span title="Water as a reactant in the differential expression of proteins in cancer">Dick, 2020</a>](https://doi.org/10.1101/2020.04.09.035022)).
+Gene ages, expressed as phylostratum numbers, are taken from [<span title="Altered interactions between unicellular and multicellular genes drive hallmarks of transformation in a diverse range of solid tumors">Trigos et al., 2017</span>](https://doi.org/10.1073/pnas.1617743114) (TPPG17) or [<span title="Towards consensus gene ages ">Liebeskind et al, 2016</span>](https://doi.org/10.1093/gbe/evw113) (LMM16).
 
 
 ```{r options, echo=FALSE}
@@ -49,33 +48,32 @@ datasets <- pdat_HPA()
 ```{r comptab, results="hide", message=FALSE, echo = FALSE}
 pdat1 <- lapply(datasets, pdat_HPA)
 comptab1 <- lapply(pdat1, get_comptab)
-pdat2 <- lapply(pdat1, recomp, "biosynth")
-comptab2 <- lapply(pdat2, get_comptab, "nO2")
-comptab3 <- lapply(pdat1, get_comptab, "PS_TPPG17", "PS_LMM16")
-comptab4 <- lapply(pdat1, get_comptab, "nAA", "MW")
+comptab2 <- lapply(pdat1, get_comptab, "PS_TPPG17", "PS_LMM16")
+comptab3 <- lapply(pdat1, get_comptab, "nAA", "MW")
 ```
 
 Differences are calculated as (median value for up-regulated proteins) - (median value for down-regulated proteins), except for phylostrata, where mean values are used.
 Dashed lines enclose the 50% credible region for highest probability density.
 
 ```{r diffplot, fig.width=8, fig.height=8, fig.align = "center", echo = FALSE}
-par(mfrow = c(2, 2), mar = c(4, 4, 2, 2), mgp = c(2.5, 1, 0))
+layout(matrix(c(0, 2, 1, 2, 1, 3, 0, 3), nrow = 2))
+par(cex = 1, mar = c(4, 4, 1, 1), mgp = c(2.5, 1, 0))
 diffplot(comptab1, labtext = NA)
-title(quote("rQEC"~italic(n)[H[2]*O]), font.main = 1)
-diffplot(comptab2, c("nO2", "nH2O"), labtext = NA)
-title(quote("Biosynthetic"~italic(n)[H[2]*O]~"and"~italic(n)[O[2]]), font.main = 1)
-diffplot(comptab3, c("PS_TPPG17", "PS_LMM16"))
-diffplot(comptab4, c("nAA", "MW"), labtext = NA)
+diffplot(comptab2, c("PS_TPPG17", "PS_LMM16"))
+diffplot(comptab3, c("nAA", "MW"), labtext = NA)
 ```
 
-In the table, values of &Delta;<i>Z</i><sub>C</sub>, &Delta;<i>n</i><sub>H<sub>2</sub>O</sub> and &Delta;<i>n</i><sub>O<sub>2</sub></sub> are multiplied by 1000, values of &Delta;PS are multiplied by 100, and negative values are shown in bold.
+In the table, values of &Delta;<i>Z</i><sub>C</sub> and &Delta;<i>n</i><sub>H<sub>2</sub>O</sub> are multiplied by 1000, values of &Delta;PS and &Delta;MW are multiplied by 100, and negative values are shown in bold.
+Abbreviations:
+
+  * <i>n</i><sub>down</sub> &ndash; number of down-regulated proteins; <i>n</i><sub>up</sub> &ndash; number of up-regulated proteins.
 
 ```{r xsummary, results="asis", echo = FALSE}
 library(xtable)
-out <- xsummary2(comptab1, comptab2, comptab3, comptab4)
+out <- xsummary2(comptab1, comptab2, comptab3)
 # round values and include dataset tags
 tags <- sapply(sapply(strsplit(datasets, "="), "[", -1), paste, collapse = ";")
-out <- cbind(out[, 1:2], tags = tags, out[, 3:25])
-out[, 6:26] <- round(out[, 6:26], 4)
+out <- cbind(out[, 1:2], tags = tags, out[, 3:19])
+out[, 6:20] <- round(out[, 6:20], 4)
 write.csv(out, "HPA.csv", row.names = FALSE, quote = 2)
 ```

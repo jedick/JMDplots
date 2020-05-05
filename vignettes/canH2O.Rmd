@@ -56,11 +56,6 @@ canH2O3()
 canH2O4()
 ```
 
-## `r nH2O` from stoichiometric hydration state and amino acid biosynthesis reactions (Figure 5)
-```{r canH2O5, message = FALSE, fig.align='center', out.width='75%', fig.width = 6, fig.height = 3, pngquant = pngquant}
-canH2O5()
-```
-
 ## Mean differences and _p_-values across all datasets (Table 2)
 Mean differences are followed by log~10~ of _p_-value in parentheses.
 Mean differences are computed as (mean of median values for up-regulated proteins in each dataset) - (mean of median values for down-regulated proteins in each dataset).
@@ -76,14 +71,8 @@ kable(canH2OT2(), align = "r")
 kable(canH2OT1())
 ```
 
-## Biosynthetic reactions for amino acids (Table S3)
-Note: nH2O and nO2 are compositional amounts (opposite of the reaction coefficients).
-```{r canH2OT3, message = FALSE}
-kable(canH2OT3())
-```
-
-## rQEC derivation and comparison with biosynthetic reactions (Figure S1)
-```{r canH2OS1, message = FALSE, fig.align='center', out.width='75%', fig.width = 6, fig.height = 6, pngquant = pngquant}
+## rQEC derivation (Figure S1)
+```{r canH2OS1, message = FALSE, fig.align='center', out.width='75%', fig.width = 6, fig.height = 3, pngquant = pngquant}
 canH2OS1()
 ```
 
@@ -97,8 +86,8 @@ canH2OS2()
 canH2OS3()
 ```
 
-## Plots with `r nH2O` and `r nO2` of amino acid biosynthesis reactions (Figure S4)
-```{r canH2OS4, message = FALSE, fig.align='center', out.width='75%', fig.width = 6, fig.height = 6, pngquant = pngquant}
+## Scatterplots of `r ZC` and `r nH2O` vs phylostrata for HPA datasets (Figure S4)
+```{r canH2OS4, message = FALSE, fig.align='center', out.width='75%', fig.width = 8, fig.height = 8, pngquant = pngquant}
 canH2OS4()
 ```
 
