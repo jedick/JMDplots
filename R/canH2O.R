@@ -474,7 +474,7 @@ canH2O4 <- function(pdf = FALSE) {
   }
 }
 
-# quantile plot for proteins coded by differentially expressed genes in aneuploid yeast cells 20200505
+# quantile distributions for proteins coded by differentially expressed genes in aneuploid yeast cells 20200505
 canH2O5 <- function(pdf = FALSE) {
   if(pdf) pdf("canH2O5.pdf", width = 6, height = 3)
   pd <- pdat_aneuploidy("TNC+19")
@@ -485,13 +485,13 @@ canH2O5 <- function(pdf = FALSE) {
   dntxt <- paste("Proteins coded by", sum(!pd$up2), "down-regulated genes")
   legend("center", c(dntxt, uptxt), lty = c(1, 2), col = c(1, 2), bty = "n")
   par(mar = c(3.5, 3.5, 0.5, 0.5))
-  qdiff(pd, "ZC")
+  qdist(pd, "ZC")
   label.figure("A", xfrac = 0.04, yfrac = 1.05, font = 2, cex = 1.5)
-  qdiff(pd, "nH2O")
+  qdist(pd, "nH2O")
   label.figure("B", xfrac = 0.95, yfrac = 1.05, font = 2, cex = 1.5)
   if(pdf) {
     dev.off()
-    addexif("canH2O5", "Quantile plot for proteins coded by differentially expressed genes in aneuploid yeast cells", "Dick (2020) (preprint)")
+    addexif("canH2O5", "Quantile distributions for proteins coded by differentially expressed genes in aneuploid yeast cells", "Dick (2020) (preprint)")
   }
 }
 
