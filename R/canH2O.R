@@ -21,7 +21,7 @@ canH2O1 <- function(pdf = FALSE) {
   p2 <- 5; r2 <- 0.1
   p3 <- 9; r3 <- 0.15
   p4 <- 19; r4 <- 0.115
-  p5 <- 16; r5 <- 0.15
+  p5 <- 16; r5 <- 0.16
   p6 <- 13; r6 <- 0.07
   p7 <- 28; r7 <- 0.09
   pP <- p3 + 2*npos[1] # the position for prostate cancer plot --> changed to phylostratigraphy box
@@ -31,8 +31,8 @@ canH2O1 <- function(pdf = FALSE) {
   straightarrow(from = pos[p2, ], to = pos[p3, ], arr.pos = 0.53, endhead = TRUE)
   curvedarrow(from = pos[p3, ], to = pos[p4, ] + c(0, 0.08), curve = 0.5, arr.pos = 0.67, endhead = TRUE)
   curvedarrow(from = pos[p3, ] + c(0, -0.05), to = pos[p5, ] + c(0.08, 0.08), curve = 0.3, arr.pos = 0.725, endhead = TRUE)
-  curvedarrow(from = pos[p4, ] + c(-0.129, -0.01), to = pos[pP, ] + c(0, 0.25), curve = 0.2, arr.pos = 0.55, endhead = TRUE)
-  curvedarrow(from = pos[p4, ] + c(-0.13, -0.01), to = pos[pO, ] + c(0.05, 0.27), curve = -0.2, arr.pos = 0.35, endhead = TRUE)
+  curvedarrow(from = pos[p4, ] + c(-0.105, -0.01), to = pos[pP, ] + c(0, 0.25), curve = 0.2, arr.pos = 0.52, endhead = TRUE)
+  curvedarrow(from = pos[p4, ] + c(-0.106, -0.01), to = pos[pO, ] + c(0.05, 0.27), curve = -0.2, arr.pos = 0.40, endhead = TRUE)
   curvedarrow(from = pos[p6, ] + c(-0.07, 0), to = pos[pO, ] + c(-0.02, 0.23), curve = 0.3, arr.pos = 0.55, endhead = TRUE)
 
   # hard-coded colors (palette.colors is not available in R < 4.0.0) 20200415
@@ -64,31 +64,60 @@ canH2O1 <- function(pdf = FALSE) {
   cansets <- unlist(sapply(cancer, "[[", "dataset"))
   nstudies <- length(unique(sapply(strsplit(c(cultsets, cansets), "_"), "[", 1)))
 
-  textrect(pos[p4, ] + c(0, 0.065), r4, ry + 0.015, lab = "", cex = cex, box.col = cols[4])
+  # add "Cancer vs normal" box
+  textrect(pos[p4, ] + c(0.02, 0.065), r4, ry + 0.015, lab = "", cex = cex, box.col = cols[4])
   calab <- paste(sapply(cancer, nrow), cond2)
-  textplain(pos[p4, ] + c(-0.1, 0.065), lab = calab, height = 0.105, cex = cex, adj = c(0, 0.5))
-  textplain(pos[p4, ] + c(0, 0.2), lab = c("Cancer", "vs normal"), font = 2, height = 0.04)
+  textplain(pos[p4, ] + c(-0.087, 0.065), lab = calab, height = 0.105, cex = cex, adj = c(0, 0.5))
+  textplain(pos[p4, ] + c(0.02, 0.2), lab = c("Cancer", "vs normal"), font = 2, height = 0.04)
+  # add color legend 20200506
+  #col2 <- palette.colors(8, "Classic Tableau")[c(6, 5, 7, 8, 4, 2)]
+  col2 <- c("#8C564B", "#9467BD", "#E377C2", "#7F7F7F", "#D62728", "#FF7F0E")
+  # function to get y-coordinates of text lines, extracted from diagram::textplain()
+  ycoords <- function (mid, height = 0.1, lab = "", adj = c(0.5, 0.5), ...) {
+    y <- numeric()
+    if (length(lab) == 1) y <- mid[2]
+    else {
+      y1 <- mid[2] + height
+      ddy <- 2 * height/(length(lab) + 1)
+      for (i in 1:length(lab)) y <- c(y, y1 - ddy * i)
+    }
+    y
+  }
+  ycancer <- ycoords(pos[p4, ] + c(-0.08, 0.065), lab = calab, height = 0.105)
+  xcancer <- rep(pos[p4, 1] + 0.117, length(ycancer))
+  points(xcancer, ycancer, bg = col2, pch = 21, cex = 1.7)
 
-  textrect(pos[p5, ] + c(-0.02, 0.08), r5, ry, lab = "", cex = cex, box.col = cols[3])
+  # add "Cell culture" box
+  textrect(pos[p5, ] + c(-0.011, 0.08), r5, ry, lab = "", cex = cex, box.col = cols[3])
   # sum osmotic (salt) and glucose datasets for hyperosmotic stress 20200411
   culab <- sapply(culture, nrow)
   culab["osmotic_euk"] <- culab["osmotic_euk"] + culab["glucose"]
   culab <- culab[-4]
   # change "osmotic_euk" to "hyperosmotic" 20200414
   names(culab)[3] <- "hyperosmotic"
-  # write "secreted in hypoxia" and "3D culture" 20200118
+  # write "secreted in hypoxia" and "3D vs 2D culture" 20200118
   culab <- paste(culab, names(culab))
   shlab <- c(paste(culab[2], "in"), "     hypoxia")
-  textplain(pos[p5, ] + c(-0.16, 0.095), lab = shlab, height = 0.038, cex = cex, adj = c(0, 0.5))
+  textplain(pos[p5, ] + c(-0.163, 0.095), lab = shlab, height = 0.038, cex = cex, adj = c(0, 0.5))
   culab <- c(culab[1], "", "", culab[3:4])
   culab[5] <- paste(culab[5], "vs 2D culture")
-  textplain(pos[p5, ] + c(-0.16, 0.08), lab = culab, height = 0.09, cex = cex, adj = c(0, 0.5))
+  textplain(pos[p5, ] + c(-0.163, 0.08), lab = culab, height = 0.09, cex = cex, adj = c(0, 0.5))
   textplain(pos[p5, ] + c(-0.02, 0.2), lab = c("Cell", "culture"), font = 2, height = 0.04)
+  # add color legend 20200506
+  #col1 <- palette.colors(8, "Okabe-Ito")[c(2, 4, 3, 1, 6)]
+  col1 <- c(orange = "#E69F00", bluishgreen = "#009E73", skyblue = "#56B4E9", black = "#000000", blue = "#0072B2")
+  yculture <- ycoords(pos[p5, ] + c(-0.16, 0.08), lab = culab, height = 0.09)
+  xculture <- rep(pos[p5, 1] + 0.13, length(yculture))
+  # point salt-inducded hyperosmotic stress on same line as glucose
+  points(xculture[-3], yculture[-3], bg = col1[-3], pch = 21, cex = 1.7)
+  points(xculture[3] - 0.025, yculture[4], bg = col1[3], pch = 21, cex = 1.7)
 
-  textrect(pos[p6, ] + c(0, 0.08), r6, ry, lab = c("GEPIA", "(TCGA/", "GTEx)", "HPA"), cex = cex, box.col = cols[1])
+
+  textrect(pos[p6, ] + c(0, 0.08), r6, ry, lab = c("GEPIA2", "(TCGA/", "GTEx)", ""), cex = cex, box.col = cols[1])
+  textplain(pos[p6, ] + c(-0.025, 0.025), r6, ry, lab = "HPA", cex = cex)
   textplain(pos[p6, ] + c(0, 0.2), lab = c("Pan-cancer", "comparison"), font = 2, height = 0.04)
 
-  textplain(pos[21, ] + c(-0.035, 0.1), lab = c(paste("Total:", total), "datasets", paste("from", nstudies), "studies"),
+  textplain(pos[21, ] + c(-0.02, 0.1), lab = c(paste("Total:", total), "datasets", paste("from", nstudies), "studies"),
             adj = c(0, 0.5), font = 3, height = 0.07, cex = 1.2)
 
   textrect(pos[pP, ] + c(0.02, 0.095), r7 + 0.015, ry, lab = c("Evolutionary", "trends of", "composition"), cex = cex, box.col = cols[1])
@@ -125,14 +154,11 @@ canH2O1 <- function(pdf = FALSE) {
   axis(2, tck = 0, labels = FALSE)
   mtext("oxidation state", 1, 0.5)
   mtext("hydration state", 2, 0.5)
-  #col1 <- palette.colors(8, "Okabe-Ito")[c(2, 4, 3, 1, 6)]
-  col1 <- c(orange = "#E69F00", bluishgreen = "#009E73", skyblue = "#56B4E9", black = "#000000", blue = "#0072B2")
-  #col2 <- palette.colors(8, "Classic Tableau")[c(6, 5, 7, 8, 4, 2)]
-  col2 <- c("#8C564B", "#9467BD", "#E377C2", "#7F7F7F", "#D62728", "#FF7F0E")
   # draw arrows to mean values
   # offset x = -0.1 to make room for text
   for(i in 5:1) arrows(-0.1, 0, 35*mean(culture[[i]]$ZC.diff) - 0.1, 35*mean(culture[[i]]$nH2O_rQEC.diff), col = col1[i], lwd = 3, length = 0.15)
   for(i in 1:6) arrows(-0.1, 0, 35*mean(cancer[[i]]$ZC.diff) - 0.1, 35*mean(cancer[[i]]$nH2O_rQEC.diff), col = col2[i], lwd = 3, length = 0.15)
+  
 
   # restore these defaults to be able to re-run this script with expected results
   par(xaxs = "r", yaxs = "r")
@@ -193,6 +219,7 @@ canH2O2 <- function(pdf = FALSE) {
       pch[grepl("cancer", alldat[[i]]$tags)] <- 19
       # use squares for microbial (yeast and bacteria) datasets 20200407
       pch[grepl("microbial", alldat[[i]]$tags)] <- 0
+      pch[grepl("yeast", alldat[[i]]$tags)] <- 0
     } else {
       # use filled/open symbols for human/[mouse or rat] cancer 20200415
       pch <- rep(19, nrow(alldat[[i]]))
@@ -475,7 +502,7 @@ canH2O5 <- function(pdf = FALSE) {
 # mean differences and p-values across all datasets 20200125
 canH2OT2 <- function() {
   cond1 <- c("hypoxia", "secreted", "osmotic_euk", "glucose", "3D")
-  cond2 <- c("colorectal", "pancreatic", "breast", "lung", "prostate", "liver")
+  cond2 <- c("breast", "colorectal", "liver", "lung", "pancreatic", "prostate")
   cond3 <- c("HPA", "TCGA")
   vigout <- system.file("vignettes", package = "canprot")
   conddat <- function(cond) read.csv(paste0(vigout, "/", cond, ".csv"), as.is = TRUE)
