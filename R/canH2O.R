@@ -396,36 +396,46 @@ canH2O3 <- function(pdf = FALSE) {
   } else ml
 }
 
-# compositional analysis of phylostrata and phylostrata-nAA plots for cancer tissue 20191201
-canH2O4 <- function(pdf = FALSE) {
-  if(pdf) pdf("canH2O4.pdf", width = 9, height = 5)
-  par(mar = c(4, 3, 1, 1), mgp = c(2, 1, 0))
-  mat <- matrix(1:10, byrow = TRUE, nrow = 2)
-  layout(mat, widths = c(1, 1, 1, 1.3, 1.5))
+# compositional analysis of phylostrata; phylostrata differences in cancer 20191201; 20200507
+canH2O4 <- function(pdf = FALSE, SI = FALSE) {
+  if(pdf) {
+    if(SI) pdf("canH2OS4.pdf", width = 9, height = 5)
+    else pdf("canH2O4.pdf", width = 9, height = 5)
+  }
+  par(mar = c(4, 4, 1, 1), mgp = c(2.5, 1, 0))
+  mat <- matrix(c(1, 1, 2, 5, 3, 6, 4, 7), nrow = 2)
+  layout(mat, widths = c(0.5, 1, 1, 1))
 
-  # plots 1-3: ZC, nH2O, nAA for Trigos et al. phylostrata
-  memo <- plotphylo("ZC", PS_source = "TPPG17")
-  label.figure("A", font = 2, cex = 1.7, yfrac = 0.96, xfrac = 0.05)
-  plotphylo("nH2O", PS_source = "TPPG17", memo = memo)
-  label.figure("B", font = 2, cex = 1.7, yfrac = 0.96, xfrac = 0.05)
-  plotphylo("nAA", PS_source = "TPPG17", memo = memo)
-  label.figure("C", font = 2, cex = 1.7, yfrac = 0.96, xfrac = 0.05)
-
-  # legend for phylostrata (Trigos et al., 2017)
+  # make legend for phylostrata
   plot.new()
   par(xpd = NA)
-  ys <- seq(0.8, 0, length.out = 8)
-  text1 <- c("Cellular organisms", "Eukaryota", "Opisthokonta", "Metazoa", "Eumetazoa", "Bilateria", "Chordata", "Euteleostomi")
-  text2 <- c("Ammiota", "Mammalia", "Theria", "Eutheria", "Euarchontoglires", "Catarrhini", "Homininae", "")
-  text(-0.25, ys, 1:8, adj = c(1, 0.5))
-  text(-0.2, ys, text1, adj = c(0, 0.5))
-  text(0.55, ys, 9:16, adj = c(1, 0.5))
-  text(0.6, ys, text2, adj = c(0, 0.5))
-  text(0.6, ys[8], "Homo sapiens", font = 3, adj = c(0, 0.5))
-  text(0.35, 1, "Phylostrata\n(Trigos et al., 2017)", cex = 1.2)
+  if(SI) {
+    # (Liebeskind et al., 2016)
+    ys <- seq(0.85, 0.15, length.out = 8)
+    text1 <- c("Cellular_organisms", "Euk_Archaea", "Euk+Bac", "Eukaryota", "Opisthokonta", "Eumetazoa", "Vertebrata", "Mammalia")
+    text(-0.6, ys, 1:8, adj = c(1, 0.5))
+    text(-0.52, ys, text1, adj = c(0, 0.5))
+  } else {
+    # (Trigos et al., 2017)
+    ys <- seq(0.9, 0.1, length.out = 16)
+    text1 <- c("Cellular organisms", "Eukaryota", "Opisthokonta", "Metazoa", "Eumetazoa", "Bilateria", "Chordata", "Euteleostomi")
+    text2 <- c("Ammiota", "Mammalia", "Theria", "Eutheria", "Euarchontoglires", "Catarrhini", "Homininae", "")
+    text(-0.6, ys, 1:16, adj = c(1, 0.5))
+    text(-0.52, ys, c(text1, text2), adj = c(0, 0.5))
+    text(-0.52, ys[16], "Homo sapiens", font = 3, adj = c(0, 0.5))
+  }
   par(xpd = FALSE)
 
-  # plot 4: 50 percentile contours for nAA-PS of proteomics datasets 20191201
+  # choose PS_source based on plot number
+  if(SI) PS_source <- "LMM16" else PS_source <- "TPPG17"
+
+  # plots 1-3: nAA, ZC, nH2O for phylostrata
+  memo <- plotphylo("nAA", PS_source = PS_source)
+  label.figure("A", font = 2, cex = 1.7, yfrac = 0.96, xfrac = 0.05)
+  plotphylo("ZC", PS_source = PS_source, memo = memo)
+  plotphylo("nH2O", PS_source = PS_source, memo = memo)
+
+  # get cancer data
   cond2 <- c("colorectal", "pancreatic", "breast", "lung", "prostate", "liver")
   vigout <- system.file("vignettes", package = "canprot")
   conddat <- function(cond) read.csv(paste0(vigout, "/", cond, ".csv"), as.is = TRUE)
@@ -433,46 +443,40 @@ canH2O4 <- function(pdf = FALSE) {
   names(cancer) <- cond2
   #col2 <- palette.colors(8, "Classic Tableau")[c(6, 5, 7, 8, 4, 2)]
   col2 <- c("#8C564B", "#9467BD", "#E377C2", "#7F7F7F", "#D62728", "#FF7F0E")
-  opar <- par(mar = c(4, 4, 1, 1), mgp = c(2.3, 1, 0), las = 1)
-  contplot(cancer, "", col2,
-           xvar = "nAA", yvar = "PS_TPPG17", xlim = c(-250, 200), ylim = c(-5, 5),
-           dx = c(-210, 60, 140, -140, -185, 130), dy = c(1.1, 2.5, -1.8, 0.5, -1.2, -1))
-  label.figure("D", cex = 1.7, font = 2, yfrac = 0.96, xfrac = 0.05)
-  par(opar)
 
-  # plots 5-7: ZC, nH2O, nAA for Liebeskind et al. phylostrata
-  memo <- plotphylo("ZC", PS_source = "LMM16")
-  label.figure("E", font = 2, cex = 1.7, yfrac = 0.96, xfrac = 0.05)
-  plotphylo("nH2O", PS_source = "LMM16", memo = memo)
-  label.figure("F", font = 2, cex = 1.7, yfrac = 0.96, xfrac = 0.05)
-  plotphylo("nAA", PS_source = "LMM16", memo = memo)
-  label.figure("G", font = 2, cex = 1.7, yfrac = 0.96, xfrac = 0.05)
-
-  # legend for phylostrata (Liebeskind et al., 2016)
-  plot.new()
-  par(xpd = NA)
-  ys <- seq(0.8, 0, length.out = 8)
-  text1 <- c("Cellular_organisms", "Euk_Archaea", "Euk+Bac", "Eukaryota", "Opisthokonta", "Eumetazoa", "Vertebrata", "Mammalia")
-  text(0.15, ys, 1:8, adj = c(1, 0.5))
-  text(0.2, ys, text1, adj = c(0, 0.5))
-  text(0.35, 1, "Phylostrata\n(Liebeskind et al., 2016)", cex = 1.2)
-  par(xpd = FALSE)
-
-  # plot 8: 50 percentile contours for nAA-PS of proteomics datasets 20191201
-  names <- names(cancer)
-  names[1] <- "colo-\nrectal"
-  opar <- par(mar = c(4, 4, 1, 1), mgp = c(2.3, 1, 0), las = 1)
-  contplot(cancer, "", col2,
-           xvar = "nAA", yvar = "PS_LMM16", xlim = c(-250, 200), ylim = c(-2, 2),
-           dx = c(120, 50, 120, -140, 170, -110), dy = c(-0.2, 1.25, -1, -0.65, -0.6, 0.72), names = names)
-  par(opar)
-  label.figure("H", cex = 1.7, font = 2, yfrac = 0.96, xfrac = 0.05)
+  # plot 4: 50 percentile contours for nAA-PS of proteomics datasets 20191201
+  if(SI) {
+    names <- names(cancer)
+    names[1] <- "colo-\nrectal"
+    contplot(cancer, "", col2,
+             xvar = "PS_LMM16", yvar = "nAA", xlim = c(-2, 2), ylim = c(-250, 200),
+             dx = c(-0.2, 1.25, -1, -0.65, -0.6, 0.72), dy = c(120, 50, 120, -140, 170, -110), names = names)
+  } else {
+    contplot(cancer, "", col2,
+             xvar = "PS_TPPG17", yvar = "nAA", xlim = c(-4, 5), ylim = c(-250, 200),
+             dx = c(1.1, 2.5, -1.8, 0.5, -1.2, -1), dy = c(-210, 60, 140, -140, -185, 130))
+  }
+  label.figure("B", cex = 1.7, font = 2, yfrac = 0.96, xfrac = 0.05)
+  # plot 5: ZC-PS
+  if(SI) {
+    contplot(cancer, "", col2, xvar = "PS_LMM16", yvar = "ZC", xlim = c(-2, 2), ylim = c(-0.05, 0.05))
+  } else {
+    contplot(cancer, "", col2, xvar = "PS_TPPG17", yvar = "ZC", xlim = c(-4, 4), ylim = c(-0.05, 0.05))
+  }
+  # plot 6: nH2O-PS
+  if(SI) {
+    contplot(cancer, "", col2, xvar = "PS_LMM16", yvar = "nH2O_rQEC", xlim = c(-2, 2), ylim = c(-0.02, 0.05))
+  } else {
+    contplot(cancer, "", col2, xvar = "PS_TPPG17", yvar = "nH2O_rQEC", xlim = c(-4, 4), ylim = c(-0.02, 0.05))
+  }
 
   if(pdf) {
     dev.off()
-    addexif("canH2O4", "Compositional analysis of phylostrata and phylostrata-nAA plots for cancer tissue", "Dick (2020) (preprint)")
+    if(SI) addexif("canH2OS4", "Compositional analysis of phylostrata representing Liebeskind et al. gene ages", "Dick (2020) (preprint)")
+    else addexif("canH2O4", "Compositional analysis of phylostrata; phylostrata differences in cancer", "Dick (2020) (preprint)")
   }
 }
+
 
 # quantile distributions for proteins coded by differentially expressed genes in aneuploid yeast cells 20200505
 canH2O5 <- function(pdf = FALSE) {
@@ -529,10 +533,13 @@ canH2OT2 <- function() {
       } else {
         thisdat <- get(type)
         for(i in 1:length(thisdat)) {
-          dn <- na.omit(thisdat[[i]][, idn])
-          up <- na.omit(thisdat[[i]][, iup])
+          dn <- thisdat[[i]][, idn]
+          up <- thisdat[[i]][, iup]
+          isNA <- is.na(dn) | is.na(up)
+          dn <- dn[!isNA]
+          up <- up[!isNA]
           mvals <- c(mvals, mean(up) - mean(dn))
-          pvals <- c(pvals, t.test(dn, up)$p.value)
+          pvals <- c(pvals, t.test(dn, up, paired = TRUE)$p.value)
         }
       }
     }
@@ -553,7 +560,7 @@ canH2OT2 <- function() {
   # adjustments for pretty kable output
   rownames(mdat) <- mdat[, 1]
   mdat <- mdat[, -1]
-  colnames(mdat) <- c("*Z*~C~", "*n*~H2O~ (rQEC)", "PS (TPPG17)", "PS (LMM16)", "*n*~AA~")
+  colnames(mdat) <- c("&Delta;*Z*~C~", "&Delta;*n*~H2O~", "&Delta;PS (TPPG17)", "&Delta;PS (LMM16)", "&Delta;*n*~AA~")
   mdat
 }
 
@@ -703,37 +710,8 @@ canH2OS2 <- function(pdf = FALSE) {
   else ml
 }
 
-# Trigos and Liebeskind phylostrata against ZC and nH2O for cancer tissue 20191211
+# scatterplots of ZC and nH2O vs phylostrata for TCGA and HPA datasets 20200505
 canH2OS3 <- function(pdf = FALSE) {
-  if(pdf) pdf("canH2OS3.pdf", width = 6, height = 6)
-  # get data
-  cond2 <- c("colorectal", "pancreatic", "breast", "lung", "prostate", "liver")
-  vigout <- system.file("vignettes", package = "canprot")
-  conddat <- function(cond) read.csv(paste0(vigout, "/", cond, ".csv"), as.is = TRUE)
-  cancer <- lapply(cond2, conddat)
-  names(cancer) <- cond2
-  #col2 <- palette.colors(8, "Classic Tableau")[c(6, 5, 7, 8, 4, 2)]
-  col2 <- c("#8C564B", "#9467BD", "#E377C2", "#7F7F7F", "#D62728", "#FF7F0E")
-  # setup plot
-  par(mfrow = c(2, 2))
-  par(mar = c(4, 4, 2, 1), mgp = c(2.3, 1, 0), las = 1)
-
-  contplot(cancer, "Trigos Phylostrata", col2, xvar = "ZC", yvar = "PS_TPPG17", ylim = c(-4, 4))
-  label.figure("A", cex = 1.7, font = 2, yfrac = 0.96, xfrac = 0.05)
-  contplot(cancer, "Trigos Phylostrata", col2, xvar = "nH2O_rQEC", yvar = "PS_TPPG17", ylim = c(-4, 4), xlim = c(-0.02, 0.05))
-  label.figure("B", cex = 1.7, font = 2, yfrac = 0.96, xfrac = 0.05)
-  contplot(cancer, "Liebeskind Phylostrata", col2, xvar = "ZC", yvar = "PS_LMM16", ylim = c(-2, 2))
-  label.figure("C", cex = 1.7, font = 2, yfrac = 0.96, xfrac = 0.05)
-  contplot(cancer, "Liebeskind Phylostrata", col2, xvar = "nH2O_rQEC", yvar = "PS_LMM16", ylim = c(-2, 2), xlim = c(-0.02, 0.05))
-  label.figure("D", cex = 1.7, font = 2, yfrac = 0.96, xfrac = 0.05)
-  if(pdf) {
-    dev.off()
-    addexif("canH2OS3", "Trigos and Liebeskind phylostrata against ZC and nH2O for cancer tissue", "Dick (2020) (preprint)")
-  }
-}
-
-# scatterplots of ZC and nH2O vs phylostrata for HPA datasets 20200505
-canH2OS4 <- function(pdf = FALSE) {
   # read files and get labels
   vigout2 <- system.file("vignettes", package = "JMDplots")
   HPA <- read.csv(file.path(vigout2, "HPA.csv"), as.is = TRUE)
@@ -751,50 +729,11 @@ canH2OS4 <- function(pdf = FALSE) {
   cond2 <- c("colorectal", "pancreatic", "breast", "lung", "prostate", "liver")
   #col2 <- palette.colors(8, "Classic Tableau")[c(6, 5, 7, 8, 4, 2)]
   col2 <- c("#8C564B", "#9467BD", "#E377C2", "#7F7F7F", "#D62728", "#FF7F0E")
-  jHPA <- match(cond2, sapply(strsplit(HPA$description, " "), "[", 1))
-  colHPA <- rep("slateblue4", nrow(HPA))
-  colHPA[jHPA] <- col2
-  sizeHPA <- rep(1.5, nrow(HPA))
-  sizeHPA[jHPA] <- 2
-  shapeHPA <- rep(15, nrow(HPA))
-  shapeHPA[jHPA] <- 1
 
   # workaround for "no visible binding for global variable" in R CMD check 20200505
   PS <- ZC <- nH2O <- NULL
 
-  r.squared.ZC <- format(summary(lm(ZC ~ PS, HPAdat))$r.squared, digits = 2)
-  ZC.title <- paste0("italic(R)^2 == '", r.squared.ZC, "'")
-  pl1 <- ggplot(HPAdat, aes(x = PS, y = ZC, label = HPA_labels)) +
-    theme_classic() + geom_smooth(method = "lm") +
-    annotate("text", -Inf, Inf, label = ZC.title, parse = TRUE, hjust = -0.2, vjust = 1.5) +
-    xlab(quote(Delta*PS*" (HPA)")) +
-    ylab(quote(Delta*italic(Z)[C]*" (HPA)")) +
-    geom_hline(yintercept = 0, linetype = 3, colour = "gray30") +
-    geom_vline(xintercept = 0, linetype = 3, colour = "gray30") +
-    geom_point(shape = shapeHPA, size = sizeHPA, col = colHPA, stroke = 1.5) +
-    ggrepel::geom_text_repel(size = 3, seed = 42) +
-    labs(tag = expression(bold(A))) +
-    theme(plot.tag = element_text(size = 20), plot.title = element_text(hjust = 0.5),
-          panel.border = element_rect(colour = "black", fill=NA))
-  pl1 <- list(pl1)
-
-  r.squared.nH2O <- format(summary(lm(nH2O ~ PS, HPAdat))$r.squared, digits = 2)
-  nH2O.title <- paste0("italic(R)^2 == '", r.squared.nH2O, "'")
-  pl2 <- ggplot(HPAdat, aes(x = PS, y = nH2O, label = HPA_labels)) +
-    theme_classic() + geom_smooth(method = "lm") +
-    annotate("text", -Inf, Inf, label = nH2O.title, parse = TRUE, hjust = -0.2, vjust = 1.5) +
-    xlab(quote(Delta*PS*" (HPA)")) +
-    ylab(quote(Delta*italic(n)[H[2]*O]*" (HPA)")) +
-    geom_hline(yintercept = 0, linetype = 3, colour = "gray30") +
-    geom_vline(xintercept = 0, linetype = 3, colour = "gray30") +
-    geom_point(shape = shapeHPA, size = sizeHPA, col = colHPA, stroke = 1.5) +
-    ggrepel::geom_text_repel(size = 3, seed = 42) +
-    labs(tag = expression(bold(B))) +
-    theme(plot.tag = element_text(size = 20), plot.title = element_text(hjust = 0.5),
-          panel.border = element_rect(colour = "black", fill=NA))
-  pl2 <- list(pl2)
-
-  # now do TCGA
+  # TCGA plots
   TCGAnames <- c("COAD", "PAAD", "BRCA", "LUAD", "PRAD", "LIHC")
   jTCGA <- match(TCGAnames, TCGA$description)
   colTCGA <- rep("slateblue4", nrow(TCGA))
@@ -806,7 +745,7 @@ canH2OS4 <- function(pdf = FALSE) {
 
   r.squared.ZC <- format(summary(lm(ZC ~ PS, TCGAdat))$r.squared, digits = 2)
   ZC.title <- paste0("italic(R)^2 == '", r.squared.ZC, "'")
-  pl3 <- ggplot(TCGAdat, aes(x = PS, y = ZC, label = TCGA_labels)) +
+  pl1 <- ggplot(TCGAdat, aes(x = PS, y = ZC, label = TCGA_labels)) +
     theme_classic() + geom_smooth(method = "lm") +
     annotate("text", -Inf, -Inf, label = ZC.title, parse = TRUE, hjust = -0.2, vjust = -1.5) +
     xlab(quote(Delta*PS*" (TCGA)")) +
@@ -815,14 +754,14 @@ canH2OS4 <- function(pdf = FALSE) {
     geom_vline(xintercept = 0, linetype = 3, colour = "gray30") +
     geom_point(shape = shapeTCGA, size = sizeTCGA, col = colTCGA, stroke = 1.5) +
     ggrepel::geom_text_repel(size = 3, seed = 42) +
-    labs(tag = expression(bold(C))) +
+    labs(tag = expression(bold(A))) +
     theme(plot.tag = element_text(size = 20), plot.title = element_text(hjust = 0.5),
           panel.border = element_rect(colour = "black", fill=NA))
-  pl3 <- list(pl3)
+  pl1 <- list(pl1)
 
   r.squared.nH2O <- format(summary(lm(nH2O ~ PS, TCGAdat))$r.squared, digits = 2)
   nH2O.title <- paste0("italic(R)^2 == '", r.squared.nH2O, "'")
-  pl4 <- ggplot(TCGAdat, aes(x = PS, y = nH2O, label = TCGA_labels)) +
+  pl2 <- ggplot(TCGAdat, aes(x = PS, y = nH2O, label = TCGA_labels)) +
     theme_classic() + geom_smooth(method = "lm") +
     annotate("text", -Inf, -Inf, label = nH2O.title, parse = TRUE, hjust = -0.2, vjust = -1.5) +
     xlab(quote(Delta*PS*" (TCGA)")) +
@@ -830,6 +769,47 @@ canH2OS4 <- function(pdf = FALSE) {
     geom_hline(yintercept = 0, linetype = 3, colour = "gray30") +
     geom_vline(xintercept = 0, linetype = 3, colour = "gray30") +
     geom_point(shape = shapeTCGA, size = sizeTCGA, col = colTCGA, stroke = 1.5) +
+    ggrepel::geom_text_repel(size = 3, seed = 42) +
+    labs(tag = expression(bold(B))) +
+    theme(plot.tag = element_text(size = 20), plot.title = element_text(hjust = 0.5),
+          panel.border = element_rect(colour = "black", fill=NA))
+  pl2 <- list(pl2)
+
+  # HPA plots
+  jHPA <- match(cond2, sapply(strsplit(HPA$description, " "), "[", 1))
+  colHPA <- rep("slateblue4", nrow(HPA))
+  colHPA[jHPA] <- col2
+  sizeHPA <- rep(1.5, nrow(HPA))
+  sizeHPA[jHPA] <- 2
+  shapeHPA <- rep(15, nrow(HPA))
+  shapeHPA[jHPA] <- 1
+
+  r.squared.ZC <- format(summary(lm(ZC ~ PS, HPAdat))$r.squared, digits = 2)
+  ZC.title <- paste0("italic(R)^2 == '", r.squared.ZC, "'")
+  pl3 <- ggplot(HPAdat, aes(x = PS, y = ZC, label = HPA_labels)) +
+    theme_classic() + geom_smooth(method = "lm") +
+    annotate("text", -Inf, Inf, label = ZC.title, parse = TRUE, hjust = -0.2, vjust = 1.5) +
+    xlab(quote(Delta*PS*" (HPA)")) +
+    ylab(quote(Delta*italic(Z)[C]*" (HPA)")) +
+    geom_hline(yintercept = 0, linetype = 3, colour = "gray30") +
+    geom_vline(xintercept = 0, linetype = 3, colour = "gray30") +
+    geom_point(shape = shapeHPA, size = sizeHPA, col = colHPA, stroke = 1.5) +
+    ggrepel::geom_text_repel(size = 3, seed = 42) +
+    labs(tag = expression(bold(C))) +
+    theme(plot.tag = element_text(size = 20), plot.title = element_text(hjust = 0.5),
+          panel.border = element_rect(colour = "black", fill=NA))
+  pl3 <- list(pl3)
+
+  r.squared.nH2O <- format(summary(lm(nH2O ~ PS, HPAdat))$r.squared, digits = 2)
+  nH2O.title <- paste0("italic(R)^2 == '", r.squared.nH2O, "'")
+  pl4 <- ggplot(HPAdat, aes(x = PS, y = nH2O, label = HPA_labels)) +
+    theme_classic() + geom_smooth(method = "lm") +
+    annotate("text", -Inf, Inf, label = nH2O.title, parse = TRUE, hjust = -0.2, vjust = 1.5) +
+    xlab(quote(Delta*PS*" (HPA)")) +
+    ylab(quote(Delta*italic(n)[H[2]*O]*" (HPA)")) +
+    geom_hline(yintercept = 0, linetype = 3, colour = "gray30") +
+    geom_vline(xintercept = 0, linetype = 3, colour = "gray30") +
+    geom_point(shape = shapeHPA, size = sizeHPA, col = colHPA, stroke = 1.5) +
     ggrepel::geom_text_repel(size = 3, seed = 42) +
     labs(tag = expression(bold(D))) +
     theme(plot.tag = element_text(size = 20), plot.title = element_text(hjust = 0.5),
@@ -840,12 +820,16 @@ canH2OS4 <- function(pdf = FALSE) {
   mat <- matrix(1:4, nrow = 2, byrow = TRUE)
   ml <- gridExtra::marrangeGrob(c(pl1, pl2, pl3, pl4), layout_matrix = mat, top = NULL)
   if(pdf) {
-    ggsave("canH2OS4.pdf", ml, width = 8, height = 8)
-    addexif("canH2OS4", "Scatterplots of ZC and nH2O vs phylostrata for HPA datasets", "Dick (2020) (preprint)")
+    ggsave("canH2OS3.pdf", ml, width = 8, height = 8)
+    addexif("canH2OS3", "Scatterplots of ZC and nH2O vs phylostrata for TCGA and HPA datasets", "Dick (2020) (preprint)")
   }
   else ml
 }
 
+# Compositional analysis of phylostrata representing Liebeskind et al. gene ages 20200507
+canH2OS4 <- function(pdf = FALSE) {
+  canH2O4(pdf = pdf, SI = TRUE)
+}
 
 # Scatterplots of hypoxia scores and ZC or nH2O for TCGA or HPA datasets 20200224
 canH2OS5 <- function(pdf = FALSE) {

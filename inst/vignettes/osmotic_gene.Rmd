@@ -56,7 +56,7 @@ comptab3 <- lapply(pdat1, get_comptab, "nAA", "MW")
 Differences are calculated as (median value for up-regulated proteins) - (median value for down-regulated proteins).
 Dashed lines enclose the 50% credible region for highest probability density.
 
-```{r diffplot, fig.width=8, fig.height=8, fig.align = "center", echo = FALSE, pngquant = pngquant}
+```{r diffplot, fig.width=9, fig.height=8, fig.align = "center", echo = FALSE, pngquant = pngquant}
 layout(matrix(c(0, 2, 1, 2, 1, 3, 0, 3), nrow = 2))
 par(cex = 1, mar = c(4, 4, 1, 1), mgp = c(2.5, 1, 0))
 diffplot(comptab1, labtext = NA)

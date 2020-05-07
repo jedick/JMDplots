@@ -51,7 +51,7 @@ canH2O2()
 canH2O3()
 ```
 
-## Compositional analysis of phylostrata and phylostrata-`r nAA` plots for cancer tissue (Figure 4)
+## Compositional analysis of phylostrata; phylostrata differences in cancer (Figure 4)
 ```{r canH2O4, message = FALSE, results = "hide", fig.align='center', out.width='100%', fig.width = 9, fig.height = 5, pngquant = pngquant}
 canH2O4()
 ```
@@ -86,13 +86,13 @@ canH2OS1()
 canH2OS2()
 ```
 
-## Trigos and Liebeskind phylostrata against `r ZC` and `r nH2O` for cancer tissue (Figure S3)
-```{r canH2OS3, message = FALSE, fig.align='center', out.width='75%', fig.width = 6, fig.height = 6, pngquant = pngquant}
+## Scatterplots of `r ZC` and `r nH2O` vs phylostrata for TCGA and HPA datasets (Figure S3)
+```{r canH2OS3, message = FALSE, fig.align='center', out.width='75%', fig.width = 8, fig.height = 8, pngquant = pngquant}
 canH2OS3()
 ```
 
-## Scatterplots of `r ZC` and `r nH2O` vs phylostrata for HPA datasets (Figure S4)
-```{r canH2OS4, message = FALSE, fig.align='center', out.width='75%', fig.width = 8, fig.height = 8, pngquant = pngquant}
+## Compositional analysis of phylostrata using Libeskind et al. gene ages (Figure S4)
+```{r canH2OS4, message = FALSE, fig.align='center', out.width='100%', fig.width = 9, fig.height = 5, pngquant = pngquant}
 canH2OS4()
 ```
 

@@ -23,7 +23,7 @@ Function names ending with \samp{T*} and \samp{S*} refer to supplementary tables
   canH2O1(pdf = FALSE)
   canH2O2(pdf = FALSE)
   canH2O3(pdf = FALSE)
-  canH2O4(pdf = FALSE)
+  canH2O4(pdf = FALSE, SI = FALSE)
   canH2O5(pdf = FALSE)
   canH2OT1()
   canH2OT2()
@@ -36,6 +36,7 @@ Function names ending with \samp{T*} and \samp{S*} refer to supplementary tables
 
 \arguments{
   \item{pdf}{logical, make a PDF file?}
+  \item{SI}{logical, make Fig. S4 instead of Fig. 4?}
 }
 
 \details{
@@ -45,14 +46,14 @@ This table gives a brief description of each function.
   \code{canH2O1} \tab Study overview \cr
   \code{canH2O2} \tab Median differences of protein length, \nH2O and \ZC for cell culture and cancer tissue \cr
   \code{canH2O3} \tab \nH2O-\ZC and phylostrata plots for TCGA and HPA datasets \cr
-  \code{canH2O4} \tab Compositional analysis of phylostrata and phylostrata-nAA plots for cancer tissue \cr
+  \code{canH2O4} \tab Compositional analysis of phylostrata; phylostrata differences in cancer \cr
   \code{canH2O5} \tab Quantile distributions for proteins coded by differentially expressed genes in aneuploid yeast cells \cr
   \code{canH2OT1} \tab Stoichiometric matrix for amino acids with QEC basis species \cr
   \code{canH2OT2} \tab Mean differences and \emph{p}-values across all datasets \cr
   \code{canH2OS1} \tab rQEC derivation \cr
   \code{canH2OS2} \tab HPA-TCGA scatterplots for \ZC and \nH2O \cr
-  \code{canH2OS3} \tab Trigos and Liebeskind phylostrata against \ZC and \nH2O for cancer tissue \cr
-  \code{canH2OS4} \tab Scatterplots of \ZC and \nH2O vs phylostrata for HPA datasets  \cr
+  \code{canH2OS3} \tab Scatterplots of \ZC and \nH2O vs phylostrata for TCGA and HPA datasets  \cr
+  \code{canH2OS4} \tab Compositional analysis of phylostrata representing Liebeskind et al. gene ages \cr
   \code{canH2OS5} \tab Scatterplots of hypoxia scores and \ZC or \nH2O for TCGA or HPA datasets \cr
 }
 }
