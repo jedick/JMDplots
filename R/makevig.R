@@ -4,6 +4,7 @@
 
 makevig <- function(vig = NULL) {
   vig.allowed <- gsub("pdat_", "", grep("pdat_", ls("package:JMDplots"), value = TRUE))
+  vig.allowed <- vig.allowed[!vig.allowed == "aneuploidy"]
   isnull <- is.null(vig)
   toomany <- length(vig) > 1
   notallowed <- !any(vig %in% vig.allowed)

@@ -477,25 +477,46 @@ canH2O4 <- function(pdf = FALSE, SI = FALSE) {
   }
 }
 
-
-# quantile distributions for proteins coded by differentially expressed genes in aneuploid yeast cells 20200505
+# differentially expressed genes in aneuploid and osmotically shocked yeast cells 20200505
 canH2O5 <- function(pdf = FALSE) {
-  if(pdf) pdf("canH2O5.pdf", width = 6, height = 3)
+  if(pdf) pdf("canH2O5.pdf", width = 5, height = 4)
+  # aneuploid yeast cells (Tsai et al., 2019)
   pd <- pdat_aneuploidy("TNC+19")
-  layout(matrix(c(1, 2, 1, 3), nrow = 2), heights = c(0.2, 1))
-  par(mar = c(0, 0, 0, 0), mgp = c(2.5, 1, 0))
+  layout(matrix(c(1, 2, 4, 1, 3, 5), nrow = 3), heights = c(0.2, 1, 1))
+  par(mar = c(0, 0, 0, 0), mgp = c(2.2, 0.8, 0))
   plot.new()
   uptxt <- paste("Proteins coded by", sum(pd$up2), "up-regulated genes")
   dntxt <- paste("Proteins coded by", sum(!pd$up2), "down-regulated genes")
-  legend("center", c(dntxt, uptxt), lty = c(1, 2), col = c(1, 2), bty = "n")
+  legend("center", c(dntxt, uptxt, ""), lty = c(1, 2, NA), col = c(1, 2, NA), bty = "n")
   par(mar = c(3.5, 3.5, 0.5, 0.5))
   qdist(pd, "ZC")
-  label.figure("A", xfrac = 0.04, yfrac = 1.05, font = 2, cex = 1.5)
+  label.figure("A", xfrac = 0.04, yfrac = 1, font = 2, cex = 1.5)
   qdist(pd, "nH2O")
-  label.figure("B", xfrac = 0.95, yfrac = 1.05, font = 2, cex = 1.5)
+  label.figure("B", xfrac = 0.04, yfrac = 1, font = 2, cex = 1.5)
+  # hyper- and hypo-osmotic experiments (Gasch et al., 2000)
+  vigout2 <- system.file("vignettes", package = "JMDplots")
+  yeast_stress <- read.csv(file.path(vigout2, "yeast_stress.csv"), as.is = TRUE)
+  ihyper <- grepl("sorbitol", yeast_stress$dataset)
+  ihypo <- grepl("Hypo", yeast_stress$dataset)
+  # plot ZC
+  plot(c(1, 7), extendrange(yeast_stress$ZC.diff), xlab = "Time (minutes)", ylab = cplab$DZC, xaxt = "n", type = "n")
+  abline(h = 0, lty = 3, col = "gray30")
+  axis(1, at = 1:7, labels = c(5, 15, 30, 45, 60, 90, 120))
+  lines(1:7, yeast_stress$ZC.diff[ihyper], pch = 1, type = "b")
+  lines(1:5, yeast_stress$ZC.diff[ihypo], pch = 0, type = "b")
+  text(c(2.5, 2.7), c(-0.006, 0.0135), c("hyperosmotic", "hypoosmotic"))
+  label.figure("C", xfrac = 0.04, yfrac = 1, font = 2, cex = 1.5)
+  # plot nH2O
+  plot(c(1, 7), extendrange(yeast_stress$nH2O_rQEC.diff), xlab = "Time (minutes)", ylab = cplab$DnH2O, xaxt = "n", type = "n")
+  abline(h = 0, lty = 3, col = "gray30")
+  axis(1, at = 1:7, labels = c(5, 15, 30, 45, 60, 90, 120))
+  lines(1:7, yeast_stress$nH2O_rQEC.diff[ihyper], pch = 1, type = "b")
+  lines(1:5, yeast_stress$nH2O_rQEC.diff[ihypo], pch = 0, type = "b")
+  text(c(2.2, 2.8), c(-0.038, 0.028), c("hyperosmotic", "hypoosmotic"))
+  label.figure("D", xfrac = 0.04, yfrac = 1, font = 2, cex = 1.5)
   if(pdf) {
     dev.off()
-    addexif("canH2O5", "Quantile distributions for proteins coded by differentially expressed genes in aneuploid yeast cells", "Dick (2020) (preprint)")
+    addexif("canH2O5", "Differentially expressed genes in aneuploid and osmotically shocked yeast cells", "Dick (2020) (preprint)")
   }
 }
 
@@ -946,9 +967,9 @@ plotphylo <- function(vars = c("ZC", "nH2O"), basis = "rQEC", PS_source = "TPPG1
   ZC <- pcomp$ZC
   nAA <- pcomp$protein.length
   # get mean ZC and nH2O for each phylostratum
-  Phylostratum <- sort(unique(dat$Phylostrata))
+  PS <- sort(unique(dat$Phylostrata))
   cum.ZC <- cum.nH2O <- cum.nAA <- mean.ZC <- mean.nH2O <- mean.nAA <- numeric()
-  for(p in Phylostratum) {
+  for(p in PS) {
     # point mean
     mean.ZC <- c(mean.ZC, mean(ZC[dat$Phylostrata == p]))
     mean.nH2O <- c(mean.nH2O, mean(nH2O[dat$Phylostrata == p]))
@@ -959,17 +980,17 @@ plotphylo <- function(vars = c("ZC", "nH2O"), basis = "rQEC", PS_source = "TPPG1
     cum.nAA <- c(cum.nAA, mean(nAA[dat$Phylostrata <= p]))
   }
   if("ZC" %in% vars) {
-    plot(Phylostratum, mean.ZC, type = "b", ylab = expression(italic(Z)[C]))
-    lines(Phylostratum, cum.ZC, col = 2)
+    plot(PS, mean.ZC, type = "b", ylab = expression(italic(Z)[C]))
+    lines(PS, cum.ZC, col = 2)
   }
   if("nH2O" %in% vars) {
     ylab <- expression(italic(n)[H[2] * O])
-    plot(Phylostratum, mean.nH2O, type = "b", ylab = ylab)
-    lines(Phylostratum, cum.nH2O, col = 2)
+    plot(PS, mean.nH2O, type = "b", ylab = ylab)
+    lines(PS, cum.nH2O, col = 2)
   }
   if("nAA" %in% vars) {
-    plot(Phylostratum, mean.nAA, type = "b", ylab = expression(italic(n)[AA]))
-    lines(Phylostratum, cum.nAA, col = 2)
+    plot(PS, mean.nAA, type = "b", ylab = expression(italic(n)[AA]))
+    lines(PS, cum.nAA, col = 2)
   }
   # return the dat and pcomp for memoization 20191211
   invisible(list(dat = dat, pcomp = pcomp))

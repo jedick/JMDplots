@@ -1,10 +1,10 @@
 ---
-title: "Hyperosmotic Gene Expression"
+title: "Yeast Gene Expression in Hyper- and Hypo-osmotic Shock"
 output:
   html_vignette:
     mathjax: null
 vignette: >
-  %\VignetteIndexEntry{Hyperosmotic Gene Expression}
+  %\VignetteIndexEntry{Yeast Gene Expression in Hyper- and Hypo-osmotic Shock}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 bibliography: osmotic_gene.bib
@@ -22,7 +22,7 @@ pngquant <- "--speed=1 --quality=0-25"
 if (!nzchar(Sys.which("pngquant"))) pngquant <- NULL 
 ```
 
-This vignette from the R package [JMDplots](https://github.com/jedick/JMDplots) version `r packageDescription("JMDplots")$Version` shows compositional metrics for proteins coded by genes that are differentially expressed in hyperosmotic compared to control conditions.
+This vignette from the R package [JMDplots](https://github.com/jedick/JMDplots) version `r packageDescription("JMDplots")$Version` shows compositional metrics for proteins coded by genes that are differentially expressed in hyperosmotic and hypoosmotic shock in yeast.
 Abbreviations:
 
   * <i>Z</i><sub>C</sub> &ndash; carbon oxidation state; <i>n</i><sub>H<sub>2</sub>O</sub> &ndash; stoichiometric hydration state per residue.
@@ -43,25 +43,26 @@ body {
 </style>
 
 ```{r datasets}
-datasets <- pdat_osmotic_gene(2020)
+datasets <- pdat_yeast_stress(2020)
 ```
 
 ```{r comptab, results="hide", message=FALSE, echo = FALSE}
-pdat1 <- lapply(datasets, pdat_osmotic_gene)
+pdat1 <- lapply(datasets, pdat_yeast_stress)
 comptab1 <- lapply(pdat1, get_comptab)
 comptab2 <- lapply(pdat1, get_comptab, "pI", "GRAVY")
 comptab3 <- lapply(pdat1, get_comptab, "nAA", "MW")
 ```
 
 Differences are calculated as (median value for proteins coded by up-regulated genes) - (median value for proteins coded by down-regulated genes).
-Dashed lines enclose the 50% credible region for highest probability density.
+Triangles points up and down stand for hyperosmotic and hypoosmotic experiments, respectively.
 
 ```{r diffplot, fig.width=9, fig.height=8, fig.align = "center", echo = FALSE, pngquant = pngquant}
 layout(matrix(c(0, 2, 1, 2, 1, 3, 0, 3), nrow = 2))
 par(cex = 1, mar = c(4, 4, 1, 1), mgp = c(2.5, 1, 0))
-diffplot(comptab1, labtext = NA)
-diffplot(comptab2, c("pI", "GRAVY"), labtext = NA)
-diffplot(comptab3, c("nAA", "MW"), labtext = NA)
+pch <- ifelse(grepl("sorbitol", datasets), 2, 6)
+diffplot(comptab1, labtext = NA, contour = FALSE, pch = pch)
+diffplot(comptab2, c("pI", "GRAVY"), labtext = NA, contour = FALSE, pch = pch)
+diffplot(comptab3, c("nAA", "MW"), labtext = NA, contour = FALSE, pch = pch)
 ```
 
 In the table, values of &Delta;<i>Z</i><sub>C</sub>, &Delta;<i>n</i><sub>H<sub>2</sub>O</sub>, and &Delta;GRAVY are multiplied by 1000, values of &Delta;pI and &Delta;MW are multiplied by 100, and negative values are shown in bold.
@@ -76,31 +77,11 @@ out <- xsummary3(comptab1, comptab2, comptab3)
 tags <- sapply(sapply(strsplit(datasets, "="), "[", -1), paste, collapse = ";")
 out <- cbind(out[, 1:2], tags = tags, out[, 3:19])
 out[, 6:20] <- round(out[, 6:20], 4)
-write.csv(out, "osmotic_gene.csv", row.names = FALSE, quote = 2)
+write.csv(out, "yeast_stress.csv", row.names = FALSE, quote = 2)
 ```
 
 ## Data Sources
 
-__a__. __b__. Tables 1--2 of @KSA+02.
-__c__. Table 1 of @WJ02.
-__d__. __e__. Table 3 of @HZP+05.
-__f__. Table 1S of @LGW+05.
-__g__. Tables 2--3 of @SLA+05.
-__h__. __i__. [Dataset.txt](http://www.wright.edu/~oleg.paliy/Papers/Osmo_Temp/Dataset.txt) of @GCP08.
-__j__. __k__. Table 3 of @SBB+09.
-__l__. Table S2 (sheet "S2_Table_3") of @HMO+10.
-__m__. __n__. __o__. __p__. Table S5 of @BBWB12, filtered to include genes with log~2~ fold change > 1 or < -1.
-__q__. Table S2 of @LB12, filtered to include genes with _p_-value < 0.05 and fold change > 2 or < 0.5.
-__r__. __s__. __t__. Supplementary Tables S2A--S2F of @QHT+13.
-__u__. __v__. [Dataset.txt](http://www.wright.edu/~oleg.paliy/Papers/UTI_Osmo/Dataset.txt) of @WGB+13, filtered to include proteins with log fold change (column "N vs K Wmean [M]" for NaCl and "U vs K Wmean [M]" for urea) > 1 or < 1 and _p_-value less than 0.05.
-__w__. Table S2 of @ADW+14
-__x__. __y__. __z__. Table S2 of @KKG+14
-__A__. __B__. Tables S5--S6 of @KSM+14.
-__C__. __D__. __E__. __F__. Supplemental Table S1 of @MGM+14, filtered to include genes with differences of Normalized ln(cDNA/gDNA) > 1 or < 1 between 2 % and higher NaCl concentration.
-__G__. __H__. __I__. Table S2 of @SLM+14.
-__J__. __K__. __L__. __M__. __N__. __O__. __P__. __Q__. __R__. Tables S1--S3 of @FRH+15.
-__S__. __T__. Table S2 of @KLB+15.
-__U__. __V__. Tables S5--S8 of @HLL17.
-__W__. Table S6 of @MWZ+18.
+__a__. &ndash; __l__. [complete_dataset.txt](http://www-genome.stanford.edu/yeast_stress/data/rawdata/complete_dataset.txt) of @GSK+00, filtered to include genes with an expression ratio > log2(1.5) or < log2(1/1.5) at any time in the "1M sorbitol" or "Hypo-osmotic shock" experiments.
 
 ## References

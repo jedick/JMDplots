@@ -30,7 +30,9 @@ export(
   # canH2O paper 20200301, 20200420, 20200421
   "canH2OS5", "pdat_osmotic_gene", "makevig",
   # 20200505
-  "canH2OS4", "pdat_aneuploidy", "canH2O5"
+  "canH2OS4", "pdat_aneuploidy", "canH2O5",
+  # 20200508
+  "pdat_yeast_stress"
 )
 
 # imports from CHNOSZ
@@ -71,8 +73,8 @@ importFrom("canprot",
   "check_IDs",
   # for pdat_osmotic_gene() 20200421
   "pdat_osmotic_euk",
-  # for canH2O5() 20200505
-  "qdist"
+  # for canH2O5() 20200505, 20200508
+  "qdist", "cplab"
 )
 
 # imports from other packages
@@ -89,7 +91,7 @@ importFrom("ggplot2", "theme_bw", "xlab", "ylab", "geom_hline", "geom_vline", "t
 
 # imports from standard packages
 importFrom("grDevices", "dev.off", "cairo_pdf", "pdf", "blues9", "colorRampPalette",
-           "chull", "col2rgb", "rgb", "colorRamp", "heat.colors", "topo.colors")
+           "chull", "col2rgb", "rgb", "colorRamp", "heat.colors", "topo.colors", "extendrange")
 importFrom("graphics", "abline", "arrows", "axis", "box", "layout",
            "legend", "lines", "mtext", "par", "plot", "plot.new",
            "points", "rect", "text", "title", "smoothScatter", "strheight",

@@ -133,3 +133,39 @@ pdat_aneuploidy <- function(dataset = 2020, basis = "rQEC") {
   if("up2" %in% colnames(dat)) up2 <- dat$up2
   return(list(dataset = dataset, basis = basis, pcomp = pcomp, up2 = up2, description = description))
 }
+
+pdat_yeast_stress <- function(dataset = 2020, basis = "rQEC") {
+  if(identical(dataset, 2020)) {
+    return(c(
+      "GSK+00_X1M.sorbitol...5.min", "GSK+00_X1M.sorbitol...15.min", "GSK+00_X1M.sorbitol...30.min", "GSK+00_X1M.sorbitol...45.min",
+      "GSK+00_X1M.sorbitol...60.min", "GSK+00_X1M.sorbitol...90.min", "GSK+00_X1M.sorbitol...120.min",
+      "GSK+00_Hypo.osmotic.shock...5.min", "GSK+00_Hypo.osmotic.shock...15.min", "GSK+00_Hypo.osmotic.shock...30.min",
+      "GSK+00_Hypo.osmotic.shock...45.min", "GSK+00_Hypo.osmotic.shock...60.min"
+    ))
+  }
+  # remove tags
+  dataset <- strsplit(dataset, "=")[[1]][1]
+  # get study and stage/condition
+  study <- strsplit(dataset, "_")[[1]][1]
+  stage <- paste(strsplit(dataset, "_")[[1]][-1], collapse = "_")
+  extdatadir <- system.file("extdata", package="JMDplots")
+  datadir <- paste0(extdatadir, "/expression/yeast_stress/")
+  if(study=="GSK+00") {
+    # 20200508 yeast gene expression, Gasch et al., 2000
+    # GSK+00_X1M.sorbitol...5.min and others
+    dat <- read.csv(paste0(datadir, "GSK+00.csv.xz"), as.is=TRUE)
+    description <- paste("yeast transcriptome", stage)
+    icol <- grep(stage, colnames(dat))
+    if(length(icol) > 1) stop("multiple columns selected")
+    # get genes with at least 2-fold change
+    dat <- dat[!is.na(dat[, icol]), ]
+    dat <- dat[abs(dat[, icol]) > log2(1.5), ]
+    up2 <- dat[, icol] > log2(1.5)
+    dat <- cleanup(dat, "Entry", up2)
+    pcomp <- protcomp(dat$Entry, basis, aa_file = paste0(extdatadir, "/aa/yeast/GSK+00_aa.csv.xz"))
+  } else stop(paste("yeast_stress dataset", dataset, "not available"))
+  print(paste0("pdat_yeast_stress: ", description, " [", dataset, "]"))
+  # use the up2 from the cleaned-up data, if it exists 20190407
+  if("up2" %in% colnames(dat)) up2 <- dat$up2
+  return(list(dataset = dataset, basis = basis, pcomp = pcomp, up2 = up2, description = description))
+}
