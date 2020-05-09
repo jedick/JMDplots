@@ -60,7 +60,7 @@ importFrom("CHNOSZ",
 # imports from canprot
 importFrom("canprot",
   # first batch: gradH2O1 20190930
-  "canprot",
+  "human",
   # second batch: gradH2O6 20191008
   "diffplot", "get_comptab", "pdat_osmotic_bact",
   # moved to canprot 20191027

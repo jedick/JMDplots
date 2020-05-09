@@ -524,7 +524,7 @@ canH2O5 <- function(pdf = FALSE) {
 ### TABLE 2 ###
 ###############
 
-# mean differences and p-values across all datasets 20200125
+# mean differences and p-values for all datasets in each condition 20200125
 canH2OT2 <- function() {
   cond1 <- c("hypoxia", "secreted", "osmotic_euk", "glucose", "3D")
   cond2 <- c("breast", "colorectal", "liver", "lung", "pancreatic", "prostate")

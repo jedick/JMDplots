@@ -49,7 +49,7 @@ This table gives a brief description of each function.
   \code{canH2O4} \tab Compositional analysis of phylostrata; phylostrata differences in cancer \cr
   \code{canH2O5} \tab Differentially expressed genes in aneuploid and osmotically shocked yeast cells \cr
   \code{canH2OT1} \tab Stoichiometric matrix for amino acids with QEC basis species \cr
-  \code{canH2OT2} \tab Mean differences and \emph{p}-values across all datasets \cr
+  \code{canH2OT2} \tab Mean differences and \emph{p}-values for all datasets in each condition \cr
   \code{canH2OS1} \tab rQEC derivation \cr
   \code{canH2OS2} \tab HPA-TCGA scatterplots for \ZC and \nH2O \cr
   \code{canH2OS3} \tab Scatterplots of \ZC and \nH2O vs phylostrata for TCGA and HPA datasets  \cr

@@ -96,7 +96,7 @@ gradH2O1 <- function(pdf = FALSE) {
   ZC.aa <- ZC(info(aa, "aq"))
 
   # get amino acid composition of human proteins (UniProt)
-  human <- get("human_base", canprot)
+  human <- get("human_base", canprot::human)
   pf.human <- protein.formula(human)
   ZC.human <- ZC(pf.human)
 
