@@ -470,10 +470,10 @@ gradH2O7 <- function(pdf = FALSE) {
   mkarrow <- function(row1, ct, frac = 0.5) {
     # row1 is the starting point
     x1 <- ct$ZC.diff[row1]
-    y1 <- ct$nH2O_rQEC.diff[row1]
+    y1 <- ct$nH2O.diff[row1]
     # the next row is the end of the full line (not the arrow)
     x2 <- ct$ZC.diff[row1 + 1]
-    y2 <- ct$nH2O_rQEC.diff[row1 + 1]
+    y2 <- ct$nH2O.diff[row1 + 1]
     # calculate slope
     m <- (y2 - y1) / (x2 - x1)
     # calculate value of x and y on the line (arrow tip)
@@ -493,7 +493,7 @@ gradH2O7 <- function(pdf = FALSE) {
     n <- 0
     for(i in 1:length(ndat)) {
       idat <- n + 1:ndat[i]
-      lines(ct$ZC.diff[idat], ct$nH2O_rQEC.diff[idat])
+      lines(ct$ZC.diff[idat], ct$nH2O.diff[idat])
       lapply(head(idat, -1), mkarrow, ct = ct)
       n <- n + ndat[i]
     }
@@ -504,12 +504,12 @@ gradH2O7 <- function(pdf = FALSE) {
   # plot A: transcriptomes compilation
   osmotic_gene <- read.csv(system.file("vignettes/osmotic_gene.csv", package = "JMDplots"))
   diffplot(osmotic_gene, pt.text = NA, contour = FALSE, cex = 1.5)
-  points(mean(osmotic_gene$ZC.diff), mean(osmotic_gene$nH2O_rQEC.diff), pch = 19, cex = 1.7)
+  points(mean(osmotic_gene$ZC.diff), mean(osmotic_gene$nH2O.diff), pch = 19, cex = 1.7)
   legend("topleft", c("dataset", "mean"), pch = c(1, 19), bty = "n")
   label.figure("(a)", cex = 1.8, xfrac = 0.12, yfrac = 1.05)
   # print the p-values
   p.ZC <- round(t.test(osmotic_gene$ZC.down, osmotic_gene$ZC.up, paired = TRUE)$p.value, 3)
-  p.nH2O <- round(t.test(osmotic_gene$nH2O_rQEC.down, osmotic_gene$nH2O_rQEC.up, paired = TRUE)$p.value, 3)
+  p.nH2O <- round(t.test(osmotic_gene$nH2O.down, osmotic_gene$nH2O.up, paired = TRUE)$p.value, 3)
   print(paste("number of transcriptomics datasets:", nrow(osmotic_gene)))
   print(paste("p-values for transcriptomics:", p.ZC, "(ZC),", p.nH2O, "(nH2O)"))
 
@@ -552,12 +552,12 @@ gradH2O7 <- function(pdf = FALSE) {
   # plot B: proteomes compilation
   osmotic_bact <- read.csv(system.file("vignettes/osmotic_bact.csv", package = "canprot"))
   diffplot(osmotic_bact, pt.text = NA, contour = FALSE, cex = 1.5)
-  points(mean(osmotic_bact$ZC.diff), mean(osmotic_bact$nH2O_rQEC.diff), pch = 19, cex = 1.7)
+  points(mean(osmotic_bact$ZC.diff), mean(osmotic_bact$nH2O.diff), pch = 19, cex = 1.7)
   legend("topleft", c("dataset", "mean"), pch = c(1, 19), bty = "n")
   label.figure("(b)", cex = 1.8, xfrac = 0.12, yfrac = 1.05)
   # print the p-values
   p.ZC <- round(t.test(osmotic_bact$ZC.down, osmotic_bact$ZC.up, paired = TRUE)$p.value, 3)
-  p.nH2O <- round(t.test(osmotic_bact$nH2O_rQEC.down, osmotic_bact$nH2O_rQEC.up, paired = TRUE)$p.value, 3)
+  p.nH2O <- round(t.test(osmotic_bact$nH2O.down, osmotic_bact$nH2O.up, paired = TRUE)$p.value, 3)
   print(paste("number of proteomics datasets:", nrow(osmotic_bact)))
   print(paste("p-values for proteomics:", p.ZC, "(ZC),", p.nH2O, "(nH2O)"))
   # print total number of studies

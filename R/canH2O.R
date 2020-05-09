@@ -156,8 +156,8 @@ canH2O1 <- function(pdf = FALSE) {
   mtext("hydration state", 2, 0.5)
   # draw arrows to mean values
   # offset x = -0.1 to make room for text
-  for(i in 5:1) arrows(-0.1, 0, 35*mean(culture[[i]]$ZC.diff) - 0.1, 35*mean(culture[[i]]$nH2O_rQEC.diff), col = col1[i], lwd = 3, length = 0.15)
-  for(i in 1:6) arrows(-0.1, 0, 35*mean(cancer[[i]]$ZC.diff) - 0.1, 35*mean(cancer[[i]]$nH2O_rQEC.diff), col = col2[i], lwd = 3, length = 0.15)
+  for(i in 5:1) arrows(-0.1, 0, 35*mean(culture[[i]]$ZC.diff) - 0.1, 35*mean(culture[[i]]$nH2O.diff), col = col1[i], lwd = 3, length = 0.15)
+  for(i in 1:6) arrows(-0.1, 0, 35*mean(cancer[[i]]$ZC.diff) - 0.1, 35*mean(cancer[[i]]$nH2O.diff), col = col2[i], lwd = 3, length = 0.15)
   
 
   # restore these defaults to be able to re-run this script with expected results
@@ -312,10 +312,10 @@ canH2O3 <- function(pdf = FALSE) {
     list(levels = levels, dat = dat)
   }
 
-  TCGAstuff <- densfun(TCGA$ZC.diff, TCGA$nH2O_rQEC.diff)
+  TCGAstuff <- densfun(TCGA$ZC.diff, TCGA$nH2O.diff)
   TCGAdens <- TCGAstuff$dat
   TCGAlevels <- TCGAstuff$levels
-  HPAstuff <- densfun(HPA$ZC.diff, HPA$nH2O_rQEC.diff)
+  HPAstuff <- densfun(HPA$ZC.diff, HPA$nH2O.diff)
   HPAdens <- HPAstuff$dat
   HPAlevels <- HPAstuff$levels
 
@@ -332,14 +332,14 @@ canH2O3 <- function(pdf = FALSE) {
   # create plots
   nudge_x <- ifelse(TCGA_labels %in% c("SKCM"), 0.001, 0)
   # workaround for "no visible binding for global variable ‘ZC.diff’" etc. in R CMD check 20200317
-  ZC.diff <- nH2O_rQEC.diff <- z <- NULL
+  ZC.diff <- nH2O.diff <- z <- NULL
   pl1 <- list(
-    ggplot(TCGA, aes(ZC.diff, nH2O_rQEC.diff, label = TCGA_labels)) + 
+    ggplot(TCGA, aes(ZC.diff, nH2O.diff, label = TCGA_labels)) + 
       pl1.common + geom_point(color = colTCGA, size = 1.5, shape = shapeTCGA, stroke = 1.5) + 
       geom_contour(data = TCGAdens, aes(x, y, z = z), breaks = TCGAlevels, inherit.aes = FALSE, color = "slateblue4", lty = 2) +
       ggrepel::geom_text_repel(size = 2.5, nudge_x = nudge_x, seed = 42, box.padding = 0.12, point.padding = 0.1) +
       ggtitle("TCGA/GTEx") + labs(tag = expression(bold(A))),
-    ggplot(HPA, aes(ZC.diff, nH2O_rQEC.diff, label = HPA_labels)) + 
+    ggplot(HPA, aes(ZC.diff, nH2O.diff, label = HPA_labels)) + 
       pl1.common + geom_point(color = colHPA, size = 1.5, shape = shapeHPA, stroke = 1.5) + 
       geom_contour(data = HPAdens, aes(x, y, z = z), breaks = HPAlevels, inherit.aes = FALSE, color = "darkslategray4", lty = 2) +
       ggrepel::geom_text_repel(size = 3, seed = 42) +
@@ -465,9 +465,9 @@ canH2O4 <- function(pdf = FALSE, SI = FALSE) {
   }
   # plot 6: nH2O-PS
   if(SI) {
-    contplot(cancer, "", col2, xvar = "PS_LMM16", yvar = "nH2O_rQEC", xlim = c(-2, 2), ylim = c(-0.02, 0.05))
+    contplot(cancer, "", col2, xvar = "PS_LMM16", yvar = "nH2O", xlim = c(-2, 2), ylim = c(-0.02, 0.05))
   } else {
-    contplot(cancer, "", col2, xvar = "PS_TPPG17", yvar = "nH2O_rQEC", xlim = c(-4, 4), ylim = c(-0.02, 0.05))
+    contplot(cancer, "", col2, xvar = "PS_TPPG17", yvar = "nH2O", xlim = c(-4, 4), ylim = c(-0.02, 0.05))
   }
 
   if(pdf) {
@@ -481,17 +481,17 @@ canH2O4 <- function(pdf = FALSE, SI = FALSE) {
 canH2O5 <- function(pdf = FALSE) {
   if(pdf) pdf("canH2O5.pdf", width = 5, height = 4)
   # aneuploid yeast cells (Tsai et al., 2019)
-  pd <- pdat_aneuploidy("TNC+19")
+  pdat <- pdat_aneuploidy("TNC+19")
   layout(matrix(c(1, 2, 4, 1, 3, 5), nrow = 3), heights = c(0.2, 1, 1))
   par(mar = c(0, 0, 0, 0), mgp = c(2.2, 0.8, 0))
   plot.new()
-  uptxt <- paste("Proteins coded by", sum(pd$up2), "up-regulated genes")
-  dntxt <- paste("Proteins coded by", sum(!pd$up2), "down-regulated genes")
+  uptxt <- paste("Proteins coded by", sum(pdat$up2), "up-regulated genes")
+  dntxt <- paste("Proteins coded by", sum(!pdat$up2), "down-regulated genes")
   legend("center", c(dntxt, uptxt, ""), lty = c(1, 2, NA), col = c(1, 2, NA), bty = "n")
   par(mar = c(3.5, 3.5, 0.5, 0.5))
-  qdist(pd, "ZC")
+  qdist(pdat, "ZC")
   label.figure("A", xfrac = 0.04, yfrac = 1, font = 2, cex = 1.5)
-  qdist(pd, "nH2O")
+  qdist(pdat, "nH2O")
   label.figure("B", xfrac = 0.04, yfrac = 1, font = 2, cex = 1.5)
   # hyper- and hypo-osmotic experiments (Gasch et al., 2000)
   vigout2 <- system.file("vignettes", package = "JMDplots")
@@ -507,11 +507,11 @@ canH2O5 <- function(pdf = FALSE) {
   text(c(2.5, 2.7), c(-0.006, 0.0135), c("hyperosmotic", "hypoosmotic"))
   label.figure("C", xfrac = 0.04, yfrac = 1, font = 2, cex = 1.5)
   # plot nH2O
-  plot(c(1, 7), extendrange(yeast_stress$nH2O_rQEC.diff), xlab = "Time (minutes)", ylab = cplab$DnH2O, xaxt = "n", type = "n")
+  plot(c(1, 7), extendrange(yeast_stress$nH2O.diff), xlab = "Time (minutes)", ylab = cplab$DnH2O, xaxt = "n", type = "n")
   abline(h = 0, lty = 3, col = "gray30")
   axis(1, at = 1:7, labels = c(5, 15, 30, 45, 60, 90, 120))
-  lines(1:7, yeast_stress$nH2O_rQEC.diff[ihyper], pch = 1, type = "b")
-  lines(1:5, yeast_stress$nH2O_rQEC.diff[ihypo], pch = 0, type = "b")
+  lines(1:7, yeast_stress$nH2O.diff[ihyper], pch = 1, type = "b")
+  lines(1:5, yeast_stress$nH2O.diff[ihypo], pch = 0, type = "b")
   text(c(2.2, 2.8), c(-0.038, 0.028), c("hyperosmotic", "hypoosmotic"))
   label.figure("D", xfrac = 0.04, yfrac = 1, font = 2, cex = 1.5)
   if(pdf) {
@@ -539,7 +539,7 @@ canH2OT2 <- function() {
   # make data frames for mean differences and p-values
   # include comparison of up- and down-regulated proteins for "Secreted" in hypoxia compared to "Hypoxia" (whole-cell)
   pdat <- mdat <- data.frame(condition = c(names(culture), names(cancer), names(pancan), "up", "down"))
-  for(property in c("ZC", "nH2O_rQEC", "PS_TPPG17", "PS_LMM16", "nAA")) {
+  for(property in c("ZC", "nH2O", "PS_TPPG17", "PS_LMM16", "nAA")) {
     pvals <- mvals <- numeric()
     idn <- grep(paste0(property, ".down"), colnames(culture[[1]]))
     iup <- grep(paste0(property, ".up"), colnames(culture[[1]]))
@@ -682,7 +682,7 @@ canH2OS2 <- function(pdf = FALSE) {
 
   # HPA-TCGA scatterplots for ZC and nH2O
   ZC <- data.frame(TCGA = TCGA$ZC.diff[iTCGA], HPA = HPA$ZC.diff[iHPA])
-  nH2O <- data.frame(TCGA = TCGA$nH2O_rQEC.diff[iTCGA], HPA = HPA$nH2O_rQEC.diff[iHPA])
+  nH2O <- data.frame(TCGA = TCGA$nH2O.diff[iTCGA], HPA = HPA$nH2O.diff[iHPA])
 
   labels <- TCGA_labels[iTCGA]
   col <- "slateblue4"
@@ -743,8 +743,8 @@ canH2OS3 <- function(pdf = FALSE) {
   HPA_labels[grepl("head", HPA_labels)] <- "head and neck"
 
   # ZC, nH2O and PS values
-  HPAdat <- data.frame(ZC = HPA$ZC.diff, nH2O = HPA$nH2O_rQEC.diff, PS = HPA$PS_TPPG17.diff)
-  TCGAdat <- data.frame(ZC = TCGA$ZC.diff, nH2O = TCGA$nH2O_rQEC.diff, PS = TCGA$PS_TPPG17.diff)
+  HPAdat <- data.frame(ZC = HPA$ZC.diff, nH2O = HPA$nH2O.diff, PS = HPA$PS_TPPG17.diff)
+  TCGAdat <- data.frame(ZC = TCGA$ZC.diff, nH2O = TCGA$nH2O.diff, PS = TCGA$PS_TPPG17.diff)
 
   # get colors for 5 cancers in paper 20191208
   cond2 <- c("colorectal", "pancreatic", "breast", "lung", "prostate", "liver")
@@ -878,12 +878,12 @@ canH2OS5 <- function(pdf = FALSE) {
   iTCGA <- match(scores$cancer, TCGA$description)
   myplot(scores$score, TCGA$ZC.diff[iTCGA], xlab = "hypoxia score", ylab = canprot::cplab$DZC, legend.x = "bottomright")
   label.figure("A", cex = 1.7, font = 2, yfrac = 0.96, xfrac = 0.05)
-  myplot(scores$score, TCGA$nH2O_rQEC.diff[iTCGA], xlab = "hypoxia score", ylab = canprot::cplab$DnH2O, legend.x = "bottomleft")
+  myplot(scores$score, TCGA$nH2O.diff[iTCGA], xlab = "hypoxia score", ylab = canprot::cplab$DnH2O, legend.x = "bottomleft")
   label.figure("B", cex = 1.7, font = 2, yfrac = 0.96, xfrac = 0.05)
   iHPA <- match(scores$cancer, HPA$description)
   myplot(scores$score, HPA$ZC.diff[iHPA], xlab = "hypoxia score", ylab = canprot::cplab$DZC, legend.x = "topleft")
   label.figure("C", cex = 1.7, font = 2, yfrac = 0.96, xfrac = 0.05)
-  myplot(scores$score, HPA$nH2O_rQEC.diff[iHPA], xlab = "hypoxia score", ylab = canprot::cplab$DnH2O, legend.x = "topright")
+  myplot(scores$score, HPA$nH2O.diff[iHPA], xlab = "hypoxia score", ylab = canprot::cplab$DnH2O, legend.x = "topright")
   label.figure("D", cex = 1.7, font = 2, yfrac = 0.96, xfrac = 0.05)
   if(pdf) {
     dev.off()
@@ -923,7 +923,7 @@ HTmap <- c(
 ############################
 
 # function to plot 50 percentile contours / extracted from canH2O2 20191201
-contplot <- function(dat, main, col, xvar = "ZC", yvar = "nH2O_rQEC", xlim = c(-0.04, 0.04), ylim = c(-0.05, 0.05), dx = NULL, dy = NULL,
+contplot <- function(dat, main, col, xvar = "ZC", yvar = "nH2O", xlim = c(-0.04, 0.04), ylim = c(-0.05, 0.05), dx = NULL, dy = NULL,
                      labtext = NULL, names = NULL) {
   xlab <- canprot::cplab[[paste0("D", strsplit(xvar, "_")[[1]][1])]]
   ylab <- canprot::cplab[[paste0("D", strsplit(yvar, "_")[[1]][1])]]
