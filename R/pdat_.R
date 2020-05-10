@@ -154,7 +154,10 @@ pdat_yeast_stress <- function(dataset = 2020, basis = "rQEC") {
     # 20200508 yeast gene expression, Gasch et al., 2000
     # GSK+00_X1M.sorbitol...5.min and others
     dat <- read.csv(paste0(datadir, "GSK+00.csv.xz"), as.is=TRUE)
-    description <- paste("yeast transcriptome", stage)
+    dtxt <- gsub(".min", " min", stage)
+    dtxt <- gsub("X1M.sorbitol...", "1M sorbitol at ", dtxt)
+    dtxt <- gsub("Hypo.osmotic.shock...", "hypoosmotic shock at ", dtxt)
+    description <- paste("yeast transcriptome in", dtxt)
     icol <- grep(stage, colnames(dat))
     if(length(icol) > 1) stop("multiple columns selected")
     # get genes with at least 2-fold change

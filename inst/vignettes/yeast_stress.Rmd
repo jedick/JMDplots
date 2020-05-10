@@ -54,12 +54,12 @@ comptab3 <- lapply(pdat1, get_comptab, "nAA", "MW")
 ```
 
 Differences are calculated as (median value for proteins coded by up-regulated genes) - (median value for proteins coded by down-regulated genes).
-Triangles points up and down stand for hyperosmotic and hypoosmotic experiments, respectively.
+Circles and squares stand for hyperosmotic and hypoosmotic experiments, respectively.
 
 ```{r diffplot, fig.width=9, fig.height=8, fig.align = "center", echo = FALSE, pngquant = pngquant}
 layout(matrix(c(0, 2, 1, 2, 1, 3, 0, 3), nrow = 2))
 par(cex = 1, mar = c(4, 4, 1, 1), mgp = c(2.5, 1, 0))
-pch <- ifelse(grepl("sorbitol", datasets), 2, 6)
+pch <- ifelse(grepl("sorbitol", datasets), 1, 0)
 diffplot(comptab1, labtext = NA, contour = FALSE, pch = pch)
 diffplot(comptab2, c("pI", "GRAVY"), labtext = NA, contour = FALSE, pch = pch)
 diffplot(comptab3, c("nAA", "MW"), labtext = NA, contour = FALSE, pch = pch)
@@ -82,6 +82,6 @@ write.csv(out, "yeast_stress.csv", row.names = FALSE, quote = 2)
 
 ## Data Sources
 
-__a__. &ndash; __l__. [complete_dataset.txt](http://www-genome.stanford.edu/yeast_stress/data/rawdata/complete_dataset.txt) of @GSK+00, filtered to include genes with an expression ratio > log2(1.5) or < log2(1/1.5) at any time in the "1M sorbitol" or "Hypo-osmotic shock" experiments.
+__a__. &ndash; __l__. [complete_dataset.txt](http://www-genome.stanford.edu/yeast_stress/data/rawdata/complete_dataset.txt) of @GSK+00, filtered to include genes with an expression ratio > log~2~(1.5) or < log~2~(1/1.5) at any time in the "1M sorbitol" or "Hypo-osmotic shock" experiments.
 
 ## References

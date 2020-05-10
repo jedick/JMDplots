@@ -7,6 +7,8 @@ vignette: >
   %\VignetteIndexEntry{Compositional analysis of The Human Protein Atlas}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
+bibliography: osmotic_gene.bib
+csl: peerj.csl
 ---
 
 ```{r setup, include=FALSE}
@@ -77,3 +79,9 @@ out <- cbind(out[, 1:2], tags = tags, out[, 3:19])
 out[, 6:20] <- round(out[, 6:20], 4)
 write.csv(out, "HPA.csv", row.names = FALSE, quote = 2)
 ```
+
+## Data Sources
+
+__a__. &ndash; __r__. Human Protein Atlas [@UFH+15].
+
+## References

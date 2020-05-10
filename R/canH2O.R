@@ -53,7 +53,7 @@ canH2O1 <- function(pdf = FALSE) {
 
   # show numbers of datasets 
   cond1 <- c("hypoxia", "secreted", "osmotic_euk", "glucose", "3D")
-  cond2 <- c("colorectal", "pancreatic", "breast", "lung", "prostate", "liver")
+  cond2 <- c("breast", "colorectal", "liver", "lung", "pancreatic", "prostate")
   vigout <- system.file("vignettes", package = "canprot")
   conddat <- function(cond) read.csv(paste0(vigout, "/", cond, ".csv"), as.is = TRUE)
   culture <- lapply(cond1, conddat); names(culture) <- cond1
@@ -70,8 +70,8 @@ canH2O1 <- function(pdf = FALSE) {
   textplain(pos[p4, ] + c(-0.087, 0.065), lab = calab, height = 0.105, cex = cex, adj = c(0, 0.5))
   textplain(pos[p4, ] + c(0.02, 0.2), lab = c("Cancer", "vs normal"), font = 2, height = 0.04)
   # add color legend 20200506
-  #col2 <- palette.colors(8, "Classic Tableau")[c(6, 5, 7, 8, 4, 2)]
-  col2 <- c("#8C564B", "#9467BD", "#E377C2", "#7F7F7F", "#D62728", "#FF7F0E")
+  #col2 <- palette.colors(8, "Classic Tableau")[c(7, 6, 2, 8, 5, 4)]
+  col2 <- c("#E377C2", "#8C564B", "#FF7F0E", "#7F7F7F", "#9467BD", "#D62728")
   # function to get y-coordinates of text lines, extracted from diagram::textplain()
   ycoords <- function (mid, height = 0.1, lab = "", adj = c(0.5, 0.5), ...) {
     y <- numeric()
@@ -194,7 +194,7 @@ canH2O2 <- function(pdf = FALSE) {
 
   # read data for all conditions
   cond1 <- c("hypoxia", "secreted", "osmotic_euk", "glucose", "3D")
-  cond2 <- c("colorectal", "pancreatic", "breast", "lung", "prostate", "liver")
+  cond2 <- c("breast", "colorectal", "liver", "lung", "pancreatic", "prostate")
   conds <- c(cond1, cond2)
   vigout <- system.file("vignettes", package = "canprot")
   alldat <- lapply(conds, function(cond) {
@@ -205,8 +205,8 @@ canH2O2 <- function(pdf = FALSE) {
 
   #col1 <- palette.colors(8, "Okabe-Ito")[c(2, 4, 3, 1, 6)]
   col1 <- c(orange = "#E69F00", bluishgreen = "#009E73", skyblue = "#56B4E9", black = "#000000", blue = "#0072B2")
-  #col2 <- palette.colors(8, "Classic Tableau")[c(6, 5, 7, 8, 4, 2)]
-  col2 <- c("#8C564B", "#9467BD", "#E377C2", "#7F7F7F", "#D62728", "#FF7F0E")
+  #col2 <- palette.colors(8, "Classic Tableau")[c(7, 6, 2, 8, 5, 4)]
+  col2 <- c("#E377C2", "#8C564B", "#FF7F0E", "#7F7F7F", "#9467BD", "#D62728")
   col <- c(col1, col2)
 
   # make scatter plots for nH2O and ZC in cell culture and cancer types
@@ -235,7 +235,7 @@ canH2O2 <- function(pdf = FALSE) {
     if(thisone == "secreted") title("secreted in", font.main = 1, line = 1.4, xpd = NA)
     if(thisone %in% c("osmotic_euk", "glucose")) title("hyperosmotic", font.main = 1, line = 1.4, xpd = NA)
     if(thisone == "hypoxia") label.figure("A", cex = 2, font = 2, yfrac = 1)
-    if(thisone == "colorectal") label.figure("B", cex = 2, font = 2, yfrac = 1)
+    if(thisone == "breast") label.figure("B", cex = 2, font = 2, yfrac = 1)
   })
   
   # compare density contours for cell culture and cancer types 20191126
@@ -249,8 +249,8 @@ canH2O2 <- function(pdf = FALSE) {
   names[3] <- "salt"
   contplot(culture, "Cell culture", col1, ylim = c(-0.06, 0.04), dx = c(0.027, 0.01, 0.022, 0, -0.02), dy = c(-0.005, 0.03, -0.037, -0.025, -0.03), names = names)
   label.figure("C", cex = 2, font = 2)
-  contplot(cancer, "Cancer tissue", col2, ylim = c(-0.04, 0.06), dx = c(NA, 0.012, -0.005, -0.022, -0.006, -0.008), dy = c(NA, -0.035, -0.035, 0.035, -0.02, 0.035))
-  text(0.025, -0.008, "CRC", col = col2[1])
+  contplot(cancer, "Cancer tissue", col2, ylim = c(-0.04, 0.06), dx = c(-0.005, NA, -0.008, -0.022, 0.012, -0.006), dy = c(-0.035, NA, 0.035, 0.035, -0.035, -0.02))
+  text(0.025, -0.008, "CRC", col = col2[2])
 
   if(pdf) {
     dev.off()
@@ -269,21 +269,21 @@ canH2O3 <- function(pdf = FALSE) {
   HPA_labels[grepl("head", HPA_labels)] <- "head and neck"
 
   # get colors for six cancers in paper 20191208
-  cond2 <- c("colorectal", "pancreatic", "breast", "lung", "prostate", "liver")
-  #col2 <- palette.colors(8, "Classic Tableau")[c(6, 5, 7, 8, 4, 2)]
-  col2 <- c("#8C564B", "#9467BD", "#E377C2", "#7F7F7F", "#D62728", "#FF7F0E")
+  cond2 <- c("breast", "colorectal", "liver", "lung", "pancreatic", "prostate")
+  #col2 <- palette.colors(8, "Classic Tableau")[c(7, 6, 2, 8, 5, 4)]
+  col2 <- c("#E377C2", "#8C564B", "#FF7F0E", "#7F7F7F", "#9467BD", "#D62728")
   jHPA <- match(cond2, sapply(strsplit(HPA$description, " "), "[", 1))
   colHPA <- rep("darkslategray", nrow(HPA))
   colHPA[jHPA] <- col2
   shapeHPA <- rep(15, nrow(HPA))
-  shapeHPA[jHPA] <- 1
+  shapeHPA[jHPA] <- 19
   # now do TCGA
   TCGAnames <- names(HTmap)[match(cond2, sapply(strsplit(HTmap, " "), "[", 1))]
   jTCGA <- match(TCGAnames, TCGA$description)
   colTCGA <- rep("darkslategray", nrow(TCGA))
   colTCGA[jTCGA] <- col2
   shapeTCGA <- rep(15, nrow(TCGA))
-  shapeTCGA[jTCGA] <- 1
+  shapeTCGA[jTCGA] <- 19
 
   # calculate 2D density and 50% probability level 20200318
   densfun <- function(x, y) {
@@ -369,7 +369,7 @@ canH2O3 <- function(pdf = FALSE) {
   col <- rep("darkslategray", nrow(dat))
   col[kTCGA] <- col2
   shape <- rep(15, nrow(dat))
-  shape[kTCGA] <- 21
+  shape[kTCGA] <- 19
   # use bold labels for cancers studied in Trigos et al., 2017
   labels <- TCGA_labels[iTCGA]
   fontface <- ifelse(labels %in% c("LUAD", "LUSC", "BRCA", "PRAD", "LIHC", "COAD", "STAD"), "bold.italic", "plain")
@@ -436,13 +436,13 @@ canH2O4 <- function(pdf = FALSE, SI = FALSE) {
   plotphylo("nH2O", PS_source = PS_source, memo = memo)
 
   # get cancer data
-  cond2 <- c("colorectal", "pancreatic", "breast", "lung", "prostate", "liver")
+  cond2 <- c("breast", "colorectal", "liver", "lung", "pancreatic", "prostate")
   vigout <- system.file("vignettes", package = "canprot")
   conddat <- function(cond) read.csv(paste0(vigout, "/", cond, ".csv"), as.is = TRUE)
   cancer <- lapply(cond2, conddat)
   names(cancer) <- cond2
-  #col2 <- palette.colors(8, "Classic Tableau")[c(6, 5, 7, 8, 4, 2)]
-  col2 <- c("#8C564B", "#9467BD", "#E377C2", "#7F7F7F", "#D62728", "#FF7F0E")
+  #col2 <- palette.colors(8, "Classic Tableau")[c(7, 6, 2, 8, 5, 4)]
+  col2 <- c("#E377C2", "#8C564B", "#FF7F0E", "#7F7F7F", "#9467BD", "#D62728")
 
   # plot 4: 50 percentile contours for nAA-PS of proteomics datasets 20191201
   if(SI) {
@@ -450,11 +450,11 @@ canH2O4 <- function(pdf = FALSE, SI = FALSE) {
     names[1] <- "colo-\nrectal"
     contplot(cancer, "", col2,
              xvar = "PS_LMM16", yvar = "nAA", xlim = c(-2, 2), ylim = c(-250, 200),
-             dx = c(-0.2, 1.25, -1, -0.65, -0.6, 0.72), dy = c(120, 50, 120, -140, 170, -110), names = names)
+             dx = c(-1, -0.2, 0.72, -0.65, 1.25, -0.6), dy = c(120, 120, -110, -140, 50, 170), names = names)
   } else {
     contplot(cancer, "", col2,
              xvar = "PS_TPPG17", yvar = "nAA", xlim = c(-4, 5), ylim = c(-250, 200),
-             dx = c(1.1, 2.5, -1.8, 0.5, -1.2, -1), dy = c(-210, 60, 140, -140, -185, 130))
+             dx = c(-1.8, 1.1, -1, 0.5, 2.5, -1.2), dy = c(140, -210, 130, -140, 60, -185))
   }
   label.figure("B", cex = 1.7, font = 2, yfrac = 0.96, xfrac = 0.05)
   # plot 5: ZC-PS
@@ -655,26 +655,17 @@ canH2OS2 <- function(pdf = FALSE) {
   HPA_labels <- sapply(strsplit(HPA_labels, " "), "[", 1)
   HPA_labels[grepl("head", HPA_labels)] <- "head and neck"
 
-  # get colors for 5 cancers in paper 20191208
-  cond2 <- c("colorectal", "pancreatic", "breast", "lung", "prostate", "liver")
-  #col2 <- palette.colors(8, "Classic Tableau")[c(6, 5, 7, 8, 4, 2)]
-  col2 <- c("#8C564B", "#9467BD", "#E377C2", "#7F7F7F", "#D62728", "#FF7F0E")
+  # get colors for 6 cancers in paper 20191208
+  cond2 <- c("breast", "colorectal", "liver", "lung", "pancreatic", "prostate")
+  #col2 <- palette.colors(8, "Classic Tableau")[c(7, 6, 2, 8, 5, 4)]
+  col2 <- c("#E377C2", "#8C564B", "#FF7F0E", "#7F7F7F", "#9467BD", "#D62728")
   jHPA <- match(cond2, sapply(strsplit(HPA$description, " "), "[", 1))
   colHPA <- rep("slateblue4", nrow(HPA))
   colHPA[jHPA] <- col2
   sizeHPA <- rep(1.5, nrow(HPA))
   sizeHPA[jHPA] <- 2
   shapeHPA <- rep(15, nrow(HPA))
-  shapeHPA[jHPA] <- 1
-  # now do TCGA
-  TCGAnames <- names(HTmap)[match(cond2, sapply(strsplit(HTmap, " "), "[", 1))]
-  jTCGA <- match(TCGAnames, TCGA$description)
-  colTCGA <- rep("slateblue4", nrow(TCGA))
-  colTCGA[jTCGA] <- col2
-  sizeTCGA <- rep(1.5, nrow(TCGA))
-  sizeTCGA[jTCGA] <- 2
-  shapeTCGA <- rep(15, nrow(TCGA))
-  shapeTCGA[jTCGA] <- 1
+  shapeHPA[jHPA] <- 19
 
   # HPA-TCGA mappings
   iHPA <- match(HTmap, HPA$description)
@@ -698,7 +689,7 @@ canH2OS2 <- function(pdf = FALSE) {
     ylab(quote(Delta*italic(Z)[C]*" (HPA)")) +
     geom_hline(yintercept = 0, linetype = 3, colour = "gray30") +
     geom_vline(xintercept = 0, linetype = 3, colour = "gray30") +
-    geom_point(shape = shape, size = size, col = col, stroke = 1.5) +
+    geom_point(shape = shapeHPA, size = sizeHPA, col = colHPA, stroke = 1.5) +
     ggrepel::geom_text_repel(size = 3, seed = 42) +
     labs(tag = expression(bold(A))) +
     theme(plot.tag = element_text(size = 20), plot.title = element_text(hjust = 0.5),
@@ -714,7 +705,7 @@ canH2OS2 <- function(pdf = FALSE) {
     ylab(quote(Delta*italic(n)[H[2]*O]*" (HPA)")) +
     geom_hline(yintercept = 0, linetype = 3, colour = "gray30") +
     geom_vline(xintercept = 0, linetype = 3, colour = "gray30") +
-    geom_point(shape = shape, size = size, col = col, stroke = 1.5) +
+    geom_point(shape = shapeHPA, size = sizeHPA, col = colHPA, stroke = 1.5) +
     ggrepel::geom_text_repel(size = 3, seed = 42) +
     labs(tag = expression(bold(B))) +
     theme(plot.tag = element_text(size = 20), plot.title = element_text(hjust = 0.5),
@@ -747,9 +738,9 @@ canH2OS3 <- function(pdf = FALSE) {
   TCGAdat <- data.frame(ZC = TCGA$ZC.diff, nH2O = TCGA$nH2O.diff, PS = TCGA$PS_TPPG17.diff)
 
   # get colors for 5 cancers in paper 20191208
-  cond2 <- c("colorectal", "pancreatic", "breast", "lung", "prostate", "liver")
-  #col2 <- palette.colors(8, "Classic Tableau")[c(6, 5, 7, 8, 4, 2)]
-  col2 <- c("#8C564B", "#9467BD", "#E377C2", "#7F7F7F", "#D62728", "#FF7F0E")
+  cond2 <- c("breast", "colorectal", "liver", "lung", "pancreatic", "prostate")
+  #col2 <- palette.colors(8, "Classic Tableau")[c(7, 6, 2, 8, 5, 4)]
+  col2 <- c("#E377C2", "#8C564B", "#FF7F0E", "#7F7F7F", "#9467BD", "#D62728")
 
   # workaround for "no visible binding for global variable" in R CMD check 20200505
   PS <- ZC <- nH2O <- NULL
@@ -762,7 +753,7 @@ canH2OS3 <- function(pdf = FALSE) {
   sizeTCGA <- rep(1.5, nrow(TCGA))
   sizeTCGA[jTCGA] <- 2
   shapeTCGA <- rep(15, nrow(TCGA))
-  shapeTCGA[jTCGA] <- 1
+  shapeTCGA[jTCGA] <- 19
 
   r.squared.ZC <- format(summary(lm(ZC ~ PS, TCGAdat))$r.squared, digits = 2)
   ZC.title <- paste0("italic(R)^2 == '", r.squared.ZC, "'")
@@ -803,7 +794,7 @@ canH2OS3 <- function(pdf = FALSE) {
   sizeHPA <- rep(1.5, nrow(HPA))
   sizeHPA[jHPA] <- 2
   shapeHPA <- rep(15, nrow(HPA))
-  shapeHPA[jHPA] <- 1
+  shapeHPA[jHPA] <- 19
 
   r.squared.ZC <- format(summary(lm(ZC ~ PS, HPAdat))$r.squared, digits = 2)
   ZC.title <- paste0("italic(R)^2 == '", r.squared.ZC, "'")
