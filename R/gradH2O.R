@@ -567,10 +567,9 @@ gradH2O7 <- function(pdf = FALSE) {
   print(paste("total number of studies (transcriptomics and proteomics):", nstudies))
 
   # plot D: proteomics: increasing time
-  osmotic_euk <- read.csv(system.file("vignettes/osmotic_euk.csv", package = "canprot"))
   Ptime <- list(
     KKG = c("KKG+14_Protein_30min", "KKG+14_Protein_80min", "KKG+14_Protein_310min"),
-    QHT = c("QHT+13_24.h", "QHT+13_48.h")
+    QHT = c("QHT+13_Protein.24.h", "QHT+13_Protein.48.h")
   )
   comptab <- osmotic_bact[match(unlist(Ptime), osmotic_bact$dataset), ]
   ndat <- sapply(Ptime, length)

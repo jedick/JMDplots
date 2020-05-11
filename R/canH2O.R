@@ -120,7 +120,7 @@ canH2O1 <- function(pdf = FALSE) {
   textplain(pos[21, ] + c(-0.02, 0.1), lab = c(paste("Total:", total), "datasets", paste("from", nstudies), "studies"),
             adj = c(0, 0.5), font = 3, height = 0.07, cex = 1.2)
 
-  textrect(pos[pP, ] + c(0.02, 0.095), r7 + 0.015, ry, lab = c("Evolutionary", "trends of", "composition"), cex = cex, box.col = cols[1])
+  textrect(pos[pP, ] + c(0.02, 0.095), r7 + 0.015, ry, lab = c("Evolutionary", "trends of", "composition"), cex = cex, box.col = cols[7])
   textplain(pos[pP, ] + c(0.02, 0.215), lab = c("Phylostratigraphic", "analysis"), font = 2, height = 0.04)
 
   textplain(pos[24, ] + c(0.12, 0.29), lab = "Main finding", font = 2)
@@ -247,10 +247,10 @@ canH2O2 <- function(pdf = FALSE) {
   names <- names(culture)
   names[1] <- "hyp-\noxia"
   names[3] <- "salt"
-  contplot(culture, "Cell culture", col1, ylim = c(-0.06, 0.04), dx = c(0.027, 0.01, 0.022, 0, -0.02), dy = c(-0.005, 0.03, -0.037, -0.025, -0.03), names = names)
-  label.figure("C", cex = 2, font = 2)
-  contplot(cancer, "Cancer tissue", col2, ylim = c(-0.04, 0.06), dx = c(-0.005, NA, -0.008, -0.022, 0.012, -0.006), dy = c(-0.035, NA, 0.035, 0.035, -0.035, -0.02))
-  text(0.025, -0.008, "CRC", col = col2[2])
+  contplot(culture, "Cell culture", col1, ylim = c(-0.06, 0.04), dx = c(0.026, 0.01, -0.007, 0.012, -0.02), dy = c(-0.005, 0.03, 0.037, -0.03, -0.03), names = names)
+  label.figure("C", cex = 2, font = 2, yfrac = 0.9)
+  contplot(cancer, "Cancer tissue", col2, ylim = c(-0.04, 0.06), dx = c(-0.005, NA, -0.007, -0.021, 0.012, -0.008), dy = c(-0.036, NA, 0.035, 0.035, -0.035, -0.02))
+  text(0.024, 0.037, "CRC", col = col2[2])
 
   if(pdf) {
     dev.off()
@@ -404,7 +404,8 @@ canH2O4 <- function(pdf = FALSE, SI = FALSE) {
   }
   par(mar = c(4, 4, 1, 1), mgp = c(2.5, 1, 0))
   mat <- matrix(c(1, 1, 2, 5, 3, 6, 4, 7), nrow = 2)
-  layout(mat, widths = c(0.5, 1, 1, 1))
+  layout(mat, widths = c(0.6, 1, 1, 1))
+  par(cex = 0.8)
 
   # make legend for phylostrata
   plot.new()
@@ -413,16 +414,16 @@ canH2O4 <- function(pdf = FALSE, SI = FALSE) {
     # (Liebeskind et al., 2016)
     ys <- seq(0.85, 0.15, length.out = 8)
     text1 <- c("Cellular_organisms", "Euk_Archaea", "Euk+Bac", "Eukaryota", "Opisthokonta", "Eumetazoa", "Vertebrata", "Mammalia")
-    text(-0.6, ys, 1:8, adj = c(1, 0.5))
-    text(-0.52, ys, text1, adj = c(0, 0.5))
+    text(-0.7, ys, 1:8, adj = c(1, 0.5))
+    text(-0.62, ys, text1, adj = c(0, 0.5))
   } else {
     # (Trigos et al., 2017)
     ys <- seq(0.9, 0.1, length.out = 16)
     text1 <- c("Cellular organisms", "Eukaryota", "Opisthokonta", "Metazoa", "Eumetazoa", "Bilateria", "Chordata", "Euteleostomi")
     text2 <- c("Ammiota", "Mammalia", "Theria", "Eutheria", "Euarchontoglires", "Catarrhini", "Homininae", "")
-    text(-0.6, ys, 1:16, adj = c(1, 0.5))
-    text(-0.52, ys, c(text1, text2), adj = c(0, 0.5))
-    text(-0.52, ys[16], "Homo sapiens", font = 3, adj = c(0, 0.5))
+    text(-0.7, ys, 1:16, adj = c(1, 0.5))
+    text(-0.62, ys, c(text1, text2), adj = c(0, 0.5))
+    text(-0.62, ys[16], "Homo sapiens", font = 3, adj = c(0, 0.5))
   }
   par(xpd = FALSE)
 
@@ -447,27 +448,42 @@ canH2O4 <- function(pdf = FALSE, SI = FALSE) {
   # plot 4: 50 percentile contours for nAA-PS of proteomics datasets 20191201
   if(SI) {
     names <- names(cancer)
-    names[1] <- "colo-\nrectal"
     contplot(cancer, "", col2,
              xvar = "PS_LMM16", yvar = "nAA", xlim = c(-2, 2), ylim = c(-250, 200),
-             dx = c(-1, -0.2, 0.72, -0.65, 1.25, -0.6), dy = c(120, 120, -110, -140, 50, 170), names = names)
+             dx = c(1.8, -0.2, 0.95, -0.65, 0.8, -0.4), dy = c(-70, 150, -105, -140, 160, 170), names = names)
+    lines(c(-0.32, 0.44), c(-80, -140))
+    lines(c(-0.65, -0.4), c(168, 105))
   } else {
     contplot(cancer, "", col2,
              xvar = "PS_TPPG17", yvar = "nAA", xlim = c(-4, 5), ylim = c(-250, 200),
-             dx = c(-1.8, 1.1, -1, 0.5, 2.5, -1.2), dy = c(140, -210, 130, -140, 60, -185))
+             dx = c(-1.2, 2.2, -1.2, 0.7, 2.2, 1.8), dy = c(190, -150, 125, -140, 160, -210))
+    lines(c(-3.5, -3), c(100, 50))
   }
   label.figure("B", cex = 1.7, font = 2, yfrac = 0.96, xfrac = 0.05)
   # plot 5: ZC-PS
   if(SI) {
-    contplot(cancer, "", col2, xvar = "PS_LMM16", yvar = "ZC", xlim = c(-2, 2), ylim = c(-0.05, 0.05))
+    contplot(cancer, "", col2, xvar = "PS_LMM16", yvar = "ZC", xlim = c(-2, 2), ylim = c(-0.05, 0.05),
+             dx = c(1.5, -1, 1, 1.25, 0.8, 0), dy = c(-0.015, 0.02, -0.01, 0, 0.03, -0.019)
+    )
+    lines(c(-0.3, 0.15), c(-0.0165, -0.028))
   } else {
-    contplot(cancer, "", col2, xvar = "PS_TPPG17", yvar = "ZC", xlim = c(-4, 4), ylim = c(-0.05, 0.05))
+    contplot(cancer, "", col2, xvar = "PS_TPPG17", yvar = "ZC", xlim = c(-4, 4), ylim = c(-0.05, 0.05),
+             dx = c(3.2, 2.6, -1.7, 1.8, 1.5, 0.5), dy = c(-0.01, -0.001, 0.015, -0.005, 0.032, -0.022))
+    lines(c(-1.05, 0.3), c(-0.013, -0.022))
   }
   # plot 6: nH2O-PS
   if(SI) {
-    contplot(cancer, "", col2, xvar = "PS_LMM16", yvar = "nH2O", xlim = c(-2, 2), ylim = c(-0.02, 0.05))
+    contplot(cancer, "", col2, xvar = "PS_LMM16", yvar = "nH2O", xlim = c(-2, 2), ylim = c(-0.02, 0.05),
+             dx = c(0.64, 1.4, 1, -0.7, 0.8, -0.4), dy = c(-0.03, 0.023, 0.01, 0.027, -0.016, -0.03)
+    )
+    lines(c(0, 0.3), c(0.035, 0.038))
+    lines(c(-1.8, -1.6), c(-0.014, 0.005))
   } else {
-    contplot(cancer, "", col2, xvar = "PS_TPPG17", yvar = "nH2O", xlim = c(-4, 4), ylim = c(-0.02, 0.05))
+    contplot(cancer, "", col2, xvar = "PS_TPPG17", yvar = "nH2O", xlim = c(-4, 4), ylim = c(-0.02, 0.05),
+             dx = c(1.4, 3.1, 1.8, 0.75, 1.6, 3.7), dy = c(-0.032, 0.023, 0.01, -0.0305, -0.015, 0.033)
+    )
+    lines(c(-2, 0.45), c(0.038, 0.046))
+    lines(c(0, 1), c(0.035, 0.038))
   }
 
   if(pdf) {
@@ -972,16 +988,16 @@ plotphylo <- function(vars = c("ZC", "nH2O"), basis = "rQEC", PS_source = "TPPG1
   }
   if("ZC" %in% vars) {
     plot(PS, mean.ZC, type = "b", ylab = expression(italic(Z)[C]))
-    lines(PS, cum.ZC, col = 2)
+    lines(PS, cum.ZC, col = 2, lty = 2)
   }
   if("nH2O" %in% vars) {
     ylab <- expression(italic(n)[H[2] * O])
     plot(PS, mean.nH2O, type = "b", ylab = ylab)
-    lines(PS, cum.nH2O, col = 2)
+    lines(PS, cum.nH2O, col = 2, lty = 2)
   }
   if("nAA" %in% vars) {
     plot(PS, mean.nAA, type = "b", ylab = expression(italic(n)[AA]))
-    lines(PS, cum.nAA, col = 2)
+    lines(PS, cum.nAA, col = 2, lty = 2)
   }
   # return the dat and pcomp for memoization 20191211
   invisible(list(dat = dat, pcomp = pcomp))
