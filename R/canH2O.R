@@ -104,21 +104,21 @@ canH2O1 <- function(pdf = FALSE) {
   textplain(pos[p5, ] + c(-0.163, 0.08), lab = culab, height = 0.09, cex = cex, adj = c(0, 0.5))
   textplain(pos[p5, ] + c(-0.02, 0.2), lab = c("Cell", "culture"), font = 2, height = 0.04)
   # add color legend 20200506
-  #col1 <- palette.colors(8, "Okabe-Ito")[c(2, 4, 3, 1, 6)]
-  col1 <- c(orange = "#E69F00", bluishgreen = "#009E73", skyblue = "#56B4E9", black = "#000000", blue = "#0072B2")
+  #col1 <- palette.colors(9, "Okabe-Ito")[c(6, 4, 9, 3, 2)]
+  col1 <- c(blue = "#0072B2", bluishgreen = "#009E73", gray = "#999999", skyblue = "#56B4E9", orange = "#E69F00")
   yculture <- ycoords(pos[p5, ] + c(-0.16, 0.08), lab = culab, height = 0.09)
   xculture <- rep(pos[p5, 1] + 0.13, length(yculture))
   # point salt-inducded hyperosmotic stress on same line as glucose
   points(xculture[-3], yculture[-3], bg = col1[-3], pch = 21, cex = 1.7)
   points(xculture[3] - 0.025, yculture[4], bg = col1[3], pch = 21, cex = 1.7)
 
+  # add dataset summary, pan-cancer, phylostrata, and findings text
+  textplain(pos[21, ] + c(-0.02, 0.1), lab = c(paste("Total:", total), "datasets", paste("from", nstudies), "studies"),
+            adj = c(0, 0.5), font = 3, height = 0.07, cex = 1.2)
 
   textrect(pos[p6, ] + c(0, 0.08), r6, ry, lab = c("GEPIA2", "(TCGA/", "GTEx)", ""), cex = cex, box.col = cols[1])
   textplain(pos[p6, ] + c(-0.025, 0.025), r6, ry, lab = "HPA", cex = cex)
   textplain(pos[p6, ] + c(0, 0.2), lab = c("Pan-cancer", "comparison"), font = 2, height = 0.04)
-
-  textplain(pos[21, ] + c(-0.02, 0.1), lab = c(paste("Total:", total), "datasets", paste("from", nstudies), "studies"),
-            adj = c(0, 0.5), font = 3, height = 0.07, cex = 1.2)
 
   textrect(pos[pP, ] + c(0.02, 0.095), r7 + 0.015, ry, lab = c("Evolutionary", "trends of", "composition"), cex = cex, box.col = cols[7])
   textplain(pos[pP, ] + c(0.02, 0.215), lab = c("Phylostratigraphic", "analysis"), font = 2, height = 0.04)
@@ -158,7 +158,6 @@ canH2O1 <- function(pdf = FALSE) {
   # offset x = -0.1 to make room for text
   for(i in 5:1) arrows(-0.1, 0, 35*mean(culture[[i]]$ZC.diff) - 0.1, 35*mean(culture[[i]]$nH2O.diff), col = col1[i], lwd = 3, length = 0.15)
   for(i in 1:6) arrows(-0.1, 0, 35*mean(cancer[[i]]$ZC.diff) - 0.1, 35*mean(cancer[[i]]$nH2O.diff), col = col2[i], lwd = 3, length = 0.15)
-  
 
   # restore these defaults to be able to re-run this script with expected results
   par(xaxs = "r", yaxs = "r")
@@ -203,8 +202,8 @@ canH2O2 <- function(pdf = FALSE) {
   })
   names(alldat) <- conds
 
-  #col1 <- palette.colors(8, "Okabe-Ito")[c(2, 4, 3, 1, 6)]
-  col1 <- c(orange = "#E69F00", bluishgreen = "#009E73", skyblue = "#56B4E9", black = "#000000", blue = "#0072B2")
+  #col1 <- palette.colors(9, "Okabe-Ito")[c(6, 4, 9, 3, 2)]
+  col1 <- c(blue = "#0072B2", bluishgreen = "#009E73", gray = "#999999", skyblue = "#56B4E9", orange = "#E69F00")
   #col2 <- palette.colors(8, "Classic Tableau")[c(7, 6, 2, 8, 5, 4)]
   col2 <- c("#E377C2", "#8C564B", "#FF7F0E", "#7F7F7F", "#9467BD", "#D62728")
   col <- c(col1, col2)
@@ -228,12 +227,13 @@ canH2O2 <- function(pdf = FALSE) {
     }
     diffplot(alldat[i], pch = pch, pt.text = NA, col = col[i], cex = 1, labtext = NA)
     main <- names(alldat)[i]
+    substr(main, 1, 1) <- toupper(substr(main, 1, 1))
     if(thisone == "secreted") main <- "hypoxia"
     if(thisone == "osmotic_euk") main <- "(salt)"
     if(thisone == "glucose") main <- "(glucose)"
     title(main, font.main = 1)
-    if(thisone == "secreted") title("secreted in", font.main = 1, line = 1.4, xpd = NA)
-    if(thisone %in% c("osmotic_euk", "glucose")) title("hyperosmotic", font.main = 1, line = 1.4, xpd = NA)
+    if(thisone == "secreted") title("Secreted in", font.main = 1, line = 1.4, xpd = NA)
+    if(thisone %in% c("osmotic_euk", "glucose")) title("Hyperosmotic", font.main = 1, line = 1.4, xpd = NA)
     if(thisone == "hypoxia") label.figure("A", cex = 2, font = 2, yfrac = 1)
     if(thisone == "breast") label.figure("B", cex = 2, font = 2, yfrac = 1)
   })
@@ -587,15 +587,20 @@ canH2OT2 <- function() {
     mdat <- cbind(mdat, mcol)
     pdat <- cbind(pdat, pcol)
   }
-  # round and combine values
-  mdat[, 2:3] <- round(mdat[, 2:3], 3)
-  for(icol in 2:3) mdat[, icol] <- paste0(sprintf("%.3f", mdat[, icol]), " (", sprintf("%.1f", pdat[, icol]), ")")
-  mdat[, 4:5] <- round(mdat[, 4:5], 2)
-  for(icol in 4:5) mdat[, icol] <- paste0(sprintf("%.2f", mdat[, icol]), " (", sprintf("%.1f", pdat[, icol]), ")")
-  mdat[, 6] <- round(mdat[, 6], 1)
-  for(icol in 6) mdat[, icol] <- paste0(sprintf("%.1f", mdat[, icol]), " (", sprintf("%.1f", pdat[, icol]), ")")
+  # format values and put p-values in parentheses (bold for values below 0.05 significance threshold)
+  fmts <- c(NA, "%.3f", "%.3f", "%.2f", "%.2f", "%.1f")
+  for(icol in 2:6) {
+    for(irow in 1:nrow(mdat)) {
+      pround <- round(pdat[irow, icol], 1)
+      ptxt <- sprintf("%.1f", pdat[irow, icol])
+      if(pround < -1.3) ptxt <- paste0("(**", ptxt, "**)")
+      else ptxt <- paste0("(", ptxt, ")")
+      mdat[irow, icol] <- paste(sprintf(fmts[icol], as.numeric(mdat[irow, icol])), ptxt)
+    }
+  }
   # adjustments for pretty kable output
   rownames(mdat) <- mdat[, 1]
+  rownames(mdat)[rownames(mdat)=="osmotic_euk"] <- "salt"
   mdat <- mdat[, -1]
   colnames(mdat) <- c("&Delta;*Z*~C~", "&Delta;*n*~H2O~", "&Delta;PS (TPPG17)", "&Delta;PS (LMM16)", "&Delta;*n*~AA~")
   mdat

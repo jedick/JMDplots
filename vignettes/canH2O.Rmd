@@ -91,8 +91,8 @@ canH2OS2()
 canH2OS3()
 ```
 
-## Compositional analysis of phylostrata using Libeskind et al. gene ages (Figure S4)
-```{r canH2OS4, message = FALSE, fig.align='center', out.width='100%', fig.width = 9, fig.height = 5, pngquant = pngquant}
+## Compositional analysis of phylostrata representing Liebeskind et al. gene ages (Figure S4)
+```{r canH2OS4, message = FALSE, results = "hide", fig.align='center', out.width='100%', fig.width = 9, fig.height = 5, pngquant = pngquant}
 canH2OS4()
 ```
 
