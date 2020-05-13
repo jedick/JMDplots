@@ -93,7 +93,7 @@ Dick, J. M. (2019) CHNOSZ: Thermodynamic calculations and diagrams for geochemis
 
 Dick, J. M., Yu, M. and Tan, J. (2020) Distinct trends in chemical composition of proteins from metagenomes in redox and salinity gradients. \emph{bioRxiv}. \doi{10.1101/2020.04.01.020008}
 
-Dick, J. M. (2020) Water as a reactant in the differential expression of proteins in cancer. \emph{(preprint)}
+Dick, J. M. (2020) Water as a reactant in the differential expression of proteins in cancer. \emph{bioRxiv}. \doi{10.1101/2020.04.09.035022}
 
 O'Leary, N. A. et al. (2016) Reference sequence (RefSeq) database at NCBI: current status, taxonomic expansion, and functional annotation. \emph{Nucleic Acids Res.} \bold{44}, D733-D745. \doi{10.1093/nar/gkv1189}
 }

@@ -399,7 +399,7 @@ canH2O3 <- function(pdf = FALSE) {
 # compositional analysis of phylostrata; phylostrata differences in cancer 20191201; 20200507
 canH2O4 <- function(pdf = FALSE, SI = FALSE) {
   if(pdf) {
-    if(SI) pdf("canH2OS4.pdf", width = 9, height = 5)
+    if(SI) pdf("canH2OS3.pdf", width = 9, height = 5)
     else pdf("canH2O4.pdf", width = 9, height = 5)
   }
   par(mar = c(4, 4, 1, 1), mgp = c(2.5, 1, 0))
@@ -488,7 +488,7 @@ canH2O4 <- function(pdf = FALSE, SI = FALSE) {
 
   if(pdf) {
     dev.off()
-    if(SI) addexif("canH2OS4", "Compositional analysis of phylostrata representing Liebeskind et al. gene ages", "Dick (2020) (preprint)")
+    if(SI) addexif("canH2OS3", "Compositional analysis of phylostrata representing Liebeskind et al. gene ages", "Dick (2020) (preprint)")
     else addexif("canH2O4", "Compositional analysis of phylostrata; phylostrata differences in cancer", "Dick (2020) (preprint)")
   }
 }
@@ -743,8 +743,13 @@ canH2OS2 <- function(pdf = FALSE) {
   else ml
 }
 
-# scatterplots of ZC and nH2O vs phylostrata for TCGA and HPA datasets 20200505
+# Compositional analysis of phylostrata representing Liebeskind et al. gene ages 20200507
 canH2OS3 <- function(pdf = FALSE) {
+  canH2O4(pdf = pdf, SI = TRUE)
+}
+
+# scatterplots of ZC and nH2O vs phylostrata for TCGA and HPA datasets 20200505
+canH2OS4 <- function(pdf = FALSE) {
   # read files and get labels
   vigout2 <- system.file("vignettes", package = "JMDplots")
   HPA <- read.csv(file.path(vigout2, "HPA.csv"), as.is = TRUE)
@@ -853,15 +858,10 @@ canH2OS3 <- function(pdf = FALSE) {
   mat <- matrix(1:4, nrow = 2, byrow = TRUE)
   ml <- gridExtra::marrangeGrob(c(pl1, pl2, pl3, pl4), layout_matrix = mat, top = NULL)
   if(pdf) {
-    ggsave("canH2OS3.pdf", ml, width = 8, height = 8)
-    addexif("canH2OS3", "Scatterplots of ZC and nH2O vs phylostrata for TCGA and HPA datasets", "Dick (2020) (preprint)")
+    ggsave("canH2OS4.pdf", ml, width = 8, height = 8)
+    addexif("canH2OS4", "Scatterplots of ZC and nH2O vs phylostrata for TCGA and HPA datasets", "Dick (2020) (preprint)")
   }
   else ml
-}
-
-# Compositional analysis of phylostrata representing Liebeskind et al. gene ages 20200507
-canH2OS4 <- function(pdf = FALSE) {
-  canH2O4(pdf = pdf, SI = TRUE)
 }
 
 # Scatterplots of hypoxia scores and ZC or nH2O for TCGA or HPA datasets 20200224
