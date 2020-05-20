@@ -28,7 +28,7 @@ ZC <- "<i>Z</i><sub>C</sub>"
 nH2O <- "<i>n</i><sub>H<sub>2</sub>O</sub>"
 ```
 
-This vignette from the R package [JMDplots](https://github.com/jedick/JMDplots) version `r packageDescription("JMDplots")$Version` contains plots from the paper by [<span title="Distinct trends in chemical composition of proteins from metagenomes in redox and salinity gradients">Dick et al. (2020)</span>](https://doi.org/10.1101/2020.04.09.035022).
+This vignette from the R package [JMDplots](https://github.com/jedick/JMDplots) version `r packageDescription("JMDplots")$Version` contains plots from the paper by [<span title="Uncovering chemical signatures of salinity gradients through compositional analysis of protein sequences">Dick et al. (2020)</span>](https://doi.org/10.5194/bg-2020-146).
 
 ```{r JMDplots, message = FALSE, results = "hide"}
 library(JMDplots)

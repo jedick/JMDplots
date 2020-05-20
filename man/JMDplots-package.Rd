@@ -91,7 +91,7 @@ Dick, J. M., Yu, M., Tan, J. and Lu, A. (2019) Changes in carbon oxidation state
 
 Dick, J. M. (2019) CHNOSZ: Thermodynamic calculations and diagrams for geochemistry. \emph{Front. Earth Sci.} \bold{7}:180. \doi{10.3389/feart.2019.00180}
 
-Dick, J. M., Yu, M. and Tan, J. (2020) Distinct trends in chemical composition of proteins from metagenomes in redox and salinity gradients. \emph{bioRxiv}. \doi{10.1101/2020.04.01.020008}
+Dick, J. M., Yu, M. and Tan, J. (2020) Uncovering chemical signatures of salinity gradients through compositional analysis of protein sequences. \emph{Biogeosciences Discussions}. \doi{10.5194/bg-2020-146}
 
 Dick, J. M. (2020) Water as a reactant in the differential expression of proteins in cancer. \emph{bioRxiv}. \doi{10.1101/2020.04.09.035022}
 

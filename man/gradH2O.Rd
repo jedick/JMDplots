@@ -82,7 +82,7 @@ The organisms are limited to those that have at least 1000 RefSeq protein sequen
 }
 
 \references{
-Dick, J. M., Yu, M. and Tan, J. (2020) Distinct trends in chemical composition of proteins from metagenomes in redox and salinity gradients. \emph{bioRxiv}. \doi{10.1101/2020.04.01.020008}
+Dick, J. M., Yu, M. and Tan, J. (2020) Uncovering chemical signatures of salinity gradients through compositional analysis of protein sequences. \emph{Biogeosciences Discussions}. \doi{10.5194/bg-2020-146}
 
 Feist, A. M. et al. (2007) A genome-scale metabolic reconstruction for \emph{Escherichia coli} K-12 MG1655 that accounts for 1260 ORFs and thermodynamic information. \emph{Mol. Syst. Biol.} \bold{3}, 121. \doi{10.1038/msb4100155}
 
