@@ -191,6 +191,7 @@ chnszten6 <- function(pdf = FALSE) {
   water("DEW")
   # add species data for DEW
   inorganics <- c("methane", "CO2", "HCO3-", "CO3-2")
+  if(packageVersion("CHNOSZ") > "1.3.6") inorganics <- c("CH4", "CO2", "HCO3-", "CO3-2")
   organics <- c("formic acid", "formate", "acetic acid", "acetate", "propanoic acid", "propanoate")
   add.obigt("DEW", c(inorganics, organics))
   ## set basis species
@@ -521,7 +522,8 @@ chnsztenS3 <- function(pdf = FALSE) {
   par(mfrow = c(1, 2), mar = c(3, 4, 1, 1))
   ## transforming an equilibrium assemblage of n-alkanes
   basis(c("CH4", "H2"), c("gas", "gas"))
-  species(c("methane", "ethane", "propane", "butane"), "aq")
+  if(packageVersion("CHNOSZ") > "1.3.6") species(c("CH4", "ethane", "propane", "butane"), "aq")
+  else species(c("methane", "ethane", "propane", "butane"), "aq")
   # set logact to -1 so total activity is 1 (total number of C is 10)
   species(1:4, -1)
   # calculate equilibrium assemblages over a range of logaH2
@@ -639,6 +641,7 @@ chnsztenS6A <- function(pdf = FALSE) {
   water("DEW")
   # add species data for DEW
   inorganics <- c("methane", "CO2", "HCO3-", "CO3-2")
+  if(packageVersion("CHNOSZ") > "1.3.6") inorganics <- c("CH4", "CO2", "HCO3-", "CO3-2")
   organics <- c("formic acid", "formate", "acetic acid", "acetate", "propanoic acid", "propanoate")
   # skip updating acetate because the new data from the DEW spreadsheet give different logK
   add.obigt("DEW", c(inorganics, organics[-4]))
@@ -731,6 +734,7 @@ chnsztenS6B <- function(pdf = FALSE) {
   water("DEW")
   # add species data for DEW
   inorganics <- c("methane", "CO2", "HCO3-", "CO3-2")
+  if(packageVersion("CHNOSZ") > "1.3.6") inorganics <- c("CH4", "CO2", "HCO3-", "CO3-2")
   organics <- c("formic acid", "formate", "acetic acid", "acetate", "propanoic acid", "propanoate")
   # skip updating acetate because the new data from the DEW spreadsheet give different logK
   add.obigt("DEW", c(inorganics, organics[-4]))
