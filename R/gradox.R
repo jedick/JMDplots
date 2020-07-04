@@ -423,9 +423,9 @@ aAA_aDNA <- function(mout, pout, datasets=c("Bison_Pool_IMG_MG", "Mud_Volcano_SR
     # get data
     moutdata <- mout[[dataset]]
     # calculate the thermodynamic properties of the DNA molecule (per nucleotide)
-    DNA_obigt <- seqcomp2obigt(moutdata$meancomp, "DNA")
+    DNA_OBIGT <- seqcomp2OBIGT(moutdata$meancomp, "DNA")
     # add them to the "OBIGT" database in CHNOSZ
-    iDNA <- do.call(mod.obigt, DNA_obigt)
+    iDNA <- do.call(mod.OBIGT, DNA_OBIGT)
     # add species
     species(iDNA)
     # calculate affinity
@@ -439,8 +439,8 @@ aAA_aDNA <- function(mout, pout, datasets=c("Bison_Pool_IMG_MG", "Mud_Volcano_SR
 
     # now do it for proteins
     poutdata <- pout[[paste0(dataset, "P")]]
-    AA_obigt <- seqcomp2obigt(poutdata$meancomp, "protein")
-    iAA <- do.call(mod.obigt, AA_obigt)
+    AA_OBIGT <- seqcomp2OBIGT(poutdata$meancomp, "protein")
+    iAA <- do.call(mod.OBIGT, AA_OBIGT)
     species(iAA)
     aAA <- affinity(Eh=c(-0.35, -0.15))
     aAA$values <- lapply(aAA$values, "*", 5.71)
@@ -560,41 +560,41 @@ aAA_aDNA <- function(mout, pout, datasets=c("Bison_Pool_IMG_MG", "Mud_Volcano_SR
 }
 
 # convert data frame of DNA or AA composition to thermodynamic properties 20180505
-seqcomp2obigt <- function(seqcomp, type="DNA") {
+seqcomp2OBIGT <- function(seqcomp, type="DNA") {
   if(type=="DNA") {
     # which columns have A, C, G, T
     icol <- match(c("A", "C", "G", "T"), colnames(seqcomp))
     # thermodynamic data for the corresponding nucleotide monophosphates
-    iobigt <- info(c("dAMP-2", "dCMP-2", "dGMP-2", "dTMP-2"))
+    iOBIGT <- info(c("dAMP-2", "dCMP-2", "dGMP-2", "dTMP-2"))
   }
   if(type=="protein") {
     # which columns have the amino acid 3-letter abbreviations
     icol <- match(aminoacids(3), colnames(seqcomp))
     # thermodynamic data for the corresponding amino acids
-    iobigt <- info(aminoacids(""))
+    iOBIGT <- info(aminoacids(""))
   }
   # get monomer properties (nucleotides or amino acids)
-  # to keep the multipliers, don't use info(iobigt)
-  monomer_obigt <- thermo()$obigt[iobigt, ]
+  # to keep the multipliers, don't use info(iOBIGT)
+  monomer_OBIGT <- thermo()$OBIGT[iOBIGT, ]
   # initialize output
-  obigt_out <- monomer_obigt[rep(1, nrow(seqcomp)), ]
+  OBIGT_out <- monomer_OBIGT[rep(1, nrow(seqcomp)), ]
   # in CHNOSZ_1.1.3, diagram() (or another function) attempts to interpret names with underscores
   # as proteins, ultimately leading to incorrect diagrams (i.e. only single fields appear)
-  obigt_out$name <- gsub("_", "-", rownames(seqcomp))
-  obigt_out$date <- today()
-  obigt_out$abbrv <- obigt_out$ref1 <- NA
+  OBIGT_out$name <- gsub("_", "-", rownames(seqcomp))
+  OBIGT_out$date <- today()
+  OBIGT_out$abbrv <- OBIGT_out$ref1 <- NA
   # loop over sequence compositions (rows)
   for(i in 1:nrow(seqcomp)) {
     # normalize composition to a single monomer unit
     monocomp <- as.numeric(seqcomp[i, icol]) / sum(seqcomp[i, icol])
     # chemical formula
-    mkp <- makeup(monomer_obigt$formula, multiplier=monocomp, sum=TRUE)
-    obigt_out$formula[i] <- as.chemical.formula(mkp)
+    mkp <- makeup(monomer_OBIGT$formula, multiplier=monocomp, sum=TRUE)
+    OBIGT_out$formula[i] <- as.chemical.formula(mkp)
     # thermodynamic properties (G, H, S, and HKF parameters)
     # the format of OBIGT changed in CHNOSZ 1.3.3; get different columns for previous versions 20191015
-    if(packageVersion("CHNOSZ") >= "1.3.3") obigt_out[i, 9:21] <- colSums(monomer_obigt[, 9:21] * monocomp)
-    else obigt_out[i, 8:20] <- colSums(monomer_obigt[, 8:20] * monocomp)
+    if(packageVersion("CHNOSZ") >= "1.3.3") OBIGT_out[i, 9:21] <- colSums(monomer_OBIGT[, 9:21] * monocomp)
+    else OBIGT_out[i, 8:20] <- colSums(monomer_OBIGT[, 8:20] * monocomp)
   }
-  obigt_out
+  OBIGT_out
 }
 

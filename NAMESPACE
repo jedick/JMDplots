@@ -39,13 +39,13 @@ export(
 importFrom("CHNOSZ",
   # first batch: gradox
   "ZC", "affinity", "aminoacids", "as.chemical.formula", 
-  "basis", "diagram", "info", "label.figure", "makeup", "mod.obigt",
+  "basis", "diagram", "info", "label.figure", "makeup",
   "species", "swap.basis", "thermo", "thermo.axis", "today",
   # second batch: chnszten
-  "DGtr", "add.obigt", "axis.label", "bgamma", "describe.basis", "describe.property",
+  "DGtr", "axis.label", "bgamma", "describe.basis", "describe.property",
   "describe.reaction", "equilibrate", "expr.property", "expr.species", "findit",
   "list2array", "mass", "maxdiff", "mod.buffer", "mosaic",
-  "nonideal", "obigt", "ratlab", "reset", "solubility",
+  "nonideal", "ratlab", "reset", "solubility",
   "subcrt", "thermo.plot.new", "water",
   # third batch: gradH2O
   "protein.formula",

@@ -18,12 +18,12 @@ aa.625 <- aa[, 6:25]
 aa[, 6:25] <- aa.625 / rowSums(aa.625)
 # add proteins to thermo$protein
 add.protein(aa)
-# add proteins to thermo$obigt
-iobigt <- info(paste(aa$protein, aa$organism, sep="_"))
+# add proteins to thermo$OBIGT
+iOBIGT <- info(paste(aa$protein, aa$organism, sep="_"))
 # use equal initial abundances, with total equal to yeastGFP abundances
 Y <- rep(mean(y$abundance[!ina]), length(y$abundance[!ina]))
 # run the Gibbs energy minimization
-w <- run.wjd(iobigt, Y=Y, imax=100)
+w <- run.wjd(iOBIGT, Y=Y, imax=100)
 # make a log-log plot
 plot(log10(y$abundance[!ina]), log10(w$X), xlim=c(1.5, 5), ylim=c(1.5, 5),
   xlab="log10(abundance) reported in YeastGFP study",

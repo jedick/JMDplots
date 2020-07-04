@@ -31,7 +31,7 @@ The output data frame contains rows with NA compositions for names that are not 
 If \code{exclusive} is \code{FALSE}, the function grabs all proteins that are localized to a compartment even if they are also localized to other compartments.
 If \code{exclusive} is \code{TRUE} (the default), only those proteins that are localized exclusively to the requested compartments are identified, unless there are no such proteins, then the non-exclusive localizations are used (applies to the \samp{bud} localization).
 
-\code{yeast.ZC} returns the \code{\link[CHNOSZ]{ZC}} of proteins in the subcellular location identified by the one-letter abbreviation.
+\code{yeast.ZC} returns the \code{\link[CHNOSZ:util.formula]{ZC}} of proteins in the subcellular location identified by the one-letter abbreviation.
 This abbreviation identifies a \dQuote{Cellular Component} in the Gene Ontology and the associatied proteins (see \code{\link{aoscp}}).
 }
 

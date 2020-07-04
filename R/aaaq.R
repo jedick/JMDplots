@@ -13,15 +13,15 @@ aaaq4 <- function(pdf = FALSE) {
 
   ## set charges of groups in order to activate the g-function
   ## (inactive by default)
-  #mod.obigt("[AABB+]", z = 1)
-  #mod.obigt("[AABB-]", z = -1)
-  #mod.obigt("[Asp-]", z = -1)
-  #mod.obigt("[Glu-]", z = -1)
-  #mod.obigt("[His+]", z = 1)
-  #mod.obigt("[Cys-]", z = -1)
-  #mod.obigt("[Tyr-]", z = -1)
-  #mod.obigt("[Lys+]", z = 1)
-  #mod.obigt("[Arg+]", z = 1)
+  #mod.OBIGT("[AABB+]", z = 1)
+  #mod.OBIGT("[AABB-]", z = -1)
+  #mod.OBIGT("[Asp-]", z = -1)
+  #mod.OBIGT("[Glu-]", z = -1)
+  #mod.OBIGT("[His+]", z = 1)
+  #mod.OBIGT("[Cys-]", z = -1)
+  #mod.OBIGT("[Tyr-]", z = -1)
+  #mod.OBIGT("[Lys+]", z = 1)
+  #mod.OBIGT("[Arg+]", z = 1)
 
   # define temperature values
   T <- 0:300
@@ -162,7 +162,7 @@ aaaq13 <- function(pdf = FALSE) {
   if(pdf) pdf("aaaq13.pdf", width = 5, height = 4)
   par(mar = c(3, 3, 1, 1))
   # use old data for methionine sidechain
-  add.obigt("OldAA")
+  add.OBIGT("OldAA")
   basis("CHNOSe")
   basis(c("NH3", "H2S"), c(-6, -3))
   species(c("AMY_BACSU", "O08452_PYRFU"))

@@ -60,7 +60,7 @@ This table gives a brief description of each function.
   \code{chnsztenS4} \tab \code{\link[CHNOSZ]{findit}} calculations for sulfur species \cr
   \code{chnsztenS5} \tab Debye-Hückel extended term parameter extrapolated from plots of Manning et al. (2013) \cr
   \code{chnsztenS6A} \tab \code{chnszten6} modified to exclude DEW data for acetate \cr
-  \code{chnsztenS6B} \tab \code{chnsztenS6A} modified to use default \code{\link[CHNOSZ]{bgamma}} equation \cr
+  \code{chnsztenS6B} \tab \code{chnsztenS6A} modified to use default \code{\link[CHNOSZ:nonideal]{bgamma}} equation \cr
   \code{chnsztenS7} \tab \logK of NaCl dissociation \cr
   \code{chnsztenS8} \tab Calcite solubility: comparison with Manning et al. (2013) \cr
   \code{chnsztenS9} \tab Compare gold solubility in HCh and CHNOSZ: hematite-magnetite buffer \cr

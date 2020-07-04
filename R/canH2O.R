@@ -544,7 +544,7 @@ canH2O5 <- function(pdf = FALSE) {
 canH2OT2 <- function() {
   cond1 <- c("hypoxia", "secreted", "osmotic_euk", "glucose", "3D")
   cond2 <- c("breast", "colorectal", "liver", "lung", "pancreatic", "prostate")
-  cond3 <- c("HPA", "TCGA")
+  cond3 <- c("TCGA", "HPA")
   vigout <- system.file("vignettes", package = "canprot")
   conddat <- function(cond) read.csv(paste0(vigout, "/", cond, ".csv"), as.is = TRUE)
   culture <- lapply(cond1, conddat); names(culture) <- cond1

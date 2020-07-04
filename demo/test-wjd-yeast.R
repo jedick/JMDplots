@@ -7,7 +7,7 @@ require("JMDplots")
 ### FIXME: equil.potentials(w) returns NULL unless we use group additivity parameters from DLH06 20190206
 ### (issue appears with MKL and OpenBLAS CRAN checks)
 reset()
-add.obigt("OldAA")
+add.OBIGT("OldAA")
 ### set up system
 # use proteins in the lipid particle (n=19)
 y <- yeastgfp("lipid.particle")
@@ -21,14 +21,14 @@ aa.625 <- aa[, 6:25]
 aa[, 6:25] <- aa.625 / rowSums(aa.625)
 # add proteins to thermo$protein
 iprotein <- add.protein(aa)
-# add proteins to thermo$obigt
-iobigt <- info(paste(aa$protein, aa$organism, sep="_"))
+# add proteins to thermo$OBIGT
+iOBIGT <- info(paste(aa$protein, aa$organism, sep="_"))
 ### closed system calculation (constant composition of elements)
 # use equal initial abundances
-Y <- rep(100, length(iobigt))
+Y <- rep(100, length(iOBIGT))
 # run the Gibbs energy minimization (this did not iterate before 20130109,
 # due to bug in calculation of free energy derivative)
-w <- run.wjd(iobigt, Y=Y, Gfrac=1e-15, nlambda=501)
+w <- run.wjd(iOBIGT, Y=Y, Gfrac=1e-15, nlambda=501)
 # the molar abundances
 X.closed <- w$X
 # get the chemical potentials of the elements

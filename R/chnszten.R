@@ -127,7 +127,7 @@ chnszten5 <- function(pdf = FALSE) {
   if(pdf) pdf("chnszten5.pdf", width=4, height=3)
   mar <- c(2.5, 3, 1, 1)
   mgp <- c(1.5, 0.3, 0)
-  add.obigt("SLOP98")
+  add.OBIGT("SLOP98")
   basis(c("corundum", "H2O", "H+", "O2"))
   species(c("Al+3", "AlO2-", "AlOH+2", "AlO+", "HAlO2"))
   a <- affinity(pH = c(0, 10), IS = 0)
@@ -193,7 +193,7 @@ chnszten6 <- function(pdf = FALSE) {
   inorganics <- c("methane", "CO2", "HCO3-", "CO3-2")
   if(packageVersion("CHNOSZ") > "1.3.6") inorganics <- c("CH4", "CO2", "HCO3-", "CO3-2")
   organics <- c("formic acid", "formate", "acetic acid", "acetate", "propanoic acid", "propanoate")
-  add.obigt("DEW", c(inorganics, organics))
+  add.OBIGT("DEW", c(inorganics, organics))
   ## set basis species
   basis(c("Fe", "SiO2", "CO3-2", "H2O", "oxygen", "H+"))
   ## calculate logfO2 in QFM buffer
@@ -267,7 +267,7 @@ chnszten7 <- function(pdf = FALSE) {
   points(xT, xlogaSiO2)
   basis(delete = TRUE)
   ## first calculation: as in SUPCRT92
-  add.obigt("SUPCRT92") # gets kaolinite and boehmite from HDNB78
+  add.OBIGT("SUPCRT92") # gets kaolinite and boehmite from HDNB78
   r1 <- subcrt(c("boehmite", "H2O", "SiO2", "kaolinite"), c(-1, -0.5, -1, 0.5), T = T, P = 1000, exceed.Ttr = TRUE) 
   # we need exceed.Ttr = TRUE because the T limit for boehmite is 500 K (Helgeson et al., 1978)
   ## second calculation: CHNOSZ default
@@ -277,7 +277,7 @@ chnszten7 <- function(pdf = FALSE) {
   reset()
   r2 <- subcrt(c("boehmite", "H2O", "SiO2", "kaolinite"), c(-1, -0.5, -1, 0.5), T = T, P = 1000, exceed.Ttr = TRUE) 
   ## third calculation: get SiO2(aq) from SHS89
-  add.obigt("AS04")
+  add.OBIGT("AS04")
   r3 <- subcrt(c("boehmite", "H2O", "SiO2", "kaolinite"), c(-1, -0.5, -1, 0.5), T = T, P = 1000, exceed.Ttr = TRUE) 
   ## log activity of SiO2 is -ve logK
   lines(T, -r1$out$logK, col = "blue1", lty = 2)
@@ -289,7 +289,7 @@ chnszten7 <- function(pdf = FALSE) {
   title(main = describe.reaction(r1$reaction), cex.main = 1.1)
   legend("bottomright", lty = c(0, 2, 0, 1, 2), pch = c(1, NA, 4, NA, NA), lwd = c(1, 1, 1, 1.5, 1),
          col = c("black", "blue", "red", "black", "red"), bty = "n", cex = 0.9,
-         legend = c("Hemley et al., 1980", "SUPCRT92", "SUPCRTBL", "CHNOSZ", 'add.obigt("AS04")'))
+         legend = c("Hemley et al., 1980", "SUPCRT92", "SUPCRTBL", "CHNOSZ", 'add.OBIGT("AS04")'))
   legend("topleft", c("Boehmite - Kaolinite", "After Zhu and Lu, 2009 Fig. A1"), bty = "n")
   reset()
   # Helgeson et al., 1978 (HDNB78): http://www.worldcat.org/oclc/13594862
@@ -316,7 +316,7 @@ chnszten7 <- function(pdf = FALSE) {
   Daw1 <- subcrt(species, coeffs, T = T)
   lines(T, Daw1$out$logK, lwd = 1.5)
   # calculation 2: dawsonite with Cp = 0
-  mod.obigt("dawsonite", Cp = 0, a = 0, b = 0, c = 0)
+  mod.OBIGT("dawsonite", Cp = 0, a = 0, b = 0, c = 0)
   Daw2 <- subcrt(species, coeffs, T = T)
   lines(T, Daw2$out$logK, col = "red", lty = 2)
   ## add points calculated using the SUPCRTBL package
@@ -346,13 +346,13 @@ chnszten7 <- function(pdf = FALSE) {
   pK <- -sres$out$logK
   lines(invTK, pK, lwd = 1.5)
   # plot line: SiO2 from Apps and Spycher, 2004
-  add.obigt("AS04")
+  add.OBIGT("AS04")
   sres <- subcrt(c("kaolinite", "OH-", "H2O", "Al(OH)4-", "SiO2"), c(-1, -2, -1, 2, 2), T = T)
   pK <- -sres$out$logK
   lines(invTK, pK, col = "red", lty = 2)
   reset()
   # plot line: SUPCRT92
-  add.obigt("SUPCRT92")
+  add.OBIGT("SUPCRT92")
   sres <- subcrt(c("kaolinite", "OH-", "H2O", "Al(OH)4-", "SiO2"), c(-1, -2, -1, 2, 2), T = T)
   pK <- -sres$out$logK
   lines(invTK, pK, col = "blue", lty = 2)
@@ -366,7 +366,7 @@ chnszten7 <- function(pdf = FALSE) {
   par(xpd = FALSE)
   legend("topright", c("Kaolinite solubility", "After Tutolo et al., 2014 Fig. 2"), bty = "n")
   legend("bottomleft", lty = c(0, 0, 2, 0, 1, 2), pch = c(1, NA, NA, 4, NA, NA), lwd = c(1, 1, 1, 1, 1.5, 1), col = c("black", "black", "blue", "red", "black", "red"),
-         legend = c("Various sources \u2013", "  see Tutolo et al., 2014", "SUPCRT92", "SUPCRTBL", "CHNOSZ", 'add.obigt("AS04")'), bty = "n", cex = 0.9)
+         legend = c("Various sources \u2013", "  see Tutolo et al., 2014", "SUPCRT92", "SUPCRTBL", "CHNOSZ", 'add.OBIGT("AS04")'), bty = "n", cex = 0.9)
   reset()
 
   ###########
@@ -385,7 +385,7 @@ chnszten7 <- function(pdf = FALSE) {
   dat <- read.csv(system.file("extdata/cpetc/Mer75_Table4.csv", package = "CHNOSZ"))
   points(dat$log.aK..aH.., dat$log.aNa..aH..)
   # plot line calculated using SUPCRT92 data
-  add.obigt("SUPCRT92")
+  add.OBIGT("SUPCRT92")
   a <- affinity("K+" = c(4, 7), "Na+" = c(6, 9), T = 100, P = 150)
   diagram(a, col = "blue", lty = 2, add = TRUE, names = NULL)
   # add SUPCRTBL calculation
@@ -494,7 +494,7 @@ chnsztenS2 <- function(pdf = FALSE) {
   if(pdf) pdf("chnsztenS2.pdf", width=4, height=4)
   mar <- c(2.5, 3, 1, 1)
   mgp <- c(1.5, 0.3, 0)
-  add.obigt("SLOP98")
+  add.OBIGT("SLOP98")
   basis(c("Cu", "H2S", "Cl-", "H2O", "H+", "e-"))
   basis("H2S", -6)
   basis("Cl-", -0.7)
@@ -644,7 +644,7 @@ chnsztenS6A <- function(pdf = FALSE) {
   if(packageVersion("CHNOSZ") > "1.3.6") inorganics <- c("CH4", "CO2", "HCO3-", "CO3-2")
   organics <- c("formic acid", "formate", "acetic acid", "acetate", "propanoic acid", "propanoate")
   # skip updating acetate because the new data from the DEW spreadsheet give different logK
-  add.obigt("DEW", c(inorganics, organics[-4]))
+  add.OBIGT("DEW", c(inorganics, organics[-4]))
   ## set basis species
   basis(c("Fe", "SiO2", "CO3-2", "H2O", "oxygen", "H+"))
   ## calculate logfO2 in QFM buffer
@@ -737,7 +737,7 @@ chnsztenS6B <- function(pdf = FALSE) {
   if(packageVersion("CHNOSZ") > "1.3.6") inorganics <- c("CH4", "CO2", "HCO3-", "CO3-2")
   organics <- c("formic acid", "formate", "acetic acid", "acetate", "propanoic acid", "propanoate")
   # skip updating acetate because the new data from the DEW spreadsheet give different logK
-  add.obigt("DEW", c(inorganics, organics[-4]))
+  add.OBIGT("DEW", c(inorganics, organics[-4]))
   ## set basis species
   basis(c("Fe", "SiO2", "CO3-2", "H2O", "oxygen", "H+"))
   ## calculate logfO2 in QFM buffer
@@ -840,7 +840,7 @@ chnsztenS8 <- function(pdf = FALSE) {
 # compare gold solubility in HCh and CHNOSZ - hematite-magnetite buffer
 chnsztenS9 <- function(pdf = FALSE) {
   # use Helgeson et al., 1978 minerals here
-  add.obigt("SUPCRT92")
+  add.OBIGT("SUPCRT92")
   # set up plot
   if(pdf) pdf("chnsztenS9.pdf", width = 9, height = 7)
   par(mfrow = c(2, 2))
@@ -985,8 +985,8 @@ chnsztenS9 <- function(pdf = FALSE) {
   names.y <- c(-6.3, -6.9, -6.2, -5.7)
   text(names.x, names.y, names)
 
-  # close plot and reset obigt
-  obigt()
+  # close plot and reset OBIGT
+  OBIGT()
   if(pdf) {
     dev.off()
     addexif("chnsztenS9", "Compare gold solubility in HCh and CHNOSZ: hematite-magnetite buffer", "https://doi.org/10.3389/feart.2019.00180")
@@ -996,7 +996,7 @@ chnsztenS9 <- function(pdf = FALSE) {
 # compare gold solubility in HCh and CHNOSZ - pyrite-pyrrhotite-magnetite buffer
 chnsztenS10 <- function(pdf = FALSE) {
   # use Helgeson et al., 1978 minerals here
-  add.obigt("SUPCRT92")
+  add.OBIGT("SUPCRT92")
   # set up plot
   if(pdf) pdf("chnsztenS10.pdf", width = 9, height = 7)
   par(mfrow = c(2, 2))
@@ -1130,8 +1130,8 @@ chnsztenS10 <- function(pdf = FALSE) {
   text(names.x, names.y, names)
   lines(c(500, 500, NA, 520, 520), c(-8, -6.4, NA, -4.7, -6))
 
-  # close plot and reset obigt
-  obigt()
+  # close plot and reset OBIGT
+  OBIGT()
   if(pdf) {
     dev.off()
     addexif("chnsztenS10", "Compare gold solubility in HCh and CHNOSZ: pyrite-pyrrhotite-magnetite buffer", "https://doi.org/10.3389/feart.2019.00180")
