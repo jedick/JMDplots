@@ -29,7 +29,15 @@ This vignette from the R package [JMDplots](https://github.com/jedick/JMDplots) 
 library(JMDplots)
 ```
 
-## [Measured temperature and pH](https://doi.org/10.1371/journal.pone.0022782.g005)
+## Measured temperature and pH
 ```{r bison1, message = FALSE, fig.align='center', out.width='100%', fig.width = 6, fig.height = 3, pngquant = pngquant}
 bison1()
 ```
+[Original plot](https://doi.org/10.1371/journal.pone.0022782.g005).
+
+## Carbon oxidation state of proteins
+```{r bison2, message = FALSE, fig.align='center', out.width='100%', fig.width = 10, fig.height = 6, pngquant = pngquant}
+bison2()
+```
+Original plots: [functional annotations](https://doi.org/10.1371/journal.pone.0022782.g004) and [major phyla](https://doi.org/10.1371/journal.pone.0072395.g001).
+Compared to the papers, the y-axis is adjusted in order to have same scale on both plots; permease at lower `r ZC` does not appear in the first plot here.

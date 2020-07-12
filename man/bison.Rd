@@ -2,6 +2,7 @@
 \name{bison}
 \alias{bison}
 \alias{bison1}
+\alias{bison2}
 \title{Plots from Bison Pool hot spring papers}
 \description{
 Plots from the paper by Dick and Shock (2011 and 2013).
@@ -16,6 +17,7 @@ This table gives a brief description of each function.
 
 \tabular{ll}{
   \code{bison1} \tab Measured \T and pH \cr
+  \code{bison2} \tab Carbon oxidation state of proteins \cr
 }
 }
 
