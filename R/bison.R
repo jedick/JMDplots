@@ -38,7 +38,7 @@ bison2 <- function() {
   ZC.annot <- ZC(pf.annot)
   for(i in 1:length(classes)) {
     lines(1:5, ZC.annot[(1:5)+5*(i-1)], col = col[i], lwd = lwd[i], lty = lty[i])
-    if(classes[i]=="overall") text(0.95, ZC.annot[1+5*(i-1)], "ALL PROTEINS", adj = 1, font = 2)
+    if(classes[i]=="overall") text(0.95, ZC.annot[1+5*(i-1)], "all proteins", adj = 1, font = 2)
     else if(classes[i] %in% clab) text(0.95, ZC.annot[1+5*(i-1)], classes[i], adj = 1)
   }
   title(main = "Annotations")
@@ -227,10 +227,40 @@ bison7 <- function(equil.results) {
   points(bison.T, sapply(equil.results, "[", "logaH2.opt"), pch=21, bg="white", col = 3, lwd = 2)
   text(90, -5.3, "Equation 2")
   text(64, -9, "Optimized metastable\nequilibrium model", adj=0)
-
 }
 
-# Comparison of model and empirical abundances
+# Comparison of model and observed abundances
+bison8 <- function(equil.results) {
+  layout(matrix(c(1, 2, 3, 4, 5, 6), nrow = 2, byrow = TRUE), widths = c(2, 2, 2))
+  par(mar = c(2.5, 0, 2.5, 0))
+  plot.new()
+  legend("topright", pch = 19, legend = phyla.abbrv, bty = "n", cex = 1.5, col = phyla.cols, text.col = 0)
+  legend("topright", pch = 0:11, legend = phyla.abbrv, bty = "n", cex = 1.5)
+  lim <- c(-6, -0.5)
+  equil.opt <- a.blast <- alpha.blast()
+  for(iloc in 1:5) {
+    a.equil <- equil.results[[iloc]]
+    iopt <- match(a.equil$logaH2.opt, a.equil$H2vals)
+    ae.opt <- a.equil$alpha[iopt, ]
+    these.cols <- phyla.cols[match(colnames(a.equil$alpha), phyla.abc)]
+    # which are these phyla in the alphabetical list of phyla
+    iphy <- match(names(ae.opt), phyla.abc)
+    equil.opt[iloc, iphy] <- ae.opt
+    mar <- c(2.5, 4.0, 2.5, 1)
+    thermo.plot.new(xlab = expression(log[2]*alpha[obs]), ylab = expression(log[2]*alpha[equil]),
+      xlim = lim, ylim = lim, mar = mar, cex = 1, yline = 1.5)
+    # add points and 1:1 line
+    points(log2(a.blast[iloc, iphy]), log2(ae.opt), pch = 19, col = these.cols)
+    points(log2(a.blast[iloc, iphy]), log2(ae.opt), pch = iphy-1)
+    lines(lim, lim, lty = 2)
+    title(main = paste("site", iloc))
+    # within-plot legend: DGtr
+    DGexpr <- as.expression(quote(Delta*italic(G[tr])/italic(RT) == phantom()))
+    DGval <- format(round(2.303*a.equil$DGtr[iopt], 3), nsmall = 3)
+    legend("bottomright", bty = "n", legend = c(DGexpr, DGval))
+  }
+  invisible(equil.opt)
+}
 
 ### UNEXPORTED OBJECTS ###
 

@@ -21,6 +21,7 @@ Please refer to the supporting information of the papers for the original script
     \item \code{\link{chnszten}} - CHNOSZ, ten years after first CRAN submission (Dick, 2019)
     \item \code{\link{gradox}} - Carbon oxidation state of metagenomes in redox gradients (Dick et al., 2019)
     \item \code{\link{aoscp}} - Average oxidation state of carbon in proteins (Dick, 2014)
+    \item \code{\link{bison}} - Bison Pool hot spring (Dick and Shock, 2011, 2014)
     \item \code{\link{scsc}} - Subcellular locations of \emph{Saccharomyces cerevisiae} (Dick, 2009)
     \item \code{\link{aaaq}} - Amino acid group additivity for ionized proteins (Dick et al., 2006)
   }
@@ -61,8 +62,6 @@ Please refer to the supporting information of the papers for the original script
 \section{Other Papers}{
 
 This package does not include plots from \emph{all} papers by the author.
-Many plots from the papers by Dick and Shock (2011 and 2013) are available in the vignette \dQuote{Hot-spring proteins in CHNOSZ} (\url{../../CHNOSZ/doc/hotspring.pdf}).
-See also \code{demo("bison", "CHNOSZ")} for a colorful version of Figure 1 of Dick and Shock (2013) (\ZC plot for phyla in Bison Pool).
 The plots from Dick (2017) are in the vignettes for \pkg{canprot} (\url{../../canprot/doc/index.html}).
 See \code{demo("bugstab", "CHNOSZ")} for Figure 4 of Dick (2016) (relative stability diagram of microbial proteins in colorectal cancer) and \code{oldvignettes/colorectal.Rmd} in \pkg{canprot} for Figure 6 of Dick (2016) (relative stability diagram for differentially expressed proteins in various colorectal cancer datasets).
 

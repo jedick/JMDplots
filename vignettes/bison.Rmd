@@ -50,21 +50,21 @@ if (!nzchar(Sys.which("pngquant"))) pngquant <- NULL
 ZC <- "<i>Z</i><sub>C</sub>"
 ```
 
-This vignette from the R package [JMDplots](https://github.com/jedick/JMDplots) version `r packageDescription("JMDplots")$Version` contains plots from the papers by Dick and Shock (<a href="https://doi.org/10.1371/journal.pone.0022782" title="Calculation of the relative chemical stabilities of proteins as a function of temperature and redox chemistry in a hot spring">2011</a> and <a href="https://doi.org/10.1371/journal.pone.0072395" title="A metastable equilibrium model for the relative abundances of microbial phyla in a hot spring">2013</a>).
+This vignette from R package [JMDplots](https://github.com/jedick/JMDplots) version `r packageDescription("JMDplots")$Version` contains plots from the papers by Dick and Shock (<a href="https://doi.org/10.1371/journal.pone.0022782" title="Calculation of the relative chemical stabilities of proteins as a function of temperature and redox chemistry in a hot spring">2011</a> and <a href="https://doi.org/10.1371/journal.pone.0072395" title="A metastable equilibrium model for the relative abundances of microbial phyla in a hot spring">2013</a>).
 
 ```{r JMDplots, message = FALSE, results = "hide"}
 library(JMDplots)
 ```
 
 The current OBIGT database in CHNOSZ has updates for the methionine sidechain group from @LD12 and the glycine group and protein backbone [UPBB] from @Kit14.
-In order to reproduce the calculations from the 2011 paper, we load the old values from @DLH06.
+In order to reproduce the calculations from the 2011 paper, we start by loading the old values from @DLH06.
 
 ```{r add.OBIGT, message = FALSE, results = "hide"}
 add.OBIGT("OldAA")
 ```
 
 ## Measured temperature and pH
-```{r bison1, message = FALSE, fig.align='center', out.width='100%', fig.width = 6, fig.height = 3, pngquant = pngquant}
+```{r bison1, message = FALSE, fig.align='center', out.width='80%', fig.width = 6, fig.height = 3, pngquant = pngquant}
 bison1()
 ```
 [Link to original figure](https://doi.org/10.1371/journal.pone.0022782.g005).
@@ -93,7 +93,7 @@ These per-residue affinities are expressed as dimensionless values, i.e. *A*/(2.
 The affinities are all negative, but are higher (more positive) for the reaction to form model protein 1 at sites 1 and 2 and to form model protein 4 at sites 3--5.
 
 ## Relative stabilities along a temperature and chemical gradient
-```{r bison4, message = FALSE, fig.align='center', out.width='100%', fig.width = 6, fig.height = 3, pngquant = pngquant}
+```{r bison4, message = FALSE, fig.align='center', out.width='80%', fig.width = 6, fig.height = 3, pngquant = pngquant}
 bison4()
 ```
 [Link to original figure](https://doi.org/10.1371/journal.pone.0022782.g005).
@@ -109,7 +109,7 @@ bison5()
 [Link to original figure](https://doi.org/10.1371/journal.pone.0072395.g002).
 The first row of plots is made using group additivity parameters from @DLH06; the second is made with updates for the methionine sidechain from @LD12 and the glycine sidechain and protein backbone group from @Kit14.
 Note the appearance of a stability field for site 3 for some classes of proteins.
-The remaining figures in this vignette use the updated parameters (i.e. the default values in OBIGT).
+The remaining figures in this vignette use the updated parameters (i.e. the current default values in OBIGT).
 
 ## Metastable equilibrium model for relative abundances
 ```{r bison6, message = FALSE, fig.align='center', out.width='100%', fig.width = 8, fig.height = 6, pngquant = pngquant}
@@ -130,5 +130,11 @@ The plot on the right, from the 2011 paper, shows effective values of log*a*~H2~
 The different redox reactions are clearly not in mutual equilibrium, but they all indicate relatively oxidizing conditions at lower temperatures.
 Equation 2 is derived from the relative stabilities of proteins *across* sites (see above).
 The plot on the right, from the 2013 paper, shows the results of optimizing the metastable equilibrium model for phylum abundances *within* sites.
+
+## Comparison of model and observed abundances
+```{r bison8, message = FALSE, fig.align='center', out.width='100%', fig.width = 9, fig.height = 6, pngquant = pngquant}
+bison8(equil.results)
+```
+[Link to original figure](https://doi.org/10.1371/journal.pone.0072395.g005).
 
 ## References

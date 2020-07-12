@@ -8,6 +8,7 @@
 \alias{bison5}
 \alias{bison6}
 \alias{bison7}
+\alias{bison8}
 \title{Plots from Bison Pool hot spring papers}
 \description{
 Plots from the papers by Dick and Shock (2011 and 2013).
@@ -21,6 +22,7 @@ Plots from the papers by Dick and Shock (2011 and 2013).
   bison5()
   bison6()
   bison7(equil.results)
+  bison8(equil.results)
 }
 
 \arguments{
@@ -38,6 +40,7 @@ This table gives a brief description of each function.
   \code{bison5} \tab Comparing old and new methionine sidechain parameters \cr
   \code{bison6} \tab Metastable equilibrium model for relative abundances \cr
   \code{bison7} \tab Activity of hydrogen comparison \cr
+  \code{bison8} \tab Comparison of model and observed abundances \cr
 }
 }
 
