@@ -1,6 +1,6 @@
 # JMDplots/bison.R
 # Plots from hot spring (Bison Pool) papers (2011, 2013)
-# Code moved from CHNOSZ/hotspring.Rnw 20200712
+# Code moved from CHNOSZ/vignettes/hotspring.Rnw 20200712
 
 # This is used in the vignette to reproduce the 2011 calculations
 #add.obigt("OldAA")
@@ -12,16 +12,14 @@ bison1 <- function() {
   plot(extendrange(distance), extendrange(bison.T), xlab = "Distance, m", ylab = axis.label("T"), type = "n")
   lines(xpoints, Tfun(xpoints))
   points(distance, bison.T, pch = 21, bg = "white", cex = 2)
-  # col <- rev(hcl.colors(5, "Temps", 0.5))
-  col <- c("#CF597E80", "#E99F6980", "#EAE29C80", "#6CC38280", "#08939280")
-  points(distance, bison.T, pch = 21, bg = col, cex = 2)
+  points(distance, bison.T, pch = 21, bg = site.cols.alpha, cex = 2)
   text(distance, bison.T, 1:5, cex = 0.8)
 
   # pH plot
   plot(extendrange(distance), extendrange(bison.pH), xlab = "Distance, m", ylab = "pH", type = "n")
   lines(xpoints, pHfun(xpoints))
   points(distance, bison.pH, pch = 21, bg = "white", cex = 2)
-  points(distance, bison.pH, pch = 21, bg = col, cex = 2)
+  points(distance, bison.pH, pch = 21, bg = site.cols.alpha, cex = 2)
   text(distance, bison.pH, 1:5, cex = 0.8)
 }
 
@@ -40,8 +38,8 @@ bison2 <- function() {
   ZC.annot <- ZC(pf.annot)
   for(i in 1:length(classes)) {
     lines(1:5, ZC.annot[(1:5)+5*(i-1)], col = col[i], lwd = lwd[i], lty = lty[i])
-    if(classes[i]=="overall") text(0.8, ZC.annot[1+5*(i-1)], "ALL PROTEINS", adj = 1, font = 2)
-    else if(classes[i] %in% clab) text(0.8, ZC.annot[1+5*(i-1)], classes[i], adj = 1)
+    if(classes[i]=="overall") text(0.95, ZC.annot[1+5*(i-1)], "ALL PROTEINS", adj = 1, font = 2)
+    else if(classes[i] %in% clab) text(0.95, ZC.annot[1+5*(i-1)], classes[i], adj = 1)
   }
   title(main = "Annotations")
 
@@ -96,7 +94,8 @@ bison4 <- function() {
   # first plot
   a <- affinity(T = Tlim, H2 = c(-7, -4))
   diagram(a, fill = NULL, names = as.character(1:5), normalize = TRUE)
-  lines(Tlim, get.logaH2(Tlim), lty = 3)
+  lines(Tlim, get.logaH2(Tlim), lty = 3, col = 4, lwd = 2)
+  text(68, -6.8, "Equation 2")
   # second plot
   species(1:5, -3)
   xT <- Tfun(xpoints)
@@ -106,8 +105,10 @@ bison4 <- function() {
   a$vars[1] <- "Distance, m"
   a$vals[[1]] <- xpoints
   e <- equilibrate(a, normalize = TRUE)
-  diagram(e, legend.x = NULL)
-  legend("bottom", lty = 1:5, legend = 1:5, bty = "n", cex = 0.6)
+  diagram(e, legend.x = NULL, lty = 1, lwd = 2)
+  diagram(e, legend.x = NULL, col = site.cols, lwd = 2, add = TRUE)
+  # labels for the lines
+  text(c(4, 8, 14, 19, 18), c(-2.81, -2.89, -3.06, -2.85, -2.94), 1:5)
 }
 
 # Comparing old and new group additivity parameters
@@ -126,12 +127,110 @@ bison5 <- function() {
       a <- affinity(T = c(50, 100), H2 = c(-7, -4), iprotein = ip)
       diagram(a, fill = NULL, names = as.character(1:5), normalize = TRUE)
       # add logaH2-T line
-      lines(par("usr")[1:2], get.logaH2(par("usr")[1:2]), lty=3)
+      lines(par("usr")[1:2], get.logaH2(par("usr")[1:2]), lty=3, col = 4, lwd = 2)
       # add a title
       title(main=annot)
     }
   }
 }
+
+# Metastable equilibrium model for relative abundances
+bison6 <- function() {
+  ip.phyla <- add.protein(aa.phyla)
+  layout(matrix(1:6, ncol=3), heights=c(2, 1))
+  equil.results <- list()
+  for(i in 1:5) {
+    # get the equilibrium degrees of formation and the optimal logaH2
+    ae <- alpha.equil(i, ip.phyla)
+    equil.results[[i]] <- ae
+    if(i %in% c(1, 3, 5)) {
+      iphy <- match(colnames(ae$alpha), phyla.abc)
+      # top row: equilibrium degrees of formation
+      thermo.plot.new(xlim = range(ae$H2vals), ylim = c(0, 0.5), xlab = axis.label("H2"),
+        ylab=expression(alpha[equil]), yline = 2, cex.axis = 1, mgp = c(1.8, 0.3, 0))
+      these.cols <- phyla.cols[match(colnames(ae$alpha), phyla.abc)]
+      for(j in 1:ncol(ae$alpha)) {
+        lines(ae$H2vals, ae$alpha[, j], lwd = 1.5)
+        lines(ae$H2vals, ae$alpha[, j], lty = phyla.lty[iphy[j]], col = these.cols[j])
+        ix <- seq(1, length(ae$H2vals), length.out = 11)
+        ix <- head(tail(ix, -1), -1)
+        points(ae$H2vals[ix], ae$alpha[, j][ix], pch = iphy[j]-1, col = these.cols[j])
+      }
+      title(main=paste("site", i))
+      legend("topleft", legend = phyla.abbrv[iphy], pch = ".", bg = "white", lty = 1, lwd = 1.5)
+      legend("topleft", legend = rep("", length(iphy)), pch = iphy-1, lty = phyla.lty[iphy], col = these.cols, bty = "n")
+      # bottom row: Gibbs energy of transformation and position of minimum
+      thermo.plot.new(xlim = range(ae$H2vals), ylim = c(0, 1/log(10)), xlab = axis.label("H2"),
+        ylab = expr.property("DGtr/2.303RT"), yline = 2, cex.axis = 1, mgp = c(1.8, 0.3, 0))
+      lines(ae$H2vals, ae$DGtr)
+      abline(v = ae$logaH2.opt, lty = 2, lwd = 2, col = 3)
+      abline(v=get.logaH2(bison.T[i]), lty = 3, lwd = 2, col = 4)
+      if(i==1) legend("bottomleft", lty = c(3, 2), lwd = c(2, 2), col = c(4, 3),
+        bg = "white", legend = c("Equation 2", "Optimized"))
+    }
+  }
+  invisible(equil.results)
+}
+
+# Activity of hydrogen comparison
+bison7 <- function(equil.results) {
+  par(mfrow = c(1, 2), mar = c(3.5, 3.5, 1, 1), mgp = c(2.5, 1, 0), las = 1)
+
+  # Potential of silver-silver chloride electrode in saturated KCl
+  # (Bard et al., 1985; http://www.worldcat.org/oclc/12106344)
+  E.AgAgCl <- function(T) {
+    0.23737 - 5.3783e-4 * T - 2.3728e-6 * T^2 - 2.2671e-9 * (T+273)
+  }
+  # Meter readings at Bison Pool and Mound Spring
+  ORP <- c(-258, -227, -55, -58, -98, -41)
+  T.ORP <- c(93.9, 87.7, 75.7, 70.1, 66.4, 66.2)
+  pH.ORP <- c(8.28, 8.31, 7.82, 7.96, 8.76, 8.06)
+  # Convert ORP to Eh, then pe, then logaH2
+  Eh <- ORP/1000 + E.AgAgCl(T.ORP)
+  pe <- convert(Eh, "pe", T = convert(T.ORP, "K"))
+  logK.ORP <- subcrt(c("e-", "H+", "H2"), c(-2, -2, 1), T = T.ORP)$out$logK
+  logaH2.ORP <- logK.ORP - 2*pe - 2*pH.ORP
+
+  # Sulfide and sulfate concentrations from 2005
+  loga.HS <- log10(c(4.77e-6, 2.03e-6, 3.12e-7, 4.68e-7, 2.18e-7))
+  loga.SO4 <- log10(c(2.10e-4, 2.03e-4, 1.98e-4, 2.01e-4, 1.89e-4))
+  # Convert sulfide/sulfate ratio to logaH2
+  logK.S <- subcrt(c("HS-", "H2O", "SO4-2", "H+", "H2"), c(-1, -4, 1, 1, 4), T=bison.T)$out$logK
+  logaH2.S <- (logK.S + bison.pH - loga.SO4 + loga.HS) / 4
+
+  # Dissolved oxygen measurements (mg/L)
+  DO <- c(0.173, 0.776, 0.9, 1.6, 2.8)
+  # Convert to log molarity (log activity) then to logaH2
+  logaO2 <- log10(DO/1000/32)
+  logK <- subcrt(c("O2", "H2", "H2O"), c(-0.5, -1, 1), T=bison.T)$out$logK
+  logaH2.O <- 0 - 0.5*logaO2 - logK
+
+  # 2011 plot
+  xlab <- axis.label("T")
+  ylab <- axis.label("H2")
+  Tlim <- c(50, 100)
+  plot(Tlim, get.logaH2(Tlim), xlim=Tlim, ylim=c(-45,0),
+    xlab=xlab, ylab=ylab, type="l", lty=3, col = 4, lwd = 2)
+  points(T.ORP, logaH2.ORP, pch=15)
+  lines(T.ORP, logaH2.ORP, lty=2)
+  points(bison.T, logaH2.O, pch=16)
+  lines(bison.T, logaH2.O, lty=2)
+  points(bison.T, logaH2.S, pch=17)
+  lines(bison.T, logaH2.S, lty=2)
+  llab <- c("Equation 2", "ORP", "dissolved oxygen", "sulfate/sulfide")
+  text(c(65, 80, 80, 74), c(-4, -25, -40, -11), llab)
+
+  # 2013 plot
+  plot(Tlim, get.logaH2(Tlim), xlim=Tlim, ylim=c(-11,-2),
+    xlab=xlab, ylab=ylab, type="l", lty=3, col = 4, lwd = 2)
+  lines(bison.T, sapply(equil.results, "[", "logaH2.opt"), lty=2, col = 3, lwd = 2)
+  points(bison.T, sapply(equil.results, "[", "logaH2.opt"), pch=21, bg="white", col = 3, lwd = 2)
+  text(90, -5.3, "Equation 2")
+  text(64, -9, "Optimized metastable\nequilibrium model", adj=0)
+
+}
+
+# Comparison of model and empirical abundances
 
 ### UNEXPORTED OBJECTS ###
 
@@ -159,11 +258,17 @@ phyla.abc <- sort(unique(aa.phyla$organism))[c(1:7,9:11,8)]
 # an abbreviation for Dein.-Thermus
 phyla.abbrv <- phyla.abc
 phyla.abbrv[[11]] <- "Dein.-Thermus"
-# colors modified from Wu and Eisen, 2008
+# colors modified from Wu and Eisen, 2008 (doi:10.1186/gb-2008-9-10-r151)
 phyla.cols <- c("#f48ba5", "#f2692f", "#cfdd2a",
   "#962272", "#87c540", "#66c3a2", "#12a64a", "#f58656",
   "#ee3237", "#25b7d5", "#3953a4")
 phyla.lty <- c(1:6, 1:5)
+
+# colors for sites (added 20200712)
+# rev(hcl.colors(5, "Temps"))
+site.cols <- c("#CF597E", "#E99F69", "#EAE29C", "#6CC382", "#089392")
+# rev(hcl.colors(5, "Temps", 0.5))
+site.cols.alpha <- c("#CF597E80", "#E99F6980", "#EAE29C80", "#6CC38280", "#08939280")
 
 # function to load basis species
 setup.basis <- function() {
@@ -174,3 +279,35 @@ setup.basis <- function() {
 # function for model logaH2 (linear function of T)
 get.logaH2 <- function(T) -11 + T * 3/40
 
+# Function to return the fractional abundances based on BLAST counts
+alpha.blast <- function() {
+  out <- xtabs(ref ~ protein + organism, aa.phyla)
+  # put it in correct order, then turn counts into fractions
+  out <- out[c(1,5:2), c(1:7,9:11,8)]
+  out <- out/rowSums(out)
+  return(out)
+}
+
+# Function to calculate metastable equilibrium degrees of formation of proteins
+# (normalized to residues) as a function of logaH2 for a specified location
+alpha.equil <- function(i = 1, ip.phyla) {
+  # order the names and counts to go with the alphabetical phylum list
+  iloc <- which(aa.phyla$protein==sitenames[i])
+  iloc <- iloc[order(match(aa.phyla$organism[iloc], phyla.abc))]
+  # set up basis species, with pH specific for this location
+  setup.basis()
+  basis("pH", bison.pH[i])
+  # calculate metastable equilibrium activities of the residues
+  a <- affinity(H2 = c(-11, -1, 101), T = bison.T[i], iprotein = ip.phyla[iloc])
+  e <- equilibrate(a, loga.balance = 0, as.residue = TRUE)
+  # remove the logarithms to get relative abundances
+  a.residue <- 10^sapply(e$loga.equil, c)
+  colnames(a.residue) <- aa.phyla$organism[iloc]
+  # the BLAST profile
+  a.blast <- alpha.blast()
+  # calculate Gibbs energy of transformation (DGtr) and find optimal logaH2
+  iblast <- match(colnames(a.residue), colnames(a.blast))
+  r <- revisit(e, "DGtr", log10(a.blast[i, iblast]), plot.it = FALSE)
+  # return the calculated activities, logaH2 range, DGtr values, and optimal logaH2
+  return(list(alpha = a.residue, H2vals = a$vals[[1]], DGtr = r$H, logaH2.opt = r$xopt))
+}

@@ -6,6 +6,8 @@
 \alias{bison3}
 \alias{bison4}
 \alias{bison5}
+\alias{bison6}
+\alias{bison7}
 \title{Plots from Bison Pool hot spring papers}
 \description{
 Plots from the papers by Dick and Shock (2011 and 2013).
@@ -13,6 +15,16 @@ Plots from the papers by Dick and Shock (2011 and 2013).
 
 \usage{
   bison1()
+  bison2()
+  bison3()
+  bison4()
+  bison5()
+  bison6()
+  bison7(equil.results)
+}
+
+\arguments{
+  \item{equil.results}{list, value returned by \code{bison6}}
 }
 
 \details{
@@ -24,6 +36,8 @@ This table gives a brief description of each function.
   \code{bison3} \tab Chemical affinities (table) \cr
   \code{bison4} \tab Relative stabilities along a temperature and chemical gradient \cr
   \code{bison5} \tab Comparing old and new methionine sidechain parameters \cr
+  \code{bison6} \tab Metastable equilibrium model for relative abundances \cr
+  \code{bison7} \tab Activity of hydrogen comparison \cr
 }
 }
 

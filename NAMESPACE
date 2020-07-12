@@ -34,7 +34,7 @@ export(
   # 20200508
   "pdat_yeast_stress",
   # Bison Pool papers 20200712
-  "bison1", "bison2", "bison3", "bison4", "bison5"
+  "bison1", "bison2", "bison3", "bison4", "bison5", "bison6", "bison7"
 )
 
 # imports from CHNOSZ
@@ -56,7 +56,9 @@ importFrom("CHNOSZ",
   # fifth batch: scsc
   "aasum", "add.protein", "label.plot",
   # sixth batch: aaaq
-  "water.lines", "pinfo", "ionize.aa"
+  "water.lines", "pinfo", "ionize.aa",
+  # for bison
+  "revisit"
 )
 
 # imports from canprot
@@ -100,7 +102,7 @@ importFrom("graphics", "abline", "arrows", "axis", "box", "layout",
            "polygon", "hist", "plot.window", "rasterImage")
 importFrom("stats", "lm", "na.omit", "predict", "sd", "predict.lm", "residuals",
            "qqline", "qqnorm", "quantile", "median", "fivenum",
-           "density", "formula", "t.test", "approx", "splinefun")
+           "density", "formula", "t.test", "approx", "splinefun", "xtabs")
 importFrom("utils", "read.csv", "demo", "packageVersion", "tail", "write.csv",
            "capture.output", "browseURL", "head")
 

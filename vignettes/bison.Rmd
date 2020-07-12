@@ -71,11 +71,11 @@ bison1()
 The lines are spline fits that represent smooth changes in *T* and pH that are used for some plots below.
 
 ## Carbon oxidation state of proteins
-```{r bison2, message = FALSE, out.width='100%', fig.width = 13, fig.height = 6.5, out.extra='class="full-width"', pngquant = pngquant}
+```{r bison2, message = FALSE, out.width='100%', fig.width = 12, fig.height = 6, out.extra='class="full-width"', pngquant = pngquant}
 bison2()
 ```
 
-Link to original figures: [functional annotations](https://doi.org/10.1371/journal.pone.0022782.g004) and [major phyla](https://doi.org/10.1371/journal.pone.0072395.g001).
+Links to original figures: [functional annotations](https://doi.org/10.1371/journal.pone.0022782.g004) and [major phyla](https://doi.org/10.1371/journal.pone.0072395.g001).
 
 ## Chemical affinities 
 ```{r bison3, message = FALSE, results = "as.is"}
@@ -99,6 +99,7 @@ bison4()
 [Link to original figure](https://doi.org/10.1371/journal.pone.0022782.g005).
 The first plot is a theoretical predominance diagram for the overall model proteins from each site as a function of temperature and activity of hydrogen.
 The dotted line is placed so that it passes through the stability fields of the proteins at approximately the actual temperatures where they are located in the hot spring.
+This is Equation 2 in the 2011 paper: log*a*~H2~ = -11 + (3/40) *T*,°C.
 The second plot shows the effect of changing both temperature and pH (interpolated from measured values) together with log*a*~H2~ (from the line in the first plot) on the predicted relative abundances of the proteins in metastable equilibrium.
 
 ## Comparing old and new group additivity parameters
@@ -107,7 +108,27 @@ bison5()
 ```
 [Link to original figure](https://doi.org/10.1371/journal.pone.0072395.g002).
 The first row of plots is made using group additivity parameters from @DLH06; the second is made with updates for the methionine sidechain from @LD12 and the glycine sidechain and protein backbone group from @Kit14.
-Note the appearance of a stability field for the model proteins from site 3.
+Note the appearance of a stability field for site 3 for some classes of proteins.
 The remaining figures in this vignette use the updated parameters (i.e. the default values in OBIGT).
+
+## Metastable equilibrium model for relative abundances
+```{r bison6, message = FALSE, fig.align='center', out.width='100%', fig.width = 8, fig.height = 6, pngquant = pngquant}
+equil.results <- bison6()
+```
+[Link to original figure](https://doi.org/10.1371/journal.pone.0072395.g003).
+The top row shows calculated relative abundances of the phyla based on metastable equilibrium among the model proteins as a function of log*a*~H2~.
+The bottom row shows the Gibbs energy of transformation (Δ*G~tr~*) between the equilibrium and actual relative abundances.
+Lines are drawn at values calculated with Equation 2 (see above) and at the minimum Δ*G~tr~*, i.e. the optimal values of log*a*~H2~ for the model.
+Plots are made for only three sites, but the function returns results for all five sites, which are used below.
+
+## Activity of hydrogen comparison
+```{r bison7, message = FALSE, fig.align='center', out.width='100%', fig.width = 8, fig.height = 3.5, pngquant = pngquant}
+bison7(equil.results)
+```
+Links to original figures: [2011](https://doi.org/10.1371/journal.pone.0022782.g009), [2013](https://doi.org/10.1371/journal.pone.0072395.g004)
+The plot on the right, from the 2011 paper, shows effective values of log*a*~H2~ calculated from oxidation-reduction potential (ORP) measurements in 2009 and sulfate/sulfide ratios and dissolved oxygen concentrations measured in 2005.
+The different redox reactions are clearly not in mutual equilibrium, but they all indicate relatively oxidizing conditions at lower temperatures.
+Equation 2 is derived from the relative stabilities of proteins *across* sites (see above).
+The plot on the right, from the 2013 paper, shows the results of optimizing the metastable equilibrium model for phylum abundances *within* sites.
 
 ## References
