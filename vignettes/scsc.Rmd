@@ -1,10 +1,10 @@
 ---
-title: "Two plots from yeast subcellular location paper (2009)"
+title: "Yeast subcellular location (2009)"
 output: 
   rmarkdown::html_vignette:
     mathjax: null
 vignette: >
-  %\VignetteIndexEntry{Two plots from yeast subcellular location paper (2009)}
+  %\VignetteIndexEntry{Yeast subcellular location (2009)}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---

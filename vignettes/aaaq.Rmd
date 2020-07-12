@@ -1,10 +1,10 @@
 ---
-title: "Three plots from amino acid group additivity paper (2006)"
+title: "Amino acid group additivity (2006)"
 output: 
   rmarkdown::html_vignette:
     mathjax: null
 vignette: >
-  %\VignetteIndexEntry{Three plots from amino acid group additivity paper (2006)}
+  %\VignetteIndexEntry{Amino acid group additivity (2006)}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---

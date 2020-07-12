@@ -1,10 +1,10 @@
 ---
-title: "Seven plots from oxidation state of carbon paper (2014)"
+title: "Oxidation state of carbon (2014)"
 output: 
   rmarkdown::html_vignette:
     mathjax: null
 vignette: >
-  %\VignetteIndexEntry{Seven plots from oxidation state of carbon paper (2014)}
+  %\VignetteIndexEntry{Oxidation state of carbon (2014)}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
