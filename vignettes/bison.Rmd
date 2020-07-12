@@ -11,6 +11,31 @@ bibliography: JMDplots.bib
 csl: elementa.csl
 ---
 
+<style>
+/* https://gomakethings.com/how-to-break-an-image-out-of-its-parent-container-with-css/ */
+@media (min-width: 700px) {
+  .full-width {
+    left: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+    max-width: 100vw;
+    position: relative;
+    right: 50%;
+    width: 100vw;
+  }
+}
+@media (min-width: 1020px) {
+  .full-width {
+    left: 50vw; /* fallback if needed */
+    left: calc(50vw - 160px);
+    width: 1000px;
+    position: relative;
+    background-color: #9ecff7;
+    padding:10px;
+  }
+}
+</style>
+
 ```{r setup, include=FALSE}
 library(knitr)
 ## use pngquant to reduce size of PNG images
@@ -42,14 +67,15 @@ add.OBIGT("OldAA")
 ```{r bison1, message = FALSE, fig.align='center', out.width='100%', fig.width = 6, fig.height = 3, pngquant = pngquant}
 bison1()
 ```
-[Link to original plot](https://doi.org/10.1371/journal.pone.0022782.g005).
+[Link to original figure](https://doi.org/10.1371/journal.pone.0022782.g005).
+The lines are spline fits that represent smooth changes in *T* and pH that are used for some plots below.
 
 ## Carbon oxidation state of proteins
-```{r bison2, message = FALSE, fig.align='center', out.width='100%', fig.width = 10, fig.height = 6, pngquant = pngquant}
+```{r bison2, message = FALSE, out.width='100%', fig.width = 13, fig.height = 6.5, out.extra='class="full-width"', pngquant = pngquant}
 bison2()
 ```
-Link to original plots: [functional annotations](https://doi.org/10.1371/journal.pone.0022782.g004) and [major phyla](https://doi.org/10.1371/journal.pone.0072395.g001).
-Compared to the papers, the *y* axis is adjusted in order to have same scale on both plots; permease at lower `r ZC` does not appear in the first plot here.
+
+Link to original figures: [functional annotations](https://doi.org/10.1371/journal.pone.0022782.g004) and [major phyla](https://doi.org/10.1371/journal.pone.0072395.g001).
 
 ## Chemical affinities 
 ```{r bison3, message = FALSE, results = "as.is"}
@@ -65,5 +91,23 @@ structure(htmltab, format = "html", class = "knitr_kable")
 [Link to original table](https://doi.org/10.1371/journal.pone.0022782.t005).
 These per-residue affinities are expressed as dimensionless values, i.e. *A*/(2.303*RT*) where *A*, *R* and *T* stand for chemical affinity, gas constant, and temperature in Kelvin.
 The affinities are all negative, but are higher (more positive) for the reaction to form model protein 1 at sites 1 and 2 and to form model protein 4 at sites 3--5.
+
+## Relative stabilities along a temperature and chemical gradient
+```{r bison4, message = FALSE, fig.align='center', out.width='100%', fig.width = 6, fig.height = 3, pngquant = pngquant}
+bison4()
+```
+[Link to original figure](https://doi.org/10.1371/journal.pone.0022782.g005).
+The first plot is a theoretical predominance diagram for the overall model proteins from each site as a function of temperature and activity of hydrogen.
+The dotted line is placed so that it passes through the stability fields of the proteins at approximately the actual temperatures where they are located in the hot spring.
+The second plot shows the effect of changing both temperature and pH (interpolated from measured values) together with log*a*~H2~ (from the line in the first plot) on the predicted relative abundances of the proteins in metastable equilibrium.
+
+## Comparing old and new group additivity parameters
+```{r bison5, message = FALSE, fig.align='center', out.width='100%', fig.width = 6, fig.height = 4, pngquant = pngquant}
+bison5()
+```
+[Link to original figure](https://doi.org/10.1371/journal.pone.0072395.g002).
+The first row of plots is made using group additivity parameters from @DLH06; the second is made with updates for the methionine sidechain from @LD12 and the glycine sidechain and protein backbone group from @Kit14.
+Note the appearance of a stability field for the model proteins from site 3.
+The remaining figures in this vignette use the updated parameters (i.e. the default values in OBIGT).
 
 ## References

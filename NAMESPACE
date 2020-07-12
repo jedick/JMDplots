@@ -34,7 +34,7 @@ export(
   # 20200508
   "pdat_yeast_stress",
   # Bison Pool papers 20200712
-  "bison1", "bison2", "bison3"
+  "bison1", "bison2", "bison3", "bison4", "bison5"
 )
 
 # imports from CHNOSZ

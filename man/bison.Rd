@@ -4,6 +4,8 @@
 \alias{bison1}
 \alias{bison2}
 \alias{bison3}
+\alias{bison4}
+\alias{bison5}
 \title{Plots from Bison Pool hot spring papers}
 \description{
 Plots from the papers by Dick and Shock (2011 and 2013).
@@ -20,6 +22,8 @@ This table gives a brief description of each function.
   \code{bison1} \tab Measured \T and pH \cr
   \code{bison2} \tab Carbon oxidation state of proteins \cr
   \code{bison3} \tab Chemical affinities (table) \cr
+  \code{bison4} \tab Relative stabilities along a temperature and chemical gradient \cr
+  \code{bison5} \tab Comparing old and new methionine sidechain parameters \cr
 }
 }
 
