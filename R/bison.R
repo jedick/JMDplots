@@ -2,13 +2,11 @@
 # Plots from hot spring (Bison Pool) papers (2011, 2013)
 # Code moved from CHNOSZ/hotspring.Rnw 20200712
 
+# This is used in the vignette to reproduce the 2011 calculations
 #add.obigt("OldAA")
 
 # Measured temperature and pH
 bison1 <- function() {
-  bison.T <- c(93.3, 79.4, 67.5, 65.3, 57.1)
-  bison.pH <- c(7.350, 7.678, 7.933, 7.995, 8.257)
-
   distance <- c(0, 6, 11, 14, 22)
   par(mfrow = c(1, 2), mar = c(4, 4, 3, 2))
   xpoints <- seq(0, 22, length.out = 128)
@@ -63,14 +61,33 @@ bison2 <- function() {
   title(main = "Major phyla")
 }
 
+# Chemical affinities
+bison3 <- function() {
+  setup.basis()
+  ip.annot <- add.protein(aa.annot)
+  pl <- protein.length(ip.annot[1:5])
+  species("overall", sitenames)
+  species(1:5, 0)
+  a <- affinity(T = bison.T, pH = bison.pH, H2 = get.logaH2(bison.T))
+  a.res <- t(as.data.frame(a$values))/pl
+  colnames(a.res) <- paste0("site", 1:5)
+  rownames(a.res) <- paste0("reaction", 1:5)
+  a.res
+}
+
 ### UNEXPORTED OBJECTS ###
+
+# names for sites 1-5
+sites <- c("N", "S", "R", "Q", "P")
+sitenames <- paste("bison", sites, sep = "")
+
+# measured T and pH values
+bison.T <- c(93.3, 79.4, 67.5, 65.3, 57.1)
+bison.pH <- c(7.350, 7.678, 7.933, 7.995, 8.257)
 
 # read the amino acid compositions
 aa.annot <- read.csv(system.file("extdata/protein/DS11.csv", package = "CHNOSZ"), as.is = TRUE)
 aa.phyla <- read.csv(system.file("extdata/protein/DS13.csv", package = "CHNOSZ"), as.is = TRUE)
-# names for sites 1-5
-sites <- c("N", "S", "R", "Q", "P")
-sitenames <- paste("bison", sites, sep = "")
 # functional annotations
 classes <- unique(aa.annot$protein)
 # the names of the phyla in alphabetical order (except Deinococcus-Thermus at end)
@@ -83,3 +100,13 @@ phyla.cols <- c("#f48ba5", "#f2692f", "#cfdd2a",
   "#962272", "#87c540", "#66c3a2", "#12a64a", "#f58656",
   "#ee3237", "#25b7d5", "#3953a4")
 phyla.lty <- c(1:6, 1:5)
+
+# function to load basis species
+setup.basis <- function() {
+  basis(c("HCO3-", "H2O", "NH3", "HS-", "H2", "H+"))
+  basis(c("HCO3-", "NH3", "HS-", "H+"), c(-3, -4, -7, -7.933))
+}
+
+# function for model logaH2 (linear function of T)
+get.logaH2 <- function(T) -11 + T * 3/40
+

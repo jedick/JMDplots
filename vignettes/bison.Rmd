@@ -7,6 +7,8 @@ vignette: >
   %\VignetteIndexEntry{Bison Pool hot spring (2011, 2013)}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
+bibliography: JMDplots.bib
+csl: elementa.csl
 ---
 
 ```{r setup, include=FALSE}
@@ -29,15 +31,39 @@ This vignette from the R package [JMDplots](https://github.com/jedick/JMDplots) 
 library(JMDplots)
 ```
 
+The current OBIGT database in CHNOSZ has updates for the methionine sidechain group from @LD12 and the glycine group and protein backbone [UPBB] from @Kit14.
+In order to reproduce the calculations from the 2011 paper, we load the old values from @DLH06.
+
+```{r add.OBIGT, message = FALSE, results = "hide"}
+add.OBIGT("OldAA")
+```
+
 ## Measured temperature and pH
 ```{r bison1, message = FALSE, fig.align='center', out.width='100%', fig.width = 6, fig.height = 3, pngquant = pngquant}
 bison1()
 ```
-[Original plot](https://doi.org/10.1371/journal.pone.0022782.g005).
+[Link to original plot](https://doi.org/10.1371/journal.pone.0022782.g005).
 
 ## Carbon oxidation state of proteins
 ```{r bison2, message = FALSE, fig.align='center', out.width='100%', fig.width = 10, fig.height = 6, pngquant = pngquant}
 bison2()
 ```
-Original plots: [functional annotations](https://doi.org/10.1371/journal.pone.0022782.g004) and [major phyla](https://doi.org/10.1371/journal.pone.0072395.g001).
-Compared to the papers, the y-axis is adjusted in order to have same scale on both plots; permease at lower `r ZC` does not appear in the first plot here.
+Link to original plots: [functional annotations](https://doi.org/10.1371/journal.pone.0022782.g004) and [major phyla](https://doi.org/10.1371/journal.pone.0072395.g001).
+Compared to the papers, the *y* axis is adjusted in order to have same scale on both plots; permease at lower `r ZC` does not appear in the first plot here.
+
+## Chemical affinities 
+```{r bison3, message = FALSE, results = "as.is"}
+tab <- round(bison3(), 3)
+htmltab <- capture.output(kable(tab, format = "html"))
+# make selected values bold
+for(i in c(15, 16, 41, 42, 43)) {
+  htmltab[i] <- gsub('">', '"><b>', htmltab[i], fixed = TRUE)
+  htmltab[i] <- gsub('</', '</b></', htmltab[i], fixed = TRUE)
+}
+structure(htmltab, format = "html", class = "knitr_kable")
+```
+[Link to original table](https://doi.org/10.1371/journal.pone.0022782.t005).
+These per-residue affinities are expressed as dimensionless values, i.e. *A*/(2.303*RT*) where *A*, *R* and *T* stand for chemical affinity, gas constant, and temperature in Kelvin.
+The affinities are all negative, but are higher (more positive) for the reaction to form model protein 1 at sites 1 and 2 and to form model protein 4 at sites 3--5.
+
+## References
