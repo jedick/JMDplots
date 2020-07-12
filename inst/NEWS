@@ -1,10 +1,15 @@
+CHANGES IN JMDplots 1.2.3
+-------------------------
+
+- 20200712 Add plots from Bison Pool hot spring papers (bison).
+
 CHANGES IN JMDplots 1.2.2
 -------------------------
 
-- 20200505 Remove biosynthesis calculations.
-
 - 20200508 Add pdat_aneuploidy() and pdat_yeast_stress(), used in
   canH2O5().
+
+- 20200505 Remove biosynthesis calculations from canH2O paper.
 
 CHANGES IN JMDplots 1.2.1
 -------------------------

@@ -32,7 +32,9 @@ export(
   # 20200505
   "canH2OS4", "pdat_aneuploidy", "canH2O5",
   # 20200508
-  "pdat_yeast_stress"
+  "pdat_yeast_stress",
+  # Bison Pool papers 20200712
+  "bison1"
 )
 
 # imports from CHNOSZ
@@ -98,7 +100,7 @@ importFrom("graphics", "abline", "arrows", "axis", "box", "layout",
            "polygon", "hist", "plot.window", "rasterImage")
 importFrom("stats", "lm", "na.omit", "predict", "sd", "predict.lm", "residuals",
            "qqline", "qqnorm", "quantile", "median", "fivenum",
-           "density", "formula", "t.test", "approx")
+           "density", "formula", "t.test", "approx", "splinefun")
 importFrom("utils", "read.csv", "demo", "packageVersion", "tail", "write.csv",
            "capture.output", "browseURL", "head")
 
