@@ -44,6 +44,15 @@ This table gives a brief description of each function.
 }
 }
 
+\section{Files in extdata/bison}{
+  \describe{
+    \item{\code{DS11.csv}, \code{DS13.csv}}{
+      These files contain average amino acid compositions of groups of proteins inferred from metagenomic sequences.
+      The groups correspond to proteins with a common functional annotation (DS11) or taxonomic affiliation (DS13).
+      The data are from Dick and Shock, 2011 and 2013.
+    }
+  }
+}
 
 \references{
 Dick, J. M. and Shock, E. L. (2011) Calculation of the relative chemical stabilities of proteins as a function of temperature and redox chemistry in a hot spring. \emph{PLOS One} \bold{6}, e22782. \doi{10.1371/journal.pone.0022782}

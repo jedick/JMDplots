@@ -57,7 +57,7 @@ library(JMDplots)
 ```
 
 The current OBIGT database in CHNOSZ has updates for the methionine sidechain group from @LD12 and the glycine group and protein backbone [UPBB] from @Kit14.
-In order to reproduce the calculations from the 2011 paper, we start by loading the old values from @DLH06.
+In order to reproduce the calculations from the 2011 paper, we start by loading the older values from @DLH06.
 
 ```{r add.OBIGT, message = FALSE, results = "hide"}
 add.OBIGT("OldAA")
@@ -136,5 +136,12 @@ The plot on the right, from the 2013 paper, shows the results of optimizing the 
 bison8(equil.results)
 ```
 [Link to original figure](https://doi.org/10.1371/journal.pone.0072395.g005).
+
+## Document history
+
+* 2011-08-23 Initial version.
+* 2012-01-07 Use superseded properties of methionine sidechain group.
+* 2014-02-01 Include results from 2013 paper and change VignetteEngine to knitr.
+* 2020-07-12 Move from CHNOSZ to JMDplots; convert document from LaTeX (Rnw) to R Markdown (Rmd) and add colors.
 
 ## References

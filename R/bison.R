@@ -279,8 +279,8 @@ pHfun <- splinefun(distance, bison.pH, method = "mono")
 xpoints <- seq(0, 22, length.out = 128)
 
 # read the amino acid compositions
-aa.annot <- read.csv(system.file("extdata/protein/DS11.csv", package = "CHNOSZ"), as.is = TRUE)
-aa.phyla <- read.csv(system.file("extdata/protein/DS13.csv", package = "CHNOSZ"), as.is = TRUE)
+aa.annot <- read.csv(system.file("extdata/bison/DS11.csv", package = "JMDplots"), as.is = TRUE)
+aa.phyla <- read.csv(system.file("extdata/bison/DS13.csv", package = "JMDplots"), as.is = TRUE)
 # functional annotations
 classes <- unique(aa.annot$protein)
 # the names of the phyla in alphabetical order (except Deinococcus-Thermus at end)
