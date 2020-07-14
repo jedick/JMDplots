@@ -434,8 +434,6 @@ aAA_aDNA <- function(mout, pout, datasets=c("Bison_Pool_IMG_MG", "Mud_Volcano_SR
     aDNA$values <- lapply(aDNA$values, "*", 5.71)
     # convert nucleotides to basepairs (multiply by 2)
     aDNA$values <- lapply(aDNA$values, "*", 2)
-    # clean up for proteins
-    species(delete=TRUE)
 
     # now do it for proteins
     poutdata <- pout[[paste0(dataset, "P")]]
@@ -444,8 +442,6 @@ aAA_aDNA <- function(mout, pout, datasets=c("Bison_Pool_IMG_MG", "Mud_Volcano_SR
     species(iAA)
     aAA <- affinity(Eh=c(-0.35, -0.15))
     aAA$values <- lapply(aAA$values, "*", 5.71)
-    # clean up for next dataset
-    species(delete=TRUE)
 
     # subtract the means
     DNA_affinity <- lapply(aDNA$values, "-", rowMeans(as.data.frame(aDNA$values)))

@@ -93,7 +93,7 @@ chnszten4 <- function(pdf = FALSE) {
   basis("H2S", -6)
   basis("Cl-", -0.7)
   species(c("copper", "cuprite", "tenorite", "chalcocite", "covellite"))
-  species(c("CuCl", "CuCl2-", "CuCl3-2", "CuCl+", "CuCl2", "CuCl3-", "CuCl4-2"))
+  species(c("CuCl", "CuCl2-", "CuCl3-2", "CuCl+", "CuCl2", "CuCl3-", "CuCl4-2"), add = TRUE)
   T <- 200
   res <- 500
   bases <- c("H2S", "HS-", "HSO4-", "SO4-2")
@@ -129,7 +129,7 @@ chnszten5 <- function(pdf = FALSE) {
   mgp <- c(1.5, 0.3, 0)
   add.OBIGT("SLOP98")
   basis(c("corundum", "H2O", "H+", "O2"))
-  species(c("Al+3", "AlO2-", "AlOH+2", "AlO+", "HAlO2"))
+  species(c("Al+3", "AlO2-", "AlOH+2", "AlO+", "HAlO2"), add = TRUE)
   a <- affinity(pH = c(0, 10), IS = 0)
   s <- solubility(a, in.terms.of = "Al+3")
   diagram(s, type = "loga.balance", ylim = c(-10, 0), lwd = 3, col = "green3", mar=mar, mgp=mgp)
@@ -376,7 +376,7 @@ chnszten7 <- function(pdf = FALSE) {
   # experimental data from Merino, 1975, Table 4 (doi:10.1016/0016-7037(75)90085-X)
   # plot line calculated using default database
   basis(c("Al2O3", "SiO2", "K+", "Na+", "O2", "H2O", "H+"))
-  species(c("albite", "K-feldspar"))
+  species(c("albite", "K-feldspar"), add = TRUE)
   T <- 100
   P <- 150
   a <- affinity("K+" = c(4, 7), "Na+" = c(6, 9), T = T, P = P)
@@ -499,7 +499,7 @@ chnsztenS2 <- function(pdf = FALSE) {
   basis("H2S", -6)
   basis("Cl-", -0.7)
   species(c("copper", "cuprite", "tenorite", "chalcocite", "covellite"))
-  species(c("CuCl", "CuCl2-", "CuCl3-2", "CuCl+", "CuCl2", "CuCl3-", "CuCl4-2"))
+  species(c("CuCl", "CuCl2-", "CuCl3-2", "CuCl+", "CuCl2", "CuCl3-", "CuCl4-2"), add = TRUE)
   T <- 200
   res <- 500
   bases <- c("H2S", "HS-", "HSO4-", "SO4-2")
@@ -810,7 +810,7 @@ chnsztenS8 <- function(pdf = FALSE) {
   ## now do calcite (a dissociation reaction)
   calfun <- function(dissociation = NULL) {
     basis(c("calcite", "Ca+2", "H2O", "O2", "H+"))
-    species(c("CO2", "HCO3-", "CO3-2"))
+    species(c("CO2", "HCO3-", "CO3-2"), add = TRUE)
     a <- affinity(pH = c(pH, res), T = T, IS = IS)
     s <- solubility(a, dissociation = dissociation)
     diagram(s, ylim = c(-10, 4), type = "loga.balance", lwd = 4, col = "green2")
