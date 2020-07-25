@@ -61,9 +61,11 @@ Please refer to the supporting information of the papers for the original script
 
 \section{Other Papers}{
 
-This package does not include plots from \emph{all} papers by the author.
-The plots from Dick (2017) are in the vignettes for \pkg{canprot} (\url{../../canprot/doc/index.html}).
-See \code{demo("bugstab", "CHNOSZ")} for Figure 4 of Dick (2016) (relative stability diagram of microbial proteins in colorectal cancer) and \code{oldvignettes/colorectal.Rmd} in \pkg{canprot} for Figure 6 of Dick (2016) (relative stability diagram for differentially expressed proteins in various colorectal cancer datasets).
+The \code{oldvignettes} directory of the \url{../../canprot/doc/index.html}{\pkg{canprot}} package has plots from Dick (2017) and Figure 6 of Dick (2016) (relative stability diagram for differentially expressed proteins in various colorectal cancer datasets).
+
+See \code{demo("bugstab")} for Figure 4 of Dick (2016) (relative stability diagram of microbial proteins in colorectal cancer and healthy tissue).
+This demo uses \code{extdata/Dic16/microbes.csv} with data for microbial occurrence in colorectal cancer and normal tissue and \code{extdata/Dic16/microbial.aa.csv} with overall amino acid compositions of proteins in microbial species.
+The files are from the Supporting Information of Dick (2016).
 
 }
 

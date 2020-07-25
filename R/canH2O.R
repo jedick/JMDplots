@@ -118,7 +118,7 @@ canH2O1 <- function(pdf = FALSE) {
 
   textrect(pos[p6, ] + c(0, 0.08), r6, ry, lab = c("GEPIA2", "(TCGA/", "GTEx)", ""), cex = cex, box.col = cols[1])
   textplain(pos[p6, ] + c(-0.025, 0.025), r6, ry, lab = "HPA", cex = cex)
-  textplain(pos[p6, ] + c(0, 0.2), lab = c("Pan-cancer", "comparison"), font = 2, height = 0.04)
+  textplain(pos[p6, ] + c(0, 0.2), lab = c("Pan-cancer", "datasets"), font = 2, height = 0.04)
 
   textrect(pos[pP, ] + c(0.02, 0.095), r7 + 0.015, ry, lab = c("Evolutionary", "trends of", "composition"), cex = cex, box.col = cols[7])
   textplain(pos[pP, ] + c(0.02, 0.215), lab = c("Phylostratigraphic", "analysis"), font = 2, height = 0.04)
@@ -231,6 +231,7 @@ canH2O2 <- function(pdf = FALSE) {
     if(thisone == "secreted") main <- "hypoxia"
     if(thisone == "osmotic_euk") main <- "(salt)"
     if(thisone == "glucose") main <- "(glucose)"
+    if(thisone == "3D") main <- "3D / 2D"
     title(main, font.main = 1)
     if(thisone == "secreted") title("Secreted in", font.main = 1, line = 1.4, xpd = NA)
     if(thisone %in% c("osmotic_euk", "glucose")) title("Hyperosmotic", font.main = 1, line = 1.4, xpd = NA)

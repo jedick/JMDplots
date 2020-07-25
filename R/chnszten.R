@@ -99,13 +99,13 @@ chnszten4 <- function(pdf = FALSE) {
   bases <- c("H2S", "HS-", "HSO4-", "SO4-2")
   m <- mosaic(bases, blend = TRUE, pH = c(0, 12, res), Eh=c(-1, 1, res), T=T)
   # first plot: S basis species
-  diagram(m$A.bases, col = "blue", col.names = "blue", lty = 2, fill = NA, mar=mar, mgp=mgp, cex.names=0.9)
+  diagram(m$A.bases, col = "blue", col.names = "blue", lty = 2, fill = NA, mar=mar, mgp=mgp, cex.names=0.9, limit.water = TRUE)
   legend("topright", legend=c(expression(italic(T)==200~degree*C), expression(italic(P)==15.5~bar)), bty="n", cex=0.8)
   label.figure("A", cex=1.3)
   # second plot: Cu species
   names <- species()$name
   names[c(1, 2, 4)] <- ""
-  diagram(m$A.species, lwd = 2, fill = NA, mar=mar, mgp=mgp, cex.names=0.9, names=names)
+  diagram(m$A.species, lwd = 2, fill = NA, mar=mar, mgp=mgp, cex.names=0.9, names=names, limit.water = TRUE)
   diagram(m$A.bases, add = TRUE, col = "blue", names = "", lty = 2)
   legend("topright", legend=c(expression(italic(T)==200~degree*C), expression(italic(P)==15.5~bar)), bty="n", cex=0.8)
   legend(-0.5, -0.4, legend=c(expression(sum(S)==10^-6~M), expression(sum(Cl)==0.2~M)), bty="n", cex=0.8)
@@ -504,8 +504,8 @@ chnsztenS2 <- function(pdf = FALSE) {
   res <- 500
   bases <- c("H2S", "HS-", "HSO4-", "SO4-2")
   m <- mosaic(bases, blend = TRUE, pH = c(0, 12, res), Eh=c(-1, 1, res), T=T)
-  diagram(m$A.species, lwd = 2, fill = NA, mar=mar, mgp=mgp, cex.names=0.9, balance = 1, limit.water=FALSE)
-  diagram(m$A.bases, add = TRUE, col = "blue", names = "", limit.water=FALSE)
+  diagram(m$A.species, lwd = 2, fill = NA, mar=mar, mgp=mgp, cex.names=0.9, balance = 1)
+  diagram(m$A.bases, add = TRUE, col = "blue", names = "")
   legend("topright", legend=c(expression(italic(T)==200~degree*C), expression(italic(P)==15.5~bar)), bty="n", cex=0.8)
   legend(-0.5, -0.4, legend=c(expression(sum(S)==10^-6~M), expression(sum(Cl)==0.2~M)), bty="n", cex=0.8)
   reset()

@@ -1,6 +1,5 @@
 TCGA            Compositional analysis of The Cancer Genome Atlas
 HPA             Compositional analysis of The Human Protein Atlas
 osmotic_gene    Compositional analysis of transcriptomes for hyperosmotic stress
-revisit-yeast   Demo for revisit() with yeast proteins
-run.wjd-yeast   Demo for run.wjd() with yeast proteins
-test-wjd-yeast  Test for wjd() with yeast proteins
+revisit-yeast   Demo for CHNOSZ::revisit() with yeast proteins
+bugstab         Relative stabilities of microbial proteins in colorectal cancer and healthy tissue

@@ -113,10 +113,11 @@ title(main=paste("Formation potential of proteins associated with\n",
   "transcriptional response to carbon limitation in yeast"))
 # the affinity of formation favors the proteins upregulated 
 # by carbon limitation at low chemical potentials of C6H12O6 ...
-stopifnot(c(d$predominant[1,1], d$predominant[1,128])==grep("up", expt))
+res <- length(a$vals[[1]])
+stopifnot(c(d$predominant[1, 1], d$predominant[1, res])==grep("up", expt))
 # ... and favors proteins downregulated by aerobic conditions
 # at high hydrogen fugacities
-stopifnot(c(d$predominant[128, 128], d$predominant[128, 1])==grep("down", expt))
+stopifnot(c(d$predominant[res, res], d$predominant[res, 1])==grep("down", expt))
 
 ## overall oxidation state of proteins exclusively localized 
 ## to cytoplasm of S. cerevisiae with/without abundance weighting
