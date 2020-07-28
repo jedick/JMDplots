@@ -23,20 +23,16 @@ Function names ending with \samp{T*} and \samp{S*} refer to supplementary tables
   canH2O1(pdf = FALSE)
   canH2O2(pdf = FALSE)
   canH2O3(pdf = FALSE)
-  canH2O4(pdf = FALSE, SI = FALSE)
-  canH2O5(pdf = FALSE)
+  canH2O4(pdf = FALSE)
   canH2OT1()
   canH2OT2()
   canH2OS1(pdf = FALSE)
   canH2OS2(pdf = FALSE)
   canH2OS3(pdf = FALSE)
-  canH2OS4(pdf = FALSE)
-  canH2OS5(pdf = FALSE)
 }
 
 \arguments{
   \item{pdf}{logical, make a PDF file?}
-  \item{SI}{logical, make Fig. S3 instead of Fig. 4?}
 }
 
 \details{
@@ -45,16 +41,13 @@ This table gives a brief description of each function.
 \tabular{ll}{
   \code{canH2O1} \tab Study overview \cr
   \code{canH2O2} \tab Median differences of protein length, \nH2O and \ZC for cell culture and cancer tissue \cr
-  \code{canH2O3} \tab \nH2O-\ZC and phylostrata plots for TCGA and HPA datasets \cr
-  \code{canH2O4} \tab Compositional analysis of phylostrata; phylostrata differences in cancer \cr
-  \code{canH2O5} \tab Differentially expressed genes in aneuploid and osmotically shocked yeast cells \cr
+  \code{canH2O3} \tab \nH2O-\ZC plots for TCGA and HPA datasets \cr
+  \code{canH2O4} \tab Differentially expressed genes in aneuploid and osmotically shocked yeast cells \cr
   \code{canH2OT1} \tab Stoichiometric matrix for amino acids with QEC basis species \cr
   \code{canH2OT2} \tab Mean differences and \emph{p}-values for all datasets in each condition \cr
   \code{canH2OS1} \tab rQEC derivation \cr
   \code{canH2OS2} \tab HPA-TCGA scatterplots for \ZC and \nH2O \cr
-  \code{canH2OS3} \tab Compositional analysis of phylostrata representing Liebeskind et al. gene ages \cr
-  \code{canH2OS4} \tab Scatterplots of \ZC and \nH2O vs phylostrata for TCGA and HPA datasets  \cr
-  \code{canH2OS5} \tab Scatterplots of hypoxia scores and \ZC or \nH2O for TCGA or HPA datasets \cr
+  \code{canH2OS3} \tab Scatterplots of hypoxia scores and \ZC or \nH2O for TCGA or HPA datasets \cr
 }
 }
 
@@ -69,8 +62,6 @@ This table gives a brief description of each function.
 Bhandari, V. et al. (2019) Molecular landmarks of tumor hypoxia across cancer types. \emph{Nat. Genet.} \bold{51}, 308--318. \doi{10.1038/s41588-018-0318-2}
 
 Dick, J. M. (2020) Water as a reactant in the differential expression of proteins in cancer. \emph{bioRxiv}. \doi{10.1101/2020.04.09.035022}
-
-Liebeskind, B. J. and McWhite, C. D. and Marcotte, E. M. (2016) Towards consensus gene ages. \emph{Genome Biol. Evol.} \bold{8}, 1812--1823. \doi{10.1093/gbe/evw113}
 }
 
 \examples{

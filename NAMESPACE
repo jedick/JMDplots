@@ -23,14 +23,10 @@ export(
   "addexif",
   # canH2O paper 20200203-20200204
   "canH2O1", "pdat_HPA", "pdat_TCGA", "canH2O2", "canH2O3", "canH2O4",
-  # canH2O Table 2 20200205
-  "canH2OT2",
   # canH2O supplementary tables and figures 20200205
-  "canH2OT1", "canH2OS1", "canH2OS2", "canH2OS3",
-  # canH2O paper 20200301, 20200420, 20200421
-  "canH2OS5", "pdat_osmotic_gene", "makevig",
-  # 20200505
-  "canH2OS4", "pdat_aneuploidy", "canH2O5",
+  "canH2OT1", "canH2OT2", "canH2OS1", "canH2OS2",
+  # canH2O paper 20200301, 20200420, 20200421, 
+  "canH2OS3", "pdat_osmotic_gene", "makevig", "pdat_aneuploidy",
   # 20200508
   "pdat_yeast_stress",
   # Bison Pool papers 20200712
