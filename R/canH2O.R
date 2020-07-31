@@ -113,7 +113,7 @@ canH2O1 <- function(pdf = FALSE) {
   textplain(pos[21, ] + c(-0.02, 0.1), lab = c(paste("Total:", total), "datasets", paste("from", nstudies), "studies"),
             adj = c(0, 0.5), font = 3, height = 0.07, cex = 1.2)
 
-  textrect(pos[p6, ] + c(0, 0.08), r6, ry, lab = c("GEPIA2", "(TCGA/", "GTEx)", ""), cex = cex, box.col = cols[7])
+  textrect(pos[p6, ] + c(0, 0.08), r6, ry, lab = c("GEPIA2", "(TCGA /", "GTEx)", ""), cex = cex, box.col = cols[7])
   textplain(pos[p6, ] + c(-0.025, 0.025), r6, ry, lab = "HPA", cex = cex)
   textplain(pos[p6, ] + c(0, 0.2), lab = c("Pan-cancer", "datasets"), font = 2, height = 0.04)
 
@@ -328,7 +328,7 @@ canH2O3 <- function(pdf = FALSE) {
       pl1.common + geom_point(color = colTCGA, size = 1.5, shape = shapeTCGA, stroke = 1.5) + 
       geom_contour(data = TCGAdens, aes(x, y, z = z), breaks = TCGAlevels, inherit.aes = FALSE, color = "slateblue4", lty = 2) +
       ggrepel::geom_text_repel(size = 2.5, nudge_x = nudge_x, seed = 42, box.padding = 0.12, point.padding = 0.1) +
-      ggtitle("TCGA/GTEx") + labs(tag = expression(bold(A))),
+      ggtitle("TCGA / GTEx") + labs(tag = expression(bold(A))),
     ggplot(HPA, aes(ZC.diff, nH2O.diff, label = HPA_labels)) + 
       pl1.common + geom_point(color = colHPA, size = 1.5, shape = shapeHPA, stroke = 1.5) + 
       geom_contour(data = HPAdens, aes(x, y, z = z), breaks = HPAlevels, inherit.aes = FALSE, color = "darkslategray4", lty = 2) +
@@ -558,7 +558,7 @@ canH2OS2 <- function(pdf = FALSE) {
   pl1 <- ggplot(ZC, aes(x = TCGA, y = HPA, label = labels)) +
     theme_classic() + geom_smooth(method = "lm") +
     annotate("text", -Inf, Inf, label = ZC.title, parse = TRUE, hjust = -0.2, vjust = 1.5) +
-    xlab(quote(Delta*italic(Z)[C]*" (TCGA/GTEx)")) +
+    xlab(quote(Delta*italic(Z)[C]*" (TCGA / GTEx)")) +
     ylab(quote(Delta*italic(Z)[C]*" (HPA)")) +
     geom_hline(yintercept = 0, linetype = 3, colour = "gray30") +
     geom_vline(xintercept = 0, linetype = 3, colour = "gray30") +
@@ -574,7 +574,7 @@ canH2OS2 <- function(pdf = FALSE) {
   pl2 <- ggplot(nH2O, aes(x = TCGA, y = HPA, label = labels)) +
     theme_classic() + geom_smooth(method = "lm") +
     annotate("text", -Inf, Inf, label = nH2O.title, parse = TRUE, hjust = -0.2, vjust = 1.5) +
-    xlab(quote(Delta*italic(n)[H[2]*O]*" (TCGA/GTEx)")) +
+    xlab(quote(Delta*italic(n)[H[2]*O]*" (TCGA / GTEx)")) +
     ylab(quote(Delta*italic(n)[H[2]*O]*" (HPA)")) +
     geom_hline(yintercept = 0, linetype = 3, colour = "gray30") +
     geom_vline(xintercept = 0, linetype = 3, colour = "gray30") +
@@ -594,46 +594,6 @@ canH2OS2 <- function(pdf = FALSE) {
   }
   else ml
 }
-
-# Scatterplots of hypoxia scores and ZC or nH2O for TCGA or HPA datasets 20200224
-canH2OS3 <- function(pdf = FALSE) {
-  if(pdf) pdf("canH2OS3.pdf", width = 6, height = 6)
-  # get TCGA and HPA data
-  vigout2 <- system.file("vignettes", package = "JMDplots")
-  HPA <- read.csv(file.path(vigout2, "HPA.csv"), as.is = TRUE)
-  TCGA <- read.csv(file.path(vigout2, "TCGA.csv"), as.is = TRUE)
-  # map HPA datasets to TCGA abbreviations
-  iHPA <- match(HTmap, HPA$description)
-  iTCGA <- match(names(HTmap), TCGA$description)
-  HPA$description[iHPA] <- TCGA$description[iTCGA]
-  # read hypoxia scores
-  file <- system.file("extdata/canH2O/BHL+19_Fig1a.csv", package = "JMDplots")
-  scores <- read.csv(file, as.is = TRUE)
-
-  # function to plot values and regression line
-  myplot <- function(x, y, xlab, ylab, main = NULL, legend.x = NULL, lmlim = NULL) {
-    plot(x, y, type = "p", xlab = xlab, ylab = ylab, main = main)
-    lmfun(x, y, legend.x, lmlim)
-  }
-  # scatterplots of TCGA and HPA metrics vs hypoxia score
-  par(mfrow = c(2, 2))
-  par(mar = c(4, 4, 2, 1), mgp = c(2.3, 1, 0))
-  iTCGA <- match(scores$cancer, TCGA$description)
-  myplot(scores$score, TCGA$ZC.diff[iTCGA], xlab = "hypoxia score", ylab = canprot::cplab$DZC, legend.x = "bottomright")
-  label.figure("A", cex = 1.7, font = 2, yfrac = 0.96, xfrac = 0.05)
-  myplot(scores$score, TCGA$nH2O.diff[iTCGA], xlab = "hypoxia score", ylab = canprot::cplab$DnH2O, legend.x = "bottomleft")
-  label.figure("B", cex = 1.7, font = 2, yfrac = 0.96, xfrac = 0.05)
-  iHPA <- match(scores$cancer, HPA$description)
-  myplot(scores$score, HPA$ZC.diff[iHPA], xlab = "hypoxia score", ylab = canprot::cplab$DZC, legend.x = "topleft")
-  label.figure("C", cex = 1.7, font = 2, yfrac = 0.96, xfrac = 0.05)
-  myplot(scores$score, HPA$nH2O.diff[iHPA], xlab = "hypoxia score", ylab = canprot::cplab$DnH2O, legend.x = "topright")
-  label.figure("D", cex = 1.7, font = 2, yfrac = 0.96, xfrac = 0.05)
-  if(pdf) {
-    dev.off()
-    addexif("canH2OS3", "Scatterplots of hypoxia scores and ZC or nH2O for TCGA or HPA datasets", "Dick (2020) (preprint)")
-  }
-}
-
 
 #########################
 ### UNEXPORTED OBJECT ###
