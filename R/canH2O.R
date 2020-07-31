@@ -169,17 +169,17 @@ canH2O2 <- function(pdf = FALSE) {
   p6 <- rep(6, 15); p7 <- rep(7, 15); p8 <- rep(8, 15)
   p9 <- rep(9, 15); p10 <- rep(10, 15); p11 <- rep(11, 15)
   # (C) credible regions
-  p12 <- rep(12, 16); p13 <- rep(13, 16)
+  p12 <- rep(12, 15); p13 <- rep(13, 15)
   # assemble columns (each one is 48 units high)
   c1 <- c(0, p1, p00, p6, p9)
   c2 <- c(0, p2, p00, p7, p10)
   c3 <- c(0, p3, p00, p8, p11)
   c4 <- c(0, p4, p00, p0, p0)
-  c5 <- c(0, p4, p12, p13)
-  c6 <- c(0, p5, p12, p13)
+  c5 <- c(0, p4, p00, p12, p13)
+  c6 <- c(0, p5, p00, p12, p13)
   mat <- matrix(c(c1, c2, c3, c4, c5, c6), nrow = 48)
   layout(mat, widths = c(1, 1, 1, 0.5, 0.5, 1))
-  par(mar = c(4, 4, 1.5, 1), mgp = c(2, 1, 0))
+  par(mar = c(3.2, 3.3, 1.5, 1), mgp = c(2.2, 1, 0))
 
   # read data for all conditions
   cond1 <- c("hypoxia", "secreted", "osmotic_euk", "glucose", "3D")
@@ -199,7 +199,6 @@ canH2O2 <- function(pdf = FALSE) {
   col <- c(col1, col2)
 
   # make scatter plots for nH2O and ZC in cell culture and cancer types
-  par(mgp = c(2.5, 1, 0))
   lapply(1:length(alldat), function(i) {
     thisone <- names(alldat)[i]
     if(thisone %in% cond1) {
@@ -214,7 +213,12 @@ canH2O2 <- function(pdf = FALSE) {
       pch[grepl("mouse", alldat[[i]]$tags)] <- 21
       pch[grepl("rat", alldat[[i]]$tags)] <- 21
     }
-    diffplot(alldat[i], pch = pch, pt.text = NA, col = col[i], cex = 1, labtext = NA)
+    diffplot(alldat[i], pch = pch, pt.text = NA, col = col[i], cex = 1, labtext = NA,
+             xlim = c(-0.06, 0.06), ylim = c(-0.06, 0.06), axes = FALSE, frame.plot = TRUE)
+    labels <- at <- seq(-0.06, 0.06, 0.02)
+    labels[c(2, 3, 5, 6)] <- NA
+    axis(1, at, labels)
+    axis(2, at, labels)
     main <- names(alldat)[i]
     substr(main, 1, 1) <- toupper(substr(main, 1, 1))
     if(thisone == "secreted") main <- "hypoxia"
@@ -237,10 +241,12 @@ canH2O2 <- function(pdf = FALSE) {
   names <- names(culture)
   names[1] <- "hyp-\noxia"
   names[3] <- "salt"
-  contplot(culture, "Cell culture", col1, ylim = c(-0.06, 0.04), dx = c(0.026, 0.01, -0.007, 0.012, -0.02), dy = c(-0.005, 0.03, 0.037, -0.03, -0.03), names = names)
-  label.figure("C", cex = 2, font = 2, yfrac = 0.9)
-  contplot(cancer, "Cancer tissue", col2, ylim = c(-0.04, 0.06), dx = c(-0.005, NA, -0.007, -0.021, 0.012, -0.008), dy = c(-0.036, NA, 0.035, 0.035, -0.035, -0.02))
-  text(0.024, 0.037, "CRC", col = col2[2])
+  contplot(culture, "Cell culture", col1, xlim = c(-0.06, 0.06), ylim = c(-0.06, 0.06),
+           dx = c(0.028, 0.015, -0.007, 0.017, -0.022), dy = c(-0.005, 0.03, 0.037, -0.03, -0.03), names = names)
+  label.figure("C", cex = 2, font = 2, xfrac = 0.02, yfrac = 0.9)
+  contplot(cancer, "Cancer tissue", col2, xlim = c(-0.06, 0.06), ylim = c(-0.06, 0.06),
+           dx = c(-0.008, NA, 0.020, -0.027, 0.018, -0.020), dy = c(-0.037, NA, 0.035, 0.03, -0.035, -0.02))
+  text(0.025, 0.038, "CRC", col = col2[2])
 
   if(pdf) {
     dev.off()
