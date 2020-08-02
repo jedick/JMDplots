@@ -50,7 +50,8 @@ if (!nzchar(Sys.which("pngquant"))) pngquant <- NULL
 ZC <- "<i>Z</i><sub>C</sub>"
 ```
 
-This vignette from R package [JMDplots](https://github.com/jedick/JMDplots) version `r packageDescription("JMDplots")$Version` contains plots from the papers by Dick and Shock (<a href="https://doi.org/10.1371/journal.pone.0022782" title="Calculation of the relative chemical stabilities of proteins as a function of temperature and redox chemistry in a hot spring">2011</a> and <a href="https://doi.org/10.1371/journal.pone.0072395" title="A metastable equilibrium model for the relative abundances of microbial phyla in a hot spring">2013</a>).
+This vignette contains plots from the papers by Dick and Shock (<a href="https://doi.org/10.1371/journal.pone.0022782" title="Calculation of the relative chemical stabilities of proteins as a function of temperature and redox chemistry in a hot spring">2011</a> and <a href="https://doi.org/10.1371/journal.pone.0072395" title="A metastable equilibrium model for the relative abundances of microbial phyla in a hot spring">2013</a>).
+This vignette was compiled with R packages [JMDplots](https://github.com/jedick/JMDplots) version `r packageDescription("JMDplots")$Version` and [CHNOSZ](http://chnosz.net) version `r packageDescription("CHNOSZ")$Version`.
 
 ```{r JMDplots, message = FALSE, results = "hide"}
 library(JMDplots)
@@ -60,7 +61,7 @@ The current OBIGT database in CHNOSZ has updates for the methionine sidechain gr
 In order to reproduce the calculations from the 2011 paper, we start by loading the older values from @DLH06.
 
 ```{r add.OBIGT, message = FALSE, results = "hide"}
-add.OBIGT("OldAA")
+if(packageVersion("CHNOSZ") > "1.3.6") add.OBIGT("OldAA") else add.obigt("OldAA")
 ```
 
 ## Measured temperature and pH

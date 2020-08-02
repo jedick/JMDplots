@@ -93,7 +93,9 @@ chnszten4 <- function(pdf = FALSE) {
   basis("H2S", -6)
   basis("Cl-", -0.7)
   species(c("copper", "cuprite", "tenorite", "chalcocite", "covellite"))
-  species(c("CuCl", "CuCl2-", "CuCl3-2", "CuCl+", "CuCl2", "CuCl3-", "CuCl4-2"), add = TRUE)
+  sargs <- list(species = c("CuCl", "CuCl2-", "CuCl3-2", "CuCl+", "CuCl2", "CuCl3-", "CuCl4-2"))
+  if(packageVersion("CHNOSZ") > "1.3.6") sargs <- c(sargs, add = TRUE)
+  do.call(species, sargs)
   T <- 200
   res <- 500
   bases <- c("H2S", "HS-", "HSO4-", "SO4-2")
@@ -129,7 +131,9 @@ chnszten5 <- function(pdf = FALSE) {
   mgp <- c(1.5, 0.3, 0)
   add.OBIGT("SLOP98")
   basis(c("corundum", "H2O", "H+", "O2"))
-  species(c("Al+3", "AlO2-", "AlOH+2", "AlO+", "HAlO2"), add = TRUE)
+  sargs <- list(species = c("Al+3", "AlO2-", "AlOH+2", "AlO+", "HAlO2"))
+  if(packageVersion("CHNOSZ") > "1.3.6") sargs <- c(sargs, add = TRUE)
+  do.call(species, sargs)
   a <- affinity(pH = c(0, 10), IS = 0)
   s <- solubility(a, in.terms.of = "Al+3")
   diagram(s, type = "loga.balance", ylim = c(-10, 0), lwd = 3, col = "green3", mar=mar, mgp=mgp)
@@ -311,13 +315,13 @@ chnszten7 <- function(pdf = FALSE) {
   points(T, logK)
   # calculation 1: CHNOSZ default
   T <- 0:250
-  species <- c("dawsonite", "H2O", "Al(OH)4-", "HCO3-", "Na+", "H+")
+  snames <- c("dawsonite", "H2O", "Al(OH)4-", "HCO3-", "Na+", "H+")
   coeffs <- c(-1, -2, 1, 1, 1, 1)
-  Daw1 <- subcrt(species, coeffs, T = T)
+  Daw1 <- subcrt(snames, coeffs, T = T)
   lines(T, Daw1$out$logK, lwd = 1.5)
   # calculation 2: dawsonite with Cp = 0
   mod.OBIGT("dawsonite", Cp = 0, a = 0, b = 0, c = 0)
-  Daw2 <- subcrt(species, coeffs, T = T)
+  Daw2 <- subcrt(snames, coeffs, T = T)
   lines(T, Daw2$out$logK, col = "red", lty = 2)
   ## add points calculated using the SUPCRTBL package
   #points(seq(25, 250, 25), c(-17.829, -16.523, -15.402, -14.425, -13.568, -12.815, -12.154, -11.581, -11.094, -10.699), pch=4, col="red")
@@ -376,7 +380,9 @@ chnszten7 <- function(pdf = FALSE) {
   # experimental data from Merino, 1975, Table 4 (doi:10.1016/0016-7037(75)90085-X)
   # plot line calculated using default database
   basis(c("Al2O3", "SiO2", "K+", "Na+", "O2", "H2O", "H+"))
-  species(c("albite", "K-feldspar"), add = TRUE)
+  sargs <- list(species = c("albite", "K-feldspar"))
+  if(packageVersion("CHNOSZ") > "1.3.6") sargs <- c(sargs, add = TRUE)
+  do.call(species, sargs)
   T <- 100
   P <- 150
   a <- affinity("K+" = c(4, 7), "Na+" = c(6, 9), T = T, P = P)
@@ -499,7 +505,9 @@ chnsztenS2 <- function(pdf = FALSE) {
   basis("H2S", -6)
   basis("Cl-", -0.7)
   species(c("copper", "cuprite", "tenorite", "chalcocite", "covellite"))
-  species(c("CuCl", "CuCl2-", "CuCl3-2", "CuCl+", "CuCl2", "CuCl3-", "CuCl4-2"), add = TRUE)
+  sargs <- list(species = c("CuCl", "CuCl2-", "CuCl3-2", "CuCl+", "CuCl2", "CuCl3-", "CuCl4-2"))
+  if(packageVersion("CHNOSZ") > "1.3.6") sargs <- c(sargs, add = TRUE)
+  do.call(species, sargs)
   T <- 200
   res <- 500
   bases <- c("H2S", "HS-", "HSO4-", "SO4-2")
@@ -810,7 +818,9 @@ chnsztenS8 <- function(pdf = FALSE) {
   ## now do calcite (a dissociation reaction)
   calfun <- function(dissociation = NULL) {
     basis(c("calcite", "Ca+2", "H2O", "O2", "H+"))
-    species(c("CO2", "HCO3-", "CO3-2"), add = TRUE)
+    sargs <- list(species = c("CO2", "HCO3-", "CO3-2"))
+    if(packageVersion("CHNOSZ") > "1.3.6") sargs <- c(sargs, add = TRUE)
+    do.call(species, sargs)
     a <- affinity(pH = c(pH, res), T = T, IS = IS)
     s <- solubility(a, dissociation = dissociation)
     diagram(s, ylim = c(-10, 4), type = "loga.balance", lwd = 4, col = "green2")

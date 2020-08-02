@@ -23,7 +23,8 @@ if (!nzchar(Sys.which("pngquant"))) pngquant <- NULL
 ZC <- "<i>Z</i><sub>C</sub>"
 ```
 
-This vignette from the R package [JMDplots](https://github.com/jedick/JMDplots) version `r packageDescription("JMDplots")$Version` contains plots from the paper by <a href="https://doi.org/10.3389/fmicb.2019.00120" title="Changes in carbon oxidation state of metagenomes along geochemical redox gradients">Dick et al. (2019)</a>.
+This vignette contains plots from the paper by <a href="https://doi.org/10.3389/fmicb.2019.00120" title="Changes in carbon oxidation state of metagenomes along geochemical redox gradients">Dick et al. (2019)</a>.
+This vignette was compiled with R packages [JMDplots](https://github.com/jedick/JMDplots) version `r packageDescription("JMDplots")$Version` and [CHNOSZ](http://chnosz.net) version `r packageDescription("CHNOSZ")$Version`.
 
 ```{r JMDplots, message = FALSE, results = "hide"}
 library(JMDplots)

@@ -124,13 +124,13 @@ canH2O1 <- function(pdf = FALSE) {
   cantext <- c(cantext1, cantext2, cantext3)
   textplain(pos[25, ] + c(0.105, 0.235), lab = cantext, height = 0.05, font = 4)
 
-  textplain(pos[27, ] + c(0.21, 0.085), lab = "Other findings", font = 2)
+  textplain(pos[27, ] + c(0.16, 0.08), lab = "Other findings", font = 2)
   hyptext1 <- quote(italic("Hypoxia experiments show no consistent"))
   hyptext2 <- quote(italic("difference in oxidation state of proteins."))
   hyptext <- as.expression(c(hyptext1, hyptext2))
   textplain(pos[26, ] + c(0.25, 0.02), lab = hyptext, height = 0.04)
 
-  hydtext1 <- quote(italic("Most high-glucose (hyperosmotic) and 3D culture"))
+  hydtext1 <- quote(italic("Most hyperosmotic stress and 3D vs 2D culture"))
   hydtext2 <- quote(italic("experiments yield lower hydration state of proteins."))
   hydtext <- as.expression(c(hydtext1, hydtext2))
   textplain(pos[26, ] + c(0.27, -0.07), lab = hydtext, height = 0.04)
@@ -213,8 +213,9 @@ canH2O2 <- function(pdf = FALSE) {
       pch[grepl("mouse", alldat[[i]]$tags)] <- 21
       pch[grepl("rat", alldat[[i]]$tags)] <- 21
     }
-    diffplot(alldat[i], pch = pch, pt.text = NA, col = col[i], cex = 1, labtext = NA,
-             xlim = c(-0.06, 0.06), ylim = c(-0.06, 0.06), axes = FALSE, frame.plot = TRUE)
+    dpargs <- list(comptab = alldat[i], pch = pch, pt.text = NA, col = col[i], cex = 1, labtext = NA)
+    if(packageVersion("canprot") > "1.0.0") dpargs <- c(dpargs, xlim = c(-0.06, 0.06), ylim = c(-0.06, 0.06), axes = FALSE, frame.plot = TRUE)
+    do.call(diffplot, dpargs)
     labels <- at <- seq(-0.06, 0.06, 0.02)
     labels[c(2, 3, 5, 6)] <- NA
     axis(1, at, labels)

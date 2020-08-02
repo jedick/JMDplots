@@ -7,15 +7,15 @@
 # 20190928 first addition to JMDplots package
 
 # USAGE (R commands):
-# source("plot.R")        - source this file
-# Fig1(TRUE)              - make Figure_1.pdf
-# Fig2(TRUE)              - make Figure_2.pdf
-# mout <- FigS1(TRUE)     - make Figure_S1.pdf
-# pout <- FigS2(TRUE)     - make Figure_S2.pdf
-# Fig3(mout, pout, TRUE)  - make Figure_3.pdf
-# Fig4(mout, pout, TRUE)  - make Figure_4.pdf
-# Fig5(TRUE)              - make Figure_5.pdf
-# Fig5(TRUE, NULL)        - make Figure_S3.pdf
+# source("gradox.R")         - source this file
+# gradox1(TRUE)              - make Figure_1.pdf
+# gradox2(TRUE)              - make Figure_2.pdf
+# mout <- gradoxS1(TRUE)     - make Figure_S1.pdf
+# pout <- gradoxS2(TRUE)     - make Figure_S2.pdf
+# gradox3(mout, pout, TRUE)  - make Figure_3.pdf
+# gradox4(mout, pout, TRUE)  - make Figure_4.pdf
+# gradox5(TRUE)              - make Figure_5.pdf
+# gradox5(TRUE, NULL)        - make Figure_S3.pdf
 
 # NOTE: Fig5() generates some expected messages about
 # missing files, indicating samples where data are not available.
@@ -427,6 +427,7 @@ aAA_aDNA <- function(mout, pout, datasets=c("Bison_Pool_IMG_MG", "Mud_Volcano_SR
     # add them to the "OBIGT" database in CHNOSZ
     iDNA <- do.call(mod.OBIGT, DNA_OBIGT)
     # add species
+    if(packageVersion("CHNOSZ") <= "1.3.6") species(delete = TRUE)
     species(iDNA)
     # calculate affinity
     aDNA <- affinity(Eh=c(-0.35, -0.15))
@@ -439,6 +440,7 @@ aAA_aDNA <- function(mout, pout, datasets=c("Bison_Pool_IMG_MG", "Mud_Volcano_SR
     poutdata <- pout[[paste0(dataset, "P")]]
     AA_OBIGT <- seqcomp2OBIGT(poutdata$meancomp, "protein")
     iAA <- do.call(mod.OBIGT, AA_OBIGT)
+    if(packageVersion("CHNOSZ") <= "1.3.6") species(delete = TRUE)
     species(iAA)
     aAA <- affinity(Eh=c(-0.35, -0.15))
     aAA$values <- lapply(aAA$values, "*", 5.71)
@@ -571,7 +573,8 @@ seqcomp2OBIGT <- function(seqcomp, type="DNA") {
   }
   # get monomer properties (nucleotides or amino acids)
   # to keep the multipliers, don't use info(iOBIGT)
-  monomer_OBIGT <- thermo()$OBIGT[iOBIGT, ]
+  if(packageVersion("CHNOSZ") > "1.3.6") monomer_OBIGT <- thermo()$OBIGT[iOBIGT, ]
+  else monomer_OBIGT <- thermo()$obigt[iOBIGT, ]
   # initialize output
   OBIGT_out <- monomer_OBIGT[rep(1, nrow(seqcomp)), ]
   # in CHNOSZ_1.1.3, diagram() (or another function) attempts to interpret names with underscores
