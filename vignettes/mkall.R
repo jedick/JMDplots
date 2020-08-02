@@ -1,7 +1,6 @@
-# JMDplots/inst/vignettes/mkall.R
-# 20200509 This compiles each of the vignettes for compositional analysis of differential expression,
-#   which updates the CSV files that are used in the gradH2O and canH2O projects.
-# 20200802 Move html files to ../doc
+# JMDplots/vignettes/mkall.R
+# Process all vignettes and move html files to ../inst/doc
+# 20200802
 
 files <- dir(pattern = "Rmd")
 print(system.time(
@@ -11,9 +10,9 @@ print(system.time(
     print(sep, quote = FALSE)
     print(paste("|", f, "|"), quote = FALSE)
     print(sep, quote = FALSE)
-    render(f)
+    rmarkdown::render(f)
     from <- gsub("Rmd", "html", f)
-    to <- file.path("../doc", from)
+    to <- file.path("../inst/doc", from)
     file.rename(from, to)
   }
 ))
