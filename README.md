@@ -12,20 +12,26 @@ First install the **remotes** packages from CRAN.
 install.packages("remotes")
 ```
 
-Although it may be possible to build the vignettes without pandoc, having pandoc available will make them look better.
-See rmarkdown's [Install Pandoc](https://cran.r-project.org/web/packages/rmarkdown/vignettes/pandoc.html) vignette for tips on installing pandoc.
-
-Install the development version of **canprot**, then install **JMDplots**.
+Then install **JMDplots**.
+This command will also install prebuilt vignettes.
 
 ```R
-remotes::install_github("jedick/canprot")
-remotes::install_github("jedick/JMDplots", build_vignettes = TRUE)
+remotes::install_github("jedick/JMDplots")
 ```
 
-Finally, open the vignettes index page to see the plots for the different papers.
+To see the plots, use the R help browser to open the vignettes page or open it directly with this command:
 
 ```R
 browseVignettes("JMDplots")
+```
+
+## Building vignettes
+
+If you want to build the vignettes yourself, be aware that it may be possible to build them without pandoc, but having pandoc available will make them look better.
+See rmarkdown's [Install Pandoc](https://cran.r-project.org/web/packages/rmarkdown/vignettes/pandoc.html) vignette for tips on installing pandoc.
+
+```R
+remotes::install_github("jedick/JMDplots", build_vignettes = TRUE)
 ```
 
 ## Online vignettes
