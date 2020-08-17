@@ -72,8 +72,8 @@ kable(canH2OT2(), align = "r")
 kable(canH2OT1())
 ```
 
-## rQEC derivation (Figure S1)
-```{r canH2OS1, message = FALSE, fig.align='center', out.width='75%', fig.width = 6, fig.height = 3, pngquant = pngquant}
+## Comparison of MTa and QEC basis species (Figure S1)
+```{r canH2OS1, message = FALSE, fig.align='center', out.width='100%', fig.width = 9, fig.height = 3, pngquant = pngquant}
 canH2OS1()
 ```
 

@@ -58,7 +58,7 @@ usedin <- list(
 # e.g. mplot("Columbia_River", "IMG_MT")
 mplot <- function(study, seqtype, plottype = "bars", ylim = NULL, plot.RNA = TRUE, taxid = NULL,
   dsDNA = TRUE, abbrev = NULL, col = NULL, add.label = TRUE, maxdepth = NULL, H2O = FALSE,
-  plot.it = TRUE, add.title = TRUE, yline = 2, basis = "rQEC", datadir = NULL, mdata = studies,
+  plot.it = TRUE, add.title = TRUE, yline = 2, basis = getOption("basis"), datadir = NULL, mdata = studies,
   add = FALSE, pch = 19, var = NULL, srt = 45, ilabel = NULL) {
   # get metadata
   md <- get.mdata(mdata, study, seqtype)
@@ -95,7 +95,7 @@ mplot <- function(study, seqtype, plottype = "bars", ylim = NULL, plot.RNA = TRU
   if(is.null(ylim)) {
     if(identical(var, "GRAVY")) ylim <- c(-0.3, -0.05)
     else if(identical(var, "pI")) ylim <- c(4, 9)
-    else if(H2O) ylim <- c(-0.02, 0.05)
+    else if(H2O) ylim <- c(-1.76, -1.67)
     else ylim <- mylim
   }
   # if taxids are given, plot total ZC first (DNA, not RNA) and add ZC for each species
@@ -213,7 +213,7 @@ mcomp <- function(mout, yvar="RNA") {
 # make page of plots for MGP/MTP 20180225
 # add subset and H2O arguments 20181231
 # add plot.it argument 20190711
-ppage <- function(subset = "gradoxSI", H2O = FALSE, set.par = TRUE, plot.it = TRUE, basis = "rQEC", add.label = TRUE, mfrow = NULL) {
+ppage <- function(subset = "gradoxSI", H2O = FALSE, set.par = TRUE, plot.it = TRUE, basis = getOption("basis"), add.label = TRUE, mfrow = NULL) {
   if(is.list(subset)) {
     # when subset is a list, it gives the studies
     studies <- subset
@@ -328,7 +328,7 @@ pcomp <- function(mout, pout, seqtype="MG", vars = NULL, parts=c("plot", "legend
         if(is.null(xlim)) xlim <- c(-0.22, -0.098)
         xlab <- quote(italic(Z)[C])
       }
-      if(is.null(ylim)) ylim <- c(-0.02, 0.05)
+      if(is.null(ylim)) ylim <- c(-1.76, -1.67)
       ylab <- quote(italic(n)[H[2]*O])
     } else if(vars=="pIG") {
       if(is.null(xlim)) xlim <- c(4, 9)

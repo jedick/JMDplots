@@ -46,7 +46,7 @@ gradH2O0 <- function() {
 gradH2O1 <- function(pdf = FALSE) {
 
   # set up figure
-  if(pdf) pdf("gradH2O1.pdf", width = 6, height = 6)
+  if(pdf) pdf("gradH2O1.pdf", width = 8, height = 6)
   par(mfrow = c(3, 4))
   par(mar = c(3.2, 3.2, 2.5, 1))
   par(las = 1)
@@ -290,7 +290,7 @@ gradH2O4 <- function(pdf = FALSE) {
   par(las = 1, mar = c(4, 4.2, 2, 1), mgp = c(2.5, 1, 0))
   par(cex.lab = 1.5)
   xlim <- c(-0.2, -0.08)
-  ylim <- c(-0.04, 0.04)
+  ylim <- c(-1.8, -1.67)
 
   # plots 1-2: Amazon river metagenome
   mout <- ppage("amazon", plot.it = FALSE)
@@ -501,7 +501,7 @@ gradH2O7 <- function(pdf = FALSE) {
   }
 
   # plot A: transcriptomes compilation
-  osmotic_gene <- read.csv(system.file("vignettes/osmotic_gene.csv", package = "JMDplots"))
+  osmotic_gene <- read.csv(system.file(paste0("vignettes/osmotic_gene_", getOption("basis"), ".csv"), package = "JMDplots"))
   diffplot(osmotic_gene, pt.text = NA, contour = FALSE, cex = 1.5)
   points(mean(osmotic_gene$ZC.diff), mean(osmotic_gene$nH2O.diff), pch = 19, cex = 1.7)
   legend("topleft", c("dataset", "mean"), pch = c(1, 19), bty = "n")
@@ -549,7 +549,7 @@ gradH2O7 <- function(pdf = FALSE) {
   par(xpd = FALSE)
 
   # plot B: proteomes compilation
-  osmotic_bact <- read.csv(system.file("vignettes/osmotic_bact.csv", package = "canprot"))
+  osmotic_bact <- read.csv(system.file(paste0("vignettes/osmotic_bact_", getOption("basis"), ".csv"), package = "canprot"))
   diffplot(osmotic_bact, pt.text = NA, contour = FALSE, cex = 1.5)
   points(mean(osmotic_bact$ZC.diff), mean(osmotic_bact$nH2O.diff), pch = 19, cex = 1.7)
   legend("topleft", c("dataset", "mean"), pch = c(1, 19), bty = "n")
@@ -604,7 +604,7 @@ gradH2O8 <- function(pdf = FALSE) {
   par(cex.lab = 1.2)
 
   # get proteomic data for halophiles
-  osmotic_halo <- read.csv(system.file("vignettes/osmotic_halo.csv", package = "canprot"))
+  osmotic_halo <- read.csv(system.file(paste0("vignettes/osmotic_halo_", getOption("basis"), ".csv"), package = "canprot"))
   # use triangles for hyperosmotic, squares for hypoosmotic
   pch <- ifelse(grepl("hypoosmotic", osmotic_halo$tags), 0, 2)
   # make nH2O-ZC plot
@@ -619,7 +619,7 @@ gradH2O8 <- function(pdf = FALSE) {
   label.figure("(b)", cex = 1.7, yfrac = 0.93)
 
   # get proteomic data for non-halophiles in hyperosmotic stress
-  osmotic_bact <- read.csv(system.file("vignettes/osmotic_bact.csv", package = "canprot"))
+  osmotic_bact <- read.csv(system.file(paste0("vignettes/osmotic_bact_", getOption("basis"), ".csv"), package = "canprot"))
   # combine halophile and non-halophile data for hyperosmotic stress
   osmotic_halo <- osmotic_halo[osmotic_halo$tags!="hypoosmotic", ]
   alldat <- rbind(osmotic_bact, osmotic_halo)

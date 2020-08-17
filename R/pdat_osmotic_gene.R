@@ -2,7 +2,7 @@
 # retrieve protein IDs for differentially expressed genes in osmotic stress
 # 20200418 jmd
 
-pdat_osmotic_gene <- function(dataset=2020, basis="rQEC") {
+pdat_osmotic_gene <- function(dataset = 2020, basis = getOption("basis")) {
   if(identical(dataset, 2020)) {
     return(c(
              "KSA+02_NaCl", "KSA+02_sorbitol", "WJ02",

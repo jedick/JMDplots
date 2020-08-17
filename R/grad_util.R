@@ -44,7 +44,7 @@ plotMG <- function(dataset="Guerrero_Negro_IMG_MG", plottype="bars",
   group="mat", xlab="layer", ylim=NULL, abbrev=NULL, dsDNA=TRUE, plot.RNA=TRUE,
   taxid=NULL, lwd=1, lty=2, lwd.bars=2, col=NULL, extendrange=FALSE, add.label=TRUE,
   plot_real_x=FALSE, maxdepth=NULL, H2O=FALSE, plot.it = TRUE, add.title = TRUE, yline = 2,
-  basis = "rQEC", techtype = NULL, dx = NULL, dy = NULL, datadir = NULL,
+  basis = getOption("basis"), techtype = NULL, dx = NULL, dy = NULL, datadir = NULL,
   add = FALSE, all.labels = NULL, pch = 19, var = NULL, srt = 45, ilabel = NULL) {
   # samples: (used for suffixes on file names)
   # labels: (used for labeling x-axis ticks)
@@ -110,7 +110,7 @@ plotMG <- function(dataset="Guerrero_Negro_IMG_MG", plottype="bars",
         mypI <- pI(mycomp)
         pI <- c(pI, mean(mypI))
         pI.SD <- c(pI.SD, sd(mypI))
-        # add basis argument (QEC or rQEC) here
+        # add basis argument (e.g. QEC or MTa or CRa) here
         myX <- Xfun(mycomp, basis)
       } else {
         # use base-paired (double-stranded) DNA

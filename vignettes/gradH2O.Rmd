@@ -42,7 +42,7 @@ gradH2O0()
 ```
 
 ## Derivation of stoichiometric hydration state (Figure 1)
-```{r gradH2O1, message = FALSE, fig.align='center', out.width='100%', fig.width = 6, fig.height = 6, pngquant = pngquant}
+```{r gradH2O1, message = FALSE, fig.align='center', out.width='100%', fig.width = 8, fig.height = 6, pngquant = pngquant}
 gradH2O1()
 ```
 

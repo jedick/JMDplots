@@ -9,15 +9,16 @@
 \description{
   These functions are used to calculate compositional metrics, including carbon oxidation state and stoichiometric hydration state, for differentially expressed proteins or proteins corresponding to differentially expressed genes.
   See the help page for \code{\link[canprot]{pdat_}} in the \pkg{canprot} package for more information about the calculations and results returned by the \code{pdat_} functions.
+  The default for the \code{basis} option, defined in \pkg{canprot}, is \samp{MTa}.
   These functions are used in the \code{\link{canH2O}} paper.
 }
 
 \usage{
-  pdat_TCGA(dataset = 2020, basis = "rQEC")
-  pdat_HPA(dataset = 2020, basis = "rQEC")
-  pdat_osmotic_gene(dataset = 2020, basis = "rQEC")
-  pdat_aneuploidy(dataset = 2020, basis = "rQEC")
-  pdat_yeast_stress(dataset = 2020, basis = "rQEC")
+  pdat_TCGA(dataset = 2020, basis = getOption("basis"))
+  pdat_HPA(dataset = 2020, basis = getOption("basis"))
+  pdat_osmotic_gene(dataset = 2020, basis = getOption("basis"))
+  pdat_aneuploidy(dataset = 2020, basis = getOption("basis"))
+  pdat_yeast_stress(dataset = 2020, basis = getOption("basis"))
 }
 
 \arguments{
@@ -37,7 +38,7 @@ Expression levels for normal tissue and cancer are from the Genotype-Tissue Expr
 
 \code{pdat_yeast_stress} gets data for differentially expressed genes in hyper- and hypo-osmotic stress in yeast (Gasch et al., 2000).
 
-Each of the functions (except \code{pdat_aneuploidy}) has a corresponding vignette.
+Each of the functions, except \code{pdat_aneuploidy}, has a corresponding vignette.
 These vignettes are located in \code{inst/vignettes}, so they are not built with the package, but can be run using \code{\link{makevig}}.
 The output files (CSV) from the vignettes are included in the package, and they are used in some figures: \code{\link{gradH2O7}} (osmotic_gene), \code{\link{canH2O3}} (TCGA, HPA), \code{\link{canH2O5}} (yeast_stress).
 }

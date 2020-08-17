@@ -16,12 +16,12 @@ The functions are exported in the package so they are available to user scripts.
   mplot(study, seqtype, plottype = "bars", ylim = NULL, plot.RNA = TRUE,
     taxid = NULL, dsDNA = TRUE, abbrev = NULL, col = NULL, add.label = TRUE,
     maxdepth = NULL, H2O = FALSE, plot.it = TRUE, add.title = TRUE, yline = 2,
-    basis = "rQEC", datadir = NULL, mdata = studies, add = FALSE, pch = 19,
+    basis = getOption("basis"), datadir = NULL, mdata = studies, add = FALSE, pch = 19,
     var = NULL, srt = 45, ilabel = NULL)
   mpage(subset = "gradoxSI", H2O = FALSE, plottype = "bars", dsDNA = TRUE,
     set.par = TRUE, add.label = TRUE, mfrow = NULL)
   ppage(subset = "gradoxSI", H2O = FALSE, set.par = TRUE, plot.it = TRUE,
-    basis = "rQEC", add.label = TRUE, mfrow = NULL)
+    basis = getOption("basis"), add.label = TRUE, mfrow = NULL)
   mcomp(mout, yvar = "RNA")
   pcomp(mout, pout, seqtype = "MG", vars = NULL, parts = c("plot", "legend"),
     yline = 2, xlim = NULL, ylim = NULL, reorder = TRUE,

@@ -1,3 +1,8 @@
+CHANGES IN JMDplots 1.2.4
+-------------------------
+
+- 20200817 Use canprot's options("basis") to select basis species.
+
 CHANGES IN JMDplots 1.2.3
 -------------------------
 
