@@ -39,7 +39,7 @@ importFrom("CHNOSZ",
   # first batch: gradox
   "ZC", "affinity", "aminoacids", "as.chemical.formula", 
   "basis", "diagram", "info", "label.figure", "makeup",
-  "species", "swap.basis", "thermo", "thermo.axis", "today",
+  "species", "swap.basis", "thermo", "thermo.axis",
   # second batch: chnszten
   "DGtr", "axis.label", "bgamma", "describe.basis", "describe.property",
   "describe.reaction", "equilibrate", "expr.property", "expr.species", "findit",

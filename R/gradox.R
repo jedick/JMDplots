@@ -580,7 +580,7 @@ seqcomp2OBIGT <- function(seqcomp, type="DNA") {
   # in CHNOSZ_1.1.3, diagram() (or another function) attempts to interpret names with underscores
   # as proteins, ultimately leading to incorrect diagrams (i.e. only single fields appear)
   OBIGT_out$name <- gsub("_", "-", rownames(seqcomp))
-  OBIGT_out$date <- today()
+  OBIGT_out$date <- as.character(Sys.Date())
   OBIGT_out$abbrv <- OBIGT_out$ref1 <- NA
   # loop over sequence compositions (rows)
   for(i in 1:nrow(seqcomp)) {

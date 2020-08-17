@@ -47,9 +47,8 @@ gradH2O1 <- function(pdf = FALSE) {
 
   # set up figure
   if(pdf) pdf("gradH2O1.pdf", width = 6, height = 6)
-  par(mfrow = c(3, 3))
+  par(mfrow = c(3, 4))
   par(mar = c(3.2, 3.2, 2.5, 1))
-  par(mgp = c(2, 0.7, 0))
   par(las = 1)
   par(cex.lab = 1.2)
 
@@ -105,62 +104,62 @@ gradH2O1 <- function(pdf = FALSE) {
   pf.ecoli <- protein.formula(ecoli)
   ZC.ecoli <- ZC(pf.ecoli)
 
-  # calculate nH2O and nO2 of amino acids with CHNOS basis
+  # Calculate nH2O and nO2 of amino acids with CHNOS basis
   basis("CHNOS")
   species(aa)
-
-  # plot 1: nH2O-ZC of amino acids (CHNOS)
+  # Plot 1: nH2O-ZC of amino acids (CHNOS)
+  par(mgp = c(2, 0.7, 0))
   aaplot(ZC.aa, species()$H2O, nH2Olab, "bottomleft", "Amino acids (CHNOS)", "(a)")
-
-  # plot 2: nO2-ZC of amino acids (CHNOS)
-  par(mgp = c(2.2, 0.7, 0), xpd = NA)
+  # Plot 2: nO2-ZC of amino acids (CHNOS)
+  par(mgp = c(2.2, 0.7, 0))
   aaplot(ZC.aa, species()$O2, nO2lab, "bottomright", "Amino acids (CHNOS)", "(b)")
 
-  # calculate nH2O and nO2 with QEC basis
+  # Calculate nH2O and nO2 with QEC basis
   basis("QEC")
   species(aa)
-
-  # plot 3: nO2-ZC of amino acids (QEC)
-  aaplot(ZC.aa, species()$O2, nO2lab, "bottomright", "Amino acids (QEC)", "(c)")
-
-  # plot 4: nH2O-ZC of amino acids (QEC)
+  # Plot 3: nH2O-ZC of amino acids (QEC)
   par(mgp = c(2, 0.7, 0))
-  # save the residuals here
-  # subtract 0.355 so mean of human proteins = 0 20191114
-  # (see canprot::H2OAA)
-  rQEC <- aaplot(ZC.aa, species()$H2O, nH2Olab, "bottomright", "Amino acids (QEC)", "(d)") - 0.355
-  names(rQEC) <- aminoacids(3)
-
-  # plot 5: nH2O-ZC of human proteins (QEC)
+  aaplot(ZC.aa, species()$H2O, nH2Olab, "bottomright", "Amino acids (QEC)", "(c)")
+  # Plot 4: nO2-ZC of amino acids (QEC)
   par(mgp = c(2.2, 0.7, 0))
-  nH2O.human <- H2OAA(human, basis = "QEC")
-  scatterfun(ZC.human, nH2O.human, "bottomleft", "Human proteins (QEC)", "(e)")
+  aaplot(ZC.aa, species()$O2, nO2lab, "bottomright", "Amino acids (QEC)", "(d)")
 
-  # plot 6: nH2O-ZC of E. coli proteins (QEC)
-  nH2O.ecoli <- H2OAA(ecoli, basis = "QEC")
-  scatterfun(ZC.ecoli, nH2O.ecoli, "bottomleft", quote(italic(E.~coli)*" proteins (QEC)"), "(f)")
-
-  # plot 7: nH2O-ZC of amino acids (rQEC)
+  ## Calculate nH2O and nO2 of amino acids with MTa basis
+  basis(c("methionine", "threonine", "acetic acid", "H2O", "O2"))
+  species(aa)
+  # Plot 5: nH2O-ZC of amino acids (MTa)
   par(mgp = c(2, 0.7, 0))
-  aaplot(ZC.aa, rQEC, nH2Olab, "bottomright", "Amino acids (rQEC)", "(g)")
-
-  # plot 8: nH2O-ZC of human proteins (rQEC)
+  aaplot(ZC.aa, species()$H2O, nH2Olab, "bottomright", "Amino acids (MTa)", "(e)")
+  # Plot 6: nO2-ZC of amino acids (MTa)
   par(mgp = c(2.2, 0.7, 0))
-  nH2O.human <- H2OAA(human, basis = "rQEC")
-  scatterfun(ZC.human, nH2O.human, "bottomleft", "Human proteins (rQEC)", "(h)")
+  aaplot(ZC.aa, species()$O2, nO2lab, "bottomright", "Amino acids (MTa)", "(f)")
+  # Plot 7: nH2O-ZC of human proteins (MTa)
+  nH2O.human <- H2OAA(human, basis = "MTa")
+  scatterfun(ZC.human, nH2O.human, "bottomleft", "Human proteins (MTa)", "(g)")
+  # Plot 8: nH2O-ZC of E. coli proteins (MTa)
+  nH2O.ecoli <- H2OAA(ecoli, basis = "MTa")
+  scatterfun(ZC.ecoli, nH2O.ecoli, "bottomleft", quote(italic(E.~coli)*" proteins (MTa)"), "(h)")
 
-  # plot 9: nH2O-ZC of E. coli proteins (rQEC)
-  nH2O.ecoli <- H2OAA(ecoli, basis = "rQEC")
-  scatterfun(ZC.ecoli, nH2O.ecoli, "bottomleft", quote(italic(E.~coli)*" proteins (rQEC)"), "(i)")
-  print(paste0("mean ZC for human, E.coli: ", round(mean(ZC.human), 3), ", ", round(mean(ZC.ecoli), 3)))
-  print(paste0("mean nH2O for human, E.coli: ", round(mean(nH2O.human), 3), ", ", round(mean(nH2O.ecoli), 3)))
+  ## Calculate nH2O and nO2 of amino acids with CRa basis
+  basis(c("cysteine", "arginine", "acetic acid", "H2O", "O2"))
+  species(aa)
+  # Plot 9: nH2O-ZC of amino acids (CRa)
+  par(mgp = c(2, 0.7, 0))
+  aaplot(ZC.aa, species()$H2O, nH2Olab, "bottomright", "Amino acids (CRa)", "(i)")
+  # Plot 10: nO2-ZC of amino acids (CRa)
+  par(mgp = c(2.2, 0.7, 0))
+  aaplot(ZC.aa, species()$O2, nO2lab, "bottomright", "Amino acids (CRa)", "(j)")
+  # Plot 11: nH2O-ZC of human proteins (CRa)
+  nH2O.human <- H2OAA(human, basis = "CRa")
+  scatterfun(ZC.human, nH2O.human, "bottomleft", "Human proteins (CRa)", "(k)")
+  # Plot 12: nH2O-ZC of E. coli proteins (CRa)
+  nH2O.ecoli <- H2OAA(ecoli, basis = "CRa")
+  scatterfun(ZC.ecoli, nH2O.ecoli, "bottomleft", quote(italic(E.~coli)*" proteins (CRa)"), "(l)")
 
   if(pdf) {
     dev.off()
     addexif("gradH2O1", "Derivation of stoichiometric hydration state", "Dick et al. (2020) (preprint)")
   }
-  ## output value of rQEC for checking code of H2OAA()
-  #rQEC
 }
 
 # nH2O-ZC scatterplots for redox gradients and the Baltic Sea 20190713
