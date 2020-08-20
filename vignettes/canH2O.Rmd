@@ -30,12 +30,15 @@ nAA <- "<i>n</i><sub>AA</sub>"
 nO2 <- "<i>n</i><sub>O<sub>2</sub></sub>"
 ```
 
+```{r library, message = FALSE, results = "hide"}
+library(JMDplots)
+# read canprot's 'basis' option
+basis <- getOption("basis")
+```
+
 This vignette contains plots from the paper by [<span title="Water as a reactant in the differential expression of proteins in cancer">Dick (2020)</span>](https://doi.org/10.1101/2020.04.09.035022).
 This vignette was compiled with R packages [JMDplots](https://github.com/jedick/JMDplots) version `r packageDescription("JMDplots")$Version` and [canprot](https://github.com/jedick/canprot) version `r packageDescription("canprot")$Version`.
-
-```{r JMDplots, message = FALSE, results = "hide"}
-library(JMDplots)
-```
+The **`r basis`** basis species (`r basis.text(basis)`, H~2~O, O~2~) are used for the analysis of stoichiometric hydration state (`r nH2O`).
 
 ## Study overview (Figure 1)
 ```{r canH2O1, message = FALSE, fig.align='center', out.width='75%', fig.width = 7, fig.height = 7, pngquant = pngquant}
@@ -72,7 +75,7 @@ kable(canH2OT2(), align = "r")
 kable(canH2OT1())
 ```
 
-## Comparison of MTa and QEC basis species (Figure S1)
+## Comparison of CQa and QEC basis species (Figure S1)
 ```{r canH2OS1, message = FALSE, fig.align='center', out.width='100%', fig.width = 9, fig.height = 3, pngquant = pngquant}
 canH2OS1()
 ```

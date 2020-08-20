@@ -47,7 +47,7 @@ importFrom("CHNOSZ",
   "nonideal", "ratlab", "reset", "solubility",
   "subcrt", "thermo.plot.new", "water",
   # third batch: gradH2O
-  "protein.formula",
+  "protein.formula", "protein.basis",
   # fourth batch: aoscp
   "nucleic.formula", "convert", "protein.length", "read.fasta",
   # fifth batch: scsc

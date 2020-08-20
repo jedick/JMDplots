@@ -214,7 +214,7 @@ canH2O2 <- function(pdf = FALSE) {
       pch[grepl("rat", alldat[[i]]$tags)] <- 21
     }
     dpargs <- list(comptab = alldat[i], pch = pch, pt.text = NA, col = col[i], cex = 1, labtext = NA)
-    if(packageVersion("canprot") > "1.0.0") dpargs <- c(dpargs, list(xlim = c(-0.06, 0.06), ylim = c(-0.06, 0.06), axes = FALSE, frame.plot = TRUE))
+    if(packageVersion("canprot") > "1.0.0") dpargs <- c(dpargs, list(xlim = c(-0.06, 0.06), ylim = c(-0.07, 0.07), axes = FALSE, frame.plot = TRUE))
     do.call(diffplot, dpargs)
     labels <- at <- seq(-0.06, 0.06, 0.02)
     labels[c(2, 3, 5, 6)] <- NA
@@ -242,10 +242,10 @@ canH2O2 <- function(pdf = FALSE) {
   names <- names(culture)
   names[1] <- "hyp-\noxia"
   names[3] <- "salt"
-  contplot(culture, "Cell culture", col1, xlim = c(-0.06, 0.06), ylim = c(-0.06, 0.06),
+  contplot(culture, "Cell culture", col1, xlim = c(-0.06, 0.06), ylim = c(-0.07, 0.07),
            dx = c(0.028, 0.015, -0.007, 0.017, -0.022), dy = c(-0.005, 0.03, 0.037, -0.03, -0.03), names = names)
   label.figure("C", cex = 2, font = 2, xfrac = 0.02, yfrac = 0.9)
-  contplot(cancer, "Cancer tissue", col2, xlim = c(-0.06, 0.06), ylim = c(-0.06, 0.06),
+  contplot(cancer, "Cancer tissue", col2, xlim = c(-0.06, 0.06), ylim = c(-0.07, 0.07),
            dx = c(-0.008, NA, 0.020, -0.027, 0.018, -0.020), dy = c(-0.037, NA, 0.035, 0.03, -0.035, -0.02))
   text(0.025, 0.038, "CRC", col = col2[2])
 
@@ -483,7 +483,7 @@ canH2OT1 <- function() {
   out
 }
 
-# Comparison of MTa and QEC basis species 20200817
+# Comparison of CQa and QEC basis species 20200817
 # rQEC (residual-corrected nH2O with QEC basis) 20190713
 canH2OS1 <- function(pdf = FALSE) {
   # set up figure
@@ -496,7 +496,7 @@ canH2OS1 <- function(pdf = FALSE) {
 
   # define axis labels
   nH2Olab.QEC <- expression(italic(n)[H[2] * O]~"(QEC)")
-  nH2Olab.MTa <- expression(italic(n)[H[2] * O]~"(MTa)")
+  nH2Olab.CQa <- expression(italic(n)[H[2] * O]~"(CQa)")
   ZClab <- expression(italic(Z)[C])
 
   # function to plot values for amino acids
@@ -515,17 +515,17 @@ canH2OS1 <- function(pdf = FALSE) {
   aaplot(ZCAA(AAcomp), H2OAA(AAcomp, "QEC"), ZClab, nH2Olab.QEC, "bottomright")
   label.figure("A", cex = 1.7, font = 2)
 
-  # plot 2: nH2O-ZC of amino acids (MTa)
-  aaplot(ZCAA(AAcomp), H2OAA(AAcomp, "MTa"), ZClab, nH2Olab.MTa, "bottomright")
+  # plot 2: nH2O-ZC of amino acids (CQa)
+  aaplot(ZCAA(AAcomp), H2OAA(AAcomp, "CQa"), ZClab, nH2Olab.CQa, "bottomright")
   label.figure("B", cex = 1.7, font = 2)
 
-  # plot 3: nH2O (MTa) - nH2O (QEC) of amino acids
-  aaplot(H2OAA(AAcomp, "QEC"), H2OAA(AAcomp, "MTa"), nH2Olab.QEC, nH2Olab.MTa, "bottomright", NULL)
+  # plot 3: nH2O (CQa) - nH2O (QEC) of amino acids
+  aaplot(H2OAA(AAcomp, "QEC"), H2OAA(AAcomp, "CQa"), nH2Olab.QEC, nH2Olab.CQa, "bottomright", NULL)
   label.figure("C", cex = 1.7, font = 2)
 
   if(pdf) {
     dev.off()
-    addexif("canH2OS1", "Comparison of MTa and QEC basis species", "Dick (2020) (preprint)")
+    addexif("canH2OS1", "Comparison of CQa and QEC basis species", "Dick (2020) (preprint)")
   }
 }
 

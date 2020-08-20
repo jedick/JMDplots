@@ -19,7 +19,7 @@ Plots from the paper by Dick et al. (2020).
 \usage{
   gradH2O0()
   gradH2O1(pdf = FALSE)
-  gradH2O2(pdf = FALSE, vars = "H2O-ZC")
+  gradH2O2(pdf = FALSE, vars = "H2O-ZC", lm = NULL)
   gradH2O3(pdf = FALSE, var = NULL)
   gradH2O4(pdf = FALSE)
   gradH2O5(pdf = FALSE)
@@ -32,6 +32,7 @@ Plots from the paper by Dick et al. (2020).
 \arguments{
   \item{pdf}{logical, make a PDF file?}
   \item{vars}{character, variables to plot (passed to \code{\link{pcomp}})}
+  \item{lm}{linear model object (returned by \code{gradH2O1})}
   \item{var}{character, variable to plot (passed to \code{\link{mplot}})}
 }
 
@@ -92,7 +93,11 @@ Rodriguez-Brito, B. et al. (2010) Viral and microbial community dynamics in four
 }
 
 \examples{
-gradH2O2()
+# Make first plot and save linear model
+# (nH2O ~ ZC for E. coli proteins)
+lm <- gradH2O1()
+# Make second plot and use lm to show trend for E. coli
+gradH2O2(lm = lm)
 
 # list ZC and nH2O of proteomes for Nif-encoding genomes
 NifProteomes()

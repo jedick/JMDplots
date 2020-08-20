@@ -46,9 +46,10 @@ gradH2O0 <- function() {
 gradH2O1 <- function(pdf = FALSE) {
 
   # set up figure
-  if(pdf) pdf("gradH2O1.pdf", width = 8, height = 6)
-  par(mfrow = c(3, 4))
-  par(mar = c(3.2, 3.2, 2.5, 1))
+  if(pdf) pdf("gradH2O1.pdf", width = 8, height = 4)
+  par(mfrow = c(2, 4))
+  par(mar = c(3.2, 3.4, 2.5, 1))
+  par(mgp = c(2.2, 0.7, 0))
   par(las = 1)
   par(cex.lab = 1.2)
 
@@ -63,7 +64,7 @@ gradH2O1 <- function(pdf = FALSE) {
     lines(xlim, predict(mylm, data.frame(ZC = xlim)), ...)
     # add R-squared text
     if(!is.null(legend.x)) {
-      R2 <- format(round(summary(mylm)$r.squared, 2), nsmall = 2)
+      R2 <- format(round(summary(mylm)$r.squared, 3), nsmall = 3)
       R2txt <- substitute(italic(R)^2 == R2, list(R2 = R2))
       legend(legend.x, legend = R2txt, bty = "n")
     }
@@ -83,9 +84,15 @@ gradH2O1 <- function(pdf = FALSE) {
     lmfun(ZC, y, c(-1, 1), legend.x)
   }
 
-  scatterfun <- function(ZC, nH2O, legend.x, main, lab) {
+  scatterH2O <- function(ZC, nH2O, legend.x, main, lab) {
     smoothScatter(ZC, nH2O, xlab = ZClab, ylab = nH2Olab, colramp = colorRampPalette(c("transparent", blues9)))
     lmfun(ZC, nH2O, par("usr")[1:2], legend.x, lty = 2, lwd = 2, col = "grey40")
+    mainlab(main, lab)
+  }
+
+  scatterO2 <- function(ZC, nO2, legend.x, main, lab) {
+    smoothScatter(ZC, nO2, xlab = ZClab, ylab = nO2lab, colramp = colorRampPalette(c("transparent", blues9)))
+    lmfun(ZC, nO2, par("usr")[1:2], legend.x, lty = 2, lwd = 2, col = "grey40")
     mainlab(main, lab)
   }
 
@@ -94,76 +101,59 @@ gradH2O1 <- function(pdf = FALSE) {
   # calculate ZC of the amino acids
   ZC.aa <- ZC(info(aa, "aq"))
 
-  # get amino acid composition of human proteins (UniProt)
-  human <- get("human_base", canprot::human)
-  pf.human <- protein.formula(human)
-  ZC.human <- ZC(pf.human)
-
   # get amino acid compositions of E. coli proteins (UniProt)
   ecoli <- read.csv(system.file("/extdata/organisms/ecoli.csv.xz", package = "JMDplots"), as.is = TRUE)
   pf.ecoli <- protein.formula(ecoli)
   ZC.ecoli <- ZC(pf.ecoli)
+  # get nH2O and nO2 with CQa basis species
+  basis(c("cysteine", "glutamine", "acetic acid", "H2O", "O2"))
+  pb.ecoli <- protein.basis(ecoli)
+  pl.ecoli <- protein.length(ecoli)
+  nH2O.ecoli <- pb.ecoli[, "H2O"] / pl.ecoli
+  nO2.ecoli <- pb.ecoli[, "O2"] / pl.ecoli
+  # check that nH2O equals that calculated with canprot::H2OAA
+  nH2O.ref <- H2OAA(ecoli, basis = "CQa")
+  stopifnot(all(nH2O.ecoli == nH2O.ref))
 
   # Calculate nH2O and nO2 of amino acids with CHNOS basis
   basis("CHNOS")
   species(aa)
   # Plot 1: nH2O-ZC of amino acids (CHNOS)
-  par(mgp = c(2, 0.7, 0))
   aaplot(ZC.aa, species()$H2O, nH2Olab, "bottomleft", "Amino acids (CHNOS)", "(a)")
   # Plot 2: nO2-ZC of amino acids (CHNOS)
-  par(mgp = c(2.2, 0.7, 0))
   aaplot(ZC.aa, species()$O2, nO2lab, "bottomright", "Amino acids (CHNOS)", "(b)")
 
   # Calculate nH2O and nO2 with QEC basis
   basis("QEC")
   species(aa)
   # Plot 3: nH2O-ZC of amino acids (QEC)
-  par(mgp = c(2, 0.7, 0))
   aaplot(ZC.aa, species()$H2O, nH2Olab, "bottomright", "Amino acids (QEC)", "(c)")
   # Plot 4: nO2-ZC of amino acids (QEC)
-  par(mgp = c(2.2, 0.7, 0))
   aaplot(ZC.aa, species()$O2, nO2lab, "bottomright", "Amino acids (QEC)", "(d)")
 
-  ## Calculate nH2O and nO2 of amino acids with MTa basis
-  basis(c("methionine", "threonine", "acetic acid", "H2O", "O2"))
+  ## Calculate nH2O and nO2 of amino acids with CQa basis
+  basis(c("cystine", "glutamine", "acetic acid", "H2O", "O2"))
   species(aa)
-  # Plot 5: nH2O-ZC of amino acids (MTa)
-  par(mgp = c(2, 0.7, 0))
-  aaplot(ZC.aa, species()$H2O, nH2Olab, "bottomright", "Amino acids (MTa)", "(e)")
-  # Plot 6: nO2-ZC of amino acids (MTa)
-  par(mgp = c(2.2, 0.7, 0))
-  aaplot(ZC.aa, species()$O2, nO2lab, "bottomright", "Amino acids (MTa)", "(f)")
-  # Plot 7: nH2O-ZC of human proteins (MTa)
-  nH2O.human <- H2OAA(human, basis = "MTa")
-  scatterfun(ZC.human, nH2O.human, "bottomleft", "Human proteins (MTa)", "(g)")
-  # Plot 8: nH2O-ZC of E. coli proteins (MTa)
-  nH2O.ecoli <- H2OAA(ecoli, basis = "MTa")
-  scatterfun(ZC.ecoli, nH2O.ecoli, "bottomleft", quote(italic(E.~coli)*" proteins (MTa)"), "(h)")
-
-  ## Calculate nH2O and nO2 of amino acids with CRa basis
-  basis(c("cysteine", "arginine", "acetic acid", "H2O", "O2"))
-  species(aa)
-  # Plot 9: nH2O-ZC of amino acids (CRa)
-  par(mgp = c(2, 0.7, 0))
-  aaplot(ZC.aa, species()$H2O, nH2Olab, "bottomright", "Amino acids (CRa)", "(i)")
-  # Plot 10: nO2-ZC of amino acids (CRa)
-  par(mgp = c(2.2, 0.7, 0))
-  aaplot(ZC.aa, species()$O2, nO2lab, "bottomright", "Amino acids (CRa)", "(j)")
-  # Plot 11: nH2O-ZC of human proteins (CRa)
-  nH2O.human <- H2OAA(human, basis = "CRa")
-  scatterfun(ZC.human, nH2O.human, "bottomleft", "Human proteins (CRa)", "(k)")
-  # Plot 12: nH2O-ZC of E. coli proteins (CRa)
-  nH2O.ecoli <- H2OAA(ecoli, basis = "CRa")
-  scatterfun(ZC.ecoli, nH2O.ecoli, "bottomleft", quote(italic(E.~coli)*" proteins (CRa)"), "(l)")
+  # Plot 5: nH2O-ZC of amino acids (CQa)
+  aaplot(ZC.aa, species()$H2O, nH2Olab, "bottomright", "Amino acids (CQa)", "(e)")
+  # Plot 6: nO2-ZC of amino acids (CQa)
+  aaplot(ZC.aa, species()$O2, nO2lab, "bottomright", "Amino acids (CQa)", "(f)")
+  # Plot 7: nH2O-ZC of E. coli proteins (CQa)
+  scatterH2O(ZC.ecoli, nH2O.ecoli, "bottomright", quote(italic(E.~coli)*" proteins (CQa)"), "(g)")
+  # Plot 8: nO2-ZC of E. coli proteins (CQa)
+  scatterO2(ZC.ecoli, nO2.ecoli, "bottomright", quote(italic(E.~coli)*" proteins (CQa)"), "(h)")
 
   if(pdf) {
     dev.off()
     addexif("gradH2O1", "Derivation of stoichiometric hydration state", "Dick et al. (2020) (preprint)")
   }
+  
+  # Return linear model of nH2O-ZC for amino acids
+  invisible(lm(species()$H2O ~ ZC.aa))
 }
 
 # nH2O-ZC scatterplots for redox gradients and the Baltic Sea 20190713
-gradH2O2 <- function(pdf = FALSE, vars = "H2O-ZC") {
+gradH2O2 <- function(pdf = FALSE, vars = "H2O-ZC", lm = NULL) {
   if(pdf) pdf("gradH2O2.pdf", width = 12, height = 5.6)
   par(mfrow = c(1, 2))
   par(mar = c(4, 4.5, 2, 1), las = 1, cex = 1.2)
@@ -203,6 +193,12 @@ gradH2O2 <- function(pdf = FALSE, vars = "H2O-ZC") {
     text(-0.1615, 0.0025, "water", adj = 0, cex = 0.8)
     text(c(-0.188, -0.212, -0.186, -0.161), c(0.0455, 0.0344, 0.0257, 0.0248), c("Nif-D", "Nif-C", "Nif-B", "Nif-A"), adj = 0, cex = 0.8)
     text(-0.218, 0.0365, "NF", cex=0.7, font = 2)
+    # add H2O-ZC fit for E. coli 20200819
+    if(!is.null(lm)) {
+      x <- par("usr")[1:2]
+      y <- predict(lm, data.frame(ZC.aa = x))
+      for(dy in seq(-0.55, -0.65, -0.01)) lines(x, y + dy, col = "gray80")
+    }
   }
   if(vars == "pIG") {
     text(c(5.00, 7.49, 5.65, 5.68), c(-0.123, -0.130, -0.109, -0.066), c("Nif-D", "Nif-C", "Nif-B", "Nif-A"), adj = 0)
@@ -225,6 +221,12 @@ gradH2O2 <- function(pdf = FALSE, vars = "H2O-ZC") {
     text(-0.135, 0.026, "surface\n> 6 PSU")
     text(-0.185, 0.031, "chl a max\n< 6 PSU")
     text(-0.18, 0.015, "chl a max\n> 6 PSU")
+    # add H2O-ZC fit for E. coli 20200819
+    if(!is.null(lm)) {
+      x <- par("usr")[1:2]
+      y <- predict(lm, data.frame(ZC.aa = x))
+      for(dy in seq(-0.55, -0.65, -0.01)) lines(x, y + dy, col = "gray80")
+    }
   }
   title("Baltic Sea", font.main = 1)
   label.figure("(b)", cex = 2, xfrac = 0.035)
@@ -290,7 +292,10 @@ gradH2O4 <- function(pdf = FALSE) {
   par(las = 1, mar = c(4, 4.2, 2, 1), mgp = c(2.5, 1, 0))
   par(cex.lab = 1.5)
   xlim <- c(-0.2, -0.08)
-  ylim <- c(-1.8, -1.67)
+  if(getOption("basis") == "MTa") ylim <- c(-1.8, -1.67)
+  if(getOption("basis") == "CRa") ylim <- c(-1.46, -1.35)
+  if(getOption("basis") == "CQa") ylim <- c(-1.15, -1)
+  if(getOption("basis") == "QEC") ylim <- c(-0.8, -0.72)
 
   # plots 1-2: Amazon river metagenome
   mout <- ppage("amazon", plot.it = FALSE)

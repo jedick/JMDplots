@@ -28,12 +28,15 @@ ZC <- "<i>Z</i><sub>C</sub>"
 nH2O <- "<i>n</i><sub>H<sub>2</sub>O</sub>"
 ```
 
+```{r library, message = FALSE, results = "hide"}
+library(JMDplots)
+# read canprot's 'basis' option
+basis <- getOption("basis")
+```
+
 This vignette contains plots from the paper by [<span title="Uncovering chemical signatures of salinity gradients through compositional analysis of protein sequences">Dick et al. (2020)</span>](https://doi.org/10.5194/bg-2020-146).
 This vignette was compiled with R packages [JMDplots](https://github.com/jedick/JMDplots) version `r packageDescription("JMDplots")$Version` and [canprot](https://github.com/jedick/canprot) version `r packageDescription("canprot")$Version`.
-
-```{r JMDplots, message = FALSE, results = "hide"}
-library(JMDplots)
-```
+The **`r basis`** basis species (`r basis.text(basis)`, H~2~O, O~2~) are used for the analysis of stoichiometric hydration state (`r nH2O`).
 
 ## Number of reactions for each amino acid in _E. coli_ metabolic reconstruction
 Reaction equations used for this calculation are from <a href="https://doi.org/10.1038/msb4100155" title="A genome-scale metabolic reconstruction for Escherichia coli K-12 MG1655 that accounts for 1260 ORFs and thermodynamic information">Feist et al. (2007)</a>.
@@ -42,13 +45,13 @@ gradH2O0()
 ```
 
 ## Derivation of stoichiometric hydration state (Figure 1)
-```{r gradH2O1, message = FALSE, fig.align='center', out.width='100%', fig.width = 8, fig.height = 6, pngquant = pngquant}
-gradH2O1()
+```{r gradH2O1, message = FALSE, fig.align='center', out.width='100%', fig.width = 8, fig.height = 4, pngquant = pngquant}
+lm <- gradH2O1()
 ```
 
 ## `r nH2O`-`r ZC` scatterplots for redox gradients and the Baltic Sea (Figure 2)
 ```{r gradH2O2, message = FALSE, fig.align='center', out.width='100%', fig.width = 12, fig.height = 5.6, pngquant = pngquant}
-gradH2O2()
+gradH2O2(lm = lm)
 ```
 
 ## `r nH2O` for Baltic Sea metagenome and metatranscriptome in different size fractions (Figure 3)
