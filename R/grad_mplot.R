@@ -96,9 +96,7 @@ mplot <- function(study, seqtype, plottype = "bars", ylim = NULL, plot.RNA = TRU
     if(identical(var, "GRAVY")) ylim <- c(-0.3, -0.05)
     else if(identical(var, "pI")) ylim <- c(4, 9)
     else if(H2O) {
-      if(getOption("basis") == "MTa") ylim <- c(-1.76, -1.67)
-      if(getOption("basis") == "CRa") ylim <- c(-1.45, -1.35)
-      if(getOption("basis") == "CQa") ylim <- c(-1.10, -1.02)
+      if(getOption("basis") == "QCa") ylim <- c(-1.10, -1.02)
       if(getOption("basis") == "QEC") ylim <- c(-0.78, -0.7)
     }
     else ylim <- mylim
@@ -334,9 +332,7 @@ pcomp <- function(mout, pout, seqtype="MG", vars = NULL, parts=c("plot", "legend
         xlab <- quote(italic(Z)[C])
       }
       if(is.null(ylim)) {
-        if(getOption("basis") == "MTa") ylim <- c(-1.76, -1.67)
-        if(getOption("basis") == "CRa") ylim <- c(-1.45, -1.35)
-        if(getOption("basis") == "CQa") ylim <- c(-1.10, -1.02)
+        if(getOption("basis") == "QCa") ylim <- c(-1.10, -1.02)
         if(getOption("basis") == "QEC") ylim <- c(-0.78, -0.7)
       }
       ylab <- quote(italic(n)[H[2]*O])

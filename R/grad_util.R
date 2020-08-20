@@ -110,7 +110,7 @@ plotMG <- function(dataset="Guerrero_Negro_IMG_MG", plottype="bars",
         mypI <- pI(mycomp)
         pI <- c(pI, mean(mypI))
         pI.SD <- c(pI.SD, sd(mypI))
-        # add basis argument (ie QEC, MTa, CRa or CQa) here
+        # add basis argument (ie QEC or QCa) here
         myX <- Xfun(mycomp, basis)
       } else {
         # use base-paired (double-stranded) DNA

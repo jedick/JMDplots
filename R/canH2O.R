@@ -483,7 +483,7 @@ canH2OT1 <- function() {
   out
 }
 
-# Comparison of CQa and QEC basis species 20200817
+# Comparison of QCa and QEC basis species 20200817
 # rQEC (residual-corrected nH2O with QEC basis) 20190713
 canH2OS1 <- function(pdf = FALSE) {
   # set up figure
@@ -496,7 +496,7 @@ canH2OS1 <- function(pdf = FALSE) {
 
   # define axis labels
   nH2Olab.QEC <- expression(italic(n)[H[2] * O]~"(QEC)")
-  nH2Olab.CQa <- expression(italic(n)[H[2] * O]~"(CQa)")
+  nH2Olab.QCa <- expression(italic(n)[H[2] * O]~"(QCa)")
   ZClab <- expression(italic(Z)[C])
 
   # function to plot values for amino acids
@@ -515,17 +515,17 @@ canH2OS1 <- function(pdf = FALSE) {
   aaplot(ZCAA(AAcomp), H2OAA(AAcomp, "QEC"), ZClab, nH2Olab.QEC, "bottomright")
   label.figure("A", cex = 1.7, font = 2)
 
-  # plot 2: nH2O-ZC of amino acids (CQa)
-  aaplot(ZCAA(AAcomp), H2OAA(AAcomp, "CQa"), ZClab, nH2Olab.CQa, "bottomright")
+  # plot 2: nH2O-ZC of amino acids (QCa)
+  aaplot(ZCAA(AAcomp), H2OAA(AAcomp, "QCa"), ZClab, nH2Olab.QCa, "bottomright")
   label.figure("B", cex = 1.7, font = 2)
 
-  # plot 3: nH2O (CQa) - nH2O (QEC) of amino acids
-  aaplot(H2OAA(AAcomp, "QEC"), H2OAA(AAcomp, "CQa"), nH2Olab.QEC, nH2Olab.CQa, "bottomright", NULL)
+  # plot 3: nH2O (QCa) - nH2O (QEC) of amino acids
+  aaplot(H2OAA(AAcomp, "QEC"), H2OAA(AAcomp, "QCa"), nH2Olab.QEC, nH2Olab.QCa, "bottomright", NULL)
   label.figure("C", cex = 1.7, font = 2)
 
   if(pdf) {
     dev.off()
-    addexif("canH2OS1", "Comparison of CQa and QEC basis species", "Dick (2020) (preprint)")
+    addexif("canH2OS1", "Comparison of QCa and QEC basis species", "Dick (2020) (preprint)")
   }
 }
 

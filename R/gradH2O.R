@@ -105,14 +105,14 @@ gradH2O1 <- function(pdf = FALSE) {
   ecoli <- read.csv(system.file("/extdata/organisms/ecoli.csv.xz", package = "JMDplots"), as.is = TRUE)
   pf.ecoli <- protein.formula(ecoli)
   ZC.ecoli <- ZC(pf.ecoli)
-  # get nH2O and nO2 with CQa basis species
-  basis(c("cysteine", "glutamine", "acetic acid", "H2O", "O2"))
+  # get nH2O and nO2 with QCa basis species
+  basis(c("glutamine", "cysteine", "acetic acid", "H2O", "O2"))
   pb.ecoli <- protein.basis(ecoli)
   pl.ecoli <- protein.length(ecoli)
   nH2O.ecoli <- pb.ecoli[, "H2O"] / pl.ecoli
   nO2.ecoli <- pb.ecoli[, "O2"] / pl.ecoli
   # check that nH2O equals that calculated with canprot::H2OAA
-  nH2O.ref <- H2OAA(ecoli, basis = "CQa")
+  nH2O.ref <- H2OAA(ecoli, basis = "QCa")
   stopifnot(all(nH2O.ecoli == nH2O.ref))
 
   # Calculate nH2O and nO2 of amino acids with CHNOS basis
@@ -131,17 +131,18 @@ gradH2O1 <- function(pdf = FALSE) {
   # Plot 4: nO2-ZC of amino acids (QEC)
   aaplot(ZC.aa, species()$O2, nO2lab, "bottomright", "Amino acids (QEC)", "(d)")
 
-  ## Calculate nH2O and nO2 of amino acids with CQa basis
-  basis(c("cystine", "glutamine", "acetic acid", "H2O", "O2"))
+  ## Calculate nH2O and nO2 of amino acids with QCa basis
+  basis(c("glutamine", "cysteine", "acetic acid", "H2O", "O2"))
   species(aa)
-  # Plot 5: nH2O-ZC of amino acids (CQa)
-  aaplot(ZC.aa, species()$H2O, nH2Olab, "bottomright", "Amino acids (CQa)", "(e)")
-  # Plot 6: nO2-ZC of amino acids (CQa)
-  aaplot(ZC.aa, species()$O2, nO2lab, "bottomright", "Amino acids (CQa)", "(f)")
-  # Plot 7: nH2O-ZC of E. coli proteins (CQa)
-  scatterH2O(ZC.ecoli, nH2O.ecoli, "bottomright", quote(italic(E.~coli)*" proteins (CQa)"), "(g)")
-  # Plot 8: nO2-ZC of E. coli proteins (CQa)
-  scatterO2(ZC.ecoli, nO2.ecoli, "bottomright", quote(italic(E.~coli)*" proteins (CQa)"), "(h)")
+  # Plot 5: nH2O-ZC of amino acids (QCa)
+  aaplot(ZC.aa, species()$H2O, nH2Olab, "bottomright", "Amino acids (QCa)", "(e)")
+  # Plot 6: nO2-ZC of amino acids (QCa)
+  aaplot(ZC.aa, species()$O2, nO2lab, "bottomright", "Amino acids (QCa)", "(f)")
+
+  # Plot 7: nH2O-ZC of E. coli proteins (QCa)
+  scatterH2O(ZC.ecoli, nH2O.ecoli, "bottomright", quote(italic(E.~coli)*" proteins (QCa)"), "(g)")
+  # Plot 8: nO2-ZC of E. coli proteins (QCa)
+  scatterO2(ZC.ecoli, nO2.ecoli, "bottomright", quote(italic(E.~coli)*" proteins (QCa)"), "(h)")
 
   if(pdf) {
     dev.off()
@@ -197,7 +198,7 @@ gradH2O2 <- function(pdf = FALSE, vars = "H2O-ZC", lm = NULL) {
     if(!is.null(lm)) {
       x <- par("usr")[1:2]
       y <- predict(lm, data.frame(ZC.aa = x))
-      for(dy in seq(-0.55, -0.65, -0.01)) lines(x, y + dy, col = "gray80")
+      for(dy in seq(-0.50, -0.60, -0.01)) lines(x, y + dy, col = "gray80")
     }
   }
   if(vars == "pIG") {
@@ -225,7 +226,7 @@ gradH2O2 <- function(pdf = FALSE, vars = "H2O-ZC", lm = NULL) {
     if(!is.null(lm)) {
       x <- par("usr")[1:2]
       y <- predict(lm, data.frame(ZC.aa = x))
-      for(dy in seq(-0.55, -0.65, -0.01)) lines(x, y + dy, col = "gray80")
+      for(dy in seq(-0.50, -0.60, -0.01)) lines(x, y + dy, col = "gray80")
     }
   }
   title("Baltic Sea", font.main = 1)
@@ -292,9 +293,7 @@ gradH2O4 <- function(pdf = FALSE) {
   par(las = 1, mar = c(4, 4.2, 2, 1), mgp = c(2.5, 1, 0))
   par(cex.lab = 1.5)
   xlim <- c(-0.2, -0.08)
-  if(getOption("basis") == "MTa") ylim <- c(-1.8, -1.67)
-  if(getOption("basis") == "CRa") ylim <- c(-1.46, -1.35)
-  if(getOption("basis") == "CQa") ylim <- c(-1.15, -1)
+  if(getOption("basis") == "QCa") ylim <- c(-1.15, -1)
   if(getOption("basis") == "QEC") ylim <- c(-0.8, -0.72)
 
   # plots 1-2: Amazon river metagenome
@@ -365,9 +364,9 @@ gradH2O4 <- function(pdf = FALSE) {
   }
 }
 
-# scatterplots of ZC and nH2O vs GRAVY and pI 20191117
+# scatterplots of ZC and nH2O vs GRAVY 20191117
 gradH2O5 <- function(pdf = FALSE) {
-  if(pdf) pdf("gradH2O5.pdf", width = 7, height = 6)
+  if(pdf) pdf("gradH2O5.pdf", width = 7, height = 33)
   par(las = 1, mar = c(4, 4.2, 1, 1), mgp = c(2.5, 1, 0))
   par(cex.lab = 1.3)
   scatterfun <- function(xvar, yvar, AAcomp) {
@@ -399,20 +398,16 @@ gradH2O5 <- function(pdf = FALSE) {
     R2txt <- substitute(italic(R)^2 == R2, list(R2 = R2))
     legend("bottomleft", legend = R2txt, bty = "n")
   }
-  par(mfrow = c(2, 2))
+  par(mfrow = c(1, 2))
   # get amino acid compositions of E.coli proteins (UniProt)
   ecoli <- read.csv(system.file("/extdata/organisms/ecoli.csv.xz", package = "JMDplots"), as.is = TRUE)
   scatterfun("GRAVY", "ZC", ecoli)
   label.figure("(a)", cex = 1.8)
   scatterfun("GRAVY", "nH2O", ecoli)
   label.figure("(b)", cex = 1.8)
-  scatterfun("pI", "ZC", ecoli)
-  label.figure("(c)", cex = 1.8)
-  scatterfun("pI", "nH2O", ecoli)
-  label.figure("(d)", cex = 1.8)
   if(pdf) {
     dev.off()
-    addexif("gradH2O5", "Scatterplots of GRAVY vs ZC and nH2O", "Dick et al. (2020) (preprint)")
+    addexif("gradH2O5", "Scatterplots of ZC and nH2O vs GRAVY", "Dick et al. (2020) (preprint)")
   }
 }
 

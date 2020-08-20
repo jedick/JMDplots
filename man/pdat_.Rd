@@ -9,7 +9,7 @@
 \description{
   These functions are used to calculate compositional metrics, including carbon oxidation state and stoichiometric hydration state, for differentially expressed proteins or proteins corresponding to differentially expressed genes.
   See the help page for \code{\link[canprot]{pdat_}} in the \pkg{canprot} package for more information about the calculations and results returned by the \code{pdat_} functions.
-  The default for the \code{basis} option, defined in \pkg{canprot}, is \samp{MTa}.
+  The default for the \code{basis} option, defined in \pkg{canprot}, is \samp{QCa}.
   These functions are used in the \code{\link{canH2O}} paper.
 }
 
