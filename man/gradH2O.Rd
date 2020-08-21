@@ -9,7 +9,6 @@
 \alias{gradH2O5}
 \alias{gradH2O6}
 \alias{gradH2O7}
-\alias{gradH2O8}
 \alias{NifProteomes}
 \alias{AAbasis}
 \title{Plots from salinity gradients paper}
@@ -26,7 +25,6 @@ Plots from the paper by Dick et al. (2020).
   gradH2O5(pdf = FALSE)
   gradH2O6(pdf = FALSE)
   gradH2O7(pdf = FALSE)
-  gradH2O8(pdf = FALSE)
   NifProteomes()
   AAbasis()
 }
@@ -47,10 +45,9 @@ This table gives a brief description of each function.
   \code{gradH2O2} \tab \nH2O-\ZC scatterplots for redox gradients and the Baltic Sea \cr
   \code{gradH2O3} \tab \nH2O for Baltic Sea metagenome and metatranscriptome in different size fractions \cr
   \code{gradH2O4} \tab \nH2O-\ZC for freshwater, marine, and hypersaline environments \cr
-  \code{gradH2O5} \tab Scatterplots of \ZC and \nH2O vs GRAVY \cr
-  \code{gradH2O6} \tab \nH2O-\ZC and GRAVY-pI plots for Baltic Sea and Rodriguez-Brito et al. data \cr
-  \code{gradH2O7} \tab Differential gene and protein expression, time-course and NaCl vs organic solutes \cr
-  \code{gradH2O8} \tab Differentially expressed proteins in halophiles under hypo- and hyperosmotic stress \cr
+  \code{gradH2O5} \tab \nH2O-\ZC and GRAVY-pI plots for Baltic Sea and Rodriguez-Brito et al. data \cr
+  \code{gradH2O6} \tab Differential gene and protein expression, time-course and NaCl vs organic solutes \cr
+  \code{gradH2O7} \tab Differentially expressed proteins in halophiles under hypo- and hyperosmotic stress \cr
 }
 
 \code{NifProteomes}, which is used in \code{gradH2O2}, calculates the mean and standard deviation of \ZC and \nH2O for proteomes encoding different homologs of nitrogenase (Nif-D, Nif-C, Nif-B, or Nif-A), as listed by Poudel et al. (2018).
@@ -83,7 +80,7 @@ The organisms are limited to those that have at least 1000 RefSeq protein sequen
     \item{\code{ecoli.csv.xz}}{
       This data file has amino acid compositions of proteins in the UniProt reference proteome of \emph{E. coli} K12 (\url{https://www.uniprot.org/proteomes/UP000000625}).
       The data frame was created by running \code{ecoli <- CHNOSZ::read.fasta("UP000000625_83333.fasta.gz")} and moving \samp{ECOLI} from the protein name to the \code{organism} column.
-      This is used in \code{gradH2O1}.
+      This was previously used in \code{gradH2O1}.
     }
   }
 }
