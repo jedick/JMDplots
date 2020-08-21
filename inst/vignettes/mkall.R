@@ -9,10 +9,10 @@ print(system.time(
   for(basis in c("QCa")) {
     options(basis = basis)
     for(f in files) {
-      sep <- paste(rep("=", nchar(f) + 4), collapse = "")
+      sep <- paste(rep("=", nchar(f) + 8), collapse = "")
       message()
       print(sep, quote = FALSE)
-      print(paste("|", f, "|"), quote = FALSE)
+      print(paste("|", f, basis, "|"), quote = FALSE)
       print(sep, quote = FALSE)
       render(f)
       from <- gsub("Rmd", "html", f)

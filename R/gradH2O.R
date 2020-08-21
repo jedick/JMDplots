@@ -42,12 +42,61 @@ gradH2O0 <- function() {
   sort(sapply(lapply(AAnames, grepl, rxn, fixed = TRUE), sum), decreasing = TRUE)
 }
 
+# Calculate R-squared of nH2O-ZC and nO2-ZC fits for amino acids, using basis species
+# that include amino acids and acetic acid 20200813
+AAbasis <- function() {
+  # combine different amino acids and acetic acid
+  aa <- c(aminoacids(""), "acetic acid")
+  aacomb <- combn(21, 3)
+  # only keep combinations that have sulfur-bearing amino acids
+  icys <- which(aa=="cysteine")
+  imet <- which(aa=="methionine")
+  has.S <- apply(aacomb, 2, function(x) any(x %in% c(icys, imet)))
+  aacomb <- aacomb[, has.S, drop=FALSE]
+  # make abbreviations
+  aa1 <- c(aminoacids(1), "a")
+  abbrv1 <- aa1[aacomb[1, ]]
+  abbrv2 <- aa1[aacomb[2, ]]
+  abbrv3 <- aa1[aacomb[3, ]]
+  abbrv <- paste0(abbrv1, abbrv2, abbrv3)
+  # where to keep the results
+  O2.R2 <- H2O.R2 <- numeric()
+  O2.slope <- H2O.slope <- numeric()
+  # calculate ZC
+  ZC <- ZC(info(aminoacids(""), "aq"))
+  # loop over combinations
+  for(i in 1:ncol(aacomb)) {
+    thisbasis <- c(aa[aacomb[, i]], "H2O", "oxygen")
+    b <- try(basis(thisbasis), silent = TRUE)
+    if(inherits(b, "try-error")) {
+      O2.R2 <- c(O2.R2, NA)
+      H2O.R2 <- c(H2O.R2, NA)
+      O2.slope <- c(O2.slope, NA)
+      H2O.slope <- c(H2O.slope, NA)
+    } else {
+      species(aminoacids(""))
+      nO2 <- species()$O2
+      nH2O <- species()$H2O
+      # calculate R2 and slope for nO2-ZC fit
+      O2lm <- lm(nO2 ~ ZC)
+      O2.R2 <- c(O2.R2, summary(O2lm)$r.squared)
+      O2.slope <- c(O2.slope, coefficients(O2lm)[[2]])
+      # calculate R2 and slope for nH2O-ZC fit
+      H2Olm <- lm(nH2O ~ ZC)
+      H2O.R2 <- c(H2O.R2, summary(H2Olm)$r.squared)
+      H2O.slope <- c(H2O.slope, coefficients(H2Olm)[[2]])
+    }
+  }
+  out <- data.frame(abbrv, O2.R2, H2O.R2, O2.slope, H2O.slope)
+  write.csv(out, "AAbasis.csv", row.names = FALSE, quote = FALSE)
+}
+
 # basis species comparison 20190713 / stoichiometric hydration state 20191005
 gradH2O1 <- function(pdf = FALSE) {
 
   # set up figure
-  if(pdf) pdf("gradH2O1.pdf", width = 8, height = 4)
-  par(mfrow = c(2, 4))
+  if(pdf) pdf("gradH2O1.pdf", width = 8, height = 6)
+  layout(matrix(c(1,2,7, 1,2,7, 3,4,7, 3,4,8, 5,6,8, 5,6,8), nrow = 6, byrow = TRUE), widths = c(1, 1, 2))
   par(mar = c(3.2, 3.4, 2.5, 1))
   par(mgp = c(2.2, 0.7, 0))
   par(las = 1)
@@ -63,37 +112,26 @@ gradH2O1 <- function(pdf = FALSE) {
     mylm <- lm(y ~ ZC)
     lines(xlim, predict(mylm, data.frame(ZC = xlim)), ...)
     # add R-squared text
+    R2 <- summary(mylm)$r.squared
     if(!is.null(legend.x)) {
-      R2 <- format(round(summary(mylm)$r.squared, 3), nsmall = 3)
-      R2txt <- substitute(italic(R)^2 == R2, list(R2 = R2))
+      rR2 <- format(round(R2, 3), nsmall = 3)
+      R2txt <- substitute(italic(R)^2 == R2, list(R2 = rR2))
       legend(legend.x, legend = R2txt, bty = "n")
     }
-    invisible(round(residuals(mylm), 3))
+    invisible(R2)
   }
 
   # function to add plot title and panel label
-  mainlab <- function(main, lab) {
+  mainlab <- function(main, lab, xfrac) {
     title(main, font.main = 1, cex.main = 1)
-    label.figure(lab, xfrac = 0.15, yfrac = 0.92, cex = 1.6)
+    label.figure(lab, xfrac = xfrac, yfrac = 0.8, cex = 1.6)
   }
 
   # function to plot nH2O or nO2 vs ZC of amino acids
-  aaplot <- function(ZC, y, ylab, legend.x, main, lab) {
+  aaplot <- function(ZC, y, ylab, legend.x, main, lab, xfrac = 0.06) {
     plot(ZC, y, type = "p", pch = aminoacids(1), xlab = ZClab, ylab = ylab)
-    mainlab(main, lab)
+    mainlab(main, lab, xfrac)
     lmfun(ZC, y, c(-1, 1), legend.x)
-  }
-
-  scatterH2O <- function(ZC, nH2O, legend.x, main, lab) {
-    smoothScatter(ZC, nH2O, xlab = ZClab, ylab = nH2Olab, colramp = colorRampPalette(c("transparent", blues9)))
-    lmfun(ZC, nH2O, par("usr")[1:2], legend.x, lty = 2, lwd = 2, col = "grey40")
-    mainlab(main, lab)
-  }
-
-  scatterO2 <- function(ZC, nO2, legend.x, main, lab) {
-    smoothScatter(ZC, nO2, xlab = ZClab, ylab = nO2lab, colramp = colorRampPalette(c("transparent", blues9)))
-    lmfun(ZC, nO2, par("usr")[1:2], legend.x, lty = 2, lwd = 2, col = "grey40")
-    mainlab(main, lab)
   }
 
   # get names of amino acids
@@ -101,52 +139,79 @@ gradH2O1 <- function(pdf = FALSE) {
   # calculate ZC of the amino acids
   ZC.aa <- ZC(info(aa, "aq"))
 
-  # get amino acid compositions of E. coli proteins (UniProt)
-  ecoli <- read.csv(system.file("/extdata/organisms/ecoli.csv.xz", package = "JMDplots"), as.is = TRUE)
-  pf.ecoli <- protein.formula(ecoli)
-  ZC.ecoli <- ZC(pf.ecoli)
-  # get nH2O and nO2 with QCa basis species
-  basis(c("glutamine", "cysteine", "acetic acid", "H2O", "O2"))
-  pb.ecoli <- protein.basis(ecoli)
-  pl.ecoli <- protein.length(ecoli)
-  nH2O.ecoli <- pb.ecoli[, "H2O"] / pl.ecoli
-  nO2.ecoli <- pb.ecoli[, "O2"] / pl.ecoli
-  # check that nH2O equals that calculated with canprot::H2OAA
-  nH2O.ref <- H2OAA(ecoli, basis = "QCa")
-  stopifnot(all(nH2O.ecoli == nH2O.ref))
-
   # Calculate nH2O and nO2 of amino acids with CHNOS basis
   basis("CHNOS")
   species(aa)
   # Plot 1: nH2O-ZC of amino acids (CHNOS)
-  aaplot(ZC.aa, species()$H2O, nH2Olab, "bottomleft", "Amino acids (CHNOS)", "(a)")
+  CHNOS.H2O.R2 <- aaplot(ZC.aa, species()$H2O, nH2Olab, "bottomleft", "", "(a)")
   # Plot 2: nO2-ZC of amino acids (CHNOS)
-  aaplot(ZC.aa, species()$O2, nO2lab, "bottomright", "Amino acids (CHNOS)", "(b)")
+  CHNOS.O2.R2 <- aaplot(ZC.aa, species()$O2, nO2lab, "bottomright", "", "(b)", 0.04)
+  mtext(quote(list(CO[2], NH[3], H[2]*S, H[2]*O, O[2])~"("*bold(CHNOS)*")                 "), line = 0.5, adj = 1, cex = 0.8)
 
   # Calculate nH2O and nO2 with QEC basis
   basis("QEC")
   species(aa)
   # Plot 3: nH2O-ZC of amino acids (QEC)
-  aaplot(ZC.aa, species()$H2O, nH2Olab, "bottomright", "Amino acids (QEC)", "(c)")
+  aaplot(ZC.aa, species()$H2O, nH2Olab, "bottomright", "", "(c)")
   # Plot 4: nO2-ZC of amino acids (QEC)
-  aaplot(ZC.aa, species()$O2, nO2lab, "bottomright", "Amino acids (QEC)", "(d)")
+  aaplot(ZC.aa, species()$O2, nO2lab, "bottomright", "", "(d)", 0.04)
+  mtext(quote(list(glutamine, "glutamic acid", cysteine, H[2]*O, O[2])~"("*bold(QEC)*")     "), line = 0.5, adj = 1, cex = 0.8)
 
   ## Calculate nH2O and nO2 of amino acids with QCa basis
   basis(c("glutamine", "cysteine", "acetic acid", "H2O", "O2"))
   species(aa)
   # Plot 5: nH2O-ZC of amino acids (QCa)
-  aaplot(ZC.aa, species()$H2O, nH2Olab, "bottomright", "Amino acids (QCa)", "(e)")
+  aaplot(ZC.aa, species()$H2O, nH2Olab, "bottomright", "", "(e)")
   # Plot 6: nO2-ZC of amino acids (QCa)
-  aaplot(ZC.aa, species()$O2, nO2lab, "bottomright", "Amino acids (QCa)", "(f)")
+  aaplot(ZC.aa, species()$O2, nO2lab, "bottomright", "", "(f)", 0.04)
+  mtext(quote(list(glutamine, cysteine, "acetic acid", H[2]*O, O[2])~"("*bold(QCa)*")       "), line = 0.5, adj = 1, cex = 0.8)
 
-  # Plot 7: nH2O-ZC of E. coli proteins (QCa)
-  scatterH2O(ZC.ecoli, nH2O.ecoli, "bottomright", quote(italic(E.~coli)*" proteins (QCa)"), "(g)")
-  # Plot 8: nO2-ZC of E. coli proteins (QCa)
-  scatterO2(ZC.ecoli, nO2.ecoli, "bottomright", quote(italic(E.~coli)*" proteins (QCa)"), "(h)")
+  # Plot 7: R2 of nH2O-ZC and nO2-ZC fits
+  par(mar = c(4, 4.7, 2.5, 1))
+  par(mgp = c(3, 0.7, 0))
+  plotbasisfun()
+  file <- system.file("extdata/gradH2O/AAbasis.csv", package = "JMDplots")
+  AAbasis <- read.csv(file, as.is = TRUE)
+  nbasis <- sum(!is.na(AAbasis$O2.R2))
+  # add 1 for CHNOS 20200821
+  nbasis <- nbasis + 1
+  # add point for CHNOS basis 20200821
+  points(CHNOS.O2.R2, CHNOS.H2O.R2, pch = 19, cex = 0.8, col = 2)
+  text(CHNOS.O2.R2, CHNOS.H2O.R2, "CHNOS", adj = -0.15, font = 2)
+  title(paste(nbasis, "combinations of basis species"), font.main = 1)
+  # add text for zoom box
+  text(0.98, 0.045, "zoom\nbox", cex = 1.1)
+  label.figure("(g)", cex = 1.6, yfrac = 0.94)
+
+  # Plot 8: zoomed plot of R2 of nH2O-ZC and nO2-ZC fits
+  pb <- plotbasisfun(TRUE)
+  title("Zoomed plot", font.main = 1)
+  # label points
+  # AMT, AMa, MTa
+  text(pb[[1]]$O2.R2[1], pb[[1]]$H2O.R2[1], paste(pb[[1]]$abbrv, collapse = "\n"), adj = c(-0.1, -0.1))
+  # CRa
+  text(pb[[2]]$O2.R2, pb[[2]]$H2O.R2, pb[[2]]$abbrv, adj = 1.2)
+  # ACT, ACa, CTa
+  text(pb[[3]]$O2.R2[1], pb[[3]]$H2O.R2[1], paste(pb[[3]]$abbrv[c(1, 2, 8)], collapse = "\n"), adj = c(0.4, -0.1))
+  # CEH, CEQ (QEC), CER
+  pb[[3]]$abbrv[pb[[3]]$abbrv == "CEQ"] <- "QEC"
+  text(pb[[3]]$O2.R2[3], pb[[3]]$H2O.R2[3], pb[[3]]$abbrv[3], adj = c(0.5, -0.5))
+  text(pb[[3]]$O2.R2[4], pb[[3]]$H2O.R2[4], pb[[3]]$abbrv[4], adj = c(0.5, -0.5), font = 2)
+  text(pb[[3]]$O2.R2[5], pb[[3]]$H2O.R2[5], pb[[3]]$abbrv[5], adj = c(0, 1.5))
+  # CQa (QCa), CRT, MWY
+  pb[[3]]$abbrv[pb[[3]]$abbrv == "CQa"] <- "QCa"
+  text(pb[[3]]$O2.R2[6], pb[[3]]$H2O.R2[6], pb[[3]]$abbrv[6], adj = c(0.5, -0.8), font = 2)
+  text(pb[[3]]$O2.R2[7], pb[[3]]$H2O.R2[7], pb[[3]]$abbrv[7], adj = c(0.5, 1.5))
+  text(pb[[3]]$O2.R2[9], pb[[3]]$H2O.R2[9], pb[[3]]$abbrv[9], adj = c(0.5, -0.5))
+  # put a circle around QCa
+  iQCa <- pb[[3]]$abbrv == "QCa"
+  points(pb[[3]]$O2.R2[iQCa], pb[[3]]$H2O.R2[iQCa], cex = 1.7, col = 4)
+  legend("topright", c("3 amino acids", "acetic acid and", "2 amino acids"), pch = 19, pt.cex = 0.8, col = c(1, 4, NA))
+  label.figure("(h)", cex = 1.6, yfrac = 0.94)
 
   if(pdf) {
     dev.off()
-    addexif("gradH2O1", "Derivation of stoichiometric hydration state", "Dick et al. (2020) (preprint)")
+    addexif("gradH2O1", "Comparison of different sets of basis species", "Dick et al. (2020) (preprint)")
   }
   
   # Return linear model of nH2O-ZC for amino acids
@@ -712,3 +777,49 @@ hullfun <- function(mout, pout, istudy, basecol, group = NULL, vars = "ZC") {
   col <- rgb(r[1], r[2], r[3], 80, maxColorValue=255)
   polygon(x[i], y[i], col = col, border = NA)
 }
+
+# Plot R-squared of nH2O-ZC and nO2-ZC fits 20200813
+plotbasisfun <- function(zoom = FALSE) {
+  # read data
+  file <- system.file("extdata/gradH2O/AAbasis.csv", package = "JMDplots")
+  AAbasis <- read.csv(file, as.is = TRUE)
+
+  # set up plot
+  xlab <- quote(italic(R)^2~"of"~italic(n)[O[2]] - italic(Z)[C]~"fits")
+  ylab <- quote(italic(R)^2~"of"~italic(n)[H[2]*O] - italic(Z)[C]~"fits")
+  if(zoom) plot(c(0.9, 0.93), c(0, 0.03), xlab = xlab, ylab = ylab, type = "n")
+  else plot(c(0, 1), c(0, 0.8), xlab = xlab, ylab = ylab, type = "n")
+  x <- extendrange(c(0.9, 0.93))
+  y <- extendrange(c(0, 0.03))
+  if(!zoom) {
+    # show the zoom box
+    rect(x[1], y[1], x[2], y[2], border = "gray40", lwd = 2)
+  }
+  # use black for combinations with only amino acids, red for acetic acid
+  abbrv <- AAbasis$abbrv
+  col <- ifelse(grepl("a", abbrv), 4, 1)
+  cex <- ifelse(zoom, 0.8, 0.3)
+  O2 <- AAbasis$O2.R2
+  H2O <- AAbasis$H2O.R2
+  points(O2, H2O, col = col, cex = cex, pch = 19)
+
+  # identify combinations with lowest R-squared for nH2O-ZC and highest R-squared for nO2-ZC
+  out1 <- AAbasis[!is.na(AAbasis$O2.R2), ]
+  out1 <- out1[out1$H2O.R2 == min(out1$H2O.R2), ]
+  out1 <- out1[out1$O2.R2 == max(out1$O2.R2), ]
+
+  # identify combinations with highest R-squared for nO2-ZC and lowest R-squared for nH2O-ZC
+  out2 <- AAbasis[!is.na(AAbasis$O2.R2), ]
+  out2 <- out2[out2$O2.R2 == max(out2$O2.R2), ]
+  out2 <- out2[out2$H2O.R2 == min(out2$H2O.R2), ]
+
+  # identify other combinations in the zoom box
+  out3 <- AAbasis[!AAbasis$abbrv %in% c(out1$abbrv, out2$abbrv), ]
+  out3 <- out3[out3$O2.R2 > x[1], ]
+  out3 <- out3[out3$H2O.R2 < y[2], ]
+  out3 <- out3[!is.na(out3$abbrv), ]
+
+  # return the values for lowest R-squared (nH2O-ZC), highest R-squared (nO2-ZC), and other combinations in the zoom box
+  return(list(out1, out2, out3))
+}
+

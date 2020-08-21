@@ -11,6 +11,7 @@
 \alias{gradH2O7}
 \alias{gradH2O8}
 \alias{NifProteomes}
+\alias{AAbasis}
 \title{Plots from salinity gradients paper}
 \description{
 Plots from the paper by Dick et al. (2020).
@@ -27,6 +28,7 @@ Plots from the paper by Dick et al. (2020).
   gradH2O7(pdf = FALSE)
   gradH2O8(pdf = FALSE)
   NifProteomes()
+  AAbasis()
 }
 
 \arguments{
@@ -41,7 +43,7 @@ This table gives a brief description of each function.
 
 \tabular{ll}{
   \code{gradH2O0} \tab Number of reactions for each amino acid in \emph{E. coli} metabolic reconstruction (no plot) \cr
-  \code{gradH2O1} \tab Derivation of stoichiometric hydration state \cr
+  \code{gradH2O1} \tab Comparison of different sets of basis species \cr
   \code{gradH2O2} \tab \nH2O-\ZC scatterplots for redox gradients and the Baltic Sea \cr
   \code{gradH2O3} \tab \nH2O for Baltic Sea metagenome and metatranscriptome in different size fractions \cr
   \code{gradH2O4} \tab \nH2O-\ZC for freshwater, marine, and hypersaline environments \cr
@@ -69,6 +71,10 @@ The organisms are limited to those that have at least 1000 RefSeq protein sequen
       Equations for metabolic reactions in \emph{E. coli} from the \samp{reactions_GPRs} worksheet from Supplementary Information 1 of Feist et al. (2007).
       This is used in \code{gradH2O0}.
     }
+    \item{\code{AAbasis.csv}}{
+      Slopes and R-squared values for linear fits of \nH2O-\ZC and \nO2-\ZC for all combinations of basis species including \H2O, \O2, and 3 amino acids or \H2O, \O2, 2 amino acids, and acetic acid.
+      \code{AAbasis} has the code used to make this file.
+    }
   }
 }
 
@@ -94,9 +100,9 @@ Rodriguez-Brito, B. et al. (2010) Viral and microbial community dynamics in four
 
 \examples{
 # Make first plot and save linear model
-# (nH2O ~ ZC for E. coli proteins)
+# (nH2O ~ ZC for amino acids with QCa basis species)
 lm <- gradH2O1()
-# Make second plot and use lm to show trend for E. coli
+# Make second plot with guidelines parallel to fit for amino acids
 gradH2O2(lm = lm)
 
 # list ZC and nH2O of proteomes for Nif-encoding genomes
