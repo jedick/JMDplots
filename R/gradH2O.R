@@ -248,6 +248,9 @@ gradH2O2 <- function(pdf = FALSE, vars = "H2O-ZC", lm = NULL) {
   if(vars == "H2O-ZC") {
     points(np$ZC, np$nH2O, pch = 15)
     lines(np$ZC, np$nH2O, col = "dimgray", lwd = 0.8, lty = 2)
+    # add study label and outline most oxidized sample 20200823
+    points(np$ZC[4], np$nH2O[4], pch = 0, cex = 1.6)
+    text(np$ZC[4], np$nH2O[4], "NF", adj = c(0.5, -1), cex = 0.7, font = 2)
   }
   if(vars == "pIG") {
     points(np$pI, np$GRAVY, pch = 15)
@@ -268,7 +271,7 @@ gradH2O2 <- function(pdf = FALSE, vars = "H2O-ZC", lm = NULL) {
     text(-0.151, -1.079, "plume", cex = 0.8, srt = 12)
     text(-0.151, -1.0815, "and", cex = 0.8, srt = 12)
     text(-0.151, -1.0840, "  seawater", cex = 0.8, srt = 12)
-    text(c(-0.196, -0.222, -0.191, -0.161), c(-1.046, -1.0645, -1.055, -1.032), c("Nif-D", "Nif-C", "Nif-B", "Nif-A"), adj = 0, cex = 0.8)
+    text(c(-0.196, -0.222, -0.191, -0.155), c(-1.046, -1.0645, -1.055, -1.039), c("Nif-D", "Nif-C", "Nif-B", "Nif-A"), adj = 0, cex = 0.8)
     text(-0.218, 0.0365, "NF", cex=0.7, font = 2)
   }
   if(vars == "pIG") {
