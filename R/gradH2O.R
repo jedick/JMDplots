@@ -495,30 +495,22 @@ gradH2O5 <- function(pdf = FALSE) {
   }
 }
 
-# differential gene and protein expression, time-course and NaCl vs organic solutes 20200420
+# differential gene and protein expression; time-course experiments and NaCl or organic solutes 20200420
 gradH2O6 <- function(pdf = FALSE) {
-  if(pdf) pdf("gradH2O6.pdf", width = 8, height = 4.5)
-  layout(matrix(0:11, nrow = 3, byrow = TRUE), widths = c(0.2, 1, 1, 1), heights = c(0.2, 1, 1))
-  # add titles
-  par(mar = c(0, 0, 0, 0))
-  plot.new()
-  text(0.57, 0.5, "All compiled datasets for bacteria", font = 2)
-  plot.new()
-  text(0.57, 0.5, "Time-course experiments", font = 2)
-  plot.new()
-  text(0.57, 0.5, "NaCl or organic solutes", font = 2)
-  plot.new()
-  text(0.5, 0.6, "Proteins coded by\ndifferentially expressed genes", srt = 90, font = 2)
-  par(mar = c(4, 4, 0.2, 1), mgp = c(2.5, 1, 0))
+  if(pdf) pdf("gradH2O6.pdf", width = 8, height = 6)
+  mat <- matrix(c(1,1,1,1,1,1,1,1, 2,2,2,2, 3,3,3, 4,4,4, 5,5,5, 6,6,6), nrow = 2, byrow = TRUE)
+  layout(mat, heights = c(3, 2))
+  par(mar = c(4, 4, 3, 1), mgp = c(2.5, 1, 0))
+  par(cex.lab = 1.3)
 
   # function to plot an arrow partway along a line
-  mkarrow <- function(row1, ct, frac = 0.5) {
+  mkarrow <- function(row1, comptab, icol, col = 1, frac = 0.5) {
     # row1 is the starting point
-    x1 <- ct$ZC.diff[row1]
-    y1 <- ct$nH2O.diff[row1]
+    x1 <- comptab[row1, icol]
+    y1 <- comptab$nH2O.diff[row1]
     # the next row is the end of the full line (not the arrow)
-    x2 <- ct$ZC.diff[row1 + 1]
-    y2 <- ct$nH2O.diff[row1 + 1]
+    x2 <- comptab[row1 + 1, icol]
+    y2 <- comptab$nH2O.diff[row1 + 1]
     # calculate slope
     m <- (y2 - y1) / (x2 - x1)
     # calculate value of x and y on the line (arrow tip)
@@ -528,37 +520,35 @@ gradH2O6 <- function(pdf = FALSE) {
     x0 <- x1 + (x2 - x1) * frac * 0.99
     y0 <- y1 + m * (x0 - x1)
     # draw the arrow
-    suppressWarnings(arrows(x0, y0, x, y, length = 0.1, angle = 20, lwd = 2))
+    suppressWarnings(arrows(x0, y0, x, y, length = 0.1, angle = 20, lwd = 2, col = col))
   }
 
-  # function to make diff plot with arrows and points
-  mkdiff <- function(ct, ndat, pch = 21, ...) {
-    # make an empty plot, add lines, then add points
-    diffplot(ct, pch = NA, pt.text = NA, contour = FALSE)
+  # function to add arrows and points for Delta nH2O vs logtime or solute
+  DnH2O <- function(comptab, ndat, pch = 21, pt.text = NULL, column = "logtime", arrows = TRUE, col = 1) {
     n <- 0
+    icol <- grep(column, colnames(comptab))
     for(i in 1:length(ndat)) {
       idat <- n + 1:ndat[i]
-      lines(ct$ZC.diff[idat], ct$nH2O.diff[idat])
-      lapply(head(idat, -1), mkarrow, ct = ct)
+      lines(comptab[idat, icol], comptab$nH2O.diff[idat], col = col)
+      points(comptab[idat, icol], comptab$nH2O.diff[idat], pch = pch, bg = "white", cex = 2.1, col = col)
+      # add labels
+      if(is.null(pt.text)) labels <- letters[idat] else labels <- pt.text[idat]
+      text(comptab[idat, icol], comptab$nH2O.diff[idat], labels, cex = 0.85, col = col)
+      if(arrows) lapply(head(idat, -1), mkarrow, comptab = comptab, icol = icol, col = col)
       n <- n + ndat[i]
     }
-    par(bg = "white")
-    diffplot(ct, pch = pch, add = TRUE, contour = FALSE, cex.text = 0.8, ...)
   }
 
-  # plot A: transcriptomes compilation
+  # Read CSV files with results of compositional analysis for differential expression
   osmotic_gene <- read.csv(system.file(paste0("vignettes/osmotic_gene_", getOption("basis"), ".csv"), package = "JMDplots"))
-  diffplot(osmotic_gene, pt.text = NA, contour = FALSE, cex = 1.5)
-  points(mean(osmotic_gene$ZC.diff), mean(osmotic_gene$nH2O.diff), pch = 19, cex = 1.7)
-  legend("topleft", c("dataset", "mean"), pch = c(1, 19), bty = "n")
-  label.figure("(a)", cex = 1.8, xfrac = 0.12, yfrac = 1.05)
-  # print the p-values
-  p.ZC <- round(t.test(osmotic_gene$ZC.down, osmotic_gene$ZC.up, paired = TRUE)$p.value, 3)
-  p.nH2O <- round(t.test(osmotic_gene$nH2O.down, osmotic_gene$nH2O.up, paired = TRUE)$p.value, 3)
-  print(paste("number of transcriptomics datasets:", nrow(osmotic_gene)))
-  print(paste("p-values for transcriptomics:", p.ZC, "(ZC),", p.nH2O, "(nH2O)"))
+  osmotic_bact <- read.csv(system.file(paste0("vignettes/osmotic_bact_", getOption("basis"), ".csv"), package = "canprot"))
+  DnH2Olab <- quote(Delta*italic(n)[H[2]*O])
+  log10timelab <- quote(log[10]*("time, minutes"))
 
-  # plot C: transcriptomics: increasing time
+  # plot A: time-course experiments
+  plot(c(0.5, 4), c(-0.12, 0.12), xlab = log10timelab, ylab = DnH2Olab, type = "n")
+  abline(h = 0, lty = 2, col = "gray40")
+  # transcriptomic data
   Ttime <- list(
     KKG = c("KKG+14_Gene_30min", "KKG+14_Gene_80min", "KKG+14_Gene_310min"),
     SLM = c("SLM+14_5", "SLM+14_30", "SLM+14_60"),
@@ -568,10 +558,29 @@ gradH2O6 <- function(pdf = FALSE) {
   )
   comptab <- osmotic_gene[match(unlist(Ttime), osmotic_gene$dataset), ]
   ndat <- sapply(Ttime, length)
-  mkdiff(comptab, ndat)
-  label.figure("(c)", cex = 1.8, xfrac = 0.12, yfrac = 1.05)
+  # make nH2O-time plot 20200824
+  Ttime <- c(30, 80, 310, 5, 30, 60, 1*60, 6*60, 24*60, 45, 14*60, 24*60, 48*60, 72*60)
+  comptab <- cbind(comptab, logtime = log10(Ttime))
+  DnH2O(comptab, ndat)
+  # proteomic data
+  Ptime <- list(
+    KKG = c("KKG+14_Protein_30min", "KKG+14_Protein_80min", "KKG+14_Protein_310min"),
+    QHT = c("QHT+13_Protein.24.h", "QHT+13_Protein.48.h")
+  )
+  comptab <- osmotic_bact[match(unlist(Ptime), osmotic_bact$dataset), ]
+  ndat <- sapply(Ptime, length)
+  Ptime <- c(30, 80, 310, 24*60, 48*60)
+  comptab <- cbind(comptab, logtime = log10(Ptime))
+  DnH2O(comptab, ndat, pch = 22, pt.text = c("a", "b", "c", "l", "m"), col = 4)
+  legend("topleft", c("transcriptomic", "proteomic"), pch = c(21, 22), bty = "n")
+  label.figure("(a)", cex = 1.8, yfrac = 0.9)
+  mtext("Time-course experiments", line = 1)
 
-  # plot E: transcriptomics: NaCl or organic solutes
+  # plot B: NaCl or organic solutes
+  plot(c(-0.2, 1.2), c(-0.07, 0.11), xlab = "Solute", ylab = DnH2Olab, type = "n", xaxt = "n")
+  axis(1, at = c(0, 1), labels = c("NaCl", "Organic"))
+  abline(h = 0, lty = 2, col = "gray40")
+  # transcriptomic data
   Tsolute <- list(
     KSA = c("KSA+02_NaCl", "KSA+02_sorbitol"),
     HZP = c("HZP+05_HSS", "HZP+05_HOS"),
@@ -583,57 +592,69 @@ gradH2O6 <- function(pdf = FALSE) {
   )
   comptab <- osmotic_gene[match(unlist(Tsolute), osmotic_gene$dataset), ]
   ndat <- sapply(Tsolute, length)
-  mkdiff(comptab, ndat, pt.text = LETTERS[1:sum(ndat)], pch = c(21, 22))
-  legend("topleft", c("NaCl", "organic"), pch = c(21, 22), bty = "n")
-  label.figure("(e)", cex = 1.8, xfrac = 0.12, yfrac = 1.05)
-
-  par(mar = c(0, 0, 0, 0))
-  par(xpd = NA)
-  plot.new()
-  text(0.5, 0.6, "Differentially expressed proteins", srt = 90, font = 2)
-  par(mar = c(4, 4, 0.2, 1), mgp = c(2.5, 1, 0))
-  par(xpd = FALSE)
-
-  # plot B: proteomes compilation
-  osmotic_bact <- read.csv(system.file(paste0("vignettes/osmotic_bact_", getOption("basis"), ".csv"), package = "canprot"))
-  diffplot(osmotic_bact, pt.text = NA, contour = FALSE, cex = 1.5)
-  points(mean(osmotic_bact$ZC.diff), mean(osmotic_bact$nH2O.diff), pch = 19, cex = 1.7)
-  legend("topleft", c("dataset", "mean"), pch = c(1, 19), bty = "n")
-  label.figure("(b)", cex = 1.8, xfrac = 0.12, yfrac = 1.05)
-  # print the p-values
-  p.ZC <- round(t.test(osmotic_bact$ZC.down, osmotic_bact$ZC.up, paired = TRUE)$p.value, 3)
-  p.nH2O <- round(t.test(osmotic_bact$nH2O.down, osmotic_bact$nH2O.up, paired = TRUE)$p.value, 3)
-  print(paste("number of proteomics datasets:", nrow(osmotic_bact)))
-  print(paste("p-values for proteomics:", p.ZC, "(ZC),", p.nH2O, "(nH2O)"))
-  # print total number of studies
-  osmotic_gene_studies <- sapply(strsplit(osmotic_gene$dataset, "_"), "[", 1)
-  osmotic_bact_studies <- sapply(strsplit(osmotic_bact$dataset, "_"), "[", 1)
-  nstudies <- length(unique(c(osmotic_gene_studies, osmotic_bact_studies)))
-  print(paste("total number of studies (transcriptomics and proteomics):", nstudies))
-
-  # plot D: proteomics: increasing time
-  Ptime <- list(
-    KKG = c("KKG+14_Protein_30min", "KKG+14_Protein_80min", "KKG+14_Protein_310min"),
-    QHT = c("QHT+13_Protein.24.h", "QHT+13_Protein.48.h")
-  )
-  comptab <- osmotic_bact[match(unlist(Ptime), osmotic_bact$dataset), ]
-  ndat <- sapply(Ptime, length)
-  mkdiff(comptab, ndat, pt.text = c("a", "b", "c", "l", "m"))
-  label.figure("(d)", cex = 1.8, xfrac = 0.12, yfrac = 1.05)
-
-  # plot F: proteomics: NaCl or organic solutes
+  Tsolute <- as.numeric(!grepl("NaCl", comptab$description)) - 0.08
+  Tsolute[1] <- Tsolute[1] + 0.08
+  Tsolute[4] <- Tsolute[4] - 0.1
+  Tsolute[8] <- Tsolute[8] + 0.1
+  comptab <- cbind(comptab, solute = Tsolute)
+  DnH2O(comptab, ndat, pt.text = LETTERS[1:sum(ndat)], column = "solute", arrows = FALSE)
+  # proteomic data
   Psolute <- list(
     KLB = c("KLB+15_prot-NaCl", "KLB+15_prot-suc"),
     SKV = c("SKV+16_Osmotic.stress.glucose_LB", "SKV+16_Glucose_LB")
   )
   comptab <- osmotic_bact[match(unlist(Psolute), osmotic_bact$dataset), ]
   ndat <- sapply(Psolute, length)
-  mkdiff(comptab, ndat, pt.text = c("O", "P", "Q", "R"), pch = c(21, 22))
-  label.figure("(f)", cex = 1.8, xfrac = 0.12, yfrac = 1.05)
+  Psolute <- c(0, 1, 0, 1) + 0.08
+  comptab <- cbind(comptab, solute = Psolute)
+  DnH2O(comptab, ndat, pch = 22, pt.text = c("O", "P", "Q", "R"), column = "solute", arrows = FALSE, col = 4)
+  label.figure("(b)", cex = 1.8, yfrac = 0.9)
+  mtext("NaCl or organic solutes", line = 1)
+
+  # Plot C: transcriptomes nH2O-ZC
+  diffplot(osmotic_gene, pt.text = NA, contour = FALSE, labtext = NA, cex = 1.2)
+  points(mean(osmotic_gene$ZC.diff), mean(osmotic_gene$nH2O.diff), pch = 19, cex = 1.7)
+  legend("topleft", c("dataset", "mean"), pch = c(1, 19), bty = "n")
+  label.figure("(c)", cex = 1.8, yfrac = 0.85)
+  # print the p-values
+  p.ZC <- round(t.test(osmotic_gene$ZC.down, osmotic_gene$ZC.up, paired = TRUE)$p.value, 3)
+  p.nH2O <- round(t.test(osmotic_gene$nH2O.down, osmotic_gene$nH2O.up, paired = TRUE)$p.value, 3)
+  print(paste("number of transcriptomics datasets:", nrow(osmotic_gene)))
+  print(paste("p-values for transcriptomics:", p.ZC, "(ZC),", p.nH2O, "(nH2O)"))
+
+  # Plot D: transcriptomes GRAVY-pI
+  diffplot(osmotic_gene, vars = c("pI", "GRAVY"), pt.text = NA, contour = FALSE, labtext = NA, cex = 1.2)
+  points(mean(osmotic_gene$pI.diff), mean(osmotic_gene$GRAVY.diff), pch = 19, cex = 1.7)
+  label.figure("(d)", cex = 1.8, yfrac = 0.85)
+  mtext("Proteins coded by differentially expressed genes", adj = 1, line = 1.5)
+  # print the p-values
+  p.pI <- round(t.test(osmotic_gene$pI.down, osmotic_gene$pI.up, paired = TRUE)$p.value, 3)
+  p.GRAVY <- round(t.test(osmotic_gene$GRAVY.down, osmotic_gene$GRAVY.up, paired = TRUE)$p.value, 3)
+  print(paste("p-values for transcriptomics:", p.pI, "(pI),", p.GRAVY, "(GRAVY)"))
+
+  # Plot E: proteomes nH2O-ZC
+  diffplot(osmotic_bact, pt.text = NA, contour = FALSE, labtext = NA, cex = 1.2, pch = 0)
+  points(mean(osmotic_bact$ZC.diff), mean(osmotic_bact$nH2O.diff), pch = 15, cex = 1.7)
+  label.figure("(e)", cex = 1.8, yfrac = 0.85)
+  # print the p-values
+  p.ZC <- round(t.test(osmotic_bact$ZC.down, osmotic_bact$ZC.up, paired = TRUE)$p.value, 3)
+  p.nH2O <- round(t.test(osmotic_bact$nH2O.down, osmotic_bact$nH2O.up, paired = TRUE)$p.value, 3)
+  print(paste("number of proteomics datasets:", nrow(osmotic_bact)))
+  print(paste("p-values for proteomics:", p.ZC, "(ZC),", p.nH2O, "(nH2O)"))
+
+  # Plot F: proteomes GRAVY-pI
+  diffplot(osmotic_bact, vars = c("pI", "GRAVY"), pt.text = NA, contour = FALSE, labtext = NA, cex = 1.2, pch = 0)
+  points(mean(osmotic_bact$pI.diff), mean(osmotic_bact$GRAVY.diff), pch = 15, cex = 1.7)
+  label.figure("(f)", cex = 1.8, yfrac = 0.85)
+  mtext("Differentially expressed proteins             ", adj = 1, line = 1.5)
+  # print the p-values
+  p.pI <- round(t.test(osmotic_bact$pI.down, osmotic_bact$pI.up, paired = TRUE)$p.value, 3)
+  p.GRAVY <- round(t.test(osmotic_bact$GRAVY.down, osmotic_bact$GRAVY.up, paired = TRUE)$p.value, 3)
+  print(paste("p-values for proteomics:", p.pI, "(pI),", p.GRAVY, "(GRAVY)"))
 
   if(pdf) {
     dev.off()
-    addexif("gradH2O6", "differential gene and protein expression, time-course and NaCl vs organic solutes", "Dick et al. (2020) (preprint)")
+    addexif("gradH2O6", "differential gene and protein expression; time-course experiments and NaCl or organic solutes", "Dick et al. (2020) (preprint)")
   }
 }
 

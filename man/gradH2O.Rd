@@ -46,7 +46,7 @@ This table gives a brief description of each function.
   \code{gradH2O3} \tab \nH2O for Baltic Sea metagenome and metatranscriptome in different size fractions \cr
   \code{gradH2O4} \tab \nH2O-\ZC for freshwater, marine, and hypersaline environments \cr
   \code{gradH2O5} \tab \nH2O-\ZC and GRAVY-pI plots for Baltic Sea and Rodriguez-Brito et al. data \cr
-  \code{gradH2O6} \tab Differential gene and protein expression, time-course and NaCl vs organic solutes \cr
+  \code{gradH2O6} \tab Differential gene and protein expression; time-course experiments and NaCl or organic solutes \cr
   \code{gradH2O7} \tab Differentially expressed proteins in halophiles under hypo- and hyperosmotic stress \cr
 }
 
