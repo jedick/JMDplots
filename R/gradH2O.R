@@ -613,45 +613,49 @@ gradH2O6 <- function(pdf = FALSE) {
   mtext("NaCl or organic solutes", line = 1)
 
   # Plot C: transcriptomes nH2O-ZC
-  diffplot(osmotic_gene, pt.text = NA, contour = FALSE, labtext = NA, cex = 1.2)
+  # Add the p-values to the axis labels
+  p.ZC <- formatC(t.test(osmotic_gene$ZC.down, osmotic_gene$ZC.up, paired = TRUE)$p.value, 3, format = "f")
+  p.nH2O <- formatC(t.test(osmotic_gene$nH2O.down, osmotic_gene$nH2O.up, paired = TRUE)$p.value, 3, format = "f")
+  labtext <- c(bquote(italic(p)==.(p.ZC)), bquote(italic(p)==.(p.nH2O)))
+  diffplot(osmotic_gene, pt.text = NA, contour = FALSE, labtext = labtext, cex = 1.2)
   points(mean(osmotic_gene$ZC.diff), mean(osmotic_gene$nH2O.diff), pch = 19, cex = 1.7)
-  legend("topleft", c("dataset", "mean"), pch = c(1, 19), bty = "n")
+  legend("topleft", c("non-halophiles", "mean"), pch = c(1, 19), bty = "n")
   label.figure("(c)", cex = 1.8, yfrac = 0.85)
-  # print the p-values
-  p.ZC <- round(t.test(osmotic_gene$ZC.down, osmotic_gene$ZC.up, paired = TRUE)$p.value, 3)
-  p.nH2O <- round(t.test(osmotic_gene$nH2O.down, osmotic_gene$nH2O.up, paired = TRUE)$p.value, 3)
-  print(paste("number of transcriptomics datasets:", nrow(osmotic_gene)))
-  print(paste("p-values for transcriptomics:", p.ZC, "(ZC),", p.nH2O, "(nH2O)"))
 
   # Plot D: transcriptomes GRAVY-pI
-  diffplot(osmotic_gene, vars = c("pI", "GRAVY"), pt.text = NA, contour = FALSE, labtext = NA, cex = 1.2)
+  p.pI <- formatC(t.test(osmotic_gene$pI.down, osmotic_gene$pI.up, paired = TRUE)$p.value, 3, format = "f")
+  p.GRAVY <- formatC(t.test(osmotic_gene$GRAVY.down, osmotic_gene$GRAVY.up, paired = TRUE)$p.value, 3, format = "f")
+  labtext <- c(bquote(italic(p)==.(p.pI)), bquote(italic(p)==.(p.GRAVY)))
+  diffplot(osmotic_gene, vars = c("pI", "GRAVY"), pt.text = NA, contour = FALSE, labtext = labtext, cex = 1.2)
   points(mean(osmotic_gene$pI.diff), mean(osmotic_gene$GRAVY.diff), pch = 19, cex = 1.7)
   label.figure("(d)", cex = 1.8, yfrac = 0.85)
   mtext("Proteins coded by differentially expressed genes", adj = 1, line = 1.5)
-  # print the p-values
-  p.pI <- round(t.test(osmotic_gene$pI.down, osmotic_gene$pI.up, paired = TRUE)$p.value, 3)
-  p.GRAVY <- round(t.test(osmotic_gene$GRAVY.down, osmotic_gene$GRAVY.up, paired = TRUE)$p.value, 3)
-  print(paste("p-values for transcriptomics:", p.pI, "(pI),", p.GRAVY, "(GRAVY)"))
+
+  # Get proteomic data for halophiles
+  osmotic_halo <- read.csv(system.file(paste0("vignettes/osmotic_halo_", getOption("basis"), ".csv"), package = "canprot"))
+  # Combine halophile and non-halophile data for hyperosmotic stress proteomics
+  osmotic_halo <- osmotic_halo[osmotic_halo$tags!="hypoosmotic", ]
+  alldat <- rbind(osmotic_bact, osmotic_halo)
+  pch <- c(rep(0, nrow(osmotic_bact)), rep(2, nrow(osmotic_halo)))
+  col <- c(rep(4, nrow(osmotic_bact)), rep(2, nrow(osmotic_halo)))
 
   # Plot E: proteomes nH2O-ZC
-  diffplot(osmotic_bact, pt.text = NA, contour = FALSE, labtext = NA, cex = 1.2, pch = 0)
-  points(mean(osmotic_bact$ZC.diff), mean(osmotic_bact$nH2O.diff), pch = 15, cex = 1.7)
+  p.ZC <- formatC(t.test(alldat$ZC.down, alldat$ZC.up, paired = TRUE)$p.value, 3, format = "f")
+  p.nH2O <- formatC(t.test(alldat$nH2O.down, alldat$nH2O.up, paired = TRUE)$p.value, 3, format = "f")
+  labtext <- c(bquote(italic(p)==.(p.ZC)), bquote(italic(p)==bold(.(p.nH2O))))
+  diffplot(alldat, pt.text = NA, contour = FALSE, labtext = labtext, cex = 1.2, pch = pch, col = col)
+  points(mean(alldat$ZC.diff), mean(alldat$nH2O.diff), pch = 19, cex = 1.7)
   label.figure("(e)", cex = 1.8, yfrac = 0.85)
-  # print the p-values
-  p.ZC <- round(t.test(osmotic_bact$ZC.down, osmotic_bact$ZC.up, paired = TRUE)$p.value, 3)
-  p.nH2O <- round(t.test(osmotic_bact$nH2O.down, osmotic_bact$nH2O.up, paired = TRUE)$p.value, 3)
-  print(paste("number of proteomics datasets:", nrow(osmotic_bact)))
-  print(paste("p-values for proteomics:", p.ZC, "(ZC),", p.nH2O, "(nH2O)"))
 
   # Plot F: proteomes GRAVY-pI
-  diffplot(osmotic_bact, vars = c("pI", "GRAVY"), pt.text = NA, contour = FALSE, labtext = NA, cex = 1.2, pch = 0)
-  points(mean(osmotic_bact$pI.diff), mean(osmotic_bact$GRAVY.diff), pch = 15, cex = 1.7)
+  p.pI <- formatC(t.test(alldat$pI.down, alldat$pI.up, paired = TRUE)$p.value, 3, format = "f")
+  p.GRAVY <- formatC(t.test(alldat$GRAVY.down, alldat$GRAVY.up, paired = TRUE)$p.value, 3, format = "f")
+  labtext <- c(bquote(italic(p)==.(p.pI)), bquote(italic(p)==bold(.(p.GRAVY))))
+  diffplot(alldat, vars = c("pI", "GRAVY"), pt.text = NA, contour = FALSE, labtext = labtext, cex = 1.2, pch = pch, col = col)
+  points(mean(alldat$pI.diff), mean(alldat$GRAVY.diff), pch = 19, cex = 1.7)
+  legend("topleft", c("non-halophiles", "halophiles", "mean"), pch = c(0, 2, 19), col = c(4, 2, 1), bty = "n")
   label.figure("(f)", cex = 1.8, yfrac = 0.85)
   mtext("Differentially expressed proteins             ", adj = 1, line = 1.5)
-  # print the p-values
-  p.pI <- round(t.test(osmotic_bact$pI.down, osmotic_bact$pI.up, paired = TRUE)$p.value, 3)
-  p.GRAVY <- round(t.test(osmotic_bact$GRAVY.down, osmotic_bact$GRAVY.up, paired = TRUE)$p.value, 3)
-  print(paste("p-values for proteomics:", p.pI, "(pI),", p.GRAVY, "(GRAVY)"))
 
   if(pdf) {
     dev.off()
