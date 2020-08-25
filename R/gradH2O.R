@@ -395,9 +395,10 @@ gradH2O4 <- function(pdf = FALSE) {
   pcomp(mout, pout, xlim = xlim, ylim = ylim, lty = 0, yline = 2.8, labels.at = NA)
   hullfun(mout, pout, c(1, 3), "green3", c("riverFL", "riverPA"))
   hullfun(mout, pout, c(1, 3), "blue", c("plumeFL", "plumePA"))
-  text(c(-0.13, -0.13), c(0.010, -0.005), c("river", "plume"))
-  legend("topleft", c("free-living", "particle-associated"), pch = c(20, 15), bty = "n", inset = c(0.05, 0))
-  legend("topleft", legend = c(NA, NA), pch = c(21, 22), pt.cex = c(0.7, 1), bty = "n")
+  text(c(-0.13, -0.132), c(-1.06, -1.10), c("river", "plume"))
+  legend("topleft", c("free-living", "particle-associated"), pch = c(20, 15), bty = "n", inset = c(0.2, 0))
+  legend("topleft", legend = c(NA, NA), pch = c(21, 22), pt.cex = c(0.7, 1), bty = "n", inset = c(0.14, 0))
+  text(c(-0.18, -0.17), c(-1.027, -1.027), c("river", "plume"), srt = 40, adj = 1)
   title("Amazon River metagenomes", font.main = 1)
   label.figure("(a)", xfrac = 0.1, cex = 1.8)
   # plot 2: GRAVY - pI
@@ -412,7 +413,7 @@ gradH2O4 <- function(pdf = FALSE) {
   pcomp(mout, pout, "MT", xlim = xlim, ylim = ylim, lty = 0, yline = 2.8, labels.at = NA)
   hullfun(mout, pout, c(2, 4), "green3", c("riverFL", "riverPA"))
   hullfun(mout, pout, c(2, 4), "blue", c("plumeFL", "plumePA"))
-  text(c(-0.125, -0.12), c(0.025, 0.005), c("river", "plume"))
+  text(c(-0.125, -0.12), c(-1.04, -1.07), c("river", "plume"))
   title("Amazon River metatranscriptomes", font.main = 1)
   label.figure("(b)", xfrac = 0.1, cex = 1.8)
   # plot 4: GRAVY - pI
@@ -435,7 +436,7 @@ gradH2O4 <- function(pdf = FALSE) {
   poutH <- ppage("hypersaline", H2O = TRUE, plot.it = FALSE)
   pcomp(moutH, poutH, reorder = FALSE, add = TRUE, labdx = 0.006, labdy = 0.004)
   hullfun(moutH, poutH, 1:3, "turquoise3")
-  text(c(-0.16, -0.16, -0.12), c(0.037, -0.007, -0.002), c("freshwater", "marine", "hypersaline"))
+  text(c(-0.16, -0.16, -0.11), c(-1.03, -1.105, -1.088), c("freshwater", "marine", "hypersaline"))
   legend("bottomright", c("lower salinity", "higher salinity"), pch = c(0, 15), col = "turquoise3", bty = "n")
   legend("bottomright", c("hypersaline datasets", "", ""), bty = "n")
   title("Freshwater - marine - hypersaline", font.main = 1)
@@ -469,12 +470,12 @@ gradH2O5 <- function(pdf = FALSE) {
   pout <- ppage("balticsurface", H2O = TRUE, plot.it = FALSE)
   pcomp(mout, pout, reorder = FALSE, yline = 3.2, cex.ylab = 1.5, font = 2, labdy = 0.003, labels.at = NA, xlim = c(-0.2, -0.08))
   text(c(-0.126, -0.124), c(0.04, 0.02), c("< 6 PSU", "> 6 PSU"))
-  title("Baltic Sea")
+  title("Baltic Sea", font.main = 1)
   label.figure("(a)", cex = 1.7)
   # Baltic Sea GRAVY - pI
   pcomp(mout, pout, reorder = FALSE, vars = "pIG", yline = 3.2, cex.ylab = 1.5, font = 2, labdy = 0.003, labels.at = NA)
   text(c(7.5, 7.2), c(-0.11, -0.23), c("< 6 PSU", "> 6 PSU"))
-  title("Baltic Sea")
+  title("Baltic Sea", font.main = 1)
   label.figure("(c)", cex = 1.7)
 
   # Rodriguez-Brito et al. nH2O - ZC
@@ -482,12 +483,12 @@ gradH2O5 <- function(pdf = FALSE) {
   pout <- ppage("socal", H2O = TRUE, plot.it = FALSE)
   pcomp(mout, pout, reorder = FALSE, yline = 3.2, cex.ylab = 1.5, font = 2, labdy = 0.003, labels.at = NA, xlim = c(-0.2, -0.08))
   text(c(-0.155, -0.125, -0.115), c(-0.005, 0.015, 0.027), c("FW", "LS", "MS-HS"))
-  title("Rodriguez-Brito et al.")
+  title("Rodriguez-Brito et al.", font.main = 1)
   label.figure("(b)", cex = 1.7)
   # Rodriguez-Brito et al. GRAVY - pI
   pcomp(mout, pout, reorder = FALSE, vars = "pIG", yline = 3.2, cex.ylab = 1.5, font = 2, labdy = 0.003, labels.at = NA)
   text(c(8.3, 6, 4.5), c(-0.18, -0.19, -0.115), c("FW", "LS", "MS-HS"))
-  title("Rodriguez-Brito et al.")
+  title("Rodriguez-Brito et al.", font.main = 1)
   label.figure("(d)", cex = 1.7)
   if(pdf) {
     dev.off()
@@ -530,7 +531,7 @@ gradH2O6 <- function(pdf = FALSE) {
     for(i in 1:length(ndat)) {
       idat <- n + 1:ndat[i]
       lines(comptab[idat, icol], comptab$nH2O.diff[idat], col = col)
-      points(comptab[idat, icol], comptab$nH2O.diff[idat], pch = pch, bg = "white", cex = 2.1, col = col)
+      points(comptab[idat, icol], comptab$nH2O.diff[idat], pch = pch, bg = "white", cex = 2.5, col = col)
       # add labels
       if(is.null(pt.text)) labels <- letters[idat] else labels <- pt.text[idat]
       text(comptab[idat, icol], comptab$nH2O.diff[idat], labels, cex = 0.85, col = col)
@@ -572,7 +573,7 @@ gradH2O6 <- function(pdf = FALSE) {
   Ptime <- c(30, 80, 310, 24*60, 48*60)
   comptab <- cbind(comptab, logtime = log10(Ptime))
   DnH2O(comptab, ndat, pch = 22, pt.text = c("a", "b", "c", "l", "m"), col = 4)
-  legend("topleft", c("transcriptomic", "proteomic"), pch = c(21, 22), bty = "n")
+  legend("topleft", c("transcriptomic", "proteomic"), pch = c(21, 22), col = c(1, 4), pt.cex = 1.5, bty = "n")
   label.figure("(a)", cex = 1.8, yfrac = 0.9)
   mtext("Time-course experiments", line = 1)
 
@@ -655,56 +656,6 @@ gradH2O6 <- function(pdf = FALSE) {
   if(pdf) {
     dev.off()
     addexif("gradH2O6", "differential gene and protein expression; time-course experiments and NaCl or organic solutes", "Dick et al. (2020) (preprint)")
-  }
-}
-
-# differentially expressed proteins in halophiles under hypo- and hyperosmotic stress
-# adapted from canprot/hyperosmotic.Rmd 20190717-20191007
-# add GRAVY and pI plot 20191028
-# use different symbols for eukaryotes and add halophilic bacteria and archaea 20191102-20191103
-# separate plots for halophiles and non-halophiles (no eukaryotes) 20200424
-gradH2O7 <- function(pdf = FALSE) {
-  if(pdf) pdf("gradH2O7.pdf", width = 5, height = 4)
-  layout(matrix(c(1, 1, 2, 2, 0, 3, 3, 0), nrow = 2, byrow = 2))
-  par(mar = c(3.2, 3.2, 2, 1))
-  par(mgp = c(1.9, 0.6, 0))
-  par(cex.lab = 1.2)
-
-  # get proteomic data for halophiles
-  osmotic_halo <- read.csv(system.file(paste0("vignettes/osmotic_halo_", getOption("basis"), ".csv"), package = "canprot"))
-  # use triangles for hyperosmotic, squares for hypoosmotic
-  pch <- ifelse(grepl("hypoosmotic", osmotic_halo$tags), 0, 2)
-  # make nH2O-ZC plot
-  diffplot(osmotic_halo, pch = pch, contour = FALSE, cex.text = 0.75, labtext = NA)
-  legend("topleft", c("hypoosmotic", "hyperosmotic"), pch = c(0, 2), bty = "n")
-  title("Halophile proteomics")
-  label.figure("(a)", cex = 1.7, yfrac = 0.93)
-  # make GRAVY-pI plot
-  diffplot(osmotic_halo, vars = c("pI", "GRAVY"), pch = pch, contour = FALSE, cex.text = 0.75, labtext = NA)
-  legend("topleft", c("hypoosmotic", "hyperosmotic"), pch = c(0, 2), bty = "n")
-  title("Halophile proteomics")
-  label.figure("(b)", cex = 1.7, yfrac = 0.93)
-
-  # get proteomic data for non-halophiles in hyperosmotic stress
-  osmotic_bact <- read.csv(system.file(paste0("vignettes/osmotic_bact_", getOption("basis"), ".csv"), package = "canprot"))
-  # combine halophile and non-halophile data for hyperosmotic stress
-  osmotic_halo <- osmotic_halo[osmotic_halo$tags!="hypoosmotic", ]
-  alldat <- rbind(osmotic_bact, osmotic_halo)
-  pch <- c(rep(1, nrow(osmotic_bact)), rep(2, nrow(osmotic_halo)))
-  # make GRAVY-pI plot
-  diffplot(alldat, vars = c("pI", "GRAVY"), pt.text = NA, contour = FALSE, pch = pch, labtext = NA, cex = 1.5)
-  points(mean(alldat$pI.diff), mean(alldat$GRAVY.diff), pch = 19, cex = 1.7)
-  legend("topleft", c("non-halophiles", "halophiles", "mean"), pch = c(1, 2, 19), bty = "n")
-  title("All hyperosmotic proteomic data")
-  label.figure("(c)", cex = 1.7, yfrac = 0.93)
-  # print the p-values
-  p.pI <- round(t.test(alldat$pI.down, alldat$pI.up, paired = TRUE)$p.value, 3)
-  p.GRAVY <- round(t.test(alldat$GRAVY.down, alldat$GRAVY.up, paired = TRUE)$p.value, 3)
-  print(paste("p-values for all hyperosmotic proteomic data:", p.pI, "(pI),", p.GRAVY, "(GRAVY)"))
-
-  if(pdf) {
-    dev.off()
-    addexif("gradH2O7", "Differentially expressed proteins in halophiles under hypo- and hyperosmotic stress", "Dick et al. (2020) (preprint)")
   }
 }
 

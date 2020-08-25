@@ -24,7 +24,6 @@ Plots from the paper by Dick et al. (2020).
   gradH2O4(pdf = FALSE)
   gradH2O5(pdf = FALSE)
   gradH2O6(pdf = FALSE)
-  gradH2O7(pdf = FALSE)
   NifProteomes()
   AAbasis()
 }
@@ -47,7 +46,6 @@ This table gives a brief description of each function.
   \code{gradH2O4} \tab \nH2O-\ZC for freshwater, marine, and hypersaline environments \cr
   \code{gradH2O5} \tab \nH2O-\ZC and GRAVY-pI plots for Baltic Sea and Rodriguez-Brito et al. data \cr
   \code{gradH2O6} \tab Differential gene and protein expression; time-course experiments and NaCl or organic solutes \cr
-  \code{gradH2O7} \tab Differentially expressed proteins in halophiles under hypo- and hyperosmotic stress \cr
 }
 
 \code{NifProteomes}, which is used in \code{gradH2O2}, calculates the mean and standard deviation of \ZC and \nH2O for proteomes encoding different homologs of nitrogenase (Nif-D, Nif-C, Nif-B, or Nif-A), as listed by Poudel et al. (2018).
