@@ -19,11 +19,12 @@ Plots from the paper by Dick et al. (2020).
 \usage{
   gradH2O0()
   gradH2O1(pdf = FALSE)
-  gradH2O2(pdf = FALSE, vars = "H2O-ZC", lm = NULL)
-  gradH2O3(pdf = FALSE, var = NULL)
-  gradH2O4(pdf = FALSE)
+  gradH2O2(pdf = FALSE)
+  gradH2O3(pdf = FALSE, vars = "H2O-ZC", lm = NULL)
+  gradH2O4(pdf = FALSE, var = NULL)
   gradH2O5(pdf = FALSE)
   gradH2O6(pdf = FALSE)
+  gradH2O7(pdf = FALSE)
   NifProteomes()
   AAbasis()
 }
@@ -41,11 +42,12 @@ This table gives a brief description of each function.
 \tabular{ll}{
   \code{gradH2O0} \tab Number of reactions for each amino acid in \emph{E. coli} metabolic reconstruction (no plot) \cr
   \code{gradH2O1} \tab Comparison of different sets of basis species \cr
-  \code{gradH2O2} \tab \nH2O-\ZC scatterplots for redox gradients and the Baltic Sea \cr
-  \code{gradH2O3} \tab \nH2O for Baltic Sea metagenome and metatranscriptome in different size fractions \cr
-  \code{gradH2O4} \tab \nH2O-\ZC for freshwater, marine, and hypersaline environments \cr
-  \code{gradH2O5} \tab \nH2O-\ZC and GRAVY-pI plots for Baltic Sea and Rodriguez-Brito et al. data \cr
-  \code{gradH2O6} \tab Differential gene and protein expression; time-course experiments and NaCl or organic solutes \cr
+  \code{gradH2O2} \tab Schematic of \nH2O and \ZC calculations \cr
+  \code{gradH2O3} \tab \nH2O-\ZC scatterplots for redox gradients and the Baltic Sea \cr
+  \code{gradH2O4} \tab \nH2O for Baltic Sea metagenome and metatranscriptome in different size fractions \cr
+  \code{gradH2O5} \tab \nH2O-\ZC for freshwater, marine, and hypersaline environments \cr
+  \code{gradH2O6} \tab \nH2O-\ZC and GRAVY-pI plots for Baltic Sea and Rodriguez-Brito et al. data \cr
+  \code{gradH2O7} \tab Differential gene and protein expression; time-course experiments and NaCl or organic solutes \cr
 }
 
 \code{NifProteomes}, which is used in \code{gradH2O2}, calculates the mean and standard deviation of \ZC and \nH2O for proteomes encoding different homologs of nitrogenase (Nif-D, Nif-C, Nif-B, or Nif-A), as listed by Poudel et al. (2018).
@@ -98,7 +100,7 @@ Rodriguez-Brito, B. et al. (2010) Viral and microbial community dynamics in four
 # (nH2O ~ ZC for amino acids with QCa basis species)
 lm <- gradH2O1()
 # Make second plot with guidelines parallel to fit for amino acids
-gradH2O2(lm = lm)
+gradH2O3(lm = lm)
 
 # list ZC and nH2O of proteomes for Nif-encoding genomes
 NifProteomes()

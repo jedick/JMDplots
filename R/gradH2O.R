@@ -180,7 +180,7 @@ gradH2O1 <- function(pdf = FALSE) {
   text(CHNOS.O2.R2, CHNOS.H2O.R2, "CHNOS", adj = -0.15, font = 2)
   title(paste(nbasis, "combinations of basis species"), font.main = 1)
   # add text for zoom box
-  text(0.98, 0.045, "zoom\nbox", cex = 1.1)
+  text(0.98, 0.045, "zoom\narea", cex = 1.1)
   label.figure("(g)", cex = 1.6, yfrac = 0.94)
 
   # Plot 8: zoomed plot of R2 of nH2O-ZC and nO2-ZC fits
@@ -218,9 +218,84 @@ gradH2O1 <- function(pdf = FALSE) {
   invisible(lm(species()$H2O ~ ZC.aa))
 }
 
+# Schematic of nH2O and ZC calculations 20200826
+gradH2O2 <- function(pdf = FALSE) {
+  # Setup plot
+  if(pdf) pdf("gradH2O2.pdf", width = 5, height = 2.5)
+  plot.new()
+  par(mar = c(0, 0, 0, 0))
+  par(usr = c(0, 1, 0.4, 1))
+  par(xpd = NA)
+
+  # Make headings
+  text(0.30, 0.95, "Elemental composition")
+  text(0.80, 0.95, "Amino acid composition")
+  text(0.05, 0.80, "Basis\nspecies", srt = 90, cex = 0.9)
+  text(0.05, 0.65, quote(italic(n)[H[2]*O]))
+  text(0.05, 0.52, quote(italic(Z)[C]))
+
+  # Use LYSC_CHICK
+  protein <- "LYSC_CHICK"
+  f <- protein.formula("LYSC_CHICK")
+  fexpr <- expr.species(as.chemical.formula(f))
+
+  # Write basis species
+  basis(c("glutamine", "cysteine", "acetic acid", "H2O", "O2"))
+  reaction <- subcrt(protein, -1)$reaction
+  text(0.30, 0.90, bquote(.(fexpr) == phantom(.)), cex = 0.8)
+  for(i in 2:6) {
+    dy <- (i - 2) * -0.03
+    coeff <- formatC(reaction$coeff[i], 2, format = "f")
+    if(i > 4) fexpr <- expr.species(reaction$formula[i])
+    else fexpr <- bquote(.(expr.species(reaction$formula[i]))~"("*.(reaction$name[i])*")")
+    text(0.22, 0.86 + dy, coeff, cex = 0.7, adj = 1)
+    text(0.24, 0.86 + dy, fexpr, cex = 0.7, adj = 0)
+  }
+  #text(0.12, 0.86 + dy, "+", cex = 0.7)
+
+  # Write nH2O equation
+  # Divide nH2O by protein length
+  pl <- protein.length(protein)
+  coeff <- formatC(reaction$coeff[5], 2, format = "f")
+  nH2O <- formatC(reaction$coeff[5] / pl, 3, format = "f")
+  nH2Oeqn <- bquote(frac(.(coeff), .(pl)~"(protein length)") == bold(.(nH2O)))
+  text(0.3, 0.65, nH2Oeqn, cex = 0.75)
+
+  # Write ZC calculation
+  df <- as.data.frame(f)
+  ZC <- formatC(ZC(f), 3, format = "f")
+  ZCeqn <- bquote(frac(- .(df$H) + 3%*%.(df$N) + 2%*%.(df$O) + 2%*%.(df$S), .(df$C)) == bold(.(ZC)))
+  text(0.35, 0.52, ZCeqn, cex = 0.75)
+  text(0.31, 0.45, "(Equation 1)")
+
+  # Write amino acid composition
+  xAA <- seq(0.65, 0.95, length.out = 10)
+  AA <- pinfo(pinfo("LYSC_CHICK"))[, 6:25]
+  text(xAA, 0.9, aminoacids()[1:10], cex = 0.75)
+  text(xAA, 0.87, AA[1:10], cex = 0.75)
+  text(xAA, 0.82, aminoacids()[11:20], cex = 0.75)
+  text(xAA, 0.79, AA[11:20], cex = 0.75)
+
+  # Write Equations using AA composition
+  text(0.75, 0.65, bquote(phantom(.) %<-% "Equation 2"))
+  text(0.75, 0.52, bquote(phantom(.) %<-% "Equation 3"))
+#  abline(v = 0.60, lty = 3, lwd = 2.2, col = "gray60")
+#  box(lty = 3, lwd = 2.2, col = "gray60")
+  mid <- 0.603
+  rect(0.005, 0.405, mid, 0.995, lty = 3, lwd = 2.2, border = "gray60")
+  rect(mid, 0.405, 0.995, 0.995, lty = 3, lwd = 2.2, border = "gray60")
+
+  # done!
+  if(pdf) {
+    dev.off()
+    addexif("gradH2O2", "Schematic of nH2O and ZC calculations", "Dick et al. (2020) (preprint)")
+  }
+  
+}
+
 # nH2O-ZC scatterplots for redox gradients and the Baltic Sea 20190713
-gradH2O2 <- function(pdf = FALSE, vars = "H2O-ZC", lm = NULL) {
-  if(pdf) pdf("gradH2O2.pdf", width = 12, height = 5.6)
+gradH2O3 <- function(pdf = FALSE, vars = "H2O-ZC", lm = NULL) {
+  if(pdf) pdf("gradH2O3.pdf", width = 12, height = 5.6)
   layout(matrix(c(1, 2, 3), nrow = 1), widths = c(3, 2, 2))
   par(mar = c(3.5, 4.5, 2, 1), las = 1, cex = 1.2)
   par(mgp = c(2.5, 1, 0))
@@ -327,13 +402,13 @@ gradH2O2 <- function(pdf = FALSE, vars = "H2O-ZC", lm = NULL) {
 
   if(pdf) {
     dev.off()
-    addexif("gradH2O2", "nH2O-ZC scatterplots for redox gradients and the Baltic Sea", "Dick et al. (2020) (preprint)")
+    addexif("gradH2O3", "nH2O-ZC scatterplots for redox gradients and the Baltic Sea", "Dick et al. (2020) (preprint)")
   }
 }
 
 # nH2O for Baltic Sea metagenome and metatranscriptome in different size fractions 20190715
-gradH2O3 <- function(pdf = FALSE, var = NULL) {
-  if(pdf) pdf("gradH2O3.pdf", width = 6, height = 3.5)
+gradH2O4 <- function(pdf = FALSE, var = NULL) {
+  if(pdf) pdf("gradH2O4.pdf", width = 6, height = 3.5)
   nvar <- ifelse(is.null(var), 1, length(var))
   if(nvar==2) par(mfrow = c(2, 3))
   else par(mfrow = c(1, 3))
@@ -371,7 +446,7 @@ gradH2O3 <- function(pdf = FALSE, var = NULL) {
 
   if(pdf) {
     dev.off()
-    addexif("gradH2O3", "nH2O for Baltic Sea metagenome and metatranscriptome in different size fractions", "Dick et al. (2020) (preprint)")
+    addexif("gradH2O4", "nH2O for Baltic Sea metagenome and metatranscriptome in different size fractions", "Dick et al. (2020) (preprint)")
   }
 }
 
@@ -379,9 +454,9 @@ gradH2O3 <- function(pdf = FALSE, var = NULL) {
 # make separate plot for sediments 20191006
 # add Amazon River 20191007
 # remove sediments and add GRAVY - pI plots 20191027
-gradH2O4 <- function(pdf = FALSE) {
+gradH2O5 <- function(pdf = FALSE) {
 
-  if(pdf) pdf("gradH2O4.pdf", width = 8, height = 5)
+  if(pdf) pdf("gradH2O5.pdf", width = 8, height = 5)
   layout(matrix(1:6, nrow = 2))
   par(las = 1, mar = c(4, 4.2, 2, 1), mgp = c(2.5, 1, 0))
   par(cex.lab = 1.5)
@@ -454,13 +529,13 @@ gradH2O4 <- function(pdf = FALSE) {
 
   if(pdf) {
     dev.off()
-    addexif("gradH2O4", "nH2O vs ZC for freshwater, marine, and hypersaline environments", "Dick et al. (2020) (preprint)")
+    addexif("gradH2O5", "nH2O vs ZC for freshwater, marine, and hypersaline environments", "Dick et al. (2020) (preprint)")
   }
 }
 
 # nH2O-ZC and GRAVY-pI plots for Baltic Sea and Rodriguez-Brito et al. data 20200421
-gradH2O5 <- function(pdf = FALSE) {
-  if(pdf) pdf("gradH2O5.pdf", width = 8, height = 8)
+gradH2O6 <- function(pdf = FALSE) {
+  if(pdf) pdf("gradH2O6.pdf", width = 8, height = 8)
   layout(matrix(1:4, nrow = 2))
   par(mar = c(4, 4.5, 2, 1), las = 1, cex = 1.2)
   par(cex.lab = 1.3)
@@ -492,13 +567,13 @@ gradH2O5 <- function(pdf = FALSE) {
   label.figure("(d)", cex = 1.7)
   if(pdf) {
     dev.off()
-    addexif("gradH2O5", "nH2O-ZC and GRAVY-pI plots for Baltic Sea and Rodriguez-Brito et al. data", "Dick et al. (2020) (preprint)")
+    addexif("gradH2O6", "nH2O-ZC and GRAVY-pI plots for Baltic Sea and Rodriguez-Brito et al. data", "Dick et al. (2020) (preprint)")
   }
 }
 
 # differential gene and protein expression; time-course experiments and NaCl or organic solutes 20200420
-gradH2O6 <- function(pdf = FALSE) {
-  if(pdf) pdf("gradH2O6.pdf", width = 8, height = 6)
+gradH2O7 <- function(pdf = FALSE) {
+  if(pdf) pdf("gradH2O7.pdf", width = 8, height = 6)
   mat <- matrix(c(1,1,1,1,1,1,1,1, 2,2,2,2, 3,3,3, 4,4,4, 5,5,5, 6,6,6), nrow = 2, byrow = TRUE)
   layout(mat, heights = c(3, 2))
   par(mar = c(4, 4, 3, 1), mgp = c(2.5, 1, 0))
@@ -659,7 +734,7 @@ gradH2O6 <- function(pdf = FALSE) {
 
   if(pdf) {
     dev.off()
-    addexif("gradH2O6", "differential gene and protein expression; time-course experiments and NaCl or organic solutes", "Dick et al. (2020) (preprint)")
+    addexif("gradH2O7", "differential gene and protein expression; time-course experiments and NaCl or organic solutes", "Dick et al. (2020) (preprint)")
   }
 }
 
