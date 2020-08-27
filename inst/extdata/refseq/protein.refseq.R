@@ -39,6 +39,11 @@ aadat <- mk.aadat()
 
 # read seqeunces from a single file into a blank aadat data frame 20190830
 read.file <- function(file) {
+  # were to save the results
+  outfile <- file.path("csv", gsub(".gz", ".csv", basename(file)))
+  # skip existing files (for restarting an aborted run) 20200729
+  if(file.exists(outfile)) return()
+
   # read the fasta file and find the header lines
   lines <- readLines(file)
   ihead <- grep("^>", lines)
@@ -56,7 +61,7 @@ read.file <- function(file) {
   WP.taxid.match <- paste0(basename(file), ".WP.taxid.match")
   write.table(aa$protein, acc.txt, row.names = FALSE, col.names = FALSE, quote = FALSE)
   # use tab separator here: https://stackoverflow.com/questions/1722353/unix-join-separator-char
-  system(paste("join -j 1 -t $'\t'", acc.txt, "release95.MultispeciesAutonomousProtein2taxname >", WP.taxid.match))
+  system(paste("join -j 1 -t $'\t'", acc.txt, "release201.MultispeciesAutonomousProtein2taxname >", WP.taxid.match))
   # turn off quoting because Synechococcus sp. JA-2-3B'a(2-13) messes things up 20190831
   # include check for empty file (no multispecies accessions) 20190901
   if(file.size(WP.taxid.match) > 0) myWP <- read.table(WP.taxid.match, sep = "\t", stringsAsFactors = FALSE, quote = "")
@@ -106,10 +111,9 @@ read.file <- function(file) {
     }
   }
 
-  # save CSV file and return result
-  outfile <- file.path("csv", gsub(".gz", ".csv", basename(file)))
+  # save CSV file
   write.csv(aadat, outfile, row.names = FALSE, quote = 3)
-  aadat
+  return()
 }
 
 read.allfiles <- function() {
@@ -139,7 +143,7 @@ read.allfiles <- function() {
   #aalist <- parLapply(cl, files, workerfun)
 
   # save a csv file of amino acid compositions (per taxid) for each fasta file
-  aalist <- parLapply(cl, files, read.file)
+  parLapply(cl, files, read.file)
   stopCluster(cl)
   #invisible(aalist)
 }

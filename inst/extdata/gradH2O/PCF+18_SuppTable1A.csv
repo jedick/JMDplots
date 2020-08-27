@@ -1,0 +1,421 @@
+Type,H-subunit,D-subunit,K-subunit,"Genome ID","Genome name",Domain,Phylum,Order
+Anf,ADQ79512.1,ADQ79509.1,ADQ79507.1,GCA_000183135.1_ASM18313v1,"Paludibacter propionicigenes WB4",BACTERIAL,Bacteroidetes,Bacteroidia
+Anf,ACF14285.1,ACF14288.1,ACF14290.1,GCA_000020525.1_ASM2052v1,"Chloroherpeton thalassium ATCC 35110",BACTERIAL,Chlorobi,Chlorobia
+Anf,AKB82408.1,AKB82412.1,AKB82410.1,GCA_000970305.1_ASM97030v1,"Methanosarcina barkeri 3",ARCHAEAL,Euryarchaeota,Methanomicrobia
+Anf,AAM04624.1,AAM04629.1,AAM04627.1,GCA_000007345.1_ASM734v1,"Methanosarcina acetivorans C2A",ARCHAEAL,Euryarchaeota,Methanomicrobia
+Anf,ADY57123.1,ADY57120.1,ADY57118.1,GCA_000190635.1_ASM19063v1,"Syntrophobotulus glycolicus DSM 8271",BACTERIAL,Firmicutes,Clostridia
+Anf,AFA47495.1,AFA47492.1,AFA47490.1,GCA_000247605.1_ASM24760v1,"Acetobacterium woodii DSM 1030",BACTERIAL,Firmicutes,Clostridia
+Anf,AIF53402.1,AIF53399.1,AIF53397.1,GCA_000725345.1_ASM72534v1,"Pelosinus sp. UFO1",BACTERIAL,Firmicutes,Negativicutes
+Anf,AJQ26362.1,AJQ26365.1,AJQ26367.1,GCA_000271665.2_ASM27166v2,"Pelosinus fermentans JBW45",BACTERIAL,Firmicutes,Negativicutes
+Anf,AIQ17622.1,AIQ17623.1,AIQ17625.1,GCA_000758525.1_ASM75852v1,"Paenibacillus sp. FSL H7-0357",BACTERIAL,Firmicutes,Bacilli
+Anf,AIQ57936.1,AIQ57937.1,AIQ57939.1,GCA_000758665.1_ASM75866v1,"Paenibacillus borealis",BACTERIAL,Firmicutes,Bacilli
+Anf,AIQ63606.1,AIQ63607.1,AIQ63609.1,GCA_000758685.1_ASM75868v1,"Paenibacillus stellifer",BACTERIAL,Firmicutes,Bacilli
+Anf,CQR55106.1,CQR55107.1,CQR55109.1,GCA_000981585.1_SBR5_T_,"Paenibacillus riograndensis SBR5",BACTERIAL,Firmicutes,Bacilli
+Anf,AGF56848.1,AGF56849.1,AGF56851.1,GCA_000340885.1_ASM34088v1,"Clostridium saccharoperbutylacetonicum N1-4(HMT)",BACTERIAL,Firmicutes,Clostridia
+Anf,AJA49858.1,AJA49856.1,AJA49854.1,GCA_000807175.1_ASM80717v1,"Clostridium pasteurianum DSM 525 = ATCC 6013",BACTERIAL,Firmicutes,Clostridia
+Anf,AJA53846.1,AJA53844.1,AJA53842.1,GCA_000807255.1_ASM80725v1,"Clostridium pasteurianum DSM 525 = ATCC 6013",BACTERIAL,Firmicutes,Clostridia
+Anf,ABC22196.1,ABC22195.1,ABC22193.1,GCA_000013085.1_ASM1308v1,"Rhodospirillum rubrum ATCC 11170",BACTERIAL,Proteobacteria,Alphaproteobacteria
+Anf,ABD90206.1,ABD90205.1,ABD90203.1,GCA_000013745.1_ASM1374v1,"Rhodopseudomonas palustris BisB18",BACTERIAL,Proteobacteria,Alphaproteobacteria
+Anf,ABJ07810.1,ABJ07809.1,ABJ07807.1,GCA_000014825.1_ASM1482v1,"Rhodopseudomonas palustris BisA53",BACTERIAL,Proteobacteria,Alphaproteobacteria
+Anf,ACF00152.1,ACF00151.1,ACF00149.1,GCA_000020445.1_ASM2044v1,"Rhodopseudomonas palustris TIE-1",BACTERIAL,Proteobacteria,Alphaproteobacteria
+Anf,ACM03752.1,ACM03751.1,ACM03749.1,GCA_000021005.1_ASM2100v1,"Rhodobacter sphaeroides KD131",BACTERIAL,Proteobacteria,Alphaproteobacteria
+Anf,ACO81000.1,ACO80999.1,ACO80997.1,GCA_000021045.1_ASM2104v1,"Azotobacter vinelandii DJ",BACTERIAL,Proteobacteria,Gammaproteobacteria
+Anf,ACS86387.1,ACS86388.1,ACS86390.1,GCA_000023545.1_ASM2354v1,"Dickeya paradisiaca Ech703",BACTERIAL,Proteobacteria,Gammaproteobacteria
+Anf,ADE84350.1,ADE84351.1,ADE84353.1,GCA_000021865.1_ASM2186v1,"Rhodobacter capsulatus SB 1003",BACTERIAL,Proteobacteria,Alphaproteobacteria
+Anf,ADP72548.1,ADP72547.1,ADP72545.1,GCA_000166055.1_ASM16605v1,"Rhodomicrobium vannielii ATCC 17100",BACTERIAL,Proteobacteria,Alphaproteobacteria
+Anf,ADU44701.1,ADU44702.1,ADU44704.1,GCA_000177255.2_ASM17725v2,"Rhodopseudomonas palustris DX-1",BACTERIAL,Proteobacteria,Alphaproteobacteria
+Anf,AEI37864.1,AEI37863.1,AEI37861.1,GCA_000218875.1_ASM21887v1,"Zymomonas mobilis subsp. pomaceae ATCC 29192",BACTERIAL,Proteobacteria,Alphaproteobacteria
+Anf,AEO47911.1,AEO47910.1,AEO47908.1,GCA_000225955.1_ASM22595v1,"Rhodospirillum rubrum F11",BACTERIAL,Proteobacteria,Alphaproteobacteria
+Anf,ALK10656.1,ALK10657.1,ALK10659.1,GCA_001402875.1_ASM140287v1,"Blastochloris viridis",BACTERIAL,Proteobacteria,Alphaproteobacteria
+Anf,BAR99383.1,BAR99382.1,BAR99380.1,GCA_001548155.2_BV133_assembly_1.0,"Blastochloris viridis",BACTERIAL,Proteobacteria,Alphaproteobacteria
+Anf,CCG07116.1,CCG07115.1,CCG07113.1,GCA_000284415.2_ASM28441v2,"Rhodospirillum photometricum DSM 122",BACTERIAL,Proteobacteria,Alphaproteobacteria
+Anf,AHF89179.1,AHF89180.1,AHF89182.1,GCA_000242935.3_ASM24293v3,"Opitutaceae bacterium TAV5",BACTERIAL,Verrucomicrobia,Opitutae
+Anf,CAE26881.1,CAE26880.1,CAE26878.1,GCA_000195775.1_ASM19577v1,"Rhodopseudomonas palustris CGA009",BACTERIAL,Proteobacteria,Alphaproteobacteria
+Nif-A,AAB91899.1,AAB91900.1,AAB91901.1,GCA_000018545.1_ASM1854v1,"Sinorhizobium fredii NGR234",BACTERIAL,Proteobacteria,Alphaproteobacteria
+Nif-A,AAB91923.1,AAB91924.1,AAB91925.1,GCA_000018545.1_ASM1854v1,"Sinorhizobium fredii NGR234",BACTERIAL,Proteobacteria,Alphaproteobacteria
+Nif-A,AAK65107.1,AAK65108.1,AAK65109.1,GCA_000006965.1_ASM696v1,"Sinorhizobium meliloti 1021",BACTERIAL,Proteobacteria,Alphaproteobacteria
+Nif-A,AAM54750.1,AAM54751.1,AAM54752.2,GCA_000092045.1_ASM9204v1,"Rhizobium etli CFN 42",BACTERIAL,Proteobacteria,Alphaproteobacteria
+Nif-A,AAM54849.1,AAM54850.1,AAM54851.1,GCA_000092045.1_ASM9204v1,"Rhizobium etli CFN 42",BACTERIAL,Proteobacteria,Alphaproteobacteria
+Nif-A,AAR36215.1,AAR36214.1,AAR36213.1,GCA_000007985.2_ASM798v2,"Geobacter sulfurreducens PCA",BACTERIAL,Proteobacteria,Deltaproteobacteria
+Nif-A,AAV90447.1,AAV90448.1,AAV90449.1,GCA_000007105.1_ASM710v1,"Zymomonas mobilis subsp. mobilis ZM4 = ATCC 31821",BACTERIAL,Proteobacteria,Alphaproteobacteria
+Nif-A,AAZ46164.1,AAZ46163.1,AAZ46162.1,GCA_000012425.1_ASM1242v1,"Dechloromonas aromatica RCB",BACTERIAL,Proteobacteria,Betaproteobacteria
+Nif-A,ABA23846.1,ABA23847.1,ABA23848.1,GCA_000204075.1_ASM20407v1,"Anabaena variabilis ATCC 29413",BACTERIAL,Cyanobacteria,None
+Nif-A,ABA89338.1,ABA89339.1,ABA89340.1,GCA_000012885.1_ASM1288v1,"Pelobacter carbinolicus DSM 2380",BACTERIAL,Proteobacteria,Deltaproteobacteria
+Nif-A,ABB30904.1,ABB30905.1,ABB30906.1,GCA_000012925.1_ASM1292v1,"Geobacter metallireducens GS-15",BACTERIAL,Proteobacteria,Deltaproteobacteria
+Nif-A,ABC21811.1,ABC21812.1,ABC21813.1,GCA_000013085.1_ASM1308v1,"Rhodospirillum rubrum ATCC 11170",BACTERIAL,Proteobacteria,Alphaproteobacteria
+Nif-A,ABC99975.1,ABC99974.1,ABC99973.1,GCA_000013205.1_ASM1320v1,"Synechococcus sp. JA-3-3Ab",BACTERIAL,Cyanobacteria,None
+Nif-A,ABD01417.1,ABD01418.1,ABD01419.1,GCA_000013225.1_ASM1322v1,"Synechococcus sp. JA-2-3B'a(2-13)",BACTERIAL,Cyanobacteria,None
+Nif-A,ABD05679.1,ABD05680.1,ABD05681.1,GCA_000013365.1_ASM1336v1,"Rhodopseudomonas palustris HaA2",BACTERIAL,Proteobacteria,Alphaproteobacteria
+Nif-A,ABD13834.1,ABD13833.1,ABD13832.1,GCA_000013345.1_ASM1334v1,"Frankia sp. CcI3",BACTERIAL,Actinobacteria,Actinobacteria
+Nif-A,ABD89986.1,ABD89985.1,ABD89984.1,GCA_000013745.1_ASM1374v1,"Rhodopseudomonas palustris BisB18",BACTERIAL,Proteobacteria,Alphaproteobacteria
+Nif-A,CAE30060.1,CAE30059.1,CAE30058.1,GCA_000195775.1_ASM19577v1,"Rhodopseudomonas palustris CGA009",BACTERIAL,Proteobacteria,Alphaproteobacteria
+Nif-A,ABE34499.1,ABE34498.1,ABE34497.1,GCA_000013645.1_ASM1364v1,"Burkholderia xenovorans LB400",BACTERIAL,Proteobacteria,Betaproteobacteria
+Nif-A,ABE38311.1,ABE38312.1,ABE38313.1,GCA_000013685.1_ASM1368v1,"Rhodopseudomonas palustris BisB5",BACTERIAL,Proteobacteria,Alphaproteobacteria
+Nif-A,ABG53144.1,ABG53145.1,ABG53146.1,GCA_000014265.1_ASM1426v1,"Trichodesmium erythraeum IMS101",BACTERIAL,Cyanobacteria,None
+Nif-A,ABJ08453.1,ABJ08452.1,ABJ08451.1,GCA_000014825.1_ASM1482v1,"Rhodopseudomonas palustris BisA53",BACTERIAL,Proteobacteria,Alphaproteobacteria
+Nif-A,ABK43713.1,ABK43712.1,ABK43711.1,GCA_000014865.1_ASM1486v1,"Magnetococcus marinus MC-1",BACTERIAL,Proteobacteria,Alphaproteobacteria
+Nif-A,ABL01060.1,ABL01061.1,ABL01062.1,GCA_000015045.1_ASM1504v1,"Pelobacter propionicus DSM 2379",BACTERIAL,Proteobacteria,Deltaproteobacteria
+Nif-A,ABM37652.1,ABM37651.1,ABM37650.1,GCA_000015505.1_ASM1550v1,"Polaromonas naphthalenivorans CJ2",BACTERIAL,Proteobacteria,Betaproteobacteria
+Nif-A,ABM61068.1,ABM61067.1,ABM61066.1,GCA_000015585.1_ASM1558v1,"Halorhodospira halophila SL1",BACTERIAL,Proteobacteria,Gammaproteobacteria
+Nif-A,ABN77295.1,ABN77294.1,ABN77293.1,GCA_000015985.1_ASM1598v1,"Rhodobacter sphaeroides ATCC 17029",BACTERIAL,Proteobacteria,Alphaproteobacteria
+Nif-A,ABO58940.1,ABO58941.1,ABO58942.1,GCA_000016205.1_ASM1620v1,"Burkholderia vietnamiensis G4",BACTERIAL,Proteobacteria,Betaproteobacteria
+Nif-A,ABP70147.1,ABP70148.1,ABP70149.1,GCA_000016405.1_ASM1640v1,"Rhodobacter sphaeroides ATCC 17025",BACTERIAL,Proteobacteria,Alphaproteobacteria
+Nif-A,ABP79021.1,ABP79022.1,ABP79023.1,GCA_000013785.1_ASM1378v1,"Pseudomonas stutzeri A1501",BACTERIAL,Proteobacteria,Gammaproteobacteria
+Nif-A,ABQ25379.1,ABQ25380.1,ABQ25381.1,GCA_000016745.1_ASM1674v1,"Geobacter uraniireducens Rf4",BACTERIAL,Proteobacteria,Deltaproteobacteria
+Nif-A,ABQ37866.1,ABQ37865.1,ABQ37864.1,GCA_000015165.1_ASM1516v1,"Bradyrhizobium sp. BTAi1",BACTERIAL,Proteobacteria,Alphaproteobacteria
+Nif-A,ABR64829.1,ABR64828.1,ABR64827.1,GCA_000017145.1_ASM1714v1,"Sinorhizobium medicae WSM419",BACTERIAL,Proteobacteria,Alphaproteobacteria
+Nif-A,ABS27227.1,ABS27226.1,ABS27225.1,GCA_000017505.1_ASM1750v1,"Anaeromyxobacter sp. Fw109-5",BACTERIAL,Proteobacteria,Deltaproteobacteria
+Nif-A,ABS65347.1,ABS65348.1,ABS65349.1,GCA_000017645.1_ASM1764v1,"Xanthobacter autotrophicus Py2",BACTERIAL,Proteobacteria,Alphaproteobacteria
+Nif-A,ABW16215.1,ABW16214.1,ABW16213.1,GCA_000018005.1_ASM1800v1,"Frankia sp. EAN1pec",BACTERIAL,Actinobacteria,Actinobacteria
+Nif-A,ABZ83695.1,ABZ83696.1,ABZ83697.1,GCA_000019165.1_ASM1916v1,"Heliobacterium modesticaldum Ice1",BACTERIAL,Firmicutes,Clostridia
+Nif-A,ACA17917.1,ACA17918.1,ACA17919.1,GCA_000019365.1_ASM1936v1,"Methylobacterium sp. 4-46",BACTERIAL,Proteobacteria,Alphaproteobacteria
+Nif-A,ACB33698.1,ACB33699.1,ACB33700.1,GCA_000019785.1_ASM1978v1,"Leptothrix cholodnii SP-6",BACTERIAL,Proteobacteria,Betaproteobacteria
+Nif-A,ACB49910.1,ACB49911.1,ACB49912.1,GCA_000017845.1_ASM1784v1,"Cyanothece sp. ATCC 51142",BACTERIAL,Cyanobacteria,None
+Nif-A,ACB94126.1,ACB94127.1,ACB94128.1,GCA_000019845.1_ASM1984v1,"Beijerinckia indica subsp. indica ATCC 9039",BACTERIAL,Proteobacteria,Alphaproteobacteria
+Nif-A,ACC76639.1,ACC76640.1,ACC76641.1,GCA_000020045.1_ASM2004v1,"Burkholderia phymatum STM815",BACTERIAL,Proteobacteria,Betaproteobacteria
+Nif-A,ACD83930.1,ACD83928.1,ACD83927.1,GCA_000019665.1_ASM1966v1,"Methylacidiphilum infernorum V4",BACTERIAL,Verrucomicrobia,None
+Nif-A,ACD94376.1,ACD94375.1,ACD94374.1,GCA_000020385.1_ASM2038v1,"Geobacter lovleyi SZ",BACTERIAL,Proteobacteria,Deltaproteobacteria
+Nif-A,ACE93965.1,ACE93964.1,ACE93963.1,GCA_000020265.1_ASM2026v1,"Rhizobium etli CIAT 652",BACTERIAL,Proteobacteria,Alphaproteobacteria
+Nif-A,ACE94049.1,ACE94048.1,ACE94047.1,GCA_000020265.1_ASM2026v1,"Rhizobium etli CIAT 652",BACTERIAL,Proteobacteria,Alphaproteobacteria
+Nif-A,ACF03590.1,ACF03589.1,ACF03588.1,GCA_000020445.1_ASM2044v1,"Rhodopseudomonas palustris TIE-1",BACTERIAL,Proteobacteria,Alphaproteobacteria
+Nif-A,ACG74424.1,ACG74425.1,ACG74426.1,GCA_000020805.1_ASM2080v1,"Anaeromyxobacter sp. K",BACTERIAL,Proteobacteria,Deltaproteobacteria
+Nif-A,ACH39087.1,ACH39088.1,ACH39089.1,GCA_000020725.1_ASM2072v1,"Geobacter bemidjiensis Bem",BACTERIAL,Proteobacteria,Deltaproteobacteria
+Nif-A,ACH83478.1,ACH83477.1,ACH83476.1,GCA_000020825.1_ASM2082v1,"Acidithiobacillus ferrooxidans ATCC 53993",BACTERIAL,Proteobacteria,Gammaproteobacteria
+Nif-A,ACI51349.1,ACI51348.1,ACI51347.1,GCA_000021325.1_ASM2132v1,"Gluconacetobacter diazotrophicus PA1 5",BACTERIAL,Proteobacteria,Alphaproteobacteria
+Nif-A,ACI58270.1,ACI58271.1,ACI58272.1,GCA_000021345.1_ASM2134v1,"Rhizobium leguminosarum bv. trifolii WSM2304",BACTERIAL,Proteobacteria,Alphaproteobacteria
+Nif-A,ACJ01032.1,ACJ01031.1,ACJ01030.1,GCA_000016185.1_ASM1618v1,"Rhodospirillum centenum SW",BACTERIAL,Proteobacteria,Alphaproteobacteria
+Nif-A,ACJ53724.1,ACJ53723.1,ACJ53722.1,GCA_000025125.1_ASM2512v1,"Candidatus Atelocyanobacterium thalassa isolate ALOHA",BACTERIAL,Cyanobacteria,None
+Nif-A,ACK52517.1,ACK52516.1,ACK52515.1,GCA_000021745.1_ASM2174v1,"Methylocella silvestris BL2",BACTERIAL,Proteobacteria,Alphaproteobacteria
+Nif-A,ACK65831.1,ACK65832.1,ACK65833.1,GCA_000021805.1_ASM2180v1,"Cyanothece sp. PCC 8801",BACTERIAL,Cyanobacteria,None
+Nif-A,ACK70547.1,ACK70546.1,ACK70545.1,GCA_000021825.1_ASM2182v1,"Cyanothece sp. PCC 7424",BACTERIAL,Cyanobacteria,None
+Nif-A,ACL19109.1,ACL19110.1,ACL19111.1,GCA_000021925.1_ASM2192v1,"Desulfitobacterium hafniense DCB-2",BACTERIAL,Firmicutes,Clostridia
+Nif-A,ACL44722.1,ACL44723.1,ACL44724.1,GCA_000022045.1_ASM2204v1,"Cyanothece sp. PCC 7425",BACTERIAL,Cyanobacteria,None
+Nif-A,ACL58883.1,ACL58882.1,ACL58881.1,GCA_000022085.1_ASM2208v1,"Methylobacterium nodulans ORS 2060",BACTERIAL,Proteobacteria,Alphaproteobacteria
+Nif-A,ACM01736.1,ACM01735.1,ACM01734.1,GCA_000021005.1_ASM2100v1,"Rhodobacter sphaeroides KD131",BACTERIAL,Proteobacteria,Alphaproteobacteria
+Nif-A,ACM20925.1,ACM20926.1,ACM20928.1,GCA_000022265.1_ASM2226v1,"Geobacter daltonii FRC-32",BACTERIAL,Proteobacteria,Deltaproteobacteria
+Nif-A,ACO76403.1,ACO76404.1,ACO76405.1,GCA_000021045.1_ASM2104v1,"Azotobacter vinelandii DJ",BACTERIAL,Proteobacteria,Gammaproteobacteria
+Nif-A,ACQ92279.1,ACQ92280.1,ACQ92281.1,GCA_000023065.1_ASM2306v1,"Tolumonas auensis DSM 9187",BACTERIAL,Proteobacteria,Gammaproteobacteria
+Nif-A,ACS59148.1,ACS59149.1,ACS59150.1,GCA_000023185.1_ASM2318v1,"Rhizobium leguminosarum bv. trifolii WSM1325",BACTERIAL,Proteobacteria,Alphaproteobacteria
+Nif-A,ACS84302.1,ACS84303.1,ACS84304.1,GCA_000023545.1_ASM2354v1,"Dickeya paradisiaca Ech703",BACTERIAL,Proteobacteria,Gammaproteobacteria
+Nif-A,ACT18197.1,ACT18196.1,ACT18195.1,GCA_000023645.1_ASM2364v1,"Geobacter sp. M21",BACTERIAL,Proteobacteria,Deltaproteobacteria
+Nif-A,ACU32734.1,ACU32733.1,ACU32732.1,GCA_000025465.1_ASM2546v1,"Klebsiella variicola At-22",BACTERIAL,Proteobacteria,Gammaproteobacteria
+Nif-A,ACV00712.1,ACV00713.1,ACV00714.1,GCA_000024045.1_ASM2404v1,"Cyanothece sp. PCC 8802",BACTERIAL,Cyanobacteria,None
+Nif-A,ACV37675.1,ACV37676.1,ACV37677.1,GCA_000024165.1_ASM2416v1,"Candidatus Accumulibacter phosphatis clade IIA str. UW-1",BACTERIAL,Proteobacteria,Betaproteobacteria
+Nif-A,ACV75951.1,ACV75950.1,ACV75949.1,GCA_000024245.1_ASM2424v1,"Zymomonas mobilis subsp. mobilis NCIMB 11163",BACTERIAL,Proteobacteria,Alphaproteobacteria
+Nif-A,ADC62805.1,ADC62804.1,ADC62803.1,GCA_000025485.1_ASM2548v1,"Allochromatium vinosum DSM 180",BACTERIAL,Proteobacteria,Gammaproteobacteria
+Nif-A,ADD67822.1,ADD67823.1,ADD67824.1,GCA_000025725.1_ASM2572v1,"Denitrovibrio acetiphilus DSM 12809",BACTERIAL,Deferribacteres,Deferribacteres
+Nif-A,ADE11119.1,ADE11120.1,ADE11121.1,GCA_000025705.1_ASM2570v1,"Sideroxydans lithotrophicus ES-1",BACTERIAL,Proteobacteria,Betaproteobacteria
+Nif-A,ADE84337.1,ADE84336.1,ADE84335.1,GCA_000021865.1_ASM2186v1,"Rhodobacter capsulatus SB 1003",BACTERIAL,Proteobacteria,Alphaproteobacteria
+Nif-A,ADG20727.1,ADG20728.1,ADG20729.1,GCA_000092885.1_ASM9288v1,"Burkholderia sp. CCGE1002",BACTERIAL,Proteobacteria,Betaproteobacteria
+Nif-A,ADG91719.1,ADG91717.1,ADG91716.1,GCA_000092245.1_ASM9224v1,"Arcobacter nitrofigilis DSM 7299",BACTERIAL,Proteobacteria,Epsilonproteobacteria
+Nif-A,ADI63610.1,ADI63609.1,ADI63608.1,GCA_000196515.1_ASM19651v1,"Anabaena azollae (Nostoc azollae' 0708)",BACTERIAL,Cyanobacteria,NA
+Nif-A,ADI85572.1,ADI85571.1,ADI85570.1,GCA_000210155.1_ASM21015v1,"Geobacter sulfurreducens KN400",BACTERIAL,Proteobacteria,Deltaproteobacteria
+Nif-A,ADJ64345.1,ADJ64344.1,ADJ64343.1,GCA_000143225.1_ASM14322v1,"Herbaspirillum seropedicae SmR1",BACTERIAL,Proteobacteria,Betaproteobacteria
+Nif-A,ADN00228.1,ADN00227.1,ADN00226.1,GCA_000147055.1_ASM14705v1,"Dickeya dadantii 3937",BACTERIAL,Proteobacteria,Gammaproteobacteria
+Nif-A,ADN15612.1,ADN15613.1,ADN15614.1,GCA_000147335.1_ASM14733v1,"Cyanothece sp. PCC 7822",BACTERIAL,Cyanobacteria,None
+Nif-A,ADP71189.1,ADP71190.1,ADP71191.1,GCA_000166055.1_ASM16605v1,"Rhodomicrobium vannielii ATCC 17100",BACTERIAL,Proteobacteria,Alphaproteobacteria
+Nif-A,ADR18595.1,ADR18596.1,ADR18597.1,GCA_000183405.1_ASM18340v1,"Calditerrivibrio nitroreducens DSM 19672",BACTERIAL,Deferribacteres,Deferribacteres
+Nif-A,ADR34162.1,ADR34160.1,ADR34159.1,GCA_000183725.1_ASM18372v1,"Sulfuricurvum kujiense DSM 16994",BACTERIAL,Proteobacteria,Epsilonproteobacteria
+Nif-A,ADU46343.1,ADU46342.1,ADU46341.1,GCA_000177255.2_ASM17725v2,"Rhodopseudomonas palustris DX-1",BACTERIAL,Proteobacteria,Alphaproteobacteria
+Nif-A,ADU72689.1,ADU72688.1,ADU72687.1,GCA_000175935.2_ASM17593v2,"Pantoea sp. At-9b",BACTERIAL,Proteobacteria,Gammaproteobacteria
+Nif-A,ADV14842.1,ADV14841.1,ADV14840.1,GCA_000185905.1_ASM18590v1,"Mesorhizobium ciceri biovar biserrulae WSM1271",BACTERIAL,Proteobacteria,Alphaproteobacteria
+Nif-A,ADW13325.1,ADW13326.1,ADW13327.1,GCA_000175115.2_ASM17511v2,"Geobacter sp. M18",BACTERIAL,Proteobacteria,Deltaproteobacteria
+Nif-A,ADY57111.1,ADY57110.1,ADY57109.1,GCA_000190635.1_ASM19063v1,"Syntrophobotulus glycolicus DSM 8271",BACTERIAL,Firmicutes,Clostridia
+Nif-A,AEA83267.1,AEA83268.1,AEA83269.1,GCA_000195105.1_ASM19510v1,"Pseudomonas stutzeri DSM 4166",BACTERIAL,Proteobacteria,Gammaproteobacteria
+Nif-A,AEF99883.1,AEF99884.1,AEF99885.1,GCA_000214665.1_ASM21466v1,"Methylomonas methanica MC09",BACTERIAL,Proteobacteria,Gammaproteobacteria
+Nif-A,AEG07185.1,AEG07186.1,AEG07187.1,GCA_000147775.3_ASM14777v3,"Sinorhizobium meliloti BL225C",BACTERIAL,Proteobacteria,Alphaproteobacteria
+Nif-A,AEG57822.1,AEG57821.1,AEG57820.1,GCA_000147795.3_ASM14779v3,"Sinorhizobium meliloti AK83",BACTERIAL,Proteobacteria,Alphaproteobacteria
+Nif-A,AEH10141.1,AEH10140.1,AEH10139.1,GCA_000177615.2_ASM17761v2,"Frankia symbiont of Datisca glomerata",BACTERIAL,Actinobacteria,Actinobacteria
+Nif-A,AEH63154.1,AEH63153.1,AEH63152.1,GCA_000175255.2_ASM17525v2,"Zymomonas mobilis subsp. mobilis ATCC 10988",BACTERIAL,Proteobacteria,Alphaproteobacteria
+Nif-A,AEH82198.1,AEH82197.1,AEH82196.1,GCA_000218265.1_ASM21826v1,"Sinorhizobium meliloti SM11",BACTERIAL,Proteobacteria,Alphaproteobacteria
+Nif-A,AEH90732.1,AEH90731.1,AEH90730.1,GCA_000176035.2_ASM17603v2,"Mesorhizobium opportunistum WSM2075",BACTERIAL,Proteobacteria,Alphaproteobacteria
+Nif-A,AEI38202.1,AEI38201.1,AEI38200.1,GCA_000218875.1_ASM21887v1,"Zymomonas mobilis subsp. pomaceae ATCC 29192",BACTERIAL,Proteobacteria,Alphaproteobacteria
+Nif-A,AEM47783.1,AEM47782.1,AEM47781.1,GCA_000214095.3_ASM21409v3,"Acidithiobacillus ferrivorans SS3",BACTERIAL,Proteobacteria,Acidithiobacillia
+Nif-A,AEO47511.1,AEO47512.1,AEO47513.1,GCA_000225955.1_ASM22595v1,"Rhodospirillum rubrum F11",BACTERIAL,Proteobacteria,Alphaproteobacteria
+Nif-A,AET59369.1,AET59370.1,AET59371.1,GCA_000235585.1_ASM23558v1,"Paenibacillus terrae HPL-003",BACTERIAL,Firmicutes,Bacilli
+Nif-A,AET70418.1,AET70417.1,AET70416.1,GCA_000235605.1_ASM23560v1,"Desulfosporosinus orientis DSM 765",BACTERIAL,Firmicutes,Clostridia
+Nif-A,AEV25360.1,AEV25361.1,AEV25362.1,GCA_000236665.1_ASM23666v1,"Dechlorosoma suillum PS",BACTERIAL,Proteobacteria,Betaproteobacteria
+Nif-A,AEX06699.1,AEX06700.1,AEX06701.1,GCA_000240325.1_ASM24032v1,"Klebsiella oxytoca KCTC 1686",BACTERIAL,Proteobacteria,Gammaproteobacteria
+Nif-A,AEX24158.1,AEX24159.1,AEX24160.1,GCA_000241385.1_ASM24138v1,"Vibrio sp. EJY3",BACTERIAL,Proteobacteria,Gammaproteobacteria
+Nif-A,AFE61311.1,AFE61312.1,AFE61313.1,GCA_000255535.1_ASM25553v1,"Rahnella aquatilis HX2",BACTERIAL,Proteobacteria,Gammaproteobacteria
+Nif-A,AFJ89853.1,AFJ89854.1,AFJ89855.1,GCA_000262695.1_ASM26269v1,"Burkholderia sp. KJ006",BACTERIAL,Proteobacteria,Betaproteobacteria
+Nif-A,AFL68336.1,AFL68338.1,AFL68339.1,GCA_000265295.1_ASM26529v1,"Sulfurospirillum barnesii SES-3",BACTERIAL,Proteobacteria,Epsilonproteobacteria
+Nif-A,AFL75500.1,AFL75501.1,AFL75502.1,GCA_000227745.3_ASM22774v3,"Thiocystis violascens DSM 198",BACTERIAL,Proteobacteria,Gammaproteobacteria
+Nif-A,AFM42901.1,AFM42900.1,AFM42899.1,GCA_000255115.3_ASM25511v3,"Desulfosporosinus acidiphilus SJ4",BACTERIAL,Firmicutes,Clostridia
+Nif-A,AFN33197.1,AFN33198.1,AFN33199.1,GCA_000276705.2_ASM27670v2,"Klebsiella oxytoca E718",BACTERIAL,Proteobacteria,Gammaproteobacteria
+Nif-A,AFQ45849.1,AFQ45848.1,AFQ45847.1,GCA_000231385.3_ASM23138v3,"Desulfosporosinus meridiei DSM 13257",BACTERIAL,Firmicutes,Clostridia
+Nif-A,AFT90593.1,AFT90594.1,AFT90595.1,GCA_000300095.1_ASM30009v1,"Burkholderia phenoliruptrix BR3459a",BACTERIAL,Proteobacteria,Betaproteobacteria
+Nif-A,AFV03033.1,AFV03032.1,AFV03031.1,GCA_000305775.1_ASM30577v1,"Dehalobacter sp. DCA",BACTERIAL,Firmicutes,Clostridia
+Nif-A,AFV06021.1,AFV06020.1,AFV06019.1,GCA_000305815.1_ASM30581v1,"Dehalobacter sp. CF",BACTERIAL,Firmicutes,Clostridia
+Nif-A,AFY78732.1,AFY78733.1,AFY78734.1,GCA_000317025.1_ASM31702v1,"Pleurocapsa sp. PCC 7327",BACTERIAL,Cyanobacteria,None
+Nif-A,AFY89975.1,AFY89974.1,AFY89973.1,GCA_000317125.1_ASM31712v1,"Chroococcidiopsis thermalis PCC 7203",BACTERIAL,Cyanobacteria,None
+Nif-A,AFZ17178.1,AFZ17177.1,AFZ17176.1,GCA_000317515.1_ASM31751v1,"Microcoleus sp. PCC 7113",BACTERIAL,Cyanobacteria,None
+Nif-A,AFZ43954.1,AFZ43955.1,AFZ43956.1,GCA_000317635.1_ASM31763v1,"Halothece sp. PCC 7418",BACTERIAL,Cyanobacteria,None
+Nif-A,AGA09729.1,AGA09728.1,AGA09727.1,GCA_000320385.2_ASM32038v2,"Sinorhizobium meliloti GR4",BACTERIAL,Proteobacteria,Alphaproteobacteria
+Nif-A,AGA91923.1,AGA91922.1,AGA91921.1,GCA_000327045.1_ASM32704v1,"Thioflavicoccus mobilis 8321",BACTERIAL,Proteobacteria,Gammaproteobacteria
+Nif-A,AGB48100.1,AGB48099.1,AGB48098.1,GCA_000230995.3_ASM23099v3,"Mesorhizobium australicum WSM2073",BACTERIAL,Proteobacteria,Alphaproteobacteria
+Nif-A,AGB73582.1,AGB73583.1,AGB73584.1,GCA_000330885.1_ASM33088v1,"Rhizobium tropici CIAT 899",BACTERIAL,Proteobacteria,Alphaproteobacteria
+Nif-A,AGG70134.1,AGG70135.1,AGG70136.1,GCA_000346065.1_ASM34606v1,"Sinorhizobium meliloti 2011",BACTERIAL,Proteobacteria,Alphaproteobacteria
+Nif-A,AGK13780.1,AGK13777.1,AGK13781.1,GCA_000380335.1_ASM38033v1,"Azotobacter vinelandii CA",BACTERIAL,Proteobacteria,Gammaproteobacteria
+Nif-A,AGN84234.1,AGN84235.1,AGN84236.1,GCA_000410515.1_ASM41051v1,"Enterobacter sp. R4-368",BACTERIAL,Proteobacteria,Gammaproteobacteria
+Nif-A,AGS25390.1,AGS25389.1,AGS25388.1,GCA_000442435.1_ASM44243v1,"Rhizobium etli bv. mimosae str. Mim1",BACTERIAL,Proteobacteria,Alphaproteobacteria
+Nif-A,AHB10638.1,AHB10637.1,AHB10636.1,GCA_000498655.1_ASM49865v1,"Zymomonas mobilis subsp. mobilis str. CP4 = NRRL B-14023",BACTERIAL,Proteobacteria,Alphaproteobacteria
+Nif-A,AHC18645.1,AHC18646.1,AHC18647.1,GCA_000507205.2_ASM50720v2,"Paenibacillus polymyxa CR1",BACTERIAL,Firmicutes,Bacilli
+Nif-A,AHF02966.1,AHF02967.1,AHF02968.1,GCA_000224005.3_ASM22400v3,"Marichromatium purpuratum 984",BACTERIAL,Proteobacteria,Gammaproteobacteria
+Nif-A,AHF88066.1,AHF88065.1,AHF88064.1,GCA_000517605.1_ASM51760v1,"Rhizobium leguminosarum bv. trifolii WSM1689",BACTERIAL,Proteobacteria,Alphaproteobacteria
+Nif-A,AHG50078.1,AHG50079.1,AHG50082.1,GCA_000520875.1_ASM52087v1,"Rhizobium leguminosarum bv. trifolii CB782",BACTERIAL,Proteobacteria,Alphaproteobacteria
+Nif-A,AHJ12546.1,AHJ12548.1,AHJ12549.1,GCA_000568815.1_ASM56881v1,"Sulfurospirillum multivorans DSM 12446",BACTERIAL,Proteobacteria,Epsilonproteobacteria
+Nif-A,AHJ70950.1,AHJ70949.1,AHJ70948.1,GCA_000576125.1_ASM57612v1,"Zymomonas mobilis subsp. mobilis NRRL B-12526",BACTERIAL,Proteobacteria,Alphaproteobacteria
+Nif-A,AHJ72803.1,AHJ72802.1,AHJ72801.1,GCA_000576165.1_ASM57616v1,"Zymomonas mobilis subsp. mobilis str. CP4 = NRRL B-14023",BACTERIAL,Proteobacteria,Alphaproteobacteria
+Nif-A,AHJ73975.1,AHJ73976.1,AHJ73977.1,GCA_000300455.3_ASM30045v3,"Kosakonia sacchari SP1",BACTERIAL,Proteobacteria,Gammaproteobacteria
+Nif-A,AHV98647.1,AHV98646.1,AHV98645.1,GCA_000612505.1_ASM61250v1,"Paenibacillus sabinae T27",BACTERIAL,Firmicutes,Bacilli
+Nif-A,AHW88035.1,AHW88034.1,AHW88033.1,GCA_000632415.1_ASM63241v1,"Klebsiella oxytoca HKOPL1",BACTERIAL,Proteobacteria,Gammaproteobacteria
+Nif-A,AIA30843.1,AIA30842.1,AIA30841.1,GCA_000695975.1_ASM69597v1,"Leptospirillum ferriphilum YSK",BACTERIAL,Nitrospirae,Nitrospira
+Nif-A,AIA71782.1,AIA71781.1,AIA71780.1,GCA_000696465.1_ASM69646v1,"Pectobacterium atrosepticum",BACTERIAL,Proteobacteria,Gammaproteobacteria
+Nif-A,AIB12323.1,AIB12324.1,AIB12325.1,GCA_000632475.2_ASM63247v2,"Azospirillum brasilense",BACTERIAL,Proteobacteria,Alphaproteobacteria
+Nif-A,AIC29945.1,AIC29946.1,AIC29947.1,GCA_000698845.1_ASM69884v1,"Rhizobium etli bv. mimosae str. IE4771",BACTERIAL,Proteobacteria,Alphaproteobacteria
+Nif-A,AID91131.1,AID91132.1,AID91133.1,GCA_000714655.1_ASM71465v1,"Klebsiella oxytoca KONIH1",BACTERIAL,Proteobacteria,Gammaproteobacteria
+Nif-A,AID99397.1,AID99398.1,AID99399.1,GCA_000714635.1_ASM71463v1,"Klebsiella pneumoniae subsp. pneumoniae KP5-1",BACTERIAL,Proteobacteria,Gammaproteobacteria
+Nif-A,AIE71212.1,AIE71213.1,AIE71214.1,GCA_000724525.1_ASM72452v1,"Klebsiella oxytoca",BACTERIAL,Proteobacteria,Gammaproteobacteria
+Nif-A,AIK14740.1,AIK14739.1,AIK14738.1,GCA_000740965.1_ASM74096v1,"Pectobacterium atrosepticum",BACTERIAL,Proteobacteria,Gammaproteobacteria
+Nif-A,AIM02188.1,AIM02187.1,AIM02186.1,GCA_000747295.1_ASM74729v1,"Sinorhizobium meliloti",BACTERIAL,Proteobacteria,Alphaproteobacteria
+Nif-A,AIQ14143.1,AIQ14142.1,AIQ14141.1,GCA_000756615.1_ASM75661v1,"Paenibacillus durus",BACTERIAL,Firmicutes,Bacilli
+Nif-A,AIQ20208.1,AIQ20207.1,AIQ20206.1,GCA_000758525.1_ASM75852v1,"Paenibacillus sp. FSL H7-0357",BACTERIAL,Firmicutes,Bacilli
+Nif-A,AIQ32053.1,AIQ32052.1,AIQ32051.1,GCA_000758565.1_ASM75856v1,"Paenibacillus sp. FSL P4-0081",BACTERIAL,Firmicutes,Bacilli
+Nif-A,AIQ43381.1,AIQ43380.1,AIQ43379.1,GCA_000758605.1_ASM75860v1,"Paenibacillus sp. FSL R5-0912",BACTERIAL,Firmicutes,Bacilli
+Nif-A,AIQ49065.1,AIQ49064.1,AIQ49063.1,GCA_000758625.1_ASM75862v1,"Paenibacillus sp. FSL R7-0273",BACTERIAL,Firmicutes,Bacilli
+Nif-A,AIQ54499.1,AIQ54498.1,AIQ54497.1,GCA_000758645.1_ASM75864v1,"Paenibacillus sp. FSL R7-0331",BACTERIAL,Firmicutes,Bacilli
+Nif-A,AIQ60590.1,AIQ60589.1,AIQ60588.1,GCA_000758665.1_ASM75866v1,"Paenibacillus borealis",BACTERIAL,Firmicutes,Bacilli
+Nif-A,AIQ65225.1,AIQ65224.1,AIQ65223.1,GCA_000758685.1_ASM75868v1,"Paenibacillus stellifer",BACTERIAL,Firmicutes,Bacilli
+Nif-A,AIQ70764.1,AIQ70763.1,AIQ70762.1,GCA_000758705.1_ASM75870v1,"Paenibacillus graminis",BACTERIAL,Firmicutes,Bacilli
+Nif-A,AIQ76252.1,AIQ76251.1,AIQ76250.1,GCA_000758725.1_ASM75872v1,"Paenibacillus odorifer",BACTERIAL,Firmicutes,Bacilli
+Nif-A,AIR70474.1,AIR70475.1,AIR70476.1,GCA_000758345.1_ASM75834v1,"Cedecea neteri",BACTERIAL,Proteobacteria,Gammaproteobacteria
+Nif-A,AIX70233.1,AIX70234.1,AIX70235.1,GCA_000784945.1_ASM78494v1,"Klebsiella pneumoniae subsp. pneumoniae",BACTERIAL,Proteobacteria,Gammaproteobacteria
+Nif-A,AJA98205.1,AJA98206.1,AJA98207.1,GCA_000812205.1_ASM81220v1,"Klebsiella variicola",BACTERIAL,Proteobacteria,Gammaproteobacteria
+Nif-A,AJC82402.1,AJC82401.1,AJC82400.1,GCA_000816125.1_ASM81612v1,"Rhizobium etli bv. phaseoli str. IE4803",BACTERIAL,Proteobacteria,Alphaproteobacteria
+Nif-A,AJC82504.1,AJC82503.1,AJC82502.1,GCA_000816125.1_ASM81612v1,"Rhizobium etli bv. phaseoli str. IE4803",BACTERIAL,Proteobacteria,Alphaproteobacteria
+Nif-A,AJD43817.1,AJD43818.1,AJD43819.1,GCA_000816845.1_ASM81684v1,"Rhizobium gallicum bv. gallicum R602",BACTERIAL,Proteobacteria,Alphaproteobacteria
+Nif-A,AJE04162.1,AJE04161.1,AJE04160.1,GCA_000817955.1_ASM81795v1,"Geobacter pickeringii",BACTERIAL,Proteobacteria,Deltaproteobacteria
+Nif-A,AJE19640.1,AJE19641.1,AJE19642.1,GCA_000817975.1_ASM81797v1,"Azotobacter chroococcum NCIMB 8003",BACTERIAL,Proteobacteria,Gammaproteobacteria
+Nif-A,AJE50793.1,AJE50792.1,AJE50791.1,GCA_000819665.1_ASM81966v1,"Paenibacillus polymyxa",BACTERIAL,Firmicutes,Bacilli
+Nif-A,AJF73246.1,AJF73247.1,AJF73248.1,GCA_000829965.1_ASM82996v1,"Raoultella ornithinolytica",BACTERIAL,Proteobacteria,Gammaproteobacteria
+Nif-A,AJP72701.1,AJP72700.1,AJP72699.1,GCA_000935025.1_ASM93502v1,"Sphingomonas sp. WHSC-8",BACTERIAL,Proteobacteria,Alphaproteobacteria
+Nif-A,AJQ93954.1,AJQ93955.1,AJQ93956.1,GCA_000940805.1_ASM94080v1,"Gynuella sunshinyii YC6258",BACTERIAL,Proteobacteria,Gammaproteobacteria
+Nif-A,AKG24140.1,AKG24139.1,AKG24138.1,GCA_000734895.2_ASM73489v2,"Calothrix sp. 336/3",BACTERIAL,Cyanobacteria,None
+Nif-A,AKG35935.1,AKG35934.1,AKG35933.1,GCA_000993825.1_ASM99382v1,"Paenibacillus durus ATCC 35681",BACTERIAL,Firmicutes,Bacilli
+Nif-A,AKH21700.1,AKH21701.1,AKH21702.1,GCA_001007875.1_ASM100787v1,"Sedimenticola sp. SIP-G1",BACTERIAL,Proteobacteria,Gammaproteobacteria
+Nif-A,AKL11969.1,AKL11968.1,AKL11967.1,GCA_001022135.1_ASM102213v1,"Kluyvera intermedia",BACTERIAL,Proteobacteria,Gammaproteobacteria
+Nif-A,AKL35497.1,AKL35496.1,AKL35495.1,GCA_001022195.1_ASM102219v1,"Klebsiella oxytoca",BACTERIAL,Proteobacteria,Gammaproteobacteria
+Nif-A,AKN66281.1,AKN66280.1,AKN66279.1,GCA_001040945.1_ASM104094v1,"Herbaspirillum seropedicae",BACTERIAL,Proteobacteria,Betaproteobacteria
+Nif-A,AKU10611.1,AKU10610.1,AKU10609.1,GCA_001190925.1_ASM119092v1,"Azoarcus sp. CIB",BACTERIAL,Proteobacteria,Betaproteobacteria
+Nif-A,ALA40938.1,ALA40939.1,ALA40940.1,GCA_001272655.2_ASM127265v2,"Paenibacillus peoriae",BACTERIAL,Firmicutes,Bacilli
+Nif-A,ALC17315.1,ALC17314.1,ALC17313.1,GCA_001278055.1_ASM127805v1,"Desulfuromonas sp. WTL",BACTERIAL,Proteobacteria,Deltaproteobacteria
+Nif-A,ALG66994.1,ALG66995.1,ALG66996.1,GCA_001305575.1_ASM130557v1,"Beggiatoa leptomitiformis",BACTERIAL,Proteobacteria,Gammaproteobacteria
+Nif-A,ALG69650.1,ALG69651.1,ALG69652.1,GCA_001305595.1_ASM130559v1,"Azospirillum thiophilum",BACTERIAL,Proteobacteria,Alphaproteobacteria
+Nif-A,ALG89632.1,ALG89633.1,ALG89634.1,GCA_001305615.1_ASM130561v1,"Confluentimicrobium sp. EMB200-NS6",BACTERIAL,Proteobacteria,Alphaproteobacteria
+Nif-A,ALK10035.1,ALK10036.1,ALK10037.1,GCA_001402875.1_ASM140287v1,"Blastochloris viridis",BACTERIAL,Proteobacteria,Alphaproteobacteria
+Nif-A,ALU89562.1,ALU89561.1,ALU89560.1,GCA_001483945.1_ASM148394v1,"Herbaspirillum rubrisubalbicans M1",BACTERIAL,Proteobacteria,Betaproteobacteria
+Nif-A,AMD29425.1,AMD29424.1,AMD29423.1,GCA_000176935.3_ASM17693v3,"Burkholderia sp. CCGE1001",BACTERIAL,Proteobacteria,Betaproteobacteria
+Nif-A,AMJ47997.1,AMJ47996.1,AMJ47994.1,GCA_001576595.1_ASM157659v1,"Rhodobacter sphaeroides",BACTERIAL,Proteobacteria,Alphaproteobacteria
+Nif-A,AMK76098.1,AMK76099.1,AMK76100.1,GCA_000785705.2_ASM78570v2,"Methylomonas denitrificans",BACTERIAL,Proteobacteria,Gammaproteobacteria
+Nif-A,AMO49431.1,AMO49430.1,AMO49429.1,GCA_001582075.1_ASM158207v1,"Enterobacter sp. FY-07",BACTERIAL,Proteobacteria,Gammaproteobacteria
+Nif-A,AMR16752.1,AMR16753.1,AMR16754.1,GCA_001596075.1_ASM159607v1,"Klebsiella quasipneumoniae",BACTERIAL,Proteobacteria,Gammaproteobacteria
+Nif-A,AMV70505.1,AMV70504.1,AMV70503.1,GCA_001611275.1_ASM161127v1,"Desulfuromonas sp. DDH964",BACTERIAL,Proteobacteria,Deltaproteobacteria
+Nif-A,BAB52275.1,BAB52276.1,BAB52277.1,GCA_000009625.1_ASM962v1,"Mesorhizobium loti MAFF303099",BACTERIAL,Proteobacteria,Alphaproteobacteria
+Nif-A,BAE50378.1,BAE50377.1,BAE50376.1,GCA_000009985.1_ASM998v1,"Magnetospirillum magneticum AMB-1",BACTERIAL,Proteobacteria,Alphaproteobacteria
+Nif-A,BAE86060.1,BAE86059.1,BAE86058.1,GCA_000010045.1_ASM1004v1,"Desulfitobacterium hafniense Y51",BACTERIAL,Firmicutes,Clostridia
+Nif-A,BAF87039.1,BAF87038.1,BAF87037.1,GCA_000010525.1_ASM1052v1,"Azorhizobium caulinodans ORS 571",BACTERIAL,Proteobacteria,Alphaproteobacteria
+Nif-A,BAI71409.1,BAI71408.1,BAI71407.1,GCA_000010725.1_ASM1072v1,"Azospirillum sp. B510",BACTERIAL,Proteobacteria,Alphaproteobacteria
+Nif-A,BAK71909.1,BAK71907.1,BAK71906.1,GCA_000284235.1_ASM28423v1,"Arcobacter sp. L",BACTERIAL,Proteobacteria,Epsilonproteobacteria
+Nif-A,BAL23130.1,BAL23129.1,BAL23128.1,GCA_000349945.1_ASM34994v1,"Azoarcus sp. KH32C",BACTERIAL,Proteobacteria,Betaproteobacteria
+Nif-A,BAL26358.1,BAL26359.1,BAL26360.1,GCA_000349945.1_ASM34994v1,"Azoarcus sp. KH32C",BACTERIAL,Proteobacteria,Betaproteobacteria
+Nif-A,BAL77838.1,BAL77837.1,BAL77836.1,GCA_000284275.1_ASM28427v1,"Bradyrhizobium sp. S23321",BACTERIAL,Proteobacteria,Alphaproteobacteria
+Nif-A,BAL97624.1,BAL97625.1,BAL97626.1,GCA_000284255.1_ASM28425v1,"Rubrivivax gelatinosus IL144",BACTERIAL,Proteobacteria,Betaproteobacteria
+Nif-A,BAM08067.1,BAM08068.1,BAM08069.1,GCA_000284315.1_ASM28431v1,"Leptospirillum ferrooxidans C2-3",BACTERIAL,Nitrospirae,Nitrospira
+Nif-A,BAM88272.1,BAM88273.1,BAM88274.1,GCA_000344805.1_ASM34480v1,"Bradyrhizobium oligotrophicum S58",BACTERIAL,Proteobacteria,Alphaproteobacteria
+Nif-A,BAP18212.1,BAP18211.1,BAP18210.1,GCA_000829235.1_ASM82923v1,"cyanobacterium endosymbiont of Epithemia turgida isolate EtSB Lake Yunoko",BACTERIAL,Cyanobacteria,None
+Nif-A,BAP56103.1,BAP56104.1,BAP56105.1,GCA_000828835.1_ASM82883v1,"Thioploca ingrica",BACTERIAL,Proteobacteria,Gammaproteobacteria
+Nif-A,BAP88505.1,BAP88504.1,BAP88503.1,GCA_000828975.1_ASM82897v1,"Burkholderiales bacterium GJ-E10",BACTERIAL,Proteobacteria,Betaproteobacteria
+Nif-A,BAQ68624.1,BAQ68623.1,BAQ68622.1,GCA_001548075.1_ASM154807v1,"Rhodovulum sulfidophilum",BACTERIAL,Proteobacteria,Alphaproteobacteria
+Nif-A,BAS00045.1,BAS00044.1,BAS00043.1,GCA_001548155.2_BV133_assembly_1.0,"Blastochloris viridis",BACTERIAL,Proteobacteria,Alphaproteobacteria
+Nif-A,BAS34484.1,BAS34483.1,BAS34482.1,GCA_001548315.1_ASM154831v1,"Klebsiella pneumoniae",BACTERIAL,Proteobacteria,Gammaproteobacteria
+Nif-A,BAS41681.1,BAS41682.1,BAS41683.1,GCA_001548355.1_ASM154835v1,"Klebsiella oxytoca",BACTERIAL,Proteobacteria,Gammaproteobacteria
+Nif-A,BAU06528.1,BAU06529.1,BAU06530.1,GCA_001548455.1_ASM154845v1,"Fischerella sp. NIES-3754",BACTERIAL,Cyanobacteria,None
+Nif-A,BAU44877.1,BAU44876.1,BAU44875.1,GCA_001548395.1_ASM154839v1,"Leptolyngbya sp. O-77",BACTERIAL,Cyanobacteria,None
+Nif-A,CAG75856.1,CAG75855.1,CAG75854.1,GCA_000011605.1_ASM1160v1,"Pectobacterium atrosepticum SCRI1043",BACTERIAL,Proteobacteria,Gammaproteobacteria
+Nif-A,CAJ65436.1,CAJ65435.1,CAJ65434.1,GCA_000058485.1_ASM5848v1,"Frankia alni ACN14a",BACTERIAL,Actinobacteria,Actinobacteria
+Nif-A,CAK10385.1,CAK10384.1,CAK10383.1,GCA_000009265.1_ASM926v1,"Rhizobium leguminosarum bv. viciae 3841",BACTERIAL,Proteobacteria,Alphaproteobacteria
+Nif-A,CAL79117.1,CAL79116.1,CAL79115.1,GCA_000026145.1_ASM2614v1,"Bradyrhizobium sp. ORS 278",BACTERIAL,Proteobacteria,Alphaproteobacteria
+Nif-A,CAL93155.1,CAL93156.1,CAL93157.1,GCA_000061505.1_ASM6150v1,"Azoarcus sp. BH72",BACTERIAL,Proteobacteria,Betaproteobacteria
+Nif-A,CAP54379.1,CAP54380.1,CAP54381.1,GCA_000067045.1_ASM6704v1,"Gluconacetobacter diazotrophicus PA1 5",BACTERIAL,Proteobacteria,Alphaproteobacteria
+Nif-A,CBS86044.1,CBS86043.1,CBS86042.1,GCA_000283655.1_ASM28365v1,"Azospirillum lipoferum 4B",BACTERIAL,Proteobacteria,Alphaproteobacteria
+Nif-A,CCB66897.1,CCB66896.1,CCB66895.1,GCA_000253295.1_ASM25329v1,"Hyphomicrobium sp. MC1",BACTERIAL,Proteobacteria,Alphaproteobacteria
+Nif-A,CCG09210.1,CCG09209.1,CCG09208.1,GCA_000284415.2_ASM28441v2,"Rhodospirillum photometricum DSM 122",BACTERIAL,Proteobacteria,Alphaproteobacteria
+Nif-A,CCJ08074.1,CCJ08075.1,CCJ08076.1,GCA_000304315.1_Msp_SC2,"Methylocystis sp. SC2",BACTERIAL,Proteobacteria,Alphaproteobacteria
+Nif-A,CCM70519.1,CCM70520.1,CCM70521.1,GCA_000304415.1_RM41,"Sinorhizobium meliloti Rm41",BACTERIAL,Proteobacteria,Alphaproteobacteria
+Nif-A,CDI12011.1,CDI12010.1,CDI12009.1,GCA_000499645.1_IRBG74,"Rhizobium sp. IRBG74",BACTERIAL,Proteobacteria,Alphaproteobacteria
+Nif-A,CDK97560.1,CDK97559.1,CDK97558.1,GCA_000513295.1_MGMSRv2,"Magnetospirillum gryphiswaldense MSR-1 v2",BACTERIAL,Proteobacteria,Alphaproteobacteria
+Nif-A,CDN51718.1,CDN51719.1,CDN51720.1,GCA_000731315.1_RG540_Ch_pA,"Neorhizobium galegae bv. orientalis str. HAMBI 540",BACTERIAL,Proteobacteria,Alphaproteobacteria
+Nif-A,CDN58415.1,CDN58416.1,CDN58417.1,GCA_000731295.1_RG1141_Ch_pA_pB,"Neorhizobium galegae bv. officinalis bv. officinalis str. HAMBI 1141",BACTERIAL,Proteobacteria,Alphaproteobacteria
+Nif-A,CQR57927.1,CQR57926.1,CQR57925.1,GCA_000981585.1_SBR5_T_,"Paenibacillus riograndensis SBR5",BACTERIAL,Firmicutes,Bacilli
+Nif-A,CUW40999.1,CUW41000.1,CUW41001.1,GCA_001511835.1_XM-1,"Magnetospirillum sp. XM-1",BACTERIAL,Proteobacteria,Alphaproteobacteria
+Nif-A,EGJ22012.1,EGJ22011.1,EGJ22010.1,GCA_000212605.1_ASM21260v1,"Rhodobacter sphaeroides WS8N",BACTERIAL,Proteobacteria,Alphaproteobacteria
+Nif-B,AAK78234.1,AAK78237.1,AAK78238.1,GCA_000008765.1_ASM876v1,"Clostridium acetobutylicum ATCC 824",BACTERIAL,Firmicutes,Clostridia
+Nif-B,AAM72759.1,AAM72762.1,AAM72763.1,GCA_000006985.1_ASM698v1,"Chlorobium tepidum TLS",BACTERIAL,Chlorobi,Chlorobia
+Nif-B,AAS94434.1,AAS94437.1,AAS94438.1,GCA_000195755.1_ASM19575v1,"Desulfovibrio vulgaris str. Hildenborough",BACTERIAL,Proteobacteria,Deltaproteobacteria
+Nif-B,ABB24385.1,ABB24388.1,ABB24389.1,GCA_000012485.1_ASM1248v1,"Chlorobium luteolum DSM 273",BACTERIAL,Chlorobi,Chlorobia
+Nif-B,ABB28505.1,ABB28508.1,ABB28509.1,GCA_000012585.1_ASM1258v1,"Chlorobium chlorochromatii CaD3",BACTERIAL,Chlorobi,Chlorobia
+Nif-B,ABK16713.1,ABK16710.1,ABK16709.1,GCA_000014965.1_ASM1496v1,"Syntrophobacter fumaroxidans MPOB",BACTERIAL,Proteobacteria,Deltaproteobacteria
+Nif-B,ABL64797.1,ABL64794.1,ABL64793.1,GCA_000015125.1_ASM1512v1,"Chlorobium phaeobacteroides DSM 266",BACTERIAL,Chlorobi,Chlorobia
+Nif-B,ABM30101.1,ABM30104.1,ABM30105.1,GCA_000015485.1_ASM1548v1,"Desulfovibrio vulgaris DP4",BACTERIAL,Proteobacteria,Deltaproteobacteria
+Nif-B,ABO51325.1,ABO51322.1,ABO51321.1,GCA_000016165.1_ASM1616v1,"Desulfotomaculum reducens MI-1",BACTERIAL,Firmicutes,Clostridia
+Nif-B,ABP37355.1,ABP37358.1,ABP37359.1,GCA_000016085.1_ASM1608v1,"Chlorobium phaeovibrioides DSM 265",BACTERIAL,Chlorobi,Chlorobia
+Nif-B,ABR34169.1,ABR34172.1,ABR34173.1,GCA_000016965.1_ASM1696v1,"Clostridium beijerinckii NCIMB 8052",BACTERIAL,Firmicutes,Clostridia
+Nif-B,ABR49651.1,ABR49648.1,ABR49647.1,GCA_000016985.1_ASM1698v1,"Alkaliphilus metalliredigens QYMF",BACTERIAL,Firmicutes,Clostridia
+Nif-B,ACD89768.1,ACD89765.1,ACD89764.1,GCA_000020465.1_ASM2046v1,"Chlorobium limicola DSM 245",BACTERIAL,Chlorobi,Chlorobia
+Nif-B,ACE04669.1,ACE04672.1,ACE04673.1,GCA_000020545.1_ASM2054v1,"Chlorobium phaeobacteroides BS1",BACTERIAL,Chlorobi,Chlorobia
+Nif-B,ACF12015.1,ACF12018.1,ACF12019.1,GCA_000020505.1_ASM2050v1,"Chlorobaculum parvum NCIB 8327",BACTERIAL,Chlorobi,Chlorobia
+Nif-B,ACF13499.1,ACF13496.1,ACF13495.1,GCA_000020525.1_ASM2052v1,"Chloroherpeton thalassium ATCC 35110",BACTERIAL,Chlorobi,Chlorobia
+Nif-B,ACF44165.1,ACF44168.1,ACF44169.1,GCA_000020645.1_ASM2064v1,"Pelodictyon phaeoclathratiforme BU-1",BACTERIAL,Chlorobi,Chlorobia
+Nif-B,ACF46645.1,ACF46648.1,ACF46649.1,GCA_000020625.1_ASM2062v1,"Prosthecochloris aestuarii DSM 271",BACTERIAL,Chlorobi,Chlorobia
+Nif-B,ACL03220.1,ACL03217.1,ACL03216.1,GCA_000021905.1_ASM2190v1,"Desulfatibacillum alkenivorans AK-01",BACTERIAL,Proteobacteria,Deltaproteobacteria
+Nif-B,ACL09552.1,ACL09555.1,ACL09556.1,GCA_000021385.1_ASM2138v1,"Desulfovibrio vulgaris str. 'Miyazaki F'",BACTERIAL,Proteobacteria,Deltaproteobacteria
+Nif-B,ACN14079.1,ACN14082.1,ACN14083.1,GCA_000020365.1_ASM2036v1,"Desulfobacterium autotrophicum HRM2",BACTERIAL,Proteobacteria,Deltaproteobacteria
+Nif-B,ACS78514.1,ACS78511.1,ACS78510.1,GCA_000023445.1_ASM2344v1,"Desulfovibrio salexigens DSM 2638",BACTERIAL,Proteobacteria,Deltaproteobacteria
+Nif-B,ACU88952.1,ACU88955.1,ACU88956.1,GCA_000023225.1_ASM2322v1,"Desulfomicrobium baculatum DSM 4028",BACTERIAL,Proteobacteria,Deltaproteobacteria
+Nif-B,ACV61909.1,ACV61912.1,ACV61913.1,GCA_000024205.1_ASM2420v1,"Desulfotomaculum acetoxidans DSM 771",BACTERIAL,Firmicutes,Clostridia
+Nif-B,ADE55852.1,ADE55851.1,ADE55850.1,GCA_000025905.1_ASM2590v1,"Coraliomargarita akajimensis DSM 45221",BACTERIAL,Verrucomicrobia,Opitutae
+Nif-B,ADG81557.1,ADG81560.1,ADG81561.1,GCA_000092945.1_ASM9294v1,"Thermincola potens JR",BACTERIAL,Firmicutes,Clostridia
+Nif-B,ADH87119.1,ADH87122.1,ADH87123.1,GCA_000092205.1_ASM9220v1,"Desulfurivibrio alkaliphilus AHT 2",BACTERIAL,Proteobacteria,Deltaproteobacteria
+Nif-B,ADK13572.1,ADK13575.1,ADK13576.1,GCA_000143685.1_ASM14368v1,"Clostridium ljungdahlii DSM 13528",BACTERIAL,Firmicutes,Clostridia
+Nif-B,ADK82110.1,ADK82107.1,ADK82106.1,GCA_000143985.1_ASM14398v1,"Spirochaeta smaragdinae DSM 11293",BACTERIAL,Spirochaetes,Spirochaetia
+Nif-B,ADK83816.1,ADK83813.1,ADK83812.1,GCA_000143965.1_ASM14396v1,"Desulfarculus baarsii DSM 2075",BACTERIAL,Proteobacteria,Deltaproteobacteria
+Nif-B,ADL52532.1,ADL52529.1,ADL52528.1,GCA_000145275.1_ASM14527v1,"Clostridium cellulovorans 743B",BACTERIAL,Firmicutes,Clostridia
+Nif-B,ADL69355.1,ADL69354.1,ADL69353.1,GCA_000145615.1_ASM14561v1,"Thermoanaerobacterium thermosaccharolyticum DSM 571",BACTERIAL,Firmicutes,Clostridia
+Nif-B,ADN01326.1,ADN01323.1,ADN01322.1,GCA_000147075.1_ASM14707v1,"Spirochaeta thermophila DSM 6192",BACTERIAL,Spirochaetes,Spirochaetia
+Nif-B,ADO83190.1,ADO83187.1,ADO83186.1,GCA_000165505.1_ASM16550v1,"Ilyobacter polytropus DSM 2926",BACTERIAL,Fusobacteria,Fusobacteriia
+Nif-B,ADP88250.1,ADP88247.1,ADP88246.1,GCA_000166115.1_ASM16611v1,"Desulfovibrio vulgaris RCH1",BACTERIAL,Proteobacteria,Deltaproteobacteria
+Nif-B,ADQ79569.1,ADQ79572.1,ADQ79573.1,GCA_000183135.1_ASM18313v1,"Paludibacter propionicigenes WB4",BACTERIAL,Bacteroidetes,Bacteroidia
+Nif-B,ADU27103.1,ADU27100.1,ADU27099.1,GCA_000178115.2_ASM17811v2,"Ethanoligenens harbinense YUAN-3",BACTERIAL,Firmicutes,Clostridia
+Nif-B,ADU62037.1,ADU62040.1,ADU62041.1,GCA_000176915.2_ASM17691v2,"Desulfovibrio aespoeensis Aspo-2",BACTERIAL,Proteobacteria,Deltaproteobacteria
+Nif-B,ADW19185.1,ADW19188.1,ADW19189.1,GCA_000186885.1_ASM18688v1,"Desulfobulbus propionicus DSM 2032",BACTERIAL,Proteobacteria,Deltaproteobacteria
+Nif-B,ADZ19300.1,ADZ19303.1,ADZ19304.1,GCA_000191905.1_ASM19190v1,"Clostridium acetobutylicum EA 2018",BACTERIAL,Firmicutes,Clostridia
+Nif-B,ADZ82193.1,ADZ82196.1,ADZ82197.1,GCA_000178835.2_ASM17883v2,"Clostridium lentocellum DSM 5427",BACTERIAL,Firmicutes,Clostridia
+Nif-B,AEB08241.1,AEB08244.1,AEB08245.1,GCA_000195295.1_ASM19529v1,"Desulfobacca acetoxidans DSM 11109",BACTERIAL,Proteobacteria,Deltaproteobacteria
+Nif-B,AEF94001.1,AEF94004.1,AEF94005.1,GCA_000214435.1_ASM21443v1,"Desulfotomaculum nigrificans CO-1-SRB",BACTERIAL,Firmicutes,Clostridia
+Nif-B,AEG61657.1,AEG61654.1,AEG61653.1,GCA_000215085.1_ASM21508v1,"Desulfotomaculum ruminis DSM 2154",BACTERIAL,Firmicutes,Clostridia
+Nif-B,AEV67918.1,AEV67921.1,AEV67922.1,GCA_000237085.1_ASM23708v1,"[Clostridium] clariflavum DSM 19732",BACTERIAL,Firmicutes,Clostridia
+Nif-B,AEY66770.1,AEY66767.1,AEY66766.1,GCA_000244875.1_ASM24487v1,"Clostridium sp. BNL1100",BACTERIAL,Firmicutes,Clostridia
+Nif-B,AFA47588.1,AFA47585.1,AFA47584.1,GCA_000247605.1_ASM24760v1,"Acetobacterium woodii DSM 1030",BACTERIAL,Firmicutes,Clostridia
+Nif-B,AFK87244.1,AFK87243.1,AFK87242.1,GCA_000307585.1_ASM30758v1,"Thermoanaerobacterium saccharolyticum JW/SL-YS485",BACTERIAL,Firmicutes,Clostridia
+Nif-B,AFM28066.1,AFM28069.1,AFM28070.1,GCA_000266945.1_ASM26694v1,"Desulfomonile tiedjei DSM 6799",BACTERIAL,Proteobacteria,Deltaproteobacteria
+Nif-B,AFY79132.1,AFY79129.1,AFY79128.1,GCA_000317025.1_ASM31702v1,"Pleurocapsa sp. PCC 7327",BACTERIAL,Cyanobacteria,None
+Nif-B,AGB19467.1,AGB19466.1,AGB19465.1,GCA_000328545.1_ASM32854v1,"Thermoanaerobacterium thermosaccharolyticum M0795",BACTERIAL,Firmicutes,Clostridia
+Nif-B,AGF56836.1,AGF56839.1,AGF56840.1,GCA_000340885.1_ASM34088v1,"Clostridium saccharoperbutylacetonicum N1-4(HMT)",BACTERIAL,Firmicutes,Clostridia
+Nif-B,AGF76918.1,AGF76921.1,AGF76922.1,GCA_000341395.1_ASM34139v1,"Desulfocapsa sulfexigens DSM 10523",BACTERIAL,Proteobacteria,Deltaproteobacteria
+Nif-B,AGK98254.1,AGK98253.1,AGK98252.1,GCA_000389635.1_ASM38963v1,"Clostridium pasteurianum BC1",BACTERIAL,Firmicutes,Clostridia
+Nif-B,AGL01840.1,AGL01837.1,AGL01836.1,GCA_000233715.3_ASM23371v3,"Desulfotomaculum gibsoniae DSM 7213",BACTERIAL,Firmicutes,Clostridia
+Nif-B,AGY76776.1,AGY76779.1,AGY76780.1,GCA_000484505.1_ASM48450v1,"Clostridium autoethanogenum DSM 10061",BACTERIAL,Firmicutes,Clostridia
+Nif-B,AHF89131.1,AHF89132.1,AHF89133.1,GCA_000242935.3_ASM24293v3,"Opitutaceae bacterium TAV5",BACTERIAL,Verrucomicrobia,Opitutae
+Nif-B,AIF49593.1,AIF49596.1,AIF49597.1,GCA_000725345.1_ASM72534v1,"Pelosinus sp. UFO1",BACTERIAL,Firmicutes,Negativicutes
+Nif-B,AII59718.1,AII59715.1,AII59714.1,GCA_000830905.1_ASM83090v1,"Dehalococcoides mccartyi CG4",BACTERIAL,Chloroflexi,Dehalococcoidia
+Nif-B,AIU04440.1,AIU04442.1,AIU04443.1,GCA_000767745.1_ASM76774v1,"Clostridium beijerinckii ATCC 35702",BACTERIAL,Firmicutes,Clostridia
+Nif-B,AJA47514.1,AJA47515.1,AJA47516.1,GCA_000807175.1_ASM80717v1,"Clostridium pasteurianum DSM 525 = ATCC 6013",BACTERIAL,Firmicutes,Clostridia
+Nif-B,AJA51502.1,AJA51503.1,AJA51504.1,GCA_000807255.1_ASM80725v1,"Clostridium pasteurianum DSM 525 = ATCC 6013",BACTERIAL,Firmicutes,Clostridia
+Nif-B,AJG98756.1,AJG98759.1,AJG98760.1,GCA_000833105.2_ASM83310v2,"Clostridium beijerinckii",BACTERIAL,Firmicutes,Clostridia
+Nif-B,AJQ29797.1,AJQ29794.1,AJQ29793.1,GCA_000271665.2_ASM27166v2,"Pelosinus fermentans JBW45",BACTERIAL,Firmicutes,Negativicutes
+Nif-B,AKG53288.1,AKG53285.1,AKG53284.1,GCA_001005265.1_ASM100526v1,"Dehalogenimonas sp. WBC-2",BACTERIAL,Chloroflexi,Dehalococcoidia
+Nif-B,AKL94862.1,AKL94865.1,AKL94866.1,GCA_001042715.1_ASM104271v1,"Clostridium aceticum",BACTERIAL,Firmicutes,Clostridia
+Nif-B,ALB46785.1,ALB46782.1,ALB46781.1,GCA_000506785.2_ASM50678v2,"Clostridium pasteurianum NRRL B-598",BACTERIAL,Firmicutes,Clostridia
+Nif-B,ALR90452.1,ALR90455.1,ALR90457.1,GCA_001456065.2_ASM145606v2,"Clostridium butyricum",BACTERIAL,Firmicutes,Clostridia
+Nif-B,ALU36930.1,ALU36933.1,ALU36934.1,GCA_001484725.1_ASM148472v1,"Clostridium autoethanogenum DSM 10061",BACTERIAL,Firmicutes,Clostridia
+Nif-B,AMK10973.1,AMK10976.1,AMK10977.1,GCA_001563225.1_ASM156322v1,"Desulfovibrio sp. J2",BACTERIAL,Proteobacteria,Deltaproteobacteria
+Nif-B,BAG83808.1,BAG83811.1,BAG83812.1,GCA_000010645.1_ASM1064v1,"Candidatus Azobacteroides pseudotrichonymphae genomovar. CFP2",BACTERIAL,Bacteroidetes,Bacteroidia
+Nif-B,BAH07777.1,BAH07774.1,BAH07773.1,GCA_000010265.1_ASM1026v1,"Clostridium kluyveri NBRC 12016",BACTERIAL,Firmicutes,Clostridia
+Nif-B,BAH75547.1,BAH75544.1,BAH75543.1,GCA_000010665.1_ASM1066v1,"Desulfovibrio magneticus RS-1",BACTERIAL,Proteobacteria,Deltaproteobacteria
+Nif-B,CDM70242.1,CDM70239.1,CDM70238.1,GCA_000577895.1_M2_40,"Clostridium bornimense",BACTERIAL,Firmicutes,Clostridia
+Nif-B,EDK35089.1,EDK35086.1,EDK35085.1,GCA_000016505.1_ASM1650v1,"Clostridium kluyveri DSM 555",BACTERIAL,Firmicutes,Clostridia
+Nif-B,EGB14507.1,EGB14504.1,EGB14503.1,GCA_000189295.2_ASM18929v2,"Desulfovibrio desulfuricans ND132",BACTERIAL,Proteobacteria,Deltaproteobacteria
+Nif-B,EGJ49116.1,EGJ49119.1,EGJ49120.1,GCA_000212675.2_ASM21267v2,"Desulfovibrio africanus str. Walvis Bay",BACTERIAL,Proteobacteria,Deltaproteobacteria
+Nif-B,AAM07246.1,AAM07249.1,AAM07250.1,GCA_000007345.1_ASM734v1,"Methanosarcina acetivorans C2A",ARCHAEAL,Euryarchaeota,Methanomicrobia
+Nif-B,AAM30415.1,AAM30418.1,AAM30419.1,GCA_000007065.1_ASM706v1,"Methanosarcina mazei Go1",ARCHAEAL,Euryarchaeota,Methanomicrobia
+Nif-B,AAZ69156.1,AAZ69153.1,AAZ69152.1,GCA_000195895.1_ASM19589v1,"Methanosarcina barkeri str. Fusaro",ARCHAEAL,Euryarchaeota,Methanomicrobia
+Nif-B,ABS55660.1,ABS55663.1,ABS55664.1,GCA_000017625.1_ASM1762v1,"Methanoregula boonei 6A8",ARCHAEAL,Euryarchaeota,Methanomicrobia
+Nif-B,ACL15934.1,ACL15931.1,ACL15930.1,GCA_000021965.1_ASM2196v1,"Methanosphaerula palustris E1-9c",ARCHAEAL,Euryarchaeota,Methanomicrobia
+Nif-B,ADN35041.1,ADN35038.1,ADN35037.1,GCA_000147875.1_ASM14787v1,"Methanolacinia petrolearia DSM 11571",ARCHAEAL,Euryarchaeota,Methanomicrobia
+Nif-B,AEB67436.1,AEB67439.1,AEB67440.1,GCA_000204415.1_ASM20441v1,"Methanosaeta concilii GP6",ARCHAEAL,Euryarchaeota,Methanomicrobia
+Nif-B,AFC98913.1,AFC98916.1,AFC98917.1,GCA_000251105.1_ASM25110v1,"Methanocella conradii HZ254",ARCHAEAL,Euryarchaeota,Methanomicrobia
+Nif-B,AFV23549.1,AFV23552.1,AFV23553.1,GCA_000306725.1_ASM30672v1,"Methanolobus psychrophilus R15",ARCHAEAL,Euryarchaeota,Methanomicrobia
+Nif-B,AGF96148.1,AGF96151.1,AGF96152.1,GCA_000341715.1_ASM34171v1,"Methanosarcina mazei Tuc01",ARCHAEAL,Euryarchaeota,Methanomicrobia
+Nif-B,AKB17680.1,AKB17677.1,AKB17676.1,GCA_000969965.1_ASM96996v1,"Methanosarcina sp. WWM596",ARCHAEAL,Euryarchaeota,Methanomicrobia
+Nif-B,AKB21036.1,AKB21033.1,AKB21032.1,GCA_000970005.1_ASM97000v1,"Methanosarcina sp. WH1",ARCHAEAL,Euryarchaeota,Methanomicrobia
+Nif-B,AKB29963.1,AKB29966.1,AKB29967.1,GCA_000970085.1_ASM97008v1,"Methanosarcina siciliae T4/M",ARCHAEAL,Euryarchaeota,Methanomicrobia
+Nif-B,AKB33860.1,AKB33863.1,AKB33864.1,GCA_000970125.1_ASM97012v1,"Methanosarcina siciliae HI350",ARCHAEAL,Euryarchaeota,Methanomicrobia
+Nif-B,AKB38222.1,AKB38225.1,AKB38226.1,GCA_000970145.1_ASM97014v1,"Methanosarcina siciliae C2J",ARCHAEAL,Euryarchaeota,Methanomicrobia
+Nif-B,AKB39591.1,AKB39588.1,AKB39587.1,GCA_000970165.1_ASM97016v1,"Methanosarcina mazei WWM610",ARCHAEAL,Euryarchaeota,Methanomicrobia
+Nif-B,AKB43227.1,AKB43224.1,AKB43223.1,GCA_000969905.1_ASM96990v1,"Methanosarcina vacuolata Z-761",ARCHAEAL,Euryarchaeota,Methanomicrobia
+Nif-B,AKB46704.1,AKB46701.1,AKB46700.1,GCA_000969945.1_ASM96994v1,"Methanosarcina sp. Kolksee",ARCHAEAL,Euryarchaeota,Methanomicrobia
+Nif-B,AKB50079.1,AKB50082.1,AKB50083.1,GCA_000969985.1_ASM96998v1,"Methanosarcina barkeri str. Wiesmoor",ARCHAEAL,Euryarchaeota,Methanomicrobia
+Nif-B,AKB55784.1,AKB55787.1,AKB55788.1,GCA_000970025.1_ASM97002v1,"Methanosarcina barkeri MS",ARCHAEAL,Euryarchaeota,Methanomicrobia
+Nif-B,AKB59259.1,AKB59262.1,AKB59263.1,GCA_000970065.1_ASM97006v1,"Methanosarcina barkeri 227",ARCHAEAL,Euryarchaeota,Methanomicrobia
+Nif-B,AKB60562.1,AKB60559.1,AKB60558.1,GCA_000970185.1_ASM97018v1,"Methanosarcina mazei SarPi",ARCHAEAL,Euryarchaeota,Methanomicrobia
+Nif-B,AKB63794.1,AKB63791.1,AKB63790.1,GCA_000970205.1_ASM97020v1,"Methanosarcina mazei S-6",ARCHAEAL,Euryarchaeota,Methanomicrobia
+Nif-B,AKB67129.1,AKB67126.1,AKB67125.1,GCA_000970225.1_ASM97022v1,"Methanosarcina mazei LYC",ARCHAEAL,Euryarchaeota,Methanomicrobia
+Nif-B,AKB70489.1,AKB70486.1,AKB70485.1,GCA_000970245.1_ASM97024v1,"Methanosarcina mazei C16",ARCHAEAL,Euryarchaeota,Methanomicrobia
+Nif-B,AKB77188.1,AKB77185.1,AKB77184.1,GCA_000970285.1_ASM97028v1,"Methanosarcina horonobensis HB-1 = JCM 15518",ARCHAEAL,Euryarchaeota,Methanomicrobia
+Nif-B,AKB83256.1,AKB83253.1,AKB83252.1,GCA_000970305.1_ASM97030v1,"Methanosarcina barkeri 3",ARCHAEAL,Euryarchaeota,Methanomicrobia
+Nif-B,AKJ39920.1,AKJ39923.1,AKJ39924.1,GCA_001027005.1_ASM102700v1,"Methanosarcina barkeri CM1",ARCHAEAL,Euryarchaeota,Methanomicrobia
+Nif-B,CAJ36850.1,CAJ36853.1,CAJ36854.1,GCA_000063445.1_ASM6344v1,"Methanocella arvoryzae MRE50",ARCHAEAL,Euryarchaeota,Methanomicrobia
+Unknown,ABU60076.1,ABU60074.1,ABU60073.1,GCA_000017805.1_ASM1780v1,"Roseiflexus castenholzii DSM 13941",BACTERIAL,Chloroflexi,Chloroflexia
+Unknown,ABQ89608.1,ABQ89606.1,ABQ89605.1,GCA_000016665.1_ASM1666v1,"Roseiflexus sp. RS-1",BACTERIAL,Chloroflexi,Chloroflexia
+Nif-C,ABP68043.1,ABP68040.1,ABP68039.1,GCA_000016545.1_ASM1654v1,"Caldicellulosiruptor saccharolyticus DSM 8903",BACTERIAL,Firmicutes,Clostridia
+Nif-C,ACA58711.1,ACA58714.1,ACA58715.1,GCA_000018425.1_ASM1842v1,"Candidatus Desulforudis audaxviator MP104C",BACTERIAL,Firmicutes,Clostridia
+Nif-C,ADI02873.1,ADI02870.1,ADI02869.1,GCA_000092405.1_ASM9240v1,"Syntrophothermus lipocalidus DSM 12680",BACTERIAL,Firmicutes,Clostridia
+Nif-C,ADQ41285.1,ADQ41282.1,ADQ41281.1,GCA_000166695.1_ASM16669v1,"Caldicellulosiruptor kristjanssonii I77R1B",BACTERIAL,Firmicutes,Clostridia
+Nif-C,ADQ46964.1,ADQ46961.1,ADQ46960.1,GCA_000166775.1_ASM16677v1,"Caldicellulosiruptor kronotskyensis 2002",BACTERIAL,Firmicutes,Clostridia
+Nif-C,AEG16830.1,AEG16827.1,AEG16826.1,GCA_000214705.1_ASM21470v1,"Desulfotomaculum kuznetsovii DSM 6115",BACTERIAL,Firmicutes,Clostridia
+Nif-C,AEH44920.1,AEH44924.1,AEH44925.1,GCA_000217795.1_ASM21779v1,"Thermodesulfatator indicus DSM 15286",BACTERIAL,Thermodesulfobacteria,Thermodesulfobacteria
+Nif-C,AEM73826.1,AEM73823.1,AEM73822.1,GCA_000193435.3_ASM19343v3,"Caldicellulosiruptor lactoaceticus 6A",BACTERIAL,Firmicutes,Clostridia
+Nif-C,AFV11095.1,AFV11098.1,AFV11099.1,GCA_000305935.1_ASM30593v1,"Thermacetogenium phaeum DSM 12270",BACTERIAL,Firmicutes,Clostridia
+Nif-C,ABR57010.1,ABR57007.1,ABR57006.1,GCA_000017185.1_ASM1718v1,"Methanococcus aeolicus Nankai-3",ARCHAEAL,Euryarchaeota,Methanococci
+Nif-C,ACX72939.1,ACX72942.1,ACX72943.1,GCA_000024625.1_ASM2462v1,"Methanocaldococcus vulcanius M7",ARCHAEAL,Euryarchaeota,Methanococci
+Nif-C,ADC68732.1,ADC68735.1,ADC68736.1,GCA_000025525.1_ASM2552v1,"Methanocaldococcus sp. FS406-22",ARCHAEAL,Euryarchaeota,Methanococci
+Nif-C,ADG12713.1,ADG12710.1,ADG12709.1,GCA_000092305.1_ASM9230v1,"Methanocaldococcus infernus ME",ARCHAEAL,Euryarchaeota,Methanococci
+Nif-C,AEF97268.1,AEF97271.1,AEF97272.1,GCA_000214415.1_ASM21441v1,"Methanotorris igneus Kol 5",ARCHAEAL,Euryarchaeota,Methanococci
+Nif-C,AEH07089.1,AEH07086.1,AEH07085.1,GCA_000179575.2_ASM17957v2,"Methanothermococcus okinawensis IH1",ARCHAEAL,Euryarchaeota,Methanococci
+Nif-D,AAB86034.1,AAB86037.1,AAB86038.1,GCA_000008645.1_ASM864v1,"Methanothermobacter thermautotrophicus str. Delta H",ARCHAEAL,Euryarchaeota,Methanobacteria
+Nif-D,ABO34969.1,ABO34972.1,ABO34975.1,GCA_000016125.1_ASM1612v1,"Methanococcus maripaludis C5",ARCHAEAL,Euryarchaeota,Methanococci
+Nif-D,ABR53979.1,ABR53976.1,ABR53973.1,GCA_000017165.1_ASM1716v1,"Methanococcus vannielii SB",ARCHAEAL,Euryarchaeota,Methanococci
+Nif-D,ABR65168.1,ABR65171.1,ABR65174.1,GCA_000017225.1_ASM1722v1,"Methanococcus maripaludis C7",ARCHAEAL,Euryarchaeota,Methanococci
+Nif-D,ABX02614.1,ABX02611.1,ABX02608.1,GCA_000018485.1_ASM1848v1,"Methanococcus maripaludis C6",ARCHAEAL,Euryarchaeota,Methanococci
+Nif-D,ADL57755.1,ADL57758.1,ADL57759.1,GCA_000145295.1_ASM14529v1,"Methanothermobacter marburgensis str. Marburg",ARCHAEAL,Euryarchaeota,Methanobacteria
+Nif-D,AEG19023.1,AEG19020.1,AEG19019.1,GCA_000214725.1_ASM21472v1,"Methanobacterium paludis",ARCHAEAL,Euryarchaeota,Methanobacteria
+Nif-D,AEK19861.1,AEK19864.1,AEK19867.1,GCA_000220645.1_ASM22064v1,"Methanococcus maripaludis X1",ARCHAEAL,Euryarchaeota,Methanococci
+Nif-D,AIS31027.1,AIS31024.1,AIS31021.1,GCA_000762265.1_ASM76226v1,"Methanobacterium formicicum",ARCHAEAL,Euryarchaeota,Methanobacteria
+Nif-D,CAF30409.1,CAF30412.1,CAF30415.1,GCA_000011585.1_ASM1158v1,"Methanococcus maripaludis S2",ARCHAEAL,Euryarchaeota,Methanococci
+Nif-D,CDG64249.1,CDG64246.1,CDG64245.1,GCA_000499765.1_Methanobacterium,"Methanobacterium sp. MB1",ARCHAEAL,Euryarchaeota,Methanobacteria
+Nif-D,CEA13847.1,CEA13844.1,CEA13841.1,GCA_000953115.1_DSM1535,"Methanobacterium formicicum",ARCHAEAL,Euryarchaeota,Methanobacteria
+Nif-D,CEL23819.1,CEL23816.1,CEL23813.1,GCA_001458655.1_Mb9,"Methanobacterium formicicum",ARCHAEAL,Euryarchaeota,Methanobacteria
+Vnf,ADU27821.1,ADU27824.1,ADU27826.1,GCA_000178115.2_ASM17811v2,"Ethanoligenens harbinense YUAN-3",BACTERIAL,Firmicutes,Clostridia
+Vnf,AGK98264.1,AGK98263.1,AGK98261.1,GCA_000389635.1_ASM38963v1,"Clostridium pasteurianum BC1",BACTERIAL,Firmicutes,Clostridia
+Vnf,AIQ12503.1,AIQ12504.1,AIQ12506.1,GCA_000756615.1_ASM75661v1,"Paenibacillus durus",BACTERIAL,Firmicutes,Bacilli
+Vnf,AJA47504.1,AJA47505.1,AJA47507.1,GCA_000807175.1_ASM80717v1,"Clostridium pasteurianum DSM 525 = ATCC 6013",BACTERIAL,Firmicutes,Clostridia
+Vnf,AJA51492.1,AJA51493.1,AJA51495.1,GCA_000807255.1_ASM80725v1,"Clostridium pasteurianum DSM 525 = ATCC 6013",BACTERIAL,Firmicutes,Clostridia
+Vnf,AJE19764.1,AJE19761.1,AJE19759.1,GCA_000817975.1_ASM81797v1,"Azotobacter chroococcum NCIMB 8003",BACTERIAL,Proteobacteria,Gammaproteobacteria
+Vnf,AKG34369.1,AKG34370.1,AKG34372.1,GCA_000993825.1_ASM99382v1,"Paenibacillus durus ATCC 35681",BACTERIAL,Firmicutes,Bacilli
+Vnf,BAH06672.1,BAH06671.1,BAH06669.1,GCA_000010265.1_ASM1026v1,"Clostridium kluyveri NBRC 12016",BACTERIAL,Firmicutes,Clostridia
+Vnf,EDK33790.1,EDK33789.1,EDK33787.1,GCA_000016505.1_ASM1650v1,"Clostridium kluyveri DSM 555",BACTERIAL,Firmicutes,Clostridia
+Vnf,AAM04632.1,AAM04635.1,AAM04637.1,GCA_000007345.1_ASM734v1,"Methanosarcina acetivorans C2A",ARCHAEAL,Euryarchaeota,Methanomicrobia
+Vnf,AAZ71206.1,AAZ71203.1,AAZ71201.1,GCA_000195895.1_ASM19589v1,"Methanosarcina barkeri str. Fusaro",ARCHAEAL,Euryarchaeota,Methanomicrobia
+Vnf,AKB29647.1,AKB29650.1,AKB29652.1,GCA_000970085.1_ASM97008v1,"Methanosarcina siciliae T4/M",ARCHAEAL,Euryarchaeota,Methanomicrobia
+Vnf,AKB33574.1,AKB33577.1,AKB33579.1,GCA_000970125.1_ASM97012v1,"Methanosarcina siciliae HI350",ARCHAEAL,Euryarchaeota,Methanomicrobia
+Vnf,AKB44501.1,AKB44498.1,AKB44496.1,GCA_000969905.1_ASM96990v1,"Methanosarcina vacuolata Z-761",ARCHAEAL,Euryarchaeota,Methanomicrobia
+Vnf,AKB48008.1,AKB48005.1,AKB48003.1,GCA_000969945.1_ASM96994v1,"Methanosarcina sp. Kolksee",ARCHAEAL,Euryarchaeota,Methanomicrobia
+Vnf,AKB51718.1,AKB51721.1,AKB51723.1,GCA_000969985.1_ASM96998v1,"Methanosarcina barkeri str. Wiesmoor",ARCHAEAL,Euryarchaeota,Methanomicrobia
+Vnf,AKB54342.1,AKB54345.1,AKB54347.1,GCA_000970025.1_ASM97002v1,"Methanosarcina barkeri MS",ARCHAEAL,Euryarchaeota,Methanomicrobia
+Vnf,AKB57581.1,AKB57578.1,AKB57576.1,GCA_000970065.1_ASM97006v1,"Methanosarcina barkeri 227",ARCHAEAL,Euryarchaeota,Methanomicrobia
+Vnf,AKB81586.1,AKB81589.1,AKB81591.1,GCA_000970305.1_ASM97030v1,"Methanosarcina barkeri 3",ARCHAEAL,Euryarchaeota,Methanomicrobia
+Vnf,AKJ38132.1,AKJ38129.1,AKJ38127.1,GCA_001027005.1_ASM102700v1,"Methanosarcina barkeri CM1",ARCHAEAL,Euryarchaeota,Methanomicrobia
+Vnf,AGK14070.1,AGK14066.1,AGK14071.1,GCA_000380335.1_ASM38033v1,"Azotobacter vinelandii CA",BACTERIAL,Proteobacteria,Gammaproteobacteria
+Vnf,ACO76527.1,ACO76522.1,ACO76520.1,GCA_000021045.1_ASM2104v1,"Azotobacter vinelandii DJ",BACTERIAL,Proteobacteria,Gammaproteobacteria
+Vnf,CAE26819.1,CAE26821.1,CAE26823.1,GCA_000195775.1_ASM19577v1,"Rhodopseudomonas palustris CGA009",BACTERIAL,Proteobacteria,Alphaproteobacteria

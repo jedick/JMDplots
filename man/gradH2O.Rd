@@ -61,7 +61,7 @@ The organisms are limited to those that have at least 1000 RefSeq protein sequen
     \item{\code{mkrds.R}}{Script to make the RDS files from multiple CSV files produced by the \dQuote{ARAST} workflow.}
     \item{\code{Nif_homolog_genomes.csv}, \code{Nif_homolog_genomes.R}}{
       Names of genomes (organisms) containing different nitrogenase (Nif) homologs, extracted from Supplemental Table 1A of Poudel et al. (2018).
-      To the source table have been added the columns \samp{Refseq.name} and \samp{taxid}, which contain the closest matching genome name in release 95 of the RefSeq database (see \code{\link{JMDplots-package}}) and corresponding taxonomic ID.
+      To the source table have been added the columns \samp{Refseq.name} and \samp{taxid}, which contain the closest matching genome name in release 201 of the RefSeq database (see \code{\link{JMDplots-package}}) and corresponding taxonomic ID.
       The R file is the script used to make \code{Nif_homolog_genomes.csv} from the source table.
     }
     \item{\code{reaction_equations.csv}}{

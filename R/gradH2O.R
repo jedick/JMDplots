@@ -346,7 +346,7 @@ gradH2O3 <- function(pdf = FALSE, vars = "H2O-ZC", lm = NULL) {
     text(-0.151, -1.079, "plume", cex = 0.8, srt = 12)
     text(-0.151, -1.0815, "and", cex = 0.8, srt = 12)
     text(-0.151, -1.0840, "  seawater", cex = 0.8, srt = 12)
-    text(c(-0.196, -0.222, -0.191, -0.155), c(-1.046, -1.0645, -1.055, -1.039), c("Nif-D", "Nif-C", "Nif-B", "Nif-A"), adj = 0, cex = 0.8)
+    text(c(-0.196, -0.222, -0.191, -0.155), c(-1.0455, -1.0645, -1.055, -1.039), c("Nif-D", "Nif-C", "Nif-B", "Nif-A"), adj = 0, cex = 0.8)
     text(-0.218, 0.0365, "NF", cex=0.7, font = 2)
   }
   if(vars == "pIG") {
@@ -471,8 +471,8 @@ gradH2O5 <- function(pdf = FALSE) {
   hullfun(mout, pout, c(1, 3), "green3", c("riverFL", "riverPA"))
   hullfun(mout, pout, c(1, 3), "blue", c("plumeFL", "plumePA"))
   text(c(-0.13, -0.132), c(-1.06, -1.10), c("river", "plume"))
-  legend("topleft", c("free-living", "particle-associated"), pch = c(20, 15), bty = "n", inset = c(0.2, 0))
-  legend("topleft", legend = c(NA, NA), pch = c(21, 22), pt.cex = c(0.7, 1), bty = "n", inset = c(0.14, 0))
+  legend("topleft", c("free-living", "particle-associated"), pch = c(20, 15), col = "blue", bty = "n", inset = c(0.2, 0))
+  legend("topleft", legend = c(NA, NA), pch = c(21, 22), col = "green3", pt.cex = c(0.7, 1), bty = "n", inset = c(0.14, 0))
   text(c(-0.18, -0.17), c(-1.027, -1.027), c("river", "plume"), srt = 40, adj = 1)
   title("Amazon River metagenomes", font.main = 1)
   label.figure("(a)", xfrac = 0.1, cex = 1.8)
@@ -668,7 +668,7 @@ gradH2O7 <- function(pdf = FALSE) {
   )
   comptab <- osmotic_gene[match(unlist(Tsolute), osmotic_gene$dataset), ]
   ndat <- sapply(Tsolute, length)
-  Tsolute <- as.numeric(!grepl("NaCl", comptab$description)) - 0.08
+  Tsolute <- as.numeric(!grepl("NaCl", comptab$description)) - 0.05
   Tsolute[1] <- Tsolute[1] + 0.08
   Tsolute[4] <- Tsolute[4] - 0.1
   Tsolute[8] <- Tsolute[8] + 0.1
@@ -681,9 +681,9 @@ gradH2O7 <- function(pdf = FALSE) {
   )
   comptab <- osmotic_bact[match(unlist(Psolute), osmotic_bact$dataset), ]
   ndat <- sapply(Psolute, length)
-  Psolute <- c(0, 1, 0, 1) + 0.08
+  Psolute <- c(0, 1, 0, 1) + 0.05
   comptab <- cbind(comptab, solute = Psolute)
-  DnH2O(comptab, ndat, pch = 22, pt.text = c("O", "P", "Q", "R"), column = "solute", arrows = FALSE, col = 4)
+  DnH2O(comptab, ndat, pch = 22, pt.text = c("E", "F", "O", "P"), column = "solute", arrows = FALSE, col = 4)
   label.figure("(b)", cex = 1.8, yfrac = 0.9)
   mtext("NaCl or organic solutes", line = 1)
 
