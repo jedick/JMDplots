@@ -66,12 +66,12 @@ gradH2O4()
 
 ## `r nH2O`-`r ZC` for freshwater, marine, and hypersaline environments (Figure 5)
 ```{r gradH2O5, message = FALSE, fig.align='center', out.width='100%', fig.width = 8, fig.height = 5, pngquant = pngquant}
-gradH2O5()
+gradH2O5(lm = lm)
 ```
 
 ## `r nH2O`-`r ZC` and GRAVY-pI plots for Baltic Sea and Rodriguez-Brito et al. data (Figure 6)
 ```{r gradH2O6, message = FALSE, fig.align='center', out.width='75%', fig.width = 8, fig.height = 8, pngquant = pngquant}
-gradH2O6()
+gradH2O6(lm = lm)
 ```
 
 ## Differential gene and protein expression; time-course experiments and NaCl or organic solutes (Figure 7)

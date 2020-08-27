@@ -279,11 +279,9 @@ gradH2O2 <- function(pdf = FALSE) {
   # Write Equations using AA composition
   text(0.75, 0.65, bquote(phantom(.) %<-% "Equation 2"))
   text(0.75, 0.52, bquote(phantom(.) %<-% "Equation 3"))
-#  abline(v = 0.60, lty = 3, lwd = 2.2, col = "gray60")
-#  box(lty = 3, lwd = 2.2, col = "gray60")
   mid <- 0.603
-  rect(0.005, 0.405, mid, 0.995, lty = 3, lwd = 2.2, border = "gray60")
-  rect(mid, 0.405, 0.995, 0.995, lty = 3, lwd = 2.2, border = "gray60")
+  rect(0.001, 0.401, mid, 0.999, border = "gray60")
+  rect(mid, 0.401, 0.999, 0.999, border = "gray60")
 
   # done!
   if(pdf) {
@@ -308,13 +306,7 @@ gradH2O3 <- function(pdf = FALSE, vars = "H2O-ZC", lm = NULL) {
   # plot 1: compare ZC and nH2O of proteins in datasets from gradox paper
   plot(c(-0.22, -0.12), c(-1.10, -1.02), xlab = ZClab, ylab = NA, type = "n")
   mtext(nH2Olab, side = 2, las = 0, line = 3.2, cex = 1.6)
-  # add H2O-ZC guidelines 20200819
-  if(!is.null(lm)) {
-    x <- par("usr")[1:2]
-    y <- predict(lm, data.frame(ZC.aa = x))
-    for(dy in seq(-0.50, -0.60, -0.01)) lines(x, y + dy, col = "gray80")
-    box()
-  }
+  lmlines(lm)
   mgradox <- ppage("gradoxGS", plot.it = FALSE)
   pgradox <- ppage("gradoxGS", H2O = TRUE, plot.it = FALSE)
   pcomp(mgradox, pgradox, reorder = FALSE, add = TRUE, vars = vars, font = 2, labdy = 0.003)
@@ -359,13 +351,7 @@ gradH2O3 <- function(pdf = FALSE, vars = "H2O-ZC", lm = NULL) {
   # plot 2: compare ZC and nH2O of proteins in Baltic Sea surface
   plot(c(-0.18, -0.12), c(-1.10, -1.02), xlab = ZClab, ylab = NA, type = "n")
   mtext(nH2Olab, side = 2, las = 0, line = 3.2, cex = 1.6)
-  # add H2O-ZC guidelines 20200819
-  if(!is.null(lm)) {
-    x <- par("usr")[1:2]
-    y <- predict(lm, data.frame(ZC.aa = x))
-    for(dy in seq(-0.50, -0.60, -0.01)) lines(x, y + dy, col = "gray80")
-    box()
-  }
+  lmlines(lm)
   mbaltics <- ppage("balticsurface", plot.it = FALSE)
   pbaltics <- ppage("balticsurface", H2O = TRUE, plot.it = FALSE)
   pcomp(mbaltics, pbaltics, reorder = FALSE, add = TRUE, labels.at = NA, vars = vars, pch = list(c(17, 17, 17, 17, 19, 19, 19, 19, 19, 19)))
@@ -427,21 +413,27 @@ gradH2O4 <- function(pdf = FALSE, var = NULL) {
           col = "blue", add.title = FALSE, add = TRUE, pch = 15, var = var[i])
     title(quote("0.1-0.8"~mu*m))
     legend("bottomleft", c("metagenomes", "metatranscriptomes"), pch = c(19, 15), col = c("red", "blue"), lty = c(2, 2), bty = "n")
-    label.figure(figlab[1], cex = 1.7)
+    mtext(quote(phantom(.) %->% phantom("salinity") %->% phantom(.)), 1, 1.2, cex = 0.7)
+    mtext("higher\nsalinity", 1, 1.7, cex = 0.7)
+    label.figure(figlab[1], cex = 1.7, xfrac = 0.17, yfrac = 0.965)
 
     mplot("Baltic_Sea-0.8s", "iMicrobe_MGP", H2O = TRUE, plottype = "#FF000030",
           col = "red", add.title = FALSE, ylim = ylim, yline = 2.7, var = var[i], srt = NA, ilabel = c(1, 12))
     mplot("Baltic_Sea-0.8s", "SRA_MTP", H2O = TRUE, plottype = "#0000FF30",
           col = "blue", add.title = FALSE, add = TRUE, pch = 15, var = var[i])
+    mtext(quote(phantom(.) %->% phantom("salinity") %->% phantom(.)), 1, 1.2, cex = 0.7)
+    mtext("higher\nsalinity", 1, 1.7, cex = 0.7)
     title(quote("0.8-3.0"~mu*m))
-    label.figure(figlab[2], cex = 1.7)
+    label.figure(figlab[2], cex = 1.7, xfrac = 0.17, yfrac = 0.965)
 
     mplot("Baltic_Sea-3.0s", "iMicrobe_MGP", H2O = TRUE, plottype = "#FF000030",
           col = "red", add.title = FALSE, ylim = ylim, yline = 2.7, var = var[i], srt = NA, ilabel = c(1, 12))
     mplot("Baltic_Sea-3.0s", "SRA_MTP", H2O = TRUE, plottype = "#0000FF30",
           col = "blue", add.title = FALSE, add = TRUE, pch = 15, var = var[i])
+    mtext(quote(phantom(.) %->% phantom("salinity") %->% phantom(.)), 1, 1.2, cex = 0.7)
+    mtext("higher\nsalinity", 1, 1.7, cex = 0.7)
     title(quote("3.0-200"~mu*m))
-    label.figure(figlab[3], cex = 1.7)
+    label.figure(figlab[3], cex = 1.7, xfrac = 0.17, yfrac = 0.965)
   }
 
   if(pdf) {
@@ -454,7 +446,7 @@ gradH2O4 <- function(pdf = FALSE, var = NULL) {
 # make separate plot for sediments 20191006
 # add Amazon River 20191007
 # remove sediments and add GRAVY - pI plots 20191027
-gradH2O5 <- function(pdf = FALSE) {
+gradH2O5 <- function(pdf = FALSE, lm = NULL) {
 
   if(pdf) pdf("gradH2O5.pdf", width = 8, height = 5)
   layout(matrix(1:6, nrow = 2))
@@ -463,14 +455,21 @@ gradH2O5 <- function(pdf = FALSE) {
   xlim <- c(-0.2, -0.08)
   if(getOption("basis") == "QCa") ylim <- c(-1.15, -1)
   if(getOption("basis") == "QEC") ylim <- c(-0.8, -0.72)
+  nH2Olab <- expression(italic(n)[H[2] * O])
+  ZClab <- expression(italic(Z)[C])
 
   # plots 1-2: Amazon river metagenome
   mout <- ppage("amazon", plot.it = FALSE)
   pout <- ppage("amazon", H2O = TRUE, plot.it = FALSE)
-  pcomp(mout, pout, xlim = xlim, ylim = ylim, lty = 0, yline = 2.8, labels.at = NA)
+  plot(xlim, ylim, xlab = ZClab, ylab = NA, type = "n")
+  mtext(nH2Olab, side = 2, las = 0, line = 2.8)
+  lmlines(lm, 0.02)
+  pcomp(mout, pout, add = TRUE, lty = 0, labels.at = NA)
   hullfun(mout, pout, c(1, 3), "green3", c("riverFL", "riverPA"))
   hullfun(mout, pout, c(1, 3), "blue", c("plumeFL", "plumePA"))
-  text(c(-0.13, -0.132), c(-1.06, -1.10), c("river", "plume"))
+  text(c(-0.129, -0.132), c(-1.055, -1.095), c("river", "plume"))
+  rect(-0.20, -1.05, -0.18, -0.995, col = "white", border = NA)
+  rect(-0.20, -1.038, -0.10, -0.995, col = "white", border = NA)
   legend("topleft", c("free-living", "particle-associated"), pch = c(20, 15), col = "blue", bty = "n", inset = c(0.2, 0))
   legend("topleft", legend = c(NA, NA), pch = c(21, 22), col = "green3", pt.cex = c(0.7, 1), bty = "n", inset = c(0.14, 0))
   text(c(-0.18, -0.17), c(-1.027, -1.027), c("river", "plume"), srt = 40, adj = 1)
@@ -485,10 +484,13 @@ gradH2O5 <- function(pdf = FALSE) {
   label.figure("(d)", xfrac = 0.1, cex = 1.8)
 
   # plots 3-4: Amazon river metatranscriptome
-  pcomp(mout, pout, "MT", xlim = xlim, ylim = ylim, lty = 0, yline = 2.8, labels.at = NA)
+  plot(xlim, ylim, xlab = ZClab, ylab = NA, type = "n")
+  mtext(nH2Olab, side = 2, las = 0, line = 2.8)
+  lmlines(lm, 0.02)
+  pcomp(mout, pout, "MT", add = TRUE, lty = 0, labels.at = NA)
   hullfun(mout, pout, c(2, 4), "green3", c("riverFL", "riverPA"))
   hullfun(mout, pout, c(2, 4), "blue", c("plumeFL", "plumePA"))
-  text(c(-0.125, -0.12), c(-1.04, -1.07), c("river", "plume"))
+  text(c(-0.125, -0.12), c(-1.035, -1.073), c("river", "plume"))
   title("Amazon River metatranscriptomes", font.main = 1)
   label.figure("(b)", xfrac = 0.1, cex = 1.8)
   # plot 4: GRAVY - pI
@@ -502,16 +504,19 @@ gradH2O5 <- function(pdf = FALSE) {
   # start plot 5: Eiler et al. (freshwater vs marine)
   moutE <- ppage("eiler", plot.it = FALSE)
   poutE <- ppage("eiler", H2O = TRUE, plot.it = FALSE)
-  pcomp(moutE, poutE, xlim = xlim, ylim = ylim, lty = 0, yline = 2.8, labels.at = NA)
+  plot(xlim, ylim, xlab = ZClab, ylab = NA, type = "n")
+  mtext(nH2Olab, side = 2, las = 0, line = 2.8)
+  lmlines(lm, 0.02)
+  pcomp(moutE, poutE, add = TRUE, lty = 0, labels.at = NA)
   hullfun(moutE, poutE, 1, "green3")
   hullfun(moutE, poutE, 2, "blue")
-
   # add hypersaline water data
   moutH <- ppage("hypersaline", plot.it = FALSE)
   poutH <- ppage("hypersaline", H2O = TRUE, plot.it = FALSE)
   pcomp(moutH, poutH, reorder = FALSE, add = TRUE, labdx = 0.006, labdy = 0.004)
   hullfun(moutH, poutH, 1:3, "turquoise3")
-  text(c(-0.16, -0.16, -0.11), c(-1.03, -1.105, -1.088), c("freshwater", "marine", "hypersaline"))
+  text(c(-0.18, -0.148, -0.10), c(-1.042, -1.095, -1.088), c("freshwater", "marine", "hypersaline"))
+  rect(-0.148, -1.15, -0.076, -1.11, col = "white", border = NA)
   legend("bottomright", c("lower salinity", "higher salinity"), pch = c(0, 15), col = "turquoise3", bty = "n")
   legend("bottomright", c("hypersaline datasets", "", ""), bty = "n")
   title("Freshwater - marine - hypersaline", font.main = 1)
@@ -534,17 +539,22 @@ gradH2O5 <- function(pdf = FALSE) {
 }
 
 # nH2O-ZC and GRAVY-pI plots for Baltic Sea and Rodriguez-Brito et al. data 20200421
-gradH2O6 <- function(pdf = FALSE) {
+gradH2O6 <- function(pdf = FALSE, lm = NULL) {
   if(pdf) pdf("gradH2O6.pdf", width = 8, height = 8)
   layout(matrix(1:4, nrow = 2))
   par(mar = c(4, 4.5, 2, 1), las = 1, cex = 1.2)
   par(cex.lab = 1.3)
+  nH2Olab <- expression(italic(n)[H[2] * O])
+  ZClab <- expression(italic(Z)[C])
 
   # Baltic Sea nH2O - ZC
   mout <- ppage("balticsurface", plot.it = FALSE)
   pout <- ppage("balticsurface", H2O = TRUE, plot.it = FALSE)
-  pcomp(mout, pout, reorder = FALSE, yline = 3.2, cex.ylab = 1.5, font = 2, labdy = 0.003, labels.at = NA, xlim = c(-0.2, -0.08))
-  text(c(-0.126, -0.124), c(0.04, 0.02), c("< 6 PSU", "> 6 PSU"))
+  plot(c(-0.2, -0.08), c(-1.12, -1.02), xlab = ZClab, ylab = NA, type = "n")
+  mtext(nH2Olab, side = 2, las = 0, line = 3.2, cex = 1.5)
+  lmlines(lm, 0.02)
+  pcomp(mout, pout, add = TRUE, reorder = FALSE, font = 2, labdy = 0.003, labels.at = NA)
+  text(c(-0.128, -0.128), c(-1.035, -1.075), c("< 6 PSU", "> 6 PSU"))
   title("Baltic Sea", font.main = 1)
   label.figure("(a)", cex = 1.7)
   # Baltic Sea GRAVY - pI
@@ -556,14 +566,17 @@ gradH2O6 <- function(pdf = FALSE) {
   # Rodriguez-Brito et al. nH2O - ZC
   mout <- ppage("socal", plot.it = FALSE)
   pout <- ppage("socal", H2O = TRUE, plot.it = FALSE)
-  pcomp(mout, pout, reorder = FALSE, yline = 3.2, cex.ylab = 1.5, font = 2, labdy = 0.003, labels.at = NA, xlim = c(-0.2, -0.08))
-  text(c(-0.155, -0.125, -0.115), c(-0.005, 0.015, 0.027), c("FW", "LS", "MS-HS"))
-  title("Rodriguez-Brito et al.", font.main = 1)
+  plot(c(-0.2, -0.08), c(-1.12, -1.02), xlab = ZClab, ylab = NA, type = "n")
+  mtext(nH2Olab, side = 2, las = 0, line = 3.2, cex = 1.5)
+  lmlines(lm, 0.02)
+  pcomp(mout, pout, add = TRUE, reorder = FALSE, font = 2, labdy = 0.003, labels.at = NA)
+  text(c(-0.185, -0.185, -0.155), c(-1.08, -1.06, -1.035), c("FW", "LS", "MS-HS"))
+  title("Fish ponds and salterns", font.main = 1)
   label.figure("(b)", cex = 1.7)
   # Rodriguez-Brito et al. GRAVY - pI
   pcomp(mout, pout, reorder = FALSE, vars = "pIG", yline = 3.2, cex.ylab = 1.5, font = 2, labdy = 0.003, labels.at = NA)
   text(c(8.3, 6, 4.5), c(-0.18, -0.19, -0.115), c("FW", "LS", "MS-HS"))
-  title("Rodriguez-Brito et al.", font.main = 1)
+  title("Fish ponds and salterns", font.main = 1)
   label.figure("(d)", cex = 1.7)
   if(pdf) {
     dev.off()
@@ -855,3 +868,12 @@ plotbasisfun <- function(zoom = FALSE) {
   return(list(out1, out2, out3))
 }
 
+# add nH2O-ZC guidelines 20200819
+lmlines <- function(lm, step = 0.01) {
+  if(!is.null(lm)) {
+    x <- par("usr")[1:2]
+    y <- predict(lm, data.frame(ZC.aa = x))
+    for(dy in seq(-0.48, -0.66, -step)) lines(x, y + dy, col = "gray80")
+    box()
+  }
+}
