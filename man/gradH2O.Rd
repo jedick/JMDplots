@@ -10,7 +10,6 @@
 \alias{gradH2O6}
 \alias{gradH2O7}
 \alias{NifProteomes}
-\alias{AAbasis}
 \title{Plots from salinity gradients paper}
 \description{
 Plots from the paper by Dick et al. (2020).
@@ -26,7 +25,6 @@ Plots from the paper by Dick et al. (2020).
   gradH2O6(pdf = FALSE, lm = NULL)
   gradH2O7(pdf = FALSE)
   NifProteomes()
-  AAbasis()
 }
 
 \arguments{
@@ -50,27 +48,27 @@ This table gives a brief description of each function.
   \code{gradH2O7} \tab Differential gene and protein expression; time-course experiments and NaCl or organic solutes \cr
 }
 
-\code{NifProteomes}, which is used in \code{gradH2O2}, calculates the mean and standard deviation of \ZC and \nH2O for proteomes encoding different homologs of nitrogenase (Nif-D, Nif-C, Nif-B, or Nif-A), as listed by Poudel et al. (2018).
+\code{NifProteomes}, which is used in \code{gradH2O3}, calculates the mean and standard deviation of \ZC and \nH2O for proteomes encoding different homologs of nitrogenase (Nif-D, Nif-C, Nif-B, or Nif-A), as listed by Poudel et al. (2018).
 The organisms are limited to those that have at least 1000 RefSeq protein sequences, and any duplicated organism names are removed.
 }
 
 \section{Files in extdata/gradH2O}{
   \describe{
-    \item{\code{Table_S1.xlsx}}{Accession numbers used and sequence processing statistics.}
-    \item{\code{MGP}}{Amino acid compositions sampled from metagenomically derived protein sequences, generated as described in \code{\link{gradox}}.}
+    \item{\code{Table_S1.xlsx}}{Accession numbers used and sequence processing statistics for salinity gradients.}
+    \item{\code{Table_S2.xlsx}}{Accession numbers used and sequence processing statistics for redox gradients.}
+    \item{\code{MGP.rds}}{Amino acid compositions sampled from metagenomically derived protein sequences, generated as described in \code{\link{gradox}}.}
     \item{\code{mkrds.R}}{Script to make the RDS files from multiple CSV files produced by the \dQuote{ARAST} workflow.}
     \item{\code{Nif_homolog_genomes.csv}, \code{Nif_homolog_genomes.R}}{
-      Names of genomes (organisms) containing different nitrogenase (Nif) homologs, extracted from Supplemental Table 1A of Poudel et al. (2018).
-      To the source table have been added the columns \samp{Refseq.name} and \samp{taxid}, which contain the closest matching genome name in release 201 of the RefSeq database (see \code{\link{JMDplots-package}}) and corresponding taxonomic ID.
-      The R file is the script used to make \code{Nif_homolog_genomes.csv} from the source table.
+      Names of genomes (organisms) containing different nitrogenase (Nif) homologs.
+      The script reads Supplemental Table 1A of Poudel et al. (2018) and adds the columns \samp{Refseq.name} and \samp{taxid}, which contain the closest matching genome name in release 201 of the RefSeq database (see \code{\link{JMDplots-package}}) and corresponding taxonomic ID.
     }
     \item{\code{reaction_equations.csv}}{
       Equations for metabolic reactions in \emph{E. coli} from the \samp{reactions_GPRs} worksheet from Supplementary Information 1 of Feist et al. (2007).
       This is used in \code{gradH2O0}.
     }
-    \item{\code{AAbasis.csv}}{
-      Slopes and R-squared values for linear fits of \nH2O-\ZC and \nO2-\ZC for all combinations of basis species including \H2O, \O2, and 3 amino acids or \H2O, \O2, 2 amino acids, and acetic acid.
-      \code{AAbasis} has the code used to make this file.
+    \item{\code{AAbasis.csv}, \code{AAbasis.R}}{
+      Slopes and R-squared values for linear models of \nH2O-\ZC and \nO2-\ZC for all combinations of basis species including \H2O, \O2, and 3 amino acids or \H2O, \O2, 2 amino acids, and acetic acid.
+      \code{AAbasis.R} is the script used to make the CSV file.
     }
   }
 }

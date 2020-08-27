@@ -8,7 +8,7 @@ export(
   "chnsztenS6A", "chnsztenS6B", "chnsztenS7", "chnsztenS8", "chnsztenS9", "chnsztenS10",
   # gradH2O paper 20190930-20191008, 20191104, 20191117, 20200421, 20200821, 20200826
   "gradH2O0", "gradH2O1", "gradH2O2", "gradH2O3", "gradH2O4",
-  "gradH2O5", "gradH2O6", "gradH2O7", "AAbasis",
+  "gradH2O5", "gradH2O6", "gradH2O7",
   # grad_mplot 20190930
   "mplot", "mpage", "ppage", "mcomp", "pcomp",
   # Nif-encoding genomes 20191015
