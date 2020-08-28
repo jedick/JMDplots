@@ -66,7 +66,7 @@ plotMG <- function(dataset="Guerrero_Negro_IMG_MG", plottype="bars",
   if(isprotein) {
     if(user_data) filestart <- paste0(datadir, "/MGP/", dataset)
     else {
-      rdsfile <- file.path(datadir, "MGP.rds")
+      rdsdata <- paste0(paper, "_MGP")
       filestart <- dataset
     }
     if(H2O) Xfun <- H2OAA else Xfun <- ZCAA
@@ -75,7 +75,7 @@ plotMG <- function(dataset="Guerrero_Negro_IMG_MG", plottype="bars",
     # data directory for DNA
     if(user_data) filestart <- paste0(datadir, "/MGD/", dataset, "D")
     else {
-      rdsfile <- file.path(datadir, "MGD.rds")
+      rdsdata <- paste0(paper, "_MGD")
       filestart <- paste0(dataset, "D")
     }
     Xfun <- ZCnuc
@@ -85,7 +85,7 @@ plotMG <- function(dataset="Guerrero_Negro_IMG_MG", plottype="bars",
   DNA <- data.frame(ZC=numeric(length(samples)*100), sample=character(length(samples)*100), stringsAsFactors=FALSE)
   meancomp <- NULL
   # read the data from the RDS file 20191022
-  if(!user_data) RDS <- readRDS(rdsfile)
+  if(!user_data) RDS <- get(rdsdata, JMDplots)
   for(i in 1:length(samples)) {
     sample <- samples[i]
     if(!is.null(taxid)) file <- paste0(filestart, "_", sample, "-", taxid, ".csv")
@@ -246,8 +246,8 @@ plotMG <- function(dataset="Guerrero_Negro_IMG_MG", plottype="bars",
     # gradox or gradH2O data location in JMDplots package 20190928
     if(!user_data) {
       datadir <- system.file(paste0("extdata/", paper), package = "JMDplots")
-      rdsfile <- file.path(datadir, "MGR.rds")
-      RDS <- readRDS(rdsfile)
+      rdsdata <- paste0(paper, "_MGR")
+      RDS <- get(rdsdata, JMDplots)
       filestart <- paste0(dataset, "R")
     }
     for(i in 1:length(samples)) {

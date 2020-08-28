@@ -1,0 +1,15 @@
+# JMDplots/R/zzz.R
+# Read data from RDS files 20200828
+
+# the 'JMDplots' environment is made here in open code
+# https://stackoverflow.com/questions/41954302/where-to-create-package-environment-variables
+JMDplots <- new.env()
+
+.onAttach <- function(libname, pkgname) {
+  with(JMDplots, {
+    gradox_MGP <- readRDS(system.file("extdata/gradox/MGP.rds", package = "JMDplots"))
+    gradox_MGR <- readRDS(system.file("extdata/gradox/MGR.rds", package = "JMDplots"))
+    gradox_MGD <- readRDS(system.file("extdata/gradox/MGD.rds", package = "JMDplots"))
+    gradH2O_MGP <- readRDS(system.file("extdata/gradH2O/MGP.rds", package = "JMDplots"))
+  })
+}

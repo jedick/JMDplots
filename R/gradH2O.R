@@ -215,7 +215,7 @@ gradH2O2 <- function(pdf = FALSE) {
   # Write ZC calculation
   df <- as.data.frame(f)
   ZC <- formatC(ZC(f), 3, format = "f")
-  ZCeqn <- bquote(frac(- .(df$H) + 3%*%.(df$N) + 2%*%.(df$O) + 2%*%.(df$S), .(df$C)) == bold(.(ZC)))
+  ZCeqn <- bquote(frac(- .(df$H) + 3*"("*.(df$N)*")" + 2*"("*.(df$O)*")" + 2*"("*.(df$S)*")", .(df$C)) == bold(.(ZC)))
   text(0.35, 0.52, ZCeqn, cex = 0.75)
   text(0.31, 0.45, "(Equation 1)")
 
