@@ -46,6 +46,6 @@ wget -N -i urllist
 
 8. Edit 'taxid.names.R' so that 'taxdir' points to the directory where the files
     'names.dmp' and 'nodes.dmp' are present. These files can be downloaded from
-    ftp://ftp.ncbi.nih.gov/pub/taxonomy/taxdump.tar.gz (accessed on 2013-09-18)
+    ftp://ftp.ncbi.nih.gov/pub/taxonomy/taxdump.tar.gz (accessed on 2020-07-15)
 
-9. Source 'taxid.names.R' to generate the file 'taxid_names.csv' [~5.5 hours]
+9. Source 'taxid.names.R' to generate the file 'taxid_names.csv' [~7.5 hours]
