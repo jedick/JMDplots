@@ -1,0 +1,264 @@
+---
+title: "Chemical portraits of cancer proteomes (2016, 2017)"
+output: 
+  rmarkdown::html_vignette:
+    mathjax: null
+vignette: >
+  %\VignetteIndexEntry{Chemical portraits of cancer proteomes (2016, 2017)}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+<script>
+function ToggleDiv(ID) {
+  var D = document.getElementById("D-" + ID);
+  var B = document.getElementById("B-" + ID);
+  if (D.style.display === "none") {
+    // open the div and change button text
+    D.style.display = "block";
+    B.innerText = "Hide code";
+  } else {
+    // close the div and change button text
+    D.style.display = "none";
+    B.innerText = "Show code";
+  }
+}
+</script>
+
+```{r HTML, include=FALSE}
+## some frequently used HTML expressions
+# use lowercase here because these tend to be variable names in the examples
+zc <- "<i>Z</i><sub>C</sub>"
+o2 <- "O<sub>2</sub>"
+h2o <- "H<sub>2</sub>O"
+```
+
+```{r options, echo=FALSE}
+options(width = 90)
+```
+
+```{r library, echo=FALSE}
+library(canprot)
+library(CHNOSZ)
+```
+
+
+This vignette reproduces figures from papers by Dick (<a href="http://doi.org/10.7717/peerj.2238" title="Proteomic indicators of oxidation and hydration state in colorectal cancer">2016</a> and <a href="https://doi.org/10.7717/peerj.3421" title = "Chemical composition and the potential for proteomic transformation in cancer, hypoxia, and hyperosmotic stress">2017</a>).
+This vignette was compiled on `r Sys.Date()` with **[JMDplots](https://github.com/jedick/JMDplots)** `r packageDescription("JMDplots")$Version` and **[canprot](https://github.com/jedick/canprot)** `r packageDescription("canprot")$Version`.
+
+## Microbial proteins in colorectal cancer (2016 Figure 4)
+
+Stability fields represent the ranges of oxygen fugacity and water activity where the mean protein composition from the labeled microbial species has a higher per-residue affinity (lower Gibbs energy) of formation than the others.
+Blue and red shading designate microbes relatively enriched in samples from healthy donors and cancer patients, respectively.
+Plot (E) is a composite figure in which the intensity of shading corresponds to the number of overlapping healthy- or cancer-enriched microbes in the preceding diagrams
+
+<button id="B-bugstab" onclick="ToggleDiv('bugstab')">Show code</button>
+<div id="D-bugstab" style="display: none">
+```{r bugstab, eval = FALSE}
+# to reproduce the calculations in the paper, use superseded data for [Gly] and [UPBB] 20190206
+if(packageVersion("CHNOSZ") > "1.3.6") add.OBIGT("OldAA", c("[Gly]", "[UPBB]")) else add.obigt("OldAA", c("[Gly]", "[UPBB]"))
+# set up graphics device
+layout(cbind(matrix(sapply(list(c(1, 2), c(3, 4)), function(x) rep(rep(x, each=3), 3)), nrow=6, byrow=TRUE),
+             matrix(rep(c(0, 5, 5, 5, 5, 0), each=4), nrow=6, byrow=TRUE)))
+opar <- par(mar=c(3.3, 3.3, 1.5, 1.5), mgp=c(2.1, 0.7, 0), xaxs="i", yaxs="i", las=1, cex=0.9)
+# resolution for plots
+res <- 500
+# basis can be "QEC" or "CHNOS"
+basis <- "QEC"
+# read bioproject ids, species names
+mfile <- system.file("extdata/Dic16/microbes.csv", package="JMDplots")
+bugs <- read.csv(mfile, as.is=TRUE)
+# where to keep the locations of healthy zones
+healthbugs <- list()
+if(basis=="CHNOS") {
+  O2 <- c(-85, -65, res)
+  H2O <- c(-15, 5, res)
+} else {
+  O2 <- c(-75, -55, res)
+  H2O <- c(-10, 10, res)
+}
+# the datasets that are considered
+datasets <- c("WCQ+12", "ZTV+14", "CTB+14", "FLJ+15")
+# colors
+blue <- "#4A6FE3"
+lightblue <- "#9DA8E2"
+neutral <- "#E2E2E2"
+lightred <- "#E495A5"
+red <- "#D33F6A"
+# labels
+logfO2lab <- expression(log*italic("f")[O[2]*group("(", italic("g"), ")")])
+logaH2Olab <- expression(log*italic("a")[H[2]*O*group("(", italic("liq"), ")")])
+for(i in 1:4) {
+  ibug <- bugs$study==datasets[i] & (is.na(bugs$logodds) | abs(bugs$logodds) > 0.15)
+  # get amino acid compositions
+  aafile <- system.file("extdata/Dic16/microbial.aa.csv", package="JMDplots")
+  microbial.aa <- read.csv(aafile, stringsAsFactors=FALSE)
+  aa <- microbial.aa[match(bugs$bioproject[ibug], microbial.aa$organism), ]
+  ip <- add.protein(aa)
+  # set up system, calculate relative stabilities
+  col <- ifelse(bugs$upcan[ibug], lightred, lightblue)
+  basis(basis)
+  a <- affinity(O2=O2, H2O=H2O, iprotein=ip, T=37)
+  names <- bugs$abbrv[ibug]
+  d <- diagram(a, names=names, fill=col, as.residue=TRUE, tplot=FALSE, xlab=logfO2lab, ylab=logaH2Olab, format.names=FALSE)
+  if(i==1) title(main="Fecal 16S rRNA", cex.main=1)
+  if(i==2) title(main="Fecal metagenome (ZTV+14)", cex.main=1)
+  if(i==3) title(main="Co-abundance groups", cex.main=1)
+  if(i==4) title(main="Fecal metagenome (FLJ+15)", cex.main=1)
+  box()
+  label.figure(LETTERS[i], yfrac=0.96, paren=FALSE, font=2, cex=1)
+  # store locations of healthy bug zones
+  p <- d$predominant
+  p[p %in% which(bugs$upcan[ibug])] <- 0
+  p[p != 0] <- 1
+  healthbugs[[i]] <- p
+}
+# now show the healthy zones
+xs <- seq(O2[1], O2[2], length.out=O2[3])
+ys <- seq(H2O[1], H2O[2], length.out=H2O[3])
+hhh <- healthbugs[[1]] + healthbugs[[2]] + healthbugs[[3]] + healthbugs[[4]]
+image(xs, ys, hhh, col=c(red, lightred, neutral, lightblue, blue), useRaster=TRUE, xlab=logfO2lab, ylab=logaH2Olab)
+title(main="Cumulative stability count")
+box()
+label.figure("E", yfrac=0.96, paren=FALSE, font=2, cex=1)
+# reset thermodynamic database
+reset()
+```
+</div>
+
+```{r bugstab, echo = FALSE, fig.width=9, fig.height=5, message=FALSE, results="hide", out.width="100%"}
+```
+
+<!-- Comment this section to reduce running time 20200829 -->
+<!--
+## Potential diagrams: Colorectal cancer (2016 Figure 6)
+
+These plots show the weighted rank-sum differences of chemical affinities of formation from basis species of proteins in different groups.
+A higher ranking of relatively down- or up-expressed proteins in colorectal cancer is represented by blue or red color, respectively.
+The last plot shows effective values of Eh (redox potential) as a function of the same variables (oxygen fugacity and water activity).
+
+Identify the datasets for protein expression.
+
+```{r datasets2}
+datasets <- c("JKMF10", "UNS+14", "WKP+14", "MRK+11_AD.NC", "MRK+11_AC.AD", "MRK+11_AC.NC", "JCF+11", "KWA+14")
+```
+
+Set up the diagram and make the plots.
+To reduce the time needed to create the vignette, the plots here are made at lower resolution than those in the paper.
+
+```{r rankplot, fig.width=10, fig.height=10, message=FALSE, results="hide", out.width=685}
+#par(mfrow=c(3, 3))
+#par(xaxs="i", yaxs="i", las=1, mar=c(4, 4, 2, 2), mgp=c(2.6, 1, 0), cex=1)
+#for(i in seq_along(datasets)) {
+#  pdat <- pdat_colorectal(datasets[i], basis="QEC4")
+#  rankplot(pdat, res=35)
+#  CHNOSZ::label.figure(LETTERS[i], paren=FALSE, font=2, yfrac=0.94)
+#}
+#Ehplot()
+#CHNOSZ::label.figure("I", paren=FALSE, font=2, yfrac=0.94)
+```
+-->
+
+## Potential diagrams: Pancreatic cancer (2017 Figure S3 and 3E)
+
+The potential diagrams show the weighted rank difference of chemical affinities between up- and down-expressed proteins in each dataset.
+Groups of datasets are considered that have similar compositional features, i.e. changes in `r zc` and _n_<sub>`r h2o`</sub>.
+
+Here we make plots for datasets for pancreatic cancer having a mean difference of _n_<sub>`r h2o`</sub> that is > 0.01 and a small `r zc`, as judged by the <i>p</i>-value and common language effect size (CLES).
+Red and blue correspond to greater potential for formation of the up- and down-expressed proteins, respectively; the line of equipotential is shown in white:
+
+```{r groupplots, fig.width=7, fig.height=7, fig.align="center", message=FALSE, results="hide"}
+gpresult <- groupplots("pancreatic_H2O_up", res = 25)
+```
+
+Now let's make a merged diagram.
+The red-white-blue shading is computed from the mean of the previous diagrams.
+The black lines show the median and quartiles for the <i>y</i>-positions of the equipotential lines in the previous diagrams.
+The second plot shows effective values of Eh (redox potential) as a function of the same variables (oxygen fugacity and water activity) (see 2016 Figure 6I).
+
+```{r mergedplot, fig.width=10, fig.height=5, fig.align="center", message=FALSE, results = "hide", out.width="100%"}
+par(mfrow = c(1, 2))
+mergedplot(gpresult, res = 25)
+Ehplot(xlim = c(-70, -62), ylim = c(-6, 2), dy = 0.1)
+```
+
+## Basis species comparison (2017 Figure S1)
+
+These plots show projections of protein composition made using two sets of basis species.
+Using the `CHNOS` basis species (CO<sub>2</sub>, NH<sub>3</sub>, H<sub>2</sub>S, `r h2o`, `r o2`), the plots show that _n_<sub>`r h2o`</sub> and _n_<sub>`r o2`</sub>, i.e. the number of `r h2o` and `r o2` in the formation per residue of the proteins from basis species, are both moderately correlated with `r zc` (average oxidation state of carbon).
+Using the `QEC` basis species (glutamine, glutamic acid, cysteine, `r h2o`, `r o2`), we find that _n_<sub>`r o2`</sub> is strongly correlated with `r zc`, but _n_<sub>`r h2o`</sub> shows very little correlation.
+Accordingly, the `QEC` basis more clearly exposes two compositional variables -- oxidation state and hydration state -- in proteomic data.
+
+Here we define some labels used in the plot.
+
+```{r labels}
+QEClab <- CHNOSZ::syslab(c("glutamine", "glutamic acid", "cysteine", "H2O", "O2"))
+CHNOSlab <- CHNOSZ::syslab(c("CO2", "NH3", "H2S", "H2O", "O2"))
+```
+
+Next, get the amino acid compositions of all proteins in the UniProt human proteome and calculate the protein formulas and `r zc`.
+Note that `r zc` is a sum of elemental ratios and is independent of the choice of basis species.
+
+```{r aa_formula}
+aa <- get("human_base", human)
+protein.formula <- CHNOSZ::protein.formula(aa)
+ZC <- CHNOSZ::ZC(protein.formula)
+```
+
+Now set up the figure and plot the per-residue compositions of the proteins projected into different sets of basis species.
+
+```{r basis_comp, fig.width=6, fig.height=6, fig.align="center"}
+par(mfrow = c(2, 2))
+par(mar = c(4, 4, 2.5, 1))
+par(cex = 1.1)
+par(mgp = c(2.5, 1, 0))
+for(basis in c("QEC", "CHNOS")) {
+  CHNOSZ::basis(basis)
+  protein.basis <- CHNOSZ::protein.basis(aa)
+  protein.length <- CHNOSZ::protein.length(aa)
+  residue.basis <- protein.basis / protein.length
+  smoothScatter(ZC, residue.basis[, "O2"], xlab = cplab$ZC, ylab = cplab$nO2)
+  smoothScatter(ZC, residue.basis[, "H2O"], xlab = cplab$ZC, ylab = cplab$nH2O)
+  if(basis=="QEC") mtext(QEClab, outer = TRUE, cex = 1.2, line = -1.5)
+  if(basis=="CHNOS") mtext(CHNOSlab, outer = TRUE, cex = 1.2, line = -15)
+}
+```
+
+## Compositional analysis of differentially expressed proteins (2017 Figures 1 and 2)
+To see the data references, run e.g. `canprot::mkoldvig("colorectal")`.
+Updates to these datasets and plots were made [for a new paper in 2020](canH2O.html).
+
+<button id="B-diffplot" onclick="ToggleDiv('diffplot')">Show code</button>
+<div id="D-diffplot" style="display: none">
+```{r diffplot, eval = FALSE}
+par(mfrow = c(2, 2), mar = c(4.5, 4.5, 2, 1))
+
+colorectal <- read.csv(system.file("oldvignettes/colorectal.csv", package = "canprot"))
+col <- rep("black", nrow(colorectal))
+col[grepl("AD", colorectal$tags)] <- "red"
+diffplot(colorectal, col = col, oldstyle = TRUE, plot.rect = TRUE)
+title("Colorectal cancer", font.main = 1)
+
+pancreatic <- read.csv(system.file("oldvignettes/pancreatic.csv", package = "canprot"))
+col <- rep("black", nrow(pancreatic))
+col[grepl("low", pancreatic$tags)] <- "red"
+diffplot(pancreatic, col = col, oldstyle = TRUE, plot.rect = TRUE)
+title("Pancreatic cancer", font.main = 1)
+
+hypoxia <- read.csv(system.file("oldvignettes/hypoxia.csv", package = "canprot"))
+col <- rep("black", nrow(hypoxia))
+col[grepl("ReOx", hypoxia$tags)] <- "blue"
+col[grepl("SPH", hypoxia$tags)] <- "red"
+col[grepl("ASC", hypoxia$tags)] <- "orange"
+diffplot(hypoxia, col = col, oldstyle = TRUE, plot.rect = TRUE)
+title("Hypoxia", font.main = 1)
+
+hyperosmotic <- read.csv(system.file("oldvignettes/hyperosmotic.csv", package = "canprot"))
+col <- rep("black", nrow(hyperosmotic))
+col[grepl("ASC", hyperosmotic$tags)] <- "orange"
+diffplot(hyperosmotic, col = col, oldstyle = TRUE, plot.rect = TRUE)
+title("Hyperosmotic stress", font.main = 1)
+```
+</div>
+
+```{r diffplot, fig.width = 8, fig.height = 8, out.width = "100%", echo = FALSE}
+```
