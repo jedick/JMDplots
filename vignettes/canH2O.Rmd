@@ -76,7 +76,7 @@ kable(canH2OT1())
 ```
 
 ## Comparison of QCa and QEC basis species (Figure S1)
-```{r canH2OS1, message = FALSE, fig.align='center', out.width='100%', fig.width = 9, fig.height = 3, pngquant = pngquant}
+```{r canH2OS1, message = FALSE, fig.align='center', out.width='100%', fig.width = 7, fig.height = 2.33, pngquant = pngquant}
 canH2OS1()
 ```
 

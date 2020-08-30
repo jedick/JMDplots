@@ -117,37 +117,35 @@ canH2O1 <- function(pdf = FALSE) {
   textplain(pos[p6, ] + c(-0.025, 0.025), r6, ry, lab = "HPA", cex = cex)
   textplain(pos[p6, ] + c(0, 0.2), lab = c("Pan-cancer", "datasets"), font = 2, height = 0.04)
 
-  textplain(pos[25, ] + c(0.105, 0.29), lab = "Main finding", font = 2)
+  textplain(pos[25, ] + c(0.105, 0.295), lab = "Main finding", font = 2)
   cantext1 <- "Most cancer types have higher"
   cantext2 <- "hydration state of proteins"
   cantext3 <- "compared to normal tissue."
   cantext <- c(cantext1, cantext2, cantext3)
-  textplain(pos[25, ] + c(0.105, 0.235), lab = cantext, height = 0.05, font = 4)
+  textplain(pos[25, ] + c(0.105, 0.24), lab = cantext, height = 0.05, font = 4)
 
   textplain(pos[27, ] + c(0.16, 0.08), lab = "Other findings", font = 2)
   hyptext1 <- quote(italic("Hypoxia experiments show no consistent"))
   hyptext2 <- quote(italic("difference in oxidation state of proteins."))
   hyptext <- as.expression(c(hyptext1, hyptext2))
-  textplain(pos[26, ] + c(0.25, 0.02), lab = hyptext, height = 0.04)
+  textplain(pos[26, ] + c(0.26, 0.02), lab = hyptext, height = 0.04)
 
   hydtext1 <- quote(italic("Most hyperosmotic stress and 3D vs 2D culture"))
   hydtext2 <- quote(italic("experiments yield lower hydration state of proteins."))
   hydtext <- as.expression(c(hydtext1, hydtext2))
-  textplain(pos[26, ] + c(0.27, -0.07), lab = hydtext, height = 0.04)
+  textplain(pos[26, ] + c(0.29, -0.07), lab = hydtext, height = 0.04)
 
   # make overview plot
   plot.new()
   par(mar = c(2, 2, 0, 0), xaxs = "i", yaxs = "i")
-  #plot.window(c(-0.05, 0.05), c(-0.05, 0.05))
   plot.window(c(-1, 1), c(-1, 1))
   axis(1, tck = 0, labels = FALSE)
   axis(2, tck = 0, labels = FALSE)
   mtext("oxidation state", 1, 0.5)
   mtext("hydration state", 2, 0.5)
-  # draw arrows to mean values
-  # offset x = -0.1 to make room for text
-  for(i in 5:1) arrows(-0.1, 0, 35*mean(culture[[i]]$ZC.diff) - 0.1, 35*mean(culture[[i]]$nH2O.diff), col = col1[i], lwd = 3, length = 0.15)
-  for(i in 1:6) arrows(-0.1, 0, 35*mean(cancer[[i]]$ZC.diff) - 0.1, 35*mean(cancer[[i]]$nH2O.diff), col = col2[i], lwd = 3, length = 0.15)
+  # draw arrows to mean values, muliplied by a constant to scale to (-1, 1) axis range
+  for(i in 5:1) arrows(0, 0, 32*mean(culture[[i]]$ZC.diff), 32*mean(culture[[i]]$nH2O.diff), col = col1[i], lwd = 3, length = 0.15)
+  for(i in 1:6) arrows(0, 0, 32*mean(cancer[[i]]$ZC.diff), 32*mean(cancer[[i]]$nH2O.diff), col = col2[i], lwd = 3, length = 0.15)
 
   # restore these defaults to be able to re-run this script with expected results
   par(xaxs = "r", yaxs = "r")
@@ -240,14 +238,15 @@ canH2O2 <- function(pdf = FALSE) {
   culture <- lapply(cond1, conddat); names(culture) <- cond1
   cancer <- lapply(cond2, conddat); names(cancer) <- cond2
   names <- names(culture)
-  names[1] <- "hyp-\noxia"
   names[3] <- "salt"
   contplot(culture, "Cell culture", col1, xlim = c(-0.06, 0.06), ylim = c(-0.07, 0.07),
-           dx = c(0.028, 0.015, -0.007, 0.017, -0.022), dy = c(-0.005, 0.03, 0.037, -0.03, -0.03), names = names)
+           dx = c(0.030, 0.028, -0.006, 0.030, -0.026), dy = c(-0.035, 0.005, -0.050, -0.043, -0.03), names = names)
+  lines(c(0.015, 0.002), c(-0.063, -0.051))
   label.figure("C", cex = 2, font = 2, xfrac = 0.02, yfrac = 0.9)
   contplot(cancer, "Cancer tissue", col2, xlim = c(-0.06, 0.06), ylim = c(-0.07, 0.07),
-           dx = c(-0.008, NA, 0.020, -0.027, 0.018, -0.020), dy = c(-0.037, NA, 0.035, 0.03, -0.035, -0.02))
-  text(0.025, 0.038, "CRC", col = col2[2])
+           dx = c(-0.020, NA, 0.025, -0.025, 0.018, -0.020), dy = c(-0.047, NA, 0.035, 0.043, -0.037, 0.024))
+  text(0.051, 0.036, "CRC", col = col2[2])
+  lines(c(0.042, 0.027), c(0.036, 0.025))
 
   if(pdf) {
     dev.off()
@@ -487,7 +486,7 @@ canH2OT1 <- function() {
 # rQEC (residual-corrected nH2O with QEC basis) 20190713
 canH2OS1 <- function(pdf = FALSE) {
   # set up figure
-  if(pdf) pdf("canH2OS1.pdf", width = 9, height = 3)
+  if(pdf) pdf("canH2OS1.pdf", width = 7, height = 2.33)
   par(mfrow = c(1, 3))
   par(mar = c(3.3, 3.3, 1, 1))
   par(mgp = c(2.2, 0.7, 0))
@@ -584,7 +583,7 @@ canH2OS2 <- function(pdf = FALSE) {
   nH2O.title <- paste0("italic(R)^2 == '", r.squared.nH2O, "'")
   pl2 <- ggplot(nH2O, aes(x = TCGA, y = HPA, label = labels)) +
     theme_classic() + geom_smooth(method = "lm") +
-    annotate("text", -Inf, Inf, label = nH2O.title, parse = TRUE, hjust = -0.2, vjust = 1.5) +
+    annotate("text", Inf, -Inf, label = nH2O.title, parse = TRUE, hjust = 1.1, vjust = -0.6) +
     xlab(quote(Delta*italic(n)[H[2]*O]*" (TCGA / GTEx)")) +
     ylab(quote(Delta*italic(n)[H[2]*O]*" (HPA)")) +
     geom_hline(yintercept = 0, linetype = 3, colour = "gray30") +
