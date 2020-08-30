@@ -1,7 +1,7 @@
 \encoding{UTF-8}
 \name{cpcp}
 \alias{cpcp}
-\title{Plots from chemical portraits of cancer proteomes paper}
+\title{Plots from cancer potential diagrams papers}
 \description{
 Plots from the papers by Dick (2016 and 2017).
 }

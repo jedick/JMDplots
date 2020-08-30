@@ -19,7 +19,7 @@ if (!nzchar(Sys.which("pngquant"))) pngquant <- NULL
 ```
 
 This vignette contains plots from the paper by [<span title="CHNOSZ: Thermodynamic calculations and diagrams for geochemistry">Dick (2019)</span>](https://doi.org/10.3389/feart.2019.00180).
-This vignette was compiled with R packages [JMDplots](https://github.com/jedick/JMDplots) version `r packageDescription("JMDplots")$Version` and [CHNOSZ](http://chnosz.net) version `r packageDescription("CHNOSZ")$Version`.
+This vignette was compiled on `r Sys.Date()` with **[JMDplots](https://github.com/jedick/JMDplots)** `r packageDescription("JMDplots")$Version` and **[CHNOSZ](http://chnosz.net)** `r packageDescription("CHNOSZ")$Version`.
 
 ```{r JMDplots, message = FALSE, results = "hide"}
 library(JMDplots)

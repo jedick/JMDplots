@@ -37,7 +37,7 @@ basis <- getOption("basis")
 ```
 
 This vignette contains plots from the paper by [<span title="Water as a reactant in the differential expression of proteins in cancer">Dick (2020)</span>](https://doi.org/10.1101/2020.04.09.035022).
-This vignette was compiled with R packages [JMDplots](https://github.com/jedick/JMDplots) version `r packageDescription("JMDplots")$Version` and [canprot](https://github.com/jedick/canprot) version `r packageDescription("canprot")$Version`.
+This vignette was compiled on `r Sys.Date()` with **[JMDplots](https://github.com/jedick/JMDplots)** `r packageDescription("JMDplots")$Version` and **[canprot](https://github.com/jedick/canprot)** `r packageDescription("canprot")$Version`.
 The **`r basis`** basis species (`r basis.text(basis)`, H~2~O, O~2~) are used for the analysis of stoichiometric hydration state (`r nH2O`).
 
 ## Study overview (Figure 1)

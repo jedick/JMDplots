@@ -51,7 +51,7 @@ ZC <- "<i>Z</i><sub>C</sub>"
 ```
 
 This vignette contains plots from the papers by Dick and Shock (<a href="https://doi.org/10.1371/journal.pone.0022782" title="Calculation of the relative chemical stabilities of proteins as a function of temperature and redox chemistry in a hot spring">2011</a> and <a href="https://doi.org/10.1371/journal.pone.0072395" title="A metastable equilibrium model for the relative abundances of microbial phyla in a hot spring">2013</a>).
-This vignette was compiled with R packages [JMDplots](https://github.com/jedick/JMDplots) version `r packageDescription("JMDplots")$Version` and [CHNOSZ](http://chnosz.net) version `r packageDescription("CHNOSZ")$Version`.
+This vignette was compiled on `r Sys.Date()` with **[JMDplots](https://github.com/jedick/JMDplots)** `r packageDescription("JMDplots")$Version` and **[CHNOSZ](http://chnosz.net)** `r packageDescription("CHNOSZ")$Version`.
 
 ```{r JMDplots, message = FALSE, results = "hide"}
 library(JMDplots)

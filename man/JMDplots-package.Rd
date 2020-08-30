@@ -20,7 +20,7 @@ Please refer to the supporting information of the papers for the original script
     \item \code{\link{gradH2O}} - Stoichiometric hydration state of metagenomes in salinity gradients (Dick et al., 2020)
     \item \code{\link{chnszten}} - CHNOSZ, ten years after first CRAN submission (Dick, 2019)
     \item \code{\link{gradox}} - Carbon oxidation state of metagenomes in redox gradients (Dick et al., 2019)
-    \item \code{\link{cpcp}} - Chemical portraits of cancer proteomes (Dick, 2016, 2017)
+    \item \code{\link{cpcp}} - Potential diagrams for cancer proteomes (Dick, 2016, 2017)
     \item \code{\link{aoscp}} - Average oxidation state of carbon in proteins (Dick, 2014)
     \item \code{\link{bison}} - Bison Pool hot spring (Dick and Shock, 2011, 2014)
     \item \code{\link{scsc}} - Subcellular locations of \emph{Saccharomyces cerevisiae} (Dick, 2009)
