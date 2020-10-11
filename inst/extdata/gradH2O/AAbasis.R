@@ -1,19 +1,19 @@
-# Calculate R-squared of nH2O-ZC and nO2-ZC fits for amino acids, using basis species
-# that include amino acids and acetic acid 20200813
+# Calculate R-squared of nH2O-ZC and nO2-ZC fits for amino acids,
+# using basis species that include different combindation of amino acids 20201011
 
 # works with CHNOSZ 1.3.6
 library(CHNOSZ)
 
-# combine different amino acids and acetic acid
-aa <- c(aminoacids(""), "acetic acid")
-aacomb <- combn(21, 3)
+# combine different amino acids
+aa <- aminoacids("")
+aacomb <- combn(20, 3)
 # only keep combinations that have sulfur-bearing amino acids
 icys <- which(aa=="cysteine")
 imet <- which(aa=="methionine")
 has.S <- apply(aacomb, 2, function(x) any(x %in% c(icys, imet)))
 aacomb <- aacomb[, has.S, drop=FALSE]
 # make abbreviations
-aa1 <- c(aminoacids(1), "a")
+aa1 <- aminoacids(1)
 abbrv1 <- aa1[aacomb[1, ]]
 abbrv2 <- aa1[aacomb[2, ]]
 abbrv3 <- aa1[aacomb[3, ]]

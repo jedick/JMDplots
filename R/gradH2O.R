@@ -46,8 +46,8 @@ gradH2O0 <- function() {
 gradH2O1 <- function(pdf = FALSE) {
 
   # set up figure
-  if(pdf) pdf("gradH2O1.pdf", width = 8, height = 6)
-  layout(matrix(c(1,2,7, 1,2,7, 3,4,7, 3,4,8, 5,6,8, 5,6,8), nrow = 6, byrow = TRUE), widths = c(1, 1, 2))
+  if(pdf) pdf("gradH2O1.pdf", width = 8, height = 4.3)
+  layout(matrix(c(1, 3, 2, 4, 5, 5), nrow = 2), widths = c(1, 1, 2))
   par(mar = c(3.2, 3.4, 2.5, 1))
   par(mgp = c(2.2, 0.7, 0))
   par(las = 1)
@@ -108,16 +108,7 @@ gradH2O1 <- function(pdf = FALSE) {
   aaplot(ZC.aa, species()$O2, nO2lab, "bottomright", "", "(d)", 0.04)
   mtext(quote(list(glutamine, "glutamic acid", cysteine, H[2]*O, O[2])~"("*bold(QEC)*")     "), line = 0.5, adj = 1, cex = 0.8)
 
-  ## Calculate nH2O and nO2 of amino acids with QCa basis
-  basis(c("glutamine", "cysteine", "acetic acid", "H2O", "O2"))
-  species(aa)
-  # Plot 5: nH2O-ZC of amino acids (QCa)
-  aaplot(ZC.aa, species()$H2O, nH2Olab, "bottomright", "", "(e)")
-  # Plot 6: nO2-ZC of amino acids (QCa)
-  aaplot(ZC.aa, species()$O2, nO2lab, "bottomright", "", "(f)", 0.04)
-  mtext(quote(list(glutamine, cysteine, "acetic acid", H[2]*O, O[2])~"("*bold(QCa)*")       "), line = 0.5, adj = 1, cex = 0.8)
-
-  # Plot 7: R2 of nH2O-ZC and nO2-ZC fits
+  # Plot 5: R2 of nH2O-ZC and nO2-ZC fits
   par(mar = c(4, 4.7, 2.5, 1))
   par(mgp = c(3, 0.7, 0))
   plotbasisfun()
@@ -127,38 +118,14 @@ gradH2O1 <- function(pdf = FALSE) {
   # add 1 for CHNOS 20200821
   nbasis <- nbasis + 1
   # add point for CHNOS basis 20200821
-  points(CHNOS.O2.R2, CHNOS.H2O.R2, pch = 19, cex = 0.8, col = 2)
+  points(CHNOS.O2.R2, CHNOS.H2O.R2, pch = 19, cex = 0.6, col = 2)
   text(CHNOS.O2.R2, CHNOS.H2O.R2, "CHNOS", adj = -0.15, font = 2)
+  # label QEC 20201011
+  QEC <- AAbasis[AAbasis$abbrv == "CEQ", ]
+  text(0.98, 0.06, "QEC", font = 2)
+  lines(c(QEC$O2.R2 + 0.004, 0.94), c(QEC$H2O.R2 + 0.004, 0.055))
   title(paste(nbasis, "combinations of basis species"), font.main = 1)
-  # add text for zoom box
-  text(0.98, 0.045, "zoom\narea", cex = 1.1)
-  label.figure("(g)", cex = 1.6, yfrac = 0.94)
-
-  # Plot 8: zoomed plot of R2 of nH2O-ZC and nO2-ZC fits
-  pb <- plotbasisfun(TRUE)
-  title("Zoomed plot", font.main = 1)
-  # label points
-  # AMT, AMa, MTa
-  text(pb[[1]]$O2.R2[1], pb[[1]]$H2O.R2[1], paste(pb[[1]]$abbrv, collapse = "\n"), adj = c(-0.1, -0.1))
-  # CRa
-  text(pb[[2]]$O2.R2, pb[[2]]$H2O.R2, pb[[2]]$abbrv, adj = 1.2)
-  # ACT, ACa, CTa
-  text(pb[[3]]$O2.R2[1], pb[[3]]$H2O.R2[1], paste(pb[[3]]$abbrv[c(1, 2, 8)], collapse = "\n"), adj = c(0.4, -0.1))
-  # CEH, CEQ (QEC), CER
-  pb[[3]]$abbrv[pb[[3]]$abbrv == "CEQ"] <- "QEC"
-  text(pb[[3]]$O2.R2[3], pb[[3]]$H2O.R2[3], pb[[3]]$abbrv[3], adj = c(0.5, -0.5))
-  text(pb[[3]]$O2.R2[4], pb[[3]]$H2O.R2[4], pb[[3]]$abbrv[4], adj = c(0.5, -0.5), font = 2)
-  text(pb[[3]]$O2.R2[5], pb[[3]]$H2O.R2[5], pb[[3]]$abbrv[5], adj = c(0, 1.5))
-  # CQa (QCa), CRT, MWY
-  pb[[3]]$abbrv[pb[[3]]$abbrv == "CQa"] <- "QCa"
-  text(pb[[3]]$O2.R2[6], pb[[3]]$H2O.R2[6], pb[[3]]$abbrv[6], adj = c(0.5, -0.8), font = 2)
-  text(pb[[3]]$O2.R2[7], pb[[3]]$H2O.R2[7], pb[[3]]$abbrv[7], adj = c(0.5, 1.5))
-  text(pb[[3]]$O2.R2[9], pb[[3]]$H2O.R2[9], pb[[3]]$abbrv[9], adj = c(0.5, -0.5))
-  # put a circle around QCa
-  iQCa <- pb[[3]]$abbrv == "QCa"
-  points(pb[[3]]$O2.R2[iQCa], pb[[3]]$H2O.R2[iQCa], cex = 1.7, col = 4)
-  legend("topright", c("3 amino acids", "acetic acid and", "2 amino acids"), pch = 19, pt.cex = 0.8, col = c(1, 4, NA))
-  label.figure("(h)", cex = 1.6, yfrac = 0.94)
+  label.figure("(e)", cex = 1.6, yfrac = 0.94)
 
   if(pdf) {
     dev.off()
@@ -191,12 +158,12 @@ gradH2O2 <- function(pdf = FALSE) {
   fexpr <- expr.species(as.chemical.formula(f))
 
   # Write basis species
-  basis(c("glutamine", "cysteine", "acetic acid", "H2O", "O2"))
+  basis(c("glutamine", "glutamic acid", "cysteine", "H2O", "O2"))
   reaction <- subcrt(protein, -1)$reaction
   text(0.30, 0.90, bquote(.(fexpr) == phantom(.)), cex = 0.8)
   for(i in 2:6) {
     dy <- (i - 2) * -0.03
-    coeff <- formatC(reaction$coeff[i], 2, format = "f")
+    coeff <- formatC(reaction$coeff[i], 1, format = "f")
     if(i > 4) fexpr <- expr.species(reaction$formula[i])
     else fexpr <- bquote(.(expr.species(reaction$formula[i]))~"("*.(reaction$name[i])*")")
     text(0.22, 0.86 + dy, coeff, cex = 0.7, adj = 1)
@@ -207,7 +174,7 @@ gradH2O2 <- function(pdf = FALSE) {
   # Write nH2O equation
   # Divide nH2O by protein length
   pl <- protein.length(protein)
-  coeff <- formatC(reaction$coeff[5], 2, format = "f")
+  coeff <- formatC(reaction$coeff[5], 1, format = "f")
   nH2O <- formatC(reaction$coeff[5] / pl, 3, format = "f")
   nH2Oeqn <- bquote(frac(.(coeff), .(pl)~"(protein length)") == bold(.(nH2O)))
   text(0.3, 0.65, nH2Oeqn, cex = 0.75)
@@ -783,40 +750,18 @@ plotbasisfun <- function(zoom = FALSE) {
   # set up plot
   xlab <- quote(italic(R)^2~"of"~italic(n)[O[2]] - italic(Z)[C]~"fits")
   ylab <- quote(italic(R)^2~"of"~italic(n)[H[2]*O] - italic(Z)[C]~"fits")
-  if(zoom) plot(c(0.9, 0.93), c(0, 0.03), xlab = xlab, ylab = ylab, type = "n")
-  else plot(c(0, 1), c(0, 0.8), xlab = xlab, ylab = ylab, type = "n")
+  plot(c(0, 1), c(0, 0.8), xlab = xlab, ylab = ylab, type = "n")
   x <- extendrange(c(0.9, 0.93))
   y <- extendrange(c(0, 0.03))
-  if(!zoom) {
-    # show the zoom box
-    rect(x[1], y[1], x[2], y[2], border = "gray40", lwd = 2)
-  }
-  # use black for combinations with only amino acids, red for acetic acid
   abbrv <- AAbasis$abbrv
-  col <- ifelse(grepl("a", abbrv), 4, 1)
-  cex <- ifelse(zoom, 0.8, 0.3)
   O2 <- AAbasis$O2.R2
   H2O <- AAbasis$H2O.R2
-  points(O2, H2O, col = col, cex = cex, pch = 19)
-
-  # identify combinations with lowest R-squared for nH2O-ZC and highest R-squared for nO2-ZC
-  out1 <- AAbasis[!is.na(AAbasis$O2.R2), ]
-  out1 <- out1[out1$H2O.R2 == min(out1$H2O.R2), ]
-  out1 <- out1[out1$O2.R2 == max(out1$O2.R2), ]
-
-  # identify combinations with highest R-squared for nO2-ZC and lowest R-squared for nH2O-ZC
-  out2 <- AAbasis[!is.na(AAbasis$O2.R2), ]
-  out2 <- out2[out2$O2.R2 == max(out2$O2.R2), ]
-  out2 <- out2[out2$H2O.R2 == min(out2$H2O.R2), ]
-
-  # identify other combinations in the zoom box
-  out3 <- AAbasis[!AAbasis$abbrv %in% c(out1$abbrv, out2$abbrv), ]
-  out3 <- out3[out3$O2.R2 > x[1], ]
-  out3 <- out3[out3$H2O.R2 < y[2], ]
-  out3 <- out3[!is.na(out3$abbrv), ]
-
-  # return the values for lowest R-squared (nH2O-ZC), highest R-squared (nO2-ZC), and other combinations in the zoom box
-  return(list(out1, out2, out3))
+  # use larger blue point for QEC 20201011
+  cex <- rep(0.3, length(O2))
+  col <- rep(1, length(O2))
+  cex[AAbasis$abbrv == "CEQ"] <- 0.6
+  col[AAbasis$abbrv == "CEQ"] <- 4
+  points(O2, H2O, cex = cex, col = col, pch = 19)
 }
 
 # add nH2O-ZC guidelines 20200819
