@@ -3,7 +3,7 @@
 
 protein_refseq.csv: total amino acid composition of all proteins for
   bacteria, archaea, and viral genomes in the RefSeq collection (n = 42787)
-taxid_names.csv: taxid, phylum name and species name for 788 microbial taxa
+taxid_names.csv: taxid, phylum name and species name for 42787 taxa
 
 # These functions/scripts have the following purpose (output files listed in parentheses):
 gencat.sh - extract accession, taxid, sequence length from RefSeq release catalog (accession.taxid.txt)

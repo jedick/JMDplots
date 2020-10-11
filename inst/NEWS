@@ -3,6 +3,8 @@ CHANGES IN JMDplots 1.2.4
 
 - 20200817 Use canprot's options("basis") to select basis species.
 
+- 20201011 Revise gradH2O and canH2O plots to use QEC basis species.
+
 CHANGES IN JMDplots 1.2.3
 -------------------------
 
