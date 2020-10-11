@@ -220,9 +220,12 @@ gradH2O3 <- function(pdf = FALSE, vars = "H2O-ZC", lm = NULL) {
   # define axis labels
   nH2Olab <- expression(italic(n)[H[2] * O])
   ZClab <- expression(italic(Z)[C])
+  # set y-axis limit depending on basis species 20201011
+  if(options("basis")$basis == "QCa") ylim <- c(-1.10, -1.02)
+  if(options("basis")$basis == "QEC") ylim <- c(-0.78, -0.70)
 
   # plot 1: compare ZC and nH2O of proteins in datasets from gradox paper
-  plot(c(-0.22, -0.12), c(-1.10, -1.02), xlab = ZClab, ylab = NA, type = "n")
+  plot(c(-0.22, -0.12), ylim, xlab = ZClab, ylab = NA, type = "n")
   mtext(nH2Olab, side = 2, las = 0, line = 3.2, cex = 1.6)
   lmlines(lm)
   mgradox <- ppage("gradoxGS", plot.it = FALSE)
@@ -243,21 +246,38 @@ gradH2O3 <- function(pdf = FALSE, vars = "H2O-ZC", lm = NULL) {
   }
   # add text labels
   if(vars == "H2O-ZC") {
-    text(-0.213, -1.0885, "hot spring", cex = 0.8, srt = 12)
-    text(-0.213, -1.091, "source", cex = 0.8, srt = 12)
-    text(-0.172, -1.062, "phototrophic", cex = 0.8, srt = 12)
-    text(-0.172, -1.0645, "zone", cex = 0.8, srt = 12)
-    text(-0.127, -0.002, "> 3 mm", adj = 0, cex = 0.8)
-    text(-0.1395, -1.078, "3 mm", adj = 0, cex = 0.8)
-    text(-0.135, -1.0665, "2 mm", adj = 0, cex = 0.8)
-    text(-0.132, -1.0555, "1 mm", adj = 0, cex = 0.8)
-    text(-0.182, -1.094, "vent", cex = 0.8, srt = 12)
-    text(-0.182, -1.097, "  fluids", cex = 0.8, srt = 12)
-    text(-0.151, -1.079, "plume", cex = 0.8, srt = 12)
-    text(-0.151, -1.0815, "and", cex = 0.8, srt = 12)
-    text(-0.151, -1.0840, "  seawater", cex = 0.8, srt = 12)
-    text(c(-0.196, -0.222, -0.191, -0.155), c(-1.0455, -1.0645, -1.055, -1.039), c("Nif-D", "Nif-C", "Nif-B", "Nif-A"), adj = 0, cex = 0.8)
-    text(-0.218, 0.0365, "NF", cex=0.7, font = 2)
+    if(options("basis")$basis == "QCA") {
+      text(-0.213, -1.0885, "hot spring", cex = 0.8, srt = 12)
+      text(-0.213, -1.091, "source", cex = 0.8, srt = 12)
+      text(-0.172, -1.062, "phototrophic", cex = 0.8, srt = 12)
+      text(-0.172, -1.0645, "zone", cex = 0.8, srt = 12)
+      text(-0.127, -0.002, "> 3 mm", adj = 0, cex = 0.8)
+      text(-0.1395, -1.078, "3 mm", adj = 0, cex = 0.8)
+      text(-0.135, -1.0665, "2 mm", adj = 0, cex = 0.8)
+      text(-0.132, -1.0555, "1 mm", adj = 0, cex = 0.8)
+      text(-0.182, -1.094, "vent", cex = 0.8, srt = 12)
+      text(-0.182, -1.097, "  fluids", cex = 0.8, srt = 12)
+      text(-0.151, -1.079, "plume", cex = 0.8, srt = 12)
+      text(-0.151, -1.0815, "and", cex = 0.8, srt = 12)
+      text(-0.151, -1.0840, "  seawater", cex = 0.8, srt = 12)
+      text(c(-0.196, -0.222, -0.191, -0.155), c(-1.0455, -1.0645, -1.055, -1.039), c("Nif-D", "Nif-C", "Nif-B", "Nif-A"), adj = 0, cex = 0.8)
+      text(-0.218, 0.0365, "NF", cex=0.7, font = 2)
+    }
+    if(options("basis")$basis == "QEC") {
+      text(-0.210, -0.7535, "hot spring", cex = 0.8)
+      text(-0.210, -0.7565, "source", cex = 0.8)
+      text(-0.160, -0.773, "phototrophic", cex = 0.8)
+      text(-0.160, -0.776, "zone", cex = 0.8)
+      lines(c(-0.160, -0.157), c(-0.771, -0.765))
+      text(-0.135, -0.776, "> 3 mm", cex = 0.8)
+      text(-0.129, -0.765, "2 mm", cex = 0.8)
+      text(-0.126, -0.757, "1 mm", cex = 0.8)
+      text(-0.180, -0.746, "vent fluids", cex = 0.8, srt = -23)
+      text(-0.156, -0.751, "plume", cex = 0.8)
+      text(-0.146, -0.746, "seawater", cex = 0.8)
+      lines(c(-0.1475, -0.1475), c(-0.748, -0.7625))
+      text(c(-0.197, -0.222, -0.177, -0.151), c(-0.706, -0.708, -0.728, -0.7365), c("Nif-D", "Nif-C", "Nif-B", "Nif-A"), adj = 0, cex = 0.8)
+    }
   }
   if(vars == "pIG") {
     text(c(5.00, 7.49, 5.65, 5.68), c(-0.123, -0.130, -0.109, -0.066), c("Nif-D", "Nif-C", "Nif-B", "Nif-A"), adj = 0)
@@ -267,7 +287,7 @@ gradH2O3 <- function(pdf = FALSE, vars = "H2O-ZC", lm = NULL) {
   label.figure("(a)", cex = 1.7, xfrac = 0.04)
 
   # plot 2: compare ZC and nH2O of proteins in Baltic Sea surface
-  plot(c(-0.18, -0.12), c(-1.10, -1.02), xlab = ZClab, ylab = NA, type = "n")
+  plot(c(-0.18, -0.12), ylim, xlab = ZClab, ylab = NA, type = "n")
   mtext(nH2Olab, side = 2, las = 0, line = 3.2, cex = 1.6)
   lmlines(lm)
   mbaltics <- ppage("balticsurface", plot.it = FALSE)
@@ -275,30 +295,36 @@ gradH2O3 <- function(pdf = FALSE, vars = "H2O-ZC", lm = NULL) {
   pcomp(mbaltics, pbaltics, reorder = FALSE, add = TRUE, labels.at = NA, vars = vars, pch = list(c(17, 17, 17, 17, 19, 19, 19, 19, 19, 19)))
   # add text labels
   if(vars == "H2O-ZC") {
-    text(-0.138, -1.031, "< 6 PSU")
-    text(-0.139, -1.060, "> 6 PSU")
+    if(options("basis")$basis == "QCA") {
+      text(-0.138, -1.031, "< 6 PSU")
+      text(-0.139, -1.060, "> 6 PSU")
+    }
+    if(options("basis")$basis == "QEC") {
+      text(-0.140, -0.724, "< 6 PSU")
+      text(-0.137, -0.747, "> 6 PSU")
+    }
   }
   title("Baltic Sea", font.main = 1, line = 1.2)
   title("surface", font.main = 1, line = 0.2)
   label.figure("(b)", cex = 1.7, xfrac = 0.035)
 
   # plot 3: compare ZC and nH2O of proteins in Baltic Sea 10-20 m
-  plot(c(-0.18, -0.12), c(-1.10, -1.02), xlab = ZClab, ylab = NA, type = "n")
+  plot(c(-0.18, -0.12), ylim, xlab = ZClab, ylab = NA, type = "n")
   mtext(nH2Olab, side = 2, las = 0, line = 3.2, cex = 1.6)
-  # add H2O-ZC guidelines 20200819
-  if(!is.null(lm)) {
-    x <- par("usr")[1:2]
-    y <- predict(lm, data.frame(ZC.aa = x))
-    for(dy in seq(-0.50, -0.60, -0.01)) lines(x, y + dy, col = "gray80")
-    box()
-  }
+  lmlines(lm)
   mbalticd <- ppage("balticdeep", plot.it = FALSE)
   pbalticd <- ppage("balticdeep", H2O = TRUE, plot.it = FALSE)
   pcomp(mbalticd, pbalticd, reorder = FALSE, add = TRUE, labels.at = NA, vars = vars, pch = list(c(17, 17, 17, 17, 19, 19, 19, 19, 19)))
   # add text labels
   if(vars == "H2O-ZC") {
-    text(-0.151, -1.052, "< 6 PSU")
-    text(-0.136, -1.080, "> 6 PSU")
+    if(options("basis")$basis == "QCA") {
+      text(-0.151, -1.052, "< 6 PSU")
+      text(-0.136, -1.080, "> 6 PSU")
+    }
+    if(options("basis")$basis == "QEC") {
+      text(-0.148, -0.73, "< 6 PSU")
+      text(-0.140, -0.75, "> 6 PSU")
+    }
   }
   title("Baltic Sea", font.main = 1, line = 1.2)
   title("chl a max", font.main = 1, line = 0.2)
@@ -320,8 +346,10 @@ gradH2O4 <- function(pdf = FALSE, var = NULL) {
   par(cex.lab = 1.5)
 
   for(i in 1:nvar) {
-    ylim <- NULL
-    if(identical(var[i], "pI")) ylim <- c(5, 7.5)
+    if(identical(var[i], "pI")) ylim <- c(5, 7.5) else {
+      if(options("basis")$basis == "QCA") ylim <- NULL
+      if(options("basis")$basis == "QEC") ylim <- c(-0.785, -0.715)
+    }
     figlab <- c("(a)", "(b)", "(c)")
     if(i==2) figlab <- c("(d)", "(e)", "(f)")
 
@@ -769,7 +797,7 @@ lmlines <- function(lm, step = 0.01) {
   if(!is.null(lm)) {
     x <- par("usr")[1:2]
     y <- predict(lm, data.frame(ZC.aa = x))
-    for(dy in seq(-0.48, -0.66, -step)) lines(x, y + dy, col = "gray80")
+    for(dy in seq(-0.48, -0.74, -step)) lines(x, y + dy, col = "gray80")
     box()
   }
 }
