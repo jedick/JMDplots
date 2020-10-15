@@ -1,0 +1,81 @@
+---
+title: "Pancreatic Cancer"
+output: 
+  rmarkdown::html_vignette:
+    mathjax: null
+vignette: >
+  %\VignetteIndexEntry{Pancreatic Cancer}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+bibliography: data_sources.bib
+csl: ../../vignettes/peerj.csl
+---
+
+This vignette from the R package [JMDplots](https://github.com/jedick/JMDplots) version `r packageDescription("JMDplots")$Version` approximately reproduces calculations of compositional oxidation state and hydration state that are described in a paper published in _PeerJ_ ([Dick, 2017](https://doi.org/10.7717/peerj.3421)).
+The reproduction is not exact because of data updates made in the package after the paper was published.
+
+## Abbreviations
+T (tumor), N (normal), CP (chronic pancreatitis), AIP (autoimmune pancreatitis), PC (pancreatic cancer), DM (diabetes mellitus), PDAC (pancreatic ductal adenocarcinoma), ANT (adjacent normal tissue), FFPE (Formalin-fixed paraffin-embedded), LCM (laser-capture microdissection), NP (normal pancreas).
+
+## Summary Table
+
+This table compares the chemical compositions of groups of human proteins that are relatively down- and up-expressed (`n1` and `n2`, respectively) in pancreatic cancer compared to non-tumor tissue.
+
+```{r options, echo=FALSE}
+options(width = 90)
+```
+
+```{r canprot, message=FALSE}
+library(canprot)
+```
+
+```{r datasets}
+datasets <- pdat_pancreatic(2017)
+```
+
+```{r comptab, message=FALSE, results = "hide"}
+pdat <- lapply(datasets, pdat_pancreatic, basis = "QEC")
+comptab <- lapply(pdat, get_comptab, plot.it = FALSE, mfun = "mean", oldstyle = TRUE)
+```
+
+```{r xsummary, results="asis"}
+library(xtable)
+out <- xsummary(comptab)
+# round values and include dataset tags
+tags <- sapply(sapply(strsplit(datasets, "="), "[", -1), paste, collapse = ";")
+out <- cbind(out[, 1:2], tags = tags, out[, 3:14])
+out[, 6:15] <- round(out[, 6:15], 4)
+write.csv(out, "pancreatic.csv", row.names = FALSE, quote = 2)
+```
+
+## Data Sources
+
+<b>a</b>. Pooled tissue samples of PC and matched normal tissue from 12 patients. Source: Tables 2 and 3 of @LHE+04.
+<b>b</b>. Two PC and two normal pancreas samples. Source: Tables 1 and 2 of @CYD+05.
+<b>c</b>. Large-scale immunoblotting (PowerBlot) of 8 tissue specimens of pancreatic intraepithelial neoplasia compared to normal pancreas and CP. Source: Table 2 of @CGB+05.
+<b>d</b>. Tissue specimens from patients with CP (without any findings of pancreatic cancer) and 10 control specimens from patients with normal pancreas. Source: Table 1 of @CBP+07.
+<b>e</b>. 12 carcinoma samples (PDAC), 12 benign pancreatic adenocarcinomas and 10 normal tissues adjacent to the PDAC primary mass. Source: Table 1 of @CTZ+09.
+<b>f</b>. Source: extracted from Suppl. Table S2 of @MLC+11.
+<b>g</b>. PDAC compared to normal pancreas. Source: Suppl. Table 3 of @PCS+11.
+<b>h</b>. Potentially accessible proteins in fresh samples of PC tumors (three patients) vs normal tissue (two patients with normal pancreas and one with CP). Source: extracted from the SI Table of @TMW+11.
+<b>i</b>. 11 tissue specimens containing >50% cancer and 8 unmatched, uninvolved tissues adjacent to pancreatitis. Source: Suppl. Tables 2 and 3 of @KBK+12.
+<b>j</b>. Fresh-frozen PDAC tissue specimens from 7 patients vs a pooled mixture of 3 normal main pancreatic duct tissue samples. Source: extracted from SI Table S3 of @KHO+13, including proteins with an expression ratio >2 [or <0.5] in at least 5 of the 7 experiments and ratio >1 [or <1] in all experiments.
+<b>k</b>. Frozen samples of PDAC tumors vs adjacent benign tissue from four patients. Source: Suppl. Table 2 of @KPC+13.
+<b>l</b>. <b>m</b>. Tissue samples from 3 patients with PC vs 3 patients with AIP or 3 patients with CP. Source: extracted from Tables 2, 3, and 4 of @PKB+13.
+<b>n</b>. <b>o</b>. 12 samples each (pooled) of low-grade tumor or high-grade tumor vs non-tumor. Source: extracted from Suppl. Tables S4 and S5 of @WLL+13, including proteins with ratios ≥1.5 or ≤0.667 for at least 2 of the 4 groups, and with expression differences for all 4 groups in the same direction.
+<b>p</b>. <b>q</b>. Source: extracted from Suppl. Tables S3 and S4 of @WLL+13a, including proteins with >3/2 or <2/3 fold change in at least 3 of 4 iTRAQ experiments for different pooled samples.
+<b>r</b>. LCM of CD24<sup>+</sup> cells from PDAC vs CD24<sup>-</sup> cells from adjacent normal tissue (ANT). Source: SI Table S5 of @ZNWL13.
+<b>s</b>. Matched PDAC and normal tissue from nine patients. Source: extracted from SI Table S5 of @ISI+14, excluding proteins marked as "not passed", i.e. having inconsistent regulation.
+<b>t</b>. PDAC tumors in transgenic mice vs pancreas in normal mice, analyzed at time points of 2.5, 3.5, 5 and 10 weeks. Source: Suppl. Table of @KKC+16.
+
+## Mean Differences
+
+The datasets comparing chronic pancreatitis or low-grade tumor to normal proteomes are highlighted in red.
+
+```{r diffplot, fig.width=6, fig.height=6, fig.align="center"}
+col <- rep("black", length(datasets))
+col[grepl("=low", datasets)] <- "red"
+diffplot(comptab, col = col, oldstyle = TRUE)
+```
+
+## References

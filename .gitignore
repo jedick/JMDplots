@@ -1,3 +1,4 @@
 vignettes/*.html
 vignettes/*.png
 inst/vignettes/*.html
+inst/extdata/cpcp/*.html

@@ -233,19 +233,19 @@ To see the data references, run e.g. `canprot::mkoldvig("colorectal")`.
 ```{r diffplot, eval = FALSE}
 par(mfrow = c(2, 2), mar = c(4.5, 4.5, 2, 1))
 
-colorectal <- read.csv(system.file("oldvignettes/colorectal.csv", package = "canprot"))
+colorectal <- read.csv(system.file("extdata/cpcp/colorectal.csv", package = "JMDplots"))
 col <- rep("black", nrow(colorectal))
 col[grepl("AD", colorectal$tags)] <- "red"
 diffplot(colorectal, col = col, oldstyle = TRUE, plot.rect = TRUE)
 title("Colorectal cancer", font.main = 1)
 
-pancreatic <- read.csv(system.file("oldvignettes/pancreatic.csv", package = "canprot"))
+pancreatic <- read.csv(system.file("extdata/cpcp/pancreatic.csv", package = "JMDplots"))
 col <- rep("black", nrow(pancreatic))
 col[grepl("low", pancreatic$tags)] <- "red"
 diffplot(pancreatic, col = col, oldstyle = TRUE, plot.rect = TRUE)
 title("Pancreatic cancer", font.main = 1)
 
-hypoxia <- read.csv(system.file("oldvignettes/hypoxia.csv", package = "canprot"))
+hypoxia <- read.csv(system.file("extdata/cpcp/hypoxia.csv", package = "JMDplots"))
 col <- rep("black", nrow(hypoxia))
 col[grepl("ReOx", hypoxia$tags)] <- "blue"
 col[grepl("SPH", hypoxia$tags)] <- "red"
@@ -253,7 +253,7 @@ col[grepl("ASC", hypoxia$tags)] <- "orange"
 diffplot(hypoxia, col = col, oldstyle = TRUE, plot.rect = TRUE)
 title("Hypoxia", font.main = 1)
 
-hyperosmotic <- read.csv(system.file("oldvignettes/hyperosmotic.csv", package = "canprot"))
+hyperosmotic <- read.csv(system.file("extdata/cpcp/hyperosmotic.csv", package = "JMDplots"))
 col <- rep("black", nrow(hyperosmotic))
 col[grepl("ASC", hyperosmotic$tags)] <- "orange"
 diffplot(hyperosmotic, col = col, oldstyle = TRUE, plot.rect = TRUE)

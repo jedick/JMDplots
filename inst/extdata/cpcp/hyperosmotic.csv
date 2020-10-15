@@ -1,0 +1,27 @@
+"dataset","description","tags","n1","n2","ZC.mean1","ZC.mean2","ZC.diff","ZC.CLES","ZC.p.value","nH2O.mean1","nH2O.mean2","nH2O.diff","nH2O.CLES","nH2O.p.value"
+PW08_2h,"_Saccharomyces cerevisiae_ in very high glucose (300 g/L) vs control (20 g/L) for 2 h",,38,44,-0.1467,-0.1567,-0.01,43.8995,0.3452,-0.7046,-0.734,-0.0293,39.2943,0.0969
+PW08_10h,"_Saccharomyces cerevisiae_ in very high glucose (300 g/L) vs control (20 g/L) for 10 h",,33,62,-0.1557,-0.1546,0.0011,50.5376,0.9346,-0.7144,-0.7347,-0.0203,40.3226,0.1227
+PW08_12h,"_Saccharomyces cerevisiae_ in very high glucose (300 g/L) vs control (20 g/L) for 12 h",,18,65,-0.1627,-0.1542,0.0085,56.8376,0.3797,-0.7114,-0.7283,-0.0169,41.8803,0.2964
+WCM+09,"mouse pancreatic islets in 16.7 mM vs 5.6 mM glucose",,63,94,-0.1315,-0.1388,-0.0073,45.9642,0.393,-0.7213,-0.7592,-0.0379,40.358,0.041
+OBBH11,"adipose-derived stem cells in 400 mOsm vs 300 mOsm NaCl",ASC,148,144,-0.1259,-0.1319,-0.006,45.6456,0.1985,-0.7417,-0.7211,0.0205,56.7661,0.0456
+CCC+12_25mM,"retinal pigmented epithelium in 25 mM glucose vs 5.5 mM glucose",,17,11,-0.091,-0.137,-0.046,31.5508,0.1107,-0.7578,-0.8103,-0.0524,34.2246,0.1755
+CCC+12_100mM,"retinal pigmented epithelium in 100 mM glucose vs 5.5 mM glucose",,21,24,-0.1006,-0.1118,-0.0111,47.619,0.7956,-0.7392,-0.7618,-0.0226,42.8571,0.423
+KKG+12_25C_aw0.985,"_Escherichia coli_ in NaCl 25C_aw0.985",,114,61,-0.1382,-0.1365,0.0017,53.2212,0.484,-0.7287,-0.7447,-0.016,44.9669,0.2738
+KKG+12_14C_aw0.985,"_Escherichia coli_ in NaCl 14C_aw0.985",,238,61,-0.138,-0.1462,-0.0082,48.7877,0.7714,-0.7187,-0.7433,-0.0246,41.7068,0.0458
+KKG+12_25C_aw0.967,"_Escherichia coli_ in NaCl 25C_aw0.967",,263,56,-0.1393,-0.1421,-0.0029,47.0668,0.4921,-0.7327,-0.7008,0.0318,59.4582,0.0263
+KKG+12_14C_aw0.967,"_Escherichia coli_ in NaCl 14C_aw0.967",,372,73,-0.1411,-0.1428,-0.0017,48.6412,0.7138,-0.7246,-0.7325,-0.0079,48.295,0.646
+CCCC13_25mM,"Chang liver cells in 25 mM  vs 5.5 mM glucose",,32,39,-0.1007,-0.1151,-0.0144,44.5513,0.4377,-0.7617,-0.7606,0.001,49.359,0.9314
+CCCC13_100mM,"Chang liver cells in 100 mM  vs 5.5 mM glucose",,19,50,-0.1343,-0.1121,0.0222,60.7368,0.1727,-0.7408,-0.7702,-0.0294,39.5789,0.1858
+TSZ+13,"eel gill",,49,28,-0.1372,-0.1369,2e-04,55.3207,0.4451,-0.7404,-0.7664,-0.026,42.5656,0.2844
+GSC14_t30a,"S. cerevisiae in glucose t30a",,78,77,-0.1452,-0.1419,0.0033,53.2468,0.4864,-0.7405,-0.765,-0.0245,41.4918,0.0677
+GSC14_t30b,"S. cerevisiae in glucose t30b",,67,67,-0.1453,-0.1472,-0.0019,49.3874,0.9044,-0.7352,-0.7523,-0.0171,44.5088,0.2737
+GSC14_t30c,"S. cerevisiae in glucose t30c",,87,87,-0.1502,-0.1516,-0.0014,47.4171,0.5573,-0.7543,-0.7687,-0.0144,44.6955,0.2274
+CLG+15,"human conjunctival epithelial cells in 380 or 480 mOsm vs 280 mOsm NaCl",,25,38,-0.1297,-0.1415,-0.0118,40,0.1857,-0.7406,-0.7309,0.0097,53.2632,0.6705
+KLB+15_trans-suc,"_Caulobacter crescentus_ Gene in 200 mM sucrose vs M2 minimal salts medium",transcriptome,105,96,-0.1558,-0.1341,0.0217,63.3631,0.0011,-0.6804,-0.7406,-0.0602,35.2381,3e-04
+KLB+15_trans-NaCl,"_Caulobacter crescentus_ Gene in 40/50 mM NaCl vs M2 minimal salts medium",transcriptome,209,142,-0.144,-0.1365,0.0075,56.2471,0.047,-0.6985,-0.7388,-0.0404,40.5519,0.0027
+KLB+15_prot-suc,"_Caulobacter crescentus_ Protein in 200 mM sucrose vs M2 minimal salts medium",,33,33,-0.1428,-0.1233,0.0194,65.2893,0.0326,-0.6814,-0.7268,-0.0454,35.3535,0.0409
+KLB+15_prot-NaCl,"_Caulobacter crescentus_ Protein in 40/50 mM NaCl vs M2 minimal salts medium",,33,27,-0.1394,-0.121,0.0185,64.7587,0.0511,-0.6804,-0.7203,-0.0399,36.4759,0.0744
+LDB+15_all,"Chinese hamster ovary cells in 15 g/L vs 5 g/L glucose",,294,205,-0.1158,-0.1426,-0.0269,36.4991,0,-0.7431,-0.7628,-0.0197,45.6678,0.0995
+LDB+15_high,"Chinese hamster ovary cells in 15 g/L vs 5 g/L glucose (high)",,66,75,-0.1026,-0.1348,-0.0322,35.3737,0.0028,-0.7578,-0.7603,-0.0025,51.6162,0.7425
+YDZ+15,"_Yarrowia lipolytica_ in 4.21 osmol/kg vs 3.17 osmol/kg NaCl",,14,28,-0.1444,-0.1112,0.0332,61.4796,0.2383,-0.708,-0.7402,-0.0323,42.0918,0.4204
+RBP+16,"_Paracoccidioides lutzii_ in 0.1 M KCl vs medium with no added KCl",,160,141,-0.1281,-0.1261,0.002,52.336,0.4847,-0.7055,-0.7497,-0.0442,35.5142,0

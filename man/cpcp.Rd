@@ -19,13 +19,14 @@ There are no functions for these papers.
   }
 }
 
-\seealso{
-
-The \code{oldvignettes} directory of the \url{../../canprot/doc/index.html}{\pkg{canprot}} package has plots for compositional analysis of differential protein expression from Dick (2017).
-Updated versions of these plots and the underlying datasets are in Dick (2020).
-
+\section{Files in extdata/cpcp}{
+  \describe{
+    \item{\code{colorectal.Rmd}, \code{hyperosmotic.Rmd}, \code{hypoxia.rmd}, \code{pancreatic.Rmd}}{
+      Vignettes showing compositional analysis of differential protein expression, based on Figures 1-2 and Tables 1-4 of Dick (2017).
+      Updated versions of these plots and the underlying datasets are in Dick (2020).
+    }
+  }
 }
-
 
 \references{
 Dick, J. M. (2016) Proteomic indicators of oxidation and hydration state in colorectal cancer. \emph{PeerJ} \bold{4}, e2238. \doi{10.7717/peerj.2238}

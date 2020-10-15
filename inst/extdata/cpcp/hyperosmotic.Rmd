@@ -1,0 +1,77 @@
+---
+title: "Hyperosmotic Stress"
+output: 
+  rmarkdown::html_vignette:
+    mathjax: null
+vignette: >
+  %\VignetteIndexEntry{Hyperosmotic Stress}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+bibliography: data_sources.bib
+csl: ../../vignettes/peerj.csl
+---
+
+This vignette from the R package [JMDplots](https://github.com/jedick/JMDplots) version `r packageDescription("JMDplots")$Version` approximately reproduces calculations of compositional oxidation state and hydration state that are described in a paper published in _PeerJ_ ([Dick, 2017](https://doi.org/10.7717/peerj.3421)).
+The reproduction is not exact because of data updates made in the package after the paper was published.
+
+## Abbreviations
+VHG (very high glucose), ARPE-19 (human retinal pigmented epithelium cells), ECO57 (_Escherichia coli_ O157:H7 Sakai), IOBA-NHC (human conjunctival epithelial cells), CAUCR (_Caulobacter crescentus_), tr. (transcriptome), pr. (proteome), CHO (Chinese hamster ovary cells).
+
+## Summary Table
+
+This table compares the chemical compositions of groups of proteins that are relatively down- and up-expressed (`n1` and `n2`, respectively) in cells grown in hyperosmotic stress compared to control conditions.
+
+```{r options, echo=FALSE}
+options(width = 90)
+```
+
+```{r canprot, message=FALSE}
+library(canprot)
+```
+
+```{r pdat, message=FALSE, results = "hide"}
+datasets <- .pdat_osmotic(2017)
+pdat <- lapply(datasets, .pdat_osmotic, basis = "QEC")
+```
+
+```{r comptab, message=FALSE}
+comptab <- lapply(pdat, get_comptab, plot.it = FALSE, mfun = "mean", oldstyle = TRUE)
+```
+
+```{r xsummary, results="asis"}
+library(xtable)
+out <- xsummary(comptab)
+# round values and include dataset tags
+tags <- sapply(sapply(strsplit(datasets, "="), "[", -1), paste, collapse = ";")
+out <- cbind(out[, 1:2], tags = tags, out[, 3:14])
+out[, 6:15] <- round(out[, 6:15], 4)
+write.csv(out, "hyperosmotic.csv", row.names = FALSE, quote = 2)
+```
+
+## Data Sources
+
+<b>a</b>. <b>b</b>. <b>c</b>. VHG (300 g/L) vs control (20 g/L). The comparisons here use proteins with expression ratios < 0.9 or > 1.1 and with p-values < 0.05. Source: SI Table of @PW08.
+<b>d</b>. 24 h at 16.7 mM vs 5.6 mM glucose. Source: extracted from Suppl. Table ST4 of @WCM+09; including the red- and blue-highlighted rows in the source table (those with ANOVA _p_-value < 0.01), and applying the authors' criterion that proteins be identified by 2 or more unique peptides in at least 4 of the 8 most intense LC-MS/MS runs.
+<b>e</b>. 300 mOsm (control) or 400 mOsm (NaCl treatment). Source: Suppl. Table 1 of @OBBH11.
+<b>f</b>. <b>g</b>. Mannitol-balanced 5.5 (control), 25 or 100 mM ᴅ-glucose media. Source: Table 1 of @CCC+12.
+<b>h</b>. <b>i</b>. <b>j</b>. <b>k</b>. Temperature and NaCl treatment (control: 35 °C, <I>a</I><sub>w</sub> = 0.993). Source: Suppl. Tables S13–S16 of @KKG+12.
+<b>l</b>. <b>m</b>. 5.5 (control), 25 or 100 mM ᴅ-glucose. Source: Table 1 of @CCCC13.
+<b>n</b>. Gill proteome of Japanese eel (<I>Anguilla japonica</I>) adapted to seawater or freshwater. Source: Protein IDs from Suppl. Table 3 and gene names of human orthologs from Suppl. File 4 of @TSZ+13.
+<b>o</b>. <b>p</b>. <b>q</b>. 30 min in YNB (2% glucose) vs YPKG (0.5% glucose) media. Source: extracted from Suppl. Files 3 and 5 of @GSC14, using the authors' criterion of _p_-value <0.05.
+<b>r</b>. 280 (control), 380, or 480 mOsm (NaCl treatment) for 24 h. Source: Table 2 of @CLG+15.
+<b>s</b>. <b>t</b>. <b>u</b>. <b>v</b>. Overnight treatment with a final concentration of 40/50 mM NaCl or 200 mM sucrose vs M2 minimal salts medium plus glucose (control). Source: Additional file Table S2 of @KLB+15.
+<b>w</b>. <b>x</b>. 15 g/L vs 5 g/L (control) glucose at days 0, 3, 6, and 9. The comparisons here use all proteins reported to have expression patterns in Cluster 1 (up) or Cluster 5 (down), or only the proteins with high expression differences (ratio ≤-0.2 or ≥0.2) at all time points. Source: SI Table S4 of @LDB+15.
+<b>y</b>. 4.21 osmol/kg vs 3.17 osmol/kg osmotic pressure (NaCl treatment). Source: Table 1 of @YDZ+15.
+<b>z</b>. 0.1 M KCl (treatment) vs medium with no added KCl (control). Source: Suppl. Tables 2 and 3 of @RBP+16.
+
+## Mean Differences
+
+The dataset for adipose-derived stem cells is highlighted in orange.
+
+```{r diffplot, fig.width=6, fig.height=6, fig.align="center"}
+col <- rep("black", length(datasets))
+col[grepl("=ASC", datasets)] <- "orange"
+diffplot(comptab, col = col, oldstyle = TRUE)
+```
+
+## References
