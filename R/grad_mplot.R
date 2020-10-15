@@ -346,6 +346,8 @@ pcomp <- function(mout, pout, seqtype="MG", vars = NULL, parts=c("plot", "legend
       plot(xlim, ylim, xlab=xlab, ylab=NA, type="n")
       mtext(ylab, side=2, line=yline, las=0, cex = cex.ylab)
     }
+    if(!is.null(labdx)) labdx <- rep(labdx, length.out = length(pout))
+    if(!is.null(labdy)) labdy <- rep(labdy, length.out = length(pout))
     for(ipout in 1:length(pout)) {
       # get study name and change MGP or MTP to MG or MT
       study <- names(pout[ipout])
@@ -438,7 +440,7 @@ pcomp <- function(mout, pout, seqtype="MG", vars = NULL, parts=c("plot", "legend
       if(is.null(labdx)) {
         dx <- pout[[ipout]][["dx"]][[seqtype]]
         if(is.null(dx) | vars!="ZC") dx <- 0
-      } else dx <- labdx
+      } else dx <- labdx[ipout]
       if(is.null(labdy)) {
         dy <- pout[[ipout]][["dy"]][[seqtype]]
         if(is.null(dy) | vars!="ZC") {
@@ -446,7 +448,7 @@ pcomp <- function(mout, pout, seqtype="MG", vars = NULL, parts=c("plot", "legend
           else if(vars=="pIG") dy <- 0.005
           else dy <- 0.003
         }
-      } else dy <- labdy
+      } else dy <- labdy[ipout]
       # add text label
       if(!is.na(labels.at)) {
         if(labels.at=="max") {

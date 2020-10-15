@@ -124,6 +124,10 @@ gradH2O1 <- function(pdf = FALSE) {
   QEC <- AAbasis[AAbasis$abbrv == "CEQ", ]
   text(0.98, 0.06, "QEC", font = 2)
   lines(c(QEC$O2.R2 + 0.004, 0.94), c(QEC$H2O.R2 + 0.004, 0.055))
+  # label MWY 20201015
+  MWY <- AAbasis[AAbasis$abbrv == "MWY", ]
+  points(MWY$O2.R2, MWY$H2O.R2, pch = 19, cex = 0.6, col = 2)
+  text(0.97, 0.002, "MWY")
   title(paste(nbasis, "combinations of basis species"), font.main = 1)
   label.figure("(e)", cex = 1.6, yfrac = 0.94)
 
@@ -230,7 +234,9 @@ gradH2O3 <- function(pdf = FALSE, vars = "H2O-ZC", lm = NULL) {
   lmlines(lm)
   mgradox <- ppage("gradoxGS", plot.it = FALSE)
   pgradox <- ppage("gradoxGS", H2O = TRUE, plot.it = FALSE)
-  pcomp(mgradox, pgradox, reorder = FALSE, add = TRUE, vars = vars, font = 2, labdy = 0.003)
+  if(getOption("basis") == "QCA") {labdx <- NULL; labdy <- 0.003}
+  if(getOption("basis") == "QEC") {labdx <- c(0, 0, -0.0125); labdy <- c(0.003, 0.003, 0.002)}
+  pcomp(mgradox, pgradox, reorder = FALSE, add = TRUE, vars = vars, font = 2, labdx = labdx, labdy = labdy)
   # add proteomes from Nif-encoding genomes 20191014
   np <- NifProteomes()
   if(vars == "H2O-ZC") {
@@ -266,10 +272,12 @@ gradH2O3 <- function(pdf = FALSE, vars = "H2O-ZC", lm = NULL) {
     if(getOption("basis") == "QEC") {
       text(-0.210, -0.7535, "hot spring", cex = 0.8)
       text(-0.210, -0.7565, "source", cex = 0.8)
-      text(-0.160, -0.773, "phototrophic", cex = 0.8)
-      text(-0.160, -0.776, "zone", cex = 0.8)
-      lines(c(-0.160, -0.157), c(-0.771, -0.765))
-      text(-0.135, -0.776, "> 3 mm", cex = 0.8)
+      text(-0.154, -0.773, "phototrophic", cex = 0.8)
+      text(-0.154, -0.776, "zone", cex = 0.8)
+      text(-0.191, -0.767, "photosynthetic", cex = 0.8)
+      text(-0.191, -0.770, "fringe", cex = 0.8)
+      lines(c(-0.156, -0.156), c(-0.771, -0.765))
+      text(-0.131, -0.776, "> 3 mm", cex = 0.8)
       text(-0.129, -0.765, "2 mm", cex = 0.8)
       text(-0.126, -0.757, "1 mm", cex = 0.8)
       text(-0.180, -0.746, "vent fluids", cex = 0.8, srt = -23)
