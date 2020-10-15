@@ -4,7 +4,7 @@
 # pdat_aneuploidy added 20200505
 
 # retrieve protein IDs for differentially expressed genes in TCGA / GTEx [via GEPIA2] 20111123 jmd
-pdat_TCGA <- function(dataset = 2020, basis = getOption("basis")) {
+pdat_TCGA <- function(dataset = 2020) {
   if(identical(dataset, 2020)) {
     return(c(
              "GEPIA2_ACC", "GEPIA2_BLCA", "GEPIA2_BRCA", "GEPIA2_CESC", "GEPIA2_COAD", 
@@ -37,7 +37,7 @@ pdat_TCGA <- function(dataset = 2020, basis = getOption("basis")) {
     dat <- dat[ilog2, ]
     up2 <- dat[, icol] > 0
     dat <- cleanup(dat, "Entry", up2)
-    pcomp <- protcomp(dat$Entry, basis=basis)
+    pcomp <- protcomp(dat$Entry)
   } else stop(paste("TCGA dataset", dataset, "not available"))
   print(paste0("pdat_TCGA: ", description, " [", dataset, "]"))
   # use the up2 from the cleaned-up data, if it exists 20190429
@@ -46,7 +46,7 @@ pdat_TCGA <- function(dataset = 2020, basis = getOption("basis")) {
 }
 
 # retrieve protein IDs for Human Protein Atlas 20111121 jmd
-pdat_HPA <- function(dataset = 2020, basis = getOption("basis")) {
+pdat_HPA <- function(dataset = 2020) {
   if(identical(dataset, 2020)) {
     return(c(
              "HPA19_1", "HPA19_2", "HPA19_3", "HPA19_4", "HPA19_5", "HPA19_6",
@@ -102,7 +102,7 @@ pdat_HPA <- function(dataset = 2020, basis = getOption("basis")) {
     # drop missing proteins
     up2 <- dat[, icancer] - dat[, inormal] >= 2.5
     dat <- cleanup(dat, "Entry", up2)
-    pcomp <- protcomp(dat$Entry, basis=basis)
+    pcomp <- protcomp(dat$Entry)
   } else stop(paste("HPA dataset", dataset, "not available"))
   print(paste0("pdat_HPA: ", description, " [", dataset, "]"))
   # use the up2 from the cleaned-up data, if it exists 20190429
@@ -110,7 +110,7 @@ pdat_HPA <- function(dataset = 2020, basis = getOption("basis")) {
   return(list(dataset=dataset, pcomp=pcomp, up2=up2, description=description))
 }
 
-pdat_aneuploidy <- function(dataset = 2020, basis = getOption("basis")) {
+pdat_aneuploidy <- function(dataset = 2020) {
   if(identical(dataset, 2020)) {
     return("TNC+19")
   }
@@ -126,15 +126,15 @@ pdat_aneuploidy <- function(dataset = 2020, basis = getOption("basis")) {
     dat <- read.csv(paste0(datadir, "TNC+19.csv.xz"), as.is=TRUE)
     description <- "yeast aneuploidy"
     up2 <- dat$log2FoldChange > 0
-    pcomp <- protcomp(dat$Entry, basis, aa_file = paste0(extdatadir, "/aa/yeast/TNC+19_aa.csv.xz"))
+    pcomp <- protcomp(dat$Entry, aa_file = paste0(extdatadir, "/aa/yeast/TNC+19_aa.csv.xz"))
   } else stop(paste("aneuploidy dataset", dataset, "not available"))
   print(paste0("pdat_aneuploidy: ", description, " [", dataset, "]"))
   # use the up2 from the cleaned-up data, if it exists 20190407
   if("up2" %in% colnames(dat)) up2 <- dat$up2
-  return(list(dataset = dataset, basis = basis, pcomp = pcomp, up2 = up2, description = description))
+  return(list(dataset = dataset, pcomp = pcomp, up2 = up2, description = description))
 }
 
-pdat_yeast_stress <- function(dataset = 2020, basis = getOption("basis")) {
+pdat_yeast_stress <- function(dataset = 2020) {
   if(identical(dataset, 2020)) {
     return(c(
       "GSK+00_X1M.sorbitol...5.min", "GSK+00_X1M.sorbitol...15.min", "GSK+00_X1M.sorbitol...30.min", "GSK+00_X1M.sorbitol...45.min",
@@ -165,10 +165,10 @@ pdat_yeast_stress <- function(dataset = 2020, basis = getOption("basis")) {
     dat <- dat[abs(dat[, icol]) > log2(1.5), ]
     up2 <- dat[, icol] > log2(1.5)
     dat <- cleanup(dat, "Entry", up2)
-    pcomp <- protcomp(dat$Entry, basis, aa_file = paste0(extdatadir, "/aa/yeast/GSK+00_aa.csv.xz"))
+    pcomp <- protcomp(dat$Entry, aa_file = paste0(extdatadir, "/aa/yeast/GSK+00_aa.csv.xz"))
   } else stop(paste("yeast_stress dataset", dataset, "not available"))
   print(paste0("pdat_yeast_stress: ", description, " [", dataset, "]"))
   # use the up2 from the cleaned-up data, if it exists 20190407
   if("up2" %in% colnames(dat)) up2 <- dat$up2
-  return(list(dataset = dataset, basis = basis, pcomp = pcomp, up2 = up2, description = description))
+  return(list(dataset = dataset, pcomp = pcomp, up2 = up2, description = description))
 }

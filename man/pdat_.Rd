@@ -7,23 +7,21 @@
 \alias{pdat_yeast_stress}
 \title{Get Protein Expression Data}
 \description{
-  These functions are used to calculate compositional metrics, including carbon oxidation state and stoichiometric hydration state, for differentially expressed proteins or proteins corresponding to differentially expressed genes.
-  See the help page for \code{\link[canprot]{pdat_}} in the \pkg{canprot} package for more information about the calculations and results returned by the \code{pdat_} functions.
-  The default for the \code{basis} option, defined in \pkg{canprot}, is \samp{QCa}.
+  These functions are used to retrieve the amino acid compositions of differentially expressed proteins or proteins corresponding to differentially expressed genes.
+  See the help page for \code{\link[canprot]{pdat_}} in the \pkg{canprot} package for more information about the results returned by the \code{pdat_} functions.
   These functions are used in the \code{\link{canH2O}} paper.
 }
 
 \usage{
-  pdat_TCGA(dataset = 2020, basis = getOption("basis"))
-  pdat_HPA(dataset = 2020, basis = getOption("basis"))
-  pdat_osmotic_gene(dataset = 2020, basis = getOption("basis"))
-  pdat_aneuploidy(dataset = 2020, basis = getOption("basis"))
-  pdat_yeast_stress(dataset = 2020, basis = getOption("basis"))
+  pdat_TCGA(dataset = 2020)
+  pdat_HPA(dataset = 2020)
+  pdat_osmotic_gene(dataset = 2020)
+  pdat_aneuploidy(dataset = 2020)
+  pdat_yeast_stress(dataset = 2020)
 }
 
 \arguments{
   \item{dataset}{character, dataset name}
-  \item{basis}{character, keyword for basis species to use}
 }
 
 \details{

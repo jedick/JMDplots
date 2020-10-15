@@ -37,8 +37,7 @@ options(width = 90)
 ```
 
 ```{r library, echo=FALSE}
-library(canprot)
-library(CHNOSZ)
+library(JMDplots)
 ```
 
 

@@ -34,7 +34,9 @@ export(
   "bison1", "bison2", "bison3", "bison4",
   "bison5", "bison6", "bison7", "bison8",
   # JMDplots package data 20200828
-  "JMDplots"
+  "JMDplots",
+  # cpcp plots 20201015
+  "Ehplot", "rankdiff", "rankplot", "groupplots", "mergedplot", "get_colors"
 )
 
 # imports from CHNOSZ
@@ -57,8 +59,10 @@ importFrom("CHNOSZ",
   "aasum", "add.protein", "label.plot",
   # sixth batch: aaaq
   "water.lines", "pinfo", "ionize.aa",
-  # for bison
-  "revisit"
+  # bison
+  "revisit",
+  # cpcp
+  "palply"
 )
 
 # imports from canprot
@@ -95,15 +99,17 @@ importFrom("ggplot2", "theme_bw", "xlab", "ylab", "geom_hline", "geom_vline", "t
 
 # imports from standard packages
 importFrom("grDevices", "dev.off", "cairo_pdf", "pdf", "blues9", "colorRampPalette",
-           "chull", "col2rgb", "rgb", "colorRamp", "heat.colors", "topo.colors", "extendrange")
+           "chull", "col2rgb", "rgb", "colorRamp", "heat.colors", "topo.colors",
+           "extendrange", "contourLines")
 importFrom("graphics", "abline", "arrows", "axis", "box", "layout",
            "legend", "lines", "mtext", "par", "plot", "plot.new",
            "points", "rect", "text", "title", "smoothScatter", "strheight",
-           "polygon", "hist", "plot.window", "rasterImage")
+           "polygon", "hist", "plot.window", "rasterImage",
+           "contour", "grconvertX", "grconvertY", "image")
 importFrom("stats", "lm", "na.omit", "predict", "sd", "predict.lm", "residuals",
            "qqline", "qqnorm", "quantile", "median", "fivenum",
            "density", "formula", "t.test", "approx", "splinefun", "xtabs",
-           "coefficients")
+           "coefficients", "loess")
 importFrom("utils", "read.csv", "demo", "packageVersion", "tail", "write.csv",
-           "capture.output", "browseURL", "head", "combn")
+           "capture.output", "browseURL", "head", "combn", "read.table")
 

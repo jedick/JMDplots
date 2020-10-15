@@ -15,3 +15,7 @@
 % 20200204
 \newcommand{\nAA}{\ifelse{latex}{\eqn{n_{\mathrm{AA}}}}{\ifelse{html}{\out{<i>n</i><sub>AA</sub>}}{nAA}}}
 \newcommand{\nO2}{\ifelse{latex}{\eqn{n_{\mathrm{O_{2}}}}}{\ifelse{html}{\out{<i>n</i><sub>O<sub>2</sub></sub>}}{nO2}}}
+% 20201015
+\newcommand{\logfO2}{\ifelse{latex}{\eqn{\log f_{\mathrm{O_{2}}}}}{\ifelse{html}{\out{log<i>f</i><sub>O<sub>2</sub></sub>}}{logfO2}}}
+\newcommand{\logaH2O}{\ifelse{latex}{\eqn{\log a_{\mathrm{H_{2}O}}}}{\ifelse{html}{\out{log<i>a</i><sub>H<sub>2</sub>O</sub>}}{logaH2O}}}
+
