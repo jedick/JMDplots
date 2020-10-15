@@ -45,8 +45,8 @@ gradH2O0()
 ```
 
 ## Comparison of different sets of basis species (Figure 1)
-```{r gradH2O1, message = FALSE, fig.align='center', out.width='100%', fig.width = 8, fig.height = 6, pngquant = pngquant}
-lm <- gradH2O1()
+```{r gradH2O1, message = FALSE, fig.align='center', out.width='100%', fig.width = 8, fig.height = 4.3, pngquant = pngquant}
+gradH2O1()
 ```
 
 ## Schematic of `r nH2O` and `r ZC` calculations (Figure 2)
@@ -56,7 +56,7 @@ gradH2O2()
 
 ## `r nH2O`-`r ZC` scatterplots for redox gradients and the Baltic Sea (Figure 3)
 ```{r gradH2O3, message = FALSE, fig.align='center', out.width='100%', fig.width = 12, fig.height = 5.6, pngquant = pngquant}
-gradH2O3(lm = lm)
+gradH2O3()
 ```
 
 ## `r nH2O` for Baltic Sea metagenome and metatranscriptome in different size fractions (Figure 4)
@@ -66,12 +66,12 @@ gradH2O4()
 
 ## `r nH2O`-`r ZC` for freshwater, marine, and hypersaline environments (Figure 5)
 ```{r gradH2O5, message = FALSE, fig.align='center', out.width='100%', fig.width = 8, fig.height = 5, pngquant = pngquant}
-gradH2O5(lm = lm)
+gradH2O5()
 ```
 
 ## `r nH2O`-`r ZC` and GRAVY-pI plots for Baltic Sea and Rodriguez-Brito et al. data (Figure 6)
 ```{r gradH2O6, message = FALSE, fig.align='center', out.width='75%', fig.width = 8, fig.height = 8, pngquant = pngquant}
-gradH2O6(lm = lm)
+gradH2O6()
 ```
 
 ## Differential gene and protein expression; time-course experiments and NaCl or organic solutes (Figure 7)

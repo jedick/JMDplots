@@ -19,10 +19,10 @@ Plots from the paper by Dick et al. (2020).
   gradH2O0()
   gradH2O1(pdf = FALSE)
   gradH2O2(pdf = FALSE)
-  gradH2O3(pdf = FALSE, vars = "H2O-ZC", lm = NULL)
+  gradH2O3(pdf = FALSE, vars = "H2O-ZC")
   gradH2O4(pdf = FALSE, var = NULL)
-  gradH2O5(pdf = FALSE, lm = NULL)
-  gradH2O6(pdf = FALSE, lm = NULL)
+  gradH2O5(pdf = FALSE)
+  gradH2O6(pdf = FALSE)
   gradH2O7(pdf = FALSE)
   NifProteomes()
 }
@@ -30,7 +30,6 @@ Plots from the paper by Dick et al. (2020).
 \arguments{
   \item{pdf}{logical, make a PDF file?}
   \item{vars}{character, variables to plot (passed to \code{\link{pcomp}})}
-  \item{lm}{linear model object (returned by \code{gradH2O1})}
   \item{var}{character, variable to plot (passed to \code{\link{mplot}})}
 }
 
@@ -94,11 +93,9 @@ Rodriguez-Brito, B. et al. (2010) Viral and microbial community dynamics in four
 }
 
 \examples{
-# Make Fig. 1 and save linear model for amino acids
-# (nH2O ~ ZC for amino acids with QCa basis species)
-lm <- gradH2O1()
-# Make Fig. 3 with guidelines parallel to linear model
-gradH2O3(lm = lm)
+# Make Figs. 1 and 2
+gradH2O1()
+gradH2O2()
 
 # list ZC and nH2O of proteomes for Nif-encoding genomes
 NifProteomes()

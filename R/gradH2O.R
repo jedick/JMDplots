@@ -214,7 +214,7 @@ gradH2O2 <- function(pdf = FALSE) {
 }
 
 # nH2O-ZC scatterplots for redox gradients and the Baltic Sea 20190713
-gradH2O3 <- function(pdf = FALSE, vars = "H2O-ZC", lm = NULL) {
+gradH2O3 <- function(pdf = FALSE, vars = "H2O-ZC") {
   if(pdf) pdf("gradH2O3.pdf", width = 12, height = 5.6)
   layout(matrix(c(1, 2, 3), nrow = 1), widths = c(3, 2, 2))
   par(mar = c(3.5, 4.5, 2, 1), las = 1, cex = 1.2)
@@ -231,7 +231,7 @@ gradH2O3 <- function(pdf = FALSE, vars = "H2O-ZC", lm = NULL) {
   # plot 1: compare ZC and nH2O of proteins in datasets from gradox paper
   plot(c(-0.22, -0.12), ylim, xlab = ZClab, ylab = NA, type = "n")
   mtext(nH2Olab, side = 2, las = 0, line = 3.2, cex = 1.6)
-  lmlines(lm)
+  lmlines()
   mgradox <- ppage("gradoxGS", plot.it = FALSE)
   pgradox <- ppage("gradoxGS", H2O = TRUE, plot.it = FALSE)
   if(getOption("basis") == "QCA") {labdx <- NULL; labdy <- 0.003}
@@ -297,7 +297,7 @@ gradH2O3 <- function(pdf = FALSE, vars = "H2O-ZC", lm = NULL) {
   # plot 2: compare ZC and nH2O of proteins in Baltic Sea surface
   plot(c(-0.18, -0.12), ylim, xlab = ZClab, ylab = NA, type = "n")
   mtext(nH2Olab, side = 2, las = 0, line = 3.2, cex = 1.6)
-  lmlines(lm)
+  lmlines()
   mbaltics <- ppage("balticsurface", plot.it = FALSE)
   pbaltics <- ppage("balticsurface", H2O = TRUE, plot.it = FALSE)
   pcomp(mbaltics, pbaltics, reorder = FALSE, add = TRUE, labels.at = NA, vars = vars, pch = list(c(17, 17, 17, 17, 19, 19, 19, 19, 19, 19)))
@@ -319,7 +319,7 @@ gradH2O3 <- function(pdf = FALSE, vars = "H2O-ZC", lm = NULL) {
   # plot 3: compare ZC and nH2O of proteins in Baltic Sea 10-20 m
   plot(c(-0.18, -0.12), ylim, xlab = ZClab, ylab = NA, type = "n")
   mtext(nH2Olab, side = 2, las = 0, line = 3.2, cex = 1.6)
-  lmlines(lm)
+  lmlines()
   mbalticd <- ppage("balticdeep", plot.it = FALSE)
   pbalticd <- ppage("balticdeep", H2O = TRUE, plot.it = FALSE)
   pcomp(mbalticd, pbalticd, reorder = FALSE, add = TRUE, labels.at = NA, vars = vars, pch = list(c(17, 17, 17, 17, 19, 19, 19, 19, 19)))
@@ -400,7 +400,7 @@ gradH2O4 <- function(pdf = FALSE, var = NULL) {
 # make separate plot for sediments 20191006
 # add Amazon River 20191007
 # remove sediments and add GRAVY - pI plots 20191027
-gradH2O5 <- function(pdf = FALSE, lm = NULL) {
+gradH2O5 <- function(pdf = FALSE) {
 
   if(pdf) pdf("gradH2O5.pdf", width = 8, height = 5)
   layout(matrix(1:6, nrow = 2))
@@ -417,7 +417,7 @@ gradH2O5 <- function(pdf = FALSE, lm = NULL) {
   pout <- ppage("amazon", H2O = TRUE, plot.it = FALSE)
   plot(xlim, ylim, xlab = ZClab, ylab = NA, type = "n")
   mtext(nH2Olab, side = 2, las = 0, line = 2.8)
-  lmlines(lm, 0.02)
+  lmlines(0.02)
   pcomp(mout, pout, add = TRUE, lty = 0, labels.at = NA)
   hullfun(mout, pout, c(1, 3), "green3", c("riverFL", "riverPA"))
   hullfun(mout, pout, c(1, 3), "blue", c("plumeFL", "plumePA"))
@@ -451,7 +451,7 @@ gradH2O5 <- function(pdf = FALSE, lm = NULL) {
   # plots 3-4: Amazon river metatranscriptome
   plot(xlim, ylim, xlab = ZClab, ylab = NA, type = "n")
   mtext(nH2Olab, side = 2, las = 0, line = 2.8)
-  lmlines(lm, 0.02)
+  lmlines(0.02)
   pcomp(mout, pout, "MT", add = TRUE, lty = 0, labels.at = NA)
   hullfun(mout, pout, c(2, 4), "green3", c("riverFL", "riverPA"))
   hullfun(mout, pout, c(2, 4), "blue", c("plumeFL", "plumePA"))
@@ -472,7 +472,7 @@ gradH2O5 <- function(pdf = FALSE, lm = NULL) {
   poutE <- ppage("eiler", H2O = TRUE, plot.it = FALSE)
   plot(xlim, ylim, xlab = ZClab, ylab = NA, type = "n")
   mtext(nH2Olab, side = 2, las = 0, line = 2.8)
-  lmlines(lm, 0.02)
+  lmlines(0.02)
   pcomp(moutE, poutE, add = TRUE, lty = 0, labels.at = NA)
   hullfun(moutE, poutE, 1, "green3")
   hullfun(moutE, poutE, 2, "blue")
@@ -511,7 +511,7 @@ gradH2O5 <- function(pdf = FALSE, lm = NULL) {
 }
 
 # nH2O-ZC and GRAVY-pI plots for Baltic Sea and Rodriguez-Brito et al. data 20200421
-gradH2O6 <- function(pdf = FALSE, lm = NULL) {
+gradH2O6 <- function(pdf = FALSE) {
   if(pdf) pdf("gradH2O6.pdf", width = 8, height = 8)
   layout(matrix(1:4, nrow = 2))
   par(mar = c(4, 4.5, 2, 1), las = 1, cex = 1.2)
@@ -526,7 +526,7 @@ gradH2O6 <- function(pdf = FALSE, lm = NULL) {
   pout <- ppage("balticsurface", H2O = TRUE, plot.it = FALSE)
   plot(c(-0.2, -0.08), ylim, xlab = ZClab, ylab = NA, type = "n")
   mtext(nH2Olab, side = 2, las = 0, line = 3.2, cex = 1.5)
-  lmlines(lm, 0.02)
+  lmlines(0.02)
   pcomp(mout, pout, add = TRUE, reorder = FALSE, font = 2, labdy = 0.003, labels.at = NA)
   if(getOption("basis") == "QCa") text(c(-0.128, -0.128), c(-1.035, -1.075), c("< 6 PSU", "> 6 PSU"))
   if(getOption("basis") == "QEC") text(c(-0.128, -0.128), c(-0.725, -0.753), c("< 6 PSU", "> 6 PSU"))
@@ -543,7 +543,7 @@ gradH2O6 <- function(pdf = FALSE, lm = NULL) {
   pout <- ppage("socal", H2O = TRUE, plot.it = FALSE)
   plot(c(-0.2, -0.08), ylim, xlab = ZClab, ylab = NA, type = "n")
   mtext(nH2Olab, side = 2, las = 0, line = 3.2, cex = 1.5)
-  lmlines(lm, 0.02)
+  lmlines(0.02)
   pcomp(mout, pout, add = TRUE, reorder = FALSE, font = 2, labdy = 0.003, labels.at = NA)
   if(getOption("basis") == "QCa") text(c(-0.185, -0.185, -0.155), c(-1.08, -1.06, -1.035), c("FW", "LS", "MS-HS"))
   if(getOption("basis") == "QEC") text(c(-0.185, -0.128, -0.125), c(-0.76, -0.755, -0.725), c("FW", "LS", "MS-HS"))
@@ -825,12 +825,30 @@ plotbasisfun <- function(zoom = FALSE) {
   points(O2, H2O, cex = cex, col = col, pch = 19)
 }
 
-# add nH2O-ZC guidelines 20200819
-lmlines <- function(lm, step = 0.01) {
-  if(!is.null(lm)) {
-    x <- par("usr")[1:2]
-    y <- predict(lm, data.frame(ZC.aa = x))
-    for(dy in seq(-0.48, -0.74, -step)) lines(x, y + dy, col = "gray80")
-    box()
+# Add nH2O-ZC guidelines parallel to regression for amino acids 20200819
+lmlines <- function(step = 0.01) {
+  if(FALSE) {
+    # Calculate ZC of the amino acids
+    aa <- aminoacids("")
+    ZC.aa <- ZC(info(aa, "aq"))
+    # Load amino acids with QCa or QEC basis 20200914
+    if(getOption("basis") == "QCa") basis(c("glutamine", "cysteine", "acetic acid", "H2O", "O2"))
+    if(getOption("basis") == "QEC") basis(c("glutamine", "glutamic acid", "cysteine", "H2O", "O2"))
+    species(aa)
+    # Make linear regression
+    lm <- lm(species()$H2O ~ ZC.aa)
+    coef <- coef(lm)
+    # Clear species!
+    reset()
+  } else {
+    # Use previously computed intercept and slope 20200920
+    if(getOption("basis") == "QCa") coef <- c(-0.4830396, 0.1579203)
+    if(getOption("basis") == "QEC") coef <- c(-0.1242780, -0.3088251)
   }
+  x <- par("usr")[1:2]
+  y <- coef[1] + coef[2] * x
+  for(dy in seq(-0.48, -0.74, -step)) lines(x, y + dy, col = "gray80")
+  # Add box so ends of lines don't cover plot edges 20201007
+  box()
 }
+
