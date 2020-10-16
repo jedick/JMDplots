@@ -82,7 +82,9 @@ importFrom("canprot",
   # for pdat_osmotic_gene() 20200421
   "pdat_osmotic_euk",
   # for canH2O5() 20200505, 20200508
-  "qdist", "cplab"
+  "qdist", "cplab",
+  # for canH2OS1() 20201016
+  "O2AA"
 )
 
 # imports from other packages

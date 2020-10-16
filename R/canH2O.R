@@ -124,16 +124,16 @@ canH2O1 <- function(pdf = FALSE) {
   cantext <- c(cantext1, cantext2, cantext3)
   textplain(pos[25, ] + c(0.105, 0.24), lab = cantext, height = 0.05, font = 4)
 
-  textplain(pos[27, ] + c(0.16, 0.08), lab = "Other findings", font = 2)
+  textplain(pos[27, ] + c(0.16, 0.07), lab = "Other findings", font = 2)
   hyptext1 <- quote(italic("Hypoxia experiments show no consistent"))
   hyptext2 <- quote(italic("difference in oxidation state of proteins."))
   hyptext <- as.expression(c(hyptext1, hyptext2))
-  textplain(pos[26, ] + c(0.26, 0.02), lab = hyptext, height = 0.04)
+  textplain(pos[26, ] + c(0.265, 0.005), lab = hyptext, height = 0.04)
 
   hydtext1 <- quote(italic("Most hyperosmotic stress and 3D vs 2D culture"))
   hydtext2 <- quote(italic("experiments yield lower hydration state of proteins."))
   hydtext <- as.expression(c(hydtext1, hydtext2))
-  textplain(pos[26, ] + c(0.29, -0.07), lab = hydtext, height = 0.04)
+  textplain(pos[26, ] + c(0.21, -0.08), lab = hydtext, height = 0.04)
 
   # make overview plot
   plot.new()
@@ -144,8 +144,8 @@ canH2O1 <- function(pdf = FALSE) {
   mtext("oxidation state", 1, 0.5)
   mtext("hydration state", 2, 0.5)
   # draw arrows to mean values, muliplied by a constant to scale to (-1, 1) axis range
-  for(i in 5:1) arrows(0, 0, 32*mean(culture[[i]]$ZC.diff), 32*mean(culture[[i]]$nH2O.diff), col = col1[i], lwd = 3, length = 0.15)
-  for(i in 1:6) arrows(0, 0, 32*mean(cancer[[i]]$ZC.diff), 32*mean(cancer[[i]]$nH2O.diff), col = col2[i], lwd = 3, length = 0.15)
+  for(i in 5:1) arrows(0, 0, 40*mean(culture[[i]]$ZC.diff), 40*mean(culture[[i]]$nH2O.diff), col = col1[i], lwd = 3, length = 0.15)
+  for(i in 1:6) arrows(0, 0, 40*mean(cancer[[i]]$ZC.diff), 40*mean(cancer[[i]]$nH2O.diff), col = col2[i], lwd = 3, length = 0.15)
 
   # restore these defaults to be able to re-run this script with expected results
   par(xaxs = "r", yaxs = "r")
@@ -239,14 +239,14 @@ canH2O2 <- function(pdf = FALSE) {
   cancer <- lapply(cond2, conddat); names(cancer) <- cond2
   names <- names(culture)
   names[3] <- "salt"
-  contplot(culture, "Cell culture", col1, xlim = c(-0.06, 0.06), ylim = c(-0.07, 0.07),
-           dx = c(0.030, 0.028, -0.006, 0.030, -0.026), dy = c(-0.035, 0.005, -0.050, -0.043, -0.03), names = names)
-  lines(c(0.015, 0.002), c(-0.063, -0.051))
+  contplot(culture, "Cell culture", col1,
+           dx = c(0.038, 0.030, -0.03, 0.0042, -0.026), dy = c(0.025, -0.054, 0.025, -0.036, -0.02), names = names)
+  lines(c(0.0147, 0.024), c(0.0035, 0.016))
+  lines(c(-0.0255, -0.0158), c(0.0143, 0.013))
   label.figure("C", cex = 2, font = 2, xfrac = 0.02, yfrac = 0.9)
-  contplot(cancer, "Cancer tissue", col2, xlim = c(-0.06, 0.06), ylim = c(-0.07, 0.07),
-           dx = c(-0.020, NA, 0.025, -0.025, 0.018, -0.020), dy = c(-0.047, NA, 0.035, 0.043, -0.037, 0.024))
-  text(0.051, 0.036, "CRC", col = col2[2])
-  lines(c(0.042, 0.027), c(0.036, 0.025))
+  contplot(cancer, "Cancer tissue", col2,
+           dx = c(-0.020, NA, 0.022, -0.023, 0.030, -0.024), dy = c(-0.028, NA, 0.027, 0.038, -0.035, 0.025))
+  text(0.0085, -0.02, "CRC", col = col2[2])
 
   if(pdf) {
     dev.off()
@@ -482,26 +482,25 @@ canH2OT1 <- function() {
   out
 }
 
-# Comparison of QCa and QEC basis species 20200817
-# rQEC (residual-corrected nH2O with QEC basis) 20190713
+# nO2-ZC and nH2O-ZC correlations using QEC basis species 20201016
 canH2OS1 <- function(pdf = FALSE) {
   # set up figure
-  if(pdf) pdf("canH2OS1.pdf", width = 7, height = 2.33)
-  par(mfrow = c(1, 3))
-  par(mar = c(3.3, 3.3, 1, 1))
-  par(mgp = c(2.2, 0.7, 0))
+  if(pdf) pdf("canH2OS1.pdf", width = 7, height = 3.5)
+  par(mfrow = c(1, 2))
+  par(mar = c(3.5, 3.5, 1, 1))
+  par(mgp = c(2.5, 0.7, 0))
   par(las = 1)
   par(cex.lab = 1.2)
 
   # define axis labels
-  nH2Olab.QEC <- expression(italic(n)[H[2] * O]~"(QEC)")
-  nH2Olab.QCa <- expression(italic(n)[H[2] * O]~"(QCa)")
+  nH2Olab <- expression(italic(n)[H[2] * O])
+  nO2lab <- expression(italic(n)[O[2]])
   ZClab <- expression(italic(Z)[C])
 
   # function to plot values for amino acids
   aaplot <- function(x, y, xlab, ylab, legend.x, lmlim = c(-1, 1)) {
     plot(x, y, type = "p", pch = aminoacids(1), xlab = xlab, ylab = NA)
-    mtext(ylab, side = 2, line = 1.7, las = 0)
+    mtext(ylab, side = 2, line = 2.4, las = 0, cex = 1.2)
     lmfun(x, y, legend.x, lmlim)
   }
 
@@ -509,22 +508,17 @@ canH2OS1 <- function(pdf = FALSE) {
   AAcomp <- as.data.frame(diag(20))
   names(AAcomp) <- aminoacids(3)
 
-  # plot 1: nH2O-ZC of amino acids (QEC)
-  # subtract 1 to make residues
-  aaplot(ZCAA(AAcomp), H2OAA(AAcomp, "QEC"), ZClab, nH2Olab.QEC, "bottomright")
+  # plot 1: nO2-ZC of amino acids
+  aaplot(ZCAA(AAcomp), O2AA(AAcomp, "QEC"), ZClab, nO2lab, "bottomright")
   label.figure("A", cex = 1.7, font = 2)
 
-  # plot 2: nH2O-ZC of amino acids (QCa)
-  aaplot(ZCAA(AAcomp), H2OAA(AAcomp, "QCa"), ZClab, nH2Olab.QCa, "bottomright")
+  # plot 2: nH2O-ZC of amino acids
+  aaplot(ZCAA(AAcomp), H2OAA(AAcomp, "QEC"), ZClab, nH2Olab, "bottomright")
   label.figure("B", cex = 1.7, font = 2)
-
-  # plot 3: nH2O (QCa) - nH2O (QEC) of amino acids
-  aaplot(H2OAA(AAcomp, "QEC"), H2OAA(AAcomp, "QCa"), nH2Olab.QEC, nH2Olab.QCa, "bottomright", NULL)
-  label.figure("C", cex = 1.7, font = 2)
 
   if(pdf) {
     dev.off()
-    addexif("canH2OS1", "Comparison of QCa and QEC basis species", "Dick (2020) (preprint)")
+    addexif("canH2OS1", "nO2-ZC and nH2O-ZC correlations using QEC basis species", "Dick (2020) (preprint)")
   }
 }
 
@@ -636,7 +630,7 @@ HTmap <- c(
 ############################
 
 # function to plot 50 percentile contours / extracted from canH2O2 20191201
-contplot <- function(dat, main, col, xvar = "ZC", yvar = "nH2O", xlim = c(-0.04, 0.04), ylim = c(-0.05, 0.05), dx = NULL, dy = NULL,
+contplot <- function(dat, main, col, xvar = "ZC", yvar = "nH2O", dx = NULL, dy = NULL,
                      labtext = NULL, names = NULL) {
   xlab <- canprot::cplab[[paste0("D", strsplit(xvar, "_")[[1]][1])]]
   ylab <- canprot::cplab[[paste0("D", strsplit(yvar, "_")[[1]][1])]]
@@ -644,7 +638,7 @@ contplot <- function(dat, main, col, xvar = "ZC", yvar = "nH2O", xlim = c(-0.04,
     xlab <- substitute(xlab ~ "("*labtext*")", list(xlab = xlab[[1]], labtext = labtext))
     ylab <- substitute(ylab ~ "("*labtext*")", list(ylab = ylab[[1]], labtext = labtext))
   }
-  plot(xlim, ylim, xlab = xlab, ylab = ylab, type = "n")
+  plot(c(-0.06, 0.06), c(-0.06, 0.06), xlab = xlab, ylab = ylab, type = "n")
   abline(h = 0, v = 0, lty = 3, col = "grey30")
   if(is.null(dx)) dx <- rep(0, length(dat))
   if(is.null(dy)) dy <- rep(0, length(dat))

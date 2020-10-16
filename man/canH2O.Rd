@@ -41,9 +41,8 @@ This table gives a brief description of each function.
   \code{canH2O4} \tab Differentially expressed genes in aneuploid and osmotically shocked yeast cells \cr
   \code{canH2OT1} \tab Stoichiometric matrix for amino acids with QEC basis species \cr
   \code{canH2OT2} \tab Mean differences and \emph{p}-values for all datasets in each condition \cr
-  \code{canH2OS1} \tab Comparison of QCa and QEC basis species \cr
+  \code{canH2OS1} \tab \nO2-\ZC and \nH2O-\ZC correlations using QEC basis species \cr
   \code{canH2OS2} \tab HPA-TCGA scatterplots for \ZC and \nH2O \cr
-  \code{canH2OS3} \tab Scatterplots of hypoxia scores and \ZC or \nH2O for TCGA or HPA datasets \cr
 }
 }
 
