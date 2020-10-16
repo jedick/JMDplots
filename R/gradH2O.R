@@ -234,7 +234,7 @@ gradH2O3 <- function(pdf = FALSE, vars = "H2O-ZC") {
   lmlines()
   mgradox <- ppage("gradoxGS", plot.it = FALSE)
   pgradox <- ppage("gradoxGS", H2O = TRUE, plot.it = FALSE)
-  if(getOption("basis") == "QCA") {labdx <- NULL; labdy <- 0.003}
+  if(getOption("basis") == "QCa") {labdx <- NULL; labdy <- 0.003}
   if(getOption("basis") == "QEC") {labdx <- c(0, 0, -0.0125); labdy <- c(0.003, 0.003, 0.002)}
   pcomp(mgradox, pgradox, reorder = FALSE, add = TRUE, vars = vars, font = 2, labdx = labdx, labdy = labdy)
   # add proteomes from Nif-encoding genomes 20191014
@@ -252,7 +252,7 @@ gradH2O3 <- function(pdf = FALSE, vars = "H2O-ZC") {
   }
   # add text labels
   if(vars == "H2O-ZC") {
-    if(getOption("basis") == "QCA") {
+    if(getOption("basis") == "QCa") {
       text(-0.213, -1.0885, "hot spring", cex = 0.8, srt = 12)
       text(-0.213, -1.091, "source", cex = 0.8, srt = 12)
       text(-0.172, -1.062, "phototrophic", cex = 0.8, srt = 12)
@@ -303,7 +303,7 @@ gradH2O3 <- function(pdf = FALSE, vars = "H2O-ZC") {
   pcomp(mbaltics, pbaltics, reorder = FALSE, add = TRUE, labels.at = NA, vars = vars, pch = list(c(17, 17, 17, 17, 19, 19, 19, 19, 19, 19)))
   # add text labels
   if(vars == "H2O-ZC") {
-    if(getOption("basis") == "QCA") {
+    if(getOption("basis") == "QCa") {
       text(-0.138, -1.031, "< 6 PSU")
       text(-0.139, -1.060, "> 6 PSU")
     }
@@ -325,7 +325,7 @@ gradH2O3 <- function(pdf = FALSE, vars = "H2O-ZC") {
   pcomp(mbalticd, pbalticd, reorder = FALSE, add = TRUE, labels.at = NA, vars = vars, pch = list(c(17, 17, 17, 17, 19, 19, 19, 19, 19)))
   # add text labels
   if(vars == "H2O-ZC") {
-    if(getOption("basis") == "QCA") {
+    if(getOption("basis") == "QCa") {
       text(-0.151, -1.052, "< 6 PSU")
       text(-0.136, -1.080, "> 6 PSU")
     }
@@ -355,7 +355,7 @@ gradH2O4 <- function(pdf = FALSE, var = NULL) {
 
   for(i in 1:nvar) {
     if(identical(var[i], "pI")) ylim <- c(5, 7.5) else {
-      if(getOption("basis") == "QCA") ylim <- NULL
+      if(getOption("basis") == "QCa") ylim <- NULL
       if(getOption("basis") == "QEC") ylim <- c(-0.785, -0.715)
     }
     figlab <- c("(a)", "(b)", "(c)")
@@ -421,7 +421,7 @@ gradH2O5 <- function(pdf = FALSE) {
   pcomp(mout, pout, add = TRUE, lty = 0, labels.at = NA)
   hullfun(mout, pout, c(1, 3), "green3", c("riverFL", "riverPA"))
   hullfun(mout, pout, c(1, 3), "blue", c("plumeFL", "plumePA"))
-  if(getOption("basis") == "QCA") {
+  if(getOption("basis") == "QCa") {
     text(c(-0.129, -0.132), c(-1.055, -1.095), c("river", "plume"))
     rect(-0.20, -1.05, -0.18, -0.995, col = "white", border = NA)
     rect(-0.20, -1.038, -0.10, -0.995, col = "white", border = NA)
@@ -455,7 +455,7 @@ gradH2O5 <- function(pdf = FALSE) {
   pcomp(mout, pout, "MT", add = TRUE, lty = 0, labels.at = NA)
   hullfun(mout, pout, c(2, 4), "green3", c("riverFL", "riverPA"))
   hullfun(mout, pout, c(2, 4), "blue", c("plumeFL", "plumePA"))
-  if(getOption("basis") == "QCA") text(c(-0.125, -0.12), c(-1.035, -1.073), c("river", "plume"))
+  if(getOption("basis") == "QCa") text(c(-0.125, -0.12), c(-1.035, -1.073), c("river", "plume"))
   if(getOption("basis") == "QEC") text(c(-0.166, -0.122), c(-0.745, -0.774), c("river", "plume"))
   title("Amazon River metatranscriptomes", font.main = 1)
   label.figure("(b)", xfrac = 0.1, cex = 1.8)
@@ -481,7 +481,7 @@ gradH2O5 <- function(pdf = FALSE) {
   poutH <- ppage("hypersaline", H2O = TRUE, plot.it = FALSE)
   pcomp(moutH, poutH, reorder = FALSE, add = TRUE, labdx = 0.006, labdy = 0.004)
   hullfun(moutH, poutH, 1:3, "turquoise3")
-  if(getOption("basis") == "QCA") {
+  if(getOption("basis") == "QCa") {
     text(c(-0.18, -0.148, -0.10), c(-1.042, -1.095, -1.088), c("freshwater", "marine", "hypersaline"))
     rect(-0.148, -1.15, -0.076, -1.11, col = "white", border = NA)
   }
@@ -640,7 +640,7 @@ gradH2O7 <- function(pdf = FALSE) {
   comptab <- cbind(comptab, logtime = log10(Ptime))
   DnH2O(comptab, ndat, pch = 22, pt.text = c("a", "b", "c", "l", "m"), col = 4)
   legend("topleft", c("transcriptomic", "proteomic"), pch = c(21, 22), col = c(1, 4), pt.cex = 1.5, bty = "n")
-  label.figure("(a)", cex = 1.8, yfrac = 0.9)
+  label.figure("(a)", cex = 1.8)
   mtext("Time-course experiments", line = 1)
 
   # plot B: NaCl or organic solutes
@@ -676,7 +676,7 @@ gradH2O7 <- function(pdf = FALSE) {
   Psolute <- c(0, 1, 0, 1) + 0.05
   comptab <- cbind(comptab, solute = Psolute)
   DnH2O(comptab, ndat, pch = 22, pt.text = c("E", "F", "O", "P"), column = "solute", arrows = FALSE, col = 4)
-  label.figure("(b)", cex = 1.8, yfrac = 0.9)
+  label.figure("(b)", cex = 1.8)
   mtext("NaCl or organic solutes", line = 1)
 
   # Plot C: transcriptomes nH2O-ZC

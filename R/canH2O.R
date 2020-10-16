@@ -245,8 +245,8 @@ canH2O2 <- function(pdf = FALSE) {
   lines(c(-0.0255, -0.0158), c(0.0143, 0.013))
   label.figure("C", cex = 2, font = 2, xfrac = 0.02, yfrac = 0.9)
   contplot(cancer, "Cancer tissue", col2,
-           dx = c(-0.020, NA, 0.022, -0.023, 0.030, -0.024), dy = c(-0.028, NA, 0.027, 0.038, -0.035, 0.025))
-  text(0.0085, -0.02, "CRC", col = col2[2])
+           dx = c(-0.019, NA, 0.022, -0.022, 0.030, -0.025), dy = c(-0.028, NA, 0.027, 0.038, -0.035, 0.023))
+  text(0.009, -0.021, "CRC", col = col2[2])
 
   if(pdf) {
     dev.off()
