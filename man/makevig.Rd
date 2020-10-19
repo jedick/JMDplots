@@ -18,7 +18,7 @@ This function compiles the indicated vignette and opens it in the browser.
 This function builds and views the vignettes for compositional analysis of differential expression datasets.
 In order to reduce package building time, these are not included in the pre-built vignettes of the package.
 
-The available vignettes are \samp{TCGA}, \samp{HPA}, and \samp{osmotic_gene}.
+The available vignettes are \samp{TCGA}, \samp{HPA}, \samp{osmotic_gene}, and \samp{yeast_stress}.
 
 Note that pandoc (including pandoc-citeproc), as a system dependency of \pkg{rmarkdown}, must be installed.
 See \pkg{rmarkdown}'s \samp{pandoc} vignette for installation tips.

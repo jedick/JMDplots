@@ -386,7 +386,7 @@ canH2O4 <- function(pdf = FALSE) {
   axis(1, at = 1:7, labels = c(5, 15, 30, 45, 60, 90, 120))
   lines(1:7, yeast_stress$nH2O.diff[ihyper], pch = 1, type = "b")
   lines(1:5, yeast_stress$nH2O.diff[ihypo], pch = 0, type = "b")
-  text(c(2.2, 2.8), c(-0.038, 0.028), c("hyperosmotic", "hypoosmotic"))
+  text(c(2.2, 2.8), c(-0.036, 0.024), c("hyperosmotic", "hypoosmotic"))
   label.figure("D", xfrac = 0.04, yfrac = 1, font = 2, cex = 1.5)
   if(pdf) {
     dev.off()

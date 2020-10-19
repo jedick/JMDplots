@@ -16,7 +16,11 @@ makevig <- function(vig = NULL) {
   htmlfile <- tempfile(pattern = paste0(vig, "_"), fileext = ".html")
   # compile the vignette and open it in the browser
   rmarkdown::render(vigfile, output_file = htmlfile, knit_root_dir = vigdir)
+  # set 'browser' option so vignettes open under Rstudio 20201019
+  # https://stackoverflow.com/questions/62536479/the-command-exams2html-does-not-generate-html-page-when-it-is-run-from-rstudio
+  if(.Platform$OS.type == "windows") oldopt <- options(browser = NULL)
   browseURL(htmlfile)
+  if(.Platform$OS.type == "windows") options(oldopt)
   # return the path of html file
   htmlfile
 }
