@@ -106,7 +106,7 @@ gradH2O1 <- function(pdf = FALSE) {
   aaplot(ZC.aa, species()$H2O, nH2Olab, "bottomright", "", "(c)")
   # Plot 4: nO2-ZC of amino acids (QEC)
   aaplot(ZC.aa, species()$O2, nO2lab, "bottomright", "", "(d)", 0.04)
-  mtext(quote(list(glutamine, "glutamic acid", cysteine, H[2]*O, O[2])~"("*bold(QEC)*")     "), line = 0.5, adj = 1, cex = 0.8)
+  mtext(quote(list(Glutamine, "glutamic acid", cysteine, H[2]*O, O[2])~"("*bold(QEC)*")     "), line = 0.5, adj = 1, cex = 0.8)
 
   # Plot 5: R2 of nH2O-ZC and nO2-ZC fits
   par(mar = c(4, 4.7, 2.5, 1))
@@ -404,7 +404,7 @@ gradH2O5 <- function(pdf = FALSE) {
 
   if(pdf) pdf("gradH2O5.pdf", width = 8, height = 5)
   layout(matrix(1:6, nrow = 2))
-  par(las = 1, mar = c(4, 4.2, 2, 1), mgp = c(2.5, 1, 0))
+  par(las = 1, mar = c(4, 4.2, 2, 1), mgp = c(2.5, 0.8, 0))
   par(cex.lab = 1.5)
   xlim <- c(-0.2, -0.08)
   if(getOption("basis") == "QCa") ylim <- c(-1.15, -1)
@@ -416,7 +416,7 @@ gradH2O5 <- function(pdf = FALSE) {
   mout <- ppage("amazon", plot.it = FALSE)
   pout <- ppage("amazon", H2O = TRUE, plot.it = FALSE)
   plot(xlim, ylim, xlab = ZClab, ylab = NA, type = "n")
-  mtext(nH2Olab, side = 2, las = 0, line = 2.8)
+  mtext(nH2Olab, side = 2, las = 0, line = 2.9)
   lmlines(0.02)
   pcomp(mout, pout, add = TRUE, lty = 0, labels.at = NA)
   hullfun(mout, pout, c(1, 3), "green3", c("riverFL", "riverPA"))
@@ -431,8 +431,8 @@ gradH2O5 <- function(pdf = FALSE) {
   }
   if(getOption("basis") == "QEC") {
     text(c(-0.128, -0.130), c(-0.755, -0.775), c("river", "plume"))
-    rect(-0.181, -0.733, -0.09, par("usr")[4] - 0.0002, col = "white", border = NA)
-    rect(-0.11, -0.737, -0.094, par("usr")[4] - 0.0002, col = "white", border = NA)
+    rect(-0.181, -0.733, -0.09, par("usr")[4] - 0.0003, col = "white", border = NA)
+    rect(-0.11, -0.737, -0.094, par("usr")[4] - 0.0003, col = "white", border = NA)
     legend("topright", legend = c(NA, NA), pch = c(21, 22), col = "green3", pt.cex = c(0.7, 1), bty = "n", inset = c(0.1, 0))
     legend("topright", legend = c(NA, NA), pch = c(20, 15), col = "blue", bty = "n", inset = c(0.17, 0))
     legend("topright", c("free-living", "particle-associated"), adj = 1, bty = "n", inset = c(-0.2, 0))
@@ -450,7 +450,7 @@ gradH2O5 <- function(pdf = FALSE) {
 
   # plots 3-4: Amazon river metatranscriptome
   plot(xlim, ylim, xlab = ZClab, ylab = NA, type = "n")
-  mtext(nH2Olab, side = 2, las = 0, line = 2.8)
+  mtext(nH2Olab, side = 2, las = 0, line = 2.9)
   lmlines(0.02)
   pcomp(mout, pout, "MT", add = TRUE, lty = 0, labels.at = NA)
   hullfun(mout, pout, c(2, 4), "green3", c("riverFL", "riverPA"))
@@ -471,7 +471,7 @@ gradH2O5 <- function(pdf = FALSE) {
   moutE <- ppage("eiler", plot.it = FALSE)
   poutE <- ppage("eiler", H2O = TRUE, plot.it = FALSE)
   plot(xlim, ylim, xlab = ZClab, ylab = NA, type = "n")
-  mtext(nH2Olab, side = 2, las = 0, line = 2.8)
+  mtext(nH2Olab, side = 2, las = 0, line = 2.9)
   lmlines(0.02)
   pcomp(moutE, poutE, add = TRUE, lty = 0, labels.at = NA)
   hullfun(moutE, poutE, 1, "green3")
@@ -487,7 +487,7 @@ gradH2O5 <- function(pdf = FALSE) {
   }
   if(getOption("basis") == "QEC") {
     text(c(-0.158, -0.183), c(-0.726, -0.758), c("freshwater", "marine"))
-    rect(-0.148, par("usr")[3] + 0.0002, par("usr")[2] - 0.0005, -0.779, col = "white", border = NA)
+    rect(-0.148, par("usr")[3] + 0.0003, par("usr")[2] - 0.0004, -0.779, col = "white", border = NA)
   }
   legend("bottomright", c("lower salinity", "higher salinity"), pch = c(0, 15), col = "turquoise3", bty = "n")
   legend("bottomright", c("hypersaline datasets", "", ""), bty = "n")
@@ -664,6 +664,8 @@ gradH2O7 <- function(pdf = FALSE) {
   Tsolute[1] <- Tsolute[1] + 0.08
   Tsolute[4] <- Tsolute[4] - 0.1
   Tsolute[8] <- Tsolute[8] + 0.1
+  Tsolute[11] <- Tsolute[11] + 0.1
+  Tsolute[13] <- Tsolute[13] - 0.1
   comptab <- cbind(comptab, solute = Tsolute)
   DnH2O(comptab, ndat, pt.text = LETTERS[1:sum(ndat)], column = "solute", arrows = FALSE)
   # proteomic data
