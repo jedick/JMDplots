@@ -479,7 +479,7 @@ gradH2O5 <- function(pdf = FALSE) {
   # add hypersaline water data
   moutH <- ppage("hypersaline", plot.it = FALSE)
   poutH <- ppage("hypersaline", H2O = TRUE, plot.it = FALSE)
-  pcomp(moutH, poutH, reorder = FALSE, add = TRUE, labdx = 0.006, labdy = 0.004)
+  pcomp(moutH, poutH, reorder = FALSE, add = TRUE, labdx = c(-0.002, 0.030, 0.056), labdy = c(-0.005, -0.011, 0.004))
   hullfun(moutH, poutH, 1:3, "turquoise3")
   if(getOption("basis") == "QCa") {
     text(c(-0.18, -0.148, -0.10), c(-1.042, -1.095, -1.088), c("freshwater", "marine", "hypersaline"))
