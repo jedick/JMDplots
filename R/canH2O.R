@@ -473,8 +473,6 @@ canH2OT1 <- function() {
   basis("QEC")
   species(aminoacids(""))
   out <- species()[, c(9, 1:5)]
-  # subtract 1 H2O to make residues
-  out$H2O <- out$H2O - 1
   # adjustments for pretty kable output
   rownames(out) <- out[, 1]
   out <- out[, -1]
@@ -504,7 +502,7 @@ canH2OS1 <- function(pdf = FALSE) {
     lmfun(x, y, legend.x, lmlim)
   }
 
-  # set up amino acid compositions to get compositional values for residues
+  # set up amino acid compositions (one amino acid per composition)
   AAcomp <- as.data.frame(diag(20))
   names(AAcomp) <- aminoacids(3)
 
