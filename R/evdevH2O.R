@@ -325,7 +325,8 @@ evdevH2O4 <- function(pdf = FALSE) {
   par(mar = c(4, 4, 1, 1), las = 1, mgp = c(3, 0.8, 0))
 
   # Read the overall amino acid compositions calculated from Futo et al., 2020 data
-  aa <- read.csv("FOK+20_overall.csv", as.is = TRUE)
+  datadir <- system.file("extdata/evdevH2O", package = "JMDplots")
+  aa <- read.csv(file.path(datadir, "FOK+20_mean_aa.csv"), as.is = TRUE)
   # Identify rows with transcriptome and proteome data
   isT <- aa$organism == "transcriptome"
   isP <- aa$organism == "proteome"
@@ -366,8 +367,8 @@ evdevH2O4 <- function(pdf = FALSE) {
 
   # Plot D: logaH2O
   par(mgp = c(2.8, 0.8, 0))
-  T_H2O <- read.csv("transcriptome_H2O.csv", as.is = TRUE)[, -1]
-  P_H2O <- read.csv("proteome_H2O.csv", as.is = TRUE)[, -1]
+  T_H2O <- read.csv(file.path(datadir, "transcriptome_H2O.csv"), as.is = TRUE)[, -1]
+  P_H2O <- read.csv(file.path(datadir, "proteome_H2O.csv"), as.is = TRUE)[, -1]
   # Get mean values of logaH2O
   T_meanH2O <- colMeans(T_H2O)
   P_meanH2O <- colMeans(P_H2O)
@@ -381,8 +382,8 @@ evdevH2O4 <- function(pdf = FALSE) {
   label.figure("D", cex = 1.5, xfrac = 0.025)
 
   # Plot E: logfO2
-  T_O2 <- read.csv("transcriptome_O2.csv", as.is = TRUE)[, -1]
-  P_O2 <- read.csv("proteome_O2.csv", as.is = TRUE)[, -1]
+  T_O2 <- read.csv(file.path(datadir, "transcriptome_O2.csv"), as.is = TRUE)[, -1]
+  P_O2 <- read.csv(file.path(datadir, "proteome_O2.csv"), as.is = TRUE)[, -1]
   # Get mean values of logfO2
   T_meanO2 <- colMeans(T_O2)
   P_meanO2 <- colMeans(P_O2)
@@ -424,6 +425,7 @@ evdevH2O5 <- function(pdf = FALSE) {
   par(mfrow = c(1, 2), font.lab = 2, las = 1)
 
   # Developmental time points and water content values from Fig. 4 of Church and Robertson, 1966
+  # doi:10.1002/jez.1401620309
   # Hours 110, 120, 130 are for P1, P2, Adult
   Hours <- c(13.47, 17.4, 23.6, 30.5, 36.17, 48.05, 53.82, 60.02, 72.64, 84.06, 95.17, 103.95, 110, 120, 130)
   Water <- c(79.57, 75.23, 75.33, 81.69, 82.4, 82.81, 76.81, 76.77, 79.58, 76.19, 76.1, 76.01, 66.72, 66.38, 72.04)
@@ -437,7 +439,8 @@ evdevH2O5 <- function(pdf = FALSE) {
   label.figure("A", cex = 1.6)
 
   # Read mean amino acid compositions for developmental time points
-  aa <- read.csv("CBS+17_mean_aa.csv", as.is = TRUE)
+  datadir <- system.file("extdata/evdevH2O", package = "JMDplots")
+  aa <- read.csv(file.path(datadir, "CBS+17_mean_aa.csv"), as.is = TRUE)
   # Plot nH2O
   plot(H2OAA(aa), type = "b", xaxt = "n", xlab = "Developmental stage", ylab = nH2Olab, cex = 1.5)
   labels <- gsub("p", "P", gsub("e", "E", aa$protein))
@@ -471,7 +474,7 @@ optimal_activity <- function(dataset = "TPPG17", seed = 1:100) {
   } else if(dataset %in% c("transcriptome", "proteome")) {
     xlab <- paste("Biofilm", dataset)
     # Read amino acid compositions of overall proteins in each biofilm stage
-    aa <- read.csv("FOK+20_overall.csv")
+    aa <- read.csv("FOK+20_mean_aa.csv")
     aa <- aa[aa$organism == dataset, ]
     names <- aa$protein
     # Load overall proteins

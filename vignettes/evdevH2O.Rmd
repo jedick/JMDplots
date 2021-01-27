@@ -7,6 +7,8 @@ vignette: >
   %\VignetteIndexEntry{Water loss in evo-devo (2021)}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
+bibliography: JMDplots.bib
+csl: elementa.csl
 ---
 
 <style>
@@ -48,6 +50,7 @@ options(width = 40)
 ```{r HTML, include=FALSE}
 logfO2 <- "log<i>f</i><sub>O<sub>2</sub></sub>"
 logaH2O <- "log<i>a</i><sub>H<sub>2</sub>O</sub>"
+nH2O <- "<i>n</i><sub>H<sub>2</sub>O</sub>"
 ```
 
 ```{r library, message = FALSE, results = "hide"}
@@ -59,20 +62,35 @@ basis <- getOption("basis")
 This vignette contains plots from the paper by [<span title="Redox potential linked to water loss from proteins in evolution and development">Dick (2021)</span>](evdevH2O.html).
 This vignette was compiled on `r Sys.Date()` with **[JMDplots](https://github.com/jedick/JMDplots)** `r packageDescription("JMDplots")$Version`.
 
-Phylostrata are from [<span title="Altered interactions between unicellular and multicellular genes drive hallmarks of transformation in a diverse range of solid tumors">Trigos et al., 2017</span>](https://doi.org/10.1073/pnas.1617743114).
-Consensus gene ages are from [<span title="Towards consensus gene ages ">Liebeskind et al, 2016</span>](https://doi.org/10.1093/gbe/evw113).
+Phylostrata are from @TPPG17.
+Consensus gene ages are from @LMM16.
 
 ## Compositional analysis of Trigos and Liebeskind datasets (Figure 1)
-```{r evdevH2O1, message = FALSE, results = "hide", out.width='100%', fig.width = 10, fig.height = 5, out.extra='class="full-width"', pngquant = pngquant}
+```{r evdevH2O1, message = FALSE, results = "hide", out.width='100%', fig.width = 10, fig.height = 5, out.extra='class="full-width"', pngquant = pngquant, dpi = 100}
 evdevH2O1()
 ```
 
 ## Thermodynamic analysis of optimal `r logaH2O` and `r logfO2` for target proteins (Figure 2)
-```{r evdevH2O2, message = FALSE, results = "hide", out.width='100%', fig.width = 7, fig.height = 3, out.extra='class="full-width"', pngquant = pngquant}
+```{r evdevH2O2, message = FALSE, results = "hide", out.width='100%', fig.width = 7, fig.height = 3, out.extra='class="full-width"', pngquant = pngquant, dpi = 100}
 evdevH2O2()
 ```
 
 ## Optimal `r logaH2O` and `r logfO2` and effective Eh for target proteins (Figure 3)
-```{r evdevH2O3, message = FALSE, results = "hide", out.width='100%', fig.width = 8, fig.height = 5, out.extra='class="full-width"', pngquant = pngquant}
+```{r evdevH2O3, message = FALSE, results = "hide", out.width='100%', fig.width = 8, fig.height = 5, out.extra='class="full-width"', pngquant = pngquant, dpi = 100}
 evdevH2O3()
 ```
+
+## Compositional and thermodynamic analysis of *B. subtilis* biofilm transcriptome and proteome (Figure 4)
+Transcriptomic and proteomic data are from @FOK+20.
+```{r evdevH2O4, message = FALSE, results = "hide", out.width='100%', fig.width = 7, fig.height = 4.5, pngquant = pngquant, dpi = 100}
+evdevH2O4()
+```
+
+## Organismal water content and proteomic `r nH2O` for fruit fly development (Figure 5)
+Whole-organism water content is from @CR66.
+Stoichiometric hydration state of proteins is calculated in this study using proteomic data from @CBS+17.
+```{r evdevH2O5, message = FALSE, results = "hide", out.width='100%', fig.width = 12, fig.height = 5, pngquant = pngquant, dpi = 100}
+evdevH2O5()
+```
+
+## References

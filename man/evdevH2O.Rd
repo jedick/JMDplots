@@ -4,6 +4,8 @@
 \alias{evdevH2O1}
 \alias{evdevH2O2}
 \alias{evdevH2O3}
+\alias{evdevH2O4}
+\alias{evdevH2O5}
 \alias{optimal_activity}
 \title{Plots from water loss in evo-devo paper}
 \description{
@@ -14,6 +16,8 @@ Plots from the paper by Dick (2021).
   evdevH2O1(pdf = FALSE)
   evdevH2O2(pdf = FALSE)
   evdevH2O3(pdf = FALSE)
+  evdevH2O4(pdf = FALSE)
+  evdevH2O5(pdf = FALSE)
   optimal_activity(dataset = "TPPG17", seed = 1:100)
 }
 
@@ -30,6 +34,8 @@ This table gives a brief description of each plotting function.
   \code{evdevH2O1} \tab Compositional analysis of Trigos and Liebeskind datasets \cr
   \code{evdevH2O2} \tab Thermodynamic analysis of optimal \logaH2O and \logfO2 for target proteins \cr
   \code{evdevH2O3} \tab Optimal \logaH2O and \logfO2 and effective Eh for target proteins \cr
+  \code{evdevH2O4} \tab Compositional and thermodynamic analysis of \emph{B. subtilis} biofilm transcriptome and proteome \cr
+  \code{evdevH2O5} \tab Organismal water content and proteomic \nH2O for fruit fly development \cr
 }
 
 \code{optimal_activity} is used to compute the optimal \logaH2O and \logfO2 that maximize the equilibrium activity of target proteins against a background of proteins in the human proteome.
@@ -49,9 +55,14 @@ The target proteins are obtained as the mean amino acid compositions for protein
     \item{\code{[dataset]_O2.csv}}{Optimal values of \logfO2 for each random seed.}
     \item{\code{*.png}}{Plots showing optimal values of \logfO2 and \logaH2O (gray lines) and their means (thick red line).}
   }
+
+  Two other files, \code{FOK+20_mean_aa.csv} and \code{CBS+17_mean_aa.csv}, contain mean amino acid compositions of proteins computed using datasets for developmental transcriptomes and proteomes in B. subtilis biofilms (Futo et al., 2020) and proteomes in fruit flies (Casas-Vila et al., 2017).
+  These files are used in \code{evdevH2O4} and \code{evdevH2O5}.
 }
 
 \references{
+Casas-Vilas, N. et al. (2017) The developmental proteome of \emph{Drosophila melanogaster}. \emph{Genome Res.} \bold{27}, 1273--1285. \doi{10.1101/gr.213694.116}
+
 Dick, J. M. (2021) Redox potential linked to water loss from proteins in evolution and developent. (Preprint)
 
 Futo, M. et al. (2020) Embryo-like features in developing \emph{Bacillus subtilis} biofilms. \emph{Mol. Biol. Evol.} \bold{38}, 31--47. \doi{10.1093/molbev/msaa217}
