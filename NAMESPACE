@@ -38,7 +38,7 @@ export(
   # cpcp plots 20201015
   "Ehplot", "rankdiff", "rankplot", "groupplots", "mergedplot", "get_colors",
   # evdevH2O paper 20210127
-  "evdevH2O1", "evdevH2O2"
+  "evdevH2O1", "evdevH2O2", "evdevH2O3", "optimal_activity"
 )
 
 # imports from CHNOSZ

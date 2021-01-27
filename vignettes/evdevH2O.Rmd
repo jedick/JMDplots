@@ -67,7 +67,12 @@ Consensus gene ages are from [<span title="Towards consensus gene ages ">Liebesk
 evdevH2O1()
 ```
 
-## Strategy for finding optimal `r logaH2O` and `r logfO2` for model proteins (Figure 2)
+## Thermodynamic analysis of optimal `r logaH2O` and `r logfO2` for target proteins (Figure 2)
 ```{r evdevH2O2, message = FALSE, results = "hide", out.width='100%', fig.width = 7, fig.height = 3, out.extra='class="full-width"', pngquant = pngquant}
 evdevH2O2()
+```
+
+## Optimal `r logaH2O` and `r logfO2` and effective Eh for target proteins (Figure 3)
+```{r evdevH2O3, message = FALSE, results = "hide", out.width='100%', fig.width = 8, fig.height = 5, out.extra='class="full-width"', pngquant = pngquant}
+evdevH2O3()
 ```

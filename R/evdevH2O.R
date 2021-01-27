@@ -72,7 +72,7 @@ evdevH2O1 <- function(pdf = FALSE) {
   }
 }
 
-# Strategy for finding optimal logaH2O and logfO2 for PS model proteins 20201219
+# Thermodynamic analysis of optimal logaH2O and logfO2 for target proteins 20201219
 evdevH2O2 <- function(pdf = FALSE) {
 
   if(pdf) pdf("evdevH2O2.pdf", width = 7, height = 3)
@@ -178,12 +178,12 @@ evdevH2O2 <- function(pdf = FALSE) {
 
   if(pdf) {
     dev.off()
-    addexif("evdevH2O2", "Strategy for finding optimal logaH2O and logfO2 for PS model proteins", "Dick (2021) (preprint)")
+    addexif("evdevH2O2", "Thermodynamic analysis of optimal logaH2O and logfO2 for target proteins", "Dick (2021) (preprint)")
   }
 
 }
 
-# Optimal logaH2O and logfO2 for phylostrata and calculated Eh 20201218
+# Optimal logaH2O and logfO2 and effective Eh for target proteins 20201218
 evdevH2O3 <- function(pdf = FALSE) {
 
   # Setup plot
@@ -198,8 +198,11 @@ evdevH2O3 <- function(pdf = FALSE) {
   plotfun <- function(PS_source, fig.lab) {
 
     # Read results
-    H2O <- read.csv(paste0(PS_source, "_H2O.csv"), as.is = TRUE, check.names = FALSE)
-    O2 <- read.csv(paste0(PS_source, "_O2.csv"), as.is = TRUE, check.names = FALSE)
+    datadir <- system.file("extdata/evdevH2O", package = "JMDplots")
+    H2Ofile <- file.path(datadir, paste0(PS_source, "_H2O.csv"))
+    O2file <- file.path(datadir, paste0(PS_source, "_O2.csv"))
+    H2O <- read.csv(H2Ofile, as.is = TRUE, check.names = FALSE)
+    O2 <- read.csv(O2file, as.is = TRUE, check.names = FALSE)
     # Get phylostrata
     iPS <- 2:ncol(H2O)
     PS <- as.numeric(colnames(H2O)[iPS])
@@ -309,7 +312,7 @@ evdevH2O3 <- function(pdf = FALSE) {
 
   if(pdf) {
     dev.off()
-    addexif("evdevH2O3", "Optimal logaH2O and logfO2 for phylostrata and calculated Eh", "Dick (2021) (preprint)")
+    addexif("evdevH2O3", "Optimal logaH2O and logfO2 and effective Eh for target proteins", "Dick (2021) (preprint)")
   }
 }
 
@@ -450,90 +453,6 @@ evdevH2O5 <- function(pdf = FALSE) {
   }
 }
 
-############################
-### UNEXPORTED FUNCTIONS ###
-############################
-
-# Mean ZC and nH2O of phylostrata 20191122
-plotphylo <- function(vars = c("ZC", "nH2O"), PS_source = "TPPG17", memo = NULL, xlab = "PS") {
-  if(is.null(memo)) {
-    dat <- read.csv(system.file("extdata/phylostrata/TPPG17.csv.xz", package = "canprot"), as.is = TRUE)
-    if(PS_source == "LMM16") {
-      dat <- read.csv(system.file("extdata/phylostrata/LMM16.csv.xz", package = "canprot"), as.is = TRUE)
-      colnames(dat)[c(1,3)] <- c("Entry", "Phylostrata")
-      # remove entries that have ENSP instead of UniProt IDs
-      dat <- dat[!grepl("^ENSP", dat$Entry), ]
-    }
-    dat <- check_IDs(dat, "Entry")
-    dat <- cleanup(dat, "Entry")
-    pcomp <- protcomp(dat$Entry)
-  } else {
-    dat <- memo$dat
-    pcomp <- memo$pcomp
-  }
-  # Use metric functions (H2OAA, ZCAA) because protcomp no longer returns these values 20201216
-  nH2O <- H2OAA(pcomp$aa)
-  ZC <- ZCAA(pcomp$aa)
-  nAA <- protein.length(pcomp$aa)
-  # get mean ZC and nH2O for each phylostratum
-  PS <- sort(unique(dat$Phylostrata))
-  cum.ZC <- cum.nH2O <- cum.nAA <- mean.ZC <- mean.nH2O <- mean.nAA <- numeric()
-  for(p in PS) {
-    # point mean
-    mean.ZC <- c(mean.ZC, mean(ZC[dat$Phylostrata == p]))
-    mean.nH2O <- c(mean.nH2O, mean(nH2O[dat$Phylostrata == p]))
-    mean.nAA <- c(mean.nAA, mean(nAA[dat$Phylostrata == p]))
-    # cumulative mean
-    cum.ZC <- c(cum.ZC, mean(ZC[dat$Phylostrata <= p]))
-    cum.nH2O <- c(cum.nH2O, mean(nH2O[dat$Phylostrata <= p]))
-    cum.nAA <- c(cum.nAA, mean(nAA[dat$Phylostrata <= p]))
-  }
-  if("ZC" %in% vars) {
-    plot(PS, mean.ZC, type = "b", xlab = xlab, ylab = ZClab, font.lab = 2)
-    lines(PS, cum.ZC, col = 2, lty = 2)
-  }
-  if("nH2O" %in% vars) {
-    plot(PS, mean.nH2O, type = "b", xlab = xlab, ylab = nH2Olab, font.lab = 2)
-    lines(PS, cum.nH2O, col = 2, lty = 2)
-  }
-  if("nAA" %in% vars) {
-    plot(PS, mean.nAA, type = "b", xlab = xlab, ylab = nAAlab, font.lab = 2)
-    lines(PS, cum.nAA, col = 2, lty = 2)
-  }
-  # return the dat and pcomp for memoization 20191211
-  invisible(list(dat = dat, pcomp = pcomp))
-}
-
-# Get mean amino acid composition for each phylostratum 20201219
-getphyloaa <- function(PS_source) {
-  dat <- read.csv(system.file(paste0("extdata/phylostrata/", PS_source, ".csv.xz"), package = "canprot"), as.is = TRUE)
-  if(PS_source == "LMM16") {
-    colnames(dat)[c(1,3)] <- c("Entry", "Phylostrata")
-    # remove entries that have ENSP instead of UniProt IDs
-    dat <- dat[!grepl("^ENSP", dat$Entry), ]
-  }
-  dat <- check_IDs(dat, "Entry")
-  dat <- cleanup(dat, "Entry")
-  pcomp <- protcomp(dat$Entry)
-  # Set up blank amino acid data frame
-  PS <- sort(unique(dat$Phylostrata))
-  aa <- thermo()$protein[rep(1, length(PS)), ]
-  aa$protein <- PS
-  aa$organism <- PS_source
-  aa$ref <- aa$abbrv <- NA
-  aa$chains <- 1
-  aa[, 6:25] <- 0
-  # Loop over phylostrata
-  for(i in seq_along(PS)) {
-    iPS <- dat$Phylostrata == PS[i]
-    aaPS <- pcomp$aa[iPS, ]
-    aamean <- colMeans(aaPS[, 6:25])
-    aa[i, 6:25] <- aamean
-  }
-  # Return both the mean compositions (aa) and all proteins (pcomp)
-  list(aa = aa, pcomp = pcomp)
-}
-
 # Calculate optimal logaH2O and logfO2 for phylostrata 20201218
 # Make it work for B. subtilis biofilm dataset (Futo et al., 2020) 20201221
 optimal_activity <- function(dataset = "TPPG17", seed = 1:100) {
@@ -624,6 +543,91 @@ optimal_activity <- function(dataset = "TPPG17", seed = 1:100) {
   write.csv(outO2, paste0(dataset, "_O2.csv"), row.names = FALSE, quote = FALSE)
   write.csv(outH2O, paste0(dataset, "_H2O.csv"), row.names = FALSE, quote = FALSE)
   savePlot(paste0(gsub(" ", "_", xlab), ".png"))
+}
+
+
+############################
+### UNEXPORTED FUNCTIONS ###
+############################
+
+# Mean ZC and nH2O of phylostrata 20191122
+plotphylo <- function(vars = c("ZC", "nH2O"), PS_source = "TPPG17", memo = NULL, xlab = "PS") {
+  if(is.null(memo)) {
+    dat <- read.csv(system.file("extdata/phylostrata/TPPG17.csv.xz", package = "canprot"), as.is = TRUE)
+    if(PS_source == "LMM16") {
+      dat <- read.csv(system.file("extdata/phylostrata/LMM16.csv.xz", package = "canprot"), as.is = TRUE)
+      colnames(dat)[c(1,3)] <- c("Entry", "Phylostrata")
+      # remove entries that have ENSP instead of UniProt IDs
+      dat <- dat[!grepl("^ENSP", dat$Entry), ]
+    }
+    dat <- check_IDs(dat, "Entry")
+    dat <- cleanup(dat, "Entry")
+    pcomp <- protcomp(dat$Entry)
+  } else {
+    dat <- memo$dat
+    pcomp <- memo$pcomp
+  }
+  # Use metric functions (H2OAA, ZCAA) because protcomp no longer returns these values 20201216
+  nH2O <- H2OAA(pcomp$aa)
+  ZC <- ZCAA(pcomp$aa)
+  nAA <- protein.length(pcomp$aa)
+  # get mean ZC and nH2O for each phylostratum
+  PS <- sort(unique(dat$Phylostrata))
+  cum.ZC <- cum.nH2O <- cum.nAA <- mean.ZC <- mean.nH2O <- mean.nAA <- numeric()
+  for(p in PS) {
+    # point mean
+    mean.ZC <- c(mean.ZC, mean(ZC[dat$Phylostrata == p]))
+    mean.nH2O <- c(mean.nH2O, mean(nH2O[dat$Phylostrata == p]))
+    mean.nAA <- c(mean.nAA, mean(nAA[dat$Phylostrata == p]))
+    # cumulative mean
+    cum.ZC <- c(cum.ZC, mean(ZC[dat$Phylostrata <= p]))
+    cum.nH2O <- c(cum.nH2O, mean(nH2O[dat$Phylostrata <= p]))
+    cum.nAA <- c(cum.nAA, mean(nAA[dat$Phylostrata <= p]))
+  }
+  if("ZC" %in% vars) {
+    plot(PS, mean.ZC, type = "b", xlab = xlab, ylab = ZClab, font.lab = 2)
+    lines(PS, cum.ZC, col = 2, lty = 2)
+  }
+  if("nH2O" %in% vars) {
+    plot(PS, mean.nH2O, type = "b", xlab = xlab, ylab = nH2Olab, font.lab = 2)
+    lines(PS, cum.nH2O, col = 2, lty = 2)
+  }
+  if("nAA" %in% vars) {
+    plot(PS, mean.nAA, type = "b", xlab = xlab, ylab = nAAlab, font.lab = 2)
+    lines(PS, cum.nAA, col = 2, lty = 2)
+  }
+  # return the dat and pcomp for memoization 20191211
+  invisible(list(dat = dat, pcomp = pcomp))
+}
+
+# Get mean amino acid composition for each phylostratum 20201219
+getphyloaa <- function(PS_source) {
+  dat <- read.csv(system.file(paste0("extdata/phylostrata/", PS_source, ".csv.xz"), package = "canprot"), as.is = TRUE)
+  if(PS_source == "LMM16") {
+    colnames(dat)[c(1,3)] <- c("Entry", "Phylostrata")
+    # remove entries that have ENSP instead of UniProt IDs
+    dat <- dat[!grepl("^ENSP", dat$Entry), ]
+  }
+  dat <- check_IDs(dat, "Entry")
+  dat <- cleanup(dat, "Entry")
+  pcomp <- protcomp(dat$Entry)
+  # Set up blank amino acid data frame
+  PS <- sort(unique(dat$Phylostrata))
+  aa <- thermo()$protein[rep(1, length(PS)), ]
+  aa$protein <- PS
+  aa$organism <- PS_source
+  aa$ref <- aa$abbrv <- NA
+  aa$chains <- 1
+  aa[, 6:25] <- 0
+  # Loop over phylostrata
+  for(i in seq_along(PS)) {
+    iPS <- dat$Phylostrata == PS[i]
+    aaPS <- pcomp$aa[iPS, ]
+    aamean <- colMeans(aaPS[, 6:25])
+    aa[i, 6:25] <- aamean
+  }
+  # Return both the mean compositions (aa) and all proteins (pcomp)
+  list(aa = aa, pcomp = pcomp)
 }
 
 
@@ -733,4 +737,3 @@ function (x = seq(0, 1, length.out = nrow(z)),
 	plot.title
     invisible(par.orig)
 }
-
