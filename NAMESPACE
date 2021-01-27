@@ -38,7 +38,8 @@ export(
   # cpcp plots 20201015
   "Ehplot", "rankdiff", "rankplot", "groupplots", "mergedplot", "get_colors",
   # evdevH2O paper 20210127
-  "evdevH2O1", "evdevH2O2", "evdevH2O3", "evdevH2O4", "evdevH2O5", "optimal_activity"
+  "evdevH2O1", "evdevH2O2", "evdevH2O3", "evdevH2O4", "evdevH2O5",
+  "optimal_activity", "logK_example"
 )
 
 # imports from CHNOSZ
@@ -64,7 +65,9 @@ importFrom("CHNOSZ",
   # bison
   "revisit",
   # cpcp
-  "palply"
+  "palply",
+  # evdevH2O
+  "protein.OBIGT"
 )
 
 # imports from canprot
@@ -115,6 +118,6 @@ importFrom("stats", "lm", "na.omit", "predict", "sd", "predict.lm", "residuals",
            "qqline", "qqnorm", "quantile", "median", "fivenum",
            "density", "formula", "t.test", "approx", "splinefun", "xtabs",
            "coefficients", "loess")
-importFrom("utils", "read.csv", "demo", "packageVersion", "tail", "write.csv",
+importFrom("utils", "read.csv", "demo", "tail", "write.csv",
            "capture.output", "browseURL", "head", "combn", "read.table")
 

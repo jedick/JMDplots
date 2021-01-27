@@ -54,7 +54,7 @@ Plot (E) is a composite figure in which the intensity of shading corresponds to 
 <div id="D-bugstab" style="display: none">
 ```{r bugstab, eval = FALSE}
 # to reproduce the calculations in the paper, use superseded data for [Gly] and [UPBB] 20190206
-if(packageVersion("CHNOSZ") > "1.3.6") add.OBIGT("OldAA", c("[Gly]", "[UPBB]")) else add.obigt("OldAA", c("[Gly]", "[UPBB]"))
+add.OBIGT("OldAA", c("[Gly]", "[UPBB]"))
 # set up graphics device
 layout(cbind(matrix(sapply(list(c(1, 2), c(3, 4)), function(x) rep(rep(x, each=3), 3)), nrow=6, byrow=TRUE),
              matrix(rep(c(0, 5, 5, 5, 5, 0), each=4), nrow=6, byrow=TRUE)))

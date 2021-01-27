@@ -7,6 +7,7 @@
 \alias{evdevH2O4}
 \alias{evdevH2O5}
 \alias{optimal_activity}
+\alias{logK_example}
 \title{Plots from water loss in evo-devo paper}
 \description{
 Plots from the paper by Dick (2021).
@@ -19,6 +20,7 @@ Plots from the paper by Dick (2021).
   evdevH2O4(pdf = FALSE)
   evdevH2O5(pdf = FALSE)
   optimal_activity(dataset = "TPPG17", seed = 1:100)
+  logK_example()
 }
 
 \arguments{
@@ -44,6 +46,8 @@ The subsampling is performed for each random seed in \code{seed} and the results
 A PNG file with plots for each dataset is also created.
 The \code{dataset} can be one of \samp{TPPG17} (phylostrata from Trigos et al., 2017), \samp{LMM16} (gene ages from Liebeskind et al., 2016), \samp{transcriptome} or \samp{proteome} (Futo et al., 2020).
 The target proteins are obtained as the mean amino acid compositions for proteins classified in particular phylostrata or gene ages, or identified in particular stages of biofilm development; the latter means are weighted by gene or protein expression values.
+
+\code{logK_example} prints the formation reaction, Gibbs energy, and affinity for an example protein (LYSC_CHICK).
 
 }
 

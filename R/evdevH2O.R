@@ -548,6 +548,37 @@ optimal_activity <- function(dataset = "TPPG17", seed = 1:100) {
   savePlot(paste0(gsub(" ", "_", xlab), ".png"))
 }
 
+# Example of protein formation reaction, Gibbs energy, and affinity 20210115
+logK_example <- function() {
+  ip <- pinfo("LYSC_CHICK")
+  pl <- protein.length(ip)
+
+  # Calculate the per-residue formula, rounded to 3 decimal places
+  residue.formula <- round(protein.formula(ip) / pl, 3)
+  # Format it as a text object
+  formula <- as.chemical.formula(residue.formula)
+  # Calculate per-residue ΔGf° at 25 °C and 1 bar
+  G <- suppressMessages(protein.OBIGT(ip)$G / pl)
+  # Add the residue as a new species
+  ires <- suppressMessages(mod.OBIGT("LYSC_residue", formula = formula, G = G))
+
+  # Calculate properties of formation reaction from QEC basis species
+  basis("QEC")
+  sres <- suppressMessages(subcrt(ires, 1, T = 25))
+
+  # Print results
+  message("Per-residue chemical formula of LYSC_CHICK")
+  print(formula)
+  message("Stoichiometry of formation reaction")
+  print(sres$reaction[, 1:3])
+  message("Equilibrium constant of formation reaction (25 \u00B0C, 1 bar)")
+  print(round(sres$out$logK, 2))
+
+  # Sanity check: we get the same equilibrium constant starting with the whole formula
+  logK.prot <- suppressMessages(subcrt("LYSC_CHICK", 1, T = 25)$out$logK)
+  logK.res <- logK.prot / pl
+  stopifnot(all.equal(sres$out$logK, logK.res, tol = 0.01, scale = 1))
+}
 
 ############################
 ### UNEXPORTED FUNCTIONS ###

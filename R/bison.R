@@ -3,7 +3,7 @@
 # Code moved from CHNOSZ/vignettes/hotspring.Rnw 20200712
 
 # This is used in the vignette to reproduce the 2011 calculations
-#add.obigt("OldAA")
+#add.OBIGT("OldAA")
 
 # Measured temperature and pH
 bison1 <- function() {
