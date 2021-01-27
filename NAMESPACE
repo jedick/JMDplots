@@ -46,13 +46,13 @@ importFrom("CHNOSZ",
   # first batch: gradox
   "ZC", "affinity", "aminoacids", "as.chemical.formula", 
   "basis", "diagram", "info", "label.figure", "makeup",
-  "species", "swap.basis", "thermo", "thermo.axis",
+  "species", "swap.basis", "thermo", "thermo.axis", "mod.OBIGT",
   # second batch: chnszten
   "DGtr", "axis.label", "bgamma", "describe.basis", "describe.property",
   "describe.reaction", "equilibrate", "expr.property", "expr.species", "findit",
   "list2array", "mass", "maxdiff", "mod.buffer", "mosaic",
   "nonideal", "ratlab", "reset", "solubility",
-  "subcrt", "thermo.plot.new", "water",
+  "subcrt", "thermo.plot.new", "water", "OBIGT", "add.OBIGT",
   # third batch: gradH2O
   "protein.formula", "protein.basis",
   # fourth batch: aoscp

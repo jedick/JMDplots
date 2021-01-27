@@ -93,8 +93,7 @@ chnszten4 <- function(pdf = FALSE) {
   basis("H2S", -6)
   basis("Cl-", -0.7)
   species(c("copper", "cuprite", "tenorite", "chalcocite", "covellite"))
-  sargs <- list(species = c("CuCl", "CuCl2-", "CuCl3-2", "CuCl+", "CuCl2", "CuCl3-", "CuCl4-2"))
-  if(packageVersion("CHNOSZ") > "1.3.6") sargs <- c(sargs, add = TRUE)
+  sargs <- list(species = c("CuCl", "CuCl2-", "CuCl3-2", "CuCl+", "CuCl2", "CuCl3-", "CuCl4-2"), add = TRUE)
   do.call(species, sargs)
   T <- 200
   res <- 500
@@ -131,8 +130,7 @@ chnszten5 <- function(pdf = FALSE) {
   mgp <- c(1.5, 0.3, 0)
   add.OBIGT("SLOP98")
   basis(c("corundum", "H2O", "H+", "O2"))
-  sargs <- list(species = c("Al+3", "AlO2-", "AlOH+2", "AlO+", "HAlO2"))
-  if(packageVersion("CHNOSZ") > "1.3.6") sargs <- c(sargs, add = TRUE)
+  sargs <- list(species = c("Al+3", "AlO2-", "AlOH+2", "AlO+", "HAlO2"), add = TRUE)
   do.call(species, sargs)
   a <- affinity(pH = c(0, 10), IS = 0)
   s <- solubility(a, in.terms.of = "Al+3")
@@ -194,8 +192,7 @@ chnszten6 <- function(pdf = FALSE) {
   ## use DEW model
   water("DEW")
   # add species data for DEW
-  inorganics <- c("methane", "CO2", "HCO3-", "CO3-2")
-  if(packageVersion("CHNOSZ") > "1.3.6") inorganics <- c("CH4", "CO2", "HCO3-", "CO3-2")
+  inorganics <- c("CH4", "CO2", "HCO3-", "CO3-2")
   organics <- c("formic acid", "formate", "acetic acid", "acetate", "propanoic acid", "propanoate")
   add.OBIGT("DEW", c(inorganics, organics))
   ## set basis species
@@ -380,8 +377,7 @@ chnszten7 <- function(pdf = FALSE) {
   # experimental data from Merino, 1975, Table 4 (doi:10.1016/0016-7037(75)90085-X)
   # plot line calculated using default database
   basis(c("Al2O3", "SiO2", "K+", "Na+", "O2", "H2O", "H+"))
-  sargs <- list(species = c("albite", "K-feldspar"))
-  if(packageVersion("CHNOSZ") > "1.3.6") sargs <- c(sargs, add = TRUE)
+  sargs <- list(species = c("albite", "K-feldspar"), add = TRUE)
   do.call(species, sargs)
   T <- 100
   P <- 150
@@ -505,8 +501,7 @@ chnsztenS2 <- function(pdf = FALSE) {
   basis("H2S", -6)
   basis("Cl-", -0.7)
   species(c("copper", "cuprite", "tenorite", "chalcocite", "covellite"))
-  sargs <- list(species = c("CuCl", "CuCl2-", "CuCl3-2", "CuCl+", "CuCl2", "CuCl3-", "CuCl4-2"))
-  if(packageVersion("CHNOSZ") > "1.3.6") sargs <- c(sargs, add = TRUE)
+  sargs <- list(species = c("CuCl", "CuCl2-", "CuCl3-2", "CuCl+", "CuCl2", "CuCl3-", "CuCl4-2"), add = TRUE)
   do.call(species, sargs)
   T <- 200
   res <- 500
@@ -530,8 +525,7 @@ chnsztenS3 <- function(pdf = FALSE) {
   par(mfrow = c(1, 2), mar = c(3, 4, 1, 1))
   ## transforming an equilibrium assemblage of n-alkanes
   basis(c("CH4", "H2"), c("gas", "gas"))
-  if(packageVersion("CHNOSZ") > "1.3.6") species(c("CH4", "ethane", "propane", "butane"), "aq")
-  else species(c("methane", "ethane", "propane", "butane"), "aq")
+  species(c("CH4", "ethane", "propane", "butane"), "aq")
   # set logact to -1 so total activity is 1 (total number of C is 10)
   species(1:4, -1)
   # calculate equilibrium assemblages over a range of logaH2
@@ -648,8 +642,7 @@ chnsztenS6A <- function(pdf = FALSE) {
   ## use DEW model
   water("DEW")
   # add species data for DEW
-  inorganics <- c("methane", "CO2", "HCO3-", "CO3-2")
-  if(packageVersion("CHNOSZ") > "1.3.6") inorganics <- c("CH4", "CO2", "HCO3-", "CO3-2")
+  inorganics <- c("CH4", "CO2", "HCO3-", "CO3-2")
   organics <- c("formic acid", "formate", "acetic acid", "acetate", "propanoic acid", "propanoate")
   # skip updating acetate because the new data from the DEW spreadsheet give different logK
   add.OBIGT("DEW", c(inorganics, organics[-4]))
@@ -679,13 +672,8 @@ chnsztenS6A <- function(pdf = FALSE) {
   names[c(3, 8)] <- ""
   col <- rep("black", length(names))
   col[c(1, 3, 6, 8, 10)] <- c("red", "darkgreen", "purple", "orange", "navyblue")
-  if(packageVersion("CHNOSZ") > "1.1.3") {
-    diagram(e, alpha = "balance", names = names, col = col, ylim = c(0, 0.8), lty=1, lwd=2,
-            mar = c(3, 3, 1, 1), ylab="carbon fraction", spline.method="natural")
-  } else {
-    diagram(e, alpha = "balance", names = names, col = col, ylim = c(0, 0.8), lty=1, lwd=2,
-            mar = c(3, 3, 1, 1), ylab="carbon fraction")
-  }
+  diagram(e, alpha = "balance", names = names, col = col, ylim = c(0, 0.8), lty=1, lwd=2,
+          mar = c(3, 3, 1, 1), ylab="carbon fraction", spline.method="natural")
   ## add HCO3- and acetate labels
   text(795, 0.035, "acetate")
   lines(c(767, 752), c(0.035, 0.0125))
@@ -741,8 +729,7 @@ chnsztenS6B <- function(pdf = FALSE) {
   ## use DEW model
   water("DEW")
   # add species data for DEW
-  inorganics <- c("methane", "CO2", "HCO3-", "CO3-2")
-  if(packageVersion("CHNOSZ") > "1.3.6") inorganics <- c("CH4", "CO2", "HCO3-", "CO3-2")
+  inorganics <- c("CH4", "CO2", "HCO3-", "CO3-2")
   organics <- c("formic acid", "formate", "acetic acid", "acetate", "propanoic acid", "propanoate")
   # skip updating acetate because the new data from the DEW spreadsheet give different logK
   add.OBIGT("DEW", c(inorganics, organics[-4]))
@@ -818,8 +805,7 @@ chnsztenS8 <- function(pdf = FALSE) {
   ## now do calcite (a dissociation reaction)
   calfun <- function(dissociation = NULL) {
     basis(c("calcite", "Ca+2", "H2O", "O2", "H+"))
-    sargs <- list(species = c("CO2", "HCO3-", "CO3-2"))
-    if(packageVersion("CHNOSZ") > "1.3.6") sargs <- c(sargs, add = TRUE)
+    sargs <- list(species = c("CO2", "HCO3-", "CO3-2"), add = TRUE)
     do.call(species, sargs)
     a <- affinity(pH = c(pH, res), T = T, IS = IS)
     s <- solubility(a, dissociation = dissociation)

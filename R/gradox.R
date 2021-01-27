@@ -427,7 +427,6 @@ aAA_aDNA <- function(mout, pout, datasets=c("Bison_Pool_IMG_MG", "Mud_Volcano_SR
     # add them to the "OBIGT" database in CHNOSZ
     iDNA <- do.call(mod.OBIGT, DNA_OBIGT)
     # add species
-    if(packageVersion("CHNOSZ") <= "1.3.6") species(delete = TRUE)
     species(iDNA)
     # calculate affinity
     aDNA <- affinity(Eh=c(-0.35, -0.15))
@@ -440,7 +439,6 @@ aAA_aDNA <- function(mout, pout, datasets=c("Bison_Pool_IMG_MG", "Mud_Volcano_SR
     poutdata <- pout[[paste0(dataset, "P")]]
     AA_OBIGT <- seqcomp2OBIGT(poutdata$meancomp, "protein")
     iAA <- do.call(mod.OBIGT, AA_OBIGT)
-    if(packageVersion("CHNOSZ") <= "1.3.6") species(delete = TRUE)
     species(iAA)
     aAA <- affinity(Eh=c(-0.35, -0.15))
     aAA$values <- lapply(aAA$values, "*", 5.71)
@@ -573,8 +571,7 @@ seqcomp2OBIGT <- function(seqcomp, type="DNA") {
   }
   # get monomer properties (nucleotides or amino acids)
   # to keep the multipliers, don't use info(iOBIGT)
-  if(packageVersion("CHNOSZ") > "1.3.6") monomer_OBIGT <- thermo()$OBIGT[iOBIGT, ]
-  else monomer_OBIGT <- thermo()$obigt[iOBIGT, ]
+  monomer_OBIGT <- thermo()$OBIGT[iOBIGT, ]
   # initialize output
   OBIGT_out <- monomer_OBIGT[rep(1, nrow(seqcomp)), ]
   # in CHNOSZ_1.1.3, diagram() (or another function) attempts to interpret names with underscores
@@ -591,8 +588,7 @@ seqcomp2OBIGT <- function(seqcomp, type="DNA") {
     OBIGT_out$formula[i] <- as.chemical.formula(mkp)
     # thermodynamic properties (G, H, S, and HKF parameters)
     # the format of OBIGT changed in CHNOSZ 1.3.3; get different columns for previous versions 20191015
-    if(packageVersion("CHNOSZ") >= "1.3.3") OBIGT_out[i, 9:21] <- colSums(monomer_OBIGT[, 9:21] * monocomp)
-    else OBIGT_out[i, 8:20] <- colSums(monomer_OBIGT[, 8:20] * monocomp)
+    OBIGT_out[i, 9:21] <- colSums(monomer_OBIGT[, 9:21] * monocomp)
   }
   OBIGT_out
 }

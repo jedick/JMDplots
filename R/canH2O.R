@@ -211,8 +211,8 @@ canH2O2 <- function(pdf = FALSE) {
       pch[grepl("mouse", alldat[[i]]$tags)] <- 21
       pch[grepl("rat", alldat[[i]]$tags)] <- 21
     }
-    dpargs <- list(comptab = alldat[i], pch = pch, pt.text = NA, col = col[i], cex = 1, labtext = NA)
-    if(packageVersion("canprot") > "1.0.0") dpargs <- c(dpargs, list(xlim = c(-0.06, 0.06), ylim = c(-0.07, 0.07), axes = FALSE, frame.plot = TRUE))
+    dpargs <- list(comptab = alldat[i], pch = pch, pt.text = NA, col = col[i], cex = 1, labtext = NA,
+                   xlim = c(-0.06, 0.06), ylim = c(-0.07, 0.07), axes = FALSE, frame.plot = TRUE)
     do.call(diffplot, dpargs)
     labels <- at <- seq(-0.06, 0.06, 0.02)
     labels[c(2, 3, 5, 6)] <- NA
