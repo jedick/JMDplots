@@ -1,0 +1,73 @@
+---
+title: "Water loss in evo-devo (2021)"
+output: 
+  rmarkdown::html_vignette:
+    mathjax: null
+vignette: >
+  %\VignetteIndexEntry{Water loss in evo-devo (2021)}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+<style>
+/* https://gomakethings.com/how-to-break-an-image-out-of-its-parent-container-with-css/ */
+@media (min-width: 700px) {
+  .full-width {
+    left: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+    max-width: 100vw;
+    position: relative;
+    right: 50%;
+    width: 100vw;
+  }
+}
+@media (min-width: 900px) {
+  .full-width {
+    left: 50vw; /* fallback if needed */
+    left: calc(50vw - 100px);
+    width: 900px;
+    position: relative;
+  }
+}
+</style>
+
+```{r setup, include=FALSE}
+library(knitr)
+## use pngquant to reduce size of PNG images
+knit_hooks$set(pngquant = hook_pngquant)
+pngquant <- "--speed=1 --quality=0-25"
+# in case pngquant isn't available
+if (!nzchar(Sys.which("pngquant"))) pngquant <- NULL 
+```
+
+```{r options, include=FALSE}
+options(width = 40)
+```
+
+```{r HTML, include=FALSE}
+logfO2 <- "log<i>f</i><sub>O<sub>2</sub></sub>"
+logaH2O <- "log<i>a</i><sub>H<sub>2</sub>O</sub>"
+```
+
+```{r library, message = FALSE, results = "hide"}
+library(JMDplots)
+# read canprot's 'basis' option
+basis <- getOption("basis")
+```
+
+This vignette contains plots from the paper by [<span title="Redox potential linked to water loss from proteins in evolution and development">Dick (2021)</span>](evdevH2O.html).
+This vignette was compiled on `r Sys.Date()` with **[JMDplots](https://github.com/jedick/JMDplots)** `r packageDescription("JMDplots")$Version`.
+
+Phylostrata are from [<span title="Altered interactions between unicellular and multicellular genes drive hallmarks of transformation in a diverse range of solid tumors">Trigos et al., 2017</span>](https://doi.org/10.1073/pnas.1617743114).
+Consensus gene ages are from [<span title="Towards consensus gene ages ">Liebeskind et al, 2016</span>](https://doi.org/10.1093/gbe/evw113).
+
+## Compositional analysis of Trigos and Liebeskind datasets (Figure 1)
+```{r evdevH2O1, message = FALSE, results = "hide", out.width='100%', fig.width = 10, fig.height = 5, out.extra='class="full-width"', pngquant = pngquant}
+evdevH2O1()
+```
+
+## Strategy for finding optimal `r logaH2O` and `r logfO2` for model proteins (Figure 2)
+```{r evdevH2O2, message = FALSE, results = "hide", out.width='100%', fig.width = 7, fig.height = 3, out.extra='class="full-width"', pngquant = pngquant}
+evdevH2O2()
+```
