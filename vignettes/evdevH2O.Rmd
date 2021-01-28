@@ -93,7 +93,7 @@ Stoichiometric hydration state of proteins is calculated in this study using pro
 evdevH2O5()
 ```
 
-## Example of protein formation reaction, Gibbs energy, and affinity
+## Example of protein chemical formula, formation reaction, and equilibrium constant
 ```{r logK_example}
 logK_example()
 ```

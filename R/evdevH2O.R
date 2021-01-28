@@ -548,7 +548,7 @@ optimal_activity <- function(dataset = "TPPG17", seed = 1:100) {
   savePlot(paste0(gsub(" ", "_", xlab), ".png"))
 }
 
-# Example of protein formation reaction, Gibbs energy, and affinity 20210115
+# Example of protein chemical formula, formation reaction, and equilibrium constant 20210115
 logK_example <- function() {
   ip <- pinfo("LYSC_CHICK")
   pl <- protein.length(ip)

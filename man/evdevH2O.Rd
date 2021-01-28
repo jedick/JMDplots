@@ -47,7 +47,7 @@ A PNG file with plots for each dataset is also created.
 The \code{dataset} can be one of \samp{TPPG17} (phylostrata from Trigos et al., 2017), \samp{LMM16} (gene ages from Liebeskind et al., 2016), \samp{transcriptome} or \samp{proteome} (Futo et al., 2020).
 The target proteins are obtained as the mean amino acid compositions for proteins classified in particular phylostrata or gene ages, or identified in particular stages of biofilm development; the latter means are weighted by gene or protein expression values.
 
-\code{logK_example} prints the formation reaction, Gibbs energy, and affinity for an example protein (LYSC_CHICK).
+\code{logK_example} prints the chemical formula, formation reaction, and equilibrium constant for an example protein (LYSC_CHICK).
 
 }
 

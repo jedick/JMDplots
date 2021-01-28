@@ -30,6 +30,7 @@ Abbreviations:
 
   * <i>Z</i><sub>C</sub> &ndash; average oxidation state of carbon.
   * <i>n</i><sub>H<sub>2</sub>O</sub> &ndash; stoichiometric hydration state per residue ([<span title="Uncovering chemical signatures of salinity gradients through compositional analysis of protein sequences">Dick et al., 2020</span>](https://doi.org/10.5194/bg-17-6145-2020)) computed using the **`r basis`** basis species (`r basis.text(basis)`, H~2~O, O~2~).
+  * pI &ndash; isoelectric point; GRAVY &ndash; grand average of hydropathicity.
   * <i>n</i><sub>AA</sub> &ndash; protein length; MW &ndash; molecular weight per residue.
 
 ```{r options, echo=FALSE}
