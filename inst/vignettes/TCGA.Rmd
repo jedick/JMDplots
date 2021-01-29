@@ -53,7 +53,7 @@ comptab2 <- lapply(pdat1, get_comptab, "PS_TPPG17", "PS_LMM16")
 comptab3 <- lapply(pdat1, get_comptab, "nAA", "MW")
 ```
 
-Differences are calculated as (median value for up-regulated proteins) - (median value for down-regulated proteins), except for phylostrata, where mean values are used.
+Differences are calculated as (median value for up-regulated proteins) - (median value for down-regulated proteins).
 Dashed lines enclose the 50% credible region for highest probability density.
 
 ```{r diffplot, fig.width=5, fig.height=5, fig.align = "center", echo = FALSE}
@@ -65,7 +65,7 @@ In the table, values of &Delta;<i>Z</i><sub>C</sub> and &Delta;<i>n</i><sub>H<su
 Abbreviations:
 
   * <i>n</i><sub>down</sub> &ndash; number of down-regulated proteins; <i>n</i><sub>up</sub> &ndash; number of up-regulated proteins.
-  * PS &ndash; phylostratum; <i>n</i><sub>AA</sub> &ndash; protein length; MW &ndash; molecular weight per residue.
+  * PS &ndash; phylostratum number (mean); <i>n</i><sub>AA</sub> &ndash; protein length; MW &ndash; molecular weight per residue.
 
 Gene ages, expressed as phylostratum numbers, are taken from [<span title="Altered interactions between unicellular and multicellular genes drive hallmarks of transformation in a diverse range of solid tumors">Trigos et al., 2017</span>](https://doi.org/10.1073/pnas.1617743114) (TPPG17) or [<span title="Towards consensus gene ages ">Liebeskind et al, 2016</span>](https://doi.org/10.1093/gbe/evw113) (LMM16).
 

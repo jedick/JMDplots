@@ -41,10 +41,17 @@ knit_hooks$set(pngquant = hook_pngquant)
 pngquant <- "--speed=1 --quality=0-25"
 # in case pngquant isn't available
 if (!nzchar(Sys.which("pngquant"))) pngquant <- NULL 
+
+## colorize messages 20171031
+## adapted from https://gist.github.com/yihui/2629886#file-knitr-color-msg-rnw
+color_block = function(color) {
+  function(x, options) sprintf('<pre style="color:%s">%s</pre>', color, x)
+}
+knit_hooks$set(warning = color_block('magenta'), error = color_block('red'), message = color_block('blue'))
 ```
 
 ```{r options, include=FALSE}
-options(width = 60)
+options(width = 80)
 ```
 
 ```{r HTML, include=FALSE}
@@ -60,7 +67,7 @@ basis <- getOption("basis")
 ```
 
 This vignette contains plots from the paper by [<span title="Redox potential linked to water loss from proteins in evolution and development">Dick (2021)</span>](evdevH2O.html).
-This vignette was compiled on `r Sys.Date()` with **[JMDplots](https://github.com/jedick/JMDplots)** `r packageDescription("JMDplots")$Version`.
+This vignette was compiled on `r Sys.Date()` with **[JMDplots](https://github.com/jedick/JMDplots)** `r packageDescription("JMDplots")$Version` and **[CHNOSZ](http://chnosz.net)** `r packageDescription("CHNOSZ")$Version`.
 
 Phylostrata are from @TPPG17.
 Consensus gene ages are from @LMM16.
@@ -71,6 +78,12 @@ evdevH2O1()
 ```
 
 ## Thermodynamic analysis of optimal `r logaH2O` and `r logfO2` for target proteins (Figure 2)
+```{r versionWarning, echo=FALSE}
+chnoszVersion <- packageVersion("CHNOSZ")
+if(!chnoszVersion > "1.4.0"){
+  warning(paste0("The installed version of CHNOSZ is ", chnoszVersion, ".\nTo get the correct output, please install CHNOSZ version > 1.4.0."))
+}
+```
 ```{r evdevH2O2, message = FALSE, results = "hide", out.width='100%', fig.width = 7, fig.height = 3, out.extra='class="full-width"', pngquant = pngquant, dpi = 100}
 evdevH2O2()
 ```
