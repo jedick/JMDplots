@@ -27,8 +27,7 @@ browseVignettes("JMDplots")
 
 ## Building vignettes
 
-If you want to build the vignettes yourself, be aware that it may be possible to build them without pandoc, but having pandoc available will make them look better.
-See rmarkdown's [Install Pandoc](https://cran.r-project.org/web/packages/rmarkdown/vignettes/pandoc.html) vignette for tips on installing pandoc.
+If you want to build the vignettes yourself, be aware that it may be possible to build them without [pandoc](https://pandoc.org/), but having pandoc available will make them look better.
 
 ```R
 remotes::install_github("jedick/JMDplots", build_vignettes = TRUE)
