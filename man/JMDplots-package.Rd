@@ -84,7 +84,7 @@ Dick, J. M., Yu, M. and Tan, J. (2020) Uncovering chemical signatures of salinit
 
 Dick, J. M. (2020) Water as a reactant in the differential expression of proteins in cancer. \emph{Comp. Sys. Onco.} \bold{1}:e1007. \doi{10.1002/cso2.1007}
 
-Dick, J. M. (2021) Redox potential linked to water loss from proteins in evolution and developent. (Preprint)
+Dick, J. M. (2021) Redox potential linked to water loss from proteins in evolution and developent. bioRxiv. \doi{https://doi.org/10.1101/2021.01.29.428804}
 
 O'Leary, N. A. et al. (2016) Reference sequence (RefSeq) database at NCBI: current status, taxonomic expansion, and functional annotation. \emph{Nucleic Acids Res.} \bold{44}, D733-D745. \doi{10.1093/nar/gkv1189}
 }

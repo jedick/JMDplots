@@ -66,7 +66,7 @@ library(JMDplots)
 basis <- getOption("basis")
 ```
 
-This vignette contains plots from the paper by [<span title="Redox potential linked to water loss from proteins in evolution and development">Dick (2021)</span>](evdevH2O.html).
+This vignette contains plots from the paper by [Dick (2021)](https://doi.org/10.1101/2021.01.29.428804 "Redox potential linked to water loss from proteins in evolution and development").
 This vignette was compiled on `r Sys.Date()` with **[JMDplots](https://github.com/jedick/JMDplots)** `r packageDescription("JMDplots")$Version` and **[CHNOSZ](http://chnosz.net)** `r packageDescription("CHNOSZ")$Version`.
 
 Phylostrata are from @TPPG17.

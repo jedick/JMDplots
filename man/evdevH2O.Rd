@@ -67,7 +67,7 @@ The target proteins are obtained as the mean amino acid compositions for protein
 \references{
 Casas-Vilas, N. et al. (2017) The developmental proteome of \emph{Drosophila melanogaster}. \emph{Genome Res.} \bold{27}, 1273--1285. \doi{10.1101/gr.213694.116}
 
-Dick, J. M. (2021) Redox potential linked to water loss from proteins in evolution and developent. (Preprint)
+Dick, J. M. (2021) Redox potential linked to water loss from proteins in evolution and developent. bioRxiv. \doi{https://doi.org/10.1101/2021.01.29.428804}
 
 Futo, M. et al. (2020) Embryo-like features in developing \emph{Bacillus subtilis} biofilms. \emph{Mol. Biol. Evol.} \bold{38}, 31--47. \doi{10.1093/molbev/msaa217}
 
