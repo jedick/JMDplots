@@ -39,7 +39,9 @@ export(
   "Ehplot", "rankdiff", "rankplot", "groupplots", "mergedplot", "get_colors",
   # evdevH2O paper 20210127
   "evdevH2O1", "evdevH2O2", "evdevH2O3", "evdevH2O4", "evdevH2O5",
-  "optimal_activity", "logK_example"
+  "optimal_activity", "logK_example",
+  # mjenergy paper 20210205
+  "mjenergy1", "mjenergy2", "mjenergy3", "calc_affinity"
 )
 
 # imports from CHNOSZ
@@ -67,7 +69,9 @@ importFrom("CHNOSZ",
   # cpcp
   "palply",
   # evdevH2O
-  "protein.OBIGT"
+  "protein.OBIGT",
+  # mjenergy
+  "E.units"
 )
 
 # imports from canprot

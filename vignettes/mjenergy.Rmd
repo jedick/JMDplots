@@ -1,0 +1,84 @@
+---
+title: "Energy release in protein synthesis (2021)"
+output: 
+  rmarkdown::html_vignette:
+    mathjax: null
+vignette: >
+  %\VignetteIndexEntry{Energy release in protein synthesis (2021)}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+<style>
+/* https://gomakethings.com/how-to-break-an-image-out-of-its-parent-container-with-css/ */
+@media (min-width: 700px) {
+  .full-width {
+    left: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+    max-width: 100vw;
+    position: relative;
+    right: 50%;
+    width: 100vw;
+  }
+}
+@media (min-width: 900px) {
+  .full-width {
+    left: 50vw; /* fallback if needed */
+    left: calc(50vw - 100px);
+    width: 900px;
+    position: relative;
+  }
+}
+</style>
+
+```{r setup, include=FALSE}
+library(knitr)
+## use pngquant to reduce size of PNG images
+knit_hooks$set(pngquant = hook_pngquant)
+pngquant <- "--speed=1 --quality=0-25"
+# in case pngquant isn't available
+if (!nzchar(Sys.which("pngquant"))) pngquant <- NULL 
+
+## colorize messages 20171031
+## adapted from https://gist.github.com/yihui/2629886#file-knitr-color-msg-rnw
+color_block = function(color) {
+  function(x, options) sprintf('<pre style="color:%s">%s</pre>', color, x)
+}
+knit_hooks$set(warning = color_block('magenta'), error = color_block('red'), message = color_block('blue'))
+```
+
+```{r options, include=FALSE}
+options(width = 80)
+```
+
+```{r HTML, include=FALSE}
+ZC <- "<i>Z</i><sub>C</sub>"
+```
+
+```{r library, message = FALSE, results = "hide"}
+library(JMDplots)
+```
+
+This vignette contains plots from the paper by [Shock and Dick (2021)](mjenergy.html "The release of energy during protein synthesis at submarine hydrothermal ecosystems").
+This vignette was compiled on `r Sys.Date()` with **[JMDplots](https://github.com/jedick/JMDplots)** `r packageDescription("JMDplots")$Version` and **[CHNOSZ](http://chnosz.net)** `r packageDescription("CHNOSZ")$Version`.
+
+## Affinities for methanogenesis and amino acid synthesis (Figure 1)
+```{r mjenergy1, message = FALSE, results = "hide", out.width='100%', fig.width = 8, fig.height = 5, pngquant = pngquant}
+mjenergy1()
+```
+
+## `r ZC` of amino acids vs frequency in *Mj* proteome (Figure 2)
+```{r mjenergy2, message = FALSE, results = "hide", out.width='100%', fig.width = 8, fig.height = 4, pngquant = pngquant}
+mjenergy2()
+```
+
+## Affinities of overall synthesis of proteins in *Mj* proteome (Figure 3)
+```{r mjenergy3, message = FALSE, results = "hide", out.width='100%', fig.width = 8, fig.height = 4, pngquant = pngquant}
+mjenergy3()
+```
+
+## Calculate affinity for amino acid synthesis and polymerization
+```{r calc_affinity, message = FALSE}
+calc_affinity()
+```
