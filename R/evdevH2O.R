@@ -700,7 +700,7 @@ function (x = seq(0, 1, length.out = nrow(z)),
           col = color.palette(length(levels) - 1),
           plot.title, plot.axes, key.title, key.axes,
           asp = NA, xaxs = "i", yaxs = "i", las = 1, axes = TRUE,
-          frame.plot = axes, add2 = NULL, ...)
+          frame.plot = axes, add2 = NULL, plot.key = TRUE, ...)
 {
     if (missing(z)) {
         if (!missing(x)) {
@@ -731,22 +731,24 @@ function (x = seq(0, 1, length.out = nrow(z)),
     else if(!add2) layout(matrix(c(2,1,4,3), ncol = 4L), widths = c(1, lcm(w/1.5), 1, lcm(w/1.5)))
     par(las = las)
 
-    ## Plot the 'plot key' (scale):
-    mar <- mar.orig
-    mar[4L] <- mar[2L]
-    mar[2L] <- 1
-    par(mar = mar)
-    plot.new()
-    plot.window(xlim = c(0,1), ylim = range(levels), xaxs = "i", yaxs = "i")
-    rect(0, levels[-length(levels)], 1, levels[-1L], col = col, border = NA)
-    if (missing(key.axes)) {
-        if (axes)
-            axis(4)
+    if(plot.key) {
+      ## Plot the 'plot key' (scale):
+      mar <- mar.orig
+      mar[4L] <- mar[2L]
+      mar[2L] <- 1
+      par(mar = mar)
+      plot.new()
+      plot.window(xlim = c(0,1), ylim = range(levels), xaxs = "i", yaxs = "i")
+      rect(0, levels[-length(levels)], 1, levels[-1L], col = col, border = NA)
+      if (missing(key.axes)) {
+          if (axes)
+              axis(4)
+      }
+      else key.axes
+      box()
+      if (!missing(key.title))
+          key.title
     }
-    else key.axes
-    box()
-    if (!missing(key.title))
-	key.title
 
     ## Plot contour-image::
     mar <- mar.orig
