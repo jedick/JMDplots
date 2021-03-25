@@ -25,7 +25,7 @@ basis <- getOption("basis")
 ```
 
 This vignette from the R package [JMDplots](https://github.com/jedick/JMDplots) version `r packageDescription("JMDplots")$Version` shows compositional metrics for proteins coded by genes that are differentially expressed in hyperosmotic and hypoosmotic shock in yeast.
-The analysis is described in more detail in a paper ([<span title="Water as a reactant in the differential expression of proteins in cancer">Dick, 2020</a>](https://doi.org/10.1002/cso2.1007)).
+The analysis is described in more detail in a paper ([<span title="Water as a reactant in the differential expression of proteins in cancer">Dick, 2021</a>](https://doi.org/10.1002/cso2.1007)).
 Abbreviations:
 
   * <i>Z</i><sub>C</sub> &ndash; average oxidation state of carbon.
