@@ -4,7 +4,9 @@
 # 20210215 Use target proteins given in aa argument
 #   - also add filebase, xlab, O2, H2O, nbackground, arguments
 # 20210307-08 Add pH and names arguments
-OptimAct <- function(aa, seed = 1:100, nbackground = 2000, filebase = NULL, xlab = "sample", names = NULL, O2 = c(-72, -67), H2O = c(-2, 6), pH = NULL) {
+# 20210401 Add plot argument
+OptimAct <- function(aa, seed = 1:100, nbackground = 2000, plot.it = TRUE, filebase = NULL,
+                     xlab = "sample", names = NULL, O2 = c(-72, -67), H2O = c(-2, 6), pH = NULL) {
 
   # Load target proteins
   iptarget <- add.protein(aa)
@@ -16,25 +18,27 @@ OptimAct <- function(aa, seed = 1:100, nbackground = 2000, filebase = NULL, xlab
   if(is.null(pH)) basis("QEC") else basis("QEC+")
   # Initialize output values and plot
   outO2 <- outH2O <- outpH <- list()
-  logH2Olab <- quote(bold(log)*bolditalic(a)[bold(H[2]*O)])
-  logO2lab <- quote(bold(log)*bolditalic(f)[bold(O[2])])
-  pHlab <- "pH"
-  if(is.null(pH)) split.screen(c(2, 1)) else split.screen(c(3, 1))
-  screen(1)
-  par(mar = c(4, 4, 1, 1), mgp = c(2.5, 1, 0), las = 1)
-  plot(range(1:length(names)), O2, xlab = xlab, ylab = logO2lab, type = "n", xaxt = "n", xaxs = "i", yaxs = "i", font.lab = 2)
-  axis(1, 1:length(names), names)
-  screen(2)
-  par(mar = c(4, 4, 1, 1), mgp = c(2.5, 1, 0), las = 1)
-  plot(range(1:length(names)), H2O, xlab = xlab, ylab = logH2Olab, type = "n", xaxt = "n", xaxs = "i", yaxs = "i", font.lab = 2)
-  axis(1, 1:length(names), names)
-  abline(h = 0, lty = 3)
-  if(!is.null(pH)) {
-    screen(3)
+  if(plot.it) {
+    logH2Olab <- quote(bold(log)*bolditalic(a)[bold(H[2]*O)])
+    logO2lab <- quote(bold(log)*bolditalic(f)[bold(O[2])])
+    pHlab <- "pH"
+    if(is.null(pH)) split.screen(c(2, 1)) else split.screen(c(3, 1))
+    screen(1)
     par(mar = c(4, 4, 1, 1), mgp = c(2.5, 1, 0), las = 1)
-    plot(range(1:length(names)), pH, xlab = xlab, ylab = pHlab, type = "n", xaxt = "n", xaxs = "i", yaxs = "i", font.lab = 2)
+    plot(range(1:length(names)), O2, xlab = xlab, ylab = logO2lab, type = "n", xaxt = "n", xaxs = "i", yaxs = "i", font.lab = 2)
     axis(1, 1:length(names), names)
-    abline(h = 7, lty = 3)
+    screen(2)
+    par(mar = c(4, 4, 1, 1), mgp = c(2.5, 1, 0), las = 1)
+    plot(range(1:length(names)), H2O, xlab = xlab, ylab = logH2Olab, type = "n", xaxt = "n", xaxs = "i", yaxs = "i", font.lab = 2)
+    axis(1, 1:length(names), names)
+    abline(h = 0, lty = 3)
+    if(!is.null(pH)) {
+      screen(3)
+      par(mar = c(4, 4, 1, 1), mgp = c(2.5, 1, 0), las = 1)
+      plot(range(1:length(names)), pH, xlab = xlab, ylab = pHlab, type = "n", xaxt = "n", xaxs = "i", yaxs = "i", font.lab = 2)
+      axis(1, 1:length(names), names)
+      abline(h = 7, lty = 3)
+    }
   }
 
   # Prevent multicore usage (runs out of memory)
@@ -57,40 +61,50 @@ OptimAct <- function(aa, seed = 1:100, nbackground = 2000, filebase = NULL, xlab
       optH2O <- c(optH2O, e$vals$H2O[imax[2]])
       if(!is.null(pH)) optpH <- c(optpH, e$vals$pH[imax[3]])
     }
-    # Plot logfO2 and logaH2O values
-    # FIXME: need two screen() calls to make this work 20201218
-    screen(1, FALSE); screen(1, FALSE)
-    lines(1:length(names), optO2, lwd = 0.5, col = "gray")
-    screen(2, FALSE); screen(2, FALSE)
-    lines(1:length(names), optH2O, lwd = 0.5, col = "gray")
-    if(!is.null(pH)) {
-      screen(3, FALSE); screen(3, FALSE)
-      lines(1:length(names), optpH, lwd = 0.5, col = "gray")
+    if(plot.it) {
+      # Plot logfO2 and logaH2O values
+      # FIXME: need two screen() calls to make this work 20201218
+      screen(1, FALSE); screen(1, FALSE)
+      lines(1:length(names), optO2, lwd = 0.5, col = "gray")
+      screen(2, FALSE); screen(2, FALSE)
+      lines(1:length(names), optH2O, lwd = 0.5, col = "gray")
+      if(!is.null(pH)) {
+        screen(3, FALSE); screen(3, FALSE)
+        lines(1:length(names), optpH, lwd = 0.5, col = "gray")
+      }
     }
     # Store results
     outO2[[iseed]] <- optO2
     outH2O[[iseed]] <- optH2O
     if(!is.null(pH)) outpH[[iseed]] <- optpH
   }
-  # Plot mean values
+  # Round values
   outO2 <- round(do.call(rbind, outO2), 3)
   outH2O <- round(do.call(rbind, outH2O), 3)
-  meanO2 <- colMeans(outO2)
-  meanH2O <- colMeans(outH2O)
-  screen(1, FALSE); screen(1, FALSE)
-  lines(1:length(names), meanO2, col = 2, lwd = 2)
-  screen(2, FALSE); screen(2, FALSE)
-  lines(1:length(names), meanH2O, col = 2, lwd = 2)
+  if(plot.it) {
+    # Plot mean values
+    meanO2 <- colMeans(outO2)
+    meanH2O <- colMeans(outH2O)
+    screen(1, FALSE); screen(1, FALSE)
+    lines(1:length(names), meanO2, col = 2, lwd = 2)
+    screen(2, FALSE); screen(2, FALSE)
+    lines(1:length(names), meanH2O, col = 2, lwd = 2)
+  }
 
   if(!is.null(pH)) {
     outpH <- round(do.call(rbind, outpH), 3)
-    meanpH <- colMeans(outpH)
-    screen(3, FALSE); screen(3, FALSE)
-    lines(1:length(names), meanpH, col = 2, lwd = 2)
+    if(plot.it) {
+      meanpH <- colMeans(outpH)
+      screen(3, FALSE); screen(3, FALSE)
+      lines(1:length(names), meanpH, col = 2, lwd = 2)
+    }
   }
 
-  # Finalize plots
-  close.screen(all.screens = TRUE)
+  if(plot.it) {
+    # Finalize plots
+    close.screen(all.screens = TRUE)
+  }
+
   # Create output values
   outO2 <- data.frame(outO2)
   colnames(outO2) <- names
@@ -100,8 +114,6 @@ OptimAct <- function(aa, seed = 1:100, nbackground = 2000, filebase = NULL, xlab
   outH2O <- cbind(seed = seed, outH2O)
 
   if(!is.null(filebase)) {
-    # Save plot 
-    savePlot(paste0(filebase, ".png"))
     # Save results
     write.csv(outO2, paste0(filebase, "_O2.csv"), row.names = FALSE, quote = FALSE)
     write.csv(outH2O, paste0(filebase, "_H2O.csv"), row.names = FALSE, quote = FALSE)

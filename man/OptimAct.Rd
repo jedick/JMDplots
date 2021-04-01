@@ -8,7 +8,7 @@ Calculate the \logaH2O and \logfO2 that maximize the activities of given target 
 
 \usage{
   OptimAct(aa, seed = 1:100, nbackground = 2000,
-    filebase = NULL, xlab = "sample", names = NULL,
+    plot.it = TRUE, filebase = NULL, xlab = "sample", names = NULL,
     O2 = c(-72, -67), H2O = c(-2, 6), pH = NULL)
 }
 
@@ -16,6 +16,7 @@ Calculate the \logaH2O and \logfO2 that maximize the activities of given target 
   \item{aa}{data frame, amino acid composition in the format of \code{\link[CHNOSZ]{thermo}()$protein}}
   \item{seed}{numeric, seeds to use for subsampling background proteins from human proteome}
   \item{nbackground}{numeric, number of background proteins to sample}
+  \item{plot.it}{logical, make a plot?}
   \item{filebase}{character, base name to use for output files}
   \item{xlab}{character or expression, label for \emph{x} axis}
   \item{names}{character, sample names}
@@ -36,8 +37,10 @@ Due to memory constraints, a single calculation does not include the entire huma
 The subsampling is performed for each random seed in \code{seed}.
 The results are returned in a list with components \code{O2} and \code{H2O}.
 
+By default, a pair of plots is made that are updated during the calculation; at the end, the mean values of \logfO2 and \logaH2O are plotted as red lines.
+Change \code{plot.it} to FALSE to  prevent making the plots.
+
 If \code{filebase} is not NULL, the return value is made \code{\link{invisible}} and the results are saved in CSV files named by concatenating \code{filebase} with \samp{_O2.csv} (for \logfO2) or \samp{_H2O.csv} (for \logaH2O).
-A PNG file with plots for each dataset is also created.
 The protein names (used in both the plots and CSV files) are taken from \code{aa$protein} or the \code{names} argument if it is not NULL.
 }
 

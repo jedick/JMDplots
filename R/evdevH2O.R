@@ -477,7 +477,10 @@ runOptimAct <- function(dataset = "TPPG17", seed = 1:100) {
     O2 <- c(-72, -65)
     H2O <- c(-2, 5)
   }
+  png(paste0(dataset, ".png"), width = 1000, height = 1000)
+  par(cex = 2)
   OptimAct(aa, seed = seed, nbackground = 2000, filebase = dataset, xlab = xlab, O2 = O2, H2O = H2O)
+  dev.off()
 
 }
 
