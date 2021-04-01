@@ -6,7 +6,7 @@
 \alias{evdevH2O3}
 \alias{evdevH2O4}
 \alias{evdevH2O5}
-\alias{optimal_activity}
+\alias{runOptimAct}
 \alias{logK_example}
 \title{Plots from water loss in evo-devo paper}
 \description{
@@ -19,7 +19,7 @@ Plots from the paper by Dick (2021).
   evdevH2O3(pdf = FALSE)
   evdevH2O4(pdf = FALSE)
   evdevH2O5(pdf = FALSE)
-  optimal_activity(dataset = "TPPG17", seed = 1:100)
+  runOptimAct(dataset = "TPPG17", seed = 1:100)
   logK_example()
 }
 
@@ -40,10 +40,7 @@ This table gives a brief description of each plotting function.
   \code{evdevH2O5} \tab Organismal water content and proteomic \nH2O for fruit fly development \cr
 }
 
-\code{optimal_activity} is used to compute the optimal \logaH2O and \logfO2 that maximize the equilibrium activity of target proteins against a background of proteins in the human proteome.
-Due to memory constraints, a single calculation does not include the entire human proteome, but a random subsample of 2000 human proteins.
-The subsampling is performed for each random seed in \code{seed} and the results are saved in CSV files named by concatenating the \code{dataset} with \samp{_O2.csv} (for \logfO2) or \samp{_H2O.csv} (for \logaH2O).
-A PNG file with plots for each dataset is also created.
+\code{runOptimAct} sets up calculations with \code{\link{OptimAct}} to  compute the optimal \logaH2O and \logfO2 that maximize the equilibrium activity of model proteins for phylostrata.
 The \code{dataset} can be one of \samp{TPPG17} (phylostrata from Trigos et al., 2017), \samp{LMM16} (gene ages from Liebeskind et al., 2016), \samp{transcriptome} or \samp{proteome} (Futo et al., 2020).
 The target proteins are obtained as the mean amino acid compositions for proteins classified in particular phylostrata or gene ages, or identified in particular stages of biofilm development; the latter means are weighted by gene or protein expression values.
 
@@ -52,12 +49,12 @@ The target proteins are obtained as the mean amino acid compositions for protein
 }
 
 \section{Files in extdata/evdevH2O}{
-  These files were created by running \code{optimal_activity} for each of the possible datasets.
+  These files were created by running \code{runOptimAct} for each \code{dataset} (see above).
   They are used in \code{evdevH2O3} (phylostrata and gene ages) and \code{evdevH2O4} (biofilm developmental stages).
   \describe{
     \item{\code{[dataset]_H2O.csv}}{Optimal values of \logaH2O for each random seed.}
     \item{\code{[dataset]_O2.csv}}{Optimal values of \logfO2 for each random seed.}
-    \item{\code{*.png}}{Plots showing optimal values of \logfO2 and \logaH2O (gray lines) and their means (thick red line).}
+    \item{\code{[dataset].png}}{Plots showing optimal values of \logfO2 and \logaH2O (gray lines) and their means (thick red line).}
   }
 
   Two other files, \code{FOK+20_mean_aa.csv} and \code{CBS+17_mean_aa.csv}, contain mean amino acid compositions of proteins computed using datasets for developmental transcriptomes and proteomes in B. subtilis biofilms (Futo et al., 2020) and proteomes in fruit flies (Casas-Vila et al., 2017).

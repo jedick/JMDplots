@@ -458,95 +458,29 @@ evdevH2O5 <- function(pdf = FALSE) {
 
 # Calculate optimal logaH2O and logfO2 for phylostrata 20201218
 # Make it work for B. subtilis biofilm dataset (Futo et al., 2020) 20201221
-optimal_activity <- function(dataset = "TPPG17", seed = 1:100) {
+runOptimAct <- function(dataset = "TPPG17", seed = 1:100) {
 
   # Process 'dataset' argument
   if(dataset %in% c("TPPG17", "LMM16")) {
     if(dataset == "TPPG17") xlab <- "Trigos phylostrata"
     if(dataset == "LMM16") xlab <- "Liebeskind gene ages"
-    # Get mean amino acid compositions and corresponding phylostrata (e.g. 1..16)
-    gpa <- getphyloaa(dataset)
-    names <- gpa$aa$protein
-    # Load PS model proteins 
-    iptarget <- add.protein(gpa$aa)
+    # Get mean amino acid compositions for phylostrata
+    aa <- getphyloaa(dataset)$aa
     O2 <- c(-72, -67)
     H2O <- c(-2, 3)
   } else if(dataset %in% c("transcriptome", "proteome")) {
     xlab <- paste("Biofilm", dataset)
     # Read amino acid compositions of overall proteins in each biofilm stage
-    aa <- read.csv("FOK+20_mean_aa.csv")
+    datadir <- system.file("extdata/evdevH2O", package = "JMDplots")
+    aa <- read.csv(file.path(datadir, "FOK+20_mean_aa.csv"), as.is = TRUE)
     aa <- aa[aa$organism == dataset, ]
-    names <- aa$protein
-    # Load overall proteins
-    iptarget <- add.protein(aa)
-    # We need this to get all the human proteins 20201221
-    gpa <- getphyloaa("TPPG17")
     O2 <- c(-72, -65)
     H2O <- c(-2, 5)
   }
+  OptimAct(aa, seed = seed, nbackground = 2000, filebase = dataset, xlab = xlab, O2 = O2, H2O = H2O)
 
-  # Set up system
-  basis("QEC")
-  # Initialize output values and plot
-  outO2 <- outH2O <- list()
-  split.screen(c(2, 1))
-  screen(1)
-  par(mar = c(4, 4, 1, 1), mgp = c(2.5, 1, 0), las = 1)
-  plot(range(1:length(names)), O2, xlab = xlab, ylab = logO2lab, type = "n", xaxt = "n", xaxs = "i", yaxs = "i", font.lab = 2)
-  axis(1, 1:length(names), names)
-  screen(2)
-  par(mar = c(4, 4, 1, 1), mgp = c(2.5, 1, 0), las = 1)
-  plot(range(1:length(names)), H2O, xlab = xlab, ylab = logH2Olab, type = "n", xaxt = "n", xaxs = "i", yaxs = "i", font.lab = 2)
-  axis(1, 1:length(names), names)
-
-  # Prevent multicore usage (runs out of memory)
-  thermo("opt$paramin" = 10000)
-  # Loop over random seeds
-  for(iseed in seq_along(seed)) {
-    # Calculate affinities for target proteins and a sample of human proteins (background)
-    set.seed(seed[iseed])
-    iback <- sample(1:nrow(gpa$pcomp$aa), 2000)
-    ipback <- add.protein(gpa$pcomp$aa[iback, ])
-    a <- affinity(O2 = O2, H2O = H2O, iprotein = c(iptarget, ipback))
-    # Equilibrate and find maximum activity for each target protein
-    e <- equilibrate(a, as.residue = TRUE, loga.balance = 0)
-    optO2 <- optH2O <- numeric()
-    for(i in seq_along(names)) {
-      imax <- arrayInd(which.max(e$loga.equil[[i]]), dim(e$loga.equil[[i]]))
-      optO2 <- c(optO2, e$vals$O2[imax[1]])
-      optH2O <- c(optH2O, e$vals$H2O[imax[2]])
-    }
-    # Plot logfO2 and logaH2O values
-    # FIXME: need two screen() calls to make this work 20201218
-    screen(1, FALSE); screen(1, FALSE)
-    lines(1:length(names), optO2, lwd = 0.5, col = "gray")
-    screen(2, FALSE); screen(2, FALSE)
-    lines(1:length(names), optH2O, lwd = 0.5, col = "gray")
-    # Store results
-    outO2[[iseed]] <- optO2
-    outH2O[[iseed]] <- optH2O
-  }
-  # Plot mean values
-  outO2 <- round(do.call(rbind, outO2), 3)
-  outH2O <- round(do.call(rbind, outH2O), 3)
-  meanO2 <- colMeans(outO2)
-  meanH2O <- colMeans(outH2O)
-  screen(1, FALSE); screen(1, FALSE)
-  lines(1:length(names), meanO2, col = 2, lwd = 2)
-  screen(2, FALSE); screen(2, FALSE)
-  lines(1:length(names), meanH2O, col = 2, lwd = 2)
-  close.screen(all.screens = TRUE)
-  # Save results
-  outO2 <- data.frame(outO2)
-  colnames(outO2) <- names
-  outO2 <- cbind(seed = seed, outO2)
-  outH2O <- data.frame(outH2O)
-  colnames(outH2O) <- names
-  outH2O <- cbind(seed = seed, outH2O)
-  write.csv(outO2, paste0(dataset, "_O2.csv"), row.names = FALSE, quote = FALSE)
-  write.csv(outH2O, paste0(dataset, "_H2O.csv"), row.names = FALSE, quote = FALSE)
-  savePlot(paste0(gsub(" ", "_", xlab), ".png"))
 }
+
 
 # Example of protein chemical formula, formation reaction, and equilibrium constant 20210115
 logK_example <- function() {
