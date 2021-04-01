@@ -44,7 +44,7 @@ evdevH2O1 <- function(pdf = FALSE) {
 
   # Plots 1-3: nAA, ZC, nH2O for Trigos phylostrata
   memo <- plotphylo("nAA", PS_source = "TPPG17")
-  label.figure("A", cex = 1.7, yfrac = 0.96, xfrac = 0.05)
+  label.figure("a", cex = 1.7, yfrac = 0.96, xfrac = 0.05, font = 2)
   plotphylo("ZC", PS_source = "TPPG17", memo = memo)
   plotphylo("nH2O", PS_source = "TPPG17", memo = memo)
 
@@ -62,7 +62,7 @@ evdevH2O1 <- function(pdf = FALSE) {
 
   # Plots 4-6: nAA, ZC, nH2O for Liebeskind phylostrata
   memo <- plotphylo("nAA", PS_source = "LMM16", xlab = "GA")
-  label.figure("B", cex = 1.7, yfrac = 0.96, xfrac = 0.05)
+  label.figure("b", cex = 1.7, yfrac = 0.96, xfrac = 0.05, font = 2)
   plotphylo("ZC", PS_source = "LMM16", memo = memo, xlab = "GA")
   plotphylo("nH2O", PS_source = "LMM16", memo = memo, xlab = "GA")
 
@@ -119,7 +119,7 @@ evdevH2O2 <- function(pdf = FALSE) {
       points(jitter(optO2, 0.4), jitter(optH2O, 0.05), pch = 21, bg = 7, cex = 1.5)
       par(xpd = FALSE)
       title("16 PS model proteins", font.main = 1)
-      label.figure("A", cex = 1.5, yfrac = 0.937)
+      label.figure("a", cex = 1.5, yfrac = 0.937, font = 2)
     },
     key.axes = {
       opar <- par(tcl = 0)
@@ -162,7 +162,7 @@ evdevH2O2 <- function(pdf = FALSE) {
       }
       par(xpd = FALSE)
       title("16 PS model + 200 human proteins", font.main = 1)
-      label.figure("B", cex = 1.5, yfrac = 0.937)
+      label.figure("b", cex = 1.5, yfrac = 0.937, font = 2)
     },
     key.axes = {
       opar <- par(tcl = 0)
@@ -219,7 +219,7 @@ evdevH2O3 <- function(pdf = FALSE) {
       axis(1, at = 2, labels = 2)
       for(i in 1:nrow(H2O)) lines(PS, H2O[i, iPS], lwd = 0.5, col = "gray")
       lines(PS, meanH2O, lwd = 2, col = 2) 
-      label.figure(fig.lab[1], cex = 1.6)
+      label.figure(fig.lab[1], cex = 1.6, font = 2)
     }
 
     if(!is.na(fig.lab[2])) {
@@ -230,7 +230,7 @@ evdevH2O3 <- function(pdf = FALSE) {
       axis(1, at = 2, labels = 2)
       for(i in 1:nrow(O2)) lines(PS, O2[i, iPS], lwd = 0.5, col = "gray")
       lines(PS, meanO2, lwd = 2, col = 2) 
-      label.figure(fig.lab[2], cex = 1.6)
+      label.figure(fig.lab[2], cex = 1.6, font = 2)
     }
 
     if(!is.na(fig.lab[3])) {
@@ -253,7 +253,7 @@ evdevH2O3 <- function(pdf = FALSE) {
       }
       abline(h = 0, lty = 2, lwd = 1.5, col = "slategray4")
       lines(PS, meanH2O, lwd = 2, col = 2) 
-      label.figure(fig.lab[3], cex = 1.6)
+      label.figure(fig.lab[3], cex = 1.6, font = 2)
     }
 
     if(!is.na(fig.lab[4])) {
@@ -302,13 +302,13 @@ evdevH2O3 <- function(pdf = FALSE) {
       text(xtext, -199, "Erythrocyte GSH/GSSG", adj = c(0.5, -0.3))
       text(xtext, -241, "Cytosolic NADH/NAD+", adj = c(0.5, 1.3))
       text(xtext, -318, "Mitochondrial NADH/NAD+", adj = c(0.5, -0.3))
-      label.figure(fig.lab[4], cex = 1.6)
+      label.figure(fig.lab[4], cex = 1.6, font = 2)
     }
 
   }
 
-  plotfun("TPPG17", c("A", "B", "C", "D"))
-  plotfun("LMM16", c(NA, NA, "E", "F"))
+  plotfun("TPPG17", c("a", "b", "c", "d"))
+  plotfun("LMM16", c(NA, NA, "e", "f"))
 
   if(pdf) {
     dev.off()
@@ -343,7 +343,7 @@ evdevH2O4 <- function(pdf = FALSE) {
   lines(1:11, pl[isT], type = "b", lty = 2, col = 3, pch = 19, cex = 1.3)
   lines(iP, pl[isP], type = "b", col = 4, pch = 15, cex = 1.3)
   legend("bottomleft", c("Proteome", "Transcriptome"), lty = c(1, 2), pch = c(15, 19), col = c(4, 3), pt.cex = 1.3, bty = "n")
-  label.figure("A", cex = 1.5, xfrac = 0.025)
+  label.figure("a", cex = 1.5, xfrac = 0.025, font = 2)
 
   # Plot B: nH2O
   nH2O <- H2OAA(aa)
@@ -353,7 +353,7 @@ evdevH2O4 <- function(pdf = FALSE) {
   abline(v = c(5, 9), lty = 3, lwd = 1.5, col = "gray40")
   lines(1:11, nH2O[isT], type = "b", lty = 2, col = 3, pch = 19, cex = 1.3)
   lines(iP, nH2O[isP], type = "b", col = 4, pch = 15, cex = 1.3)
-  label.figure("B", cex = 1.5, xfrac = 0.025)
+  label.figure("b", cex = 1.5, xfrac = 0.025, font = 2)
 
   # Plot C: ZC
   ZC <- ZCAA(aa)
@@ -363,7 +363,7 @@ evdevH2O4 <- function(pdf = FALSE) {
   abline(v = c(5, 9), lty = 3, lwd = 1.5, col = "gray40")
   lines(1:11, ZC[isT], type = "b", lty = 2, col = 3, pch = 19, cex = 1.3)
   lines(iP, ZC[isP], type = "b", col = 4, pch = 15, cex = 1.3)
-  label.figure("C", cex = 1.5, xfrac = 0.025)
+  label.figure("c", cex = 1.5, xfrac = 0.025, font = 2)
 
   # Plot D: logaH2O
   par(mgp = c(2.8, 0.8, 0))
@@ -379,7 +379,7 @@ evdevH2O4 <- function(pdf = FALSE) {
   abline(h = 0, lty = 2, lwd = 1.5, col = "slategray4")
   lines(1:11, T_meanH2O, type = "b", lty = 2, col = 3, pch = 19, cex = 1.3)
   lines(iP, P_meanH2O, type = "b", col = 4, pch = 15, cex = 1.3)
-  label.figure("D", cex = 1.5, xfrac = 0.025)
+  label.figure("d", cex = 1.5, xfrac = 0.025, font = 2)
 
   # Plot E: logfO2
   T_O2 <- read.csv(file.path(datadir, "transcriptome_O2.csv"), as.is = TRUE)[, -1]
@@ -394,7 +394,7 @@ evdevH2O4 <- function(pdf = FALSE) {
   abline(h = 0, lty = 2, lwd = 1.5, col = "slategray4")
   lines(1:11, T_meanO2, type = "b", lty = 2, col = 3, pch = 19, cex = 1.3)
   lines(iP, P_meanO2, type = "b", col = 4, pch = 15, cex = 1.3)
-  label.figure("E", cex = 1.5, xfrac = 0.025)
+  label.figure("e", cex = 1.5, xfrac = 0.025, font = 2)
 
   # Plot F: Eh
   logK <- subcrt(c("H2O", "oxygen", "H+", "e-"), c(-1, 0.5, 2, 2), T = 25)$out$logK
@@ -409,7 +409,7 @@ evdevH2O4 <- function(pdf = FALSE) {
   abline(v = c(5, 9), lty = 3, lwd = 1.5, col = "gray40")
   lines(1:11, T_Eh, type = "b", lty = 2, col = 3, pch = 19, cex = 1.3)
   lines(iP, P_Eh, type = "b", col = 4, pch = 15, cex = 1.3)
-  label.figure("F", cex = 1.5, xfrac = 0.025)
+  label.figure("f", cex = 1.5, xfrac = 0.025, font = 2)
 
   if(pdf) {
     dev.off()
@@ -436,7 +436,7 @@ evdevH2O5 <- function(pdf = FALSE) {
   axis(1, at = 120, "P2")
   axis(1, at = 130, "Adult")
   title("Organismal water content\n(Church and Robertson, 1966)", font.main = 1)
-  label.figure("A", cex = 1.6)
+  label.figure("a", cex = 1.6, font = 2)
 
   # Read mean amino acid compositions for developmental time points
   datadir <- system.file("extdata/evdevH2O", package = "JMDplots")
@@ -448,7 +448,7 @@ evdevH2O5 <- function(pdf = FALSE) {
   text(x = 1:17, y = par()$usr[3] - 1.5 * strheight("A"), labels = labels, srt = 45, adj = 1, xpd = TRUE)
   axis(1, at = 1:17, labels = NA)
   title("Stoichiometric hydration state of proteins\n(This study)", font.main = 1)
-  label.figure("B", cex = 1.6)
+  label.figure("b", cex = 1.6, font = 2)
 
   if(pdf) {
     dev.off()
