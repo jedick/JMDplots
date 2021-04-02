@@ -476,7 +476,21 @@ runOptimAct <- function(dataset = "TPPG17", seed = 1:100) {
     aa <- aa[aa$organism == dataset, ]
     O2 <- c(-72, -65)
     H2O <- c(-2, 5)
+  } else if(dataset %in% c("fly_embryo", "fly_adult")) {
+    # Get amino acid composition of differentially expressed proteins in fly adults vs embryos 20210402
+    pd <- pdat_fly("FKL+19_protein")
+    aain <- pd$pcomp$aa
+    # To optimize activities for individual proteins instead of average compositions,
+    # we need to extend the ranges of logfO2 and logaH2O
+    O2 <- c(-80, -62)
+    H2O <- c(-10, 17)
+    xlab <- "protein"
+    # Down-expressed: Higher in embryo
+    if(dataset == "fly_embryo") aa <- aain[!pd$up2, ]
+    # Up-expressed: Higher in adult
+    if(dataset == "fly_adult") aa <- aain[pd$up2, ]
   }
+
   png(paste0(dataset, ".png"), width = 1000, height = 1000)
   par(cex = 2)
   OptimAct(aa, seed = seed, nbackground = 2000, filebase = dataset, xlab = xlab, O2 = O2, H2O = H2O)

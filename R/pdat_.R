@@ -172,3 +172,43 @@ pdat_yeast_stress <- function(dataset = 2020) {
   if("up2" %in% colnames(dat)) up2 <- dat$up2
   return(list(dataset = dataset, pcomp = pcomp, up2 = up2, description = description))
 }
+
+# Get differential expression data from Fabre et al., 2019  20210401
+pdat_fly <- function(dataset = NULL) {
+  if(is.null(dataset)) {
+    return(c(
+             "FKL+19_mRNA", "FKL+19_protein"
+             ))
+  }
+  # remove tags
+  dataset <- strsplit(dataset, "=")[[1]][1]
+  # get study and stage/condition
+  study <- strsplit(dataset, "_")[[1]][1]
+  stage <- paste(strsplit(dataset, "_")[[1]][-1], collapse = "_")
+  extdatadir <- system.file("extdata", package = "JMDplots")
+  if(study=="FKL+19") {
+    # 20200102 Drosophila adult vs embryo, Fabre et al., 2019
+    # FKL+19_mRNA, FKL+19_protein
+    dat <- read.csv(file.path(extdatadir, "expression/development/FKL+19.csv"), as.is = TRUE)
+    description <- paste("Drosophila adult / embryo", stage)
+    if(stage == "protein") {
+      # get differentially expressed proteins
+      dat <- dat[abs(dat$Log2.ratio.Adult.Embryo) > 1 & dat$X.log10.BH.corrected.p.value.Adult.vs.Embryo > 2, ]
+      up2 <- dat$Log2.ratio.Adult.Embryo > 0
+    }
+    if(stage == "mRNA") {
+      # calculate ratios
+      dat <- cbind(dat, ratio = dat$log10.mRNA.adult - dat$log10.mRNA.embryo)
+      dat <- dat[abs(dat$ratio) > 1, ]
+      up2 <- dat$ratio > 0
+    }
+    aa_file <- file.path(extdatadir, "aa/fly/FKL+19_aa.csv")
+    updates_file <- file.path(extdatadir, "aa/uniprot_updates.csv")
+    dat <- check_IDs(dat, "Entry", updates_file = updates_file, aa_file = aa_file)
+    pcomp <- protcomp(dat$Entry, aa_file = aa_file)
+  } else stop(paste("fly dataset", dataset, "not available"))
+  print(paste0("pdat_fly: ", description, " [", dataset, "]"))
+  # use the up2 from the cleaned-up data, if it exists 20190407
+  if("up2" %in% colnames(dat)) up2 <- dat$up2
+  return(list(dataset = dataset, pcomp = pcomp, up2 = up2, description = description))
+}

@@ -11,8 +11,16 @@ OptimAct <- function(aa, seed = 1:100, nbackground = 2000, plot.it = TRUE, fileb
   # Load target proteins
   iptarget <- add.protein(aa)
   if(is.null(names)) names <- aa$protein
-  # Get background proteins (UniProt reference human proteome) 20210215
-  human_base <- readRDS(system.file("/extdata/protein/human_base.rds", package = "canprot"))
+  # Get background proteins:
+  ## (UniProt reference human proteome) 20210215
+  #aaback <- readRDS(system.file("/extdata/protein/human_base.rds", package = "canprot"))
+  # Only use proteins that have phylostrata assignments in both Trigos and Liebeskind datasets 20210402
+  TPPG17 <- read.csv(system.file(paste0("extdata/phylostrata/TPPG17.csv.xz"), package = "canprot"), as.is = TRUE)
+  LMM16 <- read.csv(system.file(paste0("extdata/phylostrata/LMM16.csv.xz"), package = "canprot"), as.is = TRUE)
+  # Take the intersection of lists of proteins from the two sources
+  Entry <- na.omit(intersect(TPPG17$Entry, LMM16$UniProt))
+  # Get amino acid compositions of the proteins
+  aaback <- protcomp(Entry)$aa
 
   # Set up system
   if(is.null(pH)) basis("QEC") else basis("QEC+")
@@ -48,8 +56,8 @@ OptimAct <- function(aa, seed = 1:100, nbackground = 2000, plot.it = TRUE, fileb
     # Calculate affinities for target proteins and a sample of human proteins (background)
     print(paste("seed is", seed[iseed]))
     set.seed(seed[iseed])
-    iback <- sample(1:nrow(human_base), nbackground)
-    ipback <- add.protein(human_base[iback, ])
+    iback <- sample(1:nrow(aaback), nbackground)
+    ipback <- add.protein(aaback[iback, ])
     if(is.null(pH)) a <- suppressMessages(affinity(O2 = O2, H2O = H2O, iprotein = c(iptarget, ipback)))
     if(!is.null(pH)) a <- suppressMessages(affinity(O2 = c(O2, 40), H2O = c(H2O, 40), pH = c(pH, 40), iprotein = c(iptarget, ipback)))
     # Equilibrate and find maximum activity for each target protein

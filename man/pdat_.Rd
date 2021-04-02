@@ -5,19 +5,20 @@
 \alias{pdat_osmotic_gene}
 \alias{pdat_aneuploidy}
 \alias{pdat_yeast_stress}
+\alias{pdat_fly}
 \title{Get Protein Expression Data}
 \description{
   These functions are used to retrieve the amino acid compositions of differentially expressed proteins or proteins corresponding to differentially expressed genes.
   See the help page for \code{\link[canprot]{pdat_}} in the \pkg{canprot} package for more information about the results returned by the \code{pdat_} functions.
-  These functions are used in the \code{\link{canH2O}} paper.
 }
 
 \usage{
+  pdat_osmotic_gene(dataset = 2020)
   pdat_TCGA(dataset = 2020)
   pdat_HPA(dataset = 2020)
-  pdat_osmotic_gene(dataset = 2020)
   pdat_aneuploidy(dataset = 2020)
   pdat_yeast_stress(dataset = 2020)
+  pdat_fly(dataset = NULL)
 }
 
 \arguments{
@@ -25,7 +26,11 @@
 }
 
 \details{
-\code{pdat_osmotic_gene} gets data for differentially expressed genes in transcriptomic experiments for bacteria.
+\code{pdat_osmotic_gene}, which is used in the \code{\link{gradH2O}} paper, gets data for differentially expressed genes in transcriptomic experiments for bacteria.
+
+\code{pdat_fly}, which is used in the \code{\link{evdevH2O}} paper, gets data for differentially expressed genes or proteins in adult flies compared to embryos (Fabre et al., 2019).
+
+The following functions are used in the \code{\link{canH2O}} paper:
 
 \code{pdat_TCGA} calculates chemical composition for proteins corresponding to differentially expressed genes listed by GEPIA2 (Tang et al., 2019).
 Expression levels for normal tissue and cancer are from the Genotype-Tissue Expression project (GTEx Consortium, 2017) and The Cancer Genome Atlas (TCGA Research Network et al., 2013; Hutter and Zenklusen, 2018).
@@ -36,7 +41,7 @@ Expression levels for normal tissue and cancer are from the Genotype-Tissue Expr
 
 \code{pdat_yeast_stress} gets data for differentially expressed genes in hyper- and hypo-osmotic stress in yeast (Gasch et al., 2000).
 
-Each of the functions, except \code{pdat_aneuploidy}, has a corresponding vignette.
+Except for \code{pdat_aneuploidy} and \code{pdat_fly}, each of the functions has a corresponding vignette.
 These vignettes are located in \code{inst/vignettes}, so they are not built with the package, but can be run using \code{\link{makevig}}.
 The output files (CSV) from the vignettes are included in the package, and they are used in some figures: \code{\link{gradH2O7}} (osmotic_gene), \code{\link{canH2O3}} (TCGA, HPA), \code{\link{canH2O5}} (yeast_stress).
 }
@@ -58,7 +63,9 @@ The output files (CSV) from the vignettes are included in the package, and they 
 \references{
 GTEx Consortium (2017) Genetic effects on gene expression across human tissues. \emph{Nature} \bold{550}, 204--213. \doi{10.1038/nature24277}
 
-Gasch, A. P., Spellman, P. T., Kao, C. M, Carmel-Harel, O., Eisen, M. B., Storz, G., Botstein, D., Brown, P. O. (2000) Genomic expression programs in the response of yeast cells to environmental changes. \emph{Mol. Biol. Cell} \bold{11}, 4241--4257. \doi{10.1091/mbc.11.12.4241}
+Fabre, B., Korona, D., Lees, J. G., Lazar, I., Livneh, I., Brunet, M., Orengo, C. A., Russell, S. and Lilley, K. S. (2019) Comparison of \emph{Drosophila melanogaster} embryo and adult proteome by SWATH-MS reveals differential regulation of protein synthesis, degradation machinery, and metabolism modules. \emph{J. Proteome Res.} \bold{18}, 2525--2534. \doi{10.1021/acs.jproteome.9b00076}
+
+Gasch, A. P., Spellman, P. T., Kao, C. M, Carmel-Harel, O., Eisen, M. B., Storz, G., Botstein, D. and Brown, P. O. (2000) Genomic expression programs in the response of yeast cells to environmental changes. \emph{Mol. Biol. Cell} \bold{11}, 4241--4257. \doi{10.1091/mbc.11.12.4241}
 
 Hutter, C. and Zenklusen, J. C. (2018) The Cancer Genome Atlas: Creating lasting value beyond its data. \emph{Cell} \bold{173}, 283--285. \doi{10.1016/j.cell.2018.03.042}
 
