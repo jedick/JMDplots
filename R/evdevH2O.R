@@ -480,6 +480,7 @@ runOptimAct <- function(dataset = "TPPG17", seed = 1:100) {
     # Get amino acid composition of differentially expressed proteins in fly adults vs embryos 20210402
     pd <- pdat_fly("FKL+19_protein")
     aain <- pd$pcomp$aa
+    if(missing(seed)) seed <- 1:10
     # To optimize activities for individual proteins instead of average compositions,
     # we need to extend the ranges of logfO2 and logaH2O
     O2 <- c(-80, -62)
