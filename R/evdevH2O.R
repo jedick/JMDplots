@@ -326,7 +326,7 @@ evdevH2O4 <- function(pdf = FALSE) {
 
   # Read the overall amino acid compositions calculated from Futo et al., 2020 data
   datadir <- system.file("extdata/evdevH2O", package = "JMDplots")
-  aa <- read.csv(file.path(datadir, "FOK+20_mean_aa.csv"), as.is = TRUE)
+  aa <- read.csv(file.path(datadir, "FOK+21_mean_aa.csv"), as.is = TRUE)
   # Identify rows with transcriptome and proteome data
   isT <- aa$organism == "transcriptome"
   isP <- aa$organism == "proteome"
@@ -472,7 +472,7 @@ runOptimAct <- function(dataset = "TPPG17", seed = 1:100) {
     xlab <- paste("Biofilm", dataset)
     # Read amino acid compositions of overall proteins in each biofilm stage
     datadir <- system.file("extdata/evdevH2O", package = "JMDplots")
-    aa <- read.csv(file.path(datadir, "FOK+20_mean_aa.csv"), as.is = TRUE)
+    aa <- read.csv(file.path(datadir, "FOK+21_mean_aa.csv"), as.is = TRUE)
     aa <- aa[aa$organism == dataset, ]
     O2 <- c(-72, -65)
     H2O <- c(-2, 5)

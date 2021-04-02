@@ -57,7 +57,7 @@ Dick, J. M. (2021) Redox potential linked to water loss from proteins in evoluti
 \examples{
 # An abbreviated version of runOptimAct("transcriptome")
 datadir <- system.file("extdata/evdevH2O", package = "JMDplots")
-aa <- read.csv(file.path(datadir, "FOK+20_mean_aa.csv"), as.is = TRUE)
+aa <- read.csv(file.path(datadir, "FOK+21_mean_aa.csv"), as.is = TRUE)
 aa <- subset(aa, organism == "transcriptome")
 OA <- OptimAct(aa, seed = 1:3, nbackground = 200, O2 = c(-72, -65), H2O = c(-2, 5))
 ## Default arguments used in runOptimAct -- takes much longer

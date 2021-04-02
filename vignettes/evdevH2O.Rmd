@@ -1,10 +1,10 @@
 ---
-title: "Water loss in evo-devo (2021)"
+title: "Thermodynamics in evo-devo (2021)"
 output: 
   rmarkdown::html_vignette:
     mathjax: null
 vignette: >
-  %\VignetteIndexEntry{Water loss in evo-devo (2021)}
+  %\VignetteIndexEntry{Thermodynamics in evo-devo (2021)}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 bibliography: JMDplots.bib
@@ -94,7 +94,7 @@ evdevH2O3()
 ```
 
 ## Compositional and thermodynamic analysis of *B. subtilis* biofilm transcriptome and proteome (Figure 4)
-Transcriptomic and proteomic data are from @FOK+20.
+Transcriptomic and proteomic data are from @FOK+21.
 ```{r evdevH2O4, message = FALSE, results = "hide", out.width='100%', fig.width = 7, fig.height = 4.5, pngquant = pngquant, dpi = 100}
 evdevH2O4()
 ```
