@@ -119,11 +119,12 @@ importFrom("graphics", "abline", "arrows", "axis", "box", "layout",
            "points", "rect", "text", "title", "smoothScatter", "strheight",
            "polygon", "hist", "plot.window", "rasterImage",
            "contour", "grconvertX", "grconvertY", "image",
-           ".filled.contour", "Axis", "close.screen", "lcm", "screen", "split.screen")
+           ".filled.contour", "Axis", "close.screen", "lcm", "screen",
+           "split.screen", "boxplot")
 importFrom("stats", "lm", "na.omit", "predict", "sd", "predict.lm", "residuals",
            "qqline", "qqnorm", "quantile", "median", "fivenum",
            "density", "formula", "t.test", "approx", "splinefun", "xtabs",
-           "coefficients", "loess")
+           "coefficients", "loess", "wilcox.test")
 importFrom("utils", "read.csv", "demo", "tail", "write.csv",
            "capture.output", "browseURL", "head", "combn", "read.table")
 

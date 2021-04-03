@@ -8,15 +8,15 @@
 # CHNOSZ > 1.4.0 to get species' activities in predominant.values
 
 # Create bold axis labels
-ZClab <- quote(bolditalic(Z)[bold(C)])
-nH2Olab <- quote(bolditalic(n)[bold(H[2]*O)])
-nAAlab <- quote(bolditalic(n)[bold(AA)])
-DnH2Olab <- quote(bold(Delta)*bolditalic(n)[bold(H[2]*O)])
-DPSlab <- quote(bold(Delta*PS))
-DPSHPAlab <- quote(bold(Delta*PS~"(HPA)"))
-DPSTCGAlab <- quote(bold(Delta*PS~"(TCGA)"))
-logH2Olab <- quote(bold(log)*bolditalic(a)[bold(H[2]*O)])
-logO2lab <- quote(bold(log)*bolditalic(f)[bold(O[2])])
+ZClab <- expression(bolditalic(Z)[bold(C)])
+nH2Olab <- expression(bolditalic(n)[bold(H[2]*O)])
+nAAlab <- expression(bolditalic(n)[bold(AA)])
+DnH2Olab <- expression(bold(Delta)*bolditalic(n)[bold(H[2]*O)])
+DPSlab <- expression(bold(Delta*PS))
+DPSHPAlab <- expression(bold(Delta*PS~"(HPA)"))
+DPSTCGAlab <- expression(bold(Delta*PS~"(TCGA)"))
+logaH2Olab <- expression(bold(log)*bolditalic(a)[bold(H[2]*O)])
+logfO2lab <- expression(bold(log)*bolditalic(f)[bold(O[2])])
 
 # Compositional analysis of Trigos and Liebeskind datasets 20201216
 evdevH2O1 <- function(pdf = FALSE) {
@@ -93,7 +93,7 @@ evdevH2O2 <- function(pdf = FALSE) {
   e <- equilibrate(a, as.residue = TRUE, loga.balance = 0)
   d <- diagram(e, plot.it = FALSE)
   # Make color image for activities
-  par.orig <- my.filled.contour(e$vals$O2, e$vals$H2O, d$predominant.values, xlab = logO2lab, ylab = logH2Olab,
+  par.orig <- my.filled.contour(e$vals$O2, e$vals$H2O, d$predominant.values, xlab = logfO2lab, ylab = logaH2Olab,
     nlevels = 50, col = hcl.colors(75, "YlGnBu")[20:75], frame.plot = FALSE,
     # use plot.axes to label the contour plot (see ?filled.contour)
     plot.axes = {
@@ -137,7 +137,7 @@ evdevH2O2 <- function(pdf = FALSE) {
   a <- affinity(O2 = c(O2, 128), H2O = c(H2O, 128), iprotein = c(ipPS, ipind))
   e <- equilibrate(a, as.residue = TRUE, loga.balance = 0)
   d <- diagram(e, plot.it = FALSE)
-  my.filled.contour(e$vals$O2, e$vals$H2O, d$predominant.values, xlab = logO2lab, ylab = logH2Olab,
+  my.filled.contour(e$vals$O2, e$vals$H2O, d$predominant.values, xlab = logfO2lab, ylab = logaH2Olab,
     nlevels = 50,
     col = hcl.colors(75, "YlGnBu")[20:75],
     # use plot.axes to label the contour plot (see ?filled.contour)
@@ -212,7 +212,7 @@ evdevH2O3 <- function(pdf = FALSE) {
 
     if(!is.na(fig.lab[1])) {
       # Make logaH2O plot
-      plot(range(PS), c(-2.5, 2.5), xlab = NA, ylab = logH2Olab, type = "n", xaxt = "n", xaxs = "i", yaxs = "i")
+      plot(range(PS), c(-2.5, 2.5), xlab = NA, ylab = logaH2Olab, type = "n", xaxt = "n", xaxs = "i", yaxs = "i")
       mtext("PS", 1, 2.2, font = 2, cex = par("cex"))
       axis(1, at = 1:16, labels = c(1,2,NA,NA,5,NA,NA,NA,NA,10,NA,NA,NA,NA,NA,16))
       # FIXME: redraw "2" because previous command doesn't plot it (spacing too tight)
@@ -224,7 +224,7 @@ evdevH2O3 <- function(pdf = FALSE) {
 
     if(!is.na(fig.lab[2])) {
       # Make logfO2 plot
-      plot(range(PS), c(-72, -67), xlab = NA, ylab = logO2lab, type = "n", xaxt = "n", xaxs = "i", yaxs = "i")
+      plot(range(PS), c(-72, -67), xlab = NA, ylab = logfO2lab, type = "n", xaxt = "n", xaxs = "i", yaxs = "i")
       mtext("PS", 1, 2.2, font = 2, cex = par("cex"))
       axis(1, at = 1:16, labels = c(1,2,NA,NA,5,NA,NA,NA,NA,10,NA,NA,NA,NA,NA,16))
       axis(1, at = 2, labels = 2)
@@ -235,7 +235,7 @@ evdevH2O3 <- function(pdf = FALSE) {
 
     if(!is.na(fig.lab[3])) {
       # Make logaH2O plot (mean and logaH2O = 0)
-      plot(range(PS), c(-2.5, 2.5), xlab = NA, ylab = logH2Olab, type = "n", xaxt = "n", xaxs = "i", yaxs = "i")
+      plot(range(PS), c(-2.5, 2.5), xlab = NA, ylab = logaH2Olab, type = "n", xaxt = "n", xaxs = "i", yaxs = "i")
       xlab <- switch(PS_source, TPPG17 = "PS", LMM16 = "GA")
       mtext(xlab, 1, 2.2, font = 2, cex = par("cex"))
       if(PS_source == "TPPG17") {
@@ -372,7 +372,7 @@ evdevH2O4 <- function(pdf = FALSE) {
   # Get mean values of logaH2O
   T_meanH2O <- colMeans(T_H2O)
   P_meanH2O <- colMeans(P_H2O)
-  plot(c(1, 11), range(c(T_meanH2O, P_meanH2O)), type = "n", xlab = "Biofilm stage", ylab = logH2Olab, xaxt = "n", font.lab = 2)
+  plot(c(1, 11), range(c(T_meanH2O, P_meanH2O)), type = "n", xlab = "Biofilm stage", ylab = logaH2Olab, xaxt = "n", font.lab = 2)
   text(x = 1:11, y = par()$usr[3] - 1.5 * strheight("A"), labels = aa$protein[isT], srt = 45, adj = 1, xpd = TRUE)
   axis(1, at = 1:11, labels = NA)
   abline(v = c(5, 9), lty = 3, lwd = 1.5, col = "gray40")
@@ -387,7 +387,7 @@ evdevH2O4 <- function(pdf = FALSE) {
   # Get mean values of logfO2
   T_meanO2 <- colMeans(T_O2)
   P_meanO2 <- colMeans(P_O2)
-  plot(c(1, 11), range(c(T_meanO2, P_meanO2)), type = "n", xlab = "Biofilm stage", ylab = logO2lab, xaxt = "n", font.lab = 2)
+  plot(c(1, 11), range(c(T_meanO2, P_meanO2)), type = "n", xlab = "Biofilm stage", ylab = logfO2lab, xaxt = "n", font.lab = 2)
   text(x = 1:11, y = par()$usr[3] - 1.5 * strheight("A"), labels = aa$protein[isT], srt = 45, adj = 1, xpd = TRUE)
   axis(1, at = 1:11, labels = NA)
   abline(v = c(5, 9), lty = 3, lwd = 1.5, col = "gray40")
@@ -417,13 +417,16 @@ evdevH2O4 <- function(pdf = FALSE) {
   }
 }
 
-# Organismal water content and proteomic nH2O for fruit fly development 20210116
+# Organismal water content, proteomic nH2O, and optimal logaH2O for fruit fly development 20210116
 evdevH2O5 <- function(pdf = FALSE) {
 
   # Setup plot
-  if(pdf) pdf("evdevH2O5.pdf", width = 12, height = 5)
-  par(mfrow = c(1, 2), font.lab = 2, las = 1)
+  if(pdf) pdf("evdevH2O5.pdf", width = 10, height = 6)
+  layout(matrix(c(1,1,1,1, 2,2,2,2, 3,3,3,3, 4,4,4, 5,5,5, 6,6,6, 7,7,7), byrow = TRUE, nrow = 2))
+  par(mar = c(5, 4, 3.5, 2))
+  par(font.lab = 2, las = 1)
 
+  ## Plot A:
   # Developmental time points and water content values from Fig. 4 of Church and Robertson, 1966
   # doi:10.1002/jez.1401620309
   # Hours 110, 120, 130 are for P1, P2, Adult
@@ -434,10 +437,11 @@ evdevH2O5 <- function(pdf = FALSE) {
   axis(1, at = seq(0, 100, 20))
   axis(1, at = 110, "P1")
   axis(1, at = 120, "P2")
-  axis(1, at = 130, "Adult")
+  axis(1, at = 130, "  Adult")
   title("Organismal water content\n(Church and Robertson, 1966)", font.main = 1)
   label.figure("a", cex = 1.6, font = 2)
 
+  ## Plot B:
   # Read mean amino acid compositions for developmental time points
   datadir <- system.file("extdata/evdevH2O", package = "JMDplots")
   aa <- read.csv(file.path(datadir, "CBS+17_mean_aa.csv"), as.is = TRUE)
@@ -447,13 +451,105 @@ evdevH2O5 <- function(pdf = FALSE) {
   # Make rotated labels (modified from https://www.r-bloggers.com/rotated-axis-labels-in-r-plots/)
   text(x = 1:17, y = par()$usr[3] - 1.5 * strheight("A"), labels = labels, srt = 45, adj = 1, xpd = TRUE)
   axis(1, at = 1:17, labels = NA)
-  title("Stoichiometric hydration state of proteins\n(This study)", font.main = 1)
+  title("Stoichiometric hydration state of proteins\n(Proteomic data from Casas-Vila et al., 2017)", font.main = 1)
   label.figure("b", cex = 1.6, font = 2)
+
+  ## Plot C:
+  # Read optimal logaH2O and logfO2 for differentially expressed proteins of Fabre et al., 2019
+  H2O_embryo <- read.csv(file.path(datadir, "fly_embryo_H2O.csv"), as.is = TRUE)
+  O2_embryo <- read.csv(file.path(datadir, "fly_embryo_O2.csv"), as.is = TRUE)
+  H2O_adult <- read.csv(file.path(datadir, "fly_adult_H2O.csv"), as.is = TRUE)
+  O2_adult <- read.csv(file.path(datadir, "fly_adult_O2.csv"), as.is = TRUE)
+  # Get mean values
+  H2O_embryo <- median(colMeans(H2O_embryo)[-1])
+  O2_embryo <- median(colMeans(O2_embryo)[-1])
+  H2O_adult <- median(colMeans(H2O_adult)[-1])
+  O2_adult <- median(colMeans(O2_adult)[-1])
+
+  # Optimization results for developmental proteome of Casas-Vila et al., 2017  20210403
+  # Make logaH2O plot
+  H2O <- read.csv(file.path(datadir, "fly_development_H2O.csv"), as.is = TRUE)[, -1]
+  meanH2O <- colMeans(H2O)
+  plot(meanH2O, type = "b", xaxt = "n", xlab = "Developmental stage", ylab = logaH2Olab, cex = 1.5)
+  abline(h = H2O_embryo, lty = 3, lwd = 3, col = 4)
+  abline(h = H2O_adult, lty = 4, lwd = 3, col = 2)
+  # Make rotated labels (modified from https://www.r-bloggers.com/rotated-axis-labels-in-r-plots/)
+  labels <- gsub("p", "P", gsub("e", "E", names(meanH2O)))
+  text(x = 1:17, y = par()$usr[3] - 1.5 * strheight("A"), labels = labels, srt = 45, adj = 1, xpd = TRUE)
+  axis(1, at = 1:17, labels = NA)
+  label.figure("c", cex = 1.6, font = 2)
+  title("Optimization results\n(Lines show values from panel e)", font.main = 1)
+
+  ## Plot D:
+  # ZC and nH2O of differentially expressed proteins in dataset of Fabre et al., 2019  20210401
+  # Point symbols to use for embryo and adult
+  # embryo: small filled blue circle
+  # adult: larger hollow red square
+  pch <- c(19, 0)
+  col <- c(4, 2)
+  cex <- c(0.8, 1.0)
+
+  # Get amino acid composition of differentially expressed proteins
+  pd <- pdat_fly("FKL+19_protein")
+  # Get ZC and nH2O for all proteins
+  ZC <- ZCAA(pd$pcomp$aa)
+  nH2O <- H2OAA(pd$pcomp$aa)
+  # Get ZC and nH2O for proteins with higher expression in embryo and adult
+  ZC_embryo <- ZC[!pd$up2]
+  ZC_adult <- ZC[pd$up2]
+  nH2O_embryo <- nH2O[!pd$up2]
+  nH2O_adult <- nH2O[pd$up2]
+
+  # First two plots: boxplots for ZC and nH2O 20210403
+  # Make boxplot for ZC
+  ZCdat <- list(embryo = ZC_embryo, adult = ZC_adult)
+  boxplot(ZCdat, ylab = ZClab)
+  # Add p-value
+  ZC_pvalue <- wilcox.test(ZC_embryo, ZC_adult)$p.value
+  legend <- bquote(italic(p) == .(signif(ZC_pvalue, 3)))
+  legend("topright", legend = legend, bty = "n")
+  label.figure("d", cex = 1.7, yfrac = 0.96, xfrac = 0.05, font = 2)
+  # Make boxplot for nH2O
+  nH2Odat <- list(embryo = nH2O_embryo, adult = nH2O_adult)
+  boxplot(nH2Odat, ylab = nH2Olab)
+  # Add p-value
+  nH2O_pvalue <- wilcox.test(nH2O_embryo, nH2O_adult)$p.value
+  legend <- bquote(italic(p) == .(signif(nH2O_pvalue, 3)))
+  legend("bottomleft", legend = legend, bty = "n")
+
+  # Add title for first two plots
+  par(xpd = NA)
+  text(-0.4, -0.3, "Differentially expressed proteins\n(Proteomic data from Fabre et al., 2019)", cex = 1.3)
+  text(-0.4, -1.35, bquote(italic(n) == .(sum(!pd$up2))~"with higher expression in embroys"), cex = 1.3)
+  text(-0.4, -1.42, bquote(italic(n) == .(sum(pd$up2))~"with higher expression in adults"), cex = 1.3)
+  par(xpd = FALSE)
+
+  ## Plot E:
+  # Plot median ZC and nH2O of differentially expressed proteins
+  plot(c(-0.145, -0.135), c(-0.76, -0.72), xlab = ZClab, ylab = nH2Olab, type = "n")
+  ZCmed <- c(median(ZC_embryo), median(ZC_adult))
+  nH2Omed <- c(median(nH2O_embryo), median(nH2O_adult))
+  points(ZCmed, nH2Omed, pch = pch, col = col, cex = cex * 2)
+  text(ZCmed, nH2Omed - 0.0025, c("embryo", "adult"))
+  label.figure("e", cex = 1.7, yfrac = 0.96, xfrac = 0.05, font = 2)
+
+  # Add title for second two plots
+  par(xpd = NA)
+  text(-0.131, -0.714, "Median values for differentially expressed proteins", cex = 1.3)
+  par(xpd = FALSE)
+
+  # Make logaH2O-logfO2 plot
+  plot(c(-71, -69), c(0, 2), xlab = logfO2lab, ylab = logaH2Olab, type = "n")
+  O2 <- c(O2_embryo, O2_adult)
+  H2O <- c(H2O_embryo, H2O_adult)
+  points(O2, H2O, pch = pch, col = col, cex = cex * 2)
+  text(O2, H2O - 0.15, c("embryo", "adult"))
 
   if(pdf) {
     dev.off()
-    addexif("evdevH2O5", "Organismal water content and proteomic nH2O for fruit fly development", "Dick (2021) (preprint)")
+    addexif("evdevH2O5", "Organismal water content, proteomic nH2O, and optimal logaH2O for fruit fly development", "Dick (2021) (preprint)")
   }
+
 }
 
 # Calculate optimal logaH2O and logfO2 for phylostrata 20201218

@@ -37,7 +37,7 @@ This table gives a brief description of each plotting function.
   \code{evdevH2O2} \tab Thermodynamic analysis of optimal \logaH2O and \logfO2 for target proteins \cr
   \code{evdevH2O3} \tab Optimal \logaH2O and \logfO2 and effective Eh for target proteins \cr
   \code{evdevH2O4} \tab Compositional and thermodynamic analysis of \emph{B. subtilis} biofilm transcriptome and proteome \cr
-  \code{evdevH2O5} \tab Organismal water content and proteomic \nH2O for fruit fly development \cr
+  \code{evdevH2O5} \tab Organismal water content, proteomic \nH2O, and optimal \logaH2O for fruit fly development \cr
 }
 
 \code{runOptimAct} sets up calculations with \code{\link{OptimAct}} to  compute the optimal \logaH2O and \logfO2 that maximize the equilibrium activity of model proteins for phylostrata.

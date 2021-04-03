@@ -58,6 +58,7 @@ options(width = 80)
 logfO2 <- "log<i>f</i><sub>O<sub>2</sub></sub>"
 logaH2O <- "log<i>a</i><sub>H<sub>2</sub>O</sub>"
 nH2O <- "<i>n</i><sub>H<sub>2</sub>O</sub>"
+ZC <- "<i>Z</i><sub>C</sub>"
 ```
 
 ```{r library, message = FALSE, results = "hide"}
@@ -99,10 +100,12 @@ Transcriptomic and proteomic data are from @FOK+21.
 evdevH2O4()
 ```
 
-## Organismal water content and proteomic `r nH2O` for fruit fly development (Figure 5)
-Whole-organism water content is from @CR66.
-Stoichiometric hydration state of proteins is calculated in this study using proteomic data from @CBS+17.
-```{r evdevH2O5, message = FALSE, results = "hide", out.width='100%', fig.width = 12, fig.height = 5, pngquant = pngquant, dpi = 100}
+## Organismal water content, proteomic `r nH2O`, and optimal `r logaH2O` for fruit fly development (Figure 5)
+**a** Whole-organism water content is from @CR66.
+**b** Stoichiometric hydration state of proteins is calculated in this study using proteomic data from @CBS+17.
+**d** `r ZC` and `r nH2O` of differentially expressed proteins in embryos and adult flies is calculated in this study using proteomic data from @FKL+19.
+
+```{r evdevH2O5, message = FALSE, results = "hide", out.width='100%', fig.width = 10, fig.height = 6, out.extra='class="full-width"', pngquant = pngquant, dpi = 100}
 evdevH2O5()
 ```
 
