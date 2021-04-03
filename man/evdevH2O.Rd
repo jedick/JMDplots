@@ -47,6 +47,7 @@ The possible values of \code{dataset} are described below.
   \item{\samp{LMM16}}{Gene ages from Liebeskind et al., 2016; target proteins are mean amino acid compositions for each gene age.}
   \item{\samp{transcriptome} or \samp{proteome}}{Futo et al., 2021; target proteins are mean amino acid composiitons for each stage of biofilm development, weighted by gene or protein expression values.}
   \item{\samp{fly_embryo} or \samp{fly_adult}}{Differentially expressed proteins from Fabre et al., 2019; target proteins are all proteins (i.e. not mean compositions) with higher expression in embryo or adult flies.}
+  \item{\samp{fly_development}}{Fly developmental proteome from Casas-Vila et al., 2017; target proteins are mean amino acid composition for each time point.}
 }
 
 \code{logK_example} prints the chemical formula, formation reaction, and equilibrium constant for an example protein (LYSC_CHICK).

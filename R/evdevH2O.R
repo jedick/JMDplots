@@ -490,6 +490,13 @@ runOptimAct <- function(dataset = "TPPG17", seed = 1:100) {
     if(dataset == "fly_embryo") aa <- aain[!pd$up2, ]
     # Up-expressed: Higher in adult
     if(dataset == "fly_adult") aa <- aain[pd$up2, ]
+  } else if(dataset == "fly_development") {
+    # Read mean amino acid compositions for developmental proteome of Casas-Vila et al., 2017 20210403
+    datadir <- system.file("extdata/evdevH2O", package = "JMDplots")
+    aa <- read.csv(file.path(datadir, "CBS+17_mean_aa.csv"), as.is = TRUE)
+    xlab <- "time point"
+    O2 <- c(-72, -68)
+    H2O <- c(-2, 4)
   }
 
   png(paste0(dataset, ".png"), width = 1000, height = 1000)
