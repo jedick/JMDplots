@@ -193,7 +193,7 @@ pdat_fly <- function(dataset = NULL) {
     description <- paste("Drosophila adult / embryo", stage)
     if(stage == "protein") {
       # get differentially expressed proteins
-      dat <- dat[abs(dat$Log2.ratio.Adult.Embryo) > 1 & dat$X.log10.BH.corrected.p.value.Adult.vs.Embryo > 2, ]
+      dat <- dat[abs(dat$Log2.ratio.Adult.Embryo) >= 1 & dat$X.log10.BH.corrected.p.value.Adult.vs.Embryo >= 2, ]
       up2 <- dat$Log2.ratio.Adult.Embryo > 0
     }
     if(stage == "mRNA") {
