@@ -1,11 +1,11 @@
-# JMDplots/OptimAct.R
+# JMDplots/MaximAct.R
 
 # 20201218 Calculate optimal logaH2O and logfO2 for target proteins
 # 20210215 Use target proteins given in aa argument
 #   - also add filebase, xlab, O2, H2O, nbackground, arguments
 # 20210307-08 Add pH and names arguments
 # 20210401 Add plot argument
-OptimAct <- function(aa, seed = 1:100, nbackground = 2000, plot.it = TRUE, filebase = NULL,
+MaximAct <- function(aa, seed = 1:100, nbackground = 2000, plot.it = TRUE, filebase = NULL,
                      xlab = "sample", names = NULL, O2 = c(-72, -67), H2O = c(-2, 6), pH = NULL) {
 
   # Load target proteins

@@ -1,13 +1,13 @@
 \encoding{UTF-8}
-\name{OptimAct}
-\alias{OptimAct}
+\name{MaximAct}
+\alias{MaximAct}
 \title{Calculate optimal logaH2O and logfO2 for target proteins}
 \description{
 Calculate the \logaH2O and \logfO2 that maximize the activities of given target proteins on a background of proteins from the human proteome.
 }
 
 \usage{
-  OptimAct(aa, seed = 1:100, nbackground = 2000,
+  MaximAct(aa, seed = 1:100, nbackground = 2000,
     plot.it = TRUE, filebase = NULL, xlab = "sample", names = NULL,
     O2 = c(-72, -67), H2O = c(-2, 6), pH = NULL)
 }
@@ -26,7 +26,7 @@ Calculate the \logaH2O and \logfO2 that maximize the activities of given target 
 }
 
 \details{
-\code{OptimAct} is used to compute optimal values of \logaH2O, \logfO2, and optionally pH; that is, those that maximize the equilibrium activity of each of the target proteins (given in \code{aa}) against a background of proteins in the human proteome.
+\code{MaximAct} is used to compute optimal values of \logaH2O, \logfO2, and optionally pH; that is, those that maximize the equilibrium activity of each of the target proteins (given in \code{aa}) against a background of proteins in the human proteome.
 The calculation is described by Dick (2021).
 
 The basis species used for the calculation are \samp{QEC} (glutamine - glutamic acid - cysteine - O2 - H2O) (see Dick et al., 2020), or \samp{QEC+} (the same basis species with the addition of \Hplus) if \code{pH} is not NULL.
@@ -45,7 +45,7 @@ The protein names (used in both the plots and CSV files) are taken from \code{aa
 }
 
 \seealso{
-\code{\link{runOptimAct}} to set up calculations for datasets analyzed in the \code{\link{evdevH2O}} paper.
+\code{\link{runMaximAct}} to set up calculations for datasets analyzed in the \code{\link{evdevH2O}} paper.
 }
 
 \references{
@@ -55,13 +55,13 @@ Dick, J. M. (2021) Redox potential linked to water loss from proteins in evoluti
 }
 
 \examples{
-# An abbreviated version of runOptimAct("transcriptome")
+# An abbreviated version of runMaximAct("transcriptome")
 datadir <- system.file("extdata/evdevH2O", package = "JMDplots")
 aa <- read.csv(file.path(datadir, "FOK+21_mean_aa.csv"), as.is = TRUE)
 aa <- subset(aa, organism == "transcriptome")
-OA <- OptimAct(aa, seed = 1:3, nbackground = 200, O2 = c(-72, -65), H2O = c(-2, 5))
-## Default arguments used in runOptimAct -- takes much longer
-#OA <- OptimAct(aa, seed = 1:100, nbackground = 2000, O2 = c(-72, -65), H2O = c(-2, 5))
+OA <- MaximAct(aa, seed = 1:3, nbackground = 200, O2 = c(-72, -65), H2O = c(-2, 5))
+## Default arguments used in runMaximAct -- takes much longer
+#OA <- MaximAct(aa, seed = 1:100, nbackground = 2000, O2 = c(-72, -65), H2O = c(-2, 5))
 # The logaH2O decreases at the end of the time course
 H2O <- colMeans(OA$H2O)
 stopifnot(H2O["14D"] > H2O["1M"])

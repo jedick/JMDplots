@@ -554,7 +554,7 @@ evdevH2O5 <- function(pdf = FALSE) {
 
 # Calculate optimal logaH2O and logfO2 for phylostrata 20201218
 # Make it work for B. subtilis biofilm dataset (Futo et al., 2020) 20201221
-runOptimAct <- function(dataset = "TPPG17", seed = 1:100) {
+runMaximAct <- function(dataset = "TPPG17", seed = 1:100) {
 
   # Process 'dataset' argument
   if(dataset %in% c("TPPG17", "LMM16")) {
@@ -597,7 +597,7 @@ runOptimAct <- function(dataset = "TPPG17", seed = 1:100) {
 
   png(paste0(dataset, ".png"), width = 1000, height = 1000)
   par(cex = 2)
-  OptimAct(aa, seed = seed, nbackground = 2000, filebase = dataset, xlab = xlab, O2 = O2, H2O = H2O)
+  MaximAct(aa, seed = seed, nbackground = 2000, filebase = dataset, xlab = xlab, O2 = O2, H2O = H2O)
   dev.off()
 
 }

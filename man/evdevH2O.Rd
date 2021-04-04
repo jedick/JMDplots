@@ -6,7 +6,7 @@
 \alias{evdevH2O3}
 \alias{evdevH2O4}
 \alias{evdevH2O5}
-\alias{runOptimAct}
+\alias{runMaximAct}
 \alias{logK_example}
 \title{Plots from thermodynamics in evo-devo paper}
 \description{
@@ -19,7 +19,7 @@ Plots from the paper by Dick (2021).
   evdevH2O3(pdf = FALSE)
   evdevH2O4(pdf = FALSE)
   evdevH2O5(pdf = FALSE)
-  runOptimAct(dataset = "TPPG17", seed = 1:100)
+  runMaximAct(dataset = "TPPG17", seed = 1:100)
   logK_example()
 }
 
@@ -40,7 +40,7 @@ This table gives a brief description of each plotting function.
   \code{evdevH2O5} \tab Organismal water content, proteomic \nH2O, and optimal \logaH2O for fruit fly development \cr
 }
 
-\code{runOptimAct} sets up calculations with \code{\link{OptimAct}} to  compute the optimal \logaH2O and \logfO2 that maximize the equilibrium activity of model proteins for phylostrata.
+\code{runMaximAct} sets up calculations with \code{\link{MaximAct}} to  compute the optimal \logaH2O and \logfO2 that maximize the equilibrium activity of model proteins for phylostrata.
 The possible values of \code{dataset} are described below.
 \describe{
   \item{\samp{TPPG17}}{Phylostrata from Trigos et al., 2017; target proteins are mean amino acid compositions for each phylostratum.}
@@ -55,9 +55,9 @@ The possible values of \code{dataset} are described below.
 }
 
 \section{Files in extdata/evdevH2O}{
-  These files were created by running \code{runOptimAct} for each \code{dataset} (see above).
+  These files were created by running \code{runMaximAct} for each \code{dataset} (see above).
   They are used in \code{evdevH2O3} (phylostrata and gene ages) and \code{evdevH2O4} (biofilm developmental stages).
-  To reduce package size, the PNG files output by \code{runOptimAct} are not included here.
+  To reduce package size, the PNG files output by \code{runMaximAct} are not included here.
   \describe{
     \item{\code{[dataset]_H2O.csv}}{Optimal values of \logaH2O for each random seed.}
     \item{\code{[dataset]_O2.csv}}{Optimal values of \logfO2 for each random seed.}
