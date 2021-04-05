@@ -2,11 +2,11 @@
 
 # 20201218 Calculate optimal logaH2O and logfO2 for target proteins
 # 20210215 Use target proteins given in aa argument
-#   - also add filebase, xlab, O2, H2O, nbackground, arguments
+#   - also add xlab, O2, H2O, nbackground, arguments
 # 20210307-08 Add pH and names arguments
 # 20210401 Add plot argument
-MaximAct <- function(aa, seed = 1:100, nbackground = 2000, plot.it = TRUE, filebase = NULL,
-                     xlab = "sample", names = NULL, O2 = c(-72, -67), H2O = c(-2, 6), pH = NULL) {
+MaximAct <- function(aa, seed = 1:100, nbackground = 2000, plot.it = TRUE,
+  xlab = "sample", names = NULL, O2 = c(-72, -67), H2O = c(-2, 6), pH = NULL) {
 
   # Load target proteins
   iptarget <- add.protein(aa)
@@ -33,11 +33,11 @@ MaximAct <- function(aa, seed = 1:100, nbackground = 2000, plot.it = TRUE, fileb
     if(is.null(pH)) split.screen(c(2, 1)) else split.screen(c(3, 1))
     screen(1)
     par(mar = c(4, 4, 1, 1), mgp = c(2.5, 1, 0), las = 1)
-    plot(range(1:length(names)), O2, xlab = xlab, ylab = logO2lab, type = "n", xaxt = "n", xaxs = "i", yaxs = "i", font.lab = 2)
+    plot(range(1:length(names)), O2[1:2], xlab = xlab, ylab = logO2lab, type = "n", xaxt = "n", xaxs = "i", yaxs = "i", font.lab = 2)
     axis(1, 1:length(names), names)
     screen(2)
     par(mar = c(4, 4, 1, 1), mgp = c(2.5, 1, 0), las = 1)
-    plot(range(1:length(names)), H2O, xlab = xlab, ylab = logH2Olab, type = "n", xaxt = "n", xaxs = "i", yaxs = "i", font.lab = 2)
+    plot(range(1:length(names)), H2O[1:2], xlab = xlab, ylab = logH2Olab, type = "n", xaxt = "n", xaxs = "i", yaxs = "i", font.lab = 2)
     axis(1, 1:length(names), names)
     abline(h = 0, lty = 3)
     if(!is.null(pH)) {
@@ -86,9 +86,9 @@ MaximAct <- function(aa, seed = 1:100, nbackground = 2000, plot.it = TRUE, fileb
     outH2O[[iseed]] <- optH2O
     if(!is.null(pH)) outpH[[iseed]] <- optpH
   }
-  # Round values
-  outO2 <- round(do.call(rbind, outO2), 3)
-  outH2O <- round(do.call(rbind, outH2O), 3)
+  # Gather values
+  outO2 <- do.call(rbind, outO2)
+  outH2O <- do.call(rbind, outH2O)
   if(plot.it) {
     # Plot mean values
     meanO2 <- colMeans(outO2)
@@ -100,7 +100,7 @@ MaximAct <- function(aa, seed = 1:100, nbackground = 2000, plot.it = TRUE, fileb
   }
 
   if(!is.null(pH)) {
-    outpH <- round(do.call(rbind, outpH), 3)
+    outpH <- do.call(rbind, outpH)
     if(plot.it) {
       meanpH <- colMeans(outpH)
       screen(3, FALSE); screen(3, FALSE)
@@ -120,17 +120,15 @@ MaximAct <- function(aa, seed = 1:100, nbackground = 2000, plot.it = TRUE, fileb
   outH2O <- data.frame(outH2O)
   colnames(outH2O) <- names
   outH2O <- cbind(seed = seed, outH2O)
+  out <- list(O2 = outO2, H2O = outH2O)
+  # Handle pH option
+  if(!is.null(pH)) {
+    outpH <- data.frame(outpH)
+    colnames(outpH) <- names
+    outpH <- cbind(seed = seed, outpH)
+    out <- c(out, list(pH = pH))
+  }
 
-  if(!is.null(filebase)) {
-    # Save results
-    write.csv(outO2, paste0(filebase, "_O2.csv"), row.names = FALSE, quote = FALSE)
-    write.csv(outH2O, paste0(filebase, "_H2O.csv"), row.names = FALSE, quote = FALSE)
-    if(!is.null(pH)) {
-      outpH <- data.frame(outpH)
-      colnames(outpH) <- names
-      outpH <- cbind(seed = seed, outpH)
-      write.csv(outpH, paste0(filebase, "_pH.csv"), row.names = FALSE, quote = FALSE)
-    }
-    invisible(list(O2 = outO2, H2O = outH2O))
-  } else list(O2 = outO2, H2O = outH2O)
+  out
+
 }

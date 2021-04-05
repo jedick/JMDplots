@@ -10,7 +10,6 @@
 # Create bold axis labels
 ZClab <- expression(bolditalic(Z)[bold(C)])
 nH2Olab <- expression(bolditalic(n)[bold(H[2]*O)])
-nAAlab <- expression(bolditalic(n)[bold(AA)])
 DnH2Olab <- expression(bold(Delta)*bolditalic(n)[bold(H[2]*O)])
 DPSlab <- expression(bold(Delta*PS))
 DPSHPAlab <- expression(bold(Delta*PS~"(HPA)"))
@@ -85,17 +84,18 @@ evdevH2O2 <- function(pdf = FALSE) {
   ipPS <- add.protein(gpa$aa)
   # Set up system
   basis("QEC")
+  res <- 128
   O2 <- c(-72, -67)
-  H2O <- c(-5, 2)
+  H2O <- c(-3, 3)
 
   # Plot A: predominance diagram for all PS
-  a <- affinity(O2 = c(O2, 128), H2O = c(H2O, 128), iprotein = ipPS)
+  a <- affinity(O2 = c(O2, res), H2O = c(H2O, res), iprotein = ipPS)
   e <- equilibrate(a, as.residue = TRUE, loga.balance = 0)
   d <- diagram(e, plot.it = FALSE)
   # Make color image for activities
   par.orig <- my.filled.contour(e$vals$O2, e$vals$H2O, d$predominant.values, xlab = logfO2lab, ylab = logaH2Olab,
     nlevels = 50, col = hcl.colors(75, "YlGnBu")[20:75], frame.plot = FALSE,
-    # use plot.axes to label the contour plot (see ?filled.contour)
+    # Use plot.axes to label the contour plot (see ?filled.contour)
     plot.axes = {
       box()
       #diagram(e, add = TRUE)
@@ -131,21 +131,32 @@ evdevH2O2 <- function(pdf = FALSE) {
   )
 
   # Plot B: 16 PS model proteins and n = 200 sample of human proteins
-  set.seed(3)
-  iind <- sample(1:nrow(gpa$pcomp$aa), 200)
-  ipind <- add.protein(gpa$pcomp$aa[iind, ])
-  a <- affinity(O2 = c(O2, 128), H2O = c(H2O, 128), iprotein = c(ipPS, ipind))
+  seed <- 24
+  nbackground <- 200
+  # Use same background proteins as in MaximAct()
+  TPPG17 <- read.csv(system.file(paste0("extdata/phylostrata/TPPG17.csv.xz"), package = "canprot"), as.is = TRUE)
+  LMM16 <- read.csv(system.file(paste0("extdata/phylostrata/LMM16.csv.xz"), package = "canprot"), as.is = TRUE)
+  Entry <- na.omit(intersect(TPPG17$Entry, LMM16$UniProt))
+  aaback <- protcomp(Entry)$aa
+  set.seed(seed)
+  iback <- sample(1:nrow(aaback), nbackground)
+  ipback <- add.protein(aaback[iback, ])
+  # Calculate affinities
+  a <- affinity(O2 = c(O2, res), H2O = c(H2O, res), iprotein = c(ipPS, ipback))
   e <- equilibrate(a, as.residue = TRUE, loga.balance = 0)
   d <- diagram(e, plot.it = FALSE)
+  # Get optimal logfO2 and logaH2O from MaximAct() for cross-checking 20210404
+  MA <- MaximAct(gpa$aa, seed = seed, nbackground = nbackground, O2 = c(O2, res), H2O = c(H2O, res), plot.it = FALSE)
+  # Make color-scale diagram for predominant protein activities
   my.filled.contour(e$vals$O2, e$vals$H2O, d$predominant.values, xlab = logfO2lab, ylab = logaH2Olab,
     nlevels = 50,
     col = hcl.colors(75, "YlGnBu")[20:75],
-    # use plot.axes to label the contour plot (see ?filled.contour)
+    # Use plot.axes to label the contour plot (see ?filled.contour)
     plot.axes = {
       names <- sapply(strsplit(d$species$name, "\\|"), "[", 2)
       #diagram(e, add = TRUE, names = names, format.names = FALSE)
       # Use a higher resolution for making the lines
-      a <- affinity(O2 = c(O2, 400), H2O = c(H2O, 400), iprotein = c(ipPS, ipind))
+      a <- affinity(O2 = c(O2, 400), H2O = c(H2O, 400), iprotein = c(ipPS, ipback))
       diagram(a, as.residue = TRUE, add = TRUE, names = names, format.names = FALSE)
       opar <- par(tcl = 0.3)
       thermo.axis()
@@ -159,6 +170,9 @@ evdevH2O2 <- function(pdf = FALSE) {
         optO2 <- e$vals$O2[imax[1]]
         optH2O <- e$vals$H2O[imax[2]]
         points(optO2, optH2O, pch = 21, bg = 7, cex = 1.5)
+        # Cross-check values
+        stopifnot(optO2 == MA$O2[i+1])
+        stopifnot(optH2O == MA$H2O[i+1])
       }
       par(xpd = FALSE)
       title("16 PS model + 200 human proteins", font.main = 1)
@@ -552,8 +566,8 @@ evdevH2O5 <- function(pdf = FALSE) {
 
 }
 
-# Calculate optimal logaH2O and logfO2 for phylostrata 20201218
-# Make it work for B. subtilis biofilm dataset (Futo et al., 2020) 20201221
+# Calculate optimal logaH2O and logfO2 for various datasets 20210402
+# History: Phylostrata 20201218, B. subtilis biofilm 20201221
 runMaximAct <- function(dataset = "TPPG17", seed = 1:100) {
 
   # Process 'dataset' argument
@@ -595,9 +609,17 @@ runMaximAct <- function(dataset = "TPPG17", seed = 1:100) {
     H2O <- c(-2, 4)
   }
 
+  # Start plot
   png(paste0(dataset, ".png"), width = 1000, height = 1000)
   par(cex = 2)
-  MaximAct(aa, seed = seed, nbackground = 2000, filebase = dataset, xlab = xlab, O2 = O2, H2O = H2O)
+  # Run MaximAct()
+  MA <- MaximAct(aa, seed = seed, nbackground = 2000, xlab = xlab, O2 = O2, H2O = H2O)
+  # Round and save values
+  O2 <- round(MA$O2, 3)
+  H2O <- round(MA$H2O, 3)
+  write.csv(O2, paste0(dataset, "_O2.csv"), row.names = FALSE, quote = FALSE)
+  write.csv(H2O, paste0(dataset, "_H2O.csv"), row.names = FALSE, quote = FALSE)
+  # Close plot
   dev.off()
 
 }
@@ -682,7 +704,7 @@ plotphylo <- function(vars = c("ZC", "nH2O"), PS_source = "TPPG17", memo = NULL,
     lines(PS, cum.nH2O, col = 2, lty = 2)
   }
   if("nAA" %in% vars) {
-    plot(PS, mean.nAA, type = "b", xlab = xlab, ylab = nAAlab, font.lab = 2)
+    plot(PS, mean.nAA, type = "b", xlab = xlab, ylab = "Protein length", font.lab = 2)
     lines(PS, cum.nAA, col = 2, lty = 2)
   }
   # return the dat and pcomp for memoization 20191211

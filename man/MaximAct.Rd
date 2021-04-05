@@ -8,7 +8,7 @@ Calculate the \logaH2O and \logfO2 that maximize the activities of given target 
 
 \usage{
   MaximAct(aa, seed = 1:100, nbackground = 2000,
-    plot.it = TRUE, filebase = NULL, xlab = "sample", names = NULL,
+    plot.it = TRUE, xlab = "sample", names = NULL,
     O2 = c(-72, -67), H2O = c(-2, 6), pH = NULL)
 }
 
@@ -17,7 +17,6 @@ Calculate the \logaH2O and \logfO2 that maximize the activities of given target 
   \item{seed}{numeric, seeds to use for subsampling background proteins from human proteome}
   \item{nbackground}{numeric, number of background proteins to sample}
   \item{plot.it}{logical, make a plot?}
-  \item{filebase}{character, base name to use for output files}
   \item{xlab}{character or expression, label for \emph{x} axis}
   \item{names}{character, sample names}
   \item{O2}{numeric, range of \logfO2 values}
@@ -39,9 +38,7 @@ The results are returned in a list with components \code{O2} and \code{H2O}.
 
 By default, a pair of plots is made that are updated during the calculation; at the end, the mean values of \logfO2 and \logaH2O are plotted as red lines.
 Change \code{plot.it} to FALSE to  prevent making the plots.
-
-If \code{filebase} is not NULL, the return value is made \code{\link{invisible}} and the results are saved in CSV files named by concatenating \code{filebase} with \samp{_O2.csv} (for \logfO2) or \samp{_H2O.csv} (for \logaH2O).
-The protein names (used in both the plots and CSV files) are taken from \code{aa$protein} or the \code{names} argument if it is not NULL.
+The protein names (used to label the x axis of the plots and for the column names in the output) are taken from \code{aa$protein} or the \code{names} argument if it is not NULL.
 }
 
 \seealso{
@@ -59,7 +56,7 @@ Dick, J. M. (2021) Redox potential linked to water loss from proteins in evoluti
 datadir <- system.file("extdata/evdevH2O", package = "JMDplots")
 aa <- read.csv(file.path(datadir, "FOK+21_mean_aa.csv"), as.is = TRUE)
 aa <- subset(aa, organism == "transcriptome")
-OA <- MaximAct(aa, seed = 1:3, nbackground = 200, O2 = c(-72, -65), H2O = c(-2, 5))
+OA <- MaximAct(aa, seed = 1:3, nbackground = 200, O2 = c(-72, -65, 15), H2O = c(-2, 5, 15))
 ## Default arguments used in runMaximAct -- takes much longer
 #OA <- MaximAct(aa, seed = 1:100, nbackground = 2000, O2 = c(-72, -65), H2O = c(-2, 5))
 # The logaH2O decreases at the end of the time course

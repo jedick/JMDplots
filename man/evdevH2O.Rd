@@ -40,8 +40,9 @@ This table gives a brief description of each plotting function.
   \code{evdevH2O5} \tab Organismal water content, proteomic \nH2O, and optimal \logaH2O for fruit fly development \cr
 }
 
-\code{runMaximAct} sets up calculations with \code{\link{MaximAct}} to  compute the optimal \logaH2O and \logfO2 that maximize the equilibrium activity of model proteins for phylostrata.
-The possible values of \code{dataset} are described below.
+\code{runMaximAct} sets up calculations with \code{\link{MaximAct}} to  compute the optimal \logaH2O and \logfO2 that maximize the equilibrium activity of model proteins against a human proteome background.
+The results, i.e. optimal \logfO2 or \logaH2O values for each seed and protein are saved in CSV files named by concatenating \code{dataset} with \samp{_O2.csv} or \samp{_H2O.csv}.
+The available \code{dataset}s are described below.
 \describe{
   \item{\samp{TPPG17}}{Phylostrata from Trigos et al., 2017; target proteins are mean amino acid compositions for each phylostratum.}
   \item{\samp{LMM16}}{Gene ages from Liebeskind et al., 2016; target proteins are mean amino acid compositions for each gene age.}
