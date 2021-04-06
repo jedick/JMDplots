@@ -1,10 +1,10 @@
 ---
-title: "Thermodynamics in evo-devo (2021)"
+title: "Thermodynamics in evolution and development (2021)"
 output: 
   rmarkdown::html_vignette:
     mathjax: null
 vignette: >
-  %\VignetteIndexEntry{Thermodynamics in evo-devo (2021)}
+  %\VignetteIndexEntry{Thermodynamics in evolution and development (2021)}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 bibliography: JMDplots.bib
@@ -61,14 +61,12 @@ nH2O <- "<i>n</i><sub>H<sub>2</sub>O</sub>"
 ZC <- "<i>Z</i><sub>C</sub>"
 ```
 
-```{r library, message = FALSE, results = "hide"}
-library(JMDplots)
-# read canprot's 'basis' option
-basis <- getOption("basis")
-```
-
 This vignette contains plots from the paper by [Dick (2021)](https://doi.org/10.1101/2021.01.29.428804 "Redox potential linked to water loss from proteins in evolution and development").
 This vignette was compiled on `r Sys.Date()` with **[JMDplots](https://github.com/jedick/JMDplots)** `r packageDescription("JMDplots")$Version` and **[CHNOSZ](http://chnosz.net)** `r packageDescription("CHNOSZ")$Version`.
+
+```{r library, message = FALSE, results = "hide"}
+library(JMDplots)
+```
 
 Phylostrata are from @TPPG17.
 Consensus gene ages are from @LMM16.
@@ -89,7 +87,7 @@ if(!chnoszVersion > "1.4.0"){
 evdevH2O2()
 ```
 
-## Optimal `r logaH2O` and `r logfO2` and effective Eh for target proteins (Figure 3)
+## Optimal `r logaH2O` and `r logfO2` and virtual Eh for target proteins (Figure 3)
 ```{r evdevH2O3, message = FALSE, results = "hide", out.width='100%', fig.width = 8, fig.height = 5, out.extra='class="full-width"', pngquant = pngquant, dpi = 100}
 evdevH2O3()
 ```

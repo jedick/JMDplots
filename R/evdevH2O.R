@@ -197,7 +197,7 @@ evdevH2O2 <- function(pdf = FALSE) {
 
 }
 
-# Optimal logaH2O and logfO2 and effective Eh for target proteins 20201218
+# Optimal logaH2O and logfO2 and virtual Eh for target proteins 20201218
 evdevH2O3 <- function(pdf = FALSE) {
 
   # Setup plot
@@ -283,6 +283,9 @@ evdevH2O3 <- function(pdf = FALSE) {
       Eh2 <- convert(meanO2, "E0", pH = pH, logaH2O = meanH2O)
       stopifnot(all.equal(Eh, Eh2))
       mV <- Eh * 1000
+      # Also calculate Eh assuming logaH2O = 0  20210406
+      Eh_noH2O <- convert(meanO2, "E0", pH = pH, logaH2O = 0)
+      mV_noH2O <- Eh_noH2O * 1000
 
       # Make Eh plot
       plot(range(PS), c(-325, -150), xlab = NA, ylab = NA, type = "n", xaxt = "n", xaxs = "i", yaxt = "n")
@@ -298,7 +301,7 @@ evdevH2O3 <- function(pdf = FALSE) {
         rect(10, par("usr")[3], 16, par("usr")[4], col = "lightgray")
         # PS 1 (Cellular organisms), 2 (Eukaryota), 5 (Eumetazoa), 10 (Mammalia)
         abline(v = c(1.04, 2, 5, 10), col = 5, lwd = 2)
-        xtext <- 6.2
+        xtext <- 6.5
       }
       if(PS_source == "LMM16") {
         axis(1, at = 1:8, labels = c(1,NA,NA,4,NA,6,NA,8))
@@ -306,15 +309,19 @@ evdevH2O3 <- function(pdf = FALSE) {
         abline(v = c(1.02, 4, 6, 7.98), col = 5, lwd = 2)
         xtext <- 5.5
       }
-      # Eh = -150 mV (plasma GSH/GSSG) Jones and Sies, 2015
-      # Eh = -199 mV (erythrocyte GSH/GSSG) van 't Erve et al., 2013
-      # Eh = -241 mV (cytosolic NADH/NAD+) Jones and Sies, 2015
-      # Eh = -318 mV (mitochondrial NADH/NAD+) Jones and Sies, 2015
-      abline(h = c(-150, -199, -241, -318), lty = 2, lwd = 1.5, col = "slategray4")
+      # Plot virtual Eh
       lines(PS, mV, lwd = 2, col = 2) 
+      lines(PS, mV_noH2O, lty = 2, lwd = 1, col = 2) 
+      # Add lines for measured Eh
+      abline(h = c(-150, -199, -241, -318), lty = 3, lwd = 1.5, col = "slategray4")
+      # Eh = -150 mV (plasma GSH/GSSG) Jones and Sies, 2015
       text(xtext, -150, "Plasma GSH/GSSG", adj = c(0.5, 1.3))
-      text(xtext, -199, "Erythrocyte GSH/GSSG", adj = c(0.5, -0.3))
+      # Eh = -199 mV (erythrocyte GSH/GSSG) van 't Erve et al., 2013
+      if(PS_source=="TPPG17") text(xtext, -199, "Erythrocyte GSH/GSSG", adj = c(0.5, -0.3))
+      if(PS_source=="LMM16") text(xtext, -199, "Erythrocyte         GSH/GSSG     ", adj = c(0.5, -0.3))
+      # Eh = -241 mV (cytosolic NADH/NAD+) Jones and Sies, 2015
       text(xtext, -241, "Cytosolic NADH/NAD+", adj = c(0.5, 1.3))
+      # Eh = -318 mV (mitochondrial NADH/NAD+) Jones and Sies, 2015
       text(xtext, -318, "Mitochondrial NADH/NAD+", adj = c(0.5, -0.3))
       label.figure(fig.lab[4], cex = 1.6, font = 2)
     }
@@ -326,7 +333,7 @@ evdevH2O3 <- function(pdf = FALSE) {
 
   if(pdf) {
     dev.off()
-    addexif("evdevH2O3", "Optimal logaH2O and logfO2 and effective Eh for target proteins", "Dick (2021) (preprint)")
+    addexif("evdevH2O3", "Optimal logaH2O and logfO2 and virtual Eh for target proteins", "Dick (2021) (preprint)")
   }
 }
 
@@ -480,7 +487,7 @@ evdevH2O5 <- function(pdf = FALSE) {
   H2O_adult <- median(colMeans(H2O_adult)[-1])
   O2_adult <- median(colMeans(O2_adult)[-1])
 
-  # Optimization results for developmental proteome of Casas-Vila et al., 2017  20210403
+  # MaximAct results for developmental proteome of Casas-Vila et al., 2017  20210403
   # Make logaH2O plot
   H2O <- read.csv(file.path(datadir, "fly_development_H2O.csv"), as.is = TRUE)[, -1]
   meanH2O <- colMeans(H2O)
@@ -492,7 +499,7 @@ evdevH2O5 <- function(pdf = FALSE) {
   text(x = 1:17, y = par()$usr[3] - 1.5 * strheight("A"), labels = labels, srt = 45, adj = 1, xpd = TRUE)
   axis(1, at = 1:17, labels = NA)
   label.figure("c", cex = 1.6, font = 2)
-  title("Optimization results\n(Lines show values from panel e)", font.main = 1)
+  title("MaximAct results\n(Lines show values from panel e)", font.main = 1)
 
   ## Plot D:
   # ZC and nH2O of differentially expressed proteins in dataset of Fabre et al., 2019  20210401
