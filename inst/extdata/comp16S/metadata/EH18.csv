@@ -1,0 +1,6 @@
+study,name,Run,BioSample,sample,type,cohort
+EH18,"Mono Lake",SRR3475672,SAMN04903374,ML16S_10m,top,
+EH18,"Mono Lake",SRR3475695,SAMN04903375,ML16S_15m,transition,
+EH18,"Mono Lake",SRR3475696,SAMN04903376,ML16S_18m,transition,
+EH18,"Mono Lake",SRR3475698,SAMN04903377,ML16S_25m,transition,
+EH18,"Mono Lake",SRR3475699,SAMN04903378,ML16S_31m,bottom,

@@ -1,0 +1,9 @@
+study,name,Run,BioSample,sample,type,cohort,depth
+JHM+16,"Lake Fryxell microbial mats",SRR2774767,SAMN03995620,FRX10,anoxic,,"9.6 m"
+JHM+16,"Lake Fryxell microbial mats",SRR2811167,SAMN03994023,FRX2,oxic,,"8.8 m"
+JHM+16,"Lake Fryxell microbial mats",SRR2811166,SAMN03994039,FRX3,oxic,,"8.8 m"
+JHM+16,"Lake Fryxell microbial mats",SRR2811165,SAMN03994040,FRX4,oxic,,"9.4 m"
+JHM+16,"Lake Fryxell microbial mats",SRR2810990,SAMN03995359,FRX5,transition,,"9.4 m"
+JHM+16,"Lake Fryxell microbial mats",SRR2810537,SAMN03995360,FRX6,transition,,"9.4 m"
+JHM+16,"Lake Fryxell microbial mats",SRR2809035,SAMN03995616,FRX7,anoxic,,"9.6 m"
+JHM+16,"Lake Fryxell microbial mats",SRR2775331,SAMN03995618,FRX8,anoxic,,"9.6 m"

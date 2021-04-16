@@ -43,7 +43,11 @@ export(
   # mjenergy paper 20210205
   "mjenergy1", "mjenergy2", "mjenergy3", "calc_affinity",
   # evdevH2O paper 20210401-20210402
-  "MaximAct", "pdat_fly"
+  "MaximAct", "pdat_fly",
+  # comp16S functions 20210416
+  "getmdat", "getRDP", "getmap", "getmetrics"
+#  # geo16S paper 20210416
+#  "geo16S1", "geo16S2", "geo16S3", "geo16S4" 
 )
 
 # imports from CHNOSZ
