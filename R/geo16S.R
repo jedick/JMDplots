@@ -34,7 +34,7 @@ geo16S2 <- function(pdf = FALSE) {
 
   if(pdf) pdf("Figure_2.pdf", width = 9, height = 7)
   oopar <- par(no.readonly = TRUE)
-  par(mar = c(4, 4, 3, 1))
+  par(mar = c(4, 4, 3, 2))
   par(mgp = c(2.5, 1, 0))
   layout(matrix(c(1,2,3, 4,9,5, 6,7,8), nrow = 3, byrow = TRUE))
 
@@ -46,7 +46,7 @@ geo16S2 <- function(pdf = FALSE) {
   }
 
   p1 <- plotcomp("BGPF13", title = FALSE, points = FALSE)
-  title("Yellowstone hot springs\nBowen De Le\u0301n et al., 2013", font.main = 1)
+  title("Yellowstone hot springs\nBowen De Le\u00f3n et al., 2013", font.main = 1)
   addhull(p1$ZC, p1$nH2O, 2, TRUE)
   pointfun(p1)
   legend <- c("Archaea", "Bacteria")
@@ -120,6 +120,14 @@ geo16S2 <- function(pdf = FALSE) {
   addhull(p7$ZC, p7$nH2O, 4, TRUE, lwd = 2, lty = 2)
   addhull(p8$ZC, p8$nH2O, "tan1", TRUE, lwd = 2)
   par(opar)
+
+  # Add environment type labels 20210427
+  par(xpd = NA)
+  text(-0.397, -0.703, "Hydrothermal", cex = 1.5, font = 2, srt = 90)
+  text(-0.24, -0.857, "Mat and sediment", cex = 1.5, font = 2)
+  text(-0.07, -0.635, "Marine", cex = 1.5, font = 2)
+  text(0.074, -0.78, "Hypersaline", cex = 1.5, font = 2, srt = 90)
+  par(xpd = FALSE)
 
   par(oopar)
   if(pdf) dev.off()

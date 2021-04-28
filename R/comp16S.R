@@ -43,41 +43,9 @@ getmdat <- function(study, dropNA = TRUE) {
   issubtrahend <- mdat$type == "normal"
   subject <- NULL
 
-  # Identify samples for computing differences in each study
-  # 'subject' is host or patient ID (without "tumor" or "normal" text)
-  if(study == "HCH+16") {
-    # Symbols as in Figure 1 of HCH+16
-    pch <- sapply(mdat$type, switch, "Buccal Cells" = 22, "Skin Swab" = 23, "Skin Tissue" = 24, "Breast" = 21)
-    col <- sapply(mdat$type, switch, "Buccal Cells" = 3, "Skin Swab" = 4, "Skin Tissue" = "#802fc3", "Breast" = 2)
-    # Calculate differences as "Breast" minus "Skin Tissue"
-    isminuend <- mdat$type == "Breast"
-    issubtrahend <- mdat$type == "Skin Tissue"
-    subject <- gsub(".T.*", "", mdat$sample)
-  }
-  if(study == "ZTV+14") {
-    subject <- gsub("[AC]$", "", mdat$sample)
-    col <- sapply(mdat$type, switch, tumor = 2, normal = 1, NA)
-  }
-  if(study == "ZTV+14-F") {
-    pch <- sapply(mdat$type, switch, "CRC" = 21, "Control" = 1, NA)
-    col <- sapply(mdat$type, switch, "CRC" = 2, "Control" = 1, NA)
-  }
-  if(study == "TWB+18") {
-    pch <- sapply(mdat$type, switch, "ipsilateral" = 21, "contralateral" = 1, NA)
-    isminuend <- mdat$type == "ipsilateral"
-    issubtrahend <- mdat$type == "contralateral"
-    subject <- sapply(strsplit(mdat$sample, "\\."), "[", 1)
-  }
-  if(study == "YMZ+15") {
-    desc <- paste(mdat$type, mdat$cohort, sep = "_")
-    # Yellow square for urine, red circle for semen, open symbols for healthy
-    pch <- sapply(desc, switch, PCA_semen = 21, PCA_urine = 22, healthy_semen = 1, healthy_urine = 0)
-    col <- sapply(desc, switch, PCA_semen = 2, PCA_urine = "yellow3", healthy_semen = 1, healthy_urine = 1)
-  }
-  if(study == "LBW+13") {
-    pch <- rep(1, nrow(mdat))
-    col <- sapply(mdat$type, switch, male = 1, female = 2, NA)
-  }
+  ## Identify samples for computing differences in each study
+
+  # Natural environments
   if(study == "BGPF13") {
     pch <- sapply(mdat$cohort, switch, Bacteria = 22, Archaea = 23)
     col <- sapply(mdat$cohort, switch, Bacteria = 5, Archaea = 6)
@@ -115,140 +83,8 @@ getmdat <- function(study, dropNA = TRUE) {
     pch <- sapply(type, switch, low = 24, moderate = 20, high = 21)
     col <- sapply(type, switch, low = 3, moderate = 1, high = 4)
   }
-  if(study == "NLZ+15") {
-    cohort_type <- paste(mdat$cohort, mdat$type, sep = "_")
-    pch <- sapply(cohort_type, switch, carcinoma_tumor = 21, healthy_normal = 1, NA)
-    isminuend <- cohort_type %in% c("adenoma_polyp", "carcinoma_tumor")
-    issubtrahend <- cohort_type %in% c("adenoma_normal", "carcinoma_normal")
-    sample <- sapply(strsplit(mdat$sample, "_"), "[", 1)
-    subject <- gsub("N", "", gsub("t", "T", gsub("p", "P", sample)))
-  }
-  if(study == "NLZ+15_carcinoma") {
-    cohort_type <- paste(mdat$cohort, mdat$type, sep = "_")
-    mdat <- mdat[cohort_type %in% c("carcinoma_tumor", "healthy_normal"), ]
-    cohort_type <- paste(mdat$cohort, mdat$type, sep = "_")
-    pch <- sapply(cohort_type, switch, carcinoma_tumor = 21, healthy_normal = 1)
-    col <- sapply(cohort_type, switch, carcinoma_tumor = 2, healthy_normal = 1)
-  }
-  if(study == "NLZ+15_adenoma") {
-    cohort_type <- paste(mdat$cohort, mdat$type, sep = "_")
-    mdat <- mdat[cohort_type %in% c("adenoma_polyp", "healthy_normal"), ]
-    cohort_type <- paste(mdat$cohort, mdat$type, sep = "_")
-    pch <- sapply(cohort_type, switch, adenoma_polyp = 21, healthy_normal = 1)
-    col <- sapply(cohort_type, switch, adenoma_polyp = 2, healthy_normal = 1)
-  }
-  if(study == "TZT+20") {
-    # Get race (BNH or WNH)
-    race <- gsub("[ab]", "", sapply(strsplit(mdat$ID, "_"), "[", 1))
-    race_type <- paste(race, mdat$type, sep = "_")
-    # Filled circle and square for BNH and WNH tumors; empty symbols for normal
-    pch <- sapply(race_type, switch, BNH_tumor = 21, WNH_tumor = 22, BNH_normal = 1, WNH_normal = 0)
-    col <- sapply(race_type, switch, BNH_tumor = 2, WNH_tumor = 4, BNH_normal = 1, WNH_normal = 1)
-    subject <- mdat$ID
-  }
-  if(study == "TIT+17") {
-    subject <- sapply(strsplit(mdat$sample, "\\."), "[", 3)
-  }
-  if(grepl("NLF\\+20", study)) {
-    isnormal <- grepl("(N", mdat$type, fixed = TRUE)
-    pch <- ifelse(isnormal, 1, 21)
-    col <- ifelse(isnormal, 1, 2)
-    if(length(unique(mdat$type)) > 1) {
-      isminuend <- !isnormal
-      issubtrahend <- isnormal
-      subject <- mdat$ID
-    }
-  }
-  if(study == "NLF+20-ovary-genus_unpaired") {
-    # Exclude normal adjacent samples 20201007
-    mdat <- mdat[mdat$type != "Ovary (NAT)", ]
-    isnormal <- grepl("(N", mdat$type, fixed = TRUE)
-    pch <- ifelse(isnormal, 1, 21)
-    col <- ifelse(isnormal, 1, 2)
-    subject <- NULL
-  } 
-  if(study == "BVP+20") {
-    pch <- sapply(mdat$type, switch, "Affected bronchial" = 21, "Contralateral bronchial" = 1, NA)
-    col <- sapply(mdat$type, switch, "Affected bronchial" = 2, "Contralateral bronchial" = 1, NA)
-    isminuend <- mdat$type == "Affected bronchial"
-    issubtrahend <- mdat$type == "Contralateral bronchial"
-    subject <- mdat$ID
-  }
-  if(study == "BVP+20_Salivary") {
-    mdat <- mdat[mdat$type == "Salivary", ]
-    pch <- ifelse(grepl("patient", mdat$ID), 21, 1)
-    col <- ifelse(grepl("patient", mdat$ID), 2, 1)
-  }
-  if(study == "BVP+20_Bronchial") {
-    mdat <- mdat[grepl("Bronchial", mdat$type, ignore.case = TRUE), ]
-    pch <- ifelse(grepl("patient", mdat$ID), 21, 1)
-    col <- ifelse(grepl("patient", mdat$ID), 2, 1)
-  }
-  if(study == "UGB+16") {
-    # Remove samples in PBS/skin/NTC group (UGB+16 Table S2) 20201007
-    mdat <- mdat[mdat$cohort != "removed", ]
-    # Remove benign samples
-    mdat <- mdat[mdat$type != "benign", ]
-    pch <- sapply(mdat$type, switch, tumor = 21, healthy = 1)
-    col <- sapply(mdat$type, switch, tumor = 2, healthy = 1)
-  }
-  if(study == "SKB+14_unpaired") {
-    # Remove CIS and duplicates
-    mdat <- mdat[! (grepl("duplicate", mdat$cohort) | mdat$cohort == "CIS"), ]
-    # Remove paired normal in cancer and dysplasia
-    mdat <- mdat[!mdat$type == "normal", ]
-    pch <- sapply(mdat$cohort, switch, cancer = 21, "pre-cancer" = 22, "healthy normal" = 1)
-    col <- sapply(mdat$cohort, switch, cancer = 2, "pre-cancer" = 4, "healthy normal" = 1)
-  }
-  if(study == "SKB+14_paired") {
-    # Remove CIS and duplicates
-    mdat <- mdat[! (grepl("duplicate", mdat$cohort) | mdat$cohort == "CIS"), ]
-    # Filled red and open circle for cancer / normal pairs; filled black symbol for healthy normal
-    pch <- sapply(mdat$type, switch, cancer = 21, dysplasia = 22, normal = 1, 19)
-    col <- sapply(mdat$type, switch, cancer = 2, dysplasia = 4, normal = 1, 1)
-    isminuend <- mdat$type %in% c("cancer", "dysplasia", "left")
-    issubtrahend <- mdat$type %in% c("normal", "right")
-    subject <- gsub("[DCISNRL]", "", mdat$sample)
-  }
-  if(study == "SKB+14") {
-    # Filled circle for cancer or CIS, filled square for dysplasia, open circle for healthy normal (right/left)
-    pch <- sapply(mdat$cohort, switch, cancer = 21, CIS = 21, "pre-cancer" = 22,
-                  "cancer duplicate" = 21, "pre-cancer duplicate" = 22, "healthy normal" = 1)
-    # Red for cancer, blue for dysplasia, unfilled for healthy normal
-    col <- sapply(mdat$cohort, switch, "pre-cancer" = 4, "pre-cancer duplicate" = 4, "healthy normal" = 1, 2)
-    isminuend <- mdat$type %in% c("cancer", "dysplasia", "left")
-    issubtrahend <- mdat$type %in% c("normal", "right")
-    subject <- gsub("[DCISNRL]", "", mdat$sample)
-  }
-  if(study == "ZLZZ20") {
-    subject <- gsub("[a-z]", "", mdat$sample)
-  }
-  if(study == "ZCH+17") {
-    subject <- sapply(strsplit(mdat$sample, "_"), "[", 1)
-  }
-  if(study == "YTH+17") {
-    subject <- gsub("\\.", "", gsub("U$", "", gsub("A$", "", gsub("N$", "", gsub("T$", "", mdat$sample)))))
-  }
-  if(study == "PHD+18.454") {
-    pch <- sapply(mdat$type, switch, PDAC = 21, Normal = 1, NA)
-    col <- sapply(mdat$type, switch, PDAC = 2, Normal = 1, NA)
-  }
-  if(study == "PHD+18.Illumina") {
-    # Just keep human feces samples 20201105
-    mdat <- mdat[grep("^HF", mdat$sample), ]
-    pch <- sapply(mdat$type, switch, PDAC = 21, Normal = 1, NA)
-    col <- sapply(mdat$type, switch, PDAC = 2, Normal = 1, NA)
-  }
-  if(study == "GPDS14") {
-    ## Red circles / open circles for small / large size fraction
-    #pch <- sapply(mdat$type, switch, "0.22-1.6micron" = 21, ">1.6micron" = 1, NA)
-    #col <- sapply(mdat$type, switch, "0.22-1.6micron" = 2, ">1.6micron" = 1, NA)
-    # Red open / filled circles for small / large size fraction (deep) 
-    # Blue open / filled squares for small / large size fraction (surface)
-    sizedepth <- paste(mdat$type, mdat$cohort)
-    pch <- sapply(sizedepth, switch, "0.22-1.6micron surface" = 1, ">1.6micron surface" = 21, "0.22-1.6micron deep" = 0, ">1.6micron deep" = 22)
-    col <- sapply(sizedepth, switch, "0.22-1.6micron surface" = 4, ">1.6micron surface" = 4, "0.22-1.6micron deep" = 2, ">1.6micron deep" = 2)
-  }
+
+  # Unconvential oil and gas environments
   if(study == "UKD+18.water") {
     pch <- sapply(mdat$type, switch, "MSA+" = 21, "MSA-" = 1)
     col <- sapply(mdat$type, switch, "MSA+" = 2, "MSA-" = 1)
@@ -285,22 +121,6 @@ getmdat <- function(study, dropNA = TRUE) {
   if(study == "CUN+18") {
     pch <- sapply(mdat$type, switch, "UOG+" = 21, "UOG-" = 1, 0)
     col <- sapply(mdat$type, switch, "UOG+" = 2, "UOG-" = 1, 1)
-  }
-  if(study == "CUN+18_cond") {
-    pch <- ifelse(mdat$conductivity >= 60, 21, 1)
-    col <- ifelse(mdat$conductivity >= 60, 2, 1)
-  }
-  if(study == "CUN+18_pH") {
-    pch <- ifelse(mdat$pH >= 7.4, 21, 1)
-    col <- ifelse(mdat$pH >= 7.4, 2, 1)
-  }
-  if(study == "CUN+18_alk") {
-    pch <- ifelse(mdat$alkalinity >= 18.5, 21, 1)
-    col <- ifelse(mdat$alkalinity >= 18.5, 2, 1)
-  }
-  if(study == "CUN+18_temp") {
-    pch <- ifelse(mdat$temperature <= 15.6, 21, 1)
-    col <- ifelse(mdat$temperature <= 15.6, 2, 1)
   }
   if(study == "MMA+20") {
     # Exclude AMD streams
