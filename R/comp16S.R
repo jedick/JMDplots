@@ -54,10 +54,6 @@ getmdat <- function(study, dropNA = TRUE) {
     pch <- sapply(mdat$type, switch, marine = 21, hydrothermal = 23, fauna = 8, rock = 20, NA)
     col <- sapply(mdat$type, switch, marine = 4, hydrothermal = 2, fauna = "yellow4", rock = 1, NA)
   }
-  if(study == "EH18") {
-    pch <- sapply(mdat$type, switch, top = 24, transition = 20, bottom = 25)
-    col <- sapply(mdat$type, switch, top = 4, transition = 1, bottom = 2)
-  }
   if(study == "SVH+19") {
     pch <- sapply(mdat$type, switch, oxic = 24, suboxic = 20, euxinic = 25, NA)
     col <- sapply(mdat$type, switch, oxic = 4, suboxic = 1, euxinic = 2, NA)
@@ -80,6 +76,13 @@ getmdat <- function(study, dropNA = TRUE) {
     type <- rep("moderate", nrow(mdat))
     type[mdat$salinity < 6] <- "low"
     type[mdat$salinity > 20] <- "high"
+    pch <- sapply(type, switch, low = 24, moderate = 20, high = 21)
+    col <- sapply(type, switch, low = 3, moderate = 1, high = 4)
+  }
+  if(study == "ZLM+16") {
+    type <- rep("moderate", nrow(mdat))
+    type[mdat$lake %in% c("Keluke", "Qing")] <- "low"
+    type[mdat$lake == "Gasikule"] <- "high"
     pch <- sapply(type, switch, low = 24, moderate = 20, high = 21)
     col <- sapply(type, switch, low = 3, moderate = 1, high = 4)
   }

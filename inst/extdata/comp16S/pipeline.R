@@ -23,21 +23,17 @@ writeLines(con = file, text = gsub(" ", "", c(
   # For 454 experiments, set forwardonly to NA
   "system, study, forwardonly, trunclen",
 
+  # Natural environment datasets
   "environmental, BGPF13, NA, NA",
   "environmental, HLA+16, NA, NA",
   "environmental, JHM+16, FALSE, 230",
   "environmental, MPB+17, TRUE, 450",
   "environmental, XDZ+17, TRUE, 250",
-  "environmental, EH18, NA, NA",
   "environmental, VAH+18, FALSE, 250",
   "environmental, SVH+19, NA, NA",
+  "environmental, ZLM+16, TRUE, 250",
 
-  "environmental, UKD+18.S12, TRUE, 125",
-  "environmental, UKD+18.S14, TRUE, 150",
-  "environmental, UKD+18.W14, TRUE, 150",
-  "environmental, UKD+18.W15, TRUE, 150",
-  "environmental, UKD+18.S15, TRUE, 150",
-
+  # Unconventional oil and gas datasets
   "environmental, UKD+18.sediment, TRUE, 100",
   "environmental, UKD+18.water, TRUE, 100",
   "environmental, CUN+18, TRUE, 250",
