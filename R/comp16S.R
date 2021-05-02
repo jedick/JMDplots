@@ -25,7 +25,7 @@ getmdat <- function(study, dropNA = TRUE) {
   studyfile <- gsub("_.*", "", study)
   datadir <- system.file("extdata/comp16S", package = "JMDplots")
   file <- file.path(datadir, "metadata", paste0(studyfile, ".csv"))
-  mdat <- read.csv(file, as.is = TRUE)
+  mdat <- read.csv(file, as.is = TRUE, check.names = FALSE)
 
   if(dropNA) {
     # Exclude samples with NA name (e.g. very low ZC in JHM+16 - outlier?) 20200916
@@ -46,31 +46,27 @@ getmdat <- function(study, dropNA = TRUE) {
   ## Identify samples for computing differences in each study
 
   # Natural environments
-  if(study == "BGPF13") {
+  if(study == "BGPF13") { # Heart Lake Geyser Basin, Yellowstone
     pch <- sapply(mdat$cohort, switch, Bacteria = 22, Archaea = 23)
     col <- sapply(mdat$cohort, switch, Bacteria = 5, Archaea = 6)
   }
-  if(study == "MPB+17") {
+  if(study == "MPB+17") { # Manus Basin
     pch <- sapply(mdat$type, switch, marine = 21, hydrothermal = 23, fauna = 8, rock = 20, NA)
     col <- sapply(mdat$type, switch, marine = 4, hydrothermal = 2, fauna = "yellow4", rock = 1, NA)
   }
-  if(study == "SVH+19") {
+  if(study == "SVH+19") { # Black Sea
     pch <- sapply(mdat$type, switch, oxic = 24, suboxic = 20, euxinic = 25, NA)
     col <- sapply(mdat$type, switch, oxic = 4, suboxic = 1, euxinic = 2, NA)
   }
-  if(study == "XDZ+17") {
+  if(study == "XDZ+17") { # Qarhan Salt Lake
     pch <- sapply(mdat$type, switch, normal = 24, saline = 21)
     col <- sapply(mdat$type, switch, normal = 3, saline = 4)
   }
-  if(study == "VAH+18") {
-    pch <- ifelse(grepl("S", mdat$sample), 24, 25)
-    col <- ifelse(grepl("S", mdat$sample), 4, 2)
-  }
-  if(study == "JHM+16") {
+  if(study == "JHM+16") { # Lake Fryxell microbial mats
     pch <- sapply(mdat$type, switch, oxic = 24, transition = 20, anoxic = 25)
     col <- sapply(mdat$type, switch, oxic = 4, transition = 1, anoxic = 2)
   }
-  if(study == "HLA+16") {
+  if(study == "HLA+16") { # Baltic Sea
     #pch <- sapply(mdat$type, switch, Oligohaline = 24, Mesohaline = 20, Marine = 21)
     #col <- sapply(mdat$type, switch, Oligohaline = 3, Mesohaline = 1, Marine = 4)
     type <- rep("moderate", nrow(mdat))
@@ -79,12 +75,16 @@ getmdat <- function(study, dropNA = TRUE) {
     pch <- sapply(type, switch, low = 24, moderate = 20, high = 21)
     col <- sapply(type, switch, low = 3, moderate = 1, high = 4)
   }
-  if(study == "ZLM+16") {
+  if(study == "ZLM+16") { # Tibetan Plateau Lakes
     type <- rep("moderate", nrow(mdat))
     type[mdat$lake %in% c("Keluke", "Qing")] <- "low"
     type[mdat$lake == "Gasikule"] <- "high"
     pch <- sapply(type, switch, low = 24, moderate = 20, high = 21)
     col <- sapply(type, switch, low = 3, moderate = 1, high = 4)
+  }
+  if(study == "HCW+13") { # Guerrero Negro microbial mat
+    pch <- sapply(mdat$zone, switch, A = 24, B = 20, C = 25)
+    col <- sapply(mdat$zone, switch, A = 4, B = 1, C = 2)
   }
 
   # Unconvential oil and gas environments
@@ -337,12 +337,16 @@ getmap <- function(study, RDP = NULL, lineage = NULL) {
     # 20200929
     "class_Cyanobacteria" = "phylum_Cyanobacteria",
     "genus_Spartobacteria_genera_incertae_sedis" = "species_Spartobacteria bacterium LR76",
+
     ## 20200922 Suda et al., 2002 doi:10.1099/00207713-52-5-1577
     #"genus_GpIIa" = "species_Planktothrix agardhii",
     ## 20200924 Looking at [MPB+17]
     #"genus_Marinimicrobia_genera_incertae_sedis" = "species_Candidatus Marinimicrobia bacterium",
     # 20200929 not used [BGPF13]
     #"genus_Armatimonadetes_gp7" = "phylum_Armatimonadetes",
+
+    # 20210502 processing Guerrero Negro
+    "class_Planctomycetacia" = "class_Planctomycetia",
   NA_character_)
   iswitch <- !is.na(NCBIgroups)
   if(any(iswitch)) {
@@ -569,7 +573,7 @@ plotcomp <- function(study, cn = FALSE, identify = FALSE, title = TRUE, xlim = N
       points(ZC[ifill], nH2O[ifill], pch = pch[ifill], col = 1, bg = col[ifill])
       points(ZC[!ifill], nH2O[!ifill], pch = pch[!ifill], col = col[!ifill])
     }
-    if(lines) lines(ZC, nH2O)
+    if(lines) lines(ZC, nH2O, lty = 3)
     if(isTRUE(title)) title(na.omit(mdat$name)[1], font.main = 1)
     else if(!isFALSE(title)) title(title, font.main = 1)
     # Identify points 20200903

@@ -15,7 +15,7 @@
 ## STUDY SETTINGS
 
 # Change the following line to setup the pipeline for one study
-study <- "SBE+17"
+study <- "HCW+13"
 # Settings for all studies are stored here
 file <- tempfile()
 # Write spaces here (but don't save them) to make this easier to read
@@ -53,7 +53,9 @@ writeLines(con = file, text = gsub(" ", "", c(
   "VWC+19, FALSE, 250",  # PRJNA473406  10.1126/sciadv.aaw4108
   "RZS+18, NA, NA",      # PRJNA308331  10.1080/01490451.2017.1392649
   "CLK19, FALSE, 440",   # PRJNA377833  10.1111/1758-2229.12679
-  "SBE+17, NA, NA"       # PRJNA308429  10.1073/pnas.1614190114
+  "SBE+17, NA, NA",      # PRJNA308429  10.1073/pnas.1614190114
+
+  "HCW+13, NA, NA"       # GenBank JN427016-JN539989  10.1038/ismej.2012.79
 
 )))
 # This reads and applies the settings
@@ -109,7 +111,8 @@ filter <- function(SRR) {
   olddir <- setwd(workdir)
   on.exit(setwd(olddir))
   # For SBE+17, original FASTQ files are obtained from SRA cloud 20210501
-  if(!study %in% c("SBE+17")) {
+  # For HCW+13, sequences are obtained from GenBank 20210502
+  if(!study %in% c("SBE+17", "HCW+13")) {
     # Generate input FASTQ files
     cmd <- paste("fastq-dump --split-files", SRR)
     if(study == "CCN+16") cmd <- paste("fastq-dump --split-files -X 500000", SRR)
@@ -117,7 +120,11 @@ filter <- function(SRR) {
     system(cmd)
   }
   outfile <- paste0(SRR, ".fa")
-  if(study == "SBE+17") {
+  if(study == "HCW+13") {
+    # We don't have FASTQ files for this study, so just copy the FASTA file 20210502
+    infile <- paste0(SRR, ".fasta")
+    file.copy(infile, outfile)
+  } else if(study == "SBE+17") {
     # This is Ion Torrent PGM so we need to adjust qmax 20210501
     # (Fatal error: FASTQ quality value (45) above qmax (41))
     infile <- paste0(SRR, ".fastq")
@@ -186,7 +193,7 @@ filter <- function(SRR) {
   }
 
   # Clean up
-  if(!study == "SBE+17") file.remove(Sys.glob("*.fastq"))
+  if(!study %in% c("SBE+17", "HCW+13")) file.remove(Sys.glob("*.fastq"))
   return()
 }
 

@@ -1,0 +1,11 @@
+study,name,Run,BioSample,sample,depth,zone
+HCW+13,"Guerrero Negro microbial mat",GN_layer_01,NA,GN_layer_01,0-1,A
+HCW+13,"Guerrero Negro microbial mat",GN_layer_02,NA,GN_layer_01,1-2,A
+HCW+13,"Guerrero Negro microbial mat",GN_layer_03,NA,GN_layer_01,2-3,A
+HCW+13,"Guerrero Negro microbial mat",GN_layer_04,NA,GN_layer_01,3-4,B
+HCW+13,"Guerrero Negro microbial mat",GN_layer_05,NA,GN_layer_01,4-5,B
+HCW+13,"Guerrero Negro microbial mat",GN_layer_06,NA,GN_layer_01,5-6,B
+HCW+13,"Guerrero Negro microbial mat",GN_layer_07,NA,GN_layer_01,6-10,C
+HCW+13,"Guerrero Negro microbial mat",GN_layer_08,NA,GN_layer_01,10-22,C
+HCW+13,"Guerrero Negro microbial mat",GN_layer_09,NA,GN_layer_01,22-34,C
+HCW+13,"Guerrero Negro microbial mat",GN_layer_10,NA,GN_layer_01,34-49,C
