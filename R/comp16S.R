@@ -175,6 +175,32 @@ getmdat <- function(study, dropNA = TRUE) {
     col <- ifelse(mdat$day >= 1, 2, 1)
   }
 
+  # Stratified water datasets
+  if(study == "MZG+20") {
+    # Identify shallowest and deepest samples from each lake
+    newdat <- lapply(unique(mdat$lake), function(lake) {
+      ilake <- mdat$lake == lake
+      range <- range(mdat$depth[ilake])
+      iext <- mdat$depth[ilake] %in% range
+      extdat <- mdat[ilake, ][iext, ]
+      extdat$type <- ifelse(extdat$depth == range[1], "shallowest", "deepest")
+      extdat
+    })
+    newdat <- do.call(rbind, newdat)
+    # Keep all samples, but plot only shallowest and deepest samples
+    mdat$type <- newdat$type[match(mdat$Run, newdat$Run)]
+    pch <- ifelse(mdat$type == "shallowest", 24, 25)
+    col <- ifelse(mdat$type == "shallowest", 4, 2)
+  }
+  if(study == "HXZ+20") {
+    pch <- ifelse(mdat$depth < 70, 24, 25)
+    col <- ifelse(mdat$depth < 70, 4, 2)
+  }
+  if(study == "GBL+15") {
+    pch <- ifelse(mdat$depth < 85, 24, 25)
+    col <- ifelse(mdat$depth < 85, 4, 2)
+  }
+
   minuend <- subtrahend <- rep(NA, nrow(mdat))
   if(!is.null(subject)) {
     # Enumerate minuend and subtrahend 20200915

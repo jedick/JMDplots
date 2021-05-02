@@ -78,12 +78,17 @@ geo16S1()
 geo16S2()
 ```
 
-## Shale gas datasets (Figure 3)
-```{r geo16S3, message = FALSE, results = "hide", out.width='100%', fig.width = 9, fig.height = 6, pngquant = pngquant}
+## Stratified lakes and seawater (Figure 3)
+```{r geo16S3, message = FALSE, results = "hide", out.width='100%', fig.width = 7, fig.height = 6, pngquant = pngquant}
 geo16S3()
 ```
 
-## Taxonomic levels (Figure 4)
-```{r geo16S4, message = FALSE, results = "hide", out.width='100%', fig.width = 8, fig.height = 6, pngquant = pngquant}
+## Shale gas datasets (Figure 4)
+```{r geo16S4, message = FALSE, results = "hide", out.width='100%', fig.width = 9, fig.height = 6, pngquant = pngquant}
 geo16S4()
+```
+
+## Taxonomic levels (Figure 5)
+```{r geo16S5, message = FALSE, results = "hide", out.width='100%', fig.width = 8, fig.height = 6, pngquant = pngquant}
+geo16S5()
 ```
