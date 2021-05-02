@@ -15,7 +15,7 @@
 ## STUDY SETTINGS
 
 # Change the following line to setup the pipeline for one study
-study <- "ZLF+19"
+study <- "SBE+17"
 # Settings for all studies are stored here
 file <- tempfile()
 # Write spaces here (but don't save them) to make this easier to read
@@ -40,7 +40,20 @@ writeLines(con = file, text = gsub(" ", "", c(
   "environmental, MMA+20, FALSE, 250",
   "environmental, CHM+14, NA, NA",
   "environmental, HRR+18, TRUE, 300",
-  "environmental, ZLF+19, FALSE, 290"
+  "environmental, ZLF+19, FALSE, 290",
+
+  # Stratified water datasets
+  "environmental, MZG+20, FALSE, 450",
+  "environmental, ACH+20, FALSE, 290",
+  "environmental, HXZ+20, FALSE, 440",
+  "environmental, GBL+15, FALSE, 250",
+
+  # Sediment datasets
+  "environmental, BRMJ19, FALSE, 500",
+  "environmental, VWC+19, FALSE, 250",
+  "environmental, RZS+18, NA, NA",
+  "environmental, CLK19, FALSE, 440",
+  "environmental, SBE+17, NA, NA"
 
 )))
 # This reads and applies the settings
@@ -95,13 +108,23 @@ filter <- function(SRR) {
   # Change to working directory
   olddir <- setwd(workdir)
   on.exit(setwd(olddir))
-  # Generate input FASTQ files
-  cmd <- paste("fastq-dump --split-files", SRR)
-  if(study == "CCN+16") cmd <- paste("fastq-dump --split-files -X 500000", SRR)
-  print(cmd)
-  system(cmd)
+  # For SBE+17, original FASTQ files are obtained from SRA cloud 20210501
+  if(!study %in% c("SBE+17")) {
+    # Generate input FASTQ files
+    cmd <- paste("fastq-dump --split-files", SRR)
+    if(study == "CCN+16") cmd <- paste("fastq-dump --split-files -X 500000", SRR)
+    print(cmd)
+    system(cmd)
+  }
   outfile <- paste0(SRR, ".fa")
-  if(is454) {
+  if(study == "SBE+17") {
+    # This is Ion Torrent PGM so we need to adjust qmax 20210501
+    # (Fatal error: FASTQ quality value (45) above qmax (41))
+    infile <- paste0(SRR, ".fastq")
+    cmd <- paste("vsearch -fastq_filter", infile, "-fastq_qmax 45 -fastq_stripleft 18 -fastq_trunclen 200 -fastq_maxee 1.0 -fastaout", outfile)
+    print(cmd)
+    system(cmd)
+  } else if(is454) {
     # For some 454 studies, fastq-dump puts barcodes into _2.fastq, primer and experimental sequence into _3.fastq
     # Use -stripleft to remove primer sequence; minimum and maximum length as described by KGP+12
     # Use _2.fastq or _1.fastq if needed 20200921
@@ -163,7 +186,7 @@ filter <- function(SRR) {
   }
 
   # Clean up
-  file.remove(Sys.glob("*.fastq"))
+  if(!study == "SBE+17") file.remove(Sys.glob("*.fastq"))
   return()
 }
 
@@ -205,7 +228,8 @@ subsample <- function() {
     # Extract sequences for this sample
     thisfile <- paste0(thisSRR, ".fasta")
     # https://stackoverflow.com/questions/26144692/printing-a-sequence-from-a-fasta-file
-    print(cmd <- paste0("awk '/>", thisSRR, "/{p++;print;next} /^>/{p=0} p' not_singletons.fasta > ", thisfile))
+    # Don't use "awk '/>" because sample names for SBE+17 are at end of header of original FASTQ files, not beginning 20210501
+    print(cmd <- paste0("awk '/", thisSRR, "/{p++;print;next} /^>/{p=0} p' not_singletons.fasta > ", thisfile))
     system(cmd)
 
     # Subsample 10000 sequences - put output in .fa file in FASTAdir
@@ -255,7 +279,8 @@ findchimeras <- function() {
   # https://stackoverflow.com/questions/26144692/printing-a-sequence-from-a-fasta-file
   allSRR <- gsub("\\.fa$", "", dir(pattern = "\\.fa$"))
   for(thisSRR in allSRR) {
-    print(cmd <- paste0("awk '/>", thisSRR, "/{p++;print;next} /^>/{p=0} p' nonchimeras.fasta > ", thisSRR, ".fasta"))
+    # Don't use "awk '/>" because sample names for SBE+17 are at end of header of original FASTQ files, not beginning 20210501
+    print(cmd <- paste0("awk '/", thisSRR, "/{p++;print;next} /^>/{p=0} p' nonchimeras.fasta > ", thisSRR, ".fasta"))
     system(cmd)
   }
 
