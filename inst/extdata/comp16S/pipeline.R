@@ -21,39 +21,39 @@ file <- tempfile()
 # Write spaces here (but don't save them) to make this easier to read
 writeLines(con = file, text = gsub(" ", "", c(
   # For 454 experiments, set forwardonly to NA
-  "system, study, forwardonly, trunclen",
+  "study, forwardonly, trunclen",
 
   # Natural environment datasets
-  "environmental, BGPF13, NA, NA",
-  "environmental, HLA+16, NA, NA",
-  "environmental, JHM+16, FALSE, 230",
-  "environmental, MPB+17, TRUE, 450",
-  "environmental, XDZ+17, TRUE, 250",
-  "environmental, VAH+18, FALSE, 250",
-  "environmental, SVH+19, NA, NA",
-  "environmental, ZLM+16, TRUE, 250",
+  "BGPF13, NA, NA",      # PRJNA207095  10.3389/fmicb.2013.00330
+  "HLA+16, NA, NA",      # PRJEB1245    10.3389/fmicb.2016.01883
+  "JHM+16, FALSE, 230",  # PRJNA291280  10.1128/AEM.02699-15
+  "MPB+17, TRUE, 450",   # PRJEB15554   10.1038/ismej.2017.37
+  "XDZ+17, TRUE, 250",   # PRJNA388250  10.1038/s41598-017-13608-5
+  "VAH+18, FALSE, 250",  # PRJEB22477   10.1093/femsec/fiy029
+  "SVH+19, NA, NA",      # PRJNA423140  10.1111/gbi.12316
+  "ZLM+16, TRUE, 250",   # PRJNA294836  10.1128/AEM.03332-15
 
   # Unconventional oil and gas datasets
-  "environmental, UKD+18.sediment, TRUE, 100",
-  "environmental, UKD+18.water, TRUE, 100",
-  "environmental, CUN+18, TRUE, 250",
-  "environmental, MMA+20, FALSE, 250",
-  "environmental, CHM+14, NA, NA",
-  "environmental, HRR+18, TRUE, 300",
-  "environmental, ZLF+19, FALSE, 290",
+  "UKD+18.sediment, TRUE, 100",  # PRJNA394724  10.1038/s41598-018-23679-7
+  "UKD+18.water, TRUE, 100",
+  "CUN+18, TRUE, 250",   # PRJNA449552  10.3389/fmicb.2018.01697
+  "MMA+20, FALSE, 250",  # PRJNA544240  10.1073/pnas.1911458117
+  "CHM+14, NA, NA",      # PRJNA229085  10.1021/es501173p
+  "HRR+18, TRUE, 300",   # PRJNA438710  10.1016/j.scitotenv.2018.06.067
+  "ZLF+19, FALSE, 290",  # PRJNA407226  10.1021/acsearthspacechem.9b00037
 
   # Stratified water datasets
-  "environmental, MZG+20, FALSE, 450",
-  "environmental, ACH+20, FALSE, 290",
-  "environmental, HXZ+20, FALSE, 440",
-  "environmental, GBL+15, FALSE, 250",
+  "MZG+20, FALSE, 450",  # PRJEB27579   10.1038/s41396-019-0515-8
+  "ACH+20, FALSE, 290",  # PRJNA473362  10.3390/microorganisms8121924
+  "HXZ+20, FALSE, 440",  # PRJNA503500  10.1038/s41598-020-62411-2
+  "GBL+15, FALSE, 250",  # PRJNA263621  10.1038/ismej.2015.44
 
   # Sediment datasets
-  "environmental, BRMJ19, FALSE, 500",
-  "environmental, VWC+19, FALSE, 250",
-  "environmental, RZS+18, NA, NA",
-  "environmental, CLK19, FALSE, 440",
-  "environmental, SBE+17, NA, NA"
+  "BRMJ19, FALSE, 500",  # PRJNA454851  10.1038/s41396-018-0273-z
+  "VWC+19, FALSE, 250",  # PRJNA473406  10.1126/sciadv.aaw4108
+  "RZS+18, NA, NA",      # PRJNA308331  10.1080/01490451.2017.1392649
+  "CLK19, FALSE, 440",   # PRJNA377833  10.1111/1758-2229.12679
+  "SBE+17, NA, NA"       # PRJNA308429  10.1073/pnas.1614190114
 
 )))
 # This reads and applies the settings
