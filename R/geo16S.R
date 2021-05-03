@@ -6,7 +6,7 @@
 # Figure 1: Chemical compositions of taxonomic groups 20200925
 geo16S1 <- function(pdf = FALSE) {
 
-  if(pdf) pdf("Figure_1.pdf", width = 11, height = 5)
+  if(pdf) pdf("geo16S1.pdf", width = 11, height = 5)
   par(mfrow = c(1, 3))
 
   taxacomp("majorphyla", legend.x = "bottomleft", hline = c(-0.81, -0.68))
@@ -32,7 +32,7 @@ geo16S1 <- function(pdf = FALSE) {
 # Figure 2: Natural environment datasets 20200923
 geo16S2 <- function(pdf = FALSE) {
 
-  if(pdf) pdf("Figure_2.pdf", width = 9, height = 7)
+  if(pdf) pdf("geo16S2.pdf", width = 9, height = 7)
   oopar <- par(no.readonly = TRUE)
   par(mar = c(4, 4, 3, 2))
   par(mgp = c(2.5, 1, 0))
@@ -112,6 +112,10 @@ geo16S2 <- function(pdf = FALSE) {
   }
   plot(xlim, ylim, xlab = "", ylab = "", type = "n")
   lmlines()
+  # Add convex hull for stratified lakes and sewater (from Fig. 3) 20210503
+  fig3 <- geo16S3(plot.it = FALSE)
+  addhull(fig3$ZC, fig3$nH2O, "slategray")
+  # Add convex hulls for each dataset in this figure
   addhull(p1$ZC, p1$nH2O, 2, TRUE)
   addhull(p2$ZC, p2$nH2O, 1, TRUE, lty = 2)
   addhull(p3$ZC, p3$nH2O, 1, TRUE)
@@ -136,18 +140,21 @@ geo16S2 <- function(pdf = FALSE) {
 }
 
 # Figure 3: Stratified lakes and seawater 20210428
-geo16S3 <- function(pdf = FALSE) {
-  if(pdf) pdf("geo16S3.pdf", width = 7, height = 6)
-  mat <- matrix(c(1,1,1,1, 2,3,4,5, 6,7,8,9), byrow = TRUE, nrow = 3)
-  layout(mat, heights = c(1, 10, 10))
-  # Make legend
-  par(mar = c(0, 0, 0, 0))
-  plot.new()
-  legend <- as.expression(c(quote(O[2]), "ORP", quote(italic(Z)[C])))
-  legend("top", legend = legend, lty = 1, lwd = 1.5, col = c(2, 4, 1), pch = c(NA, NA, 21), pt.bg = "white", ncol = 3, bty = "n")
+geo16S3 <- function(pdf = FALSE, plot.it = TRUE) {
 
-  # Setup plot parameters
-  par(mgp = c(1.8, 0.5, 0), mar = c(3, 3, 3, 1))
+  if(plot.it) {
+    if(pdf) pdf("geo16S3.pdf", width = 7, height = 6)
+    mat <- matrix(c(1,1,1,1, 2,3,4,5, 6,7,8,9), byrow = TRUE, nrow = 3)
+    layout(mat, heights = c(1, 10, 10))
+    # Make legend
+    par(mar = c(0, 0, 0, 0))
+    plot.new()
+    legend <- as.expression(c(quote(O[2]), "ORP", quote(italic(Z)[C])))
+    legend("top", legend = legend, lty = 1, lwd = 1.5, col = c(2, 4, 1), pch = c(NA, NA, 21), pt.bg = "white", ncol = 3, bty = "n")
+    # Setup plot parameters
+    par(mgp = c(1.8, 0.5, 0), mar = c(3, 3, 3, 1))
+  }
+
   # Global ZC and O2 range for plots
   ZClim <- c(-0.17, -0.14)
   # Identify datasets to plot
@@ -181,68 +188,74 @@ geo16S3 <- function(pdf = FALSE) {
     imet <- match(mdat$Run, metrics$Run)
     ZC <- metrics$ZC[imet]
     nH2O <- metrics$nH2O[imet]
-    # Reverse y-axis (depth)
-    ylim <- rev(range(depth))
-    # Determine whether the title has changed
-    newplot <- TRUE
-    if(i > 1) if(title[i]==title[i-1]) newplot <- FALSE
-    if(newplot) {
-      plot(ZC, depth, xlim = ZClim, ylim = ylim, xlab = axis.label("ZC"), ylab = "Depth (m)", type = "b")
-    } else {
-      # Add to plot if the title hasn't changed
-      points(ZC, depth, type = "b", pch = 0)
-    }
 
-    if(newplot) {
-      # Add title in lower right
-      if(grepl("Outside", title[i])) text(ZClim[1], ylim[1], title[i], adj = c(0, 0))
-      else text(ZClim[2], ylim[1], title[i], adj = c(1, 0))
-      # Plot O2 concentrations or ORP
-      nc <- nchar(title[i])
-      if(substr(title[i], 1, 1) == " " | substr(title[i], nc, nc) == " ") {
-        what <- "ORP"
-        xlim <- c(-350, 100)
-        col <- 4
+    if(plot.it) {
+      # Reverse y-axis (depth)
+      ylim <- rev(range(depth))
+      # Determine whether the title has changed
+      newplot <- TRUE
+      if(i > 1) if(title[i]==title[i-1]) newplot <- FALSE
+      if(newplot) {
+        plot(ZC, depth, xlim = ZClim, ylim = ylim, xlab = axis.label("ZC"), ylab = "Depth (m)", type = "b")
       } else {
-        what <- "O2"
-        xlim <- c(0, 220)
-        col <- 2
+        # Add to plot if the title hasn't changed
+        points(ZC, depth, type = "b", pch = 0)
       }
-      icol <- grep(paste0("^", what), colnames(alldat))
-      # Remove NA values
-      alldat <- alldat[!is.na(alldat[, icol]), ]
-      depth <- alldat$depth
-      par(new = TRUE)
-      plot(alldat[, icol], depth, col = col, type = "l", axes = FALSE, xlab = "", ylab = "", xlim = xlim, ylim = ylim)
-      # Add second axis labels
-      xlab <- colnames(alldat)[icol]
-      if(xlab == "O2 (umol kg-1)") xlab <- quote(O[2]~"(umol kg"^-1*")")
-      if(xlab == "O2 (umol L-1)") xlab <- quote(O[2]~"(umol L"^-1*")")
-      axis(3)
-      mtext(xlab, side = 3, line = 1.7, cex = par("cex"))
-      # Extra labels for ETNP
-      if(title[i]=="ETNP") {
-        text(40, 100, "0.2-\n1.6 \u03BCm")
-        text(160, 130, "1.6-\n30 \u03BCm")
+
+      if(newplot) {
+        # Add title in lower right
+        if(grepl("Outside", title[i])) text(ZClim[1], ylim[1], title[i], adj = c(0, 0))
+        else text(ZClim[2], ylim[1], title[i], adj = c(1, 0))
+        # Plot O2 concentrations or ORP
+        nc <- nchar(title[i])
+        if(substr(title[i], 1, 1) == " " | substr(title[i], nc, nc) == " ") {
+          what <- "ORP"
+          xlim <- c(-350, 100)
+          col <- 4
+        } else {
+          what <- "O2"
+          xlim <- c(0, 220)
+          col <- 2
+        }
+        icol <- grep(paste0("^", what), colnames(alldat))
+        # Remove NA values
+        alldat <- alldat[!is.na(alldat[, icol]), ]
+        depth <- alldat$depth
+        par(new = TRUE)
+        plot(alldat[, icol], depth, col = col, type = "l", axes = FALSE, xlab = "", ylab = "", xlim = xlim, ylim = ylim)
+        # Add second axis labels
+        xlab <- colnames(alldat)[icol]
+        if(xlab == "O2 (umol kg-1)") xlab <- quote(O[2]~"(umol kg"^-1*")")
+        if(xlab == "O2 (umol L-1)") xlab <- quote(O[2]~"(umol L"^-1*")")
+        axis(3)
+        mtext(xlab, side = 3, line = 1.7, cex = par("cex"))
+        # Extra labels for ETNP
+        if(title[i]=="ETNP") {
+          text(40, 100, "0.2-\n1.6 \u00B5m")
+          text(160, 130, "1.6-\n30 \u00B5m")
+        }
+        # Restore xlim for plotting ZC
+        par(new = TRUE)
+        plot(0, 0, type = "n", axes = FALSE, xlab = "", ylab = "", xlim = ZClim, ylim = ylim)
       }
-      # Restore xlim for plotting ZC
-      par(new = TRUE)
-      plot(0, 0, type = "n", axes = FALSE, xlab = "", ylab = "", xlim = ZClim, ylim = ylim)
-    }
+    } # end if(plot.it)
 
     # Store the ZC and nH2O values
     allZC <- c(allZC, ZC)
     allnH2O <- c(allnH2O, nH2O)
   }
-  if(pdf) dev.off()
-  list(ZC = allZC, nH2O = allnH2O)
+
+  if(plot.it) {
+    if(pdf) dev.off()
+  } else list(ZC = allZC, nH2O = allnH2O)
+
 }
 
 
 # Figure 4: Shale gas datasets 20210414
 geo16S4 <- function(pdf = FALSE) {
 
-  if(pdf) pdf("Figure_4.pdf", width = 9, height = 6)
+  if(pdf) pdf("geo16S4.pdf", width = 9, height = 6)
   par(mfrow = c(2, 2))
   par(mar = c(4, 4, 1, 1))
   par(mgp = c(2.5, 1, 0))
@@ -317,7 +330,7 @@ geo16S4 <- function(pdf = FALSE) {
 # Figure 5: Taxonomic levels 20200924
 geo16S5 <- function(pdf = FALSE) {
 
-  if(pdf) pdf("Figure_5.pdf", width = 8, height = 6)
+  if(pdf) pdf("geo16S5.pdf", width = 8, height = 6)
   par(mfrow = c(2, 2))
   par(mar = c(4, 4, 3, 1))
   par(mgp = c(2.5, 1, 0))
