@@ -149,8 +149,9 @@ geo16S3 <- function(pdf = FALSE, plot.it = TRUE) {
     # Make legend
     par(mar = c(0, 0, 0, 0))
     plot.new()
-    legend <- as.expression(c(quote(O[2]), "ORP", quote(italic(Z)[C])))
-    legend("top", legend = legend, lty = 1, lwd = 1.5, col = c(2, 4, 1), pch = c(NA, NA, 21), pt.bg = "white", ncol = 3, bty = "n")
+#    legend <- as.expression(c(quote(italic(Z)[C]), quote(O[2]), "ORP"))
+    legend <- as.expression(c(quote(italic(Z)[C]), quote(O[2]), quote(NO[3]^"-" / NO[2]^"-")))
+    legend("top", legend = legend, lty = 1, lwd = 1.5, col = c(1, 2, 4), pch = c(21, NA, NA), pt.bg = "white", ncol = 3, bty = "n")
     # Setup plot parameters
     par(mgp = c(1.8, 0.5, 0), mar = c(3, 3, 3, 1))
   }
@@ -165,7 +166,8 @@ geo16S3 <- function(pdf = FALSE, plot.it = TRUE) {
   ID <- c("SVH+19", "Lake Zug", "Lake Lugano", "0.2-1.6micron", "1.6-30micron",
           "SYBL", "SYBL", "C3", "C3")
   title <- c("Black Sea", "Lake Zug", "Lake\nLugano", "ETNP", "ETNP",
-             # Use leading or trailing space to flag ORP plots
+#             # Use leading or trailing space to flag ORP plots
+             # Use leading or trailing space to flag NO3-/NO2- plots
              "Inside\nBlue Hole", " Inside\nBlue Hole", "Outside\nBlue Hole", "Outside\nBlue Hole ")
   # Make objects to hold all ZC and nH2O values (for convex hull in Figure 2)
   allZC <- allnH2O <- numeric()
@@ -206,12 +208,18 @@ geo16S3 <- function(pdf = FALSE, plot.it = TRUE) {
         # Add title in lower right
         if(grepl("Outside", title[i])) text(ZClim[1], ylim[1], title[i], adj = c(0, 0))
         else text(ZClim[2], ylim[1], title[i], adj = c(1, 0))
-        # Plot O2 concentrations or ORP
+#        # Plot O2 concentrations or ORP
+        # Plot O2 concentrations or NO3-/NO2- ratio
         nc <- nchar(title[i])
         if(substr(title[i], 1, 1) == " " | substr(title[i], nc, nc) == " ") {
-          what <- "ORP"
-          xlim <- c(-350, 100)
+#          what <- "ORP"
+          what <- "NO3.NO2"
+#          xlim <- c(-350, 100)
+          xlim <- c(0, 250)
           col <- 4
+          # Calculate NO3- / NO2- ratio 20210511
+          NO3.NO2 <- alldat$`NO3- (umol L-1)` / alldat$`NO2- (umol L-1)`
+          alldat <- cbind(alldat, NO3.NO2)
         } else {
           what <- "O2"
           xlim <- c(0, 220)
@@ -225,8 +233,9 @@ geo16S3 <- function(pdf = FALSE, plot.it = TRUE) {
         plot(alldat[, icol], depth, col = col, type = "l", axes = FALSE, xlab = "", ylab = "", xlim = xlim, ylim = ylim)
         # Add second axis labels
         xlab <- colnames(alldat)[icol]
-        if(xlab == "O2 (umol kg-1)") xlab <- quote(O[2]~"(umol kg"^-1*")")
-        if(xlab == "O2 (umol L-1)") xlab <- quote(O[2]~"(umol L"^-1*")")
+        if(xlab == "O2 (umol kg-1)") xlab <- quote(O[2]~"(\u00B5mol kg"^-1*")")
+        if(xlab == "O2 (umol L-1)") xlab <- quote(O[2]~"(\u00B5mol L"^-1*")")
+        if(xlab == "NO3.NO2") xlab <- quote(NO[3]^"-" / NO[2]^"-"~"(mol/mol)")
         axis(3)
         mtext(xlab, side = 3, line = 1.7, cex = par("cex"))
         # Extra labels for ETNP
