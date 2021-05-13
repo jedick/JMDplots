@@ -743,15 +743,38 @@ diffcomp <- function(study, cn = FALSE, identify = FALSE, title = TRUE, xlim = N
   invisible(list(study = study, DZC = D_mean_ZC, DnH2O = D_mean_nH2O))
 }
 
-# Plot median differences for different phylogenetic branches 20200924
-branchcomp <- function(study = "XDZ+17", metric = "nH2O", pch.up = 24, pch.down = 21, minpercent = 2, ylim = c(-0.002, 0.02)) {
+# Plot differences between two groups of samples or two studies for taxa at different ranks 20200924
+rankcomp <- function(study = "XDZ+17", metric = "nH2O", pch.up = 24, pch.down = 21, minpercent = 2, ylim = c(-0.002, 0.02), study2 = NA) {
 
   # Get metadata, RDP and taxonomy mapping
-  mdat <- getmdat(study)
-  # Drop samples with NA pch (we can't include them in the difference)
-  mdat <- mdat[!is.na(mdat$pch), ]
-  RDP <- getRDP(study, mdat = mdat)
-  map <- getmap(study, RDP = RDP)
+  mdat <- getmdat(study)[, c("study", "name", "Run", "sample", "pch")]
+  # Get data to compare two studies 20210513
+  if(!is.na(study2)) {
+    mdat2 <- getmdat(study2)[, c("study", "name", "Run", "sample", "pch")]
+    mdat$pch <- pch.up
+    mdat2$pch <- pch.down
+    # Get RDP classification and taxonomy mapping
+    RDP <- getRDP(study, mdat = mdat)
+    map <- getmap(study, RDP = RDP)
+    RDP2 <- getRDP(study2, mdat = mdat2)
+    map2 <- getmap(study2, RDP = RDP2)
+    # Put together the data from both studies
+    mdat <- rbind(mdat, mdat2)
+    # Include taxonomy mapping in data frames before merging
+    RDP <- cbind(RDP, map = map)
+    RDP2 <- cbind(RDP2, map = map2)
+    RDP <- merge(RDP, RDP2, all = TRUE)
+    # Get out the mappings from the merged data
+    map <- RDP$map
+    RDP <- RDP[, -grep("map", colnames(RDP))]
+    # Replace NA with 0
+    RDP[is.na(RDP)] <- 0
+  } else {
+    # Drop samples with NA pch (we can't include them in the difference)
+    mdat <- mdat[!is.na(mdat$pch), ]
+    RDP <- getRDP(study, mdat = mdat)
+    map <- getmap(study, RDP = RDP)
+  }
   # Keep metadata only for samples with >= 200 counts 20201006
   mdat <- mdat[mdat$Run %in% colnames(RDP), ]
   # Read compositional metrics for faster running
@@ -773,27 +796,29 @@ branchcomp <- function(study = "XDZ+17", metric = "nH2O", pch.up = 24, pch.down 
 
   # Loop over taxonomic ranks
   for(i in seq_along(ranks)) {
-    # Find the groups with this rank in the lineage
+    # Find the taxa with this rank in the lineage
     irank <- vapply(lsplit, function(x) match(ranks[i], x), 0) - 1
-    group <- mapply("[", lsplit, irank)
-    # Calculate the compositional metrics for each unique group
-    groups <- na.omit(unique(group))
-    groupdiffs <- rep(NA, length(groups))
-    names(groupdiffs) <- groups
+    taxon <- mapply("[", lsplit, irank)
+    # Calculate the compositional metrics for each unique taxon
+    taxa <- na.omit(unique(taxon))
+    taxondiffs <- rep(NA, length(taxa))
+    names(taxondiffs) <- taxa
     parents <- character()
+    domains <- character()
     cex <- numeric()
-    for(j in seq_along(groups)) {
-      # Which organisms (classifications) are in this group
-      igroup <- group == groups[j]
-      igroup[is.na(igroup)] <- FALSE
-      thisRDP <- RDP[igroup, ]
-      thismap <- map[igroup]
-      # Skip low-abundance groups
+    for(j in seq_along(taxa)) {
+      # Which organisms (by RDP classification) are in this taxon
+      itaxon <- taxon == taxa[j]
+      itaxon[is.na(itaxon)] <- FALSE
+      thisRDP <- RDP[itaxon, ]
+      thismap <- map[itaxon]
+      # Calculate percent abundance of this taxon
       thispercent <- sum(thisRDP[, -(1:3)]) / sum(RDP[, -(1:3)]) * 100
+      # Skip low-abundance taxa
       if(thispercent < minpercent) next
-      # If we got here, print message about group name and abundance
-      print(paste0("branchcomp: ", ranks[i], "_", groups[j], " (", round(thispercent), "%)"))
-      # Skip groups with no available mappings
+      # If we got here, print message about taxon name and abundance
+      print(paste0("rankcomp: ", ranks[i], "_", taxa[j], " (", round(thispercent), "%)"))
+      # Skip taxa with no available mappings
       if(all(is.na(thismap))) {
         print("            --- no taxonomic mappings available!")  
         next
@@ -802,29 +827,40 @@ branchcomp <- function(study = "XDZ+17", metric = "nH2O", pch.up = 24, pch.down 
       metrics <- getmetrics(study, mdat = mdat, RDP = thisRDP, map = thismap, metrics = RefSeq_metrics)
       # Keep NA compositions out
       isna <- is.na(metrics$ZC)
-      # Calculate median difference of compositional metric
+      # Get selected compositional metric
       if(metric == "nH2O") X <- metrics$nH2O[!isna]
       if(metric == "ZC") X <- metrics$ZC[!isna]
-      up <- median(X[mdat[!isna, ]$pch == pch.up])
-      down <- median(X[mdat[!isna, ]$pch == pch.down])
+      # Calculate median difference of compositional metric
+      up <- median(X[mdat[!isna, ]$pch %in% pch.up])
+      down <- median(X[mdat[!isna, ]$pch %in% pch.down])
       diff <- up - down
       # Store the results
-      groupdiffs[j] <- diff
-      # Make point size reflect group abundance
-      cex <- c(cex, thispercent * 0.05)
+      taxondiffs[j] <- diff
+      # Make point size reflect taxon abundance
+      cex <- c(cex, thispercent * 0.1)
+      # Keep track of the domain for coloring 20210513
+      domain <- ""
+      if(all(grepl("Archaea", thisRDP$lineage))) domain <- "Archaea"
+      if(all(grepl("Bacteria", thisRDP$lineage))) domain <- "Bacteria"
+      domains <- c(domains, domain)
       if(i > 1) {
         # Identify the parent taxon
-        parent <- lsplit[igroup][[1]][irank[igroup][1] - 2]
+        parent <- lsplit[itaxon][[1]][irank[itaxon][1] - 2]
         parents <- c(parents, parent)
       }
     }
 
-    # Remove NA (low-abundance) groups
-    groupdiffs <- na.omit(groupdiffs)
-    for(k in seq_along(groupdiffs)) {
-      # Add point for this group
-      groupdiff <- groupdiffs[k]
-      points(i, groupdiffs[k], pch = 20, cex = cex[k])
+    # Remove NA (low-abundance) taxa
+    taxondiffs <- na.omit(taxondiffs)
+    for(k in seq_along(taxondiffs)) {
+      # Color-code taxa belonging to Archaea or Bacteria 20210531
+      col <- "#70809080"  # semi-transparent slategray
+      if(domains[k] == "Archaea") col <- "#df536b80"  # semi-transparent color 2
+      if(domains[k] == "Bacteria") col <- "#2297e680"  # semi-transparent color 4
+      # Retrieve calculated difference for this taxon
+      taxondiff <- taxondiffs[k]
+      # Add point for this taxon
+      points(i, taxondiffs[k], pch = 20, cex = cex[k], col = col)
       if(i > 1) {
         # Add a line from the parent
         drank <- 1
@@ -833,14 +869,14 @@ branchcomp <- function(study = "XDZ+17", metric = "nH2O", pch.up = 24, pch.down 
         # e.g. family_SAR11 -> class_Alphaproteobacteria (nothing at order rank in this lineage in RDP taxonomy)
         if(inherits(parentdiff, "error")) {
           drank <- 2
-          parentdiff <- alldiffs[[i - 2]][[parents[k]]]
+          parentdiff <- tryCatch(alldiffs[[i - 2]][[parents[k]]], error = function(e) e)
         }
-        lines(c(i - drank, i), c(parentdiff, groupdiff))
+        if(!inherits(parentdiff, "error")) lines(c(i - drank, i), c(parentdiff, taxondiff), col = "#00000040")
       }
     }
 
     # Save the differences
-    alldiffs[[i]] <- groupdiffs
+    alldiffs[[i]] <- taxondiffs
   }
 
 }

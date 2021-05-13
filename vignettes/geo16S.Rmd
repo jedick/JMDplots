@@ -88,7 +88,7 @@ geo16S3()
 geo16S4()
 ```
 
-## Taxonomic levels (Figure 5)
+## Compositional differences at different taxonomic ranks (Figure 5)
 ```{r geo16S5, message = FALSE, results = "hide", out.width='100%', fig.width = 8, fig.height = 6, pngquant = pngquant}
 geo16S5()
 ```

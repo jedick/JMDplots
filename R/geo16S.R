@@ -336,29 +336,32 @@ geo16S4 <- function(pdf = FALSE) {
 
 }
 
-# Figure 5: Taxonomic levels 20200924
+# Figure 5: Compositional differences at different taxonomic ranks 20200924
 geo16S5 <- function(pdf = FALSE) {
 
   if(pdf) pdf("geo16S5.pdf", width = 8, height = 6)
-  par(mfrow = c(2, 2))
+  mat <- matrix(c(1,1,2,2,3,3, 0,4,4,5,5,0), nrow = 2, byrow = 2)
+  layout(mat)
   par(mar = c(4, 4, 3, 1))
   par(mgp = c(2.5, 1, 0))
 
-  branchcomp("MPB+17", "ZC", pch.up = 23, pch.down = 21, ylim = c(-0.03, 0.005))
+  rankcomp("MPB+17", "ZC", pch.up = 23, pch.down = 21, ylim = c(-0.03, 0.005))
   mtext("Manus Basin", line = 1.5)
   mtext("(T > 10 \u00B0C) - (T < 10 \u00B0C)", line = 0.3, cex = 0.8)
 
-  branchcomp("HLA+16", "nH2O", pch.up = 24, pch.down = 21, ylim = c(-0.01, 0.015))
+  rankcomp("HLA+16", "nH2O", pch.up = 24, pch.down = 21, ylim = c(-0.01, 0.015))
   mtext("Baltic Sea", line = 1.5)
   mtext("(PSU < 6) - (PSU > 20)", line = 0.3, cex = 0.8)
 
-  branchcomp("XDZ+17", "nH2O", pch.up = 24, pch.down = 21, ylim = c(-0.002, 0.03))
+  rankcomp("XDZ+17", "nH2O", pch.up = 24, pch.down = 21, ylim = c(-0.002, 0.03))
   mtext("Qarhan Salt Lake soils", line = 1.5)
-  mtext("(normal) - (saline)", line = 0.3, cex = 0.8)
+  mtext("normal - saline", line = 0.3, cex = 0.8)
 
-  branchcomp("JHM+16", "ZC", pch.up = 25, pch.down = 24, ylim = c(-0.03, 0.01))
-  mtext("Lake Fryxell", line = 1.5)
-  mtext("(anoxic) - (oxic)", line = 0.3, cex = 0.8)
+  rankcomp("MPB+17", "ZC", ylim = c(-0.02, 0.02), study2 = "HLA+16")
+  mtext("Manus Basin - Baltic Sea", line = 1)
+
+  rankcomp("BGPF13", "ZC", ylim = c(-0.12, 0.02), study2 = "XDZ+17")
+  mtext("Yellowstone - Qarhan Salt Lake", line = 1)
 
   if(pdf) dev.off()
 

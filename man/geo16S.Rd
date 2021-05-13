@@ -32,7 +32,7 @@ This table gives a brief description of each plotting function.
   \code{geo16S2} \tab Natural environment datasets \cr
   \code{geo16S3} \tab Stratified lakes and seawater \cr
   \code{geo16S4} \tab Shale gas datasets \cr
-  \code{geo16S5} \tab Taxonomic levels \cr
+  \code{geo16S5} \tab Compositional differences at different taxonomic ranks \cr
 }
 
 For \code{geo16S3}, the \code{plot.it} argument can be used to prevent plotting, and instead return the \ZC and \nH2O values for all the points in the plot.
