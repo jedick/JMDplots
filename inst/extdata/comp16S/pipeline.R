@@ -29,9 +29,9 @@ writeLines(con = file, text = gsub(" ", "", c(
   "JHM+16, FALSE, 230",  # PRJNA291280  10.1128/AEM.02699-15
   "MPB+17, TRUE, 450",   # PRJEB15554   10.1038/ismej.2017.37
   "XDZ+17, TRUE, 250",   # PRJNA388250  10.1038/s41598-017-13608-5
-  "VAH+18, FALSE, 250",  # PRJEB22477   10.1093/femsec/fiy029
   "SVH+19, NA, NA",      # PRJNA423140  10.1111/gbi.12316
   "ZLM+16, TRUE, 250",   # PRJNA294836  10.1128/AEM.03332-15
+  "HCW+13, NA, NA",      # GenBank JN427016-JN539989  10.1038/ismej.2012.79
 
   # Unconventional oil and gas datasets
   "UKD+18.sediment, TRUE, 100",  # PRJNA394724  10.1038/s41598-018-23679-7
@@ -49,13 +49,12 @@ writeLines(con = file, text = gsub(" ", "", c(
   "GBL+15, FALSE, 250",  # PRJNA263621  10.1038/ismej.2015.44
 
   # Sediment datasets
+  "VAH+18, FALSE, 250",  # PRJEB22477   10.1093/femsec/fiy029
   "BRMJ19, FALSE, 500",  # PRJNA454851  10.1038/s41396-018-0273-z
   "VWC+19, FALSE, 250",  # PRJNA473406  10.1126/sciadv.aaw4108
   "RZS+18, NA, NA",      # PRJNA308331  10.1080/01490451.2017.1392649
   "CLK19, FALSE, 440",   # PRJNA377833  10.1111/1758-2229.12679
-  "SBE+17, NA, NA",      # PRJNA308429  10.1073/pnas.1614190114
-
-  "HCW+13, NA, NA"       # GenBank JN427016-JN539989  10.1038/ismej.2012.79
+  "SBE+17, NA, NA"       # PRJNA308429  10.1073/pnas.1614190114
 
 )))
 # This reads and applies the settings

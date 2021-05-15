@@ -62,10 +62,6 @@ mkAA <- function(ranks = c("genus", "family", "order", "class", "phylum", "super
     # Get names of all taxa at this rank
     names <- na.omit(unique(taxa[, icol]))
     print(paste(rank, length(names)))
-  #  # Include a Cyanobacteria "class" (following RDP Classifer; NCBI has NA class for all Cyanobacteria)
-  #  names <- c(names, "Cyanobacteria")
-  #  # Also include an Acidobacteria "class"
-  #  names <- c(names, "Acidobacteria")
 
     # Create blank amino acid data frame
     AA <- thermo()$protein[rep(1, length(names)), ]
@@ -79,7 +75,6 @@ mkAA <- function(ranks = c("genus", "family", "order", "class", "phylum", "super
       # Find all RefSeq taxa that have this taxon name
       taxon <- names[i]
       istax <- taxa[, icol] == taxon
-  #    if(taxon %in% c("Cyanobacteria", "Acidobacteria")) istax <- taxa$phylum == taxon
       istax[is.na(istax)] <- FALSE
       if(any(istax)) {
         # Sum the number of sequences ("chains" column) and amino acid composition for this taxon
@@ -96,17 +91,6 @@ mkAA <- function(ranks = c("genus", "family", "order", "class", "phylum", "super
         AA$abbrv[i] <- parent
       }
     }
-
-#    if(rank == "genus") {
-#      # Add individual taxids that are used for RDP-NCBI mappings 20200922
-#      addspecies <- refseq$ref %in% c("Planktothrix agardhii", "Candidatus Marinimicrobia bacterium")
-#      addspecies <- refseq$ref %in% c("Spartobacteria bacterium LR76")
-#      adds <- refseq[addspecies, ]
-#      adds$organism <- adds$ref
-#      adds$ref <- 1
-#      adds$protein <- "species"
-#      AA <- rbind(adds, AA)
-#    }
 
     # Make per-protein average
     AA[, 5:25] <- round(AA[, 5:25] / AA$chains, 1)

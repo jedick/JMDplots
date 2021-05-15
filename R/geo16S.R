@@ -164,7 +164,7 @@ geo16S3 <- function(pdf = FALSE, plot.it = TRUE) {
   column <- c("study", "lake", "lake", "size", "size",
               "station", "station", "station", "station")
   ID <- c("SVH+19", "Lake Zug", "Lake Lugano", "0.2-1.6micron", "1.6-30micron",
-          "SYBL", "SYBL", "C3", "C3")
+          "SYBL", "SYBL", "C4", "C4")
   title <- c("Black Sea", "Lake Zug", "Lake\nLugano", "ETNP", "ETNP",
 #             # Use leading or trailing space to flag ORP plots
              # Use leading or trailing space to flag NO3-/NO2- plots
