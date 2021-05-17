@@ -504,8 +504,8 @@ taxacomp <- function(which = c("Bacteria", "Archaea"), xlim = NULL, ylim = NULL,
   # Proteobacteria 20200925
   if(identical(which, "Proteobacteria")) {
     taxa <- c("Alphaproteobacteria", "Betaproteobacteria", "Gammaproteobacteria", "Deltaproteobacteria", "Epsilonproteobacteria", "Zetaproteobacteria",
-              "Acidithiobacillia", "Hydrogenophilalia", "Oligoflexia", "Bacilli")
-    pch <- c(rep(21:23, 3), 24)
+              "Acidithiobacillia", "Hydrogenophilalia", "Oligoflexia")
+    pch <- rep(21:23, 3)
     col <- seq_along(taxa)
     if(is.null(ylim)) ylim <- c(-0.77, -0.71)
   }
@@ -535,20 +535,16 @@ taxacomp <- function(which = c("Bacteria", "Archaea"), xlim = NULL, ylim = NULL,
     points(children$ZC, children$nH2O, pch = pch[i], cex = 0.7, col = 1, bg = col[i], lwd = 0.5)
     # Plot lines from parent to all children 20200925
     for(j in seq_along(children$ZC)) lines(c(group$ZC, children$ZC[j]), c(group$nH2O, children$nH2O[j]), col = col[i], lty = lty)
-    # Add numbers for Halobacteria and Nanohaloarchaea 20200930
+    # Label Halobacteria and Nanohaloarchaea 20200930
     if(thisgroup == "Euryarchaeota") {
       ihalo <- match(c("Halobacteria", "Nanohaloarchaea"), children$group)
       dy <- ifelse(which == "majorcellular", -0.0025, -0.005)
       text(children$ZC[ihalo], children$nH2O[ihalo] + dy, c(1, 2))
     }
-    # Add numbers for Lactobacillales (Streptococcus) and Pseudomonadales (Pseudomonas) 20201008
-    if(thisgroup == "Bacilli") {
-      ilacto <- match("Lactobacillales", children$group)
-      text(children$ZC[ilacto], children$nH2O[ilacto] + 0.0015, 3)
-    }
-    if(thisgroup == "Gammaproteobacteria") {
-      ipseudo <- match("Pseudomonadales", children$group)
-      text(children$ZC[ipseudo] - 0.0015, children$nH2O[ipseudo] + 0.0015, 4)
+    # Label Clostridia 20200930
+    if(thisgroup == "Firmicutes" & which == "majorcellular") {
+      iclos <- match("Clostridia", children$group)
+      text(children$ZC[iclos], children$nH2O[iclos] + 0.0025, 3)
     }
 
     # Keep values for identification
