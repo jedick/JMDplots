@@ -83,12 +83,13 @@ geo16S2()
 geo16S3()
 ```
 
-## Shale gas datasets (Figure 4)
-```{r geo16S4, message = FALSE, results = "hide", out.width='100%', fig.width = 9, fig.height = 6, pngquant = pngquant}
+## Compositional differences at different taxonomic levels (Figure 4)
+```{r geo16S4, message = FALSE, results = "hide", out.width='100%', fig.width = 8, fig.height = 3, pngquant = pngquant}
 geo16S4()
 ```
 
-## Compositional differences at different taxonomic ranks (Figure 5)
-```{r geo16S5, message = FALSE, results = "hide", out.width='100%', fig.width = 8, fig.height = 6, pngquant = pngquant}
+## Shale gas datasets (Figure 5)
+```{r geo16S5, message = FALSE, results = "hide", out.width='100%', fig.width = 9, fig.height = 6, pngquant = pngquant}
 geo16S5()
 ```
+

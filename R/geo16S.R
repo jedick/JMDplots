@@ -10,20 +10,23 @@ geo16S1 <- function(pdf = FALSE) {
   par(mfrow = c(1, 3))
 
   taxacomp("majorphyla", legend.x = "bottomleft", hline = c(-0.81, -0.68))
-  title("Major phyla and their classes", font.main = 1)
+  title("Major phyla and their classes", font.main = 1, cex.main = 1.4)
+  label.figure("a", font = 2, cex = 1.6)
   # Draw lines indicating zoom area in next plot
   par(xpd = NA)
   lines(c(-0.05, -0.015), c(-0.81, -0.9), lty = 2, col = "gray40")
   lines(c(-0.05, -0.015), c(-0.68, -0.65), lty = 2, col = "gray40")
   par(xpd = FALSE)
   taxacomp("majorcellular", legend.x = "bottomleft", hline = c(-0.76, -0.71))
-  title("Major cellular phyla and their classes", font.main = 1)
+  title("Major cellular phyla and their classes", font.main = 1, cex.main = 1.4)
+  label.figure("b", font = 2, cex = 1.6)
   par(xpd = NA)
   lines(c(-0.05, -0.015), c(-0.76, -0.81), lty = 2, col = "gray40")
   lines(c(-0.05, -0.015), c(-0.71, -0.68), lty = 2, col = "gray40")
   par(xpd = FALSE)
   taxacomp("Proteobacteria", legend.x = "topright")
-  title("Proteobacterial classes and their orders", font.main = 1)
+  title("Proteobacterial classes and their orders", font.main = 1, cex.main = 1.4)
+  label.figure("c", font = 2, cex = 1.6)
 
   if(pdf) dev.off()
 
@@ -260,88 +263,11 @@ geo16S3 <- function(pdf = FALSE, plot.it = TRUE) {
 
 }
 
-
-# Figure 4: Shale gas datasets 20210414
+# Figure 5: Compositional differences at different taxonomic levels 20200924
 geo16S4 <- function(pdf = FALSE) {
 
-  if(pdf) pdf("geo16S4.pdf", width = 9, height = 6)
-  par(mfrow = c(2, 2))
-  par(mar = c(4, 4, 1, 1))
-  par(mgp = c(2.5, 1, 0))
-
-  ## Plot A: Pennsylvania streams affected by Marcellus Shale activity 20210324
-
-  # Data from Ulrich et al., 2018
-  xlim <- c(-0.16, -0.13)
-  ylim <- c(-0.755, -0.725)
-  plotcomp("UKD+18.water_2014", xlim = xlim, ylim = ylim, title = FALSE)
-  legend("topleft", c("MSA+", "MSA-"), pch = c(21, 1), pt.bg = c(2, 1), bg = "white")
-  legend("bottomright", c("Pennsylvania Streams", "Ulrich et al., 2018"), bg = "white")
-  label.figure("A", cex = 1.5, xfrac = 0.03)
-
-  ## Plot C: Comparison of different studies on Pennsylvania Streams 20210327
-
-  studies <- c("UKD+18.water_2014", "UKD+18.sediment_2014", "CUN+18", "MMA+20_spring", "MMA+20_fall")
-  # Start plot
-  plot(c(-0.15, -0.138), c(-0.744, -0.732), type = "n", xlab = cplab$ZC, ylab = cplab$nH2O)
-  pch <- 21:25
-  # Loop over studies
-  for(i in 1:5) {
-    mean <- plotcomp(studies[[i]], plot.it = FALSE)$mean
-    points(mean$ZC.dn, mean$nH2O.dn, pch = pch[i], cex = 1.5, lwd = 2, bg = "white")
-    lines(c(mean$ZC.dn, mean$ZC.up), c(mean$nH2O.dn, mean$nH2O.up))
-    points(mean$ZC.up, mean$nH2O.up, pch = pch[i], cex = 1.8, lwd = 2, bg = 2)
-  }
-  # Add labels
-  text(-0.1455, -0.736, "Ulrich et al., 2018\n(water)")
-  text(-0.1482, -0.7404, "Ulrich et al., 2018\n(sediment)")
-  text(-0.139, -0.7363, "Chen See\net al., 2018")
-  text(-0.1419, -0.7404, "Mumford et al., 2020\n(spring)")
-  text(-0.1432, -0.7428, "Mumford et al., 2020\n(fall)")
-  # Add legend
-  legend("topleft", c("Lowest disturbance", "Highest disturbance"), pch = c(21, 21), pt.bg = c("white", 2), pt.cex = c(1.4, 1.7), lwd = 2, lty = NA)
-  label.figure("B", cex = 1.5, xfrac = 0.03)
-
-  ## Plots C-D: Comparison of different studies on produced water 20210330
-
-  # Panel C: Cluff et al., 2014
-  plotcomp("CHM+14", title = FALSE)
-  legend("topright", c("Injected Fluids (day = 0)", "Produced Water (day >= 49)"),
-         pch = c(21, 21), pt.bg = c("white", 2), bg = "white")
-  legend("bottomleft", c("Marcellus Shale", "Cluff et al., 2014"), bg = "white", inset = c(-0.03, 0))
-  box()
-  label.figure("C", cex = 1.5, xfrac = 0.03)
-
-  # Panel D: Multiple studies
-  studies <- c("CHM+14", "HRR+18", "ZLF+19")
-  # Start plot
-  plot(c(-0.22, -0.14), c(-0.75, -0.71), type = "n", xlab = cplab$ZC, ylab = cplab$nH2O)
-  pch <- 21:25
-  # Loop over studies
-  for(i in 1:3) {
-    mean <- plotcomp(studies[[i]], plot.it = FALSE)$mean
-    points(mean$ZC.dn, mean$nH2O.dn, pch = pch[i], cex = 1.5, lwd = 2, bg = "white")
-    lines(c(mean$ZC.dn, mean$ZC.up), c(mean$nH2O.dn, mean$nH2O.up))
-    points(mean$ZC.up, mean$nH2O.up, pch = pch[i], cex = 1.8, lwd = 2, bg = 2)
-  }
-  # Add labels
-  text(-0.165, -0.726, "Cluff et al., 2014")
-  text(-0.2, -0.73, "Hull et al., 2018")
-  text(-0.163, -0.746, "Zhong et al., 2019")
-  # Add legend
-  legend("topright", c("Source Water\nor Injected Fluids", "Produced Water"), pch = c(21, 21), pt.bg = c("white", 2), pt.cex = c(1.4, 1.7), lwd = 2, lty = NA)
-  label.figure("D", cex = 1.5, xfrac = 0.03)
-
-  if(pdf) dev.off()
-
-}
-
-# Figure 5: Compositional differences at different taxonomic ranks 20200924
-geo16S5 <- function(pdf = FALSE) {
-
-  if(pdf) pdf("geo16S5.pdf", width = 8, height = 6)
-  mat <- matrix(c(1,1,2,2,3,3, 0,4,4,5,5,0), nrow = 2, byrow = 2)
-  layout(mat)
+  if(pdf) pdf("geo16S4.pdf", width = 8, height = 3)
+  par(mfrow = c(1, 3))
   par(mar = c(4, 4, 3, 1))
   par(mgp = c(2.5, 1, 0))
 
@@ -357,12 +283,98 @@ geo16S5 <- function(pdf = FALSE) {
   mtext("Qarhan Salt Lake soils", line = 1.5)
   mtext("normal - saline", line = 0.3, cex = 0.8)
 
-  rankcomp("MPB+17", "ZC", ylim = c(-0.02, 0.02), study2 = "HLA+16")
-  mtext("Manus Basin - Baltic Sea", line = 1)
+  # Add legend for point size 20210518
+  y <- c(0.030, 0.025, 0.022, 0.020) - 0.005
+  text <- c("100%", "50%", "20%", "2%")
+  cex <- par("cex") * c(10, 5, 2, 0.2)
+  for(i in 1:4) {
+    points(4, y[i], pch = 19, col = "#70809080", cex = cex[i])
+    text(4.5, y[i], text[i], adj = 0)
+  }
 
-  rankcomp("BGPF13", "ZC", ylim = c(-0.12, 0.02), study2 = "XDZ+17")
-  mtext("Yellowstone - Qarhan Salt Lake", line = 1)
+#  # Between-study comparisons
+#  rankcomp("MPB+17", "ZC", ylim = c(-0.02, 0.02), study2 = "HLA+16")
+#  mtext("Manus Basin - Baltic Sea", line = 1)
+#
+#  rankcomp("BGPF13", "ZC", ylim = c(-0.12, 0.02), study2 = "XDZ+17")
+#  mtext("Yellowstone - Qarhan Salt Lake", line = 1)
 
   if(pdf) dev.off()
 
 }
+
+# Figure 5: Shale gas datasets 20210414
+geo16S5 <- function(pdf = FALSE) {
+
+  if(pdf) pdf("geo16S5.pdf", width = 9, height = 6)
+  par(mfrow = c(2, 2))
+  par(mar = c(4, 4, 1, 1))
+  par(mgp = c(2.5, 1, 0))
+
+  ## Plot A: Pennsylvania streams affected by Marcellus Shale activity 20210324
+
+  # Data from Ulrich et al., 2018
+  xlim <- c(-0.16, -0.13)
+  ylim <- c(-0.755, -0.725)
+  plotcomp("UKD+18.water_2014", xlim = xlim, ylim = ylim, title = FALSE)
+  legend("topleft", c("MSA+", "MSA-"), pch = c(21, 1), pt.bg = c(2, 1), bg = "white")
+  legend("bottomright", c("Pennsylvania Streams", "Ulrich et al., 2018"), bg = "white")
+  label.figure("a", cex = 1.5, xfrac = 0.03, font = 2)
+
+  ## Plot C: Comparison of different studies on Pennsylvania Streams 20210327
+
+  studies <- c("UKD+18.water_2014", "UKD+18.sediment_2014", "CUN+18", "MMA+20_spring", "MMA+20_fall")
+  # Start plot
+  plot(c(-0.15, -0.138), c(-0.744, -0.732), type = "n", xlab = cplab$ZC, ylab = cplab$nH2O)
+  pch <- 21:25
+  # Loop over studies
+  for(i in 1:5) {
+    mean <- plotcomp(studies[[i]], plot.it = FALSE)$mean
+    points(mean$ZC.dn, mean$nH2O.dn, pch = pch[i], cex = 1.5, lwd = 2, bg = "#ffffffa0")
+    lines(c(mean$ZC.dn, mean$ZC.up), c(mean$nH2O.dn, mean$nH2O.up))
+    points(mean$ZC.up, mean$nH2O.up, pch = pch[i], cex = 1.8, lwd = 2, bg = "#df536ba0")
+  }
+  # Add labels
+  text(-0.1455, -0.736, "Ulrich et al., 2018\n(water)")
+  text(-0.1482, -0.7404, "Ulrich et al., 2018\n(sediment)")
+  text(-0.139, -0.7363, "Chen See\net al., 2018")
+  text(-0.1419, -0.7404, "Mumford et al., 2020\n(spring)")
+  text(-0.1432, -0.7428, "Mumford et al., 2020\n(fall)")
+  # Add legend
+  legend("topleft", c("Lowest disturbance", "Highest disturbance"), pch = c(21, 21), pt.bg = c("#ffffffa0", "#df536ba0"), pt.cex = c(1.4, 1.7), lwd = 2, lty = NA)
+  label.figure("b", cex = 1.5, xfrac = 0.03, font = 2)
+
+  ## Plots C-D: Comparison of different studies on produced water 20210330
+
+  # Panel C: Cluff et al., 2014
+  plotcomp("CHM+14", title = FALSE)
+  legend("topright", c("Injected Fluids (day = 0)", "Produced Water (day >= 49)"),
+         pch = c(21, 21), pt.bg = c("white", 2), bg = "white")
+  legend("bottomleft", c("Marcellus Shale", "Cluff et al., 2014"), bg = "white", inset = c(-0.03, 0))
+  box()
+  label.figure("c", cex = 1.5, xfrac = 0.03, font = 2)
+
+  # Panel D: Multiple studies
+  studies <- c("CHM+14", "HRR+18", "ZLF+19")
+  # Start plot
+  plot(c(-0.22, -0.14), c(-0.75, -0.71), type = "n", xlab = cplab$ZC, ylab = cplab$nH2O)
+  pch <- 21:25
+  # Loop over studies
+  for(i in 1:3) {
+    mean <- plotcomp(studies[[i]], plot.it = FALSE)$mean
+    points(mean$ZC.dn, mean$nH2O.dn, pch = pch[i], cex = 1.5, lwd = 2, bg = "#ffffffa0")
+    lines(c(mean$ZC.dn, mean$ZC.up), c(mean$nH2O.dn, mean$nH2O.up))
+    points(mean$ZC.up, mean$nH2O.up, pch = pch[i], cex = 1.8, lwd = 2, bg = "#df536ba0")
+  }
+  # Add labels
+  text(-0.165, -0.726, "Cluff et al., 2014")
+  text(-0.2, -0.73, "Hull et al., 2018")
+  text(-0.163, -0.746, "Zhong et al., 2019")
+  # Add legend
+  legend("topright", c("Source Water\nor Injected Fluids", "Produced Water"), pch = c(21, 21), pt.bg = c("#ffffffa0", "#df536ba0"), pt.cex = c(1.4, 1.7), lwd = 2, lty = NA)
+  label.figure("d", cex = 1.5, xfrac = 0.03, font = 2)
+
+  if(pdf) dev.off()
+
+}
+

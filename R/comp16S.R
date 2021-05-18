@@ -464,7 +464,8 @@ getmetrics <- function(study, cn = FALSE, mdat = NULL, RDP = NULL, map = NULL, l
 ######################
 
 # Make a nH2O-ZC plot for selected taxa and all their children 20200911
-taxacomp <- function(which = c("Bacteria", "Archaea"), xlim = NULL, ylim = NULL, col = seq_along(taxa), legend.x = "topleft", identify = FALSE, pch = NULL, hline = NULL) {
+taxacomp <- function(which = c("Bacteria", "Archaea"), xlim = NULL, ylim = NULL,
+  col = seq_along(taxa), legend.x = "topleft", identify = FALSE, pch = NULL, hline = NULL) {
 
   # Read compositional metrics of all taxa
   datadir <- system.file("extdata/comp16S", package = "JMDplots")
@@ -510,6 +511,13 @@ taxacomp <- function(which = c("Bacteria", "Archaea"), xlim = NULL, ylim = NULL,
     if(is.null(ylim)) ylim <- c(-0.77, -0.71)
   }
 
+  # Use semi-transparent colors for lines 20210518
+  lcol <- palette()
+  lcol[1] <- "#000000"  # black
+  lcol[8] <- "#9e9e9e"  # gray62
+  lcol <- paste0(lcol, "80")
+  lcol <- rep(lcol, length.out = length(col))
+
   # Initialize plot
   if(is.null(xlim)) xlim <- c(-0.25, -0.05)
   if(is.null(ylim)) ylim <- c(-0.82, -0.68)
@@ -519,7 +527,9 @@ taxacomp <- function(which = c("Bacteria", "Archaea"), xlim = NULL, ylim = NULL,
   # Store all values for identify()
   ZC <- nH2O <- numeric()
   names <- character()
-  # Loop over taxa
+
+  # Loop 1: Get values to plot
+  vals <- list()
   for(i in seq_along(taxa)) {
     thisgroup <- taxa[i]
     # Get the compositional metrics for this group
@@ -529,29 +539,50 @@ taxacomp <- function(which = c("Bacteria", "Archaea"), xlim = NULL, ylim = NULL,
     # Get the compositional metrics for all children
     ichildren <- metrics$parent == thisgroup
     children <- metrics[ichildren, ]
-
-    # Plot points
-    points(group$ZC, group$nH2O, pch = pch[i], cex = 1.5, col = col[i], bg = col[i])
-    points(children$ZC, children$nH2O, pch = pch[i], cex = 0.7, col = 1, bg = col[i], lwd = 0.5)
-    # Plot lines from parent to all children 20200925
-    for(j in seq_along(children$ZC)) lines(c(group$ZC, children$ZC[j]), c(group$nH2O, children$nH2O[j]), col = col[i], lty = lty)
-    # Label Halobacteria and Nanohaloarchaea 20200930
-    if(thisgroup == "Euryarchaeota") {
-      ihalo <- match(c("Halobacteria", "Nanohaloarchaea"), children$group)
-      dy <- ifelse(which == "majorcellular", -0.0025, -0.005)
-      text(children$ZC[ihalo], children$nH2O[ihalo] + dy, c(1, 2))
-    }
-    # Label Clostridia 20200930
-    if(thisgroup == "Firmicutes" & which == "majorcellular") {
-      iclos <- match("Clostridia", children$group)
-      text(children$ZC[iclos], children$nH2O[iclos] + 0.0025, 3)
-    }
+    # Store the values to make the plot
+    vals[[i]] <- list(group = group, children = children)
 
     # Keep values for identification
     ZC <- c(ZC, group$ZC, children$ZC)
     nH2O <- c(nH2O, group$nH2O, children$nH2O)
     names <- c(names, group$group, children$group)
   }
+
+  # Loop 2: Plot lines from parents to all children 20200925
+  for(i in seq_along(taxa)) {
+    group <- vals[[i]]$group
+    children <- vals[[i]]$children
+    for(j in seq_along(children$ZC)) lines(c(group$ZC, children$ZC[j]), c(group$nH2O, children$nH2O[j]), col = lcol[i], lty = lty)
+  }
+
+  # Loop 3: Plot points for parents
+  for(i in seq_along(taxa)) {
+    group <- vals[[i]]$group
+    children <- vals[[i]]$children
+    points(group$ZC, group$nH2O, pch = pch[i], cex = 1.5, col = col[i], bg = col[i])
+  }
+
+  # Loop 4: Plot points for children
+  for(i in seq_along(taxa)) {
+    group <- vals[[i]]$group
+    children <- vals[[i]]$children
+    # Use white outline for black points 20210518
+    pt.col <- ifelse((col[i] - 1) %% 8 == 0, "white", 1)
+    points(children$ZC, children$nH2O, pch = pch[i], cex = 0.7, col = pt.col, bg = col[i], lwd = 0.5)
+    # Label Halobacteria and Nanohaloarchaea 20200930
+    thisgroup <- taxa[i]
+    if(thisgroup == "Euryarchaeota") {
+      ihalo <- match(c("Halobacteria", "Nanohaloarchaea", "Methanococci"), children$group)
+      dy <- ifelse(which == "majorcellular", -0.0025, -0.005)
+      text(children$ZC[ihalo], children$nH2O[ihalo] + dy, c(1, 2, 3))
+    }
+    # Label Clostridia 20200930
+    if(thisgroup == "Firmicutes" & identical(which, "majorcellular")) {
+      iclos <- match("Clostridia", children$group)
+      text(children$ZC[iclos], children$nH2O[iclos] + 0.0025, 4)
+    }
+  }
+
   # Add legend
   len <- length(taxa)
   if(identical(which, "majorcellular")) {
