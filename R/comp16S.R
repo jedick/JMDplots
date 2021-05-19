@@ -200,6 +200,13 @@ getmdat <- function(study, dropNA = TRUE) {
     pch <- ifelse(mdat$depth < 85, 24, 25)
     col <- ifelse(mdat$depth < 85, 4, 2)
   }
+  if(study == "BCA+20") {
+    type <- rep("transition", nrow(mdat))
+    type[mdat$depth < 3] <- "oxic"
+    type[mdat$depth > 4] <- "anoxic"
+    pch <- sapply(type, switch, oxic = 24, transition = 20, anoxic = 25)
+    col <- sapply(type, switch, oxic = 4, transition = 1, anoxic = 2)
+  }
 
   minuend <- subtrahend <- rep(NA, nrow(mdat))
   if(!is.null(subject)) {

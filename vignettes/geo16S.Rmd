@@ -79,7 +79,7 @@ geo16S2()
 ```
 
 ## Stratified lakes and seawater (Figure 3)
-```{r geo16S3, message = FALSE, results = "hide", out.width='100%', fig.width = 7, fig.height = 6, pngquant = pngquant}
+```{r geo16S3, message = FALSE, results = "hide", out.width='100%', fig.width = 7, fig.height = 9, pngquant = pngquant}
 geo16S3()
 ```
 

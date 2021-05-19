@@ -117,7 +117,7 @@ geo16S2 <- function(pdf = FALSE) {
   lmlines()
   # Add convex hull for stratified lakes and sewater (from Fig. 3) 20210503
   fig3 <- geo16S3(plot.it = FALSE)
-  addhull(fig3$ZC, fig3$nH2O, "slategray")
+  addhull(fig3$ZC, fig3$nH2O, "slategray3")
   # Add convex hulls for each dataset in this figure
   addhull(p1$ZC, p1$nH2O, 2, TRUE)
   addhull(p2$ZC, p2$nH2O, 1, TRUE, lty = 2)
@@ -146,35 +146,41 @@ geo16S2 <- function(pdf = FALSE) {
 geo16S3 <- function(pdf = FALSE, plot.it = TRUE) {
 
   if(plot.it) {
-    if(pdf) pdf("geo16S3.pdf", width = 7, height = 6)
-    mat <- matrix(c(1,1,1,1, 2,3,4,5, 6,7,8,9), byrow = TRUE, nrow = 3)
-    layout(mat, heights = c(1, 10, 10))
+    if(pdf) pdf("geo16S3.pdf", width = 7, height = 9)
+    mat <- matrix(c(1,1,1,1, 2,3,4,5, 6,7,8,9, 10,11,12,13), byrow = TRUE, nrow = 4)
+    layout(mat, heights = c(1, 10, 10, 10))
     # Make legend
     par(mar = c(0, 0, 0, 0))
     plot.new()
-#    legend <- as.expression(c(quote(italic(Z)[C]), quote(O[2]), "ORP"))
     legend <- as.expression(c(quote(italic(Z)[C]), quote(O[2]), quote(NO[3]^"-" / NO[2]^"-")))
-    legend("top", legend = legend, lty = 1, lwd = 1.5, col = c(1, 2, 4), pch = c(21, NA, NA), pt.bg = "white", ncol = 3, bty = "n")
+    legend("top", legend = legend, lty = c(1, 1, 2), lwd = 1.5, col = c(1, 2, 4), pch = c(21, NA, NA), pt.bg = "white", ncol = 3, bty = "n")
     # Setup plot parameters
     par(mgp = c(1.8, 0.5, 0), mar = c(3, 3, 3, 1))
   }
 
-  # Global ZC and O2 range for plots
-  ZClim <- c(-0.17, -0.14)
   # Identify datasets to plot
   study <- c("SVH+19", "MZG+20", "MZG+20", "GBL+15", "GBL+15",
-             "HXZ+20", "HXZ+20", "HXZ+20", "HXZ+20")
+             "HXZ+20", "HXZ+20", "HXZ+20", "HXZ+20",
+             "BCA+20", "BCA+20", "BCA+20", "BCA+20")
   column <- c("study", "lake", "lake", "size", "size",
-              "station", "station", "station", "station")
+              "station", "station", "station", "station",
+              "month", "month", "month", "month")
   ID <- c("SVH+19", "Lake Zug", "Lake Lugano", "0.2-1.6micron", "1.6-30micron",
-          "SYBL", "SYBL", "C4", "C4")
+          "SYBL", "SYBL", "C4", "C4",
+          "Jul", "Nov", "Feb", "Apr")
   title <- c("Black Sea", "Lake Zug", "Lake\nLugano", "ETNP", "ETNP",
-#             # Use leading or trailing space to flag ORP plots
              # Use leading or trailing space to flag NO3-/NO2- plots
-             "Inside\nBlue Hole", " Inside\nBlue Hole", "Outside\nBlue Hole", "Outside\nBlue Hole ")
+             "Blue Hole\n", " Blue Hole\n", "Blue Hole\n", "Blue Hole\n ",
+             "Ursu Lake\n", "Ursu Lake\n", "Ursu Lake\n", "Ursu Lake\n")
+  subtitle <- c("", "", "", "", "",
+                "Inside", "Inside", "Outside (C4)", "Outside (C4)",
+                "July 2015", "November 2015", "February 2016", "April 2016")
+  titlesub <- paste(title, subtitle)
   # Make objects to hold all ZC and nH2O values (for convex hull in Figure 2)
   allZC <- allnH2O <- numeric()
   for(i in 1:length(study)) {
+    # ZC range for plots
+    if(study[i] == "BCA+20") ZClim <- c(-0.175, -0.145) else ZClim <- c(-0.17, -0.14)
     # Get the metadata and compositional metrics for this study
     # Keep all rows for higher-resolution O2 measurements
     mdat <- getmdat(study[i], dropNA = FALSE)
@@ -196,10 +202,10 @@ geo16S3 <- function(pdf = FALSE, plot.it = TRUE) {
 
     if(plot.it) {
       # Reverse y-axis (depth)
-      ylim <- rev(range(depth))
+      if(study[i] == "BCA+20") ylim <- c(11, 0) else ylim <- rev(range(depth))
       # Determine whether the title has changed
       newplot <- TRUE
-      if(i > 1) if(title[i]==title[i-1]) newplot <- FALSE
+      if(i > 1) if(titlesub[i]==titlesub[i-1]) newplot <- FALSE
       if(newplot) {
         plot(ZC, depth, xlim = ZClim, ylim = ylim, xlab = axis.label("ZC"), ylab = "Depth (m)", type = "b")
       } else {
@@ -209,35 +215,40 @@ geo16S3 <- function(pdf = FALSE, plot.it = TRUE) {
 
       if(newplot) {
         # Add title in lower right
-        if(grepl("Outside", title[i])) text(ZClim[1], ylim[1], title[i], adj = c(0, 0))
-        else text(ZClim[2], ylim[1], title[i], adj = c(1, 0))
-#        # Plot O2 concentrations or ORP
+        if(grepl("Outside", subtitle[i])) {
+          text(ZClim[1], ylim[1], title[i], adj = c(0, 0), font = 2)
+          text(ZClim[1], ylim[1], subtitle[i], adj = c(0, 0))
+        } else {
+          text(ZClim[2], ylim[1], title[i], adj = c(1, 0), font = 2)
+          text(ZClim[2], ylim[1], subtitle[i], adj = c(1, 0))
+        }
         # Plot O2 concentrations or NO3-/NO2- ratio
         nc <- nchar(title[i])
         if(substr(title[i], 1, 1) == " " | substr(title[i], nc, nc) == " ") {
-#          what <- "ORP"
           what <- "NO3.NO2"
-#          xlim <- c(-350, 100)
           xlim <- c(0, 250)
           col <- 4
+          lty <- 2
           # Calculate NO3- / NO2- ratio 20210511
           NO3.NO2 <- alldat$`NO3- (umol L-1)` / alldat$`NO2- (umol L-1)`
           alldat <- cbind(alldat, NO3.NO2)
         } else {
           what <- "O2"
-          xlim <- c(0, 220)
+          if(study[i] == "BCA+20") xlim <- c(0, 25) else xlim <- c(0, 220)
           col <- 2
+          lty <- 1
         }
         icol <- grep(paste0("^", what), colnames(alldat))
         # Remove NA values
         alldat <- alldat[!is.na(alldat[, icol]), ]
         depth <- alldat$depth
         par(new = TRUE)
-        plot(alldat[, icol], depth, col = col, type = "l", axes = FALSE, xlab = "", ylab = "", xlim = xlim, ylim = ylim)
+        plot(alldat[, icol], depth, col = col, lty = lty, type = "l", axes = FALSE, xlab = "", ylab = "", xlim = xlim, ylim = ylim)
         # Add second axis labels
         xlab <- colnames(alldat)[icol]
         if(xlab == "O2 (umol kg-1)") xlab <- quote(O[2]~"(\u00B5mol kg"^-1*")")
         if(xlab == "O2 (umol L-1)") xlab <- quote(O[2]~"(\u00B5mol L"^-1*")")
+        if(xlab == "O2 (mg L-1)") xlab <- quote(O[2]~"(mg L"^-1*")")
         if(xlab == "NO3.NO2") xlab <- quote(NO[3]^"-" / NO[2]^"-"~"(mol/mol)")
         axis(3)
         mtext(xlab, side = 3, line = 1.7, cex = par("cex"))
@@ -252,9 +263,9 @@ geo16S3 <- function(pdf = FALSE, plot.it = TRUE) {
       }
     } # end if(plot.it)
 
-    # Store the ZC and nH2O values
-    allZC <- c(allZC, ZC)
-    allnH2O <- c(allnH2O, nH2O)
+    # Store all non-NA ZC and nH2O values
+    allZC <- c(allZC, na.omit(ZC))
+    allnH2O <- c(allnH2O, na.omit(nH2O))
   }
 
   if(plot.it) {
@@ -263,7 +274,7 @@ geo16S3 <- function(pdf = FALSE, plot.it = TRUE) {
 
 }
 
-# Figure 5: Compositional differences at different taxonomic levels 20200924
+# Figure 4: Compositional differences at different taxonomic levels 20200924
 geo16S4 <- function(pdf = FALSE) {
 
   if(pdf) pdf("geo16S4.pdf", width = 8, height = 3)
