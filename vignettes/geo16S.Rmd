@@ -84,7 +84,7 @@ geo16S3()
 ```
 
 ## Compositional differences at different taxonomic levels (Figure 4)
-```{r geo16S4, message = FALSE, results = "hide", out.width='100%', fig.width = 8, fig.height = 3, pngquant = pngquant}
+```{r geo16S4, message = FALSE, results = "hide", out.width='100%', fig.width = 10.5, fig.height = 7, out.extra = 'class="full-width"', pngquant = pngquant, dpi = 100}
 geo16S4()
 ```
 

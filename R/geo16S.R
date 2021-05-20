@@ -277,22 +277,40 @@ geo16S3 <- function(pdf = FALSE, plot.it = TRUE) {
 # Figure 4: Compositional differences at different taxonomic levels 20200924
 geo16S4 <- function(pdf = FALSE) {
 
-  if(pdf) pdf("geo16S4.pdf", width = 8, height = 3)
-  par(mfrow = c(1, 3))
+  if(pdf) pdf("geo16S4.pdf", width = 10.5, height = 7)
+  mat <- matrix(c(1,2,3,4, 5,6,7,8), nrow = 2, byrow = TRUE)
+  layout(mat, widths = c(1, 2, 2, 2))
   par(mar = c(4, 4, 3, 1))
   par(mgp = c(2.5, 1, 0))
 
-  rankcomp("MPB+17", "ZC", pch.up = 23, pch.down = 21, ylim = c(-0.03, 0.005))
-  mtext("Manus Basin", line = 1.5)
-  mtext("(T > 10 \u00B0C) - (T < 10 \u00B0C)", line = 0.3, cex = 0.8)
+  p <- groupcomp("MPB+17", "ZC", "domain", pch.up = 23, pch.down = 21, ylim = c(-0.23, -0.13), xlim = c(0, 100),
+    xadj = c(Bacteria = 1), yadj = c(Bacteria = 1))
+#  title(paste("Domain", round(p)))
+  title("Manus Basin")
+  text(40, -0.154, "T < 10 \u00B0C", font = 2)
+  text(40, -0.187, "T > 10 \u00B0C", font = 2)
+  p <- groupcomp("MPB+17", "ZC", "phylum", pch.up = 23, pch.down = 21, ylim = c(-0.23, -0.13),
+    xadj = c(Proteobacteria = 1, Bacteroidetes = -0.25))
+  title(paste("Phylum", round(p)))
+  p <- groupcomp("MPB+17", "ZC", "class", pch.up = 23, pch.down = 21, ylim = c(-0.23, -0.13),
+    xadj = c(Flavobacteriia = -0.25), yadj = c(Gammaproteobacteria = 1.2))
+  title(paste("Class", round(p)))
+  p <- groupcomp("MPB+17", "ZC", "genus", pch.up = 23, pch.down = 21, ylim = c(-0.23, -0.13), minpercent = 1,
+    xadj = c(Alteromonas = -0.15, Sulfurimonas = 1), yadj = c(Alcanivorax = 1.2, Sulfurimonas = 1.2))
+  title(paste("Genus", round(p)))
 
-  rankcomp("HLA+16", "nH2O", pch.up = 24, pch.down = 21, ylim = c(-0.01, 0.015))
-  mtext("Baltic Sea", line = 1.5)
-  mtext("(PSU < 6) - (PSU > 20)", line = 0.3, cex = 0.8)
-
-  rankcomp("XDZ+17", "nH2O", pch.up = 24, pch.down = 21, ylim = c(-0.002, 0.03))
-  mtext("Qarhan Salt Lake soils", line = 1.5)
-  mtext("normal - saline", line = 0.3, cex = 0.8)
+  p <- groupcomp("HLA+16", "nH2O", "domain", pch.up = 24, pch.down = 21, ylim = c(-0.78, -0.71), xlim = c(0, 100),
+    xadj = c(Bacteria = 1), yadj = c(Bacteria = 0))
+#  title(paste("Domain", round(p)))
+  title("Baltic Sea")
+  text(40, -0.742, "PSU < 6", font = 2)
+  text(40, -0.754, "PSU > 20", font = 2)
+  p <- groupcomp("HLA+16", "nH2O", "phylum", pch.up = 24, pch.down = 21, ylim = c(-0.78, -0.71))
+  title(paste("Phylum", round(p)))
+  p <- groupcomp("HLA+16", "nH2O", "class", pch.up = 24, pch.down = 21, ylim = c(-0.78, -0.71))
+  title(paste("Class", round(p)))
+  p <- groupcomp("HLA+16", "nH2O", "genus", pch.up = 24, pch.down = 21, ylim = c(-0.78, -0.71), minpercent = 1)
+  title(paste("Genus", round(p)))
 
   # Add legend for point size 20210518
   y <- c(0.030, 0.025, 0.022, 0.020) - 0.005

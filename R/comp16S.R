@@ -777,14 +777,15 @@ diffcomp <- function(study, cn = FALSE, identify = FALSE, title = TRUE, xlim = N
   invisible(list(study = study, DZC = D_mean_ZC, DnH2O = D_mean_nH2O))
 }
 
-# Plot differences between two groups of samples or two studies for taxa at different ranks 20200924
-rankcomp <- function(study = "XDZ+17", metric = "nH2O", pch.up = 24, pch.down = 21, minpercent = 2, ylim = c(-0.002, 0.02), study2 = NA) {
+# Composition-abundance plots for sample groups within taxonomic groups 20210520
+groupcomp <- function(study = "XDZ+17", metric = "nH2O", rank = "domain", pch.up = 24, pch.down = 21, minpercent = 2,
+                      xlim = NULL, ylim = NULL, xadj = NULL, yadj = NULL, study2 = NA) {
 
   # Get metadata, RDP and taxonomy mapping
-  mdat <- getmdat(study)[, c("study", "name", "Run", "sample", "pch")]
+  mdat <- getmdat(study)[, c("study", "name", "Run", "sample", "pch", "col")]
   # Get data to compare two studies 20210513
   if(!is.na(study2)) {
-    mdat2 <- getmdat(study2)[, c("study", "name", "Run", "sample", "pch")]
+    mdat2 <- getmdat(study2)[, c("study", "name", "Run", "sample", "pch", "col")]
     mdat$pch <- pch.up
     mdat2$pch <- pch.down
     # Get RDP classification and taxonomy mapping
@@ -809,109 +810,98 @@ rankcomp <- function(study = "XDZ+17", metric = "nH2O", pch.up = 24, pch.down = 
     RDP <- getRDP(study, mdat = mdat)
     map <- getmap(study, RDP = RDP)
   }
-  # Keep metadata only for samples with >= 200 counts 20201006
-  mdat <- mdat[mdat$Run %in% colnames(RDP), ]
+  # Identify samples in up- and down-groups
+  iup <- mdat$pch %in% pch.up
+  idown <- mdat$pch %in% pch.down
+  # Retrieve colors for points
+  col.up <- mdat[iup, ]$col[1]
+  col.down <- mdat[idown, ]$col[1]
   # Read compositional metrics for faster running
   datadir <- system.file("extdata/comp16S", package = "JMDplots")
   RefSeq_metrics <- read.csv(file.path(datadir, "RefSeq_metrics.csv"), as.is = TRUE)
 
   # Split the lineage text
   lsplit <- strsplit(RDP$lineage, ";")
-  # Define the ranks and start the plot
-  ranks <- c("rootrank", "domain", "phylum", "class", "order", "family")
-  plot(range(1:length(ranks)), ylim, xlab = NA, ylab = cplab[[paste0("D", metric)]], type = "n", xaxt = "n")
-  # Make rotated axis labels 20200926
-  text(x = seq_along(ranks), y = par()$usr[3] - 1.5 * strheight("A"), labels = ranks, srt = 30, adj = 1, xpd = TRUE)
-  axis(1, at = seq_along(ranks), labels = NA)
-  abline(h = 0, lty = 2, col = "gray40")
-  # A place to keep the calculated differences between "up" and "down" samples
-  alldiffs <- vector("list", length(ranks))
-  names(alldiffs) <- ranks
-
-  # Loop over taxonomic ranks
-  for(i in seq_along(ranks)) {
-    # Find the taxa with this rank in the lineage
-    irank <- vapply(lsplit, function(x) match(ranks[i], x), 0) - 1
-    taxon <- mapply("[", lsplit, irank)
-    # Calculate the compositional metrics for each unique taxon
-    taxa <- na.omit(unique(taxon))
-    taxondiffs <- rep(NA, length(taxa))
-    names(taxondiffs) <- taxa
-    parents <- character()
-    domains <- character()
-    cex <- numeric()
-    for(j in seq_along(taxa)) {
-      # Which organisms (by RDP classification) are in this taxon
-      itaxon <- taxon == taxa[j]
-      itaxon[is.na(itaxon)] <- FALSE
-      thisRDP <- RDP[itaxon, ]
-      thismap <- map[itaxon]
-      # Calculate percent abundance of this taxon
-      thispercent <- sum(thisRDP[, -(1:3)]) / sum(RDP[, -(1:3)]) * 100
-      # Skip low-abundance taxa
-      if(thispercent < minpercent) next
-      # If we got here, print message about taxon name and abundance
-      print(paste0("rankcomp: ", ranks[i], "_", taxa[j], " (", round(thispercent), "%)"))
-      # Skip taxa with no available mappings
-      if(all(is.na(thismap))) {
-        print("            --- no taxonomic mappings available!")  
-        next
-      }
-      # Calculate the compositional metrics
-      metrics <- getmetrics(study, mdat = mdat, RDP = thisRDP, map = thismap, metrics = RefSeq_metrics)
-      # Keep NA compositions out
-      isna <- is.na(metrics$ZC)
-      # Get selected compositional metric
-      if(metric == "nH2O") X <- metrics$nH2O[!isna]
-      if(metric == "ZC") X <- metrics$ZC[!isna]
-      # Calculate median difference of compositional metric
-      up <- median(X[mdat[!isna, ]$pch %in% pch.up])
-      down <- median(X[mdat[!isna, ]$pch %in% pch.down])
-      diff <- up - down
-      # Store the results
-      taxondiffs[j] <- diff
-      # Make point size reflect taxon abundance
-      cex <- c(cex, thispercent * 0.1)
-      # Keep track of the domain for coloring 20210513
-      domain <- ""
-      if(all(grepl("Archaea", thisRDP$lineage))) domain <- "Archaea"
-      if(all(grepl("Bacteria", thisRDP$lineage))) domain <- "Bacteria"
-      domains <- c(domains, domain)
-      if(i > 1) {
-        # Identify the parent taxon
-        parent <- lsplit[itaxon][[1]][irank[itaxon][1] - 2]
-        parents <- c(parents, parent)
-      }
+  # Find the taxa with the specified rank in the lineage
+  irank <- vapply(lsplit, function(x) match(rank, x), 0) - 1
+  taxon <- mapply("[", lsplit, irank)
+  # Calculate the compositional metrics for each unique taxon
+  taxa <- na.omit(unique(taxon))
+  Xup <- Xdown <- Pup <- Pdown <- Ptaxa <- numeric()
+  Xtaxa <- character()
+  for(j in seq_along(taxa)) {
+    # Which organisms (by RDP classification) are in this taxon
+    itaxon <- taxon == taxa[j]
+    itaxon[is.na(itaxon)] <- FALSE
+    thisRDP <- RDP[itaxon, ]
+    thismap <- map[itaxon]
+    # Calculate percent abundance of this taxon in the whole community
+    thispercent <- sum(thisRDP[, -(1:3)]) / sum(RDP[, -(1:3)]) * 100
+    # Skip low-abundance taxa
+    if(thispercent < minpercent) next
+    # If we got here, print message about taxon name and abundance
+    print(paste0("groupcomp: ", rank, "_", taxa[j], " (", round(thispercent), "%)"))
+    # Skip taxa with no available mappings
+    if(all(is.na(thismap))) {
+      print("            --- no taxonomic mappings available!")  
+      next
     }
-
-    # Remove NA (low-abundance) taxa
-    taxondiffs <- na.omit(taxondiffs)
-    for(k in seq_along(taxondiffs)) {
-      # Color-code taxa belonging to Archaea or Bacteria 20210531
-      col <- "#70809080"  # semi-transparent slategray
-      if(domains[k] == "Archaea") col <- "#df536b80"  # semi-transparent color 2
-      if(domains[k] == "Bacteria") col <- "#2297e680"  # semi-transparent color 4
-      # Retrieve calculated difference for this taxon
-      taxondiff <- taxondiffs[k]
-      # Add point for this taxon
-      points(i, taxondiffs[k], pch = 20, cex = cex[k], col = col)
-      if(i > 1) {
-        # Add a line from the parent
-        drank <- 1
-        parentdiff <- tryCatch(alldiffs[[i - drank]][[parents[k]]], error = function(e) e)
-        # Sometimes need to go up another rank 20200925
-        # e.g. family_SAR11 -> class_Alphaproteobacteria (nothing at order rank in this lineage in RDP taxonomy)
-        if(inherits(parentdiff, "error")) {
-          drank <- 2
-          parentdiff <- tryCatch(alldiffs[[i - 2]][[parents[k]]], error = function(e) e)
-        }
-        if(!inherits(parentdiff, "error")) lines(c(i - drank, i), c(parentdiff, taxondiff), col = "#00000040")
-      }
-    }
-
-    # Save the differences
-    alldiffs[[i]] <- taxondiffs
+    # Keep percentages and names of used taxa
+    Xtaxa <- c(Xtaxa, taxa[j])
+    Ptaxa <- c(Ptaxa, thispercent)
+    # Calculate the compositional metrics
+    metrics <- getmetrics(study, mdat = mdat, RDP = thisRDP, map = thismap, metrics = RefSeq_metrics)
+    # Get selected compositional metric
+    if(metric == "nH2O") X <- metrics$nH2O
+    if(metric == "ZC") X <- metrics$ZC
+    # Calculate median values of compositional metrics
+    Xup <- c(Xup, median(X[iup], na.rm = TRUE))
+    Xdown <- c(Xdown, median(X[idown], na.rm = TRUE))
+    # Calculate percent abundance within the sample groups 20210520
+    upall <- RDP[, which(iup) + 3]
+    upthis <- thisRDP[, which(iup) + 3]
+    Pup <- c(Pup, sum(upthis) / sum(upall) * 100)
+    downall <- RDP[, which(idown) + 3]
+    downthis <- thisRDP[, which(idown) + 3]
+    Pdown <- c(Pdown, sum(downthis) / sum(downall) * 100)
   }
+
+  # Plot the compositions and abundances
+  if(is.null(xlim)) xlim <- range(na.omit(c(Pup, Pdown)))
+  if(is.null(ylim)) ylim <- range(na.omit(c(Xup, Xdown)))
+  plot(xlim, ylim, type = "n", xlab = "Abundance (%)", ylab = cplab[[metric]])
+  for(k in seq_along(Xtaxa)) {
+    # Add points for up- and down- sample groups
+    cex <- 1.5
+    if(pch.up > 20) points(Pup[k], Xup[k], pch = pch.up, bg = col.up, cex = cex)
+    else points(Pup[k], Xup[k], pch = pch.up, col = col.up, cex = cex)
+    if(pch.down > 20) points(Pdown[k], Xdown[k], pch = pch.down, bg = col.down, cex = cex)
+    else points(Pdown[k], Xdown[k], pch = pch.down, col = col.down, cex = cex)
+    # Add arrow connecting the points
+    arrows(Pdown[k], Xdown[k], Pup[k], Xup[k], length = 0.1)
+    # Pad labels with spaces to offset from points
+    label <- paste0("  ", Xtaxa[k], "  ")
+    # Get adjustment from arguments if provided
+    adj <- c(0, 0.5)
+    if(!is.null(xadj)) if(!is.na(xadj[Xtaxa[k]])) adj[1] <- xadj[Xtaxa[k]]
+    if(!is.null(yadj)) if(!is.na(yadj[Xtaxa[k]])) adj[2] <- yadj[Xtaxa[k]]
+    # Add group name with spaces to offset from points
+    text(Pup[k], Xup[k], label, adj = adj)
+  }
+  # Add lines for total composition of these groups
+  OKup <- !is.na(Xup)
+  Xup <- Xup[OKup]
+  Pup <- Pup[OKup]
+  up <- sum(Xup * Pup / sum(Pup))
+  OKdown <- !is.na(Xdown)
+  Xdown <- Xdown[OKdown]
+  Pdown <- Pdown[OKdown]
+  down <- sum(Xdown * Pdown / sum(Pdown))
+  abline(h = up, lty = 2, lwd = 2, col = col.up)
+  abline(h = down, lty = 3, lwd = 2, col = col.down)
+  # Calculate and return total percentage of community represented by these taxa
+  Ptaxa <- Ptaxa[OKup & OKdown]
+  sum(Ptaxa)
 
 }
 
