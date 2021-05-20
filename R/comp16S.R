@@ -369,7 +369,7 @@ getmap <- function(study, RDP = NULL, lineage = NULL) {
     "phylum_Cyanobacteria/Chloroplast" = "phylum_Cyanobacteria",
     # 20200929
     "class_Cyanobacteria" = "phylum_Cyanobacteria",
-    "genus_Spartobacteria_genera_incertae_sedis" = "species_Spartobacteria bacterium LR76",
+    "genus_Spartobacteria_genera_incertae_sedis" = "class_Spartobacteria",
 
     ## 20200922 Suda et al., 2002 doi:10.1099/00207713-52-5-1577
     #"genus_GpIIa" = "species_Planktothrix agardhii",
@@ -596,6 +596,7 @@ taxacomp <- function(which = c("Bacteria", "Archaea"), xlim = NULL, ylim = NULL,
     legend("bottomleft", taxa[1:8], pch = pch[1:8], col = col[1:8], pt.bg = col[1:8], cex = 0.9, bg = "white")
     legend("bottomright", taxa[9:len], pch = pch[9:len], col = col[9:len], pt.bg = col[9:len], cex = 0.9, bg = "white")
   } else if(identical(which, "Proteobacteria")) {
+    taxa[taxa == "Epsilonproteobacteria"] <- "Epsilonproteobacteria *"
     legend("topright", taxa[1:6], pch = pch[1:6], col = col[1:6], pt.bg = col[1:6], cex = 0.9, bg = "white")
     legend("bottomleft", taxa[7:len], pch = pch[7:len], col = col[7:len], pt.bg = col[7:len], cex = 0.9, bg = "white")
   } else if(identical(which, "majorphyla")) {
@@ -869,7 +870,10 @@ groupcomp <- function(study = "XDZ+17", metric = "nH2O", rank = "domain", pch.up
   # Plot the compositions and abundances
   if(is.null(xlim)) xlim <- range(na.omit(c(Pup, Pdown)))
   if(is.null(ylim)) ylim <- range(na.omit(c(Xup, Xdown)))
-  plot(xlim, ylim, type = "n", xlab = "Abundance (%)", ylab = cplab[[metric]])
+  if(identical(xlim, c(0, 100))) {
+    plot(extendrange(xlim), ylim, type = "n", xlab = "Abundance (%)", ylab = cplab[[metric]], xaxt = "n")
+    axis(1, c(0, 50, 100))
+  } else plot(xlim, ylim, type = "n", xlab = "Abundance (%)", ylab = cplab[[metric]])
   for(k in seq_along(Xtaxa)) {
     # Add points for up- and down- sample groups
     cex <- 1.5

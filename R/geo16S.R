@@ -73,7 +73,7 @@ geo16S2 <- function(pdf = FALSE) {
   title("Manus Basin submarine vents\nMeier et al., 2017", font.main = 1)
   addhull(p4$ZC, p4$nH2O, 2, TRUE, lty = 2)
   pointfun(p4)
-  legend <- c("T < 10 \u00B0C", "T > 10 \u00B0C", "rock", "fauna")
+  legend <- as.expression(c(quote(italic(T)~"< 10 \u00B0C"), quote(italic(T)~"> 10 \u00B0C"), "rock", "fauna"))
   legend("bottomleft", legend, pch = c(21, 23, 20, 8), col = c(1, 1, 1, "yellow4"), pt.bg = c(4, 2, NA, NA), bg = "white")
 
   p5 <- plotcomp("ZLM+16", title = FALSE, points = FALSE)
@@ -284,48 +284,45 @@ geo16S4 <- function(pdf = FALSE) {
   par(mgp = c(2.5, 1, 0))
 
   p <- groupcomp("MPB+17", "ZC", "domain", pch.up = 23, pch.down = 21, ylim = c(-0.23, -0.13), xlim = c(0, 100),
-    xadj = c(Bacteria = 1), yadj = c(Bacteria = 1))
-#  title(paste("Domain", round(p)))
+    xadj = c(Bacteria = 1), yadj = c(Bacteria = -3))
   title("Manus Basin")
-  text(40, -0.154, "T < 10 \u00B0C", font = 2)
-  text(40, -0.187, "T > 10 \u00B0C", font = 2)
+  text(40, -0.154, "   < 10 \u00B0C", font = 2)
+  text(10, -0.154, "T", font = 4)
+  text(40, -0.187, "   > 10 \u00B0C", font = 2)
+  text(10, -0.187, "T", font = 4)
   p <- groupcomp("MPB+17", "ZC", "phylum", pch.up = 23, pch.down = 21, ylim = c(-0.23, -0.13),
-    xadj = c(Proteobacteria = 1, Bacteroidetes = -0.25))
-  title(paste("Phylum", round(p)))
+    xadj = c(Proteobacteria = 1, Bacteroidetes = -0.2))
+  title(paste0("Phylum (", round(p), "% of total)"))
   p <- groupcomp("MPB+17", "ZC", "class", pch.up = 23, pch.down = 21, ylim = c(-0.23, -0.13),
-    xadj = c(Flavobacteriia = -0.25), yadj = c(Gammaproteobacteria = 1.2))
-  title(paste("Class", round(p)))
+    xadj = c(Flavobacteriia = -0.2, Gammaproteobacteria = 0.2), yadj = c(Gammaproteobacteria = 1.7))
+  title(paste0("Class (", round(p), "% of total)"))
   p <- groupcomp("MPB+17", "ZC", "genus", pch.up = 23, pch.down = 21, ylim = c(-0.23, -0.13), minpercent = 1,
-    xadj = c(Alteromonas = -0.15, Sulfurimonas = 1), yadj = c(Alcanivorax = 1.2, Sulfurimonas = 1.2))
-  title(paste("Genus", round(p)))
+    xadj = c(Alteromonas = -0.1, Sulfurimonas = 1, Alcanivorax = -0.9, Halomonas = -0.55, Thiogranum = -0.1, Sulfurovum = 0.5),
+    yadj = c(Sulfurimonas = 1.2, Pseudomonas = 1.5, Thalassospira = 0.4, Sulfurovum = -1))
+  title(paste0("Genus (", round(p), "% of total)"))
 
   p <- groupcomp("HLA+16", "nH2O", "domain", pch.up = 24, pch.down = 21, ylim = c(-0.78, -0.71), xlim = c(0, 100),
-    xadj = c(Bacteria = 1), yadj = c(Bacteria = 0))
-#  title(paste("Domain", round(p)))
+    xadj = c(Bacteria = 1), yadj = c(Bacteria = 1.5))
   title("Baltic Sea")
   text(40, -0.742, "PSU < 6", font = 2)
   text(40, -0.754, "PSU > 20", font = 2)
-  p <- groupcomp("HLA+16", "nH2O", "phylum", pch.up = 24, pch.down = 21, ylim = c(-0.78, -0.71))
-  title(paste("Phylum", round(p)))
-  p <- groupcomp("HLA+16", "nH2O", "class", pch.up = 24, pch.down = 21, ylim = c(-0.78, -0.71))
-  title(paste("Class", round(p)))
-  p <- groupcomp("HLA+16", "nH2O", "genus", pch.up = 24, pch.down = 21, ylim = c(-0.78, -0.71), minpercent = 1)
-  title(paste("Genus", round(p)))
-
-  # Add legend for point size 20210518
-  y <- c(0.030, 0.025, 0.022, 0.020) - 0.005
-  text <- c("100%", "50%", "20%", "2%")
-  cex <- par("cex") * c(10, 5, 2, 0.2)
-  for(i in 1:4) {
-    points(4, y[i], pch = 19, col = "#70809080", cex = cex[i])
-    text(4.5, y[i], text[i], adj = 0)
-  }
+  p <- groupcomp("HLA+16", "nH2O", "phylum", pch.up = 24, pch.down = 21, ylim = c(-0.78, -0.71),
+    xadj = c(Proteobacteria = -0.2))
+  title(paste0("Phylum (", round(p), "% of total)"))
+  p <- groupcomp("HLA+16", "nH2O", "class", pch.up = 24, pch.down = 21, ylim = c(-0.78, -0.71),
+    xadj = c(Acidimicrobiia = 0.5, Gammaproteobacteria = -0.4, Flavobacteriia = -0.1),
+    yadj = c(Acidimicrobiia = -1, Alphaproteobacteria = -1, Cyanobacteria = -1, Gammaproteobacteria = 2.2, Verrucomicrobiae = -0.5, Flavobacteriia = 1))
+  title(paste0("Class (", round(p), "% of total)"))
+  p <- groupcomp("HLA+16", "nH2O", "genus", pch.up = 24, pch.down = 21, ylim = c(-0.78, -0.71), minpercent = 1,
+    xadj = c(Spartobacteria_genera_incertae_sedis = 1, `Candidatus Pelagibacter` = -0.05),
+    yadj = c(Spartobacteria_genera_incertae_sedis = -0.5))
+  title(paste0("Genus (", round(p), "% of total)"))
 
 #  # Between-study comparisons
-#  rankcomp("MPB+17", "ZC", ylim = c(-0.02, 0.02), study2 = "HLA+16")
+#  groupcomp("MPB+17", "ZC", ylim = c(-0.02, 0.02), study2 = "HLA+16")
 #  mtext("Manus Basin - Baltic Sea", line = 1)
 #
-#  rankcomp("BGPF13", "ZC", ylim = c(-0.12, 0.02), study2 = "XDZ+17")
+#  groupcomp("BGPF13", "ZC", ylim = c(-0.12, 0.02), study2 = "XDZ+17")
 #  mtext("Yellowstone - Qarhan Salt Lake", line = 1)
 
   if(pdf) dev.off()
