@@ -7,7 +7,7 @@
 \alias{calc_affinity}
 \title{Plots from energy release in protein synthesis paper}
 \description{
-Plots from the paper by Shock and Dick (2021).
+Plots from the paper by Dick and Shock (2021).
 }
 
 \usage{

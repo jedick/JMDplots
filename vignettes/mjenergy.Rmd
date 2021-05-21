@@ -60,7 +60,7 @@ ZC <- "<i>Z</i><sub>C</sub>"
 library(JMDplots)
 ```
 
-This vignette contains plots from the paper by [Shock and Dick (2021)](mjenergy.html "The release of energy during protein synthesis at submarine hydrothermal ecosystems").
+This vignette contains plots from the paper by [Dick and Shock (2021)](mjenergy.html "The release of energy during protein synthesis at submarine hydrothermal ecosystems").
 This vignette was compiled on `r Sys.Date()` with **[JMDplots](https://github.com/jedick/JMDplots)** `r packageDescription("JMDplots")$Version` and **[CHNOSZ](http://chnosz.net)** `r packageDescription("CHNOSZ")$Version`.
 
 ## Affinities for methanogenesis and amino acid synthesis (Figure 1)

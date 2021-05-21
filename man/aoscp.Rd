@@ -50,12 +50,12 @@ If \code{file} is not NULL, then value of \ZC are calculated from the amino acid
 \section{Files in extdata/aoscp}{
   \describe{
     \item{\code{SGD_associations.csv.xz}}{
-      For yeast genes, this table lists the accessions, SGDID, and the association to cellular components in the Gene Ontology, derived from gene_association.sgd.gz, protein_properties.tab and go_terms.tab downloaded from \url{http://www.yeastgenome.org} on 2013-08-24.
+      For yeast genes, this table lists the accessions, SGDID, and the association to cellular components in the Gene Ontology, derived from gene_association.sgd.gz, protein_properties.tab and go_terms.tab downloaded from \url{https://www.yeastgenome.org/} on 2013-08-24.
       All gene associations with the NOT qualifier were removed, as were those without a matching entry in protein_properties.tab (e.g. RNA-coding genes).
     }
     \item{\code{ZC_HUMAN.csv.xz}, \code{ZC_membrane.csv.xz}}{
       Compilations of the values of \ZC for human proteins and human membrane proteins.
-      Values in \code{ZC_HUMAN.csv} were calculated from protein sequences in HUMAN.fasta.gz, downloaded from \url{ftp://ftp.uniprot.org/pub/databases/uniprot/current_release/knowledgebase/proteomes/HUMAN.fasta.gz} on 2013-08-24 (file dated 2013-07-24).
+      Values in \code{ZC_HUMAN.csv} were calculated from protein sequences in HUMAN.fasta.gz, downloaded from \url{https://ftp.uniprot.org/pub/databases/uniprot/current_release/knowledgebase/reference_proteomes/} on 2013-08-24 (file dated 2013-07-24).
       Values in \code{ZC_membrane.csv} were calculated from protein sequences in all *.fa files in Additional File 2 of Almén et al. (2009).
       NOTE: To save space in the package, the accession and length columns have been removed from these files; the complete files are present in the Supplementary data of Dick (2014).
     }

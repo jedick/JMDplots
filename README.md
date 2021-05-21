@@ -2,7 +2,7 @@
 
 # JMDplots
 
-This R package has code and data for plots from papers by [Jeffrey M. Dick](http://chnosz.net/jeff).
+This R package has code and data for plots from papers by [Jeffrey M. Dick](http://chnosz.net/jeff/).
 
 ## Installation
 
@@ -35,4 +35,4 @@ remotes::install_github("jedick/JMDplots", build_vignettes = TRUE)
 
 ## Online vignettes
 
-The vignettes are available at <http://chnosz.net/JMDplots/doc>.
+The vignettes are available at <http://chnosz.net/JMDplots/doc/>.

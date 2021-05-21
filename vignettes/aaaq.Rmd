@@ -42,7 +42,7 @@ aaaq10()
 
 ## Eh-pH diagram for extracellular α-amylases (Figure 13)
 This plot, showing the relative stabilities of extracellular α-amylases from two organisms on an Eh-pH diagram, is based on Fig. 13 of Dick et al. (2006).
-Points are added for Eh-pH values from soils ([Baas Becking et al., 1960](https://www.jstor.org/stable/30059218)) and hot springs in Yellowstone ([Spear et al., 2005](https://doi.org/10.1073.pnas.0409574102)) and Iceland ([Stefánsson and Arnórsson, 2002](https://doi.org/10.1016/S0009-2541(02)00119-5)).
+Points are added for Eh-pH values from soils ([Baas Becking et al., 1960](https://www.jstor.org/stable/30059218)) and hot springs in Yellowstone ([Spear et al., 2005](https://doi.org/10.1073/pnas.0409574102)) and Iceland ([Stefánsson and Arnórsson, 2002](https://doi.org/10.1016/S0009-2541(02)00119-5)).
 Note that the symbols for Yellowstone and Iceland were incorrectly swapped in the figure caption of Dick et al. (2006).
 
 ```{r aaaq13, message = FALSE, fig.align='center', out.width='80%', fig.width = 5, fig.height = 4, pngquant = pngquant}

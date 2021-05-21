@@ -35,7 +35,7 @@ chnszten4()
 chnszten5()
 ```
 
-## <a href="http://www.dewcommunity.org/" title="Deep Earth Water Community">DEW</a> model (based on Fig. 3 of [Sverjensky et al., 2014](http://www.nature.com/doifinder/10.1038/ngeo2291)) (Figure 6)
+## <a href="http://www.dewcommunity.org/" title="Deep Earth Water Community">DEW</a> model (based on Fig. 3 of [Sverjensky et al., 2014](https://doi.org/10.1038/ngeo2291)) (Figure 6)
 ```{r chnszten6, message = FALSE, fig.align='center', out.width='50%', fig.width = 5, fig.height = 5, pngquant = pngquant}
 chnszten6()
 ```
