@@ -92,6 +92,16 @@ mkAA <- function(ranks = c("genus", "family", "order", "class", "phylum", "super
       }
     }
 
+#    if(rank == "genus") {
+#      # Add individual taxids that are used for RDP-NCBI mappings 20200922
+#      addspecies <- refseq$ref %in% c("Planktothrix agardhii")
+#      adds <- refseq[addspecies, ]
+#      adds$organism <- adds$ref
+#      adds$ref <- 1
+#      adds$protein <- "species"
+#      AA <- rbind(adds, AA)
+#    }
+
     # Make per-protein average
     AA[, 5:25] <- round(AA[, 5:25] / AA$chains, 1)
     out[[rank]] <- AA
@@ -116,5 +126,22 @@ mkmetrics <- function() {
   out$ZC <- ZCAA(AA)
   out$nC <- CAA(AA)
   write.csv(out, "RefSeq_metrics.csv", row.names = FALSE, quote = FALSE)
+}
+
+# Function used in mkmetrics() to calculate number of carbon atoms in amino acid compositions 20200927
+CAA <- function(AAcomp) {
+  # the number of carbons of the amino acids
+  nC_AA <- c(Ala = 3, Cys = 3, Asp = 4, Glu = 5, Phe = 9, Gly = 2, His = 6, 
+    Ile = 6, Lys = 6, Leu = 6, Met = 5, Asn = 4, Pro = 5, Gln = 5, 
+    Arg = 6, Ser = 3, Thr = 4, Val = 5, Trp = 11, Tyr = 9)
+  # find columns with names for the amino acids
+  isAA <- colnames(AAcomp) %in% c("Ala", "Cys", "Asp", "Glu", "Phe", "Gly", "His", "Ile", "Lys", 
+    "Leu", "Met", "Asn", "Pro", "Gln", "Arg", "Ser", "Thr", "Val", "Trp", "Tyr")
+  iAA <- match(colnames(AAcomp)[isAA], names(nC_AA))
+  # calculate the nC for all occurrences of each amino acid
+  multC <- t(t(AAcomp[, isAA]) * nC_AA[iAA])
+  # calculate the total nC, then the per-residue nC
+  nCtot <- rowSums(multC)
+  nCtot / rowSums(AAcomp[, isAA])
 }
 

@@ -588,6 +588,11 @@ taxacomp <- function(which = c("Bacteria", "Archaea"), xlim = NULL, ylim = NULL,
       iclos <- match("Clostridia", children$group)
       text(children$ZC[iclos], children$nH2O[iclos] + 0.0025, 4)
     }
+#    # Label Pisoniviricetes 20210520
+#    if(thisgroup == "Pisuviricota") {
+#      ipison <- match("Pisoniviricetes", children$group)
+#      text(children$ZC[ipison], children$nH2O[ipison] - 0.0025, 5)
+#    }
   }
 
   # Add legend
@@ -780,10 +785,11 @@ diffcomp <- function(study, cn = FALSE, identify = FALSE, title = TRUE, xlim = N
 
 # Composition-abundance plots for sample groups within taxonomic groups 20210520
 groupcomp <- function(study = "XDZ+17", metric = "nH2O", rank = "domain", pch.up = 24, pch.down = 21, minpercent = 2,
-                      xlim = NULL, ylim = NULL, xadj = NULL, yadj = NULL, study2 = NA) {
+                      xlim = NULL, ylim = NULL, xadj = NULL, yadj = NULL, study2 = NA, mdat = NULL, map = NULL, RDP = NULL) {
 
   # Get metadata, RDP and taxonomy mapping
-  mdat <- getmdat(study)[, c("study", "name", "Run", "sample", "pch", "col")]
+  if(is.null(mdat)) mdat <- getmdat(study)
+  mdat <- mdat[, c("study", "name", "Run", "sample", "pch", "col")]
   # Get data to compare two studies 20210513
   if(!is.na(study2)) {
     mdat2 <- getmdat(study2)[, c("study", "name", "Run", "sample", "pch", "col")]
@@ -808,8 +814,8 @@ groupcomp <- function(study = "XDZ+17", metric = "nH2O", rank = "domain", pch.up
   } else {
     # Drop samples with NA pch (we can't include them in the difference)
     mdat <- mdat[!is.na(mdat$pch), ]
-    RDP <- getRDP(study, mdat = mdat)
-    map <- getmap(study, RDP = RDP)
+    if(is.null(RDP)) RDP <- getRDP(study, mdat = mdat)
+    if(is.null(map)) map <- getmap(study, RDP = RDP)
   }
   # Identify samples in up- and down-groups
   iup <- mdat$pch %in% pch.up
