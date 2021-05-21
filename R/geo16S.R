@@ -400,10 +400,10 @@ geo16S5 <- function(pdf = FALSE) {
   }
   # Add labels
   text(-0.1455, -0.736, "Ulrich et al., 2018\n(water)")
-  text(-0.1482, -0.7404, "Ulrich et al., 2018\n(sediment)")
-  text(-0.139, -0.7363, "Chen See\net al., 2018")
-  text(-0.1419, -0.7404, "Mumford et al., 2020\n(spring)")
-  text(-0.1432, -0.7428, "Mumford et al., 2020\n(fall)")
+  text(-0.1482, -0.7408, "Ulrich et al., 2018\n(sediment)")
+  text(-0.139, -0.7370, "Chen See\net al., 2018")
+  text(-0.1418, -0.7408, "Mumford et al., 2020\n(spring)")
+  text(-0.1428, -0.7432, "Mumford et al., 2020\n(fall)")
   # Add legend
   legend("topleft", c("Lowest disturbance", "Highest disturbance"), pch = c(21, 21), pt.bg = c("#ffffffa0", "#df536ba0"), pt.cex = c(1.4, 1.7), lwd = 2, lty = NA)
   label.figure("b", cex = 1.5, xfrac = 0.03, font = 2)
