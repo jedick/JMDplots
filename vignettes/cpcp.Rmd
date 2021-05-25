@@ -36,13 +36,17 @@ h2o <- "H<sub>2</sub>O"
 options(width = 90)
 ```
 
-```{r library, echo=FALSE}
+This vignette runs the code to make selected plots from these papers:
+
+> Dick JM. 2016. Proteomic indicators of oxidation and hydration state in colorectal cancer. *PeerJ* **4**: e2238. doi: [10.7717/peerj.2238](https://doi.org/10.7717/peerj.2238)
+>
+> Dick JM. 2017. Chemical composition and the potential for proteomic transformation in cancer, hypoxia, and hyperosmotic stress. *PeerJ* **5**: e3421. doi: [10.7717/peerj.3421](https://doi.org/10.7717/peerj.3421)
+
+This vignette was compiled on `r Sys.Date()` with **[JMDplots](https://github.com/jedick/JMDplots)** `r packageDescription("JMDplots")$Version` and **[canprot](https://github.com/jedick/canprot)** `r packageDescription("canprot")$Version`.
+
+```{r JMDplots, message = FALSE, results = "hide"}
 library(JMDplots)
 ```
-
-
-This vignette contains plots from the papers by Dick (<a href="https://doi.org/10.7717/peerj.2238" title="Proteomic indicators of oxidation and hydration state in colorectal cancer">2016</a> and <a href="https://doi.org/10.7717/peerj.3421" title = "Chemical composition and the potential for proteomic transformation in cancer, hypoxia, and hyperosmotic stress">2017</a>).
-This vignette was compiled on `r Sys.Date()` with **[JMDplots](https://github.com/jedick/JMDplots)** `r packageDescription("JMDplots")$Version` and **[canprot](https://github.com/jedick/canprot)** `r packageDescription("canprot")$Version`.
 
 ## Microbial proteins in colorectal cancer (2016 Figure 4)
 

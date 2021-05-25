@@ -56,12 +56,15 @@ options(width = 80)
 ZC <- "<i>Z</i><sub>C</sub>"
 ```
 
+This vignette runs the code to make the plots from this paper:
+
+> Dick JM, Shock EL. 2021. The release of energy during protein synthesis at submarine hydrothermal ecosystems. Submitted manuscript.
+
+This vignette was compiled on `r Sys.Date()` with **[JMDplots](https://github.com/jedick/JMDplots)** `r packageDescription("JMDplots")$Version` and **[CHNOSZ](http://chnosz.net)** `r packageDescription("CHNOSZ")$Version`.
+
 ```{r library, message = FALSE, results = "hide"}
 library(JMDplots)
 ```
-
-This vignette contains plots from the paper by [Dick and Shock (2021)](mjenergy.html "The release of energy during protein synthesis at submarine hydrothermal ecosystems").
-This vignette was compiled on `r Sys.Date()` with **[JMDplots](https://github.com/jedick/JMDplots)** `r packageDescription("JMDplots")$Version` and **[CHNOSZ](http://chnosz.net)** `r packageDescription("CHNOSZ")$Version`.
 
 ## Affinities for methanogenesis and amino acid synthesis (Figure 1)
 ```{r mjenergy1, message = FALSE, results = "hide", out.width='100%', fig.width = 8, fig.height = 5, pngquant = pngquant}

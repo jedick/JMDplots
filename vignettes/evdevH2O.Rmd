@@ -61,7 +61,14 @@ nH2O <- "<i>n</i><sub>H<sub>2</sub>O</sub>"
 ZC <- "<i>Z</i><sub>C</sub>"
 ```
 
-This vignette contains plots from the paper by [Dick (2021)](https://doi.org/10.1101/2021.01.29.428804 "Redox potential linked to water loss from proteins in evolution and development").
+This vignette runs the code to make the plots from this paper:
+
+> Dick JM. 2021. A thermodynamic model for water activity and redox potential in evolution and development. Submitted manuscript.
+>
+> Preprint available at:
+>
+> Dick JM. 2021. Redox potential linked to water loss from proteins in evolution and development. bioRxiv. doi: [10.1101/2021.01.29.428804](https://doi.org/10.1101/2021.01.29.428804)
+
 This vignette was compiled on `r Sys.Date()` with **[JMDplots](https://github.com/jedick/JMDplots)** `r packageDescription("JMDplots")$Version` and **[CHNOSZ](http://chnosz.net)** `r packageDescription("CHNOSZ")$Version`.
 
 ```{r library, message = FALSE, results = "hide"}

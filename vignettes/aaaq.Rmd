@@ -23,7 +23,12 @@ if (!nzchar(Sys.which("pngquant"))) pngquant <- NULL
 pKa <- "p<i>K</i><sub>a</sub>"
 ```
 
-This vignette contains plots from the paper by <a href="https://doi.org/10.5194/bg-3-311-2006" title="Temperature, pressure, and electrochemical constraints on protein speciation: Group additivity calculation of the standard molal thermodynamic properties of ionized unfolded proteins">Dick et al. (2006)</a>.
+This vignette runs the code to make selected plots from this paper:
+
+> Dick JM, LaRowe DE, Helgeson HC. 2006. Temperature, pressure, and electrochemical constraints on protein speciation: Group additivity calculation of the standard molal thermodynamic properties of ionized unfolded proteins. *Biogeosciences* **3**(3): 311–336. doi: [10.5194/bg-3-311-2006](https://doi.org/10.5194/bg-3-311-2006)
+
+These plots have been modified from the original figures to add a neutral pH line to Figure 4 and a legend and colored labels to Figure 13.
+
 This vignette was compiled on `r Sys.Date()` with **[JMDplots](https://github.com/jedick/JMDplots)** `r packageDescription("JMDplots")$Version` **[CHNOSZ](http://chnosz.net)** `r packageDescription("CHNOSZ")$Version`.
 
 ```{r JMDplots, message = FALSE, results = "hide"}

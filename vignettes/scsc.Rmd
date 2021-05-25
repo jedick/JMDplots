@@ -23,7 +23,12 @@ if (!nzchar(Sys.which("pngquant"))) pngquant <- NULL
 H2O <- "H<sub>2</sub>O"
 ```
 
-This vignette contains plots from the paper by <a href="https://doi.org/10.1186/1752-0509-3-75" title="Calculation of the relative metastabilities of proteins in subcellular compartments of Saccharomyces cerevisiae">Dick (2009)</a>.
+This vignette runs the code to make selected plots from this paper:
+
+> Dick JM. 2009. Calculation of the relative metastabilities of proteins in subcellular compartments of *Saccharomyces cerevisiae*. *BMC Systems Biology* **3**: 75. doi: [10.1186/1752-0509-3-75](https://doi.org/10.1186/1752-0509-3-75)
+
+These plots have been modified from the original figures to make greater use of color.
+
 This vignette was compiled on `r Sys.Date()` with **[JMDplots](https://github.com/jedick/JMDplots)** `r packageDescription("JMDplots")$Version` **[CHNOSZ](http://chnosz.net)** `r packageDescription("CHNOSZ")$Version`.
 
 ```{r JMDplots, message = FALSE, results = "hide"}

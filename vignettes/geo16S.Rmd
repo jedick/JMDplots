@@ -61,7 +61,10 @@ nH2O <- "<i>n</i><sub>H<sub>2</sub>O</sub>"
 ZC <- "<i>Z</i><sub>C</sub>"
 ```
 
-This vignette contains plots from the paper by [Dick and Tan (2021)](geo16S.html "Geobiochemistry of microbial community proteomes inferred from 16S rRNA sequences").
+This vignette runs the code to make the plots from this paper:
+
+> Dick JM, Tan J. 2021. A chemical representation of microbial proteomes links community composition to global and local redox gradients. Submitted manuscript.
+
 This vignette was compiled on `r Sys.Date()` with **[JMDplots](https://github.com/jedick/JMDplots)** `r packageDescription("JMDplots")$Version` and **[CHNOSZ](http://chnosz.net)** `r packageDescription("CHNOSZ")$Version`.
 
 ```{r library, message = FALSE, results = "hide"}
