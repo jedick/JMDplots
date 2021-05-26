@@ -30,7 +30,7 @@ nAA <- "<i>n</i><sub>AA</sub>"
 nO2 <- "<i>n</i><sub>O<sub>2</sub></sub>"
 ```
 
-This vignette runs the code to make the plots from this paper:
+This vignette runs the code to make the plots from the following paper:
 
 > Dick JM. 2021. Water as a reactant in the differential expression of proteins in cancer. *Computational & Systems Oncology* **1**(1): e1007. doi: [10.1002/cso2.1007](https://doi.org/10.1002/cso2.1007)
 

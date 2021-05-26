@@ -61,7 +61,7 @@ nH2O <- "<i>n</i><sub>H<sub>2</sub>O</sub>"
 ZC <- "<i>Z</i><sub>C</sub>"
 ```
 
-This vignette runs the code to make the plots from this paper:
+This vignette runs the code to make the plots from the following paper:
 
 > Dick JM, Tan J. 2021. A chemical representation of microbial proteomes links community composition to global and local redox gradients. Submitted manuscript.
 

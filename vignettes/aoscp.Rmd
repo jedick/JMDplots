@@ -24,7 +24,7 @@ ZC <- "<i>Z</i><sub>C</sub>"
 Topt <- "<i>T</i><sub>opt</sub>"
 ```
 
-This vignette runs the code to make the plots from this paper:
+This vignette runs the code to make the plots from the following paper:
 
 > Dick JM. 2014. Average oxidation state of carbon in proteins. *Journal of the Royal Society Interface* **11**: 20131095. doi: [10.1098/rsif.2013.1095](https://doi.org/10.1098/rsif.2013.1095)
 

@@ -28,17 +28,18 @@ ZC <- "<i>Z</i><sub>C</sub>"
 nH2O <- "<i>n</i><sub>H<sub>2</sub>O</sub>"
 ```
 
+This vignette runs the code to make the plots from the following paper:
+
+> Dick JM, Yu M, Tan J. 2020. Uncovering chemical signatures of salinity gradients through compositional analysis of protein sequences. *Biogeosciences* **17**(23): 6145--6162. doi: [10.5194/bg-17-6145-2020](https://doi.org/10.5194/bg-17-6145-2020)
+
+This vignette was compiled on `r Sys.Date()` with **[JMDplots](https://github.com/jedick/JMDplots)** `r packageDescription("JMDplots")$Version` and **[canprot](https://github.com/jedick/canprot)** `r packageDescription("canprot")$Version`.
+
 ```{r library, message = FALSE, results = "hide"}
 library(JMDplots)
 # read canprot's 'basis' option
 basis <- getOption("basis")
 ```
 
-This vignette runs the code to make the plots from this paper:
-
-> Dick JM, Yu M, Tan J. 2020. Uncovering chemical signatures of salinity gradients through compositional analysis of protein sequences. *Biogeosciences* **17**(23): 6145--6162. doi: [10.5194/bg-17-6145-2020](https://doi.org/10.5194/bg-17-6145-2020)
-
-This vignette was compiled on `r Sys.Date()` with **[JMDplots](https://github.com/jedick/JMDplots)** `r packageDescription("JMDplots")$Version` and **[canprot](https://github.com/jedick/canprot)** `r packageDescription("canprot")$Version`.
 The **`r basis`** basis species (`r basis.text(basis)`, H~2~O, O~2~) are used for the analysis of stoichiometric hydration state (`r nH2O`).
 
 ## Number of reactions for each amino acid in _E. coli_ metabolic reconstruction

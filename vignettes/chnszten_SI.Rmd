@@ -18,7 +18,7 @@ pngquant <- "--speed=1 --quality=0-25"
 if (!nzchar(Sys.which("pngquant"))) pngquant <- NULL 
 ```
 
-This vignette runs the code to make the supplementary figures from this paper:
+This vignette runs the code to make the supplementary figures from the following paper:
 
 > Dick JM. 2019. CHNOSZ: Thermodynamic calculations and diagrams for geochemistry. *Frontiers in Earth Science* **7**: 180. doi: [10.3389/feart.2019.00180](https://doi.org/10.3389/feart.2019.00180)
 

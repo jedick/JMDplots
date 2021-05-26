@@ -61,7 +61,7 @@ nH2O <- "<i>n</i><sub>H<sub>2</sub>O</sub>"
 ZC <- "<i>Z</i><sub>C</sub>"
 ```
 
-This vignette runs the code to make the plots from this paper:
+This vignette runs the code to make the plots from the following paper:
 
 > Dick JM. 2021. A thermodynamic model for water activity and redox potential in evolution and development. Submitted manuscript.
 >
