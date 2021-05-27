@@ -78,6 +78,10 @@ For \ZC, the summations are further weighted by number of carbon atoms (Dick et 
   }
 }
 
+\seealso{
+\code{\link{comp16S_plot}} for functions used to plot the compositional metrics.
+}
+
 \references{
 Dick, J. M., Yu, M. and Tan, J. (2020) Uncovering chemical signatures of salinity gradients through compositional analysis of protein sequences. \emph{Biogeosciences} \bold{17}, 6145--6162. \doi{10.5194/bg-17-6145-2020}
 }

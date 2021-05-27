@@ -622,7 +622,7 @@ taxacomp <- function(which = c("Bacteria", "Archaea"), xlim = NULL, ylim = NULL,
 
 # Plot compositional metrics for all samples in a study 20200901
 plotcomp <- function(study, cn = FALSE, identify = FALSE, title = TRUE, xlim = NULL, ylim = NULL,
-  plot.it = TRUE, points = TRUE, lines = FALSE, lineage = NULL, pch.up = 21, pch.dn = 1) {
+  plot.it = TRUE, points = TRUE, lines = FALSE, lineage = NULL, pch.up = 21, pch.down = 1) {
   # Get amino acid composition for samples
   mdat <- getmdat(study)
   RDP <- getRDP(study, cn = cn, mdat = mdat, lineage = lineage)
@@ -656,16 +656,16 @@ plotcomp <- function(study, cn = FALSE, identify = FALSE, title = TRUE, xlim = N
       #count <- round(colSums(RDP[, -(1:3)]))
       #identify(ZC, nH2O, count)
     }
-    xlab <- cplab$ZC
-    ylab <- cplab$nH2O
+    xlab <- canprot::cplab$ZC
+    ylab <- canprot::cplab$nH2O
   }
 
   # Calculate mean values and p-values 20201003
   iup <- pch %in% pch.up
-  idn <- pch %in% pch.dn
+  idn <- pch %in% pch.down
   mean <- list()
   p.nH2O <- p.ZC <- NA
-  if(!is.null(pch.up) & !is.null(pch.dn) & sum(iup) > 0 & sum(idn) > 0) {
+  if(!is.null(pch.up) & !is.null(pch.down) & sum(iup) > 0 & sum(idn) > 0) {
     if(sum(idn) > 2 & sum(iup) > 2) {
       p.nH2O <- t.test(nH2O[idn], nH2O[iup])$p.value
       p.ZC <- t.test(ZC[idn], ZC[iup])$p.value
@@ -683,16 +683,16 @@ plotcomp <- function(study, cn = FALSE, identify = FALSE, title = TRUE, xlim = N
   # Add axis labels
   if(plot.it) {
     # Make formatted axis labels
-    if(is.na(p.ZC)) xlab <- cplab$ZC else {
+    if(is.na(p.ZC)) xlab <- canprot::cplab$ZC else {
       # Make log10 p-value bold if p-value is less than 0.05
       log10p.ZC <- formatC(log10(p.ZC), 1, format = "f")
-      if(p.ZC < 0.05) xlab <- bquote(.(cplab$ZC[[1]]) ~ "(" * bold(.(log10p.ZC)) * ")")
-      else xlab <- bquote(.(cplab$ZC[[1]]) ~ "(" * .(log10p.ZC) * ")")
+      if(p.ZC < 0.05) xlab <- bquote(.(canprot::cplab$ZC[[1]]) ~ "(" * bold(.(log10p.ZC)) * ")")
+      else xlab <- bquote(.(canprot::cplab$ZC[[1]]) ~ "(" * .(log10p.ZC) * ")")
     }
-    if(is.na(p.nH2O)) ylab <- cplab$nH2O else {
+    if(is.na(p.nH2O)) ylab <- canprot::cplab$nH2O else {
       log10p.nH2O <- formatC(log10(p.nH2O), 1, format = "f")
-      if(p.nH2O < 0.05) ylab <- bquote(.(cplab$nH2O[[1]]) ~ "(" * bold(.(log10p.nH2O)) * ")")
-      else ylab <- bquote(.(cplab$nH2O[[1]]) ~ "(" * .(log10p.nH2O) * ")")
+      if(p.nH2O < 0.05) ylab <- bquote(.(canprot::cplab$nH2O[[1]]) ~ "(" * bold(.(log10p.nH2O)) * ")")
+      else ylab <- bquote(.(canprot::cplab$nH2O[[1]]) ~ "(" * .(log10p.nH2O) * ")")
     }
     mtext(xlab, side = 1, line = par("mgp")[1], cex = 0.8)
     mtext(ylab, side = 2, line = par("mgp")[1], cex = 0.8)
@@ -701,93 +701,16 @@ plotcomp <- function(study, cn = FALSE, identify = FALSE, title = TRUE, xlim = N
   invisible(list(study = study, nH2O = nH2O, ZC = ZC, pch = pch, col = col, mean = mean))
 }
 
-# Plot differences of nH2O and ZC 20200901
-# Use iminuend and isubtrahend to identify sample pairs 20200914
-diffcomp <- function(study, cn = FALSE, identify = FALSE, title = TRUE, xlim = NULL, ylim = NULL, plot.it = TRUE) {
-  # Get metadata
-  mdat <- getmdat(study)
-  # Get compositional metrics for samples
-  metrics <- getmetrics(study, cn = cn, mdat = mdat)
-  # Keep metadata only for samples with >= 200 counts 20201001
-  mdat <- mdat[mdat$Run %in% metrics$Run, ]
-  nH2O <- metrics$nH2O
-  ZC <- metrics$ZC
-  if(all(is.na(mdat$minuend))) stop("minuend and subtrahend for differences are not defined")
-  # Find pairs of samples for minuend and subtrahend
-  pairs <- intersect(na.omit(mdat$minuend), na.omit(mdat$subtrahend))
-  isubtrahend <- match(pairs, mdat$subtrahend)
-  iminuend <- match(pairs, mdat$minuend)
-  # Calculate differences
-  DnH2O <- nH2O[iminuend] - nH2O[isubtrahend]
-  DZC <- ZC[iminuend] - ZC[isubtrahend]
-  # Default symbol is red circle with black outline
-  pch <- rep(21, length(pairs))
-  col <- rep(2, length(pairs))
-  if(study == "HCH+16") {
-    # Use different points for cancer and benign disease 20200914
-    # This is the 'histology_cat' annotation from Biosample metadata
-    col <- sapply(mdat$cohort[iminuend], switch, InvCa = 2, DCIS = 2, BBD_non_atypia = 0, Atypia = 0)
+# function to add convex hulls 20200923
+addhull <- function(x, y, basecol, outline = FALSE, ...) {
+  i <- chull(x, y)
+  r <- as.numeric(col2rgb(basecol))
+  if(outline) {
+    polygon(x[i], y[i], col = NA, border = basecol, ...)
+  } else {
+    col <- rgb(r[1], r[2], r[3], 80, maxColorValue=255)
+    polygon(x[i], y[i], col = col, border = NA, ...)
   }
-  if(study == "TWB+18") {
-    # Red filled circle for cancer, open circle for not cancer
-    pch <- sapply(mdat$cohort[iminuend], switch, cancer = 21, "not cancer" = 1)
-    col <- sapply(mdat$cohort[iminuend], switch, cancer = 2, "not cancer" = 1)
-  }
-  if(study == "NLZ+15") {
-    # Red circle for carcinoma, blue square for adenoma
-    pch <- sapply(mdat$type[iminuend], switch, tumor = 21, polyp = 22)
-    col <- sapply(mdat$type[iminuend], switch, tumor = 2, polyp = 4)
-  }
-  if(study == "TZT+20") {
-#    # Red circle for TNBC, red square for TPBC
-#    pch <- sapply(mdat$cohort[iminuend], switch, TNBC = 21, TPBC = 22)
-    race <- gsub("[ab]", "", sapply(strsplit(mdat$subject, "_"), "[", 1))
-    pch <- sapply(race[iminuend], switch, BNH = 21, WNH = 22)
-    col <- sapply(race[iminuend], switch, BNH = 2, WNH = 4)
-  }
-  if(study == "SKB+14_paired") {
-    # Filled circle for cancer/normal or CIS/normal, filled square for dysplasia/normal, open circle for healthy normal (right/left)
-    pch <- sapply(mdat$cohort[iminuend], switch, cancer = 21, CIS = 21, "pre-cancer" = 22,
-                  "cancer duplicate" = 21, "pre-cancer duplicate" = 22, "healthy normal" = 1)
-    # Red for cancer, blue for dysplasia, unfilled for healthy normal
-    col <- sapply(mdat$cohort[iminuend], switch, "pre-cancer" = 4, "pre-cancer duplicate" = 4, "healthy normal" = 0, 2)
-  }
-
-  # Calculate mean difference and p-value 20201001
-  # Use col == 2 (red) to get cancer-normal pairs
-  iup <- iminuend[col == 2]
-  idn <- isubtrahend[col == 2]
-  D_mean_nH2O <- mean(nH2O[iup]) - mean(nH2O[idn])
-  D_mean_ZC <- mean(ZC[iup]) - mean(ZC[idn])
-
-  if(plot.it) {
-    # Make plot
-    if(is.null(xlim)) xlim <- range(DZC)
-    if(is.null(ylim)) ylim <- range(DnH2O)
-    plot(xlim, ylim, xlab = NA, ylab = NA, type = "n")
-    points(DZC, DnH2O, pch = pch, col = 1, bg = col)
-    abline(v = 0, h = 0, lty = 2, col = "gray60")
-    points(D_mean_ZC, D_mean_nH2O, pch = 8, col = "white", lwd = 3.5, cex = 2)
-    points(D_mean_ZC, D_mean_nH2O, pch = 8, lwd = 1.5, cex = 2)
-    points(D_mean_ZC, D_mean_nH2O, pch = 8, lwd = 0.5, col = 2, cex = 2)
-    p.nH2O <- t.test(nH2O[idn], nH2O[iup], paired = TRUE)$p.value
-    log10p.nH2O <- formatC(log10(p.nH2O), 1, format = "f")
-    p.ZC <- t.test(ZC[idn], ZC[iup], paired = TRUE)$p.value
-    log10p.ZC <- formatC(log10(p.ZC), 1, format = "f")
-    # Make log10 p-value bold if p-value is less than 0.05
-    if(p.ZC < 0.05) xlab <- bquote(.(cplab$DZC[[1]]) ~ "(" * bold(.(log10p.ZC)) * ")") else xlab <- bquote(.(cplab$DZC[[1]]) ~ "(" * .(log10p.ZC) * ")")
-    if(p.nH2O < 0.05) ylab <- bquote(.(cplab$DnH2O[[1]]) ~ "(" * bold(.(log10p.nH2O)) * ")") else ylab <- bquote(.(cplab$DnH2O[[1]]) ~ "(" * .(log10p.nH2O) * ")")
-    mtext(xlab, side = 1, line = par("mgp")[1], cex = 0.8)
-    mtext(ylab, side = 2, line = par("mgp")[1], cex = 0.8)
-    # Add title
-    if(isTRUE(title)) title(na.omit(mdat$name)[1], font.main = 1, cex = 0.9, xpd = NA)
-    else if(!isFALSE(title)) title(title, font.main = 1, cex = 0.9, xpd = NA)
-    # Identify points 20200903
-    if(identify) identify(DZC, DnH2O, mdat$subject[iminuend])
-  }
-
-  # Return the mean values 20201003
-  invisible(list(study = study, DZC = D_mean_ZC, DnH2O = D_mean_nH2O))
 }
 
 # Composition-abundance plots for sample groups within taxonomic groups 20210520
@@ -884,9 +807,9 @@ groupcomp <- function(study = "XDZ+17", metric = "nH2O", rank = "domain", pch.up
   if(is.null(xlim)) xlim <- range(na.omit(c(Pup, Pdown)))
   if(is.null(ylim)) ylim <- range(na.omit(c(Xup, Xdown)))
   if(identical(xlim, c(0, 100))) {
-    plot(extendrange(xlim), ylim, type = "n", xlab = "Abundance (%)", ylab = cplab[[metric]], xaxt = "n")
+    plot(extendrange(xlim), ylim, type = "n", xlab = "Abundance (%)", ylab = canprot::cplab[[metric]], xaxt = "n")
     axis(1, c(0, 50, 100))
-  } else plot(xlim, ylim, type = "n", xlab = "Abundance (%)", ylab = cplab[[metric]])
+  } else plot(xlim, ylim, type = "n", xlab = "Abundance (%)", ylab = canprot::cplab[[metric]])
   for(k in seq_along(Xtaxa)) {
     # Add points for up- and down- sample groups
     cex <- 1.5
@@ -926,6 +849,96 @@ groupcomp <- function(study = "XDZ+17", metric = "nH2O", rank = "domain", pch.up
 # Unexported functions #
 ########################
 
+# Plot differences of nH2O and ZC 20200901
+# Use iminuend and isubtrahend to identify sample pairs 20200914
+diffcomp <- function(study, cn = FALSE, identify = FALSE, title = TRUE, xlim = NULL, ylim = NULL, plot.it = TRUE) {
+  # Get metadata
+  mdat <- getmdat(study)
+  # Get compositional metrics for samples
+  metrics <- getmetrics(study, cn = cn, mdat = mdat)
+  # Keep metadata only for samples with >= 200 counts 20201001
+  mdat <- mdat[mdat$Run %in% metrics$Run, ]
+  nH2O <- metrics$nH2O
+  ZC <- metrics$ZC
+  if(all(is.na(mdat$minuend))) stop("minuend and subtrahend for differences are not defined")
+  # Find pairs of samples for minuend and subtrahend
+  pairs <- intersect(na.omit(mdat$minuend), na.omit(mdat$subtrahend))
+  isubtrahend <- match(pairs, mdat$subtrahend)
+  iminuend <- match(pairs, mdat$minuend)
+  # Calculate differences
+  DnH2O <- nH2O[iminuend] - nH2O[isubtrahend]
+  DZC <- ZC[iminuend] - ZC[isubtrahend]
+  # Default symbol is red circle with black outline
+  pch <- rep(21, length(pairs))
+  col <- rep(2, length(pairs))
+  if(study == "HCH+16") {
+    # Use different points for cancer and benign disease 20200914
+    # This is the 'histology_cat' annotation from Biosample metadata
+    col <- sapply(mdat$cohort[iminuend], switch, InvCa = 2, DCIS = 2, BBD_non_atypia = 0, Atypia = 0)
+  }
+  if(study == "TWB+18") {
+    # Red filled circle for cancer, open circle for not cancer
+    pch <- sapply(mdat$cohort[iminuend], switch, cancer = 21, "not cancer" = 1)
+    col <- sapply(mdat$cohort[iminuend], switch, cancer = 2, "not cancer" = 1)
+  }
+  if(study == "NLZ+15") {
+    # Red circle for carcinoma, blue square for adenoma
+    pch <- sapply(mdat$type[iminuend], switch, tumor = 21, polyp = 22)
+    col <- sapply(mdat$type[iminuend], switch, tumor = 2, polyp = 4)
+  }
+  if(study == "TZT+20") {
+#    # Red circle for TNBC, red square for TPBC
+#    pch <- sapply(mdat$cohort[iminuend], switch, TNBC = 21, TPBC = 22)
+    race <- gsub("[ab]", "", sapply(strsplit(mdat$subject, "_"), "[", 1))
+    pch <- sapply(race[iminuend], switch, BNH = 21, WNH = 22)
+    col <- sapply(race[iminuend], switch, BNH = 2, WNH = 4)
+  }
+  if(study == "SKB+14_paired") {
+    # Filled circle for cancer/normal or CIS/normal, filled square for dysplasia/normal, open circle for healthy normal (right/left)
+    pch <- sapply(mdat$cohort[iminuend], switch, cancer = 21, CIS = 21, "pre-cancer" = 22,
+                  "cancer duplicate" = 21, "pre-cancer duplicate" = 22, "healthy normal" = 1)
+    # Red for cancer, blue for dysplasia, unfilled for healthy normal
+    col <- sapply(mdat$cohort[iminuend], switch, "pre-cancer" = 4, "pre-cancer duplicate" = 4, "healthy normal" = 0, 2)
+  }
+
+  # Calculate mean difference and p-value 20201001
+  # Use col == 2 (red) to get cancer-normal pairs
+  iup <- iminuend[col == 2]
+  idn <- isubtrahend[col == 2]
+  D_mean_nH2O <- mean(nH2O[iup]) - mean(nH2O[idn])
+  D_mean_ZC <- mean(ZC[iup]) - mean(ZC[idn])
+
+  if(plot.it) {
+    # Make plot
+    if(is.null(xlim)) xlim <- range(DZC)
+    if(is.null(ylim)) ylim <- range(DnH2O)
+    plot(xlim, ylim, xlab = NA, ylab = NA, type = "n")
+    points(DZC, DnH2O, pch = pch, col = 1, bg = col)
+    abline(v = 0, h = 0, lty = 2, col = "gray60")
+    points(D_mean_ZC, D_mean_nH2O, pch = 8, col = "white", lwd = 3.5, cex = 2)
+    points(D_mean_ZC, D_mean_nH2O, pch = 8, lwd = 1.5, cex = 2)
+    points(D_mean_ZC, D_mean_nH2O, pch = 8, lwd = 0.5, col = 2, cex = 2)
+    p.nH2O <- t.test(nH2O[idn], nH2O[iup], paired = TRUE)$p.value
+    log10p.nH2O <- formatC(log10(p.nH2O), 1, format = "f")
+    p.ZC <- t.test(ZC[idn], ZC[iup], paired = TRUE)$p.value
+    log10p.ZC <- formatC(log10(p.ZC), 1, format = "f")
+    # Make log10 p-value bold if p-value is less than 0.05
+    if(p.ZC < 0.05) xlab <- bquote(.(canprot::cplab$DZC[[1]]) ~ "(" * bold(.(log10p.ZC)) * ")") else xlab <- bquote(.(canprot::cplab$DZC[[1]]) ~ "(" * .(log10p.ZC) * ")")
+    if(p.nH2O < 0.05) ylab <- bquote(.(canprot::cplab$DnH2O[[1]]) ~ "(" * bold(.(log10p.nH2O)) * ")") else ylab <- bquote(.(canprot::cplab$DnH2O[[1]]) ~ "(" * .(log10p.nH2O) * ")")
+    mtext(xlab, side = 1, line = par("mgp")[1], cex = 0.8)
+    mtext(ylab, side = 2, line = par("mgp")[1], cex = 0.8)
+    # Add title
+    if(isTRUE(title)) title(na.omit(mdat$name)[1], font.main = 1, cex = 0.9, xpd = NA)
+    else if(!isFALSE(title)) title(title, font.main = 1, cex = 0.9, xpd = NA)
+    # Identify points 20200903
+    if(identify) identify(DZC, DnH2O, mdat$subject[iminuend])
+  }
+
+  # Return the mean values 20201003
+  invisible(list(study = study, DZC = D_mean_ZC, DnH2O = D_mean_nH2O))
+}
+
+
 # Add nH2O-ZC guidelines parallel to regression for amino acids
 # Modified from JMDplots::gradH2O1() and JMDplots:::lmlines() 20200901
 lmlines <- function(step = 0.01) {
@@ -953,85 +966,3 @@ lmlines <- function(step = 0.01) {
   # Add box so ends of lines don't cover plot edges 20201007
   box()
 }
-
-# function to add convex hulls 20200923
-addhull <- function(x, y, basecol, outline = FALSE, ...) {
-  i <- chull(x, y)
-  r <- as.numeric(col2rgb(basecol))
-  if(outline) {
-    polygon(x[i], y[i], col = NA, border = basecol, ...)
-  } else {
-    col <- rgb(r[1], r[2], r[3], 80, maxColorValue=255)
-    polygon(x[i], y[i], col = col, border = NA, ...)
-  }
-}
-
-
-### Functions for calculating compositional metrics ###
-### Extracted and modified from canprot/R/metrics.R ###
-
-## calculate carbon oxidation state for amino acid compositions 20180228
-#ZCAA <- function(AAcomp) {
-#  # the number of carbons of the amino acids
-#  nC_AA <- c(Ala = 3, Cys = 3, Asp = 4, Glu = 5, Phe = 9, Gly = 2, His = 6, 
-#    Ile = 6, Lys = 6, Leu = 6, Met = 5, Asn = 4, Pro = 5, Gln = 5, 
-#    Arg = 6, Ser = 3, Thr = 4, Val = 5, Trp = 11, Tyr = 9)
-#  # the Ztot of the amino acids == CHNOSZ::ZC(info(info(aminoacids("")))$formula) * nC_AA
-#  Ztot_AA <- c(Ala = 0, Cys = 2, Asp = 4, Glu = 2, Phe = -4, Gly = 2, His = 4, 
-#    Ile = -6, Lys = -4, Leu = -6, Met = -2, Asn = 4, Pro = -2, Gln = 2, 
-#    Arg = 2, Ser = 2, Thr = 0, Val = -4, Trp = -2, Tyr = -2)
-#  # the ZC of the amino acids == CHNOSZ::ZC(info(info(aminoacids("")))$formula)
-#  ZC_AA <- Ztot_AA / nC_AA
-#  # find columns with names for the amino acids
-#  isAA <- colnames(AAcomp) %in% c("Ala", "Cys", "Asp", "Glu", "Phe", "Gly", "His", "Ile", "Lys", 
-#    "Leu", "Met", "Asn", "Pro", "Gln", "Arg", "Ser", "Thr", "Val", "Trp", "Tyr")
-#  iAA <- match(colnames(AAcomp)[isAA], names(ZC_AA))
-#  # calculate the nC for all occurrences of each amino acid
-#  multC <- t(t(AAcomp[, isAA]) * nC_AA[iAA])
-#  # multiply nC by ZC
-#  multZC <- t(t(multC) * ZC_AA[iAA])
-#  # calculate the total ZC and nC, then the overall ZC
-#  ZCtot <- rowSums(multZC)
-#  nCtot <- rowSums(multC)
-#  ZCtot / nCtot
-#}
-#
-## calculate stoichiometric hydration state for proteins with given amino acid compositions 20181228
-#H2OAA <- function(AAcomp) {
-#  # how to get the number of H2O in reactions to form amino acid residues from the "QEC" basis:
-#  ## library(CHNOSZ)
-#  ## basis("QEC")
-#  ## species(aminoacids(3))
-#  ## nH2O_AA <- species()[["H2O"]]
-#  ## names(nH2O_AA) <- aminoacids(3)
-#  nH2O_AA <- c( Ala =  0.6, Cys =    0, Asp = -0.2, Glu =    0, Phe = -2.2, Gly =  0.4, His = -1.8,
-#    Ile =  1.2, Lys =  1.2, Leu =  1.2, Met =  0.4, Asn = -0.2, Pro =    0, Gln =    0,
-#    Arg =  0.2, Ser =  0.6, Thr =  0.8, Val =    1, Trp = -3.8, Tyr = -2.2) - 1
-#  # find columns with names for the amino acids
-#  isAA <- colnames(AAcomp) %in% names(nH2O_AA)
-#  iAA <- match(colnames(AAcomp)[isAA], names(nH2O_AA))
-#  # calculate total number of H2O in reactions to form proteins
-#  nH2O <- rowSums(t(t(AAcomp[, isAA]) * nH2O_AA[iAA]))
-#  # add one to account for terminal groups
-#  nH2O <- nH2O + 1
-#  # divide by number of residues (length of protein)
-#  nH2O / rowSums(AAcomp[, isAA])
-#}
-#
-## calculate number of carbon atoms in amino acid compositions 20200927
-#CAA <- function(AAcomp) {
-#  # the number of carbons of the amino acids
-#  nC_AA <- c(Ala = 3, Cys = 3, Asp = 4, Glu = 5, Phe = 9, Gly = 2, His = 6, 
-#    Ile = 6, Lys = 6, Leu = 6, Met = 5, Asn = 4, Pro = 5, Gln = 5, 
-#    Arg = 6, Ser = 3, Thr = 4, Val = 5, Trp = 11, Tyr = 9)
-#  # find columns with names for the amino acids
-#  isAA <- colnames(AAcomp) %in% c("Ala", "Cys", "Asp", "Glu", "Phe", "Gly", "His", "Ile", "Lys", 
-#    "Leu", "Met", "Asn", "Pro", "Gln", "Arg", "Ser", "Thr", "Val", "Trp", "Tyr")
-#  iAA <- match(colnames(AAcomp)[isAA], names(nC_AA))
-#  # calculate the nC for all occurrences of each amino acid
-#  multC <- t(t(AAcomp[, isAA]) * nC_AA[iAA])
-#  # calculate the total nC, then the per-residue nC
-#  nCtot <- rowSums(multC)
-#  nCtot / rowSums(AAcomp[, isAA])
-#}
-
