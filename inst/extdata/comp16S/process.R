@@ -64,8 +64,13 @@ mkAA <- function(ranks = c("genus", "family", "order", "class", "phylum", "super
     print(paste(rank, length(names)))
 
     # Create blank amino acid data frame
-    AA <- thermo()$protein[rep(1, length(names)), ]
-    AA[] <- NA
+    AAtmp <- structure(list(
+      protein = NA, organism = NA, ref = NA, abbrv = NA, chains = NA,
+      Ala = NA, Cys = NA, Asp = NA, Glu = NA, Phe = NA,
+      Gly = NA, His = NA, Ile = NA, Lys = NA, Leu = NA,
+      Met = NA, Asn = NA, Pro = NA, Gln = NA, Arg = NA,
+      Ser = NA, Thr = NA, Val = NA, Trp = NA, Tyr = NA), row.names = 1L, class = "data.frame")
+    AA <- AAtmp[rep(1, length(names)), ]
     AA$protein <- rank
     AA$organism <- names
     rownames(AA) <- 1:length(names)
@@ -92,15 +97,15 @@ mkAA <- function(ranks = c("genus", "family", "order", "class", "phylum", "super
       }
     }
 
-#    if(rank == "genus") {
-#      # Add individual taxids that are used for RDP-NCBI mappings 20200922
-#      addspecies <- refseq$ref %in% c("Planktothrix agardhii")
-#      adds <- refseq[addspecies, ]
-#      adds$organism <- adds$ref
-#      adds$ref <- 1
-#      adds$protein <- "species"
-#      AA <- rbind(adds, AA)
-#    }
+    if(rank == "genus") {
+      # Add individual taxids that are used for RDP-NCBI mappings 20200922
+      addspecies <- refseq$ref %in% c("Candidatus Marinimicrobia bacterium")
+      adds <- refseq[addspecies, ]
+      adds$organism <- adds$ref
+      adds$ref <- 1
+      adds$protein <- "species"
+      AA <- rbind(adds, AA)
+    }
 
     # Make per-protein average
     AA[, 5:25] <- round(AA[, 5:25] / AA$chains, 1)
@@ -122,8 +127,8 @@ mkmetrics <- function() {
   # Build output data frame; rename columns for better readability
   out <- data.frame(rank = AA$protein, group = AA$organism, ntaxa = AA$ref, parent = AA$abbrv, nH2O = NA, ZC = NA, nC = NA)
   # Calculate metrics
-  out$nH2O <- H2OAA(AA)
-  out$ZC <- ZCAA(AA)
+  out$nH2O <- canprot::H2OAA(AA)
+  out$ZC <- canprot::ZCAA(AA)
   out$nC <- CAA(AA)
   write.csv(out, "RefSeq_metrics.csv", row.names = FALSE, quote = FALSE)
 }

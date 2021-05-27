@@ -18,7 +18,7 @@ Anf,"Rhodospirillum rubrum ATCC 11170",BACTERIAL,Proteobacteria,Alphaproteobacte
 Anf,"Rhodopseudomonas palustris BisB18",BACTERIAL,Proteobacteria,Alphaproteobacteria,"Rhodopseudomonas palustris",1076
 Anf,"Rhodopseudomonas palustris BisA53",BACTERIAL,Proteobacteria,Alphaproteobacteria,"Rhodopseudomonas palustris",1076
 Anf,"Rhodopseudomonas palustris TIE-1",BACTERIAL,Proteobacteria,Alphaproteobacteria,"Rhodopseudomonas palustris",1076
-Anf,"Rhodobacter sphaeroides KD131",BACTERIAL,Proteobacteria,Alphaproteobacteria,"Rhodobacter sphaeroides",1063
+Anf,"Rhodobacter sphaeroides KD131",BACTERIAL,Proteobacteria,Alphaproteobacteria,"Rhodobacter",1060
 Anf,"Azotobacter vinelandii DJ",BACTERIAL,Proteobacteria,Gammaproteobacteria,"Azotobacter vinelandii",354
 Anf,"Dickeya paradisiaca Ech703",BACTERIAL,Proteobacteria,Gammaproteobacteria,"Dickeya paradisiaca",69223
 Anf,"Rhodobacter capsulatus SB 1003",BACTERIAL,Proteobacteria,Alphaproteobacteria,"Rhodobacter capsulatus",1061
@@ -37,10 +37,10 @@ Nif-A,"Sinorhizobium meliloti 1021",BACTERIAL,Proteobacteria,Alphaproteobacteria
 Nif-A,"Rhizobium etli CFN 42",BACTERIAL,Proteobacteria,Alphaproteobacteria,"Rhizobium etli",29449
 Nif-A,"Rhizobium etli CFN 42",BACTERIAL,Proteobacteria,Alphaproteobacteria,"Rhizobium etli",29449
 Nif-A,"Geobacter sulfurreducens PCA",BACTERIAL,Proteobacteria,Deltaproteobacteria,"Geobacter sulfurreducens",35554
-Nif-A,"Zymomonas mobilis subsp. mobilis ZM4 = ATCC 31821",BACTERIAL,Proteobacteria,Alphaproteobacteria,"Zymomonas mobilis subsp. mobilis ZM4 = ATCC 31821",264203
+Nif-A,"Zymomonas mobilis subsp. mobilis ZM4 = ATCC 31821",BACTERIAL,Proteobacteria,Alphaproteobacteria,"Zymomonas mobilis",542
 Nif-A,"Dechloromonas aromatica RCB",BACTERIAL,Proteobacteria,Betaproteobacteria,"Dechloromonas aromatica",259537
 Nif-A,"Anabaena variabilis ATCC 29413",BACTERIAL,Cyanobacteria,None,"Anabaena",1163
-Nif-A,"Pelobacter carbinolicus DSM 2380",BACTERIAL,Proteobacteria,Deltaproteobacteria,"Pelobacter carbinolicus",19
+Nif-A,"Pelobacter carbinolicus DSM 2380",BACTERIAL,Proteobacteria,Deltaproteobacteria,NA,NA
 Nif-A,"Geobacter metallireducens GS-15",BACTERIAL,Proteobacteria,Deltaproteobacteria,"Geobacter metallireducens",28232
 Nif-A,"Rhodospirillum rubrum ATCC 11170",BACTERIAL,Proteobacteria,Alphaproteobacteria,"Rhodospirillum rubrum",1085
 Nif-A,"Synechococcus sp. JA-3-3Ab",BACTERIAL,Cyanobacteria,None,"Synechococcus sp. JA-3-3Ab",321327
@@ -57,9 +57,9 @@ Nif-A,"Magnetococcus marinus MC-1",BACTERIAL,Proteobacteria,Alphaproteobacteria,
 Nif-A,"Pelobacter propionicus DSM 2379",BACTERIAL,Proteobacteria,Deltaproteobacteria,"Pelobacter propionicus",29543
 Nif-A,"Polaromonas naphthalenivorans CJ2",BACTERIAL,Proteobacteria,Betaproteobacteria,"Polaromonas naphthalenivorans",216465
 Nif-A,"Halorhodospira halophila SL1",BACTERIAL,Proteobacteria,Gammaproteobacteria,"Halorhodospira halophila",1053
-Nif-A,"Rhodobacter sphaeroides ATCC 17029",BACTERIAL,Proteobacteria,Alphaproteobacteria,"Rhodobacter sphaeroides",1063
+Nif-A,"Rhodobacter sphaeroides ATCC 17029",BACTERIAL,Proteobacteria,Alphaproteobacteria,"Rhodobacter",1060
 Nif-A,"Burkholderia vietnamiensis G4",BACTERIAL,Proteobacteria,Betaproteobacteria,"Burkholderia vietnamiensis",60552
-Nif-A,"Rhodobacter sphaeroides ATCC 17025",BACTERIAL,Proteobacteria,Alphaproteobacteria,"Rhodobacter sphaeroides",1063
+Nif-A,"Rhodobacter sphaeroides ATCC 17025",BACTERIAL,Proteobacteria,Alphaproteobacteria,"Rhodobacter",1060
 Nif-A,"Pseudomonas stutzeri A1501",BACTERIAL,Proteobacteria,Gammaproteobacteria,"Pseudomonas stutzeri",316
 Nif-A,"Geobacter uraniireducens Rf4",BACTERIAL,Proteobacteria,Deltaproteobacteria,"Geobacter uraniireducens",351604
 Nif-A,"Bradyrhizobium sp. BTAi1",BACTERIAL,Proteobacteria,Alphaproteobacteria,"Bradyrhizobium sp. BTAi1",288000
@@ -67,7 +67,7 @@ Nif-A,"Sinorhizobium medicae WSM419",BACTERIAL,Proteobacteria,Alphaproteobacteri
 Nif-A,"Anaeromyxobacter sp. Fw109-5",BACTERIAL,Proteobacteria,Deltaproteobacteria,"Anaeromyxobacter sp. Fw109-5",404589
 Nif-A,"Xanthobacter autotrophicus Py2",BACTERIAL,Proteobacteria,Alphaproteobacteria,"Xanthobacter autotrophicus",280
 Nif-A,"Frankia sp. EAN1pec",BACTERIAL,Actinobacteria,Actinobacteria,"Frankia sp. EAN1pec",298653
-Nif-A,"Heliobacterium modesticaldum Ice1",BACTERIAL,Firmicutes,Clostridia,"Heliobacterium modesticaldum",35701
+Nif-A,"Heliobacterium modesticaldum Ice1",BACTERIAL,Firmicutes,Clostridia,"Heliobacterium",2697
 Nif-A,"Methylobacterium sp. 4-46",BACTERIAL,Proteobacteria,Alphaproteobacteria,"Methylobacterium sp. 4-46",426117
 Nif-A,"Leptothrix cholodnii SP-6",BACTERIAL,Proteobacteria,Betaproteobacteria,"Leptothrix cholodnii",34029
 Nif-A,"Cyanothece sp. ATCC 51142",BACTERIAL,Cyanobacteria,None,NA,NA
@@ -91,7 +91,7 @@ Nif-A,"Cyanothece sp. PCC 7424",BACTERIAL,Cyanobacteria,None,NA,NA
 Nif-A,"Desulfitobacterium hafniense DCB-2",BACTERIAL,Firmicutes,Clostridia,"Desulfitobacterium hafniense",49338
 Nif-A,"Cyanothece sp. PCC 7425",BACTERIAL,Cyanobacteria,None,"Cyanothece sp. PCC 7425",395961
 Nif-A,"Methylobacterium nodulans ORS 2060",BACTERIAL,Proteobacteria,Alphaproteobacteria,"Methylobacterium nodulans",114616
-Nif-A,"Rhodobacter sphaeroides KD131",BACTERIAL,Proteobacteria,Alphaproteobacteria,"Rhodobacter sphaeroides",1063
+Nif-A,"Rhodobacter sphaeroides KD131",BACTERIAL,Proteobacteria,Alphaproteobacteria,"Rhodobacter",1060
 Nif-A,"Geobacter daltonii FRC-32",BACTERIAL,Proteobacteria,Deltaproteobacteria,"Geobacter daltonii",1203471
 Nif-A,"Azotobacter vinelandii DJ",BACTERIAL,Proteobacteria,Gammaproteobacteria,"Azotobacter vinelandii",354
 Nif-A,"Tolumonas auensis DSM 9187",BACTERIAL,Proteobacteria,Gammaproteobacteria,"Tolumonas auensis",43948
@@ -101,12 +101,12 @@ Nif-A,"Geobacter sp. M21",BACTERIAL,Proteobacteria,Deltaproteobacteria,"Geobacte
 Nif-A,"Klebsiella variicola At-22",BACTERIAL,Proteobacteria,Gammaproteobacteria,"Klebsiella variicola",244366
 Nif-A,"Cyanothece sp. PCC 8802",BACTERIAL,Cyanobacteria,None,NA,NA
 Nif-A,"Candidatus Accumulibacter phosphatis clade IIA str. UW-1",BACTERIAL,Proteobacteria,Betaproteobacteria,"Candidatus Accumulibacter phosphatis",327160
-Nif-A,"Zymomonas mobilis subsp. mobilis NCIMB 11163",BACTERIAL,Proteobacteria,Alphaproteobacteria,"Zymomonas mobilis subsp. mobilis NCIMB 11163",622759
+Nif-A,"Zymomonas mobilis subsp. mobilis NCIMB 11163",BACTERIAL,Proteobacteria,Alphaproteobacteria,"Zymomonas mobilis",542
 Nif-A,"Allochromatium vinosum DSM 180",BACTERIAL,Proteobacteria,Gammaproteobacteria,"Allochromatium vinosum",1049
 Nif-A,"Denitrovibrio acetiphilus DSM 12809",BACTERIAL,Deferribacteres,Deferribacteres,"Denitrovibrio acetiphilus",118000
 Nif-A,"Sideroxydans lithotrophicus ES-1",BACTERIAL,Proteobacteria,Betaproteobacteria,"Sideroxydans lithotrophicus",63745
 Nif-A,"Rhodobacter capsulatus SB 1003",BACTERIAL,Proteobacteria,Alphaproteobacteria,"Rhodobacter capsulatus",1061
-Nif-A,"Burkholderia sp. CCGE1002",BACTERIAL,Proteobacteria,Betaproteobacteria,"Burkholderia",32008
+Nif-A,"Burkholderia sp. CCGE1002",BACTERIAL,Proteobacteria,Betaproteobacteria,"Burkholderia sp.",36773
 Nif-A,"Arcobacter nitrofigilis DSM 7299",BACTERIAL,Proteobacteria,Epsilonproteobacteria,"Arcobacter nitrofigilis",28199
 Nif-A,"Anabaena azollae (Nostoc azollae' 0708)",BACTERIAL,Cyanobacteria,NA,"Anabaena",1163
 Nif-A,"Geobacter sulfurreducens KN400",BACTERIAL,Proteobacteria,Deltaproteobacteria,"Geobacter sulfurreducens",35554
@@ -126,15 +126,15 @@ Nif-A,"Methylomonas methanica MC09",BACTERIAL,Proteobacteria,Gammaproteobacteria
 Nif-A,"Sinorhizobium meliloti BL225C",BACTERIAL,Proteobacteria,Alphaproteobacteria,"Sinorhizobium meliloti",382
 Nif-A,"Sinorhizobium meliloti AK83",BACTERIAL,Proteobacteria,Alphaproteobacteria,"Sinorhizobium meliloti",382
 Nif-A,"Frankia symbiont of Datisca glomerata",BACTERIAL,Actinobacteria,Actinobacteria,"Frankia",1854
-Nif-A,"Zymomonas mobilis subsp. mobilis ATCC 10988",BACTERIAL,Proteobacteria,Alphaproteobacteria,"Zymomonas mobilis subsp. mobilis ATCC 10988",555217
-Nif-A,"Sinorhizobium meliloti SM11",BACTERIAL,Proteobacteria,Alphaproteobacteria,"Sinorhizobium meliloti SM11",707241
+Nif-A,"Zymomonas mobilis subsp. mobilis ATCC 10988",BACTERIAL,Proteobacteria,Alphaproteobacteria,"Zymomonas mobilis",542
+Nif-A,"Sinorhizobium meliloti SM11",BACTERIAL,Proteobacteria,Alphaproteobacteria,"Sinorhizobium meliloti",382
 Nif-A,"Mesorhizobium opportunistum WSM2075",BACTERIAL,Proteobacteria,Alphaproteobacteria,"Mesorhizobium opportunistum",593909
 Nif-A,"Zymomonas mobilis subsp. pomaceae ATCC 29192",BACTERIAL,Proteobacteria,Alphaproteobacteria,"Zymomonas mobilis",542
 Nif-A,"Acidithiobacillus ferrivorans SS3",BACTERIAL,Proteobacteria,Acidithiobacillia,"Acidithiobacillus ferrivorans",160808
 Nif-A,"Rhodospirillum rubrum F11",BACTERIAL,Proteobacteria,Alphaproteobacteria,"Rhodospirillum rubrum",1085
 Nif-A,"Paenibacillus terrae HPL-003",BACTERIAL,Firmicutes,Bacilli,"Paenibacillus terrae",159743
 Nif-A,"Desulfosporosinus orientis DSM 765",BACTERIAL,Firmicutes,Clostridia,"Desulfosporosinus orientis",1563
-Nif-A,"Dechlorosoma suillum PS",BACTERIAL,Proteobacteria,Betaproteobacteria,"Dechlorosoma suillum",146939
+Nif-A,"Dechlorosoma suillum PS",BACTERIAL,Proteobacteria,Betaproteobacteria,NA,NA
 Nif-A,"Klebsiella oxytoca KCTC 1686",BACTERIAL,Proteobacteria,Gammaproteobacteria,"Klebsiella oxytoca",571
 Nif-A,"Vibrio sp. EJY3",BACTERIAL,Proteobacteria,Gammaproteobacteria,"Vibrio sp. EJY3",1116375
 Nif-A,"Rahnella aquatilis HX2",BACTERIAL,Proteobacteria,Gammaproteobacteria,"Rahnella aquatilis",34038
@@ -159,14 +159,14 @@ Nif-A,"Sinorhizobium meliloti 2011",BACTERIAL,Proteobacteria,Alphaproteobacteria
 Nif-A,"Azotobacter vinelandii CA",BACTERIAL,Proteobacteria,Gammaproteobacteria,"Azotobacter vinelandii",354
 Nif-A,"Enterobacter sp. R4-368",BACTERIAL,Proteobacteria,Gammaproteobacteria,"Enterobacter sp. R4-368",1166130
 Nif-A,"Rhizobium etli bv. mimosae str. Mim1",BACTERIAL,Proteobacteria,Alphaproteobacteria,"Rhizobium etli",29449
-Nif-A,"Zymomonas mobilis subsp. mobilis str. CP4 = NRRL B-14023",BACTERIAL,Proteobacteria,Alphaproteobacteria,"Zymomonas mobilis subsp. mobilis str. CP4 = NRRL B-14023",627343
+Nif-A,"Zymomonas mobilis subsp. mobilis str. CP4 = NRRL B-14023",BACTERIAL,Proteobacteria,Alphaproteobacteria,"Zymomonas mobilis",542
 Nif-A,"Paenibacillus polymyxa CR1",BACTERIAL,Firmicutes,Bacilli,"Paenibacillus polymyxa",1406
 Nif-A,"Marichromatium purpuratum 984",BACTERIAL,Proteobacteria,Gammaproteobacteria,"Marichromatium purpuratum",37487
 Nif-A,"Rhizobium leguminosarum bv. trifolii WSM1689",BACTERIAL,Proteobacteria,Alphaproteobacteria,"Rhizobium leguminosarum",384
 Nif-A,"Rhizobium leguminosarum bv. trifolii CB782",BACTERIAL,Proteobacteria,Alphaproteobacteria,"Rhizobium leguminosarum",384
 Nif-A,"Sulfurospirillum multivorans DSM 12446",BACTERIAL,Proteobacteria,Epsilonproteobacteria,"Sulfurospirillum multivorans",66821
-Nif-A,"Zymomonas mobilis subsp. mobilis NRRL B-12526",BACTERIAL,Proteobacteria,Alphaproteobacteria,"Zymomonas mobilis subsp. mobilis",120045
-Nif-A,"Zymomonas mobilis subsp. mobilis str. CP4 = NRRL B-14023",BACTERIAL,Proteobacteria,Alphaproteobacteria,"Zymomonas mobilis subsp. mobilis str. CP4 = NRRL B-14023",627343
+Nif-A,"Zymomonas mobilis subsp. mobilis NRRL B-12526",BACTERIAL,Proteobacteria,Alphaproteobacteria,"Zymomonas mobilis",542
+Nif-A,"Zymomonas mobilis subsp. mobilis str. CP4 = NRRL B-14023",BACTERIAL,Proteobacteria,Alphaproteobacteria,"Zymomonas mobilis",542
 Nif-A,"Kosakonia sacchari SP1",BACTERIAL,Proteobacteria,Gammaproteobacteria,"Kosakonia sacchari",1158459
 Nif-A,"Paenibacillus sabinae T27",BACTERIAL,Firmicutes,Bacilli,"Paenibacillus sabinae",365617
 Nif-A,"Klebsiella oxytoca HKOPL1",BACTERIAL,Proteobacteria,Gammaproteobacteria,"Klebsiella oxytoca",571
@@ -175,7 +175,7 @@ Nif-A,"Pectobacterium atrosepticum",BACTERIAL,Proteobacteria,Gammaproteobacteria
 Nif-A,"Azospirillum brasilense",BACTERIAL,Proteobacteria,Alphaproteobacteria,"Azospirillum brasilense",192
 Nif-A,"Rhizobium etli bv. mimosae str. IE4771",BACTERIAL,Proteobacteria,Alphaproteobacteria,"Rhizobium etli",29449
 Nif-A,"Klebsiella oxytoca KONIH1",BACTERIAL,Proteobacteria,Gammaproteobacteria,"Klebsiella oxytoca",571
-Nif-A,"Klebsiella pneumoniae subsp. pneumoniae KP5-1",BACTERIAL,Proteobacteria,Gammaproteobacteria,"Klebsiella pneumoniae subsp. pneumoniae",72407
+Nif-A,"Klebsiella pneumoniae subsp. pneumoniae KP5-1",BACTERIAL,Proteobacteria,Gammaproteobacteria,"Klebsiella pneumoniae",573
 Nif-A,"Klebsiella oxytoca",BACTERIAL,Proteobacteria,Gammaproteobacteria,"Klebsiella oxytoca",571
 Nif-A,"Pectobacterium atrosepticum",BACTERIAL,Proteobacteria,Gammaproteobacteria,"Pectobacterium atrosepticum",29471
 Nif-A,"Sinorhizobium meliloti",BACTERIAL,Proteobacteria,Alphaproteobacteria,"Sinorhizobium meliloti",382
@@ -190,7 +190,7 @@ Nif-A,"Paenibacillus stellifer",BACTERIAL,Firmicutes,Bacilli,"Paenibacillus stel
 Nif-A,"Paenibacillus graminis",BACTERIAL,Firmicutes,Bacilli,"Paenibacillus graminis",189425
 Nif-A,"Paenibacillus odorifer",BACTERIAL,Firmicutes,Bacilli,"Paenibacillus odorifer",189426
 Nif-A,"Cedecea neteri",BACTERIAL,Proteobacteria,Gammaproteobacteria,"Cedecea neteri",158822
-Nif-A,"Klebsiella pneumoniae subsp. pneumoniae",BACTERIAL,Proteobacteria,Gammaproteobacteria,"Klebsiella pneumoniae subsp. pneumoniae",72407
+Nif-A,"Klebsiella pneumoniae subsp. pneumoniae",BACTERIAL,Proteobacteria,Gammaproteobacteria,"Klebsiella pneumoniae",573
 Nif-A,"Klebsiella variicola",BACTERIAL,Proteobacteria,Gammaproteobacteria,"Klebsiella variicola",244366
 Nif-A,"Rhizobium etli bv. phaseoli str. IE4803",BACTERIAL,Proteobacteria,Alphaproteobacteria,"Rhizobium etli",29449
 Nif-A,"Rhizobium etli bv. phaseoli str. IE4803",BACTERIAL,Proteobacteria,Alphaproteobacteria,"Rhizobium etli",29449
@@ -199,7 +199,7 @@ Nif-A,"Geobacter pickeringii",BACTERIAL,Proteobacteria,Deltaproteobacteria,"Geob
 Nif-A,"Azotobacter chroococcum NCIMB 8003",BACTERIAL,Proteobacteria,Gammaproteobacteria,"Azotobacter chroococcum",353
 Nif-A,"Paenibacillus polymyxa",BACTERIAL,Firmicutes,Bacilli,"Paenibacillus polymyxa",1406
 Nif-A,"Raoultella ornithinolytica",BACTERIAL,Proteobacteria,Gammaproteobacteria,"Raoultella ornithinolytica",54291
-Nif-A,"Sphingomonas sp. WHSC-8",BACTERIAL,Proteobacteria,Alphaproteobacteria,"Sphingomonas",13687
+Nif-A,"Sphingomonas sp. WHSC-8",BACTERIAL,Proteobacteria,Alphaproteobacteria,"Sphingomonas sp.",28214
 Nif-A,"Gynuella sunshinyii YC6258",BACTERIAL,Proteobacteria,Gammaproteobacteria,"Gynuella sunshinyii",1445505
 Nif-A,"Calothrix sp. 336/3",BACTERIAL,Cyanobacteria,None,"Calothrix sp. 336/3",1337936
 Nif-A,"Paenibacillus durus ATCC 35681",BACTERIAL,Firmicutes,Bacilli,"Paenibacillus durus",44251
@@ -216,9 +216,9 @@ Nif-A,"Confluentimicrobium sp. EMB200-NS6",BACTERIAL,Proteobacteria,Alphaproteob
 Nif-A,"Blastochloris viridis",BACTERIAL,Proteobacteria,Alphaproteobacteria,"Blastochloris viridis",1079
 Nif-A,"Herbaspirillum rubrisubalbicans M1",BACTERIAL,Proteobacteria,Betaproteobacteria,"Herbaspirillum rubrisubalbicans",80842
 Nif-A,"Burkholderia sp. CCGE1001",BACTERIAL,Proteobacteria,Betaproteobacteria,"Burkholderia sp. CCGE1001",640510
-Nif-A,"Rhodobacter sphaeroides",BACTERIAL,Proteobacteria,Alphaproteobacteria,"Rhodobacter sphaeroides",1063
+Nif-A,"Rhodobacter sphaeroides",BACTERIAL,Proteobacteria,Alphaproteobacteria,"Rhodobacter",1060
 Nif-A,"Methylomonas denitrificans",BACTERIAL,Proteobacteria,Gammaproteobacteria,"Methylomonas denitrificans",1538553
-Nif-A,"Enterobacter sp. FY-07",BACTERIAL,Proteobacteria,Gammaproteobacteria,"Enterobacter",547
+Nif-A,"Enterobacter sp. FY-07",BACTERIAL,Proteobacteria,Gammaproteobacteria,"Enterobacter sp. FY-07",1692238
 Nif-A,"Klebsiella quasipneumoniae",BACTERIAL,Proteobacteria,Gammaproteobacteria,"Klebsiella quasipneumoniae",1463165
 Nif-A,"Desulfuromonas sp. DDH964",BACTERIAL,Proteobacteria,Deltaproteobacteria,"Desulfuromonas sp. DDH964",1823759
 Nif-A,"Mesorhizobium loti MAFF303099",BACTERIAL,Proteobacteria,Alphaproteobacteria,"Mesorhizobium loti",381
@@ -229,7 +229,7 @@ Nif-A,"Azospirillum sp. B510",BACTERIAL,Proteobacteria,Alphaproteobacteria,"Azos
 Nif-A,"Arcobacter sp. L",BACTERIAL,Proteobacteria,Epsilonproteobacteria,"Arcobacter sp. L",944547
 Nif-A,"Azoarcus sp. KH32C",BACTERIAL,Proteobacteria,Betaproteobacteria,"Azoarcus sp. KH32C",748247
 Nif-A,"Azoarcus sp. KH32C",BACTERIAL,Proteobacteria,Betaproteobacteria,"Azoarcus sp. KH32C",748247
-Nif-A,"Bradyrhizobium sp. S23321",BACTERIAL,Proteobacteria,Alphaproteobacteria,"Bradyrhizobium sp. S23321",335659
+Nif-A,"Bradyrhizobium sp. S23321",BACTERIAL,Proteobacteria,Alphaproteobacteria,"Bradyrhizobium sp.",376
 Nif-A,"Rubrivivax gelatinosus IL144",BACTERIAL,Proteobacteria,Betaproteobacteria,"Rubrivivax gelatinosus",28068
 Nif-A,"Leptospirillum ferrooxidans C2-3",BACTERIAL,Nitrospirae,Nitrospira,"Leptospirillum ferrooxidans",180
 Nif-A,"Bradyrhizobium oligotrophicum S58",BACTERIAL,Proteobacteria,Alphaproteobacteria,"Bradyrhizobium oligotrophicum",44255
@@ -246,7 +246,7 @@ Nif-A,"Pectobacterium atrosepticum SCRI1043",BACTERIAL,Proteobacteria,Gammaprote
 Nif-A,"Frankia alni ACN14a",BACTERIAL,Actinobacteria,Actinobacteria,"Frankia alni",1859
 Nif-A,"Rhizobium leguminosarum bv. viciae 3841",BACTERIAL,Proteobacteria,Alphaproteobacteria,"Rhizobium leguminosarum",384
 Nif-A,"Bradyrhizobium sp. ORS 278",BACTERIAL,Proteobacteria,Alphaproteobacteria,"Bradyrhizobium sp. ORS 278",114615
-Nif-A,"Azoarcus sp. BH72",BACTERIAL,Proteobacteria,Betaproteobacteria,"Azoarcus sp. BH72",62928
+Nif-A,"Azoarcus sp. BH72",BACTERIAL,Proteobacteria,Betaproteobacteria,"Azoarcus",12960
 Nif-A,"Gluconacetobacter diazotrophicus PA1 5",BACTERIAL,Proteobacteria,Alphaproteobacteria,"Gluconacetobacter diazotrophicus",33996
 Nif-A,"Azospirillum lipoferum 4B",BACTERIAL,Proteobacteria,Alphaproteobacteria,"Azospirillum lipoferum",193
 Nif-A,"Hyphomicrobium sp. MC1",BACTERIAL,Proteobacteria,Alphaproteobacteria,"Hyphomicrobium sp. MC1",717785
@@ -259,7 +259,7 @@ Nif-A,"Neorhizobium galegae bv. orientalis str. HAMBI 540",BACTERIAL,Proteobacte
 Nif-A,"Neorhizobium galegae bv. officinalis bv. officinalis str. HAMBI 1141",BACTERIAL,Proteobacteria,Alphaproteobacteria,"Neorhizobium galegae",399
 Nif-A,"Paenibacillus riograndensis SBR5",BACTERIAL,Firmicutes,Bacilli,"Paenibacillus riograndensis",483937
 Nif-A,"Magnetospirillum sp. XM-1",BACTERIAL,Proteobacteria,Alphaproteobacteria,"Magnetospirillum sp. XM-1",1663591
-Nif-A,"Rhodobacter sphaeroides WS8N",BACTERIAL,Proteobacteria,Alphaproteobacteria,"Rhodobacter sphaeroides",1063
+Nif-A,"Rhodobacter sphaeroides WS8N",BACTERIAL,Proteobacteria,Alphaproteobacteria,"Rhodobacter",1060
 Nif-B,"Clostridium acetobutylicum ATCC 824",BACTERIAL,Firmicutes,Clostridia,"Clostridium acetobutylicum",1488
 Nif-B,"Chlorobium tepidum TLS",BACTERIAL,Chlorobi,Chlorobia,"Chlorobium",1091
 Nif-B,"Desulfovibrio vulgaris str. Hildenborough",BACTERIAL,Proteobacteria,Deltaproteobacteria,"Desulfovibrio vulgaris",881
@@ -281,7 +281,7 @@ Nif-B,"Prosthecochloris aestuarii DSM 271",BACTERIAL,Chlorobi,Chlorobia,"Prosthe
 Nif-B,"Desulfatibacillum alkenivorans AK-01",BACTERIAL,Proteobacteria,Deltaproteobacteria,"Desulfatibacillum alkenivorans",259354
 Nif-B,"Desulfovibrio vulgaris str. 'Miyazaki F'",BACTERIAL,Proteobacteria,Deltaproteobacteria,"Desulfovibrio vulgaris",881
 Nif-B,"Desulfobacterium autotrophicum HRM2",BACTERIAL,Proteobacteria,Deltaproteobacteria,"Desulfobacterium autotrophicum",2296
-Nif-B,"Desulfovibrio salexigens DSM 2638",BACTERIAL,Proteobacteria,Deltaproteobacteria,"Desulfovibrio salexigens",880
+Nif-B,"Desulfovibrio salexigens DSM 2638",BACTERIAL,Proteobacteria,Deltaproteobacteria,"Desulfovibrio",872
 Nif-B,"Desulfomicrobium baculatum DSM 4028",BACTERIAL,Proteobacteria,Deltaproteobacteria,"Desulfomicrobium baculatum",899
 Nif-B,"Desulfotomaculum acetoxidans DSM 771",BACTERIAL,Firmicutes,Clostridia,"Desulfotomaculum",1562
 Nif-B,"Coraliomargarita akajimensis DSM 45221",BACTERIAL,Verrucomicrobia,Opitutae,"Coraliomargarita akajimensis",395922
@@ -324,13 +324,13 @@ Nif-B,"Clostridium pasteurianum DSM 525 = ATCC 6013",BACTERIAL,Firmicutes,Clostr
 Nif-B,"Clostridium pasteurianum DSM 525 = ATCC 6013",BACTERIAL,Firmicutes,Clostridia,"Clostridium pasteurianum",1501
 Nif-B,"Clostridium beijerinckii",BACTERIAL,Firmicutes,Clostridia,"Clostridium beijerinckii",1520
 Nif-B,"Pelosinus fermentans JBW45",BACTERIAL,Firmicutes,Negativicutes,"Pelosinus fermentans",365349
-Nif-B,"Dehalogenimonas sp. WBC-2",BACTERIAL,Chloroflexi,Dehalococcoidia,"Dehalogenimonas",670486
+Nif-B,"Dehalogenimonas sp. WBC-2",BACTERIAL,Chloroflexi,Dehalococcoidia,"Dehalogenimonas sp. WBC-2",943347
 Nif-B,"Clostridium aceticum",BACTERIAL,Firmicutes,Clostridia,"Clostridium aceticum",84022
 Nif-B,"Clostridium pasteurianum NRRL B-598",BACTERIAL,Firmicutes,Clostridia,"Clostridium pasteurianum",1501
 Nif-B,"Clostridium butyricum",BACTERIAL,Firmicutes,Clostridia,"Clostridium butyricum",1492
 Nif-B,"Clostridium autoethanogenum DSM 10061",BACTERIAL,Firmicutes,Clostridia,"Clostridium autoethanogenum",84023
 Nif-B,"Desulfovibrio sp. J2",BACTERIAL,Proteobacteria,Deltaproteobacteria,"Desulfovibrio",872
-Nif-B,"Candidatus Azobacteroides pseudotrichonymphae genomovar. CFP2",BACTERIAL,Bacteroidetes,Bacteroidia,"Candidatus Azobacteroides pseudotrichonymphae",511435
+Nif-B,"Candidatus Azobacteroides pseudotrichonymphae genomovar. CFP2",BACTERIAL,Bacteroidetes,Bacteroidia,NA,NA
 Nif-B,"Clostridium kluyveri NBRC 12016",BACTERIAL,Firmicutes,Clostridia,"Clostridium kluyveri",1534
 Nif-B,"Desulfovibrio magneticus RS-1",BACTERIAL,Proteobacteria,Deltaproteobacteria,"Desulfovibrio magneticus",184917
 Nif-B,"Clostridium bornimense",BACTERIAL,Firmicutes,Clostridia,"Clostridium bornimense",1216932
@@ -345,7 +345,7 @@ Nif-B,"Methanosphaerula palustris E1-9c",ARCHAEAL,Euryarchaeota,Methanomicrobia,
 Nif-B,"Methanolacinia petrolearia DSM 11571",ARCHAEAL,Euryarchaeota,Methanomicrobia,"Methanolacinia petrolearia",54120
 Nif-B,"Methanosaeta concilii GP6",ARCHAEAL,Euryarchaeota,Methanomicrobia,NA,NA
 Nif-B,"Methanocella conradii HZ254",ARCHAEAL,Euryarchaeota,Methanomicrobia,"Methanocella conradii",1175444
-Nif-B,"Methanolobus psychrophilus R15",ARCHAEAL,Euryarchaeota,Methanomicrobia,"Methanolobus",2220
+Nif-B,"Methanolobus psychrophilus R15",ARCHAEAL,Euryarchaeota,Methanomicrobia,"Methanolobus psychrophilus",420950
 Nif-B,"Methanosarcina mazei Tuc01",ARCHAEAL,Euryarchaeota,Methanomicrobia,"Methanosarcina mazei",2209
 Nif-B,"Methanosarcina sp. WWM596",ARCHAEAL,Euryarchaeota,Methanomicrobia,"Methanosarcina sp. WWM596",1434103
 Nif-B,"Methanosarcina sp. WH1",ARCHAEAL,Euryarchaeota,Methanomicrobia,"Methanosarcina sp. WH1",1434102
@@ -384,7 +384,7 @@ Nif-C,"Methanocaldococcus infernus ME",ARCHAEAL,Euryarchaeota,Methanococci,"Meth
 Nif-C,"Methanotorris igneus Kol 5",ARCHAEAL,Euryarchaeota,Methanococci,"Methanotorris igneus",2189
 Nif-C,"Methanothermococcus okinawensis IH1",ARCHAEAL,Euryarchaeota,Methanococci,"Methanothermococcus okinawensis",155863
 Nif-D,"Methanothermobacter thermautotrophicus str. Delta H",ARCHAEAL,Euryarchaeota,Methanobacteria,"Methanothermobacter thermautotrophicus",145262
-Nif-D,"Methanococcus maripaludis C5",ARCHAEAL,Euryarchaeota,Methanococci,"Methanococcus maripaludis C5",402880
+Nif-D,"Methanococcus maripaludis C5",ARCHAEAL,Euryarchaeota,Methanococci,"Methanococcus maripaludis",39152
 Nif-D,"Methanococcus vannielii SB",ARCHAEAL,Euryarchaeota,Methanococci,"Methanococcus vannielii",2187
 Nif-D,"Methanococcus maripaludis C7",ARCHAEAL,Euryarchaeota,Methanococci,"Methanococcus maripaludis",39152
 Nif-D,"Methanococcus maripaludis C6",ARCHAEAL,Euryarchaeota,Methanococci,"Methanococcus maripaludis",39152

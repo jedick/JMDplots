@@ -34,6 +34,14 @@ This vignette runs the code to make the plots from the following paper:
 
 This vignette was compiled on `r Sys.Date()` with **[JMDplots](https://github.com/jedick/JMDplots)** `r packageDescription("JMDplots")$Version` and **[canprot](https://github.com/jedick/canprot)** `r packageDescription("canprot")$Version`.
 
+```{r refseq, echo = FALSE}
+# Get RefSeq version 20210527
+file <- system.file("extdata/refseq/README.txt", package = "JMDplots")
+release <- substr(strsplit(readLines(file, n=2)[2], "release ")[[1]][2], 1, 3)
+```
+
+For Figure 3, the RefSeq database release `r release` is used for the proteomes of *nif*-bearing organisms (release 201 was used in the paper).
+
 ```{r library, message = FALSE, results = "hide"}
 library(JMDplots)
 # read canprot's 'basis' option

@@ -367,19 +367,22 @@ getmap <- function(study, RDP = NULL, lineage = NULL) {
     # 20200920 Lots of Escherichia in urine [WZZ+18]
     "genus_Escherichia/Shigella" = "genus_Escherichia",
     "phylum_Cyanobacteria/Chloroplast" = "phylum_Cyanobacteria",
-    # 20200929
+    # 20200924 Looking at [MPB+17]
+    "genus_Marinimicrobia_genera_incertae_sedis" = "species_Candidatus Marinimicrobia bacterium",
+    # 20200929 Unclassified Cyanobacteria are just Cyanobacteria
     "class_Cyanobacteria" = "phylum_Cyanobacteria",
     "genus_Spartobacteria_genera_incertae_sedis" = "class_Spartobacteria",
+    # 20210502 Processing Guerrero Negro
+    "class_Planctomycetacia" = "class_Planctomycetia",
+    # 20210526 NCBI taxonomy no longer has an Actinobacteria "class"
+    "class_Actinobacteria" = "phylum_Actinobacteria",
+    "order_Rhizobiales" = "order_Hyphomicrobiales",
 
     ## 20200922 Suda et al., 2002 doi:10.1099/00207713-52-5-1577
     #"genus_GpIIa" = "species_Planktothrix agardhii",
-    ## 20200924 Looking at [MPB+17]
-    #"genus_Marinimicrobia_genera_incertae_sedis" = "species_Candidatus Marinimicrobia bacterium",
     # 20200929 not used [BGPF13]
     #"genus_Armatimonadetes_gp7" = "phylum_Armatimonadetes",
 
-    # 20210502 processing Guerrero Negro
-    "class_Planctomycetacia" = "class_Planctomycetia",
   NA_character_)
   iswitch <- !is.na(NCBIgroups)
   if(any(iswitch)) {
@@ -448,7 +451,9 @@ getmetrics <- function(study, cn = FALSE, mdat = NULL, RDP = NULL, map = NULL, l
   # Don't test particular RDP-NCBI mappings that cross ranks
   iclassCyano <- RDP$rank == "class" & RDP$name == "Cyanobacteria"
   igenusSparto <- RDP$rank == "genus" & RDP$name == "Spartobacteria_genera_incertae_sedis"
-  equalrank <- equalrank[!(iclassCyano | igenusSparto)]
+  iclassActino <- RDP$rank == "class" & RDP$name == "Actinobacteria"
+  igenusMarini <- RDP$rank == "genus" & RDP$name == "Marinimicrobia_genera_incertae_sedis"
+  equalrank <- equalrank[!(iclassCyano | igenusSparto | iclassActino | igenusMarini)]
   stopifnot(all(equalrank))
 
   # Get classification matrix (rows = taxa, columns = samples)

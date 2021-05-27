@@ -1,9 +1,9 @@
 # This document describes steps for processing the 
-# RefSeq database (release 201, 2020-07-13) to produce these files:
+# RefSeq database (release 206, 2020-05-21) to produce these files:
 
 protein_refseq.csv: total amino acid composition of all proteins for
-  bacteria, archaea, and viral genomes in the RefSeq collection (n = 42787)
-taxid_names.csv: taxid, phylum name and species name for 42787 taxa
+  bacteria, archaea, and viral genomes in the RefSeq collection (n = 49448)
+taxid_names.csv: taxid, phylum name and species name for 49448 taxa
 
 # These functions/scripts have the following purpose (output files listed in parentheses):
 gencat.sh - extract accession, taxid, sequence length from RefSeq release catalog (accession.taxid.txt)
@@ -13,16 +13,16 @@ taxid.names.R - get taxonomic names for each taxid represented (taxid_names.csv)
 ## Download stuff
 
 1. Download catalog files
-wget ftp://ftp.ncbi.nih.gov/refseq/release/release-catalog/RefSeq-release201.catalog.gz (1270585 KB)
-wget ftp://ftp.ncbi.nih.gov/refseq/release/release-catalog/release201.MultispeciesAutonomousProtein2taxname.gz (174586 KB)
-wget ftp://ftp.ncbi.nih.gov/refseq/release/release-catalog/release201.files.installed (1234 KB)
+wget https://ftp.ncbi.nih.gov/refseq/release/release-catalog/RefSeq-release206.catalog.gz (1.5 GB)
+wget https://ftp.ncbi.nih.gov/refseq/release/release-catalog/release206.MultispeciesAutonomousProtein2taxname.gz (229 MB)
+wget https://ftp.ncbi.nih.gov/refseq/release/release-catalog/release206.files.installed (1.5 MB)
 
 2. List URLS for the microbial protein sequence files
-grep bacteria.*faa release201.files.installed | awk '!($1="")' | sed -e "s/^\ /ftp\:\/\/ftp.ncbi.nih.gov\/refseq\/release\/bacteria\//g" > urllist
-grep archaea.*faa release201.files.installed | awk '!($1="")' | sed -e "s/^\ /ftp\:\/\/ftp.ncbi.nih.gov\/refseq\/release\/archaea\//g" >> urllist
-grep viral.*faa release201.files.installed | awk '!($1="")' | sed -e "s/^\ /ftp\:\/\/ftp.ncbi.nih.gov\/refseq\/release\/viral\//g" >> urllist
+grep bacteria.*faa release206.files.installed | awk '!($1="")' | sed -e "s/^\ /https\:\/\/ftp.ncbi.nih.gov\/refseq\/release\/bacteria\//g" > urllist
+grep archaea.*faa release206.files.installed | awk '!($1="")' | sed -e "s/^\ /https\:\/\/ftp.ncbi.nih.gov\/refseq\/release\/archaea\//g" >> urllist
+grep viral.*faa release206.files.installed | awk '!($1="")' | sed -e "s/^\ /https\:\/\/ftp.ncbi.nih.gov\/refseq\/release\/viral\//g" >> urllist
 
-3. Download the sequence files; use -N to skip existing files [1113 files, 25 GB]
+3. Download the sequence files; use -N to skip existing files [1297 files, 33 GB]
 wget -N -i urllist
 
 4. Move the *.faa.gz files to a directory named 'protein'
@@ -30,22 +30,25 @@ wget -N -i urllist
 ## Protein stuff
 
 # Timings were made on a 2018 Intel i7 laptop
-5. gzip -d release201.MultispeciesAutonomousProtein2taxname.gz [2.4 GB, needed for finding all taxids for WP accessions]
+5. gzip -d release206.MultispeciesAutonomousProtein2taxname.gz [2.8 GB, needed for finding all taxids for WP accessions]
 
 6. Use 'gencat.sh' to generate accession.taxid.txt for bacteria, archaea, and viral proteins in the catalog [11 minutes]
-   for RefSeq201, 'wc -l accession.taxid.txt' is 148851653
+   for RefSeq 206, 'wc -l accession.taxid.txt' is 169527530
 
 7. Generate protein_refseq.csv
    mkdir csv
    Then, run these R commands in the working directory that contains accession.taxid.txt, protein/, and csv/
    > source("protein.refseq.R")
-   > read.allfiles()    # ca. 14 hours (8 cores)
-   > protein.refseq()   # 4 minutes
+   > read.allfiles()    # ca. 19 hours (8 cores)
+   > protein.refseq()   # 5 minutes
 
 ## Taxonomy stuff
 
 8. Edit 'taxid.names.R' so that 'taxdir' points to the directory where the files
     'names.dmp' and 'nodes.dmp' are present. These files can be downloaded from
-    ftp://ftp.ncbi.nih.gov/pub/taxonomy/taxdump.tar.gz (accessed on 2020-07-15)
+    https://ftp.ncbi.nih.gov/pub/taxonomy/taxdump.tar.gz
 
-9. Source 'taxid.names.R' to generate the file 'taxid_names.csv' [~7.5 hours]
+    File info on server (accessed on 2021-05-21):
+    taxdump.tar.gz            2021-05-21 21:27   53M
+
+9. Source 'taxid.names.R' to generate the file 'taxid_names.csv' [8 hours]
