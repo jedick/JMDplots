@@ -1,7 +1,8 @@
 # JMDplots/geo16S.R
 # Make plots for the paper:
 # Geobiochemistry of microbial community proteomes inferred from 16S RNA sequences
-# 20200416 added to JMDplots
+# 20210416 Initial commit to JMDplots
+# 20210527 Updated plots for RefSeq release 206
 
 # Figure 1: Chemical compositions of taxonomic groups 20200925
 geo16S1 <- function(pdf = FALSE) {
@@ -94,12 +95,12 @@ geo16S2 <- function(pdf = FALSE) {
   title("Guerrero Negro mat layers\nHarris et al., 2013", font.main = 1)
   addhull(p7$ZC, p7$nH2O, "tan1", TRUE, lty = 2)
   pointfun(p7)
-  text(c(-0.1525, -0.1575, -0.1583), c(-0.7547, -0.760, -0.7647), c("0-1 mm", "1-2 mm", "2-3 mm"))
+  text(c(-0.1516, -0.1571, -0.1576), c(-0.7551, -0.7608, -0.7649), c("0-1 mm", "1-2 mm", "2-3 mm"))
   legend <- c("photic/oxic", "low sulfide", "high sulfide")
   legend("topleft", legend, pch = c(24, 20, 25), pt.bg = c(4, 1, 2), bg = "white")
 
   p8 <- plotcomp("XDZ+17", title = FALSE, points = FALSE)
-  title("Qarhan Salt Lake soils\nXie et al., 2017", font.main = 1)
+  title("Qarhan Salt Lake and\nnormal soils, Xie et al., 2017", font.main = 1)
   addhull(p8$ZC, p8$nH2O, "turquoise3", TRUE)
   pointfun(p8)
   legend <- c("normal", "saline")
@@ -256,8 +257,8 @@ geo16S3 <- function(pdf = FALSE, plot.it = TRUE) {
         mtext(xlab, side = 3, line = 1.7, cex = par("cex"))
         # Extra labels for ETNP
         if(title[i]=="ETNP") {
-          text(40, 100, "0.2-\n1.6 \u00B5m")
-          text(160, 130, "1.6-\n30 \u00B5m")
+          text(40, 78, "0.2-\n1.6 \u00B5m")
+          text(140, 135, "1.6-\n30 \u00B5m")
         }
         # Restore xlim for plotting ZC
         par(new = TRUE)
@@ -320,11 +321,13 @@ geo16S4 <- function(pdf = FALSE) {
   )
   title(paste0("Class (", round(p), "% of total)"))
   p <- groupcomp("MPB+17", "ZC", "genus", pch.up = 23, pch.down = 21, ylim = c(-0.23, -0.13), minpercent = 1,
-    xadj = c(Alteromonas = -0.07, Sulfurimonas = 1.05, Alcanivorax = -0.9, Halomonas = -0.55, Thiogranum = -0.1, Sulfurovum = 0.5, Thalassospira = 0.5, Pseudomonas = -0.1),
-    yadj = c(Sulfurimonas = 1.2, Pseudomonas = 1.5, Thalassospira = 3.5, Sulfurovum = -1, Pseudoalteromonas = 1, Thiogranum = 0.6),
+    xadj = c(Alteromonas = -0.07, Sulfurimonas = 1.05, Alcanivorax = -0.9, Halomonas = -0.55, Thiogranum = 0.17, Sulfurovum = 0.5, Thalassospira = 0.5, Pseudomonas = -0.1),
+    yadj = c(Sulfurimonas = 1.2, Pseudomonas = 1.5, Thalassospira = 3.2, Sulfurovum = -1, Thiogranum = 5.7, Marinimicrobia_genera_incertae_sedis
+ = -0.8),
     mdat = mdat, RDP = RDP, map = map
   )
-  lines(c(0.6, 1.3), c(-0.1515, -0.145))
+  lines(c(0.6, 1.3), c(-0.1508, -0.145))
+  lines(c(0, 0), c(-0.1545, -0.1425))
   title(paste0("Genus (", round(p), "% of total)"))
 
   # Make plots for Baltic Sea
@@ -339,13 +342,14 @@ geo16S4 <- function(pdf = FALSE) {
   text(40, -0.743, "PSU < 6", font = 2)
   text(40, -0.753, "PSU > 20", font = 2)
   p <- groupcomp("HLA+16", "nH2O", "phylum", pch.up = 24, pch.down = 21, ylim = c(-0.78, -0.71),
-    xadj = c(Proteobacteria = -0.2),
+    xadj = c(Proteobacteria = -0.2, Planctomycetes = 0.1),
+    yadj = c(Planctomycetes = 1.8),
     mdat = mdat, RDP = RDP, map = map
   )
   title(paste0("Phylum (", round(p), "% of total)"))
   p <- groupcomp("HLA+16", "nH2O", "class", pch.up = 24, pch.down = 21, ylim = c(-0.78, -0.71),
-    xadj = c(Acidimicrobiia = 0.5, Gammaproteobacteria = -0.4, Flavobacteriia = -0.1, Cyanobacteria = 0.05),
-    yadj = c(Acidimicrobiia = -1, Alphaproteobacteria = -0.6, Cyanobacteria = -0.7, Gammaproteobacteria = 2.2, Verrucomicrobiae = -0.5, Flavobacteriia = 1),
+    xadj = c(Acidimicrobiia = 0.5, Gammaproteobacteria = 0.4, Flavobacteriia = -0.1, Cyanobacteria = 0.05, Verrucomicrobiae = -0.25),
+    yadj = c(Acidimicrobiia = -1, Alphaproteobacteria = -0.6, Cyanobacteria = -0.7, Gammaproteobacteria = 1.6, Verrucomicrobiae = 1.5, Flavobacteriia = 1),
     mdat = mdat, RDP = RDP, map = map
   )
   title(paste0("Class (", round(p), "% of total)"))
@@ -400,10 +404,10 @@ geo16S5 <- function(pdf = FALSE) {
   }
   # Add labels
   text(-0.1455, -0.736, "Ulrich et al., 2018\n(water)")
-  text(-0.1482, -0.7408, "Ulrich et al., 2018\n(sediment)")
-  text(-0.139, -0.7370, "Chen See\net al., 2018")
-  text(-0.1418, -0.7408, "Mumford et al., 2020\n(spring)")
-  text(-0.1428, -0.7432, "Mumford et al., 2020\n(fall)")
+  text(-0.1478, -0.7409, "Ulrich et al., 2018\n(sediment)")
+  text(-0.1390, -0.7374, "Chen See\net al., 2018")
+  text(-0.1418, -0.7413, "Mumford et al., 2020\n(spring)")
+  text(-0.1427, -0.7435, "Mumford et al., 2020\n(fall)")
   # Add legend
   legend("topleft", c("Lowest disturbance", "Highest disturbance"), pch = c(21, 21), pt.bg = c("#ffffffa0", "#df536ba0"), pt.cex = c(1.4, 1.7), lwd = 2, lty = NA)
   label.figure("b", cex = 1.5, xfrac = 0.03, font = 2)
@@ -433,7 +437,7 @@ geo16S5 <- function(pdf = FALSE) {
   # Add labels
   text(-0.165, -0.726, "Cluff et al., 2014")
   text(-0.2, -0.73, "Hull et al., 2018")
-  text(-0.163, -0.746, "Zhong et al., 2019")
+  text(-0.191, -0.719, "Zhong et al., 2019")
   # Add legend
   legend("topright", c("Source Water\nor Injected Fluids", "Produced Water"), pch = c(21, 21), pt.bg = c("#ffffffa0", "#df536ba0"), pt.cex = c(1.4, 1.7), lwd = 2, lty = NA)
   label.figure("d", cex = 1.5, xfrac = 0.03, font = 2)

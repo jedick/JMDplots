@@ -506,6 +506,8 @@ taxacomp <- function(which = c("Bacteria", "Archaea"), xlim = NULL, ylim = NULL,
     phyla <- metrics[metrics$rank == "phylum" & metrics$parent != "Viruses", ]
     phyla <- phyla[phyla$ntaxa > 60, ]
     phyla <- phyla[order(phyla$ntaxa, decreasing = TRUE), ]
+    # Swap Chloroflexi and Crenarchaeota so latter doesn't have same color as Euryarchaeota 20210527
+    phyla[14:15, ] <- phyla[15:14, ]
     taxa <- phyla$group
     col <- seq_along(taxa)
     if(is.null(ylim)) ylim <- c(-0.81, -0.68)
@@ -533,7 +535,7 @@ taxacomp <- function(which = c("Bacteria", "Archaea"), xlim = NULL, ylim = NULL,
   # Initialize plot
   if(is.null(xlim)) xlim <- c(-0.25, -0.05)
   if(is.null(ylim)) ylim <- c(-0.82, -0.68)
-  plot(xlim, ylim, xlab = cplab$ZC, ylab = cplab$nH2O, type = "n", xaxs = "i", yaxs = "i")
+  plot(xlim, ylim, xlab = canprot::cplab$ZC, ylab = canprot::cplab$nH2O, type = "n", xaxs = "i", yaxs = "i")
   # Add horizontal lines to show range of following plot 20200925
   if(!is.null(hline)) abline(h = hline, lty = 2, col = "gray40")
   # Store all values for identify()
@@ -610,10 +612,10 @@ taxacomp <- function(which = c("Bacteria", "Archaea"), xlim = NULL, ylim = NULL,
     legend("topright", taxa[1:6], pch = pch[1:6], col = col[1:6], pt.bg = col[1:6], cex = 0.9, bg = "white")
     legend("bottomleft", taxa[7:len], pch = pch[7:len], col = col[7:len], pt.bg = col[7:len], cex = 0.9, bg = "white")
   } else if(identical(which, "majorphyla")) {
-    legend <- c("Cellular", taxa[1:5], "Viruses", taxa[6:10])
-    pch <- c(NA, pch[1:5], NA, pch[6:10])
-    col <- c(NA, col[1:5], NA, col[6:10])
-    legend("bottomleft", legend, text.font = c(2, 1,1,1,1,1, 2, 1,1,1,1,1), pch = pch, col = col, pt.bg = col, cex = 0.9, bg = "white")
+    legend <- c("Cellular", taxa[1:6], "Viruses", taxa[7:11])
+    pch <- c(NA, pch[1:6], NA, pch[7:11])
+    col <- c(NA, col[1:6], NA, col[7:11])
+    legend("bottomleft", legend, text.font = c(2, 1,1,1,1,1,1, 2, 1,1,1,1,1), pch = pch, col = col, pt.bg = col, cex = 0.9, bg = "white")
   } else if(!is.null(legend.x) & !identical(legend.x, NA)) legend(legend.x, taxa, pch = pch, col = seq_along(taxa), pt.bg = seq_along(taxa), cex = 0.9, bg = "white")
   if(identify) identify(ZC, nH2O, names)
 }

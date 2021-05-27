@@ -8,7 +8,7 @@
 \title{Compositional analysis of proteomes inferred from 16S sequences}
 \description{
 Functions to calculate compositional metrics (\ZC and \nH2O) for inferred microbial community proteomes.
-Proteomes are inferred by combining taxonomic classifications of 16S sequences with RefSeq microbial proteomes.
+Proteomes are inferred by combining taxonomic classifications of 16S rRNA gene sequences with RefSeq microbial proteomes.
 }
 
 \usage{
@@ -69,8 +69,9 @@ For \ZC, the summations are further weighted by number of carbon atoms (Dick et 
 \section{Files in extdata/comp16S}{
   \describe{
     \item{\code{pipeline.R}}{Functions to run external programs for sequence analysis (fastq-dump, vsearch, seqtk, RDP Classifier).}
+    \item{\code{metadata/*.csv}}{Sample metadata for each study.}
     \item{\code{process.R}}{Functions to create the processed data files listed below:}
-    \item{\code{RDP/*.csv}}{RDP Classifier results combined into a single CSV file for each study. (\code{process.R:mkRDP})}
+    \item{\code{RDP/*.csv.xz}}{RDP Classifier results combined into a single CSV file for each study. (\code{process.R:mkRDP})}
     \item{\code{groupAA.csv}}{Average amino acid composition of RefSeq proteomes at genus and higher ranks. (\code{process.R:mkAA})}
     \item{\code{RefSeq_metrics.csv}}{Compositional metrics (\ZC and \nH2O) for each RefSeq group. (\code{process.R:mkmetrics})}
     \item{\code{bergeyTrainingTree.csv}}{Data from \code{bergeyTrainingTree.xml} in the RDP Classifier package version 2.1.3 (\url{https://sourceforge.net/projects/rdp-classifier/}), used for copy-number adjustment.}
