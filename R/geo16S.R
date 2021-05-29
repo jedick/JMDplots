@@ -12,7 +12,7 @@ geo16S1 <- function(pdf = FALSE) {
 
   taxacomp("majorphyla", legend.x = "bottomleft", hline = c(-0.81, -0.68))
   title("Major phyla and their classes", font.main = 1, cex.main = 1.4)
-  label.figure("a", font = 2, cex = 1.6)
+  label.figure("A", font = 2, cex = 1.6)
   # Draw lines indicating zoom area in next plot
   par(xpd = NA)
   lines(c(-0.05, -0.015), c(-0.81, -0.9), lty = 2, col = "gray40")
@@ -20,14 +20,14 @@ geo16S1 <- function(pdf = FALSE) {
   par(xpd = FALSE)
   taxacomp("majorcellular", legend.x = "bottomleft", hline = c(-0.76, -0.71))
   title("Major cellular phyla and their classes", font.main = 1, cex.main = 1.4)
-  label.figure("b", font = 2, cex = 1.6)
+  label.figure("B", font = 2, cex = 1.6)
   par(xpd = NA)
   lines(c(-0.05, -0.015), c(-0.76, -0.81), lty = 2, col = "gray40")
   lines(c(-0.05, -0.015), c(-0.71, -0.68), lty = 2, col = "gray40")
   par(xpd = FALSE)
   taxacomp("Proteobacteria", legend.x = "topright")
   title("Proteobacterial classes and their orders", font.main = 1, cex.main = 1.4)
-  label.figure("c", font = 2, cex = 1.6)
+  label.figure("C", font = 2, cex = 1.6)
 
   if(pdf) dev.off()
 
@@ -50,49 +50,56 @@ geo16S2 <- function(pdf = FALSE) {
   }
 
   p1 <- plotcomp("BGPF13", title = FALSE, points = FALSE)
-  title("Yellowstone hot springs\nBowen De Le\u00f3n et al., 2013", font.main = 1)
+#  title("Yellowstone hot springs\nBowen De Le\u00f3n et al., 2013", font.main = 1)
+  title("Yellowstone hot springs", font.main = 1)
   addhull(p1$ZC, p1$nH2O, 2, TRUE)
   pointfun(p1)
   legend <- c("Archaea", "Bacteria")
   legend("bottomleft", legend, pch = c(23, 22), col = c(1, 1), pt.bg = c(6, 5), bg = "white")
 
   p2 <- plotcomp("SVH+19", title = FALSE, points = FALSE)
-  title("Black Sea\nSollai et al., 2019", font.main = 1)
+#  title("Black Sea\nSollai et al., 2019", font.main = 1)
+  title("Black Sea", font.main = 1)
   addhull(p2$ZC, p2$nH2O, "blue", TRUE, lty = 2)
   pointfun(p2)
   legend <- c("oxic", "suboxic", "euxinic")
   legend("bottomright", legend, pch = c(24, 20, 25), pt.bg = c(4, 1, 2), bg = "white")
 
   p3 <- plotcomp("HLA+16", title = FALSE, points = FALSE)
-  title("Baltic Sea\nHerlemann et al., 2016", font.main = 1)
+#  title("Baltic Sea\nHerlemann et al., 2016", font.main = 1)
+  title("Baltic Sea", font.main = 1)
   addhull(p3$ZC, p3$nH2O, "blue", TRUE)
   pointfun(p3)
   legend <- c("< 6 PSU", "6-20 PSU", "> 20 PSU")
   legend("bottomright", legend, pch = c(24, 20, 21), col = c(1, 1, 1), pt.bg = c(3, NA, 4), bg = "white")
 
   p4 <- plotcomp("MPB+17", title = FALSE, points = FALSE)
-  title("Manus Basin submarine vents\nMeier et al., 2017", font.main = 1)
+#  title("Manus Basin submarine vents\nMeier et al., 2017", font.main = 1)
+  title("Manus Basin submarine vents", font.main = 1)
   addhull(p4$ZC, p4$nH2O, 2, TRUE, lty = 2)
   pointfun(p4)
   legend <- as.expression(c(quote(italic(T)~"< 10 \u00B0C"), quote(italic(T)~"> 10 \u00B0C"), "rock", "fauna"))
   legend("bottomleft", legend, pch = c(21, 23, 20, 8), col = c(1, 1, 1, "yellow4"), pt.bg = c(4, 2, NA, NA), bg = "white")
 
   p5 <- plotcomp("ZLM+16", title = FALSE, points = FALSE)
-  title("Tibetan Plateau lakes\nZhong et al., 2016", font.main = 1)
+#  title("Tibetan Plateau lakes\nZhong et al., 2016", font.main = 1)
+  title("Tibetan Plateau lakes", font.main = 1)
   addhull(p5$ZC, p5$nH2O, "turquoise3", TRUE, lty = 2)
   pointfun(p5)
   legend <- c("< 10 g/l", "24-99 g/l", "> 300 g/l")
   legend("topright", legend, pch = c(24, 20, 21), col = c(1, 1, 1), pt.bg = c(3, NA, 4), bg = "white")
 
   p6 <- plotcomp("JHM+16", title = FALSE, points = FALSE)
-  title("Lake Fryxell oxygen gradient\nJungblut et al., 2016", font.main = 1)
+#  title("Lake Fryxell oxygen gradient\nJungblut et al., 2016", font.main = 1)
+  title("Lake Fryxell oxygen gradient", font.main = 1)
   addhull(p6$ZC, p6$nH2O, "tan1", TRUE)
   pointfun(p6)
   legend <- c("oxic", "transition", "anoxic")
   legend("bottomright", legend, pch = c(24, 20, 25), pt.bg = c(4, 1, 2), bg = "white")
 
   p7 <- plotcomp("HCW+13", title = FALSE, points = FALSE, ylim = c(-0.765, -0.7545))
-  title("Guerrero Negro mat layers\nHarris et al., 2013", font.main = 1)
+#  title("Guerrero Negro mat layers\nHarris et al., 2013", font.main = 1)
+  title("Guerrero Negro mat layers", font.main = 1)
   addhull(p7$ZC, p7$nH2O, "tan1", TRUE, lty = 2)
   pointfun(p7)
   text(c(-0.1516, -0.1571, -0.1576), c(-0.7551, -0.7608, -0.7649), c("0-1 mm", "1-2 mm", "2-3 mm"))
@@ -100,7 +107,8 @@ geo16S2 <- function(pdf = FALSE) {
   legend("topleft", legend, pch = c(24, 20, 25), pt.bg = c(4, 1, 2), bg = "white")
 
   p8 <- plotcomp("XDZ+17", title = FALSE, points = FALSE)
-  title("Qarhan Salt Lake and\nnormal soils, Xie et al., 2017", font.main = 1)
+#  title("Qarhan Salt Lake and\nnormal soils, Xie et al., 2017", font.main = 1)
+  title("Qarhan Salt Lake\nand normal soils", font.main = 1)
   addhull(p8$ZC, p8$nH2O, "turquoise3", TRUE)
   pointfun(p8)
   legend <- c("normal", "saline")
@@ -116,10 +124,10 @@ geo16S2 <- function(pdf = FALSE) {
   }
   plot(xlim, ylim, xlab = "", ylab = "", type = "n")
   lmlines()
-  # Add convex hull for stratified lakes and sewater (from Fig. 3) 20210503
-  fig3 <- geo16S3(plot.it = FALSE)
-  addhull(fig3$mar$ZC, fig3$mar$nH2O, "blue")
-  addhull(fig3$ursu$ZC, fig3$ursu$nH2O, "turquoise3")
+#  # Add convex hull for stratified lakes and sewater (from Fig. 3) 20210503
+#  fig3 <- geo16S3(plot.it = FALSE)
+#  addhull(fig3$mar$ZC, fig3$mar$nH2O, "blue")
+#  addhull(fig3$ursu$ZC, fig3$ursu$nH2O, "turquoise3")
   # Add convex hulls for each dataset in this figure
   addhull(p1$ZC, p1$nH2O, 2, TRUE)
   addhull(p2$ZC, p2$nH2O, "blue", TRUE, lty = 2)
@@ -384,10 +392,9 @@ geo16S5 <- function(pdf = FALSE) {
   # Data from Ulrich et al., 2018
   xlim <- c(-0.16, -0.13)
   ylim <- c(-0.755, -0.725)
-  plotcomp("UKD+18.water_2014", xlim = xlim, ylim = ylim, title = FALSE)
-  legend("topleft", c("MSA+", "MSA-"), pch = c(21, 1), pt.bg = c(2, 1), bg = "white")
-  legend("bottomright", c("Pennsylvania Streams", "Ulrich et al., 2018"), bg = "white")
-  label.figure("a", cex = 1.5, xfrac = 0.03, font = 2)
+  plotcomp("UKD+18.water_2014", xlim = xlim, ylim = ylim, title = FALSE, pval = FALSE)
+  legend("topleft", c("MSA+", "MSA-"), pch = c(21, 1), pt.bg = c(2, 1), bg = "white", title = "Northwestern Pennsylvania")
+  label.figure("A", cex = 1.5, xfrac = 0.03, font = 2)
 
   ## Plot C: Comparison of different studies on Pennsylvania Streams 20210327
 
@@ -403,24 +410,23 @@ geo16S5 <- function(pdf = FALSE) {
     points(mean$ZC.up, mean$nH2O.up, pch = pch[i], cex = 1.8, lwd = 2, bg = "#df536ba0")
   }
   # Add labels
-  text(-0.1455, -0.736, "Ulrich et al., 2018\n(water)")
-  text(-0.1478, -0.7409, "Ulrich et al., 2018\n(sediment)")
-  text(-0.1390, -0.7374, "Chen See\net al., 2018")
-  text(-0.1418, -0.7413, "Mumford et al., 2020\n(spring)")
-  text(-0.1427, -0.7435, "Mumford et al., 2020\n(fall)")
+  text(-0.1448, -0.736, "NW PA\nwater")
+  text(-0.1475, -0.7410, "NW PA\nsediment")
+  text(-0.1394, -0.7379, "NE PE\nsediment")
+  text(-0.1416, -0.7413, "PASF water (spring)")
+  text(-0.1432, -0.7435, "PASF water (fall)")
   # Add legend
-  legend("topleft", c("Lowest disturbance", "Highest disturbance"), pch = c(21, 21), pt.bg = c("#ffffffa0", "#df536ba0"), pt.cex = c(1.4, 1.7), lwd = 2, lty = NA)
-  label.figure("b", cex = 1.5, xfrac = 0.03, font = 2)
+  legend("topleft", c("Lowest Disturbance", "Highest Disturbance"), pch = c(21, 21), pt.bg = c("#ffffffa0", "#df536ba0"), pt.cex = c(1.4, 1.7), lwd = 2, lty = NA)
+  label.figure("B", cex = 1.5, xfrac = 0.03, font = 2)
 
   ## Plots C-D: Comparison of different studies on produced water 20210330
 
   # Panel C: Cluff et al., 2014
-  plotcomp("CHM+14", title = FALSE)
-  legend("topright", c("Injected Fluids (day = 0)", "Produced Water (day >= 49)"),
-         pch = c(21, 21), pt.bg = c("white", 2), bg = "white")
-  legend("bottomleft", c("Marcellus Shale", "Cluff et al., 2014"), bg = "white", inset = c(-0.03, 0))
+  plotcomp("CHM+14", title = FALSE, pval = FALSE)
+  legend("topright", c("Injected Fluids (day 0)", "Produced Water (day 49 and after)"),
+         pch = c(21, 21), pt.bg = c("white", 2), bg = "white", title = "Marcellus Shale")
   box()
-  label.figure("c", cex = 1.5, xfrac = 0.03, font = 2)
+  label.figure("C", cex = 1.5, xfrac = 0.03, font = 2)
 
   # Panel D: Multiple studies
   studies <- c("CHM+14", "HRR+18", "ZLF+19")
@@ -435,12 +441,12 @@ geo16S5 <- function(pdf = FALSE) {
     points(mean$ZC.up, mean$nH2O.up, pch = pch[i], cex = 1.8, lwd = 2, bg = "#df536ba0")
   }
   # Add labels
-  text(-0.165, -0.726, "Cluff et al., 2014")
-  text(-0.2, -0.73, "Hull et al., 2018")
-  text(-0.191, -0.719, "Zhong et al., 2019")
+  text(-0.165, -0.726, "Marcellus Shale")
+  text(-0.204, -0.732, "Denver-Julesburg Basin")
+  text(-0.191, -0.719, "Duvernay Formation")
   # Add legend
   legend("topright", c("Source Water\nor Injected Fluids", "Produced Water"), pch = c(21, 21), pt.bg = c("#ffffffa0", "#df536ba0"), pt.cex = c(1.4, 1.7), lwd = 2, lty = NA)
-  label.figure("d", cex = 1.5, xfrac = 0.03, font = 2)
+  label.figure("D", cex = 1.5, xfrac = 0.03, font = 2)
 
   if(pdf) dev.off()
 

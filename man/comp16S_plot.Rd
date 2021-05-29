@@ -16,7 +16,7 @@ Functions to plot compositional metrics (\ZC and \nH2O) for inferred microbial c
     pch = NULL, hline = NULL)
   plotcomp(study, cn = FALSE, identify = FALSE, title = TRUE,
     xlim = NULL, ylim = NULL, plot.it = TRUE, points = TRUE, lines = FALSE,
-    lineage = NULL, pch.up = 21, pch.down = 1)
+    lineage = NULL, pch.up = 21, pch.down = 1, pval = TRUE)
   addhull(x, y, basecol, outline = FALSE, ...)
   groupcomp(study = "XDZ+17", metric = "nH2O", rank = "domain",
     pch.up = 24, pch.down = 21, minpercent = 2, xlim = NULL, ylim = NULL,
@@ -41,6 +41,7 @@ Functions to plot compositional metrics (\ZC and \nH2O) for inferred microbial c
   \item{lineage}{character, restrict plot to this taxonomic lineage}
   \item{pch.up}{numeric, symbol for samples in \dQuote{up-expressed} group}
   \item{pch.down}{numeric, symbol for samples in \dQuote{down-expressed} group}
+  \item{pval}{logical, show log10 of p-value in axis labels?}
   \item{x}{x values}
   \item{y}{y values}
   \item{basecol}{color used for hull lines}

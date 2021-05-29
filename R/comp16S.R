@@ -622,7 +622,7 @@ taxacomp <- function(which = c("Bacteria", "Archaea"), xlim = NULL, ylim = NULL,
 
 # Plot compositional metrics for all samples in a study 20200901
 plotcomp <- function(study, cn = FALSE, identify = FALSE, title = TRUE, xlim = NULL, ylim = NULL,
-  plot.it = TRUE, points = TRUE, lines = FALSE, lineage = NULL, pch.up = 21, pch.down = 1) {
+  plot.it = TRUE, points = TRUE, lines = FALSE, lineage = NULL, pch.up = 21, pch.down = 1, pval = TRUE) {
   # Get amino acid composition for samples
   mdat <- getmdat(study)
   RDP <- getRDP(study, cn = cn, mdat = mdat, lineage = lineage)
@@ -683,13 +683,13 @@ plotcomp <- function(study, cn = FALSE, identify = FALSE, title = TRUE, xlim = N
   # Add axis labels
   if(plot.it) {
     # Make formatted axis labels
-    if(is.na(p.ZC)) xlab <- canprot::cplab$ZC else {
+    if(is.na(p.ZC) | !pval) xlab <- canprot::cplab$ZC else {
       # Make log10 p-value bold if p-value is less than 0.05
       log10p.ZC <- formatC(log10(p.ZC), 1, format = "f")
       if(p.ZC < 0.05) xlab <- bquote(.(canprot::cplab$ZC[[1]]) ~ "(" * bold(.(log10p.ZC)) * ")")
       else xlab <- bquote(.(canprot::cplab$ZC[[1]]) ~ "(" * .(log10p.ZC) * ")")
     }
-    if(is.na(p.nH2O)) ylab <- canprot::cplab$nH2O else {
+    if(is.na(p.nH2O) | !pval) ylab <- canprot::cplab$nH2O else {
       log10p.nH2O <- formatC(log10(p.nH2O), 1, format = "f")
       if(p.nH2O < 0.05) ylab <- bquote(.(canprot::cplab$nH2O[[1]]) ~ "(" * bold(.(log10p.nH2O)) * ")")
       else ylab <- bquote(.(canprot::cplab$nH2O[[1]]) ~ "(" * .(log10p.nH2O) * ")")
