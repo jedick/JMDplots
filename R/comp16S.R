@@ -367,7 +367,7 @@ getmap <- function(study, RDP = NULL, lineage = NULL) {
     # 20200920 Lots of Escherichia in urine [WZZ+18]
     "genus_Escherichia/Shigella" = "genus_Escherichia",
     "phylum_Cyanobacteria/Chloroplast" = "phylum_Cyanobacteria",
-    # 20200924 Looking at [MPB+17]
+    # 20200924 Manus Basin [MPB+17]
     "genus_Marinimicrobia_genera_incertae_sedis" = "species_Candidatus Marinimicrobia bacterium",
     # 20200929 Unclassified Cyanobacteria are just Cyanobacteria
     "class_Cyanobacteria" = "phylum_Cyanobacteria",
@@ -377,11 +377,25 @@ getmap <- function(study, RDP = NULL, lineage = NULL) {
     # 20210526 NCBI taxonomy no longer has an Actinobacteria "class"
     "class_Actinobacteria" = "phylum_Actinobacteria",
     "order_Rhizobiales" = "order_Hyphomicrobiales",
+    # 20210530 Acidobacteria
+    "genus_Gp1" = "genus_Acidobacterium",
+    "genus_Gp6" = "genus_Luteitalea",
+    # 20210530 Cyanobacteria
+    "genus_GpI" = "genus_Nostoc",
+    "genus_GpIIa" = "genus_Synechococcus",
+    "genus_GpVI" = "genus_Pseudanabaena",
+    "family_Family II" = "family_Synechococcaceae",
 
-    ## 20200922 Suda et al., 2002 doi:10.1099/00207713-52-5-1577
-    #"genus_GpIIa" = "species_Planktothrix agardhii",
-    # 20200929 not used [BGPF13]
+    ## NOT USED
+
+    # 20200929 Yellowstone [BGPF13]
+    # Not used because there's not much information about this group
     #"genus_Armatimonadetes_gp7" = "phylum_Armatimonadetes",
+
+    # 20210530 Marcellus Shale [CHM+14]
+    # https://lpsn.dsmz.de/family/arcobacteraceae
+    # Not used because this causes a large low-ZC deviation in Blue Hole 100m sample
+    #"family_Arcobacteraceae" = "family_Campylobacteraceae",
 
   NA_character_)
   iswitch <- !is.na(NCBIgroups)
@@ -453,7 +467,9 @@ getmetrics <- function(study, cn = FALSE, mdat = NULL, RDP = NULL, map = NULL, l
   igenusSparto <- RDP$rank == "genus" & RDP$name == "Spartobacteria_genera_incertae_sedis"
   iclassActino <- RDP$rank == "class" & RDP$name == "Actinobacteria"
   igenusMarini <- RDP$rank == "genus" & RDP$name == "Marinimicrobia_genera_incertae_sedis"
-  equalrank <- equalrank[!(iclassCyano | igenusSparto | iclassActino | igenusMarini)]
+  igenusGpI <- RDP$rank == "genus" & RDP$name == "GpI"
+  igenusGpIIa <- RDP$rank == "genus" & RDP$name == "GpIIa"
+  equalrank <- equalrank[!(iclassCyano | igenusSparto | iclassActino | igenusMarini | igenusGpI | igenusGpIIa)]
   stopifnot(all(equalrank))
 
   # Get classification matrix (rows = taxa, columns = samples)
@@ -522,6 +538,24 @@ taxacomp <- function(which = c("Bacteria", "Archaea"), xlim = NULL, ylim = NULL,
               "Acidithiobacillia", "Hydrogenophilalia", "Oligoflexia")
     pch <- rep(21:23, 3)
     col <- seq_along(taxa)
+    if(is.null(ylim)) ylim <- c(-0.77, -0.71)
+  }
+
+  # Acidobacteria 20210529
+  if(identical(which, "Acidobacteria")) {
+    taxa <- c("Acidobacteriia", "Blastocatellia", "Holophagae", "Thermoanaerobaculia", "Vicinamibacteria")
+    pch <- c(21, 22, 23, 21, 22)
+    col <- seq_along(taxa)
+  }
+
+  # Cyanobacteria 20210529
+  if(identical(which, "Cyanobacteria")) {
+    taxa <- c("Synechococcales", "Nostocales", "Oscillatoriales", "Chroococcales", 
+      "Pleurocapsales", "Chroococcidiopsidales", "Gloeobacterales", 
+      "Spirulinales", "Gloeoemargaritales")
+    pch <- rep(21:23, 3)
+    col <- seq_along(taxa)
+    if(is.null(xlim)) xlim <- c(-0.19, -0.13)
     if(is.null(ylim)) ylim <- c(-0.77, -0.71)
   }
 

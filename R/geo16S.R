@@ -313,8 +313,8 @@ geo16S4 <- function(pdf = FALSE) {
     mdat = mdat, RDP = RDP, map = map
   )
   title("Manus Basin")
-  text(40, -0.154, "   < 10 \u00B0C", font = 2)
-  text(10, -0.154, "T", font = 4)
+  text(40, -0.1545, "   < 10 \u00B0C", font = 2)
+  text(10, -0.1545, "T", font = 4)
   text(40, -0.186, "   > 10 \u00B0C", font = 2)
   text(10, -0.186, "T", font = 4)
   p <- groupcomp("MPB+17", "ZC", "phylum", pch.up = 23, pch.down = 21, ylim = c(-0.23, -0.13),
@@ -324,7 +324,7 @@ geo16S4 <- function(pdf = FALSE) {
   title(paste0("Phylum (", round(p), "% of total)"))
   p <- groupcomp("MPB+17", "ZC", "class", pch.up = 23, pch.down = 21, ylim = c(-0.23, -0.13),
     xadj = c(Flavobacteriia = -0.17, Gammaproteobacteria = 0.2),
-    yadj = c(Flavobacteriia = 0, Gammaproteobacteria = 1.7),
+    yadj = c(Flavobacteriia = 0.1, Gammaproteobacteria = 1.7),
     mdat = mdat, RDP = RDP, map = map
   )
   title(paste0("Class (", round(p), "% of total)"))
@@ -347,17 +347,17 @@ geo16S4 <- function(pdf = FALSE) {
     mdat = mdat, RDP = RDP, map = map
   )
   title("Baltic Sea")
-  text(40, -0.743, "PSU < 6", font = 2)
+  text(40, -0.741, "PSU < 6", font = 2)
   text(40, -0.753, "PSU > 20", font = 2)
   p <- groupcomp("HLA+16", "nH2O", "phylum", pch.up = 24, pch.down = 21, ylim = c(-0.78, -0.71),
-    xadj = c(Proteobacteria = -0.2, Planctomycetes = 0.1),
-    yadj = c(Planctomycetes = 1.8),
+    xadj = c(Proteobacteria = -0.2, Planctomycetes = 0.1, "Cyanobacteria/Chloroplast" = 0.35),
+    yadj = c(Planctomycetes = 1.8, "Cyanobacteria/Chloroplast" = 2.5),
     mdat = mdat, RDP = RDP, map = map
   )
   title(paste0("Phylum (", round(p), "% of total)"))
   p <- groupcomp("HLA+16", "nH2O", "class", pch.up = 24, pch.down = 21, ylim = c(-0.78, -0.71),
-    xadj = c(Acidimicrobiia = 0.5, Gammaproteobacteria = 0.4, Flavobacteriia = -0.1, Cyanobacteria = 0.05, Verrucomicrobiae = -0.25),
-    yadj = c(Acidimicrobiia = -1, Alphaproteobacteria = -0.6, Cyanobacteria = -0.7, Gammaproteobacteria = 1.6, Verrucomicrobiae = 1.5, Flavobacteriia = 1),
+    xadj = c(Acidimicrobiia = 0.5, Gammaproteobacteria = 0.4, Flavobacteriia = -0.1, Verrucomicrobiae = -0.25, Betaproteobacteria = 0.25),
+    yadj = c(Acidimicrobiia = -1, Alphaproteobacteria = -0.6, Gammaproteobacteria = 1.6, Verrucomicrobiae = 1.5, Flavobacteriia = 1, Betaproteobacteria = 2.5),
     mdat = mdat, RDP = RDP, map = map
   )
   title(paste0("Class (", round(p), "% of total)"))
@@ -396,11 +396,11 @@ geo16S5 <- function(pdf = FALSE) {
   legend("topleft", c("MSA+", "MSA-"), pch = c(21, 1), pt.bg = c(2, 1), bg = "white", title = "Northwestern Pennsylvania")
   label.figure("A", cex = 1.5, xfrac = 0.03, font = 2)
 
-  ## Plot C: Comparison of different studies on Pennsylvania Streams 20210327
+  ## Plot B: Comparison of different studies on Pennsylvania Streams 20210327
 
   studies <- c("UKD+18.water_2014", "UKD+18.sediment_2014", "CUN+18", "MMA+20_spring", "MMA+20_fall")
   # Start plot
-  plot(c(-0.15, -0.138), c(-0.744, -0.732), type = "n", xlab = cplab$ZC, ylab = cplab$nH2O)
+  plot(c(-0.148, -0.138), c(-0.744, -0.732), type = "n", xlab = cplab$ZC, ylab = cplab$nH2O)
   pch <- 21:25
   # Loop over studies
   for(i in 1:5) {
@@ -410,20 +410,20 @@ geo16S5 <- function(pdf = FALSE) {
     points(mean$ZC.up, mean$nH2O.up, pch = pch[i], cex = 1.8, lwd = 2, bg = "#df536ba0")
   }
   # Add labels
-  text(-0.1448, -0.736, "NW PA\nwater")
-  text(-0.1475, -0.7410, "NW PA\nsediment")
-  text(-0.1394, -0.7379, "NE PE\nsediment")
-  text(-0.1416, -0.7413, "PASF water (spring)")
-  text(-0.1432, -0.7435, "PASF water (fall)")
+  text(-0.1443, -0.736, "NW PA\nwater")
+  text(-0.1466, -0.7422, "NW PA\nsediment")
+  text(-0.1390, -0.7379, "NE PE\nsediment")
+  text(-0.1410, -0.7417, "PASF water (spring)")
+  text(-0.1420, -0.7431, "PASF water (fall)")
   # Add legend
-  legend("topleft", c("Lowest Disturbance", "Highest Disturbance"), pch = c(21, 21), pt.bg = c("#ffffffa0", "#df536ba0"), pt.cex = c(1.4, 1.7), lwd = 2, lty = NA)
+  legend("topleft", c("Lowest disturbance", "Highest disturbance"), pch = c(21, 21), pt.bg = c("#ffffffa0", "#df536ba0"), pt.cex = c(1.4, 1.7), lwd = 2, lty = NA)
   label.figure("B", cex = 1.5, xfrac = 0.03, font = 2)
 
   ## Plots C-D: Comparison of different studies on produced water 20210330
 
   # Panel C: Cluff et al., 2014
   plotcomp("CHM+14", title = FALSE, pval = FALSE)
-  legend("topright", c("Injected Fluids (day 0)", "Produced Water (day 49 and after)"),
+  legend("topright", c("Injected fluids (day 0)", "Produced water (day 49 and after)"),
          pch = c(21, 21), pt.bg = c("white", 2), bg = "white", title = "Marcellus Shale")
   box()
   label.figure("C", cex = 1.5, xfrac = 0.03, font = 2)
@@ -445,7 +445,7 @@ geo16S5 <- function(pdf = FALSE) {
   text(-0.204, -0.732, "Denver-Julesburg Basin")
   text(-0.191, -0.719, "Duvernay Formation")
   # Add legend
-  legend("topright", c("Source Water\nor Injected Fluids", "Produced Water"), pch = c(21, 21), pt.bg = c("#ffffffa0", "#df536ba0"), pt.cex = c(1.4, 1.7), lwd = 2, lty = NA)
+  legend("topright", c("Source water\nor injected fluids", "Produced water"), pch = c(21, 21), pt.bg = c("#ffffffa0", "#df536ba0"), pt.cex = c(1.4, 1.7), lwd = 2, lty = NA)
   label.figure("D", cex = 1.5, xfrac = 0.03, font = 2)
 
   if(pdf) dev.off()

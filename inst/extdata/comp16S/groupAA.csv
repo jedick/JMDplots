@@ -1,4 +1,5 @@
 protein,organism,ref,abbrv,chains,Ala,Cys,Asp,Glu,Phe,Gly,His,Ile,Lys,Leu,Met,Asn,Pro,Gln,Arg,Ser,Thr,Val,Trp,Tyr
+species,Luteitalea pratensis,1,,1,45.6,2.7,20.3,17.8,12.1,30.8,7.8,14.2,7.8,35.8,7.3,8,20.5,11.7,29.3,19.1,21.6,30.3,5.5,8
 species,Candidatus Marinimicrobia bacterium,1,,1,31,1,19.2,16.8,20,29.8,5.8,37,16.2,46.2,12.2,18.8,16.5,11.5,24,30,18,25.8,5,13.5
 genus,Azorhizobium,5,Xanthobacteraceae,1,44.2,2.6,17.4,17.3,11.8,28.7,6.3,15.3,9.5,34.1,7.6,7.6,18.1,9.7,23,16.8,17.7,25.5,4,6.9
 genus,Buchnera,1,Erwiniaceae,1,13.7,4.2,13.5,16.6,17,17.2,7,39.9,34.4,32.6,7,25.1,9.7,10.7,11.7,23.4,15,15.4,2.9,12.6

@@ -99,7 +99,7 @@ mkAA <- function(ranks = c("genus", "family", "order", "class", "phylum", "super
 
     if(rank == "genus") {
       # Add individual taxids that are used for RDP-NCBI mappings 20200922
-      addspecies <- refseq$ref %in% c("Candidatus Marinimicrobia bacterium")
+      addspecies <- refseq$ref %in% c("Candidatus Marinimicrobia bacterium", "Luteitalea pratensis")
       adds <- refseq[addspecies, ]
       adds$organism <- adds$ref
       adds$ref <- 1
@@ -127,9 +127,9 @@ mkmetrics <- function() {
   # Build output data frame; rename columns for better readability
   out <- data.frame(rank = AA$protein, group = AA$organism, ntaxa = AA$ref, parent = AA$abbrv, nH2O = NA, ZC = NA, nC = NA)
   # Calculate metrics
-  out$nH2O <- canprot::H2OAA(AA)
-  out$ZC <- canprot::ZCAA(AA)
-  out$nC <- CAA(AA)
+  out$nH2O <- round(canprot::H2OAA(AA), 6)
+  out$ZC <- round(canprot::ZCAA(AA), 6)
+  out$nC <- round(CAA(AA), 6)
   write.csv(out, "RefSeq_metrics.csv", row.names = FALSE, quote = FALSE)
 }
 

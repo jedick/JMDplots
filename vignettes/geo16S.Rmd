@@ -63,7 +63,7 @@ ZC <- "<i>Z</i><sub>C</sub>"
 
 This vignette runs the code to make the plots from the following paper:
 
-> Dick JM, Tan J. 2021. A chemical representation of microbial proteomes links community composition to global and local redox gradients. Submitted manuscript.
+> Dick JM, Tan J. 2021. A chemical link between redox conditions and microbial community composition. Submitted manuscript.
 
 This vignette was compiled on `r Sys.Date()` with **[JMDplots](https://github.com/jedick/JMDplots)** `r packageDescription("JMDplots")$Version` and **[CHNOSZ](http://chnosz.net)** `r packageDescription("CHNOSZ")$Version`.
 
