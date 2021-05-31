@@ -28,16 +28,20 @@ Plots from the paper by Dick and Tan (2021).
 This table gives a brief description of each plotting function.
 
 \tabular{ll}{
-  \code{geo16S1} \tab Chemical compositions of taxonomic groups \cr
-  \code{geo16S2} \tab Natural environment datasets \cr
-  \code{geo16S3} \tab Stratified lakes and seawater \cr
-  \code{geo16S4} \tab Compositional differences at different taxonomic levels \cr
-  \code{geo16S5} \tab Shale gas datasets \cr
+  \code{geo16S1} \tab Distinct chemical compositions of proteomes of major taxonomic groups \cr
+  \code{geo16S2} \tab Inferred community proteomes from different environments have distinct chemical signatures \cr
+  \code{geo16S3} \tab Lower carbon oxidation state is tied to oxygen depletion in water columns \cr
+  \code{geo16S4} \tab Changes of abundance and chemical composition for individual taxonomic groups \cr
+  \code{geo16S5} \tab Decreased carbon oxidation state of inferred proteomes for communities affected by unconventional oil and gas extraction \cr
 }
 
 For \code{geo16S3}, the \code{plot.it} argument can be used to prevent plotting, and instead return the \ZC and \nH2O values for all the points in the plot.
 This is used by \code{code16S2} to make the convex hull for the datasets plotted by \code{geo16S3}.
 
+}
+
+\references{
+Dick, J. M. and Tan, J. (2021) Proteomic evidence for a chemical link between redox conditions and microbial community composition. Submitted manuscript.
 }
 
 \examples{

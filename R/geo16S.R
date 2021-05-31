@@ -62,7 +62,7 @@ geo16S2 <- function(pdf = FALSE) {
   title("Black Sea", font.main = 1)
   addhull(p2$ZC, p2$nH2O, "blue", TRUE, lty = 2)
   pointfun(p2)
-  legend <- c("oxic", "suboxic", "euxinic")
+  legend <- c("Oxic", "Suboxic", "Euxinic")
   legend("bottomright", legend, pch = c(24, 20, 25), pt.bg = c(4, 1, 2), bg = "white")
 
   p3 <- plotcomp("HLA+16", title = FALSE, points = FALSE)
@@ -78,8 +78,9 @@ geo16S2 <- function(pdf = FALSE) {
   title("Manus Basin submarine vents", font.main = 1)
   addhull(p4$ZC, p4$nH2O, 2, TRUE, lty = 2)
   pointfun(p4)
-  legend <- as.expression(c(quote(italic(T)~"< 10 \u00B0C"), quote(italic(T)~"> 10 \u00B0C"), "rock", "fauna"))
-  legend("bottomleft", legend, pch = c(21, 23, 20, 8), col = c(1, 1, 1, "yellow4"), pt.bg = c(4, 2, NA, NA), bg = "white")
+  legend <- as.expression(c(quote(italic(T)~"< 50 \u00B0C"), quote(italic(T)~"> 50 \u00B0C")))
+  legend("bottomleft", legend, pch = c(21, 23), col = c(1, 1), pt.bg = c(4, 2), bg = "white", title = "Water")
+  legend("bottomright", c("Rock", "Fauna"), pch = c(20, 8), col = c(1, "yellow4"), bg = "white")
 
   p5 <- plotcomp("ZLM+16", title = FALSE, points = FALSE)
 #  title("Tibetan Plateau lakes\nZhong et al., 2016", font.main = 1)
@@ -94,7 +95,7 @@ geo16S2 <- function(pdf = FALSE) {
   title("Lake Fryxell oxygen gradient", font.main = 1)
   addhull(p6$ZC, p6$nH2O, "tan1", TRUE)
   pointfun(p6)
-  legend <- c("oxic", "transition", "anoxic")
+  legend <- c("Oxic", "Transition", "Anoxic")
   legend("bottomright", legend, pch = c(24, 20, 25), pt.bg = c(4, 1, 2), bg = "white")
 
   p7 <- plotcomp("HCW+13", title = FALSE, points = FALSE, ylim = c(-0.765, -0.7545))
@@ -103,7 +104,7 @@ geo16S2 <- function(pdf = FALSE) {
   addhull(p7$ZC, p7$nH2O, "tan1", TRUE, lty = 2)
   pointfun(p7)
   text(c(-0.1516, -0.1571, -0.1576), c(-0.7551, -0.7608, -0.7649), c("0-1 mm", "1-2 mm", "2-3 mm"))
-  legend <- c("photic/oxic", "low sulfide", "high sulfide")
+  legend <- c("Photic/oxic", "Low sulfide", "High sulfide")
   legend("topleft", legend, pch = c(24, 20, 25), pt.bg = c(4, 1, 2), bg = "white")
 
   p8 <- plotcomp("XDZ+17", title = FALSE, points = FALSE)
@@ -111,7 +112,7 @@ geo16S2 <- function(pdf = FALSE) {
   title("Qarhan Salt Lake\nand normal soils", font.main = 1)
   addhull(p8$ZC, p8$nH2O, "turquoise3", TRUE)
   pointfun(p8)
-  legend <- c("normal", "saline")
+  legend <- c("Normal", "Saline")
   legend("topright", legend, pch = c(24, 21), pt.bg = c(3, 4), bg = "white")
 
   # Make an index plot
@@ -309,33 +310,32 @@ geo16S4 <- function(pdf = FALSE) {
 
   # Make plots for Manus Basin
   p <- groupcomp("MPB+17", "ZC", "domain", pch.up = 23, pch.down = 21, ylim = c(-0.23, -0.13), xlim = c(0, 100),
-    xadj = c(Bacteria = 1), yadj = c(Bacteria = -3),
+    xadj = c(Bacteria = 1), yadj = c(Bacteria = -5),
     mdat = mdat, RDP = RDP, map = map
   )
   title("Manus Basin")
-  text(40, -0.1545, "   < 10 \u00B0C", font = 2)
-  text(10, -0.1545, "T", font = 4)
-  text(40, -0.186, "   > 10 \u00B0C", font = 2)
-  text(10, -0.186, "T", font = 4)
+  text(40, -0.157, "   < 50 \u00B0C", font = 2)
+  text(10, -0.157, "T", font = 4)
+  text(40, -0.202, "   > 50 \u00B0C", font = 2)
+  text(10, -0.202, "T", font = 4)
   p <- groupcomp("MPB+17", "ZC", "phylum", pch.up = 23, pch.down = 21, ylim = c(-0.23, -0.13),
-    xadj = c(Proteobacteria = 1, Bacteroidetes = -0.18),
+    xadj = c(Proteobacteria = 1, Bacteroidetes = -0.18, Campilobacterota = 0.4),
+    yadj = c(Bacteroidetes = 1, Campilobacterota = -3),
     mdat = mdat, RDP = RDP, map = map
   )
   title(paste0("Phylum (", round(p), "% of total)"))
   p <- groupcomp("MPB+17", "ZC", "class", pch.up = 23, pch.down = 21, ylim = c(-0.23, -0.13),
-    xadj = c(Flavobacteriia = -0.17, Gammaproteobacteria = 0.2),
-    yadj = c(Flavobacteriia = 0.1, Gammaproteobacteria = 1.7),
+    xadj = c(Flavobacteriia = -0.17, Gammaproteobacteria = 0.2, Campylobacteria = 0.4),
+    yadj = c(Flavobacteriia = 1.2, Gammaproteobacteria = 1.7, Campylobacteria = -3),
     mdat = mdat, RDP = RDP, map = map
   )
   title(paste0("Class (", round(p), "% of total)"))
   p <- groupcomp("MPB+17", "ZC", "genus", pch.up = 23, pch.down = 21, ylim = c(-0.23, -0.13), minpercent = 1,
-    xadj = c(Alteromonas = -0.07, Sulfurimonas = 1.05, Alcanivorax = -0.9, Halomonas = -0.55, Thiogranum = 0.17, Sulfurovum = 0.5, Thalassospira = 0.5, Pseudomonas = -0.1),
-    yadj = c(Sulfurimonas = 1.2, Pseudomonas = 1.5, Thalassospira = 3.2, Sulfurovum = -1, Thiogranum = 5.7, Marinimicrobia_genera_incertae_sedis
- = -0.8),
+    xadj = c(Alteromonas = 0.1, Sulfurimonas = 1.05, Alcanivorax = -1, Halomonas = -0.65, Thiogranum = 0.17, Sulfurovum = -0.1, Pseudomonas = 0.1, Pseudoalteromonas = -0.25, Acinetobacter = 0.7),
+    yadj = c(Sulfurimonas = 1.5, Pseudomonas = 1.8, Sulfurovum = -0.5, Thiogranum = 5, Marinimicrobia_genera_incertae_sedis = -0.8, Alteromonas = 1.8, Acinetobacter = 1.5),
     mdat = mdat, RDP = RDP, map = map
   )
-  lines(c(0.6, 1.3), c(-0.1508, -0.145))
-  lines(c(0, 0), c(-0.1545, -0.1425))
+  lines(c(0, 0), c(-0.1525, -0.1425))
   title(paste0("Genus (", round(p), "% of total)"))
 
   # Make plots for Baltic Sea

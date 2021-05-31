@@ -51,8 +51,12 @@ getmdat <- function(study, dropNA = TRUE) {
     col <- sapply(mdat$cohort, switch, Bacteria = 5, Archaea = 6)
   }
   if(study == "MPB+17") { # Manus Basin
-    pch <- sapply(mdat$type, switch, marine = 21, hydrothermal = 23, fauna = 8, rock = 20, NA)
-    col <- sapply(mdat$type, switch, marine = 4, hydrothermal = 2, fauna = "yellow4", rock = 1, NA)
+    type <- mdat$type
+    iwater <- type == "water/fluid"
+    type[iwater][mdat$T[iwater] > 50] <- "highT"
+    type[iwater][mdat$T[iwater] < 50] <- "lowT"
+    pch <- sapply(type, switch, lowT = 21, highT = 23, "fauna surface" = 8, "rock/chimney" = 20, NA)
+    col <- sapply(type, switch, lowT = 4, highT = 2, "fauna surface" = "yellow4", "rock/chimney" = 1, NA)
   }
   if(study == "SVH+19") { # Black Sea
     pch <- sapply(mdat$type, switch, oxic = 24, suboxic = 20, euxinic = 25, NA)
