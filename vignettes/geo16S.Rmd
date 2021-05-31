@@ -1,5 +1,5 @@
 ---
-title: "Geobiochemistry of 16S sequences (2021)"
+title: "Geobiochemistry inferred from 16S gene sequences (2021)"
 output: 
   rmarkdown::html_vignette:
     mathjax: null
@@ -76,23 +76,34 @@ library(JMDplots)
 geo16S1()
 ```
 
+**Data source:** NCBI Reference Sequence (RefSeq) database [@OWB+16]. **Numbered symbols**: (1) Halobacteria, (2) Nanohaloarchaea, (3) Methanococci, (4) Clostridia.
+
 ## Inferred community proteomes from different environments have distinct chemical signatures (Figure 2)
 ```{r geo16S2, message = FALSE, results = "hide", out.width='100%', fig.width = 9, fig.height = 7, out.extra='class="full-width"', pngquant = pngquant, dpi = 100}
 geo16S2()
 ```
+
+**Data sources:** Guerrero Negro mat [@HCW+13], Yellowstone hot springs [@BGPF13], Baltic Sea water [@HLA+16], Lake Fryxell mat [@JHM+16], Tibetan Plateau lakes [@ZLM+16], Manus Basin vents [@MPB+17], Qarhan Salt Lake soils [@XDZ+17], Black Sea water [@SVH+19].
 
 ## Lower carbon oxidation state is tied to oxygen depletion in water columns (Figure 3)
 ```{r geo16S3, message = FALSE, results = "hide", out.width='100%', fig.width = 7, fig.height = 9, pngquant = pngquant}
 geo16S3()
 ```
 
+**Data sources:** Black Sea [@SVH+19], Swiss lakes (Lake Zug and Lake Lugano) [@MZG+20], Eastern Tropical North Pacific (ETNP) [@GBL+15], Sansha Yongle Blue Hole [@HXZ+20], Ursu Lake [@BCA+20].
+
 ## Changes of abundance and chemical composition for individual taxonomic groups (Figure 4)
 ```{r geo16S4, message = FALSE, results = "hide", out.width='100%', fig.width = 10.5, fig.height = 7, out.extra = 'class="full-width"', pngquant = pngquant, dpi = 100}
 geo16S4()
 ```
+
+**Data sources:** Manus Basin vents [@MPB+17], Baltic Sea water [@HLA+16].
 
 ## Decreased carbon oxidation state of inferred proteomes for communities affected by unconventional oil and gas extraction (Figure 5)
 ```{r geo16S5, message = FALSE, results = "hide", out.width='100%', fig.width = 9, fig.height = 6, pngquant = pngquant}
 geo16S5()
 ```
 
+**Data sources:** Northwestern Pennsylvania stream water and sediment [@UKD+18], Northeastern Pennslvania stream sediment [@CUN+18], Pennsylvania State Forests stream water in spring and fall [@MMA+20], Marcellus Shale [@CHM+14], Denver--Julesburg Basin [@HRR+18], Duvernay Formation [@ZLF+19].
+
+## References
