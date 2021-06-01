@@ -73,6 +73,8 @@ getmdat <- function(study, dropNA = TRUE) {
   if(study == "HLA+16") { # Baltic Sea
     #pch <- sapply(mdat$type, switch, Oligohaline = 24, Mesohaline = 20, Marine = 21)
     #col <- sapply(mdat$type, switch, Oligohaline = 3, Mesohaline = 1, Marine = 4)
+    # Use near-surface samples 20210601
+    mdat <- mdat[mdat$depth <= 20, ]
     type <- rep("moderate", nrow(mdat))
     type[mdat$salinity < 6] <- "low"
     type[mdat$salinity > 20] <- "high"
@@ -309,7 +311,7 @@ getRDP <- function(study, cn = FALSE, mdat = NULL, lineage = NULL) {
   # Remove classifications at root and domain level (Bacteria and Archaea),
   # and Chlorophyta, Chloroplast and Bacillariophyta 20200922
   RDPgroups <- paste(out$rank, out$name, sep = "_")
-  rmgroups <- c("rootrank_Root", "domain_Bacteria", "domain_Archaea", "genus_Chlorophyta", "class_Chloroplast", "genus_Bacillariophyta")
+  rmgroups <- c("rootrank_Root", "domain_Bacteria", "domain_Archaea", "class_Chloroplast", "family_Chloroplast", "genus_Chlorophyta", "genus_Bacillariophyta")
   isrm <- RDPgroups %in% rmgroups
   if(any(isrm)) {
     irm <- which(isrm)
@@ -537,6 +539,16 @@ taxacomp <- function(which = c("Bacteria", "Archaea"), xlim = NULL, ylim = NULL,
   }
 
   # Proteobacteria 20200925
+  # How to count the representatives in each proteobacterial class:
+  #> taxa <- read.csv(system.file("extdata/refseq/taxid_names.csv.xz", package = "JMDplots"), as.is = TRUE)
+  #> sort(table(na.omit(taxa$class[taxa$phylum == "Proteobacteria"])), decreasing = TRUE)
+  #
+  #  Gammaproteobacteria   Alphaproteobacteria    Betaproteobacteria 
+  #                 8269                  5667                  2456 
+  #Epsilonproteobacteria   Deltaproteobacteria           Oligoflexia 
+  #                  451                   441                    32 
+  #    Acidithiobacillia     Hydrogenophilalia    Zetaproteobacteria 
+  #                   20                    11                    11 
   if(identical(which, "Proteobacteria")) {
     taxa <- c("Alphaproteobacteria", "Betaproteobacteria", "Gammaproteobacteria", "Deltaproteobacteria", "Epsilonproteobacteria", "Zetaproteobacteria",
               "Acidithiobacillia", "Hydrogenophilalia", "Oligoflexia")
@@ -546,13 +558,23 @@ taxacomp <- function(which = c("Bacteria", "Archaea"), xlim = NULL, ylim = NULL,
   }
 
   # Acidobacteria 20210529
+  #> sort(table(na.omit(taxa$class[taxa$phylum == "Acidobacteria"])), decreasing = TRUE)
+  #     Acidobacteriia      Blastocatellia          Holophagae Thermoanaerobaculia    Vicinamibacteria 
+  #                 68                  12                   5                   1                   1 
   if(identical(which, "Acidobacteria")) {
     taxa <- c("Acidobacteriia", "Blastocatellia", "Holophagae", "Thermoanaerobaculia", "Vicinamibacteria")
     pch <- c(21, 22, 23, 21, 22)
     col <- seq_along(taxa)
   }
 
-  # Cyanobacteria 20210529
+  # Cyanobacteria **orders** 20210529
+  #> sort(table(na.omit(taxa$order[taxa$phylum == "Cyanobacteria"])), decreasing = TRUE)
+  #      Synechococcales            Nostocales       Oscillatoriales 
+  #                  323                   228                   121 
+  #        Chroococcales        Pleurocapsales Chroococcidiopsidales 
+  #                   49                    13                     9 
+  #      Gloeobacterales          Spirulinales    Gloeoemargaritales 
+  #                    3                     2                     1 
   if(identical(which, "Cyanobacteria")) {
     taxa <- c("Synechococcales", "Nostocales", "Oscillatoriales", "Chroococcales", 
       "Pleurocapsales", "Chroococcidiopsidales", "Gloeobacterales", 
@@ -624,14 +646,15 @@ taxacomp <- function(which = c("Bacteria", "Archaea"), xlim = NULL, ylim = NULL,
     # Label Halobacteria and Nanohaloarchaea 20200930
     thisgroup <- taxa[i]
     if(thisgroup == "Euryarchaeota") {
-      ihalo <- match(c("Halobacteria", "Nanohaloarchaea", "Methanococci"), children$group)
-      dy <- ifelse(which == "majorcellular", -0.0025, -0.005)
-      text(children$ZC[ihalo], children$nH2O[ihalo] + dy, c(1, 2, 3))
+      ihalo <- match(c("Thermococci", "Methanococci", "Archaeoglobi", "Nanohaloarchaea", "Halobacteria"), children$group)
+      dy <- ifelse(which == "majorcellular", 0.0025, 0.005)
+      dx <- c(0, 0, 0, 0.002, 0)
+      text(children$ZC[ihalo] + dx, children$nH2O[ihalo] + dy, c(1, 2, 3, 4, 5))
     }
     # Label Clostridia 20200930
     if(thisgroup == "Firmicutes" & identical(which, "majorcellular")) {
       iclos <- match("Clostridia", children$group)
-      text(children$ZC[iclos], children$nH2O[iclos] + 0.0025, 4)
+      text(children$ZC[iclos], children$nH2O[iclos] + 0.0025, 6)
     }
 #    # Label Pisoniviricetes 20210520
 #    if(thisgroup == "Pisuviricota") {

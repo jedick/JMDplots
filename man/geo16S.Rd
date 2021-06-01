@@ -28,7 +28,7 @@ Plots from the paper by Dick and Tan (2021).
 This table gives a brief description of each plotting function.
 
 \tabular{ll}{
-  \code{geo16S1} \tab Distinct chemical compositions of proteomes of major taxonomic groups \cr
+  \code{geo16S1} \tab Distinct chemical compositions of predicted proteomes of major taxonomic groups \cr
   \code{geo16S2} \tab Inferred community proteomes from different environments have distinct chemical signatures \cr
   \code{geo16S3} \tab Lower carbon oxidation state is tied to oxygen depletion in water columns \cr
   \code{geo16S4} \tab Changes of abundance and chemical composition for individual taxonomic groups \cr
