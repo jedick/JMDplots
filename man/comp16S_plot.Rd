@@ -11,8 +11,8 @@ Functions to plot compositional metrics (\ZC and \nH2O) for inferred microbial c
 }
 
 \usage{
-  taxacomp(which = c("Bacteria", "Archaea"), xlim = NULL, ylim = NULL,
-    col = seq_along(taxa), legend.x = "topleft", identify = FALSE,
+  taxacomp(groups = c("Bacteria", "Archaea"), xlim = NULL, ylim = NULL,
+    col = seq_along(groups), legend.x = "topleft", identify = FALSE,
     pch = NULL, hline = NULL)
   plotcomp(study, cn = FALSE, identify = FALSE, title = TRUE,
     xlim = NULL, ylim = NULL, plot.it = TRUE, points = TRUE, lines = FALSE,
@@ -24,7 +24,7 @@ Functions to plot compositional metrics (\ZC and \nH2O) for inferred microbial c
 }
 
 \arguments{
-  \item{which}{character, names of taxonomic groups to plot}
+  \item{groups}{character, names of taxonomic groups to plot}
   \item{xlim}{numeric, x axis limits}
   \item{ylim}{numeric, y axis limits}
   \item{col}{color for each group}
@@ -61,7 +61,8 @@ Functions to plot compositional metrics (\ZC and \nH2O) for inferred microbial c
 \details{
 
 \code{taxacomp} plots the \ZC and \nH2O of taxonomic groups in RefSeq and their children.
-\code{which} can be the names of one or more taxonomic groups, or one of the following keywords: \samp{majorphyla} (phyla with more than 500 representatives), \samp{majorcellular} (non-viral (cellular) phyla with more than 60 representatives), \samp{Proteobacteria} (proteobacterial classes and their order).
+\code{groups} can be the names of one or more taxonomic groups, or one of the following keywords: \samp{majorphyla} (phyla with more than 500 representatives), \samp{majorcellular} (non-viral (cellular) phyla with more than 60 representatives), \samp{proteobacteria}, \samp{acidobacteria}, or \samp{cyanobacteria} (classes within the indicated phylum and their orders).
+Note that the keywords are all lower-case; use the upper-case name (e.g. \samp{Proteobacteria}) to plot the phylum and its orders.
 
 \code{plotcomp} plots the \ZC and \nH2O of community proteomes inferred by combining taxonomic abundances from 16S rRNA gene sequencing with RefSeq proteomes.
 

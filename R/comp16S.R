@@ -498,19 +498,19 @@ getmetrics <- function(study, cn = FALSE, mdat = NULL, RDP = NULL, map = NULL, l
 ######################
 
 # Make a nH2O-ZC plot for selected taxa and all their children 20200911
-taxacomp <- function(which = c("Bacteria", "Archaea"), xlim = NULL, ylim = NULL,
-  col = seq_along(taxa), legend.x = "topleft", identify = FALSE, pch = NULL, hline = NULL) {
+taxacomp <- function(groups = c("Bacteria", "Archaea"), xlim = NULL, ylim = NULL,
+  col = seq_along(groups), legend.x = "topleft", identify = FALSE, pch = NULL, hline = NULL) {
 
   # Read compositional metrics of all taxa
   datadir <- system.file("extdata/comp16S", package = "JMDplots")
   metrics <- read.csv(file.path(datadir, "RefSeq_metrics.csv"), as.is = TRUE)
   # Default point symbols
-  taxa <- which
+  taxa <- groups
   if(is.null(pch)) pch <- rep(21, length(taxa))
   lty <- 1
 
   # For "majorphyla", get names of phyla with more than 500 representatives
-  if(identical(which, "majorphyla")) {
+  if(identical(groups, "majorphyla")) {
     phyla <- metrics[metrics$rank == "phylum", ]
     phyla <- phyla[phyla$ntaxa > 500, ]
     phyla <- phyla[order(phyla$ntaxa, decreasing = TRUE), ]
@@ -524,7 +524,7 @@ taxacomp <- function(which = c("Bacteria", "Archaea"), xlim = NULL, ylim = NULL,
   }
 
   # "majorcellular" is like "majorphyla" but excludes Viruses
-  if(identical(which, "majorcellular")) {
+  if(identical(groups, "majorcellular")) {
     phyla <- metrics[metrics$rank == "phylum" & metrics$parent != "Viruses", ]
     phyla <- phyla[phyla$ntaxa > 60, ]
     phyla <- phyla[order(phyla$ntaxa, decreasing = TRUE), ]
@@ -549,7 +549,7 @@ taxacomp <- function(which = c("Bacteria", "Archaea"), xlim = NULL, ylim = NULL,
   #                  451                   441                    32 
   #    Acidithiobacillia     Hydrogenophilalia    Zetaproteobacteria 
   #                   20                    11                    11 
-  if(identical(which, "Proteobacteria")) {
+  if(identical(groups, "proteobacteria")) {
     taxa <- c("Alphaproteobacteria", "Betaproteobacteria", "Gammaproteobacteria", "Deltaproteobacteria", "Epsilonproteobacteria", "Zetaproteobacteria",
               "Acidithiobacillia", "Hydrogenophilalia", "Oligoflexia")
     pch <- rep(21:23, 3)
@@ -561,7 +561,7 @@ taxacomp <- function(which = c("Bacteria", "Archaea"), xlim = NULL, ylim = NULL,
   #> sort(table(na.omit(taxa$class[taxa$phylum == "Acidobacteria"])), decreasing = TRUE)
   #     Acidobacteriia      Blastocatellia          Holophagae Thermoanaerobaculia    Vicinamibacteria 
   #                 68                  12                   5                   1                   1 
-  if(identical(which, "Acidobacteria")) {
+  if(identical(groups, "acidobacteria")) {
     taxa <- c("Acidobacteriia", "Blastocatellia", "Holophagae", "Thermoanaerobaculia", "Vicinamibacteria")
     pch <- c(21, 22, 23, 21, 22)
     col <- seq_along(taxa)
@@ -575,7 +575,7 @@ taxacomp <- function(which = c("Bacteria", "Archaea"), xlim = NULL, ylim = NULL,
   #                   49                    13                     9 
   #      Gloeobacterales          Spirulinales    Gloeoemargaritales 
   #                    3                     2                     1 
-  if(identical(which, "Cyanobacteria")) {
+  if(identical(groups, "cyanobacteria")) {
     taxa <- c("Synechococcales", "Nostocales", "Oscillatoriales", "Chroococcales", 
       "Pleurocapsales", "Chroococcidiopsidales", "Gloeobacterales", 
       "Spirulinales", "Gloeoemargaritales")
@@ -604,15 +604,39 @@ taxacomp <- function(which = c("Bacteria", "Archaea"), xlim = NULL, ylim = NULL,
 
   # Loop 1: Get values to plot
   vals <- list()
+  refseq_species <- NULL
+
   for(i in seq_along(taxa)) {
     thisgroup <- taxa[i]
     # Get the compositional metrics for this group
     igroup <- metrics$group == thisgroup
     if(sum(igroup) > 1) warning(paste0("found more than one ", thisgroup, " (", paste(metrics$rank[igroup], collapse = ", "), "); using the first"))
     group <- metrics[which(igroup)[1], ]
-    # Get the compositional metrics for all children
-    ichildren <- metrics$parent == thisgroup
-    children <- metrics[ichildren, ]
+    if(identical(group$rank, "genus")) {
+      # For a genus, look for children (species) in full RefSeq data frame 20210603
+      if(is.null(refseq_species)) {
+        # Read RefSeq amino acid compositions and taxon names
+        refseq <- read.csv(system.file("extdata/refseq/protein_refseq.csv.xz", package = "JMDplots"), as.is = TRUE)
+        alltaxa <- read.csv(system.file("extdata/refseq/taxid_names.csv.xz", package = "JMDplots"), as.is = TRUE)
+        # Keep species-level taxa that have a genus name
+        irefseq <- !is.na(alltaxa$species) & !is.na(alltaxa$genus)
+        refseq_species <- refseq[irefseq, ]
+        # Put genus name in "abbrv" column
+        refseq_species$abbrv <- alltaxa$genus[irefseq]
+        # Keep species with at least 1000 sequences
+        refseq_species <- refseq_species[refseq_species$chains >= 1000, ]
+      }
+      # Find species in this genus and calculate ZC and nH2O
+      ispecies <- refseq_species$abbrv == thisgroup
+      sp.refseq <- refseq_species[ispecies, ]
+      sp.ZC <- ZCAA(sp.refseq)
+      sp.nH2O <- H2OAA(sp.refseq)
+      children <- data.frame(group = sp.refseq$ref, ZC = sp.ZC, nH2O = sp.nH2O)
+    } else {
+      # Get the compositional metrics for all children
+      ichildren <- metrics$parent == thisgroup
+      children <- metrics[ichildren, ]
+    }
     # Store the values to make the plot
     vals[[i]] <- list(group = group, children = children)
 
@@ -647,12 +671,12 @@ taxacomp <- function(which = c("Bacteria", "Archaea"), xlim = NULL, ylim = NULL,
     thisgroup <- taxa[i]
     if(thisgroup == "Euryarchaeota") {
       ihalo <- match(c("Thermococci", "Methanococci", "Archaeoglobi", "Nanohaloarchaea", "Halobacteria"), children$group)
-      dy <- ifelse(which == "majorcellular", 0.0025, 0.005)
+      dy <- ifelse(groups == "majorcellular", 0.0025, 0.005)
       dx <- c(0, 0, 0, 0.002, 0)
       text(children$ZC[ihalo] + dx, children$nH2O[ihalo] + dy, c(1, 2, 3, 4, 5))
     }
     # Label Clostridia 20200930
-    if(thisgroup == "Firmicutes" & identical(which, "majorcellular")) {
+    if(thisgroup == "Firmicutes" & identical(groups, "majorcellular")) {
       iclos <- match("Clostridia", children$group)
       text(children$ZC[iclos], children$nH2O[iclos] + 0.0025, 6)
     }
@@ -665,20 +689,22 @@ taxacomp <- function(which = c("Bacteria", "Archaea"), xlim = NULL, ylim = NULL,
 
   # Add legend
   len <- length(taxa)
-  if(identical(which, "majorcellular")) {
+  if(identical(groups, "majorcellular")) {
     legend("bottomleft", taxa[1:8], pch = pch[1:8], col = col[1:8], pt.bg = col[1:8], cex = 0.9, bg = "white")
     legend("bottomright", taxa[9:len], pch = pch[9:len], col = col[9:len], pt.bg = col[9:len], cex = 0.9, bg = "white")
-  } else if(identical(which, "Proteobacteria")) {
+  } else if(identical(groups, "proteobacteria")) {
     taxa[taxa == "Epsilonproteobacteria"] <- "Epsilonproteobacteria *"
     legend("topright", taxa[1:6], pch = pch[1:6], col = col[1:6], pt.bg = col[1:6], cex = 0.9, bg = "white")
     legend("bottomleft", taxa[7:len], pch = pch[7:len], col = col[7:len], pt.bg = col[7:len], cex = 0.9, bg = "white")
-  } else if(identical(which, "majorphyla")) {
+  } else if(identical(groups, "majorphyla")) {
     legend <- c("Cellular", taxa[1:6], "Viruses", taxa[7:11])
     pch <- c(NA, pch[1:6], NA, pch[7:11])
     col <- c(NA, col[1:6], NA, col[7:11])
     legend("bottomleft", legend, text.font = c(2, 1,1,1,1,1,1, 2, 1,1,1,1,1), pch = pch, col = col, pt.bg = col, cex = 0.9, bg = "white")
   } else if(!is.null(legend.x) & !identical(legend.x, NA)) legend(legend.x, taxa, pch = pch, col = seq_along(taxa), pt.bg = seq_along(taxa), cex = 0.9, bg = "white")
   if(identify) identify(ZC, nH2O, names)
+  # Return values invisibly 20210603
+  invisible(vals)
 }
 
 # Plot compositional metrics for all samples in a study 20200901

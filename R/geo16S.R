@@ -25,7 +25,7 @@ geo16S1 <- function(pdf = FALSE) {
   lines(c(-0.05, -0.015), c(-0.76, -0.81), lty = 2, col = "gray40")
   lines(c(-0.05, -0.015), c(-0.71, -0.68), lty = 2, col = "gray40")
   par(xpd = FALSE)
-  taxacomp("Proteobacteria", legend.x = "topright")
+  taxacomp("proteobacteria", legend.x = "topright")
   title("Proteobacterial classes and their orders", font.main = 1, cex.main = 1.4)
   label.figure("C", font = 2, cex = 1.6)
 
