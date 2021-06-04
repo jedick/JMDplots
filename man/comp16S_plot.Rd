@@ -5,15 +5,17 @@
 \alias{plotcomp}
 \alias{addhull}
 \alias{groupcomp}
+\alias{getrefseq}
 \title{Plot compositional metrics of taxa and community proteomes inferred from 16S rRNA gene sequences}
 \description{
 Functions to plot compositional metrics (\ZC and \nH2O) for inferred microbial community proteomes.
 }
 
 \usage{
+  getrefseq(filterspecies = TRUE)
   taxacomp(groups = c("Bacteria", "Archaea"), xlim = NULL, ylim = NULL,
     col = seq_along(groups), legend.x = "topleft", identify = FALSE,
-    pch = NULL, hline = NULL)
+    pch = NULL, hline = NULL, filterspecies = TRUE)
   plotcomp(study, cn = FALSE, identify = FALSE, title = TRUE,
     xlim = NULL, ylim = NULL, plot.it = TRUE, points = TRUE, lines = FALSE,
     lineage = NULL, pch.up = 21, pch.down = 1, pval = TRUE)
@@ -24,6 +26,7 @@ Functions to plot compositional metrics (\ZC and \nH2O) for inferred microbial c
 }
 
 \arguments{
+  \item{filterspecies}{logical, remove species with > 20000 sequences?}
   \item{groups}{character, names of taxonomic groups to plot}
   \item{xlim}{numeric, x axis limits}
   \item{ylim}{numeric, y axis limits}
@@ -59,6 +62,9 @@ Functions to plot compositional metrics (\ZC and \nH2O) for inferred microbial c
 }
 
 \details{
+
+\code{getrefseq} retrieves amino acid compositions and taxonomic names from the files \code{extdata/refseq/protein_refseq.csv.xz} and \code{extdata/refseq/taxid_names.csv.xz}.
+By default, any species with greater than 20000 reference sequences is omitted; set \code{filterspecies} to FALSE to include all available species.
 
 \code{taxacomp} plots the \ZC and \nH2O of taxonomic groups in RefSeq and their children.
 \code{groups} can be the names of one or more taxonomic groups, or one of the following keywords: \samp{majorphyla} (phyla with more than 500 representatives), \samp{majorcellular} (non-viral (cellular) phyla with more than 60 representatives), \samp{proteobacteria}, \samp{acidobacteria}, or \samp{cyanobacteria} (classes within the indicated phylum and their orders).

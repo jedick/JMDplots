@@ -493,13 +493,33 @@ getmetrics <- function(study, cn = FALSE, mdat = NULL, RDP = NULL, map = NULL, l
   out
 }
 
+# Get amino acid compositions for taxids in RefSeq, excluding
+# super-sequenced species (biased to high ZC/low nH2O) 20210604
+getrefseq <- function(filterspecies = TRUE) {
+  # Read RefSeq amino acid compositions and taxid names
+  refseq <- read.csv(system.file("extdata/refseq/protein_refseq.csv.xz", package = "JMDplots"), as.is = TRUE)
+  taxa <- read.csv(system.file("extdata/refseq/taxid_names.csv.xz", package = "JMDplots"), as.is = TRUE)
+  if(filterspecies) {
+    # Take out species with > 20000 sequences
+    ispecies <- !is.na(taxa$species)
+    isuper <- refseq$chains > 20000
+    isuperspecies <- ispecies & isuper
+    message(paste("getrefseq: removing", sum(isuperspecies), "species with > 20000 sequences"))
+    # Return both the amino acid compositions and taxid names
+    # NOTE: the following genera are completely removed: Buchnera, Sorangium, Dolosigranulum, Enhygromyxa, Ruthenibacterium
+    refseq <- refseq[!isuperspecies, ]
+    taxa <- taxa[!isuperspecies, ]
+  }
+  list(refseq = refseq, taxa = taxa)
+}
+
 ######################
 # Plotting functions #
 ######################
 
 # Make a nH2O-ZC plot for selected taxa and all their children 20200911
 taxacomp <- function(groups = c("Bacteria", "Archaea"), xlim = NULL, ylim = NULL,
-  col = seq_along(groups), legend.x = "topleft", identify = FALSE, pch = NULL, hline = NULL) {
+  col = seq_along(groups), legend.x = "topleft", identify = FALSE, pch = NULL, hline = NULL, filterspecies = TRUE) {
 
   # Read compositional metrics of all taxa
   datadir <- system.file("extdata/comp16S", package = "JMDplots")
@@ -616,8 +636,9 @@ taxacomp <- function(groups = c("Bacteria", "Archaea"), xlim = NULL, ylim = NULL
       # For a genus, look for children (species) in full RefSeq data frame 20210603
       if(is.null(refseq_species)) {
         # Read RefSeq amino acid compositions and taxon names
-        refseq <- read.csv(system.file("extdata/refseq/protein_refseq.csv.xz", package = "JMDplots"), as.is = TRUE)
-        alltaxa <- read.csv(system.file("extdata/refseq/taxid_names.csv.xz", package = "JMDplots"), as.is = TRUE)
+        gr <- getrefseq(filterspecies)
+        refseq <- gr$refseq
+        alltaxa <- gr$taxa
         # Keep species-level taxa that have a genus name
         irefseq <- !is.na(alltaxa$species) & !is.na(alltaxa$genus)
         refseq_species <- refseq[irefseq, ]

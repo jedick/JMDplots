@@ -44,8 +44,10 @@ mkRDP <- function(study) {
 mkAA <- function(ranks = c("genus", "family", "order", "class", "phylum", "superkingdom")) {
 
   # Read RefSeq amino acid compositions and taxon names
-  refseq <- read.csv(system.file("extdata/refseq/protein_refseq.csv.xz", package = "JMDplots"), as.is = TRUE)
-  taxa <- read.csv(system.file("extdata/refseq/taxid_names.csv.xz", package = "JMDplots"), as.is = TRUE)
+  # Use getrefseq() to exclude supersequenced species 20210604
+  gr <- JMDplots::getrefseq()
+  refseq <- gr$refseq
+  taxa <- gr$taxa
   # Make sure the data tables have consistent taxids
   stopifnot(all(refseq$organism == taxa$taxid))
 
