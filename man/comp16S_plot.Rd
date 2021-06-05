@@ -15,7 +15,7 @@ Functions to plot compositional metrics (\ZC and \nH2O) for inferred microbial c
   getrefseq(filterspecies = TRUE)
   taxacomp(groups = c("Bacteria", "Archaea"), xlim = NULL, ylim = NULL,
     col = seq_along(groups), legend.x = "topleft", identify = FALSE,
-    pch = NULL, hline = NULL, filterspecies = TRUE)
+    pch = NULL, hline = NULL, filterspecies = TRUE, lcol = NULL)
   plotcomp(study, cn = FALSE, identify = FALSE, title = TRUE,
     xlim = NULL, ylim = NULL, plot.it = TRUE, points = TRUE, lines = FALSE,
     lineage = NULL, pch.up = 21, pch.down = 1, pval = TRUE)
@@ -35,6 +35,7 @@ Functions to plot compositional metrics (\ZC and \nH2O) for inferred microbial c
   \item{identify}{logical, run \code{\link{identify}} for interactive identification of points?}
   \item{pch}{plotting symbol}
   \item{hline}{numeric, add lines to show range of following plot}
+  \item{lcol}{color for lines}
   \item{study}{study key corresponding to file names in \code{extdata/comp16S} (e.g. \samp{HCW+13})}
   \item{cn}{logical, apply copy-number correction to RDP classifier results?}
   \item{title}{character, plot title}

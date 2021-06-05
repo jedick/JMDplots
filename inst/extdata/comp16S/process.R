@@ -44,12 +44,12 @@ mkRDP <- function(study) {
 mkAA <- function(ranks = c("genus", "family", "order", "class", "phylum", "superkingdom")) {
 
   # Read RefSeq amino acid compositions and taxon names
-  # Use getrefseq() to exclude supersequenced species 20210604
-  gr <- JMDplots::getrefseq()
-  refseq <- gr$refseq
-  taxa <- gr$taxa
+  refseq <- read.csv(system.file("extdata/refseq/protein_refseq.csv.xz", package = "JMDplots"), as.is = TRUE)
+  taxa <- read.csv(system.file("extdata/refseq/taxid_names.csv.xz", package = "JMDplots"), as.is = TRUE)
   # Make sure the data tables have consistent taxids
   stopifnot(all(refseq$organism == taxa$taxid))
+  # Weight all taxids equally (not by number of sequences) 20210605
+  refseq[, 5:25] <- refseq[, 5:25] / refseq$chains
 
   # Make a list to hold the output
   out <- vector("list", length(ranks))
@@ -109,8 +109,8 @@ mkAA <- function(ranks = c("genus", "family", "order", "class", "phylum", "super
       AA <- rbind(adds, AA)
     }
 
-    # Make per-protein average
-    AA[, 5:25] <- round(AA[, 5:25] / AA$chains, 1)
+    # Round the values
+    AA[, 5:25] <- round(AA[, 5:25], 1)
     out[[rank]] <- AA
 
   }

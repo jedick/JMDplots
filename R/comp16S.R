@@ -519,7 +519,7 @@ getrefseq <- function(filterspecies = TRUE) {
 
 # Make a nH2O-ZC plot for selected taxa and all their children 20200911
 taxacomp <- function(groups = c("Bacteria", "Archaea"), xlim = NULL, ylim = NULL,
-  col = seq_along(groups), legend.x = "topleft", identify = FALSE, pch = NULL, hline = NULL, filterspecies = TRUE) {
+  col = seq_along(groups), legend.x = "topleft", identify = FALSE, pch = NULL, hline = NULL, filterspecies = TRUE, lcol = NULL) {
 
   # Read compositional metrics of all taxa
   datadir <- system.file("extdata/comp16S", package = "JMDplots")
@@ -606,11 +606,13 @@ taxacomp <- function(groups = c("Bacteria", "Archaea"), xlim = NULL, ylim = NULL
   }
 
   # Use semi-transparent colors for lines 20210518
-  lcol <- palette()
-  lcol[1] <- "#000000"  # black
-  lcol[8] <- "#9e9e9e"  # gray62
-  lcol <- paste0(lcol, "80")
-  lcol <- rep(lcol, length.out = length(col))
+  if(is.null(lcol)) {
+    lcol <- palette()
+    lcol[1] <- "#000000"  # black
+    lcol[8] <- "#9e9e9e"  # gray62
+    lcol <- paste0(lcol, "80")
+    lcol <- rep(lcol, length.out = length(col))
+  }
 
   # Initialize plot
   if(is.null(xlim)) xlim <- c(-0.25, -0.05)
@@ -652,7 +654,7 @@ taxacomp <- function(groups = c("Bacteria", "Archaea"), xlim = NULL, ylim = NULL
       sp.refseq <- refseq_species[ispecies, ]
       sp.ZC <- ZCAA(sp.refseq)
       sp.nH2O <- H2OAA(sp.refseq)
-      children <- data.frame(group = sp.refseq$ref, ZC = sp.ZC, nH2O = sp.nH2O)
+      children <- data.frame(group = sp.refseq$ref, chains = sp.refseq$chains, ZC = sp.ZC, nH2O = sp.nH2O)
     } else {
       # Get the compositional metrics for all children
       ichildren <- metrics$parent == thisgroup
@@ -686,7 +688,10 @@ taxacomp <- function(groups = c("Bacteria", "Archaea"), xlim = NULL, ylim = NULL
     group <- vals[[i]]$group
     children <- vals[[i]]$children
     # Use white outline for black points 20210518
-    pt.col <- ifelse((col[i] - 1) %% 8 == 0, "white", 1)
+    pt.col <- 1
+    if(is.numeric(col[i])) {
+      if((col[i] - 1) %% 8 == 0) pt.col <- "white"
+    }
     points(children$ZC, children$nH2O, pch = pch[i], cex = 0.7, col = pt.col, bg = col[i], lwd = 0.5)
     # Label Halobacteria and Nanohaloarchaea 20200930
     thisgroup <- taxa[i]
