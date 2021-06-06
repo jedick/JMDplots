@@ -114,7 +114,7 @@ getmetrics <- function(study, cn = FALSE, mdat = NULL, RDP = NULL, map = NULL, l
   if(is.null(mdat)) mdat <- getmdat(study)
   if(is.null(RDP)) RDP <- getRDP(study, cn = cn, mdat = mdat, lineage = lineage)
   if(is.null(map)) map <- getmap(study, RDP = RDP, lineage = lineage)
-  # Keep metadata only for samples with >= 100 counts 20201001
+  # Keep metadata only for samples with sufficient counts 20201001
   mdat <- mdat[mdat$Run %in% colnames(RDP), ]
   # Exclude NA mappings
   RDP <- RDP[!is.na(map), ]
@@ -394,7 +394,7 @@ taxacomp <- function(groups = c("Bacteria", "Archaea"), xlim = NULL, ylim = NULL
 
 # Plot compositional metrics for all samples in a study 20200901
 plotcomp <- function(study, cn = FALSE, identify = FALSE, title = TRUE, xlim = NULL, ylim = NULL,
-  plot.it = TRUE, points = TRUE, lines = FALSE, lineage = NULL, pch.up = 21, pch.down = 1, pval = TRUE) {
+  plot.it = TRUE, points = TRUE, lines = FALSE, lineage = NULL, pch1 = 1, pch2 = 21, pval = TRUE) {
   # Get amino acid composition for samples
   mdat <- getmdat(study)
   RDP <- getRDP(study, cn = cn, mdat = mdat, lineage = lineage)
@@ -433,22 +433,22 @@ plotcomp <- function(study, cn = FALSE, identify = FALSE, title = TRUE, xlim = N
   }
 
   # Calculate mean values and p-values 20201003
-  iup <- pch %in% pch.up
-  idn <- pch %in% pch.down
+  i2 <- pch %in% pch2
+  i1 <- pch %in% pch1
   mean <- list()
   p.nH2O <- p.ZC <- NA
-  if(!is.null(pch.up) & !is.null(pch.down) & sum(iup) > 0 & sum(idn) > 0) {
-    if(sum(idn) > 2 & sum(iup) > 2) {
-      p.nH2O <- t.test(nH2O[idn], nH2O[iup])$p.value
-      p.ZC <- t.test(ZC[idn], ZC[iup])$p.value
+  if(!is.null(pch2) & !is.null(pch1) & sum(i2) > 0 & sum(i1) > 0) {
+    if(sum(i1) > 2 & sum(i2) > 2) {
+      p.nH2O <- t.test(nH2O[i1], nH2O[i2])$p.value
+      p.ZC <- t.test(ZC[i1], ZC[i2])$p.value
       print(paste("p.ZC =", round(p.ZC, 3), "p.nH2O =", round(p.nH2O, 3)))
     }
-    mean <- list(ZC.dn = mean(ZC[idn]), ZC.up = mean(ZC[iup]), nH2O.dn = mean(nH2O[idn]), nH2O.up = mean(nH2O[iup]))
+    mean <- list(ZC1 = mean(ZC[i1]), ZC2 = mean(ZC[i2]), nH2O1 = mean(nH2O[i1]), nH2O2 = mean(nH2O[i2]))
     if(plot.it) {
-      points(mean$ZC.dn, mean$nH2O.dn, pch = 8, cex = 2, lwd = 4, col = "white")
-      points(mean$ZC.dn, mean$nH2O.dn, pch = 8, cex = 2, lwd = 2, col = 1)
-      points(mean$ZC.up, mean$nH2O.up, pch = 8, cex = 2, lwd = 4, col = "white")
-      points(mean$ZC.up, mean$nH2O.up, pch = 8, cex = 2, lwd = 2, col = 2)
+      points(mean$ZC1, mean$nH2O1, pch = 8, cex = 2, lwd = 4, col = "white")
+      points(mean$ZC1, mean$nH2O1, pch = 8, cex = 2, lwd = 2, col = 1)
+      points(mean$ZC2, mean$nH2O2, pch = 8, cex = 2, lwd = 4, col = "white")
+      points(mean$ZC2, mean$nH2O2, pch = 8, cex = 2, lwd = 2, col = 2)
     }
   }
 
@@ -487,7 +487,7 @@ addhull <- function(x, y, basecol, outline = FALSE, ...) {
 
 # Get abundances and compositional metrics for taxonomic groups
 # to compare samples (within a study or between studies) 20210606
-getgroup <- function(study = "XDZ+17", metric = "nH2O", rank = "domain", pch.up = 24, pch.down = 21,
+getgroup <- function(study = "XDZ+17", metric = "nH2O", rank = "domain", pch1 = 21, pch2 = 24,
   minpercent = 2, study2 = NA, mdat = NULL, map = NULL, RDP = NULL) {
 
   # Get metadata, RDP and taxonomy mapping
@@ -496,8 +496,8 @@ getgroup <- function(study = "XDZ+17", metric = "nH2O", rank = "domain", pch.up 
   # Get data to compare two studies 20210513
   if(!is.na(study2)) {
     mdat2 <- getmdat(study2)[, c("study", "name", "Run", "sample", "pch", "col")]
-    mdat$pch <- pch.up
-    mdat2$pch <- pch.down
+    mdat$pch <- pch2
+    mdat2$pch <- pch1
     # Get RDP classification and taxonomy mapping
     RDP <- getRDP(study, mdat = mdat)
     map <- getmap(study, RDP = RDP)
@@ -520,31 +520,42 @@ getgroup <- function(study = "XDZ+17", metric = "nH2O", rank = "domain", pch.up 
     if(is.null(RDP)) RDP <- getRDP(study, mdat = mdat)
     if(is.null(map)) map <- getmap(study, RDP = RDP)
   }
-  # Identify samples in up- and down-groups
-  iup <- mdat$pch %in% pch.up
-  idown <- mdat$pch %in% pch.down
+  # Drop samples that are excluded by getRDP (because of low counts or NA name) 20210606
+  mdat <- mdat[mdat$Run %in% colnames(RDP), ]
+  # Identify samples in each group2
+  i2 <- mdat$pch %in% pch2
+  i1 <- mdat$pch %in% pch1
   # Retrieve colors for points
-  col.up <- mdat[iup, ]$col[1]
-  col.down <- mdat[idown, ]$col[1]
+  col2 <- mdat[i2, ]$col[1]
+  col1 <- mdat[i1, ]$col[1]
   # Read compositional metrics for faster running
   datadir <- system.file("extdata/comp16S", package = "JMDplots")
   RefSeq_metrics <- read.csv(file.path(datadir, "RefSeq_metrics.csv"), as.is = TRUE)
+  # Calculate the change in compositional metric for the whole community
+  metrics <- getmetrics(study, mdat = mdat, RDP = RDP, map = map, metrics = RefSeq_metrics)
+  # Get selected compositional metric
+  if(metric == "nH2O") X <- metrics$nH2O
+  if(metric == "ZC") X <- metrics$ZC
+  # Calculate mean values of compositional metrics
+  X2 <- mean(X[i2], na.rm = TRUE)
+  X1 <- mean(X[i1], na.rm = TRUE)
+  Xwhole <- c(X1, X2)
 
   # Split the lineage text
   lsplit <- strsplit(RDP$lineage, ";")
   # Find the taxa with the specified rank in the lineage
   irank <- vapply(lsplit, function(x) match(rank, x), 0) - 1
-  taxon <- mapply("[", lsplit, irank)
+  RDPtaxa <- mapply("[", lsplit, irank)
   # Calculate the compositional metrics for each unique taxon
-  taxa <- na.omit(unique(taxon))
-  Xup <- Xdown <- Pup <- Pdown <- Ptaxa <- numeric()
-  Xtaxa <- character()
+  taxa <- na.omit(unique(RDPtaxa))
+  X2 <- X1 <- P2 <- P1 <- Pboth <- numeric()
+  taxon <- character()
   for(j in seq_along(taxa)) {
     # Which organisms (by RDP classification) are in this taxon
-    itaxon <- taxon == taxa[j]
-    itaxon[is.na(itaxon)] <- FALSE
-    thisRDP <- RDP[itaxon, ]
-    thismap <- map[itaxon]
+    iRDP <- RDPtaxa == taxa[j]
+    iRDP[is.na(iRDP)] <- FALSE
+    thisRDP <- RDP[iRDP, ]
+    thismap <- map[iRDP]
     # Calculate percent abundance of this taxon in the whole community
     thispercent <- sum(thisRDP[, -(1:3)]) / sum(RDP[, -(1:3)]) * 100
     # Skip low-abundance taxa
@@ -557,28 +568,36 @@ getgroup <- function(study = "XDZ+17", metric = "nH2O", rank = "domain", pch.up 
       next
     }
     # Keep percentages and names of used taxa
-    Xtaxa <- c(Xtaxa, taxa[j])
-    Ptaxa <- c(Ptaxa, thispercent)
+    taxon <- c(taxon, taxa[j])
+    Pboth <- c(Pboth, thispercent)
     # Calculate the compositional metrics
     metrics <- getmetrics(study, mdat = mdat, RDP = thisRDP, map = thismap, metrics = RefSeq_metrics)
     # Get selected compositional metric
     if(metric == "nH2O") X <- metrics$nH2O
     if(metric == "ZC") X <- metrics$ZC
-    # Calculate median values of compositional metrics
-    Xup <- c(Xup, median(X[iup], na.rm = TRUE))
-    Xdown <- c(Xdown, median(X[idown], na.rm = TRUE))
+    # Calculate mean values of compositional metrics
+    X2 <- c(X2, mean(X[i2], na.rm = TRUE))
+    X1 <- c(X1, mean(X[i1], na.rm = TRUE))
     # Calculate percent abundance within the sample groups 20210520
-    upall <- RDP[, which(iup) + 3]
-    upthis <- thisRDP[, which(iup) + 3]
-    Pup <- c(Pup, sum(upthis) / sum(upall) * 100)
-    downall <- RDP[, which(idown) + 3]
-    downthis <- thisRDP[, which(idown) + 3]
-    Pdown <- c(Pdown, sum(downthis) / sum(downall) * 100)
+    all2 <- RDP[, which(i2) + 3]
+    this2 <- thisRDP[, which(i2) + 3]
+    P2 <- c(P2, sum(this2) / sum(all2) * 100)
+    all1 <- RDP[, which(i1) + 3]
+    this1 <- thisRDP[, which(i1) + 3]
+    P1 <- c(P1, sum(this1) / sum(all1) * 100)
   }
 
+  # Calculate change in metric contributed by each taxon 20210606
+  # Replace NA values for metric with 0 (where a taxon has zero abundance in one of the sample groups)
+  x2 <- X2
+  x2[is.na(x2)] <- 0
+  x1 <- X1
+  x1[is.na(x1)] <- 0
+  DX <- (x2 - Xwhole[1]) * P2 / 100 - (x1 - Xwhole[1]) * P1 / 100
+  names(DX) <- taxon
   # Assemble output
-  out <- list(study, metric, pch.up, pch.down, col.up, col.down, Xup, Xdown, Pup, Pdown, Ptaxa, Xtaxa)
-  names(out) <- c("study", "metric", "pch.up", "pch.down", "col.up", "col.down", "Xup", "Xdown", "Pup", "Pdown", "Ptaxa", "Xtaxa")
+  out <- list(study, metric, pch1, pch2, col1, col2, X1, X2, P1, P2, Pboth, DX, Xwhole, taxon)
+  names(out) <- c("study", "metric", "pch1", "pch2", "col1", "col2", "X1", "X2", "P1", "P2", "Pboth", "DX", "Xwhole", "taxon")
   out
 
 }
@@ -589,44 +608,44 @@ groupcomp <- function(..., xlim = NULL, ylim = NULL, xadj = NULL, yadj = NULL) {
   gg <- getgroup(...)
 
   # Plot the compositions and abundances
-  if(is.null(xlim)) xlim <- range(na.omit(c(gg$Pup, gg$Pdown)))
-  if(is.null(ylim)) ylim <- range(na.omit(c(gg$Xup, gg$Xdown)))
+  if(is.null(xlim)) xlim <- range(na.omit(c(gg$P2, gg$P1)))
+  if(is.null(ylim)) ylim <- range(na.omit(c(gg$X2, gg$X1)))
   if(identical(xlim, c(0, 100))) {
     plot(extendrange(xlim), ylim, type = "n", xlab = "Abundance (%)", ylab = canprot::cplab[[gg$metric]], xaxt = "n")
     axis(1, c(0, 50, 100))
   } else plot(xlim, ylim, type = "n", xlab = "Abundance (%)", ylab = canprot::cplab[[gg$metric]])
-  for(k in seq_along(gg$Xtaxa)) {
-    # Add points for up- and down- sample groups
+  for(k in seq_along(gg$taxon)) {
+    # Add points for sample groups
     cex <- 1.5
-    if(gg$pch.up > 20) points(gg$Pup[k], gg$Xup[k], pch = gg$pch.up, bg = gg$col.up, cex = cex)
-    else points(gg$Pup[k], gg$Xup[k], pch = gg$pch.up, col = gg$col.up, cex = cex)
-    if(gg$pch.down > 20) points(gg$Pdown[k], gg$Xdown[k], pch = gg$pch.down, bg = gg$col.down, cex = cex)
-    else points(gg$Pdown[k], gg$Xdown[k], pch = gg$pch.down, col = gg$col.down, cex = cex)
+    if(gg$pch2 > 20) points(gg$P2[k], gg$X2[k], pch = gg$pch2, bg = gg$col2, cex = cex)
+    else points(gg$P2[k], gg$X2[k], pch = gg$pch2, col = gg$col2, cex = cex)
+    if(gg$pch1 > 20) points(gg$P1[k], gg$X1[k], pch = gg$pch1, bg = gg$col1, cex = cex)
+    else points(gg$P1[k], gg$X1[k], pch = gg$pch1, col = gg$col1, cex = cex)
     # Add arrow connecting the points
-    arrows(gg$Pdown[k], gg$Xdown[k], gg$Pup[k], gg$Xup[k], length = 0.1)
+    arrows(gg$P1[k], gg$X1[k], gg$P2[k], gg$X2[k], length = 0.1)
     # Pad labels with spaces to offset from points
-    label <- paste0("  ", gg$Xtaxa[k], "  ")
+    label <- paste0("  ", gg$taxon[k], "  ")
     # Get adjustment from arguments if provided
     adj <- c(0, 0.5)
-    if(!is.null(xadj)) if(!is.na(xadj[gg$Xtaxa[k]])) adj[1] <- xadj[gg$Xtaxa[k]]
-    if(!is.null(yadj)) if(!is.na(yadj[gg$Xtaxa[k]])) adj[2] <- yadj[gg$Xtaxa[k]]
+    if(!is.null(xadj)) if(!is.na(xadj[gg$taxon[k]])) adj[1] <- xadj[gg$taxon[k]]
+    if(!is.null(yadj)) if(!is.na(yadj[gg$taxon[k]])) adj[2] <- yadj[gg$taxon[k]]
     # Add group name with spaces to offset from points
-    text(gg$Pup[k], gg$Xup[k], label, adj = adj)
+    text(gg$P2[k], gg$X2[k], label, adj = adj)
   }
   # Add lines for total composition of these groups
-  OKup <- !is.na(gg$Xup)
-  Xup <- gg$Xup[OKup]
-  Pup <- gg$Pup[OKup]
-  up <- sum(Xup * Pup / sum(Pup))
-  OKdown <- !is.na(gg$Xdown)
-  Xdown <- gg$Xdown[OKdown]
-  Pdown <- gg$Pdown[OKdown]
-  down <- sum(Xdown * Pdown / sum(Pdown))
-  abline(h = up, lty = 2, lwd = 2, col = gg$col.up)
-  abline(h = down, lty = 3, lwd = 2, col = gg$col.down)
+  OK2 <- !is.na(gg$X2)
+  X2 <- gg$X2[OK2]
+  P2 <- gg$P2[OK2]
+  total2 <- sum(X2 * P2 / sum(P2))
+  OK1 <- !is.na(gg$X1)
+  X1 <- gg$X1[OK1]
+  P1 <- gg$P1[OK1]
+  total1 <- sum(X1 * P1 / sum(P1))
+  abline(h = total2, lty = 2, lwd = 2, col = gg$col2)
+  abline(h = total1, lty = 3, lwd = 2, col = gg$col1)
   # Calculate and return total percentage of community represented by these taxa
-  Ptaxa <- gg$Ptaxa[OKup & OKdown]
-  sum(Ptaxa)
+  Pboth <- gg$Pboth[OK2 & OK1]
+  sum(Pboth)
 
 }
 
@@ -641,7 +660,7 @@ diffcomp <- function(study, cn = FALSE, identify = FALSE, title = TRUE, xlim = N
   mdat <- getmdat(study)
   # Get compositional metrics for samples
   metrics <- getmetrics(study, cn = cn, mdat = mdat)
-  # Keep metadata only for samples with >= 200 counts 20201001
+  # Keep metadata only for samples with sufficient counts 20201001
   mdat <- mdat[mdat$Run %in% metrics$Run, ]
   nH2O <- metrics$nH2O
   ZC <- metrics$ZC
@@ -688,10 +707,10 @@ diffcomp <- function(study, cn = FALSE, identify = FALSE, title = TRUE, xlim = N
 
   # Calculate mean difference and p-value 20201001
   # Use col == 2 (red) to get cancer-normal pairs
-  iup <- iminuend[col == 2]
-  idn <- isubtrahend[col == 2]
-  D_mean_nH2O <- mean(nH2O[iup]) - mean(nH2O[idn])
-  D_mean_ZC <- mean(ZC[iup]) - mean(ZC[idn])
+  i2 <- iminuend[col == 2]
+  i1 <- isubtrahend[col == 2]
+  D_mean_nH2O <- mean(nH2O[i2]) - mean(nH2O[i1])
+  D_mean_ZC <- mean(ZC[i2]) - mean(ZC[i1])
 
   if(plot.it) {
     # Make plot
@@ -703,9 +722,9 @@ diffcomp <- function(study, cn = FALSE, identify = FALSE, title = TRUE, xlim = N
     points(D_mean_ZC, D_mean_nH2O, pch = 8, col = "white", lwd = 3.5, cex = 2)
     points(D_mean_ZC, D_mean_nH2O, pch = 8, lwd = 1.5, cex = 2)
     points(D_mean_ZC, D_mean_nH2O, pch = 8, lwd = 0.5, col = 2, cex = 2)
-    p.nH2O <- t.test(nH2O[idn], nH2O[iup], paired = TRUE)$p.value
+    p.nH2O <- t.test(nH2O[i1], nH2O[i2], paired = TRUE)$p.value
     log10p.nH2O <- formatC(log10(p.nH2O), 1, format = "f")
-    p.ZC <- t.test(ZC[idn], ZC[iup], paired = TRUE)$p.value
+    p.ZC <- t.test(ZC[i1], ZC[i2], paired = TRUE)$p.value
     log10p.ZC <- formatC(log10(p.ZC), 1, format = "f")
     # Make log10 p-value bold if p-value is less than 0.05
     if(p.ZC < 0.05) xlab <- bquote(.(canprot::cplab$DZC[[1]]) ~ "(" * bold(.(log10p.ZC)) * ")") else xlab <- bquote(.(canprot::cplab$DZC[[1]]) ~ "(" * .(log10p.ZC) * ")")

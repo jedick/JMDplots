@@ -309,7 +309,7 @@ geo16S4 <- function(pdf = FALSE) {
   map <- getmap("MPB+17", RDP = RDP)
 
   # Make plots for Manus Basin
-  p <- groupcomp("MPB+17", "ZC", "domain", pch.up = 23, pch.down = 21, ylim = c(-0.23, -0.13), xlim = c(0, 100),
+  p <- groupcomp("MPB+17", "ZC", "domain", pch1 = 21, pch2 = 23, ylim = c(-0.23, -0.13), xlim = c(0, 100),
     xadj = c(Bacteria = 1), yadj = c(Bacteria = -5),
     mdat = mdat, RDP = RDP, map = map
   )
@@ -318,19 +318,19 @@ geo16S4 <- function(pdf = FALSE) {
   text(10, -0.1569, "T", font = 4)
   text(40, -0.2025, "   > 50 \u00B0C", font = 2)
   text(10, -0.2025, "T", font = 4)
-  p <- groupcomp("MPB+17", "ZC", "phylum", pch.up = 23, pch.down = 21, ylim = c(-0.23, -0.13),
+  p <- groupcomp("MPB+17", "ZC", "phylum", pch1 = 21, pch2 = 23, ylim = c(-0.23, -0.13),
     xadj = c(Proteobacteria = 1, Bacteroidetes = -0.18, Campilobacterota = 0.45),
     yadj = c(Bacteroidetes = 1, Campilobacterota = -3),
     mdat = mdat, RDP = RDP, map = map
   )
   title(paste0("Phylum (", round(p), "% of total)"))
-  p <- groupcomp("MPB+17", "ZC", "class", pch.up = 23, pch.down = 21, ylim = c(-0.23, -0.13),
+  p <- groupcomp("MPB+17", "ZC", "class", pch1 = 21, pch2 = 23, ylim = c(-0.23, -0.13),
     xadj = c(Flavobacteriia = -0.17, Gammaproteobacteria = 0.2, Campylobacteria = 0.45),
     yadj = c(Flavobacteriia = 1.2, Gammaproteobacteria = 1.7, Campylobacteria = -3),
     mdat = mdat, RDP = RDP, map = map
   )
   title(paste0("Class (", round(p), "% of total)"))
-  p <- groupcomp("MPB+17", "ZC", "genus", pch.up = 23, pch.down = 21, ylim = c(-0.23, -0.13), minpercent = 1,
+  p <- groupcomp("MPB+17", "ZC", "genus", pch1 = 21, pch2 = 23, ylim = c(-0.23, -0.13), minpercent = 1,
     xadj = c(Alteromonas = 0.1, Sulfurimonas = 1.05, Alcanivorax = -1, Halomonas = -0.65, Thiogranum = 0.17, Sulfurovum = -0.1, Pseudomonas = 0.1, Pseudoalteromonas = -0.25, Acinetobacter = 0.7),
     yadj = c(Sulfurimonas = 1.5, Pseudomonas = 1.8, Sulfurovum = -0.5, Thiogranum = 5, Marinimicrobia_genera_incertae_sedis = -0.8, Alteromonas = 1.8, Acinetobacter = 1.5),
     mdat = mdat, RDP = RDP, map = map
@@ -342,26 +342,26 @@ geo16S4 <- function(pdf = FALSE) {
   mdat <- getmdat("HLA+16")
   RDP <- getRDP("HLA+16", mdat = mdat)
   map <- getmap("HLA+16", RDP = RDP)
-  p <- groupcomp("HLA+16", "nH2O", "domain", pch.up = 24, pch.down = 21, ylim = c(-0.78, -0.71), xlim = c(0, 100),
+  p <- groupcomp("HLA+16", "nH2O", "domain", pch1 = 21, pch2 = 24, ylim = c(-0.78, -0.71), xlim = c(0, 100),
     xadj = c(Bacteria = 1), yadj = c(Bacteria = 2),
     mdat = mdat, RDP = RDP, map = map
   )
   title("Baltic Sea")
   text(40, -0.7419, "Salinity < 6", font = 2)
   text(40, -0.7534, "Salinity > 20", font = 2)
-  p <- groupcomp("HLA+16", "nH2O", "phylum", pch.up = 24, pch.down = 21, ylim = c(-0.78, -0.71),
+  p <- groupcomp("HLA+16", "nH2O", "phylum", pch1 = 21, pch2 = 24, ylim = c(-0.78, -0.71),
     xadj = c(Proteobacteria = -0.2, Planctomycetes = 0.1, "Cyanobacteria/Chloroplast" = 0.35, Bacteroidetes = -0.1),
     yadj = c(Planctomycetes = 1.8, "Cyanobacteria/Chloroplast" = 2.5),
     mdat = mdat, RDP = RDP, map = map
   )
   title(paste0("Phylum (", round(p), "% of total)"))
-  p <- groupcomp("HLA+16", "nH2O", "class", pch.up = 24, pch.down = 21, ylim = c(-0.78, -0.71),
+  p <- groupcomp("HLA+16", "nH2O", "class", pch1 = 21, pch2 = 24, ylim = c(-0.78, -0.71),
     xadj = c(Acidimicrobiia = 0.5, Gammaproteobacteria = 0.4, Flavobacteriia = -0.1, Verrucomicrobiae = -0.3, Betaproteobacteria = 0.25, Cyanobacteria = -0.07),
     yadj = c(Acidimicrobiia = -1, Alphaproteobacteria = -0.6, Gammaproteobacteria = 1.6, Verrucomicrobiae = 1.5, Flavobacteriia = 1.1, Betaproteobacteria = 2.5),
     mdat = mdat, RDP = RDP, map = map
   )
   title(paste0("Class (", round(p), "% of total)"))
-  p <- groupcomp("HLA+16", "nH2O", "genus", pch.up = 24, pch.down = 21, ylim = c(-0.78, -0.71), minpercent = 1,
+  p <- groupcomp("HLA+16", "nH2O", "genus", pch1 = 21, pch2 = 24, ylim = c(-0.78, -0.71), minpercent = 1,
     xadj = c(Spartobacteria_genera_incertae_sedis = 1.02, `Candidatus Pelagibacter` = 0, GpIIa = 1.1),
     yadj = c(Spartobacteria_genera_incertae_sedis = -0.7),
     mdat = mdat, RDP = RDP, map = map
@@ -405,9 +405,9 @@ geo16S5 <- function(pdf = FALSE) {
   # Loop over studies
   for(i in 1:5) {
     mean <- plotcomp(studies[[i]], plot.it = FALSE)$mean
-    points(mean$ZC.dn, mean$nH2O.dn, pch = pch[i], cex = 1.5, lwd = 2, bg = "#ffffffa0")
-    lines(c(mean$ZC.dn, mean$ZC.up), c(mean$nH2O.dn, mean$nH2O.up))
-    points(mean$ZC.up, mean$nH2O.up, pch = pch[i], cex = 1.8, lwd = 2, bg = "#df536ba0")
+    points(mean$ZC1, mean$nH2O1, pch = pch[i], cex = 1.5, lwd = 2, bg = "#ffffffa0")
+    lines(c(mean$ZC1, mean$ZC2), c(mean$nH2O1, mean$nH2O2))
+    points(mean$ZC2, mean$nH2O2, pch = pch[i], cex = 1.8, lwd = 2, bg = "#df536ba0")
   }
   # Add labels
   text(-0.1443, -0.736, "NW PA\nwater")
@@ -436,9 +436,9 @@ geo16S5 <- function(pdf = FALSE) {
   # Loop over studies
   for(i in 1:3) {
     mean <- plotcomp(studies[[i]], plot.it = FALSE)$mean
-    points(mean$ZC.dn, mean$nH2O.dn, pch = pch[i], cex = 1.5, lwd = 2, bg = "#ffffffa0")
-    lines(c(mean$ZC.dn, mean$ZC.up), c(mean$nH2O.dn, mean$nH2O.up))
-    points(mean$ZC.up, mean$nH2O.up, pch = pch[i], cex = 1.8, lwd = 2, bg = "#df536ba0")
+    points(mean$ZC1, mean$nH2O1, pch = pch[i], cex = 1.5, lwd = 2, bg = "#ffffffa0")
+    lines(c(mean$ZC1, mean$ZC2), c(mean$nH2O1, mean$nH2O2))
+    points(mean$ZC2, mean$nH2O2, pch = pch[i], cex = 1.8, lwd = 2, bg = "#df536ba0")
   }
   # Add labels
   text(-0.165, -0.726, "Marcellus Shale")

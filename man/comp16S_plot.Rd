@@ -19,10 +19,10 @@ Functions to plot compositional metrics (\ZC and \nH2O) for inferred microbial c
     pch = NULL, hline = NULL, filterspecies = TRUE, lcol = NULL)
   plotcomp(study, cn = FALSE, identify = FALSE, title = TRUE,
     xlim = NULL, ylim = NULL, plot.it = TRUE, points = TRUE, lines = FALSE,
-    lineage = NULL, pch.up = 21, pch.down = 1, pval = TRUE)
+    lineage = NULL, pch1 = 1, pch2 = 21, pval = TRUE)
   addhull(x, y, basecol, outline = FALSE, ...)
   getgroup(study = "XDZ+17", metric = "nH2O", rank = "domain",
-    pch.up = 24, pch.down = 21, minpercent = 2, study2 = NA,
+    pch1 = 21, pch2 = 24, minpercent = 2, study2 = NA,
     mdat = NULL, map = NULL, RDP = NULL)
   groupcomp(..., xlim = NULL, ylim = NULL, xadj = NULL, yadj = NULL)
 }
@@ -45,8 +45,8 @@ Functions to plot compositional metrics (\ZC and \nH2O) for inferred microbial c
   \item{points}{logical, plot points?}
   \item{lines}{logical, plot lines?}
   \item{lineage}{character, restrict plot to this taxonomic lineage}
-  \item{pch.up}{numeric, symbol for samples in \dQuote{up-expressed} group}
-  \item{pch.down}{numeric, symbol for samples in \dQuote{down-expressed} group}
+  \item{pch1}{numeric, symbol for samples in group 1}
+  \item{pch2}{numeric, symbol for samples in group 2}
   \item{pval}{logical, show log10 of p-value in axis labels?}
   \item{x}{x values}
   \item{y}{y values}
@@ -80,13 +80,17 @@ The lines are draw only in \code{outline} is TRUE; otherwise, the area of the hu
 The fill color is a lightened (semi-transparent) shade of the color given in \code{basecol}.
 
 \code{groupcomp} makes composition-abundance plots for sample groups within taxonomic groups.
-The sample groups are identified by their plotting symbols (\code{pch.up} and \code{pch.down}) in the metadata (see \code{\link{getmdat}}).
+The sample groups are identified by their plotting symbols (\code{pch1} and \code{pch2}) in the metadata (see \code{\link{getmdat}}).
 \code{getgroup} is the function that assembles the data for these plots.
 
 }
 
 \value{
-\code{getgroup} returns a list with elements \samp{study}, \samp{metric} (study key and compositional metric), \samp{pch.up}, \samp{pch.down}, \samp{col.up}, \samp{col.down} (single plotting symbols and color for each sample group), \samp{Xup}, \samp{Xdown} (median values of the selected compositional metric for all taxonomic groups within each sample group), \samp{Pup}, \samp{Pdown} (percent abundances of the taxonomic groups within each sample group), \samp{Ptaxa} (percent abundance of each taxonomic group in both sample groups (combined)), \samp{Xtaxa} (taxon names).
+\code{getgroup} returns a list with elements \samp{study}, \samp{metric} (study key and compositional metric), \samp{pch1}, \samp{pch2}, \samp{col1}, \samp{col2} (single plotting symbols and color for each sample group), \samp{X1}, \samp{X2} (mean values of the selected compositional metric for individual taxa within each sample group), \samp{P1}, \samp{P2} (percent abundances of the taxa within each sample group), \samp{Pboth} (percent abundance of each taxon in both sample groups (combined)), \samp{DX}, (contribution of each taxon to the difference between sample groups), \samp{Xwhole}, (mean values of the metric for sample groups 1 and 2), \samp{taxon} (taxon names).
+
+\samp{DX} is calculated as \code{(X2 - Xwhole[1]) * P2 / 100 - (X1 - Xwhole[1]) * P1 / 100}.
+The value of \code{sum(DX) / diff(Xwhole)} should be close to 1.
+However, it is not exactly 1 even if \code{minpercent} is set to zero (to include all taxa) because the sum of differences of means (\code{DX}) is not equal to the difference of the means of sums (\code{Xwhole}).
 }
 
 \seealso{
@@ -120,4 +124,13 @@ plotcomp("HLA+16", lineage = "Proteobacteria")
 
 # Plot nH2O differences for individual phyla
 groupcomp("HLA+16", rank = "phylum")
+
+# Calculate contribution of individual phyla to the ZC difference
+# between high- and low-T samples at Manus Basin
+gg <- getgroup("MPB+17", "ZC", "phylum", pch2 = 23, pch1 = 21)
+# This shows that changes in abundance and ZC of Campilobacterota, Aquificae,
+# and Proteobacteria contribute positively to the overall ZC change
+(DXpercent <- gg$DX / diff(gg$Xwhole) * 100)
+# The individual differences account for more than 95% of the overall change
+stopifnot(sum(DXpercent) > 95)
 }
