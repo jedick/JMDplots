@@ -1,7 +1,7 @@
 # JMDplots/R/zzz.R
 # Read data from RDS files 20200828
 
-# the 'JMDplots' environment is made here in open code
+# The 'JMDplots' environment is made here in open code
 # https://stackoverflow.com/questions/41954302/where-to-create-package-environment-variables
 JMDplots <- new.env()
 
@@ -12,4 +12,12 @@ JMDplots <- new.env()
     gradox_MGD <- readRDS(system.file("extdata/gradox/MGD.rds", package = "JMDplots"))
     gradH2O_MGP <- readRDS(system.file("extdata/gradH2O/MGP.rds", package = "JMDplots"))
   })
+}
+
+# Set 'comp16Sdir' option 20210607
+# Adapted from R/src/library/grDevices/zzz.R
+.onLoad <- function(libname, pkgname) {
+  op.JMDplots <- list(comp16Sdir = system.file("extdata/comp16S", package = "JMDplots"))
+  toset <- !(names(op.JMDplots) %in% names(.Options))
+  if(any(toset)) options(op.JMDplots[toset])
 }

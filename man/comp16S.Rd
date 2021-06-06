@@ -44,6 +44,8 @@ Sequences with classification results at only the root or domain level (Root, Ar
 Sequences classified to the class Chloroplast or genera Chlorophyta or Bacillariophyta are also omitted because they have little correspondence with the NCBI taxonomy.
 All remaining sequences (those classified to genus or higher levels) can be used for mapping to the NCBI taxonomy.
 
+The location of the \code{comp16S} directory used in \code{getmdat} and \code{getRDP} can be changed by setting the option \code{comp16Sdir}.
+
 \code{getmap} maps RDP names to the NCBI taxonomy.
 RDP group names are made by combining the rank and name with an underscore separator (e.g. \samp{genus_Escherichia/Shigella}).
 Some particular group names are changed to correspond with the NCBI taxonomy as follows:
