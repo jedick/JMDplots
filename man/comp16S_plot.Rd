@@ -6,6 +6,7 @@
 \alias{addhull}
 \alias{groupcomp}
 \alias{getrefseq}
+\alias{getgroup}
 \title{Plot compositional metrics of taxa and community proteomes inferred from 16S rRNA gene sequences}
 \description{
 Functions to plot compositional metrics (\ZC and \nH2O) for inferred microbial community proteomes.
@@ -20,9 +21,10 @@ Functions to plot compositional metrics (\ZC and \nH2O) for inferred microbial c
     xlim = NULL, ylim = NULL, plot.it = TRUE, points = TRUE, lines = FALSE,
     lineage = NULL, pch.up = 21, pch.down = 1, pval = TRUE)
   addhull(x, y, basecol, outline = FALSE, ...)
-  groupcomp(study = "XDZ+17", metric = "nH2O", rank = "domain",
-    pch.up = 24, pch.down = 21, minpercent = 2, xlim = NULL, ylim = NULL,
-    xadj = NULL, yadj = NULL, study2 = NA, mdat = NULL, map = NULL, RDP = NULL)
+  getgroup(study = "XDZ+17", metric = "nH2O", rank = "domain",
+    pch.up = 24, pch.down = 21, minpercent = 2, study2 = NA,
+    mdat = NULL, map = NULL, RDP = NULL)
+  groupcomp(..., xlim = NULL, ylim = NULL, xadj = NULL, yadj = NULL)
 }
 
 \arguments{
@@ -50,16 +52,16 @@ Functions to plot compositional metrics (\ZC and \nH2O) for inferred microbial c
   \item{y}{y values}
   \item{basecol}{color used for hull lines}
   \item{outline}{logical, draw hull lines?}
-  \item{...}{other arguments passed to \code{\link{polygon}}}
+  \item{...}{arguments passed to \code{\link{polygon}} (by \code{addulll}) or \code{getgroup} (by \code{groupcomp})}
   \item{metric}{compositional metric, \samp{ZC} or \samp{nH2O}}
   \item{rank}{character, taxonomic rank}
   \item{minpercent}{numeric, include taxa that are at least this abundant}
-  \item{xadj}{numeric, x adjustment for text labels}
-  \item{yadj}{numeric, y adjustment for text labels}
   \item{study2}{character, calculate differences between two studies instead of groups in one study}
   \item{mdat}{data frame, output from \code{\link{getmdat}}}
   \item{map}{data frame, output from \code{\link{getmap}}}
   \item{RDP}{data frame, output from \code{\link{getRDP}}}
+  \item{xadj}{numeric, x adjustment for text labels}
+  \item{yadj}{numeric, y adjustment for text labels}
 }
 
 \details{
@@ -79,7 +81,12 @@ The fill color is a lightened (semi-transparent) shade of the color given in \co
 
 \code{groupcomp} makes composition-abundance plots for sample groups within taxonomic groups.
 The sample groups are identified by their plotting symbols (\code{pch.up} and \code{pch.down}) in the metadata (see \code{\link{getmdat}}).
+\code{getgroup} is the function that assembles the data for these plots.
 
+}
+
+\value{
+\code{getgroup} returns a list with elements \samp{study}, \samp{metric} (study key and compositional metric), \samp{pch.up}, \samp{pch.down}, \samp{col.up}, \samp{col.down} (single plotting symbols and color for each sample group), \samp{Xup}, \samp{Xdown} (median values of the selected compositional metric for all taxonomic groups within each sample group), \samp{Pup}, \samp{Pdown} (percent abundances of the taxonomic groups within each sample group), \samp{Ptaxa} (percent abundance of each taxonomic group in both sample groups (combined)), \samp{Xtaxa} (taxon names).
 }
 
 \seealso{

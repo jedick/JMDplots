@@ -51,7 +51,7 @@ export(
   # geo16S paper 20210527
   "taxacomp", "plotcomp", "addhull", "groupcomp",
   # comp16S paper 20210604
-  "getrefseq"
+  "getrefseq", "getgroup"
 )
 
 # imports from CHNOSZ
