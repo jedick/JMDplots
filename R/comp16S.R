@@ -448,7 +448,7 @@ getmap <- function(study, RDP = NULL, lineage = NULL) {
 }
 
 # Get compositional metrics for all samples in a study 20200927
-getmetrics <- function(study, cn = FALSE, mdat = NULL, RDP = NULL, map = NULL, lineage = NULL, metrics = NULL) {
+getmetrics <- function(study, cn = FALSE, mdat = NULL, RDP = NULL, map = NULL, lineage = NULL, metrics = NULL, groups = NULL) {
   # Handle missing arguments
   if(is.null(mdat)) mdat <- getmdat(study)
   if(is.null(RDP)) RDP <- getRDP(study, cn = cn, mdat = mdat, lineage = lineage)
@@ -478,15 +478,29 @@ getmetrics <- function(study, cn = FALSE, mdat = NULL, RDP = NULL, map = NULL, l
 
   # Get classification matrix (rows = taxa, columns = samples)
   RDPmat <- RDP[, -(1:3)]
-  # Calculate average nH2O for all samples
-  nH2O <- colSums(RDPmat * metrics$nH2O) / colSums(RDPmat)
-  # To calculate ZC, we need to compute the sum of charge (ZC * nC) and the sum of carbon atoms
-  sumZ <- colSums(RDPmat * metrics$ZC * metrics$nC)
-  sumC <- colSums(RDPmat * metrics$nC)
-  ZC <- sumZ / sumC
+  if(is.null(groups)) {
+    # Calculate abundance-weighted mean nH2O for each sample
+    nH2O <- colSums(RDPmat * metrics$nH2O) / colSums(RDPmat)
+    # To calculate ZC, we need to compute the sum of charge (ZC * nC) and the sum of carbon atoms
+    sumZ <- colSums(RDPmat * metrics$ZC * metrics$nC)
+    sumC <- colSums(RDPmat * metrics$nC)
+    ZC <- sumZ / sumC
+    # Create output data frame
+    out <- data.frame(Run = colnames(RDPmat), sample = mdat$sample, nH2O = nH2O, ZC = ZC)
+  } else {
+    # Split data into sample groups and calculate metrics for each group 20210607
+    nH2O <- ZC <- numeric()
+    for(i in 1:length(groups)) {
+      # Use rowSums to combine all samples in each group into one meta-sample
+      thisRDP <- rowSums(RDPmat[, groups[[i]], drop = FALSE])
+      nH2O <- c(nH2O, sum(thisRDP * metrics$nH2O) / sum(thisRDP))
+      sumZ <- sum(thisRDP * metrics$ZC * metrics$nC)
+      sumC <- sum(thisRDP * metrics$nC)
+      ZC <- c(ZC, sumZ / sumC)
+    }
+    out <- data.frame(Run = rep(NA, length(groups)), sample = 1:length(groups), nH2O = nH2O, ZC = ZC)
+  }
 
-  # Create output data frame
-  out <- data.frame(Run = colnames(RDPmat), sample = mdat$sample, nH2O = nH2O, ZC = ZC)
   rownames(out) <- 1:nrow(out)
   out
 }

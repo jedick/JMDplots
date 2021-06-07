@@ -19,7 +19,7 @@ Functions to plot compositional metrics (\ZC and \nH2O) for inferred microbial c
     pch = NULL, hline = NULL, filterspecies = TRUE, lcol = NULL)
   plotcomp(study, cn = FALSE, identify = FALSE, title = TRUE,
     xlim = NULL, ylim = NULL, plot.it = TRUE, points = TRUE, lines = FALSE,
-    lineage = NULL, pch1 = 1, pch2 = 21, pval = TRUE)
+    lineage = NULL, pch1 = 1, pch2 = 21)
   addhull(x, y, basecol, outline = FALSE, ...)
   getgroup(study = "XDZ+17", metric = "nH2O", rank = "domain",
     pch1 = 21, pch2 = 24, minpercent = 2, study2 = NA,
@@ -47,7 +47,6 @@ Functions to plot compositional metrics (\ZC and \nH2O) for inferred microbial c
   \item{lineage}{character, restrict plot to this taxonomic lineage}
   \item{pch1}{numeric, symbol for samples in group 1}
   \item{pch2}{numeric, symbol for samples in group 2}
-  \item{pval}{logical, show log10 of p-value in axis labels?}
   \item{x}{x values}
   \item{y}{y values}
   \item{basecol}{color used for hull lines}
@@ -74,23 +73,23 @@ By default, any species with greater than 20000 reference sequences is omitted; 
 Note that the keywords are all lower-case; use the upper-case name (e.g. \samp{Proteobacteria}) to plot the phylum and its orders.
 
 \code{plotcomp} plots the \ZC and \nH2O of community proteomes inferred by combining taxonomic abundances from 16S rRNA gene sequencing with RefSeq proteomes.
+If \code{pch1} and \code{pch2} are provided, then two sample groups are identified by their plotting symbols in the metadata (see \code{\link{getmdat}}).
+Star-shaped symbols are plotted to indicate the metrics computed for meta-samples created by aggregating the RDP counts for all samples in each sample group.
 
 \code{addhull} uses \code{\link{polygon}} to draw a convex hull around the points given in \code{x}, \code{y}.
 The lines are draw only in \code{outline} is TRUE; otherwise, the area of the hull is filled.
 The fill color is a lightened (semi-transparent) shade of the color given in \code{basecol}.
 
 \code{groupcomp} makes composition-abundance plots for sample groups within taxonomic groups.
-The sample groups are identified by their plotting symbols (\code{pch1} and \code{pch2}) in the metadata (see \code{\link{getmdat}}).
 \code{getgroup} is the function that assembles the data for these plots.
 
 }
 
 \value{
-\code{getgroup} returns a list with elements \samp{study}, \samp{metric} (study key and compositional metric), \samp{pch1}, \samp{pch2}, \samp{col1}, \samp{col2} (single plotting symbols and color for each sample group), \samp{X1}, \samp{X2} (mean values of the selected compositional metric for individual taxa within each sample group), \samp{P1}, \samp{P2} (percent abundances of the taxa within each sample group), \samp{Pboth} (percent abundance of each taxon in both sample groups (combined)), \samp{DX}, (contribution of each taxon to the difference between sample groups), \samp{Xwhole}, (mean values of the metric for sample groups 1 and 2), \samp{taxon} (taxon names).
+\code{getgroup} returns a list with elements \samp{study}, \samp{metric} (study key and compositional metric), \samp{pch1}, \samp{pch2}, \samp{col1}, \samp{col2} (single plotting symbols and color for each sample group), \samp{X1}, \samp{X2} (values of the selected compositional metric for individual taxa within each sample group), \samp{P1}, \samp{P2} (percent abundances of the taxa within each sample group), \samp{Pboth} (percent abundance of each taxon in both sample groups (combined)), \samp{DX}, (contribution of each taxon to the difference between sample groups), \samp{Xwhole}, (values of the metric for sample groups 1 and 2), \samp{taxon} (taxon names).
 
 \samp{DX} is calculated as \code{(X2 - Xwhole[1]) * P2 / 100 - (X1 - Xwhole[1]) * P1 / 100}.
 The value of \code{sum(DX) / diff(Xwhole)} should be close to 1.
-However, it is not exactly 1 even if \code{minpercent} is set to zero (to include all taxa) because the sum of differences of means (\code{DX}) is not equal to the difference of the means of sums (\code{Xwhole}).
 }
 
 \seealso{
@@ -122,6 +121,9 @@ addhull(pc$ZC, pc$nH2O, "slategray1")
 # Make a plot for only Proteobacteria
 plotcomp("HLA+16", lineage = "Proteobacteria")
 
+# Add points for aggregated high- and low-salinity samples
+plotcomp("HLA+16", pch1 = 21, pch2 = 24)
+
 # Plot nH2O differences for individual phyla
 groupcomp("HLA+16", rank = "phylum")
 
@@ -131,6 +133,6 @@ gg <- getgroup("MPB+17", "ZC", "phylum", pch2 = 23, pch1 = 21)
 # This shows that changes in abundance and ZC of Campilobacterota, Aquificae,
 # and Proteobacteria contribute positively to the overall ZC change
 (DXpercent <- gg$DX / diff(gg$Xwhole) * 100)
-# The individual differences account for more than 95% of the overall change
-stopifnot(sum(DXpercent) > 95)
+# The individual differences account for more than 98% of the overall change
+stopifnot(sum(DXpercent) > 98)
 }

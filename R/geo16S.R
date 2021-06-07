@@ -392,7 +392,7 @@ geo16S5 <- function(pdf = FALSE) {
   # Data from Ulrich et al., 2018
   xlim <- c(-0.16, -0.13)
   ylim <- c(-0.755, -0.725)
-  plotcomp("UKD+18.water_2014", xlim = xlim, ylim = ylim, title = FALSE, pval = FALSE)
+  plotcomp("UKD+18.water_2014", xlim = xlim, ylim = ylim, title = FALSE)
   legend("topleft", c("MSA+", "MSA-"), pch = c(21, 1), pt.bg = c(2, 1), bg = "white", title = "Northwestern Pennsylvania")
   label.figure("A", cex = 1.5, xfrac = 0.03, font = 2)
 
@@ -404,10 +404,10 @@ geo16S5 <- function(pdf = FALSE) {
   pch <- 21:25
   # Loop over studies
   for(i in 1:5) {
-    mean <- plotcomp(studies[[i]], plot.it = FALSE)$mean
-    points(mean$ZC1, mean$nH2O1, pch = pch[i], cex = 1.5, lwd = 2, bg = "#ffffffa0")
-    lines(c(mean$ZC1, mean$ZC2), c(mean$nH2O1, mean$nH2O2))
-    points(mean$ZC2, mean$nH2O2, pch = pch[i], cex = 1.8, lwd = 2, bg = "#df536ba0")
+    group <- plotcomp(studies[[i]], plot.it = FALSE)$group
+    points(group$ZC1, group$nH2O1, pch = pch[i], cex = 1.5, lwd = 2, bg = "#ffffffa0")
+    lines(c(group$ZC1, group$ZC2), c(group$nH2O1, group$nH2O2))
+    points(group$ZC2, group$nH2O2, pch = pch[i], cex = 1.8, lwd = 2, bg = "#df536ba0")
   }
   # Add labels
   text(-0.1443, -0.736, "NW PA\nwater")
@@ -422,7 +422,7 @@ geo16S5 <- function(pdf = FALSE) {
   ## Plots C-D: Comparison of different studies on produced water 20210330
 
   # Panel C: Cluff et al., 2014
-  plotcomp("CHM+14", title = FALSE, pval = FALSE)
+  plotcomp("CHM+14", title = FALSE)
   legend("topright", c("Injected fluids (day 0)", "Produced water (day 49 and after)"),
          pch = c(21, 21), pt.bg = c("white", 2), bg = "white", title = "Marcellus Shale")
   box()
@@ -435,10 +435,10 @@ geo16S5 <- function(pdf = FALSE) {
   pch <- 21:25
   # Loop over studies
   for(i in 1:3) {
-    mean <- plotcomp(studies[[i]], plot.it = FALSE)$mean
-    points(mean$ZC1, mean$nH2O1, pch = pch[i], cex = 1.5, lwd = 2, bg = "#ffffffa0")
-    lines(c(mean$ZC1, mean$ZC2), c(mean$nH2O1, mean$nH2O2))
-    points(mean$ZC2, mean$nH2O2, pch = pch[i], cex = 1.8, lwd = 2, bg = "#df536ba0")
+    group <- plotcomp(studies[[i]], plot.it = FALSE)$group
+    points(group$ZC1, group$nH2O1, pch = pch[i], cex = 1.5, lwd = 2, bg = "#ffffffa0")
+    lines(c(group$ZC1, group$ZC2), c(group$nH2O1, group$nH2O2))
+    points(group$ZC2, group$nH2O2, pch = pch[i], cex = 1.8, lwd = 2, bg = "#df536ba0")
   }
   # Add labels
   text(-0.165, -0.726, "Marcellus Shale")

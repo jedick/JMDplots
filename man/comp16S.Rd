@@ -16,7 +16,7 @@ Proteomes are inferred by combining taxonomic classifications of 16S rRNA gene s
   getRDP(study, cn = FALSE, mdat = NULL, lineage = NULL)
   getmap(study, RDP = NULL, lineage = NULL)
   getmetrics(study, cn = FALSE, mdat = NULL, RDP = NULL, map = NULL,
-    lineage = NULL, metrics = NULL)
+    lineage = NULL, metrics = NULL, groups = NULL)
 }
 
 \arguments{
@@ -28,6 +28,7 @@ Proteomes are inferred by combining taxonomic classifications of 16S rRNA gene s
   \item{RDP}{data frame, output from \code{getRDP} (used for memoization by other functions)}
   \item{map}{data frame, output from \code{getmap} (used for memoization by other functions)}
   \item{metrics}{data frame, content of \code{extdata/comp16S/RefSeq_metrics.csv} (used for memoization by other functions)}
+  \item{groups}{list, indexing vectors to aggregate groups of samples into one or more meta-samples}
 }
 
 \details{
@@ -99,4 +100,9 @@ getmdat("BGPF13")
 getRDP("BGPF13")
 getmap("BGPF13")
 getmetrics("BGPF13")
+
+# Calculate metrics for aggregated samples for Archaea and Bacteria
+mdat <- getmdat("BGPF13")
+groups <- list(mdat$cohort == "Archaea", mdat$cohort == "Bacteria")
+getmetrics("BGPF13", groups = groups)
 }
