@@ -7,6 +7,7 @@
 \alias{groupcomp}
 \alias{getrefseq}
 \alias{getgroup}
+\alias{groupperc}
 \title{Plot compositional metrics of taxa and community proteomes inferred from 16S rRNA gene sequences}
 \description{
 Functions to plot compositional metrics (\ZC and \nH2O) for inferred microbial community proteomes.
@@ -25,6 +26,7 @@ Functions to plot compositional metrics (\ZC and \nH2O) for inferred microbial c
     pch1 = 21, pch2 = 24, minpercent = 2, study2 = NA,
     mdat = NULL, map = NULL, RDP = NULL)
   groupcomp(..., xlim = NULL, ylim = NULL, xadj = NULL, yadj = NULL)
+  groupperc(..., xlim = NULL, ylim = NULL, xadj = NULL, yadj = NULL)
 }
 
 \arguments{
@@ -80,7 +82,8 @@ Star-shaped symbols are plotted to indicate the metrics computed for meta-sample
 The lines are draw only in \code{outline} is TRUE; otherwise, the area of the hull is filled.
 The fill color is a lightened (semi-transparent) shade of the color given in \code{basecol}.
 
-\code{groupcomp} makes composition-abundance plots for sample groups within taxonomic groups.
+\code{groupcomp} makes ZC- or nH2O-abundance plots for taxonomic groups within two sample groups.
+\code{groupperc} plots the percent contribution by each taxonomic group to the community difference of ZC or nH2O between sample groups, vs abundance of the taxonomic groups.
 \code{getgroup} is the function that assembles the data for these plots.
 
 }
@@ -135,4 +138,7 @@ gg <- getgroup("MPB+17", "ZC", "phylum", pch2 = 23, pch1 = 21)
 (DXpercent <- gg$DX / diff(gg$Xwhole) * 100)
 # The individual differences account for more than 98% of the overall change
 stopifnot(sum(DXpercent) > 98)
+
+# Show the changes as percentages of the total
+groupperc("MPB+17", metric = "ZC", rank = "phylum", pch1 = 21, pch2 = 23)
 }

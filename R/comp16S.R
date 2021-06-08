@@ -194,8 +194,13 @@ getmdat <- function(study, dropNA = TRUE) {
     col <- ifelse(mdat$type == "shallowest", 4, 2)
   }
   if(study == "HXZ+20") {
-    pch <- ifelse(mdat$depth < 70, 24, 25)
-    col <- ifelse(mdat$depth < 70, 4, 2)
+    type <- rep("transition", nrow(mdat))
+    type[mdat$O2 > 100] <- "oxic"
+    type[mdat$O2 == 0] <- "anoxic"
+    pch <- sapply(type, switch, oxic = 24, transition = 20, anoxic = 25)
+    col <- sapply(type, switch, oxic = 4, transition = 1, anoxic = 2)
+    type[mdat$station == "C4"] <- NA
+    col[mdat$station == "C4"] <- NA
   }
   if(study == "GBL+15") {
     pch <- ifelse(mdat$depth < 85, 24, 25)

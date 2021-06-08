@@ -356,6 +356,10 @@ getgroup <- function(study = "XDZ+17", metric = "nH2O", rank = "domain", pch1 = 
   # Identify samples in each group
   i1 <- mdat$pch %in% pch1
   i2 <- mdat$pch %in% pch2
+  # Stop if no samples match 20210608
+  pchavail <- paste(unique(mdat$pch), collapse = " ")
+  if(!any(i1)) stop(paste0("pch1 = ", pch1, " doesn't match any samples (available values are ", pchavail, ")"))
+  if(!any(i2)) stop(paste0("pch2 = ", pch2, " doesn't match any samples (available values are ", pchavail, ")"))
   # Retrieve colors for points
   col1 <- mdat[i1, ]$col[1]
   col2 <- mdat[i2, ]$col[1]
@@ -376,18 +380,24 @@ getgroup <- function(study = "XDZ+17", metric = "nH2O", rank = "domain", pch1 = 
   RDPtaxa <- mapply("[", lsplit, irank)
   # Calculate the compositional metrics for each unique taxon
   taxa <- na.omit(unique(RDPtaxa))
+#  # Include "Other" 20210608
+#  taxa <- c(taxa, "Other")
   X2 <- X1 <- P2 <- P1 <- Pboth <- numeric()
   taxon <- character()
+  allI <- logical(length(RDPtaxa))
   for(j in seq_along(taxa)) {
     # Which organisms (by RDP classification) are in this taxon
-    iRDP <- RDPtaxa == taxa[j]
-    iRDP[is.na(iRDP)] <- FALSE
+    if(taxa[j] == "Other") iRDP <- !allI else {
+      iRDP <- RDPtaxa == taxa[j]
+      iRDP[is.na(iRDP)] <- FALSE
+      allI <- allI | iRDP
+    }
     thisRDP <- RDP[iRDP, ]
     thismap <- map[iRDP]
     # Calculate percent abundance of this taxon in the whole community
     thispercent <- sum(thisRDP[, -(1:3)]) / sum(RDP[, -(1:3)]) * 100
     # Skip low-abundance taxa
-    if(thispercent < minpercent) next
+    if(taxa[j] != "Other") if(thispercent < minpercent) next
     # If we got here, print message about taxon name and abundance
     print(paste0("getgroup: ", rank, "_", taxa[j], " (", round(thispercent), "%)"))
     # Skip taxa with no available mappings
@@ -477,6 +487,41 @@ groupcomp <- function(..., xlim = NULL, ylim = NULL, xadj = NULL, yadj = NULL) {
   # Calculate and return total percentage of community represented by these taxa
   Pboth <- gg$Pboth[OK2 & OK1]
   sum(Pboth)
+}
+
+# Plot contribution to difference of ZC or nH2O (percent of total) vs abundance for taxonomic groups 20210606
+groupperc <- function(..., xlim = NULL, ylim = NULL, xadj = NULL, yadj = NULL) {
+  # Calculate per-taxon contributions to total change of ZC
+  gg <- getgroup(...)
+  DXpercent <- gg$DX / diff(gg$Xwhole) * 100
+  # Start plot
+  if(is.null(xlim)) xlim <- range(gg$P1, gg$P2)
+  if(is.null(ylim)) ylim <- range(DXpercent)
+  plot(xlim, ylim, xlab = "Abundance (%)", ylab = paste("Contribution to", gg$metric, "change (%)"), type = "n")
+  # Loop over taxa
+  for(k in seq_along(gg$taxon)) {
+    # Add points for sample groups
+    cex <- 1.5
+    if(gg$pch2 > 20) points(gg$P2[k], DXpercent[k], pch = gg$pch2, bg = gg$col2, cex = cex)
+    else points(gg$P2[k], DXpercent[k], pch = gg$pch2, col = gg$col2, cex = cex)
+    if(gg$pch1 > 20) points(gg$P1[k], DXpercent[k], pch = gg$pch1, bg = gg$col1, cex = cex)
+    else points(gg$P1[k], DXpercent[k], pch = gg$pch1, col = gg$col1, cex = cex)
+    # Add arrow connecting the points
+    arrows(gg$P1[k], DXpercent[k], gg$P2[k], DXpercent[k], length = 0.1)
+    # Add labels
+    label <- gg$taxon[k]
+  #  # Get adjustment from arguments if provided
+  #  adj <- c(05, 0.5)
+  #  if(!is.null(xadj)) if(!is.na(xadj[gg$Xtaxa[k]])) adj[1] <- xadj[gg$Xtaxa[k]]
+  #  if(!is.null(yadj)) if(!is.na(yadj[gg$Xtaxa[k]])) adj[2] <- yadj[gg$Xtaxa[k]]
+  #  # Add group name with spaces to offset from points
+  #  text(gg$P2[k], gg$Xup[k], label, adj = adj)
+    labx <- mean(c(gg$P1[k], gg$P2[k]))
+    dy <- diff(ylim) / 30
+    if(DXpercent[k] > 50) dy <- -dy
+    text(labx, DXpercent[k] + dy, label)
+  }
+  invisible(gg)
 }
 
 ########################

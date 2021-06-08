@@ -119,6 +119,10 @@ read.file <- function(file) {
 read.allfiles <- function() {
   # List all files in "protein" directory
   files <- file.path("protein", dir("protein"))
+  # Exclude already processed files 20210604
+  csvfiles <- file.path("csv", dir("csv"))
+  done <- gsub("csv$", "gz", gsub("^csv", "protein", csvfiles))
+  files <- files[!files %in% done]
 
   ## Parallel computations, adapted from ?clusterApply
   # Use option cl.cores to choose an appropriate cluster size.
