@@ -209,7 +209,7 @@ taxacomp <- function(groups = c("Bacteria", "Archaea"), xlim = NULL, ylim = NULL
     # Label Halobacteria and Nanohaloarchaea 20200930
     thisgroup <- taxa[i]
     if(thisgroup == "Euryarchaeota") {
-      ihalo <- match(c("Thermococci", "Methanococci", "Archaeoglobi", "Nanohaloarchaea", "Halobacteria"), children$group)
+      ihalo <- match(c("Methanococci", "Thermococci", "Archaeoglobi", "Nanohaloarchaea", "Halobacteria"), children$group)
       dy <- ifelse(groups == "majorcellular", 0.0025, 0.005)
       dx <- c(0, 0, 0, 0.002, 0)
       text(children$ZC[ihalo] + dx, children$nH2O[ihalo] + dy, c(1, 2, 3, 4, 5))

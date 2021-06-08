@@ -57,7 +57,7 @@ geo16S2 <- function(pdf = FALSE) {
   legend <- c("Archaea", "Bacteria")
   legend("bottomleft", legend, pch = c(23, 22), col = c(1, 1), pt.bg = c(6, 5), bg = "white")
 
-  p2 <- plotcomp("SVH+19", title = FALSE, points = FALSE)
+  p2 <- plotcomp("SVH+19", title = FALSE, points = FALSE, ylim = c(-0.757, -0.737))
 #  title("Black Sea\nSollai et al., 2019", font.main = 1)
   title("Black Sea", font.main = 1)
   addhull(p2$ZC, p2$nH2O, "blue", TRUE, lty = 2)
@@ -73,7 +73,7 @@ geo16S2 <- function(pdf = FALSE) {
   legend <- c("< 6", "6-20", "> 20")
   legend("bottomright", legend, pch = c(24, 20, 21), col = c(1, 1, 1), pt.bg = c(3, NA, 4), bg = "white", title = "Salinity")
 
-  p4 <- plotcomp("MPB+17", title = FALSE, points = FALSE)
+  p4 <- plotcomp("MPB+17", title = FALSE, points = FALSE, ylim = c(-0.777, -0.725))
 #  title("Manus Basin submarine vents\nMeier et al., 2017", font.main = 1)
   title("Manus Basin submarine vents", font.main = 1)
   addhull(p4$ZC, p4$nH2O, 2, TRUE, lty = 2)
@@ -98,12 +98,12 @@ geo16S2 <- function(pdf = FALSE) {
   legend <- c("Oxic", "Transition", "Anoxic")
   legend("bottomright", legend, pch = c(24, 20, 25), pt.bg = c(4, 1, 2), bg = "white")
 
-  p7 <- plotcomp("HCW+13", title = FALSE, points = FALSE, ylim = c(-0.765, -0.7545))
+  p7 <- plotcomp("HCW+13", title = FALSE, points = FALSE, ylim = c(-0.764, -0.7545))
 #  title("Guerrero Negro mat layers\nHarris et al., 2013", font.main = 1)
   title("Guerrero Negro mat layers", font.main = 1)
   addhull(p7$ZC, p7$nH2O, "tan1", TRUE, lty = 2)
   pointfun(p7)
-  text(c(-0.1516, -0.1571, -0.1576), c(-0.7551, -0.7608, -0.7649), c("0-1 mm", "1-2 mm", "2-3 mm"))
+  text(c(-0.1518, -0.1577, -0.1578), c(-0.7547, -0.7602, -0.7637), c("0-1 mm", "1-2 mm", "2-3 mm"))
   legend <- c("Photic/oxic", "Low sulfide", "High sulfide")
   legend("topleft", legend, pch = c(24, 20, 25), pt.bg = c(4, 1, 2), bg = "white")
 
@@ -125,7 +125,7 @@ geo16S2 <- function(pdf = FALSE) {
   }
   plot(xlim, ylim, xlab = "", ylab = "", type = "n")
   lmlines()
-#  # Add convex hull for stratified lakes and sewater (from Fig. 3) 20210503
+#  # Add convex hull for stratified lakes and seawater (from Fig. 3) 20210503
 #  fig3 <- geo16S3(plot.it = FALSE)
 #  addhull(fig3$mar$ZC, fig3$mar$nH2O, "blue")
 #  addhull(fig3$ursu$ZC, fig3$ursu$nH2O, "turquoise3")
@@ -192,13 +192,11 @@ geo16S3 <- function(pdf = FALSE, plot.it = TRUE) {
   ursuZC <- ursunH2O <- numeric()
   for(i in 1:length(study)) {
     # ZC range for plots
-    if(study[i] == "BCA+20") ZClim <- c(-0.175, -0.145) else ZClim <- c(-0.17, -0.14)
+    if(study[i] == "BCA+20") ZClim <- c(-0.180, -0.145) else ZClim <- c(-0.172, -0.140)
     # Get the metadata and compositional metrics for this study
     # Keep all rows for higher-resolution O2 measurements
     mdat <- getmdat(study[i], dropNA = FALSE)
     metrics <- getmetrics(study[i])
-    # Use depths < 500 m (excludes 500-2000 m Black Sea to better visualize shallower trends)
-    mdat <- mdat[mdat$depth < 500, ]
     # Get the rows matching the ID
     iID <- mdat[, column[i]] == ID[i]
     mdat <- mdat[iID, ]
@@ -214,12 +212,27 @@ geo16S3 <- function(pdf = FALSE, plot.it = TRUE) {
 
     if(plot.it) {
       # Reverse y-axis (depth)
-      if(study[i] == "BCA+20") ylim <- c(11, 0) else ylim <- rev(range(depth))
+      ylim <- rev(range(depth))
+      # See deeper O2 concentrations in Ursu Lake
+      if(study[i] == "BCA+20") ylim <- c(11, 0)
+      if(study[i] == "SVH+19") {
+        print(mdat$depth)
+        # Plot 1000 and 2000 m samples closer to the others 20210608
+        ylim <- c(700, 50)
+        depth[match(c(1000, 2000), depth)] <- c(600, 700)
+      }
       # Determine whether the title has changed
       newplot <- TRUE
       if(i > 1) if(titlesub[i]==titlesub[i-1]) newplot <- FALSE
       if(newplot) {
-        plot(ZC, depth, xlim = ZClim, ylim = ylim, xlab = axis.label("ZC"), ylab = "Depth (m)", type = "b")
+        if(study[i] == "SVH+19") {
+          plot(ZC, depth, xlim = ZClim, ylim = ylim, xlab = axis.label("ZC"), ylab = "Depth (m)", type = "b", yaxt = "n")
+          axis(2, at = seq(100, 700, 100), labels = c(100, 200, 300, 400, 500, 1000, 2000), gap.axis = 0)
+          par(xpd = NA)
+          text(-0.1734, 550, "/", srt = 90, font = 2, cex = 2, col = "white")
+          text(-0.1734, 550, "/", srt = 90)
+          par(xpd = FALSE)
+        } else plot(ZC, depth, xlim = ZClim, ylim = ylim, xlab = axis.label("ZC"), ylab = "Depth (m)", type = "b")
       } else {
         # Add to plot if the title hasn't changed
         points(ZC, depth, type = "b", pch = 0)
@@ -266,8 +279,8 @@ geo16S3 <- function(pdf = FALSE, plot.it = TRUE) {
         mtext(xlab, side = 3, line = 1.7, cex = par("cex"))
         # Extra labels for ETNP
         if(title[i]=="ETNP") {
-          text(40, 78, "0.2-\n1.6 \u00B5m")
-          text(140, 135, "1.6-\n30 \u00B5m")
+          text(44, 76, "0.2-\n1.6 \u00B5m")
+          text(128, 138, "1.6-\n30 \u00B5m")
         }
         # Restore xlim for plotting ZC
         par(new = TRUE)
@@ -289,7 +302,7 @@ geo16S3 <- function(pdf = FALSE, plot.it = TRUE) {
     if(pdf) dev.off()
   }
   # Return values for marine and freshwater datasets and Ursu Lake 20210521
-  list(mar = list(ZC = marZC, nH2O = marnH2O), ursu = list(ZC = ursuZC, nH2O = ursunH2O))
+  invisible(list(mar = list(ZC = marZC, nH2O = marnH2O), ursu = list(ZC = ursuZC, nH2O = ursunH2O)))
 
 }
 
@@ -314,28 +327,28 @@ geo16S4 <- function(pdf = FALSE) {
     mdat = mdat, RDP = RDP, map = map
   )
   title("Manus Basin")
-  text(40, -0.1569, "   < 50 \u00B0C", font = 2)
-  text(10, -0.1569, "T", font = 4)
-  text(40, -0.2025, "   > 50 \u00B0C", font = 2)
-  text(10, -0.2025, "T", font = 4)
+  text(40, -0.161, "   < 50 \u00B0C", font = 2)
+  text(10, -0.161, "T", font = 4)
+  text(40, -0.204, "   > 50 \u00B0C", font = 2)
+  text(10, -0.204, "T", font = 4)
   p <- groupcomp("MPB+17", "ZC", "phylum", pch1 = 21, pch2 = 23, ylim = c(-0.23, -0.13),
-    xadj = c(Proteobacteria = 1, Bacteroidetes = -0.18, Campilobacterota = 0.45),
+    xadj = c(Proteobacteria = 1, Bacteroidetes = -0.18, Campilobacterota = 0.42),
     yadj = c(Bacteroidetes = 1, Campilobacterota = -3),
     mdat = mdat, RDP = RDP, map = map
   )
   title(paste0("Phylum (", round(p), "% of total)"))
   p <- groupcomp("MPB+17", "ZC", "class", pch1 = 21, pch2 = 23, ylim = c(-0.23, -0.13),
-    xadj = c(Flavobacteriia = -0.17, Gammaproteobacteria = 0.2, Campylobacteria = 0.45),
-    yadj = c(Flavobacteriia = 1.2, Gammaproteobacteria = 1.7, Campylobacteria = -3),
+    xadj = c(Flavobacteriia = -0.17, Gammaproteobacteria = 0.2, Campylobacteria = 0.45, Deltaproteobacteria = 0.1),
+    yadj = c(Flavobacteriia = 1.2, Gammaproteobacteria = 1.7, Campylobacteria = -3, Deltaproteobacteria = -0.8),
     mdat = mdat, RDP = RDP, map = map
   )
   title(paste0("Class (", round(p), "% of total)"))
   p <- groupcomp("MPB+17", "ZC", "genus", pch1 = 21, pch2 = 23, ylim = c(-0.23, -0.13), minpercent = 1,
-    xadj = c(Alteromonas = 0.1, Sulfurimonas = 1.05, Alcanivorax = -1, Halomonas = -0.65, Thiogranum = 0.17, Sulfurovum = -0.1, Pseudomonas = 0.1, Pseudoalteromonas = -0.25, Acinetobacter = 0.7),
-    yadj = c(Sulfurimonas = 1.5, Pseudomonas = 1.8, Sulfurovum = -0.5, Thiogranum = 5, Marinimicrobia_genera_incertae_sedis = -0.8, Alteromonas = 1.8, Acinetobacter = 1.5),
+    xadj = c(Alteromonas = 0.1, Sulfurimonas = 1.05, Alcanivorax = -1, Halomonas = -0.65, Thiogranum = 0.17, Sulfurovum = -0.1, Pseudomonas = 0.1, Pseudoalteromonas = -0.25, Acinetobacter = 0.72),
+    yadj = c(Sulfurimonas = 1.5, Pseudomonas = 1.8, Sulfurovum = -0.5, Thiogranum = 5.5, Marinimicrobia_genera_incertae_sedis = -0.8, Alteromonas = 1.8, Acinetobacter = 1.4),
     mdat = mdat, RDP = RDP, map = map
   )
-  lines(c(0, 0), c(-0.1525, -0.1425))
+  lines(c(0, 0), c(-0.1535, -0.1425))
   title(paste0("Genus (", round(p), "% of total)"))
 
   # Make plots for Baltic Sea
@@ -343,27 +356,27 @@ geo16S4 <- function(pdf = FALSE) {
   RDP <- getRDP("HLA+16", mdat = mdat)
   map <- getmap("HLA+16", RDP = RDP)
   p <- groupcomp("HLA+16", "nH2O", "domain", pch1 = 21, pch2 = 24, ylim = c(-0.78, -0.71), xlim = c(0, 100),
-    xadj = c(Bacteria = 1), yadj = c(Bacteria = 2),
+    xadj = c(Bacteria = 1), yadj = c(Bacteria = 1.5),
     mdat = mdat, RDP = RDP, map = map
   )
   title("Baltic Sea")
-  text(40, -0.7419, "Salinity < 6", font = 2)
+  text(40, -0.743, "Salinity < 6", font = 2)
   text(40, -0.7534, "Salinity > 20", font = 2)
   p <- groupcomp("HLA+16", "nH2O", "phylum", pch1 = 21, pch2 = 24, ylim = c(-0.78, -0.71),
     xadj = c(Proteobacteria = -0.2, Planctomycetes = 0.1, "Cyanobacteria/Chloroplast" = 0.35, Bacteroidetes = -0.1),
-    yadj = c(Planctomycetes = 1.8, "Cyanobacteria/Chloroplast" = 2.5),
+    yadj = c(Planctomycetes = 1.8, "Cyanobacteria/Chloroplast" = 2),
     mdat = mdat, RDP = RDP, map = map
   )
   title(paste0("Phylum (", round(p), "% of total)"))
   p <- groupcomp("HLA+16", "nH2O", "class", pch1 = 21, pch2 = 24, ylim = c(-0.78, -0.71),
-    xadj = c(Acidimicrobiia = 0.5, Gammaproteobacteria = 0.4, Flavobacteriia = -0.1, Verrucomicrobiae = -0.3, Betaproteobacteria = 0.25, Cyanobacteria = -0.07),
-    yadj = c(Acidimicrobiia = -1, Alphaproteobacteria = -0.6, Gammaproteobacteria = 1.6, Verrucomicrobiae = 1.5, Flavobacteriia = 1.1, Betaproteobacteria = 2.5),
+    xadj = c(Acidimicrobiia = 0.5, Gammaproteobacteria = 0.4, Flavobacteriia = -0.05, Verrucomicrobiae = -0.3, Betaproteobacteria = 0.55, Cyanobacteria = -0.07),
+    yadj = c(Acidimicrobiia = -1, Alphaproteobacteria = -0.6, Gammaproteobacteria = -1, Verrucomicrobiae = 1.5, Flavobacteriia = 1.2, Betaproteobacteria = -1),
     mdat = mdat, RDP = RDP, map = map
   )
   title(paste0("Class (", round(p), "% of total)"))
   p <- groupcomp("HLA+16", "nH2O", "genus", pch1 = 21, pch2 = 24, ylim = c(-0.78, -0.71), minpercent = 1,
     xadj = c(Spartobacteria_genera_incertae_sedis = 1.02, `Candidatus Pelagibacter` = 0, GpIIa = 1.1),
-    yadj = c(Spartobacteria_genera_incertae_sedis = -0.7),
+    yadj = c(Spartobacteria_genera_incertae_sedis = -0.7, GpI = 0.2),
     mdat = mdat, RDP = RDP, map = map
   )
   title(paste0("Genus (", round(p), "% of total)"))
@@ -400,7 +413,7 @@ geo16S5 <- function(pdf = FALSE) {
 
   studies <- c("UKD+18.water_2014", "UKD+18.sediment_2014", "CUN+18", "MMA+20_spring", "MMA+20_fall")
   # Start plot
-  plot(c(-0.148, -0.138), c(-0.744, -0.732), type = "n", xlab = cplab$ZC, ylab = cplab$nH2O)
+  plot(c(-0.148, -0.139), c(-0.744, -0.732), type = "n", xlab = cplab$ZC, ylab = cplab$nH2O)
   pch <- 21:25
   # Loop over studies
   for(i in 1:5) {
@@ -410,11 +423,11 @@ geo16S5 <- function(pdf = FALSE) {
     points(group$ZC2, group$nH2O2, pch = pch[i], cex = 1.8, lwd = 2, bg = "#df536ba0")
   }
   # Add labels
-  text(-0.1443, -0.736, "NW PA\nwater")
-  text(-0.1466, -0.7422, "NW PA\nsediment")
-  text(-0.1390, -0.7379, "NE PE\nsediment")
-  text(-0.1410, -0.7417, "PASF water (spring)")
-  text(-0.1420, -0.7431, "PASF water (fall)")
+  text(-0.1443, -0.7372, "NW PA\nwater")
+  text(-0.1475, -0.7420, "NW PA\nsediment")
+  text(-0.1405, -0.7390, "NE PE\nsediment")
+  text(-0.1428, -0.7420, "PASF water (spring)")
+  text(-0.1438, -0.7434, "PASF water (fall)")
   # Add legend
   legend("topleft", c("Lowest disturbance", "Highest disturbance"), pch = c(21, 21), pt.bg = c("#ffffffa0", "#df536ba0"), pt.cex = c(1.4, 1.7), lwd = 2, lty = NA)
   label.figure("B", cex = 1.5, xfrac = 0.03, font = 2)
@@ -441,9 +454,9 @@ geo16S5 <- function(pdf = FALSE) {
     points(group$ZC2, group$nH2O2, pch = pch[i], cex = 1.8, lwd = 2, bg = "#df536ba0")
   }
   # Add labels
-  text(-0.165, -0.726, "Marcellus Shale")
-  text(-0.204, -0.732, "Denver-Julesburg Basin")
-  text(-0.191, -0.719, "Duvernay Formation")
+  text(-0.166, -0.726, "Marcellus Shale")
+  text(-0.204, -0.729, "Denver-Julesburg Basin")
+  text(-0.172, -0.742, "Duvernay Formation")
   # Add legend
   legend("topright", c("Source water\nor injected fluids", "Produced water"), pch = c(21, 21), pt.bg = c("#ffffffa0", "#df536ba0"), pt.cex = c(1.4, 1.7), lwd = 2, lty = NA)
   label.figure("D", cex = 1.5, xfrac = 0.03, font = 2)
