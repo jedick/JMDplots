@@ -333,54 +333,67 @@ geo16S4 <- function(pdf = FALSE) {
   text(10, -0.161, "T", font = 4)
   text(40, -0.204, "   > 50 \u00B0C", font = 2)
   text(10, -0.204, "T", font = 4)
-  p <- groupcomp("MPB+17", "ZC", "phylum", pch1 = 21, pch2 = 23, ylim = c(-0.23, -0.13),
+
+  gg <- groupcomp("MPB+17", "ZC", "phylum", pch1 = 21, pch2 = 23, ylim = c(-0.23, -0.13),
     xadj = c(Proteobacteria = 1, Bacteroidetes = -0.18, Campilobacterota = 0.42),
     yadj = c(Bacteroidetes = 1, Campilobacterota = -3),
     mdat = mdat, RDP = RDP, map = map
   )
+  # Calculate total percentage of community represented by these taxa
+  p <- sum(gg$Pboth[!is.na(gg$X1) & !is.na(gg$X2)])
   title(paste0("Phylum (", round(p), "% of total)"))
-  p <- groupcomp("MPB+17", "ZC", "class", pch1 = 21, pch2 = 23, ylim = c(-0.23, -0.13),
+
+  gg <- groupcomp("MPB+17", "ZC", "class", pch1 = 21, pch2 = 23, ylim = c(-0.23, -0.13),
     xadj = c(Flavobacteriia = -0.17, Gammaproteobacteria = 0.2, Campylobacteria = 0.45, Deltaproteobacteria = 0.1),
     yadj = c(Flavobacteriia = 1.2, Gammaproteobacteria = 1.7, Campylobacteria = -3, Deltaproteobacteria = -0.8),
     mdat = mdat, RDP = RDP, map = map
   )
+  p <- sum(gg$Pboth[!is.na(gg$X1) & !is.na(gg$X2)])
   title(paste0("Class (", round(p), "% of total)"))
-  p <- groupcomp("MPB+17", "ZC", "genus", pch1 = 21, pch2 = 23, ylim = c(-0.23, -0.13), minpercent = 1,
+
+  gg <- groupcomp("MPB+17", "ZC", "genus", pch1 = 21, pch2 = 23, ylim = c(-0.23, -0.13), minpercent = 1,
     xadj = c(Alteromonas = 0.1, Sulfurimonas = 1.05, Alcanivorax = -1, Halomonas = -0.65, Thiogranum = 0.17, Sulfurovum = -0.1, Pseudomonas = 0.1, Pseudoalteromonas = -0.25, Acinetobacter = 0.72),
     yadj = c(Sulfurimonas = 1.5, Pseudomonas = 1.8, Sulfurovum = -0.5, Thiogranum = 5.5, Marinimicrobia_genera_incertae_sedis = -0.8, Alteromonas = 1.8, Acinetobacter = 1.4),
     mdat = mdat, RDP = RDP, map = map
   )
   lines(c(0, 0), c(-0.1535, -0.1425))
+  p <- sum(gg$Pboth[!is.na(gg$X1) & !is.na(gg$X2)])
   title(paste0("Genus (", round(p), "% of total)"))
 
   # Make plots for Baltic Sea
   mdat <- getmdat("HLA+16")
   RDP <- getRDP("HLA+16", mdat = mdat)
   map <- getmap("HLA+16", RDP = RDP)
-  p <- groupcomp("HLA+16", "nH2O", "domain", pch1 = 21, pch2 = 24, ylim = c(-0.78, -0.71), xlim = c(0, 100),
+  gg <- groupcomp("HLA+16", "nH2O", "domain", pch1 = 21, pch2 = 24, ylim = c(-0.78, -0.71), xlim = c(0, 100),
     xadj = c(Bacteria = 1), yadj = c(Bacteria = 1.5),
     mdat = mdat, RDP = RDP, map = map
   )
   title("Baltic Sea")
   text(40, -0.743, "Salinity < 6", font = 2)
   text(40, -0.7534, "Salinity > 20", font = 2)
-  p <- groupcomp("HLA+16", "nH2O", "phylum", pch1 = 21, pch2 = 24, ylim = c(-0.78, -0.71),
+
+  gg <- groupcomp("HLA+16", "nH2O", "phylum", pch1 = 21, pch2 = 24, ylim = c(-0.78, -0.71),
     xadj = c(Proteobacteria = -0.2, Planctomycetes = 0.1, "Cyanobacteria/Chloroplast" = 0.35, Bacteroidetes = -0.1),
     yadj = c(Planctomycetes = 1.8, "Cyanobacteria/Chloroplast" = 2),
     mdat = mdat, RDP = RDP, map = map
   )
+  p <- sum(gg$Pboth[!is.na(gg$X1) & !is.na(gg$X2)])
   title(paste0("Phylum (", round(p), "% of total)"))
-  p <- groupcomp("HLA+16", "nH2O", "class", pch1 = 21, pch2 = 24, ylim = c(-0.78, -0.71),
+
+  gg <- groupcomp("HLA+16", "nH2O", "class", pch1 = 21, pch2 = 24, ylim = c(-0.78, -0.71),
     xadj = c(Acidimicrobiia = 0.5, Gammaproteobacteria = 0.4, Flavobacteriia = -0.05, Verrucomicrobiae = -0.3, Betaproteobacteria = 0.55, Cyanobacteria = -0.07),
     yadj = c(Acidimicrobiia = -1, Alphaproteobacteria = -0.6, Gammaproteobacteria = -1, Verrucomicrobiae = 1.5, Flavobacteriia = 1.2, Betaproteobacteria = -1),
     mdat = mdat, RDP = RDP, map = map
   )
+  p <- sum(gg$Pboth[!is.na(gg$X1) & !is.na(gg$X2)])
   title(paste0("Class (", round(p), "% of total)"))
-  p <- groupcomp("HLA+16", "nH2O", "genus", pch1 = 21, pch2 = 24, ylim = c(-0.78, -0.71), minpercent = 1,
+
+  gg <- groupcomp("HLA+16", "nH2O", "genus", pch1 = 21, pch2 = 24, ylim = c(-0.78, -0.71), minpercent = 1,
     xadj = c(Spartobacteria_genera_incertae_sedis = 1.02, `Candidatus Pelagibacter` = 0, GpIIa = 1.1),
     yadj = c(Spartobacteria_genera_incertae_sedis = -0.7, GpI = 0.2),
     mdat = mdat, RDP = RDP, map = map
   )
+  p <- sum(gg$Pboth[!is.na(gg$X1) & !is.na(gg$X2)])
   title(paste0("Genus (", round(p), "% of total)"))
 
 #  # Between-study comparisons
@@ -408,28 +421,27 @@ geo16S5 <- function(pdf = FALSE) {
   xlim <- c(-0.16, -0.13)
   ylim <- c(-0.755, -0.725)
   plotcomp("UKD+18.water_2014", xlim = xlim, ylim = ylim, title = FALSE)
-  legend("topleft", c("MSA+", "MSA-"), pch = c(21, 1), pt.bg = c(2, 1), bg = "white", title = "Northwestern Pennsylvania")
+  legend("topleft", c("MSA-", "MSA+"), pch = c(1, 21), pt.bg = c(1, 2), bg = "white", title = "NW PA water")
   label.figure("A", cex = 1.5, xfrac = 0.03, font = 2)
 
   ## Plot B: Comparison of different studies on Pennsylvania Streams 20210327
 
-  studies <- c("UKD+18.water_2014", "UKD+18.sediment_2014", "CUN+18", "MMA+20_spring", "MMA+20_fall")
+  studies <- c("UKD+18.water_2014", "UKD+18.sediment_2014", "MMA+20_spring", "MMA+20_fall")
   # Start plot
-  plot(c(-0.148, -0.139), c(-0.744, -0.732), type = "n", xlab = cplab$ZC, ylab = cplab$nH2O)
+  plot(c(-0.148, -0.139), c(-0.745, -0.735), type = "n", xlab = cplab$ZC, ylab = cplab$nH2O)
   pch <- 21:25
   # Loop over studies
-  for(i in 1:5) {
+  for(i in 1:4) {
     group <- plotcomp(studies[[i]], plot.it = FALSE)$group
     points(group$ZC1, group$nH2O1, pch = pch[i], cex = 1.5, lwd = 2, bg = "#ffffffa0")
     lines(c(group$ZC1, group$ZC2), c(group$nH2O1, group$nH2O2))
     points(group$ZC2, group$nH2O2, pch = pch[i], cex = 1.8, lwd = 2, bg = "#df536ba0")
   }
   # Add labels
-  text(-0.1443, -0.7372, "NW PA\nwater")
-  text(-0.1475, -0.7420, "NW PA\nsediment")
-  text(-0.1405, -0.7390, "NE PE\nsediment")
-  text(-0.1428, -0.7420, "PASF water (spring)")
-  text(-0.1438, -0.7434, "PASF water (fall)")
+  text(-0.1423, -0.7388, "NW PA\nwater")
+  text(-0.1473, -0.7423, "NW PA\nsediment")
+  text(-0.1427, -0.7432, "PASF water (spring)")
+  text(-0.1435, -0.7447, "PASF water (fall)")
   # Add legend
   legend("topleft", c("Lowest disturbance", "Highest disturbance"), pch = c(21, 21), pt.bg = c("#ffffffa0", "#df536ba0"), pt.cex = c(1.4, 1.7), lwd = 2, lty = NA)
   label.figure("B", cex = 1.5, xfrac = 0.03, font = 2)

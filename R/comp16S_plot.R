@@ -375,7 +375,7 @@ getgroup <- function(study = "XDZ+17", metric = "nH2O", rank = "domain", pch1 = 
   # Calculate the compositional metrics for each unique taxon
   taxa <- na.omit(unique(RDPtaxa))
 #  # Include "Other" 20210608
-#  taxa <- c(taxa, "Other")
+#  if(withother) taxa <- c(taxa, "Other")
   X2 <- X1 <- P2 <- P1 <- Pboth <- numeric()
   taxon <- character()
   iall <- logical(length(RDPtaxa))
@@ -489,9 +489,7 @@ groupcomp <- function(..., xlim = NULL, ylim = NULL, xadj = NULL, yadj = NULL) {
   total2 <- sum(X2 * P2 / sum(P2))
   abline(h = total1, lty = 3, lwd = 2, col = gg$col1)
   abline(h = total2, lty = 2, lwd = 2, col = gg$col2)
-  # Calculate and return total percentage of community represented by these taxa
-  Pboth <- gg$Pboth[OK2 & OK1]
-  sum(Pboth)
+  invisible(gg)
 }
 
 # Plot contribution to difference of ZC or nH2O (percent of total) vs abundance for taxonomic groups 20210606

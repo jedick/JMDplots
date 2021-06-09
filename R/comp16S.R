@@ -395,6 +395,8 @@ getmap <- function(study, RDP = NULL, lineage = NULL) {
     "genus_GpIIa" = "genus_Synechococcus",
     "genus_GpVI" = "genus_Pseudanabaena",
     "family_Family II" = "family_Synechococcaceae",
+    # 20210609 Verrucomicrobia
+    "genus_Subdivision3_genera_incertae_sedis" = "family_Verrucomicrobia subdivision 3",
 
     ## NOT USED
 
@@ -477,20 +479,21 @@ getmetrics <- function(study, cn = FALSE, mdat = NULL, RDP = NULL, map = NULL, l
   igenusSparto <- RDP$rank == "genus" & RDP$name == "Spartobacteria_genera_incertae_sedis"
   iclassActino <- RDP$rank == "class" & RDP$name == "Actinobacteria"
   igenusMarini <- RDP$rank == "genus" & RDP$name == "Marinimicrobia_genera_incertae_sedis"
+  igenusVerruco <- RDP$rank == "genus" & RDP$name == "Subdivision3_genera_incertae_sedis"
   igenusGpI <- RDP$rank == "genus" & RDP$name == "GpI"
   igenusGpIIa <- RDP$rank == "genus" & RDP$name == "GpIIa"
-  equalrank <- equalrank[!(iclassCyano | igenusSparto | iclassActino | igenusMarini | igenusGpI | igenusGpIIa)]
+  equalrank <- equalrank[!(iclassCyano | igenusSparto | iclassActino | igenusMarini | igenusVerruco | igenusGpI | igenusGpIIa)]
   stopifnot(all(equalrank))
 
   # Get classification matrix (rows = taxa, columns = samples)
   RDPmat <- RDP[, -(1:3)]
+  # Calculate abundance-weighted mean nH2O for each sample
+  nH2O <- colSums(RDPmat * metrics$nH2O) / colSums(RDPmat)
+  # To calculate ZC, we need to compute the sum of charge (ZC * nC) and the sum of carbon atoms
+  sumZ <- colSums(RDPmat * metrics$ZC * metrics$nC)
+  sumC <- colSums(RDPmat * metrics$nC)
+  ZC <- sumZ / sumC
   if(is.null(groups)) {
-    # Calculate abundance-weighted mean nH2O for each sample
-    nH2O <- colSums(RDPmat * metrics$nH2O) / colSums(RDPmat)
-    # To calculate ZC, we need to compute the sum of charge (ZC * nC) and the sum of carbon atoms
-    sumZ <- colSums(RDPmat * metrics$ZC * metrics$nC)
-    sumC <- colSums(RDPmat * metrics$nC)
-    ZC <- sumZ / sumC
     # Create output data frame
     out <- data.frame(Run = colnames(RDPmat), sample = mdat$sample, nH2O = nH2O, ZC = ZC)
   } else {
@@ -504,6 +507,8 @@ getmetrics <- function(study, cn = FALSE, mdat = NULL, RDP = NULL, map = NULL, l
       sumC <- sum(thisRDP * metrics$nC)
       ZC <- c(ZC, sumZ / sumC)
     }
+#    ZC <- sapply(groups, function(i) mean(ZC[i]))
+#    nH2O <- sapply(groups, function(i) mean(nH2O[i]))
     out <- data.frame(Run = rep(NA, length(groups)), sample = 1:length(groups), nH2O = nH2O, ZC = ZC)
   }
 
