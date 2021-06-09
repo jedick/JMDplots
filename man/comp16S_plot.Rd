@@ -23,7 +23,7 @@ Functions to plot compositional metrics (\ZC and \nH2O) for inferred microbial c
     lineage = NULL, pch1 = 1, pch2 = 21)
   addhull(x, y, basecol, outline = FALSE, ...)
   getgroup(study = "XDZ+17", metric = "nH2O", rank = "domain",
-    pch1 = 21, pch2 = 24, minpercent = 2, study2 = NA,
+    pch1 = 21, pch2 = 24, minpercent = 2, study2 = NA, scale100 = FALSE,
     mdat = NULL, map = NULL, RDP = NULL)
   groupcomp(..., xlim = NULL, ylim = NULL, xadj = NULL, yadj = NULL)
   groupperc(..., xlim = NULL, ylim = NULL, xadj = NULL, yadj = NULL)
@@ -58,6 +58,7 @@ Functions to plot compositional metrics (\ZC and \nH2O) for inferred microbial c
   \item{rank}{character, taxonomic rank}
   \item{minpercent}{numeric, include taxa that are at least this abundant}
   \item{study2}{character, calculate differences between two studies instead of groups in one study}
+  \item{scale100}{logical, scale abundances in each group so they total 100 percent?}
   \item{mdat}{data frame, output from \code{\link{getmdat}}}
   \item{map}{data frame, output from \code{\link{getmap}}}
   \item{RDP}{data frame, output from \code{\link{getRDP}}}
@@ -89,10 +90,10 @@ The fill color is a lightened (semi-transparent) shade of the color given in \co
 }
 
 \value{
-\code{getgroup} returns a list with elements \samp{study}, \samp{metric} (study key and compositional metric), \samp{pch1}, \samp{pch2}, \samp{col1}, \samp{col2} (single plotting symbols and color for each sample group), \samp{X1}, \samp{X2} (values of the selected compositional metric for individual taxa within each sample group), \samp{P1}, \samp{P2} (percent abundances of the taxa within each sample group), \samp{Pboth} (percent abundance of each taxon in both sample groups (combined)), \samp{DX}, (contribution of each taxon to the difference between sample groups), \samp{Xwhole}, (values of the metric for sample groups 1 and 2), \samp{taxon} (taxon names).
+\code{getgroup} returns a list with elements \samp{study}, \samp{metric} (study key and compositional metric), \samp{pch1}, \samp{pch2}, \samp{col1}, \samp{col2} (single plotting symbols and color for each sample group), \samp{X1}, \samp{X2} (values of the selected compositional metric for individual taxa within each sample group), \samp{P1}, \samp{P2} (percent abundances of the taxa within each sample group), \samp{Pboth} (percent abundance of each taxon in both sample groups (combined)), \samp{DX}, (contribution of each taxon to the difference between sample groups), \samp{Xall}, (values of the metric for all taxa taken together in sample groups 1 and 2), \samp{taxon} (taxon names).
 
-\samp{DX} is calculated as \code{(X2 - Xwhole[1]) * P2 / 100 - (X1 - Xwhole[1]) * P1 / 100}.
-The value of \code{sum(DX) / diff(Xwhole)} should be close to 1.
+\samp{DX} is calculated as \code{(X2 - Xall[1]) * P2 / 100 - (X1 - Xall[1]) * P1 / 100}.
+Note that \code{sum(DX) / diff(Xall)} equals 1.
 }
 
 \seealso{
@@ -132,12 +133,10 @@ groupcomp("HLA+16", rank = "phylum")
 
 # Calculate contribution of individual phyla to the ZC difference
 # between high- and low-T samples at Manus Basin
-gg <- getgroup("MPB+17", "ZC", "phylum", pch2 = 23, pch1 = 21)
+gg <- getgroup("MPB+17", "ZC", "phylum", pch2 = 23, pch1 = 21, scale100 = TRUE)
 # This shows that changes in abundance and ZC of Campilobacterota, Aquificae,
 # and Proteobacteria contribute positively to the overall ZC change
-(DXpercent <- gg$DX / diff(gg$Xwhole) * 100)
-# The individual differences account for more than 98% of the overall change
-stopifnot(sum(DXpercent) > 98)
+gg$DX / diff(gg$Xall) * 100
 
 # Show the changes as percentages of the total
 groupperc("MPB+17", metric = "ZC", rank = "phylum", pch1 = 21, pch2 = 23)

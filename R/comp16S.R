@@ -51,7 +51,8 @@ getmdat <- function(study, dropNA = TRUE) {
     type[iwater][mdat$T[iwater] > 50] <- "highT"
     type[iwater][mdat$T[iwater] < 50] <- "lowT"
     pch <- sapply(type, switch, lowT = 21, highT = 23, "fauna surface" = 8, "rock/chimney" = 20, NA)
-    col <- sapply(type, switch, lowT = 4, highT = 2, "fauna surface" = "yellow4", "rock/chimney" = 1, NA)
+    # For fauna, use a darkened yellow4 with transparency 20210609
+    col <- sapply(type, switch, lowT = 4, highT = 2, "fauna surface" = "#757500C0", "rock/chimney" = 1, NA)
   }
   if(study == "SVH+19") { # Black Sea
     pch <- sapply(mdat$type, switch, oxic = 24, suboxic = 20, euxinic = 25, NA)

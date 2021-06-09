@@ -319,7 +319,7 @@ addhull <- function(x, y, basecol, outline = FALSE, ...) {
 # Get abundances and compositional metrics for taxonomic groups
 # to compare samples (within a study or between studies) 20210606
 getgroup <- function(study = "XDZ+17", metric = "nH2O", rank = "domain", pch1 = 21, pch2 = 24,
-  minpercent = 2, study2 = NA, mdat = NULL, map = NULL, RDP = NULL) {
+  minpercent = 2, study2 = NA, scale100 = FALSE, mdat = NULL, map = NULL, RDP = NULL) {
 
   # Get metadata, RDP and taxonomy mapping
   if(is.null(mdat)) mdat <- getmdat(study)
@@ -366,12 +366,6 @@ getgroup <- function(study = "XDZ+17", metric = "nH2O", rank = "domain", pch1 = 
   # Read compositional metrics for faster running
   datadir <- system.file("extdata/comp16S", package = "JMDplots")
   RefSeq_metrics <- read.csv(file.path(datadir, "RefSeq_metrics.csv"), as.is = TRUE)
-  # Calculate the change in compositional metric for the whole community
-  metrics <- getmetrics(study, mdat = mdat, RDP = RDP, map = map, metrics = RefSeq_metrics, groups = list(i1, i2))
-  # Get selected compositional metric
-  if(metric == "nH2O") X <- metrics$nH2O
-  if(metric == "ZC") X <- metrics$ZC
-  Xwhole <- X
 
   # Split the lineage text
   lsplit <- strsplit(RDP$lineage, ";")
@@ -384,13 +378,13 @@ getgroup <- function(study = "XDZ+17", metric = "nH2O", rank = "domain", pch1 = 
 #  taxa <- c(taxa, "Other")
   X2 <- X1 <- P2 <- P1 <- Pboth <- numeric()
   taxon <- character()
-  allI <- logical(length(RDPtaxa))
+  iall <- logical(length(RDPtaxa))
   for(j in seq_along(taxa)) {
     # Which organisms (by RDP classification) are in this taxon
-    if(taxa[j] == "Other") iRDP <- !allI else {
+    if(taxa[j] == "Other") iRDP <- !iall else {
       iRDP <- RDPtaxa == taxa[j]
       iRDP[is.na(iRDP)] <- FALSE
-      allI <- allI | iRDP
+      iall <- iall | iRDP
     }
     thisRDP <- RDP[iRDP, ]
     thismap <- map[iRDP]
@@ -425,20 +419,31 @@ getgroup <- function(study = "XDZ+17", metric = "nH2O", rank = "domain", pch1 = 
     P2 <- c(P2, sum(this2) / sum(all2) * 100)
   }
 
-  # Calculate change in metric contributed by each taxon 20210606
+  if(scale100) {
+    # Make percentages for *included* taxa sum to 100  20210609
+    P1 <- P1 / sum(P1) * 100
+    P2 <- P2 / sum(P2) * 100
+  }
+
   # Replace NA values for metric with 0 (where a taxon has zero abundance in one of the sample groups)
   x1 <- X1
   x1[is.na(x1)] <- 0
   x2 <- X2
   x2[is.na(x2)] <- 0
-  DX <- (x2 - Xwhole[1]) * P2 / 100 - (x1 - Xwhole[1]) * P1 / 100
+
+  # Calculate the change in compositional metric for all *included* taxa 20210609
+  Xall <- c(sum(P1 * x1), sum(P2 * x2)) / 100
+  # Calculate change in metric contributed by each taxon 20210606
+  DX <- (x2 - Xall[1]) * P2 / 100 - (x1 - Xall[1]) * P1 / 100
   names(DX) <- taxon
-  # Report total contribution 
-  DXpercent <- round(sum(DX / diff(Xwhole)) * 100, 2)
-  message(paste0("getgroup: total contribution to \u0394", metric, " by individual taxa is ", DXpercent, "% of whole"))
+  DXpercent <- round(sum(DX / diff(Xall)) * 100, 2)
+  if(scale100) {
+    # Check that total contribution sums to 100% 20210609
+    stopifnot(DXpercent == 100)
+  } else message(paste0("getgroup: total contribution to \u0394", metric, " by individual taxa is ", DXpercent, "% of whole"))
   # Assemble output
-  out <- list(study, metric, pch1, pch2, col1, col2, X1, X2, P1, P2, Pboth, DX, Xwhole, taxon)
-  names(out) <- c("study", "metric", "pch1", "pch2", "col1", "col2", "X1", "X2", "P1", "P2", "Pboth", "DX", "Xwhole", "taxon")
+  out <- list(study, metric, pch1, pch2, col1, col2, X1, X2, P1, P2, Pboth, DX, Xall, taxon)
+  names(out) <- c("study", "metric", "pch1", "pch2", "col1", "col2", "X1", "X2", "P1", "P2", "Pboth", "DX", "Xall", "taxon")
   out
 
 }
@@ -493,7 +498,7 @@ groupcomp <- function(..., xlim = NULL, ylim = NULL, xadj = NULL, yadj = NULL) {
 groupperc <- function(..., xlim = NULL, ylim = NULL, xadj = NULL, yadj = NULL) {
   # Calculate per-taxon contributions to total change of ZC
   gg <- getgroup(...)
-  DXpercent <- gg$DX / diff(gg$Xwhole) * 100
+  DXpercent <- gg$DX / diff(gg$Xall) * 100
   # Start plot
   if(is.null(xlim)) xlim <- range(gg$P1, gg$P2)
   if(is.null(ylim)) ylim <- range(DXpercent)

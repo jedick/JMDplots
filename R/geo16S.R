@@ -18,13 +18,15 @@ geo16S1 <- function(pdf = FALSE) {
   lines(c(-0.05, -0.015), c(-0.81, -0.9), lty = 2, col = "gray40")
   lines(c(-0.05, -0.015), c(-0.68, -0.65), lty = 2, col = "gray40")
   par(xpd = FALSE)
-  taxacomp("majorcellular", legend.x = "bottomleft", hline = c(-0.76, -0.71))
+
+  taxacomp("majorcellular", legend.x = "bottomleft", hline = c(-0.77, -0.71))
   title("Major cellular phyla and their classes", font.main = 1, cex.main = 1.4)
   label.figure("B", font = 2, cex = 1.6)
   par(xpd = NA)
-  lines(c(-0.05, -0.015), c(-0.76, -0.81), lty = 2, col = "gray40")
+  lines(c(-0.05, -0.015), c(-0.77, -0.81), lty = 2, col = "gray40")
   lines(c(-0.05, -0.015), c(-0.71, -0.68), lty = 2, col = "gray40")
   par(xpd = FALSE)
+
   taxacomp("proteobacteria", legend.x = "topright")
   title("Proteobacterial classes and their orders", font.main = 1, cex.main = 1.4)
   label.figure("C", font = 2, cex = 1.6)
@@ -80,7 +82,7 @@ geo16S2 <- function(pdf = FALSE) {
   pointfun(p4)
   legend <- as.expression(c(quote(italic(T)~"< 50 \u00B0C"), quote(italic(T)~"> 50 \u00B0C")))
   legend("bottomleft", legend, pch = c(21, 23), col = c(1, 1), pt.bg = c(4, 2), bg = "white", title = "Water")
-  legend("bottomright", c("Rock", "Fauna"), pch = c(20, 8), col = c(1, "yellow4"), bg = "white")
+  legend("bottomright", c("Rock", "Fauna"), pch = c(20, 8), col = c(1, "#757500C0"), bg = "white")
 
   p5 <- plotcomp("ZLM+16", title = FALSE, points = FALSE)
 #  title("Tibetan Plateau lakes\nZhong et al., 2016", font.main = 1)
