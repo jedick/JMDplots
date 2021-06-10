@@ -179,8 +179,8 @@ getmdat <- function(study, dropNA = TRUE) {
 
   # Stratified water datasets
   if(study == "MZG+20") {
-    # Identify shallowest and deepest samples from each lake
-    newdat <- lapply(unique(mdat$lake), function(lake) {
+    # Identify shallowest and deepest samples from Lakes Zug and Lugano
+    newdat <- lapply(c("Lake Zug", "Lake Lugano"), function(lake) {
       ilake <- mdat$lake == lake
       range <- range(mdat$depth[ilake])
       iext <- mdat$depth[ilake] %in% range
@@ -204,8 +204,10 @@ getmdat <- function(study, dropNA = TRUE) {
     col[mdat$station == "C4"] <- NA
   }
   if(study == "GBL+15") {
-    pch <- ifelse(mdat$depth < 85, 24, 25)
-    col <- ifelse(mdat$depth < 85, 4, 2)
+    pch <- ifelse(mdat$depth < 100, 24, ifelse(mdat$depth > 100, 25, 20))
+    col <- ifelse(mdat$depth < 100, 4, ifelse(mdat$depth > 100, 2, 1))
+    pch[mdat$size != "0.2-1.6micron"] <- NA
+    col[mdat$size != "0.2-1.6micron"] <- NA
   }
   if(study == "BCA+20") {
     type <- rep("transition", nrow(mdat))

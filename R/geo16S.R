@@ -479,3 +479,199 @@ geo16S5 <- function(pdf = FALSE) {
 
 }
 
+# Abundance and ZC of classes in oxidizing and reducing conditions 20210609
+geo16S_S1 <- function(pdf = FALSE) {
+  if(pdf) pdf("geo16S_S1.pdf", width = 9, height = 12)
+  par(mfrow = c(4, 3))
+  par(mar = c(4, 4, 2, 1))
+  par(mgp = c(2, 1, 0))
+
+  study <- c(
+    "GBL+15", "JHM+16", "MPB+17", "BCA+20",
+    "SVH+19", "MZG+20", "HXZ+20",
+    "UKD+18.water", "MMA+20_spring",
+    "CHM+14", "HRR+18", "ZLF+19"
+  )
+  description <- c(
+    "ETNP water", "Lake Fryxell mat", "Manus Basin vents", "Ursu Lake water",
+    "Black Sea water", "Swiss Lakes", "Sansha Yongle Blue Hole",
+    "NW Pennsylvania water", "PASF Streams (spring)",
+    "Marcellus Shale", "Denver-Julesburg Basin", "Duvernay Formation"
+  )
+  condition <- c(
+    "(> 100 m) - (< 100 m)",
+    "(anoxic) - (oxic)",
+    "(> 50 \u00B0C) - (< 50 \u00B0C)",
+    "(> 4 m) - (< 3 m)",
+    "(euxinic) - (oxic)",
+    "(deepest) - (shallowest)",
+    "(anoxic) - (oxic)",
+    "(MSA+) - (MSA-)",
+    "(high/highest) - (low/lowest)",
+    "(PW day 49+) - (IF day 0)",
+    "(FW day 130+) - (SW day 0)",
+    "(FW day 18) - (SW day 0)"
+  )
+  pch1 <- c(24, 24, 21, 24, 24, 24, 24, 1, 1, 1, 1, 1, 1)
+  pch2 <- c(25, 25, 23, 25, 25, 25, 25, 21, 21, 21, 21, 21, 21)
+  DZC <- numeric()
+  for(i in 1:length(study)) {
+    gg <- groupcomp(study[i], metric = "ZC", rank = "class", pch1 = pch1[i], pch2 = pch2[i], scale100 = TRUE, minpercent = 2)
+    title(study[i])
+    # Assemble percent contribution by each taxonomic group
+    P <- round(gg$DX / diff(gg$Xall) * 100)
+    P <- as.data.frame(t(P))
+    # Include study name and merge with other studies
+    P <- cbind(study = study[i], P)
+    if(i==1) percent <- P else percent <- merge(percent, P, all = TRUE)
+    # Keep track of the overall ZC change
+    DZC <- c(DZC, diff(gg$Xall))
+  }
+  if(pdf) dev.off()
+
+  # Save results for geo16S6() 20210610
+  out <- cbind(DZC = round(DZC, 4), percent)
+  write.csv(out, "geo16S_S1.csv", row.names = FALSE, quote = FALSE)
+}
+
+# Contributions of classes to overall ZC difference between oxidizing and reducing conditions 20210610
+geo16S6 <- function(pdf = FALSE) {
+  # Setup plot
+  if(pdf) pdf("geo16S6.pdf", width = 14, height = 8)
+  layout(matrix(c(1, 2), nrow = 1), widths = c(1, 8))
+  
+  # Read file created by geo16S_S1
+  file <- system.file("extdata/geo16S/geo16S_S1.csv", package = "JMDplots")
+  dat <- read.csv(file, as.is = TRUE)
+  DZC <- dat$DZC
+  percent <- dat[, -1]
+
+  study <- c(
+    "GBL+15", "JHM+16", "MPB+17", "BCA+20",
+    "SVH+19", "MZG+20", "HXZ+20",
+    "UKD+18.water", "MMA+20_spring",
+    "CHM+14", "HRR+18", "ZLF+19"
+  )
+  description <- c(
+    "ETNP water", "Lake Fryxell mat", "Manus Basin vents", "Ursu Lake water",
+    "Black Sea water", "Swiss Lakes", "Sansha Yongle Blue Hole",
+    "NW Pennsylvania water", "PASF Streams (spring)",
+    "Marcellus Shale", "Denver-Julesburg Basin", "Duvernay Formation"
+  )
+  condition <- c(
+    "(> 100 m) - (< 100 m)",
+    "(anoxic) - (oxic)",
+    "(> 50 \u00B0C) - (< 50 \u00B0C)",
+    "(> 4 m) - (< 3 m)",
+    "(euxinic) - (oxic)",
+    "(deepest) - (shallowest)",
+    "(anoxic) - (oxic)",
+    "(MSA+) - (MSA-)",
+    "(high/highest) - (low/lowest)",
+    "(PW day 49+) - (IF day 0)",
+    "(FW day 130+) - (SW day 0)",
+    "(FW day 18) - (SW day 0)"
+  )
+
+  # Plot ZC 
+  par(mar = c(8, 1, 1, 0.2))
+  par(las = 1)
+  plot(range(DZC), c(12.5, 0.5), ylim = c(12.5, 0.5), yaxs = "i", yaxt = "n", ylab = "", xlab = cplab$DZC, type = "n")
+  for(i in 1:12) lines(c(DZC[i], DZC[i]), c(i-0.5, i+0.5), lwd = 2)
+
+  # Make heatmap 20210609
+  # Move "study" column to rownames
+  rownames(percent) <- percent$study
+  percent <- percent[, -1]
+  # Reorder rows according to studies in paper
+  percent <- percent[match(study, rownames(percent)), ]
+  # Reorder columns to group classes by phyla
+  classes <- c(
+  "Alphaproteobacteria", "Betaproteobacteria", "Gammaproteobacteria", "Deltaproteobacteria",  # Proteobacteria
+  "Campylobacteria",  # Campylobacterota
+  "Acidobacteria_Gp1", "Acidobacteria_Gp3", "Acidobacteria_Gp6",  # Acidobacteria
+  "Actinobacteria", "Acidimicrobiia",  # Actinobacteria
+  "Clostridia", "Bacilli",  # Firmicutes
+  "Balneolia", "Chitinophagia", "Cytophagia", "Flavobacteriia", "Saprospiria",  # Bacteroidetes
+  "Verrucomicrobiae", "Spartobacteria", "Subdivision3",  # Verrucomicrobia
+  "Planctomycetacia", "Phycisphaerae", # Planctomycetes 
+  "Anaerolineae", "Caldilineae",  # Chloroflexi
+  "Cyanobacteria", # Cyanobateria
+  "Chlamydiia",  # Chlamydiae
+  "Aquificae",   # Aquificae
+  "Chlorobia",   # Chlorobi
+  "Nitrospira",  # Nitrospirae
+  "Nitrospinia", # Nitrospinae
+  "Synergistia", # Synergistetes
+  "Thermotogae"  # Thermotogae
+  )
+  icol <- match(classes, colnames(percent))
+  # Put any unmatched columns at the end
+  allcol <- 1:ncol(percent)
+  icol <- c(icol, allcol[!allcol %in% icol])
+  percent <- percent[, icol]
+  # Save the names for making rotated labels
+  labels <- colnames(percent)
+  colnames(percent) <- rep("", ncol(percent))
+  # Move names of single classes in phyla upwards
+  isingle <- labels %in% c("Campylobacteria", "Planctomycetacia", "Cyanobacteria", "Chlamydiia",
+    "Aquificae", "Chlorobia", "Nitrospira", "Nitrospinia", "Synergistia", "Thermotogae",
+    "Actinobacteria", "Acidimicrobiia", "Balneolia", "Chitinophagia", "Cytophagia", "Flavobacteriia", "Saprospiria",
+    "Planctomycetacia", "Phycisphaerae")
+  labels[!isingle] <- paste0(labels[!isingle], "   ")
+
+  # Make it a matrix
+  percent <- as.matrix(percent)
+  # Remove rownames - we will label the axis later
+  rownames(percent) <- rep("", nrow(percent))
+  # Truncate values to [-100, 100]
+  Pall <- percent
+  percent[percent < -100] <- -100
+  percent[percent > 100] <- 100
+
+  # Setup margins, colors, breaks
+  par(cex = 1)
+  par(mar = c(8, 12, 1, 4))
+  par(tcl = -0.3)
+  col <- function(n) hcl.colors(n, "Geyser", rev = TRUE)
+  breaks <- c(-100, -50, -20, -10, 0, 10, 20, 50, 100)
+
+  # Plot heatmap
+  requireNamespace("plot.matrix")
+  plot(percent, col = col, breaks = breaks, main = "", xlab = "", ylab = "")
+  # Add triangles to indicate values > 100
+  iup <- Pall > 100
+  iup[is.na(iup)] <- FALSE
+  xyup <- which(iup, arr.ind = TRUE)
+  x <- xyup[, 2]
+  y <- 13 - xyup[, 1]
+  points(x, y, pch = 2, cex = 1, lwd = 2, col = "#ffffffc0")
+  # We would plot down-pointing triange for values < -100, but there aren't any
+  stopifnot(all(na.omit(as.vector(Pall >= -100))))
+
+  # Make rotated labels (modified from https://www.r-bloggers.com/rotated-axis-labels-in-r-plots/)
+  text(x = seq_along(labels) + 0.3, y = par()$usr[3] - 2 * strheight("A"), labels = labels, srt = 40, adj = 1, xpd = TRUE)
+
+  # Add phylum labels
+  par(xpd = NA)
+  text(2.5, 0.1, "Proteobacteria", font = 2, cex = 0.7)
+  text(7, 0.05, "Acidobacteria", font = 2, cex = 0.7)
+  text(9.5, 0.23, "Actinobacteria", font = 2, cex = 0.7)
+  text(11.5, 0.05, "Firmicutes", font = 2, cex = 0.7)
+  text(15, 0.2, "Bacteroidetes", font = 2, cex = 0.7)
+  lines(c(12.8, 13.5), c(0.2, 0.2))
+  lines(c(16.5, 17.2), c(0.2, 0.2))
+  text(19, 0.05, "Verrucomicrobia", font = 2, cex = 0.7)
+  text(21.5, 0.23, "Planctomycetes", font = 2, cex = 0.7)
+  text(23.5, 0.05, "Chloroflexi", font = 2, cex = 0.7)
+
+  # Add outer legend label
+  text(33.8, 12.4, expression(Delta * italic(Z)[C] * "%"))
+  par(xpd = FALSE)
+
+  # Add dataset description and conditions
+  axis(2, at = 12:1 + 0.2, labels = description, tick = FALSE)
+  axis(2, at = 12:1 - 0.2, labels = condition, tick = FALSE)
+
+  if(pdf) dev.off()
+}
