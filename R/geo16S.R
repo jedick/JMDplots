@@ -498,26 +498,41 @@ geo16S_S1 <- function(pdf = FALSE) {
     "NW Pennsylvania water", "PASF Streams (spring)",
     "Marcellus Shale", "Denver-Julesburg Basin", "Duvernay Formation"
   )
-  condition <- c(
-    "(> 100 m) - (< 100 m)",
-    "(anoxic) - (oxic)",
-    "(> 50 \u00B0C) - (< 50 \u00B0C)",
-    "(> 4 m) - (< 3 m)",
-    "(euxinic) - (oxic)",
-    "(deepest) - (shallowest)",
-    "(anoxic) - (oxic)",
-    "(MSA+) - (MSA-)",
-    "(high/highest) - (low/lowest)",
-    "(PW day 49+) - (IF day 0)",
-    "(FW day 130+) - (SW day 0)",
-    "(FW day 18) - (SW day 0)"
-  )
   pch1 <- c(24, 24, 21, 24, 24, 24, 24, 1, 1, 1, 1, 1, 1)
   pch2 <- c(25, 25, 23, 25, 25, 25, 25, 21, 21, 21, 21, 21, 21)
+  xadj <- list(
+    c(Gammaproteobacteria = 1.1, Flavobacteriia = -0.9, Planctomycetacia = 0.5),
+    c(Alphaproteobacteria = -0.25, Saprospiria = 0.5),
+    c(Campylobacteria = 0.5, Deltaproteobacteria = 0.1),
+    c(Saprospiria = -0.6, Gammaproteobacteria = -0.5, Balneolia = -0.65, Deltaproteobacteria = 1.3, Cytophagia = -0.35, Clostridia = 1.5, Verrucomicrobiae = -0.1, Planctomycetacia = -0.22),
+    c(Planctomycetacia = -0.1, Cyanobacteria = -1, Alphaproteobacteria = -0.5, Verrucomicrobiae = -0.5, Flavobacteriia = -0.05, Deltaproteobacteria = 0.9, Gammaproteobacteria = -0.05),
+    c(Phycisphaerae = -0.3, Planctomycetacia = -0.27, Alphaproteobacteria = -0.15, Nitrospira = -0.15, Cyanobacteria = -0.65, Gammaproteobacteria = 1),
+    c(Acidimicrobiia = -0.05, Alphaproteobacteria = -0.05, Cyanobacteria = -0.8, Gammaproteobacteria = 1.05),
+    c(Alphaproteobacteria = 1, Bacilli = -0.2, Actinobacteria = -0.05),
+    c(Acidobacteria_Gp6 = -0.1, Acidobacteria_Gp1 = -0.1, Spartobacteria = -0.1, Subdivision3 = -0.1, Deltaproteobacteria = 0.3, Alphaproteobacteria = 0.87, Betaproteobacteria = 0.2),
+    c(Gammaproteobacteria = -0.1, Clostridia = 1.2, Campylobacteria = -0.55),
+    c(Gammaproteobacteria = -0.2),
+    c(Actinobacteria = -0.05, Betaproteobacteria = -0.3, Alphaproteobacteria = 0.1, Flavobacteriia = -0.5, Clostridia = 1.7)
+  )
+  yadj <- list(
+    c(Cyanobacteria = 1.5, Flavobacteriia = 0, Planctomycetacia = -0.8),
+    c(Saprospiria = -0.5, Planctomycetacia = 1.5, Verrucomicrobiae = -0.4, Caldilineae = 2, Deltaproteobacteria = -0.2, Cytophagia = 1.4),
+    c(Gammaproteobacteria = 1.2, Deltaproteobacteria = -0.6, Flavobacteriia = -0.4, Campylobacteria = -3.5),
+    c(Saprospiria = 0, Balneolia = 0, Deltaproteobacteria = -1.7, Cytophagia = -0.6, Flavobacteriia = 1.5, Clostridia = 0, Verrucomicrobiae = 2),
+    c(Alphaproteobacteria = -2.3, Verrucomicrobiae = 14, Flavobacteriia = 0.8, Deltaproteobacteria = 1.8),
+    c(Phycisphaerae = -1, Planctomycetacia = -12, Nitrospira = 1.9, Deltaproteobacteria = -0.5, Gammaproteobacteria = -1.2),
+    c(Acidimicrobiia = 1.3, Cyanobacteria = 1.5, Nitrospinia = 1.7, Flavobacteriia = -0.5),
+    c(Betaproteobacteria = 1.3, Clostridia = -0.2),
+    c(Acidobacteria_Gp3 = -1.3, Subdivision3 = 1, Acidobacteria_Gp1 = -0.5, Spartobacteria = 0.3, Deltaproteobacteria = 1.3, Betaproteobacteria = -0.8, Alphaproteobacteria = 1.9),
+    c(Clostridia = 1.3),
+    c(Gammaproteobacteria = 1.3),
+    c(Actinobacteria = 1.2, Betaproteobacteria = 1, Alphaproteobacteria = 1.6)
+  )
+
   DZC <- numeric()
   for(i in 1:length(study)) {
-    gg <- groupcomp(study[i], metric = "ZC", rank = "class", pch1 = pch1[i], pch2 = pch2[i], scale100 = TRUE, minpercent = 2)
-    title(study[i])
+    gg <- groupcomp(study[i], metric = "ZC", rank = "class", pch1 = pch1[i], pch2 = pch2[i], xadj = xadj[[i]], yadj = yadj[[i]], scale100 = TRUE, minpercent = 2)
+    title(description[i])
     # Assemble percent contribution by each taxonomic group
     P <- round(gg$DX / diff(gg$Xall) * 100)
     P <- as.data.frame(t(P))

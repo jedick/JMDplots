@@ -65,7 +65,12 @@ This vignette runs the code to make the plots from the following paper:
 
 > Dick JM, Tan J. 2021. Genomic evidence for a chemical link between redox conditions and microbial community composition. bioRxiv. doi: [10.1101/2021.05.31.446500](https://doi.org/10.1101/2021.05.31.446500)
 
-The plots in this vignette are modified from the preprint in the following way: All taxids are weighted equally (instead of by number of reference sequences) to calculate the mean amino acid composition for taxonomic groups.
+The plots in this vignette are modified from the preprint in the following ways:
+
+* All taxids are weighted equally (instead of by number of reference sequences) to calculate the mean amino acid composition for taxonomic groups.
+* For subsets of samples, RDP counts are aggregated to calculate `r ZC` and `r nH2O` (instead of taking the mean of these values among samples).
+* Removed dataset for NE Pennsylvania stream sediment.
+* Added Fig. 6 and Fig. S1.
 
 This vignette was compiled on `r Sys.Date()` with **[JMDplots](https://github.com/jedick/JMDplots)** `r packageDescription("JMDplots")$Version` and **[CHNOSZ](http://chnosz.net)** `r packageDescription("CHNOSZ")$Version`.
 
@@ -78,7 +83,7 @@ library(JMDplots)
 geo16S1()
 ```
 
-**Data source:** NCBI Reference Sequence (RefSeq) database [@OWB+16]. **Numbered symbols**: (1) Methanococci, (2) Thermococci, (3) Archaeoglobi, (4) Nanohaloarchaea, (5) Halobacteria, (6) Clostridia.
+**Data source:** NCBI Reference Sequence (RefSeq) database [@OWB+16]. **Numbered symbols**: (1) Methanococci, (2) Archaeoglobi, (3) Thermococci, (4) Halobacteria, (5) Nanohaloarchaea, (6) Clostridia.
 
 ## Inferred community proteomes from different environments have distinct chemical signatures (Figure 2)
 ```{r geo16S2, message = FALSE, results = "hide", out.width='100%', fig.width = 9, fig.height = 7, out.extra='class="full-width"', pngquant = pngquant, dpi = 100}
@@ -106,7 +111,7 @@ geo16S4()
 geo16S5()
 ```
 
-**Data sources:** Northwestern Pennsylvania stream water and sediment [@UKD+18], Northeastern Pennslvania stream sediment [@CUN+18], Pennsylvania State Forests stream water in spring and fall [@MMA+20], Marcellus Shale [@CHM+14], Denver--Julesburg Basin [@HRR+18], Duvernay Formation [@ZLF+19].
+**Data sources:** Northwestern Pennsylvania stream water and sediment [@UKD+18], Pennsylvania State Forests stream water in spring and fall [@MMA+20], Marcellus Shale [@CHM+14], Denver--Julesburg Basin [@HRR+18], Duvernay Formation [@ZLF+19].
 
 ## Contributions of classes to overall `r ZC` difference between oxidizing and reducing conditions (Figure 6)
 ```{r geo16S6, message = FALSE, results = "hide", out.width='100%', fig.width = 14, fig.height = 8, out.extra = 'class="full-width"', pngquant = pngquant}

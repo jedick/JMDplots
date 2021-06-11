@@ -209,7 +209,7 @@ taxacomp <- function(groups = c("Bacteria", "Archaea"), xlim = NULL, ylim = NULL
     # Label Halobacteria and Nanohaloarchaea 20200930
     thisgroup <- taxa[i]
     if(thisgroup == "Euryarchaeota") {
-      ihalo <- match(c("Methanococci", "Thermococci", "Archaeoglobi", "Nanohaloarchaea", "Halobacteria"), children$group)
+      ihalo <- match(c("Methanococci", "Archaeoglobi", "Thermococci", "Halobacteria", "Nanohaloarchaea"), children$group)
       dy <- ifelse(groups == "majorcellular", 0.0025, 0.005)
       dx <- c(0, 0, 0, 0.002, 0)
       text(children$ZC[ihalo] + dx, children$nH2O[ihalo] + dy, c(1, 2, 3, 4, 5))
@@ -425,16 +425,15 @@ getgroup <- function(study = "XDZ+17", metric = "nH2O", rank = "domain", pch1 = 
     P2 <- P2 / sum(P2) * 100
   }
 
-  # Replace NA values for metric with 0 (where a taxon has zero abundance in one of the sample groups)
-  x1 <- X1
-  x1[is.na(x1)] <- 0
-  x2 <- X2
-  x2[is.na(x2)] <- 0
+  # Replace NA values for metric (where a taxon has zero abundance)
+  # with value from other sample group 20210611
+  X1[is.na(X1)] <- X2[is.na(X1)]
+  X2[is.na(X2)] <- X1[is.na(X2)]
 
   # Calculate the change in compositional metric for all *included* taxa 20210609
-  Xall <- c(sum(P1 * x1), sum(P2 * x2)) / 100
+  Xall <- c(sum(P1 * X1), sum(P2 * X2)) / 100
   # Calculate change in metric contributed by each taxon 20210606
-  DX <- (x2 - Xall[1]) * P2 / 100 - (x1 - Xall[1]) * P1 / 100
+  DX <- (X2 - Xall[1]) * P2 / 100 - (X1 - Xall[1]) * P1 / 100
   names(DX) <- taxon
   DXpercent <- round(sum(DX / diff(Xall)) * 100, 2)
   if(scale100) {
