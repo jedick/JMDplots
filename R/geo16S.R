@@ -584,7 +584,7 @@ geo16S6 <- function(pdf = FALSE) {
     "(MSA+) - (MSA-)",
     "(high/highest) - (low/lowest)",
     "(PW day 49+) - (IF day 0)",
-    "(FW day 130+) - (SW day 0)",
+    "(PW day 130+) - (SW day 0)",
     "(FW day 18) - (SW day 0)"
   )
 
@@ -648,7 +648,7 @@ geo16S6 <- function(pdf = FALSE) {
   par(cex = 1)
   par(mar = c(8, 12, 1, 4))
   par(tcl = -0.3)
-  col <- function(n) hcl.colors(n, "Geyser", rev = TRUE)
+  col <- function(n) hcl.colors(n, "RdYlBu")
   breaks <- c(-100, -50, -20, -10, 0, 10, 20, 50, 100)
 
   # Plot heatmap

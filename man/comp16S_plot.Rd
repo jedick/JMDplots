@@ -20,7 +20,7 @@ Functions to plot compositional metrics (\ZC and \nH2O) for inferred microbial c
     pch = NULL, hline = NULL, filterspecies = TRUE, lcol = NULL)
   plotcomp(study, cn = FALSE, identify = FALSE, title = TRUE,
     xlim = NULL, ylim = NULL, plot.it = TRUE, points = TRUE, lines = FALSE,
-    lineage = NULL, pch1 = 1, pch2 = 21)
+    lineage = NULL, pch1 = 1, pch2 = 21, dropNA = TRUE)
   addhull(x, y, basecol, outline = FALSE, ...)
   getgroup(study = "XDZ+17", metric = "nH2O", rank = "domain",
     pch1 = 21, pch2 = 24, minpercent = 2, study2 = NA, scale100 = FALSE,
@@ -49,6 +49,7 @@ Functions to plot compositional metrics (\ZC and \nH2O) for inferred microbial c
   \item{lineage}{character, restrict plot to this taxonomic lineage}
   \item{pch1}{numeric, symbol for samples in group 1}
   \item{pch2}{numeric, symbol for samples in group 2}
+  \item{dropNA}{logical, exclude samples with NA name in metadata?}
   \item{x}{x values}
   \item{y}{y values}
   \item{basecol}{color used for hull lines}
@@ -122,13 +123,18 @@ legend("bottomright", legend, pch = pch, col = 1, pt.bg = pt.bg, bg = "white")
 addhull(pc$ZC, pc$nH2O, "blue", TRUE)
 addhull(pc$ZC, pc$nH2O, "slategray1")
 
+# Some samples (i.e. outliers) have an NA name in the metadata
+# to exclude them from further calculations.
+# Use dropNA = FALSE to show all samples.
+plotcomp("UKD+18.sediment", dropNA = FALSE)
+
 # Make a plot for only Proteobacteria
 plotcomp("HLA+16", lineage = "Proteobacteria")
 
 # Add points for aggregated high- and low-salinity samples
 plotcomp("HLA+16", pch1 = 21, pch2 = 24)
 
-# Plot nH2O differences for individual phyla
+# Plot nH2O and abundances for individual phyla
 groupcomp("HLA+16", rank = "phylum")
 
 # Calculate contribution of individual phyla to the ZC difference

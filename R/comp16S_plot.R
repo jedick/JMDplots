@@ -248,9 +248,9 @@ taxacomp <- function(groups = c("Bacteria", "Archaea"), xlim = NULL, ylim = NULL
 
 # Plot compositional metrics for all samples in a study 20200901
 plotcomp <- function(study, cn = FALSE, identify = FALSE, title = TRUE, xlim = NULL, ylim = NULL,
-  plot.it = TRUE, points = TRUE, lines = FALSE, lineage = NULL, pch1 = 1, pch2 = 21) {
+  plot.it = TRUE, points = TRUE, lines = FALSE, lineage = NULL, pch1 = 1, pch2 = 21, dropNA = TRUE) {
   # Get amino acid composition for samples
-  mdat <- getmdat(study)
+  mdat <- getmdat(study, dropNA = dropNA)
   RDP <- getRDP(study, cn = cn, mdat = mdat, lineage = lineage)
   metrics <- getmetrics(study, mdat = mdat, RDP = RDP, lineage = lineage)
   # Keep metadata only for samples with >= 200 counts 20201006

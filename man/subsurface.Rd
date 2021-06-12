@@ -25,7 +25,7 @@ Tully, B. J., Wheat, C. G., Glazer, B. T. and Huber, J. A. (2018) A dynamic micr
 subsurface <- list(
   Peru_Margin = list( # 20180313 [OECB13]
     depth = c("5m", "30m", "50m", "70m", "91m", "159m"),
-    SRA_MT = c("SRX187180", "SRX330851", "SRX331883", "SRX331884", "SRX331956", "SRX331958"),
+    SRA_MT = c("SRX187180","SRX330851","SRX331883","SRX331884","SRX331956","SRX331958"),
     MT_range = c(1.64, 1.72),
     MTP_range = c(-0.18, -0.13),
     abbrev = "PM",

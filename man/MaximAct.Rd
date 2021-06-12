@@ -56,7 +56,7 @@ Dick, J. M. (2021) Redox potential linked to water loss from proteins in evoluti
 datadir <- system.file("extdata/evdevH2O", package = "JMDplots")
 aa <- read.csv(file.path(datadir, "FOK+21_mean_aa.csv"), as.is = TRUE)
 aa <- subset(aa, organism == "transcriptome")
-OA <- MaximAct(aa, seed = 1:3, nbackground = 200, O2 = c(-72, -65, 15), H2O = c(-2, 5, 15))
+OA <- MaximAct(aa, seed = 1:3, nbackground = 200, O2 = c(-72,-65,15), H2O = c(-2,5,15))
 ## Default arguments used in runMaximAct -- takes much longer
 #OA <- MaximAct(aa, seed = 1:100, nbackground = 2000, O2 = c(-72, -65), H2O = c(-2, 5))
 # The logaH2O decreases at the end of the time course

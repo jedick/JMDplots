@@ -17,8 +17,9 @@ Plots from the papers by Dick (2016 and 2017).
     xlim = c(-75, -55), ylim = c(-10, 10), dy = 0.2)
   rankdiff(rank1, rank2, n1 = NULL, n2 = NULL, as.fraction=TRUE)
   rankplot(pdat, T = 37, what = "rankdiff", main = NULL, res = 300,
-           plot.it = TRUE, xlim = c(-75, -55), ylim = c(-10, 10), basis = "QEC+")
-  groupplots(group = "hypoxia_ZC_down", each100 = FALSE, res = 50, plot.it = TRUE)
+    plot.it = TRUE, xlim = c(-75, -55), ylim = c(-10, 10), basis = "QEC+")
+  groupplots(group = "hypoxia_ZC_down", each100 = FALSE, res = 50,
+    plot.it = TRUE)
   mergedplot(gpresult, each100 = FALSE, res = 50)
   get_colors(x, max50 = FALSE)
 }
