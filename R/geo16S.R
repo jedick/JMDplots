@@ -494,7 +494,7 @@ geo16S_S1 <- function(pdf = FALSE) {
   )
   description <- c(
     "ETNP water", "Lake Fryxell mat", "Manus Basin vents", "Ursu Lake water",
-    "Black Sea water", "Swiss Lakes", "Sansha Yongle Blue Hole",
+    "Black Sea water", "Swiss lakes", "Sansha Yongle Blue Hole",
     "NW Pennsylvania water", "PASF Streams (spring)",
     "Marcellus Shale", "Denver-Julesburg Basin", "Duvernay Formation"
   )
@@ -569,7 +569,7 @@ geo16S6 <- function(pdf = FALSE) {
   )
   description <- c(
     "ETNP water", "Lake Fryxell mat", "Manus Basin vents", "Ursu Lake water",
-    "Black Sea water", "Swiss Lakes", "Sansha Yongle Blue Hole",
+    "Black Sea water", "Swiss lakes", "Sansha Yongle Blue Hole",
     "NW Pennsylvania water", "PASF Streams (spring)",
     "Marcellus Shale", "Denver-Julesburg Basin", "Duvernay Formation"
   )

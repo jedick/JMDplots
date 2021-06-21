@@ -261,8 +261,8 @@ getRDP <- function(study, cn = FALSE, mdat = NULL, lineage = NULL) {
   # Keep the "lineage", "rank", "name", and counts columns
   dat <- dat[, c(2, 4, 3, icol)]
 
-  if(grepl("NLF+20", study, fixed = TRUE)) {
-    # For NLF+20, just use all counts as-is
+  if(grepl("WAN+17", study, fixed = TRUE)) {
+    # For WAN+17, just use all counts as-is
     out <- dat
     totalcounts <- colSums(out[, -(1:3), drop = FALSE])
   } else {
@@ -290,7 +290,6 @@ getRDP <- function(study, cn = FALSE, mdat = NULL, lineage = NULL) {
     stopifnot(all(abs(totalcounts - rootcounts) < 0.1))
   }
 
-
   # Keep specified lineage 20200924
   if(!is.null(lineage)) {
     precount <- sum(out[, -(1:3)])
@@ -310,7 +309,8 @@ getRDP <- function(study, cn = FALSE, mdat = NULL, lineage = NULL) {
   igenus <- out$rank == "genus"
   genuscounts <- colSums(out[igenus, -(1:3), drop = FALSE])
   # Print median percent genus counts
-  genuspercent <- round(100 * median(genuscounts / totalcounts))
+  # Use na.omit to handle divide-by-zero 20210621
+  genuspercent <- round(100 * median(na.omit(genuscounts / totalcounts)))
   print(paste0("getRDP [", study, "]: ", genuspercent, "% of classifications at genus level"))
 
   # Remove classifications at root and domain level (Bacteria and Archaea),
@@ -330,7 +330,8 @@ getRDP <- function(study, cn = FALSE, mdat = NULL, lineage = NULL) {
   # Recalculate total counts
   totalcounts <- colSums(out[, -(1:3), drop = FALSE])
 
-  if(is.null(lineage)) {
+  # Add & max(totalcounts) >= 200 for RHM+20  20210615
+  if(is.null(lineage) & max(totalcounts) >= 200) {
     # Discard samples with < 200 total counts 20201001
     ismall <- totalcounts < 200
     if(any(ismall)) {
