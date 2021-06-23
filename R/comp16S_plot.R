@@ -284,16 +284,18 @@ plotcomp <- function(study, cn = FALSE, identify = FALSE, title = TRUE, xlim = N
     }
   }
 
-  # Calculate sample group values 20210607
   i1 <- pch %in% pch1
   i2 <- pch %in% pch2
-  metrics <- getmetrics(study, mdat = mdat, RDP = RDP, lineage = lineage, groups = list(i1, i2))
   group <- list()
   if(!is.null(pch2) & !is.null(pch1) & sum(i2) > 0 & sum(i1) > 0) {
-    group <- list(ZC1 = metrics$ZC[1], ZC2 = metrics$ZC[2], nH2O1 = metrics$nH2O[1], nH2O2 = metrics$nH2O[2])
+    # Calculate mean of sample values 20201003
+    group <- list(ZC1 = mean(ZC[i1]), ZC2 = mean(ZC[i2]), nH2O1 = mean(nH2O[i1]), nH2O2 = mean(nH2O[i2]))
+#    # Calculate values for aggregated samples 20210607
+#    metrics <- getmetrics(study, mdat = mdat, RDP = RDP, lineage = lineage, groups = list(i1, i2))
+#    group <- list(ZC1 = metrics$ZC[1], ZC2 = metrics$ZC[2], nH2O1 = metrics$nH2O[1], nH2O2 = metrics$nH2O[2])
     if(plot.it) {
-      col1 <- mdat$col[mdat$pch == pch1]
-      col2 <- mdat$col[mdat$pch == pch2]
+      col1 <- na.omit(mdat$col[mdat$pch == pch1])[1]
+      col2 <- na.omit(mdat$col[mdat$pch == pch2])[1]
       points(group$ZC1, group$nH2O1, pch = 8, cex = 2, lwd = 4, col = "white")
       points(group$ZC1, group$nH2O1, pch = 8, cex = 2, lwd = 2, col = col1)
       points(group$ZC2, group$nH2O2, pch = 8, cex = 2, lwd = 4, col = "white")

@@ -468,7 +468,7 @@ geo16S5 <- function(pdf = FALSE) {
     points(group$ZC2, group$nH2O2, pch = pch[i], cex = 1.8, lwd = 2, bg = "#df536ba0")
   }
   # Add labels
-  text(-0.166, -0.726, "Marcellus Shale")
+  text(-0.164, -0.726, "Marcellus Shale")
   text(-0.204, -0.729, "Denver-Julesburg Basin")
   text(-0.172, -0.742, "Duvernay Formation")
   # Add legend
