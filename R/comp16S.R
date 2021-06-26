@@ -255,37 +255,48 @@ getRDP <- function(study, cn = FALSE, mdat = NULL, lineage = NULL) {
   file <- file.path(datadir, "RDP", paste0(studyfile, ".tab.xz"))
   # If there is no .xz file, look for a .tab file 20210607
   if(!file.exists(file)) file <- file.path(datadir, "RDP", paste0(studyfile, ".tab"))
-  dat <- read.table(file, sep = "\t", header = TRUE)
+  datorig <- dat <- read.table(file, sep = "\t", header = TRUE, check.names = FALSE)
   # Get counts for each sample
   icol <- match(Run, colnames(dat))
   # Keep the "lineage", "rank", "name", and counts columns
   dat <- dat[, c(2, 4, 3, icol)]
 
-  if(grepl("WAN+17", study, fixed = TRUE)) {
-    # For WAN+17, just use all counts as-is
-    out <- dat
-    totalcounts <- colSums(out[, -(1:3), drop = FALSE])
-  } else {
-    # Find the ranks for the "unclassified" (i.e. classified at higher rank than genus)
-    iunclass <- grepl("unclassified_", dat$name)
-    if(any(iunclass)) {
-      unclassname <- gsub("unclassified_", "", dat$name[iunclass])
-      # Split the lineage text and find the length of each one
-      slineage <- strsplit(dat$lineage[iunclass], ";")
-      sllength <- vapply(slineage, length, 1)
-      # The rank is a certain number of positions before the end
-      irank <- sllength - 2
-      unclassrank <- mapply("[", slineage, irank)
-      dat$rank[iunclass] <- unclassrank
-      dat$name[iunclass] <- unclassname
-    }
-    # Keep the rows for counts at genus and higher ranks ("unclassified")
+  iunclass <- grepl("unclassified_", dat$name)
+  if(any(iunclass)) {
+    # Find the ranks for the "unclassified" counts
+    # (which means classified at higher rank than genus)
+    unclassname <- gsub("unclassified_", "", dat$name[iunclass])
+    # Split the lineage text and find the length of each one
+    slineage <- strsplit(dat$lineage[iunclass], ";")
+    sllength <- vapply(slineage, length, 1)
+    # The rank is a certain number of positions before the end
+    irank <- sllength - 2
+    unclassrank <- mapply("[", slineage, irank)
+    dat$rank[iunclass] <- unclassrank
+    dat$name[iunclass] <- unclassname
+  }
+  if(any(iunclass) | !is.na(datorig$taxid[1])) {
+    # This is for the actual output from the RDP Classifier
+    # We want to keep genus-level classifications; also:
+    # Remove the counts of classifications at higher ranks (which are also counted at lower ranks)
+    # *except* for the ones labeled "unclassified" (which are not counted at lower ranks)
     igenus <- dat$rank == "genus"
     out <- dat[igenus | iunclass, ]
-    # Get the total counts
-    totalcounts <- colSums(out[, -(1:3), drop = FALSE])
-    # Get the "rootrank" counts
-    rootcounts <- dat[1, -(1:3)]
+  } else {
+    if(grepl("WAN+17", study, fixed = TRUE)) {
+      # Here the taxon counts are assembled from SI tables; just the all counts as-is
+      out <- dat
+    } else {
+      # For MicrobiomeHD datasets, all OTU classifications are to lowest taxonomic level 20210623
+      # Remove the first row (sum of counts)
+      out <- dat[-1, ]
+    }
+  }
+  # Get the total counts
+  totalcounts <- colSums(out[, -(1:3), drop = FALSE])
+  # Get the "rootrank" counts
+  rootcounts <- dat[1, -(1:3)]
+  if(!grepl("WAN+17", study, fixed = TRUE)) {
     # Stop if total counts doesn't equal "rootrank" counts
     stopifnot(all(abs(totalcounts - rootcounts) < 0.1))
   }
