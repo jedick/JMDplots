@@ -1,4 +1,4 @@
-# JMDplots/comp16S.R
+# JMDplots/chem16S.R
 # Calculate compositional metrics based on 16S data and RefSeq proteins 20200902
 # Revised to include "unclassified" groups in RDP (i.e. classified above genera) 20200911
 # Moved to JMDplots 20210416
@@ -18,7 +18,7 @@ getmdat <- function(study, dropNA = TRUE) {
   # Read metadata file
   # Remove suffix after underscore 20200929
   studyfile <- gsub("_.*", "", study)
-  datadir <- getOption("comp16Sdir")
+  datadir <- getOption("chem16Sdir")
   file <- file.path(datadir, "metadata", paste0(studyfile, ".csv"))
   mdat <- read.csv(file, as.is = TRUE, check.names = FALSE)
 
@@ -251,7 +251,7 @@ getRDP <- function(study, cn = FALSE, mdat = NULL, lineage = NULL) {
   # Remove suffix after underscore 20200929
   studyfile <- gsub("_.*", "", study)
   # Read output of RDP classifer
-  datadir <- getOption("comp16Sdir")
+  datadir <- getOption("chem16Sdir")
   file <- file.path(datadir, "RDP", paste0(studyfile, ".tab.xz"))
   # If there is no .xz file, look for a .tab file 20210607
   if(!file.exists(file)) file <- file.path(datadir, "RDP", paste0(studyfile, ".tab"))
@@ -443,7 +443,7 @@ getmap <- function(study, RDP = NULL, lineage = NULL) {
   }
 
   # Read amino acid composition of all taxonomic groups in RefSeq
-  datadir <- system.file("extdata/comp16S", package = "JMDplots")
+  datadir <- system.file("extdata/chem16S", package = "JMDplots")
   AA <- read.csv(file.path(datadir, "groupAA.csv"), as.is = TRUE)
   AAgroups <- paste(AA$protein, AA$organism, sep = "_")
   iAA <- match(RDPgroups, AAgroups)
@@ -483,7 +483,7 @@ getmetrics <- function(study, cn = FALSE, mdat = NULL, RDP = NULL, map = NULL, l
   if(length(map) == 0) stop("no mappings to available RefSeq taxa!")
 
   # Get compositional metrics of RefSeq groups
-  datadir <- system.file("extdata/comp16S", package = "JMDplots")
+  datadir <- system.file("extdata/chem16S", package = "JMDplots")
   if(is.null(metrics)) metrics <- read.csv(file.path(datadir, "RefSeq_metrics.csv"), as.is = TRUE)
   metrics <- metrics[map, ]
   # Make sure the mapping is correct

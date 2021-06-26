@@ -4,7 +4,7 @@
 # 20210416 Initial commit to JMDplots
 # 20210527 Updated plots for RefSeq release 206
 
-# Figure 1: Chemical compositions of taxonomic groups 20200925
+# Figure 1: Chemical parameters of predicted proteoms for taxonomic groups 20200925
 geo16S1 <- function(pdf = FALSE) {
 
   if(pdf) pdf("geo16S1.pdf", width = 11, height = 5)

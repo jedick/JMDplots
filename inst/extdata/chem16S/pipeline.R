@@ -1,4 +1,4 @@
-# comp16S/pipeline.R
+# chem16S/pipeline.R
 # Merge and filter 16S SRA sequences, subsample, find chimeras, and run RDP Classifier
 # 20200909 jmd v1
 
@@ -60,16 +60,16 @@ trunclen <- settings$trunclen[istudy]
 ## FILE LOCATIONS
 
 # Working directory
-workdir <- "~/tmp/comp16S"
+workdir <- "~/tmp/chem16S"
 # Output directory for FASTA files
-FASTAdir <- file.path("/home/comp16S", study, "fasta")
+FASTAdir <- file.path("/home/chem16S", study, "fasta")
 # Reference database for chimera detection
-refdb <- "/home/comp16S/SILVA/SILVA_138.1_SSURef_NR99_tax_silva.fasta.gz"
-#refdb <- "/home/comp16S/chimera/gold.fa"
+refdb <- "/home/chem16S/SILVA/SILVA_138.1_SSURef_NR99_tax_silva.fasta.gz"
+#refdb <- "/home/chem16S/chimera/gold.fa"
 # RDP jar file
 RDPjar <- "/opt/rdp_classifier_2.13/dist/classifier.jar"
 # Output directory for RDP Classifier
-RDPdir <- file.path("/home/comp16S", study, "RDP")
+RDPdir <- file.path("/home/chem16S", study, "RDP")
 # RDP Classifier version (java -jar /opt/rdp_classifier_2.13/dist/classifier.jar version)
 #Gene:16srrna    Trainset No:18  Taxonomy Version:RDP 16S rRNA training setNo 18 07/2020
 #RDP Classifier Version:RDP Naive Bayesian rRNA Classifier Version 2.11, September 2015

@@ -14,10 +14,10 @@ JMDplots <- new.env()
   })
 }
 
-# Set 'comp16Sdir' option 20210607
+# Set 'chem16Sdir' option 20210607
 # Adapted from R/src/library/grDevices/zzz.R
 .onLoad <- function(libname, pkgname) {
-  op.JMDplots <- list(comp16Sdir = system.file("extdata/comp16S", package = "JMDplots"))
+  op.JMDplots <- list(chem16Sdir = system.file("extdata/chem16S", package = "JMDplots"))
   toset <- !(names(op.JMDplots) %in% names(.Options))
   if(any(toset)) options(op.JMDplots[toset])
 }

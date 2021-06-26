@@ -1,6 +1,6 @@
-# JMDplots/comp16S_plot.R
+# JMDplots/chem16S_plot.R
 # Plotting functions for predicted RefSeq and inferred community proteomes
-# Separated from comp16S.R 20210607
+# Separated from chem16S.R 20210607
 
 # taxacomp()                # nH2O-ZC plot for taxa (default: Bacteria, Archaea) and their children
 # plotcomp("KGP+12")        # nH2O-ZC plot for specified study
@@ -35,7 +35,7 @@ taxacomp <- function(groups = c("Bacteria", "Archaea"), xlim = NULL, ylim = NULL
   col = seq_along(groups), legend.x = "topleft", identify = FALSE, pch = NULL, hline = NULL, filterspecies = TRUE, lcol = NULL) {
 
   # Read compositional metrics of all taxa
-  datadir <- system.file("extdata/comp16S", package = "JMDplots")
+  datadir <- system.file("extdata/chem16S", package = "JMDplots")
   metrics <- read.csv(file.path(datadir, "RefSeq_metrics.csv"), as.is = TRUE)
   # Default point symbols
   taxa <- groups
@@ -366,7 +366,7 @@ getgroup <- function(study = "XDZ+17", metric = "nH2O", rank = "domain", pch1 = 
   col1 <- mdat[i1, ]$col[1]
   col2 <- mdat[i2, ]$col[1]
   # Read compositional metrics for faster running
-  datadir <- system.file("extdata/comp16S", package = "JMDplots")
+  datadir <- system.file("extdata/chem16S", package = "JMDplots")
   RefSeq_metrics <- read.csv(file.path(datadir, "RefSeq_metrics.csv"), as.is = TRUE)
 
   # Split the lineage text

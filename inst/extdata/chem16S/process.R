@@ -1,4 +1,4 @@
-# comp16S/process.R
+# chem16S/process.R
 
 # File preparation functions
 # mkRDP("KGP+12")     # Combine output of RDP Classifier into one file --> RDP/KGP+12.tab
@@ -20,7 +20,7 @@ mkRDP <- function(study) {
   # Loop over runs
   for(i in 1:nrow(mdat)) {
     # The RDP result file
-    RDPfile <- file.path("/home/comp16S", mdat$study[i], "RDP", paste0(mdat$Run[i], ".txt"))
+    RDPfile <- file.path("/home/chem16S", mdat$study[i], "RDP", paste0(mdat$Run[i], ".txt"))
     print(RDPfile)
     # Copy the RDP result file to here (temporary directory)
     file.copy(RDPfile, ".")

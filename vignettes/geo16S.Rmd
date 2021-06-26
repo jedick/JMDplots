@@ -78,7 +78,7 @@ This vignette was compiled on `r Sys.Date()` with **[JMDplots](https://github.co
 library(JMDplots)
 ```
 
-## Distinct chemical compositions of predicted proteomes of major taxonomic groups (Figure 1)
+## Distinct chemical parameters of predicted proteomes for major taxonomic groups (Figure 1)
 ```{r geo16S1, message = FALSE, warning = FALSE, results = "hide", out.width='100%', fig.width = 11, fig.height = 5, out.extra='class="full-width"', pngquant = pngquant, dpi = 100}
 geo16S1()
 ```

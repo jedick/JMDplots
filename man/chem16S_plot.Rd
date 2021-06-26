@@ -1,6 +1,6 @@
 \encoding{UTF-8}
-\name{comp16S_plot}
-\alias{comp16S_plot}
+\name{chem16S_plot}
+\alias{chem16S_plot}
 \alias{taxacomp}
 \alias{plotcomp}
 \alias{addhull}
@@ -8,9 +8,9 @@
 \alias{getrefseq}
 \alias{getgroup}
 \alias{groupperc}
-\title{Plot compositional metrics of taxa and community proteomes inferred from 16S rRNA gene sequences}
+\title{Plot chemical parameters of taxa and community proteomes inferred from 16S rRNA gene sequences}
 \description{
-Functions to plot compositional metrics (\ZC and \nH2O) for inferred microbial community proteomes.
+Functions to plot chemical parameters (\ZC and \nH2O) for inferred microbial community proteomes.
 }
 
 \usage{
@@ -40,7 +40,7 @@ Functions to plot compositional metrics (\ZC and \nH2O) for inferred microbial c
   \item{pch}{plotting symbol}
   \item{hline}{numeric, add lines to show range of following plot}
   \item{lcol}{color for lines}
-  \item{study}{study key corresponding to file names in \code{extdata/comp16S} (e.g. \samp{HCW+13})}
+  \item{study}{study key corresponding to file names in \code{extdata/chem16S} (e.g. \samp{HCW+13})}
   \item{cn}{logical, apply copy-number correction to RDP classifier results?}
   \item{title}{character, plot title}
   \item{plot.it}{logical, make a plot?}
@@ -55,7 +55,7 @@ Functions to plot compositional metrics (\ZC and \nH2O) for inferred microbial c
   \item{basecol}{color used for hull lines}
   \item{outline}{logical, draw hull lines?}
   \item{...}{arguments passed to \code{\link{polygon}} (by \code{addulll}) or \code{getgroup} (by \code{groupcomp})}
-  \item{metric}{compositional metric, \samp{ZC} or \samp{nH2O}}
+  \item{metric}{chemical parameter, \samp{ZC} or \samp{nH2O}}
   \item{rank}{character, taxonomic rank}
   \item{minpercent}{numeric, include taxa that are at least this abundant}
   \item{study2}{character, calculate differences between two studies instead of groups in one study}
@@ -91,14 +91,14 @@ The fill color is a lightened (semi-transparent) shade of the color given in \co
 }
 
 \value{
-\code{getgroup} returns a list with elements \samp{study}, \samp{metric} (study key and compositional metric), \samp{pch1}, \samp{pch2}, \samp{col1}, \samp{col2} (single plotting symbols and color for each sample group), \samp{X1}, \samp{X2} (values of the selected compositional metric for individual taxa within each sample group), \samp{P1}, \samp{P2} (percent abundances of the taxa within each sample group), \samp{Pboth} (percent abundance of each taxon in both sample groups (combined)), \samp{DX}, (contribution of each taxon to the difference between sample groups), \samp{Xall}, (values of the metric for all taxa taken together in sample groups 1 and 2), \samp{taxon} (taxon names).
+\code{getgroup} returns a list with elements \samp{study}, \samp{metric} (study key and chemical parameter), \samp{pch1}, \samp{pch2}, \samp{col1}, \samp{col2} (single plotting symbols and color for each sample group), \samp{X1}, \samp{X2} (values of the selected chemical parameter for individual taxa within each sample group), \samp{P1}, \samp{P2} (percent abundances of the taxa within each sample group), \samp{Pboth} (percent abundance of each taxon in both sample groups (combined)), \samp{DX}, (contribution of each taxon to the difference between sample groups), \samp{Xall}, (values of the metric for all taxa taken together in sample groups 1 and 2), \samp{taxon} (taxon names).
 
 \samp{DX} is calculated as \code{(X2 - Xall[1]) * P2 / 100 - (X1 - Xall[1]) * P1 / 100}.
 Note that \code{sum(DX) / diff(Xall)} equals 1.
 }
 
 \seealso{
-\code{\link{comp16S}} for the functions used to calculate the compositional metrics.
+\code{\link{chem16S}} for the functions used to calculate the chemical parameters.
 }
 
 \references{
