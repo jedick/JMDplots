@@ -195,10 +195,10 @@ geo16S3 <- function(pdf = FALSE, plot.it = TRUE) {
   for(i in 1:length(study)) {
     # ZC range for plots
     if(study[i] == "BCA+20") ZClim <- c(-0.180, -0.145) else ZClim <- c(-0.172, -0.140)
-    # Get the metadata and compositional metrics for this study
+    # Get the metadata and compositional parameters for this study
     # Keep all rows for higher-resolution O2 measurements
     mdat <- getmdat(study[i], dropNA = FALSE)
-    metrics <- getmetrics(study[i])
+    params <- getparams(study[i])
     # Get the rows matching the ID
     iID <- mdat[, column[i]] == ID[i]
     mdat <- mdat[iID, ]
@@ -208,9 +208,9 @@ geo16S3 <- function(pdf = FALSE, plot.it = TRUE) {
     mdat <- mdat[!is.na(mdat$name), ]
     depth <- mdat$depth
     # Get the ZC and nH2O values
-    imet <- match(mdat$Run, metrics$Run)
-    ZC <- metrics$ZC[imet]
-    nH2O <- metrics$nH2O[imet]
+    imet <- match(mdat$Run, params$Run)
+    ZC <- params$ZC[imet]
+    nH2O <- params$nH2O[imet]
 
     if(plot.it) {
       # Reverse y-axis (depth)
@@ -531,7 +531,7 @@ geo16S_S1 <- function(pdf = FALSE) {
 
   DZC <- numeric()
   for(i in 1:length(study)) {
-    gg <- groupcomp(study[i], metric = "ZC", rank = "class", pch1 = pch1[i], pch2 = pch2[i], xadj = xadj[[i]], yadj = yadj[[i]], scale100 = TRUE, minpercent = 2)
+    gg <- groupcomp(study[i], param = "ZC", rank = "class", pch1 = pch1[i], pch2 = pch2[i], xadj = xadj[[i]], yadj = yadj[[i]], scale100 = TRUE, minpercent = 2)
     title(description[i])
     # Assemble percent contribution by each taxonomic group
     P <- round(gg$DX / diff(gg$Xall) * 100)

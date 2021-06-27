@@ -34,9 +34,9 @@ getrefseq <- function(filterspecies = TRUE) {
 taxacomp <- function(groups = c("Bacteria", "Archaea"), xlim = NULL, ylim = NULL,
   col = seq_along(groups), legend.x = "topleft", identify = FALSE, pch = NULL, hline = NULL, filterspecies = TRUE, lcol = NULL) {
 
-  # Read compositional metrics of all taxa
+  # Read chemical parameters of all taxa
   datadir <- system.file("extdata/chem16S", package = "JMDplots")
-  metrics <- read.csv(file.path(datadir, "RefSeq_metrics.csv"), as.is = TRUE)
+  params <- read.csv(file.path(datadir, "taxon_parameters.csv"), as.is = TRUE)
   # Default point symbols
   taxa <- groups
   if(is.null(pch)) pch <- rep(21, length(taxa))
@@ -44,7 +44,7 @@ taxacomp <- function(groups = c("Bacteria", "Archaea"), xlim = NULL, ylim = NULL
 
   # For "majorphyla", get names of phyla with more than 500 representatives
   if(identical(groups, "majorphyla")) {
-    phyla <- metrics[metrics$rank == "phylum", ]
+    phyla <- params[params$rank == "phylum", ]
     phyla <- phyla[phyla$ntaxa > 500, ]
     phyla <- phyla[order(phyla$ntaxa, decreasing = TRUE), ]
     # Move viruses to end 20200926
@@ -58,7 +58,7 @@ taxacomp <- function(groups = c("Bacteria", "Archaea"), xlim = NULL, ylim = NULL
 
   # "majorcellular" is like "majorphyla" but excludes Viruses
   if(identical(groups, "majorcellular")) {
-    phyla <- metrics[metrics$rank == "phylum" & metrics$parent != "Viruses", ]
+    phyla <- params[params$rank == "phylum" & params$parent != "Viruses", ]
     phyla <- phyla[phyla$ntaxa > 60, ]
     phyla <- phyla[order(phyla$ntaxa, decreasing = TRUE), ]
     # Swap Chloroflexi and Crenarchaeota so latter doesn't have same color as Euryarchaeota 20210527
@@ -143,10 +143,10 @@ taxacomp <- function(groups = c("Bacteria", "Archaea"), xlim = NULL, ylim = NULL
 
   for(i in seq_along(taxa)) {
     thisgroup <- taxa[i]
-    # Get the compositional metrics for this group
-    igroup <- metrics$group == thisgroup
-    if(sum(igroup) > 1) warning(paste0("found more than one ", thisgroup, " (", paste(metrics$rank[igroup], collapse = ", "), "); using the first"))
-    group <- metrics[which(igroup)[1], ]
+    # Get the chemical parameters for this group
+    igroup <- params$group == thisgroup
+    if(sum(igroup) > 1) warning(paste0("found more than one ", thisgroup, " (", paste(params$rank[igroup], collapse = ", "), "); using the first"))
+    group <- params[which(igroup)[1], ]
     if(identical(group$rank, "genus")) {
       # For a genus, look for children (species) in full RefSeq data frame 20210603
       if(is.null(refseq_species)) {
@@ -169,9 +169,9 @@ taxacomp <- function(groups = c("Bacteria", "Archaea"), xlim = NULL, ylim = NULL
       sp.nH2O <- H2OAA(sp.refseq)
       children <- data.frame(group = sp.refseq$ref, chains = sp.refseq$chains, ZC = sp.ZC, nH2O = sp.nH2O)
     } else {
-      # Get the compositional metrics for all children
-      ichildren <- metrics$parent == thisgroup
-      children <- metrics[ichildren, ]
+      # Get the chemical parameters for all children
+      ichildren <- params$parent == thisgroup
+      children <- params[ichildren, ]
     }
     # Store the values to make the plot
     vals[[i]] <- list(group = group, children = children)
@@ -246,20 +246,20 @@ taxacomp <- function(groups = c("Bacteria", "Archaea"), xlim = NULL, ylim = NULL
   invisible(vals)
 }
 
-# Plot compositional metrics for all samples in a study 20200901
+# Plot chemical parameters for all samples in a study 20200901
 plotcomp <- function(study, cn = FALSE, identify = FALSE, title = TRUE, xlim = NULL, ylim = NULL,
   plot.it = TRUE, points = TRUE, lines = FALSE, lineage = NULL, pch1 = 1, pch2 = 21, dropNA = TRUE) {
   # Get amino acid composition for samples
   mdat <- getmdat(study, dropNA = dropNA)
   RDP <- getRDP(study, cn = cn, mdat = mdat, lineage = lineage)
-  metrics <- getmetrics(study, mdat = mdat, RDP = RDP, lineage = lineage)
+  params <- getparams(study, mdat = mdat, RDP = RDP, lineage = lineage)
   # Keep metadata only for samples with >= 200 counts 20201006
-  mdat <- mdat[mdat$Run %in% metrics$Run, ]
+  mdat <- mdat[mdat$Run %in% params$Run, ]
   pch <- mdat$pch
   col <- mdat$col
   # Get nH2O and ZC
-  nH2O <- metrics$nH2O
-  ZC <- metrics$ZC
+  nH2O <- params$nH2O
+  ZC <- params$ZC
 
   if(plot.it) {
     # Start plot
@@ -277,7 +277,7 @@ plotcomp <- function(study, cn = FALSE, identify = FALSE, title = TRUE, xlim = N
     else if(!isFALSE(title)) title(title, font.main = 1)
     # Identify points 20200903
     if(identify) {
-      identify(ZC, nH2O, metrics$sample)
+      identify(ZC, nH2O, params$sample)
       ## Label points with RDP counts 20200919
       #count <- round(colSums(RDP[, -(1:3)]))
       #identify(ZC, nH2O, count)
@@ -291,8 +291,8 @@ plotcomp <- function(study, cn = FALSE, identify = FALSE, title = TRUE, xlim = N
     # Calculate mean of sample values 20201003
     group <- list(ZC1 = mean(ZC[i1]), ZC2 = mean(ZC[i2]), nH2O1 = mean(nH2O[i1]), nH2O2 = mean(nH2O[i2]))
 #    # Calculate values for aggregated samples 20210607
-#    metrics <- getmetrics(study, mdat = mdat, RDP = RDP, lineage = lineage, groups = list(i1, i2))
-#    group <- list(ZC1 = metrics$ZC[1], ZC2 = metrics$ZC[2], nH2O1 = metrics$nH2O[1], nH2O2 = metrics$nH2O[2])
+#    params <- getparams(study, mdat = mdat, RDP = RDP, lineage = lineage, groups = list(i1, i2))
+#    group <- list(ZC1 = params$ZC[1], ZC2 = params$ZC[2], nH2O1 = params$nH2O[1], nH2O2 = params$nH2O[2])
     if(plot.it) {
       col1 <- na.omit(mdat$col[mdat$pch == pch1])[1]
       col2 <- na.omit(mdat$col[mdat$pch == pch2])[1]
@@ -318,9 +318,9 @@ addhull <- function(x, y, basecol, outline = FALSE, ...) {
   }
 }
 
-# Get abundances and compositional metrics for taxonomic groups
+# Get abundances and chemical parameters for taxonomic groups
 # to compare samples (within a study or between studies) 20210606
-getgroup <- function(study = "XDZ+17", metric = "nH2O", rank = "domain", pch1 = 21, pch2 = 24,
+getgroup <- function(study = "XDZ+17", param = "nH2O", rank = "domain", pch1 = 21, pch2 = 24,
   minpercent = 2, study2 = NA, scale100 = FALSE, mdat = NULL, map = NULL, RDP = NULL) {
 
   # Get metadata, RDP and taxonomy mapping
@@ -365,16 +365,16 @@ getgroup <- function(study = "XDZ+17", metric = "nH2O", rank = "domain", pch1 = 
   # Retrieve colors for points
   col1 <- mdat[i1, ]$col[1]
   col2 <- mdat[i2, ]$col[1]
-  # Read compositional metrics for faster running
+  # Read chemical parameters for faster running
   datadir <- system.file("extdata/chem16S", package = "JMDplots")
-  RefSeq_metrics <- read.csv(file.path(datadir, "RefSeq_metrics.csv"), as.is = TRUE)
+  taxon_parameters <- read.csv(file.path(datadir, "taxon_parameters.csv"), as.is = TRUE)
 
   # Split the lineage text
   lsplit <- strsplit(RDP$lineage, ";")
   # Find the taxa with the specified rank in the lineage
   irank <- vapply(lsplit, function(x) match(rank, x), 0) - 1
   RDPtaxa <- mapply("[", lsplit, irank)
-  # Calculate the compositional metrics for each unique taxon
+  # Calculate the chemical parameters for each unique taxon
   taxa <- na.omit(unique(RDPtaxa))
 #  # Include "Other" 20210608
 #  if(withother) taxa <- c(taxa, "Other")
@@ -405,11 +405,11 @@ getgroup <- function(study = "XDZ+17", metric = "nH2O", rank = "domain", pch1 = 
     taxon <- c(taxon, taxa[j])
     Pboth <- c(Pboth, thispercent)
 
-    # Calculate the compositional metrics
-    metrics <- getmetrics(study, mdat = mdat, RDP = thisRDP, map = thismap, metrics = RefSeq_metrics, groups = list(i1, i2))
-    # Get selected compositional metric
-    if(metric == "nH2O") X <- metrics$nH2O
-    if(metric == "ZC") X <- metrics$ZC
+    # Calculate the chemical parameters
+    params <- getparams(study, mdat = mdat, RDP = thisRDP, map = thismap, params = taxon_parameters, groups = list(i1, i2))
+    # Get selected chemical parameter
+    if(param == "nH2O") X <- params$nH2O
+    if(param == "ZC") X <- params$ZC
     X1 <- c(X1, X[1])
     X2 <- c(X2, X[2])
     # Calculate percent abundance within the sample groups 20210520
@@ -427,24 +427,24 @@ getgroup <- function(study = "XDZ+17", metric = "nH2O", rank = "domain", pch1 = 
     P2 <- P2 / sum(P2) * 100
   }
 
-  # Replace NA values for metric (where a taxon has zero abundance)
+  # Replace NA values for parameter (where a taxon has zero abundance)
   # with value from other sample group 20210611
   X1[is.na(X1)] <- X2[is.na(X1)]
   X2[is.na(X2)] <- X1[is.na(X2)]
 
-  # Calculate the change in compositional metric for all *included* taxa 20210609
+  # Calculate the change in chemical parameter for all *included* taxa 20210609
   Xall <- c(sum(P1 * X1), sum(P2 * X2)) / 100
-  # Calculate change in metric contributed by each taxon 20210606
+  # Calculate change in parameter contributed by each taxon 20210606
   DX <- (X2 - Xall[1]) * P2 / 100 - (X1 - Xall[1]) * P1 / 100
   names(DX) <- taxon
   DXpercent <- round(sum(DX / diff(Xall)) * 100, 2)
   if(scale100) {
     # Check that total contribution sums to 100% 20210609
     stopifnot(DXpercent == 100)
-  } else message(paste0("getgroup: total contribution to \u0394", metric, " by individual taxa is ", DXpercent, "% of whole"))
+  } else message(paste0("getgroup: total contribution to \u0394", param, " by individual taxa is ", DXpercent, "% of whole"))
   # Assemble output
-  out <- list(study, metric, pch1, pch2, col1, col2, X1, X2, P1, P2, Pboth, DX, Xall, taxon)
-  names(out) <- c("study", "metric", "pch1", "pch2", "col1", "col2", "X1", "X2", "P1", "P2", "Pboth", "DX", "Xall", "taxon")
+  out <- list(study, param, pch1, pch2, col1, col2, X1, X2, P1, P2, Pboth, DX, Xall, taxon)
+  names(out) <- c("study", "param", "pch1", "pch2", "col1", "col2", "X1", "X2", "P1", "P2", "Pboth", "DX", "Xall", "taxon")
   out
 
 }
@@ -458,9 +458,9 @@ groupcomp <- function(..., xlim = NULL, ylim = NULL, xadj = NULL, yadj = NULL) {
   if(is.null(xlim)) xlim <- range(na.omit(c(gg$P2, gg$P1)))
   if(is.null(ylim)) ylim <- range(na.omit(c(gg$X2, gg$X1)))
   if(identical(xlim, c(0, 100))) {
-    plot(extendrange(xlim), ylim, type = "n", xlab = "Abundance (%)", ylab = canprot::cplab[[gg$metric]], xaxt = "n")
+    plot(extendrange(xlim), ylim, type = "n", xlab = "Abundance (%)", ylab = canprot::cplab[[gg$param]], xaxt = "n")
     axis(1, c(0, 50, 100))
-  } else plot(xlim, ylim, type = "n", xlab = "Abundance (%)", ylab = canprot::cplab[[gg$metric]])
+  } else plot(xlim, ylim, type = "n", xlab = "Abundance (%)", ylab = canprot::cplab[[gg$param]])
   for(k in seq_along(gg$taxon)) {
     # Add points for sample groups
     cex <- 1.5
@@ -501,7 +501,7 @@ groupperc <- function(..., xlim = NULL, ylim = NULL, xadj = NULL, yadj = NULL) {
   # Start plot
   if(is.null(xlim)) xlim <- range(gg$P1, gg$P2)
   if(is.null(ylim)) ylim <- range(DXpercent)
-  plot(xlim, ylim, xlab = "Abundance (%)", ylab = paste("Contribution to", gg$metric, "change (%)"), type = "n")
+  plot(xlim, ylim, xlab = "Abundance (%)", ylab = paste("Contribution to", gg$param, "change (%)"), type = "n")
   # Loop over taxa
   for(k in seq_along(gg$taxon)) {
     # Add points for sample groups
@@ -537,12 +537,12 @@ groupperc <- function(..., xlim = NULL, ylim = NULL, xadj = NULL, yadj = NULL) {
 diffcomp <- function(study, cn = FALSE, identify = FALSE, title = TRUE, xlim = NULL, ylim = NULL, plot.it = TRUE) {
   # Get metadata
   mdat <- getmdat(study)
-  # Get compositional metrics for samples
-  metrics <- getmetrics(study, cn = cn, mdat = mdat)
+  # Get chemical parameters for samples
+  params <- getparams(study, cn = cn, mdat = mdat)
   # Keep metadata only for samples with sufficient counts 20201001
-  mdat <- mdat[mdat$Run %in% metrics$Run, ]
-  nH2O <- metrics$nH2O
-  ZC <- metrics$ZC
+  mdat <- mdat[mdat$Run %in% params$Run, ]
+  nH2O <- params$nH2O
+  ZC <- params$ZC
   if(all(is.na(mdat$minuend))) stop("minuend and subtrahend for differences are not defined")
   # Find pairs of samples for minuend and subtrahend
   pairs <- intersect(na.omit(mdat$minuend), na.omit(mdat$subtrahend))

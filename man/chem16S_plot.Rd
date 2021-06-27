@@ -22,7 +22,7 @@ Functions to plot chemical parameters (\ZC and \nH2O) for inferred microbial com
     xlim = NULL, ylim = NULL, plot.it = TRUE, points = TRUE, lines = FALSE,
     lineage = NULL, pch1 = 1, pch2 = 21, dropNA = TRUE)
   addhull(x, y, basecol, outline = FALSE, ...)
-  getgroup(study = "XDZ+17", metric = "nH2O", rank = "domain",
+  getgroup(study = "XDZ+17", param = "nH2O", rank = "domain",
     pch1 = 21, pch2 = 24, minpercent = 2, study2 = NA, scale100 = FALSE,
     mdat = NULL, map = NULL, RDP = NULL)
   groupcomp(..., xlim = NULL, ylim = NULL, xadj = NULL, yadj = NULL)
@@ -55,7 +55,7 @@ Functions to plot chemical parameters (\ZC and \nH2O) for inferred microbial com
   \item{basecol}{color used for hull lines}
   \item{outline}{logical, draw hull lines?}
   \item{...}{arguments passed to \code{\link{polygon}} (by \code{addulll}) or \code{getgroup} (by \code{groupcomp})}
-  \item{metric}{chemical parameter, \samp{ZC} or \samp{nH2O}}
+  \item{param}{chemical parameter, \samp{ZC} or \samp{nH2O}}
   \item{rank}{character, taxonomic rank}
   \item{minpercent}{numeric, include taxa that are at least this abundant}
   \item{study2}{character, calculate differences between two studies instead of groups in one study}
@@ -78,7 +78,7 @@ Note that the keywords are all lower-case; use the upper-case name (e.g. \samp{P
 
 \code{plotcomp} plots the \ZC and \nH2O of community proteomes inferred by combining taxonomic abundances from 16S rRNA gene sequencing with RefSeq proteomes.
 If \code{pch1} and \code{pch2} are provided, then two sample groups are identified by their plotting symbols in the metadata (see \code{\link{getmdat}}).
-Star-shaped symbols are plotted to indicate the metrics computed for meta-samples created by aggregating the RDP counts for all samples in each sample group.
+Star-shaped symbols are plotted to indicate the parameters computed for meta-samples created by aggregating the RDP counts for all samples in each sample group.
 
 \code{addhull} uses \code{\link{polygon}} to draw a convex hull around the points given in \code{x}, \code{y}.
 The lines are draw only in \code{outline} is TRUE; otherwise, the area of the hull is filled.
@@ -91,7 +91,7 @@ The fill color is a lightened (semi-transparent) shade of the color given in \co
 }
 
 \value{
-\code{getgroup} returns a list with elements \samp{study}, \samp{metric} (study key and chemical parameter), \samp{pch1}, \samp{pch2}, \samp{col1}, \samp{col2} (single plotting symbols and color for each sample group), \samp{X1}, \samp{X2} (values of the selected chemical parameter for individual taxa within each sample group), \samp{P1}, \samp{P2} (percent abundances of the taxa within each sample group), \samp{Pboth} (percent abundance of each taxon in both sample groups (combined)), \samp{DX}, (contribution of each taxon to the difference between sample groups), \samp{Xall}, (values of the metric for all taxa taken together in sample groups 1 and 2), \samp{taxon} (taxon names).
+\code{getgroup} returns a list with elements \samp{study}, \samp{param} (study key and chemical parameter), \samp{pch1}, \samp{pch2}, \samp{col1}, \samp{col2} (single plotting symbols and color for each sample group), \samp{X1}, \samp{X2} (values of the selected chemical parameter for individual taxa within each sample group), \samp{P1}, \samp{P2} (percent abundances of the taxa within each sample group), \samp{Pboth} (percent abundance of each taxon in both sample groups (combined)), \samp{DX}, (contribution of each taxon to the difference between sample groups), \samp{Xall}, (values of the parameter for all taxa taken together in sample groups 1 and 2), \samp{taxon} (taxon names).
 
 \samp{DX} is calculated as \code{(X2 - Xall[1]) * P2 / 100 - (X1 - Xall[1]) * P1 / 100}.
 Note that \code{sum(DX) / diff(Xall)} equals 1.
@@ -145,5 +145,5 @@ gg <- getgroup("MPB+17", "ZC", "phylum", pch2 = 23, pch1 = 21, scale100 = TRUE)
 gg$DX / diff(gg$Xall) * 100
 
 # Show the changes as percentages of the total
-groupperc("MPB+17", metric = "ZC", rank = "phylum", pch1 = 21, pch2 = 23)
+groupperc("MPB+17", param = "ZC", rank = "phylum", pch1 = 21, pch2 = 23)
 }
