@@ -50,7 +50,9 @@ export(
   "geo16S1", "geo16S2", "geo16S3", "geo16S4", "geo16S5", "geo16S6", "geo16S_S1",
   "taxacomp", "plotcomp", "addhull", "groupcomp",
   # can16S paper 20210604
-  "getrefseq", "getgroup", "groupperc"
+  "getrefseq", "getgroup", "groupperc",
+  # evdevH2O paper 20210707
+  "evdevH2OS1"
 )
 
 # imports from CHNOSZ

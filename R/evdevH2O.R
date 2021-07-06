@@ -17,7 +17,7 @@ DPSTCGAlab <- expression(bold(Delta*PS~"(TCGA)"))
 logaH2Olab <- expression(bold(log)*bolditalic(a)[bold(H[2]*O)])
 logfO2lab <- expression(bold(log)*bolditalic(f)[bold(O[2])])
 
-# Compositional analysis of Trigos and Liebeskind datasets 20201216
+# Chemical analysis of Trigos and Liebeskind datasets 20201216
 evdevH2O1 <- function(pdf = FALSE) {
   if(pdf) pdf("evdevH2O1.pdf", width = 10, height = 5)
   par(mar = c(4, 4, 1, 1), mgp = c(2.5, 1, 0))
@@ -31,7 +31,7 @@ evdevH2O1 <- function(pdf = FALSE) {
   par(xpd = NA)
   ys <- seq(0.95, 0.2, length.out = 8)
   text1 <- c("Cellular organisms", "Eukaryota", "Opisthokonta", "Metazoa", "Eumetazoa", "Bilateria", "Chordata", "Euteleostomi")
-  text2 <- c("Ammiota", "Mammalia", "Theria", "Eutheria", "Euarchontoglires", "Catarrhini", "Homininae", "")
+  text2 <- c("Amniota", "Mammalia", "Theria", "Eutheria", "Euarchontoglires", "Catarrhini", "Homininae", "")
   text(0.06, ys, 1:8, adj = c(1, 0.5))
   text(0.10, ys, text1, adj = c(0, 0.5))
   text(0.59, ys, 9:16, adj = c(1, 0.5))
@@ -67,7 +67,7 @@ evdevH2O1 <- function(pdf = FALSE) {
 
   if(pdf) {
     dev.off()
-    addexif("evdevH2O1", "Compositional analysis of Trigos and Liebeskind datasets", "Dick (2021) (preprint)")
+    addexif("evdevH2O1", "Chemical analysis of Trigos and Liebeskind datasets", "Dick (2021) (preprint)")
   }
 }
 
@@ -337,7 +337,7 @@ evdevH2O3 <- function(pdf = FALSE) {
   }
 }
 
-# Compositional and thermodynamic analysis of B. subtilis biofilm transcriptome and proteome 20201221
+# Chemical and thermodynamic analysis of B. subtilis biofilm transcriptome and proteome 20201221
 evdevH2O4 <- function(pdf = FALSE) {
 
   # Setup plot
@@ -434,7 +434,7 @@ evdevH2O4 <- function(pdf = FALSE) {
 
   if(pdf) {
     dev.off()
-    addexif("evdevH2O4", "Compositional and thermodynamic analysis of B. subtilis biofilm transcriptome and proteome", "Dick (2021) (preprint)")
+    addexif("evdevH2O4", "Chemical and thermodynamic analysis of B. subtilis biofilm transcriptome and proteome", "Dick (2021) (preprint)")
   }
 }
 
@@ -573,6 +573,23 @@ evdevH2O5 <- function(pdf = FALSE) {
 
 }
 
+# Number of genes in each phylostratum 20210707
+evdevH2OS1 <- function(pdf = FALSE) {
+  if(pdf) pdf("evdevH2OS1.pdf", width = 8, height = 4)
+  par(mar = c(3.5, 3.5, 2, 1), mgp = c(2.5, 1, 0))
+  par(mfrow = c(1, 2))
+
+  plotphylo("n", PS_source = "TPPG17")
+  title("Trigos", font.main = 1)
+  plotphylo("n", PS_source = "LMM16", xlab = "GA")
+  title("Liebeskind", font.main = 1)
+
+  if(pdf) {
+    dev.off()
+    addexif("evdevH2OS1", "Number of genes in each phylostratum", "Dick (2021) (preprint)")
+  }
+}
+
 # Calculate optimal logaH2O and logfO2 for various datasets 20210402
 # History: Phylostrata 20201218, B. subtilis biofilm 20201221
 runMaximAct <- function(dataset = "TPPG17", seed = 1:100) {
@@ -685,13 +702,13 @@ plotphylo <- function(vars = c("ZC", "nH2O"), PS_source = "TPPG17", memo = NULL,
     dat <- memo$dat
     pcomp <- memo$pcomp
   }
-  # Use metric functions (H2OAA, ZCAA) because protcomp no longer returns these values 20201216
+  # Use AA functions (H2OAA, ZCAA) because protcomp no longer returns these values 20201216
   nH2O <- H2OAA(pcomp$aa)
   ZC <- ZCAA(pcomp$aa)
   nAA <- protein.length(pcomp$aa)
   # get mean ZC and nH2O for each phylostratum
   PS <- sort(unique(dat$Phylostrata))
-  cum.ZC <- cum.nH2O <- cum.nAA <- mean.ZC <- mean.nH2O <- mean.nAA <- numeric()
+  cum.n <- n <- cum.ZC <- cum.nH2O <- cum.nAA <- mean.ZC <- mean.nH2O <- mean.nAA <- numeric()
   for(p in PS) {
     # point mean
     mean.ZC <- c(mean.ZC, mean(ZC[dat$Phylostrata == p]))
@@ -701,6 +718,9 @@ plotphylo <- function(vars = c("ZC", "nH2O"), PS_source = "TPPG17", memo = NULL,
     cum.ZC <- c(cum.ZC, mean(ZC[dat$Phylostrata <= p]))
     cum.nH2O <- c(cum.nH2O, mean(nH2O[dat$Phylostrata <= p]))
     cum.nAA <- c(cum.nAA, mean(nAA[dat$Phylostrata <= p]))
+    # number of proteins in each phylostratum
+    n <- c(n, sum(dat$Phylostrata == p))
+    cum.n <- c(cum.n, sum(dat$Phylostrata <= p))
   }
   if("ZC" %in% vars) {
     plot(PS, mean.ZC, type = "b", xlab = xlab, ylab = ZClab, font.lab = 2)
@@ -713,6 +733,9 @@ plotphylo <- function(vars = c("ZC", "nH2O"), PS_source = "TPPG17", memo = NULL,
   if("nAA" %in% vars) {
     plot(PS, mean.nAA, type = "b", xlab = xlab, ylab = "Protein length", font.lab = 2)
     lines(PS, cum.nAA, col = 2, lty = 2)
+  }
+  if("n" %in% vars) {
+    plot(PS, n, type = "b", xlab = xlab, ylab = "Number", font.lab = 2)
   }
   # return the dat and pcomp for memoization 20191211
   invisible(list(dat = dat, pcomp = pcomp))
