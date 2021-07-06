@@ -718,36 +718,6 @@ plotphylo <- function(vars = c("ZC", "nH2O"), PS_source = "TPPG17", memo = NULL,
   invisible(list(dat = dat, pcomp = pcomp))
 }
 
-# Get mean amino acid composition for each phylostratum 20201219
-getphyloaa <- function(PS_source) {
-  dat <- read.csv(system.file(paste0("extdata/phylostrata/", PS_source, ".csv.xz"), package = "canprot"), as.is = TRUE)
-  if(PS_source == "LMM16") {
-    colnames(dat)[c(1,3)] <- c("Entry", "Phylostrata")
-    # remove entries that have ENSP instead of UniProt IDs
-    dat <- dat[!grepl("^ENSP", dat$Entry), ]
-  }
-  dat <- check_IDs(dat, "Entry")
-  dat <- cleanup(dat, "Entry")
-  pcomp <- protcomp(dat$Entry)
-  # Set up blank amino acid data frame
-  PS <- sort(unique(dat$Phylostrata))
-  aa <- thermo()$protein[rep(1, length(PS)), ]
-  aa$protein <- PS
-  aa$organism <- PS_source
-  aa$ref <- aa$abbrv <- NA
-  aa$chains <- 1
-  aa[, 6:25] <- 0
-  # Loop over phylostrata
-  for(i in seq_along(PS)) {
-    iPS <- dat$Phylostrata == PS[i]
-    aaPS <- pcomp$aa[iPS, ]
-    aamean <- colMeans(aaPS[, 6:25])
-    aa[i, 6:25] <- aamean
-  }
-  # Return both the mean compositions (aa) and all proteins (pcomp)
-  list(aa = aa, pcomp = pcomp)
-}
-
 
 ### Modification of filled.contour.R by Jeffrey M. Dick 20201219
 ### - Add border = NA to rect()

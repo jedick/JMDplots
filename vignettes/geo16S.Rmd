@@ -65,12 +65,14 @@ This vignette runs the code to make the plots from the following preprint:
 
 > Dick JM, Tan J. 2021. Genomic evidence for a chemical link between redox conditions and microbial community composition. bioRxiv. doi: [10.1101/2021.05.31.446500](https://doi.org/10.1101/2021.05.31.446500)
 
+<!--
 The plots in this vignette are modified from the preprint in the following ways:
 
 * All taxids are weighted equally (instead of by number of reference sequences) to calculate the mean amino acid composition for taxonomic groups.
 * For subsets of samples, RDP counts are aggregated to calculate `r ZC` and `r nH2O` (instead of taking the mean of these values among samples).
 * Removed dataset for NE Pennsylvania stream sediment.
 * Added Fig. 6 and Fig. S1.
+-->
 
 This vignette was compiled on `r Sys.Date()` with **[JMDplots](https://github.com/jedick/JMDplots)** `r packageDescription("JMDplots")$Version` and **[CHNOSZ](http://chnosz.net)** `r packageDescription("CHNOSZ")$Version`.
 

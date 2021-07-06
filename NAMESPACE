@@ -42,8 +42,8 @@ export(
   "runMaximAct", "logK_example",
   # mjenergy paper 20210205
   "mjenergy1", "mjenergy2", "mjenergy3", "calc_affinity",
-  # evdevH2O paper 20210401-20210402
-  "MaximAct", "pdat_fly",
+  # evdevH2O paper 20210402
+  "pdat_fly",
   # chem16S functions 20210416
   "getmdat", "getRDP", "getmap", "getparams",
   # geo16S paper 20210416-20210610
@@ -102,7 +102,9 @@ importFrom("canprot",
   # for canH2O5() 20200505, 20200508
   "qdist", "cplab",
   # for canH2OS1() 20201016
-  "O2AA"
+  "O2AA",
+  # for evdevH2O2() and runMaximAct() 20210706
+  "MaximAct", "getphyloaa"
 )
 
 # imports from other packages

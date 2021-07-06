@@ -40,7 +40,7 @@ This table gives a brief description of each plotting function.
   \code{evdevH2O5} \tab Organismal water content, proteomic \nH2O, and optimal \logaH2O for fruit fly development \cr
 }
 
-\code{runMaximAct} sets up calculations with \code{\link{MaximAct}} to  compute the optimal \logaH2O and \logfO2 that maximize the equilibrium activity of model proteins against a human proteome background.
+\code{runMaximAct} sets up calculations with \code{\link[canprot]{MaximAct}} to  compute the optimal \logaH2O and \logfO2 that maximize the equilibrium activity of model proteins against a human proteome background.
 The results, i.e. optimal \logfO2 or \logaH2O values for each seed and protein are saved in CSV files named by concatenating \code{dataset} with \samp{_O2.csv} or \samp{_H2O.csv}.
 The available \code{dataset}s are described below.
 \describe{
@@ -84,4 +84,18 @@ Trigos, A. S. and Pearson, R. B. and Papenfuss, A. T. and Goode, D. L. (2017) Al
 
 \examples{
 evdevH2O1()
+
+# An abbreviated version of runMaximAct("transcriptome")
+datadir <- system.file("extdata/evdevH2O", package = "JMDplots")
+aa <- read.csv(file.path(datadir, "FOK+21_mean_aa.csv"), as.is = TRUE)
+aa <- subset(aa, organism == "transcriptome")
+MA <- MaximAct(aa, seed = 1:3, nbackground = 200, O2 = c(-72,-65,15), H2O = c(-2,5,15))
+## Default arguments used in runMaximAct -- takes much longer
+#MA <- MaximAct(aa, seed = 1:100, nbackground = 2000, O2 = c(-72, -65), H2O = c(-2, 5))
+# The logaH2O decreases at the end of the time course
+H2O <- colMeans(MA$H2O)
+stopifnot(H2O["14D"] > H2O["1M"])
+stopifnot(H2O["1M"] > H2O["2M"])
+# The final value of logaH2O is close to 0
+stopifnot(round(H2O["2M"]) == 0)
 }

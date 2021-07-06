@@ -69,7 +69,7 @@ This vignette runs the code to make the plots from the following paper:
 >
 > Dick JM. 2021. Redox potential linked to water loss from proteins in evolution and development. bioRxiv. doi: [10.1101/2021.01.29.428804](https://doi.org/10.1101/2021.01.29.428804)
 
-This vignette was compiled on `r Sys.Date()` with **[JMDplots](https://github.com/jedick/JMDplots)** `r packageDescription("JMDplots")$Version` and **[CHNOSZ](http://chnosz.net)** `r packageDescription("CHNOSZ")$Version`.
+This vignette was compiled on `r Sys.Date()` with **[JMDplots](https://github.com/jedick/JMDplots)** `r packageDescription("JMDplots")$Version`, **[CHNOSZ](http://chnosz.net)** `r packageDescription("CHNOSZ")$Version`, and **[canprot](https://github.com/jedick/canprot)** `r packageDescription("canprot")$Version`.
 
 ```{r library, message = FALSE, results = "hide"}
 library(JMDplots)
@@ -78,7 +78,7 @@ library(JMDplots)
 Phylostrata are from @TPPG17.
 Consensus gene ages are from @LMM16.
 
-## Compositional analysis of Trigos and Liebeskind datasets (Figure 1)
+## Chemical analysis of Trigos and Liebeskind datasets (Figure 1)
 ```{r evdevH2O1, message = FALSE, results = "hide", out.width='100%', fig.width = 10, fig.height = 5, out.extra='class="full-width"', pngquant = pngquant, dpi = 100}
 evdevH2O1()
 ```
@@ -99,7 +99,7 @@ evdevH2O2()
 evdevH2O3()
 ```
 
-## Compositional and thermodynamic analysis of *B. subtilis* biofilm transcriptome and proteome (Figure 4)
+## Chemical and thermodynamic analysis of *B. subtilis* biofilm transcriptome and proteome (Figure 4)
 Transcriptomic and proteomic data are from @FOK+21.
 ```{r evdevH2O4, message = FALSE, results = "hide", out.width='100%', fig.width = 7, fig.height = 4.5, pngquant = pngquant, dpi = 100}
 evdevH2O4()
