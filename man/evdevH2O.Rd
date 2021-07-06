@@ -35,10 +35,10 @@ Plots from the paper by Dick (2021).
 This table gives a brief description of each plotting function.
 
 \tabular{ll}{
-  \code{evdevH2O1} \tab Compositional analysis of Trigos and Liebeskind datasets \cr
+  \code{evdevH2O1} \tab Chemical analysis of Trigos and Liebeskind datasets \cr
   \code{evdevH2O2} \tab Thermodynamic analysis of optimal \logaH2O and \logfO2 for target proteins \cr
   \code{evdevH2O3} \tab Optimal \logaH2O and \logfO2 and virtual Eh for target proteins \cr
-  \code{evdevH2O4} \tab Compositional and thermodynamic analysis of \emph{B. subtilis} biofilm transcriptome and proteome \cr
+  \code{evdevH2O4} \tab Chemical and thermodynamic analysis of \emph{B. subtilis} biofilm transcriptome and proteome \cr
   \code{evdevH2O5} \tab Organismal water content, proteomic \nH2O, and optimal \logaH2O for fruit fly development \cr
   \code{evdevH2OS1} \tab Number of genes in each phylostratum \cr
 }
