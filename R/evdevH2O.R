@@ -18,7 +18,7 @@ logaH2Olab <- expression(bold(log)*bolditalic(a)[bold(H[2]*O)])
 logfO2lab <- expression(bold(log)*bolditalic(f)[bold(O[2])])
 
 # Chemical analysis of Trigos and Liebeskind datasets 20201216
-evdevH2O1 <- function(pdf = FALSE) {
+evdevH2O1 <- function(pdf = FALSE, boot.R = 99) {
   if(pdf) pdf("evdevH2O1.pdf", width = 10, height = 5)
   par(mar = c(4, 4, 1, 1), mgp = c(2.5, 1, 0))
   mat <- matrix(1:8, nrow = 2, byrow = TRUE)
@@ -42,10 +42,10 @@ evdevH2O1 <- function(pdf = FALSE) {
   par(opar)
 
   # Plots 1-3: nAA, ZC, nH2O for Trigos phylostrata
-  memo <- plotphylo("nAA", PS_source = "TPPG17")
+  memo <- plotphylo("nAA", PS_source = "TPPG17", boot.R = boot.R)
   label.figure("a", cex = 1.7, yfrac = 0.96, xfrac = 0.05, font = 2)
-  plotphylo("ZC", PS_source = "TPPG17", memo = memo)
-  plotphylo("nH2O", PS_source = "TPPG17", memo = memo)
+  plotphylo("ZC", PS_source = "TPPG17", memo = memo, boot.R = boot.R)
+  plotphylo("nH2O", PS_source = "TPPG17", memo = memo, boot.R = boot.R)
 
   # Make legend for Liebeskind phylostrata
   opar <- par(mar = c(0, 0, 1.5, 0))
@@ -60,10 +60,10 @@ evdevH2O1 <- function(pdf = FALSE) {
   par(opar)
 
   # Plots 4-6: nAA, ZC, nH2O for Liebeskind phylostrata
-  memo <- plotphylo("nAA", PS_source = "LMM16", xlab = "GA")
+  memo <- plotphylo("nAA", PS_source = "LMM16", xlab = "GA", boot.R = boot.R)
   label.figure("b", cex = 1.7, yfrac = 0.96, xfrac = 0.05, font = 2)
-  plotphylo("ZC", PS_source = "LMM16", memo = memo, xlab = "GA")
-  plotphylo("nH2O", PS_source = "LMM16", memo = memo, xlab = "GA")
+  plotphylo("ZC", PS_source = "LMM16", memo = memo, xlab = "GA", boot.R = boot.R)
+  plotphylo("nH2O", PS_source = "LMM16", memo = memo, xlab = "GA", boot.R = boot.R)
 
   if(pdf) {
     dev.off()
@@ -686,7 +686,7 @@ logK_example <- function() {
 ############################
 
 # Mean ZC and nH2O of phylostrata 20191122
-plotphylo <- function(vars = c("ZC", "nH2O"), PS_source = "TPPG17", memo = NULL, xlab = "PS") {
+plotphylo <- function(var = "ZC", PS_source = "TPPG17", memo = NULL, xlab = "PS", boot.R = 99) {
   if(is.null(memo)) {
     dat <- read.csv(system.file("extdata/phylostrata/TPPG17.csv.xz", package = "canprot"), as.is = TRUE)
     if(PS_source == "LMM16") {
@@ -703,39 +703,43 @@ plotphylo <- function(vars = c("ZC", "nH2O"), PS_source = "TPPG17", memo = NULL,
     pcomp <- memo$pcomp
   }
   # Use AA functions (H2OAA, ZCAA) because protcomp no longer returns these values 20201216
-  nH2O <- H2OAA(pcomp$aa)
-  ZC <- ZCAA(pcomp$aa)
-  nAA <- protein.length(pcomp$aa)
-  # get mean ZC and nH2O for each phylostratum
+  X <- switch(var, ZC = ZCAA(pcomp$aa), nH2O = H2OAA(pcomp$aa), nAA = protein.length(pcomp$aa), n = NA)
+  # Get mean chemical parameters for each phylostratum
   PS <- sort(unique(dat$Phylostrata))
-  cum.n <- n <- cum.ZC <- cum.nH2O <- cum.nAA <- mean.ZC <- mean.nH2O <- mean.nAA <- numeric()
+  high.X <- low.X <- cum.X <- mean.X <- numeric()
   for(p in PS) {
-    # point mean
-    mean.ZC <- c(mean.ZC, mean(ZC[dat$Phylostrata == p]))
-    mean.nH2O <- c(mean.nH2O, mean(nH2O[dat$Phylostrata == p]))
-    mean.nAA <- c(mean.nAA, mean(nAA[dat$Phylostrata == p]))
-    # cumulative mean
-    cum.ZC <- c(cum.ZC, mean(ZC[dat$Phylostrata <= p]))
-    cum.nH2O <- c(cum.nH2O, mean(nH2O[dat$Phylostrata <= p]))
-    cum.nAA <- c(cum.nAA, mean(nAA[dat$Phylostrata <= p]))
-    # number of proteins in each phylostratum
-    n <- c(n, sum(dat$Phylostrata == p))
-    cum.n <- c(cum.n, sum(dat$Phylostrata <= p))
+    if(var %in% c("ZC", "nH2O", "nAA")) {
+      # Point mean
+      this.X <- X[dat$Phylostrata == p]
+      mean.X <- c(mean.X, mean(this.X))
+      # Confidence interval from bootstrap 20210707
+      set.seed(1234)
+      boot.X <- boot::boot(this.X, weighted.mean, R = boot.R, stype = "w")
+      ci.X <- boot::boot.ci(boot.X, conf = 0.95, type = "perc")
+      low.X <- c(low.X, ci.X$percent[4])
+      high.X <- c(high.X, ci.X$percent[5])
+      # Cumulative mean
+      cum.X <- c(cum.X, mean(X[dat$Phylostrata <= p]))
+    }
+    if(var == "n") {
+      # Number of proteins in this phylostratum
+      mean.X <- c(mean.X, sum(dat$Phylostrata == p))
+      cum.X <- c(cum.X, sum(dat$Phylostrata <= p))
+    }
   }
-  if("ZC" %in% vars) {
-    plot(PS, mean.ZC, type = "b", xlab = xlab, ylab = ZClab, font.lab = 2)
-    lines(PS, cum.ZC, col = 2, lty = 2)
+  ylab <- switch(var, ZC = ZClab, nH2O = nH2Olab, nAA = "Protein length")
+  if(var %in% c("ZC", "nH2O", "nAA")) {
+    plot(range(PS), range(c(mean.X, low.X, high.X)), type = "n", xlab = xlab, ylab = ylab, font.lab = 2)
+    # Reorder points to make shaded CI area with polygon() 20210707
+    cix <- c(PS, rev(PS))
+    ciy <- c(low.X, rev(high.X))
+    polygon(cix, ciy, col = "gray80", border = NA)
+    # Plot the point and cumulative means
+    points(PS, mean.X, pch = 19, type = "b", cex = 0.7)
+    lines(PS, cum.X, col = 2, lty = 2)
   }
-  if("nH2O" %in% vars) {
-    plot(PS, mean.nH2O, type = "b", xlab = xlab, ylab = nH2Olab, font.lab = 2)
-    lines(PS, cum.nH2O, col = 2, lty = 2)
-  }
-  if("nAA" %in% vars) {
-    plot(PS, mean.nAA, type = "b", xlab = xlab, ylab = "Protein length", font.lab = 2)
-    lines(PS, cum.nAA, col = 2, lty = 2)
-  }
-  if("n" %in% vars) {
-    plot(PS, n, type = "b", xlab = xlab, ylab = "Number", font.lab = 2)
+  if(var == "n") {
+    plot(PS, mean.X, type = "b", xlab = xlab, ylab = "Number", font.lab = 2)
   }
   # return the dat and pcomp for memoization 20191211
   invisible(list(dat = dat, pcomp = pcomp))

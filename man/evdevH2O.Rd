@@ -15,7 +15,7 @@ Plots from the paper by Dick (2021).
 }
 
 \usage{
-  evdevH2O1(pdf = FALSE)
+  evdevH2O1(pdf = FALSE, boot.R = 99)
   evdevH2O2(pdf = FALSE)
   evdevH2O3(pdf = FALSE)
   evdevH2O4(pdf = FALSE)
@@ -27,6 +27,7 @@ Plots from the paper by Dick (2021).
 
 \arguments{
   \item{pdf}{logical, make a PDF file?}
+  \item{boot.R}{integer, number of bootstrap replicates}
   \item{dataset}{character, dataset to use for constructing target proteins}
   \item{seed}{numeric, seeds to use for subsampling background proteins from human proteome}
 }
@@ -87,6 +88,10 @@ Trigos, A. S. and Pearson, R. B. and Papenfuss, A. T. and Goode, D. L. (2017) Al
 
 \examples{
 evdevH2O1()
+
+# Start with a fresh plot device to run the next example
+# (Something from above messes up split.screen())
+dev.off()
 
 # An abbreviated version of runMaximAct("transcriptome")
 datadir <- system.file("extdata/evdevH2O", package = "JMDplots")

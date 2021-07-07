@@ -75,12 +75,13 @@ This vignette was compiled on `r Sys.Date()` with **[JMDplots](https://github.co
 library(JMDplots)
 ```
 
-Phylostrata are from @TPPG17.
-Consensus gene ages are from @LMM16.
+To reduce running time, the plots in this vignette are made with 99 bootstrap replicates.
+To reproduce the plots in the paper, the `boot.R` argument should be changed to 999.
 
 ## Chemical analysis of Trigos and Liebeskind datasets (Figure 1)
+Data sources: Phylostrata are from @TPPG17. Consensus gene ages are from @LMM16.
 ```{r evdevH2O1, message = FALSE, results = "hide", out.width='100%', fig.width = 10, fig.height = 5, out.extra='class="full-width"', pngquant = pngquant, dpi = 100}
-evdevH2O1()
+evdevH2O1(boot.R = 99)
 ```
 
 ## Thermodynamic analysis of optimal `r logaH2O` and `r logfO2` for target proteins (Figure 2)
