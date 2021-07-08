@@ -51,8 +51,8 @@ export(
   "taxacomp", "plotcomp", "addhull", "groupcomp",
   # can16S paper 20210604
   "getrefseq", "getgroup", "groupperc",
-  # evdevH2O paper 20210707
-  "evdevH2OS1"
+  # evdevH2O paper 20210707-20210708
+  "evdevH2OS1", "getCBS17"
 )
 
 # imports from CHNOSZ

@@ -439,7 +439,7 @@ evdevH2O4 <- function(pdf = FALSE) {
 }
 
 # Organismal water content, proteomic nH2O, and optimal logaH2O for fruit fly development 20210116
-evdevH2O5 <- function(pdf = FALSE) {
+evdevH2O5 <- function(pdf = FALSE, boot.R = 99) {
 
   # Setup plot
   if(pdf) pdf("evdevH2O5.pdf", width = 10, height = 6)
@@ -466,8 +466,19 @@ evdevH2O5 <- function(pdf = FALSE) {
   # Read mean amino acid compositions for developmental time points
   datadir <- system.file("extdata/evdevH2O", package = "JMDplots")
   aa <- read.csv(file.path(datadir, "CBS+17_mean_aa.csv"), as.is = TRUE)
-  # Plot nH2O
-  plot(H2OAA(aa), type = "b", xaxt = "n", xlab = "Developmental stage", ylab = nH2Olab, cex = 1.5)
+#  # Plot nH2O
+#  plot(H2OAA(aa), type = "b", xaxt = "n", xlab = "Developmental stage", ylab = nH2Olab, cex = 1.5)
+
+  # Get mean nH2O and bootstrap confidence interval for weighted mean 20210708
+  H2O <- getCBS17(boot.R = boot.R)
+  # Setup plot
+  plot(c(1, 17), range(c(H2O$mean, H2O$low, H2O$high)), type = "n", xaxt = "n", xlab = "Developmental stage", ylab = nH2Olab, cex = 1.5)
+  # Reorder points to make shaded CI area with polygon() 20210707
+  cix <- c(1:17, 17:1)
+  ciy <- c(H2O$low, rev(H2O$high))
+  polygon(cix, ciy, col = "lightgray", border = NA)
+  points(1:17, H2O$mean, type = "b", cex = 1.5)
+
   labels <- gsub("p", "P", gsub("e", "E", aa$protein))
   # Make rotated labels (modified from https://www.r-bloggers.com/rotated-axis-labels-in-r-plots/)
   text(x = 1:17, y = par()$usr[3] - 1.5 * strheight("A"), labels = labels, srt = 45, adj = 1, xpd = TRUE)
@@ -541,7 +552,7 @@ evdevH2O5 <- function(pdf = FALSE) {
   # Add title for first two plots
   par(xpd = NA)
   text(-0.4, -0.3, "Differentially expressed proteins\n(Proteomic data from Fabre et al., 2019)", cex = 1.3)
-  text(-0.4, -1.35, bquote(italic(n) == .(sum(!pd$up2))~"with higher expression in embroys"), cex = 1.3)
+  text(-0.4, -1.35, bquote(italic(n) == .(sum(!pd$up2))~"with higher expression in embryos"), cex = 1.3)
   text(-0.4, -1.42, bquote(italic(n) == .(sum(pd$up2))~"with higher expression in adults"), cex = 1.3)
   par(xpd = FALSE)
 
@@ -714,7 +725,8 @@ plotphylo <- function(var = "ZC", PS_source = "TPPG17", memo = NULL, xlab = "PS"
       mean.X <- c(mean.X, mean(this.X))
       # Confidence interval from bootstrap 20210707
       set.seed(1234)
-      boot.X <- boot::boot(this.X, weighted.mean, R = boot.R, stype = "w")
+      samplemean <- function(x, i) mean(x[i])
+      boot.X <- boot::boot(this.X, samplemean, R = boot.R)
       ci.X <- boot::boot.ci(boot.X, conf = 0.95, type = "perc")
       low.X <- c(low.X, ci.X$percent[4])
       high.X <- c(high.X, ci.X$percent[5])
@@ -733,7 +745,7 @@ plotphylo <- function(var = "ZC", PS_source = "TPPG17", memo = NULL, xlab = "PS"
     # Reorder points to make shaded CI area with polygon() 20210707
     cix <- c(PS, rev(PS))
     ciy <- c(low.X, rev(high.X))
-    polygon(cix, ciy, col = "gray80", border = NA)
+    polygon(cix, ciy, col = "lightgray", border = NA)
     # Plot the point and cumulative means
     points(PS, mean.X, pch = 19, type = "b", cex = 0.7)
     lines(PS, cum.X, col = 2, lty = 2)

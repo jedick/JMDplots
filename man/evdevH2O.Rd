@@ -19,7 +19,7 @@ Plots from the paper by Dick (2021).
   evdevH2O2(pdf = FALSE)
   evdevH2O3(pdf = FALSE)
   evdevH2O4(pdf = FALSE)
-  evdevH2O5(pdf = FALSE)
+  evdevH2O5(pdf = FALSE, boot.R = 99)
   evdevH2OS1(pdf = FALSE)
   runMaximAct(dataset = "TPPG17", seed = 1:100)
   logK_example()
