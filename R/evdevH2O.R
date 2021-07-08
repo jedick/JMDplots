@@ -338,7 +338,7 @@ evdevH2O3 <- function(pdf = FALSE) {
 }
 
 # Chemical and thermodynamic analysis of B. subtilis biofilm transcriptome and proteome 20201221
-evdevH2O4 <- function(pdf = FALSE) {
+evdevH2O4 <- function(pdf = FALSE, boot.R = 99) {
 
   # Setup plot
   if(pdf) pdf("evdevH2O4.pdf", width = 7, height = 4.5)
@@ -346,48 +346,65 @@ evdevH2O4 <- function(pdf = FALSE) {
   par(mar = c(4, 4, 1, 1), las = 1, mgp = c(3, 0.8, 0))
 
   # Read the overall amino acid compositions calculated from Futo et al., 2020 data
-  datadir <- system.file("extdata/evdevH2O", package = "JMDplots")
-  aa <- read.csv(file.path(datadir, "FOK+21_mean_aa.csv"), as.is = TRUE)
+  devodir <- system.file("extdata/devodata", package = "JMDplots")
+  aa <- read.csv(file.path(devodir, "FOK+21_mean_aa.csv"), as.is = TRUE)
   # Identify rows with transcriptome and proteome data
   isT <- aa$organism == "transcriptome"
   isP <- aa$organism == "proteome"
   # Identify stages with proteomic data
   iP <- match(aa$protein[isP], aa$protein[isT])
 
+  # Function to plot confidence intervals and means 20210708
+  plot_CI_and_mean <- function(X) {
+    # Confidence interval for transcriptome
+    cix <- c(1:11, 11:1)
+    ciy <- c(X$low[isT], rev(X$high[isT]))
+    # col = 3 with transparency
+    polygon(cix, ciy, col = "#61d04f80", border = NA)
+    # Confidence interval for proteome
+    cix <- c(iP, rev(iP))
+    ciy <- c(X$low[isP], rev(X$high[isP]))
+    # col = 4 with transparency
+    polygon(cix, ciy, col = "#2297e680", border = NA)
+    # Points for transcriptome and proteome
+    # col = 3 with HSV value reduced by 20
+    lines(1:11, X$mean[isT], type = "b", lty = 2, col = "#499d3c", pch = 19, cex = 1.3)
+    # col = 4 with HSV value reduced by 20
+    lines(iP, X$mean[isP], type = "b", col = "#1a76b3", pch = 15, cex = 1.3)
+  }
+
   # Plot A: protein length
-  pl <- protein.length(aa)
-  plot(c(1, 11), range(pl), type = "n", xlab = NA, ylab = "Protein length", xaxt = "n", font.lab = 2)
+  X <- getFOK21("length", boot.R = boot.R)
+  plot(c(1, 11), range(X$mean, X$low, X$high), type = "n", xlab = NA, ylab = "Protein length", xaxt = "n", font.lab = 2)
   # Make rotated labels (modified from https://www.r-bloggers.com/rotated-axis-labels-in-r-plots/)
   text(x = 1:11, y = par()$usr[3] - 1.5 * strheight("A"), labels = aa$protein[isT], srt = 45, adj = 1, xpd = TRUE)
   axis(1, at = 1:11, labels = NA)
   abline(v = c(5, 9), lty = 3, lwd = 1.5, col = "gray40")
-  lines(1:11, pl[isT], type = "b", lty = 2, col = 3, pch = 19, cex = 1.3)
-  lines(iP, pl[isP], type = "b", col = 4, pch = 15, cex = 1.3)
-  legend("bottomleft", c("Proteome", "Transcriptome"), lty = c(1, 2), pch = c(15, 19), col = c(4, 3), pt.cex = 1.3, bty = "n")
+  plot_CI_and_mean(X)
+  legend("bottomleft", c("Proteome", "Transcriptome"), lty = c(1, 2), pch = c(15, 19), col = c("#1a76b3", "#499d3c"), pt.cex = 1.3, bty = "n")
   label.figure("a", cex = 1.5, xfrac = 0.025, font = 2)
 
   # Plot B: nH2O
-  nH2O <- H2OAA(aa)
-  plot(c(1, 11), range(nH2O), type = "n", xlab = NA, ylab = nH2Olab, xaxt = "n", font.lab = 2)
+  X <- getFOK21("H2O", boot.R = boot.R)
+  plot(c(1, 11), range(X$mean, X$low, X$high), type = "n", xlab = NA, ylab = nH2Olab, xaxt = "n", font.lab = 2)
   text(x = 1:11, y = par()$usr[3] - 1.5 * strheight("A"), labels = aa$protein[isT], srt = 45, adj = 1, xpd = TRUE)
   axis(1, at = 1:11, labels = NA)
   abline(v = c(5, 9), lty = 3, lwd = 1.5, col = "gray40")
-  lines(1:11, nH2O[isT], type = "b", lty = 2, col = 3, pch = 19, cex = 1.3)
-  lines(iP, nH2O[isP], type = "b", col = 4, pch = 15, cex = 1.3)
+  plot_CI_and_mean(X)
   label.figure("b", cex = 1.5, xfrac = 0.025, font = 2)
 
   # Plot C: ZC
-  ZC <- ZCAA(aa)
-  plot(c(1, 11), range(ZC), type = "n", xlab = NA, ylab = ZClab, xaxt = "n", font.lab = 2)
+  X <- getFOK21("ZC", boot.R = boot.R)
+  plot(c(1, 11), range(X$mean, X$low, X$high), type = "n", xlab = NA, ylab = ZClab, xaxt = "n", font.lab = 2)
   text(x = 1:11, y = par()$usr[3] - 1.5 * strheight("A"), labels = aa$protein[isT], srt = 45, adj = 1, xpd = TRUE)
   axis(1, at = 1:11, labels = NA)
   abline(v = c(5, 9), lty = 3, lwd = 1.5, col = "gray40")
-  lines(1:11, ZC[isT], type = "b", lty = 2, col = 3, pch = 19, cex = 1.3)
-  lines(iP, ZC[isP], type = "b", col = 4, pch = 15, cex = 1.3)
+  plot_CI_and_mean(X)
   label.figure("c", cex = 1.5, xfrac = 0.025, font = 2)
 
   # Plot D: logaH2O
   par(mgp = c(2.8, 0.8, 0))
+  datadir <- system.file("extdata/evdevH2O", package = "JMDplots")
   T_H2O <- read.csv(file.path(datadir, "transcriptome_H2O.csv"), as.is = TRUE)[, -1]
   P_H2O <- read.csv(file.path(datadir, "proteome_H2O.csv"), as.is = TRUE)[, -1]
   # Get mean values of logaH2O
@@ -398,8 +415,8 @@ evdevH2O4 <- function(pdf = FALSE) {
   axis(1, at = 1:11, labels = NA)
   abline(v = c(5, 9), lty = 3, lwd = 1.5, col = "gray40")
   abline(h = 0, lty = 2, lwd = 1.5, col = "slategray4")
-  lines(1:11, T_meanH2O, type = "b", lty = 2, col = 3, pch = 19, cex = 1.3)
-  lines(iP, P_meanH2O, type = "b", col = 4, pch = 15, cex = 1.3)
+  lines(1:11, T_meanH2O, type = "b", lty = 2, col = "#499d3c", pch = 19, cex = 1.3)
+  lines(iP, P_meanH2O, type = "b", col = "#1a76b3", pch = 15, cex = 1.3)
   label.figure("d", cex = 1.5, xfrac = 0.025, font = 2)
 
   # Plot E: logfO2
@@ -413,8 +430,8 @@ evdevH2O4 <- function(pdf = FALSE) {
   axis(1, at = 1:11, labels = NA)
   abline(v = c(5, 9), lty = 3, lwd = 1.5, col = "gray40")
   abline(h = 0, lty = 2, lwd = 1.5, col = "slategray4")
-  lines(1:11, T_meanO2, type = "b", lty = 2, col = 3, pch = 19, cex = 1.3)
-  lines(iP, P_meanO2, type = "b", col = 4, pch = 15, cex = 1.3)
+  lines(1:11, T_meanO2, type = "b", lty = 2, col = "#499d3c", pch = 19, cex = 1.3)
+  lines(iP, P_meanO2, type = "b", col = "#1a76b3", pch = 15, cex = 1.3)
   label.figure("e", cex = 1.5, xfrac = 0.025, font = 2)
 
   # Plot F: Eh
@@ -428,8 +445,8 @@ evdevH2O4 <- function(pdf = FALSE) {
   text(x = 1:11, y = par()$usr[3] - 1.5 * strheight("A"), labels = aa$protein[isT], srt = 45, adj = 1, xpd = TRUE)
   axis(1, at = 1:11, labels = NA)
   abline(v = c(5, 9), lty = 3, lwd = 1.5, col = "gray40")
-  lines(1:11, T_Eh, type = "b", lty = 2, col = 3, pch = 19, cex = 1.3)
-  lines(iP, P_Eh, type = "b", col = 4, pch = 15, cex = 1.3)
+  lines(1:11, T_Eh, type = "b", lty = 2, col = "#499d3c", pch = 19, cex = 1.3)
+  lines(iP, P_Eh, type = "b", col = "#1a76b3", pch = 15, cex = 1.3)
   label.figure("f", cex = 1.5, xfrac = 0.025, font = 2)
 
   if(pdf) {
@@ -464,8 +481,8 @@ evdevH2O5 <- function(pdf = FALSE, boot.R = 99) {
 
   ## Plot B:
   # Read mean amino acid compositions for developmental time points
-  datadir <- system.file("extdata/evdevH2O", package = "JMDplots")
-  aa <- read.csv(file.path(datadir, "CBS+17_mean_aa.csv"), as.is = TRUE)
+  devodir <- system.file("extdata/devodata", package = "JMDplots")
+  aa <- read.csv(file.path(devodir, "CBS+17_mean_aa.csv"), as.is = TRUE)
 #  # Plot nH2O
 #  plot(H2OAA(aa), type = "b", xaxt = "n", xlab = "Developmental stage", ylab = nH2Olab, cex = 1.5)
 
@@ -488,6 +505,7 @@ evdevH2O5 <- function(pdf = FALSE, boot.R = 99) {
 
   ## Plot C:
   # Read optimal logaH2O and logfO2 for differentially expressed proteins of Fabre et al., 2019
+  datadir <- system.file("extdata/evdevH2O", package = "JMDplots")
   H2O_embryo <- read.csv(file.path(datadir, "fly_embryo_H2O.csv"), as.is = TRUE)
   O2_embryo <- read.csv(file.path(datadir, "fly_embryo_O2.csv"), as.is = TRUE)
   H2O_adult <- read.csv(file.path(datadir, "fly_adult_H2O.csv"), as.is = TRUE)
@@ -616,8 +634,8 @@ runMaximAct <- function(dataset = "TPPG17", seed = 1:100) {
   } else if(dataset %in% c("transcriptome", "proteome")) {
     xlab <- paste("Biofilm", dataset)
     # Read amino acid compositions of overall proteins in each biofilm stage
-    datadir <- system.file("extdata/evdevH2O", package = "JMDplots")
-    aa <- read.csv(file.path(datadir, "FOK+21_mean_aa.csv"), as.is = TRUE)
+    devodir <- system.file("extdata/devodata", package = "JMDplots")
+    aa <- read.csv(file.path(devodir, "FOK+21_mean_aa.csv"), as.is = TRUE)
     aa <- aa[aa$organism == dataset, ]
     O2 <- c(-72, -65)
     H2O <- c(-2, 5)
@@ -637,8 +655,8 @@ runMaximAct <- function(dataset = "TPPG17", seed = 1:100) {
     if(dataset == "fly_adult") aa <- aain[pd$up2, ]
   } else if(dataset == "fly_development") {
     # Read mean amino acid compositions for developmental proteome of Casas-Vila et al., 2017 20210403
-    datadir <- system.file("extdata/evdevH2O", package = "JMDplots")
-    aa <- read.csv(file.path(datadir, "CBS+17_mean_aa.csv"), as.is = TRUE)
+    devodir <- system.file("extdata/devodata", package = "JMDplots")
+    aa <- read.csv(file.path(devodir, "CBS+17_mean_aa.csv"), as.is = TRUE)
     xlab <- "time point"
     O2 <- c(-72, -68)
     H2O <- c(-2, 4)

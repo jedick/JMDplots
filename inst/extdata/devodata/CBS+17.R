@@ -1,11 +1,11 @@
-# jedick/devodata/CBS+17.R
+# JMDplots/devodata/CBS+17.R
 # Make proteins with abundance-weighted amino acid composition from proteomes
 # 20210114
 
 # Read abundance data
-dat <- read.csv("CBS+17_abundance.csv")
+dat <- read.csv("CBS+17_abundance.csv.xz")
 # Read amino acid compositions of proteins
-aa <- read.csv("CBS+17_aa.csv")
+aa <- read.csv("CBS+17_aa.csv.xz")
 
 # Names of time points
 tp <- c("e02", "e06", "e12", "e20", "L1", "L2", "L3", "L3c", "p1", "p2", "p3", "p4", "p5", "Ayf", "Aym", "Af", "Am")
@@ -32,6 +32,6 @@ stopifnot(all(aa$protein == dat$Entry))
 for(i in seq_along(itp)) {
   values <- dat[, itp[i]]
   aarow <- colSums(aa[, 6:25] * values)
-  aaout[i, 6:25] <- aarow
+  aaout[i, 6:25] <- round(aarow, 4)
 }
 write.csv(aaout, "CBS+17_mean_aa.csv", row.names = FALSE, quote = FALSE)

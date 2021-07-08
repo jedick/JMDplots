@@ -2,22 +2,25 @@
 \name{devodata}
 \alias{devodata}
 \alias{getCBS17}
+\alias{getFOK21}
 \title{Data from developmental proteomics studies}
 \description{
 Data and chemical parameters for fruit fly and biofilm developmental proteomes.
 }
 
 \usage{
-  getCBS17(X, boot.R)
+  getCBS17(parameter, boot.R)
+  getFOK21(parameter, boot.R)
 }
 
 \arguments{
-  \item{X}{character, name of parameter (\samp{nH2O})}
+  \item{parameter}{character, name of parameter (\samp{H2O}, \samp{ZC}, or \samp{length})}
   \item{boot.R}{integer, number of bootstrap replicates}
 }
 
 \details{
 \code{getCBS17} calculates the weighted mean and bootstrap confidence interval for chemical parameters in the \emph{Drosophila melanogaster} developmental proteome (Casas-Vila et al., 2017).
+\code{getFOK21} does the same for the \emph{Bacillus subtilis} developmental proteome (Futo et al., 2021).
 }
 
 \section{Files in extdata/devodata}{
@@ -25,6 +28,9 @@ Data and chemical parameters for fruit fly and biofilm developmental proteomes.
     \item{\code{CBS+17_abundance.csv.xz}}{Processed protein abundance data from Supplemental Table S1 of Casas-Vila et al. (2017). Values in the columns for "imputed.log2.LFQ.intensity" were exponentiated, and means of all 4 replicates at each time point were taken to give the values in this file. Protein IDs were mapped to UniProt IDs in the "Entry" column.}
     \item{\code{CBS+17_aa.csv.xz}}{Amino acid compositions obtained from the canonical UniProt sequences for all proteins.}
     \item{\code{CBS+17.R}, \code{CBS+17_mean_aa.csv}}{R script and output for abundance-weighted mean amino acid compositions for proteins at each developmental time point.}
+    \item{\code{FOK+21_abundance.csv.xz}}{Gene and protein abundance data from Supplementary File S10 of Futo et al. (2020). Values in the sheets named "TAI" and "PAI" were used without modification and stored in the columns starting with "T_" and "P_". Protein IDs were mapped to UniProt IDs in the "Entry" column.}
+    \item{\code{FOK+21_aa.csv.xz}}{Amino acid compositions obtained from the canonical UniProt sequences for all proteins.}
+    \item{\code{FOK+21.R}, \code{FOK+21_mean_aa.csv}}{R script and output for abundance-weighted mean amino acid compositions for proteins at each developmental time point.}
   }
 
 }
