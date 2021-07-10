@@ -3,7 +3,7 @@
 # Code moved from CHNOSZ/vignettes/hotspring.Rnw 20200712
 
 # This is used in the vignette to reproduce the 2011 calculations
-#add.OBIGT("OldAA")
+#add.OBIGT(system.file("extdata/OBIGT/OldAA.csv", package = "JMDplots"))
 
 # Measured temperature and pH
 bison1 <- function() {
@@ -117,7 +117,7 @@ bison5 <- function() {
   for(j in 1:2) {
     # use old parameters for first row and current ones for second row
     reset()
-    if(j==1) add.OBIGT("OldAA")
+    if(j==1) add.OBIGT(system.file("extdata/OBIGT/OldAA.csv", package = "JMDplots"))
     # setup basis species and proteins
     setup.basis()
     ip.annot <- add.protein(aa.annot)
