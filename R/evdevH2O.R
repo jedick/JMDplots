@@ -403,8 +403,8 @@ evdevH2O4 <- function(pdf = FALSE, boot.R = 99) {
   # Plot D: logaH2O
   par(mgp = c(2.8, 0.8, 0))
   datadir <- system.file("extdata/evdevH2O", package = "JMDplots")
-  T_H2O <- read.csv(file.path(datadir, "transcriptome_H2O_Hsa.csv"), as.is = TRUE)[, -1]
-  P_H2O <- read.csv(file.path(datadir, "proteome_H2O_Hsa.csv"), as.is = TRUE)[, -1]
+  T_H2O <- read.csv(file.path(datadir, "transcriptome_H2O_Bsu.csv"), as.is = TRUE)[, -1]
+  P_H2O <- read.csv(file.path(datadir, "proteome_H2O_Bsu.csv"), as.is = TRUE)[, -1]
   # Get mean values of logaH2O
   T_meanH2O <- colMeans(T_H2O)
   P_meanH2O <- colMeans(P_H2O)
@@ -418,8 +418,8 @@ evdevH2O4 <- function(pdf = FALSE, boot.R = 99) {
   label.figure("d", cex = 1.5, xfrac = 0.025, font = 2)
 
   # Plot E: logfO2
-  T_O2 <- read.csv(file.path(datadir, "transcriptome_O2_Hsa.csv"), as.is = TRUE)[, -1]
-  P_O2 <- read.csv(file.path(datadir, "proteome_O2_Hsa.csv"), as.is = TRUE)[, -1]
+  T_O2 <- read.csv(file.path(datadir, "transcriptome_O2_Bsu.csv"), as.is = TRUE)[, -1]
+  P_O2 <- read.csv(file.path(datadir, "proteome_O2_Bsu.csv"), as.is = TRUE)[, -1]
   # Get mean values of logfO2
   T_meanO2 <- colMeans(T_O2)
   P_meanO2 <- colMeans(P_O2)
@@ -504,10 +504,10 @@ evdevH2O5 <- function(pdf = FALSE, boot.R = 99) {
   ## Plot C:
   # Read optimal logaH2O and logfO2 for differentially expressed proteins of Fabre et al., 2019
   datadir <- system.file("extdata/evdevH2O", package = "JMDplots")
-  H2O_embryo <- read.csv(file.path(datadir, "fly_embryo_H2O_Hsa.csv"), as.is = TRUE)
-  O2_embryo <- read.csv(file.path(datadir, "fly_embryo_O2_Hsa.csv"), as.is = TRUE)
-  H2O_adult <- read.csv(file.path(datadir, "fly_adult_H2O_Hsa.csv"), as.is = TRUE)
-  O2_adult <- read.csv(file.path(datadir, "fly_adult_O2_Hsa.csv"), as.is = TRUE)
+  H2O_embryo <- read.csv(file.path(datadir, "fly_embryo_H2O_Dme.csv"), as.is = TRUE)
+  O2_embryo <- read.csv(file.path(datadir, "fly_embryo_O2_Dme.csv"), as.is = TRUE)
+  H2O_adult <- read.csv(file.path(datadir, "fly_adult_H2O_Dme.csv"), as.is = TRUE)
+  O2_adult <- read.csv(file.path(datadir, "fly_adult_O2_Dme.csv"), as.is = TRUE)
   # Get mean values
   H2O_embryo <- median(colMeans(H2O_embryo)[-1])
   O2_embryo <- median(colMeans(O2_embryo)[-1])
@@ -516,7 +516,7 @@ evdevH2O5 <- function(pdf = FALSE, boot.R = 99) {
 
   # MaximAct results for developmental proteome of Casas-Vila et al., 2017  20210403
   # Make logaH2O plot
-  H2O <- read.csv(file.path(datadir, "fly_development_H2O_Hsa.csv"), as.is = TRUE)[, -1]
+  H2O <- read.csv(file.path(datadir, "fly_development_H2O_Dme.csv"), as.is = TRUE)[, -1]
   meanH2O <- colMeans(H2O)
   plot(meanH2O, type = "b", xaxt = "n", xlab = "Developmental stage", ylab = logaH2Olab, cex = 1.5)
   abline(h = H2O_embryo, lty = 3, lwd = 3, col = 4)
@@ -617,7 +617,7 @@ evdevH2OS1 <- function(pdf = FALSE) {
   }
 }
 
-# Chemical parameter range of human, yeast, bacterial, and archaeal proteomes 20210711
+# Chemical parameter range of human, fly, bacterial, and archaeal proteomes 20210711
 evdevH2OS2 <- function(pdf = FALSE) {
 
   if(pdf) pdf("evdevH2OS2.pdf", width = 6, height = 5)
@@ -628,21 +628,21 @@ evdevH2OS2 <- function(pdf = FALSE) {
   TPPG17 <- read.csv(system.file(paste0("extdata/phylostrata/TPPG17.csv.xz"), package = "canprot"), as.is = TRUE)
   LMM16 <- read.csv(system.file(paste0("extdata/phylostrata/LMM16.csv.xz"), package = "canprot"), as.is = TRUE)
   Entry <- na.omit(intersect(TPPG17$Entry, LMM16$UniProt))
-  human <- protcomp(Entry)$aa
-  human_ZC <- ZCAA(human)
-  human_nH2O <- H2OAA(human)
-  # Yeast proteome
-  yeast <- yeast.aa()
-  yeast_ZC <- ZCAA(yeast)
-  yeast_nH2O <- H2OAA(yeast)
-  # E. coli proteome
-  ecoli <- read.csv(system.file("extdata/organisms/UP000000625_83333.csv.xz", package = "JMDplots"), as.is = TRUE)
-  ecoli_ZC <- ZCAA(ecoli)
-  ecoli_nH2O <- H2OAA(ecoli)
-  # Mja proteome
-  mja <- read.csv(system.file("extdata/organisms/UP000000805_243232.csv.xz", package = "JMDplots"), as.is = TRUE)
-  mja_ZC <- ZCAA(mja)
-  mja_nH2O <- H2OAA(mja)
+  Hsa <- protcomp(Entry)$aa
+  Hsa_ZC <- ZCAA(Hsa)
+  Hsa_nH2O <- H2OAA(Hsa)
+  # Fly proteome
+  Dme <- read.csv(system.file("extdata/organisms/UP000000803_7227.csv.xz", package = "JMDplots"), as.is = TRUE)
+  Dme_ZC <- ZCAA(Dme)
+  Dme_nH2O <- H2OAA(Dme)
+  # Bacillus subtilis proteome
+  Bsu <- read.csv(system.file("extdata/organisms/UP000001570_224308.csv.xz", package = "JMDplots"), as.is = TRUE)
+  Bsu_ZC <- ZCAA(Bsu)
+  Bsu_nH2O <- H2OAA(Bsu)
+  # M. jannaschii proteome
+  Mja <- read.csv(system.file("extdata/organisms/UP000000805_243232.csv.xz", package = "JMDplots"), as.is = TRUE)
+  Mja_ZC <- ZCAA(Mja)
+  Mja_nH2O <- H2OAA(Mja)
 
   # Phylostrata target proteins
   gpa <- getphyloaa("TPPG17")
@@ -660,25 +660,25 @@ evdevH2OS2 <- function(pdf = FALSE) {
   fly_nH2O <- H2OAA(fly)
 
   # Get total range for all proteomes
-  ZClim <- range(human_ZC, yeast_ZC, ecoli_ZC, mja_ZC)
-  nH2Olim <- range(human_nH2O, yeast_nH2O, ecoli_nH2O, mja_nH2O)
+  ZClim <- range(Hsa_ZC, Dme_ZC, Bsu_ZC, Mja_ZC)
+  nH2Olim <- range(Hsa_nH2O, Dme_nH2O, Bsu_nH2O, Mja_nH2O)
 
   # Human background
-  smoothScatter(human_ZC, human_nH2O, xlim = ZClim, ylim = nH2Olim, xlab = ZClab, ylab = nH2Olab)
+  smoothScatter(Hsa_ZC, Hsa_nH2O, xlim = ZClim, ylim = nH2Olim, xlab = ZClab, ylab = nH2Olab)
   abline(h = -1, v = 0, lty = 2, col = "darkgray")
-  title(paste(length(human_ZC), "human proteins"), font.main = 1)
+  title(paste(length(Hsa_ZC), "human proteins"), font.main = 1)
   # PS target
   points(PS_ZC, PS_nH2O, pch = 15, col = 3, cex = 0.5)
   # biofilm target
   points(biofilm_ZC, biofilm_nH2O, pch = 16, col = 5, cex = 0.5)
   # fly target
   points(fly_ZC, fly_nH2O, pch = 17, col = 6, cex = 0.5)
-  legend("bottomleft", c("Phylostrata", "Biofilm", "Fruit fly"), pch = c(15, 16, 17), col = c(3, 5, 6), title = "Target proteins", cex = 0.8)
+  legend("bottomleft", c("Phylostrata", "Biofilm", "Fly development"), pch = c(15, 16, 17), col = c(3, 5, 6), title = "Target proteins", cex = 0.8)
 
-  # Yeast background
-  smoothScatter(yeast_ZC, yeast_nH2O, xlim = ZClim, ylim = nH2Olim, xlab = ZClab, ylab = nH2Olab)
+  # Fly background
+  smoothScatter(Dme_ZC, Dme_nH2O, xlim = ZClim, ylim = nH2Olim, xlab = ZClab, ylab = nH2Olab)
   abline(h = -1, v = 0, lty = 2, col = "darkgray")
-  title(paste(length(yeast_ZC), "yeast proteins"), font.main = 1)
+  title(bquote(.(length(Dme_ZC))~italic("D. melanogaster")~"proteins"), font.main = 1)
   # PS target
   points(PS_ZC, PS_nH2O, pch = 15, col = 3, cex = 0.5)
   # biofilm target
@@ -686,10 +686,10 @@ evdevH2OS2 <- function(pdf = FALSE) {
   # fly target
   points(fly_ZC, fly_nH2O, pch = 17, col = 6, cex = 0.5)
 
-  # E. coli background
-  smoothScatter(ecoli_ZC, ecoli_nH2O, xlim = ZClim, ylim = nH2Olim, xlab = ZClab, ylab = nH2Olab)
+  # B. subtilis background
+  smoothScatter(Bsu_ZC, Bsu_nH2O, xlim = ZClim, ylim = nH2Olim, xlab = ZClab, ylab = nH2Olab)
   abline(h = -1, v = 0, lty = 2, col = "darkgray")
-  title(bquote(.(length(ecoli_ZC))~italic("E. coli")~"proteins"), font.main = 1)
+  title(bquote(.(length(Bsu_ZC))~italic("B. subtilis")~"proteins"), font.main = 1)
   # PS target
   points(PS_ZC, PS_nH2O, pch = 15, col = 3, cex = 0.5)
   # biofilm target
@@ -698,9 +698,9 @@ evdevH2OS2 <- function(pdf = FALSE) {
   points(fly_ZC, fly_nH2O, pch = 17, col = 6, cex = 0.5)
 
   # M. jannaschii background
-  smoothScatter(mja_ZC, mja_nH2O, xlim = ZClim, ylim = nH2Olim, xlab = ZClab, ylab = nH2Olab)
+  smoothScatter(Mja_ZC, Mja_nH2O, xlim = ZClim, ylim = nH2Olim, xlab = ZClab, ylab = nH2Olab)
   abline(h = -1, v = 0, lty = 2, col = "darkgray")
-  title(bquote(.(length(mja_ZC))~italic("M. jannaschii")~"proteins"), font.main = 1)
+  title(bquote(.(length(Mja_ZC))~italic("M. jannaschii")~"proteins"), font.main = 1)
   # PS target
   points(PS_ZC, PS_nH2O, pch = 15, col = 3, cex = 0.5)
   # biofilm target
@@ -718,6 +718,8 @@ evdevH2OS2 <- function(pdf = FALSE) {
 # Calculate optimal logaH2O and logfO2 for various datasets 20210402
 # History: Phylostrata 20201218, B. subtilis biofilm 20201221
 runMaximAct <- function(dataset = "TPPG17", seed = 1:100, bg_organism = "Hsa") {
+
+  message(paste("runMaximAct: target", dataset, "with", length(seed), "samples of", bg_organism, "background"))
 
   # Process 'dataset' argument
   if(dataset %in% c("TPPG17", "LMM16")) {
@@ -763,6 +765,8 @@ runMaximAct <- function(dataset = "TPPG17", seed = 1:100, bg_organism = "Hsa") {
   if(identical(bg_organism, "Hsa")) AA_background <- NULL
   else if(identical(bg_organism, "Sce")) AA_background <- yeast.aa()
   else if(identical(bg_organism, "Eco")) AA_background <- read.csv(system.file("extdata/organisms/UP000000625_83333.csv.xz", package = "JMDplots"), as.is = TRUE)
+  else if(identical(bg_organism, "Dme")) AA_background <- read.csv(system.file("extdata/organisms/UP000000803_7227.csv.xz", package = "JMDplots"), as.is = TRUE)
+  else if(identical(bg_organism, "Bsu")) AA_background <- read.csv(system.file("extdata/organisms/UP000001570_224308.csv.xz", package = "JMDplots"), as.is = TRUE)
   else if(identical(bg_organism, "Mja")) {
     AA_background <- read.csv(system.file("extdata/organisms/UP000000805_243232.csv.xz", package = "JMDplots"), as.is = TRUE)
     # We use all the proteins (1787) without sampling
