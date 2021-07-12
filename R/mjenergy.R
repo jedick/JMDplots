@@ -69,7 +69,7 @@ mjenergy2 <- function(pdf = FALSE) {
   # Read amino acid compositions of Mj proteins
   #faafile <- c("UP000000805_243232.fasta.gz")
   #aa <- read.fasta(faafile)
-  aa <- read.csv(system.file("extdata/mjenergy/UP000000805_243232.csv.gz", package = "JMDplots"), as.is = TRUE)
+  aa <- read.csv(system.file("extdata/organisms/UP000000805_243232.csv.gz", package = "JMDplots"), as.is = TRUE)
   # Calculate frequency (percentage) of each amino acid
   AAsum <- colSums(aa[, 6:25])
   AAperc <- 100 * AAsum / sum(AAsum)
@@ -117,7 +117,7 @@ mjenergy3 <- function(pdf = FALSE) {
   # Read amino acid compositions of Mj proteins
   #faafile <- c("UP000000805_243232.fasta.gz")
   #aa <- read.fasta(faafile)
-  aa <- read.csv(system.file("extdata/mjenergy/UP000000805_243232.csv.gz", package = "JMDplots"), as.is = TRUE)
+  aa <- read.csv(system.file("extdata/organisms/UP000000805_243232.csv.gz", package = "JMDplots"), as.is = TRUE)
   # Calculate ZC of Mj proteins
   ZC <- ZC(protein.formula(aa))
   # Calculate the 1st and 3rd quartiles

@@ -32,25 +32,64 @@ Please refer to the supporting information of the papers for the original script
   There are some other directories, described below.
 
   \describe{
+
     \item{\code{subsurface}}{
       Metagenome-derived amino acid compositions for two subsurface environments.
       These files are provided to illustrate the usage of user-provided data sets; see \code{\link{subsurface}}.
     }
+
     \item{\code{organisms}}{
-      Amino acid compositions of yeast and \emph{E. coli}, and subcellular location data for yeast.
-      See \code{\link{yeast}}, \code{\link{scsc}} and \code{\link{gradH2O}}.
+
+      \describe{
+
+        \item{\code{Sce.csv.xz}}{
+          Data frame of amino acid composition of 6716 proteins from the \emph{Saccharomyces} Genome Database (SGD).
+          Values in the first three columns are the \code{ORF} names of proteins, \code{SGDID}, and \code{GENE} names.
+          The remaining twenty columns (\code{ALA}..\code{VAL}) contain the numbers of the respective amino acids in each protein.
+          The sources of data for \samp{Sce.csv} are the files \samp{protein_properties.tab} and \samp{SGD_features.tab} (for the gene names), downloaded from \url{https://www.yeastgenome.org/} on 2013-08-24.
+          A shorter version of this file was previously present in \pkg{CHNOSZ} (to version 1.3.3).
+          Used in \code{\link{yeast.aa}} and \code{\link{evdevH2OS2}}.
+        }
+
+        \item{\code{ecoli.csv.xz}}{
+          This data file has amino acid compositions of 4392 proteins in the UniProt reference proteome of \emph{E. coli} K12 (\url{https://www.uniprot.org/proteomes/UP000000625}; file dated 2021-06-16, accessed on 2021-07-12).
+          The data frame was created by running \code{ecoli <- CHNOSZ::read.fasta("UP000000625_83333.fasta.gz")}.
+          Used in \code{\link{evdevH2OS2}}.
+        }
+
+        \item{\code{UP000000805_243232.csv.gz}}{
+          Amino acid compositions of 1787 proteins in \emph{Methanocaldococcus jannaschii}.
+          It was created by processing the file \code{UP000000805_243232.fasta.gz}, which was downloaded from the UniProt reference proteomes FTP site (\url{ftp://ftp.uniprot.org/pub/databases/uniprot/current_release/knowledgebase/reference_proteomes/Archaea/}).
+          The server timestamp on \code{UP000000805_243232.fasta.gz} was Dec. 2, 2020; the reference proteome was last modified on August 22, 2020 according to \url{https://www.uniprot.org/proteomes/UP000000805}.
+          The commands used to create \code{UP000000805_243232.csv.gz} are:
+          \verb{
+            aa <- CHNOSZ::read.fasta("UP000000805_243232.fasta.gz")
+            write.csv(aa, "UP000000805_243232.csv", row.names = FALSE, quote = FALSE)
+            system("gzip UP000000805_243232.csv")
+          }
+          Used in \code{\link{mjenergy}} and \code{\link{evdevH2OS2}}.
+        }
+
+      }
+
+      This directory also has subcellular location data for yeast; see \code{\link{yeast}} for more information.
+
     }
 
     \item{\code{refseq}}{
       Total amino acid compositions of all proteins for each taxon (bacteria, archaea, and viral) in the NCBI Reference Sequence database, based on RefSeq release 206 of 2021-05-21 (O'Leary et al., 2016).
       This directory contains the scripts used to process the RefSeq files and resulting CSV file with amino acid compositions.
+
       \describe{
+
         \item{\code{protein_refseq.csv.xz}}{
           The columns are arranged as follows: \code{protein} (\dQuote{refseq}), \code{organism} (taxonomic id), \code{ref} (organism name), \code{abbrv} (empty), \code{chains} (number of protein sequences for this organism).
           The remaining columns have the total counts of amino acids.
           Used in \code{\link{gradH2O}}.
         }
+
       }
+
     }
 
     \item{\code{vignettes}}{
@@ -62,6 +101,7 @@ Please refer to the supporting information of the papers for the original script
       The \code{OldAA.csv} file here has thermodynamic data for glycine and methionine, [Gly] and [Met] sidechain groups, and the protein backbone group from Dick et al. (2006).
       These data have been superseded in the default OBIGT database in CHNOSZ and are kept here in order to reproduce calculations from some papers (\code{\link{aaaq}}, \code{\link{scsc}}, and \code{\link{bison}}).
     }
+
   }
 
 }

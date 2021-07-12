@@ -7,6 +7,7 @@
 \alias{evdevH2O4}
 \alias{evdevH2O5}
 \alias{evdevH2OS1}
+\alias{evdevH2OS2}
 \alias{runMaximAct}
 \alias{logK_example}
 \title{Plots from thermodynamics in evolution and development paper}
@@ -42,6 +43,7 @@ This table gives a brief description of each plotting function.
   \code{evdevH2O4} \tab Chemical and thermodynamic analysis of \emph{B. subtilis} biofilm transcriptome and proteome \cr
   \code{evdevH2O5} \tab Organismal water content, proteomic \nH2O, and optimal \logaH2O for fruit fly development \cr
   \code{evdevH2OS1} \tab Number of genes in each phylostratum \cr
+  \code{evdevH2OS1} \tab Chemical parameter range of human, yeast, bacterial, and archaeal proteomes \cr
 }
 
 \code{runMaximAct} sets up calculations with \code{\link[canprot]{MaximAct}} to  compute the optimal \logaH2O and \logfO2 that maximize the equilibrium activity of model proteins against a human proteome background.

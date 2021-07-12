@@ -44,15 +44,6 @@ If \code{location} is NULL, \code{yeastgfp} returns the names of all known locat
 
 \section{Files in extdata/organisms}{
   \describe{
-    \item{\code{Sce.csv.xz}}{
-      Data frame of amino acid composition of 6716 proteins from the \emph{Saccharomyces} Genome Database (SGD).
-      Values in the first three columns are the \code{ORF} names of proteins, \code{SGDID}, and \code{GENE} names.
-      The remaining twenty columns (\code{ALA}..\code{VAL}) contain the numbers of the respective amino acids in each protein.
-      The sources of data for \samp{Sce.csv} are the files \samp{protein_properties.tab} and \samp{SGD_features.tab} (for the gene names), downloaded from \url{https://www.yeastgenome.org/} on 2013-08-24.
-      A shorter version of this file was previously present in \pkg{CHNOSZ} (to version 1.3.3).
-      Used in \code{yeast.aa}
-    }
-
     \item{\code{yeastgfp.csv.xz}}{
       Has 28 columns; the names of the first five are \code{yORF}, \code{gene name}, \code{GFP tagged?}, \code{GFP visualized?}, and \code{abundance}.
       The remaining columns correspond to the 23 subcellular localizations considered in the YeastGFP project (Huh et al., 2003 and Ghaemmaghami et al., 2003) and hold values of either \code{T} or \code{F} for each protein.

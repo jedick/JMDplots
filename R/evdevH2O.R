@@ -360,17 +360,15 @@ evdevH2O4 <- function(pdf = FALSE, boot.R = 99) {
     cix <- c(1:11, 11:1)
     ciy <- c(X$low[isT], rev(X$high[isT]))
     # col = 3 with transparency
-    polygon(cix, ciy, col = "#61d04f80", border = NA)
+    polygon(cix, ciy, col = "#61d04f50", border = NA)
     # Confidence interval for proteome
     cix <- c(iP, rev(iP))
     ciy <- c(X$low[isP], rev(X$high[isP]))
     # col = 4 with transparency
-    polygon(cix, ciy, col = "#2297e680", border = NA)
+    polygon(cix, ciy, col = "#2297e650", border = NA)
     # Points for transcriptome and proteome
-    # col = 3 with HSV value reduced by 20
-    lines(1:11, X$mean[isT], type = "b", lty = 2, col = "#499d3c", pch = 19, cex = 1.3)
-    # col = 4 with HSV value reduced by 20
-    lines(iP, X$mean[isP], type = "b", col = "#1a76b3", pch = 15, cex = 1.3)
+    lines(1:11, X$mean[isT], type = "b", col = 3, pch = 19, cex = 1.3)
+    lines(iP, X$mean[isP], type = "b", col = 4, pch = 15, cex = 1.3)
   }
 
   # Plot A: protein length
@@ -381,7 +379,7 @@ evdevH2O4 <- function(pdf = FALSE, boot.R = 99) {
   axis(1, at = 1:11, labels = NA)
   abline(v = c(5, 9), lty = 3, lwd = 1.5, col = "gray40")
   plot_CI_and_mean(X)
-  legend("bottomleft", c("Proteome", "Transcriptome"), lty = c(1, 2), pch = c(15, 19), col = c("#1a76b3", "#499d3c"), pt.cex = 1.3, bty = "n")
+  legend("bottomleft", c("Proteome", "Transcriptome"), lty = c(1, 1), pch = c(15, 19), col = c(4, 3), pt.cex = 1.3, bty = "n")
   label.figure("a", cex = 1.5, xfrac = 0.025, font = 2)
 
   # Plot B: nH2O
@@ -415,8 +413,8 @@ evdevH2O4 <- function(pdf = FALSE, boot.R = 99) {
   axis(1, at = 1:11, labels = NA)
   abline(v = c(5, 9), lty = 3, lwd = 1.5, col = "gray40")
   abline(h = 0, lty = 2, lwd = 1.5, col = "slategray4")
-  lines(1:11, T_meanH2O, type = "b", lty = 2, col = "#499d3c", pch = 19, cex = 1.3)
-  lines(iP, P_meanH2O, type = "b", col = "#1a76b3", pch = 15, cex = 1.3)
+  lines(1:11, T_meanH2O, type = "b", col = 3, pch = 19, cex = 1.3)
+  lines(iP, P_meanH2O, type = "b", col = 4, pch = 15, cex = 1.3)
   label.figure("d", cex = 1.5, xfrac = 0.025, font = 2)
 
   # Plot E: logfO2
@@ -430,8 +428,8 @@ evdevH2O4 <- function(pdf = FALSE, boot.R = 99) {
   axis(1, at = 1:11, labels = NA)
   abline(v = c(5, 9), lty = 3, lwd = 1.5, col = "gray40")
   abline(h = 0, lty = 2, lwd = 1.5, col = "slategray4")
-  lines(1:11, T_meanO2, type = "b", lty = 2, col = "#499d3c", pch = 19, cex = 1.3)
-  lines(iP, P_meanO2, type = "b", col = "#1a76b3", pch = 15, cex = 1.3)
+  lines(1:11, T_meanO2, type = "b", col = 3, pch = 19, cex = 1.3)
+  lines(iP, P_meanO2, type = "b", col = 4, pch = 15, cex = 1.3)
   label.figure("e", cex = 1.5, xfrac = 0.025, font = 2)
 
   # Plot F: Eh
@@ -445,8 +443,8 @@ evdevH2O4 <- function(pdf = FALSE, boot.R = 99) {
   text(x = 1:11, y = par()$usr[3] - 1.5 * strheight("A"), labels = aa$protein[isT], srt = 45, adj = 1, xpd = TRUE)
   axis(1, at = 1:11, labels = NA)
   abline(v = c(5, 9), lty = 3, lwd = 1.5, col = "gray40")
-  lines(1:11, T_Eh, type = "b", lty = 2, col = "#499d3c", pch = 19, cex = 1.3)
-  lines(iP, P_Eh, type = "b", col = "#1a76b3", pch = 15, cex = 1.3)
+  lines(1:11, T_Eh, type = "b", col = 3, pch = 19, cex = 1.3)
+  lines(iP, P_Eh, type = "b", col = 4, pch = 15, cex = 1.3)
   label.figure("f", cex = 1.5, xfrac = 0.025, font = 2)
 
   if(pdf) {
@@ -617,6 +615,104 @@ evdevH2OS1 <- function(pdf = FALSE) {
     dev.off()
     addexif("evdevH2OS1", "Number of genes in each phylostratum", "Dick (2021) (preprint)")
   }
+}
+
+# Chemical parameter range of human, yeast, bacterial, and archaeal proteomes 20210711
+evdevH2OS2 <- function(pdf = FALSE) {
+
+  if(pdf) pdf("evdevH2OS2.pdf", width = 6, height = 5)
+  par(mfrow = c(2, 2))
+  par(mar = c(3.1, 3.1, 2, 1), mgp = c(2.1, 0.7, 0))
+
+  # Background human proteome as used in MaximAct()
+  TPPG17 <- read.csv(system.file(paste0("extdata/phylostrata/TPPG17.csv.xz"), package = "canprot"), as.is = TRUE)
+  LMM16 <- read.csv(system.file(paste0("extdata/phylostrata/LMM16.csv.xz"), package = "canprot"), as.is = TRUE)
+  Entry <- na.omit(intersect(TPPG17$Entry, LMM16$UniProt))
+  human <- protcomp(Entry)$aa
+  human_ZC <- ZCAA(human)
+  human_nH2O <- H2OAA(human)
+  # Yeast proteome
+  yeast <- read.csv(system.file("extdata/organisms/Sce.csv.xz", package = "JMDplots"), as.is = TRUE)
+  yeast_ZC <- na.omit(ZCAA(yeast))
+  yeast_nH2O <- na.omit(H2OAA(yeast))
+  # E. coli proteome
+  ecoli <- read.csv(system.file("extdata/organisms/ecoli.csv.xz", package = "JMDplots"), as.is = TRUE)
+  ecoli_ZC <- ZCAA(ecoli)
+  ecoli_nH2O <- H2OAA(ecoli)
+  # Mja proteome
+  mja <- read.csv(system.file("extdata/organisms/UP000000805_243232.csv.gz", package = "JMDplots"), as.is = TRUE)
+  mja_ZC <- ZCAA(mja)
+  mja_nH2O <- H2OAA(mja)
+
+  # Phylostrata target proteins
+  gpa <- getphyloaa("TPPG17")
+  PS_ZC <- ZCAA(gpa$aa)
+  PS_nH2O <- H2OAA(gpa$aa)
+  # Biofilm target proteins
+  devodir <- system.file("extdata/devodata", package = "JMDplots")
+  biofilm <- read.csv(file.path(devodir, "FOK+21_mean_aa.csv"), as.is = TRUE)
+  biofilm_ZC <- ZCAA(biofilm)
+  biofilm_nH2O <- H2OAA(biofilm)
+  # Fly target proteins
+  devodir <- system.file("extdata/devodata", package = "JMDplots")
+  fly <- read.csv(file.path(devodir, "CBS+17_mean_aa.csv"), as.is = TRUE)
+  fly_ZC <- ZCAA(fly)
+  fly_nH2O <- H2OAA(fly)
+
+  # Get total range for all proteomes
+  ZClim <- range(human_ZC, yeast_ZC, ecoli_ZC, mja_ZC)
+  nH2Olim <- range(human_nH2O, yeast_nH2O, ecoli_nH2O, mja_nH2O)
+
+  # Human background
+  smoothScatter(human_ZC, human_nH2O, xlim = ZClim, ylim = nH2Olim, xlab = ZClab, ylab = nH2Olab)
+  abline(h = -1, v = 0, lty = 2, col = "darkgray")
+  title(paste(length(human_ZC), "human proteins"), font.main = 1)
+  # PS target
+  points(PS_ZC, PS_nH2O, pch = 15, col = 3, cex = 0.5)
+  # biofilm target
+  points(biofilm_ZC, biofilm_nH2O, pch = 16, col = 5, cex = 0.5)
+  # fly target
+  points(fly_ZC, fly_nH2O, pch = 17, col = 6, cex = 0.5)
+  legend("bottomleft", c("Phylostrata", "Biofilm", "Fruit fly"), pch = c(15, 16, 17), col = c(3, 5, 6), title = "Target proteins", cex = 0.8)
+
+  # Yeast background
+  smoothScatter(yeast_ZC, yeast_nH2O, xlim = ZClim, ylim = nH2Olim, xlab = ZClab, ylab = nH2Olab)
+  abline(h = -1, v = 0, lty = 2, col = "darkgray")
+  title(paste(length(yeast_ZC), "yeast proteins"), font.main = 1)
+  # PS target
+  points(PS_ZC, PS_nH2O, pch = 15, col = 3, cex = 0.5)
+  # biofilm target
+  points(biofilm_ZC, biofilm_nH2O, pch = 16, col = 5, cex = 0.5)
+  # fly target
+  points(fly_ZC, fly_nH2O, pch = 17, col = 6, cex = 0.5)
+
+  # E. coli background
+  smoothScatter(ecoli_ZC, ecoli_nH2O, xlim = ZClim, ylim = nH2Olim, xlab = ZClab, ylab = nH2Olab)
+  abline(h = -1, v = 0, lty = 2, col = "darkgray")
+  title(paste(length(ecoli_ZC), "E. coli proteins"), font.main = 1)
+  # PS target
+  points(PS_ZC, PS_nH2O, pch = 15, col = 3, cex = 0.5)
+  # biofilm target
+  points(biofilm_ZC, biofilm_nH2O, pch = 16, col = 5, cex = 0.5)
+  # fly target
+  points(fly_ZC, fly_nH2O, pch = 17, col = 6, cex = 0.5)
+
+  # M. jannaschii background
+  smoothScatter(mja_ZC, mja_nH2O, xlim = ZClim, ylim = nH2Olim, xlab = ZClab, ylab = nH2Olab)
+  abline(h = -1, v = 0, lty = 2, col = "darkgray")
+  title(paste(length(mja_ZC), "M. jannaschii proteins"), font.main = 1)
+  # PS target
+  points(PS_ZC, PS_nH2O, pch = 15, col = 3, cex = 0.5)
+  # biofilm target
+  points(biofilm_ZC, biofilm_nH2O, pch = 16, col = 5, cex = 0.5)
+  # fly target
+  points(fly_ZC, fly_nH2O, pch = 17, col = 6, cex = 0.5)
+
+  if(pdf) {
+    dev.off()
+    addexif("evdevH2OS2", "Chemical parameter range of human, yeast, bacterial, and archaeal proteomes", "Dick (2021) (preprint)")
+  }
+
 }
 
 # Calculate optimal logaH2O and logfO2 for various datasets 20210402

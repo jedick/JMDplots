@@ -114,6 +114,11 @@ evdevH2O5()
 evdevH2OS1()
 ```
 
+## Chemical parameter range of human, yeast, bacterial, and archaeal proteomes (Figure S2)
+```{r evdevH2OS2, message = FALSE, results = "hide", out.width='100%', fig.width = 6, fig.height = 5, pngquant = pngquant, dpi = 100}
+evdevH2OS2()
+```
+
 ## Example of protein chemical formula, formation reaction, and equilibrium constant
 ```{r logK_example}
 logK_example()

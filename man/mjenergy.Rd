@@ -36,18 +36,6 @@ This table gives a brief description of each plotting function.
 The default arguments correspond to the example calculation discussed in the paper (CSG_METJA at 85 \degC).
 }
 
-\section{Files in extdata/mjenergy}{
-  \code{UP000000805_243232.csv.gz} has amino acid compositions of 1787 proteins in \emph{Methanocaldococcus jannaschii}.
-  It was created by processing the file \code{UP000000805_243232.fasta.gz}, which was downloaded from the UniProt reference proteomes FTP site (\url{ftp://ftp.uniprot.org/pub/databases/uniprot/current_release/knowledgebase/reference_proteomes/Archaea/}).
-  The server timestamp on \code{UP000000805_243232.fasta.gz} was Dec. 2, 2020; the reference proteome was last modified on August 22, 2020 according to \url{https://www.uniprot.org/proteomes/UP000000805}.
-  The commands used to create \code{UP000000805_243232.csv.gz} are:
-  \verb{
-    aa <- CHNOSZ::read.fasta("UP000000805_243232.fasta.gz")
-    write.csv(aa, "UP000000805_243232.csv", row.names = FALSE, quote = FALSE)
-    system("gzip UP000000805_243232.csv")
-  }
-}
-
 \references{
 Shock, E. L. and Dick, J. M. (2021) The release of energy during protein synthesis at submarine hydrothermal ecosystems. (Preprint)
 }
