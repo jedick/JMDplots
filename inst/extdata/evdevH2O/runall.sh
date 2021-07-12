@@ -11,7 +11,6 @@ export NSEED=10
 Rscript --vanilla --default-packages=JMDplots -e "runMaximAct('TPPG17', bg_organism = 'Hsa', seed=1:$NSEED)"
 Rscript --vanilla --default-packages=JMDplots -e "runMaximAct('TPPG17', bg_organism = 'Dme', seed=1:$NSEED)"
 Rscript --vanilla --default-packages=JMDplots -e "runMaximAct('TPPG17', bg_organism = 'Bsu', seed=1:$NSEED)"
-Rscript --vanilla --default-packages=JMDplots -e "runMaximAct('TPPG17', bg_organism = 'Mja', seed=1:$NSEED)"
 
 # Liebeskind gene ages
 Rscript --vanilla --default-packages=JMDplots -e "runMaximAct('LMM16', bg_organism = 'Hsa', seed=1:$NSEED)"
