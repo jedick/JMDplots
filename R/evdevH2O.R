@@ -213,8 +213,8 @@ evdevH2O3 <- function(pdf = FALSE) {
 
     # Read results
     datadir <- system.file("extdata/evdevH2O", package = "JMDplots")
-    H2Ofile <- file.path(datadir, paste0(PS_source, "_H2O.csv"))
-    O2file <- file.path(datadir, paste0(PS_source, "_O2.csv"))
+    H2Ofile <- file.path(datadir, paste0(PS_source, "_H2O_Hsa.csv"))
+    O2file <- file.path(datadir, paste0(PS_source, "_O2_Hsa.csv"))
     H2O <- read.csv(H2Ofile, as.is = TRUE, check.names = FALSE)
     O2 <- read.csv(O2file, as.is = TRUE, check.names = FALSE)
     # Get phylostrata
@@ -403,8 +403,8 @@ evdevH2O4 <- function(pdf = FALSE, boot.R = 99) {
   # Plot D: logaH2O
   par(mgp = c(2.8, 0.8, 0))
   datadir <- system.file("extdata/evdevH2O", package = "JMDplots")
-  T_H2O <- read.csv(file.path(datadir, "transcriptome_H2O.csv"), as.is = TRUE)[, -1]
-  P_H2O <- read.csv(file.path(datadir, "proteome_H2O.csv"), as.is = TRUE)[, -1]
+  T_H2O <- read.csv(file.path(datadir, "transcriptome_H2O_Hsa.csv"), as.is = TRUE)[, -1]
+  P_H2O <- read.csv(file.path(datadir, "proteome_H2O_Hsa.csv"), as.is = TRUE)[, -1]
   # Get mean values of logaH2O
   T_meanH2O <- colMeans(T_H2O)
   P_meanH2O <- colMeans(P_H2O)
@@ -418,8 +418,8 @@ evdevH2O4 <- function(pdf = FALSE, boot.R = 99) {
   label.figure("d", cex = 1.5, xfrac = 0.025, font = 2)
 
   # Plot E: logfO2
-  T_O2 <- read.csv(file.path(datadir, "transcriptome_O2.csv"), as.is = TRUE)[, -1]
-  P_O2 <- read.csv(file.path(datadir, "proteome_O2.csv"), as.is = TRUE)[, -1]
+  T_O2 <- read.csv(file.path(datadir, "transcriptome_O2_Hsa.csv"), as.is = TRUE)[, -1]
+  P_O2 <- read.csv(file.path(datadir, "proteome_O2_Hsa.csv"), as.is = TRUE)[, -1]
   # Get mean values of logfO2
   T_meanO2 <- colMeans(T_O2)
   P_meanO2 <- colMeans(P_O2)
@@ -504,10 +504,10 @@ evdevH2O5 <- function(pdf = FALSE, boot.R = 99) {
   ## Plot C:
   # Read optimal logaH2O and logfO2 for differentially expressed proteins of Fabre et al., 2019
   datadir <- system.file("extdata/evdevH2O", package = "JMDplots")
-  H2O_embryo <- read.csv(file.path(datadir, "fly_embryo_H2O.csv"), as.is = TRUE)
-  O2_embryo <- read.csv(file.path(datadir, "fly_embryo_O2.csv"), as.is = TRUE)
-  H2O_adult <- read.csv(file.path(datadir, "fly_adult_H2O.csv"), as.is = TRUE)
-  O2_adult <- read.csv(file.path(datadir, "fly_adult_O2.csv"), as.is = TRUE)
+  H2O_embryo <- read.csv(file.path(datadir, "fly_embryo_H2O_Hsa.csv"), as.is = TRUE)
+  O2_embryo <- read.csv(file.path(datadir, "fly_embryo_O2_Hsa.csv"), as.is = TRUE)
+  H2O_adult <- read.csv(file.path(datadir, "fly_adult_H2O_Hsa.csv"), as.is = TRUE)
+  O2_adult <- read.csv(file.path(datadir, "fly_adult_O2_Hsa.csv"), as.is = TRUE)
   # Get mean values
   H2O_embryo <- median(colMeans(H2O_embryo)[-1])
   O2_embryo <- median(colMeans(O2_embryo)[-1])
@@ -516,7 +516,7 @@ evdevH2O5 <- function(pdf = FALSE, boot.R = 99) {
 
   # MaximAct results for developmental proteome of Casas-Vila et al., 2017  20210403
   # Make logaH2O plot
-  H2O <- read.csv(file.path(datadir, "fly_development_H2O.csv"), as.is = TRUE)[, -1]
+  H2O <- read.csv(file.path(datadir, "fly_development_H2O_Hsa.csv"), as.is = TRUE)[, -1]
   meanH2O <- colMeans(H2O)
   plot(meanH2O, type = "b", xaxt = "n", xlab = "Developmental stage", ylab = logaH2Olab, cex = 1.5)
   abline(h = H2O_embryo, lty = 3, lwd = 3, col = 4)
@@ -632,15 +632,15 @@ evdevH2OS2 <- function(pdf = FALSE) {
   human_ZC <- ZCAA(human)
   human_nH2O <- H2OAA(human)
   # Yeast proteome
-  yeast <- read.csv(system.file("extdata/organisms/Sce.csv.xz", package = "JMDplots"), as.is = TRUE)
-  yeast_ZC <- na.omit(ZCAA(yeast))
-  yeast_nH2O <- na.omit(H2OAA(yeast))
+  yeast <- yeast.aa()
+  yeast_ZC <- ZCAA(yeast)
+  yeast_nH2O <- H2OAA(yeast)
   # E. coli proteome
-  ecoli <- read.csv(system.file("extdata/organisms/ecoli.csv.xz", package = "JMDplots"), as.is = TRUE)
+  ecoli <- read.csv(system.file("extdata/organisms/UP000000625_83333.csv.xz", package = "JMDplots"), as.is = TRUE)
   ecoli_ZC <- ZCAA(ecoli)
   ecoli_nH2O <- H2OAA(ecoli)
   # Mja proteome
-  mja <- read.csv(system.file("extdata/organisms/UP000000805_243232.csv.gz", package = "JMDplots"), as.is = TRUE)
+  mja <- read.csv(system.file("extdata/organisms/UP000000805_243232.csv.xz", package = "JMDplots"), as.is = TRUE)
   mja_ZC <- ZCAA(mja)
   mja_nH2O <- H2OAA(mja)
 
@@ -689,7 +689,7 @@ evdevH2OS2 <- function(pdf = FALSE) {
   # E. coli background
   smoothScatter(ecoli_ZC, ecoli_nH2O, xlim = ZClim, ylim = nH2Olim, xlab = ZClab, ylab = nH2Olab)
   abline(h = -1, v = 0, lty = 2, col = "darkgray")
-  title(paste(length(ecoli_ZC), "E. coli proteins"), font.main = 1)
+  title(bquote(.(length(ecoli_ZC))~italic("E. coli")~"proteins"), font.main = 1)
   # PS target
   points(PS_ZC, PS_nH2O, pch = 15, col = 3, cex = 0.5)
   # biofilm target
@@ -700,7 +700,7 @@ evdevH2OS2 <- function(pdf = FALSE) {
   # M. jannaschii background
   smoothScatter(mja_ZC, mja_nH2O, xlim = ZClim, ylim = nH2Olim, xlab = ZClab, ylab = nH2Olab)
   abline(h = -1, v = 0, lty = 2, col = "darkgray")
-  title(paste(length(mja_ZC), "M. jannaschii proteins"), font.main = 1)
+  title(bquote(.(length(mja_ZC))~italic("M. jannaschii")~"proteins"), font.main = 1)
   # PS target
   points(PS_ZC, PS_nH2O, pch = 15, col = 3, cex = 0.5)
   # biofilm target
@@ -717,22 +717,22 @@ evdevH2OS2 <- function(pdf = FALSE) {
 
 # Calculate optimal logaH2O and logfO2 for various datasets 20210402
 # History: Phylostrata 20201218, B. subtilis biofilm 20201221
-runMaximAct <- function(dataset = "TPPG17", seed = 1:100) {
+runMaximAct <- function(dataset = "TPPG17", seed = 1:100, bg_organism = "Hsa") {
 
   # Process 'dataset' argument
   if(dataset %in% c("TPPG17", "LMM16")) {
     if(dataset == "TPPG17") xlab <- "Trigos phylostrata"
     if(dataset == "LMM16") xlab <- "Liebeskind gene ages"
     # Get mean amino acid compositions for phylostrata
-    aa <- getphyloaa(dataset)$aa
-    O2 <- c(-72, -67)
+    AA_target <- getphyloaa(dataset)$aa
+    O2 <- c(-72, -65)
     H2O <- c(-2, 3)
   } else if(dataset %in% c("transcriptome", "proteome")) {
     xlab <- paste("Biofilm", dataset)
     # Read amino acid compositions of overall proteins in each biofilm stage
     devodir <- system.file("extdata/devodata", package = "JMDplots")
     aa <- read.csv(file.path(devodir, "FOK+21_mean_aa.csv"), as.is = TRUE)
-    aa <- aa[aa$organism == dataset, ]
+    AA_target <- aa[aa$organism == dataset, ]
     O2 <- c(-72, -65)
     H2O <- c(-2, 5)
   } else if(dataset %in% c("fly_embryo", "fly_adult")) {
@@ -746,33 +746,48 @@ runMaximAct <- function(dataset = "TPPG17", seed = 1:100) {
     H2O <- c(-10, 17)
     xlab <- "protein"
     # Down-expressed: Higher in embryo
-    if(dataset == "fly_embryo") aa <- aain[!pd$up2, ]
+    if(dataset == "fly_embryo") AA_target <- aain[!pd$up2, ]
     # Up-expressed: Higher in adult
-    if(dataset == "fly_adult") aa <- aain[pd$up2, ]
+    if(dataset == "fly_adult") AA_target <- aain[pd$up2, ]
   } else if(dataset == "fly_development") {
     # Read mean amino acid compositions for developmental proteome of Casas-Vila et al., 2017 20210403
     devodir <- system.file("extdata/devodata", package = "JMDplots")
-    aa <- read.csv(file.path(devodir, "CBS+17_mean_aa.csv"), as.is = TRUE)
+    AA_target <- read.csv(file.path(devodir, "CBS+17_mean_aa.csv"), as.is = TRUE)
     xlab <- "time point"
     O2 <- c(-72, -68)
     H2O <- c(-2, 4)
   }
 
+  # Get different background proteins if specified 20210712
+  # Human (Hsa) is the default background in MaximAct()
+  if(identical(bg_organism, "Hsa")) AA_background <- NULL
+  else if(identical(bg_organism, "Sce")) AA_background <- yeast.aa()
+  else if(identical(bg_organism, "Eco")) AA_background <- read.csv(system.file("extdata/organisms/UP000000625_83333.csv.xz", package = "JMDplots"), as.is = TRUE)
+  else if(identical(bg_organism, "Mja")) {
+    AA_background <- read.csv(system.file("extdata/organisms/UP000000805_243232.csv.xz", package = "JMDplots"), as.is = TRUE)
+    # We use all the proteins (1787) without sampling
+    seed = 1
+    # Offset logfO2 and logaH2O
+    O2 <- O2 + 7
+    H2O <- H2O - 2
+  }
+  else stop(paste("unrecognized background organism:", bg_organism))
+  bgname <- paste0("_", bg_organism)
+
   # Start plot
-  png(paste0(dataset, ".png"), width = 1000, height = 1000)
+  png(paste0(dataset, bgname, ".png"), width = 1000, height = 1000)
   par(cex = 2)
   # Run MaximAct()
-  MA <- MaximAct(aa, seed = seed, nbackground = 2000, xlab = xlab, O2 = O2, H2O = H2O)
+  MA <- MaximAct(AA_target, seed = seed, nbackground = 2000, xlab = xlab, O2 = O2, H2O = H2O, AA_background = AA_background)
   # Round and save values
   O2 <- round(MA$O2, 3)
   H2O <- round(MA$H2O, 3)
-  write.csv(O2, paste0(dataset, "_O2.csv"), row.names = FALSE, quote = FALSE)
-  write.csv(H2O, paste0(dataset, "_H2O.csv"), row.names = FALSE, quote = FALSE)
+  write.csv(O2, paste0(dataset, "_O2", bgname, ".csv"), row.names = FALSE, quote = FALSE)
+  write.csv(H2O, paste0(dataset, "_H2O", bgname, ".csv"), row.names = FALSE, quote = FALSE)
   # Close plot
   dev.off()
 
 }
-
 
 # Example of protein chemical formula, formation reaction, and equilibrium constant 20210115
 logK_example <- function() {

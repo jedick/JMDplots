@@ -1,23 +1,22 @@
 # JMDplots/yeast.R
 
-# get amino acid compositions of proteins from Saccharomyces cerevisiae
-yeast.aa <- function(protein=NULL) {
-  # return the composition of one or more proteins from S. cerevisiae (Sce)
-  # extracted from get.protein 20120519
-  datapath <- paste("extdata/organisms/Sce.csv.xz", sep="")
-  datafile <- system.file(datapath, package="JMDplots")
-  if(datafile=="") stop(paste("missing", datapath))
+# Get amino acid compositions of proteins from Saccharomyces cerevisiae
+yeast.aa <- function(protein = NULL) {
+  # Return the composition of one or more proteins from S. cerevisiae (Sce)
+  # Extracted from get.protein 20120519
+  datafile <- system.file("extdata/organisms/Sce.csv.xz", package="JMDplots")
   mydata <- read.csv(datafile, as.is=TRUE)
-  # if protein is not supplied, just give some information about the datafile
+  # If particular proteins are not given,
+  # use all proteins except those with NA amino acid composition 20210712
   if(is.null(protein)) {
-    message("yeast.aa: ", datapath, " has data for ", nrow(mydata), " proteins")
-    return(invisible())
+    protein <- mydata$ORF
+    protein <- protein[!is.na(mydata$ALA)]
   }
-  # which columns to search for matches
+  # Which columns to search for matches
   searchcols <- c("ORF", "SGDID", "GENE")
-  # which columns have the amino acids, in the order of thermo$protein 
+  # Which columns have the amino acids, in the order of thermo$protein 
   iaa <- match(toupper(aminoacids(3)), toupper(colnames(mydata)))
-  # iterate over a list
+  # Iterate over a list
   waslist <- TRUE
   out <- list()
   if(!is.list(protein)) {
@@ -25,7 +24,7 @@ yeast.aa <- function(protein=NULL) {
     protein <- list(protein)
   }
   for(i in 1:length(protein)) {
-    # find the matches
+    # Find the matches
     imatch <- rep(NA, length(protein[[i]]))
     for(cname in searchcols) {
       icol <- match(cname, colnames(mydata))
@@ -33,7 +32,7 @@ yeast.aa <- function(protein=NULL) {
       iimatch <- match(protein[[i]], mydata[, icol])
       imatch[!is.na(iimatch)] <- iimatch[!is.na(iimatch)]
     }
-    # report and remember the unsuccessful matches
+    # Report and remember the unsuccessful matches
     if(all(is.na(imatch))) stop("no proteins found!")
     inotmatch <- which(is.na(imatch)) 
     if(length(inotmatch) > 0) {
@@ -41,19 +40,19 @@ yeast.aa <- function(protein=NULL) {
       message("yeast.aa: ", paste(protein[[i]][inotmatch], collapse=" "), verb, " not matched")
     }
     aa <- data.frame(mydata[imatch, iaa])
-    # add the identifying columns
+    # Add the identifying columns
     ref <- mydata$SGDID[imatch]
     abbrv <- mydata$GENE[imatch]
     chains <- rep(1, length(protein[[i]]))
     chains[inotmatch] <- NA
     org <- rep("Sce", length(protein[[i]]))
-    precols <- data.frame(protein[[i]], organism=org, ref, abbrv, chains, stringsAsFactors=FALSE)
+    precols <- data.frame(protein[[i]], organism = org, ref, abbrv, chains)
     colnames(precols)[1] <- "protein"
     colnames(aa) <- aminoacids(3)
     aa <- cbind(precols, aa)
     out <- c(out, list(aa))
   }
-  # done!
+  # Done!
   if(!waslist) return(out[[1]])
   else return(out)
 }

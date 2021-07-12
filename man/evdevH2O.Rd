@@ -22,7 +22,7 @@ Plots from the paper by Dick (2021).
   evdevH2O4(pdf = FALSE, boot.R = 99)
   evdevH2O5(pdf = FALSE, boot.R = 99)
   evdevH2OS1(pdf = FALSE)
-  runMaximAct(dataset = "TPPG17", seed = 1:100)
+  runMaximAct(dataset = "TPPG17", seed = 1:100, bg_organism = "Hsa")
   logK_example()
 }
 
@@ -31,6 +31,7 @@ Plots from the paper by Dick (2021).
   \item{boot.R}{integer, number of bootstrap replicates}
   \item{dataset}{character, dataset to use for constructing target proteins}
   \item{seed}{numeric, seeds to use for subsampling background proteins from human proteome}
+  \item{bg_organism}{character, use background proteins from this organism.}
 }
 
 \details{
@@ -47,7 +48,6 @@ This table gives a brief description of each plotting function.
 }
 
 \code{runMaximAct} sets up calculations with \code{\link[canprot]{MaximAct}} to  compute the optimal \logaH2O and \logfO2 that maximize the equilibrium activity of model proteins against a human proteome background.
-The results, i.e. optimal \logfO2 or \logaH2O values for each seed and protein are saved in CSV files named by concatenating \code{dataset} with \samp{_O2.csv} or \samp{_H2O.csv}.
 The available \code{dataset}s are described below.
 \describe{
   \item{\samp{TPPG17}}{Phylostrata from Trigos et al., 2017; target proteins are mean amino acid compositions for each phylostratum.}
@@ -56,6 +56,11 @@ The available \code{dataset}s are described below.
   \item{\samp{fly_embryo} or \samp{fly_adult}}{Differentially expressed proteins from Fabre et al., 2019; target proteins are all proteins (i.e. not mean compositions) with higher expression in embryo or adult flies.}
   \item{\samp{fly_development}}{Fly developmental proteome from Casas-Vila et al., 2017; target proteins are mean amino acid composition for each time point.}
 }
+
+\code{bg_organism} can be one of \samp{Hsa} (\emph{Homo sapiens}), \samp{Sce} (\emph{Saccharomyces cerevisiae}), \samp{Eco} (\emph{Escherichia coli}), \samp{Mja} (\emph{Methanocaldococcus jannaschii}).
+These are used to retrieve the background proteins used for the \code{AA_background} argument in \code{\link[canprot]{MaximAct}}.
+
+The results, i.e. optimal \logfO2 or \logaH2O values for each seed and protein are saved in CSV files named by pasting together the \code{dataset}, \code{bg_organism}, and \samp{O2.csv} or \samp{H2O.csv}, separated by \samp{_}.
 
 \code{logK_example} prints the chemical formula, formation reaction, and equilibrium constant for an example protein (LYSC_CHICK).
 

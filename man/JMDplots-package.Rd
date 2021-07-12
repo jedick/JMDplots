@@ -51,13 +51,7 @@ Please refer to the supporting information of the papers for the original script
           Used in \code{\link{yeast.aa}} and \code{\link{evdevH2OS2}}.
         }
 
-        \item{\code{ecoli.csv.xz}}{
-          This data file has amino acid compositions of 4392 proteins in the UniProt reference proteome of \emph{E. coli} K12 (\url{https://www.uniprot.org/proteomes/UP000000625}; file dated 2021-06-16, accessed on 2021-07-12).
-          The data frame was created by running \code{ecoli <- CHNOSZ::read.fasta("UP000000625_83333.fasta.gz")}.
-          Used in \code{\link{evdevH2OS2}}.
-        }
-
-        \item{\code{UP000000805_243232.csv.gz}}{
+        \item{\code{UP000000805_243232.csv.xz}}{
           Amino acid compositions of 1787 proteins in \emph{Methanocaldococcus jannaschii}.
           It was created by processing the file \code{UP000000805_243232.fasta.gz}, which was downloaded from the UniProt reference proteomes FTP site (\url{ftp://ftp.uniprot.org/pub/databases/uniprot/current_release/knowledgebase/reference_proteomes/Archaea/}).
           The server timestamp on \code{UP000000805_243232.fasta.gz} was Dec. 2, 2020; the reference proteome was last modified on August 22, 2020 according to \url{https://www.uniprot.org/proteomes/UP000000805}.
@@ -65,10 +59,27 @@ Please refer to the supporting information of the papers for the original script
           \verb{
             aa <- CHNOSZ::read.fasta("UP000000805_243232.fasta.gz")
             write.csv(aa, "UP000000805_243232.csv", row.names = FALSE, quote = FALSE)
-            system("gzip UP000000805_243232.csv")
+            system("xz UP000000805_243232.csv")
           }
           Used in \code{\link{mjenergy}} and \code{\link{evdevH2OS2}}.
         }
+
+        \item{\code{UP000000625_83333.csv.xz}}{
+          This data file has amino acid compositions of 4392 proteins in the UniProt reference proteome of \emph{Escherichia coli} K12 (\url{https://www.uniprot.org/proteomes/UP000000625}; last modified 2021-03-07, file timestamp 2021-06-16, accessed on 2021-07-12).
+          The data frame was created by running \code{CHNOSZ::read.fasta("UP000000625_83333.fasta.gz")}.
+          Used in \code{\link{evdevH2OS2}}.
+        }
+
+        \item{\code{UP000000803_7227.csv.xz}}{
+          This data file has amino acid compositions of 4392 proteins in the UniProt reference proteome of \emph{Drosophila melanogaster} (\url{https://www.uniprot.org/proteomes/UP000000803}; last modified 2021-03-07, file timestamp 2021-06-16, accessed on 2021-07-12).
+          Used in \code{\link{evdevH2OS2}}.
+        }
+
+        \item{\code{UP000001570_224308.csv.xz}}{
+          This data file has amino acid compositions of 4392 proteins in the UniProt reference proteome of \emph{Bacillus subtilis} strain 168 (\url{https://www.uniprot.org/proteomes/UP000001570}; last modified 2021-03-09, file timestamp 2021-06-16, accessed on 2021-07-12).
+          Used in \code{\link{evdevH2OS2}}.
+        }
+
 
       }
 
