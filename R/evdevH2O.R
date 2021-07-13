@@ -37,12 +37,15 @@ evdevH2O1 <- function(pdf = FALSE, boot.R = 99) {
   text(0.59, ys, 9:16, adj = c(1, 0.5))
   text(0.63, ys, text2, adj = c(0, 0.5))
   text(0.63, ys[8], "Homo sapiens", font = 3, adj = c(0, 0.5))
-  title("Trigos phylostrata", font.main = 1)
+  title("Phylostrata (Trigos et al., 2017)", font.main = 1)
   par(xpd = FALSE)
   par(opar)
 
-  # Plots 1-3: nAA, ZC, nH2O for Trigos phylostrata
+  # Plots 1-3: Protein length and number, ZC, nH2O for Trigos phylostrata
   memo <- plotphylo("nAA", PS_source = "TPPG17", boot.R = boot.R)
+  plotphylo("n", PS_source = "TPPG17", memo = memo)
+  text(10.5, 500, "length", cex = 0.8)
+  text(6, 320, "number / 10", cex = 0.8)
   label.figure("a", cex = 1.7, yfrac = 0.96, xfrac = 0.05, font = 2)
   plotphylo("ZC", PS_source = "TPPG17", memo = memo, boot.R = boot.R)
   plotphylo("nH2O", PS_source = "TPPG17", memo = memo, boot.R = boot.R)
@@ -55,12 +58,15 @@ evdevH2O1 <- function(pdf = FALSE, boot.R = 99) {
   text1 <- c("Cellular_organisms", "Euk_Archaea", "Euk+Bac", "Eukaryota", "Opisthokonta", "Eumetazoa", "Vertebrata", "Mammalia")
   text(0.29, ys, 1:8, adj = c(1, 0.5))
   text(0.33, ys, text1, adj = c(0, 0.5))
-  title("Liebeskind gene ages", font.main = 1)
+  title("Gene ages (Liebeskind et al., 2016)", font.main = 1)
   par(xpd = FALSE)
   par(opar)
 
-  # Plots 4-6: nAA, ZC, nH2O for Liebeskind phylostrata
+  # Plots 4-6: Protein length and number, ZC, nH2O for Liebeskind gene ages
   memo <- plotphylo("nAA", PS_source = "LMM16", xlab = "GA", boot.R = boot.R)
+  plotphylo("n", PS_source = "LMM16", memo = memo)
+  text(2.5, 620, "length", cex = 0.8)
+  text(4.5, 70, "number / 10", cex = 0.8)
   label.figure("b", cex = 1.7, yfrac = 0.96, xfrac = 0.05, font = 2)
   plotphylo("ZC", PS_source = "LMM16", memo = memo, xlab = "GA", boot.R = boot.R)
   plotphylo("nH2O", PS_source = "LMM16", memo = memo, xlab = "GA", boot.R = boot.R)
@@ -602,6 +608,15 @@ evdevH2O5 <- function(pdf = FALSE, boot.R = 99) {
   abline(v = c(5, 9), lty = 3, lwd = 1.5, col = "gray40")
   lines(1:11, T_Eh, type = "b", col = 3, pch = 19, cex = 1.3)
   lines(iP, P_Eh, type = "b", col = 4, pch = 15, cex = 1.3)
+
+  # Add lines for logaH2O = 0  20210713
+  T_pe0 <- 0.25 * T_meanO2 - pH - 0.5 * logK
+  P_pe0 <- 0.25 * P_meanO2 - pH - 0.5 * logK
+  T_Eh0 <- convert(T_pe0, "Eh") * 1000
+  P_Eh0 <- convert(P_pe0, "Eh") * 1000
+  lines(1:11, T_Eh0, lty = 2, col = 3, pch = 19, cex = 1.3)
+  lines(iP, P_Eh0, lty = 2, col = 4, pch = 15, cex = 1.3)
+
   label.figure("f", cex = 1.5, xfrac = 0.025, font = 2)
 
   if(pdf) {
@@ -638,7 +653,7 @@ evdevH2O6 <- function(pdf = FALSE, boot.R = 99) {
   # Read mean amino acid compositions for developmental time points
   devodir <- system.file("extdata/devodata", package = "JMDplots")
   aa <- read.csv(file.path(devodir, "CBS+17_mean_aa.csv"), as.is = TRUE)
-#  # Plot nH2O
+#  # Plot nH2O for model proteins
 #  plot(H2OAA(aa), type = "b", xaxt = "n", xlab = "Developmental stage", ylab = nH2Olab, cex = 1.5)
 
   # Get mean nH2O and bootstrap confidence interval for weighted mean 20210708
@@ -652,10 +667,13 @@ evdevH2O6 <- function(pdf = FALSE, boot.R = 99) {
   points(1:17, H2O$mean, type = "b", cex = 1.5)
 
   labels <- gsub("p", "P", gsub("e", "E", aa$protein))
-  # Make rotated labels (modified from https://www.r-bloggers.com/rotated-axis-labels-in-r-plots/)
-  text(x = 1:17, y = par()$usr[3] - 1.5 * strheight("A"), labels = labels, srt = 45, adj = 1, xpd = TRUE)
+  # Label "f" and "m" as sub-labels of "Ay" and "A" 20210713
+  labels <- gsub("A", "", gsub("Ay", "", labels))
+  text(x = 1:13, y = par()$usr[3] - 1.5 * strheight("A"), labels = labels[1:13], srt = 45, adj = 1, xpd = TRUE)
+  text(x = 14:17, y = par()$usr[3] - 1.5 * strheight("A"), labels = labels[14:17], xpd = TRUE)
   axis(1, at = 1:17, labels = NA)
-  title("Stoichiometric hydration state of proteins\n(Proteomic data from Casas-Vila et al., 2017)", font.main = 1)
+  axis(1, at = c(14.5, 16.5), tick = FALSE, labels = c("Ay", "A"))
+  title("Developmental proteome\n(Proteomic data from Casas-Vila et al., 2017)", font.main = 1)
   label.figure("b", cex = 1.6, font = 2)
 
   ## Plot C:
@@ -675,15 +693,20 @@ evdevH2O6 <- function(pdf = FALSE, boot.R = 99) {
   # Make logaH2O plot
   H2O <- read.csv(file.path(datadir, "fly_development_H2O_Dme.csv"), as.is = TRUE)[, -1]
   meanH2O <- colMeans(H2O)
-  plot(meanH2O, type = "b", xaxt = "n", xlab = "Developmental stage", ylab = logaH2Olab, cex = 1.5)
-  abline(h = H2O_embryo, lty = 3, lwd = 3, col = 4)
-  abline(h = H2O_adult, lty = 4, lwd = 3, col = 2)
+  plot(meanH2O, ylim = range(0, meanH2O), type = "b", xaxt = "n", xlab = "Developmental stage", ylab = logaH2Olab, cex = 1.5)
+  abline(h = 0, lty = 4, lwd = 1.5, col = "slategray4")
+  lines(c(1, 4), rep(H2O_embryo, 2), lty = 1, lwd = 2, col = 4)
+  lines(c(14, 17), rep(H2O_adult, 2), lty = 1, lwd = 2, col = 2)
   # Make rotated labels (modified from https://www.r-bloggers.com/rotated-axis-labels-in-r-plots/)
-  labels <- gsub("p", "P", gsub("e", "E", names(meanH2O)))
-  text(x = 1:17, y = par()$usr[3] - 1.5 * strheight("A"), labels = labels, srt = 45, adj = 1, xpd = TRUE)
+  text(x = 1:13, y = par()$usr[3] - 1.5 * strheight("A"), labels = labels[1:13], srt = 45, adj = 1, xpd = TRUE)
+  text(x = 14:17, y = par()$usr[3] - 1.5 * strheight("A"), labels = labels[14:17], xpd = TRUE)
   axis(1, at = 1:17, labels = NA)
+  axis(1, at = c(14.5, 16.5), tick = FALSE, labels = c("Ay", "A"))
+  text(9, 1, "DP", font = 2)
+  text(2.5, 1.55, "DE\nembryo", font = 2)
+  text(15.5, 0.65, "DE\nadult", font = 2)
   label.figure("c", cex = 1.6, font = 2)
-  title("MaximAct results\n(Lines show values from panel e)", font.main = 1)
+  title("Developmental proteome (DP) and\nDifferentially expressed proteins (DE)", font.main = 1)
 
   ## Plot D:
   # ZC and nH2O of differentially expressed proteins in dataset of Fabre et al., 2019  20210401
@@ -744,7 +767,8 @@ evdevH2O6 <- function(pdf = FALSE, boot.R = 99) {
   par(xpd = FALSE)
 
   # Make logaH2O-logfO2 plot
-  plot(c(-71, -69), c(0, 2), xlab = logfO2lab, ylab = logaH2Olab, type = "n")
+  plot(c(-71, -70.2), c(0, 2), xlab = logfO2lab, ylab = logaH2Olab, type = "n")
+  abline(h = 0, lty = 4, lwd = 1.5, col = "slategray4")
   O2 <- c(O2_embryo, O2_adult)
   H2O <- c(H2O_embryo, H2O_adult)
   points(O2, H2O, pch = pch, col = col, cex = cex * 2)
@@ -755,23 +779,6 @@ evdevH2O6 <- function(pdf = FALSE, boot.R = 99) {
     addexif("evdevH2O6", "Organismal water content, proteomic nH2O, and optimal logaH2O for fruit fly development", "Dick (2021) (preprint)")
   }
 
-}
-
-# Number of genes in each phylostratum 20210707
-evdevH2OS1 <- function(pdf = FALSE) {
-  if(pdf) pdf("evdevH2OS1.pdf", width = 8, height = 4)
-  par(mar = c(3.5, 3.5, 2, 1), mgp = c(2.5, 1, 0))
-  par(mfrow = c(1, 2))
-
-  plotphylo("n", PS_source = "TPPG17")
-  title("Trigos", font.main = 1)
-  plotphylo("n", PS_source = "LMM16", xlab = "GA")
-  title("Liebeskind", font.main = 1)
-
-  if(pdf) {
-    dev.off()
-    addexif("evdevH2OS1", "Number of genes in each phylostratum", "Dick (2021) (preprint)")
-  }
 }
 
 # Calculate optimal logaH2O and logfO2 for various datasets 20210402
@@ -931,9 +938,12 @@ plotphylo <- function(var = "ZC", PS_source = "TPPG17", memo = NULL, xlab = "PS"
       cum.X <- c(cum.X, sum(dat$Phylostrata <= p))
     }
   }
-  ylab <- switch(var, ZC = ZClab, nH2O = nH2Olab, nAA = "Protein length")
+  ylab <- switch(var, ZC = ZClab, nH2O = nH2Olab, nAA = quote("Protein length or"~italic(n)/10))
   if(var %in% c("ZC", "nH2O", "nAA")) {
-    plot(range(PS), range(c(mean.X, low.X, high.X)), type = "n", xlab = xlab, ylab = ylab, font.lab = 2)
+    ylim <- range(c(mean.X, low.X, high.X))
+    # Extend the ylim to zero for protein length and number plot 20210713
+    if(var == "nAA") ylim <- range(0, ylim)
+    plot(range(PS), ylim, type = "n", xlab = xlab, ylab = ylab, font.lab = 2)
     # Reorder points to make shaded CI area with polygon() 20210707
     cix <- c(PS, rev(PS))
     ciy <- c(low.X, rev(high.X))
@@ -943,7 +953,8 @@ plotphylo <- function(var = "ZC", PS_source = "TPPG17", memo = NULL, xlab = "PS"
     lines(PS, cum.X, col = 2, lty = 2)
   }
   if(var == "n") {
-    plot(PS, mean.X, type = "b", xlab = xlab, ylab = "Number", font.lab = 2)
+    # Add points for (number of proteins) / 10  20210713
+    points(PS, mean.X / 10, type = "b", cex = 0.8)
   }
   # return the dat and pcomp for memoization 20191211
   invisible(list(dat = dat, pcomp = pcomp))

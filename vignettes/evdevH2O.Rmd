@@ -114,11 +114,6 @@ evdevH2O5()
 evdevH2O6()
 ```
 
-## Number of genes in each phylostratum (Figure S1)
-```{r evdevH2OS1, message = FALSE, results = "hide", out.width='100%', fig.width = 8, fig.height = 4, pngquant = pngquant}
-evdevH2OS1()
-```
-
 ## Example of protein chemical formula, formation reaction, and equilibrium constant
 ```{r logK_example}
 logK_example()

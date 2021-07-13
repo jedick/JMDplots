@@ -48,7 +48,7 @@ Please refer to the supporting information of the papers for the original script
           The remaining twenty columns (\code{ALA}..\code{VAL}) contain the numbers of the respective amino acids in each protein.
           The sources of data for \samp{Sce.csv} are the files \samp{protein_properties.tab} and \samp{SGD_features.tab} (for the gene names), downloaded from \url{https://www.yeastgenome.org/} on 2013-08-24.
           A shorter version of this file was previously present in \pkg{CHNOSZ} (to version 1.3.3).
-          Used in \code{\link{yeast.aa}} and \code{\link{evdevH2OS2}}.
+          Used in \code{\link{yeast.aa}}.
         }
 
         \item{\code{UP000000805_243232.csv.xz}}{
@@ -61,23 +61,22 @@ Please refer to the supporting information of the papers for the original script
             write.csv(aa, "UP000000805_243232.csv", row.names = FALSE, quote = FALSE)
             system("xz UP000000805_243232.csv")
           }
-          Used in \code{\link{mjenergy}} and \code{\link{evdevH2OS2}}.
+          Used in \code{\link{mjenergy}}.
         }
 
         \item{\code{UP000000625_83333.csv.xz}}{
           This data file has amino acid compositions of 4392 proteins in the UniProt reference proteome of \emph{Escherichia coli} K12 (\url{https://www.uniprot.org/proteomes/UP000000625}; last modified 2021-03-07, file timestamp 2021-06-16, accessed on 2021-07-12).
           The data frame was created by running \code{CHNOSZ::read.fasta("UP000000625_83333.fasta.gz")}.
-          Used in \code{\link{evdevH2OS2}}.
         }
 
         \item{\code{UP000000803_7227.csv.xz}}{
           This data file has amino acid compositions of 4392 proteins in the UniProt reference proteome of \emph{Drosophila melanogaster} (\url{https://www.uniprot.org/proteomes/UP000000803}; last modified 2021-03-07, file timestamp 2021-06-16, accessed on 2021-07-12).
-          Used in \code{\link{evdevH2OS2}}.
+          Used in \code{\link{evdevH2O}}.
         }
 
         \item{\code{UP000001570_224308.csv.xz}}{
           This data file has amino acid compositions of 4392 proteins in the UniProt reference proteome of \emph{Bacillus subtilis} strain 168 (\url{https://www.uniprot.org/proteomes/UP000001570}; last modified 2021-03-09, file timestamp 2021-06-16, accessed on 2021-07-12).
-          Used in \code{\link{evdevH2OS2}}.
+          Used in \code{\link{evdevH2O}}.
         }
 
 
