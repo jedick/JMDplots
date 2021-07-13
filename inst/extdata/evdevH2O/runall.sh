@@ -3,9 +3,9 @@
 # Script to create all the CSV files in this directory
 # Use Rscript to avoid running out of memory in a single R process 20210712
 
-# NOTE: After running this script, PNG files are processed with pngquant to reduce size
+# NOTE: Generated PNG files are deleted to reduce package size
 
-export NSEED=10
+export NSEED=100
 
 # Trigos phylostrata
 Rscript --vanilla --default-packages=JMDplots -e "runMaximAct('TPPG17', bg_organism = 'Hsa', seed=1:$NSEED)"
