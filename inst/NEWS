@@ -1,9 +1,9 @@
 CHANGES IN JMDplots 1.2.7
 -------------------------
 
-- 20210710 Move OBIGT/OldAA.csv here from CHNOSZ.
+- 20210714 Revise plots for geo16S and evdevH2O papers.
 
-- 20210706 Move MaximAct() (from evdevH2O paper) to canprot.
+- 20210710 Move OBIGT/OldAA.csv here from CHNOSZ.
 
 CHANGES IN JMDplots 1.2.6
 -------------------------

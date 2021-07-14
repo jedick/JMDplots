@@ -640,7 +640,7 @@ evdevH2O6 <- function(pdf = FALSE, boot.R = 99) {
   # Hours 110, 120, 130 are for P1, P2, Adult
   Hours <- c(13.47, 17.4, 23.6, 30.5, 36.17, 48.05, 53.82, 60.02, 72.64, 84.06, 95.17, 103.95, 110, 120, 130)
   Water <- c(79.57, 75.23, 75.33, 81.69, 82.4, 82.81, 76.81, 76.77, 79.58, 76.19, 76.1, 76.01, 66.72, 66.38, 72.04)
-  plot(Hours, Water, type = "b", pch = 19, xlim = c(0, 140), xlab = "Hours after hatching", ylab = "Water content (%)",
+  plot(Hours, Water, type = "b", pch = 19, xlim = c(0, 140), xlab = "Hours after hatching                       ", ylab = "Water content (%)",
        xaxs = "i", xaxt = "n", cex = 1.5)
   axis(1, at = seq(0, 100, 20))
   axis(1, at = 110, "P1")
@@ -703,10 +703,10 @@ evdevH2O6 <- function(pdf = FALSE, boot.R = 99) {
   axis(1, at = 1:17, labels = NA)
   axis(1, at = c(14.5, 16.5), tick = FALSE, labels = c("Ay", "A"))
   text(9, 1, "DP", font = 2)
-  text(2.5, 1.55, "DE\nembryo", font = 2)
-  text(15.5, 0.65, "DE\nadult", font = 2)
+  text(2.5, 1.55, "DEP\nembryo", font = 2)
+  text(15.5, 0.65, "DEP\nadult", font = 2)
   label.figure("c", cex = 1.6, font = 2)
-  title("Developmental proteome (DP) and\nDifferentially expressed proteins (DE)", font.main = 1)
+  title("Developmental proteome (DP) and\nDifferentially expressed proteins (DEP)", font.main = 1)
 
   ## Plot D:
   # ZC and nH2O of differentially expressed proteins in dataset of Fabre et al., 2019  20210401
