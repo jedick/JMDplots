@@ -1,5 +1,5 @@
 # JMDplots/chem16S.R
-# Calculate chemical parameters based on 16S data and RefSeq proteins 20200902
+# Calculate chemical metrics based on 16S data and RefSeq proteins 20200902
 # Revised to include "unclassified" groups in RDP (i.e. classified above genera) 20200911
 # Moved to JMDplots 20210416
 
@@ -7,7 +7,7 @@
 # getmdat("KGP+12")     # Metadata for this study (study, name, Run, BioSample, sample, type, cohort)
 # getRDP("KGP+12")      # RDP results for all samples in this study
 # getmap("KGP+12")      # Map RDP to RefSeq taxonomy (match to rows of groupAA.csv)
-# getparams("KGP+12")   # Calculate chemical parameters (nH2O, ZC) for each sample
+# getmetrics("KGP+12")   # Calculate chemical metrics (nH2O, ZC) for each sample
 
 #####################
 # Utility functions #
@@ -469,8 +469,8 @@ getmap <- function(study, RDP = NULL, lineage = NULL) {
   iAA
 }
 
-# Get chemical parameters for all samples in a study 20200927
-getparams <- function(study, cn = FALSE, mdat = NULL, RDP = NULL, map = NULL, lineage = NULL, params = NULL, groups = NULL) {
+# Get chemical metrics for all samples in a study 20200927
+getmetrics <- function(study, cn = FALSE, mdat = NULL, RDP = NULL, map = NULL, lineage = NULL, metrics = NULL, groups = NULL) {
   # Handle missing arguments
   if(is.null(mdat)) mdat <- getmdat(study)
   if(is.null(RDP)) RDP <- getRDP(study, cn = cn, mdat = mdat, lineage = lineage)
@@ -482,12 +482,12 @@ getparams <- function(study, cn = FALSE, mdat = NULL, RDP = NULL, map = NULL, li
   map <- na.omit(map)
   if(length(map) == 0) stop("no mappings to available RefSeq taxa!")
 
-  # Get chemical parameters of RefSeq groups
+  # Get chemical metrics of RefSeq groups
   datadir <- system.file("extdata/chem16S", package = "JMDplots")
-  if(is.null(params)) params <- read.csv(file.path(datadir, "taxon_parameters.csv"), as.is = TRUE)
-  params <- params[map, ]
+  if(is.null(metrics)) metrics <- read.csv(file.path(datadir, "taxon_metrics.csv"), as.is = TRUE)
+  metrics <- metrics[map, ]
   # Make sure the mapping is correct
-  equalrank <- RDP$rank == params$rank
+  equalrank <- RDP$rank == metrics$rank
   # Don't test particular RDP-NCBI mappings that cross ranks
   iclassCyano <- RDP$rank == "class" & RDP$name == "Cyanobacteria"
   igenusSparto <- RDP$rank == "genus" & RDP$name == "Spartobacteria_genera_incertae_sedis"
@@ -502,27 +502,25 @@ getparams <- function(study, cn = FALSE, mdat = NULL, RDP = NULL, map = NULL, li
   # Get classification matrix (rows = taxa, columns = samples)
   RDPmat <- RDP[, -(1:3)]
   # Calculate abundance-weighted mean nH2O for each sample
-  nH2O <- colSums(RDPmat * params$nH2O) / colSums(RDPmat)
+  nH2O <- colSums(RDPmat * metrics$nH2O) / colSums(RDPmat)
   # To calculate ZC, we need to compute the sum of charge (ZC * nC) and the sum of carbon atoms
-  sumZ <- colSums(RDPmat * params$ZC * params$nC)
-  sumC <- colSums(RDPmat * params$nC)
+  sumZ <- colSums(RDPmat * metrics$ZC * metrics$nC)
+  sumC <- colSums(RDPmat * metrics$nC)
   ZC <- sumZ / sumC
   if(is.null(groups)) {
     # Create output data frame
     out <- data.frame(Run = colnames(RDPmat), sample = mdat$sample, nH2O = nH2O, ZC = ZC)
   } else {
-    # Split data into sample groups and calculate parameters for each group 20210607
+    # Split data into sample groups and calculate metrics for each group 20210607
     nH2O <- ZC <- numeric()
     for(i in 1:length(groups)) {
       # Use rowSums to combine all samples in each group into one meta-sample
       thisRDP <- rowSums(RDPmat[, groups[[i]], drop = FALSE])
-      nH2O <- c(nH2O, sum(thisRDP * params$nH2O) / sum(thisRDP))
-      sumZ <- sum(thisRDP * params$ZC * params$nC)
-      sumC <- sum(thisRDP * params$nC)
+      nH2O <- c(nH2O, sum(thisRDP * metrics$nH2O) / sum(thisRDP))
+      sumZ <- sum(thisRDP * metrics$ZC * metrics$nC)
+      sumC <- sum(thisRDP * metrics$nC)
       ZC <- c(ZC, sumZ / sumC)
     }
-#    ZC <- sapply(groups, function(i) mean(ZC[i]))
-#    nH2O <- sapply(groups, function(i) mean(nH2O[i]))
     out <- data.frame(Run = rep(NA, length(groups)), sample = 1:length(groups), nH2O = nH2O, ZC = ZC)
   }
 

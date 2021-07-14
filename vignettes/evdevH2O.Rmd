@@ -94,7 +94,7 @@ evdevH2O2()
 evdevH2O3()
 ```
 
-## Chemical and thermodynamic parameter ranges for different background proteomes (Figure 4)
+## Ranges of chemical metrics and thermodynamic parameters for different background proteomes (Figure 4)
 ```{r evdevH2O4, message = FALSE, results = "hide", out.width='100%', fig.width = 8, fig.height = 5, out.extra='class="full-width"', pngquant = pngquant, dpi = 100}
 evdevH2O4()
 ```

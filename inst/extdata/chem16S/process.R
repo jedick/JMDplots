@@ -3,7 +3,7 @@
 # File preparation functions
 # mkRDP("KGP+12")     # Combine output of RDP Classifier into one file --> RDP/KGP+12.tab
 # mkAA()              # Use RefSeq sequences to make amino acid composition of taxonomic groups at genus and higher ranks --> groupAA.csv
-# mkparams()          # Calculate chemical parameters (nH2O, ZC) for each RefSeq group --> taxon_parameters.csv
+# mkmetrics()          # Calculate chemical metrics (nH2O, ZC) for each RefSeq group --> taxon_metrics.csv
 
 # Combine output files of RDP Classifier into a single CSV file for each study 20200903
 # Use RDP Classifier merge-count command 20200910
@@ -122,20 +122,20 @@ mkAA <- function(ranks = c("genus", "family", "order", "class", "phylum", "super
   write.csv(out, "groupAA.csv", row.names = FALSE, quote = FALSE)
 }
 
-# Compute chemical parameters for each RefSeq group 20200927
-mkparams <- function() {
+# Compute chemical metrics for each RefSeq group 20200927
+mkmetrics <- function() {
   # Read amino acid compositions of all groups
   AA <- read.csv("groupAA.csv", as.is = TRUE)
   # Build output data frame; rename columns for better readability
   out <- data.frame(rank = AA$protein, group = AA$organism, ntaxa = AA$ref, parent = AA$abbrv, nH2O = NA, ZC = NA, nC = NA)
-  # Calculate parameters
+  # Calculate metrics
   out$nH2O <- round(canprot::H2OAA(AA), 6)
   out$ZC <- round(canprot::ZCAA(AA), 6)
   out$nC <- round(CAA(AA), 6)
-  write.csv(out, "taxon_parameters.csv", row.names = FALSE, quote = FALSE)
+  write.csv(out, "taxon_metrics.csv", row.names = FALSE, quote = FALSE)
 }
 
-# Function used in mkparams() to calculate number of carbon atoms in amino acid compositions 20200927
+# Function used in mkmetrics() to calculate number of carbon atoms in amino acid compositions 20200927
 CAA <- function(AAcomp) {
   # the number of carbons of the amino acids
   nC_AA <- c(Ala = 3, Cys = 3, Asp = 4, Glu = 5, Phe = 9, Gly = 2, His = 6, 

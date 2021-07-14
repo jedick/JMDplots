@@ -343,7 +343,7 @@ evdevH2O3 <- function(pdf = FALSE) {
   }
 }
 
-# Chemical and thermodynamic parameter ranges for different background proteomes 20210711
+# Ranges of chemical metrics and thermodynamic parameters for different background proteomes 20210711
 evdevH2O4 <- function(pdf = FALSE) {
 
   if(pdf) pdf("evdevH2O4.pdf", width = 8, height = 5)
@@ -495,7 +495,7 @@ evdevH2O4 <- function(pdf = FALSE) {
 
   if(pdf) {
     dev.off()
-    addexif("evdevH2O4", "Chemical and thermodynamic parameter ranges for different background proteomes", "Dick (2021) (preprint)")
+    addexif("evdevH2O4", "Ranges of chemical metrics and thermodynamic parameters for different background proteomes", "Dick (2021) (preprint)")
   }
 
 }
@@ -924,7 +924,7 @@ plotphylo <- function(var = "ZC", PS_source = "TPPG17", memo = NULL, xlab = "PS"
   }
   # Use AA functions (H2OAA, ZCAA) because protcomp no longer returns these values 20201216
   X <- switch(var, ZC = ZCAA(pcomp$aa), nH2O = H2OAA(pcomp$aa), nAA = protein.length(pcomp$aa), n = NA)
-  # Get mean chemical parameters for each phylostratum
+  # Get mean chemical metrics for each phylostratum
   PS <- sort(unique(dat$Phylostrata))
   high.X <- low.X <- cum.X <- mean.X <- numeric()
   for(p in PS) {

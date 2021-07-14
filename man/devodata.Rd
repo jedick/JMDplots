@@ -5,21 +5,21 @@
 \alias{getFOK21}
 \title{Data from developmental proteomics studies}
 \description{
-Data and chemical parameters for fruit fly and biofilm developmental proteomes.
+Data and chemical metrics for fruit fly and biofilm developmental proteomes.
 }
 
 \usage{
-  getCBS17(parameter, boot.R)
-  getFOK21(parameter, boot.R)
+  getCBS17(metric, boot.R)
+  getFOK21(metric, boot.R)
 }
 
 \arguments{
-  \item{parameter}{character, name of parameter (\samp{H2O}, \samp{ZC}, or \samp{length})}
+  \item{metric}{character, name of metric (\samp{H2O}, \samp{ZC}, or \samp{length})}
   \item{boot.R}{integer, number of bootstrap replicates}
 }
 
 \details{
-\code{getCBS17} calculates the weighted mean and bootstrap confidence interval for chemical parameters in the \emph{Drosophila melanogaster} developmental proteome (Casas-Vila et al., 2017).
+\code{getCBS17} calculates the weighted mean and bootstrap confidence interval for chemical metrics in the \emph{Drosophila melanogaster} developmental proteome (Casas-Vila et al., 2017).
 \code{getFOK21} does the same for the \emph{Bacillus subtilis} developmental proteome (Futo et al., 2021).
 }
 

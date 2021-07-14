@@ -90,12 +90,12 @@ geo16S1()
 
 **Data source:** NCBI Reference Sequence (RefSeq) database [@OWB+16]. **Numbered symbols**: (1) Methanococci, (2) Archaeoglobi, (3) Thermococci, (4) Halobacteria, (5) Nanohaloarchaea, (6) Clostridia.
 
-Get the chemical parameters including `r ZC` for particular genera that are abundant in produced fluids of shale gas wells:
+Get the chemical metrics including `r ZC` for particular genera that are abundant in produced fluids of shale gas wells:
 
-```{r taxon_parameters}
+```{r taxon_metrics}
 datadir <- system.file("extdata/chem16S", package = "JMDplots")
-taxon_parameters <- read.csv(file.path(datadir, "taxon_parameters.csv"), as.is = TRUE)
-subset(taxon_parameters, group %in% c("Halanaerobium", "Thermoanaerobacter"))
+taxon_metrics <- read.csv(file.path(datadir, "taxon_metrics.csv"), as.is = TRUE)
+subset(taxon_metrics, group %in% c("Halanaerobium", "Thermoanaerobacter"))
 ```
 
 ## Inferred community proteomes from different environments have distinct chemical signatures (Figure 2)
@@ -112,7 +112,7 @@ geo16S3()
 
 **Data sources:** Black Sea [@SVH+19], Swiss lakes (Lake Zug and Lake Lugano) [@MZG+20], Eastern Tropical North Pacific (ETNP) [@GBL+15], Sansha Yongle Blue Hole [@HXZ+20], Ursu Lake [@BCA+20].
 
-## Changes of abundance and chemical parameters at different taxonomic levels (Figure 4)
+## Changes of abundance and chemical metrics at different taxonomic levels (Figure 4)
 ```{r geo16S4, message = FALSE, results = "hide", out.width='100%', fig.width = 10.5, fig.height = 7, out.extra = 'class="full-width"', pngquant = pngquant, dpi = 100}
 geo16S4()
 ```

@@ -4,7 +4,7 @@
 # 20210416 Initial commit to JMDplots
 # 20210527 Updated plots for RefSeq release 206
 
-# Figure 1: Chemical parameters of predicted proteoms for taxonomic groups 20200925
+# Figure 1: Distinct chemical parameters of predicted proteoms for taxonomic groups 20200925
 geo16S1 <- function(pdf = FALSE) {
 
   if(pdf) pdf("geo16S1.pdf", width = 11, height = 5)
@@ -167,7 +167,7 @@ geo16S3 <- function(pdf = FALSE, plot.it = TRUE) {
     plot.new()
     legend <- as.expression(c(quote(italic(Z)[C]), quote(O[2]), quote(NO[3]^"-" / NO[2]^"-")))
     legend("top", legend = legend, lty = c(1, 1, 2), lwd = 1.5, col = c(1, 2, 4), pch = c(21, NA, NA), pt.bg = "white", ncol = 3, bty = "n")
-    # Setup plot parameters
+    # Setup plot metrics
     par(mgp = c(1.8, 0.5, 0), mar = c(3, 3, 3, 1))
   }
 
@@ -195,10 +195,10 @@ geo16S3 <- function(pdf = FALSE, plot.it = TRUE) {
   for(i in 1:length(study)) {
     # ZC range for plots
     if(study[i] == "BCA+20") ZClim <- c(-0.180, -0.145) else ZClim <- c(-0.172, -0.140)
-    # Get the metadata and compositional parameters for this study
+    # Get the metadata and compositional metrics for this study
     # Keep all rows for higher-resolution O2 measurements
     mdat <- getmdat(study[i], dropNA = FALSE)
-    params <- getparams(study[i])
+    metrics <- getmetrics(study[i])
     # Get the rows matching the ID
     iID <- mdat[, column[i]] == ID[i]
     mdat <- mdat[iID, ]
@@ -208,9 +208,9 @@ geo16S3 <- function(pdf = FALSE, plot.it = TRUE) {
     mdat <- mdat[!is.na(mdat$name), ]
     depth <- mdat$depth
     # Get the ZC and nH2O values
-    imet <- match(mdat$Run, params$Run)
-    ZC <- params$ZC[imet]
-    nH2O <- params$nH2O[imet]
+    imet <- match(mdat$Run, metrics$Run)
+    ZC <- metrics$ZC[imet]
+    nH2O <- metrics$nH2O[imet]
 
     if(plot.it) {
       # Reverse y-axis (depth)

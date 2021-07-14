@@ -1,9 +1,9 @@
 # JMDplots/devodata
 # Get abundance-weighted means and bootstrap confidence intervals
-# for chemical parameters (protein length, ZC, nH2O) of developmental proteomes
+# for chemical metrics (protein length, ZC, nH2O) of developmental proteomes
 # 20210708 jmd first version
 
-getCBS17 <- function(parameter = "H2O", boot.R = 99) {
+getCBS17 <- function(metric = "H2O", boot.R = 99) {
 
   # Read abundance data
   datadir <- system.file("extdata/devodata", package = "JMDplots")
@@ -25,10 +25,10 @@ getCBS17 <- function(parameter = "H2O", boot.R = 99) {
   # Get protein length
   pl <- protein.length(aa)
 
-  # Calculate the parameter for each protein
-  if(parameter == "ZC") X <- ZCAA(aa)
-  if(parameter == "H2O") X <- H2OAA(aa)
-  if(parameter == "length") X <- protein.length(aa)
+  # Calculate the metric for each protein
+  if(metric == "ZC") X <- ZCAA(aa)
+  if(metric == "H2O") X <- H2OAA(aa)
+  if(metric == "length") X <- protein.length(aa)
 
   # https://stackoverflow.com/questions/46231261/bootstrap-weighted-mean-in-r
   samplewmean <- function(d, i, j) {
@@ -53,7 +53,7 @@ getCBS17 <- function(parameter = "H2O", boot.R = 99) {
 
 }
 
-getFOK21 <- function(parameter = "H2O", boot.R = 99) {
+getFOK21 <- function(metric = "H2O", boot.R = 99) {
 
   # Read abundance data
   datadir <- system.file("extdata/devodata", package = "JMDplots")
@@ -77,10 +77,10 @@ getFOK21 <- function(parameter = "H2O", boot.R = 99) {
   # Get protein length
   pl <- protein.length(aa)
 
-  # Calculate the parameter for each protein
-  if(parameter == "ZC") X <- ZCAA(aa)
-  if(parameter == "H2O") X <- H2OAA(aa)
-  if(parameter == "length") X <- protein.length(aa)
+  # Calculate the metric for each protein
+  if(metric == "ZC") X <- ZCAA(aa)
+  if(metric == "H2O") X <- H2OAA(aa)
+  if(metric == "length") X <- protein.length(aa)
 
   # https://stackoverflow.com/questions/46231261/bootstrap-weighted-mean-in-r
   samplewmean <- function(d, i, j) {
