@@ -39,7 +39,7 @@ export(
   "Ehplot", "rankdiff", "rankplot", "groupplots", "mergedplot", "get_colors",
   # evdevH2O paper 20210127
   "evdevH2O1", "evdevH2O2", "evdevH2O3", "evdevH2O4", "evdevH2O5", "evdevH2O6",
-  "runMaximAct", "logK_example",
+  "MaximAct", "runMaximAct", "logK_example",
   # mjenergy paper 20210205
   "mjenergy1", "mjenergy2", "mjenergy3", "calc_affinity",
   # evdevH2O paper 20210402
@@ -51,8 +51,8 @@ export(
   "taxacomp", "plotcomp", "addhull", "groupcomp",
   # can16S paper 20210604
   "getrefseq", "getgroup", "groupperc",
-  # evdevH2O paper 20210707-20210708
-  "getCBS17", "getFOK21"
+  # evdevH2O paper 20210706-20210708
+  "getphyloaa", "getCBS17", "getFOK21"
 )
 
 # imports from CHNOSZ
@@ -104,9 +104,7 @@ importFrom("canprot",
   # for canH2O5() 20200505, 20200508
   "qdist", "cplab",
   # for canH2OS1() 20201016
-  "O2AA",
-  # for evdevH2O2() and runMaximAct() 20210706
-  "MaximAct", "getphyloaa"
+  "O2AA"
 )
 
 # imports from other packages

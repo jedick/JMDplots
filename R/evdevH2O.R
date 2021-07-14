@@ -783,7 +783,7 @@ evdevH2O6 <- function(pdf = FALSE, boot.R = 99) {
 
 # Calculate optimal logaH2O and logfO2 for various datasets 20210402
 # History: Phylostrata 20201218, B. subtilis biofilm 20201221
-runMaximAct <- function(dataset = "TPPG17", seed = 1:100, bg_organism = "Hsa") {
+runMaximAct <- function(dataset = "TPPG17", seed = 1:100, nbackground = 2000, res = 256, bg_organism = "Hsa", writeFiles = TRUE) {
 
   message(paste("runMaximAct: target", dataset, "with", length(seed), "samples of", bg_organism, "background"))
 
@@ -844,18 +844,28 @@ runMaximAct <- function(dataset = "TPPG17", seed = 1:100, bg_organism = "Hsa") {
   else stop(paste("unrecognized background organism:", bg_organism))
   bgname <- paste0("_", bg_organism)
 
+  # Set resolution 20210714
+  O2 <- c(O2, res)
+  H2O <- c(H2O, res)
+
   # Start plot
-  png(paste0(dataset, bgname, ".png"), width = 1000, height = 1000)
-  par(cex = 2)
+  if(writeFiles) {
+    png(paste0(dataset, bgname, ".png"), width = 1000, height = 1000)
+    par(cex = 2)
+  }
   # Run MaximAct()
-  MA <- MaximAct(AA_target, seed = seed, nbackground = 2000, xlab = xlab, O2 = O2, H2O = H2O, AA_background = AA_background)
-  # Round and save values
-  O2 <- round(MA$O2, 3)
-  H2O <- round(MA$H2O, 3)
-  write.csv(O2, paste0(dataset, "_O2", bgname, ".csv"), row.names = FALSE, quote = FALSE)
-  write.csv(H2O, paste0(dataset, "_H2O", bgname, ".csv"), row.names = FALSE, quote = FALSE)
-  # Close plot
-  dev.off()
+  MA <- MaximAct(AA_target, seed = seed, nbackground = nbackground, xlab = xlab, O2 = O2, H2O = H2O, AA_background = AA_background)
+  if(writeFiles) {
+    # Round and save values
+    O2vals <- round(MA$O2, 3)
+    H2Ovals <- round(MA$H2O, 3)
+    write.csv(O2vals, paste0(dataset, "_O2", bgname, ".csv"), row.names = FALSE, quote = FALSE)
+    write.csv(H2Ovals, paste0(dataset, "_H2O", bgname, ".csv"), row.names = FALSE, quote = FALSE)
+    # Close plot
+    dev.off()
+  }
+  # Return output of MaximAct()
+  MA
 
 }
 

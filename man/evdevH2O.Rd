@@ -21,7 +21,8 @@ Plots from the paper by Dick (2021).
   evdevH2O4(pdf = FALSE)
   evdevH2O5(pdf = FALSE, boot.R = 99)
   evdevH2O6(pdf = FALSE, boot.R = 99)
-  runMaximAct(dataset = "TPPG17", seed = 1:100, bg_organism = "Hsa")
+  runMaximAct(dataset = "TPPG17", seed = 1:100, nbackground = 2000,
+    res = 256, bg_organism = "Hsa", writeFiles = TRUE)
   logK_example()
 }
 
@@ -30,6 +31,9 @@ Plots from the paper by Dick (2021).
   \item{boot.R}{integer, number of bootstrap replicates}
   \item{dataset}{character, dataset to use for constructing target proteins}
   \item{seed}{numeric, seeds to use for subsampling background proteins from human proteome}
+  \item{nbackground}{numeric, number of background proteins to sample}
+  \item{res}{numeric, grid resolution for \logfO2 and \logaH2O}
+  \item{writeFiles}{logical, creates CSV and PNG output files?}
   \item{bg_organism}{character, use background proteins from this organism.}
 }
 
@@ -45,7 +49,7 @@ This table gives a brief description of each plotting function.
   \code{evdevH2O6} \tab Organismal water content, proteomic \nH2O, and optimal \logaH2O for fruit fly development \cr
 }
 
-\code{runMaximAct} sets up calculations with \code{\link[canprot]{MaximAct}} to  compute the optimal \logaH2O and \logfO2 that maximize the equilibrium activity of model proteins against a human proteome background.
+\code{runMaximAct} sets up calculations with \code{\link{MaximAct}} to compute the optimal \logaH2O and \logfO2 that maximize the equilibrium activity of target proteins against a proteomic background.
 The available \code{dataset}s are described below.
 \describe{
   \item{\samp{TPPG17}}{Phylostrata from Trigos et al., 2017; target proteins are mean amino acid compositions for each phylostratum.}
@@ -55,26 +59,26 @@ The available \code{dataset}s are described below.
   \item{\samp{fly_development}}{Fly developmental proteome from Casas-Vila et al., 2017; target proteins are mean amino acid composition for each time point.}
 }
 
-\code{bg_organism} can be one of \samp{Hsa} (\emph{Homo sapiens}), \samp{Sce} (\emph{Saccharomyces cerevisiae}), \samp{Eco} (\emph{Escherichia coli}), \samp{Mja} (\emph{Methanocaldococcus jannaschii}).
-These are used to retrieve the background proteins used for the \code{AA_background} argument in \code{\link[canprot]{MaximAct}}.
+\code{bg_organism} can be one of \samp{Hsa} (\emph{Homo sapiens}), \samp{Sce} (\emph{Saccharomyces cerevisiae}), \samp{Eco} (\emph{Escherichia coli}), \samp{Mja} (\emph{Methanocaldococcus jannaschii}), \samp{Dme} (\emph{Drosophila melanogaster}), or \samp{Bsu} (\emph{Bacillus subtilis}).
+These are used to retrieve the background proteins used for the \code{AA_background} argument in \code{\link{MaximAct}}.
 
-The results, i.e. optimal \logfO2 or \logaH2O values for each seed and protein are saved in CSV files named by pasting together the \code{dataset}, \code{bg_organism}, and \samp{O2.csv} or \samp{H2O.csv}, separated by \samp{_}.
+If \code{writeFiles} is TRUE, a PNG plot file is created and optimal \logfO2 or \logaH2O values for each seed and protein are saved in CSV files named by pasting together the \code{dataset}, \code{bg_organism}, and \samp{O2.csv} or \samp{H2O.csv}, separated by \samp{_}.
 
 \code{logK_example} prints the chemical formula, formation reaction, and equilibrium constant for an example protein (LYSC_CHICK).
 
 }
 
 \section{Files in extdata/evdevH2O}{
-  These files were created by running \code{runMaximAct} for each \code{dataset} (see above).
-  They are used in \code{evdevH2O3} (phylostrata and gene ages) and \code{evdevH2O4} (biofilm developmental stages).
-  To reduce package size, the PNG files output by \code{runMaximAct} are not included here.
   \describe{
-    \item{\code{[dataset]_H2O.csv}}{Optimal values of \logaH2O for each random seed.}
-    \item{\code{[dataset]_O2.csv}}{Optimal values of \logfO2 for each random seed.}
+    \item{\code{runall.sh}}{Script to run \code{runMaximAct} for different datasets and background proteomes.}
+    \item{\code{[dataset]_H2O.csv}}{Output file with optimal values of \logaH2O for each random seed.}
+    \item{\code{[dataset]_O2.csv}}{Output file with optimal values of \logfO2 for each random seed.}
   }
+  The output files are used in \code{evdevH2O3} (thermodynamic analysis of phylostrata and gene ages) and \code{evdevH2O5} (thermodynamic analysis of biofilm developmental stages).
+  To reduce package size, the PNG files output by \code{runMaximAct} are not included here.
 
   Two other files, \code{FOK+21_mean_aa.csv} and \code{CBS+17_mean_aa.csv}, contain mean amino acid compositions of proteins computed using datasets for developmental transcriptomes and proteomes in B. subtilis biofilms (Futo et al., 2021) and proteomes in fruit flies (Casas-Vila et al., 2017).
-  These files are used in \code{evdevH2O4} and \code{evdevH2O5}.
+  These files are used in \code{evdevH2O5} and \code{evdevH2O6}.
 }
 
 \references{
@@ -98,13 +102,7 @@ evdevH2O1()
 # (Something from above messes up split.screen())
 dev.off()
 
-# An abbreviated version of runMaximAct("transcriptome")
-devodir <- system.file("extdata/devodata", package = "JMDplots")
-aa <- read.csv(file.path(devodir, "FOK+21_mean_aa.csv"), as.is = TRUE)
-aa <- subset(aa, organism == "transcriptome")
-MA <- MaximAct(aa, seed = 1:3, nbackground = 200, O2 = c(-72,-65,15), H2O = c(-2,5,15))
-## Default arguments used in runMaximAct -- takes much longer
-#MA <- MaximAct(aa, seed = 1:100, nbackground = 2000, O2 = c(-72, -65), H2O = c(-2, 5))
+MA <- runMaximAct("transcriptome", seed = 1:3, nbackground = 200, res = 15, writeFiles = FALSE)
 # The logaH2O decreases at the end of the time course
 H2O <- colMeans(MA$H2O)
 stopifnot(H2O["14D"] > H2O["1M"])

@@ -1,26 +1,30 @@
 # JMDplots/MaximAct.R
 
 # 20201218 Calculate optimal logaH2O and logfO2 for target proteins
-# 20210215 Use target proteins given in aa argument
+# 20210215 Use target proteins given in AA_target argument
 #   - also add xlab, O2, H2O, nbackground, arguments
 # 20210307-08 Add pH and names arguments
 # 20210401 Add plot argument
-MaximAct <- function(aa, seed = 1:100, nbackground = 2000, plot.it = TRUE,
-  xlab = "sample", names = NULL, O2 = c(-72, -67), H2O = c(-2, 6), pH = NULL) {
+MaximAct <- function(AA_target, seed = 1:100, nbackground = 2000, plot.it = TRUE,
+  xlab = "sample", names = NULL, O2 = c(-72, -67), H2O = c(-2, 6), pH = NULL,
+  AA_background = NULL) {
 
   # Load target proteins
-  iptarget <- add.protein(aa)
-  if(is.null(names)) names <- aa$protein
-  # Get background proteins:
-  ## (UniProt reference human proteome) 20210215
-  #aaback <- readRDS(system.file("/extdata/protein/human_base.rds", package = "canprot"))
-  # Only use proteins that have phylostrata assignments in both Trigos and Liebeskind datasets 20210402
-  TPPG17 <- read.csv(system.file(paste0("extdata/phylostrata/TPPG17.csv.xz"), package = "canprot"), as.is = TRUE)
-  LMM16 <- read.csv(system.file(paste0("extdata/phylostrata/LMM16.csv.xz"), package = "canprot"), as.is = TRUE)
-  # Take the intersection of lists of proteins from the two sources
-  Entry <- na.omit(intersect(TPPG17$Entry, LMM16$UniProt))
-  # Get amino acid compositions of the proteins
-  aaback <- protcomp(Entry)$aa
+  iptarget <- add.protein(AA_target)
+  if(is.null(names)) names <- AA_target$protein
+
+  if(is.null(AA_background)) {
+    # Get background proteins:
+    ## (UniProt reference human proteome) 20210215
+    #AA_background <- readRDS(system.file("/extdata/protein/human_base.rds", package = "canprot"))
+    # Only use proteins that have phylostrata assignments in both Trigos and Liebeskind datasets 20210402
+    TPPG17 <- read.csv(system.file(paste0("extdata/phylostrata/TPPG17.csv.xz"), package = "canprot"), as.is = TRUE)
+    LMM16 <- read.csv(system.file(paste0("extdata/phylostrata/LMM16.csv.xz"), package = "canprot"), as.is = TRUE)
+    # Take the intersection of lists of proteins from the two sources
+    Entry <- na.omit(intersect(TPPG17$Entry, LMM16$UniProt))
+    # Get amino acid compositions of the proteins
+    AA_background <- protcomp(Entry)$aa
+  }
 
   # Set up system
   if(is.null(pH)) basis("QEC") else basis("QEC+")
@@ -56,10 +60,12 @@ MaximAct <- function(aa, seed = 1:100, nbackground = 2000, plot.it = TRUE,
     # Calculate affinities for target proteins and a sample of human proteins (background)
     print(paste("seed is", seed[iseed]))
     set.seed(seed[iseed])
-    iback <- sample(1:nrow(aaback), nbackground)
-    ipback <- add.protein(aaback[iback, ])
+    iback <- 1:nrow(AA_background)
+    # Sample background proteins only if number of available proteins is greater than sample size 20210712
+    if(nrow(AA_background) > nbackground) iback <- sample(1:nrow(AA_background), nbackground)
+    ipback <- add.protein(AA_background[iback, ])
     if(is.null(pH)) a <- suppressMessages(affinity(O2 = O2, H2O = H2O, iprotein = c(iptarget, ipback)))
-    if(!is.null(pH)) a <- suppressMessages(affinity(O2 = c(O2, 40), H2O = c(H2O, 40), pH = c(pH, 40), iprotein = c(iptarget, ipback)))
+    if(!is.null(pH)) a <- suppressMessages(affinity(O2 = c(O2[1:2], 40), H2O = c(H2O[1:2], 40), pH = c(pH, 40), iprotein = c(iptarget, ipback)))
     # Equilibrate and find maximum activity for each target protein
     e <- suppressMessages(equilibrate(a, as.residue = TRUE, loga.balance = 0))
     optO2 <- optH2O <- optpH <- numeric()
@@ -131,4 +137,34 @@ MaximAct <- function(aa, seed = 1:100, nbackground = 2000, plot.it = TRUE,
 
   out
 
+}
+
+# Get mean amino acid composition for each phylostratum 20201219
+getphyloaa <- function(PS_source) {
+  dat <- read.csv(system.file(paste0("extdata/phylostrata/", PS_source, ".csv.xz"), package = "canprot"), as.is = TRUE)
+  if(PS_source == "LMM16") {
+    colnames(dat)[c(1,3)] <- c("Entry", "Phylostrata")
+    # remove entries that have ENSP instead of UniProt IDs
+    dat <- dat[!grepl("^ENSP", dat$Entry), ]
+  }
+  dat <- check_IDs(dat, "Entry")
+  dat <- cleanup(dat, "Entry")
+  pcomp <- protcomp(dat$Entry)
+  # Set up blank amino acid data frame
+  PS <- sort(unique(dat$Phylostrata))
+  aa <- thermo()$protein[rep(1, length(PS)), ]
+  aa$protein <- PS
+  aa$organism <- PS_source
+  aa$ref <- aa$abbrv <- NA
+  aa$chains <- 1
+  aa[, 6:25] <- 0
+  # Loop over phylostrata
+  for(i in seq_along(PS)) {
+    iPS <- dat$Phylostrata == PS[i]
+    aaPS <- pcomp$aa[iPS, ]
+    aamean <- colMeans(aaPS[, 6:25])
+    aa[i, 6:25] <- aamean
+  }
+  # Return both the mean compositions (aa) and all proteins (pcomp)
+  list(aa = aa, pcomp = pcomp)
 }
