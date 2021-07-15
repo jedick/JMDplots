@@ -230,9 +230,11 @@ geo16S3 <- function(pdf = FALSE, plot.it = TRUE) {
         if(study[i] == "SVH+19") {
           plot(ZC, depth, xlim = ZClim, ylim = ylim, xlab = axis.label("ZC"), ylab = "Depth (m)", type = "b", yaxt = "n")
           axis(2, at = seq(100, 700, 100), labels = c(100, 200, 300, 400, 500, 1000, 2000), gap.axis = 0)
+          # Plot y-axis break
           par(xpd = NA)
-          text(-0.1734, 550, "/", srt = 90, font = 2, cex = 2, col = "white")
-          text(-0.1734, 550, "/", srt = 90)
+          rect(-0.174, 557, -0.173, 542, col = "white", border = NA)
+          text(-0.1734, 542, "/", srt = 90)
+          text(-0.1734, 556, "/", srt = 90)
           par(xpd = FALSE)
         } else plot(ZC, depth, xlim = ZClim, ylim = ylim, xlab = axis.label("ZC"), ylab = "Depth (m)", type = "b")
       } else {

@@ -63,7 +63,7 @@ par.orig <- JMDplots:::my.filled.contour(e$vals$O2, e$vals$H2O, d$predominant.va
   add2 = TRUE
 )
 
-## Plot 2: Effective Eh for Liebeskind gene ages
+## Plot 2: Virtual Eh for Liebeskind gene ages
 PS_source <- "LMM16"
 # Read results
 datadir <- system.file("extdata/evdevH2O", package = "JMDplots")
