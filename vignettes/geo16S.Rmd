@@ -61,8 +61,12 @@ nH2O <- "<i>n</i><sub>H<sub>2</sub>O</sub>"
 ZC <- "<i>Z</i><sub>C</sub>"
 ```
 
-This vignette runs the code to make the plots from the following preprint:
+This vignette runs the code to make the plots from the following paper:
 
+> Dick JM, Tan J. 2021. What they're made of matters: Chemical links between microbial communities and their environments. Submitted manuscript.
+>
+> Preprint available at:
+>
 > Dick JM, Tan J. 2021. Genomic evidence for a chemical link between redox conditions and microbial community composition. bioRxiv. doi: [10.1101/2021.05.31.446500](https://doi.org/10.1101/2021.05.31.446500)
 
 <!--

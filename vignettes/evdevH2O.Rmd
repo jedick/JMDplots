@@ -114,6 +114,18 @@ evdevH2O5()
 evdevH2O6()
 ```
 
+## Show total and unmapped number of genes in @TPPG17 phylostrata dataset
+```{r TPPG17_stats, echo = FALSE}
+file <- system.file("extdata/phylostrata/TPPG17.csv.xz", package = "canprot")
+dat <- read.csv(file)
+message(paste("Total number of genes:", nrow(dat)))
+message("Total gene count in each phylostratum:")
+table(dat$Phylostrata)
+message(paste("Genes not mapped to UniProt:", sum(is.na(dat$Entry))))
+message("Unmapped genes in each phylostratum:")
+table(dat$Phylostrata[is.na(dat$Entry)])
+```
+
 ## Example of protein chemical formula, formation reaction, and equilibrium constant
 ```{r logK_example}
 logK_example()

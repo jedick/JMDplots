@@ -5,6 +5,8 @@ CHANGES IN JMDplots 1.2.7
 
 - 20210710 Move OBIGT/OldAA.csv here from CHNOSZ.
 
+- 20210525 Update to RefSeq release 206.
+
 CHANGES IN JMDplots 1.2.6
 -------------------------
 
@@ -20,9 +22,11 @@ CHANGES IN JMDplots 1.2.5
 CHANGES IN JMDplots 1.2.4
 -------------------------
 
+- 20201011 Revise gradH2O and canH2O plots to use QEC basis species.
+
 - 20200817 Use canprot's options("basis") to select basis species.
 
-- 20201011 Revise gradH2O and canH2O plots to use QEC basis species.
+- 20200731 Update to RefSeq release 201.
 
 CHANGES IN JMDplots 1.2.3
 -------------------------
@@ -81,3 +85,5 @@ CHANGES IN JMDplots 1.0.0
   (Supplementary plots are in second vignette.)
 
 - 20190928 Started package with plots from gradox paper.
+
+- 20190904 Update to RefSeq release 95 from release 61 (previously in CHNOSZ).
