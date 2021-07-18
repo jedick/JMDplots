@@ -5,6 +5,7 @@
 #   - also add xlab, O2, H2O, nbackground, arguments
 # 20210307-08 Add pH and names arguments
 # 20210401 Add plot argument
+# 20210718 Allow H2O = 0 (unit activity of H2O)
 MaximAct <- function(AA_target, seed = 1:100, nbackground = 2000, plot.it = TRUE,
   xlab = "sample", names = NULL, O2 = c(-72, -67), H2O = c(-2, 6), pH = NULL,
   AA_background = NULL) {
@@ -64,15 +65,21 @@ MaximAct <- function(AA_target, seed = 1:100, nbackground = 2000, plot.it = TRUE
     # Sample background proteins only if number of available proteins is greater than sample size 20210712
     if(nrow(AA_background) > nbackground) iback <- sample(1:nrow(AA_background), nbackground)
     ipback <- add.protein(AA_background[iback, ])
-    if(is.null(pH)) a <- suppressMessages(affinity(O2 = O2, H2O = H2O, iprotein = c(iptarget, ipback)))
-    if(!is.null(pH)) a <- suppressMessages(affinity(O2 = c(O2[1:2], 40), H2O = c(H2O[1:2], 40), pH = c(pH, 40), iprotein = c(iptarget, ipback)))
+    if(identical(H2O, 0)) {
+      # Use unit activity of H2O 20210718
+      if(is.null(pH)) a <- suppressMessages(affinity(O2 = O2, iprotein = c(iptarget, ipback)))
+      if(!is.null(pH)) a <- suppressMessages(affinity(O2 = c(O2[1:2], 40), pH = c(pH, 40), iprotein = c(iptarget, ipback)))
+    } else {
+      if(is.null(pH)) a <- suppressMessages(affinity(O2 = O2, H2O = H2O, iprotein = c(iptarget, ipback)))
+      if(!is.null(pH)) a <- suppressMessages(affinity(O2 = c(O2[1:2], 40), H2O = c(H2O[1:2], 40), pH = c(pH, 40), iprotein = c(iptarget, ipback)))
+    }
     # Equilibrate and find maximum activity for each target protein
     e <- suppressMessages(equilibrate(a, as.residue = TRUE, loga.balance = 0))
     optO2 <- optH2O <- optpH <- numeric()
     for(i in seq_along(names)) {
       imax <- arrayInd(which.max(e$loga.equil[[i]]), dim(e$loga.equil[[i]]))
       optO2 <- c(optO2, e$vals$O2[imax[1]])
-      optH2O <- c(optH2O, e$vals$H2O[imax[2]])
+      if(identical(H2O, 0)) optH2O <- c(optH2O, 0) else optH2O <- c(optH2O, e$vals$H2O[imax[2]])
       if(!is.null(pH)) optpH <- c(optpH, e$vals$pH[imax[3]])
     }
     if(plot.it) {

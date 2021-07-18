@@ -915,9 +915,12 @@ plotphylo <- function(var = "ZC", PS_source = "TPPG17", memo = NULL, xlab = "PS"
       # remove entries that have ENSP instead of UniProt IDs
       dat <- dat[!grepl("^ENSP", dat$Entry), ]
     }
+    # Update old UniProt IDs
     dat <- check_IDs(dat, "Entry")
-    dat <- cleanup(dat, "Entry")
-    pcomp <- protcomp(dat$Entry)
+    # Remove genes with no UniProt mapping 20210718
+    dat <- dat[!is.na(dat$Entry), ]
+    # Run protcomp and suppress warning about duplicated IDs 20210718
+    pcomp <- suppressWarnings(protcomp(dat$Entry))
   } else {
     dat <- memo$dat
     pcomp <- memo$pcomp
