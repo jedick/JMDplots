@@ -870,7 +870,8 @@ runMaximAct <- function(dataset = "TPPG17", seed = 1:100, nbackground = 2000, re
 }
 
 # Example of protein chemical formula, formation reaction, and equilibrium constant 20210115
-logK_example <- function() {
+# Add logQ 20210719
+LYSC_example <- function() {
   ip <- pinfo("LYSC_CHICK")
   pl <- protein.length(ip)
 
@@ -881,24 +882,50 @@ logK_example <- function() {
   # Calculate per-residue ΔGf° at 25 °C and 1 bar
   G <- suppressMessages(protein.OBIGT(ip)$G / pl)
   # Add the residue as a new species
-  ires <- suppressMessages(mod.OBIGT("LYSC_residue", formula = formula, G = G))
+  suppressMessages(mod.OBIGT("LYSC_residue", formula = formula, G = G))
 
   # Calculate properties of formation reaction from QEC basis species
   basis("QEC")
-  sres <- suppressMessages(subcrt(ires, 1, T = 25))
+  sres <- suppressMessages(subcrt("LYSC_residue", 1, T = 25))
 
   # Print results
   message("Per-residue chemical formula of LYSC_CHICK")
   print(formula)
   message("Stoichiometry of formation reaction")
   print(sres$reaction[, 1:3])
-  message("Equilibrium constant of formation reaction (25 \u00B0C, 1 bar)")
+  message("logK of formation reaction (25 \u00B0C, 1 bar)")
   print(round(sres$out$logK, 2))
 
   # Sanity check: we get the same equilibrium constant starting with the whole formula
-  logK.prot <- suppressMessages(subcrt("LYSC_CHICK", 1, T = 25)$out$logK)
-  logK.res <- logK.prot / pl
-  stopifnot(all.equal(sres$out$logK, logK.res, tol = 0.01, scale = 1))
+  logK.protein <- suppressMessages(subcrt("LYSC_CHICK", 1, T = 25)$out$logK)
+  logK.residue <- logK.protein / pl
+  stopifnot(all.equal(sres$out$logK, logK.residue, tol = 0.01, scale = 1))
+
+  # Calculate logQ 20210719
+  # Use activities of amino acids and H2O set in basis("QEC"), but with logfO2 = -70
+  basis("O2", -70)
+  logQ.residue_round <- suppressMessages(subcrt("LYSC_residue", 1, T = 25, logact = 0)$out$logQ)
+
+  # The reaction auto-balance is not very precise, so let's do it another way
+  # For activity of residue = 1, activity of protein is 1/length
+  loga.protein <- log10(1/pl)
+  logQ.protein <- suppressMessages(subcrt("LYSC_CHICK", 1, T = 25, logact = loga.protein)$out$logQ)
+  logQ.residue <- logQ.protein / pl
+  # Sanity check 2: logQ is similar for the two methods above
+  stopifnot(all.equal(logQ.residue, logQ.residue_round, tol = 0.02, scale = 1))
+
+  message("logQ of formation reaction (logfO2 = -70, logaH2O = 0)")
+  print(round(logQ.residue, 2))
+  message("log(K/Q)")
+  logKQ <- logK.residue - logQ.residue
+  print(round(logKQ, 2))
+
+  # Sanity check 3: same value for log(K/Q) is returned by affinity()
+  species("LYSC_CHICK", loga.protein)
+  a <- suppressMessages(affinity())
+  A.protein <- a$values[[1]][1]
+  A.residue <- A.protein / pl
+  stopifnot(all.equal(logKQ, A.residue))
 }
 
 ############################

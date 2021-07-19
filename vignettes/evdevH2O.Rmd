@@ -134,9 +134,9 @@ message("Unmapped genes in each phylostratum:")
 table(dat$Phylostrata[is.na(dat$Entry)])
 ```
 
-## Example of protein chemical formula, formation reaction, and equilibrium constant
-```{r logK_example}
-logK_example()
+## Example of protein chemical formula, formation reaction, equilibrium constant, and activity product
+```{r LYSC_example}
+LYSC_example()
 ```
 
 ## References

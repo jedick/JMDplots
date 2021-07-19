@@ -8,7 +8,7 @@
 \alias{evdevH2O5}
 \alias{evdevH2O6}
 \alias{runMaximAct}
-\alias{logK_example}
+\alias{LYSC_example}
 \title{Plots from thermodynamics in evolution and development paper}
 \description{
 Plots from the paper by Dick (2021).
@@ -23,7 +23,7 @@ Plots from the paper by Dick (2021).
   evdevH2O6(pdf = FALSE, boot.R = 99)
   runMaximAct(dataset = "TPPG17", seed = 1:100, nbackground = 2000,
     res = 256, bg_organism = "Hsa", writeFiles = TRUE)
-  logK_example()
+  LYSC_example()
 }
 
 \arguments{
@@ -64,7 +64,7 @@ These are used to retrieve the background proteins used for the \code{AA_backgro
 
 If \code{writeFiles} is TRUE, a PNG plot file is created and optimal \logfO2 or \logaH2O values for each seed and protein are saved in CSV files named by pasting together the \code{dataset}, \code{bg_organism}, and \samp{O2.csv} or \samp{H2O.csv}, separated by \samp{_}.
 
-\code{logK_example} prints the chemical formula, formation reaction, and equilibrium constant for an example protein (LYSC_CHICK).
+\code{LYSC_example} prints the chemical formula, formation reaction, equilibrium constant, and activity product for the example protein (LYSC_CHICK) used in the text.
 
 }
 
