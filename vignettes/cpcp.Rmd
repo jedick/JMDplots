@@ -1,12 +1,14 @@
 ---
-title: "Cancer potential diagrams (2016, 2017)"
+title: "Chemical portraits of cancer proteomes (2016, 2017)"
 output: 
   rmarkdown::html_vignette:
     mathjax: null
 vignette: >
-  %\VignetteIndexEntry{Cancer potential diagrams (2016, 2017)}
+  %\VignetteIndexEntry{Chemical portraits of cancer proteomes (2016, 2017)}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
+bibliography: JMDplots.bib
+csl: elementa.csl
 ---
 <script>
 function ToggleDiv(ID) {
@@ -50,28 +52,28 @@ library(JMDplots)
 
 ## Microbial proteins in colorectal cancer (2016 Figure 4)
 
-Stability fields represent the ranges of oxygen fugacity and water activity where the mean protein composition from the labeled microbial species has a higher per-residue affinity (lower Gibbs energy) of formation than the others.
+Stability fields represent the ranges of oxygen fugacity and water activity where a protein with the mean amino acid composition from the labeled microbial species has a higher per-residue affinity (lower Gibbs energy) of formation than the others.
 Blue and red shading designate microbes relatively enriched in samples from healthy donors and cancer patients, respectively.
 Plot (E) is a composite figure in which the intensity of shading corresponds to the number of overlapping healthy- or cancer-enriched microbes in the preceding diagrams
 
 <button id="B-bugstab" onclick="ToggleDiv('bugstab')">Show code</button>
 <div id="D-bugstab" style="display: none">
 ```{r bugstab, eval = FALSE}
-# to reproduce the calculations in the paper, use superseded data for [Gly] and [UPBB] 20190206
+# To reproduce the calculations in the paper, use superseded data for [Gly] and [UPBB] 20190206
 file <- system.file("extdata/OBIGT/OldAA.csv", package = "JMDplots")
 add.OBIGT(file, c("[Gly]", "[UPBB]"))
-# set up graphics device
+# Set up graphics device
 layout(cbind(matrix(sapply(list(c(1, 2), c(3, 4)), function(x) rep(rep(x, each=3), 3)), nrow=6, byrow=TRUE),
              matrix(rep(c(0, 5, 5, 5, 5, 0), each=4), nrow=6, byrow=TRUE)))
 opar <- par(mar=c(3.3, 3.3, 1.5, 1.5), mgp=c(2.1, 0.7, 0), xaxs="i", yaxs="i", las=1, cex=0.9)
-# resolution for plots
+# Resolution for plots
 res <- 500
-# basis can be "QEC" or "CHNOS"
+# Basis can be "QEC" or "CHNOS"
 basis <- "QEC"
-# read bioproject ids, species names
+# Read bioproject ids, species names
 mfile <- system.file("extdata/Dic16/microbes.csv", package="JMDplots")
 bugs <- read.csv(mfile, as.is=TRUE)
-# where to keep the locations of healthy zones
+# Where to keep the locations of healthy zones
 healthbugs <- list()
 if(basis=="CHNOS") {
   O2 <- c(-85, -65, res)
@@ -80,7 +82,7 @@ if(basis=="CHNOS") {
   O2 <- c(-75, -55, res)
   H2O <- c(-10, 10, res)
 }
-# the datasets that are considered
+# The datasets that are considered
 datasets <- c("WCQ+12", "ZTV+14", "CTB+14", "FLJ+15")
 # colors
 blue <- "#4A6FE3"
@@ -88,17 +90,17 @@ lightblue <- "#9DA8E2"
 neutral <- "#E2E2E2"
 lightred <- "#E495A5"
 red <- "#D33F6A"
-# labels
+# Labels
 logfO2lab <- expression(log*italic("f")[O[2]*group("(", italic("g"), ")")])
 logaH2Olab <- expression(log*italic("a")[H[2]*O*group("(", italic("liq"), ")")])
 for(i in 1:4) {
   ibug <- bugs$study==datasets[i] & (is.na(bugs$logodds) | abs(bugs$logodds) > 0.15)
-  # get amino acid compositions
+  # Get amino acid compositions
   aafile <- system.file("extdata/Dic16/microbial.aa.csv", package="JMDplots")
   microbial.aa <- read.csv(aafile, stringsAsFactors=FALSE)
   aa <- microbial.aa[match(bugs$bioproject[ibug], microbial.aa$organism), ]
   ip <- add.protein(aa)
-  # set up system, calculate relative stabilities
+  # Set up system, calculate relative stabilities
   col <- ifelse(bugs$upcan[ibug], lightred, lightblue)
   basis(basis)
   a <- affinity(O2=O2, H2O=H2O, iprotein=ip, T=37)
@@ -110,13 +112,13 @@ for(i in 1:4) {
   if(i==4) title(main="Fecal metagenome (FLJ+15)", cex.main=1)
   box()
   label.figure(LETTERS[i], yfrac=0.96, paren=FALSE, font=2, cex=1)
-  # store locations of healthy bug zones
+  # Store locations of healthy bug zones
   p <- d$predominant
   p[p %in% which(bugs$upcan[ibug])] <- 0
   p[p != 0] <- 1
   healthbugs[[i]] <- p
 }
-# now show the healthy zones
+# Now show the healthy zones
 xs <- seq(O2[1], O2[2], length.out=O2[3])
 ys <- seq(H2O[1], H2O[2], length.out=H2O[3])
 hhh <- healthbugs[[1]] + healthbugs[[2]] + healthbugs[[3]] + healthbugs[[4]]
@@ -124,13 +126,15 @@ image(xs, ys, hhh, col=c(red, lightred, neutral, lightblue, blue), useRaster=TRU
 title(main="Cumulative stability count")
 box()
 label.figure("E", yfrac=0.96, paren=FALSE, font=2, cex=1)
-# reset thermodynamic database
+# Reset thermodynamic database
 reset()
 ```
 </div>
 
 ```{r bugstab, echo = FALSE, fig.width=9, fig.height=5, message=FALSE, results="hide", out.width="100%"}
 ```
+
+Data sources: **A**. @WCQ+12. **B**. @ZTV+14. **C**. @CTB+14. **D**. @FLJ+15.
 
 <!-- Comment this section to reduce running time 20200829 -->
 <!--
@@ -165,7 +169,7 @@ To reduce the time needed to create the vignette, the plots here are made at low
 ## Potential diagrams: Pancreatic cancer (2017 Figure S3 and 3E)
 
 The potential diagrams show the weighted rank difference of chemical affinities between up- and down-expressed proteins in each dataset.
-Groups of datasets are considered that have similar compositional features, i.e. changes in `r zc` and _n_<sub>`r h2o`</sub>.
+Groups of datasets are considered that have similar chemical features, i.e. changes in `r zc` and _n_<sub>`r h2o`</sub>.
 
 Here we make plots for datasets for pancreatic cancer having a mean difference of _n_<sub>`r h2o`</sub> that is > 0.01 and a small `r zc`, as judged by the <i>p</i>-value and common language effect size (CLES).
 Red and blue correspond to greater potential for formation of the up- and down-expressed proteins, respectively; the line of equipotential is shown in white:
@@ -185,12 +189,14 @@ mergedplot(gpresult, res = 25)
 Ehplot(xlim = c(-70, -62), ylim = c(-6, 2), dy = 0.1)
 ```
 
+Data sources: @LHE+04, @MLC+11, @KHO+13, @KPC+13, @PKB+13, @KKC+16.
+
 ## Basis species comparison (2017 Figure S1)
 
-These plots show projections of protein composition made using two sets of basis species.
+These plots show projections of elemental composition of proteins made using two sets of basis species.
 Using the `CHNOS` basis species (CO<sub>2</sub>, NH<sub>3</sub>, H<sub>2</sub>S, `r h2o`, `r o2`), the plots show that _n_<sub>`r h2o`</sub> and _n_<sub>`r o2`</sub>, i.e. the number of `r h2o` and `r o2` in the formation per residue of the proteins from basis species, are both moderately correlated with `r zc` (average oxidation state of carbon).
 Using the `QEC` basis species (glutamine, glutamic acid, cysteine, `r h2o`, `r o2`), we find that _n_<sub>`r o2`</sub> is strongly correlated with `r zc`, but _n_<sub>`r h2o`</sub> shows very little correlation.
-Accordingly, the `QEC` basis more clearly exposes two compositional variables -- oxidation state and hydration state -- in proteomic data.
+Accordingly, the `QEC` basis more clearly exposes two chemical variables -- oxidation state and hydration state -- in proteomic data.
 
 Here we define some labels used in the plot.
 
@@ -208,7 +214,7 @@ protein.formula <- CHNOSZ::protein.formula(aa)
 ZC <- CHNOSZ::ZC(protein.formula)
 ```
 
-Now set up the figure and plot the per-residue compositions of the proteins projected into different sets of basis species.
+Now set up the figure and plot the per-residue elemental compositions of the proteins projected into different sets of basis species.
 
 ```{r basis_comp, fig.width=6, fig.height=6, fig.align="center"}
 par(mfrow = c(2, 2))
@@ -227,10 +233,10 @@ for(basis in c("QEC", "CHNOS")) {
 }
 ```
 
-## Compositional analysis of differentially expressed proteins (2017 Figures 1 and 2)
-To see the data references, run e.g. `canprot::mkoldvig("colorectal")`.
+## Chemical analysis of differentially expressed proteins (2017 Figures 1 and 2)
+*Updates to these datasets and plots were made for a <b>[new paper in 2021](canH2O.html)</b>.*
 
-*Updates to these datasets and plots were made for a <b>[new paper in 2020](canH2O.html)</b>.*
+For individual vignettes including data references, see the files in `system.file("extdata/cpcp", package = "JMDplots")`.
 
 <button id="B-diffplot" onclick="ToggleDiv('diffplot')">Show code</button>
 <div id="D-diffplot" style="display: none">
@@ -267,3 +273,5 @@ title("Hyperosmotic stress", font.main = 1)
 
 ```{r diffplot, fig.width = 8, fig.height = 8, out.width = "100%", echo = FALSE}
 ```
+
+## References

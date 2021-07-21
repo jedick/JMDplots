@@ -2,9 +2,9 @@
 # Make proteins with abundance-weighted amino acid composition from transcriptomes and proteomes 20201221
 
 # Read abundance data
-dat <- read.csv("FOK+20_abundance.csv")
+dat <- read.csv("FOK+21_abundance.csv.xz")
 # Read amino acid compositions of proteins
-aa <- read.csv("FOK+20_aa.csv")
+aa <- read.csv("FOK+21_aa.csv.xz")
 
 # Columns with the transcriptome and proteome data
 iT <- grep("T_", colnames(dat))
@@ -16,7 +16,7 @@ aaout <- thermo()$protein[rep(1, length(iTP)), ]
 aaout[, 6:25] <- 0
 aaout$chains <- 1
 aaout$abbrv <- NA
-aaout$ref <- "FOK+20"
+aaout$ref <- "FOK+21"
 aaout$organism[grepl("T_", colnames(dat)[iTP])] <- "transcriptome"
 aaout$organism[grepl("P_", colnames(dat)[iTP])] <- "proteome"
 aaout$protein <- sapply(strsplit(colnames(dat)[iTP], "_"), "[", 2)
@@ -37,4 +37,4 @@ for(i in seq_along(iTP)) {
   aaout[i, 6:25] <- aarow
 }
 aaout[, 6:25] <- round(aaout[, 6:25], 3)
-write.csv(aaout, "FOK+20_mean_aa.csv", row.names = FALSE, quote = FALSE)
+write.csv(aaout, "FOK+21_mean_aa.csv", row.names = FALSE, quote = FALSE)
