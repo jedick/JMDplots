@@ -17,7 +17,7 @@ DPSTCGAlab <- expression(bold(Delta*PS~"(TCGA)"))
 logaH2Olab <- expression(bold(log)*bolditalic(a)[bold(H[2]*O)])
 logfO2lab <- expression(bold(log)*bolditalic(f)[bold(O[2])])
 
-# Chemical analysis of Trigos and Liebeskind datasets 20201216
+# Chemical analysis of phylostrata and gene age datasets 20201216
 evdevH2O1 <- function(pdf = FALSE, boot.R = 99) {
   if(pdf) pdf("evdevH2O1.pdf", width = 10, height = 5)
   par(mar = c(4, 4, 1, 1), mgp = c(2.5, 1, 0))

@@ -41,7 +41,7 @@ Plots from the paper by Dick (2021).
 This table gives a brief description of each plotting function.
 
 \tabular{ll}{
-  \code{evdevH2O1} \tab Chemical analysis of Trigos and Liebeskind datasets \cr
+  \code{evdevH2O1} \tab Chemical analysis of phylostrata and gene age datasets \cr
   \code{evdevH2O2} \tab Thermodynamic analysis of optimal \logaH2O and \logfO2 for target proteins \cr
   \code{evdevH2O3} \tab Optimal \logaH2O and \logfO2 and virtual Eh for target proteins \cr
   \code{evdevH2O4} \tab Ranges of chemical metrics and thermodynamic parameters for different background proteomes \cr

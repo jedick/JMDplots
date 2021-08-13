@@ -63,7 +63,7 @@ ZC <- "<i>Z</i><sub>C</sub>"
 
 This vignette runs the code to make the plots from the following paper:
 
-> Dick JM, Tan J. 2021. What they're made of matters: Chemical links between microbial communities and their environments. Submitted manuscript.
+> Dick JM, Tan J. 2021. Genomic evidence for a chemical link between redox conditions and microbial community composition. Submitted manuscript.
 >
 > Preprint available at:
 >
