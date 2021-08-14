@@ -24,8 +24,8 @@ mjenergy1 <- function(pdf = FALSE) {
   species("CH4", -3)
   a <- affinity(T = rb$T, CO2 = rb$CO2, H2 = rb$H2, `NH4+` = rb$`NH4+`, H2S = rb$H2S, pH = rb$pH)
   # Convert dimensionless affinities to kJ/mol
-  T <- convert(a$vals[[1]], "K")
-  a$values <- lapply(a$values, convert, "G", T)
+  TK <- convert(rb$T, "K")
+  a$values <- lapply(a$values, convert, "G", TK)
   a$values <- lapply(a$values, convert, "J")
   a$values <- lapply(a$values, `*`, -0.001)
   # Make plot
@@ -34,10 +34,27 @@ mjenergy1 <- function(pdf = FALSE) {
   abline(h = 0, lty = 3, lwd = 2, col = "gray40")
   label.figure("a", cex = 1.5)
 
+  # Add dashed line for variable activity of CH4  20210814
+  a_vals <- numeric()
+  for(i in 1:nrow(rb)) {
+    basis("CO2", rb$CO2[i])
+    basis("H2", rb$H2[i])
+    species("CH4", rb$CH4[i])
+    a <- suppressMessages(affinity(T = rb$T[i]))
+    a_vals <- c(a_vals, a$values[[1]])
+  }
+  # Convert dimensionless affinities to kJ/mol
+  a_vals <- convert(a_vals, "G", T = TK)
+  a_vals <- convert(a_vals, "J")
+  a_vals <- - a_vals / 1000
+  lines(rb$T, a_vals, lty = 2)
+  ltxt <- as.expression(c(quote(italic(a)[CH[4]] == 10^-3), quote(italic(a)[CH[4]]~from~mixing~model), quote("(Shock and Canovas, 2010)")))
+  legend("topright", legend = ltxt, bty = "n", lty = c(1, 2, NA), lwd = c(1.7, 1.2), cex = 0.8)
+
   # Calculation for amino acids
   # Stay below 250 °C
   rb <- rb[rb$T < 250, ]
-  species(c("serine", "asparagine", "glycine", "aspartic acid", "valine", "leucine", "tryptophan", "phenylalanine"), -3)
+  species(aminoacids(""), -3)
   a <- affinity(T = rb$T, CO2 = rb$CO2, H2 = rb$H2, `NH4+` = rb$`NH4+`, H2S = rb$H2S, pH = rb$pH)
   # Convert dimensionless affinities to kJ/mol
   T <- convert(a$vals[[1]], "K")
@@ -46,14 +63,28 @@ mjenergy1 <- function(pdf = FALSE) {
   a$values <- lapply(a$values, `*`, -0.001)
   # Make plot
   E.units("J")  # only affects axis label, not conversion above
-  col <- c(1, 1, 2, 2, 3, 3, 4, 4)
-  lty <- c(1, 2, 1, 2, 1, 2, 1, 2)
+  # Use colors for ZC 20210813
+  zc <- ZC(info(aminoacids(""), "aq"))
+  col <- rep(1, length(zc))
+  col[zc < -0.3] <- 2
+  col[zc > 0.3] <- 4
+  lty <- 1
   diagram(a, balance = 1, ylim = c(-200, 400), ylab = axis.label("A", prefix = "k"), lwd = 2, col = col, lty = lty, names = NA)
   abline(h = 0, lty = 3, lwd = 2, col = "gray40")
-  text(c(104, 99, 151, 33, 33, 33, 33, 33), c(-52, -79, -45, 17, 201, 271, 320, 344), c("S", "N", "G", "D", "V", "L", "W", "F"), adj = 0.5)
+  # Add labels for all amino acids 20210813
+  lT <- c(A = 7, C = 5, D = 7, E = 7, F = 7, G = 7, H = 7, I = 7, K = 7, L = 7,
+          M = 7, N = 4, P = 7, Q = 5, R = 7, S = 4, T = 7, V = 7, W = 7, Y = 7)
+  lx <- rb$T[lT]
+  dy <- c(A = 8.5, C = 8.5, D = 8.5, E = 8.5, F = 8.5, G = 8.5, H = -8.5, I = -8.5, K = 8.5, L = 8.5,
+          M = 8.5, N = -9.5, P = 8.5, Q = 8.5, R = 8.5, S = 9.5, T = 8.5, V = 8.5, W = 8.5, Y = 8.5)
+  ly <- mapply("[", a$values, lT) + dy
+  text(lx, ly, aminoacids(), cex = 0.8)
+  ltxt <- as.expression(c(quote(italic(Z)[C] < -0.3), quote("-0.3 <"~italic(Z)[C] < 0.3), quote(italic(Z)[C] > 0.3)))
+  legend("topright", legend = ltxt, lty = 1, col = c(2, 1, 4), lwd = 2, bty = "n", cex = 0.8)
   label.figure("b", cex = 1.5)
 
-  # FIXME: Reset units so they don't interfere with protein ionization calculations 20201210
+  # Reset units so they don't interfere with protein ionization calculations 20201210
+  # (bug fixed in CHNOSZ 1.4.0, but we leave this here for compatibility with earlier versions)
   reset()
   if(pdf) dev.off()
 }
