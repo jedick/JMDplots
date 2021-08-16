@@ -67,7 +67,7 @@ library(JMDplots)
 ```
 
 ## Affinities for methanogenesis and amino acid synthesis (Figure 1)
-```{r mjenergy1, message = FALSE, results = "hide", out.width='100%', fig.width = 8, fig.height = 5, pngquant = pngquant}
+```{r mjenergy1, message = FALSE, results = "hide", out.width='100%', fig.width = 9, fig.height = 9, pngquant = pngquant}
 mjenergy1()
 ```
 
@@ -77,7 +77,7 @@ mjenergy2()
 ```
 
 ## Affinities of overall synthesis of proteins in *Mj* proteome (Figure 3)
-```{r mjenergy3, message = FALSE, results = "hide", out.width='100%', fig.width = 8, fig.height = 4, pngquant = pngquant}
+```{r mjenergy3, message = FALSE, results = "hide", out.width='100%', fig.width = 8, fig.height = 7, pngquant = pngquant}
 mjenergy3()
 ```
 

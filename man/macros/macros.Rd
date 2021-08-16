@@ -22,3 +22,9 @@
 \newcommand{\degC}{\ifelse{latex}{\eqn{^{\circ}}C}{\ifelse{html}{\out{&deg;}C}{°C}}}
 % 20210401
 \newcommand{\Hplus}{\ifelse{latex}{\eqn{\mathrm{H^{+}}}}{\ifelse{html}{\out{H<sup>+</sup>}}{H+}}}
+% 20210816
+\newcommand{\CO2}{\ifelse{latex}{\eqn{\mathrm{CO_{2}}}}{\ifelse{html}{\out{CO<sub>2</sub>}}{CO2}}}
+\newcommand{\H2}{\ifelse{latex}{\eqn{\mathrm{H_{2}}}}{\ifelse{html}{\out{H<sub>2</sub>}}{H2}}}
+\newcommand{\NH4plus}{\ifelse{latex}{\eqn{\mathrm{NH_{4}^{+}}}}{\ifelse{html}{\out{NH<sub>4</sub><sup>+</sup>}}{NH4+}}}
+\newcommand{\H2S}{\ifelse{latex}{\eqn{\mathrm{H_{2}S}}}{\ifelse{html}{\out{H<sub>2</sub>S}}{H2S}}}
+\newcommand{\CH4}{\ifelse{latex}{\eqn{\mathrm{CH_{4}}}}{\ifelse{html}{\out{CH<sub>4</sub>}}{CH4}}}
