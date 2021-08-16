@@ -124,7 +124,7 @@ mjenergy1 <- function(pdf = FALSE) {
   if(pdf) dev.off()
 }
 
-# ZC of amino acids vs frequency in Mj proteome 20201207
+# ZC of amino acids vs frequency in the Mj proteome 20201207
 mjenergy2 <- function(pdf = FALSE) {
 
   # Setup figure
@@ -170,8 +170,8 @@ mjenergy2 <- function(pdf = FALSE) {
   if(pdf) dev.off()
 }
 
-# Affinities of overall synthesis of proteins in Mj proteome 20201208
-mjenergy3 <- function(pdf = FALSE) {
+# Affinities of overall synthesis of proteins in the Mj proteome 20201208
+mjenergy3 <- function(pdf = FALSE, write.csv = FALSE) {
 
   # Setup figure
   if(pdf) pdf("mjenergy3.pdf", width = 8, height = 7)
@@ -186,6 +186,8 @@ mjenergy3 <- function(pdf = FALSE) {
   # Calculate the 1st and 3rd quartiles
   quartiles <- quantile(ZC, c(1,3)/4)
 
+  # Save affinities to write CSV files  20210816
+  out <- list(Rainbow = NULL, Endeavor = NULL)
   for(vent in c("Rainbow", "Endeavor")) {
 
     # Read Shock and Canovas (2010) modelling results
@@ -204,6 +206,10 @@ mjenergy3 <- function(pdf = FALSE) {
     a$values <- lapply(a$values, convert, "G", T)
     a$values <- lapply(a$values, convert, "J")
     a$values <- lapply(a$values, `*`, -1e-6)
+    # Save values with temperature as column names
+    outvals <- do.call(rbind, a$values)
+    colnames(outvals) <- SC10$T
+    out[[vent]] <- outvals
 
     # First plot: whole proteins
     if(vent == "Rainbow") ylim <- c(-50, 150)
@@ -240,11 +246,24 @@ mjenergy3 <- function(pdf = FALSE) {
       text(125, -25, "Endeavor", font = 2)
       label.figure("d", cex = 1.5)
     }
+
   }
 
   # FIXME: Reset units so they don't interfere with protein ionization calculations 20201210
   reset()
   if(pdf) dev.off()
+
+  # Return and save affinities 20210816
+  out$Rainbow <- round(out$Rainbow, 4)
+  out$Endeavor <- round(out$Endeavor, 4)
+  rownames(out$Rainbow) <- aa$protein
+  rownames(out$Endeavor) <- aa$protein
+  if(write.csv) {
+    write.csv(out$Rainbow, "Dataset_S2.csv", quote = FALSE)
+    write.csv(out$Endeavor, "Dataset_S3.csv", quote = FALSE)
+  }
+  invisible(out)
+
 }
 
 # Read Shock and Canovas (2010) modelling results
@@ -315,3 +334,59 @@ calc_affinity <- function(T = 85, protein = "CSG_METJA") {
   print(paste("Affinity for synthesis of", protein, "(ionized):", protMJ.ion, "MJ/mol"))
 
 }
+
+# Functions to make Appendix (SI) files 20210812
+
+# Table S3: Overall synthesis reactions of amino acids
+mjenergy_Table_S3 <- function() {
+  # Set basis species
+  basis(c("CO2", "NH4+", "H2S", "H2O", "H2", "H+"))
+  # Get names of amino acids
+  AA <- sort(aminoacids(""))
+  # Start table
+  out <- data.frame("Amino acid" = AA, Reaction = NA)
+  # Loop over amino acids
+  for(i in seq_along(AA)) {
+    # Use subcrt() to balance formation reaction for each amino acid
+    reaction <- suppressMessages(subcrt(AA[i], 1, T = 25))$reaction
+    # Where to store text for reactants and products
+    rtxt <- ptxt <- character()
+    # Loop over species in reaction
+    for(j in 1:nrow(reaction)) {
+      # Get absolute value of coefficient
+      cabs <- abs(reaction$coeff[j])
+      # Paste coefficient (if it's != 1) and chemical formula
+      ccf <- reaction$formula[j]
+      if(cabs != 1) ccf <- paste(cabs, ccf)
+      ## Append name of amino acid
+      #if(j == 1) ccf <- paste0(ccf, " (", reaction$name[j], ")")
+      # Assign text to reactants or products
+      if(reaction$coeff[j] > 0) ptxt <- c(ptxt, ccf)
+      if(reaction$coeff[j] < 0) rtxt <- c(rtxt, ccf)
+    }
+    # Collapse species text for reactants and products
+    rtxt <- paste(rtxt, collapse = " + ")
+    ptxt <- paste(ptxt, collapse = " + ")
+    # Write reaction
+    reaction_txt <- paste(rtxt, ptxt, sep = " = ")
+    # Put reaction into table
+    out$Reaction[i] <- reaction_txt
+  }
+  out
+}
+
+# Data Set S1: Chemical formulas of proteins 20210813
+mjenergy_Dataset_S1 <- function(write.csv = FALSE) {
+  # Read amino acid compositions of Mj proteins
+  aa <- read.csv(system.file("extdata/organisms/UP000000805_243232.csv.xz", package = "JMDplots"), as.is = TRUE)
+  # Calculate protein formulas and length
+  pf <- protein.formula(aa)
+  pl <- protein.length(aa)
+  # Calculate protein ZC (round to 5 decimal places for table)
+  zc <- round(ZC(pf), 5)
+  # Make data frame
+  out <- data.frame(Protein = rownames(pf), pf, lenth = pl, ZC = zc)
+  # Command to save CSV file
+  if(write.csv) write.csv(out, "Dataset_S1.csv", row.names = FALSE, quote = FALSE) else out
+}
+

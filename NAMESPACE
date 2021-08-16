@@ -52,7 +52,9 @@ export(
   # can16S paper 20210604
   "getrefseq", "getgroup", "groupperc",
   # evdevH2O paper 20210706-20210708
-  "getphyloaa", "getCBS17", "getFOK21"
+  "getphyloaa", "getCBS17", "getFOK21",
+  # mjenergy paper 20210816
+  "mjenergy_Table_S3", "mjenergy_Dataset_S1"
 )
 
 # imports from CHNOSZ
