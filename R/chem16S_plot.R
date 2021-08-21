@@ -262,9 +262,10 @@ plotcomp <- function(study, cn = FALSE, identify = FALSE, title = TRUE, xlim = N
   ZC <- metrics$ZC
 
   if(plot.it) {
+    # Get axis limits, excluding values of non-plotted points 20210820
+    if(is.null(xlim)) xlim <- range(ZC[!is.na(pch)])
+    if(is.null(ylim)) ylim <- range(nH2O[!is.na(pch)])
     # Start plot
-    if(is.null(xlim)) xlim <- range(ZC)
-    if(is.null(ylim)) ylim <- range(nH2O)
     plot(xlim, ylim, xlab = canprot::cplab$ZC, ylab = canprot::cplab$nH2O, type = "n")
     if(points) {
       lmlines()

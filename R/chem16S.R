@@ -509,7 +509,9 @@ getmetrics <- function(study, cn = FALSE, mdat = NULL, RDP = NULL, map = NULL, l
   ZC <- sumZ / sumC
   if(is.null(groups)) {
     # Create output data frame
-    out <- data.frame(Run = colnames(RDPmat), sample = mdat$sample, nH2O = nH2O, ZC = ZC)
+    # Use first column name starting with "sample" or "Sample" 20210818
+    sampcol <- grep("^sample", colnames(mdat), ignore.case = TRUE)[1]
+    out <- data.frame(Run = colnames(RDPmat), sample = mdat[, sampcol], nH2O = nH2O, ZC = ZC)
   } else {
     # Split data into sample groups and calculate metrics for each group 20210607
     nH2O <- ZC <- numeric()
