@@ -48,7 +48,7 @@ export(
   "getmdat", "getRDP", "getmap", "getmetrics",
   # geo16S paper 20210416-20210610
   "geo16S1", "geo16S2", "geo16S3", "geo16S4", "geo16S5", "geo16S6", "geo16S_S1",
-  "taxacomp", "plotcomp", "addhull", "groupcomp",
+  "taxacomp", "plotmet", "addhull", "groupmet",
   # can16S paper 20210604
   "getrefseq", "getgroup", "groupperc",
   # evdevH2O paper 20210706-20210708

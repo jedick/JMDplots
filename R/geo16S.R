@@ -51,7 +51,7 @@ geo16S2 <- function(pdf = FALSE) {
     points(pcomp$ZC[!ifill], pcomp$nH2O[!ifill], pch = pcomp$pch[!ifill], col = pcomp$col[!ifill])
   }
 
-  p1 <- plotcomp("BGPF13", title = FALSE, points = FALSE)
+  p1 <- plotmet("BGPF13", title = FALSE, points = FALSE)
 #  title("Yellowstone hot springs\nBowen De Le\u00f3n et al., 2013", font.main = 1)
   title("Yellowstone hot springs", font.main = 1)
   addhull(p1$ZC, p1$nH2O, 2, TRUE)
@@ -59,7 +59,7 @@ geo16S2 <- function(pdf = FALSE) {
   legend <- c("Archaea", "Bacteria")
   legend("bottomleft", legend, pch = c(23, 22), col = c(1, 1), pt.bg = c(6, 5), bg = "white")
 
-  p2 <- plotcomp("SVH+19", title = FALSE, points = FALSE, ylim = c(-0.757, -0.737))
+  p2 <- plotmet("SVH+19", title = FALSE, points = FALSE, ylim = c(-0.757, -0.737))
 #  title("Black Sea\nSollai et al., 2019", font.main = 1)
   title("Black Sea", font.main = 1)
   addhull(p2$ZC, p2$nH2O, "blue", TRUE, lty = 2)
@@ -67,7 +67,7 @@ geo16S2 <- function(pdf = FALSE) {
   legend <- c("Oxic", "Suboxic", "Euxinic")
   legend("bottomright", legend, pch = c(24, 20, 25), pt.bg = c(4, 1, 2), bg = "white")
 
-  p3 <- plotcomp("HLA+16", title = FALSE, points = FALSE)
+  p3 <- plotmet("HLA+16", title = FALSE, points = FALSE)
 #  title("Baltic Sea\nHerlemann et al., 2016", font.main = 1)
   title("Baltic Sea", font.main = 1)
   addhull(p3$ZC, p3$nH2O, "blue", TRUE)
@@ -75,7 +75,7 @@ geo16S2 <- function(pdf = FALSE) {
   legend <- c("< 6", "6-20", "> 20")
   legend("bottomright", legend, pch = c(24, 20, 21), col = c(1, 1, 1), pt.bg = c(3, NA, 4), bg = "white", title = "Salinity")
 
-  p4 <- plotcomp("MPB+17", title = FALSE, points = FALSE, ylim = c(-0.777, -0.725))
+  p4 <- plotmet("MPB+17", title = FALSE, points = FALSE, ylim = c(-0.777, -0.725))
 #  title("Manus Basin submarine vents\nMeier et al., 2017", font.main = 1)
   title("Manus Basin submarine vents", font.main = 1)
   addhull(p4$ZC, p4$nH2O, 2, TRUE, lty = 2)
@@ -84,7 +84,7 @@ geo16S2 <- function(pdf = FALSE) {
   legend("bottomleft", legend, pch = c(21, 23), col = c(1, 1), pt.bg = c(4, 2), bg = "white", title = "Water")
   legend("bottomright", c("Rock", "Fauna"), pch = c(20, 8), col = c(1, "#757500C0"), bg = "white")
 
-  p5 <- plotcomp("ZLM+16", title = FALSE, points = FALSE)
+  p5 <- plotmet("ZLM+16", title = FALSE, points = FALSE)
 #  title("Tibetan Plateau lakes\nZhong et al., 2016", font.main = 1)
   title("Tibetan Plateau lakes", font.main = 1)
   addhull(p5$ZC, p5$nH2O, "turquoise3", TRUE, lty = 2)
@@ -92,7 +92,7 @@ geo16S2 <- function(pdf = FALSE) {
   legend <- c("< 10 g/L", "24-99 g/L", "> 300 g/L")
   legend("topright", legend, pch = c(24, 20, 21), col = c(1, 1, 1), pt.bg = c(3, NA, 4), bg = "white", title = "Salinity")
 
-  p6 <- plotcomp("JHM+16", title = FALSE, points = FALSE)
+  p6 <- plotmet("JHM+16", title = FALSE, points = FALSE)
 #  title("Lake Fryxell oxygen gradient\nJungblut et al., 2016", font.main = 1)
   title("Lake Fryxell oxygen gradient", font.main = 1)
   addhull(p6$ZC, p6$nH2O, "tan1", TRUE)
@@ -100,7 +100,7 @@ geo16S2 <- function(pdf = FALSE) {
   legend <- c("Oxic", "Transition", "Anoxic")
   legend("bottomright", legend, pch = c(24, 20, 25), pt.bg = c(4, 1, 2), bg = "white")
 
-  p7 <- plotcomp("HCW+13", title = FALSE, points = FALSE, ylim = c(-0.764, -0.7545))
+  p7 <- plotmet("HCW+13", title = FALSE, points = FALSE, ylim = c(-0.764, -0.7545))
 #  title("Guerrero Negro mat layers\nHarris et al., 2013", font.main = 1)
   title("Guerrero Negro mat layers", font.main = 1)
   addhull(p7$ZC, p7$nH2O, "tan1", TRUE, lty = 2)
@@ -109,7 +109,7 @@ geo16S2 <- function(pdf = FALSE) {
   legend <- c("Photic/oxic", "Low sulfide", "High sulfide")
   legend("topleft", legend, pch = c(24, 20, 25), pt.bg = c(4, 1, 2), bg = "white")
 
-  p8 <- plotcomp("XDZ+17", title = FALSE, points = FALSE)
+  p8 <- plotmet("XDZ+17", title = FALSE, points = FALSE)
 #  title("Qarhan Salt Lake and\nnormal soils, Xie et al., 2017", font.main = 1)
   title("Qarhan Salt Lake\nand normal soils", font.main = 1)
   addhull(p8$ZC, p8$nH2O, "turquoise3", TRUE)
@@ -326,7 +326,7 @@ geo16S4 <- function(pdf = FALSE) {
   map <- getmap("MPB+17", RDP = RDP)
 
   # Make plots for Manus Basin
-  p <- groupcomp("MPB+17", "ZC", "domain", pch1 = 21, pch2 = 23, ylim = c(-0.23, -0.13), xlim = c(0, 100),
+  p <- groupmet("MPB+17", "ZC", "domain", pch1 = 21, pch2 = 23, ylim = c(-0.23, -0.13), xlim = c(0, 100),
     xadj = c(Bacteria = 1), yadj = c(Bacteria = -5),
     mdat = mdat, RDP = RDP, map = map
   )
@@ -336,7 +336,7 @@ geo16S4 <- function(pdf = FALSE) {
   text(40, -0.204, "   > 50 \u00B0C", font = 2)
   text(10, -0.204, "T", font = 4)
 
-  gg <- groupcomp("MPB+17", "ZC", "phylum", pch1 = 21, pch2 = 23, ylim = c(-0.23, -0.13),
+  gg <- groupmet("MPB+17", "ZC", "phylum", pch1 = 21, pch2 = 23, ylim = c(-0.23, -0.13),
     xadj = c(Proteobacteria = 1, Bacteroidetes = -0.18, Campilobacterota = 0.42),
     yadj = c(Bacteroidetes = 1, Campilobacterota = -3),
     mdat = mdat, RDP = RDP, map = map
@@ -345,7 +345,7 @@ geo16S4 <- function(pdf = FALSE) {
   p <- sum(gg$Pboth[!is.na(gg$X1) & !is.na(gg$X2)])
   title(paste0("Phylum (", round(p), "% of total)"))
 
-  gg <- groupcomp("MPB+17", "ZC", "class", pch1 = 21, pch2 = 23, ylim = c(-0.23, -0.13),
+  gg <- groupmet("MPB+17", "ZC", "class", pch1 = 21, pch2 = 23, ylim = c(-0.23, -0.13),
     xadj = c(Flavobacteriia = -0.17, Gammaproteobacteria = 0.2, Campylobacteria = 0.45, Deltaproteobacteria = 0.1),
     yadj = c(Flavobacteriia = 1.2, Gammaproteobacteria = 1.7, Campylobacteria = -3, Deltaproteobacteria = -0.8),
     mdat = mdat, RDP = RDP, map = map
@@ -353,7 +353,7 @@ geo16S4 <- function(pdf = FALSE) {
   p <- sum(gg$Pboth[!is.na(gg$X1) & !is.na(gg$X2)])
   title(paste0("Class (", round(p), "% of total)"))
 
-  gg <- groupcomp("MPB+17", "ZC", "genus", pch1 = 21, pch2 = 23, ylim = c(-0.23, -0.13), minpercent = 1,
+  gg <- groupmet("MPB+17", "ZC", "genus", pch1 = 21, pch2 = 23, ylim = c(-0.23, -0.13), minpercent = 1,
     xadj = c(Alteromonas = 0.1, Sulfurimonas = 1.05, Alcanivorax = -1, Halomonas = -0.65, Thiogranum = 0.17, Sulfurovum = -0.1, Pseudomonas = 0.1, Pseudoalteromonas = -0.25, Acinetobacter = 0.72),
     yadj = c(Sulfurimonas = 1.5, Pseudomonas = 1.8, Sulfurovum = -0.5, Thiogranum = 5.5, Marinimicrobia_genera_incertae_sedis = -0.8, Alteromonas = 1.8, Acinetobacter = 1.4),
     mdat = mdat, RDP = RDP, map = map
@@ -366,7 +366,7 @@ geo16S4 <- function(pdf = FALSE) {
   mdat <- getmdat("HLA+16")
   RDP <- getRDP("HLA+16", mdat = mdat)
   map <- getmap("HLA+16", RDP = RDP)
-  gg <- groupcomp("HLA+16", "nH2O", "domain", pch1 = 21, pch2 = 24, ylim = c(-0.78, -0.71), xlim = c(0, 100),
+  gg <- groupmet("HLA+16", "nH2O", "domain", pch1 = 21, pch2 = 24, ylim = c(-0.78, -0.71), xlim = c(0, 100),
     xadj = c(Bacteria = 1), yadj = c(Bacteria = 1.5),
     mdat = mdat, RDP = RDP, map = map
   )
@@ -374,7 +374,7 @@ geo16S4 <- function(pdf = FALSE) {
   text(40, -0.743, "Salinity < 6", font = 2)
   text(40, -0.7534, "Salinity > 20", font = 2)
 
-  gg <- groupcomp("HLA+16", "nH2O", "phylum", pch1 = 21, pch2 = 24, ylim = c(-0.78, -0.71),
+  gg <- groupmet("HLA+16", "nH2O", "phylum", pch1 = 21, pch2 = 24, ylim = c(-0.78, -0.71),
     xadj = c(Proteobacteria = -0.2, Planctomycetes = 0.1, "Cyanobacteria/Chloroplast" = 0.35, Bacteroidetes = -0.1),
     yadj = c(Planctomycetes = 1.8, "Cyanobacteria/Chloroplast" = 2),
     mdat = mdat, RDP = RDP, map = map
@@ -382,7 +382,7 @@ geo16S4 <- function(pdf = FALSE) {
   p <- sum(gg$Pboth[!is.na(gg$X1) & !is.na(gg$X2)])
   title(paste0("Phylum (", round(p), "% of total)"))
 
-  gg <- groupcomp("HLA+16", "nH2O", "class", pch1 = 21, pch2 = 24, ylim = c(-0.78, -0.71),
+  gg <- groupmet("HLA+16", "nH2O", "class", pch1 = 21, pch2 = 24, ylim = c(-0.78, -0.71),
     xadj = c(Acidimicrobiia = 0.5, Gammaproteobacteria = 0.4, Flavobacteriia = -0.05, Verrucomicrobiae = -0.3, Betaproteobacteria = 0.55, Cyanobacteria = -0.07),
     yadj = c(Acidimicrobiia = -1, Alphaproteobacteria = -0.6, Gammaproteobacteria = -1, Verrucomicrobiae = 1.5, Flavobacteriia = 1.2, Betaproteobacteria = -1),
     mdat = mdat, RDP = RDP, map = map
@@ -390,7 +390,7 @@ geo16S4 <- function(pdf = FALSE) {
   p <- sum(gg$Pboth[!is.na(gg$X1) & !is.na(gg$X2)])
   title(paste0("Class (", round(p), "% of total)"))
 
-  gg <- groupcomp("HLA+16", "nH2O", "genus", pch1 = 21, pch2 = 24, ylim = c(-0.78, -0.71), minpercent = 1,
+  gg <- groupmet("HLA+16", "nH2O", "genus", pch1 = 21, pch2 = 24, ylim = c(-0.78, -0.71), minpercent = 1,
     xadj = c(Spartobacteria_genera_incertae_sedis = 1.02, `Candidatus Pelagibacter` = 0, GpIIa = 1.1),
     yadj = c(Spartobacteria_genera_incertae_sedis = -0.7, GpI = 0.2),
     mdat = mdat, RDP = RDP, map = map
@@ -399,10 +399,10 @@ geo16S4 <- function(pdf = FALSE) {
   title(paste0("Genus (", round(p), "% of total)"))
 
 #  # Between-study comparisons
-#  groupcomp("MPB+17", "ZC", ylim = c(-0.02, 0.02), study2 = "HLA+16")
+#  groupmet("MPB+17", "ZC", ylim = c(-0.02, 0.02), study2 = "HLA+16")
 #  mtext("Manus Basin - Baltic Sea", line = 1)
 #
-#  groupcomp("BGPF13", "ZC", ylim = c(-0.12, 0.02), study2 = "XDZ+17")
+#  groupmet("BGPF13", "ZC", ylim = c(-0.12, 0.02), study2 = "XDZ+17")
 #  mtext("Yellowstone - Qarhan Salt Lake", line = 1)
 
   if(pdf) dev.off()
@@ -422,7 +422,7 @@ geo16S5 <- function(pdf = FALSE) {
   # Data from Ulrich et al., 2018
   xlim <- c(-0.16, -0.13)
   ylim <- c(-0.755, -0.725)
-  plotcomp("UKD+18.water_2014", xlim = xlim, ylim = ylim, title = FALSE)
+  plotmet("UKD+18.water_2014", xlim = xlim, ylim = ylim, title = FALSE)
   legend("topleft", c("MSA-", "MSA+"), pch = c(1, 21), pt.bg = c(1, 2), bg = "white", title = "NW PA water")
   label.figure("A", cex = 1.5, xfrac = 0.03, font = 2)
 
@@ -434,7 +434,7 @@ geo16S5 <- function(pdf = FALSE) {
   pch <- 21:25
   # Loop over studies
   for(i in 1:4) {
-    group <- plotcomp(studies[[i]], plot.it = FALSE)$group
+    group <- plotmet(studies[[i]], plot.it = FALSE)$group
     points(group$ZC1, group$nH2O1, pch = pch[i], cex = 1.5, lwd = 2, bg = "#ffffffa0")
     lines(c(group$ZC1, group$ZC2), c(group$nH2O1, group$nH2O2))
     points(group$ZC2, group$nH2O2, pch = pch[i], cex = 1.8, lwd = 2, bg = "#df536ba0")
@@ -451,7 +451,7 @@ geo16S5 <- function(pdf = FALSE) {
   ## Plots C-D: Comparison of different studies on produced water 20210330
 
   # Panel C: Cluff et al., 2014
-  plotcomp("CHM+14", title = FALSE)
+  plotmet("CHM+14", title = FALSE)
   legend("topright", c("Injected fluids (day 0)", "Produced water (day 49 and after)"),
          pch = c(21, 21), pt.bg = c("white", 2), bg = "white", title = "Marcellus Shale")
   box()
@@ -464,7 +464,7 @@ geo16S5 <- function(pdf = FALSE) {
   pch <- 21:25
   # Loop over studies
   for(i in 1:3) {
-    group <- plotcomp(studies[[i]], plot.it = FALSE)$group
+    group <- plotmet(studies[[i]], plot.it = FALSE)$group
     points(group$ZC1, group$nH2O1, pch = pch[i], cex = 1.5, lwd = 2, bg = "#ffffffa0")
     lines(c(group$ZC1, group$ZC2), c(group$nH2O1, group$nH2O2))
     points(group$ZC2, group$nH2O2, pch = pch[i], cex = 1.8, lwd = 2, bg = "#df536ba0")
@@ -533,7 +533,7 @@ geo16S_S1 <- function(pdf = FALSE) {
 
   DZC <- numeric()
   for(i in 1:length(study)) {
-    gg <- groupcomp(study[i], param = "ZC", rank = "class", pch1 = pch1[i], pch2 = pch2[i], xadj = xadj[[i]], yadj = yadj[[i]], scale100 = TRUE, minpercent = 2)
+    gg <- groupmet(study[i], param = "ZC", rank = "class", pch1 = pch1[i], pch2 = pch2[i], xadj = xadj[[i]], yadj = yadj[[i]], scale100 = TRUE, minpercent = 2)
     title(description[i])
     # Assemble percent contribution by each taxonomic group
     P <- round(gg$DX / diff(gg$Xall) * 100)

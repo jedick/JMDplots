@@ -2,9 +2,9 @@
 \name{chem16S_plot}
 \alias{chem16S_plot}
 \alias{taxacomp}
-\alias{plotcomp}
+\alias{plotmet}
 \alias{addhull}
-\alias{groupcomp}
+\alias{groupmet}
 \alias{getrefseq}
 \alias{getgroup}
 \alias{groupperc}
@@ -18,14 +18,14 @@ Functions to plot chemical metrics (\ZC and \nH2O) for inferred microbial commun
   taxacomp(groups = c("Bacteria", "Archaea"), xlim = NULL, ylim = NULL,
     col = seq_along(groups), legend.x = "topleft", identify = FALSE,
     pch = NULL, hline = NULL, filterspecies = TRUE, lcol = NULL)
-  plotcomp(study, cn = FALSE, identify = FALSE, title = TRUE,
+  plotmet(study, cn = FALSE, identify = FALSE, title = TRUE,
     xlim = NULL, ylim = NULL, plot.it = TRUE, points = TRUE, lines = FALSE,
     lineage = NULL, pch1 = 1, pch2 = 21, dropNA = TRUE)
   addhull(x, y, basecol, outline = FALSE, ...)
   getgroup(study = "XDZ+17", param = "nH2O", rank = "domain",
     pch1 = 21, pch2 = 24, minpercent = 2, study2 = NA, scale100 = FALSE,
     mdat = NULL, map = NULL, RDP = NULL)
-  groupcomp(..., xlim = NULL, ylim = NULL, xadj = NULL, yadj = NULL)
+  groupmet(..., xlim = NULL, ylim = NULL, xadj = NULL, yadj = NULL)
   groupperc(..., xlim = NULL, ylim = NULL, xadj = NULL, yadj = NULL)
 }
 
@@ -54,7 +54,7 @@ Functions to plot chemical metrics (\ZC and \nH2O) for inferred microbial commun
   \item{y}{y values}
   \item{basecol}{color used for hull lines}
   \item{outline}{logical, draw hull lines?}
-  \item{...}{arguments passed to \code{\link{polygon}} (by \code{addulll}) or \code{getgroup} (by \code{groupcomp})}
+  \item{...}{arguments passed to \code{\link{polygon}} (by \code{addulll}) or \code{getgroup} (by \code{groupmet})}
   \item{param}{chemical metric, \samp{ZC} or \samp{nH2O}}
   \item{rank}{character, taxonomic rank}
   \item{minpercent}{numeric, include taxa that are at least this abundant}
@@ -76,7 +76,7 @@ By default, any species with greater than 20000 reference sequences is omitted; 
 \code{groups} can be the names of one or more taxonomic groups, or one of the following keywords: \samp{majorphyla} (phyla with more than 500 representatives), \samp{majorcellular} (non-viral (cellular) phyla with more than 60 representatives), \samp{proteobacteria}, \samp{acidobacteria}, or \samp{cyanobacteria} (classes within the indicated phylum and their orders).
 Note that the keywords are all lower-case; use the upper-case name (e.g. \samp{Proteobacteria}) to plot the phylum and its orders.
 
-\code{plotcomp} plots the \ZC and \nH2O of community proteomes inferred by combining taxonomic abundances from 16S rRNA gene sequencing with RefSeq proteomes.
+\code{plotmet} plots the \ZC and \nH2O of community proteomes inferred by combining taxonomic abundances from 16S rRNA gene sequencing with RefSeq proteomes.
 If \code{pch1} and \code{pch2} are provided, then two sample groups are identified by their plotting symbols in the metadata (see \code{\link{getmdat}}).
 Star-shaped symbols are plotted to indicate the metrics computed for meta-samples created by aggregating the RDP counts for all samples in each sample group.
 
@@ -84,7 +84,7 @@ Star-shaped symbols are plotted to indicate the metrics computed for meta-sample
 The lines are draw only in \code{outline} is TRUE; otherwise, the area of the hull is filled.
 The fill color is a lightened (semi-transparent) shade of the color given in \code{basecol}.
 
-\code{groupcomp} makes ZC- or nH2O-abundance plots for taxonomic groups within two sample groups.
+\code{groupmet} makes ZC- or nH2O-abundance plots for taxonomic groups within two sample groups.
 \code{groupperc} plots the percent contribution by each taxonomic group to the community difference of ZC or nH2O between sample groups, vs abundance of the taxonomic groups.
 \code{getgroup} is the function that assembles the data for these plots.
 
@@ -113,7 +113,7 @@ taxacomp("majorphyla")
 
 # Make a plot for the Baltic Sea salinity gradient
 # (data from Herlemann et al., 2016)
-pc <- plotcomp("HLA+16")
+pc <- plotmet("HLA+16")
 # Add a legend
 legend <- c("< 6 PSU", "6-20 PSU", "> 20 PSU")
 pch <- c(24, 20, 21)
@@ -126,16 +126,16 @@ addhull(pc$ZC, pc$nH2O, "slategray1")
 # Some samples (i.e. outliers) have an NA name in the metadata
 # to exclude them from further calculations.
 # Use dropNA = FALSE to show all samples.
-plotcomp("UKD+18.sediment", dropNA = FALSE)
+plotmet("UKD+18.sediment", dropNA = FALSE)
 
 # Make a plot for only Proteobacteria
-plotcomp("HLA+16", lineage = "Proteobacteria")
+plotmet("HLA+16", lineage = "Proteobacteria")
 
 # Add points for aggregated high- and low-salinity samples
-plotcomp("HLA+16", pch1 = 21, pch2 = 24)
+plotmet("HLA+16", pch1 = 21, pch2 = 24)
 
 # Plot nH2O and abundances for individual phyla
-groupcomp("HLA+16", rank = "phylum")
+groupmet("HLA+16", rank = "phylum")
 
 # Calculate contribution of individual phyla to the ZC difference
 # between high- and low-T samples at Manus Basin

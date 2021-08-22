@@ -3,8 +3,8 @@
 # Separated from chem16S.R 20210607
 
 # taxacomp()                # nH2O-ZC plot for taxa (default: Bacteria, Archaea) and their children
-# plotcomp("KGP+12")        # nH2O-ZC plot for specified study
-# diffcomp("KGP+12")        # DnH2O-DZC plot for specified study
+# plotmet("KGP+12")        # nH2O-ZC plot for specified study
+# diffmet("KGP+12")        # DnH2O-DZC plot for specified study
 
 ######################
 # Plotting functions #
@@ -247,7 +247,7 @@ taxacomp <- function(groups = c("Bacteria", "Archaea"), xlim = NULL, ylim = NULL
 }
 
 # Plot chemical metrics for all samples in a study 20200901
-plotcomp <- function(study, cn = FALSE, identify = FALSE, title = TRUE, xlim = NULL, ylim = NULL,
+plotmet <- function(study, cn = FALSE, identify = FALSE, title = TRUE, xlim = NULL, ylim = NULL,
   plot.it = TRUE, points = TRUE, lines = FALSE, lineage = NULL, pch1 = 1, pch2 = 21, dropNA = TRUE) {
   # Get amino acid composition for samples
   mdat <- getmdat(study, dropNA = dropNA)
@@ -451,7 +451,7 @@ getgroup <- function(study = "XDZ+17", param = "nH2O", rank = "domain", pch1 = 2
 }
 
 # Composition-abundance plots for taxonomic groups within sample groups 20210520
-groupcomp <- function(..., xlim = NULL, ylim = NULL, xadj = NULL, yadj = NULL) {
+groupmet <- function(..., xlim = NULL, ylim = NULL, xadj = NULL, yadj = NULL) {
 
   gg <- getgroup(...)
 
@@ -535,7 +535,7 @@ groupperc <- function(..., xlim = NULL, ylim = NULL, xadj = NULL, yadj = NULL) {
 
 # Plot differences of nH2O and ZC 20200901
 # Use iminuend and isubtrahend to identify sample pairs 20200914
-diffcomp <- function(study, cn = FALSE, identify = FALSE, title = TRUE, xlim = NULL, ylim = NULL, plot.it = TRUE) {
+diffmet <- function(study, cn = FALSE, identify = FALSE, title = TRUE, xlim = NULL, ylim = NULL, plot.it = TRUE) {
   # Get metadata
   mdat <- getmdat(study)
   # Get chemical metrics for samples
