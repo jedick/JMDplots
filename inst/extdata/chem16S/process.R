@@ -1,43 +1,11 @@
 # chem16S/process.R
 
-# File preparation functions
-# mkRDP("KGP+12")     # Combine output of RDP Classifier into one file --> RDP/KGP+12.tab
-# mkAA()              # Use RefSeq sequences to make amino acid composition of taxonomic groups at genus and higher ranks --> groupAA.csv
-# mkmetrics()          # Calculate chemical metrics (nH2O, ZC) for each RefSeq group --> taxon_metrics.csv
+# Functions to create intermediate data files from RefSeq amino acid compositions
 
-# Combine output files of RDP Classifier into a single CSV file for each study 20200903
-# Use RDP Classifier merge-count command 20200910
-# Read study metadata to combine samples from different sources 20200921
-mkRDP <- function(study) {
-  # Get metadata for this study
-  mdat <- getmdat(study, dropNA = FALSE)
-  # Change to temporary directory
-  olddir <- setwd(tempdir())
-  on.exit(setwd(olddir))
-  # Remove any existing .txt files
-  file.remove(Sys.glob("*.txt"))
-
-  # Loop over runs
-  for(i in 1:nrow(mdat)) {
-    # The RDP result file
-    RDPfile <- file.path("/home/chem16S", mdat$study[i], "RDP", paste0(mdat$Run[i], ".txt"))
-    print(RDPfile)
-    # Copy the RDP result file to here (temporary directory)
-    file.copy(RDPfile, ".")
-  }
-
-  # Now list all the RDP result files
-  files <- dir(pattern = "txt")
-  # Name of output file
-  outfile <- file.path(olddir, "RDP", paste0(study, ".tab"))
-  # Remove output file in case it exists
-  if(file.exists(outfile)) file.remove(outfile)
-  # RDP jar file
-  RDPjar <- "/opt/rdp_classifier_2.13/dist/classifier.jar"
-  # Run merge-count command
-  print(cmd <- paste("java -jar", RDPjar, "merge-count", outfile, paste(files, collapse = " ")))
-  system(cmd)
-}
+# Use RefSeq sequences to make amino acid composition of taxonomic groups at genus and higher ranks --> groupAA.csv
+# mkAA()       
+# Calculate chemical metrics (nH2O, ZC) for each RefSeq group --> taxon_metrics.csv
+# mkmetrics()         
 
 # Calculate average amino acid composition of genus and higher ranks in RefSeq 20200911
 # Note: column names are chosen to be compatible with 'protein' data in CHNOSZ

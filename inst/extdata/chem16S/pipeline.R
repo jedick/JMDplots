@@ -12,6 +12,26 @@
 # RDP Classifier 2.13  https://sourceforge.net/projects/rdp-classifier/
 # Java openjdk version 1.8.0_252 (for RDP); GNU utils (cat, awk, grep)
 
+## USAGE
+
+# First, make sure the working directory is clean (especially no *.fa files)
+# To filter one file (generates .fa files in workdir for subsampling)
+# filter("SRR2059382")
+
+# To filter multiple files:
+# SRR <- c("SRR2059381", "SRR2059380", "SRR2059379")
+# lapply(SRR, filter)
+
+# To subsample and remove chimeras from the filtered files:
+# subsample()
+# findchimeras()
+
+# To run RDP Classifier after chimera removal:
+# classify(SRR)
+# To combine output of RDP Classifier into one file
+# -- result is saved in RDP/<study>.tab in the current directory
+# mkRDP(study, SRR)
+
 ## STUDY SETTINGS
 
 # Change the following line to setup the pipeline for one study
@@ -73,23 +93,6 @@ RDPdir <- file.path("/home/chem16S", study, "RDP")
 # RDP Classifier version (java -jar /opt/rdp_classifier_2.13/dist/classifier.jar version)
 #Gene:16srrna    Trainset No:18  Taxonomy Version:RDP 16S rRNA training setNo 18 07/2020
 #RDP Classifier Version:RDP Naive Bayesian rRNA Classifier Version 2.11, September 2015
-
-## USAGE
-
-# First, make sure the working directory is clean (especially no *.fa files)
-# To filter one file (generates .fa files in workdir for subsampling)
-# filter("SRR2059382")
-
-# To filter multiple files:
-# SRR <- c("SRR2059381", "SRR2059380", "SRR2059379")
-# lapply(SRR, filter)
-
-# To subsample and remove chimeras from the filtered files:
-# subsample()
-# findchimeras()
-
-# To run RDP Classifier after chimera removal:
-# classify(SRR)
 
 filter <- function(SRR) {
   message("============================================")
@@ -186,7 +189,7 @@ filter <- function(SRR) {
   return()
 }
 
-subsample <- function() {
+subsample <- function(do.singletons = TRUE) {
   message("=======================")
   message(paste0("Subsampling [", study, "]"))
   message("=======================")
@@ -194,29 +197,35 @@ subsample <- function() {
   # Change to working directory
   olddir <- setwd(workdir)
   on.exit(setwd(olddir))
-  # Make combined FASTA file of filtered sequences 20200914
-  print(cmd <- "cat *.fa > filtered.fasta")
-  system(cmd)
 
-  # Remove singletons 20200912
-  # 1. Dereplicate sequences, keeping those that appear exactly once
-  print(cmd <- "vsearch -derep_fulllength filtered.fasta -maxuniquesize 1 -output singletons.fasta")
-  system(cmd)
-  # 2. Get all sequence IDs
-  print(cmd <- 'grep ">" filtered.fasta | sed -e s/\\ .*//g | sed -e s/\\>//g > allIDs.txt')
-  system(cmd)
-  allIDs <- readLines("allIDs.txt")
-  # 3. Get singleton sequence IDs
-  print(cmd <- 'grep ">" singletons.fasta | sed -e s/\\ .*//g | sed -e s/\\>//g > singletonIDs.txt')
-  system(cmd)
-  singletonIDs <- readLines("singletonIDs.txt")
-  # 4. Write IDs of sequences that are not singletons
-  writeLines(setdiff(allIDs, singletonIDs), "not_singletons.txt")
-  # 5. Extract sequences that are not singletons
-  print(cmd <- "seqtk subseq filtered.fasta not_singletons.txt > not_singletons.fasta")
-  system(cmd)
-  singletxt <- paste0("Removed ", length(singletonIDs), " singletons from ", length(allIDs), " sequences (", round(length(singletonIDs) / length(allIDs) * 100, 1), "%)")
-  print(singletxt)
+  if(do.singletons) {
+    # Make combined FASTA file of filtered sequences 20200914
+    print(cmd <- "cat *.fa > filtered.fasta")
+    system(cmd)
+    # Remove singletons 20200912
+    # 1. Dereplicate sequences, keeping those that appear exactly once
+    print(cmd <- "vsearch -derep_fulllength filtered.fasta -maxuniquesize 1 -output singletons.fasta")
+    system(cmd)
+    # 2. Get all sequence IDs
+    print(cmd <- 'grep ">" filtered.fasta | sed -e s/\\ .*//g | sed -e s/\\>//g > allIDs.txt')
+    system(cmd)
+    allIDs <- readLines("allIDs.txt")
+    # 3. Get singleton sequence IDs
+    print(cmd <- 'grep ">" singletons.fasta | sed -e s/\\ .*//g | sed -e s/\\>//g > singletonIDs.txt')
+    system(cmd)
+    singletonIDs <- readLines("singletonIDs.txt")
+    # 4. Write IDs of sequences that are not singletons
+    writeLines(setdiff(allIDs, singletonIDs), "not_singletons.txt")
+    # 5. Extract sequences that are not singletons
+    print(cmd <- "seqtk subseq filtered.fasta not_singletons.txt > not_singletons.fasta")
+    system(cmd)
+    singletxt <- paste0("Removed ", length(singletonIDs), " singletons from ", length(allIDs), " sequences (", round(length(singletonIDs) / length(allIDs) * 100, 1), "%)")
+    print(singletxt)
+  } else {
+    # Don't remove singletons, but combine filtered sequences for subsampling 20210821
+    print(cmd <- "cat *.fa > not_singletons.fasta")
+    system(cmd)
+  }
 
   # Loop over samples
   allSRR <- gsub("\\.fa$", "", dir(pattern = "\\.fa$"))
@@ -320,4 +329,37 @@ classify <- function(SRR, conf = 0.8) {
     # Clean up
     file.remove(Sys.glob(paste0("*", thisSRR, "*")))
   }
+}
+
+# Combine output files of RDP Classifier into a single CSV file for one study 20200903
+# Use RDP Classifier merge-count command 20200910
+# Get file list from RDPdir 20210817
+mkRDP <- function() {
+  # Change to temporary directory
+  olddir <- setwd(tempdir())
+  on.exit(setwd(olddir))
+  # Remove any existing .txt files
+  file.remove(Sys.glob("*.txt"))
+
+  # Loop over runs
+  runs <- gsub(".txt", "", dir(RDPdir))
+  for(run in runs) {
+    # The RDP result file
+    RDPfile <- file.path(RDPdir, paste0(run, ".txt"))
+    print(RDPfile)
+    # Copy the RDP result file to here (temporary directory)
+    file.copy(RDPfile, ".")
+  }
+
+  # Now list all the RDP result files
+  files <- dir(pattern = "txt")
+  # Name of output file
+  outfile <- file.path(olddir, "RDP", paste0(study, ".tab"))
+  # Remove output file in case it exists
+  if(file.exists(outfile)) file.remove(outfile)
+  # RDP jar file
+  RDPjar <- "/opt/rdp_classifier_2.13/dist/classifier.jar"
+  # Run merge-count command
+  print(cmd <- paste("java -jar", RDPjar, "merge-count", outfile, paste(files, collapse = " ")))
+  system(cmd)
 }
