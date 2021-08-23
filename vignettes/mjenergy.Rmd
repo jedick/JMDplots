@@ -7,6 +7,8 @@ vignette: >
   %\VignetteIndexEntry{Energy release in protein synthesis (2021)}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
+bibliography: JMDplots.bib
+csl: elementa.csl
 ---
 
 <style>
@@ -71,6 +73,8 @@ library(JMDplots)
 mjenergy1()
 ```
 
+Calculations shown in this and other figures use activities of CH~4~, CO~2~, NH~4~^+^, H~2~S, H~2~, and H^+^ from the mixing models of @SC10.
+
 ## `r ZC` of amino acids vs frequency in the *Mj* proteome (Figure 2)
 ```{r mjenergy2, message = FALSE, results = "hide", out.width='100%', fig.width = 8, fig.height = 4, pngquant = pngquant}
 mjenergy2()
@@ -85,3 +89,5 @@ mjenergy3()
 ```{r calc_affinity, message = FALSE}
 calc_affinity()
 ```
+
+## References
