@@ -79,12 +79,16 @@ To reduce running time, the plots in this vignette are made with 99 bootstrap re
 To reproduce the plots in the paper, the `boot.R` argument should be changed to 999.
 
 The plots in the paper were made on 2021-07-15 with JMDplots 1.2.7.
-After that time, the following minor change was made to the plots in this vignette:
+After that time, the following minor changes were made to the plots in this vignette:
 
 * 2021-07-18.
     The version of Figure 1 in the paper was made by counting unique UniProt IDs among all phylostrata; duplicates were removed after the first occurrence.
     This resulted in the removal of a relatively small number (175) of phylostrata assignments.
     The plots have been updated in this vignette to use counts for all genes with a UniProt mapping (including duplicates).
+
+* 2021-08-24
+    Lines showing the cumulative mean were removed from Figure 1.
+    These lines are not discussed in the text.
 
 ## Chemical analysis of phylostrata and gene age datasets (Figure 1)
 Data sources: Phylostrata are from @TPPG17. Consensus gene ages are from @LMM16.

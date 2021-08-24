@@ -988,9 +988,10 @@ plotphylo <- function(var = "ZC", PS_source = "TPPG17", memo = NULL, xlab = "PS"
     cix <- c(PS, rev(PS))
     ciy <- c(low.X, rev(high.X))
     polygon(cix, ciy, col = "lightgray", border = NA)
-    # Plot the point and cumulative means
+    # Plot the point
     points(PS, mean.X, pch = 19, type = "b", cex = 0.7)
-    lines(PS, cum.X, col = 2, lty = 2)
+    # Don't plot the cumulative mean 20210824
+    #lines(PS, cum.X, col = 2, lty = 2)
   }
   if(var == "n") {
     # Add points for (number of proteins) / 10  20210713
