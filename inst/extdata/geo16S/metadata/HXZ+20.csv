@@ -1,4 +1,4 @@
-study,name,Run,BioSample,sample,station,depth,"O2 (umol L-1)","ORP (mV)","NO3- (umol L-1)","NO2- (umol L-1)"
+study,name,Run,BioSample,sample,Station,depth,"O2 (umol L-1)","ORP (mV)","NO3- (umol L-1)","NO2- (umol L-1)"
 HXZ+20,"Sansha Yongle Blue Hole",SRR8146444,SAMN10363489,BHO0m,SYBL,0,237.4,18,0,0.082
 HXZ+20,"Sansha Yongle Blue Hole",SRR8146453,SAMN10363490,BHO10m,SYBL,10,189.6,46,0,0.092
 HXZ+20,NA,,,,SYBL,13.1,166.8,,,

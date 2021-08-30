@@ -176,8 +176,8 @@ geo16S3 <- function(pdf = FALSE, plot.it = TRUE) {
              "HXZ+20", "HXZ+20", "HXZ+20", "HXZ+20",
              "BCA+20", "BCA+20", "BCA+20", "BCA+20")
   column <- c("study", "lake", "lake", "size", "size",
-              "station", "station", "station", "station",
-              "month", "month", "month", "month")
+              "Station", "Station", "Station", "Station",
+              "Month", "Month", "Month", "Month")
   ID <- c("SVH+19", "Lake Zug", "Lake Lugano", "0.2-1.6micron", "1.6-30micron",
           "SYBL", "SYBL", "C4", "C4",
           "Jul", "Nov", "Feb", "Apr")

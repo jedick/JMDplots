@@ -16,8 +16,8 @@ mjenergy1 <- function(pdf = FALSE) {
 
   ## Plot (a): Methanogenesis
 
-  # Calculate affinities for Rainbow and Endeavor vents 20210815
-  for(vent in c("Rainbow", "Endeavor")) {
+  # Calculate affinities for Rainbow and Endeavour vents 20210815
+  for(vent in c("Rainbow", "Endeavour")) {
 
     # Read Shock and Canovas (2010) modelling results
     file <- system.file(paste0("extdata/mjenergy/SC10_", vent, ".csv"), package = "JMDplots")
@@ -39,7 +39,7 @@ mjenergy1 <- function(pdf = FALSE) {
       diagram(a, balance = 1, xlim = c(0, 350), ylim = c(-200, 400), ylab = axis.label("A", prefix = "k"), lwd = 2, names = NA)
       abline(h = 0, lty = 3, lwd = 2, col = "gray40")
     }
-    if(vent == "Endeavor") {
+    if(vent == "Endeavour") {
       # Add line
       diagram(a, balance = 1, lwd = 2, col = 2, names = NA, add = TRUE)
     }
@@ -58,7 +58,7 @@ mjenergy1 <- function(pdf = FALSE) {
     a_vals <- convert(a_vals, "J")
     a_vals <- - a_vals / 1000
     col <- 1
-    if(vent == "Endeavor") col <- 2
+    if(vent == "Endeavour") col <- 2
     lines(SC10$T, a_vals, lty = 2, col = col)
 
   }
@@ -68,11 +68,11 @@ mjenergy1 <- function(pdf = FALSE) {
   # Add labels
   text(175, 250, "Methanogenesis", font = 2)
   text(250, 110, "Rainbow", font = 2)
-  text(250, -30, "Endeavor", font = 2)
+  text(250, -30, "Endeavour", font = 2)
   label.figure("a", cex = 1.5)
 
   # Plots (b) and (c): Amino acids
-  for(vent in c("Rainbow", "Endeavor")) {
+  for(vent in c("Rainbow", "Endeavour")) {
     # Read Shock and Canovas (2010) modelling results
     file <- system.file(paste0("extdata/mjenergy/SC10_", vent, ".csv"), package = "JMDplots")
     SC10 <- read.csv(file, check.names = FALSE)
@@ -94,7 +94,7 @@ mjenergy1 <- function(pdf = FALSE) {
     col[zc > 0.3] <- 4
     # Make plot
     if(vent == "Rainbow") ylim <- c(-200, 400)
-    if(vent == "Endeavor") ylim <- c(-400, 100)
+    if(vent == "Endeavour") ylim <- c(-400, 100)
     diagram(a, balance = 1, xlim = c(0, 200), ylim = ylim, ylab = axis.label("A", prefix = "k"), lty = 1, lwd = 2, col = col, names = NA)
     abline(h = 0, lty = 3, lwd = 2, col = "gray40")
     if(vent == "Rainbow") {
@@ -112,8 +112,8 @@ mjenergy1 <- function(pdf = FALSE) {
       text(150, 250, "Amino acids\nRainbow", font = 2)
       label.figure("b", cex = 1.5)
     }
-    if(vent == "Endeavor") {
-      text(30, -100, "Amino acids\nEndeavor", font = 2)
+    if(vent == "Endeavour") {
+      text(30, -100, "Amino acids\nEndeavour", font = 2)
       label.figure("c", cex = 1.5)
     }
   }
@@ -187,8 +187,8 @@ mjenergy3 <- function(pdf = FALSE, write.csv = FALSE) {
   quartiles <- quantile(ZC, c(1,3)/4)
 
   # Save affinities to write CSV files  20210816
-  out <- list(Rainbow = NULL, Endeavor = NULL)
-  for(vent in c("Rainbow", "Endeavor")) {
+  out <- list(Rainbow = NULL, Endeavour = NULL)
+  for(vent in c("Rainbow", "Endeavour")) {
 
     # Read Shock and Canovas (2010) modelling results
     file <- system.file(paste0("extdata/mjenergy/SC10_", vent, ".csv"), package = "JMDplots")
@@ -213,7 +213,7 @@ mjenergy3 <- function(pdf = FALSE, write.csv = FALSE) {
 
     # First plot: whole proteins
     if(vent == "Rainbow") ylim <- c(-50, 150)
-    if(vent == "Endeavor") ylim <- c(-200, 0)
+    if(vent == "Endeavour") ylim <- c(-200, 0)
     # Use red for lower quartile, black for interquartile range, and blue for highest quartile
     col <- rep(1, length(ZC))
     col[ZC < quartiles[1]] <- 2
@@ -242,8 +242,8 @@ mjenergy3 <- function(pdf = FALSE, write.csv = FALSE) {
       text(125, 125, "Rainbow", font = 2)
       label.figure("b", cex = 1.5)
     }
-    if(vent == "Endeavor") {
-      text(125, -25, "Endeavor", font = 2)
+    if(vent == "Endeavour") {
+      text(125, -25, "Endeavour", font = 2)
       label.figure("d", cex = 1.5)
     }
 
@@ -255,12 +255,12 @@ mjenergy3 <- function(pdf = FALSE, write.csv = FALSE) {
 
   # Return and save affinities 20210816
   out$Rainbow <- round(out$Rainbow, 4)
-  out$Endeavor <- round(out$Endeavor, 4)
+  out$Endeavour <- round(out$Endeavour, 4)
   rownames(out$Rainbow) <- aa$protein
-  rownames(out$Endeavor) <- aa$protein
+  rownames(out$Endeavour) <- aa$protein
   if(write.csv) {
     write.csv(out$Rainbow, "Dataset_S2.csv", quote = FALSE)
-    write.csv(out$Endeavor, "Dataset_S3.csv", quote = FALSE)
+    write.csv(out$Endeavour, "Dataset_S3.csv", quote = FALSE)
   }
   invisible(out)
 

@@ -1,4 +1,4 @@
-study,name,Run,BioSample,sample,depth,month,"O2 (mg L-1)","ORP (mV)","T (°C)",pH
+study,name,Run,BioSample,sample,depth,Month,"O2 (mg L-1)","ORP (mV)","T (°C)",pH
 BCA+20,NA,,,,0.1,Apr,7.85,117.4,15.9,8.38
 BCA+20,"Ursu Lake",SRR5861454,SAMN07409439,APR0-5,0.5,Apr,6,112.4,23.91,8.39
 BCA+20,"Ursu Lake",SRR5861455,SAMN07409440,APR1,1,Apr,10.86,101.1,28.23,8.72
