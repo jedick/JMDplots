@@ -248,7 +248,7 @@ taxacomp <- function(groups = c("Bacteria", "Archaea"), xlim = NULL, ylim = NULL
 
 # Plot chemical metrics for all samples in a study 20200901
 plotmet <- function(study, cn = FALSE, identify = FALSE, title = TRUE, xlim = NULL, ylim = NULL,
-  plot.it = TRUE, points = TRUE, lines = FALSE, lineage = NULL, pch1 = 1, pch2 = 21, dropNA = TRUE) {
+  plot.it = TRUE, points = TRUE, lines = FALSE, lineage = NULL, pch1 = 1, pch2 = 21, dropNA = TRUE, return = "data") {
   # Get amino acid composition for samples
   mdat <- getmdat(study, dropNA = dropNA)
   RDP <- getRDP(study, cn = cn, mdat = mdat, lineage = lineage)
@@ -304,7 +304,13 @@ plotmet <- function(study, cn = FALSE, identify = FALSE, title = TRUE, xlim = NU
     }
   }
 
-  invisible(list(study = study, nH2O = nH2O, ZC = ZC, pch = pch, col = col, group = group))
+  # Return either the group means or individual values 20210831
+  if(return == "group") out <- group
+  if(return == "data") {
+    name <- na.omit(mdat$name)[1]
+    out <- data.frame(study = study, name = name, metrics, pch = pch, col = col)
+  }
+  invisible(out)
 }
 
 # function to add convex hulls 20200923

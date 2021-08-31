@@ -127,10 +127,6 @@ geo16S2 <- function(pdf = FALSE) {
   }
   plot(xlim, ylim, xlab = "", ylab = "", type = "n")
   lmlines()
-#  # Add convex hull for stratified lakes and seawater (from Fig. 3) 20210503
-#  fig3 <- geo16S3(plot.it = FALSE)
-#  addhull(fig3$mar$ZC, fig3$mar$nH2O, "blue")
-#  addhull(fig3$ursu$ZC, fig3$ursu$nH2O, "turquoise3")
   # Add convex hulls for each dataset in this figure
   addhull(p1$ZC, p1$nH2O, 2, TRUE)
   addhull(p2$ZC, p2$nH2O, "blue", TRUE, lty = 2)
@@ -152,6 +148,12 @@ geo16S2 <- function(pdf = FALSE) {
 
   par(oopar)
   if(pdf) dev.off()
+
+  # Save data in CSV file 20210830
+  alldat <- rbind(p1, p2, p3, p4, p5, p6, p7, p8)
+  alldat$ZC <- round(alldat$ZC, 6)
+  alldat$nH2O <- round(alldat$nH2O, 6)
+  write.csv(alldat, "Source_Data_1.csv", row.names = FALSE, quote = FALSE)
 
 }
 
@@ -434,7 +436,7 @@ geo16S5 <- function(pdf = FALSE) {
   pch <- 21:25
   # Loop over studies
   for(i in 1:4) {
-    group <- plotmet(studies[[i]], plot.it = FALSE)$group
+    group <- plotmet(studies[[i]], plot.it = FALSE, return = "group")
     points(group$ZC1, group$nH2O1, pch = pch[i], cex = 1.5, lwd = 2, bg = "#ffffffa0")
     lines(c(group$ZC1, group$ZC2), c(group$nH2O1, group$nH2O2))
     points(group$ZC2, group$nH2O2, pch = pch[i], cex = 1.8, lwd = 2, bg = "#df536ba0")
@@ -464,7 +466,7 @@ geo16S5 <- function(pdf = FALSE) {
   pch <- 21:25
   # Loop over studies
   for(i in 1:3) {
-    group <- plotmet(studies[[i]], plot.it = FALSE)$group
+    group <- plotmet(studies[[i]], plot.it = FALSE, return = "group")
     points(group$ZC1, group$nH2O1, pch = pch[i], cex = 1.5, lwd = 2, bg = "#ffffffa0")
     lines(c(group$ZC1, group$ZC2), c(group$nH2O1, group$nH2O2))
     points(group$ZC2, group$nH2O2, pch = pch[i], cex = 1.8, lwd = 2, bg = "#df536ba0")
