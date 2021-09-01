@@ -10,7 +10,7 @@ geo16S1 <- function(pdf = FALSE) {
   if(pdf) pdf("geo16S1.pdf", width = 11, height = 5)
   par(mfrow = c(1, 3))
 
-  taxacomp("majorphyla", legend.x = "bottomleft", hline = c(-0.81, -0.68))
+  tc1 <- taxacomp("majorphyla", legend.x = "bottomleft", hline = c(-0.81, -0.68))
   title("Major phyla and their classes", font.main = 1, cex.main = 1.4)
   label.figure("A", font = 2, cex = 1.6)
   # Draw lines indicating zoom area in next plot
@@ -19,7 +19,7 @@ geo16S1 <- function(pdf = FALSE) {
   lines(c(-0.05, -0.015), c(-0.68, -0.65), lty = 2, col = "gray40")
   par(xpd = FALSE)
 
-  taxacomp("majorcellular", legend.x = "bottomleft", hline = c(-0.77, -0.71))
+  tc2 <- taxacomp("majorcellular", legend.x = "bottomleft", hline = c(-0.77, -0.71))
   title("Major cellular phyla and their classes", font.main = 1, cex.main = 1.4)
   label.figure("B", font = 2, cex = 1.6)
   par(xpd = NA)
@@ -27,11 +27,22 @@ geo16S1 <- function(pdf = FALSE) {
   lines(c(-0.05, -0.015), c(-0.71, -0.68), lty = 2, col = "gray40")
   par(xpd = FALSE)
 
-  taxacomp("proteobacteria", legend.x = "topright")
+  tc3 <- taxacomp("proteobacteria", legend.x = "topright")
   title("Proteobacterial classes and their orders", font.main = 1, cex.main = 1.4)
   label.figure("C", font = 2, cex = 1.6)
 
   if(pdf) dev.off()
+
+  # Return Source Data 20210831
+  datA <- do.call(rbind, lapply(tc1, function(x) {do.call(rbind, x)}))
+  datA <- cbind(plot = "A", datA)
+  datB <- do.call(rbind, lapply(tc2, function(x) {do.call(rbind, x)}))
+  datB <- cbind(plot = "A", datB)
+  datC <- do.call(rbind, lapply(tc3, function(x) {do.call(rbind, x)}))
+  datC <- cbind(plot = "A", datC)
+  out <- rbind(datA, datB, datC)
+  rownames(out) <- NULL
+  invisible(out)
 
 }
 
@@ -149,11 +160,11 @@ geo16S2 <- function(pdf = FALSE) {
   par(oopar)
   if(pdf) dev.off()
 
-  # Save data in CSV file 20210830
-  alldat <- rbind(p1, p2, p3, p4, p5, p6, p7, p8)
-  alldat$ZC <- round(alldat$ZC, 6)
-  alldat$nH2O <- round(alldat$nH2O, 6)
-  write.csv(alldat, "Source_Data_1.csv", row.names = FALSE, quote = FALSE)
+  # Return Source Data 20210831
+  out <- rbind(p1, p2, p3, p4, p5, p6, p7, p8)
+  out$ZC <- round(out$ZC, 6)
+  out$nH2O <- round(out$nH2O, 6)
+  invisible(out)
 
 }
 
@@ -191,9 +202,10 @@ geo16S3 <- function(pdf = FALSE, plot.it = TRUE) {
                 "Inside", "Inside", "Outside (C4)", "Outside (C4)",
                 "July 2015", "November 2015", "February 2016", "April 2016")
   titlesub <- paste(title, subtitle)
-  # Make objects to hold all ZC and nH2O values (for convex hull in Figure 2)
-  marZC <- marnH2O <- numeric()
-  ursuZC <- ursunH2O <- numeric()
+
+  # Make object to hold Source Data
+  out <- list()
+  # Loop over studies
   for(i in 1:length(study)) {
     # ZC range for plots
     if(study[i] == "BCA+20") ZClim <- c(-0.180, -0.145) else ZClim <- c(-0.172, -0.140)
@@ -217,10 +229,9 @@ geo16S3 <- function(pdf = FALSE, plot.it = TRUE) {
     if(plot.it) {
       # Reverse y-axis (depth)
       ylim <- rev(range(depth))
-      # See deeper O2 concentrations in Ursu Lake
+      # Visualize deeper O2 concentrations in Ursu Lake
       if(study[i] == "BCA+20") ylim <- c(11, 0)
       if(study[i] == "SVH+19") {
-        print(mdat$depth)
         # Plot 1000 and 2000 m samples closer to the others 20210608
         ylim <- c(700, 50)
         depth[match(c(1000, 2000), depth)] <- c(600, 700)
@@ -292,23 +303,44 @@ geo16S3 <- function(pdf = FALSE, plot.it = TRUE) {
         par(new = TRUE)
         plot(0, 0, type = "n", axes = FALSE, xlab = "", ylab = "", xlim = ZClim, ylim = ylim)
       }
+
+      # Don't repeat Blue Hole in Source Data (there are loops for O2 and NO3-/NO2-; just use one)
+      if(substr(title[i], 1, 1) == " ") next
+      # Assemble the Source Data
+      sd <- alldat[, c("study", "name", "Run", "sample", "depth")]
+      sd <- cbind(sd, "O2 (umol kg-1)" = NA, "O2 (umol L-1)" = NA, "O2 (mg L-1)" = NA, "NO3- (umol L-1)" = NA, "NO2- (umol L-1)" = NA, ZC = NA, nH2O = NA)
+      # Names of the columns with chemical concentrations
+      cnames <- c("O2 (umol kg-1)", "O2 (umol L-1)", "O2 (mg L-1)", "NO3- (umol L-1)", "NO2- (umol L-1)")
+      for(cname in cnames) if(cname %in% colnames(alldat)) sd[, cname] <- alldat[, cname]
+      # Put ZC and nH2O values in correct place
+      metrics <- metrics[imet, ]
+      metrics <- metrics[!is.na(metrics$Run), ]
+      isd <- match(metrics$Run, sd$Run)
+      sd$ZC[isd] <- metrics$ZC
+      sd$nH2O[isd] <- metrics$nH2O
+
+      # Replace NA name with study name
+      sd.name <- na.omit(sd$name)[1]
+      sd$name[is.na(sd$name)] <- sd.name
+      # Use NA instead of "" for missing Run and sample name
+      sd$Run[sd$Run == ""] <- NA
+      sd$sample[sd$sample == ""] <- NA
+      # Place data frame into output list
+      out[[i]] <- sd
+
     } # end if(plot.it)
 
-    # Store all non-NA ZC and nH2O values
-    if(grepl("Ursu", title[i])) {
-      ursuZC <- c(ursuZC, na.omit(ZC))
-      ursunH2O <- c(ursunH2O, na.omit(nH2O))
-    } else {
-      marZC <- c(marZC, na.omit(ZC))
-      marnH2O <- c(marnH2O, na.omit(nH2O))
-    }
-  }
+  } # end loop
 
   if(plot.it) {
     if(pdf) dev.off()
   }
-  # Return values for marine and freshwater datasets and Ursu Lake 20210521
-  invisible(list(mar = list(ZC = marZC, nH2O = marnH2O), ursu = list(ZC = ursuZC, nH2O = ursunH2O)))
+
+  # Return Source Data 20210831
+  out <- do.call(rbind, out)
+  out$ZC <- round(out$ZC, 6)
+  out$nH2O <- round(out$nH2O, 6)
+  invisible(out)
 
 }
 
@@ -434,12 +466,19 @@ geo16S5 <- function(pdf = FALSE) {
   # Start plot
   plot(c(-0.148, -0.139), c(-0.745, -0.735), type = "n", xlab = cplab$ZC, ylab = cplab$nH2O)
   pch <- 21:25
+  outB <- list()
   # Loop over studies
   for(i in 1:4) {
-    group <- plotmet(studies[[i]], plot.it = FALSE, return = "group")
-    points(group$ZC1, group$nH2O1, pch = pch[i], cex = 1.5, lwd = 2, bg = "#ffffffa0")
-    lines(c(group$ZC1, group$ZC2), c(group$nH2O1, group$nH2O2))
-    points(group$ZC2, group$nH2O2, pch = pch[i], cex = 1.8, lwd = 2, bg = "#df536ba0")
+    pm <- plotmet(studies[[i]], plot.it = FALSE, extracolumn = "type")
+    # Determine sample groups from values of pch returned by plotmet()  20210901
+    i1 <- pm$pch == 1
+    i2 <- pm$pch == 21
+    means <- list(ZC1 = mean(pm$ZC[i1]), ZC2 = mean(pm$ZC[i2]), nH2O1 = mean(pm$nH2O[i1]), nH2O2 = mean(pm$nH2O[i2]))
+    points(means$ZC1, means$nH2O1, pch = pch[i], cex = 1.5, lwd = 2, bg = "#ffffffa0")
+    lines(c(means$ZC1, means$ZC2), c(means$nH2O1, means$nH2O2))
+    points(means$ZC2, means$nH2O2, pch = pch[i], cex = 1.8, lwd = 2, bg = "#df536ba0")
+    # Save values for Source Data 20210901
+    outB[[i]] <- pm
   }
   # Add labels
   text(-0.1423, -0.7388, "NW PA\nwater")
@@ -464,12 +503,18 @@ geo16S5 <- function(pdf = FALSE) {
   # Start plot
   plot(c(-0.22, -0.14), c(-0.75, -0.71), type = "n", xlab = cplab$ZC, ylab = cplab$nH2O)
   pch <- 21:25
+  outD <- list()
   # Loop over studies
   for(i in 1:3) {
-    group <- plotmet(studies[[i]], plot.it = FALSE, return = "group")
-    points(group$ZC1, group$nH2O1, pch = pch[i], cex = 1.5, lwd = 2, bg = "#ffffffa0")
-    lines(c(group$ZC1, group$ZC2), c(group$nH2O1, group$nH2O2))
-    points(group$ZC2, group$nH2O2, pch = pch[i], cex = 1.8, lwd = 2, bg = "#df536ba0")
+    pm <- plotmet(studies[[i]], plot.it = FALSE, extracolumn = "type")
+    # Determine sample groups from values of pch returned by plotmet()  20210901
+    i1 <- pm$pch == 1
+    i2 <- pm$pch == 21
+    means <- list(ZC1 = mean(pm$ZC[i1]), ZC2 = mean(pm$ZC[i2]), nH2O1 = mean(pm$nH2O[i1]), nH2O2 = mean(pm$nH2O[i2]))
+    points(means$ZC1, means$nH2O1, pch = pch[i], cex = 1.5, lwd = 2, bg = "#ffffffa0")
+    lines(c(means$ZC1, means$ZC2), c(means$nH2O1, means$nH2O2))
+    points(means$ZC2, means$nH2O2, pch = pch[i], cex = 1.8, lwd = 2, bg = "#df536ba0")
+    outD[[i]] <- pm
   }
   # Add labels
   text(-0.164, -0.726, "Marcellus Shale")
@@ -480,6 +525,15 @@ geo16S5 <- function(pdf = FALSE) {
   label.figure("D", cex = 1.5, xfrac = 0.03, font = 2)
 
   if(pdf) dev.off()
+
+  # Return Source Data 20210901
+  outB <- do.call(rbind, outB)
+  outD <- do.call(rbind, outD)
+  out <- rbind(outB, outD)
+  out <- out[, !colnames(out) %in% c("pch", "col")]
+  out$nH2O <- round(out$nH2O, 6)
+  out$ZC <- round(out$ZC, 6)
+  invisible(out)
 
 }
 
@@ -549,8 +603,8 @@ geo16S_S1 <- function(pdf = FALSE) {
   if(pdf) dev.off()
 
   # Save results for geo16S6() 20210610
-  out <- cbind(DZC = round(DZC, 4), percent)
-  write.csv(out, "geo16S_S1.csv", row.names = FALSE, quote = FALSE)
+  out <- cbind(DZC = round(DZC, 6), percent)
+  #write.csv(out, "geo16S_S1.csv", row.names = FALSE, quote = FALSE)
 }
 
 # Contributions of classes to overall ZC difference between oxidizing and reducing conditions 20210610

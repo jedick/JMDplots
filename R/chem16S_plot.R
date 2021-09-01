@@ -248,7 +248,8 @@ taxacomp <- function(groups = c("Bacteria", "Archaea"), xlim = NULL, ylim = NULL
 
 # Plot chemical metrics for all samples in a study 20200901
 plotmet <- function(study, cn = FALSE, identify = FALSE, title = TRUE, xlim = NULL, ylim = NULL,
-  plot.it = TRUE, points = TRUE, lines = FALSE, lineage = NULL, pch1 = 1, pch2 = 21, dropNA = TRUE, return = "data") {
+  plot.it = TRUE, points = TRUE, lines = FALSE, lineage = NULL, pch1 = 1, pch2 = 21, dropNA = TRUE,
+  return = "data", extracolumn = NULL) {
   # Get amino acid composition for samples
   mdat <- getmdat(study, dropNA = dropNA)
   RDP <- getRDP(study, cn = cn, mdat = mdat, lineage = lineage)
@@ -287,28 +288,33 @@ plotmet <- function(study, cn = FALSE, identify = FALSE, title = TRUE, xlim = NU
 
   i1 <- pch %in% pch1
   i2 <- pch %in% pch2
-  group <- list()
+  means <- list()
   if(!is.null(pch2) & !is.null(pch1) & sum(i2) > 0 & sum(i1) > 0) {
     # Calculate mean of sample values 20201003
-    group <- list(ZC1 = mean(ZC[i1]), ZC2 = mean(ZC[i2]), nH2O1 = mean(nH2O[i1]), nH2O2 = mean(nH2O[i2]))
+    means <- list(ZC1 = mean(ZC[i1]), ZC2 = mean(ZC[i2]), nH2O1 = mean(nH2O[i1]), nH2O2 = mean(nH2O[i2]))
 #    # Calculate values for aggregated samples 20210607
-#    metrics <- getmetrics(study, mdat = mdat, RDP = RDP, lineage = lineage, groups = list(i1, i2))
-#    group <- list(ZC1 = metrics$ZC[1], ZC2 = metrics$ZC[2], nH2O1 = metrics$nH2O[1], nH2O2 = metrics$nH2O[2])
+#    metrics <- getmetrics(study, mdat = mdat, RDP = RDP, lineage = lineage, meanss = list(i1, i2))
+#    means <- list(ZC1 = metrics$ZC[1], ZC2 = metrics$ZC[2], nH2O1 = metrics$nH2O[1], nH2O2 = metrics$nH2O[2])
     if(plot.it) {
       col1 <- na.omit(mdat$col[mdat$pch == pch1])[1]
       col2 <- na.omit(mdat$col[mdat$pch == pch2])[1]
-      points(group$ZC1, group$nH2O1, pch = 8, cex = 2, lwd = 4, col = "white")
-      points(group$ZC1, group$nH2O1, pch = 8, cex = 2, lwd = 2, col = col1)
-      points(group$ZC2, group$nH2O2, pch = 8, cex = 2, lwd = 4, col = "white")
-      points(group$ZC2, group$nH2O2, pch = 8, cex = 2, lwd = 2, col = col2)
+      points(means$ZC1, means$nH2O1, pch = 8, cex = 2, lwd = 4, col = "white")
+      points(means$ZC1, means$nH2O1, pch = 8, cex = 2, lwd = 2, col = col1)
+      points(means$ZC2, means$nH2O2, pch = 8, cex = 2, lwd = 4, col = "white")
+      points(means$ZC2, means$nH2O2, pch = 8, cex = 2, lwd = 2, col = col2)
     }
   }
 
-  # Return either the group means or individual values 20210831
-  if(return == "group") out <- group
+  # Return either the means means or individual values 20210831
+  if(return == "means") out <- means
   if(return == "data") {
     name <- na.omit(mdat$name)[1]
     out <- data.frame(study = study, name = name, metrics, pch = pch, col = col)
+    if(!is.null(extracolumn)) {
+      # Add an extra column (e.g. 'type') to the output 20210901
+      extracols <- mdat[, extracolumn, drop = FALSE]
+      out <- cbind(out, extracols)
+    }
   }
   invisible(out)
 }

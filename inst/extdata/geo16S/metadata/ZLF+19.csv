@@ -1,7 +1,7 @@
-study,name,Run,BioSample,sample,description,day
-ZLF+19,"Duvernay Formation Produced Water",SRR6058388,SAMN07639509,ZC11,"16S RNA sequencing of Archaea and Bacteria: microbial communities in well 2 source water",-1
-ZLF+19,"Duvernay Formation Produced Water",SRR6058389,SAMN07639509,ZC14,"16S RNA sequencing of Archaea and Bacteria: microbial communities in well 2 flowback and produced water day 1",1
-ZLF+19,"Duvernay Formation Produced Water",SRR6058390,SAMN07639509,ZC13,"16S RNA sequencing of Archaea and Bacteria: microbial communities in well 2 flowback and produced water day 0",0
-ZLF+19,"Duvernay Formation Produced Water",SRR6058391,SAMN07639509,ZC17,"16S RNA sequencing of Archaea and Bacteria: microbial communities in well 2 flowback and produced water day 1 h",0.04
-ZLF+19,"Duvernay Formation Produced Water",SRR6058392,SAMN07639509,ZC15,"16S RNA sequencing of Archaea and Bacteria: microbial communities in well 2 flowback and produced water day 10",10
-ZLF+19,"Duvernay Formation Produced Water",SRR6058393,SAMN07639509,ZC18,"16S RNA sequencing of Archaea and Bacteria: microbial communities in well 2 flowback and produced water day 18",18
+study,name,Run,BioSample,sample,description,type,day
+ZLF+19,"Duvernay Formation Produced Water",SRR6058388,SAMN07639509,ZC11,"16S RNA sequencing of Archaea and Bacteria: microbial communities in well 2 source water","source water",-1
+ZLF+19,"Duvernay Formation Produced Water",SRR6058389,SAMN07639509,ZC14,"16S RNA sequencing of Archaea and Bacteria: microbial communities in well 2 flowback and produced water day 1","flowback and produced water",1
+ZLF+19,"Duvernay Formation Produced Water",SRR6058390,SAMN07639509,ZC13,"16S RNA sequencing of Archaea and Bacteria: microbial communities in well 2 flowback and produced water day 0","flowback and produced water",0
+ZLF+19,"Duvernay Formation Produced Water",SRR6058391,SAMN07639509,ZC17,"16S RNA sequencing of Archaea and Bacteria: microbial communities in well 2 flowback and produced water day 1 h","flowback and produced water",0.04
+ZLF+19,"Duvernay Formation Produced Water",SRR6058392,SAMN07639509,ZC15,"16S RNA sequencing of Archaea and Bacteria: microbial communities in well 2 flowback and produced water day 10","flowback and produced water",10
+ZLF+19,"Duvernay Formation Produced Water",SRR6058393,SAMN07639509,ZC18,"16S RNA sequencing of Archaea and Bacteria: microbial communities in well 2 flowback and produced water day 18","flowback and produced water",18
