@@ -209,7 +209,7 @@ getmdat <- function(study, dropNA = TRUE) {
     pch[mdat$size != "0.2-1.6micron"] <- NA
     col[mdat$size != "0.2-1.6micron"] <- NA
   }
-  if(study == "BCA+20") {
+  if(study == "BCA+21") {
     type <- rep("transition", nrow(mdat))
     type[mdat$depth < 3] <- "oxic"
     type[mdat$depth > 4] <- "anoxic"

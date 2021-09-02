@@ -187,7 +187,7 @@ geo16S3 <- function(pdf = FALSE, plot.it = TRUE) {
   # Identify datasets to plot
   study <- c("SVH+19", "MZG+20", "MZG+20", "GBL+15", "GBL+15",
              "HXZ+20", "HXZ+20", "HXZ+20", "HXZ+20",
-             "BCA+20", "BCA+20", "BCA+20", "BCA+20")
+             "BCA+21", "BCA+21", "BCA+21", "BCA+21")
   column <- c("study", "lake", "lake", "size", "size",
               "Station", "Station", "Station", "Station",
               "Month", "Month", "Month", "Month")
@@ -208,7 +208,7 @@ geo16S3 <- function(pdf = FALSE, plot.it = TRUE) {
   # Loop over studies
   for(i in 1:length(study)) {
     # ZC range for plots
-    if(study[i] == "BCA+20") ZClim <- c(-0.180, -0.145) else ZClim <- c(-0.172, -0.140)
+    if(study[i] == "BCA+21") ZClim <- c(-0.180, -0.145) else ZClim <- c(-0.172, -0.140)
     # Get the metadata and compositional metrics for this study
     # Keep all rows for higher-resolution O2 measurements
     mdat <- getmdat(study[i], dropNA = FALSE)
@@ -230,7 +230,7 @@ geo16S3 <- function(pdf = FALSE, plot.it = TRUE) {
       # Reverse y-axis (depth)
       ylim <- rev(range(depth))
       # Visualize deeper O2 concentrations in Ursu Lake
-      if(study[i] == "BCA+20") ylim <- c(11, 0)
+      if(study[i] == "BCA+21") ylim <- c(11, 0)
       if(study[i] == "SVH+19") {
         # Plot 1000 and 2000 m samples closer to the others 20210608
         ylim <- c(700, 50)
@@ -276,7 +276,7 @@ geo16S3 <- function(pdf = FALSE, plot.it = TRUE) {
           alldat <- cbind(alldat, NO3.NO2)
         } else {
           what <- "O2"
-          if(study[i] == "BCA+20") xlim <- c(0, 25) else xlim <- c(0, 220)
+          if(study[i] == "BCA+21") xlim <- c(0, 25) else xlim <- c(0, 220)
           col <- 2
           lty <- 1
         }
@@ -560,7 +560,7 @@ geo16S_S1 <- function(pdf = FALSE) {
   par(mgp = c(2, 1, 0))
 
   study <- c(
-    "GBL+15", "JHM+16", "MPB+17", "BCA+20",
+    "GBL+15", "JHM+16", "MPB+17", "BCA+21",
     "SVH+19", "MZG+20", "HXZ+20",
     "UKD+18.water", "MMA+20_spring",
     "CHM+14", "HRR+18", "ZLF+19"
@@ -643,7 +643,7 @@ geo16S6 <- function(pdf = FALSE) {
   percent <- dat[, -(1:3)]
 
   study <- c(
-    "GBL+15", "JHM+16", "MPB+17", "BCA+20",
+    "GBL+15", "JHM+16", "MPB+17", "BCA+21",
     "SVH+19", "MZG+20", "HXZ+20",
     "UKD+18.water", "MMA+20_spring",
     "CHM+14", "HRR+18", "ZLF+19"

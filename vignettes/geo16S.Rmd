@@ -114,7 +114,7 @@ dat2 <- geo16S2()
 dat3 <- geo16S3()
 ```
 
-**Data sources:** Black Sea [@SVH+19], Swiss lakes (Lake Zug and Lake Lugano) [@MZG+20], Eastern Tropical North Pacific (ETNP) [@GBL+15], Sansha Yongle Blue Hole [@HXZ+20], Ursu Lake [@BCA+20].
+**Data sources:** Black Sea [@SVH+19], Swiss lakes (Lake Zug and Lake Lugano) [@MZG+20], Eastern Tropical North Pacific (ETNP) [@GBL+15], Sansha Yongle Blue Hole [@HXZ+20], Ursu Lake [@BCA+21].
 
 ## Changes of abundance and chemical metrics at different taxonomic levels (Figure 4)
 ```{r geo16S4, message = FALSE, results = "hide", out.width='100%', fig.width = 10.5, fig.height = 7, out.extra = 'class="full-width"', pngquant = pngquant, dpi = 100}

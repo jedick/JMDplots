@@ -48,7 +48,7 @@ This is used by \code{code16S2} to make the convex hull for the datasets plotted
 
 \section{Files in extdata/geo16S}{
   \describe{
-    \item{\code{geo16S_S1.csv}}{File created by running \code{geo16S_S1}, used by \code{geo16S6}.}
+    \item{\code{geo16S_S1.csv}}{File created by running \code{write.csv(geo16S_S1(), "geo16S_S1.csv", row.names = FALSE, quote = FALSE)}, used by \code{geo16S6}.}
   }
 }
 
