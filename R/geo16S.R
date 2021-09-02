@@ -466,6 +466,8 @@ geo16S5 <- function(pdf = FALSE) {
   # Start plot
   plot(c(-0.148, -0.139), c(-0.745, -0.735), type = "n", xlab = cplab$ZC, ylab = cplab$nH2O)
   pch <- 21:25
+  xadj <- c(0.5, 0.5, 0.5, -0.5)
+  yadj <- c(-0.8, -0.8, -0.8, 0.5)
   outB <- list()
   # Loop over studies
   for(i in 1:4) {
@@ -477,14 +479,20 @@ geo16S5 <- function(pdf = FALSE) {
     points(means$ZC1, means$nH2O1, pch = pch[i], cex = 1.5, lwd = 2, bg = "#ffffffa0")
     lines(c(means$ZC1, means$ZC2), c(means$nH2O1, means$nH2O2))
     points(means$ZC2, means$nH2O2, pch = pch[i], cex = 1.8, lwd = 2, bg = "#df536ba0")
+    # Plot number of samples next to points 20210902
+    n1 <- length(pm$ZC[i1])
+    n2 <- length(pm$ZC[i2])
+    if(i==4) dyadj <- 0.2 else dyadj <- 0
+    text(means$ZC1, means$nH2O1, n1, adj = c(xadj[i], yadj[i] - dyadj))
+    text(means$ZC2, means$nH2O2, n2, adj = c(xadj[i], yadj[i] + dyadj))
     # Save values for Source Data 20210901
     outB[[i]] <- pm
   }
   # Add labels
   text(-0.1423, -0.7388, "NW PA\nwater")
-  text(-0.1473, -0.7423, "NW PA\nsediment")
+  text(-0.1473, -0.742, "NW PA\nsediment")
   text(-0.1427, -0.7432, "PASF water (spring)")
-  text(-0.1435, -0.7447, "PASF water (fall)")
+  text(-0.143, -0.7447, "PASF water (fall)")
   # Add legend
   legend("topleft", c("Lowest disturbance", "Highest disturbance"), pch = c(21, 21), pt.bg = c("#ffffffa0", "#df536ba0"), pt.cex = c(1.4, 1.7), lwd = 2, lty = NA)
   label.figure("B", cex = 1.5, xfrac = 0.03, font = 2)
@@ -503,6 +511,8 @@ geo16S5 <- function(pdf = FALSE) {
   # Start plot
   plot(c(-0.22, -0.14), c(-0.75, -0.71), type = "n", xlab = cplab$ZC, ylab = cplab$nH2O)
   pch <- 21:25
+  xadj <- c(0.5, -1, 0.5)
+  yadj <- c(-0.9, 0, -1)
   outD <- list()
   # Loop over studies
   for(i in 1:3) {
@@ -514,6 +524,11 @@ geo16S5 <- function(pdf = FALSE) {
     points(means$ZC1, means$nH2O1, pch = pch[i], cex = 1.5, lwd = 2, bg = "#ffffffa0")
     lines(c(means$ZC1, means$ZC2), c(means$nH2O1, means$nH2O2))
     points(means$ZC2, means$nH2O2, pch = pch[i], cex = 1.8, lwd = 2, bg = "#df536ba0")
+    # Plot number of samples next to points 20210902
+    n1 <- length(pm$ZC[i1])
+    n2 <- length(pm$ZC[i2])
+    text(means$ZC1, means$nH2O1, n1, adj = c(xadj[i], yadj[i] - dyadj))
+    text(means$ZC2, means$nH2O2, n2, adj = c(xadj[i], yadj[i] + dyadj))
     outD[[i]] <- pm
   }
   # Add labels
@@ -587,7 +602,7 @@ geo16S_S1 <- function(pdf = FALSE) {
     c(Actinobacteria = 1.2, Betaproteobacteria = 1, Alphaproteobacteria = 1.6)
   )
 
-  DZC <- numeric()
+  n1 <- n2 <- DZC <- numeric()
   for(i in 1:length(study)) {
     gg <- groupmet(study[i], param = "ZC", rank = "class", pch1 = pch1[i], pch2 = pch2[i], xadj = xadj[[i]], yadj = yadj[[i]], scale100 = TRUE, minpercent = 2)
     title(description[i])
@@ -599,11 +614,16 @@ geo16S_S1 <- function(pdf = FALSE) {
     if(i==1) percent <- P else percent <- merge(percent, P, all = TRUE)
     # Keep track of the overall ZC change
     DZC <- c(DZC, diff(gg$Xall))
+    # Keep track of number of samples 20210902
+    n1 <- c(n1, gg$n1)
+    n2 <- c(n2, gg$n2)
   }
   if(pdf) dev.off()
+  # Put studies in correct order (they are alphabetized by merge()) 20210902
+  percent <- percent[match(study, percent$study), ]
 
   # Save results for geo16S6() 20210610
-  out <- cbind(DZC = round(DZC, 6), percent)
+  out <- cbind(n1 = n1, n2 = n2, DZC = round(DZC, 6), percent)
   #write.csv(out, "geo16S_S1.csv", row.names = FALSE, quote = FALSE)
 }
 
@@ -613,11 +633,14 @@ geo16S6 <- function(pdf = FALSE) {
   if(pdf) pdf("geo16S6.pdf", width = 14, height = 8)
   layout(matrix(c(1, 2), nrow = 1), widths = c(1, 8))
   
-  # Read file created by geo16S_S1
+  # Read file created by geo16S_S1()
   file <- system.file("extdata/geo16S/geo16S_S1.csv", package = "JMDplots")
   dat <- read.csv(file, as.is = TRUE)
   DZC <- dat$DZC
-  percent <- dat[, -1]
+  n1 <- dat$n1
+  n2 <- dat$n2
+  # Get the columns with the study key and percent change for classes
+  percent <- dat[, -(1:3)]
 
   study <- c(
     "GBL+15", "JHM+16", "MPB+17", "BCA+20",
@@ -631,20 +654,10 @@ geo16S6 <- function(pdf = FALSE) {
     "NW Pennsylvania water", "PASF Streams (spring)",
     "Marcellus Shale", "Denver-Julesburg Basin", "Duvernay Formation"
   )
-  condition <- c(
-    "(> 100 m) - (< 100 m)",
-    "(anoxic) - (oxic)",
-    "(> 50 \u00B0C) - (< 50 \u00B0C)",
-    "(> 4 m) - (< 3 m)",
-    "(euxinic) - (oxic)",
-    "(deepest) - (shallowest)",
-    "(anoxic) - (oxic)",
-    "(MSA+) - (MSA-)",
-    "(high/highest) - (low/lowest)",
-    "(PW day 49+) - (IF day 0)",
-    "(PW day 130+) - (SW day 0)",
-    "(FW day 18) - (SW day 0)"
-  )
+  # Include numbers of samples in condition text 20210902
+  cond2 <- c( "> 100 m", "anoxic", "> 50 \u00B0C", "> 4 m", "euxinic", "deepest", "anoxic", "MSA+", "highest", "PW day 49+", "PW day 130+", "FW day 18")
+  cond1 <- c("< 100 m", "oxic", "< 50 \u00B0C", "< 3 m", "oxic", "shallowest", "oxic", "MSA-", "lowest", "IF day 0", "SW day 0", "SW day 0")
+  condition <- paste0(cond2, " (", n2, ") - ", cond1, " (", n1, ")")
 
   # Plot ZC 
   par(mar = c(8, 1, 1, 0.2))
@@ -656,8 +669,8 @@ geo16S6 <- function(pdf = FALSE) {
   # Move "study" column to rownames
   rownames(percent) <- percent$study
   percent <- percent[, -1]
-  # Reorder rows according to studies in paper
-  percent <- percent[match(study, rownames(percent)), ]
+  # Make sure rows are in right order
+  stopifnot(all(rownames(percent) == study))
   # Reorder columns to group classes by phyla
   classes <- c(
   "Alphaproteobacteria", "Betaproteobacteria", "Gammaproteobacteria", "Deltaproteobacteria",  # Proteobacteria
@@ -744,7 +757,7 @@ geo16S6 <- function(pdf = FALSE) {
 
   # Add dataset description and conditions
   axis(2, at = 12:1 + 0.2, labels = description, tick = FALSE)
-  axis(2, at = 12:1 - 0.2, labels = condition, tick = FALSE)
+  axis(2, at = 12:1 - 0.2, labels = condition, tick = FALSE, cex.axis = 0.9)
 
   if(pdf) dev.off()
 }

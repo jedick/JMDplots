@@ -456,8 +456,10 @@ getgroup <- function(study = "XDZ+17", param = "nH2O", rank = "domain", pch1 = 2
     stopifnot(DXpercent == 100)
   } else message(paste0("getgroup: total contribution to \u0394", param, " by individual taxa is ", DXpercent, "% of whole"))
   # Assemble output
-  out <- list(study, param, pch1, pch2, col1, col2, X1, X2, P1, P2, Pboth, DX, Xall, taxon)
-  names(out) <- c("study", "param", "pch1", "pch2", "col1", "col2", "X1", "X2", "P1", "P2", "Pboth", "DX", "Xall", "taxon")
+  n1 <- sum(i1)
+  n2 <- sum(i2)
+  out <- list(study, param, pch1, pch2, col1, col2, n1, n2, X1, X2, P1, P2, Pboth, DX, Xall, taxon)
+  names(out) <- c("study", "param", "pch1", "pch2", "col1", "col2", "n1", "n2", "X1", "X2", "P1", "P2", "Pboth", "DX", "Xall", "taxon")
   out
 
 }
