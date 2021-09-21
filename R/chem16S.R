@@ -243,7 +243,7 @@ getmdat <- function(study, dropNA = TRUE) {
 }
 
 # Get RDP results for all samples in a study 20200912
-getRDP <- function(study, cn = FALSE, mdat = NULL, lineage = NULL) {
+getRDP <- function(study, cn = FALSE, mdat = NULL, lineage = NULL, mincount = 200) {
   # Handle missing arguments
   if(is.null(mdat)) mdat <- getmdat(study)
   # Get the sample Runs (SRR numbers)
@@ -275,28 +275,24 @@ getRDP <- function(study, cn = FALSE, mdat = NULL, lineage = NULL) {
     dat$rank[iunclass] <- unclassrank
     dat$name[iunclass] <- unclassname
   }
-  if(any(iunclass) | !is.na(datorig$taxid[1])) {
+  if(dat$lineage[1] == "null") {
     # This is for the actual output from the RDP Classifier
     # We want to keep genus-level classifications; also:
     # Remove the counts of classifications at higher ranks (which are also counted at lower ranks)
     # *except* for the ones labeled "unclassified" (which are not counted at lower ranks)
     igenus <- dat$rank == "genus"
     out <- dat[igenus | iunclass, ]
+    isRDP <- TRUE
   } else {
-    if(grepl("WAN+17", study, fixed = TRUE)) {
-      # Here the taxon counts are assembled from SI tables; just the all counts as-is
-      out <- dat
-    } else {
-      # For MicrobiomeHD datasets, all OTU classifications are to lowest taxonomic level 20210623
-      # Remove the first row (sum of counts)
-      out <- dat[-1, ]
-    }
+    # Otherwise, the taxon counts are assembled from SI or OTU tables; use all the counts
+    out <- dat
+    isRDP <- FALSE
   }
   # Get the total counts
   totalcounts <- colSums(out[, -(1:3), drop = FALSE])
-  # Get the "rootrank" counts
-  rootcounts <- dat[1, -(1:3)]
-  if(!grepl("WAN+17", study, fixed = TRUE)) {
+  if(isRDP) {
+    # Get the "rootrank" counts
+    rootcounts <- dat[1, -(1:3)]
     # Stop if total counts doesn't equal "rootrank" counts
     stopifnot(all(abs(totalcounts - rootcounts) < 0.1))
   }
@@ -341,12 +337,12 @@ getRDP <- function(study, cn = FALSE, mdat = NULL, lineage = NULL) {
   # Recalculate total counts
   totalcounts <- colSums(out[, -(1:3), drop = FALSE])
 
-  # Add & max(totalcounts) >= 200 for RHM+20  20210615
-  if(is.null(lineage) & max(totalcounts) >= 200) {
-    # Discard samples with < 200 total counts 20201001
-    ismall <- totalcounts < 200
+  # Only test mincount if at least some runs have more than it (added for RHM+20)  20210615
+  if(max(totalcounts) >= mincount) {
+    # Discard samples with < mincount total counts 20201001
+    ismall <- totalcounts < mincount
     if(any(ismall)) {
-      print(paste0("getRDP [", study, "]: discarding ", sum(ismall), " samples with < 200 total counts"))
+      print(paste0("getRDP [", study, "]: discarding ", sum(ismall), " samples with < ", mincount, " total counts"))
       out <- out[, c(TRUE, TRUE, TRUE, !ismall)]
     }
   }
@@ -376,11 +372,11 @@ getRDP <- function(study, cn = FALSE, mdat = NULL, lineage = NULL) {
 
 
 # Map RDP to RefSeq taxonomy 20200912
-getmap <- function(study, RDP = NULL, lineage = NULL) {
+getmap <- function(study, RDP = NULL, lineage = NULL, mincount = 200) {
   # Handle missing arguments
   if(is.null(RDP)) {
     mdat <- getmdat(study)
-    RDP <- getRDP(study, mdat = mdat, lineage = lineage)
+    RDP <- getRDP(study, mdat = mdat, lineage = lineage, mincount = mincount)
   }
   # Make group names by combining rank and name
   RDPgroups <- paste(RDP$rank, RDP$name, sep = "_")
@@ -470,11 +466,11 @@ getmap <- function(study, RDP = NULL, lineage = NULL) {
 }
 
 # Get chemical metrics for all samples in a study 20200927
-getmetrics <- function(study, cn = FALSE, mdat = NULL, RDP = NULL, map = NULL, lineage = NULL, metrics = NULL, groups = NULL) {
+getmetrics <- function(study, cn = FALSE, mdat = NULL, RDP = NULL, map = NULL, lineage = NULL, mincount = 200, metrics = NULL, groups = NULL) {
   # Handle missing arguments
   if(is.null(mdat)) mdat <- getmdat(study)
-  if(is.null(RDP)) RDP <- getRDP(study, cn = cn, mdat = mdat, lineage = lineage)
-  if(is.null(map)) map <- getmap(study, RDP = RDP, lineage = lineage)
+  if(is.null(RDP)) RDP <- getRDP(study, cn = cn, mdat = mdat, lineage = lineage, mincount = mincount)
+  if(is.null(map)) map <- getmap(study, RDP = RDP, lineage = lineage, mincount = mincount)
   # Keep metadata only for samples with sufficient counts 20201001
   mdat <- mdat[mdat$Run %in% colnames(RDP), ]
   # Exclude NA mappings

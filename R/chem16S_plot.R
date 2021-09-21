@@ -248,12 +248,12 @@ taxacomp <- function(groups = c("Bacteria", "Archaea"), xlim = NULL, ylim = NULL
 
 # Plot chemical metrics for all samples in a study 20200901
 plotmet <- function(study, cn = FALSE, identify = FALSE, title = TRUE, xlim = NULL, ylim = NULL,
-  plot.it = TRUE, points = TRUE, lines = FALSE, lineage = NULL, pch1 = 1, pch2 = 21, dropNA = TRUE,
-  return = "data", extracolumn = NULL) {
+  plot.it = TRUE, points = TRUE, lines = FALSE, lineage = NULL, mincount = 200, pch1 = 1, pch2 = 21, dropNA = TRUE,
+  return = "data", extracolumn = NULL, add = FALSE, plot.bg = TRUE) {
   # Get amino acid composition for samples
   mdat <- getmdat(study, dropNA = dropNA)
-  RDP <- getRDP(study, cn = cn, mdat = mdat, lineage = lineage)
-  metrics <- getmetrics(study, mdat = mdat, RDP = RDP, lineage = lineage)
+  RDP <- getRDP(study, cn = cn, mdat = mdat, lineage = lineage, mincount = mincount)
+  metrics <- getmetrics(study, mdat = mdat, RDP = RDP, lineage = lineage, mincount = mincount)
   # Keep metadata only for samples with >= 200 counts 20201006
   mdat <- mdat[mdat$Run %in% metrics$Run, ]
   pch <- mdat$pch
@@ -264,12 +264,15 @@ plotmet <- function(study, cn = FALSE, identify = FALSE, title = TRUE, xlim = NU
 
   if(plot.it) {
     # Get axis limits, excluding values of non-plotted points 20210820
-    if(is.null(xlim)) xlim <- range(ZC[!is.na(pch)])
-    if(is.null(ylim)) ylim <- range(nH2O[!is.na(pch)])
+    # Also exclude NA values (for Bison Pool site Q with lineage = "Archaea") 20210916
+    if(is.null(xlim)) xlim <- range(na.omit(ZC[!is.na(pch)]))
+    if(is.null(ylim)) ylim <- range(na.omit(nH2O[!is.na(pch)]))
     # Start plot
-    plot(xlim, ylim, xlab = canprot::cplab$ZC, ylab = canprot::cplab$nH2O, type = "n")
+    if(!add) plot(xlim, ylim, xlab = canprot::cplab$ZC, ylab = canprot::cplab$nH2O, type = "n")
     if(points) {
-      lmlines()
+      # Add background nH2O-ZC correlation (from basis species)
+      if(plot.bg) lmlines()
+      # Plot points for samples
       ifill <- pch > 20
       points(ZC[ifill], nH2O[ifill], pch = pch[ifill], col = 1, bg = col[ifill])
       points(ZC[!ifill], nH2O[!ifill], pch = pch[!ifill], col = col[!ifill])

@@ -20,8 +20,8 @@ Functions to plot chemical metrics (\ZC and \nH2O) for inferred microbial commun
     pch = NULL, hline = NULL, filterspecies = TRUE, lcol = NULL)
   plotmet(study, cn = FALSE, identify = FALSE, title = TRUE,
     xlim = NULL, ylim = NULL, plot.it = TRUE, points = TRUE, lines = FALSE,
-    lineage = NULL, pch1 = 1, pch2 = 21, dropNA = TRUE, return = "data",
-    extracolumn = NULL)
+    lineage = NULL, mincount = 200, pch1 = 1, pch2 = 21, dropNA = TRUE, return = "data",
+    extracolumn = NULL, add = FALSE, plot.bg = TRUE)
   addhull(x, y, basecol, outline = FALSE, ...)
   getgroup(study = "XDZ+17", param = "nH2O", rank = "domain",
     pch1 = 21, pch2 = 24, minpercent = 2, study2 = NA, scale100 = FALSE,
@@ -48,11 +48,14 @@ Functions to plot chemical metrics (\ZC and \nH2O) for inferred microbial commun
   \item{points}{logical, plot points?}
   \item{lines}{logical, plot lines?}
   \item{lineage}{character, restrict plot to this taxonomic lineage}
+  \item{mincount}{integer, minimum classification count for each sample}
   \item{pch1}{numeric, symbol for samples in group 1}
   \item{pch2}{numeric, symbol for samples in group 2}
   \item{dropNA}{logical, exclude samples with NA name in metadata?}
   \item{return}{character, indicates whether to return \samp{data} values or group \samp{means}}
   \item{extracolumn}{character, the name of one or more extra columns (from \code{\link{getmdat}}) to include in the output}
+  \item{add}{logical, add to existing plot?}
+  \item{plot.bg}{logical, plot lines for background correlation from basis species?}
   \item{x}{x values}
   \item{y}{y values}
   \item{basecol}{color used for hull lines}

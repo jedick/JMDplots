@@ -385,7 +385,7 @@ mjenergy_Dataset_S1 <- function(write.csv = FALSE) {
   # Calculate protein ZC (round to 5 decimal places for table)
   zc <- round(ZC(pf), 5)
   # Make data frame
-  out <- data.frame(Protein = rownames(pf), pf, lenth = pl, ZC = zc)
+  out <- data.frame(Protein = rownames(pf), pf, length = pl, ZC = zc)
   # Command to save CSV file
   if(write.csv) write.csv(out, "Dataset_S1.csv", row.names = FALSE, quote = FALSE) else out
 }

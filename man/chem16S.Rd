@@ -13,10 +13,10 @@ Proteomes are inferred by combining taxonomic classifications of 16S rRNA gene s
 
 \usage{
   getmdat(study, dropNA = TRUE)
-  getRDP(study, cn = FALSE, mdat = NULL, lineage = NULL)
-  getmap(study, RDP = NULL, lineage = NULL)
+  getRDP(study, cn = FALSE, mdat = NULL, lineage = NULL, mincount = 200)
+  getmap(study, RDP = NULL, lineage = NULL, mincount = 200)
   getmetrics(study, cn = FALSE, mdat = NULL, RDP = NULL, map = NULL,
-    lineage = NULL, metrics = NULL, groups = NULL)
+    lineage = NULL, mincount = 200, metrics = NULL, groups = NULL)
 }
 
 \arguments{
@@ -24,6 +24,7 @@ Proteomes are inferred by combining taxonomic classifications of 16S rRNA gene s
   \item{dropNA}{logical, exclude samples with NA name in metadata?}
   \item{cn}{logical, adjust counts for 16S rRNA gene copy number?}
   \item{lineage}{character, regular expression for filtering lineages}
+  \item{mincount}{integer, minimum classification count for each sample}
   \item{mdat}{data frame, output from \code{getmdat} (used for memoization by other functions)}
   \item{RDP}{data frame, output from \code{getRDP} (used for memoization by other functions)}
   \item{map}{data frame, output from \code{getmap} (used for memoization by other functions)}
@@ -43,6 +44,7 @@ The output has columns for \samp{lineage}, \samp{rank}, \samp{name}, and columns
 Only rows (lineages) with count > 0 for at least one sample are retained.
 Sequences with classification results at only the root or domain level (Root, Archaea, or Bacteria) are omitted because they provide poor taxonomic resolution.
 Sequences classified to the class Chloroplast or genera Chlorophyta or Bacillariophyta are also omitted because they have little correspondence with the NCBI taxonomy.
+Then, only columns (samples) with classification count > \code{mincount} are retained.
 All remaining sequences (those classified to genus or higher levels) can be used for mapping to the NCBI taxonomy.
 
 The location of the \code{chem16S} directory used in \code{getmdat} and \code{getRDP} can be changed by setting the option \code{chem16Sdir}.
