@@ -1,6 +1,11 @@
 # chem16S/pipeline.R
-# Merge and filter 16S SRA sequences, subsample, find chimeras, and run RDP Classifier
-# 20200909 jmd v1
+# Merge and filter 16S sequences from SRA, subsample, find chimeras, and run RDP Classifier
+
+# 20200909 Initial version by Jeffrey M. Dick
+# 20210922 Add settings for orp16S datasets
+#          Add --skip-technical --clip options to fastq-dump
+#          Don't use fastq_filter --stripleft for 454 data
+#          Change default RDP classifier confidence threshold to 0.5
 
 ## SYSTEM REQUIREMENTS
 # (version numbers for information only)
@@ -35,7 +40,7 @@
 ## STUDY SETTINGS
 
 # Change the following line to setup the pipeline for one study
-study <- "HCW+13"
+study <- "CHM+14"
 # Settings for all studies are stored here
 file <- tempfile()
 # Write spaces here (but don't save them) to make this easier to read
@@ -43,8 +48,11 @@ writeLines(con = file, text = gsub(" ", "", c(
   # For 454 experiments, set forwardonly to NA
   "study, forwardonly, trunclen",
 
+  ## For geo16S paper 20210502
+
   # Natural environment datasets
-  "HCW+13, NA, NA",      # GenBank JN427016-JN539989  10.1038/ismej.2012.79
+  # For HCW+13 (Guerrero Negro), don't use filter(); start with findchimeras()
+  #"HCW+13, NA, NA",      # GenBank JN427016-JN539989  10.1038/ismej.2012.79
   "BGPF13, NA, NA",      # BioProject PRJNA207095  10.3389/fmicb.2013.00330
   "HLA+16, NA, NA",      # PRJEB1245    10.3389/fmicb.2016.01883
   "JHM+16, FALSE, 230",  # PRJNA291280  10.1128/AEM.02699-15
@@ -53,7 +61,7 @@ writeLines(con = file, text = gsub(" ", "", c(
   "XDZ+17, TRUE, 250",   # PRJNA388250  10.1038/s41598-017-13608-5
   "SVH+19, NA, NA",      # PRJNA423140  10.1111/gbi.12316
 
-  # Unconventional oil and gas datasets
+  # Shale gas datasets
   "UKD+18.sediment, TRUE, 100",  # PRJNA394724  10.1038/s41598-018-23679-7
   "UKD+18.water, TRUE, 100",
   "MMA+20, FALSE, 250",  # PRJNA544240  10.1073/pnas.1911458117
@@ -61,16 +69,87 @@ writeLines(con = file, text = gsub(" ", "", c(
   "HRR+18, TRUE, 300",   # PRJNA438710  10.1016/j.scitotenv.2018.06.067
   "ZLF+19, FALSE, 290",  # PRJNA407226  10.1021/acsearthspacechem.9b00037
 
-  # Stratified water datasets
+  # Stratified water body datasets
   "GBL+15, FALSE, 250",  # PRJNA263621  10.1038/ismej.2015.44
   "BCA+21, FALSE, 450",  # PRJNA395513  10.1111/1462-2920.14909
   "MZG+20, FALSE, 450",  # PRJEB27579   10.1038/s41396-019-0515-8
-  "HXZ+20, FALSE, 440"   # PRJNA503500  10.1038/s41598-020-62411-2
+  "HXZ+20, FALSE, 440",  # PRJNA503500  10.1038/s41598-020-62411-2
+
+  ## For orp16S paper 20210922
+
+  "MLL+19, TRUE, 250",
+  "RSJ+21, FALSE, 290",
+  "RMB+17, FALSE, 250",
+  "NTB+21, TRUE, 150",
+  "SBP+20, FALSE, 250",
+  "MWY+21, FALSE, 250",
+  "SAR+13, NA, NA",
+  "CTS+17, FALSE, 400",
+  "HSF+19, FALSE, 440",
+  "SCM+18, TRUE, 250",
+  "HDZ+19, FALSE, 420",
+  "BOEM21, FALSE, 400",
+  "YHK+20, FALSE, 400",
+  "CNA+20, TRUE, 450",
+  "BMJ+19, FALSE, 300",
+  "SRM+19, FALSE, 250",
+  "HLZ+18, FALSE, 420",
+  "XLD+20, TRUE, 250",
+  "JHL+12, NA, NA",
+  "PSG+20, FALSE, 250",
+  "CZZ+19, NA, NA",
+  "KSR+21, FALSE, 440",
+  "ZCZ+21, FALSE, 450",
+  "LLZ+20, TRUE, 150",
+  "SKP+21, FALSE, 200",
+  "ZZL+21, FALSE, 450",
+  "PBU+20, FALSE, 400",
+  "GWS+19, FALSE, 300",
+  "KLY+20, TRUE, 250",
+  "SRM+21, FALSE, 250",
+  "MLL+18, TRUE, 250",
+  "JDP+20, TRUE, 275",
+  "BWD+19, FALSE, 400",
+  "ABT+17, FALSE, 280",
+  "LXH+20, TRUE, 450",
+  "LMG+20, TRUE, 280",
+  "WHL+21, FALSE, 400",
+  "LLL+21, FALSE, 450",
+  "SDH+19, FALSE, 300",
+  "GWSS21, FALSE, 300",
+  "PCL+18, TRUE, 250",
+  "ZML+17, TRUE, 400",
+  "RBW+14, FALSE, 250", # Winogradsky column
+  "DTJ+20, FALSE, 420",
+  "WFB+21, FALSE, 440",
+  "SBW+17, TRUE, 280",
+  "KLM+16, NA, NA",
+  "LMBA21, TRUE, 280",
+  "ZDA+20, TRUE, 450",
+  "ZZZ+18, TRUE, 240",
+  "BSPD17, FALSE, 400",
+  "CWC+20, FALSE, 440",
+  "BMOB18, TRUE, 350",
+  "JVW+20, FALSE, 250",
+  "LJC+20, FALSE, 420",
+  "GFE+16, NA, NA",
+  "ECS+18, TRUE, 400",
+  "FAV+21, FALSE, 400",
+  "VMB+19, TRUE, 380",
+  "DLS21, TRUE, 300",
+  "ZZLL21, FALSE, 450",
+  "GWS+20, FALSE, 300",
+  "CLS+19, TRUE, 150",
+  "SMS+12, NA, NA",
+  "BYB+17, NA, NA",
+  "MCS+21, FALSE, 400"
+
 )))
+
 # This reads and applies the settings
 settings <- read.csv(file, as.is = TRUE)
 istudy <- match(study, settings$study)
-# Different filtering for 454 studies
+# Flag for 454 studies
 is454 <- is.na(settings$forwardonly[istudy])
 # Use forward reads only (for low-quality or missing reverse reads)
 forwardonly <- settings$forwardonly[istudy]
@@ -102,35 +181,34 @@ filter <- function(SRR) {
   # Change to working directory
   olddir <- setwd(workdir)
   on.exit(setwd(olddir))
-  # For SBE+17, original FASTQ files are obtained from SRA cloud 20210501
-  # For HCW+13, sequences are obtained from GenBank 20210502
-  if(!study %in% c("SBE+17", "HCW+13")) {
-    # Generate input FASTQ files
-    cmd <- paste("fastq-dump --split-files", SRR)
-    if(study == "CCN+16") cmd <- paste("fastq-dump --split-files -X 500000", SRR)
+  # The output file from this function is a FASTA file with .fa suffix
+  outfile <- paste0(SRR, ".fa")
+
+  # For BYB+17, FASTQ files are downloaded from SRA cloud 20210917
+  fqdump <- FALSE
+
+  if(!study %in% c("BYB+17")) {
+    # Generate input FASTQ files with fastq-dump
+    fqdump <- TRUE
+    cmd <- paste("fastq-dump --split-files --skip-technical --clip", SRR)
+    if(study == "CCN+16") cmd <- paste("fastq-dump --split-files --skip-technical --clip -X 500000", SRR)
     print(cmd)
     system(cmd)
   }
-  outfile <- paste0(SRR, ".fa")
-  if(study == "HCW+13") {
-    # We don't have FASTQ files for this study, so just copy the FASTA file 20210502
-    infile <- paste0(SRR, ".fasta")
-    file.copy(infile, outfile)
-  } else if(study == "SBE+17") {
-    # This is Ion Torrent PGM so we need to adjust qmax 20210501
-    # (Fatal error: FASTQ quality value (45) above qmax (41))
-    infile <- paste0(SRR, ".fastq")
-    cmd <- paste("vsearch -fastq_filter", infile, "-fastq_qmax 45 -fastq_stripleft 18 -fastq_trunclen 200 -fastq_maxee 1.0 -fastaout", outfile)
-    print(cmd)
-    system(cmd)
-  } else if(is454) {
-    # For some 454 studies, fastq-dump puts barcodes into _2.fastq, primer and experimental sequence into _3.fastq
-    # Use -stripleft to remove primer sequence; minimum and maximum length as described by KGP+12
-    # Use _2.fastq or _1.fastq if needed 20200921
+
+  if(is454) {
+    # For 454 studies, fastq-dump --skip-technical puts biological sequences into file with highest-numbered suffix 
+    # Use _3.fastq, _2.fastq or _1.fastq if they are present 20200921
     infile <- paste0(SRR, "_3.fastq")
     if(!file.exists(infile)) infile <- paste0(SRR, "_2.fastq")
     if(!file.exists(infile)) infile <- paste0(SRR, "_1.fastq")
-    cmd <- paste("vsearch -fastq_filter", infile, "-fastq_stripleft 18 -fastq_minlen 200 -fastq_maxlen 600 -fastq_truncqual 15 -fastaout", outfile)
+    # These are needed for files not generated by fastq-dump (BYB+17)
+    if(!file.exists(infile)) infile <- paste0(SRR, ".fastq")
+    truncqual <- 15
+    fastq_minlen <- 200
+    if(study %in% c("SAR+13", "GFE+16")) truncqual <- 11
+    if(study %in% c("GFE+16")) fastq_minlen <- 100
+    cmd <- paste("vsearch -fastq_filter", infile, "-fastq_minlen", fastq_minlen, "-fastq_maxlen 600 -fastq_truncqual", truncqual, "-fastaout", outfile)
     print(cmd)
     system(cmd)
   } else if(forwardonly) {
@@ -173,19 +251,26 @@ filter <- function(SRR) {
   if(!is454) {
     # Remove short and high-error reads
     # Use fastq_maxee_rate instead of fastq_maxee 20200920
-    cmd <- paste("vsearch -fastq_filter merged.fastq -fastq_trunclen", trunclen, "-fastq_maxee_rate 0.005 -fastaout", outfile)
-    # JHM+16: Very high expected error rate 20200923
-    if(study == "JHM+16") cmd <- paste("vsearch -fastq_filter merged.fastq -fastq_trunclen", trunclen, "-fastaout", outfile)
-    # WYF+20: Ion Torrent needs -fastq_qmax 44 20200928
-    if(study == "WYF+20") cmd <- paste("vsearch -fastq_filter merged.fastq -fastq_trunclen", trunclen, "-fastq_maxee_rate 0.005 -fastq_qmax 44 -fastaout", outfile)
-    # FPP+18: Ion Torrent needs -fastq_qmax 45 20201104
-    if(study == "FPP+18") cmd <- paste("vsearch -fastq_filter merged.fastq -fastq_trunclen", trunclen, "-fastq_maxee_rate 0.005 -fastq_qmax 45 -fastaout", outfile)
+    # Use default -fastq_qmax except for some studies 20210922
+    qmax <- 41
+    # For Ion Torrent 20200928
+    if(study == "PCL+18") qmax <- 45
+    # For Illumina MiSeq (strange quality encoding?) 20210909
+    if(study == "ECS+18") qmax <- 93
+    cmd <- paste("vsearch -fastq_filter merged.fastq -fastq_trunclen", trunclen, "-fastq_qmax", qmax, "-fastq_maxee_rate 0.005 -fastaout", outfile)
     print(cmd)
     system(cmd)
   }
+  if(study %in% c("BYB+17")) {
+    # Append run ID to header so we can extract the reads in the subsample() and findchimeras() steps 20210913
+    lines <- readLines(outfile)
+    ihead <- grep("^>", lines)
+    lines[ihead] <- paste0(lines[ihead], ";", SRR)
+    writeLines(lines, outfile)
+  }
 
   # Clean up
-  if(!study %in% c("SBE+17", "HCW+13")) file.remove(Sys.glob("*.fastq"))
+  if(!study %in% c("BYB+17")) file.remove(Sys.glob("*.fastq"))
   return()
 }
 
@@ -295,7 +380,7 @@ findchimeras <- function() {
 }
 
 # Run RDP Classifier on one or multiple files 20200910
-classify <- function(SRR, conf = 0.8) {
+classify <- function(SRR, conf = 0.5) {
   # Make sure RDP output directory exists 20200915
   if(!dir.exists(RDPdir)) stop(paste("directory", RDPdir, "does not exist"))
   # Force evaluation of SRR before changing the directory
@@ -315,9 +400,7 @@ classify <- function(SRR, conf = 0.8) {
 
     # Copy FASTA file to here without .fasta suffix (so it doesn't get into sample name)
     file.copy(FASTAfile, thisSRR, overwrite = TRUE)
-    # Run classifier
-#    print(cmd <- paste0("java -jar ", RDPjar, " classify -o ", thisSRR, ".tab -h ", thisSRR, ".txt ", thisSRR))
-    # Add -c (confidence cutoff) 20201007
+    # Run classifier with -c (confidence score threshold) 20201007
     print(cmd <- paste0("java -jar ", RDPjar, " classify -c ", conf, " -o ", thisSRR, ".tab -h ", thisSRR, ".txt ", thisSRR))
     system(cmd)
 

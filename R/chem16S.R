@@ -69,8 +69,6 @@ getmdat <- function(study, dropNA = TRUE) {
   if(study == "HLA+16") { # Baltic Sea
     #pch <- sapply(mdat$type, switch, Oligohaline = 24, Mesohaline = 20, Marine = 21)
     #col <- sapply(mdat$type, switch, Oligohaline = 3, Mesohaline = 1, Marine = 4)
-    # Use near-surface samples 20210601
-    mdat <- mdat[mdat$depth <= 20, ]
     type <- rep("moderate", nrow(mdat))
     type[mdat$salinity < 6] <- "low"
     type[mdat$salinity > 20] <- "high"
