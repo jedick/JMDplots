@@ -5,7 +5,6 @@
 # 20210922 Add settings for orp16S datasets
 #          Add --skip-technical --clip options to fastq-dump
 #          Don't use fastq_filter --stripleft for 454 data
-#          Change default RDP classifier confidence threshold to 0.5
 
 ## SYSTEM REQUIREMENTS
 # (version numbers for information only)
@@ -40,7 +39,7 @@
 ## STUDY SETTINGS
 
 # Change the following line to setup the pipeline for one study
-study <- "ZZZ+18"
+study <- "HLA+16"
 # Settings for all studies are stored here
 file <- tempfile()
 # Write spaces here (but don't save them) to make this easier to read
@@ -142,7 +141,8 @@ writeLines(con = file, text = gsub(" ", "", c(
   "CLS+19, TRUE, 150",
   "SMS+12, NA, NA",
   "BYB+17, NA, NA",
-  "MCS+21, FALSE, 400"
+  "MCS+21, FALSE, 400",
+  "RKSK21, FALSE, 295"
 
 )))
 
@@ -380,7 +380,7 @@ findchimeras <- function() {
 }
 
 # Run RDP Classifier on one or multiple files 20200910
-classify <- function(SRR, conf = 0.5) {
+classify <- function(SRR, conf = 0.8) {
   # Make sure RDP output directory exists 20200915
   if(!dir.exists(RDPdir)) stop(paste("directory", RDPdir, "does not exist"))
   # Force evaluation of SRR before changing the directory
