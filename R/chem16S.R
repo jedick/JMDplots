@@ -55,8 +55,8 @@ getmdat <- function(study, dropNA = TRUE) {
     col <- sapply(type, switch, lowT = 4, highT = 2, "fauna surface" = "#757500C0", "rock/chimney" = 1, NA)
   }
   if(study == "SVH+19") { # Black Sea
-    pch <- sapply(mdat$type, switch, oxic = 24, suboxic = 20, euxinic = 25, NA)
-    col <- sapply(mdat$type, switch, oxic = 4, suboxic = 1, euxinic = 2, NA)
+    pch <- sapply(mdat$Type, switch, Oxic = 24, Suboxic = 20, Euxinic = 25, NA)
+    col <- sapply(mdat$Type, switch, Oxic = 4, Suboxic = 1, Euxinic = 2, NA)
   }
   if(study == "XDZ+17") { # Qarhan Salt Lake
     pch <- sapply(mdat$type, switch, normal = 24, saline = 21)
