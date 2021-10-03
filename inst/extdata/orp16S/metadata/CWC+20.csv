@@ -1,0 +1,85 @@
+name,Run,BioSample,sample,Layer,Management,Treatment,Lindane,Day,"Eh (mV)",pH
+"Paddy Soil Water Management",SRR10091965,SAMN12721166,PP-C-1-0,Topsoil,,NA,NA,0,415,4.43
+"Paddy Soil Water Management",SRR10091954,SAMN12721167,PP-C-2-0,Topsoil,,NA,NA,0,415,4.43
+"Paddy Soil Water Management",SRR10091943,SAMN12721168,PP-C-3-0,Topsoil,,NA,NA,0,415,4.43
+"Paddy Soil Water Management",SRR10091899,SAMN12721172,PPBA-C-1-0,Topsoil,,Bioaugmentation,NA,0,396,4.92
+"Paddy Soil Water Management",SRR10091982,SAMN12721173,PPBA-C-2-0,Topsoil,,Bioaugmentation,NA,0,396,4.92
+"Paddy Soil Water Management",SRR10091879,SAMN12721174,PPBA-C-3-0,Topsoil,,Bioaugmentation,NA,0,396,4.92
+"Paddy Soil Water Management",SRR10091857,SAMN12721176,PPFL-NA-S-7,Topsoil,Flooding,"Natural attenuation",Spiked,7,-282,5.13
+"Paddy Soil Water Management",SRR10091853,SAMN12721178,PPFL-BS-S-7,Topsoil,Flooding,Biostimulation,Spiked,7,-251,5.26
+"Paddy Soil Water Management",SRR10091979,SAMN12721180,PPFL-BA-S-7,Topsoil,Flooding,Bioaugmentation,Spiked,7,-280,5.24
+"Paddy Soil Water Management",SRR10091970,SAMN12721188,PPFL-NA-S-14,Topsoil,Flooding,"Natural attenuation",Spiked,14,-362,5.22
+"Paddy Soil Water Management",SRR10091968,SAMN12721190,PPFL-BS-S-14,Topsoil,Flooding,Biostimulation,Spiked,14,-354,5.38
+"Paddy Soil Water Management",SRR10091966,SAMN12721192,PPFL-BA-S-14,Topsoil,Flooding,Bioaugmentation,Spiked,14,-356,5.27
+"Paddy Soil Water Management",SRR10091951,SAMN12721205,PPFL-NA-U-1-21,Topsoil,Flooding,"Natural attenuation",Unspiked,21,-360,5.37
+"Paddy Soil Water Management",SRR10091948,SAMN12721208,PPFL-NA-S-1-21,Topsoil,Flooding,"Natural attenuation",Spiked,21,-349,5.22
+"Paddy Soil Water Management",SRR10091938,SAMN12721217,PPFL-BS-U-1-21,Topsoil,Flooding,Biostimulation,Unspiked,21,-355,6.28
+"Paddy Soil Water Management",SRR10091935,SAMN12721220,PPFL-BS-S-1-21,Topsoil,Flooding,Biostimulation,Spiked,21,-346,5.31
+"Paddy Soil Water Management",SRR10091925,SAMN12721229,PPFL-BA-U-1-21,Topsoil,Flooding,Bioaugmentation,Unspiked,21,-350,5.34
+"Paddy Soil Water Management",SRR10091922,SAMN12721232,PPFL-BA-S-1-21,Topsoil,Flooding,Bioaugmentation,Spiked,21,-346,5.34
+"Paddy Soil Water Management",SRR10091880,SAMN12721272,PPFL-NA-S-28,Topsoil,Flooding,"Natural attenuation",Spiked,28,-260,5.27
+"Paddy Soil Water Management",SRR10091877,SAMN12721274,PPFL-BS-S-28,Topsoil,Flooding,Biostimulation,Spiked,28,-273,5.51
+"Paddy Soil Water Management",SRR10091875,SAMN12721276,PPFL-BA-S-28,Topsoil,Flooding,Bioaugmentation,Spiked,28,-281,5.34
+"Paddy Soil Water Management",SRR10091866,SAMN12721284,PPFL-NA-S-42,Topsoil,Flooding,"Natural attenuation",Spiked,42,-287,5.22
+"Paddy Soil Water Management",SRR10091864,SAMN12721286,PPFL-BS-S-42,Topsoil,Flooding,Biostimulation,Spiked,42,-306,6.28
+"Paddy Soil Water Management",SRR10091862,SAMN12721288,PPFL-BA-S-42,Topsoil,Flooding,Bioaugmentation,Spiked,42,-297,5.34
+"Paddy Soil Water Management",SRR10091977,SAMN12721182,PPMD-NA-S-7,Topsoil,Draining,"Natural attenuation",Spiked,7,321,4.46
+"Paddy Soil Water Management",SRR10091974,SAMN12721184,PPMD-BS-S-7,Topsoil,Draining,Biostimulation,Spiked,7,218,6.25
+"Paddy Soil Water Management",SRR10091972,SAMN12721186,PPMD-BA-S-7,Topsoil,Draining,Bioaugmentation,Spiked,7,217,5.04
+"Paddy Soil Water Management",SRR10091963,SAMN12721194,PPMD-NA-S-14,Topsoil,Draining,"Natural attenuation",Spiked,14,372,4.56
+"Paddy Soil Water Management",SRR10091961,SAMN12721196,PPMD-BS-S-14,Topsoil,Draining,Biostimulation,Spiked,14,268,6.45
+"Paddy Soil Water Management",SRR10091959,SAMN12721198,PPMD-BA-S-14,Topsoil,Draining,Bioaugmentation,Spiked,14,271,5.07
+"Paddy Soil Water Management",SRR10091912,SAMN12721241,PPMD-NA-U-1-21,Topsoil,Draining,"Natural attenuation",Unspiked,21,300,5.23
+"Paddy Soil Water Management",SRR10091908,SAMN12721244,PPMD-NA-S-1-21,Topsoil,Draining,"Natural attenuation",Spiked,21,385,4.62
+"Paddy Soil Water Management",SRR10091898,SAMN12721253,PPMD-BS-U-1-21,Topsoil,Draining,Biostimulation,Unspiked,21,260,6.3
+"Paddy Soil Water Management",SRR10091895,SAMN12721256,PPMD-BS-S-1-21,Topsoil,Draining,Biostimulation,Spiked,21,303,6.12
+"Paddy Soil Water Management",SRR10091887,SAMN12721265,PPMD-BA-U-1-21,Topsoil,Draining,Bioaugmentation,Unspiked,21,239,5.21
+"Paddy Soil Water Management",SRR10091884,SAMN12721268,PPMD-BA-S-1-21,Topsoil,Draining,Bioaugmentation,Spiked,21,280,5.2
+"Paddy Soil Water Management",SRR10091873,SAMN12721278,PPMD-NA-S-28,Topsoil,Draining,"Natural attenuation",Spiked,28,375,4.66
+"Paddy Soil Water Management",SRR10091871,SAMN12721280,PPMD-BS-S-28,Topsoil,Draining,Biostimulation,Spiked,28,286,6.05
+"Paddy Soil Water Management",SRR10091869,SAMN12721282,PPMD-BA-S-28,Topsoil,Draining,Bioaugmentation,Spiked,28,262,5.04
+"Paddy Soil Water Management",SRR10091860,SAMN12721290,PPMD-NA-S-42,Topsoil,Draining,"Natural attenuation",Spiked,42,358,4.73
+"Paddy Soil Water Management",SRR10091858,SAMN12721292,PPMD-BS-S-42,Topsoil,Draining,Biostimulation,Spiked,42,310,5.75
+"Paddy Soil Water Management",SRR10091855,SAMN12721294,PPMD-BA-S-42,Topsoil,Draining,Bioaugmentation,Spiked,42,291,5.1
+"Paddy Soil Water Management",SRR10091984,SAMN12721163,PL-C-1-0,Subsoil,,NA,NA,0,450,5.13
+"Paddy Soil Water Management",SRR10091983,SAMN12721164,PL-C-2-0,Subsoil,,NA,NA,0,450,5.13
+"Paddy Soil Water Management",SRR10091976,SAMN12721165,PL-C-3-0,Subsoil,,NA,NA,0,450,5.13
+"Paddy Soil Water Management",SRR10091932,SAMN12721169,PLBA-C-1-0,Subsoil,,Bioaugmentation,NA,0,461,5.26
+"Paddy Soil Water Management",SRR10091921,SAMN12721170,PLBA-C-2-0,Subsoil,,Bioaugmentation,NA,0,461,5.26
+"Paddy Soil Water Management",SRR10091910,SAMN12721171,PLBA-C-3-0,Subsoil,,Bioaugmentation,NA,0,461,5.26
+"Paddy Soil Water Management",SRR10091868,SAMN12721175,PLFL-NA-S-7,Subsoil,Flooding,"Natural attenuation",Spiked,7,-214,5.52
+"Paddy Soil Water Management",SRR10091854,SAMN12721177,PLFL-BS-S-7,Subsoil,Flooding,Biostimulation,Spiked,7,-204,5.51
+"Paddy Soil Water Management",SRR10091980,SAMN12721179,PLFL-BA-S-7,Subsoil,Flooding,Bioaugmentation,Spiked,7,-223,5.47
+"Paddy Soil Water Management",SRR10091971,SAMN12721187,PLFL-NA-S-14,Subsoil,Flooding,"Natural attenuation",Spiked,14,-231,5.5
+"Paddy Soil Water Management",SRR10091969,SAMN12721189,PLFL-BS-S-14,Subsoil,Flooding,Biostimulation,Spiked,14,-250,5.55
+"Paddy Soil Water Management",SRR10091967,SAMN12721191,PLFL-BA-S-14,Subsoil,Flooding,Bioaugmentation,Spiked,14,-309,5.57
+"Paddy Soil Water Management",SRR10091958,SAMN12721199,PLFL-NA-U-1-21,Subsoil,Flooding,"Natural attenuation",Unspiked,21,-254,5.53
+"Paddy Soil Water Management",SRR10091955,SAMN12721202,PLFL-NA-S-1-21,Subsoil,Flooding,"Natural attenuation",Spiked,21,-234,5.52
+"Paddy Soil Water Management",SRR10091945,SAMN12721211,PLFL-BS-U-1-21,Subsoil,Flooding,Biostimulation,Unspiked,21,-322,6.19
+"Paddy Soil Water Management",SRR10091941,SAMN12721214,PLFL-BS-S-1-21,Subsoil,Flooding,Biostimulation,Spiked,21,-225,5.55
+"Paddy Soil Water Management",SRR10091931,SAMN12721223,PLFL-BA-U-1-21,Subsoil,Flooding,Bioaugmentation,Unspiked,21,-351,5.58
+"Paddy Soil Water Management",SRR10091928,SAMN12721226,PLFL-BA-S-1-21,Subsoil,Flooding,Bioaugmentation,Spiked,21,-299,5.54
+"Paddy Soil Water Management",SRR10091881,SAMN12721271,PLFL-NA-S-28,Subsoil,Flooding,"Natural attenuation",Spiked,28,-204,5.59
+"Paddy Soil Water Management",SRR10091878,SAMN12721273,PLFL-BS-S-28,Subsoil,Flooding,Biostimulation,Spiked,28,-225,5.65
+"Paddy Soil Water Management",SRR10091876,SAMN12721275,PLFL-BA-S-28,Subsoil,Flooding,Bioaugmentation,Spiked,28,-253,5.64
+"Paddy Soil Water Management",SRR10091867,SAMN12721283,PLFL-NA-S-42,Subsoil,Flooding,"Natural attenuation",Spiked,42,-217,5.59
+"Paddy Soil Water Management",SRR10091865,SAMN12721285,PLFL-BS-S-42,Subsoil,Flooding,Biostimulation,Spiked,42,-261,5.98
+"Paddy Soil Water Management",SRR10091863,SAMN12721287,PLFL-BA-S-42,Subsoil,Flooding,Bioaugmentation,Spiked,42,-272,5.7
+"Paddy Soil Water Management",SRR10091978,SAMN12721181,PLMD-NA-S-7,Subsoil,Draining,"Natural attenuation",Spiked,7,399,5.23
+"Paddy Soil Water Management",SRR10091975,SAMN12721183,PLMD-BS-S-7,Subsoil,Draining,Biostimulation,Spiked,7,329,5.6
+"Paddy Soil Water Management",SRR10091973,SAMN12721185,PLMD-BA-S-7,Subsoil,Draining,Bioaugmentation,Spiked,7,360,5.17
+"Paddy Soil Water Management",SRR10091964,SAMN12721193,PLMD-NA-S-14,Subsoil,Draining,"Natural attenuation",Spiked,14,400,5.16
+"Paddy Soil Water Management",SRR10091962,SAMN12721195,PLMD-BS-S-14,Subsoil,Draining,Biostimulation,Spiked,14,336,6.55
+"Paddy Soil Water Management",SRR10091960,SAMN12721197,PLMD-BA-S-14,Subsoil,Draining,Bioaugmentation,Spiked,14,370,5.2
+"Paddy Soil Water Management",SRR10091918,SAMN12721235,PLMD-NA-U-1-21,Subsoil,Draining,"Natural attenuation",Unspiked,21,390,5.23
+"Paddy Soil Water Management",SRR10091915,SAMN12721238,PLMD-NA-S-1-21,Subsoil,Draining,"Natural attenuation",Spiked,21,396,5.22
+"Paddy Soil Water Management",SRR10091905,SAMN12721247,PLMD-BS-U-1-21,Subsoil,Draining,Biostimulation,Unspiked,21,333,6.69
+"Paddy Soil Water Management",SRR10091902,SAMN12721250,PLMD-BS-S-1-21,Subsoil,Draining,Biostimulation,Spiked,21,340,6.69
+"Paddy Soil Water Management",SRR10091892,SAMN12721259,PLMD-BA-U-1-21,Subsoil,Draining,Bioaugmentation,Unspiked,21,362,5.21
+"Paddy Soil Water Management",SRR10091888,SAMN12721262,PLMD-BA-S-1-21,Subsoil,Draining,Bioaugmentation,Spiked,21,356,5.24
+"Paddy Soil Water Management",SRR10091874,SAMN12721277,PLMD-NA-S-28,Subsoil,Draining,"Natural attenuation",Spiked,28,389,5.22
+"Paddy Soil Water Management",SRR10091872,SAMN12721279,PLMD-BS-S-28,Subsoil,Draining,Biostimulation,Spiked,28,334,6.75
+"Paddy Soil Water Management",SRR10091870,SAMN12721281,PLMD-BA-S-28,Subsoil,Draining,Bioaugmentation,Spiked,28,364,5.28
+"Paddy Soil Water Management",SRR10091861,SAMN12721289,PLMD-NA-S-42,Subsoil,Draining,"Natural attenuation",Spiked,42,399,5.16
+"Paddy Soil Water Management",SRR10091859,SAMN12721291,PLMD-BS-S-42,Subsoil,Draining,Biostimulation,Spiked,42,332,6.68
+"Paddy Soil Water Management",SRR10091856,SAMN12721293,PLMD-BA-S-42,Subsoil,Draining,Bioaugmentation,Spiked,42,362,5.27

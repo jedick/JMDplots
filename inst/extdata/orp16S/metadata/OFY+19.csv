@@ -1,0 +1,101 @@
+name,Run,BioSample,"Sample ID",Area,Type,Location,"Temperature (°C)",pH,"ORP (mV)"
+"Japan Hydrothermal Sediment",1405_UN_A1_D,NA,1405_UN_A1_D,"Kyushu Island","Hot Spring",Unagi-onsen,65.2,2.59,-130
+"Japan Hydrothermal Sediment",1405_UN_A1_M,NA,1405_UN_A1_M,"Kyushu Island","Hot Spring",Unagi-onsen,65.6,2.65,-127
+"Japan Hydrothermal Sediment",1405_UN_A1_S,NA,1405_UN_A1_S,"Kyushu Island","Hot Spring",Unagi-onsen,65.2,2.75,-102
+"Japan Hydrothermal Sediment",1405_UN_A2_D,NA,1405_UN_A2_D,"Kyushu Island","Hot Spring",Unagi-onsen,65.1,2.88,-23
+"Japan Hydrothermal Sediment",1405_UN_A2_M,NA,1405_UN_A2_M,"Kyushu Island","Hot Spring",Unagi-onsen,52.3,2.91,-18
+"Japan Hydrothermal Sediment",1405_UN_A2_S,NA,1405_UN_A2_S,"Kyushu Island","Hot Spring",Unagi-onsen,41.4,3.05,223
+"Japan Hydrothermal Sediment",1405_UN_B1,NA,1405_UN_B1,"Kyushu Island","Hot Spring",Unagi-onsen,94,3.66,-140
+"Japan Hydrothermal Sediment",1405_UN_B2,NA,1405_UN_B2,"Kyushu Island","Hot Spring",Unagi-onsen,99,2.2,-88
+"Japan Hydrothermal Sediment",1405_UN_B3,NA,1405_UN_B3,"Kyushu Island","Hot Spring",Unagi-onsen,67,3.56,426
+"Japan Hydrothermal Sediment",1405_UN_B4,NA,1405_UN_B4,"Kyushu Island","Hot Spring",Unagi-onsen,63.7,2.94,-87
+"Japan Hydrothermal Sediment",1405_UN_B7,NA,1405_UN_B7,"Kyushu Island","Hot Spring",Unagi-onsen,61.8,4.89,-218
+"Japan Hydrothermal Sediment",1405_UN_B8,NA,1405_UN_B8,"Kyushu Island","Hot Spring",Unagi-onsen,97.1,3.65,-102
+"Japan Hydrothermal Sediment",1405_UN_R2,NA,1405_UN_R2,"Kyushu Island","Hot Spring",Unagi-onsen,46.1,3.47,-130
+"Japan Hydrothermal Sediment",1505_UN_A1_S,NA,1505_UN_A1_S,"Kyushu Island","Hot Spring",Unagi-onsen,51.2,5.2,-54
+"Japan Hydrothermal Sediment",1505_UN_B1,NA,1505_UN_B1,"Kyushu Island","Hot Spring",Unagi-onsen,84.8,5.3,-148
+"Japan Hydrothermal Sediment",1505_UN_B2,NA,1505_UN_B2,"Kyushu Island","Hot Spring",Unagi-onsen,84.9,5.65,-133
+"Japan Hydrothermal Sediment",1505_UN_B3,NA,1505_UN_B3,"Kyushu Island","Hot Spring",Unagi-onsen,46.4,4.81,-90
+"Japan Hydrothermal Sediment",1505_UN_B4,NA,1505_UN_B4,"Kyushu Island","Hot Spring",Unagi-onsen,66,4.91,-121
+"Japan Hydrothermal Sediment",1505_UN_B6,NA,1505_UN_B6,"Kyushu Island","Hot Spring",Unagi-onsen,39.4,5.54,-33
+"Japan Hydrothermal Sediment",1505_UN_B7,NA,1505_UN_B7,"Kyushu Island","Hot Spring",Unagi-onsen,48.4,4.85,206
+"Japan Hydrothermal Sediment",1505_UN_B8,NA,1505_UN_B8,"Kyushu Island","Hot Spring",Unagi-onsen,80.9,5.07,-123
+"Japan Hydrothermal Sediment",1505_UN_C1,NA,1505_UN_C1,"Kyushu Island","Hot Spring",Unagi-onsen,80,4.85,140
+"Japan Hydrothermal Sediment",1505_UN_C2,NA,1505_UN_C2,"Kyushu Island","Hot Spring",Unagi-onsen,93.1,4.63,-118
+"Japan Hydrothermal Sediment",1505_UN_C3,NA,1505_UN_C3,"Kyushu Island","Hot Spring",Unagi-onsen,58.7,4.57,-125
+"Japan Hydrothermal Sediment",1505_UN_C4,NA,1505_UN_C4,"Kyushu Island","Hot Spring",Unagi-onsen,95.8,4.37,-174
+"Japan Hydrothermal Sediment",1505_UN_C5,NA,1505_UN_C5,"Kyushu Island","Hot Spring",Unagi-onsen,54.6,4.54,-62
+"Japan Hydrothermal Sediment",1505_UN_R1,NA,1505_UN_R1,"Kyushu Island","Hot Spring",Unagi-onsen,33.8,5.83,277
+"Japan Hydrothermal Sediment",1505_UN_R2,NA,1505_UN_R2,"Kyushu Island","Hot Spring",Unagi-onsen,48.4,5.83,108
+"Japan Hydrothermal Sediment",1511_UN_A1_C,NA,1511_UN_A1_C,"Kyushu Island","Hot Spring",Unagi-onsen,83.9,5.08,-130
+"Japan Hydrothermal Sediment",1511_UN_A1_D,NA,1511_UN_A1_D,"Kyushu Island","Hot Spring",Unagi-onsen,63.5,5.44,18
+"Japan Hydrothermal Sediment",1511_UN_A1_M,NA,1511_UN_A1_M,"Kyushu Island","Hot Spring",Unagi-onsen,53,5.53,55
+"Japan Hydrothermal Sediment",1511_UN_A1_S,NA,1511_UN_A1_S,"Kyushu Island","Hot Spring",Unagi-onsen,48,5.56,145
+"Japan Hydrothermal Sediment",1511_UN_A2_C,NA,1511_UN_A2_C,"Kyushu Island","Hot Spring",Unagi-onsen,89.1,3.59,-89
+"Japan Hydrothermal Sediment",1511_UN_A2_D,NA,1511_UN_A2_D,"Kyushu Island","Hot Spring",Unagi-onsen,70.9,4.68,-68
+"Japan Hydrothermal Sediment",1511_UN_A2_M,NA,1511_UN_A2_M,"Kyushu Island","Hot Spring",Unagi-onsen,60.6,4.77,-41
+"Japan Hydrothermal Sediment",1511_UN_A2_S,NA,1511_UN_A2_S,"Kyushu Island","Hot Spring",Unagi-onsen,52.9,5.39,10
+"Japan Hydrothermal Sediment",1511_UN_B1,NA,1511_UN_B1,"Kyushu Island","Hot Spring",Unagi-onsen,81.3,4.7,135
+"Japan Hydrothermal Sediment",1511_UN_B2,NA,1511_UN_B2,"Kyushu Island","Hot Spring",Unagi-onsen,96.2,4.33,449
+"Japan Hydrothermal Sediment",1511_UN_B3,NA,1511_UN_B3,"Kyushu Island","Hot Spring",Unagi-onsen,75.9,4.24,309
+"Japan Hydrothermal Sediment",1511_UN_B4_C,NA,1511_UN_B4_C,"Kyushu Island","Hot Spring",Unagi-onsen,94.9,3.65,-50
+"Japan Hydrothermal Sediment",1511_UN_B4_S,NA,1511_UN_B4_S,"Kyushu Island","Hot Spring",Unagi-onsen,60.6,4.14,151
+"Japan Hydrothermal Sediment",1511_UN_C1,NA,1511_UN_C1,"Kyushu Island","Hot Spring",Unagi-onsen,91.3,3.8,-108
+"Japan Hydrothermal Sediment",1511_UN_D1,NA,1511_UN_D1,"Kyushu Island","Hot Spring",Unagi-onsen,41.2,3.59,413
+"Japan Hydrothermal Sediment",1511_UN_D3,NA,1511_UN_D3,"Kyushu Island","Hot Spring",Unagi-onsen,66.5,4.64,-121
+"Japan Hydrothermal Sediment",1511_UN_D4_C,NA,1511_UN_D4_C,"Kyushu Island","Hot Spring",Unagi-onsen,94.3,3.31,-96
+"Japan Hydrothermal Sediment",1511_UN_D4_S,NA,1511_UN_D4_S,"Kyushu Island","Hot Spring",Unagi-onsen,67.6,4.78,276
+"Japan Hydrothermal Sediment",1511_UN_R3,NA,1511_UN_R3,"Kyushu Island","Hot Spring",Unagi-onsen,46.2,4.03,-113
+"Japan Hydrothermal Sediment",1612_UN_A1_1,NA,1612_UN_A1_1,"Kyushu Island","Hot Spring",Unagi-onsen,95.6,5.32,-234
+"Japan Hydrothermal Sediment",1612_UN_A1_2,NA,1612_UN_A1_2,"Kyushu Island","Hot Spring",Unagi-onsen,96.9,5.23,-201
+"Japan Hydrothermal Sediment",1612_UN_A1_3,NA,1612_UN_A1_3,"Kyushu Island","Hot Spring",Unagi-onsen,96.1,5.05,-185
+"Japan Hydrothermal Sediment",1612_UN_A1_4,NA,1612_UN_A1_4,"Kyushu Island","Hot Spring",Unagi-onsen,92.8,5.09,-150
+"Japan Hydrothermal Sediment",1612_UN_A1_5,NA,1612_UN_A1_5,"Kyushu Island","Hot Spring",Unagi-onsen,88.2,4.04,-239
+"Japan Hydrothermal Sediment",1612_UN_B1,NA,1612_UN_B1,"Kyushu Island","Hot Spring",Unagi-onsen,92.6,2.64,164
+"Japan Hydrothermal Sediment",1612_UN_B7_1,NA,1612_UN_B7_1,"Kyushu Island","Hot Spring",Unagi-onsen,94,5.5,-160
+"Japan Hydrothermal Sediment",1612_UN_B7_2,NA,1612_UN_B7_2,"Kyushu Island","Hot Spring",Unagi-onsen,93.1,5.9,-227
+"Japan Hydrothermal Sediment",1612_UN_B7_3,NA,1612_UN_B7_3,"Kyushu Island","Hot Spring",Unagi-onsen,90.3,5.14,-262
+"Japan Hydrothermal Sediment",1612_UN_B7_4,NA,1612_UN_B7_4,"Kyushu Island","Hot Spring",Unagi-onsen,82.7,4.74,-92
+"Japan Hydrothermal Sediment",1612_UN_B7_5,NA,1612_UN_B7_5,"Kyushu Island","Hot Spring",Unagi-onsen,76.1,3.73,-60
+"Japan Hydrothermal Sediment",1612_UN_B9_1,NA,1612_UN_B9_1,"Kyushu Island","Hot Spring",Unagi-onsen,89.2,3.67,-100
+"Japan Hydrothermal Sediment",1612_UN_B9_2,NA,1612_UN_B9_2,"Kyushu Island","Hot Spring",Unagi-onsen,70.1,3.65,-51
+"Japan Hydrothermal Sediment",1612_UN_B9_3,NA,1612_UN_B9_3,"Kyushu Island","Hot Spring",Unagi-onsen,60.1,3.61,-40
+"Japan Hydrothermal Sediment",1612_UN_B9_4,NA,1612_UN_B9_4,"Kyushu Island","Hot Spring",Unagi-onsen,48.6,4.27,-17
+"Japan Hydrothermal Sediment",1612_UN_B9_5,NA,1612_UN_B9_5,"Kyushu Island","Hot Spring",Unagi-onsen,35.5,4.84,155
+"Japan Hydrothermal Sediment",1612_UN_E1,NA,1612_UN_E1,"Kyushu Island","Hot Spring",Unagi-onsen,84.6,4,-157
+"Japan Hydrothermal Sediment",1612_UN_E2,NA,1612_UN_E2,"Kyushu Island","Hot Spring",Unagi-onsen,68.1,3.61,151
+"Japan Hydrothermal Sediment",1612_KR_A1,NA,1612_KR_A1,"Kyushu Island","Hot Spring",Yamanoshiro-onsen,69.5,2.62,310
+"Japan Hydrothermal Sediment",1612_KR_A2,NA,1612_KR_A2,"Kyushu Island","Hot Spring",Yamanoshiro-onsen,75.2,2.62,-23
+"Japan Hydrothermal Sediment",1612_KR_A3,NA,1612_KR_A3,"Kyushu Island","Hot Spring",Yamanoshiro-onsen,74,2.53,-13
+"Japan Hydrothermal Sediment",1612_KR_B1,NA,1612_KR_B1,"Kyushu Island","Hot Spring",Yamanoshiro-onsen,82.8,3.12,-41
+"Japan Hydrothermal Sediment",1612_KR_B2,NA,1612_KR_B2,"Kyushu Island","Hot Spring",Yamanoshiro-onsen,72.5,2.67,262
+"Japan Hydrothermal Sediment",1612_KR_C1,NA,1612_KR_C1,"Kyushu Island","Hot Spring",Yamanoshiro-onsen,87.7,2.41,0
+"Japan Hydrothermal Sediment",1612_KR_C2,NA,1612_KR_C2,"Kyushu Island","Hot Spring",Yamanoshiro-onsen,88.7,2.78,-45
+"Japan Hydrothermal Sediment",1612_KR_D1,NA,1612_KR_D1,"Kyushu Island","Hot Spring",Yamanoshiro-onsen,88.6,3.5,-179
+"Japan Hydrothermal Sediment",1612_KR_D2,NA,1612_KR_D2,"Kyushu Island","Hot Spring",Yamanoshiro-onsen,63.4,3.19,-80
+"Japan Hydrothermal Sediment",1612_KR_E1,NA,1612_KR_E1,"Kyushu Island","Hot Spring",Yamanoshiro-onsen,64.4,4.08,-134
+"Japan Hydrothermal Sediment",1703_KM_1,NA,1703_KM_1,"Kyushu Island","Hot Spring",Komatsu-jigoku,61.1,5.41,-34
+"Japan Hydrothermal Sediment",1703_KM_2-1_03,NA,1703_KM_2-1_03,"Kyushu Island","Hot Spring",Komatsu-jigoku,NA,NA,NA
+"Japan Hydrothermal Sediment",1703_KM_2-1_07,NA,1703_KM_2-1_07,"Kyushu Island","Hot Spring",Komatsu-jigoku,NA,NA,NA
+"Japan Hydrothermal Sediment",1703_KM_2-2,NA,1703_KM_2-2,"Kyushu Island","Hot Spring",Komatsu-jigoku,61.6,2.54,130
+"Japan Hydrothermal Sediment",1703_KM_3_05,NA,1703_KM_3_05,"Kyushu Island","Hot Spring",Komatsu-jigoku,NA,NA,NA
+"Japan Hydrothermal Sediment",1703_KM_3_20,NA,1703_KM_3_20,"Kyushu Island","Hot Spring",Komatsu-jigoku,NA,NA,NA
+"Japan Hydrothermal Sediment",1703_KM_3_40,NA,1703_KM_3_40,"Kyushu Island","Hot Spring",Komatsu-jigoku,NA,NA,NA
+"Japan Hydrothermal Sediment",1703_KM_4,NA,1703_KM_4,"Kyushu Island","Hot Spring",Komatsu-jigoku,65.8,2.24,157
+"Japan Hydrothermal Sediment",1703_KM_5,NA,1703_KM_5,"Kyushu Island","Hot Spring",Komatsu-jigoku,71.6,2.77,286
+"Japan Hydrothermal Sediment",1703_KM_6,NA,1703_KM_6,"Kyushu Island","Hot Spring",Komatsu-jigoku,71,5.6,-179
+"Japan Hydrothermal Sediment",1703_KM_7,NA,1703_KM_7,"Kyushu Island","Hot Spring",Komatsu-jigoku,80.9,2.34,40
+"Japan Hydrothermal Sediment",1703_KM_8_05,NA,1703_KM_8_05,"Kyushu Island","Hot Spring",Komatsu-jigoku,NA,NA,NA
+"Japan Hydrothermal Sediment",1703_KM_8_10,NA,1703_KM_8_10,"Kyushu Island","Hot Spring",Komatsu-jigoku,NA,NA,NA
+"Japan Hydrothermal Sediment",1703_KM_9,NA,1703_KM_9,"Kyushu Island","Hot Spring",Komatsu-jigoku,75.1,2.6,54
+"Japan Hydrothermal Sediment",1501_IZ_ATGH01,NA,1501_IZ_ATGH01,"Izu peninsula","Hot Spring","Kamogun Higashiizucho",73.5,8.5,121
+"Japan Hydrothermal Sediment",1501_IZ_ATGM02,NA,1501_IZ_ATGM02,"Izu peninsula",Drain,"Kamogun Higashiizucho",68.2,8.4,189
+"Japan Hydrothermal Sediment",1501_IZ_BZ05,NA,1501_IZ_BZ05,"Izu peninsula","Hot Spring","Kamogun Higashiizucho",80.1,8.5,-7
+"Japan Hydrothermal Sediment",1501_IZ_BZ06,NA,1501_IZ_BZ06,"Izu peninsula","Hot Spring","Kamogun Higashiizucho",78.5,8.5,-22
+"Japan Hydrothermal Sediment",1501_IZ_BZ07,NA,1501_IZ_BZ07,"Izu peninsula","Hot Spring","Kamogun Higashiizucho",78.3,8.5,63
+"Japan Hydrothermal Sediment",1501_IZ_JD,NA,1501_IZ_JD,"Izu peninsula",Drain,"Kamogun Minamiizucho",60.1,7.7,259
+"Japan Hydrothermal Sediment",1501_IZ_JU,NA,1501_IZ_JU,"Izu peninsula",Drain,"Kamogun Minamiizucho",78.5,7.8,156
+"Japan Hydrothermal Sediment",1501_IZ_SM05,NA,1501_IZ_SM05,"Izu peninsula","Hot Spring","Kamogun Minamiizucho",63.2,7.9,81
+"Japan Hydrothermal Sediment",1501_IZ_SM07,NA,1501_IZ_SM07,"Izu peninsula","Hot Spring","Kamogun Minamiizucho",61.4,8.3,94
+"Japan Hydrothermal Sediment",1501_IZ_KD01,NA,1501_IZ_KD01,"Izu peninsula","Hot Spring","Kamogun Kawazucho",70.4,8.9,-30
+"Japan Hydrothermal Sediment",1612_UN_UL,NA,1612_UN_UL,"Kyushu Island",Lake,Unagi-ike,17.5,7.37,75

@@ -1,0 +1,72 @@
+name,Run,LibraryName,BioSample,"sample ID",Type,Depth,ORP(mV),EC(us/cm),pH,TOC(mg/kg)
+"Maozhou River Hyporheic Zone",SRR11450995,A0_M3,SAMN14484286,A0_M,"Main stream",10-20cm,252.2,20.29,6.44,1.18
+"Maozhou River Hyporheic Zone",SRR11450962,A1_B3,SAMN14484292,A1_B,"Main stream",20-30cm,155,78.2,8.72,0
+"Maozhou River Hyporheic Zone",SRR11450951,A1_M3,SAMN14484293,A1_M,"Main stream",10-20cm,144.2,67.8,8.53,0
+"Maozhou River Hyporheic Zone",SRR11451014,A2_M3,SAMN14484302,A2_M,"Main stream",10-20cm,265,103.7,6.08,0
+"Maozhou River Hyporheic Zone",SRR11450993,A2_U3,SAMN14484305,A2_U,"Main stream",0-5cm,193.9,152.1,6.78,0
+"Maozhou River Hyporheic Zone",SRR11450990,A3_B3,SAMN14484308,A3_B,"Main stream",20-30cm,-39.7,325,7.23,11.73
+"Maozhou River Hyporheic Zone",SRR11450987,A3_M3,SAMN14484311,A3_M,"Main stream",10-20cm,81,341,7.34,10
+"Maozhou River Hyporheic Zone",SRR11450983,A3_U3,SAMN14484314,A3_U,"Main stream",0-5cm,22.7,418,6.93,17.03
+"Maozhou River Hyporheic Zone",SRR11450980,A4_B3,SAMN14484317,A4_B,"Main stream",20-30cm,53.3,492,5.74,18.18
+"Maozhou River Hyporheic Zone",SRR11450977,A4_M3,SAMN14484320,A4_M,"Main stream",10-20cm,109.4,379,5.96,26.7
+"Maozhou River Hyporheic Zone",SRR11450974,A4_U3,SAMN14484323,A4_U,"Main stream",0-5cm,308.8,263,5.03,7.94
+"Maozhou River Hyporheic Zone",SRR11450970,A5_B3,SAMN14484326,A5_B,"Main stream",20-30cm,-17.6,946,7.82,21.51
+"Maozhou River Hyporheic Zone",SRR11450967,A5_M3,SAMN14484329,A5_M,"Main stream",10-20cm,0.5,656,7.6,18.44
+"Maozhou River Hyporheic Zone",SRR11451100,A5_U3,SAMN14484332,A5_U,"Main stream",0-5cm,6.8,498,7.5,17.61
+"Maozhou River Hyporheic Zone",SRR11450960,F_M3,SAMN14484365,F_M,"Animal farm",10-20cm,140.7,312,7.19,65.13
+"Maozhou River Hyporheic Zone",SRR11450956,F_U10_B3,SAMN14484369,F_U10_B,"Animal farm",20-30cm,136.8,228,6.42,58.21
+"Maozhou River Hyporheic Zone",SRR11450953,F_U10_M3,SAMN14484372,F_U10_M,"Animal farm",10-20cm,155.8,146.9,6.62,66.56
+"Maozhou River Hyporheic Zone",SRR11450949,F_U10_U3,SAMN14484375,F_U10_U,"Animal farm",0-5cm,155.1,147.5,6.94,63.13
+"Maozhou River Hyporheic Zone",SRR11450947,F_U3,SAMN14484377,F_U,"Animal farm",0-5cm,145.3,239,6.97,71.99
+"Maozhou River Hyporheic Zone",SRR11450944,H1_100_B3,SAMN14484380,H1_U100_B,Hospital,20-30cm,156.5,117.9,7.34,2.5
+"Maozhou River Hyporheic Zone",SRR11450941,H1_100_M3,SAMN14484383,H1_U100_M,Hospital,10-20cm,135.8,111.2,7.23,3.51
+"Maozhou River Hyporheic Zone",SRR11451040,P_20_U3,SAMN14484440,P_20_U,WWTP,0-5cm,187.6,42.1,6.42,173.3
+"Maozhou River Hyporheic Zone",SRR11451029,P_500_B3,SAMN14484450,P_500_B,WWTP,20-30cm,92.5,331,7.73,16.9
+"Maozhou River Hyporheic Zone",SRR11451026,P_500_M3,SAMN14484453,P_500_M,WWTP,10-20cm,133.3,219.3,6.99,0
+"Maozhou River Hyporheic Zone",SRR11451022,P_500_U3,SAMN14484456,P_500_U,WWTP,0-5cm,138,2093,7.18,4.3
+"Maozhou River Hyporheic Zone",SRR11451039,P_50_B3,SAMN14484441,P_50_B,WWTP,20-30cm,162,108.3,7.33,0
+"Maozhou River Hyporheic Zone",SRR11451035,P_50_M3,SAMN14484444,P_50_M,WWTP,10-20cm,144.7,135.7,7.81,0
+"Maozhou River Hyporheic Zone",SRR11451032,P_50_U3,SAMN14484447,P_50_U,WWTP,0-5cm,167.7,46,6.46,2.5
+"Maozhou River Hyporheic Zone",SRR11451019,P_U3,SAMN14484459,P_U,WWTP,0-5cm,200.8,42.8,5.85,398.2
+"Maozhou River Hyporheic Zone",SRR11451016,T_2K_M3,SAMN14484462,T_2K_M,Tributary,10-20cm,175.7,826,5.3,60.31
+"Maozhou River Hyporheic Zone",SRR11451012,T_2K_U3,SAMN14484465,T_2K_U,Tributary,0-5cm,250.9,116.9,6.22,29.29
+"Maozhou River Hyporheic Zone",SRR11451009,T_500_M3,SAMN14484468,T_500_M,Tributary,10-20cm,138.5,77.4,7.84,0
+"Maozhou River Hyporheic Zone",SRR11451006,T_500_U3,SAMN14484471,T_500_U,Tributary,0-5cm,178.3,318,6.44,20.61
+"Maozhou River Hyporheic Zone",SRR11451002,T_B3,SAMN14484474,T_B,Tributary,20-30cm,257.8,425,5.66,64.88
+"Maozhou River Hyporheic Zone",SRR11450999,T_M3,SAMN14484477,T_M,Tributary,10-20cm,276.5,134.5,6.19,49.62
+"Maozhou River Hyporheic Zone",SRR11450996,T_U3,SAMN14484480,T_U,Tributary,0-5cm,278.9,148.7,6.05,38.62
+"Maozhou River Hyporheic Zone",SRR11451098,A0_U3,SAMN14484289,A0_U,"Main stream",0-5cm,244.7,21.04,6.54,4.15
+"Maozhou River Hyporheic Zone",SRR11451113,A1_U3,SAMN14484296,A1_U,"Main stream",0-5cm,142.4,120.5,7.92,0
+"Maozhou River Hyporheic Zone",SRR11451047,A2_B3,SAMN14484299,A2_B,"Main stream",20-30cm,310.5,125.8,5.25,0
+"Maozhou River Hyporheic Zone",SRR11451096,F_100_B3,SAMN14484335,F_100_B,"Animal farm",20-30cm,145.9,190.6,6.51,12.94
+"Maozhou River Hyporheic Zone",SRR11451093,F_100_M3,SAMN14484338,F_100_M,"Animal farm",10-20cm,147.2,153.7,6.62,22.62
+"Maozhou River Hyporheic Zone",SRR11451090,F_100_U3,SAMN14484341,F_100_U,"Animal farm",0-5cm,144.8,172.3,6.67,97.39
+"Maozhou River Hyporheic Zone",SRR11451086,F_250_B3,SAMN14484344,F_250_B,"Animal farm",20-30cm,149,305,6.45,4.29
+"Maozhou River Hyporheic Zone",SRR11451083,F_250_M3,SAMN14484347,F_250_M,"Animal farm",10-20cm,103.5,120.9,7.01,4.11
+"Maozhou River Hyporheic Zone",SRR11451080,F_250_U3,SAMN14484350,F_250_U,"Animal farm",0-5cm,102.7,157.2,6.89,7.82
+"Maozhou River Hyporheic Zone",SRR11451077,F_500_B3,SAMN14484353,F_500_B,"Animal farm",20-30cm,109.1,101.7,6.85,1.39
+"Maozhou River Hyporheic Zone",SRR11451073,F_500_M3,SAMN14484356,F_500_M,"Animal farm",10-20cm,93.4,104.8,7.03,659.9
+"Maozhou River Hyporheic Zone",SRR11451070,F_500_U3,SAMN14484359,F_500_U,"Animal farm",0-5cm,65.8,174.4,7.03,19.19
+"Maozhou River Hyporheic Zone",SRR11450964,F_B3,SAMN14484362,F_B,"Animal farm",20-30cm,121.8,255,7.06,71.1
+"Maozhou River Hyporheic Zone",SRR11451129,H1_1K_B3,SAMN14484389,H1_1K_B,Hospital,20-30cm,231.6,106.1,6.4,0
+"Maozhou River Hyporheic Zone",SRR11451122,H1_1K_U3,SAMN14484395,H1_1K_U,Hospital,0-5cm,196.8,93.7,7.09,28.45
+"Maozhou River Hyporheic Zone",SRR11451126,H1_1K_M3,SAMN14484392,H1_1K_M,Hospital,10-20cm,203.6,60.3,7.06,0
+"Maozhou River Hyporheic Zone",SRR11451108,H1_5K_B3,SAMN14484408,H1_5K_B,Hospital,20-30cm,142.6,113.5,6.53,71.48
+"Maozhou River Hyporheic Zone",SRR11451105,H1_5K_M3,SAMN14484411,H1_5K_M,Hospital,10-20cm,130.6,143.1,6.69,70.97
+"Maozhou River Hyporheic Zone",SRR11451103,H1_5K_U3,SAMN14484413,H1_5K_U,Hospital,0-5cm,-50.6,792,6.65,78.69
+"Maozhou River Hyporheic Zone",SRR11451119,H1_200_B3,SAMN14484398,H1_B,Hospital,20-30cm,142.9,138.8,7.37,11.35
+"Maozhou River Hyporheic Zone",SRR11451116,H1_200_M3,SAMN14484401,H1_M,Hospital,10-20cm,129.2,245,6.98,42.42
+"Maozhou River Hyporheic Zone",SRR11451132,H1_100_U3,SAMN14484386,H1_U100_U,Hospital,0-5cm,91.7,249,7.67,3.6
+"Maozhou River Hyporheic Zone",SRR11451101,H1_M3,SAMN14484414,H1_U200_M,Hospital,10-20cm,111.4,67.6,6.93,0
+"Maozhou River Hyporheic Zone",SRR11451066,H1_U3,SAMN14484416,H1_U200_U,Hospital,0-5cm,95.6,63.2,6.69,0
+"Maozhou River Hyporheic Zone",SRR11451112,H1_200_U3,SAMN14484404,H1_U,Hospital,0-5cm,227.7,95.1,6.73,25.71
+"Maozhou River Hyporheic Zone",SRR11451063,H2_B3,SAMN14484419,H2_B,Hospital,20-30cm,234.9,27.6,6.11,0
+"Maozhou River Hyporheic Zone",SRR11451060,H2_M3,SAMN14484422,H2_M,Hospital,10-20cm,232.8,57.1,6.08,0
+"Maozhou River Hyporheic Zone",SRR11451056,H2_U3,SAMN14484425,H2_U,Hospital,0-5cm,173.3,64.7,7.21,625.6
+"Maozhou River Hyporheic Zone",SRR11451051,P_100_B3,SAMN14484430,P_100_B,WWTP,20-30cm,189.8,39.6,6.21,703.8
+"Maozhou River Hyporheic Zone",SRR11451048,P_100_M3,SAMN14484433,P_100_M,WWTP,10-20cm,242.8,52.4,6.25,4.13
+"Maozhou River Hyporheic Zone",SRR11451044,P_100_U3,SAMN14484436,P_100_U,WWTP,0-5cm,158.8,86.8,7.26,0
+"Maozhou River Hyporheic Zone",SRR11451055,P_10_B3,SAMN14484426,P_10_B,WWTP,20-30cm,134.2,78.7,7.29,0
+"Maozhou River Hyporheic Zone",SRR11451054,P_10_M3,SAMN14484427,P_10_M,WWTP,10-20cm,124.6,100.3,7.16,0
+"Maozhou River Hyporheic Zone",SRR11451053,P_10_U3,SAMN14484428,P_10_U,WWTP,0-5cm,140,157.7,6.99,0
+"Maozhou River Hyporheic Zone",SRR11451042,P_20_M3,SAMN14484438,P_20_M,WWTP,10-20cm,206,15.56,6.15,0

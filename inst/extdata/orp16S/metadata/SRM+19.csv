@@ -1,0 +1,20 @@
+name,Run,BioSample,sample,"Land Use",pH,"DO (mg/L)","ORP (mV)"
+"Rayong Province",SRR6760377,SAMN08574247,G1,Agriculture,5.26,3.59,263.9
+"Rayong Province",SRR6760378,SAMN08574248,G2,Agriculture,7.07,4.01,215
+"Rayong Province",SRR6760375,SAMN08574249,G3,Community,7.85,6.48,196.1
+"Rayong Province",SRR6760376,SAMN08574250,G4,Agriculture,5.48,1.56,-87.3
+"Rayong Province",SRR6760373,SAMN08574251,G5,Agriculture,6.03,3.37,3.1
+"Rayong Province",SRR6760374,SAMN08574252,G6,Agriculture,6.36,1.99,-84
+"Rayong Province",SRR6760371,SAMN08574253,G7,Community,6.16,2.85,175
+"Rayong Province",SRR6760372,SAMN08574254,G8,Community,6.66,7.5,-47.7
+"Rayong Province",SRR6760379,SAMN08574255,G9,Agriculture,6.61,4.29,149.2
+"Rayong Province",SRR6760380,SAMN08574256,G10,Community,6.94,3.32,12.4
+"Rayong Province",SRR6760388,SAMN08574257,G11,Community,6.72,3.48,38.3
+"Rayong Province",SRR6760389,SAMN08574258,G12,Landfill,7.28,0,-380.7
+"Rayong Province",SRR6760386,SAMN08574259,G13,Landfill,7.07,3.15,153.5
+"Rayong Province",SRR6760387,SAMN08574260,G14,Landfill,7.3,4.43,149.3
+"Rayong Province",SRR6760384,SAMN08574261,G15,Landfill,3.53,5.76,424.5
+"Rayong Province",SRR6760385,SAMN08574262,G16,Community,7.1,7.8,182.8
+"Rayong Province",SRR6760382,SAMN08574263,G17,Community,7.5,4,138.4
+"Rayong Province",SRR6760383,SAMN08574264,G18,Community,6.7,4.34,161.8
+"Rayong Province",SRR6760381,SAMN08574265,G19,Mine,7.4,3.26,-49.5

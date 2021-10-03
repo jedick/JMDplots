@@ -1,0 +1,49 @@
+name,Run,LibraryName,BioSample,SampleName,Marsh,Treatment,pH,"Redox (mV)"
+"Urban Wetland Soils",SRR6206143,II_MESO_A_1,SAMN07827970,II.Acetate.site.1,"Iona Island",Acetate,7.09,-220
+"Urban Wetland Soils",SRR6206144,II_MESO_A_2,SAMN07827971,II.Acetate.site.4,"Iona Island",Acetate,7.09,-220
+"Urban Wetland Soils",SRR6206141,II_MESO_A_3,SAMN07827972,II.Acetate.site.6,"Iona Island",Acetate,7.09,-220
+"Urban Wetland Soils",SRR6206142,II_MESO_A_4,SAMN07827973,II.Acetate.site.7,"Iona Island",Acetate,7.09,-220
+"Urban Wetland Soils",SRR6206147,II_F_1,SAMN07827974,II.Field.Num.1,"Iona Island",Field,NA,NA
+"Urban Wetland Soils",SRR6206148,II_F_2,SAMN07827975,II.Field.Num.2,"Iona Island",Field,NA,NA
+"Urban Wetland Soils",SRR6206145,II_F_3,SAMN07827976,II.Field.Num.3,"Iona Island",Field,NA,NA
+"Urban Wetland Soils",SRR6206146,II_F_4,SAMN07827977,II.Field.Num.4,"Iona Island",Field,NA,NA
+"Urban Wetland Soils",SRR6206149,II_MESO_NC_1,SAMN07827978,II.NegCtrl.site.1,"Iona Island","No amendment",6.7,-89
+"Urban Wetland Soils",SRR6206150,II_MESO_NC_2,SAMN07827979,II.NegCtrl.site.4,"Iona Island","No amendment",6.7,-89
+"Urban Wetland Soils",SRR6206125,II_MESO_NC_3,SAMN07827980,II.NegCtrl.site.6,"Iona Island","No amendment",6.7,-89
+"Urban Wetland Soils",SRR6206126,II_MESO_NC_4,SAMN07827981,II.NegCtrl.site.7,"Iona Island","No amendment",6.7,-89
+"Urban Wetland Soils",SRR6206123,II_MESO_PRE_1,SAMN07827982,II.Preinc.site.1,"Iona Island",Pre-incubation,6.66,-215
+"Urban Wetland Soils",SRR6206124,II_MESO_PRE_2,SAMN07827983,II.Preinc.site.4,"Iona Island",Pre-incubation,6.66,-215
+"Urban Wetland Soils",SRR6206129,II_MESO_PRE_3,SAMN07827984,II.Preinc.site.6,"Iona Island",Pre-incubation,6.66,-215
+"Urban Wetland Soils",SRR6206130,II_MESO_PRE_4,SAMN07827985,II.Preinc.site.7,"Iona Island",Pre-incubation,6.66,-215
+"Urban Wetland Soils",SRR6206127,PM_MESO_A_1,SAMN07827986,PM.Acetate.site.3,Piermont,Acetate,7.74,-297
+"Urban Wetland Soils",SRR6206128,PM_MESO_A_2,SAMN07827987,PM.Acetate.site.6,Piermont,Acetate,7.74,-297
+"Urban Wetland Soils",SRR6206132,PM_MESO_A_3,SAMN07827988,PM.Acetate.site.7,Piermont,Acetate,7.74,-297
+"Urban Wetland Soils",SRR6206133,PM_MESO_A_4,SAMN07827989,PM.Acetate.site.8,Piermont,Acetate,7.74,-297
+"Urban Wetland Soils",SRR6206110,PM_F_1,SAMN07827990,PM.Field.Num1,Piermont,Field,NA,NA
+"Urban Wetland Soils",SRR6206109,PM_F_2,SAMN07827991,PM.Field.Num2,Piermont,Field,NA,NA
+"Urban Wetland Soils",SRR6206108,PM_F_3,SAMN07827992,PM.Field.Num3,Piermont,Field,NA,NA
+"Urban Wetland Soils",SRR6206107,PM_F_4,SAMN07827993,PM.Field.Num4,Piermont,Field,NA,NA
+"Urban Wetland Soils",SRR6206114,PM_MESO_NC_1,SAMN07827994,PM.NegCtrl.site.3,Piermont,"No amendment",6.75,-61
+"Urban Wetland Soils",SRR6206113,PM_MESO_NC_2,SAMN07827995,PM.NegCtrl.site.6,Piermont,"No amendment",6.75,-61
+"Urban Wetland Soils",SRR6206112,PM_MESO_NC_3,SAMN07827996,PM.NegCtrl.site.7,Piermont,"No amendment",6.75,-61
+"Urban Wetland Soils",SRR6206111,PM_MESO_NC_4,SAMN07827997,PM.NegCtrl.site.8,Piermont,"No amendment",6.75,-61
+"Urban Wetland Soils",SRR6206105,PM_MESO_PRE_1,SAMN07827998,PM.Preinc.site.3,Piermont,Pre-incubation,6.26,-65
+"Urban Wetland Soils",SRR6206104,PM_MESO_PRE_2,SAMN07827999,PM.Preinc.site.6,Piermont,Pre-incubation,6.26,-65
+"Urban Wetland Soils",SRR6206117,PM_MESO_PRE_3,SAMN07828000,PM.Preinc.site.7,Piermont,Pre-incubation,6.26,-65
+"Urban Wetland Soils",SRR6206118,PM_MESO_PRE_4,SAMN07828001,PM.Preinc.site.8,Piermont,Pre-incubation,6.26,-65
+"Urban Wetland Soils",SRR6206119,SI_MESO_A_1,SAMN07828002,SI.Acetate.site.1,"Saw Mill Creek",Acetate,7.46,-367
+"Urban Wetland Soils",SRR6206120,SI_MESO_A_2,SAMN07828003,SI.Acetate.site.4,"Saw Mill Creek",Acetate,7.46,-367
+"Urban Wetland Soils",SRR6206106,SI_MESO_A_3,SAMN07828004,SI.Acetate.site.5,"Saw Mill Creek",Acetate,7.46,-367
+"Urban Wetland Soils",SRR6206136,SI_MESO_A_4,SAMN07828005,SI.Acetate.site.7,"Saw Mill Creek",Acetate,7.46,-367
+"Urban Wetland Soils",SRR6206115,SI_F_1,SAMN07828006,SI.Field.Num1,"Saw Mill Creek",Field,NA,NA
+"Urban Wetland Soils",SRR6206116,SI_F_2,SAMN07828007,SI.Field.Num2,"Saw Mill Creek",Field,NA,NA
+"Urban Wetland Soils",SRR6206134,SI_F_3,SAMN07828008,SI.Field.Num3,"Saw Mill Creek",Field,NA,NA
+"Urban Wetland Soils",SRR6206135,SI_F_4,SAMN07828009,SI.Field.Num4,"Saw Mill Creek",Field,NA,NA
+"Urban Wetland Soils",SRR6206137,SI_MESO_NC_1,SAMN07828010,SI.NegCtrl.site.1,"Saw Mill Creek","No amendment",6.9,-161
+"Urban Wetland Soils",SRR6206151,SI_MESO_NC_2,SAMN07828011,SI.NegCtrl.site.4,"Saw Mill Creek","No amendment",6.9,-161
+"Urban Wetland Soils",SRR6206139,SI_MESO_NC_3,SAMN07828012,SI.NegCtrl.site.5,"Saw Mill Creek","No amendment",6.9,-161
+"Urban Wetland Soils",SRR6206138,SI_MESO_NC_4,SAMN07828013,SI.NegCtrl.site.7,"Saw Mill Creek","No amendment",6.9,-161
+"Urban Wetland Soils",SRR6206122,SI_MESO_PRE_1,SAMN07828014,SI.Preinc.site.1,"Saw Mill Creek",Pre-incubation,6.85,-209
+"Urban Wetland Soils",SRR6206121,SI_MESO_PRE_2,SAMN07828015,SI.Preinc.site.4,"Saw Mill Creek",Pre-incubation,6.85,-209
+"Urban Wetland Soils",SRR6206140,SI_MESO_PRE_3,SAMN07828016,SI.Preinc.site.5,"Saw Mill Creek",Pre-incubation,6.85,-209
+"Urban Wetland Soils",SRR6206131,SI_MESO_PRE_4,SAMN07828017,SI.Preinc.site.7,"Saw Mill Creek",Pre-incubation,6.85,-209

@@ -1,0 +1,12 @@
+name,Run,BioSample,sample,LibraryName,SampleName,LatLong,Description,Type,pH,"Temp (°C)","ORP (mV)"
+"Golmud, Qaidam Basin",SRR6152546,SAMN07765428,G1,D4,G8,"36.14 N 94.78 E","Collected in phreatic aquifer",Un-confined,8.18,17.5,186
+"Golmud, Qaidam Basin",SRR6152537,SAMN07765433,G2,GY1-5,G20,"36.31 N 94.81 E","Collected in phreatic aquifer",Un-confined,8.23,12.3,13
+"Golmud, Qaidam Basin",SRR6152544,SAMN07765430,G3,GH1,G14,"36.42 N 94.85 E","Collected in shallow confined aquifer",Confined,7.86,16,81
+"Golmud, Qaidam Basin",SRR6152543,SAMN07765423,G4-1,GK3-1,G1,"36.51 N 94.96 E","Collected at 60 to 144 meters blow the ground",Confined,8.17,16.5,-76
+"Golmud, Qaidam Basin",SRR6152542,SAMN07765424,G4-2,GK3-2,G2,"36.51 N 94.96 E","Collected at 129 to 155 meters blow the ground",Confined,8.02,21,45
+"Golmud, Qaidam Basin",SRR6152541,SAMN07765425,G4-3,GK3-3,G3,"36.51 N 94.96 E","Collected at 169 to 201 meters blow the ground",Confined,7.94,19.5,-3
+"Golmud, Qaidam Basin",SRR6152540,SAMN07765426,G4-4,GK3-4,G4,"36.51 N 94.96 E","Collected at 227 to 258 meters blow the ground",Confined,8.01,16.6,126
+"Golmud, Qaidam Basin",SRR6152547,SAMN07765427,G4-5,GK3-5,G5,"36.51 N 94.96 E","Collected at 272 to 322 meters blow the ground",Confined,7.99,18,16
+"Golmud, Qaidam Basin",SRR6152545,SAMN07765429,G5-1,Z9-1,G11,"36.51 N 94.96 E","Collected at 50 to 120 meters blow the ground",Confined,8.1,16.6,-75
+"Golmud, Qaidam Basin",SRR6152538,SAMN07765432,G5-2,Z9-2,G16,"36.51 N 94.96 E","Collected at 150 to 200 meters blow the ground",Confined,8.19,16.9,-83
+"Golmud, Qaidam Basin",SRR6152539,SAMN07765431,G6,G53-1,G15,"36.57 N 95.01 E","Collected in deep confined aquifer",Confined,8.21,20,-94

@@ -1,0 +1,55 @@
+name,Run,BioSample,SampleName,pond,supplement,replicate,layer,description,depth
+"Winogradsky Columns",SRR1123369,SAMN02581153,"W3-1 A",Buxton,"vegetable scraps",1,SWI,"white layer at top",0
+"Winogradsky Columns",SRR1123678,SAMN02581174,"W3-1 C",Buxton,"vegetable scraps",1,"8 cm","black with grey flecks",8
+"Winogradsky Columns",SRR1123538,SAMN02581142,"W3-1 D",Buxton,"vegetable scraps",1,"12 cm","black with grey flecks",12
+"Winogradsky Columns",SRR1123542,SAMN02581143,"W3-2 A",Buxton,"vegetable scraps",2,SWI,"white layer at top",0
+NA,SRR1140937,SAMN02581203,"W3-2 B",Buxton,"vegetable scraps",2,"8 cm","black with grey flecks",8
+"Winogradsky Columns",SRR1123379,SAMN02581180,"W3-2 D",Buxton,"vegetable scraps",2,"12 cm","black with grey flecks",12
+"Winogradsky Columns",SRR1123622,SAMN02581204,"W3-3 A",Buxton,"vegetable scraps",3,SWI,"brown/light yellow",0
+"Winogradsky Columns",SRR1123454,SAMN02581175,"W3-3 B",Buxton,"vegetable scraps",3,"4 cm","black, coppery brown flecks, grey",4
+"Winogradsky Columns",SRR1123450,SAMN02581187,"W3-3 C",Buxton,"vegetable scraps",3,"8 cm","black, coppery brown flecks,",8
+"Winogradsky Columns",SRR1123547,SAMN02581205,"W3-3 D",Buxton,"vegetable scraps",3,"12 cm","black, dark grey, some brown flecks",12
+"Winogradsky Columns",SRR1123200,SAMN02581155,"W3-3 E",Buxton,"vegetable scraps",3,Top,"green, brown muck from top",-4
+"Winogradsky Columns",SRR1123580,SAMN02581192,"W4-1 A",Buxton,"leaf litter",1,SWI,"black with grey flecks/bit of green",0
+"Winogradsky Columns",SRR1123461,SAMN02581206,"W4-1 B",Buxton,"leaf litter",1,"4 cm","black with grey flecks",4
+"Winogradsky Columns",SRR1123552,SAMN02581144,"W4-1 C",Buxton,"leaf litter",1,"8 cm","black with grey flecks",8
+"Winogradsky Columns",SRR1123244,SAMN02581207,"W4-1 D",Buxton,"leaf litter",1,"12 cm","black with grey flecks",12
+"Winogradsky Columns",SRR1123466,SAMN02581193,"W4-2 A",Buxton,"leaf litter",2,SWI,"black with grey flecks/lots of green",0
+"Winogradsky Columns",SRR1123684,SAMN02581164,"W4-2 B",Buxton,"leaf litter",2,"4 cm","black with grey flecks",4
+"Winogradsky Columns",SRR1123208,SAMN02581208,"W4-2 C",Buxton,"leaf litter",2,"8 cm","black with grey flecks",8
+"Winogradsky Columns",SRR1123117,SAMN02581181,"W4-2 D",Buxton,"leaf litter",2,"12 cm","black with grey flecks",12
+"Winogradsky Columns",SRR1123576,SAMN02581209,"W4-3 A",Buxton,"leaf litter",3,SWI,"black, grey, brown, yellow/brown",0
+"Winogradsky Columns",SRR1123279,SAMN02581165,"W4-3 B",Buxton,"leaf litter",3,"4 cm","black with grey/white patches",4
+"Winogradsky Columns",SRR1123205,SAMN02581210,"W4-3 C",Buxton,"leaf litter",3,"8 cm","white patches, black and grey",8
+"Winogradsky Columns",SRR1123187,SAMN02581194,"W4-3 D",Buxton,"leaf litter",3,"12 cm","black with white patches",12
+"Winogradsky Columns",SRR1123280,SAMN02581166,"W4-3 E",Buxton,"leaf litter",3,Top,"bright olive green hard colonies from top",-4
+"Winogradsky Columns",SRR1123275,SAMN02581211,"W5-1 A",Eph's,"vegetable scraps",1,SWI,green,0
+"Winogradsky Columns",SRR1123416,SAMN02581182,"W5-1 B",Eph's,"vegetable scraps",1,"4 cm","all black, smells of sulfide",4
+"Winogradsky Columns",SRR1123374,SAMN02581195,"W5-1 C",Eph's,"vegetable scraps",1,"8 cm","all black, smells of sulfide",8
+"Winogradsky Columns",SRR1123311,SAMN02581167,"W5-1 D",Eph's,"vegetable scraps",1,"12 cm","all black, smells of sulfide",12
+"Winogradsky Columns",SRR1123455,SAMN02581196,"W5-2 A",Eph's,"vegetable scraps",2,SWI,colorful,0
+"Winogradsky Columns",SRR1123613,SAMN02581156,"W5-2 B",Eph's,"vegetable scraps",2,"4 cm","pale green",4
+"Winogradsky Columns",SRR1123232,SAMN02581157,"W5-2 C",Eph's,"vegetable scraps",2,"8 cm",black,8
+"Winogradsky Columns",SRR1123363,SAMN02581168,"W5-2 D",Eph's,"vegetable scraps",2,"12 cm","all black, smells of sulfide",12
+"Winogradsky Columns",SRR1123609,SAMN02581169,"W5-2 E",Eph's,"vegetable scraps",2,"6 cm","emerald green (btw A and B)",6
+"Winogradsky Columns",SRR1123679,SAMN02581190,"W5-2 E 2",Eph's,"vegetable scraps",2,"6 cm","emerald green (btw A and B)",6
+"Winogradsky Columns",SRR1123180,SAMN02581197,"W5-3 A",Eph's,"vegetable scraps",3,SWI,"emerald gree, olive green, some grey, brown, black",0
+"Winogradsky Columns",SRR1123340,SAMN02581158,"W5-3 B",Eph's,"vegetable scraps",3,"4 cm","mostly black and greys, some light green",4
+"Winogradsky Columns",SRR1123410,SAMN02581198,"W5-3 C",Eph's,"vegetable scraps",3,"8 cm","black, grey",8
+"Winogradsky Columns",SRR1123372,SAMN02581170,"W5-3 D",Eph's,"vegetable scraps",3,"12 cm","black and grey, similar to 5C",12
+"Winogradsky Columns",SRR1123248,SAMN02581145,"W5-3 E",Eph's,"vegetable scraps",3,Top,"bright green film from top wall",-4
+"Winogradsky Columns",SRR1123330,SAMN02581183,"W6-1 A",Eph's,"leaf litter",1,SWI,green,0
+"Winogradsky Columns",SRR1123335,SAMN02581146,"W6-1 B",Eph's,"leaf litter",1,"4 cm","black, smells of sulfide",4
+"Winogradsky Columns",SRR1123532,SAMN02581212,"W6-1 C",Eph's,"leaf litter",1,"8 cm",black,8
+"Winogradsky Columns",SRR1123284,SAMN02581199,"W6-1 D",Eph's,"leaf litter",1,"12 cm",black,12
+"Winogradsky Columns",SRR1123499,SAMN02581176,"W6-2 A",Eph's,"leaf litter",2,SWI,top/green,0
+"Winogradsky Columns",SRR1123341,SAMN02581177,"W6-2 B",Eph's,"leaf litter",2,"4 cm",brownish,4
+"Winogradsky Columns",SRR1123185,SAMN02581184,"W6-2 D",Eph's,"leaf litter",2,"12 cm",black,12
+"Winogradsky Columns",SRR1123220,SAMN02581185,"W6-3 A",Eph's,"leaf litter",3,SWI,"orange, olive green emerald green, some red/brown",0
+"Winogradsky Columns",SRR1123412,SAMN02581215,"W6-3 B",Eph's,"leaf litter",3,"4 cm","Olive green, emerald green,",4
+"Winogradsky Columns",SRR1123199,SAMN02581159,"W6-3 C",Eph's,"leaf litter",3,"8 cm","pale green, white, black",8
+"Winogradsky Columns",SRR1123331,SAMN02581216,"W6-3 D",Eph's,"leaf litter",3,"12 cm","grey, some dark green and white",12
+"Winogradsky Columns",SRR1123118,SAMN02581188,"W6-3 E",Eph's,"leaf litter",3,"12 cm","black and grey, some forest green, white flecks",12
+"Winogradsky Columns",SRR1123551,SAMN02581201,"W6-3 F",Eph's,"leaf litter",3,"3 cm","light brown, dark grey, rust color, some green",3
+"Winogradsky Columns",SRR1123186,SAMN02581189,"W6-3 H",Eph's,"leaf litter",3,"6 cm","green (marbled forest green and olive green), rust color, green/yellows",6
+"Winogradsky Columns",SRR1123184,SAMN02581160,"W6-3 I",Eph's,"leaf litter",3,Top,"green/brown film from top wall",-4

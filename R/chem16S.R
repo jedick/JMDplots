@@ -215,28 +215,123 @@ getmdat <- function(study, dropNA = TRUE) {
     col <- sapply(type, switch, oxic = 4, transition = 1, anoxic = 2)
   }
 
-  minuend <- subtrahend <- rep(NA, nrow(mdat))
-  if(!is.null(subject)) {
-    # Enumerate minuend and subtrahend 20200915
-    # We can't deal with subjects that appear more than twice
-    if(max(table(subject[isminuend | issubtrahend])) > 2) stop("one or more subjects have ambiguous samples for difference")
-    # List subjects in each group
-    sminuend <- subject[isminuend]
-    ssubtrahend <- subject[issubtrahend]
-    # Find subjects with paired data
-    paired <- intersect(sminuend, ssubtrahend)
-    ispaired <- subject %in% paired
-    # Identify the minuend and subtrahend in all pairs
-    iminuend <- which(ispaired & isminuend)
-    isubtrahend <- which(ispaired & issubtrahend)
-    # Number the pairs sequentially
-    pairs <- seq_along(isubtrahend)
-    minuend[iminuend] <- pairs
-    # Find the paired sample for each subject
-    isubject <- match(subject[isubtrahend], subject[iminuend])
-    subtrahend[isubtrahend] <- pairs[isubject]
-  } else subject <- rep(NA, nrow(mdat))
-  mdat <- cbind(mdat, pch, col, subject, minuend, subtrahend)
+  ## Datasets for orp16S paper 20211003
+  if(study == "RBW+14") {
+    type <- rep("reducing", nrow(mdat))
+    type[mdat$layer == "Top"] <- "oxidizing"
+    type[mdat$layer == "SWI"] <- "transition"
+    pch <- sapply(type, switch, oxidizing = 24, transition = 20, reducing = 25)
+    col <- sapply(type, switch, oxidizing = 4, transition = 1, reducing = 2)
+  }
+  if(study == "DLS21") {
+    # Just look at bulk soil 20210910
+    mdat <- mdat[mdat$Source == "bulk soil", ]
+  }
+  shortstudy <- study
+  if(shortstudy %in% c(
+    "MLL+19", "HXZ+20", "BCA+21", "RSJ+21", "RMB+17", "SBP+20", "NTB+21", "MWY+21", "SAR+13",
+    "CTS+17", "SCM+18", "HDZ+19", "BOEM21", "ZHZ+19", "YHK+20", "CNA+20", "BMJ+19", "SRM+19",
+    "HLZ+18", "XLD+20", "JHL+12", "PSG+20", "KSR+21", "ZCZ+21", "SKP+21", "ZZL+21", "PBU+20",
+    "GWS+19", "KLY+20", "SRM+21", "MLL+18", "JDP+20", "BWD+19", "ABT+17", "LXH+20", "LMG+20",
+    "WHL+21", "LLL+21", "SDH+19", "GWSS21", "HSF+19", "ZML+17", "DTJ+20", "WFB+21", "SBW+17",
+    "KLM+16", "LMBA21", "ZDA+20", "ZZZ+18", "BSPD17", "CWC+20", "BMOB18", "JVW+20", "LJC+20",
+    "GFE+16", "ECS+18", "FAV+21", "VMB+19", "DLS21", "ZZLL21", "GWS+20", "CLS+19", "SMS+12",
+    "OFY+19", "BYB+17", "MCS+21", "SVH+19", "PMM+20", "GZL21"
+  )) {
+    # General processing of metadata for sed16S datasets 20210820
+    # Get Eh or ORP values (uses partial name matching, can match a column named "Eh (mV)")
+    Eh <- mdat$Eh
+    Ehname <- "Eh"
+    if(is.null(Eh)) {
+      Eh <- mdat$ORP
+      Ehname <- "ORP"
+    }
+    # Also match a column starting with "redox" (case-insensitive)
+    iEh <- grep("^redox", colnames(mdat), ignore.case = TRUE)
+    if(length(iEh) > 0) {
+      Eh <- mdat[, iEh[1]]
+      Ehname <- strsplit(colnames(mdat)[iEh[1]], " ")[[1]][1]
+    }
+    if(is.null(Eh)) stop("can't find Eh or ORP column")
+
+    # Append Ehorig column (normalized column name used for exporting data) 20210821
+    mdat <- cbind(mdat, Ehorig = Eh)
+    
+    # Get temperature for dEh/dpH calculation 20210829
+    iT <- match("T", colnames(mdat))  # matches "T"
+    if(is.na(iT)) iT <- grep("^T\\ ", colnames(mdat))[1]  # matches "T (°C)" but not e.g. "Treatment"
+    if(is.na(iT)) iT <- grep("^Temp", colnames(mdat))[1]  # matches "Temperature (°C)"
+    if(!is.na(iT)) {
+      T <- mdat[, iT]
+      Ttext <- paste(round(range(na.omit(T)), 1), collapse = " to ")
+    } else {
+      T <- rep(25, nrow(mdat))
+      Ttext <- "assumed 25"
+    }
+
+    # Adjust Eh to pH 7 20210828
+    # Find pH column
+    ipH <- match("pH", colnames(mdat))
+    if(!is.na(ipH)) {
+      # pH values
+      pH <- mdat[, ipH]
+      pHtext <- paste(round(range(na.omit(pH)), 1), collapse = " to ")
+      ## Eh(mV)-pH slope at 25 °C
+      #dEhdpH <- -59.2
+      # Find dEh/dpH as a function of T 20210829
+      TK <- T + 273.15
+      R <- 0.0083147
+      F <- 96.4935
+      dEhdpH <- - (log(10) * R * TK) / F * 1000
+
+      # Difference to pH 7
+      pHdiff <- 7 - pH
+      # Adjust to pH 7
+      Eh7 <- round(Eh + pHdiff * dEhdpH, 1)
+
+    } else {
+      Eh7 <- Eh
+      pHtext <- "assumed 7"
+    }
+    mdat <- cbind(mdat, Eh7 = Eh7)
+    # Print message about T, pH and Eh ranges
+    Ehtext <- paste(round(range(na.omit(Eh))), collapse = " to ")
+    Eh7text <- paste(round(range(na.omit(Eh7))), collapse = " to ")
+    print(paste0(study, ": T ", Ttext, ", pH ", pHtext, ", Eh ", Ehtext, ", Eh7 ", Eh7text))
+
+    # Keep NA values out of clusters
+    ina <- is.na(Eh7)
+    # Divide data into 3 clusters
+    cl <- kmeans(Eh7[!ina], 3, nstart = 100)
+    # Find the clusters with the lowest and highest means
+    imin <- which.min(cl$centers[, 1])
+    imax <- which.max(cl$centers[, 1])
+    imid <- (1:3)[-c(imin, imax)]
+    # Name the clusters
+    cluster <- rep(NA, nrow(mdat))
+    cluster[!ina][cl$cluster == imin] <- "reducing"
+    cluster[!ina][cl$cluster == imid] <- "transition"
+    cluster[!ina][cl$cluster == imax] <- "oxidizing"
+    # Get pch and col for plot
+    pch <- sapply(cluster, switch, oxidizing = 24, transition = 21, reducing = 25, NA)
+    col <- sapply(cluster, switch, oxidizing = 4, transition = 1, reducing = 2, NA)
+    # Print message about Eh7 or ORP ranges of clusters
+    ro <- range(na.omit(Eh7[cluster=="oxidizing"]))
+    no <- sum(na.omit(cluster=="oxidizing"))
+    message(paste0("getmdat: oxidizing Eh7 ", paste(ro, collapse = " to "), " mV (n = ", no, ")"))
+    rt <- range(na.omit(Eh7[cluster=="transition"]))
+    nt <- sum(na.omit(cluster=="transition"))
+    message(paste0("getmdat: transition Eh7 ", paste(rt, collapse = " to "), " mV (n = ", nt, ")"))
+    rr <- range(na.omit(Eh7[cluster=="reducing"]))
+    nr <- sum(na.omit(cluster=="reducing"))
+    message(paste0("getmdat: reducing Eh7 ", paste(rr, collapse = " to "), " mV (n = ", nr, ")"))
+    # Append cluster names to data frame
+    mdat <- cbind(mdat, cluster)
+  }
+
+  if(is.null(pch)) stop(paste(study, "metadata file exists, but not set up for processing"))
+
+  mdat <- cbind(mdat, pch, col)
   mdat
 }
 
@@ -256,6 +351,8 @@ getRDP <- function(study, cn = FALSE, mdat = NULL, lineage = NULL, mincount = 20
   datorig <- dat <- read.table(file, sep = "\t", header = TRUE, check.names = FALSE)
   # Get counts for each sample
   icol <- match(Run, colnames(dat))
+  # Error for samples not in RDP output 20210926
+  if(any(is.na(icol))) stop(paste0("One or more runs in metadata not in RDP output for ", study, ": ", paste(Run[is.na(icol)], collapse = ", ")))
   # Keep the "lineage", "rank", "name", and counts columns
   dat <- dat[, c(2, 4, 3, icol)]
 

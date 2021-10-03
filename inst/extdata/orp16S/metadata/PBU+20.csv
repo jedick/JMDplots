@@ -1,0 +1,11 @@
+name,Run,BioSample,sample,description,Type,"Temperature (°C)",pH,"Eh (mV)"
+"Uzon Caldera",SRR11496425,SAMN14538722,U20Bur,"Burlyashchiy spring",Spring,89,6.91,132
+"Uzon Caldera",SRR11496432,SAMN14538715,U3kot,"unnamed cauldron",Cauldron,86,4.4,120
+"Uzon Caldera",SRR11496426,SAMN14538721,U3_5yasher,"Yashcheritsa spring",Spring,77,4.52,406
+"Uzon Caldera",SRR11496430,SAMN14538717,"U3 1-3","sampling pit, clay","Sampling Pit",77,3.8,106
+"Uzon Caldera",SRR11496429,SAMN14538718,"U3 2-3","sampling pit, clay","Sampling Pit",67,2.85,124
+"Uzon Caldera",SRR11496431,SAMN14538716,U3Ass,"sampling pit, arsenic sulfides","Sampling Pit",23,2.8,216
+"Uzon Caldera",SRR11496428,SAMN14538719,"U3 4-9","sampling pit, oil drops","Sampling Pit",61,4.43,69
+"Uzon Caldera",SRR11496427,SAMN14538720,U3_4-10,"sampling pit, oil drops","Sampling Pit",55,5.4,-5
+"Uzon Caldera",SRR11496424,SAMN14538723,U5-1,"Thermophilic spring",Spring,70,6.29,-34
+"Uzon Caldera",SRR11496423,SAMN14538724,G11-1a,"Geyser valley","Geyser Valley (Control)",93,8.56,180

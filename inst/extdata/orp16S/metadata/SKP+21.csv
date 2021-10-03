@@ -1,0 +1,13 @@
+name,Run,BioSample,SampleName,Type,pH,"Temp. (°C)","DO (mg L-1)","ORP (mV)"
+"Phetchabun-Pichit Gold Mine",SRR8771293,SAMN11191506,L1-GW,Groundwater,6.5,29.2,3.87,212.2
+"Phetchabun-Pichit Gold Mine",SRR8771292,SAMN11191507,L2-GW,Groundwater,6.87,32.3,2.84,59.4
+"Phetchabun-Pichit Gold Mine",SRR8771295,SAMN11191508,L3-GW,Groundwater,6.39,30.5,3.29,115.4
+"Phetchabun-Pichit Gold Mine",SRR8771294,SAMN11191509,L4-GW,Groundwater,6.7,31.8,2.95,88.9
+"Phetchabun-Pichit Gold Mine",SRR8771297,SAMN11191510,L5-GW,Groundwater,4.9,31,2.92,296.9
+"Phetchabun-Pichit Gold Mine",SRR8771296,SAMN11191511,L6-GW,Groundwater,7.21,32.3,4.79,149.5
+"Phetchabun-Pichit Gold Mine",SRR8771299,SAMN11191512,L1-SW,"Surface water",6.34,31,7.63,390.3
+"Phetchabun-Pichit Gold Mine",SRR8771298,SAMN11191513,L2-SW,"Surface water",6.98,33.4,7.14,308.1
+"Phetchabun-Pichit Gold Mine",SRR8771291,SAMN11191514,L6-SW,"Surface water",8.22,34,7.19,269.1
+"Phetchabun-Pichit Gold Mine",SRR8771290,SAMN11191515,L1-S,Soil,NA,NA,NA,NA
+"Phetchabun-Pichit Gold Mine",SRR8771289,SAMN11191516,L2-S,Soil,NA,NA,NA,NA
+"Phetchabun-Pichit Gold Mine",SRR8771288,SAMN11191517,L6-S,Soil,NA,NA,NA,NA

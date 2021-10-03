@@ -54,7 +54,9 @@ export(
   # evdevH2O paper 20210706-20210708
   "getphyloaa", "getCBS17", "getFOK21",
   # mjenergy paper 20210816
-  "mjenergy_Table_S3", "mjenergy_Dataset_S1"
+  "mjenergy_Table_S3", "mjenergy_Dataset_S1",
+  # orp16S paper 20211003
+  "orp16S1", "orp16S2", "orp16S3", "orp16S4", "orp16S5", "orp16S6", "orp16S_S1"
 )
 
 # imports from CHNOSZ
@@ -120,6 +122,9 @@ importFrom("ggplot2", "theme_bw", "xlab", "ylab", "geom_hline", "geom_vline", "t
            "theme_void", "geom_text", "annotate", "unit",
            "ggplot_gtable", "ggplot_build", "theme_classic", "element_rect", "ggsave",
            "geom_smooth", "geom_contour")
+importFrom("grid", "grid.roundrect", "gpar")
+importFrom("oce", "mapPlot", "mapPoints", "mapPolygon")
+importFrom("sf", "st_coordinates", "st_read", "st_transform")
 
 # imports from standard packages
 importFrom("grDevices", "dev.off", "cairo_pdf", "pdf", "blues9", "colorRampPalette",
@@ -135,7 +140,7 @@ importFrom("graphics", "abline", "arrows", "axis", "box", "layout",
 importFrom("stats", "lm", "na.omit", "predict", "sd", "predict.lm", "residuals",
            "qqline", "qqnorm", "quantile", "median", "fivenum",
            "density", "formula", "t.test", "approx", "splinefun", "xtabs",
-           "coefficients", "loess", "wilcox.test", "weighted.mean")
+           "coefficients", "loess", "wilcox.test", "weighted.mean", "kmeans", "qt")
 importFrom("utils", "read.csv", "demo", "tail", "write.csv",
            "capture.output", "browseURL", "head", "combn", "read.table")
 

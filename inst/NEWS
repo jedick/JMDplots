@@ -1,10 +1,11 @@
-CHANGES IN JMDplots 1.2.8-2
+CHANGES IN JMDplots 1.2.8-5
 ---------------------------
 
-- 20210920 Add 'mincount' argument to getRDP() and related functions.
+- 20211003 Add plots for orp16S paper.
 
-- 20210922 Use fastq-dump --clip to remove adapters, and 0.5 confidence score
-  threshold for RDP Classifier in chem16S/pipeline.R.
+- 20210922 Use fastq-dump --clip to remove adapters in chem16S/pipeline.R.
+
+- 20210920 Add 'mincount' argument to getRDP() and related functions.
 
 CHANGES IN JMDplots 1.2.8
 -------------------------

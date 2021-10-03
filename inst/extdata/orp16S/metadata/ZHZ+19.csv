@@ -1,0 +1,32 @@
+study,name,Run,BioSample,sample,environment,hydrocarbon,Treatment,"ORP (mV)"
+ZHZ+19,"Hydrocarbon Biodegradation",SRR8607593,SAMN10986706,AR-Sludge,"Anaerobic Returned Sludge",NA,NA,NA
+ZHZ+19,"Hydrocarbon Biodegradation",SRR8607580,SAMN10986703,C-Soil,"Contaminated Soil",NA,NA,NA
+ZHZ+19,"Hydrocarbon Biodegradation",SRR8607581,SAMN10986704,O-Sludge,"Oil Sludge",NA,NA,NA
+ZHZ+19,"Hydrocarbon Biodegradation",SRR8607601,SAMN10986676,O4.1,NA,NA,Original,-131
+ZHZ+19,"Hydrocarbon Biodegradation",SRR8607600,SAMN10986677,O4.2,NA,NA,Original,-131
+ZHZ+19,"Hydrocarbon Biodegradation",SRR8607599,SAMN10986678,O4.3,NA,NA,Original,-131
+ZHZ+19,"Hydrocarbon Biodegradation",SRR8607584,SAMN10986694,PFP4.1,NA,PAH,Ferric-reducing,-148
+ZHZ+19,"Hydrocarbon Biodegradation",SRR8607583,SAMN10986695,PFP4.2,NA,PAH,Ferric-reducing,-148
+ZHZ+19,"Hydrocarbon Biodegradation",SRR8607573,SAMN10986696,PFP4.3,NA,PAH,Ferric-reducing,-148
+ZHZ+19,"Hydrocarbon Biodegradation",SRR8607577,SAMN10986700,PMP4.1,NA,PAH,Methanogenic,-418
+ZHZ+19,"Hydrocarbon Biodegradation",SRR8607578,SAMN10986701,PMP4.2,NA,PAH,Methanogenic,-418
+ZHZ+19,"Hydrocarbon Biodegradation",SRR8607579,SAMN10986702,PMP4.3,NA,PAH,Methanogenic,-418
+ZHZ+19,"Hydrocarbon Biodegradation",SRR8607585,SAMN10986691,PNP4.1,NA,PAH,Nitrate-reducing,-77
+ZHZ+19,"Hydrocarbon Biodegradation",SRR8607588,SAMN10986692,PNP4.2,NA,PAH,Nitrate-reducing,-77
+ZHZ+19,"Hydrocarbon Biodegradation",SRR8607587,SAMN10986693,PNP4.3,NA,PAH,Nitrate-reducing,-77
+ZHZ+19,"Hydrocarbon Biodegradation",SRR8607574,SAMN10986697,PSP4.1,NA,PAH,Sulfate-reducing,-350
+ZHZ+19,"Hydrocarbon Biodegradation",SRR8607575,SAMN10986698,PSP4.2,NA,PAH,Sulfate-reducing,-350
+ZHZ+19,"Hydrocarbon Biodegradation",SRR8607576,SAMN10986699,PSP4.3,NA,PAH,Sulfate-reducing,-350
+ZHZ+19,NA,SRR8607582,SAMN10986705,UR-Sed.,"Urban river sediment",NA,NA,-148
+ZHZ+19,"Hydrocarbon Biodegradation",SRR8607595,SAMN10986682,nFP4.1,NA,n-alkane,Ferric-reducing,-160
+ZHZ+19,"Hydrocarbon Biodegradation",SRR8607594,SAMN10986683,nFP4.2,NA,n-alkane,Ferric-reducing,-160
+ZHZ+19,"Hydrocarbon Biodegradation",SRR8607603,SAMN10986684,nFP4.3,NA,n-alkane,Ferric-reducing,-160
+ZHZ+19,"Hydrocarbon Biodegradation",SRR8607592,SAMN10986688,nMP4.1,NA,n-alkane,Methanogenic,-399
+ZHZ+19,"Hydrocarbon Biodegradation",SRR8607591,SAMN10986689,nMP4.2,NA,n-alkane,Methanogenic,-399
+ZHZ+19,"Hydrocarbon Biodegradation",SRR8607586,SAMN10986690,nMP4.3,NA,n-alkane,Methanogenic,-399
+ZHZ+19,"Hydrocarbon Biodegradation",SRR8607598,SAMN10986679,nNP4.1,NA,n-alkane,Nitrate-reducing,-79
+ZHZ+19,"Hydrocarbon Biodegradation",SRR8607597,SAMN10986680,nNP4.2,NA,n-alkane,Nitrate-reducing,-79
+ZHZ+19,"Hydrocarbon Biodegradation",SRR8607596,SAMN10986681,nNP4.3,NA,n-alkane,Nitrate-reducing,-79
+ZHZ+19,"Hydrocarbon Biodegradation",SRR8607602,SAMN10986685,nSP4.1,NA,n-alkane,Sulfate-reducing,-330
+ZHZ+19,"Hydrocarbon Biodegradation",SRR8607590,SAMN10986686,nSP4.2,NA,n-alkane,Sulfate-reducing,-330
+ZHZ+19,"Hydrocarbon Biodegradation",SRR8607589,SAMN10986687,nSP4.3,NA,n-alkane,Sulfate-reducing,-330

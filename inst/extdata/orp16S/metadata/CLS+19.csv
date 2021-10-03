@@ -1,0 +1,46 @@
+name,Run,BioSample,SampleName,Domain,Type,Location,pH,"T (°C)","ORP (mV)","DO (mg/L)","Cond (μs/cm-1)"
+"Jinchuan River",SRR6823395,SAMN08683324,AB1,Bacteria,Water,"Baota Bridge",7.8,20.3,31,1.7,496
+"Jinchuan River",SRR6823394,SAMN08683325,AB2,Bacteria,Water,"Baota Bridge",7.9,19.5,28,0.4,463
+"Jinchuan River",SRR6823393,SAMN08683326,AB3,Bacteria,Water,"Baota Bridge",7.6,20.3,28,0.2,478
+"Jinchuan River",SRR6823392,SAMN08683327,BB1,Bacteria,Water,"Jingeng Road",8.2,21,60,4.9,926
+"Jinchuan River",SRR6823399,SAMN08683328,BB2,Bacteria,Water,"Jingeng Road",7.9,20.6,54,1.1,952
+"Jinchuan River",SRR6823398,SAMN08683329,BB3,Bacteria,Water,"Jingeng Road",7.5,20.4,40,0.2,947
+"Jinchuan River",SRR6823397,SAMN08683330,CB1,Bacteria,Water,"Dongguapu Bridge",7.9,20.3,-36,0.3,475
+"Jinchuan River",SRR6823396,SAMN08683331,CB2,Bacteria,Water,"Dongguapu Bridge",7.9,20.4,-36,0.4,492
+"Jinchuan River",SRR6823390,SAMN08683332,CB3,Bacteria,Water,"Dongguapu Bridge",7.9,20.3,-38,0.3,474
+"Jinchuan River",SRR6823389,SAMN08683333,DB1,Bacteria,Water,"Xinmenkou Residential District",7.9,20.4,4,2.3,425
+"Jinchuan River",SRR6823388,SAMN08683334,DB2,Bacteria,Water,"Xinmenkou Residential District",7.9,20.3,-2,1.3,434
+"Jinchuan River",SRR6823391,SAMN08683335,DB3,Bacteria,Water,"Xinmenkou Residential District",7.8,20.6,-23,0.9,456
+"Jinchuan River",SRR6823645,SAMN08683352,AB4,Bacteria,Sediment,"Baota Bridge",7.1,19.7,197,NA,NA
+"Jinchuan River",SRR6823644,SAMN08683353,AB5,Bacteria,Sediment,"Baota Bridge",7,19.5,11,NA,NA
+"Jinchuan River",SRR6823647,SAMN08683354,AB6,Bacteria,Sediment,"Baota Bridge",7.1,20.3,2,NA,NA
+"Jinchuan River",SRR6823646,SAMN08683355,BB4,Bacteria,Sediment,"Jingeng Road",7.1,21,233,NA,NA
+"Jinchuan River",SRR6823649,SAMN08683356,BB5,Bacteria,Sediment,"Jingeng Road",7.2,20.6,112,NA,NA
+"Jinchuan River",SRR6823648,SAMN08683357,BB6,Bacteria,Sediment,"Jingeng Road",7.2,20.4,7,NA,NA
+"Jinchuan River",SRR6823651,SAMN08683358,CB4,Bacteria,Sediment,"Dongguapu Bridge",7.1,20.3,254,NA,NA
+"Jinchuan River",SRR6823650,SAMN08683359,CB5,Bacteria,Sediment,"Dongguapu Bridge",7.2,20.4,214,NA,NA
+"Jinchuan River",SRR6823643,SAMN08683360,CB6,Bacteria,Sediment,"Dongguapu Bridge",7.2,20.3,8,NA,NA
+"Jinchuan River",SRR6823642,SAMN08683361,DB4,Bacteria,Sediment,"Xinmenkou Residential District",7.1,20.4,218,NA,NA
+"Jinchuan River",SRR6823653,SAMN08683362,DB5,Bacteria,Sediment,"Xinmenkou Residential District",7.1,20.3,67,NA,NA
+"Jinchuan River",SRR6823652,SAMN08683363,DB6,Bacteria,Sediment,"Xinmenkou Residential District",7.2,20.6,13,NA,NA
+"Jinchuan River",SRR6823637,SAMN08683339,AA1,Archaea,Water,"Baota Bridge",7.8,20.3,31,1.7,496
+"Jinchuan River",SRR6823636,SAMN08683340,AA2,Archaea,Water,"Baota Bridge",7.9,19.5,28,0.4,463
+"Jinchuan River",SRR6823639,SAMN08683341,AA3,Archaea,Water,"Baota Bridge",7.6,20.3,28,0.2,478
+"Jinchuan River",SRR6823638,SAMN08683342,BA1,Archaea,Water,"Jingeng Road",8.2,21,60,4.9,926
+"Jinchuan River",SRR6823633,SAMN08683343,BA2,Archaea,Water,"Jingeng Road",7.9,20.6,54,1.1,952
+"Jinchuan River",SRR6823632,SAMN08683344,BA3,Archaea,Water,"Jingeng Road",7.5,20.4,40,0.2,947
+"Jinchuan River",SRR6823630,SAMN08683348,DA1,Archaea,Water,"Xinmenkou Residential District",7.9,20.4,4,2.3,425
+"Jinchuan River",SRR6823641,SAMN08683349,DA2,Archaea,Water,"Xinmenkou Residential District",7.9,20.3,-2,1.3,434
+"Jinchuan River",SRR6823640,SAMN08683350,DA3,Archaea,Water,"Xinmenkou Residential District",7.8,20.6,-23,0.9,456
+"Jinchuan River",SRR6823676,SAMN08683365,AA4,Archaea,Sediment,"Baota Bridge",7.1,19.7,197,NA,NA
+"Jinchuan River",SRR6823675,SAMN08683366,AA5,Archaea,Sediment,"Baota Bridge",7,19.5,11,NA,NA
+"Jinchuan River",SRR6823682,SAMN08683367,AA6,Archaea,Sediment,"Baota Bridge",7.1,20.3,2,NA,NA
+"Jinchuan River",SRR6823679,SAMN08683368,BA4,Archaea,Sediment,"Jingeng Road",7.1,21,233,NA,NA
+"Jinchuan River",SRR6823672,SAMN08683369,BA5,Archaea,Sediment,"Jingeng Road",7.2,20.6,112,NA,NA
+"Jinchuan River",SRR6823671,SAMN08683370,BA6,Archaea,Sediment,"Jingeng Road",7.2,20.4,7,NA,NA
+"Jinchuan River",SRR6823674,SAMN08683371,CA4,Archaea,Sediment,"Dongguapu Bridge",7.1,20.3,254,NA,NA
+"Jinchuan River",SRR6823673,SAMN08683372,CA5,Archaea,Sediment,"Dongguapu Bridge",7.2,20.4,214,NA,NA
+"Jinchuan River",SRR6823681,SAMN08683373,CA6,Archaea,Sediment,"Dongguapu Bridge",7.2,20.3,8,NA,NA
+"Jinchuan River",SRR6823680,SAMN08683374,DA4,Archaea,Sediment,"Xinmenkou Residential District",7.1,20.4,218,NA,NA
+"Jinchuan River",SRR6823678,SAMN08683375,DA5,Archaea,Sediment,"Xinmenkou Residential District",7.1,20.3,67,NA,NA
+"Jinchuan River",SRR6823677,SAMN08683376,DA6,Archaea,Sediment,"Xinmenkou Residential District",7.2,20.6,13,NA,NA

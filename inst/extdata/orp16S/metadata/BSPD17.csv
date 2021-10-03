@@ -1,0 +1,33 @@
+name,Run,LibraryName,BioSample,"Sample name",Type,Description,replicate,pH,"Redox (mV)"
+"Baltic Sea Swedish Coast",SRR3584323,1_P933_1035,SAMN05163191,"Water Oxic field 1",Water,"Oxic field",1,8.12,160.8
+"Baltic Sea Swedish Coast",SRR3584432,24_P933_1058,SAMN05163191,"Water Oxic control 1 day 0",Water,"Oxic control day 0",1,8.35,133.1
+"Baltic Sea Swedish Coast",SRR3584499,85_P1130_2026,SAMN05163191,"Water Oxic control 1 day 12",Water,"Oxic control day 12",1,7.57,142.8
+"Baltic Sea Swedish Coast",SRR3584409,13_P933_1047,SAMN05163191,"Water Oxic control 1 day 20",Water,"Oxic control day 20",1,7.88,148.45
+"Baltic Sea Swedish Coast",SRR3584419,21_P933_1055,SAMN05163191,"Water Oxic to Anoxic 1 day 0",Water,"Oxic to Anoxic day 0",1,8.31,139.35
+"Baltic Sea Swedish Coast",SRR3584496,82_P1130_2022,SAMN05163191,"Water Oxic to Anoxic 1 day 12",Water,"Oxic to Anoxic day 12",1,7.34,172.75
+"Baltic Sea Swedish Coast",SRR3584505,10_P933_1044,SAMN05163191,"Water Oxic to Anoxic 1 day 20",Water,"Oxic to Anoxic day 20",1,7.44,171.3
+"Baltic Sea Swedish Coast",SRR3584439,4_P933_1038,SAMN05163191,"Water Intermediate field 1",Water,"Intermediate field",1,7.74,132.5
+"Baltic Sea Swedish Coast",SRR3584444,35_P933_1077,SAMN05163191,"Water Intermediate to Oxic 1 day 0",Water,"Intermediate to Oxic day 0",1,8.24,125.6
+"Baltic Sea Swedish Coast",SRR3584504,90_P1130_2036,SAMN05163191,"Water Intermediate to Oxic 1 day 12",Water,"Intermediate to Oxic day 12",1,7.63,149.5
+"Baltic Sea Swedish Coast",SRR3584416,19_P933_1053,SAMN05163191,"Water Intermediate to Oxic 1 day 20",Water,"Intermediate to Oxic day 20",1,7.96,159.67
+"Baltic Sea Swedish Coast",SRR3584445,36_P933_1078,SAMN05163191,"Water Intermediate to Anoxic 1 day 0",Water,"Intermediate to Anoxic day 0",1,7.96,125.6
+"Baltic Sea Swedish Coast",SRR3584506,91_P1130_2037,SAMN05163191,"Water Intermediate to Anoxic 1 day 12",Water,"Intermediate to Anoxic day 12",1,7.23,155.2
+"Baltic Sea Swedish Coast",SRR3584417,20_P933_1054,SAMN05163191,"Water Intermediate to Anoxic 1 day 20",Water,"Intermediate to Anoxic day 20",1,7.46,183.3
+"Baltic Sea Swedish Coast",SRR3584472,7_P933_1041,SAMN05163191,"Water Anoxic field 1",Water,"Anoxic field",1,7.69,-1.4
+"Baltic Sea Swedish Coast",SRR3584447,38_P933_1091,SAMN05163191,"Water Anoxic control 1 day 0",Water,"Anoxic control day 0",1,7.59,146.5
+"Baltic Sea Swedish Coast",SRR3584508,93_P1130_2039,SAMN05163191,"Water Anoxic control 1 day 12",Water,"Anoxic control day 12",1,7.47,143.35
+"Baltic Sea Swedish Coast",SRR3584436,28_P933_1066,SAMN05163191,"Water Anoxic control 1 day 20",Water,"Anoxic control day 20",1,7.36,157
+"Baltic Sea Swedish Coast",SRR3584446,37_P933_1079,SAMN05163191,"Water Anoxic to Oxic 1 day 0",Water,"Anoxic to Oxic day 0",1,7.99,45.93
+"Baltic Sea Swedish Coast",SRR3584507,92_P1130_2038,SAMN05163191,"Water Anoxic to Oxic 1 day 12",Water,"Anoxic to Oxic day 12",1,7.74,153.33
+"Baltic Sea Swedish Coast",SRR3584435,27_P933_1065,SAMN05163191,"Water Anoxic to Oxic 1 day 20",Water,"Anoxic to Oxic day 20",1,8.01,157.5
+"Baltic Sea Swedish Coast",SRR3584512,97_P1130_2044,SAMN05163191,"Sediment Oxic field 1",Sediment,"Oxic field",1,7.85,96.95
+"Baltic Sea Swedish Coast",SRR3584396,109_P1130_2056,SAMN05163191,"Sediment Oxic control 1",Sediment,"Oxic control",1,NA,NA
+"Baltic Sea Swedish Coast",SRR3584374,106_P1130_2053,SAMN05163191,"Sediment Oxic to Anoxic 1",Sediment,"Oxic to Anoxic",1,NA,NA
+"Baltic Sea Swedish Coast",SRR3584515,100_P1130_2047,SAMN05163191,"Sediment Intermediate field 1",Sediment,"Intermediate field",1,7.95,119.7
+"Baltic Sea Swedish Coast",SRR3584399,111_P1130_2058,SAMN05163191,"Sediment Intermediate to Oxic 1",Sediment,"Intermediate to Oxic",1,7.91,104.15
+"Baltic Sea Swedish Coast",SRR3584401,113_P1130_2060,SAMN05163191,"Sediment Intermediate to Anoxic 1",Sediment,"Intermediate to Anoxic",1,8.02,128.37
+"Baltic Sea Swedish Coast",SRR3584371,103_P1130_2050,SAMN05163191,"Sediment Anoxic field 1",Sediment,"Anoxic field",1,8.1,114.2
+"Baltic Sea Swedish Coast",SRR3584406,118_P1130_2065,SAMN05163191,"Sediment Anoxic control 1",Sediment,"Anoxic control",1,8.22,106.75
+"Baltic Sea Swedish Coast",SRR3584404,116_P1130_2063,SAMN05163191,"Sediment Anoxic to Oxic 1",Sediment,"Anoxic to Oxic",1,8.02,130.8
+"Baltic Sea Swedish Coast",SRR3585037,6_P2043_1092,SAMN05173135,"Anoxic Control 1",NA,"Anoxic Control",1,NA,NA
+"Baltic Sea Swedish Coast",SRR3585032,1_P2043_1087,SAMN05173135,"Anoxic to oxic 1",NA,"Anoxic to oxic",1,NA,NA

@@ -1,0 +1,10 @@
+name,Run,BioSample,SampleName,Location,pH,"T (°C)","ORP (mV)","DO (%)"
+"Southwestern Yunnan",SRR9311567,SAMN12057465,DGG1,Rehai,7.97,84,-140,15.3
+"Southwestern Yunnan",SRR9311568,SAMN12057466,DGG2,Rehai,4.57,54.3,242,55
+"Southwestern Yunnan",SRR13069621,SAMN16802399,DGG3,Rehai,8.45,85.3,58,30.9
+"Southwestern Yunnan",SRR13069620,SAMN16802400,DGG4,Rehai,8.67,83.3,94,63.9
+"Southwestern Yunnan",SRR13069619,SAMN16802401,DGG6,Rehai,7.73,87.3,2,25
+"Southwestern Yunnan",SRR9311565,SAMN12057463,BLZ1,Banglazhang,8.12,83.9,-162,37.8
+"Southwestern Yunnan",SRR9311566,SAMN12057464,BLZ2,Banglazhang,5.9,43.5,136,37.8
+"Southwestern Yunnan",SRR13069623,SAMN16802397,BLZ4,Banglazhang,9.16,85,-254,9
+"Southwestern Yunnan",SRR13069622,SAMN16802398,BLZ5,Banglazhang,7.55,76.3,-145,39.9
