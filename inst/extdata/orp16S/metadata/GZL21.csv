@@ -1,0 +1,95 @@
+name,Run,BioSample,SampleName,Site,Type,Position,Latitude,Longitude,Depth,"Temperature (°C)",pH,"DO (mg/L)","ORP (mV)"
+"Three Gorges Reservoir",SRR14692645,SAMN19460476,s_mFXZ,fuxingzhen,Sediment,Main stream,30.29638333,108.1198333,29,NA,NA,NA,NA
+"Three Gorges Reservoir",SRR14692653,SAMN19460469,s_mGLZ,gulingzhen,Sediment,Main stream,30.94366667,109.0819167,58,NA,NA,NA,NA
+"Three Gorges Reservoir",SRR14692638,SAMN19460482,s_mGPC,gaopingcun,Sediment,Main stream,29.72143333,107.1373167,22,NA,NA,NA,NA
+"Three Gorges Reservoir",SRR14692659,SAMN19460463,s_mLZFC,lvzhufacun,Sediment,Main stream,31.04095,110.4873833,92,NA,NA,NA,NA
+"Three Gorges Reservoir",SRR14692637,SAMN19460483,s_mMLZ,maliuzui,Sediment,Main stream,29.68731667,106.9215167,12,NA,NA,NA,NA
+"Three Gorges Reservoir",SRR14692642,SAMN19460479,s_mNTZ,nantozhen,Sediment,Main stream,29.8644,107.5314,26,NA,NA,NA,NA
+"Three Gorges Reservoir",SRR14692655,SAMN19460467,s_mQCX,quchixiang,Sediment,Main stream,31.02686667,109.7423333,39,NA,NA,NA,NA
+"Three Gorges Reservoir",SRR14692641,SAMN19460480,s_mQXZ,qingxizhen,Sediment,Main stream,29.78948333,107.4429833,41,NA,NA,NA,NA
+"Three Gorges Reservoir",SRR14692657,SAMN19460465,s_mWSX,wushanxian,Sediment,Main stream,31.06503333,109.9006333,141,NA,NA,NA,NA
+"Three Gorges Reservoir",SRR14692644,SAMN19460477,s_mWYZ,wuyangzhen,Sediment,Main stream,30.2078,108.00015,27,NA,NA,NA,NA
+"Three Gorges Reservoir",SRR14692635,SAMN19460485,s_mXKZ,xiakouzhen,Sediment,Main stream,29.56773333,106.66855,21,NA,NA,NA,NA
+"Three Gorges Reservoir",SRR14692636,SAMN19460484,s_mXSC,xinshancun,Sediment,Main stream,29.57911667,106.83845,20,NA,NA,NA,NA
+"Three Gorges Reservoir",SRR14692646,SAMN19460475,s_mYYS,yunyangshang,Sediment,Main stream,30.95281667,108.6378167,62,NA,NA,NA,NA
+"Three Gorges Reservoir",SRR14692648,SAMN19460473,s_mYYX,yunyangxia,Sediment,Main stream,30.92221667,108.7468833,48,NA,NA,NA,NA
+"Three Gorges Reservoir",SRR14692663,SAMN19460460,s_mZG,zigui,Sediment,Main stream,30.84941667,110.9854667,108,NA,NA,NA,NA
+"Three Gorges Reservoir",SRR14692652,SAMN19460470,s_tCTH,changtanhe,Sediment,Tributary,30.91183333,109.08395,29,NA,NA,NA,NA
+"Three Gorges Reservoir",SRR14692656,SAMN19460466,s_tDNH,daninghe,Sediment,Tributary,31.11853333,109.8929833,36,NA,NA,NA,NA
+"Three Gorges Reservoir",SRR14692662,SAMN19460461,s_tJWX,jiuwanxi,Sediment,Tributary,30.84585,110.8404167,43,NA,NA,NA,NA
+"Three Gorges Reservoir",SRR14692643,SAMN19460478,s_tLH,longhe,Sediment,Tributary,29.87333333,107.7448333,23,NA,NA,NA,NA
+"Three Gorges Reservoir",SRR14692651,SAMN19460471,s_tMDX,modaoxi,Sediment,Tributary,30.9148,108.9525,38,NA,NA,NA,NA
+"Three Gorges Reservoir",SRR14692654,SAMN19460468,s_tMXH,meixihe,Sediment,Tributary,31.10698333,109.4770167,43,NA,NA,NA,NA
+"Three Gorges Reservoir",SRR14692647,SAMN19460474,s_tPXH,pengxihe,Sediment,Tributary,30.94711667,108.69435,58,NA,NA,NA,NA
+"Three Gorges Reservoir",SRR14692658,SAMN19460464,s_tSNX,shennongxi,Sediment,Tributary,31.09288333,110.31555,71,NA,NA,NA,NA
+"Three Gorges Reservoir",SRR14692649,SAMN19460472,s_tTXH,tangxihe,Sediment,Tributary,30.97121667,108.9053,54,NA,NA,NA,NA
+"Three Gorges Reservoir",SRR14692640,SAMN19460481,s_tWJ,wujiang,Sediment,Tributary,29.67735,107.3896833,22,NA,NA,NA,NA
+"Three Gorges Reservoir",SRR14692660,SAMN19460462,s_tXXH,xiangxihe,Sediment,Tributary,30.98976667,110.76025,43,NA,NA,NA,NA
+"Three Gorges Reservoir",SRR14692668,SAMN19460455,w1mCT,cuntan,"Surface water",Main stream,29.62041667,106.6032667,0.5,NA,NA,NA,NA
+"Three Gorges Reservoir",SRR14692666,SAMN19460457,w1mCTM,chaotianmen,"Surface water",Main stream,29.56978333,106.5885,0.5,NA,NA,NA,NA
+"Three Gorges Reservoir",SRR14692702,SAMN19460424,w1mFXZ,fuxingzhen,"Surface water",Main stream,30.29638333,108.1198333,0.5,18.464,7.96,8.59,277.3
+"Three Gorges Reservoir",SRR14692720,SAMN19460408,w1mGLZ,gulingzhen,"Surface water",Main stream,30.94366667,109.0819167,0.5,18.832,8.33,9.87,233.1
+"Three Gorges Reservoir",SRR14692687,SAMN19460438,w1mGPC,gaopingcun,"Surface water",Main stream,29.71946667,107.14105,0.5,21.959,8.07,8.21,203.1
+"Three Gorges Reservoir",SRR14692689,SAMN19460436,w1mGYC,guoyuancun,"Surface water",Main stream,29.74425,107.3237167,0.5,19.881,7.98,8.72,127.6
+"Three Gorges Reservoir",SRR14692650,SAMN19460400,w1mLZFC,lvzhufacun,"Surface water",Main stream,31.04095,110.4873833,0.5,15.938,8.36,9.66,280.4
+"Three Gorges Reservoir",SRR14692686,SAMN19460439,w1mMLZ,maliuzui,"Surface water",Main stream,29.6997,106.9330167,0.5,21.509,8.08,8.51,204.1
+"Three Gorges Reservoir",SRR14692697,SAMN19460429,w1mNTZ,nantozhen,"Surface water",Main stream,29.85855,107.53115,0.5,19.76,7.89,8.19,271.6
+"Three Gorges Reservoir",SRR14692722,SAMN19460406,w1mQCX,quchixiang,"Surface water",Main stream,31.02686667,109.7423333,0.5,17.055,8.28,8.87,239.2
+"Three Gorges Reservoir",SRR14692696,SAMN19460430,w1mQXZ,qingxizhen,"Surface water",Main stream,29.79083333,107.4419333,0.5,20.828,7.99,8.37,218.3
+"Three Gorges Reservoir",SRR14692694,SAMN19460396,w1mQYZ,quyuanzhen,"Surface water",Main stream,30.92676667,110.8179667,0.5,15.278,8.25,9.99,272.8
+"Three Gorges Reservoir",SRR14692632,SAMN19460402,w1mWSX,wushanxian,"Surface water",Main stream,31.06503333,109.9006333,0.5,17.202,8.15,8.8,261.8
+"Three Gorges Reservoir",SRR14692701,SAMN19460425,w1mWYZ,wuyangzhen,"Surface water",Main stream,30.2078,108.00015,0.5,19.072,7.97,8.64,207.5
+"Three Gorges Reservoir",SRR14692671,SAMN19460452,w1mWZX,wanzhouxian,"Surface water",Main stream,30.76331667,108.4189,0.5,NA,NA,NA,NA
+"Three Gorges Reservoir",SRR14692684,SAMN19460441,w1mXKZ,xiakouzhen,"Surface water",Main stream,29.56773333,106.66855,0.5,21.323,7.99,8.24,229.2
+"Three Gorges Reservoir",SRR14692685,SAMN19460440,w1mXSC,xinshancun,"Surface water",Main stream,29.60185,106.8549833,0.5,21.439,7.9,8.2,246.7
+"Three Gorges Reservoir",SRR14692703,SAMN19460423,w1mYSX,yanshanxiang,"Surface water",Main stream,30.55666667,108.2993,0.5,18.619,8.13,9.45,255.5
+"Three Gorges Reservoir",SRR14692704,SAMN19460422,w1mYYS,yunyangshang,"Surface water",Main stream,30.95276667,108.6393833,0.5,18.073,8.13,8.63,238.2
+"Three Gorges Reservoir",SRR14692709,SAMN19460418,w1mYYX,yunyangxia,"Surface water",Main stream,30.92221667,108.7468833,0.5,18.232,8.23,8.36,250.4
+"Three Gorges Reservoir",SRR14692634,SAMN19460392,w1mZG,zigui,"Surface water",Main stream,30.84941667,110.9854667,0.5,14.619,8.18,9.31,274.1
+"Three Gorges Reservoir",SRR14692719,SAMN19460409,w1tCTH,changtanhe,"Surface water",Tributary,30.91183333,109.08395,0.5,17.634,8.29,9.02,223.8
+"Three Gorges Reservoir",SRR14692631,SAMN19460403,w1tDNH,daninghe,"Surface water",Tributary,31.10453333,109.8899833,0.5,18.021,8.43,10.03,261.3
+"Three Gorges Reservoir",SRR14692681,SAMN19460443,w1tDNH1,daxihe,"Surface water",Tributary,30.9897,109.6087833,0.5,NA,NA,NA,NA
+"Three Gorges Reservoir",SRR14692682,SAMN19460442,w1tJLJ,jialingjiang,"Surface water",Tributary,29.5692,106.5787167,0.5,21.982,7.75,8.04,264.6
+"Three Gorges Reservoir",SRR14692705,SAMN19460395,w1tJWX,jiuwanxi,"Surface water",Tributary,30.84585,110.8404167,0.5,16.321,8.57,10.46,308.2
+"Three Gorges Reservoir",SRR14692700,SAMN19460426,w1tLH,longhe,"Surface water",Tributary,29.87333333,107.7448333,0.5,19.599,8.01,8.57,275.4
+"Three Gorges Reservoir",SRR14692688,SAMN19460437,w1tLXX,lixiangxi,"Surface water",Tributary,29.651,107.1275,0.5,NA,NA,NA,NA
+"Three Gorges Reservoir",SRR14692715,SAMN19460412,w1tMDX,modaoxi,"Surface water",Tributary,30.9148,108.9525,0.5,18.725,8.17,8.55,257.9
+"Three Gorges Reservoir",SRR14692721,SAMN19460407,w1tMXH,meixihe,"Surface water",Tributary,31.10698333,109.4770167,0.5,21.505,8.7,9.86,219.9
+"Three Gorges Reservoir",SRR14692678,SAMN19460446,w1tMXH1,meixihe,"Surface water",Tributary,31.11233333,109.4375833,0.5,NA,NA,NA,NA
+"Three Gorges Reservoir",SRR14692708,SAMN19460419,w1tPXH,pengxihe,"Surface water",Tributary,30.94711667,108.69435,0.5,21.537,8.02,8.84,255.9
+"Three Gorges Reservoir",SRR14692675,SAMN19460449,w1tPXH1,pengxihe,"Surface water",Tributary,31.08908333,108.6751833,0.5,NA,NA,NA,NA
+"Three Gorges Reservoir",SRR14692639,SAMN19460401,w1tSNX,shennongxi,"Surface water",Tributary,31.09288333,110.31555,0.5,16.988,8.31,9.14,275.5
+"Three Gorges Reservoir",SRR14692712,SAMN19460415,w1tTXH,tangxihe,"Surface water",Tributary,30.97121667,108.9053,0.5,19.312,8.17,8.81,244.5
+"Three Gorges Reservoir",SRR14692692,SAMN19460433,w1tWJ,wujiang,"Surface water",Tributary,29.67735,107.3896833,0.5,17.134,8.17,9.14,253.1
+"Three Gorges Reservoir",SRR14692683,SAMN19460397,w1tXXH,xiangxihe,"Surface water",Tributary,30.98976667,110.76025,0.5,15.86,8.17,8.96,238.8
+"Three Gorges Reservoir",SRR14692665,SAMN19460458,w2mCTM,chaotianmen,"Middle water",Main stream,29.56978333,106.5885,8.5,NA,NA,NA,NA
+"Three Gorges Reservoir",SRR14692695,SAMN19460431,w2mQXZ,qingxizhen,"Middle water",Main stream,29.79083333,107.4419333,20.5,19.918,7.98,8.11,221.1
+"Three Gorges Reservoir",SRR14692670,SAMN19460453,w2mWZX,wanzhouxian,"Middle water",Main stream,30.76331667,108.4189,68,NA,NA,NA,NA
+"Three Gorges Reservoir",SRR14692633,SAMN19460393,w2mZG,zigui,"Middle water",Main stream,30.84941667,110.9854667,54,14.327,8.15,8.55,291
+"Three Gorges Reservoir",SRR14692718,SAMN19460410,w2tCTH,changtanhe,"Middle water",Tributary,30.91183333,109.08395,14.5,17.398,7.97,7.97,223.5
+"Three Gorges Reservoir",SRR14692630,SAMN19460404,w2tDNH,daninghe,"Middle water",Tributary,31.10453333,109.8899833,36.5,16.933,8.11,8.51,261.1
+"Three Gorges Reservoir",SRR14692680,SAMN19460444,w2tDNH1,daxihe,"Middle water",Tributary,30.9897,109.6087833,15,NA,NA,NA,NA
+"Three Gorges Reservoir",SRR14692699,SAMN19460427,w2tLH,longhe,"Middle water",Tributary,29.87333333,107.7448333,11.5,16.583,7.86,8.62,276.1
+"Three Gorges Reservoir",SRR14692714,SAMN19460413,w2tMDX,modaoxi,"Middle water",Tributary,30.9148,108.9525,19,17.533,8.02,7.96,261.6
+"Three Gorges Reservoir",SRR14692677,SAMN19460447,w2tMXH1,meixihe,"Middle water",Tributary,31.11233333,109.4375833,10.5,NA,NA,NA,NA
+"Three Gorges Reservoir",SRR14692707,SAMN19460420,w2tPXH,pengxihe,"Middle water",Tributary,30.94711667,108.69435,29,18.445,8,8.37,221.7
+"Three Gorges Reservoir",SRR14692674,SAMN19460450,w2tPXH1,pengxihe,"Middle water",Tributary,31.08908333,108.6751833,14.5,NA,NA,NA,NA
+"Three Gorges Reservoir",SRR14692711,SAMN19460416,w2tTXH,tangxihe,"Middle water",Tributary,30.97121667,108.9053,27,17.96,7.94,8.11,249.6
+"Three Gorges Reservoir",SRR14692691,SAMN19460434,w2tWJ,wujiang,"Middle water",Tributary,29.67735,107.3896833,11,17.018,8.03,8.97,255.3
+"Three Gorges Reservoir",SRR14692672,SAMN19460398,w2tXXH,xiangxihe,"Middle water",Tributary,30.98976667,110.76025,21.5,15.277,8.12,8.69,246.1
+"Three Gorges Reservoir",SRR14692667,SAMN19460456,w3mCT,cuntan,"Bottom water",Main stream,29.62041667,106.6032667,11,NA,NA,NA,NA
+"Three Gorges Reservoir",SRR14692664,SAMN19460459,w3mCTM,chaotianmen,"Bottom water",Main stream,29.56978333,106.5885,17,NA,NA,NA,NA
+"Three Gorges Reservoir",SRR14692693,SAMN19460432,w3mQXZ,qingxizhen,"Bottom water",Main stream,29.79083333,107.4419333,41,19.908,7.89,8,231
+"Three Gorges Reservoir",SRR14692669,SAMN19460454,w3mWZX,wanzhouxian,"Bottom water",Main stream,30.76331667,108.4189,136,NA,NA,NA,NA
+"Three Gorges Reservoir",SRR14692716,SAMN19460394,w3mZG,zigui,"Bottom water",Main stream,30.84941667,110.9854667,108,13.584,7.93,8.54,293.1
+"Three Gorges Reservoir",SRR14692717,SAMN19460411,w3tCTH,changtanhe,"Bottom water",Tributary,30.91183333,109.08395,29,17.311,7.87,7.72,230.2
+"Three Gorges Reservoir",SRR14692723,SAMN19460405,w3tDNH,daninghe,"Bottom water",Tributary,31.10453333,109.8899833,73,16.386,8,8.15,263.6
+"Three Gorges Reservoir",SRR14692679,SAMN19460445,w3tDNH1,daxihe,"Bottom water",Tributary,30.9897,109.6087833,30,NA,NA,NA,NA
+"Three Gorges Reservoir",SRR14692698,SAMN19460428,w3tLH,longhe,"Bottom water",Tributary,29.87333333,107.7448333,23,16.456,7.84,8.56,220.5
+"Three Gorges Reservoir",SRR14692713,SAMN19460414,w3tMDX,modaoxi,"Bottom water",Tributary,30.9148,108.9525,38,17.014,7.99,7.63,264
+"Three Gorges Reservoir",SRR14692676,SAMN19460448,w3tMXH1,meixihe,"Bottom water",Tributary,31.11233333,109.4375833,21,NA,NA,NA,NA
+"Three Gorges Reservoir",SRR14692706,SAMN19460421,w3tPXH,pengxihe,"Bottom water",Tributary,30.94711667,108.69435,58,16.637,7.69,5.89,237.1
+"Three Gorges Reservoir",SRR14692673,SAMN19460451,w3tPXH1,pengxihe,"Bottom water",Tributary,31.08908333,108.6751833,29,NA,NA,NA,NA
+"Three Gorges Reservoir",SRR14692710,SAMN19460417,w3tTXH,tangxihe,"Bottom water",Tributary,30.97121667,108.9053,54,16.884,7.85,7.56,254.5
+"Three Gorges Reservoir",SRR14692690,SAMN19460435,w3tWJ,wujiang,"Bottom water",Tributary,29.67735,107.3896833,22,16.902,8.01,8.79,258.6
+"Three Gorges Reservoir",SRR14692661,SAMN19460399,w3tXXH,xiangxihe,"Bottom water",Tributary,30.98976667,110.76025,43,15.132,8.08,8.51,251.6

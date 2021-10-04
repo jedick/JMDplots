@@ -7,8 +7,8 @@
 
 # Group studies by environment types 20210828
 envirotype <- list(
-  "River & Seawater" = c("MLL+18", "SVH+19", "HXZ+20", "KLY+20", "WHL+21", "LXH+20", "JVW+20", "ZZL+21"),
-  "Lake & Pond" = c("SAR+13", "ECS+18", "BCA+21", "HLZ+18", "CNA+20", "BWD+19", "RSJ+21", "BOEM21", "FAV+21"),
+  "River & Seawater" = c("MLL+18", "SVH+19", "HXZ+20", "KLY+20", "WHL+21", "LXH+20", "JVW+20", "ZZL+21", "GZL21"),
+  "Lake & Pond" = c("SAR+13", "ECS+18", "LLC+19", "BCA+21", "HLZ+18", "CNA+20", "BWD+19", "RSJ+21", "BOEM21", "FAV+21"),
   "Groundwater" = c("KLM+16", "SDH+19", "SRM+19", "SKP+21", "YHK+20", "JDP+20", "GWS+19", "SRM+21", "ZCZ+21"),
   # NOTE: Keep Hot Spring at #4 to get red color 20210904
   "Hot Spring" = c("SMS+12", "BMJ+19", "LMG+20", "GWSS21", "GWS+20", "PBU+20", "MWY+21", "OFY+19"),
@@ -189,9 +189,11 @@ orp16S3 <- function(pdf = FALSE) {
     "LXH+20, 25.42, 99.34", # SAMN15090995
     "JVW+20, 45.432025, 12.260878", # SAMN15796698
     "ZZL+21, 22.77, 113.79", # SAMN16964962
+#    "GZL21, 29.568, 106.668", # SAMN19460485
     # Lake & Pond
     "SAR+13, 1.96, -157.33", # Materials and methods
     "ECS+18, -33.65, -70.117", # Materials and methods
+    "LLC+19, 24.82, 118.15", # SAMN04549101
     "BCA+21, 46.3615, 25.0509", # SAMN07409474
     "HLZ+18, 24.795, 118.138", # SAMN07638080
     "CNA+20, 39.441, -77.371", # Web search for geographic center of Maryland --> https://sos.maryland.gov/mdkids/Pages/Geography.aspx
@@ -288,6 +290,14 @@ orp16S3 <- function(pdf = FALSE) {
   # Coordinates for Southern Tibetan Plateau dataset are from Table 1 of MWY+21
   dat <- getmdat("MWY+21")
   mapPoints(dat$longitude, dat$latitude, col = orp16Scol[4], lwd = 2)
+  # Coordinates for Three Gorges Reservoir are from Table S1 of GZL21
+  dat <- getmdat("GZL21")
+  dat <- dat[!is.na(dat$"ORP (mV)"), ]
+  latlon <- paste(dat$Latitude, dat$Longitude)
+  isuniq <- !duplicated(latlon)
+  dat <- dat[isuniq, ]
+  mapPoints(dat$Longitude, dat$Latitude, col = 1, lwd = 1)
+
   # Get colors for studies
   icol <- envirodat$groupnum[match(coords$study, envirodat$study)]
   # Identify studies that use samples from laboratory or mesocosm experiments
@@ -659,10 +669,12 @@ orp16S_S1 <- function(pdf = FALSE) {
     plotZC("LXH+20", "Bacteria", groupby = "Season", groups = c("Summer", "Winter"), legend.x = "bottomright"),
     plotZC("JVW+20", "two", groupby = "isolation_source", groups = c("Ulva laetevirens", "lagoon water"), legend.x = "topright"),
     plotZC("ZZL+21", "Bacteria", groupby = "Location", groups = c("Main Stream", "Animal Farm", "Hospital", "WWTP", "Tributary"), legend.x = "bottomright"),
+    plotZC("GZL21", "Bacteria", groupby = "Type", groups = c("Surface water", "Middle water", "Bottom water"), legend.x = "bottomleft"),
 
     message("\nLake & Pond"),
     plotZC("SAR+13", "two", groupby = "Zone", groups = c("Photic-oxic", "Transition", "Anoxic")),
     plotZC("ECS+18", "Bacteria", groupby = "Lake", groups = c("Laguna Negra", "Lo Encanado")),
+    plotZC("LLC+19", "Bacteria", groupby = "Size", groups = c("Free-living", "Particle-associated")),
     plotZC("BCA+21", "Bacteria", groupby = "Month", groups = c("Jul", "Nov", "Feb", "Apr")),
     plotZC("HLZ+18", "Bacteria", groupby = "Type", groups = c("Reservoir", "Pond"), legend.x = "bottomright"),
     plotZC("CNA+20", "Bacteria", groupby = "Season", groups = c("Summer", "Autumn", "Winter", "Spring"), legend.x = "topright"),
