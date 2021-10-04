@@ -1,10 +1,10 @@
 ---
-title: "Local and global chemical shaping of bacterial communities by redox potential (2021)"
+title: "Chemical shaping of bacterial communities (2021)"
 output: 
   rmarkdown::html_vignette:
     mathjax: null
 vignette: >
-  %\VignetteIndexEntry{Local and global chemical shaping of bacterial communities by redox potential (2021)}
+  %\VignetteIndexEntry{Chemical shaping of bacterial communities (2021)}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 bibliography: JMDplots.bib
@@ -78,12 +78,12 @@ options(chem16Sdir = orp16Sdir)
 ```
 
 ## Geobiochemical predictive framework (Figure 1)
-```{r orp16S1, message = FALSE, results = "hide", out.width='100%', fig.width = 7, fig.height = 5, pngquant = pngquant}
+```{r orp16S1, message = FALSE, results = "hide", out.width='80%', fig.align='center', fig.width = 7, fig.height = 5, pngquant = pngquant}
 orp16S1()
 ```
 
 ## Depth profiles in Winogradsky Columns (Figure 2)
-```{r orp16S2, message = FALSE, results = "hide", out.width='100%', fig.width = 7, fig.height = 5, pngquant = pngquant}
+```{r orp16S2, message = FALSE, results = "hide", out.width='80%', fig.align='center', fig.width = 7, fig.height = 5, pngquant = pngquant}
 orp16S2()
 ```
 
@@ -91,7 +91,6 @@ orp16S2()
 
 ## Sample locations on world map (Figure 3)
 ```{r orp16S3, message = FALSE, results = "hide", out.width='100%', fig.width = 26, out.extra = 'class="full-width"', fig.height = 14, pngquant = pngquant, dpi = 100}
-data(coastlineWorld, package = "oce")
 orp16S3()
 ```
 

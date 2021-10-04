@@ -40,7 +40,6 @@ This table gives a brief description of each plotting function.
 }
 
 To set up the \code{\link{chem16S}} environment, change the \code{options(chem16Sdir)} before running these functions (see example).
-In addition, \code{data(coastlineWorld, package = "oce")} is needed before running \code{orp16S3}.
 
 \code{orp16S_S1} creates the files EZdat.csv and EZlm.csv that are used by the other functions.
 
@@ -67,8 +66,8 @@ orp16S1()
 
 orp16Sdir = system.file("extdata/orp16S", package = "JMDplots")
 options(chem16Sdir = orp16Sdir)
+
 orp16S2()
 
-data(coastlineWorld, package = "oce")
 orp16S3()
 }

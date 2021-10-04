@@ -264,7 +264,8 @@ orp16S3 <- function(pdf = FALSE) {
   # Start map
   # https://cran.r-project.org/web/packages/oce/vignettes/map_projections.html
   par(mar = c(2, 0.5, 0, 0.5))
-  mapPlot(coastlineWorld, col = "lightgray", projection = "+proj=wintri", border = "white", drawBox = FALSE)
+  # We don't need data(coastlineWorld) ... it's the default map 20211003
+  mapPlot(col = "lightgray", projection = "+proj=wintri", border = "white", drawBox = FALSE)
 
   # Add Great Lakes
   # https://www.sciencebase.gov/catalog/item/530f8a0ee4b0e7e46bd300dd
@@ -661,7 +662,7 @@ orp16S_S1 <- function(pdf = FALSE) {
 
     message("\nLake & Pond"),
     plotZC("SAR+13", "two", groupby = "Zone", groups = c("Photic-oxic", "Transition", "Anoxic")),
-    plotZC("ECS+18", "Bacteria", groupby = "Lake", groups = c("Laguna Negra", "Lo Encañado")),
+    plotZC("ECS+18", "Bacteria", groupby = "Lake", groups = c("Laguna Negra", "Lo Encanado")),
     plotZC("BCA+21", "Bacteria", groupby = "Month", groups = c("Jul", "Nov", "Feb", "Apr")),
     plotZC("HLZ+18", "Bacteria", groupby = "Type", groups = c("Reservoir", "Pond"), legend.x = "bottomright"),
     plotZC("CNA+20", "Bacteria", groupby = "Season", groups = c("Summer", "Autumn", "Winter", "Spring"), legend.x = "topright"),
@@ -728,7 +729,7 @@ orp16S_S1 <- function(pdf = FALSE) {
     plotZC("CWC+20", "Bacteria", groupby = "Management", groups = c("Flooding", "Draining")),
     plotZC("PSG+20", "two", groupby = "Treatment", groups = c("Initial", "NCC", "RB", "RGP", "TP")),
     plotZC("XLD+20", "two", groupby = "Treatment", groups = c("CK", "9K-Control", "Htt-sys", "Att-sys", "Co-sys"), legend.x = "bottomright"),
-    plotZC("LJC+20", "two", groupby = "meanT", groups = c("MAT >= 21.5 °C", "MAT < 21.5 °C")),
+    plotZC("LJC+20", "two", groupby = "meanT", groups = c("MAT >= 21.5 degC", "MAT < 21.5 degC")),
     plotZC("DTJ+20", "two", groupby = "Zone", groups = c("Bulk Soil", "Mature", "Elongation", "Tip")),
     plotZC("LLL+21", "Bacteria", groupby = "Treatment", groups = c("CK", "FL", "EA", "SB", "BD")),
     plotZC("DLS21", "two", groupby = "Treatment", groups = c("control", "char", "silicate", "husk"))
