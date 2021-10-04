@@ -236,7 +236,8 @@ getmdat <- function(study, dropNA = TRUE) {
     "WHL+21", "LLL+21", "SDH+19", "GWSS21", "HSF+19", "ZML+17", "DTJ+20", "WFB+21", "SBW+17",
     "KLM+16", "LMBA21", "ZDA+20", "ZZZ+18", "BSPD17", "CWC+20", "BMOB18", "JVW+20", "LJC+20",
     "GFE+16", "ECS+18", "FAV+21", "VMB+19", "DLS21", "ZZLL21", "GWS+20", "CLS+19", "SMS+12",
-    "OFY+19", "BYB+17", "MCS+21", "SVH+19", "PMM+20", "GZL21", "LLC+19"
+    "OFY+19", "BYB+17", "MCS+21", "SVH+19", "PMM+20", "GZL21", "LLC+19", "NLE+21", "GSY+20",
+    "SCH+16", "LZR+17"
   )) {
     # General processing of metadata for sed16S datasets 20210820
     # Get Eh or ORP values (uses partial name matching, can match a column named "Eh (mV)")

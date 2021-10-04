@@ -1,0 +1,10 @@
+name,Run,BioSample,SampleName,Type,"Depth (m)","T (°C)","Redox potential (mV)"
+"Potentilla Lake",SRR3521425,SAMN04992780,"2.5 m",Oxic,2.5,2.8,89
+"Potentilla Lake",SRR3521426,SAMN04992781,"3.5 m",Oxic,3.5,3.3,88
+"Potentilla Lake",SRR3521427,SAMN04992782,"4.0 m",Oxic,4,3.5,88
+"Potentilla Lake",SRR3521428,SAMN04992783,"4.5 m",Oxic,4.5,3.6,87
+"Potentilla Lake",SRR3521429,SAMN04992784,"5.0 m",Oxycline,5,3.6,9
+"Potentilla Lake",SRR3521430,SAMN04992785,"5.5 m",Anoxic,5.5,3.7,-123
+"Potentilla Lake",SRR3521431,SAMN04992786,"6.0 m",Anoxic,6,3.8,-179
+"Potentilla Lake",SRR3521432,SAMN04992787,"6.5 m",Anoxic,6.5,3.8,-190
+"Potentilla Lake",SRR3521433,SAMN04992788,"7.0 m",Anoxic,7,3.8,-190

@@ -8,7 +8,7 @@
 # Group studies by environment types 20210828
 envirotype <- list(
   "River & Seawater" = c("MLL+18", "SVH+19", "HXZ+20", "KLY+20", "WHL+21", "LXH+20", "JVW+20", "ZZL+21", "GZL21"),
-  "Lake & Pond" = c("SAR+13", "ECS+18", "LLC+19", "BCA+21", "HLZ+18", "CNA+20", "BWD+19", "RSJ+21", "BOEM21", "FAV+21"),
+  "Lake & Pond" = c("SAR+13", "LZR+17", "ECS+18", "LLC+19", "SCH+16", "BCA+21", "HLZ+18", "CNA+20", "BWD+19", "RSJ+21", "BOEM21", "GSY+20", "NLE+21", "FAV+21"),
   "Groundwater" = c("KLM+16", "SDH+19", "SRM+19", "SKP+21", "YHK+20", "JDP+20", "GWS+19", "SRM+21", "ZCZ+21"),
   # NOTE: Keep Hot Spring at #4 to get red color 20210904
   "Hot Spring" = c("SMS+12", "BMJ+19", "LMG+20", "GWSS21", "GWS+20", "PBU+20", "MWY+21", "OFY+19"),
@@ -192,14 +192,18 @@ orp16S3 <- function(pdf = FALSE) {
 #    "GZL21, 29.568, 106.668", # SAMN19460485
     # Lake & Pond
     "SAR+13, 1.96, -157.33", # Materials and methods
+    "LZR+17, 30.587, 104.310", # Table 1
     "ECS+18, -33.65, -70.117", # Materials and methods
     "LLC+19, 24.82, 118.15", # SAMN04549101
+    "SCH+16, 67.081, -50.355", # Materials and methods
     "BCA+21, 46.3615, 25.0509", # SAMN07409474
     "HLZ+18, 24.795, 118.138", # SAMN07638080
     "CNA+20, 39.441, -77.371", # Web search for geographic center of Maryland --> https://sos.maryland.gov/mdkids/Pages/Geography.aspx
     "BWD+19, 47.120571, -88.545425", # SAMN09980099
     "RSJ+21, 61.833, 24.283", # Materials and methods
     "BOEM21, 43.051389, -75.965", # Materials and methods
+    "GSY+20, 37.59, -7.124", # Materials and methods
+    "NLE+21, 32.833, 35.583", # SAMEA7280991
     "FAV+21, 0.757, 36.372", # SAMN19267646
     # Hot Spring
     "SMS+12, 44.6, -110.9", # JGI IMG/M sample name 1_050719N
@@ -296,7 +300,7 @@ orp16S3 <- function(pdf = FALSE) {
   latlon <- paste(dat$Latitude, dat$Longitude)
   isuniq <- !duplicated(latlon)
   dat <- dat[isuniq, ]
-  mapPoints(dat$Longitude, dat$Latitude, col = 1, lwd = 1)
+  mapPoints(dat$Longitude, dat$Latitude, col = orp16Scol[1], lwd = 1)
 
   # Get colors for studies
   icol <- envirodat$groupnum[match(coords$study, envirodat$study)]
@@ -673,14 +677,18 @@ orp16S_S1 <- function(pdf = FALSE) {
 
     message("\nLake & Pond"),
     plotZC("SAR+13", "two", groupby = "Zone", groups = c("Photic-oxic", "Transition", "Anoxic")),
+    plotZC("LZR+17", "two", groupby = "Elevation", groups = c("< 1000 m", "1000 - 4000 m", "> 4000 m"), legend.x = "bottomleft"),
     plotZC("ECS+18", "Bacteria", groupby = "Lake", groups = c("Laguna Negra", "Lo Encanado")),
     plotZC("LLC+19", "Bacteria", groupby = "Size", groups = c("Free-living", "Particle-associated")),
+    plotZC("SCH+16", "two", groupby = "Type", groups = c("Oxic", "Oxycline", "Anoxic")),
     plotZC("BCA+21", "Bacteria", groupby = "Month", groups = c("Jul", "Nov", "Feb", "Apr")),
     plotZC("HLZ+18", "Bacteria", groupby = "Type", groups = c("Reservoir", "Pond"), legend.x = "bottomright"),
     plotZC("CNA+20", "Bacteria", groupby = "Season", groups = c("Summer", "Autumn", "Winter", "Spring"), legend.x = "topright"),
     plotZC("BWD+19", "two", groupby = "Cover", groups = c("Ice", "Ice Free"), legend.x = "bottomright"),
     plotZC("RSJ+21", "two", groupby = "Lake", groups = c("Kuiva", "Lovo"), legend.x = "topright"),
     plotZC("BOEM21", "Bacteria", groupby = "Stratum", groups = c("Upper", "Chemocline", "Lower")),
+    plotZC("GSY+20", "two", groupby = "Lake", groups = c("La Zarza", "Filon Centro"), legend.x = "bottomright"),
+    plotZC("NLE+21", "Bacteria", groupby = "Year", groups = c("2017", "2018"), legend.x = "bottomleft"),
     plotZC("FAV+21", "two", groupby = "Type", groups = c("Oxic Surface", "Anoxic Surface", "Bottom")),
 
     # Hot Spring
@@ -888,7 +896,7 @@ plotZC <- function(study, lineage = NULL, mincount = 100, pch = NULL, col = NULL
   if(!is.null(groupby) & !is.null(groups)) {
     # Add legend
     legend <- as.character(groups)
-    legend(legend.x, legend, pch = pchtype, col = orp16Scol[coltype], pt.bg = coltype, title = groupby, cex = 0.9)
+    legend(legend.x, legend, pch = pchtype, col = orp16Scol[coltype], pt.bg = orp16Scol[coltype], title = groupby, cex = 0.9)
     # Add sample type (group) to output
     EZdat <- cbind(groupby = groupby, group = mdat[, icol], EZdat)
   } else {

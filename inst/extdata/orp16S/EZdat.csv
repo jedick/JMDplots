@@ -378,6 +378,26 @@ SAR+13,Lake & Pond,Archaea,Layer 8,SRR554448,Zone,Anoxic,-135,-154.5,-0.144081
 SAR+13,Lake & Pond,Archaea,Layer 9,SRR554450,Zone,Anoxic,-135,-154.5,-0.137614
 SAR+13,Lake & Pond,Archaea,Layer 9,SRR554451,Zone,Anoxic,-135,-154.5,-0.149333
 SAR+13,Lake & Pond,Archaea,Layer 9,SRR554432,Zone,Anoxic,-135,-154.5,-0.146377
+LZR+17,Lake & Pond,Bacteria,MJK_LF31-36,SRR1542629,Elevation,< 1000 m,388,517.3,-0.139506
+LZR+17,Lake & Pond,Bacteria,BGY_LF43-48,SRR1542638,Elevation,< 1000 m,373,479.1,-0.148002
+LZR+17,Lake & Pond,Bacteria,LC1_LF1-6,SRR1519330,Elevation,1000 - 4000 m,569,582.6,-0.151998
+LZR+17,Lake & Pond,Bacteria,WXH_LF13-18,SRR1542599,Elevation,1000 - 4000 m,541,634.5,-0.150338
+LZR+17,Lake & Pond,Bacteria,WXH_LF13-18,SRR1521969,Elevation,1000 - 4000 m,541,634.5,-0.146987
+LZR+17,Lake & Pond,Bacteria,MCH_LF7-12,SRR1533122,Elevation,1000 - 4000 m,584,672.3,-0.151655
+LZR+17,Lake & Pond,Bacteria,DHZ_LF49-54,SRR1542646,Elevation,1000 - 4000 m,557,643.5,-0.153955
+LZR+17,Lake & Pond,Bacteria,XNH_LF19-24,SRR1542606,Elevation,> 4000 m,571,621.5,-0.13998
+LZR+17,Lake & Pond,Bacteria,BJH_LF55-60,SRR1542649,Elevation,> 4000 m,555,661.8,-0.14708
+LZR+17,Lake & Pond,Bacteria,HHZ_LF25-30,SRR1542628,Elevation,> 4000 m,603,664.5,-0.153762
+LZR+17,Lake & Pond,Bacteria,BHZ_LF37-42,SRR1542634,Elevation,> 4000 m,610,666.2,-0.163544
+LZR+17,Lake & Pond,Archaea,MJK_LF31-36,SRR1542629,Elevation,< 1000 m,388,517.3,-0.160107
+LZR+17,Lake & Pond,Archaea,LC1_LF1-6,SRR1519330,Elevation,1000 - 4000 m,569,582.6,-0.192562
+LZR+17,Lake & Pond,Archaea,WXH_LF13-18,SRR1542599,Elevation,1000 - 4000 m,541,634.5,-0.187769
+LZR+17,Lake & Pond,Archaea,WXH_LF13-18,SRR1521969,Elevation,1000 - 4000 m,541,634.5,-0.200063
+LZR+17,Lake & Pond,Archaea,MCH_LF7-12,SRR1533122,Elevation,1000 - 4000 m,584,672.3,-0.181519
+LZR+17,Lake & Pond,Archaea,DHZ_LF49-54,SRR1542646,Elevation,1000 - 4000 m,557,643.5,-0.183474
+LZR+17,Lake & Pond,Archaea,XNH_LF19-24,SRR1542606,Elevation,> 4000 m,571,621.5,-0.181258
+LZR+17,Lake & Pond,Archaea,HHZ_LF25-30,SRR1542628,Elevation,> 4000 m,603,664.5,-0.190816
+LZR+17,Lake & Pond,Archaea,BHZ_LF37-42,SRR1542634,Elevation,> 4000 m,610,666.2,-0.179669
 ECS+18,Lake & Pond,Bacteria,LN0,SRR14251101,Lake,Laguna Negra,601,606.6,-0.14958
 ECS+18,Lake & Pond,Bacteria,LN5,SRR14251100,Lake,Laguna Negra,586,602.9,-0.146716
 ECS+18,Lake & Pond,Bacteria,LN10,SRR14251099,Lake,Laguna Negra,577,605.1,-0.15002
@@ -422,6 +442,19 @@ LLC+19,Lake & Pond,Bacteria,XD6MF,SRR3233737,Size,Free-living,403,403,-0.131017
 LLC+19,Lake & Pond,Bacteria,XD6MP,SRR3233760,Size,Particle-associated,403,403,-0.139822
 LLC+19,Lake & Pond,Bacteria,XD6SF,SRR3233735,Size,Free-living,413,413,-0.131699
 LLC+19,Lake & Pond,Bacteria,XD6SP,SRR3233759,Size,Particle-associated,413,413,-0.138041
+SCH+16,Lake & Pond,Bacteria,2.5 m,SRR3521425,Type,Oxic,89,89,-0.140322
+SCH+16,Lake & Pond,Bacteria,3.5 m,SRR3521426,Type,Oxic,88,88,-0.14093
+SCH+16,Lake & Pond,Bacteria,4.0 m,SRR3521427,Type,Oxic,88,88,-0.141709
+SCH+16,Lake & Pond,Bacteria,4.5 m,SRR3521428,Type,Oxic,87,87,-0.139088
+SCH+16,Lake & Pond,Bacteria,5.0 m,SRR3521429,Type,Oxycline,9,9,-0.146163
+SCH+16,Lake & Pond,Bacteria,5.5 m,SRR3521430,Type,Anoxic,-123,-123,-0.149707
+SCH+16,Lake & Pond,Bacteria,6.0 m,SRR3521431,Type,Anoxic,-179,-179,-0.153484
+SCH+16,Lake & Pond,Bacteria,6.5 m,SRR3521432,Type,Anoxic,-190,-190,-0.155895
+SCH+16,Lake & Pond,Bacteria,7.0 m,SRR3521433,Type,Anoxic,-190,-190,-0.153319
+SCH+16,Lake & Pond,Archaea,5.5 m,SRR3521430,Type,Anoxic,-123,-123,-0.171618
+SCH+16,Lake & Pond,Archaea,6.0 m,SRR3521431,Type,Anoxic,-179,-179,-0.17138
+SCH+16,Lake & Pond,Archaea,6.5 m,SRR3521432,Type,Anoxic,-190,-190,-0.17078
+SCH+16,Lake & Pond,Archaea,7.0 m,SRR3521433,Type,Anoxic,-190,-190,-0.170921
 BCA+21,Lake & Pond,Bacteria,APR0-5,SRR5861454,Month,Apr,112.4,194.3,-0.168901
 BCA+21,Lake & Pond,Bacteria,APR1,SRR5861455,Month,Apr,101.1,204,-0.164541
 BCA+21,Lake & Pond,Bacteria,APR2,SRR5861457,Month,Apr,102.3,192.9,-0.160564
@@ -670,6 +703,59 @@ BOEM21,Lake & Pond,Bacteria,FGL23.5m,SRR12074937,Stratum,Lower,-300,-300,-0.1639
 BOEM21,Lake & Pond,Bacteria,FGL24m,SRR12074936,Stratum,Lower,-300,-300,-0.164867
 BOEM21,Lake & Pond,Bacteria,FGL24.5m,SRR12074935,Stratum,Lower,-300,-300,-0.164386
 BOEM21,Lake & Pond,Bacteria,FGL25m,SRR12074934,Stratum,Lower,-300,-300,-0.165947
+GSY+20,Lake & Pond,Bacteria,FC01r1,ERR4298945,Lake,Filon Centro,660,385.1,-0.149877
+GSY+20,Lake & Pond,Bacteria,FC01r2,ERR4298946,Lake,Filon Centro,660,385.1,-0.153287
+GSY+20,Lake & Pond,Bacteria,FC01r3,ERR4298947,Lake,Filon Centro,660,385.1,-0.154367
+GSY+20,Lake & Pond,Bacteria,FC15r1,ERR4298948,Lake,Filon Centro,493,230.1,-0.142856
+GSY+20,Lake & Pond,Bacteria,FC15r2,ERR4298949,Lake,Filon Centro,493,230.1,-0.143648
+GSY+20,Lake & Pond,Bacteria,FC15r3,ERR4298950,Lake,Filon Centro,493,230.1,-0.144137
+GSY+20,Lake & Pond,Bacteria,FC30r1,ERR4298951,Lake,Filon Centro,200,25.1,-0.150542
+GSY+20,Lake & Pond,Bacteria,FC30r2,ERR4298952,Lake,Filon Centro,200,25.1,-0.14947
+GSY+20,Lake & Pond,Bacteria,FC45r1,ERR4298953,Lake,Filon Centro,44,-109.7,-0.16476
+GSY+20,Lake & Pond,Bacteria,FC45r2,ERR4298954,Lake,Filon Centro,44,-109.7,-0.166482
+GSY+20,Lake & Pond,Bacteria,FC45r3,ERR4298955,Lake,Filon Centro,44,-109.7,-0.166762
+GSY+20,Lake & Pond,Bacteria,LZ00r1,ERR4298956,Lake,La Zarza,682,426.4,-0.159392
+GSY+20,Lake & Pond,Bacteria,LZ00r2,ERR4298957,Lake,La Zarza,682,426.4,-0.160663
+GSY+20,Lake & Pond,Bacteria,LZ00r3,ERR4298958,Lake,La Zarza,682,426.4,-0.160458
+GSY+20,Lake & Pond,Bacteria,LZ30r1,ERR4298959,Lake,La Zarza,324,97.8,-0.164834
+GSY+20,Lake & Pond,Bacteria,LZ30r3,ERR4298961,Lake,La Zarza,324,97.8,-0.153932
+GSY+20,Lake & Pond,Bacteria,LZ70r1,ERR4298962,Lake,La Zarza,265,54.5,-0.169083
+GSY+20,Lake & Pond,Bacteria,LZ70r2,ERR4298963,Lake,La Zarza,265,54.5,-0.148627
+GSY+20,Lake & Pond,Bacteria,LZ70r3,ERR4298964,Lake,La Zarza,265,54.5,-0.151394
+GSY+20,Lake & Pond,Archaea,FC15r1,ERR4298948,Lake,Filon Centro,493,230.1,-0.147444
+GSY+20,Lake & Pond,Archaea,FC15r2,ERR4298949,Lake,Filon Centro,493,230.1,-0.152623
+GSY+20,Lake & Pond,Archaea,FC15r3,ERR4298950,Lake,Filon Centro,493,230.1,-0.149272
+GSY+20,Lake & Pond,Archaea,FC30r1,ERR4298951,Lake,Filon Centro,200,25.1,-0.129792
+GSY+20,Lake & Pond,Archaea,FC30r2,ERR4298952,Lake,Filon Centro,200,25.1,-0.131428
+GSY+20,Lake & Pond,Archaea,FC45r1,ERR4298953,Lake,Filon Centro,44,-109.7,-0.132155
+GSY+20,Lake & Pond,Archaea,FC45r2,ERR4298954,Lake,Filon Centro,44,-109.7,-0.136507
+GSY+20,Lake & Pond,Archaea,FC45r3,ERR4298955,Lake,Filon Centro,44,-109.7,-0.134739
+GSY+20,Lake & Pond,Archaea,LZ30r1,ERR4298959,Lake,La Zarza,324,97.8,-0.173165
+GSY+20,Lake & Pond,Archaea,LZ30r3,ERR4298961,Lake,La Zarza,324,97.8,-0.189003
+GSY+20,Lake & Pond,Archaea,LZ70r1,ERR4298962,Lake,La Zarza,265,54.5,-0.169459
+GSY+20,Lake & Pond,Archaea,LZ70r2,ERR4298963,Lake,La Zarza,265,54.5,-0.170425
+GSY+20,Lake & Pond,Archaea,LZ70r3,ERR4298964,Lake,La Zarza,265,54.5,-0.22034
+NLE+21,Lake & Pond,Bacteria,1.5m-2017,ERR4575187,Year,2017,260,260,-0.170528
+NLE+21,Lake & Pond,Bacteria,5m-2017,ERR4578913,Year,2017,262,262,-0.163219
+NLE+21,Lake & Pond,Bacteria,13m-2017,ERR4575188,Year,2017,276,276,-0.157095
+NLE+21,Lake & Pond,Bacteria,14.5m-2017,ERR4575301,Year,2017,274,274,-0.159226
+NLE+21,Lake & Pond,Bacteria,15m-2017,ERR4575397,Year,2017,272,272,-0.160415
+NLE+21,Lake & Pond,Bacteria,16m-2017,ERR4575302,Year,2017,265,265,-0.160151
+NLE+21,Lake & Pond,Bacteria,17m-2017,ERR4578909,Year,2017,-71,-71,-0.158499
+NLE+21,Lake & Pond,Bacteria,18m-2017,ERR4578912,Year,2017,-152,-152,-0.155775
+NLE+21,Lake & Pond,Bacteria,0.5m-2018,ERR4578915,Year,2018,141,141,-0.160204
+NLE+21,Lake & Pond,Bacteria,2.5m-2018,ERR4578997,Year,2018,147,147,-0.16187
+NLE+21,Lake & Pond,Bacteria,5m-2018,ERR4578998,Year,2018,147,147,-0.160862
+NLE+21,Lake & Pond,Bacteria,7m-2018,ERR4578999,Year,2018,147,147,-0.162512
+NLE+21,Lake & Pond,Bacteria,10m-2018,ERR4578916,Year,2018,149,149,-0.161144
+NLE+21,Lake & Pond,Bacteria,13m-2018,ERR4578917,Year,2018,151,151,-0.162372
+NLE+21,Lake & Pond,Bacteria,14m-2018,ERR4578926,Year,2018,155,155,-0.158104
+NLE+21,Lake & Pond,Bacteria,15m-2018,ERR4578928,Year,2018,-95,-95,-0.158281
+NLE+21,Lake & Pond,Bacteria,16m-2018,ERR4578993,Year,2018,-145,-145,-0.158864
+NLE+21,Lake & Pond,Bacteria,17m-2018,ERR4578994,Year,2018,-176,-176,-0.16114
+NLE+21,Lake & Pond,Bacteria,18m-2018,ERR4578995,Year,2018,-194,-194,-0.162221
+NLE+21,Lake & Pond,Bacteria,19m-2018,ERR4578996,Year,2018,-203,-203,-0.161082
+NLE+21,Lake & Pond,Bacteria,22m-2018,ERR4578914,Year,2018,-224,-224,-0.157086
 FAV+21,Lake & Pond,Bacteria,W-SO-0,SRR14598046,Type,Oxic Surface,285,438.2,-0.144362
 FAV+21,Lake & Pond,Bacteria,W-SO-0.5,SRR14598045,Type,Oxic Surface,298,450.4,-0.144116
 FAV+21,Lake & Pond,Bacteria,W-SO-1,SRR14598037,Type,Oxic Surface,270,422.2,-0.143808
