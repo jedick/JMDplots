@@ -30,13 +30,8 @@ getmdat <- function(study, dropNA = TRUE) {
       mdat <- mdat[!is.na(mdat$name), ]
     }
   }
-  # Default point symbol: red filled circle for tumor, black open circle for normal, NA otherwise
-  pch <- sapply(mdat$type, switch, tumor = 21, normal = 1, NA)
-  col <- sapply(mdat$type, switch, tumor = 2, normal = 1, NA)
-  # Default differences: tumor minus normal
-  isminuend <- mdat$type == "tumor"
-  issubtrahend <- mdat$type == "normal"
-  subject <- NULL
+  # Use NULL pch as flag for unavailable dataset 20210820
+  pch <- NULL
 
   ## Identify samples for computing differences in each study
 
@@ -237,7 +232,7 @@ getmdat <- function(study, dropNA = TRUE) {
     "KLM+16", "LMBA21", "ZDA+20", "ZZZ+18", "BSPD17", "CWC+20", "BMOB18", "JVW+20", "LJC+20",
     "GFE+16", "ECS+18", "FAV+21", "VMB+19", "DLS21", "ZZLL21", "GWS+20", "CLS+19", "SMS+12",
     "OFY+19", "BYB+17", "MCS+21", "SVH+19", "PMM+20", "GZL21", "LLC+19", "NLE+21", "GSY+20",
-    "SCH+16", "LZR+17"
+    "SCH+16", "LZR+17", "GRG+20", "APV+20", "YHK+19"
   )) {
     # General processing of metadata for sed16S datasets 20210820
     # Get Eh or ORP values (uses partial name matching, can match a column named "Eh (mV)")

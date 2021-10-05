@@ -1,31 +1,31 @@
 name,Run,BioSample,sample,LibraryName,Type,"Eh (mV)"
-"Hunan Soil",SRR5435155,SAMN06704758,Paddy_soil_1,PA1,Paddy,81.6
-"Hunan Soil",SRR5435146,SAMN06704767,Paddy_soil_10,PA10,Paddy,108.4
-"Hunan Soil",SRR5435154,SAMN06704759,Paddy_soil_2,PA2,Paddy,110.4
-"Hunan Soil",SRR5435153,SAMN06704760,Paddy_soil_3,PA3,Paddy,166.1
-"Hunan Soil",SRR5435152,SAMN06704761,Paddy_soil_4,PA4,Paddy,93.6
-"Hunan Soil",SRR5435151,SAMN06704762,Paddy_soil_5,PA5,Paddy,125.3
-"Hunan Soil",SRR5435150,SAMN06704763,Paddy_soil_6,PA6,Paddy,110.3
-"Hunan Soil",SRR5435149,SAMN06704764,Paddy_soil_7,PA7,Paddy,76
-"Hunan Soil",SRR5435148,SAMN06704765,Paddy_soil_8,PA8,Paddy,288.1
-"Hunan Soil",SRR5435147,SAMN06704766,Paddy_soil_9,PA9,Paddy,164.9
-"Hunan Soil",SRR5435145,SAMN06704768,Sediment_1,SE1,Sediment,-65.8
-"Hunan Soil",SRR5435136,SAMN06704777,Sediment_10,SE10,Sediment,-174.1
-"Hunan Soil",SRR5435144,SAMN06704769,Sediment_2,SE2,Sediment,-120.5
-"Hunan Soil",SRR5435143,SAMN06704770,Sediment_3,SE3,Sediment,-115
-"Hunan Soil",SRR5435142,SAMN06704771,Sediment_4,SE4,Sediment,-62.3
-"Hunan Soil",SRR5435141,SAMN06704772,Sediment_5,SE5,Sediment,-60.2
-"Hunan Soil",SRR5435140,SAMN06704773,Sediment_6,SE6,Sediment,-192.9
-"Hunan Soil",SRR5435139,SAMN06704774,Sediment_7,SE7,Sediment,-246.8
-"Hunan Soil",SRR5435138,SAMN06704775,Sediment_8,SE8,Sediment,-265
-"Hunan Soil",SRR5435137,SAMN06704776,Sediment_9,SE9,Sediment,-129.8
-"Hunan Soil",SRR5435165,SAMN06704748,Upland_soil_1,UP1,Upland,415.4
-"Hunan Soil",SRR5435156,SAMN06704757,Upland_soil_10,UP10,Upland,395.4
-"Hunan Soil",SRR5435164,SAMN06704749,Upland_soil_2,UP2,Upland,376.1
-"Hunan Soil",SRR5435163,SAMN06704750,Upland_soil_3,UP3,Upland,373.2
-"Hunan Soil",SRR5435162,SAMN06704751,Upland_soil_4,UP4,Upland,444
-"Hunan Soil",SRR5435161,SAMN06704752,Upland_soil_5,UP5,Upland,409.4
-"Hunan Soil",SRR5435160,SAMN06704753,Upland_soil_6,UP6,Upland,402.4
-"Hunan Soil",SRR5435159,SAMN06704754,Upland_soil_7,UP7,Upland,380
-"Hunan Soil",SRR5435158,SAMN06704755,Upland_soil_8,UP8,Upland,369.8
-"Hunan Soil",SRR5435157,SAMN06704756,Upland_soil_9,UP9,Upland,369.4
+"Dabu, Hunan Province",SRR5435155,SAMN06704758,Paddy_soil_1,PA1,Paddy,81.6
+"Dabu, Hunan Province",SRR5435146,SAMN06704767,Paddy_soil_10,PA10,Paddy,108.4
+"Dabu, Hunan Province",SRR5435154,SAMN06704759,Paddy_soil_2,PA2,Paddy,110.4
+"Dabu, Hunan Province",SRR5435153,SAMN06704760,Paddy_soil_3,PA3,Paddy,166.1
+"Dabu, Hunan Province",SRR5435152,SAMN06704761,Paddy_soil_4,PA4,Paddy,93.6
+"Dabu, Hunan Province",SRR5435151,SAMN06704762,Paddy_soil_5,PA5,Paddy,125.3
+"Dabu, Hunan Province",SRR5435150,SAMN06704763,Paddy_soil_6,PA6,Paddy,110.3
+"Dabu, Hunan Province",SRR5435149,SAMN06704764,Paddy_soil_7,PA7,Paddy,76
+"Dabu, Hunan Province",SRR5435148,SAMN06704765,Paddy_soil_8,PA8,Paddy,288.1
+"Dabu, Hunan Province",SRR5435147,SAMN06704766,Paddy_soil_9,PA9,Paddy,164.9
+"Dabu, Hunan Province",SRR5435145,SAMN06704768,Sediment_1,SE1,Sediment,-65.8
+"Dabu, Hunan Province",SRR5435136,SAMN06704777,Sediment_10,SE10,Sediment,-174.1
+"Dabu, Hunan Province",SRR5435144,SAMN06704769,Sediment_2,SE2,Sediment,-120.5
+"Dabu, Hunan Province",SRR5435143,SAMN06704770,Sediment_3,SE3,Sediment,-115
+"Dabu, Hunan Province",SRR5435142,SAMN06704771,Sediment_4,SE4,Sediment,-62.3
+"Dabu, Hunan Province",SRR5435141,SAMN06704772,Sediment_5,SE5,Sediment,-60.2
+"Dabu, Hunan Province",SRR5435140,SAMN06704773,Sediment_6,SE6,Sediment,-192.9
+"Dabu, Hunan Province",SRR5435139,SAMN06704774,Sediment_7,SE7,Sediment,-246.8
+"Dabu, Hunan Province",SRR5435138,SAMN06704775,Sediment_8,SE8,Sediment,-265
+"Dabu, Hunan Province",SRR5435137,SAMN06704776,Sediment_9,SE9,Sediment,-129.8
+"Dabu, Hunan Province",SRR5435165,SAMN06704748,Upland_soil_1,UP1,Upland,415.4
+"Dabu, Hunan Province",SRR5435156,SAMN06704757,Upland_soil_10,UP10,Upland,395.4
+"Dabu, Hunan Province",SRR5435164,SAMN06704749,Upland_soil_2,UP2,Upland,376.1
+"Dabu, Hunan Province",SRR5435163,SAMN06704750,Upland_soil_3,UP3,Upland,373.2
+"Dabu, Hunan Province",SRR5435162,SAMN06704751,Upland_soil_4,UP4,Upland,444
+"Dabu, Hunan Province",SRR5435161,SAMN06704752,Upland_soil_5,UP5,Upland,409.4
+"Dabu, Hunan Province",SRR5435160,SAMN06704753,Upland_soil_6,UP6,Upland,402.4
+"Dabu, Hunan Province",SRR5435159,SAMN06704754,Upland_soil_7,UP7,Upland,380
+"Dabu, Hunan Province",SRR5435158,SAMN06704755,Upland_soil_8,UP8,Upland,369.8
+"Dabu, Hunan Province",SRR5435157,SAMN06704756,Upland_soil_9,UP9,Upland,369.4

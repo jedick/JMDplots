@@ -55,9 +55,6 @@ options(width = 80)
 ```
 
 ```{r HTML, include=FALSE}
-logfO2 <- "log<i>f</i><sub>O<sub>2</sub></sub>"
-logaH2O <- "log<i>a</i><sub>H<sub>2</sub>O</sub>"
-nH2O <- "<i>n</i><sub>H<sub>2</sub>O</sub>"
 ZC <- "<i>Z</i><sub>C</sub>"
 ```
 
@@ -101,12 +98,12 @@ orp16S4()
 
 **Data sources:**
 
-## Local and global analysis of ZC-Eh7 correlations (Figure 5)
+## Local and global analysis of `r ZC`-Eh7 correlations (Figure 5)
 ```{r orp16S5, message = FALSE, results = "hide", out.width='100%', fig.width = 10, fig.height = 8, out.extra = 'class="full-width"', pngquant = pngquant, dpi = 100}
 orp16S5()
 ```
 
-## ZC-Eh7 fits for Bacteria and Archaea in hot springs (Figure 6)
+## `r ZC`-Eh7 fits for Bacteria and Archaea in hot springs (Figure 6)
 ```{r orp16S6, message = FALSE, results = "hide", out.width='100%', fig.width = 8, fig.height = 3.5, pngquant = pngquant}
 orp16S6()
 ```

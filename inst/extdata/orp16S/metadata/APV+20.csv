@@ -1,0 +1,25 @@
+name,Run,LibraryName,BioSample,ScientificName,SampleName,Type,Month,"DO (mg/L)",pH,"Temp (°C)","EC (µS/cm)","ORP (mV)"
+"Mezquital Valley",SRR7775194,Canal.Feb,SAMN09941378,"wastewater metagenome",Canal.Feb,Canal,February,0,8.93,20.54,1369,-379.4
+"Mezquital Valley",SRR7775192,Canal.May,SAMN09941380,"wastewater metagenome",Canal.May,Canal,May,0,6.73,22.92,1309,-44.2
+"Mezquital Valley",SRR7775193,Canal.Aug,SAMN09941377,"wastewater metagenome",Canal.Aug,Canal,August,0,6.92,21.36,1221,-45.5
+"Mezquital Valley",SRR7775190,Canal.Oct,SAMN09941382,"wastewater metagenome",Canal.Oct,Canal,October,0,7.69,21.52,1290,-67
+"Mezquital Valley",SRR7775189,Canal.Nov,SAMN09941381,"wastewater metagenome",Canal.Nov,Canal,November,0,7.1,21.42,930,-46.2
+"Mezquital Valley",SRR7775191,Canal.Jan,SAMN09941379,"wastewater metagenome",Canal.Jan,Canal,January,0,7.8,17.44,2264,-34.8
+"Mezquital Valley",SRR7775188,Piezo.Feb,SAMN09941384,"groundwater metagenome",Piezometer.Feb,Piezometer,February,1.84,6.89,17.77,1464,75.1
+"Mezquital Valley",SRR7775186,Piezo.May,SAMN09941386,"groundwater metagenome",Piezometer.May,Piezometer,May,3.91,7.27,20.56,1492,218
+"Mezquital Valley",SRR7775187,Piezo.Aug,SAMN09941383,"groundwater metagenome",Piezometer.Aug,Piezometer,August,4.3,7.11,18.46,1510,167.5
+"Mezquital Valley",SRR7775182,Piezo.Oct,SAMN09941388,"groundwater metagenome",Piezometer.Oct,Piezometer,October,3.26,7.17,18.68,1393,213
+"Mezquital Valley",SRR7775181,Piezo.Nov,SAMN09941387,"groundwater metagenome",Piezometer.Nov,Piezometer,November,2.96,7.1,18.24,1224,176.5
+"Mezquital Valley",SRR7775185,Piezo.Jan,SAMN09941385,"groundwater metagenome",Piezometer.Jan,Piezometer,January,2.24,7.06,18.32,1153,118.8
+"Mezquital Valley",SRR7775184,Well.Feb,SAMN09941396,"groundwater metagenome",Well.Feb,Well,February,0.4,6.44,19.24,1512,87.6
+"Mezquital Valley",SRR7775173,Well.May,SAMN09941398,"groundwater metagenome",Well.May,Well,May,3.46,7.4,20.15,1464,149
+"Mezquital Valley",SRR7775183,Well.Aug,SAMN09941395,"groundwater metagenome",Well.Aug,Well,August,3.8,7.08,18.91,1645,190.6
+"Mezquital Valley",SRR7775171,Well.Oct,SAMN09941400,"groundwater metagenome",Well.Oct,Well,October,2.54,7.08,19.63,1180,219.3
+"Mezquital Valley",SRR7775172,Well.Nov,SAMN09941399,"groundwater metagenome",Well.Nov,Well,November,2.54,7.1,19.02,1307,164.5
+"Mezquital Valley",SRR7775174,Well.Jan,SAMN09941397,"groundwater metagenome",Well.Jan,Well,January,3.89,7.08,19.5,1341,141.2
+"Mezquital Valley",SRR7775180,Spring.Feb,SAMN09941390,"groundwater metagenome",Spring.Feb,Spring,February,2.79,6.81,20.15,1660,107
+"Mezquital Valley",SRR7775178,Spring.May,SAMN09941392,"groundwater metagenome",Spring.May,Spring,May,5.2,7.22,20.22,3021,179.8
+"Mezquital Valley",SRR7775179,Spring.Aug,SAMN09941389,"groundwater metagenome",Spring.Aug,Spring,August,4.82,7.22,19.04,1671,199
+"Mezquital Valley",SRR7775176,Spring.Oct,SAMN09941394,"groundwater metagenome",Spring.Oct,Spring,October,3.46,7.2,19.76,1241,191.1
+"Mezquital Valley",SRR7775175,Spring.Nov,SAMN09941393,"groundwater metagenome",Spring.Nov,Spring,November,3.12,7.25,19.62,1315,157
+"Mezquital Valley",SRR7775177,Spring.Jan,SAMN09941391,"groundwater metagenome",Spring.Jan,Spring,January,4.84,7.16,18.42,1287,161.5

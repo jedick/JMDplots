@@ -768,6 +768,15 @@ FAV+21,Lake & Pond,Archaea,W-SO-0.5_arc,SRR14598044,Type,Oxic Surface,298,450.4,
 FAV+21,Lake & Pond,Archaea,W-SO-1_arc,SRR14598043,Type,Oxic Surface,270,422.2,-0.172136
 FAV+21,Lake & Pond,Archaea,W-SO-2_arc,SRR14598042,Type,Anoxic Surface,167,319.2,-0.172396
 FAV+21,Lake & Pond,Archaea,W-SO-3_arc,SRR14598041,Type,Anoxic Surface,136,288.2,-0.172643
+GRG+20,Lake & Pond,Bacteria,RT0m,mgm4773102,Type,Oxic,628,363.1,-0.150303
+GRG+20,Lake & Pond,Bacteria,RT1.5m,mgm4773105,Type,Oxic,630,365.2,-0.149359
+GRG+20,Lake & Pond,Bacteria,RT7m,mgm4773101,Type,Oxic,651,386,-0.154416
+GRG+20,Lake & Pond,Bacteria,RT12.5m,mgm4773103,Type,Oxic,606,339.4,-0.154253
+GRG+20,Lake & Pond,Bacteria,RT20.5m,mgm4773106,Type,Anoxic,495,221.8,-0.150361
+GRG+20,Lake & Pond,Bacteria,RT32m,mgm4773104,Type,Anoxic,447,166.5,-0.140808
+GRG+20,Lake & Pond,Archaea,RT12.5m,mgm4773103,Type,Oxic,606,339.4,-0.147641
+GRG+20,Lake & Pond,Archaea,RT20.5m,mgm4773106,Type,Anoxic,495,221.8,-0.178576
+GRG+20,Lake & Pond,Archaea,RT32m,mgm4773104,Type,Anoxic,447,166.5,-0.180751
 SMS+12,Hot Spring,Bacteria,N,16SBPEG_N,Type,Chemotrophic,-92,1.2,-0.218154
 SMS+12,Hot Spring,Bacteria,S,16SBPEG_S,Type,Chemotrophic,128,184.8,-0.195154
 SMS+12,Hot Spring,Bacteria,R,16SBPEG_R,Type,Transition,130,195.4,-0.191052
@@ -1225,6 +1234,22 @@ KLM+16,Groundwater,Bacteria,MW9_Dec2010,SRR3124350,Day,2,-138,-123.8,-0.157156
 KLM+16,Groundwater,Bacteria,MW9_Aug2011,SRR3124351,Day,246,-123,-76.3,-0.163091
 KLM+16,Groundwater,Bacteria,MW9_Feb2012,SRR3124353,Day,448,-38,-20.3,-0.155257
 KLM+16,Groundwater,Bacteria,MW9_Oct2012,SRR3124354,Day,671,-74,-57.4,-0.154255
+YHK+19,Groundwater,Bacteria,No.1-DNA,DRR099606,NA,NA,58,59.1,-0.161473
+YHK+19,Groundwater,Bacteria,No.2-DNA,DRR099607,NA,NA,63,61.3,-0.156622
+YHK+19,Groundwater,Bacteria,No.3-DNA,DRR099608,NA,NA,91,73.9,-0.155536
+YHK+19,Groundwater,Bacteria,No.4-DNA,DRR099609,NA,NA,54,56.8,-0.15748
+YHK+19,Groundwater,Bacteria,No.5-DNA,DRR099610,NA,NA,89,86.2,-0.159503
+YHK+19,Groundwater,Bacteria,No.6-DNA,DRR099611,NA,NA,102,117.9,-0.155507
+YHK+19,Groundwater,Bacteria,No.7-DNA,DRR099612,NA,NA,95,108.7,-0.156789
+YHK+19,Groundwater,Bacteria,No.8-DNA,DRR099613,NA,NA,106,92.9,-0.159263
+YHK+19,Groundwater,Bacteria,No.9-DNA,DRR099614,NA,NA,90,84.3,-0.159524
+YHK+19,Groundwater,Bacteria,No.10-DNA,DRR099615,NA,NA,86,77.5,-0.151941
+YHK+19,Groundwater,Bacteria,No.11-DNA,DRR099616,NA,NA,227,224.2,-0.146725
+YHK+19,Groundwater,Bacteria,No.12-DNA,DRR099617,NA,NA,60,60,-0.145006
+YHK+19,Groundwater,Bacteria,No.13-DNA,DRR099618,NA,NA,19,22.4,-0.162703
+YHK+19,Groundwater,Archaea,No.7-DNA,DRR099612,NA,NA,95,108.7,-0.192725
+YHK+19,Groundwater,Archaea,No.9-DNA,DRR099614,NA,NA,90,84.3,-0.175509
+YHK+19,Groundwater,Archaea,No.11-DNA,DRR099616,NA,NA,227,224.2,-0.186685
 SDH+19,Groundwater,Bacteria,Q132,SRR6075081,Type,Freshwater,-30.6,-15.2,-0.158388
 SDH+19,Groundwater,Bacteria,Q130,SRR6075082,Type,Freshwater,71.2,64.1,-0.155101
 SDH+19,Groundwater,Bacteria,Q143,SRR6075055,Type,Brackish,29.1,27.3,-0.17922
@@ -1255,6 +1280,39 @@ SRM+19,Groundwater,Bacteria,G16,SRR6760385,Land Use,Community,182.8,188.7,-0.153
 SRM+19,Groundwater,Bacteria,G17,SRR6760382,Land Use,Community,138.4,168,-0.152782
 SRM+19,Groundwater,Bacteria,G18,SRR6760383,Land Use,Community,161.8,144.1,-0.161755
 SRM+19,Groundwater,Bacteria,G19,SRR6760381,Land Use,Mine,-49.5,-25.8,-0.159479
+APV+20,Groundwater,Bacteria,Canal.Feb,SRR7775194,Type,Canal,-379.4,-266.9,-0.198744
+APV+20,Groundwater,Bacteria,Canal.May,SRR7775192,Type,Canal,-44.2,-60.1,-0.195492
+APV+20,Groundwater,Bacteria,Canal.Aug,SRR7775193,Type,Canal,-45.5,-50.2,-0.17664
+APV+20,Groundwater,Bacteria,Canal.Oct,SRR7775190,Type,Canal,-67,-26.7,-0.166529
+APV+20,Groundwater,Bacteria,Canal.Nov,SRR7775189,Type,Canal,-46.2,-40.4,-0.200423
+APV+20,Groundwater,Bacteria,Canal.Jan,SRR7775191,Type,Canal,-34.8,11.3,-0.188434
+APV+20,Groundwater,Bacteria,Piezometer.Feb,SRR7775188,Type,Piezometer,75.1,68.8,-0.143073
+APV+20,Groundwater,Bacteria,Piezometer.May,SRR7775186,Type,Piezometer,218,233.7,-0.157704
+APV+20,Groundwater,Bacteria,Piezometer.Aug,SRR7775187,Type,Piezometer,167.5,173.9,-0.147933
+APV+20,Groundwater,Bacteria,Piezometer.Oct,SRR7775182,Type,Piezometer,213,222.8,-0.156876
+APV+20,Groundwater,Bacteria,Piezometer.Nov,SRR7775181,Type,Piezometer,176.5,182.3,-0.162147
+APV+20,Groundwater,Bacteria,Piezometer.Jan,SRR7775185,Type,Piezometer,118.8,122.3,-0.144475
+APV+20,Groundwater,Bacteria,Well.Feb,SRR7775184,Type,Well,87.6,55.1,-0.159007
+APV+20,Groundwater,Bacteria,Well.May,SRR7775173,Type,Well,149,172.3,-0.15468
+APV+20,Groundwater,Bacteria,Well.Aug,SRR7775183,Type,Well,190.6,195.2,-0.150481
+APV+20,Groundwater,Bacteria,Well.Oct,SRR7775171,Type,Well,219.3,223.9,-0.150246
+APV+20,Groundwater,Bacteria,Well.Nov,SRR7775172,Type,Well,164.5,170.3,-0.154494
+APV+20,Groundwater,Bacteria,Well.Jan,SRR7775174,Type,Well,141.2,145.8,-0.152687
+APV+20,Groundwater,Bacteria,Spring.Feb,SRR7775180,Type,Spring,107,95.9,-0.152792
+APV+20,Groundwater,Bacteria,Spring.May,SRR7775178,Type,Spring,179.8,192.6,-0.150454
+APV+20,Groundwater,Bacteria,Spring.Aug,SRR7775179,Type,Spring,199,211.8,-0.167327
+APV+20,Groundwater,Bacteria,Spring.Oct,SRR7775176,Type,Spring,191.1,202.7,-0.15614
+APV+20,Groundwater,Bacteria,Spring.Nov,SRR7775175,Type,Spring,157,171.5,-0.153646
+APV+20,Groundwater,Bacteria,Spring.Jan,SRR7775177,Type,Spring,161.5,170.8,-0.148027
+APV+20,Groundwater,Archaea,Piezometer.Jan,SRR7775185,Type,Piezometer,118.8,122.3,-0.169686
+APV+20,Groundwater,Archaea,Well.Feb,SRR7775184,Type,Well,87.6,55.1,-0.169374
+APV+20,Groundwater,Archaea,Well.May,SRR7775173,Type,Well,149,172.3,-0.179118
+APV+20,Groundwater,Archaea,Well.Aug,SRR7775183,Type,Well,190.6,195.2,-0.159814
+APV+20,Groundwater,Archaea,Well.Oct,SRR7775171,Type,Well,219.3,223.9,-0.167678
+APV+20,Groundwater,Archaea,Well.Nov,SRR7775172,Type,Well,164.5,170.3,-0.153154
+APV+20,Groundwater,Archaea,Well.Jan,SRR7775174,Type,Well,141.2,145.8,-0.164222
+APV+20,Groundwater,Archaea,Spring.Aug,SRR7775179,Type,Spring,199,211.8,-0.183603
+APV+20,Groundwater,Archaea,Spring.Jan,SRR7775177,Type,Spring,161.5,170.8,-0.178272
 SKP+21,Groundwater,Bacteria,L1-GW,SRR8771293,Type,Groundwater,212.2,182.2,-0.13676
 SKP+21,Groundwater,Bacteria,L2-GW,SRR8771292,Type,Groundwater,59.4,51.5,-0.137388
 SKP+21,Groundwater,Bacteria,L3-GW,SRR8771295,Type,Groundwater,115.4,78.6,-0.146569

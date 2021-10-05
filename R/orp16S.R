@@ -8,8 +8,9 @@
 # Group studies by environment types 20210828
 envirotype <- list(
   "River & Seawater" = c("MLL+18", "SVH+19", "HXZ+20", "KLY+20", "WHL+21", "LXH+20", "JVW+20", "ZZL+21", "GZL21"),
-  "Lake & Pond" = c("SAR+13", "LZR+17", "ECS+18", "LLC+19", "SCH+16", "BCA+21", "HLZ+18", "CNA+20", "BWD+19", "RSJ+21", "BOEM21", "GSY+20", "NLE+21", "FAV+21"),
-  "Groundwater" = c("KLM+16", "SDH+19", "SRM+19", "SKP+21", "YHK+20", "JDP+20", "GWS+19", "SRM+21", "ZCZ+21"),
+  "Lake & Pond" = c("SAR+13", "LZR+17", "ECS+18", "LLC+19", "SCH+16", "BCA+21", "HLZ+18", "CNA+20",
+                    "BWD+19", "RSJ+21", "BOEM21", "GSY+20", "NLE+21", "FAV+21", "GRG+20"),
+  "Groundwater" = c("KLM+16", "YHK+19", "SDH+19", "SRM+19", "APV+20", "SKP+21", "YHK+20", "JDP+20", "GWS+19", "SRM+21", "ZCZ+21"),
   # NOTE: Keep Hot Spring at #4 to get red color 20210904
   "Hot Spring" = c("SMS+12", "BMJ+19", "LMG+20", "GWSS21", "GWS+20", "PBU+20", "MWY+21", "OFY+19"),
   "Alkaline Spring" = c("SBP+20", "RMB+17", "CTS+17", "KSR+21", "NTB+21"),
@@ -205,6 +206,7 @@ orp16S3 <- function(pdf = FALSE) {
     "GSY+20, 37.59, -7.124", # Materials and methods
     "NLE+21, 32.833, 35.583", # SAMEA7280991
     "FAV+21, 0.757, 36.372", # SAMN19267646
+    "GRG+20, 37.726, -6.555", # Materials and methods
     # Hot Spring
     "SMS+12, 44.6, -110.9", # JGI IMG/M sample name 1_050719N
     "BMJ+19, 14.089567, 40.348583", # SAMN11581539
@@ -236,8 +238,10 @@ orp16S3 <- function(pdf = FALSE) {
     "DLS21, 39.39, -75.44", # SAMN17245435  ### Mesocosm
     # Groundwater
     "KLM+16, 42.99, -82.30", # SAMN04423023
+#    "YHK+19, 40.460, -87.764", # SAMD00089561
     "SDH+19, 23.03, 113.38", # SAMN07692244
     "SRM+19, 12.67417, 101.3889", # Materials and methods
+    "APV+20, 20.12, -99.23", # Materials and methods
     "SKP+21, 16.263306, 100.647778", # SAMN11191517
     "YHK+20, 51.209467, 10.791968", # SAMEA5714424
     "JDP+20, 44.8883, 110.1353", # SAMN12236980
@@ -293,6 +297,9 @@ orp16S3 <- function(pdf = FALSE) {
   mapPoints(dat$longitude, dat$latitude, col = orp16Scol[7], lwd = 2)
   # Coordinates for Southern Tibetan Plateau dataset are from Table 1 of MWY+21
   dat <- getmdat("MWY+21")
+  latlon <- paste(dat$latitude, dat$longitude)
+  isuniq <- !duplicated(latlon)
+  dat <- dat[isuniq, ]
   mapPoints(dat$longitude, dat$latitude, col = orp16Scol[4], lwd = 2)
   # Coordinates for Three Gorges Reservoir are from Table S1 of GZL21
   dat <- getmdat("GZL21")
@@ -301,6 +308,10 @@ orp16S3 <- function(pdf = FALSE) {
   isuniq <- !duplicated(latlon)
   dat <- dat[isuniq, ]
   mapPoints(dat$Longitude, dat$Latitude, col = orp16Scol[1], lwd = 1)
+  # Coordinates for Mahomet Aquifer are from Table S1 of YHK+19
+  dat <- getmdat("YHK+19")
+  latlon <- paste(dat$Latitude, dat$Longitude)
+  mapPoints(dat$Longitude, dat$Latitude, col = 3, lwd = 1)
 
   # Get colors for studies
   icol <- envirodat$groupnum[match(coords$study, envirodat$study)]
@@ -690,6 +701,7 @@ orp16S_S1 <- function(pdf = FALSE) {
     plotZC("GSY+20", "two", groupby = "Lake", groups = c("La Zarza", "Filon Centro"), legend.x = "bottomright"),
     plotZC("NLE+21", "Bacteria", groupby = "Year", groups = c("2017", "2018"), legend.x = "bottomleft"),
     plotZC("FAV+21", "two", groupby = "Type", groups = c("Oxic Surface", "Anoxic Surface", "Bottom")),
+    plotZC("GRG+20", "two", groupby = "Type", groups = c("Oxic", "Anoxic"), legend.x = "bottomleft"),
 
     # Hot Spring
     message("\nHot Spring"),
@@ -711,8 +723,10 @@ orp16S_S1 <- function(pdf = FALSE) {
 
     message("\nGroundwater"),
     plotZC("KLM+16", "Bacteria", groupby = "Day", groups = c(-1, 246, 448, 671)),
+    plotZC("YHK+19", "two"),
     plotZC("SDH+19", "two", groupby = "Type", groups = c("Freshwater", "Brackish", "Saltwater")),
     plotZC("SRM+19", "Bacteria", groupby = "Land Use", groups = c("Agriculture", "Community", "Landfill", "Mine")),
+    plotZC("APV+20", "two", groupby = "Type", groups = c("Canal", "Piezometer", "Well", "Spring")),
     plotZC("SKP+21", "Bacteria", groupby = "Type", groups = c("Groundwater", "Surface water"), legend.x = "topright"),
     plotZC("YHK+20", "Bacteria", groupby = "Location", groups = c("Upper Hillslope", "Middle Slope", "Lower Footslope")),
     plotZC("JDP+20", "Bacteria", groupby = "Roll-Front Setting", groups = c("Oxidized", "Intermediate", "Reduced"), legend.x = "bottomright"),
