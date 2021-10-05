@@ -1,0 +1,13 @@
+name,Run,LibraryName,BioSample,SampleName,Domain,Season,Type,pH,"ORP (mV)","T (°C)"
+"Qiangtang River Estuary",SRR7772569,Lib1,SAMN09935350,SprM,Archaea,Spring,Mid-tide,8.31,49.6,20
+"Qiangtang River Estuary",SRR7772570,Lib2,SAMN09935351,SprL,Archaea,Spring,Low-tide,8.36,48.9,19.9
+"Qiangtang River Estuary",SRR7772571,Lib3,SAMN09935352,SprS,Archaea,Spring,Subtidal,8.37,36.4,18.9
+"Qiangtang River Estuary",SRR7772572,Lib4,SAMN09935353,SumM,Archaea,Summer,Mid-tide,8.31,87.8,32
+"Qiangtang River Estuary",SRR7772565,Lib5,SAMN09935354,SumL,Archaea,Summer,Low-tide,8.43,34.9,32
+"Qiangtang River Estuary",SRR7772566,Lib6,SAMN09935355,SumS,Archaea,Summer,Subtidal,8.36,26.9,32
+"Qiangtang River Estuary",SRR7772567,Lib7,SAMN09935356,AutM,Archaea,Autumn,Mid-tide,8.3,70.7,22.4
+"Qiangtang River Estuary",SRR7772568,Lib8,SAMN09935357,AutL,Archaea,Autumn,Low-tide,8.3,40.8,20.7
+"Qiangtang River Estuary",SRR7772563,Lib9,SAMN09935358,AutS,Archaea,Autumn,Subtidal,8.3,61.7,20
+"Qiangtang River Estuary",SRR7772564,Lib10,SAMN09935359,WinM,Archaea,Winter,Mid-tide,8.12,72.4,9
+"Qiangtang River Estuary",SRR7772573,Lib11,SAMN09935360,WinL,Archaea,Winter,Low-tide,8.24,62.8,9
+"Qiangtang River Estuary",SRR7772574,Lib12,SAMN09935361,WinS,Archaea,Winter,Subtidal,8.12,53.5,9

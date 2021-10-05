@@ -12,10 +12,10 @@ envirotype <- list(
                     "BWD+19", "RSJ+21", "BOEM21", "GSY+20", "NLE+21", "FAV+21", "GRG+20"),
   "Groundwater" = c("KLM+16", "YHK+19", "SDH+19", "SRM+19", "APV+20", "SKP+21", "YHK+20", "JDP+20", "GWS+19", "SRM+21", "ZCZ+21"),
   # NOTE: Keep Hot Spring at #4 to get red color 20210904
-  "Hot Spring" = c("SMS+12", "BMJ+19", "LMG+20", "GWSS21", "GWS+20", "PBU+20", "MWY+21", "OFY+19"),
+  "Hot Spring" = c("SMS+12", "PCL+18_Acidic", "PCL+18_Alkaline", "BMJ+19", "LMG+20", "GWSS21", "GWS+20", "PBU+20", "MWY+21", "OFY+19"),
   "Alkaline Spring" = c("SBP+20", "RMB+17", "CTS+17", "KSR+21", "NTB+21"),
-  "Sediment" = c("JHL+12", "GFE+16", "ZML+17", "BYB+17", "BSPD17", "ABT+17", "HDZ+19", "SCM+18",
-                 "CLS+19", "ZDA+20", "VMB+19", "HSF+19", "MCS+21", "LMBA21", "ZZLL21", "WFB+21"),
+  "Sediment" = c("JHL+12", "GFE+16", "ZML+17", "BYB+17", "BSPD17", "ABT+17", "HDZ+19", "WHLH21", "SCM+18",
+                 "CLS+19", "ZDA+20", "VMB+19", "WHC+19", "HSF+19", "MCS+21", "LMBA21", "ZZLL21", "WFB+21"),
   "Soil" = c("SBW+17", "MLL+19", "BMOB18", "ZZZ+18", "PMM+20", "ZHZ+19", "CWC+20", "PSG+20", "XLD+20", "LJC+20", "DTJ+20", "LLL+21", "DLS21")
 )
 # Turn the list into a data frame for easier lookup 20210904
@@ -209,6 +209,7 @@ orp16S3 <- function(pdf = FALSE) {
     "GRG+20, 37.726, -6.555", # Materials and methods
     # Hot Spring
     "SMS+12, 44.6, -110.9", # JGI IMG/M sample name 1_050719N
+    "PCL+18_Acidic, -38.5, 176.0", # Fig. 1
     "BMJ+19, 14.089567, 40.348583", # SAMN11581539
     "LMG+20, -37.855, -71.158", # Table 1
     "GWSS21, 24.86, 98.33", # SAMN16802401
@@ -256,10 +257,12 @@ orp16S3 <- function(pdf = FALSE) {
     "BSPD17, 57.89297, 16.5855", # SAMN05163191   ### Laboratory
     "ABT+17, 43.42, -2.7", # Fig. 1
     "HDZ+19, 29.901, 113.52435", # SAMN05990289
+    "WHLH21, 23.52, 113.495", # Materials and methods
     "SCM+18, 25.25, -97.23", # Table 1
     "CLS+19, 32.22, 118.83", # SAMN08683376
     "ZDA+20, -21.42996, -70.05874", # SAMEA4858706
     "VMB+19, 52.11, 79.17", # SAMN08987150
+    "WHC+19, 30.12, 122.14", # Materials and methods
     "HSF+19, 47.803, 16.709", # methods
     "MCS+21, -32.15, -71.1", # Materials and methods
     "LMBA17, 43.42, -2.7", # Fig. 1
@@ -311,7 +314,7 @@ orp16S3 <- function(pdf = FALSE) {
   # Coordinates for Mahomet Aquifer are from Table S1 of YHK+19
   dat <- getmdat("YHK+19")
   latlon <- paste(dat$Latitude, dat$Longitude)
-  mapPoints(dat$Longitude, dat$Latitude, col = 3, lwd = 1)
+  mapPoints(dat$Longitude, dat$Latitude, col = orp16Scol[3], lwd = 1)
 
   # Get colors for studies
   icol <- envirodat$groupnum[match(coords$study, envirodat$study)]
@@ -324,7 +327,7 @@ orp16S3 <- function(pdf = FALSE) {
   # Use smaller points for high-density regions 20210915
   cex <- ifelse(coords$study %in% c(
     "MLL+19", "XLD+20", "LLL+21", "DTJ+20", # Hunan
-    "ZZL+21", "MLL+18", "SDH+19", "ZML+17", "ZZLL21", "ZZZ+18", "ZHZ+19" # GD-HK-MO GBA
+    "ZZL+21", "MLL+18", "SDH+19", "ZML+17", "ZZLL21", "ZZZ+18", "ZHZ+19", "WHLH21" # GD-HK-MO GBA
 #    "JVW+20", "ZCZ+21", "KSR+21"  # Northern Italy
   ), 1.5, 2.5)
   # Plot sample locations
@@ -403,12 +406,14 @@ orp16S5 <- function(pdf = FALSE) {
     studies <- envirotype[[i]]
     for(j in seq_along(studies)) {
       with(dat[dat$study == studies[j], ], {
-        y <- function(x) intercept + slope * x
-        Eh7 <- c(Eh7min, Eh7max)
-        ZC <- y(Eh7)
-        # Use dashed line for fits with low slope 20211002
-        if(abs(slope * 1000) < 0.01) lty <- 2 else lty <- 1
-        lines(Eh7, ZC, col = orp16Scol[i], lty = lty)
+        if(length(slope) > 0) {
+          y <- function(x) intercept + slope * x
+          Eh7 <- c(Eh7min, Eh7max)
+          ZC <- y(Eh7)
+          # Use dashed line for fits with low slope 20211002
+          if(abs(slope * 1000) < 0.01) lty <- 2 else lty <- 1
+          lines(Eh7, ZC, col = orp16Scol[i], lty = lty)
+        }
       })
     }
   }
@@ -422,11 +427,14 @@ orp16S5 <- function(pdf = FALSE) {
     studies <- envirotype[[i]]
     for(j in seq_along(studies)) {
       with(dat[dat$study == studies[j], ], {
-        y <- function(x) intercept + slope * x
-        Eh7 <- c(Eh7min, Eh7max)
-        ZC <- y(Eh7)
-        if(abs(slope * 1000) < 0.01) lty <- 2 else lty <- 1
-        lines(Eh7, ZC, col = orp16Scol[i], lty = lty)
+        # Need this 'if' to catch study without Bacteria (WHC+19) 20211005
+        if(length(slope) > 0) {
+          y <- function(x) intercept + slope * x
+          Eh7 <- c(Eh7min, Eh7max)
+          ZC <- y(Eh7)
+          if(abs(slope * 1000) < 0.01) lty <- 2 else lty <- 1
+          lines(Eh7, ZC, col = orp16Scol[i], lty = lty)
+        }
       })
     }
   }
@@ -522,7 +530,7 @@ orp16S6 <- function(pdf = FALSE) {
   # Use blue for neutral/alkaline
   col <- rep(orp16Scol[1], length(studies))
   # Use red for acidic
-  iacid <- studies %in% c("LMG+20")
+  iacid <- studies %in% c("PCL+18_Acidic", "LMG+20")
   col[iacid] <- orp16Scol[4]
   # Use turquoise for hypersaline
   ihyper <- studies %in% c("BMJ+19")
@@ -706,6 +714,8 @@ orp16S_S1 <- function(pdf = FALSE) {
     # Hot Spring
     message("\nHot Spring"),
     plotZC("SMS+12", "two", groupby = "Type", groups = c("Chemotrophic", "Transition", "Phototrophic")),
+    plotZC("PCL+18_Acidic", "two", legend.x = "bottomright"),
+    plotZC("PCL+18_Alkaline", "two"),
     plotZC("BMJ+19", "two", groupby = "Environment", groups = c("Hydrothermal Pond", "Yellow Lake", "Black Lake", "Assale Lake", "Cave Water")),
     plotZC("LMG+20", "two", groupby = "Setting", groups = c("River", "Hot Spring"), legend.x = "bottomleft"),
     plotZC("GWSS21", "two", groupby = "Location", groups = c("Rehai", "Banglazhang")),
@@ -743,10 +753,12 @@ orp16S_S1 <- function(pdf = FALSE) {
     plotZC("BSPD17", "Bacteria", groupby = "Type", groups = c("Water", "Sediment"), legend.x = "bottomleft"),
     plotZC("ABT+17", "two", groupby = "Type", groups = c("Coastal", "Estuarine")),
     plotZC("HDZ+19", "Bacteria", groupby = "Type", groups = c("Water", "Sediment")),
+    plotZC("WHLH21", "Bacteria", groupby = "Position", groups = c("Surface", "Middle", "Bottom"), legend.x = "bottomleft"),
     plotZC("SCM+18", "two", groupby = "Site", groups = c("Shallow", "Deep"), legend.x = "bottomleft"),
     plotZC("CLS+19", "two", groupby = "Type", groups = c("Water", "Sediment"), legend.x = "bottomright"),
     plotZC("ZDA+20", "Bacteria", groupby = "Type", groups = c("Water", "Sediment"), legend.x = "bottomleft"),
     plotZC("VMB+19", "two", groupby = "Type", groups = c("Water", "Sediment"), legend.x = "topright"),
+    plotZC("WHC+19", "Archaea", groupby = "Type", groups = c("Mid-tide", "Low-tide", "Subtidal"), legend.x = "topright"),
     plotZC("HSF+19", "Bacteria", groupby = "Type", groups = c("Water", "Sediment-Water Interface", "Sediment"), legend.x = "topright"),
     plotZC("MCS+21", "two", groupby = "Type", groups = c("Water", "Sediment"), legend.x = "left"),
     plotZC("LMBA21", "two", groupby = "Year", groups = c(2013, 2015, 2016, 2017, 2018, 2019), legend.x = "bottomright"),
@@ -865,7 +877,7 @@ plotZC <- function(study, lineage = NULL, mincount = 100, pch = NULL, col = NULL
       # Find matching samples and set the pch and col
       itype <- mdat[, icol] == groups[i]
       pch[itype] <- pchtype[i]
-      col[itype] <- coltype[i]
+      col[itype] <- orp16Scol[coltype[i]]
     }
 
   }
@@ -904,7 +916,7 @@ plotZC <- function(study, lineage = NULL, mincount = 100, pch = NULL, col = NULL
   }
   # Add points
   if("points" %in% show) {
-    points(EZdat$Eh7, EZdat$ZC, pch = pch, col = orp16Scol[col], bg = orp16Scol[col], type = type, cex = cex)
+    points(EZdat$Eh7, EZdat$ZC, pch = pch, col = col, bg = col, type = type, cex = cex)
   }
 
   if(!is.null(groupby) & !is.null(groups)) {

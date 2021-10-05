@@ -211,6 +211,7 @@ getmdat <- function(study, dropNA = TRUE) {
   }
 
   ## Datasets for orp16S paper 20211003
+  shortstudy <- study
   if(study == "RBW+14") {
     type <- rep("reducing", nrow(mdat))
     type[mdat$layer == "Top"] <- "oxidizing"
@@ -218,11 +219,16 @@ getmdat <- function(study, dropNA = TRUE) {
     pch <- sapply(type, switch, oxidizing = 24, transition = 20, reducing = 25)
     col <- sapply(type, switch, oxidizing = 4, transition = 1, reducing = 2)
   }
+  if(grepl("PCL\\+18", study)) {
+    # PCL+18, PCL+18_Acidic, PCL+19_Alkaline
+    Type <- sapply(strsplit(study, "_"), "[", 2)
+    if(!is.na(Type)) mdat <- mdat[mdat$Type == Type, ]
+    shortstudy <- "PCL+18"
+  }
   if(study == "DLS21") {
     # Just look at bulk soil 20210910
     mdat <- mdat[mdat$Source == "bulk soil", ]
   }
-  shortstudy <- study
   if(shortstudy %in% c(
     "MLL+19", "HXZ+20", "BCA+21", "RSJ+21", "RMB+17", "SBP+20", "NTB+21", "MWY+21", "SAR+13",
     "CTS+17", "SCM+18", "HDZ+19", "BOEM21", "ZHZ+19", "YHK+20", "CNA+20", "BMJ+19", "SRM+19",
@@ -232,7 +238,7 @@ getmdat <- function(study, dropNA = TRUE) {
     "KLM+16", "LMBA21", "ZDA+20", "ZZZ+18", "BSPD17", "CWC+20", "BMOB18", "JVW+20", "LJC+20",
     "GFE+16", "ECS+18", "FAV+21", "VMB+19", "DLS21", "ZZLL21", "GWS+20", "CLS+19", "SMS+12",
     "OFY+19", "BYB+17", "MCS+21", "SVH+19", "PMM+20", "GZL21", "LLC+19", "NLE+21", "GSY+20",
-    "SCH+16", "LZR+17", "GRG+20", "APV+20", "YHK+19"
+    "SCH+16", "LZR+17", "GRG+20", "APV+20", "YHK+19", "WHC+19", "WHLH21", "PCL+18"
   )) {
     # General processing of metadata for sed16S datasets 20210820
     # Get Eh or ORP values (uses partial name matching, can match a column named "Eh (mV)")
