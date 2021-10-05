@@ -31,7 +31,7 @@ This table gives a brief description of each plotting function.
 
 \tabular{ll}{
   \code{orp16S1} \tab Geobiochemical predictive framework \cr
-  \code{orp16S2} \tab Depth profiles in Winogradsky Columns \cr
+  \code{orp16S2} \tab Chemical and geobiochemical depth profiles in Winogradsky columns \cr
   \code{orp16S3} \tab Sample locations on world map \cr
   \code{orp16S4} \tab Selected plots for each environment type \cr
   \code{orp16S5} \tab Local and global analysis of ZC-Eh7 correlations \cr

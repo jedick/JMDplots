@@ -39,7 +39,7 @@
 ## STUDY SETTINGS
 
 # Change the following line to setup the pipeline for one study
-study <- "HLA+16"
+study <- "PCL+18"
 # Settings for all studies are stored here
 file <- tempfile()
 # Write spaces here (but don't save them) to make this easier to read
@@ -88,6 +88,7 @@ writeLines(con = file, text = gsub(" ", "", c(
   "SCM+18, TRUE, 250",
   "HDZ+19, FALSE, 420",
   "BOEM21, FALSE, 400",
+  "ZHZ+19, FALSE, 300",
   "YHK+20, FALSE, 400",
   "CNA+20, TRUE, 450",
   "BMJ+19, FALSE, 300",
@@ -96,7 +97,6 @@ writeLines(con = file, text = gsub(" ", "", c(
   "XLD+20, TRUE, 250",
   "JHL+12, NA, NA",
   "PSG+20, FALSE, 250",
-  "CZZ+19, NA, NA",
   "KSR+21, FALSE, 440",
   "ZCZ+21, FALSE, 450",
   "LLZ+20, TRUE, 150",
@@ -116,7 +116,6 @@ writeLines(con = file, text = gsub(" ", "", c(
   "LLL+21, FALSE, 450",
   "SDH+19, FALSE, 300",
   "GWSS21, FALSE, 300",
-  "PCL+18, TRUE, 250",
   "ZML+17, TRUE, 400",
   "RBW+14, FALSE, 250", # Winogradsky column
   "DTJ+20, FALSE, 420",
@@ -139,10 +138,23 @@ writeLines(con = file, text = gsub(" ", "", c(
   "ZZLL21, FALSE, 450",
   "GWS+20, FALSE, 300",
   "CLS+19, TRUE, 150",
-  "SMS+12, NA, NA",
+  # For SMS+12 (Bison Pool), start with findchimeras()
+  #"SMS+12, NA, NA",
   "BYB+17, NA, NA",
   "MCS+21, FALSE, 400",
-  "RKSK21, FALSE, 295"
+  "PMM+20, FALSE, 400",
+  "GZL21, FALSE, 420",
+  "SCH+16, TRUE, 250",
+  "APV+20, FALSE, 250",
+  "NLE+21, FALSE, 440",
+  "GSY+20, TRUE, 120",
+  "WHC+19, FALSE, 420",
+  "LZR+17, TRUE, 250",
+  "LLC+19, TRUE, 400",
+  "YHK+19, TRUE, 250",
+  "WHLH21, TRUE, 440",
+  "GRG+20, NA, NA",
+  "PCL+18, TRUE, 250"
 
 )))
 
@@ -184,19 +196,27 @@ filter <- function(SRR) {
   # The output file from this function is a FASTA file with .fa suffix
   outfile <- paste0(SRR, ".fa")
 
-  # For BYB+17, FASTQ files are downloaded from SRA cloud 20210917
-  fqdump <- FALSE
-
-  if(!study %in% c("BYB+17")) {
+  if(study %in% c("BYB+17", "GRG+20")) {
+    # For BYB+17, FASTQ files are downloaded from SRA cloud 20210917
+    fqdump <- FALSE
+  } else {
     # Generate input FASTQ files with fastq-dump
     fqdump <- TRUE
     cmd <- paste("fastq-dump --split-files --skip-technical --clip", SRR)
-    if(study == "CCN+16") cmd <- paste("fastq-dump --split-files --skip-technical --clip -X 500000", SRR)
+    if(study == "SCH+16") cmd <- paste("fastq-dump --split-files --skip-technical --clip -X 100000", SRR)
     print(cmd)
     system(cmd)
   }
 
-  if(is454) {
+  if(study %in% c("GRG+20")) {
+    # These are files from MG-RAST (.fasta suffix)
+    # Prefix MG-RAST ID to header so we can extract the reads in the subsample() and findchimeras() steps 20211004
+    fastafile <- paste0(SRR, ".fasta")
+    lines <- readLines(fastafile)
+    ihead <- grep("^>", lines)
+    lines[ihead] <- paste0(">", SRR, ";", gsub("^>", "", lines[ihead]))
+    writeLines(lines, outfile)
+  } else if(is454) {
     # For 454 studies, fastq-dump --skip-technical puts biological sequences into file with highest-numbered suffix 
     # Use _3.fastq, _2.fastq or _1.fastq if they are present 20200921
     infile <- paste0(SRR, "_3.fastq")
@@ -251,13 +271,15 @@ filter <- function(SRR) {
   if(!is454) {
     # Remove short and high-error reads
     # Use fastq_maxee_rate instead of fastq_maxee 20200920
+    maxee_rate <- 0.005
+    if(study == "YHK+19") maxee_rate <- 0.05
     # Use default -fastq_qmax except for some studies 20210922
     qmax <- 41
-    # For Ion Torrent 20200928
-    if(study == "PCL+18") qmax <- 45
     # For Illumina MiSeq (strange quality encoding?) 20210909
     if(study == "ECS+18") qmax <- 93
-    cmd <- paste("vsearch -fastq_filter merged.fastq -fastq_trunclen", trunclen, "-fastq_qmax", qmax, "-fastq_maxee_rate 0.005 -fastaout", outfile)
+    # For Ion Torrent 20210928
+    if(study == "PCL+18") qmax <- 45
+    cmd <- paste("vsearch -fastq_filter merged.fastq -fastq_trunclen", trunclen, "-fastq_qmax", qmax, "-fastq_maxee_rate", maxee_rate, "-fastaout", outfile)
     print(cmd)
     system(cmd)
   }
@@ -270,7 +292,7 @@ filter <- function(SRR) {
   }
 
   # Clean up
-  if(!study %in% c("BYB+17")) file.remove(Sys.glob("*.fastq"))
+  if(fqdump) file.remove(Sys.glob("*.fastq"))
   return()
 }
 

@@ -230,15 +230,14 @@ getmdat <- function(study, dropNA = TRUE) {
     mdat <- mdat[mdat$Source == "bulk soil", ]
   }
   if(shortstudy %in% c(
-    "MLL+19", "HXZ+20", "BCA+21", "RSJ+21", "RMB+17", "SBP+20", "NTB+21", "MWY+21", "SAR+13",
-    "CTS+17", "SCM+18", "HDZ+19", "BOEM21", "ZHZ+19", "YHK+20", "CNA+20", "BMJ+19", "SRM+19",
-    "HLZ+18", "XLD+20", "JHL+12", "PSG+20", "KSR+21", "ZCZ+21", "SKP+21", "ZZL+21", "PBU+20",
-    "GWS+19", "KLY+20", "SRM+21", "MLL+18", "JDP+20", "BWD+19", "ABT+17", "LXH+20", "LMG+20",
-    "WHL+21", "LLL+21", "SDH+19", "GWSS21", "HSF+19", "ZML+17", "DTJ+20", "WFB+21", "SBW+17",
-    "KLM+16", "LMBA21", "ZDA+20", "ZZZ+18", "BSPD17", "CWC+20", "BMOB18", "JVW+20", "LJC+20",
-    "GFE+16", "ECS+18", "FAV+21", "VMB+19", "DLS21", "ZZLL21", "GWS+20", "CLS+19", "SMS+12",
-    "OFY+19", "BYB+17", "MCS+21", "SVH+19", "PMM+20", "GZL21", "LLC+19", "NLE+21", "GSY+20",
-    "SCH+16", "LZR+17", "GRG+20", "APV+20", "YHK+19", "WHC+19", "WHLH21", "PCL+18"
+    "MLL+19", "HXZ+20", "BCA+21", "RSJ+21", "RMB+17", "SBP+20", "NTB+21", "MWY+21", "SAR+13", "CTS+17",
+    "SCM+18", "HDZ+19", "BOEM21", "ZHZ+19", "YHK+20", "CNA+20", "BMJ+19", "SRM+19", "HLZ+18", "XLD+20",
+    "JHL+12", "PSG+20", "KSR+21", "ZCZ+21", "SKP+21", "ZZL+21", "PBU+20", "GWS+19", "KLY+20", "SRM+21",
+    "MLL+18", "JDP+20", "BWD+19", "ABT+17", "LXH+20", "LMG+20", "WHL+21", "LLL+21", "SDH+19", "GWSS21",
+    "HSF+19", "ZML+17", "DTJ+20", "WFB+21", "SBW+17", "KLM+16", "LMBA21", "ZDA+20", "ZZZ+18", "BSPD17",
+    "CWC+20", "BMOB18", "JVW+20", "LJC+20", "GFE+16", "ECS+18", "FAV+21", "VMB+19", "DLS21", "ZZLL21",
+    "GWS+20", "CLS+19", "SMS+12", "OFY+19", "BYB+17", "MCS+21", "SVH+19", "PMM+20", "GZL21", "LLC+19",
+    "NLE+21", "GSY+20", "SCH+16", "LZR+17", "GRG+20", "APV+20", "YHK+19", "WHC+19", "WHLH21", "PCL+18"
   )) {
     # General processing of metadata for sed16S datasets 20210820
     # Get Eh or ORP values (uses partial name matching, can match a column named "Eh (mV)")
