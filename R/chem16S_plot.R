@@ -2,9 +2,8 @@
 # Plotting functions for predicted RefSeq and inferred community proteomes
 # Separated from chem16S.R 20210607
 
-# taxacomp()                # nH2O-ZC plot for taxa (default: Bacteria, Archaea) and their children
+# taxacomp()               # nH2O-ZC plot for taxa (default: Bacteria, Archaea) and their children
 # plotmet("KGP+12")        # nH2O-ZC plot for specified study
-# diffmet("KGP+12")        # DnH2O-DZC plot for specified study
 
 ######################
 # Plotting functions #
@@ -549,96 +548,6 @@ groupperc <- function(..., xlim = NULL, ylim = NULL, xadj = NULL, yadj = NULL) {
 ########################
 # Unexported functions #
 ########################
-
-# Plot differences of nH2O and ZC 20200901
-# Use iminuend and isubtrahend to identify sample pairs 20200914
-diffmet <- function(study, cn = FALSE, identify = FALSE, title = TRUE, xlim = NULL, ylim = NULL, plot.it = TRUE) {
-  # Get metadata
-  mdat <- getmdat(study)
-  # Get chemical metrics for samples
-  metrics <- getmetrics(study, cn = cn, mdat = mdat)
-  # Keep metadata only for samples with sufficient counts 20201001
-  mdat <- mdat[mdat$Run %in% metrics$Run, ]
-  nH2O <- metrics$nH2O
-  ZC <- metrics$ZC
-  if(all(is.na(mdat$minuend))) stop("minuend and subtrahend for differences are not defined")
-  # Find pairs of samples for minuend and subtrahend
-  pairs <- intersect(na.omit(mdat$minuend), na.omit(mdat$subtrahend))
-  isubtrahend <- match(pairs, mdat$subtrahend)
-  iminuend <- match(pairs, mdat$minuend)
-  # Calculate differences
-  DnH2O <- nH2O[iminuend] - nH2O[isubtrahend]
-  DZC <- ZC[iminuend] - ZC[isubtrahend]
-  # Default symbol is red circle with black outline
-  pch <- rep(21, length(pairs))
-  col <- rep(2, length(pairs))
-  if(study == "HCH+16") {
-    # Use different points for cancer and benign disease 20200914
-    # This is the 'histology_cat' annotation from Biosample metadata
-    col <- sapply(mdat$cohort[iminuend], switch, InvCa = 2, DCIS = 2, BBD_non_atypia = 0, Atypia = 0)
-  }
-  if(study == "TWB+18") {
-    # Red filled circle for cancer, open circle for not cancer
-    pch <- sapply(mdat$cohort[iminuend], switch, cancer = 21, "not cancer" = 1)
-    col <- sapply(mdat$cohort[iminuend], switch, cancer = 2, "not cancer" = 1)
-  }
-  if(study == "NLZ+15") {
-    # Red circle for carcinoma, blue square for adenoma
-    pch <- sapply(mdat$type[iminuend], switch, tumor = 21, polyp = 22)
-    col <- sapply(mdat$type[iminuend], switch, tumor = 2, polyp = 4)
-  }
-  if(study == "TZT+20") {
-#    # Red circle for TNBC, red square for TPBC
-#    pch <- sapply(mdat$cohort[iminuend], switch, TNBC = 21, TPBC = 22)
-    race <- gsub("[ab]", "", sapply(strsplit(mdat$subject, "_"), "[", 1))
-    pch <- sapply(race[iminuend], switch, BNH = 21, WNH = 22)
-    col <- sapply(race[iminuend], switch, BNH = 2, WNH = 4)
-  }
-  if(study == "SKB+14_paired") {
-    # Filled circle for cancer/normal or CIS/normal, filled square for dysplasia/normal, open circle for healthy normal (right/left)
-    pch <- sapply(mdat$cohort[iminuend], switch, cancer = 21, CIS = 21, "pre-cancer" = 22,
-                  "cancer duplicate" = 21, "pre-cancer duplicate" = 22, "healthy normal" = 1)
-    # Red for cancer, blue for dysplasia, unfilled for healthy normal
-    col <- sapply(mdat$cohort[iminuend], switch, "pre-cancer" = 4, "pre-cancer duplicate" = 4, "healthy normal" = 0, 2)
-  }
-
-  # Calculate mean difference and p-value 20201001
-  # Use col == 2 (red) to get cancer-normal pairs
-  i2 <- iminuend[col == 2]
-  i1 <- isubtrahend[col == 2]
-  D_mean_nH2O <- mean(nH2O[i2]) - mean(nH2O[i1])
-  D_mean_ZC <- mean(ZC[i2]) - mean(ZC[i1])
-
-  if(plot.it) {
-    # Make plot
-    if(is.null(xlim)) xlim <- range(DZC)
-    if(is.null(ylim)) ylim <- range(DnH2O)
-    plot(xlim, ylim, xlab = NA, ylab = NA, type = "n")
-    points(DZC, DnH2O, pch = pch, col = 1, bg = col)
-    abline(v = 0, h = 0, lty = 2, col = "gray60")
-    points(D_mean_ZC, D_mean_nH2O, pch = 8, col = "white", lwd = 3.5, cex = 2)
-    points(D_mean_ZC, D_mean_nH2O, pch = 8, lwd = 1.5, cex = 2)
-    points(D_mean_ZC, D_mean_nH2O, pch = 8, lwd = 0.5, col = 2, cex = 2)
-    p.nH2O <- t.test(nH2O[i1], nH2O[i2], paired = TRUE)$p.value
-    log10p.nH2O <- formatC(log10(p.nH2O), 1, format = "f")
-    p.ZC <- t.test(ZC[i1], ZC[i2], paired = TRUE)$p.value
-    log10p.ZC <- formatC(log10(p.ZC), 1, format = "f")
-    # Make log10 p-value bold if p-value is less than 0.05
-    if(p.ZC < 0.05) xlab <- bquote(.(canprot::cplab$DZC[[1]]) ~ "(" * bold(.(log10p.ZC)) * ")") else xlab <- bquote(.(canprot::cplab$DZC[[1]]) ~ "(" * .(log10p.ZC) * ")")
-    if(p.nH2O < 0.05) ylab <- bquote(.(canprot::cplab$DnH2O[[1]]) ~ "(" * bold(.(log10p.nH2O)) * ")") else ylab <- bquote(.(canprot::cplab$DnH2O[[1]]) ~ "(" * .(log10p.nH2O) * ")")
-    mtext(xlab, side = 1, line = par("mgp")[1], cex = 0.8)
-    mtext(ylab, side = 2, line = par("mgp")[1], cex = 0.8)
-    # Add title
-    if(isTRUE(title)) title(na.omit(mdat$name)[1], font.main = 1, cex = 0.9, xpd = NA)
-    else if(!isFALSE(title)) title(title, font.main = 1, cex = 0.9, xpd = NA)
-    # Identify points 20200903
-    if(identify) identify(DZC, DnH2O, mdat$subject[iminuend])
-  }
-
-  # Return the mean values 20201003
-  invisible(list(study = study, DZC = D_mean_ZC, DnH2O = D_mean_nH2O))
-}
-
 
 # Add nH2O-ZC guidelines parallel to regression for amino acids
 # Modified from JMDplots::gradH2O1() and JMDplots:::lmlines() 20200901

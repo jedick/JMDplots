@@ -13,7 +13,7 @@
 # Utility functions #
 #####################
 
-# Get metadata for a study, appending columns for pch, col, minuend and subtrahend (pairs for difference calculation) 20200914
+# Get metadata for a study, appending columns for pch and col 20200914
 getmdat <- function(study, dropNA = TRUE) {
   # Read metadata file
   # Remove suffix after underscore 20200929

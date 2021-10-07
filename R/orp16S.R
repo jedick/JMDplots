@@ -584,94 +584,6 @@ orp16S6 <- function(pdf = FALSE) {
 
 }
 
-add.linear <- function(Eh7, ZC, nstudy = NA) {
-  # Plot linear fit and confidence interval 20210920
-  # Use lighter colors for environments with few datasets 20210925
-  text.col <- "black"
-  polygon.col <- "gray80"
-  line.col <- "gray62"
-  if(!is.na(nstudy)) if(nstudy < 5) {
-    text.col <- "gray60"
-    polygon.col <- "gray90"
-    line.col <- "gray70"
-  }
-  # Show number of studies and exit if there are zero 20210926
-  if(!is.na(nstudy)) {
-    legend("topleft", legend = nstudy, bty = "n", text.font = 2, text.col = text.col, inset = c(-0.05, 0))
-    if(nstudy == 0) return()
-  }
-  # https://stackoverflow.com/questions/22717930/how-to-get-the-confidence-intervals-for-lowess-fit-using-r
-  Ehvals <- seq(range(Eh7)[1], range(Eh7)[2], length.out = 100)
-  EZlm <- lm(ZC ~ Eh7)
-  plx <- predict(EZlm, newdata = data.frame(Eh7 = Ehvals), se = T)
-  upper <- plx$fit + qt(0.975, plx$df) * plx$se
-  lower <- plx$fit - qt(0.975, plx$df) * plx$se
-  polygon(c(Ehvals, rev(Ehvals)), c(lower, rev(upper)), col = polygon.col, border = NA)
-  lines(Ehvals, plx$fit, col = line.col)
-  # Get the slope
-  slope <- EZlm$coefficients[2]
-  # Multiply by 1000 to convert from mV to V
-  slope <- slope * 1000
-  # Round to fixed number of decimal places
-  slope <- formatC(slope, digits = 3, format = "f")
-  stext <- bquote(.(slope)~V^-1)
-  # Also show number of samples
-  Ntext <- bquote(italic(N) == .(length(ZC)))
-  # Add text to plot
-  legend <- as.expression(c(Ntext, stext))
-  legend("topright", legend = legend, bty = "n", text.col = text.col)
-
-#  # Get P-value
-#  Pval <- summary(EZlm)$coefficients[, "Pr(>|t|)"]["Eh7"]
-#  # Divide by 2 to get one-sided p-value
-#  Pval <- Pval / 2
-#  Pval <- formatC(Pval, digits = 1, format = "e")
-#  Ptext <- bquote(italic(P) == .(Pval))
-#  legend("topleft", legend = Ptext, bty = "n")
-}
-
-# Scatterplots for all samples in each environment type 20210913
-# NOTE: default ienv omits Hot Spring (4)
-eachenv <- function(lineage = "Bacteria", add = FALSE, do.linear = TRUE, ienv = c(1, 2, 5, 3, 6, 7)) {
-  # Read Eh7 - ZC data
-  dat <- read.csv(system.file("extdata/orp16S/EZdat.csv", package = "JMDplots"))
-  # Get overall x and y limits
-  xlim <- range(dat$Eh7)
-  ylim <- range(dat$ZC)
-  # Use Bacteria or Archaea only
-  dat <- dat[dat$lineage == lineage, ]
-  # Get names of environment types
-  envirotypes <- names(envirotype)
-  # Loop over environment types
-  for(i in ienv) {
-    # Start plot
-    if(!add) plot(xlim, ylim, type = "n", xlab = "", ylab = "", axes = FALSE)
-    # Get Eh7 and ZC values
-    thisdat <- dat[dat$envirotype == envirotypes[i], ]
-    Eh7 <- thisdat$Eh7
-    ZC <- thisdat$ZC
-    if(do.linear) {
-      # Include number of studies in legend 20210925
-      nstudy <- length(unique(thisdat$study))
-      add.linear(Eh7, ZC, nstudy)
-    }
-    if(!add) {
-      # Add plot axes and title
-      if(lineage == "Archaea") {
-        axis(1, labels = NA)
-        # Make rotated labels (modified from https://www.r-bloggers.com/rotated-axis-labels-in-r-plots/)
-        x <- c(-400, 0, 600)
-        text(x = x, y = par()$usr[3] - 1.5 * strheight("A"), labels = x, srt = 45, adj = 1, xpd = NA)
-      }
-      if(i == 1) axis(2)
-      box()
-      if(lineage == "Bacteria") title(envirotypes[i], font.main = 1, cex.main = 1)
-    }
-    # Plot points
-    points(Eh7, ZC, pch = 19, cex = 0.2, col = orp16Scol[i])
-  }
-}
-
 # Figure S1: ZC-Eh scatterplots for all studies 20210827
 # This also creates files EZdat (Eh and ZC values) and
 # EZlm (linear fits) for use by other plotting functions
@@ -806,138 +718,95 @@ orp16S_S1 <- function(pdf = FALSE) {
 }
 
 
-# Plot ZC values vs Eh7 for a single study 20210827
-# Use 'groupby' (name of column with sample groups) and 'groups' (names of sample groups) to apply the pch and col to individual samples
-plotZC <- function(study, lineage = NULL, mincount = 100, pch = NULL, col = NULL, add = FALSE, type = "p", groupby = NULL, groups = NULL,
-                   legend.x = "topleft", show = c("lm", "points"), col.line = "gray62", lwd = 1, cex = 1, mdat = NULL, title.line = NA) {
+############################
+### UNEXPORTED FUNCTIONS ###
+############################
 
-  if(identical(lineage, "two")) {
-    # Make two plots for studies that have Bacteria and Archaea 20210913
-    out1 <- plotZC(study, "Bacteria", mincount, pch, col, add, type, groupby, groups, legend.x, show, col.line, lwd, cex)
-    # Don't show legend on second (Archaea) plot 20210914
-    out2 <- plotZC(study, "Archaea", mincount, pch, col, add, type, groupby, groups, legend.x = NA, show, col.line, lwd, cex, mdat = out1$mdat)
-    out <- c(out1, out2)
-    return(invisible(out))
+add.linear <- function(Eh7, ZC, nstudy = NA) {
+  # Plot linear fit and confidence interval 20210920
+  # Use lighter colors for environments with few datasets 20210925
+  text.col <- "black"
+  polygon.col <- "gray80"
+  line.col <- "gray62"
+  if(!is.na(nstudy)) if(nstudy < 5) {
+    text.col <- "gray60"
+    polygon.col <- "gray90"
+    line.col <- "gray70"
   }
-
-  # Get metadata; use suppressMessages() to suppress messages
-  if(is.null(mdat)) mdat <- suppressMessages(getmdat(study))
-  mdat.orig <- mdat
-  # For Bacteria or Archaea, use only runs that are labeled as such 20210920
-  if("Domain" %in% colnames(mdat)) {
-    if(identical(lineage, "Bacteria")) mdat <- mdat[mdat$Domain == "Bacteria", ]
-    if(identical(lineage, "Archaea")) mdat <- mdat[mdat$Domain == "Archaea", ]
+  # Show number of studies and exit if there are zero 20210926
+  if(!is.na(nstudy)) {
+    legend("topleft", legend = nstudy, bty = "n", text.font = 2, text.col = text.col, inset = c(-0.05, 0))
+    if(nstudy == 0) return()
   }
+  # https://stackoverflow.com/questions/22717930/how-to-get-the-confidence-intervals-for-lowess-fit-using-r
+  Ehvals <- seq(range(Eh7)[1], range(Eh7)[2], length.out = 100)
+  EZlm <- lm(ZC ~ Eh7)
+  plx <- predict(EZlm, newdata = data.frame(Eh7 = Ehvals), se = T)
+  upper <- plx$fit + qt(0.975, plx$df) * plx$se
+  lower <- plx$fit - qt(0.975, plx$df) * plx$se
+  polygon(c(Ehvals, rev(Ehvals)), c(lower, rev(upper)), col = polygon.col, border = NA)
+  lines(Ehvals, plx$fit, col = line.col)
+  # Get the slope
+  slope <- EZlm$coefficients[2]
+  # Multiply by 1000 to convert from mV to V
+  slope <- slope * 1000
+  # Round to fixed number of decimal places
+  slope <- formatC(slope, digits = 3, format = "f")
+  stext <- bquote(.(slope)~V^-1)
+  # Also show number of samples
+  Ntext <- bquote(italic(N) == .(length(ZC)))
+  # Add text to plot
+  legend <- as.expression(c(Ntext, stext))
+  legend("topright", legend = legend, bty = "n", text.col = text.col)
 
-  # Use capture.output to hide printed output
-  null <- capture.output(
-    # Use try() to capture errors (with no mapped sequences for lineage = "Archaea")
-    met <- try(
-      suppressMessages(
-        getmetrics(study, mdat = mdat, lineage = lineage, mincount = mincount)
-      ), silent = TRUE
-    )
-  )
-  # Print message and skip dataset with no mapped sequences
-  if(inherits(met, "try-error")) {
-    print(paste0(study, ": no mapped sequences for ", lineage))
-    return()
-  }
+#  # Get P-value
+#  Pval <- summary(EZlm)$coefficients[, "Pr(>|t|)"]["Eh7"]
+#  # Divide by 2 to get one-sided p-value
+#  Pval <- Pval / 2
+#  Pval <- formatC(Pval, digits = 1, format = "e")
+#  Ptext <- bquote(italic(P) == .(Pval))
+#  legend("topleft", legend = Ptext, bty = "n")
+}
 
-  # Keep metadata only for samples with >= mincount counts 20201006
-  mdat <- mdat[mdat$Run %in% met$Run, ]
-  nsamp <- nrow(mdat)
-  # Remove samples with NA Eh7 or ZC 20210822
-  mdat <- mdat[!(is.na(mdat$Eh7) | is.na(met$ZC)), ]
-  met <- met[met$Run %in% mdat$Run, ]
-  stopifnot(all(mdat$Run == met$Run))
-  # Print message about number of samples and Eh7 and ZC range
-  ZCtext <- paste(range(round(met$ZC, 3)), collapse = " to ")
-  if(!is.null(lineage)) ltext <- paste0(lineage, ": ") else ltext <- ""
-  print(paste0(study, ": ", ltext, nrow(mdat), "/", nsamp, " samples, ZC ", ZCtext))
-
-  # Assign pch and col to sample groups
-  if(!is.null(groupby) & !is.null(groups)) {
-
-    # Get default point symbols
-    pchavail <- 21:25
-    if(is.null(pch)) pch <- rep(pchavail, length(groups))
-
-    # The pch and col for each sample type
-    pchtype <- rep(pch, length.out = length(groups))
-    coltype <- 1:length(groups)
-
-    # The pch and col for individual samples
-    pch <- col <- rep(NA, nrow(mdat))
-    # The column with sample groups
-    icol <- match(groupby, colnames(mdat))
-    if(is.na(icol)) stop(paste(groupby, "is not a column name in metadata for", study))
-    # Loop over sample groups
-    for(i in seq_along(groups)) {
-      # Find matching samples and set the pch and col
-      itype <- mdat[, icol] == groups[i]
-      pch[itype] <- pchtype[i]
-      col[itype] <- orp16Scol[coltype[i]]
+# Scatterplots for all samples in each environment type 20210913
+# NOTE: default ienv omits Hot Spring (4)
+eachenv <- function(lineage = "Bacteria", add = FALSE, do.linear = TRUE, ienv = c(1, 2, 5, 3, 6, 7)) {
+  # Read Eh7 - ZC data
+  dat <- read.csv(system.file("extdata/orp16S/EZdat.csv", package = "JMDplots"))
+  # Get overall x and y limits
+  xlim <- range(dat$Eh7)
+  ylim <- range(dat$ZC)
+  # Use Bacteria or Archaea only
+  dat <- dat[dat$lineage == lineage, ]
+  # Get names of environment types
+  envirotypes <- names(envirotype)
+  # Loop over environment types
+  for(i in ienv) {
+    # Start plot
+    if(!add) plot(xlim, ylim, type = "n", xlab = "", ylab = "", axes = FALSE)
+    # Get Eh7 and ZC values
+    thisdat <- dat[dat$envirotype == envirotypes[i], ]
+    Eh7 <- thisdat$Eh7
+    ZC <- thisdat$ZC
+    if(do.linear) {
+      # Include number of studies in legend 20210925
+      nstudy <- length(unique(thisdat$study))
+      add.linear(Eh7, ZC, nstudy)
     }
-
+    if(!add) {
+      # Add plot axes and title
+      if(lineage == "Archaea") {
+        axis(1, labels = NA)
+        # Make rotated labels (modified from https://www.r-bloggers.com/rotated-axis-labels-in-r-plots/)
+        x <- c(-400, 0, 600)
+        text(x = x, y = par()$usr[3] - 1.5 * strheight("A"), labels = x, srt = 45, adj = 1, xpd = NA)
+      }
+      if(i == 1) axis(2)
+      box()
+      if(lineage == "Bacteria") title(envirotypes[i], font.main = 1, cex.main = 1)
+    }
+    # Plot points
+    points(Eh7, ZC, pch = 19, cex = 0.2, col = orp16Scol[i])
   }
-
-  # Defaults for pch and col if sample groups are not specified
-  if(is.null(pch)) pch <- 19
-  if(is.null(col)) col <- "#40404080"
-
-  # Make data frame with Eh7 and ZC values
-  EZdat <- data.frame(Eh = mdat$Ehorig, Eh7 = mdat$Eh7, ZC = round(met$ZC, 6))
-  # Create subtitle for environment type 20210904
-  sub <- envirotype <- envirodat$group[envirodat$study == study]
-  if(!add) {
-    # Start new plot
-    plot(EZdat$Eh7, EZdat$ZC, xlab = "Eh7 (mV)", ylab = cplab$ZC, type = "n")
-    # Take off suffix after underscore 20210914
-    root <- strsplit(study, "_")[[1]][1]
-    suffix <- strsplit(study, "_")[[1]][2]
-    main <- paste0(na.omit(mdat$name)[1], " (", root, ")")
-    title(main = main, font.main = 1, line = title.line)
-    # Include suffix in subtite 20210914
-    if(!is.na(suffix)) sub <- paste(sub, "-", suffix)
-    # Add lineage 20210913
-    if(!is.null(lineage)) sub <- paste(sub, "-", lineage)
-    title(main = sub, line = 0.5, cex.main = 1)
-  }
-  # Add linear fit
-  if("lm" %in% show) {
-    EZlm <- lm(ZC ~ Eh7, EZdat)
-    Eh7lim <- range(EZlm$model$Eh7)
-    ZCpred <- predict.lm(EZlm, data.frame(Eh7 = Eh7lim))
-    # Use solid or dashed line to indicate large or small slope 20210926
-    slope <- EZlm$coefficients[2] * 1000
-    if(is.na(slope)) lty <- 3 else if(abs(slope) < 0.01) lty <- 2 else lty <- 1
-    lines(Eh7lim, ZCpred, col = col.line, lwd = lwd, lty = lty)
-  }
-  # Add points
-  if("points" %in% show) {
-    points(EZdat$Eh7, EZdat$ZC, pch = pch, col = col, bg = col, type = type, cex = cex)
-  }
-
-  if(!is.null(groupby) & !is.null(groups)) {
-    # Add legend
-    legend <- as.character(groups)
-    legend(legend.x, legend, pch = pchtype, col = orp16Scol[coltype], pt.bg = orp16Scol[coltype], title = groupby, cex = 0.9)
-    # Add sample type (group) to output
-    EZdat <- cbind(groupby = groupby, group = mdat[, icol], EZdat)
-  } else {
-    EZdat <- cbind(groupby = NA, group = NA, EZdat)
-  }
-
-
-  # Return values
-  # Use first column name starting with "sample" or "Sample" 20210818
-  sampcol <- grep("^sample", colnames(mdat), ignore.case = TRUE)[1]
-  if(is.null(lineage)) lineage <- ""
-  EZdat <- cbind(study = study, envirotype = envirotype, lineage = lineage, sample = mdat[, sampcol], Run = mdat$Run, EZdat)
-  out <- list(study = study, envirotype = envirotype, lineage = lineage, mdat = mdat.orig, EZdat = EZdat)
-  if("lm" %in% show) out <- c(out, list(EZlm = EZlm, Eh7lim = Eh7lim, ZCpred = ZCpred))
-  invisible(out)
-
 }
 

@@ -39,7 +39,7 @@ This table gives a brief description of each plotting function.
   \code{orp16S_S1} \tab ZC-Eh scatterplots for all studies \cr
 }
 
-To set up the \code{\link{chem16S}} environment, change the \code{options(chem16Sdir)} before running these functions (see example).
+To set up the \code{\link{chem16S}} environment, change \code{options(chem16Sdir)} before running these functions (see example).
 
 \code{orp16S_S1} creates the files EZdat.csv and EZlm.csv that are used by the other functions.
 
@@ -55,6 +55,10 @@ To set up the \code{\link{chem16S}} environment, change the \code{options(chem16
   }
 }
 
+\seealso{
+\code{\link{plotZC}} is used to make the \ZC-Eh7 scatterplots and linear fits in \code{orp16S4} and \code{orp16S_S1}.
+}
+
 \references{
 Dick, J. M. and Meng, D. (2021) Local and global chemical shaping of bacterial communities by redox potential.
 
@@ -64,8 +68,7 @@ USGS (2010) Great Lakes and Watersheds Shapefiles. ScienceBase Catalog, U.S. Geo
 \examples{
 orp16S1()
 
-orp16Sdir = system.file("extdata/orp16S", package = "JMDplots")
-options(chem16Sdir = orp16Sdir)
+options(chem16Sdir = system.file("extdata/orp16S", package = "JMDplots"))
 
 orp16S2()
 

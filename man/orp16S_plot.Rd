@@ -1,0 +1,59 @@
+\encoding{UTF-8}
+\name{orp16S_plot}
+\alias{orp16S_plot}
+\alias{plotZC}
+\title{Plotting functions for orp16S paper}
+\description{
+Plot \ZC vs Eh7 and \ZC vs percentage of Most Abundant Mapped Taxon.
+}
+
+\usage{
+  plotZC(study, lineage = NULL, mincount = 100, pch = NULL, col = NULL,
+    add = FALSE, type = "p", groupby = NULL, groups = NULL, legend.x = "topleft",
+    show = c("lm", "points"), col.line = "gray62", lwd = 1, cex = 1, mdat = NULL,
+    title.line = NA)
+}
+
+\arguments{
+  \item{study}{character, study key}
+  \item{lineage}{character, regular expression for filtering lineages, or the keyword \samp{two}}
+  \item{mincount}{integer, minimum classification count for each sample}
+  \item{pch}{point symbol}
+  \item{col}{color(s) for points}
+  \item{add}{logical, add to existing plot?}
+  \item{type}{plot type, as in \code{\link{plot.default}}}
+  \item{groupby}{character, column name for grouping samples}
+  \item{groups}{character, names of sample groups}
+  \item{legend.x}{legend placement (\code{x} argument for \code{\link{legend}})}
+  \item{show}{character, show these plot elements}
+  \item{col.line}{line color (linear fit)}
+  \item{lwd}{line width}
+  \item{cex}{character expansion}
+  \item{mdat}{output of \code{\link{getmdat}} - used internally for memoization with \code{lineage = "two"}}
+  \item{title.line}{numeric, placement of title}
+}
+
+\details{
+
+\code{plotZC} is used to make \ZC-Eh7 scatterplots for a single study.
+By default, \ZC is calculated for estimated proteomes using all bacterial and archaeal sequences.
+Set \code{lineage} to \samp{Bacteria} or \samp{Archaea} to make one plot for one of the domains, or to \samp{two} to make two plots for both domains.
+The latter option is used in \code{\link{orp16S_S1}} for the Figure S1 in the paper.
+
+}
+
+\value{
+A list with elements \code{study}, \code{envirotype} (environment type), \code{lineage}, \code{mdat} (output of \code{\link{getmdat}}), and \code{EZdat}.
+\code{EZdat} is a data frame with one row per sample and columns for \code{study}, \code{envirotype}, \code{lineage}, \code{sample} (sample name), \code{Run} (SRA run accession or other database ID), \code{Eh}, \code{Eh7}, and \code{ZC}.
+If \code{groupby} and \code{groups} are given, \code{EZdat} additionally contains columns \code{groupby} and \code{group}.
+If \code{show} includes \samp{lm}, the output additionally contains \code{EZlm} (the result of \code{\link{lm}(ZC ~ Eh7, EZdat)}), Eh7lim (range of Eh7 values), and ZCpred (fitted \ZC values for this Eh7 range).
+}
+
+\seealso{
+\code{\link{orp16S}}
+}
+
+\examples{
+options(chem16Sdir = system.file("extdata/orp16S", package = "JMDplots"))
+plotZC("MLL+19", "Bacteria", groupby = "Type", groups = c("Upland", "Paddy", "Sediment"))
+}
