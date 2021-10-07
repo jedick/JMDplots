@@ -4,10 +4,10 @@
 # Moved to JMDplots 20210416
 
 # Utility functions
-# getmdat("KGP+12")     # Metadata for this study (study, name, Run, BioSample, sample, type, cohort)
-# getRDP("KGP+12")      # RDP results for all samples in this study
-# getmap("KGP+12")      # Map RDP to RefSeq taxonomy (match to rows of groupAA.csv)
-# getmetrics("KGP+12")   # Calculate chemical metrics (nH2O, ZC) for each sample
+# getmdat("SVH+19")     # Metadata for this study (study, name, Run, BioSample, sample, type, cohort)
+# getRDP("SVH+19")      # RDP results for all samples in this study
+# getmap("SVH+19")      # Map RDP to RefSeq taxonomy (match to rows of groupAA.csv)
+# getmetrics("SVH+19")   # Calculate chemical metrics (nH2O, ZC) for each sample
 
 #####################
 # Utility functions #

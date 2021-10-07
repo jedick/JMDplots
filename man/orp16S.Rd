@@ -56,7 +56,7 @@ To set up the \code{\link{chem16S}} environment, change \code{options(chem16Sdir
 }
 
 \seealso{
-\code{\link{plotZC}} is used to make the \ZC-Eh7 scatterplots and linear fits in \code{orp16S4} and \code{orp16S_S1}.
+\code{\link{plotEZ}} is used to make the \ZC-Eh7 scatterplots and linear fits in \code{orp16S4} and \code{orp16S_S1}.
 }
 
 \references{

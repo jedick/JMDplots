@@ -355,21 +355,21 @@ orp16S4 <- function(pdf = FALSE) {
   par(mgp = c(2.5, 1, 0))
 
   # Black Sea (River & Seawater)
-  plotZC("SVH+19", "Bacteria", groupby = "Type", groups = c("Oxic", "Suboxic", "Euxinic"), title.line = 1.5)
+  plotEZ("SVH+19", "Bacteria", groupby = "Type", groups = c("Oxic", "Suboxic", "Euxinic"), title.line = 1.5)
   # Fayetteville Green Lake (Lake & Pond)
-  plotZC("BOEM21", "Bacteria", groupby = "Stratum", groups = c("Upper", "Chemocline", "Lower"), title.line = 1.5)
+  plotEZ("BOEM21", "Bacteria", groupby = "Stratum", groups = c("Upper", "Chemocline", "Lower"), title.line = 1.5)
   # Samail Ophiolite (Alkaline Spring)
-  plotZC("RMB+17", "Bacteria", groupby = "pH Group", groups = c("< 10", "> 10"), title.line = 1.5)
+  plotEZ("RMB+17", "Bacteria", groupby = "pH Group", groups = c("< 10", "> 10"), title.line = 1.5)
   # Eastern Tibetan Plateau (Hot Spring)
-  plotZC("GWS+20", "Bacteria", groupby = "Field", groups = c("Batang", "Litang", "Kangding"), title.line = 1.5)
+  plotEZ("GWS+20", "Bacteria", groupby = "Field", groups = c("Batang", "Litang", "Kangding"), title.line = 1.5)
   # Hainich Critical Zone (Groundwater)
-  plotZC("YHK+20", "Bacteria", groupby = "Location", groups = c("Upper Hillslope", "Middle Slope", "Lower Footslope"), title.line = 1.5)
+  plotEZ("YHK+20", "Bacteria", groupby = "Location", groups = c("Upper Hillslope", "Middle Slope", "Lower Footslope"), title.line = 1.5)
   # Po Plain (Groundwater)
-  plotZC("ZCZ+21", "Bacteria", groupby = "Location", groups = c("LO", "CR1", "MN", "VA", "BS", "CR2"), legend.x = "topright", title.line = 1.5)
+  plotEZ("ZCZ+21", "Bacteria", groupby = "Location", groups = c("LO", "CR1", "MN", "VA", "BS", "CR2"), legend.x = "topright", title.line = 1.5)
   # Bay of Biscay (Sediment)
-  plotZC("LMBA21", "Bacteria", groupby = "Year", groups = c(2013, 2015, 2016, 2017, 2018, 2019), legend.x = "bottomright", title.line = 1.5)
+  plotEZ("LMBA21", "Bacteria", groupby = "Year", groups = c(2013, 2015, 2016, 2017, 2018, 2019), legend.x = "bottomright", title.line = 1.5)
   # Hunan Soil (Soil)
-  plotZC("MLL+19", "Bacteria", groupby = "Type", groups = c("Upland", "Paddy", "Sediment"), title.line = 1.5)
+  plotEZ("MLL+19", "Bacteria", groupby = "Type", groups = c("Upland", "Paddy", "Sediment"), title.line = 1.5)
 
   if(pdf) dev.off()
 
@@ -574,7 +574,7 @@ orp16S6 <- function(pdf = FALSE) {
   for(j in seq_along(studies)) {
     # Skip study with no archaeal sequences
     if(studies[j] %in% c("PBU+20")) next
-    pout <- plotZC(studies[j], show = "lm", lwd = 2, col.line = col[j], add = TRUE)
+    pout <- plotEZ(studies[j], show = "lm", lwd = 2, col.line = col[j], add = TRUE)
     text(pout$Eh7lim[2], pout$ZC[2], j)
   }
   title("Bacteria and Archaea", font.main = 1)
@@ -596,101 +596,101 @@ orp16S_S1 <- function(pdf = FALSE) {
   results <- c(
 
     message("\nRiver & Seawater"),
-    plotZC("MLL+18", "Bacteria", groupby = "Season", groups = c("Summer", "Winter"), legend.x = "bottomright"),
-    plotZC("SVH+19", "two", groupby = "Type", groups = c("Oxic", "Suboxic", "Euxinic")),
-    plotZC("HXZ+20", "Bacteria", groupby = "Station", groups = c("SYBL", "C4")),
-    plotZC("KLY+20", "Bacteria", groupby = "Year", groups = c(2018, 2019), legend.x = "bottomright"),
-    plotZC("WHL+21", "two", groupby = "Season", groups = c("Spring", "Summer", "Autumn", "Winter"), legend.x = "bottomleft"),
-    plotZC("LXH+20", "Bacteria", groupby = "Season", groups = c("Summer", "Winter"), legend.x = "bottomright"),
-    plotZC("JVW+20", "two", groupby = "isolation_source", groups = c("Ulva laetevirens", "lagoon water"), legend.x = "topright"),
-    plotZC("ZZL+21", "Bacteria", groupby = "Location", groups = c("Main Stream", "Animal Farm", "Hospital", "WWTP", "Tributary"), legend.x = "bottomright"),
-    plotZC("GZL21", "Bacteria", groupby = "Type", groups = c("Surface water", "Middle water", "Bottom water"), legend.x = "bottomleft"),
+    plotEZ("MLL+18", "Bacteria", groupby = "Season", groups = c("Summer", "Winter"), legend.x = "bottomright"),
+    plotEZ("SVH+19", "two", groupby = "Type", groups = c("Oxic", "Suboxic", "Euxinic")),
+    plotEZ("HXZ+20", "Bacteria", groupby = "Station", groups = c("SYBL", "C4")),
+    plotEZ("KLY+20", "Bacteria", groupby = "Year", groups = c(2018, 2019), legend.x = "bottomright"),
+    plotEZ("WHL+21", "two", groupby = "Season", groups = c("Spring", "Summer", "Autumn", "Winter"), legend.x = "bottomleft"),
+    plotEZ("LXH+20", "Bacteria", groupby = "Season", groups = c("Summer", "Winter"), legend.x = "bottomright"),
+    plotEZ("JVW+20", "two", groupby = "isolation_source", groups = c("Ulva laetevirens", "lagoon water"), legend.x = "topright"),
+    plotEZ("ZZL+21", "Bacteria", groupby = "Location", groups = c("Main Stream", "Animal Farm", "Hospital", "WWTP", "Tributary"), legend.x = "bottomright"),
+    plotEZ("GZL21", "Bacteria", groupby = "Type", groups = c("Surface water", "Middle water", "Bottom water"), legend.x = "bottomleft"),
 
     message("\nLake & Pond"),
-    plotZC("SAR+13", "two", groupby = "Zone", groups = c("Photic-oxic", "Transition", "Anoxic")),
-    plotZC("LZR+17", "two", groupby = "Elevation", groups = c("< 1000 m", "1000 - 4000 m", "> 4000 m"), legend.x = "bottomleft"),
-    plotZC("ECS+18", "Bacteria", groupby = "Lake", groups = c("Laguna Negra", "Lo Encanado")),
-    plotZC("LLC+19", "Bacteria", groupby = "Size", groups = c("Free-living", "Particle-associated")),
-    plotZC("SCH+16", "two", groupby = "Type", groups = c("Oxic", "Oxycline", "Anoxic")),
-    plotZC("BCA+21", "Bacteria", groupby = "Month", groups = c("Jul", "Nov", "Feb", "Apr")),
-    plotZC("HLZ+18", "Bacteria", groupby = "Type", groups = c("Reservoir", "Pond"), legend.x = "bottomright"),
-    plotZC("CNA+20", "Bacteria", groupby = "Season", groups = c("Summer", "Autumn", "Winter", "Spring"), legend.x = "topright"),
-    plotZC("BWD+19", "two", groupby = "Cover", groups = c("Ice", "Ice Free"), legend.x = "bottomright"),
-    plotZC("RSJ+21", "two", groupby = "Lake", groups = c("Kuiva", "Lovo"), legend.x = "topright"),
-    plotZC("BOEM21", "Bacteria", groupby = "Stratum", groups = c("Upper", "Chemocline", "Lower")),
-    plotZC("GSY+20", "two", groupby = "Lake", groups = c("La Zarza", "Filon Centro"), legend.x = "bottomright"),
-    plotZC("NLE+21", "Bacteria", groupby = "Year", groups = c("2017", "2018"), legend.x = "bottomleft"),
-    plotZC("FAV+21", "two", groupby = "Type", groups = c("Oxic Surface", "Anoxic Surface", "Bottom")),
-    plotZC("GRG+20", "two", groupby = "Type", groups = c("Oxic", "Anoxic"), legend.x = "bottomleft"),
+    plotEZ("SAR+13", "two", groupby = "Zone", groups = c("Photic-oxic", "Transition", "Anoxic")),
+    plotEZ("LZR+17", "two", groupby = "Elevation", groups = c("< 1000 m", "1000 - 4000 m", "> 4000 m"), legend.x = "bottomleft"),
+    plotEZ("ECS+18", "Bacteria", groupby = "Lake", groups = c("Laguna Negra", "Lo Encanado")),
+    plotEZ("LLC+19", "Bacteria", groupby = "Size", groups = c("Free-living", "Particle-associated")),
+    plotEZ("SCH+16", "two", groupby = "Type", groups = c("Oxic", "Oxycline", "Anoxic")),
+    plotEZ("BCA+21", "Bacteria", groupby = "Month", groups = c("Jul", "Nov", "Feb", "Apr")),
+    plotEZ("HLZ+18", "Bacteria", groupby = "Type", groups = c("Reservoir", "Pond"), legend.x = "bottomright"),
+    plotEZ("CNA+20", "Bacteria", groupby = "Season", groups = c("Summer", "Autumn", "Winter", "Spring"), legend.x = "topright"),
+    plotEZ("BWD+19", "two", groupby = "Cover", groups = c("Ice", "Ice Free"), legend.x = "bottomright"),
+    plotEZ("RSJ+21", "two", groupby = "Lake", groups = c("Kuiva", "Lovo"), legend.x = "topright"),
+    plotEZ("BOEM21", "Bacteria", groupby = "Stratum", groups = c("Upper", "Chemocline", "Lower")),
+    plotEZ("GSY+20", "two", groupby = "Lake", groups = c("La Zarza", "Filon Centro"), legend.x = "bottomright"),
+    plotEZ("NLE+21", "Bacteria", groupby = "Year", groups = c("2017", "2018"), legend.x = "bottomleft"),
+    plotEZ("FAV+21", "two", groupby = "Type", groups = c("Oxic Surface", "Anoxic Surface", "Bottom")),
+    plotEZ("GRG+20", "two", groupby = "Type", groups = c("Oxic", "Anoxic"), legend.x = "bottomleft"),
 
     # Hot Spring
     message("\nHot Spring"),
-    plotZC("SMS+12", "two", groupby = "Type", groups = c("Chemotrophic", "Transition", "Phototrophic")),
-    plotZC("PCL+18_Acidic", "two", legend.x = "bottomright"),
-    plotZC("PCL+18_Alkaline", "two"),
-    plotZC("BMJ+19", "two", groupby = "Environment", groups = c("Hydrothermal Pond", "Yellow Lake", "Black Lake", "Assale Lake", "Cave Water")),
-    plotZC("LMG+20", "two", groupby = "Setting", groups = c("River", "Hot Spring"), legend.x = "bottomleft"),
-    plotZC("GWSS21", "two", groupby = "Location", groups = c("Rehai", "Banglazhang")),
-    plotZC("GWS+20", "two", groupby = "Field", groups = c("Batang", "Litang", "Kangding")),
-    plotZC("PBU+20", "Bacteria", groupby = "Type", groups = c("Cauldron", "Sampling Pit", "Spring", "Geyser Valley (Control)"), legend.x = "bottomright"),
-    plotZC("MWY+21", "two", groupby = "Location", groups = c("Quseyongba", "Moluojiang", "Daggyai", "Quzhuomu"), legend.x = "bottomright"),
-    plotZC("OFY+19", "two", groupby = "Type", groups = c("Hot Spring", "Drain", "Lake")),
+    plotEZ("SMS+12", "two", groupby = "Type", groups = c("Chemotrophic", "Transition", "Phototrophic")),
+    plotEZ("PCL+18_Acidic", "two", legend.x = "bottomright"),
+    plotEZ("PCL+18_Alkaline", "two"),
+    plotEZ("BMJ+19", "two", groupby = "Environment", groups = c("Hydrothermal Pond", "Yellow Lake", "Black Lake", "Assale Lake", "Cave Water")),
+    plotEZ("LMG+20", "two", groupby = "Setting", groups = c("River", "Hot Spring"), legend.x = "bottomleft"),
+    plotEZ("GWSS21", "two", groupby = "Location", groups = c("Rehai", "Banglazhang")),
+    plotEZ("GWS+20", "two", groupby = "Field", groups = c("Batang", "Litang", "Kangding")),
+    plotEZ("PBU+20", "Bacteria", groupby = "Type", groups = c("Cauldron", "Sampling Pit", "Spring", "Geyser Valley (Control)"), legend.x = "bottomright"),
+    plotEZ("MWY+21", "two", groupby = "Location", groups = c("Quseyongba", "Moluojiang", "Daggyai", "Quzhuomu"), legend.x = "bottomright"),
+    plotEZ("OFY+19", "two", groupby = "Type", groups = c("Hot Spring", "Drain", "Lake")),
 
     message("\nAlkaline Spring"),
-    plotZC("SBP+20", "two", groupby = "pH Group", groups = c("< 10", "> 10")),
-    plotZC("RMB+17", "two", groupby = "pH Group", groups = c("< 10", "> 10")),
-    plotZC("CTS+17", "two", groupby = "Type", groups = c("River", "Well", "Spring"), legend.x = "bottomleft"),
-    plotZC("KSR+21", "Bacteria", groupby = "Location", groups = c("Lerone", "Branega", "Branega Creek Water")),
-    plotZC("NTB+21", "two", groupby = "Well", groups = c("BA1A", "BA1D")),
+    plotEZ("SBP+20", "two", groupby = "pH Group", groups = c("< 10", "> 10")),
+    plotEZ("RMB+17", "two", groupby = "pH Group", groups = c("< 10", "> 10")),
+    plotEZ("CTS+17", "two", groupby = "Type", groups = c("River", "Well", "Spring"), legend.x = "bottomleft"),
+    plotEZ("KSR+21", "Bacteria", groupby = "Location", groups = c("Lerone", "Branega", "Branega Creek Water")),
+    plotEZ("NTB+21", "two", groupby = "Well", groups = c("BA1A", "BA1D")),
 
     message("\nGroundwater"),
-    plotZC("KLM+16", "Bacteria", groupby = "Day", groups = c(-1, 246, 448, 671)),
-    plotZC("YHK+19", "two"),
-    plotZC("SDH+19", "two", groupby = "Type", groups = c("Freshwater", "Brackish", "Saltwater")),
-    plotZC("SRM+19", "Bacteria", groupby = "Land Use", groups = c("Agriculture", "Community", "Landfill", "Mine")),
-    plotZC("APV+20", "two", groupby = "Type", groups = c("Canal", "Piezometer", "Well", "Spring")),
-    plotZC("SKP+21", "Bacteria", groupby = "Type", groups = c("Groundwater", "Surface water"), legend.x = "topright"),
-    plotZC("YHK+20", "Bacteria", groupby = "Location", groups = c("Upper Hillslope", "Middle Slope", "Lower Footslope")),
-    plotZC("JDP+20", "Bacteria", groupby = "Roll-Front Setting", groups = c("Oxidized", "Intermediate", "Reduced"), legend.x = "bottomright"),
-    plotZC("GWS+19", "Bacteria", groupby = "Type", groups = c("Un-confined", "Confined"), legend.x = "bottomleft"),
-    plotZC("SRM+21", "Bacteria", groupby = "Depth", groups = c("Surface", "Shallow", "Deep"), legend.x = "bottomleft"),
-    plotZC("ZCZ+21", "Bacteria", groupby = "Location", groups = c("LO", "CR1", "MN", "VA", "BS", "CR2"), legend.x = "topright"),
+    plotEZ("KLM+16", "Bacteria", groupby = "Day", groups = c(-1, 246, 448, 671)),
+    plotEZ("YHK+19", "two"),
+    plotEZ("SDH+19", "two", groupby = "Type", groups = c("Freshwater", "Brackish", "Saltwater")),
+    plotEZ("SRM+19", "Bacteria", groupby = "Land Use", groups = c("Agriculture", "Community", "Landfill", "Mine")),
+    plotEZ("APV+20", "two", groupby = "Type", groups = c("Canal", "Piezometer", "Well", "Spring")),
+    plotEZ("SKP+21", "Bacteria", groupby = "Type", groups = c("Groundwater", "Surface water"), legend.x = "topright"),
+    plotEZ("YHK+20", "Bacteria", groupby = "Location", groups = c("Upper Hillslope", "Middle Slope", "Lower Footslope")),
+    plotEZ("JDP+20", "Bacteria", groupby = "Roll-Front Setting", groups = c("Oxidized", "Intermediate", "Reduced"), legend.x = "bottomright"),
+    plotEZ("GWS+19", "Bacteria", groupby = "Type", groups = c("Un-confined", "Confined"), legend.x = "bottomleft"),
+    plotEZ("SRM+21", "Bacteria", groupby = "Depth", groups = c("Surface", "Shallow", "Deep"), legend.x = "bottomleft"),
+    plotEZ("ZCZ+21", "Bacteria", groupby = "Location", groups = c("LO", "CR1", "MN", "VA", "BS", "CR2"), legend.x = "topright"),
 
     message("\nSediment"),
-    plotZC("JHL+12", "two", groupby = "Core", groups = c("GC6", "GC12")),
-    plotZC("GFE+16", "Bacteria", groupby = "Station", groups = c(1, 4, 7, 18)),
-#    plotZC("ZML+17", "two", groupby = "Season", groups = c("Winter", "Summer"), legend.x = "bottomleft"),
-    plotZC("ZML+17", "two", groupby = "Type", groups = c("Mangrove Forest", "Intertidal Mudflat"), legend.x = "bottomleft"),
-    plotZC("BYB+17", "two", groupby = "Type", groups = c("Freshwater", "Brackish", "Saltmarsh", "Hypersaline"), legend.x = "bottomright"),
-    plotZC("BSPD17", "Bacteria", groupby = "Type", groups = c("Water", "Sediment"), legend.x = "bottomleft"),
-    plotZC("ABT+17", "two", groupby = "Type", groups = c("Coastal", "Estuarine")),
-    plotZC("HDZ+19", "Bacteria", groupby = "Type", groups = c("Water", "Sediment")),
-    plotZC("WHLH21", "Bacteria", groupby = "Position", groups = c("Surface", "Middle", "Bottom"), legend.x = "bottomleft"),
-    plotZC("SCM+18", "two", groupby = "Site", groups = c("Shallow", "Deep"), legend.x = "bottomleft"),
-    plotZC("CLS+19", "two", groupby = "Type", groups = c("Water", "Sediment"), legend.x = "bottomright"),
-    plotZC("ZDA+20", "Bacteria", groupby = "Type", groups = c("Water", "Sediment"), legend.x = "bottomleft"),
-    plotZC("VMB+19", "two", groupby = "Type", groups = c("Water", "Sediment"), legend.x = "topright"),
-    plotZC("WHC+19", "Archaea", groupby = "Type", groups = c("Mid-tide", "Low-tide", "Subtidal"), legend.x = "topright"),
-    plotZC("HSF+19", "Bacteria", groupby = "Type", groups = c("Water", "Sediment-Water Interface", "Sediment"), legend.x = "topright"),
-    plotZC("MCS+21", "two", groupby = "Type", groups = c("Water", "Sediment"), legend.x = "left"),
-    plotZC("LMBA21", "two", groupby = "Year", groups = c(2013, 2015, 2016, 2017, 2018, 2019), legend.x = "bottomright"),
-    plotZC("ZZLL21", "Bacteria", groupby = "Type", groups = c("Main stream", "Animal farm", "Hospital", "WWTP", "Tributary"), legend.x = "bottomleft"),
-    plotZC("WFB+21", "Bacteria", groupby = "Treatment", groups = c("C. volutator", "H. diversicolor", "Cv & Hd", "MPB", "Manual turbation")),
+    plotEZ("JHL+12", "two", groupby = "Core", groups = c("GC6", "GC12")),
+    plotEZ("GFE+16", "Bacteria", groupby = "Station", groups = c(1, 4, 7, 18)),
+#    plotEZ("ZML+17", "two", groupby = "Season", groups = c("Winter", "Summer"), legend.x = "bottomleft"),
+    plotEZ("ZML+17", "two", groupby = "Type", groups = c("Mangrove Forest", "Intertidal Mudflat"), legend.x = "bottomleft"),
+    plotEZ("BYB+17", "two", groupby = "Type", groups = c("Freshwater", "Brackish", "Saltmarsh", "Hypersaline"), legend.x = "bottomright"),
+    plotEZ("BSPD17", "Bacteria", groupby = "Type", groups = c("Water", "Sediment"), legend.x = "bottomleft"),
+    plotEZ("ABT+17", "two", groupby = "Type", groups = c("Coastal", "Estuarine")),
+    plotEZ("HDZ+19", "Bacteria", groupby = "Type", groups = c("Water", "Sediment")),
+    plotEZ("WHLH21", "Bacteria", groupby = "Position", groups = c("Surface", "Middle", "Bottom"), legend.x = "bottomleft"),
+    plotEZ("SCM+18", "two", groupby = "Site", groups = c("Shallow", "Deep"), legend.x = "bottomleft"),
+    plotEZ("CLS+19", "two", groupby = "Type", groups = c("Water", "Sediment"), legend.x = "bottomright"),
+    plotEZ("ZDA+20", "Bacteria", groupby = "Type", groups = c("Water", "Sediment"), legend.x = "bottomleft"),
+    plotEZ("VMB+19", "two", groupby = "Type", groups = c("Water", "Sediment"), legend.x = "topright"),
+    plotEZ("WHC+19", "Archaea", groupby = "Type", groups = c("Mid-tide", "Low-tide", "Subtidal"), legend.x = "topright"),
+    plotEZ("HSF+19", "Bacteria", groupby = "Type", groups = c("Water", "Sediment-Water Interface", "Sediment"), legend.x = "topright"),
+    plotEZ("MCS+21", "two", groupby = "Type", groups = c("Water", "Sediment"), legend.x = "left"),
+    plotEZ("LMBA21", "two", groupby = "Year", groups = c(2013, 2015, 2016, 2017, 2018, 2019), legend.x = "bottomright"),
+    plotEZ("ZZLL21", "Bacteria", groupby = "Type", groups = c("Main stream", "Animal farm", "Hospital", "WWTP", "Tributary"), legend.x = "bottomleft"),
+    plotEZ("WFB+21", "Bacteria", groupby = "Treatment", groups = c("C. volutator", "H. diversicolor", "Cv & Hd", "MPB", "Manual turbation")),
 
     message("\nSoil"),
-    plotZC("SBW+17", "Bacteria", groupby = "Treatment", groups = c("Control", "BC400", "BC600")),
-    plotZC("MLL+19", "two", groupby = "Type", groups = c("Upland", "Paddy", "Sediment")),
-    plotZC("BMOB18", "two", groupby = "Treatment", groups = c("Acetate", "No amendment", "Pre-incubation")),
-    plotZC("ZZZ+18", "two", groupby = "Treatment", groups = c("None", "AQDS", "Biochar"), legend.x = "bottomleft"),
-    plotZC("PMM+20", "two", groupby = "Type", groups = c("Fluctuating", "Static")),
-    plotZC("ZHZ+19", "two", groupby = "Treatment", groups = c("Original", "Nitrate-reducing", "Ferric-reducing", "Sulfate-reducing", "Methanogenic")),
-    plotZC("CWC+20", "Bacteria", groupby = "Management", groups = c("Flooding", "Draining")),
-    plotZC("PSG+20", "two", groupby = "Treatment", groups = c("Initial", "NCC", "RB", "RGP", "TP")),
-    plotZC("XLD+20", "two", groupby = "Treatment", groups = c("CK", "9K-Control", "Htt-sys", "Att-sys", "Co-sys"), legend.x = "bottomright"),
-    plotZC("LJC+20", "two", groupby = "meanT", groups = c("MAT >= 21.5 degC", "MAT < 21.5 degC")),
-    plotZC("DTJ+20", "two", groupby = "Zone", groups = c("Bulk Soil", "Mature", "Elongation", "Tip")),
-    plotZC("LLL+21", "Bacteria", groupby = "Treatment", groups = c("CK", "FL", "EA", "SB", "BD")),
-    plotZC("DLS21", "two", groupby = "Treatment", groups = c("control", "char", "silicate", "husk"))
+    plotEZ("SBW+17", "Bacteria", groupby = "Treatment", groups = c("Control", "BC400", "BC600")),
+    plotEZ("MLL+19", "two", groupby = "Type", groups = c("Upland", "Paddy", "Sediment")),
+    plotEZ("BMOB18", "two", groupby = "Treatment", groups = c("Acetate", "No amendment", "Pre-incubation")),
+    plotEZ("ZZZ+18", "two", groupby = "Treatment", groups = c("None", "AQDS", "Biochar"), legend.x = "bottomleft"),
+    plotEZ("PMM+20", "two", groupby = "Type", groups = c("Fluctuating", "Static")),
+    plotEZ("ZHZ+19", "two", groupby = "Treatment", groups = c("Original", "Nitrate-reducing", "Ferric-reducing", "Sulfate-reducing", "Methanogenic")),
+    plotEZ("CWC+20", "Bacteria", groupby = "Management", groups = c("Flooding", "Draining")),
+    plotEZ("PSG+20", "two", groupby = "Treatment", groups = c("Initial", "NCC", "RB", "RGP", "TP")),
+    plotEZ("XLD+20", "two", groupby = "Treatment", groups = c("CK", "9K-Control", "Htt-sys", "Att-sys", "Co-sys"), legend.x = "bottomright"),
+    plotEZ("LJC+20", "two", groupby = "meanT", groups = c("MAT >= 21.5 degC", "MAT < 21.5 degC")),
+    plotEZ("DTJ+20", "two", groupby = "Zone", groups = c("Bulk Soil", "Mature", "Elongation", "Tip")),
+    plotEZ("LLL+21", "Bacteria", groupby = "Treatment", groups = c("CK", "FL", "EA", "SB", "BD")),
+    plotEZ("DLS21", "two", groupby = "Treatment", groups = c("control", "char", "silicate", "husk"))
 
   )
   # Done plotting!

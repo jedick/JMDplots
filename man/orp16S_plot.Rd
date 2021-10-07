@@ -1,14 +1,14 @@
 \encoding{UTF-8}
 \name{orp16S_plot}
 \alias{orp16S_plot}
-\alias{plotZC}
+\alias{plotEZ}
 \title{Plotting functions for orp16S paper}
 \description{
 Plot \ZC vs Eh7 and \ZC vs percentage of Most Abundant Mapped Taxon.
 }
 
 \usage{
-  plotZC(study, lineage = NULL, mincount = 100, pch = NULL, col = NULL,
+  plotEZ(study, lineage = NULL, mincount = 100, pch = NULL, col = NULL,
     add = FALSE, type = "p", groupby = NULL, groups = NULL, legend.x = "topleft",
     show = c("lm", "points"), col.line = "gray62", lwd = 1, cex = 1, mdat = NULL,
     title.line = NA)
@@ -35,7 +35,7 @@ Plot \ZC vs Eh7 and \ZC vs percentage of Most Abundant Mapped Taxon.
 
 \details{
 
-\code{plotZC} is used to make \ZC-Eh7 scatterplots for a single study.
+\code{plotEZ} is used to make \ZC-Eh7 scatterplots for a single study.
 By default, \ZC is calculated for estimated proteomes using all bacterial and archaeal sequences.
 Set \code{lineage} to \samp{Bacteria} or \samp{Archaea} to make one plot for one of the domains, or to \samp{two} to make two plots for both domains.
 The latter option is used in \code{\link{orp16S_S1}} for the Figure S1 in the paper.
@@ -55,5 +55,5 @@ If \code{show} includes \samp{lm}, the output additionally contains \code{EZlm} 
 
 \examples{
 options(chem16Sdir = system.file("extdata/orp16S", package = "JMDplots"))
-plotZC("MLL+19", "Bacteria", groupby = "Type", groups = c("Upland", "Paddy", "Sediment"))
+plotEZ("MLL+19", "Bacteria", groupby = "Type", groups = c("Upland", "Paddy", "Sediment"))
 }

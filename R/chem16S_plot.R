@@ -3,7 +3,7 @@
 # Separated from chem16S.R 20210607
 
 # taxacomp()               # nH2O-ZC plot for taxa (default: Bacteria, Archaea) and their children
-# plotmet("KGP+12")        # nH2O-ZC plot for specified study
+# plotmet("SVH+19")        # nH2O-ZC plot for specified study
 
 ######################
 # Plotting functions #
