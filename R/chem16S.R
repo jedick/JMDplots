@@ -220,10 +220,16 @@ getmdat <- function(study, dropNA = TRUE) {
     col <- sapply(type, switch, oxidizing = 4, transition = 1, reducing = 2)
   }
   if(grepl("PCL\\+18", study)) {
-    # PCL+18, PCL+18_Acidic, PCL+19_Alkaline
+    # PCL+18, PCL+18_Acidic, PCL+18_Alkaline
     Type <- sapply(strsplit(study, "_"), "[", 2)
     if(!is.na(Type)) mdat <- mdat[mdat$Type == Type, ]
     shortstudy <- "PCL+18"
+  }
+  if(grepl("LMBA21", study)) {
+    # LMBA21, LMBA21_2013, LMBA21_2015, LMBA21_2016, LMBA21_2017, LMBA21_2018, LMBA21_2019
+    Year <- sapply(strsplit(study, "_"), "[", 2)
+    if(!is.na(Year)) mdat <- mdat[mdat$Year == Year, ]
+    shortstudy <- "LMBA21"
   }
   if(study == "DLS21") {
     # Just look at bulk soil 20210910
@@ -233,11 +239,11 @@ getmdat <- function(study, dropNA = TRUE) {
     "MLL+19", "HXZ+20", "BCA+21", "RSJ+21", "RMB+17", "SBP+20", "NTB+21", "MWY+21", "SAR+13", "CTS+17",
     "SCM+18", "HDZ+19", "BOEM21", "ZHZ+19", "YHK+20", "CNA+20", "BMJ+19", "SRM+19", "HLZ+18", "XLD+20",
     "JHL+12", "PSG+20", "KSR+21", "ZCZ+21", "SKP+21", "ZZL+21", "PBU+20", "GWS+19", "KLY+20", "SRM+21",
-    "MLL+18", "JDP+20", "BWD+19", "ABT+17", "LXH+20", "LMG+20", "WHL+21", "LLL+21", "SDH+19", "GWSS21",
-    "HSF+19", "ZML+17", "DTJ+20", "WFB+21", "SBW+17", "KLM+16", "LMBA21", "ZDA+20", "ZZZ+18", "BSPD17",
-    "CWC+20", "BMOB18", "JVW+20", "LJC+20", "GFE+16", "ECS+18", "FAV+21", "VMB+19", "DLS21", "ZZLL21",
-    "GWS+20", "CLS+19", "SMS+12", "OFY+19", "BYB+17", "MCS+21", "SVH+19", "PMM+20", "GZL21", "LLC+19",
-    "NLE+21", "GSY+20", "SCH+16", "LZR+17", "GRG+20", "APV+20", "YHK+19", "WHC+19", "WHLH21", "PCL+18"
+    "MLL+18", "JDP+20", "BWD+19", "LXH+20", "LMG+20", "WHL+21", "LLL+21", "SDH+19", "GWSS21", "HSF+19",
+    "ZML+17", "DTJ+20", "WFB+21", "SBW+17", "KLM+16", "LMBA21", "ZDA+20", "ZZZ+18", "BSPD17", "CWC+20",
+    "BMOB18", "JVW+20", "LJC+20", "GFE+16", "ECS+18", "FAV+21", "VMB+19", "DLS21", "ZZLL21", "GWS+20",
+    "CLS+19", "SMS+12", "OFY+19", "BYB+17", "MCS+21", "SVH+19", "PMM+20", "GZL21", "LLC+19", "NLE+21",
+    "GSY+20", "SCH+16", "LZR+17", "GRG+20", "APV+20", "YHK+19", "WHC+19", "WHLH21", "PCL+18"
   )) {
     # General processing of metadata for orp16S datasets 20210820
     # Get Eh or ORP values (uses partial name matching, can match a column named "Eh (mV)")
@@ -416,8 +422,7 @@ getRDP <- function(study, cn = FALSE, mdat = NULL, lineage = NULL, mincount = 20
   # Get the number of counts classified at genus level
   igenus <- out$rank == "genus"
   genuscounts <- colSums(out[igenus, -(1:3), drop = FALSE], na.rm = TRUE)
-  # Print median percent genus counts
-  # Use na.omit to handle divide-by-zero 20210621
+  # Print percentage of assignments at genus level
   genuspercent <- round(100 * sum(genuscounts) / sum(totalcounts))
   print(paste0("getRDP [", study, "]: ", genuspercent, "% of classifications at genus level"))
 
