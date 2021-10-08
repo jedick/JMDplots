@@ -253,7 +253,7 @@ plotmet <- function(study, cn = FALSE, identify = FALSE, title = TRUE, xlim = NU
   mdat <- getmdat(study, dropNA = dropNA)
   RDP <- getRDP(study, cn = cn, mdat = mdat, lineage = lineage, mincount = mincount)
   metrics <- getmetrics(study, mdat = mdat, RDP = RDP, lineage = lineage, mincount = mincount)
-  # Keep metadata only for samples with >= 200 counts 20201006
+  # Keep metadata only for samples with >= mincount counts 20201006
   mdat <- mdat[mdat$Run %in% metrics$Run, ]
   pch <- mdat$pch
   col <- mdat$col

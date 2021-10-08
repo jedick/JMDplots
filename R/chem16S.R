@@ -7,7 +7,7 @@
 # getmdat("SVH+19")     # Metadata for this study (study, name, Run, BioSample, sample, type, cohort)
 # getRDP("SVH+19")      # RDP results for all samples in this study
 # getmap("SVH+19")      # Map RDP to RefSeq taxonomy (match to rows of groupAA.csv)
-# getmetrics("SVH+19")   # Calculate chemical metrics (nH2O, ZC) for each sample
+# getmetrics("SVH+19")  # Calculate chemical metrics (nH2O, ZC) for each sample
 
 #####################
 # Utility functions #
@@ -239,7 +239,7 @@ getmdat <- function(study, dropNA = TRUE) {
     "GWS+20", "CLS+19", "SMS+12", "OFY+19", "BYB+17", "MCS+21", "SVH+19", "PMM+20", "GZL21", "LLC+19",
     "NLE+21", "GSY+20", "SCH+16", "LZR+17", "GRG+20", "APV+20", "YHK+19", "WHC+19", "WHLH21", "PCL+18"
   )) {
-    # General processing of metadata for sed16S datasets 20210820
+    # General processing of metadata for orp16S datasets 20210820
     # Get Eh or ORP values (uses partial name matching, can match a column named "Eh (mV)")
     Eh <- mdat$Eh
     Ehname <- "Eh"
@@ -314,8 +314,11 @@ getmdat <- function(study, dropNA = TRUE) {
     cluster[!ina][cl$cluster == imid] <- "transition"
     cluster[!ina][cl$cluster == imax] <- "oxidizing"
     # Get pch and col for plot
-    pch <- sapply(cluster, switch, oxidizing = 24, transition = 21, reducing = 25, NA)
-    col <- sapply(cluster, switch, oxidizing = 4, transition = 1, reducing = 2, NA)
+    # Use is.null to let previous assignments take precedence (for SVH+19 in geo16S) 20211008
+    if(is.null(pch)) {
+      pch <- sapply(cluster, switch, oxidizing = 24, transition = 21, reducing = 25, NA)
+      col <- sapply(cluster, switch, oxidizing = 4, transition = 1, reducing = 2, NA)
+    }
     # Print message about Eh7 or ORP ranges of clusters
     ro <- range(na.omit(Eh7[cluster=="oxidizing"]))
     no <- sum(na.omit(cluster=="oxidizing"))
@@ -402,6 +405,8 @@ getRDP <- function(study, cn = FALSE, mdat = NULL, lineage = NULL, mincount = 20
     postcount <- sum(out[, -(1:3)])
     lpercent <- formatC(postcount / precount * 100, 1, format = "f")
     print(paste0("getRDP [", study, "]: keeping ", lineage, " lineage (", lpercent, "%)"))
+    # Recalculate total counts 20211008
+    totalcounts <- colSums(out[, -(1:3), drop = FALSE])
   }
 
   # Keep the rows with any counts > 0
@@ -410,10 +415,10 @@ getRDP <- function(study, cn = FALSE, mdat = NULL, lineage = NULL, mincount = 20
 
   # Get the number of counts classified at genus level
   igenus <- out$rank == "genus"
-  genuscounts <- colSums(out[igenus, -(1:3), drop = FALSE])
+  genuscounts <- colSums(out[igenus, -(1:3), drop = FALSE], na.rm = TRUE)
   # Print median percent genus counts
   # Use na.omit to handle divide-by-zero 20210621
-  genuspercent <- round(100 * median(na.omit(genuscounts / totalcounts)))
+  genuspercent <- round(100 * sum(genuscounts) / sum(totalcounts))
   print(paste0("getRDP [", study, "]: ", genuspercent, "% of classifications at genus level"))
 
   # Remove classifications at root and domain level (Bacteria and Archaea),
@@ -433,20 +438,24 @@ getRDP <- function(study, cn = FALSE, mdat = NULL, lineage = NULL, mincount = 20
   # Recalculate total counts
   totalcounts <- colSums(out[, -(1:3), drop = FALSE])
 
-  # Only test mincount if at least some runs have more than it (added for RHM+20)  20210615
-  if(max(totalcounts) >= mincount) {
+#  # Only test mincount if at least some runs have more than it (added for RHM+20)  20210615
+#  if(max(totalcounts) >= mincount) {
     # Discard samples with < mincount total counts 20201001
     ismall <- totalcounts < mincount
     if(any(ismall)) {
       print(paste0("getRDP [", study, "]: discarding ", sum(ismall), " samples with < ", mincount, " total counts"))
       out <- out[, c(TRUE, TRUE, TRUE, !ismall)]
     }
-  }
+#  }
   # Recalculate total counts
   totalcounts <- colSums(out[, -(1:3), drop = FALSE])
   # Report the median number of counts 20200917
   # Change this to range 20200924
-  print(paste0("getRDP [", study, "]: count range is [", paste(round(range(totalcounts)), collapse = " "), "]"))
+  if(length(totalcounts) == 0) {
+    print(paste0("getRDP [", study, "]: no samples contain at least ", mincount, " counts"))
+  } else {
+    print(paste0("getRDP [", study, "]: count range is [", paste(round(range(totalcounts)), collapse = " "), "]"))
+  }
 
   # Adjust counts for 16S rRNA gene copy number 20200927
   if(cn) {
@@ -477,7 +486,7 @@ getmap <- function(study, RDP = NULL, lineage = NULL, mincount = 200) {
   # Make group names by combining rank and name
   RDPgroups <- paste(RDP$rank, RDP$name, sep = "_")
   # Calculate group abundances for displaying messages
-  groupcounts <- rowSums(RDP[, -(1:3), drop = FALSE])
+  groupcounts <- as.numeric(rowSums(RDP[, -(1:3), drop = FALSE]))
 
   NCBIgroups <- vapply(RDPgroups, switch, "",
     # 20200920 Lots of Escherichia in urine [WZZ+18]
@@ -538,25 +547,31 @@ getmap <- function(study, RDP = NULL, lineage = NULL, mincount = 200) {
   datadir <- system.file("extdata/chem16S", package = "JMDplots")
   AA <- read.csv(file.path(datadir, "groupAA.csv"), as.is = TRUE)
   AAgroups <- paste(AA$protein, AA$organism, sep = "_")
+  # Do the mapping!
   iAA <- match(RDPgroups, AAgroups)
-  # Print summary of missing groups
+  # Get percentages of unmapped groups
   naAA <- is.na(iAA)
+  nagroups <- RDPgroups[naAA]
   nacounts <- groupcounts[naAA]
   napercent <- nacounts / sum(groupcounts) * 100
+  # Print summary of missing groups
   naorder <- order(napercent, decreasing = TRUE)
-  napercent <- round(napercent[naorder], 2)
-  nagroups <- RDPgroups[naAA][naorder]
-  if(sum(naAA) > 0) namsg <- paste0("getmap [", study, "]: can't map RDP group ", nagroups[1], " (", napercent[1], "%)")
-  if(sum(naAA) > 1) namsg <- paste0("getmap [", study, "]: can't map RDP groups ", nagroups[1], " (", napercent[1], "%), ",
-                                    nagroups[2], " (", napercent[2], "%)")
-  if(sum(naAA) > 2) namsg <- paste0("getmap [", study, "]: can't map RDP groups ", nagroups[1], " (", napercent[1], "%), ",
-                                    nagroups[2], " (", napercent[2], "%), ", nagroups[3], " (", napercent[3], "%)")
-  if(sum(naAA) > 3) namsg <- paste0("getmap [", study, "]: can't map RDP groups ", nagroups[1], " (", napercent[1], "%), ",
-                                    nagroups[2], " (", napercent[2], "%), ", sum(naAA) - 2, " others (", sum(napercent[-(1:2)]), "%)")
+  ordergroups <- nagroups[naorder]
+  orderpercent <- round(napercent[naorder], 2)
+  if(sum(naAA) > 0) namsg <- paste0("getmap [", study, "]: can't map RDP group ", ordergroups[1], " (", orderpercent[1], "%)")
+  if(sum(naAA) > 1) namsg <- paste0("getmap [", study, "]: can't map RDP groups ", ordergroups[1], " (", orderpercent[1], "%), ",
+                                    ordergroups[2], " (", orderpercent[2], "%)")
+  if(sum(naAA) > 2) namsg <- paste0("getmap [", study, "]: can't map RDP groups ", ordergroups[1], " (", orderpercent[1], "%), ",
+                                    ordergroups[2], " (", orderpercent[2], "%), ", ordergroups[3], " (", orderpercent[3], "%)")
+  if(sum(naAA) > 3) namsg <- paste0("getmap [", study, "]: can't map RDP groups ", ordergroups[1], " (", orderpercent[1], "%), ",
+                                    ordergroups[2], " (", orderpercent[2], "%), ", sum(naAA) - 2, " others (", sum(orderpercent[-(1:2)]), "%)")
   if(sum(naAA) > 0) print(namsg)
   # Print message about total mapped percent 20200927
   mappedpercent <- formatC(100 - sum(napercent), 1, format = "f")
   print(paste0("getmap [", study, "]: mapped ", mappedpercent, "% of RDP classifications to NCBI taxonomy"))
+  # Set attributes to indicate unmapped groups 20211007
+  attr(iAA, "unmapped_groups") <- nagroups
+  attr(iAA, "unmapped_percent") <- napercent
   # Return result
   iAA
 }
@@ -567,8 +582,9 @@ getmetrics <- function(study, cn = FALSE, mdat = NULL, RDP = NULL, map = NULL, l
   if(is.null(mdat)) mdat <- getmdat(study)
   if(is.null(RDP)) RDP <- getRDP(study, cn = cn, mdat = mdat, lineage = lineage, mincount = mincount)
   if(is.null(map)) map <- getmap(study, RDP = RDP, lineage = lineage, mincount = mincount)
-  # Keep metadata only for samples with sufficient counts 20201001
+  # Keep metadata only for samples with >= mincount counts 20201001
   mdat <- mdat[mdat$Run %in% colnames(RDP), ]
+  if(nrow(mdat) == 0) stop("no samples have >= mincount counts!")
   # Exclude NA mappings
   RDP <- RDP[!is.na(map), ]
   map <- na.omit(map)

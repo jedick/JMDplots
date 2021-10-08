@@ -55,8 +55,9 @@ export(
   "getphyloaa", "getCBS17", "getFOK21",
   # mjenergy paper 20210816
   "mjenergy_Table_S3", "mjenergy_Dataset_S1",
-  # orp16S paper 20211003-20211007
-  "orp16S1", "orp16S2", "orp16S3", "orp16S4", "orp16S5", "orp16S6", "orp16S_S1", "plotEZ"
+  # orp16S paper 20211003-20211008
+  "orp16S1", "orp16S2", "orp16S3", "orp16S4", "orp16S5", "orp16S6", "orp16S_S1",
+  "plotEZ", "plotMA"
 )
 
 # imports from CHNOSZ

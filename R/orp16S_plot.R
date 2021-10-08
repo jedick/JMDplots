@@ -8,7 +8,7 @@
 
 # Plot ZC values vs Eh7 for a single study 20210827
 # Use 'groupby' (name of column with sample groups) and 'groups' (names of sample groups) to apply the pch and col to individual samples
-plotEZ <- function(study, lineage = NULL, mincount = 100, pch = NULL, col = NULL, add = FALSE, type = "p", groupby = NULL, groups = NULL,
+plotEZ <- function(study, lineage = NULL, mincount = 50, pch = NULL, col = NULL, add = FALSE, type = "p", groupby = NULL, groups = NULL,
                    legend.x = "topleft", show = c("lm", "points"), col.line = "gray62", lwd = 1, cex = 1, mdat = NULL, title.line = NA) {
 
   if(identical(lineage, "two")) {
@@ -141,3 +141,57 @@ plotEZ <- function(study, lineage = NULL, mincount = 100, pch = NULL, col = NULL
 
 }
 
+# Plot ZC vs percentage of most abundant mapped taxon (MAMT) and
+# show percentages of MAMT and MAUT (most abundant unmapped taxon) 20211007
+plotMA <- function(study, lineage = NULL, mincount = 50) {
+
+  # Get RDP counts, mapping to NCBI taxonomy, and chemical metrics
+  mdat <- getmdat(study)
+  RDP <- getRDP(study, lineage = lineage, mincount = mincount, mdat = mdat)
+  map <- getmap(study, lineage = lineage, mincount = mincount, RDP = RDP)
+  metrics <- getmetrics(study, lineage = lineage, mincount = mincount, mdat = mdat, RDP = RDP, map = map)
+
+  # Extract numeric rows
+  RDPnum <- RDP[, -(1:3)]
+  # Calculate sum of counts for each taxon
+  taxoncounts <- rowSums(RDPnum)
+  # Don't count unmapped taxa for MAMT identification
+  mappedcounts <- taxoncounts
+  mappedcounts[is.na(map)] <- 0
+  # Find the MAMT for the entire dataset
+  iMAMT <- which.max(mappedcounts)
+
+  # Get the name and abundance of the MAMT
+  MAMTname <- paste(RDP$rank[iMAMT], RDP$name[iMAMT], sep = "_")
+  MAMTperc <- formatC(taxoncounts[iMAMT] / sum(taxoncounts) * 100, format = "f", digits = 1)
+  # Get ZC of the MAMT
+  datadir <- system.file("extdata/chem16S", package = "JMDplots")
+  taxon_metrics <- read.csv(file.path(datadir, "taxon_metrics.csv"), as.is = TRUE)
+  MAMTZC <- taxon_metrics$ZC[map[iMAMT]]
+
+  # Calculate the abundance of the MAMT within each sample
+  samplecounts <- colSums(RDPnum)
+  perc <- as.numeric(RDPnum[iMAMT, ] / samplecounts * 100)
+  # Start plot with percentage and ZC range
+  plot(range(perc), range(metrics$ZC, MAMTZC), type = "n", xlab = "Abundance of MAMT (%)", ylab = cplab$ZC)
+  # Add line for ZC of MAMT
+  abline(h = MAMTZC, lty = 2)
+  # Add points for community ZC vs abundance of MAMT
+  points(perc, metrics$ZC)
+
+  # Get MAUT
+  unmapped_groups <- attr(map, "unmapped_groups")
+  unmapped_percent <- attr(map, "unmapped_percent")
+  iMAUT <- which.max(unmapped_percent)
+  MAUTname <- unmapped_groups[iMAUT]
+  MAUTperc <- formatC(unmapped_percent[iMAUT], format = "f", digits = 1)
+
+  # Add title: study, MAMT, MAUT
+  main <- paste(study, lineage)
+  title(main, line = 3)
+  MAMTtitle <- paste0("MAMT: ", MAMTname, " (", MAMTperc, "%)")
+  title(MAMTtitle, line = 2, font.main = 1)
+  MAUTtitle <- paste0("MAUT: ", MAUTname, " (", MAUTperc, "%)")
+  title(MAUTtitle, line = 1, font.main = 1)
+
+}
