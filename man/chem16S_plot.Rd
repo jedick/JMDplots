@@ -8,9 +8,9 @@
 \alias{getrefseq}
 \alias{getgroup}
 \alias{groupperc}
-\title{Plot chemical metrics of taxa and community proteomes inferred from 16S rRNA gene sequences}
+\title{Plot chemical metrics of taxa and community proteomes estimated from 16S rRNA gene sequences}
 \description{
-Functions to plot chemical metrics (\ZC and \nH2O) for inferred microbial community proteomes.
+Functions to plot chemical metrics (\ZC and \nH2O) for estimated microbial community proteomes.
 }
 
 \usage{
@@ -82,7 +82,7 @@ By default, any species with greater than 20000 reference sequences is omitted; 
 \code{groups} can be the names of one or more taxonomic groups, or one of the following keywords: \samp{majorphyla} (phyla with more than 500 representatives), \samp{majorcellular} (non-viral (cellular) phyla with more than 60 representatives), \samp{proteobacteria}, \samp{acidobacteria}, or \samp{cyanobacteria} (classes within the indicated phylum and their orders).
 Note that the keywords are all lower-case; use the upper-case name (e.g. \samp{Proteobacteria}) to plot the phylum and its orders.
 
-\code{plotmet} plots the \ZC and \nH2O of community proteomes inferred by combining taxonomic abundances from 16S rRNA gene sequencing with RefSeq proteomes.
+\code{plotmet} plots the \ZC and \nH2O of community proteomes estimated by combining taxonomic abundances from 16S rRNA gene sequencing with RefSeq proteomes.
 If \code{pch1} and \code{pch2} are provided, then two sample groups are identified by their plotting symbols in the metadata (see \code{\link{getmdat}}).
 Star-shaped symbols are plotted to indicate the metrics computed for meta-samples created by aggregating the RDP counts for all samples in each sample group.
 

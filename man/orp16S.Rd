@@ -34,9 +34,9 @@ This table gives a brief description of each plotting function.
   \code{orp16S2} \tab Chemical and geobiochemical depth profiles in Winogradsky columns \cr
   \code{orp16S3} \tab Sample locations on world map \cr
   \code{orp16S4} \tab Selected plots for each environment type \cr
-  \code{orp16S5} \tab Local and global analysis of ZC-Eh7 correlations \cr
-  \code{orp16S6} \tab ZC-Eh7 fits for Bacteria and Archaea in hot springs \cr
-  \code{orp16S_S1} \tab ZC-Eh scatterplots for all studies \cr
+  \code{orp16S5} \tab Local and global analysis of \ZC-Eh7 correlations \cr
+  \code{orp16S6} \tab Distinctions in carbon oxidation state estimated for different hot springs, and global fits for all environments. \cr
+  \code{orp16S_S1} \tab \ZC-Eh scatterplots for all studies \cr
 }
 
 To set up the \code{\link{chem16S}} environment, change \code{options(chem16Sdir)} before running these functions (see example).
@@ -49,7 +49,7 @@ To set up the \code{\link{chem16S}} environment, change \code{options(chem16Sdir
   \describe{
     \item{\code{hydro_p}}{Shapefiles for the North American Great Lakes, downloaded from USGS (2010).}
     \item{\code{EZdat.csv}}{Data for all samples, created by \code{orp16S_S1}.}
-    \item{\code{EZlm.csv}}{Linear fits between Eh7 and ZC for each dataset created by \code{orp16S_S1}.}
+    \item{\code{EZlm.csv}}{Linear fits between Eh7 and \ZC for each dataset created by \code{orp16S_S1}.}
     \item{\code{metadata/*.csv}}{Sample metadata for each study.}
     \item{\code{RDP/*.csv.xz}}{RDP Classifier results combined into a single CSV file for each study, created with the \code{mkRDP} function in the \code{process.R} script (\code{\link{chem16S}}).}
   }

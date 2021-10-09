@@ -13,7 +13,8 @@ Make plots of \ZC vs Eh7 and \ZC vs abundance of Most Abundant Mapped Taxon.
     add = FALSE, type = "p", groupby = NULL, groups = NULL, legend.x = "topleft",
     show = c("lm", "points"), col.line = "gray62", lwd = 1, cex = 1, mdat = NULL,
     title.line = NA)
-  plotMA(study, lineage = NULL, mincount = 50)
+  plotMA(study, lineage = NULL, mincount = 50, pch = NULL, col = NULL,
+    groupby = NULL, groups = NULL, legend.x = "topright")
 }
 
 \arguments{

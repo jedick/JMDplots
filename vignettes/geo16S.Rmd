@@ -87,7 +87,7 @@ geo16Sdir = system.file("extdata/geo16S", package = "JMDplots")
 options(chem16Sdir = geo16Sdir)
 ```
 
-## Distinct chemical parameters of predicted proteomes for major taxonomic groups (Figure 1)
+## Distinct chemical parameters of reference proteomes for major taxonomic groups (Figure 1)
 ```{r geo16S1, message = FALSE, warning = FALSE, results = "hide", out.width='100%', fig.width = 11, fig.height = 5, out.extra='class="full-width"', pngquant = pngquant, dpi = 100}
 dat1 <- geo16S1()
 ```
@@ -102,7 +102,7 @@ taxon_metrics <- read.csv(file.path(datadir, "taxon_metrics.csv"), as.is = TRUE)
 subset(taxon_metrics, group %in% c("Halanaerobium", "Thermoanaerobacter"))
 ```
 
-## Inferred community proteomes from different environments have distinct chemical signatures (Figure 2)
+## Estimated community proteomes from different environments have distinct chemical signatures (Figure 2)
 ```{r geo16S2, message = FALSE, results = "hide", out.width='100%', fig.width = 9, fig.height = 7, out.extra='class="full-width"', pngquant = pngquant, dpi = 100}
 dat2 <- geo16S2()
 ```
@@ -123,7 +123,7 @@ geo16S4()
 
 **Data sources:** Manus Basin vents [@MPB+17], Baltic Sea water [@HLA+16].
 
-## Decreased carbon oxidation state of inferred proteomes for communities affected by unconventional oil and gas extraction (Figure 5)
+## Decreased carbon oxidation state of estimated proteomes for communities affected by unconventional oil and gas extraction (Figure 5)
 ```{r geo16S5, message = FALSE, results = "hide", out.width='100%', fig.width = 9, fig.height = 6, pngquant = pngquant}
 dat4 <- geo16S5()
 ```

@@ -32,11 +32,11 @@ Plots from the paper by Dick and Tan (2021).
 This table gives a brief description of each plotting function.
 
 \tabular{ll}{
-  \code{geo16S1} \tab Distinct chemical parameters of predicted proteomes for major taxonomic groups \cr
-  \code{geo16S2} \tab Inferred community proteomes from different environments have distinct chemical signatures \cr
+  \code{geo16S1} \tab Distinct chemical parameters of reference proteomes for major taxonomic groups \cr
+  \code{geo16S2} \tab Estimated community proteomes from different environments have distinct chemical signatures \cr
   \code{geo16S3} \tab Lower carbon oxidation state is tied to oxygen depletion in water columns \cr
   \code{geo16S4} \tab Changes of abundance and chemical composition at different taxonomic levels \cr
-  \code{geo16S5} \tab Decreased carbon oxidation state of inferred proteomes for communities affected by unconventional oil and gas extraction \cr
+  \code{geo16S5} \tab Decreased carbon oxidation state of estimated proteomes for communities affected by unconventional oil and gas extraction \cr
   \code{geo16S6} \tab Contributions of classes to overall \ZC difference between oxidizing and reducing conditions \cr
   \code{geo16S_S1} \tab Abundance and \ZC of classes in oxidizing and reducing conditions \cr
 }

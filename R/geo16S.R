@@ -1,10 +1,10 @@
 # JMDplots/geo16S.R
 # Make plots for the paper:
-# Geobiochemistry of microbial community proteomes inferred from 16S RNA sequences
+# Geobiochemistry of microbial community proteomes estimated from 16S RNA sequences
 # 20210416 Initial commit to JMDplots
 # 20210527 Updated plots for RefSeq release 206
 
-# Figure 1: Distinct chemical parameters of predicted proteoms for taxonomic groups 20200925
+# Figure 1: Distinct chemical parameters of reference proteomes for taxonomic groups 20200925
 geo16S1 <- function(pdf = FALSE) {
 
   if(pdf) pdf("geo16S1.pdf", width = 11, height = 5)

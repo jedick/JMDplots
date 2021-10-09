@@ -1,9 +1,9 @@
 # JMDplots/orp16S.R
 # Plots for paper on ZC-ORP correlations 20210827
 
-## To run these functions, chem16Sdir needs to be changed 20211003
-#orp16Sdir = system.file("extdata/orp16S", package = "JMDplots")
-#options(chem16Sdir = orp16Sdir)
+## Uncomment to source and run these functions interactively (developer mode)
+#source("chem16S.R")
+#options(chem16Sdir = system.file("extdata/orp16S", package = "JMDplots"))
 
 # Group studies by environment types 20210828
 envirotype <- list(
@@ -160,7 +160,7 @@ orp16S2 <- function(pdf = FALSE) {
   # Add sample sizes
   par(xpd = NA)
   for(i in 1:5) {
-    label <- bquote(italic(n) == .(length(ZC[[i]])))
+    label <- bquote(italic(N) == .(length(ZC[[i]])))
     text(-0.182, i - 0.25, label, adj = 1)
   }
   par(xpd = FALSE)
@@ -416,7 +416,12 @@ orp16S5 <- function(pdf = FALSE) {
       })
     }
   }
-  legend("bottomright", names(envirotype)[i1], lty = 1, col = orp16Scol[i1], cex = 0.8, bty = "n")
+  l1names <- names(envirotype)[i1][c(1, NA, 2, 3, 4)]
+  l1names[1] <- "River &"
+  l1names[2] <- "Seawater"
+  l1names[5] <- "Alkaline Spr."
+  l1col <- orp16Scol[i1][c(1, NA, 2, 3, 4)]
+  legend("bottomright", l1names, lty = 1, col = l1col, cex = 0.8, bty = "n")
   label.figure("A", font = 2, cex = 2, xfrac = 0, yfrac = 0.9)
 
   # Groundwater, sediment, soil
@@ -476,7 +481,7 @@ orp16S5 <- function(pdf = FALSE) {
   plot.new()
   text(0.3, 0.5, "Archaea", srt = 90, xpd = NA)
 
-  ## Panel D: Scatterplots and fits for Bacteria and Archaea in all environments 20210914
+  ## Panel D: Scatterplots and fits for Bacteria and Archaea in all environments except hot springs 20210914
   # Read Eh7 - ZC data
   dat <- read.csv(system.file("extdata/orp16S/EZdat.csv", package = "JMDplots"))
   # Omit data for Hot Spring environment
@@ -484,7 +489,7 @@ orp16S5 <- function(pdf = FALSE) {
 
   # Start plot for Bacteria
   par(mar = c(4, 4, 1, 1))
-  plot(c(-500, 650), c(-0.22, -0.12), type = "n", xlab = "Eh7 (mV)", ylab = cplab$ZC)
+  plot(c(-500, 650), range(dat$ZC), type = "n", xlab = "Eh7 (mV)", ylab = cplab$ZC)
   # Use Bacteria only
   thisdat <- dat[dat$lineage == "Bacteria", ]
   # Add linear fit; include number of studies in legend 20210925
@@ -496,7 +501,7 @@ orp16S5 <- function(pdf = FALSE) {
   label.figure("D", font = 2, cex = 2, xfrac = 0.02, yfrac = 1)
 
   # Now do Archaea
-  plot(c(-500, 650), c(-0.22, -0.12), type = "n", xlab = "Eh7 (mV)", ylab = cplab$ZC)
+  plot(c(-500, 650), range(dat$ZC), type = "n", xlab = "Eh7 (mV)", ylab = cplab$ZC)
   thisdat <- dat[dat$lineage == "Archaea", ]
   nstudy <- length(unique(thisdat$study))
   add.linear(thisdat$Eh7, thisdat$ZC, nstudy)
@@ -506,17 +511,20 @@ orp16S5 <- function(pdf = FALSE) {
   # Add legend
   par(mar = c(4, 1, 1, 1))
   plot.new()
-  ienv = c(1, 2, 5, 3, 6, 7)
-  legend("left", names(envirotype)[ienv], pch = 19, col = orp16Scol[ienv], bty = "n")
+  ienv = c(1, 2, 5, 3, 6, 7, NA)
+  ltext <- names(envirotype)[ienv]
+  ltext[7] <- "(no hot springs)"
+  legend("left", ltext, pch = 19, col = orp16Scol[ienv], bty = "n")
 
   if(pdf) dev.off()
 }
 
-# Figure 6: ZC-Eh7 fits for Bacteria and Archaea in hot springs 20210930
+# Figure 6: Distinctions in carbon oxidation state estimated for different hot springs, and global fits for all environments. 20210930
 orp16S6 <- function(pdf = FALSE) {
 
-  if(pdf) pdf("Figure6.pdf", width = 8, height = 3.5)
-  par(mfrow = c(1, 3))
+  if(pdf) pdf("Figure6.pdf", width = 8, height = 6)
+  mat <- matrix(c(1,1,1,1, 2,2,2,2, 3,3,3,3, 0,4,4,4,4,4, 5,5,5,5,5,0), nrow = 2, byrow = TRUE)
+  layout(mat, heights = c(3, 2))
   par(mar = c(4, 4, 2, 1))
   par(mgp = c(2.5, 1, 0))
 
@@ -557,8 +565,8 @@ orp16S6 <- function(pdf = FALSE) {
       })
     }
     title(lineages[k], font.main = 1)
-    label.figure(LETTERS[k], font = 2, cex = 1.5, yfrac = 0.96)
     if(k==1) {
+      label.figure("A", font = 2, cex = 1.5, yfrac = 0.96)
       # Add legend
       lhyper <- paste0("Hypersaline (", paste(which(ihyper), collapse = ", "), ")")
       lsed <- paste0("Sediment (", paste(which(ised), collapse = ", "), ")")
@@ -577,7 +585,30 @@ orp16S6 <- function(pdf = FALSE) {
     text(pout$Eh7lim[2], pout$ZC[2], j)
   }
   title("Bacteria and Archaea", font.main = 1)
-  label.figure("C", font = 2, cex = 1.5, yfrac = 0.96)
+
+  # Scatterplots and fits for Bacteria and Archaea in all environments incluing hot springs 20211009
+  # Read Eh7 - ZC data
+  dat <- read.csv(system.file("extdata/orp16S/EZdat.csv", package = "JMDplots"))
+  # Loop over Bacteria and Archaea
+  for(k in 1:2) {
+    par(mar = c(4, 4, 1, 1))
+    plot(c(-500, 650), range(dat$ZC), type = "n", xlab = "Eh7 (mV)", ylab = cplab$ZC)
+    # Use Bacteria only
+    thisdat <- dat[dat$lineage == lineages[k], ]
+    # Add linear fit; include number of studies in legend 20210925
+    nstudy <- length(unique(thisdat$study))
+    add.linear(thisdat$Eh7, thisdat$ZC, nstudy, pvalue_upper_right = TRUE)
+    # Add points - highlight hot springs in red
+    ienv <- c(1, 2, 5, 3, 6, 7, 4)
+    cols <- rep("gray", length(ienv))
+    cols[4] <- orp16Scol[4]
+    eachenv(lineages[k], add = TRUE, do.linear = FALSE, ienv = ienv, cols = cols)
+    title(lineages[k], font.main = 1)
+    if(k == 1) {
+      label.figure("B", font = 2, cex = 1.5, yfrac = 0.96)
+      legend("bottomright", c("Hot Spring", "Other environments"), col = c(orp16Scol[4], "gray"), pch = 19, bty = "n", cex = 0.9)
+    }
+  }
 
   if(pdf) dev.off()
 
@@ -656,12 +687,11 @@ orp16S_S1 <- function(pdf = FALSE) {
     plotEZ("ZCZ+21", "Bacteria", groupby = "Location", groups = c("LO", "CR1", "MN", "VA", "BS", "CR2"), legend.x = "topright"),
 
     message("\nSediment"),
-    plotEZ("JHL+12", "two", groupby = "Core", groups = c("GC6", "GC12")),
+    plotEZ("JHL+12", "two", groupby = "Core", groups = c("GC6", "GC12"), legend.x = "bottomright"),
     plotEZ("GFE+16", "Bacteria", groupby = "Station", groups = c(1, 4, 7, 18)),
-#    plotEZ("ZML+17", "two", groupby = "Season", groups = c("Winter", "Summer"), legend.x = "bottomleft"),
     plotEZ("ZML+17", "two", groupby = "Type", groups = c("Mangrove Forest", "Intertidal Mudflat"), legend.x = "bottomleft"),
     plotEZ("BYB+17", "two", groupby = "Type", groups = c("Freshwater", "Brackish", "Saltmarsh", "Hypersaline"), legend.x = "bottomright"),
-    plotEZ("BSPD17", "Bacteria", groupby = "Type", groups = c("Water", "Sediment"), legend.x = "bottomleft"),
+    plotEZ("BSPD17", "Bacteria", groupby = "Type", groups = c("Water", "Sediment")),
     plotEZ("HDZ+19", "Bacteria", groupby = "Type", groups = c("Water", "Sediment")),
     plotEZ("WHLH21", "Bacteria", groupby = "Position", groups = c("Surface", "Middle", "Bottom"), legend.x = "bottomleft"),
     plotEZ("SCM+18", "two", groupby = "Site", groups = c("Shallow", "Deep"), legend.x = "bottomleft"),
@@ -670,7 +700,7 @@ orp16S_S1 <- function(pdf = FALSE) {
     plotEZ("VMB+19", "two", groupby = "Type", groups = c("Water", "Sediment"), legend.x = "topright"),
     plotEZ("WHC+19", "Archaea", groupby = "Type", groups = c("Mid-tide", "Low-tide", "Subtidal"), legend.x = "topright"),
     plotEZ("HSF+19", "Bacteria", groupby = "Type", groups = c("Water", "Sediment-Water Interface", "Sediment"), legend.x = "topright"),
-    plotEZ("MCS+21", "two", groupby = "Type", groups = c("Water", "Sediment"), legend.x = "left"),
+    plotEZ("MCS+21", "two", groupby = "Type", groups = c("Water", "Sediment"), legend.x = "topright"),
     plotEZ("LMBA21_2017", "two", groupby = "Season", groups = c("Summer", "Winter"), legend.x = "bottomright"),
     plotEZ("ZZLL21", "Bacteria", groupby = "Type", groups = c("Main stream", "Animal farm", "Hospital", "WWTP", "Tributary"), legend.x = "bottomleft"),
     plotEZ("WFB+21", "Bacteria", groupby = "Treatment", groups = c("C. volutator", "H. diversicolor", "Cv & Hd", "MPB", "Manual turbation")),
@@ -684,7 +714,7 @@ orp16S_S1 <- function(pdf = FALSE) {
     plotEZ("ZHZ+19", "two", groupby = "Treatment", groups = c("Original", "Nitrate-reducing", "Ferric-reducing", "Sulfate-reducing", "Methanogenic")),
     plotEZ("CWC+20", "Bacteria", groupby = "Management", groups = c("Flooding", "Draining")),
     plotEZ("PSG+20", "two", groupby = "Treatment", groups = c("Initial", "NCC", "RB", "RGP", "TP")),
-    plotEZ("XLD+20", "two", groupby = "Treatment", groups = c("CK", "9K-Control", "Htt-sys", "Att-sys", "Co-sys"), legend.x = "bottomright"),
+    plotEZ("XLD+20", "two", groupby = "Treatment", groups = c("Original Soil", "CK", "9K-Control", "Htt-sys", "Att-sys", "Co-sys"), legend.x = "bottomright"),
     plotEZ("LJC+20", "two", groupby = "meanT", groups = c("MAT >= 21.5 degC", "MAT < 21.5 degC")),
     plotEZ("DTJ+20", "two", groupby = "Zone", groups = c("Bulk Soil", "Mature", "Elongation", "Tip")),
     plotEZ("LLL+21", "Bacteria", groupby = "Treatment", groups = c("CK", "FL", "EA", "SB", "BD")),
@@ -720,7 +750,7 @@ orp16S_S1 <- function(pdf = FALSE) {
 ### UNEXPORTED FUNCTIONS ###
 ############################
 
-add.linear <- function(Eh7, ZC, nstudy = NA) {
+add.linear <- function(Eh7, ZC, nstudy = NA, pvalue_upper_right = FALSE) {
   # Plot linear fit and confidence interval 20210920
   # Use lighter colors for environments with few datasets 20210925
   text.col <- "black"
@@ -757,25 +787,36 @@ add.linear <- function(Eh7, ZC, nstudy = NA) {
   legend <- as.expression(c(Ntext, stext))
   legend("topright", legend = legend, bty = "n", text.col = text.col)
 
-#  # Get P-value
-#  Pval <- summary(EZlm)$coefficients[, "Pr(>|t|)"]["Eh7"]
-#  # Divide by 2 to get one-sided p-value
-#  Pval <- Pval / 2
-#  Pval <- formatC(Pval, digits = 1, format = "e")
-#  Ptext <- bquote(italic(P) == .(Pval))
-#  legend("topleft", legend = Ptext, bty = "n")
+  # Calculate Pearson correlation 20211009
+  pearson <- cor.test(Eh7, ZC)
+  # Get p-value stars
+  pval <- pearson$p.value
+  stars <- ""
+  if(pval < 0.05) stars <- "*"
+  if(pval < 0.01) stars <- "**"
+  if(pval < 0.001) stars <- "***"
+  if(pval < 0.0001) stars <- "****"
+  # Format correlation coefficient and paste stars
+  rtext <- formatC(pearson$estimate, digits = 2, format = "f")
+  rtext <- paste0(rtext, stars)
+  rtext <- bquote(italic(r) == .(rtext))
+  if(pvalue_upper_right) {
+    legend("topright", legend = rtext, bty = "n", text.col = text.col, inset = c(0.02, 0.2))
+  } else {
+    legend("bottomleft", legend = rtext, bty = "n", text.col = text.col)
+  }
 }
 
 # Scatterplots for all samples in each environment type 20210913
 # NOTE: default ienv omits Hot Spring (4)
-eachenv <- function(lineage = "Bacteria", add = FALSE, do.linear = TRUE, ienv = c(1, 2, 5, 3, 6, 7)) {
+eachenv <- function(lineage = "Bacteria", add = FALSE, do.linear = TRUE, ienv = c(1, 2, 5, 3, 6, 7), cols = orp16Scol) {
   # Read Eh7 - ZC data
   dat <- read.csv(system.file("extdata/orp16S/EZdat.csv", package = "JMDplots"))
   # Get overall x and y limits
   xlim <- range(dat$Eh7)
   ylim <- range(dat$ZC)
   # Use Bacteria or Archaea only
-  dat <- dat[dat$lineage == lineage, ]
+  if(!is.null(lineage)) dat <- dat[dat$lineage == lineage, ]
   # Get names of environment types
   envirotypes <- names(envirotype)
   # Loop over environment types
@@ -804,7 +845,7 @@ eachenv <- function(lineage = "Bacteria", add = FALSE, do.linear = TRUE, ienv = 
       if(lineage == "Bacteria") title(envirotypes[i], font.main = 1, cex.main = 1)
     }
     # Plot points
-    points(Eh7, ZC, pch = 19, cex = 0.2, col = orp16Scol[i])
+    points(Eh7, ZC, pch = 19, cex = 0.2, col = cols[i])
   }
 }
 

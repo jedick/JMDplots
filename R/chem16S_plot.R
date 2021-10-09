@@ -1,5 +1,5 @@
 # JMDplots/chem16S_plot.R
-# Plotting functions for predicted RefSeq and inferred community proteomes
+# Plotting functions for reference (RefSeq) and estimated community proteomes
 # Separated from chem16S.R 20210607
 
 # taxacomp()               # nH2O-ZC plot for taxa (default: Bacteria, Archaea) and their children

@@ -1,4 +1,4 @@
-# exports for JMDplots package
+# Exports for JMDplots package
 export(
   # gradox paper 20190928
   "gradox1", "gradox2", "gradoxS1", "gradoxS2", "gradox3", "gradox4", "gradox5",
@@ -60,7 +60,7 @@ export(
   "plotEZ", "plotMA"
 )
 
-# imports from CHNOSZ
+# Imports from CHNOSZ
 importFrom("CHNOSZ",
   # first batch: gradox
   "ZC", "affinity", "aminoacids", "as.chemical.formula", 
@@ -90,7 +90,7 @@ importFrom("CHNOSZ",
   "E.units"
 )
 
-# imports from canprot
+# Imports from canprot
 importFrom("canprot",
   # first batch: gradH2O1 20190930
   "human",
@@ -112,7 +112,7 @@ importFrom("canprot",
   "O2AA"
 )
 
-# imports from other packages
+# Imports from other packages
 importFrom("shiny", "fluidPage", "includeCSS", "shinyApp")
 importFrom("timevis", "renderTimevis", "timevis", "timevisOutput")
 importFrom("png", "readPNG")
@@ -127,7 +127,7 @@ importFrom("grid", "grid.roundrect", "gpar")
 importFrom("oce", "mapPlot", "mapPoints", "mapPolygon")
 importFrom("sf", "st_coordinates", "st_read", "st_transform")
 
-# imports from standard packages
+# Imports from standard packages
 importFrom("grDevices", "dev.off", "cairo_pdf", "pdf", "blues9", "colorRampPalette",
            "chull", "col2rgb", "rgb", "colorRamp", "heat.colors", "topo.colors",
            "extendrange", "contourLines", "hcl.colors", "savePlot", "png", "palette")
@@ -141,7 +141,8 @@ importFrom("graphics", "abline", "arrows", "axis", "box", "layout",
 importFrom("stats", "lm", "na.omit", "predict", "sd", "predict.lm", "residuals",
            "qqline", "qqnorm", "quantile", "median", "fivenum",
            "density", "formula", "t.test", "approx", "splinefun", "xtabs",
-           "coefficients", "loess", "wilcox.test", "weighted.mean", "kmeans", "qt")
+           "coefficients", "loess", "wilcox.test", "weighted.mean",
+           "kmeans", "qt", "cor.test")
 importFrom("utils", "read.csv", "demo", "tail", "write.csv",
            "capture.output", "browseURL", "head", "combn", "read.table")
 

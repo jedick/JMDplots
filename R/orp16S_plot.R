@@ -143,13 +143,15 @@ plotEZ <- function(study, lineage = NULL, mincount = 50, pch = NULL, col = NULL,
 
 # Plot ZC vs percentage of most abundant mapped taxon (MAMT) and
 # show percentages of MAMT and MAUT (most abundant unmapped taxon) 20211007
-plotMA <- function(study, lineage = NULL, mincount = 50) {
+plotMA <- function(study, lineage = NULL, mincount = 50, pch = NULL, col = NULL, groupby = NULL, groups = NULL, legend.x = "topright") {
 
   # Get RDP counts, mapping to NCBI taxonomy, and chemical metrics
   mdat <- getmdat(study)
   RDP <- getRDP(study, lineage = lineage, mincount = mincount, mdat = mdat)
   map <- getmap(study, lineage = lineage, mincount = mincount, RDP = RDP)
   metrics <- getmetrics(study, lineage = lineage, mincount = mincount, mdat = mdat, RDP = RDP, map = map)
+  # Keep metadata only for samples with >= mincount counts 20211008
+  mdat <- mdat[mdat$Run %in% metrics$Run, ]
 
   # Extract numeric rows
   RDPnum <- RDP[, -(1:3)]
@@ -169,6 +171,31 @@ plotMA <- function(study, lineage = NULL, mincount = 50) {
   taxon_metrics <- read.csv(file.path(datadir, "taxon_metrics.csv"), as.is = TRUE)
   MAMTZC <- taxon_metrics$ZC[map[iMAMT]]
 
+  # Assign pch and col to sample groups
+  if(!is.null(groupby) & !is.null(groups)) {
+    # Get default point symbols
+    pchavail <- 21:25
+    if(is.null(pch)) pch <- rep(pchavail, length(groups))
+    # The pch and col for each sample type
+    pchtype <- rep(pch, length.out = length(groups))
+    coltype <- 1:length(groups)
+    # The pch and col for individual samples
+    pch <- col <- rep(NA, nrow(mdat))
+    # The column with sample groups
+    icol <- match(groupby, colnames(mdat))
+    if(is.na(icol)) stop(paste(groupby, "is not a column name in metadata for", study))
+    # Loop over sample groups
+    for(i in seq_along(groups)) {
+      # Find matching samples and set the pch and col
+      itype <- mdat[, icol] == groups[i]
+      pch[itype] <- pchtype[i]
+      col[itype] <- orp16Scol[coltype[i]]
+    }
+  }
+  # Defaults for pch and col if sample groups are not specified
+  if(is.null(pch)) pch <- 19
+  if(is.null(col)) col <- "#40404080"
+
   # Calculate the abundance of the MAMT within each sample
   samplecounts <- colSums(RDPnum)
   perc <- as.numeric(RDPnum[iMAMT, ] / samplecounts * 100)
@@ -177,7 +204,7 @@ plotMA <- function(study, lineage = NULL, mincount = 50) {
   # Add line for ZC of MAMT
   abline(h = MAMTZC, lty = 2)
   # Add points for community ZC vs abundance of MAMT
-  points(perc, metrics$ZC)
+  points(perc, metrics$ZC, pch = pch, col = col, bg = col)
 
   # Get MAUT
   unmapped_groups <- attr(map, "unmapped_groups")
@@ -193,5 +220,11 @@ plotMA <- function(study, lineage = NULL, mincount = 50) {
   title(MAMTtitle, line = 2, font.main = 1)
   MAUTtitle <- paste0("MAUT: ", MAUTname, " (", MAUTperc, "%)")
   title(MAUTtitle, line = 1, font.main = 1)
+
+  if(!is.null(groupby) & !is.null(groups)) {
+    # Add legend
+    legend <- as.character(groups)
+    legend(legend.x, legend, pch = pchtype, col = orp16Scol[coltype], pt.bg = orp16Scol[coltype], title = groupby, cex = 0.9, bg = "white")
+  }
 
 }
