@@ -65,7 +65,7 @@ This vignette runs the code to make the plots from the following paper:
 > Preprint available at:
 >
 
-This vignette was compiled on `r Sys.Date()` with **[JMDplots](https://github.com/jedick/JMDplots)** `r packageDescription("JMDplots")$Version` and **[CHNOSZ](http://chnosz.net)** `r packageDescription("CHNOSZ")$Version`.
+This vignette was compiled on `r Sys.Date()` with **[JMDplots](https://github.com/jedick/JMDplots)** `r packageDescription("JMDplots")$Version`.
 
 ```{r library, message = FALSE, results = "hide"}
 library(JMDplots)
@@ -93,14 +93,14 @@ orp16S3()
 
 **Data sources:** coastlineWorld dataset in R package oce [@KR21]; shapefiles for North American Great Lakes [@USGS10].
 
-## Selected plots for each environment type (Figure 4)
+## Analysis of selected datasets for each environment type (Figure 4)
 ```{r orp16S4, message = FALSE, results = "hide", out.width='100%', fig.width = 12, fig.height = 6, out.extra = 'class="full-width"', pngquant = pngquant, dpi = 100}
 orp16S4()
 ```
 
-**Data sources:** Black Sea [@SVH+19], Fayetteville Green Lake [@BOEM21], Samail Ophiolite [@RMB+17], Eastern Tibetan Plateau [@GWS+20], Hainich Critical Zone [@YHK+20], Po Plain [@ZCZ+21], Bay of Biscay [@LMBA21], Dabu, Hunan Province [@MLL+19].
+**Data sources:** Black Sea [@SVH+19], Fayetteville Green Lake [@BOEM21], Samail Ophiolite [@RMB+17], Eastern Tibetan Plateau [@GWS+20], Hainich Critical Zone [@YHK+20], Phetchabun-Pichit Gold Mine [@SKP+21], Bay of Biscay [@LMBA21], Dabu Town, Hunan Province [@MLL+19].
 
-## Local and global analysis of `r ZC`-Eh7 correlations (Figure 5)
+## Local and global analysis of `r ZC` and Eh7 data (Figure 5)
 ```{r orp16S5, message = FALSE, results = "hide", out.width='100%', fig.width = 10, fig.height = 8, out.extra = 'class="full-width"', pngquant = pngquant, dpi = 100}
 orp16S5()
 ```

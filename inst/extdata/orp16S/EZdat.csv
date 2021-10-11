@@ -858,27 +858,27 @@ GWSS21,Hot Spring,Archaea,DGG6,SRR13069619,Location,Rehai,2,54.2,-0.217192
 GWSS21,Hot Spring,Archaea,BLZ2,SRR9311566,Location,Banglazhang,136,66.9,-0.124816
 GWSS21,Hot Spring,Archaea,BLZ4,SRR13069623,Location,Banglazhang,-254,-100.5,-0.217972
 GWSS21,Hot Spring,Archaea,BLZ5,SRR13069622,Location,Banglazhang,-145,-106.9,-0.213452
-GWS+20,Hot Spring,Bacteria,BT1,SRR10580898,Field,Batang,127,108.2,-0.152244
-GWS+20,Hot Spring,Bacteria,BT2,SRR10580896,Field,Batang,-50,-50,-0.155418
-GWS+20,Hot Spring,Bacteria,BT3,SRR10580889,Field,Batang,-181,-134.1,-0.211052
-GWS+20,Hot Spring,Bacteria,BT4,SRR10580885,Field,Batang,-123,-116.3,-0.23116
-GWS+20,Hot Spring,Bacteria,BT5,SRR10580891,Field,Batang,-267,-109.4,-0.200236
-GWS+20,Hot Spring,Bacteria,BT6,SRR10580894,Field,Batang,-28,72.3,-0.20666
-GWS+20,Hot Spring,Bacteria,BT7,SRR10580888,Field,Batang,-248,-40.1,-0.216421
-GWS+20,Hot Spring,Bacteria,LT1,SRR10580893,Field,Litang,104,97.9,-0.148305
-GWS+20,Hot Spring,Bacteria,LT2,SRR10580887,Field,Litang,-163,-86.3,-0.207088
-GWS+20,Hot Spring,Bacteria,KD2,SRR10580886,Field,Kangding,105,86.5,-0.139962
-GWS+20,Hot Spring,Bacteria,KD3,SRR10580895,Field,Kangding,57,57,-0.162882
-GWS+20,Hot Spring,Bacteria,KD4,SRR10580892,Field,Kangding,-245,-282.3,-0.195956
-GWS+20,Hot Spring,Bacteria,KD5,SRR10580890,Field,Kangding,22,63.1,-0.164337
-GWS+20,Hot Spring,Bacteria,KD6,SRR10580899,Field,Kangding,-161,-105,-0.225043
-GWS+20,Hot Spring,Archaea,BT1,SRR10580898,Field,Batang,127,108.2,-0.171662
-GWS+20,Hot Spring,Archaea,BT2,SRR10580896,Field,Batang,-50,-50,-0.181585
-GWS+20,Hot Spring,Archaea,BT5,SRR10580891,Field,Batang,-267,-109.4,-0.21088
-GWS+20,Hot Spring,Archaea,BT6,SRR10580894,Field,Batang,-28,72.3,-0.213079
-GWS+20,Hot Spring,Archaea,BT7,SRR10580888,Field,Batang,-248,-40.1,-0.214478
-GWS+20,Hot Spring,Archaea,KD3,SRR10580895,Field,Kangding,57,57,-0.171378
-GWS+20,Hot Spring,Archaea,KD5,SRR10580890,Field,Kangding,22,63.1,-0.182125
+GWS+20,Hot Spring,Bacteria,BT1,SRR10580898,Hydrothermal Field,Batang,127,108.2,-0.152244
+GWS+20,Hot Spring,Bacteria,BT2,SRR10580896,Hydrothermal Field,Batang,-50,-50,-0.155418
+GWS+20,Hot Spring,Bacteria,BT3,SRR10580889,Hydrothermal Field,Batang,-181,-134.1,-0.211052
+GWS+20,Hot Spring,Bacteria,BT4,SRR10580885,Hydrothermal Field,Batang,-123,-116.3,-0.23116
+GWS+20,Hot Spring,Bacteria,BT5,SRR10580891,Hydrothermal Field,Batang,-267,-109.4,-0.200236
+GWS+20,Hot Spring,Bacteria,BT6,SRR10580894,Hydrothermal Field,Batang,-28,72.3,-0.20666
+GWS+20,Hot Spring,Bacteria,BT7,SRR10580888,Hydrothermal Field,Batang,-248,-40.1,-0.216421
+GWS+20,Hot Spring,Bacteria,LT1,SRR10580893,Hydrothermal Field,Litang,104,97.9,-0.148305
+GWS+20,Hot Spring,Bacteria,LT2,SRR10580887,Hydrothermal Field,Litang,-163,-86.3,-0.207088
+GWS+20,Hot Spring,Bacteria,KD2,SRR10580886,Hydrothermal Field,Kangding,105,86.5,-0.139962
+GWS+20,Hot Spring,Bacteria,KD3,SRR10580895,Hydrothermal Field,Kangding,57,57,-0.162882
+GWS+20,Hot Spring,Bacteria,KD4,SRR10580892,Hydrothermal Field,Kangding,-245,-282.3,-0.195956
+GWS+20,Hot Spring,Bacteria,KD5,SRR10580890,Hydrothermal Field,Kangding,22,63.1,-0.164337
+GWS+20,Hot Spring,Bacteria,KD6,SRR10580899,Hydrothermal Field,Kangding,-161,-105,-0.225043
+GWS+20,Hot Spring,Archaea,BT1,SRR10580898,Hydrothermal Field,Batang,127,108.2,-0.171662
+GWS+20,Hot Spring,Archaea,BT2,SRR10580896,Hydrothermal Field,Batang,-50,-50,-0.181585
+GWS+20,Hot Spring,Archaea,BT5,SRR10580891,Hydrothermal Field,Batang,-267,-109.4,-0.21088
+GWS+20,Hot Spring,Archaea,BT6,SRR10580894,Hydrothermal Field,Batang,-28,72.3,-0.213079
+GWS+20,Hot Spring,Archaea,BT7,SRR10580888,Hydrothermal Field,Batang,-248,-40.1,-0.214478
+GWS+20,Hot Spring,Archaea,KD3,SRR10580895,Hydrothermal Field,Kangding,57,57,-0.171378
+GWS+20,Hot Spring,Archaea,KD5,SRR10580890,Hydrothermal Field,Kangding,22,63.1,-0.182125
 PBU+20,Hot Spring,Bacteria,U20Bur,SRR11496425,Type,Spring,132,125.5,-0.148108
 PBU+20,Hot Spring,Bacteria,U3kot,SRR11496432,Type,Cauldron,120,-65.3,-0.157294
 PBU+20,Hot Spring,Bacteria,U3_5yasher,SRR11496426,Type,Spring,406,233.7,-0.174629

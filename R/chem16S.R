@@ -443,15 +443,12 @@ getRDP <- function(study, cn = FALSE, mdat = NULL, lineage = NULL, mincount = 20
   # Recalculate total counts
   totalcounts <- colSums(out[, -(1:3), drop = FALSE])
 
-#  # Only test mincount if at least some runs have more than it (added for RHM+20)  20210615
-#  if(max(totalcounts) >= mincount) {
-    # Discard samples with < mincount total counts 20201001
-    ismall <- totalcounts < mincount
-    if(any(ismall)) {
-      print(paste0("getRDP [", study, "]: discarding ", sum(ismall), " samples with < ", mincount, " total counts"))
-      out <- out[, c(TRUE, TRUE, TRUE, !ismall)]
-    }
-#  }
+  # Discard samples with < mincount total counts 20201001
+  ismall <- totalcounts < mincount
+  if(any(ismall)) {
+    print(paste0("getRDP [", study, "]: discarding ", sum(ismall), " samples with < ", mincount, " total counts"))
+    out <- out[, c(TRUE, TRUE, TRUE, !ismall)]
+  }
   # Recalculate total counts
   totalcounts <- colSums(out[, -(1:3), drop = FALSE])
   # Report the median number of counts 20200917

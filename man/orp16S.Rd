@@ -33,8 +33,8 @@ This table gives a brief description of each plotting function.
   \code{orp16S1} \tab Geobiochemical predictive framework \cr
   \code{orp16S2} \tab Chemical and geobiochemical depth profiles in Winogradsky columns \cr
   \code{orp16S3} \tab Sample locations on world map \cr
-  \code{orp16S4} \tab Selected plots for each environment type \cr
-  \code{orp16S5} \tab Local and global analysis of \ZC-Eh7 correlations \cr
+  \code{orp16S4} \tab Analysis of selected datasets for each environment type \cr
+  \code{orp16S5} \tab Local and global analysis of \ZC and Eh7 data \cr
   \code{orp16S6} \tab Distinctions in carbon oxidation state estimated for different hot springs, and global fits for all environments. \cr
   \code{orp16S_S1} \tab \ZC-Eh scatterplots for all studies \cr
 }

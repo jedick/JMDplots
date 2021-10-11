@@ -344,7 +344,7 @@ orp16S3 <- function(pdf = FALSE) {
 
 }
 
-# Figure 4: Selected plots for each environment type 20211003
+# Figure 4: Analysis of selected datasets for each environment type 20211003
 orp16S4 <- function(pdf = FALSE) {
 
   if(pdf) pdf("Figure4.pdf", width = 12, height = 6)
@@ -360,11 +360,11 @@ orp16S4 <- function(pdf = FALSE) {
   # Samail Ophiolite (Alkaline Spring)
   plotEZ("RMB+17", "Bacteria", groupby = "pH Group", groups = c("< 10", "> 10"), title.line = 1.5)
   # Eastern Tibetan Plateau (Hot Spring)
-  plotEZ("GWS+20", "Bacteria", groupby = "Field", groups = c("Batang", "Litang", "Kangding"), title.line = 1.5)
+  plotEZ("GWS+20", "Bacteria", groupby = "Hydrothermal Field", groups = c("Batang", "Litang", "Kangding"), title.line = 1.5)
   # Hainich Critical Zone (Groundwater)
   plotEZ("YHK+20", "Bacteria", groupby = "Location", groups = c("Upper Hillslope", "Middle Slope", "Lower Footslope"), title.line = 1.5)
-  # Po Plain (Groundwater)
-  plotEZ("ZCZ+21", "Bacteria", groupby = "Location", groups = c("LO", "CR1", "MN", "VA", "BS", "CR2"), legend.x = "topright", title.line = 1.5)
+  # Phetchabun-Pichit Gold Mine (Groundwater)
+  plotEZ("SKP+21", "Bacteria", groupby = "Type", groups = c("Groundwater", "Surface water"), legend.x = "topright", title.line = 1.5)
   # Bay of Biscay (Sediment)
   plotEZ("LMBA21_2017", "Bacteria", groupby = "Season", groups = c("Summer", "Winter"), legend.x = "bottomright", title.line = 1.5)
   # Hunan Soil (Soil)
@@ -374,7 +374,7 @@ orp16S4 <- function(pdf = FALSE) {
 
 }
 
-# Figure 5: Local and global analysis of ZC-Eh7 correlations 20210828
+# Figure 5: Local and global analysis of ZC and Eh7 data 20210828
 orp16S5 <- function(pdf = FALSE) {
 
   if(pdf) pdf("Figure5.pdf", width = 10, height = 8)
@@ -600,13 +600,14 @@ orp16S6 <- function(pdf = FALSE) {
     add.linear(thisdat$Eh7, thisdat$ZC, nstudy, pvalue_upper_right = TRUE)
     # Add points - highlight hot springs in red
     ienv <- c(1, 2, 5, 3, 6, 7, 4)
-    cols <- rep("gray", length(ienv))
+    # Use red for hot spring, gray for other environments
+    cols <- rep("slategray2", length(ienv))
     cols[4] <- orp16Scol[4]
     eachenv(lineages[k], add = TRUE, do.linear = FALSE, ienv = ienv, cols = cols)
     title(lineages[k], font.main = 1)
     if(k == 1) {
       label.figure("B", font = 2, cex = 1.5, yfrac = 0.96)
-      legend("bottomright", c("Hot Spring", "Other environments"), col = c(orp16Scol[4], "gray"), pch = 19, bty = "n", cex = 0.9)
+      legend("bottomright", c("Hot Spring", "Other environments"), col = c(orp16Scol[4], "slategray2"), pch = 19, bty = "n", cex = 0.9)
     }
   }
 
@@ -661,7 +662,7 @@ orp16S_S1 <- function(pdf = FALSE) {
     plotEZ("BMJ+19", "two", groupby = "Environment", groups = c("Hydrothermal Pond", "Yellow Lake", "Black Lake", "Assale Lake", "Cave Water")),
     plotEZ("LMG+20", "two", groupby = "Setting", groups = c("River", "Hot Spring"), legend.x = "bottomleft"),
     plotEZ("GWSS21", "two", groupby = "Location", groups = c("Rehai", "Banglazhang")),
-    plotEZ("GWS+20", "two", groupby = "Field", groups = c("Batang", "Litang", "Kangding")),
+    plotEZ("GWS+20", "two", groupby = "Hydrothermal Field", groups = c("Batang", "Litang", "Kangding")),
     plotEZ("PBU+20", "Bacteria", groupby = "Type", groups = c("Cauldron", "Sampling Pit", "Spring", "Geyser Valley (Control)"), legend.x = "bottomright"),
     plotEZ("MWY+21", "two", groupby = "Location", groups = c("Quseyongba", "Moluojiang", "Daggyai", "Quzhuomu"), legend.x = "bottomright"),
     plotEZ("OFY+19", "two", groupby = "Type", groups = c("Hot Spring", "Drain", "Lake")),

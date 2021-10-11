@@ -1,4 +1,4 @@
-name,Run,LibraryName,BioSample,sample,Field,latlong,"T (°C)",pH,"EC (mS/cm)","TDS (g/L)","ORP (mV)","DO (%)"
+name,Run,LibraryName,BioSample,sample,"Hydrothermal Field",latlong,"T (°C)",pH,"EC (mS/cm)","TDS (g/L)","ORP (mV)","DO (%)"
 "Eastern Tibetan Plateau",SRR10580898,SC2,SAMN13430419,BT1,Batang,"29.96 N 99.08 E",43.3,6.7,1.49,0.74,127,26.2
 "Eastern Tibetan Plateau",SRR10580896,SC13,SAMN13430429,BT2,Batang,"30.15 N 99.19 E",45.5,7,1.94,0.98,-50,18
 "Eastern Tibetan Plateau",SRR10580889,SC5,SAMN13430422,BT3,Batang,"30.28 N 99.34 E",64.4,7.7,1.58,0.79,-181,28.7
