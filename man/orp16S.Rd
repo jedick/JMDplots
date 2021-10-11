@@ -55,6 +55,12 @@ To set up the \code{\link{chem16S}} environment, change \code{options(chem16Sdir
   }
 }
 
+\section{Other files}{
+  \describe{
+    \item{\code{doc/orp16S.bib}}{Reference keys for all datasets (all of them are listed here; only some of them are cited in the vignette orp16S.Rmd).}
+  }
+}
+
 \seealso{
 \code{\link{plotEZ}} is used to make the \ZC-Eh7 scatterplots and linear fits in \code{orp16S4} and \code{orp16S_S1}.
 }
@@ -73,4 +79,11 @@ options(chem16Sdir = system.file("extdata/orp16S", package = "JMDplots"))
 orp16S2()
 
 orp16S3()
+
+# Check that references for all studies are available
+mdatdir <- system.file("extdata/orp16S/metadata", package = "JMDplots")
+studies <- gsub(".csv", "", dir(mdatdir))
+bibfile <- system.file("doc/orp16S.bib", package = "JMDplots")
+bibentry <- bibtex::read.bib(bibfile)
+stopifnot(all(studies \%in\% names(bibentry)))
 }

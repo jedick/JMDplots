@@ -166,7 +166,8 @@ orp16S2 <- function(pdf = FALSE) {
   par(xpd = FALSE)
   label.figure("B", font = 2, cex = 1.5)
 
-  if(pdf) dev.off()
+  # Reset layout to make orp16S3 in the examples run nicely 20211011
+  if(pdf) dev.off() else layout(1)
 
 }
 
