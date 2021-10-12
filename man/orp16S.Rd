@@ -52,6 +52,7 @@ To set up the \code{\link{chem16S}} environment, change \code{options(chem16Sdir
     \item{\code{EZlm.csv}}{Linear fits between Eh7 and \ZC for each dataset created by \code{orp16S_S1}.}
     \item{\code{metadata/*.csv}}{Sample metadata for each study.}
     \item{\code{RDP/*.csv.xz}}{RDP Classifier results combined into a single CSV file for each study, created with the \code{mkRDP} function in the \code{process.R} script (\code{\link{chem16S}}).}
+    \item{\code{OTU2RDP.R}}{Script to construct \code{RDP/OFY+19.csv} from Table S2 of Omae et al. (2019).}
   }
 }
 
@@ -69,6 +70,8 @@ To set up the \code{\link{chem16S}} environment, change \code{options(chem16Sdir
 Dick, J. M. and Meng, D. (2021) Local and global chemical shaping of bacterial communities by redox potential.
 
 USGS (2010) Great Lakes and Watersheds Shapefiles. ScienceBase Catalog, U.S. Geological Survey. \doi{https://www.sciencebase.gov/catalog/item/530f8a0ee4b0e7e46bd300dd}
+
+Omae, K., Fukuyama, Y., Yasuda, H., Mise, K., Yoshida, T. and Sako, Y. (2019) Diversity and distribution of thermophilic hydrogenogenic carboxydotrophs revealed by microbial community analysis in sediments from multiple hydrothermal environments in Japan. \emph{Archives of Microbiology} \bold{201}, 969-982. \doi{10.1007/s00203-019-01661-9}
 }
 
 \examples{

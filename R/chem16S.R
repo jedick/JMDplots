@@ -428,8 +428,12 @@ getRDP <- function(study, cn = FALSE, mdat = NULL, lineage = NULL, mincount = 20
 
   # Remove classifications at root and domain level (Bacteria and Archaea),
   # and Chlorophyta, Chloroplast and Bacillariophyta 20200922
+  # and Eukaryota 20211012
   RDPgroups <- paste(out$rank, out$name, sep = "_")
-  rmgroups <- c("rootrank_Root", "domain_Bacteria", "domain_Archaea", "class_Chloroplast", "family_Chloroplast", "genus_Chlorophyta", "genus_Bacillariophyta")
+  RDPgroups[grepl("Eukaryota", out$lineage)] <- "Eukaryota"
+  rmgroups <- c("rootrank_Root", "domain_Bacteria", "domain_Archaea", "Eukaryota",
+    # Cyanobacteria/Chloroplast
+    "class_Chloroplast", "family_Chloroplast", "genus_Chlorophyta", "genus_Bacillariophyta")
   isrm <- RDPgroups %in% rmgroups
   if(any(isrm)) {
     irm <- which(isrm)
@@ -610,7 +614,7 @@ getmetrics <- function(study, cn = FALSE, mdat = NULL, RDP = NULL, map = NULL, l
   stopifnot(all(equalrank))
 
   # Get classification matrix (rows = taxa, columns = samples)
-  RDPmat <- RDP[, -(1:3)]
+  RDPmat <- RDP[, -(1:3), drop = FALSE]
   # Calculate abundance-weighted mean nH2O for each sample
   nH2O <- colSums(RDPmat * metrics$nH2O) / colSums(RDPmat)
   # To calculate ZC, we need to compute the sum of charge (ZC * nC) and the sum of carbon atoms

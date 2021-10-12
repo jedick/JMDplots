@@ -127,6 +127,9 @@ orp16S1 <- function(pdf = FALSE) {
 # Figure 2: Chemical and geobiochemical depth profiles in Winogradsky columns 20210829
 orp16S2 <- function(pdf = FALSE) {
 
+  if(!grepl("orp16S", options("chem16Sdir")[[1]])) 
+    stop('Please run this first: options(chem16Sdir = system.file("extdata/orp16S", package = "JMDplots"))')
+
   if(pdf) pdf("Figure2.pdf", width = 7, height = 5)
 
   layout(t(matrix(1:2)), widths = c(3, 4))
@@ -173,6 +176,9 @@ orp16S2 <- function(pdf = FALSE) {
 
 # Figure 3: Sample locations on world map
 orp16S3 <- function(pdf = FALSE) {
+
+  if(!grepl("orp16S", options("chem16Sdir")[[1]])) 
+    stop('Please run this first: options(chem16Sdir = system.file("extdata/orp16S", package = "JMDplots"))')
 
   if(pdf) pdf("Figure3.pdf", width = 26, height = 14)
 
@@ -278,7 +284,7 @@ orp16S3 <- function(pdf = FALSE) {
   # https://cran.r-project.org/web/packages/oce/vignettes/map_projections.html
   par(mar = c(2, 0.5, 0, 0.5))
   # We don't need data(coastlineWorld) ... it's the default map 20211003
-  mapPlot(col = "lightgray", projection = "+proj=wintri", border = "white", drawBox = FALSE)
+  mapPlot(col = "slategray2", projection = "+proj=wintri", border = "white", drawBox = FALSE)
 
   # Add Great Lakes
   # https://www.sciencebase.gov/catalog/item/530f8a0ee4b0e7e46bd300dd
@@ -347,6 +353,9 @@ orp16S3 <- function(pdf = FALSE) {
 
 # Figure 4: Analysis of selected datasets for each environment type 20211003
 orp16S4 <- function(pdf = FALSE) {
+
+  if(!grepl("orp16S", options("chem16Sdir")[[1]])) 
+    stop('Please run this first: options(chem16Sdir = system.file("extdata/orp16S", package = "JMDplots"))')
 
   if(pdf) pdf("Figure4.pdf", width = 12, height = 6)
   par(mfrow = c(2, 4))
@@ -514,7 +523,7 @@ orp16S5 <- function(pdf = FALSE) {
   plot.new()
   ienv = c(1, 2, 5, 3, 6, 7, NA)
   ltext <- names(envirotype)[ienv]
-  ltext[7] <- "(no hot springs)"
+  ltext[7] <- "(No hot springs)"
   legend("left", ltext, pch = 19, col = orp16Scol[ienv], bty = "n")
 
   if(pdf) dev.off()
@@ -522,6 +531,9 @@ orp16S5 <- function(pdf = FALSE) {
 
 # Figure 6: Distinctions in carbon oxidation state estimated for different hot springs, and global fits for all environments. 20210930
 orp16S6 <- function(pdf = FALSE) {
+
+  if(!grepl("orp16S", options("chem16Sdir")[[1]])) 
+    stop('Please run this first: options(chem16Sdir = system.file("extdata/orp16S", package = "JMDplots"))')
 
   if(pdf) pdf("Figure6.pdf", width = 8, height = 6)
   mat <- matrix(c(1,1,1,1, 2,2,2,2, 3,3,3,3, 0,4,4,4,4,4, 5,5,5,5,5,0), nrow = 2, byrow = TRUE)
@@ -547,6 +559,18 @@ orp16S6 <- function(pdf = FALSE) {
   ised <- studies %in% c("PBU+20", "MWY+21", "OFY+19")
   col[ised] <- "gray"
 
+  # Offset for labels 20211012
+  dx <- list(
+    c(-60, 20, -190, 20, 20, 20, 20, 20, 20, 35),
+    c(20, 20, 20, 20, 20, 20, 20, 20, -90, 20),
+    c(-80, 20, -150, 20, 20, 20, 20, 20, -90, 35)
+  )
+  dy <- list(
+    c(-0.022, 0, -0.015, 0, 0.003, 0, 0, 0, 0, 0),
+    c(0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+    c(-0.025, 0, -0.01, 0, 0, 0, -0.003, 0, -0.0025, 0)
+  )
+
   # Loop over Bacteria and Archaea
   lineages <- c("Bacteria", "Archaea")
   for(k in 1:2) {
@@ -561,7 +585,7 @@ orp16S6 <- function(pdf = FALSE) {
           if(abs(slope * 1000) < 0.01) lty <- 2 else lty <- 1
           lines(Eh7, ZC, col = col[j], lwd = 2, lty = lty)
           # Add number to identify dataset
-          text(tail(Eh7, 1), tail(ZC, 1), j)
+          text(tail(Eh7, 1) + dx[[k]][j], tail(ZC, 1) + dy[[k]][j], j)
         }
       })
     }
@@ -583,7 +607,7 @@ orp16S6 <- function(pdf = FALSE) {
     # Skip study with no archaeal sequences
     if(studies[j] %in% c("PBU+20")) next
     pout <- plotEZ(studies[j], show = "lm", lwd = 2, col.line = col[j], add = TRUE)
-    text(pout$Eh7lim[2], pout$ZC[2], j)
+    text(pout$Eh7lim[2] + dx[[3]][j], pout$ZC[2] + dy[[3]][j], j)
   }
   title("Bacteria and Archaea", font.main = 1)
 
@@ -620,6 +644,9 @@ orp16S6 <- function(pdf = FALSE) {
 # This also creates files EZdat (Eh and ZC values) and
 # EZlm (linear fits) for use by other plotting functions
 orp16S_S1 <- function(pdf = FALSE) {
+
+  if(!grepl("orp16S", options("chem16Sdir")[[1]])) 
+    stop('Please run this first: options(chem16Sdir = system.file("extdata/orp16S", package = "JMDplots"))')
 
   # Setup figure
   if(pdf) pdf("Figure_S1.pdf", width = 12, height = 9)
@@ -794,10 +821,10 @@ add.linear <- function(Eh7, ZC, nstudy = NA, pvalue_upper_right = FALSE) {
   # Get p-value stars
   pval <- pearson$p.value
   stars <- ""
-  if(pval < 0.05) stars <- "*"
-  if(pval < 0.01) stars <- "**"
-  if(pval < 0.001) stars <- "***"
-  if(pval < 0.0001) stars <- "****"
+  if(pval < 1e-2) stars <- "*"
+  if(pval < 1e-5) stars <- "**"
+  if(pval < 1e-20) stars <- "***"
+  if(pval < 1e-30) stars <- "****"
   # Format correlation coefficient and paste stars
   rtext <- formatC(pearson$estimate, digits = 2, format = "f")
   rtext <- paste0(rtext, stars)
