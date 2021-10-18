@@ -761,3 +761,89 @@ geo16S6 <- function(pdf = FALSE) {
 
   if(pdf) dev.off()
 }
+
+# Comparison of protein ZC from metagenomic or metatranscriptomic data with estimates from 16S and reference sequences 20211017
+geo16S7 <- function(pdf = FALSE) {
+
+  if(pdf) pdf("geo16S7.pdf", width = 7, height = 5)
+  par(mar = c(4, 4, 1, 1), mgp = c(2.8, 1, 0))
+
+  # Start plot
+  xylim <- c(-0.22, -0.13)
+  xlab <- quote(italic(Z)[C]~"from metagenome or metatranscriptome")
+  ylab <- quote(italic(Z)[C]~"estimated from 16S and reference sequences")
+  plot(xylim, xylim, type = "n", xlab = xlab, ylab = ylab)
+  lines(xylim, xylim, lty = 2, col = "gray40")
+
+  # Get ZC calculated from Guerrero Negro metagenome (Kunin et al., 2008)
+  dat_MG <- mplot("Guerrero_Negro", "IMG_MGP", plot.it = FALSE)
+  # Reverse the order because upper mat layers are plotted on the right
+  ZC_MG <- rev(dat_MG$AA)
+  # Get ZC calculated from Guerrero Negro 16S data (Harris et al., 2013)
+  dat_16S <- getmetrics("HCW+13")
+  ZC_16S <- dat_16S$ZC
+  # Check that the sample names are the same
+  stopifnot(all.equal(rev(rownames(dat_MG$meancomp)), gsub(".*_", "", dat_16S$sample)))
+  # Add lines to plot
+  lines(ZC_MG, ZC_16S, type = "b")
+  # Fill symbol for most oxidized (surface) sample
+  points(ZC_MG[1], ZC_16S[1], pch = 19)
+  # Label points for upper 3 layers
+  text(c(-0.135, -0.1382, -0.1422), c(-0.1472, -0.1598, -0.1618), c("1", "2", "3"), cex = 0.8)
+  text(-0.135, -0.17, "Guerrero\nNegro")
+
+  # Get ZC calculated from ETNP OMZ metagenome (Glass et al., 2015)
+  dat_MG <- mplot("ETNP_OMZ", "SRA_MGP", plot.it = FALSE)
+  # Reverse the order because smaller water depths are plotted on the right
+  ZC_MG <- rev(dat_MG$AA)
+  # Get ZC calculated from ETNP OMZ 16S data (Ganesh et al., 2015)
+  dat_16S <- getmetrics("GBL+15")
+  # Use smallest size fraction
+  dat_16S <- subset(dat_16S, grepl("1.6micron", dat_16S$sample))
+  ZC_16S <- dat_16S$ZC
+  # Check that the sample names are the same
+  all.equal(rev(rownames(dat_MG$meancomp)), gsub("_.*", "", dat_16S$sample))
+  # Add lines to plot
+  lines(ZC_MG, ZC_16S, type = "b")
+  # Fill symbol for most oxidized (surface) sample
+  points(ZC_MG[1], ZC_16S[1], pch = 19)
+  text(-0.153, -0.177, "ETNP")
+
+  # Get ZC calculated from Bison Pool metagenome (Havig et al., 2011)
+  dat_MG <- mplot("Bison_Pool", "IMG_MGP", plot.it = FALSE)
+  ZC_MG <- dat_MG$AA
+  # Get ZC calculated from Bison Pool 16S data (Swingley et al., 2012)
+  dat_16S <- getmetrics("SMS+12")
+  ZC_16S <- dat_16S$ZC
+  # Check that the sample names are the same
+  stopifnot(all.equal(rownames(dat_MG$meancomp), dat_16S$sample))
+  # Add lines to plot
+  lines(ZC_MG, ZC_16S, type = "b")
+  # Fill symbol for most oxidized (low-T) sample
+  points(ZC_MG[5], ZC_16S[5], pch = 19)
+  text(-0.18, -0.197, "Bison Pool")
+
+  # Get ZC calculated from Mono Lake metatranscriptome (Edwardson and Hollibaugh, 2017)
+  dat_MT <- mplot("Mono_Lake", "SRA_MTP", plot.it = FALSE)
+  # NOTE: reverse the order because smaller water depths are plotted on the right
+  ZC_MT <- rev(dat_MT$AA)
+  # Get ZC calculated from Mono Lake 16S data (Edwardson and Hollibaugh, 2018)
+  dat_16S <- getmetrics("EH18")
+  ZC_16S <- dat_16S$ZC
+  # Check that the sample names are the same
+  stopifnot(all.equal(rev(rownames(dat_MT$meancomp)), gsub(".*_", "", dat_16S$sample)))
+  # Add lines to plot
+  lines(ZC_MT, ZC_16S, type = "b", pch = 0)
+  # Fill symbol for most oxidized (surface) sample
+  points(ZC_MT[1], ZC_16S[1], pch = 15)
+  text(-0.172, -0.145, "Mono Lake")
+
+  # Add legend
+  legend("topleft", character(3), pch = c(1, 0, 19), bty = "n")
+  legend("topleft", c("Metagenome", "Metatranscriptome", "Most oxidized", "(surface or low-T sample)"), pch = c(NA, NA, 15, NA), bty = "n", inset = c(0.02, 0))
+
+  if(pdf) dev.off()
+
+
+}
+

@@ -55,7 +55,7 @@ usedin <- list(
 )
 
 # function to plot sampled compositions for indicated study and sequence type 20180222
-# e.g. mplot("Columbia_River", "IMG_MT")
+# e.g. mplot("Guerrero_Negro", "IMG_MG")
 mplot <- function(study, seqtype, plottype = "bars", ylim = NULL, plot.RNA = TRUE, taxid = NULL,
   dsDNA = TRUE, abbrev = NULL, col = NULL, add.label = TRUE, maxdepth = NULL, H2O = FALSE,
   plot.it = TRUE, add.title = TRUE, yline = 2, basis = getOption("basis"), datadir = NULL, mdata = studies,

@@ -7,6 +7,7 @@
 \alias{geo16S4}
 \alias{geo16S5}
 \alias{geo16S6}
+\alias{geo16S7}
 \alias{geo16S_S1}
 \title{Plots from geobiochemistry of 16S sequences paper}
 \description{
@@ -20,6 +21,7 @@ Plots from the paper by Dick and Tan (2021).
   geo16S4(pdf = FALSE)
   geo16S5(pdf = FALSE)
   geo16S6(pdf = FALSE)
+  geo16S7(pdf = FALSE)
   geo16S_S1(pdf = FALSE)
 }
 
@@ -36,8 +38,9 @@ This table gives a brief description of each plotting function.
   \code{geo16S2} \tab Estimated community proteomes from different environments have distinct chemical signatures \cr
   \code{geo16S3} \tab Lower carbon oxidation state is tied to oxygen depletion in water columns \cr
   \code{geo16S4} \tab Changes of abundance and chemical composition at different taxonomic levels \cr
-  \code{geo16S5} \tab Decreased carbon oxidation state of estimated proteomes for communities affected by unconventional oil and gas extraction \cr
+  \code{geo16S5} \tab Decreased carbon oxidation state of estimated proteomes for communities affected by shale gas extraction \cr
   \code{geo16S6} \tab Contributions of classes to overall \ZC difference between oxidizing and reducing conditions \cr
+  \code{geo16S7} \tab Comparison of protein \ZC from metagenomic or metatranscriptomic data with estimates from 16S and reference sequences \cr
   \code{geo16S_S1} \tab Abundance and \ZC of classes in oxidizing and reducing conditions \cr
 }
 

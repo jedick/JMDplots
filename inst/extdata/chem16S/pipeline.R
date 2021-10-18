@@ -39,7 +39,7 @@
 ## STUDY SETTINGS
 
 # Change the following line to setup the pipeline for one study
-study <- "PCL+18"
+study <- "EH18"
 # Settings for all studies are stored here
 file <- tempfile()
 # Write spaces here (but don't save them) to make this easier to read
@@ -73,6 +73,11 @@ writeLines(con = file, text = gsub(" ", "", c(
   "BCA+21, FALSE, 450",  # PRJNA395513  10.1111/1462-2920.14909
   "MZG+20, FALSE, 450",  # PRJEB27579   10.1038/s41396-019-0515-8
   "HXZ+20, FALSE, 440",  # PRJNA503500  10.1038/s41598-020-62411-2
+
+  # Datasets for comparing 16S estimated proteomes with metagenome/metatranscriptome 20211017
+  # For SMS+12 (Bison Pool), start with findchimeras()
+  #"SMS+12, NA, NA",
+  "EH18, NA, NA",
 
   ## For orp16S paper 20210922
 
@@ -137,8 +142,6 @@ writeLines(con = file, text = gsub(" ", "", c(
   "ZZLL21, FALSE, 450",
   "GWS+20, FALSE, 300",
   "CLS+19, TRUE, 150",
-  # For SMS+12 (Bison Pool), start with findchimeras()
-  #"SMS+12, NA, NA",
   "BYB+17, NA, NA",
   "MCS+21, FALSE, 400",
   "PMM+20, FALSE, 400",

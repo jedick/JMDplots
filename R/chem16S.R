@@ -209,6 +209,10 @@ getmdat <- function(study, dropNA = TRUE) {
     pch <- sapply(type, switch, oxic = 24, transition = 20, anoxic = 25)
     col <- sapply(type, switch, oxic = 4, transition = 1, anoxic = 2)
   }
+  if(study == "EH18") {
+    pch <- sapply(mdat$type, switch, top = 24, transition = 20, bottom = 25)
+    col <- sapply(mdat$type, switch, top = 4, transition = 1, bottom = 2)
+  }
 
   ## Datasets for orp16S paper 20211003
   shortstudy <- study

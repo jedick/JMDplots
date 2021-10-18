@@ -284,7 +284,8 @@ orp16S3 <- function(pdf = FALSE) {
   # https://cran.r-project.org/web/packages/oce/vignettes/map_projections.html
   par(mar = c(2, 0.5, 0, 0.5))
   # We don't need data(coastlineWorld) ... it's the default map 20211003
-  mapPlot(col = "slategray2", projection = "+proj=wintri", border = "white", drawBox = FALSE)
+  # Color is azure3
+  mapPlot(col = "#c1cdcd", projection = "+proj=wintri", border = "white", drawBox = FALSE)
 
   # Add Great Lakes
   # https://www.sciencebase.gov/catalog/item/530f8a0ee4b0e7e46bd300dd
