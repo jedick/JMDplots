@@ -37,9 +37,9 @@ geo16S1 <- function(pdf = FALSE) {
   datA <- do.call(rbind, lapply(tc1, function(x) {do.call(rbind, x)}))
   datA <- cbind(plot = "A", datA)
   datB <- do.call(rbind, lapply(tc2, function(x) {do.call(rbind, x)}))
-  datB <- cbind(plot = "A", datB)
+  datB <- cbind(plot = "B", datB)
   datC <- do.call(rbind, lapply(tc3, function(x) {do.call(rbind, x)}))
-  datC <- cbind(plot = "A", datC)
+  datC <- cbind(plot = "C", datC)
   out <- rbind(datA, datB, datC)
   rownames(out) <- NULL
   invisible(out)
@@ -418,7 +418,7 @@ geo16S4 <- function(pdf = FALSE) {
 
   gg <- groupmet("HLA+16", "nH2O", "class", pch1 = 21, pch2 = 24, ylim = c(-0.78, -0.71),
     xadj = c(Acidimicrobiia = 0.5, Gammaproteobacteria = 0.4, Flavobacteriia = -0.05, Verrucomicrobiae = -0.3, Betaproteobacteria = 0.55, Cyanobacteria = -0.07),
-    yadj = c(Acidimicrobiia = -1, Alphaproteobacteria = -0.6, Gammaproteobacteria = -1, Verrucomicrobiae = 1.5, Flavobacteriia = 1.2, Betaproteobacteria = -1),
+    yadj = c(Acidimicrobiia = -1, Alphaproteobacteria = -0.6, Gammaproteobacteria = -1, Verrucomicrobiae = 1.5, Flavobacteriia = 1.2, Betaproteobacteria = -1, Planctomycetacia = 1),
     mdat = mdat, RDP = RDP, map = map
   )
   p <- sum(gg$Pboth[!is.na(gg$X1) & !is.na(gg$X2)])
@@ -511,8 +511,8 @@ geo16S5 <- function(pdf = FALSE) {
   # Start plot
   plot(c(-0.22, -0.14), c(-0.75, -0.71), type = "n", xlab = cplab$ZC, ylab = cplab$nH2O)
   pch <- 21:25
-  xadj <- c(0.5, -1, 0.5)
-  yadj <- c(-0.9, 0, -1)
+  xadj <- c(0.3, -1, 0.5)
+  yadj <- c(-1.1, 0, -1)
   outD <- list()
   # Loop over studies
   for(i in 1:3) {
@@ -527,8 +527,8 @@ geo16S5 <- function(pdf = FALSE) {
     # Plot number of samples next to points 20210902
     n1 <- length(pm$ZC[i1])
     n2 <- length(pm$ZC[i2])
-    text(means$ZC1, means$nH2O1, n1, adj = c(xadj[i], yadj[i] - dyadj))
-    text(means$ZC2, means$nH2O2, n2, adj = c(xadj[i], yadj[i] + dyadj))
+    text(means$ZC1, means$nH2O1, n1, adj = c(xadj[i], yadj[i]))
+    text(means$ZC2, means$nH2O2, n2, adj = c(xadj[i], yadj[i]))
     outD[[i]] <- pm
   }
   # Add labels
@@ -578,7 +578,7 @@ geo16S_S1 <- function(pdf = FALSE) {
     c(Alphaproteobacteria = -0.25, Saprospiria = 0.5),
     c(Campylobacteria = 0.5, Deltaproteobacteria = 0.1),
     c(Saprospiria = -0.6, Gammaproteobacteria = -0.5, Balneolia = -0.65, Deltaproteobacteria = 1.3, Cytophagia = -0.35, Clostridia = 1.5, Verrucomicrobiae = -0.1, Planctomycetacia = -0.22),
-    c(Planctomycetacia = -0.1, Cyanobacteria = -1, Alphaproteobacteria = -0.5, Verrucomicrobiae = -0.5, Flavobacteriia = -0.05, Deltaproteobacteria = 0.9, Gammaproteobacteria = -0.05),
+    c(Planctomycetacia = -0.2, Cyanobacteria = -0.9, Alphaproteobacteria = -0.75, Verrucomicrobiae = -0.3, Flavobacteriia = -0.45, Deltaproteobacteria = 0.9, Gammaproteobacteria = -0.35),
     c(Phycisphaerae = -0.3, Planctomycetacia = -0.27, Alphaproteobacteria = -0.15, Nitrospira = -0.15, Cyanobacteria = -0.65, Gammaproteobacteria = 1),
     c(Acidimicrobiia = -0.05, Alphaproteobacteria = -0.05, Cyanobacteria = -0.8, Gammaproteobacteria = 1.05),
     c(Alphaproteobacteria = 1, Bacilli = -0.2, Actinobacteria = -0.05),
@@ -592,7 +592,7 @@ geo16S_S1 <- function(pdf = FALSE) {
     c(Saprospiria = -0.5, Planctomycetacia = 1.5, Verrucomicrobiae = -0.4, Caldilineae = 2, Deltaproteobacteria = -0.2, Cytophagia = 1.4),
     c(Gammaproteobacteria = 1.2, Deltaproteobacteria = -0.6, Flavobacteriia = -0.4, Campylobacteria = -3.5),
     c(Saprospiria = 0, Balneolia = 0, Deltaproteobacteria = -1.7, Cytophagia = -0.6, Flavobacteriia = 1.5, Clostridia = 0, Verrucomicrobiae = 2),
-    c(Alphaproteobacteria = -2.3, Verrucomicrobiae = 14, Flavobacteriia = 0.8, Deltaproteobacteria = 1.8),
+    c(Alphaproteobacteria = -2.6, Verrucomicrobiae = 12, Flavobacteriia = -2, Deltaproteobacteria = 1.8),
     c(Phycisphaerae = -1, Planctomycetacia = -12, Nitrospira = 1.9, Deltaproteobacteria = -0.5, Gammaproteobacteria = -1.2),
     c(Acidimicrobiia = 1.3, Cyanobacteria = 1.5, Nitrospinia = 1.7, Flavobacteriia = -0.5),
     c(Betaproteobacteria = 1.3, Clostridia = -0.2),
