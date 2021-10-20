@@ -1,10 +1,10 @@
 ---
-title: "Redox gradients (2019)"
+title: "Carbon oxidation state from metagenomic data for redox gradients (2019)"
 output: 
   rmarkdown::html_vignette:
     mathjax: null
 vignette: >
-  %\VignetteIndexEntry{Redox gradients (2019)}
+  %\VignetteIndexEntry{Carbon oxidation state from metagenomic data for redox gradients (2019)}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---

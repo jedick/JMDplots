@@ -1,10 +1,10 @@
 ---
-title: "Chemical shaping of bacterial communities by redox potential (2021)"
+title: "Local and global chemical shaping of bacterial communities by redox potential (2021)"
 output: 
   rmarkdown::html_vignette:
     mathjax: null
 vignette: >
-  %\VignetteIndexEntry{Chemical shaping of bacterial communities by redox potential (2021)}
+  %\VignetteIndexEntry{Local and global chemical shaping of bacterial communities by redox potential (2021)}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 bibliography: orp16S.bib
@@ -60,7 +60,7 @@ ZC <- "<i>Z</i><sub>C</sub>"
 
 This vignette runs the code to make the plots from the following paper:
 
-> Dick JM, Meng D. 2021. Local and global chemical shaping of bacterial communities by redox potential.
+> Dick JM, Meng D. 2021. Local and global chemical shaping of bacterial communities by redox potential. Manuscript in preparation.
 >
 > Preprint available at:
 >

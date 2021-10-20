@@ -29,7 +29,7 @@ This vignette runs the code to make selected plots from the following paper:
 
 These plots have been modified from the original figures to make greater use of color.
 
-This vignette was compiled on `r Sys.Date()` with **[JMDplots](https://github.com/jedick/JMDplots)** `r packageDescription("JMDplots")$Version` **[CHNOSZ](http://chnosz.net)** `r packageDescription("CHNOSZ")$Version`.
+This vignette was compiled on `r Sys.Date()` with **[JMDplots](https://github.com/jedick/JMDplots)** `r packageDescription("JMDplots")$Version` and **[CHNOSZ](http://chnosz.net)** `r packageDescription("CHNOSZ")$Version`.
 
 ```{r JMDplots, message = FALSE, results = "hide"}
 library(JMDplots)

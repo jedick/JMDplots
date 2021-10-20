@@ -1,10 +1,10 @@
 ---
-title: "Geobiochemistry of evolution and development (2021)"
+title: "Thermodynamic model for water activity and redox potential in evolution and development (2021)"
 output: 
   rmarkdown::html_vignette:
     mathjax: null
 vignette: >
-  %\VignetteIndexEntry{Geobiochemistry of evolution and development (2021)}
+  %\VignetteIndexEntry{Thermodynamic model for water activity and redox potential in evolution and development (2021)}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 bibliography: JMDplots.bib

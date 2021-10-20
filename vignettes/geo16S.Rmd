@@ -1,10 +1,10 @@
 ---
-title: "Geobiochemistry of microbial proteomes and communities (2021)"
+title: "Chemical metrics of estimated microbial community proteomes from 16S rRNA and RefSeq data (2021)"
 output: 
   rmarkdown::html_vignette:
     mathjax: null
 vignette: >
-  %\VignetteIndexEntry{Geobiochemistry of microbial proteomes and communities (2021)}
+  %\VignetteIndexEntry{Chemical metrics of estimated microbial community proteomes from 16S rRNA and RefSeq data (2021)}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 bibliography: JMDplots.bib
@@ -63,7 +63,7 @@ ZC <- "<i>Z</i><sub>C</sub>"
 
 This vignette runs the code to make the plots from the following paper:
 
-> Dick JM, Tan J. 2021. Genomic evidence for chemical convergence between redox conditions and microbial community composition. Submitted manuscript.
+> Dick JM, Tan J. 2021. Chemical links between redox conditions and microbial community composition deduced from 16S rRNA and reference protein sequences. Submitted manuscript.
 >
 > Preprint available at:
 >
@@ -78,7 +78,7 @@ The plots in this vignette are modified from the preprint in the following ways:
 * Added Fig. 6 and Fig. S1.
 -->
 
-This vignette was compiled on `r Sys.Date()` with **[JMDplots](https://github.com/jedick/JMDplots)** `r packageDescription("JMDplots")$Version` and **[CHNOSZ](http://chnosz.net)** `r packageDescription("CHNOSZ")$Version`.
+This vignette was compiled on `r Sys.Date()` with **[JMDplots](https://github.com/jedick/JMDplots)** `r packageDescription("JMDplots")$Version`.
 
 ```{r library, message = FALSE, results = "hide"}
 library(JMDplots)
@@ -149,10 +149,10 @@ geo16S_S1()
 This code shows how the Source Data files for each of the figures is saved.
 The `dat*` objects are created by running the code blocks above, but the following code block is not run in this vignette in order to avoid cluttering the working directory.
 ```{r SourceData, eval = FALSE}
-write.csv(dat1, "Source_Data_1.csv", row.names = FALSE, quote = FALSE)
-write.csv(dat2, "Source_Data_2.csv", row.names = FALSE, quote = FALSE)
-write.csv(dat3, "Source_Data_3.csv", row.names = FALSE, quote = FALSE)
-write.csv(dat4, "Source_Data_4.csv", row.names = FALSE, quote = FALSE)
+write.csv(dat1, "Dataset_S1.csv", row.names = FALSE, quote = FALSE)
+write.csv(dat2, "Dataset_S2.csv", row.names = FALSE, quote = FALSE)
+write.csv(dat3, "Dataset_S3.csv", row.names = FALSE, quote = FALSE)
+write.csv(dat4, "Dataset_S4.csv", row.names = FALSE, quote = FALSE)
 ```
 
 ## References
