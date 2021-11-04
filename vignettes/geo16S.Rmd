@@ -140,6 +140,8 @@ geo16S6()
 geo16S7()
 ```
 
+**Data sources:** Guerrero Negro mat metagenome [@KRH+08], 16S [@HCW+13]; Bison Pool metagenome [@HRM+11], 16S [@SMS+12]; Eastern Tropical North Pacific metagenome [@GKG+15], 16S [@GBL+15]; Mono Lake metatranscriptome [@EH17], 16S [@EH18].
+
 ## Abundance and `r ZC` of classes in oxidizing and reducing conditions (Figure S1)
 ```{r geo16S_S1, message = FALSE, results = "hide", out.width='100%', fig.width = 9, fig.height = 12, pngquant = pngquant}
 geo16S_S1()

@@ -62,9 +62,7 @@ This vignette runs the code to make the plots from the following paper:
 
 > Dick JM, Meng D. 2021. Local and global chemical shaping of bacterial communities by redox potential. Manuscript in preparation.
 >
-> Preprint available at:
->
-> Dick JM, Meng D. 2021. Local and global chemical shaping of bacterial communities by redox potential. bioRxiv. doi: [10.1101/2021.10.12.464155](https://doi.org/10.1101/2021.10.12.464155)
+> Preprint available at bioRxiv. doi: [10.1101/2021.10.12.464155](https://doi.org/10.1101/2021.10.12.464155)
 
 This vignette was compiled on `r Sys.Date()` with **[JMDplots](https://github.com/jedick/JMDplots)** `r packageDescription("JMDplots")$Version`.
 
@@ -106,7 +104,7 @@ orp16S4()
 orp16S5()
 ```
 
-## Distinctions in carbon oxidation state estimated for different hot springs, and global fits for all environments. (Figure 6)
+## Distinctions in carbon oxidation state estimated for different hot springs, and global fits for all environments (Figure 6)
 ```{r orp16S6, message = FALSE, results = "hide", out.width='100%', fig.width = 8, fig.height = 6, pngquant = pngquant}
 orp16S6()
 ```
