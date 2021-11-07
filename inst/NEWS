@@ -1,5 +1,7 @@
-CHANGES IN JMDplots 1.2.8-5
+CHANGES IN JMDplots 1.2.9
 ---------------------------
+
+- 20211107 Correct values in extdata/mjenergy/SC10_Endeavour.csv.
 
 - 20211003 Add plots for orp16S paper.
 

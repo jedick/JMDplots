@@ -68,7 +68,7 @@ mjenergy1 <- function(pdf = FALSE) {
   # Add labels
   text(175, 250, "Methanogenesis", font = 2)
   text(250, 110, "Rainbow", font = 2)
-  text(250, -30, "Endeavour", font = 2)
+  text(250, -45, "Endeavour", font = 2)
   label.figure("a", cex = 1.5)
 
   # Plots (b) and (c): Amino acids
@@ -113,7 +113,7 @@ mjenergy1 <- function(pdf = FALSE) {
       label.figure("b", cex = 1.5)
     }
     if(vent == "Endeavour") {
-      text(30, -100, "Amino acids\nEndeavour", font = 2)
+      text(40, -100, "Amino acids\nEndeavour", font = 2)
       label.figure("c", cex = 1.5)
     }
   }
@@ -213,7 +213,7 @@ mjenergy3 <- function(pdf = FALSE, write.csv = FALSE) {
 
     # First plot: whole proteins
     if(vent == "Rainbow") ylim <- c(-50, 150)
-    if(vent == "Endeavour") ylim <- c(-200, 0)
+    if(vent == "Endeavour") ylim <- c(-300, 0)
     # Use red for lower quartile, black for interquartile range, and blue for highest quartile
     col <- rep(1, length(ZC))
     col[ZC < quartiles[1]] <- 2
@@ -239,11 +239,11 @@ mjenergy3 <- function(pdf = FALSE, write.csv = FALSE) {
     diagram(a, balance = pl, xlim = c(0, 200), ylim = ylim, ylab = ylab, lty = 1, lwd = 0.2, names = NA, col = col)
     abline(h = 0, lty = 3, lwd = 2, col = "gray40")
     if(vent == "Rainbow") {
-      text(125, 125, "Rainbow", font = 2)
+      text(100, 125, "Rainbow", font = 2, adj = 0)
       label.figure("b", cex = 1.5)
     }
     if(vent == "Endeavour") {
-      text(125, -25, "Endeavour", font = 2)
+      text(100, -40, "Endeavour", font = 2, adj = 0)
       label.figure("d", cex = 1.5)
     }
 
