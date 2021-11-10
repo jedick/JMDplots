@@ -1,5 +1,10 @@
-CHANGES IN JMDplots 1.2.9
+CHANGES IN JMDplots 1.2.9-1
 ---------------------------
+
+- 20211110 Rename chnszten to chnosz10.
+
+CHANGES IN JMDplots 1.2.9
+-------------------------
 
 - 20211107 Correct values in extdata/mjenergy/SC10_Endeavour.csv.
 

@@ -1,4 +1,4 @@
-# project/filename: chnszten/plot.R
+# project/filename: chnosz10/plot.R
 # Code for the paper "CHNOSZ: Thermodynamic calculations and diagrams for geochemistry"
 # By: Jeffrey M. Dick
 # Available at: https://doi.org/10.5281/zenodo.2648521
@@ -11,15 +11,15 @@
 
 # This code depends on CHNOSZ version 1.3.2 (https://cran.r-project.org/package=CHNOSZ)
 # and was run under R version 3.6.0 on Linux x64 (https://www.r-project.org/).
-# Additional system tools may be needed to support the cairo_pdf device, used in chnszten7() and chnsztenS7().
-# chnszten1() requires CRAN packages timevis and shiny.
+# Additional system tools may be needed to support the cairo_pdf device, used in chnosz107() and chnosz10S7().
+# chnosz101() requires CRAN packages timevis and shiny.
 
 ##########################
 ### Figure 1: timeline ###
 ##########################
 
 # make timeline of CHNOSZ development 20170920 / updated 20190417
-chnszten1 <- function() {
+chnosz101 <- function() {
   # uses timevis package
   # timeline data
   timedata <- data.frame(matrix(c(
@@ -84,8 +84,8 @@ chnszten1 <- function() {
 ### Figure 4: mosaic diagram ###
 ################################
 
-chnszten4 <- function(pdf = FALSE) {
-  if(pdf) pdf("chnszten4.pdf", width=8, height=3)
+chnosz104 <- function(pdf = FALSE) {
+  if(pdf) pdf("chnosz104.pdf", width=8, height=3)
   par(mfrow=c(1, 2), cex=1.3)
   mar <- c(2.5, 3, 1, 1)
   mgp <- c(1.5, 0.3, 0)
@@ -116,7 +116,7 @@ chnszten4 <- function(pdf = FALSE) {
   label.figure("B", cex=1.3)
   if(pdf) {
     dev.off()
-    addexif("chnszten4", "Mosaic Eh-pH diagram for the Cu-S-Cl-O-H system", "https://doi.org/10.3389/feart.2019.00180")
+    addexif("chnosz104", "Mosaic Eh-pH diagram for the Cu-S-Cl-O-H system", "https://doi.org/10.3389/feart.2019.00180")
   }
 }
 
@@ -124,8 +124,8 @@ chnszten4 <- function(pdf = FALSE) {
 ### Figure 5: solubility diagram ###
 ####################################
 
-chnszten5 <- function(pdf = FALSE) {
-  if(pdf) pdf("chnszten5.pdf", width=4, height=3)
+chnosz105 <- function(pdf = FALSE) {
+  if(pdf) pdf("chnosz105.pdf", width=4, height=3)
   mar <- c(2.5, 3, 1, 1)
   mgp <- c(1.5, 0.3, 0)
   add.OBIGT("SLOP98")
@@ -169,7 +169,7 @@ chnszten5 <- function(pdf = FALSE) {
   text(6.55, -3, "equilibrium pH", srt = 90, cex = 0.7, col = "gray50")
   if(pdf) {
     dev.off()
-    addexif("chnszten5", "Corundum solubility diagram", "https://doi.org/10.3389/feart.2019.00180")
+    addexif("chnosz105", "Corundum solubility diagram", "https://doi.org/10.3389/feart.2019.00180")
   }
 }
 
@@ -177,8 +177,8 @@ chnszten5 <- function(pdf = FALSE) {
 ### Figure 6: DEW model ###
 ###########################
 
-chnszten6 <- function(pdf = FALSE) {
-  if(pdf) pdf("chnszten6.pdf", width=5, height=5)
+chnosz106 <- function(pdf = FALSE) {
+  if(pdf) pdf("chnosz106.pdf", width=5, height=5)
   par(cex = 1.2)
   # conditions:
   # T = 600, 700, 800, 900, 1000 degC
@@ -235,7 +235,7 @@ chnszten6 <- function(pdf = FALSE) {
   reset()
   if(pdf) {
     dev.off()
-    addexif("chnszten6", "DEW model (based on Fig. 3 of Sverjensky et al., 2014)", "https://doi.org/10.3389/feart.2019.00180 and https://doi.org/10.1038/ngeo2291")
+    addexif("chnosz106", "DEW model (based on Fig. 3 of Sverjensky et al., 2014)", "https://doi.org/10.3389/feart.2019.00180 and https://doi.org/10.1038/ngeo2291")
   }
 }
 
@@ -244,9 +244,9 @@ chnszten6 <- function(pdf = FALSE) {
 #####################################
 
 # reactions of Al-bearing minerals
-chnszten7 <- function(pdf = FALSE) {
+chnosz107 <- function(pdf = FALSE) {
   # use cairo_pdf for better handling of symbols (e.g. reaction double arrow)
-  if(pdf) cairo_pdf("chnszten7.pdf", width = 7.2, height = 7.2)
+  if(pdf) cairo_pdf("chnosz107.pdf", width = 7.2, height = 7.2)
   # the code for the figure is very close to demo("aluminum"),
   # but the line color for SUPCRT92 in the legend of (A) needs to be changed to blue,
   # so we include the entire code here 20190607
@@ -414,7 +414,7 @@ chnszten7 <- function(pdf = FALSE) {
   par(xpd = FALSE)
   if(pdf) {
     dev.off()
-    addexif("chnszten7", "Thermodynamic properties of reactions involving Al-bearing minerals", "https://doi.org/10.3389/feart.2019.00180")
+    addexif("chnosz107", "Thermodynamic properties of reactions involving Al-bearing minerals", "https://doi.org/10.3389/feart.2019.00180")
   }
 }
 
@@ -423,7 +423,7 @@ chnszten7 <- function(pdf = FALSE) {
 ############################
 
 # calculations and plot for comparing the logK and maximum affinity methods 20170927
-chnsztenS1 <- function(pdf = FALSE) {
+chnosz10S1 <- function(pdf = FALSE) {
   # calcualate logK of reactions and logfO2 for activities = 10^-3
   # CO2 - CH4 ... use "oxygen" for the gas!
   K_1 <- suppressMessages(subcrt(c("H2O", "CO2", "CH4", "oxygen"), c(-2, -1, 1, 2), T=25, P=1)$out$logK)
@@ -459,7 +459,7 @@ chnsztenS1 <- function(pdf = FALSE) {
   # divide acetic acid affinity by 2
   a$values[[2]] <- a$values[[2]] / 2
   # set up plot
-  if(pdf) pdf("chnsztenS1.pdf", width=6.5, height=5)
+  if(pdf) pdf("chnosz10S1.pdf", width=6.5, height=5)
   par(mar=c(3.5, 3.5, 0.5, 0.5), mgp=c(2.5, 1, 0), cex=1.2)
   plot(range(a$vals[[1]]), range(unlist(a$values)), type="n", xlab=axis.label("O2"), ylab="")
   mtext(expression(italic(A) / italic(n)[CO[2]]), side=2, line=2, cex=1.2)
@@ -487,13 +487,13 @@ chnsztenS1 <- function(pdf = FALSE) {
   legend(-71.8, 12, legend=c(expression(italic(T)==25~degree*C), expression(italic(P)==1~bar)), bty="n", cex=0.9)
   if(pdf) {
     dev.off()
-    addexif("chnsztenS1", "Comparison of logK and maximum affinity methods", "https://doi.org/10.3389/feart.2019.00180")
+    addexif("chnosz10S1", "Comparison of logK and maximum affinity methods", "https://doi.org/10.3389/feart.2019.00180")
   }
 }
 
 # Figure4B modified to reproduce Fig. 5A of Caporuscio et al. (2017)
-chnsztenS2 <- function(pdf = FALSE) {
-  if(pdf) pdf("chnsztenS2.pdf", width=4, height=4)
+chnosz10S2 <- function(pdf = FALSE) {
+  if(pdf) pdf("chnosz10S2.pdf", width=4, height=4)
   mar <- c(2.5, 3, 1, 1)
   mgp <- c(1.5, 0.3, 0)
   add.OBIGT("SLOP98")
@@ -514,14 +514,14 @@ chnsztenS2 <- function(pdf = FALSE) {
   reset()
   if(pdf) {
     dev.off()
-    addexif("chnsztenS2", "Eh-pH diagram like Fig. 5A of Caporuscio et al. (2017)", "https://doi.org/10.3389/feart.2019.00180 and https://doi.org/10.1016/j.jnucmat.2016.12.036")
+    addexif("chnosz10S2", "Eh-pH diagram like Fig. 5A of Caporuscio et al. (2017)", "https://doi.org/10.3389/feart.2019.00180 and https://doi.org/10.1016/j.jnucmat.2016.12.036")
   }
 }
 
 # calculate Gibbs energy of transformation for an assemblage of n-alkanes 20190604
-chnsztenS3 <- function(pdf = FALSE) {
+chnosz10S3 <- function(pdf = FALSE) {
   # set up plot
-  if(pdf) pdf("chnsztenS3.pdf", width = 7, height = 4)
+  if(pdf) pdf("chnosz10S3.pdf", width = 7, height = 4)
   par(mfrow = c(1, 2), mar = c(3, 4, 1, 1))
   ## transforming an equilibrium assemblage of n-alkanes
   basis(c("CH4", "H2"), c("gas", "gas"))
@@ -555,14 +555,14 @@ chnsztenS3 <- function(pdf = FALSE) {
   label.figure("B", cex = 1.5)
   if(pdf) {
     dev.off()
-    addexif("chnsztenS3", "Gibbs energy of transformation for an assemblage of n-alkanes", "https://doi.org/10.3389/feart.2019.00180")
+    addexif("chnosz10S3", "Gibbs energy of transformation for an assemblage of n-alkanes", "https://doi.org/10.3389/feart.2019.00180")
   }
 }
 
 # findit() calculations for sulfur species 20190604
-chnsztenS4 <- function(pdf = FALSE) {
+chnosz10S4 <- function(pdf = FALSE) {
   # set up plot
-  if(pdf) pdf("chnsztenS4.pdf", width = 8, height = 8)
+  if(pdf) pdf("chnosz10S4.pdf", width = 8, height = 8)
   par(mfrow = c(2, 2))
   # the ranges of the parameters we will optimize
   vars <- list(O2 = c(-80, -40), pH = c(4, 14), T = c(0, 200))
@@ -613,23 +613,23 @@ chnsztenS4 <- function(pdf = FALSE) {
   par(opar)
   if(pdf) {
     dev.off()
-    addexif("chnsztenS4", "findit() calculations for sulfur species", "https://doi.org/10.3389/feart.2019.00180")
+    addexif("chnosz10S4", "findit() calculations for sulfur species", "https://doi.org/10.3389/feart.2019.00180")
   }
 }
 
 # Debye-Hückel extended term parameter extrapolated from plots of Manning et al., 2013
-chnsztenS5 <- function(pdf = FALSE) {
-  if(pdf) pdf("chnsztenS5.pdf", width = 6, height = 6)
+chnosz10S5 <- function(pdf = FALSE) {
+  if(pdf) pdf("chnosz10S5.pdf", width = 6, height = 6)
   bgamma(showsplines = "T")
   if(pdf) {
     dev.off()
-    addexif("chnsztenS5", "Debye-H\u00FCckel extended term parameter extrapolated from plots of Manning et al. (2013)", "https://doi.org/10.3389/feart.2019.00180 and https://doi.org/10.2138/rmg.2013.75.5")
+    addexif("chnosz10S5", "Debye-H\u00FCckel extended term parameter extrapolated from plots of Manning et al. (2013)", "https://doi.org/10.3389/feart.2019.00180 and https://doi.org/10.2138/rmg.2013.75.5")
   }
 }
 
 # Figure 6 modified to exclude DEW data for acetate
-chnsztenS6A <- function(pdf = FALSE) {
-  if(pdf) pdf("chnsztenS6A.pdf", width=5, height=5)
+chnosz10S6A <- function(pdf = FALSE) {
+  if(pdf) pdf("chnosz10S6A.pdf", width=5, height=5)
   # conditions:
   # T = 600, 700, 800, 900, 1000 degC
   # P = 5.0GPa (50000 bar)
@@ -710,13 +710,13 @@ chnsztenS6A <- function(pdf = FALSE) {
   reset()
   if(pdf) {
     dev.off()
-    addexif("chnsztenS6A", "Figure 6 modified to exclude DEW data for acetate", "https://doi.org/10.3389/feart.2019.00180")
+    addexif("chnosz10S6A", "Figure 6 modified to exclude DEW data for acetate", "https://doi.org/10.3389/feart.2019.00180")
   }
 }
 
 # Figure S6A modified to use default bgamma equation (non-zero extended term parameter extrapolated from Manning et al., 2013)
-chnsztenS6B <- function(pdf = FALSE) {
-  if(pdf) pdf("chnsztenS6B.pdf", width=5, height=5)
+chnosz10S6B <- function(pdf = FALSE) {
+  if(pdf) pdf("chnosz10S6B.pdf", width=5, height=5)
   # conditions:
   # T = 600, 700, 800, 900, 1000 degC
   # P = 5.0GPa (50000 bar)
@@ -777,24 +777,24 @@ chnsztenS6B <- function(pdf = FALSE) {
   reset()
   if(pdf) {
     dev.off()
-    addexif("chnsztenS6B", "Figure S6A modified to use default bgamma equation", "https://doi.org/10.3389/feart.2019.00180")
+    addexif("chnosz10S6B", "Figure S6A modified to use default bgamma equation", "https://doi.org/10.3389/feart.2019.00180")
   }
 }
 
 # logK of NaCl dissociation
-chnsztenS7 <- function(pdf = FALSE) {
+chnosz10S7 <- function(pdf = FALSE) {
   # use cairo_pdf for better handling of symbols (e.g. reaction double arrow)
-  if(pdf) cairo_pdf("chnsztenS7.pdf", width = 7, height = 7)
+  if(pdf) cairo_pdf("chnosz10S7.pdf", width = 7, height = 7)
   demo("NaCl", ask = FALSE, echo = FALSE)
   if(pdf) {
     dev.off()
-    addexif("chnsztenS7", "logK of NaCl dissociation", "https://doi.org/10.3389/feart.2019.00180")
+    addexif("chnosz10S7", "logK of NaCl dissociation", "https://doi.org/10.3389/feart.2019.00180")
   }
 }
 
 # calcite solubility: comparison with Manning et al., 2013
-chnsztenS8 <- function(pdf = FALSE) {
-  if(pdf) pdf("chnsztenS8.pdf", width=7, height=7)
+chnosz10S8 <- function(pdf = FALSE) {
+  if(pdf) pdf("chnosz10S8.pdf", width=7, height=7)
   par(mfrow = c(1, 2))
   ## set pH range and resolution, constant temperature and ionic strength
   pH <- c(0, 14)
@@ -829,16 +829,16 @@ chnsztenS8 <- function(pdf = FALSE) {
   label.figure("B", cex = 1.7)
   if(pdf) {
     dev.off()
-    addexif("chnsztenS8", "Calcite solubility: comparison with Manning et al. (2013)", "https://doi.org/10.3389/feart.2019.00180 and https://doi.org/10.2138/rmg.2013.75.5")
+    addexif("chnosz10S8", "Calcite solubility: comparison with Manning et al. (2013)", "https://doi.org/10.3389/feart.2019.00180 and https://doi.org/10.2138/rmg.2013.75.5")
   }
 }
 
 # compare gold solubility in HCh and CHNOSZ - hematite-magnetite buffer
-chnsztenS9 <- function(pdf = FALSE) {
+chnosz10S9 <- function(pdf = FALSE) {
   # use Helgeson et al., 1978 minerals here
   add.OBIGT("SUPCRT92")
   # set up plot
-  if(pdf) pdf("chnsztenS9.pdf", width = 9, height = 7)
+  if(pdf) pdf("chnosz10S9.pdf", width = 9, height = 7)
   par(mfrow = c(2, 2))
   # log(m_Au) from Fig. 2A Williams-Jones et al., 2009 (doi:10.2113/gselements.5.5.281)
   WBM09_Fig2A <- data.frame(
@@ -985,16 +985,16 @@ chnsztenS9 <- function(pdf = FALSE) {
   OBIGT()
   if(pdf) {
     dev.off()
-    addexif("chnsztenS9", "Compare gold solubility in HCh and CHNOSZ: hematite-magnetite buffer", "https://doi.org/10.3389/feart.2019.00180")
+    addexif("chnosz10S9", "Compare gold solubility in HCh and CHNOSZ: hematite-magnetite buffer", "https://doi.org/10.3389/feart.2019.00180")
   }
 }
 
 # compare gold solubility in HCh and CHNOSZ - pyrite-pyrrhotite-magnetite buffer
-chnsztenS10 <- function(pdf = FALSE) {
+chnosz10S10 <- function(pdf = FALSE) {
   # use Helgeson et al., 1978 minerals here
   add.OBIGT("SUPCRT92")
   # set up plot
-  if(pdf) pdf("chnsztenS10.pdf", width = 9, height = 7)
+  if(pdf) pdf("chnosz10S10.pdf", width = 9, height = 7)
   par(mfrow = c(2, 2))
   # log(m_Au) from Fig. 2B Williams-Jones et al., 2009 (doi:10.2113/gselements.5.5.281)
   WBM09_Fig2B <- data.frame(
@@ -1130,7 +1130,7 @@ chnsztenS10 <- function(pdf = FALSE) {
   OBIGT()
   if(pdf) {
     dev.off()
-    addexif("chnsztenS10", "Compare gold solubility in HCh and CHNOSZ: pyrite-pyrrhotite-magnetite buffer", "https://doi.org/10.3389/feart.2019.00180")
+    addexif("chnosz10S10", "Compare gold solubility in HCh and CHNOSZ: pyrite-pyrrhotite-magnetite buffer", "https://doi.org/10.3389/feart.2019.00180")
   }
 }
 
@@ -1138,7 +1138,7 @@ chnsztenS10 <- function(pdf = FALSE) {
 ### UNEXPORTED FUNCTIONS ###
 ############################
 
-## Function used in chnsztenS9 and chnsztenS10
+## Function used in chnosz10S9 and chnosz10S10
 # estimate the Cl- molality and ionic strength for a hypothetical 
 # NaCl solution with total chloride equal to specified NaCl + KCl solution,
 # then estimate the molality of K+ in that solution 20181109
@@ -1151,7 +1151,7 @@ chloride <- function(T, P, m_NaCl, m_KCl) {
   list(IS = NaCl$IS, m_Cl = NaCl$m_Cl, m_K = m_K)
 }
 
-## Function used in chnsztenS9 and chnsztenS10
+## Function used in chnosz10S9 and chnosz10S10
 # convert log(ppm) to log(m) 20190418
 logppm2logm <- function(logppm) {
   ppm <- 10^logppm

@@ -19,7 +19,7 @@ Please refer to the supporting information of the papers for the original script
     \item \code{\link{evdevH2O}} - Redox potential and water loss from proteins in evolution and development (Dick, 2021)
     \item \code{\link{canH2O}} - Water as a reactant in the differential expression of proteins in cancer (Dick, 2020)
     \item \code{\link{gradH2O}} - Stoichiometric hydration state of metagenomes in salinity gradients (Dick et al., 2020)
-    \item \code{\link{chnszten}} - CHNOSZ, ten years after first CRAN submission (Dick, 2019)
+    \item \code{\link{chnosz10}} - CHNOSZ, ten years after first CRAN submission (Dick, 2019)
     \item \code{\link{gradox}} - Carbon oxidation state of metagenomes in redox gradients (Dick et al., 2019)
     \item \code{\link{cpcp}} - Potential diagrams for cancer proteomes (Dick, 2016, 2017)
     \item \code{\link{aoscp}} - Average oxidation state of carbon in proteins (Dick, 2014)

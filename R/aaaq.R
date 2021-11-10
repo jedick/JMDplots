@@ -27,7 +27,7 @@ aaaq4 <- function(pdf = FALSE) {
   T <- 0:300
 
   # start the plot
-  if(pdf) pdf(width = 8, height = 6, file = "aaaq4.pdf")
+  if(pdf) pdf(width = 8, height = 6.5, file = "aaaq4.pdf")
   par(cex = 2, mar = c(3, 3, 1, 1), mgp = c(1.8, 0.3, 0), yaxs = "i", xaxs = "i", lwd = 3)
   ylab <- axis.label("T")
   plot(c(0, 13), range(T), xlab = "pH", ylab = ylab, las = 1, tcl = 0, type = "n", xaxt = "n")
@@ -37,7 +37,7 @@ aaaq4 <- function(pdf = FALSE) {
   pK_AABB_minus <- subcrt(c("[AABB-]", "H+", "[AABB]"), c(-1, -1, 1), T = T)$out$logK
 
   # draw filled area for between AABB ionizations
-  polygon(c(pK_AABB_plus, rev(pK_AABB_minus)), c(T, rev(T)), col = "grey")
+  polygon(c(pK_AABB_plus, rev(pK_AABB_minus)), c(T, rev(T)), col = "snow3")
 
   # calculate pKa for sidechains
   pK_AA <- list(
@@ -84,7 +84,7 @@ aaaq4 <- function(pdf = FALSE) {
 
   # add water
   pK_H2O <- subcrt(c("OH-", "H+", "H2O"), c(-1, -1, 1), T = T)$out$logK / 2
-  lines(pK_H2O, T, col = "green2", lwd = 3)
+  lines(pK_H2O, T, col = 4, lwd = 3)
   text(7, 50, expr.species("H2O"), srt = -65, cex = 0.8)
 
   ## add a title

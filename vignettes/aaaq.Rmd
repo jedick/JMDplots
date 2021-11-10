@@ -38,7 +38,7 @@ library(JMDplots)
 ```
 
 ## `r pKa` of sidechain and amino acid backbone groups (Figure 4)
-```{r aaaq4, message = FALSE, fig.align='center', out.width='80%', fig.width = 8, fig.height = 6, pngquant = pngquant}
+```{r aaaq4, message = FALSE, fig.align='center', out.width='80%', fig.width = 8, fig.height = 6.5, pngquant = pngquant}
 aaaq4()
 ```
 

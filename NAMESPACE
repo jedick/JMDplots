@@ -2,10 +2,10 @@
 export(
   # gradox paper 20190928
   "gradox1", "gradox2", "gradoxS1", "gradoxS2", "gradox3", "gradox4", "gradox5",
-  # chnszten paper 20190929
-  "chnszten1", "chnszten4", "chnszten5", "chnszten6", "chnszten7",
-  "chnsztenS1", "chnsztenS2", "chnsztenS3", "chnsztenS4", "chnsztenS5",
-  "chnsztenS6A", "chnsztenS6B", "chnsztenS7", "chnsztenS8", "chnsztenS9", "chnsztenS10",
+  # chnosz10 paper 20190929
+  "chnosz101", "chnosz104", "chnosz105", "chnosz106", "chnosz107",
+  "chnosz10S1", "chnosz10S2", "chnosz10S3", "chnosz10S4", "chnosz10S5",
+  "chnosz10S6A", "chnosz10S6B", "chnosz10S7", "chnosz10S8", "chnosz10S9", "chnosz10S10",
   # gradH2O paper 20190930-20191008, 20191104, 20191117, 20200421, 20200821, 20200826
   "gradH2O0", "gradH2O1", "gradH2O2", "gradH2O3", "gradH2O4",
   "gradH2O5", "gradH2O6", "gradH2O7",
@@ -66,7 +66,7 @@ importFrom("CHNOSZ",
   "ZC", "affinity", "aminoacids", "as.chemical.formula", 
   "basis", "diagram", "info", "label.figure", "makeup",
   "species", "swap.basis", "thermo", "thermo.axis", "mod.OBIGT",
-  # second batch: chnszten
+  # second batch: chnosz10
   "DGtr", "axis.label", "bgamma", "describe.basis", "describe.property",
   "describe.reaction", "equilibrate", "expr.property", "expr.species", "findit",
   "list2array", "mass", "maxdiff", "mod.buffer", "mosaic",
