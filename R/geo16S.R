@@ -500,14 +500,14 @@ geo16S5 <- function(pdf = FALSE) {
   ## Plots C-D: Comparison of different studies on produced water 20210330
 
   # Panel C: Cluff et al., 2014
-  plotmet("CHM+14", title = FALSE)
+  plotmet("CHM+14_injected-49", title = FALSE)
   legend("topright", c("Injected fluids (day 0)", "Produced water (day 49 and after)"),
          pch = c(21, 21), pt.bg = c("white", 2), bg = "white", title = "Marcellus Shale")
   box()
   label.figure("C", cex = 1.5, xfrac = 0.03, font = 2)
 
   # Panel D: Multiple studies
-  studies <- c("CHM+14", "HRR+18", "ZLF+19")
+  studies <- c("CHM+14_injected-49", "HRR+18_injected-130", "ZLF+19_injected-18")
   # Start plot
   plot(c(-0.22, -0.14), c(-0.75, -0.71), type = "n", xlab = cplab$ZC, ylab = cplab$nH2O)
   pch <- 21:25
@@ -563,7 +563,7 @@ geo16S_S1 <- function(pdf = FALSE) {
     "GBL+15", "JHM+16", "MPB+17", "BCA+21",
     "SVH+19", "MZG+20", "HXZ+20",
     "UKD+18.water", "MMA+20_spring",
-    "CHM+14", "HRR+18", "ZLF+19"
+    "CHM+14_injected-49", "HRR+18_injected-130", "ZLF+19_injected-18"
   )
   description <- c(
     "ETNP water", "Lake Fryxell mat", "Manus Basin vents", "Ursu Lake water",
@@ -646,7 +646,7 @@ geo16S6 <- function(pdf = FALSE) {
     "GBL+15", "JHM+16", "MPB+17", "BCA+21",
     "SVH+19", "MZG+20", "HXZ+20",
     "UKD+18.water", "MMA+20_spring",
-    "CHM+14", "HRR+18", "ZLF+19"
+    "CHM+14_injected-49", "HRR+18_injected-130", "ZLF+19_injected-18"
   )
   description <- c(
     "ETNP water", "Lake Fryxell mat", "Manus Basin vents", "Ursu Lake water",

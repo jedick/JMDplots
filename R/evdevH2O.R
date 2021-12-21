@@ -218,7 +218,7 @@ evdevH2O3 <- function(pdf = FALSE) {
   plotfun <- function(PS_source, fig.lab) {
 
     # Read results
-    datadir <- system.file("extdata/evdevH2O", package = "JMDplots")
+    datadir <- system.file("extdata/evdevH2O/MaximAct", package = "JMDplots")
     H2Ofile <- file.path(datadir, paste0(PS_source, "_H2O_Hsa.csv"))
     O2file <- file.path(datadir, paste0(PS_source, "_O2_Hsa.csv"))
     H2O <- read.csv(H2Ofile, as.is = TRUE, check.names = FALSE)
@@ -372,12 +372,12 @@ evdevH2O4 <- function(pdf = FALSE) {
   PS_ZC <- ZCAA(gpa$aa)
   PS_nH2O <- H2OAA(gpa$aa)
   # Biofilm target proteins
-  devodir <- system.file("extdata/devodata", package = "JMDplots")
+  devodir <- system.file("extdata/evdevH2O/devodata", package = "JMDplots")
   biofilm <- read.csv(file.path(devodir, "FOK+21_mean_aa.csv"), as.is = TRUE)
   biofilm_ZC <- ZCAA(biofilm)
   biofilm_nH2O <- H2OAA(biofilm)
   # Fly target proteins
-  devodir <- system.file("extdata/devodata", package = "JMDplots")
+  devodir <- system.file("extdata/evdevH2O/devodata", package = "JMDplots")
   fly <- read.csv(file.path(devodir, "CBS+17_mean_aa.csv"), as.is = TRUE)
   fly_ZC <- ZCAA(fly)
   fly_nH2O <- H2OAA(fly)
@@ -423,7 +423,7 @@ evdevH2O4 <- function(pdf = FALSE) {
   # with background proteins from different organisms  20210712
 
   # Read results
-  datadir <- system.file("extdata/evdevH2O", package = "JMDplots")
+  datadir <- system.file("extdata/evdevH2O/MaximAct", package = "JMDplots")
   PS_source <- "TPPG17"
   H2O_Hsa <- read.csv(file.path(datadir, paste0(PS_source, "_H2O_Hsa.csv")), as.is = TRUE, check.names = FALSE)
   O2_Hsa <- read.csv(file.path(datadir, paste0(PS_source, "_O2_Hsa.csv")), as.is = TRUE, check.names = FALSE)
@@ -509,7 +509,7 @@ evdevH2O5 <- function(pdf = FALSE, boot.R = 99) {
   par(mar = c(4, 4, 1, 1), las = 1, mgp = c(3, 0.8, 0))
 
   # Read the overall amino acid compositions calculated from Futo et al., 2020 data
-  devodir <- system.file("extdata/devodata", package = "JMDplots")
+  devodir <- system.file("extdata/evdevH2O/devodata", package = "JMDplots")
   aa <- read.csv(file.path(devodir, "FOK+21_mean_aa.csv"), as.is = TRUE)
   # Identify rows with transcriptome and proteome data
   isT <- aa$organism == "transcriptome"
@@ -565,7 +565,7 @@ evdevH2O5 <- function(pdf = FALSE, boot.R = 99) {
 
   # Plot D: logaH2O
   par(mgp = c(2.8, 0.8, 0))
-  datadir <- system.file("extdata/evdevH2O", package = "JMDplots")
+  datadir <- system.file("extdata/evdevH2O/MaximAct", package = "JMDplots")
   T_H2O <- read.csv(file.path(datadir, "transcriptome_H2O_Bsu.csv"), as.is = TRUE)[, -1]
   P_H2O <- read.csv(file.path(datadir, "proteome_H2O_Bsu.csv"), as.is = TRUE)[, -1]
   # Get mean values of logaH2O
@@ -651,7 +651,7 @@ evdevH2O6 <- function(pdf = FALSE, boot.R = 99) {
 
   ## Plot B:
   # Read mean amino acid compositions for developmental time points
-  devodir <- system.file("extdata/devodata", package = "JMDplots")
+  devodir <- system.file("extdata/evdevH2O/devodata", package = "JMDplots")
   aa <- read.csv(file.path(devodir, "CBS+17_mean_aa.csv"), as.is = TRUE)
 #  # Plot nH2O for model proteins
 #  plot(H2OAA(aa), type = "b", xaxt = "n", xlab = "Developmental stage", ylab = nH2Olab, cex = 1.5)
@@ -678,7 +678,7 @@ evdevH2O6 <- function(pdf = FALSE, boot.R = 99) {
 
   ## Plot C:
   # Read optimal logaH2O and logfO2 for differentially expressed proteins of Fabre et al., 2019
-  datadir <- system.file("extdata/evdevH2O", package = "JMDplots")
+  datadir <- system.file("extdata/evdevH2O/MaximAct", package = "JMDplots")
   H2O_embryo <- read.csv(file.path(datadir, "fly_embryo_H2O_Dme.csv"), as.is = TRUE)
   O2_embryo <- read.csv(file.path(datadir, "fly_embryo_O2_Dme.csv"), as.is = TRUE)
   H2O_adult <- read.csv(file.path(datadir, "fly_adult_H2O_Dme.csv"), as.is = TRUE)
@@ -798,7 +798,7 @@ runMaximAct <- function(dataset = "TPPG17", seed = 1:100, nbackground = 2000, re
   } else if(dataset %in% c("transcriptome", "proteome")) {
     xlab <- paste("Biofilm", dataset)
     # Read amino acid compositions of overall proteins in each biofilm stage
-    devodir <- system.file("extdata/devodata", package = "JMDplots")
+    devodir <- system.file("extdata/evdevH2O/devodata", package = "JMDplots")
     aa <- read.csv(file.path(devodir, "FOK+21_mean_aa.csv"), as.is = TRUE)
     AA_target <- aa[aa$organism == dataset, ]
     O2 <- c(-72, -65)
@@ -819,7 +819,7 @@ runMaximAct <- function(dataset = "TPPG17", seed = 1:100, nbackground = 2000, re
     if(dataset == "fly_adult") AA_target <- aain[pd$up2, ]
   } else if(dataset == "fly_development") {
     # Read mean amino acid compositions for developmental proteome of Casas-Vila et al., 2017 20210403
-    devodir <- system.file("extdata/devodata", package = "JMDplots")
+    devodir <- system.file("extdata/evdevH2O/devodata", package = "JMDplots")
     AA_target <- read.csv(file.path(devodir, "CBS+17_mean_aa.csv"), as.is = TRUE)
     xlab <- "time point"
     O2 <- c(-72, -68)
@@ -942,6 +942,12 @@ plotphylo <- function(var = "ZC", PS_source = "TPPG17", memo = NULL, xlab = "PS"
       # remove entries that have ENSP instead of UniProt IDs
       dat <- dat[!grepl("^ENSP", dat$Entry), ]
     }
+    if(PS_source == "FOK+21") {
+      dat <- read.csv(system.file("extdata/evdevH2O/phylostrata/FOK+21.csv.xz", package = "JMDplots"), as.is = TRUE)
+      colnames(dat)[c(1,3)] <- c("Entry", "Phylostrata")
+      # remove entries that have ENSP instead of UniProt IDs
+      dat <- dat[!grepl("^ENSP", dat$Entry), ]
+    }
     # Update old UniProt IDs
     dat <- check_IDs(dat, "Entry")
     # Remove genes with no UniProt mapping 20210718
@@ -953,12 +959,12 @@ plotphylo <- function(var = "ZC", PS_source = "TPPG17", memo = NULL, xlab = "PS"
     pcomp <- memo$pcomp
   }
   # Use AA functions (H2OAA, ZCAA) because protcomp no longer returns these values 20201216
-  X <- switch(var, ZC = ZCAA(pcomp$aa), nH2O = H2OAA(pcomp$aa), nAA = protein.length(pcomp$aa), n = NA)
+  X <- switch(var, ZC = ZCAA(pcomp$aa), nH2O = H2OAA(pcomp$aa), nAA = protein.length(pcomp$aa), n = NA, Cost = CostAA(pcomp$aa))
   # Get mean chemical metrics for each phylostratum
   PS <- sort(unique(dat$Phylostrata))
   high.X <- low.X <- cum.X <- mean.X <- numeric()
   for(p in PS) {
-    if(var %in% c("ZC", "nH2O", "nAA")) {
+    if(var %in% c("ZC", "nH2O", "nAA", "Cost")) {
       # Point mean
       this.X <- X[dat$Phylostrata == p]
       mean.X <- c(mean.X, mean(this.X))
@@ -978,8 +984,8 @@ plotphylo <- function(var = "ZC", PS_source = "TPPG17", memo = NULL, xlab = "PS"
       cum.X <- c(cum.X, sum(dat$Phylostrata <= p))
     }
   }
-  ylab <- switch(var, ZC = ZClab, nH2O = nH2Olab, nAA = quote("Protein length or"~italic(n)/10))
-  if(var %in% c("ZC", "nH2O", "nAA")) {
+  ylab <- switch(var, ZC = ZClab, nH2O = nH2Olab, nAA = quote("Protein length or"~italic(n)/10), Cost = "Cost")
+  if(var %in% c("ZC", "nH2O", "nAA", "Cost")) {
     ylim <- range(c(mean.X, low.X, high.X))
     # Extend the ylim to zero for protein length and number plot 20210713
     if(var == "nAA") ylim <- range(0, ylim)
@@ -1001,6 +1007,22 @@ plotphylo <- function(var = "ZC", PS_source = "TPPG17", memo = NULL, xlab = "PS"
   invisible(list(dat = dat, pcomp = pcomp))
 }
 
+# Calculate metabolic cost from amino acid compositions of proteins 20211220
+CostAA <- function(AAcomp) {
+  # Amino acid cost from Akashi and Gojobori (2002)
+  # doi:10.1073/pnas.062526999
+  Cost <- c(Ala = 11.7, Cys = 24.7, Asp = 12.7, Glu = 15.3, Phe = 52.0,
+            Gly = 11.7, His = 38.3, Ile = 32.3, Lys = 30.3, Leu = 27.3,
+            Met = 34.3, Asn = 14.7, Pro = 20.3, Gln = 16.3, Arg = 27.3,
+            Ser = 11.7, Thr = 18.7, Val = 23.3, Trp = 74.3, Tyr = 50.0)
+  # find columns with names for the amino acids
+  isAA <- colnames(AAcomp) %in% names(Cost)
+  iAA <- match(colnames(AAcomp)[isAA], names(Cost))
+  # calculate total of cost values for each protein
+  sumCost <- rowSums(t(t(AAcomp[, isAA]) * Cost[iAA]))
+  # divide by length of proteins to get average
+  sumCost / rowSums(AAcomp[, isAA])
+}
 
 ### Modification of filled.contour.R by Jeffrey M. Dick 20201219
 ### - Add border = NA to rect()

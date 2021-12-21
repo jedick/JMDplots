@@ -6,7 +6,7 @@
 getCBS17 <- function(metric = "H2O", boot.R = 99) {
 
   # Read abundance data
-  datadir <- system.file("extdata/devodata", package = "JMDplots")
+  datadir <- system.file("extdata/evdevH2O/devodata", package = "JMDplots")
   dat <- read.csv(file.path(datadir, "CBS+17_abundance.csv.xz"))
   # Read amino acid compositions of proteins
   aa <- read.csv(file.path(datadir, "CBS+17_aa.csv.xz"))
@@ -56,7 +56,7 @@ getCBS17 <- function(metric = "H2O", boot.R = 99) {
 getFOK21 <- function(metric = "H2O", boot.R = 99) {
 
   # Read abundance data
-  datadir <- system.file("extdata/devodata", package = "JMDplots")
+  datadir <- system.file("extdata/evdevH2O/devodata", package = "JMDplots")
   dat <- read.csv(file.path(datadir, "FOK+21_abundance.csv.xz"))
   # Read amino acid compositions of proteins
   aa <- read.csv(file.path(datadir, "FOK+21_aa.csv.xz"))

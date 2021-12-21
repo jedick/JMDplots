@@ -152,20 +152,20 @@ getmdat <- function(study, dropNA = TRUE) {
     pch <- ifelse(mdat$sDII >= 20, 21, 1)
     col <- ifelse(mdat$sDII >= 20, 2, 1)
   }
-  if(study == "CHM+14") {
+  if(grepl("CHM+14", study, fixed = TRUE)) {
     # Injected fluids and later produced water
-    mdat <- mdat[mdat$day == 0 | mdat$day >= 49, ]
+    if(study == "CHM+14_injected-49") mdat <- mdat[mdat$day == 0 | mdat$day >= 49, ]
     pch <- ifelse(mdat$day >= 49, 21, 1)
     col <- ifelse(mdat$day >= 49, 2, 1)
   }
-  if(study == "HRR+18") {
-    mdat <- mdat[mdat$day %in% c(0, 130, 220), ]
+  if(grepl("HRR+18", study, fixed = TRUE)) {
+    if(study == "HRR+18_injected-130") mdat <- mdat[mdat$day %in% c(0, 130, 220), ]
     pch <- ifelse(mdat$day > 10, 21, 1)
     col <- ifelse(mdat$day > 10, 2, 1)
   }
-  if(study == "ZLF+19") {
+  if(grepl("ZLF+19", study, fixed = TRUE)) {
     # Source water and flowback day 18
-    mdat <- mdat[mdat$day %in% c(-1, 18), ]
+    if(study == "ZLF+19_injected-18") mdat <- mdat[mdat$day %in% c(-1, 18), ]
     pch <- ifelse(mdat$day >= 1, 21, 1)
     col <- ifelse(mdat$day >= 1, 2, 1)
   }
@@ -522,6 +522,11 @@ getmap <- function(study, RDP = NULL, lineage = NULL, mincount = 200) {
     "family_Family II" = "family_Synechococcaceae",
     # 20210609 Verrucomicrobia
     "genus_Subdivision3_genera_incertae_sedis" = "family_Verrucomicrobia subdivision 3",
+    # 20211215 Clostridia
+    # Eubacteriales is used in NCBI; is a synonym for Clostridiales (https://lpsn.dsmz.de/order/eubacteriales)
+    "order_Clostridiales" = "order_Eubacteriales",
+    # Oscillospiraceae is used in NCBI; is a synonym for Ruminococcaceae (https://lpsn.dsmz.de/order/eubacteriales)
+    "family_Ruminococcaceae" = "family_Oscillospiraceae",
 
     ## NOT USED
 

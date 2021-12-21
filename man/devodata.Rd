@@ -23,7 +23,7 @@ Data and chemical metrics for fruit fly and biofilm developmental proteomes.
 \code{getFOK21} does the same for the \emph{Bacillus subtilis} developmental proteome (Futo et al., 2021).
 }
 
-\section{Files in extdata/devodata}{
+\section{Files in extdata/evdevH2O/devodata}{
   \describe{
     \item{\code{CBS+17_abundance.csv.xz}}{Processed protein abundance data from Supplemental Table S1 of Casas-Vila et al. (2017). Values in the columns for "imputed.log2.LFQ.intensity" were exponentiated, and means of all 4 replicates at each time point were taken to give the values in this file. Protein IDs were mapped to UniProt IDs in the "Entry" column.}
     \item{\code{CBS+17_aa.csv.xz}}{Amino acid compositions obtained from the canonical UniProt sequences for all proteins.}
