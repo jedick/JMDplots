@@ -134,7 +134,7 @@ reset()
 ```{r bugstab, echo = FALSE, fig.width=9, fig.height=5, message=FALSE, results="hide", out.width="100%"}
 ```
 
-Data sources: **A**. @WCQ+12. **B**. @ZTV+14. **C**. @CTB+14. **D**. @FLJ+15.
+**Data sources:** **A**. @WCQ+12. **B**. @ZTV+14. **C**. @CTB+14. **D**. @FLJ+15.
 
 <!-- Comment this section to reduce running time 20200829 -->
 <!--
@@ -189,7 +189,7 @@ mergedplot(gpresult, res = 25)
 Ehplot(xlim = c(-70, -62), ylim = c(-6, 2), dy = 0.1)
 ```
 
-Data sources: @LHE+04, @MLC+11, @KHO+13, @KPC+13, @PKB+13, @KKC+16.
+**Data sources:** @LHE+04, @MLC+11, @KHO+13, @KPC+13, @PKB+13, @KKC+16.
 
 ## Basis species comparison (2017 Figure S1)
 

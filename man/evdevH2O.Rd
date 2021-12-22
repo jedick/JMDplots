@@ -7,6 +7,7 @@
 \alias{evdevH2O4}
 \alias{evdevH2O5}
 \alias{evdevH2O6}
+\alias{evdevH2O7}
 \alias{runMaximAct}
 \alias{LYSC_example}
 \title{Plots from thermodynamics in evolution and development paper}
@@ -21,6 +22,7 @@ Plots from the paper by Dick (2021).
   evdevH2O4(pdf = FALSE)
   evdevH2O5(pdf = FALSE, boot.R = 99)
   evdevH2O6(pdf = FALSE, boot.R = 99)
+  evdevH2O7(pdf = FALSE)
   runMaximAct(dataset = "TPPG17", seed = 1:100, nbackground = 2000,
     res = 256, bg_organism = "Hsa", writeFiles = TRUE)
   LYSC_example()
@@ -47,6 +49,7 @@ This table gives a brief description of each plotting function.
   \code{evdevH2O4} \tab Ranges of chemical metrics and thermodynamic parameters for different background proteomes \cr
   \code{evdevH2O5} \tab Chemical and thermodynamic analysis of \emph{B. subtilis} biofilm transcriptome and proteome \cr
   \code{evdevH2O6} \tab Organismal water content, proteomic \nH2O, and optimal \logaH2O for fruit fly development \cr
+  \code{evdevH2O7} \tab Evolution of protein \ZC in eukaryotic lineages \cr
 }
 
 \code{runMaximAct} sets up calculations with \code{\link{MaximAct}} to compute the optimal \logaH2O and \logfO2 that maximize the equilibrium activity of target proteins against a proteomic background.
@@ -77,8 +80,37 @@ If \code{writeFiles} is TRUE, a PNG plot file is created and optimal \logfO2 or 
   The output files are used in \code{evdevH2O3} (thermodynamic analysis of phylostrata and gene ages) and \code{evdevH2O5} (thermodynamic analysis of biofilm developmental stages).
   To reduce package size, the PNG files output by \code{runMaximAct} are not included here.
 
-  Two other files, \code{FOK+21_mean_aa.csv} and \code{CBS+17_mean_aa.csv}, contain mean amino acid compositions of proteins computed using datasets for developmental transcriptomes and proteomes in B. subtilis biofilms (Futo et al., 2021) and proteomes in fruit flies (Casas-Vila et al., 2017).
+  Two other files, \code{FOK+21_mean_aa.csv} and \code{CBS+17_mean_aa.csv}, contain mean amino acid compositions of proteins computed using datasets for developmental transcriptomes and proteomes in \emph{B. subtilis} biofilms (Futo et al., 2021) and proteomes in fruit flies (Casas-Vila et al., 2017).
   These files are used in \code{evdevH2O5} and \code{evdevH2O6}.
+}
+
+\section{Files in extdata/evdevH2O/phylostrata}{
+  \describe{
+    \item{\code{FOK+21.csv}}{Phylostrata assignments for 4317 proteins in B. subtilis, from supplementary file S8 of Futo et al. (2021).}
+    \item{\code{FOK+21_aa.csv}}{Amino acid compositions of the proteins. These protein sequences were downloaded from NCBI, combined into a single FASTA file, and processed into a table of amino acid composition using \code{\link[CHNOSZ]{read.fasta}}.}
+  }
+}
+
+\section{Files in extdata/evdevH2O/LMM16}{
+  \describe{
+    \item{\code{mkmetrics.R}}{
+      Script to calculate \ZC and \nH2O and get gene ages for proteins in the consensus tables of Liebeskind et al. (2016).
+      This script requires files available from UniProt and Zenodo (\doi{10.5281/zenodo.51708}); see comments for details.
+    }
+    \item{\code{reference_proteomes.csv}}{IDs of UniProt reference proteomes for 31 organisms in Liebeskind et al. (2016) (input file for \code{mkmetrics.R}).}
+    \item{\code{modeAges.csv}}{Names of gene age categories for each organism (output by \code{mkmetrics.R}).}
+    \item{\code{metrics/*.csv.xz}}{Files with ID, modeAge, \ZC, \nH2O for each protein (output by \code{mkmetrics.R}).}
+  }
+}
+
+\section{Files in extdata/evdevH2O/JWN+21}{
+  \describe{
+    \item{\code{mkAA.R}}{
+      Script to assemble amino acid compositions from data files of James et al. (2021).
+      This script requires files available from Figshare (\doi{10.6084/m9.figshare.12037281.v1}); see comments for details.
+    }
+    \item{\code{pfam_animal_nontrans_AA.csv.xz}, \code{pfam_animal_trans_AA.csv.xz}, \code{pfam_plant_nontrans_AA.csv.xz}, \code{pfam_plant_trans_AA.csv.xz}}{Output files from the script.}
+  }
 }
 
 \references{
@@ -89,6 +121,8 @@ Dick, J. M. (2021) Redox potential linked to water loss from proteins in evoluti
 Fabre, B., Korona, D., Lees, J. G., Lazar, I., Livneh, I., Brunet, M., Orengo, C. A., Russell, S. and Lilley, K. S. (2019) Comparison of \emph{Drosophila melanogaster} embryo and adult proteome by SWATH-MS reveals differential regulation of protein synthesis, degradation machinery, and metabolism modules. \emph{J. Proteome Res.} \bold{18}, 2525--2534. \doi{10.1021/acs.jproteome.9b00076}
 
 Futo, M. et al. (2021) Embryo-like features in developing \emph{Bacillus subtilis} biofilms. \emph{Mol. Biol. Evol.} \bold{38}, 31--47. \doi{10.1093/molbev/msaa217}
+
+James, J. E., Willis, S. M., Nelson, P. G., Weibel, C., Kosinski, L. J. and Masel, J. (2021) Universal and taxon-specific trends in protein sequences as a function of age. \emph{eLife} \bold{10}, e57347. \doi{10.7554/eLife.57347}
 
 Liebeskind, B. J. and McWhite, C. D. and Marcotte, E. M. (2016) Towards consensus gene ages. \emph{Genome Biol. Evol.} \bold{8}, 1812--1823. \doi{10.1093/gbe/evw113}
 
@@ -113,4 +147,7 @@ stopifnot(H2O["14D"] > H2O["1M"])
 stopifnot(H2O["1M"] > H2O["2M"])
 # The final value of logaH2O is close to 0
 stopifnot(round(H2O["2M"]) == 0)
+
+# Futo et al. (2021) phylostrata are not used in the paper
+# JMDplots:::plotphylo(PS_source = "FOK+21")
 }

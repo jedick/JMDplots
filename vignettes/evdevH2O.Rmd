@@ -1,10 +1,10 @@
 ---
-title: "Thermodynamic model for water activity and redox potential in evolution and development (2021)"
+title: "Thermodynamic model for water activity and redox potential in evolution and development (2022)"
 output: 
   rmarkdown::html_vignette:
     mathjax: null
 vignette: >
-  %\VignetteIndexEntry{Thermodynamic model for water activity and redox potential in evolution and development (2021)}
+  %\VignetteIndexEntry{Thermodynamic model for water activity and redox potential in evolution and development (2022)}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 bibliography: JMDplots.bib
@@ -63,7 +63,7 @@ ZC <- "<i>Z</i><sub>C</sub>"
 
 This vignette runs the code to make the plots from the following paper:
 
-> Dick JM. 2021. A thermodynamic model for water activity and redox potential in evolution and development. Submitted manuscript.
+> Dick JM. 2022. A thermodynamic model for water activity and redox potential in evolution and development. Submitted manuscript.
 >
 > Preprint available at:
 >
@@ -78,23 +78,12 @@ library(JMDplots)
 To reduce running time, the plots in this vignette are made with 99 bootstrap replicates.
 To reproduce the plots in the paper, the `boot.R` argument should be changed to 999.
 
-The plots in the paper were made on 2021-07-15 with JMDplots 1.2.7.
-After that time, the following minor changes were made to the plots in this vignette:
-
-* 2021-07-18.
-    The version of Figure 1 in the paper was made by counting unique UniProt IDs among all phylostrata; duplicates were removed after the first occurrence.
-    This resulted in the removal of a relatively small number (175) of phylostrata assignments.
-    The plots have been updated in this vignette to use counts for all genes with a UniProt mapping (including duplicates).
-
-* 2021-08-24
-    Lines showing the cumulative mean were removed from Figure 1.
-    These lines are not discussed in the text.
-
 ## Chemical analysis of phylostrata and gene age datasets (Figure 1)
-Data sources: Phylostrata are from @TPPG17. Consensus gene ages are from @LMM16.
 ```{r evdevH2O1, message = FALSE, results = "hide", out.width='100%', fig.width = 10, fig.height = 5, out.extra='class="full-width"', pngquant = pngquant, dpi = 100}
 evdevH2O1(boot.R = 99)
 ```
+
+**Data sources:** Phylostrata are from @TPPG17. Consensus gene ages are from @LMM16.
 
 ## MaximAct: Thermodynamic analysis of optimal `r logaH2O` and `r logfO2` for target proteins (Figure 2)
 ```{r evdevH2O2, message = FALSE, results = "hide", out.width='100%', fig.width = 7, fig.height = 3, out.extra='class="full-width"', pngquant = "--speed=1 --quality=25-50", dpi = 100}
@@ -106,25 +95,39 @@ evdevH2O2()
 evdevH2O3()
 ```
 
+**Data sources:** Plasma and subcellular redox potentials are from @VWR+13 and @JS15.
+
 ## Ranges of chemical metrics and thermodynamic parameters for different background proteomes (Figure 4)
 ```{r evdevH2O4, message = FALSE, results = "hide", out.width='100%', fig.width = 8, fig.height = 5, out.extra='class="full-width"', pngquant = pngquant, dpi = 100}
 evdevH2O4()
 ```
 
 ## Chemical and thermodynamic analysis of *B. subtilis* biofilm transcriptome and proteome (Figure 5)
-Transcriptomic and proteomic data are from @FOK+21.
 ```{r evdevH2O5, message = FALSE, results = "hide", out.width='100%', fig.width = 7, fig.height = 4.5, pngquant = pngquant, dpi = 100}
-evdevH2O5()
+evdevH2O5(boot.R = 99)
 ```
 
+**Data source:** Transcriptomic and proteomic data are from @FOK+21.
+
 ## Organismal water content, proteomic `r nH2O`, and optimal `r logaH2O` for fruit fly development (Figure 6)
+```{r evdevH2O6, message = FALSE, results = "hide", out.width='100%', fig.width = 10, fig.height = 6, out.extra='class="full-width"', pngquant = pngquant, dpi = 100}
+evdevH2O6(boot.R = 99)
+```
+
+**Data sources:**
 **a** Whole-organism water content is from @CR66.
 **b** Stoichiometric hydration state of proteins is calculated in this study using proteomic data from @CBS+17.
 **d** `r ZC` and `r nH2O` of differentially expressed proteins in embryos and adult flies is calculated in this study using proteomic data from @FKL+19.
 
-```{r evdevH2O6, message = FALSE, results = "hide", out.width='100%', fig.width = 10, fig.height = 6, out.extra='class="full-width"', pngquant = pngquant, dpi = 100}
-evdevH2O6()
+
+## Evolution of protein `r ZC` in eukaryotic lineages (Figure 7)
+```{r evdevH2O7, message = FALSE, results = "hide", out.width='100%', fig.width = 10, fig.height = 6, out.extra='class="full-width"', pngquant = pngquant, dpi = 100}
+evdevH2O7()
 ```
+
+**Data sources:**
+**a** Consensus gene ages are from @LMM16. Divergence times of human lineage are from @KSSH17.
+**b** Amino acid compositions of homology groups for Pfam domains are from @JWN+20 and @JWN+21.
 
 ## Show total and unmapped number of genes in @TPPG17 phylostrata dataset
 ```{r TPPG17_stats, echo = FALSE}
