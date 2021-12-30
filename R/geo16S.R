@@ -723,7 +723,8 @@ geo16S6 <- function(pdf = FALSE) {
   breaks <- c(-100, -50, -20, -10, 0, 10, 20, 50, 100)
 
   # Plot heatmap
-  requireNamespace("plot.matrix")
+  # This isn't needed because import("plot.matrix") has been added to NAMESPACE 20211230
+  #requireNamespace("plot.matrix")
   plot(percent, col = col, breaks = breaks, main = "", xlab = "", ylab = "")
   # Add triangles to indicate values > 100
   iup <- Pall > 100

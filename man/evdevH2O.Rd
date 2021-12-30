@@ -84,13 +84,6 @@ If \code{writeFiles} is TRUE, a PNG plot file is created and optimal \logfO2 or 
   These files are used in \code{evdevH2O5} and \code{evdevH2O6}.
 }
 
-\section{Files in extdata/evdevH2O/phylostrata}{
-  \describe{
-    \item{\code{FOK+21.csv}}{Phylostrata assignments for 4317 proteins in B. subtilis, from supplementary file S8 of Futo et al. (2021).}
-    \item{\code{FOK+21_aa.csv}}{Amino acid compositions of the proteins. These protein sequences were downloaded from NCBI, combined into a single FASTA file, and processed into a table of amino acid composition using \code{\link[CHNOSZ]{read.fasta}}.}
-  }
-}
-
 \section{Files in extdata/evdevH2O/LMM16}{
   \describe{
     \item{\code{mkmetrics.R}}{
@@ -130,7 +123,7 @@ Trigos, A. S. and Pearson, R. B. and Papenfuss, A. T. and Goode, D. L. (2017) Al
 }
 
 \seealso{
-\code{\link{devodata}} for analysis of developmental proteomes.
+\code{\link{devodata}} for data sources for developmental proteomes.
 }
 
 \examples{
@@ -147,7 +140,4 @@ stopifnot(H2O["14D"] > H2O["1M"])
 stopifnot(H2O["1M"] > H2O["2M"])
 # The final value of logaH2O is close to 0
 stopifnot(round(H2O["2M"]) == 0)
-
-# Futo et al. (2021) phylostrata are not used in the paper
-# JMDplots:::plotphylo(PS_source = "FOK+21")
 }

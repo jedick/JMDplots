@@ -126,6 +126,8 @@ importFrom("ggplot2", "theme_bw", "xlab", "ylab", "geom_hline", "geom_vline", "t
 importFrom("grid", "grid.roundrect", "gpar")
 importFrom("oce", "mapPlot", "mapPoints", "mapPolygon")
 importFrom("sf", "st_coordinates", "st_read", "st_transform")
+# We need a method provided by the package, not an exported function, so import the whole package 20211230
+import("plot.matrix")
 
 # Imports from standard packages
 importFrom("grDevices", "dev.off", "cairo_pdf", "pdf", "blues9", "colorRampPalette",

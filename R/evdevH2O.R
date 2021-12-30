@@ -86,7 +86,7 @@ evdevH2O2 <- function(pdf = FALSE) {
   # Get mean amino acid compositions
   gpa <- getphyloaa("TPPG17")
   PS <- gpa$aa$protein
-  # Load PS model proteins 
+  # Load target proteins 
   ipPS <- add.protein(gpa$aa)
   # Set up system
   basis("QEC")
@@ -113,7 +113,7 @@ evdevH2O2 <- function(pdf = FALSE) {
       axis(1)
       axis(2)
       par(opar)
-      # Show location of maximum activity for each PS model protein
+      # Show location of maximum activity for each target protein
       par(xpd = TRUE)
       optO2 <- optH2O <- numeric()
       for(i in 1:16) {
@@ -124,7 +124,7 @@ evdevH2O2 <- function(pdf = FALSE) {
       set.seed(3)
       points(jitter(optO2, 0.4), jitter(optH2O, 0.05), pch = 21, bg = 7, cex = 1.5)
       par(xpd = FALSE)
-      title("16 PS model proteins", font.main = 1)
+      title("16 target proteins", font.main = 1)
       label.figure("a", cex = 1.5, yfrac = 0.937, font = 2)
     },
     key.axes = {
@@ -136,7 +136,7 @@ evdevH2O2 <- function(pdf = FALSE) {
     add2 = FALSE
   )
 
-  # Plot B: 16 PS model proteins and n = 200 sample of human proteins
+  # Plot B: 16 target proteins and n = 200 sample of human proteins
   seed <- 24
   nbackground <- 200
   # Use same background proteins as in MaximAct()
@@ -169,7 +169,7 @@ evdevH2O2 <- function(pdf = FALSE) {
       axis(1)
       axis(2)
       par(opar)
-      # Show location of maximum activity for each PS model protein
+      # Show location of maximum activity for each target protein
       par(xpd = TRUE)
       for(i in 1:16) {
         imax <- arrayInd(which.max(e$loga.equil[[i]]), dim(e$loga.equil[[i]]))
@@ -181,7 +181,7 @@ evdevH2O2 <- function(pdf = FALSE) {
         stopifnot(optH2O == MA$H2O[i+1])
       }
       par(xpd = FALSE)
-      title("16 PS model + 200 human proteins", font.main = 1)
+      title("16 target + 200 background proteins", font.main = 1)
       label.figure("b", cex = 1.5, yfrac = 0.937, font = 2)
     },
     key.axes = {
@@ -237,7 +237,8 @@ evdevH2O3 <- function(pdf = FALSE) {
       axis(1, at = 1:16, labels = c(1,2,NA,NA,5,NA,NA,NA,NA,10,NA,NA,NA,NA,NA,16))
       # FIXME: redraw "2" because previous command doesn't plot it (spacing too tight)
       axis(1, at = 2, labels = 2)
-      for(i in 1:nrow(H2O)) lines(PS, H2O[i, iPS], lwd = 0.5, col = "gray")
+      # Use transparent gray 20211223
+      for(i in 1:nrow(H2O)) lines(PS, H2O[i, iPS], lwd = 0.5, col = "#bababa80")
       lines(PS, meanH2O, lwd = 2, col = 2) 
       label.figure(fig.lab[1], cex = 1.6, font = 2)
     }
@@ -248,7 +249,7 @@ evdevH2O3 <- function(pdf = FALSE) {
       mtext("PS", 1, 2.2, font = 2, cex = par("cex"))
       axis(1, at = 1:16, labels = c(1,2,NA,NA,5,NA,NA,NA,NA,10,NA,NA,NA,NA,NA,16))
       axis(1, at = 2, labels = 2)
-      for(i in 1:nrow(O2)) lines(PS, O2[i, iPS], lwd = 0.5, col = "gray")
+      for(i in 1:nrow(O2)) lines(PS, O2[i, iPS], lwd = 0.5, col = "#bababa80")
       lines(PS, meanO2, lwd = 2, col = 2) 
       label.figure(fig.lab[2], cex = 1.6, font = 2)
     }
@@ -710,12 +711,6 @@ evdevH2O6 <- function(pdf = FALSE, boot.R = 99) {
 
   ## Plot D:
   # ZC and nH2O of differentially expressed proteins in dataset of Fabre et al., 2019  20210401
-  # Point symbols to use for embryo and adult
-  # embryo: small filled blue circle
-  # adult: larger hollow red square
-  pch <- c(19, 0)
-  col <- c(4, 2)
-  cex <- c(0.8, 1.0)
 
   # Get amino acid composition of differentially expressed proteins
   pd <- pdat_fly("FKL+19_protein")
@@ -731,28 +726,35 @@ evdevH2O6 <- function(pdf = FALSE, boot.R = 99) {
   # First two plots: boxplots for ZC and nH2O 20210403
   # Make boxplot for ZC
   ZCdat <- list(embryo = ZC_embryo, adult = ZC_adult)
-  boxplot(ZCdat, ylab = ZClab)
+  boxplot(ZCdat, ylab = ZClab, outpch = 21, outbg = "#55555580", outcol = NA)
   # Add p-value
   ZC_pvalue <- wilcox.test(ZC_embryo, ZC_adult)$p.value
-  legend <- bquote(italic(p) == .(signif(ZC_pvalue, 3)))
+  legend <- bquote(italic(P) == .(signif(ZC_pvalue, 3)))
   legend("topright", legend = legend, bty = "n")
   label.figure("d", cex = 1.7, yfrac = 0.96, xfrac = 0.05, font = 2)
   # Make boxplot for nH2O
   nH2Odat <- list(embryo = nH2O_embryo, adult = nH2O_adult)
-  boxplot(nH2Odat, ylab = nH2Olab)
+  boxplot(nH2Odat, ylab = nH2Olab, outpch = 21, outbg = "#55555580", outcol = NA)
   # Add p-value
   nH2O_pvalue <- wilcox.test(nH2O_embryo, nH2O_adult)$p.value
-  legend <- bquote(italic(p) == .(signif(nH2O_pvalue, 3)))
+  legend <- bquote(italic(P) == .(signif(nH2O_pvalue, 3)))
   legend("bottomleft", legend = legend, bty = "n")
 
   # Add title for first two plots
   par(xpd = NA)
   text(-0.4, -0.3, "Differentially expressed proteins\n(Proteomic data from Fabre et al., 2019)", cex = 1.3)
-  text(-0.4, -1.35, bquote(italic(n) == .(sum(!pd$up2))~"with higher expression in embryos"), cex = 1.3)
-  text(-0.4, -1.42, bquote(italic(n) == .(sum(pd$up2))~"with higher expression in adults"), cex = 1.3)
+  text(-0.4, -1.35, bquote(italic(N) == .(sum(!pd$up2))~"with higher expression in embryos"), cex = 1.3)
+  text(-0.4, -1.42, bquote(italic(N) == .(sum(pd$up2))~"with higher expression in adults"), cex = 1.3)
   par(xpd = FALSE)
 
   ## Plot E:
+  # Point symbols to use for embryo and adult
+  # embryo: filled blue circle
+  # adult: filled red square
+  pch <- c(19, 15)
+  col <- c(4, 2)
+  cex <- c(0.8, 0.9)
+
   # Plot median ZC and nH2O of differentially expressed proteins
   plot(c(-0.145, -0.135), c(-0.76, -0.72), xlab = ZClab, ylab = nH2Olab, type = "n")
   ZCmed <- c(median(ZC_embryo), median(ZC_adult))
@@ -772,7 +774,7 @@ evdevH2O6 <- function(pdf = FALSE, boot.R = 99) {
   O2 <- c(O2_embryo, O2_adult)
   H2O <- c(H2O_embryo, H2O_adult)
   points(O2, H2O, pch = pch, col = col, cex = cex * 2)
-  text(O2, H2O - 0.15, c("embryo", "adult"))
+  text(O2, H2O - 0.13, c("embryo", "adult"))
 
   if(pdf) {
     dev.off()
@@ -813,7 +815,7 @@ evdevH2O7 <- function(pdf = FALSE) {
     modeAge <- 1:max(dat$modeAge)
     ZC <- sapply(modeAge, function(Age) mean(subset(dat, modeAge == Age)$ZC))
     # Add lines to plot
-    col <- "#80808080"
+    col <- "#99999980"
     lwd <- 1
     if(refprot$OSCODE[i] == "HUMAN") {
       col <- 2
@@ -822,8 +824,8 @@ evdevH2O7 <- function(pdf = FALSE) {
     lines(modeAge, ZC, col = col, lwd = lwd)
   }
   # Add text to indicate divergence at Opisthokonta
-  text(4, -0.03, "Common lineage")
-  text(6, -0.03, "Distinct lineages\n(31 species)")
+  text(3.95, -0.03, "Common ancestors", adj = c(0.5, 0.5))
+  text(5.95, -0.03, "Lineages diverge", adj = c(0.5, 0.5))
   # Add labels for divergence times (Kumar et al., 2017)
   par(xpd = NA)
   y <- -0.003
@@ -836,7 +838,7 @@ evdevH2O7 <- function(pdf = FALSE) {
   par(xpd = FALSE)
   legend("left", "Human", lty = 1, col = 2, lwd = 2, bty = "n")
   title("Divergence times for human lineage (Mya)", line = 2.5, font.main = 1)
-  label.figure("a", font = 2, cex = 1.5)
+  label.figure("a", font = 2, cex = 1.6)
 
   # Assemble age groups for legend
   modeAges <- read.csv(file.path(datadir, "modeAges.csv"))
@@ -878,7 +880,7 @@ evdevH2O7 <- function(pdf = FALSE) {
 
     plot(Age, ZC, type = "n", xlab = "Age (Mya)", ylab = ZClab, xlim = rev(range(Age)), font.lab = 2)
     boxplot(ZC ~ Age, add = TRUE, at = unique(Age), boxfill = "lightblue", xaxt = "n", yaxt = "n",
-            position = "dodge", varwidth = TRUE, boxwex = 200, outpch = 19, outcex = 0.4, outcol = "gray40")
+            position = "dodge", varwidth = TRUE, boxwex = 200, outpch = 21, outcex = 0.4, outbg = "#66666680", outcol = NA)
     abline(Intercept, Slope, lwd = 2, col = "dodgerblue")
 
     # Create title
@@ -894,7 +896,7 @@ evdevH2O7 <- function(pdf = FALSE) {
     stattext <- bquote("Slope"==.(signif(-Slope * 1e3, digits = 2))*"/Gya, "~italic(P)==.(signif(Pvalue, digits = 2)))
     title(stattext, line = 1, font.main = 1, cex.main = 1)
 
-    if(set == "pfam_plant_nontrans") label.figure("b", font = 2, cex = 1.5)
+    if(set == "pfam_plant_nontrans") label.figure("b", font = 2, cex = 1.6)
 
   }
 
@@ -1055,29 +1057,20 @@ LYSC_example <- function() {
 # Mean ZC and nH2O of phylostrata 20191122
 plotphylo <- function(var = "ZC", PS_source = "TPPG17", memo = NULL, xlab = "PS", boot.R = 99) {
   if(is.null(memo)) {
-    if(PS_source == "FOK+21") {
-      # Get phylostrata from Futo et al. (2021) 20211221
-      dat <- read.csv(system.file("extdata/evdevH2O/phylostrata/FOK+21.csv", package = "JMDplots"), as.is = TRUE)
-      colnames(dat)[c(1,2)] <- c("Entry", "Phylostrata")
-      AA <- read.csv(system.file("extdata/evdevH2O/phylostrata/FOK+21_aa.csv", package = "JMDplots"), as.is = TRUE)
-      # Make sure protein IDs are the same in both files
-      stopifnot(all(dat$Entry==AA$protein))
-    } else {
-      dat <- read.csv(system.file("extdata/phylostrata/TPPG17.csv.xz", package = "canprot"), as.is = TRUE)
-      if(PS_source == "LMM16") {
-        dat <- read.csv(system.file("extdata/phylostrata/LMM16.csv.xz", package = "canprot"), as.is = TRUE)
-        colnames(dat)[c(1,3)] <- c("Entry", "Phylostrata")
-        # remove entries that have ENSP instead of UniProt IDs
-        dat <- dat[!grepl("^ENSP", dat$Entry), ]
-      }
-      # Update old UniProt IDs
-      dat <- check_IDs(dat, "Entry")
-      # Remove genes with no UniProt mapping 20210718
-      dat <- dat[!is.na(dat$Entry), ]
-      # Run protcomp and suppress warning about duplicated IDs 20210718
-      pcomp <- suppressWarnings(protcomp(dat$Entry))
-      AA <- pcomp$aa
+    dat <- read.csv(system.file("extdata/phylostrata/TPPG17.csv.xz", package = "canprot"), as.is = TRUE)
+    if(PS_source == "LMM16") {
+      dat <- read.csv(system.file("extdata/phylostrata/LMM16.csv.xz", package = "canprot"), as.is = TRUE)
+      colnames(dat)[c(1,3)] <- c("Entry", "Phylostrata")
+      # remove entries that have ENSP instead of UniProt IDs
+      dat <- dat[!grepl("^ENSP", dat$Entry), ]
     }
+    # Update old UniProt IDs
+    dat <- check_IDs(dat, "Entry")
+    # Remove genes with no UniProt mapping 20210718
+    dat <- dat[!is.na(dat$Entry), ]
+    # Run protcomp and suppress warning about duplicated IDs 20210718
+    pcomp <- suppressWarnings(protcomp(dat$Entry))
+    AA <- pcomp$aa
   } else {
     dat <- memo$dat
     AA <- memo$AA

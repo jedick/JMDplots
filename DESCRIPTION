@@ -1,6 +1,6 @@
-Date: 2021-12-22
+Date: 2021-12-30
 Package: JMDplots
-Version: 1.2.9-3
+Version: 1.2.9-4
 Title: Plots from Papers by Jeffrey M. Dick
 Authors@R: c(
     person("Jeffrey", "Dick", , "jeff@chnosz.net", role = c("aut", "cre"),
@@ -9,8 +9,8 @@ Authors@R: c(
 Author: Jeffrey Dick [aut, cre] (0000-0002-0687-5890)
 Maintainer: Jeffrey Dick <jeff@chnosz.net>
 Depends: R (>= 3.2.0), CHNOSZ (>= 1.4.1), canprot (>= 1.1.0)
-Imports: shiny, timevis, png, MASS, diagram, xtable, ggplot2, ggrepel, gridExtra, knitr, rmarkdown, plot.matrix, boot, grid, oce, sf
-Suggests: bibtex
+Imports: shiny, timevis, png, MASS, diagram, ggplot2, ggrepel, gridExtra, rmarkdown, plot.matrix, boot, grid, oce, sf
+Suggests: bibtex, knitr, xtable
 Description: Code and data used to make plots from various papers by the author.
     The plots are shown in vignettes for each paper.
 Encoding: UTF-8
