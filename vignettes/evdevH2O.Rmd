@@ -78,7 +78,7 @@ library(JMDplots)
 To reduce running time, the plots in this vignette are made with 99 bootstrap replicates.
 To reproduce the plots in the paper, the `boot.R` argument should be changed to 999.
 
-## Chemical analysis of phylostrata and gene age datasets (Figure 1)
+## Protein length and chemical metrics for phylostratigraphic age groups (Figure 1)
 ```{r evdevH2O1, message = FALSE, results = "hide", out.width='100%', fig.width = 10, fig.height = 5, out.extra='class="full-width"', pngquant = pngquant, dpi = 100}
 evdevH2O1(boot.R = 99)
 ```
@@ -97,7 +97,7 @@ evdevH2O3()
 
 **Data sources:** Plasma and subcellular redox potentials are from @VWR+13 and @JS15.
 
-## Ranges of chemical metrics and thermodynamic parameters for different background proteomes (Figure 4)
+## Chemical metrics for and thermodynamic parameters with different background proteomes (Figure 4)
 ```{r evdevH2O4, message = FALSE, results = "hide", out.width='100%', fig.width = 8, fig.height = 5, out.extra='class="full-width"', pngquant = pngquant, dpi = 100}
 evdevH2O4()
 ```

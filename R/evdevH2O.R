@@ -344,7 +344,7 @@ evdevH2O3 <- function(pdf = FALSE) {
   }
 }
 
-# Ranges of chemical metrics and thermodynamic parameters for different background proteomes 20210711
+# Chemical metrics for and thermodynamic parameters with different background proteomes 20210711
 evdevH2O4 <- function(pdf = FALSE) {
 
   if(pdf) pdf("evdevH2O4.pdf", width = 8, height = 5)
@@ -784,7 +784,7 @@ evdevH2O6 <- function(pdf = FALSE, boot.R = 99) {
 }
 
 # Evolution of protein ZC in eukaryotic lineages 20211103
-evdevH2O7 <- function(pdf = FALSE) {
+evdevH2O7 <- function(pdf = FALSE, H2O = FALSE) {
 
   # Setup figure
   if(pdf) pdf("evdevH2O7.pdf", width = 10, height = 6)
@@ -803,17 +803,19 @@ evdevH2O7 <- function(pdf = FALSE) {
   irp <- c(irp[!ishuman], irp[ishuman])
   refprot <- refprot[irp, ]
 
-  # Start ZC plot
-  plot(c(1, 9), c(-0.18, -0.02), xlab = "Gene Age", ylab = ZClab, type = "n", font.lab = 2)
+  # Start ZC or nH2O plot
+  if(!H2O) plot(c(1, 9), c(-0.18, -0.02), xlab = "Gene Age", ylab = ZClab, type = "n", font.lab = 2)
+  if(H2O) plot(c(1, 9), c(-0.9, -0.65), xlab = "Gene Age", ylab = nH2Olab, type = "n", font.lab = 2)
   # Add drop line at gene age 5 (Opisthokonta)
   abline(v = 5, lty = 2, col = "gray40")
   # Loop over proteomes
   for(i in 1:nrow(refprot)) {
-    # Read modeAge and ZC values
+    # Read modeAge and ZC/nH2O values
     dat <- read.csv(file.path(datadir, "metrics", paste0(refprot$OSCODE[i], ".csv.xz")))
-    # Get mean ZC for each modeAge
+    # Get mean ZC/nH2O for each modeAge
     modeAge <- 1:max(dat$modeAge)
-    ZC <- sapply(modeAge, function(Age) mean(subset(dat, modeAge == Age)$ZC))
+    if(!H2O) X <- sapply(modeAge, function(Age) mean(subset(dat, modeAge == Age)$ZC))
+    if(H2O) X <- sapply(modeAge, function(Age) mean(subset(dat, modeAge == Age)$nH2O))
     # Add lines to plot
     col <- "#99999980"
     lwd <- 1
@@ -821,14 +823,15 @@ evdevH2O7 <- function(pdf = FALSE) {
       col <- 2
       lwd <- 2
     }
-    lines(modeAge, ZC, col = col, lwd = lwd)
+    lines(modeAge, X, col = col, lwd = lwd)
   }
   # Add text to indicate divergence at Opisthokonta
-  text(3.95, -0.03, "Common ancestors", adj = c(0.5, 0.5))
-  text(5.95, -0.03, "Lineages diverge", adj = c(0.5, 0.5))
+  if(H2O) y <- -0.65 else y <- -0.03
+  text(3.95, y, "Common ancestors", adj = c(0.5, 0.5))
+  text(5.95, y, "Lineages diverge", adj = c(0.5, 0.5))
   # Add labels for divergence times (Kumar et al., 2017)
   par(xpd = NA)
-  y <- -0.003
+  if(H2O) y <- -0.625 else y <- -0.003
   text(1, y, 4290, srt = 45) # Cellular organisms
   text(4, y, 2101, srt = 45) # Eukaryota
   text(5, y, 1105, srt = 45) # Eukaryota
@@ -867,19 +870,21 @@ evdevH2O7 <- function(pdf = FALSE) {
     # Order data by Age
     AA <- AA[order(AA$protein), ]
     Age <- AA$protein
-    # Calculate ZC
-    ZC <- ZC(protein.formula(AA))
+    # Calculate ZC/nH2O
+    if(!H2O) X <- ZC(protein.formula(AA))
+    if(H2O) X <- H2OAA(AA)
 
     # Make boxplots and regression lines
     # Some parts adapted from https://github.com/MaselLab/ProteinEvolution/blob/master/Figures/BoxAndWhiskerPlots_LinearModelSlopes_MetricsVsAge.py
-    LinearModel <- lm(ZC ~ Age)
+    LinearModel <- lm(X ~ Age)
     Intercept <- coef(LinearModel)["(Intercept)"]
     Slope <- coef(LinearModel)["Age"]
     Pvalue <- summary(LinearModel)$coefficients[2, 4]
     R2 <- summary(LinearModel)$r.squared
 
-    plot(Age, ZC, type = "n", xlab = "Age (Mya)", ylab = ZClab, xlim = rev(range(Age)), font.lab = 2)
-    boxplot(ZC ~ Age, add = TRUE, at = unique(Age), boxfill = "lightblue", xaxt = "n", yaxt = "n",
+    if(H2O) ylab <- nH2Olab else ylab <- ZClab
+    plot(Age, X, type = "n", xlab = "Age (Mya)", ylab = ylab, xlim = rev(range(Age)), font.lab = 2)
+    boxplot(X ~ Age, add = TRUE, at = unique(Age), boxfill = "lightblue", xaxt = "n", yaxt = "n",
             position = "dodge", varwidth = TRUE, boxwex = 200, outpch = 21, outcex = 0.4, outbg = "#66666680", outcol = NA)
     abline(Intercept, Slope, lwd = 2, col = "dodgerblue")
 

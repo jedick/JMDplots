@@ -12,7 +12,7 @@
 \alias{LYSC_example}
 \title{Plots from thermodynamics in evolution and development paper}
 \description{
-Plots from the paper by Dick (2021).
+Plots from the paper by Dick (2022).
 }
 
 \usage{
@@ -22,7 +22,7 @@ Plots from the paper by Dick (2021).
   evdevH2O4(pdf = FALSE)
   evdevH2O5(pdf = FALSE, boot.R = 99)
   evdevH2O6(pdf = FALSE, boot.R = 99)
-  evdevH2O7(pdf = FALSE)
+  evdevH2O7(pdf = FALSE, H2O = FALSE)
   runMaximAct(dataset = "TPPG17", seed = 1:100, nbackground = 2000,
     res = 256, bg_organism = "Hsa", writeFiles = TRUE)
   LYSC_example()
@@ -31,6 +31,7 @@ Plots from the paper by Dick (2021).
 \arguments{
   \item{pdf}{logical, make a PDF file?}
   \item{boot.R}{integer, number of bootstrap replicates}
+  \item{H2O}{logical, make plots for \nH2O instead of \ZC?}
   \item{dataset}{character, dataset to use for constructing target proteins}
   \item{seed}{numeric, seeds to use for subsampling background proteins from human proteome}
   \item{nbackground}{numeric, number of background proteins to sample}
@@ -43,10 +44,10 @@ Plots from the paper by Dick (2021).
 This table gives a brief description of each plotting function.
 
 \tabular{ll}{
-  \code{evdevH2O1} \tab Chemical analysis of phylostrata and gene age datasets \cr
+  \code{evdevH2O1} \tab Protein length and chemical metrics for phylostratigraphic age groups \cr
   \code{evdevH2O2} \tab Thermodynamic analysis of optimal \logaH2O and \logfO2 for target proteins \cr
   \code{evdevH2O3} \tab Optimal \logaH2O and \logfO2 and virtual Eh for target proteins \cr
-  \code{evdevH2O4} \tab Ranges of chemical metrics and thermodynamic parameters for different background proteomes \cr
+  \code{evdevH2O4} \tab Chemical metrics for and thermodynamic parameters with different background proteomes \cr
   \code{evdevH2O5} \tab Chemical and thermodynamic analysis of \emph{B. subtilis} biofilm transcriptome and proteome \cr
   \code{evdevH2O6} \tab Organismal water content, proteomic \nH2O, and optimal \logaH2O for fruit fly development \cr
   \code{evdevH2O7} \tab Evolution of protein \ZC in eukaryotic lineages \cr
@@ -109,7 +110,7 @@ If \code{writeFiles} is TRUE, a PNG plot file is created and optimal \logfO2 or 
 \references{
 Casas-Vilas, N. et al. (2017) The developmental proteome of \emph{Drosophila melanogaster}. \emph{Genome Res.} \bold{27}, 1273--1285. \doi{10.1101/gr.213694.116}
 
-Dick, J. M. (2021) Redox potential linked to water loss from proteins in evolution and developent. bioRxiv. \doi{https://doi.org/10.1101/2021.01.29.428804}
+Dick, J. M. (2022) A thermodynamic model for water activity and redox potential in evolution and development. Submitted manuscript, earlier preprint available at bioRxiv. \doi{https://doi.org/10.1101/2021.01.29.428804}
 
 Fabre, B., Korona, D., Lees, J. G., Lazar, I., Livneh, I., Brunet, M., Orengo, C. A., Russell, S. and Lilley, K. S. (2019) Comparison of \emph{Drosophila melanogaster} embryo and adult proteome by SWATH-MS reveals differential regulation of protein synthesis, degradation machinery, and metabolism modules. \emph{J. Proteome Res.} \bold{18}, 2525--2534. \doi{10.1021/acs.jproteome.9b00076}
 
