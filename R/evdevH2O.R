@@ -324,8 +324,8 @@ evdevH2O3 <- function(pdf = FALSE) {
       # Eh = -150 mV (plasma GSH/GSSG) Jones and Sies, 2015
       text(xtext, -150, "Plasma GSH/GSSG", adj = c(0.5, 1.3))
       # Eh = -199 mV (erythrocyte GSH/GSSG) van 't Erve et al., 2013
-      if(PS_source=="TPPG17") text(xtext, -199, "Erythrocyte GSH/GSSG", adj = c(0.5, -0.3))
-      if(PS_source=="LMM16") text(xtext, -199, "Erythrocyte         GSH/GSSG     ", adj = c(0.5, -0.3))
+      if(PS_source=="TPPG17") text(xtext, -199, "Intracellular GSH/GSSG", adj = c(0.49, -0.3))
+      if(PS_source=="LMM16") text(xtext, -199, "Intracellular         GSH/GSSG     ", adj = c(0.5, -0.3))
       # Eh = -241 mV (cytosolic NADH/NAD+) Jones and Sies, 2015
       text(xtext, -241, "Cytosolic NADH/NAD+", adj = c(0.5, 1.3))
       # Eh = -318 mV (mitochondrial NADH/NAD+) Jones and Sies, 2015
