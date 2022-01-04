@@ -85,7 +85,7 @@ For \ZC, the means are further weighted by number of carbon atoms (Dick et al., 
 \section{Files in extdata/chem16S}{
   \describe{
     \item{\code{pipeline.R}}{Functions to run external programs for sequence analysis (fastq-dump, vsearch, seqtk, RDP Classifier).}
-    \item{\code{process.R}}{Functions to create the processed data files listed below:}
+    \item{\code{process_refseq.R}}{Functions to create the processed data files listed below:}
     \item{\code{groupAA.csv}}{Average amino acid composition of RefSeq proteomes at genus and higher ranks. (\code{process.R:mkAA})}
     \item{\code{taxon_metrics.csv}}{Chemical metrics (\ZC and \nH2O) for each RefSeq group. (\code{process.R:mkmetrics})}
     \item{\code{bergeyTrainingTree.csv}}{Data from \code{bergeyTrainingTree.xml} in the RDP Classifier package version 2.1.3 (\url{https://sourceforge.net/projects/rdp-classifier/}), used for copy-number adjustment.}

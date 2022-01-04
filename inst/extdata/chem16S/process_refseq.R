@@ -1,14 +1,13 @@
-# chem16S/process.R
+# chem16S/process_refseq.R
 
 # Functions to create intermediate data files from RefSeq amino acid compositions
 
-# Use RefSeq sequences to make amino acid composition of taxonomic groups at genus and higher ranks --> groupAA.csv
+# Calculate amino acid composition of taxonomic groups at genus and higher ranks --> groupAA.csv
 # mkAA()       
 # Calculate chemical metrics (nH2O, ZC) for each RefSeq group --> taxon_metrics.csv
 # mkmetrics()         
 
 # Calculate average amino acid composition of genus and higher ranks in RefSeq 20200911
-# Note: column names are chosen to be compatible with 'protein' data in CHNOSZ
 mkAA <- function(ranks = c("genus", "family", "order", "class", "phylum", "superkingdom")) {
 
   # Read RefSeq amino acid compositions and taxon names
@@ -16,7 +15,11 @@ mkAA <- function(ranks = c("genus", "family", "order", "class", "phylum", "super
   taxa <- read.csv(system.file("extdata/refseq/taxid_names.csv.xz", package = "JMDplots"), as.is = TRUE)
   # Make sure the data tables have consistent taxids
   stopifnot(all(refseq$organism == taxa$taxid))
-  # Weight all taxids equally (not by number of sequences) 20210605
+  # Keep taxids classified at species level 20220104
+  isspecies <- !is.na(taxa$species)
+  refseq <- refseq[isspecies, ]
+  taxa <- taxa[isspecies, ]
+  # Divide by number of reference sequences in each species to get mean AA composition per protein 20210605
   refseq[, 5:25] <- refseq[, 5:25] / refseq$chains
 
   # Make a list to hold the output
@@ -34,6 +37,7 @@ mkAA <- function(ranks = c("genus", "family", "order", "class", "phylum", "super
     print(paste(rank, length(names)))
 
     # Create blank amino acid data frame
+    # NOTE: column names are chosen to be compatible with 'protein' data in CHNOSZ
     AAtmp <- structure(list(
       protein = NA, organism = NA, ref = NA, abbrv = NA, chains = NA,
       Ala = NA, Cys = NA, Asp = NA, Glu = NA, Phe = NA,
@@ -55,11 +59,12 @@ mkAA <- function(ranks = c("genus", "family", "order", "class", "phylum", "super
         # Sum the number of sequences ("chains" column) and amino acid composition for this taxon
         sumAA <- colSums(refseq[istax, 5:25])
         AA[i, 5:25] <- sumAA
-        # Put the number of taxa into the "ref" column
+        # Put the number of sequences into the "ref" column
         AA$ref[i] <- sum(istax)
         # Put the parent taxon into the "abbrv" column
         parent <- "Root"
         if(icol < ncol(taxa)) {
+          # All taxa with the same name and rank should have the same parent, but if not, list them all
           parent <- unique(taxa[istax, icol+1])
           if(length(parent) > 1) parent <- paste(parent, collapse = ";")
         }
