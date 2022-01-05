@@ -552,89 +552,14 @@ geo16S5 <- function(pdf = FALSE) {
 
 }
 
-# Abundance and ZC of classes in oxidizing and reducing conditions 20210609
-geo16S_S1 <- function(pdf = FALSE) {
-  if(pdf) pdf("geo16S_S1.pdf", width = 9, height = 12)
-  par(mfrow = c(4, 3))
-  par(mar = c(4, 4, 2, 1))
-  par(mgp = c(2, 1, 0))
-
-  study <- c(
-    "GBL+15", "JHM+16", "MPB+17", "BCA+21",
-    "SVH+19", "MZG+20", "HXZ+20",
-    "UKD+18.water", "MMA+20_spring",
-    "CHM+14_injected-49", "HRR+18_injected-130", "ZLF+19_injected-18"
-  )
-  description <- c(
-    "ETNP water", "Lake Fryxell mat", "Manus Basin vents", "Ursu Lake water",
-    "Black Sea water", "Swiss lakes", "Sansha Yongle Blue Hole",
-    "NW Pennsylvania water", "PASF Streams (spring)",
-    "Marcellus Shale", "Denver-Julesburg Basin", "Duvernay Formation"
-  )
-  pch1 <- c(24, 24, 21, 24, 24, 24, 24, 1, 1, 1, 1, 1, 1)
-  pch2 <- c(25, 25, 23, 25, 25, 25, 25, 21, 21, 21, 21, 21, 21)
-  xadj <- list(
-    c(Gammaproteobacteria = 1.1, Flavobacteriia = -0.9, Planctomycetacia = 0.5),
-    c(Alphaproteobacteria = -0.25, Saprospiria = 0.5),
-    c(Campylobacteria = 0.5, Deltaproteobacteria = 0.1),
-    c(Saprospiria = -0.6, Gammaproteobacteria = -0.5, Balneolia = -0.65, Deltaproteobacteria = 1.3, Cytophagia = -0.35, Clostridia = 1.5, Verrucomicrobiae = -0.1, Planctomycetacia = -0.22),
-    c(Planctomycetacia = -0.2, Cyanobacteria = -0.9, Alphaproteobacteria = -0.75, Verrucomicrobiae = -0.3, Flavobacteriia = -0.45, Deltaproteobacteria = 0.9, Gammaproteobacteria = -0.35),
-    c(Phycisphaerae = -0.3, Planctomycetacia = -0.27, Alphaproteobacteria = -0.15, Nitrospira = -0.15, Cyanobacteria = -0.65, Gammaproteobacteria = 1),
-    c(Acidimicrobiia = -0.05, Alphaproteobacteria = -0.05, Cyanobacteria = -0.8, Gammaproteobacteria = 1.05),
-    c(Alphaproteobacteria = 1, Bacilli = -0.2, Actinobacteria = -0.05),
-    c(Acidobacteria_Gp6 = -0.1, Acidobacteria_Gp1 = -0.1, Spartobacteria = -0.1, Subdivision3 = -0.1, Deltaproteobacteria = 0.3, Alphaproteobacteria = 0.87, Betaproteobacteria = 0.2),
-    c(Gammaproteobacteria = -0.1, Clostridia = 1.2, Campylobacteria = -0.55),
-    c(Gammaproteobacteria = -0.2),
-    c(Actinobacteria = -0.05, Betaproteobacteria = -0.3, Alphaproteobacteria = 0.1, Flavobacteriia = -0.5, Clostridia = 1.7)
-  )
-  yadj <- list(
-    c(Cyanobacteria = 1.5, Flavobacteriia = 0, Planctomycetacia = -0.8),
-    c(Saprospiria = -0.5, Planctomycetacia = 1.5, Verrucomicrobiae = -0.4, Caldilineae = 2, Deltaproteobacteria = -0.2, Cytophagia = 1.4),
-    c(Gammaproteobacteria = 1.2, Deltaproteobacteria = -0.6, Flavobacteriia = -0.4, Campylobacteria = -3.5),
-    c(Saprospiria = 0, Balneolia = 0, Deltaproteobacteria = -1.7, Cytophagia = -0.6, Flavobacteriia = 1.5, Clostridia = 0, Verrucomicrobiae = 2),
-    c(Alphaproteobacteria = -2.6, Verrucomicrobiae = 12, Flavobacteriia = -2, Deltaproteobacteria = 1.8),
-    c(Phycisphaerae = -1, Planctomycetacia = -12, Nitrospira = 1.9, Deltaproteobacteria = -0.5, Gammaproteobacteria = -1.2),
-    c(Acidimicrobiia = 1.3, Cyanobacteria = 1.5, Nitrospinia = 1.7, Flavobacteriia = -0.5),
-    c(Betaproteobacteria = 1.3, Clostridia = -0.2),
-    c(Acidobacteria_Gp3 = -1.3, Subdivision3 = 1, Acidobacteria_Gp1 = -0.5, Spartobacteria = 0.3, Deltaproteobacteria = 1.3, Betaproteobacteria = -0.8, Alphaproteobacteria = 1.9),
-    c(Clostridia = 1.3),
-    c(Gammaproteobacteria = 1.3),
-    c(Actinobacteria = 1.2, Betaproteobacteria = 1, Alphaproteobacteria = 1.6)
-  )
-
-  n1 <- n2 <- DZC <- numeric()
-  for(i in 1:length(study)) {
-    gg <- groupmet(study[i], param = "ZC", rank = "class", pch1 = pch1[i], pch2 = pch2[i], xadj = xadj[[i]], yadj = yadj[[i]], scale100 = TRUE, minpercent = 2)
-    title(description[i])
-    # Assemble percent contribution by each taxonomic group
-    P <- round(gg$DX / diff(gg$Xall) * 100)
-    P <- as.data.frame(t(P))
-    # Include study name and merge with other studies
-    P <- cbind(study = study[i], P)
-    if(i==1) percent <- P else percent <- merge(percent, P, all = TRUE)
-    # Keep track of the overall ZC change
-    DZC <- c(DZC, diff(gg$Xall))
-    # Keep track of number of samples 20210902
-    n1 <- c(n1, gg$n1)
-    n2 <- c(n2, gg$n2)
-  }
-  if(pdf) dev.off()
-  # Put studies in correct order (they are alphabetized by merge()) 20210902
-  percent <- percent[match(study, percent$study), ]
-
-  # Save results for geo16S6() 20210610
-  out <- cbind(n1 = n1, n2 = n2, DZC = round(DZC, 6), percent)
-  #write.csv(out, "geo16S_S1.csv", row.names = FALSE, quote = FALSE)
-}
-
 # Contributions of classes to overall ZC difference between oxidizing and reducing conditions 20210610
 geo16S6 <- function(pdf = FALSE) {
   # Setup plot
   if(pdf) pdf("geo16S6.pdf", width = 14, height = 8)
   layout(matrix(c(1, 2), nrow = 1), widths = c(1, 8))
   
-  # Read file created by geo16S_S1()
-  file <- system.file("extdata/geo16S/geo16S_S1.csv", package = "JMDplots")
+  # Read file created by geo16S_S3()
+  file <- system.file("extdata/geo16S/geo16S_S3.csv", package = "JMDplots")
   dat <- read.csv(file, as.is = TRUE)
   DZC <- dat$DZC
   n1 <- dat$n1
@@ -846,5 +771,213 @@ geo16S7 <- function(pdf = FALSE) {
   if(pdf) dev.off()
 
 
+}
+
+# RefSeq and 16S rRNA data processing outline 20220104
+geo16S_S1 <- function(pdf = FALSE) {
+
+  if(pdf) pdf("geo16S_S1.pdf", width = 16, height = 5)
+
+  par(mar = c(1, 1, 1, 1))
+  plot(1:10, type = "n", axes = FALSE, xlab = "", ylab = "")
+  text(1, 10, "Reference Sequence Processing", adj = 0, font = 2)
+  text(1, 9, "1. Sum AAcomp of all sequences for each taxid", adj = 0)
+  text(1, 8, "2. Keep taxids classified at species level", adj = 0)
+  text(1, 7, "3. Divide by number of sequences in each species to get normalized AAcomp", adj = 0)
+  text(1, 6, "4. Sum normalized AAcomp for all species in each genus", adj = 0)
+  text(1, 5, "5. Sum normalized AAcomp for all species in each family", adj = 0)
+  text(1, 4, "6. Sum normalized AAcomp for all species in each order", adj = 0)
+  text(1, 3, "7. Sum normalized AAcomp for all species in each class", adj = 0)
+  text(1, 2, "8. Sum normalized AAcomp for all species in each phylum", adj = 0)
+  text(1, 1, "9. Calculate and record ZC and nH2O for all taxonomic groups at each level", adj = 0)
+
+  text(3.25, 10, "(Data Source)", adj = 0, font = 2)
+  text(3.25, 9, "(RefSeq protein sequences)", adj = 0, font = 2)
+  text(3.25, 8, "(NCBI taxonomy files)", adj = 0, font = 2)
+
+  text(5, 10, "Chemical Metrics for\nTaxonomic Groups", adj = 0, font = 2)
+  # Read file with precomputed metrics for taxa at different ranks
+  metrics <- read.csv(system.file("extdata/chem16S/taxon_metrics.csv", package = "JMDplots"))
+  ranks <- c("superkingdom", "phylum", "class", "order", "family", "genus", "species")
+  plural <- c("superkingdoms (*)", "phyla", "classes", "orders", "families", "genera", "species (*)")
+  for(irank in 1:7) {
+    nrank <- sum(metrics$rank == ranks[irank])
+    text(5, 9-irank, paste(nrank, plural[irank]), adj = 0)
+  }
+  lines(c(4.9, 4.9), c(8.2, 1.8))
+  arrows(3.65, 1.25, 4.88, 5.00)
+  lines(c(5.7, 5.7), c(7.2, 2.8))
+  arrows(5.71, 5.00, 6.43, 4.00)
+
+  text(6.5, 10, "16S rRNA Classification\nand Analysis", adj = 0, font = 2)
+  text(6.5, 8, "1. Run RDP Classifier on public 16S rRNA datasets (see Tables 1 and S1)", adj = 0)
+  text(6.5, 7, "2. Assemble counts of lowest-level classifications (genus to phylum)", adj = 0)
+  text(6.5, 6, "3. Mapping step 1: Change some RDP names to NCBI equivalents (see Methods)", adj = 0)
+  text(6.5, 5, "4. Mapping step 2: Text match between RDP and NCBI names", adj = 0)
+  text(6.5, 4, "5. Multiply classification counts by precomputed chemical metrics", adj = 0)
+  text(6.5, 3, "6. Divide by number of classifications to get mean ZC and nH2O for community", adj = 0)
+  text(6.5, 2, "7. Visualize data", adj = 0)
+
+  if(pdf) dev.off()
+
+}
+
+# Scatterplots of ZC and nH2O for genera vs higher taxonomic levels 20211130
+geo16S_S2 <- function(pdf = FALSE) {
+  if(pdf) pdf("geo16S_S2.pdf", width = 12, height = 6)
+
+  # Read file with precomputed metrics for taxa at different ranks
+  metrics <- read.csv(system.file("extdata/chem16S/taxon_metrics.csv", package = "JMDplots"))
+  # Get tables of all taxonomic names and amino acid compositions
+  names <- read.csv(system.file("extdata/refseq/taxid_names.csv.xz", package = "JMDplots"))
+  # Take out viruses
+  ivirus <- names$superkingdom == "Viruses"
+  ivirus[is.na(ivirus)] <- TRUE
+  names <- names[!ivirus, ]
+
+  # Initialize list of ZC and nH2O values for taxa in each rank
+  NAvec <- rep(NA, nrow(names))
+  nH2O <- ZC <- list(genus = NAvec, family = NAvec, order = NAvec, class = NAvec, phylum = NAvec, superkingdom = NAvec)
+
+  for(rank in c("genus", "family", "order", "class", "phylum", "superkingdom")) {
+    icol <- match(rank, colnames(names))
+    isrank <- !is.na(names[, icol])
+    # Use a copy of the metrics table with blanked-out names of taxa not at this rank
+    thismet <- metrics
+    thismet$group[metrics$rank != rank] <- ""
+    # Lookup these taxa in the metrics table
+    imetrics <- match(names[, icol][isrank], thismet$group)
+    # Make sure all taxa are in this rank
+    stopifnot(identical(unique(thismet$rank[imetrics]), rank))
+    # Store ZC and nH2O values
+    ZC[[rank]][isrank] <- thismet$ZC[imetrics]
+    names(ZC[[rank]])[isrank] <- names[, icol][isrank]
+    nH2O[[rank]][isrank] <- thismet$nH2O[imetrics]
+    names(nH2O[[rank]])[isrank] <- names[, icol][isrank]
+  }
+
+  # Print number of genera
+  ngenus <- length(na.omit(unique(names(ZC[["genus"]]))))
+  print(paste("There are", ngenus, "genera"))
+
+  # Make plots
+  par(mfrow = c(2, 5))
+  par(mgp = c(2.9, 1, 0))
+  # Identify superkingdoms
+  iArc <- names(ZC[["superkingdom"]]) == "Archaea"
+  iBac <- names(ZC[["superkingdom"]]) == "Bacteria"
+
+  cex <- 2
+  cex.an <- 1
+  # Outer loop: ZC or nH2O
+  for(metric in c("ZC", "nH2O")) {
+    
+    # Inner loop: higher-level ranks
+    ranks <- c("family", "order", "class", "phylum", "superkingdom")
+    for(rank in ranks) {
+      if(metric == "ZC") { x <- ZC[["genus"]]; y <- ZC[[rank]] }
+      if(metric == "nH2O") { x <- nH2O[["genus"]]; y <- nH2O[[rank]] }
+      xylim <- range(na.omit(x))
+      # Start plot and add 1:1 line
+      if(metric == "ZC") plot(xylim, xylim, type = "n", xlab = quote("genus"~italic(Z)[C]), ylab = bquote(.(rank)~italic(Z)[C]))
+      if(metric == "nH2O") plot(xylim, xylim, type = "n", xlab = quote("genus"~italic(n)[H[2]*O]), ylab = bquote(.(rank)~italic(n)[H[2]*O]))
+      lines(xylim, xylim, lty = 2, col = "gray40")
+      # Add points: Bacteria then Archaea
+      points(x[iBac], y[iBac], pch = ".", col = "steelblue3", cex = cex)
+      points(x[iArc], y[iArc], pch = ".", col = 2, cex = cex)
+      # Add points and linear regression
+      thislm <- lm(y ~ x)
+      lines(xylim, predict(thislm, data.frame(x = xylim)), col = "#00000080")
+      # Add R2 value
+      R2 <- summary(thislm)$r.squared
+      R2txt <- bquote(italic(R)^2 == .(formatC(R2, digits = 3, format = "f")))
+      legend("topleft", legend = R2txt, bty = "n")
+      if(metric == "ZC") {
+        # Add title with number of taxa at this rank
+        plural <- switch(rank, "genus" = "genera", "family" = "families", "order" = "orders",
+          "class" = "classes", "phylum" = "phyla", "superkingdom" = "superkingdoms")
+        ntaxa <- length(unique(names(ZC[[rank]])))
+        title(paste(ntaxa, plural), font.main = 1)
+      }
+    }
+  }
+
+  if(pdf) dev.off()
+
+}
+
+# Abundance and ZC of classes in oxidizing and reducing conditions 20210609
+geo16S_S3 <- function(pdf = FALSE) {
+  if(pdf) pdf("geo16S_S3.pdf", width = 9, height = 12)
+  par(mfrow = c(4, 3))
+  par(mar = c(4, 4, 2, 1))
+  par(mgp = c(2, 1, 0))
+
+  study <- c(
+    "GBL+15", "JHM+16", "MPB+17", "BCA+21",
+    "SVH+19", "MZG+20", "HXZ+20",
+    "UKD+18.water", "MMA+20_spring",
+    "CHM+14_injected-49", "HRR+18_injected-130", "ZLF+19_injected-18"
+  )
+  description <- c(
+    "ETNP water", "Lake Fryxell mat", "Manus Basin vents", "Ursu Lake water",
+    "Black Sea water", "Swiss lakes", "Sansha Yongle Blue Hole",
+    "NW Pennsylvania water", "PASF Streams (spring)",
+    "Marcellus Shale", "Denver-Julesburg Basin", "Duvernay Formation"
+  )
+  pch1 <- c(24, 24, 21, 24, 24, 24, 24, 1, 1, 1, 1, 1, 1)
+  pch2 <- c(25, 25, 23, 25, 25, 25, 25, 21, 21, 21, 21, 21, 21)
+  xadj <- list(
+    c(Gammaproteobacteria = 1.1, Flavobacteriia = -0.9, Planctomycetacia = 0.5),
+    c(Alphaproteobacteria = -0.25, Saprospiria = 0.5),
+    c(Campylobacteria = 0.5, Deltaproteobacteria = 0.1),
+    c(Saprospiria = -0.6, Gammaproteobacteria = -0.5, Balneolia = -0.65, Deltaproteobacteria = 1.3, Cytophagia = -0.35, Clostridia = 1.5, Verrucomicrobiae = -0.1, Planctomycetacia = -0.22),
+    c(Planctomycetacia = -0.2, Cyanobacteria = -0.9, Alphaproteobacteria = -0.75, Verrucomicrobiae = -0.3, Flavobacteriia = -0.45, Deltaproteobacteria = 0.9, Gammaproteobacteria = -0.35),
+    c(Phycisphaerae = -0.3, Planctomycetacia = -0.27, Alphaproteobacteria = -0.15, Nitrospira = -0.15, Cyanobacteria = -0.65, Gammaproteobacteria = 1),
+    c(Acidimicrobiia = -0.05, Alphaproteobacteria = -0.05, Cyanobacteria = -0.8, Gammaproteobacteria = 1.05),
+    c(Alphaproteobacteria = 1, Bacilli = -0.2, Actinobacteria = -0.05),
+    c(Acidobacteria_Gp6 = -0.1, Acidobacteria_Gp1 = -0.1, Spartobacteria = -0.1, Subdivision3 = -0.1, Deltaproteobacteria = 0.3, Alphaproteobacteria = 0.87, Betaproteobacteria = 0.2),
+    c(Gammaproteobacteria = -0.1, Clostridia = 1.2, Campylobacteria = -0.55),
+    c(Gammaproteobacteria = -0.2),
+    c(Actinobacteria = -0.05, Betaproteobacteria = -0.3, Alphaproteobacteria = 0.1, Flavobacteriia = -0.5, Clostridia = 1.7)
+  )
+  yadj <- list(
+    c(Cyanobacteria = 1.5, Flavobacteriia = 0, Planctomycetacia = -0.8),
+    c(Saprospiria = -0.5, Planctomycetacia = 1.5, Verrucomicrobiae = -0.4, Caldilineae = 2, Deltaproteobacteria = -0.2, Cytophagia = 1.4),
+    c(Gammaproteobacteria = 1.2, Deltaproteobacteria = -0.6, Flavobacteriia = -0.4, Campylobacteria = -3.5),
+    c(Saprospiria = 0, Balneolia = 0, Deltaproteobacteria = -1.7, Cytophagia = -0.6, Flavobacteriia = 1.5, Clostridia = 0, Verrucomicrobiae = 2),
+    c(Alphaproteobacteria = -2.6, Verrucomicrobiae = 12, Flavobacteriia = -2, Deltaproteobacteria = 1.8),
+    c(Phycisphaerae = -1, Planctomycetacia = -12, Nitrospira = 1.9, Deltaproteobacteria = -0.5, Gammaproteobacteria = -1.2),
+    c(Acidimicrobiia = 1.3, Cyanobacteria = 1.5, Nitrospinia = 1.7, Flavobacteriia = -0.5),
+    c(Betaproteobacteria = 1.3, Clostridia = -0.2),
+    c(Acidobacteria_Gp3 = -1.3, Subdivision3 = 1, Acidobacteria_Gp1 = -0.5, Spartobacteria = 0.3, Deltaproteobacteria = 1.3, Betaproteobacteria = -0.8, Alphaproteobacteria = 1.9),
+    c(Clostridia = 1.3),
+    c(Gammaproteobacteria = 1.3),
+    c(Actinobacteria = 1.2, Betaproteobacteria = 1, Alphaproteobacteria = 1.6)
+  )
+
+  n1 <- n2 <- DZC <- numeric()
+  for(i in 1:length(study)) {
+    gg <- groupmet(study[i], param = "ZC", rank = "class", pch1 = pch1[i], pch2 = pch2[i], xadj = xadj[[i]], yadj = yadj[[i]], scale100 = TRUE, minpercent = 2)
+    title(description[i])
+    # Assemble percent contribution by each taxonomic group
+    P <- round(gg$DX / diff(gg$Xall) * 100)
+    P <- as.data.frame(t(P))
+    # Include study name and merge with other studies
+    P <- cbind(study = study[i], P)
+    if(i==1) percent <- P else percent <- merge(percent, P, all = TRUE)
+    # Keep track of the overall ZC change
+    DZC <- c(DZC, diff(gg$Xall))
+    # Keep track of number of samples 20210902
+    n1 <- c(n1, gg$n1)
+    n2 <- c(n2, gg$n2)
+  }
+  if(pdf) dev.off()
+  # Put studies in correct order (they are alphabetized by merge()) 20210902
+  percent <- percent[match(study, percent$study), ]
+
+  # Save results for geo16S6() 20210610
+  out <- cbind(n1 = n1, n2 = n2, DZC = round(DZC, 6), percent)
+  #write.csv(out, "geo16S_S3.csv", row.names = FALSE, quote = FALSE)
 }
 

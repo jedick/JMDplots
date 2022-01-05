@@ -50,9 +50,10 @@ export(
   # chem16S functions 20210416
   "getmdat", "getRDP", "getmap", "getmetrics",
   # geo16S paper 20210416-20210610
-  "geo16S1", "geo16S2", "geo16S3", "geo16S4", "geo16S5", "geo16S6", "geo16S_S1",
+  "geo16S1", "geo16S2", "geo16S3", "geo16S4", "geo16S5", "geo16S6", "geo16S_S3",
   "taxacomp", "plotmet", "addhull", "groupmet",
   "geo16S7", # 20211018
+  "geo16S_S1", "geo16S_S2", # 20220105
   # can16S paper 20210604
   "getrefseq", "getgroup", "groupperc",
   # orp16S paper 20211003-20211008
