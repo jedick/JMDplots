@@ -2,7 +2,7 @@
 
 # Functions to create intermediate data files from RefSeq amino acid compositions
 
-# Calculate amino acid composition of taxonomic groups at genus and higher ranks --> groupAA.csv
+# Calculate amino acid composition of taxonomic groups at genus and higher ranks --> taxon_AA.csv
 # mkAA()       
 # Calculate chemical metrics (nH2O, ZC) for each RefSeq group --> taxon_metrics.csv
 # mkmetrics()         
@@ -51,15 +51,17 @@ mkAA <- function(ranks = c("genus", "family", "order", "class", "phylum", "super
 
     # Loop over names
     for(i in 1:length(names)) {
-      # Find all RefSeq taxa that have this taxon name
+      # Find all RefSeq species that have this taxon name
       taxon <- names[i]
       istax <- taxa[, icol] == taxon
       istax[is.na(istax)] <- FALSE
       if(any(istax)) {
-        # Sum the number of sequences ("chains" column) and amino acid composition for this taxon
+        # Sum the number of species ("chains" column) and amino acid composition for this taxon
         sumAA <- colSums(refseq[istax, 5:25])
-        AA[i, 5:25] <- sumAA
-        # Put the number of sequences into the "ref" column
+        # Divide by the number of species to get the mean amino acid composition for this taxon 20220107
+        meanAA <- sumAA / sumAA[1]
+        AA[i, 5:25] <- meanAA
+        # Put the number of species into the "ref" column
         AA$ref[i] <- sum(istax)
         # Put the parent taxon into the "abbrv" column
         parent <- "Root"
@@ -83,7 +85,7 @@ mkAA <- function(ranks = c("genus", "family", "order", "class", "phylum", "super
     }
 
     # Round the values
-    AA[, 5:25] <- round(AA[, 5:25], 1)
+    AA[, 5:25] <- round(AA[, 5:25], 2)
     out[[rank]] <- AA
 
   }
@@ -92,13 +94,13 @@ mkAA <- function(ranks = c("genus", "family", "order", "class", "phylum", "super
   out <- do.call(rbind, out)
   # Replace NA parent with ""
   out$abbrv[is.na(out$abbrv)] <- ""
-  write.csv(out, "groupAA.csv", row.names = FALSE, quote = FALSE)
+  write.csv(out, "taxon_AA.csv", row.names = FALSE, quote = FALSE)
 }
 
 # Compute chemical metrics for each RefSeq group 20200927
 mkmetrics <- function() {
   # Read amino acid compositions of all groups
-  AA <- read.csv("groupAA.csv", as.is = TRUE)
+  AA <- read.csv("taxon_AA.csv", as.is = TRUE)
   # Build output data frame; rename columns for better readability
   out <- data.frame(rank = AA$protein, group = AA$organism, ntaxa = AA$ref, parent = AA$abbrv, nH2O = NA, ZC = NA, nC = NA)
   # Calculate metrics

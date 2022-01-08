@@ -147,7 +147,7 @@ geo16S7()
 geo16S_S1()
 ```
 
-## Scatterplots of `r ZC` and `r nH2O` for 3442 bacterial and archaeal genera vs higher taxonomic levels (Figure S2)
+## Scatterplots of `r ZC` and `r nH2O` for 3443 bacterial and archaeal genera vs higher taxonomic levels (Figure S2)
 ```{r geo16S_S2, message = FALSE, results = "hide", out.width='100%', fig.width = 12, fig.height = 6, out.extra = 'class="full-width"', pngquant = pngquant}
 geo16S_S2()
 ```

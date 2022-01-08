@@ -834,6 +834,10 @@ geo16S_S2 <- function(pdf = FALSE) {
   ivirus <- names$superkingdom == "Viruses"
   ivirus[is.na(ivirus)] <- TRUE
   names <- names[!ivirus, ]
+  # Take out NA genera and dereplicate lineages 20220107
+  names <- names[!is.na(names$genus), ]
+  gfocp <- apply(names[, c("genus", "family", "order", "class", "phylum")], 1, paste, collapse = " ")
+  names <- names[!duplicated(gfocp), ]
 
   # Initialize list of ZC and nH2O values for taxa in each rank
   NAvec <- rep(NA, nrow(names))
@@ -857,7 +861,7 @@ geo16S_S2 <- function(pdf = FALSE) {
   }
 
   # Print number of genera
-  ngenus <- length(na.omit(unique(names(ZC[["genus"]]))))
+  ngenus <- length(names(ZC[["genus"]]))
   print(paste("There are", ngenus, "genera"))
 
   # Make plots

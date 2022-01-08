@@ -6,7 +6,7 @@
 # Utility functions
 # getmdat("SVH+19")     # Metadata for this study (study, name, Run, BioSample, sample, type, cohort)
 # getRDP("SVH+19")      # RDP results for all samples in this study
-# getmap("SVH+19")      # Map RDP to RefSeq taxonomy (match to rows of groupAA.csv)
+# getmap("SVH+19")      # Map RDP to RefSeq taxonomy (match to rows of taxon_AA.csv)
 # getmetrics("SVH+19")  # Calculate chemical metrics (nH2O, ZC) for each sample
 
 #####################
@@ -560,7 +560,7 @@ getmap <- function(study, RDP = NULL, lineage = NULL, mincount = 200) {
 
   # Read amino acid composition of all taxonomic groups in RefSeq
   datadir <- system.file("extdata/chem16S", package = "JMDplots")
-  AA <- read.csv(file.path(datadir, "groupAA.csv"), as.is = TRUE)
+  AA <- read.csv(file.path(datadir, "taxon_AA.csv"), as.is = TRUE)
   AAgroups <- paste(AA$protein, AA$organism, sep = "_")
   # Do the mapping!
   iAA <- match(RDPgroups, AAgroups)
