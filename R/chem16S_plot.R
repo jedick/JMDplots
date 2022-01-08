@@ -380,9 +380,9 @@ getgroup <- function(study = "XDZ+17", param = "nH2O", rank = "domain", pch1 = 2
   # Retrieve colors for points
   col1 <- mdat[i1, ]$col[1]
   col2 <- mdat[i2, ]$col[1]
-  # Read chemical metrics for faster running
+  # Read amino acid compositions for faster running
   datadir <- system.file("extdata/chem16S", package = "JMDplots")
-  taxon_metrics <- read.csv(file.path(datadir, "taxon_metrics.csv"), as.is = TRUE)
+  taxon_AA <- read.csv(file.path(datadir, "taxon_AA.csv"), as.is = TRUE)
 
   # Split the lineage text
   lsplit <- strsplit(RDP$lineage, ";")
@@ -421,7 +421,7 @@ getgroup <- function(study = "XDZ+17", param = "nH2O", rank = "domain", pch1 = 2
     Pboth <- c(Pboth, thispercent)
 
     # Calculate the chemical metrics
-    metrics <- getmetrics(study, mdat = mdat, RDP = thisRDP, map = thismap, metrics = taxon_metrics, groups = list(i1, i2))
+    metrics <- getmetrics(study, mdat = mdat, RDP = thisRDP, map = thismap, taxon_AA = taxon_AA, groups = list(i1, i2))
     # Get selected chemical metric
     if(param == "nH2O") X <- metrics$nH2O
     if(param == "ZC") X <- metrics$ZC

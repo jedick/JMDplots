@@ -592,7 +592,7 @@ getmap <- function(study, RDP = NULL, lineage = NULL, mincount = 200) {
 }
 
 # Get chemical metrics for all samples in a study 20200927
-getmetrics <- function(study, cn = FALSE, mdat = NULL, RDP = NULL, map = NULL, lineage = NULL, mincount = 200, metrics = NULL, groups = NULL) {
+getmetrics <- function(study, cn = FALSE, mdat = NULL, RDP = NULL, map = NULL, lineage = NULL, mincount = 200, taxon_AA = NULL, groups = NULL) {
   # Handle missing arguments
   if(is.null(mdat)) mdat <- getmdat(study)
   if(is.null(RDP)) RDP <- getRDP(study, cn = cn, mdat = mdat, lineage = lineage, mincount = mincount)
@@ -603,14 +603,15 @@ getmetrics <- function(study, cn = FALSE, mdat = NULL, RDP = NULL, map = NULL, l
   # Exclude NA mappings
   RDP <- RDP[!is.na(map), ]
   map <- na.omit(map)
-  if(length(map) == 0) stop("no mappings to available RefSeq taxa!")
+  if(length(map) == 0) stop("no available mappings RefSeq taxa!")
 
-  # Get chemical metrics of RefSeq groups
+  # Get amino acid compositions of taxa compiled from RefSeq sequences
+  # (no longer using precompiled metrics in taxon_metrics.csv 20220108)
   datadir <- system.file("extdata/chem16S", package = "JMDplots")
-  if(is.null(metrics)) metrics <- read.csv(file.path(datadir, "taxon_metrics.csv"), as.is = TRUE)
-  metrics <- metrics[map, ]
-  # Make sure the mapping is correct
-  equalrank <- RDP$rank == metrics$rank
+  if(is.null(taxon_AA)) taxon_AA <- read.csv(file.path(datadir, "taxon_AA.csv"), as.is = TRUE)
+  # Keep only those taxa used in the mapping
+  taxon_AA <- taxon_AA[map, ]
+  equalrank <- RDP$rank == taxon_AA$protein
   # Don't test particular RDP-NCBI mappings that cross ranks
   iclassCyano <- RDP$rank == "class" & RDP$name == "Cyanobacteria"
   igenusSparto <- RDP$rank == "genus" & RDP$name == "Spartobacteria_genera_incertae_sedis"
@@ -623,14 +624,16 @@ getmetrics <- function(study, cn = FALSE, mdat = NULL, RDP = NULL, map = NULL, l
   stopifnot(all(equalrank))
 
   # Get classification matrix (rows = taxa, columns = samples)
-  RDPmat <- RDP[, -(1:3), drop = FALSE]
-  # Calculate abundance-weighted mean nH2O for each sample
-  nH2O <- colSums(RDPmat * metrics$nH2O) / colSums(RDPmat)
-  # To calculate ZC, we need to compute the sum of charge (ZC * nC) and the sum of carbon atoms
-  sumZ <- colSums(RDPmat * metrics$ZC * metrics$nC)
-  sumC <- colSums(RDPmat * metrics$nC)
-  ZC <- sumZ / sumC
+  RDPmat <- as.matrix(RDP[, -(1:3), drop = FALSE])
+  # Get amino acid matrix (rows = taxa, columns = amino acid)
+  AAmat <- as.matrix(taxon_AA[, 6:25, drop = FALSE])
+
   if(is.null(groups)) {
+    # Calculate amino acid composition for each sample (weighted by taxon abundances)
+    AAcomp <- t(RDPmat) %*% AAmat
+    # Calculate ZC and nH2O from amino acid composition
+    ZC <- ZCAA(AAcomp)
+    nH2O <- H2OAA(AAcomp)
     # Create output data frame
     # Use first column name starting with "sample" or "Sample" 20210818
     sampcol <- grep("^sample", colnames(mdat), ignore.case = TRUE)[1]
@@ -641,10 +644,9 @@ getmetrics <- function(study, cn = FALSE, mdat = NULL, RDP = NULL, map = NULL, l
     for(i in 1:length(groups)) {
       # Use rowSums to combine all samples in each group into one meta-sample
       thisRDP <- rowSums(RDPmat[, groups[[i]], drop = FALSE])
-      nH2O <- c(nH2O, sum(thisRDP * metrics$nH2O) / sum(thisRDP))
-      sumZ <- sum(thisRDP * metrics$ZC * metrics$nC)
-      sumC <- sum(thisRDP * metrics$nC)
-      ZC <- c(ZC, sumZ / sumC)
+      AAcomp <- t(thisRDP) %*% AAmat
+      ZC <- c(ZC, ZCAA(AAcomp))
+      nH2O <- c(nH2O, H2OAA(AAcomp))
     }
     out <- data.frame(Run = rep(NA, length(groups)), sample = 1:length(groups), nH2O = nH2O, ZC = ZC)
   }
