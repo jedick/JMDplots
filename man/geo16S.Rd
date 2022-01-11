@@ -19,7 +19,7 @@ Plots from the paper by Dick and Tan (2021).
 \usage{
   geo16S1(pdf = FALSE)
   geo16S2(pdf = FALSE)
-  geo16S3(pdf = FALSE, plot.it = TRUE)
+  geo16S3(pdf = FALSE)
   geo16S4(pdf = FALSE)
   geo16S5(pdf = FALSE)
   geo16S6(pdf = FALSE)
@@ -31,7 +31,6 @@ Plots from the paper by Dick and Tan (2021).
 
 \arguments{
   \item{pdf}{logical, make a PDF file?}
-  \item{plot.it}{logical, make a plot?}
 }
 
 \details{
@@ -50,9 +49,6 @@ This table gives a brief description of each plotting function.
   \code{geo16S_S4} \tab Abundance and \ZC of classes in oxidizing and reducing conditions \cr
 }
 
-For \code{geo16S3}, the \code{plot.it} argument can be used to prevent plotting, and instead return the \ZC and \nH2O values for all the points in the plot.
-This is used by \code{code16S2} to make the convex hull for the datasets plotted by \code{geo16S3}.
-
 }
 
 \section{Files in extdata/geo16S}{
@@ -60,10 +56,20 @@ This is used by \code{code16S2} to make the convex hull for the datasets plotted
     \item{\code{geo16S_S4.csv}}{File created by running \code{write.csv(geo16S_S4(), "geo16S_S4.csv", row.names = FALSE, quote = FALSE)}, used by \code{geo16S5}.}
     \item{\code{metadata/*.csv}}{Sample metadata for each study.}
     \item{\code{RDP/*.csv.xz}}{RDP Classifier results combined into a single CSV file for each study, created with the \code{mkRDP} function in the \code{process.R} script (\code{\link{chem16S}}).}
+    \item{\code{AWDM15.csv}}{Accession numbers and sample descriptions for the Human Microbiome Project, Soils, and Mammalian Guts datasets taken from Supplementary Material of Aßhauer et al. (2015) and used in \code{geo16S6}.}
+  }
+}
+
+\section{Files in extdata/geo16S/ARAST}{
+  \describe{
+    \item{\code{*_AA.csv}}{Mean amino acid compositions of protein fragments inferred from metagenomes, produced by \code{runARAST.R} and used in \code{geo16S6}.}
+    \item{\code{scripts/}}{Directory with script files \code{ARAST.R} for the analysis pipeline, \code{runARAST.R} to run the pipeline for each dataset, and supporting Bash and Perl script files. The \code{ARAST.R} file is a modified version of the pipeline used in a previous study (see \code{\link{gradox}}).}
   }
 }
 
 \references{
+Aßhauer, K. P., Wemheuer, B., Daniel, R. and Meinicke, P. (2015) Tax4Fun: predicting functional profiles from metagenomic 16S rRNA data. \emph{Bioinformatics} \bold{31}, 2882--2884. \doi{10.1093/bioinformatics/btv287}
+
 Dick, J. M. and Tan, J. (2021) Genomic evidence for a chemical link between redox conditions and microbial community composition. bioRxiv. \doi{https://doi.org/10.1101/2021.05.31.446500}
 }
 

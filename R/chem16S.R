@@ -82,7 +82,7 @@ getmdat <- function(study, dropNA = TRUE) {
     col <- sapply(mdat$zone, switch, A = 4, B = 1, C = 2)
   }
 
-  # Unconvential oil and gas environments
+  # Shale gas datasets
   if(study == "UKD+18.water") {
     pch <- sapply(mdat$type, switch, "MSA+" = 21, "MSA-" = 1)
     col <- sapply(mdat$type, switch, "MSA+" = 2, "MSA-" = 1)
@@ -212,6 +212,20 @@ getmdat <- function(study, dropNA = TRUE) {
   if(study == "EH18") {
     pch <- sapply(mdat$type, switch, top = 24, transition = 20, bottom = 25)
     col <- sapply(mdat$type, switch, top = 4, transition = 1, bottom = 2)
+  }
+
+  # Dataets for metagenome comparison 20220111
+  if(study == "MKK+11") {
+    pch <- rep(NA, nrow(mdat))
+    col <- rep(NA, nrow(mdat))
+  }
+  if(study == "FLA+12") {
+    pch <- rep(NA, nrow(mdat))
+    col <- rep(NA, nrow(mdat))
+  }
+  if(study == "HMP12") {
+    pch <- rep(NA, nrow(mdat))
+    col <- rep(NA, nrow(mdat))
   }
 
   ## Datasets for orp16S paper 20211003

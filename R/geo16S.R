@@ -583,89 +583,282 @@ geo16S5 <- function(pdf = FALSE) {
 }
 
 # Comparison of protein ZC from metagenomic or metatranscriptomic data with estimates from 16S and reference sequences 20211017
+# Add Marcellus, HMP, and Soils and Guts 20211218
 geo16S6 <- function(pdf = FALSE) {
 
-  if(pdf) pdf("geo16S6.pdf", width = 7, height = 5)
-  par(mar = c(4, 4, 1, 1), mgp = c(2.8, 1, 0))
+  if(pdf) pdf("geo16S6.pdf", width = 10, height = 6)
+  mat <- matrix(c(1,1, 2,2, 3,3, 0, 4,4, 5,5, 0), nrow = 2, byrow = TRUE)
+  layout(mat)
+  par(mar = c(4, 4, 2, 1), mgp = c(2.8, 1, 0))
+  xylim <- c(-0.22, -0.12)
 
-  # Start plot
-  xylim <- c(-0.22, -0.13)
+  ### Panel A: Comparisons with metagenomes analyzed by Dick et al. (2019)
+
+  # Start plot A
   xlab <- quote(italic(Z)[C]~"from metagenome or metatranscriptome")
-  ylab <- quote(italic(Z)[C]~"estimated from 16S and reference sequences")
+  ylab <- quote(italic(Z)[C]~"estimated from 16S rRNA")
   plot(xylim, xylim, type = "n", xlab = xlab, ylab = ylab)
   lines(xylim, xylim, lty = 2, col = "gray40")
 
-  # Get ZC calculated from Guerrero Negro metagenome (Kunin et al., 2008)
+  ## Guerrero Negro metagenome (Kunin et al., 2008)
   dat_MG <- mplot("Guerrero_Negro", "IMG_MGP", plot.it = FALSE)
   # Reverse the order because upper mat layers are plotted on the right
   ZC_MG <- rev(dat_MG$AA)
-  # Get ZC calculated from Guerrero Negro 16S data (Harris et al., 2013)
+  # 16S data (Harris et al., 2013)
   dat_16S <- getmetrics("HCW+13")
   ZC_16S <- dat_16S$ZC
   # Check that the sample names are the same
   stopifnot(all.equal(rev(rownames(dat_MG$meancomp)), gsub(".*_", "", dat_16S$sample)))
-  # Add lines to plot
-  lines(ZC_MG, ZC_16S, type = "b")
+  # Add lines and points
+  lines(ZC_MG, ZC_16S)
+  points(ZC_MG, ZC_16S, pch = 21, bg = "white")
   # Fill symbol for most oxidized (surface) sample
-  points(ZC_MG[1], ZC_16S[1], pch = 19)
+  points(ZC_MG[1], ZC_16S[1], pch = 21, bg = 1)
   # Label points for upper 3 layers
   text(c(-0.135, -0.1382, -0.1422), c(-0.1472, -0.1598, -0.1618), c("1", "2", "3"), cex = 0.8)
-  text(-0.135, -0.17, "Guerrero\nNegro")
+  text(-0.135, -0.170, "Guerrero\nNegro")
 
-  # Get ZC calculated from ETNP OMZ metagenome (Glass et al., 2015)
+  ## ETNP OMZ metagenome (Glass et al., 2015)
   dat_MG <- mplot("ETNP_OMZ", "SRA_MGP", plot.it = FALSE)
   # Reverse the order because smaller water depths are plotted on the right
   ZC_MG <- rev(dat_MG$AA)
-  # Get ZC calculated from ETNP OMZ 16S data (Ganesh et al., 2015)
+  # 16S data (Ganesh et al., 2015)
   dat_16S <- getmetrics("GBL+15")
   # Use smallest size fraction
   dat_16S <- subset(dat_16S, grepl("1.6micron", dat_16S$sample))
   ZC_16S <- dat_16S$ZC
   # Check that the sample names are the same
-  all.equal(rev(rownames(dat_MG$meancomp)), gsub("_.*", "", dat_16S$sample))
-  # Add lines to plot
-  lines(ZC_MG, ZC_16S, type = "b")
-  # Fill symbol for most oxidized (surface) sample
-  points(ZC_MG[1], ZC_16S[1], pch = 19)
-  text(-0.153, -0.177, "ETNP")
+  stopifnot(all.equal(rev(rownames(dat_MG$meancomp)), gsub("_.*", "", dat_16S$sample)))
+  # Add lines and points
+  lines(ZC_MG, ZC_16S)
+  points(ZC_MG, ZC_16S, pch = 21, bg = "white")
+  # Fill symbol for surface sample
+  points(ZC_MG[1], ZC_16S[1], pch = 21, bg = 1)
+  text(-0.154, -0.178, "ETNP")
 
-  # Get ZC calculated from Bison Pool metagenome (Havig et al., 2011)
+  ## ETNP OMZ metatranscriptome (Ganesh et al., 2015)
+  dat_MT <- mplot("ETNP_OMZ", "SRA_MTP", plot.it = FALSE)
+  # Reverse the order because smaller water depths are plotted on the right
+  ZC_MT <- rev(dat_MT$AA)
+  # 16S data (Ganesh et al., 2015)
+  dat_16S <- getmetrics("GBL+15")
+  # Use smallest size fraction
+  dat_16S <- subset(dat_16S, grepl("1.6micron", dat_16S$sample))
+  ZC_16S <- dat_16S$ZC
+  # Check that the sample names are the same
+  stopifnot(all.equal(rev(rownames(dat_MT$meancomp)), gsub("_.*", "", dat_16S$sample)))
+  # Add lines and points
+  lines(ZC_MT, ZC_16S, col = 4)
+  points(ZC_MT, ZC_16S, pch = 22, bg = "white", col = 4)
+  # Fill symbol for surface sample
+  points(ZC_MT[1], ZC_16S[1], pch = 22, bg = 4, col = 4)
+
+  ## Bison Pool metagenome (Havig et al., 2011)
   dat_MG <- mplot("Bison_Pool", "IMG_MGP", plot.it = FALSE)
   ZC_MG <- dat_MG$AA
-  # Get ZC calculated from Bison Pool 16S data (Swingley et al., 2012)
+  # 16S data (Swingley et al., 2012)
   dat_16S <- getmetrics("SMS+12")
   ZC_16S <- dat_16S$ZC
   # Check that the sample names are the same
   stopifnot(all.equal(rownames(dat_MG$meancomp), dat_16S$sample))
-  # Add lines to plot
-  lines(ZC_MG, ZC_16S, type = "b")
-  # Fill symbol for most oxidized (low-T) sample
-  points(ZC_MG[5], ZC_16S[5], pch = 19)
-  text(-0.18, -0.197, "Bison Pool")
+  # Add lines and points
+  lines(ZC_MG, ZC_16S)
+  points(ZC_MG, ZC_16S, pch = 21, bg = "white")
+  # Fill symbol for low-T sample
+  points(ZC_MG[5], ZC_16S[5], pch = 21, bg = 1)
+  text(-0.17, -0.193, "Bison Pool")
 
-  # Get ZC calculated from Mono Lake metatranscriptome (Edwardson and Hollibaugh, 2017)
+  ## Mono Lake metatranscriptome (Edwardson and Hollibaugh, 2017)
   dat_MT <- mplot("Mono_Lake", "SRA_MTP", plot.it = FALSE)
   # NOTE: reverse the order because smaller water depths are plotted on the right
   ZC_MT <- rev(dat_MT$AA)
-  # Get ZC calculated from Mono Lake 16S data (Edwardson and Hollibaugh, 2018)
+  # 16S data (Edwardson and Hollibaugh, 2018)
   dat_16S <- getmetrics("EH18")
   ZC_16S <- dat_16S$ZC
   # Check that the sample names are the same
   stopifnot(all.equal(rev(rownames(dat_MT$meancomp)), gsub(".*_", "", dat_16S$sample)))
-  # Add lines to plot
-  lines(ZC_MT, ZC_16S, type = "b", pch = 0)
-  # Fill symbol for most oxidized (surface) sample
-  points(ZC_MT[1], ZC_16S[1], pch = 15)
-  text(-0.172, -0.145, "Mono Lake")
+  # Add lines and points
+  lines(ZC_MT, ZC_16S, pch = 0, col = 4)
+  points(ZC_MT, ZC_16S, pch = 22, bg = "white", col = 4)
+  # Fill symbol for surface sample
+  points(ZC_MT[1], ZC_16S[1], pch = 22, bg = 4, col = 4)
+  text(-0.178, -0.150, "Mono Lake")
 
   # Add legend
-  legend("topleft", character(3), pch = c(1, 0, 19), bty = "n")
-  legend("topleft", c("Metagenome", "Metatranscriptome", "Most oxidized", "(surface or low-T sample)"), pch = c(NA, NA, 15, NA), bty = "n", inset = c(0.02, 0))
+  legend("topleft", character(3), pch = c(1, 0, 19), col = c(1, 4, 1), bty = "n")
+  ltxt <- as.expression(c("Metagenome", "Metatranscriptome", quote("Surface or high-"*O[2]*" sample")))
+  legend("topleft", ltxt, pch = c(NA, NA, 15), col = c(NA, NA, 4), bty = "n", inset = c(0.025, 0))
+  # Add title and figure label
+  title("Various Environments", font.main = 1, cex.main = 1.1)
+  label.figure("A", cex = 1.5, font = 2, xfrac = 0.04, yfrac = 0.96)
+
+  ### Panels B-E: Comparisons with metagenomes analyzed in this study
+
+  # Start plot B
+  xlab <- quote(italic(Z)[C]~"from metagenome")
+  plot(xylim, xylim, type = "n", xlab = xlab, ylab = ylab)
+  lines(xylim, xylim, lty = 2, col = "gray40")
+
+  ## Marcellus metagenomes (Daly et al., 2016) 20211218
+  ARASTdir <- system.file("extdata/geo16S/ARAST", package = "JMDplots")
+  aa <- read.csv(file.path(ARASTdir, "Marcellus_AA.csv"))
+  ZC_MG <- ZC(protein.formula(aa))
+  # Marcellus 16S (Cluff et al., 2014)
+  dat_16S <- getmetrics("CHM+14")
+  # List run IDs here
+  ID <- list(
+    # Time points: input, T7, T13, T82, T328
+    Time = paste("Day", c(0, 7, 13, 82, 328)), 
+    Metagenome = c("SRR3111417", "SRR3111625", "SRR3111724", "SRR3111729", "SRR3111737"),
+    Amplicon = c("SRR1184016", "SRR1184060", "SRR1184062", "SRR1184081", "SRR1184083")
+    ## 16S replicate 2
+    #Amplicon2 = c("SRR1184049", "SRR1184061", "SRR1184063", "SRR1184082", "SRR1184084")
+  )
+  # Make sure metagenomes are in correct order
+  stopifnot(all(aa$protein == ID$Metagenome))
+  # Get 16S runs corresponding to metagenomes
+  idat <- match(ID$Amplicon, dat_16S$Run)
+  dat_16S <- dat_16S[idat, ]
+  ZC_16S <- dat_16S$ZC
+  # Assign colors: open circle for injected fluid, gray for flowback, red for produced
+  mdat <- getmdat("CHM+14")
+  mdat <- mdat[idat, ]
+  col <- rep("white", nrow(mdat))
+  col[mdat$type == "flowback fluid"] <- 8
+  col[mdat$type == "produced fluid"] <- 2
+  points(ZC_MG, ZC_16S, pch = 21, bg = col, type = "b")
+  dy <- c(-0.005, -0.005, 0.005, -0.005, -0.005)
+  text(ZC_MG, ZC_16S + dy, ID$Time)
+
+  # Add legend
+  legend("topleft", c("Injected", "Flowback", "Produced"), pch = 21, pt.bg = c("white", 8, 2), bty = "n")
+  # Add title and figure label
+  title("Marcellus Shale Fluids", font.main = 1, cex.main = 1.1)
+  label.figure("B", cex = 1.5, font = 2, xfrac = 0.04, yfrac = 0.96)
+
+  # Start plot C
+  xlab <- quote(italic(Z)[C]~"from metagenome")
+  plot(xylim, xylim, type = "n", xlab = xlab, ylab = ylab)
+  lines(xylim, xylim, lty = 2, col = "gray40")
+
+  ## Manus Basin metagenomes (Meier et al., 2017) 20220110
+  aa <- read.csv(file.path(ARASTdir, "Manus_AA.csv"))
+  ZC_MG <- ZC(protein.formula(aa))
+  # Manus Basin 16S (Meier et al., 2017)
+  dat_16S <- getmetrics("MPB+17")
+  # List run IDs here
+  ID <- list(
+    # Samples: NSu-F2b, NSu-F5, Fw-F1b, Fw-F3, RR-F1b
+    Sample = c("MNB27-NSu-F2b", "MNB29-NSu-F5", "MNB14-Fw-F1b", "MNB17-Fw-F3", "MNB45-RR-F1b"),
+    Metagenome = c("ERR1679394", "ERR1679395", "ERR1679397", "ERR1679396", "ERR1679398"),
+    Amplicon = c("ERR1665247", "ERR1665249", "ERR1665234", "ERR1665237", "ERR1665265")
+  )
+  # Make sure metagenomes are in correct order
+  stopifnot(all(aa$protein == ID$Metagenome))
+  # Get 16S runs corresponding to metagenomes
+  idat <- match(ID$Amplicon, dat_16S$Run)
+  dat_16S <- dat_16S[idat, ]
+  ZC_16S <- dat_16S$ZC
+  # Assign colors: blue for < 10 degC, red for > 50 degC
+  mdat <- getmdat("MPB+17")
+  mdat <- mdat[idat, ]
+  col <- rep("white", nrow(mdat))
+  col[mdat$T > 50] <- 2
+  col[mdat$T < 10] <- 4
+  points(ZC_MG, ZC_16S, pch = 22, bg = col, type = "b")
+  # Add sample names with O2 concentrations (from Figure S5 of Meier et al., 2017)
+  samptxt <- substr(ID$Sample, 7, 13)
+  samptxt <- paste0(samptxt, "\n", c(0.07, 0.14, 0.17, NA, 0.2), " mM O2")
+  samptxt <- gsub("NA mM O2", "ND O2\n\n", samptxt)
+  dx <- c(0.012, 0.012, -0.012, 0.008, 0.012)
+  text(ZC_MG + dx, ZC_16S - 0.01, samptxt, adj = c(0.5, 0))
+
+  # Add legend
+  legend("topleft", c("T > 50 \u00B0C", "10 \u00B0C < T < 50 \u00B0C", "T < 10 \u00B0C"), pch = 22, pt.bg = c(2, "white", 4), bty = "n")
+  # Add title and figure label
+  title("Manus Basin Vents", font.main = 1, cex.main = 1.1)
+  label.figure("C", cex = 1.5, font = 2, xfrac = 0.04, yfrac = 0.96)
+
+  ### Panels D-E: Plot ZC of 16S vs metagenomes for other datasets (used in Tax4Fun/PICRUSt papers) 20211215
+  # Read data for paired metagenomes and amplicon sequences from Tax4Fun paper (Aßhauer et al., 2015)
+  AWDM15file <- system.file("extdata/geo16S/AWDM15.csv", package = "JMDplots")
+  AWDM15 <- read.csv(AWDM15file)
+
+  # Start plot D
+  xlab <- quote(italic(Z)[C]~"from metagenome")
+  plot(xylim, xylim, type = "n", xlab = xlab, ylab = ylab)
+  lines(xylim, xylim, lty = 2, col = "gray40")
+
+  # HMP 16S
+  met <- getmetrics("HMP12")
+  # HMP metagenomes
+  aa <- read.csv(file.path(ARASTdir, "HMP_AA.csv"))
+  # Put data in same order
+  dat <- AWDM15[AWDM15$Name == "HMP", ]
+  imet <- match(dat$Amplicon, met$Run)
+  met <- met[imet, ]
+  iaa <- match(dat$Metagenome, aa$protein)
+  aa <- aa[iaa, ]
+  # Make sure the 16S and metagenomes are paired correctly
+  stopifnot(all(na.omit(met$Run == dat$Amplicon)))
+  stopifnot(all(aa$protein == dat$Metagenome))
+  # Get ZC values
+  ZC_16S <- met$ZC
+  ZC_MG <- ZC(protein.formula(aa))
+  # Assign colors: red for GI tract, gray for skin, blue for others
+  mdat <- getmdat("HMP12")
+  col <- ifelse(mdat$"Body site" == "GI tract", 2, 4)
+  col[mdat$"Body site" == "Skin"] <- 8
+  points(ZC_MG, ZC_16S, pch = 21, bg = col)
+
+  legend("topleft", c("Skin", "GI tract", "Other sites"), pch = 21, pt.bg = c(8, 2, 4), bty = "n")
+  title("Human Microbiome Project", font.main = 1, cex.main = 1.1)
+  label.figure("D", cex = 1.5, font = 2, xfrac = 0.04, yfrac = 0.96)
+
+  # Start plot E
+  xlab <- quote(italic(Z)[C]~"from metagenome")
+  plot(xylim, xylim, type = "n", xlab = xlab, ylab = ylab)
+  lines(xylim, xylim, lty = 2, col = "gray40")
+
+  # Guts 16S
+  met <- getmetrics("MKK+11")
+  # Guts metagenomes
+  aa <- read.csv(file.path(ARASTdir, "Guts_AA.csv"))
+  # Make sure the 16S and metagenomes are paired correctly
+  dat <- AWDM15[AWDM15$Name == "Guts", ]
+  stopifnot(all(paste0(met$Run, ".3") == paste0("mgm", dat$Amplicon)))
+  stopifnot(all(aa$protein == paste0("mgm", dat$Metagenome)))
+  # Get ZC values
+  ZC_16S <- met$ZC
+  ZC_MG <- ZC(protein.formula(aa))
+  points(ZC_MG, ZC_16S, pch = 21, bg = 2)
+
+  # Soils 16S
+  met <- getmetrics("FLA+12")
+  # Soils metagenomes
+  aa <- read.csv(file.path(ARASTdir, "Soils_AA.csv"))
+  # Put data in same order
+  dat <- AWDM15[AWDM15$Name == "Soils", ]
+  imet <- match(paste0("mgm", dat$Amplicon), paste0(met$Run, ".3"))
+  met <- met[imet, ]
+  iaa <- match(paste0("mgm", dat$Metagenome), aa$protein)
+  aa <- aa[iaa, ]
+  # Make sure the 16S and metagenomes are paired correctly
+  stopifnot(all(paste0(met$Run, ".3") == paste0("mgm", dat$Amplicon)))
+  stopifnot(all(aa$protein == paste0("mgm", dat$Metagenome)))
+  # Get ZC values
+  ZC_16S <- met$ZC
+  ZC_MG <- ZC(protein.formula(aa))
+  points(ZC_MG, ZC_16S, pch = 21)
+
+  legend("topleft", c("Soils", "Guts"), pch = 21, pt.bg = c("transparent", 2), bty = "n")
+  title("Soils and Mammalian Guts", font.main = 1, cex.main = 1.1)
+  label.figure("E", cex = 1.5, font = 2, xfrac = 0.04, yfrac = 0.96)
 
   if(pdf) dev.off()
 
-
 }
+
 
 # RefSeq and 16S rRNA data processing outline 20220104
 geo16S_S1 <- function(pdf = FALSE) {

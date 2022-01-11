@@ -129,11 +129,16 @@ geo16S5()
 ```
 
 ## Comparison of protein `r ZC` from metagenomic or metatranscriptomic data with estimates from 16S and reference sequences (Figure 6)
-```{r geo16S6, message = FALSE, results = "hide", out.width='100%', fig.width = 7, fig.height = 5, pngquant = pngquant}
+```{r geo16S6, message = FALSE, results = "hide", out.width='100%', fig.width = 10, fig.height = 6, out.extra = 'class="full-width"', pngquant = pngquant}
 geo16S6()
 ```
 
-**Data sources:** Guerrero Negro mat metagenome [@KRH+08], 16S [@HCW+13]; Bison Pool metagenome [@HRM+11], 16S [@SMS+12]; Eastern Tropical North Pacific metagenome [@GKG+15], 16S [@GBL+15]; Mono Lake metatranscriptome [@EH17], 16S [@EH18].
+**Data sources:** 
+**A**. Guerrero Negro mat metagenome [@KRH+08], 16S [@HCW+13]; Bison Pool metagenome [@HRM+11], 16S [@SMS+12]; Eastern Tropical North Pacific metagenome [@GKG+15], metatranscriptome and 16S [@GBL+15]; Mono Lake metatranscriptome [@EH17], 16S [@EH18].
+**B**. Marcellus Shale metagenome [@DBW+16], 16S [@CHM+14].
+**C**. Manus Basin [@MPB+17].
+**D**. Human Microbiome Project [@HMP12].
+**E**. Soils [@FLA+12]; mammalian guts [@MKK+11].
 
 ## RefSeq and 16S rRNA data processing outline (Figure S1)
 ```{r geo16S_S1, message = FALSE, results = "hide", out.width='100%', fig.width = 16, fig.height = 5, out.extra = 'class="full-width"', pngquant = pngquant}

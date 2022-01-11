@@ -1,0 +1,50 @@
+Name,Run,BioSample,"Body site","Body subsite","Sample name"
+HMP,SRR049646,NA,"GI tract","GI tract",SRS011271
+HMP,SRR049315,NA,"GI tract","GI tract",SRS011405
+HMP,SRR045327,NA,"GI tract","GI tract",SRS011452
+HMP,SRR045294,NA,"GI tract","GI tract",SRS011529
+HMP,SRR045344,NA,"GI tract","GI tract",SRS011586
+HMP,SRR041527,NA,"GI tract","GI tract",SRS013687
+HMP,SRR050386,NA,"GI tract","GI tract",SRS014235
+HMP,SRR043639,NA,"GI tract","GI tract",SRS014287
+HMP,SRR045715,NA,"GI tract","GI tract",SRS014613
+HMP,SRR045709,NA,"GI tract","GI tract",SRS014923
+HMP,SRR045722,NA,"GI tract","GI tract",SRS015133
+HMP,SRR047400,NA,"GI tract","GI tract",SRS015190
+HMP,SRR044021,NA,"GI tract","GI tract",SRS015578
+HMP,SRR044257,NA,"GI tract","GI tract",SRS015663
+HMP,SRR044216,NA,"GI tract","GI tract",SRS015782
+HMP,SRR043760,NA,"GI tract","GI tract",SRS015854
+HMP,SRR044087,NA,"GI tract","GI tract",SRS015960
+HMP,SRR044251,NA,"GI tract","GI tract",SRS016018
+HMP,SRR044252,NA,"GI tract","GI tract",SRS016056
+HMP,SRR044395,NA,"GI tract","GI tract",SRS016095
+HMP,SRR044423,NA,"GI tract","GI tract",SRS016203
+HMP,SRR044054,NA,"GI tract","GI tract",SRS016267
+HMP,SRR044424,NA,"GI tract","GI tract",SRS016335
+HMP,SRR044732,NA,"Nasal cavity",anterior_nares,SRS015450
+HMP,SRR041398,NA,"Nasal cavity",anterior_nares,SRS016434
+HMP,SRR040582,NA,"Nasal cavity",anterior_nares,SRS016553
+HMP,SRR041789,NA,"Oral cavity",buccal_mucosa,SRS013506
+HMP,SRR041621,NA,"Oral cavity",buccal_mucosa,SRS013711
+HMP,SRR040949,NA,"Oral cavity",buccal_mucosa,SRS016349
+HMP,SRR041712,NA,"Oral cavity",buccal_mucosa,SRS016533
+HMP,SRR041343,NA,"Oral cavity",buccal_mucosa,SRS016600
+HMP,SRR040791,NA,"Oral cavity",supragingival_plaque,SRS013252
+HMP,SRR041536,NA,"Oral cavity",supragingival_plaque,SRS013723
+HMP,SRR047457,NA,"Oral cavity",supragingival_plaque,SRS015470
+HMP,SRR044085,NA,"Oral cavity",supragingival_plaque,SRS015574
+HMP,SRR044384,NA,"Oral cavity",supragingival_plaque,SRS016331
+HMP,SRR040741,NA,"Oral cavity",tongue_dorsum,SRS013234
+HMP,SRR049863,NA,"Oral cavity",tongue_dorsum,SRS015762
+HMP,SRR044274,NA,"Oral cavity",tongue_dorsum,SRS016002
+HMP,SRR044381,NA,"Oral cavity",tongue_dorsum,SRS016225
+HMP,SRR040656,NA,"Oral cavity",tongue_dorsum,SRS016529
+HMP,SRR040697,NA,Skin,left_retroauricular_crease,SRS013258
+HMP,SRR040735,NA,Skin,right_retroauricular_crease,SRS013261
+HMP,SRR049312,NA,"UG tract",posterior_fornix,SRS011584
+HMP,SRR045699,NA,"UG tract",posterior_fornix,SRS014343
+HMP,SRR045687,NA,"UG tract",posterior_fornix,SRS014629
+HMP,SRR047559,NA,"UG tract",posterior_fornix,SRS015425
+HMP,SRR044399,NA,"UG tract",posterior_fornix,SRS016111
+HMP,SRR040605,NA,"UG tract",posterior_fornix,SRS016559
