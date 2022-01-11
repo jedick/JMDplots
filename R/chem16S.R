@@ -523,9 +523,9 @@ getmap <- function(study, RDP = NULL, lineage = NULL, mincount = 200) {
     # 20210609 Verrucomicrobia
     "genus_Subdivision3_genera_incertae_sedis" = "family_Verrucomicrobia subdivision 3",
     # 20211215 Clostridia
-    # Eubacteriales is used in NCBI; is a synonym for Clostridiales (https://lpsn.dsmz.de/order/eubacteriales)
+    # Clostridiales is a synonym for Eubacteriales (https://lpsn.dsmz.de/order/eubacteriales)
     "order_Clostridiales" = "order_Eubacteriales",
-    # Oscillospiraceae is used in NCBI; is a synonym for Ruminococcaceae (https://lpsn.dsmz.de/order/eubacteriales)
+    # Ruminococcaceae is a synonym for Oscillospiraceae (https://lpsn.dsmz.de/family/oscillospiraceae)
     "family_Ruminococcaceae" = "family_Oscillospiraceae",
 
     ## NOT USED

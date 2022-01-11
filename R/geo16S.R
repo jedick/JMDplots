@@ -169,20 +169,18 @@ geo16S2 <- function(pdf = FALSE) {
 }
 
 # Figure 3: Stratified lakes and seawater 20210428
-geo16S3 <- function(pdf = FALSE, plot.it = TRUE) {
+geo16S3 <- function(pdf = FALSE) {
 
-  if(plot.it) {
-    if(pdf) pdf("geo16S3.pdf", width = 7, height = 9)
-    mat <- matrix(c(1,1,1,1, 2,3,4,5, 6,7,8,9, 10,11,12,13), byrow = TRUE, nrow = 4)
-    layout(mat, heights = c(1, 10, 10, 10))
-    # Make legend
-    par(mar = c(0, 0, 0, 0))
-    plot.new()
-    legend <- as.expression(c(quote(italic(Z)[C]), quote(O[2]), quote(NO[3]^"-" / NO[2]^"-")))
-    legend("top", legend = legend, lty = c(1, 1, 2), lwd = 1.5, col = c(1, 2, 4), pch = c(21, NA, NA), pt.bg = "white", ncol = 3, bty = "n")
-    # Setup plot metrics
-    par(mgp = c(1.8, 0.5, 0), mar = c(3, 3, 3, 1))
-  }
+  if(pdf) pdf("geo16S3.pdf", width = 7, height = 9)
+  mat <- matrix(c(1,1,1,1, 2,3,4,5, 6,7,8,9, 10,11,12,13), byrow = TRUE, nrow = 4)
+  layout(mat, heights = c(1, 10, 10, 10))
+  # Make legend
+  par(mar = c(0, 0, 0, 0))
+  plot.new()
+  legend <- as.expression(c(quote(italic(Z)[C]), quote(O[2]), quote(NO[3]^"-" / NO[2]^"-")))
+  legend("top", legend = legend, lty = c(1, 1, 2), lwd = 1.5, col = c(1, 2, 4), pch = c(21, NA, NA), pt.bg = "white", ncol = 3, bty = "n")
+  # Setup plot metrics
+  par(mgp = c(1.8, 0.5, 0), mar = c(3, 3, 3, 1))
 
   # Identify datasets to plot
   study <- c("SVH+19", "MZG+20", "MZG+20", "GBL+15", "GBL+15",
@@ -226,115 +224,110 @@ geo16S3 <- function(pdf = FALSE, plot.it = TRUE) {
     ZC <- metrics$ZC[imet]
     nH2O <- metrics$nH2O[imet]
 
-    if(plot.it) {
-      # Reverse y-axis (depth)
-      ylim <- rev(range(depth))
-      # Visualize deeper O2 concentrations in Ursu Lake
-      if(study[i] == "BCA+21") ylim <- c(11, 0)
+    # Reverse y-axis (depth)
+    ylim <- rev(range(depth))
+    # Visualize deeper O2 concentrations in Ursu Lake
+    if(study[i] == "BCA+21") ylim <- c(11, 0)
+    if(study[i] == "SVH+19") {
+      # Plot 1000 and 2000 m samples closer to the others 20210608
+      ylim <- c(700, 50)
+      depth[match(c(1000, 2000), depth)] <- c(600, 700)
+    }
+    # Determine whether the title has changed
+    newplot <- TRUE
+    if(i > 1) if(titlesub[i]==titlesub[i-1]) newplot <- FALSE
+    if(newplot) {
       if(study[i] == "SVH+19") {
-        # Plot 1000 and 2000 m samples closer to the others 20210608
-        ylim <- c(700, 50)
-        depth[match(c(1000, 2000), depth)] <- c(600, 700)
-      }
-      # Determine whether the title has changed
-      newplot <- TRUE
-      if(i > 1) if(titlesub[i]==titlesub[i-1]) newplot <- FALSE
-      if(newplot) {
-        if(study[i] == "SVH+19") {
-          plot(ZC, depth, xlim = ZClim, ylim = ylim, xlab = axis.label("ZC"), ylab = "Depth (m)", type = "b", yaxt = "n")
-          axis(2, at = seq(100, 700, 100), labels = c(100, 200, 300, 400, 500, 1000, 2000), gap.axis = 0)
-          # Plot y-axis break 20210715
-          par(xpd = NA)
-          rect(-0.174, 557, -0.173, 542, col = "white", border = NA)
-          text(-0.1734, 542, "/", srt = 90)
-          text(-0.1734, 556, "/", srt = 90)
-          par(xpd = FALSE)
-        } else plot(ZC, depth, xlim = ZClim, ylim = ylim, xlab = axis.label("ZC"), ylab = "Depth (m)", type = "b")
+        plot(ZC, depth, xlim = ZClim, ylim = ylim, xlab = axis.label("ZC"), ylab = "Depth (m)", type = "b", yaxt = "n")
+        axis(2, at = seq(100, 700, 100), labels = c(100, 200, 300, 400, 500, 1000, 2000), gap.axis = 0)
+        # Plot y-axis break 20210715
+        par(xpd = NA)
+        rect(-0.174, 557, -0.173, 542, col = "white", border = NA)
+        text(-0.1734, 542, "/", srt = 90)
+        text(-0.1734, 556, "/", srt = 90)
+        par(xpd = FALSE)
+      } else plot(ZC, depth, xlim = ZClim, ylim = ylim, xlab = axis.label("ZC"), ylab = "Depth (m)", type = "b")
+    } else {
+      # Add to plot if the title hasn't changed
+      points(ZC, depth, type = "b", pch = 0)
+    }
+
+    if(newplot) {
+      # Add title in lower right
+      if(grepl("Outside", subtitle[i])) {
+        text(ZClim[1], ylim[1], title[i], adj = c(0, 0), font = 2)
+        text(ZClim[1], ylim[1], subtitle[i], adj = c(0, 0))
       } else {
-        # Add to plot if the title hasn't changed
-        points(ZC, depth, type = "b", pch = 0)
+        text(ZClim[2], ylim[1], title[i], adj = c(1, 0), font = 2)
+        text(ZClim[2], ylim[1], subtitle[i], adj = c(1, 0))
       }
-
-      if(newplot) {
-        # Add title in lower right
-        if(grepl("Outside", subtitle[i])) {
-          text(ZClim[1], ylim[1], title[i], adj = c(0, 0), font = 2)
-          text(ZClim[1], ylim[1], subtitle[i], adj = c(0, 0))
-        } else {
-          text(ZClim[2], ylim[1], title[i], adj = c(1, 0), font = 2)
-          text(ZClim[2], ylim[1], subtitle[i], adj = c(1, 0))
-        }
-        # Plot O2 concentrations or NO3-/NO2- ratio
-        nc <- nchar(title[i])
-        if(substr(title[i], 1, 1) == " " | substr(title[i], nc, nc) == " ") {
-          what <- "NO3.NO2"
-          xlim <- c(0, 250)
-          col <- 4
-          lty <- 2
-          # Calculate NO3- / NO2- ratio 20210511
-          NO3.NO2 <- alldat$`NO3- (umol L-1)` / alldat$`NO2- (umol L-1)`
-          alldat <- cbind(alldat, NO3.NO2)
-        } else {
-          what <- "O2"
-          if(study[i] == "BCA+21") xlim <- c(0, 25) else xlim <- c(0, 220)
-          col <- 2
-          lty <- 1
-        }
-        icol <- grep(paste0("^", what), colnames(alldat))
-        # Remove NA values
-        alldat <- alldat[!is.na(alldat[, icol]), ]
-        depth <- alldat$depth
-        par(new = TRUE)
-        plot(alldat[, icol], depth, col = col, lty = lty, type = "l", axes = FALSE, xlab = "", ylab = "", xlim = xlim, ylim = ylim)
-        # Add second axis labels
-        xlab <- colnames(alldat)[icol]
-        if(xlab == "O2 (umol kg-1)") xlab <- quote(O[2]~"(\u00B5mol kg"^-1*")")
-        if(xlab == "O2 (umol L-1)") xlab <- quote(O[2]~"(\u00B5mol L"^-1*")")
-        if(xlab == "O2 (mg L-1)") xlab <- quote(O[2]~"(mg L"^-1*")")
-        if(xlab == "NO3.NO2") xlab <- quote(NO[3]^"-" / NO[2]^"-"~"(mol/mol)")
-        axis(3)
-        mtext(xlab, side = 3, line = 1.7, cex = par("cex"))
-        # Extra labels for ETNP
-        if(title[i]=="ETNP") {
-          text(44, 76, "0.2-\n1.6 \u00B5m")
-          text(128, 138, "1.6-\n30 \u00B5m")
-        }
-        # Restore xlim for plotting ZC
-        par(new = TRUE)
-        plot(0, 0, type = "n", axes = FALSE, xlab = "", ylab = "", xlim = ZClim, ylim = ylim)
+      # Plot O2 concentrations or NO3-/NO2- ratio
+      nc <- nchar(title[i])
+      if(substr(title[i], 1, 1) == " " | substr(title[i], nc, nc) == " ") {
+        what <- "NO3.NO2"
+        xlim <- c(0, 250)
+        col <- 4
+        lty <- 2
+        # Calculate NO3- / NO2- ratio 20210511
+        NO3.NO2 <- alldat$`NO3- (umol L-1)` / alldat$`NO2- (umol L-1)`
+        alldat <- cbind(alldat, NO3.NO2)
+      } else {
+        what <- "O2"
+        if(study[i] == "BCA+21") xlim <- c(0, 25) else xlim <- c(0, 220)
+        col <- 2
+        lty <- 1
       }
+      icol <- grep(paste0("^", what), colnames(alldat))
+      # Remove NA values
+      alldat <- alldat[!is.na(alldat[, icol]), ]
+      depth <- alldat$depth
+      par(new = TRUE)
+      plot(alldat[, icol], depth, col = col, lty = lty, type = "l", axes = FALSE, xlab = "", ylab = "", xlim = xlim, ylim = ylim)
+      # Add second axis labels
+      xlab <- colnames(alldat)[icol]
+      if(xlab == "O2 (umol kg-1)") xlab <- quote(O[2]~"(\u00B5mol kg"^-1*")")
+      if(xlab == "O2 (umol L-1)") xlab <- quote(O[2]~"(\u00B5mol L"^-1*")")
+      if(xlab == "O2 (mg L-1)") xlab <- quote(O[2]~"(mg L"^-1*")")
+      if(xlab == "NO3.NO2") xlab <- quote(NO[3]^"-" / NO[2]^"-"~"(mol/mol)")
+      axis(3)
+      mtext(xlab, side = 3, line = 1.7, cex = par("cex"))
+      # Extra labels for ETNP
+      if(title[i]=="ETNP") {
+        text(44, 76, "0.2-\n1.6 \u00B5m")
+        text(128, 138, "1.6-\n30 \u00B5m")
+      }
+      # Restore xlim for plotting ZC
+      par(new = TRUE)
+      plot(0, 0, type = "n", axes = FALSE, xlab = "", ylab = "", xlim = ZClim, ylim = ylim)
+    }
 
-      # Don't repeat Blue Hole in Source Data (there are loops for O2 and NO3-/NO2-; just use one)
-      if(substr(title[i], 1, 1) == " ") next
-      # Assemble the Source Data
-      sd <- alldat[, c("study", "name", "Run", "sample", "depth")]
-      sd <- cbind(sd, "O2 (umol kg-1)" = NA, "O2 (umol L-1)" = NA, "O2 (mg L-1)" = NA, "NO3- (umol L-1)" = NA, "NO2- (umol L-1)" = NA, ZC = NA, nH2O = NA)
-      # Names of the columns with chemical concentrations
-      cnames <- c("O2 (umol kg-1)", "O2 (umol L-1)", "O2 (mg L-1)", "NO3- (umol L-1)", "NO2- (umol L-1)")
-      for(cname in cnames) if(cname %in% colnames(alldat)) sd[, cname] <- alldat[, cname]
-      # Put ZC and nH2O values in correct place
-      metrics <- metrics[imet, ]
-      metrics <- metrics[!is.na(metrics$Run), ]
-      isd <- match(metrics$Run, sd$Run)
-      sd$ZC[isd] <- metrics$ZC
-      sd$nH2O[isd] <- metrics$nH2O
+    # Don't repeat Blue Hole in Source Data (there are loops for O2 and NO3-/NO2-; just use one)
+    if(substr(title[i], 1, 1) == " ") next
+    # Assemble the Source Data
+    sd <- alldat[, c("study", "name", "Run", "sample", "depth")]
+    sd <- cbind(sd, "O2 (umol kg-1)" = NA, "O2 (umol L-1)" = NA, "O2 (mg L-1)" = NA, "NO3- (umol L-1)" = NA, "NO2- (umol L-1)" = NA, ZC = NA, nH2O = NA)
+    # Names of the columns with chemical concentrations
+    cnames <- c("O2 (umol kg-1)", "O2 (umol L-1)", "O2 (mg L-1)", "NO3- (umol L-1)", "NO2- (umol L-1)")
+    for(cname in cnames) if(cname %in% colnames(alldat)) sd[, cname] <- alldat[, cname]
+    # Put ZC and nH2O values in correct place
+    metrics <- metrics[imet, ]
+    metrics <- metrics[!is.na(metrics$Run), ]
+    isd <- match(metrics$Run, sd$Run)
+    sd$ZC[isd] <- metrics$ZC
+    sd$nH2O[isd] <- metrics$nH2O
 
-      # Replace NA name with study name
-      sd.name <- na.omit(sd$name)[1]
-      sd$name[is.na(sd$name)] <- sd.name
-      # Use NA instead of "" for missing Run and sample name
-      sd$Run[sd$Run == ""] <- NA
-      sd$sample[sd$sample == ""] <- NA
-      # Place data frame into output list
-      out[[i]] <- sd
-
-    } # end if(plot.it)
+    # Replace NA name with study name
+    sd.name <- na.omit(sd$name)[1]
+    sd$name[is.na(sd$name)] <- sd.name
+    # Use NA instead of "" for missing Run and sample name
+    sd$Run[sd$Run == ""] <- NA
+    sd$sample[sd$sample == ""] <- NA
+    # Place data frame into output list
+    out[[i]] <- sd
 
   } # end loop
 
-  if(plot.it) {
-    if(pdf) dev.off()
-  }
+  if(pdf) dev.off()
 
   # Return Source Data 20210831
   out <- do.call(rbind, out)
@@ -344,109 +337,10 @@ geo16S3 <- function(pdf = FALSE, plot.it = TRUE) {
 
 }
 
-# Figure 4: Compositional differences at different taxonomic levels 20200924
+# Figure 4: Shale gas datasets 20210414
 geo16S4 <- function(pdf = FALSE) {
 
-  if(pdf) pdf("geo16S4.pdf", width = 10.5, height = 7)
-  mat <- matrix(c(1,2,3,4, 5,6,7,8), nrow = 2, byrow = TRUE)
-  layout(mat, widths = c(1, 2, 2, 2))
-  par(mar = c(4, 4, 3, 1))
-  par(mgp = c(2.5, 1, 0))
-  par(cex.lab = 1.1)
-
-  # Preload data for faster running
-  mdat <- getmdat("MPB+17")
-  RDP <- getRDP("MPB+17", mdat = mdat)
-  map <- getmap("MPB+17", RDP = RDP)
-
-  # Make plots for Manus Basin
-  p <- groupmet("MPB+17", "ZC", "domain", pch1 = 21, pch2 = 23, ylim = c(-0.23, -0.13), xlim = c(0, 100),
-    xadj = c(Bacteria = 1), yadj = c(Bacteria = -5),
-    mdat = mdat, RDP = RDP, map = map
-  )
-  title("Manus Basin")
-  text(40, -0.161, "   < 50 \u00B0C", font = 2)
-  text(10, -0.161, "T", font = 4)
-  text(40, -0.204, "   > 50 \u00B0C", font = 2)
-  text(10, -0.204, "T", font = 4)
-
-  gg <- groupmet("MPB+17", "ZC", "phylum", pch1 = 21, pch2 = 23, ylim = c(-0.23, -0.13),
-    xadj = c(Proteobacteria = 1, Bacteroidetes = -0.18, Campilobacterota = 0.42),
-    yadj = c(Bacteroidetes = 1, Campilobacterota = -3),
-    mdat = mdat, RDP = RDP, map = map
-  )
-  # Calculate total percentage of community represented by these taxa
-  p <- sum(gg$Pboth[!is.na(gg$X1) & !is.na(gg$X2)])
-  title(paste0("Phylum (", round(p), "% of total)"))
-
-  gg <- groupmet("MPB+17", "ZC", "class", pch1 = 21, pch2 = 23, ylim = c(-0.23, -0.13),
-    xadj = c(Flavobacteriia = -0.17, Gammaproteobacteria = 0.2, Campylobacteria = 0.45, Deltaproteobacteria = 0.1),
-    yadj = c(Flavobacteriia = 1.2, Gammaproteobacteria = 1.7, Campylobacteria = -3, Deltaproteobacteria = -0.8),
-    mdat = mdat, RDP = RDP, map = map
-  )
-  p <- sum(gg$Pboth[!is.na(gg$X1) & !is.na(gg$X2)])
-  title(paste0("Class (", round(p), "% of total)"))
-
-  gg <- groupmet("MPB+17", "ZC", "genus", pch1 = 21, pch2 = 23, ylim = c(-0.23, -0.13), minpercent = 1,
-    xadj = c(Alteromonas = 0.1, Sulfurimonas = 1.05, Alcanivorax = -1, Halomonas = -0.65, Thiogranum = 0.17, Sulfurovum = -0.1, Pseudomonas = 0.1, Pseudoalteromonas = -0.25, Acinetobacter = 0.72),
-    yadj = c(Sulfurimonas = 1.5, Pseudomonas = 1.8, Sulfurovum = -0.5, Thiogranum = 5.5, Marinimicrobia_genera_incertae_sedis = -0.8, Alteromonas = 1.8, Acinetobacter = 1.4),
-    mdat = mdat, RDP = RDP, map = map
-  )
-  lines(c(0, 0), c(-0.1535, -0.1425))
-  p <- sum(gg$Pboth[!is.na(gg$X1) & !is.na(gg$X2)])
-  title(paste0("Genus (", round(p), "% of total)"))
-
-  # Make plots for Baltic Sea
-  mdat <- getmdat("HLA+16")
-  RDP <- getRDP("HLA+16", mdat = mdat)
-  map <- getmap("HLA+16", RDP = RDP)
-  gg <- groupmet("HLA+16", "nH2O", "domain", pch1 = 21, pch2 = 24, ylim = c(-0.78, -0.71), xlim = c(0, 100),
-    xadj = c(Bacteria = 1), yadj = c(Bacteria = 1.5),
-    mdat = mdat, RDP = RDP, map = map
-  )
-  title("Baltic Sea")
-  text(40, -0.743, "Salinity < 6", font = 2)
-  text(40, -0.7534, "Salinity > 20", font = 2)
-
-  gg <- groupmet("HLA+16", "nH2O", "phylum", pch1 = 21, pch2 = 24, ylim = c(-0.78, -0.71),
-    xadj = c(Proteobacteria = -0.2, Planctomycetes = 0.1, "Cyanobacteria/Chloroplast" = 0.35, Bacteroidetes = -0.1),
-    yadj = c(Planctomycetes = 1.8, "Cyanobacteria/Chloroplast" = 2),
-    mdat = mdat, RDP = RDP, map = map
-  )
-  p <- sum(gg$Pboth[!is.na(gg$X1) & !is.na(gg$X2)])
-  title(paste0("Phylum (", round(p), "% of total)"))
-
-  gg <- groupmet("HLA+16", "nH2O", "class", pch1 = 21, pch2 = 24, ylim = c(-0.78, -0.71),
-    xadj = c(Acidimicrobiia = 0.5, Gammaproteobacteria = 0.4, Flavobacteriia = -0.05, Verrucomicrobiae = -0.3, Betaproteobacteria = 0.55, Cyanobacteria = -0.07),
-    yadj = c(Acidimicrobiia = -1, Alphaproteobacteria = -0.6, Gammaproteobacteria = -1, Verrucomicrobiae = 1.5, Flavobacteriia = 1.2, Betaproteobacteria = -1, Planctomycetacia = 1),
-    mdat = mdat, RDP = RDP, map = map
-  )
-  p <- sum(gg$Pboth[!is.na(gg$X1) & !is.na(gg$X2)])
-  title(paste0("Class (", round(p), "% of total)"))
-
-  gg <- groupmet("HLA+16", "nH2O", "genus", pch1 = 21, pch2 = 24, ylim = c(-0.78, -0.71), minpercent = 1,
-    xadj = c(Spartobacteria_genera_incertae_sedis = 1.02, `Candidatus Pelagibacter` = 0, GpIIa = 1.1),
-    yadj = c(Spartobacteria_genera_incertae_sedis = -0.7, GpI = 0.2),
-    mdat = mdat, RDP = RDP, map = map
-  )
-  p <- sum(gg$Pboth[!is.na(gg$X1) & !is.na(gg$X2)])
-  title(paste0("Genus (", round(p), "% of total)"))
-
-#  # Between-study comparisons
-#  groupmet("MPB+17", "ZC", ylim = c(-0.02, 0.02), study2 = "HLA+16")
-#  mtext("Manus Basin - Baltic Sea", line = 1)
-#
-#  groupmet("BGPF13", "ZC", ylim = c(-0.12, 0.02), study2 = "XDZ+17")
-#  mtext("Yellowstone - Qarhan Salt Lake", line = 1)
-
-  if(pdf) dev.off()
-
-}
-
-# Figure 5: Shale gas datasets 20210414
-geo16S5 <- function(pdf = FALSE) {
-
-  if(pdf) pdf("geo16S5.pdf", width = 9, height = 6)
+  if(pdf) pdf("geo16S4.pdf", width = 9, height = 6)
   par(mfrow = c(2, 2))
   par(mar = c(4, 4, 1, 1))
   par(mgp = c(2.5, 1, 0))
@@ -553,13 +447,13 @@ geo16S5 <- function(pdf = FALSE) {
 }
 
 # Contributions of classes to overall ZC difference between oxidizing and reducing conditions 20210610
-geo16S6 <- function(pdf = FALSE) {
+geo16S5 <- function(pdf = FALSE) {
   # Setup plot
-  if(pdf) pdf("geo16S6.pdf", width = 14, height = 8)
+  if(pdf) pdf("geo16S5.pdf", width = 14, height = 8)
   layout(matrix(c(1, 2), nrow = 1), widths = c(1, 8))
   
   # Read file created by geo16S_S3()
-  file <- system.file("extdata/geo16S/geo16S_S3.csv", package = "JMDplots")
+  file <- system.file("extdata/geo16S/geo16S_S4.csv", package = "JMDplots")
   dat <- read.csv(file, as.is = TRUE)
   DZC <- dat$DZC
   n1 <- dat$n1
@@ -689,9 +583,9 @@ geo16S6 <- function(pdf = FALSE) {
 }
 
 # Comparison of protein ZC from metagenomic or metatranscriptomic data with estimates from 16S and reference sequences 20211017
-geo16S7 <- function(pdf = FALSE) {
+geo16S6 <- function(pdf = FALSE) {
 
-  if(pdf) pdf("geo16S7.pdf", width = 7, height = 5)
+  if(pdf) pdf("geo16S6.pdf", width = 7, height = 5)
   par(mar = c(4, 4, 1, 1), mgp = c(2.8, 1, 0))
 
   # Start plot
@@ -912,9 +806,109 @@ geo16S_S2 <- function(pdf = FALSE) {
 
 }
 
-# Abundance and ZC of classes in oxidizing and reducing conditions 20210609
+# Compositional differences at different taxonomic levels 20200924
 geo16S_S3 <- function(pdf = FALSE) {
-  if(pdf) pdf("geo16S_S3.pdf", width = 9, height = 12)
+
+  if(pdf) pdf("geo16S_S3.pdf", width = 10.5, height = 7)
+  mat <- matrix(c(1,2,3,4, 5,6,7,8), nrow = 2, byrow = TRUE)
+  layout(mat, widths = c(1, 2, 2, 2))
+  par(mar = c(4, 4, 3, 1))
+  par(mgp = c(2.5, 1, 0))
+  par(cex.lab = 1.1)
+
+  # Preload data for faster running
+  mdat <- getmdat("MPB+17")
+  RDP <- getRDP("MPB+17", mdat = mdat)
+  map <- getmap("MPB+17", RDP = RDP)
+
+  # Make plots for Manus Basin
+  p <- groupmet("MPB+17", "ZC", "domain", pch1 = 21, pch2 = 23, ylim = c(-0.23, -0.13), xlim = c(0, 100),
+    xadj = c(Bacteria = 1), yadj = c(Bacteria = -5),
+    mdat = mdat, RDP = RDP, map = map
+  )
+  title("Manus Basin")
+  text(40, -0.161, "   < 50 \u00B0C", font = 2)
+  text(10, -0.161, "T", font = 4)
+  text(40, -0.204, "   > 50 \u00B0C", font = 2)
+  text(10, -0.204, "T", font = 4)
+
+  gg <- groupmet("MPB+17", "ZC", "phylum", pch1 = 21, pch2 = 23, ylim = c(-0.23, -0.13),
+    xadj = c(Proteobacteria = 1, Bacteroidetes = -0.18, Campilobacterota = 0.42),
+    yadj = c(Bacteroidetes = 1, Campilobacterota = -3),
+    mdat = mdat, RDP = RDP, map = map
+  )
+  # Calculate total percentage of community represented by these taxa
+  p <- sum(gg$Pboth[!is.na(gg$X1) & !is.na(gg$X2)])
+  title(paste0("Phylum (", round(p), "% of total)"))
+
+  gg <- groupmet("MPB+17", "ZC", "class", pch1 = 21, pch2 = 23, ylim = c(-0.23, -0.13),
+    xadj = c(Flavobacteriia = -0.17, Gammaproteobacteria = 0.2, Campylobacteria = 0.45, Deltaproteobacteria = 0.1),
+    yadj = c(Flavobacteriia = 1.2, Gammaproteobacteria = 1.7, Campylobacteria = -3, Deltaproteobacteria = -0.8),
+    mdat = mdat, RDP = RDP, map = map
+  )
+  p <- sum(gg$Pboth[!is.na(gg$X1) & !is.na(gg$X2)])
+  title(paste0("Class (", round(p), "% of total)"))
+
+  gg <- groupmet("MPB+17", "ZC", "genus", pch1 = 21, pch2 = 23, ylim = c(-0.23, -0.13), minpercent = 1,
+    xadj = c(Alteromonas = 0.1, Sulfurimonas = 1.05, Alcanivorax = -1, Halomonas = -0.65, Thiogranum = 0.17, Sulfurovum = -0.1, Pseudomonas = 0.1, Pseudoalteromonas = -0.25, Acinetobacter = 0.72),
+    yadj = c(Sulfurimonas = 1.5, Pseudomonas = 1.8, Sulfurovum = -0.5, Thiogranum = 5.5, Marinimicrobia_genera_incertae_sedis = -0.8, Alteromonas = 1.8, Acinetobacter = 1.4),
+    mdat = mdat, RDP = RDP, map = map
+  )
+  lines(c(0, 0), c(-0.1535, -0.1425))
+  p <- sum(gg$Pboth[!is.na(gg$X1) & !is.na(gg$X2)])
+  title(paste0("Genus (", round(p), "% of total)"))
+
+  # Make plots for Baltic Sea
+  mdat <- getmdat("HLA+16")
+  RDP <- getRDP("HLA+16", mdat = mdat)
+  map <- getmap("HLA+16", RDP = RDP)
+  gg <- groupmet("HLA+16", "nH2O", "domain", pch1 = 21, pch2 = 24, ylim = c(-0.78, -0.71), xlim = c(0, 100),
+    xadj = c(Bacteria = 1), yadj = c(Bacteria = 1.5),
+    mdat = mdat, RDP = RDP, map = map
+  )
+  title("Baltic Sea")
+  text(40, -0.743, "Salinity < 6", font = 2)
+  text(40, -0.7534, "Salinity > 20", font = 2)
+
+  gg <- groupmet("HLA+16", "nH2O", "phylum", pch1 = 21, pch2 = 24, ylim = c(-0.78, -0.71),
+    xadj = c(Proteobacteria = -0.2, Planctomycetes = 0.1, "Cyanobacteria/Chloroplast" = 0.35, Bacteroidetes = -0.1),
+    yadj = c(Planctomycetes = 1.8, "Cyanobacteria/Chloroplast" = 2),
+    mdat = mdat, RDP = RDP, map = map
+  )
+  p <- sum(gg$Pboth[!is.na(gg$X1) & !is.na(gg$X2)])
+  title(paste0("Phylum (", round(p), "% of total)"))
+
+  gg <- groupmet("HLA+16", "nH2O", "class", pch1 = 21, pch2 = 24, ylim = c(-0.78, -0.71),
+    xadj = c(Acidimicrobiia = 0.5, Gammaproteobacteria = 0.4, Flavobacteriia = -0.05, Verrucomicrobiae = -0.3, Betaproteobacteria = 0.55, Cyanobacteria = -0.07),
+    yadj = c(Acidimicrobiia = -1, Alphaproteobacteria = -0.6, Gammaproteobacteria = -1, Verrucomicrobiae = 1.5, Flavobacteriia = 1.2, Betaproteobacteria = -1, Planctomycetacia = 1),
+    mdat = mdat, RDP = RDP, map = map
+  )
+  p <- sum(gg$Pboth[!is.na(gg$X1) & !is.na(gg$X2)])
+  title(paste0("Class (", round(p), "% of total)"))
+
+  gg <- groupmet("HLA+16", "nH2O", "genus", pch1 = 21, pch2 = 24, ylim = c(-0.78, -0.71), minpercent = 1,
+    xadj = c(Spartobacteria_genera_incertae_sedis = 1.02, `Candidatus Pelagibacter` = 0, GpIIa = 1.1),
+    yadj = c(Spartobacteria_genera_incertae_sedis = -0.7, GpI = 0.2),
+    mdat = mdat, RDP = RDP, map = map
+  )
+  p <- sum(gg$Pboth[!is.na(gg$X1) & !is.na(gg$X2)])
+  title(paste0("Genus (", round(p), "% of total)"))
+
+#  # Between-study comparisons
+#  groupmet("MPB+17", "ZC", ylim = c(-0.02, 0.02), study2 = "HLA+16")
+#  mtext("Manus Basin - Baltic Sea", line = 1)
+#
+#  groupmet("BGPF13", "ZC", ylim = c(-0.12, 0.02), study2 = "XDZ+17")
+#  mtext("Yellowstone - Qarhan Salt Lake", line = 1)
+
+  if(pdf) dev.off()
+
+}
+
+
+# Abundance and ZC of classes in oxidizing and reducing conditions 20210609
+geo16S_S4 <- function(pdf = FALSE) {
+  if(pdf) pdf("geo16S_S4.pdf", width = 9, height = 12)
   par(mfrow = c(4, 3))
   par(mar = c(4, 4, 2, 1))
   par(mgp = c(2, 1, 0))
@@ -984,6 +978,6 @@ geo16S_S3 <- function(pdf = FALSE) {
 
   # Save results for geo16S6() 20210610
   out <- cbind(n1 = n1, n2 = n2, DZC = round(DZC, 6), percent)
-  #write.csv(out, "geo16S_S3.csv", row.names = FALSE, quote = FALSE)
+  #write.csv(out, "geo16S_S4.csv", row.names = FALSE, quote = FALSE)
 }
 
