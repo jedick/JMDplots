@@ -163,6 +163,11 @@ geo16S_S3()
 geo16S_S4()
 ```
 
+## Correlations between `r ZC` estimated from metagenomes and 16S rRNA sequences (Figure S5)
+```{r geo16S_S5, message = FALSE, results = "hide", out.width='100%', fig.width = 10, fig.height = 8, out.extra = 'class="full-width"', pngquant = pngquant}
+geo16S_S5()
+```
+
 ## Source Data files
 This code shows how the Source Data files for each of the figures is saved.
 The `dat*` objects are created by running the code blocks above, but the following code block is not run in this vignette in order to avoid cluttering the working directory.

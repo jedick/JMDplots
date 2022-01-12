@@ -364,7 +364,7 @@ getmdat <- function(study, dropNA = TRUE) {
 }
 
 # Get RDP results for all samples in a study 20200912
-getRDP <- function(study, cn = FALSE, mdat = NULL, lineage = NULL, mincount = 200) {
+getRDP <- function(study, cn = FALSE, mdat = NULL, lineage = NULL, mincount = 200, lowest.level = NULL) {
   # Handle missing arguments
   if(is.null(mdat)) mdat <- getmdat(study)
   # Get the sample Runs (SRR numbers)
@@ -496,16 +496,41 @@ getRDP <- function(study, cn = FALSE, mdat = NULL, lineage = NULL, mincount = 20
     out[, -(1:3)] <- round(out[, -(1:3)] / cpNumber, 3)
   }
 
-  out
+  RDP <- out
+
+  # Trim classifications to specified lowest level 20220112
+  if(!is.null(lowest.level)) {
+    lineage <- RDP$lineage
+    # Split the lineage at the specified level
+    trimmed.lineage <- sapply(strsplit(RDP$lineage, lowest.level), "[", 1)
+    # Get the name of the taxon at this level
+    new.name <- sapply(strsplit(trimmed.lineage, ";"), tail, 1)
+    # To make the new lineage, add the name of the rank at the end
+    new.lineage <- paste0(trimmed.lineage, lowest.level, ";")
+    # Only update lineages that have the lowest-level classification
+    has.ll <- grepl(lowest.level, lineage)
+    RDP$lineage[has.ll] <- new.lineage[has.ll]
+    RDP$name[has.ll] <- new.name[has.ll]
+    RDP$rank[has.ll] <- lowest.level
+    # Check that each unique lineage string corresponds to a unique rank-name combination
+    stopifnot(identical(duplicated(RDP$lineage), duplicated(paste(RDP$rank, RDP$name))))
+    # Combine duplicated lineages
+    newRDP <- aggregate(RDP[, -(1:3)], list(lineage = RDP$lineage), sum)
+    iRDP <- match(newRDP$lineage, RDP$lineage)
+    newRDP <- cbind(lineage = newRDP$lineage, rank = RDP$rank[iRDP], name = RDP$name[iRDP], newRDP[, -1])
+    RDP <- newRDP
+  }
+
+  RDP
 }
 
 
 # Map RDP to RefSeq taxonomy 20200912
-getmap <- function(study, RDP = NULL, lineage = NULL, mincount = 200) {
+getmap <- function(study, RDP = NULL, lineage = NULL, mincount = 200, lowest.level = NULL) {
   # Handle missing arguments
   if(is.null(RDP)) {
     mdat <- getmdat(study)
-    RDP <- getRDP(study, mdat = mdat, lineage = lineage, mincount = mincount)
+    RDP <- getRDP(study, mdat = mdat, lineage = lineage, mincount = mincount, lowest.level = lowest.level)
   }
   # Make group names by combining rank and name
   RDPgroups <- paste(RDP$rank, RDP$name, sep = "_")
@@ -606,11 +631,11 @@ getmap <- function(study, RDP = NULL, lineage = NULL, mincount = 200) {
 }
 
 # Get chemical metrics for all samples in a study 20200927
-getmetrics <- function(study, cn = FALSE, mdat = NULL, RDP = NULL, map = NULL, lineage = NULL, mincount = 200, taxon_AA = NULL, groups = NULL) {
+getmetrics <- function(study, cn = FALSE, mdat = NULL, RDP = NULL, map = NULL, lineage = NULL, mincount = 200, lowest.level = NULL, taxon_AA = NULL, groups = NULL) {
   # Handle missing arguments
   if(is.null(mdat)) mdat <- getmdat(study)
-  if(is.null(RDP)) RDP <- getRDP(study, cn = cn, mdat = mdat, lineage = lineage, mincount = mincount)
-  if(is.null(map)) map <- getmap(study, RDP = RDP, lineage = lineage, mincount = mincount)
+  if(is.null(RDP)) RDP <- getRDP(study, cn = cn, mdat = mdat, lineage = lineage, mincount = mincount, lowest.level = lowest.level)
+  if(is.null(map)) map <- getmap(study, RDP = RDP, lineage = lineage, mincount = mincount, lowest.level = lowest.level)
   # Keep metadata only for samples with >= mincount counts 20201001
   mdat <- mdat[mdat$Run %in% colnames(RDP), ]
   if(nrow(mdat) == 0) stop("no samples have >= mincount counts!")

@@ -13,10 +13,13 @@ Proteomes are estimated by combining taxonomic classifications of 16S rRNA gene 
 
 \usage{
   getmdat(study, dropNA = TRUE)
-  getRDP(study, cn = FALSE, mdat = NULL, lineage = NULL, mincount = 200)
-  getmap(study, RDP = NULL, lineage = NULL, mincount = 200)
+  getRDP(study, cn = FALSE, mdat = NULL, lineage = NULL, mincount = 200,
+    lowest.level = NULL)
+  getmap(study, RDP = NULL, lineage = NULL, mincount = 200,
+    lowest.level = NULL)
   getmetrics(study, cn = FALSE, mdat = NULL, RDP = NULL, map = NULL,
-    lineage = NULL, mincount = 200, taxon_AA = NULL, groups = NULL)
+    lineage = NULL, mincount = 200, lowest.level = NULL, taxon_AA = NULL,
+    groups = NULL)
 }
 
 \arguments{
@@ -25,6 +28,7 @@ Proteomes are estimated by combining taxonomic classifications of 16S rRNA gene 
   \item{cn}{logical, adjust counts for 16S rRNA gene copy number?}
   \item{lineage}{character, regular expression for filtering lineages}
   \item{mincount}{integer, minimum classification count for each sample}
+  \item{lowest.level}{character, truncate classifications at this taxonomic level}
   \item{mdat}{data frame, output from \code{getmdat} (used for memoization by other functions)}
   \item{RDP}{data frame, output from \code{getRDP} (used for memoization by other functions)}
   \item{map}{data frame, output from \code{getmap} (used for memoization by other functions)}
@@ -47,6 +51,9 @@ Sequences classified to the class Chloroplast or genera Chlorophyta or Bacillari
 Then, only columns (samples) with classification count > \code{mincount} are retained.
 All remaining sequences (those classified to genus or higher levels) can be used for mapping to the NCBI taxonomy.
 
+Use the \code{lowest.level} argument to trim (truncate) the classifications to a level higher than genus.
+This argument does not reduce the number of classifications, but only trims the RDP lineages to the specified level; this likely creates duplicate lineages, for which the classification counts are then consolidated.
+
 The location of the \code{chem16S} directory used in \code{getmdat} and \code{getRDP} can be changed by setting the option \code{chem16Sdir}.
 
 \code{getmap} maps RDP names to the NCBI taxonomy.
@@ -68,7 +75,9 @@ Some particular group names are changed to correspond with the NCBI taxonomy as 
     genus_GpIIa \tab genus_Synechococcus \cr
     genus_GpVI \tab genus_Pseudanabaena \cr
     family_Family II \tab family_Synechococcaceae \cr
-    genus_Subdivision3_genera_incertae_sedis \tab family_Verrucomicrobia subdivision 3
+    genus_Subdivision3_genera_incertae_sedis \tab family_Verrucomicrobia subdivision 3 \cr
+    order_Clostridiales \tab order_Eubacteriales \cr
+    family_Ruminococcaceae \tab family_Oscillospiraceae
 }
 The group names are then matched to the NCBI taxa listed in \code{extdata/chem16S/taxon_AA.csv}.
 The \code{protein} and \code{organism} columns in this file hold the rank and taxon name extracted from the RefSeq database.
@@ -115,4 +124,14 @@ getmetrics("BGPF13")
 mdat <- getmdat("BGPF13")
 groups <- list(mdat$cohort == "Archaea", mdat$cohort == "Bacteria")
 getmetrics("BGPF13", groups = groups)
+
+# Default: classifications go down to genus level
+RDP <- getRDP("BGPF13")
+# Truncate classifications at phylum level
+pRDP <- getRDP("BGPF13", lowest.level = "phylum")
+stopifnot(identical(unique(pRDP$rank), "phylum"))
+# The classification counts are the same
+RDP.counts <- colSums(RDP[, -(1:3)])
+pRDP.counts <- colSums(pRDP[, -(1:3)])
+stopifnot(identical(RDP.counts, pRDP.counts))
 }
