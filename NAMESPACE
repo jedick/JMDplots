@@ -50,11 +50,11 @@ export(
   # chem16S functions 20210416
   "getmdat", "getRDP", "getmap", "getmetrics",
   # geo16S paper 20210416-20210610
-  "geo16S1", "geo16S2", "geo16S3", "geo16S4", "geo16S5", "geo16S_S3", "geo16S_S4",
+  "geo16S1", "geo16S2", "geo16S3", "geo16S4",
   "taxacomp", "plotmet", "addhull", "groupmet",
-  "geo16S6", # 20211018
+  "geo16S5", # 20211018
   "geo16S_S1", "geo16S_S2", # 20220105
-  "geo16S_S5", # 20220112
+  "geo16S_S3", # 20220112
   # can16S paper 20210604
   "getrefseq", "getgroup", "groupperc",
   # orp16S paper 20211003-20211008
@@ -128,8 +128,6 @@ importFrom("ggplot2", "theme_bw", "xlab", "ylab", "geom_hline", "geom_vline", "t
 importFrom("grid", "grid.roundrect", "gpar")
 importFrom("oce", "mapPlot", "mapPoints", "mapPolygon")
 importFrom("sf", "st_coordinates", "st_read", "st_transform")
-# We need a method provided by the package, not an exported function, so import the whole package 20211230
-import("plot.matrix")
 
 # Imports from standard packages
 importFrom("grDevices", "dev.off", "cairo_pdf", "pdf", "blues9", "colorRampPalette",

@@ -39,7 +39,7 @@
 ## STUDY SETTINGS
 
 # Change the following line to setup the pipeline for one study
-study <- "EH18"
+study <- "HMP12"
 # Settings for all studies are stored here
 file <- tempfile()
 # Write spaces here (but don't save them) to make this easier to read
@@ -75,9 +75,12 @@ writeLines(con = file, text = gsub(" ", "", c(
   "HXZ+20, FALSE, 440",  # PRJNA503500  10.1038/s41598-020-62411-2
 
   # Datasets for comparing 16S estimated proteomes with metagenome/metatranscriptome 20211017
-  # For SMS+12 (Bison Pool), start with findchimeras()
+  # For SMS+12 (Bison Pool), start with classify()
   #"SMS+12, NA, NA",
   "EH18, NA, NA",
+  "MKK+11, NA, NA",
+  "FLA+12, NA, NA",
+  "HMP12, TRUE, 400",
 
   ## For orp16S paper 20210922
 
@@ -198,7 +201,7 @@ filter <- function(SRR) {
   # The output file from this function is a FASTA file with .fa suffix
   outfile <- paste0(SRR, ".fa")
 
-  if(study %in% c("BYB+17", "GRG+20")) {
+  if(study %in% c("BYB+17", "GRG+20", "MKK+11", "FLA+12")) {
     # For BYB+17, FASTQ files are downloaded from SRA cloud 20210917
     fqdump <- FALSE
   } else {
@@ -210,7 +213,7 @@ filter <- function(SRR) {
     system(cmd)
   }
 
-  if(study %in% c("GRG+20")) {
+  if(study %in% c("GRG+20", "MKK+11", "FLA+12")) {
     # These are files from MG-RAST (.fasta suffix)
     # Prefix MG-RAST ID to header so we can extract the reads in the subsample() and findchimeras() steps 20211004
     fastafile <- paste0(SRR, ".fasta")
@@ -236,6 +239,8 @@ filter <- function(SRR) {
   } else if(forwardonly) {
     # Use forward reads only
     file.copy(paste0(SRR, "_1.fastq"), "merged.fastq", overwrite = TRUE)
+    # For Human Microbiome Project, reads are in different file 20211216
+    if(study == "HMP12") file.copy(paste0(SRR, "_4.fastq"), "merged.fastq", overwrite = TRUE)
     nseq <- length(readLines("merged.fastq")) / 4
     print(paste0("Using forward reads only (", nseq, " sequences)"))
   } else {

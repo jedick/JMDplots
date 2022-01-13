@@ -63,7 +63,7 @@ ZC <- "<i>Z</i><sub>C</sub>"
 
 This vignette runs the code to make the plots from the following paper:
 
-> Dick JM, Tan J. 2021. Evidence for chemical links between redox conditions and microbial community composition from 16S rRNA and reference protein sequences. Submitted manuscript.
+> Dick JM, Tan J. 2021. Chemical links between redox conditions and microbial community proteomes estimated from 16S rRNA and reference protein sequences. Submitted manuscript.
 >
 > Preprint available at:
 >
@@ -117,20 +117,15 @@ dat3 <- geo16S3()
 **Data sources:** Black Sea [@SVH+19], Swiss lakes (Lake Zug and Lake Lugano) [@MZG+20], Eastern Tropical North Pacific (ETNP) [@GBL+15], Sansha Yongle Blue Hole [@HXZ+20], Ursu Lake [@BCA+21].
 
 ## Decreased carbon oxidation state of estimated proteomes for communities affected by shale gas extraction (Figure 4)
-```{r geo16S4, message = FALSE, results = "hide", out.width='100%', fig.width = 9, fig.height = 6, pngquant = pngquant}
+```{r geo16S4, message = FALSE, results = "hide", out.width='100%', fig.width = 10, fig.height = 6, out.extra = 'class="full-width"', pngquant = pngquant}
 dat4 <- geo16S4()
 ```
 
 **Data sources:** Northwestern Pennsylvania stream water and sediment [@UKD+18], Pennsylvania State Forests stream water in spring and fall [@MMA+20], Marcellus Shale [@CHM+14], Denver--Julesburg Basin [@HRR+18], Duvernay Formation [@ZLF+19].
 
-## Contributions of classes to overall `r ZC` difference between oxidizing and reducing conditions (Figure 5)
-```{r geo16S5, message = FALSE, results = "hide", out.width='100%', fig.width = 14, fig.height = 8, out.extra = 'class="full-width"', pngquant = pngquant}
+## Comparison of protein `r ZC` from metagenomic or metatranscriptomic data with estimates from 16S and reference sequences (Figure 5)
+```{r geo16S5, message = FALSE, results = "hide", out.width='100%', fig.width = 10, fig.height = 6, out.extra = 'class="full-width"', pngquant = pngquant}
 geo16S5()
-```
-
-## Comparison of protein `r ZC` from metagenomic or metatranscriptomic data with estimates from 16S and reference sequences (Figure 6)
-```{r geo16S6, message = FALSE, results = "hide", out.width='100%', fig.width = 10, fig.height = 6, out.extra = 'class="full-width"', pngquant = pngquant}
-geo16S6()
 ```
 
 **Data sources:** 
@@ -150,22 +145,9 @@ geo16S_S1()
 geo16S_S2()
 ```
 
-## Changes of abundance and chemical metrics at different taxonomic levels (Figure S3)
-```{r geo16S_S3, message = FALSE, results = "hide", out.width='100%', fig.width = 10.5, fig.height = 7, out.extra = 'class="full-width"', pngquant = pngquant, dpi = 100}
+## Correlations between `r ZC` estimated from metagenomes and 16S rRNA sequences (Figure S3)
+```{r geo16S_S3, message = FALSE, results = "hide", out.width='100%', fig.width = 10, fig.height = 8, out.extra = 'class="full-width"', pngquant = pngquant}
 geo16S_S3()
-```
-
-**Data sources:** Manus Basin vents [@MPB+17], Baltic Sea water [@HLA+16].
-
-
-## Abundance and `r ZC` of classes in oxidizing and reducing conditions (Figure S4)
-```{r geo16S_S4, message = FALSE, results = "hide", out.width='100%', fig.width = 9, fig.height = 12, pngquant = pngquant}
-geo16S_S4()
-```
-
-## Correlations between `r ZC` estimated from metagenomes and 16S rRNA sequences (Figure S5)
-```{r geo16S_S5, message = FALSE, results = "hide", out.width='100%', fig.width = 10, fig.height = 8, out.extra = 'class="full-width"', pngquant = pngquant}
-geo16S_S5()
 ```
 
 ## Source Data files
