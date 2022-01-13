@@ -34,7 +34,7 @@ Calculate the \logaH2O and \logfO2 that maximize the activities of given target 
 The calculation is described by Dick (2021).
 
 The amino acid compositions of the target and background proteins are given in \code{AA_target} and \code{AA_background}, respectively.
-If \code{AA_background} is NULL, the background corresponds to human proteins that have phylostrata assignments in both the Trigos and Liebeskind datasets (see \code{\link[canprot]{PS}}).
+If \code{AA_background} is NULL, the background corresponds to human proteins that have phylostrata assignments in both the Trigos and Liebeskind datasets (see \code{\link{PS}}).
 The entire human proteome is not used to avoid inclusion of background proteins with unusual amino acid compositions.
 
 The basis species used for the calculation are \samp{QEC} (glutamine - glutamic acid - cysteine - O2 - H2O) (see Dick et al., 2020), or \samp{QEC+} (the same basis species with the addition of \Hplus) if \code{pH} is not NULL.

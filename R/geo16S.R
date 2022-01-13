@@ -207,7 +207,7 @@ geo16S3 <- function(pdf = FALSE) {
   for(i in 1:length(study)) {
     # ZC range for plots
     if(study[i] == "BCA+21") ZClim <- c(-0.180, -0.145) else ZClim <- c(-0.172, -0.140)
-    # Get the metadata and compositional metrics for this study
+    # Get the metadata and chemical metrics for this study
     # Keep all rows for higher-resolution O2 measurements
     mdat <- getmdat(study[i], dropNA = FALSE)
     metrics <- getmetrics(study[i])

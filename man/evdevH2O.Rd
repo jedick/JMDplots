@@ -125,6 +125,7 @@ Trigos, A. S. and Pearson, R. B. and Papenfuss, A. T. and Goode, D. L. (2017) Al
 
 \seealso{
 \code{\link{devodata}} for data sources for developmental proteomes.
+\code{\link{PS}} for functions used to retrieve phylostrata from UniProt IDs.
 }
 
 \examples{

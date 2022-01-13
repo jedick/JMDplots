@@ -140,8 +140,8 @@ evdevH2O2 <- function(pdf = FALSE) {
   seed <- 24
   nbackground <- 200
   # Use same background proteins as in MaximAct()
-  TPPG17 <- read.csv(system.file(paste0("extdata/phylostrata/TPPG17.csv.xz"), package = "canprot"), as.is = TRUE)
-  LMM16 <- read.csv(system.file(paste0("extdata/phylostrata/LMM16.csv.xz"), package = "canprot"), as.is = TRUE)
+  TPPG17 <- read.csv(system.file(paste0("extdata/evdevH2O/phylostrata/TPPG17.csv.xz"), package = "JMDplots"), as.is = TRUE)
+  LMM16 <- read.csv(system.file(paste0("extdata/evdevH2O/phylostrata/LMM16.csv.xz"), package = "JMDplots"), as.is = TRUE)
   Entry <- na.omit(intersect(TPPG17$Entry, LMM16$UniProt))
   aaback <- protcomp(Entry)$aa
   set.seed(seed)
@@ -353,8 +353,8 @@ evdevH2O4 <- function(pdf = FALSE) {
   par(mar = c(3.1, 3.1, 2, 1), mgp = c(2.1, 0.7, 0))
 
   # Background human proteome as used in MaximAct()
-  TPPG17 <- read.csv(system.file(paste0("extdata/phylostrata/TPPG17.csv.xz"), package = "canprot"), as.is = TRUE)
-  LMM16 <- read.csv(system.file(paste0("extdata/phylostrata/LMM16.csv.xz"), package = "canprot"), as.is = TRUE)
+  TPPG17 <- read.csv(system.file(paste0("extdata/evdevH2O/phylostrata/TPPG17.csv.xz"), package = "JMDplots"), as.is = TRUE)
+  LMM16 <- read.csv(system.file(paste0("extdata/evdevH2O/phylostrata/LMM16.csv.xz"), package = "JMDplots"), as.is = TRUE)
   Entry <- na.omit(intersect(TPPG17$Entry, LMM16$UniProt))
   Hsa <- protcomp(Entry)$aa
   Hsa_ZC <- ZCAA(Hsa)
@@ -1062,9 +1062,9 @@ LYSC_example <- function() {
 # Mean ZC and nH2O of phylostrata 20191122
 plotphylo <- function(var = "ZC", PS_source = "TPPG17", memo = NULL, xlab = "PS", boot.R = 99) {
   if(is.null(memo)) {
-    dat <- read.csv(system.file("extdata/phylostrata/TPPG17.csv.xz", package = "canprot"), as.is = TRUE)
+    dat <- read.csv(system.file("extdata/evdevH2O/phylostrata/TPPG17.csv.xz", package = "JMDplots"), as.is = TRUE)
     if(PS_source == "LMM16") {
-      dat <- read.csv(system.file("extdata/phylostrata/LMM16.csv.xz", package = "canprot"), as.is = TRUE)
+      dat <- read.csv(system.file("extdata/evdevH2O/phylostrata/LMM16.csv.xz", package = "JMDplots"), as.is = TRUE)
       colnames(dat)[c(1,3)] <- c("Entry", "Phylostrata")
       # remove entries that have ENSP instead of UniProt IDs
       dat <- dat[!grepl("^ENSP", dat$Entry), ]

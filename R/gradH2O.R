@@ -604,7 +604,7 @@ gradH2O7 <- function(pdf = FALSE) {
     }
   }
 
-  # Read CSV files with results of compositional analysis for differential expression
+  # Read CSV files with results of chemical analysis for differential expression
   osmotic_gene <- read.csv(system.file(paste0("vignettes/osmotic_gene_", getOption("basis"), ".csv"), package = "JMDplots"))
   osmotic_bact <- read.csv(system.file(paste0("vignettes/osmotic_bact_", getOption("basis"), ".csv"), package = "canprot"))
   DnH2Olab <- quote(Delta*italic(n)[H[2]*O])
@@ -745,7 +745,7 @@ NifProteomes <- function() {
   refseq <- read.csv(RSfile, as.is = TRUE)
   # the Nif types, arranged from anaerobic to aerobic
   types <- c("Nif-D", "Nif-C", "Nif-B", "Nif-A")
-  # assemble the compositional metrics
+  # assemble the chemical metrics
   ZC <- ZC.SD <- nH2O <- nH2O.SD <- GRAVY <- GRAVY.SD <- pI <- pI.SD <- numeric()
   for(type in types) {
     # get the taxids for genomes with this type of Nif

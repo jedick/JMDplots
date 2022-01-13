@@ -19,8 +19,8 @@ MaximAct <- function(AA_target, seed = 1:100, nbackground = 2000, plot.it = TRUE
     ## (UniProt reference human proteome) 20210215
     #AA_background <- readRDS(system.file("/extdata/protein/human_base.rds", package = "canprot"))
     # Only use proteins that have phylostrata assignments in both Trigos and Liebeskind datasets 20210402
-    TPPG17 <- read.csv(system.file(paste0("extdata/phylostrata/TPPG17.csv.xz"), package = "canprot"), as.is = TRUE)
-    LMM16 <- read.csv(system.file(paste0("extdata/phylostrata/LMM16.csv.xz"), package = "canprot"), as.is = TRUE)
+    TPPG17 <- read.csv(system.file(paste0("extdata/evdevH2O/phylostrata/TPPG17.csv.xz"), package = "JMDplots"), as.is = TRUE)
+    LMM16 <- read.csv(system.file(paste0("extdata/evdevH2O/phylostrata/LMM16.csv.xz"), package = "JMDplots"), as.is = TRUE)
     # Take the intersection of lists of proteins from the two sources
     Entry <- na.omit(intersect(TPPG17$Entry, LMM16$UniProt))
     # Get amino acid compositions of the proteins
@@ -148,7 +148,7 @@ MaximAct <- function(AA_target, seed = 1:100, nbackground = 2000, plot.it = TRUE
 
 # Get mean amino acid composition for each phylostratum 20201219
 getphyloaa <- function(PS_source) {
-  dat <- read.csv(system.file(paste0("extdata/phylostrata/", PS_source, ".csv.xz"), package = "canprot"), as.is = TRUE)
+  dat <- read.csv(system.file(paste0("extdata/evdevH2O/phylostrata/", PS_source, ".csv.xz"), package = "JMDplots"), as.is = TRUE)
   if(PS_source == "LMM16") {
     colnames(dat)[c(1,3)] <- c("Entry", "Phylostrata")
     # remove entries that have ENSP instead of UniProt IDs

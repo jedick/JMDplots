@@ -22,6 +22,8 @@ export(
   "aaaq4", "aaaq10", "aaaq13",
   # utilities 20191027
   "addexif",
+  # 20191127 (added to canprot), 20220113 (moved to JMDplots)
+  "PS",
   # canH2O paper 20200203-20200204
   "canH2O1", "pdat_HPA", "pdat_TCGA", "canH2O2", "canH2O3", "canH2O4",
   # canH2O supplementary tables and figures 20200205
