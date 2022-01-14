@@ -596,9 +596,9 @@ MG16S <- function(which, plot.lines = TRUE, lowest.level = NULL, lineage = NULL)
     ZC_MG <- ZC_MT
   }
 
-  if(which == "Marcellus") {
+  if(which == "Marcellus_Shale") {
     ## Marcellus metagenomes (Daly et al., 2016) 20211218
-    aa <- read.csv(file.path(ARASTdir, "Marcellus_AA.csv"))
+    aa <- read.csv(file.path(ARASTdir, "Marcellus_Shale_AA.csv"))
     ZC_MG <- ZC(protein.formula(aa))
     # Marcellus 16S (Cluff et al., 2014)
     dat_16S <- getmetrics("CHM+14", lowest.level = lowest.level, lineage = lineage)
@@ -627,9 +627,9 @@ MG16S <- function(which, plot.lines = TRUE, lowest.level = NULL, lineage = NULL)
     points(ZC_MG, ZC_16S, pch = 21, bg = col, type = type)
   }
 
-  if(which == "Manus") {
+  if(which == "Manus_Basin") {
     ## Manus Basin metagenomes (Meier et al., 2017) 20220110
-    aa <- read.csv(file.path(ARASTdir, "Manus_AA.csv"))
+    aa <- read.csv(file.path(ARASTdir, "Manus_Basin_AA.csv"))
     ZC_MG <- ZC(protein.formula(aa))
     # Manus Basin 16S (Meier et al., 2017)
     dat_16S <- getmetrics("MPB+17", lowest.level = lowest.level, lineage = lineage)
@@ -761,7 +761,7 @@ geo16S5 <- function(pdf = FALSE) {
   xlab <- quote(italic(Z)[C]~"from metagenome")
   plot(xylim, xylim, type = "n", xlab = xlab, ylab = ylab)
   lines(xylim, xylim, lty = 2, col = "gray40")
-  dat <- MG16S("Marcellus")
+  dat <- MG16S("Marcellus_Shale")
   dy <- c(-0.005, -0.005, 0.005, -0.005, -0.005)
   text(dat$ZC_MG, dat$ZC_16S + dy, dat$ID$Time)
   # Add legend
@@ -774,7 +774,7 @@ geo16S5 <- function(pdf = FALSE) {
   xlab <- quote(italic(Z)[C]~"from metagenome")
   plot(xylim, xylim, type = "n", xlab = xlab, ylab = ylab)
   lines(xylim, xylim, lty = 2, col = "gray40")
-  dat <- MG16S("Manus")
+  dat <- MG16S("Manus_Basin")
   # Add sample names with O2 concentrations (from Figure S5 of Meier et al., 2017)
   samptxt <- substr(dat$ID$Sample, 7, 13)
   samptxt <- paste0(samptxt, "\n", c(0.07, 0.14, 0.17, NA, 0.2), " mM O2")
@@ -952,10 +952,64 @@ geo16S_S2 <- function(pdf = FALSE) {
 
 }
 
-# Correlations between ZC estimated from MG and 16S 20220112
+# nH2O-ZC plots for major phyla and their genera 20220114
 geo16S_S3 <- function(pdf = FALSE) {
 
-  if(pdf) pdf("geo16S_S3.pdf", width = 10, height = 8)
+  if(pdf) pdf("geo16S_S3.pdf", width = 14, height = 7)
+
+  par(mfrow = c(1, 2))
+  par(mar = c(4, 4, 2, 1))
+  xlim <- c(-0.3, 0)
+  ylim <- c(-0.85, -0.65)
+
+  metrics <- read.csv(system.file("extdata/chem16S/taxon_metrics.csv", package = "JMDplots"))
+  names <- read.csv(system.file("extdata/refseq/taxid_names.csv.xz", package = "JMDplots"))
+  # Only keep taxa with non-NA genus and phylum
+  names <- names[!(is.na(names$genus) | is.na(names$phylum)), ]
+
+
+  # Plot phylum connected to all genera
+  plotit <- function(phylum, col = 1) {
+    genera <- unique(names$genus[names$phylum == phylum])
+    # Lookup phylum and genera in metrics table
+    iphylum <- match(phylum, metrics$group)
+    igenera <- match(genera, metrics$group)
+    # Use thicker lines and less transparency for phyla with fewer genera
+    if(length(genera) < 50) lwd <- 2 else lwd <- 1
+    if(length(genera) < 50) alpha <- "a0" else alpha <- "50"
+    # Add transparency to given color
+    x <- col2rgb(col)
+    newcol <- rgb(x[1], x[2], x[3], maxColorValue = 255)
+    newcol <- paste0(newcol, alpha)
+    for(i in igenera) lines(c(metrics$ZC[iphylum], metrics$ZC[i]), c(metrics$nH2O[iphylum], metrics$nH2O[i]), col = newcol, lwd = lwd)
+    lwd
+  }
+
+  # Get "majorcellular" phyla used in Figure 1
+  phyla <- metrics[metrics$rank == "phylum" & metrics$parent != "Viruses", ]
+  phyla <- phyla[phyla$ntaxa > 60, ]
+  phyla <- phyla[order(phyla$ntaxa, decreasing = TRUE), ]
+  # Swap Chloroflexi and Crenarchaeota so latter doesn't have same color as Euryarchaeota 20210527
+  phyla[14:15, ] <- phyla[15:14, ]
+
+  # Plot first 8 phyla
+  plot(xlim, ylim, xlab = canprot::cplab$ZC, ylab = canprot::cplab$nH2O, type = "n", xaxs = "i", yaxs = "i")
+  lwd <- lapply(1:8, function(i) {plotit(phyla$group[i], col = i)} )
+  legend("topright", phyla$group[1:8], col = 1:8, lwd = lwd, cex = 0.9, bg = "white")
+
+  # Plot second 8 phyla
+  plot(xlim, ylim, xlab = canprot::cplab$ZC, ylab = canprot::cplab$nH2O, type = "n", xaxs = "i", yaxs = "i")
+  lwd <- lapply(9:16, function(i) {plotit(phyla$group[i], col = i)} )
+  legend("topright", phyla$group[9:16], col = 1:8, lwd = lwd, cex = 0.9, bg = "white")
+
+  if(pdf) dev.off()
+
+}
+
+# Correlations between ZC estimated from MG and 16S 20220112
+geo16S_S4 <- function(pdf = FALSE) {
+
+  if(pdf) pdf("geo16S_S4.pdf", width = 10, height = 8)
   par(mfrow = c(3, 3))
   par(mar = c(4, 4, 4, 1), mgp = c(2.8, 1, 0))
   xylim <- c(-0.22, -0.12)
@@ -984,7 +1038,7 @@ geo16S_S3 <- function(pdf = FALSE) {
     ylab <- quote(italic(Z)[C]~"estimated from 16S rRNA")
     plot(xylim, xylim, type = "n", xlab = xlab, ylab = ylab)
     lines(xylim, xylim, lty = 2, col = "gray40")
-    dat <- lapply(c("Guerrero_Negro", "ETNP_MG", "ETNP_MT", "Bison_Pool", "Mono_Lake", "Marcellus", "Manus"), MG16S, plot.lines = FALSE,
+    dat <- lapply(c("Guerrero_Negro", "ETNP_MG", "ETNP_MT", "Bison_Pool", "Mono_Lake", "Marcellus_Shale", "Manus_Basin"), MG16S, plot.lines = FALSE,
       lowest.level = lowest.level, lineage = lineage)
     lmfun(dat, xylim)
     # Add title and figure label

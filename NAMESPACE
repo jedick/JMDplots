@@ -57,6 +57,7 @@ export(
   "geo16S5", # 20211018
   "geo16S_S1", "geo16S_S2", # 20220105
   "geo16S_S3", # 20220112
+  "geo16S_S4", # 20220114
   # can16S paper 20210604
   "getrefseq", "getgroup", "groupperc",
   # orp16S paper 20211003-20211008

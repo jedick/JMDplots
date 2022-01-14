@@ -9,6 +9,7 @@
 \alias{geo16S_S1}
 \alias{geo16S_S2}
 \alias{geo16S_S3}
+\alias{geo16S_S4}
 \title{Plots from geobiochemistry of 16S sequences paper}
 \description{
 Plots from the paper by Dick and Tan (2021).
@@ -23,6 +24,7 @@ Plots from the paper by Dick and Tan (2021).
   geo16S_S1(pdf = FALSE)
   geo16S_S2(pdf = FALSE)
   geo16S_S3(pdf = FALSE)
+  geo16S_S4(pdf = FALSE)
 }
 
 \arguments{
@@ -40,7 +42,8 @@ This table gives a brief description of each plotting function.
   \code{geo16S5} \tab Comparison of protein \ZC from metagenomic or metatranscriptomic data with estimates from 16S and reference sequences \cr
   \code{geo16S_S1} \tab RefSeq and 16S rRNA data processing outline \cr
   \code{geo16S_S2} \tab Scatterplots of \ZC and \nH2O for genera vs higher taxonomic levels \cr
-  \code{geo16S_S3} \tab Correlations between \ZC estimated from metagenomes and 16S rRNA sequences \cr
+  \code{geo16S_S3} \tab \nH2O-\ZC plots for major phyla and their genera \cr
+  \code{geo16S_S4} \tab Correlations between \ZC estimated from metagenomes and 16S rRNA sequences \cr
 }
 
 }
