@@ -192,13 +192,14 @@ geo16S3 <- function(pdf = FALSE) {
   ID <- c("SVH+19", "Lake Zug", "Lake Lugano", "0.2-1.6micron", "1.6-30micron",
           "SYBL", "SYBL", "C4", "C4",
           "Jul", "Nov", "Feb", "Apr")
-  title <- c("Black Sea", "Lake Zug", "Lake\nLugano", "ETNP", "ETNP",
+  # \n are used for vertical offset from plot bottom
+  title <- c("Black Sea\n", "Lake Zug\n", "Lake\nLugano\n", "ETNP\n", "ETNP\n",
              # Use leading or trailing space to flag NO3-/NO2- plots
-             "Blue Hole\n", " Blue Hole\n", "Blue Hole\n", "Blue Hole\n ",
-             "Ursu Lake\n", "Ursu Lake\n", "Ursu Lake\n", "Ursu Lake\n")
+             "Blue Hole\n\n", " Blue Hole\n\n", "Blue Hole\n\n", "Blue Hole\n\n ",
+             "Ursu Lake\n\n", "Ursu Lake\n\n", "Ursu Lake\n\n", "Ursu Lake\n\n")
   subtitle <- c("", "", "", "", "",
-                "Inside", "Inside", "Outside (C4)", "Outside (C4)",
-                "July 2015", "November 2015", "February 2016", "April 2016")
+                "Inside\n", "Inside\n", "Outside (C4)\n", "Outside (C4)\n",
+                "July 2015\n", "November 2015\n", "February 2016\n", "April 2016\n")
   titlesub <- paste(title, subtitle)
 
   # Make object to hold Source Data
@@ -206,7 +207,7 @@ geo16S3 <- function(pdf = FALSE) {
   # Loop over studies
   for(i in 1:length(study)) {
     # ZC range for plots
-    if(study[i] == "BCA+21") ZClim <- c(-0.180, -0.145) else ZClim <- c(-0.172, -0.140)
+    if(study[i] == "BCA+21") ZClim <- c(-0.180, -0.145) else ZClim <- c(-0.175, -0.140)
     # Get the metadata and chemical metrics for this study
     # Keep all rows for higher-resolution O2 measurements
     mdat <- getmdat(study[i], dropNA = FALSE)
@@ -233,6 +234,8 @@ geo16S3 <- function(pdf = FALSE) {
       ylim <- c(700, 50)
       depth[match(c(1000, 2000), depth)] <- c(600, 700)
     }
+    # Add space at bottom of ETNP for spearman correlations 20220114
+    if(study[i] == "GBL+15") ylim <- c(320, 30)
     # Determine whether the title has changed
     newplot <- TRUE
     if(i > 1) if(titlesub[i]==titlesub[i-1]) newplot <- FALSE
@@ -251,6 +254,8 @@ geo16S3 <- function(pdf = FALSE) {
       # Add to plot if the title hasn't changed
       points(ZC, depth, type = "b", pch = 0)
     }
+    # Save ZC and depth for Spearman correlation 20220114
+    ZCdepth <- list(ZC = ZC, depth = depth)
 
     if(newplot) {
       # Add title in lower right
@@ -292,7 +297,7 @@ geo16S3 <- function(pdf = FALSE) {
       axis(3)
       mtext(xlab, side = 3, line = 1.7, cex = par("cex"))
       # Extra labels for ETNP
-      if(title[i]=="ETNP") {
+      if(title[i]=="ETNP\n") {
         text(44, 76, "0.2-\n1.6 \u00B5m")
         text(128, 138, "1.6-\n30 \u00B5m")
       }
@@ -300,6 +305,25 @@ geo16S3 <- function(pdf = FALSE) {
       par(new = TRUE)
       plot(0, 0, type = "n", axes = FALSE, xlab = "", ylab = "", xlim = ZClim, ylim = ylim)
     }
+    # Save O2 and depth for Spearman correlation 20220114
+    O2depth <- list(O2 = alldat[, icol], depth = depth)
+
+    # Add Spearman correlation 20220114
+    depths <- intersect(ZCdepth$depth, O2depth$depth)
+    iZC <- match(depths, ZCdepth$depth)
+    iO2 <- match(depths, O2depth$depth)
+    # Calculate Spearman rank correlation; use = "complete.obs" to drop pairs with NA ZC
+    spearman <- cor(ZCdepth$ZC[iZC], O2depth$O2[iO2], use = "complete.obs", method = "spearman")
+    rtxt <- bquote(rho == .(formatC(spearman, digits = 2, format = "f")))
+    if(grepl("ETNP", title[i])) {
+      # For ETNP, put the correlations next to the lines for different size fractions
+      if(newplot) text(ZClim[2], ylim[1], rtxt, adj = c(3, 0))
+      else text(ZClim[2], ylim[1], rtxt, adj = c(1.9, 0))
+    } else {
+      if(grepl("Outside", subtitle[i])) text(ZClim[1], ylim[1], rtxt, adj = c(0, 0))
+      else text(ZClim[2], ylim[1], rtxt, adj = c(1, 0))
+    }
+
 
     # Don't repeat Blue Hole in Source Data (there are loops for O2 and NO3-/NO2-; just use one)
     if(substr(title[i], 1, 1) == " ") next

@@ -147,7 +147,7 @@ importFrom("stats", "lm", "na.omit", "predict", "sd", "predict.lm", "residuals",
            "qqline", "qqnorm", "quantile", "median", "fivenum",
            "density", "formula", "t.test", "approx", "splinefun", "xtabs",
            "coefficients", "loess", "wilcox.test", "weighted.mean",
-           "kmeans", "qt", "cor.test", "coef", "aggregate")
+           "kmeans", "qt", "cor.test", "coef", "aggregate", "cor")
 importFrom("utils", "read.csv", "demo", "tail", "write.csv",
            "capture.output", "browseURL", "head", "combn", "read.table")
 
