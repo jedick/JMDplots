@@ -1,8 +1,9 @@
 # JMDplots/evdevH2O.R
 # Make plots for the paper:
-# Redox potential linked to water loss from proteins in evolution and development
+# A thermodynamic model for water activity and redox potential in evolution and development
 # 20201216 First version
 # 20210127 Added to JMDplots
+# 20220113 Paper title changed to reflect current version on bioRxiv
 
 # Requires:
 # CHNOSZ > 1.4.0 to get species' activities in predominant.values
@@ -73,7 +74,7 @@ evdevH2O1 <- function(pdf = FALSE, boot.R = 99) {
 
   if(pdf) {
     dev.off()
-    addexif("evdevH2O1", "Chemical analysis of Trigos and Liebeskind datasets", "Dick (2021) (preprint)")
+    addexif("evdevH2O1", "Chemical analysis of Trigos and Liebeskind datasets", "Dick (2022)")
   }
 }
 
@@ -198,7 +199,7 @@ evdevH2O2 <- function(pdf = FALSE) {
 
   if(pdf) {
     dev.off()
-    addexif("evdevH2O2", "Thermodynamic analysis of optimal logaH2O and logfO2 for target proteins", "Dick (2021) (preprint)")
+    addexif("evdevH2O2", "Thermodynamic analysis of optimal logaH2O and logfO2 for target proteins", "Dick (2022)")
   }
 
 }
@@ -340,7 +341,7 @@ evdevH2O3 <- function(pdf = FALSE) {
 
   if(pdf) {
     dev.off()
-    addexif("evdevH2O3", "Optimal logaH2O and logfO2 and virtual Eh for target proteins", "Dick (2021) (preprint)")
+    addexif("evdevH2O3", "Optimal logaH2O and logfO2 and virtual Eh for target proteins", "Dick (2022)")
   }
 }
 
@@ -496,7 +497,7 @@ evdevH2O4 <- function(pdf = FALSE) {
 
   if(pdf) {
     dev.off()
-    addexif("evdevH2O4", "Ranges of chemical metrics and thermodynamic parameters for different background proteomes", "Dick (2021) (preprint)")
+    addexif("evdevH2O4", "Ranges of chemical metrics and thermodynamic parameters for different background proteomes", "Dick (2022)")
   }
 
 }
@@ -622,7 +623,7 @@ evdevH2O5 <- function(pdf = FALSE, boot.R = 99) {
 
   if(pdf) {
     dev.off()
-    addexif("evdevH2O5", "Chemical and thermodynamic analysis of B. subtilis biofilm transcriptome and proteome", "Dick (2021) (preprint)")
+    addexif("evdevH2O5", "Chemical and thermodynamic analysis of B. subtilis biofilm transcriptome and proteome", "Dick (2022)")
   }
 }
 
@@ -778,7 +779,7 @@ evdevH2O6 <- function(pdf = FALSE, boot.R = 99) {
 
   if(pdf) {
     dev.off()
-    addexif("evdevH2O6", "Organismal water content, proteomic nH2O, and optimal logaH2O for fruit fly development", "Dick (2021) (preprint)")
+    addexif("evdevH2O6", "Organismal water content, proteomic nH2O, and optimal logaH2O for fruit fly development", "Dick (2022)")
   }
 
 }

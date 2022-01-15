@@ -63,7 +63,7 @@ Regardless of the value of \code{write.csv}, \code{mjenergy} returns the affinit
 \references{
 Shock, E. and Canovas, P. (2010) The potential for abiotic organic synthesis and biosynthesis at seafloor hydrothermal systems. \emph{Geofluids} \bold{10}, 161--192. \doi{10.1111/j.1468-8123.2010.00277.x}
 
-Shock, E. L. and Dick, J. M. (2021) The release of energy during protein synthesis at submarine hydrothermal ecosystems. (Preprint)
+Dick, J. M. and Shock, E. L. (2021) The release of energy during protein synthesis at ultramafic-hosted submarine hydrothermal ecosystems. \emph{JGR: Biogeosciences} \bold{126}, e2021JG006436. \doi{10.1029/2021JG006436}
 }
 
 \examples{

@@ -16,8 +16,10 @@ Please refer to the supporting information of the papers for the original script
 
 \details{
   \itemize{
-    \item \code{\link{evdevH2O}} - Redox potential and water loss from proteins in evolution and development (Dick, 2021)
-    \item \code{\link{canH2O}} - Water as a reactant in the differential expression of proteins in cancer (Dick, 2020)
+    \item \code{\link{evdevH2O}} - Thermodynamic model for water activity and redox potential in evolution and development (Dick, 2022)
+    \item \code{\link{geo16S}} - Chemical links between redox conditions and microbial community composition (Dick and Tan, 2021)
+    \item \code{\link{mjenergy}} - Energy release in protein synthesis (Dick and Shock, 2021)
+    \item \code{\link{canH2O}} - Water as a reactant in the differential expression of proteins in cancer (Dick, 2021)
     \item \code{\link{gradH2O}} - Stoichiometric hydration state of metagenomes in salinity gradients (Dick et al., 2020)
     \item \code{\link{chnosz10}} - CHNOSZ, ten years after first CRAN submission (Dick, 2019)
     \item \code{\link{gradox}} - Carbon oxidation state of metagenomes in redox gradients (Dick et al., 2019)
@@ -139,7 +141,11 @@ Dick, J. M., Yu, M. and Tan, J. (2020) Uncovering chemical signatures of salinit
 
 Dick, J. M. (2021) Water as a reactant in the differential expression of proteins in cancer. \emph{Comp. Sys. Onco.} \bold{1}:e1007. \doi{10.1002/cso2.1007}
 
-Dick, J. M. (2021) Redox potential linked to water loss from proteins in evolution and developent. bioRxiv. \doi{https://doi.org/10.1101/2021.01.29.428804}
+Dick, J. M. and Shock, E. L. (2021) The release of energy during protein synthesis at ultramafic-hosted submarine hydrothermal ecosystems. \emph{JGR: Biogeosciences} \bold{126}, e2021JG006436. \doi{10.1029/2021JG006436}
+
+Dick, J. M. and Tan, J. (2021) Genomic evidence for a chemical link between redox conditions and microbial community composition. bioRxiv. \doi{https://doi.org/10.1101/2021.05.31.446500}
+
+Dick, J. M. (2022) A thermodynamic model for water activity and redox potential in evolution and developent. bioRxiv. \doi{https://doi.org/10.1101/2021.01.29.428804}
 
 O'Leary, N. A. et al. (2016) Reference sequence (RefSeq) database at NCBI: current status, taxonomic expansion, and functional annotation. \emph{Nucleic Acids Res.} \bold{44}, D733-D745. \doi{10.1093/nar/gkv1189}
 }

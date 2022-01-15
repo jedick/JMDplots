@@ -67,7 +67,7 @@ This vignette runs the code to make the plots from the following paper:
 >
 > Preprint available at:
 >
-> Dick JM. 2021. Redox potential linked to water loss from proteins in evolution and development. bioRxiv. doi: [10.1101/2021.01.29.428804](https://doi.org/10.1101/2021.01.29.428804)
+> Dick JM. 2022. A thermodynamic model for water activity and redox potential in evolution and development. bioRxiv. doi: [10.1101/2021.01.29.428804](https://doi.org/10.1101/2021.01.29.428804)
 
 This vignette was compiled on `r Sys.Date()` with **[JMDplots](https://github.com/jedick/JMDplots)** `r packageDescription("JMDplots")$Version`, **[CHNOSZ](http://chnosz.net)** `r packageDescription("CHNOSZ")$Version`, and **[canprot](https://github.com/jedick/canprot)** `r packageDescription("canprot")$Version`.
 

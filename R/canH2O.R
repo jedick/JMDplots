@@ -151,7 +151,7 @@ canH2O1 <- function(pdf = FALSE) {
   par(xaxs = "r", yaxs = "r")
   if(pdf) {
     dev.off()
-    addexif("canH2O1", "Study overview", "Dick (2020) (preprint)")
+    addexif("canH2O1", "Study overview", "Dick (2021)")
   }
 }
 
@@ -250,7 +250,7 @@ canH2O2 <- function(pdf = FALSE) {
 
   if(pdf) {
     dev.off()
-    addexif("canH2O2", "Median differences of protein length, nH2O and ZC for cell culture and cancer tissue", "Dick (2020) (preprint)")
+    addexif("canH2O2", "Median differences of protein length, nH2O and ZC for cell culture and cancer tissue", "Dick (2021)")
   }
 }
 
@@ -347,7 +347,7 @@ canH2O3 <- function(pdf = FALSE) {
   ml <- gridExtra::marrangeGrob(pl1, layout_matrix = mat, top = NULL)
   if(pdf) {
     ggsave("canH2O3.pdf", ml, width = 10, height = 4)
-    addexif("canH2O3", "nH2O-ZC and plots for TCGA and HPA datasets", "Dick (2020) (preprint)")
+    addexif("canH2O3", "nH2O-ZC and plots for TCGA and HPA datasets", "Dick (2021)")
   } else ml
 }
 
@@ -390,7 +390,7 @@ canH2O4 <- function(pdf = FALSE) {
   label.figure("D", xfrac = 0.04, yfrac = 1, font = 2, cex = 1.5)
   if(pdf) {
     dev.off()
-    addexif("canH2O4", "Differentially expressed genes in aneuploid and osmotically shocked yeast cells", "Dick (2020) (preprint)")
+    addexif("canH2O4", "Differentially expressed genes in aneuploid and osmotically shocked yeast cells", "Dick (2021)")
   }
 }
 
@@ -516,7 +516,7 @@ canH2OS1 <- function(pdf = FALSE) {
 
   if(pdf) {
     dev.off()
-    addexif("canH2OS1", "nO2-ZC and nH2O-ZC correlations using QEC basis species", "Dick (2020) (preprint)")
+    addexif("canH2OS1", "nO2-ZC and nH2O-ZC correlations using QEC basis species", "Dick (2021)")
   }
 }
 
@@ -592,7 +592,7 @@ canH2OS2 <- function(pdf = FALSE) {
   ml <- gridExtra::marrangeGrob(c(pl1, pl2), layout_matrix = mat, top = NULL)
   if(pdf) {
     ggsave("canH2OS2.pdf", ml, width = 8, height = 4)
-    addexif("canH2OS2", "HPA-TCGA scatterplots for ZC and nH2O", "Dick (2020) (preprint)")
+    addexif("canH2OS2", "HPA-TCGA scatterplots for ZC and nH2O", "Dick (2021)")
   }
   else ml
 }

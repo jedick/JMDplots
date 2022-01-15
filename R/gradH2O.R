@@ -133,7 +133,7 @@ gradH2O1 <- function(pdf = FALSE) {
 
   if(pdf) {
     dev.off()
-    addexif("gradH2O1", "Comparison of different sets of basis species", "Dick et al. (2020) (preprint)")
+    addexif("gradH2O1", "Comparison of different sets of basis species", "Dick et al. (2020)")
   }
   
   # Return linear model of nH2O-ZC for amino acids
@@ -208,7 +208,7 @@ gradH2O2 <- function(pdf = FALSE) {
   # done!
   if(pdf) {
     dev.off()
-    addexif("gradH2O2", "Schematic of nH2O and ZC calculations", "Dick et al. (2020) (preprint)")
+    addexif("gradH2O2", "Schematic of nH2O and ZC calculations", "Dick et al. (2020)")
   }
   
 }
@@ -340,7 +340,7 @@ gradH2O3 <- function(pdf = FALSE, vars = "H2O-ZC") {
 
   if(pdf) {
     dev.off()
-    addexif("gradH2O3", "nH2O-ZC scatterplots for redox gradients and the Baltic Sea", "Dick et al. (2020) (preprint)")
+    addexif("gradH2O3", "nH2O-ZC scatterplots for redox gradients and the Baltic Sea", "Dick et al. (2020)")
   }
 }
 
@@ -392,7 +392,7 @@ gradH2O4 <- function(pdf = FALSE, var = NULL) {
 
   if(pdf) {
     dev.off()
-    addexif("gradH2O4", "nH2O for Baltic Sea metagenome and metatranscriptome in different size fractions", "Dick et al. (2020) (preprint)")
+    addexif("gradH2O4", "nH2O for Baltic Sea metagenome and metatranscriptome in different size fractions", "Dick et al. (2020)")
   }
 }
 
@@ -506,7 +506,7 @@ gradH2O5 <- function(pdf = FALSE) {
 
   if(pdf) {
     dev.off()
-    addexif("gradH2O5", "nH2O vs ZC for freshwater, marine, and hypersaline environments", "Dick et al. (2020) (preprint)")
+    addexif("gradH2O5", "nH2O vs ZC for freshwater, marine, and hypersaline environments", "Dick et al. (2020)")
   }
 }
 
@@ -556,7 +556,7 @@ gradH2O6 <- function(pdf = FALSE) {
   label.figure("(d)", cex = 1.7)
   if(pdf) {
     dev.off()
-    addexif("gradH2O6", "nH2O-ZC and GRAVY-pI plots for Baltic Sea and Rodriguez-Brito et al. data", "Dick et al. (2020) (preprint)")
+    addexif("gradH2O6", "nH2O-ZC and GRAVY-pI plots for Baltic Sea and Rodriguez-Brito et al. data", "Dick et al. (2020)")
   }
 }
 
@@ -728,7 +728,7 @@ gradH2O7 <- function(pdf = FALSE) {
 
   if(pdf) {
     dev.off()
-    addexif("gradH2O7", "differential gene and protein expression; time-course experiments and NaCl or organic solutes", "Dick et al. (2020) (preprint)")
+    addexif("gradH2O7", "differential gene and protein expression; time-course experiments and NaCl or organic solutes", "Dick et al. (2020)")
   }
 }
 
