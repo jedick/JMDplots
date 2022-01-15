@@ -24,11 +24,12 @@ Plots from the paper by Dick and Tan (2021).
   geo16S_S1(pdf = FALSE)
   geo16S_S2(pdf = FALSE)
   geo16S_S3(pdf = FALSE)
-  geo16S_S4(pdf = FALSE)
+  geo16S_S4(pdf = FALSE, H2O = FALSE)
 }
 
 \arguments{
   \item{pdf}{logical, make a PDF file?}
+  \item{H2O}{logical, make plots for \nH2O instead of \ZC?}
 }
 
 \details{

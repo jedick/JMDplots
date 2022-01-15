@@ -516,7 +516,8 @@ geo16S4 <- function(pdf = FALSE) {
 }
 
 # Function to plot individual datasets for geo16S5 20220112
-MG16S <- function(which, plot.lines = TRUE, lowest.level = NULL, lineage = NULL) {
+# Use H2O = FALSE for ZC, H2O = TRUE for nH2O
+MG16S <- function(which, plot.lines = TRUE, lowest.level = NULL, lineage = NULL, rm.outliers = FALSE, H2O = FALSE) {
 
   # To return NULL ID unless it is set below
   ID <- NULL
@@ -528,104 +529,105 @@ MG16S <- function(which, plot.lines = TRUE, lowest.level = NULL, lineage = NULL)
 
   if(which == "Guerrero_Negro") {
     ## Guerrero Negro metagenome (Kunin et al., 2008)
-    dat_MG <- mplot("Guerrero_Negro", "IMG_MGP", plot.it = FALSE)
+    dat_MG <- mplot("Guerrero_Negro", "IMG_MGP", plot.it = FALSE, H2O = H2O)
     # Reverse the order because upper mat layers are plotted on the right
-    ZC_MG <- rev(dat_MG$AA)
+    metric_MG <- rev(dat_MG$AA)
     # 16S data (Harris et al., 2013)
     dat_16S <- getmetrics("HCW+13", lowest.level = lowest.level, lineage = lineage)
-    ZC_16S <- dat_16S$ZC
+    if(H2O) metric_16S <- dat_16S$nH2O else metric_16S <- dat_16S$ZC
     # Check that the sample names are the same
     stopifnot(all.equal(rev(rownames(dat_MG$meancomp)), gsub(".*_", "", dat_16S$sample)))
     # Add lines and points
-    if(plot.lines) lines(ZC_MG, ZC_16S)
-    points(ZC_MG, ZC_16S, pch = 21, bg = "white")
+    if(plot.lines) lines(metric_MG, metric_16S)
+    points(metric_MG, metric_16S, pch = 21, bg = "white")
     # Fill symbol for most oxidized (surface) sample
-    points(ZC_MG[1], ZC_16S[1], pch = 21, bg = 1)
+    points(metric_MG[1], metric_16S[1], pch = 21, bg = 4)
   }
 
   if(which == "ETNP_MG") {
     ## ETNP OMZ metagenome (Glass et al., 2015)
-    dat_MG <- mplot("ETNP_OMZ", "SRA_MGP", plot.it = FALSE)
+    dat_MG <- mplot("ETNP_OMZ", "SRA_MGP", plot.it = FALSE, H2O = H2O)
     # Reverse the order because smaller water depths are plotted on the right
-    ZC_MG <- rev(dat_MG$AA)
+    metric_MG <- rev(dat_MG$AA)
     # 16S data (Ganesh et al., 2015)
     dat_16S <- getmetrics("GBL+15", lowest.level = lowest.level, lineage = lineage)
     # Use smallest size fraction
     dat_16S <- subset(dat_16S, grepl("1.6micron", dat_16S$sample))
-    ZC_16S <- dat_16S$ZC
+    if(H2O) metric_16S <- dat_16S$nH2O else metric_16S <- dat_16S$ZC
     # Check that the sample names are the same
     stopifnot(all.equal(rev(rownames(dat_MG$meancomp)), gsub("_.*", "", dat_16S$sample)))
     # Add lines and points
-    if(plot.lines) lines(ZC_MG, ZC_16S)
-    points(ZC_MG, ZC_16S, pch = 21, bg = "white")
+    if(plot.lines) lines(metric_MG, metric_16S)
+    points(metric_MG, metric_16S, pch = 21, bg = "white")
     # Fill symbol for surface sample
-    points(ZC_MG[1], ZC_16S[1], pch = 21, bg = 1)
+    points(metric_MG[1], metric_16S[1], pch = 21, bg = 4)
   }
 
   if(which == "ETNP_MT") {
     ## ETNP OMZ metatranscriptome (Ganesh et al., 2015)
-    dat_MT <- mplot("ETNP_OMZ", "SRA_MTP", plot.it = FALSE)
+    dat_MT <- mplot("ETNP_OMZ", "SRA_MTP", plot.it = FALSE, H2O = H2O)
     # Reverse the order because smaller water depths are plotted on the right
-    ZC_MT <- rev(dat_MT$AA)
+    metric_MT <- rev(dat_MT$AA)
     # 16S data (Ganesh et al., 2015)
     dat_16S <- getmetrics("GBL+15", lowest.level = lowest.level, lineage = lineage)
     # Use smallest size fraction
     dat_16S <- subset(dat_16S, grepl("1.6micron", dat_16S$sample))
-    ZC_16S <- dat_16S$ZC
+    if(H2O) metric_16S <- dat_16S$nH2O else metric_16S <- dat_16S$ZC
     # Check that the sample names are the same
     stopifnot(all.equal(rev(rownames(dat_MT$meancomp)), gsub("_.*", "", dat_16S$sample)))
     # Add lines and points
-    if(plot.lines) lines(ZC_MT, ZC_16S, col = 4)
-    points(ZC_MT, ZC_16S, pch = 22, bg = "white", col = 4)
+    if(plot.lines) lines(metric_MT, metric_16S, col = 8)
+    points(metric_MT, metric_16S, pch = 22, bg = "white", col = 8)
     # Fill symbol for surface sample
-    points(ZC_MT[1], ZC_16S[1], pch = 22, bg = 4, col = 4)
+    points(metric_MT[1], metric_16S[1], pch = 22, bg = 4, col = 8)
     # For the return value
-    ZC_MG <- ZC_MT
+    metric_MG <- metric_MT
   }
 
   if(which == "Bison_Pool") {
     ## Bison Pool metagenome (Havig et al., 2011)
-    dat_MG <- mplot("Bison_Pool", "IMG_MGP", plot.it = FALSE)
-    ZC_MG <- dat_MG$AA
+    dat_MG <- mplot("Bison_Pool", "IMG_MGP", plot.it = FALSE, H2O = H2O)
+    metric_MG <- dat_MG$AA
     # 16S data (Swingley et al., 2012)
     # mincount needs to be lowered from default for when lineage = "genus"
     # (site 4 (Q) has less than 200 genus-level classifications)
     dat_16S <- getmetrics("SMS+12", lowest.level = lowest.level, lineage = lineage, mincount = 50)
-    ZC_16S <- dat_16S$ZC
+    if(H2O) metric_16S <- dat_16S$nH2O else metric_16S <- dat_16S$ZC
     # Check that the sample names are the same
     stopifnot(all.equal(rownames(dat_MG$meancomp), dat_16S$sample))
     # Add lines and points
-    if(plot.lines) lines(ZC_MG, ZC_16S)
-    points(ZC_MG, ZC_16S, pch = 21, bg = "white")
+    if(plot.lines) lines(metric_MG, metric_16S)
+    points(metric_MG, metric_16S, pch = 21, bg = "white")
     # Fill symbol for low-T sample
-    points(ZC_MG[5], ZC_16S[5], pch = 21, bg = 1)
+    points(metric_MG[5], metric_16S[5], pch = 21, bg = 4)
   }
 
   if(which == "Mono_Lake") {
     ## Mono Lake metatranscriptome (Edwardson and Hollibaugh, 2017)
-    dat_MT <- mplot("Mono_Lake", "SRA_MTP", plot.it = FALSE)
+    dat_MT <- mplot("Mono_Lake", "SRA_MTP", plot.it = FALSE, H2O = H2O)
     # NOTE: reverse the order because smaller water depths are plotted on the right
-    ZC_MT <- rev(dat_MT$AA)
+    metric_MT <- rev(dat_MT$AA)
     # 16S data (Edwardson and Hollibaugh, 2018)
     dat_16S <- getmetrics("EH18", lowest.level = lowest.level, lineage = lineage)
-    ZC_16S <- dat_16S$ZC
+    if(H2O) metric_16S <- dat_16S$nH2O else metric_16S <- dat_16S$ZC
     # Check that the sample names are the same
     stopifnot(all.equal(rev(rownames(dat_MT$meancomp)), gsub(".*_", "", dat_16S$sample)))
     # Add lines and points
-    if(plot.lines) lines(ZC_MT, ZC_16S, pch = 0, col = 4)
-    points(ZC_MT, ZC_16S, pch = 22, bg = "white", col = 4)
+    if(plot.lines) lines(metric_MT, metric_16S, pch = 0, col = 8)
+    points(metric_MT, metric_16S, pch = 22, bg = "white", col = 8)
     # Fill symbol for surface sample
-    points(ZC_MT[1], ZC_16S[1], pch = 22, bg = 4, col = 4)
+    points(metric_MT[1], metric_16S[1], pch = 22, bg = 4, col = 8)
     # For the return value
-    ZC_MG <- ZC_MT
+    metric_MG <- metric_MT
   }
 
   if(which == "Marcellus_Shale") {
     ## Marcellus metagenomes (Daly et al., 2016) 20211218
     aa <- read.csv(file.path(ARASTdir, "Marcellus_Shale_AA.csv"))
-    ZC_MG <- ZC(protein.formula(aa))
+    if(H2O) metric_MG <- H2OAA(aa) else metric_MG <- ZCAA(aa)
     # Marcellus 16S (Cluff et al., 2014)
-    dat_16S <- getmetrics("CHM+14", lowest.level = lowest.level, lineage = lineage)
+    mdat <- getmdat("CHM+14")
+    dat_16S <- getmetrics("CHM+14", mdat = mdat, lowest.level = lowest.level, lineage = lineage)
     # List run IDs here
     ID <- list(
       # Time points: input, T7, T13, T82, T328
@@ -640,23 +642,23 @@ MG16S <- function(which, plot.lines = TRUE, lowest.level = NULL, lineage = NULL)
     # Get 16S runs corresponding to metagenomes
     idat <- match(ID$Amplicon, dat_16S$Run)
     dat_16S <- dat_16S[idat, ]
-    ZC_16S <- dat_16S$ZC
+    if(H2O) metric_16S <- dat_16S$nH2O else metric_16S <- dat_16S$ZC
     # Assign colors: open circle for injected fluid, gray for flowback, red for produced
-    mdat <- getmdat("CHM+14")
     mdat <- mdat[idat, ]
-    col <- rep("white", nrow(mdat))
+    col <- rep(4, nrow(mdat))
     col[mdat$type == "flowback fluid"] <- 8
     col[mdat$type == "produced fluid"] <- 2
     if(plot.lines) type <- "b" else type <- "p"
-    points(ZC_MG, ZC_16S, pch = 21, bg = col, type = type)
+    points(metric_MG, metric_16S, pch = 23, bg = col, type = type)
   }
 
   if(which == "Manus_Basin") {
     ## Manus Basin metagenomes (Meier et al., 2017) 20220110
     aa <- read.csv(file.path(ARASTdir, "Manus_Basin_AA.csv"))
-    ZC_MG <- ZC(protein.formula(aa))
+    if(H2O) metric_MG <- H2OAA(aa) else metric_MG <- ZCAA(aa)
     # Manus Basin 16S (Meier et al., 2017)
-    dat_16S <- getmetrics("MPB+17", lowest.level = lowest.level, lineage = lineage)
+    mdat <- getmdat("MPB+17")
+    dat_16S <- getmetrics("MPB+17", mdat = mdat, lowest.level = lowest.level, lineage = lineage)
     # List run IDs here
     ID <- list(
       # Samples: NSu-F2b, NSu-F5, Fw-F1b, Fw-F3, RR-F1b
@@ -669,19 +671,44 @@ MG16S <- function(which, plot.lines = TRUE, lowest.level = NULL, lineage = NULL)
     # Get 16S runs corresponding to metagenomes
     idat <- match(ID$Amplicon, dat_16S$Run)
     dat_16S <- dat_16S[idat, ]
-    ZC_16S <- dat_16S$ZC
+    if(H2O) metric_16S <- dat_16S$nH2O else metric_16S <- dat_16S$ZC
     # Assign colors: blue for < 10 degC, red for > 50 degC
-    mdat <- getmdat("MPB+17")
     mdat <- mdat[idat, ]
     col <- rep("white", nrow(mdat))
     col[mdat$T > 50] <- 2
     col[mdat$T < 10] <- 4
-    points(ZC_MG, ZC_16S, pch = 22, bg = col)
+    points(metric_MG, metric_16S, pch = 22, bg = col)
+  }
+
+  if(which == "Black_Sea") {
+    ## Black Sea metagenome (Villanueva et al., 2021) 20220115
+    aa <- read.csv(file.path(ARASTdir, "Black_Sea_AA.csv"))
+    if(H2O) metric_MG <- H2OAA(aa) else metric_MG <- ZCAA(aa)
+    # 16S data (Sollai et al., 2019)
+    mdat <- getmdat("SVH+19")
+    dat_16S <- getmetrics("SVH+19", mdat = mdat)
+    if(H2O) metric_16S <- dat_16S$nH2O else metric_16S <- dat_16S$ZC
+    ID <- list(
+      Depth = c(50, 70, 80, 85, 90, 95, 100, 105,
+        110, 130, 170, 250, 500, 1000, 2000),
+      Metagenome = c("SRR12347146", "SRR12347145", "SRR12347139", "SRR12347138", "SRR12347137", "SRR12347136", "SRR12347135", "SRR12347134",
+        "SRR12347133", "SRR12347132", "SRR12347144", "SRR12347143", "SRR12347142", "SRR12347141", "SRR12347140")
+    )
+    # Check that the samples are in the right order
+    stopifnot(all(mdat$depth == ID$Depth))
+    stopifnot(all(aa$protein == ID$Metagenome))
+    # Assign colors and symbols: blue up for < 100 m, red down for >= 100 m
+    col <- rep(4, nrow(mdat))
+    pch <- rep(24, nrow(mdat))
+    col[mdat$depth >= 100] <- 2
+    pch[mdat$depth >= 100] <- 25
+    points(metric_MG, metric_16S, pch = pch, bg = col)
   }
 
   if(which == "HMP") {
     # HMP 16S
-    met <- getmetrics("HMP12", lowest.level = lowest.level, lineage = lineage)
+    mdat <- getmdat("HMP12")
+    met <- getmetrics("HMP12", mdat = mdat, lowest.level = lowest.level, lineage = lineage)
     # HMP metagenomes
     aa <- read.csv(file.path(ARASTdir, "HMP_AA.csv"))
     # Put data in same order
@@ -694,13 +721,20 @@ MG16S <- function(which, plot.lines = TRUE, lowest.level = NULL, lineage = NULL)
     stopifnot(all(na.omit(met$Run == dat$Amplicon)))
     stopifnot(all(aa$protein == dat$Metagenome))
     # Get ZC values
-    ZC_16S <- met$ZC
-    ZC_MG <- ZC(protein.formula(aa))
+    if(H2O) metric_16S <- met$nH2O else metric_16S <- met$ZC
+    if(H2O) metric_MG <- H2OAA(aa) else metric_MG <- ZCAA(aa)
+    if(rm.outliers & !H2O) {
+      # Remove outliers (exceptionlly high ZC in metagenome) 20221215
+      iout <- metric_MG > -0.12
+      metric_MG <- metric_MG[!iout]
+      metric_16S <- metric_16S[!iout]
+      mdat <- mdat[!iout, ]
+    }
     # Assign colors: red for GI tract, gray for skin, blue for others
-    mdat <- getmdat("HMP12")
-    col <- ifelse(mdat$"Body site" == "GI tract", 2, 4)
-    col[mdat$"Body site" == "Skin"] <- 8
-    points(ZC_MG, ZC_16S, pch = 21, bg = col)
+    col <- rep(8, nrow(mdat))
+    col[mdat$"Body site" == "GI tract"] <- 2
+    col[mdat$"Body site" == "Skin"] <- 4
+    points(metric_MG, metric_16S, pch = 21, bg = col)
   }
 
   if(which == "Guts") {
@@ -713,9 +747,9 @@ MG16S <- function(which, plot.lines = TRUE, lowest.level = NULL, lineage = NULL)
     stopifnot(all(paste0(met$Run, ".3") == paste0("mgm", dat$Amplicon)))
     stopifnot(all(aa$protein == paste0("mgm", dat$Metagenome)))
     # Get ZC values
-    ZC_16S <- met$ZC
-    ZC_MG <- ZC(protein.formula(aa))
-    points(ZC_MG, ZC_16S, pch = 21, bg = 2)
+    if(H2O) metric_16S <- met$nH2O else metric_16S <- met$ZC
+    if(H2O) metric_MG <- H2OAA(aa) else metric_MG <- ZCAA(aa)
+    points(metric_MG, metric_16S, pch = 21, bg = 2)
   }
 
   if(which == "Soils") {
@@ -733,12 +767,12 @@ MG16S <- function(which, plot.lines = TRUE, lowest.level = NULL, lineage = NULL)
     stopifnot(all(paste0(met$Run, ".3") == paste0("mgm", dat$Amplicon)))
     stopifnot(all(aa$protein == paste0("mgm", dat$Metagenome)))
     # Get ZC values
-    ZC_16S <- met$ZC
-    ZC_MG <- ZC(protein.formula(aa))
-    points(ZC_MG, ZC_16S, pch = 21)
+    if(H2O) metric_16S <- met$nH2O else metric_16S <- met$ZC
+    if(H2O) metric_MG <- H2OAA(aa) else metric_MG <- ZCAA(aa)
+    points(metric_MG, metric_16S, pch = 21, bg = 4)
   }
 
-  list(ZC_MG = ZC_MG, ZC_16S = ZC_16S, ID = ID)
+  list(metric_MG = metric_MG, metric_16S = metric_16S, ID = ID)
 
 }
 
@@ -771,10 +805,24 @@ geo16S5 <- function(pdf = FALSE) {
   text(-0.17, -0.193, "Bison Pool")
   MG16S("Mono_Lake")
   text(-0.178, -0.150, "Mono Lake")
+  # Empty legends to make box with cut-out 20220115
+  l3 <- legend("topleft", rep("                                ", 3))
+  l1 <- legend("topleft", "                                                             ")
+  # Erase interior lines
+  y <- l1$rect$top - l1$rect$h
+  x1 <- l3$rect$left
+  x2 <- l3$rect$left + l3$rect$w
+  dx <- 0.0002
+  lines(c(x1 + dx, x2 - dx), c(y, y), col = "white", lend = 1, lwd = 1.5)
+  x <- l3$rect$left + l3$rect$w
+  y1 <- l1$rect$top
+  y2 <- l1$rect$top - l1$rect$h
+  dy <- 0.00025
+  lines(c(x, x), c(y1 - dy, y2 + dy), col = "white", lend = 1, lwd = 1.5)
   # Add legend
-  legend("topleft", character(3), pch = c(1, 0, 19), col = c(1, 4, 1), bty = "n")
-  ltxt <- as.expression(c("Metagenome", "Metatranscriptome", quote("Surface or high-"*O[2]*" sample")))
-  legend("topleft", ltxt, pch = c(NA, NA, 15), col = c(NA, NA, 4), bty = "n", inset = c(0.025, 0))
+  legend("topleft", character(3), pch = c(21, 21, 22), col = c(1, 1, 8), pt.bg = c(4, "white", "white"), bty = "n")
+  ltxt <- as.expression(c(quote("Near-surface and/or high-"*O[2]*" sample"), "Metagenome", "Metatranscriptome"))
+  legend("topleft", ltxt, pch = c(22, NA, NA), col = c(8, NA, NA), pt.bg = c(4, NA, NA), inset = c(0.025, 0), bty = "n")
   # Add title and figure label
   title("Various Environments", font.main = 1, cex.main = 1.1)
   label.figure("A", cex = 1.5, font = 2, xfrac = 0.04, yfrac = 0.96)
@@ -787,9 +835,9 @@ geo16S5 <- function(pdf = FALSE) {
   lines(xylim, xylim, lty = 2, col = "gray40")
   dat <- MG16S("Marcellus_Shale")
   dy <- c(-0.005, -0.005, 0.005, -0.005, -0.005)
-  text(dat$ZC_MG, dat$ZC_16S + dy, dat$ID$Time)
+  text(dat$metric_MG, dat$metric_16S + dy, dat$ID$Time)
   # Add legend
-  legend("topleft", c("Injected", "Flowback", "Produced"), pch = 21, pt.bg = c("white", 8, 2), bty = "n")
+  legend("topleft", c("Injected", "Flowback", "Produced"), pch = 23, pt.bg = c(4, 8, 2))
   # Add title and figure label
   title("Marcellus Shale Fluids", font.main = 1, cex.main = 1.1)
   label.figure("B", cex = 1.5, font = 2, xfrac = 0.04, yfrac = 0.96)
@@ -802,13 +850,17 @@ geo16S5 <- function(pdf = FALSE) {
   # Add sample names with O2 concentrations (from Figure S5 of Meier et al., 2017)
   samptxt <- substr(dat$ID$Sample, 7, 13)
   samptxt <- paste0(samptxt, "\n", c(0.07, 0.14, 0.17, NA, 0.2), " mM O2")
-  samptxt <- gsub("NA mM O2", "ND O2\n\n", samptxt)
-  dx <- c(0.012, 0.012, -0.012, 0.008, 0.012)
-  text(dat$ZC_MG + dx, dat$ZC_16S - 0.01, samptxt, adj = c(0.5, 0))
-  # Add legend
-  legend("topleft", c("T > 50 \u00B0C", "10 \u00B0C < T < 50 \u00B0C", "T < 10 \u00B0C"), pch = 22, pt.bg = c(2, "white", 4), bty = "n")
+  samptxt <- gsub("0.17 mM O2", "0.17 mM O2\n\n", samptxt)
+  samptxt <- gsub("NA mM O2", "ND O2", samptxt)
+  dx <- c(0.010, 0.009, -0.012, -0.008, 0.009)
+  text(dat$metric_MG + dx, dat$metric_16S - 0.01, samptxt, adj = c(0.5, 0), cex = 0.9)
+  # Add Black Sea 20220115
+  MG16S("Black_Sea")
+  # Add legends
+  legend("topleft", c("Depth < 100 m", "Depth >= 100 m"), pch = c(24, 25), pt.bg = c(4, 2), title = "Black Sea")
+  legend("bottomright", c("T < 10 \u00B0C", "10 \u00B0C < T < 50 \u00B0C", "T > 50 \u00B0C"), pch = 22, pt.bg = c(4, "white", 2), title = "Manus Basin")
   # Add title and figure label
-  title("Manus Basin Vents", font.main = 1, cex.main = 1.1)
+  title("Manus Basin Vents and Black Sea", font.main = 1, cex.main = 1.1)
   label.figure("C", cex = 1.5, font = 2, xfrac = 0.04, yfrac = 0.96)
 
   ### Panels D-E: Plot ZC of 16S vs metagenomes for datasets used in Tax4Fun/PICRUSt papers 20211215
@@ -818,7 +870,7 @@ geo16S5 <- function(pdf = FALSE) {
   plot(xlimHMP, xylim, type = "n", xlab = xlab, ylab = ylab)
   lines(xylim, xylim, lty = 2, col = "gray40")
   MG16S("HMP")
-  legend("topleft", c("Skin", "GI tract", "Other sites"), pch = 21, pt.bg = c(8, 2, 4), bty = "n")
+  legend("topleft", c("Skin", "GI tract", "Other sites"), pch = 21, pt.bg = c(4, 2, 8))
   title("Human Microbiome Project", font.main = 1, cex.main = 1.1)
   label.figure("D", cex = 1.5, font = 2, xfrac = 0.04, yfrac = 0.96)
 
@@ -828,7 +880,7 @@ geo16S5 <- function(pdf = FALSE) {
   lines(xylim, xylim, lty = 2, col = "gray40")
   MG16S("Guts")
   MG16S("Soils")
-  legend("topleft", c("Soils", "Guts"), pch = 21, pt.bg = c("transparent", 2), bty = "n")
+  legend("topleft", c("Soils", "Guts"), pch = 21, pt.bg = c(4, 2))
   title("Soils and Mammalian Guts", font.main = 1, cex.main = 1.1)
   label.figure("E", cex = 1.5, font = 2, xfrac = 0.04, yfrac = 0.96)
 
@@ -1031,18 +1083,17 @@ geo16S_S3 <- function(pdf = FALSE) {
 }
 
 # Correlations between ZC estimated from MG and 16S 20220112
-geo16S_S4 <- function(pdf = FALSE) {
+geo16S_S4 <- function(pdf = FALSE, H2O = FALSE) {
 
-  if(pdf) pdf("geo16S_S4.pdf", width = 10, height = 8)
-  par(mfrow = c(3, 3))
+  if(pdf) pdf("geo16S_S4.pdf", width = 10, height = 6)
+  par(mfrow = c(2, 3))
   par(mar = c(4, 4, 4, 1), mgp = c(2.8, 1, 0))
-  xylim <- c(-0.22, -0.12)
-  xlimHMP <- c(-0.22, -0.08)
+  if(H2O) xylim <- c(-0.8, -0.70) else xylim <- c(-0.22, -0.12)
 
   # Plot regression line and R2
   lmfun <- function(dat, xylim) {
-    x <- unlist(lapply(dat, "[[", "ZC_MG"))
-    y <- unlist(lapply(dat, "[[", "ZC_16S"))
+    x <- unlist(lapply(dat, "[[", "metric_MG"))
+    y <- unlist(lapply(dat, "[[", "metric_16S"))
     # Add points and linear regression
     thislm <- lm(y ~ x)
     lines(xylim, predict(thislm, data.frame(x = xylim)), col = "#00000080")
@@ -1052,40 +1103,46 @@ geo16S_S4 <- function(pdf = FALSE) {
     legend("topleft", legend = R2txt, bty = "n")
   }
 
-  for(row in 1:3) {
+  for(row in 1:2) {
 
-    if(row == 2) lowest.level <- "phylum" else lowest.level <- NULL
-    if(row == 3) lineage = "genus" else lineage <- NULL
+    if(row == 2) lineage = "genus" else lineage <- NULL
+    # Not used: show the estimates using only phylum-level classifications
+    if(row == 3) lowest.level <- "phylum" else lowest.level <- NULL
 
-    ## Panel A: Various Environments
-    xlab <- quote(italic(Z)[C]~"from metagenome or metatranscriptome")
-    ylab <- quote(italic(Z)[C]~"estimated from 16S rRNA")
+    ## Panel 1: Various Environments
+    if(H2O) {
+      xlab <- quote(italic(n)[H[2]*O]~"from metagenome or metatranscriptome")
+      ylab <- quote(italic(n)[H[2]*O]~"estimated from 16S rRNA")
+    } else {
+      xlab <- quote(italic(Z)[C]~"from metagenome or metatranscriptome")
+      ylab <- quote(italic(Z)[C]~"estimated from 16S rRNA")
+    }
     plot(xylim, xylim, type = "n", xlab = xlab, ylab = ylab)
     lines(xylim, xylim, lty = 2, col = "gray40")
-    dat <- lapply(c("Guerrero_Negro", "ETNP_MG", "ETNP_MT", "Bison_Pool", "Mono_Lake", "Marcellus_Shale", "Manus_Basin"), MG16S, plot.lines = FALSE,
-      lowest.level = lowest.level, lineage = lineage)
+    dat <- lapply(c("Guerrero_Negro", "ETNP_MG", "ETNP_MT", "Bison_Pool", "Mono_Lake", "Marcellus_Shale", "Manus_Basin", "Black_Sea"),
+      MG16S, plot.lines = FALSE, lowest.level = lowest.level, lineage = lineage, H2O = H2O)
     lmfun(dat, xylim)
     # Add title and figure label
-    title("Various Environments + Marcellus + Manus", font.main = 1, cex.main = 1.1, line = 1)
+    title("Various Environments + Marcellus + Manus + Black Sea     ", font.main = 1, cex.main = 1.1, line = 1)
 
-    ## Panel B: Human Microbiome Project
-    xlab <- quote(italic(Z)[C]~"from metagenome")
-    plot(xlimHMP, xylim, type = "n", xlab = xlab, ylab = ylab)
-    lines(xylim, xylim, lty = 2, col = "gray40")
-    dat <- lapply("HMP", MG16S, plot.lines = FALSE, lowest.level = lowest.level, lineage = lineage)
-    lmfun(dat, xlimHMP)
+    ## Panel 2: Human Microbiome Project
+    if(H2O) xlab <- quote(italic(n)[H[2]*O]~"from metagenome") else xlab <- quote(italic(Z)[C]~"from metagenome")
+    if(H2O) xylimHMP <- c(-0.95, -0.70) else xylimHMP <- xylim
+    plot(xylimHMP, xylimHMP, type = "n", xlab = xlab, ylab = ylab)
+    lines(xylimHMP, xylimHMP, lty = 2, col = "gray40")
+    dat <- lapply("HMP", MG16S, plot.lines = FALSE, lowest.level = lowest.level, lineage = lineage, rm.outliers = TRUE, H2O = H2O)
+    lmfun(dat, xylimHMP)
     title("Human Microbiome Project", font.main = 1, cex.main = 1.1, line = 1)
     par(xpd = NA)
     if(row == 1) title("A. Lowest-level classifications (genus to phylum)", line = 2.5)
-    if(row == 2) title("B. Phylum-level classifications (lineages truncated at phylum)", line = 2.5)
-    if(row == 3) title("C. Genus-level classifications only (higher-level classifications discarded)", line = 2.5)
+    if(row == 2) title("B. Genus-level classifications only (higher-level classifications discarded)", line = 2.5)
+    if(row == 3) title("C. Phylum-level classifications (lineages truncated at phylum)", line = 2.5)
     par(xpd = FALSE)
 
-    ## Panel C: Soils and Mammamlian Guts
-    xlab <- quote(italic(Z)[C]~"from metagenome")
+    ## Panel 3: Soils and Mammamlian Guts
     plot(xylim, xylim, type = "n", xlab = xlab, ylab = ylab)
     lines(xylim, xylim, lty = 2, col = "gray40")
-    dat <- lapply(c("Guts", "Soils"), MG16S, plot.lines = FALSE, lowest.level = lowest.level, lineage = lineage)
+    dat <- lapply(c("Guts", "Soils"), MG16S, plot.lines = FALSE, lowest.level = lowest.level, lineage = lineage, H2O = H2O)
     lmfun(dat, xylim)
     title("Soils and Mammalian Guts", font.main = 1, cex.main = 1.1, line = 1)
 
