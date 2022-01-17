@@ -10,6 +10,7 @@
 \alias{geo16S_S2}
 \alias{geo16S_S3}
 \alias{geo16S_S4}
+\alias{geo16S_S5}
 \title{Plots from geobiochemistry of 16S sequences paper}
 \description{
 Plots from the paper by Dick and Tan (2021).
@@ -24,7 +25,8 @@ Plots from the paper by Dick and Tan (2021).
   geo16S_S1(pdf = FALSE)
   geo16S_S2(pdf = FALSE)
   geo16S_S3(pdf = FALSE)
-  geo16S_S4(pdf = FALSE, H2O = FALSE)
+  geo16S_S4(pdf = FALSE)
+  geo16S_S5(pdf = FALSE, H2O = FALSE)
 }
 
 \arguments{
@@ -44,7 +46,8 @@ This table gives a brief description of each plotting function.
   \code{geo16S_S1} \tab RefSeq and 16S rRNA data processing outline \cr
   \code{geo16S_S2} \tab Scatterplots of \ZC and \nH2O for genera vs higher taxonomic levels \cr
   \code{geo16S_S3} \tab \nH2O-\ZC plots for major phyla and their genera \cr
-  \code{geo16S_S4} \tab Correlations between \ZC estimated from metagenomes and 16S rRNA sequences \cr
+  \code{geo16S_S4} \tab Venn diagrams for phylum and genus names in the RefSeq (NCBI), RDP, and SILVA taxonomies \cr
+  \code{geo16S_S5} \tab Correlations between \ZC estimated from metagenomes and 16S rRNA sequences \cr
 }
 
 }
@@ -61,6 +64,13 @@ This table gives a brief description of each plotting function.
   \describe{
     \item{\code{*_AA.csv}}{Mean amino acid compositions of protein fragments inferred from metagenomes, produced by \code{runARAST.R} and used in \code{geo16S5}.}
     \item{\code{scripts/}}{Directory with script files \code{ARAST.R} for the analysis pipeline, \code{runARAST.R} to run the pipeline for each dataset, and supporting Bash and Perl script files. The \code{ARAST.R} file is a modified version of the pipeline used in a previous study (see \code{\link{gradox}}).}
+  }
+}
+
+\section{Files in extdata/geo16S/taxonomy}{
+  \describe{
+    \item{\code{process.R}}{Script used for extracting taxonomic names from RDP and SILVA sequence files. See comments for details about data sources.}
+    \item{\code{[RDP|SILVA][phyla|genera].txt}}{Files with archaeal and bacterial phylum and genus names in RDP and SILVA, used in \code{geo16S_S4}.}
   }
 }
 

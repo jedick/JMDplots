@@ -33,7 +33,7 @@ geo16S1 <- function(pdf = FALSE) {
 
   if(pdf) dev.off()
 
-  # Return Source Data 20210831
+  # Return data for Table S4 20210831
   datA <- do.call(rbind, lapply(tc1, function(x) {do.call(rbind, x)}))
   datA <- cbind(plot = "A", datA)
   datB <- do.call(rbind, lapply(tc2, function(x) {do.call(rbind, x)}))
@@ -160,7 +160,7 @@ geo16S2 <- function(pdf = FALSE) {
   par(oopar)
   if(pdf) dev.off()
 
-  # Return Source Data 20210831
+  # Return data for Table S5 20210831
   out <- rbind(p1, p2, p3, p4, p5, p6, p7, p8)
   out$ZC <- round(out$ZC, 6)
   out$nH2O <- round(out$nH2O, 6)
@@ -202,7 +202,7 @@ geo16S3 <- function(pdf = FALSE) {
                 "July 2015\n", "November 2015\n", "February 2016\n", "April 2016\n")
   titlesub <- paste(title, subtitle)
 
-  # Make object to hold Source Data
+  # Make object to hold data for Table S6
   out <- list()
   # Loop over studies
   for(i in 1:length(study)) {
@@ -325,9 +325,9 @@ geo16S3 <- function(pdf = FALSE) {
     }
 
 
-    # Don't repeat Blue Hole in Source Data (there are loops for O2 and NO3-/NO2-; just use one)
+    # Don't repeat Blue Hole in Table S6 (there are loops for O2 and NO3-/NO2-; just use one)
     if(substr(title[i], 1, 1) == " ") next
-    # Assemble the Source Data
+    # Assemble the data for Table S6
     sd <- alldat[, c("study", "name", "Run", "sample", "depth")]
     sd <- cbind(sd, "O2 (umol kg-1)" = NA, "O2 (umol L-1)" = NA, "O2 (mg L-1)" = NA, "NO3- (umol L-1)" = NA, "NO2- (umol L-1)" = NA, ZC = NA, nH2O = NA)
     # Names of the columns with chemical concentrations
@@ -353,7 +353,7 @@ geo16S3 <- function(pdf = FALSE) {
 
   if(pdf) dev.off()
 
-  # Return Source Data 20210831
+  # Return data for Table S6 20210831
   out <- do.call(rbind, out)
   out$ZC <- round(out$ZC, 6)
   out$nH2O <- round(out$nH2O, 6)
@@ -403,7 +403,7 @@ geo16S4 <- function(pdf = FALSE) {
     if(i==4) dyadj <- 0.2 else dyadj <- 0
     text(means$ZC1, means$nH2O1, n1, adj = c(xadj[i], yadj[i] - dyadj))
     text(means$ZC2, means$nH2O2, n2, adj = c(xadj[i], yadj[i] + dyadj))
-    # Save values for Source Data 20210901
+    # Save values for Table S7 20210901
     outB[[i]] <- pm
   }
   # Add labels
@@ -504,7 +504,7 @@ geo16S4 <- function(pdf = FALSE) {
 
   if(pdf) dev.off()
 
-  # Return Source Data 20210901
+  # Return data for Table S7 20210901
   outB <- do.call(rbind, outB)
   outD <- do.call(rbind, outD)
   out <- rbind(outB, outD)
@@ -1082,10 +1082,73 @@ geo16S_S3 <- function(pdf = FALSE) {
 
 }
 
-# Correlations between ZC estimated from MG and 16S 20220112
-geo16S_S4 <- function(pdf = FALSE, H2O = FALSE) {
+# Venn diagrams for phylum and genus names in the RefSeq (NCBI), RDP, and SILVA taxonomies 20220117
+geo16S_S4 <- function(pdf = FALSE) {
 
-  if(pdf) pdf("geo16S_S4.pdf", width = 10, height = 6)
+  # Read lists of RDP and SILVA names
+  datadir <- system.file("extdata/geo16S/taxonomy", package = "JMDplots")
+  RDPphyla <- readLines(file.path(datadir, "RDPphyla.txt"))
+  RDPgenera <- readLines(file.path(datadir, "RDPgenera.txt"))
+  SILVAphyla <- readLines(file.path(datadir, "SILVAphyla.txt"))
+  SILVAgenera <- readLines(file.path(datadir, "SILVAgenera.txt"))
+  # Read NCBI names
+  NCBI <- read.csv(system.file("extdata/refseq/taxid_names.csv.xz", package = "JMDplots"))
+  NCBIphyla <- unique(na.omit(NCBI$phylum))
+  NCBIgenera <- unique(na.omit(NCBI$genus))
+
+  pl <- list()
+
+  # Make Venn diagrams
+  fillsRDP <- list(fill = c("transparent", "slategray3"))
+  fillsSILVA <- list(fill = c("transparent", "lightpink2"))
+
+  A <- length(setdiff(NCBIphyla, RDPphyla))
+  B <- length(setdiff(RDPphyla, NCBIphyla))
+  AB <- length(intersect(NCBIphyla, RDPphyla))
+  pl[[1]] <- plot( euler(c(A = A, B = B, "A&B" = AB)), legend = list(labels = c("RefSeq (NCBI)", "RDP"), side = "bottom"), quantities = TRUE, fills = fillsRDP )
+
+  A <- length(setdiff(NCBIphyla, SILVAphyla))
+  B <- length(setdiff(SILVAphyla, NCBIphyla))
+  AB <- length(intersect(NCBIphyla, SILVAphyla))
+  pl[[2]] <- plot( euler(c(A = A, B = B, "A&B" = AB)), legend = list(labels = c("RefSeq (NCBI)", "SILVA"), side = "bottom"), quantities = TRUE, fills = fillsSILVA )
+
+  A <- length(setdiff(NCBIgenera, RDPgenera))
+  B <- length(setdiff(RDPgenera, NCBIgenera))
+  AB <- length(intersect(NCBIgenera, RDPgenera))
+  pl[[3]] <- plot( euler(c(A = A, B = B, "A&B" = AB)), legend = list(labels = c("RefSeq (NCBI)", "RDP"), side = "bottom"), quantities = TRUE, fills = fillsRDP )
+
+  A <- length(setdiff(NCBIgenera, SILVAgenera))
+  B <- length(setdiff(SILVAgenera, NCBIgenera))
+  AB <- length(intersect(NCBIgenera, SILVAgenera))
+  pl[[4]] <- plot( euler(c(A = A, B = B, "A&B" = AB)), legend = list(labels = c("RefSeq (NCBI)", "SILVA"), side = "bottom"), quantities = TRUE, fills = fillsSILVA )
+
+  # Make the plot
+  if(pdf) pdf("geo16S_S4.pdf", width = 8, height = 6)
+
+  lg <- gridExtra::tableGrob(c("A. phyla", "B. genera"), theme = gridExtra::ttheme_minimal(base_size = 18))
+  rg <- gridExtra::arrangeGrob(grobs = pl, ncol = 2)
+  grid.draw(cbind(lg, rg, size = "last"))
+  if(pdf) dev.off()
+
+  # Save RDP and SILVA names not in NCBI for Table S8
+  out <- list(
+    RDP_phylum_name_not_in_RefSeq = sort(setdiff(RDPphyla, NCBIphyla)),
+    RDP_genus_name_not_in_RefSeq = sort(setdiff(RDPgenera, NCBIgenera)),
+    SILVA_phylum_name_not_in_RefSeq = sort(setdiff(SILVAphyla, NCBIphyla)),
+    SILVA_genus_name_not_in_RefSeq = sort(setdiff(SILVAgenera, NCBIgenera))
+  )
+  # Pad each list element to the same length with NA
+  len <- max(sapply(out, length))
+  out <- lapply(out, "[", 1:len)
+  out <- do.call(cbind, out) 
+  invisible(out)
+
+}
+
+# Correlations between ZC estimated from MG and 16S 20220112
+geo16S_S5 <- function(pdf = FALSE, H2O = FALSE) {
+
+  if(pdf) pdf("geo16S_S5.pdf", width = 10, height = 6)
   par(mfrow = c(2, 3))
   par(mar = c(4, 4, 4, 1), mgp = c(2.8, 1, 0))
   if(H2O) xylim <- c(-0.8, -0.70) else xylim <- c(-0.22, -0.12)

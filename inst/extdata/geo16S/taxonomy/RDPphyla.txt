@@ -1,0 +1,66 @@
+Actinobacteria
+Proteobacteria
+Acidobacteria
+Firmicutes
+Tenericutes
+Deinococcus-Thermus
+Armatimonadetes
+Euryarchaeota
+Cyanobacteria/Chloroplast
+Bacteroidetes
+Verrucomicrobia
+Korarchaeota
+Parcubacteria
+Microgenomates
+Candidatus Saccharibacteria
+candidate division WPS-2
+Spirochaetes
+candidate division WPS-1
+Chlorobi
+Atribacteria
+candidate division ZB3
+Crenarchaeota
+Diapherotrites
+Woesearchaeota
+Nanohaloarchaeota
+Chloroflexi
+Thermodesulfobacteria
+Fusobacteria
+Campilobacterota
+Thermotogae
+Nitrospirae
+Chlamydiae
+Aquificae
+Fibrobacteres
+Elusimicrobia
+Synergistetes
+Gemmatimonadetes
+Planctomycetes
+Deferribacteres
+Rhodothermaeota
+Balneolaeota
+Nitrospinae
+Chrysiogenetes
+Marinimicrobia
+Poribacteria
+Thaumarchaeota
+Lentisphaerae
+Dictyoglomi
+Caldiserica
+Ignavibacteriae
+Omnitrophica
+Candidatus Calescamantes
+Hydrogenedentes
+Parvarchaeota
+Coprothermobacterota
+SR1
+BRC1
+Latescibacteria
+Nanoarchaeota
+Acetothermia
+Aminicenantes
+Pacearchaeota
+Aenigmarchaeota
+Kiritimatiellaeota
+Cloacimonetes
+Abditibacteriota

@@ -57,7 +57,8 @@ export(
   "geo16S5", # 20211018
   "geo16S_S1", "geo16S_S2", # 20220105
   "geo16S_S3", # 20220112
-  "geo16S_S4", # 20220114
+  "geo16S_S4", # 20220117
+  "geo16S_S5", # 20220114
   # can16S paper 20210604
   "getrefseq", "getgroup", "groupperc",
   # orp16S paper 20211003-20211008
@@ -128,9 +129,10 @@ importFrom("ggplot2", "theme_bw", "xlab", "ylab", "geom_hline", "geom_vline", "t
            "theme_void", "geom_text", "annotate", "unit",
            "ggplot_gtable", "ggplot_build", "theme_classic", "element_rect", "ggsave",
            "geom_smooth", "geom_contour")
-importFrom("grid", "grid.roundrect", "gpar")
+importFrom("grid", "grid.roundrect", "gpar", "grid.draw")
 importFrom("oce", "mapPlot", "mapPoints", "mapPolygon")
 importFrom("sf", "st_coordinates", "st_read", "st_transform")
+importFrom("eulerr", "euler")
 
 # Imports from standard packages
 importFrom("grDevices", "dev.off", "cairo_pdf", "pdf", "blues9", "colorRampPalette",
