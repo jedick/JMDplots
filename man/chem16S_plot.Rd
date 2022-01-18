@@ -4,10 +4,7 @@
 \alias{taxacomp}
 \alias{plotmet}
 \alias{addhull}
-\alias{groupmet}
 \alias{getrefseq}
-\alias{getgroup}
-\alias{groupperc}
 \title{Plot chemical metrics of taxa and community proteomes estimated from 16S rRNA gene sequences}
 \description{
 Functions to plot chemical metrics (\ZC and \nH2O) for estimated microbial community proteomes.
@@ -23,11 +20,6 @@ Functions to plot chemical metrics (\ZC and \nH2O) for estimated microbial commu
     lineage = NULL, mincount = 200, pch1 = 1, pch2 = 21, dropNA = TRUE, return = "data",
     extracolumn = NULL, add = FALSE, plot.bg = TRUE)
   addhull(x, y, basecol, outline = FALSE, ...)
-  getgroup(study = "XDZ+17", param = "nH2O", rank = "domain",
-    pch1 = 21, pch2 = 24, minpercent = 2, study2 = NA, scale100 = FALSE,
-    mdat = NULL, map = NULL, RDP = NULL)
-  groupmet(..., xlim = NULL, ylim = NULL, xadj = NULL, yadj = NULL)
-  groupperc(..., xlim = NULL, ylim = NULL, xadj = NULL, yadj = NULL)
 }
 
 \arguments{
@@ -61,16 +53,6 @@ Functions to plot chemical metrics (\ZC and \nH2O) for estimated microbial commu
   \item{basecol}{color used for hull lines}
   \item{outline}{logical, draw hull lines?}
   \item{...}{arguments passed to \code{\link{polygon}} (by \code{addulll}) or \code{getgroup} (by \code{groupmet})}
-  \item{param}{chemical metric, \samp{ZC} or \samp{nH2O}}
-  \item{rank}{character, taxonomic rank}
-  \item{minpercent}{numeric, include taxa that are at least this abundant}
-  \item{study2}{character, calculate differences between two studies instead of groups in one study}
-  \item{scale100}{logical, scale abundances in each group so they total 100 percent?}
-  \item{mdat}{data frame, output from \code{\link{getmdat}}}
-  \item{map}{data frame, output from \code{\link{getmap}}}
-  \item{RDP}{data frame, output from \code{\link{getRDP}}}
-  \item{xadj}{numeric, x adjustment for text labels}
-  \item{yadj}{numeric, y adjustment for text labels}
 }
 
 \details{
@@ -84,15 +66,11 @@ Note that the keywords are all lower-case; use the upper-case name (e.g. \samp{P
 
 \code{plotmet} plots the \ZC and \nH2O of community proteomes estimated by combining taxonomic abundances from 16S rRNA gene sequencing with RefSeq proteomes.
 If \code{pch1} and \code{pch2} are provided, then two sample groups are identified by their plotting symbols in the metadata (see \code{\link{getmdat}}).
-Star-shaped symbols are plotted to indicate the metrics computed for meta-samples created by aggregating the RDP counts for all samples in each sample group.
+Star-shaped symbols are plotted to indicate the mean values of metrics for each sample group.
 
 \code{addhull} uses \code{\link{polygon}} to draw a convex hull around the points given in \code{x}, \code{y}.
 The lines are draw only in \code{outline} is TRUE; otherwise, the area of the hull is filled.
 The fill color is a lightened (semi-transparent) shade of the color given in \code{basecol}.
-
-\code{groupmet} makes ZC- or nH2O-abundance plots for taxonomic groups within two sample groups.
-\code{groupperc} plots the percent contribution by each taxonomic group to the community difference of ZC or nH2O between sample groups, vs abundance of the taxonomic groups.
-\code{getgroup} is the function that assembles the data for these plots.
 
 }
 
@@ -137,19 +115,7 @@ plotmet("UKD+18.sediment", dropNA = FALSE)
 # Make a plot for only Proteobacteria
 plotmet("HLA+16", lineage = "Proteobacteria")
 
-# Add points for aggregated high- and low-salinity samples
+# Show points for all samples and larger points for
+# mean values of high- and low-salinity samples
 plotmet("HLA+16", pch1 = 21, pch2 = 24)
-
-# Plot nH2O and abundances for individual phyla
-groupmet("HLA+16", rank = "phylum")
-
-# Calculate contribution of individual phyla to the ZC difference
-# between high- and low-T samples at Manus Basin
-gg <- getgroup("MPB+17", "ZC", "phylum", pch2 = 23, pch1 = 21, scale100 = TRUE)
-# This shows that changes in abundance and ZC of Campilobacterota, Aquificae,
-# and Proteobacteria contribute positively to the overall ZC change
-gg$DX / diff(gg$Xall) * 100
-
-# Show the changes as percentages of the total
-groupperc("MPB+17", param = "ZC", rank = "phylum", pch1 = 21, pch2 = 23)
 }

@@ -159,7 +159,7 @@ getmdat <- function(study, dropNA = TRUE) {
     col <- ifelse(mdat$day >= 49, 2, 1)
   }
   if(grepl("HRR+18", study, fixed = TRUE)) {
-    if(study == "HRR+18_injected-130") mdat <- mdat[mdat$day %in% c(0, 130, 220), ]
+    if(study == "HRR+18_injected-22") mdat <- mdat[mdat$day == 0 | mdat$day >= 22, ]
     pch <- ifelse(mdat$day > 10, 21, 1)
     col <- ifelse(mdat$day > 10, 2, 1)
   }

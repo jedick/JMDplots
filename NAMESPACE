@@ -53,14 +53,14 @@ export(
   "getmdat", "getRDP", "getmap", "getmetrics",
   # geo16S paper 20210416-20210610
   "geo16S1", "geo16S2", "geo16S3", "geo16S4",
-  "taxacomp", "plotmet", "addhull", "groupmet",
+  "taxacomp", "plotmet", "addhull",
   "geo16S5", # 20211018
   "geo16S_S1", "geo16S_S2", # 20220105
   "geo16S_S3", # 20220112
   "geo16S_S4", # 20220117
   "geo16S_S5", # 20220114
   # can16S paper 20210604
-  "getrefseq", "getgroup", "groupperc",
+  "getrefseq",
   # orp16S paper 20211003-20211008
   "orp16S1", "orp16S2", "orp16S3", "orp16S4", "orp16S5", "orp16S6", "orp16S_S1",
   "plotEZ", "plotMA"

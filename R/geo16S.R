@@ -375,14 +375,14 @@ geo16S4 <- function(pdf = FALSE) {
   xlim <- c(-0.16, -0.13)
   ylim <- c(-0.755, -0.725)
   plotmet("UKD+18.water_2014", xlim = xlim, ylim = ylim, title = FALSE)
-  legend("topleft", c("MSA-", "MSA+"), pch = c(1, 21), pt.bg = c(1, 2), bg = "white", title = "NW PA water")
+  legend("topleft", c("MSA-", "MSA+"), pch = c(1, 21), pt.bg = c(1, 2), bg = "white", title = "NW PA streams 2014")
   label.figure("A", cex = 1.5, xfrac = 0.03, font = 2)
 
   ## Plot B: Comparison of different studies on Pennsylvania Streams 20210327
 
   studies <- c("UKD+18.water_2014", "UKD+18.sediment_2014", "MMA+20_spring", "MMA+20_fall")
   # Start plot
-  plot(c(-0.148, -0.139), c(-0.745, -0.735), type = "n", xlab = cplab$ZC, ylab = cplab$nH2O)
+  plot(c(-0.148, -0.139), c(-0.75, -0.735), type = "n", xlab = cplab$ZC, ylab = cplab$nH2O)
   pch <- 21:25
   xadj <- c(0.5, 0.5, 0.5, -0.5)
   yadj <- c(-0.8, -0.8, -0.8, 0.5)
@@ -407,10 +407,10 @@ geo16S4 <- function(pdf = FALSE) {
     outB[[i]] <- pm
   }
   # Add labels
-  text(-0.1423, -0.7388, "NW PA\nwater")
-  text(-0.1473, -0.742, "NW PA\nsediment")
-  text(-0.1427, -0.7432, "PASF water (spring)")
-  text(-0.143, -0.7447, "PASF water (fall)")
+  text(-0.1423, -0.7388, "NW PA\nstreams 2014")
+  text(-0.1473, -0.742, "NW PA\nsediment 2014")
+  text(-0.1427, -0.7432, "PASF streams (spring)")
+  text(-0.143, -0.7447, "PASF streams (fall)")
   # Add legend
   legend("topleft", c("Lowest disturbance", "Highest disturbance"), pch = c(21, 21), pt.bg = c("#ffffffa0", "#df536ba0"), pt.cex = c(1.4, 1.7), lwd = 2, lty = NA)
   label.figure("B", cex = 1.5, xfrac = 0.03, font = 2)
@@ -425,7 +425,7 @@ geo16S4 <- function(pdf = FALSE) {
   label.figure("C", cex = 1.5, xfrac = 0.03, font = 2)
 
   # Panel D: Multiple studies
-  studies <- c("CHM+14_injected-49", "HRR+18_injected-130", "ZLF+19_injected-18")
+  studies <- c("CHM+14_injected-49", "HRR+18_injected-22", "ZLF+19_injected-18")
   # Start plot
   plot(c(-0.22, -0.14), c(-0.75, -0.71), type = "n", xlab = cplab$ZC, ylab = cplab$nH2O)
   pch <- 21:25
@@ -461,13 +461,13 @@ geo16S4 <- function(pdf = FALSE) {
   study <- c(
     "GBL+15", "JHM+16", "MPB+17", "BCA+21",
     "SVH+19", "MZG+20", "HXZ+20",
-    "UKD+18.water", "MMA+20_spring",
-    "CHM+14_injected-49", "HRR+18_injected-130", "ZLF+19_injected-18"
+    "UKD+18.water_2014", "MMA+20_spring",
+    "CHM+14_injected-49", "HRR+18_injected-22", "ZLF+19_injected-18"
   )
   description <- c(
     "ETNP water", "Lake Fryxell mat", "Manus Basin vents", "Ursu Lake water",
     "Black Sea water", "Swiss lakes", "Sansha Yongle Blue Hole",
-    "NW Pennsylvania water", "PASF Streams (spring)",
+    "NW PA streams 2014", "PASF streams (spring)",
     "Marcellus Shale", "Denver-Julesburg Basin", "Duvernay Formation"
   )
 
@@ -476,18 +476,25 @@ geo16S4 <- function(pdf = FALSE) {
   pch2 <- c(25, 25, 23, 25, 25, 25, 25, 21, 21, 21, 21, 21, 21)
   n1 <- n2 <- DZC <- numeric()
   for(i in 1:length(study)) {
-    gg <- getgroup(study[i], param = "ZC", pch1 = pch1[i], pch2 = pch2[i])
-    # Keep track of the overall ZC change
-    DZC <- c(DZC, diff(gg$Xall))
+    # Get metrics for samples in this study
+    pm <- plotmet(study[[i]], plot.it = FALSE)
+    # Determine oxidized and reduced sample groups from values of pch returned by plotmet()  20210901
+    pm <- pm[!is.na(pm$pch), ]
+    i1 <- pm$pch == pch1[i]
+    i2 <- pm$pch == pch2[i]
+    # Keep track of the mean difference of ZC
+    DZC <- c(DZC, mean(pm$ZC[i2]) - mean(pm$ZC[i1]))
     # Keep track of number of samples 20210902
-    n1 <- c(n1, gg$n1)
-    n2 <- c(n2, gg$n2)
+    n1 <- c(n1, length(pm$ZC[i1]))
+    n2 <- c(n2, length(pm$ZC[i2]))
   }
 
   # Include numbers of samples in condition text 20210902
   cond2 <- c( "> 100 m", "anoxic", "> 50 \u00B0C", "> 4 m", "euxinic", "deepest", "anoxic", "MSA+", "highest", "PW day 49+", "PW day 130+", "FW day 18")
   cond1 <- c("< 100 m", "oxic", "< 50 \u00B0C", "< 3 m", "oxic", "shallowest", "oxic", "MSA-", "lowest", "IF day 0", "SW day 0", "SW day 0")
   condition <- paste0(cond2, " (", n2, ") - ", cond1, " (", n1, ")")
+
+  # TODO: Order samples by DZC 20220118
 
   # Plot ZC 
   par(mar = c(4, 12, 1, 0.2))
