@@ -17,7 +17,7 @@ Please refer to the supporting information of the papers for the original script
 \details{
   \itemize{
     \item \code{\link{evdevH2O}} - Thermodynamic model for water activity and redox potential in evolution and development (Dick, 2022)
-    \item \code{\link{geo16S}} - Chemical links between redox conditions and microbial community composition (Dick and Tan, 2021)
+    \item \code{\link{geo16S}} - Chemical links between redox conditions and estimated community proteomes (Dick and Tan, 2021)
     \item \code{\link{mjenergy}} - Energy release in protein synthesis (Dick and Shock, 2021)
     \item \code{\link{canH2O}} - Water as a reactant in the differential expression of proteins in cancer (Dick, 2021)
     \item \code{\link{gradH2O}} - Stoichiometric hydration state of metagenomes in salinity gradients (Dick et al., 2020)

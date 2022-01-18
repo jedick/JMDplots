@@ -457,8 +457,8 @@ geo16S4 <- function(pdf = FALSE) {
 
   ## Panel E: ZC differences between oxidized and reduced sample subsets in various studies
   study <- c(
-    "GBL+15", "JHM+16", "MPB+17", "BCA+21",
-    "SVH+19", "MZG+20_Zug", "MZG+20_Lugano", "HXZ+20",
+    "GBL+15", "JHM+16_O2", "MPB+17", "BCA+21",
+    "SVH+19_O2", "MZG+20_Zug", "MZG+20_Lugano", "HXZ+20",
     "UKD+18.water_2014", "UKD+18.sediment_2014", "MMA+20_spring", "MMA+20_fall",
     "CHM+14_injected-49", "HRR+18_injected-22", "ZLF+19_injected-18",
     "SMS+12", "EH18"
@@ -475,13 +475,13 @@ geo16S4 <- function(pdf = FALSE) {
              "anoxic", "anoxic", "anoxic", "anoxic",
              "MSA+", "MSA+", "highest", "highest",
              "PW day 49+", "PW day 22+", "PW day 18",
-             "> 70 \u00B0C", "anoxic"
+             "anoxic", "anoxic"
   )
   cond1 <- c("oxic", "oxic", "< 50 \u00B0C", "oxic",
              "oxic", "oxic", "oxic", "oxic",
              "MSA-", "MSA-", "lowest", "lowest",
              "IF day 0", "SW day 0", "SW day 0",
-             "< 70 \u00B0C", "oxic"
+             "oxic", "oxic"
   )
   # Values of pch (from getmdat()/plotmet()) for oxidized and reduced sample groups
   pch_ox <- c(24, 24, 21, 24,
@@ -630,10 +630,11 @@ MG16S <- function(which, plot.lines = TRUE, lowest.level = NULL, lineage = NULL,
     # 16S data (Swingley et al., 2012)
     # mincount needs to be lowered from default for when lineage = "genus"
     # (site 4 (Q) has less than 200 genus-level classifications)
-    dat_16S <- getmetrics("SMS+12", lowest.level = lowest.level, lineage = lineage, mincount = 50)
+    mdat <- getmdat("SMS+12")
+    dat_16S <- getmetrics("SMS+12", mdat = mdat, lowest.level = lowest.level, lineage = lineage, mincount = 50)
     if(H2O) metric_16S <- dat_16S$nH2O else metric_16S <- dat_16S$ZC
     # Check that the sample names are the same
-    stopifnot(all.equal(rownames(dat_MG$meancomp), dat_16S$sample))
+    stopifnot(all.equal(rownames(dat_MG$meancomp), mdat$"Field Code"))
     # Add lines and points
     if(plot.lines) lines(metric_MG, metric_16S)
     points(metric_MG, metric_16S, pch = 21, bg = "white")

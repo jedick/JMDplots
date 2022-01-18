@@ -50,6 +50,11 @@ getmdat <- function(study, dropNA = TRUE) {
     col <- sapply(type, switch, lowT = 4, highT = 2, "fauna surface" = "#757500C0", "rock/chimney" = 1, NA)
   }
   if(study == "SVH+19") { # Black Sea
+    pch <- sapply(mdat$Type, switch, Oxic = 24, Suboxic = 20, Euxinic = 25, NA)
+    col <- sapply(mdat$Type, switch, Oxic = 4, Suboxic = 1, Euxinic = 2, NA)
+  }
+  if(study == "SVH+19_O2") {
+    # oxic and anoxic groups for geo16S4() 20220118
     pch <- ifelse(mdat$O2 > 0.5, 24, 25)
     col <- ifelse(mdat$O2 > 0.5, 4, 2)
   }
@@ -60,6 +65,11 @@ getmdat <- function(study, dropNA = TRUE) {
   if(study == "JHM+16") { # Lake Fryxell microbial mats
     pch <- sapply(mdat$type, switch, oxic = 24, transition = 20, anoxic = 25)
     col <- sapply(mdat$type, switch, oxic = 4, transition = 1, anoxic = 2)
+  }
+  if(study == "JHM+16_O2") {
+    # oxic and anoxic groups for geo16S4() 20220118
+    pch <- ifelse(mdat$O2 > 0.5, 24, 25)
+    col <- ifelse(mdat$O2 > 0.5, 4, 2)
   }
   if(study == "HLA+16") { # Baltic Sea
     #pch <- sapply(mdat$type, switch, Oligohaline = 24, Mesohaline = 20, Marine = 21)
@@ -217,7 +227,7 @@ getmdat <- function(study, dropNA = TRUE) {
     type <- rep("transition", nrow(mdat))
     type[mdat$depth < 3] <- "oxic"
     type[mdat$depth > 4] <- "anoxic"
-    # pch is for geo16S paper 20220118
+    # pch is for geo16S4() 20220118
     pch <- ifelse(mdat$O2 > 0.5, 24, 25)
     col <- ifelse(mdat$O2 > 0.5, 4, 2)
   }
@@ -240,9 +250,9 @@ getmdat <- function(study, dropNA = TRUE) {
     col <- rep(NA, nrow(mdat))
   }
   if(study == "SMS+12") {
-    # pch is for geo16S paper 20220118
-    pch <- ifelse(mdat$T < 70, 24, 25)
-    col <- ifelse(mdat$T < 70, 4, 2)
+    # pch is for geo16S4() 20220118
+    pch <- ifelse(mdat$O2 > 0.5, 24, 25)
+    col <- ifelse(mdat$O2 > 0.5, 4, 2)
   }
 
   ## Datasets for orp16S paper 20211003
