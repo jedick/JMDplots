@@ -245,9 +245,9 @@ geo16S3 <- function(pdf = FALSE) {
         axis(2, at = seq(100, 700, 100), labels = c(100, 200, 300, 400, 500, 1000, 2000), gap.axis = 0)
         # Plot y-axis break 20210715
         par(xpd = NA)
-        rect(-0.174, 557, -0.173, 542, col = "white", border = NA)
-        text(-0.1734, 542, "/", srt = 90)
-        text(-0.1734, 556, "/", srt = 90)
+        rect(-0.177, 557, -0.175, 542, col = "white", border = NA)
+        text(-0.1764, 542, "/", srt = 90)
+        text(-0.1764, 556, "/", srt = 90)
         par(xpd = FALSE)
       } else plot(ZC, depth, xlim = ZClim, ylim = ylim, xlab = axis.label("ZC"), ylab = "Depth (m)", type = "b")
     } else {
@@ -365,7 +365,7 @@ geo16S3 <- function(pdf = FALSE) {
 geo16S4 <- function(pdf = FALSE) {
 
   if(pdf) pdf("geo16S4.pdf", width = 10, height = 6)
-  layout(matrix(c(1, 3, 2, 4, 5, 5), nrow = 2), widths = c(2, 2, 1.5))
+  layout(matrix(c(1, 3, 2, 4, 5, 5), nrow = 2), widths = c(2, 2, 1.8))
   par(mar = c(4, 4, 1, 1))
   par(mgp = c(2.5, 1, 0))
 
@@ -375,7 +375,7 @@ geo16S4 <- function(pdf = FALSE) {
   xlim <- c(-0.16, -0.13)
   ylim <- c(-0.755, -0.725)
   plotmet("UKD+18.water_2014", xlim = xlim, ylim = ylim, title = FALSE)
-  legend("topleft", c("MSA-", "MSA+"), pch = c(1, 21), pt.bg = c(1, 2), bg = "white", title = "NW PA streams 2014")
+  legend("topleft", c("MSA-", "MSA+"), pch = c(1, 21), pt.bg = c(1, 2), bg = "white", title = "NW PA streams (2014)")
   label.figure("A", cex = 1.5, xfrac = 0.03, font = 2)
 
   ## Plot B: Comparison of different studies on Pennsylvania Streams 20210327
@@ -407,10 +407,10 @@ geo16S4 <- function(pdf = FALSE) {
     outB[[i]] <- pm
   }
   # Add labels
-  text(-0.1423, -0.7388, "NW PA\nstreams 2014")
-  text(-0.1473, -0.742, "NW PA\nsediment 2014")
-  text(-0.1427, -0.7432, "PASF streams (spring)")
-  text(-0.143, -0.7447, "PASF streams (fall)")
+  text(-0.142, -0.7403, "NW PA\nstreams (2014)")
+  text(-0.1465, -0.744, "NW PA\nsediment (2014)")
+  text(-0.1415, -0.7465, "PASF streams (spring)")
+  text(-0.1421, -0.7485, "PASF streams (fall)")
   # Add legend
   legend("topleft", c("Lowest disturbance", "Highest disturbance"), pch = c(21, 21), pt.bg = c("#ffffffa0", "#df536ba0"), pt.cex = c(1.4, 1.7), lwd = 2, lty = NA)
   label.figure("B", cex = 1.5, xfrac = 0.03, font = 2)
@@ -429,8 +429,6 @@ geo16S4 <- function(pdf = FALSE) {
   # Start plot
   plot(c(-0.22, -0.14), c(-0.75, -0.71), type = "n", xlab = cplab$ZC, ylab = cplab$nH2O)
   pch <- 21:25
-  xadj <- c(0.3, -1, 0.5)
-  yadj <- c(-1.1, 0, -1)
   outD <- list()
   # Loop over studies
   for(i in 1:3) {
@@ -445,14 +443,14 @@ geo16S4 <- function(pdf = FALSE) {
     # Plot number of samples next to points 20210902
     n1 <- length(pm$ZC[i1])
     n2 <- length(pm$ZC[i2])
-    text(means$ZC1, means$nH2O1, n1, adj = c(xadj[i], yadj[i]))
-    text(means$ZC2, means$nH2O2, n2, adj = c(xadj[i], yadj[i]))
+    text(means$ZC1, means$nH2O1, n1, adj = c(-1, 0.5))
+    text(means$ZC2, means$nH2O2, n2, adj = c(0.2, -1))
     outD[[i]] <- pm
   }
   # Add labels
-  text(-0.164, -0.726, "Marcellus Shale")
-  text(-0.204, -0.729, "Denver-Julesburg Basin")
-  text(-0.172, -0.742, "Duvernay Formation")
+  text(-0.168, -0.726, "Marcellus Shale")
+  text(-0.204, -0.7295, "Denver-Julesburg Basin")
+  text(-0.174, -0.744, "Duvernay Formation")
   # Add legend
   legend("topright", c("Source water\nor injected fluids", "Produced water"), pch = c(21, 21), pt.bg = c("#ffffffa0", "#df536ba0"), pt.cex = c(1.4, 1.7), lwd = 2, lty = NA)
   label.figure("D", cex = 1.5, xfrac = 0.03, font = 2)
@@ -460,53 +458,87 @@ geo16S4 <- function(pdf = FALSE) {
   ## Panel E: ZC differences between oxidized and reduced sample subsets in various studies
   study <- c(
     "GBL+15", "JHM+16", "MPB+17", "BCA+21",
-    "SVH+19", "MZG+20", "HXZ+20",
-    "UKD+18.water_2014", "MMA+20_spring",
-    "CHM+14_injected-49", "HRR+18_injected-22", "ZLF+19_injected-18"
+    "SVH+19", "MZG+20_Zug", "MZG+20_Lugano", "HXZ+20",
+    "UKD+18.water_2014", "UKD+18.sediment_2014", "MMA+20_spring", "MMA+20_fall",
+    "CHM+14_injected-49", "HRR+18_injected-22", "ZLF+19_injected-18",
+    "SMS+12", "EH18"
   )
   description <- c(
-    "ETNP water", "Lake Fryxell mat", "Manus Basin vents", "Ursu Lake water",
-    "Black Sea water", "Swiss lakes", "Sansha Yongle Blue Hole",
-    "NW PA streams 2014", "PASF streams (spring)",
-    "Marcellus Shale", "Denver-Julesburg Basin", "Duvernay Formation"
+    "ETNP (0.2-1.6 \u00B5M)", "Lake Fryxell mat", "Manus Basin (water samples)", "Ursu Lake",
+    "Black Sea", "Lake Zug", "Lake Lugano", "Sansha Yongle Blue Hole",
+    "NW PA streams (2014)", "NW PA sediment (2014)", "PASF streams (spring)", "PASF streams (fall)",
+    "Marcellus Shale", "Denver-Julesburg Basin", "Duvernay Formation",
+    "Bison Pool", "Mono Lake"
+  )
+  # Description of conditions of sample groups
+  cond2 <- c("anoxic", "anoxic", "> 50 \u00B0C", "anoxic",
+             "anoxic", "anoxic", "anoxic", "anoxic",
+             "MSA+", "MSA+", "highest", "highest",
+             "PW day 49+", "PW day 22+", "PW day 18",
+             "> 70 \u00B0C", "anoxic"
+  )
+  cond1 <- c("oxic", "oxic", "< 50 \u00B0C", "oxic",
+             "oxic", "oxic", "oxic", "oxic",
+             "MSA-", "MSA-", "lowest", "lowest",
+             "IF day 0", "SW day 0", "SW day 0",
+             "< 70 \u00B0C", "oxic"
+  )
+  # Values of pch (from getmdat()/plotmet()) for oxidized and reduced sample groups
+  pch_ox <- c(24, 24, 21, 24,
+            24, 24, 24, 24,
+            1, 1, 1, 1,
+            1, 1, 1,
+            24, 24
+  )
+  pch_red <- c(25, 25, 23, 25,
+            25, 25, 25, 25,
+            21, 21, 21, 21,
+            21, 21, 21,
+            25, 25
   )
 
   # Loop over studies and get ZC difference
-  pch1 <- c(24, 24, 21, 24, 24, 24, 24, 1, 1, 1, 1, 1, 1)
-  pch2 <- c(25, 25, 23, 25, 25, 25, 25, 21, 21, 21, 21, 21, 21)
-  n1 <- n2 <- DZC <- numeric()
+  P <- n1 <- n2 <- DZC <- numeric()
   for(i in 1:length(study)) {
     # Get metrics for samples in this study
     pm <- plotmet(study[[i]], plot.it = FALSE)
     # Determine oxidized and reduced sample groups from values of pch returned by plotmet()  20210901
     pm <- pm[!is.na(pm$pch), ]
-    i1 <- pm$pch == pch1[i]
-    i2 <- pm$pch == pch2[i]
+    iox <- pm$pch == pch_ox[i]
+    ired <- pm$pch == pch_red[i]
     # Keep track of the mean difference of ZC
-    DZC <- c(DZC, mean(pm$ZC[i2]) - mean(pm$ZC[i1]))
+    DZC <- c(DZC, mean(pm$ZC[ired]) - mean(pm$ZC[iox]))
     # Keep track of number of samples 20210902
-    n1 <- c(n1, length(pm$ZC[i1]))
-    n2 <- c(n2, length(pm$ZC[i2]))
+    n1 <- c(n1, length(pm$ZC[iox]))
+    n2 <- c(n2, length(pm$ZC[ired]))
   }
 
   # Include numbers of samples in condition text 20210902
-  cond2 <- c( "> 100 m", "anoxic", "> 50 \u00B0C", "> 4 m", "euxinic", "deepest", "anoxic", "MSA+", "highest", "PW day 49+", "PW day 130+", "FW day 18")
-  cond1 <- c("< 100 m", "oxic", "< 50 \u00B0C", "< 3 m", "oxic", "shallowest", "oxic", "MSA-", "lowest", "IF day 0", "SW day 0", "SW day 0")
   condition <- paste0(cond2, " (", n2, ") - ", cond1, " (", n1, ")")
 
-  # TODO: Order samples by DZC 20220118
+  # Order samples by Delta ZC 20220118
+  orderDZC <- order(DZC)
+  DZC <- DZC[orderDZC]
+  description <- description[orderDZC]
+  condition <- condition[orderDZC]
 
-  # Plot ZC 
-  par(mar = c(4, 12, 1, 0.2))
-  par(las = 1)
-  plot(range(DZC), c(12.5, 0.5), ylim = c(12.5, 0.5), yaxs = "i", yaxt = "n", ylab = "", xlab = cplab$DZC, type = "n")
+  # Setup plot
+  nsamp <- length(DZC)
+  par(mar = c(4, 12, 3, 0.2), las = 1)
+  plot(c(min(DZC), 0.01), c(nsamp + 0.5, 0.5), ylim = c(nsamp + 0.5, 0.5), yaxs = "i", yaxt = "n", ylab = "", xlab = cplab$DZC, type = "n")
+  title("Mean differences between oxidized                         ", font.main = 1, line = 1.6)
+  title("and reduced sample groups                         ", font.main = 1, line = 0.5)
+  # Add line at DZC = 0
+  abline(v = 0, lty = 2, col = "gray40")
+  # Use red for shale gas and hydrothermal systems
   col <- rep(1, length(description))
-  col[description %in% c("Manus Basin vents", "Marcellus Shale", "Denver-Julesburg Basin", "Duvernay Formation")] <- 2
-  for(i in 1:12) lines(c(DZC[i], DZC[i]), c(i - 0.5, i + 0.5), lwd = 2, col = col[i])
+  col[description %in% c("Bison Pool", "Manus Basin (water samples)", "Marcellus Shale", "Denver-Julesburg Basin", "Duvernay Formation")] <- 2
+  # Plot Delta ZC 
+  for(i in 1:nsamp) lines(c(DZC[i], DZC[i]), c(i - 0.5, i + 0.5), lwd = 2, col = col[i])
 
   # Add dataset description and conditions
-  axis(2, at = 1:12 - 0.2, labels = description, tick = FALSE)
-  axis(2, at = 1:12 + 0.2, labels = condition, tick = FALSE, cex.axis = 0.9)
+  axis(2, at = 1:nsamp - 0.2, labels = description, tick = FALSE)
+  axis(2, at = 1:nsamp + 0.2, labels = condition, tick = FALSE, cex.axis = 0.9)
   label.figure("E", cex = 1.5, yfrac = 0.97, font = 2)
 
   if(pdf) dev.off()
@@ -814,7 +846,7 @@ geo16S5 <- function(pdf = FALSE) {
   text(-0.178, -0.150, "Mono Lake")
   # Empty legends to make box with cut-out 20220115
   l3 <- legend("topleft", rep("                                ", 3))
-  l1 <- legend("topleft", "                                                             ")
+  l1 <- legend("topleft", "                                                 ")
   # Erase interior lines
   y <- l1$rect$top - l1$rect$h
   x1 <- l3$rect$left
@@ -828,7 +860,7 @@ geo16S5 <- function(pdf = FALSE) {
   lines(c(x, x), c(y1 - dy, y2 + dy), col = "white", lend = 1, lwd = 1.5)
   # Add legend
   legend("topleft", character(3), pch = c(21, 21, 22), col = c(1, 1, 8), pt.bg = c(4, "white", "white"), bty = "n")
-  ltxt <- as.expression(c(quote("Near-surface and/or high-"*O[2]*" sample"), "Metagenome", "Metatranscriptome"))
+  ltxt <- as.expression(c(quote("Near-surface and/or high-"*O[2]), "Metagenome", "Metatranscriptome"))
   legend("topleft", ltxt, pch = c(22, NA, NA), col = c(8, NA, NA), pt.bg = c(4, NA, NA), inset = c(0.025, 0), bty = "n")
   # Add title and figure label
   title("Various Environments", font.main = 1, cex.main = 1.1)

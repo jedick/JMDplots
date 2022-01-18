@@ -23,7 +23,7 @@ getmdat <- function(study, dropNA = TRUE) {
   mdat <- read.csv(file, as.is = TRUE, check.names = FALSE)
 
   if(dropNA) {
-    # Exclude samples with NA name (e.g. very low ZC in JHM+16 - outlier?) 20200916
+    # Exclude samples with NA name (e.g. outliers?) 20200916
     noname <- is.na(mdat$name)
     if(any(noname)) {
       print(paste0("getmdat [", study, "]: dropping ", sum(noname), " samples with NA name"))
@@ -50,8 +50,8 @@ getmdat <- function(study, dropNA = TRUE) {
     col <- sapply(type, switch, lowT = 4, highT = 2, "fauna surface" = "#757500C0", "rock/chimney" = 1, NA)
   }
   if(study == "SVH+19") { # Black Sea
-    pch <- sapply(mdat$Type, switch, Oxic = 24, Suboxic = 20, Euxinic = 25, NA)
-    col <- sapply(mdat$Type, switch, Oxic = 4, Suboxic = 1, Euxinic = 2, NA)
+    pch <- ifelse(mdat$O2 > 0.5, 24, 25)
+    col <- ifelse(mdat$O2 > 0.5, 4, 2)
   }
   if(study == "XDZ+17") { # Qarhan Salt Lake
     pch <- sapply(mdat$type, switch, normal = 24, saline = 21)
@@ -182,10 +182,20 @@ getmdat <- function(study, dropNA = TRUE) {
       extdat
     })
     newdat <- do.call(rbind, newdat)
-    # Keep all samples, but plot only shallowest and deepest samples
+    # Keep all samples, but only assign pch and col shallowest and deepest samples
     mdat$type <- newdat$type[match(mdat$Run, newdat$Run)]
     pch <- ifelse(mdat$type == "shallowest", 24, 25)
     col <- ifelse(mdat$type == "shallowest", 4, 2)
+  }
+  if(study == "MZG+20_Zug") {
+    mdat <- mdat[mdat$lake == "Lake Zug", ]
+    pch <- ifelse(mdat$O2 > 0.5, 24, 25)
+    col <- ifelse(mdat$O2 > 0.5, 4, 2)
+  }
+  if(study == "MZG+20_Lugano") {
+    mdat <- mdat[mdat$lake == "Lake Lugano", ]
+    pch <- ifelse(mdat$O2 > 0.5, 24, 25)
+    col <- ifelse(mdat$O2 > 0.5, 4, 2)
   }
   if(study == "HXZ+20") {
     type <- rep("transition", nrow(mdat))
@@ -197,21 +207,23 @@ getmdat <- function(study, dropNA = TRUE) {
     col[mdat$station == "C4"] <- NA
   }
   if(study == "GBL+15") {
-    pch <- ifelse(mdat$depth < 100, 24, ifelse(mdat$depth > 100, 25, 20))
-    col <- ifelse(mdat$depth < 100, 4, ifelse(mdat$depth > 100, 2, 1))
+    pch <- ifelse(mdat$O2 > 0.5, 24, 25)
+    col <- ifelse(mdat$O2 > 0.5, 4, 2)
     pch[mdat$size != "0.2-1.6micron"] <- NA
     col[mdat$size != "0.2-1.6micron"] <- NA
   }
   if(study == "BCA+21") {
+    # "type" column is for orp16S paper, not geo16S
     type <- rep("transition", nrow(mdat))
     type[mdat$depth < 3] <- "oxic"
     type[mdat$depth > 4] <- "anoxic"
-    pch <- sapply(type, switch, oxic = 24, transition = 20, anoxic = 25)
-    col <- sapply(type, switch, oxic = 4, transition = 1, anoxic = 2)
+    # pch is for geo16S paper 20220118
+    pch <- ifelse(mdat$O2 > 0.5, 24, 25)
+    col <- ifelse(mdat$O2 > 0.5, 4, 2)
   }
   if(study == "EH18") {
-    pch <- sapply(mdat$type, switch, top = 24, transition = 20, bottom = 25)
-    col <- sapply(mdat$type, switch, top = 4, transition = 1, bottom = 2)
+    pch <- ifelse(mdat$O2 > 0.5, 24, 25)
+    col <- ifelse(mdat$O2 > 0.5, 4, 2)
   }
 
   # Dataets for metagenome comparison 20220111
@@ -226,6 +238,11 @@ getmdat <- function(study, dropNA = TRUE) {
   if(study == "HMP12") {
     pch <- rep(NA, nrow(mdat))
     col <- rep(NA, nrow(mdat))
+  }
+  if(study == "SMS+12") {
+    # pch is for geo16S paper 20220118
+    pch <- ifelse(mdat$T < 70, 24, 25)
+    col <- ifelse(mdat$T < 70, 4, 2)
   }
 
   ## Datasets for orp16S paper 20211003

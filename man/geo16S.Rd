@@ -41,7 +41,7 @@ This table gives a brief description of each plotting function.
   \code{geo16S1} \tab Distinct chemical parameters of reference proteomes for major taxonomic groups \cr
   \code{geo16S2} \tab Estimated community proteomes from different environments have distinct chemical signatures \cr
   \code{geo16S3} \tab Lower carbon oxidation state is tied to oxygen depletion in water columns \cr
-  \code{geo16S4} \tab Decreased carbon oxidation state of estimated proteomes for communities affected by shale gas extraction \cr
+  \code{geo16S4} \tab Common trends of carbon oxidation state of estimated community proteomes for shale gas wells and hydrothermal systems \cr
   \code{geo16S5} \tab Comparison of protein \ZC from metagenomic or metatranscriptomic data with estimates from 16S and reference sequences \cr
   \code{geo16S_S1} \tab RefSeq and 16S rRNA data processing outline \cr
   \code{geo16S_S2} \tab Scatterplots of \ZC and \nH2O for genera vs higher taxonomic levels \cr

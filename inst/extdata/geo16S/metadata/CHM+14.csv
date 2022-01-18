@@ -1,47 +1,24 @@
 study,name,Run,BioSample,sample,description,type,well,day
 CHM+14,"Marcellus Shale Produced Water",SRR1184016,SAMN02441908,61312_1.16S_515F,"Well 1 Day 0 hydraulic fracturing fluid","hydraulic fracturing fluid",1,0
-CHM+14,"Marcellus Shale Produced Water",SRR1184049,SAMN02441908,61312_1.16S_515F,"Well 1 Day 0 hydraulic fracturing fluid","hydraulic fracturing fluid",1,0
 CHM+14,"Marcellus Shale Produced Water",SRR1184052,SAMN02441909,61812.1.16S_515F,"Well 1 Day 4 flowback fluid","flowback fluid",1,4
-CHM+14,"Marcellus Shale Produced Water",SRR1184053,SAMN02441909,61812.1.16S_515F,"Well 1 Day 4 flowback fluid","flowback fluid",1,4
 CHM+14,"Marcellus Shale Produced Water",SRR1184058,SAMN02441910,62712_3.16S_515F,"Well 1 Day 6.5 flowback fluid","flowback fluid",1,6.5
-CHM+14,"Marcellus Shale Produced Water",SRR1184059,SAMN02441910,62712_3.16S_515F,"Well 1 Day 6.5 flowback fluid","flowback fluid",1,6.5
 CHM+14,"Marcellus Shale Produced Water",SRR1184060,SAMN02441911,62712_4.16S_515F,"Well 1 Day 7 flowback fluid","flowback fluid",1,7
-CHM+14,"Marcellus Shale Produced Water",SRR1184061,SAMN02441911,62712_4.16S_515F,"Well 1 Day 7 flowback fluid","flowback fluid",1,7
 CHM+14,"Marcellus Shale Produced Water",SRR1184062,SAMN02441912,62712_9.16S_515F,"Well 1 Day 13.3 flowback fluid","flowback fluid",1,13.3
-CHM+14,"Marcellus Shale Produced Water",SRR1184063,SAMN02441912,62712_9.16S_515F,"Well 1 Day 13.3 flowback fluid","flowback fluid",1,13.3
 CHM+14,"Marcellus Shale Produced Water",SRR1184064,SAMN02441913,72712.1.16S_515F,"Well 1 Day 49 produced fluid","produced fluid",1,49
-CHM+14,"Marcellus Shale Produced Water",SRR1184080,SAMN02441913,72712.1.16S_515F,"Well 1 Day 49 produced fluid","produced fluid",1,49
 CHM+14,"Marcellus Shale Produced Water",SRR1184081,SAMN02441914,82912_1.16S_515F,"Well 1 Day 82 produced fluid","produced fluid",1,82
-CHM+14,"Marcellus Shale Produced Water",SRR1184082,SAMN02441914,82912_1.16S_515F,"Well 1 Day 82 produced fluid","produced fluid",1,82
 CHM+14,"Marcellus Shale Produced Water",SRR1184083,SAMN02441915,50113.1A.16S_515F,"Well 1 Day 328 produced fluid","produced fluid",1,328
-CHM+14,"Marcellus Shale Produced Water",SRR1184084,SAMN02441915,50113.1A.16S_515F,"Well 1 Day 328 produced fluid","produced fluid",1,328
 CHM+14,"Marcellus Shale Produced Water",SRR1184085,SAMN02441916,MA61312_2.16S_515F,"Well 2 Day 0 hydraulic fracturing fluid","hydraulic fracturing fluid",2,0
-CHM+14,"Marcellus Shale Produced Water",SRR1184086,SAMN02441916,MA61312_2.16S_515F,"Well 2 Day 0 hydraulic fracturing fluid","hydraulic fracturing fluid",2,0
 CHM+14,"Marcellus Shale Produced Water",SRR1184088,SAMN02441916,MA61312_2.16S_515F,"Well 2 Day 0 hydraulic fracturing fluid","hydraulic fracturing fluid",2,0
-CHM+14,"Marcellus Shale Produced Water",SRR1184089,SAMN02441916,MA61312_2.16S_515F,"Well 2 Day 0 hydraulic fracturing fluid","hydraulic fracturing fluid",2,0
 CHM+14,"Marcellus Shale Produced Water",SRR1184091,SAMN02441917,61812.4.16S_515F,"Well 2 Day 5 flowback fluid","flowback fluid",2,5
-CHM+14,"Marcellus Shale Produced Water",SRR1184093,SAMN02441917,61812.4.16S_515F,"Well 2 Day 5 flowback fluid","flowback fluid",2,5
 CHM+14,"Marcellus Shale Produced Water",SRR1184094,SAMN02441918,MA62712_10.16S_515F,"Well 2 Day 7.7 flowback fluid","flowback fluid",2,7.7
-CHM+14,"Marcellus Shale Produced Water",SRR1184096,SAMN02441918,MA62712_10.16S_515F,"Well 2 Day 7.7 flowback fluid","flowback fluid",2,7.7
 CHM+14,"Marcellus Shale Produced Water",SRR1184097,SAMN02441918,MA62712_10.16S_515F,"Well 2 Day 7.7 flowback fluid","flowback fluid",2,7.7
-CHM+14,"Marcellus Shale Produced Water",SRR1184098,SAMN02441918,MA62712_10.16S_515F,"Well 2 Day 7.7 flowback fluid","flowback fluid",2,7.7
 CHM+14,"Marcellus Shale Produced Water",SRR1184100,SAMN02441919,62712_13.16S_515F,"Well 2 Day 9 flowback fluid","flowback fluid",2,9
-CHM+14,"Marcellus Shale Produced Water",SRR1184102,SAMN02441919,62712_13.16S_515F,"Well 2 Day 9 flowback fluid","flowback fluid",2,9
 CHM+14,"Marcellus Shale Produced Water",SRR1184103,SAMN02441920,72712.2.16S_515F,"Well 2 Day 49 produced fluid","produced fluid",2,49
-CHM+14,"Marcellus Shale Produced Water",SRR1184104,SAMN02441920,72712.2.16S_515F,"Well 2 Day 49 produced fluid","produced fluid",2,49
 CHM+14,"Marcellus Shale Produced Water",SRR1184105,SAMN02441921,82912_2.16S_515F,"Well 2 Day 82 produced fluid","produced fluid",2,82
-CHM+14,"Marcellus Shale Produced Water",SRR1184116,SAMN02441921,82912_2.16S_515F,"Well 2 Day 82 produced fluid","produced fluid",2,82
 CHM+14,"Marcellus Shale Produced Water",SRR1184117,SAMN02441922,50113.2A.16S_515F,"Well 2 Day 328 produced fluid","produced fluid",2,328
-CHM+14,"Marcellus Shale Produced Water",SRR1184122,SAMN02441922,50113.2A.16S_515F,"Well 2 Day 328 produced fluid","produced fluid",2,328
 CHM+14,"Marcellus Shale Produced Water",SRR1184126,SAMN02441923,61312.3.16S_515F,"Well 3 Day 0 hydraulic fracturing fluid","hydraulic fracturing fluid",3,0
-CHM+14,"Marcellus Shale Produced Water",SRR1184130,SAMN02441923,61312.3.16S_515F,"Well 3 Day 0 hydraulic fracturing fluid","hydraulic fracturing fluid",3,0
 CHM+14,"Marcellus Shale Produced Water",SRR1184131,SAMN02441924,61812.7.16S_515F,"Well 3 Day 3.5 flowback fluid","flowback fluid",3,3.5
-CHM+14,"Marcellus Shale Produced Water",SRR1184133,SAMN02441924,61812.7.16S_515F,"Well 3 Day 3.5 flowback fluid","flowback fluid",3,3.5
 CHM+14,"Marcellus Shale Produced Water",SRR1184134,SAMN02441925,62712.18.16S_515F,"Well 3 Day 7 flowback fluid","flowback fluid",3,7
-CHM+14,"Marcellus Shale Produced Water",SRR1184135,SAMN02441925,62712.18.16S_515F,"Well 3 Day 7 flowback fluid","flowback fluid",3,7
 CHM+14,"Marcellus Shale Produced Water",SRR1184136,SAMN02441926,MA62712_18.16S_515F,"Well 3 Day 7 dup flowback fluid","flowback fluid",3,7
-CHM+14,"Marcellus Shale Produced Water",SRR1184137,SAMN02441926,MA62712_18.16S_515F,"Well 3 Day 7 dup flowback fluid","flowback fluid",3,7
 CHM+14,"Marcellus Shale Produced Water",SRR1184138,SAMN02441926,MA62712_18.16S_515F,"Well 3 Day 7 dup flowback fluid","flowback fluid",3,7
-CHM+14,"Marcellus Shale Produced Water",SRR1184139,SAMN02441926,MA62712_18.16S_515F,"Well 3 Day 7 dup flowback fluid","flowback fluid",3,7
 CHM+14,"Marcellus Shale Produced Water",SRR1184140,SAMN02441927,62712.15.16S_515F,"Well 3 Day 7.7 flowback fluid","flowback fluid",3,7.7
-CHM+14,"Marcellus Shale Produced Water",SRR1184141,SAMN02441927,62712.15.16S_515F,"Well 3 Day 7.7 flowback fluid","flowback fluid",3,7.7

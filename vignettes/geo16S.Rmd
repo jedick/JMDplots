@@ -116,7 +116,7 @@ Table_S6 <- geo16S3()
 
 **Data sources:** Black Sea [@SVH+19], Swiss lakes (Lake Zug and Lake Lugano) [@MZG+20], Eastern Tropical North Pacific (ETNP) [@GBL+15], Sansha Yongle Blue Hole [@HXZ+20], Ursu Lake [@BCA+21].
 
-## Decreased carbon oxidation state of estimated proteomes for communities affected by shale gas extraction (Figure 4)
+## Common trends of carbon oxidation state of estimated community proteomes for shale gas wells and hydrothermal systems (Figure 4)
 ```{r geo16S4, message = FALSE, results = "hide", out.width='100%', fig.width = 10, fig.height = 6, out.extra = 'class="full-width"', pngquant = pngquant}
 Table_S7 <- geo16S4()
 ```

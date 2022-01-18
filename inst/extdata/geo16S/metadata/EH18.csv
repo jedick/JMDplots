@@ -1,6 +1,6 @@
-study,name,Run,BioSample,sample,type,cohort
-EH18,"Mono Lake",SRR3475672,SAMN04903374,ML16S_10m,top,
-EH18,"Mono Lake",SRR3475695,SAMN04903375,ML16S_15m,transition,
-EH18,"Mono Lake",SRR3475696,SAMN04903376,ML16S_18m,transition,
-EH18,"Mono Lake",SRR3475698,SAMN04903377,ML16S_25m,transition,
-EH18,"Mono Lake",SRR3475699,SAMN04903378,ML16S_31m,bottom,
+study,name,Run,BioSample,sample,type,"depth (m)","T (°C)","O2 (mg/L)"
+EH18,"Mono Lake",SRR3475672,SAMN04903374,ML16S_10m,top,10,16.4,4.1
+EH18,"Mono Lake",SRR3475695,SAMN04903375,ML16S_15m,transition,15,13.1,0.9
+EH18,"Mono Lake",SRR3475696,SAMN04903376,ML16S_18m,transition,18,9.9,0
+EH18,"Mono Lake",SRR3475698,SAMN04903377,ML16S_25m,transition,25,6.8,0
+EH18,"Mono Lake",SRR3475699,SAMN04903378,ML16S_31m,bottom,31,6.1,0
