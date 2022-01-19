@@ -177,28 +177,28 @@ geo16S3 <- function(pdf = FALSE) {
   # Make legend
   par(mar = c(0, 0, 0, 0))
   plot.new()
-  legend <- as.expression(c(quote(italic(Z)[C]), quote(O[2]), quote(NO[3]^"-" / NO[2]^"-")))
-  legend("top", legend = legend, lty = c(1, 1, 2), lwd = 1.5, col = c(1, 2, 4), pch = c(21, NA, NA), pt.bg = "white", ncol = 3, bty = "n")
+  legend <- as.expression(c(quote(italic(Z)[C]), quote(O[2])))
+  legend("top", legend = legend, lty = c(1, 1), lwd = 1.5, col = c(1, 2), pch = c(21, NA), pt.bg = "white", ncol = 3, bty = "n")
   # Setup plot metrics
   par(mgp = c(1.8, 0.5, 0), mar = c(3, 3, 3, 1))
 
   # Identify datasets to plot
+  # "__BSMG__" is flag for Black Sea metagenome 20220119
   study <- c("SVH+19", "MZG+20", "MZG+20", "GBL+15", "GBL+15",
-             "HXZ+20", "HXZ+20", "HXZ+20", "HXZ+20",
+             "__BSMG__", NA, "HXZ+20", "HXZ+20",
              "BCA+21", "BCA+21", "BCA+21", "BCA+21")
   column <- c("study", "lake", "lake", "size", "size",
-              "Station", "Station", "Station", "Station",
+              "", NA, "Station", "Station",
               "Month", "Month", "Month", "Month")
   ID <- c("SVH+19", "Lake Zug", "Lake Lugano", "0.2-1.6micron", "1.6-30micron",
-          "SYBL", "SYBL", "C4", "C4",
+          "", NA, "SYBL", "C4",
           "Jul", "Nov", "Feb", "Apr")
   # \n are used for vertical offset from plot bottom
   title <- c("Black Sea\n", "Lake Zug\n", "Lake\nLugano\n", "ETNP\n", "ETNP\n",
-             # Use leading or trailing space to flag NO3-/NO2- plots
-             "Blue Hole\n\n", " Blue Hole\n\n", "Blue Hole\n\n", "Blue Hole\n\n ",
+             "Black Sea\n\n", NA, "Blue Hole\n\n", "Blue Hole\n\n",
              "Ursu Lake\n\n", "Ursu Lake\n\n", "Ursu Lake\n\n", "Ursu Lake\n\n")
   subtitle <- c("", "", "", "", "",
-                "Inside\n", "Inside\n", "Outside (C4)\n", "Outside (C4)\n",
+                "Metagenome\n", NA, "Inside\n", "Outside (C4)\n",
                 "July 2015\n", "November 2015\n", "February 2016\n", "April 2016\n")
   titlesub <- paste(title, subtitle)
 
@@ -206,30 +206,69 @@ geo16S3 <- function(pdf = FALSE) {
   out <- list()
   # Loop over studies
   for(i in 1:length(study)) {
+    if(is.na(study[i])) {
+      # Leave empty space 20220119
+      par(c(0, 0, 0, 0))
+      plot.new()
+      par(xpd = NA)
+      arrows(0, 0.75, -0.4, 0.75, length = 0.1)
+      text(-0.4, 0.5, paste(
+        "This plot is for protein sequences",
+        "inferred from shotgun metagenomes.",
+        "",
+        "All other plots are for estimated",
+        "community proteomes from 16S rRNA",
+        "and reference protein sequences.",
+        sep = "\n"), cex = 0.9, adj = 0)
+      par(xpd = FALSE)
+      next
+    }
     # ZC range for plots
     if(study[i] == "BCA+21") ZClim <- c(-0.180, -0.145) else ZClim <- c(-0.175, -0.140)
-    # Get the metadata and chemical metrics for this study
-    # Keep all rows for higher-resolution O2 measurements
-    mdat <- getmdat(study[i], dropNA = FALSE)
-    metrics <- getmetrics(study[i])
-    # Get the rows matching the ID
-    iID <- mdat[, column[i]] == ID[i]
-    mdat <- mdat[iID, ]
-    # Sort the data by depth
-    alldat <- mdat <- mdat[order(mdat$depth), ]
-    # Now exclude NA samples
-    mdat <- mdat[!is.na(mdat$name), ]
-    depth <- mdat$depth
-    # Get the ZC and nH2O values
-    imet <- match(mdat$Run, metrics$Run)
-    ZC <- metrics$ZC[imet]
-    nH2O <- metrics$nH2O[imet]
+    if(study[i] == "__BSMG__") {
+      ## Get data for Black Sea metagenome
+      ARASTdir <- system.file("extdata/geo16S/ARAST", package = "JMDplots")
+      aa <- read.csv(file.path(ARASTdir, "Black_Sea_AA.csv"))
+      ZC <- ZCAA(aa)
+      nH2O <- H2OAA(aa)
+      depth = c(50, 70, 80, 85, 90, 95, 100, 105,
+        110, 130, 170, 250, 500, 1000, 2000)
+      Metagenome = c("SRR12347146", "SRR12347145", "SRR12347139", "SRR12347138", "SRR12347137", "SRR12347136", "SRR12347135", "SRR12347134",
+        "SRR12347133", "SRR12347132", "SRR12347144", "SRR12347143", "SRR12347142", "SRR12347141", "SRR12347140")
+      ## Get metadata for O2 concentration
+      alldat <- getmdat("SVH+19")
+      # Check that the samples are in the right order
+      stopifnot(all(aa$protein == Metagenome))
+      stopifnot(all(alldat$depth == depth))
+      # Put in correct data for the metagenome
+      alldat$study <- "VMW+21"
+      alldat$name <- "Black Sea metagenome"
+      alldat$Run <- Metagenome
+    } else {
+      ## Get data for 16S studies
+      # Get the metadata and chemical metrics for this study
+      # Keep all rows for higher-resolution O2 measurements
+      mdat <- getmdat(study[i], dropNA = FALSE)
+      metrics <- getmetrics(study[i])
+      # Get the rows matching the ID
+      iID <- mdat[, column[i]] == ID[i]
+      mdat <- mdat[iID, ]
+      # Sort the data by depth
+      alldat <- mdat <- mdat[order(mdat$depth), ]
+      # Now exclude NA samples
+      mdat <- mdat[!is.na(mdat$name), ]
+      depth <- mdat$depth
+      # Get the ZC and nH2O values
+      imet <- match(mdat$Run, metrics$Run)
+      ZC <- metrics$ZC[imet]
+      nH2O <- metrics$nH2O[imet]
+    }
 
     # Reverse y-axis (depth)
     ylim <- rev(range(depth))
     # Visualize deeper O2 concentrations in Ursu Lake
     if(study[i] == "BCA+21") ylim <- c(11, 0)
-    if(study[i] == "SVH+19") {
+    if(study[i] %in% c("SVH+19", "__BSMG__")) {
       # Plot 1000 and 2000 m samples closer to the others 20210608
       ylim <- c(700, 50)
       depth[match(c(1000, 2000), depth)] <- c(600, 700)
@@ -240,7 +279,7 @@ geo16S3 <- function(pdf = FALSE) {
     newplot <- TRUE
     if(i > 1) if(titlesub[i]==titlesub[i-1]) newplot <- FALSE
     if(newplot) {
-      if(study[i] == "SVH+19") {
+      if(study[i] %in% c("SVH+19", "__BSMG__")) {
         plot(ZC, depth, xlim = ZClim, ylim = ylim, xlab = axis.label("ZC"), ylab = "Depth (m)", type = "b", yaxt = "n")
         axis(2, at = seq(100, 700, 100), labels = c(100, 200, 300, 400, 500, 1000, 2000), gap.axis = 0)
         # Plot y-axis break 20210715
@@ -266,23 +305,13 @@ geo16S3 <- function(pdf = FALSE) {
         text(ZClim[2], ylim[1], title[i], adj = c(1, 0), font = 2)
         text(ZClim[2], ylim[1], subtitle[i], adj = c(1, 0))
       }
-      # Plot O2 concentrations or NO3-/NO2- ratio
+      # Plot O2 concentrations
       nc <- nchar(title[i])
-      if(substr(title[i], 1, 1) == " " | substr(title[i], nc, nc) == " ") {
-        what <- "NO3.NO2"
-        xlim <- c(0, 250)
-        col <- 4
-        lty <- 2
-        # Calculate NO3- / NO2- ratio 20210511
-        NO3.NO2 <- alldat$`NO3- (umol L-1)` / alldat$`NO2- (umol L-1)`
-        alldat <- cbind(alldat, NO3.NO2)
-      } else {
-        what <- "O2"
-        if(study[i] == "BCA+21") xlim <- c(0, 25) else xlim <- c(0, 220)
-        col <- 2
-        lty <- 1
-      }
-      icol <- grep(paste0("^", what), colnames(alldat))
+      what <- "O2"
+      if(study[i] == "BCA+21") xlim <- c(0, 25) else xlim <- c(0, 220)
+      col <- 2
+      lty <- 1
+      icol <- grep("^O2", colnames(alldat))
       # Remove NA values
       alldat <- alldat[!is.na(alldat[, icol]), ]
       depth <- alldat$depth
@@ -293,7 +322,6 @@ geo16S3 <- function(pdf = FALSE) {
       if(xlab == "O2 (umol kg-1)") xlab <- quote(O[2]~"(\u00B5mol kg"^-1*")")
       if(xlab == "O2 (umol L-1)") xlab <- quote(O[2]~"(\u00B5mol L"^-1*")")
       if(xlab == "O2 (mg L-1)") xlab <- quote(O[2]~"(mg L"^-1*")")
-      if(xlab == "NO3.NO2") xlab <- quote(NO[3]^"-" / NO[2]^"-"~"(mol/mol)")
       axis(3)
       mtext(xlab, side = 3, line = 1.7, cex = par("cex"))
       # Extra labels for ETNP
@@ -324,21 +352,23 @@ geo16S3 <- function(pdf = FALSE) {
       else text(ZClim[2], ylim[1], rtxt, adj = c(1, 0))
     }
 
-
-    # Don't repeat Blue Hole in Table S6 (there are loops for O2 and NO3-/NO2-; just use one)
-    if(substr(title[i], 1, 1) == " ") next
     # Assemble the data for Table S6
     sd <- alldat[, c("study", "name", "Run", "sample", "depth")]
-    sd <- cbind(sd, "O2 (umol kg-1)" = NA, "O2 (umol L-1)" = NA, "O2 (mg L-1)" = NA, "NO3- (umol L-1)" = NA, "NO2- (umol L-1)" = NA, ZC = NA, nH2O = NA)
+    sd <- cbind(sd, "O2 (umol kg-1)" = NA, "O2 (umol L-1)" = NA, "O2 (mg L-1)" = NA, ZC = NA, nH2O = NA)
     # Names of the columns with chemical concentrations
-    cnames <- c("O2 (umol kg-1)", "O2 (umol L-1)", "O2 (mg L-1)", "NO3- (umol L-1)", "NO2- (umol L-1)")
+    cnames <- c("O2 (umol kg-1)", "O2 (umol L-1)", "O2 (mg L-1)")
     for(cname in cnames) if(cname %in% colnames(alldat)) sd[, cname] <- alldat[, cname]
-    # Put ZC and nH2O values in correct place
-    metrics <- metrics[imet, ]
-    metrics <- metrics[!is.na(metrics$Run), ]
-    isd <- match(metrics$Run, sd$Run)
-    sd$ZC[isd] <- metrics$ZC
-    sd$nH2O[isd] <- metrics$nH2O
+    if(study[i] == "__BSMG__") {
+      sd$ZC <- ZC
+      sd$nH2O <- nH2O
+    } else {
+      # Put ZC and nH2O values in correct place
+      metrics <- metrics[imet, ]
+      metrics <- metrics[!is.na(metrics$Run), ]
+      isd <- match(metrics$Run, sd$Run)
+      sd$ZC[isd] <- metrics$ZC
+      sd$nH2O[isd] <- metrics$nH2O
+    }
 
     # Replace NA name with study name
     sd.name <- na.omit(sd$name)[1]
@@ -412,7 +442,7 @@ geo16S4 <- function(pdf = FALSE) {
   text(-0.1415, -0.7465, "PASF streams (spring)")
   text(-0.1421, -0.7485, "PASF streams (fall)")
   # Add legend
-  legend("topleft", c("Lowest disturbance", "Highest disturbance"), pch = c(21, 21), pt.bg = c("#ffffffa0", "#df536ba0"), pt.cex = c(1.4, 1.7), lwd = 2, lty = NA)
+  legend("topleft", c("MSA- or lowest disturbance", "MSA+ or highest disturbance"), pch = c(21, 21), pt.bg = c("#ffffffa0", "#df536ba0"), pt.cex = c(1.4, 1.7), lwd = 2, lty = NA)
   label.figure("B", cex = 1.5, xfrac = 0.03, font = 2)
 
   ## Plots C-D: Comparison of different studies on produced water 20210330
@@ -464,8 +494,8 @@ geo16S4 <- function(pdf = FALSE) {
     "SMS+12", "EH18"
   )
   description <- c(
-    "ETNP (0.2-1.6 \u00B5M)", "Lake Fryxell mat", "Manus Basin (water samples)", "Ursu Lake",
-    "Black Sea", "Lake Zug", "Lake Lugano", "Sansha Yongle Blue Hole",
+    "ETNP (0.2-1.6 \u00B5M)", "Lake Fryxell mat", "Manus Basin (water samples)", "Ursu Lake (all months)",
+    "Black Sea", "Lake Zug", "Lake Lugano", "Blue Hole (Inside)",
     "NW PA streams (2014)", "NW PA sediment (2014)", "PASF streams (spring)", "PASF streams (fall)",
     "Marcellus Shale", "Denver-Julesburg Basin", "Duvernay Formation",
     "Bison Pool", "Mono Lake"
@@ -932,19 +962,19 @@ geo16S5 <- function(pdf = FALSE) {
 # RefSeq and 16S rRNA data processing outline 20220104
 geo16S_S1 <- function(pdf = FALSE) {
 
-  if(pdf) pdf("geo16S_S1.pdf", width = 16, height = 5)
+  if(pdf) pdf("geo16S_S1.pdf", width = 17.1, height = 5)
 
   par(mar = c(0.1, 0.1, 0.1, 0.1))
   plot(c(1, 10.2), c(1.9, 10.1), type = "n", axes = FALSE, xlab = "", ylab = "", xaxs = "i", yaxs = "i")
   text(1, 10, "Reference Sequence Processing", adj = c(0, 1), font = 2)
   text(1, 9, "1. Use taxids classified at species level", adj = 0)
-  text(1, 8, "2. Sum AAcomp of all sequences for each species", adj = 0)
-  text(1, 7, "3. Divide by number of sequences to get mean AAcomp for each species", adj = 0)
-  text(1, 6, "4. Calculate mean AAcomp for all species in each genus", adj = 0)
-  text(1, 5, "5. Calculate mean AAcomp for all species in each family", adj = 0)
-  text(1, 4, "6. Calculate mean AAcomp for all species in each order", adj = 0)
-  text(1, 3, "7. Calculate mean AAcomp for all species in each class", adj = 0)
-  text(1, 2, "8. Calculate mean AAcomp for all species in each phylum", adj = 0)
+  text(1, 8, "2. Sum AA of all sequences for each species", adj = 0)
+  text(1, 7, "3. Divide by number of sequences to get mean AA for each species (AA[species])", adj = 0)
+  text(1, 6, "4. Calculate mean AA[genus] from all AA[species] in each genus", adj = 0)
+  text(1, 5, "5. Calculate mean AA[family] from all AA[species] in each family", adj = 0)
+  text(1, 4, "6. Calculate mean AA[order] from all AA[species] in each order", adj = 0)
+  text(1, 3, "7. Calculate mean AA[class] from all AA[species] in each class", adj = 0)
+  text(1, 2, "8. Calculate mean AA[phylum] from all AA[species] in each phylum", adj = 0)
 #  text(1, 1, "9. Calculate and record ZC and nH2O for all taxonomic groups at each level", adj = 0)
 
   text(3.35, 10, "(Data Source)", adj = c(0, 1), font = 2)
@@ -960,20 +990,20 @@ geo16S_S1 <- function(pdf = FALSE) {
     nrank <- sum(metrics$rank == ranks[irank])
     text(5, 9-irank, paste(nrank, plural[irank]), adj = 0)
   }
-  lines(c(3.7, 3.7), c(1.8, 6.2))
+  lines(c(3.87, 3.87), c(1.8, 6.2))
   lines(c(4.9, 4.9), c(7.2, 2.8))
-  arrows(3.75, 4, 4.88, 5.00)
+  arrows(3.9, 4, 4.88, 5.00)
   lines(c(5.68, 5.68), c(7.2, 2.8))
   arrows(5.71, 5.00, 6.43, 5.00)
 
   text(6.5, 10, "16S rRNA Classification and Analysis", adj = c(0, 1), font = 2)
   text(6.5, 9, "1. Run RDP Classifier on public 16S rRNA datasets (see Tables 1 and S1)", adj = 0)
   text(6.5, 8, "2. Assemble counts of lowest-level classifications (genus to phylum)", adj = 0)
-  text(6.5, 7, "3. Mapping step 1: Change some RDP names to NCBI equivalents (see Methods)", adj = 0)
-  text(6.5, 6, "4. Mapping step 2: Text match between RDP and NCBI names", adj = 0)
+  text(6.5, 7, "3. Mapping step 1: Manually convert some RDP names to NCBI names (see Methods)", adj = 0)
+  text(6.5, 6, "4. Mapping step 2: Automatic text match between RDP and NCBI names", adj = 0)
   text(6.5, 5, "5. Multiply classification counts by reference proteomes", adj = 0)
-  text(6.5, 4, "6. Divide by number of classifications to get estimated community proteome (AAcomp)", adj = 0)
-  text(6.5, 3, "7. Calculate ZC and nH2O from AAcomp (see Dick et al., 2020)", adj = 0)
+  text(6.5, 4, "6. Divide by number of classifications to get estimated community proteome (AA[community])", adj = 0)
+  text(6.5, 3, "7. Use AA[community] to calculate ZC and nH2O (see Dick et al., 2020)", adj = 0)
   text(6.5, 2, "8. Visualize data", adj = 0)
 
   if(pdf) dev.off()

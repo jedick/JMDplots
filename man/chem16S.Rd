@@ -51,7 +51,9 @@ Sequences classified to the class Chloroplast or genera Chlorophyta or Bacillari
 Then, only columns (samples) with classification count > \code{mincount} are retained.
 All remaining sequences (those classified to genus or higher levels) can be used for mapping to the NCBI taxonomy.
 
-Use the \code{lowest.level} argument to trim (truncate) the classifications to a level higher than genus.
+The lineage text of the RDP Classifier looks like \dQuote{Root;rootrank;Archaea;domain;Diapherotrites;phylum;Diapherotrites Incertae Sedis AR10;genus;}, so you can use \code{lineage = "Archaea"} to select the archaeal classifications or \code{lineage = "genus"} to select genus-level classifications.
+
+Use the \code{lowest.level} argument to truncate the classifications to a level higher than genus.
 This argument does not reduce the number of classifications, but only trims the RDP lineages to the specified level; this likely creates duplicate lineages, for which the classification counts are then consolidated.
 
 The location of the \code{chem16S} directory used in \code{getmdat} and \code{getRDP} can be changed by setting the option \code{chem16Sdir}.
