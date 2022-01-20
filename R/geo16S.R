@@ -70,7 +70,7 @@ geo16S2 <- function(pdf = FALSE) {
   legend <- c("Archaea", "Bacteria")
   legend("bottomleft", legend, pch = c(23, 22), col = c(1, 1), pt.bg = c(6, 5), bg = "white")
 
-  p2 <- plotmet("SVH+19", title = FALSE, points = FALSE, ylim = c(-0.757, -0.737))
+  p2 <- plotmet("SVH+19", title = FALSE, points = FALSE)
 #  title("Black Sea\nSollai et al., 2019", font.main = 1)
   title("Black Sea", font.main = 1)
   addhull(p2$ZC, p2$nH2O, "blue", TRUE, lty = 2)
@@ -111,12 +111,12 @@ geo16S2 <- function(pdf = FALSE) {
   legend <- c("Oxic", "Transition", "Anoxic")
   legend("bottomright", legend, pch = c(24, 20, 25), pt.bg = c(4, 1, 2), bg = "white")
 
-  p7 <- plotmet("HCW+13", title = FALSE, points = FALSE, ylim = c(-0.764, -0.7545))
+  p7 <- plotmet("HCW+13", title = FALSE, points = FALSE, ylim = c(-0.767, -0.7578))
 #  title("Guerrero Negro mat layers\nHarris et al., 2013", font.main = 1)
   title("Guerrero Negro mat layers", font.main = 1)
   addhull(p7$ZC, p7$nH2O, "tan1", TRUE, lty = 2)
   pointfun(p7)
-  text(c(-0.1518, -0.1577, -0.1578), c(-0.7547, -0.7602, -0.7637), c("0-1 mm", "1-2 mm", "2-3 mm"))
+  text(c(-0.1512, -0.1575, -0.1576), c(-0.7581, -0.7635, -0.7669), c("0-1 mm", "1-2 mm", "2-3 mm"))
   legend <- c("Photic/oxic", "Low sulfide", "High sulfide")
   legend("topleft", legend, pch = c(24, 20, 25), pt.bg = c(4, 1, 2), bg = "white")
 
@@ -586,7 +586,7 @@ geo16S4 <- function(pdf = FALSE) {
 
 # Function to plot individual datasets for geo16S5 20220112
 # Use H2O = FALSE for ZC, H2O = TRUE for nH2O
-MG16S <- function(which, plot.lines = TRUE, lowest.level = NULL, lineage = NULL, rm.outliers = FALSE, H2O = FALSE) {
+MG16S <- function(which, plot.lines = TRUE, lowest.level = NULL, lineage = NULL, rm.outliers = FALSE, H2O = FALSE, cex = 1) {
 
   # To return NULL ID unless it is set below
   ID <- NULL
@@ -608,9 +608,9 @@ MG16S <- function(which, plot.lines = TRUE, lowest.level = NULL, lineage = NULL,
     stopifnot(all.equal(rev(rownames(dat_MG$meancomp)), gsub(".*_", "", dat_16S$sample)))
     # Add lines and points
     if(plot.lines) lines(metric_MG, metric_16S)
-    points(metric_MG, metric_16S, pch = 21, bg = "white")
+    points(metric_MG, metric_16S, pch = 21, bg = "white", cex = cex)
     # Fill symbol for most oxidized (surface) sample
-    points(metric_MG[1], metric_16S[1], pch = 21, bg = 4)
+    points(metric_MG[1], metric_16S[1], pch = 21, bg = 4, cex = cex)
   }
 
   if(which == "ETNP_MG") {
@@ -627,9 +627,9 @@ MG16S <- function(which, plot.lines = TRUE, lowest.level = NULL, lineage = NULL,
     stopifnot(all.equal(rev(rownames(dat_MG$meancomp)), gsub("_.*", "", dat_16S$sample)))
     # Add lines and points
     if(plot.lines) lines(metric_MG, metric_16S)
-    points(metric_MG, metric_16S, pch = 21, bg = "white")
+    points(metric_MG, metric_16S, pch = 21, bg = "white", cex = cex)
     # Fill symbol for surface sample
-    points(metric_MG[1], metric_16S[1], pch = 21, bg = 4)
+    points(metric_MG[1], metric_16S[1], pch = 21, bg = 4, cex = cex)
   }
 
   if(which == "ETNP_MT") {
@@ -646,9 +646,9 @@ MG16S <- function(which, plot.lines = TRUE, lowest.level = NULL, lineage = NULL,
     stopifnot(all.equal(rev(rownames(dat_MT$meancomp)), gsub("_.*", "", dat_16S$sample)))
     # Add lines and points
     if(plot.lines) lines(metric_MT, metric_16S, col = 8)
-    points(metric_MT, metric_16S, pch = 22, bg = "white", col = 8)
+    points(metric_MT, metric_16S, pch = 22, bg = "white", col = 8, cex = cex)
     # Fill symbol for surface sample
-    points(metric_MT[1], metric_16S[1], pch = 22, bg = 4, col = 8)
+    points(metric_MT[1], metric_16S[1], pch = 22, bg = 4, col = 8, cex = cex)
     # For the return value
     metric_MG <- metric_MT
   }
@@ -667,9 +667,9 @@ MG16S <- function(which, plot.lines = TRUE, lowest.level = NULL, lineage = NULL,
     stopifnot(all.equal(rownames(dat_MG$meancomp), mdat$"Field Code"))
     # Add lines and points
     if(plot.lines) lines(metric_MG, metric_16S)
-    points(metric_MG, metric_16S, pch = 21, bg = "white")
+    points(metric_MG, metric_16S, pch = 21, bg = "white", cex = cex)
     # Fill symbol for low-T sample
-    points(metric_MG[5], metric_16S[5], pch = 21, bg = 4)
+    points(metric_MG[5], metric_16S[5], pch = 21, bg = 4, cex = cex)
   }
 
   if(which == "Mono_Lake") {
@@ -684,9 +684,9 @@ MG16S <- function(which, plot.lines = TRUE, lowest.level = NULL, lineage = NULL,
     stopifnot(all.equal(rev(rownames(dat_MT$meancomp)), gsub(".*_", "", dat_16S$sample)))
     # Add lines and points
     if(plot.lines) lines(metric_MT, metric_16S, pch = 0, col = 8)
-    points(metric_MT, metric_16S, pch = 22, bg = "white", col = 8)
+    points(metric_MT, metric_16S, pch = 22, bg = "white", col = 8, cex = cex)
     # Fill symbol for surface sample
-    points(metric_MT[1], metric_16S[1], pch = 22, bg = 4, col = 8)
+    points(metric_MT[1], metric_16S[1], pch = 22, bg = 4, col = 8, cex = cex)
     # For the return value
     metric_MG <- metric_MT
   }
@@ -719,7 +719,7 @@ MG16S <- function(which, plot.lines = TRUE, lowest.level = NULL, lineage = NULL,
     col[mdat$type == "flowback fluid"] <- 8
     col[mdat$type == "produced fluid"] <- 2
     if(plot.lines) type <- "b" else type <- "p"
-    points(metric_MG, metric_16S, pch = 23, bg = col, type = type)
+    points(metric_MG, metric_16S, pch = 23, bg = col, type = type, cex = cex)
   }
 
   if(which == "Manus_Basin") {
@@ -747,7 +747,7 @@ MG16S <- function(which, plot.lines = TRUE, lowest.level = NULL, lineage = NULL,
     col <- rep("white", nrow(mdat))
     col[mdat$T > 50] <- 2
     col[mdat$T < 10] <- 4
-    points(metric_MG, metric_16S, pch = 22, bg = col)
+    points(metric_MG, metric_16S, pch = 22, bg = col, cex = cex)
   }
 
   if(which == "Black_Sea") {
@@ -772,7 +772,7 @@ MG16S <- function(which, plot.lines = TRUE, lowest.level = NULL, lineage = NULL,
     pch <- rep(24, nrow(mdat))
     col[mdat$depth >= 100] <- 2
     pch[mdat$depth >= 100] <- 25
-    points(metric_MG, metric_16S, pch = pch, bg = col)
+    points(metric_MG, metric_16S, pch = pch, bg = col, cex = cex)
   }
 
   if(which == "HMP") {
@@ -819,7 +819,7 @@ MG16S <- function(which, plot.lines = TRUE, lowest.level = NULL, lineage = NULL,
     # Get ZC values
     if(H2O) metric_16S <- met$nH2O else metric_16S <- met$ZC
     if(H2O) metric_MG <- H2OAA(aa) else metric_MG <- ZCAA(aa)
-    points(metric_MG, metric_16S, pch = 21, bg = 2)
+    points(metric_MG, metric_16S, pch = 21, bg = 2, cex = cex)
   }
 
   if(which == "Soils") {
@@ -839,7 +839,7 @@ MG16S <- function(which, plot.lines = TRUE, lowest.level = NULL, lineage = NULL,
     # Get ZC values
     if(H2O) metric_16S <- met$nH2O else metric_16S <- met$ZC
     if(H2O) metric_MG <- H2OAA(aa) else metric_MG <- ZCAA(aa)
-    points(metric_MG, metric_16S, pch = 21, bg = 4)
+    points(metric_MG, metric_16S, pch = 21, bg = 4, cex = cex)
   }
 
   list(metric_MG = metric_MG, metric_16S = metric_16S, ID = ID)
@@ -867,14 +867,21 @@ geo16S5 <- function(pdf = FALSE) {
   MG16S("Guerrero_Negro")
   # Label points for upper 3 layers
   text(c(-0.135, -0.1382, -0.1422), c(-0.1472, -0.1598, -0.1618), c("1", "2", "3"), cex = 0.8)
-  text(-0.135, -0.170, "Guerrero\nNegro")
+  text(-0.135, -0.174, "Guerrero\nNegro\nmat")
   MG16S("ETNP_MG")
   MG16S("ETNP_MT")
-  text(-0.154, -0.178, "ETNP")
-  MG16S("Bison_Pool")
-  text(-0.17, -0.193, "Bison Pool")
+  text(-0.154, -0.181, "ETNP\nwater")
+  BP <- MG16S("Bison_Pool", cex = 1.3)
+  # Make arrows to show outflow channel 20220120
+  arrows(BP$metric_MG[1], BP$metric_16S[1], BP$metric_MG[2], BP$metric_16S[2], length = 0.1, col = 2)
+  arrows(BP$metric_MG[2], BP$metric_16S[2], BP$metric_MG[3], BP$metric_16S[3], length = 0.1, col = 8)
+  arrows(BP$metric_MG[3], BP$metric_16S[3], BP$metric_MG[4], BP$metric_16S[4], length = 0.1, col = 4)
+  text(-0.205, -0.193, "Bison\nPool")
+  text(-0.1905, -0.2172, "Hot spring source", cex = 0.9)
+  text(-0.173, -0.1954, "Outflow channel:", cex = 0.9)
+  text(-0.173, -0.2014, quote(italic(T)~"and"~O[2]~"gradient"), cex = 0.9)
   MG16S("Mono_Lake")
-  text(-0.178, -0.150, "Mono Lake")
+  text(-0.178, -0.154, "Mono Lake\nwater")
   # Empty legends to make box with cut-out 20220115
   l3 <- legend("topleft", rep("                                ", 3))
   l1 <- legend("topleft", "                                                 ")
@@ -916,19 +923,21 @@ geo16S5 <- function(pdf = FALSE) {
   xlab <- quote(italic(Z)[C]~"from metagenome")
   plot(xylim, xylim, type = "n", xlab = xlab, ylab = ylab)
   lines(xylim, xylim, lty = 2, col = "gray40")
-  dat <- MG16S("Manus_Basin")
-  # Add sample names with O2 concentrations (from Figure S5 of Meier et al., 2017)
-  samptxt <- substr(dat$ID$Sample, 7, 13)
-  samptxt <- paste0(samptxt, "\n", c(0.07, 0.14, 0.17, NA, 0.2), " mM O2")
-  samptxt <- gsub("0.17 mM O2", "0.17 mM O2\n\n", samptxt)
-  samptxt <- gsub("NA mM O2", "ND O2", samptxt)
+  dat <- MG16S("Manus_Basin", cex = 1.3)
+  # Plot sample names and O2 concentrations (from Figure S5 of Meier et al., 2017)
   dx <- c(0.010, 0.009, -0.012, -0.008, 0.009)
-  text(dat$metric_MG + dx, dat$metric_16S - 0.01, samptxt, adj = c(0.5, 0), cex = 0.9)
+  dy <- c(0, 0, 0.012, 0, 0)
+  samptxt <- substr(dat$ID$Sample, 7, 13)
+  text(dat$metric_MG + dx, dat$metric_16S - 0.004 + dy, samptxt, cex = 0.9)
+  O2txt <- as.expression(c(quote(0.07~"mM"~O[2]), quote(0.14~"mM"~O[2]), quote(0.17~"mM"~O[2]), quote("ND"~O[2]), quote(0.2~"mM"~O[2])))
+  text(dat$metric_MG + dx, dat$metric_16S - 0.009 + dy, O2txt, cex = 0.9)
+
   # Add Black Sea 20220115
-  MG16S("Black_Sea")
+  MG16S("Black_Sea", cex = 0.8)
   # Add legends
-  legend("topleft", c("Depth < 100 m", "Depth >= 100 m"), pch = c(24, 25), pt.bg = c(4, 2), title = "Black Sea")
-  legend("bottomright", c("T < 10 \u00B0C", "10 \u00B0C < T < 50 \u00B0C", "T > 50 \u00B0C"), pch = 22, pt.bg = c(4, "white", 2), title = "Manus Basin")
+  legend("topleft", c("Depth < 100 m", "Depth >= 100 m"), pch = c(24, 25), pt.bg = c(4, 2), pt.cex = 0.8, title = "Black Sea")
+  legend <- as.expression(c(quote(italic(T)~"< 10 \u00B0C"), quote("10 \u00B0C <"~italic(T)~"< 50 \u00B0C"), quote(italic(T)~"> 50 \u00B0C")))
+  legend("bottomright", legend = legend, pch = 22, pt.bg = c(4, "white", 2), pt.cex = 1.3, title = "Manus Basin")
   # Add title and figure label
   title("Manus Basin Vents and Black Sea", font.main = 1, cex.main = 1.1)
   label.figure("C", cex = 1.5, font = 2, xfrac = 0.04, yfrac = 0.96)
@@ -1080,10 +1089,13 @@ geo16S_S2 <- function(pdf = FALSE) {
       # Add points and linear regression
       thislm <- lm(y ~ x)
       lines(xylim, predict(thislm, data.frame(x = xylim)), col = "#00000080")
-      # Add R2 value
+      # Show R2 and slope
       R2 <- summary(thislm)$r.squared
       R2txt <- bquote(italic(R)^2 == .(formatC(R2, digits = 3, format = "f")))
       legend("topleft", legend = R2txt, bty = "n")
+      Slope <- coef(thislm)["x"]
+      Slopetxt <- paste("slope =", formatC(Slope, digits = 3, format = "f"))
+      legend("bottomright", legend = Slopetxt, bty = "n")
       if(metric == "ZC") {
         # Add title with number of taxa at this rank
         plural <- switch(rank, "genus" = "genera", "family" = "families", "order" = "orders",
