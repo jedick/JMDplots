@@ -39,7 +39,7 @@
 ## STUDY SETTINGS
 
 # Change the following line to setup the pipeline for one study
-study <- "HMP12"
+study <- "FLA+12"
 # Settings for all studies are stored here
 file <- tempfile()
 # Write spaces here (but don't save them) to make this easier to read
@@ -203,6 +203,7 @@ filter <- function(RUNID) {
 
   if(study %in% c("BYB+17", "GRG+20", "MKK+11", "FLA+12")) {
     # For BYB+17, FASTQ files are downloaded from SRA cloud 20210917
+    # For the others, files are downloaded from MG-RAST 20220122
     fqdump <- FALSE
   } else {
     # Generate input FASTQ files with fastq-dump

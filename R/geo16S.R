@@ -596,6 +596,14 @@ MG16S <- function(which, plot.lines = TRUE, lowest.level = NULL, lineage = NULL,
   AWDM15file <- system.file("extdata/geo16S/AWDM15.csv", package = "JMDplots")
   AWDM15 <- read.csv(AWDM15file)
 
+  # Start a plot if there isn't one 20220122
+  if(is.null(dev.list())) {
+    xylim <- c(-0.22, -0.08)
+    xlab <- quote(italic(Z)[C]~"from metagenome or metatranscriptome")
+    ylab <- quote(italic(Z)[C]~"estimated from 16S rRNA")
+    plot(xylim, xylim, type = "n", xlab = xlab, ylab = ylab)
+  }
+
   if(which == "Guerrero_Negro") {
     ## Guerrero Negro metagenome (Kunin et al., 2008)
     dat_MG <- mplot("Guerrero_Negro", "IMG_MGP", plot.it = FALSE, H2O = H2O)
@@ -814,7 +822,7 @@ MG16S <- function(which, plot.lines = TRUE, lowest.level = NULL, lineage = NULL,
     aa <- read.csv(file.path(ARASTdir, "Guts_AA.csv"))
     # Make sure the 16S and metagenomes are paired correctly
     dat <- AWDM15[AWDM15$Name == "Guts", ]
-    stopifnot(all(paste0(met$Run, ".3") == paste0("mgm", dat$Amplicon)))
+    stopifnot(all(met$Run == paste0("mgm", dat$Amplicon)))
     stopifnot(all(aa$protein == paste0("mgm", dat$Metagenome)))
     # Get ZC values
     if(H2O) metric_16S <- met$nH2O else metric_16S <- met$ZC
@@ -829,12 +837,12 @@ MG16S <- function(which, plot.lines = TRUE, lowest.level = NULL, lineage = NULL,
     aa <- read.csv(file.path(ARASTdir, "Soils_AA.csv"))
     # Put data in same order
     dat <- AWDM15[AWDM15$Name == "Soils", ]
-    imet <- match(paste0("mgm", dat$Amplicon), paste0(met$Run, ".3"))
+    imet <- match(paste0("mgm", dat$Amplicon), met$Run)
     met <- met[imet, ]
     iaa <- match(paste0("mgm", dat$Metagenome), aa$protein)
     aa <- aa[iaa, ]
     # Make sure the 16S and metagenomes are paired correctly
-    stopifnot(all(paste0(met$Run, ".3") == paste0("mgm", dat$Amplicon)))
+    stopifnot(all(met$Run == paste0("mgm", dat$Amplicon)))
     stopifnot(all(aa$protein == paste0("mgm", dat$Metagenome)))
     # Get ZC values
     if(H2O) metric_16S <- met$nH2O else metric_16S <- met$ZC
@@ -1264,8 +1272,9 @@ geo16S_S5 <- function(pdf = FALSE, H2O = FALSE) {
     }
     plot(xylim, xylim, type = "n", xlab = xlab, ylab = ylab)
     lines(xylim, xylim, lty = 2, col = "gray40")
-    dat <- lapply(c("Guerrero_Negro", "ETNP_MG", "ETNP_MT", "Bison_Pool", "Mono_Lake", "Marcellus_Shale", "Manus_Basin", "Black_Sea"),
-      MG16S, plot.lines = FALSE, lowest.level = lowest.level, lineage = lineage, H2O = H2O)
+    cex <- c(1, 1, 1, 1.3, 1, 1, 1.3, 0.8)
+    dat <- mapply(MG16S, which = c("Guerrero_Negro", "ETNP_MG", "ETNP_MT", "Bison_Pool", "Mono_Lake", "Marcellus_Shale", "Manus_Basin", "Black_Sea"),
+                   cex = cex, plot.lines = FALSE, MoreArgs = list(lowest.level = lowest.level, lineage = lineage, H2O = H2O), SIMPLIFY = FALSE)
     lmfun(dat, xylim)
     # Add title and figure label
     title("Various Environments + Marcellus + Manus + Black Sea     ", font.main = 1, cex.main = 1.1, line = 1)

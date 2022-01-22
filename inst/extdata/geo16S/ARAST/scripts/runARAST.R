@@ -5,7 +5,7 @@
 source("ARAST.R")
 
 # Function to calculate amino acid composition from inferred protein sequences
-mkAA <- function(faafiles, outfile, environment) {
+mkAA <- function(faafiles, environment) {
   # Create blank data frame for amino acid composition for each sample
   out <- as.data.frame(matrix(ncol = 25, nrow = length(ID)))
   colnames(out) <- c("protein", "organism", "ref", "abbrv", "chains",
@@ -20,6 +20,7 @@ mkAA <- function(faafiles, outfile, environment) {
     aa <- CHNOSZ::read.fasta(faafiles[i])
     out[i, 5:25] <- colSums(aa[, 5:25])
   }
+  outfile <- paste0(environment, "_AA.csv")
   write.csv(out, outfile, row.names = FALSE, quote = FALSE)
 }
 
@@ -44,7 +45,7 @@ lapply(files, process, techtype = "illumina")
 # The inferred amino acid sequences of protein-coding genes
 faafiles <- paste0("/home/ARAST/work/", ID, ".fasta_coding.faa.gz")
 # Generate table of summed amino acid frequencies for each sample
-mkAA(faafiles, "HMP_AA.csv", "HMP")
+mkAA(faafiles, "HMP")
 
 ########
 ## Process Gut metagenomes (Muegge et al., 2011)
@@ -70,7 +71,7 @@ files <- paste0("/home/ARAST/work/", ID, ".fasta")
 lapply(files, process, techtype = "454")
 
 faafiles <- paste0("/home/ARAST/work/", ID, ".fasta_coding.faa.gz")
-mkAA(faafiles, "Guts_AA.csv", "Guts")
+mkAA(faafiles, "Guts")
 
 ########
 ## Process Soil metagenomes (Fierer et al., 2012)
@@ -79,13 +80,13 @@ mkAA(faafiles, "Guts_AA.csv", "Guts")
 # These fastq files have first 100 MB (1024*1024*100 bytes) of each run
 ID <- c("mgm4477803.3", "mgm4477804.3", "mgm4477805.3", "mgm4477807.3", 
 "mgm4477872.3", "mgm4477873.3", "mgm4477874.3", "mgm4477875.3", 
-"mgm4477876.3", "mgm4477877.3", "mgm4477899.3", "mgm4477902.3", 
-"mgm4477903.3", "mgm4477904.3")
+"mgm4477876.3", "mgm4477877.3", "mgm4477899.3", "mgm4477900.3", "mgm4477901.3",
+"mgm4477902.3", "mgm4477903.3", "mgm4477904.3")
 files <- paste0("/home/ARAST/work/", ID, ".fastq")
 lapply(files, process, techtype = "illumina")
 
 faafiles <- paste0("/home/ARAST/work/", ID, ".fastq_coding.faa.gz")
-mkAA(faafiles, "Soils_AA.csv", "Soils")
+mkAA(faafiles, "Soils")
 
 ########
 ## Process Marcellus metagenomes (Daly et al., 2016)
@@ -98,10 +99,8 @@ ID <- c("SRR3111417", "SRR3111625", "SRR3111724", "SRR3111729", "SRR3111737")
 files <- paste0("/home/ARAST/work/", ID, ".fastq")
 lapply(files, process, techtype = "illumina")
 
-# The inferred amino acid sequences of protein-coding genes
 faafiles <- paste0("/home/ARAST/work/", ID, ".fastq_coding.faa.gz")
-# Generate table of summed amino acid frequencies for each sample
-mkAA(faafiles, "Marcellus_AA.csv", "Marcellus")
+mkAA(faafiles, "Marcellus_Shale")
 
 ########
 ## Process Manus Basin metagenomes (Meier et al., 2017)
@@ -114,8 +113,21 @@ ID <- c("ERR1679394", "ERR1679395", "ERR1679397", "ERR1679396", "ERR1679398")
 files <- paste0("/home/ARAST/work/", ID, ".fastq")
 lapply(files, process, techtype = "illumina")
 
-# The inferred amino acid sequences of protein-coding genes
 faafiles <- paste0("/home/ARAST/work/", ID, ".fastq_coding.faa.gz")
-# Generate table of summed amino acid frequencies for each sample
-mkAA(faafiles, "Manus_AA.csv", "Manus")
+mkAA(faafiles, "Manus_Basin")
 
+########
+## Process Black Sea metagenomes (Villanueva et al., 2021)
+########
+
+# These fastq files have first 500000 sequences (2000000 lines) of each SRA run
+# Depths: c(50, 70, 80, 85, 90, 95, 100, 105, 110, 130, 170, 250, 500, 1000, 2000)
+ID <- c("SRR12347146", "SRR12347145", "SRR12347139", "SRR12347138", "SRR12347137",
+        "SRR12347136", "SRR12347135", "SRR12347134", "SRR12347133", "SRR12347132",
+        "SRR12347144", "SRR12347143", "SRR12347142", "SRR12347141", "SRR12347140")
+
+files <- paste0("/home/ARAST/work/", ID, ".fastq")
+lapply(files, process, techtype = "illumina")
+
+faafiles <- paste0("/home/ARAST/work/", ID, ".fastq_coding.faa.gz")
+mkAA(faafiles, "Black_Sea")
