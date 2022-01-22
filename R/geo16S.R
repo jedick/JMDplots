@@ -604,6 +604,14 @@ MG16S <- function(which, plot.lines = TRUE, lowest.level = NULL, lineage = NULL,
     plot(xylim, xylim, type = "n", xlab = xlab, ylab = ylab)
   }
 
+  # Use semi-transparent colors 20220122
+  c1 <- addalpha(1, "80")
+  c2 <- addalpha(2, "b0")
+  c3 <- addalpha(3, "b0")
+  c4 <- addalpha(4, "b0")
+  c6 <- addalpha(6, "b0")
+  c8 <- addalpha(8, "b0")
+
   if(which == "Guerrero_Negro") {
     ## Guerrero Negro metagenome (Kunin et al., 2008)
     dat_MG <- mplot("Guerrero_Negro", "IMG_MGP", plot.it = FALSE, H2O = H2O)
@@ -675,9 +683,9 @@ MG16S <- function(which, plot.lines = TRUE, lowest.level = NULL, lineage = NULL,
     stopifnot(all.equal(rownames(dat_MG$meancomp), mdat$"Field Code"))
     # Add lines and points
     if(plot.lines) lines(metric_MG, metric_16S)
-    points(metric_MG, metric_16S, pch = 21, bg = "white", cex = cex)
+    points(metric_MG, metric_16S, pch = 21, bg = "transparent", cex = cex)
     # Fill symbol for low-T sample
-    points(metric_MG[5], metric_16S[5], pch = 21, bg = 4, cex = cex)
+    points(metric_MG[5], metric_16S[5], pch = 21, bg = c4, cex = cex)
   }
 
   if(which == "Mono_Lake") {
@@ -753,9 +761,9 @@ MG16S <- function(which, plot.lines = TRUE, lowest.level = NULL, lineage = NULL,
     # Assign colors: blue for < 10 degC, red for > 50 degC
     mdat <- mdat[idat, ]
     col <- rep("white", nrow(mdat))
-    col[mdat$T > 50] <- 2
-    col[mdat$T < 10] <- 4
-    points(metric_MG, metric_16S, pch = 22, bg = col, cex = cex)
+    col[mdat$T > 50] <- c2
+    col[mdat$T < 10] <- c4
+    points(metric_MG, metric_16S, pch = 22, bg = col, col = c1, cex = cex)
   }
 
   if(which == "Black_Sea") {
@@ -776,11 +784,11 @@ MG16S <- function(which, plot.lines = TRUE, lowest.level = NULL, lineage = NULL,
     stopifnot(all(mdat$depth == ID$Depth))
     stopifnot(all(aa$protein == ID$Metagenome))
     # Assign colors and symbols: blue up for < 100 m, red down for >= 100 m
-    col <- rep(4, nrow(mdat))
+    col <- rep(c4, nrow(mdat))
     pch <- rep(24, nrow(mdat))
-    col[mdat$depth >= 100] <- 2
+    col[mdat$depth >= 100] <- c2
     pch[mdat$depth >= 100] <- 25
-    points(metric_MG, metric_16S, pch = pch, bg = col, cex = cex)
+    points(metric_MG, metric_16S, pch = pch, bg = col, col = c1, cex = cex)
   }
 
   if(which == "HMP") {
@@ -801,18 +809,25 @@ MG16S <- function(which, plot.lines = TRUE, lowest.level = NULL, lineage = NULL,
     # Get ZC values
     if(H2O) metric_16S <- met$nH2O else metric_16S <- met$ZC
     if(H2O) metric_MG <- H2OAA(aa) else metric_MG <- ZCAA(aa)
+    # Don't plot MG with low numbers of protein fragments 20220122
+    ilow <- aa$chains < 50000
+    if(any(ilow)) {
+      metric_MG <- metric_MG[!ilow]
+      metric_16S <- metric_16S[!ilow]
+      mdat <- mdat[!ilow, ]
+    }
+    # Remove outliers (exceptionally high ZC in metagenome) 20221215
     if(rm.outliers & !H2O) {
-      # Remove outliers (exceptionlly high ZC in metagenome) 20221215
       iout <- metric_MG > -0.12
       metric_MG <- metric_MG[!iout]
       metric_16S <- metric_16S[!iout]
       mdat <- mdat[!iout, ]
     }
-    # Assign colors: red for GI tract, gray for skin, blue for others
-    col <- rep(8, nrow(mdat))
-    col[mdat$"Body site" == "GI tract"] <- 2
-    col[mdat$"Body site" == "Skin"] <- 4
-    points(metric_MG, metric_16S, pch = 21, bg = col)
+    # Colors: blue (Skin), green (Nasal cavity), gray (Oral cavity), red (GI tract), magenta (UG tract)
+    # Symbols: up triangle (skin, GI tract), circle (Oral cavity), down triangle (Nasal cavity, UG tract)
+    col <- sapply(mdat$"Body site", switch, "Skin" = c4, "Nasal cavity" = c3, "Oral cavity" = c8, "GI tract" = c2, "UG tract" = c6)
+    pch <- sapply(mdat$"Body site", switch, "Skin" = 24, "Nasal cavity" = 25, "Oral cavity" = 21, "GI tract" = 24, "UG tract" = 25)
+    points(metric_MG, metric_16S, pch = pch, bg = col, col = c1)
   }
 
   if(which == "Guts") {
@@ -827,7 +842,7 @@ MG16S <- function(which, plot.lines = TRUE, lowest.level = NULL, lineage = NULL,
     # Get ZC values
     if(H2O) metric_16S <- met$nH2O else metric_16S <- met$ZC
     if(H2O) metric_MG <- H2OAA(aa) else metric_MG <- ZCAA(aa)
-    points(metric_MG, metric_16S, pch = 21, bg = 2, cex = cex)
+    points(metric_MG, metric_16S, pch = 21, bg = c2, col = c1, cex = cex)
   }
 
   if(which == "Soils") {
@@ -847,7 +862,7 @@ MG16S <- function(which, plot.lines = TRUE, lowest.level = NULL, lineage = NULL,
     # Get ZC values
     if(H2O) metric_16S <- met$nH2O else metric_16S <- met$ZC
     if(H2O) metric_MG <- H2OAA(aa) else metric_MG <- ZCAA(aa)
-    points(metric_MG, metric_16S, pch = 21, bg = 4, cex = cex)
+    points(metric_MG, metric_16S, pch = 21, bg = c4, col = c1, cex = cex)
   }
 
   list(metric_MG = metric_MG, metric_16S = metric_16S, ID = ID)
@@ -868,7 +883,7 @@ geo16S5 <- function(pdf = FALSE) {
   ### Panel A: Comparisons with metagenomes analyzed by Dick et al. (2019)
 
   # Start plot A
-  xlab <- quote(italic(Z)[C]~"from metagenome or metatranscriptome")
+  xlab <- quote(italic(Z)[C]~"from shotgun metagenome or metatranscriptome")
   ylab <- quote(italic(Z)[C]~"estimated from 16S rRNA")
   plot(xylim, xylim, type = "n", xlab = xlab, ylab = ylab)
   lines(xylim, xylim, lty = 2, col = "gray40")
@@ -879,7 +894,7 @@ geo16S5 <- function(pdf = FALSE) {
   MG16S("ETNP_MG")
   MG16S("ETNP_MT")
   text(-0.154, -0.181, "ETNP\nwater")
-  BP <- MG16S("Bison_Pool", cex = 1.3)
+  BP <- MG16S("Bison_Pool", cex = 1.4)
   # Make arrows to show outflow channel 20220120
   arrows(BP$metric_MG[1], BP$metric_16S[1], BP$metric_MG[2], BP$metric_16S[2], length = 0.1, col = 2)
   arrows(BP$metric_MG[2], BP$metric_16S[2], BP$metric_MG[3], BP$metric_16S[3], length = 0.1, col = 8)
@@ -915,7 +930,7 @@ geo16S5 <- function(pdf = FALSE) {
   ### Panels B-E: Comparisons with metagenomes analyzed in this study
 
   # Start plot B
-  xlab <- quote(italic(Z)[C]~"from metagenome")
+  xlab <- quote(italic(Z)[C]~"from shotgun metagenome")
   plot(xylim, xylim, type = "n", xlab = xlab, ylab = ylab)
   lines(xylim, xylim, lty = 2, col = "gray40")
   dat <- MG16S("Marcellus_Shale")
@@ -927,11 +942,19 @@ geo16S5 <- function(pdf = FALSE) {
   title("Marcellus Shale Fluids", font.main = 1, cex.main = 1.1)
   label.figure("B", cex = 1.5, font = 2, xfrac = 0.04, yfrac = 0.96)
 
+  # Use semi-transparent colors 20220122
+  c1 <- addalpha(1, "80")
+  c2 <- addalpha(2, "b0")
+  c3 <- addalpha(3, "b0")
+  c4 <- addalpha(4, "b0")
+  c6 <- addalpha(6, "b0")
+  c8 <- addalpha(8, "b0")
+
   # Start plot C
   xlab <- quote(italic(Z)[C]~"from metagenome")
   plot(xylim, xylim, type = "n", xlab = xlab, ylab = ylab)
   lines(xylim, xylim, lty = 2, col = "gray40")
-  dat <- MG16S("Manus_Basin", cex = 1.3)
+  dat <- MG16S("Manus_Basin", cex = 1.4)
   # Plot sample names and O2 concentrations (from Figure S5 of Meier et al., 2017)
   dx <- c(0.010, 0.009, -0.012, -0.008, 0.009)
   dy <- c(0, 0, 0.012, 0, 0)
@@ -941,11 +964,11 @@ geo16S5 <- function(pdf = FALSE) {
   text(dat$metric_MG + dx, dat$metric_16S - 0.009 + dy, O2txt, cex = 0.9)
 
   # Add Black Sea 20220115
-  MG16S("Black_Sea", cex = 0.8)
+  MG16S("Black_Sea", cex = 0.9)
   # Add legends
-  legend("topleft", c("Depth < 100 m", "Depth >= 100 m"), pch = c(24, 25), pt.bg = c(4, 2), pt.cex = 0.8, title = "Black Sea")
+  legend("topleft", c("Depth < 100 m", "Depth >= 100 m"), pch = c(24, 25), pt.bg = c(c4, c2), col = c1, pt.cex = 0.9, title = "Black Sea")
   legend <- as.expression(c(quote(italic(T)~"< 10 \u00B0C"), quote("10 \u00B0C <"~italic(T)~"< 50 \u00B0C"), quote(italic(T)~"> 50 \u00B0C")))
-  legend("bottomright", legend = legend, pch = 22, pt.bg = c(4, "white", 2), pt.cex = 1.3, title = "Manus Basin")
+  legend("bottomright", legend = legend, pch = 22, pt.bg = c(c4, "white", c2), col = c1, pt.cex = 1.3, title = "Manus Basin")
   # Add title and figure label
   title("Manus Basin Vents and Black Sea", font.main = 1, cex.main = 1.1)
   label.figure("C", cex = 1.5, font = 2, xfrac = 0.04, yfrac = 0.96)
@@ -957,7 +980,7 @@ geo16S5 <- function(pdf = FALSE) {
   plot(xlimHMP, xylim, type = "n", xlab = xlab, ylab = ylab)
   lines(xylim, xylim, lty = 2, col = "gray40")
   MG16S("HMP")
-  legend("topleft", c("Skin", "GI tract", "Other sites"), pch = 21, pt.bg = c(4, 2, 8))
+  legend("topleft", c("Skin", "Nasal cavity", "Oral cavity", "GI tract", "UG tract"), pch = c(24, 25, 21, 24, 25), pt.bg = c(c4, c3, c8, c2, c6), col = c1)
   title("Human Microbiome Project", font.main = 1, cex.main = 1.1)
   label.figure("D", cex = 1.5, font = 2, xfrac = 0.04, yfrac = 0.96)
 
@@ -967,7 +990,7 @@ geo16S5 <- function(pdf = FALSE) {
   lines(xylim, xylim, lty = 2, col = "gray40")
   MG16S("Guts")
   MG16S("Soils")
-  legend("topleft", c("Soils", "Guts"), pch = 21, pt.bg = c(4, 2))
+  legend("topleft", c("Soils", "Guts"), pch = 21, pt.bg = c(c4, c2), col = c1)
   title("Soils and Mammalian Guts", font.main = 1, cex.main = 1.1)
   label.figure("E", cex = 1.5, font = 2, xfrac = 0.04, yfrac = 0.96)
 
@@ -1143,10 +1166,7 @@ geo16S_S3 <- function(pdf = FALSE) {
     # Use thicker lines and less transparency for phyla with fewer genera
     if(length(genera) < 50) lwd <- 2 else lwd <- 1
     if(length(genera) < 50) alpha <- "a0" else alpha <- "50"
-    # Add transparency to given color
-    x <- col2rgb(col)
-    newcol <- rgb(x[1], x[2], x[3], maxColorValue = 255)
-    newcol <- paste0(newcol, alpha)
+    newcol <- addalpha(col, alpha)
     for(i in igenera) lines(c(metrics$ZC[iphylum], metrics$ZC[i]), c(metrics$nH2O[iphylum], metrics$nH2O[i]), col = newcol, lwd = lwd)
     lwd
   }
@@ -1272,7 +1292,7 @@ geo16S_S5 <- function(pdf = FALSE, H2O = FALSE) {
     }
     plot(xylim, xylim, type = "n", xlab = xlab, ylab = ylab)
     lines(xylim, xylim, lty = 2, col = "gray40")
-    cex <- c(1, 1, 1, 1.3, 1, 1, 1.3, 0.8)
+    cex <- c(1, 1, 1, 1.4, 1, 1, 1.4, 0.9)
     dat <- mapply(MG16S, which = c("Guerrero_Negro", "ETNP_MG", "ETNP_MT", "Bison_Pool", "Mono_Lake", "Marcellus_Shale", "Manus_Basin", "Black_Sea"),
                    cex = cex, plot.lines = FALSE, MoreArgs = list(lowest.level = lowest.level, lineage = lineage, H2O = H2O), SIMPLIFY = FALSE)
     lmfun(dat, xylim)
@@ -1306,3 +1326,11 @@ geo16S_S5 <- function(pdf = FALSE, H2O = FALSE) {
 
 }
 
+### UNEXPORTED FUNCTION ###
+addalpha <- function(col, alpha) {
+  # Add transparency to given color
+  x <- col2rgb(col)
+  newcol <- rgb(x[1], x[2], x[3], maxColorValue = 255)
+  newcol <- paste0(newcol, alpha)
+  newcol
+}

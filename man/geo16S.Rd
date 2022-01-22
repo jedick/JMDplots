@@ -62,7 +62,7 @@ This table gives a brief description of each plotting function.
 
 \section{Files in extdata/geo16S/ARAST}{
   \describe{
-    \item{\code{*_AA.csv}}{Mean amino acid compositions of protein fragments inferred from metagenomes, produced by \code{runARAST.R} and used in \code{geo16S5}.}
+    \item{\code{*_AA.csv}}{Sum of amino acid compositions of protein fragments inferred from metagenomes, produced by \code{runARAST.R} and used in \code{geo16S5}. The \code{chains} column has the number of protein fragments.}
     \item{\code{scripts/}}{Directory with script files \code{ARAST.R} for the analysis pipeline, \code{runARAST.R} to run the pipeline for each dataset, and supporting Bash and Perl script files. The \code{ARAST.R} file is a modified version of the pipeline used in a previous study (see \code{\link{gradox}}).}
   }
 }
