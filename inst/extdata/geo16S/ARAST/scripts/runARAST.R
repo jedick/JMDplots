@@ -6,6 +6,8 @@ source("ARAST.R")
 
 # Function to calculate amino acid composition from inferred protein sequences
 mkAA <- function(faafiles, environment) {
+  # Get Run IDs from file name
+  ID <- sapply(strsplit(basename(faafiles), ".fast*"), "[", 1)
   # Create blank data frame for amino acid composition for each sample
   out <- as.data.frame(matrix(ncol = 25, nrow = length(ID)))
   colnames(out) <- c("protein", "organism", "ref", "abbrv", "chains",
@@ -28,7 +30,8 @@ mkAA <- function(faafiles, environment) {
 ## Process HMP metagenomes (HMP Consortium, 2012)
 ########
 
-# These fasta files have first 500000 sequences (1000000 lines) of each SRA run
+# These fasta files initially have first 500000 sequences (1000000 lines) of each SRA run
+# (Later iterations use more sequences for specific runs - see Table S3)
 ID <- c(
   # Samples used in Tax4Fun paper
   "SRR059889", "SRR060375", "SRR060433", "SRR060445", "SRR061143", 

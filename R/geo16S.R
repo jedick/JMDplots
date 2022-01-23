@@ -599,7 +599,7 @@ MG16S <- function(which, plot.lines = TRUE, lowest.level = NULL, lineage = NULL,
   # Start a plot if there isn't one 20220122
   if(is.null(dev.list())) {
     xylim <- c(-0.22, -0.08)
-    xlab <- quote(italic(Z)[C]~"from metagenome or metatranscriptome")
+    xlab <- quote(italic(Z)[C]~"from shotgun metagenome or metatranscriptome")
     ylab <- quote(italic(Z)[C]~"estimated from 16S rRNA")
     plot(xylim, xylim, type = "n", xlab = xlab, ylab = ylab)
   }
@@ -607,8 +607,8 @@ MG16S <- function(which, plot.lines = TRUE, lowest.level = NULL, lineage = NULL,
   # Use semi-transparent colors 20220122
   c1 <- addalpha(1, "80")
   c2 <- addalpha(2, "b0")
-  c3 <- addalpha(3, "b0")
   c4 <- addalpha(4, "b0")
+  c5 <- addalpha(5, "b0")
   c6 <- addalpha(6, "b0")
   c8 <- addalpha(8, "b0")
 
@@ -815,17 +815,21 @@ MG16S <- function(which, plot.lines = TRUE, lowest.level = NULL, lineage = NULL,
       metric_MG <- metric_MG[!ilow]
       metric_16S <- metric_16S[!ilow]
       mdat <- mdat[!ilow, ]
+      aa <- aa[!ilow, ]
     }
-    # Remove outliers (exceptionally high ZC in metagenome) 20221215
+    # Remove outliers (anomalously high ZC in metagenome) 20221215
     if(rm.outliers & !H2O) {
       iout <- metric_MG > -0.12
       metric_MG <- metric_MG[!iout]
       metric_16S <- metric_16S[!iout]
       mdat <- mdat[!iout, ]
+      aa <- aa[!iout, ]
     }
+    # Load IDs for identify() 20220123
+    ID <- aa$protein
     # Colors: blue (Skin), green (Nasal cavity), gray (Oral cavity), red (GI tract), magenta (UG tract)
     # Symbols: up triangle (skin, GI tract), circle (Oral cavity), down triangle (Nasal cavity, UG tract)
-    col <- sapply(mdat$"Body site", switch, "Skin" = c4, "Nasal cavity" = c3, "Oral cavity" = c8, "GI tract" = c2, "UG tract" = c6)
+    col <- sapply(mdat$"Body site", switch, "Skin" = c5, "Nasal cavity" = c4, "Oral cavity" = c8, "GI tract" = c2, "UG tract" = c6)
     pch <- sapply(mdat$"Body site", switch, "Skin" = 24, "Nasal cavity" = 25, "Oral cavity" = 21, "GI tract" = 24, "UG tract" = 25)
     points(metric_MG, metric_16S, pch = pch, bg = col, col = c1)
   }
@@ -945,13 +949,13 @@ geo16S5 <- function(pdf = FALSE) {
   # Use semi-transparent colors 20220122
   c1 <- addalpha(1, "80")
   c2 <- addalpha(2, "b0")
-  c3 <- addalpha(3, "b0")
   c4 <- addalpha(4, "b0")
+  c5 <- addalpha(5, "b0")
   c6 <- addalpha(6, "b0")
   c8 <- addalpha(8, "b0")
 
   # Start plot C
-  xlab <- quote(italic(Z)[C]~"from metagenome")
+  xlab <- quote(italic(Z)[C]~"from shotgun metagenome")
   plot(xylim, xylim, type = "n", xlab = xlab, ylab = ylab)
   lines(xylim, xylim, lty = 2, col = "gray40")
   dat <- MG16S("Manus_Basin", cex = 1.4)
@@ -976,16 +980,16 @@ geo16S5 <- function(pdf = FALSE) {
   ### Panels D-E: Plot ZC of 16S vs metagenomes for datasets used in Tax4Fun/PICRUSt papers 20211215
 
   # Start plot D
-  xlab <- quote(italic(Z)[C]~"from metagenome")
+  xlab <- quote(italic(Z)[C]~"from shotgun metagenome")
   plot(xlimHMP, xylim, type = "n", xlab = xlab, ylab = ylab)
   lines(xylim, xylim, lty = 2, col = "gray40")
   MG16S("HMP")
-  legend("topleft", c("Skin", "Nasal cavity", "Oral cavity", "GI tract", "UG tract"), pch = c(24, 25, 21, 24, 25), pt.bg = c(c4, c3, c8, c2, c6), col = c1)
+  legend("topleft", c("Skin", "Nasal cavity", "Oral cavity", "GI tract", "UG tract"), pch = c(24, 25, 21, 24, 25), pt.bg = c(c5, c4, c8, c2, c6), col = c1)
   title("Human Microbiome Project", font.main = 1, cex.main = 1.1)
   label.figure("D", cex = 1.5, font = 2, xfrac = 0.04, yfrac = 0.96)
 
   # Start plot E
-  xlab <- quote(italic(Z)[C]~"from metagenome")
+  xlab <- quote(italic(Z)[C]~"from shotgun metagenome")
   plot(xylim, xylim, type = "n", xlab = xlab, ylab = ylab)
   lines(xylim, xylim, lty = 2, col = "gray40")
   MG16S("Guts")
@@ -1284,10 +1288,10 @@ geo16S_S5 <- function(pdf = FALSE, H2O = FALSE) {
 
     ## Panel 1: Various Environments
     if(H2O) {
-      xlab <- quote(italic(n)[H[2]*O]~"from metagenome or metatranscriptome")
+      xlab <- quote(italic(n)[H[2]*O]~"from shotgun metagenome or metatranscriptome")
       ylab <- quote(italic(n)[H[2]*O]~"estimated from 16S rRNA")
     } else {
-      xlab <- quote(italic(Z)[C]~"from metagenome or metatranscriptome")
+      xlab <- quote(italic(Z)[C]~"from shotgun metagenome or metatranscriptome")
       ylab <- quote(italic(Z)[C]~"estimated from 16S rRNA")
     }
     plot(xylim, xylim, type = "n", xlab = xlab, ylab = ylab)
@@ -1300,7 +1304,7 @@ geo16S_S5 <- function(pdf = FALSE, H2O = FALSE) {
     title("Various Environments + Marcellus + Manus + Black Sea     ", font.main = 1, cex.main = 1.1, line = 1)
 
     ## Panel 2: Human Microbiome Project
-    if(H2O) xlab <- quote(italic(n)[H[2]*O]~"from metagenome") else xlab <- quote(italic(Z)[C]~"from metagenome")
+    if(H2O) xlab <- quote(italic(n)[H[2]*O]~"from shotgun metagenome") else xlab <- quote(italic(Z)[C]~"from shotgun metagenome")
     if(H2O) xylimHMP <- c(-0.95, -0.70) else xylimHMP <- xylim
     plot(xylimHMP, xylimHMP, type = "n", xlab = xlab, ylab = ylab)
     lines(xylimHMP, xylimHMP, lty = 2, col = "gray40")
