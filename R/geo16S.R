@@ -898,34 +898,28 @@ geo16S5 <- function(pdf = FALSE) {
   MG16S("ETNP_MG")
   MG16S("ETNP_MT")
   text(-0.154, -0.181, "ETNP\nwater")
-  BP <- MG16S("Bison_Pool", cex = 1.4)
+  BP <- MG16S("Bison_Pool", cex = 1.4, plot.lines = FALSE)
   # Make arrows to show outflow channel 20220120
-  arrows(BP$metric_MG[1], BP$metric_16S[1], BP$metric_MG[2], BP$metric_16S[2], length = 0.1, col = 2)
-  arrows(BP$metric_MG[2], BP$metric_16S[2], BP$metric_MG[3], BP$metric_16S[3], length = 0.1, col = 8)
-  arrows(BP$metric_MG[3], BP$metric_16S[3], BP$metric_MG[4], BP$metric_16S[4], length = 0.1, col = 4)
-  text(-0.205, -0.193, "Bison\nPool")
+  dx.fraction <- c(0.1, 0.08, 0.08)
+  for(i in 1:3) {
+    x <- BP$metric_MG[i:(i+1)]
+    y <- BP$metric_16S[i:(i+1)]
+    lmxy <- lm(y ~ x)
+    # Find coordinates for a fraction of the line length
+    dx <- diff(x) * dx.fraction[i]
+    xs <- c(x[1] + dx, x[2] - dx)
+    ys <- predict(lmxy, data.frame(x = xs))
+    arrows(xs[1], ys[1], xs[2], ys[2], length = 0.1)
+  }
+#  text(-0.205, -0.193, "Bison\nPool")
+  text(-0.16, -0.212, "Bison Pool")
   text(-0.1905, -0.2172, "Hot spring source", cex = 0.9)
-  text(-0.173, -0.1954, "Outflow channel:", cex = 0.9)
-  text(-0.173, -0.2014, quote(italic(T)~"and"~O[2]~"gradient"), cex = 0.9)
+  text(-0.1875, -0.208, "Outflow channel", cex = 0.9)
   MG16S("Mono_Lake")
   text(-0.178, -0.154, "Mono Lake\nwater")
-  # Empty legends to make box with cut-out 20220115
-  l3 <- legend("topleft", rep("                                ", 3))
-  l1 <- legend("topleft", "                                                 ")
-  # Erase interior lines
-  y <- l1$rect$top - l1$rect$h
-  x1 <- l3$rect$left
-  x2 <- l3$rect$left + l3$rect$w
-  dx <- 0.0002
-  lines(c(x1 + dx, x2 - dx), c(y, y), col = "white", lend = 1, lwd = 1.5)
-  x <- l3$rect$left + l3$rect$w
-  y1 <- l1$rect$top
-  y2 <- l1$rect$top - l1$rect$h
-  dy <- 0.00025
-  lines(c(x, x), c(y1 - dy, y2 + dy), col = "white", lend = 1, lwd = 1.5)
   # Add legend
-  legend("topleft", character(3), pch = c(21, 21, 22), col = c(1, 1, 8), pt.bg = c(4, "white", "white"), bty = "n")
-  ltxt <- as.expression(c(quote("Near-surface and/or high-"*O[2]), "Metagenome", "Metatranscriptome"))
+  legend("topleft", rep("                                ", 3), pch = c(21, 21, 22), col = c(1, 1, 8), pt.bg = c(4, "white", "white"))
+  ltxt <- as.expression(c(quote("Highest "*O[2]), "Metagenome", "Metatranscriptome"))
   legend("topleft", ltxt, pch = c(22, NA, NA), col = c(8, NA, NA), pt.bg = c(4, NA, NA), inset = c(0.025, 0), bty = "n")
   # Add title and figure label
   title("Various Environments", font.main = 1, cex.main = 1.1)
@@ -938,8 +932,9 @@ geo16S5 <- function(pdf = FALSE) {
   plot(xylim, xylim, type = "n", xlab = xlab, ylab = ylab)
   lines(xylim, xylim, lty = 2, col = "gray40")
   dat <- MG16S("Marcellus_Shale")
-  dy <- c(-0.005, -0.005, 0.005, -0.005, -0.005)
-  text(dat$metric_MG, dat$metric_16S + dy, dat$ID$Time)
+  dy <- c(-0.004, 0, 0, -0.005, -0.005)
+  dx <- c(0.007, -0.008, 0.009, 0, 0)
+  text(dat$metric_MG + dx, dat$metric_16S + dy, dat$ID$Time)
   # Add legend
   legend("topleft", c("Injected", "Flowback", "Produced"), pch = 23, pt.bg = c(4, 8, 2))
   # Add title and figure label
