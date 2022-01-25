@@ -14,7 +14,7 @@ mkAA <- function(faafiles, environment) {
     "Ala", "Cys", "Asp", "Glu", "Phe", "Gly", "His", "Ile", "Lys", "Leu",
     "Met", "Asn", "Pro", "Gln", "Arg", "Ser", "Thr", "Val", "Trp", "Tyr"
   )
-  # Put in run ID and environment (HMP, Gut, or Soils)
+  # Put in run ID and environment
   out$protein <- ID
   out$organism <- environment
   # Read each file and calculate amino acid composition
@@ -107,10 +107,10 @@ faafiles <- paste0("/home/ARAST/work/", ID, ".fastq_coding.faa.gz")
 mkAA(faafiles, "Soils")
 
 ########
-## Process Marcellus metagenomes (Daly et al., 2016)
+## Process Marcellus Shale metagenomes (Daly et al., 2016)
 ########
 
-# These fastq files have first 500000 sequences (2000000 lines) of each SRA run
+# These fastq files have first 2500000 sequences (10000000 lines) of each SRA run
 # Time points: input, T7, T13, T82, T328
 ID <- c("SRR3111417", "SRR3111625", "SRR3111724", "SRR3111729", "SRR3111737")
 
@@ -124,7 +124,7 @@ mkAA(faafiles, "Marcellus_Shale")
 ## Process Manus Basin metagenomes (Meier et al., 2017)
 ########
 
-# These fastq files have first 500000 sequences (2000000 lines) of each SRA run
+# These fastq files have first 2500000 sequences (10000000 lines) of each SRA run
 # Samples: NSu-F2b, NSu-F5, Fw-F1b, Fw-F3, RR-F1b
 ID <- c("ERR1679394", "ERR1679395", "ERR1679397", "ERR1679396", "ERR1679398")
 
