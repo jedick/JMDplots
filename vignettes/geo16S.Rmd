@@ -125,7 +125,7 @@ Table_S8 <- geo16S4()
 
 ## Comparison of protein `r ZC` from metagenomic or metatranscriptomic data with estimates from 16S and reference sequences (Figure 5)
 ```{r geo16S5, message = FALSE, results = "hide", out.width='100%', fig.width = 10, fig.height = 6, out.extra = 'class="full-width"', pngquant = pngquant}
-geo16S5()
+Table_S9 <- geo16S5()
 ```
 
 **Data sources:** 
@@ -152,7 +152,7 @@ geo16S_S3()
 
 ## Venn diagrams for phylum and genus names in the RefSeq (NCBI), RDP, and SILVA taxonomies (Figure S4)
 ```{r geo16S_S4, message = FALSE, results = "hide", out.width='80%', fig.align='center', fig.width = 8, fig.height = 6, pngquant = pngquant}
-Table_S9 <- geo16S_S4()
+Table_S10 <- geo16S_S4()
 ```
 
 **Data sources:** **RefSeq (NCBI):** Names of taxa with protein sequences in RefSeq as listed in `system.file("extdata/refseq/taxid_names.csv.xz", package = "JMDplots")`; **RDP:** `trainset18_062020_speciesrank.fa` in <https://sourceforge.net/projects/rdp-classifier/files/RDP_Classifier_TrainingData/RDPClassifier_16S_trainsetNo18_rawtrainingdata.zip>; **SILVA:** <https://www.arb-silva.de/fileadmin/silva_databases/release_138_1/Exports/SILVA_138.1_SSURef_NR99_tax_silva.fasta.gz>.
@@ -161,6 +161,13 @@ Table_S9 <- geo16S_S4()
 ```{r geo16S_S5, message = FALSE, results = "hide", out.width='100%', fig.width = 10, fig.height = 8, out.extra = 'class="full-width"', pngquant = pngquant}
 geo16S_S5()
 ```
+
+## Correlation of `r ZC` with GC content of metagenome and 16S amplicon reads (Figure S6)
+```{r geo16S_S6, message = FALSE, results = "hide", out.width='100%', fig.width = 8, fig.height = 7, pngquant = pngquant}
+geo16S_S6()
+```
+
+**Data source:** <https://trace.ncbi.nlm.nih.gov/Traces/sra/?run=SRR*******>, where `SRR*******` is the SRA Run accession for metagenomic or 16S amplicon sequences.
 
 ## Supplementary Table files
 This code shows how the files for each of the Supplementary Tables is saved.
@@ -171,6 +178,7 @@ write.csv(Table_S6, "Table_S6.csv", row.names = FALSE, quote = FALSE)
 write.csv(Table_S7, "Table_S7.csv", row.names = FALSE, quote = FALSE)
 write.csv(Table_S8, "Table_S8.csv", row.names = FALSE, quote = FALSE)
 write.csv(Table_S9, "Table_S9.csv", row.names = FALSE, quote = FALSE)
+write.csv(Table_S10, "Table_S10.csv", row.names = FALSE, quote = FALSE)
 ```
 
 ## References

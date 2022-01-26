@@ -11,6 +11,7 @@
 \alias{geo16S_S3}
 \alias{geo16S_S4}
 \alias{geo16S_S5}
+\alias{geo16S_S6}
 \title{Plots from geobiochemistry of 16S sequences paper}
 \description{
 Plots from the paper by Dick and Tan (2021).
@@ -27,6 +28,7 @@ Plots from the paper by Dick and Tan (2021).
   geo16S_S3(pdf = FALSE)
   geo16S_S4(pdf = FALSE)
   geo16S_S5(pdf = FALSE, H2O = FALSE)
+  geo16S_S6(pdf = FALSE)
 }
 
 \arguments{
@@ -48,6 +50,7 @@ This table gives a brief description of each plotting function.
   \code{geo16S_S3} \tab \nH2O-\ZC plots for major phyla and their genera \cr
   \code{geo16S_S4} \tab Venn diagrams for phylum and genus names in the RefSeq (NCBI), RDP, and SILVA taxonomies \cr
   \code{geo16S_S5} \tab Correlations between \ZC estimated from metagenomes and 16S rRNA sequences \cr
+  \code{geo16S_S6} \tab Correlation of \ZC with GC content of metagenome and 16S amplicon reads \cr
 }
 
 }
@@ -56,7 +59,7 @@ This table gives a brief description of each plotting function.
   \describe{
     \item{\code{metadata/*.csv}}{Sample metadata for each study.}
     \item{\code{RDP/*.csv.xz}}{RDP Classifier results combined into a single CSV file for each study, created with the \code{mkRDP} function in the \code{process.R} script (\code{\link{chem16S}}).}
-    \item{\code{AWDM15.csv}}{Accession numbers and sample descriptions for the Human Microbiome Project, Soils, and Mammalian Guts datasets taken from Supplementary Material of Aßhauer et al. (2015) and used in \code{geo16S5}.}
+    \item{\code{AWDM15.csv}}{Accession numbers and sample descriptions for the Human Microbiome Project, Soils, and Mammalian Guts datasets taken from Supplementary Material of Aßhauer et al. (2015) and used in \code{geo16S5}. GC content for metagenome and 16S amplicon reads was taken from \code{https://trace.ncbi.nlm.nih.gov/Traces/sra/?run=SRR*******}.}
   }
 }
 

@@ -588,11 +588,9 @@ geo16S4 <- function(pdf = FALSE) {
 # Use H2O = FALSE for ZC, H2O = TRUE for nH2O
 MG16S <- function(which, plot.lines = TRUE, lowest.level = NULL, lineage = NULL, rm.outliers = FALSE, H2O = FALSE, cex = 1) {
 
-  # To return NULL ID unless it is set below
-  ID <- NULL
   # For MG datasets analyzed in this study (others are from gradox paper)
   ARASTdir <- system.file("extdata/geo16S/ARAST", package = "JMDplots")
-  # Read data for paired metagenomes and amplicon sequences from Tax4Fun paper (Aßhauer et al., 2015)
+  # Read data for paired metagenomes and amplicon sequences expanded from Tax4Fun paper (Aßhauer et al., 2015)
   AWDM15file <- system.file("extdata/geo16S/AWDM15.csv", package = "JMDplots")
   AWDM15 <- read.csv(AWDM15file)
 
@@ -629,9 +627,10 @@ MG16S <- function(which, plot.lines = TRUE, lowest.level = NULL, lineage = NULL,
     # Fill symbol for most oxidized (surface) sample
     points(metric_MG[1], metric_16S[1], pch = 21, bg = 4, cex = cex)
     # Get sample name and ID for Supplemental Table 20220125
-    Sample <- mdat$depth
-    Amplicon <- mdat$Run
-    Metagenome <- mdat$Run
+    Sample <- mdat$sample
+    Amplicon <- mdat$GenBank
+    gradox_S1 <- read.csv(system.file("extdata/gradox/Table_S1.csv", package = "JMDplots"))
+    Metagenome <- gradox_S1$ID[gradox_S1$study.name == "Guerrero_Negro"]
   }
 
   if(which == "ETNP_MG") {
@@ -656,8 +655,8 @@ MG16S <- function(which, plot.lines = TRUE, lowest.level = NULL, lineage = NULL,
     # Get sample name and ID for Supplemental Table 20220125
     Sample <- paste0(mdat$depth, "m_", mdat$size)
     Amplicon <- mdat$Run
-    # TODO: Run IDs aren't listed by mplot()
-    Metagenome <- rep(NA, length(Amplicon))
+    gradox_S1 <- read.csv(system.file("extdata/gradox/Table_S1.csv", package = "JMDplots"))
+    Metagenome <- gradox_S1$ID[gradox_S1$study.name == "ETNP_OMZ" & gradox_S1$type == "MG"]
   }
 
   if(which == "ETNP_MT") {
@@ -684,7 +683,8 @@ MG16S <- function(which, plot.lines = TRUE, lowest.level = NULL, lineage = NULL,
     # Get sample name and ID for Supplemental Table 20220125
     Sample <- paste0(mdat$depth, "m_", mdat$size)
     Amplicon <- mdat$Run
-    Metagenome <- rep(NA, length(Amplicon))
+    gradox_S1 <- read.csv(system.file("extdata/gradox/Table_S1.csv", package = "JMDplots"))
+    Metagenome <- gradox_S1$ID[gradox_S1$study.name == "ETNP_OMZ" & gradox_S1$type == "MT"]
   }
 
   if(which == "Bison_Pool") {
@@ -705,9 +705,11 @@ MG16S <- function(which, plot.lines = TRUE, lowest.level = NULL, lineage = NULL,
     # Fill symbol for low-T sample
     points(metric_MG[5], metric_16S[5], pch = 21, bg = c4, cex = cex)
     # Get sample name and ID for Supplemental Table 20220125
-    Sample <- paste0(mdat$Sample)
+    gradox_S1 <- read.csv(system.file("extdata/gradox/Table_S1.csv", package = "JMDplots"))
+    Library <- sapply(strsplit(gradox_S1$sample.description[gradox_S1$study.name == "Bison_Pool"], " "), "tail", 1)
+    Sample <- paste0("Site ", mdat$Sample, " (", mdat$`Field Code`, ") (", Library, ")")
     Amplicon <- mdat$Run
-    Metagenome <- rep(NA, length(Amplicon))
+    Metagenome <- gradox_S1$ID[gradox_S1$study.name == "Bison_Pool"]
   }
 
   if(which == "Mono_Lake") {
@@ -731,7 +733,8 @@ MG16S <- function(which, plot.lines = TRUE, lowest.level = NULL, lineage = NULL,
     # Get sample name and ID for Supplemental Table 20220125
     Sample <- paste0(mdat$sample)
     Amplicon <- mdat$Run
-    Metagenome <- rep(NA, length(Amplicon))
+    gradox_S1 <- read.csv(system.file("extdata/gradox/Table_S1.csv", package = "JMDplots"))
+    Metagenome <- gradox_S1$ID[gradox_S1$study.name == "Mono_Lake"]
   }
 
   if(which == "Marcellus_Shale") {
@@ -746,6 +749,9 @@ MG16S <- function(which, plot.lines = TRUE, lowest.level = NULL, lineage = NULL,
     # List run IDs here
     Metagenome = c("SRR3111417", "SRR3111625", "SRR3111724", "SRR3111729", "SRR3111737")
     Amplicon = c("SRR1184016", "SRR1184060", "SRR1184062", "SRR1184081", "SRR1184083")
+    # GC content from https://trace.ncbi.nlm.nih.gov/Traces/sra/?run=SRR******* 20220126
+    GC_MG <- c(58.4, 37.7, 57, 39.6, 53.1)
+    GC_16S <- c(53.9, 55, 54.8, 51.8, 53.2)
     ## 16S replicate 2
     #Amplicon2 = c("SRR1184049", "SRR1184061", "SRR1184063", "SRR1184082", "SRR1184084")
     # Make sure metagenomes are in correct order
@@ -1364,6 +1370,142 @@ geo16S_S5 <- function(pdf = FALSE, H2O = FALSE) {
     dat <- lapply(c("Guts", "Soils"), MG16S, plot.lines = FALSE, lowest.level = lowest.level, lineage = lineage, H2O = H2O)
     lmfun(dat, xylim)
     title("Soils and Mammalian Guts", font.main = 1, cex.main = 1.1, line = 1)
+
+  }
+
+  if(pdf) dev.off()
+
+}
+
+# Correlation of ZC with GC content of metagenome and 16S amplicon reads 20220126
+geo16S_S6 <- function(pdf = FALSE) {
+
+  if(pdf) pdf("geo16S_S6.pdf", width = 8, height = 7)
+  par(mfrow = c(2, 2))
+  par(mar = c(4, 4, 2, 1))
+  par(mgp = c(2.8, 1, 0))
+
+  # Change these to extract specific parts of the taxonomy
+  lowest.level <- NULL
+  lineage <- NULL
+
+  # For MG datasets analyzed in this study (others are from gradox paper)
+  ARASTdir <- system.file("extdata/geo16S/ARAST", package = "JMDplots")
+  # Read data for paired metagenomes and amplicon sequences expanded from Tax4Fun paper (Aßhauer et al., 2015)
+  AWDM15file <- system.file("extdata/geo16S/AWDM15.csv", package = "JMDplots")
+  AWDM15 <- read.csv(AWDM15file)
+
+  # Use semi-transparent colors 20220122
+  c1 <- addalpha(1, "80")
+  c2 <- addalpha(2, "b0")
+  c4 <- addalpha(4, "b0")
+  c5 <- addalpha(5, "b0")
+  c6 <- addalpha(6, "b0")
+  c8 <- addalpha(8, "b0")
+
+  for(name in c("Marcellus", "HMP")) {
+
+    if(name == "HMP") {
+      # HMP 16S
+      mdat <- getmdat("HMP12")
+      met <- getmetrics("HMP12", mdat = mdat, lowest.level = lowest.level, lineage = lineage)
+      # HMP metagenomes
+      aa <- read.csv(file.path(ARASTdir, "HMP_AA.csv"))
+      # Put data in same order
+      dat <- AWDM15[AWDM15$Name == "HMP", ]
+      imet <- match(dat$Amplicon, met$Run)
+      met <- met[imet, ]
+      iaa <- match(dat$Metagenome, aa$protein)
+      aa <- aa[iaa, ]
+      # Make sure the 16S and metagenomes are paired correctly
+      stopifnot(all(na.omit(met$Run == dat$Amplicon)))
+      stopifnot(all(aa$protein == dat$Metagenome))
+      # Don't plot MG with low numbers of protein fragments 20220122
+      ilow <- aa$chains < 50000
+      if(any(ilow)) {
+        mdat <- mdat[!ilow, ]
+        met <- met[!ilow, ]
+        aa <- aa[!ilow, ]
+        dat <- dat[!ilow, ]
+      }
+      # Get ZC
+      ZC_16S <- met$ZC
+      ZC_MG <- ZCAA(aa)
+      # Get GC
+      GC_16S <- dat$GC_16S
+      GC_MG <- dat$GC_MG
+      # Colors: blue (Skin), green (Nasal cavity), gray (Oral cavity), red (GI tract), magenta (UG tract)
+      col <- sapply(mdat$"Body site", switch, "Skin" = c5, "Nasal cavity" = c4, "Oral cavity" = c8, "GI tract" = c2, "UG tract" = c6)
+      # Symbols: up triangle (skin, GI tract), circle (Oral cavity), down triangle (Nasal cavity, UG tract)
+      pch <- sapply(mdat$"Body site", switch, "Skin" = 24, "Nasal cavity" = 25, "Oral cavity" = 21, "GI tract" = 24, "UG tract" = 25)
+      legend.x <- "bottomright"
+    }
+
+    if(name == "Marcellus") {
+      ## Marcellus metagenomes (Daly et al., 2016) 20211218
+      aa <- read.csv(file.path(ARASTdir, "Marcellus_Shale_AA.csv"))
+      ZC_MG <- ZCAA(aa)
+      # Marcellus 16S (Cluff et al., 2014)
+      mdat <- getmdat("CHM+14")
+      dat_16S <- getmetrics("CHM+14", mdat = mdat, lowest.level = lowest.level, lineage = lineage)
+      # Time points: input, T7, T13, T82, T328
+      Sample = paste("Day", c(0, 7, 13, 82, 328))
+      # List run IDs here
+      Metagenome = c("SRR3111417", "SRR3111625", "SRR3111724", "SRR3111729", "SRR3111737")
+      Amplicon = c("SRR1184016", "SRR1184060", "SRR1184062", "SRR1184081", "SRR1184083")
+      # GC content from https://trace.ncbi.nlm.nih.gov/Traces/sra/?run=SRR******* 20220126
+      GC_MG <- c(58.4, 37.7, 57, 39.6, 53.1)
+      GC_16S <- c(53.9, 55, 54.8, 51.8, 53.2)
+      # Make sure metagenomes are in correct order
+      stopifnot(all(aa$protein == Metagenome))
+      # Get 16S runs corresponding to metagenomes
+      idat <- match(Amplicon, dat_16S$Run)
+      dat_16S <- dat_16S[idat, ]
+      ZC_16S <- dat_16S$ZC
+      # Assign colors: open circle for injected fluid, gray for flowback, red for produced
+      mdat <- mdat[idat, ]
+      col <- rep(4, nrow(mdat))
+      col[mdat$type == "flowback fluid"] <- 8
+      col[mdat$type == "produced fluid"] <- 2
+      pch <- 23
+      legend.x <- "topleft"
+    }
+
+  #  ## Plot A: GC 16S vs GC MG
+  #  plot(range(GC_MG), range(GC_16S), xlab = "GC content of shotgun metagenome reads (%)", ylab = "GC content of 16S amplicon reads (%)", type = "n")
+  #  points(GC_MG, GC_16S, pch = pch, bg = col, col = c1)
+
+    lmfun <- function(x, y) {
+      # Add points and linear regression
+      thislm <- lm(y ~ x)
+      lines(range(x), predict(thislm, data.frame(x = range(x))), col = "#00000080")
+      # Show R2 and slope
+      R2 <- summary(thislm)$r.squared
+      R2txt <- bquote(italic(R)^2 == .(formatC(R2, digits = 3, format = "f")))
+      R2txt
+    }
+
+    ## Plot A: ZC MG vs GC MG
+    plot(range(GC_MG), range(ZC_MG, na.rm = TRUE), xlab = "%GC content - metagenome", ylab = quote("Protein"~italic(Z)[C]~"- metagenome"), type = "n")
+    points(GC_MG, ZC_MG, pch = pch, bg = col, col = c1)
+    R2txt <- lmfun(GC_MG, ZC_MG)
+    legend(legend.x, legend = R2txt, bty = "n")
+
+    if(name == "Marcellus") legend("bottomright", c("Injected", "Flowback", "Produced"), pch = 23, pt.bg = c(4, 8, 2))
+
+    ## Plot B: ZC 16S vs GC 16S
+    plot(range(GC_16S), range(ZC_16S, na.rm = TRUE), xlab = "%GC content - 16S amplicon", ylab = quote("Protein"~italic(Z)[C]~"- 16S amplicon"), type = "n")
+    points(GC_16S, ZC_16S, pch = pch, bg = col, col = c1)
+    R2txt <- lmfun(GC_16S, ZC_16S)
+    legend(legend.x, legend = R2txt, bty = "n")
+
+    if(name == "HMP") legend("topleft", c("Skin", "Nasal cavity", "Oral cavity", "GI tract", "UG tract"), pch = c(24, 25, 21, 24, 25), pt.bg = c(c5, c4, c8, c2, c6), col = c1)
+
+    # Add title
+    par(xpd = NA)
+    if(name == "Marcellus") title("A. Marcellus Shale                                                                                       ")
+    if(name == "HMP") title("B. Human Microbiome Project                                                                                       ")
+    par(xpd = FALSE)
 
   }
 

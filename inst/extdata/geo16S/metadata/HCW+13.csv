@@ -1,11 +1,11 @@
-study,name,Run,BioSample,sample,depth,zone
-HCW+13,"Guerrero Negro microbial mat",GN_layer_01,NA,GN_layer_01,0-1,A
-HCW+13,"Guerrero Negro microbial mat",GN_layer_02,NA,GN_layer_02,1-2,A
-HCW+13,"Guerrero Negro microbial mat",GN_layer_03,NA,GN_layer_03,2-3,A
-HCW+13,"Guerrero Negro microbial mat",GN_layer_04,NA,GN_layer_04,3-4,B
-HCW+13,"Guerrero Negro microbial mat",GN_layer_05,NA,GN_layer_05,4-5,B
-HCW+13,"Guerrero Negro microbial mat",GN_layer_06,NA,GN_layer_06,5-6,B
-HCW+13,"Guerrero Negro microbial mat",GN_layer_07,NA,GN_layer_07,6-10,C
-HCW+13,"Guerrero Negro microbial mat",GN_layer_08,NA,GN_layer_08,10-22,C
-HCW+13,"Guerrero Negro microbial mat",GN_layer_09,NA,GN_layer_09,22-34,C
-HCW+13,"Guerrero Negro microbial mat",GN_layer_10,NA,GN_layer_10,34-49,C
+study,name,Run,BioSample,GenBank,sample,depth,zone
+HCW+13,"Guerrero Negro microbial mat",GN_layer_01,NA,JN427016-JN437545,GN_layer_01,0-1,A
+HCW+13,"Guerrero Negro microbial mat",GN_layer_02,NA,JN437546-JN448704,GN_layer_02,1-2,A
+HCW+13,"Guerrero Negro microbial mat",GN_layer_03,NA,JN448705-JN460048,GN_layer_03,2-3,A
+HCW+13,"Guerrero Negro microbial mat",GN_layer_04,NA,JN460049-JN471530,GN_layer_04,3-4,B
+HCW+13,"Guerrero Negro microbial mat",GN_layer_05,NA,JN471531-JN482996,GN_layer_05,4-5,B
+HCW+13,"Guerrero Negro microbial mat",GN_layer_06,NA,JN482997-JN492304,GN_layer_06,5-6,B
+HCW+13,"Guerrero Negro microbial mat",GN_layer_07,NA,JN492305-JN505215,GN_layer_07,6-10,C
+HCW+13,"Guerrero Negro microbial mat",GN_layer_08,NA,JN505216-JN516352,GN_layer_08,10-22,C
+HCW+13,"Guerrero Negro microbial mat",GN_layer_09,NA,JN516353-JN528421,GN_layer_09,22-34,C
+HCW+13,"Guerrero Negro microbial mat",GN_layer_10,NA,JN528422-JN539989,GN_layer_10,34-49,C
