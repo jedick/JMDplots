@@ -86,7 +86,7 @@ geo16S2 <- function(pdf = FALSE) {
   legend <- c("< 6", "6-20", "> 20")
   legend("bottomright", legend, pch = c(24, 20, 21), col = c(1, 1, 1), pt.bg = c(3, NA, 4), bg = "white", title = "Salinity")
 
-  p4 <- plotmet("MPB+17", title = FALSE, points = FALSE, ylim = c(-0.777, -0.725))
+  p4 <- plotmet("MPB+17", title = FALSE, points = FALSE)
 #  title("Manus Basin submarine vents\nMeier et al., 2017", font.main = 1)
   title("Manus Basin submarine vents", font.main = 1)
   addhull(p4$ZC, p4$nH2O, 2, TRUE, lty = 2)
@@ -111,12 +111,12 @@ geo16S2 <- function(pdf = FALSE) {
   legend <- c("Oxic", "Transition", "Anoxic")
   legend("bottomright", legend, pch = c(24, 20, 25), pt.bg = c(4, 1, 2), bg = "white")
 
-  p7 <- plotmet("HCW+13", title = FALSE, points = FALSE, ylim = c(-0.767, -0.7578))
+  p7 <- plotmet("HCW+13", title = FALSE, points = FALSE, ylim = c(-0.7685, -0.7585))
 #  title("Guerrero Negro mat layers\nHarris et al., 2013", font.main = 1)
   title("Guerrero Negro mat layers", font.main = 1)
   addhull(p7$ZC, p7$nH2O, "tan1", TRUE, lty = 2)
   pointfun(p7)
-  text(c(-0.1512, -0.1575, -0.1576), c(-0.7581, -0.7635, -0.7669), c("0-1 mm", "1-2 mm", "2-3 mm"))
+  text(c(-0.1512, -0.1572, -0.1576), c(-0.7587, -0.7645, -0.7684), c("0-1 mm", "1-2 mm", "2-3 mm"))
   legend <- c("Photic/oxic", "Low sulfide", "High sulfide")
   legend("topleft", legend, pch = c(24, 20, 25), pt.bg = c(4, 1, 2), bg = "white")
 
@@ -224,7 +224,7 @@ geo16S3 <- function(pdf = FALSE) {
       next
     }
     # ZC range for plots
-    if(study[i] == "BCA+21") ZClim <- c(-0.180, -0.145) else ZClim <- c(-0.175, -0.140)
+    if(study[i] == "BCA+21") ZClim <- c(-0.180, -0.145) else ZClim <- c(-0.170, -0.140)
     if(study[i] == "__BSMG__") {
       ## Get data for Black Sea metagenome
       ARASTdir <- system.file("extdata/geo16S/ARAST", package = "JMDplots")
@@ -284,9 +284,9 @@ geo16S3 <- function(pdf = FALSE) {
         axis(2, at = seq(100, 700, 100), labels = c(100, 200, 300, 400, 500, 1000, 2000), gap.axis = 0)
         # Plot y-axis break 20210715
         par(xpd = NA)
-        rect(-0.177, 557, -0.175, 542, col = "white", border = NA)
-        text(-0.1764, 542, "/", srt = 90)
-        text(-0.1764, 556, "/", srt = 90)
+        rect(-0.172, 557, -0.168, 542, col = "white", border = NA)
+        text(-0.1712, 542, "/", srt = 90)
+        text(-0.1712, 556, "/", srt = 90)
         par(xpd = FALSE)
       } else plot(ZC, depth, xlim = ZClim, ylim = ylim, xlab = axis.label("ZC"), ylab = "Depth (m)", type = "b")
     } else {
@@ -345,11 +345,11 @@ geo16S3 <- function(pdf = FALSE) {
     rtxt <- bquote(rho == .(formatC(spearman, digits = 2, format = "f")))
     if(grepl("ETNP", title[i])) {
       # For ETNP, put the correlations next to the lines for different size fractions
-      if(newplot) text(ZClim[2], ylim[1], rtxt, adj = c(3, 0))
-      else text(ZClim[2], ylim[1], rtxt, adj = c(1.9, 0))
+      if(newplot) text(ZClim[2], ylim[1], rtxt, adj = c(3, 0.1))
+      else text(ZClim[2], ylim[1], rtxt, adj = c(1.9, 0.1))
     } else {
-      if(grepl("Outside", subtitle[i])) text(ZClim[1], ylim[1], rtxt, adj = c(0, 0))
-      else text(ZClim[2], ylim[1], rtxt, adj = c(1, 0))
+      if(grepl("Outside", subtitle[i])) text(ZClim[1], ylim[1], rtxt, adj = c(0, 0.1))
+      else text(ZClim[2], ylim[1], rtxt, adj = c(1, 0.1))
     }
 
     # Assemble the data for Supplementary Table
@@ -412,7 +412,7 @@ geo16S4 <- function(pdf = FALSE) {
 
   studies <- c("UKD+18.water_2014", "UKD+18.sediment_2014", "MMA+20_spring", "MMA+20_fall")
   # Start plot
-  plot(c(-0.148, -0.139), c(-0.75, -0.735), type = "n", xlab = cplab$ZC, ylab = cplab$nH2O)
+  plot(c(-0.148, -0.140), c(-0.748, -0.735), type = "n", xlab = cplab$ZC, ylab = cplab$nH2O)
   pch <- 21:25
   xadj <- c(0.5, 0.5, 0.5, -0.5)
   yadj <- c(-0.8, -0.8, -0.8, 0.5)
@@ -437,10 +437,10 @@ geo16S4 <- function(pdf = FALSE) {
     outB[[i]] <- pm
   }
   # Add labels
-  text(-0.142, -0.7403, "NW PA\nstreams (2014)")
-  text(-0.1465, -0.744, "NW PA\nsediment (2014)")
-  text(-0.1415, -0.7465, "PASF streams (spring)")
-  text(-0.1421, -0.7485, "PASF streams (fall)")
+  text(-0.143, -0.7393, "NW PA\nstreams (2014)")
+  text(-0.1468, -0.7433, "NW PA\nsediment (2014)")
+  text(-0.1428, -0.7455, "PASF streams (spring)")
+  text(-0.1432, -0.7473, "PASF streams (fall)")
   # Add legend
   legend("topleft", c("MSA- or lowest disturbance", "MSA+ or highest disturbance"), pch = c(21, 21), pt.bg = c("#ffffffa0", "#df536ba0"), pt.cex = c(1.4, 1.7), lwd = 2, lty = NA)
   label.figure("B", cex = 1.5, xfrac = 0.03, font = 2)
@@ -473,14 +473,15 @@ geo16S4 <- function(pdf = FALSE) {
     # Plot number of samples next to points 20210902
     n1 <- length(pm$ZC[i1])
     n2 <- length(pm$ZC[i2])
-    text(means$ZC1, means$nH2O1, n1, adj = c(-1, 0.5))
+    if(i == 3) adj <- c(-1, 1) else adj <- c(-1, 0.5)
+    text(means$ZC1, means$nH2O1, n1, adj = adj)
     text(means$ZC2, means$nH2O2, n2, adj = c(0.2, -1))
     outD[[i]] <- pm
   }
   # Add labels
   text(-0.168, -0.726, "Marcellus Shale")
-  text(-0.204, -0.7295, "Denver-Julesburg Basin")
-  text(-0.174, -0.744, "Duvernay Formation")
+  text(-0.202, -0.731, "Denver-Julesburg Basin")
+  text(-0.172, -0.745, "Duvernay Formation")
   # Add legend
   legend("topright", c("Source water\nor injected fluids", "Produced water"), pch = c(21, 21), pt.bg = c("#ffffffa0", "#df536ba0"), pt.cex = c(1.4, 1.7), lwd = 2, lty = NA)
   label.figure("D", cex = 1.5, xfrac = 0.03, font = 2)
@@ -554,7 +555,7 @@ geo16S4 <- function(pdf = FALSE) {
 
   # Setup plot
   nsamp <- length(DZC)
-  par(mar = c(4, 12, 3, 0.2), las = 1)
+  par(mar = c(4, 12, 3, 0.5), las = 1)
   plot(c(min(DZC), 0.01), c(nsamp + 0.5, 0.5), ylim = c(nsamp + 0.5, 0.5), yaxs = "i", yaxt = "n", ylab = "", xlab = cplab$DZC, type = "n")
   title("Mean differences between oxidized                         ", font.main = 1, line = 1.6)
   title("and reduced sample groups                         ", font.main = 1, line = 0.5)
@@ -937,7 +938,7 @@ geo16S5 <- function(pdf = FALSE) {
   text(-0.135, -0.174, "Guerrero\nNegro\nmat")
   out2 <- MG16S("ETNP_MG")
   out3 <- MG16S("ETNP_MT")
-  text(-0.154, -0.181, "ETNP\nwater")
+  text(-0.172, -0.160, "ETNP water")
   out4 <- MG16S("Bison_Pool", cex = 1.4, plot.lines = FALSE)
   # Make arrows to show outflow channel 20220120
   dx.fraction <- c(0.1, 0.08, 0.08)
@@ -951,12 +952,11 @@ geo16S5 <- function(pdf = FALSE) {
     ys <- predict(lmxy, data.frame(x = xs))
     arrows(xs[1], ys[1], xs[2], ys[2], length = 0.1)
   }
-#  text(-0.205, -0.193, "Bison\nPool")
   text(-0.16, -0.212, "Bison Pool")
   text(-0.1905, -0.2172, "Hot spring source", cex = 0.9)
   text(-0.1875, -0.208, "Outflow channel", cex = 0.9)
   out5 <- MG16S("Mono_Lake")
-  text(-0.178, -0.154, "Mono Lake\nwater")
+  text(-0.182, -0.148, "Mono Lake water")
   # Add legend
   legend("topleft", rep("                                ", 3), pch = c(21, 21, 22), col = c(1, 1, 8), pt.bg = c(4, "white", "white"))
   ltxt <- as.expression(c(quote("Highest "*O[2]), "Metagenome", "Metatranscriptome"))
@@ -995,8 +995,8 @@ geo16S5 <- function(pdf = FALSE) {
   lines(xylim, xylim, lty = 2, col = "gray40")
   out7 <- MG16S("Manus_Basin", cex = 1.4)
   # Plot sample names and O2 concentrations (from Figure S5 of Meier et al., 2017)
-  dx <- c(0.010, 0.009, -0.012, -0.008, 0.009)
-  dy <- c(0, 0, 0.012, 0, 0)
+  dx <- c(0.010, 0.009, -0.012, -0.008, 0.007)
+  dy <- c(0, 0, 0.012, 0, -0.0018)
   samptxt <- substr(out7$Sample, 7, 13)
   text(out7$metric_MG + dx, out7$metric_16S - 0.004 + dy, samptxt, cex = 0.9)
   O2txt <- as.expression(c(quote(0.07~"mM"~O[2]), quote(0.14~"mM"~O[2]), quote(0.17~"mM"~O[2]), quote("ND"~O[2]), quote(0.2~"mM"~O[2])))
@@ -1131,7 +1131,7 @@ geo16S_S2 <- function(pdf = FALSE) {
     # Lookup these taxa in the metrics table
     imetrics <- match(names[, icol][isrank], thismet$group)
     # Make sure all taxa are in this rank
-    stopifnot(identical(unique(thismet$rank[imetrics]), rank))
+    stopifnot(all(na.omit(unique(thismet$rank[imetrics])) %in% rank))
     # Store ZC and nH2O values
     ZC[[rank]][isrank] <- thismet$ZC[imetrics]
     names(ZC[[rank]])[isrank] <- names[, icol][isrank]
@@ -1139,9 +1139,9 @@ geo16S_S2 <- function(pdf = FALSE) {
     names(nH2O[[rank]])[isrank] <- names[, icol][isrank]
   }
 
-  # Print number of genera
-  ngenus <- length(names(ZC[["genus"]]))
-  print(paste("There are", ngenus, "genera"))
+#  # Print number of genera
+#  ngenus <- length(names(ZC[["genus"]]))
+#  print(paste("There are", ngenus, "genera"))
 
   # Make plots
   par(mfrow = c(2, 5))
@@ -1199,6 +1199,7 @@ geo16S_S3 <- function(pdf = FALSE) {
 
   par(mfrow = c(1, 2))
   par(mar = c(4, 4, 2, 1))
+  par(cex = 1.2)
   xlim <- c(-0.3, 0)
   ylim <- c(-0.85, -0.65)
 
@@ -1206,7 +1207,6 @@ geo16S_S3 <- function(pdf = FALSE) {
   names <- read.csv(system.file("extdata/refseq/taxid_names.csv.xz", package = "JMDplots"))
   # Only keep taxa with non-NA genus and phylum
   names <- names[!(is.na(names$genus) | is.na(names$phylum)), ]
-
 
   # Plot phylum connected to all genera
   plotit <- function(phylum, col = 1) {
@@ -1238,6 +1238,14 @@ geo16S_S3 <- function(pdf = FALSE) {
   plot(xlim, ylim, xlab = canprot::cplab$ZC, ylab = canprot::cplab$nH2O, type = "n", xaxs = "i", yaxs = "i")
   lwd <- lapply(9:16, function(i) {plotit(phyla$group[i], col = i)} )
   legend("topright", phyla$group[9:16], col = 1:8, lwd = lwd, cex = 0.9, bg = "white")
+
+#  # Plot 8 more phyla 20220126
+#  phyla <- metrics[metrics$rank == "phylum" & metrics$parent != "Viruses", ]
+#  phyla <- phyla[phyla$ntaxa > 20 & phyla$ntaxa <= 60, ]
+#  phyla <- phyla[order(phyla$ntaxa, decreasing = TRUE), ]
+#  plot(xlim, ylim, xlab = canprot::cplab$ZC, ylab = canprot::cplab$nH2O, type = "n", xaxs = "i", yaxs = "i")
+#  lwd <- lapply(1:8, function(i) {plotit(phyla$group[i], col = i)} )
+#  legend("topright", phyla$group[1:8], col = 1:8, lwd = lwd, cex = 0.9, bg = "white")
 
   if(pdf) dev.off()
 
@@ -1377,7 +1385,7 @@ geo16S_S5 <- function(pdf = FALSE, H2O = FALSE) {
 
 }
 
-# Correlation of ZC with GC content of metagenome and 16S amplicon reads 20220126
+# Correlation of ZC with GC content of metagenomic and 16S amplicon reads 20220126
 geo16S_S6 <- function(pdf = FALSE) {
 
   if(pdf) pdf("geo16S_S6.pdf", width = 8, height = 7)

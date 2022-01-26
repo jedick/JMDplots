@@ -19,6 +19,12 @@ mkAA <- function(ranks = c("genus", "family", "order", "class", "phylum", "super
   isspecies <- !is.na(taxa$species)
   refseq <- refseq[isspecies, ]
   taxa <- taxa[isspecies, ]
+  # Exclude Bacteria and Archaea species with less than 500 sequences
+  ivirus <- taxa$superkingdom == "Viruses"
+  ivirus[is.na(ivirus)] <- FALSE
+  ilow <- refseq$chains < 500 & !ivirus
+  refseq <- refseq[!ilow, ]
+  taxa <- taxa[!ilow, ]
   # Divide by number of reference sequences in each species to get mean AA composition per protein 20210605
   refseq[, 5:25] <- refseq[, 5:25] / refseq$chains
 
@@ -76,7 +82,9 @@ mkAA <- function(ranks = c("genus", "family", "order", "class", "phylum", "super
 
     if(rank == "genus") {
       # Add individual taxids that are used for RDP-NCBI mappings 20200922
-      addspecies <- refseq$ref %in% c("Candidatus Marinimicrobia bacterium", "Luteitalea pratensis")
+      #addspecies <- refseq$ref %in% c("Candidatus Marinimicrobia bacterium", "Luteitalea pratensis")
+      # Can't use Candidatus Marinimicrobia bacterium because it only has 4 RefSeq sequences 20220126
+      addspecies <- refseq$ref %in% c("Luteitalea pratensis")
       adds <- refseq[addspecies, ]
       adds$organism <- adds$ref
       adds$ref <- 1

@@ -50,7 +50,7 @@ This table gives a brief description of each plotting function.
   \code{geo16S_S3} \tab \nH2O-\ZC plots for major phyla and their genera \cr
   \code{geo16S_S4} \tab Venn diagrams for phylum and genus names in the RefSeq (NCBI), RDP, and SILVA taxonomies \cr
   \code{geo16S_S5} \tab Correlations between \ZC estimated from metagenomes and 16S rRNA sequences \cr
-  \code{geo16S_S6} \tab Correlation of \ZC with GC content of metagenome and 16S amplicon reads \cr
+  \code{geo16S_S6} \tab Correlation of \ZC with GC content of metagenomic and 16S amplicon reads \cr
 }
 
 }
