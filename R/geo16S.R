@@ -327,7 +327,7 @@ geo16S3 <- function(pdf = FALSE) {
       # Extra labels for ETNP
       if(title[i]=="ETNP\n") {
         text(44, 76, "0.2-\n1.6 \u00B5m")
-        text(128, 138, "1.6-\n30 \u00B5m")
+        text(135, 138, "1.6-\n30 \u00B5m")
       }
       # Restore xlim for plotting ZC
       par(new = TRUE)
@@ -849,7 +849,9 @@ MG16S <- function(which, plot.lines = TRUE, lowest.level = NULL, lineage = NULL,
     }
     # Remove outliers (anomalously high ZC in metagenome) 20221215
     if(rm.outliers & !H2O) {
-      iout <- metric_MG > -0.12
+      iout.Nasal <- dat$Body.site=="Nasal cavity" & metric_MG > -0.12
+      iout.UG <- dat$Body.site=="UG tract" & metric_MG > -0.14
+      iout <- iout.Nasal | iout.UG
       metric_MG <- metric_MG[!iout]
       metric_16S <- metric_16S[!iout]
       mdat <- mdat[!iout, ]

@@ -1,5 +1,9 @@
-CHANGES IN JMDplots 1.2.10-1
+CHANGES IN JMDplots 1.2.11
 --------------------------
+
+- 20220127 Revise plots for geo16S paper.
+
+- 20220126 For Bacteria and Archaea, only use species with at least 500 sequences (chem16S/process_refseq.R).
 
 - 20220104 Only use taxids classified at species level (chem16S/process_refseq.R).
 
