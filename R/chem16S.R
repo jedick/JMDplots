@@ -568,8 +568,6 @@ getmap <- function(study, RDP = NULL, lineage = NULL, mincount = 200, lowest.lev
     # 20200920 Lots of Escherichia in urine [WZZ+18]
     "genus_Escherichia/Shigella" = "genus_Escherichia",
     "phylum_Cyanobacteria/Chloroplast" = "phylum_Cyanobacteria",
-    # 20200924 Manus Basin [MPB+17]
-    "genus_Marinimicrobia_genera_incertae_sedis" = "species_Candidatus Marinimicrobia bacterium",
     # 20200929 Unclassified Cyanobacteria are just Cyanobacteria
     "class_Cyanobacteria" = "phylum_Cyanobacteria",
     "genus_Spartobacteria_genera_incertae_sedis" = "class_Spartobacteria",
@@ -682,11 +680,10 @@ getmetrics <- function(study, cn = FALSE, mdat = NULL, RDP = NULL, map = NULL, l
   iclassCyano <- RDP$rank == "class" & RDP$name == "Cyanobacteria"
   igenusSparto <- RDP$rank == "genus" & RDP$name == "Spartobacteria_genera_incertae_sedis"
   iclassActino <- RDP$rank == "class" & RDP$name == "Actinobacteria"
-  igenusMarini <- RDP$rank == "genus" & RDP$name == "Marinimicrobia_genera_incertae_sedis"
   igenusVerruco <- RDP$rank == "genus" & RDP$name == "Subdivision3_genera_incertae_sedis"
   igenusGpI <- RDP$rank == "genus" & RDP$name == "GpI"
   igenusGpIIa <- RDP$rank == "genus" & RDP$name == "GpIIa"
-  equalrank <- equalrank[!(iclassCyano | igenusSparto | iclassActino | igenusMarini | igenusVerruco | igenusGpI | igenusGpIIa)]
+  equalrank <- equalrank[!(iclassCyano | igenusSparto | iclassActino | igenusVerruco | igenusGpI | igenusGpIIa)]
   stopifnot(all(equalrank))
 
   # Get classification matrix (rows = taxa, columns = samples)

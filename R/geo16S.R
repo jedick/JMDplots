@@ -1075,9 +1075,9 @@ geo16S_S1 <- function(pdf = FALSE) {
   text(5, 10, "Amino Acid Compositions\nfor Taxonomic Groups\n(Reference Proteomes)", adj = c(0, 1), font = 2)
   # Read file with precomputed metrics for taxa at different ranks
   metrics <- read.csv(system.file("extdata/chem16S/taxon_metrics.csv", package = "JMDplots"))
-  ranks <- c("superkingdom", "phylum", "class", "order", "family", "genus", "species")
-  plural <- c("superkingdoms (*)", "phyla", "classes", "orders", "families", "genera", "species (*)")
-  for(irank in 1:7) {
+  ranks <- c("superkingdom", "phylum", "class", "order", "family", "genus")
+  plural <- c("superkingdoms (*)", "phyla", "classes", "orders", "families", "genera")
+  for(irank in 1:6) {
     nrank <- sum(metrics$rank == ranks[irank])
     text(5, 9-irank, paste(nrank, plural[irank]), adj = 0)
   }
@@ -1195,11 +1195,12 @@ geo16S_S2 <- function(pdf = FALSE) {
 # nH2O-ZC plots for major phyla and their genera 20220114
 geo16S_S3 <- function(pdf = FALSE) {
 
-  if(pdf) pdf("geo16S_S3.pdf", width = 14, height = 7)
+  if(pdf) pdf("geo16S_S3.pdf", width = 13, height = 11)
 
-  par(mfrow = c(1, 2))
+  mat <- matrix(c(1,1,2,2, 0,3,3,0), nrow = 2, byrow = TRUE)
+  layout(mat)
   par(mar = c(4, 4, 2, 1))
-  par(cex = 1.2)
+  par(cex= 1.2)
   xlim <- c(-0.3, 0)
   ylim <- c(-0.85, -0.65)
 
@@ -1232,20 +1233,26 @@ geo16S_S3 <- function(pdf = FALSE) {
   # Plot first 8 phyla
   plot(xlim, ylim, xlab = canprot::cplab$ZC, ylab = canprot::cplab$nH2O, type = "n", xaxs = "i", yaxs = "i")
   lwd <- lapply(1:8, function(i) {plotit(phyla$group[i], col = i)} )
-  legend("topright", phyla$group[1:8], col = 1:8, lwd = lwd, cex = 0.9, bg = "white")
+  legend("topright", phyla$group[1:8], col = 1:8, lwd = lwd, cex = 0.8, bg = "white")
+  label.figure("A", font = 2, cex = 1.5, xfrac = 0.03)
 
   # Plot second 8 phyla
   plot(xlim, ylim, xlab = canprot::cplab$ZC, ylab = canprot::cplab$nH2O, type = "n", xaxs = "i", yaxs = "i")
   lwd <- lapply(9:16, function(i) {plotit(phyla$group[i], col = i)} )
-  legend("topright", phyla$group[9:16], col = 1:8, lwd = lwd, cex = 0.9, bg = "white")
+  legend("topright", phyla$group[9:16], col = 1:8, lwd = lwd, cex = 0.8, bg = "white")
+  label.figure("B", font = 2, cex = 1.5, xfrac = 0.03)
 
-#  # Plot 8 more phyla 20220126
-#  phyla <- metrics[metrics$rank == "phylum" & metrics$parent != "Viruses", ]
-#  phyla <- phyla[phyla$ntaxa > 20 & phyla$ntaxa <= 60, ]
-#  phyla <- phyla[order(phyla$ntaxa, decreasing = TRUE), ]
-#  plot(xlim, ylim, xlab = canprot::cplab$ZC, ylab = canprot::cplab$nH2O, type = "n", xaxs = "i", yaxs = "i")
-#  lwd <- lapply(1:8, function(i) {plotit(phyla$group[i], col = i)} )
-#  legend("topright", phyla$group[1:8], col = 1:8, lwd = lwd, cex = 0.9, bg = "white")
+  # Plot 8 more phyla 20220126
+  phyla <- metrics[metrics$rank == "phylum" & metrics$parent != "Viruses", ]
+  phyla <- phyla[phyla$ntaxa >= 18 & phyla$ntaxa <= 60, ]
+  phyla <- phyla[order(phyla$ntaxa, decreasing = TRUE), ]
+  plot(xlim, ylim, xlab = canprot::cplab$ZC, ylab = canprot::cplab$nH2O, type = "n", xaxs = "i", yaxs = "i")
+  lwd <- lapply(1:8, function(i) {plotit(phyla$group[i], col = i)} )
+  legend <- phyla$group[1:8]
+  legend <- gsub("Candidatus Thermoplasmatota", "Candidatus", legend)
+  legend <- c(legend, "Thermoplasmatota")
+  legend("topright", legend, col = c(1:8, NA), lwd = lwd, cex = 0.8, bg = "white")
+  label.figure("C", font = 2, cex = 1.5, xfrac = 0.03)
 
   if(pdf) dev.off()
 
