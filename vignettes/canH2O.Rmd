@@ -1,10 +1,10 @@
 ---
-title: "Chemical metrics for differentially expressed proteins in cancer (2021)"
+title: "Water as a reactant in the differential expression of proteins in cancer (2021)"
 output: 
   rmarkdown::html_vignette:
     mathjax: null
 vignette: >
-  %\VignetteIndexEntry{Chemical metrics for differentially expressed proteins in cancer (2021)}
+  %\VignetteIndexEntry{Water as a reactant in the differential expression of proteins in cancer (2021)}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---

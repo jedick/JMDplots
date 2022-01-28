@@ -1,10 +1,10 @@
 ---
-title: "Local and global chemical shaping of bacterial communities by redox potential (2021)"
+title: "Chemical shaping of bacterial communities by redox potential (2021)"
 output: 
   rmarkdown::html_vignette:
     mathjax: null
 vignette: >
-  %\VignetteIndexEntry{Local and global chemical shaping of bacterial communities by redox potential (2021)}
+  %\VignetteIndexEntry{Chemical shaping of bacterial communities by redox potential (2021)}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 bibliography: orp16S.bib

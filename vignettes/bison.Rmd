@@ -1,10 +1,10 @@
 ---
-title: "Bison Pool hot spring (2011, 2013)"
+title: "Relative stabilities of proteins inferred from a hot-spring metagenome (2011, 2013)"
 output: 
   rmarkdown::html_vignette:
     mathjax: null
 vignette: >
-  %\VignetteIndexEntry{Bison Pool hot spring (2011, 2013)}
+  %\VignetteIndexEntry{Relative stabilities of proteins inferred from a hot-spring metagenome (2011, 2013)}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 bibliography: JMDplots.bib

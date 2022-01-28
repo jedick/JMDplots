@@ -1,10 +1,10 @@
 ---
-title: "Thermodynamic model for water activity and redox potential in evolution and development (2022)"
+title: "Water activity and redox potential in evolution and development (2022)"
 output: 
   rmarkdown::html_vignette:
     mathjax: null
 vignette: >
-  %\VignetteIndexEntry{Thermodynamic model for water activity and redox potential in evolution and development (2022)}
+  %\VignetteIndexEntry{Water activity and redox potential in evolution and development (2022)}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 bibliography: JMDplots.bib
