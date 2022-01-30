@@ -207,8 +207,7 @@ geo16S3 <- function(pdf = FALSE) {
   # Loop over studies
   for(i in 1:length(study)) {
     if(is.na(study[i])) {
-      # Leave empty space 20220119
-      par(c(0, 0, 0, 0))
+      # Don't make a plot, but add text 20220119
       plot.new()
       par(xpd = NA)
       arrows(0, 0.75, -0.4, 0.75, length = 0.1)
