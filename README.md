@@ -35,7 +35,7 @@ remotes::install_github("jedick/JMDplots", build_vignettes = TRUE)
 
 ## Online vignettes
 
-The vignettes are available at <http://chnosz.net/JMDplots/doc/>.
+The vignettes can be viewed at <http://chnosz.net/JMDplots/doc/>.
 
 ## Licenses
 

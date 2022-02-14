@@ -76,7 +76,7 @@ importFrom("CHNOSZ",
   # second batch: chnosz10
   "DGtr", "axis.label", "bgamma", "describe.basis", "describe.property",
   "describe.reaction", "equilibrate", "expr.property", "expr.species", "findit",
-  "list2array", "mass", "maxdiff", "mod.buffer", "mosaic",
+  "list2array", "mass", "mod.buffer", "mosaic",
   "nonideal", "ratlab", "reset", "solubility",
   "subcrt", "thermo.plot.new", "water", "OBIGT", "add.OBIGT",
   # third batch: gradH2O

@@ -687,6 +687,8 @@ chnosz10S6A <- function(pdf = FALSE) {
   label.figure("A", xfrac = 0.02, yfrac = 0.97, cex = 1.7)
 
   ## check that we're within 0.1 of the QFM-2 values used by SSH14
+  # The maximum (absolute) pairwise difference between x and y
+  maxdiff <- function(x, y) max(abs(y - x))
   stopifnot(maxdiff((buf$O2-2), c(-17.0, -14.5, -12.5, -10.8, -9.4)) < 0.1)
 
   # Here are the logKs of aqueous species dissociation reactions at 600 degC and 50000 bar,
