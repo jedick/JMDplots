@@ -19,8 +19,8 @@ logaH2Olab <- expression(bold(log)*bolditalic(a)[bold(H[2]*O)])
 logfO2lab <- expression(bold(log)*bolditalic(f)[bold(O[2])])
 
 # Chemical analysis of phylostrata and gene age datasets 20201216
-evdevH2O1 <- function(pdf = FALSE, boot.R = 99) {
-  if(pdf) pdf("evdevH2O1.pdf", width = 10, height = 5)
+evdevH2O2 <- function(pdf = FALSE, boot.R = 99) {
+  if(pdf) pdf("evdevH2O2.pdf", width = 10, height = 5)
   par(mar = c(4, 4, 1, 1), mgp = c(2.5, 1, 0))
   mat <- matrix(1:8, nrow = 2, byrow = TRUE)
   layout(mat, widths = c(1.2, 1, 1, 1))
@@ -72,16 +72,138 @@ evdevH2O1 <- function(pdf = FALSE, boot.R = 99) {
   plotphylo("ZC", PS_source = "LMM16", memo = memo, xlab = "GA", boot.R = boot.R)
   plotphylo("nH2O", PS_source = "LMM16", memo = memo, xlab = "GA", boot.R = boot.R)
 
-  if(pdf) {
-    dev.off()
-    addexif("evdevH2O1", "Chemical analysis of Trigos and Liebeskind datasets", "Dick (2022)")
+  if(pdf) dev.off()
+}
+
+# Evolution of protein ZC in eukaryotic lineages 20211103
+evdevH2O3 <- function(pdf = FALSE, H2O = FALSE) {
+
+  # Setup figure
+  if(pdf) pdf("evdevH2O3.pdf", width = 10, height = 6)
+  mat <- matrix(c(1,1,1,1,1,1, 2,2,2,2, 3,3,3,3,3, 5,5,5,5,5, 4,4,4,4,4, 6,6,6,6,6), nrow = 10)
+  layout(mat, widths = c(2, 1, 1))
+  par(mar = c(4, 4, 3.5, 1), mgp = c(2.5, 1, 0))
+
+  ## Panel A: gene ages from Liebeskind et al. (2016)
+
+  # Read list of reference proteomes
+  datadir <- system.file("extdata/evdevH2O/LMM16", package = "JMDplots")
+  refprot <- read.csv(file.path(datadir, "reference_proteomes.csv"))
+  # Put HUMAN last so it's more visible
+  irp <- 1:nrow(refprot)
+  ishuman <- refprot$OSCODE == "HUMAN"
+  irp <- c(irp[!ishuman], irp[ishuman])
+  refprot <- refprot[irp, ]
+
+  # Start ZC or nH2O plot
+  if(!H2O) plot(c(1, 9), c(-0.18, -0.02), xlab = "Gene Age", ylab = ZClab, type = "n", font.lab = 2)
+  if(H2O) plot(c(1, 9), c(-0.9, -0.65), xlab = "Gene Age", ylab = nH2Olab, type = "n", font.lab = 2)
+  # Add drop line at gene age 5 (Opisthokonta)
+  abline(v = 5, lty = 2, col = "gray40")
+  # Loop over proteomes
+  for(i in 1:nrow(refprot)) {
+    # Read modeAge and ZC/nH2O values
+    dat <- read.csv(file.path(datadir, "metrics", paste0(refprot$OSCODE[i], ".csv.xz")))
+    # Get mean ZC/nH2O for each modeAge
+    modeAge <- 1:max(dat$modeAge)
+    if(!H2O) X <- sapply(modeAge, function(Age) mean(subset(dat, modeAge == Age)$ZC))
+    if(H2O) X <- sapply(modeAge, function(Age) mean(subset(dat, modeAge == Age)$nH2O))
+    # Add lines to plot
+    col <- "#99999980"
+    lwd <- 1
+    if(refprot$OSCODE[i] == "HUMAN") {
+      col <- 2
+      lwd <- 2
+    }
+    lines(modeAge, X, col = col, lwd = lwd)
   }
+  # Add text to indicate divergence at Opisthokonta
+  if(H2O) y <- -0.65 else y <- -0.03
+  text(3.95, y, "Common ancestors", adj = c(0.5, 0.5))
+  text(5.95, y, "Lineages diverge", adj = c(0.5, 0.5))
+  # Add labels for divergence times (Kumar et al., 2017)
+  par(xpd = NA)
+  if(H2O) y <- -0.625 else y <- -0.003
+  text(1, y, 4290, srt = 45) # Cellular organisms
+  text(4, y, 2101, srt = 45) # Eukaryota
+  text(5, y, 1105, srt = 45) # Eukaryota
+  text(6, y, 948, srt = 45)  # Eumetazoa
+  text(7, y, 615, srt = 45)  # Vertebrata
+  text(8, y, 177, srt = 45)  # Mammalia
+  par(xpd = FALSE)
+  legend("left", "Human", lty = 1, col = 2, lwd = 2, bty = "n")
+  title("Divergence times for human lineage (Mya)", line = 2.5, font.main = 1)
+  label.figure("a", font = 2, cex = 1.6)
+
+  # Assemble age groups for legend
+  modeAges <- read.csv(file.path(datadir, "modeAges.csv"))
+  legend <- sapply(1:9, function(i) {
+    agetab <- table(modeAges[, paste0("X", i)])
+    paste0(i, ": ", paste0(names(agetab), " (", agetab, ")", collapse = ", "))
+  })
+  # Start plot for legend
+  plot.new()
+  par(mar = c(1, 1, 1, 1))
+  par(xpd = NA)
+  legend("center", legend, bty = "n", y.intersp = 2)
+  par(xpd = FALSE)
+
+  ## Panel B: Protein families from James et al. (2021)  20211221
+
+  par(mar = c(4, 4, 3.5, 1))
+
+  for(set in c("pfam_plant_nontrans", "pfam_plant_trans", "pfam_animal_nontrans", "pfam_animal_trans")) {
+
+    # Read amino acid composition from file
+    datadir <- system.file("extdata/evdevH2O/JWN+21", package = "JMDplots")
+    file <- file.path(datadir, paste0(set, "_AA.csv.xz"))
+    AA <- read.csv(file)
+
+    # Order data by Age
+    AA <- AA[order(AA$protein), ]
+    Age <- AA$protein
+    # Calculate ZC/nH2O
+    if(!H2O) X <- ZC(protein.formula(AA))
+    if(H2O) X <- H2OAA(AA)
+
+    # Make boxplots and regression lines
+    # Some parts adapted from https://github.com/MaselLab/ProteinEvolution/blob/master/Figures/BoxAndWhiskerPlots_LinearModelSlopes_MetricsVsAge.py
+    LinearModel <- lm(X ~ Age)
+    Intercept <- coef(LinearModel)["(Intercept)"]
+    Slope <- coef(LinearModel)["Age"]
+    Pvalue <- summary(LinearModel)$coefficients[2, 4]
+    R2 <- summary(LinearModel)$r.squared
+
+    if(H2O) ylab <- nH2Olab else ylab <- ZClab
+    plot(Age, X, type = "n", xlab = "Age (Mya)", ylab = ylab, xlim = rev(range(Age)), font.lab = 2)
+    boxplot(X ~ Age, add = TRUE, at = unique(Age), boxfill = "lightblue", xaxt = "n", yaxt = "n",
+            position = "dodge", varwidth = TRUE, boxwex = 200, outpch = 21, outcex = 0.4, outbg = "#66666680", outcol = NA)
+    abline(Intercept, Slope, lwd = 2, col = "dodgerblue")
+
+    # Create title
+    main <- gsub("pfam_p", "P", set)
+    main <- gsub("pfam_a", "A", main)
+    main <- gsub("_nontrans", " non-transmembrane", main)
+    main <- gsub("_trans", " transmembrane", main)
+    main <- paste0(main, " (", nrow(AA), ")")
+    title(main, line = 2.2, font.main = 1, cex.main = 1.1)
+
+    # Add legend
+    # NOTE: The ages are revered (x-axis), so slope is multiplied by -1
+    stattext <- bquote("Slope"==.(signif(-Slope * 1e3, digits = 2))*"/Gya, "~italic(P)==.(signif(Pvalue, digits = 2)))
+    title(stattext, line = 1, font.main = 1, cex.main = 1)
+
+    if(set == "pfam_plant_nontrans") label.figure("b", font = 2, cex = 1.6)
+
+  }
+
+  if(pdf) dev.off()
 }
 
 # Thermodynamic analysis of optimal logaH2O and logfO2 for target proteins 20201219
-evdevH2O2 <- function(pdf = FALSE) {
+evdevH2O4 <- function(pdf = FALSE) {
 
-  if(pdf) pdf("evdevH2O2.pdf", width = 7, height = 3)
+  if(pdf) pdf("evdevH2O4.pdf", width = 7, height = 3)
   par(mar = c(3, 3.1, 3, 1), mgp = c(2, 0.5, 0))
 
   # Get mean amino acid compositions
@@ -197,18 +319,15 @@ evdevH2O2 <- function(pdf = FALSE) {
   # Reset plot parameters
   par(par.orig)
 
-  if(pdf) {
-    dev.off()
-    addexif("evdevH2O2", "Thermodynamic analysis of optimal logaH2O and logfO2 for target proteins", "Dick (2022)")
-  }
+  if(pdf) dev.off()
 
 }
 
 # Optimal logaH2O and logfO2 and virtual Eh for target proteins 20201218
-evdevH2O3 <- function(pdf = FALSE) {
+evdevH2O5 <- function(pdf = FALSE) {
 
   # Setup plot
-  if(pdf) pdf("evdevH2O3.pdf", width = 8, height = 5)
+  if(pdf) pdf("evdevH2O5.pdf", width = 8, height = 5)
   par(mgp = c(2.5, 1, 0), las = 1, font.lab = 2)
   layout(matrix(1:6, nrow = 2))
   par(mar = c(3.8, 4.5, 1.2, 1))
@@ -339,16 +458,13 @@ evdevH2O3 <- function(pdf = FALSE) {
   plotfun("TPPG17", c("a", "b", "c", "d"))
   plotfun("LMM16", c(NA, NA, "e", "f"))
 
-  if(pdf) {
-    dev.off()
-    addexif("evdevH2O3", "Optimal logaH2O and logfO2 and virtual Eh for target proteins", "Dick (2022)")
-  }
+  if(pdf) dev.off()
 }
 
 # Chemical metrics for and thermodynamic parameters with different background proteomes 20210711
-evdevH2O4 <- function(pdf = FALSE) {
+evdevH2O6 <- function(pdf = FALSE) {
 
-  if(pdf) pdf("evdevH2O4.pdf", width = 8, height = 5)
+  if(pdf) pdf("evdevH2O6.pdf", width = 8, height = 5)
   mat <- matrix(c(7,1,1,9,4, 8,1,1,0,5, 2,2,3,3,5, 2,2,3,3,6), nrow = 4, byrow = 4)
   layout(mat, heights = c(2,1,1,2), widths = c(1,1,1,1,2))
   par(mar = c(3.1, 3.1, 2, 1), mgp = c(2.1, 0.7, 0))
@@ -495,18 +611,15 @@ evdevH2O4 <- function(pdf = FALSE) {
   legend("center", c("Human", "D. melanogaster", "B. subtilis"), lty = c(1, 2, 3), col = 4, lwd = 2, title = "Background proteome", bty = "n", text.font = c(1, 3, 3))
   label.figure("b", font = 2, cex = 2, xfrac = 0.9, yfrac = 0.9)
 
-  if(pdf) {
-    dev.off()
-    addexif("evdevH2O4", "Ranges of chemical metrics and thermodynamic parameters for different background proteomes", "Dick (2022)")
-  }
+  if(pdf) dev.off()
 
 }
 
 # Chemical and thermodynamic analysis of B. subtilis biofilm transcriptome and proteome 20201221
-evdevH2O5 <- function(pdf = FALSE, boot.R = 99) {
+evdevH2O7 <- function(pdf = FALSE, boot.R = 99) {
 
   # Setup plot
-  if(pdf) pdf("evdevH2O5.pdf", width = 7, height = 4.5)
+  if(pdf) pdf("evdevH2O7.pdf", width = 7, height = 4.5)
   par(mfrow = c(2, 3))
   par(mar = c(4, 4, 1, 1), las = 1, mgp = c(3, 0.8, 0))
 
@@ -621,17 +734,14 @@ evdevH2O5 <- function(pdf = FALSE, boot.R = 99) {
 
   label.figure("f", cex = 1.5, xfrac = 0.025, font = 2)
 
-  if(pdf) {
-    dev.off()
-    addexif("evdevH2O5", "Chemical and thermodynamic analysis of B. subtilis biofilm transcriptome and proteome", "Dick (2022)")
-  }
+  if(pdf) dev.off()
 }
 
 # Organismal water content, proteomic nH2O, and optimal logaH2O for fruit fly development 20210116
-evdevH2O6 <- function(pdf = FALSE, boot.R = 99) {
+evdevH2O8 <- function(pdf = FALSE, boot.R = 99) {
 
   # Setup plot
-  if(pdf) pdf("evdevH2O6.pdf", width = 10, height = 6)
+  if(pdf) pdf("evdevH2O8.pdf", width = 10, height = 6)
   layout(matrix(c(1,1,1,1, 2,2,2,2, 3,3,3,3, 4,4,4, 5,5,5, 6,6,6, 7,7,7), byrow = TRUE, nrow = 2))
   par(mar = c(5, 4, 3.5, 2))
   par(font.lab = 2, las = 1)
@@ -777,136 +887,8 @@ evdevH2O6 <- function(pdf = FALSE, boot.R = 99) {
   points(O2, H2O, pch = pch, col = col, cex = cex * 2)
   text(O2, H2O - 0.13, c("embryo", "adult"))
 
-  if(pdf) {
-    dev.off()
-    addexif("evdevH2O6", "Organismal water content, proteomic nH2O, and optimal logaH2O for fruit fly development", "Dick (2022)")
-  }
-
-}
-
-# Evolution of protein ZC in eukaryotic lineages 20211103
-evdevH2O7 <- function(pdf = FALSE, H2O = FALSE) {
-
-  # Setup figure
-  if(pdf) pdf("evdevH2O7.pdf", width = 10, height = 6)
-  mat <- matrix(c(1,1,1,1,1,1, 2,2,2,2, 3,3,3,3,3, 5,5,5,5,5, 4,4,4,4,4, 6,6,6,6,6), nrow = 10)
-  layout(mat, widths = c(2, 1, 1))
-  par(mar = c(4, 4, 3.5, 1), mgp = c(2.5, 1, 0))
-
-  ## Panel A: gene ages from Liebeskind et al. (2016)
-
-  # Read list of reference proteomes
-  datadir <- system.file("extdata/evdevH2O/LMM16", package = "JMDplots")
-  refprot <- read.csv(file.path(datadir, "reference_proteomes.csv"))
-  # Put HUMAN last so it's more visible
-  irp <- 1:nrow(refprot)
-  ishuman <- refprot$OSCODE == "HUMAN"
-  irp <- c(irp[!ishuman], irp[ishuman])
-  refprot <- refprot[irp, ]
-
-  # Start ZC or nH2O plot
-  if(!H2O) plot(c(1, 9), c(-0.18, -0.02), xlab = "Gene Age", ylab = ZClab, type = "n", font.lab = 2)
-  if(H2O) plot(c(1, 9), c(-0.9, -0.65), xlab = "Gene Age", ylab = nH2Olab, type = "n", font.lab = 2)
-  # Add drop line at gene age 5 (Opisthokonta)
-  abline(v = 5, lty = 2, col = "gray40")
-  # Loop over proteomes
-  for(i in 1:nrow(refprot)) {
-    # Read modeAge and ZC/nH2O values
-    dat <- read.csv(file.path(datadir, "metrics", paste0(refprot$OSCODE[i], ".csv.xz")))
-    # Get mean ZC/nH2O for each modeAge
-    modeAge <- 1:max(dat$modeAge)
-    if(!H2O) X <- sapply(modeAge, function(Age) mean(subset(dat, modeAge == Age)$ZC))
-    if(H2O) X <- sapply(modeAge, function(Age) mean(subset(dat, modeAge == Age)$nH2O))
-    # Add lines to plot
-    col <- "#99999980"
-    lwd <- 1
-    if(refprot$OSCODE[i] == "HUMAN") {
-      col <- 2
-      lwd <- 2
-    }
-    lines(modeAge, X, col = col, lwd = lwd)
-  }
-  # Add text to indicate divergence at Opisthokonta
-  if(H2O) y <- -0.65 else y <- -0.03
-  text(3.95, y, "Common ancestors", adj = c(0.5, 0.5))
-  text(5.95, y, "Lineages diverge", adj = c(0.5, 0.5))
-  # Add labels for divergence times (Kumar et al., 2017)
-  par(xpd = NA)
-  if(H2O) y <- -0.625 else y <- -0.003
-  text(1, y, 4290, srt = 45) # Cellular organisms
-  text(4, y, 2101, srt = 45) # Eukaryota
-  text(5, y, 1105, srt = 45) # Eukaryota
-  text(6, y, 948, srt = 45)  # Eumetazoa
-  text(7, y, 615, srt = 45)  # Vertebrata
-  text(8, y, 177, srt = 45)  # Mammalia
-  par(xpd = FALSE)
-  legend("left", "Human", lty = 1, col = 2, lwd = 2, bty = "n")
-  title("Divergence times for human lineage (Mya)", line = 2.5, font.main = 1)
-  label.figure("a", font = 2, cex = 1.6)
-
-  # Assemble age groups for legend
-  modeAges <- read.csv(file.path(datadir, "modeAges.csv"))
-  legend <- sapply(1:9, function(i) {
-    agetab <- table(modeAges[, paste0("X", i)])
-    paste0(i, ": ", paste0(names(agetab), " (", agetab, ")", collapse = ", "))
-  })
-  # Start plot for legend
-  plot.new()
-  par(mar = c(1, 1, 1, 1))
-  par(xpd = NA)
-  legend("center", legend, bty = "n", y.intersp = 2)
-  par(xpd = FALSE)
-
-  ## Panel B: Protein families from James et al. (2021)  20211221
-
-  par(mar = c(4, 4, 3.5, 1))
-
-  for(set in c("pfam_plant_nontrans", "pfam_plant_trans", "pfam_animal_nontrans", "pfam_animal_trans")) {
-
-    # Read amino acid composition from file
-    datadir <- system.file("extdata/evdevH2O/JWN+21", package = "JMDplots")
-    file <- file.path(datadir, paste0(set, "_AA.csv.xz"))
-    AA <- read.csv(file)
-
-    # Order data by Age
-    AA <- AA[order(AA$protein), ]
-    Age <- AA$protein
-    # Calculate ZC/nH2O
-    if(!H2O) X <- ZC(protein.formula(AA))
-    if(H2O) X <- H2OAA(AA)
-
-    # Make boxplots and regression lines
-    # Some parts adapted from https://github.com/MaselLab/ProteinEvolution/blob/master/Figures/BoxAndWhiskerPlots_LinearModelSlopes_MetricsVsAge.py
-    LinearModel <- lm(X ~ Age)
-    Intercept <- coef(LinearModel)["(Intercept)"]
-    Slope <- coef(LinearModel)["Age"]
-    Pvalue <- summary(LinearModel)$coefficients[2, 4]
-    R2 <- summary(LinearModel)$r.squared
-
-    if(H2O) ylab <- nH2Olab else ylab <- ZClab
-    plot(Age, X, type = "n", xlab = "Age (Mya)", ylab = ylab, xlim = rev(range(Age)), font.lab = 2)
-    boxplot(X ~ Age, add = TRUE, at = unique(Age), boxfill = "lightblue", xaxt = "n", yaxt = "n",
-            position = "dodge", varwidth = TRUE, boxwex = 200, outpch = 21, outcex = 0.4, outbg = "#66666680", outcol = NA)
-    abline(Intercept, Slope, lwd = 2, col = "dodgerblue")
-
-    # Create title
-    main <- gsub("pfam_p", "P", set)
-    main <- gsub("pfam_a", "A", main)
-    main <- gsub("_nontrans", " non-transmembrane", main)
-    main <- gsub("_trans", " transmembrane", main)
-    main <- paste0(main, " (", nrow(AA), ")")
-    title(main, line = 2.2, font.main = 1, cex.main = 1.1)
-
-    # Add legend
-    # NOTE: The ages are revered (x-axis), so slope is multiplied by -1
-    stattext <- bquote("Slope"==.(signif(-Slope * 1e3, digits = 2))*"/Gya, "~italic(P)==.(signif(Pvalue, digits = 2)))
-    title(stattext, line = 1, font.main = 1, cex.main = 1)
-
-    if(set == "pfam_plant_nontrans") label.figure("b", font = 2, cex = 1.6)
-
-  }
-
   if(pdf) dev.off()
+
 }
 
 # Calculate optimal logaH2O and logfO2 for various datasets 20210402

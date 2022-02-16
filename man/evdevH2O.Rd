@@ -1,13 +1,13 @@
 \encoding{UTF-8}
 \name{evdevH2O}
 \alias{evdevH2O}
-\alias{evdevH2O1}
 \alias{evdevH2O2}
 \alias{evdevH2O3}
 \alias{evdevH2O4}
 \alias{evdevH2O5}
 \alias{evdevH2O6}
 \alias{evdevH2O7}
+\alias{evdevH2O8}
 \alias{runMaximAct}
 \alias{LYSC_example}
 \title{Plots from thermodynamics in evolution and development paper}
@@ -16,13 +16,13 @@ Plots from the paper by Dick (2022).
 }
 
 \usage{
-  evdevH2O1(pdf = FALSE, boot.R = 99)
-  evdevH2O2(pdf = FALSE)
-  evdevH2O3(pdf = FALSE)
+  evdevH2O2(pdf = FALSE, boot.R = 99)
+  evdevH2O3(pdf = FALSE, H2O = FALSE)
   evdevH2O4(pdf = FALSE)
-  evdevH2O5(pdf = FALSE, boot.R = 99)
-  evdevH2O6(pdf = FALSE, boot.R = 99)
-  evdevH2O7(pdf = FALSE, H2O = FALSE)
+  evdevH2O5(pdf = FALSE)
+  evdevH2O6(pdf = FALSE)
+  evdevH2O7(pdf = FALSE, boot.R = 99)
+  evdevH2O8(pdf = FALSE, boot.R = 99)
   runMaximAct(dataset = "TPPG17", seed = 1:100, nbackground = 2000,
     res = 256, bg_organism = "Hsa", writeFiles = TRUE)
   LYSC_example()
@@ -44,13 +44,13 @@ Plots from the paper by Dick (2022).
 This table gives a brief description of each plotting function.
 
 \tabular{ll}{
-  \code{evdevH2O1} \tab Protein length and chemical metrics for phylostratigraphic age groups \cr
-  \code{evdevH2O2} \tab Thermodynamic analysis of optimal \logaH2O and \logfO2 for target proteins \cr
-  \code{evdevH2O3} \tab Optimal \logaH2O and \logfO2 and virtual Eh for target proteins \cr
-  \code{evdevH2O4} \tab Chemical metrics for and thermodynamic parameters with different background proteomes \cr
-  \code{evdevH2O5} \tab Chemical and thermodynamic analysis of \emph{B. subtilis} biofilm transcriptome and proteome \cr
-  \code{evdevH2O6} \tab Organismal water content, proteomic \nH2O, and optimal \logaH2O for fruit fly development \cr
-  \code{evdevH2O7} \tab Evolution of protein \ZC in eukaryotic lineages \cr
+  \code{evdevH2O2} \tab Protein length and chemical metrics for phylostratigraphic age groups \cr
+  \code{evdevH2O3} \tab Evolution of protein \ZC in eukaryotic lineages \cr
+  \code{evdevH2O4} \tab Thermodynamic analysis of optimal \logaH2O and \logfO2 for target proteins \cr
+  \code{evdevH2O5} \tab Optimal \logaH2O and \logfO2 and virtual Eh for target proteins \cr
+  \code{evdevH2O6} \tab Chemical metrics for and thermodynamic parameters with different background proteomes \cr
+  \code{evdevH2O7} \tab Chemical and thermodynamic analysis of \emph{B. subtilis} biofilm transcriptome and proteome \cr
+  \code{evdevH2O8} \tab Organismal water content, proteomic \nH2O, and optimal \logaH2O for fruit fly development \cr
 }
 
 \code{runMaximAct} sets up calculations with \code{\link{MaximAct}} to compute the optimal \logaH2O and \logfO2 that maximize the equilibrium activity of target proteins against a proteomic background.
@@ -78,11 +78,8 @@ If \code{writeFiles} is TRUE, a PNG plot file is created and optimal \logfO2 or 
     \item{\code{[dataset]_H2O.csv}}{Output file with optimal values of \logaH2O for each random seed.}
     \item{\code{[dataset]_O2.csv}}{Output file with optimal values of \logfO2 for each random seed.}
   }
-  The output files are used in \code{evdevH2O3} (thermodynamic analysis of phylostrata and gene ages) and \code{evdevH2O5} (thermodynamic analysis of biofilm developmental stages).
+  The output files are used in \code{evdevH2O5} (thermodynamic analysis of phylostrata and gene ages) and \code{evdevH2O7} (thermodynamic analysis of biofilm developmental stages).
   To reduce package size, the PNG files output by \code{runMaximAct} are not included here.
-
-  Two other files, \code{FOK+21_mean_aa.csv} and \code{CBS+17_mean_aa.csv}, contain mean amino acid compositions of proteins computed using datasets for developmental transcriptomes and proteomes in \emph{B. subtilis} biofilms (Futo et al., 2021) and proteomes in fruit flies (Casas-Vila et al., 2017).
-  These files are used in \code{evdevH2O5} and \code{evdevH2O6}.
 }
 
 \section{Files in extdata/evdevH2O/LMM16}{
@@ -129,7 +126,7 @@ Trigos, A. S. and Pearson, R. B. and Papenfuss, A. T. and Goode, D. L. (2017) Al
 }
 
 \examples{
-evdevH2O1()
+evdevH2O2()
 
 # Start with a fresh plot device to run the next example
 # (Something from above messes up split.screen())

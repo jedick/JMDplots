@@ -78,40 +78,49 @@ library(JMDplots)
 To reduce running time, the plots in this vignette are made with 99 bootstrap replicates.
 To reproduce the plots in the paper, the `boot.R` argument should be changed to 999.
 
-## Protein length and chemical metrics for phylostratigraphic age groups (Figure 1)
-```{r evdevH2O1, message = FALSE, results = "hide", out.width='100%', fig.width = 10, fig.height = 5, out.extra='class="full-width"', pngquant = pngquant, dpi = 100}
-evdevH2O1(boot.R = 99)
+## Protein length and chemical metrics for phylostratigraphic age groups (Figure 2)
+```{r evdevH2O2, message = FALSE, results = "hide", out.width='100%', fig.width = 10, fig.height = 5, out.extra='class="full-width"', pngquant = pngquant, dpi = 100}
+evdevH2O2(boot.R = 99)
 ```
 
 **Data sources:** Phylostrata are from @TPPG17. Consensus gene ages are from @LMM16.
 
-## MaximAct: Thermodynamic analysis of optimal `r logaH2O` and `r logfO2` for target proteins (Figure 2)
-```{r evdevH2O2, message = FALSE, results = "hide", out.width='100%', fig.width = 7, fig.height = 3, out.extra='class="full-width"', pngquant = "--speed=1 --quality=25-50", dpi = 100}
-evdevH2O2()
+## Evolution of protein `r ZC` in eukaryotic lineages (Figure 3)
+```{r evdevH2O3, message = FALSE, results = "hide", out.width='100%', fig.width = 10, fig.height = 6, out.extra='class="full-width"', pngquant = pngquant, dpi = 100}
+evdevH2O3()
 ```
 
-## Optimal `r logaH2O` and `r logfO2` and virtual Eh for target proteins (Figure 3)
-```{r evdevH2O3, message = FALSE, results = "hide", out.width='100%', fig.width = 8, fig.height = 5, out.extra='class="full-width"', pngquant = pngquant, dpi = 100}
-evdevH2O3()
+**Data sources:**
+**a** Consensus gene ages are from @LMM16. Divergence times of human lineage are from @KSSH17.
+**b** Amino acid compositions of homology groups for Pfam domains are from @JWN+20 and @JWN+21.
+
+## MaximAct: Thermodynamic analysis of optimal `r logaH2O` and `r logfO2` for target proteins (Figure 4)
+```{r evdevH2O4, message = FALSE, results = "hide", out.width='100%', fig.width = 7, fig.height = 3, out.extra='class="full-width"', pngquant = "--speed=1 --quality=25-50", dpi = 100}
+evdevH2O4()
+```
+
+## Optimal `r logaH2O` and `r logfO2` and virtual Eh for target proteins (Figure 5)
+```{r evdevH2O5, message = FALSE, results = "hide", out.width='100%', fig.width = 8, fig.height = 5, out.extra='class="full-width"', pngquant = pngquant, dpi = 100}
+evdevH2O5()
 ```
 
 **Data sources:** Plasma and subcellular redox potentials are from @VWR+13 and @JS15.
 
-## Chemical metrics for and thermodynamic parameters with different background proteomes (Figure 4)
-```{r evdevH2O4, message = FALSE, results = "hide", out.width='100%', fig.width = 8, fig.height = 5, out.extra='class="full-width"', pngquant = pngquant, dpi = 100}
-evdevH2O4()
+## Chemical metrics for and thermodynamic parameters with different background proteomes (Figure 6)
+```{r evdevH2O6, message = FALSE, results = "hide", out.width='100%', fig.width = 8, fig.height = 5, out.extra='class="full-width"', pngquant = pngquant, dpi = 100}
+evdevH2O6()
 ```
 
-## Chemical and thermodynamic analysis of *B. subtilis* biofilm transcriptome and proteome (Figure 5)
-```{r evdevH2O5, message = FALSE, results = "hide", out.width='100%', fig.width = 7, fig.height = 4.5, pngquant = pngquant, dpi = 100}
-evdevH2O5(boot.R = 99)
+## Chemical and thermodynamic analysis of *B. subtilis* biofilm transcriptome and proteome (Figure 7)
+```{r evdevH2O7, message = FALSE, results = "hide", out.width='100%', fig.width = 7, fig.height = 4.5, pngquant = pngquant, dpi = 100}
+evdevH2O7(boot.R = 99)
 ```
 
 **Data source:** Transcriptomic and proteomic data are from @FOK+21.
 
-## Organismal water content, proteomic `r nH2O`, and optimal `r logaH2O` for fruit fly development (Figure 6)
-```{r evdevH2O6, message = FALSE, results = "hide", out.width='100%', fig.width = 10, fig.height = 6, out.extra='class="full-width"', pngquant = pngquant, dpi = 100}
-evdevH2O6(boot.R = 99)
+## Organismal water content, proteomic `r nH2O`, and optimal `r logaH2O` for fruit fly development (Figure 8)
+```{r evdevH2O8, message = FALSE, results = "hide", out.width='100%', fig.width = 10, fig.height = 6, out.extra='class="full-width"', pngquant = pngquant, dpi = 100}
+evdevH2O8(boot.R = 99)
 ```
 
 **Data sources:**
@@ -120,14 +129,7 @@ evdevH2O6(boot.R = 99)
 **d** `r ZC` and `r nH2O` of differentially expressed proteins in embryos and adult flies is calculated in this study using proteomic data from @FKL+19.
 
 
-## Evolution of protein `r ZC` in eukaryotic lineages (Figure 7)
-```{r evdevH2O7, message = FALSE, results = "hide", out.width='100%', fig.width = 10, fig.height = 6, out.extra='class="full-width"', pngquant = pngquant, dpi = 100}
-evdevH2O7()
-```
-
-**Data sources:**
-**a** Consensus gene ages are from @LMM16. Divergence times of human lineage are from @KSSH17.
-**b** Amino acid compositions of homology groups for Pfam domains are from @JWN+20 and @JWN+21.
+### Specific values mentioned in the text
 
 ## Show total and unmapped number of genes in @TPPG17 phylostrata dataset
 ```{r TPPG17_stats, echo = FALSE}

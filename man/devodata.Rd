@@ -36,7 +36,7 @@ Data and chemical metrics for fruit fly and biofilm developmental proteomes.
 }
 
 \seealso{
-\code{\link{evdevH2O4}} and \code{\link{evdevH2O5}} are functions that use these files.
+\code{\link{evdevH2O6}} and \code{\link{evdevH2O7}} are functions that use these files.
 }
 
 \references{

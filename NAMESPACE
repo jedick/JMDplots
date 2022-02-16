@@ -40,10 +40,10 @@ export(
   # cpcp plots 20201015
   "Ehplot", "rankdiff", "rankplot", "groupplots", "mergedplot", "get_colors",
   # evdevH2O paper 20210127
-  "evdevH2O1", "evdevH2O2", "evdevH2O3", "evdevH2O4", "evdevH2O5", "evdevH2O6",
+  "evdevH2O2", "evdevH2O4", "evdevH2O5", "evdevH2O6", "evdevH2O7", "evdevH2O8",
   "MaximAct", "runMaximAct", "LYSC_example",
   "getphyloaa", "getCBS17", "getFOK21", # 20210706-20210708
-  "evdevH2O7", # 20211222
+  "evdevH2O3", # 20211222
   # mjenergy paper 20210205
   "mjenergy1", "mjenergy2", "mjenergy3", "calc_affinity",
   "mjenergy_Table_S3", "mjenergy_Dataset_S1", # 20210816
