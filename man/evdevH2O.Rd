@@ -1,6 +1,7 @@
 \encoding{UTF-8}
 \name{evdevH2O}
 \alias{evdevH2O}
+\alias{evdevH2O1}
 \alias{evdevH2O2}
 \alias{evdevH2O3}
 \alias{evdevH2O4}
@@ -16,6 +17,7 @@ Plots from the paper by Dick (2022).
 }
 
 \usage{
+  evdevH2O1(pdf = FALSE)
   evdevH2O2(pdf = FALSE, boot.R = 99)
   evdevH2O3(pdf = FALSE, H2O = FALSE)
   evdevH2O4(pdf = FALSE)
@@ -44,6 +46,7 @@ Plots from the paper by Dick (2022).
 This table gives a brief description of each plotting function.
 
 \tabular{ll}{
+  \code{evdevH2O1} \tab Comparison of different sets of basis species \cr
   \code{evdevH2O2} \tab Protein length and chemical metrics for phylostratigraphic age groups \cr
   \code{evdevH2O3} \tab Evolution of protein \ZC in eukaryotic lineages \cr
   \code{evdevH2O4} \tab Thermodynamic analysis of optimal \logaH2O and \logfO2 for target proteins \cr

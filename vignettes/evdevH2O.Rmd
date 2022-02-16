@@ -76,7 +76,14 @@ library(JMDplots)
 ```
 
 To reduce running time, the plots in this vignette are made with 99 bootstrap replicates.
-To reproduce the plots in the paper, the `boot.R` argument should be changed to 999.
+To reproduce the plots in the paper, the value of `boot.R` in the function calls below should be changed to 999.
+
+## Comparison of different sets of basis species (Figure 1)
+```{r evdevH2O1, message = FALSE, results = "hide", out.width='100%', fig.width = 8, fig.height = 6, pngquant = pngquant, dpi = 100}
+evdevH2O1()
+```
+
+**Data source:** UniProt reference protoemes (<https://uniprot.org>).
 
 ## Protein length and chemical metrics for phylostratigraphic age groups (Figure 2)
 ```{r evdevH2O2, message = FALSE, results = "hide", out.width='100%', fig.width = 10, fig.height = 5, out.extra='class="full-width"', pngquant = pngquant, dpi = 100}
@@ -129,9 +136,9 @@ evdevH2O8(boot.R = 99)
 **d** `r ZC` and `r nH2O` of differentially expressed proteins in embryos and adult flies is calculated in this study using proteomic data from @FKL+19.
 
 
-### Specific values mentioned in the text
+## Specific values mentioned in the text
 
-## Show total and unmapped number of genes in @TPPG17 phylostrata dataset
+### Total and unmapped numbers of genes in @TPPG17 phylostrata dataset
 ```{r TPPG17_stats, echo = FALSE}
 file <- system.file("extdata/evdevH2O/phylostrata/TPPG17.csv.xz", package = "JMDplots")
 dat <- read.csv(file)
@@ -143,7 +150,7 @@ message("Unmapped genes in each phylostratum:")
 table(dat$Phylostrata[is.na(dat$Entry)])
 ```
 
-## Example of protein chemical formula, formation reaction, equilibrium constant, and activity product
+### Example of protein chemical formula, formation reaction, equilibrium constant, and activity product
 ```{r LYSC_example}
 LYSC_example()
 ```

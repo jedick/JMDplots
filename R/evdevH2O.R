@@ -18,6 +18,70 @@ DPSTCGAlab <- expression(bold(Delta*PS~"(TCGA)"))
 logaH2Olab <- expression(bold(log)*bolditalic(a)[bold(H[2]*O)])
 logfO2lab <- expression(bold(log)*bolditalic(f)[bold(O[2])])
 
+# Comparison of different sets of basis species 20220216
+evdevH2O1 <- function(pdf = FALSE) {
+
+  if(pdf) pdf("evdevH2O1.pdf", width = 8, height = 6)
+
+  # Adapted from JMDplots/vignettes/cpcp.Rmd
+  # Setup figure
+  par(mar = c(4, 3.3, 2.5, 2.3))
+  par(cex = 1.1)
+  par(mgp = c(2.3, 1, 0))
+  par(mfrow = c(3, 4))
+
+  # Get labels for basis species
+  QEClab <- syslab(c("glutamine", "glutamic acid", "cysteine", "H2O", "O2"))
+  CHNOSlab <- syslab(c("CO2", "NH3", "H2S", "H2O", "O2"))
+
+  # Loop over human, fly, and B. subtilis proteins
+  for(organism in c("Hsa", "Dme", "Bsu")) {
+
+    # Get amino acid compositions of human proteins
+    if(organism == "Hsa") aa <- get("human_base", human)
+    if(organism == "Dme") aa <- read.csv(system.file("extdata/organisms/UP000000803_7227.csv.xz", package = "JMDplots"), as.is = TRUE)
+    if(organism == "Bsu") aa <- read.csv(system.file("extdata/organisms/UP000001570_224308.csv.xz", package = "JMDplots"), as.is = TRUE)
+    protein.formula <- protein.formula(aa)
+    ZC <- ZC(protein.formula)
+
+    # Loop over basis species
+    for(basis in c("QEC", "CHNOS")) {
+      # Set basis species
+      CHNOSZ::basis(basis)
+      # Calculate formation reactions
+      protein.basis <- CHNOSZ::protein.basis(aa)
+      # Divide by protein length to get per-residue values
+      protein.length <- CHNOSZ::protein.length(aa)
+      residue.basis <- protein.basis / protein.length
+      # Loop over O2 and H2O
+      for(species in c("O2", "H2O")) {
+        # Make scatter plot
+        values <- residue.basis[, species]
+        ylab <- cplab[[paste0("n", species)]]
+        smoothScatter(ZC, values, xlab = cplab$ZC, ylab = ylab)
+        # Add linear fit
+        thislm <- lm(values ~ ZC)
+        x <- range(ZC)
+        y <- predict.lm(thislm, data.frame(ZC = x))
+        lines(x, y, lty = 2, lwd = 2, col = 8)
+        # Add legend with R-squared value
+        R2 <- summary(thislm)$r.squared
+        R2txt <- bquote(italic(R)^2 == .(formatC(R2, digits = 3, format = "f")))
+        legend.x <- ifelse(species == "O2", "bottomright", "bottomleft")
+        legend(legend.x, legend = R2txt, bty = "n")
+        # Add basis species titles
+        if(organism == "Hsa" & basis == "QEC" & species == "O2") mtext(QEClab, outer = TRUE, line = -1.5, adj = 0.095)
+        if(organism == "Hsa" & basis == "QEC" & species == "O2") mtext(CHNOSlab, outer = TRUE, line = -1.5, adj = 0.825)
+        # Add organism titles
+        if(basis == "CHNOS" & species == "H2O") mtext(organism, side = 4, line = 1)
+      }
+    }
+  }
+
+  if(pdf) dev.off()
+
+}
+
 # Chemical analysis of phylostrata and gene age datasets 20201216
 evdevH2O2 <- function(pdf = FALSE, boot.R = 99) {
   if(pdf) pdf("evdevH2O2.pdf", width = 10, height = 5)
