@@ -226,11 +226,11 @@ evdevH2O3 <- function(pdf = FALSE, H2O = FALSE) {
     # Order data by Age
     AA <- AA[order(AA$protein), ]
     Age <- AA$protein
-    # Calculate ZC/nH2O
+    # Calculate ZC or nH2O
     if(!H2O) X <- ZC(protein.formula(AA))
     if(H2O) X <- H2OAA(AA)
 
-    # Make boxplots and regression lines
+    # Get linear model coefficients
     # Some parts adapted from https://github.com/MaselLab/ProteinEvolution/blob/master/Figures/BoxAndWhiskerPlots_LinearModelSlopes_MetricsVsAge.py
     LinearModel <- lm(X ~ Age)
     Intercept <- coef(LinearModel)["(Intercept)"]
@@ -238,8 +238,13 @@ evdevH2O3 <- function(pdf = FALSE, H2O = FALSE) {
     Pvalue <- summary(LinearModel)$coefficients[2, 4]
     R2 <- summary(LinearModel)$r.squared
 
+    # Setup plot
     if(H2O) ylab <- nH2Olab else ylab <- ZClab
     plot(Age, X, type = "n", xlab = "Age (Mya)", ylab = ylab, xlim = rev(range(Age)), font.lab = 2)
+    # Draw horizontal line at LUCA 20220217
+    LUCA.X <- median(X[AA$protein == max(Age)])
+    abline(h = LUCA.X, lty = 2, col = "gray40")
+    # Make boxplots and regression lines
     boxplot(X ~ Age, add = TRUE, at = unique(Age), boxfill = "lightblue", xaxt = "n", yaxt = "n",
             position = "dodge", varwidth = TRUE, boxwex = 200, outpch = 21, outcex = 0.4, outbg = "#66666680", outcol = NA)
     abline(Intercept, Slope, lwd = 2, col = "dodgerblue")
