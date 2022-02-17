@@ -38,6 +38,7 @@ getCBS17 <- function(metric = "H2O", boot.R = 99) {
   }
 
   # Run boot() for each timepoint
+  set.seed(1234)
   boot.list <- lapply(tp, function(TP) {
     weights <- dat[, TP]
     boot::boot(X, samplewmean, R = boot.R, j = weights)
@@ -90,6 +91,7 @@ getFOK21 <- function(metric = "H2O", boot.R = 99) {
   }
 
   # Run boot() for each timepoint
+  set.seed(1234)
   boot.list <- lapply(iTP, function(i) {
     weights <- dat[, i]
     boot::boot(X, samplewmean, R = boot.R, j = weights)

@@ -12,11 +12,9 @@
 ZClab <- expression(bolditalic(Z)[bold(C)])
 nH2Olab <- expression(bolditalic(n)[bold(H[2]*O)])
 DnH2Olab <- expression(bold(Delta)*bolditalic(n)[bold(H[2]*O)])
-DPSlab <- expression(bold(Delta*PS))
-DPSHPAlab <- expression(bold(Delta*PS~"(HPA)"))
-DPSTCGAlab <- expression(bold(Delta*PS~"(TCGA)"))
 logaH2Olab <- expression(bold(log)*bolditalic(a)[bold(H[2]*O)])
 logfO2lab <- expression(bold(log)*bolditalic(f)[bold(O[2])])
+Ehlab <- expression(bold("Eh (mV)"))
 
 # Comparison of different sets of basis species 20220216
 evdevH2O1 <- function(pdf = FALSE) {
@@ -786,6 +784,11 @@ evdevH2O7 <- function(pdf = FALSE, boot.R = 99) {
   P_pe <- 0.25 * P_meanO2 - pH - 0.5 * P_meanH2O - 0.5 * logK
   T_Eh <- convert(T_pe, "Eh") * 1000
   P_Eh <- convert(P_pe, "Eh") * 1000
+  # Another way to calculate using CHNOSZ::convert
+  T_Eh2 <- convert(T_meanO2, "E0", pH = pH, logaH2O = T_meanH2O) * 1000
+  P_Eh2 <- convert(P_meanO2, "E0", pH = pH, logaH2O = P_meanH2O) * 1000
+  stopifnot(all.equal(T_Eh, T_Eh2))
+  stopifnot(all.equal(P_Eh, P_Eh2))
   plot(c(1, 11), range(c(T_Eh, P_Eh)), type = "n", xlab = "Biofilm stage", ylab = "Eh (mV)", xaxt = "n", font.lab = 2)
   text(x = 1:11, y = par()$usr[3] - 1.5 * strheight("A"), labels = aa$protein[isT], srt = 45, adj = 1, xpd = TRUE)
   axis(1, at = 1:11, labels = NA)
@@ -864,11 +867,25 @@ evdevH2O8 <- function(pdf = FALSE, boot.R = 99) {
   O2_embryo <- read.csv(file.path(datadir, "fly_embryo_O2_Dme.csv"), as.is = TRUE)
   H2O_adult <- read.csv(file.path(datadir, "fly_adult_H2O_Dme.csv"), as.is = TRUE)
   O2_adult <- read.csv(file.path(datadir, "fly_adult_O2_Dme.csv"), as.is = TRUE)
-  # Get mean values
-  H2O_embryo <- median(colMeans(H2O_embryo)[-1])
-  O2_embryo <- median(colMeans(O2_embryo)[-1])
-  H2O_adult <- median(colMeans(H2O_adult)[-1])
-  O2_adult <- median(colMeans(O2_adult)[-1])
+  # Get mean values for MaximAct runs
+  H2O_embryo <- colMeans(H2O_embryo)[-1]
+  O2_embryo <- colMeans(O2_embryo)[-1]
+  H2O_adult <- colMeans(H2O_adult)[-1]
+  O2_adult <- colMeans(O2_adult)[-1]
+  # Calculate Eh
+  Eh_embryo <- convert(O2_embryo, "E0", pH = 7, logaH2O = H2O_embryo) * 1000
+  Eh_adult <- convert(O2_adult, "E0", pH = 7, logaH2O = H2O_adult) * 1000
+  Eh_embryo_noH2O <- convert(O2_embryo, "E0", pH = 7) * 1000
+  Eh_adult_noH2O <- convert(O2_adult, "E0", pH = 7) * 1000
+  # Get median values for proteins
+  H2O_embryo <- median(H2O_embryo)
+  O2_embryo <- median(O2_embryo)
+  Eh_embryo <- median(Eh_embryo)
+  Eh_embryo_noH2O <- median(Eh_embryo_noH2O)
+  H2O_adult <- median(H2O_adult)
+  O2_adult <- median(O2_adult)
+  Eh_adult <- median(Eh_adult)
+  Eh_adult_noH2O <- median(Eh_adult_noH2O)
 
   # MaximAct results for developmental proteome of Casas-Vila et al., 2017  20210403
   # Make logaH2O plot
@@ -948,13 +965,17 @@ evdevH2O8 <- function(pdf = FALSE, boot.R = 99) {
   text(-0.131, -0.714, "Median values for differentially expressed proteins", cex = 1.3)
   par(xpd = FALSE)
 
-  # Make logaH2O-logfO2 plot
-  plot(c(-71, -70.2), c(0, 2), xlab = logfO2lab, ylab = logaH2Olab, type = "n")
+  # Make logaH2O-Eh plot
+  # (changed from logaH2O-logfO2 20220217)
+  plot(c(-300, -220), c(0, 2), xlab = Ehlab, ylab = logaH2Olab, type = "n")
   abline(h = 0, lty = 4, lwd = 1.5, col = "slategray4")
-  O2 <- c(O2_embryo, O2_adult)
+  Eh <- c(Eh_embryo, Eh_adult)
   H2O <- c(H2O_embryo, H2O_adult)
-  points(O2, H2O, pch = pch, col = col, cex = cex * 2)
-  text(O2, H2O - 0.13, c("embryo", "adult"))
+  points(Eh, H2O, pch = pch, col = col, cex = cex * 2)
+  text(Eh, H2O - 0.13, c("embryo", "adult"))
+  # Add points for logaH2O = 0
+  Eh_noH2O <- c(Eh_embryo_noH2O, Eh_adult_noH2O)
+  points(Eh_noH2O, c(0, 0), pch = c(21, 22), col = col, cex = cex * 2)
 
   if(pdf) dev.off()
 
