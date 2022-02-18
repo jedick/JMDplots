@@ -12,7 +12,7 @@
 
 
 
-<title>Bison Pool hot spring (2011, 2013)</title>
+<title>Relative stabilities of proteins inferred from a hot-spring metagenome (2011, 2013)</title>
 
 <script>// Hide empty <a> tag within highlighted CodeBlock for screen reader accessibility (see https://github.com/jgm/pandoc/issues/6352#issuecomment-626106786) -->
 // v0.0.1
@@ -275,7 +275,6 @@ line-height: 40px;
 }
 h2 {
 border-bottom: 4px solid #f7f7f7;
-padding-top: 10px;
 padding-bottom: 2px;
 font-size: 145%;
 }
@@ -332,7 +331,7 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 
 
 
-<h1 class="title toc-ignore">Bison Pool hot spring (2011, 2013)</h1>
+<h1 class="title toc-ignore">Relative stabilities of proteins inferred from a hot-spring metagenome (2011, 2013)</h1>
 
 
 
@@ -366,7 +365,7 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 <p>Dick JM, Shock EL. 2013. A metastable equilibrium model for the relative abundances of microbial phyla in a hot spring. <em>PLOS One</em> <strong>8</strong>(9): e72395. doi: <a href="https://doi.org/10.1371/journal.pone.0072395">10.1371/journal.pone.0072395</a></p>
 </blockquote>
 <p>These plots have been modified from the original figures to make greater use of color.</p>
-<p>This vignette was compiled on 2022-01-27 with <strong><a href="https://github.com/jedick/JMDplots">JMDplots</a></strong> 1.2.11 and <strong><a href="http://chnosz.net">CHNOSZ</a></strong> 1.4.1.</p>
+<p>This vignette was compiled on 2022-02-18 with <strong><a href="https://github.com/jedick/JMDplots">JMDplots</a></strong> 1.2.12 and <strong><a href="http://chnosz.net">CHNOSZ</a></strong> 1.4.2.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="kw">library</span>(JMDplots)</span></code></pre></div>
 <p>The current OBIGT database in CHNOSZ has updates for the methionine sidechain group from <span class="citation">LaRowe and Dick (2012)</span> and the glycine group and protein backbone [UPBB] from <span class="citation">Kitadai (2014)</span>. In order to reproduce the calculations from the 2011 paper, we start by loading the older values from <span class="citation">Dick et al. (2006)</span>.</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>file &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">&quot;extdata/OBIGT/OldAA.csv&quot;</span>, <span class="dt">package =</span> <span class="st">&quot;JMDplots&quot;</span>)</span>

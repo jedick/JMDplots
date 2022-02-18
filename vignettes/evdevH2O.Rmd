@@ -155,4 +155,16 @@ table(dat$Phylostrata[is.na(dat$Entry)])
 LYSC_example()
 ```
 
+### Number of background proteins from the human proteome
+```{r background}
+TPPG17_file <- "extdata/evdevH2O/phylostrata/TPPG17.csv.xz"
+LMM16_file <- "extdata/evdevH2O/phylostrata/LMM16.csv.xz"
+TPPG17 <- read.csv(system.file(TPPG17_file, package = "JMDplots"), as.is = TRUE)
+LMM16 <- read.csv(system.file(LMM16_file, package = "JMDplots"), as.is = TRUE)
+UniProt_IDs <- na.omit(intersect(TPPG17$Entry, LMM16$UniProt))
+length(UniProt_IDs)
+```
+
+**Data sources:** @TPPG17 (`TPPG17`) and @LMM16 (`LMM16`).
+
 ## References
