@@ -495,28 +495,26 @@ evdevH2O5 <- function(pdf = FALSE) {
         rect(10, par("usr")[3], 16, par("usr")[4], col = "lightgray")
         # PS 1 (Cellular organisms), 2 (Eukaryota), 5 (Eumetazoa), 10 (Mammalia)
         abline(v = c(1.04, 2, 5, 10), col = 5, lwd = 2)
-        xtext <- 6.5
+        xtext <- 7.4
       }
       if(PS_source == "LMM16") {
         axis(1, at = 1:8, labels = c(1,NA,NA,4,NA,6,NA,8))
         # PS 1 (Cellular_organisms), 4 (Eukaryota), 6 (Eumetazoa), 8 (Mammalia)
         abline(v = c(1.02, 4, 6, 7.98), col = 5, lwd = 2)
-        xtext <- 5.5
+        xtext <- 5
       }
       # Plot virtual Eh
       lines(PS, mV, lwd = 2, col = 2) 
       lines(PS, mV_noH2O, lty = 2, lwd = 1, col = 2) 
       # Add lines for measured Eh
-      abline(h = c(-150, -199, -241, -318), lty = 3, lwd = 1.5, col = "slategray4")
-      # Eh = -150 mV (plasma GSH/GSSG) Jones and Sies, 2015
-      text(xtext, -150, "Plasma GSH/GSSG", adj = c(0.5, 1.3))
-      # Eh = -199 mV (erythrocyte GSH/GSSG) van 't Erve et al., 2013
-      if(PS_source=="TPPG17") text(xtext, -199, "Intracellular GSH/GSSG", adj = c(0.49, -0.3))
-      if(PS_source=="LMM16") text(xtext, -199, "Intracellular         GSH/GSSG     ", adj = c(0.5, -0.3))
-      # Eh = -241 mV (cytosolic NADH/NAD+) Jones and Sies, 2015
-      text(xtext, -241, "Cytosolic NADH/NAD+", adj = c(0.5, 1.3))
-      # Eh = -318 mV (mitochondrial NADH/NAD+) Jones and Sies, 2015
-      text(xtext, -318, "Mitochondrial NADH/NAD+", adj = c(0.5, -0.3))
+      abline(h = c(-150, -208, -230, -320, -380), lty = 3, lwd = 1.5, col = "slategray4")
+      # Plasma GSH/GSSG from Jones and Sies (2015)
+      text(xtext, -150, "Blood\nPlasma", adj = c(0.5, 1.2))
+      # ER, cytosol, and mitochondrial GSH/GSSG from Schwarzländer et al. (2016)
+      text(xtext, -208, "ER                           ", adj = c(0.5, -0.4))
+      text(xtext, -230, "Cell Lysate", adj = c(0.5, 1.4))
+      text(xtext, -320, "Cytosol", adj = c(0.5, -0.4))
+      text(xtext, -380, "Mitochondria", adj = c(0.5, -0.3))
       label.figure(fig.lab[4], cex = 1.6, font = 2)
     }
 

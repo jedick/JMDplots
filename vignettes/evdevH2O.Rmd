@@ -111,7 +111,7 @@ evdevH2O4()
 evdevH2O5()
 ```
 
-**Data sources:** Plasma and subcellular redox potentials are from @VWR+13 and @JS15.
+**Data sources:** Blood plasma and subcellular redox potentials (*E*~GSH~) are from @JS15 and @SDMM16.
 
 ## Chemical metrics for and thermodynamic parameters with different background proteomes (Figure 6)
 ```{r evdevH2O6, message = FALSE, results = "hide", out.width='100%', fig.width = 8, fig.height = 5, out.extra='class="full-width"', pngquant = pngquant, dpi = 100}
