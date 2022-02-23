@@ -135,15 +135,15 @@ bison5 <- function() {
 }
 
 # Metastable equilibrium model for relative abundances
-bison6 <- function() {
+bison6 <- function(plot.it = TRUE) {
   ip.phyla <- add.protein(aa.phyla)
-  layout(matrix(1:6, ncol=3), heights=c(2, 1))
+  if(plot.it) layout(matrix(1:6, ncol=3), heights=c(2, 1))
   equil.results <- list()
   for(i in 1:5) {
     # get the equilibrium degrees of formation and the optimal logaH2
     ae <- alpha.equil(i, ip.phyla)
     equil.results[[i]] <- ae
-    if(i %in% c(1, 3, 5)) {
+    if(i %in% c(1, 3, 5) & plot.it) {
       iphy <- match(colnames(ae$alpha), phyla.abc)
       # top row: equilibrium degrees of formation
       thermo.plot.new(xlim = range(ae$H2vals), ylim = c(0, 0.5), xlab = axis.label("H2"),

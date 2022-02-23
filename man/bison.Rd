@@ -20,12 +20,13 @@ Plots from the papers by Dick and Shock (2011 and 2013).
   bison3()
   bison4()
   bison5()
-  bison6()
+  bison6(plot.it = TRUE)
   bison7(equil.results)
   bison8(equil.results)
 }
 
 \arguments{
+  \item{plot.it}{logical, make a plot?}
   \item{equil.results}{list, value returned by \code{bison6}}
 }
 

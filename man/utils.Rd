@@ -2,6 +2,7 @@
 \name{utils}
 \alias{utils}
 \alias{addexif}
+\alias{addalpha}
 \title{Some Utilities for the Package}
 \description{
   Utility functions for the package.
@@ -9,16 +10,21 @@
 
 \usage{
   addexif(name, title, paperref)
+  addalpha(col, alpha)
 }
 
 \arguments{
   \item{name}{character, function name (added to Creator in PDF metadata)}
   \item{title}{character, title for PDF}
   \item{paperref}{character, reference (added to Subject in PDF metadata)}
+  \item{col}{color specification (see \code{\link{col2rgb}})}
+  \item{alpha}{character, hexadecimal value of alpha}
 }
 
 \details{
 \code{addexif} is a utility function to write add PDF metadata using the \samp{exiftool} system command.
 The file name is constructed from the function name (i.e. \code{name.pdf}).
 If \samp{exiftool} is not available, this function does nothing.
+
+\code{addalpha} adds transparency to a color by appending the value of alpha to the hexadecimal string equivalent of the color given in \code{col}.
 }

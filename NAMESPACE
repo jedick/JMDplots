@@ -65,7 +65,9 @@ export(
   "getrefseq",
   # orp16S paper 20211003-20211008
   "orp16S1", "orp16S2", "orp16S3", "orp16S4", "orp16S5", "orp16S6", "orp16S_S1",
-  "plotEZ", "plotMA"
+  "plotEZ", "plotMA",
+  # utilities 20220223
+  "addalpha"
 )
 
 # Imports from CHNOSZ

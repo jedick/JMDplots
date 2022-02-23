@@ -1528,12 +1528,3 @@ geo16S_S6 <- function(pdf = FALSE) {
   if(pdf) dev.off()
 
 }
-
-### UNEXPORTED FUNCTION ###
-addalpha <- function(col, alpha) {
-  # Add transparency to given color
-  x <- col2rgb(col)
-  newcol <- rgb(x[1], x[2], x[3], maxColorValue = 255)
-  newcol <- paste0(newcol, alpha)
-  newcol
-}
