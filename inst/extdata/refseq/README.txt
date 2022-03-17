@@ -1,5 +1,5 @@
 # This document describes steps for processing the 
-# RefSeq database (release 206, 2020-05-21) to produce these files:
+# RefSeq database (release 206, 2021-05-21) to produce these files:
 
 protein_refseq.csv: total amino acid composition of all proteins for
   bacteria, archaea, and viral genomes in the RefSeq collection (n = 49448)

@@ -110,7 +110,7 @@ If \code{writeFiles} is TRUE, a PNG plot file is created and optimal \logfO2 or 
 \references{
 Casas-Vilas, N. et al. (2017) The developmental proteome of \emph{Drosophila melanogaster}. \emph{Genome Res.} \bold{27}, 1273--1285. \doi{10.1101/gr.213694.116}
 
-Dick, J. M. (2022) A thermodynamic model for water activity and redox potential in evolution and developent. bioRxiv. \doi{https://doi.org/10.1101/2021.01.29.428804}
+Dick, J. M. (2022) A thermodynamic model for water activity and redox potential in evolution and developent. \emph{J. Mol. Evol}. \doi{https://doi.org/10.1007/s00239-022-10051-7}
 
 Fabre, B., Korona, D., Lees, J. G., Lazar, I., Livneh, I., Brunet, M., Orengo, C. A., Russell, S. and Lilley, K. S. (2019) Comparison of \emph{Drosophila melanogaster} embryo and adult proteome by SWATH-MS reveals differential regulation of protein synthesis, degradation machinery, and metabolism modules. \emph{J. Proteome Res.} \bold{18}, 2525--2534. \doi{10.1021/acs.jproteome.9b00076}
 

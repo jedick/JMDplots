@@ -61,13 +61,11 @@ nH2O <- "<i>n</i><sub>H<sub>2</sub>O</sub>"
 ZC <- "<i>Z</i><sub>C</sub>"
 ```
 
-This vignette runs the code to make the plots from the following paper:
+This vignette runs the code to make the plots from the following paper first published by Springer Nature:
 
-> Dick JM. 2022. A thermodynamic model for water activity and redox potential in evolution and development. Submitted manuscript.
->
-> Preprint available at:
->
-> Dick JM. 2022. A thermodynamic model for water activity and redox potential in evolution and development. bioRxiv. doi: [10.1101/2021.01.29.428804](https://doi.org/10.1101/2021.01.29.428804)
+> Dick JM. 2022. A thermodynamic model for water activity and redox potential in evolution and development. *Journal of Molecular Evolution*. doi: [10.1007/s00239-022-10051-7](https://doi.org/10.1007/s00239-022-10051-7)
+
+Use this link for full-text access to a view-only version of the paper: [https://rdcu.be/cITho](https://rdcu.be/cITho). A preprint of the paper is available on bioRxiv at doi: [10.1101/2021.01.29.428804](https://doi.org/10.1101/2021.01.29.428804).
 
 This vignette was compiled on `r Sys.Date()` with **[JMDplots](https://github.com/jedick/JMDplots)** `r packageDescription("JMDplots")$Version`, **[CHNOSZ](http://chnosz.net)** `r packageDescription("CHNOSZ")$Version`, and **[canprot](https://github.com/jedick/canprot)** `r packageDescription("canprot")$Version`.
 
@@ -150,7 +148,19 @@ message("Unmapped genes in each phylostratum:")
 table(dat$Phylostrata[is.na(dat$Entry)])
 ```
 
-### Example of protein chemical formula, formation reaction, equilibrium constant, and activity product
+### Calculating `r ZC` of chicken egg-white lysozyme from the chemical formula
+```{r LYSC_ZC_formula}
+(pf <- protein.formula("LYSC_CHICK"))
+CHNOSZ::ZC(pf)
+```
+
+### Calculating `r ZC` of lysozyme from the amino acid composition
+```{r LYSC_ZC_aa}
+(aa <- pinfo(pinfo("LYSC_CHICK")))
+canprot::ZCAA(aa)
+```
+
+### Per-residue chemical formula, formation reaction, equilibrium constant, and activity product
 ```{r LYSC_example}
 LYSC_example()
 ```

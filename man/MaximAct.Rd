@@ -59,7 +59,7 @@ The protein names (used to label the x axis of the plots and for the column name
 \references{
 Dick, J. M., Yu, M. and Tan, J. (2020) Uncovering chemical signatures of salinity gradients through compositional analysis of protein sequences. \emph{Biogeosciences} \bold{17}, 6145--6162. \doi{10.5194/bg-17-6145-2020}
 
-Dick, J. M. (2022) A thermodynamic model for water activity and redox potential in evolution and developent. bioRxiv. \doi{https://doi.org/10.1101/2021.01.29.428804}
+Dick, J. M. (2022) A thermodynamic model for water activity and redox potential in evolution and developent. \emph{J. Mol. Evol}. \doi{https://doi.org/10.1007/s00239-022-10051-7}
 
 Liebeskind, B. J. and McWhite, C. D. and Marcotte, E. M. (2016) Towards consensus gene ages. \emph{Genome Biol. Evol.} \bold{8}, 1812--1823. \doi{10.1093/gbe/evw113}
 

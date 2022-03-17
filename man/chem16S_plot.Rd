@@ -97,15 +97,19 @@ taxacomp("majorphyla")
 
 # Make a plot for the Baltic Sea salinity gradient
 # (data from Herlemann et al., 2016)
-pc <- plotmet("HLA+16")
+pm <- plotmet("HLA+16")
 # Add a legend
 legend <- c("< 6 PSU", "6-20 PSU", "> 20 PSU")
 pch <- c(24, 20, 21)
 pt.bg <- c(3, NA, 4)
 legend("bottomright", legend, pch = pch, col = 1, pt.bg = pt.bg, bg = "white")
-# Add the convex hull - lines then area
-addhull(pc$ZC, pc$nH2O, "blue", TRUE)
-addhull(pc$ZC, pc$nH2O, "slategray1")
+# Identify samples with low and high salinity
+mdat <- getmdat("HLA+16")
+ilo <- mdat$salinity < 6
+ihi <- mdat$salinity > 20
+# Add convex hulls
+addhull(pm$ZC[ilo], pm$nH2O[ilo], "green3")
+addhull(pm$ZC[ihi], pm$nH2O[ihi], "blue")
 
 # Some samples (i.e. outliers) have an NA name in the metadata
 # to exclude them from further calculations.
