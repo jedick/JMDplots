@@ -155,5 +155,5 @@ importFrom("stats", "lm", "na.omit", "predict", "sd", "predict.lm", "residuals",
            "coefficients", "loess", "wilcox.test", "weighted.mean",
            "kmeans", "qt", "cor.test", "coef", "aggregate", "cor")
 importFrom("utils", "read.csv", "demo", "tail", "write.csv",
-           "capture.output", "browseURL", "head", "combn", "read.table")
+           "capture.output", "browseURL", "head", "combn", "read.table", "packageVersion")
 

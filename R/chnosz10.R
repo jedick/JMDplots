@@ -382,14 +382,14 @@ chnosz107 <- function(pdf = FALSE) {
   T <- 100
   P <- 150
   a <- affinity("K+" = c(4, 7), "Na+" = c(6, 9), T = T, P = P)
-  diagram(a, lwd = 1.5, xlab = ratlab("K+"), ylab = ratlab("Na+"), names = NULL)
+  diagram(a, lwd = 1.5, xlab = ratlab("K+"), ylab = ratlab("Na+"), names = NA)
   # plot experimental data
   dat <- read.csv(system.file("extdata/cpetc/Mer75_Table4.csv", package = "CHNOSZ"))
   points(dat$log.aK..aH.., dat$log.aNa..aH..)
   # plot line calculated using SUPCRT92 data
   add.OBIGT("SUPCRT92")
   a <- affinity("K+" = c(4, 7), "Na+" = c(6, 9), T = 100, P = 150)
-  diagram(a, col = "blue", lty = 2, add = TRUE, names = NULL)
+  diagram(a, col = "blue", lty = 2, add = TRUE, names = NA)
   # add SUPCRTBL calculation
   logK_BL <- 2.092
   logaK <- seq(4, 7, 0.5)
@@ -805,12 +805,12 @@ chnosz10S8 <- function(pdf = FALSE) {
   IS <- 0
 
   ## now do calcite (a dissociation reaction)
-  calfun <- function(dissociation = NULL) {
+  calfun <- function(dissociate = TRUE) {
     basis(c("calcite", "Ca+2", "H2O", "O2", "H+"))
     sargs <- list(species = c("CO2", "HCO3-", "CO3-2"), add = TRUE)
     do.call(species, sargs)
     a <- affinity(pH = c(pH, res), T = T, IS = IS)
-    s <- solubility(a, dissociation = dissociation)
+    s <- solubility(a, dissociate = dissociate)
     diagram(s, ylim = c(-10, 4), type = "loga.balance", lwd = 4, col = "green2")
     diagram(s, add = TRUE, dy = c(1, 0.7, 0.2))
     lexpr <- as.expression(c("total", expr.species("CO2", state = "aq"),

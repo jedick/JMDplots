@@ -1080,7 +1080,7 @@ LYSC_example <- function() {
   # Calculate per-residue ΔGf° at 25 °C and 1 bar
   G <- suppressMessages(protein.OBIGT(ip)$G / pl)
   # Add the residue as a new species
-  suppressMessages(mod.OBIGT("LYSC_residue", formula = formula, G = G))
+  suppressMessages(mod.OBIGT("LYSC_residue", formula = formula, E_units = "cal", G = G))
 
   # Calculate properties of formation reaction from QEC basis species
   basis("QEC")

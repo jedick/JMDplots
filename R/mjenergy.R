@@ -31,8 +31,9 @@ mjenergy1 <- function(pdf = FALSE) {
     # Convert dimensionless affinities to kJ/mol
     TK <- convert(SC10$T, "K")
     a$values <- lapply(a$values, convert, "G", TK)
-    a$values <- lapply(a$values, convert, "J")
     a$values <- lapply(a$values, `*`, -0.001)
+    # Convert to Joules if needed (for earlier CHNOSZ versions) 20220401
+    if(packageVersion("CHNOSZ") <= "1.4.3") a$values <- lapply(a$values, convert, "J")
     if(vent == "Rainbow") {
       # Make plot
       E.units("J")  # only affects axis label, not conversion above
@@ -55,7 +56,8 @@ mjenergy1 <- function(pdf = FALSE) {
     }
     # Convert dimensionless affinities to kJ/mol
     a_vals <- convert(a_vals, "G", T = TK)
-    a_vals <- convert(a_vals, "J")
+    # Convert to Joules if needed (for earlier CHNOSZ versions) 20220401
+    if(packageVersion("CHNOSZ") <= "1.4.3") a_vals <- convert(a_vals, "J")
     a_vals <- - a_vals / 1000
     col <- 1
     if(vent == "Endeavour") col <- 2
@@ -83,8 +85,9 @@ mjenergy1 <- function(pdf = FALSE) {
     # Convert dimensionless affinities to kJ/mol
     T <- convert(a$vals[[1]], "K")
     a$values <- lapply(a$values, convert, "G", T)
-    a$values <- lapply(a$values, convert, "J")
     a$values <- lapply(a$values, `*`, -0.001)
+    # Convert to Joules if needed (for earlier CHNOSZ versions) 20220401
+    if(packageVersion("CHNOSZ") <= "1.4.3") a$values <- lapply(a$values, convert, "J")
     # Make plot
     E.units("J")  # only affects axis label, not conversion above
     # Use colors for ZC 20210813
@@ -204,8 +207,9 @@ mjenergy3 <- function(pdf = FALSE, write.csv = FALSE) {
     # Convert dimensionless affinities to MJ/mol
     T <- convert(a$vals[[1]], "K")
     a$values <- lapply(a$values, convert, "G", T)
-    a$values <- lapply(a$values, convert, "J")
     a$values <- lapply(a$values, `*`, -1e-6)
+    # Convert to Joules if needed (for earlier CHNOSZ versions) 20220401
+    if(packageVersion("CHNOSZ") <= "1.4.3") a$values <- lapply(a$values, convert, "J")
     # Save values with temperature as column names
     outvals <- do.call(rbind, a$values)
     colnames(outvals) <- SC10$T
@@ -329,7 +333,9 @@ calc_affinity <- function(T = 85, protein = "CSG_METJA") {
   E.units("cal")
   species(protein)
   a <- suppressMessages(affinity(T = T))
-  protJ.ion <- convert(-convert(a$values[[1]], "G", T = convert(T, "K")), "J")
+  protJ.ion <- -convert(a$values[[1]], "G", T = convert(T, "K"))
+  # Convert to Joules if needed (for earlier CHNOSZ versions) 20220401
+  if(packageVersion("CHNOSZ") <= "1.4.3") protJ.ion <- convert(protJ.ion, "J")
   protMJ.ion <- formatC(protJ.ion / 1e6, format = "f", digits = 1)
   print(paste("Affinity for synthesis of", protein, "(ionized):", protMJ.ion, "MJ/mol"))
 
