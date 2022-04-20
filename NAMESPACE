@@ -67,7 +67,9 @@ export(
   "orp16S1", "orp16S2", "orp16S3", "orp16S4", "orp16S5", "orp16S6", "orp16S_S1",
   "plotEZ", "plotMA",
   # utilities 20220223
-  "addalpha"
+  "addalpha",
+  # gcbio paper 20220420
+  "gcbio1", "gcbio2", "gcbio3", "gcbio4", "gcbio5", "gcbioS1"
 )
 
 # Imports from CHNOSZ
@@ -127,7 +129,8 @@ importFrom("shiny", "fluidPage", "includeCSS", "shinyApp")
 importFrom("timevis", "renderTimevis", "timevis", "timevisOutput")
 importFrom("png", "readPNG")
 importFrom("MASS", "kde2d")
-importFrom("diagram", "openplotmat", "coordinates", "straightarrow", "curvedarrow", "textrect", "textplain")
+importFrom("diagram", "openplotmat", "coordinates", "straightarrow", "curvedarrow",
+           "textrect", "textplain", "textempty")
 importFrom("ggplot2", "theme_bw", "xlab", "ylab", "geom_hline", "geom_vline", "theme",
            "element_text", "ggplot", "aes", "geom_point", "ggtitle", "labs", "xlim", "ylim",
            "theme_void", "geom_text", "annotate", "unit",
@@ -137,6 +140,7 @@ importFrom("grid", "grid.roundrect", "gpar", "grid.draw")
 importFrom("oce", "mapPlot", "mapPoints", "mapPolygon")
 importFrom("sf", "st_coordinates", "st_read", "st_transform")
 importFrom("eulerr", "euler")
+importFrom("ape", "read.tree", "plot.phylo")
 
 # Imports from standard packages
 importFrom("grDevices", "dev.off", "cairo_pdf", "pdf", "blues9", "colorRampPalette",
@@ -148,12 +152,13 @@ importFrom("graphics", "abline", "arrows", "axis", "box", "layout",
            "polygon", "hist", "plot.window", "rasterImage",
            "contour", "grconvertX", "grconvertY", "image",
            ".filled.contour", "Axis", "close.screen", "lcm", "screen",
-           "split.screen", "boxplot")
+           "split.screen", "boxplot", "matlines", "matplot")
 importFrom("stats", "lm", "na.omit", "predict", "sd", "predict.lm", "residuals",
            "qqline", "qqnorm", "quantile", "median", "fivenum",
            "density", "formula", "t.test", "approx", "splinefun", "xtabs",
            "coefficients", "loess", "wilcox.test", "weighted.mean",
-           "kmeans", "qt", "cor.test", "coef", "aggregate", "cor")
+           "kmeans", "qt", "cor.test", "coef", "aggregate", "cor", "uniroot")
 importFrom("utils", "read.csv", "demo", "tail", "write.csv",
-           "capture.output", "browseURL", "head", "combn", "read.table", "packageVersion")
+           "capture.output", "browseURL", "head", "combn", "read.table", "packageVersion",
+           "assignInNamespace")
 

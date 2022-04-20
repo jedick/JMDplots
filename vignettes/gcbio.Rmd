@@ -1,0 +1,105 @@
+---
+title: "Frontier of geochemical biology (2022)"
+output: 
+  rmarkdown::html_vignette:
+    mathjax: null
+vignette: >
+  %\VignetteIndexEntry{Frontier of geochemical biology (2022)}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+bibliography: JMDplots.bib
+csl: elementa.csl
+---
+
+<style>
+/* https://gomakethings.com/how-to-break-an-image-out-of-its-parent-container-with-css/ */
+@media (min-width: 700px) {
+  .full-width {
+    left: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+    max-width: 100vw;
+    position: relative;
+    right: 50%;
+    width: 100vw;
+  }
+}
+@media (min-width: 900px) {
+  .full-width {
+    left: 50vw; /* fallback if needed */
+    left: calc(50vw - 100px);
+    width: 900px;
+    position: relative;
+  }
+}
+</style>
+
+```{r setup, include=FALSE}
+library(knitr)
+# Use pngquant to reduce size of PNG images
+knit_hooks$set(pngquant = hook_pngquant)
+pngquant <- "--speed=1 --quality=0-25"
+# In case pngquant isn't available
+if (!nzchar(Sys.which("pngquant"))) pngquant <- NULL 
+```
+
+```{r options, include=FALSE}
+options(width = 80)
+```
+
+```{r HTML, include=FALSE}
+ZC <- "<i>Z</i><sub>C</sub>"
+logaH2 <- "log<i>a</i><sub>H<sub>2</sub></sub>"
+```
+
+This vignette runs the code to make the plots from the following paper:
+
+> Dick JM, Boyer GM, Canovas PA III, Shock EL. 2022. The frontier of geochemical biology: Ecological applications of carbon oxidation state and the next steps for thermodynamic models. Manuscript in preparation.
+
+This vignette was compiled on `r Sys.Date()` with **[JMDplots](https://github.com/jedick/JMDplots)** `r packageDescription("JMDplots")$Version`.
+
+```{r library, message = FALSE, results = "hide"}
+library(JMDplots)
+```
+
+## `r ZC` of proteins and lipids in hot springs (Figure 1)
+```{r gcbio1, message = FALSE, results = "hide", out.width='80%', fig.align='center', fig.width = 8.5, fig.height = 4, pngquant = pngquant}
+gcbio1()
+```
+
+**Data sources:** Proteins [@DS13] and lipids [@BSS+20].
+
+## Overlay `r ZC` on phylogenetic tree of methanogens (Figure 2)
+```{r gcbio2, message = FALSE, results = "hide", out.width='100%', fig.width = 12, fig.height = 8, out.extra = 'class="full-width"', pngquant = pngquant}
+gcbio2()
+```
+
+**Data sources:** Hierarchical clustering tree of methanogenesis genes [@LL18]; `r ZC` calculated for reference proteomes [@DT22] based on RefSeq protein sequences [@OWB+16]. See Table 1 in the paper for references for optimal growth temperature (*T*~opt~).
+
+## Affinities of organic synthesis reactions (Figure 3)
+```{r gcbio3, message = FALSE, results = "hide", out.width='100%', fig.width = 7, fig.height = 6, pngquant = pngquant, dpi = 100}
+gcbio3()
+```
+
+**Data sources:** List of organic compounds from @SC10 and TCA cycle metabolites from @CS16. See Table 2 in the paper for references for thermodynamic data.
+
+## Affinities for methanogen proteomes and `r logaH2` of habitable niches (Figure 4)
+```{r gcbio4, message = FALSE, results = "hide", out.width='100%', fig.width = 7, fig.height = 5, out.extra = 'class="full-width"', pngquant = "--speed=1 --quality=25-50", dpi = 100}
+gcbio4()
+```
+
+**Data sources:** Lost City *T* and H~2~ concentration [@KKF+05], Rainbow vent fluid mixing model [@SC10], methanogenic and non-methanogenic sediments [@LG88].
+
+## Interdisciplinary fields in a biological hierarchy (Figure 5)
+```{r gcbio5, message = FALSE, results = "hide", out.width='100%', fig.width = 14, fig.height = 6, pngquant = pngquant}
+gcbio5()
+```
+
+**Data source:** Biological hierarchy modified from @GMC+18.
+
+## Intermediate `r logaH2` calculated for different compound classes (Figure S1)
+```{r gcbioS1, message = FALSE, results = "hide", out.width='80%', fig.align='center', fig.width = 6, fig.height = 8, pngquant = pngquant}
+gcbioS1()
+```
+
+## References

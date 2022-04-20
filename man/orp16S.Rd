@@ -20,6 +20,7 @@ Plots from the paper by Dick and Meng (2021).
   orp16S4(pdf = FALSE)
   orp16S5(pdf = FALSE)
   orp16S6(pdf = FALSE)
+  orp16S_S1(pdf = FALSE)
 }
 
 \arguments{
@@ -67,7 +68,7 @@ To set up the \code{\link{chem16S}} environment, change \code{options(chem16Sdir
 }
 
 \references{
-Dick, J. M. and Meng, D. (2021) Local and global chemical shaping of bacterial communities by redox potential.
+Dick, J. M. and Meng, D. (2021) Local and global chemical shaping of bacterial communities by redox potential. bioRxiv. \doi{10.1101/2021.10.12.464155}
 
 USGS (2010) Great Lakes and Watersheds Shapefiles. ScienceBase Catalog, U.S. Geological Survey. \doi{https://www.sciencebase.gov/catalog/item/530f8a0ee4b0e7e46bd300dd}
 

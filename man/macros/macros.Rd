@@ -28,3 +28,5 @@
 \newcommand{\NH4plus}{\ifelse{latex}{\eqn{\mathrm{NH_{4}^{+}}}}{\ifelse{html}{\out{NH<sub>4</sub><sup>+</sup>}}{NH4+}}}
 \newcommand{\H2S}{\ifelse{latex}{\eqn{\mathrm{H_{2}S}}}{\ifelse{html}{\out{H<sub>2</sub>S}}{H2S}}}
 \newcommand{\CH4}{\ifelse{latex}{\eqn{\mathrm{CH_{4}}}}{\ifelse{html}{\out{CH<sub>4</sub>}}{CH4}}}
+% 20220420
+\newcommand{\logaH2}{\ifelse{latex}{\eqn{\log a_{\mathrm{H_{2}}}}}{\ifelse{html}{\out{log<i>a</i><sub>H<sub>2</sub></sub>}}{logaH2}}}
