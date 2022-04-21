@@ -76,14 +76,14 @@ gcbio2()
 
 **Data sources:** Hierarchical clustering tree of methanogenesis genes [@LL18]; `r ZC` calculated for reference proteomes [@DT22] based on RefSeq protein sequences [@OWB+16]. See Table 1 in the paper for references for optimal growth temperature (*T*~opt~).
 
-## Affinities of organic synthesis reactions (Figure 3)
+## Relative stabilities of organic compounds in `r logaH2`--*T* space (Figure 3)
 ```{r gcbio3, message = FALSE, results = "hide", out.width='100%', fig.width = 7, fig.height = 6, pngquant = pngquant, dpi = 100}
 gcbio3()
 ```
 
 **Data sources:** List of organic compounds from @SC10 and TCA cycle metabolites from @CS16. See Table 2 in the paper for references for thermodynamic data.
 
-## Affinities for methanogen proteomes and `r logaH2` of habitable niches (Figure 4)
+## Relative stabilities of methanogen proteomes align with `r logaH2` of habitable niches (Figure 4)
 ```{r gcbio4, message = FALSE, results = "hide", out.width='100%', fig.width = 7, fig.height = 5, out.extra = 'class="full-width"', pngquant = "--speed=1 --quality=25-50", dpi = 100}
 gcbio4()
 ```

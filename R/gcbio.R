@@ -6,9 +6,6 @@
 # 20220220 Make hierarchy diagram
 # 20220420 Move to JMDplots
 
-# NOTE: gcbio2() depends on modified version of plot.phylo() from ape package (version 5.5)
-#source("plot.phylo_jmd.R")
-
 # Create bold axis labels
 ZClab <- quote(bolditalic(Z)[bold(C)])
 Tlab <- quote(bolditalic(T)~bold("("*degree*C*")"))
@@ -36,104 +33,6 @@ specieslist <- list(
 # Get seawater from Amend and Shock (1998)
 Seawater.AS98 <- data.frame(T = 18, CO2 = log10(1e-4), H2 = log10(2e-9), pH = -log10(5e-9), "NH4+" = log10(5e-8), H2S = log10(1e-15), check.names = FALSE)
 
-## Newick-format tree based on Figure 1 of Lyu and Lu (2018)
-## Branch lengths were measured using g3data  20210516
-## Used one species (strain level not in RefSeq):
-##   Represent Methanobrevibacter smithii DSM2375 and DSM2374 with single Methanobrevibacter smithii
-##   Represent Methanococcus maripaludis C6 and C7 with single Methanococcus maripaludis
-##   Remove Methanococcus maripaludis C5 and S2
-##   Remove Methanococcus voltae PS
-
-methanogen_tree <- read.tree(text = "
-(
-
-  (
-
-    (
-      (
-        (
-          (Methanococcoides_burtonii:176,
-            (Methanohalobium_evestigatum:121,
-              (Methanohalophilus_mahii:99, Methanomethylovorans_hollandica:99
-              ):22
-            ):55
-          ):148, Methanosalsum_zhilinae:324
-        ):76, Methanothrix_thermoacetophila:400
-      ):17,
-      (Methanosarcina_acetivorans:181,
-        (Methanosarcina_barkeri:129, Methanosarcina_mazei:129
-        ):52
-      ):236
-    ):373,
-
-    (
-      (
-        (Methanocella_conradii:145, Methanocella_arvoryzae:145
-        ):168, Methanocella_paludicola:313
-      ):291,
-      (
-        (Methanoregula_boonei:209, Methanosphaerula_palustris:209
-        ):269,
-        (
-          (
-            (Methanoculleus_marisnigri:178, Methanolacinia_petrolearia:178
-            ):20, Methanofollis_liminatans:198
-          ):35,
-          (Methanoplanus_limicola:108, Methanospirillum_hungatei:108
-          ):125
-        ):245
-      ):126
-    ):186
-
-  ):210,
-
-  (
-
-    (
-      (
-        (
-          (
-            (Methanobrevibacter_ruminantium:48
-            ):81,
-            (Methanobrevibacter_smithii:73
-            ):56
-          ):64,
-          (Methanothermobacter_thermautotrophicus:164, Methanothermus_fervidus:164
-          ):29
-        ):46, Methanosphaera_stadtmanae:239
-      ):144,
-      (Methanothermobacter_marburgensis:213, Methanococcus_aeolicus:213
-      ):170
-    ):119,
-
-    (
-      (Methanocaldococcus_fervens:360,
-        (
-          (Methanocaldococcus_infernus:270,
-            (
-              (Methanocaldococcus_jannaschii:90,
-                (Methanocaldococcus_sp._FS406-22:53, Methanocaldococcus_vulcanius:53
-                ):37
-              ):64, Methanothermococcus_okinawensis:154
-            ):116
-          ):28,
-          (
-            (
-              (Methanococcus_vannielii:0
-              ):98, Methanococcus_voltae:98
-            ):83,
-            (Methanococcus_maripaludis:92
-            ):89
-          ):117
-        ):62
-      ):38, Methanopyrus_kandleri:398
-    ):104
-
-  ):498
-
-):100;
-")
-
 # Make semi-transparent colors 20220223
 addalpha <- function(col, alpha) {
   x <- col2rgb(col)
@@ -145,6 +44,8 @@ col4 <- addalpha(4, "b0")
 col8 <- addalpha(8, "b0")
 col2 <- addalpha(2, "b0")
 
+# Read methanogen tree
+methanogen_tree <- read.tree(system.file("extdata/gcbio/methanogen_tree.txt", package = "JMDplots"))
 # Match species names without underscore used for labeling the tree
 methanogens <- gsub("_", " ", methanogen_tree$tip.label)
 # Indices of Class I and Class II methanogens
@@ -256,7 +157,7 @@ gcbio1 <- function(pdf = FALSE) {
 # Overlay ZC on phylogenetic tree of methanogens 20210516
 gcbio2 <- function(pdf = FALSE) {
 
-  # Use locally modified version of plot.phylo()
+  # Use locally modified version of plot.phylo() from ape package (version 5.5)
   source(system.file("extdata/gcbio/plot.phylo_jmd.R", package = "JMDplots"))
   # https://stackoverflow.com/questions/24331690/modify-package-function 20191121
   environment(plot.phylo_jmd) <- asNamespace("ape")
@@ -269,6 +170,7 @@ gcbio2 <- function(pdf = FALSE) {
 
   # Use colors to distinguish Class I and Class II
   edge.color <- c(rep(4, 37), rep(2, 37))
+  methanogen_tree <- read.tree(system.file("extdata/gcbio/methanogen_tree.txt", package = "JMDplots"))
   plot.phylo(methanogen_tree, root.edge = TRUE, edge.color = edge.color, cex = 0.75)
 
   # Calculate ZC from protein formulas
@@ -702,7 +604,7 @@ gcbio5 <- function(pdf = FALSE) {
   i <- 5; textempty(elpos[i + 1 + del, ] + c(0, 0), labels[i], adj = c(0, 1), col = "#9C27B0", font = 2)
 
   del <- 4 * nrow
-  textempty(elpos[1 + del, ], "Modelling\nApproach", cex = lcex, font = 2, adj = 0)
+  textempty(elpos[1 + del, ], "Modeling\nApproach", cex = lcex, font = 2, adj = 0)
   labels <- c("... in their\ngeological context", "", "", "", "", "Thermodynamics\nof ...")
   for(i in 1:6) textempty(elpos[i + 1 + del, ], labels[i], adj = 0, col = "#D50000", font = 2)
   # Uncomment this to check the alignment of separate text items below

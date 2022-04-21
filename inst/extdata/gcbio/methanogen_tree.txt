@@ -1,0 +1,95 @@
+[Newick-format tree based on Figure 1 of Lyu and Lu (2018)]
+[Branch lengths were measured using g3data  20210516]
+[Used one species (strain level not in RefSeq):]
+[  Represent Methanobrevibacter smithii DSM2375 and DSM2374 with single Methanobrevibacter smithii]
+[  Represent Methanococcus maripaludis C6 and C7 with single Methanococcus maripaludis]
+[  Remove Methanococcus maripaludis C5 and S2]
+[  Remove Methanococcus voltae PS]
+
+(
+
+  (
+
+    (
+      (
+        (
+          (Methanococcoides_burtonii:176,
+            (Methanohalobium_evestigatum:121,
+              (Methanohalophilus_mahii:99, Methanomethylovorans_hollandica:99
+              ):22
+            ):55
+          ):148, Methanosalsum_zhilinae:324
+        ):76, Methanothrix_thermoacetophila:400
+      ):17,
+      (Methanosarcina_acetivorans:181,
+        (Methanosarcina_barkeri:129, Methanosarcina_mazei:129
+        ):52
+      ):236
+    ):373,
+
+    (
+      (
+        (Methanocella_conradii:145, Methanocella_arvoryzae:145
+        ):168, Methanocella_paludicola:313
+      ):291,
+      (
+        (Methanoregula_boonei:209, Methanosphaerula_palustris:209
+        ):269,
+        (
+          (
+            (Methanoculleus_marisnigri:178, Methanolacinia_petrolearia:178
+            ):20, Methanofollis_liminatans:198
+          ):35,
+          (Methanoplanus_limicola:108, Methanospirillum_hungatei:108
+          ):125
+        ):245
+      ):126
+    ):186
+
+  ):210,
+
+  (
+
+    (
+      (
+        (
+          (
+            (Methanobrevibacter_ruminantium:48
+            ):81,
+            (Methanobrevibacter_smithii:73
+            ):56
+          ):64,
+          (Methanothermobacter_thermautotrophicus:164, Methanothermus_fervidus:164
+          ):29
+        ):46, Methanosphaera_stadtmanae:239
+      ):144,
+      (Methanothermobacter_marburgensis:213, Methanococcus_aeolicus:213
+      ):170
+    ):119,
+
+    (
+      (Methanocaldococcus_fervens:360,
+        (
+          (Methanocaldococcus_infernus:270,
+            (
+              (Methanocaldococcus_jannaschii:90,
+                (Methanocaldococcus_sp._FS406-22:53, Methanocaldococcus_vulcanius:53
+                ):37
+              ):64, Methanothermococcus_okinawensis:154
+            ):116
+          ):28,
+          (
+            (
+              (Methanococcus_vannielii:0
+              ):98, Methanococcus_voltae:98
+            ):83,
+            (Methanococcus_maripaludis:92
+            ):89
+          ):117
+        ):62
+      ):38, Methanopyrus_kandleri:398
+    ):104
+
+  ):498
+
+):100;
