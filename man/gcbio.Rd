@@ -36,7 +36,7 @@ This table gives a brief description of each plotting function.
   \code{gcbio2} \tab Overlay \ZC on phylogenetic tree of methanogens \cr
   \code{gcbio3} \tab Affinities of organic synthesis reactions \cr
   \code{gcbio4} \tab Affinities for methanogen proteomes and \logaH2 of habitable niches \cr
-  \code{gcbio5} \tab Interdisciplinary fields in a biological hierarchy \cr
+  \code{gcbio5} \tab Interdisciplinary areas in a biological hierarchy \cr
   \code{gcbioS1} \tab Intermediate \logaH2 calculated for different compound classes \cr
 }
 

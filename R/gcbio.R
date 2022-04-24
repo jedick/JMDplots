@@ -109,11 +109,11 @@ gcbio1 <- function(pdf = FALSE) {
   ilo <- T < 60
   imid <- T >= 60 & T <= 70
   ihi <- T > 70
-  points(T[ilo], ZC[ilo], pch = 21, bg = col4)
-  points(T[imid], ZC[imid], pch = 21, bg = col8)
+  points(T[ilo], ZC[ilo], pch = 22, bg = col4)
+  points(T[imid], ZC[imid], pch = 23, bg = col8)
   points(T[ihi], ZC[ihi], pch = 21, bg = col2)
   # Add labels
-  text(83, -0.15, "Proteins grouped\nby major phyla")
+  text(83, -0.14, "Proteins grouped\nby major phyla")
   label.figure("A", cex = 1.5, font = 2, xfrac = 0.06)
 
   ## Plot B: Lipids
@@ -131,11 +131,11 @@ gcbio1 <- function(pdf = FALSE) {
   ihi <- T > 70
   # Plot points
   points(T[ilo], ZC.alkyl[ilo], pch = 22, bg = col4)
-  points(T[imid], ZC.alkyl[imid], pch = 22, bg = col8)
-  points(T[ihi], ZC.alkyl[ihi], pch = 22, bg = col2)
-  points(T[ilo], ZC.IPL[ilo], pch = 23, bg = col4)
+  points(T[imid], ZC.alkyl[imid], pch = 23, bg = col8)
+  points(T[ihi], ZC.alkyl[ihi], pch = 21, bg = col2)
+  points(T[ilo], ZC.IPL[ilo], pch = 22, bg = col4)
   points(T[imid], ZC.IPL[imid], pch = 23, bg = col8)
-  points(T[ihi], ZC.IPL[ihi], pch = 23, bg = col2)
+  points(T[ihi], ZC.IPL[ihi], pch = 21, bg = col2)
   # Label molecular groups
   text(70, -1.32, "Intact polar lipids")
   text(50, -2, "Alkyl chains")
@@ -146,8 +146,11 @@ gcbio1 <- function(pdf = FALSE) {
   plot.new()
   par(mar = c(0, 0, 0, 0))
   par(xpd = NA)
-  legend <- as.expression(c(quote(italic(T) < 60~degree*C*";"), "less reducing", "", quote("Transition zone"), "", quote(italic(T) > 70~degree*C*";"), "more reducing"))
-  legend("left", legend = legend, pch = c(21, NA, NA, 21, NA, 21, NA), pt.bg = c(col4, NA, NA, col8, NA, col2, NA), bty = "n", inset = -1, y.intersp = 1)
+  legend <- as.expression(c(quote(" "*italic(T) < 60~degree*C*";"), " less reducing", "",
+                            quote(" Transition zone"), "",
+                            quote(" "*italic(T) > 70~degree*C*";"), " more reducing"))
+  legend("left", legend = legend, pch = c(22, NA, NA, 23, NA, 21, NA), pt.bg = c(col4, NA, NA, col8, NA, col2, NA),
+    bty = "n", inset = -1, y.intersp = 1)
   par(xpd = FALSE)
 
   if(pdf) dev.off()
@@ -222,12 +225,12 @@ gcbio2 <- function(pdf = FALSE) {
   text(85, -0.1705, "thermophiles\n(Class I)")
   text(80, -0.257, "Methanocaldococcus", font = 3)
   # Add convex hulls 20220401
-  dat1 <- dat[setdiff(iI, which(iout)), ]
-  i1 <- chull(dat1$Topt, dat1$ZC)
-  polygon(dat1$Topt[i1], dat1$ZC[i1], col = "#E5737380", border = NA)
   dat2 <- dat[iII, ]
   i2 <- chull(dat2$Topt, dat2$ZC)
   polygon(dat2$Topt[i2], dat2$ZC[i2], col = "#90CAF980", border = NA)
+  dat1 <- dat[setdiff(iI, which(iout)), ]
+  i1 <- chull(dat1$Topt, dat1$ZC)
+  polygon(dat1$Topt[i1], dat1$ZC[i1], col = "#E5737380", border = NA)
   label.figure("B", cex = 1.5, font = 2, yfrac = 0.85, xfrac = -0.05)
 
   if(pdf) dev.off()
@@ -249,7 +252,7 @@ gcbio3 <- function(pdf = FALSE) {
   # NOTE: H2S is present but is not in any formation reactions 20220403
   basis(c("CO2", "H2", "NH4+", "H2O", "H2S", "H+"), c(Seawater.AS98$CO2, Seawater.AS98$H2, Seawater.AS98$"NH4+", 0, Seawater.AS98$H2S, -Seawater.AS98$pH))
   # Position of slope text
-  slopey <- c(-100, -160, -70)
+  slopey <- c(-112, -160, -70)
 
   # Loop over logaH2 activities
   for(ilogaH2 in c(1, 2, 3)) {
@@ -286,6 +289,7 @@ gcbio3 <- function(pdf = FALSE) {
       # Convert to Gibbs energy (J/mol)
       TK <- convert(T, "K")
       A <- -convert(A, "G", TK)
+      if(packageVersion("CHNOSZ") <= "1.4.3") A <- convert(A, "J")
       # Convert to kJ/mol
       A <- A / 1000
       # Divide A by number of carbon
@@ -311,13 +315,18 @@ gcbio3 <- function(pdf = FALSE) {
     lines(x, y, lty = 2, lwd = 2, col = 8)
     # Add legend with slope
     slope <- thislm$coefficients[[2]]
-    slopetxt <- bquote("Slope" == .(formatC(slope, digits = 1, format = "f")))
+    word <- "Slope"
+    if(ilogaH2 == 1) {
+      word <- "linear fit"
+      text(-1.53, -95, "Slope of")
+    }
+    slopetxt <- bquote(.(word) == .(formatC(slope, digits = 1, format = "f")))
     if(round(slope, 1) == 0) slopetxt <- "Slope = 0"
     text(-0.5, slopey[ilogaH2], slopetxt)
 
     # Add title: logaH2
-    Htxt <- bquote(log*italic(a)[H[2]] == .(logaH2))
-    legend("top", legend = Htxt, bty = "n")
+    Htxt <- bquote(bold(log*bolditalic(a)[H[2]] == .(logaH2)))
+    title(Htxt, line = -1, cex.main = 1)
     if(ilogaH2 == 3) {
       # Add oxidation-intermediate-reduction arrow 20220221
       par(xpd = NA)
@@ -342,7 +351,10 @@ gcbio3 <- function(pdf = FALSE) {
       text(mean(c(x1, x2)), -288, "Reduced and oxidized compounds\nare approximately equally stable", adj = c(0.5, 0))
       par(xpd = FALSE)
     }
-    if(ilogaH2 == 1) label.figure("A", cex = 1.5, font = 2, yfrac = 0.97)
+    if(ilogaH2 == 1) {
+      text(-3.1, 72, quote(CH[4]))
+      label.figure("A", cex = 1.5, font = 2, yfrac = 0.97)
+    }
 
   }
 
@@ -407,6 +419,7 @@ gcbio4 <- function(pdf = FALSE) {
     # Convert to Gibbs energy (J/mol)
     TK <- convert(T, "K")
     A <- -convert(A, "G", TK)
+    if(packageVersion("CHNOSZ") <= "1.4.3") A <- convert(A, "J")
     # Convert to kJ/mol
     A <- A / 1000
     # Calculate affinity per residue
@@ -419,7 +432,7 @@ gcbio4 <- function(pdf = FALSE) {
     legend("bottomleft", legend = legend, bty = "n", inset = inset)
     if(i == 1) legend("bottomleft", c("Pairwise affinity", "differences:", ""), inset = c(-0.1, 0), bty = "n")
     # Add legend: logaH2
-    Htxt <- bquote(log*italic(a)[H[2]] == .(logaH2s[i]))
+    Htxt <- bquote(bold(log*bolditalic(a)[H[2]] == .(logaH2s[i])))
     if(i > 1) legend.x <- "topleft" else legend.x <- "top"
     legend(legend.x, legend = Htxt, bty = "n")
     if(i==1) label.figure("A", cex = 1.5, font = 2, yfrac = 0.97, xfrac = 0.06)
@@ -434,7 +447,7 @@ gcbio4 <- function(pdf = FALSE) {
   legend(-0.45, 0.52, legend = c("Methanocaldococcus"), pch = 21, col = col2, pt.bg = col2, text.font = 3, bty = "n", cex = 0.9, pt.cex = 1)
   dT <- describe.property("T", T)
   dbasis <- describe.basis(ibasis = c(1, 3, 5, 6))
-  legend("topright", legend = c(dT, dbasis), bty = "n")
+  legend("topright", legend = c(dT, dbasis), bty = "n", y.intersp = 1.1)
   par(xpd = FALSE)
 
   ## Plot B: Contour plot for affinity differences between Class I and Class II proteomes 20220402
@@ -498,15 +511,14 @@ gcbio4 <- function(pdf = FALSE) {
   Tvals <- seq(par("usr")[1], par("usr")[2], length.out = 100)
   logaH2.min <- subcrt(c("CO2", "H2", "CH4", "H2O"), c(-1, -4, 1, 2), T = Tvals)$out$logK / -4
   polygon(c(Tvals, rev(Tvals)), c(logaH2.min, rep(par("usr")[3], length(Tvals))), col = "gray80", lty = 0)
-  lines(Tvals, logaH2.min, lty = 3, lwd = 2)
+  lines(Tvals, logaH2.min, lty = 3)
   box()
-  dy <- 1
-  text(82, -7.4 + dy, quote(italic(a)[CH[4]] / italic(a)[CO[2]] == 10^0), srt = srt)
+  text(83, -6.4, quote(italic(a)[CH[4]] / italic(a)[CO[2]] == 10^0), srt = srt)
   # Add lines for aCO2/aCH4 = 10^2 and 10^4 20220303
   lines(Tvals[33:100], logaH2.min[33:100] + 2, lty = 3)
-  text(93, -5.1 + dy, quote(10^2), srt = srt)
+  text(94, -4.1, quote(10^2), srt = srt)
   lines(Tvals, logaH2.min + 4, lty = 3)
-  text(93, -3.1 + dy, quote(10^4), srt = srt)
+  text(94, -2.0, quote(10^4), srt = srt)
 
   # Add box for Lost City 20220303
   # 40 to 90 °C (Kelley et al., 2005)
@@ -541,7 +553,7 @@ gcbio4 <- function(pdf = FALSE) {
   text(102, -1.5, "More reducing than known\nhydrothermal systems", font = 3, adj = 0, col = "gray40")
   text(102, -8.5, "Not reducing enough\nfor autotrophic\nmethanogenesis", font = 3, adj = 0, col = "gray40")
   lines(c(100, 130), c(-2.34, -2.34), lty = 2)
-  lines(c(100, 130), rep(tail(logaH2.min, 1), 2), lty = 3, lwd = 2)
+  lines(c(100, 130), rep(tail(logaH2.min, 1), 2), lty = 3)
   text(132, -4, "Habitable\nniches", font = 3, col = "green4", adj = 0)
   arrows(130,-2.34, 130, tail(logaH2.min, 1), code = 3, col = "green4", length = 0.1)
   text(101, tail(CL[[1]]$y, 1), quote("10%"~A[I] > A[II]), adj = 0, col = "#366BFB")
@@ -554,7 +566,7 @@ gcbio4 <- function(pdf = FALSE) {
 
 }
 
-# Interdisciplinary fields in a biological hierarchy 20220215
+# Interdisciplinary areas in a biological hierarchy 20220215
 gcbio5 <- function(pdf = FALSE) {
 
   if(pdf) pdf("Figure_5.pdf", width = 14, height = 6)
@@ -597,7 +609,7 @@ gcbio5 <- function(pdf = FALSE) {
   curvedarrow(from, to, curve = 0.1, arr.type = "none", lcol = "#366BFB", lwd = 3)
 
   del <- 3 * nrow
-  textempty(elpos[1 + del, ], "Interdisciplinary\nField", cex = lcex, font = 2, adj = 0)
+  textempty(elpos[1 + del, ], "Interdisciplinary\nArea", cex = lcex, font = 2, adj = 0)
   labels <- c("", "Geobiochemistry", "", "", "Geochemical\nBiology", "")
   dy1 <- diff(elpos[1:2, 2]) / 2
   i <- 2; textempty(elpos[i + 1 + del, ] + c(0, dy1), labels[i], adj = c(0, 1), col = "#9C27B0", font = 2)
@@ -608,8 +620,8 @@ gcbio5 <- function(pdf = FALSE) {
   labels <- c("... in their\ngeological context", "", "", "", "", "Thermodynamics\nof ...")
   for(i in 1:6) textempty(elpos[i + 1 + del, ], labels[i], adj = 0, col = "#D50000", font = 2)
   # Uncomment this to check the alignment of separate text items below
-  #labels <- c("", "biochemical\nreactions", "", "", "chemical\ndifferences\nbetween organisms", "")
-  labels <- c("", "biochemical\n", "", "", "chemical\n\nbetween organisms", "")
+  #labels <- c("", "biochemical\nreactions", "", "", "chemical\ndifferences\nbetween organisms\nor communities", "")
+  labels <- c("", "biochemical\n", "", "", "chemical\n\nbetween organisms\nor communities", "")
   i <- 2; textempty(elpos[i + 1 + del, ] + c(0, dy1), labels[i], adj = c(0, 1), col = "#D50000")
   i <- 5; textempty(elpos[i + 1 + del, ], labels[i], adj = c(0, 1), col = "#D50000")
   labels <- c("", "reactions", "", "", "differences", "")
@@ -635,14 +647,14 @@ gcbio5 <- function(pdf = FALSE) {
 # Plot intermediate logaH2 20220220
 # Add class argument 20220418
 intermediate_logaH2 <- function(class = NULL, add = FALSE, parargs = list(mar = c(4, 4, 1, 1), mgp = c(2.7, 1, 0)),
-  ylim = NULL, lines = TRUE, redox = TRUE, pH = TRUE, NH4 = TRUE, pH.y = -9.4, NH4.y = -6.6) {
+  xlim = c(0, 300), ylim = NULL, lines = TRUE, redox = TRUE, pH = TRUE, NH4 = TRUE, pH.y = -9.4, NH4.y = -6.6) {
   if(!add) do.call(par, parargs)
   file <- "H2_intermediate.csv"
   if(!is.null(class)) file <- paste0("H2_intermediate_", gsub(" ", "", class), ".csv")
   dat <- read.csv(file.path(system.file("extdata/gcbio", package = "JMDplots"), file))
   x <- dat[, "T", drop = FALSE]
   y <- dat[, 2:5]
-  if(!add) matplot(x, y, type = "n", xlab = Tlab, ylab = logaH2lab, xlim = c(0, 300), ylim = ylim, xaxs = "i")
+  if(!add) matplot(x, y, type = "n", xlab = Tlab, ylab = logaH2lab, xlim = xlim, ylim = ylim, xaxs = "i")
   # Fill area between lines
   polygon(c(dat$T, rev(dat$T)), c(dat$loN_lopH, rev(dat$hiN_hipH)), border = NA, col = "#9E9E9E80")
   polygon(c(dat$T, rev(dat$T)), c(dat$hiN_lopH, rev(dat$loN_hipH)), border = NA, col = "#9E9E9EB0")
@@ -653,8 +665,10 @@ intermediate_logaH2 <- function(class = NULL, add = FALSE, parargs = list(mar = 
   polygon(c(dat$T, rev(dat$T)), c(bot, rev(dat$loN_lopH)), border = NA, col = "#90CAF980")
 
   # Don't plot ends of lines 20220401
-  if(pH) dat <- dat[dat$T > 10, ]
-  if(NH4) dat <- dat[dat$T < 290, ]
+  Tlim <- c(10, 290)
+  if(!is.null(class)) Tlim <- c(17, 270)
+  if(pH) dat <- dat[dat$T > Tlim[1], ]
+  if(NH4) dat <- dat[dat$T < Tlim[2], ]
 
   x <- dat[, "T", drop = FALSE]
   y <- dat[, 2:5]
@@ -673,8 +687,16 @@ intermediate_logaH2 <- function(class = NULL, add = FALSE, parargs = list(mar = 
     pHlab <- character(ncol(pHdat))
     pHlab[grep("lopH", colnames(pHdat))] <- 3
     pHlab[grep("hipH", colnames(pHdat))] <- 9
-    text(10, pHdat - 0.1, pHlab)
-    text(8, pH.y, "pH", font = 2)
+    pHdat.x <- 10
+    pH.x <- 8
+    dy <- -0.1
+    if(!is.null(class)) {
+      pHdat.x <- c(14, 7, 14, 7)
+      pH.x <- 12
+      dy <- c(-0.1, -0.6, -0.1, -0.6)
+    }
+    text(pHdat.x, pHdat + dy, pHlab)
+    text(pH.x, pH.y, "pH", font = 2)
   }
   if(NH4) {
     # Add logaNH4+ labels at high T
@@ -682,8 +704,16 @@ intermediate_logaH2 <- function(class = NULL, add = FALSE, parargs = list(mar = 
     NH4lab <- character(ncol(NH4dat))
     NH4lab[grep("loN", colnames(NH4dat))] <- -8
     NH4lab[grep("hiN", colnames(NH4dat))] <- -3
-    text(293, NH4dat, NH4lab)
-    text(278, NH4.y, logaNH4lab, font = 2)
+    NH4dat.x <- 293
+    NH4.x <- 278
+    dy <- 0
+    if(!is.null(class)) {
+      NH4dat.x <- c(278, 290, 290, 278)
+      NH4.x <- 270
+      dy <- c(0, 0.5, 0.5, 0)
+    }
+    text(NH4dat.x, NH4dat + dy, NH4lab)
+    text(NH4.x, NH4.y, logaNH4lab, font = 2)
   }
   if(redox) {
     # Add more/less oxidizing/reducing labels 20220401
@@ -725,9 +755,10 @@ calc_logaH2_intermediate <- function(class = NULL) {
     # Calculate affinities
     a <- suppressMessages(affinity(T = T, sout = sout))
     A <- unlist(a$values)
-    # Convert to Gibbs energy
+    # Convert to Gibbs energy (J/mol)
     TK <- convert(T, "K")
     A <- -convert(A, "G", TK)
+    if(packageVersion("CHNOSZ") <= "1.4.3") A <- convert(A, "J")
     # Convert to kJ/mol
     A <- convert(A, "J") / 1000
     # Divide A by number of carbon
@@ -783,13 +814,13 @@ gcbioS1 <- function(pdf = FALSE) {
   titlefun("C1 and C2")
   intermediate_logaH2("Acid",       parargs = parargs, ylim = ylim, redox = FALSE, pH = FALSE, NH4 = FALSE)
   titlefun("Acid")
-  intermediate_logaH2("Amino acid", parargs = parargs, ylim = ylim, redox = FALSE, pH.y = -10.5, NH4.y = -8)
+  intermediate_logaH2("Amino acid", parargs = parargs, ylim = ylim, redox = FALSE, pH.y = -8.5, NH4.y = -10)
   titlefun("Amino acid")
   intermediate_logaH2("Sugar",      parargs = parargs, ylim = ylim, redox = FALSE, pH = FALSE, NH4 = FALSE)
   titlefun("Sugar")
-  intermediate_logaH2("Nucleobase", parargs = parargs, ylim = ylim, redox = FALSE, pH.y = -13, NH4.y = -15)
+  intermediate_logaH2("Nucleobase", parargs = parargs, ylim = ylim, redox = FALSE, pH.y = -12, NH4.y = -17)
   titlefun("Nucleobase")
-  intermediate_logaH2("TCA",        parargs = parargs, ylim = ylim, redox = FALSE, NH4 = FALSE, pH.y = -11.5)
+  intermediate_logaH2("TCA",        parargs = parargs, ylim = ylim, redox = FALSE, NH4 = FALSE, pH.y = -10)
   titlefun("TCA")
   if(pdf) dev.off()
 }

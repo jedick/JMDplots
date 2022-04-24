@@ -69,7 +69,7 @@ export(
   # utilities 20220223
   "addalpha",
   # gcbio paper 20220420
-  "gcbio1", "gcbio2", "gcbio3", "gcbio4", "gcbio5", "gcbioS1"
+  "gcbio1", "gcbio2", "gcbio3", "gcbio4", "gcbio5", "gcbioS1", "calc_logaH2_intermediate"
 )
 
 # Imports from CHNOSZ

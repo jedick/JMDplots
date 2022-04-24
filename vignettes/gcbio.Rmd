@@ -90,7 +90,7 @@ gcbio4()
 
 **Data sources:** Lost City *T* and H~2~ concentration [@KKF+05], Rainbow vent fluid mixing model [@SC10], methanogenic and non-methanogenic sediments [@LG88].
 
-## Interdisciplinary fields in a biological hierarchy (Figure 5)
+## Interdisciplinary areas in a biological hierarchy (Figure 5)
 ```{r gcbio5, message = FALSE, results = "hide", out.width='100%', fig.width = 14, fig.height = 6, pngquant = pngquant}
 gcbio5()
 ```
