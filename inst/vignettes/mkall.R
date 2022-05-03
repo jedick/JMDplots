@@ -1,5 +1,5 @@
 # JMDplots/inst/vignettes/mkall.R
-# 20200509 This compiles each of the vignettes for compositional analysis of differential expression,
+# 20200509 This compiles each of the vignettes for chemical analysis of differential expression,
 #   which updates the CSV files that are used in the gradH2O and canH2O projects.
 # 20200802 Move html files to ../doc
 # 20200817 Render vignettes for various basis species (save CSV files for all; HTML for last one only)

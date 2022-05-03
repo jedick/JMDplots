@@ -59,7 +59,8 @@ Circles and squares stand for hyperosmotic and hypoosmotic experiments, respecti
 
 ```{r diffplot, fig.width=5, fig.height=5, fig.align = "center", echo = FALSE, pngquant = pngquant}
 par(mar = c(4, 4, 1, 1))
-diffplot(comptab1, labtext = NA)
+pch <- ifelse(grepl("sorbitol", datasets), 1, 0)
+diffplot(comptab1, labtext = NA, pch = pch)
 ```
 
 In the table, values of &Delta;<i>Z</i><sub>C</sub>, &Delta;<i>n</i><sub>H<sub>2</sub>O</sub>, and &Delta;GRAVY are multiplied by 1000, values of &Delta;pI and &Delta;MW are multiplied by 100, and negative values are shown in bold.
