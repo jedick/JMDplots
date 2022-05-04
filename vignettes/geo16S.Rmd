@@ -61,13 +61,12 @@ nH2O <- "<i>n</i><sub>H<sub>2</sub>O</sub>"
 ZC <- "<i>Z</i><sub>C</sub>"
 ```
 
-This vignette runs the code to make the plots from the following paper:
+This vignette runs the code to make the plots from the following paper first published by Springer Nature:
 
-> Dick JM, Tan J. 2022. Chemical links between redox conditions and estimated community proteomes from 16S rRNA and reference protein sequences. Submitted manuscript.
->
-> Preprint available at:
->
-> Dick JM, Tan J. 2021. Genomic evidence for a chemical link between redox conditions and microbial community composition. bioRxiv. doi: [10.1101/2021.05.31.446500](https://doi.org/10.1101/2021.05.31.446500)
+> Dick JM, Tan J. 2022. Chemical links between redox conditions and estimated community proteomes from 16S rRNA and reference protein sequences. *Microbial Ecology*. doi: [10.1007/s00248-022-01988-9](https://doi.org/10.1007/s00248-022-01988-9)
+
+Use this link for full-text access to a view-only version of the paper: [https://rdcu.be/cMCDa](https://rdcu.be/cMCDa).
+A preprint of the paper is available on bioRxiv at doi: [10.1101/2021.05.31.446500](https://doi.org/10.1101/2021.05.31.446500).
 
 This vignette was compiled on `r Sys.Date()` with **[JMDplots](https://github.com/jedick/JMDplots)** `r packageDescription("JMDplots")$Version`.
 

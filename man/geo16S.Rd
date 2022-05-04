@@ -14,7 +14,7 @@
 \alias{geo16S_S6}
 \title{Plots from geobiochemistry of 16S sequences paper}
 \description{
-Plots from the paper by Dick and Tan (2021).
+Plots from the paper by Dick and Tan (2022).
 }
 
 \usage{
@@ -80,7 +80,7 @@ This table gives a brief description of each plotting function.
 \references{
 Aßhauer, K. P., Wemheuer, B., Daniel, R. and Meinicke, P. (2015) Tax4Fun: predicting functional profiles from metagenomic 16S rRNA data. \emph{Bioinformatics} \bold{31}, 2882--2884. \doi{10.1093/bioinformatics/btv287}
 
-Dick, J. M. and Tan, J. (2021) Genomic evidence for a chemical link between redox conditions and microbial community composition. bioRxiv. \doi{https://doi.org/10.1101/2021.05.31.446500}
+Dick, J. M. and Tan, J. (2022) Chemical links between redox conditions and estimated community proteomes from 16S rRNA and reference protein sequences. \emph{Microb. Ecol.} \doi{10.1007/s00248-022-01988-9}
 }
 
 \examples{

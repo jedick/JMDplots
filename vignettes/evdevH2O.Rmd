@@ -63,9 +63,10 @@ ZC <- "<i>Z</i><sub>C</sub>"
 
 This vignette runs the code to make the plots from the following paper first published by Springer Nature:
 
-> Dick JM. 2022. A thermodynamic model for water activity and redox potential in evolution and development. *Journal of Molecular Evolution*. doi: [10.1007/s00239-022-10051-7](https://doi.org/10.1007/s00239-022-10051-7)
+> Dick JM. 2022. A thermodynamic model for water activity and redox potential in evolution and development. *Journal of Molecular Evolution* **90**(2): 182--199. doi: [10.1007/s00239-022-10051-7](https://doi.org/10.1007/s00239-022-10051-7)
 
-Use this link for full-text access to a view-only version of the paper: [https://rdcu.be/cITho](https://rdcu.be/cITho). A preprint of the paper is available on bioRxiv at doi: [10.1101/2021.01.29.428804](https://doi.org/10.1101/2021.01.29.428804).
+Use this link for full-text access to a view-only version of the paper: [https://rdcu.be/cITho](https://rdcu.be/cITho).
+A preprint of the paper is available on bioRxiv at doi: [10.1101/2021.01.29.428804](https://doi.org/10.1101/2021.01.29.428804).
 
 This vignette was compiled on `r Sys.Date()` with **[JMDplots](https://github.com/jedick/JMDplots)** `r packageDescription("JMDplots")$Version`, **[CHNOSZ](http://chnosz.net)** `r packageDescription("CHNOSZ")$Version`, and **[canprot](https://github.com/jedick/canprot)** `r packageDescription("canprot")$Version`.
 
