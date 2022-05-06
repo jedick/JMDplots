@@ -12,6 +12,13 @@ First install the **remotes** packages from CRAN.
 install.packages("remotes")
 ```
 
+Then install **chem16S**.
+
+```R
+remotes::install_github("jedick/chem16S")
+
+```
+
 Then install **JMDplots**.
 This command will also install prebuilt vignettes.
 
@@ -19,7 +26,7 @@ This command will also install prebuilt vignettes.
 remotes::install_github("jedick/JMDplots")
 ```
 
-To see the plots, use the R help browser to open the vignettes page or open it directly with this command:
+To view the plots, use the R help browser to open the vignettes page or open it directly with this command:
 
 ```R
 browseVignettes("JMDplots")
