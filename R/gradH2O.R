@@ -741,7 +741,7 @@ NifProteomes <- function() {
   # drop NA taxids
   Nif <- Nif[!is.na(Nif$taxid), ]
   # read refseq data
-  RSfile <- system.file("extdata/refseq/protein_refseq.csv.xz", package = "JMDplots")
+  RSfile <- system.file("extdata/refseq/protein_refseq.csv.xz", package = "chem16S")
   refseq <- read.csv(RSfile, as.is = TRUE)
   # the Nif types, arranged from anaerobic to aerobic
   types <- c("Nif-D", "Nif-C", "Nif-B", "Nif-A")

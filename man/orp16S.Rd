@@ -8,6 +8,7 @@
 \alias{orp16S5}
 \alias{orp16S6}
 \alias{orp16S_S1}
+\alias{getmdat_orp16S}
 \title{Plots from chemical shaping of bacterial communities paper}
 \description{
 Plots from the paper by Dick and Meng (2021).
@@ -21,10 +22,14 @@ Plots from the paper by Dick and Meng (2021).
   orp16S5(pdf = FALSE)
   orp16S6(pdf = FALSE)
   orp16S_S1(pdf = FALSE)
+  getmdat_orp16S(study, metrics = NULL, dropNA = TRUE)
 }
 
 \arguments{
   \item{pdf}{logical, make a PDF file?}
+  \item{study}{character, study name}
+  \item{metrics}{data frame, output of \code{\link[chem16S]{getmetrics}}}
+  \item{dropNA}{logical, exclude samples with NA name in metadata?}
 }
 
 \details{
@@ -40,20 +45,22 @@ This table gives a brief description of each plotting function.
   \code{orp16S_S1} \tab \ZC-Eh scatterplots for all studies \cr
 }
 
-To set up the \code{\link{chem16S}} environment, change \code{options(chem16Sdir)} before running these functions (see example).
-
 \code{orp16S_S1} creates the files EZdat.csv and EZlm.csv that are used by the other functions.
 
+\code{getmdat_orp16S} gets metadata for the indicated \code{study}, calculates Eh7 from Eh and pH and T (if available), classifies samples into 3 clusters according to their Eh values, and adds columns for plot parameters (\code{pch}, \code{col}).
+The default for \code{dropNA} means to exclude samples with NA name in the metadata file, which is used to exclude outliers from the analysis.
+If \code{metrics} is supplied, the samples are sorted in the same order as the metadata file, and the function returns a list with both \samp{metadata} and the sorted \samp{metrics}.
 }
 
 \section{Files in extdata/orp16S}{
   \describe{
-    \item{\code{hydro_p}}{Shapefiles for the North American Great Lakes, downloaded from USGS (2010).}
-    \item{\code{EZdat.csv}}{Data for all samples, created by \code{orp16S_S1}.}
-    \item{\code{EZlm.csv}}{Linear fits between Eh7 and \ZC for each dataset created by \code{orp16S_S1}.}
-    \item{\code{metadata/*.csv}}{Sample metadata for each study.}
-    \item{\code{RDP/*.csv.xz}}{RDP Classifier results combined into a single CSV file for each study, created with the \code{mkRDP} function in the \code{process.R} script (\code{\link{chem16S}}).}
-    \item{\code{OTU2RDP.R}}{Script to construct \code{RDP/OFY+19.csv} from Table S2 of Omae et al. (2019).}
+    \item{\file{pipeline.R}}{Pipeline for sequence data processing (uses external programs fastq-dump, vsearch, seqtk, RDP Classifier).}
+    \item{\file{metadata/*.csv}}{Sample metadata for each study.}
+    \item{\file{RDP/*.csv.xz}}{RDP Classifier results combined into a single CSV file for each study, created with the \code{mkRDP} function in \file{pipeline.R}.}
+    \item{\file{hydro_p}}{Shapefiles for the North American Great Lakes, downloaded from USGS (2010).}
+    \item{\file{EZdat.csv}}{Data for all samples, created by \code{orp16S_S1}.}
+    \item{\file{EZlm.csv}}{Linear fits between Eh7 and \ZC for each dataset created by \code{orp16S_S1}.}
+    \item{\file{OTU2RDP.R}}{Script to construct \code{RDP/OFY+19.csv} from Table S2 of Omae et al. (2019).}
   }
 }
 
@@ -77,8 +84,6 @@ Omae, K., Fukuyama, Y., Yasuda, H., Mise, K., Yoshida, T. and Sako, Y. (2019) Di
 
 \examples{
 orp16S1()
-
-options(chem16Sdir = system.file("extdata/orp16S", package = "JMDplots"))
 
 orp16S2()
 

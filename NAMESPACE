@@ -50,11 +50,9 @@ export(
   "mjenergy_Table_S3", "mjenergy_Dataset_S1", # 20210816
   # evdevH2O paper 20210402
   "pdat_fly",
-  # chem16S functions 20210416
-  "getmdat", "getRDP", "getmap", "getmetrics",
   # geo16S paper 20210416-20210610
   "geo16S1", "geo16S2", "geo16S3", "geo16S4",
-  "taxacomp", "plotmet", "addhull",
+  "taxacomp", 
   "geo16S5", # 20211018
   "geo16S_S1", "geo16S_S2", # 20220105
   "geo16S_S3", # 20220112
@@ -69,7 +67,9 @@ export(
   # utilities 20220223
   "addalpha",
   # gcbio paper 20220420
-  "gcbio1", "gcbio2", "gcbio3", "gcbio4", "gcbio5", "gcbioS1", "calc_logaH2_intermediate"
+  "gcbio1", "gcbio2", "gcbio3", "gcbio4", "gcbio5", "gcbioS1", "calc_logaH2_intermediate",
+  # Moving functions to chem16S package 20220506
+  "getmdat_geo16S"
 )
 
 # Imports from CHNOSZ
@@ -122,6 +122,12 @@ importFrom("canprot",
   "qdist", "cplab",
   # for canH2OS1() 20201016
   "O2AA"
+)
+
+# Imports from chem16S
+importFrom("chem16S",
+  # 20220506
+  "readRDP", "mapRDP", "getmetrics", "plotmet", "addhull"
 )
 
 # Imports from other packages

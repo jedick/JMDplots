@@ -1,10 +1,6 @@
 # JMDplots/orp16S.R
 # Plots for paper on ZC-ORP correlations 20210827
 
-## Uncomment to source and run these functions interactively (developer mode)
-#source("chem16S.R")
-#options(chem16Sdir = system.file("extdata/orp16S", package = "JMDplots"))
-
 # Group studies by environment types 20210828
 envirotype <- list(
   "River & Seawater" = c("MLL+18", "SVH+19", "HXZ+20", "KLY+20", "WHL+21", "LXH+20", "JVW+20", "ZZL+21", "GZL21"),
@@ -127,9 +123,6 @@ orp16S1 <- function(pdf = FALSE) {
 # Figure 2: Chemical and geobiochemical depth profiles in Winogradsky columns 20210829
 orp16S2 <- function(pdf = FALSE) {
 
-  if(!grepl("orp16S", options("chem16Sdir")[[1]])) 
-    stop('Please run this first: options(chem16Sdir = system.file("extdata/orp16S", package = "JMDplots"))')
-
   if(pdf) pdf("Figure2.pdf", width = 7, height = 5)
 
   layout(t(matrix(1:2)), widths = c(3, 4))
@@ -152,11 +145,12 @@ orp16S2 <- function(pdf = FALSE) {
   label.figure("A", font = 2, cex = 1.5)
 
   # Get 16S metadata and chemical metrics for Rundell et al. (2014) experiments
-  mdat <- getmdat("RBW+14")
-  metrics <- getmetrics("RBW+14")
+  metrics.in <- getmetrics_orp16S("RBW+14")
+  mdat <- getmdat_orp16S("RBW+14", metrics.in)
+  metrics <- mdat$metrics
   # Get ZC values for each layer
   layers <- c("12 cm", "8 cm", "4 cm", "SWI", "Top")
-  ZC <- lapply(layers, function(layer) metrics$ZC[mdat$layer == layer])
+  ZC <- lapply(layers, function(layer) metrics$ZC[mdat$metadata$layer == layer])
   # Make boxplots
   boxplot(ZC, horizontal = TRUE, show.names = FALSE, xlab = axis.label("ZC"), ylim = c(-0.18, -0.145), yaxs = "i")
   axis(2, 1:5, labels = layers, las = 1)
@@ -176,9 +170,6 @@ orp16S2 <- function(pdf = FALSE) {
 
 # Figure 3: Sample locations on world map
 orp16S3 <- function(pdf = FALSE) {
-
-  if(!grepl("orp16S", options("chem16Sdir")[[1]])) 
-    stop('Please run this first: options(chem16Sdir = system.file("extdata/orp16S", package = "JMDplots"))')
 
   if(pdf) pdf("Figure3.pdf", width = 26, height = 14)
 
@@ -303,23 +294,23 @@ orp16S3 <- function(pdf = FALSE) {
   # Plot transects 20210929
   # Coordinates for East Asia Paddy Soil dataset are from
   # Sourcedata.xlsx from https://doi.org/10.6084/m9.figshare.12622829
-  dat <- getmdat("LJC+20")
+  dat <- getmdat_orp16S("LJC+20")
   mapPoints(dat$longitude, dat$latitude, col = orp16Scol[7], lwd = 2)
   # Coordinates for Southern Tibetan Plateau dataset are from Table 1 of MWY+21
-  dat <- getmdat("MWY+21")
+  dat <- getmdat_orp16S("MWY+21")
   latlon <- paste(dat$latitude, dat$longitude)
   isuniq <- !duplicated(latlon)
   dat <- dat[isuniq, ]
   mapPoints(dat$longitude, dat$latitude, col = orp16Scol[4], lwd = 2)
   # Coordinates for Three Gorges Reservoir are from Table S1 of GZL21
-  dat <- getmdat("GZL21")
+  dat <- getmdat_orp16S("GZL21")
   dat <- dat[!is.na(dat$"ORP (mV)"), ]
   latlon <- paste(dat$Latitude, dat$Longitude)
   isuniq <- !duplicated(latlon)
   dat <- dat[isuniq, ]
   mapPoints(dat$Longitude, dat$Latitude, col = orp16Scol[1], lwd = 1)
   # Coordinates for Mahomet Aquifer are from Table S1 of YHK+19
-  dat <- getmdat("YHK+19")
+  dat <- getmdat_orp16S("YHK+19")
   latlon <- paste(dat$Latitude, dat$Longitude)
   mapPoints(dat$Longitude, dat$Latitude, col = orp16Scol[3], lwd = 1)
 
@@ -354,9 +345,6 @@ orp16S3 <- function(pdf = FALSE) {
 
 # Figure 4: Analysis of selected datasets for each environment type 20211003
 orp16S4 <- function(pdf = FALSE) {
-
-  if(!grepl("orp16S", options("chem16Sdir")[[1]])) 
-    stop('Please run this first: options(chem16Sdir = system.file("extdata/orp16S", package = "JMDplots"))')
 
   if(pdf) pdf("Figure4.pdf", width = 12, height = 6)
   par(mfrow = c(2, 4))
@@ -533,9 +521,6 @@ orp16S5 <- function(pdf = FALSE) {
 # Figure 6: Distinctions in carbon oxidation state estimated for different hot springs, and global fits for all environments. 20210930
 orp16S6 <- function(pdf = FALSE) {
 
-  if(!grepl("orp16S", options("chem16Sdir")[[1]])) 
-    stop('Please run this first: options(chem16Sdir = system.file("extdata/orp16S", package = "JMDplots"))')
-
   if(pdf) pdf("Figure6.pdf", width = 8, height = 6)
   mat <- matrix(c(1,1,1,1, 2,2,2,2, 3,3,3,3, 0,4,4,4,4,4, 5,5,5,5,5,0), nrow = 2, byrow = TRUE)
   layout(mat, heights = c(3, 2))
@@ -645,9 +630,6 @@ orp16S6 <- function(pdf = FALSE) {
 # This also creates files EZdat (Eh and ZC values) and
 # EZlm (linear fits) for use by other plotting functions
 orp16S_S1 <- function(pdf = FALSE) {
-
-  if(!grepl("orp16S", options("chem16Sdir")[[1]])) 
-    stop('Please run this first: options(chem16Sdir = system.file("extdata/orp16S", package = "JMDplots"))')
 
   # Setup figure
   if(pdf) pdf("Figure_S1.pdf", width = 12, height = 9)
@@ -877,5 +859,189 @@ eachenv <- function(lineage = "Bacteria", add = FALSE, do.linear = TRUE, ienv = 
     # Plot points
     points(Eh7, ZC, pch = 19, cex = 0.2, col = cols[i])
   }
+}
+
+# Get metadata for a study, appending columns for pch and col 20200914
+getmdat_orp16S <- function(study, metrics = NULL, dropNA = TRUE) {
+  # Read metadata file
+  # Remove suffix after underscore 20200929
+  studyfile <- gsub("_.*", "", study)
+  datadir <- system.file("extdata/orp16S", package = "JMDplots")
+  file <- file.path(datadir, "metadata", paste0(studyfile, ".csv"))
+  metadata <- read.csv(file, as.is = TRUE, check.names = FALSE)
+
+  if(dropNA) {
+    # Exclude samples with NA name 20200916
+    noname <- is.na(metadata$name)
+    if(any(noname)) {
+      print(paste0("getmetadata [", study, "]: dropping ", sum(noname), " samples with NA name"))
+      metadata <- metadata[!is.na(metadata$name), ]
+    }
+  }
+  # Use NULL pch as flag for unavailable dataset 20210820
+  pch <- NULL
+
+  ## Datasets for orp16S paper 20211003
+  shortstudy <- study
+  if(study == "RBW+14") {
+    type <- rep("reducing", nrow(metadata))
+    type[metadata$layer == "Top"] <- "oxidizing"
+    type[metadata$layer == "SWI"] <- "transition"
+    pch <- sapply(type, switch, oxidizing = 24, transition = 20, reducing = 25)
+    col <- sapply(type, switch, oxidizing = 4, transition = 1, reducing = 2)
+  }
+  if(grepl("PCL\\+18", study)) {
+    # PCL+18, PCL+18_Acidic, PCL+18_Alkaline
+    Type <- sapply(strsplit(study, "_"), "[", 2)
+    if(!is.na(Type)) metadata <- metadata[metadata$Type == Type, ]
+    shortstudy <- "PCL+18"
+  }
+  if(grepl("LMBA21", study)) {
+    # LMBA21, LMBA21_2013, LMBA21_2015, LMBA21_2016, LMBA21_2017, LMBA21_2018, LMBA21_2019
+    Year <- sapply(strsplit(study, "_"), "[", 2)
+    if(!is.na(Year)) metadata <- metadata[metadata$Year == Year, ]
+    shortstudy <- "LMBA21"
+  }
+  if(study == "DLS21") {
+    # Just look at bulk soil 20210910
+    metadata <- metadata[metadata$Source == "bulk soil", ]
+  }
+  if(shortstudy %in% c(
+    "MLL+19", "HXZ+20", "BCA+21", "RSJ+21", "RMB+17", "SBP+20", "NTB+21", "MWY+21", "SAR+13", "CTS+17",
+    "SCM+18", "HDZ+19", "BOEM21", "ZHZ+19", "YHK+20", "CNA+20", "BMJ+19", "SRM+19", "HLZ+18", "XLD+20",
+    "JHL+12", "PSG+20", "KSR+21", "ZCZ+21", "SKP+21", "ZZL+21", "PBU+20", "GWS+19", "KLY+20", "SRM+21",
+    "MLL+18", "JDP+20", "BWD+19", "LXH+20", "LMG+20", "WHL+21", "LLL+21", "SDH+19", "GWSS21", "HSF+19",
+    "ZML+17", "DTJ+20", "WFB+21", "SBW+17", "KLM+16", "LMBA21", "ZDA+20", "ZZZ+18", "BSPD17", "CWC+20",
+    "BMOB18", "JVW+20", "LJC+20", "GFE+16", "ECS+18", "FAV+21", "VMB+19", "DLS21", "ZZLL21", "GWS+20",
+    "CLS+19", "SMS+12", "OFY+19", "BYB+17", "MCS+21", "SVH+19", "PMM+20", "GZL21", "LLC+19", "NLE+21",
+    "GSY+20", "SCH+16", "LZR+17", "GRG+20", "APV+20", "YHK+19", "WHC+19", "WHLH21", "PCL+18"
+  )) {
+    # General processing of metadata for orp16S datasets 20210820
+    # Get Eh or ORP values (uses partial name matching, can match a column named "Eh (mV)")
+    Eh <- metadata$Eh
+    Ehname <- "Eh"
+    if(is.null(Eh)) {
+      Eh <- metadata$ORP
+      Ehname <- "ORP"
+    }
+    # Also match a column starting with "redox" (case-insensitive)
+    iEh <- grep("^redox", colnames(metadata), ignore.case = TRUE)
+    if(length(iEh) > 0) {
+      Eh <- metadata[, iEh[1]]
+      Ehname <- strsplit(colnames(metadata)[iEh[1]], " ")[[1]][1]
+    }
+    if(is.null(Eh)) stop("can't find Eh or ORP column")
+
+    # Append Ehorig column (normalized column name used for exporting data) 20210821
+    metadata <- cbind(metadata, Ehorig = Eh)
+    
+    # Get temperature for dEh/dpH calculation 20210829
+    iT <- match("T", colnames(metadata))  # matches "T"
+    if(is.na(iT)) iT <- grep("^T\\ ", colnames(metadata))[1]  # matches "T (°C)" but not e.g. "Treatment"
+    if(is.na(iT)) iT <- grep("^Temp", colnames(metadata))[1]  # matches "Temperature (°C)"
+    if(!is.na(iT)) {
+      T <- metadata[, iT]
+      Ttext <- paste(round(range(na.omit(T)), 1), collapse = " to ")
+    } else {
+      T <- rep(25, nrow(metadata))
+      Ttext <- "assumed 25"
+    }
+
+    # Adjust Eh to pH 7 20210828
+    # Find pH column
+    ipH <- match("pH", colnames(metadata))
+    if(!is.na(ipH)) {
+      # pH values
+      pH <- metadata[, ipH]
+      pHtext <- paste(round(range(na.omit(pH)), 1), collapse = " to ")
+      ## Eh(mV)-pH slope at 25 °C
+      #dEhdpH <- -59.2
+      # Find dEh/dpH as a function of T 20210829
+      TK <- T + 273.15
+      R <- 0.0083147
+      F <- 96.4935
+      dEhdpH <- - (log(10) * R * TK) / F * 1000
+
+      # Difference to pH 7
+      pHdiff <- 7 - pH
+      # Adjust to pH 7
+      Eh7 <- round(Eh + pHdiff * dEhdpH, 1)
+
+    } else {
+      Eh7 <- Eh
+      pHtext <- "assumed 7"
+    }
+    metadata <- cbind(metadata, Eh7 = Eh7)
+    # Print message about T, pH and Eh ranges
+    Ehtext <- paste(round(range(na.omit(Eh))), collapse = " to ")
+    Eh7text <- paste(round(range(na.omit(Eh7))), collapse = " to ")
+    print(paste0(study, ": T ", Ttext, ", pH ", pHtext, ", Eh ", Ehtext, ", Eh7 ", Eh7text))
+
+    # Keep NA values out of clusters
+    ina <- is.na(Eh7)
+    # Divide data into 3 clusters
+    cl <- kmeans(Eh7[!ina], 3, nstart = 100)
+    # Find the clusters with the lowest and highest means
+    imin <- which.min(cl$centers[, 1])
+    imax <- which.max(cl$centers[, 1])
+    imid <- (1:3)[-c(imin, imax)]
+    # Name the clusters
+    cluster <- rep(NA, nrow(metadata))
+    cluster[!ina][cl$cluster == imin] <- "reducing"
+    cluster[!ina][cl$cluster == imid] <- "transition"
+    cluster[!ina][cl$cluster == imax] <- "oxidizing"
+    # Get pch and col for plot
+    # Use is.null to let previous assignments take precedence (for SVH+19 in geo16S) 20211008
+    if(is.null(pch)) {
+      pch <- sapply(cluster, switch, oxidizing = 24, transition = 21, reducing = 25, NA)
+      col <- sapply(cluster, switch, oxidizing = 4, transition = 1, reducing = 2, NA)
+    }
+    # Print message about Eh7 or ORP ranges of clusters
+    ro <- range(na.omit(Eh7[cluster=="oxidizing"]))
+    no <- sum(na.omit(cluster=="oxidizing"))
+    message(paste0("getmetadata: oxidizing Eh7 ", paste(ro, collapse = " to "), " mV (n = ", no, ")"))
+    rt <- range(na.omit(Eh7[cluster=="transition"]))
+    nt <- sum(na.omit(cluster=="transition"))
+    message(paste0("getmetadata: transition Eh7 ", paste(rt, collapse = " to "), " mV (n = ", nt, ")"))
+    rr <- range(na.omit(Eh7[cluster=="reducing"]))
+    nr <- sum(na.omit(cluster=="reducing"))
+    message(paste0("getmetadata: reducing Eh7 ", paste(rr, collapse = " to "), " mV (n = ", nr, ")"))
+    # Append cluster names to data frame
+    metadata <- cbind(metadata, cluster)
+  }
+
+  if(is.null(pch)) stop(paste(study, "metadata file exists, but not set up for processing"))
+
+  metadata <- cbind(metadata, pch, col)
+  metadata <- cbind(metadata, pch, col)
+  # Return both metadata and metrics, if provided 20220506
+  if(is.null(metrics)) metadata else {
+    # Keep metadata only for samples with metrics 20201006
+    metadata <- metadata[metadata$Run %in% metrics$Run, ]
+    # Put metrics in same order as metadata 20220505
+    imet <- match(metadata$Run, metrics$Run)
+    metrics <- metrics[imet, ]
+    # Insert sample column in metrics
+    # Use first column name starting with "sample" or "Sample" 20210818
+    sampcol <- grep("^sample", colnames(metadata), ignore.case = TRUE)[1]
+    metrics <- data.frame(Run = metrics$Run, sample = metadata[, sampcol], nH2O = metrics$nH2O, ZC = metrics$ZC)
+    list(metadata = metadata, metrics = metrics)
+  }
+}
+
+########################
+# Unexported functions #
+########################
+
+# Function to calculate metrics for a given study 20220506
+getmetrics_orp16S <- function(study, ...) {
+  # Remove suffix after underscore 20200929
+  studyfile <- gsub("_.*", "", study)
+  RDPfile <- system.file(file.path("extdata/orp16S/RDP", paste0(studyfile, ".tab.xz")), package = "JMDplots")
+  # If there is no .xz file, look for a .tab file 20210607
+  if(!file.exists(RDPfile)) RDPfile <- system.file(file.path("extdata/orp16S/RDP", paste0(studyfile, ".tab")), package = "JMDplots")
+  RDP <- readRDP(RDPfile, ...)
+  map <- mapRDP(RDP)
+  getmetrics(RDP, map)
 }
 

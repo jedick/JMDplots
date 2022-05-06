@@ -62,7 +62,7 @@ geo16S2 <- function(pdf = FALSE) {
     points(pcomp$ZC[!ifill], pcomp$nH2O[!ifill], pch = pcomp$pch[!ifill], col = pcomp$col[!ifill])
   }
 
-  p1 <- plotmet("BGPF13", title = FALSE, points = FALSE)
+  p1 <- plotmet_geo16S("BGPF13", title = FALSE, points = FALSE)
 #  title("Yellowstone hot springs\nBowen De Le\u00f3n et al., 2013", font.main = 1)
   title("Yellowstone hot springs", font.main = 1)
   addhull(p1$ZC, p1$nH2O, 2, TRUE)
@@ -70,7 +70,7 @@ geo16S2 <- function(pdf = FALSE) {
   legend <- c("Archaea", "Bacteria")
   legend("bottomleft", legend, pch = c(23, 22), col = c(1, 1), pt.bg = c(6, 5), bg = "white")
 
-  p2 <- plotmet("SVH+19", title = FALSE, points = FALSE)
+  p2 <- plotmet_geo16S("SVH+19", title = FALSE, points = FALSE)
 #  title("Black Sea\nSollai et al., 2019", font.main = 1)
   title("Black Sea", font.main = 1)
   addhull(p2$ZC, p2$nH2O, "blue", TRUE, lty = 2)
@@ -78,7 +78,7 @@ geo16S2 <- function(pdf = FALSE) {
   legend <- c("Oxic", "Suboxic", "Euxinic")
   legend("bottomright", legend, pch = c(24, 20, 25), pt.bg = c(4, 1, 2), bg = "white")
 
-  p3 <- plotmet("HLA+16", title = FALSE, points = FALSE)
+  p3 <- plotmet_geo16S("HLA+16", title = FALSE, points = FALSE)
 #  title("Baltic Sea\nHerlemann et al., 2016", font.main = 1)
   title("Baltic Sea", font.main = 1)
   addhull(p3$ZC, p3$nH2O, "blue", TRUE)
@@ -86,7 +86,7 @@ geo16S2 <- function(pdf = FALSE) {
   legend <- c("< 6", "6-20", "> 20")
   legend("bottomright", legend, pch = c(24, 20, 21), col = c(1, 1, 1), pt.bg = c(3, NA, 4), bg = "white", title = "Salinity")
 
-  p4 <- plotmet("MPB+17", title = FALSE, points = FALSE)
+  p4 <- plotmet_geo16S("MPB+17", title = FALSE, points = FALSE)
 #  title("Manus Basin submarine vents\nMeier et al., 2017", font.main = 1)
   title("Manus Basin submarine vents", font.main = 1)
   addhull(p4$ZC, p4$nH2O, 2, TRUE, lty = 2)
@@ -95,7 +95,7 @@ geo16S2 <- function(pdf = FALSE) {
   legend("bottomleft", legend, pch = c(21, 23), col = c(1, 1), pt.bg = c(4, 2), bg = "white", title = "Water")
   legend("bottomright", c("Rock", "Fauna"), pch = c(20, 8), col = c(1, "#757500C0"), bg = "white")
 
-  p5 <- plotmet("ZLM+16", title = FALSE, points = FALSE)
+  p5 <- plotmet_geo16S("ZLM+16", title = FALSE, points = FALSE)
 #  title("Tibetan Plateau lakes\nZhong et al., 2016", font.main = 1)
   title("Tibetan Plateau lakes", font.main = 1)
   addhull(p5$ZC, p5$nH2O, "turquoise3", TRUE, lty = 2)
@@ -103,7 +103,7 @@ geo16S2 <- function(pdf = FALSE) {
   legend <- c("< 10 g/L", "24-99 g/L", "> 300 g/L")
   legend("topright", legend, pch = c(24, 20, 21), col = c(1, 1, 1), pt.bg = c(3, NA, 4), bg = "white", title = "Salinity")
 
-  p6 <- plotmet("JHM+16", title = FALSE, points = FALSE)
+  p6 <- plotmet_geo16S("JHM+16", title = FALSE, points = FALSE)
 #  title("Lake Fryxell oxygen gradient\nJungblut et al., 2016", font.main = 1)
   title("Lake Fryxell oxygen gradient", font.main = 1)
   addhull(p6$ZC, p6$nH2O, "tan1", TRUE)
@@ -111,7 +111,7 @@ geo16S2 <- function(pdf = FALSE) {
   legend <- c("Oxic", "Transition", "Anoxic")
   legend("bottomright", legend, pch = c(24, 20, 25), pt.bg = c(4, 1, 2), bg = "white")
 
-  p7 <- plotmet("HCW+13", title = FALSE, points = FALSE, ylim = c(-0.7685, -0.7585))
+  p7 <- plotmet_geo16S("HCW+13", title = FALSE, points = FALSE, ylim = c(-0.7685, -0.7585))
 #  title("Guerrero Negro mat layers\nHarris et al., 2013", font.main = 1)
   title("Guerrero Negro mat layers", font.main = 1)
   addhull(p7$ZC, p7$nH2O, "tan1", TRUE, lty = 2)
@@ -120,7 +120,7 @@ geo16S2 <- function(pdf = FALSE) {
   legend <- c("Photic/oxic", "Low sulfide", "High sulfide")
   legend("topleft", legend, pch = c(24, 20, 25), pt.bg = c(4, 1, 2), bg = "white")
 
-  p8 <- plotmet("XDZ+17", title = FALSE, points = FALSE)
+  p8 <- plotmet_geo16S("XDZ+17", title = FALSE, points = FALSE)
 #  title("Qarhan Salt Lake and\nnormal soils, Xie et al., 2017", font.main = 1)
   title("Qarhan Salt Lake\nand normal soils", font.main = 1)
   addhull(p8$ZC, p8$nH2O, "turquoise3", TRUE)
@@ -235,7 +235,7 @@ geo16S3 <- function(pdf = FALSE) {
       Metagenome = c("SRR12347146", "SRR12347145", "SRR12347139", "SRR12347138", "SRR12347137", "SRR12347136", "SRR12347135", "SRR12347134",
         "SRR12347133", "SRR12347132", "SRR12347144", "SRR12347143", "SRR12347142", "SRR12347141", "SRR12347140")
       ## Get metadata for O2 concentration
-      alldat <- getmdat("SVH+19")
+      alldat <- getmdat_geo16S("SVH+19")
       # Check that the samples are in the right order
       stopifnot(all(aa$protein == Metagenome))
       stopifnot(all(alldat$depth == depth))
@@ -247,8 +247,8 @@ geo16S3 <- function(pdf = FALSE) {
       ## Get data for 16S studies
       # Get the metadata and chemical metrics for this study
       # Keep all rows for higher-resolution O2 measurements
-      mdat <- getmdat(study[i], dropNA = FALSE)
-      metrics <- getmetrics(study[i])
+      mdat <- getmdat_geo16S(study[i], dropNA = FALSE)
+      metrics <- getmetrics_geo16S(study[i])
       # Get the rows matching the ID
       iID <- mdat[, column[i]] == ID[i]
       mdat <- mdat[iID, ]
@@ -403,7 +403,7 @@ geo16S4 <- function(pdf = FALSE) {
   # Data from Ulrich et al., 2018
   xlim <- c(-0.16, -0.13)
   ylim <- c(-0.755, -0.725)
-  plotmet("UKD+18.water_2014", xlim = xlim, ylim = ylim, title = FALSE)
+  plotmet_geo16S("UKD+18.water_2014", xlim = xlim, ylim = ylim, title = FALSE)
   legend("topleft", c("MSA-", "MSA+"), pch = c(1, 21), pt.bg = c(1, 2), bg = "white", title = "NW PA streams (2014)")
   label.figure("A", cex = 1.5, xfrac = 0.03, font = 2)
 
@@ -418,7 +418,7 @@ geo16S4 <- function(pdf = FALSE) {
   outB <- list()
   # Loop over studies
   for(i in 1:4) {
-    pm <- plotmet(studies[[i]], plot.it = FALSE, extracolumn = "type")
+    pm <- plotmet_geo16S(studies[[i]], plot.it = FALSE, extracolumn = "type")
     # Determine sample groups from values of pch returned by plotmet()  20210901
     i1 <- pm$pch == 1
     i2 <- pm$pch == 21
@@ -447,7 +447,7 @@ geo16S4 <- function(pdf = FALSE) {
   ## Plots C-D: Comparison of different studies on produced water 20210330
 
   # Panel C: Cluff et al., 2014
-  plotmet("CHM+14_injected-49", title = FALSE)
+  plotmet_geo16S("CHM+14_injected-49", title = FALSE)
   legend("topright", c("Injected fluids (day 0)", "Produced water (day 49 and after)"),
          pch = c(21, 21), pt.bg = c("white", 2), bg = "white", title = "Marcellus Shale")
   box()
@@ -461,7 +461,7 @@ geo16S4 <- function(pdf = FALSE) {
   outD <- list()
   # Loop over studies
   for(i in 1:3) {
-    pm <- plotmet(studies[[i]], plot.it = FALSE, extracolumn = "type")
+    pm <- plotmet_geo16S(studies[[i]], plot.it = FALSE, extracolumn = "type")
     # Determine sample groups from values of pch returned by plotmet()  20210901
     i1 <- pm$pch == 1
     i2 <- pm$pch == 21
@@ -531,7 +531,7 @@ geo16S4 <- function(pdf = FALSE) {
   P <- n1 <- n2 <- DZC <- numeric()
   for(i in 1:length(study)) {
     # Get metrics for samples in this study
-    pm <- plotmet(study[[i]], plot.it = FALSE)
+    pm <- plotmet_geo16S(study[[i]], plot.it = FALSE)
     # Determine oxidized and reduced sample groups from values of pch returned by plotmet()  20210901
     pm <- pm[!is.na(pm$pch), ]
     iox <- pm$pch == pch_ox[i]
@@ -616,8 +616,11 @@ MG16S <- function(which, plot.lines = TRUE, lowest.level = NULL, lineage = NULL,
     # Reverse the order because upper mat layers are plotted on the right
     metric_MG <- rev(dat_MG$AA)
     # 16S data (Harris et al., 2013)
-    mdat <- getmdat("HCW+13")
-    dat_16S <- getmetrics("HCW+13", mdat = mdat, lowest.level = lowest.level, lineage = lineage)
+
+    metrics <- getmetrics_geo16S("HCW+13", lowest.level = lowest.level, lineage = lineage)
+    mdat <- getmdat_geo16S("HCW+13", metrics)
+    dat_16S <- mdat$metrics
+
     if(H2O) metric_16S <- dat_16S$nH2O else metric_16S <- dat_16S$ZC
     # Check that the sample names are the same
     stopifnot(all.equal(rev(rownames(dat_MG$meancomp)), gsub(".*_", "", dat_16S$sample)))
@@ -627,8 +630,8 @@ MG16S <- function(which, plot.lines = TRUE, lowest.level = NULL, lineage = NULL,
     # Fill symbol for most oxidized (surface) sample
     points(metric_MG[1], metric_16S[1], pch = 21, bg = 4, cex = cex)
     # Get sample name and ID for Supplemental Table 20220125
-    Sample <- mdat$sample
-    Amplicon <- mdat$GenBank
+    Sample <- mdat$metadata$sample
+    Amplicon <- mdat$metadata$GenBank
     gradox_S1 <- read.csv(system.file("extdata/gradox/Table_S1.csv", package = "JMDplots"))
     Metagenome <- gradox_S1$ID[gradox_S1$study.name == "Guerrero_Negro"]
   }
@@ -639,11 +642,13 @@ MG16S <- function(which, plot.lines = TRUE, lowest.level = NULL, lineage = NULL,
     # Reverse the order because smaller water depths are plotted on the right
     metric_MG <- rev(dat_MG$AA)
     # 16S data (Ganesh et al., 2015)
-    mdat <- getmdat("GBL+15")
-    dat_16S <- getmetrics("GBL+15", mdat = mdat, lowest.level = lowest.level, lineage = lineage)
+    metrics <- getmetrics_geo16S("GBL+15", lowest.level = lowest.level, lineage = lineage)
+    mdat <- getmdat_geo16S("GBL+15", metrics)
+    dat_16S <- mdat$metrics
+    metadata <- mdat$metadata
     # Use smallest size fraction
     dat_16S <- subset(dat_16S, grepl("1.6micron", dat_16S$sample))
-    mdat <- mdat[mdat$Run %in% dat_16S$Run, ]
+    metadata <- metadata[metadata$Run %in% dat_16S$Run, ]
     if(H2O) metric_16S <- dat_16S$nH2O else metric_16S <- dat_16S$ZC
     # Check that the sample names are the same
     stopifnot(all.equal(rev(rownames(dat_MG$meancomp)), gsub("_.*", "", dat_16S$sample)))
@@ -653,8 +658,8 @@ MG16S <- function(which, plot.lines = TRUE, lowest.level = NULL, lineage = NULL,
     # Fill symbol for surface sample
     points(metric_MG[1], metric_16S[1], pch = 21, bg = 4, cex = cex)
     # Get sample name and ID for Supplemental Table 20220125
-    Sample <- paste0(mdat$depth, "m_", mdat$size)
-    Amplicon <- mdat$Run
+    Sample <- paste0(metadata$depth, "m_", metadata$size)
+    Amplicon <- metadata$Run
     gradox_S1 <- read.csv(system.file("extdata/gradox/Table_S1.csv", package = "JMDplots"))
     Metagenome <- gradox_S1$ID[gradox_S1$study.name == "ETNP_OMZ" & gradox_S1$type == "MG"]
   }
@@ -665,11 +670,13 @@ MG16S <- function(which, plot.lines = TRUE, lowest.level = NULL, lineage = NULL,
     # Reverse the order because smaller water depths are plotted on the right
     metric_MT <- rev(dat_MT$AA)
     # 16S data (Ganesh et al., 2015)
-    mdat <- getmdat("GBL+15")
-    dat_16S <- getmetrics("GBL+15", lowest.level = lowest.level, lineage = lineage)
+    metrics <- getmetrics_geo16S("GBL+15", lowest.level = lowest.level, lineage = lineage)
+    mdat <- getmdat_geo16S("GBL+15", metrics)
+    dat_16S <- mdat$metrics
+    metadata <- mdat$metadata
     # Use smallest size fraction
     dat_16S <- subset(dat_16S, grepl("1.6micron", dat_16S$sample))
-    mdat <- mdat[mdat$Run %in% dat_16S$Run, ]
+    metadata <- metadata[metadata$Run %in% dat_16S$Run, ]
     if(H2O) metric_16S <- dat_16S$nH2O else metric_16S <- dat_16S$ZC
     # Check that the sample names are the same
     stopifnot(all.equal(rev(rownames(dat_MT$meancomp)), gsub("_.*", "", dat_16S$sample)))
@@ -681,8 +688,8 @@ MG16S <- function(which, plot.lines = TRUE, lowest.level = NULL, lineage = NULL,
     # For the return value
     metric_MG <- metric_MT
     # Get sample name and ID for Supplemental Table 20220125
-    Sample <- paste0(mdat$depth, "m_", mdat$size)
-    Amplicon <- mdat$Run
+    Sample <- paste0(metadata$depth, "m_", metadata$size)
+    Amplicon <- metadata$Run
     gradox_S1 <- read.csv(system.file("extdata/gradox/Table_S1.csv", package = "JMDplots"))
     Metagenome <- gradox_S1$ID[gradox_S1$study.name == "ETNP_OMZ" & gradox_S1$type == "MT"]
   }
@@ -694,11 +701,13 @@ MG16S <- function(which, plot.lines = TRUE, lowest.level = NULL, lineage = NULL,
     # 16S data (Swingley et al., 2012)
     # mincount needs to be lowered from default for when lineage = "genus"
     # (site 4 (Q) has less than 200 genus-level classifications)
-    mdat <- getmdat("SMS+12")
-    dat_16S <- getmetrics("SMS+12", mdat = mdat, lowest.level = lowest.level, lineage = lineage, mincount = 50)
+    metrics <- getmetrics_geo16S("SMS+12", lowest.level = lowest.level, lineage = lineage, mincount = 50)
+    mdat <- getmdat_geo16S("SMS+12", metrics)
+    dat_16S <- mdat$metrics
+    metadata <- mdat$metadata
     if(H2O) metric_16S <- dat_16S$nH2O else metric_16S <- dat_16S$ZC
     # Check that the sample names are the same
-    stopifnot(all.equal(rownames(dat_MG$meancomp), mdat$"Field Code"))
+    stopifnot(all.equal(rownames(dat_MG$meancomp), metadata$"Field Code"))
     # Add lines and points
     if(plot.lines) lines(metric_MG, metric_16S)
     points(metric_MG, metric_16S, pch = 21, bg = "transparent", cex = cex)
@@ -707,8 +716,8 @@ MG16S <- function(which, plot.lines = TRUE, lowest.level = NULL, lineage = NULL,
     # Get sample name and ID for Supplemental Table 20220125
     gradox_S1 <- read.csv(system.file("extdata/gradox/Table_S1.csv", package = "JMDplots"))
     Library <- sapply(strsplit(gradox_S1$sample.description[gradox_S1$study.name == "Bison_Pool"], " "), "tail", 1)
-    Sample <- paste0("Site ", mdat$Sample, " (", mdat$`Field Code`, ") (", Library, ")")
-    Amplicon <- mdat$Run
+    Sample <- paste0("Site ", metadata$Sample, " (", metadata$`Field Code`, ") (", Library, ")")
+    Amplicon <- metadata$Run
     Metagenome <- gradox_S1$ID[gradox_S1$study.name == "Bison_Pool"]
   }
 
@@ -718,8 +727,10 @@ MG16S <- function(which, plot.lines = TRUE, lowest.level = NULL, lineage = NULL,
     # NOTE: reverse the order because smaller water depths are plotted on the right
     metric_MT <- rev(dat_MT$AA)
     # 16S data (Edwardson and Hollibaugh, 2018)
-    mdat <- getmdat("EH18")
-    dat_16S <- getmetrics("EH18", lowest.level = lowest.level, lineage = lineage)
+    metrics <- getmetrics_geo16S("EH18", lowest.level = lowest.level, lineage = lineage)
+    mdat <- getmdat_geo16S("EH18", metrics)
+    dat_16S <- mdat$metrics
+    metadata <- mdat$metadata
     if(H2O) metric_16S <- dat_16S$nH2O else metric_16S <- dat_16S$ZC
     # Check that the sample names are the same
     stopifnot(all.equal(rev(rownames(dat_MT$meancomp)), gsub(".*_", "", dat_16S$sample)))
@@ -731,8 +742,8 @@ MG16S <- function(which, plot.lines = TRUE, lowest.level = NULL, lineage = NULL,
     # For the return value
     metric_MG <- metric_MT
     # Get sample name and ID for Supplemental Table 20220125
-    Sample <- paste0(mdat$sample)
-    Amplicon <- mdat$Run
+    Sample <- paste0(metadata$sample)
+    Amplicon <- metadata$Run
     gradox_S1 <- read.csv(system.file("extdata/gradox/Table_S1.csv", package = "JMDplots"))
     Metagenome <- gradox_S1$ID[gradox_S1$study.name == "Mono_Lake"]
   }
@@ -742,8 +753,10 @@ MG16S <- function(which, plot.lines = TRUE, lowest.level = NULL, lineage = NULL,
     aa <- read.csv(file.path(ARASTdir, "Marcellus_Shale_AA.csv"))
     if(H2O) metric_MG <- H2OAA(aa) else metric_MG <- ZCAA(aa)
     # Marcellus 16S (Cluff et al., 2014)
-    mdat <- getmdat("CHM+14")
-    dat_16S <- getmetrics("CHM+14", mdat = mdat, lowest.level = lowest.level, lineage = lineage)
+    metrics <- getmetrics_geo16S("CHM+14", lowest.level = lowest.level, lineage = lineage)
+    mdat <- getmdat_geo16S("CHM+14", metrics)
+    dat_16S <- mdat$metrics
+    metadata <- mdat$metadata
     # Time points: input, T7, T13, T82, T328
     Sample = paste("Day", c(0, 7, 13, 82, 328))
     # List run IDs here
@@ -761,10 +774,10 @@ MG16S <- function(which, plot.lines = TRUE, lowest.level = NULL, lineage = NULL,
     dat_16S <- dat_16S[idat, ]
     if(H2O) metric_16S <- dat_16S$nH2O else metric_16S <- dat_16S$ZC
     # Assign colors: open circle for injected fluid, gray for flowback, red for produced
-    mdat <- mdat[idat, ]
-    col <- rep(4, nrow(mdat))
-    col[mdat$type == "flowback fluid"] <- 8
-    col[mdat$type == "produced fluid"] <- 2
+    metadata <- metadata[idat, ]
+    col <- rep(4, nrow(metadata))
+    col[metadata$type == "flowback fluid"] <- 8
+    col[metadata$type == "produced fluid"] <- 2
     if(plot.lines) type <- "b" else type <- "p"
     points(metric_MG, metric_16S, pch = 23, bg = col, type = type, cex = cex)
   }
@@ -774,8 +787,10 @@ MG16S <- function(which, plot.lines = TRUE, lowest.level = NULL, lineage = NULL,
     aa <- read.csv(file.path(ARASTdir, "Manus_Basin_AA.csv"))
     if(H2O) metric_MG <- H2OAA(aa) else metric_MG <- ZCAA(aa)
     # Manus Basin 16S (Meier et al., 2017)
-    mdat <- getmdat("MPB+17")
-    dat_16S <- getmetrics("MPB+17", mdat = mdat, lowest.level = lowest.level, lineage = lineage)
+    metrics <- getmetrics_geo16S("MPB+17", lowest.level = lowest.level, lineage = lineage)
+    mdat <- getmdat_geo16S("MPB+17", metrics)
+    dat_16S <- mdat$metrics
+    metadata <- mdat$metadata
     # Samples: NSu-F2b, NSu-F5, Fw-F1b, Fw-F3, RR-F1b
     Sample = c("MNB27-NSu-F2b", "MNB29-NSu-F5", "MNB14-Fw-F1b", "MNB17-Fw-F3", "MNB45-RR-F1b")
     # List run IDs here
@@ -788,10 +803,10 @@ MG16S <- function(which, plot.lines = TRUE, lowest.level = NULL, lineage = NULL,
     dat_16S <- dat_16S[idat, ]
     if(H2O) metric_16S <- dat_16S$nH2O else metric_16S <- dat_16S$ZC
     # Assign colors: blue for < 10 degC, red for > 50 degC
-    mdat <- mdat[idat, ]
-    col <- rep("white", nrow(mdat))
-    col[mdat$T > 50] <- c2
-    col[mdat$T < 10] <- c4
+    metadata <- metadata[idat, ]
+    col <- rep("white", nrow(metadata))
+    col[metadata$T > 50] <- c2
+    col[metadata$T < 10] <- c4
     points(metric_MG, metric_16S, pch = 22, bg = col, col = c1, cex = cex)
   }
 
@@ -800,29 +815,34 @@ MG16S <- function(which, plot.lines = TRUE, lowest.level = NULL, lineage = NULL,
     aa <- read.csv(file.path(ARASTdir, "Black_Sea_AA.csv"))
     if(H2O) metric_MG <- H2OAA(aa) else metric_MG <- ZCAA(aa)
     # 16S data (Sollai et al., 2019)
-    mdat <- getmdat("SVH+19")
-    dat_16S <- getmetrics("SVH+19", mdat = mdat)
+    metrics <- getmetrics_geo16S("SVH+19")
+    ## TODO: add missing arguments: 20220506
+    #metrics <- getmetrics_geo16S("SVH+19", lowest.level = lowest.level, lineage = lineage)
+    mdat <- getmdat_geo16S("SVH+19", metrics)
+    dat_16S <- mdat$metrics
+    metadata <- mdat$metadata
     if(H2O) metric_16S <- dat_16S$nH2O else metric_16S <- dat_16S$ZC
     Sample = c(50, 70, 80, 85, 90, 95, 100, 105,
       110, 130, 170, 250, 500, 1000, 2000)
     Metagenome = c("SRR12347146", "SRR12347145", "SRR12347139", "SRR12347138", "SRR12347137", "SRR12347136", "SRR12347135", "SRR12347134",
       "SRR12347133", "SRR12347132", "SRR12347144", "SRR12347143", "SRR12347142", "SRR12347141", "SRR12347140")
     # Check that the samples are in the right order
-    stopifnot(all(mdat$depth == Sample))
+    stopifnot(all(metadata$depth == Sample))
     stopifnot(all(aa$protein == Metagenome))
     # Assign colors and symbols: blue up for < 100 m, red down for >= 100 m
-    col <- rep(c4, nrow(mdat))
-    pch <- rep(24, nrow(mdat))
-    col[mdat$depth >= 100] <- c2
-    pch[mdat$depth >= 100] <- 25
+    col <- rep(c4, nrow(metadata))
+    pch <- rep(24, nrow(metadata))
+    col[metadata$depth >= 100] <- c2
+    pch[metadata$depth >= 100] <- 25
     points(metric_MG, metric_16S, pch = pch, bg = col, col = c1, cex = cex)
-    Amplicon <- mdat$Run
+    Amplicon <- metadata$Run
   }
 
   if(which == "HMP") {
     # HMP 16S
-    mdat <- getmdat("HMP12")
-    met <- getmetrics("HMP12", mdat = mdat, lowest.level = lowest.level, lineage = lineage)
+    met <- getmetrics_geo16S("HMP12", lowest.level = lowest.level, lineage = lineage)
+    # NOTE: don't use 'metrics' argument here in order to get metadata for *all* samples
+    metadata <- getmdat_geo16S("HMP12")
     # HMP metagenomes
     aa <- read.csv(file.path(ARASTdir, "HMP_AA.csv"))
     # Put data in same order
@@ -842,7 +862,7 @@ MG16S <- function(which, plot.lines = TRUE, lowest.level = NULL, lineage = NULL,
     if(any(ilow)) {
       metric_MG <- metric_MG[!ilow]
       metric_16S <- metric_16S[!ilow]
-      mdat <- mdat[!ilow, ]
+      metadata <- metadata[!ilow, ]
       aa <- aa[!ilow, ]
       dat <- dat[!ilow, ]
     }
@@ -853,14 +873,14 @@ MG16S <- function(which, plot.lines = TRUE, lowest.level = NULL, lineage = NULL,
       iout <- iout.Nasal | iout.UG
       metric_MG <- metric_MG[!iout]
       metric_16S <- metric_16S[!iout]
-      mdat <- mdat[!iout, ]
+      metadata <- metadata[!iout, ]
       aa <- aa[!iout, ]
       dat <- dat[!iout, ]
     }
     # Colors: blue (Skin), green (Nasal cavity), gray (Oral cavity), red (GI tract), magenta (UG tract)
     # Symbols: up triangle (skin, GI tract), circle (Oral cavity), down triangle (Nasal cavity, UG tract)
-    col <- sapply(mdat$"Body site", switch, "Skin" = c5, "Nasal cavity" = c4, "Oral cavity" = c8, "GI tract" = c2, "UG tract" = c6)
-    pch <- sapply(mdat$"Body site", switch, "Skin" = 24, "Nasal cavity" = 25, "Oral cavity" = 21, "GI tract" = 24, "UG tract" = 25)
+    col <- sapply(metadata$"Body site", switch, "Skin" = c5, "Nasal cavity" = c4, "Oral cavity" = c8, "GI tract" = c2, "UG tract" = c6)
+    pch <- sapply(metadata$"Body site", switch, "Skin" = 24, "Nasal cavity" = 25, "Oral cavity" = 21, "GI tract" = 24, "UG tract" = 25)
     points(metric_MG, metric_16S, pch = pch, bg = col, col = c1)
     # Get sample name and ID for Supplemental Table 20220125
     Sample <- dat$Sample.name
@@ -870,7 +890,7 @@ MG16S <- function(which, plot.lines = TRUE, lowest.level = NULL, lineage = NULL,
 
   if(which == "Guts") {
     # Guts 16S
-    met <- getmetrics("MKK+11", lowest.level = lowest.level, lineage = lineage, mincount = 50)
+    met <- getmetrics_geo16S("MKK+11", lowest.level = lowest.level, lineage = lineage, mincount = 50)
     # Guts metagenomes
     aa <- read.csv(file.path(ARASTdir, "Guts_AA.csv"))
     # Make sure the 16S and metagenomes are paired correctly
@@ -889,7 +909,7 @@ MG16S <- function(which, plot.lines = TRUE, lowest.level = NULL, lineage = NULL,
 
   if(which == "Soils") {
     # Soils 16S
-    met <- getmetrics("FLA+12", lowest.level = lowest.level, lineage = lineage)
+    met <- getmetrics_geo16S("FLA+12", lowest.level = lowest.level, lineage = lineage)
     # Soils metagenomes
     aa <- read.csv(file.path(ARASTdir, "Soils_AA.csv"))
     # Put data in same order
@@ -1075,7 +1095,7 @@ geo16S_S1 <- function(pdf = FALSE) {
 
   text(5, 10, "Amino Acid Compositions\nfor Taxonomic Groups\n(Reference Proteomes)", adj = c(0, 1), font = 2)
   # Read file with precomputed metrics for taxa at different ranks
-  metrics <- read.csv(system.file("extdata/chem16S/taxon_metrics.csv", package = "JMDplots"))
+  metrics <- read.csv(system.file("extdata/chem16S/taxon_metrics.csv", package = "chem16S"))
   ranks <- c("superkingdom", "phylum", "class", "order", "family", "genus")
   plural <- c("superkingdoms (*)", "phyla", "classes", "orders", "families", "genera")
   for(irank in 1:6) {
@@ -1107,9 +1127,9 @@ geo16S_S2 <- function(pdf = FALSE) {
   if(pdf) pdf("geo16S_S2.pdf", width = 12, height = 6)
 
   # Read file with precomputed metrics for taxa at different ranks
-  metrics <- read.csv(system.file("extdata/chem16S/taxon_metrics.csv", package = "JMDplots"))
+  metrics <- read.csv(system.file("extdata/chem16S/taxon_metrics.csv", package = "chem16S"))
   # Get tables of all taxonomic names and amino acid compositions
-  names <- read.csv(system.file("extdata/refseq/taxid_names.csv.xz", package = "JMDplots"))
+  names <- read.csv(system.file("extdata/refseq/taxid_names.csv.xz", package = "chem16S"))
   # Take out viruses
   ivirus <- names$superkingdom == "Viruses"
   ivirus[is.na(ivirus)] <- TRUE
@@ -1205,8 +1225,8 @@ geo16S_S3 <- function(pdf = FALSE) {
   xlim <- c(-0.3, 0)
   ylim <- c(-0.85, -0.65)
 
-  metrics <- read.csv(system.file("extdata/chem16S/taxon_metrics.csv", package = "JMDplots"))
-  names <- read.csv(system.file("extdata/refseq/taxid_names.csv.xz", package = "JMDplots"))
+  metrics <- read.csv(system.file("extdata/chem16S/taxon_metrics.csv", package = "chem16S"))
+  names <- read.csv(system.file("extdata/refseq/taxid_names.csv.xz", package = "chem16S"))
   # Only keep taxa with non-NA genus and phylum
   names <- names[!(is.na(names$genus) | is.na(names$phylum)), ]
 
@@ -1269,7 +1289,7 @@ geo16S_S4 <- function(pdf = FALSE) {
   SILVAphyla <- readLines(file.path(datadir, "SILVAphyla.txt"))
   SILVAgenera <- readLines(file.path(datadir, "SILVAgenera.txt"))
   # Read NCBI names
-  NCBI <- read.csv(system.file("extdata/refseq/taxid_names.csv.xz", package = "JMDplots"))
+  NCBI <- read.csv(system.file("extdata/refseq/taxid_names.csv.xz", package = "chem16S"))
   NCBIphyla <- unique(na.omit(NCBI$phylum))
   NCBIgenera <- unique(na.omit(NCBI$genus))
 
@@ -1423,8 +1443,9 @@ geo16S_S6 <- function(pdf = FALSE) {
 
     if(name == "HMP") {
       # HMP 16S
-      mdat <- getmdat("HMP12")
-      met <- getmetrics("HMP12", mdat = mdat, lowest.level = lowest.level, lineage = lineage)
+      met <- getmetrics_geo16S("HMP12", lowest.level = lowest.level, lineage = lineage)
+      # NOTE: don't use 'metrics' argument here in order to get metadata for *all* samples
+      metadata <- getmdat_geo16S("HMP12")
       # HMP metagenomes
       aa <- read.csv(file.path(ARASTdir, "HMP_AA.csv"))
       # Put data in same order
@@ -1439,7 +1460,7 @@ geo16S_S6 <- function(pdf = FALSE) {
       # Don't plot MG with low numbers of protein fragments 20220122
       ilow <- aa$chains < 50000
       if(any(ilow)) {
-        mdat <- mdat[!ilow, ]
+        metadata <- metadata[!ilow, ]
         met <- met[!ilow, ]
         aa <- aa[!ilow, ]
         dat <- dat[!ilow, ]
@@ -1451,9 +1472,9 @@ geo16S_S6 <- function(pdf = FALSE) {
       GC_16S <- dat$GC_16S
       GC_MG <- dat$GC_MG
       # Colors: blue (Skin), green (Nasal cavity), gray (Oral cavity), red (GI tract), magenta (UG tract)
-      col <- sapply(mdat$"Body site", switch, "Skin" = c5, "Nasal cavity" = c4, "Oral cavity" = c8, "GI tract" = c2, "UG tract" = c6)
+      col <- sapply(metadata$"Body site", switch, "Skin" = c5, "Nasal cavity" = c4, "Oral cavity" = c8, "GI tract" = c2, "UG tract" = c6)
       # Symbols: up triangle (skin, GI tract), circle (Oral cavity), down triangle (Nasal cavity, UG tract)
-      pch <- sapply(mdat$"Body site", switch, "Skin" = 24, "Nasal cavity" = 25, "Oral cavity" = 21, "GI tract" = 24, "UG tract" = 25)
+      pch <- sapply(metadata$"Body site", switch, "Skin" = 24, "Nasal cavity" = 25, "Oral cavity" = 21, "GI tract" = 24, "UG tract" = 25)
       legend.x <- "bottomright"
     }
 
@@ -1462,8 +1483,10 @@ geo16S_S6 <- function(pdf = FALSE) {
       aa <- read.csv(file.path(ARASTdir, "Marcellus_Shale_AA.csv"))
       ZC_MG <- ZCAA(aa)
       # Marcellus 16S (Cluff et al., 2014)
-      mdat <- getmdat("CHM+14")
-      dat_16S <- getmetrics("CHM+14", mdat = mdat, lowest.level = lowest.level, lineage = lineage)
+      metrics <- getmetrics_geo16S("CHM+14", lowest.level = lowest.level, lineage = lineage)
+      mdat <- getmdat_geo16S("CHM+14", metrics)
+      dat_16S <- mdat$metrics
+      metadata <- mdat$metadata
       # Time points: input, T7, T13, T82, T328
       Sample = paste("Day", c(0, 7, 13, 82, 328))
       # List run IDs here
@@ -1479,10 +1502,10 @@ geo16S_S6 <- function(pdf = FALSE) {
       dat_16S <- dat_16S[idat, ]
       ZC_16S <- dat_16S$ZC
       # Assign colors: open circle for injected fluid, gray for flowback, red for produced
-      mdat <- mdat[idat, ]
-      col <- rep(4, nrow(mdat))
-      col[mdat$type == "flowback fluid"] <- 8
-      col[mdat$type == "produced fluid"] <- 2
+      metadata <- metadata[idat, ]
+      col <- rep(4, nrow(metadata))
+      col[metadata$type == "flowback fluid"] <- 8
+      col[metadata$type == "produced fluid"] <- 2
       pch <- 23
       legend.x <- "topleft"
     }
@@ -1527,4 +1550,289 @@ geo16S_S6 <- function(pdf = FALSE) {
 
   if(pdf) dev.off()
 
+}
+
+# Get metadata for a study, appending columns for pch and col 20200914
+getmdat_geo16S <- function(study, metrics = NULL, dropNA = TRUE) {
+  # Read metadata file
+  # Remove suffix after underscore 20200929
+  studyfile <- gsub("_.*", "", study)
+  datadir <- system.file("extdata/geo16S", package = "JMDplots")
+  file <- file.path(datadir, "metadata", paste0(studyfile, ".csv"))
+  metadata <- read.csv(file, as.is = TRUE, check.names = FALSE)
+
+  if(dropNA) {
+    # Exclude samples with NA name (e.g. outliers?) 20200916
+    noname <- is.na(metadata$name)
+    if(any(noname)) {
+      print(paste0("getmetadata [", study, "]: dropping ", sum(noname), " samples with NA name"))
+      metadata <- metadata[!is.na(metadata$name), ]
+    }
+  }
+  # Use NULL pch as flag for unavailable dataset 20210820
+  pch <- NULL
+
+  ## Identify samples for computing differences in each study
+
+  # Natural environments
+  if(study == "BGPF13") { # Heart Lake Geyser Basin, Yellowstone
+    pch <- sapply(metadata$cohort, switch, Bacteria = 22, Archaea = 23)
+    col <- sapply(metadata$cohort, switch, Bacteria = 5, Archaea = 6)
+  }
+  if(study == "MPB+17") { # Manus Basin
+    type <- metadata$type
+    iwater <- type == "water/fluid"
+    type[iwater][metadata$T[iwater] > 50] <- "highT"
+    type[iwater][metadata$T[iwater] < 50] <- "lowT"
+    pch <- sapply(type, switch, lowT = 21, highT = 23, "fauna surface" = 8, "rock/chimney" = 20, NA)
+    # For fauna, use a darkened yellow4 with transparency 20210609
+    col <- sapply(type, switch, lowT = 4, highT = 2, "fauna surface" = "#757500C0", "rock/chimney" = 1, NA)
+  }
+  if(study == "SVH+19") { # Black Sea
+    pch <- sapply(metadata$Type, switch, Oxic = 24, Suboxic = 20, Euxinic = 25, NA)
+    col <- sapply(metadata$Type, switch, Oxic = 4, Suboxic = 1, Euxinic = 2, NA)
+  }
+  if(study == "SVH+19_O2") {
+    # oxic and anoxic groups for geo16S4() 20220118
+    pch <- ifelse(metadata$O2 > 0.5, 24, 25)
+    col <- ifelse(metadata$O2 > 0.5, 4, 2)
+  }
+  if(study == "XDZ+17") { # Qarhan Salt Lake
+    pch <- sapply(metadata$type, switch, normal = 24, saline = 21)
+    col <- sapply(metadata$type, switch, normal = 3, saline = 4)
+  }
+  if(study == "JHM+16") { # Lake Fryxell microbial mats
+    pch <- sapply(metadata$type, switch, oxic = 24, transition = 20, anoxic = 25)
+    col <- sapply(metadata$type, switch, oxic = 4, transition = 1, anoxic = 2)
+  }
+  if(study == "JHM+16_O2") {
+    # oxic and anoxic groups for geo16S4() 20220118
+    pch <- ifelse(metadata$O2 > 0.5, 24, 25)
+    col <- ifelse(metadata$O2 > 0.5, 4, 2)
+  }
+  if(study == "HLA+16") { # Baltic Sea
+    #pch <- sapply(metadata$type, switch, Oligohaline = 24, Mesohaline = 20, Marine = 21)
+    #col <- sapply(metadata$type, switch, Oligohaline = 3, Mesohaline = 1, Marine = 4)
+    type <- rep("moderate", nrow(metadata))
+    type[metadata$salinity < 6] <- "low"
+    type[metadata$salinity > 20] <- "high"
+    pch <- sapply(type, switch, low = 24, moderate = 20, high = 21)
+    col <- sapply(type, switch, low = 3, moderate = 1, high = 4)
+  }
+  if(study == "ZLM+16") { # Tibetan Plateau Lakes
+    type <- rep("moderate", nrow(metadata))
+    type[metadata$lake %in% c("Keluke", "Qing")] <- "low"
+    type[metadata$lake == "Gasikule"] <- "high"
+    pch <- sapply(type, switch, low = 24, moderate = 20, high = 21)
+    col <- sapply(type, switch, low = 3, moderate = 1, high = 4)
+  }
+  if(study == "HCW+13") { # Guerrero Negro microbial mat
+    pch <- sapply(metadata$zone, switch, A = 24, B = 20, C = 25)
+    col <- sapply(metadata$zone, switch, A = 4, B = 1, C = 2)
+  }
+
+  # Shale gas datasets
+  if(study == "UKD+18.water") {
+    pch <- sapply(metadata$type, switch, "MSA+" = 21, "MSA-" = 1)
+    col <- sapply(metadata$type, switch, "MSA+" = 2, "MSA-" = 1)
+  }
+  if(study == "UKD+18.sediment") {
+    pch <- sapply(metadata$type, switch, "MSA+" = 21, "MSA-" = 1)
+    col <- sapply(metadata$type, switch, "MSA+" = 2, "MSA-" = 1)
+  }
+  if(grepl("UKD\\+18.*2012", study)) {
+    metadata <- metadata[metadata$year == 2012, ]
+    pch <- sapply(metadata$type, switch, "MSA+" = 21, "MSA-" = 1)
+    col <- sapply(metadata$type, switch, "MSA+" = 2, "MSA-" = 1)
+  }
+  if(grepl("UKD\\+18.*2013", study)) {
+    metadata <- metadata[metadata$year == 2013, ]
+    pch <- sapply(metadata$type, switch, "MSA+" = 21, "MSA-" = 1)
+    col <- sapply(metadata$type, switch, "MSA+" = 2, "MSA-" = 1)
+  }
+  if(grepl("UKD\\+18.*2014", study)) {
+    metadata <- metadata[metadata$year == 2014, ]
+    pch <- sapply(metadata$type, switch, "MSA+" = 21, "MSA-" = 1)
+    col <- sapply(metadata$type, switch, "MSA+" = 2, "MSA-" = 1)
+  }
+  if(grepl("UKD\\+18.*2015", study)) {
+    metadata <- metadata[metadata$year == 2015, ]
+    pch <- sapply(metadata$type, switch, "MSA+" = 21, "MSA-" = 1)
+    col <- sapply(metadata$type, switch, "MSA+" = 2, "MSA-" = 1)
+  }
+  if(grepl("UKD\\+18.*2016", study)) {
+    metadata <- metadata[metadata$year == 2016, ]
+    pch <- sapply(metadata$type, switch, "MSA+" = 21, "MSA-" = 1)
+    col <- sapply(metadata$type, switch, "MSA+" = 2, "MSA-" = 1)
+  }
+  if(study == "CUN+18") {
+    pch <- sapply(metadata$type, switch, "UOG+" = 21, "UOG-" = 1, 0)
+    col <- sapply(metadata$type, switch, "UOG+" = 2, "UOG-" = 1, 1)
+  }
+  if(study == "MMA+20") {
+    # Exclude AMD streams
+    metadata <- metadata[!(grepl("Bark_Camp_Sed", metadata$sample) | grepl("Boone_Sed", metadata$sample) | grepl("Boone_Dup_Sed", metadata$sample)), ]
+#    # Include only streams categorized as "low/lowest" or "high/highest" disturbance intensity
+#    metadata <- metadata[metadata$sDII < 15 | metadata$sDII > 30, ]
+    # Include only streams categorized as "lowest" or "highest" disturbance intensity
+    metadata <- metadata[metadata$sDII < 5 | metadata$sDII > 40, ]
+    pch <- ifelse(metadata$sDII >= 20, 21, 1)
+    col <- ifelse(metadata$sDII >= 20, 2, 1)
+  }
+  if(study == "MMA+20_spring") {
+    # Exclude AMD streams
+    metadata <- metadata[!(grepl("Bark_Camp_Sed", metadata$sample) | grepl("Boone_Sed", metadata$sample) | grepl("Boone_Dup_Sed", metadata$sample)), ]
+    # Include only streams categorized as "lowest" or "highest" disturbance intensity
+    metadata <- metadata[metadata$sDII < 5 | metadata$sDII > 40, ]
+    # Include only spring samples
+    ispring <- grep("^04", sapply(strsplit(metadata$sample, "_"), tail, 1))
+    metadata <- metadata[ispring, ]
+    pch <- ifelse(metadata$sDII >= 20, 21, 1)
+    col <- ifelse(metadata$sDII >= 20, 2, 1)
+  }
+  if(study == "MMA+20_fall") {
+    # Exclude AMD streams
+    metadata <- metadata[!(grepl("Bark_Camp_Sed", metadata$sample) | grepl("Boone_Sed", metadata$sample) | grepl("Boone_Dup_Sed", metadata$sample)), ]
+    # Include only streams categorized as "lowest" or "highest" disturbance intensity
+    metadata <- metadata[metadata$sDII < 5 | metadata$sDII > 40, ]
+    # Include only fall samples
+    ifall <- grep("^09", sapply(strsplit(metadata$sample, "_"), tail, 1))
+    metadata <- metadata[ifall, ]
+    pch <- ifelse(metadata$sDII >= 20, 21, 1)
+    col <- ifelse(metadata$sDII >= 20, 2, 1)
+  }
+  if(grepl("CHM+14", study, fixed = TRUE)) {
+    # Injected fluids and later produced water
+    if(study == "CHM+14_injected-49") metadata <- metadata[metadata$day == 0 | metadata$day >= 49, ]
+    pch <- ifelse(metadata$day >= 49, 21, 1)
+    col <- ifelse(metadata$day >= 49, 2, 1)
+  }
+  if(grepl("HRR+18", study, fixed = TRUE)) {
+    if(study == "HRR+18_injected-22") metadata <- metadata[metadata$day == 0 | metadata$day >= 22, ]
+    pch <- ifelse(metadata$day > 10, 21, 1)
+    col <- ifelse(metadata$day > 10, 2, 1)
+  }
+  if(grepl("ZLF+19", study, fixed = TRUE)) {
+    # Source water and flowback day 18
+    if(study == "ZLF+19_injected-18") metadata <- metadata[metadata$day %in% c(-1, 18), ]
+    pch <- ifelse(metadata$day >= 1, 21, 1)
+    col <- ifelse(metadata$day >= 1, 2, 1)
+  }
+
+  # Stratified water datasets
+  if(study == "MZG+20") {
+    # Identify shallowest and deepest samples from Lakes Zug and Lugano
+    newdat <- lapply(c("Lake Zug", "Lake Lugano"), function(lake) {
+      ilake <- metadata$lake == lake
+      range <- range(metadata$depth[ilake])
+      iext <- metadata$depth[ilake] %in% range
+      extdat <- metadata[ilake, ][iext, ]
+      extdat$type <- ifelse(extdat$depth == range[1], "shallowest", "deepest")
+      extdat
+    })
+    newdat <- do.call(rbind, newdat)
+    # Keep all samples, but only assign pch and col shallowest and deepest samples
+    metadata$type <- newdat$type[match(metadata$Run, newdat$Run)]
+    pch <- ifelse(metadata$type == "shallowest", 24, 25)
+    col <- ifelse(metadata$type == "shallowest", 4, 2)
+  }
+  if(study == "MZG+20_Zug") {
+    metadata <- metadata[metadata$lake == "Lake Zug", ]
+    pch <- ifelse(metadata$O2 > 0.5, 24, 25)
+    col <- ifelse(metadata$O2 > 0.5, 4, 2)
+  }
+  if(study == "MZG+20_Lugano") {
+    metadata <- metadata[metadata$lake == "Lake Lugano", ]
+    pch <- ifelse(metadata$O2 > 0.5, 24, 25)
+    col <- ifelse(metadata$O2 > 0.5, 4, 2)
+  }
+  if(study == "HXZ+20") {
+    type <- rep("transition", nrow(metadata))
+    type[metadata$O2 > 100] <- "oxic"
+    type[metadata$O2 == 0] <- "anoxic"
+    pch <- sapply(type, switch, oxic = 24, transition = 20, anoxic = 25)
+    col <- sapply(type, switch, oxic = 4, transition = 1, anoxic = 2)
+    type[metadata$station == "C4"] <- NA
+    col[metadata$station == "C4"] <- NA
+  }
+  if(study == "GBL+15") {
+    pch <- ifelse(metadata$O2 > 0.5, 24, 25)
+    col <- ifelse(metadata$O2 > 0.5, 4, 2)
+    pch[metadata$size != "0.2-1.6micron"] <- NA
+    col[metadata$size != "0.2-1.6micron"] <- NA
+  }
+  if(study == "BCA+21") {
+    # "type" column is for orp16S paper, not geo16S
+    type <- rep("transition", nrow(metadata))
+    type[metadata$depth < 3] <- "oxic"
+    type[metadata$depth > 4] <- "anoxic"
+    # pch is for geo16S4() 20220118
+    pch <- ifelse(metadata$O2 > 0.5, 24, 25)
+    col <- ifelse(metadata$O2 > 0.5, 4, 2)
+  }
+  if(study == "EH18") {
+    pch <- ifelse(metadata$O2 > 0.5, 24, 25)
+    col <- ifelse(metadata$O2 > 0.5, 4, 2)
+  }
+
+  # Dataets for metagenome comparison 20220111
+  if(study == "MKK+11") {
+    pch <- rep(NA, nrow(metadata))
+    col <- rep(NA, nrow(metadata))
+  }
+  if(study == "FLA+12") {
+    pch <- rep(NA, nrow(metadata))
+    col <- rep(NA, nrow(metadata))
+  }
+  if(study == "HMP12") {
+    pch <- rep(NA, nrow(metadata))
+    col <- rep(NA, nrow(metadata))
+  }
+  if(study == "SMS+12") {
+    # pch is for geo16S4() 20220118
+    pch <- ifelse(metadata$O2 > 0.5, 24, 25)
+    col <- ifelse(metadata$O2 > 0.5, 4, 2)
+  }
+
+  if(is.null(pch)) stop(paste(study, "metadata file exists, but not set up for processing"))
+
+  metadata <- cbind(metadata, pch, col)
+  # Return both metadata and metrics, if provided 20220506
+  if(is.null(metrics)) metadata else {
+    # Keep metadata only for samples with metrics 20201006
+    metadata <- metadata[metadata$Run %in% metrics$Run, ]
+    # Put metrics in same order as metadata 20220505
+    imet <- match(metadata$Run, metrics$Run)
+    metrics <- metrics[imet, ]
+    # Insert sample column in metrics
+    # Use first column name starting with "sample" or "Sample" 20210818
+    sampcol <- grep("^sample", colnames(metadata), ignore.case = TRUE)[1]
+    metrics <- data.frame(Run = metrics$Run, sample = metadata[, sampcol], nH2O = metrics$nH2O, ZC = metrics$ZC)
+    list(metadata = metadata, metrics = metrics)
+  }
+}
+
+########################
+# Unexported functions #
+########################
+
+# Function to calculate metrics for a given study 20220506
+getmetrics_geo16S <- function(study, ...) {
+  # Remove suffix after underscore 20200929
+  studyfile <- gsub("_.*", "", study)
+  RDPfile <- system.file(file.path("extdata/geo16S/RDP", paste0(studyfile, ".tab.xz")), package = "JMDplots")
+  # If there is no .xz file, look for a .tab file 20210607
+  if(!file.exists(RDPfile)) RDPfile <- system.file(file.path("extdata/geo16S/RDP", paste0(studyfile, ".tab")), package = "JMDplots")
+  RDP <- readRDP(RDPfile, ...)
+  map <- mapRDP(RDP)
+  getmetrics(RDP, map)
+}
+
+# Function to calculate and plot metrics for a given study 20220506
+plotmet_geo16S <- function(study, ...) {
+  metrics <- getmetrics_geo16S(study)
+  mdat <- getmdat_geo16S(study, metrics)
+  pm <- plotmet(mdat, ...)
+  # Prepend study column
+  cbind(study = study, pm)
 }

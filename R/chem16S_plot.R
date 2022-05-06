@@ -13,8 +13,8 @@
 # super-sequenced species (biased to high ZC/low nH2O) 20210604
 getrefseq <- function(filterspecies = TRUE) {
   # Read RefSeq amino acid compositions and taxid names
-  refseq <- read.csv(system.file("extdata/refseq/protein_refseq.csv.xz", package = "JMDplots"), as.is = TRUE)
-  taxa <- read.csv(system.file("extdata/refseq/taxid_names.csv.xz", package = "JMDplots"), as.is = TRUE)
+  refseq <- read.csv(system.file("extdata/refseq/protein_refseq.csv.xz", package = "chem16S"), as.is = TRUE)
+  taxa <- read.csv(system.file("extdata/refseq/taxid_names.csv.xz", package = "chem16S"), as.is = TRUE)
   if(filterspecies) {
     # Take out species with > 20000 sequences
     ispecies <- !is.na(taxa$species)
@@ -34,7 +34,7 @@ taxacomp <- function(groups = c("Bacteria", "Archaea"), xlim = NULL, ylim = NULL
   col = seq_along(groups), legend.x = "topleft", identify = FALSE, pch = NULL, hline = NULL, filterspecies = TRUE, lcol = NULL) {
 
   # Read chemical metrics of all taxa
-  datadir <- system.file("extdata/chem16S", package = "JMDplots")
+  datadir <- system.file("extdata/chem16S", package = "chem16S")
   metrics <- read.csv(file.path(datadir, "taxon_metrics.csv"), as.is = TRUE)
   # Default point symbols
   taxa <- groups
@@ -72,7 +72,7 @@ taxacomp <- function(groups = c("Bacteria", "Archaea"), xlim = NULL, ylim = NULL
 
   # Proteobacteria 20200925
   # How to count the representatives in each proteobacterial class:
-  #> taxa <- read.csv(system.file("extdata/refseq/taxid_names.csv.xz", package = "JMDplots"), as.is = TRUE)
+  #> taxa <- read.csv(system.file("extdata/refseq/taxid_names.csv.xz", package = "chem16S"), as.is = TRUE)
   #> sort(table(na.omit(taxa$class[taxa$phylum == "Proteobacteria"])), decreasing = TRUE)
   #
   #  Gammaproteobacteria   Alphaproteobacteria    Betaproteobacteria 
@@ -244,122 +244,3 @@ taxacomp <- function(groups = c("Bacteria", "Archaea"), xlim = NULL, ylim = NULL
   invisible(vals)
 }
 
-# Plot chemical metrics for all samples in a study 20200901
-plotmet <- function(study, cn = FALSE, identify = FALSE, title = TRUE, xlim = NULL, ylim = NULL,
-  plot.it = TRUE, points = TRUE, lines = FALSE, lineage = NULL, mincount = 200, pch1 = 1, pch2 = 21, dropNA = TRUE,
-  return = "data", extracolumn = NULL, add = FALSE, plot.bg = TRUE) {
-  # Get amino acid composition for samples
-  mdat <- getmdat(study, dropNA = dropNA)
-  RDP <- getRDP(study, cn = cn, mdat = mdat, lineage = lineage, mincount = mincount)
-  metrics <- getmetrics(study, mdat = mdat, RDP = RDP, lineage = lineage, mincount = mincount)
-  # Keep metadata only for samples with >= mincount counts 20201006
-  mdat <- mdat[mdat$Run %in% metrics$Run, ]
-  pch <- mdat$pch
-  col <- mdat$col
-  # Get nH2O and ZC
-  nH2O <- metrics$nH2O
-  ZC <- metrics$ZC
-
-  if(plot.it) {
-    # Get axis limits, excluding values of non-plotted points 20210820
-    # Also exclude NA values (for Bison Pool site Q with lineage = "Archaea") 20210916
-    if(is.null(xlim)) xlim <- range(na.omit(ZC[!is.na(pch)]))
-    if(is.null(ylim)) ylim <- range(na.omit(nH2O[!is.na(pch)]))
-    # Start plot
-    if(!add) plot(xlim, ylim, xlab = canprot::cplab$ZC, ylab = canprot::cplab$nH2O, type = "n")
-    if(points) {
-      # Add background nH2O-ZC correlation (from basis species)
-      if(plot.bg) lmlines()
-      # Plot points for samples
-      ifill <- pch > 20
-      points(ZC[ifill], nH2O[ifill], pch = pch[ifill], col = 1, bg = col[ifill])
-      points(ZC[!ifill], nH2O[!ifill], pch = pch[!ifill], col = col[!ifill])
-    }
-    if(lines) lines(ZC, nH2O, lty = 3)
-    if(isTRUE(title)) title(na.omit(mdat$name)[1], font.main = 1)
-    else if(!isFALSE(title)) title(title, font.main = 1)
-    # Identify points 20200903
-    if(identify) {
-      identify(ZC, nH2O, metrics$sample)
-      ## Label points with RDP counts 20200919
-      #count <- round(colSums(RDP[, -(1:3)]))
-      #identify(ZC, nH2O, count)
-    }
-  }
-
-  i1 <- pch %in% pch1
-  i2 <- pch %in% pch2
-  means <- list()
-  if(!is.null(pch2) & !is.null(pch1) & sum(i2) > 0 & sum(i1) > 0) {
-    # Calculate mean of sample values 20201003
-    means <- list(ZC1 = mean(ZC[i1]), ZC2 = mean(ZC[i2]), nH2O1 = mean(nH2O[i1]), nH2O2 = mean(nH2O[i2]))
-#    # Calculate values for aggregated samples 20210607
-#    metrics <- getmetrics(study, mdat = mdat, RDP = RDP, lineage = lineage, meanss = list(i1, i2))
-#    means <- list(ZC1 = metrics$ZC[1], ZC2 = metrics$ZC[2], nH2O1 = metrics$nH2O[1], nH2O2 = metrics$nH2O[2])
-    if(plot.it) {
-      col1 <- na.omit(mdat$col[mdat$pch == pch1])[1]
-      col2 <- na.omit(mdat$col[mdat$pch == pch2])[1]
-      points(means$ZC1, means$nH2O1, pch = 8, cex = 2, lwd = 4, col = "white")
-      points(means$ZC1, means$nH2O1, pch = 8, cex = 2, lwd = 2, col = col1)
-      points(means$ZC2, means$nH2O2, pch = 8, cex = 2, lwd = 4, col = "white")
-      points(means$ZC2, means$nH2O2, pch = 8, cex = 2, lwd = 2, col = col2)
-    }
-  }
-
-  # Return either the means means or individual values 20210831
-  if(return == "means") out <- means
-  if(return == "data") {
-    name <- na.omit(mdat$name)[1]
-    out <- data.frame(study = study, name = name, metrics, pch = pch, col = col)
-    if(!is.null(extracolumn)) {
-      # Add an extra column (e.g. 'type') to the output 20210901
-      extracols <- mdat[, extracolumn, drop = FALSE]
-      out <- cbind(out, extracols)
-    }
-  }
-  invisible(out)
-}
-
-# function to add convex hulls 20200923
-addhull <- function(x, y, basecol, outline = FALSE, ...) {
-  i <- chull(x, y)
-  r <- as.numeric(col2rgb(basecol))
-  if(outline) {
-    polygon(x[i], y[i], col = NA, border = basecol, ...)
-  } else {
-    col <- rgb(r[1], r[2], r[3], 80, maxColorValue=255)
-    polygon(x[i], y[i], col = col, border = NA, ...)
-  }
-}
-
-########################
-# Unexported functions #
-########################
-
-# Add nH2O-ZC guidelines parallel to regression for amino acids
-# Modified from JMDplots::gradH2O1() and JMDplots:::lmlines() 20200901
-lmlines <- function(step = 0.01) {
-  if(FALSE) {
-    # Calculate ZC of the amino acids
-    aa <- aminoacids("")
-    ZC.aa <- ZC(info(aa, "aq"))
-    # Load amino acids with QCa or QEC basis 20200914
-    basis(c("glutamine", "glutamic acid", "cysteine", "H2O", "O2"))
-    #if(options("basis")$basis == "QCa") basis(c("glutamine", "cysteine", "acetic acid", "H2O", "O2"))
-    species(aa)
-    # Make linear regression
-    lm <- lm(species()$H2O ~ ZC.aa)
-    coef <- coef(lm)
-    # Clear species!
-    reset()
-  } else {
-    # Use previously computed intercept and slope 20200920
-    coef <- c(-0.1242780, -0.3088251)
-    #if(options("basis")$basis == "QCa") coef <- c(-0.4830396, 0.1579203)
-  }
-  x <- par("usr")[1:2]
-  y <- coef[1] + coef[2] * x
-  for(dy in seq(-0.48, -1.20, -step)) lines(x, y + dy, col = "gray80")
-  # Add box so ends of lines don't cover plot edges 20201007
-  box()
-}

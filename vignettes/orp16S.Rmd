@@ -68,9 +68,6 @@ This vignette was compiled on `r Sys.Date()` with **[JMDplots](https://github.co
 
 ```{r library, message = FALSE, results = "hide"}
 library(JMDplots)
-# Tell the functions where the RDP Classifer output is stored
-orp16Sdir = system.file("extdata/orp16S", package = "JMDplots")
-options(chem16Sdir = orp16Sdir)
 ```
 
 ## Geobiochemical predictive framework (Figure 1)

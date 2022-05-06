@@ -9,52 +9,53 @@
 # Plot ZC values vs Eh7 for a single study 20210827
 # Use 'groupby' (name of column with sample groups) and 'groups' (names of sample groups) to apply the pch and col to individual samples
 plotEZ <- function(study, lineage = NULL, mincount = 50, pch = NULL, col = NULL, add = FALSE, type = "p", groupby = NULL, groups = NULL,
-                   legend.x = "topleft", show = c("lm", "points"), col.line = "gray62", lwd = 1, cex = 1, mdat = NULL, title.line = NA) {
+                   legend.x = "topleft", show = c("lm", "points"), col.line = "gray62", lwd = 1, cex = 1, metadata = NULL, title.line = NA) {
 
   if(identical(lineage, "two")) {
     # Make two plots for studies that have Bacteria and Archaea 20210913
     out1 <- plotEZ(study, "Bacteria", mincount, pch, col, add, type, groupby, groups, legend.x, show, col.line, lwd, cex)
     # Don't show legend on second (Archaea) plot 20210914
-    out2 <- plotEZ(study, "Archaea", mincount, pch, col, add, type, groupby, groups, legend.x = NA, show, col.line, lwd, cex, mdat = out1$mdat)
+    out2 <- plotEZ(study, "Archaea", mincount, pch, col, add, type, groupby, groups, legend.x = NA, show, col.line, lwd, cex, metadata = out1$metadata)
     out <- c(out1, out2)
     return(invisible(out))
-  }
-
-  # Get metadata; use suppressMessages() to suppress messages
-  if(is.null(mdat)) mdat <- suppressMessages(getmdat(study))
-  mdat.orig <- mdat
-  # For Bacteria or Archaea, use only runs that are labeled as such 20210920
-  if("Domain" %in% colnames(mdat)) {
-    if(identical(lineage, "Bacteria")) mdat <- mdat[mdat$Domain == "Bacteria", ]
-    if(identical(lineage, "Archaea")) mdat <- mdat[mdat$Domain == "Archaea", ]
   }
 
   # Use capture.output to hide printed output
   null <- capture.output(
     # Use try() to capture errors (with no mapped sequences for lineage = "Archaea")
-    met <- try(
+    metrics.in <- try(
       suppressMessages(
-        getmetrics(study, mdat = mdat, lineage = lineage, mincount = mincount)
+        getmetrics_orp16S(study, lineage = lineage, mincount = mincount)
       ), silent = TRUE
     )
   )
   # Print message and skip dataset with no mapped sequences
-  if(inherits(met, "try-error")) {
+  if(inherits(metrics.in, "try-error")) {
     print(paste0(study, ": no mapped sequences for ", lineage))
     return()
   }
 
-  # Keep metadata only for samples with >= mincount counts 20201006
-  mdat <- mdat[mdat$Run %in% met$Run, ]
-  nsamp <- nrow(mdat)
+  # Get metadata; use suppressMessages() to suppress messages
+  mdat <- suppressMessages(getmdat_orp16S(study, metrics.in))
+  metadata.orig <- metadata <- mdat$metadata
+  metrics <- mdat$metrics
+  # For Bacteria or Archaea, use only runs that are labeled as such 20210920
+  if("Domain" %in% colnames(metadata)) {
+    if(identical(lineage, "Bacteria")) idomain <- metadata$Domain == "Bacteria"
+    if(identical(lineage, "Archaea")) idomain <- metadata$Domain == "Archaea"
+    metadata <- metadata[idomain, , drop = FALSE]
+    metrics <- metrics[idomain, , drop = FALSE]
+  }
+
+  nsamp <- nrow(metadata)
   # Remove samples with NA Eh7 or ZC 20210822
-  mdat <- mdat[!(is.na(mdat$Eh7) | is.na(met$ZC)), ]
-  met <- met[met$Run %in% mdat$Run, ]
-  stopifnot(all(mdat$Run == met$Run))
+  metadata <- metadata[!(is.na(metadata$Eh7) | is.na(metrics$ZC)), ]
+  metrics <- metrics[metrics$Run %in% metadata$Run, ]
+  stopifnot(all(metadata$Run == metrics$Run))
   # Print message about number of samples and Eh7 and ZC range
-  ZCtext <- paste(range(round(met$ZC, 3)), collapse = " to ")
+  ZCtext <- paste(range(round(metrics$ZC, 3)), collapse = " to ")
   if(!is.null(lineage)) ltext <- paste0(lineage, ": ") else ltext <- ""
-  print(paste0(study, ": ", ltext, nrow(mdat), "/", nsamp, " samples, ZC ", ZCtext))
+  print(paste0(study, ": ", ltext, nrow(metadata), "/", nsamp, " samples, ZC ", ZCtext))
 
   # Assign pch and col to sample groups
   if(!is.null(groupby) & !is.null(groups)) {
@@ -68,14 +69,14 @@ plotEZ <- function(study, lineage = NULL, mincount = 50, pch = NULL, col = NULL,
     coltype <- 1:length(groups)
 
     # The pch and col for individual samples
-    pch <- col <- rep(NA, nrow(mdat))
+    pch <- col <- rep(NA, nrow(metadata))
     # The column with sample groups
-    icol <- match(groupby, colnames(mdat))
+    icol <- match(groupby, colnames(metadata))
     if(is.na(icol)) stop(paste(groupby, "is not a column name in metadata for", study))
     # Loop over sample groups
     for(i in seq_along(groups)) {
       # Find matching samples and set the pch and col
-      itype <- mdat[, icol] == groups[i]
+      itype <- metadata[, icol] == groups[i]
       pch[itype] <- pchtype[i]
       col[itype] <- orp16Scol[coltype[i]]
     }
@@ -87,7 +88,7 @@ plotEZ <- function(study, lineage = NULL, mincount = 50, pch = NULL, col = NULL,
   if(is.null(col)) col <- "#40404080"
 
   # Make data frame with Eh7 and ZC values
-  EZdat <- data.frame(Eh = mdat$Ehorig, Eh7 = mdat$Eh7, ZC = round(met$ZC, 6))
+  EZdat <- data.frame(Eh = metadata$Ehorig, Eh7 = metadata$Eh7, ZC = round(metrics$ZC, 6))
   # Create subtitle for environment type 20210904
   sub <- envirotype <- envirodat$group[envirodat$study == study]
   if(!add) {
@@ -96,7 +97,7 @@ plotEZ <- function(study, lineage = NULL, mincount = 50, pch = NULL, col = NULL,
     # Take off suffix after underscore 20210914
     root <- strsplit(study, "_")[[1]][1]
     suffix <- strsplit(study, "_")[[1]][2]
-    main <- paste0(na.omit(mdat$name)[1], " (", root, ")")
+    main <- paste0(na.omit(metadata$name)[1], " (", root, ")")
     title(main = main, font.main = 1, line = title.line)
     # Include suffix in subtite 20210914
     if(!is.na(suffix)) sub <- paste(sub, "-", suffix)
@@ -124,7 +125,7 @@ plotEZ <- function(study, lineage = NULL, mincount = 50, pch = NULL, col = NULL,
     legend <- as.character(groups)
     legend(legend.x, legend, pch = pchtype, col = orp16Scol[coltype], pt.bg = orp16Scol[coltype], title = groupby, cex = 0.9)
     # Add sample type (group) to output
-    EZdat <- cbind(groupby = groupby, group = mdat[, icol], EZdat)
+    EZdat <- cbind(groupby = groupby, group = metadata[, icol], EZdat)
   } else {
     EZdat <- cbind(groupby = NA, group = NA, EZdat)
   }
@@ -132,10 +133,10 @@ plotEZ <- function(study, lineage = NULL, mincount = 50, pch = NULL, col = NULL,
 
   # Return values
   # Use first column name starting with "sample" or "Sample" 20210818
-  sampcol <- grep("^sample", colnames(mdat), ignore.case = TRUE)[1]
+  sampcol <- grep("^sample", colnames(metadata), ignore.case = TRUE)[1]
   if(is.null(lineage)) lineage <- ""
-  EZdat <- cbind(study = study, envirotype = envirotype, lineage = lineage, sample = mdat[, sampcol], Run = mdat$Run, EZdat)
-  out <- list(study = study, envirotype = envirotype, lineage = lineage, mdat = mdat.orig, EZdat = EZdat)
+  EZdat <- cbind(study = study, envirotype = envirotype, lineage = lineage, sample = metadata[, sampcol], Run = metadata$Run, EZdat)
+  out <- list(study = study, envirotype = envirotype, lineage = lineage, metadata = metadata.orig, EZdat = EZdat)
   if("lm" %in% show) out <- c(out, list(EZlm = EZlm, Eh7lim = Eh7lim, ZCpred = ZCpred))
   invisible(out)
 
@@ -146,15 +147,19 @@ plotEZ <- function(study, lineage = NULL, mincount = 50, pch = NULL, col = NULL,
 plotMA <- function(study, lineage = NULL, mincount = 50, pch = NULL, col = NULL, groupby = NULL, groups = NULL, legend.x = "topright") {
 
   # Get RDP counts, mapping to NCBI taxonomy, and chemical metrics
-  mdat <- getmdat(study)
-  RDP <- getRDP(study, lineage = lineage, mincount = mincount, mdat = mdat)
-  map <- getmap(study, lineage = lineage, mincount = mincount, RDP = RDP)
-  metrics <- getmetrics(study, lineage = lineage, mincount = mincount, mdat = mdat, RDP = RDP, map = map)
-  # Keep metadata only for samples with >= mincount counts 20211008
-  mdat <- mdat[mdat$Run %in% metrics$Run, ]
+  studyfile <- gsub("_.*", "", study)
+  RDPfile <- system.file(file.path("extdata/orp16S/RDP", paste0(studyfile, ".tab.xz")), package = "JMDplots")
+  # If there is no .xz file, look for a .tab file 20210607
+  if(!file.exists(RDPfile)) RDPfile <- system.file(file.path("extdata/orp16S/RDP", paste0(studyfile, ".tab")), package = "JMDplots")
+  RDP <- readRDP(RDPfile, lineage = lineage, mincount = mincount)
+  map <- mapRDP(RDP)
+  metrics <- getmetrics_orp16S(study, lineage = lineage, mincount = mincount)
+  mdat <- getmdat_orp16S(study, metrics)
+  metadata <- mdat$metadata
+  metrics <- mdat$metrics
 
   # Extract numeric rows
-  RDPnum <- RDP[, -(1:3)]
+  RDPnum <- RDP[, -(1:4)]
   # Calculate sum of counts for each taxon
   taxoncounts <- rowSums(RDPnum)
   # Don't count unmapped taxa for MAMT identification
@@ -167,7 +172,7 @@ plotMA <- function(study, lineage = NULL, mincount = 50, pch = NULL, col = NULL,
   MAMTname <- paste(RDP$rank[iMAMT], RDP$name[iMAMT], sep = "_")
   MAMTperc <- formatC(taxoncounts[iMAMT] / sum(taxoncounts) * 100, format = "f", digits = 1)
   # Get ZC of the MAMT
-  datadir <- system.file("extdata/chem16S", package = "JMDplots")
+  datadir <- system.file("extdata/chem16S", package = "chem16S")
   taxon_metrics <- read.csv(file.path(datadir, "taxon_metrics.csv"), as.is = TRUE)
   MAMTZC <- taxon_metrics$ZC[map[iMAMT]]
 
@@ -180,14 +185,14 @@ plotMA <- function(study, lineage = NULL, mincount = 50, pch = NULL, col = NULL,
     pchtype <- rep(pch, length.out = length(groups))
     coltype <- 1:length(groups)
     # The pch and col for individual samples
-    pch <- col <- rep(NA, nrow(mdat))
+    pch <- col <- rep(NA, nrow(metadata))
     # The column with sample groups
-    icol <- match(groupby, colnames(mdat))
+    icol <- match(groupby, colnames(metadata))
     if(is.na(icol)) stop(paste(groupby, "is not a column name in metadata for", study))
     # Loop over sample groups
     for(i in seq_along(groups)) {
       # Find matching samples and set the pch and col
-      itype <- mdat[, icol] == groups[i]
+      itype <- metadata[, icol] == groups[i]
       pch[itype] <- pchtype[i]
       col[itype] <- orp16Scol[coltype[i]]
     }

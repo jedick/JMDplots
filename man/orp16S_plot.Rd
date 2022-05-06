@@ -11,7 +11,7 @@ Make plots of \ZC vs Eh7 and \ZC vs abundance of Most Abundant Mapped Taxon.
 \usage{
   plotEZ(study, lineage = NULL, mincount = 50, pch = NULL, col = NULL,
     add = FALSE, type = "p", groupby = NULL, groups = NULL, legend.x = "topleft",
-    show = c("lm", "points"), col.line = "gray62", lwd = 1, cex = 1, mdat = NULL,
+    show = c("lm", "points"), col.line = "gray62", lwd = 1, cex = 1, metadata = NULL,
     title.line = NA)
   plotMA(study, lineage = NULL, mincount = 50, pch = NULL, col = NULL,
     groupby = NULL, groups = NULL, legend.x = "topright")
@@ -32,7 +32,7 @@ Make plots of \ZC vs Eh7 and \ZC vs abundance of Most Abundant Mapped Taxon.
   \item{col.line}{line color (linear fit)}
   \item{lwd}{line width}
   \item{cex}{character expansion}
-  \item{mdat}{output of \code{\link{getmdat}} - used internally for memoization with \code{lineage = "two"}}
+  \item{metadata}{output of \code{\link{getmdat_orp16S}} - used internally for memoization with \code{lineage = "two"}}
   \item{title.line}{numeric, placement of title}
 }
 
@@ -50,7 +50,7 @@ The plot title shows the percentages of MAMT and MAUT (most abundant unmapped ta
 }
 
 \value{
-\code{plotEZ} returns a list with elements \code{study}, \code{envirotype} (environment type), \code{lineage}, \code{mdat} (output of \code{\link{getmdat}}), and \code{EZdat}.
+\code{plotEZ} returns a list with elements \code{study}, \code{envirotype} (environment type), \code{lineage}, \code{metadata} (output of \code{\link{getmdat_orp16S}}), and \code{EZdat}.
 \code{EZdat} is a data frame with one row per sample and columns for \code{study}, \code{envirotype}, \code{lineage}, \code{sample} (sample name), \code{Run} (SRA run accession or other database ID), \code{Eh}, \code{Eh7}, and \code{ZC}.
 If \code{groupby} and \code{groups} are given, \code{EZdat} additionally contains columns \code{groupby} and \code{group}.
 If \code{show} includes \samp{lm}, the output additionally contains \code{EZlm} (the result of \code{\link{lm}(ZC ~ Eh7, EZdat)}), Eh7lim (range of Eh7 values), and ZCpred (fitted \ZC values for this Eh7 range).
@@ -61,8 +61,6 @@ If \code{show} includes \samp{lm}, the output additionally contains \code{EZlm} 
 }
 
 \examples{
-options(chem16Sdir = system.file("extdata/orp16S", package = "JMDplots"))
-
 plotEZ("MLL+19", "Bacteria", groupby = "Type", groups = c("Upland", "Paddy", "Sediment"))
 
 plotMA("LMBA21", "Archaea")

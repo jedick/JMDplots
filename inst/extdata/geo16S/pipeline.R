@@ -39,7 +39,7 @@
 ## STUDY SETTINGS
 
 # Change the following line to setup the pipeline for one study
-study <- "FLA+12"
+study <- "HMP12"
 # Settings for all studies are stored here
 file <- tempfile()
 # Write spaces here (but don't save them) to make this easier to read
@@ -80,86 +80,7 @@ writeLines(con = file, text = gsub(" ", "", c(
   "EH18, NA, NA",
   "MKK+11, NA, NA",
   "FLA+12, NA, NA",
-  "HMP12, TRUE, 400",
-
-  ## For orp16S paper 20210922
-
-  "MLL+19, TRUE, 250",
-  "RSJ+21, FALSE, 290",
-  "RMB+17, FALSE, 250",
-  "NTB+21, TRUE, 150",
-  "SBP+20, FALSE, 250",
-  "MWY+21, FALSE, 250",
-  "SAR+13, NA, NA",
-  "CTS+17, FALSE, 400",
-  "HSF+19, FALSE, 440",
-  "SCM+18, TRUE, 250",
-  "HDZ+19, FALSE, 420",
-  "BOEM21, FALSE, 400",
-  "ZHZ+19, FALSE, 300",
-  "YHK+20, FALSE, 400",
-  "CNA+20, TRUE, 450",
-  "BMJ+19, FALSE, 300",
-  "SRM+19, FALSE, 250",
-  "HLZ+18, FALSE, 420",
-  "XLD+20, TRUE, 250",
-  "JHL+12, NA, NA",
-  "PSG+20, FALSE, 250",
-  "KSR+21, FALSE, 440",
-  "ZCZ+21, FALSE, 450",
-  "LLZ+20, TRUE, 150",
-  "SKP+21, FALSE, 200",
-  "ZZL+21, FALSE, 450",
-  "PBU+20, FALSE, 400",
-  "GWS+19, FALSE, 300",
-  "KLY+20, TRUE, 250",
-  "SRM+21, FALSE, 250",
-  "MLL+18, TRUE, 250",
-  "JDP+20, TRUE, 275",
-  "BWD+19, FALSE, 400",
-  "LXH+20, TRUE, 450",
-  "LMG+20, TRUE, 280",
-  "WHL+21, FALSE, 400",
-  "LLL+21, FALSE, 450",
-  "SDH+19, FALSE, 300",
-  "GWSS21, FALSE, 300",
-  "ZML+17, TRUE, 400",
-  "RBW+14, FALSE, 250", # Winogradsky column
-  "DTJ+20, FALSE, 420",
-  "WFB+21, FALSE, 440",
-  "SBW+17, TRUE, 280",
-  "KLM+16, NA, NA",
-  "LMBA21, TRUE, 280",
-  "ZDA+20, TRUE, 450",
-  "ZZZ+18, TRUE, 240",
-  "BSPD17, FALSE, 400",
-  "CWC+20, FALSE, 440",
-  "BMOB18, TRUE, 350",
-  "JVW+20, FALSE, 250",
-  "LJC+20, FALSE, 420",
-  "GFE+16, NA, NA",
-  "ECS+18, TRUE, 400",
-  "FAV+21, FALSE, 400",
-  "VMB+19, TRUE, 380",
-  "DLS21, TRUE, 300",
-  "ZZLL21, FALSE, 450",
-  "GWS+20, FALSE, 300",
-  "CLS+19, TRUE, 150",
-  "BYB+17, NA, NA",
-  "MCS+21, FALSE, 400",
-  "PMM+20, FALSE, 400",
-  "GZL21, FALSE, 420",
-  "SCH+16, TRUE, 250",
-  "APV+20, FALSE, 250",
-  "NLE+21, FALSE, 440",
-  "GSY+20, TRUE, 120",
-  "WHC+19, FALSE, 420",
-  "LZR+17, TRUE, 250",
-  "LLC+19, TRUE, 400",
-  "YHK+19, TRUE, 250",
-  "WHLH21, TRUE, 440",
-  "GRG+20, NA, NA",
-  "PCL+18, TRUE, 250"
+  "HMP12, TRUE, 400"
 
 )))
 

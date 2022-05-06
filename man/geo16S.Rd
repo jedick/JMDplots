@@ -12,6 +12,7 @@
 \alias{geo16S_S4}
 \alias{geo16S_S5}
 \alias{geo16S_S6}
+\alias{getmdat_geo16S}
 \title{Plots from geobiochemistry of 16S sequences paper}
 \description{
 Plots from the paper by Dick and Tan (2022).
@@ -29,11 +30,15 @@ Plots from the paper by Dick and Tan (2022).
   geo16S_S4(pdf = FALSE)
   geo16S_S5(pdf = FALSE, H2O = FALSE)
   geo16S_S6(pdf = FALSE)
+  getmdat_geo16S(study, metrics = NULL, dropNA = TRUE)
 }
 
 \arguments{
   \item{pdf}{logical, make a PDF file?}
   \item{H2O}{logical, make plots for \nH2O instead of \ZC?}
+  \item{study}{character, study name}
+  \item{metrics}{data frame, output of \code{\link[chem16S]{getmetrics}}}
+  \item{dropNA}{logical, exclude samples with NA name in metadata?}
 }
 
 \details{
@@ -53,13 +58,19 @@ This table gives a brief description of each plotting function.
   \code{geo16S_S6} \tab Correlation of \ZC with GC content of metagenomic and 16S amplicon reads \cr
 }
 
+\code{getmdat_geo16S} gets metadata for the indicated \code{study} and adds columns for plot parameters (\code{pch}, \code{col}).
+For some datasets, sample subsets are indicated by appending a suffix to the study name separated by an underscore.
+The default for \code{dropNA} means to exclude samples with NA name in the metadata file, which is used to exclude outliers from the analysis.
+If \code{metrics} is supplied, the samples are sorted in the same order as the metadata file, and the function returns a list with both \samp{metadata} and the sorted \samp{metrics}.
+
 }
 
 \section{Files in extdata/geo16S}{
   \describe{
-    \item{\code{metadata/*.csv}}{Sample metadata for each study.}
-    \item{\code{RDP/*.csv.xz}}{RDP Classifier results combined into a single CSV file for each study, created with the \code{mkRDP} function in the \code{process.R} script (\code{\link{chem16S}}).}
-    \item{\code{AWDM15.csv}}{Accession numbers and sample descriptions for the Human Microbiome Project, Soils, and Mammalian Guts datasets taken from Supplementary Material of Aßhauer et al. (2015) and used in \code{geo16S5}. GC content for metagenome and 16S amplicon reads was taken from \code{https://trace.ncbi.nlm.nih.gov/Traces/sra/?run=SRR*******}.}
+    \item{\file{pipeline.R}}{Pipeline for sequence data processing (uses external programs fastq-dump, vsearch, seqtk, RDP Classifier).}
+    \item{\file{metadata/*.csv}}{Sample metadata for each study.}
+    \item{\file{RDP/*.csv.xz}}{RDP Classifier results combined into a single CSV file for each study, created with the \code{mkRDP} function in \file{pipeline.R}.}
+    \item{\file{AWDM15.csv}}{Accession numbers and sample descriptions for the Human Microbiome Project, Soils, and Mammalian Guts datasets taken from Supplementary Material of Aßhauer et al. (2015) and used in \code{geo16S5}. GC content for metagenome and 16S amplicon reads was taken from \code{https://trace.ncbi.nlm.nih.gov/Traces/sra/?run=SRR*******}.}
   }
 }
 
@@ -85,4 +96,14 @@ Dick, J. M. and Tan, J. (2022) Chemical links between redox conditions and estim
 
 \examples{
 geo16S1()
+
+# List datasets used in geo16S paper
+mdatdir <- system.file("extdata/geo16S/metadata", package = "JMDplots")
+gsub(".csv", "", dir(mdatdir))
+# Get metadata for one study
+mdat <- getmdat_geo16S("BGPF13")
+
+## Calculate metrics for aggregated samples for Archaea and Bacteria
+#groups <- list(mdat$cohort == "Archaea", mdat$cohort == "Bacteria")
+#getmetrics("BGPF13", groups = groups)
 }
