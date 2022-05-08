@@ -12,7 +12,8 @@ First install the **remotes** packages from CRAN.
 install.packages("remotes")
 ```
 
-Then install **chem16S**.
+Then install [**chem16S**](../chem16S).
+This package is used to calculate chemical metrics of estimated community proteomes from 16S rRNA data.
 
 ```R
 remotes::install_github("jedick/chem16S")

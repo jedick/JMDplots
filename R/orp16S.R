@@ -1037,9 +1037,10 @@ getmdat_orp16S <- function(study, metrics = NULL, dropNA = TRUE) {
 getmetrics_orp16S <- function(study, ...) {
   # Remove suffix after underscore 20200929
   studyfile <- gsub("_.*", "", study)
-  RDPfile <- system.file(file.path("extdata/orp16S/RDP", paste0(studyfile, ".tab.xz")), package = "JMDplots")
+  datadir <- system.file("extdata/orp16S/RDP", package = "JMDplots")
+  RDPfile <- file.path(datadir, paste0(studyfile, ".tab.xz"))
   # If there is no .xz file, look for a .tab file 20210607
-  if(!file.exists(RDPfile)) RDPfile <- system.file(file.path("extdata/orp16S/RDP", paste0(studyfile, ".tab")), package = "JMDplots")
+  if(!file.exists(RDPfile)) RDPfile <- file.path(datadir, paste0(studyfile, ".tab"))
   RDP <- readRDP(RDPfile, ...)
   map <- mapRDP(RDP)
   getmetrics(RDP, map)

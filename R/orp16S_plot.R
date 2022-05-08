@@ -135,6 +135,7 @@ plotEZ <- function(study, lineage = NULL, mincount = 50, pch = NULL, col = NULL,
   # Use first column name starting with "sample" or "Sample" 20210818
   sampcol <- grep("^sample", colnames(metadata), ignore.case = TRUE)[1]
   if(is.null(lineage)) lineage <- ""
+  if(length(envirotype) == 0) envirotype <- ""
   EZdat <- cbind(study = study, envirotype = envirotype, lineage = lineage, sample = metadata[, sampcol], Run = metadata$Run, EZdat)
   out <- list(study = study, envirotype = envirotype, lineage = lineage, metadata = metadata.orig, EZdat = EZdat)
   if("lm" %in% show) out <- c(out, list(EZlm = EZlm, Eh7lim = Eh7lim, ZCpred = ZCpred))
@@ -148,9 +149,10 @@ plotMA <- function(study, lineage = NULL, mincount = 50, pch = NULL, col = NULL,
 
   # Get RDP counts, mapping to NCBI taxonomy, and chemical metrics
   studyfile <- gsub("_.*", "", study)
-  RDPfile <- system.file(file.path("extdata/orp16S/RDP", paste0(studyfile, ".tab.xz")), package = "JMDplots")
+  datadir <- system.file("extdata/orp16S/RDP", package = "JMDplots")
+  RDPfile <- file.path(datadir, paste0(studyfile, ".tab.xz"))
   # If there is no .xz file, look for a .tab file 20210607
-  if(!file.exists(RDPfile)) RDPfile <- system.file(file.path("extdata/orp16S/RDP", paste0(studyfile, ".tab")), package = "JMDplots")
+  if(!file.exists(RDPfile)) RDPfile <- file.path(datadir, paste0(studyfile, ".tab"))
   RDP <- readRDP(RDPfile, lineage = lineage, mincount = mincount)
   map <- mapRDP(RDP)
   metrics <- getmetrics_orp16S(study, lineage = lineage, mincount = mincount)
@@ -158,6 +160,8 @@ plotMA <- function(study, lineage = NULL, mincount = 50, pch = NULL, col = NULL,
   metadata <- mdat$metadata
   metrics <- mdat$metrics
 
+  # Keep RDP columns for which we have data 20220508
+  RDP <- cbind(RDP[, 1:4], RDP[, colnames(RDP) %in% metadata$Run])
   # Extract numeric rows
   RDPnum <- RDP[, -(1:4)]
   # Calculate sum of counts for each taxon
