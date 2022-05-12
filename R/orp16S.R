@@ -862,7 +862,7 @@ eachenv <- function(lineage = "Bacteria", add = FALSE, do.linear = TRUE, ienv = 
 }
 
 # Get metadata for a study, appending columns for pch and col 20200914
-getmdat_orp16S <- function(study, metrics = NULL, dropNA = TRUE) {
+getmdat_orp16S <- function(study, metrics = NULL, dropNA = TRUE, size = NULL) {
   # Read metadata file
   # Remove suffix after underscore 20200929
   studyfile <- gsub("_.*", "", study)
@@ -872,10 +872,11 @@ getmdat_orp16S <- function(study, metrics = NULL, dropNA = TRUE) {
 
   if(dropNA) {
     # Exclude samples with NA name 20200916
-    noname <- is.na(metadata$name)
+    iname <- match("name", tolower(colnames(metadata)))
+    noname <- is.na(metadata[, iname])
     if(any(noname)) {
       print(paste0("getmetadata [", study, "]: dropping ", sum(noname), " samples with NA name"))
-      metadata <- metadata[!is.na(metadata$name), ]
+      metadata <- metadata[!is.na(metadata[, iname]), ]
     }
   }
   # Use NULL pch as flag for unavailable dataset 20210820
@@ -1018,6 +1019,11 @@ getmdat_orp16S <- function(study, metrics = NULL, dropNA = TRUE) {
   if(is.null(metrics)) metadata else {
     # Keep metadata only for samples with metrics 20201006
     metadata <- metadata[metadata$Run %in% metrics$Run, ]
+    # Keep specified number of random samples 20220509
+    if(!is.null(size)) if(nrow(metadata) > size) {
+      isample <- sample(1:nrow(metadata), size = size)
+      metadata <- metadata[isample, ]
+    }
     # Put metrics in same order as metadata 20220505
     imet <- match(metadata$Run, metrics$Run)
     metrics <- metrics[imet, ]

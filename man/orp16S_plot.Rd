@@ -11,8 +11,8 @@ Make plots of \ZC vs Eh7 and \ZC vs abundance of Most Abundant Mapped Taxon.
 \usage{
   plotEZ(study, lineage = NULL, mincount = 50, pch = NULL, col = NULL,
     add = FALSE, type = "p", groupby = NULL, groups = NULL, legend.x = "topleft",
-    show = c("lm", "points"), col.line = "gray62", lwd = 1, cex = 1, metadata = NULL,
-    title.line = NA)
+    show = c("lm", "points"), col.line = "gray62", lwd = 1, cex = 1,
+    title.line = NA, dxlim = c(0, 0), dylim = c(0, 0), size = NULL)
   plotMA(study, lineage = NULL, mincount = 50, pch = NULL, col = NULL,
     groupby = NULL, groups = NULL, legend.x = "topright")
 }
@@ -32,8 +32,10 @@ Make plots of \ZC vs Eh7 and \ZC vs abundance of Most Abundant Mapped Taxon.
   \item{col.line}{line color (linear fit)}
   \item{lwd}{line width}
   \item{cex}{character expansion}
-  \item{metadata}{output of \code{\link{getmdat_orp16S}} - used internally for memoization with \code{lineage = "two"}}
   \item{title.line}{numeric, placement of title}
+  \item{dxlim}{numeric, adjustment to x-axis limits}
+  \item{dylim}{numeric, adjustment to y-axis limits}
+  \item{size}{numeric, number of randomly selected samples (see \code{\link{getmdat_orp16S}})}
 }
 
 \details{

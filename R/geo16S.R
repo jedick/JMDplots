@@ -1563,10 +1563,11 @@ getmdat_geo16S <- function(study, metrics = NULL, dropNA = TRUE) {
 
   if(dropNA) {
     # Exclude samples with NA name (e.g. outliers?) 20200916
-    noname <- is.na(metadata$name)
+    iname <- match("name", tolower(colnames(metadata)))
+    noname <- is.na(metadata[, iname])
     if(any(noname)) {
       print(paste0("getmetadata [", study, "]: dropping ", sum(noname), " samples with NA name"))
-      metadata <- metadata[!is.na(metadata$name), ]
+      metadata <- metadata[!is.na(metadata[, iname]), ]
     }
   }
   # Use NULL pch as flag for unavailable dataset 20210820

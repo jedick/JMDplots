@@ -22,7 +22,7 @@ Plots from the paper by Dick and Meng (2021).
   orp16S5(pdf = FALSE)
   orp16S6(pdf = FALSE)
   orp16S_S1(pdf = FALSE)
-  getmdat_orp16S(study, metrics = NULL, dropNA = TRUE)
+  getmdat_orp16S(study, metrics = NULL, dropNA = TRUE, size = NULL)
 }
 
 \arguments{
@@ -30,6 +30,7 @@ Plots from the paper by Dick and Meng (2021).
   \item{study}{character, study name}
   \item{metrics}{data frame, output of \code{\link[chem16S]{getmetrics}}}
   \item{dropNA}{logical, exclude samples with NA name in metadata?}
+  \item{size}{numeric, number of samples to randomly select}
 }
 
 \details{
@@ -48,8 +49,9 @@ This table gives a brief description of each plotting function.
 \code{orp16S_S1} creates the files EZdat.csv and EZlm.csv that are used by the other functions.
 
 \code{getmdat_orp16S} gets metadata for the indicated \code{study}, calculates Eh7 from Eh and pH and T (if available), classifies samples into 3 clusters according to their Eh values, and adds columns for plot parameters (\code{pch}, \code{col}).
-The default for \code{dropNA} means to exclude samples with NA name in the metadata file, which is used to exclude outliers from the analysis.
-If \code{metrics} is supplied, the samples are sorted in the same order as the metadata file, and the function returns a list with both \samp{metadata} and the sorted \samp{metrics}.
+The default for \code{dropNA} means to exclude samples with NA name in the metadata file.
+If \code{metrics} is supplied, metadata are kept only for samples with available metrics, the sample metrics are placed in the same order as the remaining metadata, and the function returns a list with both \samp{metadata} and the sorted \samp{metrics}.
+\code{size} can be used to specify a number of samples (from among those with both metadata and \code{metrics}, if given) to be randomly selected.
 }
 
 \section{Files in extdata/orp16S}{

@@ -9,13 +9,13 @@
 # Plot ZC values vs Eh7 for a single study 20210827
 # Use 'groupby' (name of column with sample groups) and 'groups' (names of sample groups) to apply the pch and col to individual samples
 plotEZ <- function(study, lineage = NULL, mincount = 50, pch = NULL, col = NULL, add = FALSE, type = "p", groupby = NULL, groups = NULL,
-                   legend.x = "topleft", show = c("lm", "points"), col.line = "gray62", lwd = 1, cex = 1, metadata = NULL, title.line = NA) {
+  legend.x = "topleft", show = c("lm", "points"), col.line = "gray62", lwd = 1, cex = 1, title.line = NA, dxlim = c(0, 0), dylim = c(0, 0), size = NULL) {
 
   if(identical(lineage, "two")) {
     # Make two plots for studies that have Bacteria and Archaea 20210913
-    out1 <- plotEZ(study, "Bacteria", mincount, pch, col, add, type, groupby, groups, legend.x, show, col.line, lwd, cex)
+    out1 <- plotEZ(study, "Bacteria", mincount, pch, col, add, type, groupby, groups, legend.x, show, col.line, lwd, cex, title.line, dxlim, dylim, size)
     # Don't show legend on second (Archaea) plot 20210914
-    out2 <- plotEZ(study, "Archaea", mincount, pch, col, add, type, groupby, groups, legend.x = NA, show, col.line, lwd, cex, metadata = out1$metadata)
+    out2 <- plotEZ(study, "Archaea", mincount, pch, col, add, type, groupby, groups, legend.x = NA, show, col.line, lwd, cex, title.line, dxlim, dylim, size)
     out <- c(out1, out2)
     return(invisible(out))
   }
@@ -35,12 +35,13 @@ plotEZ <- function(study, lineage = NULL, mincount = 50, pch = NULL, col = NULL,
     return()
   }
 
-  # Get metadata; use suppressMessages() to suppress messages
-  mdat <- suppressMessages(getmdat_orp16S(study, metrics.in))
-  metadata.orig <- metadata <- mdat$metadata
+  # Get metadata
+  mdat <- suppressMessages(getmdat_orp16S(study, metrics = metrics.in, size = size))
+  metadata <- mdat$metadata
   metrics <- mdat$metrics
-  # For Bacteria or Archaea, use only runs that are labeled as such 20210920
+  # If specified lineage is Bacteria or Archaea, use only runs that are labeled as such 20210920
   if("Domain" %in% colnames(metadata)) {
+    idomain <- rep(TRUE, nrow(metadata))
     if(identical(lineage, "Bacteria")) idomain <- metadata$Domain == "Bacteria"
     if(identical(lineage, "Archaea")) idomain <- metadata$Domain == "Archaea"
     metadata <- metadata[idomain, , drop = FALSE]
@@ -92,12 +93,16 @@ plotEZ <- function(study, lineage = NULL, mincount = 50, pch = NULL, col = NULL,
   # Create subtitle for environment type 20210904
   sub <- envirotype <- envirodat$group[envirodat$study == study]
   if(!add) {
+    # Calculate x- and y-limits (with adjustment from arguments) 20220511
+    xlim <- range(EZdat$Eh7) + dxlim
+    ylim <- range(EZdat$ZC) + dylim
     # Start new plot
-    plot(EZdat$Eh7, EZdat$ZC, xlab = "Eh7 (mV)", ylab = cplab$ZC, type = "n")
+    plot(EZdat$Eh7, EZdat$ZC, xlab = "Eh7 (mV)", ylab = cplab$ZC, type = "n", xlim = xlim, ylim = ylim)
     # Take off suffix after underscore 20210914
     root <- strsplit(study, "_")[[1]][1]
     suffix <- strsplit(study, "_")[[1]][2]
-    main <- paste0(na.omit(metadata$name)[1], " (", root, ")")
+    iname <- match("name", tolower(colnames(metadata)))
+    main <- paste0(na.omit(metadata[, iname])[1], " (", root, ")")
     title(main = main, font.main = 1, line = title.line)
     # Include suffix in subtite 20210914
     if(!is.na(suffix)) sub <- paste(sub, "-", suffix)
@@ -137,7 +142,7 @@ plotEZ <- function(study, lineage = NULL, mincount = 50, pch = NULL, col = NULL,
   if(is.null(lineage)) lineage <- ""
   if(length(envirotype) == 0) envirotype <- ""
   EZdat <- cbind(study = study, envirotype = envirotype, lineage = lineage, sample = metadata[, sampcol], Run = metadata$Run, EZdat)
-  out <- list(study = study, envirotype = envirotype, lineage = lineage, metadata = metadata.orig, EZdat = EZdat)
+  out <- list(study = study, envirotype = envirotype, lineage = lineage, metadata = metadata, EZdat = EZdat)
   if("lm" %in% show) out <- c(out, list(EZlm = EZlm, Eh7lim = Eh7lim, ZCpred = ZCpred))
   invisible(out)
 
