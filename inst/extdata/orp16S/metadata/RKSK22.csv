@@ -1,0 +1,139 @@
+name,Run,LibraryName,BioSample,SampleName,Compartment,Spartina,Depth,Location,Year,Eh,pH,Salinity
+"Georgia Salt Marshes",SRR12995242,Spartina002,SAMN16678213,Sapelo18_Bulk_sediment_T1_P1_0-5,"Bulk sediment",Tall,0-5,Sapelo,2018,78.7,7.5,30.02
+"Georgia Salt Marshes",SRR12995243,Spartina001,SAMN16678212,Sapelo18_Bulk_sediment_T1_P1_5-10,"Bulk sediment",Tall,10-05,Sapelo,2018,-143.3,6.8,23.24
+"Georgia Salt Marshes",SRR12995272,Spartina004,SAMN16678215,Sapelo18_Bulk_sediment_T1_P2_0-5,"Bulk sediment",Medium,0-5,Sapelo,2018,-287,6.2,35.7
+"Georgia Salt Marshes",SRR12995224,Spartina003,SAMN16678214,Sapelo18_Bulk_sediment_T1_P2_5-10,"Bulk sediment",Medium,10-05,Sapelo,2018,-373.7,6.7,37.26
+"Georgia Salt Marshes",SRR12995250,Spartina006,SAMN16678217,Sapelo18_Bulk_sediment_T1_P3_0-5,"Bulk sediment",Short,0-5,Sapelo,2018,-332.3,6.4,42.98
+"Georgia Salt Marshes",SRR12995261,Spartina005,SAMN16678216,Sapelo18_Bulk_sediment_T1_P3_5-10,"Bulk sediment",Short,10-05,Sapelo,2018,-405,6.6,38.46
+"Georgia Salt Marshes",SRR12995290,Spartina008,SAMN16678219,Sapelo18_Bulk_sediment_T1_P4_0-5,"Bulk sediment",Short,0-5,Sapelo,2018,-254.5,6.7,33.63
+"Georgia Salt Marshes",SRR12995301,Spartina007,SAMN16678218,Sapelo18_Bulk_sediment_T1_P4_5-10,"Bulk sediment",Short,10-05,Sapelo,2018,-310.5,6.6,39.03
+"Georgia Salt Marshes",SRR12995279,Spartina009,SAMN16678220,Sapelo18_Bulk_sediment_T2_P1_5-10,"Bulk sediment",Tall,10-05,Sapelo,2018,20,6.2,17.17
+"Georgia Salt Marshes",SRR12995241,Spartina011,SAMN16678222,Sapelo18_Bulk_sediment_T2_P2_5-10,"Bulk sediment",Medium,10-05,Sapelo,2018,-226.5,6.6,19.26
+"Georgia Salt Marshes",SRR12995235,Spartina020,SAMN16678231,Sapelo18_Bulk_sediment_T3_P3_0-5,"Bulk sediment",Short,0-5,Sapelo,2018,-362,6.5,37.41
+"Georgia Salt Marshes",SRR12995218,Spartina022,SAMN16678233,Sapelo18_Bulk_sediment_T4_P1_0-5,"Bulk sediment",Tall,0-5,Sapelo,2018,18,7.1,22.46
+"Georgia Salt Marshes",SRR12995223,Spartina021,SAMN16678232,Sapelo18_Bulk_sediment_T4_P1_5-10,"Bulk sediment",Tall,10-05,Sapelo,2018,-29,6,20.45
+"Georgia Salt Marshes",SRR12995216,Spartina024,SAMN16678235,Sapelo18_Bulk_sediment_T4_P2_0-5,"Bulk sediment",Medium,0-5,Sapelo,2018,-295.5,6.8,35.5
+"Georgia Salt Marshes",SRR12995217,Spartina023,SAMN16678234,Sapelo18_Bulk_sediment_T4_P2_5-10,"Bulk sediment",Medium,10-05,Sapelo,2018,-385.5,6.8,29.67
+"Georgia Salt Marshes",SRR12995214,Spartina026,SAMN16678237,Sapelo18_Bulk_sediment_T4_P3_0-5,"Bulk sediment",Short,0-5,Sapelo,2018,-271.5,6.5,43.63
+"Georgia Salt Marshes",SRR12995215,Spartina025,SAMN16678236,Sapelo18_Bulk_sediment_T4_P3_5-10,"Bulk sediment",Short,10-05,Sapelo,2018,-347.5,6.6,46.09
+"Georgia Salt Marshes",SRR12995276,Spartina028,SAMN16678239,Sapelo2018_Endosphere_T1_P1_0-5,Root,Tall,0-5,Sapelo,2018,-143.3,6.8,23.24
+"Georgia Salt Marshes",SRR12995213,Spartina027,SAMN16678238,Sapelo2018_Endosphere_T1_P1_5-10,Root,Tall,10-05,Sapelo,2018,78.7,7.5,30.02
+"Georgia Salt Marshes",SRR12995273,Spartina030,SAMN16678241,Sapelo2018_Endosphere_T1_P2_0-5,Root,Medium,0-5,Sapelo,2018,-373.7,6.7,37.26
+"Georgia Salt Marshes",SRR12995274,Spartina029,SAMN16678240,Sapelo2018_Endosphere_T1_P2_5-10,Root,Medium,10-05,Sapelo,2018,-287,6.2,35.7
+"Georgia Salt Marshes",SRR12995270,Spartina032,SAMN16678243,Sapelo2018_Endosphere_T1_P3_0-5,Root,Short,0-5,Sapelo,2018,-405,6.6,38.46
+"Georgia Salt Marshes",SRR12995271,Spartina031,SAMN16678242,Sapelo2018_Endosphere_T1_P3_5-10,Root,Short,10-05,Sapelo,2018,-332.3,6.4,42.98
+"Georgia Salt Marshes",SRR12995268,Spartina034,SAMN16678245,Sapelo2018_Endosphere_T1_P4_0-5,Root,Short,0-5,Sapelo,2018,-310.5,6.6,39.03
+"Georgia Salt Marshes",SRR12995269,Spartina033,SAMN16678244,Sapelo2018_Endosphere_T1_P4_5-10,Root,Short,10-05,Sapelo,2018,-254.5,6.7,33.63
+"Georgia Salt Marshes",SRR12995266,Spartina036,SAMN16678247,Sapelo2018_Endosphere_T2_P1_0-5,Root,Tall,0-5,Sapelo,2018,20,6.2,17.17
+"Georgia Salt Marshes",SRR12995267,Spartina035,SAMN16678246,Sapelo2018_Endosphere_T2_P1_5-10,Root,Tall,10-05,Sapelo,2018,34.5,7.1,26.62
+"Georgia Salt Marshes",SRR12995264,Spartina038,SAMN16678249,Sapelo2018_Endosphere_T2_P2_0-5,Root,Medium,0-5,Sapelo,2018,-226.5,6.6,19.26
+"Georgia Salt Marshes",SRR12995265,Spartina037,SAMN16678248,Sapelo2018_Endosphere_T2_P2_5-10,Root,Medium,10-05,Sapelo,2018,-66,7.1,26.22
+"Georgia Salt Marshes",SRR12995262,Spartina040,SAMN16678251,Sapelo2018_Endosphere_T2_P3_0-5,Root,Short,0-5,Sapelo,2018,-346,6.5,32.87
+"Georgia Salt Marshes",SRR12995263,Spartina039,SAMN16678250,Sapelo2018_Endosphere_T2_P3_5-10,Root,Short,10-05,Sapelo,2018,-143,6.5,34.77
+"Georgia Salt Marshes",SRR12995259,Spartina042,SAMN16678253,Sapelo2018_Endosphere_T4_P1_0-5,Root,Tall,0-5,Sapelo,2018,-29,6,20.45
+"Georgia Salt Marshes",SRR12995260,Spartina041,SAMN16678252,Sapelo2018_Endosphere_T4_P1_5-10,Root,Tall,10-05,Sapelo,2018,18,7.1,22.46
+"Georgia Salt Marshes",SRR12995257,Spartina044,SAMN16678255,Sapelo2018_Endosphere_T4_P2_0-5,Root,Medium,0-5,Sapelo,2018,-385.5,6.8,29.67
+"Georgia Salt Marshes",SRR12995258,Spartina043,SAMN16678254,Sapelo2018_Endosphere_T4_P2_5-10,Root,Medium,10-05,Sapelo,2018,-295.5,6.8,35.5
+"Georgia Salt Marshes",SRR12995255,Spartina046,SAMN16678257,Sapelo2018_Endosphere_T4_P3_0-5,Root,Short,0-5,Sapelo,2018,-347.5,6.6,46.09
+"Georgia Salt Marshes",SRR12995256,Spartina045,SAMN16678256,Sapelo2018_Endosphere_T4_P3_5-10,Root,Short,10-05,Sapelo,2018,-271.5,6.5,43.63
+"Georgia Salt Marshes",SRR12995253,Spartina048,SAMN16678259,Sapelo2018_Rhizosphere_T1_P1_0-5,Rhizosphere,Tall,0-5,Sapelo,2018,-143.3,6.8,23.24
+"Georgia Salt Marshes",SRR12995254,Spartina047,SAMN16678258,Sapelo2018_Rhizosphere_T1_P1_5-10,Rhizosphere,Tall,10-05,Sapelo,2018,78.7,7.5,30.02
+"Georgia Salt Marshes",SRR12995251,Spartina050,SAMN16678261,Sapelo2018_Rhizosphere_T1_P2_0-5,Rhizosphere,Medium,0-5,Sapelo,2018,-373.7,6.7,37.26
+"Georgia Salt Marshes",SRR12995252,Spartina049,SAMN16678260,Sapelo2018_Rhizosphere_T1_P2_5-10,Rhizosphere,Medium,10-05,Sapelo,2018,-287,6.2,35.7
+"Georgia Salt Marshes",SRR12995248,Spartina052,SAMN16678263,Sapelo2018_Rhizosphere_T1_P3_0-5,Rhizosphere,Short,0-5,Sapelo,2018,-405,6.6,38.46
+"Georgia Salt Marshes",SRR12995249,Spartina051,SAMN16678262,Sapelo2018_Rhizosphere_T1_P3_5-10,Rhizosphere,Short,10-05,Sapelo,2018,-332.3,6.4,42.98
+"Georgia Salt Marshes",SRR12995246,Spartina054,SAMN16678265,Sapelo2018_Rhizosphere_T1_P4_0-5,Rhizosphere,Short,0-5,Sapelo,2018,-310.5,6.6,39.03
+"Georgia Salt Marshes",SRR12995247,Spartina053,SAMN16678264,Sapelo2018_Rhizosphere_T1_P4_5-10,Rhizosphere,Short,10-05,Sapelo,2018,-254.5,6.7,33.63
+"Georgia Salt Marshes",SRR12995244,Spartina056,SAMN16678267,Sapelo2018_Rhizosphere_T2_P1_0-5,Rhizosphere,Tall,0-5,Sapelo,2018,20,6.2,17.17
+"Georgia Salt Marshes",SRR12995245,Spartina055,SAMN16678266,Sapelo2018_Rhizosphere_T2_P1_5-10,Rhizosphere,Tall,10-05,Sapelo,2018,34.5,7.1,26.62
+"Georgia Salt Marshes",SRR12995304,Spartina058,SAMN16678269,Sapelo2018_Rhizosphere_T2_P2_0-5,Rhizosphere,Medium,0-5,Sapelo,2018,-226.5,6.6,19.26
+"Georgia Salt Marshes",SRR12995306,Spartina057,SAMN16678268,Sapelo2018_Rhizosphere_T2_P2_5-10,Rhizosphere,Medium,10-05,Sapelo,2018,-66,7.1,26.22
+"Georgia Salt Marshes",SRR12995302,Spartina060,SAMN16678271,Sapelo2018_Rhizosphere_T2_P3_0-5,Rhizosphere,Short,0-5,Sapelo,2018,-346,6.5,32.87
+"Georgia Salt Marshes",SRR12995303,Spartina059,SAMN16678270,Sapelo2018_Rhizosphere_T2_P3_5-10,Rhizosphere,Short,10-05,Sapelo,2018,-143,6.5,34.77
+"Georgia Salt Marshes",SRR12995299,Spartina062,SAMN16678273,Sapelo2018_Rhizosphere_T4_P1_0-5,Rhizosphere,Tall,0-5,Sapelo,2018,-29,6,20.45
+"Georgia Salt Marshes",SRR12995300,Spartina061,SAMN16678272,Sapelo2018_Rhizosphere_T4_P1_5-10,Rhizosphere,Tall,10-05,Sapelo,2018,18,7.1,22.46
+"Georgia Salt Marshes",SRR12995297,Spartina064,SAMN16678275,Sapelo2018_Rhizosphere_T4_P2_0-5,Rhizosphere,Medium,0-5,Sapelo,2018,-385.5,6.8,29.67
+"Georgia Salt Marshes",SRR12995298,Spartina063,SAMN16678274,Sapelo2018_Rhizosphere_T4_P2_5-10,Rhizosphere,Medium,10-05,Sapelo,2018,-295.5,6.8,35.5
+"Georgia Salt Marshes",SRR12995295,Spartina066,SAMN16678277,Sapelo2018_Rhizosphere_T4_P3_0-5,Rhizosphere,Short,0-5,Sapelo,2018,-347.5,6.6,46.09
+"Georgia Salt Marshes",SRR12995296,Spartina065,SAMN16678276,Sapelo2018_Rhizosphere_T4_P3_5-10,Rhizosphere,Short,10-05,Sapelo,2018,-271.5,6.5,43.63
+"Georgia Salt Marshes",SRR12995293,Spartina068,SAMN16678279,Sapelo2019_Bulk_sediment_T1_P1_0-5,"Bulk sediment",Tall,0-5,Sapelo,2019,-114,6.7,42.24
+"Georgia Salt Marshes",SRR12995294,Spartina067,SAMN16678278,Sapelo2019_Bulk_sediment_T1_P1_5-10,"Bulk sediment",Tall,10-05,Sapelo,2019,-140.7,6.6,44.03
+"Georgia Salt Marshes",SRR12995291,Spartina070,SAMN16678281,Sapelo2019_Bulk_sediment_T1_P2_0-5,"Bulk sediment",Medium,0-5,Sapelo,2019,-289,7.4,45.99
+"Georgia Salt Marshes",SRR12995292,Spartina069,SAMN16678280,Sapelo2019_Bulk_sediment_T1_P2_5-10,"Bulk sediment",Medium,10-05,Sapelo,2019,-385,6.6,37.15
+"Georgia Salt Marshes",SRR12995288,Spartina072,SAMN16678283,Sapelo2019_Bulk_sediment_T1_P3_0-5,"Bulk sediment",Short,0-5,Sapelo,2019,-377,6.6,47.58
+"Georgia Salt Marshes",SRR12995289,Spartina071,SAMN16678282,Sapelo2019_Bulk_sediment_T1_P3_5-10,"Bulk sediment",Short,10-05,Sapelo,2019,-397.5,7.1,41.16
+"Georgia Salt Marshes",SRR12995286,Spartina074,SAMN16678285,Sapelo2019_Bulk_sediment_T1_P4_0-5,"Bulk sediment",Short,0-5,Sapelo,2019,-276.5,6.5,33.29
+"Georgia Salt Marshes",SRR12995287,Spartina073,SAMN16678284,Sapelo2019_Bulk_sediment_T1_P4_5-10,"Bulk sediment",Short,10-05,Sapelo,2019,-326,6.7,41.16
+"Georgia Salt Marshes",SRR12995284,Spartina076,SAMN16678287,Sapelo2019_Bulk_sediment_T3_P1_0-5,"Bulk sediment",Tall,0-5,Sapelo,2019,-48.5,6.6,26.31
+"Georgia Salt Marshes",SRR12995285,Spartina075,SAMN16678286,Sapelo2019_Bulk_sediment_T3_P1_5-10,"Bulk sediment",Tall,10-05,Sapelo,2019,-109.5,6,24.58
+"Georgia Salt Marshes",SRR12995282,Spartina078,SAMN16678289,Sapelo2019_Bulk_sediment_T3_P2_0-5,"Bulk sediment",Medium,0-5,Sapelo,2019,-68,6.9,23.55
+"Georgia Salt Marshes",SRR12995283,Spartina077,SAMN16678288,Sapelo2019_Bulk_sediment_T3_P2_5-10,"Bulk sediment",Medium,10-05,Sapelo,2019,-63,6,22.61
+"Georgia Salt Marshes",SRR12995280,Spartina080,SAMN16678291,Sapelo2019_Bulk_sediment_T3_P3_0-5,"Bulk sediment",Short,0-5,Sapelo,2019,-371,6.9,28.44
+"Georgia Salt Marshes",SRR12995281,Spartina079,SAMN16678290,Sapelo2019_Bulk_sediment_T3_P3_5-10,"Bulk sediment",Short,10-05,Sapelo,2019,-388.5,6.6,27.63
+"Georgia Salt Marshes",SRR12995277,Spartina082,SAMN16678293,Sapelo2019_Bulk_sediment_T4_P1_0-5,"Bulk sediment",Tall,0-5,Sapelo,2019,86,6.9,29.29
+"Georgia Salt Marshes",SRR12995278,Spartina081,SAMN16678292,Sapelo2019_Bulk_sediment_T4_P1_5-10,"Bulk sediment",Tall,10-05,Sapelo,2019,42,6.4,25.43
+"Georgia Salt Marshes",SRR12995275,Spartina083,SAMN16678294,Sapelo2019_Bulk_sediment_T4_P2_5-10,"Bulk sediment",Medium,10-05,Sapelo,2019,-395.5,6.5,25.69
+"Georgia Salt Marshes",SRR12995308,Spartina098,SAMN16678309,Sapelo2019_Endosphere_T3_P1_0-5,Root,Tall,0-5,Sapelo,2019,-48.5,6.6,26.31
+"Georgia Salt Marshes",SRR12995309,Spartina097,SAMN16678308,Sapelo2019_Endosphere_T3_P1_0-5_b,Root,Tall,0-5,Sapelo,2019,-48.5,6.6,26.31
+"Georgia Salt Marshes",SRR12995310,Spartina096,SAMN16678307,Sapelo2019_Endosphere_T3_P1_5-10,Root,Tall,10-05,Sapelo,2019,-109.5,6,24.58
+"Georgia Salt Marshes",SRR12995311,Spartina095,SAMN16678306,Sapelo2019_Endosphere_T3_P1_5-10_b,Root,Tall,10-05,Sapelo,2019,-109.5,6,24.58
+"Georgia Salt Marshes",SRR12995212,Spartina101,SAMN16678312,Sapelo2019_Endosphere_T3_P2_0-5_b,Root,Medium,0-5,Sapelo,2019,-68,6.9,23.55
+"Georgia Salt Marshes",SRR12995305,Spartina100,SAMN16678311,Sapelo2019_Endosphere_T3_P2_5-10,Root,Medium,10-05,Sapelo,2019,-63,6,22.61
+"Georgia Salt Marshes",SRR12995307,Spartina099,SAMN16678310,Sapelo2019_Endosphere_T3_P2_5-10_b,Root,Medium,10-05,Sapelo,2019,-63,6,22.61
+"Georgia Salt Marshes",SRR12995316,Spartina010,SAMN16678221,Sapelo18_Bulk_sediment_T2_P1_0-5,"Bulk sediment",Tall,0-5,Sapelo,2018,34.5,7.1,26.62
+"Georgia Salt Marshes",SRR12995406,Spartina012,SAMN16678223,Sapelo18_Bulk_sediment_T2_P2_0-5,"Bulk sediment",Medium,0-5,Sapelo,2018,-66,7.1,26.22
+"Georgia Salt Marshes",SRR12995384,Spartina014,SAMN16678225,Sapelo18_Bulk_sediment_T2_P3_0-5,"Bulk sediment",Short,0-5,Sapelo,2018,-143,6.5,34.77
+"Georgia Salt Marshes",SRR12995395,Spartina013,SAMN16678224,Sapelo18_Bulk_sediment_T2_P3_5-10,"Bulk sediment",Short,10-05,Sapelo,2018,-346,6.5,32.87
+"Georgia Salt Marshes",SRR12995362,Spartina016,SAMN16678227,Sapelo18_Bulk_sediment_T3_P1_0-5,"Bulk sediment",Tall,0-5,Sapelo,2018,-147,7.3,28.84
+"Georgia Salt Marshes",SRR12995373,Spartina015,SAMN16678226,Sapelo18_Bulk_sediment_T3_P1_5-10,"Bulk sediment",Tall,10-05,Sapelo,2018,36.5,6.5,27.7
+"Georgia Salt Marshes",SRR12995340,Spartina018,SAMN16678229,Sapelo18_Bulk_sediment_T3_P2_0-5,"Bulk sediment",Medium,0-5,Sapelo,2018,89.5,7,29.98
+"Georgia Salt Marshes",SRR12995351,Spartina017,SAMN16678228,Sapelo18_Bulk_sediment_T3_P2_5-10,"Bulk sediment",Medium,10-05,Sapelo,2018,119,5.5,29.24
+"Georgia Salt Marshes",SRR12995329,Spartina019,SAMN16678230,Sapelo18_Bulk_sediment_T3_P3_5-10,"Bulk sediment",Short,10-05,Sapelo,2018,-340.5,6.7,33.64
+"Georgia Salt Marshes",SRR12995323,Spartina084,SAMN16678295,Sapelo2019_Bulk_sediment_T4_P2_0-5,"Bulk sediment",Medium,0-5,Sapelo,2019,-297.5,6.6,29.02
+"Georgia Salt Marshes",SRR12995321,Spartina086,SAMN16678297,Sapelo2019_Bulk_sediment_T4_P3_0-5,"Bulk sediment",Short,0-5,Sapelo,2019,-334,6.9,28.95
+"Georgia Salt Marshes",SRR12995322,Spartina085,SAMN16678296,Sapelo2019_Bulk_sediment_T4_P3_5-10,"Bulk sediment",Short,10-05,Sapelo,2019,-361,6.3,26.78
+"Georgia Salt Marshes",SRR12995319,Spartina088,SAMN16678299,Sapelo2019_Endosphere_T1_P1_0-5,Root,Tall,0-5,Sapelo,2019,-114,6.7,42.24
+"Georgia Salt Marshes",SRR12995320,Spartina087,SAMN16678298,Sapelo2019_Endosphere_T1_P1_5-10,Root,Tall,10-05,Sapelo,2019,-140.7,6.6,44.03
+"Georgia Salt Marshes",SRR12995317,Spartina090,SAMN16678301,Sapelo2019_Endosphere_T1_P2_0-5,Root,Medium,0-5,Sapelo,2019,-289,7.4,45.99
+"Georgia Salt Marshes",SRR12995318,Spartina089,SAMN16678300,Sapelo2019_Endosphere_T1_P2_5-10,Root,Medium,10-05,Sapelo,2019,-385,6.6,37.15
+"Georgia Salt Marshes",SRR12995314,Spartina092,SAMN16678303,Sapelo2019_Endosphere_T1_P3_0-5,Root,Short,0-5,Sapelo,2019,-377,6.6,47.58
+"Georgia Salt Marshes",SRR12995315,Spartina091,SAMN16678302,Sapelo2019_Endosphere_T1_P3_5-10,Root,Short,10-05,Sapelo,2019,-397.5,7.1,41.16
+"Georgia Salt Marshes",SRR12995312,Spartina094,SAMN16678305,Sapelo2019_Endosphere_T1_P4_0-5,Root,Short,0-5,Sapelo,2019,-276.5,6.5,33.29
+"Georgia Salt Marshes",SRR12995313,Spartina093,SAMN16678304,Sapelo2019_Endosphere_T1_P4_5-10,Root,Short,10-05,Sapelo,2019,-326,6.7,41.16
+"Georgia Salt Marshes",SRR12995411,Spartina106,SAMN16678317,Sapelo2019_Endosphere_T3_P3_0-5,Root,Short,0-5,Sapelo,2019,-371,6.9,28.44
+"Georgia Salt Marshes",SRR12995409,Spartina108,SAMN16678319,Sapelo2019_Endosphere_T4_P1_0-5,Root,Tall,0-5,Sapelo,2019,86,6.9,29.29
+"Georgia Salt Marshes",SRR12995410,Spartina107,SAMN16678318,Sapelo2019_Endosphere_T4_P1_5-10,Root,Tall,10-05,Sapelo,2019,42,6.4,25.43
+"Georgia Salt Marshes",SRR12995407,Spartina110,SAMN16678321,Sapelo2019_Endosphere_T4_P2_0-5,Root,Medium,0-5,Sapelo,2019,-297.5,6.6,29.02
+"Georgia Salt Marshes",SRR12995408,Spartina109,SAMN16678320,Sapelo2019_Endosphere_T4_P2_5-10,Root,Medium,10-05,Sapelo,2019,-395.5,6.5,25.69
+"Georgia Salt Marshes",SRR12995404,Spartina112,SAMN16678323,Sapelo2019_Endosphere_T4_P3_0-5,Root,Short,0-5,Sapelo,2019,-334,6.9,28.95
+"Georgia Salt Marshes",SRR12995405,Spartina111,SAMN16678322,Sapelo2019_Endosphere_T4_P3_5-10,Root,Short,10-05,Sapelo,2019,-361,6.3,26.78
+"Georgia Salt Marshes",SRR12995402,Spartina114,SAMN16678325,Sapelo2019_Rhizosphere_T1_P1_0-5,Rhizosphere,Tall,0-5,Sapelo,2019,-114,6.7,42.24
+"Georgia Salt Marshes",SRR12995403,Spartina113,SAMN16678324,Sapelo2019_Rhizosphere_T1_P1_5-10,Rhizosphere,Tall,10-05,Sapelo,2019,-140.7,6.6,44.03
+"Georgia Salt Marshes",SRR12995400,Spartina116,SAMN16678327,Sapelo2019_Rhizosphere_T1_P2_0-5,Rhizosphere,Medium,0-5,Sapelo,2019,-289,7.4,45.99
+"Georgia Salt Marshes",SRR12995401,Spartina115,SAMN16678326,Sapelo2019_Rhizosphere_T1_P2_5-10,Rhizosphere,Medium,10-05,Sapelo,2019,-385,6.6,37.15
+"Georgia Salt Marshes",SRR12995398,Spartina118,SAMN16678329,Sapelo2019_Rhizosphere_T1_P3_0-5,Rhizosphere,Short,0-5,Sapelo,2019,-377,6.6,47.58
+"Georgia Salt Marshes",SRR12995399,Spartina117,SAMN16678328,Sapelo2019_Rhizosphere_T1_P3_5-10,Rhizosphere,Short,10-05,Sapelo,2019,-397.5,7.1,41.16
+"Georgia Salt Marshes",SRR12995396,Spartina120,SAMN16678331,Sapelo2019_Rhizosphere_T1_P4_0-5,Rhizosphere,Short,0-5,Sapelo,2019,-276.5,6.5,33.29
+"Georgia Salt Marshes",SRR12995397,Spartina119,SAMN16678330,Sapelo2019_Rhizosphere_T1_P4_5-10,Rhizosphere,Short,10-05,Sapelo,2019,-326,6.7,41.16
+"Georgia Salt Marshes",SRR12995391,Spartina124,SAMN16678335,Sapelo2019_Rhizosphere_T3_P1_0-5,Rhizosphere,Tall,0-5,Sapelo,2019,-48.5,6.6,26.31
+"Georgia Salt Marshes",SRR12995392,Spartina123,SAMN16678334,Sapelo2019_Rhizosphere_T3_P1_0-5_b,Rhizosphere,Tall,0-5,Sapelo,2019,-48.5,6.6,26.31
+"Georgia Salt Marshes",SRR12995393,Spartina122,SAMN16678333,Sapelo2019_Rhizosphere_T3_P1_5-10,Rhizosphere,Tall,10-05,Sapelo,2019,-109.5,6,24.58
+"Georgia Salt Marshes",SRR12995394,Spartina121,SAMN16678332,Sapelo2019_Rhizosphere_T3_P1_5-10_b,Rhizosphere,Tall,10-05,Sapelo,2019,-109.5,6,24.58
+"Georgia Salt Marshes",SRR12995387,Spartina128,SAMN16678339,Sapelo2019_Rhizosphere_T3_P2_0-5,Rhizosphere,Medium,0-5,Sapelo,2019,-68,6.9,23.55
+"Georgia Salt Marshes",SRR12995388,Spartina127,SAMN16678338,Sapelo2019_Rhizosphere_T3_P2_0-5_b,Rhizosphere,Medium,0-5,Sapelo,2019,-68,6.9,23.55
+"Georgia Salt Marshes",SRR12995389,Spartina126,SAMN16678337,Sapelo2019_Rhizosphere_T3_P2_5-10,Rhizosphere,Medium,10-05,Sapelo,2019,-63,6,22.61
+"Georgia Salt Marshes",SRR12995390,Spartina125,SAMN16678336,Sapelo2019_Rhizosphere_T3_P2_5-10_b,Rhizosphere,Medium,10-05,Sapelo,2019,-63,6,22.61
+"Georgia Salt Marshes",SRR12995382,Spartina132,SAMN16678343,Sapelo2019_Rhizosphere_T3_P3_0-5,Rhizosphere,Short,0-5,Sapelo,2019,-371,6.9,28.44
+"Georgia Salt Marshes",SRR12995383,Spartina131,SAMN16678342,Sapelo2019_Rhizosphere_T3_P3_0-5_b,Rhizosphere,Short,0-5,Sapelo,2019,-371,6.9,28.44
+"Georgia Salt Marshes",SRR12995385,Spartina130,SAMN16678341,Sapelo2019_Rhizosphere_T3_P3_5-10,Rhizosphere,Short,10-05,Sapelo,2019,-388.5,6.6,27.63
+"Georgia Salt Marshes",SRR12995386,Spartina129,SAMN16678340,Sapelo2019_Rhizosphere_T3_P3_5-10_b,Rhizosphere,Short,10-05,Sapelo,2019,-388.5,6.6,27.63
+"Georgia Salt Marshes",SRR12995380,Spartina134,SAMN16678345,Sapelo2019_Rhizosphere_T4_P1_0-5,Rhizosphere,Tall,0-5,Sapelo,2019,86,6.9,29.29
+"Georgia Salt Marshes",SRR12995381,Spartina133,SAMN16678344,Sapelo2019_Rhizosphere_T4_P1_5-10,Rhizosphere,Tall,10-05,Sapelo,2019,42,6.4,25.43
+"Georgia Salt Marshes",SRR12995378,Spartina136,SAMN16678347,Sapelo2019_Rhizosphere_T4_P2_0-5,Rhizosphere,Medium,0-5,Sapelo,2019,-297.5,6.6,29.02
+"Georgia Salt Marshes",SRR12995379,Spartina135,SAMN16678346,Sapelo2019_Rhizosphere_T4_P2_5-10,Rhizosphere,Medium,10-05,Sapelo,2019,-395.5,6.5,25.69
+"Georgia Salt Marshes",SRR12995376,Spartina138,SAMN16678349,Sapelo2019_Rhizosphere_T4_P3_0-5,Rhizosphere,Short,0-5,Sapelo,2019,-334,6.9,28.95
+"Georgia Salt Marshes",SRR12995377,Spartina137,SAMN16678348,Sapelo2019_Rhizosphere_T4_P3_5-10,Rhizosphere,Short,10-05,Sapelo,2019,-361,6.3,26.78
+"Georgia Salt Marshes",SRR12995415,Spartina102,SAMN16678313,Sapelo2019_Endosphere_T3_P2_0-5,Root,Medium,0-5,Sapelo,2019,-68,6.9,23.55
+"Georgia Salt Marshes",SRR12995412,Spartina105,SAMN16678316,Sapelo2019_Endosphere_T3_P3_0-5_b,Root,Short,0-5,Sapelo,2019,-371,6.9,28.44
+"Georgia Salt Marshes",SRR12995413,Spartina104,SAMN16678315,Sapelo2019_Endosphere_T3_P3_5-10,Root,Short,10-05,Sapelo,2019,-388.5,6.6,27.63
+"Georgia Salt Marshes",SRR12995414,Spartina103,SAMN16678314,Sapelo2019_Endosphere_T3_P3_5-10_b,Root,Short,10-05,Sapelo,2019,-388.5,6.6,27.63

@@ -1,0 +1,10 @@
+Name,Run,BioSample,sample,Description,"Depth (m)",pH,"T (°C)","ORP (mV)"
+CROMO,SRR12920517,SAMN16578990,5CROd023,"100% atmospheric O2",2.81,12,15,-224
+CROMO,SRR12920518,SAMN16578990,5CROd022,"50% atmospheric O2 biological replicate 2",3.41,11.8,15.2,-228
+CROMO,SRR12920519,SAMN16578990,5CROd021,"50% atmospheric O2 biological replicate 1",3.41,11.8,15.2,-228
+CROMO,SRR12920516,SAMN16578990,5CROd024,"15% atmospheric O2",3.21,11.8,15,-214
+CROMO,SRR12920521,SAMN16578990,5CROd020,"0% atmospheric O2 biological replicate 2",5.91,11.9,15,-227
+CROMO,SRR12920522,SAMN16578990,5CROd019,"0% atmospheric O2 biological replicate 1",5.91,11.9,15,-227
+CROMO,SRR12920525,SAMN16578990,5CROd016,"well base biological replicate 1",19.5,12,18.7,-262
+CROMO,SRR12920526,SAMN16578990,5CROd015,"well base biological replicate 2",19.5,12,18.7,-262
+CROMO,SRR12920527,SAMN16578990,5CROd014,"well base biological replicate 3",19.5,12,18.7,-262

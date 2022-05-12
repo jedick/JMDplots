@@ -1,0 +1,25 @@
+Name,Run,BioSample,LibraryName,SampleName,Treatment,Pepper,pH,"Eh (mV)"
+"Reductive Soil Disinfestation",SRR12659245,SAMN16191114,CK1,CKA,Control,FALSE,6,46
+"Reductive Soil Disinfestation",SRR12659244,SAMN16191115,CK2,CKB,Control,FALSE,6,46
+"Reductive Soil Disinfestation",SRR12659233,SAMN16191116,CK3,CKC,Control,FALSE,6,46
+"Reductive Soil Disinfestation",SRR12659228,SAMN16191117,CKF1,CK_FA,Flooded,FALSE,6.73,-148
+"Reductive Soil Disinfestation",SRR12659227,SAMN16191118,CKF2,CK_FB,Flooded,FALSE,6.73,-148
+"Reductive Soil Disinfestation",SRR12659226,SAMN16191119,CKF3,CK_FC,Flooded,FALSE,6.73,-148
+"Reductive Soil Disinfestation",SRR12659225,SAMN16191120,RSD1_1,T1_05A,"Flooded + 0.5% silkworm excrement",FALSE,6.8,-179
+"Reductive Soil Disinfestation",SRR12659224,SAMN16191121,RSD1_2,T1_05B,"Flooded + 0.5% silkworm excrement",FALSE,6.8,-179
+"Reductive Soil Disinfestation",SRR12659223,SAMN16191122,RSD1_3,T1_05C,"Flooded + 0.5% silkworm excrement",FALSE,6.8,-179
+"Reductive Soil Disinfestation",SRR12659222,SAMN16191123,RSD2_1,T1_1A,"Flooded + 1% silkworm excrement",FALSE,6.83,-173
+"Reductive Soil Disinfestation",SRR12659243,SAMN16191124,RSD2_2,T1_1B,"Flooded + 1% silkworm excrement",FALSE,6.83,-173
+"Reductive Soil Disinfestation",SRR12659242,SAMN16191125,RSD2_3,T1_1C,"Flooded + 1% silkworm excrement",FALSE,6.83,-173
+"Reductive Soil Disinfestation",SRR12659241,SAMN16191126,pCK1,pl_CKA,Control,TRUE,NA,NA
+"Reductive Soil Disinfestation",SRR12659240,SAMN16191127,pCK2,pl_CKB,Control,TRUE,NA,NA
+"Reductive Soil Disinfestation",SRR12659239,SAMN16191128,pCK3,pl_CKC,Control,TRUE,NA,NA
+"Reductive Soil Disinfestation",SRR12659238,SAMN16191129,pCKF1,pl_CKFA,Flooded,TRUE,NA,NA
+"Reductive Soil Disinfestation",SRR12659237,SAMN16191130,pCKF2,pl_CKFB,Flooded,TRUE,NA,NA
+"Reductive Soil Disinfestation",SRR12659236,SAMN16191131,pCKF3,pl_CKFC,Flooded,TRUE,NA,NA
+"Reductive Soil Disinfestation",SRR12659235,SAMN16191132,pRSD1_1,pl_T105A,"Flooded + 0.5% silkworm excrement",TRUE,NA,NA
+"Reductive Soil Disinfestation",SRR12659234,SAMN16191133,pRSD1_2,pl_T105B,"Flooded + 0.5% silkworm excrement",TRUE,NA,NA
+"Reductive Soil Disinfestation",SRR12659232,SAMN16191134,pRSD1_3,pl_T105C,"Flooded + 0.5% silkworm excrement",TRUE,NA,NA
+"Reductive Soil Disinfestation",SRR12659231,SAMN16191135,pRSD2_1,pl_T11A,"Flooded + 1% silkworm excrement",TRUE,NA,NA
+"Reductive Soil Disinfestation",SRR12659230,SAMN16191136,pRSD2_2,pl_T11B,"Flooded + 1% silkworm excrement",TRUE,NA,NA
+"Reductive Soil Disinfestation",SRR12659229,SAMN16191137,pRSD2_3,pl_T11C,"Flooded + 1% silkworm excrement",TRUE,NA,NA

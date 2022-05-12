@@ -1,0 +1,19 @@
+Name,Run,BioSample,Sample,"Soil Type",Treatment,"Eh (mV)",pH
+"Anhui Province Paddy Soil",SRR6234796,SAMN07816355,LCK1.1,Loamy,Control,543,6.04
+"Anhui Province Paddy Soil",SRR6234795,SAMN07816355,LCK2.1,Loamy,Control,543,6.04
+"Anhui Province Paddy Soil",SRR6234798,SAMN07816355,LCK3.1,Loamy,Control,543,6.04
+"Anhui Province Paddy Soil",SRR6234797,SAMN07816355,L1-1.1,Loamy,"Low FeCl2",400,5.14
+"Anhui Province Paddy Soil",SRR6234799,SAMN07816355,L1-2.1,Loamy,"Low FeCl2",400,5.14
+"Anhui Province Paddy Soil",SRR6234789,SAMN07816355,L1-3.1,Loamy,"Low FeCl2",400,5.14
+"Anhui Province Paddy Soil",SRR6234788,SAMN07816355,L2-1.1,Loamy,"High FeCl2",231,3.95
+"Anhui Province Paddy Soil",SRR6234791,SAMN07816355,L2-2.1,Loamy,"High FeCl2",231,3.95
+"Anhui Province Paddy Soil",SRR6234790,SAMN07816355,L2-3.1,Loamy,"High FeCl2",231,3.95
+"Anhui Province Paddy Soil",SRR6234792,SAMN07816355,SCK1.1,Sandy,Control,529,5.54
+"Anhui Province Paddy Soil",SRR6234803,SAMN07816355,SCK2.1,Sandy,Control,529,5.54
+"Anhui Province Paddy Soil",SRR6234802,SAMN07816355,SCK3.1,Sandy,Control,529,5.54
+"Anhui Province Paddy Soil",SRR6234805,SAMN07816355,S1-1.1,Sandy,"Low FeCl2",245,4.37
+"Anhui Province Paddy Soil",SRR6234804,SAMN07816355,S1-2.1,Sandy,"Low FeCl2",245,4.37
+"Anhui Province Paddy Soil",SRR6234801,SAMN07816355,S1-3.1,Sandy,"Low FeCl2",245,4.37
+"Anhui Province Paddy Soil",SRR6234793,SAMN07816355,S2-1.1,Sandy,"High FeCl2",120,3.23
+"Anhui Province Paddy Soil",SRR6234794,SAMN07816355,S2-2.1,Sandy,"High FeCl2",120,3.23
+"Anhui Province Paddy Soil",SRR6234800,SAMN07816355,S2-3.1,Sandy,"High FeCl2",120,3.23
