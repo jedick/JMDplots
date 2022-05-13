@@ -3,7 +3,7 @@
 
 # Group studies by environment types 20210828
 envirotype <- list(
-  "River & Seawater" = c("MLL+18", "SVH+19", "HXZ+20", "KLY+20", "GSBT20", "WHL+21", "LXH+20", "JVW+20", "ZZL+21", "HKH22",
+  "River & Seawater" = c("MLL+18", "SVH+19", "HXZ+20", "KLY+20", "GSBT20_Prefilter", "GSBT20_Postfilter", "WHL+21", "LXH+20", "JVW+20", "ZZL+21", "HKH22",
                          "GZL21"),
   "Lake & Pond" = c("SAR+13", "LZR+17", "ECS+18", "LLC+19", "SCH+16", "BCA+21", "HLZ+18", "GRG+20", "CNA+20", "BWD+19",
                     "RSJ+21", "LRL+22", "BOEM21", "IBK+22", "GSY+20", "NLE+21", "SPA+21", "FAV+21", "PSV+22"),
@@ -175,7 +175,7 @@ orp16S2 <- function(pdf = FALSE) {
 # Figure 3: Sample locations on world map
 orp16S3 <- function(pdf = FALSE) {
 
-  if(pdf) pdf("Figure3.pdf", width = 26, height = 14)
+  if(pdf) pdf("Figure3.pdf", width = 26, height = 15)
 
   # Coordinates for orp16S datasets
   file <- tempfile()
@@ -295,6 +295,22 @@ orp16S3 <- function(pdf = FALSE) {
     mapPolygon(gl.coords[, "X"], gl.coords[, "Y"], col = "white", border = NA)
   }
 
+  # Get colors for studies
+  icol <- envirodat$groupnum[match(coords$study, envirodat$study)]
+  # Identify studies that use samples from laboratory or mesocosm experiments
+  lab <- c(
+    "BSPD17", "WFB+21", # Sediment
+    "SBW+17", "BMOB18", "ZZZ+18", "PMM+20", "ZHZ+19", "CWC+20", "PSG+20", "XLD+20", "DTJ+20", "LLL+21", "DLS21" # Soil
+  )
+  pch <- ifelse(coords$study %in% lab, 15, 19)
+  # Use smaller points for high-density regions 20210915
+  cex <- ifelse(coords$study %in% c(
+    "MLL+19", "XLD+20", "LLL+21", "DTJ+20", # Hunan
+    "ZZL+21", "MLL+18", "SDH+19", "ZML+17", "ZZLL21", "ZZZ+18", "ZHZ+19", "WHLH21" # GD-HK-MO GBA
+  ), 1.5, 2.5)
+  # Plot sample locations
+  mapPoints(coords$longitude, coords$latitude, pch = pch, col = orp16Scol[icol], cex = cex)
+
   # Plot transects 20210929
   # Coordinates for East Asia Paddy Soil dataset are from
   # Sourcedata.xlsx from https://doi.org/10.6084/m9.figshare.12622829
@@ -317,30 +333,19 @@ orp16S3 <- function(pdf = FALSE) {
   dat <- getmdat_orp16S("YHK+19")
   latlon <- paste(dat$Latitude, dat$Longitude)
   mapPoints(dat$Longitude, dat$Latitude, col = orp16Scol[3], lwd = 1)
-
-  # Get colors for studies
-  icol <- envirodat$groupnum[match(coords$study, envirodat$study)]
-  # Identify studies that use samples from laboratory or mesocosm experiments
-  lab <- c(
-    "BSPD17", "WFB+21", # Sediment
-    "SBW+17", "BMOB18", "ZZZ+18", "PMM+20", "ZHZ+19", "CWC+20", "PSG+20", "XLD+20", "DTJ+20", "LLL+21", "DLS21" # Soil
-  )
-  pch <- ifelse(coords$study %in% lab, 15, 19)
-  # Use smaller points for high-density regions 20210915
-  cex <- ifelse(coords$study %in% c(
-    "MLL+19", "XLD+20", "LLL+21", "DTJ+20", # Hunan
-    "ZZL+21", "MLL+18", "SDH+19", "ZML+17", "ZZLL21", "ZZZ+18", "ZHZ+19", "WHLH21" # GD-HK-MO GBA
-#    "JVW+20", "ZCZ+21", "KSR+21"  # Northern Italy
-  ), 1.5, 2.5)
-  # Plot sample locations
-  mapPoints(coords$longitude, coords$latitude, pch = pch, col = orp16Scol[icol], cex = cex)
+  # Coordinates for Port Microbes are from https://github.com/rghannam/portmicrobes/data/metadata/pm_metadata.csv
+  dat <- getmdat_orp16S("GSBT20")
+  # Use first sample for each port
+  dat <- dat[!duplicated(dat$Port), ]
+  mapPoints(dat$Longitude, dat$Latitude, col = orp16Scol[1], pch = 17)
 
   # Add legend
   ienv = c(1, 2, 4, 5, 3, 6, 7)
   par(xpd = NA)
   legend("bottomleft", names(envirotype)[ienv], pch = 19, col = orp16Scol[ienv], bty = "n", cex = 2, inset = c(0, -0.03))
-  ltext <- c("Field samples", "Laboratory or mesocosm", "Smaller symbols for", "densely sampled areas", "Open symbols for transects")
-  legend("bottomright", ltext, pch = c(19, 15, 20, NA, 1), bty = "n", cex = 2, pt.cex = c(2, 2, 2, 2, 1), inset = c(0, -0.03))
+  ltext <- c("Field samples", "Laboratory or mesocosm", "Smaller symbols for", "densely sampled areas", "Port samples", "Open symbols for transects")
+  legend("bottomright", ltext, pch = c(19, 15, 20, NA, 17, 1), col = c(1, 1, 1, NA, orp16Scol[1], 1),
+         bty = "n", cex = 2, pt.cex = c(2, 2, 2, 2, 1, 1), inset = c(0, -0.03))
   par(xpd = FALSE)
 
   if(pdf) dev.off()
@@ -648,7 +653,8 @@ orp16S_S1 <- function(pdf = FALSE) {
     plotEZ("SVH+19", "two", groupby = "Type", groups = c("Oxic", "Suboxic", "Euxinic")),
     plotEZ("HXZ+20", "Bacteria", groupby = "Station", groups = c("SYBL", "C4")),
     plotEZ("KLY+20", "Bacteria", groupby = "Year", groups = c(2018, 2019), legend.x = "bottomright"),
-    plotEZ("GSBT20", "two", groupby = "Region", groups = c("West Coast U.S.", "Great Lakes", "East Coast U.S.", "Europe", "Asia"), legend.x = "bottomright", size = 100),
+    plotEZ("GSBT20_Prefilter", "two", groupby = "Region", groups = c("West Coast U.S.", "Great Lakes", "East Coast U.S.", "Europe", "Asia"), legend.x = "bottomright"),
+    plotEZ("GSBT20_Postfilter", "two", groupby = "Region", groups = c("West Coast U.S.", "Great Lakes", "East Coast U.S.", "Europe", "Asia"), legend.x = "bottomright"),
     plotEZ("WHL+21", "Bacteria", groupby = "Season", groups = c("Spring", "Summer", "Autumn", "Winter"), legend.x = "bottomleft"),
     plotEZ("LXH+20", "Bacteria", groupby = "Season", groups = c("Summer", "Winter"), legend.x = "bottomright"),
     plotEZ("JVW+20", "Bacteria", groupby = "isolation_source", groups = c("Ulva laetevirens", "lagoon water"), legend.x = "topright"),
@@ -934,6 +940,15 @@ getmdat_orp16S <- function(study, metrics = NULL, dropNA = TRUE, size = NULL) {
   if(study == "DLS21") {
     # Just look at bulk soil 20210910
     metadata <- metadata[metadata$Source == "bulk soil", ]
+  }
+  if(grepl("GSBT20", study)) {
+    # GSBT20, GSBT20_Prefilter, GSBT20_Postfilter
+    filter <- sapply(strsplit(study, "_"), "[", 2)
+    if(!is.na(filter)) {
+      if(filter == "Postfilter") metadata <- metadata[grepl("post", metadata$Sample), ]
+      if(filter == "Prefilter") metadata <- metadata[!grepl("post", metadata$Sample), ]
+    }
+    shortstudy <- "GSBT20"
   }
   if(shortstudy %in% c(
     "MLL+19", "HXZ+20", "BCA+21", "RSJ+21", "RMB+17", "SBP+20", "NTB+21", "MWY+21", "SAR+13", "CTS+17",
