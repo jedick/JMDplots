@@ -1,34 +1,34 @@
 Name,Run,BioSample,Sample,"Depth (cm)",Site,Year,"O2 (mg/L)","Redox (mV)",pH
-"Lake Hazen",14.Deep.Hole.1,SAMN08366634,LH.Deep.Hole.b.1.2014,0.25,"Deep Hole",2014,4.03,116.46,8.39
-"Lake Hazen",14.Deep.Hole.2,SAMN08366635,LH.Deep.Hole.b.2.2014,0.5,"Deep Hole",2014,1.84,124.49,8.39
-"Lake Hazen",14.Deep.Hole.3,SAMN08366636,LH.Deep.Hole.b.3.2014,0.75,"Deep Hole",2014,0.24,114.2,8.37
-"Lake Hazen",14.Deep.Hole.4,SAMN08366637,LH.Deep.Hole.b.4.2014,1,"Deep Hole",2014,-0.38,100.32,8.37
-"Lake Hazen",14.Deep.Hole.5,SAMN08366638,LH.Deep.Hole.b.5.2014,5.5,"Deep Hole",2014,NA,NA,NA
-"Lake Hazen",14.Deep.Hole.6,SAMN08366639,LH.Deep.Hole.b.6.2014,8,"Deep Hole",2014,NA,NA,NA
-"Lake Hazen",14.Snowgoose.Bay.1,SAMN08366645,LH.Snowgoose.Bay.b.1.2014,0.25,"Snowgoose Bay",2014,9.46,189.14,7.78
-"Lake Hazen",14.Snowgoose.Bay.2,SAMN08366646,LH.Snowgoose.Bay.b.2.2014,0.5,"Snowgoose Bay",2014,6.79,148.69,7.82
-"Lake Hazen",14.Snowgoose.Bay.3,SAMN08366647,LH.Snowgoose.Bay.b.3.2014,0.75,"Snowgoose Bay",2014,5.03,139.74,7.85
-"Lake Hazen",14.Snowgoose.Bay.4,SAMN08366648,LH.Snowgoose.Bay.b.4.2014,1,"Snowgoose Bay",2014,3.69,133.72,7.87
-"Lake Hazen",14.Snowgoose.Bay.5,SAMN08366649,LH.Snowgoose.Bay.b.5.2014,5.5,"Snowgoose Bay",2014,NA,NA,NA
-"Lake Hazen",14.Snowgoose.Bay.6,SAMN08366650,LH.Snowgoose.Bay.b.6.2014,8,"Snowgoose Bay",2014,NA,NA,NA
-"Lake Hazen",14.Snowgoose.Bay.7,SAMN08366651,LH.Snowgoose.Bay.b.7.2014,27.5,"Snowgoose Bay",2014,NA,NA,NA
-"Lake Hazen",15.Snowgoose.Bay.1,SAMN08366652,LH.Snowgoose.Bay.b.1.2015,1,"Snowgoose Bay",2015,1.29,443.38,7.57
-"Lake Hazen",15.Snowgoose.Bay.2,SAMN08366653,LH.Snowgoose.Bay.b.2.2015,2,"Snowgoose Bay",2015,-0.05,423.77,7.64
-"Lake Hazen",15.Snowgoose.Bay.3,SAMN08366654,LH.Snowgoose.Bay.b.3.2015,3,"Snowgoose Bay",2015,-0.05,407.97,7.61
-"Lake Hazen",15.Snowgoose.Bay.4,SAMN08366655,LH.Snowgoose.Bay.b.4.2015,4,"Snowgoose Bay",2015,-0.05,380.34,7.57
-"Lake Hazen",15.Snowgoose.Bay.5,SAMN08366656,LH.Snowgoose.Bay.b.5.2015,5,"Snowgoose Bay",2015,-0.05,352.54,7.54
-"Lake Hazen",15.Johns.Island.1,SAMN08366657,LH.Johns.Island.b.1.2015,1,"John's Island",2015,11.5,367.64,8.67
-"Lake Hazen",15.Johns.Island.2,SAMN08366658,LH.Johns.Island.b.2.2015,2,"John's Island",2015,8.4,396.71,8.91
-"Lake Hazen",15.Johns.Island.3,SAMN08366659,LH.Johns.Island.b.3.2015,3,"John's Island",2015,6.79,407.45,9.01
-"Lake Hazen",15.Johns.Island.4,SAMN08366660,LH.Johns.Island.b.4.2015,4,"John's Island",2015,5.67,411.74,8.95
-"Lake Hazen",15.Johns.Island.5,SAMN08366661,LH.Johns.Island.b.5.2015,5,"John's Island",2015,4.66,412.98,8.88
-"Lake Hazen",15.Deep.Hole.1,SAMN08366640,LH.Deep.Hole.b.1.2015,1,"Deep Hole",2015,1.17,443.43,7.04
-"Lake Hazen",15.Deep.Hole.2,SAMN08366641,LH.Deep.Hole.b.2.2015,2,"Deep Hole",2015,-0.14,429.49,7.02
-"Lake Hazen",15.Deep.Hole.3,SAMN08366642,LH.Deep.Hole.b.3.2015,3,"Deep Hole",2015,-0.15,415.18,7.01
-"Lake Hazen",15.Deep.Hole.4,SAMN08366643,LH.Deep.Hole.b.4.2015,4,"Deep Hole",2015,-0.15,397.23,7.02
-"Lake Hazen",15.Deep.Hole.5,SAMN08366644,LH.Deep.Hole.b.5.2015,5,"Deep Hole",2015,-0.16,383.35,7.02
-"Lake Hazen",15.Skeleton.Lake.1,SAMN08366662,Skeleton.Lake.b.1.2015,1,"Skeleton Lake",2015,1.19,187.57,7.35
-"Lake Hazen",15.Skeleton.Lake.2,SAMN08366663,Skeleton.Lake.b.2.2015,2,"Skeleton Lake",2015,-0.62,194.58,7.3
-"Lake Hazen",15.Skeleton.Lake.3,SAMN08366664,Skeleton.Lake.b.3.2015,3,"Skeleton Lake",2015,-1.56,98.15,7.26
-"Lake Hazen",15.Skeleton.Lake.4,SAMN08366665,Skeleton.Lake.b.4.2015,4,"Skeleton Lake",2015,-0.11,128.26,7.18
-"Lake Hazen",15.Skeleton.Lake.5,SAMN08366666,Skeleton.Lake.b.5.2015,5,"Skeleton Lake",2015,-0.07,125.88,7.15
+"Lake Hazen, Nunavut",14.Deep.Hole.1,SAMN08366634,LH.Deep.Hole.b.1.2014,0.25,"Deep Hole",2014,4.03,116.46,8.39
+"Lake Hazen, Nunavut",14.Deep.Hole.2,SAMN08366635,LH.Deep.Hole.b.2.2014,0.5,"Deep Hole",2014,1.84,124.49,8.39
+"Lake Hazen, Nunavut",14.Deep.Hole.3,SAMN08366636,LH.Deep.Hole.b.3.2014,0.75,"Deep Hole",2014,0.24,114.2,8.37
+"Lake Hazen, Nunavut",14.Deep.Hole.4,SAMN08366637,LH.Deep.Hole.b.4.2014,1,"Deep Hole",2014,-0.38,100.32,8.37
+"Lake Hazen, Nunavut",14.Deep.Hole.5,SAMN08366638,LH.Deep.Hole.b.5.2014,5.5,"Deep Hole",2014,NA,NA,NA
+"Lake Hazen, Nunavut",14.Deep.Hole.6,SAMN08366639,LH.Deep.Hole.b.6.2014,8,"Deep Hole",2014,NA,NA,NA
+"Lake Hazen, Nunavut",14.Snowgoose.Bay.1,SAMN08366645,LH.Snowgoose.Bay.b.1.2014,0.25,"Snowgoose Bay",2014,9.46,189.14,7.78
+"Lake Hazen, Nunavut",14.Snowgoose.Bay.2,SAMN08366646,LH.Snowgoose.Bay.b.2.2014,0.5,"Snowgoose Bay",2014,6.79,148.69,7.82
+"Lake Hazen, Nunavut",14.Snowgoose.Bay.3,SAMN08366647,LH.Snowgoose.Bay.b.3.2014,0.75,"Snowgoose Bay",2014,5.03,139.74,7.85
+"Lake Hazen, Nunavut",14.Snowgoose.Bay.4,SAMN08366648,LH.Snowgoose.Bay.b.4.2014,1,"Snowgoose Bay",2014,3.69,133.72,7.87
+"Lake Hazen, Nunavut",14.Snowgoose.Bay.5,SAMN08366649,LH.Snowgoose.Bay.b.5.2014,5.5,"Snowgoose Bay",2014,NA,NA,NA
+"Lake Hazen, Nunavut",14.Snowgoose.Bay.6,SAMN08366650,LH.Snowgoose.Bay.b.6.2014,8,"Snowgoose Bay",2014,NA,NA,NA
+"Lake Hazen, Nunavut",14.Snowgoose.Bay.7,SAMN08366651,LH.Snowgoose.Bay.b.7.2014,27.5,"Snowgoose Bay",2014,NA,NA,NA
+"Lake Hazen, Nunavut",15.Snowgoose.Bay.1,SAMN08366652,LH.Snowgoose.Bay.b.1.2015,1,"Snowgoose Bay",2015,1.29,443.38,7.57
+"Lake Hazen, Nunavut",15.Snowgoose.Bay.2,SAMN08366653,LH.Snowgoose.Bay.b.2.2015,2,"Snowgoose Bay",2015,-0.05,423.77,7.64
+"Lake Hazen, Nunavut",15.Snowgoose.Bay.3,SAMN08366654,LH.Snowgoose.Bay.b.3.2015,3,"Snowgoose Bay",2015,-0.05,407.97,7.61
+"Lake Hazen, Nunavut",15.Snowgoose.Bay.4,SAMN08366655,LH.Snowgoose.Bay.b.4.2015,4,"Snowgoose Bay",2015,-0.05,380.34,7.57
+"Lake Hazen, Nunavut",15.Snowgoose.Bay.5,SAMN08366656,LH.Snowgoose.Bay.b.5.2015,5,"Snowgoose Bay",2015,-0.05,352.54,7.54
+"Lake Hazen, Nunavut",15.Johns.Island.1,SAMN08366657,LH.Johns.Island.b.1.2015,1,"John's Island",2015,11.5,367.64,8.67
+"Lake Hazen, Nunavut",15.Johns.Island.2,SAMN08366658,LH.Johns.Island.b.2.2015,2,"John's Island",2015,8.4,396.71,8.91
+"Lake Hazen, Nunavut",15.Johns.Island.3,SAMN08366659,LH.Johns.Island.b.3.2015,3,"John's Island",2015,6.79,407.45,9.01
+"Lake Hazen, Nunavut",15.Johns.Island.4,SAMN08366660,LH.Johns.Island.b.4.2015,4,"John's Island",2015,5.67,411.74,8.95
+"Lake Hazen, Nunavut",15.Johns.Island.5,SAMN08366661,LH.Johns.Island.b.5.2015,5,"John's Island",2015,4.66,412.98,8.88
+"Lake Hazen, Nunavut",15.Deep.Hole.1,SAMN08366640,LH.Deep.Hole.b.1.2015,1,"Deep Hole",2015,1.17,443.43,7.04
+"Lake Hazen, Nunavut",15.Deep.Hole.2,SAMN08366641,LH.Deep.Hole.b.2.2015,2,"Deep Hole",2015,-0.14,429.49,7.02
+"Lake Hazen, Nunavut",15.Deep.Hole.3,SAMN08366642,LH.Deep.Hole.b.3.2015,3,"Deep Hole",2015,-0.15,415.18,7.01
+"Lake Hazen, Nunavut",15.Deep.Hole.4,SAMN08366643,LH.Deep.Hole.b.4.2015,4,"Deep Hole",2015,-0.15,397.23,7.02
+"Lake Hazen, Nunavut",15.Deep.Hole.5,SAMN08366644,LH.Deep.Hole.b.5.2015,5,"Deep Hole",2015,-0.16,383.35,7.02
+"Lake Hazen, Nunavut",15.Skeleton.Lake.1,SAMN08366662,Skeleton.Lake.b.1.2015,1,"Skeleton Lake",2015,1.19,187.57,7.35
+"Lake Hazen, Nunavut",15.Skeleton.Lake.2,SAMN08366663,Skeleton.Lake.b.2.2015,2,"Skeleton Lake",2015,-0.62,194.58,7.3
+"Lake Hazen, Nunavut",15.Skeleton.Lake.3,SAMN08366664,Skeleton.Lake.b.3.2015,3,"Skeleton Lake",2015,-1.56,98.15,7.26
+"Lake Hazen, Nunavut",15.Skeleton.Lake.4,SAMN08366665,Skeleton.Lake.b.4.2015,4,"Skeleton Lake",2015,-0.11,128.26,7.18
+"Lake Hazen, Nunavut",15.Skeleton.Lake.5,SAMN08366666,Skeleton.Lake.b.5.2015,5,"Skeleton Lake",2015,-0.07,125.88,7.15

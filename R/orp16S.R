@@ -206,10 +206,14 @@ orp16S3 <- function(pdf = FALSE) {
     "CNA+20, 39.441, -77.371", # Web search for geographic center of Maryland --> https://sos.maryland.gov/mdkids/Pages/Geography.aspx
     "BWD+19, 47.120571, -88.545425", # SAMN09980099
     "RSJ+21, 61.833, 24.283", # Materials and methods
+    "LRL+22, 20.8538, -87.1253", # SAMN16910034 
     "BOEM21, 43.051389, -75.965", # Materials and methods
+    "IBK+22, 53.1516, 13.0262", # SAMN15366194
     "GSY+20, 37.59, -7.124", # Materials and methods
     "NLE+21, 32.833, 35.583", # SAMEA7280991
+    "SPA+21, 45.8126, 8.7401", # SAMN17524543
     "FAV+21, 0.757, 36.372", # SAMN19267646
+    "PSV+22, 50.178, 12.596", # Study site
     ## Hot Spring
     "SMS+12, 44.6, -110.9", # JGI IMG/M sample name 1_050719N
     "PCL+18_Acidic, -38.5, 176.0", # Fig. 1
@@ -224,22 +228,31 @@ orp16S3 <- function(pdf = FALSE) {
     "SBP+20, 38.862, -122.414", # SAMN03850954
     "RMB+17, 22.9052, 58.6606", # SAMN05981641
     "CTS+17, 10.94323, -85.63485", # SAMN06226041
+    "SPH+21, 38.8257, -122.35152", # SAMN16578990
     "KSR+21, 44.264340, 8.46442", # SAMN17101425
+    "PSB+21, 38.8621, -122.4304", # SAMN17252996
     "NTB+21, 22.881, 58.701", # SAMN19998441
     ## Soil - put this group before Groundwater and Sediment for clearer visualization in GBA 20210927
     "SBW+17, 28.25, 116.92", # Materials and methods  ### Laboratory
     "MLL+19, 26.1, 112.5", # Materials and methods
+    "ZLH+22, 30.50, 118.36", # SAMN07816355   ### Laboratory
     "BMOB18, 40.60842, -74.19258", # SAMN07828017  ### Laboratory
     "ZZZ+18, 21.816, 112.464", # Materials and methods  ### Laboratory
     "PMM+20, 43.397, -80.311",  # Web search for Cambridge, ON, Canada  ### Laboratory
     "ZHZ+19, 23.130, 113.671", # Materials and methods
+    "WHLH21a, 37.53, 105.03", # Materials and methods
     "CWC+20, 28.226, 116.898", # Materials and methods  ### Laboratory
     "PSG+20, 36.61, -119.53", # Web search for Parlier, CA   ### Mesocosm
     "XLD+20, 27.35, 112.05", # Materials and methods   ### Laboratory
     # LJC+20 see below
     "DTJ+20, 26.45, 111.52", # SAMN14332759   ### Laboratory
+    "ZWH+22, 29.18, 119.28", # SAMN16191137   ### Laboratory
     "LLL+21, 27.78, 113.13", # Materials and methods   ### Laboratory
+    "RKSK22, 31.97283, -81.0304", # SAMN16678415
     "DLS21, 39.39, -75.44", # SAMN17245435  ### Mesocosm
+    "WKP+22, 53.29, 17.79", # SAMN23457780
+    "CYG+22, 31.035, 118.8367", # Wikipedia Nanjing Agricultural University   ### Laboratory
+    "CKB+22, 37.8635, 138.9426", # Wikipedia Niigata University   ### Laboratory
     ## Groundwater
     "KLM+16, 42.99, -82.30", # SAMN04423023
     # YHK+19 see below
@@ -252,6 +265,8 @@ orp16S3 <- function(pdf = FALSE) {
     "GWS+19, 36.31, 94.81", # SAMN07765433
     "SRM+21, 14.83, 99.35", # SAMN14829351
     "ZCZ+21, 45.21, 9.57", # Table 1
+    "CSW+22, 36.69, 109.86", # SAMN21040055
+    "GXS+22, 36, 114", # Fig. 1
     ## Sediment
     "JHL+12, 73.566167, 8.1585", # SAMN00744894
     "GFE+16, -36.69, -73.07", # Table 1
@@ -261,15 +276,20 @@ orp16S3 <- function(pdf = FALSE) {
     "HDZ+19, 29.901, 113.52435", # SAMN05990289
     "WHLH21, 23.52, 113.495", # Materials and methods
     "SCM+18, 25.25, -97.23", # Table 1
+    "RSS+18, 82, -71", # Introduction
     "CLS+19, 32.22, 118.83", # SAMN08683376
     "ZDA+20, -21.42996, -70.05874", # SAMEA4858706
     "VMB+19, 52.11, 79.17", # SAMN08987150
     "WHC+19, 30.12, 122.14", # Materials and methods
     "HSF+19, 47.803, 16.709", # methods
+    "RBM+21, -23.25, -44.62", # SAMN10935837
     "MCS+21, -32.15, -71.1", # Materials and methods
     "LMBA17_2017, 43.42, -2.7", # Fig. 1
+    "HSF+22, -9.42979, 46.49524", # SAMN14343437
     "ZZLL21, 22.68, 113.97", # SAMN16964887
+    # BKR+22 see below
     "WFB+21, 56.440893, -2.863194", # methods   ### Mesocosm
+    "HCW+22, 31.3, 119.98", # Materials and methods   ### Laboratory
     "NA, NA, NA"
   )))
 
@@ -300,14 +320,18 @@ orp16S3 <- function(pdf = FALSE) {
   icol <- envirodat$groupnum[match(coords$study, envirodat$study)]
   # Identify studies that use samples from laboratory or mesocosm experiments
   lab <- c(
-    "BSPD17", "WFB+21", # Sediment
-    "SBW+17", "BMOB18", "ZZZ+18", "PMM+20", "ZHZ+19", "CWC+20", "PSG+20", "XLD+20", "DTJ+20", "LLL+21", "DLS21" # Soil
+    # Sediment
+    "BSPD17", "WFB+21", "HCW+22",
+    # Soil
+    "SBW+17", "ZLH+22", "BMOB18", "ZZZ+18", "PMM+20", "ZHZ+19", "CWC+20", "PSG+20", "XLD+20", "DTJ+20",
+    "ZWH+22", "LLL+21", "DLS21", "CYG+22", "CKB+22"
   )
   pch <- ifelse(coords$study %in% lab, 15, 19)
   # Use smaller points for high-density regions 20210915
   cex <- ifelse(coords$study %in% c(
     "MLL+19", "XLD+20", "LLL+21", "DTJ+20", # Hunan
-    "ZZL+21", "MLL+18", "SDH+19", "ZML+17", "ZZLL21", "ZZZ+18", "ZHZ+19", "WHLH21" # GD-HK-MO GBA
+    "ZZL+21", "MLL+18", "SDH+19", "ZML+17", "ZZLL21", "ZZZ+18", "ZHZ+19", "WHLH21", # GD-HK-MO GBA
+    "ZLH+22", "CYG+22", "CLS+19", "ZWH+22", "HCW+22", "WHC+19", "SBW+17" # Jiangsu-Gansu-Zhejiang
   ), 1.5, 2.5)
   # Plot sample locations
   mapPoints(coords$longitude, coords$latitude, pch = pch, col = orp16Scol[icol], cex = cex)
@@ -339,6 +363,10 @@ orp16S3 <- function(pdf = FALSE) {
   # Use first sample for each port
   dat <- dat[!duplicated(dat$Port), ]
   mapPoints(dat$Longitude, dat$Latitude, col = orp16Scol[1], pch = 17)
+  # Coordinates for Barents Sea are from BioSamples of BioProject PRJNA624280
+  dat <- getmdat_orp16S("BKR+22")
+  dat <- dat[!duplicated(dat$Station), ]
+  mapPoints(dat$Longitude, dat$Latitude, col = orp16Scol[6], pch = 19, cex = 1.5)
 
   # Add legend
   ienv = c(1, 2, 4, 5, 3, 6, 7)
