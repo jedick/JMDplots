@@ -517,31 +517,6 @@ ZZL+21,River & Seawater,Bacteria,2020_P_20_1,SRR13175306,Location,WWTP,148.03,18
 ZZL+21,River & Seawater,Bacteria,2020_P_500_1,SRR13175296,Location,WWTP,117.2,164.1,-0.131403
 ZZL+21,River & Seawater,Bacteria,2020_P_50_1,SRR13175303,Location,WWTP,116.53,157.2,-0.138291
 ZZL+21,River & Seawater,Bacteria,2020_T_1,SRR13175293,Location,Tributary,127.4,217.1,-0.129602
-HKH22,River & Seawater,Bacteria,BFRZ1a,SRR13893253,Type,Biofilm,591,302.5,-0.161077
-HKH22,River & Seawater,Bacteria,BFRZ1b,SRR13893252,Type,Biofilm,591,302.5,-0.161226
-HKH22,River & Seawater,Bacteria,BFRZ2a,SRR13893251,Type,Biofilm,520,242.8,-0.154117
-HKH22,River & Seawater,Bacteria,BFRZ2b,SRR13893254,Type,Biofilm,520,242.8,-0.15789
-HKH22,River & Seawater,Bacteria,BFRZ2c,SRR13893250,Type,Biofilm,520,242.8,-0.158931
-HKH22,River & Seawater,Bacteria,BFRZ2d,SRR13893272,Type,Biofilm,520,242.8,-0.158816
-HKH22,River & Seawater,Bacteria,BFRZ3a,SRR13893271,Type,Biofilm,506,223.1,-0.144228
-HKH22,River & Seawater,Bacteria,BFRZ3b,SRR13893269,Type,Biofilm,506,223.1,-0.158676
-HKH22,River & Seawater,Bacteria,BFRZ3c,SRR13893268,Type,Biofilm,506,223.1,-0.158262
-HKH22,River & Seawater,Bacteria,BFRZ3d,SRR13893267,Type,Biofilm,506,223.1,-0.162537
-HKH22,River & Seawater,Bacteria,BFRZ3e,SRR13893270,Type,Biofilm,506,223.1,-0.153342
-HKH22,River & Seawater,Bacteria,BFRZ4a,SRR13893266,Type,Biofilm,487,232.4,-0.152238
-HKH22,River & Seawater,Bacteria,BFRZ4b,SRR13893265,Type,Biofilm,487,232.4,-0.157741
-HKH22,River & Seawater,Bacteria,BFRZ4c,SRR13893264,Type,Biofilm,487,232.4,-0.136341
-HKH22,River & Seawater,Bacteria,BFRZ4d,SRR13893263,Type,Biofilm,487,232.4,-0.141992
-HKH22,River & Seawater,Bacteria,BFRZ5a,SRR13893260,Type,Biofilm,480,214.1,-0.157789
-HKH22,River & Seawater,Bacteria,BFRZ5b,SRR13893259,Type,Biofilm,480,214.1,-0.143257
-HKH22,River & Seawater,Bacteria,BFRZ5c,SRR13893262,Type,Biofilm,480,214.1,-0.158089
-HKH22,River & Seawater,Bacteria,BFRZ6a,SRR13893258,Type,Biofilm,465,216.1,-0.146369
-HKH22,River & Seawater,Bacteria,BFRZ6b,SRR13893257,Type,Biofilm,465,216.1,-0.148762
-HKH22,River & Seawater,Bacteria,PH1,SRR13893274,Type,AMD pool,536,275.7,-0.145753
-HKH22,River & Seawater,Bacteria,Pool1,SRR13893273,Type,AMD pool,645,339.5,-0.153467
-HKH22,River & Seawater,Bacteria,S1,SRR13893261,Type,AMD pool,566,317.1,-0.151361
-HKH22,River & Seawater,Bacteria,S2,SRR13893256,Type,AMD pool,470,215.4,-0.15869
-HKH22,River & Seawater,Bacteria,S3,SRR13893255,Type,AMD pool,493,215.8,-0.155033
 GZL21,River & Seawater,Bacteria,w1mFXZ,SRR14692702,Type,Surface water,277.3,332.8,-0.144542
 GZL21,River & Seawater,Bacteria,w1mGLZ,SRR14692720,Type,Surface water,233.1,310.1,-0.150551
 GZL21,River & Seawater,Bacteria,w1mGPC,SRR14692687,Type,Surface water,203.1,265.8,-0.140221

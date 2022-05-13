@@ -3,7 +3,7 @@
 
 # Group studies by environment types 20210828
 envirotype <- list(
-  "River & Seawater" = c("MLL+18", "SVH+19", "HXZ+20", "KLY+20", "GSBT20_Prefilter", "GSBT20_Postfilter", "WHL+21", "LXH+20", "JVW+20", "ZZL+21", "HKH22",
+  "River & Seawater" = c("MLL+18", "SVH+19", "HXZ+20", "KLY+20", "GSBT20_Prefilter", "GSBT20_Postfilter", "WHL+21", "LXH+20", "JVW+20", "ZZL+21",
                          "GZL21"),
   "Lake & Pond" = c("SAR+13", "LZR+17", "ECS+18", "LLC+19", "SCH+16", "BCA+21", "HLZ+18", "GRG+20", "CNA+20", "BWD+19",
                     "RSJ+21", "LRL+22", "BOEM21", "IBK+22", "GSY+20", "NLE+21", "SPA+21", "FAV+21", "PSV+22"),
@@ -183,17 +183,18 @@ orp16S3 <- function(pdf = FALSE) {
   writeLines(con = file, text = gsub(" ", "", c(
     # Column names
     "study, latitude, longitude",
-    # River & Seawater (comments indicate source of coordinates from paper or SRA metadata)
+    ## River & Seawater (comments indicate source of coordinates from paper or SRA metadata)
     "MLL+18, 22.20, 113.09", # Fig. 1
     "SVH+19, 42.90, 30.68", # Materials and methods
     "HXZ+20, 16.52, 111.77", # Table 1
     "KLY+20, 37.60189, 126.8128", # Materials and methods
+    # GSBT20 see below
     "WHL+21, 30.76, 115.36", # SAMN13242327
     "LXH+20, 25.42, 99.34", # SAMN15090995
     "JVW+20, 45.432025, 12.260878", # SAMN15796698
     "ZZL+21, 22.77, 113.79", # SAMN16964962
-#    "GZL21, 29.568, 106.668", # SAMN19460485
-    # Lake & Pond
+    # GZL21 see below
+    ## Lake & Pond
     "SAR+13, 1.96, -157.33", # Materials and methods
     "LZR+17, 30.587, 104.310", # Table 1
     "ECS+18, -33.65, -70.117", # Materials and methods
@@ -209,7 +210,7 @@ orp16S3 <- function(pdf = FALSE) {
     "GSY+20, 37.59, -7.124", # Materials and methods
     "NLE+21, 32.833, 35.583", # SAMEA7280991
     "FAV+21, 0.757, 36.372", # SAMN19267646
-    # Hot Spring
+    ## Hot Spring
     "SMS+12, 44.6, -110.9", # JGI IMG/M sample name 1_050719N
     "PCL+18_Acidic, -38.5, 176.0", # Fig. 1
     "BMJ+19, 14.089567, 40.348583", # SAMN11581539
@@ -217,15 +218,15 @@ orp16S3 <- function(pdf = FALSE) {
     "GWSS21, 24.86, 98.33", # SAMN16802401
     "GWS+20, 30.12, 101.94", # SAMN13430433
     "PBU+20, 54.4395, 160.144194", # SAMN14538724
-#    "MWY+21, 30.5848, 81.5806", # Table 1
+    # MWY+21 see below
     "OFY+19, 31.228, 130.613", # Online Resource 1
-    # Alkaline Spring
+    ## Alkaline Spring
     "SBP+20, 38.862, -122.414", # SAMN03850954
     "RMB+17, 22.9052, 58.6606", # SAMN05981641
     "CTS+17, 10.94323, -85.63485", # SAMN06226041
     "KSR+21, 44.264340, 8.46442", # SAMN17101425
     "NTB+21, 22.881, 58.701", # SAMN19998441
-    # Soil - put this group before Groundwater and Sediment for clearer visualization in GBA 20210927
+    ## Soil - put this group before Groundwater and Sediment for clearer visualization in GBA 20210927
     "SBW+17, 28.25, 116.92", # Materials and methods  ### Laboratory
     "MLL+19, 26.1, 112.5", # Materials and methods
     "BMOB18, 40.60842, -74.19258", # SAMN07828017  ### Laboratory
@@ -235,13 +236,13 @@ orp16S3 <- function(pdf = FALSE) {
     "CWC+20, 28.226, 116.898", # Materials and methods  ### Laboratory
     "PSG+20, 36.61, -119.53", # Web search for Parlier, CA   ### Mesocosm
     "XLD+20, 27.35, 112.05", # Materials and methods   ### Laboratory
-#    "LJC+20, 35.19, 118.69", # SAMN14149974
+    # LJC+20 see below
     "DTJ+20, 26.45, 111.52", # SAMN14332759   ### Laboratory
     "LLL+21, 27.78, 113.13", # Materials and methods   ### Laboratory
     "DLS21, 39.39, -75.44", # SAMN17245435  ### Mesocosm
-    # Groundwater
+    ## Groundwater
     "KLM+16, 42.99, -82.30", # SAMN04423023
-#    "YHK+19, 40.460, -87.764", # SAMD00089561
+    # YHK+19 see below
     "SDH+19, 23.03, 113.38", # SAMN07692244
     "SRM+19, 12.67417, 101.3889", # Materials and methods
     "APV+20, 20.12, -99.23", # Materials and methods
@@ -251,7 +252,7 @@ orp16S3 <- function(pdf = FALSE) {
     "GWS+19, 36.31, 94.81", # SAMN07765433
     "SRM+21, 14.83, 99.35", # SAMN14829351
     "ZCZ+21, 45.21, 9.57", # Table 1
-    # Sediment
+    ## Sediment
     "JHL+12, 73.566167, 8.1585", # SAMN00744894
     "GFE+16, -36.69, -73.07", # Table 1
     "ZML+17, 22.494, 114.029", # Table 1
@@ -659,7 +660,6 @@ orp16S_S1 <- function(pdf = FALSE) {
     plotEZ("LXH+20", "Bacteria", groupby = "Season", groups = c("Summer", "Winter"), legend.x = "bottomright"),
     plotEZ("JVW+20", "Bacteria", groupby = "isolation_source", groups = c("Ulva laetevirens", "lagoon water"), legend.x = "topright"),
     plotEZ("ZZL+21", "Bacteria", groupby = "Location", groups = c("Main Stream", "Animal Farm", "Hospital", "WWTP", "Tributary"), legend.x = "bottomright"),
-    plotEZ("HKH22", "Bacteria", groupby = "Type", groups = c("Biofilm", "AMD pool"), legend.x = "topright"),
     plotEZ("GZL21", "Bacteria", groupby = "Type", groups = c("Surface water", "Middle water", "Bottom water"), legend.x = "bottomleft"),
 
     message("\nLake & Pond"),
@@ -958,10 +958,9 @@ getmdat_orp16S <- function(study, metrics = NULL, dropNA = TRUE, size = NULL) {
     "ZML+17", "DTJ+20", "WFB+21", "SBW+17", "KLM+16", "LMBA21", "ZDA+20", "ZZZ+18", "BSPD17", "CWC+20",
     "BMOB18", "JVW+20", "LJC+20", "GFE+16", "ECS+18", "FAV+21", "VMB+19", "DLS21", "ZZLL21", "GWS+20",
     "CLS+19", "SMS+12", "OFY+19", "BYB+17", "MCS+21", "SVH+19", "PMM+20", "GZL21", "LLC+19", "NLE+21",
-    "GSY+20", "SCH+16", "LZR+17", "GRG+20", "APV+20", "YHK+19", "WHC+19", "WHLH21", "PCL+18", "HKH22",
-    "GSBT20", "SPA+21", "PSV+22", "CSW+22", "GXS+22", "IBK+22", "HSF+22", "RBM+21", "HCW+22", "BKR+22",
-    "WKP+22", "ZLH+22", "CKB+22", "ZWH+22", "LRL+22", "WHLH21a", "CYG+22", "RSS+18", "SPH+21", "PSB+21",
-    "RKSK22"
+    "GSY+20", "SCH+16", "LZR+17", "GRG+20", "APV+20", "YHK+19", "WHC+19", "WHLH21", "PCL+18", "GSBT20",
+    "SPA+21", "PSV+22", "CSW+22", "GXS+22", "IBK+22", "HSF+22", "RBM+21", "HCW+22", "BKR+22", "WKP+22",
+    "ZLH+22", "CKB+22", "ZWH+22", "LRL+22", "WHLH21a", "CYG+22", "RSS+18", "SPH+21", "PSB+21", "RKSK22"
   )) {
     # General processing of metadata for orp16S datasets 20210820
     # Get Eh or ORP values (uses partial name matching, can match a column named "Eh (mV)")
