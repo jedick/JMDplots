@@ -13,6 +13,8 @@
 \alias{geo16S_S5}
 \alias{geo16S_S6}
 \alias{getmdat_geo16S}
+\alias{getmetrics_geo16S}
+\alias{plotmet_geo16S}
 \title{Plots from geobiochemistry of 16S sequences paper}
 \description{
 Plots from the paper by Dick and Tan (2022).
@@ -31,6 +33,8 @@ Plots from the paper by Dick and Tan (2022).
   geo16S_S5(pdf = FALSE, H2O = FALSE)
   geo16S_S6(pdf = FALSE)
   getmdat_geo16S(study, metrics = NULL, dropNA = TRUE)
+  getmetrics_geo16S(study, quiet = TRUE, ...)
+  plotmet_geo16S(study, quiet = TRUE, ...)
 }
 
 \arguments{
@@ -39,6 +43,8 @@ Plots from the paper by Dick and Tan (2022).
   \item{study}{character, study name}
   \item{metrics}{data frame, output of \code{\link[chem16S]{getmetrics}}}
   \item{dropNA}{logical, exclude samples with NA name in metadata?}
+  \item{quiet}{logical, change to FALSE to print details about data processing}
+  \item{...}{additional arguments passed to \code{\link[chem16S]{readRDP}} (for \code{getmetrics_geo16S}) or \code{\link[chem16S]{plotmet}} (for \code{plotmet_geo16S})}
 }
 
 \details{
@@ -62,6 +68,9 @@ This table gives a brief description of each plotting function.
 For some datasets, sample subsets are indicated by appending a suffix to the study name separated by an underscore.
 The default for \code{dropNA} means to exclude samples with NA name in the metadata file, which is used to exclude outliers from the analysis.
 If \code{metrics} is supplied, the samples are sorted in the same order as the metadata file, and the function returns a list with both \samp{metadata} and the sorted \samp{metrics}.
+
+\code{getmetrics_geo16S} calculates chemical metrics (\ZC and \nH2O) for the indicated study.
+\code{...} is used to supply arguments to \code{\link[chem16S]{readRDP}}.
 
 }
 
@@ -95,15 +104,25 @@ Dick, J. M. and Tan, J. (2022) Chemical links between redox conditions and estim
 }
 
 \examples{
+# Make Figure 1
 geo16S1()
+
+# Get metrics of estimated community proteomes and paired metadata for one study
+metrics <- getmetrics_geo16S("BCA+21")
+mdat <- getmdat_geo16S("BCA+21", metrics = metrics)
+
+# Get *all* available metadata
+metadata <- getmdat_geo16S("BCA+21", dropNA = FALSE)
+stopifnot(nrow(metadata) > nrow(mdat$metadata))
+
+# Make a nH2O-ZC plot with lots of messages printed
+# Symbols are coded in getmetrics_geo16S
+# (blue: oxic, black: suboxic, red: euxinic)
+plotmet_geo16S("SVH+19", quiet = FALSE)
 
 # List datasets used in geo16S paper
 mdatdir <- system.file("extdata/geo16S/metadata", package = "JMDplots")
 gsub(".csv", "", dir(mdatdir))
 # Get metadata for one study
 mdat <- getmdat_geo16S("BGPF13")
-
-## Calculate metrics for aggregated samples for Archaea and Bacteria
-#groups <- list(mdat$cohort == "Archaea", mdat$cohort == "Bacteria")
-#getmetrics("BGPF13", groups = groups)
 }

@@ -924,7 +924,7 @@ eachenv <- function(lineage = "Bacteria", add = FALSE, do.linear = TRUE, ienv = 
 }
 
 # Get metadata for a study, appending columns for pch and col 20200914
-getmdat_orp16S <- function(study, metrics = NULL, dropNA = TRUE, size = NULL) {
+getmdat_orp16S <- function(study, metrics = NULL, dropNA = TRUE, size = NULL, quiet = TRUE) {
   # Read metadata file
   # Remove suffix after underscore 20200929
   studyfile <- gsub("_.*", "", study)
@@ -937,12 +937,13 @@ getmdat_orp16S <- function(study, metrics = NULL, dropNA = TRUE, size = NULL) {
     iname <- match("name", tolower(colnames(metadata)))
     noname <- is.na(metadata[, iname])
     if(any(noname)) {
-      print(paste0("getmetadata [", study, "]: dropping ", sum(noname), " samples with NA name"))
+      if(!quiet) print(paste0("getmdat_orp16S [", study, "]: dropping ", sum(noname), " samples with NA name"))
       metadata <- metadata[!is.na(metadata[, iname]), ]
     }
   }
   # Use NULL pch as flag for unavailable dataset 20210820
   pch <- NULL
+  infotext <- NULL
 
   ## Datasets for orp16S paper 20211003
   shortstudy <- study
@@ -1049,7 +1050,8 @@ getmdat_orp16S <- function(study, metrics = NULL, dropNA = TRUE, size = NULL) {
     # Print message about T, pH and Eh ranges
     Ehtext <- paste(round(range(na.omit(Eh))), collapse = " to ")
     Eh7text <- paste(round(range(na.omit(Eh7))), collapse = " to ")
-    print(paste0(study, ": T ", Ttext, ", pH ", pHtext, ", Eh ", Ehtext, ", Eh7 ", Eh7text))
+    infotext <- paste0(study, ": T ", Ttext, ", pH ", pHtext, ", Eh ", Ehtext, ", Eh7 ", Eh7text)
+    if(!quiet) print(infotext)
 
     # Cluster samples by Eh7 value
     if(nrow(metadata) > 3) {
@@ -1072,16 +1074,18 @@ getmdat_orp16S <- function(study, metrics = NULL, dropNA = TRUE, size = NULL) {
         pch <- sapply(cluster, switch, oxidizing = 24, transition = 21, reducing = 25, NA)
         col <- sapply(cluster, switch, oxidizing = 4, transition = 1, reducing = 2, NA)
       }
-      # Print message about Eh7 or ORP ranges of clusters
-      ro <- range(na.omit(Eh7[cluster=="oxidizing"]))
-      no <- sum(na.omit(cluster=="oxidizing"))
-      message(paste0("getmetadata: oxidizing Eh7 ", paste(ro, collapse = " to "), " mV (n = ", no, ")"))
-      rt <- range(na.omit(Eh7[cluster=="transition"]))
-      nt <- sum(na.omit(cluster=="transition"))
-      message(paste0("getmetadata: transition Eh7 ", paste(rt, collapse = " to "), " mV (n = ", nt, ")"))
-      rr <- range(na.omit(Eh7[cluster=="reducing"]))
-      nr <- sum(na.omit(cluster=="reducing"))
-      message(paste0("getmetadata: reducing Eh7 ", paste(rr, collapse = " to "), " mV (n = ", nr, ")"))
+      if(!quiet) {
+        # Print message about Eh7 or ORP ranges of clusters
+        ro <- range(na.omit(Eh7[cluster=="oxidizing"]))
+        no <- sum(na.omit(cluster=="oxidizing"))
+        message(paste0("getmdat_orp16S: oxidizing Eh7 ", paste(ro, collapse = " to "), " mV (n = ", no, ")"))
+        rt <- range(na.omit(Eh7[cluster=="transition"]))
+        nt <- sum(na.omit(cluster=="transition"))
+        message(paste0("getmdat_orp16S: transition Eh7 ", paste(rt, collapse = " to "), " mV (n = ", nt, ")"))
+        rr <- range(na.omit(Eh7[cluster=="reducing"]))
+        nr <- sum(na.omit(cluster=="reducing"))
+        message(paste0("getmdat_orp16S: reducing Eh7 ", paste(rr, collapse = " to "), " mV (n = ", nr, ")"))
+      }
       # Append cluster names to data frame
       metadata <- cbind(metadata, cluster)
     } else {
@@ -1099,6 +1103,8 @@ getmdat_orp16S <- function(study, metrics = NULL, dropNA = TRUE, size = NULL) {
 
   metadata <- cbind(metadata, pch, col)
   metadata <- cbind(metadata, pch, col)
+  # Use the infotext as an attribute for printing by orp16S_info 20220513
+  attr(metadata, "infotext") <- infotext
   # Return both metadata and metrics, if provided 20220506
   if(is.null(metrics)) metadata else {
     # Keep metadata only for samples with metrics 20201006
@@ -1119,20 +1125,57 @@ getmdat_orp16S <- function(study, metrics = NULL, dropNA = TRUE, size = NULL) {
   }
 }
 
-########################
-# Unexported functions #
-########################
-
 # Function to calculate metrics for a given study 20220506
-getmetrics_orp16S <- function(study, ...) {
+getmetrics_orp16S <- function(study, quiet = TRUE, ...) {
   # Remove suffix after underscore 20200929
   studyfile <- gsub("_.*", "", study)
   datadir <- system.file("extdata/orp16S/RDP", package = "JMDplots")
   RDPfile <- file.path(datadir, paste0(studyfile, ".tab.xz"))
   # If there is no .xz file, look for a .tab file 20210607
   if(!file.exists(RDPfile)) RDPfile <- file.path(datadir, paste0(studyfile, ".tab"))
-  RDP <- readRDP(RDPfile, ...)
-  map <- mapRDP(RDP)
+  RDP <- readRDP(RDPfile, quiet = quiet, ...)
+  map <- mapRDP(RDP, quiet = quiet)
   getmetrics(RDP, map)
+}
+
+# Function to gather info (study name, number of samples with Bacteria and Archaea,
+# T, pH, Eh, and Eh7 ranges) for filling in Table S1 20220513
+orp16S_info <- function(study) {
+  # Get all samples with mincount = 50
+  metrics <- getmetrics_orp16S(study, mincount = 50)
+  # Get metadata for these samples
+  mdat <- getmdat_orp16S(study, metrics)
+  metadata <- mdat$metadata
+  iname <- match("name", tolower(colnames(metadata)))
+  name <- na.omit(metadata[, iname])[1]
+  print(name)
+  # Number of samples with Bacteria and Archaea (note mincount = 50 for each one)
+  metrics.Bac <- try(getmetrics_orp16S(study, lineage = "Bacteria", mincount = 50), TRUE)
+  if(inherits(metrics.Bac, "try-error")) nBac <- 0 else {
+    mdat.Bac <- getmdat_orp16S(study, metrics.Bac)
+    nBac <- nrow(mdat.Bac$metrics)
+  }
+  metrics.Arc <- try(getmetrics_orp16S(study, lineage = "Archaea", mincount = 50), TRUE)
+  if(inherits(metrics.Arc, "try-error")) nArc <- 0 else {
+    mdat.Arc <- getmdat_orp16S(study, metrics.Arc)
+    nArc <- nrow(mdat.Arc$metrics)
+  }
+  print(paste0("nBac: ", nBac, "; nArc: ", nArc))
+  # Now print the T, pH, Eh, Eh7 ranges
+  print(attributes(metadata)$infotext)
+  # Read linear fit coefficients
+  dat <- read.csv(system.file("extdata/orp16S/EZlm.csv", package = "JMDplots"))
+  dat <- dat[dat$study == study, ]
+  for(lineage in c("Bacteria", "Archaea")) {
+    idat <- dat$lineage == lineage
+    if(any(idat)) {
+      slope <- dat$slope[idat]
+      slopetxt <- "-- (close to zero)"
+      if(slope * 1e3 > 0.01) slopetxt <- "positive (> 0.01 V-1)"
+      if(slope * 1e3 < -0.01) slopetxt <- "negative (< -0.01 V-1)"
+      slopetxt <- paste("Slope of ZC-Eh7 correlation for", lineage, "is", slopetxt)
+      print(slopetxt)
+    }
+  }
 }
 

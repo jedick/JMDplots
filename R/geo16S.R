@@ -816,7 +816,7 @@ MG16S <- function(which, plot.lines = TRUE, lowest.level = NULL, lineage = NULL,
     if(H2O) metric_MG <- H2OAA(aa) else metric_MG <- ZCAA(aa)
     # 16S data (Sollai et al., 2019)
     metrics <- getmetrics_geo16S("SVH+19")
-    ## TODO: add missing arguments: 20220506
+    ## TODO: add missing arguments 20220506
     #metrics <- getmetrics_geo16S("SVH+19", lowest.level = lowest.level, lineage = lineage)
     mdat <- getmdat_geo16S("SVH+19", metrics)
     dat_16S <- mdat$metrics
@@ -1813,26 +1813,22 @@ getmdat_geo16S <- function(study, metrics = NULL, dropNA = TRUE) {
   }
 }
 
-########################
-# Unexported functions #
-########################
-
 # Function to calculate metrics for a given study 20220506
-getmetrics_geo16S <- function(study, ...) {
+getmetrics_geo16S <- function(study, quiet = TRUE, ...) {
   # Remove suffix after underscore 20200929
   studyfile <- gsub("_.*", "", study)
   datadir <- system.file("extdata/geo16S/RDP", package = "JMDplots")
   RDPfile <- file.path(datadir, paste0(studyfile, ".tab.xz"))
   # If there is no .xz file, look for a .tab file 20210607
   if(!file.exists(RDPfile)) RDPfile <- file.path(datadir, paste0(studyfile, ".tab"))
-  RDP <- readRDP(RDPfile, ...)
-  map <- mapRDP(RDP)
+  RDP <- readRDP(RDPfile, quiet = quiet, ...)
+  map <- mapRDP(RDP, quiet = quiet)
   getmetrics(RDP, map)
 }
 
 # Function to calculate and plot metrics for a given study 20220506
-plotmet_geo16S <- function(study, ...) {
-  metrics <- getmetrics_geo16S(study)
+plotmet_geo16S <- function(study, quiet = TRUE, ...) {
+  metrics <- getmetrics_geo16S(study, quiet = quiet)
   mdat <- getmdat_geo16S(study, metrics)
   pm <- plotmet(mdat, ...)
   # Prepend study column
