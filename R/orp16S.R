@@ -13,10 +13,10 @@ envirotype <- list(
   "Hot Spring" = c("SMS+12", "PCL+18_Acidic", "PCL+18_Alkaline", "BMJ+19", "LMG+20", "GWSS21", "GWS+20", "PBU+20", "MWY+21", "OFY+19"),
   "Alkaline Spring" = c("SBP+20", "RMB+17", "CTS+17", "SPH+21", "KSR+21", "PSB+21", "NTB+21"),
   "Sediment" = c("JHL+12", "GFE+16", "ZML+17", "BYB+17", "BSPD17", "HDZ+19", "TCN+17", "WHLH21", "SCM+18", "RSS+18",
-                 "CLS+19", "ZDA+20", "VMB+19", "WHC+19", "HSF+19", "RBM+21", "MCS+21", "LMBA21_2017", "HSF+22", "ZZLL21",
-                 "BKR+22", "WFB+21", "HCW+22"),
-  "Soil" = c("SBW+17", "MLL+19", "ZLH+22", "BMOB18", "ZZZ+18", "PMM+20", "ZHZ+19", "WHLH21a", "CWC+20", "PSG+20",
-             "XLD+20", "LJC+20", "DTJ+20", "ZWH+22", "LLL+21", "RKSK22", "DLS21", "WKP+22", "CYG+22", "CKB+22")
+                 "CLS+19", "ZDA+20", "VMB+19", "WHC+19", "HSF+19", "RBM+21", "ZHZ+19", "MCS+21", "LMBA21_2017", "HSF+22",
+                 "ZZLL21", "BKR+22", "WFB+21", "HCW+22"),
+  "Soil" = c("SBW+17", "MLL+19", "ZLH+22", "BMOB18", "ZZZ+18", "PMM+20", "WHLH21a", "CWC+20", "PSG+20", "XLD+20",
+             "LJC+20", "DTJ+20", "ZWH+22", "LLL+21", "RKSK22", "DLS21", "WKP+22", "CYG+22", "CKB+22")
 )
 # Turn the list into a data frame for easier lookup 20210904
 envirodat <- do.call(rbind, lapply(seq_along(envirotype), function(i) data.frame(study = envirotype[[i]], groupnum = i)))
@@ -239,7 +239,6 @@ orp16S3 <- function(pdf = FALSE) {
     "BMOB18, 40.60842, -74.19258", # SAMN07828017  ### Laboratory
     "ZZZ+18, 21.816, 112.464", # Materials and methods  ### Laboratory
     "PMM+20, 43.397, -80.311",  # Web search for Cambridge, ON, Canada  ### Laboratory
-    "ZHZ+19, 23.130, 113.671", # Materials and methods
     "WHLH21a, 37.53, 105.03", # Materials and methods
     "CWC+20, 28.226, 116.898", # Materials and methods  ### Laboratory
     "PSG+20, 36.61, -119.53", # Web search for Parlier, CA   ### Mesocosm
@@ -284,6 +283,7 @@ orp16S3 <- function(pdf = FALSE) {
     "WHC+19, 30.12, 122.14", # Materials and methods
     "HSF+19, 47.803, 16.709", # methods
     "RBM+21, -23.25, -44.62", # SAMN10935837
+    "ZHZ+19, 23.130, 113.671", # Materials and methods   ### Laboratory
     "MCS+21, -32.15, -71.1", # Materials and methods
     "LMBA17_2017, 43.42, -2.7", # Fig. 1
     "HSF+22, -9.42979, 46.49524", # SAMN14343437
@@ -322,9 +322,9 @@ orp16S3 <- function(pdf = FALSE) {
   # Identify studies that use samples from laboratory or mesocosm experiments
   lab <- c(
     # Sediment
-    "BSPD17", "TCN+17", "WFB+21", "HCW+22",
+    "BSPD17", "TCN+17", "ZHZ+19", "WFB+21", "HCW+22",
     # Soil
-    "SBW+17", "ZLH+22", "BMOB18", "ZZZ+18", "PMM+20", "ZHZ+19", "CWC+20", "PSG+20", "XLD+20", "DTJ+20",
+    "SBW+17", "ZLH+22", "BMOB18", "ZZZ+18", "PMM+20", "CWC+20", "PSG+20", "XLD+20", "DTJ+20",
     "ZWH+22", "LLL+21", "DLS21", "CYG+22", "CKB+22"
   )
   pch <- ifelse(coords$study %in% lab, 15, 19)
@@ -766,6 +766,7 @@ orp16S_S1 <- function(pdf = FALSE) {
     plotEZ("WHC+19", "Archaea", groupby = "Type", groups = c("Mid-tide", "Low-tide", "Subtidal"), legend.x = "topright"),
     plotEZ("HSF+19", "Bacteria", groupby = "Type", groups = c("Water", "Sediment-Water Interface", "Sediment"), legend.x = "topright"),
     plotEZ("RBM+21", "Bacteria", groupby = "Site", groups = c("3 (external)", "5 (middle)", "7 (inner)"), legend.x = "topright"),
+    plotEZ("ZHZ+19", "two", groupby = "Treatment", groups = c("Original", "Nitrate-reducing", "Ferric-reducing", "Sulfate-reducing", "Methanogenic")),
     plotEZ("MCS+21", "two", groupby = "Type", groups = c("Water", "Sediment"), legend.x = "topright"),
     plotEZ("LMBA21_2017", "two", groupby = "Season", groups = c("Summer", "Winter"), legend.x = "bottomright"),
     plotEZ("HSF+22", "Bacteria", groupby = "Location", groups = c("West Lagoon", "North Lagoon", "South Lagoon", "Cinq Cases"), legend.x = "bottomright"),
@@ -781,7 +782,6 @@ orp16S_S1 <- function(pdf = FALSE) {
     plotEZ("BMOB18", "two", groupby = "Treatment", groups = c("Acetate", "No amendment", "Pre-incubation")),
     plotEZ("ZZZ+18", "two", groupby = "Treatment", groups = c("None", "AQDS", "Biochar"), legend.x = "bottomleft"),
     plotEZ("PMM+20", "Bacteria", groupby = "Type", groups = c("Fluctuating", "Static")),
-    plotEZ("ZHZ+19", "two", groupby = "Treatment", groups = c("Original", "Nitrate-reducing", "Ferric-reducing", "Sulfate-reducing", "Methanogenic")),
     plotEZ("WHLH21a", "Bacteria", groupby = "Stage", groups = c("Algae", "Cyanolichen", "Chlorolichen", "Moss"), legend.x = "bottomright"),
     plotEZ("CWC+20", "Bacteria", groupby = "Management", groups = c("Flooding", "Draining")),
     plotEZ("PSG+20", "two", groupby = "Treatment", groups = c("Initial", "NCC", "RB", "RGP", "TP")),
