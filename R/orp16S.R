@@ -16,7 +16,7 @@ envirotype <- list(
                  "CLS+19", "ZDA+20", "VMB+19", "WHC+19", "HSF+19", "RBM+21", "ZHZ+19", "MCS+21", "LMBA21_2017", "HSF+22",
                  "ZZLL21", "BKR+22", "WFB+21", "HCW+22"),
   "Soil" = c("SBW+17", "MLL+19", "ZLH+22", "BMOB18", "ZZZ+18", "PMM+20", "WHLH21a", "CWC+20", "PSG+20", "XLD+20",
-             "LJC+20", "DTJ+20", "ZWH+22", "LLL+21", "RKSK22", "DLS21", "WKP+22", "CYG+22", "CKB+22")
+             "LJC+20", "DTJ+20", "ZWH+22", "LLL+21", "RKSK22", "DLS21_Bulk", "WKP+22", "CYG+22", "CKB+22")
 )
 # Turn the list into a data frame for easier lookup 20210904
 envirodat <- do.call(rbind, lapply(seq_along(envirotype), function(i) data.frame(study = envirotype[[i]], groupnum = i)))
@@ -248,7 +248,7 @@ orp16S3 <- function(pdf = FALSE) {
     "ZWH+22, 29.18, 119.28", # SAMN16191137   ### Laboratory
     "LLL+21, 27.78, 113.13", # Materials and methods   ### Laboratory
     "RKSK22, 31.97283, -81.0304", # SAMN16678415
-    "DLS21, 39.39, -75.44", # SAMN17245435  ### Mesocosm
+    "DLS21_Bulk, 39.39, -75.44", # SAMN17245435  ### Mesocosm
     "WKP+22, 53.29, 17.79", # SAMN23457780
     "CYG+22, 31.035, 118.8367", # Wikipedia Nanjing Agricultural University   ### Laboratory
     "CKB+22, 37.8635, 138.9426", # Wikipedia Niigata University   ### Laboratory
@@ -325,7 +325,7 @@ orp16S3 <- function(pdf = FALSE) {
     "BSPD17", "TCN+17", "ZHZ+19", "WFB+21", "HCW+22",
     # Soil
     "SBW+17", "ZLH+22", "BMOB18", "ZZZ+18", "PMM+20", "CWC+20", "PSG+20", "XLD+20", "DTJ+20",
-    "ZWH+22", "LLL+21", "DLS21", "CYG+22", "CKB+22"
+    "ZWH+22", "LLL+21", "DLS21_Bulk", "CYG+22", "CKB+22"
   )
   pch <- ifelse(coords$study %in% lab, 15, 19)
   # Use smaller points for high-density regions 20210915
@@ -791,7 +791,7 @@ orp16S_S1 <- function(pdf = FALSE) {
     plotEZ("ZWH+22", "Bacteria", groupby = "Treatment", groups = c("Control", "Flooded", "Flooded + 0.5% silkworm excrement", "Flooded + 1% silkworm excrement"), legend.x = "bottomright"),
     plotEZ("LLL+21", "Bacteria", groupby = "Treatment", groups = c("CK", "FL", "EA", "SB", "BD")),
     plotEZ("RKSK22", "two", groupby = "Compartment", groups = c("Bulk sediment", "Rhizosphere", "Root"), legend.x = "bottomright"),
-    plotEZ("DLS21", "Bacteria", groupby = "Treatment", groups = c("control", "char", "silicate", "husk")),
+    plotEZ("DLS21_Bulk", "Bacteria", groupby = "Treatment", groups = c("control", "char", "silicate", "husk")),
     plotEZ("WKP+22", "Bacteria", groupby = "Type", groups = c("Intercropping", "Monoculture"), legend.x = "bottomleft"),
     plotEZ("CYG+22", "two", groupby = "Soil", groups = c("Fengyang", "Tancheng", "Shuyang")),
     plotEZ("CKB+22", "two", groupby = "Treatment", groups = c("FM 5 Mg/ha", "FM 10 Mg/ha", "RS 5 Mg/ha", "RS 10 Mg/ha"), legend.x = "bottomright")
@@ -968,9 +968,15 @@ getmdat_orp16S <- function(study, metrics = NULL, dropNA = TRUE, size = NULL, qu
     if(!is.na(Year)) metadata <- metadata[metadata$Year == Year, ]
     shortstudy <- "LMBA21"
   }
-  if(study == "DLS21") {
-    # Just look at bulk soil 20210910
-    metadata <- metadata[metadata$Source == "bulk soil", ]
+  if(grepl("DLS21", study)) {
+    # DLS21, DLS21_Bulk, DLS21_Rhizosphere, DLS21_Plaque
+    source <- sapply(strsplit(study, "_"), "[", 2)
+    if(!is.na(source)) {
+      if(source == "Bulk") metadata <- metadata[metadata$Source == "bulk soil", ]
+      if(source == "Rhizosphere") metadata <- metadata[metadata$Source == "rhizosphere soil", ]
+      if(source == "Plaque") metadata <- metadata[metadata$Source == "iron plaque", ]
+    }
+    shortstudy <- "DLS21"
   }
   if(grepl("GSBT20", study)) {
     # GSBT20, GSBT20_Prefilter, GSBT20_Postfilter

@@ -71,11 +71,14 @@ This information is used to fill in Table S1 of the paper.
   \describe{
     \item{\file{pipeline.R}}{Pipeline for sequence data processing (uses external programs fastq-dump, vsearch, seqtk, RDP Classifier).}
     \item{\file{metadata/*.csv}}{Sample metadata for each study.}
-    \item{\file{RDP/*.csv.xz}}{RDP Classifier results combined into a single CSV file for each study, created with the \code{mkRDP} function in \file{pipeline.R}.}
+    \item{\file{RDP/*.csv.xz}}{
+      RDP Classifier results combined into a single CSV file for each study, created with the \code{classify} and \code{mkRDP} function2 in \file{pipeline.R}.
+      An exception is \file{OFY+19.tab}, which has data extracted from the OTU table in Online Resource 2 of Omae et al. (2019).
+    }
     \item{\file{hydro_p}}{Shapefiles for the North American Great Lakes, downloaded from USGS (2010).}
     \item{\file{EZdat.csv}}{Data for all samples, created by \code{orp16S_S1}.}
     \item{\file{EZlm.csv}}{Linear fits between Eh7 and \ZC for each dataset created by \code{orp16S_S1}.}
-    \item{\file{OTU2RDP.R}}{Script to construct \code{RDP/OFY+19.csv} from Table S2 of Omae et al. (2019).}
+    \item{\file{OTU2RDP.R}}{Script to construct \file{OFY+19.tab} from Online Resource 2 of Omae et al. (2019).}
   }
 }
 
