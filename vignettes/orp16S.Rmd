@@ -70,7 +70,7 @@ This vignette was compiled on `r Sys.Date()` with **[JMDplots](https://github.co
 library(JMDplots)
 ```
 
-## Geobiochemical predictive framework (Figure 1)
+## Thermodynamic predictive framework (Figure 1)
 ```{r orp16S1, message = FALSE, results = "hide", out.width='80%', fig.align='center', fig.width = 7, fig.height = 5, pngquant = pngquant}
 orp16S1()
 ```
@@ -95,6 +95,11 @@ orp16S4()
 ```
 
 **Data sources:** Black Sea [@SVH+19], Fayetteville Green Lake [@BOEM21], Samail Ophiolite [@RMB+17], Eastern Tibetan Plateau [@GWS+20], Hainich Critical Zone [@YHK+20], Phetchabun-Pichit Gold Mine [@SKP+21], Bay of Biscay [@LMBA21], Dabu Town, Hunan Province [@MLL+19].
+
+## Summary of regression slopes for all datasets (Table 2)
+```{r orp16S_T2}
+kable(orp16S_T2())
+```
 
 ## Local and global analysis of `r ZC` and Eh7 data (Figure 5)
 ```{r orp16S5, message = FALSE, results = "hide", out.width='100%', fig.width = 10, fig.height = 8, out.extra = 'class="full-width"', pngquant = pngquant, dpi = 100}

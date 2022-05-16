@@ -8,6 +8,7 @@
 \alias{orp16S5}
 \alias{orp16S6}
 \alias{orp16S_S1}
+\alias{orp16S_T2}
 \alias{getmdat_orp16S}
 \alias{getmetrics_orp16S}
 \alias{orp16S_info}
@@ -24,6 +25,7 @@ Plots from the paper by Dick and Meng (2021).
   orp16S5(pdf = FALSE)
   orp16S6(pdf = FALSE)
   orp16S_S1(pdf = FALSE)
+  orp16S_T2()
   getmdat_orp16S(study, metrics = NULL, dropNA = TRUE, size = NULL, quiet = TRUE)
   getmetrics_orp16S(study, mincount = 100, quiet = TRUE, ...)
   orp16S_info(study)
@@ -44,7 +46,7 @@ Plots from the paper by Dick and Meng (2021).
 This table gives a brief description of each plotting function.
 
 \tabular{ll}{
-  \code{orp16S1} \tab Geobiochemical predictive framework \cr
+  \code{orp16S1} \tab Thermodynamic predictive framework \cr
   \code{orp16S2} \tab Chemical and geobiochemical depth profiles in Winogradsky columns \cr
   \code{orp16S3} \tab Sample locations on world map \cr
   \code{orp16S4} \tab Analysis of selected datasets for each environment type \cr
@@ -53,7 +55,9 @@ This table gives a brief description of each plotting function.
   \code{orp16S_S1} \tab \ZC-Eh scatterplots for all studies \cr
 }
 
-\code{orp16S_S1} creates the files EZdat.csv and EZlm.csv that are used by the other functions.
+\code{orp16S_S1} creates the files \file{EZdat.csv} and \file{EZlm.csv} that are used by the other functions.
+
+\code{orp16S_T2} returns a table summarizing regression slopes for all datasets (based on \file{EZlm.csv}).
 
 \code{getmdat_orp16S} gets metadata for the indicated \code{study}, calculates Eh7 from Eh and pH and T (if available), classifies samples into 3 clusters according to their Eh values, and adds columns for plot parameters (\code{pch}, \code{col}).
 The default for \code{dropNA} means to exclude samples with NA name in the metadata file.
@@ -98,11 +102,17 @@ USGS (2010) Great Lakes and Watersheds Shapefiles. ScienceBase Catalog, U.S. Geo
 }
 
 \examples{
+# Conceptual framework
 orp16S1()
 
+# Winogradsky columns
 orp16S2()
 
+# World map
 orp16S3()
+
+# Summarize results for individual datasets
+orp16S_T2()
 
 # "Raw" metrics with lots of messages printed
 getmetrics_orp16S("SVH+19", mincount = 50, quiet = FALSE)

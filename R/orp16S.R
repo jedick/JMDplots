@@ -30,7 +30,7 @@ EZdat <- read.csv(system.file("extdata/orp16S/EZdat.csv", package = "JMDplots"))
 # Read linear fit coefficients
 EZlm <- read.csv(system.file("extdata/orp16S/EZlm.csv", package = "JMDplots"))
 
-# Figure 1: Geobiochemical predictive framework 20210830
+# Figure 1: Thermodynamic predictive framework 20210830
 orp16S1 <- function(pdf = FALSE) {
 
   if(pdf) pdf("Figure1.pdf", width = 7, height = 5)
@@ -123,7 +123,7 @@ orp16S1 <- function(pdf = FALSE) {
   text(80, 44, "Univariate  prediction", font = 2)
 
   # Add title
-  title("Geobiochemical Predictive Framework", font.main = 1)
+  title("Thermodynamic Predictive Framework", font.main = 1)
 
   if(pdf) dev.off()
 
@@ -1181,3 +1181,36 @@ orp16S_info <- function(study) {
   }
 }
 
+# Summary table of regression slopes 20220516
+orp16S_T2 <- function() {
+  # All environment types
+  envirotype <- unique(EZlm$envirotype)
+  # Initialize output
+  out <- matrix(nrow = length(envirotype), ncol = 6)
+  # Loop over Bacteria and Archaea
+  lineage <- c("Bacteria", "Archaea")
+  for(ilin in 1:2) {
+    # Column offset
+    if(lineage[ilin] == "Archaea") dcol <- 3 else dcol <- 0
+    # Loop over environment type
+    for(ienv in 1:length(envirotype)) {
+      # Get fitting results
+      thisdat <- EZlm[EZlm$lineage == lineage[ilin] & EZlm$envirotype == envirotype[ienv], ]
+      # Get number of datasets and count those with positive and negative slopes
+      ndat <- nrow(thisdat)
+      npos <- sum(thisdat$slope * 1e3 > 0.01)
+      nneg <- sum(thisdat$slope * 1e3 < -0.01)
+      # Calcualate percentages
+      ppos <- round(npos / ndat * 100)
+      pneg <- round(nneg / ndat * 100)
+      # Enter values into table
+      out[ienv, 1 + dcol] <- ndat
+      out[ienv, 2 + dcol] <- ppos
+      out[ienv, 3 + dcol] <- pneg
+    }
+  }
+  # Put in names
+  rownames(out) <- envirotype
+  colnames(out) <- paste(rep(c("N", "Pos", "Neg"), 2), rep(c("Bac", "Arc"), each = 3), sep = "_")
+  out
+}
