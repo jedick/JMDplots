@@ -9,18 +9,18 @@ Make plots of \ZC vs Eh7 and \ZC vs abundance of Most Abundant Mapped Taxon.
 }
 
 \usage{
-  plotEZ(study, lineage = NULL, mincount = 50, pch = NULL, col = NULL,
+  plotEZ(study, lineage = NULL, mincount = 100, pch = NULL, col = NULL,
     add = FALSE, type = "p", groupby = NULL, groups = NULL, legend.x = "topleft",
     show = c("lm", "points"), col.line = "gray62", lwd = 1, cex = 1,
     title.line = NA, dxlim = c(0, 0), dylim = c(0, 0), size = NULL)
-  plotMA(study, lineage = NULL, mincount = 50, pch = NULL, col = NULL,
+  plotMA(study, lineage = NULL, mincount = 100, pch = NULL, col = NULL,
     groupby = NULL, groups = NULL, legend.x = "topright")
 }
 
 \arguments{
   \item{study}{character, study key}
   \item{lineage}{character, regular expression for filtering lineages, or the keyword \samp{two}}
-  \item{mincount}{integer, minimum classification count for each sample}
+  \item{mincount}{integer, samples with less than this number of RDP classifications are excluded}
   \item{pch}{point symbol}
   \item{col}{color(s) for points}
   \item{add}{logical, add to existing plot?}

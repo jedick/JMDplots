@@ -8,7 +8,7 @@
 
 # Plot ZC values vs Eh7 for a single study 20210827
 # Use 'groupby' (name of column with sample groups) and 'groups' (names of sample groups) to apply the pch and col to individual samples
-plotEZ <- function(study, lineage = NULL, mincount = 50, pch = NULL, col = NULL, add = FALSE, type = "p", groupby = NULL, groups = NULL,
+plotEZ <- function(study, lineage = NULL, mincount = 100, pch = NULL, col = NULL, add = FALSE, type = "p", groupby = NULL, groups = NULL,
   legend.x = "topleft", show = c("lm", "points"), col.line = "gray62", lwd = 1, cex = 1, title.line = NA, dxlim = c(0, 0), dylim = c(0, 0), size = NULL) {
 
   if(identical(lineage, "two")) {
@@ -135,7 +135,6 @@ plotEZ <- function(study, lineage = NULL, mincount = 50, pch = NULL, col = NULL,
     EZdat <- cbind(groupby = NA, group = NA, EZdat)
   }
 
-
   # Return values
   # Use first column name starting with "sample" or "Sample" 20210818
   sampcol <- grep("^sample", colnames(metadata), ignore.case = TRUE)[1]
@@ -150,7 +149,7 @@ plotEZ <- function(study, lineage = NULL, mincount = 50, pch = NULL, col = NULL,
 
 # Plot ZC vs percentage of most abundant mapped taxon (MAMT) and
 # show percentages of MAMT and MAUT (most abundant unmapped taxon) 20211007
-plotMA <- function(study, lineage = NULL, mincount = 50, pch = NULL, col = NULL, groupby = NULL, groups = NULL, legend.x = "topright") {
+plotMA <- function(study, lineage = NULL, mincount = 100, pch = NULL, col = NULL, groupby = NULL, groups = NULL, legend.x = "topright") {
 
   # Get RDP counts, mapping to NCBI taxonomy, and chemical metrics
   studyfile <- gsub("_.*", "", study)

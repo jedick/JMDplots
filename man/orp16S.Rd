@@ -25,7 +25,7 @@ Plots from the paper by Dick and Meng (2021).
   orp16S6(pdf = FALSE)
   orp16S_S1(pdf = FALSE)
   getmdat_orp16S(study, metrics = NULL, dropNA = TRUE, size = NULL, quiet = TRUE)
-  getmetrics_orp16S(study, quiet = TRUE, ...)
+  getmetrics_orp16S(study, mincount = 100, quiet = TRUE, ...)
   orp16S_info(study)
 }
 
@@ -36,6 +36,7 @@ Plots from the paper by Dick and Meng (2021).
   \item{dropNA}{logical, exclude samples with NA name in metadata?}
   \item{size}{numeric, number of samples to randomly select}
   \item{quiet}{logical, change to FALSE to print details about data processing}
+  \item{mincount}{integer, samples with less than this number of RDP classifications are excluded}
   \item{...}{additional arguments passed to \code{\link[chem16S]{readRDP}}}
 }
 

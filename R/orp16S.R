@@ -25,6 +25,11 @@ envirodat <- cbind(envirodat, group = names(envirotype)[envirodat$groupnum])
 # Set the palette for R colors (numeric index of 'col') 20210914
 orp16Scol <- palette.colors(n = length(envirotype), palette = "Classic Tableau", alpha = 0.75)
 
+# Read Eh7 - ZC data
+EZdat <- read.csv(system.file("extdata/orp16S/EZdat.csv", package = "JMDplots"))
+# Read linear fit coefficients
+EZlm <- read.csv(system.file("extdata/orp16S/EZlm.csv", package = "JMDplots"))
+
 # Figure 1: Geobiochemical predictive framework 20210830
 orp16S1 <- function(pdf = FALSE) {
 
@@ -301,8 +306,9 @@ orp16S3 <- function(pdf = FALSE) {
   # https://cran.r-project.org/web/packages/oce/vignettes/map_projections.html
   par(mar = c(2, 0.5, 0, 0.5))
   # We don't need data(coastlineWorld) ... it's the default map 20211003
-  # Color is azure3
-  mapPlot(col = "#c1cdcd", projection = "+proj=wintri", border = "white", drawBox = FALSE)
+  # A color between azure2 and azure3 20220516
+  col <- rgb(t((col2rgb("azure2") + col2rgb("azure3")) / 2), maxColorValue = 255)
+  mapPlot(col = col, projection = "+proj=wintri", border = "white", drawBox = FALSE)
 
   # Add Great Lakes
   # https://www.sciencebase.gov/catalog/item/530f8a0ee4b0e7e46bd300dd
@@ -429,12 +435,10 @@ orp16S5 <- function(pdf = FALSE) {
   par(mar = c(4, 4, 1, 1))
   par(mgp = c(2.5, 1, 0))
 
-  # Read linear fit coefficients
-  dat <- read.csv(system.file("extdata/orp16S/EZlm.csv", package = "JMDplots"))
   # Use Bacteria only 20210913
-  dat <- dat[dat$lineage == "Bacteria", ]
+  EZlm <- EZlm[EZlm$lineage == "Bacteria", ]
 
-  ## Panel A: Linear fits for each datasets
+  ## Panel A: Linear fits for each dataset
 
   # River & seawater, lake & pond, hot spring, alkaline spring
   plot(c(-400, 750), c(-0.23, -0.12), type = "n", xlab = "Eh7 (mV)", ylab = cplab$ZC)
@@ -442,7 +446,7 @@ orp16S5 <- function(pdf = FALSE) {
   for(i in i1) {
     studies <- envirotype[[i]]
     for(j in seq_along(studies)) {
-      with(dat[dat$study == studies[j], ], {
+      with(EZlm[EZlm$study == studies[j], ], {
         if(length(slope) > 0) {
           y <- function(x) intercept + slope * x
           Eh7 <- c(Eh7min, Eh7max)
@@ -468,7 +472,7 @@ orp16S5 <- function(pdf = FALSE) {
   for(i in i2) {
     studies <- envirotype[[i]]
     for(j in seq_along(studies)) {
-      with(dat[dat$study == studies[j], ], {
+      with(EZlm[EZlm$study == studies[j], ], {
         # Need this 'if' to catch study without Bacteria (WHC+19) 20211005
         if(length(slope) > 0) {
           y <- function(x) intercept + slope * x
@@ -485,22 +489,22 @@ orp16S5 <- function(pdf = FALSE) {
   ## Panel B: Slope vs log10(number of samples)
 
   # Get color according to environment group
-  env <- envirodat[match(dat$study, envirodat$study), ]
+  env <- envirodat[match(EZlm$study, envirodat$study), ]
   # Get range for included samples 20210905
   j1 <- env$groupnum %in% i1
   j2 <- env$groupnum %in% i2
-  xlim <- range(log10(dat$nsamp[j1 | j2]))
+  xlim <- range(log10(EZlm$nsamp[j1 | j2]))
   # Multiply by 1000 to use V instead of mV 20210913
-  ylim <- range(1000 * dat$slope[j1 | j2])
+  ylim <- range(1000 * EZlm$slope[j1 | j2])
   # River & seawater, lake & pond, hot spring, alkaline spring
   plot(xlim, ylim, type = "n", xlab = "log10(Number of samples)", ylab = quote("Slope of linear fit"~(V^-1)))
-  abline(h = 0, lty = 4, col = "gray")
-  points(log10(dat$nsamp[j1]), 1000 * dat$slope[j1], pch = 19, col = orp16Scol[env$groupnum[j1]])
+  abline(h = 0, lty = 2, lwd = 1.5, col = "gray50")
+  points(log10(EZlm$nsamp[j1]), 1000 * EZlm$slope[j1], pch = 19, col = orp16Scol[env$groupnum[j1]])
   label.figure("B", font = 2, cex = 2, xfrac = -0.05, yfrac = 0.9)
   # Groundwater, sediment, soil
   plot(xlim, ylim, type = "n", xlab = "log10(Number of samples)", ylab = quote("Slope of linear fit"~(V^-1)))
-  abline(h = 0, lty = 4, col = "gray")
-  points(log10(dat$nsamp[j2]), 1000 * dat$slope[j2], pch = 19, col = orp16Scol[env$groupnum[j2]])
+  abline(h = 0, lty = 2, lwd = 1.5, col = "gray50")
+  points(log10(EZlm$nsamp[j2]), 1000 * EZlm$slope[j2], pch = 19, col = orp16Scol[env$groupnum[j2]])
 
   ## Panel C: Scatterplots and fits for each environment
 
@@ -520,16 +524,14 @@ orp16S5 <- function(pdf = FALSE) {
   text(0.3, 0.5, "Archaea", srt = 90, xpd = NA)
 
   ## Panel D: Scatterplots and fits for Bacteria and Archaea in all environments except hot springs 20210914
-  # Read Eh7 - ZC data
-  dat <- read.csv(system.file("extdata/orp16S/EZdat.csv", package = "JMDplots"))
   # Omit data for Hot Spring environment
-  dat <- dat[dat$envirotype != "Hot Spring", ]
+  EZdat <- EZdat[EZdat$envirotype != "Hot Spring", ]
 
   # Start plot for Bacteria
   par(mar = c(4, 4, 1, 1))
-  plot(c(-500, 650), range(dat$ZC), type = "n", xlab = "Eh7 (mV)", ylab = cplab$ZC)
+  plot(c(-500, 650), range(EZdat$ZC), type = "n", xlab = "Eh7 (mV)", ylab = cplab$ZC)
   # Use Bacteria only
-  thisdat <- dat[dat$lineage == "Bacteria", ]
+  thisdat <- EZdat[EZdat$lineage == "Bacteria", ]
   # Add linear fit; include number of studies in legend 20210925
   nstudy <- length(unique(thisdat$study))
   add.linear(thisdat$Eh7, thisdat$ZC, nstudy)
@@ -539,8 +541,8 @@ orp16S5 <- function(pdf = FALSE) {
   label.figure("D", font = 2, cex = 2, xfrac = 0.02, yfrac = 1)
 
   # Now do Archaea
-  plot(c(-500, 650), range(dat$ZC), type = "n", xlab = "Eh7 (mV)", ylab = cplab$ZC)
-  thisdat <- dat[dat$lineage == "Archaea", ]
+  plot(c(-500, 650), range(EZdat$ZC), type = "n", xlab = "Eh7 (mV)", ylab = cplab$ZC)
+  thisdat <- EZdat[EZdat$lineage == "Archaea", ]
   nstudy <- length(unique(thisdat$study))
   add.linear(thisdat$Eh7, thisdat$ZC, nstudy)
   eachenv("Archaea", add = TRUE, do.linear = FALSE)
@@ -637,14 +639,12 @@ orp16S6 <- function(pdf = FALSE) {
   title("Bacteria and Archaea", font.main = 1)
 
   # Scatterplots and fits for Bacteria and Archaea in all environments incluing hot springs 20211009
-  # Read Eh7 - ZC data
-  dat <- read.csv(system.file("extdata/orp16S/EZdat.csv", package = "JMDplots"))
   # Loop over Bacteria and Archaea
   for(k in 1:2) {
     par(mar = c(4, 4, 1, 1))
-    plot(c(-500, 650), range(dat$ZC), type = "n", xlab = "Eh7 (mV)", ylab = cplab$ZC)
-    # Use Bacteria only
-    thisdat <- dat[dat$lineage == lineages[k], ]
+    plot(c(-500, 650), range(EZdat$ZC), type = "n", xlab = "Eh7 (mV)", ylab = cplab$ZC)
+    # Use Bacteria or Archaea only
+    thisdat <- EZdat[EZdat$lineage == lineages[k], ]
     # Add linear fit; include number of studies in legend 20210925
     nstudy <- length(unique(thisdat$study))
     add.linear(thisdat$Eh7, thisdat$ZC, nstudy, pvalue_upper_right = TRUE)
@@ -828,13 +828,11 @@ orp16S_S1 <- function(pdf = FALSE) {
 
 add.linear <- function(Eh7, ZC, nstudy = NA, pvalue_upper_right = FALSE) {
   # Plot linear fit and confidence interval 20210920
-  # Use lighter colors for environments with few datasets 20210925
   text.col <- "black"
-  polygon.col <- "gray80"
   line.col <- "gray62"
+  # Use lighter colors for environments with few datasets 20210925
   if(!is.na(nstudy)) if(nstudy < 5) {
     text.col <- "gray60"
-    polygon.col <- "gray90"
     line.col <- "gray70"
   }
   # Show number of studies and exit if there are zero 20210926
@@ -842,13 +840,11 @@ add.linear <- function(Eh7, ZC, nstudy = NA, pvalue_upper_right = FALSE) {
     legend("topleft", legend = nstudy, bty = "n", text.font = 2, text.col = text.col, inset = c(-0.05, 0))
     if(nstudy == 0) return()
   }
-  # https://stackoverflow.com/questions/22717930/how-to-get-the-confidence-intervals-for-lowess-fit-using-r
-  Ehvals <- seq(range(Eh7)[1], range(Eh7)[2], length.out = 100)
+  # Fit data with linear model
   EZlm <- lm(ZC ~ Eh7)
+  # Draw linear fit
+  Ehvals <- range(Eh7)
   plx <- predict(EZlm, newdata = data.frame(Eh7 = Ehvals), se = T)
-  upper <- plx$fit + qt(0.975, plx$df) * plx$se
-  lower <- plx$fit - qt(0.975, plx$df) * plx$se
-  polygon(c(Ehvals, rev(Ehvals)), c(lower, rev(upper)), col = polygon.col, border = NA)
   lines(Ehvals, plx$fit, col = line.col)
   # Get the slope
   slope <- EZlm$coefficients[2]
@@ -1135,14 +1131,14 @@ getmdat_orp16S <- function(study, metrics = NULL, dropNA = TRUE, size = NULL, qu
 }
 
 # Function to calculate metrics for a given study 20220506
-getmetrics_orp16S <- function(study, quiet = TRUE, ...) {
+getmetrics_orp16S <- function(study, mincount = 100, quiet = TRUE, ...) {
   # Remove suffix after underscore 20200929
   studyfile <- gsub("_.*", "", study)
   datadir <- system.file("extdata/orp16S/RDP", package = "JMDplots")
   RDPfile <- file.path(datadir, paste0(studyfile, ".tab.xz"))
   # If there is no .xz file, look for a .tab file 20210607
   if(!file.exists(RDPfile)) RDPfile <- file.path(datadir, paste0(studyfile, ".tab"))
-  RDP <- readRDP(RDPfile, quiet = quiet, ...)
+  RDP <- readRDP(RDPfile, mincount = mincount, quiet = quiet, ...)
   map <- mapRDP(RDP, quiet = quiet)
   getmetrics(RDP, map)
 }
@@ -1150,21 +1146,21 @@ getmetrics_orp16S <- function(study, quiet = TRUE, ...) {
 # Function to gather info (study name, number of samples with Bacteria and Archaea,
 # T, pH, Eh, and Eh7 ranges) for filling in Table S1 20220513
 orp16S_info <- function(study) {
-  # Get all samples with mincount = 50
-  metrics <- getmetrics_orp16S(study, mincount = 50)
+  # Get all samples with mincount = 100
+  metrics <- getmetrics_orp16S(study)
   # Get metadata for these samples
   mdat <- getmdat_orp16S(study, metrics)
   metadata <- mdat$metadata
   iname <- match("name", tolower(colnames(metadata)))
   name <- na.omit(metadata[, iname])[1]
   print(name)
-  # Number of samples with Bacteria and Archaea (note mincount = 50 for each one)
-  metrics.Bac <- try(getmetrics_orp16S(study, lineage = "Bacteria", mincount = 50), TRUE)
+  # Number of samples with Bacteria and Archaea (note mincount = 100 for each one)
+  metrics.Bac <- try(getmetrics_orp16S(study, lineage = "Bacteria"), TRUE)
   if(inherits(metrics.Bac, "try-error")) nBac <- 0 else {
     mdat.Bac <- getmdat_orp16S(study, metrics.Bac)
     nBac <- nrow(mdat.Bac$metrics)
   }
-  metrics.Arc <- try(getmetrics_orp16S(study, lineage = "Archaea", mincount = 50), TRUE)
+  metrics.Arc <- try(getmetrics_orp16S(study, lineage = "Archaea"), TRUE)
   if(inherits(metrics.Arc, "try-error")) nArc <- 0 else {
     mdat.Arc <- getmdat_orp16S(study, metrics.Arc)
     nArc <- nrow(mdat.Arc$metrics)
