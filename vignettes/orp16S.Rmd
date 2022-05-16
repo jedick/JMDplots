@@ -106,6 +106,6 @@ orp16S5()
 orp16S6()
 ```
 
-**Data sources:** **1** Yellowstone - Bison Pool [@SMS+12], **2** acidic and **3** circumneutral to alkaline New Zealand hot springs [@PCL+18], **4** Dallol Geothermal Area [@BMJ+19], **5** Copahue Volcano-Río Agrio [@LMG+20;@MCC+20], **6** Southwestern Yunnan [@GWSS21], **7** Eastern Tibetan Plateau [@GWS+20], **8** Uzon Caldera [@PBU+20], **9** Southern Tibetan Plateau [@MWY+21], **10** Japan Hydrothermal Sediment [@OFY+19].
+**Data sources:** **1** Yellowstone - Bison Pool [@SMS+12], **2** acidic and **3** circumneutral to alkaline New Zealand hot springs [@PCL+18], **4** Dallol Geothermal Area [@BMJ+19], **5** Copahue Volcano-Río Agrio [@LMG+20;@MCC+20], **6** Southwestern Yunnan [@GWSS21], **7** Eastern Tibetan Plateau [@GWS+20], **8** Uzon Caldera [@PBU+20], **9** Southern Tibetan Plateau [@MWY+21].
 
 ## References

@@ -74,12 +74,10 @@ This information is used to fill in Table S1 of the paper.
     \item{\file{metadata/*.csv}}{Sample metadata for each study.}
     \item{\file{RDP/*.csv.xz}}{
       RDP Classifier results combined into a single CSV file for each study, created with the \code{classify} and \code{mkRDP} function2 in \file{pipeline.R}.
-      An exception is \file{OFY+19.tab}, which has data extracted from the OTU table in Online Resource 2 of Omae et al. (2019).
     }
     \item{\file{hydro_p}}{Shapefiles for the North American Great Lakes, downloaded from USGS (2010).}
     \item{\file{EZdat.csv}}{Data for all samples, created by \code{orp16S_S1}.}
     \item{\file{EZlm.csv}}{Linear fits between Eh7 and \ZC for each dataset created by \code{orp16S_S1}.}
-    \item{\file{OTU2RDP.R}}{Script to construct \file{OFY+19.tab} from Online Resource 2 of Omae et al. (2019).}
   }
 }
 
@@ -97,8 +95,6 @@ This information is used to fill in Table S1 of the paper.
 Dick, J. M. and Meng, D. (2021) Local and global chemical shaping of bacterial communities by redox potential. bioRxiv. \doi{10.1101/2021.10.12.464155}
 
 USGS (2010) Great Lakes and Watersheds Shapefiles. ScienceBase Catalog, U.S. Geological Survey. \doi{https://www.sciencebase.gov/catalog/item/530f8a0ee4b0e7e46bd300dd}
-
-Omae, K., Fukuyama, Y., Yasuda, H., Mise, K., Yoshida, T. and Sako, Y. (2019) Diversity and distribution of thermophilic hydrogenogenic carboxydotrophs revealed by microbial community analysis in sediments from multiple hydrothermal environments in Japan. \emph{Archives of Microbiology} \bold{201}, 969-982. \doi{10.1007/s00203-019-01661-9}
 }
 
 \examples{

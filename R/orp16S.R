@@ -10,7 +10,7 @@ envirotype <- list(
   "Groundwater" = c("KLM+16", "YHK+19", "SDH+19", "SRM+19", "APV+20", "SKP+21", "YHK+20", "JDP+20", "GWS+19",
                     "SRM+21", "ZCZ+21", "CSW+22", "GXS+22"),
   # NOTE: Keep Hot Spring in 4th location to get red color 20210904
-  "Hot Spring" = c("SMS+12", "PCL+18_Acidic", "PCL+18_Alkaline", "BMJ+19", "LMG+20", "GWSS21", "GWS+20", "PBU+20", "MWY+21", "OFY+19"),
+  "Hot Spring" = c("SMS+12", "PCL+18_Acidic", "PCL+18_Alkaline", "BMJ+19", "LMG+20", "GWSS21", "GWS+20", "PBU+20", "MWY+21"),
   "Alkaline Spring" = c("SBP+20", "RMB+17", "CTS+17", "SPH+21", "KSR+21", "PSB+21", "NTB+21"),
   "Sediment" = c("JHL+12", "GFE+16", "ZML+17", "BYB+17", "BSPD17", "HDZ+19", "TCN+17", "WHLH21", "SCM+18", "RSS+18",
                  "CLS+19", "ZDA+20", "VMB+19", "WHC+19", "HSF+19", "RBM+21", "ZHZ+19", "MCS+21", "LMBA21_2017", "HSF+22",
@@ -228,7 +228,6 @@ orp16S3 <- function(pdf = FALSE) {
     "GWS+20, 30.12, 101.94", # SAMN13430433
     "PBU+20, 54.4395, 160.144194", # SAMN14538724
     # MWY+21 see below
-    "OFY+19, 31.228, 130.613", # Online Resource 1
     ## Alkaline Spring
     "SBP+20, 38.862, -122.414", # SAMN03850954
     "RMB+17, 22.9052, 58.6606", # SAMN05981641
@@ -583,7 +582,7 @@ orp16S6 <- function(pdf = FALSE) {
   ihyper <- studies %in% c("BMJ+19")
   col[ihyper] <- "turquoise3"
   # Use gray for sediments
-  ised <- studies %in% c("PBU+20", "MWY+21", "OFY+19")
+  ised <- studies %in% c("PBU+20", "MWY+21")
   col[ised] <- "gray"
 
   # Offset for labels 20211012
@@ -723,7 +722,6 @@ orp16S_S1 <- function(pdf = FALSE) {
     plotEZ("GWS+20", "two", groupby = "Hydrothermal Field", groups = c("Batang", "Litang", "Kangding")),
     plotEZ("PBU+20", "Bacteria", groupby = "Type", groups = c("Cauldron", "Sampling Pit", "Spring", "Geyser Valley (Control)"), legend.x = "bottomright"),
     plotEZ("MWY+21", "two", groupby = "Location", groups = c("Quseyongba", "Moluojiang", "Daggyai", "Quzhuomu"), legend.x = "bottomright"),
-    plotEZ("OFY+19", "two", groupby = "Type", groups = c("Hot Spring", "Drain", "Lake")),
 
     message("\nAlkaline Spring"),
     plotEZ("SBP+20", "Bacteria", groupby = "pH Group", groups = c("< 10", "> 10")),
@@ -990,11 +988,10 @@ getmdat_orp16S <- function(study, metrics = NULL, dropNA = TRUE, size = NULL, qu
     "MLL+18", "JDP+20", "BWD+19", "LXH+20", "LMG+20", "WHL+21", "LLL+21", "SDH+19", "GWSS21", "HSF+19",
     "ZML+17", "DTJ+20", "WFB+21", "SBW+17", "KLM+16", "LMBA21", "ZDA+20", "ZZZ+18", "BSPD17", "CWC+20",
     "BMOB18", "JVW+20", "LJC+20", "GFE+16", "ECS+18", "FAV+21", "VMB+19", "DLS21", "ZZLL21", "GWS+20",
-    "CLS+19", "SMS+12", "OFY+19", "BYB+17", "MCS+21", "SVH+19", "PMM+20", "GZL21", "LLC+19", "NLE+21",
-    "GSY+20", "SCH+16", "LZR+17", "GRG+20", "APV+20", "YHK+19", "WHC+19", "WHLH21", "PCL+18", "GSBT20",
-    "SPA+21", "PSV+22", "CSW+22", "GXS+22", "IBK+22", "HSF+22", "RBM+21", "HCW+22", "BKR+22", "WKP+22",
-    "ZLH+22", "CKB+22", "ZWH+22", "LRL+22", "WHLH21a", "CYG+22", "RSS+18", "SPH+21", "PSB+21", "RKSK22",
-    "TCN+17"
+    "CLS+19", "SMS+12", "BYB+17", "MCS+21", "SVH+19", "PMM+20", "GZL21", "LLC+19", "NLE+21", "GSY+20",
+    "SCH+16", "LZR+17", "GRG+20", "APV+20", "YHK+19", "WHC+19", "WHLH21", "PCL+18", "GSBT20", "SPA+21",
+    "PSV+22", "CSW+22", "GXS+22", "IBK+22", "HSF+22", "RBM+21", "HCW+22", "BKR+22", "WKP+22", "ZLH+22",
+    "CKB+22", "ZWH+22", "LRL+22", "WHLH21a", "CYG+22", "RSS+18", "SPH+21", "PSB+21", "RKSK22", "TCN+17"
   )) {
     # General processing of metadata for orp16S datasets 20210820
     # Get Eh or ORP values (uses partial name matching, can match a column named "Eh (mV)")
