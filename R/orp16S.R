@@ -664,13 +664,13 @@ orp16S6 <- function(pdf = FALSE) {
 
 }
 
-# Figure S1: ZC-Eh scatterplots for all studies 20210827
+# Figure S2: ZC-Eh scatterplots for all studies 20210827
 # This also creates files EZdat (Eh and ZC values) and
 # EZlm (linear fits) for use by other plotting functions
-orp16S_S1 <- function(pdf = FALSE) {
+orp16S_S2 <- function(pdf = FALSE) {
 
   # Setup figure
-  if(pdf) pdf("Figure_S1.pdf", width = 12, height = 9)
+  if(pdf) pdf("Figure_S2.pdf", width = 12, height = 9)
   par(mfrow = c(3, 4))
 
   # To reproduce subsampling with size= argument 20220509
@@ -1213,4 +1213,57 @@ orp16S_T2 <- function() {
   rownames(out) <- envirotype
   colnames(out) <- paste(rep(c("N", "Pos", "Neg"), 2), rep(c("Bac", "Arc"), each = 3), sep = "_")
   out
+}
+
+# Global Eh-pH diagram 20220516
+orp16S_S1 <- function(pdf = FALSE) {
+  if(pdf) pdf("Figure_S1.pdf", width = 8, height = 6)
+  layout(t(matrix(1:2)), widths = c(3, 1))
+  # Get data for unique samples
+  ssr <- paste(EZdat$study, EZdat$sample, EZdat$Run, sep = "_")
+  idup <- duplicated(ssr)
+  thisdat <- EZdat[!idup, ]
+  # Remove NA pH
+  thisdat <- thisdat[!is.na(thisdat$pH), ]
+  # Get colors
+  ienv <- match(thisdat$envirotype, names(envirotype))
+  col <- orp16Scol[ienv]
+  # Make plot
+  par(mar = c(4, 4, 1, 1))
+  plot(thisdat$pH, thisdat$Eh, col = col, pch = 19, cex = 0.5, xlab = "pH", ylab = "Eh (mV)",
+       xlim = c(-2, 14), ylim = c(-600, 1000), xaxs = "i", yaxs = "i", axes = FALSE)
+  box()
+  axis(1, at = seq(-2, 14, 2))
+  axis(2, at = seq(-600, 1000, 200))
+  # Add outline from Bass Becking et al. (1960)
+  BKM60 <- read.csv(system.file("extdata/orp16S/BKM60.csv", package = "JMDplots"))
+  top <- subset(BKM60, segment == "top")
+  lines(top$pH, top$Eh)
+  bottom <- subset(BKM60, segment == "bottom")
+  lines(bottom$pH, bottom$Eh)
+  left <- subset(BKM60, segment == "left")
+  for(i in 1:(nrow(left)/2)) {
+    ii <- c(i*2-1, i*2)
+    lines(left$pH[ii], left$Eh[ii])
+  }
+  right <- subset(BKM60, segment == "right")
+  for(i in 1:(nrow(right)/2)) {
+    ii <- c(i*2-1, i*2)
+    lines(right$pH[ii], right$Eh[ii])
+  }
+  O2 <- subset(BKM60, segment == "O2")
+  lines(O2$pH, O2$Eh, lwd = 2)
+  H2 <- subset(BKM60, segment == "H2")
+  lines(H2$pH, H2$Eh, lwd = 2)
+  text(0, 55, quote(H^"+"), cex = 1.2, srt = -30)
+  text(-0.5, -35, quote(H[2]), cex = 1.2, srt = -30)
+  text(5.5, 840, quote(H[2]*O), cex = 1.2, srt = -30)
+  text(6, 930, quote(O[2]), cex = 1.2, srt = -30)
+  # Add legend
+  par(mar = c(4, 1, 1, 1))
+  plot.new()
+  ienv = c(1, 2, 4, 5, 3, 6, 7)
+  ltext <- names(envirotype)[ienv]
+  legend("left", ltext, pch = 19, col = orp16Scol[ienv], bty = "n")
+  if(pdf) dev.off()
 }

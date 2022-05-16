@@ -8,6 +8,7 @@
 \alias{orp16S5}
 \alias{orp16S6}
 \alias{orp16S_S1}
+\alias{orp16S_S2}
 \alias{orp16S_T2}
 \alias{getmdat_orp16S}
 \alias{getmetrics_orp16S}
@@ -25,6 +26,7 @@ Plots from the paper by Dick and Meng (2021).
   orp16S5(pdf = FALSE)
   orp16S6(pdf = FALSE)
   orp16S_S1(pdf = FALSE)
+  orp16S_S2(pdf = FALSE)
   orp16S_T2()
   getmdat_orp16S(study, metrics = NULL, dropNA = TRUE, size = NULL, quiet = TRUE)
   getmetrics_orp16S(study, mincount = 100, quiet = TRUE, ...)
@@ -52,10 +54,11 @@ This table gives a brief description of each plotting function.
   \code{orp16S4} \tab Analysis of selected datasets for each environment type \cr
   \code{orp16S5} \tab Local and global analysis of \ZC and Eh7 data \cr
   \code{orp16S6} \tab Distinctions in carbon oxidation state estimated for different hot springs, and global fits for all environments. \cr
-  \code{orp16S_S1} \tab \ZC-Eh scatterplots for all studies \cr
+  \code{orp16S_S1} \tab Eh-pH diagram (outline from Baas Becking et al., 1960) \cr
+  \code{orp16S_S2} \tab \ZC-Eh scatterplots for each dataset \cr
 }
 
-\code{orp16S_S1} creates the files \file{EZdat.csv} and \file{EZlm.csv} that are used by the other functions.
+\code{orp16S_S2} creates the files \file{EZdat.csv} and \file{EZlm.csv} that are used by the other functions.
 
 \code{orp16S_T2} returns a table summarizing regression slopes for all datasets (based on \file{EZlm.csv}).
 
@@ -82,6 +85,7 @@ This information is used to fill in Table S1 of the paper.
     \item{\file{hydro_p}}{Shapefiles for the North American Great Lakes, downloaded from USGS (2010).}
     \item{\file{EZdat.csv}}{Data for all samples, created by \code{orp16S_S1}.}
     \item{\file{EZlm.csv}}{Linear fits between Eh7 and \ZC for each dataset created by \code{orp16S_S1}.}
+    \item{\file{BKM60.csv}}{Outline of Eh-pH range of natural environments, digitized from Fig. 32 of Baas Becking et al. (1960).}
   }
 }
 
@@ -96,6 +100,8 @@ This information is used to fill in Table S1 of the paper.
 }
 
 \references{
+Baas Becking, L. G. M., Kaplan, I. R. and Moore, D. (1960) Limits of the natural environment in terms of pH and oxidation-reduction potentials. \emph{Journal of Geology} \bold{68}, 243--284. \url{https://www.jstor.org/stable/30059218}
+
 Dick, J. M. and Meng, D. (2021) Local and global chemical shaping of bacterial communities by redox potential. bioRxiv. \doi{10.1101/2021.10.12.464155}
 
 USGS (2010) Great Lakes and Watersheds Shapefiles. ScienceBase Catalog, U.S. Geological Survey. \doi{https://www.sciencebase.gov/catalog/item/530f8a0ee4b0e7e46bd300dd}
