@@ -90,13 +90,14 @@ plotEZ <- function(study, lineage = NULL, mincount = 100, pch = NULL, col = NULL
 
   # Make data frame with Eh7 and ZC values
   # Add T and pH 20220516
+  # Add O2_umol_L 20220517
   iT <- match("T", colnames(metadata))  # matches "T"
   if(is.na(iT)) iT <- grep("^T\\ ", colnames(metadata))[1]  # matches "T (°C)" but not e.g. "Treatment"
   if(is.na(iT)) iT <- grep("^Temp", colnames(metadata))[1]  # matches "Temperature (°C)"
   if(is.na(iT)) T <- NA else T <- metadata[, iT]
   ipH <- match("pH", colnames(metadata))
   if(is.na(ipH)) pH <- NA else pH <- metadata[, ipH]
-  EZdat <- data.frame(T = T, pH = pH, Eh = metadata$Ehorig, Eh7 = metadata$Eh7, ZC = round(metrics$ZC, 6))
+  EZdat <- data.frame(T = T, pH = pH, O2_umol_L = metadata$O2_umol_L, Eh = metadata$Ehorig, Eh7 = metadata$Eh7, ZC = round(metrics$ZC, 6))
   # Create subtitle for environment type 20210904
   sub <- envirotype <- envirodat$group[envirodat$study == study]
   if(!add) {

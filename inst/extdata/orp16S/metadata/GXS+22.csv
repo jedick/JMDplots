@@ -1,4 +1,4 @@
-Name,Run,BioSample,LibraryName,Sample,pH,DO,ORP,Subarea
+Name,Run,BioSample,LibraryName,Sample,pH,"DO (%)",ORP,Subarea
 "Linzhou-Anyang Groundwater",SRR16242151,SAMN22082217,R806B43,AY06,7.5,96.3,107,A
 "Linzhou-Anyang Groundwater",SRR16242160,SAMN22082218,R806B44,AY10,7.8,90.5,106,B
 "Linzhou-Anyang Groundwater",SRR16242159,SAMN22082219,R806B45,AY12,7.9,89.2,123,B

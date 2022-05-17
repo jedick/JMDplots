@@ -955,7 +955,6 @@ getmdat_orp16S <- function(study, metrics = NULL, dropNA = TRUE, size = NULL, qu
       pHdiff <- 7 - pH
       # Adjust to pH 7
       Eh7 <- round(Eh + pHdiff * dEhdpH, 1)
-
     } else {
       Eh7 <- Eh
       pHtext <- "assumed 7"
@@ -966,6 +965,37 @@ getmdat_orp16S <- function(study, metrics = NULL, dropNA = TRUE, size = NULL, qu
     Eh7text <- paste(round(range(na.omit(Eh7))), collapse = " to ")
     infotext <- paste0(study, ": T ", Ttext, ", pH ", pHtext, ", Eh ", Ehtext, ", Eh7 ", Eh7text)
     if(!quiet) print(infotext)
+
+    # Get O2 values 20220517
+    O2_umol_L <- NA
+    iO2 <- grep("^O2", colnames(metadata))[1]
+    if(is.na(iO2)) iO2 <- grep("^DO", colnames(metadata))[1]
+    if(is.na(iO2)) iO2 <- grep("^oxygen", tolower(colnames(metadata)))[1]
+    if(!is.na(iO2)) {
+      # Get the units
+      O2name <- colnames(metadata)[iO2]
+      # Remove text up to and including left parenthesis, and right parenthesis
+      units <- gsub(".*\\(|\\)", "", O2name)
+      if(units %in% c("\u03BCmol/L", "\u03BCmol L-1", "umol/L", "umol L-1", "umol kg-1")) O2_umol_L <- metadata[, iO2]
+      else if(units == "mM") O2_umol_L <- metadata[, iO2] * 1000
+      else if(units %in% c("mg/L", "mg L-1")) O2_umol_L <- metadata[, iO2] * 1000 / 32
+      else if(units == "%") {
+        # Calculate logK for O2(gas) = O2(aq)
+        logK <- rep(NA, nrow(metadata))
+        not_NA <- !is.na(T)
+        logK[not_NA] <- subcrt(c("O2", "O2"), c("gas", "aq"), c(-1, 1), T = T[not_NA])$out$logK
+        # Calculate saturated oxygen concentration from logK = logaO2(aq) - logfO2(gas)
+        # Assume fugacity is partial pressure of oxygen in sea-level atmosphere
+        logaO2 <- logK + log10(0.21)
+        # Remove logarithm and convert mol to umol
+        O2_umol_L_sat <- 10^logaO2 * 1e6
+        # Multiply by percent to get concentration
+        O2_umol_L <- metadata[, iO2] / 100 * O2_umol_L_sat
+      }
+      else if(identical(units, O2name)) warning(paste0(study, ": no units given for ", O2name))
+      else stop(paste0(study, ": unrecognized units for oxygen concentration: ", units))
+    }
+    metadata <- cbind(metadata, O2_umol_L = O2_umol_L)
 
     # Cluster samples by Eh7 value
     if(nrow(metadata) > 3) {

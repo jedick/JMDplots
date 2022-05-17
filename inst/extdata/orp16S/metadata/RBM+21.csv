@@ -1,4 +1,4 @@
-Name,Run,BioSample,SampleName,latlong,Site,"Depth (cm)",DO,pH,ORP
+Name,Run,BioSample,SampleName,latlong,Site,"Depth (cm)","DO (mg/L)",pH,ORP
 "Saco do Mamanguá ría",SRR8580113,SAMN10935830,B1,"23.21 S 44.58 W","3 (external)",0-20,4.24,7.77,-55.6
 "Saco do Mamanguá ría",SRR8580112,SAMN10935831,B2,"23.21 S 44.58 W","3 (external)",20-40,3.56,7.68,-97.9
 "Saco do Mamanguá ría",SRR8580111,SAMN10935832,D1,"23.23 S 44.60 W","5 (middle)",0-20,6.96,7.78,10.2

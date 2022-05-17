@@ -1,4 +1,4 @@
-name,Run,BioSample,Sample,Lake,Depth,Conductivity,"Temperature (°C)",pH,"Redox potential (mV)",Oxygen
+name,Run,BioSample,Sample,Lake,Depth,Conductivity,"Temperature (°C)",pH,"Redox potential (mV)","Oxygen (μmol/L)"
 "Iberian Pyrite Belt",ERR4298945,SAMEA7025489,FC01r1,"Filon Centro",1,4829,22.3,2.31,660,9.65
 "Iberian Pyrite Belt",ERR4298946,SAMEA7025490,FC01r2,"Filon Centro",1,4829,22.3,2.31,660,9.65
 "Iberian Pyrite Belt",ERR4298947,SAMEA7025491,FC01r3,"Filon Centro",1,4829,22.3,2.31,660,9.65

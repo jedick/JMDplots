@@ -1,7 +1,7 @@
-Name,Run,BioSample,LibraryName,Domain,"Sample Name",KH#,Month,"Land Use",Reed,Canopy,Size,Depth,Perm.,pH,"Cond. µS",Temp,Depth,"O2 mg/L",E0,Eh
+Name,Run,BioSample,LibraryName,Domain,"Sample Name",KH#,Month,"Land Use",Reed,Canopy,Size,Depth,Perm.,pH,"Cond. µS",Temp,Depth,"O2 (mg/L)",E0,Eh
 "German Kettle Holes",SRR12128697,SAMN15365347,ARC_265W5,Archaea,265W5,265,Oct,Arable,Y,N,L,D,3,7.22,737,12.6,NA,5.29,177.6,387.6
 "German Kettle Holes",SRR12128691,SAMN15365351,ARC_269W4,Archaea,269W4,269,Jun,Arable,N,P,M,S,3,8.196,1235,22.6,NA,7.8,166.4,376.4
-"German Kettle Holes",SRR12128690,SAMN15365352,ARC_269W5,Archaea,269W5,269,Oct,Arable,N,P,M,S,3,7.872,861,12.7,NA,288,165.1,375.1
+"German Kettle Holes",SRR12128690,SAMN15365352,ARC_269W5,Archaea,269W5,269,Oct,Arable,N,P,M,S,3,7.872,861,12.7,NA,2.88,165.1,375.1
 "German Kettle Holes",SRR12128851,SAMN15365333,ARC_258W5,Archaea,258W5,258,Oct,Arable,N,N,M,D,3,7.665,627,11.9,NA,NA,172.4,382.4
 "German Kettle Holes",SRR12128796,SAMN15365338,ARC_259W5,Archaea,259W5,259,Oct,Arable,Y,N,L,S,3,7.186,625,11,NA,NA,141.2,351.2
 "German Kettle Holes",SRR12128807,SAMN15365337,Arc_259W4,Archaea,259W4,259,Jun,Arable,Y,N,L,S,3,7.1,739,21.4,NA,7.15,155.2,365.2
@@ -38,7 +38,7 @@ Name,Run,BioSample,LibraryName,Domain,"Sample Name",KH#,Month,"Land Use",Reed,Ca
 "German Kettle Holes",SRR12128008,SAMN15365624,BAC_259W5,Bacteria,259W5,259,Oct,Arable,Y,N,L,S,3,7.186,625,11,NA,NA,141.2,351.2
 "German Kettle Holes",SRR12127998,SAMN15365633,BAC_265W5,Bacteria,265W5,265,Oct,Arable,Y,N,L,D,3,7.22,737,12.6,NA,5.29,177.6,387.6
 "German Kettle Holes",SRR12127991,SAMN15365640,BAC_269W4,Bacteria,269W4,269,Jun,Arable,N,P,M,S,3,8.196,1235,22.6,NA,7.8,166.4,376.4
-"German Kettle Holes",SRR12127990,SAMN15365641,BAC_269W5,Bacteria,269W5,269,Oct,Arable,N,P,M,S,3,7.872,861,12.7,NA,288,165.1,375.1
+"German Kettle Holes",SRR12127990,SAMN15365641,BAC_269W5,Bacteria,269W5,269,Oct,Arable,N,P,M,S,3,7.872,861,12.7,NA,2.88,165.1,375.1
 "German Kettle Holes",SRR12127981,SAMN15365649,BAC_275W4,Bacteria,275W4,275,Jun,Arable,Y,N,L,D,3,7.91,447,21,NA,7,149.6,359.6
 "German Kettle Holes",SRR12127980,SAMN15365650,BAC_275W5,Bacteria,275W5,275,Oct,Arable,Y,N,L,D,3,7.882,418,11,NA,NA,153.5,363.5
 "German Kettle Holes",SRR12127971,SAMN15365657,BAC_287W5,Bacteria,287W5,287,Oct,Arable,Y,P,M,S,3,5.698,804,11.9,30,4.36,190.4,400.4

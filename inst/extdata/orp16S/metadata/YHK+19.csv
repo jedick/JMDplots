@@ -1,4 +1,4 @@
-name,Run,BioSample,Sample,Latitude,Longitude,"Temp (°C)",pH,"ORP (mV)","DO (mg/l)"
+name,Run,BioSample,Sample,Latitude,Longitude,"Temp (°C)",pH,"ORP (mV)","DO (mg/L)"
 "Mahomet Aquifer",DRR099606,SAMD00089549,No.1-DNA,40.2122367,-88.98082157,13.6,7.02,58,0.1
 "Mahomet Aquifer",DRR099607,SAMD00089550,No.2-DNA,40.07773962,-88.82327728,13.9,6.97,63,0.1
 "Mahomet Aquifer",DRR099608,SAMD00089551,No.3-DNA,39.94506437,-88.59601878,13.5,6.7,91,0.15

@@ -1,4 +1,4 @@
-name,Run,LibraryName,BioSample,sample,"Roll-Front Setting",pH,"ORP (mV)","Cond (mS/cm)","O2 (mg/L0"
+name,Run,LibraryName,BioSample,sample,"Roll-Front Setting",pH,"ORP (mV)","Cond (mS/cm)","O2 (mg/L)"
 "Zoovch Ovoo Uranium Deposit",SRR9659503,M3,SAMN12236980,PZOV_0013,Oxidized,7.67,379.1,4.26,6.73
 "Zoovch Ovoo Uranium Deposit",SRR9659504,M8,SAMN12236980,PTZO_0001,Oxidized,7.76,354.6,3.79,3.81
 "Zoovch Ovoo Uranium Deposit",SRR9659506,M1,SAMN12236980,MOZO_0007,Intermediate,7.71,172.3,4.34,0.01

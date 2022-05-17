@@ -1,4 +1,4 @@
-name,Run,BioSample,sample,Depth,"DO (mg/l)",pH,"ORP (mV)","EC (μs/cm)","Temp (°C)"
+name,Run,BioSample,sample,Depth,"DO (mg/L)",pH,"ORP (mV)","EC (μs/cm)","Temp (°C)"
 "Lower Chao Praya Basin",SRR11687821,SAMN14829339,DW1,Deep,2.14,6.56,-64.8,544,28.8
 "Lower Chao Praya Basin",SRR11687820,SAMN14829340,DW2,Deep,5.31,6.64,173.7,350,31.5
 "Lower Chao Praya Basin",SRR11687816,SAMN14829341,DW3,Deep,4.74,6.55,172.6,371,28.5

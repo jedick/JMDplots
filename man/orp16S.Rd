@@ -59,7 +59,8 @@ This table gives a brief description of each plotting function.
 
 \code{orp16S_T2} returns a table summarizing regression slopes for all datasets (based on \file{EZlm.csv}).
 
-\code{getmdat_orp16S} gets metadata for the indicated \code{study}, calculates Eh7 from Eh and pH and T (if available), classifies samples into 3 clusters according to their Eh values, and adds columns for plot parameters (\code{pch}, \code{col}).
+\code{getmdat_orp16S} gets metadata for the indicated \code{study}, calculates Eh7 from Eh and pH and T (if available), classifies samples into 3 clusters according to their Eh values, and adds columns for plot parameters (\samp{pch}, \samp{col}).
+The function also adds a column named \samp{O2_umol_L}, with O2 concentration in (μmol/L), which is converted from source units of O2 concentration if needed.
 The default for \code{dropNA} means to exclude samples with NA name in the metadata file.
 If \code{metrics} is supplied, metadata are kept only for samples with available metrics, the sample metrics are placed in the same order as the remaining metadata, and the function returns a list with both \samp{metadata} and the sorted \samp{metrics}.
 \code{size} can be used to specify a number of samples (from among those with both metadata and \code{metrics}, if given) to be randomly selected.

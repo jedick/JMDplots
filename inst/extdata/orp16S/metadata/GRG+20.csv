@@ -1,5 +1,5 @@
 name,Run,"MG-RAST ID",BioSample,Sample,Type,"ORP (mV)","DO (mM)",pH,"Temperature (°C)"
-"Peña de Hierro",mgm4773102,mgm4773102.3,NA,RT0m,Oxic,628,27,2.42,18.4
+"Peña de Hierro",mgm4773102,mgm4773102.3,NA,RT0m,Oxic,628,0.27,2.42,18.4
 "Peña de Hierro",mgm4773105,mgm4773105.3,NA,RT1.5m,Oxic,630,0.27,2.41,17.6
 "Peña de Hierro",mgm4773101,mgm4773101.3,NA,RT7m,Oxic,651,0.17,2.31,11.6
 "Peña de Hierro",mgm4773103,mgm4773103.3,NA,RT12.5m,Oxic,606,0.06,2.26,10.3

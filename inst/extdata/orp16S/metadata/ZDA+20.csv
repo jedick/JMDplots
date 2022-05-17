@@ -1,4 +1,4 @@
-name,Run,BioSample,sample,Type,"T (°C)","EC (μS/cm)",pH,"ORP (mV)","DO (mg/L)"
+name,Run,BioSample,sample,Type,"T (°C)","EC (μS/cm)",pH,"ORP (mV)","DO (%)"
 "Loa River",ERR2756767,SAMEA4858695,U1W,Water,11.3,1205.7,8.61,264.12,74.5
 "Loa River",ERR2756768,SAMEA4858696,U1S,Sediment,11.3,1205.7,8.61,264.12,74.5
 "Loa River",ERR2756763,SAMEA4858691,U11W,Water,7.5,3256.2,8.16,263.92,60.6
