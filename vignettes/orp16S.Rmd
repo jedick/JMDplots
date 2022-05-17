@@ -108,6 +108,11 @@ kable(orp16S_T2())
 orp16S5()
 ```
 
+## Distinct associations between `r ZC` and Eh7 or O~2~ (Figure 6)
+```{r orp16S6, message = FALSE, results = "hide", out.width='100%', fig.width = 7, fig.height = 6, pngquant = pngquant, dpi = 100}
+orp16S6()
+```
+
 ## Eh-pH diagram (Figure S1)
 ```{r orp16S_S1, message = FALSE, results = "hide", out.width='100%', fig.width = 8, fig.height = 6, pngquant = pngquant}
 orp16S_S1()

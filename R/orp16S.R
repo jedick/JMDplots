@@ -525,15 +525,15 @@ orp16S5 <- function(pdf = FALSE) {
   par(mar = c(4, 4, 1, 1))
   par(mgp = c(2.5, 1, 0))
 
-  # Use Bacteria only 20210913
-  EZlm <- EZlm[EZlm$lineage == "Bacteria", ]
-
-  ## Panel A: Scatterplots and fits for each environment
-
+  ## Panel A: Scatterplots and fits for Bacteria and Archaea in each environment
   par(mar = c(0, 0, 1, 0))
-  eachenv("Bacteria")
+  xlim <- range(EZdat$Eh7)
+  ylim <- range(EZdat$ZC)
+  eedat <- EZdat[EZdat$lineage == "Bacteria", ]
+  eachenv(eedat, xlim = xlim, ylim = ylim, lineage = "Bacteria")
   par(mar = c(1, 0, 0, 0))
-  eachenv("Archaea")
+  eedat <- EZdat[EZdat$lineage == "Archaea", ]
+  eachenv(eedat, xlim = xlim, ylim = ylim, lineage = "Archaea")
   # Add labels
   plot.new()
   text(0.5, -0.5, "Eh7 (mV)", cex = 1.2, xpd = NA)
@@ -545,8 +545,7 @@ orp16S5 <- function(pdf = FALSE) {
   plot.new()
   text(0.3, 0.5, "Archaea", srt = 90, xpd = NA)
 
-  ## Panel D: Scatterplots and fits for Bacteria and Archaea in all environments 20210914
-
+  ## Panel B: Scatterplots and fits for Bacteria and Archaea in all environments 20210914
   # Start plot for Bacteria
   par(mar = c(4, 4, 1, 1))
   plot(c(-500, 650), range(EZdat$ZC), type = "n", xlab = "Eh7 (mV)", ylab = cplab$ZC)
@@ -556,7 +555,7 @@ orp16S5 <- function(pdf = FALSE) {
   nstudy <- length(unique(thisdat$study))
   add.linear(thisdat$Eh7, thisdat$ZC, nstudy)
   # Add points
-  eachenv("Bacteria", add = TRUE, do.linear = FALSE)
+  eachenv(thisdat, add = TRUE, do.linear = FALSE)
   title("Bacteria", font.main = 1)
   label.figure("B", font = 2, cex = 2, xfrac = 0.02, yfrac = 1)
 
@@ -565,7 +564,7 @@ orp16S5 <- function(pdf = FALSE) {
   thisdat <- EZdat[EZdat$lineage == "Archaea", ]
   nstudy <- length(unique(thisdat$study))
   add.linear(thisdat$Eh7, thisdat$ZC, nstudy)
-  eachenv("Archaea", add = TRUE, do.linear = FALSE)
+  eachenv(thisdat, add = TRUE, do.linear = FALSE)
   title("Archaea", font.main = 1)
 
   # Add legend
@@ -739,7 +738,7 @@ orp16S_S2 <- function(pdf = FALSE) {
 ### UNEXPORTED FUNCTIONS ###
 ############################
 
-add.linear <- function(Eh7, ZC, nstudy = NA, pvalue_upper_right = FALSE) {
+add.linear <- function(Eh7, ZC, nstudy = NA, O2 = FALSE) {
   # Plot linear fit and confidence interval 20210920
   text.col <- "black"
   line.col <- "gray62"
@@ -765,7 +764,10 @@ add.linear <- function(Eh7, ZC, nstudy = NA, pvalue_upper_right = FALSE) {
   slope <- slope * 1000
   # Round to fixed number of decimal places
   slope <- formatC(slope, digits = 3, format = "f")
+  # Units for Eh7
   stext <- bquote(.(slope)~V^-1)
+  # Units for O2
+  if(O2) stext <- bquote(.(slope)~L~mu*mol^-1)
   # Also show number of samples
   Ntext <- bquote(italic(N) == .(length(ZC)))
   # Add text to plot
@@ -774,47 +776,43 @@ add.linear <- function(Eh7, ZC, nstudy = NA, pvalue_upper_right = FALSE) {
 
   # Calculate Pearson correlation 20211009
   pearson <- cor.test(Eh7, ZC)
-  # Get p-value stars
+  # Get p-value
   pval <- pearson$p.value
-  stars <- ""
-  if(pval < 1e-2) stars <- "*"
-  if(pval < 1e-5) stars <- "**"
-  if(pval < 1e-20) stars <- "***"
-  if(pval < 1e-30) stars <- "****"
-  # Format correlation coefficient and paste stars
+  # Format correlation coefficient
   rtext <- formatC(pearson$estimate, digits = 2, format = "f")
-  rtext <- paste0(rtext, stars)
   rtext <- bquote(italic(r) == .(rtext))
-  if(pvalue_upper_right) {
-    legend("topright", legend = rtext, bty = "n", text.col = text.col, inset = c(0.02, 0.2))
-  } else {
-    legend("bottomright", legend = rtext, bty = "n", text.col = text.col)
-  }
+  # Format P-value
+  ptext <- formatC(signif(pval, 1))
+  ptext <- bquote(italic(P) == .(ptext))
+  ltext <- c(rtext, ptext)
+  legend("bottomright", legend = ltext, bty = "n", text.col = text.col)
 }
 
 # Scatterplots for all samples in each environment type 20210913
-eachenv <- function(lineage = "Bacteria", add = FALSE, do.linear = TRUE, ienv = c(1, 2, 4, 5, 3, 6, 7), cols = orp16Scol) {
+eachenv <- function(eedat, add = FALSE, do.linear = TRUE, ienv = c(1, 2, 4, 5, 3, 6, 7), cols = orp16Scol,
+  lineage = NULL, xlim = NULL, ylim = NULL, O2 = FALSE) {
+  # Decide whether x variable is Eh7 or O2
+  if(O2) Xvar <- eedat$O2_umol_L else Xvar <- eedat$Eh7
+  eedat <- cbind(eedat, Xvar)
   # Get overall x and y limits
-  xlim <- range(EZdat$Eh7)
-  ylim <- range(EZdat$ZC)
-  # Use Bacteria or Archaea only
-  if(!is.null(lineage)) EZdat <- EZdat[EZdat$lineage == lineage, ]
+  if(is.null(xlim)) xlim <- range(eedat$Xvar)
+  if(is.null(ylim)) ylim <- range(eedat$ZC)
   # Get names of environment types
   envirotypes <- names(envirotype)
   # Loop over environment types
   for(i in ienv) {
     # Start plot
     if(!add) plot(xlim, ylim, type = "n", xlab = "", ylab = "", axes = FALSE)
-    # Get Eh7 and ZC values
-    thisdat <- EZdat[EZdat$envirotype == envirotypes[i], ]
-    Eh7 <- thisdat$Eh7
+    # Get Eh7/O2 and ZC values
+    thisdat <- eedat[eedat$envirotype == envirotypes[i], ]
+    Xvar <- thisdat$Xvar
     ZC <- thisdat$ZC
     if(do.linear) {
       # Include number of studies in legend 20210925
       nstudy <- length(unique(thisdat$study))
-      add.linear(Eh7, ZC, nstudy)
+      add.linear(Xvar, ZC, nstudy)
     }
-    if(!add) {
+    if(!isTRUE(add)) {
       # Add plot axes and title
       if(lineage == "Archaea") {
         axis(1, labels = NA)
@@ -827,7 +825,7 @@ eachenv <- function(lineage = "Bacteria", add = FALSE, do.linear = TRUE, ienv = 
       if(lineage == "Bacteria") title(envirotypes[i], font.main = 1, cex.main = 1)
     }
     # Plot points
-    points(Eh7, ZC, pch = 19, cex = 0.2, col = cols[i])
+    points(Xvar, ZC, pch = 19, cex = 0.2, col = cols[i])
   }
 }
 
@@ -986,7 +984,7 @@ getmdat_orp16S <- function(study, metrics = NULL, dropNA = TRUE, size = NULL, qu
         logK[not_NA] <- subcrt(c("O2", "O2"), c("gas", "aq"), c(-1, 1), T = T[not_NA])$out$logK
         # Calculate saturated oxygen concentration from logK = logaO2(aq) - logfO2(gas)
         # Assume fugacity is partial pressure of oxygen in sea-level atmosphere
-        logaO2 <- logK + log10(0.21)
+        logaO2 <- logK + log10(0.21 * 1.01325)
         # Remove logarithm and convert mol to umol
         O2_umol_L_sat <- 10^logaO2 * 1e6
         # Multiply by percent to get concentration
@@ -1210,3 +1208,56 @@ orp16S_S1 <- function(pdf = FALSE) {
   if(pdf) dev.off()
 }
 
+# Compare regressions with Eh and O2 20220517
+orp16S6 <- function(pdf = FALSE) {
+
+  if(pdf) pdf("Figure6.pdf", width = 7, height = 6)
+  mat <- matrix(c(1,1,3,3, 2,2,4,4, 0,5,5,0), ncol = 3)
+  layout(mat, widths = c(2, 2, 1))
+  par(mar = c(4, 4, 2.5, 1))
+
+  # Use only samples with non-NA O2
+  thisdat <- EZdat[!is.na(EZdat$O2_umol_L), ] 
+
+  ## Bacteria only
+  bacdat <- thisdat[thisdat$lineage == "Bacteria", ]
+  # Start ZC-Eh7 plot
+  plot(c(-500, 650), range(bacdat$ZC), type = "n", xlab = "Eh7 (mV)", ylab = cplab$ZC)
+  # Add linear fit; include number of studies in legend 20210925
+  nstudy <- length(unique(bacdat$study))
+  add.linear(bacdat$Eh7, bacdat$ZC, nstudy)
+  # Add points
+  eachenv(bacdat, add = TRUE, do.linear = FALSE)
+  label.figure("A", cex = 1.5, font = 2)
+  # Start ZC-O2 plot
+  plot(c(0, 750), range(bacdat$ZC), type = "n", xlab = quote(O[2]~"("*mu*"mol L"^{-1}*")"), ylab = cplab$ZC)
+  add.linear(bacdat$O2_umol_L, bacdat$ZC, nstudy, O2 = TRUE)
+  eachenv(bacdat, add = TRUE, do.linear = FALSE, O2 = TRUE)
+  mtext("Bacteria", adj = -0.42, line = 1)
+
+  ## Archaea only
+  arcdat <- thisdat[thisdat$lineage == "Archaea", ]
+  # Start ZC-Eh7 plot
+  plot(c(-500, 650), range(arcdat$ZC), type = "n", xlab = "Eh7 (mV)", ylab = cplab$ZC)
+  # Add linear fit; include number of studies in legend 20210925
+  nstudy <- length(unique(arcdat$study))
+  add.linear(arcdat$Eh7, arcdat$ZC, nstudy)
+  # Add points
+  eachenv(arcdat, add = TRUE, do.linear = FALSE)
+  label.figure("B", cex = 1.5, font = 2)
+  # Start ZC-O2 plot
+  plot(c(0, 750), range(arcdat$ZC), type = "n", xlab = quote(O[2]~"("*mu*"mol L"^{-1}*")"), ylab = cplab$ZC)
+  add.linear(arcdat$O2_umol_L, arcdat$ZC, nstudy, O2 = TRUE)
+  eachenv(arcdat, add = TRUE, do.linear = FALSE, O2 = TRUE)
+  mtext("Archaea", adj = -0.42, line = 1)
+
+  # Add legend
+  par(mar = c(4, 1, 1, 1))
+  plot.new()
+  ienv = c(1, 2, 4, 5, 3, 6, 7)
+  ltext <- names(envirotype)[ienv]
+  legend("left", ltext, pch = 19, col = orp16Scol[ienv], bty = "n")
+
+  if(pdf) dev.off()
+
+}
