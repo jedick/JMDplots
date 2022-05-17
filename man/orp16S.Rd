@@ -6,7 +6,6 @@
 \alias{orp16S3}
 \alias{orp16S4}
 \alias{orp16S5}
-\alias{orp16S6}
 \alias{orp16S_S1}
 \alias{orp16S_S2}
 \alias{orp16S_T2}
@@ -24,7 +23,6 @@ Plots from the paper by Dick and Meng (2021).
   orp16S3(pdf = FALSE)
   orp16S4(pdf = FALSE)
   orp16S5(pdf = FALSE)
-  orp16S6(pdf = FALSE)
   orp16S_S1(pdf = FALSE)
   orp16S_S2(pdf = FALSE)
   orp16S_T2()
@@ -51,9 +49,8 @@ This table gives a brief description of each plotting function.
   \code{orp16S1} \tab Thermodynamic predictive framework \cr
   \code{orp16S2} \tab Chemical and geobiochemical depth profiles in Winogradsky columns \cr
   \code{orp16S3} \tab Sample locations on world map \cr
-  \code{orp16S4} \tab Analysis of selected datasets for each environment type \cr
-  \code{orp16S5} \tab Local and global analysis of \ZC and Eh7 data \cr
-  \code{orp16S6} \tab Distinctions in carbon oxidation state estimated for different hot springs, and global fits for all environments. \cr
+  \code{orp16S4} \tab Linear regressions between \ZC and Eh7 at local scales \cr
+  \code{orp16S5} \tab Linear regressions between \ZC and Eh7 at a global scale \cr
   \code{orp16S_S1} \tab Eh-pH diagram (outline from Baas Becking et al., 1960) \cr
   \code{orp16S_S2} \tab \ZC-Eh scatterplots for each dataset \cr
 }

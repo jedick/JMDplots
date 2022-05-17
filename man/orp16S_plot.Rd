@@ -32,7 +32,7 @@ Make plots of \ZC vs Eh7 and \ZC vs abundance of Most Abundant Mapped Taxon.
   \item{col.line}{line color (linear fit)}
   \item{lwd}{line width}
   \item{cex}{character expansion}
-  \item{title.line}{numeric, placement of title}
+  \item{title.line}{numeric, placement of title (use NULL to omit title)}
   \item{dxlim}{numeric, adjustment to x-axis limits}
   \item{dylim}{numeric, adjustment to y-axis limits}
   \item{size}{numeric, number of randomly selected samples (see \code{\link{getmdat_orp16S}})}
@@ -44,7 +44,6 @@ Make plots of \ZC vs Eh7 and \ZC vs abundance of Most Abundant Mapped Taxon.
 By default, \ZC is calculated for estimated proteomes using all bacterial and archaeal sequences.
 Set \code{lineage} to \samp{Bacteria} or \samp{Archaea} to make one plot for one of the domains, or to \samp{two} to make two plots for both domains.
 The latter option is used in \code{\link{orp16S_S1}} for the Figure S1 in the paper.
-
 
 \code{plotMA} plots \ZC vs the percent abundance of most abundant mapped taxon (MAMT).
 The plot title shows the percentages of MAMT and MAUT (most abundant unmapped taxon).

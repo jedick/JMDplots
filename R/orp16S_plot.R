@@ -104,18 +104,22 @@ plotEZ <- function(study, lineage = NULL, mincount = 100, pch = NULL, col = NULL
     xlim <- range(EZdat$Eh7) + dxlim
     ylim <- range(EZdat$ZC) + dylim
     # Start new plot
-    plot(EZdat$Eh7, EZdat$ZC, xlab = "Eh7 (mV)", ylab = cplab$ZC, type = "n", xlim = xlim, ylim = ylim)
-    # Take off suffix after underscore 20210914
-    root <- strsplit(study, "_")[[1]][1]
-    suffix <- strsplit(study, "_")[[1]][2]
-    iname <- match("name", tolower(colnames(metadata)))
-    main <- paste0(na.omit(metadata[, iname])[1], " (", root, ")")
-    title(main = main, font.main = 1, line = title.line)
-    # Include suffix in subtite 20210914
-    if(!is.na(suffix)) sub <- paste(sub, "-", suffix)
-    # Add lineage 20210913
-    if(!is.null(lineage)) sub <- paste(sub, "-", lineage)
-    title(main = sub, line = 0.5, cex.main = 1)
+    plot(EZdat$Eh7, EZdat$ZC, xlab = "", ylab = cplab$ZC, type = "n", xlim = xlim, ylim = ylim)
+    # Draw x-axis label with mtext to avoid getting cut off by small margin 20220517
+    mtext("Eh7 (mV)", side = 1, line = par("mgp")[1], cex = par("cex"))
+    if(!is.null(title.line)) {
+      # Take off suffix after underscore 20210914
+      root <- strsplit(study, "_")[[1]][1]
+      suffix <- strsplit(study, "_")[[1]][2]
+      iname <- match("name", tolower(colnames(metadata)))
+      main <- paste0(na.omit(metadata[, iname])[1], " (", root, ")")
+      title(main = main, font.main = 1, line = title.line)
+      # Include suffix in subtite 20210914
+      if(!is.na(suffix)) sub <- paste(sub, "-", suffix)
+      # Add lineage 20210913
+      if(!is.null(lineage)) sub <- paste(sub, "-", lineage)
+      title(main = sub, line = 0.5, cex.main = 1)
+    }
   }
   # Add linear fit
   if("lm" %in% show) {

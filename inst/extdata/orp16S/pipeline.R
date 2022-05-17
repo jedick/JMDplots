@@ -1,4 +1,4 @@
-# chem16S/pipeline.R
+# orp16S/pipeline.R
 # Merge and filter 16S sequences from SRA, subsample, find chimeras, and run RDP Classifier
 
 # 20200909 Initial version by Jeffrey M. Dick
@@ -18,28 +18,33 @@
 
 ## USAGE
 
-# First, make sure the working directory is clean (especially no *.fa files)
+# Source THIS file. NOTE: first change 'study' (defined below),
+# which affects pipeline settings and location of processed files
+# > source("pipeline.R") 
+
+# Make sure the working directory is clean (especially no *.fa files)
 # To filter one file (generates .fa files in workdir for subsampling)
-# filter("SRR2059382")
+# > filter("SRR2059382")
 
 # To filter multiple files:
-# RUNID <- c("SRR2059381", "SRR2059380", "SRR2059379")
-# lapply(RUNID, filter)
+# > RUNID <- c("SRR2059381", "SRR2059380", "SRR2059379")
+# > lapply(RUNID, filter)
 
 # To subsample and remove chimeras from the filtered files:
-# subsample()
-# findchimeras()
+#  - First make sure directories FASTAdir and RDPdir (defined below) exist
+# > subsample()
+# > findchimeras()
 
 # To run RDP Classifier after chimera removal:
-# classify(RUNID)
+# > classify(RUNID)
 # To combine output of RDP Classifier into one file
-# -- result is saved in RDP/<study>.tab in the current directory
-# mkRDP(study, RUNID)
+#   - Result is saved in RDP/<study>.tab below the current directory
+# > mkRDP(study, RUNID)
 
 ## STUDY SETTINGS
 
 # Change the following line to setup the pipeline for one study
-study <- "PCL+18"
+study <- "GSBT20"
 # Settings for all studies are stored here
 file <- tempfile()
 # Write spaces here (but don't save them) to make this easier to read
@@ -47,8 +52,12 @@ writeLines(con = file, text = gsub(" ", "", c(
   # For 454 experiments, set forwardonly to NA
   "study, forwardonly, trunclen",
 
-  ## For orp16S paper 20210922
+  ## Datasets processed for geo16S paper and also used in orp16S paper
+  "SVH+19, NA, NA",      # PRJNA423140  10.1111/gbi.12316
+  "BCA+21, FALSE, 450",  # PRJNA395513  10.1111/1462-2920.14909
+  "HXZ+20, FALSE, 440",  # PRJNA503500  10.1038/s41598-020-62411-2
 
+  ## For orp16S paper 20210922
   "MLL+19, TRUE, 250",
   "RSJ+21, FALSE, 290",
   "RMB+17, FALSE, 250",
@@ -72,7 +81,6 @@ writeLines(con = file, text = gsub(" ", "", c(
   "PSG+20, FALSE, 250",
   "KSR+21, FALSE, 440",
   "ZCZ+21, FALSE, 450",
-  "LLZ+20, TRUE, 150",
   "SKP+21, FALSE, 200",
   "ZZL+21, FALSE, 450",
   "PBU+20, FALSE, 400",
@@ -95,6 +103,7 @@ writeLines(con = file, text = gsub(" ", "", c(
   "SBW+17, TRUE, 280",
   "KLM+16, NA, NA",
   "LMBA21, TRUE, 280",
+  "TCN+17, TRUE, 450",
   "ZDA+20, TRUE, 450",
   "ZZZ+18, TRUE, 240",
   "BSPD17, FALSE, 400",
@@ -124,7 +133,36 @@ writeLines(con = file, text = gsub(" ", "", c(
   "YHK+19, TRUE, 250",
   "WHLH21, TRUE, 440",
   "GRG+20, NA, NA",
-  "PCL+18, TRUE, 250"
+  "PCL+18, TRUE, 250",
+
+  # More orp16S 20220504
+  "SPA+21, FALSE, 440",
+  "GSBT20, FALSE, 400",
+  "IBK+22, TRUE, 440",
+  "PSV+22, FALSE, 400",
+  "GXS+22, NA, NA",
+  "CSW+22, TRUE, 240",
+  "HSF+22, FALSE, 440",
+  "RBM+21, TRUE, 150",
+  "HCW+22, TRUE, 240",
+  "BKR+22, TRUE, 400",
+  "WKP+22, FALSE, 450",
+  "CKB+22, FALSE, 290",
+  "ZWH+22, FALSE, 440",
+  "ZLH+22, FALSE, 450",
+  "WHLH21a, FALSE, 450",
+  "CYG+22, TRUE, 360",
+  "LRL+22, FALSE, 400",
+  "SPH+21, FALSE, 250",
+  "PSB+21, FALSE, 250",
+  "RKSK22, FALSE, 295"
+
+  # For SMS+12 (Bison Pool):
+  #  - FASTA files were downloaded from MG-RAST (mgp100292)
+  #  - Start processing with classify()
+  # For RSS+18 (Lake Hazen):
+  #  - FASTA files for each site were created with split_libraries.py (from QIIME) and seqtk subseq 20220511
+  #  - Start processing with subsample()
 
 )))
 
@@ -344,7 +382,7 @@ subsample <- function(do.singletons = TRUE) {
 
 # Find chimeras in combined FASTA file, then split result into samples 20200913
 # (Saves time by masking and creating k-mer index only once)
-findchimeras <- function() {
+findchimeras <- function(threads = 8) {
   message("=========================")
   message(paste0("Finding chimeras [", study, "]"))
   message("=========================")
@@ -357,7 +395,7 @@ findchimeras <- function() {
   system(cmd)
 
   # Identify chimeras
-  print(cmd <- paste("vsearch -uchime_ref combined.fasta -nonchimeras nonchimeras.fasta -db", refdb))
+  print(cmd <- paste("vsearch -threads", threads, "-uchime_ref combined.fasta -nonchimeras nonchimeras.fasta -db", refdb))
   system(cmd)
 
   # Split result into one file for each sample
@@ -375,40 +413,52 @@ findchimeras <- function() {
 }
 
 # Run RDP Classifier on one or multiple files 20200910
-classify <- function(RUNID, conf = 0.8) {
+# Use GNU parallel 20220509
+classify <- function(RUNID, conf = 0.8, jobs = 4) {
+
   # Make sure RDP output directory exists 20200915
   if(!dir.exists(RDPdir)) stop(paste("directory", RDPdir, "does not exist"))
   # Force evaluation of RUNID before changing the directory
   allRUNID <- RUNID
-  # Change to working directory
-  olddir <- setwd(workdir)
+
+  # Change to RDP directory
+  olddir <- setwd(RDPdir)
   on.exit(setwd(olddir))
 
-  # Loop over all RUNIDs
+  # Loop over RUNIDs
   n <- length(allRUNID)
   for(i in 1:n) {
     thisRUNID <- allRUNID[i]
-    message("=======================================")
-    message(paste0("Classifying ", thisRUNID, " [", study, "] (", i, "/", n, ")"))
-    message("=======================================")
-
-    # Input FASTA file
-    FASTAfile <- file.path(FASTAdir, paste0(thisRUNID, ".fasta"))
-
+    # Path to the FASTA file
+    FASTAfile <- file.path("../fasta", paste0(thisRUNID, ".fasta"))
     # Copy FASTA file to here without .fasta suffix (so it doesn't get into sample name)
     file.copy(FASTAfile, thisRUNID, overwrite = TRUE)
-    # Run classifier with -c (confidence score threshold) 20201007
-    print(cmd <- paste0("java -jar ", RDPjar, " classify -c ", conf, " -o ", thisRUNID, ".tab -h ", thisRUNID, ".txt ", thisRUNID))
-    system(cmd)
-
-    # Copy results (assignment count for each taxon) to output directories
-    results <- paste0(thisRUNID, ".txt")
-    resfile <- file.path(RDPdir, paste0(thisRUNID, ".txt"))
-    file.copy(results, resfile, overwrite = TRUE)
-
-    # Clean up
-    file.remove(Sys.glob(paste0("*", thisRUNID, "*")))
   }
+
+  # Write input filenames to file
+  writeLines(allRUNID, "fastafiles")
+  # Write output (.txt and .tab) filenames to files
+  txtfiles <- paste0(RUNID, ".txt")
+  writeLines(txtfiles, "txtfiles")
+  tabfiles <- paste0(RUNID, ".tab")
+  writeLines(tabfiles, "tabfiles")
+
+  cmd <- paste("parallel --link --jobs", jobs, "java -jar /opt/rdp_classifier_2.13/dist/classifier.jar classify -c 0.8 -h {3} -o {2} {1} :::: fastafiles tabfiles txtfiles")
+  message("=======================================")
+  message(paste0("Classifying ", n, " runs with ", jobs, " jobs [", study, "]"))
+  message("=======================================")
+
+  system(cmd)
+
+  # Clean up
+  file.remove(c("fastafiles", "tabfiles", "txtfiles"))
+  file.remove(Sys.glob(paste0("cnadjusted_*")))
+  file.remove(Sys.glob(paste0("*.tab")))
+  for(i in 1:n) {
+    thisRUNID <- allRUNID[i]
+    file.remove(thisRUNID)
+  }
+
 }
 
 # Combine output files of RDP Classifier into a single CSV file for one study 20200903
