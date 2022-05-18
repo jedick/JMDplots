@@ -71,7 +71,7 @@ library(JMDplots)
 ```
 
 ## Thermodynamic predictive framework (Figure 1)
-```{r orp16S1, message = FALSE, results = "hide", out.width='80%', fig.align='center', fig.width = 7, fig.height = 5, pngquant = pngquant}
+```{r orp16S1, message = FALSE, results = "hide", out.width='80%', fig.align='center', fig.width = 6, fig.height = 4, pngquant = pngquant}
 orp16S1()
 ```
 

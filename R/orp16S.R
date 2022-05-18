@@ -11,7 +11,7 @@ envirotype <- list(
                     "SRM+21", "ZCZ+21", "CSW+22", "GXS+22"),
   # NOTE: Keep Hot Spring in 4th location to get red color 20210904
   "Hot Spring" = c("SMS+12", "PCL+18_Acidic", "PCL+18_Alkaline", "BMJ+19", "LMG+20", "GWSS21", "GWS+20", "PBU+20", "MWY+21"),
-  "Alkaline Spring" = c("SBP+20", "RMB+17", "CTS+17", "SPH+21", "KSR+21", "PSB+21", "NTB+21"),
+  "Hyperalkaline" = c("SBP+20", "RMB+17", "CTS+17", "SPH+21", "KSR+21", "PSB+21", "NTB+21"),
   "Sediment" = c("JHL+12", "GFE+16", "ZML+17", "BYB+17", "BSPD17", "HDZ+19", "TCN+17", "WHLH21", "SCM+18", "RSS+18",
                  "CLS+19", "ZDA+20", "VMB+19", "WHC+19", "HSF+19", "RBM+21", "ZHZ+19", "MCS+21", "LMBA21_2017", "HSF+22",
                  "ZZLL21", "BKR+22", "WFB+21", "HCW+22"),
@@ -33,7 +33,7 @@ EZlm <- read.csv(system.file("extdata/orp16S/EZlm.csv", package = "JMDplots"))
 # Figure 1: Thermodynamic predictive framework 20210830
 orp16S1 <- function(pdf = FALSE) {
 
-  if(pdf) pdf("Figure1.pdf", width = 7, height = 5)
+  if(pdf) pdf("Figure1.pdf", width = 6, height = 4)
 
   # Define colors; adapted from
   # https://cdn.elifesciences.org/author-guide/tables-colour.pdf
@@ -49,81 +49,66 @@ orp16S1 <- function(pdf = FALSE) {
   Gray <- "#E6E6E6"
 
   # Setup plot
-  par(mar = c(1, 1, 2, 1))
+  par(mar = c(0, 0, 0, 0))
   plot(c(5, 95), c(1, 80), type = "n", axes = FALSE, xlab = "", ylab = "")
   # Uncomment this as a guide for making the 'grid' one 20210927
   #box(lwd = 2)
-  grid.roundrect(0.5, 0.48, 0.94, 0.88, gp = gpar(fill = Gray))
+  grid.roundrect(0.5, 0.5, 0.99, 0.99, gp = gpar(fill = "azure2"))
 
-  # Plot bottom box and text for correlative framework
-  # Uncomment this as a guide for making the 'grid' one 20211002
-  #rect(5, 2, 95, 40, col = Purple80, border = Purple, lty = 2)
-  grid.roundrect(0.5, 0.28, 0.88, 0.4, gp = gpar(col = Purple, fill = Purple80, lty = 2))
-  text(50, 32, "Conventional\nCorrelative Framework", col = PurpleText, cex = 1.2)
+  dy <- -2.5
 
   # Plot lines to go behind shapes
-  lines(c(20, 50), c(20, 60))
-  lines(c(20, 50), c(60, 60))
-  lines(c(50, 80), c(60, 60))
+  lines(c(20, 50), c(20, 60)+dy)
+  lines(c(20, 50), c(60, 60)+dy)
+  lines(c(50, 80), c(60, 60)+dy)
   # Add arrows along lines 20210927
-  arrows(20, 20, 20*0.35 + 50*0.65, 20*0.35 + 60*0.65, length = 0.1)
-  arrows(20, 60, 37, 60, length = 0.1)
-  arrows(50, 60, 66, 60, length = 0.1)
+  arrows(20, 20+dy, 20*0.35 + 50*0.65, (20*0.35 + 60*0.65)+dy, length = 0.1)
+  arrows(20, 60+dy, 37, 60+dy, length = 0.1)
+  arrows(50, 60+dy, 66, 60+dy, length = 0.1)
 
   # Plot shapes and text for biological methods
-  text(20, 79, "Biological Methods", col = RedText, font = 2)
-  for(bg in c("white", Red80)) points(20, 60, pch = 21, cex = 18, bg = bg)
-  text(20, 66, "RefSeq", font = 2, col = RedText)
-  text(20, 57, "Reference\nproteomes\nof taxa")
-  for(bg in c("white", Red80)) points(20, 20, pch = 21, cex = 18, bg = bg)
-  text(20, 25, "16S + RDP", font = 2, col = RedText)
-  text(20, 18, "Taxonomic\nabundances")
+  text(20, 79+dy, "Biological Methods", col = RedText, font = 2)
+  for(bg in c("white", Red80)) points(20, 60+dy, pch = 21, cex = 18, bg = bg)
+  text(20, 66+dy, "RefSeq", font = 2, col = RedText)
+  text(20, 57+dy, "Reference\nproteomes\nof taxa")
+  for(bg in c("white", Red80)) points(20, 20+dy, pch = 21, cex = 18, bg = bg)
+  text(20, 25+dy, "16S + RDP", font = 2, col = RedText)
+  text(20, 18+dy, "Taxonomic\nabundances")
 
   # Plot shapes and text for chemical methods
-  text(80, 79, "Chemical Methods", col = BlueText, font = 2)
-  for(bg in c("white", Blue80)) points(80, 60, pch = 22, cex = 18, bg = bg)
-  text(80, 68, quote(bolditalic(Z)[bold(C)]), col = BlueText, cex = 1.2)
-  text(80, 58.5, "Carbon\noxidation\nstate")
+  text(80, 79+dy, "Chemical Methods", col = BlueText, font = 2)
+  for(bg in c("white", Blue80)) points(80, 60+dy, pch = 22, cex = 18, bg = bg)
+  text(80, 68+dy, quote(bolditalic(Z)[bold(C)]), col = BlueText, cex = 1.2)
+  text(80, 58.5+dy, "Carbon\noxidation\nstate")
   # Show multiple physicochemical variables 20210927
   # Function to draw rectangle at x,y with width and height w,h
   myrect <- function(x, y, w, h, ...) rect(x - w/2, y - h/2, x + w/2, y + h/2, ...)
-  # T, Eh, pH
-  for(col in c("white", Blue80)) myrect(73, 28, 5, 6, col = col)
-  text(73, 28, "T", col = BlueText)
-  for(col in c("white", Blue80)) myrect(80, 30, 7, 7, col = col, lwd = 2)
-  text(80, 30, "Eh", font = 2, cex = 1.2, col = BlueText)
-  for(col in c("white", Blue80)) myrect(87.5, 28, 6, 6, col = col)
-  text(87.5, 28, "pH", col = BlueText)
-  # Salinity, Metals
-  for(col in c("white", Blue80)) myrect(75, 20, 11, 6, col = col)
-  text(75, 20, "Salinity", col = BlueText)
-  for(col in c("white", Blue80)) myrect(86.5, 20, 10, 6, col = col)
-  text(86.5, 20, "Metals", col = BlueText)
-  # O2, CO2, SO4
-  for(col in c("white", Blue80)) myrect(72, 12, 5, 6, col = col)
-  text(72, 12, quote(O[2]), col = BlueText)
-  for(col in c("white", Blue80)) myrect(79, 12, 7, 6, col = col)
-  text(79, 12, quote(CO[2]), col = BlueText)
-  for(col in c("white", Blue80)) myrect(87.5, 12, 8, 6, col = col)
-  text(87.5, 12, quote(SO[4]^"2-"), col = BlueText)
+  # T, Eh, pH, O2
+  for(col in c("white", Blue80)) myrect(73, 16+dy, 5, 6, col = col)
+  text(73, 16+dy, "T", col = BlueText)
+  for(col in c("white", Blue80)) myrect(80, 20+dy, 7, 7, col = col)
+  text(80, 20+dy, "Eh", font = 2, cex = 1.2, col = BlueText)
+  for(col in c("white", Blue80)) myrect(87.5, 16+dy, 6, 6, col = col)
+  text(87.5, 16+dy, "pH", col = BlueText)
+  for(col in c("white", Blue80)) myrect(80, 11+dy, 5, 6, col = col)
+  text(80, 11+dy, quote(O[2]), col = BlueText)
 
   # Plot inner rectangle and text
   third <- 100/3
   # Uncomment this to make the original rectangle (as a guide for the 'grid' one)
-  #for(bg in c("white", Orange80)) rect(1.2*third, 50, 1.8*third, 70, col = bg)
+  #for(bg in c("white", Orange80)) rect(1.2*third, 50+dy, 1.8*third, 70+dy, col = bg)
   # Use this to get rounded corners 20210927
-  for(fill in c("white", Orange80)) grid.roundrect(0.5, 0.685, 0.19, 0.21, gp = gpar(fill = fill))
-  text(50, 67, quote(bold(C[bolditalic(c)]*H[bolditalic(h)]*N[bolditalic(n)]*O[bolditalic(o)]*S[bolditalic(s)])), col = OrangeText)
-  text(50, 58, "Estimated\nCommunity\nProteomes")
+  for(fill in c("white", Orange80)) grid.roundrect(0.5, 0.7, 0.205, 0.23, gp = gpar(fill = fill))
+  text(50, 67+dy, quote(bold(C[bolditalic(c)]*H[bolditalic(h)]*N[bolditalic(n)]*O[bolditalic(o)]*S[bolditalic(s)])), col = OrangeText)
+  text(50, 58+dy, "Estimated\nCommunity\nProteomes")
 
   # Plot arrows and text labels
-  arrows(1*third - 1, 20, 2*third + 1, 20, code = 3, lty = 2, length = 0.1)
-  text(50, 20, "Multivariate\ncorrelations")
-  arrows(80, 35, 80, 51, code = 3, lwd = 1.5, length = 0.1)
-  text(80, 44, "Univariate  prediction", font = 2)
-
-  # Add title
-  title("Thermodynamic Predictive Framework", font.main = 1)
+  arrows(1*third - 1, 20+dy, 1*third + 6, 20+dy, code = 1, lty = 1, length = 0.1)
+  arrows(2*third - 4, 16+dy, 2*third + 3, 16+dy, code = 2, lty = 1, length = 0.1)
+  text(50, 18+dy, "Community and\nenvironmental data")
+  arrows(80, 25+dy, 80, 45+dy, code = 3, lwd = 1.5, length = 0.1, col = BlueText)
+  text(46, 42+dy, "Thermodynamic prediction", font = 2, cex = 0.9, adj = c(0, 1))
+  text(49, 42+dy, "\nCarbon oxidation state\nis positively correlated\nwith redox potential", font = 3, cex = 0.9, adj = c(0, 1))
 
   if(pdf) dev.off()
 
@@ -161,7 +146,7 @@ orp16S2 <- function(pdf = FALSE) {
   layers <- c("12 cm", "8 cm", "4 cm", "SWI", "Top")
   ZC <- lapply(layers, function(layer) metrics$ZC[mdat$metadata$layer == layer])
   # Make boxplots
-  boxplot(ZC, horizontal = TRUE, show.names = FALSE, xlab = axis.label("ZC"), ylim = c(-0.18, -0.145), yaxs = "i")
+  boxplot(ZC, horizontal = TRUE, show.names = FALSE, xlab = axis.label("ZC"), ylim = c(-0.18, -0.145), yaxs = "i", col = "azure3")
   axis(2, 1:5, labels = layers, las = 1)
   # Add sample sizes
   par(xpd = NA)
@@ -228,7 +213,7 @@ orp16S3 <- function(pdf = FALSE) {
     "GWS+20, 30.12, 101.94", # SAMN13430433
     "PBU+20, 54.4395, 160.144194", # SAMN14538724
     # MWY+21 see below
-    ## Alkaline Spring
+    ## Hyperalkaline
     "SBP+20, 38.862, -122.414", # SAMN03850954
     "RMB+17, 22.9052, 58.6606", # SAMN05981641
     "CTS+17, 10.94323, -85.63485", # SAMN06226041
@@ -306,8 +291,8 @@ orp16S3 <- function(pdf = FALSE) {
   par(mar = c(2, 0.5, 0, 0.5))
   # We don't need data(coastlineWorld) ... it's the default map 20211003
   # A color between azure2 and azure3 20220516
-  col <- rgb(t((col2rgb("azure2") + col2rgb("azure3")) / 2), maxColorValue = 255)
-  mapPlot(col = col, projection = "+proj=wintri", border = "white", drawBox = FALSE)
+  azure23 <- rgb(t((col2rgb("azure2") + col2rgb("azure3")) / 2), maxColorValue = 255)
+  mapPlot(col = azure23, projection = "+proj=wintri", border = "white", drawBox = FALSE)
 
   # Add Great Lakes
   # https://www.sciencebase.gov/catalog/item/530f8a0ee4b0e7e46bd300dd
@@ -637,7 +622,7 @@ orp16S_S2 <- function(pdf = FALSE) {
     plotEZ("PBU+20", "Bacteria", groupby = "Type", groups = c("Cauldron", "Sampling Pit", "Spring", "Geyser Valley (Control)"), legend.x = "bottomright"),
     plotEZ("MWY+21", "two", groupby = "Location", groups = c("Quseyongba", "Moluojiang", "Daggyai", "Quzhuomu"), legend.x = "bottomright"),
 
-    message("\nAlkaline Spring"),
+    message("\nHyperalkaline"),
     plotEZ("SBP+20", "Bacteria", groupby = "pH Group", groups = c("< 10", "> 10")),
     plotEZ("RMB+17", "two", groupby = "pH Group", groups = c("< 10", "> 10")),
     plotEZ("CTS+17", "two", groupby = "Type", groups = c("River", "Well", "Spring"), legend.x = "bottomleft"),
