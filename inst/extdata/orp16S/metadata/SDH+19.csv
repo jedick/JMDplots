@@ -1,7 +1,7 @@
-name,Run,BioSample,SampleName,Type,"Temperature (°C)",pH,"ORP (mV)"
-"Pearl River Delta",SRR6075081,SAMN07692244,Q132,Freshwater,24.5,7.26,-30.6
-"Pearl River Delta",SRR6075082,SAMN07692243,Q130,Freshwater,25.8,6.88,71.2
-"Pearl River Delta",SRR6075055,SAMN07692236,Q143,Brackish,24.95,6.97,29.1
-"Pearl River Delta",SRR6075056,SAMN07692238,Q144,Brackish,25.1,7.09,32.5
-"Pearl River Delta",SRR6075054,SAMN07692231,Q146,Saltwater,25.1,7.04,-100.7
-"Pearl River Delta",SRR6075051,SAMN07692228,Q149,Saltwater,26,7.68,-220.1
+name,Run,BioSample,SampleName,Type,"Temperature (°C)",pH,"ORP (mV)","DO (%)"
+"Pearl River Delta",SRR6075081,SAMN07692244,Q132,Freshwater,24.5,7.26,-30.6,60.8
+"Pearl River Delta",SRR6075082,SAMN07692243,Q130,Freshwater,25.8,6.88,71.2,28.5
+"Pearl River Delta",SRR6075055,SAMN07692236,Q143,Brackish,24.95,6.97,29.1,49
+"Pearl River Delta",SRR6075056,SAMN07692238,Q144,Brackish,25.1,7.09,32.5,55.2
+"Pearl River Delta",SRR6075054,SAMN07692231,Q146,Saltwater,25.1,7.04,-100.7,28.8
+"Pearl River Delta",SRR6075051,SAMN07692228,Q149,Saltwater,26,7.68,-220.1,1.4

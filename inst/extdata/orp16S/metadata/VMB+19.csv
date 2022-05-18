@@ -1,7 +1,7 @@
-name,Run,LibraryName,BioSample,SampleName,Type,"Redox potential (Eh)"
-"Cock Soda Lake",SRR7083935,CS-Br16-DNA-amplicon,SAMN08987116,CS-Br16,Water,238
-"Cock Soda Lake",SRR7083916,CS-Sed16-5cm-DNA-amplicon,SAMN08987119,CS-Sed16-5cm,Sediment,-211
-"Cock Soda Lake",SRR7083921,CS-Sed16-5_10cm-DNA-amplicon,SAMN08987120,CS-Sed16-5_10cm,Sediment,-262
-"Cock Soda Lake",SRR7083922,CS-Sed16-10_15cm-DNA-amplicon,SAMN08987121,CS-Sed16-10_15cm,Sediment,-309
-"Cock Soda Lake",SRR7083919,CS-Sed16-15_20cm-DNA-amplicon,SAMN08987122,CS-Sed16-15_20cm,Sediment,-328
-"Cock Soda Lake",SRR7083920,CS-Sed16-20_25cm-DNA-amplicon,SAMN08987123,CS-Sed16-20_25cm,Sediment,-344
+name,Run,LibraryName,BioSample,SampleName,Type,"Redox potential (Eh)","O2 (%)"
+"Cock Soda Lake",SRR7083935,CS-Br16-DNA-amplicon,SAMN08987116,CS-Br16,Water,238,80
+"Cock Soda Lake",SRR7083916,CS-Sed16-5cm-DNA-amplicon,SAMN08987119,CS-Sed16-5cm,Sediment,-211,0
+"Cock Soda Lake",SRR7083921,CS-Sed16-5_10cm-DNA-amplicon,SAMN08987120,CS-Sed16-5_10cm,Sediment,-262,0
+"Cock Soda Lake",SRR7083922,CS-Sed16-10_15cm-DNA-amplicon,SAMN08987121,CS-Sed16-10_15cm,Sediment,-309,0
+"Cock Soda Lake",SRR7083919,CS-Sed16-15_20cm-DNA-amplicon,SAMN08987122,CS-Sed16-15_20cm,Sediment,-328,0
+"Cock Soda Lake",SRR7083920,CS-Sed16-20_25cm-DNA-amplicon,SAMN08987123,CS-Sed16-20_25cm,Sediment,-344,0

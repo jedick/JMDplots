@@ -1,103 +1,103 @@
-name,Run,BioSample,SampleName,DATE,Cover,"Cond (µS/cm)","Temp (°C)",pH,"ORP (mV)"
-"Keweenaw Waterway",SRR7787953,SAMN09979989,Nov2rep2,Nov2,"Ice Free",74.3,8.9,8.02,177.4
-"Keweenaw Waterway",SRR7788208,SAMN09979992,Nov3rep2,Nov3,"Ice Free",73.3,8.8,8,246.1
-"Keweenaw Waterway",SRR7788204,SAMN09979996,Nov4rep3,Nov4,"Ice Free",75.7,9.3,8.05,222.6
-"Keweenaw Waterway",SRR7788215,SAMN09979999,Nov5rep3,Nov5,"Ice Free",76.8,9.6,8.23,209.6
-"Keweenaw Waterway",SRR7788092,SAMN09980001,Nov6rep2,Nov6,"Ice Free",74.2,9.1,8.01,221.2
-"Keweenaw Waterway",SRR7788094,SAMN09980003,Nov9rep1,Nov9,"Ice Free",72.6,8.7,8.15,175.3
-"Keweenaw Waterway",SRR7788098,SAMN09980007,Nov10rep2,Nov10,"Ice Free",72.4,8.4,7.96,155.8
-"Keweenaw Waterway",SRR7788101,SAMN09980010,Nov11rep2,Nov11,"Ice Free",72.1,8.2,8.08,203.4
-"Keweenaw Waterway",SRR7788217,SAMN09980012,Nov12rep1,Nov12,"Ice Free",72.9,8.3,8.02,183.2
-"Keweenaw Waterway",SRR7788213,SAMN09980016,Nov13rep2,Nov13,"Ice Free",72.1,7.7,8.01,178
-"Keweenaw Waterway",SRR7788211,SAMN09980018,Nov16rep1,Nov16,"Ice Free",72,7.3,7.98,171.3
-"Keweenaw Waterway",SRR7788113,SAMN09980022,Nov17rep2,Nov17,"Ice Free",74.1,8,NA,NA
-"Keweenaw Waterway",SRR7787951,SAMN09980024,Nov18rep1,Nov18,"Ice Free",74.9,8.2,NA,NA
-"Keweenaw Waterway",SRR7788080,SAMN09980029,Nov19rep3,Nov19,"Ice Free",73.7,7.7,NA,NA
-"Keweenaw Waterway",SRR7788182,SAMN09980030,Nov20rep1,Nov20,"Ice Free",74.8,6.8,8.07,96
-"Keweenaw Waterway",SRR7787990,SAMN09980034,Nov23rep3,Nov23,"Ice Free",67,5.2,8.1,147.5
-"Keweenaw Waterway",SRR7787993,SAMN09980035,Nov24rep1,Nov24,"Ice Free",64.2,4.6,NA,NA
-"Keweenaw Waterway",SRR7787994,SAMN09980038,Nov25rep1,Nov25,"Ice Free",64.8,4.6,7.72,167.2
-"Keweenaw Waterway",SRR7788115,SAMN09980041,Nov26rep1,Nov26,"Ice Free",65.8,4.5,8.1,207.6
-"Keweenaw Waterway",SRR7787973,SAMN09980044,Nov27rep1,Nov27,"Ice Free",64.6,4.1,7.88,156.7
-"Keweenaw Waterway",SRR7787968,SAMN09980047,Nov30rep3,Nov30,"Ice Free",64.1,3.3,7.8,135.5
-"Keweenaw Waterway",SRR7787969,SAMN09980048,Dec1rep1,Dec1,"Ice Free",65.1,3.4,7.71,134.9
-"Keweenaw Waterway",SRR7788006,SAMN09980052,Dec2rep2,Dec2,"Ice Free",65.2,3.4,8.05,146.8
-"Keweenaw Waterway",SRR7788011,SAMN09980055,Dec3rep2,Dec3,"Ice Free",66.3,3.3,7.96,137.3
-"Keweenaw Waterway",SRR7788009,SAMN09980057,Dec4rep2,Dec4,"Ice Free",65.3,3.2,7.43,201.2
-"Keweenaw Waterway",SRR7788068,SAMN09980060,Dec7rep2,Dec7,"Ice Free",62.5,3.2,7.72,182.8
-"Keweenaw Waterway",SRR7788034,SAMN09980062,Dec8rep1,Dec8,"Ice Free",62.3,3.1,7.54,149.1
-"Keweenaw Waterway",SRR7788027,SAMN09980067,Dec9rep3,Dec9,"Ice Free",64.5,3.4,7.86,149.6
-"Keweenaw Waterway",SRR7788038,SAMN09980070,Dec10rep3,Dec10,"Ice Free",64.3,3.7,7.67,163.8
-"Keweenaw Waterway",SRR7788065,SAMN09980073,Dec11rep3,Dec11,"Ice Free",64.3,3.7,7.59,174.2
-"Keweenaw Waterway",SRR7788059,SAMN09980075,Dec14rep2,Dec14,"Ice Free",65.4,3.1,7.78,188.2
-"Keweenaw Waterway",SRR7788061,SAMN09980077,Dec15rep1,Dec15,"Ice Free",65.6,3.1,7.61,191.5
-"Keweenaw Waterway",SRR7788148,SAMN09980081,Dec16rep2,Dec16,"Ice Free",67.2,2.9,NA,NA
-"Keweenaw Waterway",SRR7788151,SAMN09980084,Dec17rep2,Dec17,"Ice Free",68.1,2.8,7.68,152.5
-"Keweenaw Waterway",SRR7788155,SAMN09980088,Dec18rep3,Dec18,"Ice Free",65.9,2.2,7.7,115.6
-"Keweenaw Waterway",SRR7788145,SAMN09980089,Dec21rep1,Dec21,"Ice Free",57.8,1.2,6.8,255.1
-"Keweenaw Waterway",SRR7788199,SAMN09980092,Dec22rep2,Dec22,"Ice Free",57.9,1.1,NA,NA
-"Keweenaw Waterway",SRR7788197,SAMN09980094,Dec23rep1,Dec23,"Ice Free",61,1.6,8.09,118.8
-"Keweenaw Waterway",SRR7788043,SAMN09979803,Jan4rep3,Jan4,Ice,56.9,0.4,7.68,136.5
-"Keweenaw Waterway",SRR7788050,SAMN09979805,Jan5rep2,Jan5,Ice,57.9,0.3,7.33,156.6
-"Keweenaw Waterway",SRR7788119,SAMN09979809,Jan6rep3,Jan6,Ice,57.2,0.3,7.51,145
-"Keweenaw Waterway",SRR7788190,SAMN09979812,Jan7rep3,Jan7,Ice,56.8,0.3,7.53,148.1
-"Keweenaw Waterway",SRR7788185,SAMN09979815,Jan8rep3,Jan8,Ice,56.6,0.3,7.98,118.6
-"Keweenaw Waterway",SRR7788188,SAMN09979818,Jan11rep3,Jan11,Ice,57.9,0.3,8.06,134.2
-"Keweenaw Waterway",SRR7787933,SAMN09979821,Jan12rep3,Jan12,Ice,59.9,0.6,8,93.8
-"Keweenaw Waterway",SRR7787932,SAMN09979822,Jan13rep1,Jan13,Ice,57.6,0.4,7.86,144
-"Keweenaw Waterway",SRR7787939,SAMN09979827,Jan14rep3,Jan14,Ice,56.5,0.3,7.34,181.5
-"Keweenaw Waterway",SRR7787938,SAMN09979828,Jan15rep1,Jan15,Ice,57.1,0.4,7.56,172.9
-"Keweenaw Waterway",SRR7787976,SAMN09979833,Jan18rep3,Jan18,Ice,57.8,0.3,7.97,108.6
-"Keweenaw Waterway",SRR7787982,SAMN09979835,Jan19rep2,Jan19,Ice,12.9,-0.1,7.08,231.8
-"Keweenaw Waterway",SRR7787981,SAMN09979838,Jan20rep2,Jan20,Ice,57.3,0.2,7.8,137.5
-"Keweenaw Waterway",SRR7788026,SAMN09979841,Jan21rep2,Jan21,Ice,59.2,0.8,6.41,214.5
-"Keweenaw Waterway",SRR7788024,SAMN09979843,Jan22rep3,Jan22,Ice,56.4,0.1,7.5,160.5
-"Keweenaw Waterway",SRR7788021,SAMN09979846,Jan25rep3,Jan25,Ice,56.7,0,7.81,166.3
-"Keweenaw Waterway",SRR7788018,SAMN09979849,Jan26rep3,Jan26,Ice,56.5,0.1,7.86,165.1
-"Keweenaw Waterway",SRR7788017,SAMN09979850,Jan27rep1,Jan27,Ice,56.6,0.3,7.79,154.8
-"Keweenaw Waterway",SRR7788048,SAMN09979853,Jan28rep1,Jan28,Ice,57.3,0.1,8.08,159.9
-"Keweenaw Waterway",SRR7788052,SAMN09979857,Jan29rep2,Jan29,Ice,56.9,0.1,6.77,224.7
-"Keweenaw Waterway",SRR7788118,SAMN09979859,Feb1rep1,Feb1,Ice,60.3,0.7,NA,NA
-"Keweenaw Waterway",SRR7788076,SAMN09979864,Feb2rep3,Feb2,Ice,58.5,0.1,7.93,131.7
-"Keweenaw Waterway",SRR7788070,SAMN09979866,Feb3rep2,Feb3,Ice,58.6,0.1,NA,NA
-"Keweenaw Waterway",SRR7788072,SAMN09979868,Feb4rep1,Feb4,Ice,58.4,0,NA,NA
-"Keweenaw Waterway",SRR7788114,SAMN09979872,Feb5rep2,Feb5,Ice,62.4,0.3,NA,NA
-"Keweenaw Waterway",SRR7788109,SAMN09979875,Feb8rep2,Feb8,Ice,60.4,0.2,NA,NA
-"Keweenaw Waterway",SRR7788013,SAMN09979877,Feb9rep1,Feb9,Ice,60.3,0.1,NA,NA
-"Keweenaw Waterway",SRR7788015,SAMN09979880,Feb11rep1,Feb11,Ice,60.3,0.1,7.69,154.1
-"Keweenaw Waterway",SRR7788106,SAMN09979885,Feb12rep3,Feb12,Ice,63.2,0.2,7.61,155.6
-"Keweenaw Waterway",SRR7788105,SAMN09979886,Feb15rep1,Feb15,Ice,64.6,0.7,8.61,153.1
-"Keweenaw Waterway",SRR7788132,SAMN09979889,Feb16rep1,Feb16,Ice,60.8,0.3,8.14,122.6
-"Keweenaw Waterway",SRR7788173,SAMN09979894,Feb18rep3,Feb18,Ice,60.2,0.2,7.18,146.9
-"Keweenaw Waterway",SRR7788167,SAMN09979896,Feb19rep2,Feb19,Ice,68.5,0.2,7.29,162
-"Keweenaw Waterway",SRR7788036,SAMN09979899,Feb22rep2,Feb22,Ice,66.6,0.2,7.25,120.9
-"Keweenaw Waterway",SRR7788177,SAMN09979901,Feb23rep1,Feb23,Ice,69.6,0.4,7.62,123.9
-"Keweenaw Waterway",SRR7788181,SAMN09979905,Feb25rep2,Feb25,Ice,65.5,0.1,8.06,99.7
-"Keweenaw Waterway",SRR7788178,SAMN09979908,Feb26rep2,Feb26,Ice,64.7,0.1,8.14,91.8
-"Keweenaw Waterway",SRR7788194,SAMN09980097,Feb29rep1,Feb29,Ice,67.2,0.4,8.26,110.9
-"Keweenaw Waterway",SRR7788140,SAMN09979912,Mar2rep3,Mar2,Ice,69.9,0.3,8.2,111.7
-"Keweenaw Waterway",SRR7788141,SAMN09979913,Mar3rep1,Mar3,Ice,71.6,0.5,6.21,204.9
-"Keweenaw Waterway",SRR7788136,SAMN09979916,Mar4rep1,Mar4,Ice,71.4,0.3,7.25,144.9
-"Keweenaw Waterway",SRR7787963,SAMN09979921,Mar7rep3,Mar7,Ice,73.6,0.3,8.13,127.7
-"Keweenaw Waterway",SRR7787964,SAMN09979924,Mar8rep3,Mar8,Ice,71,0.4,8.37,122.4
-"Keweenaw Waterway",SRR7787959,SAMN09979925,Mar9rep1,Mar9,Ice,73.7,0.4,7.66,133
-"Keweenaw Waterway",SRR7787970,SAMN09979930,Mar10rep3,Mar10,Ice,67.9,0.3,8.09,127.1
-"Keweenaw Waterway",SRR7787927,SAMN09979932,Mar11rep2,Mar11,Ice,70.9,0.7,8.05,104
-"Keweenaw Waterway",SRR7787922,SAMN09979935,Mar14rep2,Mar14,Ice,72.9,1.5,8.29,138.3
-"Keweenaw Waterway",SRR7787920,SAMN09979937,Mar15rep1,Mar15,Ice,65.7,0.6,NA,NA
-"Keweenaw Waterway",SRR7788091,SAMN09979941,Mar21rep2,Mar21,"Ice Free",70.7,1.3,8,149.9
-"Keweenaw Waterway",SRR7788087,SAMN09979945,Mar22rep3,Mar22,"Ice Free",62.7,0.6,8.37,174
-"Keweenaw Waterway",SRR7788084,SAMN09979948,Mar23rep3,Mar23,"Ice Free",62.8,0.6,6.54,172.6
-"Keweenaw Waterway",SRR7788082,SAMN09979950,Mar24rep2,Mar24,"Ice Free",61.4,0.4,7.92,169.8
-"Keweenaw Waterway",SRR7787997,SAMN09979952,Mar28rep1,Mar28,"Ice Free",62.7,0.8,6.35,167.4
-"Keweenaw Waterway",SRR7788002,SAMN09979957,Mar29rep3,Mar29,"Ice Free",57.7,1.2,6.88,149.6
-"Keweenaw Waterway",SRR7788004,SAMN09979959,Mar31rep2,Mar31,"Ice Free",59.5,1.4,7.84,149.3
-"Keweenaw Waterway",SRR7788158,SAMN09979962,Apr5rep2,Apr5,"Ice Free",58.3,2.1,6.14,181.5
-"Keweenaw Waterway",SRR7788160,SAMN09979964,Apr7rep1,Apr7,"Ice Free",61.1,1.7,6.43,143.5
-"Keweenaw Waterway",SRR7788164,SAMN09979968,Apr8rep2,Apr8,"Ice Free",57.3,1.1,7.51,109
-"Keweenaw Waterway",SRR7788125,SAMN09979971,Apr12rep2,Apr12,"Ice Free",68.2,2.4,8.29,80.3
-"Keweenaw Waterway",SRR7788042,SAMN09979974,Apr13rep2,Apr13,"Ice Free",65.1,1.9,8.26,82.8
-"Keweenaw Waterway",SRR7788127,SAMN09979977,Apr14rep2,Apr14,"Ice Free",62.3,1.7,8.4,72
-"Keweenaw Waterway",SRR7787945,SAMN09979981,Apr18rep3,Apr18,"Ice Free",64.3,3.2,7.16,230
-"Keweenaw Waterway",SRR7787943,SAMN09979983,Apr19rep2,Apr19,"Ice Free",65.1,3.3,7.3,115
-"Keweenaw Waterway",SRR7787947,SAMN09979987,Apr20rep3,Apr20,"Ice Free",63.3,3.2,7.82,114.8
+name,Run,BioSample,SampleName,DATE,Cover,"Cond (µS/cm)","Temp (°C)",pH,"ORP (mV)","DO (mg/L)"
+"Keweenaw Waterway",SRR7787953,SAMN09979989,Nov2rep2,Nov2,"Ice Free",74.3,8.9,8.02,177.4,11.4
+"Keweenaw Waterway",SRR7788208,SAMN09979992,Nov3rep2,Nov3,"Ice Free",73.3,8.8,8,246.1,11.39
+"Keweenaw Waterway",SRR7788204,SAMN09979996,Nov4rep3,Nov4,"Ice Free",75.7,9.3,8.05,222.6,11.52
+"Keweenaw Waterway",SRR7788215,SAMN09979999,Nov5rep3,Nov5,"Ice Free",76.8,9.6,8.23,209.6,11.45
+"Keweenaw Waterway",SRR7788092,SAMN09980001,Nov6rep2,Nov6,"Ice Free",74.2,9.1,8.01,221.2,11.58
+"Keweenaw Waterway",SRR7788094,SAMN09980003,Nov9rep1,Nov9,"Ice Free",72.6,8.7,8.15,175.3,11.48
+"Keweenaw Waterway",SRR7788098,SAMN09980007,Nov10rep2,Nov10,"Ice Free",72.4,8.4,7.96,155.8,11.56
+"Keweenaw Waterway",SRR7788101,SAMN09980010,Nov11rep2,Nov11,"Ice Free",72.1,8.2,8.08,203.4,11.61
+"Keweenaw Waterway",SRR7788217,SAMN09980012,Nov12rep1,Nov12,"Ice Free",72.9,8.3,8.02,183.2,11.5
+"Keweenaw Waterway",SRR7788213,SAMN09980016,Nov13rep2,Nov13,"Ice Free",72.1,7.7,8.01,178,11.66
+"Keweenaw Waterway",SRR7788211,SAMN09980018,Nov16rep1,Nov16,"Ice Free",72,7.3,7.98,171.3,11.81
+"Keweenaw Waterway",SRR7788113,SAMN09980022,Nov17rep2,Nov17,"Ice Free",74.1,8,NA,NA,11.7
+"Keweenaw Waterway",SRR7787951,SAMN09980024,Nov18rep1,Nov18,"Ice Free",74.9,8.2,NA,NA,11.56
+"Keweenaw Waterway",SRR7788080,SAMN09980029,Nov19rep3,Nov19,"Ice Free",73.7,7.7,NA,NA,11.94
+"Keweenaw Waterway",SRR7788182,SAMN09980030,Nov20rep1,Nov20,"Ice Free",74.8,6.8,8.07,96,11.96
+"Keweenaw Waterway",SRR7787990,SAMN09980034,Nov23rep3,Nov23,"Ice Free",67,5.2,8.1,147.5,12.43
+"Keweenaw Waterway",SRR7787993,SAMN09980035,Nov24rep1,Nov24,"Ice Free",64.2,4.6,NA,NA,4.21
+"Keweenaw Waterway",SRR7787994,SAMN09980038,Nov25rep1,Nov25,"Ice Free",64.8,4.6,7.72,167.2,12.28
+"Keweenaw Waterway",SRR7788115,SAMN09980041,Nov26rep1,Nov26,"Ice Free",65.8,4.5,8.1,207.6,12.14
+"Keweenaw Waterway",SRR7787973,SAMN09980044,Nov27rep1,Nov27,"Ice Free",64.6,4.1,7.88,156.7,12.59
+"Keweenaw Waterway",SRR7787968,SAMN09980047,Nov30rep3,Nov30,"Ice Free",64.1,3.3,7.8,135.5,12.46
+"Keweenaw Waterway",SRR7787969,SAMN09980048,Dec1rep1,Dec1,"Ice Free",65.1,3.4,7.71,134.9,12.49
+"Keweenaw Waterway",SRR7788006,SAMN09980052,Dec2rep2,Dec2,"Ice Free",65.2,3.4,8.05,146.8,12.64
+"Keweenaw Waterway",SRR7788011,SAMN09980055,Dec3rep2,Dec3,"Ice Free",66.3,3.3,7.96,137.3,12.31
+"Keweenaw Waterway",SRR7788009,SAMN09980057,Dec4rep2,Dec4,"Ice Free",65.3,3.2,7.43,201.2,12.7
+"Keweenaw Waterway",SRR7788068,SAMN09980060,Dec7rep2,Dec7,"Ice Free",62.5,3.2,7.72,182.8,12.82
+"Keweenaw Waterway",SRR7788034,SAMN09980062,Dec8rep1,Dec8,"Ice Free",62.3,3.1,7.54,149.1,12.79
+"Keweenaw Waterway",SRR7788027,SAMN09980067,Dec9rep3,Dec9,"Ice Free",64.5,3.4,7.86,149.6,12.68
+"Keweenaw Waterway",SRR7788038,SAMN09980070,Dec10rep3,Dec10,"Ice Free",64.3,3.7,7.67,163.8,12.54
+"Keweenaw Waterway",SRR7788065,SAMN09980073,Dec11rep3,Dec11,"Ice Free",64.3,3.7,7.59,174.2,12.75
+"Keweenaw Waterway",SRR7788059,SAMN09980075,Dec14rep2,Dec14,"Ice Free",65.4,3.1,7.78,188.2,12.57
+"Keweenaw Waterway",SRR7788061,SAMN09980077,Dec15rep1,Dec15,"Ice Free",65.6,3.1,7.61,191.5,12.82
+"Keweenaw Waterway",SRR7788148,SAMN09980081,Dec16rep2,Dec16,"Ice Free",67.2,2.9,NA,NA,12.98
+"Keweenaw Waterway",SRR7788151,SAMN09980084,Dec17rep2,Dec17,"Ice Free",68.1,2.8,7.68,152.5,12.95
+"Keweenaw Waterway",SRR7788155,SAMN09980088,Dec18rep3,Dec18,"Ice Free",65.9,2.2,7.7,115.6,13.05
+"Keweenaw Waterway",SRR7788145,SAMN09980089,Dec21rep1,Dec21,"Ice Free",57.8,1.2,6.8,255.1,13.39
+"Keweenaw Waterway",SRR7788199,SAMN09980092,Dec22rep2,Dec22,"Ice Free",57.9,1.1,NA,NA,13.46
+"Keweenaw Waterway",SRR7788197,SAMN09980094,Dec23rep1,Dec23,"Ice Free",61,1.6,8.09,118.8,12.98
+"Keweenaw Waterway",SRR7788043,SAMN09979803,Jan4rep3,Jan4,Ice,56.9,0.4,7.68,136.5,13.58
+"Keweenaw Waterway",SRR7788050,SAMN09979805,Jan5rep2,Jan5,Ice,57.9,0.3,7.33,156.6,13.67
+"Keweenaw Waterway",SRR7788119,SAMN09979809,Jan6rep3,Jan6,Ice,57.2,0.3,7.51,145,13.76
+"Keweenaw Waterway",SRR7788190,SAMN09979812,Jan7rep3,Jan7,Ice,56.8,0.3,7.53,148.1,13.78
+"Keweenaw Waterway",SRR7788185,SAMN09979815,Jan8rep3,Jan8,Ice,56.6,0.3,7.98,118.6,13.69
+"Keweenaw Waterway",SRR7788188,SAMN09979818,Jan11rep3,Jan11,Ice,57.9,0.3,8.06,134.2,13.69
+"Keweenaw Waterway",SRR7787933,SAMN09979821,Jan12rep3,Jan12,Ice,59.9,0.6,8,93.8,13.47
+"Keweenaw Waterway",SRR7787932,SAMN09979822,Jan13rep1,Jan13,Ice,57.6,0.4,7.86,144,13.53
+"Keweenaw Waterway",SRR7787939,SAMN09979827,Jan14rep3,Jan14,Ice,56.5,0.3,7.34,181.5,13.54
+"Keweenaw Waterway",SRR7787938,SAMN09979828,Jan15rep1,Jan15,Ice,57.1,0.4,7.56,172.9,13.42
+"Keweenaw Waterway",SRR7787976,SAMN09979833,Jan18rep3,Jan18,Ice,57.8,0.3,7.97,108.6,13.39
+"Keweenaw Waterway",SRR7787982,SAMN09979835,Jan19rep2,Jan19,Ice,12.9,-0.1,7.08,231.8,16.64
+"Keweenaw Waterway",SRR7787981,SAMN09979838,Jan20rep2,Jan20,Ice,57.3,0.2,7.8,137.5,13.59
+"Keweenaw Waterway",SRR7788026,SAMN09979841,Jan21rep2,Jan21,Ice,59.2,0.8,6.41,214.5,13.39
+"Keweenaw Waterway",SRR7788024,SAMN09979843,Jan22rep3,Jan22,Ice,56.4,0.1,7.5,160.5,13.99
+"Keweenaw Waterway",SRR7788021,SAMN09979846,Jan25rep3,Jan25,Ice,56.7,0,7.81,166.3,13.99
+"Keweenaw Waterway",SRR7788018,SAMN09979849,Jan26rep3,Jan26,Ice,56.5,0.1,7.86,165.1,13.96
+"Keweenaw Waterway",SRR7788017,SAMN09979850,Jan27rep1,Jan27,Ice,56.6,0.3,7.79,154.8,13.9
+"Keweenaw Waterway",SRR7788048,SAMN09979853,Jan28rep1,Jan28,Ice,57.3,0.1,8.08,159.9,13.89
+"Keweenaw Waterway",SRR7788052,SAMN09979857,Jan29rep2,Jan29,Ice,56.9,0.1,6.77,224.7,13.88
+"Keweenaw Waterway",SRR7788118,SAMN09979859,Feb1rep1,Feb1,Ice,60.3,0.7,NA,NA,13.56
+"Keweenaw Waterway",SRR7788076,SAMN09979864,Feb2rep3,Feb2,Ice,58.5,0.1,7.93,131.7,13.85
+"Keweenaw Waterway",SRR7788070,SAMN09979866,Feb3rep2,Feb3,Ice,58.6,0.1,NA,NA,13.91
+"Keweenaw Waterway",SRR7788072,SAMN09979868,Feb4rep1,Feb4,Ice,58.4,0,NA,NA,13.8
+"Keweenaw Waterway",SRR7788114,SAMN09979872,Feb5rep2,Feb5,Ice,62.4,0.3,NA,NA,13.35
+"Keweenaw Waterway",SRR7788109,SAMN09979875,Feb8rep2,Feb8,Ice,60.4,0.2,NA,NA,13.58
+"Keweenaw Waterway",SRR7788013,SAMN09979877,Feb9rep1,Feb9,Ice,60.3,0.1,NA,NA,13.52
+"Keweenaw Waterway",SRR7788015,SAMN09979880,Feb11rep1,Feb11,Ice,60.3,0.1,7.69,154.1,13.44
+"Keweenaw Waterway",SRR7788106,SAMN09979885,Feb12rep3,Feb12,Ice,63.2,0.2,7.61,155.6,15.77
+"Keweenaw Waterway",SRR7788105,SAMN09979886,Feb15rep1,Feb15,Ice,64.6,0.7,8.61,153.1,13.26
+"Keweenaw Waterway",SRR7788132,SAMN09979889,Feb16rep1,Feb16,Ice,60.8,0.3,8.14,122.6,13.49
+"Keweenaw Waterway",SRR7788173,SAMN09979894,Feb18rep3,Feb18,Ice,60.2,0.2,7.18,146.9,13.73
+"Keweenaw Waterway",SRR7788167,SAMN09979896,Feb19rep2,Feb19,Ice,68.5,0.2,7.29,162,13.48
+"Keweenaw Waterway",SRR7788036,SAMN09979899,Feb22rep2,Feb22,Ice,66.6,0.2,7.25,120.9,13.73
+"Keweenaw Waterway",SRR7788177,SAMN09979901,Feb23rep1,Feb23,Ice,69.6,0.4,7.62,123.9,13.36
+"Keweenaw Waterway",SRR7788181,SAMN09979905,Feb25rep2,Feb25,Ice,65.5,0.1,8.06,99.7,13.68
+"Keweenaw Waterway",SRR7788178,SAMN09979908,Feb26rep2,Feb26,Ice,64.7,0.1,8.14,91.8,13.63
+"Keweenaw Waterway",SRR7788194,SAMN09980097,Feb29rep1,Feb29,Ice,67.2,0.4,8.26,110.9,13.11
+"Keweenaw Waterway",SRR7788140,SAMN09979912,Mar2rep3,Mar2,Ice,69.9,0.3,8.2,111.7,13.02
+"Keweenaw Waterway",SRR7788141,SAMN09979913,Mar3rep1,Mar3,Ice,71.6,0.5,6.21,204.9,12.87
+"Keweenaw Waterway",SRR7788136,SAMN09979916,Mar4rep1,Mar4,Ice,71.4,0.3,7.25,144.9,13.02
+"Keweenaw Waterway",SRR7787963,SAMN09979921,Mar7rep3,Mar7,Ice,73.6,0.3,8.13,127.7,12.91
+"Keweenaw Waterway",SRR7787964,SAMN09979924,Mar8rep3,Mar8,Ice,71,0.4,8.37,122.4,12.88
+"Keweenaw Waterway",SRR7787959,SAMN09979925,Mar9rep1,Mar9,Ice,73.7,0.4,7.66,133,12.8
+"Keweenaw Waterway",SRR7787970,SAMN09979930,Mar10rep3,Mar10,Ice,67.9,0.3,8.09,127.1,13.26
+"Keweenaw Waterway",SRR7787927,SAMN09979932,Mar11rep2,Mar11,Ice,70.9,0.7,8.05,104,12.97
+"Keweenaw Waterway",SRR7787922,SAMN09979935,Mar14rep2,Mar14,Ice,72.9,1.5,8.29,138.3,12.68
+"Keweenaw Waterway",SRR7787920,SAMN09979937,Mar15rep1,Mar15,Ice,65.7,0.6,NA,NA,13.37
+"Keweenaw Waterway",SRR7788091,SAMN09979941,Mar21rep2,Mar21,"Ice Free",70.7,1.3,8,149.9,12.87
+"Keweenaw Waterway",SRR7788087,SAMN09979945,Mar22rep3,Mar22,"Ice Free",62.7,0.6,8.37,174,13.37
+"Keweenaw Waterway",SRR7788084,SAMN09979948,Mar23rep3,Mar23,"Ice Free",62.8,0.6,6.54,172.6,13.33
+"Keweenaw Waterway",SRR7788082,SAMN09979950,Mar24rep2,Mar24,"Ice Free",61.4,0.4,7.92,169.8,13.64
+"Keweenaw Waterway",SRR7787997,SAMN09979952,Mar28rep1,Mar28,"Ice Free",62.7,0.8,6.35,167.4,13.49
+"Keweenaw Waterway",SRR7788002,SAMN09979957,Mar29rep3,Mar29,"Ice Free",57.7,1.2,6.88,149.6,13.1
+"Keweenaw Waterway",SRR7788004,SAMN09979959,Mar31rep2,Mar31,"Ice Free",59.5,1.4,7.84,149.3,12.67
+"Keweenaw Waterway",SRR7788158,SAMN09979962,Apr5rep2,Apr5,"Ice Free",58.3,2.1,6.14,181.5,12.5
+"Keweenaw Waterway",SRR7788160,SAMN09979964,Apr7rep1,Apr7,"Ice Free",61.1,1.7,6.43,143.5,12.04
+"Keweenaw Waterway",SRR7788164,SAMN09979968,Apr8rep2,Apr8,"Ice Free",57.3,1.1,7.51,109,12.53
+"Keweenaw Waterway",SRR7788125,SAMN09979971,Apr12rep2,Apr12,"Ice Free",68.2,2.4,8.29,80.3,12.13
+"Keweenaw Waterway",SRR7788042,SAMN09979974,Apr13rep2,Apr13,"Ice Free",65.1,1.9,8.26,82.8,12.44
+"Keweenaw Waterway",SRR7788127,SAMN09979977,Apr14rep2,Apr14,"Ice Free",62.3,1.7,8.4,72,12.55
+"Keweenaw Waterway",SRR7787945,SAMN09979981,Apr18rep3,Apr18,"Ice Free",64.3,3.2,7.16,230,12.15
+"Keweenaw Waterway",SRR7787943,SAMN09979983,Apr19rep2,Apr19,"Ice Free",65.1,3.3,7.3,115,11.98
+"Keweenaw Waterway",SRR7787947,SAMN09979987,Apr20rep3,Apr20,"Ice Free",63.3,3.2,7.82,114.8,11.76

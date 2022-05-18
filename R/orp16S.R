@@ -607,7 +607,7 @@ orp16S_S2 <- function(pdf = FALSE) {
     message("\nLake & Pond"),
     plotEZ("SAR+13", "two", groupby = "Zone", groups = c("Photic-oxic", "Transition", "Anoxic")),
     plotEZ("LZR+17", "Bacteria", groupby = "Elevation", groups = c("< 1000 m", "1000 - 4000 m", "> 4000 m"), legend.x = "bottomleft"),
-    plotEZ("ECS+18", "Bacteria", groupby = "Lake", groups = c("Laguna Negra", "Lo Encanado")),
+    plotEZ("ECS+18", "Bacteria", groupby = "Lake", groups = c("Laguna Negra", "Lo Enca\u00F1ado")),
     plotEZ("LLC+19", "Bacteria", groupby = "Size", groups = c("Free-living", "Particle-associated")),
     plotEZ("SCH+16", "two", groupby = "Type", groups = c("Oxic", "Oxycline", "Anoxic")),
     plotEZ("BCA+21", "Bacteria", groupby = "Month", groups = c("Jul", "Nov", "Feb", "Apr")),
@@ -974,9 +974,10 @@ getmdat_orp16S <- function(study, metrics = NULL, dropNA = TRUE, size = NULL, qu
       O2name <- colnames(metadata)[iO2]
       # Remove text up to and including left parenthesis, and right parenthesis
       units <- gsub(".*\\(|\\)", "", O2name)
-      if(units %in% c("\u03BCmol/L", "\u03BCmol L-1", "umol/L", "umol L-1", "umol kg-1")) O2_umol_L <- metadata[, iO2]
-      else if(units == "mM") O2_umol_L <- metadata[, iO2] * 1000
+      if(units %in% c("\u03BCmol/L", "\u03BCmol L-1", "umol/L", "umol L-1", "umol kg-1", "\u03BCM")) O2_umol_L <- metadata[, iO2]
+      else if(units %in% c("mM", "mmol L-1")) O2_umol_L <- metadata[, iO2] * 1000
       else if(units %in% c("mg/L", "mg L-1")) O2_umol_L <- metadata[, iO2] * 1000 / 32
+      else if(units %in% c("mL/L", "mL L-1")) O2_umol_L <- metadata[, iO2] * 1.42905 * 1000 / 32
       else if(units == "%") {
         # Calculate logK for O2(gas) = O2(aq)
         logK <- rep(NA, nrow(metadata))
@@ -1043,7 +1044,6 @@ getmdat_orp16S <- function(study, metrics = NULL, dropNA = TRUE, size = NULL, qu
 
   if(is.null(pch)) stop(paste(study, "metadata file exists, but not set up for processing"))
 
-  metadata <- cbind(metadata, pch, col)
   metadata <- cbind(metadata, pch, col)
   # Use the infotext as an attribute for printing by orp16S_info 20220513
   attr(metadata, "infotext") <- infotext
@@ -1212,14 +1212,14 @@ orp16S_S1 <- function(pdf = FALSE) {
 orp16S6 <- function(pdf = FALSE) {
 
   if(pdf) pdf("Figure6.pdf", width = 7, height = 6)
-  mat <- matrix(c(1,1,3,3, 2,2,4,4, 0,5,5,0), ncol = 3)
+  mat <- matrix(1:6, nrow = 2, byrow = TRUE)
   layout(mat, widths = c(2, 2, 1))
-  par(mar = c(4, 4, 2.5, 1))
 
   # Use only samples with non-NA O2
   thisdat <- EZdat[!is.na(EZdat$O2_umol_L), ] 
 
   ## Bacteria only
+  par(mar = c(4, 4, 2.5, 1))
   bacdat <- thisdat[thisdat$lineage == "Bacteria", ]
   # Start ZC-Eh7 plot
   plot(c(-500, 650), range(bacdat$ZC), type = "n", xlab = "Eh7 (mV)", ylab = cplab$ZC)
@@ -1234,8 +1234,18 @@ orp16S6 <- function(pdf = FALSE) {
   add.linear(bacdat$O2_umol_L, bacdat$ZC, nstudy, O2 = TRUE)
   eachenv(bacdat, add = TRUE, do.linear = FALSE, O2 = TRUE)
   mtext("Bacteria", adj = -0.42, line = 1)
+  # Add legend
+  par(mar = c(0, 0, 0, 0))
+  plot.new()
+  ienv = c(1, 2, 4, 5, 3, 6, 7)
+  ltext <- names(envirotype)[ienv]
+  # Add number of samples in each environment 20220518
+  nsamp <- table(bacdat$envirotype)[ltext]
+  ltext <- paste0(ltext, " (", nsamp, ")")
+  legend("left", ltext, pch = 19, col = orp16Scol[ienv], bty = "n")
 
   ## Archaea only
+  par(mar = c(4, 4, 2.5, 1))
   arcdat <- thisdat[thisdat$lineage == "Archaea", ]
   # Start ZC-Eh7 plot
   plot(c(-500, 650), range(arcdat$ZC), type = "n", xlab = "Eh7 (mV)", ylab = cplab$ZC)
@@ -1250,12 +1260,14 @@ orp16S6 <- function(pdf = FALSE) {
   add.linear(arcdat$O2_umol_L, arcdat$ZC, nstudy, O2 = TRUE)
   eachenv(arcdat, add = TRUE, do.linear = FALSE, O2 = TRUE)
   mtext("Archaea", adj = -0.42, line = 1)
-
   # Add legend
-  par(mar = c(4, 1, 1, 1))
+  par(mar = c(0, 0, 0, 0))
   plot.new()
   ienv = c(1, 2, 4, 5, 3, 6, 7)
   ltext <- names(envirotype)[ienv]
+  # Add number of samples in each environment 20220518
+  nsamp <- table(arcdat$envirotype)[ltext]
+  ltext <- paste0(ltext, " (", nsamp, ")")
   legend("left", ltext, pch = 19, col = orp16Scol[ienv], bty = "n")
 
   if(pdf) dev.off()

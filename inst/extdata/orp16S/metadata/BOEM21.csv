@@ -1,10 +1,10 @@
-name,Run,BioSample,sample,Stratum,"depth (m)","ORP (mV)"
-"Fayetteville Green Lake",SRR12074942,SAMN15351051,FGL01m,Upper,1,150
-"Fayetteville Green Lake",SRR12074941,SAMN15351052,FGL09m,Upper,9,160
-"Fayetteville Green Lake",SRR12074940,SAMN15351053,FGL18m,Chemocline,18,180
-"Fayetteville Green Lake",SRR12074939,SAMN15351054,FGL22m,Lower,22,-300
-"Fayetteville Green Lake",SRR12074938,SAMN15351055,FGL23m,Lower,23,-300
-"Fayetteville Green Lake",SRR12074937,SAMN15351056,FGL23.5m,Lower,23.5,-300
-"Fayetteville Green Lake",SRR12074936,SAMN15351057,FGL24m,Lower,24,-300
-"Fayetteville Green Lake",SRR12074935,SAMN15351058,FGL24.5m,Lower,24.5,-300
-"Fayetteville Green Lake",SRR12074934,SAMN15351059,FGL25m,Lower,25,-300
+name,Run,BioSample,sample,Stratum,"depth (m)","T (°C)","DO (mg L-1)","ORP (mV)"
+"Fayetteville Green Lake",SRR12074942,SAMN15351051,FGL01m,Upper,1,8.9,11.7,150
+"Fayetteville Green Lake",SRR12074941,SAMN15351052,FGL09m,Upper,9,9.5,11.8,160
+"Fayetteville Green Lake",SRR12074940,SAMN15351053,FGL18m,Chemocline,18,12,6.1,180
+"Fayetteville Green Lake",SRR12074939,SAMN15351054,FGL22m,Lower,22,13,3.5,-300
+"Fayetteville Green Lake",SRR12074938,SAMN15351055,FGL23m,Lower,23,13,2.9,-300
+"Fayetteville Green Lake",SRR12074937,SAMN15351056,FGL23.5m,Lower,23.5,13,2.8,-300
+"Fayetteville Green Lake",SRR12074936,SAMN15351057,FGL24m,Lower,24,13.1,2.7,-300
+"Fayetteville Green Lake",SRR12074935,SAMN15351058,FGL24.5m,Lower,24.5,13.1,2.6,-300
+"Fayetteville Green Lake",SRR12074934,SAMN15351059,FGL25m,Lower,25,13.1,2.6,-300
