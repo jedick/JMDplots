@@ -2,9 +2,7 @@
 # Plotting functions used in orp16S paper 20211007
 
 ## Uncomment to source and run these functions interactively (developer mode)
-#source("chem16S.R")
 #source("orp16S.R")
-#options(chem16Sdir = system.file("extdata/orp16S", package = "JMDplots"))
 
 # Plot ZC values vs Eh7 for a single study 20210827
 # Use 'groupby' (name of column with sample groups) and 'groups' (names of sample groups) to apply the pch and col to individual samples
@@ -128,9 +126,11 @@ plotEZ <- function(study, lineage = NULL, mincount = 100, pch = NULL, col = NULL
     Eh7lim <- range(EZlm$model$Eh7)
     ZCpred <- predict.lm(EZlm, data.frame(Eh7 = Eh7lim))
     # Use solid or dashed line to indicate large or small slope 20210926
-    slope <- EZlm$coefficients[2] * 1000
+    slope <- EZlm$coefficients[2] * 1e3
     if(is.na(slope)) lty <- 3 else if(abs(slope) < 0.01) lty <- 2 else lty <- 1
     lines(Eh7lim, ZCpred, col = col.line, lwd = lwd, lty = lty)
+    # Calculate Pearson correlation 20220520
+    pearson <- cor.test(EZdat$Eh7, EZdat$ZC, method = "pearson")
   }
   # Add points
   if("points" %in% show) {
@@ -154,7 +154,7 @@ plotEZ <- function(study, lineage = NULL, mincount = 100, pch = NULL, col = NULL
   if(length(envirotype) == 0) envirotype <- ""
   EZdat <- cbind(study = study, envirotype = envirotype, lineage = lineage, sample = metadata[, sampcol], Run = metadata$Run, EZdat)
   out <- list(study = study, envirotype = envirotype, lineage = lineage, metadata = metadata, EZdat = EZdat)
-  if("lm" %in% show) out <- c(out, list(EZlm = EZlm, Eh7lim = Eh7lim, ZCpred = ZCpred))
+  if("lm" %in% show) out <- c(out, list(EZlm = EZlm, Eh7lim = Eh7lim, ZCpred = ZCpred, pearson = pearson))
   invisible(out)
 
 }

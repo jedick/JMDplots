@@ -30,3 +30,7 @@
 \newcommand{\CH4}{\ifelse{latex}{\eqn{\mathrm{CH_{4}}}}{\ifelse{html}{\out{CH<sub>4</sub>}}{CH4}}}
 % 20220420
 \newcommand{\logaH2}{\ifelse{latex}{\eqn{\log a_{\mathrm{H_{2}}}}}{\ifelse{html}{\out{log<i>a</i><sub>H<sub>2</sub></sub>}}{logaH2}}}
+% Subscripts and superscripts 20220520
+\newcommand{\s}{\ifelse{latex}{\eqn{_{#1}}}{\ifelse{html}{\out{<sub>#1</sub>}}{#1}}}
+\newcommand{\S}{\ifelse{latex}{\eqn{^{#1}}}{\ifelse{html}{\out{<sup>#1</sup>}}{^#1}}}
+

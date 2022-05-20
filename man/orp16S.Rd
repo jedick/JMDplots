@@ -6,9 +6,9 @@
 \alias{orp16S3}
 \alias{orp16S4}
 \alias{orp16S5}
-\alias{orp16S6}
 \alias{orp16S_S1}
 \alias{orp16S_S2}
+\alias{orp16S_S3}
 \alias{orp16S_T2}
 \alias{getmdat_orp16S}
 \alias{getmetrics_orp16S}
@@ -24,9 +24,9 @@ Plots from the paper by Dick and Meng (2021).
   orp16S3(pdf = FALSE)
   orp16S4(pdf = FALSE)
   orp16S5(pdf = FALSE)
-  orp16S6(pdf = FALSE)
   orp16S_S1(pdf = FALSE)
   orp16S_S2(pdf = FALSE)
+  orp16S_S3(pdf = FALSE)
   orp16S_T2()
   getmdat_orp16S(study, metrics = NULL, dropNA = TRUE, size = NULL, quiet = TRUE)
   getmetrics_orp16S(study, mincount = 100, quiet = TRUE, ...)
@@ -53,25 +53,27 @@ This table gives a brief description of each plotting function.
   \code{orp16S3} \tab Sample locations on world map \cr
   \code{orp16S4} \tab Linear regressions between \ZC and Eh7 at local scales \cr
   \code{orp16S5} \tab Linear regressions between \ZC and Eh7 at a global scale \cr
-  \code{orp16S6} \tab Distinct associations between \ZC and Eh7 or \O2 \cr
   \code{orp16S_S1} \tab Eh-pH diagram (outline from Baas Becking et al., 1960) \cr
   \code{orp16S_S2} \tab \ZC-Eh scatterplots for each dataset \cr
+  \code{orp16S_S3} \tab Comparison of Eh7 and \O2 as predictors of carbon oxidation state \cr
 }
 
-\code{orp16S_S2} creates the files \file{EZdat.csv} and \file{EZlm.csv} that are used by the other functions.
+\code{orp16S_S2} creates the files \file{EZdat.csv} and \file{EZlm.csv} that are used by the other plotting functions.
+\file{EZdat.csv} has sample data and metadata: study key, environment type, lineage (Bacteria or Archaea), sample name, SRA or MG-RAST accession number, grouping description, sample group, values of T (°C), pH, \O2 concentration (μmol/L), Eh (mV), Eh7 (mV), and \ZC.
+\file{EZlm.csv} has regression results for each dataset and domain: study key, environment type, lineage, number of samples, Eh7 range, slope (V\S{-1}) and intercept (\ZC) of of linear regression, Pearson correlation coefficient and \emph{P}-value.
 
 \code{orp16S_T2} returns a table summarizing regression slopes for all datasets (based on \file{EZlm.csv}).
 
 \code{getmdat_orp16S} gets metadata for the indicated \code{study}, calculates Eh7 from Eh and pH and T (if available), classifies samples into 3 clusters according to their Eh values, and adds columns for plot parameters (\samp{pch}, \samp{col}).
-The function also adds a column named \samp{O2_umol_L}, with O2 concentration in (μmol/L), which is converted from source units of O2 concentration if needed.
+The function also adds a column named \samp{O2_umol_L}, with \O2 concentration in (μmol/L), which is converted from source units of \O2 concentration as needed.
 The default for \code{dropNA} means to exclude samples with NA name in the metadata file.
 If \code{metrics} is supplied, metadata are kept only for samples with available metrics, the sample metrics are placed in the same order as the remaining metadata, and the function returns a list with both \samp{metadata} and the sorted \samp{metrics}.
 \code{size} can be used to specify a number of samples (from among those with both metadata and \code{metrics}, if given) to be randomly selected.
 
 \code{getmetrics_orp16S} calculates chemical metrics (\ZC and \nH2O) for the indicated study.
-\code{...} is used to supply argument to \code{\link[chem16S]{readRDP}}; note that \code{mincount = 50} is needed to reproduce the data processing used in the paper (see \code{\link{plotEZ}}).
+\code{...} is used to supply argument to \code{\link[chem16S]{readRDP}}; note that the default of \code{mincount = 100} was used for data processing in the paper (see \code{\link{plotEZ}}).
 
-\code{orp16S_info} prints general information about a study (more specifically, a dataset): name, number of samples with Bacteria and Archaea (with \code{mincount = 50}), bibligraphic key, range of T, pH, Eh, and Eh7, and whether the slope of the ZC-Eh7 correlations for Bacteria and Archaea (if available) are negative (< -0.01 V-1), positive (> 0.01 V-1), or close to zero.
+\code{orp16S_info} prints general information about a study (more specifically, a dataset): name, number of samples with Bacteria and Archaea (with \code{mincount = 100}), bibligraphic key, range of T, pH, Eh, and Eh7, and whether the slope of the \ZC-Eh7 correlations for Bacteria and Archaea (if available) are negative (< -0.01 V\S{-1}), positive (> 0.01 V\S{-1}), or close to zero.
 This information is used to fill in Table S1 of the paper.
 
 }
@@ -84,8 +86,8 @@ This information is used to fill in Table S1 of the paper.
       RDP Classifier results combined into a single CSV file for each study, created with the \code{classify} and \code{mkRDP} function2 in \file{pipeline.R}.
     }
     \item{\file{hydro_p}}{Shapefiles for the North American Great Lakes, downloaded from USGS (2010).}
-    \item{\file{EZdat.csv}}{Data for all samples, created by \code{orp16S_S1}.}
-    \item{\file{EZlm.csv}}{Linear fits between Eh7 and \ZC for each dataset created by \code{orp16S_S1}.}
+    \item{\file{EZdat.csv}}{Data for all samples, created by \code{orp16S_S2}.}
+    \item{\file{EZlm.csv}}{Linear fits between Eh7 and \ZC for each dataset created by \code{orp16S_S2}.}
     \item{\file{BKM60.csv}}{Outline of Eh-pH range of natural environments, digitized from Fig. 32 of Baas Becking et al. (1960).}
   }
 }
@@ -97,7 +99,7 @@ This information is used to fill in Table S1 of the paper.
 }
 
 \seealso{
-\code{\link{plotEZ}} is used to make the \ZC-Eh7 scatterplots and linear fits in \code{orp16S4} and \code{orp16S_S1}.
+\code{\link{plotEZ}} is used to make the \ZC-Eh7 scatterplots and linear fits in \code{orp16S4} and \code{orp16S_S2}.
 }
 
 \references{
@@ -109,7 +111,7 @@ USGS (2010) Great Lakes and Watersheds Shapefiles. ScienceBase Catalog, U.S. Geo
 }
 
 \examples{
-# Conceptual framework
+# Methods outline
 orp16S1()
 
 # Winogradsky columns
@@ -122,9 +124,9 @@ orp16S3()
 orp16S_T2()
 
 # "Raw" metrics with lots of messages printed
-getmetrics_orp16S("SVH+19", mincount = 50, quiet = FALSE)
+getmetrics_orp16S("SVH+19", quiet = FALSE)
 # Metrics with associated metadata
-metrics <- getmetrics_orp16S("SPA+21", mincount = 50)
+metrics <- getmetrics_orp16S("SPA+21")
 mdat <- getmdat_orp16S("SPA+21", metrics = metrics)
 # This has 'metadata' and 'metrics' data frames with same number of rows
 str(mdat)

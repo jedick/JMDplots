@@ -53,7 +53,7 @@ orp16S1 <- function(pdf = FALSE) {
   plot(c(5, 95), c(1, 80), type = "n", axes = FALSE, xlab = "", ylab = "")
   # Uncomment this as a guide for making the 'grid' one 20210927
   #box(lwd = 2)
-  grid.roundrect(0.5, 0.5, 0.99, 0.99, gp = gpar(fill = "azure2"))
+  grid.roundrect(0.5, 0.5, 0.99, 0.99, gp = gpar(fill = "azure"))
 
   dy <- -2.5
 
@@ -411,13 +411,14 @@ orp16S4 <- function(pdf = FALSE) {
   i2 <- c(3, 6, 7)
   j2 <- env$groupnum %in% i2
   xlim <- range(log10(lmbac$nsamp[j1 | j2]))
-  # Multiply by 1000 to use V instead of mV 20210913
-  ymaxabs <- max(abs(1000 * lmbac$slope[j1 | j2]))
+  # Multiply by 1e3 to use V-1 instead of mV-1 20210913
+  # NOTE: conversion to V-1 is moved to orp16S_S2() 20220520
+  ymaxabs <- max(abs(lmbac$slope[j1 | j2]))
   ylim <- c(-ymaxabs*1.2, ymaxabs)
   # River & seawater, lake & pond, hot spring, alkaline spring
   plot(xlim, ylim, type = "n", xlab = "log10(Number of samples)", ylab = quote("Slope of linear fit"~(V^-1)))
   abline(h = 0, lty = 2, lwd = 1.5, col = "gray50")
-  points(log10(lmbac$nsamp[j1]), 1000 * lmbac$slope[j1], pch = 19, col = orp16Scol[env$groupnum[j1]])
+  points(log10(lmbac$nsamp[j1]), lmbac$slope[j1], pch = 19, col = orp16Scol[env$groupnum[j1]])
   # Add legend
   ltext <- names(envirotype)[i1[1:2]]
   legend("bottomleft", ltext, pch = 19, col = orp16Scol[i1[1:2]])
@@ -428,7 +429,7 @@ orp16S4 <- function(pdf = FALSE) {
   # Groundwater, sediment, soil
   plot(xlim, ylim, type = "n", xlab = "log10(Number of samples)", ylab = quote("Slope of linear fit"~(V^-1)))
   abline(h = 0, lty = 2, lwd = 1.5, col = "gray50")
-  points(log10(lmbac$nsamp[j2]), 1000 * lmbac$slope[j2], pch = 19, col = orp16Scol[env$groupnum[j2]])
+  points(log10(lmbac$nsamp[j2]), lmbac$slope[j2], pch = 19, col = orp16Scol[env$groupnum[j2]])
   ltext <- names(envirotype)[i2]
   legend("bottomright", ltext, pch = 19, col = orp16Scol[i2])
 
@@ -451,14 +452,12 @@ orp16S4 <- function(pdf = FALSE) {
 
   # Offset for labels 20211012
   dx <- list(
-    c(-60, 20, -190, 20, 20, 20, 20, 20, 20, 35),
-    c(20, 20, 20, 20, 20, 20, 20, 20, -90, 20),
-    c(-80, 20, -150, 20, 20, 20, 20, 20, -90, 35)
+    c(-80, 40, -190, 40, -150, 40, -220, 40, -180),
+    c(40, -380, -130, 20, 40, 40, -120, NA, -200)
   )
   dy <- list(
-    c(-0.022, 0, -0.015, 0, 0.003, 0, 0, 0, 0, 0),
-    c(0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
-    c(-0.025, 0, -0.01, 0, 0, 0, -0.003, 0, -0.0025, 0)
+    c(-0.022, 0, -0.015, 0, 0.004, 0, -0.03, 0, -0.01),
+    c(0, -0.002, 0.03, 0, 0, 0, -0.007, NA, 0.007)
   )
 
   # Loop over Bacteria and Archaea
@@ -468,11 +467,12 @@ orp16S4 <- function(pdf = FALSE) {
     plot(c(-450, 400), c(-0.23, -0.08), type = "n", xlab = "Eh7 (mV)", ylab = cplab$ZC)
     for(j in seq_along(studies)) {
       with(dat[dat$study == studies[j], ], {
-        y <- function(x) intercept + slope * x
+        # Divide by 1e3 to convert slope from V-1 to mV-1 20220520
+        y <- function(x) intercept + slope * x / 1e3
         Eh7 <- c(Eh7min, Eh7max)
         ZC <- y(Eh7)
         if(length(Eh7) > 0) {
-          if(abs(slope * 1000) < 0.01) lty <- 2 else lty <- 1
+          if(abs(slope) < 0.01) lty <- 2 else lty <- 1
           lines(Eh7, ZC, col = col[j], lwd = 2, lty = lty)
           # Add number to identify dataset
           text(tail(Eh7, 1) + dx[[k]][j], tail(ZC, 1) + dy[[k]][j], j)
@@ -486,8 +486,9 @@ orp16S4 <- function(pdf = FALSE) {
       lhyper <- paste0("Hypersaline (", paste(which(ihyper), collapse = ", "), ")")
       lsed <- paste0("Sediment (", paste(which(ised), collapse = ", "), ")")
       lacid <- paste0("Acidic (", paste(which(iacid), collapse = ", "), ")")
-      lalk <- paste0("Neutral/Alkaline (", paste(which(col == orp16Scol[1]), collapse = ", "), ")")
-      legend("topleft", c(lhyper, lsed, lacid, lalk), col = c("turquoise3", "gray", orp16Scol[4], orp16Scol[1]), lwd = 2, bty = "n")
+      lneut <- "Circumneutral to"
+      lalk <- paste0("Alkaline (", paste(which(col == orp16Scol[1]), collapse = ", "), ")")
+      legend("topleft", c(lhyper, lsed, lacid, lneut, lalk), col = c("turquoise3", "gray", orp16Scol[4], orp16Scol[1], NA), lwd = 2, bty = "n")
     }
   }
 
@@ -644,7 +645,7 @@ orp16S_S2 <- function(pdf = FALSE) {
     plotEZ("SRM+21", "Bacteria", groupby = "Depth", groups = c("Surface", "Shallow", "Deep"), legend.x = "bottomleft"),
     plotEZ("ZCZ+21", "Bacteria", groupby = "Location", groups = c("LO", "CR1", "MN", "VA", "BS", "CR2"), legend.x = "topright"),
     plotEZ("CSW+22", "two", groupby = "BTEX", groups = c("High", "Low", "No"), legend.x = "topright"),
-    plotEZ("GXS+22", "two", groupby = "Subarea", groups = c("A", "B", "C")),
+    plotEZ("GXS+22", "Bacteria", groupby = "Subarea", groups = c("A", "B", "C")),
 
     message("\nSediment"),
     plotEZ("JHL+12", "two", groupby = "Core", groups = c("GC6", "GC12"), legend.x = "bottomright"),
@@ -711,7 +712,11 @@ orp16S_S2 <- function(pdf = FALSE) {
   envirotype <- sapply(results[names(results) == "envirotype"], "[")
   lineage <- sapply(results[names(results) == "lineage"], "[")
   nsamp <- sapply(model, nrow)
-  EZlm <- data.frame(study, envirotype, lineage, nsamp, Eh7min, Eh7max, slope, intercept)
+  pearson.r <- unlist(lapply(results[names(results) == "pearson"], "[[", "estimate"))
+  P.value <- unlist(lapply(results[names(results) == "pearson"], "[[", "p.value"))
+  # Note: slope is mutiplied by 1e3 to convert from mV-1 to V-1
+  EZlm <- data.frame(study, envirotype, lineage, nsamp, Eh7min, Eh7max,
+    slope = signif(slope * 1e3, 6), intercept = signif(intercept, 6), pearson.r = signif(pearson.r, 6), P.value = signif(P.value, 6))
   # Save data and results to files
   write.csv(EZdat, "EZdat.csv", row.names = FALSE, quote = FALSE)
   write.csv(EZlm, "EZlm.csv", row.names = FALSE, quote = FALSE)
@@ -745,8 +750,8 @@ add.linear <- function(Eh7, ZC, nstudy = NA, O2 = FALSE) {
   lines(Ehvals, plx$fit, col = line.col)
   # Get the slope
   slope <- EZlm$coefficients[2]
-  # Multiply by 1000 to convert from mV to V
-  slope <- slope * 1000
+  # Multiply by 1e3 to convert from mV-1 to V-1
+  slope <- slope * 1e3
   # Round to fixed number of decimal places
   slope <- formatC(slope, digits = 3, format = "f")
   # Units for Eh7
@@ -760,8 +765,8 @@ add.linear <- function(Eh7, ZC, nstudy = NA, O2 = FALSE) {
   legend("topright", legend = legend, bty = "n", text.col = text.col)
 
   # Calculate Pearson correlation 20211009
-  pearson <- cor.test(Eh7, ZC)
-  # Get p-value
+  pearson <- cor.test(Eh7, ZC, method = "pearson")
+  # Get P-value
   pval <- pearson$p.value
   # Format correlation coefficient
   rtext <- formatC(pearson$estimate, digits = 2, format = "f")
@@ -933,11 +938,10 @@ getmdat_orp16S <- function(study, metrics = NULL, dropNA = TRUE, size = NULL, qu
       R <- 0.0083147
       F <- 96.4935
       dEhdpH <- - (log(10) * R * TK) / F * 1000
-
       # Difference to pH 7
       pHdiff <- 7 - pH
       # Adjust to pH 7
-      Eh7 <- round(Eh + pHdiff * dEhdpH, 1)
+      Eh7 <- round(Eh + pHdiff * dEhdpH, 2)
     } else {
       Eh7 <- Eh
       pHtext <- "assumed 7"
@@ -1097,8 +1101,8 @@ orp16S_info <- function(study) {
     if(any(idat)) {
       slope <- dat$slope[idat]
       slopetxt <- "-- (close to zero)"
-      if(slope * 1e3 > 0.01) slopetxt <- "positive (> 0.01 V-1)"
-      if(slope * 1e3 < -0.01) slopetxt <- "negative (< -0.01 V-1)"
+      if(slope > 0.01) slopetxt <- "positive (> 0.01 V-1)"
+      if(slope < -0.01) slopetxt <- "negative (< -0.01 V-1)"
       slopetxt <- paste("Slope of ZC-Eh7 correlation for", lineage, "is", slopetxt)
       print(slopetxt)
     }
@@ -1122,8 +1126,8 @@ orp16S_T2 <- function() {
       thisdat <- EZlm[EZlm$lineage == lineage[ilin] & EZlm$envirotype == envirotype[ienv], ]
       # Get number of datasets and count those with positive and negative slopes
       ndat <- nrow(thisdat)
-      npos <- sum(thisdat$slope * 1e3 > 0.01)
-      nneg <- sum(thisdat$slope * 1e3 < -0.01)
+      npos <- sum(thisdat$slope > 0.01)
+      nneg <- sum(thisdat$slope < -0.01)
       # Calcualate percentages
       ppos <- round(npos / ndat * 100)
       pneg <- round(nneg / ndat * 100)
@@ -1194,9 +1198,9 @@ orp16S_S1 <- function(pdf = FALSE) {
 }
 
 # Compare regressions with Eh and O2 20220517
-orp16S6 <- function(pdf = FALSE) {
+orp16S_S3 <- function(pdf = FALSE) {
 
-  if(pdf) pdf("Figure6.pdf", width = 7, height = 6)
+  if(pdf) pdf("Figure_S3.pdf", width = 7, height = 6)
   mat <- matrix(1:6, nrow = 2, byrow = TRUE)
   layout(mat, widths = c(2, 2, 1))
 
@@ -1213,7 +1217,7 @@ orp16S6 <- function(pdf = FALSE) {
   add.linear(bacdat$Eh7, bacdat$ZC, nstudy)
   # Add points
   eachenv(bacdat, add = TRUE, do.linear = FALSE)
-  label.figure("A", cex = 1.5, font = 2)
+#  label.figure("A", cex = 1.5, font = 2)
   # Start ZC-O2 plot
   plot(c(0, 750), range(bacdat$ZC), type = "n", xlab = quote(O[2]~"("*mu*"mol L"^{-1}*")"), ylab = cplab$ZC)
   add.linear(bacdat$O2_umol_L, bacdat$ZC, nstudy, O2 = TRUE)
@@ -1239,7 +1243,7 @@ orp16S6 <- function(pdf = FALSE) {
   add.linear(arcdat$Eh7, arcdat$ZC, nstudy)
   # Add points
   eachenv(arcdat, add = TRUE, do.linear = FALSE)
-  label.figure("B", cex = 1.5, font = 2)
+#  label.figure("B", cex = 1.5, font = 2)
   # Start ZC-O2 plot
   plot(c(0, 750), range(arcdat$ZC), type = "n", xlab = quote(O[2]~"("*mu*"mol L"^{-1}*")"), ylab = cplab$ZC)
   add.linear(arcdat$O2_umol_L, arcdat$ZC, nstudy, O2 = TRUE)
