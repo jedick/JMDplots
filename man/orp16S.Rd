@@ -55,7 +55,7 @@ This table gives a brief description of each plotting function.
   \code{orp16S5} \tab Linear regressions between \ZC and Eh7 at a global scale \cr
   \code{orp16S_S1} \tab Eh-pH diagram (outline from Baas Becking et al., 1960) \cr
   \code{orp16S_S2} \tab \ZC-Eh scatterplots for each dataset \cr
-  \code{orp16S_S3} \tab Comparison of Eh7 and \O2 as predictors of carbon oxidation state \cr
+  \code{orp16S_S3} \tab Comparison of Eh7, Eh, and \O2 as predictors of carbon oxidation state \cr
 }
 
 \code{orp16S_S2} creates the files \file{EZdat.csv} and \file{EZlm.csv} that are used by the other plotting functions.

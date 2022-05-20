@@ -70,8 +70,8 @@ This vignette was compiled on `r Sys.Date()` with **[JMDplots](https://github.co
 library(JMDplots)
 ```
 
-## Thermodynamic predictive framework (Figure 1)
-```{r orp16S1, message = FALSE, results = "hide", out.width='80%', fig.align='center', fig.width = 6, fig.height = 4, pngquant = pngquant}
+## Methods outline (Figure 1)
+```{r orp16S1, message = FALSE, results = "hide", out.width='75%', fig.align='center', fig.width = 6, fig.height = 4, pngquant = pngquant}
 orp16S1()
 ```
 
@@ -115,8 +115,8 @@ orp16S_S1()
 
 **Data source:** Outline is from @BKM60.
 
-## Comparison of Eh7 and O~2~ as predictors of carbon oxidation state (Figure S3)
-```{r orp16S_S3, message = FALSE, results = "hide", out.width='100%', fig.width = 7, fig.height = 6, pngquant = pngquant, dpi = 100}
+## Comparison of Eh7, Eh, and O~2~ as predictors of carbon oxidation state (Figure S3)
+```{r orp16S_S3, message = FALSE, results = "hide", out.width='100%', fig.width = 6, fig.height = 8, pngquant = pngquant, dpi = 100}
 orp16S_S3()
 ```
 

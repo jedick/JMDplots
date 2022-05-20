@@ -129,13 +129,13 @@ orp16S2 <- function(pdf = FALSE) {
   SWIdepth <- 11.3
   # Shift depth values so SWI is at zero
   MODdepth <- depth - SWIdepth
-  plot(ORP, MODdepth, ylim = c(14.7, -6.3), type = "b", lty = 2, xlab = "ORP or Eh7 (mV)", ylab = "Depth (cm)", xlim = c(-400, 800), las = 1)
+  plot(ORP, MODdepth, ylim = c(14.7, -6.3), type = "b", lty = 2, xlab = "Eh or Eh7 (mV)", ylab = "Depth (cm)", xlim = c(-400, 800), las = 1)
   abline(h = 0, lty = 2, col = "darkgray", lwd = 1.5)
   # Calculate and plot Eh7 20210926
   Eh7 <- ORP + -59.16 * (7 - pH)
   lines(Eh7, MODdepth, type = "b", pch = 19)
-  text(50, -2.5, "Eh7")
-  text(700, -2.5, "ORP")
+  text(50, -2.3, "Eh7")
+  text(650, -2.3, "Eh")
   label.figure("A", font = 2, cex = 1.5)
 
   # Get 16S metadata and chemical metrics for Rundell et al. (2014) experiments
@@ -424,7 +424,7 @@ orp16S4 <- function(pdf = FALSE) {
   legend("bottomleft", ltext, pch = 19, col = orp16Scol[i1[1:2]])
   ltext <- names(envirotype)[i1[3:4]]
   legend("bottomright", ltext, pch = 19, col = orp16Scol[i1[3:4]])
-  title("Linear regressions for bacterial communities\n(all datasets)", font.main = 1, xpd = NA, line = 0.7)
+  title("Linear regressions for bacterial communities\nin each dataset", font.main = 1, xpd = NA, line = 0.7)
   label.figure("B", font = 2, cex = 1.5, yfrac = 1.05)
   # Groundwater, sediment, soil
   plot(xlim, ylim, type = "n", xlab = "log10(Number of samples)", ylab = quote("Slope of linear fit"~(V^-1)))
@@ -487,7 +487,7 @@ orp16S4 <- function(pdf = FALSE) {
       lsed <- paste0("Sediment (", paste(which(ised), collapse = ", "), ")")
       lacid <- paste0("Acidic (", paste(which(iacid), collapse = ", "), ")")
       lneut <- "Circumneutral to"
-      lalk <- paste0("Alkaline (", paste(which(col == orp16Scol[1]), collapse = ", "), ")")
+      lalk <- paste0("alkaline (", paste(which(col == orp16Scol[1]), collapse = ", "), ")")
       legend("topleft", c(lhyper, lsed, lacid, lneut, lalk), col = c("turquoise3", "gray", orp16Scol[4], orp16Scol[1], NA), lwd = 2, bty = "n")
     }
   }
@@ -728,7 +728,7 @@ orp16S_S2 <- function(pdf = FALSE) {
 ### UNEXPORTED FUNCTIONS ###
 ############################
 
-add.linear <- function(Eh7, ZC, nstudy = NA, O2 = FALSE) {
+add.linear <- function(xvals, ZC, nstudy = NA, xvar = "Eh7") {
   # Plot linear fit and confidence interval 20210920
   text.col <- "black"
   line.col <- "gray62"
@@ -743,21 +743,20 @@ add.linear <- function(Eh7, ZC, nstudy = NA, O2 = FALSE) {
     if(nstudy == 0) return()
   }
   # Fit data with linear model
-  EZlm <- lm(ZC ~ Eh7)
+  thislm <- lm(ZC ~ xvals)
   # Draw linear fit
-  Ehvals <- range(Eh7)
-  plx <- predict(EZlm, newdata = data.frame(Eh7 = Ehvals), se = T)
-  lines(Ehvals, plx$fit, col = line.col)
+  xlim <- range(xvals)
+  plx <- predict(thislm, newdata = data.frame(xvals = xlim), se = T)
+  lines(xlim, plx$fit, col = line.col)
   # Get the slope
-  slope <- EZlm$coefficients[2]
-  # Multiply by 1e3 to convert from mV-1 to V-1
+  slope <- thislm$coefficients[2]
+  # Multiply by 1e3 to convert from mV-1 to V-1 or umol-1 to mmol-1
   slope <- slope * 1e3
   # Round to fixed number of decimal places
   slope <- formatC(slope, digits = 3, format = "f")
-  # Units for Eh7
-  stext <- bquote(.(slope)~V^-1)
-  # Units for O2
-  if(O2) stext <- bquote(.(slope)~L~mu*mol^-1)
+  # Units for Eh7/Eh/O2
+  if(xvar %in% c("Eh7", "Eh")) stext <- bquote(.(slope)~V^-1)
+  if(xvar == "O2") stext <- bquote(.(slope)~L~mmol^-1)
   # Also show number of samples
   Ntext <- bquote(italic(N) == .(length(ZC)))
   # Add text to plot
@@ -765,7 +764,7 @@ add.linear <- function(Eh7, ZC, nstudy = NA, O2 = FALSE) {
   legend("topright", legend = legend, bty = "n", text.col = text.col)
 
   # Calculate Pearson correlation 20211009
-  pearson <- cor.test(Eh7, ZC, method = "pearson")
+  pearson <- cor.test(xvals, ZC, method = "pearson")
   # Get P-value
   pval <- pearson$p.value
   # Format correlation coefficient
@@ -780,12 +779,14 @@ add.linear <- function(Eh7, ZC, nstudy = NA, O2 = FALSE) {
 
 # Scatterplots for all samples in each environment type 20210913
 eachenv <- function(eedat, add = FALSE, do.linear = TRUE, ienv = c(1, 2, 4, 5, 3, 6, 7), cols = orp16Scol,
-  lineage = NULL, xlim = NULL, ylim = NULL, O2 = FALSE) {
-  # Decide whether x variable is Eh7 or O2
-  if(O2) Xvar <- eedat$O2_umol_L else Xvar <- eedat$Eh7
-  eedat <- cbind(eedat, Xvar)
+  lineage = NULL, xlim = NULL, ylim = NULL, xvar = "Eh7") {
+  # Get x values
+  if(xvar == "Eh7") xvals <- eedat$Eh7
+  if(xvar == "Eh") xvals <- eedat$Eh
+  if(xvar == "O2") xvals <- eedat$O2_umol_L
+  eedat <- cbind(eedat, xvals)
   # Get overall x and y limits
-  if(is.null(xlim)) xlim <- range(eedat$Xvar)
+  if(is.null(xlim)) xlim <- range(eedat$xvals)
   if(is.null(ylim)) ylim <- range(eedat$ZC)
   # Get names of environment types
   envirotypes <- names(envirotype)
@@ -795,12 +796,12 @@ eachenv <- function(eedat, add = FALSE, do.linear = TRUE, ienv = c(1, 2, 4, 5, 3
     if(!add) plot(xlim, ylim, type = "n", xlab = "", ylab = "", axes = FALSE)
     # Get Eh7/O2 and ZC values
     thisdat <- eedat[eedat$envirotype == envirotypes[i], ]
-    Xvar <- thisdat$Xvar
+    xvals <- thisdat$xvals
     ZC <- thisdat$ZC
     if(do.linear) {
       # Include number of studies in legend 20210925
       nstudy <- length(unique(thisdat$study))
-      add.linear(Xvar, ZC, nstudy)
+      add.linear(xvals, ZC, nstudy)
     }
     if(!isTRUE(add)) {
       # Add plot axes and title
@@ -815,7 +816,7 @@ eachenv <- function(eedat, add = FALSE, do.linear = TRUE, ienv = c(1, 2, 4, 5, 3
       if(lineage == "Bacteria") title(envirotypes[i], font.main = 1, cex.main = 1)
     }
     # Plot points
-    points(Xvar, ZC, pch = 19, cex = 0.2, col = cols[i])
+    points(xvals, ZC, pch = 19, cex = 0.2, col = cols[i])
   }
 }
 
@@ -1197,67 +1198,47 @@ orp16S_S1 <- function(pdf = FALSE) {
   if(pdf) dev.off()
 }
 
-# Compare regressions with Eh and O2 20220517
+# Compare regressions with Eh7, Eh, and O2 20220517
 orp16S_S3 <- function(pdf = FALSE) {
 
-  if(pdf) pdf("Figure_S3.pdf", width = 7, height = 6)
-  mat <- matrix(1:6, nrow = 2, byrow = TRUE)
-  layout(mat, widths = c(2, 2, 1))
+  if(pdf) pdf("Figure_S3.pdf", width = 6, height = 8)
+#  mat <- matrix(1:6, nrow = 2, byrow = TRUE)
+  mat <- matrix(1:8, ncol = 2)
+  layout(mat, heights = c(2, 2, 2, 1))
 
   # Use only samples with non-NA O2
-  thisdat <- EZdat[!is.na(EZdat$O2_umol_L), ] 
+  hasO2dat <- EZdat[!is.na(EZdat$O2_umol_L), ] 
 
-  ## Bacteria only
-  par(mar = c(4, 4, 2.5, 1))
-  bacdat <- thisdat[thisdat$lineage == "Bacteria", ]
-  # Start ZC-Eh7 plot
-  plot(c(-500, 650), range(bacdat$ZC), type = "n", xlab = "Eh7 (mV)", ylab = cplab$ZC)
-  # Add linear fit; include number of studies in legend 20210925
-  nstudy <- length(unique(bacdat$study))
-  add.linear(bacdat$Eh7, bacdat$ZC, nstudy)
-  # Add points
-  eachenv(bacdat, add = TRUE, do.linear = FALSE)
-#  label.figure("A", cex = 1.5, font = 2)
-  # Start ZC-O2 plot
-  plot(c(0, 750), range(bacdat$ZC), type = "n", xlab = quote(O[2]~"("*mu*"mol L"^{-1}*")"), ylab = cplab$ZC)
-  add.linear(bacdat$O2_umol_L, bacdat$ZC, nstudy, O2 = TRUE)
-  eachenv(bacdat, add = TRUE, do.linear = FALSE, O2 = TRUE)
-  mtext("Bacteria", adj = -0.42, line = 1)
-  # Add legend
-  par(mar = c(0, 0, 0, 0))
-  plot.new()
-  ienv = c(1, 2, 4, 5, 3, 6, 7)
-  ltext <- names(envirotype)[ienv]
-  # Add number of samples in each environment 20220518
-  nsamp <- table(bacdat$envirotype)[ltext]
-  ltext <- paste0(ltext, " (", nsamp, ")")
-  legend("left", ltext, pch = 19, col = orp16Scol[ienv], bty = "n")
-
-  ## Archaea only
-  par(mar = c(4, 4, 2.5, 1))
-  arcdat <- thisdat[thisdat$lineage == "Archaea", ]
-  # Start ZC-Eh7 plot
-  plot(c(-500, 650), range(arcdat$ZC), type = "n", xlab = "Eh7 (mV)", ylab = cplab$ZC)
-  # Add linear fit; include number of studies in legend 20210925
-  nstudy <- length(unique(arcdat$study))
-  add.linear(arcdat$Eh7, arcdat$ZC, nstudy)
-  # Add points
-  eachenv(arcdat, add = TRUE, do.linear = FALSE)
-#  label.figure("B", cex = 1.5, font = 2)
-  # Start ZC-O2 plot
-  plot(c(0, 750), range(arcdat$ZC), type = "n", xlab = quote(O[2]~"("*mu*"mol L"^{-1}*")"), ylab = cplab$ZC)
-  add.linear(arcdat$O2_umol_L, arcdat$ZC, nstudy, O2 = TRUE)
-  eachenv(arcdat, add = TRUE, do.linear = FALSE, O2 = TRUE)
-  mtext("Archaea", adj = -0.42, line = 1)
-  # Add legend
-  par(mar = c(0, 0, 0, 0))
-  plot.new()
-  ienv = c(1, 2, 4, 5, 3, 6, 7)
-  ltext <- names(envirotype)[ienv]
-  # Add number of samples in each environment 20220518
-  nsamp <- table(arcdat$envirotype)[ltext]
-  ltext <- paste0(ltext, " (", nsamp, ")")
-  legend("left", ltext, pch = 19, col = orp16Scol[ienv], bty = "n")
+  # Loop over domains
+  for(lineage in c("Bacteria", "Archaea")) {
+    par(mar = c(4, 4, 1.5, 1))
+    thisdat <- hasO2dat[hasO2dat$lineage == lineage, ]
+    # ZC-Eh7 plot
+    plot(c(-500, 700), range(hasO2dat$ZC), type = "n", xlab = "Eh7 (mV)", ylab = cplab$ZC)
+    # Add linear fit; include number of studies in legend 20210925
+    nstudy <- length(unique(thisdat$study))
+    add.linear(thisdat$Eh7, thisdat$ZC, nstudy)
+    # Add points
+    eachenv(thisdat, add = TRUE, do.linear = FALSE, xvar = "Eh7")
+    title(lineage, font.main = 1)
+    # ZC-Eh plot
+    plot(c(-500, 700), range(hasO2dat$ZC), type = "n", xlab = "Eh (mV)", ylab = cplab$ZC)
+    add.linear(thisdat$Eh, thisdat$ZC, nstudy, xvar = "Eh")
+    eachenv(thisdat, add = TRUE, do.linear = FALSE, xvar = "Eh")
+    # ZC-O2 plot
+    plot(c(0, 750), range(hasO2dat$ZC), type = "n", xlab = quote(O[2]~"("*mu*"mol L"^{-1}*")"), ylab = cplab$ZC)
+    add.linear(thisdat$O2_umol_L, thisdat$ZC, nstudy, xvar = "O2")
+    eachenv(thisdat, add = TRUE, do.linear = FALSE, xvar = "O2")
+    # Add legend
+    par(mar = c(0, 0, 0, 0))
+    plot.new()
+    ienv = c(1, 2, 4, 5, 3, 6, 7)
+    ltext <- names(envirotype)[ienv]
+    # Add number of samples in each environment 20220518
+    nsamp <- table(thisdat$envirotype)[ltext]
+    ltext <- paste0(ltext, " (", nsamp, ")")
+    legend("bottom", ltext, pch = 19, col = orp16Scol[ienv], bty = "n")
+  }
 
   if(pdf) dev.off()
 
