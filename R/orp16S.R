@@ -274,17 +274,18 @@ orp16S3 <- function(pdf = FALSE) {
     "RBM+21, -23.25, -44.62", # SAMN10935837
     "ZHZ+19, 23.130, 113.671", # Materials and methods   ### Laboratory
     "MCS+21, -32.15, -71.1", # Materials and methods
-    "LMBA17_2017, 43.42, -2.7", # Fig. 1
+    "LMBA21_2017, 43.42, -2.7", # Fig. 1
     "HSF+22, -9.42979, 46.49524", # SAMN14343437
     "ZZLL21, 22.68, 113.97", # SAMN16964887
     # BKR+22 see below
     "WFB+21, 56.440893, -2.863194", # methods   ### Mesocosm
-    "HCW+22, 31.3, 119.98", # Materials and methods   ### Laboratory
-    "NA, NA, NA"
+    "HCW+22, 31.3, 119.98" # Materials and methods   ### Laboratory
   )))
 
   # This reads the data
   coords <- read.csv(file, as.is = TRUE)
+  # Make sure the study keys are correct 20220522
+  stopifnot(all(coords$study %in% unlist(envirotype)))
 
   # Start map
   # https://cran.r-project.org/web/packages/oce/vignettes/map_projections.html
@@ -412,7 +413,7 @@ orp16S4 <- function(pdf = FALSE) {
   j2 <- env$groupnum %in% i2
   xlim <- range(log10(lmbac$nsamp[j1 | j2]))
   # Multiply by 1e3 to use V-1 instead of mV-1 20210913
-  # NOTE: conversion to V-1 is moved to orp16S_S2() 20220520
+  # NOTE: conversion to V-1 has been moved to orp16S_S2() 20220520
   ymaxabs <- max(abs(lmbac$slope[j1 | j2]))
   ylim <- c(-ymaxabs*1.2, ymaxabs)
   # River & seawater, lake & pond, hot spring, alkaline spring
@@ -708,17 +709,18 @@ orp16S_S2 <- function(pdf = FALSE) {
   Eh7min <- Eh7lim[1, ]
   Eh7max <- Eh7lim[2, ]
   study <- sapply(results[names(results) == "study"], "[")
+  name <- sapply(results[names(results) == "name"], "[")
   envirotype <- sapply(results[names(results) == "envirotype"], "[")
   lineage <- sapply(results[names(results) == "lineage"], "[")
   nsamp <- sapply(model, nrow)
   pearson.r <- unlist(lapply(results[names(results) == "pearson"], "[[", "estimate"))
   P.value <- unlist(lapply(results[names(results) == "pearson"], "[[", "p.value"))
   # Note: slope is mutiplied by 1e3 to convert from mV-1 to V-1
-  EZlm <- data.frame(study, envirotype, lineage, nsamp, Eh7min, Eh7max,
+  EZlm <- data.frame(study, name, envirotype, lineage, nsamp, Eh7min, Eh7max,
     slope = signif(slope * 1e3, 6), intercept = signif(intercept, 6), pearson.r = signif(pearson.r, 6), P.value = signif(P.value, 6))
   # Save data and results to files
   write.csv(EZdat, "EZdat.csv", row.names = FALSE, quote = FALSE)
-  write.csv(EZlm, "EZlm.csv", row.names = FALSE, quote = FALSE)
+  write.csv(EZlm, "EZlm.csv", row.names = FALSE, quote = 2)
 
 }
 

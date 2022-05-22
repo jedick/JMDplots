@@ -96,6 +96,12 @@ plotEZ <- function(study, lineage = NULL, mincount = 100, pch = NULL, col = NULL
   ipH <- match("pH", colnames(metadata))
   if(is.na(ipH)) pH <- NA else pH <- metadata[, ipH]
   EZdat <- data.frame(T = T, pH = pH, O2_umol_L = metadata$O2_umol_L, Eh = metadata$Ehorig, Eh7 = metadata$Eh7, ZC = round(metrics$ZC, 6))
+  # Get dataset name
+  iname <- match("name", tolower(colnames(metadata)))
+  name <- na.omit(metadata[, iname])[1]
+  # Split suffix from study key 20210914
+  root <- strsplit(study, "_")[[1]][1]
+  suffix <- strsplit(study, "_")[[1]][2]
   # Create subtitle for environment type 20210904
   sub <- envirotype <- envirodat$group[envirodat$study == study]
   if(!add) {
@@ -107,11 +113,7 @@ plotEZ <- function(study, lineage = NULL, mincount = 100, pch = NULL, col = NULL
     # Draw x-axis label with mtext to avoid getting cut off by small margin 20220517
     mtext("Eh7 (mV)", side = 1, line = par("mgp")[1], cex = par("cex"))
     if(!is.null(title.line)) {
-      # Take off suffix after underscore 20210914
-      root <- strsplit(study, "_")[[1]][1]
-      suffix <- strsplit(study, "_")[[1]][2]
-      iname <- match("name", tolower(colnames(metadata)))
-      main <- paste0(na.omit(metadata[, iname])[1], " (", root, ")")
+      main <- paste0(name, " (", root, ")")
       title(main = main, font.main = 1, line = title.line)
       # Include suffix in subtite 20210914
       if(!is.na(suffix)) sub <- paste(sub, "-", suffix)
@@ -147,13 +149,15 @@ plotEZ <- function(study, lineage = NULL, mincount = 100, pch = NULL, col = NULL
     EZdat <- cbind(groupby = NA, group = NA, EZdat)
   }
 
+  # Include suffix in name 20220522
+  if(!is.na(suffix)) name <- paste0(name, " (", suffix, ")")
   # Return values
   # Use first column name starting with "sample" or "Sample" 20210818
   sampcol <- grep("^sample", colnames(metadata), ignore.case = TRUE)[1]
   if(is.null(lineage)) lineage <- ""
   if(length(envirotype) == 0) envirotype <- ""
   EZdat <- cbind(study = study, envirotype = envirotype, lineage = lineage, sample = metadata[, sampcol], Run = metadata$Run, EZdat)
-  out <- list(study = study, envirotype = envirotype, lineage = lineage, metadata = metadata, EZdat = EZdat)
+  out <- list(study = study, name = name, envirotype = envirotype, lineage = lineage, metadata = metadata, EZdat = EZdat)
   if("lm" %in% show) out <- c(out, list(EZlm = EZlm, Eh7lim = Eh7lim, ZCpred = ZCpred, pearson = pearson))
   invisible(out)
 

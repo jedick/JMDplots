@@ -138,6 +138,9 @@ orp16S_info("SPA+21")
 orp16S_info("PCL+18_Acidic")
 orp16S_info("PCL+18_Alkaline")
 
+# There's no plotmet_orp16S, but this is what it would look like in one line
+plotmet(getmdat_orp16S("DJK+18", getmetrics_orp16S("DJK+18")))
+
 \dontrun{
 # Get unexported object with datasets in each environment type
 envirotype <- JMDplots:::envirotype
