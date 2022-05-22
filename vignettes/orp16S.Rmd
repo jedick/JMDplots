@@ -83,7 +83,7 @@ orp16S2()
 **Data sources:** ORP and pH for Eh7 calculation [@DFYS19]; 16S rRNA gene sequences for `r ZC` calculation [@RBW+14].
 
 ## Sample locations on world map (Figure 3)
-```{r orp16S3, message = FALSE, results = "hide", out.width='100%', fig.width = 26, fig.height = 14, out.extra = 'class="full-width"', pngquant = pngquant, dpi = 100}
+```{r orp16S3, message = FALSE, results = "hide", out.width='100%', fig.width = 26, fig.height = 15, out.extra = 'class="full-width"', pngquant = pngquant, dpi = 100}
 orp16S3()
 ```
 

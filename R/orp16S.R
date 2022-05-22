@@ -416,7 +416,7 @@ orp16S4 <- function(pdf = FALSE) {
   ymaxabs <- max(abs(lmbac$slope[j1 | j2]))
   ylim <- c(-ymaxabs*1.2, ymaxabs)
   # River & seawater, lake & pond, hot spring, alkaline spring
-  plot(xlim, ylim, type = "n", xlab = "log10(Number of samples)", ylab = quote("Slope of linear fit"~(V^-1)))
+  plot(xlim, ylim, type = "n", xlab = quote(log[10]~"(Number of samples)"), ylab = quote("Slope of linear fit"~(V^-1)))
   abline(h = 0, lty = 2, lwd = 1.5, col = "gray50")
   points(log10(lmbac$nsamp[j1]), lmbac$slope[j1], pch = 19, col = orp16Scol[env$groupnum[j1]])
   # Add legend
@@ -427,7 +427,7 @@ orp16S4 <- function(pdf = FALSE) {
   title("Linear regressions for bacterial communities\nin each dataset", font.main = 1, xpd = NA, line = 0.7)
   label.figure("B", font = 2, cex = 1.5, yfrac = 1.05)
   # Groundwater, sediment, soil
-  plot(xlim, ylim, type = "n", xlab = "log10(Number of samples)", ylab = quote("Slope of linear fit"~(V^-1)))
+  plot(xlim, ylim, type = "n", xlab = quote(log[10]~"(Number of samples)"), ylab = quote("Slope of linear fit"~(V^-1)))
   abline(h = 0, lty = 2, lwd = 1.5, col = "gray50")
   points(log10(lmbac$nsamp[j2]), lmbac$slope[j2], pch = 19, col = orp16Scol[env$groupnum[j2]])
   ltext <- names(envirotype)[i2]
@@ -598,7 +598,7 @@ orp16S_S2 <- function(pdf = FALSE) {
     plotEZ("SCH+16", "two", groupby = "Type", groups = c("Oxic", "Oxycline", "Anoxic")),
     plotEZ("BCA+21", "Bacteria", groupby = "Month", groups = c("Jul", "Nov", "Feb", "Apr")),
     plotEZ("HLZ+18", "Bacteria", groupby = "Type", groups = c("Reservoir", "Pond"), legend.x = "bottomright"),
-    plotEZ("GRG+20", "two", groupby = "Type", groups = c("Oxic", "Anoxic"), legend.x = "bottomleft"),
+    plotEZ("GRG+20", "Bacteria", groupby = "Type", groups = c("Oxic", "Anoxic"), legend.x = "bottomleft"),
     plotEZ("CNA+20", "Bacteria", groupby = "Season", groups = c("Summer", "Autumn", "Winter", "Spring"), legend.x = "topright"),
     plotEZ("BWD+19", "Bacteria", groupby = "Cover", groups = c("Ice", "Ice Free"), legend.x = "bottomright"),
     plotEZ("RSJ+21", "two", groupby = "Lake", groups = c("Kuiva", "Lovo"), legend.x = "topright"),
@@ -611,7 +611,6 @@ orp16S_S2 <- function(pdf = FALSE) {
     plotEZ("FAV+21", "two", groupby = "Type", groups = c("Oxic Surface", "Anoxic Surface", "Bottom")),
     plotEZ("PSV+22", "Bacteria", groupby = "Location", groups = c("Center", "West"), legend.x = "bottomright"),
 
-    # Hot Spring
     message("\nHot Spring"),
     plotEZ("SMS+12", "two", groupby = "Type", groups = c("Chemotrophic", "Transition", "Phototrophic")),
     plotEZ("PCL+18_Acidic", "two", legend.x = "bottomright"),
@@ -634,7 +633,7 @@ orp16S_S2 <- function(pdf = FALSE) {
 
     message("\nGroundwater"),
     plotEZ("KLM+16", "Bacteria", groupby = "Day", groups = c(-1, 246, 448, 671)),
-    plotEZ("YHK+19", "two"),
+    plotEZ("YHK+19", "Bacteria"),
     plotEZ("SDH+19", "Bacteria", groupby = "Type", groups = c("Freshwater", "Brackish", "Saltwater")),
     plotEZ("SRM+19", "Bacteria", groupby = "Land Use", groups = c("Agriculture", "Community", "Landfill", "Mine")),
     plotEZ("APV+20", "two", groupby = "Type", groups = c("Canal", "Piezometer", "Well", "Spring")),
@@ -644,7 +643,7 @@ orp16S_S2 <- function(pdf = FALSE) {
     plotEZ("GWS+19", "Bacteria", groupby = "Type", groups = c("Un-confined", "Confined"), legend.x = "bottomleft"),
     plotEZ("SRM+21", "Bacteria", groupby = "Depth", groups = c("Surface", "Shallow", "Deep"), legend.x = "bottomleft"),
     plotEZ("ZCZ+21", "Bacteria", groupby = "Location", groups = c("LO", "CR1", "MN", "VA", "BS", "CR2"), legend.x = "topright"),
-    plotEZ("CSW+22", "two", groupby = "BTEX", groups = c("High", "Low", "No"), legend.x = "topright"),
+    plotEZ("CSW+22", "Bacteria", groupby = "BTEX", groups = c("High", "Low", "No"), legend.x = "topright"),
     plotEZ("GXS+22", "Bacteria", groupby = "Subarea", groups = c("A", "B", "C")),
 
     message("\nSediment"),
@@ -656,7 +655,7 @@ orp16S_S2 <- function(pdf = FALSE) {
     plotEZ("HDZ+19", "Bacteria", groupby = "Type", groups = c("Water", "Sediment")),
     plotEZ("TCN+17", "Bacteria", groupby = "Treatment", groups = c("Oxic", "Anoxic/Oxic", "Anoxic"), legend.x = "bottomright"),
     plotEZ("WHLH21", "Bacteria", groupby = "Position", groups = c("Surface", "Middle", "Bottom"), legend.x = "bottomleft"),
-    plotEZ("SCM+18", "two", groupby = "Site", groups = c("Shallow", "Deep"), legend.x = "bottomleft"),
+    plotEZ("SCM+18", "Bacteria", groupby = "Site", groups = c("Shallow", "Deep"), legend.x = "bottomleft"),
     plotEZ("RSS+18", "Bacteria", groupby = "Site", groups = c("Deep Hole", "Snowgoose Bay", "John's Island", "Skeleton Lake"), dylim = c(0, 0.001)),
     plotEZ("CLS+19", "two", groupby = "Type", groups = c("Water", "Sediment"), legend.x = "bottomright"),
     plotEZ("ZDA+20", "Bacteria", groupby = "Type", groups = c("Water", "Sediment"), legend.x = "bottomleft"),
@@ -684,8 +683,8 @@ orp16S_S2 <- function(pdf = FALSE) {
     plotEZ("CWC+20", "Bacteria", groupby = "Management", groups = c("Flooding", "Draining")),
     plotEZ("PSG+20", "two", groupby = "Treatment", groups = c("Initial", "NCC", "RB", "RGP", "TP")),
     plotEZ("XLD+20", "two", groupby = "Treatment", groups = c("Original Soil", "CK", "9K-Control", "Htt-sys", "Att-sys", "Co-sys"), legend.x = "bottomright"),
-    plotEZ("LJC+20", "two", groupby = "meanT", groups = c("MAT >= 21.5 degC", "MAT < 21.5 degC")),
-    plotEZ("DTJ+20", "two", groupby = "Zone", groups = c("Bulk Soil", "Mature", "Elongation", "Tip")),
+    plotEZ("LJC+20", "Bacteria", groupby = "meanT", groups = c("MAT >= 21.5 degC", "MAT < 21.5 degC")),
+    plotEZ("DTJ+20", "Bacteria", groupby = "Zone", groups = c("Bulk Soil", "Mature", "Elongation", "Tip")),
     plotEZ("ZWH+22", "Bacteria", groupby = "Treatment", groups = c("Control", "Flooded", "Flooded + 0.5% silkworm excrement", "Flooded + 1% silkworm excrement"), legend.x = "bottomright"),
     plotEZ("LLL+21", "Bacteria", groupby = "Treatment", groups = c("CK", "FL", "EA", "SB", "BD")),
     plotEZ("RKSK22", "two", groupby = "Compartment", groups = c("Bulk sediment", "Rhizosphere", "Root"), legend.x = "bottomright"),
@@ -1094,9 +1093,11 @@ orp16S_info <- function(study) {
   }
   print(paste0("nBac: ", nBac, "; nArc: ", nArc))
   # Now print the T, pH, Eh, Eh7 ranges
-  print(attributes(metadata)$infotext)
+  infotext <- attributes(metadata)$infotext
+  print(infotext)
   # Read linear fit coefficients
   dat <- EZlm[EZlm$study == study, ]
+  bacslope <- NA
   for(lineage in c("Bacteria", "Archaea")) {
     idat <- dat$lineage == lineage
     if(any(idat)) {
@@ -1104,10 +1105,21 @@ orp16S_info <- function(study) {
       slopetxt <- "-- (close to zero)"
       if(slope > 0.01) slopetxt <- "positive (> 0.01 V-1)"
       if(slope < -0.01) slopetxt <- "negative (< -0.01 V-1)"
+      if(lineage == "Bacteria") bacslope <- slopetxt
       slopetxt <- paste("Slope of ZC-Eh7 correlation for", lineage, "is", slopetxt)
       print(slopetxt)
     }
   }
+  # Return values for Table S1 invisibly 20220520
+  T <- gsub(",.*", "", strsplit(infotext, "T ")[[1]][2])
+  if(T == "assumed 25") T <- NA
+  pH <- gsub(",.*", "", strsplit(infotext, "pH ")[[1]][2])
+  if(pH == "assumed 7") pH <- NA
+  Eh <- gsub(",.*", "", strsplit(infotext, "Eh ")[[1]][2])
+  Eh7 <- strsplit(infotext, "Eh7 ")[[1]][2]
+  if(!is.na(bacslope)) bacslope <- strsplit(bacslope, " ")[[1]][1]
+  out <- data.frame(study = study, name = name, nBac = nBac, nArc = nArc, T = T, pH = pH, Eh = Eh, Eh7 = Eh7, bacslope = bacslope)
+  invisible(out)
 }
 
 # Summary table of regression slopes 20220516

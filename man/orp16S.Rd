@@ -74,7 +74,7 @@ If \code{metrics} is supplied, metadata are kept only for samples with available
 \code{...} is used to supply argument to \code{\link[chem16S]{readRDP}}; note that the default of \code{mincount = 100} was used for data processing in the paper (see \code{\link{plotEZ}}).
 
 \code{orp16S_info} prints general information about a study (more specifically, a dataset): name, number of samples with Bacteria and Archaea (with \code{mincount = 100}), bibligraphic key, range of T, pH, Eh, and Eh7, and whether the slope of the \ZC-Eh7 correlations for Bacteria and Archaea (if available) are negative (< -0.01 V\S{-1}), positive (> 0.01 V\S{-1}), or close to zero.
-This information is used to fill in Table S1 of the paper.
+The function also returns information in a data frame, which is used to fill in Table S1 of the paper.
 
 }
 
@@ -137,6 +137,21 @@ orp16S_info("SPA+21")
 # Some keys have suffixes to retrieve subsets of data (see code of getmdat_orp16S)
 orp16S_info("PCL+18_Acidic")
 orp16S_info("PCL+18_Alkaline")
+
+\dontrun{
+# Get unexported object with datasets in each environment type
+envirotype <- JMDplots:::envirotype
+# Function to get info for all datasets in one environment type
+envinfo <- function(ienv) do.call(rbind, lapply(envirotype[[ienv]], orp16S_info))
+# Get info for all datasets in all environment types
+allenv <- lapply(1:7, envinfo)
+# Put in names of environments
+cbindenv <- function(a, b) cbind(envirotype = a, b)
+allenv <- mapply(cbindenv, names(envirotype)[1:7], allenv, SIMPLIFY = FALSE)
+allenv <- do.call(rbind, c(allenv, make.row.names = FALSE))
+# Now write to CSV file for copying to Table S1
+write.csv(allenv, "Table_S1_values.csv", row.names = FALSE)
+}
 
 # Check that references for all studies are available
 mdatdir <- system.file("extdata/orp16S/metadata", package = "JMDplots")

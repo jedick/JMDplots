@@ -49,4 +49,4 @@ The vignettes can be viewed at <http://chnosz.net/JMDplots/doc/>.
 
 This package except for the file `inst/extdata/orp16S/metadata/PCL+18.csv` is licensed under the GNU General Public License v3 (GPLv3).
 
-The ORP (numeric) and Feature (Stream, Spring, Lake, Terrace, or Geyser) data for New Zealand hot springs ([Power et al., 2018](https://doi.org/10.1038/s41467-018-05020-y)) in `PCL+18.csv` were obtained from the [1000 Springs Project](http://1000springs.org.nz) and are licensed under CC-BY-NC-SA.
+The ORP (mV), DO (mg/L) and Feature (Stream, Spring, Lake, Terrace, or Geyser) data for New Zealand hot springs ([Power et al., 2018](https://doi.org/10.1038/s41467-018-05020-y)) in `PCL+18.csv` were obtained from the [1000 Springs Project](http://1000springs.org.nz) and are licensed under CC-BY-NC-SA.
