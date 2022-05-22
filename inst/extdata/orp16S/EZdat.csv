@@ -1531,6 +1531,43 @@ KLM+16,Groundwater,Bacteria,MW9_Dec2010,SRR3124350,Day,2,NA,7.24,18.75,-138,-123
 KLM+16,Groundwater,Bacteria,MW9_Aug2011,SRR3124351,Day,246,NA,7.79,114.0625,-123,-76.27,-0.162969
 KLM+16,Groundwater,Bacteria,MW9_Feb2012,SRR3124353,Day,448,NA,7.3,78.4375,-38,-20.25,-0.156071
 KLM+16,Groundwater,Bacteria,MW9_Oct2012,SRR3124354,Day,671,NA,7.28,45,-74,-57.44,-0.154681
+MIN+16,Groundwater,Bacteria,KAW,DRR057239,NA,NA,48.7,7.6,NA,-196,-157.68,-0.153782
+MIN+16,Groundwater,Bacteria,YZ50,DRR057238,NA,NA,41,7.8,NA,-114,-64.14,-0.170512
+MIN+16,Groundwater,Bacteria,NKK,DRR057240,NA,NA,40.6,8.2,NA,-178,-103.3,-0.154067
+MIN+16,Groundwater,Bacteria,EIS,DRR057241,NA,NA,28.6,8.4,NA,-312,-228.18,-0.148965
+MIN+16,Groundwater,Bacteria,SMD,DRR057242,NA,NA,39,8.2,NA,-270,-195.68,-0.18734
+MIN+16,Groundwater,Bacteria,KOZ,DRR057243,NA,NA,30,8.3,NA,-297,-218.81,-0.162273
+MIN+16,Groundwater,Bacteria,US-2,DRR057244,NA,NA,32.8,8.9,NA,-255,-139.66,-0.148932
+MIN+16,Groundwater,Bacteria,ART,DRR057245,NA,NA,35.1,8.8,NA,-257,-146.91,-0.151722
+WLJ+16,Groundwater,Bacteria,IC01,IC01112,Arsenic,As < 100 μg/L,NA,7.43,NA,194,219.44,-0.150554
+WLJ+16,Groundwater,Bacteria,IC02,IC0295,Arsenic,As > 100 μg/L,NA,8.05,NA,-138,-75.89,-0.156758
+WLJ+16,Groundwater,Bacteria,IC03,IC03101,Arsenic,As < 100 μg/L,NA,7.86,NA,-60,-9.13,-0.15483
+WLJ+16,Groundwater,Bacteria,IC04,IC04114,Arsenic,As > 100 μg/L,NA,7.59,NA,-46,-11.1,-0.156381
+WLJ+16,Groundwater,Bacteria,IC05,IC0597,Arsenic,As > 100 μg/L,NA,6.92,NA,-22,-26.73,-0.145579
+WLJ+16,Groundwater,Bacteria,IC06,IC06102,Arsenic,As < 100 μg/L,NA,7.95,NA,114,170.2,-0.163091
+WLJ+16,Groundwater,Bacteria,IC07,IC07103,Arsenic,As < 100 μg/L,NA,8.05,NA,-65,-2.89,-0.161418
+WLJ+16,Groundwater,Bacteria,IC08,IC08111,Arsenic,As < 100 μg/L,NA,7.26,NA,216,231.38,-0.153656
+WLJ+16,Groundwater,Bacteria,IC09,IC09108,Arsenic,As > 100 μg/L,NA,6.7,NA,-187,-204.75,-0.156133
+WLJ+16,Groundwater,Bacteria,IC11,IC11113,Arsenic,As > 100 μg/L,NA,7.99,NA,-50,8.56,-0.156423
+WLJ+16,Groundwater,Bacteria,IC12,IC12104,Arsenic,As > 100 μg/L,NA,8.45,NA,-278,-192.22,-0.162642
+WLJ+16,Groundwater,Bacteria,IC13,IC1394,Arsenic,As > 100 μg/L,NA,8.31,NA,76,153.49,-0.150486
+WLJ+16,Groundwater,Bacteria,IC14,IC14109,Arsenic,As > 100 μg/L,NA,8.03,NA,5,65.93,-0.163153
+WLJ+16,Groundwater,Bacteria,IC15,IC1592,Arsenic,As < 100 μg/L,NA,7.73,NA,-30,13.18,-0.148957
+WLJ+16,Groundwater,Bacteria,IC16,IC16107,Arsenic,As > 100 μg/L,NA,8.02,NA,26,86.34,-0.157406
+WLJ+16,Groundwater,Bacteria,IC17,IC17110,Arsenic,As < 100 μg/L,NA,6.73,NA,119,103.03,-0.141086
+WLJ+16,Groundwater,Archaea,IC03,IC03101,Arsenic,As < 100 μg/L,NA,7.86,NA,-60,-9.13,-0.139378
+WLJ+16,Groundwater,Archaea,IC11,IC11113,Arsenic,As > 100 μg/L,NA,7.99,NA,-50,8.56,-0.182239
+WLJ+16,Groundwater,Archaea,IC12,IC12104,Arsenic,As > 100 μg/L,NA,8.45,NA,-278,-192.22,-0.157223
+WLJ+16,Groundwater,Archaea,IC13,IC1394,Arsenic,As > 100 μg/L,NA,8.31,NA,76,153.49,-0.131301
+WLJ+16,Groundwater,Archaea,IC15,IC1592,Arsenic,As < 100 μg/L,NA,7.73,NA,-30,13.18,-0.143978
+WLJ+16,Groundwater,Archaea,IC17,IC17110,Arsenic,As < 100 μg/L,NA,6.73,NA,119,103.03,-0.149189
+XKL+21,Groundwater,Bacteria,K1_1_2_2th_D,mgm4887099.3,NA,NA,NA,7.75,NA,-81.6,-37.23,-0.149212
+XKL+21,Groundwater,Bacteria,K1_2_6_2th_D,mgm4887093.3,NA,NA,NA,7.49,NA,-100,-71.01,-0.149581
+XKL+21,Groundwater,Bacteria,K1_3_1_2th_D,mgm4887094.3,NA,NA,NA,7.61,NA,-158,-121.91,-0.158891
+XKL+21,Groundwater,Bacteria,K1-4 D,mgm4887089.3,NA,NA,NA,8.16,NA,-145,-76.38,-0.148761
+XKL+21,Groundwater,Bacteria,K1_5_2_D,mgm4887101.3,NA,NA,NA,8.06,NA,-124,-61.29,-0.147226
+XKL+21,Groundwater,Bacteria,K1_6_2_D,mgm4887088.3,NA,NA,NA,7.99,NA,-153,-94.44,-0.145825
+XKL+21,Groundwater,Bacteria,K1_7_3_D,mgm4887085.3,NA,NA,NA,7.93,NA,-107,-51.98,-0.150602
 YHK+19,Groundwater,Bacteria,No.1-DNA,DRR099606,NA,NA,13.6,7.02,3.125,58,59.14,-0.161632
 YHK+19,Groundwater,Bacteria,No.2-DNA,DRR099607,NA,NA,13.9,6.97,3.125,63,61.29,-0.156231
 YHK+19,Groundwater,Bacteria,No.3-DNA,DRR099608,NA,NA,13.5,6.7,4.6875,91,73.94,-0.156011
@@ -1569,12 +1606,6 @@ SRM+19,Groundwater,Bacteria,G16,SRR6760385,Land Use,Community,NA,7.1,243.75,182.
 SRM+19,Groundwater,Bacteria,G17,SRR6760382,Land Use,Community,NA,7.5,125,138.4,167.98,-0.152281
 SRM+19,Groundwater,Bacteria,G18,SRR6760383,Land Use,Community,NA,6.7,135.625,161.8,144.05,-0.161216
 SRM+19,Groundwater,Bacteria,G19,SRR6760381,Land Use,Mine,NA,7.4,101.875,-49.5,-25.84,-0.158825
-APV+20,Groundwater,Bacteria,Canal.Feb,SRR7775194,Type,Canal,20.54,8.93,0,-379.4,-266.94,-0.198125
-APV+20,Groundwater,Bacteria,Canal.May,SRR7775192,Type,Canal,22.92,6.73,0,-44.2,-60.06,-0.194603
-APV+20,Groundwater,Bacteria,Canal.Aug,SRR7775193,Type,Canal,21.36,6.92,0,-45.5,-50.17,-0.176615
-APV+20,Groundwater,Bacteria,Canal.Oct,SRR7775190,Type,Canal,21.52,7.69,0,-67,-26.66,-0.166928
-APV+20,Groundwater,Bacteria,Canal.Nov,SRR7775189,Type,Canal,21.42,7.1,0,-46.2,-40.36,-0.200122
-APV+20,Groundwater,Bacteria,Canal.Jan,SRR7775191,Type,Canal,17.44,7.8,0,-34.8,11.32,-0.188219
 APV+20,Groundwater,Bacteria,Piezometer.Feb,SRR7775188,Type,Piezometer,17.77,6.89,57.5,75.1,68.75,-0.143467
 APV+20,Groundwater,Bacteria,Piezometer.May,SRR7775186,Type,Piezometer,20.56,7.27,122.1875,218,233.73,-0.157281
 APV+20,Groundwater,Bacteria,Piezometer.Aug,SRR7775187,Type,Piezometer,18.46,7.11,134.375,167.5,173.86,-0.148086
@@ -1644,6 +1675,24 @@ YHK+20,Groundwater,Bacteria,H53_PNK072,ERR3374474,Location,Lower Footslope,9.47,
 YHK+20,Groundwater,Bacteria,H53_PNK075,ERR3374475,Location,Lower Footslope,9.47,7.4,0,237.5,259.93,-0.153662
 YHK+20,Groundwater,Bacteria,H53_PNK084,ERR3374476,Location,Lower Footslope,9.47,7.4,0,237.5,259.93,-0.154623
 YHK+20,Groundwater,Bacteria,H53_PNK087,ERR3374477,Location,Lower Footslope,9.47,7.4,0,237.5,259.93,-0.158655
+JZS+20,Groundwater,Bacteria,BacBJ121,SRR8290173,Well,BJ12,15.57,6.45,5,43.33,11.82,-0.145046
+JZS+20,Groundwater,Bacteria,BacBJ122,SRR8290178,Well,BJ12,15.57,6.45,5,43.33,11.82,-0.143963
+JZS+20,Groundwater,Bacteria,BacBJ123,SRR8290179,Well,BJ12,15.57,6.45,5,43.33,11.82,-0.145026
+JZS+20,Groundwater,Bacteria,BacBJ201,SRR8290176,Well,BJ20,19.7,7.2,2.40625,-152.33,-140.71,-0.169485
+JZS+20,Groundwater,Bacteria,BacBJ202,SRR8290177,Well,BJ20,19.7,7.2,2.40625,-152.33,-140.71,-0.17159
+JZS+20,Groundwater,Bacteria,BacBJ203,SRR8290180,Well,BJ20,19.7,7.2,2.40625,-152.33,-140.71,-0.168954
+JZS+20,Groundwater,Bacteria,BacBJ21,SRR8290174,Well,BJ2,17.56,7.17,11.25,130.667,140.47,-0.151189
+JZS+20,Groundwater,Bacteria,BacBJ22,SRR8290175,Well,BJ2,17.56,7.17,11.25,130.667,140.47,-0.154391
+JZS+20,Groundwater,Bacteria,BacBJ23,SRR8290172,Well,BJ2,17.56,7.17,11.25,130.667,140.47,-0.152878
+JZS+20,Groundwater,Archaea,ArchBJ121,SRR8290182,Well,BJ12,15.57,6.45,5,43.33,11.82,-0.18746
+JZS+20,Groundwater,Archaea,ArchBJ122,SRR8290183,Well,BJ12,15.57,6.45,5,43.33,11.82,-0.184518
+JZS+20,Groundwater,Archaea,ArchBJ123,SRR8290188,Well,BJ12,15.57,6.45,5,43.33,11.82,-0.180828
+JZS+20,Groundwater,Archaea,ArchBJ201,SRR8290189,Well,BJ20,19.7,7.2,2.40625,-152.33,-140.71,-0.175991
+JZS+20,Groundwater,Archaea,ArchBJ202,SRR8290186,Well,BJ20,19.7,7.2,2.40625,-152.33,-140.71,-0.173375
+JZS+20,Groundwater,Archaea,ArchBJ203,SRR8290187,Well,BJ20,19.7,7.2,2.40625,-152.33,-140.71,-0.169419
+JZS+20,Groundwater,Archaea,ArchBJ21,SRR8290181,Well,BJ2,17.56,7.17,11.25,130.667,140.47,-0.20337
+JZS+20,Groundwater,Archaea,ArchBJ22,SRR8290184,Well,BJ2,17.56,7.17,11.25,130.667,140.47,-0.198472
+JZS+20,Groundwater,Archaea,ArchBJ23,SRR8290185,Well,BJ2,17.56,7.17,11.25,130.667,140.47,-0.194556
 JDP+20,Groundwater,Bacteria,PZOV_0013,SRR9659503,Roll-Front Setting,Oxidized,NA,7.67,210.3125,379.1,418.73,-0.135158
 JDP+20,Groundwater,Bacteria,PTZO_0001,SRR9659504,Roll-Front Setting,Oxidized,NA,7.76,119.0625,354.6,399.56,-0.147244
 JDP+20,Groundwater,Bacteria,MOZO_0007,SRR9659506,Roll-Front Setting,Intermediate,NA,7.71,0.3125,172.3,214.3,-0.171525

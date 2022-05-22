@@ -7,8 +7,8 @@ envirotype <- list(
                          "GZL21"),
   "Lake & Pond" = c("SAR+13", "LZR+17", "ECS+18", "LLC+19", "SCH+16", "BCA+21", "HLZ+18", "GRG+20", "CNA+20", "BWD+19",
                     "RSJ+21", "LRL+22", "BOEM21", "IBK+22", "GSY+20", "NLE+21", "SPA+21", "FAV+21", "PSV+22"),
-  "Groundwater" = c("KLM+16", "YHK+19", "SDH+19", "SRM+19", "APV+20", "SKP+21", "YHK+20", "JDP+20", "GWS+19",
-                    "SRM+21", "ZCZ+21", "CSW+22", "GXS+22"),
+  "Groundwater" = c("KLM+16", "MIN+16", "WLJ+16", "XKL+21", "YHK+19", "SDH+19", "SRM+19", "APV+20", "SKP+21", "YHK+20",
+                    "JZS+20", "JDP+20", "GWS+19", "SRM+21", "ZCZ+21", "CSW+22", "GXS+22"),
   # NOTE: Keep Hot Spring in 4th location to get red color 20210904
   "Hot Spring" = c("SMS+12", "PCL+18_Acidic", "PCL+18_Alkaline", "BMJ+19", "LMG+20", "GWSS21", "GWS+20", "PBU+20", "MWY+21"),
   "Hyperalkaline" = c("SBP+20", "RMB+17", "CTS+17", "SPH+21", "KSR+21", "PSB+21", "NTB+21"),
@@ -243,12 +243,16 @@ orp16S3 <- function(pdf = FALSE) {
     "CKB+22, 37.8635, 138.9426", # Wikipedia Niigata University   ### Laboratory
     ## Groundwater
     "KLM+16, 42.99, -82.30", # SAMN04423023
+    "MIN+16, 34.8438, 138.7662", # SAMD00048865
+    "WLJ+16, 41, 107", # SAMN05938707
+    "XKL+21, 41.0025, 106.9664", # Materials and methods
     # YHK+19 see below
     "SDH+19, 23.03, 113.38", # SAMN07692244
     "SRM+19, 12.67417, 101.3889", # Materials and methods
     "APV+20, 20.12, -99.23", # Materials and methods
     "SKP+21, 16.263306, 100.647778", # SAMN11191517
     "YHK+20, 51.209467, 10.791968", # SAMEA5714424
+    "JZS+20, 39.89, 116.49", # SAMN10531952
     "JDP+20, 44.8883, 110.1353", # SAMN12236980
     "GWS+19, 36.31, 94.81", # SAMN07765433
     "SRM+21, 14.83, 99.35", # SAMN14829351
@@ -634,12 +638,16 @@ orp16S_S2 <- function(pdf = FALSE) {
 
     message("\nGroundwater"),
     plotEZ("KLM+16", "Bacteria", groupby = "Day", groups = c(-1, 246, 448, 671)),
+    plotEZ("MIN+16", "Bacteria"),
+    plotEZ("WLJ+16", "two", groupby = "Arsenic", groups = c("As < 100 \u03BCg/L", "As > 100 \u03BCg/L")),
+    plotEZ("XKL+21", "Bacteria"),
     plotEZ("YHK+19", "Bacteria"),
     plotEZ("SDH+19", "Bacteria", groupby = "Type", groups = c("Freshwater", "Brackish", "Saltwater")),
     plotEZ("SRM+19", "Bacteria", groupby = "Land Use", groups = c("Agriculture", "Community", "Landfill", "Mine")),
-    plotEZ("APV+20", "two", groupby = "Type", groups = c("Canal", "Piezometer", "Well", "Spring")),
+    plotEZ("APV+20", "two", groupby = "Type", groups = c("Piezometer", "Well", "Spring"), legend.x = "bottomleft"),
     plotEZ("SKP+21", "Bacteria", groupby = "Type", groups = c("Groundwater", "Surface water"), legend.x = "topright"),
     plotEZ("YHK+20", "Bacteria", groupby = "Location", groups = c("Upper Hillslope", "Middle Slope", "Lower Footslope")),
+    plotEZ("JZS+20", "two", groupby = "Well", groups = c("BJ2", "BJ12", "BJ20")),
     plotEZ("JDP+20", "Bacteria", groupby = "Roll-Front Setting", groups = c("Oxidized", "Intermediate", "Reduced"), legend.x = "bottomright"),
     plotEZ("GWS+19", "Bacteria", groupby = "Type", groups = c("Un-confined", "Confined"), legend.x = "bottomleft"),
     plotEZ("SRM+21", "Bacteria", groupby = "Depth", groups = c("Surface", "Shallow", "Deep"), legend.x = "bottomleft"),
@@ -729,7 +737,7 @@ orp16S_S2 <- function(pdf = FALSE) {
 ### UNEXPORTED FUNCTIONS ###
 ############################
 
-add.linear <- function(xvals, ZC, nstudy = NA, xvar = "Eh7") {
+add.linear <- function(xvals, ZC, nstudy = NA, xvar = "Eh7", N_slope.legend.x = "topright", N_slope.legend.inset = 0) {
   # Plot linear fit and confidence interval 20210920
   text.col <- "black"
   line.col <- "gray62"
@@ -762,7 +770,7 @@ add.linear <- function(xvals, ZC, nstudy = NA, xvar = "Eh7") {
   Ntext <- bquote(italic(N) == .(length(ZC)))
   # Add text to plot
   legend <- as.expression(c(Ntext, stext))
-  legend("topright", legend = legend, bty = "n", text.col = text.col)
+  legend(N_slope.legend.x, legend = legend, bty = "n", text.col = text.col, inset = N_slope.legend.inset)
 
   # Calculate Pearson correlation 20211009
   pearson <- cor.test(xvals, ZC, method = "pearson")
@@ -893,7 +901,8 @@ getmdat_orp16S <- function(study, metrics = NULL, dropNA = TRUE, size = NULL, qu
     "CLS+19", "SMS+12", "BYB+17", "MCS+21", "SVH+19", "PMM+20", "GZL21", "LLC+19", "NLE+21", "GSY+20",
     "SCH+16", "LZR+17", "GRG+20", "APV+20", "YHK+19", "WHC+19", "WHLH21", "PCL+18", "GSBT20", "SPA+21",
     "PSV+22", "CSW+22", "GXS+22", "IBK+22", "HSF+22", "RBM+21", "HCW+22", "BKR+22", "WKP+22", "ZLH+22",
-    "CKB+22", "ZWH+22", "LRL+22", "WHLH21a", "CYG+22", "RSS+18", "SPH+21", "PSB+21", "RKSK22", "TCN+17"
+    "CKB+22", "ZWH+22", "LRL+22", "WHLH21a", "CYG+22", "RSS+18", "SPH+21", "PSB+21", "RKSK22", "TCN+17",
+    "WLJ+16", "JZS+20", "MIN+16", "XKL+21"
   )) {
     # General processing of metadata for orp16S datasets 20210820
     # Get Eh or ORP values (uses partial name matching, can match a column named "Eh (mV)")
@@ -1216,7 +1225,6 @@ orp16S_S1 <- function(pdf = FALSE) {
 orp16S_S3 <- function(pdf = FALSE) {
 
   if(pdf) pdf("Figure_S3.pdf", width = 6, height = 8)
-#  mat <- matrix(1:6, nrow = 2, byrow = TRUE)
   mat <- matrix(1:8, ncol = 2)
   layout(mat, heights = c(2, 2, 2, 1))
 

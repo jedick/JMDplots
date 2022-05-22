@@ -1,10 +1,10 @@
 name,Run,LibraryName,BioSample,ScientificName,SampleName,Type,Month,"DO (mg/L)",pH,"Temp (°C)","EC (µS/cm)","ORP (mV)"
-"Mezquital Valley",SRR7775194,Canal.Feb,SAMN09941378,"wastewater metagenome",Canal.Feb,Canal,February,0,8.93,20.54,1369,-379.4
-"Mezquital Valley",SRR7775192,Canal.May,SAMN09941380,"wastewater metagenome",Canal.May,Canal,May,0,6.73,22.92,1309,-44.2
-"Mezquital Valley",SRR7775193,Canal.Aug,SAMN09941377,"wastewater metagenome",Canal.Aug,Canal,August,0,6.92,21.36,1221,-45.5
-"Mezquital Valley",SRR7775190,Canal.Oct,SAMN09941382,"wastewater metagenome",Canal.Oct,Canal,October,0,7.69,21.52,1290,-67
-"Mezquital Valley",SRR7775189,Canal.Nov,SAMN09941381,"wastewater metagenome",Canal.Nov,Canal,November,0,7.1,21.42,930,-46.2
-"Mezquital Valley",SRR7775191,Canal.Jan,SAMN09941379,"wastewater metagenome",Canal.Jan,Canal,January,0,7.8,17.44,2264,-34.8
+NA,SRR7775194,Canal.Feb,SAMN09941378,"wastewater metagenome",Canal.Feb,Canal,February,0,8.93,20.54,1369,-379.4
+NA,SRR7775192,Canal.May,SAMN09941380,"wastewater metagenome",Canal.May,Canal,May,0,6.73,22.92,1309,-44.2
+NA,SRR7775193,Canal.Aug,SAMN09941377,"wastewater metagenome",Canal.Aug,Canal,August,0,6.92,21.36,1221,-45.5
+NA,SRR7775190,Canal.Oct,SAMN09941382,"wastewater metagenome",Canal.Oct,Canal,October,0,7.69,21.52,1290,-67
+NA,SRR7775189,Canal.Nov,SAMN09941381,"wastewater metagenome",Canal.Nov,Canal,November,0,7.1,21.42,930,-46.2
+NA,SRR7775191,Canal.Jan,SAMN09941379,"wastewater metagenome",Canal.Jan,Canal,January,0,7.8,17.44,2264,-34.8
 "Mezquital Valley",SRR7775188,Piezo.Feb,SAMN09941384,"groundwater metagenome",Piezometer.Feb,Piezometer,February,1.84,6.89,17.77,1464,75.1
 "Mezquital Valley",SRR7775186,Piezo.May,SAMN09941386,"groundwater metagenome",Piezometer.May,Piezometer,May,3.91,7.27,20.56,1492,218
 "Mezquital Valley",SRR7775187,Piezo.Aug,SAMN09941383,"groundwater metagenome",Piezometer.Aug,Piezometer,August,4.3,7.11,18.46,1510,167.5

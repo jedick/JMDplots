@@ -67,13 +67,19 @@ PSB+21,"CROMO",Hyperalkaline,Bacteria,81,-129.14,222.5,0.0121987,-0.155485,0.108
 NTB+21,"Samail Ophiolite Packers",Hyperalkaline,Bacteria,8,-172.31,230.79,0.0157572,-0.149075,0.81416,0.0138924
 NTB+21,"Samail Ophiolite Packers",Hyperalkaline,Archaea,5,193.37,230.79,0.338492,-0.244106,0.928979,0.0224767
 KLM+16,"Sarnia nZVI Injection",Groundwater,Bacteria,28,-171.01,39.16,0.0857606,-0.156189,0.616673,0.000474444
+MIN+16,"Shizuoka Prefecture",Groundwater,Bacteria,8,-228.18,-64.14,0.00115349,-0.159518,0.00487304,0.990863
+WLJ+16,"Hetao Plain",Groundwater,Bacteria,16,-204.75,231.38,0.0119413,-0.155304,0.240016,0.370586
+WLJ+16,"Hetao Plain",Groundwater,Archaea,6,-192.22,153.49,0.0580538,-0.151295,0.386588,0.449005
+XKL+21,"Western Hetao Basin",Groundwater,Bacteria,7,-121.91,-37.23,0.0825459,-0.14395,0.548827,0.202014
 YHK+19,"Mahomet Aquifer",Groundwater,Bacteria,13,22.41,224.15,0.0512766,-0.160451,0.480561,0.0964607
 SDH+19,"Pearl River Delta",Groundwater,Bacteria,6,-179.74,64.08,0.0216355,-0.162133,0.38067,0.456577
 SRM+19,"Rayong Province",Groundwater,Bacteria,19,-364.14,246.38,0.0162127,-0.154624,0.405073,0.0853511
-APV+20,"Mezquital Valley",Groundwater,Bacteria,24,-266.94,233.73,0.107187,-0.173312,0.776007,8.3391e-06
+APV+20,"Mezquital Valley",Groundwater,Bacteria,18,55.11,233.73,-0.0391375,-0.146699,-0.342301,0.164398
 APV+20,"Mezquital Valley",Groundwater,Archaea,9,55.11,223.95,-0.0254199,-0.166315,-0.118741,0.760928
 SKP+21,"Phetchabun-Pichit Gold Mine",Groundwater,Bacteria,9,51.52,350.47,-0.0232636,-0.137717,-0.639895,0.0634398
 YHK+20,"Hainich Critical Zone",Groundwater,Bacteria,33,159.2,433.21,0.0247025,-0.160704,0.587564,0.000324202
+JZS+20,"Chemical Factory, Beijing",Groundwater,Bacteria,9,-140.71,140.47,0.0643517,-0.156084,0.697034,0.0369034
+JZS+20,"Chemical Factory, Beijing",Groundwater,Archaea,9,-140.71,140.47,-0.0914676,-0.184979,-0.954333,6.4075e-05
 JDP+20,"Zoovch Ovoo Uranium Deposit",Groundwater,Bacteria,8,55.21,418.73,0.0226069,-0.153452,0.311945,0.451939
 GWS+19,"Golmud, Qaidam Basin",Groundwater,Bacteria,11,-23.62,254.05,-0.0144999,-0.152334,-0.123812,0.716837
 SRM+21,"Lower Chao Praya Basin",Groundwater,Bacteria,13,-91.16,180.2,-0.00928468,-0.146086,-0.119304,0.697864

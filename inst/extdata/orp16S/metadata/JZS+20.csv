@@ -1,0 +1,19 @@
+name,Run,BioSample,SampleName,Domain,Well,pH,"DO (mg/L)","T (°C)","ORP (mV)"
+"Chemical Factory, Beijing",SRR8290182,SAMN10531947,ArchBJ121,Archaea,BJ12,6.45,0.16,15.57,43.33
+"Chemical Factory, Beijing",SRR8290183,SAMN10531948,ArchBJ122,Archaea,BJ12,6.45,0.16,15.57,43.33
+"Chemical Factory, Beijing",SRR8290188,SAMN10531949,ArchBJ123,Archaea,BJ12,6.45,0.16,15.57,43.33
+"Chemical Factory, Beijing",SRR8290189,SAMN10531950,ArchBJ201,Archaea,BJ20,7.2,0.077,19.7,-152.33
+"Chemical Factory, Beijing",SRR8290186,SAMN10531951,ArchBJ202,Archaea,BJ20,7.2,0.077,19.7,-152.33
+"Chemical Factory, Beijing",SRR8290187,SAMN10531952,ArchBJ203,Archaea,BJ20,7.2,0.077,19.7,-152.33
+"Chemical Factory, Beijing",SRR8290181,SAMN10531944,ArchBJ21,Archaea,BJ2,7.17,0.36,17.56,130.667
+"Chemical Factory, Beijing",SRR8290184,SAMN10531945,ArchBJ22,Archaea,BJ2,7.17,0.36,17.56,130.667
+"Chemical Factory, Beijing",SRR8290185,SAMN10531946,ArchBJ23,Archaea,BJ2,7.17,0.36,17.56,130.667
+"Chemical Factory, Beijing",SRR8290173,SAMN10531938,BacBJ121,Bacteria,BJ12,6.45,0.16,15.57,43.33
+"Chemical Factory, Beijing",SRR8290178,SAMN10531939,BacBJ122,Bacteria,BJ12,6.45,0.16,15.57,43.33
+"Chemical Factory, Beijing",SRR8290179,SAMN10531940,BacBJ123,Bacteria,BJ12,6.45,0.16,15.57,43.33
+"Chemical Factory, Beijing",SRR8290176,SAMN10531941,BacBJ201,Bacteria,BJ20,7.2,0.077,19.7,-152.33
+"Chemical Factory, Beijing",SRR8290177,SAMN10531942,BacBJ202,Bacteria,BJ20,7.2,0.077,19.7,-152.33
+"Chemical Factory, Beijing",SRR8290180,SAMN10531943,BacBJ203,Bacteria,BJ20,7.2,0.077,19.7,-152.33
+"Chemical Factory, Beijing",SRR8290174,SAMN10531935,BacBJ21,Bacteria,BJ2,7.17,0.36,17.56,130.667
+"Chemical Factory, Beijing",SRR8290175,SAMN10531936,BacBJ22,Bacteria,BJ2,7.17,0.36,17.56,130.667
+"Chemical Factory, Beijing",SRR8290172,SAMN10531937,BacBJ23,Bacteria,BJ2,7.17,0.36,17.56,130.667

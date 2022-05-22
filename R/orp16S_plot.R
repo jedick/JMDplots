@@ -142,6 +142,16 @@ plotEZ <- function(study, lineage = NULL, mincount = 100, pch = NULL, col = NULL
   if(!is.null(groupby) & !is.null(groups)) {
     # Add legend
     legend <- as.character(groups)
+    # Deal with mu character 20220522
+    legend.expr <- list()
+    for(i in 1:length(legend)) {
+      if(grepl("\u03BC", legend[i])) {
+        start <- strsplit(legend[i], "\u03BC")[[1]][1]
+        end <- strsplit(legend[i], "\u03BC")[[1]][2]
+        legend.expr[[i]] <- bquote(.(start)*mu*.(end))
+      } else legend.expr[[i]] <- bquote(.(legend[i]))
+    }
+    legend <- as.expression(legend.expr)
     legend(legend.x, legend, pch = pchtype, col = orp16Scol[coltype], pt.bg = orp16Scol[coltype], title = groupby, cex = 0.9)
     # Add sample type (group) to output
     EZdat <- cbind(groupby = groupby, group = metadata[, icol], EZdat)

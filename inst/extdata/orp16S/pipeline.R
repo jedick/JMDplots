@@ -5,6 +5,8 @@
 # 20210922 Add settings for orp16S datasets
 #          Add --skip-technical --clip options to fastq-dump
 #          Don't use fastq_filter --stripleft for 454 data
+# 20220512 Use GNU parallel in classify()
+# 20220521 Replace > in "awk '/>" in subsample() and findchimeras()
 
 ## SYSTEM REQUIREMENTS
 # (version numbers for information only)
@@ -44,7 +46,7 @@
 ## STUDY SETTINGS
 
 # Change the following line to setup the pipeline for one study
-study <- "GSBT20"
+study <- "XKL+21"
 # Settings for all studies are stored here
 file <- tempfile()
 # Write spaces here (but don't save them) to make this easier to read
@@ -155,12 +157,17 @@ writeLines(con = file, text = gsub(" ", "", c(
   "LRL+22, FALSE, 400",
   "SPH+21, FALSE, 250",
   "PSB+21, FALSE, 250",
-  "RKSK22, FALSE, 295"
+  "RKSK22, FALSE, 295",
+  "WLJ+16, TRUE, 200",
+  "JZS+20, TRUE, 290",
+  "MIN+16, FALSE, 400",
+  "XKL+21, NA, NA"
 
   # For SMS+12 (Bison Pool):
   #  - FASTA files were downloaded from MG-RAST (mgp100292)
   #  - Start processing with classify()
   # For RSS+18 (Lake Hazen):
+  #  - FASTQ files were downloaded from NCBI cloud
   #  - FASTA files for each site were created with split_libraries.py (from QIIME) and seqtk subseq 20220511
   #  - Start processing with subsample()
 
@@ -204,9 +211,11 @@ filter <- function(RUNID) {
   # The output file from this function is a FASTA file with .fa suffix
   outfile <- paste0(RUNID, ".fa")
 
-  if(study %in% c("BYB+17", "GRG+20", "MKK+11", "FLA+12")) {
-    # For BYB+17, FASTQ files are downloaded from SRA cloud 20210917
-    # For the others, files are downloaded from MG-RAST 20220122
+  if(study %in% c("BYB+17", "GRG+20", "WLJ+16", "XKL+21")) {
+    # For BYB+17, FASTQ files were downloaded from SRA cloud 20210917
+    # For GRG+20, files were downloaded from MG-RAST 20220122
+    # For WLJ+16, FASTQ files were downloaded from SRA cloud 20220521
+    # For XKL+21, files were downloaded from MG-RAST 20220522
     fqdump <- FALSE
   } else {
     # Generate input FASTQ files with fastq-dump
@@ -217,7 +226,7 @@ filter <- function(RUNID) {
     system(cmd)
   }
 
-  if(study %in% c("GRG+20", "MKK+11", "FLA+12")) {
+  if(study %in% c("GRG+20", "XKL+21")) {
     # These are files from MG-RAST (.fasta suffix)
     # Prefix MG-RAST ID to header so we can extract the reads in the subsample() and findchimeras() steps 20211004
     fastafile <- paste0(RUNID, ".fasta")
@@ -243,40 +252,42 @@ filter <- function(RUNID) {
   } else if(forwardonly) {
     # Use forward reads only
     file.copy(paste0(RUNID, "_1.fastq"), "merged.fastq", overwrite = TRUE)
-    # For Human Microbiome Project, reads are in different file 20211216
-    if(study == "HMP12") file.copy(paste0(RUNID, "_4.fastq"), "merged.fastq", overwrite = TRUE)
+    # For Hetao Plain, file names are different 20220521
+    if(study == "WLJ+16") file.copy(paste0(RUNID, "_R1.fastq"), "merged.fastq", overwrite = TRUE)
     nseq <- length(readLines("merged.fastq")) / 4
     print(paste0("Using forward reads only (", nseq, " sequences)"))
   } else {
+    # Get file names for forward and reverse reads
+    FWDfile <- paste0(RUNID, "_1.fastq")
+    REVfile <- paste0(RUNID, "_2.fastq")
     # Check that we have same number of forward and reverse reads 20200917
     # (issue with some datasets: fastq_dump rejects some reads because READLEN < 1)
-    ID1 <- sapply(strsplit(gsub("@", "", system(paste0("awk '(NR - 1) % 4 == 0' ", RUNID, "_1.fastq"), intern = TRUE)), " "), "[", 1)
-    ID2 <- sapply(strsplit(gsub("@", "", system(paste0("awk '(NR - 1) % 4 == 0' ", RUNID, "_2.fastq"), intern = TRUE)), " "), "[", 1)
+    ID1 <- sapply(strsplit(gsub("@", "", system(paste("awk '(NR - 1) % 4 == 0'", FWDfile), intern = TRUE)), " "), "[", 1)
+    ID2 <- sapply(strsplit(gsub("@", "", system(paste("awk '(NR - 1) % 4 == 0'", REVfile), intern = TRUE)), " "), "[", 1)
     # Forward reads that have matching reverse reads
     forward_matches <- ID1[ID1 %in% ID2]
     if(length(forward_matches) < length(ID1)) {
       writeLines(forward_matches, "forward_matches.txt")
-      print(cmd <- paste0("seqtk subseq ", RUNID, "_1.fastq forward_matches.txt > new_1.fastq"))
+      print(cmd <- paste("seqtk subseq", FWDfile, "forward_matches.txt > new_1.fastq"))
       system(cmd)
-      print(cmd <- paste0("mv new_1.fastq ", RUNID, "_1.fastq"))
+      print(cmd <- paste("mv new_1.fastq", FWDfile))
       system(cmd)
     }
     # Reverse reads that have matching forward reads
     reverse_matches <- ID2[ID2 %in% ID1]
     if(length(reverse_matches) < length(ID2)) {
       writeLines(reverse_matches, "reverse_matches.txt")
-      print(cmd <- paste0("seqtk subseq ", RUNID, "_2.fastq reverse_matches.txt > new_2.fastq"))
+      print(cmd <- paste("seqtk subseq", REVfile, "reverse_matches.txt > new_2.fastq"))
       system(cmd)
-      print(cmd <- paste0("mv new_2.fastq ", RUNID, "_2.fastq"))
+      print(cmd <- paste("mv new_2.fastq", REVfile))
       system(cmd)
     }
     # Make sure forward and reverse reads have same IDs
-    ID1 <- sapply(strsplit(gsub("@", "", system(paste0("awk '(NR - 1) % 4 == 0' ", RUNID, "_1.fastq"), intern = TRUE)), " "), "[", 1)
-    ID2 <- sapply(strsplit(gsub("@", "", system(paste0("awk '(NR - 1) % 4 == 0' ", RUNID, "_2.fastq"), intern = TRUE)), " "), "[", 1)
-    if(!all(ID1 == ID2)) stop(paste0("sequence IDs in ", RUNID, "_1.fastq and ", RUNID, "_2.fastq don't match!"))
-
+    ID1 <- sapply(strsplit(gsub("@", "", system(paste("awk '(NR - 1) % 4 == 0'", FWDfile), intern = TRUE)), " "), "[", 1)
+    ID2 <- sapply(strsplit(gsub("@", "", system(paste("awk '(NR - 1) % 4 == 0'", REVfile), intern = TRUE)), " "), "[", 1)
+    if(!all(ID1 == ID2)) stop(paste("sequence IDs in", FWDfile, "and", REVfile, "don't match!"))
     # Merge paired reads
-    print(cmd <- paste0("vsearch -fastq_mergepairs ", RUNID, "_1.fastq -reverse ", RUNID, "_2.fastq -fastqout merged.fastq"))
+    print(cmd <- paste("vsearch -fastq_mergepairs", FWDfile, "-reverse", REVfile, "-fastqout merged.fastq"))
     system(cmd)
   }
   if(!is454) {
@@ -351,8 +362,9 @@ subsample <- function(do.singletons = TRUE) {
     # Extract sequences for this sample
     thisfile <- paste0(thisRUNID, ".fasta")
     # https://stackoverflow.com/questions/26144692/printing-a-sequence-from-a-fasta-file
-    # Don't use "awk '/>" because sample names for SBE+17 are at end of header of original FASTQ files, not beginning 20210501
-    print(cmd <- paste0("awk '/", thisRUNID, "/{p++;print;next} /^>/{p=0} p' not_singletons.fasta > ", thisfile))
+    # "awk '/>" is used to match sample name at beginning of header line
+    # (this is needed for numeric or short sample names that can match other parts of the header)
+    print(cmd <- paste0("awk '/>", thisRUNID, "/{p++;print;next} /^>/{p=0} p' not_singletons.fasta > ", thisfile))
     system(cmd)
 
     # Subsample 10000 sequences - put output in .fa file in FASTAdir
@@ -402,8 +414,7 @@ findchimeras <- function(threads = 8) {
   # https://stackoverflow.com/questions/26144692/printing-a-sequence-from-a-fasta-file
   allRUNID <- gsub("\\.fa$", "", dir(pattern = "\\.fa$"))
   for(thisRUNID in allRUNID) {
-    # Don't use "awk '/>" because sample names for SBE+17 are at end of header of original FASTQ files, not beginning 20210501
-    print(cmd <- paste0("awk '/", thisRUNID, "/{p++;print;next} /^>/{p=0} p' nonchimeras.fasta > ", thisRUNID, ".fasta"))
+    print(cmd <- paste0("awk '/>", thisRUNID, "/{p++;print;next} /^>/{p=0} p' nonchimeras.fasta > ", thisRUNID, ".fasta"))
     system(cmd)
   }
 
