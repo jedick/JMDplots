@@ -62,7 +62,7 @@ export(
   # can16S paper 20210604
   "getrefseq",
   # orp16S paper 20211003-20211008
-  "orp16S1", "orp16S2", "orp16S3", "orp16S4", "orp16S5", "orp16S_S2",
+  "orp16S1", "orp16S2", "orp16S3", "orp16S4", "orp16S6", "orp16S_S2",
   "plotEZ", "plotMA",
   # utilities 20220223
   "addalpha",
@@ -71,7 +71,7 @@ export(
   # Moving functions to chem16S package 20220506-20220513
   "getmdat_geo16S", "getmetrics_geo16S", "plotmet_geo16S", "getmdat_orp16S", "getmetrics_orp16S", "orp16S_info",
   # orp16S paper 20220516-20220517
-  "orp16S_T2", "orp16S_S1", "orp16S_S3"
+  "orp16S_T2", "orp16S_S1", "orp16S_S3", "orp16S5"
 )
 
 # Imports from CHNOSZ
@@ -166,7 +166,8 @@ importFrom("stats", "lm", "na.omit", "predict", "sd", "predict.lm", "residuals",
            "qqline", "qqnorm", "quantile", "median", "fivenum",
            "density", "formula", "t.test", "approx", "splinefun", "xtabs",
            "coefficients", "loess", "wilcox.test", "weighted.mean",
-           "kmeans", "qt", "cor.test", "coef", "aggregate", "cor", "uniroot")
+           "kmeans", "qt", "cor.test", "coef", "aggregate", "cor", "uniroot",
+           "TukeyHSD", "aov")
 importFrom("utils", "read.csv", "demo", "tail", "write.csv",
            "capture.output", "browseURL", "head", "combn", "read.table", "packageVersion",
            "assignInNamespace")

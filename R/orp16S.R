@@ -501,10 +501,114 @@ orp16S4 <- function(pdf = FALSE) {
 
 }
 
-# Figure 5: Linear regressions between ZC and Eh7 at a global scale 20210828
+# Contamination and redox potential as factors in ZC of groundwater communities 20220521
 orp16S5 <- function(pdf = FALSE) {
 
-  if(pdf) pdf("Figure5.pdf", width = 10, height = 7)
+  if(pdf) pdf("Figure5.pdf", width = 8, height = 5)
+  mat <- matrix(c(1,1,1,1,3,3,3,3,5,5,5,5, 2,2,2,2,4,4,4,4,6,6,6,6, 0,0,0,7,7,7,8,8,8,0,0,0), nrow = 3, byrow = TRUE)
+  layout(mat, heights = c(2, 1, 1.5))
+
+  # Get bacterial data for groundwater studies
+  envirotype <- lineage <- NULL
+  gwdat <- subset(EZdat, envirotype == "Groundwater")
+  gwdat <- subset(gwdat, lineage == "Bacteria")
+  # Get bacterials regressions for groundwater studies
+  gwlm <- subset(EZlm, envirotype == "Groundwater")
+  gwlm <- subset(gwlm, lineage == "Bacteria")
+  # List datasets for in different groups
+  gwtype <- list(
+    Arsenic = c("WLJ+16", "XKL+21", "SRM+19", "SKP+21", "SRM+21", "ZCZ+21"),
+    Other = c("KLM+16", "APV+20", "JZS+20", "CSW+22", "GXS+22"),
+    BG = c("MIN+16", "YHK+19", "SDH+19", "YHK+20", "JDP+20", "GWS+19")
+  )
+  # Possible pch and col
+  pchs <- rep(0:7, 2) # length = 16
+  cols <- rep(orp16Scol, 2) # length = 14
+
+  # Loop over groups
+  for(i in 1:3) {
+
+    thisstudy <- gwtype[[i]]
+    thisdat <- gwdat[gwdat$study %in% thisstudy, ]
+    # Start plot
+    par(mar = c(4, 4, 2, 1))
+    plot(0, 0, xlim = range(gwdat$Eh7), ylim = range(gwdat$ZC), xlab = "Eh7 (mV)", ylab = axis.label("ZC"), type = "n")
+    ithis <- match(thisdat$study, thisstudy)
+    pch <- pchs[ithis]
+    col <- cols[ithis]
+    points(thisdat$Eh7, thisdat$ZC, pch = pch, col = col)
+    add.linear(thisdat$Eh7, thisdat$ZC, N_slope.legend.x = "topleft", N_slope.legend.inset = c(-0.05, 0))
+    ttext <- group <- names(gwtype)[i]
+    ttext[ttext == "Other"] <- "Other contaminants"
+    ttext[ttext == "BG"] <- "Background"
+    title(ttext, font.main = 1)
+    if(i==1) label.figure("A", font = 2, cex = 1.5, xfrac = 0.03)
+
+    # Store ZC values at low and high Eh7
+    zc_lo <- data.frame(group = group, ZC = thisdat$ZC[thisdat$Eh7 < 0 & thisdat$Eh7 > -200])
+    zc_hi <- data.frame(group = group, ZC = thisdat$ZC[thisdat$Eh7 > 0 & thisdat$Eh7 < 200])
+    if(i == 1) {
+      ZC_lo <- zc_lo
+      ZC_hi <- zc_hi
+    } else {
+      ZC_lo <- rbind(ZC_lo, zc_lo)
+      ZC_hi <- rbind(ZC_hi, zc_hi)
+    }
+
+    # Add legend: include number of samples and slope for each dataset
+    thislm <- gwlm[gwlm$study %in% thisstudy, ]
+    stopifnot(all(unique(thisdat$study) == thislm$study))
+    slope <- formatC(thislm$slope, digits = 3, format = "f")
+    legend <- lapply(1:nrow(thislm), function(i) bquote(.(thislm$name[i])~"("*italic(N) == .(thislm$nsamp[i])*","~.(slope[i])~V^{-1}*")"))
+    par(mar = c(1, 1, 1, 1))
+    plot.new()
+    legend("top", legend = as.expression(legend), pch = unique(pch), col = unique(col), bty = "n", cex = 0.9)
+
+  }
+
+  # Reorder factor levels
+  ZC_lo$group <- as.factor(ZC_lo$group)
+  ZC_lo$group <- factor(ZC_lo$group, names(gwtype))
+  ZC_hi$group <- as.factor(ZC_hi$group)
+  ZC_hi$group <- factor(ZC_hi$group, names(gwtype))
+  # Use red and blue for low- and high-Eh7 groups
+  col2 <- addalpha(2, "b0")
+  col4 <- addalpha(4, "b0")
+
+  # Make boxplot for low-Eh7 groups
+  par(mar = c(2, 2, 1, 1))
+  bp_lo <- boxplot(ZC ~ group, ZC_lo, ylim = range(gwdat$ZC), varwidth = TRUE, col = col2)
+  mtext(axis.label("ZC"), side = 2, line = 2, cex = par("cex"))
+  # One-way ANOVA and Tukey's post-hoc test
+  # Adapted from https://statdoe.com/one-way-anova-and-box-plot-in-r/
+  anova <- aov(ZC ~ group, data = ZC_lo)
+  tukey <- TukeyHSD(anova)
+  # Compact letter display
+  cld <- multcompLetters4(anova, tukey)$group$Letters
+  # Get into same order as data
+  cld <- cld[match(names(cld), names(gwtype))]
+  # Add letters to plot
+  text((1:3) + 0.3, bp_lo$stats[4, ] + 0.003, cld)
+  title("Reducing conditions\n-200 < Eh7 (mV) < 0", font.main = 1, cex.main = 1, line = 0.25, xpd = NA)
+  label.figure("B", font = 2, cex = 1.5, xfrac = -0.05, yfrac = 1.03)
+
+  # Make boxplot for high-Eh7 groups
+  bp_hi <- boxplot(ZC ~ group, ZC_hi, ylim = range(gwdat$ZC), varwidth = TRUE, col = col4)
+  anova <- aov(ZC ~ group, data = ZC_hi)
+  tukey <- TukeyHSD(anova)
+  cld <- multcompLetters4(anova, tukey)$group$Letters
+  cld <- cld[match(names(cld), names(gwtype))]
+  text((1:3) + 0.3, bp_hi$stats[4, ] + 0.003, cld)
+  title("Oxidizing conditions\n0 < Eh7 (mV) < 200", font.main = 1, cex.main = 1, line = 0.25, xpd = NA)
+  
+  if(pdf) dev.off()
+
+}
+
+# Figure 6: Linear regressions between ZC and Eh7 at a global scale 20210828
+orp16S6 <- function(pdf = FALSE) {
+
+  if(pdf) pdf("Figure6.pdf", width = 10, height = 7)
   mat <- matrix(c(
     16, 16, rep(1:7, each = 6), 17, 17,
     16, 16, rep(8:14, each = 6), 18, 18,
