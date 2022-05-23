@@ -13,31 +13,31 @@ LXH+20,"Lancang River",River & Seawater,Bacteria,17,255.42,331,0.0521097,-0.1717
 JVW+20,"Lagoon of Venice",River & Seawater,Bacteria,17,297.81,636.72,-0.0059483,-0.15811,-0.10187,0.697245
 ZZL+21,"Maozhou River",River & Seawater,Bacteria,54,-88.7,238.87,0.117259,-0.163197,0.546595,1.90282e-05
 GZL21,"Three Gorges Reservoir",River & Seawater,Bacteria,50,184.58,398.37,-0.0477532,-0.13431,-0.238839,0.0948391
-SAR+13,"Kiritimati Microbial Mat",Lake & Pond,Bacteria,22,-161.52,-2,0.217449,-0.128877,0.961509,1.09876e-12
-SAR+13,"Kiritimati Microbial Mat",Lake & Pond,Archaea,25,-161.52,-2,0.335373,-0.0864853,0.955623,1.06307e-13
-LZR+17,"Siguniang Mountain",Lake & Pond,Bacteria,11,479.07,672.26,-0.0501812,-0.118805,-0.464092,0.150448
+SAR+13,"Microbial Mat, Kiritimati Atoll",Lake & Pond,Bacteria,22,-161.52,-2,0.217449,-0.128877,0.961509,1.09876e-12
+SAR+13,"Microbial Mat, Kiritimati Atoll",Lake & Pond,Archaea,25,-161.52,-2,0.335373,-0.0864853,0.955623,1.06307e-13
+LZR+17,"Siguniang Mountain, China",Lake & Pond,Bacteria,11,479.07,672.26,-0.0501812,-0.118805,-0.464092,0.150448
 ECS+18,"Andean Lakes",Lake & Pond,Bacteria,8,498.4,606.64,0.0569318,-0.184611,0.724766,0.0419573
 LLC+19,"Xidong Reservoir, Xiamen",Lake & Pond,Bacteria,36,29,563,0.00113517,-0.136343,0.0748432,0.664419
-SCH+16,"Potentilla Lake",Lake & Pond,Bacteria,9,-190,89,0.0485925,-0.145023,0.98248,2.30396e-06
-SCH+16,"Potentilla Lake",Lake & Pond,Archaea,4,-190,-123,-0.00863451,-0.172355,-0.808124,0.191876
-BCA+21,"Ursu Lake",Lake & Pond,Bacteria,36,-433.66,231.18,0.0248211,-0.162936,0.796614,6.19785e-09
+SCH+16,"Potentilla Lake, Greenland",Lake & Pond,Bacteria,9,-190,89,0.0485925,-0.145023,0.98248,2.30396e-06
+SCH+16,"Potentilla Lake, Greenland",Lake & Pond,Archaea,4,-190,-123,-0.00863451,-0.172355,-0.808124,0.191876
+BCA+21,"Ursu Lake, Romania",Lake & Pond,Bacteria,36,-433.66,231.18,0.0248211,-0.162936,0.796614,6.19785e-09
 HLZ+18,"Xiamen Reservoirs and Ponds",Lake & Pond,Bacteria,27,-3.99,522.71,0.0363921,-0.15093,0.649557,0.000245988
-GRG+20,"Peña de Hierro",Lake & Pond,Bacteria,6,166.53,386.03,-0.0373757,-0.13782,-0.657231,0.1561
+GRG+20,"Peña de Hierro, Spain",Lake & Pond,Bacteria,6,166.53,386.03,-0.0373757,-0.13782,-0.657231,0.1561
 CNA+20,"Mid-Atlantic Agricultural Pond",Lake & Pond,Bacteria,15,212.56,362.71,-0.0938943,-0.122015,-0.459883,0.084567
-BWD+19,"Keweenaw Waterway",Lake & Pond,Bacteria,81,131.46,302.04,0.0135785,-0.154454,0.123752,0.271031
+BWD+19,"Keweenaw Waterway, Michigan",Lake & Pond,Bacteria,81,131.46,302.04,0.0135785,-0.154454,0.123752,0.271031
 RSJ+21,"Finnish Lakes",Lake & Pond,Bacteria,8,-10,203,-0.0200003,-0.153752,-0.674604,0.0664817
 RSJ+21,"Finnish Lakes",Lake & Pond,Archaea,10,-145,203,-0.000931657,-0.166512,-0.0321837,0.929671
-LRL+22,"Cenote El Zapote",Lake & Pond,Bacteria,6,-117.75,441.72,0.0364245,-0.153154,0.982132,0.000476051
-LRL+22,"Cenote El Zapote",Lake & Pond,Archaea,6,-117.75,441.72,-0.027738,-0.178787,-0.751236,0.085128
+LRL+22,"Cenote El Zapote, Mexico",Lake & Pond,Bacteria,6,-117.75,441.72,0.0364245,-0.153154,0.982132,0.000476051
+LRL+22,"Cenote El Zapote, Mexico",Lake & Pond,Archaea,6,-117.75,441.72,-0.027738,-0.178787,-0.751236,0.085128
 BOEM21,"Fayetteville Green Lake",Lake & Pond,Bacteria,9,-300,180,0.0138236,-0.159474,0.834168,0.00517841
 IBK+22,"German Kettle Holes",Lake & Pond,Bacteria,37,116.95,455.32,0.0218728,-0.167028,0.256109,0.126009
 IBK+22,"German Kettle Holes",Lake & Pond,Archaea,38,116.95,455.32,0.0151571,-0.182572,0.144708,0.386043
 GSY+20,"Iberian Pyrite Belt",Lake & Pond,Bacteria,19,-109.69,426.37,0.0117868,-0.157252,0.270027,0.263548
 GSY+20,"Iberian Pyrite Belt",Lake & Pond,Archaea,13,-109.69,230.1,-0.061872,-0.152757,-0.28138,0.351689
-NLE+21,"Lake Kinneret",Lake & Pond,Bacteria,21,-224,276,-0.00475035,-0.158955,-0.318673,0.159148
+NLE+21,"Lake Kinneret, Israel",Lake & Pond,Bacteria,21,-224,276,-0.00475035,-0.158955,-0.318673,0.159148
 SPA+21,"Lake Varese, Italy",Lake & Pond,Bacteria,28,-169.39,407.57,-0.0123816,-0.153602,-0.505135,0.00611177
-FAV+21,"Lake Sonachi",Lake & Pond,Bacteria,7,72.49,450.38,0.0807894,-0.175264,0.917741,0.0035645
-FAV+21,"Lake Sonachi",Lake & Pond,Archaea,5,288.22,450.38,0.00173322,-0.171075,0.147329,0.813095
+FAV+21,"Lake Sonachi, Kenya",Lake & Pond,Bacteria,7,72.49,450.38,0.0807894,-0.175264,0.917741,0.0035645
+FAV+21,"Lake Sonachi, Kenya",Lake & Pond,Archaea,5,288.22,450.38,0.00173322,-0.171075,0.147329,0.813095
 PSV+22,"Lake Medard, Czechia",Lake & Pond,Bacteria,15,-165.41,254.2,0.0223046,-0.152571,0.677216,0.00554622
 SMS+12,"Bison Pool, Yellowstone NP",Hot Spring,Bacteria,5,-66.55,232.36,0.169077,-0.2103,0.842216,0.0734298
 SMS+12,"Bison Pool, Yellowstone NP",Hot Spring,Archaea,4,-66.55,232.36,0.137716,-0.206447,0.74717,0.25283
@@ -56,21 +56,21 @@ GWS+20,"Eastern Tibetan Plateau",Hot Spring,Archaea,5,-109.36,108.16,0.0933903,-
 PBU+20,"Uzon Caldera",Hot Spring,Bacteria,10,-156.08,293.33,0.0208161,-0.158726,0.160373,0.658069
 MWY+21,"Southern Tibetan Plateau",Hot Spring,Bacteria,13,-149.44,10.96,0.0833159,-0.161443,0.596254,0.031492
 MWY+21,"Southern Tibetan Plateau",Hot Spring,Archaea,7,-149.44,6.64,-0.0334246,-0.180848,-0.216332,0.641277
-SBP+20,"CROMO",Hyperalkaline,Bacteria,24,-126.19,26.1,0.0443281,-0.155967,0.319058,0.128598
+SBP+20,"CROMO 1",Hyperalkaline,Bacteria,24,-126.19,26.1,0.0443281,-0.155967,0.319058,0.128598
 RMB+17,"Samail Ophiolite",Hyperalkaline,Bacteria,19,-310.56,268.14,0.0295168,-0.159202,0.581201,0.0090592
 RMB+17,"Samail Ophiolite",Hyperalkaline,Archaea,12,-118.25,268.14,0.0637734,-0.191701,0.837401,0.000676664
 CTS+17,"Santa Elena Ophiolite",Hyperalkaline,Bacteria,32,-78.17,243.34,-0.0311877,-0.150462,-0.264358,0.143716
 CTS+17,"Santa Elena Ophiolite",Hyperalkaline,Archaea,31,-78.17,243.34,-0.116889,-0.159393,-0.671698,3.51459e-05
-SPH+21,"CROMO",Hyperalkaline,Bacteria,9,27.53,61.86,0.0568865,-0.14792,0.249947,0.516582
+SPH+21,"CROMO 2",Hyperalkaline,Bacteria,9,27.53,61.86,0.0568865,-0.14792,0.249947,0.516582
 KSR+21,"Voltri Massif",Hyperalkaline,Bacteria,8,186.05,486.23,0.0229125,-0.159312,0.722644,0.04286
-PSB+21,"CROMO",Hyperalkaline,Bacteria,81,-129.14,222.5,0.0121987,-0.155485,0.108546,0.334753
+PSB+21,"CROMO 3",Hyperalkaline,Bacteria,81,-129.14,222.5,0.0121987,-0.155485,0.108546,0.334753
 NTB+21,"Samail Ophiolite Packers",Hyperalkaline,Bacteria,8,-172.31,230.79,0.0157572,-0.149075,0.81416,0.0138924
 NTB+21,"Samail Ophiolite Packers",Hyperalkaline,Archaea,5,193.37,230.79,0.338492,-0.244106,0.928979,0.0224767
 KLM+16,"Sarnia nZVI Injection",Groundwater,Bacteria,28,-171.01,39.16,0.0857606,-0.156189,0.616673,0.000474444
 MIN+16,"Shizuoka Prefecture",Groundwater,Bacteria,8,-228.18,-64.14,0.00115349,-0.159518,0.00487304,0.990863
-WLJ+16,"Hetao Plain",Groundwater,Bacteria,16,-204.75,231.38,0.0119413,-0.155304,0.240016,0.370586
-WLJ+16,"Hetao Plain",Groundwater,Archaea,6,-192.22,153.49,0.0580538,-0.151295,0.386588,0.449005
-XKL+21,"Western Hetao Basin",Groundwater,Bacteria,7,-121.91,-37.23,0.0825459,-0.14395,0.548827,0.202014
+WLJ+16,"Hetao Basin 1",Groundwater,Bacteria,16,-204.75,231.38,0.0119413,-0.155304,0.240016,0.370586
+WLJ+16,"Hetao Basin 1",Groundwater,Archaea,6,-192.22,153.49,0.0580538,-0.151295,0.386588,0.449005
+XKL+21,"Hetao Basin 2",Groundwater,Bacteria,7,-121.91,-37.23,0.0825459,-0.14395,0.548827,0.202014
 YHK+19,"Mahomet Aquifer",Groundwater,Bacteria,13,22.41,224.15,0.0512766,-0.160451,0.480561,0.0964607
 SDH+19,"Pearl River Delta",Groundwater,Bacteria,6,-179.74,64.08,0.0216355,-0.162133,0.38067,0.456577
 SRM+19,"Rayong Province",Groundwater,Bacteria,19,-364.14,246.38,0.0162127,-0.154624,0.405073,0.0853511

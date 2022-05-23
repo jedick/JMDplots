@@ -149,6 +149,7 @@ importFrom("oce", "mapPlot", "mapPoints", "mapPolygon")
 importFrom("sf", "st_coordinates", "st_read", "st_transform")
 importFrom("eulerr", "euler")
 importFrom("ape", "read.tree", "plot.phylo")
+importFrom("multcompView", "multcompLetters4")
 
 # Imports from standard packages
 importFrom("grDevices", "dev.off", "cairo_pdf", "pdf", "blues9", "colorRampPalette",
