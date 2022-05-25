@@ -7,7 +7,8 @@
 # Plot ZC values vs Eh7 for a single study 20210827
 # Use 'groupby' (name of column with sample groups) and 'groups' (names of sample groups) to apply the pch and col to individual samples
 plotEZ <- function(study, lineage = NULL, mincount = 100, pch = NULL, col = NULL, add = FALSE, type = "p", groupby = NULL, groups = NULL,
-  legend.x = "topleft", show = c("lm", "points"), col.line = "gray62", lwd = 1, cex = 1, title.line = NA, dxlim = c(0, 0), dylim = c(0, 0), size = NULL) {
+  legend.x = "topleft", show = c("lm", "points"), col.line = "gray62", lwd = 1, cex = 1, title.line = NA,
+  dxlim = c(0, 0), dylim = c(0, 0), size = NULL, slope.legend = NULL) {
 
   if(identical(lineage, "two")) {
     # Make two plots for studies that have Bacteria and Archaea 20210913
@@ -133,6 +134,14 @@ plotEZ <- function(study, lineage = NULL, mincount = 100, pch = NULL, col = NULL
     lines(Eh7lim, ZCpred, col = col.line, lwd = lwd, lty = lty)
     # Calculate Pearson correlation 20220520
     pearson <- cor.test(EZdat$Eh7, EZdat$ZC, method = "pearson")
+
+    if(!is.null(slope.legend)) {
+      # Round to fixed number of decimal places
+      slopenum <- formatC(slope, digits = 3, format = "f")
+      stext <- bquote(.(slopenum)~V^-1)
+      legend(slope.legend, legend = stext, bty = "n")
+    }
+
   }
   # Add points
   if("points" %in% show) {

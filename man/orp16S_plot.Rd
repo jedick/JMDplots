@@ -12,7 +12,8 @@ Make plots of \ZC vs Eh7 and \ZC vs abundance of Most Abundant Mapped Taxon.
   plotEZ(study, lineage = NULL, mincount = 100, pch = NULL, col = NULL,
     add = FALSE, type = "p", groupby = NULL, groups = NULL, legend.x = "topleft",
     show = c("lm", "points"), col.line = "gray62", lwd = 1, cex = 1,
-    title.line = NA, dxlim = c(0, 0), dylim = c(0, 0), size = NULL)
+    title.line = NA, dxlim = c(0, 0), dylim = c(0, 0), size = NULL,
+    slope.legend = NULL)
   plotMA(study, lineage = NULL, mincount = 100, pch = NULL, col = NULL,
     groupby = NULL, groups = NULL, legend.x = "topright")
 }
@@ -36,6 +37,7 @@ Make plots of \ZC vs Eh7 and \ZC vs abundance of Most Abundant Mapped Taxon.
   \item{dxlim}{numeric, adjustment to x-axis limits}
   \item{dylim}{numeric, adjustment to y-axis limits}
   \item{size}{numeric, number of randomly selected samples (see \code{\link{getmdat_orp16S}})}
+  \item{slope.legend}{character, legend placement for slope (NULL for no slope legend)}
 }
 
 \details{
