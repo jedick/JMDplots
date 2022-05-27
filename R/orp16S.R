@@ -77,9 +77,9 @@ orp16S1 <- function(pdf = FALSE) {
 
   # Plot shapes and text for chemical methods
   text(80, 79+dy, "Chemical Methods", col = BlueText, font = 2)
-  for(bg in c("white", Blue80)) points(80, 60+dy, pch = 22, cex = 18, bg = bg)
-  text(80, 68+dy, quote(bolditalic(Z)[bold(C)]), col = BlueText, cex = 1.2)
-  text(80, 58.5+dy, "Carbon\noxidation\nstate")
+  for(bg in c("white", Blue80)) points(80, 60+dy, pch = 22, cex = 16, bg = bg)
+  text(80, 67+dy, quote(bolditalic(Z)[bold(C)]), col = BlueText, cex = 1.2)
+  text(80, 57.5+dy, "Carbon\noxidation\nstate")
   # Show multiple physicochemical variables 20210927
   # Function to draw rectangle at x,y with width and height w,h
   myrect <- function(x, y, w, h, ...) rect(x - w/2, y - h/2, x + w/2, y + h/2, ...)
@@ -106,7 +106,7 @@ orp16S1 <- function(pdf = FALSE) {
   arrows(1*third - 1, 20+dy, 1*third + 6, 20+dy, code = 1, lty = 1, length = 0.1)
   arrows(2*third - 4, 16+dy, 2*third + 3, 16+dy, code = 2, lty = 1, length = 0.1)
   text(50, 18+dy, "Community and\nenvironmental data")
-  arrows(80, 25+dy, 80, 45+dy, code = 3, lwd = 1.5, length = 0.1, col = BlueText)
+  arrows(80, 26+dy, 80, 46+dy, code = 3, lwd = 1.5, length = 0.1, col = BlueText)
   text(46, 42+dy, "Thermodynamic prediction", font = 2, cex = 0.9, adj = c(0, 1))
   text(49, 42+dy, "\nCarbon oxidation state\nis positively correlated\nwith redox potential", font = 3, cex = 0.9, adj = c(0, 1))
 
@@ -367,10 +367,10 @@ orp16S3 <- function(pdf = FALSE) {
   # Add legend
   ienv = c(1, 2, 4, 5, 3, 6, 7)
   par(xpd = NA)
-  legend("bottomleft", names(envirotype)[ienv], pch = 19, col = orp16Scol[ienv], bty = "n", cex = 2, inset = c(0, -0.03))
+  legend("bottomleft", names(envirotype)[ienv], pch = 19, col = orp16Scol[ienv], bty = "n", cex = 2, pt.cex = 3, inset = c(0, -0.03))
   ltext <- c("Field sites", "Laboratory or mesocosm", "Smaller symbols for", "densely sampled areas", "Port sites", "Open symbols for transects")
   legend("bottomright", ltext, pch = c(19, 15, 20, NA, 17, 1), col = c(1, 1, 1, NA, orp16Scol[1], 1),
-         bty = "n", cex = 2, pt.cex = c(2, 2, 2, 2, 1, 1), inset = c(0, -0.03))
+         bty = "n", cex = 2, pt.cex = c(3, 3, 3, 3, 2, 2), inset = c(0, -0.03))
   par(xpd = FALSE)
 
   if(pdf) dev.off()
@@ -504,9 +504,9 @@ orp16S4 <- function(pdf = FALSE) {
 # Contamination and redox potential as factors in ZC of groundwater communities 20220521
 orp16S5 <- function(pdf = FALSE) {
 
-  if(pdf) pdf("Figure5.pdf", width = 8, height = 5)
+  if(pdf) pdf("Figure5.pdf", width = 8, height = 5.5)
   mat <- matrix(c(1,1,1,1,3,3,3,3,5,5,5,5, 2,2,2,2,4,4,4,4,6,6,6,6, 0,0,0,7,7,7,8,8,8,0,0,0), nrow = 3, byrow = TRUE)
-  layout(mat, heights = c(2, 1, 1.5))
+  layout(mat, heights = c(2, 1, 1.8))
 
   # Get bacterial data for groundwater studies
   envirotype <- lineage <- NULL
@@ -576,7 +576,7 @@ orp16S5 <- function(pdf = FALSE) {
   col4 <- addalpha(4, "b0")
 
   # Make boxplot for low-Eh7 groups
-  par(mar = c(2, 2, 1, 1))
+  par(mar = c(2, 2, 2, 1))
   bp_lo <- boxplot(ZC ~ group, ZC_lo, ylim = range(gwdat$ZC), varwidth = TRUE, col = col2)
   mtext(axis.label("ZC"), side = 2, line = 2, cex = par("cex"))
   # One-way ANOVA and Tukey's post-hoc test
@@ -590,7 +590,7 @@ orp16S5 <- function(pdf = FALSE) {
   # Add letters to plot
   text((1:3) + 0.3, bp_lo$stats[4, ] + 0.003, cld)
   title("Reducing conditions\n-200 < Eh7 (mV) < 0", font.main = 1, cex.main = 1, line = 0.25, xpd = NA)
-  label.figure("B", font = 2, cex = 1.5, xfrac = -0.05, yfrac = 1.03)
+  label.figure("B", font = 2, cex = 1.5, xfrac = -0.05)
 
   # Make boxplot for high-Eh7 groups
   bp_hi <- boxplot(ZC ~ group, ZC_hi, ylim = range(gwdat$ZC), varwidth = TRUE, col = col4)

@@ -53,7 +53,7 @@ This table gives a brief description of each plotting function.
   \code{orp16S2} \tab Chemical and geobiochemical depth profiles in Winogradsky columns \cr
   \code{orp16S3} \tab Sample locations on world map \cr
   \code{orp16S4} \tab Linear regressions between \ZC and Eh7 at local scales \cr
-  \code{orp16S5} \tab Contamination and redox potential as factors in \ZC of groundwater communities \cr
+  \code{orp16S5} \tab Contamination and redox potential as factors in \ZC of groundwater bacterial communities \cr
   \code{orp16S6} \tab Linear regressions between \ZC and Eh7 at a global scale \cr
   \code{orp16S_S1} \tab Eh-pH diagram (outline from Baas Becking et al., 1960) \cr
   \code{orp16S_S2} \tab \ZC-Eh scatterplots for each dataset \cr

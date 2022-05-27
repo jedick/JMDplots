@@ -1,10 +1,10 @@
 ---
-title: "Chemical adaptation of estimated bacterial community proteomes to redox potential (2022)"
+title: "Chemical adaptation of bacterial communities to redox potential (2022)"
 output: 
   rmarkdown::html_vignette:
     mathjax: null
 vignette: >
-  %\VignetteIndexEntry{Chemical adaptation of estimated bacterial community proteomes to redox potential (2022)}
+  %\VignetteIndexEntry{Chemical adaptation of bacterial communities to redox potential (2022)}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 bibliography: [orp16S.bib, JMDplots.bib]
@@ -61,7 +61,7 @@ ZC <- "<i>Z</i><sub>C</sub>"
 
 This vignette runs the code to make the plots from the following paper:
 
-> Dick JM, Meng D. 2021. Local and global chemical shaping of bacterial communities by redox potential. Manuscript in preparation.
+> Dick JM, Meng D. 2022. Estimated proteomes of bacterial communities are chemically adapted to redox conditions at a global scale. Submitted manuscript.
 >
 > Preprint available at bioRxiv. doi: [10.1101/2021.10.12.464155](https://doi.org/10.1101/2021.10.12.464155)
 
@@ -102,14 +102,15 @@ orp16S4()
 ## Summary of regression slopes for all datasets (Table 2)
 ```{r orp16S_T2}
 colnames <- c("Number", "% Positive", "% Negative")
-kable(orp16S_T2(), col.names = rep(colnames, 2)) %>% add_header_above(c(" " = 1, "Bacteria" = 3, "Archaea" = 3))
+kable(orp16S_T2(), col.names = rep(colnames, 2)) %>%
+  add_header_above(c(" " = 1, "Bacteria" = 3, "Archaea" = 3))
 ```
 
 **Note:** Positive and negative refer to slopes of linear regressions that are > 0.01 V^-1^ and < -0.01 V^-1^, respectively.
 Datasets for which the regression slopes have a smaller magnitude are not counted in either column.
 
-## Contamination and redox potential as factors in `r ZC` of groundwater communities (Figure 5)
-```{r orp16S5, message = FALSE, results = "hide", out.width='100%', fig.width = 8, fig.height = 5, out.extra = 'class="full-width"', pngquant = pngquant, dpi = 100}
+## Contamination and redox potential as factors in `r ZC` of groundwater bacterial communities (Figure 5)
+```{r orp16S5, message = FALSE, results = "hide", out.width='100%', fig.width = 8, fig.height = 5.5, out.extra = 'class="full-width"', pngquant = pngquant, dpi = 100}
 orp16S5()
 ```
 
