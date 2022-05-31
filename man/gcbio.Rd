@@ -5,7 +5,6 @@
 \alias{gcbio2}
 \alias{gcbio3}
 \alias{gcbio4}
-\alias{gcbio5}
 \alias{gcbioS1}
 \alias{calc_logaH2_intermediate}
 \title{Plots from frontier of geochemical biology paper}
@@ -18,7 +17,6 @@ Plots from the paper by Dick et al. (2022).
   gcbio2(pdf = FALSE)
   gcbio3(pdf = FALSE)
   gcbio4(pdf = FALSE)
-  gcbio5(pdf = FALSE)
   gcbioS1(pdf = FALSE)
   calc_logaH2_intermediate(class = NULL)
 }
@@ -36,7 +34,6 @@ This table gives a brief description of each plotting function.
   \code{gcbio2} \tab Overlay \ZC on phylogenetic tree of methanogens \cr
   \code{gcbio3} \tab Affinities of organic synthesis reactions \cr
   \code{gcbio4} \tab Affinities for methanogen proteomes and \logaH2 of habitable niches \cr
-  \code{gcbio5} \tab Interdisciplinary areas in a biological hierarchy \cr
   \code{gcbioS1} \tab Intermediate \logaH2 calculated for different compound classes \cr
 }
 
@@ -65,5 +62,5 @@ Lyu, Z. and Lu, Y. (2018) Metabolic shift at the class level sheds light on adap
 }
 
 \examples{
-gcbio5()
+gcbio1()
 }
