@@ -8,7 +8,7 @@
 
 # read the organism names and refseq data
 org <- read.csv("PCF+18_SuppTable1A.csv", as.is = TRUE)
-RSfile <- system.file("extdata/refseq/protein_refseq.csv.xz", package = "JMDplots")
+RSfile <- system.file("extdata/refseq/protein_refseq.csv.xz", package = "chem16S")
 refseq <- read.csv(RSfile, as.is = TRUE)
 # find matching organism name in refseq data
 findorg <- function(orgname, refseq) {

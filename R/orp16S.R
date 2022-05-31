@@ -579,14 +579,14 @@ orp16S5 <- function(pdf = FALSE) {
   par(mar = c(2, 2, 2, 1))
   bp_lo <- boxplot(ZC ~ group, ZC_lo, ylim = range(gwdat$ZC), varwidth = TRUE, col = col2)
   mtext(axis.label("ZC"), side = 2, line = 2, cex = par("cex"))
-  # One-way ANOVA and Tukey's post-hoc test
+  # One-way ANOVA and Tukey's Honest Significant Differences
   # Adapted from https://statdoe.com/one-way-anova-and-box-plot-in-r/
   anova <- aov(ZC ~ group, data = ZC_lo)
   tukey <- TukeyHSD(anova)
   # Compact letter display
   cld <- multcompLetters4(anova, tukey)$group$Letters
-  # Get into same order as data
-  cld <- cld[match(names(cld), names(gwtype))]
+  cld <- cld[match(names(gwtype), names(cld))]
+  stopifnot(identical(names(cld), names(gwtype)))
   # Add letters to plot
   text((1:3) + 0.3, bp_lo$stats[4, ] + 0.003, cld)
   title("Reducing conditions\n-200 < Eh7 (mV) < 0", font.main = 1, cex.main = 1, line = 0.25, xpd = NA)
@@ -597,7 +597,8 @@ orp16S5 <- function(pdf = FALSE) {
   anova <- aov(ZC ~ group, data = ZC_hi)
   tukey <- TukeyHSD(anova)
   cld <- multcompLetters4(anova, tukey)$group$Letters
-  cld <- cld[match(names(cld), names(gwtype))]
+  cld <- cld[match(names(gwtype), names(cld))]
+  stopifnot(identical(names(cld), names(gwtype)))
   text((1:3) + 0.3, bp_hi$stats[4, ] + 0.003, cld)
   title("Oxidizing conditions\n0 < Eh7 (mV) < 200", font.main = 1, cex.main = 1, line = 0.25, xpd = NA)
   

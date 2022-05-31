@@ -38,7 +38,7 @@ This vignette was compiled on `r Sys.Date()` with **[JMDplots](https://github.co
 
 ```{r refseq, echo = FALSE}
 # Get RefSeq version 20210527
-file <- system.file("extdata/refseq/README.txt", package = "JMDplots")
+file <- system.file("extdata/refseq/README.txt", package = "chem16S")
 release <- substr(strsplit(readLines(file, n=2)[2], "release ")[[1]][2], 1, 3)
 ```
 

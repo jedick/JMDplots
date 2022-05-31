@@ -240,15 +240,15 @@ gradH2O3 <- function(pdf = FALSE, vars = "H2O-ZC") {
   # add proteomes from Nif-encoding genomes 20191014
   np <- NifProteomes()
   if(vars == "H2O-ZC") {
-    points(np$ZC, np$nH2O, pch = 15)
-    lines(np$ZC, np$nH2O, col = "dimgray", lwd = 0.8, lty = 2)
+    points(np$ZC.mean, np$nH2O.mean, pch = 15)
+    lines(np$ZC.mean, np$nH2O.mean, col = "dimgray", lwd = 0.8, lty = 2)
     # add study label and outline most oxidized sample 20200823
-    points(np$ZC[4], np$nH2O[4], pch = 0, cex = 1.6)
-    text(np$ZC[4], np$nH2O[4], "NF", adj = c(0.5, -1), cex = 0.7, font = 2)
+    points(np$ZC.mean[4], np$nH2O.mean[4], pch = 0, cex = 1.6)
+    text(np$ZC.mean[4], np$nH2O.mean[4], "NF", adj = c(0.5, -1), cex = 0.7, font = 2)
   }
   if(vars == "pIG") {
-    points(np$pI, np$GRAVY, pch = 15)
-    lines(np$pI, np$GRAVY, col = "dimgray", lwd = 0.8, lty = 2)
+    points(np$pI.mean, np$GRAVY.mean, pch = 15)
+    lines(np$pI.mean, np$GRAVY.mean, col = "dimgray", lwd = 0.8, lty = 2)
   }
   # add text labels
   if(vars == "H2O-ZC") {
@@ -732,47 +732,57 @@ gradH2O7 <- function(pdf = FALSE) {
   }
 }
 
-# calculate ZC and nH2O of proteomes encoding different Nif homologs (Poudel et al., 2018)
-# 20191014
+# Calculate ZC and nH2O of proteomes encoding different Nif homologs (Poudel et al., 2018)  20191014
+# Also return individual ZC values of all proteomes 20220531
 NifProteomes <- function() {
-  # read file with Nif genome classifications and taxids
+  # Read file with Nif genome classifications and taxids
   Niffile <- system.file("extdata/gradH2O/Nif_homolog_genomes.csv", package = "JMDplots")
   Nif <- read.csv(Niffile, as.is = TRUE)
-  # drop NA taxids
+  # Drop NA taxids
   Nif <- Nif[!is.na(Nif$taxid), ]
-  # read refseq data
+  # Read refseq data
   RSfile <- system.file("extdata/refseq/protein_refseq.csv.xz", package = "chem16S")
   refseq <- read.csv(RSfile, as.is = TRUE)
-  # the Nif types, arranged from anaerobic to aerobic
+  # The Nif types, arranged from anaerobic to aerobic
   types <- c("Nif-D", "Nif-C", "Nif-B", "Nif-A")
-  # assemble the chemical metrics
-  ZC <- ZC.SD <- nH2O <- nH2O.SD <- GRAVY <- GRAVY.SD <- pI <- pI.SD <- numeric()
-  for(type in types) {
-    # get the taxids for genomes with this type of Nif
+  # Assemble the chemical metrics
+  ZC.mean <- ZC.sd <- nH2O.mean <- nH2O.sd <- GRAVY.mean <- GRAVY.sd <- pI.mean <- pI.sd <- numeric()
+  ZClist <- list()
+  for(i in 1:length(types)) {
+    type <- types[i]
+    # Get the taxids for genomes with this type of Nif
     iNif <- Nif$Type == type
     taxid <- Nif$taxid[iNif]
-    # remove duplicated taxids 20191018
+    # Remove duplicated taxids 20191018
     taxid <- taxid[!duplicated(taxid)]
-    # get the row number in the refseq data frame
+    # Get the row number in the refseq data frame
     irefseq <- match(taxid, refseq$organism)
-    # include only organisms with at least 1000 protein sequences
+    # Include only organisms with at least 1000 protein sequences
     i1000 <- refseq$chains[irefseq] >= 1000
     irefseq <- irefseq[i1000]
     #print(paste(type, "represented by", length(irefseq), "nonredundant genomes with at least 1000 protein sequences"))
-    # get the amino acid composition from refseq
+    # Get the amino acid composition from refseq
     AAcomp <- refseq[irefseq, ]
-    # calculate ZC and nH2O
-    ZC <- c(ZC, mean(ZCAA(AAcomp)))
-    ZC.SD <- c(ZC.SD, sd(ZCAA(AAcomp)))
-    nH2O <- c(nH2O, mean(H2OAA(AAcomp)))
-    nH2O.SD <- c(nH2O.SD, sd(H2OAA(AAcomp)))
-    GRAVY <- c(GRAVY, mean(GRAVY(AAcomp)))
-    GRAVY.SD <- c(GRAVY.SD, sd(GRAVY(AAcomp)))
-    pI <- c(pI, mean(pI(AAcomp)))
-    pI.SD <- c(pI.SD, sd(pI(AAcomp)))
+    # Calculate ZC and nH2O
+    ZC <- ZCAA(AAcomp)
+    ZC.mean <- c(ZC.mean, mean(ZC))
+    ZC.sd <- c(ZC.sd, sd(ZC))
+    H2O <- H2OAA(AAcomp)
+    nH2O.mean <- c(nH2O.mean, mean(H2O))
+    nH2O.sd <- c(nH2O.sd, sd(H2O))
+    GRAVY <- GRAVY(AAcomp)
+    GRAVY.mean <- c(GRAVY.mean, mean(GRAVY))
+    GRAVY.sd <- c(GRAVY.sd, sd(GRAVY))
+    pI <- pI(AAcomp)
+    pI.mean <- c(pI.mean, mean(pI))
+    pI.sd <- c(pI.sd, sd(pI))
+    # Store ZC values 20220531
+    ZClist[[i]] <- ZC
   }
-  # return values
-  list(types = types, ZC = ZC, ZC.SD = ZC.SD, nH2O = nH2O, nH2O.SD = nH2O.SD, GRAVY = GRAVY, GRAVY.SD = GRAVY.SD, pI = pI, pI.SD = pI.SD)
+  # Return values
+  names(ZClist) <- types
+  list(types = types, ZC.mean = ZC.mean, ZC.sd = ZC.sd, nH2O.mean = nH2O.mean, nH2O.sd = nH2O.sd,
+       GRAVY.mean = GRAVY.mean, GRAVY.sd = GRAVY.sd, pI.mean = pI.mean, pI.sd = pI.sd, ZClist = ZClist)
 }
 
 ############################
