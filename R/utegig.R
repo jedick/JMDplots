@@ -1,4 +1,4 @@
-# JMDplots/gcbio.R
+# JMDplots/utegig.R
 # Plots for perspective paper on oxidation state of biomolecules
 # 20200418 jmd first version
 # 20210516 Add methanogen tree
@@ -45,7 +45,7 @@ col8 <- addalpha(8, "b0")
 col2 <- addalpha(2, "b0")
 
 # Read methanogen tree
-methanogen_tree <- read.tree(system.file("extdata/gcbio/methanogen_tree.txt", package = "JMDplots"))
+methanogen_tree <- read.tree(system.file("extdata/utegig/methanogen_tree.txt", package = "JMDplots"))
 # Match species names without underscore used for labeling the tree
 methanogens <- gsub("_", " ", methanogen_tree$tip.label)
 # Indices of Class I and Class II methanogens
@@ -78,7 +78,7 @@ mcol[iII] <- col4
 #write.csv(methanogen_AA, "methanogen_AA.csv", row.names = FALSE, quote = FALSE)
 
 # ZC of proteins and lipids in hot springs 20210516
-gcbio1 <- function(pdf = FALSE) {
+utegig1 <- function(pdf = FALSE) {
 
   if(pdf) pdf("Figure_1.pdf", width = 8.5, height = 4)
   layout(matrix(1:3, nrow = 1), widths = c(1.07, 1, 0.4))
@@ -158,7 +158,7 @@ gcbio1 <- function(pdf = FALSE) {
 }
 
 # Overlay ZC on phylogenetic tree of methanogens 20210516
-gcbio2 <- function(pdf = FALSE) {
+utegig2 <- function(pdf = FALSE) {
 
   if(pdf) pdf("Figure_2.pdf", width = 12, height = 8)
   layout(matrix(1:2, nrow = 1), widths = c(1.5, 0.7))
@@ -166,7 +166,7 @@ gcbio2 <- function(pdf = FALSE) {
 
   # Use colors to distinguish Class I and Class II
   edge.color <- c(rep(4, 37), rep(2, 37))
-  methanogen_tree <- read.tree(system.file("extdata/gcbio/methanogen_tree.txt", package = "JMDplots"))
+  methanogen_tree <- read.tree(system.file("extdata/utegig/methanogen_tree.txt", package = "JMDplots"))
   pp <- plot.phylo(methanogen_tree, root.edge = TRUE, edge.color = edge.color, show.tip.label = FALSE)
   # Add tip labels 20220531
   labels <- methanogen_tree$tip.label
@@ -179,7 +179,7 @@ gcbio2 <- function(pdf = FALSE) {
   text(4170, iFS + dy, FStxt, adj = c(0, 0), xpd = NA)
 
   # Calculate ZC from protein formulas
-  methanogen_AA <- read.csv(system.file("extdata/gcbio/methanogen_AA.csv", package = "JMDplots"))
+  methanogen_AA <- read.csv(system.file("extdata/utegig/methanogen_AA.csv", package = "JMDplots"))
   ZC <- ZC(protein.formula(methanogen_AA))
 
   # Add labels
@@ -206,9 +206,9 @@ gcbio2 <- function(pdf = FALSE) {
   # ZC-Topt plot 20220224
   par(mar = c(9, 2, 7, 1))
   # Read Topt
-  dat <- read.csv(system.file("extdata/gcbio/Topt.csv", package = "JMDplots"))
+  dat <- read.csv(system.file("extdata/utegig/Topt.csv", package = "JMDplots"))
   # Append ZC column
-  methanogen_AA <- read.csv(system.file("extdata/gcbio/methanogen_AA.csv", package = "JMDplots"))
+  methanogen_AA <- read.csv(system.file("extdata/utegig/methanogen_AA.csv", package = "JMDplots"))
   ZC <- ZC(protein.formula(methanogen_AA))
   dat$ZC <- ZC[match(dat$species, methanogens)]
   # Use par(xpd = NA) to show the y-axis label 20220401
@@ -236,7 +236,7 @@ gcbio2 <- function(pdf = FALSE) {
 }
 
 # Affinities of organic synthesis reactions 20211109
-gcbio3 <- function(pdf = FALSE) {
+utegig3 <- function(pdf = FALSE) {
 
   if(pdf) pdf("Figure_3.pdf", width = 7, height = 6)
   mat <- matrix(c(1,1,2,2,3,3,4, 0,5,5,5,5,0,0), byrow = TRUE, nrow = 2)
@@ -377,7 +377,7 @@ gcbio3 <- function(pdf = FALSE) {
 }
 
 # Affinities for methanogen proteomes and logaH2 of habitable niches 20220402
-gcbio4 <- function(pdf = FALSE) {
+utegig4 <- function(pdf = FALSE) {
 
   if(pdf) pdf("Figure_4.pdf", width = 7, height = 5)
   mat <- matrix(c(1,1,2,2,3,3,4, 5,5,5,6,6,6,0), nrow = 2, byrow = TRUE)
@@ -389,7 +389,7 @@ gcbio4 <- function(pdf = FALSE) {
   T <- 25
 
   # Calculate ZC of methanogen proteomes excluding high-ZC outliers
-  methanogen_AA <- read.csv(system.file("extdata/gcbio/methanogen_AA.csv", package = "JMDplots"))
+  methanogen_AA <- read.csv(system.file("extdata/utegig/methanogen_AA.csv", package = "JMDplots"))
   ZC <- ZC(protein.formula(methanogen_AA[!iout, ]))
   # Add proteins to CHNOSZ
   ip <- add.protein(methanogen_AA[!iout, ])
@@ -530,7 +530,7 @@ gcbio4 <- function(pdf = FALSE) {
   text(mean(c(x1, x2)), mean(c(y1, y2)), "Lost City", col = "green4")
 
   # Add lines for sediments (Lovley and Goodwin, 1988) 20220303
-  sediment <- read.csv(system.file("extdata/gcbio/LG88_Fig1.csv", package = "JMDplots"))
+  sediment <- read.csv(system.file("extdata/utegig/LG88_Fig1.csv", package = "JMDplots"))
   for(i in 1:nrow(sediment)) {
     if(sediment$type[i] == "Methane") col <- "green4" else col <- "gray40"
     if(sediment$type[i] == "Methane") lty <- 1 else lty <- 2
@@ -569,7 +569,7 @@ intermediate_logaH2 <- function(class = NULL, add = FALSE, parargs = list(mar = 
   if(!add) do.call(par, parargs)
   file <- "H2_intermediate.csv"
   if(!is.null(class)) file <- paste0("H2_intermediate_", gsub(" ", "", class), ".csv")
-  dat <- read.csv(file.path(system.file("extdata/gcbio", package = "JMDplots"), file))
+  dat <- read.csv(file.path(system.file("extdata/utegig", package = "JMDplots"), file))
   x <- dat[, "T", drop = FALSE]
   y <- dat[, 2:5]
   if(!add) matplot(x, y, type = "n", xlab = Tlab, ylab = logaH2lab, xlim = xlim, ylim = ylim, xaxs = "i")
@@ -720,7 +720,7 @@ calc_logaH2_intermediate <- function(class = NULL) {
 }
 
 # Intermediate logaH2 calculated for different compound classes 20220418
-gcbioS1 <- function(pdf = FALSE) {
+utegigS1 <- function(pdf = FALSE) {
   # To generate files:
   # lapply(names(specieslist), calc_logaH2_intermediate)
   if(pdf) pdf("Figure_S1.pdf", width = 6, height = 8)

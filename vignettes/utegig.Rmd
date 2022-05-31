@@ -1,10 +1,10 @@
 ---
-title: "Frontier of geochemical biology (2022)"
+title: "Using thermodynamics to extract geochemical information from genomes (2022)"
 output: 
   rmarkdown::html_vignette:
     mathjax: null
 vignette: >
-  %\VignetteIndexEntry{Frontier of geochemical biology (2022)}
+  %\VignetteIndexEntry{Using thermodynamics to extract geochemical information from genomes (2022)}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 bibliography: JMDplots.bib
@@ -54,7 +54,7 @@ logaH2 <- "log<i>a</i><sub>H<sub>2</sub></sub>"
 
 This vignette runs the code to make the plots from the following paper:
 
-> Dick JM, Boyer GM, Canovas PA III, Shock EL. 2022. The frontier of geochemical biology: Ecological applications of carbon oxidation state and the next steps for thermodynamic models. Manuscript in preparation.
+> Dick JM, Boyer GM, Canovas PA III, Shock EL. 2022. Using thermodynamics to extract geochemical information from genomes (and other -omes). Manuscript in preparation.
 
 This vignette was compiled on `r Sys.Date()` with **[JMDplots](https://github.com/jedick/JMDplots)** `r packageDescription("JMDplots")$Version`.
 
@@ -63,36 +63,36 @@ library(JMDplots)
 ```
 
 ## `r ZC` of proteins and lipids in hot springs (Figure 1)
-```{r gcbio1, message = FALSE, results = "hide", out.width='80%', fig.align='center', fig.width = 8.5, fig.height = 4, pngquant = pngquant}
-gcbio1()
+```{r utegig1, message = FALSE, results = "hide", out.width='80%', fig.align='center', fig.width = 8.5, fig.height = 4, pngquant = pngquant}
+utegig1()
 ```
 
 **Data sources:** Proteins [@DS13] and lipids [@BSS+20].
 
 ## Overlay `r ZC` on phylogenetic tree of methanogens (Figure 2)
-```{r gcbio2, message = FALSE, results = "hide", out.width='100%', fig.width = 12, fig.height = 8, out.extra = 'class="full-width"', pngquant = pngquant}
-gcbio2()
+```{r utegig2, message = FALSE, results = "hide", out.width='100%', fig.width = 12, fig.height = 8, out.extra = 'class="full-width"', pngquant = pngquant}
+utegig2()
 ```
 
 **Data sources:** Hierarchical clustering tree of methanogenesis genes [@LL18]; `r ZC` calculated for reference proteomes [@DT22] based on RefSeq protein sequences [@OWB+16]. See Table 1 in the paper for references for optimal growth temperature (*T*~opt~).
 
 ## Relative stabilities of organic compounds in `r logaH2`--*T* space (Figure 3)
-```{r gcbio3, message = FALSE, results = "hide", out.width='100%', fig.width = 7, fig.height = 6, pngquant = pngquant, dpi = 100}
-gcbio3()
+```{r utegig3, message = FALSE, results = "hide", out.width='100%', fig.width = 7, fig.height = 6, pngquant = pngquant, dpi = 100}
+utegig3()
 ```
 
 **Data sources:** List of organic compounds from @SC10 and TCA cycle metabolites from @CS16. See Table 2 in the paper for references for thermodynamic data.
 
 ## Relative stabilities of methanogen proteomes align with `r logaH2` of habitable niches (Figure 4)
-```{r gcbio4, message = FALSE, results = "hide", out.width='100%', fig.width = 7, fig.height = 5, out.extra = 'class="full-width"', pngquant = "--speed=1 --quality=25-50", dpi = 100}
-gcbio4()
+```{r utegig4, message = FALSE, results = "hide", out.width='100%', fig.width = 7, fig.height = 5, out.extra = 'class="full-width"', pngquant = "--speed=1 --quality=25-50", dpi = 100}
+utegig4()
 ```
 
 **Data sources:** Lost City *T* and H~2~ concentration [@KKF+05], Rainbow vent fluid mixing model [@SC10], methanogenic and non-methanogenic sediments [@LG88].
 
 ## Intermediate `r logaH2` calculated for different compound classes (Figure S1)
-```{r gcbioS1, message = FALSE, results = "hide", out.width='80%', fig.align='center', fig.width = 6, fig.height = 8, pngquant = pngquant}
-gcbioS1()
+```{r utegigS1, message = FALSE, results = "hide", out.width='80%', fig.align='center', fig.width = 6, fig.height = 8, pngquant = pngquant}
+utegigS1()
 ```
 
 ## References
