@@ -160,21 +160,23 @@ gcbio1 <- function(pdf = FALSE) {
 # Overlay ZC on phylogenetic tree of methanogens 20210516
 gcbio2 <- function(pdf = FALSE) {
 
-  # Use locally modified version of plot.phylo() from ape package (version 5.5)
-  source(system.file("extdata/gcbio/plot.phylo_jmd.R", package = "JMDplots"))
-  # https://stackoverflow.com/questions/24331690/modify-package-function 20191121
-  environment(plot.phylo_jmd) <- asNamespace("ape")
-  assignInNamespace("plot.phylo", plot.phylo_jmd, ns = "ape")
-  plot.phylo <- plot.phylo_jmd
-
   if(pdf) pdf("Figure_2.pdf", width = 12, height = 8)
   layout(matrix(1:2, nrow = 1), widths = c(1.5, 0.7))
-  par(mar = c(2, 0, 2, 0))
+  par(mar = c(2, 0, 1, 32))
 
   # Use colors to distinguish Class I and Class II
   edge.color <- c(rep(4, 37), rep(2, 37))
   methanogen_tree <- read.tree(system.file("extdata/gcbio/methanogen_tree.txt", package = "JMDplots"))
-  plot.phylo(methanogen_tree, root.edge = TRUE, edge.color = edge.color, cex = 0.75)
+  pp <- plot.phylo(methanogen_tree, root.edge = TRUE, edge.color = edge.color, show.tip.label = FALSE)
+  # Add tip labels 20220531
+  labels <- methanogen_tree$tip.label
+  labels <- gsub("_", " ", labels)
+  FStxt <- "sp. FS406-22"
+  iFS <- grep(FStxt, labels, fixed = TRUE)
+  labels <- gsub(FStxt, "", labels, fixed = TRUE)
+  dy <- -0.25
+  text(3100, 1:36 + dy, labels, font = 3, adj = c(0, 0), xpd = NA)
+  text(4170, iFS + dy, FStxt, adj = c(0, 0), xpd = NA)
 
   # Calculate ZC from protein formulas
   methanogen_AA <- read.csv(system.file("extdata/gcbio/methanogen_AA.csv", package = "JMDplots"))
@@ -183,19 +185,15 @@ gcbio2 <- function(pdf = FALSE) {
   # Add labels
   text(0, 29.5, "Class I", font = 2, adj = 0, cex = 1.2)
   text(0, 5, "Class II", font = 2, adj = 0, cex = 1.2)
-  par(xpd = NA)
-  text(1900, -1.7, ZClab)
-  text(1900, 38.5, ZClab)
-  par(xpd = FALSE)
+  text(3200, -2.4, ZClab, adj = c(0, 0), xpd = NA)
   label.figure("A", cex = 1.5, font = 2, yfrac = 0.97)
   # Setup a new plot in the empty space between the tree and names
   par(new = TRUE)
-  par(mar = c(2, 9, 2, 18))
+  par(mar = c(2, 9, 1, 18))
   plot(range(ZC), c(1, length(ZC)), type = "n", ylab = "", axes = FALSE)
   axis(1, at = seq(-0.25, -0.15, 0.01), labels = FALSE, tcl = -0.3)
   axis(1, at = c(-0.25, -0.2, -0.15))
   axis(3, at = seq(-0.25, -0.15, 0.01), labels = FALSE, tcl = -0.3)
-  axis(3, at = c(-0.25, -0.2, -0.15))
   # Plot guidelines 20220405
   abline(v = c(-0.25, -0.20, -0.15), lty = 2, col = 8)
 #  abline(h = 1:36, lty = 3, col = "gray40")
@@ -550,8 +548,6 @@ gcbio4 <- function(pdf = FALSE) {
   text(40, -9.5, "Non-methanogenic sediments", adj = 0, cex = 0.9, col = "gray40")
   lines(c(26, 39), c(-9, -9.5), col = "gray40")
   par(xpd = NA)
-  text(102, -1.5, "More reducing than known\nhydrothermal systems", font = 3, adj = 0, col = "gray40")
-  text(102, -8.5, "Not reducing enough\nfor autotrophic\nmethanogenesis", font = 3, adj = 0, col = "gray40")
   lines(c(100, 130), c(-2.34, -2.34), lty = 2)
   lines(c(100, 130), rep(tail(logaH2.min, 1), 2), lty = 3)
   text(132, -4, "Habitable\nniches", font = 3, col = "green4", adj = 0)
