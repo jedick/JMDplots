@@ -90,6 +90,13 @@ utegig4()
 
 **Data sources:** Lost City *T* and H~2~ concentration [@KKF+05], Rainbow vent fluid mixing model [@SC10], methanogenic and non-methanogenic sediments [@LG88].
 
+## Thaumarchaeota `r ZC` and thermodynamic analysis (Figure 5)
+```{r utegig5, message = FALSE, results = "hide", out.width='100%', fig.width = 17, fig.height = 12, out.extra = 'class="full-width"', dpi = 100}
+utegig5()
+```
+
+**Data sources:** Methanogens [@LL18], Nif-bearing organisms [@PCF+18], Thaumarchaeota [@RFH+19]. Amino acid compositions are from RefSeq proteomes (methanogens and Nif-bearing organisms) or NCBI and IMG genomes (Thaumarchaeota).
+
 ## Intermediate `r logaH2` calculated for different compound classes (Figure S1)
 ```{r utegigS1, message = FALSE, results = "hide", out.width='80%', fig.align='center', fig.width = 6, fig.height = 8, pngquant = pngquant}
 utegigS1()
