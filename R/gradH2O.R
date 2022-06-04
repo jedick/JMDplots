@@ -734,6 +734,7 @@ gradH2O7 <- function(pdf = FALSE) {
 
 # Calculate ZC and nH2O of proteomes encoding different Nif homologs (Poudel et al., 2018)  20191014
 # Also return individual ZC values of all proteomes 20220531
+# Also return amino acid composition of all proteomes 20220603
 NifProteomes <- function() {
   # Read file with Nif genome classifications and taxids
   Niffile <- system.file("extdata/gradH2O/Nif_homolog_genomes.csv", package = "JMDplots")
@@ -748,6 +749,7 @@ NifProteomes <- function() {
   # Assemble the chemical metrics
   ZC.mean <- ZC.sd <- nH2O.mean <- nH2O.sd <- GRAVY.mean <- GRAVY.sd <- pI.mean <- pI.sd <- numeric()
   ZClist <- list()
+  aalist <- list()
   for(i in 1:length(types)) {
     type <- types[i]
     # Get the taxids for genomes with this type of Nif
@@ -778,11 +780,16 @@ NifProteomes <- function() {
     pI.sd <- c(pI.sd, sd(pI))
     # Store ZC values 20220531
     ZClist[[i]] <- ZC
+    # Store amino acid compositions 20220603
+    AAcomp$protein <- type
+    aalist[[i]] <- AAcomp
   }
   # Return values
   names(ZClist) <- types
+  AA <- do.call(rbind, aalist)
   list(types = types, ZC.mean = ZC.mean, ZC.sd = ZC.sd, nH2O.mean = nH2O.mean, nH2O.sd = nH2O.sd,
-       GRAVY.mean = GRAVY.mean, GRAVY.sd = GRAVY.sd, pI.mean = pI.mean, pI.sd = pI.sd, ZClist = ZClist)
+       GRAVY.mean = GRAVY.mean, GRAVY.sd = GRAVY.sd, pI.mean = pI.mean, pI.sd = pI.sd,
+       ZClist = ZClist, AA = AA)
 }
 
 ############################

@@ -1,9 +1,9 @@
 # JMDplots/utegig.R
-# Plots for perspective paper on oxidation state of biomolecules
-# 20200418 jmd first version
+# Plots for perspective paper on geochemical biology
+# 20200418 jmd first version (review of Bison Pool and amino acid synthesis [AS98])
 # 20210516 Add methanogen tree
-# 20210727 Add nH2O-ZC overview plot [deleted]
-# 20220220 Make hierarchy diagram
+# 20210727 Add nH2O-ZC overview plot (deleted)
+# 20220220 Make hierarchy diagram (deleted)
 # 20220420 Move to JMDplots
 
 # Create bold axis labels
@@ -562,13 +562,12 @@ utegig4 <- function(pdf = FALSE) {
 
 }
 
-# Thaumarchaeota ZC and thermodynamic analysis 20220601
+# Chemical and thermodynamic analysis of multiple lineages 20220601
 utegig5 <- function(pdf = FALSE) {
 
-  if(pdf) pdf("Figure_5.pdf", width = 17, height = 12)
-  layout(matrix(1:6, nrow = 2, byrow = TRUE), widths = c(2.5, 4, 4))
-  par(cex = 1.5, mar = c(4, 4, 3, 1))
-  ylim <- c(-0.25, -0.10)
+  if(pdf) pdf("Figure_5.pdf", width = 9, height = 5)
+  layout(matrix(1:8, nrow = 2), widths = c(2.5, 4, 4, 1.5))
+  par(mar = c(4, 4, 3, 1))
   
   # Function to add significant difference letters 20220531
   cldfun <- function(ZClist, bp) {
@@ -587,126 +586,147 @@ utegig5 <- function(pdf = FALSE) {
     text((1:n) + 0.35, bp$stats[4, ] + 0.0045, cld)
   }
 
-  # Methanogen proteomes 20220424
-  # Read amino acid composition and compute ZC
-  methanogen_AA <- read.csv(system.file("extdata/utegig/methanogen_AA.csv", package = "JMDplots"))
-  ZC <- ZC(protein.formula(methanogen_AA))
-  # Indices of Class I and Class II methanogens
-  iI <- 20:36
-  iII <- 1:19
   # Faded colors
   col4 <- addalpha(4, "b0")
   col2 <- addalpha(2, "b0")
-  # Make plot
-  ZClist <- list("Class I" = ZC[iI], "Class II" = ZC[iII])
-  names(ZClist) <- paste0(names(ZClist), "\n(", sapply(ZClist, length), ")")
-  bp <- boxplot(ZClist, ylab = ZClab, col = c(col2, col4), ylim = ylim, names = character(2))
-  axis(1, at = 1:2, labels = names(ZClist), line = 1, lwd = 0)
-  cldfun(ZClist, bp)
-  text(1, -0.12, "Anoxic\nhabitats", font = 2, cex = 0.8)
-  text(2, -0.12, "Anoxic\nand oxic\nhabitats", font = 2, cex = 0.8)
-  abline(v = 1.5, lty = 2, lwd = 2, col = 8)
-  title("Methanogens\n(Lyu and Lu, 2018)", font.main = 1, cex.main = 1)
-  label.figure("A", cex = 1.5, font = 2, xfrac = 0.06)
-
-  # Nif-bearing organisms 20220531
-  ZClist <- NifProteomes()$ZClist
-  bp <- boxplot(ZClist, ylab = ZClab, col = c(col2, col2, col4, col4), ylim = ylim, names = character(4))
-  names(ZClist) <- paste0(names(ZClist), "\n(", sapply(ZClist, length), ")")
-  axis(1, at = 1:4, labels = names(ZClist), line = 1, lwd = 0)
-  # Names with "-" confuse multcompLetters4()
-  names(ZClist) <- gsub("-", "", names(ZClist))
-  cldfun(ZClist, bp)
-  text(1.5, -0.12, "Anaerobic", font = 2, cex = 0.8)
-  text(3.2, -0.11, "Anaerobic\nand aerobic", font = 2, cex = 0.8)
-  abline(v = 2.5, lty = 2, lwd = 2, col = 8)
-  title("Nif-bearing organisms\n(Poudel et al., 2018)", font.main = 1, cex.main = 1)
-
-  # Thaumarchaeota 20220414
-  aa <- read.csv(system.file("extdata/utegig/RFH+19_aa.csv", package = "JMDplots"))
-  group <- c("Basal", "Terrestrial", "Shallow", "Deep")
-  ZC <- ZCAA(aa)
-  ZClist <- lapply(group, function(g) ZC[aa$protein == g])
-  names(ZClist) <- group
-  names(ZClist) <- paste0(names(ZClist), "\n(", sapply(ZClist, length), ")")
-  bp <- boxplot(ZClist, ylab = ZClab, col = c(col2, col4, col4, col4), ylim = ylim, names = character(4))
-  cldfun(ZClist, bp)
-  axis(1, at = 1:4, labels = names(ZClist), line = 1, lwd = 0, gap.axis = 0)
-  text(0.9, -0.12, "Pre-GOE\nemergence", font = 2, cex = 0.8)
-  text(2.1, -0.12, "Post-GOE\nemergence", font = 2, cex = 0.8)
-  abline(v = 1.5, lty = 2, lwd = 2, col = 8)
-  title("Thaumarchaeota\n(Ren et al., 2019)", font.main = 1, cex.main = 1)
+  # y-axis limits for boxplots
+  ylim <- c(-0.25, -0.10)
+  # Axis limits for affinity plots
+  xlims <- list(c(-4, -12), c(0, -15), c(0, -15))
+  ylims <- list(c(0, 40), c(0, 250), c(0, 50))
+  # Where to draw transition line
+  trans <- list(c("Class I", "Class II"), c("Nif-C", "Nif-B"), c("Basal", "Terrestrial"))
 
   # Define basis species and temperature
   basis(c("CO2", "H2", "NH4+", "H2O", "H2S", "H+"), c(Seawater.AS98$CO2, Seawater.AS98$H2, Seawater.AS98$"NH4+", 0, Seawater.AS98$H2S, -Seawater.AS98$pH))
   T <- 25
+  # Calculate logK for H2 = 2H+ + 2e- for conversion to Eh
+  logK <- subcrt(c("H2", "H+", "e-"), c(-1, 2, 2), T = T)$out$logK
+  pH <- Seawater.AS98$pH
+  # Adjustments for label position
+  dx <- list(c(0, 0), c(4, 0, -8, 0), c(0, 0, -2, -1))
+  dy <- list(c(0, 0), c(30, 0, -70, 0), c(1, 2, 5, -3))
 
-  # Add legend
-  plot.new()
-  par(mar = c(0, 0, 0, 0))
-  par(xpd = NA)
-  dT <- describe.property("T", T)
-  dbasis <- describe.basis(ibasis = c(1, 5, 6))
-  legend("topright", legend = c(dT, dbasis), bty = "n", y.intersp = 1.5, title = "Thaumarchaeota", title.cex = 1.1)
-  par(xpd = FALSE)
-  par(cex = 1.5, mar = c(3, 4, 3, 1))
-  label.figure("B", cex = 1.5, font = 2, xfrac = 0.06)
+  for(i in 1:3) {
 
-  if(!packageVersion("CHNOSZ") > "1.4.3") {
-    warning("Not making average affinity ranking plots because of insufficient CHNOSZ version")
-  } else {
+    if(i == 1) {
+      # Methanogen proteomes 20220424
+      # Read amino acid composition and compute ZC
+      aa <- read.csv(system.file("extdata/utegig/methanogen_AA.csv", package = "JMDplots"))
+      # Indices of Class I and Class II methanogens
+      iI <- 20:36
+      iII <- 1:19
+      col <- c(col2, col4)
+      # Make ZC plot
+      ZC <- ZC(protein.formula(aa))
+      ZClist <- list("Class I" = ZC[iI], "Class II" = ZC[iII])
+      names(ZClist) <- paste0(names(ZClist), "\n(", sapply(ZClist, length), ")")
+      bp <- boxplot(ZClist, ylab = ZClab, col = col, ylim = ylim, names = character(2))
+      axis(1, at = 1:2, labels = names(ZClist), line = 1, lwd = 0)
+      cldfun(ZClist, bp)
+      text(1, -0.12, "Anoxic\nhabitats", font = 2, cex = 0.8)
+      text(2, -0.12, "Anoxic\nand oxic\nhabitats", font = 2, cex = 0.8)
+      abline(v = 1.5, lty = 2, lwd = 1.5, col = 8)
+      title("Methanogens\n(Lyu and Lu, 2018)", font.main = 1, cex.main = 1)
+      label.figure("A", cex = 1.5, font = 2, xfrac = 0.06)
+      # Get the species in each group
+      groups <- list("Class I" = iI, "Class II" = iII)
+    }
 
-    # Affinity ranking diagram for Thaumarchaeota 20220415
-    # Load protein residues
-    ip <- add.protein(aa, as.residue = TRUE)
-    # Names of groups and colors from Ren et al. (2019)
-    groupnames <- c("Basal", "Terrestrial", "Shallow", "Deep")
-    col <- c("#b2427e", "#c78d55", "#00a06f", "#4085c3")
-    # Get the species in each group
-    groups <- sapply(groupnames, function(group) aa$protein == group, simplify = FALSE)
+    if(i == 2) {
+      # Nif-bearing organisms 20220531
+      np <- NifProteomes()
+      ZClist <- np$ZClist
+      col <- c(col2, col2, col4, col4)
+      bp <- boxplot(ZClist, ylab = ZClab, col = col, ylim = ylim, names = character(4))
+      names(ZClist) <- paste0(names(ZClist), "\n(", sapply(ZClist, length), ")")
+      axis(1, at = 1:4, labels = names(ZClist), line = 1, lwd = 0)
+      # Names with "-" confuse multcompLetters4()
+      names(ZClist) <- gsub("-", "", names(ZClist))
+      cldfun(ZClist, bp)
+      text(1.5, -0.12, "Anaerobic", font = 2, cex = 0.8)
+      text(3.2, -0.11, "Anaerobic\nand aerobic", font = 2, cex = 0.8)
+      abline(v = 2.5, lty = 2, lwd = 1.5, col = 8)
+      title("Nif-bearing organisms\n(Poudel et al., 2018)", font.main = 1, cex.main = 1)
+      # Get the amino acid compositions and species in each group
+      aa <- np$AA
+      groupnames <- np$types
+      groups <- sapply(groupnames, function(group) aa$protein == group, simplify = FALSE)
+    }
 
-    # Calculate logK for H2 = 2H+ + 2e- for conversion to Eh
-    logK <- subcrt(c("H2", "H+", "e-"), c(-1, 2, 2), T = T)$out$logK
-    pH <- Seawater.AS98$pH
+    if(i == 3) {
+      # Thaumarchaeota 20220414
+      aa <- read.csv(system.file("extdata/utegig/thaumarchaeota_AA.csv", package = "JMDplots"))
+      groupnames <- c("Basal", "Terrestrial", "Shallow", "Deep")
+      ## Colors from Ren et al. (2019)
+      #col <- c("#b2427e", "#c78d55", "#00a06f", "#4085c3")
+      col <- c(col2, col4, col4, col4)
+      ZC <- ZCAA(aa)
+      ZClist <- lapply(groupnames, function(g) ZC[aa$protein == g])
+      names(ZClist) <- groupnames
+      names(ZClist) <- paste0(names(ZClist), "\n(", sapply(ZClist, length), ")")
+      bp <- boxplot(ZClist, ylab = ZClab, col = col, ylim = ylim, names = character(4))
+      cldfun(ZClist, bp)
+      axis(1, at = 1:4, labels = names(ZClist), line = 1, lwd = 0, gap.axis = 0)
+      text(0.9, -0.12, "Pre-GOE\nemergence", font = 2, cex = 0.8)
+      text(2.1, -0.12, "Post-GOE\nemergence", font = 2, cex = 0.8)
+      abline(v = 1.5, lty = 2, lwd = 1.5, col = 8)
+      title("Thaumarchaeota\n(Ren et al., 2019)", font.main = 1, cex.main = 1)
+      # Get the species in each group
+      groups <- sapply(groupnames, function(group) aa$protein == group, simplify = FALSE)
+    }
 
-    # Make two plots with different NH4+ activity
-    dx <- list(c(0, 0, -2, -1), c(0, -1, 0, -1))
-    dy <- list(c(1, 2, 5, -3), c(1, 2, 2, -3))
-    for(i in 1:2) {
-      if(i == 2) basis("NH4+", 0)
-      a <- affinity(H2 = c(0, -15), iprotein = ip, T = T)
+    if(!packageVersion("CHNOSZ") > "1.4.3") {
+      warning("Not making average affinity ranking plots because of insufficient CHNOSZ version")
+      plot.new()
+    } else {
+      # Make affinity ranking plot 20220602
+      # Load proteins and calculate affinity
+      ip <- add.protein(aa, as.residue = TRUE)
+      a <- affinity(H2 = xlims[[i]], iprotein = ip, T = T)
       # Calculate normalized sum of ranks for each group and make diagram
-      arank <- CHNOSZ::affinity_rank(a, groups)
-      diagram(arank, xlim = c(0, -15), col = col, lty = 1, lwd = 2, dx = dx[[i]], dy = dy[[i]],
-              xlab = logaH2lab, ylab = "Average affinity ranking", ylim = c(0, 50))
-      # Add logaNH4 legend
-      dbasis <- describe.basis(ibasis = 3)
-      legend("bottomright", legend = dbasis, bty = "n")
+      # TODO: use function from CHNOSZ (when CHNOSZ 2.0.0 is released)
+      #arank <- CHNOSZ::affinity_rank(a, groups)
+      arank <- affinity.rank(a, groups)
+      # Save graphical settings that are modified by diagram()
+      opar <- par(c("mar", "mgp", "tcl", "las", "xaxs", "yaxs"))
+      diagram(arank, xlim = xlims[[i]], ylim = ylims[[i]], col = col, lty = 1, lwd = 1.5, dx = dx[[i]], dy = dy[[i]],
+              xlab = logaH2lab, ylab = "Average affinity ranking")
+      par(opar)
+      if(i == 1) label.figure("B", cex = 1.5, font = 2, xfrac = 0.06)
 
-      for(j in 1:2) {
-        # Don't draw Basal-Shallow on first plot
-        if(j > i) next
-        # Draw line at Basal-Terrestrial or Basal-Shallow transition
-        if(j == 1) itrans <- which.min(abs(arank$values$Basal - arank$values$Terrestrial))
-        if(j == 2) itrans <- which.min(abs(arank$values$Basal - arank$values$Shallow))
-        logaH2 <- arank$vals$H2[itrans]
-        A <- arank$values$Basal[itrans]
-        lines(c(logaH2, logaH2), c(A, 53), lty = 2, lwd = 2, col = 8, xpd = NA)
+      # Draw line at transition
+      itrans <- which.min(abs(arank$values[[trans[[i]][1]]] - arank$values[[trans[[i]][2]]]))
+      logaH2 <- arank$vals$H2[itrans]
+      A <- arank$values[[trans[[i]][1]]][itrans]
+      ytop1 <- ylims[[i]][2] + diff(ylims[[i]]) * 0.05
+      lines(c(logaH2, logaH2), c(A, ytop1), lty = 2, lwd = 1.5, col = 8, xpd = NA)
 
-        # Calculate pe and Eh (mV)
-        pe <- -pH - 0.5*logaH2 - 0.5*logK
-        Eh <- 1000 * convert(pe, "Eh", pH = pH)
-        Ehtext <- paste(round(Eh), "mV")
-        text(logaH2, 54, Ehtext, xpd = NA)
-      }
+      # Calculate pe and Eh (mV)
+      pe <- -pH - 0.5*logaH2 - 0.5*logK
+      Eh <- 1000 * convert(pe, "Eh", pH = pH)
+      Ehtext <- paste(round(Eh), "mV")
+      ytop2 <- ylims[[i]][2] + diff(ylims[[i]]) * 0.1
+      text(logaH2, ytop2, Ehtext, xpd = NA)
     }
 
   }
 
+  # Add legend
+  plot.new()
+  plot.new()
+  par(mar = c(0, 0, 0, 0))
+  par(xpd = NA)
+  dT <- describe.property("T", T)
+  dbasis <- describe.basis(ibasis = c(1, 3, 5, 6))
+  legend("left", legend = c(dT, dbasis), bty = "n", y.intersp = 1.5, inset = c(-1, 0))
+  par(xpd = FALSE)
+  par(cex = 1.5, mar = c(3, 4, 3, 1))
+  label.figure("B", cex = 1.5, font = 2, xfrac = 0.06)
+
   if(pdf) dev.off()
 
 }
-
 
 # Plot intermediate logaH2 20220220
 # Add class argument 20220418
@@ -887,4 +907,31 @@ utegigS1 <- function(pdf = FALSE) {
   intermediate_logaH2("TCA cycle",  parargs = parargs, ylim = ylim, redox = FALSE, NH4 = FALSE, pH.y = -10)
   titlefun("TCA cycle")
   if(pdf) dev.off()
+}
+
+# Calculate normalized sum of ranking of affinities for species in designated groups
+# 20220416 jmd first version
+affinity.rank <- function(aout, groups) {
+  # Put the affinities into matrix form
+  amat <- sapply(aout$values, as.numeric)
+  # Calculate ranks
+  # https://stackoverflow.com/questions/1412775/pmax-parallel-maximum-equivalent-for-rank-in-r
+  arank <- apply(amat, 1, rank)
+  # Get the normalized ranks for each group
+  grank <- sapply(groups, function(group) {
+    # Sum the ranks for this group and divide by number of species in the group
+    if(inherits(group, "logical")) n <- sum(group)
+    if(inherits(group, "integer")) n <- length(group)
+    colSums(arank[group, ]) / n
+  })
+  # Restore dims
+  dims <- dim(aout$values[[1]])
+  glist <- apply(grank, 2, "dim<-", dims, simplify = FALSE)
+  aout$values <- glist
+  # Rename species to group names (for use by diagram())
+  aout$species <- aout$species[1:length(groups), ]
+  aout$species$name <- names(groups)
+  # "Sign" the object with our function name
+  aout$fun <- "affinity_rank"
+  aout
 }

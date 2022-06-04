@@ -54,7 +54,7 @@ logaH2 <- "log<i>a</i><sub>H<sub>2</sub></sub>"
 
 This vignette runs the code to make the plots from the following paper:
 
-> Dick JM, Boyer GM, Canovas PA III, Shock EL. 2022. Using thermodynamics to extract geochemical information from genomes (and other -omes). Manuscript in preparation.
+> Dick JM, Boyer GM, Canovas PA III, Shock EL. 2022. Using thermodynamics to extract geochemical information from genomes. Manuscript in preparation.
 
 This vignette was compiled on `r Sys.Date()` with **[JMDplots](https://github.com/jedick/JMDplots)** `r packageDescription("JMDplots")$Version`.
 
@@ -90,8 +90,8 @@ utegig4()
 
 **Data sources:** Lost City *T* and H~2~ concentration [@KKF+05], Rainbow vent fluid mixing model [@SC10], methanogenic and non-methanogenic sediments [@LG88].
 
-## Thaumarchaeota `r ZC` and thermodynamic analysis (Figure 5)
-```{r utegig5, message = FALSE, results = "hide", out.width='100%', fig.width = 17, fig.height = 12, out.extra = 'class="full-width"', dpi = 100}
+## Chemical and thermodynamic analysis of multiple lineages (Figure 5)
+```{r utegig5, message = FALSE, results = "hide", out.width='100%', fig.width = 9, fig.height = 5, out.extra = 'class="full-width"', dpi = 100}
 utegig5()
 ```
 

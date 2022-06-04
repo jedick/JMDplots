@@ -36,7 +36,7 @@ This table gives a brief description of each plotting function.
   \code{utegig2} \tab Overlay \ZC on phylogenetic tree of methanogens \cr
   \code{utegig3} \tab Affinities of organic synthesis reactions \cr
   \code{utegig4} \tab Affinities for methanogen proteomes and \logaH2 of habitable niches \cr
-  \code{utegig5} \tab Thaumarchaeota \ZC and thermodynamic analysis \cr
+  \code{utegig5} \tab Chemical and thermodynamic analysis of multiple lineages \cr
   \code{utegigS1} \tab Intermediate \logaH2 calculated for different compound classes \cr
 }
 
@@ -53,12 +53,12 @@ This table gives a brief description of each plotting function.
     \item{\file{H2_intermediate.csv}}{Intermediate logaH2 (where the slope of affinity vs \ZC is zero) for organic compounds, calculated using \code{calc_logaH2_intermediate}.}
     \item{\file{H2_intermediate_*.csv}}{Intermediate logaH2 (where the slope of affinity vs \ZC is zero) for different classes of organic compounds (\samp{C1andC2}, \samp{Acid}, \samp{Aminoacid}, \samp{Sugar}, \samp{Nucleobase}, \samp{TCA}).}
     \item{\file{methanogen_tree.txt}}{Hierarchical clustering tree for functional genes of Class I and Class I methanogens. Tree was digitized and modified from Fig. 1 of Lyu and Lu (2018) and is provided in Newick format.}
-    \item{\file{RFH+19_aa.csv}}{Amino acid compositions for whole-genome sequences of selected Aigarchaeota and basal, terrestrial, shallow- and deep-water groups of thaumarchaeota (group names are listed in the \samp{protein} column). Accession numbers for genomes (in the \samp{organisms} column; numeric for IMG, alphanumeric for NCBI) were taken from Table S1 of Ren et al. (2019)}.
+    \item{\file{thaumarchaeota_AA.csv}}{Amino acid compositions for genome sequences of selected Aigarchaeota and basal, terrestrial, shallow- and deep-water groups of thaumarchaeota (group names are listed in the \samp{protein} column). Accession numbers for genomes (in the \samp{organisms} column; numeric for IMG, alphanumeric for NCBI) were taken from Table S1 of Ren et al. (2019)}.
   }
 }
 
 \references{
-Dick, J. M., Boyer, G. M., Canovas, P. A. III and Shock, E. L. (2022) Using thermodynamics to extract geochemical information from genomes (and other -omes). Manuscript in preparation.
+Dick, J. M., Boyer, G. M., Canovas, P. A. III and Shock, E. L. (2022) Using thermodynamics to extract geochemical information from genomes. Manuscript in preparation.
 
 Lovley, D. R. and Goodwin, S. (1988) Hydrogen concentrations as an indicator of the predominant terminal electron-accepting reactions in aquatic sediments. \emph{Geochim. Cosmochim. Acta} \bold{52}, 2993--3003. \doi{10.1016/0016-7037(88)90163-9}
 
