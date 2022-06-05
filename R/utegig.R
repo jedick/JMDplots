@@ -593,7 +593,7 @@ utegig5 <- function(pdf = FALSE) {
   ylim <- c(-0.25, -0.10)
   # Axis limits for affinity plots
   xlims <- list(c(-4, -12), c(0, -15), c(0, -15))
-  ylims <- list(c(0, 40), c(0, 250), c(0, 50))
+  ylims <- list(c(0, 40), c(0, 250), c(0, 70))
   # Where to draw transition line
   trans <- list(c("Class I", "Class II"), c("Nif-C", "Nif-B"), c("Basal", "Terrestrial"))
 
@@ -604,8 +604,8 @@ utegig5 <- function(pdf = FALSE) {
   logK <- subcrt(c("H2", "H+", "e-"), c(-1, 2, 2), T = T)$out$logK
   pH <- Seawater.AS98$pH
   # Adjustments for label position
-  dx <- list(c(0, 0), c(4, 0, -8, 0), c(0, 0, -2, -1))
-  dy <- list(c(0, 0), c(30, 0, -70, 0), c(1, 2, 5, -3))
+  dx <- list(c(0, 0), c(4, 0, -8, 0), c(0, 0, 2, -1))
+  dy <- list(c(1, 1), c(32, 2, -68, 2), c(2, 2, 4, -6))
 
   for(i in 1:3) {
 
@@ -656,7 +656,12 @@ utegig5 <- function(pdf = FALSE) {
 
     if(i == 3) {
       # Thaumarchaeota 20220414
-      aa <- read.csv(system.file("extdata/utegig/thaumarchaeota_AA.csv", package = "JMDplots"))
+      # Amino acid compositions of predicted (Glimmer) and database (NCBI or IMG) proteomes
+      predicted <- read.csv(system.file("extdata/utegig/Thaumarchaeota_predicted_AA.csv", package = "JMDplots"))
+      database <- read.csv(system.file("extdata/utegig/Thaumarchaeota_database_AA.csv", package = "JMDplots"))
+      # If both are available, use predicted instead of database
+      aa <- rbind(predicted, database)
+      aa <- aa[!duplicated(aa$organism), ]
       groupnames <- c("Basal", "Terrestrial", "Shallow", "Deep")
       ## Colors from Ren et al. (2019)
       #col <- c("#b2427e", "#c78d55", "#00a06f", "#4085c3")
@@ -685,9 +690,8 @@ utegig5 <- function(pdf = FALSE) {
       ip <- add.protein(aa, as.residue = TRUE)
       a <- affinity(H2 = xlims[[i]], iprotein = ip, T = T)
       # Calculate normalized sum of ranks for each group and make diagram
-      # TODO: use function from CHNOSZ (when CHNOSZ 2.0.0 is released)
-      #arank <- CHNOSZ::affinity_rank(a, groups)
-      arank <- affinity.rank(a, groups)
+      # TODO: add affinity_rank to imports in NAMESPACE when CHNOSZ 2.0.0 is released
+      arank <- CHNOSZ::affinity_rank(a, groups)
       # Save graphical settings that are modified by diagram()
       opar <- par(c("mar", "mgp", "tcl", "las", "xaxs", "yaxs"))
       diagram(arank, xlim = xlims[[i]], ylim = ylims[[i]], col = col, lty = 1, lwd = 1.5, dx = dx[[i]], dy = dy[[i]],
@@ -909,29 +913,36 @@ utegigS1 <- function(pdf = FALSE) {
   if(pdf) dev.off()
 }
 
-# Calculate normalized sum of ranking of affinities for species in designated groups
-# 20220416 jmd first version
-affinity.rank <- function(aout, groups) {
-  # Put the affinities into matrix form
-  amat <- sapply(aout$values, as.numeric)
-  # Calculate ranks
-  # https://stackoverflow.com/questions/1412775/pmax-parallel-maximum-equivalent-for-rank-in-r
-  arank <- apply(amat, 1, rank)
-  # Get the normalized ranks for each group
-  grank <- sapply(groups, function(group) {
-    # Sum the ranks for this group and divide by number of species in the group
-    if(inherits(group, "logical")) n <- sum(group)
-    if(inherits(group, "integer")) n <- length(group)
-    colSums(arank[group, ]) / n
-  })
-  # Restore dims
-  dims <- dim(aout$values[[1]])
-  glist <- apply(grank, 2, "dim<-", dims, simplify = FALSE)
-  aout$values <- glist
-  # Rename species to group names (for use by diagram())
-  aout$species <- aout$species[1:length(groups), ]
-  aout$species$name <- names(groups)
-  # "Sign" the object with our function name
-  aout$fun <- "affinity_rank"
-  aout
+# Comparison of ZC of proteomes predicted by Glimmer and downloaded from NCBI 20220604
+utegigS2 <- function(pdf = FALSE) {
+  if(pdf) pdf("Figure_S2.pdf", width = 4, height = 4)
+  par(mar= c(4.1, 4.1, 1, 1))
+  predicted <- read.csv(system.file("extdata/utegig/Thaumarchaeota_predicted_AA.csv", package = "JMDplots"))
+  database <- read.csv(system.file("extdata/utegig/Thaumarchaeota_database_AA.csv", package = "JMDplots"))
+  organisms <- intersect(predicted$organism, database$organism)
+  predicted <- predicted[match(organisms, predicted$organism), ]
+  database <- database[match(organisms, database$organism), ]
+  y <- ZC_predicted <- ZCAA(predicted)
+  x <- ZC_database <- ZCAA(database)
+  # Colors from Ren et al. (2019)
+  groupcol <- c(Basal = "#b2427e", Terrestrial = "#c78d55", Shallow = "#00a06f", Deep = "#4085c3")
+  col <- groupcol[match(database$protein, names(groupcol))]
+  pch <- match(database$protein, names(groupcol)) + 13
+  plot(ZC_database, ZC_predicted, pch = pch, col = col,
+       xlab = quote(bolditalic(Z)[bold(C)]~"(NCBI proteins)"), ylab = quote(bolditalic(Z)[bold(C)]~"(Glimmer proteins)"))
+  # Add legend
+  icol <- which(!duplicated(col))
+  legend("topleft", names(col)[icol], col = col[icol], pch = pch[icol])
+  # Calculate linear regression
+  thislm <- lm(y ~ x)
+  xylim <- c(-0.22, -0.10)
+  lines(xylim, predict(thislm, data.frame(x = xylim)), col = "#00000080")
+  # Show R2 and slope
+  R2 <- summary(thislm)$r.squared
+  R2txt <- bquote(italic(R)^2 == .(formatC(R2, digits = 3, format = "f")))
+  legend("bottomright", legend = R2txt, bty = "n")
+  Slope <- coef(thislm)["x"]
+  Slopetxt <- paste("slope =", formatC(Slope, digits = 3, format = "f"))
+  legend("bottomright", legend = c(Slopetxt, ""), bty = "n")
+  if(pdf) dev.off()
 }
