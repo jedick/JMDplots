@@ -85,7 +85,8 @@ GWS+19,"Golmud, Qaidam Basin",Groundwater,Bacteria,11,-23.62,254.05,-0.0144999,-
 SRM+21,"Lower Chao Praya Basin",Groundwater,Bacteria,13,-91.16,180.2,-0.00928468,-0.146086,-0.119304,0.697864
 ZCZ+21,"Po Plain",Groundwater,Bacteria,18,-89.37,416.75,-0.0134,-0.153228,-0.362736,0.139031
 CSW+22,"Ordos Basin Groundwater",Groundwater,Bacteria,6,-133.07,169.56,-0.0341046,-0.155237,-0.432678,0.391484
-GXS+22,"Linzhou-Anyang Groundwater",Groundwater,Bacteria,8,109.49,176.24,0.141478,-0.17598,0.750026,0.0320953
+GXS+22,"Linzhou-Anyang Groundwater",Groundwater,Bacteria,14,61.58,191.58,0.0362371,-0.159477,0.221914,0.445764
+GXS+22,"Linzhou-Anyang Groundwater",Groundwater,Archaea,4,110.58,191.58,-0.00806068,-0.187441,-0.252933,0.747067
 JHL+12,"Loki's Castle",Sediment,Bacteria,11,-147.25,379.58,0.0410555,-0.162941,0.548516,0.0805973
 JHL+12,"Loki's Castle",Sediment,Archaea,11,-147.25,379.58,-0.0030678,-0.186833,-0.174111,0.608647
 GFE+16,"Humboldt Sulfuretum",Sediment,Bacteria,15,-311,3,0.0429522,-0.155662,0.639692,0.0102248

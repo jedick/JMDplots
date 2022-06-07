@@ -759,7 +759,7 @@ orp16S_S2 <- function(pdf = FALSE) {
     plotEZ("SRM+21", "Bacteria", groupby = "Depth", groups = c("Surface", "Shallow", "Deep"), legend.x = "bottomleft"),
     plotEZ("ZCZ+21", "Bacteria", groupby = "Location", groups = c("LO", "CR1", "MN", "VA", "BS", "CR2"), legend.x = "topright"),
     plotEZ("CSW+22", "Bacteria", groupby = "BTEX", groups = c("High", "Low", "No"), legend.x = "topright"),
-    plotEZ("GXS+22", "Bacteria", groupby = "Subarea", groups = c("A", "B", "C")),
+    plotEZ("GXS+22", "two", groupby = "Subarea", groups = c("A", "B", "C"), legend.x = "bottomleft"),
 
     message("\nSediment"),
     plotEZ("JHL+12", "two", groupby = "Core", groups = c("GC6", "GC12"), legend.x = "bottomright"),
