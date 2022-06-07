@@ -1,0 +1,67 @@
+name,Run,BioSample,Sample,SampleName,"Experiment Title",Molecule,Location,Layer,"O2 (μM)","Redox (mV)",pH
+"Marine and Freshwater Sediments",SRR5826265,SAMN07346302,CK361,CKV,"cDNA-Seq of Kalo Vig sediment, layer 1",cDNA,"Kalø Vig",1,125,150,7.9
+"Marine and Freshwater Sediments",SRR5826264,SAMN07346302,CK362,CKV,"cDNA-Seq of Kalo Vig sediment, layer 2",cDNA,"Kalø Vig",2,0,75,7.5
+"Marine and Freshwater Sediments",SRR5826267,SAMN07346302,CK363,CKV,"cDNA-Seq of Kalo Vig sediment, layer 3",cDNA,"Kalø Vig",3,0,50,7.5
+"Marine and Freshwater Sediments",SRR5826266,SAMN07346302,CK364,CKV,"cDNA-Seq of Kalo Vig sediment, layer 4",cDNA,"Kalø Vig",4,0,50,7.3
+"Marine and Freshwater Sediments",SRR5826261,SAMN07346302,CK451,CKV,"cDNA-Seq of Kalo Vig sediment, layer 1",cDNA,"Kalø Vig",1,125,150,7.9
+"Marine and Freshwater Sediments",SRR5826260,SAMN07346302,CK452,CKV,"cDNA-Seq of Kalo Vig sediment, layer 2",cDNA,"Kalø Vig",2,0,75,7.5
+"Marine and Freshwater Sediments",SRR5826263,SAMN07346302,CK453,CKV,"cDNA-Seq of Kalo Vig sediment, layer 3",cDNA,"Kalø Vig",3,0,50,7.5
+"Marine and Freshwater Sediments",SRR5826262,SAMN07346302,CK454,CKV,"cDNA-Seq of Kalo Vig sediment, layer 4",cDNA,"Kalø Vig",4,0,50,7.3
+"Marine and Freshwater Sediments",SRR5826258,SAMN07346302,CK851,CKV,"cDNA-Seq of Kalo Vig sediment, layer 1",cDNA,"Kalø Vig",1,125,150,7.9
+"Marine and Freshwater Sediments",SRR5826257,SAMN07346302,CK852,CKV,"cDNA-Seq of Kalo Vig sediment, layer 2",cDNA,"Kalø Vig",2,0,75,7.5
+"Marine and Freshwater Sediments",SRR5826227,SAMN07346302,CK853,CKV,"cDNA-Seq of Kalo Vig sediment, layer 3",cDNA,"Kalø Vig",3,0,50,7.5
+"Marine and Freshwater Sediments",SRR5826226,SAMN07346302,CK854,CKV,"cDNA-Seq of Kalo Vig sediment, layer 4",cDNA,"Kalø Vig",4,0,50,7.3
+"Marine and Freshwater Sediments",SRR5826248,SAMN07346304,CL1,CLC,"cDNA-Seq of Lake Constance sediment, layer 1",cDNA,"Lake Constance",1,150,293,7.6
+"Marine and Freshwater Sediments",SRR5826249,SAMN07346304,CL2,CLC,"cDNA-Seq of Lake Constance sediment, layer 2",cDNA,"Lake Constance",2,3,190,7.6
+"Marine and Freshwater Sediments",SRR5826246,SAMN07346304,CL3,CLC,"cDNA-Seq of Lake Constance sediment, layer 3",cDNA,"Lake Constance",3,0,117,7.5
+"Marine and Freshwater Sediments",SRR5826247,SAMN07346304,CL4,CLC,"cDNA-Seq of Lake Constance sediment, layer 3",cDNA,"Lake Constance",3,0,117,7.5
+"Marine and Freshwater Sediments",SRR5826255,SAMN07346304,CL5,CLC,"cDNA-Seq of Lake Constance sediment, layer 4",cDNA,"Lake Constance",4,0,110,7.4
+"Marine and Freshwater Sediments",SRR5826256,SAMN07346304,CL6,CLC,"cDNA-Seq of Lake Constance sediment, layer 1",cDNA,"Lake Constance",1,150,293,7.6
+"Marine and Freshwater Sediments",SRR5826217,SAMN07346304,CL7,CLC,"cDNA-Seq of Lake Constance sediment, layer 2",cDNA,"Lake Constance",2,3,190,7.6
+"Marine and Freshwater Sediments",SRR5826216,SAMN07346304,CL8,CLC,"cDNA-Seq of Lake Constance sediment, layer 3",cDNA,"Lake Constance",3,0,117,7.5
+"Marine and Freshwater Sediments",SRR5826206,SAMN07346304,CL9,CLC,"cDNA-Seq of Lake Constance sediment, layer 4",cDNA,"Lake Constance",4,0,110,7.4
+"Marine and Freshwater Sediments",SRR5826225,SAMN07346303,CN081,CNF,"cDNA-Seq of Norsminde sediment, layer 1",cDNA,"Norsminde Fjord",1,125,140,7.85
+"Marine and Freshwater Sediments",SRR5826224,SAMN07346303,CN082,CNF,"cDNA-Seq of Norsminde sediment, layer 2",cDNA,"Norsminde Fjord",2,0,0,7.5
+"Marine and Freshwater Sediments",SRR5826223,SAMN07346303,CN083,CNF,"cDNA-Seq of Norsminde sediment, layer 3",cDNA,"Norsminde Fjord",3,0,-100,7.5
+"Marine and Freshwater Sediments",SRR5826222,SAMN07346303,CN084,CNF,"cDNA-Seq of Norsminde sediment, layer 4",cDNA,"Norsminde Fjord",4,0,-100,7.3
+"Marine and Freshwater Sediments",SRR5826221,SAMN07346303,CN181,CNF,"cDNA-Seq of Norsminde sediment, layer 1",cDNA,"Norsminde Fjord",1,125,140,7.85
+"Marine and Freshwater Sediments",SRR5826220,SAMN07346303,CN182,CNF,"cDNA-Seq of Norsminde sediment, layer 2",cDNA,"Norsminde Fjord",2,0,0,7.5
+"Marine and Freshwater Sediments",SRR5826219,SAMN07346303,CN183,CNF,"cDNA-Seq of Norsminde sediment, layer 3",cDNA,"Norsminde Fjord",3,0,-100,7.5
+"Marine and Freshwater Sediments",SRR5826218,SAMN07346303,CN184,CNF,"cDNA-Seq of Norsminde sediment, layer 4",cDNA,"Norsminde Fjord",4,0,-100,7.3
+"Marine and Freshwater Sediments",SRR5826252,SAMN07346303,CN461,CNF,"cDNA-Seq of Norsminde sediment, layer 1",cDNA,"Norsminde Fjord",1,125,140,7.85
+"Marine and Freshwater Sediments",SRR5826253,SAMN07346303,CN462,CNF,"cDNA-Seq of Norsminde sediment, layer 2",cDNA,"Norsminde Fjord",2,0,0,7.5
+"Marine and Freshwater Sediments",SRR5826250,SAMN07346303,CN463,CNF,"cDNA-Seq of Norsminde sediment, layer 3",cDNA,"Norsminde Fjord",3,0,-100,7.5
+"Marine and Freshwater Sediments",SRR5826251,SAMN07346303,CN464,CNF,"cDNA-Seq of Norsminde sediment, layer 4",cDNA,"Norsminde Fjord",4,0,-100,7.3
+"Marine and Freshwater Sediments",SRR5826254,SAMN07346305,DK361,DKV,"DNA-Seq of Kalo Vig sediment, layer 1",DNA,"Kalø Vig",1,125,150,7.9
+"Marine and Freshwater Sediments",SRR5826213,SAMN07346305,DK362,DKV,"DNA-Seq of Kalo Vig sediment, layer 2",DNA,"Kalø Vig",2,0,75,7.5
+"Marine and Freshwater Sediments",SRR5826212,SAMN07346305,DK363,DKV,"DNA-Seq of Kalo Vig sediment, layer 3",DNA,"Kalø Vig",3,0,50,7.5
+"Marine and Freshwater Sediments",SRR5826215,SAMN07346305,DK364,DKV,"DNA-Seq of Kalo Vig sediment, layer 4",DNA,"Kalø Vig",4,0,50,7.3
+"Marine and Freshwater Sediments",SRR5826214,SAMN07346305,DK451,DKV,"DNA-Seq of Kalo Vig sediment, layer 1",DNA,"Kalø Vig",1,125,150,7.9
+"Marine and Freshwater Sediments",SRR5826207,SAMN07346305,DK452,DKV,"DNA-Seq of Kalo Vig sediment, layer 2",DNA,"Kalø Vig",2,0,75,7.5
+"Marine and Freshwater Sediments",SRR5826205,SAMN07346305,DK453,DKV,"DNA-Seq of Kalo Vig sediment, layer 3",DNA,"Kalø Vig",3,0,50,7.5
+"Marine and Freshwater Sediments",SRR5826242,SAMN07346305,DK454,DKV,"DNA-Seq of Kalo Vig sediment, layer 4",DNA,"Kalø Vig",4,0,50,7.3
+"Marine and Freshwater Sediments",SRR5826243,SAMN07346305,DK851,DKV,"DNA-Seq of Kalo Vig sediment, layer 1",DNA,"Kalø Vig",1,125,150,7.9
+"Marine and Freshwater Sediments",SRR5826244,SAMN07346305,DK852,DKV,"DNA-Seq of Kalo Vig sediment, layer 2",DNA,"Kalø Vig",2,0,75,7.5
+"Marine and Freshwater Sediments",SRR5826245,SAMN07346305,DK853,DKV,"DNA-Seq of Kalo Vig sediment, layer 3",DNA,"Kalø Vig",3,0,50,7.5
+"Marine and Freshwater Sediments",SRR5826238,SAMN07346305,DK854,DKV,"DNA-Seq of Kalo Vig sediment, layer 4",DNA,"Kalø Vig",4,0,50,7.3
+"Marine and Freshwater Sediments",SRR5826234,SAMN07346307,DL1,DLC,"DNA-Seq of Lake Constance sediment, layer 1",DNA,"Lake Constance",1,150,293,7.6
+"Marine and Freshwater Sediments",SRR5826204,SAMN07346307,DL2,DLC,"DNA-Seq of Lake Constance sediment, layer 2",DNA,"Lake Constance",2,3,190,7.6
+"Marine and Freshwater Sediments",SRR5826202,SAMN07346307,DL3,DLC,"DNA-Seq of Lake Constance sediment, layer 3",DNA,"Lake Constance",3,0,117,7.5
+"Marine and Freshwater Sediments",SRR5826210,SAMN07346307,DL4,DLC,"DNA-Seq of Lake Constance sediment, layer 3",DNA,"Lake Constance",3,0,117,7.5
+"Marine and Freshwater Sediments",SRR5826203,SAMN07346307,DL5,DLC,"DNA-Seq of Lake Constance sediment, layer 4",DNA,"Lake Constance",4,0,110,7.4
+"Marine and Freshwater Sediments",SRR5826208,SAMN07346307,DL6,DLC,"DNA-Seq of Lake Constance sediment, layer 1",DNA,"Lake Constance",1,150,293,7.6
+"Marine and Freshwater Sediments",SRR5826211,SAMN07346307,DL7,DLC,"DNA-Seq of Lake Constance sediment, layer 2",DNA,"Lake Constance",2,3,190,7.6
+"Marine and Freshwater Sediments",SRR5826229,SAMN07346307,DL8,DLC,"DNA-Seq of Lake Constance sediment, layer 3",DNA,"Lake Constance",3,0,117,7.5
+"Marine and Freshwater Sediments",SRR5826230,SAMN07346307,DL9,DLC,"DNA-Seq of Lake Constance sediment, layer 4",DNA,"Lake Constance",4,0,110,7.4
+"Marine and Freshwater Sediments",SRR5826239,SAMN07346306,DN081,DNF,"DNA-Seq of Norsminde sediment, layer 1",DNA,"Norsminde Fjord",1,125,140,7.85
+"Marine and Freshwater Sediments",SRR5826240,SAMN07346306,DN082,DNF,"DNA-Seq of Norsminde sediment, layer 2",DNA,"Norsminde Fjord",2,0,0,7.5
+"Marine and Freshwater Sediments",SRR5826241,SAMN07346306,DN083,DNF,"DNA-Seq of Norsminde sediment, layer 3",DNA,"Norsminde Fjord",3,0,-100,7.5
+"Marine and Freshwater Sediments",SRR5826235,SAMN07346306,DN084,DNF,"DNA-Seq of Norsminde sediment, layer 4",DNA,"Norsminde Fjord",4,0,-100,7.3
+"Marine and Freshwater Sediments",SRR5826236,SAMN07346306,DN181,DNF,"DNA-Seq of Norsminde sediment, layer 1",DNA,"Norsminde Fjord",1,125,140,7.85
+"Marine and Freshwater Sediments",SRR5826237,SAMN07346306,DN182,DNF,"DNA-Seq of Norsminde sediment, layer 2",DNA,"Norsminde Fjord",2,0,0,7.5
+"Marine and Freshwater Sediments",SRR5826233,SAMN07346306,DN183,DNF,"DNA-Seq of Norsminde sediment, layer 3",DNA,"Norsminde Fjord",3,0,-100,7.5
+"Marine and Freshwater Sediments",SRR5826232,SAMN07346306,DN184,DNF,"DNA-Seq of Norsminde sediment, layer 4",DNA,"Norsminde Fjord",4,0,-100,7.3
+"Marine and Freshwater Sediments",SRR5826231,SAMN07346306,DN461,DNF,"DNA-Seq of Norsminde sediment, layer 1",DNA,"Norsminde Fjord",1,125,140,7.85
+"Marine and Freshwater Sediments",SRR5826228,SAMN07346306,DN462,DNF,"DNA-Seq of Norsminde sediment, layer 2",DNA,"Norsminde Fjord",2,0,0,7.5
+"Marine and Freshwater Sediments",SRR5826209,SAMN07346306,DN463,DNF,"DNA-Seq of Norsminde sediment, layer 3",DNA,"Norsminde Fjord",3,0,-100,7.5
+"Marine and Freshwater Sediments",SRR5826259,SAMN07346306,DN464,DNF,"DNA-Seq of Norsminde sediment, layer 4",DNA,"Norsminde Fjord",4,0,-100,7.3

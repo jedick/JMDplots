@@ -1,0 +1,25 @@
+Name,Run,BioSample,Sample,Treatment,Day,"ORP (mV)",pH,"As (μM)"
+"High-As Aquifer Sediments",SRR12101823,SAMN14931214,"library 21","Without C",0,NA,NA,0.21
+"High-As Aquifer Sediments",SRR12101834,SAMN14931204,"library 11","Without C",21,-309,8.1,26
+"High-As Aquifer Sediments",SRR12101824,SAMN14931196,"library 3","Without C",29,-285,8.35,0.32
+"High-As Aquifer Sediments",SRR12101836,SAMN14931194,"library 1","Without C",71,-254,8.4,0.16
+"High-As Aquifer Sediments",SRR12101818,SAMN14931198,"library 5",Acetate,29,-347,8.23,0.52
+"High-As Aquifer Sediments",SRR12101820,SAMN14931217,"library 24",Acetate,43,-314,8.52,0.91
+"High-As Aquifer Sediments",SRR12101828,SAMN14931210,"library 17",Acetate,57,-292,8.42,0.49
+"High-As Aquifer Sediments",SRR12101825,SAMN14931213,"library 20",Acetate,71,-276,8.46,0.52
+"High-As Aquifer Sediments",SRR12101816,SAMN14931200,"library 7",Lactate,29,-290,8.51,0.56
+"High-As Aquifer Sediments",SRR12101830,SAMN14931208,"library 15",Lactate,43,-315,8.47,0.26
+"High-As Aquifer Sediments",SRR12101833,SAMN14931205,"library 12",Lacate,57,-318,8.61,0.15
+"High-As Aquifer Sediments",SRR12101835,SAMN14931195,"library 2",Lactate,71,-291,8.39,0.19
+"High-As Aquifer Sediments",SRR12101815,SAMN14931201,"library 8",AQS,29,-525,8.37,0.37
+"High-As Aquifer Sediments",SRR12101822,SAMN14931215,"library 22",AQS,43,-562,8.39,0.79
+"High-As Aquifer Sediments",SRR12101813,SAMN14931203,"library 10",AQS,57,-570,8.66,0.72
+"High-As Aquifer Sediments",SRR12101826,SAMN14931212,"library 19",AQS,71,-598,8.81,0.63
+"High-As Aquifer Sediments",SRR12101821,SAMN14931216,"library 23",HA,29,-327,8.92,0.69
+"High-As Aquifer Sediments",SRR12101817,SAMN14931199,"library 6",HA,43,-378,8.74,0.58
+"High-As Aquifer Sediments",SRR12101819,SAMN14931197,"library 4",HA,57,-403,8.55,0.32
+"High-As Aquifer Sediments",SRR12101814,SAMN14931202,"library 9",HA,71,-424,8.71,0.31
+"High-As Aquifer Sediments",SRR12101832,SAMN14931206,"library 13",Hexadecane,29,NA,NA,NA
+"High-As Aquifer Sediments",SRR12101831,SAMN14931207,"library 14",Hexadecane,71,NA,NA,NA
+"High-As Aquifer Sediments",SRR12101829,SAMN14931209,"library 16",FA,29,NA,NA,NA
+"High-As Aquifer Sediments",SRR12101827,SAMN14931211,"library 18",FA,71,NA,NA,NA

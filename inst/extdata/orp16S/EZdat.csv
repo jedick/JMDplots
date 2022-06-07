@@ -947,17 +947,17 @@ IBK+22,Lake & Pond,Archaea,312W5,SRR12128278,Land Use,Arable,13.2,9.082,NA,325.6
 IBK+22,Lake & Pond,Archaea,40W4,SRR12128273,Land Use,Arable,15,7.155,28.125,243.2,252.06,-0.190848
 IBK+22,Lake & Pond,Archaea,287W4,SRR12128296,Land Use,Arable,21.9,6.64,139.375,326.8,305.73,-0.194149
 IBK+22,Lake & Pond,Archaea,312W4,SRR12128279,Land Use,Arable,19.9,7.17,135,371.9,381.78,-0.177458
-GSY+20,Lake & Pond,Bacteria,FC01r1,ERR4298945,Lake,Filon Centro,22.3,2.31,284.331094226216,660,385.07,-0.149037
-GSY+20,Lake & Pond,Bacteria,FC01r2,ERR4298946,Lake,Filon Centro,22.3,2.31,284.331094226216,660,385.07,-0.152818
-GSY+20,Lake & Pond,Bacteria,FC01r3,ERR4298947,Lake,Filon Centro,22.3,2.31,284.331094226216,660,385.07,-0.154235
-GSY+20,Lake & Pond,Bacteria,FC15r1,ERR4298948,Lake,Filon Centro,11.8,2.35,12.4771704002401,493,230.1,-0.142924
-GSY+20,Lake & Pond,Bacteria,FC15r2,ERR4298949,Lake,Filon Centro,11.8,2.35,12.4771704002401,493,230.1,-0.143749
-GSY+20,Lake & Pond,Bacteria,FC15r3,ERR4298950,Lake,Filon Centro,11.8,2.35,12.4771704002401,493,230.1,-0.144253
-GSY+20,Lake & Pond,Bacteria,FC30r1,ERR4298951,Lake,Filon Centro,14,3.93,0,200,25.09,-0.14873
-GSY+20,Lake & Pond,Bacteria,FC30r2,ERR4298952,Lake,Filon Centro,14,3.93,0,200,25.09,-0.147708
-GSY+20,Lake & Pond,Bacteria,FC45r1,ERR4298953,Lake,Filon Centro,15.89,4.32,0,44,-109.69,-0.164432
-GSY+20,Lake & Pond,Bacteria,FC45r2,ERR4298954,Lake,Filon Centro,15.89,4.32,0,44,-109.69,-0.166355
-GSY+20,Lake & Pond,Bacteria,FC45r3,ERR4298955,Lake,Filon Centro,15.89,4.32,0,44,-109.69,-0.166664
+GSY+20,Lake & Pond,Bacteria,FC01r1,ERR4298945,Lake,Filón Centro,22.3,2.31,284.331094226216,660,385.07,-0.149037
+GSY+20,Lake & Pond,Bacteria,FC01r2,ERR4298946,Lake,Filón Centro,22.3,2.31,284.331094226216,660,385.07,-0.152818
+GSY+20,Lake & Pond,Bacteria,FC01r3,ERR4298947,Lake,Filón Centro,22.3,2.31,284.331094226216,660,385.07,-0.154235
+GSY+20,Lake & Pond,Bacteria,FC15r1,ERR4298948,Lake,Filón Centro,11.8,2.35,12.4771704002401,493,230.1,-0.142924
+GSY+20,Lake & Pond,Bacteria,FC15r2,ERR4298949,Lake,Filón Centro,11.8,2.35,12.4771704002401,493,230.1,-0.143749
+GSY+20,Lake & Pond,Bacteria,FC15r3,ERR4298950,Lake,Filón Centro,11.8,2.35,12.4771704002401,493,230.1,-0.144253
+GSY+20,Lake & Pond,Bacteria,FC30r1,ERR4298951,Lake,Filón Centro,14,3.93,0,200,25.09,-0.14873
+GSY+20,Lake & Pond,Bacteria,FC30r2,ERR4298952,Lake,Filón Centro,14,3.93,0,200,25.09,-0.147708
+GSY+20,Lake & Pond,Bacteria,FC45r1,ERR4298953,Lake,Filón Centro,15.89,4.32,0,44,-109.69,-0.164432
+GSY+20,Lake & Pond,Bacteria,FC45r2,ERR4298954,Lake,Filón Centro,15.89,4.32,0,44,-109.69,-0.166355
+GSY+20,Lake & Pond,Bacteria,FC45r3,ERR4298955,Lake,Filón Centro,15.89,4.32,0,44,-109.69,-0.166664
 GSY+20,Lake & Pond,Bacteria,LZ00r1,ERR4298956,Lake,La Zarza,21,2.62,345.709241327457,682,426.37,-0.159519
 GSY+20,Lake & Pond,Bacteria,LZ00r2,ERR4298957,Lake,La Zarza,21,2.62,345.709241327457,682,426.37,-0.161091
 GSY+20,Lake & Pond,Bacteria,LZ00r3,ERR4298958,Lake,La Zarza,21,2.62,345.709241327457,682,426.37,-0.160781
@@ -966,14 +966,14 @@ GSY+20,Lake & Pond,Bacteria,LZ30r3,ERR4298961,Lake,La Zarza,23,3.15,0,324,97.78,
 GSY+20,Lake & Pond,Bacteria,LZ70r1,ERR4298962,Lake,La Zarza,25.7,3.45,0,265,54.5,-0.168076
 GSY+20,Lake & Pond,Bacteria,LZ70r2,ERR4298963,Lake,La Zarza,25.7,3.45,0,265,54.5,-0.149157
 GSY+20,Lake & Pond,Bacteria,LZ70r3,ERR4298964,Lake,La Zarza,25.7,3.45,0,265,54.5,-0.151432
-GSY+20,Lake & Pond,Archaea,FC15r1,ERR4298948,Lake,Filon Centro,11.8,2.35,12.4771704002401,493,230.1,-0.147559
-GSY+20,Lake & Pond,Archaea,FC15r2,ERR4298949,Lake,Filon Centro,11.8,2.35,12.4771704002401,493,230.1,-0.152868
-GSY+20,Lake & Pond,Archaea,FC15r3,ERR4298950,Lake,Filon Centro,11.8,2.35,12.4771704002401,493,230.1,-0.149342
-GSY+20,Lake & Pond,Archaea,FC30r1,ERR4298951,Lake,Filon Centro,14,3.93,0,200,25.09,-0.129702
-GSY+20,Lake & Pond,Archaea,FC30r2,ERR4298952,Lake,Filon Centro,14,3.93,0,200,25.09,-0.131295
-GSY+20,Lake & Pond,Archaea,FC45r1,ERR4298953,Lake,Filon Centro,15.89,4.32,0,44,-109.69,-0.132137
-GSY+20,Lake & Pond,Archaea,FC45r2,ERR4298954,Lake,Filon Centro,15.89,4.32,0,44,-109.69,-0.136239
-GSY+20,Lake & Pond,Archaea,FC45r3,ERR4298955,Lake,Filon Centro,15.89,4.32,0,44,-109.69,-0.134526
+GSY+20,Lake & Pond,Archaea,FC15r1,ERR4298948,Lake,Filón Centro,11.8,2.35,12.4771704002401,493,230.1,-0.147559
+GSY+20,Lake & Pond,Archaea,FC15r2,ERR4298949,Lake,Filón Centro,11.8,2.35,12.4771704002401,493,230.1,-0.152868
+GSY+20,Lake & Pond,Archaea,FC15r3,ERR4298950,Lake,Filón Centro,11.8,2.35,12.4771704002401,493,230.1,-0.149342
+GSY+20,Lake & Pond,Archaea,FC30r1,ERR4298951,Lake,Filón Centro,14,3.93,0,200,25.09,-0.129702
+GSY+20,Lake & Pond,Archaea,FC30r2,ERR4298952,Lake,Filón Centro,14,3.93,0,200,25.09,-0.131295
+GSY+20,Lake & Pond,Archaea,FC45r1,ERR4298953,Lake,Filón Centro,15.89,4.32,0,44,-109.69,-0.132137
+GSY+20,Lake & Pond,Archaea,FC45r2,ERR4298954,Lake,Filón Centro,15.89,4.32,0,44,-109.69,-0.136239
+GSY+20,Lake & Pond,Archaea,FC45r3,ERR4298955,Lake,Filón Centro,15.89,4.32,0,44,-109.69,-0.134526
 GSY+20,Lake & Pond,Archaea,LZ30r1,ERR4298959,Lake,La Zarza,23,3.15,0,324,97.78,-0.172231
 GSY+20,Lake & Pond,Archaea,LZ30r3,ERR4298961,Lake,La Zarza,23,3.15,0,324,97.78,-0.187994
 GSY+20,Lake & Pond,Archaea,LZ70r1,ERR4298962,Lake,La Zarza,25.7,3.45,0,265,54.5,-0.169319
@@ -1961,6 +1961,49 @@ TCN+17,Sediment,Bacteria,HC-bioreactors_O_T8,SRR5457229,Treatment,Oxic,NA,NA,242
 TCN+17,Sediment,Bacteria,HC-bioreactors_O_T10,SRR5457228,Treatment,Oxic,NA,NA,245.257609778134,225,225,-0.157507
 TCN+17,Sediment,Bacteria,HC-bioreactors_O_T11,SRR5457227,Treatment,Oxic,NA,NA,247.677915137787,238,238,-0.155879
 TCN+17,Sediment,Bacteria,HC-bioreactors_O_T15,SRR5457226,Treatment,Oxic,NA,NA,238.534539334655,254,254,-0.153387
+OHL+18_DNA,Sediment,Bacteria,DK361,SRR5826254,Location,Kalø Vig,NA,7.9,125,150,203.24,-0.153898
+OHL+18_DNA,Sediment,Bacteria,DK362,SRR5826213,Location,Kalø Vig,NA,7.5,0,75,104.58,-0.155186
+OHL+18_DNA,Sediment,Bacteria,DK363,SRR5826212,Location,Kalø Vig,NA,7.5,0,50,79.58,-0.153364
+OHL+18_DNA,Sediment,Bacteria,DK364,SRR5826215,Location,Kalø Vig,NA,7.3,0,50,67.75,-0.155525
+OHL+18_DNA,Sediment,Bacteria,DK451,SRR5826214,Location,Kalø Vig,NA,7.9,125,150,203.24,-0.152021
+OHL+18_DNA,Sediment,Bacteria,DK452,SRR5826207,Location,Kalø Vig,NA,7.5,0,75,104.58,-0.151281
+OHL+18_DNA,Sediment,Bacteria,DK453,SRR5826205,Location,Kalø Vig,NA,7.5,0,50,79.58,-0.1533
+OHL+18_DNA,Sediment,Bacteria,DK454,SRR5826242,Location,Kalø Vig,NA,7.3,0,50,67.75,-0.153628
+OHL+18_DNA,Sediment,Bacteria,DK851,SRR5826243,Location,Kalø Vig,NA,7.9,125,150,203.24,-0.154979
+OHL+18_DNA,Sediment,Bacteria,DK852,SRR5826244,Location,Kalø Vig,NA,7.5,0,75,104.58,-0.154237
+OHL+18_DNA,Sediment,Bacteria,DK853,SRR5826245,Location,Kalø Vig,NA,7.5,0,50,79.58,-0.152816
+OHL+18_DNA,Sediment,Bacteria,DK854,SRR5826238,Location,Kalø Vig,NA,7.3,0,50,67.75,-0.153907
+OHL+18_DNA,Sediment,Bacteria,DL1,SRR5826234,Location,Lake Constance,NA,7.6,150,293,328.49,-0.149844
+OHL+18_DNA,Sediment,Bacteria,DL2,SRR5826204,Location,Lake Constance,NA,7.6,3,190,225.49,-0.149527
+OHL+18_DNA,Sediment,Bacteria,DL3,SRR5826202,Location,Lake Constance,NA,7.5,0,117,146.58,-0.148902
+OHL+18_DNA,Sediment,Bacteria,DL4,SRR5826210,Location,Lake Constance,NA,7.5,0,117,146.58,-0.148715
+OHL+18_DNA,Sediment,Bacteria,DL5,SRR5826203,Location,Lake Constance,NA,7.4,0,110,133.66,-0.150559
+OHL+18_DNA,Sediment,Bacteria,DL6,SRR5826208,Location,Lake Constance,NA,7.6,150,293,328.49,-0.148221
+OHL+18_DNA,Sediment,Bacteria,DL7,SRR5826211,Location,Lake Constance,NA,7.6,3,190,225.49,-0.148501
+OHL+18_DNA,Sediment,Bacteria,DL8,SRR5826229,Location,Lake Constance,NA,7.5,0,117,146.58,-0.150077
+OHL+18_DNA,Sediment,Bacteria,DL9,SRR5826230,Location,Lake Constance,NA,7.4,0,110,133.66,-0.152831
+OHL+18_DNA,Sediment,Bacteria,DN081,SRR5826239,Location,Norsminde Fjord,NA,7.85,125,140,190.28,-0.152895
+OHL+18_DNA,Sediment,Bacteria,DN082,SRR5826240,Location,Norsminde Fjord,NA,7.5,0,0,29.58,-0.152321
+OHL+18_DNA,Sediment,Bacteria,DN083,SRR5826241,Location,Norsminde Fjord,NA,7.5,0,-100,-70.42,-0.15501
+OHL+18_DNA,Sediment,Bacteria,DN084,SRR5826235,Location,Norsminde Fjord,NA,7.3,0,-100,-82.25,-0.155748
+OHL+18_DNA,Sediment,Bacteria,DN181,SRR5826236,Location,Norsminde Fjord,NA,7.85,125,140,190.28,-0.15473
+OHL+18_DNA,Sediment,Bacteria,DN182,SRR5826237,Location,Norsminde Fjord,NA,7.5,0,0,29.58,-0.154857
+OHL+18_DNA,Sediment,Bacteria,DN183,SRR5826233,Location,Norsminde Fjord,NA,7.5,0,-100,-70.42,-0.158262
+OHL+18_DNA,Sediment,Bacteria,DN184,SRR5826232,Location,Norsminde Fjord,NA,7.3,0,-100,-82.25,-0.15585
+OHL+18_DNA,Sediment,Bacteria,DN461,SRR5826231,Location,Norsminde Fjord,NA,7.85,125,140,190.28,-0.153072
+OHL+18_DNA,Sediment,Bacteria,DN462,SRR5826228,Location,Norsminde Fjord,NA,7.5,0,0,29.58,-0.154158
+OHL+18_DNA,Sediment,Bacteria,DN463,SRR5826209,Location,Norsminde Fjord,NA,7.5,0,-100,-70.42,-0.154983
+OHL+18_DNA,Sediment,Bacteria,DN464,SRR5826259,Location,Norsminde Fjord,NA,7.3,0,-100,-82.25,-0.157501
+OHL+18_DNA,Sediment,Archaea,DK363,SRR5826212,Location,Kalø Vig,NA,7.5,0,50,79.58,-0.133116
+OHL+18_DNA,Sediment,Archaea,DK364,SRR5826215,Location,Kalø Vig,NA,7.3,0,50,67.75,-0.129871
+OHL+18_DNA,Sediment,Archaea,DK454,SRR5826242,Location,Kalø Vig,NA,7.3,0,50,67.75,-0.124377
+OHL+18_DNA,Sediment,Archaea,DL5,SRR5826203,Location,Lake Constance,NA,7.4,0,110,133.66,-0.157748
+OHL+18_DNA,Sediment,Archaea,DL9,SRR5826230,Location,Lake Constance,NA,7.4,0,110,133.66,-0.161924
+OHL+18_DNA,Sediment,Archaea,DN084,SRR5826235,Location,Norsminde Fjord,NA,7.3,0,-100,-82.25,-0.131295
+OHL+18_DNA,Sediment,Archaea,DN182,SRR5826237,Location,Norsminde Fjord,NA,7.5,0,0,29.58,-0.126458
+OHL+18_DNA,Sediment,Archaea,DN183,SRR5826233,Location,Norsminde Fjord,NA,7.5,0,-100,-70.42,-0.135762
+OHL+18_DNA,Sediment,Archaea,DN463,SRR5826209,Location,Norsminde Fjord,NA,7.5,0,-100,-70.42,-0.12917
+OHL+18_DNA,Sediment,Archaea,DN464,SRR5826259,Location,Norsminde Fjord,NA,7.3,0,-100,-82.25,-0.133606
 WHLH21,Sediment,Bacteria,S1SS,SRR5974409,Position,Surface,NA,NA,NA,-224,-224,-0.181573
 WHLH21,Sediment,Bacteria,S1MS,SRR5974408,Position,Middle,NA,NA,NA,-324,-324,-0.129413
 WHLH21,Sediment,Bacteria,S1BS,SRR5974413,Position,Bottom,NA,NA,NA,-360,-360,-0.132511
@@ -2091,6 +2134,20 @@ VMB+19,Sediment,Archaea,CS-Sed16-5_10cm,SRR7083921,Type,Sediment,NA,NA,0,-262,-2
 VMB+19,Sediment,Archaea,CS-Sed16-10_15cm,SRR7083922,Type,Sediment,NA,NA,0,-309,-309,-0.131599
 VMB+19,Sediment,Archaea,CS-Sed16-15_20cm,SRR7083919,Type,Sediment,NA,NA,0,-328,-328,-0.137651
 VMB+19,Sediment,Archaea,CS-Sed16-20_25cm,SRR7083920,Type,Sediment,NA,NA,0,-344,-344,-0.145848
+HWWS19,Sediment,Bacteria,GPMD3,SRR7535351,NA,NA,12.6,7.2,NA,157,168.34,-0.146908
+HWWS19,Sediment,Bacteria,GPMD4,SRR7535352,NA,NA,13.6,6.9,NA,160,154.31,-0.147831
+HWWS19,Sediment,Bacteria,GPMD5,SRR7535353,NA,NA,14.4,6.6,NA,160,137.18,-0.148934
+HWWS19,Sediment,Bacteria,GPMD6,SRR7535354,NA,NA,15.3,6.6,NA,73,50.11,-0.152399
+HWWS19,Sediment,Bacteria,GPMD7,SRR7535355,NA,NA,16,6.8,NA,-57,-68.47,-0.15639
+HWWS19,Sediment,Bacteria,GPMD8,SRR7535356,NA,NA,17,7.2,NA,-113,-101.49,-0.157842
+HWWS19,Sediment,Bacteria,GPMD9,SRR7535347,NA,NA,16.8,7.2,NA,-129,-117.49,-0.152312
+HWWS19,Sediment,Archaea,GPMD3,SRR7535351,NA,NA,12.6,7.2,NA,157,168.34,-0.189213
+HWWS19,Sediment,Archaea,GPMD4,SRR7535352,NA,NA,13.6,6.9,NA,160,154.31,-0.189471
+HWWS19,Sediment,Archaea,GPMD5,SRR7535353,NA,NA,14.4,6.6,NA,160,137.18,-0.189512
+HWWS19,Sediment,Archaea,GPMD6,SRR7535354,NA,NA,15.3,6.6,NA,73,50.11,-0.187342
+HWWS19,Sediment,Archaea,GPMD7,SRR7535355,NA,NA,16,6.8,NA,-57,-68.47,-0.170679
+HWWS19,Sediment,Archaea,GPMD8,SRR7535356,NA,NA,17,7.2,NA,-113,-101.49,-0.160176
+HWWS19,Sediment,Archaea,GPMD9,SRR7535347,NA,NA,16.8,7.2,NA,-129,-117.49,-0.211825
 WHC+19,Sediment,Archaea,SprM,SRR7772569,Type,Mid-tide,20,8.31,NA,49.6,125.79,-0.189375
 WHC+19,Sediment,Archaea,SprL,SRR7772570,Type,Low-tide,19.9,8.36,NA,48.9,127.98,-0.188582
 WHC+19,Sediment,Archaea,SprS,SRR7772571,Type,Subtidal,18.9,8.37,NA,36.4,115.79,-0.188291
@@ -2260,6 +2317,24 @@ LMBA21_2017,Sediment,Archaea,EOI15_Su2017,ERR3711582,Season,Summer,NA,NA,219.441
 LMBA21_2017,Sediment,Archaea,EOI20_Wi2017,ERR3711600,Season,Winter,NA,NA,256.014522487701,-174,-174,-0.185206
 LMBA21_2017,Sediment,Archaea,EBI20_Wi2017,ERR3711449,Season,Winter,NA,NA,246.333301049091,396,396,-0.189543
 LMBA21_2017,Sediment,Archaea,EM10_Wi2017,ERR3711502,Season,Winter,NA,NA,259.241596300572,394,394,-0.189265
+MPL+22,Sediment,Bacteria,HK.UP.1,SRR9854988,Depth,Surface,NA,4.8,NA,137,6.86,-0.157453
+MPL+22,Sediment,Bacteria,HK.DOWN.1,SRR9854987,Depth,Subsurface,NA,5.4,NA,-79,-173.65,-0.15712
+MPL+22,Sediment,Bacteria,YX.UP.1,SRR9854992,Depth,Surface,NA,6.1,NA,44,-9.24,-0.158848
+MPL+22,Sediment,Bacteria,YX.DOWN.1,SRR9854995,Depth,Subsurface,NA,5.3,NA,-87,-187.57,-0.16158
+MPL+22,Sediment,Bacteria,FCG.UP.1,SRR9854972,Depth,Surface,NA,6.1,NA,94,40.76,-0.159185
+MPL+22,Sediment,Bacteria,FCG.DOWN.1,SRR9854979,Depth,Subsurface,NA,5.6,NA,-93,-175.82,-0.158995
+MPL+22,Sediment,Bacteria,HN.UP.1,SRR9855009,Depth,Surface,NA,6.3,NA,54,12.59,-0.153532
+MPL+22,Sediment,Bacteria,HN.DOWN.1,SRR9854983,Depth,Subsurface,NA,5.3,NA,-67,-167.57,-0.160831
+MPL+22,Sediment,Bacteria,SZ.UP.1,SRR9855007,Depth,Surface,NA,6.1,NA,68,14.76,-0.15789
+MPL+22,Sediment,Bacteria,SZ.DOWN.1,SRR9855004,Depth,Subsurface,NA,5.5,NA,-38,-126.73,-0.159499
+MPL+22,Sediment,Bacteria,BH.UP.1,SRR9854974,Depth,Surface,NA,6.3,NA,60,18.59,-0.161167
+MPL+22,Sediment,Bacteria,BH.DOWN.1,SRR9854977,Depth,Subsurface,NA,5.8,NA,-133,-203.99,-0.16616
+MPL+22,Sediment,Bacteria,ZJ.UP.1,SRR9855000,Depth,Surface,NA,6.2,NA,101,53.68,-0.161102
+MPL+22,Sediment,Bacteria,ZJ.DOWN.1,SRR9854997,Depth,Subsurface,NA,5.3,NA,-251,-351.57,-0.164306
+MPL+22,Sediment,Archaea,HK.DOWN.1,SRR9854987,Depth,Subsurface,NA,5.4,NA,-79,-173.65,-0.180016
+MPL+22,Sediment,Archaea,FCG.DOWN.1,SRR9854979,Depth,Subsurface,NA,5.6,NA,-93,-175.82,-0.178477
+MPL+22,Sediment,Archaea,HN.DOWN.1,SRR9854983,Depth,Subsurface,NA,5.3,NA,-67,-167.57,-0.165719
+MPL+22,Sediment,Archaea,SZ.DOWN.1,SRR9855004,Depth,Subsurface,NA,5.5,NA,-38,-126.73,-0.168655
 HSF+22,Sediment,Bacteria,ALD_CC_K01_01,SRR11295435,Location,Cinq Cases,NA,6.998,NA,-41,-41.12,-0.131963
 HSF+22,Sediment,Bacteria,ALD_CC_K01_02,SRR11295431,Location,Cinq Cases,NA,6.998,NA,-41,-41.12,-0.14978
 HSF+22,Sediment,Bacteria,ALD_CC_K01_03,SRR11295425,Location,Cinq Cases,NA,6.9,NA,85,79.08,-0.147494
@@ -2475,6 +2550,25 @@ BKR+22,Sediment,Archaea,Barents sea mid118-2,SRR11548067,Station,5441,NA,NA,NA,-
 BKR+22,Sediment,Archaea,Barents sea mid119-2,SRR11548066,Station,5454,NA,NA,NA,147,147,-0.188873
 BKR+22,Sediment,Archaea,Barents sea mid120-2,SRR11548075,Station,5454,NA,NA,NA,125,125,-0.166538
 BKR+22,Sediment,Archaea,Barents sea mid121-2,SRR11548074,Station,5454,NA,NA,NA,-105,-105,-0.174702
+WZW+21,Sediment,Bacteria,library 11,SRR12101834,Treatment,Without C,NA,8.1,NA,-309,-243.93,-0.1819
+WZW+21,Sediment,Bacteria,library 3,SRR12101824,Treatment,Without C,NA,8.35,NA,-285,-205.14,-0.168984
+WZW+21,Sediment,Bacteria,library 1,SRR12101836,Treatment,Without C,NA,8.4,NA,-254,-171.18,-0.180633
+WZW+21,Sediment,Bacteria,library 5,SRR12101818,Treatment,Acetate,NA,8.23,NA,-347,-274.24,-0.16944
+WZW+21,Sediment,Bacteria,library 24,SRR12101820,Treatment,Acetate,NA,8.52,NA,-314,-224.08,-0.176099
+WZW+21,Sediment,Bacteria,library 17,SRR12101828,Treatment,Acetate,NA,8.42,NA,-292,-208,-0.183384
+WZW+21,Sediment,Bacteria,library 20,SRR12101825,Treatment,Acetate,NA,8.46,NA,-276,-189.63,-0.181208
+WZW+21,Sediment,Bacteria,library 7,SRR12101816,Treatment,Lactate,NA,8.51,NA,-290,-200.67,-0.181344
+WZW+21,Sediment,Bacteria,library 15,SRR12101830,Treatment,Lactate,NA,8.47,NA,-315,-228.04,-0.180495
+WZW+21,Sediment,Bacteria,library 12,SRR12101833,Treatment,Lacate,NA,8.61,NA,-318,-222.76,-0.178779
+WZW+21,Sediment,Bacteria,library 2,SRR12101835,Treatment,Lactate,NA,8.39,NA,-291,-208.77,-0.180082
+WZW+21,Sediment,Bacteria,library 8,SRR12101815,Treatment,AQS,NA,8.37,NA,-525,-443.96,-0.173451
+WZW+21,Sediment,Bacteria,library 22,SRR12101822,Treatment,AQS,NA,8.39,NA,-562,-479.77,-0.170996
+WZW+21,Sediment,Bacteria,library 10,SRR12101813,Treatment,AQS,NA,8.66,NA,-570,-471.8,-0.172846
+WZW+21,Sediment,Bacteria,library 19,SRR12101826,Treatment,AQS,NA,8.81,NA,-598,-490.93,-0.172654
+WZW+21,Sediment,Bacteria,library 23,SRR12101821,Treatment,HA,NA,8.92,NA,-327,-213.42,-0.176276
+WZW+21,Sediment,Bacteria,library 6,SRR12101817,Treatment,HA,NA,8.74,NA,-378,-275.07,-0.174075
+WZW+21,Sediment,Bacteria,library 4,SRR12101819,Treatment,HA,NA,8.55,NA,-403,-311.31,-0.183358
+WZW+21,Sediment,Bacteria,library 9,SRR12101814,Treatment,HA,NA,8.71,NA,-424,-322.84,-0.175617
 WFB+21,Sediment,Bacteria,t01d00,SRR12038439,Treatment,C. volutator,NA,NA,2,211,211,-0.148354
 WFB+21,Sediment,Bacteria,t01d15,SRR12038428,Treatment,C. volutator,NA,NA,1.7,147,147,-0.148933
 WFB+21,Sediment,Bacteria,t01d30,SRR12038417,Treatment,C. volutator,NA,NA,0,92,92,-0.149754
@@ -2554,6 +2648,24 @@ WFB+21,Sediment,Bacteria,t20d00,SRR12038407,Treatment,Manual turbation,NA,NA,0.3
 WFB+21,Sediment,Bacteria,t20d15,SRR12038406,Treatment,Manual turbation,NA,NA,0.2,151,151,-0.149478
 WFB+21,Sediment,Bacteria,t20d30,SRR12038404,Treatment,Manual turbation,NA,NA,0,87,87,-0.150453
 WFB+21,Sediment,Bacteria,t20d45,SRR12038403,Treatment,Manual turbation,NA,NA,0,59,59,-0.151517
+LLS+22,Sediment,Bacteria,SCC71,SRR14194024,Month,July,23.9,7.39,NA,-109,-86.01,-0.159764
+LLS+22,Sediment,Bacteria,SCC73,SRR14194012,Month,July,24.3,7.34,NA,-121,-100.93,-0.14994
+LLS+22,Sediment,Bacteria,SCC75,SRR14194000,Month,July,24.6,7.42,NA,-103,-78.19,-0.150758
+LLS+22,Sediment,Bacteria,SC71,SRR14193999,Month,July,24.1,7.65,NA,-120,-81.66,-0.149378
+LLS+22,Sediment,Bacteria,SC73,SRR14193997,Month,July,24.1,7.58,NA,-151,-116.79,-0.143946
+LLS+22,Sediment,Bacteria,SC75,SRR14193995,Month,July,24.5,7.62,NA,-137,-100.38,-0.149735
+LLS+22,Sediment,Bacteria,SCC101,SRR14194022,Month,October,23.4,7.55,NA,-120,-87.64,-0.14724
+LLS+22,Sediment,Bacteria,SCC103,SRR14194020,Month,October,23.1,7.56,NA,-140,-107.08,-0.148994
+LLS+22,Sediment,Bacteria,SCC105,SRR14194018,Month,October,23,7.45,NA,-131,-104.56,-0.145841
+LLS+22,Sediment,Bacteria,SC101,SRR14194017,Month,October,22.9,7.68,NA,-165,-125.06,-0.141073
+LLS+22,Sediment,Bacteria,SC103,SRR14194015,Month,October,23.4,7.76,NA,-170,-125.28,-0.146973
+LLS+22,Sediment,Bacteria,SC105,SRR14194013,Month,October,23.1,7.73,NA,-165,-122.09,-0.144774
+LLS+22,Sediment,Bacteria,SCC121,SRR14194011,Month,December,7.6,7.58,NA,-150,-117.69,-0.150749
+LLS+22,Sediment,Bacteria,SCC123,SRR14194009,Month,December,7.8,7.57,NA,-145,-113.23,-0.145077
+LLS+22,Sediment,Bacteria,SCC125,SRR14194007,Month,December,7.3,7.54,NA,-154,-123.95,-0.147519
+LLS+22,Sediment,Bacteria,SC121,SRR14194006,Month,December,7.7,7.62,NA,-145,-110.45,-0.145451
+LLS+22,Sediment,Bacteria,SC123,SRR14194004,Month,December,7.8,7.6,NA,-138,-104.55,-0.142525
+LLS+22,Sediment,Bacteria,SC125,SRR14194002,Month,December,7.4,7.61,NA,-141,-107.04,-0.143792
 HCW+22,Sediment,Bacteria,21d_Jb1_,SRR16767572,Condition,Static,NA,7.45,NA,-220.9,-194.28,-0.146867
 HCW+22,Sediment,Bacteria,21d_Jb2_,SRR16767571,Condition,Static,NA,7.45,NA,-220.9,-194.28,-0.150651
 HCW+22,Sediment,Bacteria,21d_Jb3_,SRR16767569,Condition,Static,NA,7.45,NA,-220.9,-194.28,-0.15014

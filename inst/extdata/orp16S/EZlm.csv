@@ -97,6 +97,8 @@ BYB+17,"Great Salt Lake",Sediment,Archaea,8,-200.17,47.8,0.0787336,-0.086697,0.2
 BSPD17,"Baltic Sea Swedish Coast",Sediment,Bacteria,28,39.42,227.05,0.129035,-0.191306,0.319357,0.0976134
 HDZ+19,"Honghu Lake",Sediment,Bacteria,28,-381.23,160.96,0.0297409,-0.155106,0.831067,4.35892e-08
 TCN+17,"Hydrocarbonoclastic Bioreactors",Sediment,Bacteria,19,-382,254,0.0314367,-0.160892,0.500598,0.0290346
+OHL+18_DNA,"Marine and Freshwater Sediments (DNA)",Sediment,Bacteria,33,-82.25,328.49,0.0167036,-0.154764,0.722814,2.02786e-06
+OHL+18_DNA,"Marine and Freshwater Sediments (DNA)",Sediment,Archaea,10,-82.25,133.66,-0.079531,-0.134689,-0.550047,0.0994866
 WHLH21,"Daya Bay",Sediment,Bacteria,20,-360,-74,-0.178061,-0.197137,-0.553623,0.0113275
 SCM+18,"Perdido Fold Belt",Sediment,Bacteria,11,-204,236,-0.0142175,-0.148235,-0.504879,0.113204
 RSS+18,"Lake Hazen, Nunavut",Sediment,Bacteria,28,113.53,527.09,0.00265643,-0.14945,0.150745,0.443859
@@ -105,6 +107,8 @@ CLS+19,"Jinchuan River",Sediment,Archaea,21,7.82,259.82,0.0185231,-0.170233,0.30
 ZDA+20,"Loa River",Sediment,Bacteria,14,170.3,354.98,-0.0689157,-0.138386,-0.543229,0.0446883
 VMB+19,"Cock Soda Lake",Sediment,Bacteria,6,-344,238,-0.0112218,-0.152947,-0.520968,0.289245
 VMB+19,"Cock Soda Lake",Sediment,Archaea,6,-344,238,-0.0505728,-0.134825,-0.363746,0.478445
+HWWS19,"Subterranean Estuary",Sediment,Bacteria,7,-117.49,168.34,0.029278,-0.152733,0.877032,0.00952158
+HWWS19,"Subterranean Estuary",Sediment,Archaea,7,-117.49,168.34,-0.0250152,-0.184665,-0.192777,0.678779
 WHC+19,"Qiangtang River Estuary",Sediment,Archaea,11,109.24,146.93,-0.0245808,-0.186308,-0.481179,0.134025
 HSF+19,"Lake Neusiedl",Sediment,Bacteria,21,-223.84,508.61,-0.0168642,-0.156224,-0.774264,3.80099e-05
 RBM+21,"Saco do Mamanguá ría",Sediment,Bacteria,8,-265.18,88.59,-0.00897262,-0.146813,-0.382927,0.349112
@@ -114,11 +118,15 @@ MCS+21,"Valparaíso Bay",Sediment,Bacteria,7,138.38,519.94,-0.0380401,-0.152973,
 MCS+21,"Valparaíso Bay",Sediment,Archaea,7,138.38,519.94,0.0659901,-0.177673,0.576897,0.175107
 LMBA21_2017,"Bay of Biscay (2017)",Sediment,Bacteria,47,-204,476,0.0222969,-0.156024,0.72774,6.81521e-09
 LMBA21_2017,"Bay of Biscay (2017)",Sediment,Archaea,14,-202,436,-0.0357186,-0.176283,-0.597262,0.0241146
+MPL+22,"South China Mangroves",Sediment,Bacteria,14,-351.57,53.68,0.013756,-0.158606,0.547092,0.0428957
+MPL+22,"South China Mangroves",Sediment,Archaea,4,-175.82,-126.73,0.169692,-0.145906,0.552032,0.447968
 HSF+22,"Aldabra Atoll",Sediment,Bacteria,120,-301.96,398.11,0.012385,-0.151883,0.279258,0.00200969
 ZZLL21,"Maozhou River Hyporheic Zone",Sediment,Bacteria,71,-71.3,256.75,0.0246622,-0.155296,0.248947,0.0363034
 BKR+22,"Barents Sea",Sediment,Bacteria,12,-210,226,0.0178287,-0.157305,0.560226,0.05816
 BKR+22,"Barents Sea",Sediment,Archaea,12,-210,226,-0.0458296,-0.171411,-0.569023,0.0534983
+WZW+21,"High-As Aquifer Sediments",Sediment,Bacteria,19,-490.93,-171.18,-0.0233641,-0.18355,-0.533928,0.0185407
 WFB+21,"Estuarine Sediment Mesocosms",Sediment,Bacteria,79,59,211,0.00736301,-0.150735,0.433095,6.7018e-05
+LLS+22,"Integrated Multitrophic Aquaculture",Sediment,Bacteria,18,-125.28,-78.19,-0.156865,-0.164086,-0.557638,0.0161927
 HCW+22,"Hydrodynamic Experiments",Sediment,Bacteria,45,-211.59,-56.52,-0.00745085,-0.152259,-0.101202,0.508304
 SBW+17,"Biochar in Paddy Soil",Soil,Bacteria,16,-235.68,-36.92,0.0167976,-0.147816,0.821514,9.51604e-05
 MLL+19,"Dabu Town, Hunan Province",Soil,Bacteria,30,-374.58,300.25,0.0172708,-0.152588,0.725505,5.7271e-06

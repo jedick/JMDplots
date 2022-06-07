@@ -1,0 +1,15 @@
+Name,Run,BioSample,SampleName,pH,ORP,Depth
+"South China Mangroves",SRR9854988,SAMN12385986,HK.UP.1,4.8,137,Surface
+"South China Mangroves",SRR9854987,SAMN12385983,HK.DOWN.1,5.4,-79,Subsurface
+"South China Mangroves",SRR9854992,SAMN12386004,YX.UP.1,6.1,44,Surface
+"South China Mangroves",SRR9854995,SAMN12386001,YX.DOWN.1,5.3,-87,Subsurface
+"South China Mangroves",SRR9854972,SAMN12385980,FCG.UP.1,6.1,94,Surface
+"South China Mangroves",SRR9854979,SAMN12385977,FCG.DOWN.1,5.6,-93,Subsurface
+"South China Mangroves",SRR9855009,SAMN12385992,HN.UP.1,6.3,54,Surface
+"South China Mangroves",SRR9854983,SAMN12385989,HN.DOWN.1,5.3,-67,Subsurface
+"South China Mangroves",SRR9855007,SAMN12385998,SZ.UP.1,6.1,68,Surface
+"South China Mangroves",SRR9855004,SAMN12385995,SZ.DOWN.1,5.5,-38,Subsurface
+"South China Mangroves",SRR9854974,SAMN12385974,BH.UP.1,6.3,60,Surface
+"South China Mangroves",SRR9854977,SAMN12385971,BH.DOWN.1,5.8,-133,Subsurface
+"South China Mangroves",SRR9855000,SAMN12386010,ZJ.UP.1,6.2,101,Surface
+"South China Mangroves",SRR9854997,SAMN12386007,ZJ.DOWN.1,5.3,-251,Subsurface
