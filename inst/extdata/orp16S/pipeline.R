@@ -46,7 +46,7 @@
 ## STUDY SETTINGS
 
 # Change the following line to setup the pipeline for one study
-study <- "XKL+21"
+study <- "RKN+17"
 # Settings for all studies are stored here
 file <- tempfile()
 # Write spaces here (but don't save them) to make this easier to read
@@ -161,7 +161,18 @@ writeLines(con = file, text = gsub(" ", "", c(
   "WLJ+16, TRUE, 200",
   "JZS+20, TRUE, 290",
   "MIN+16, FALSE, 400",
-  "XKL+21, NA, NA"
+  "XKL+21, NA, NA",
+
+  # 20220528-20220608
+  "OHL+18, TRUE, 250",
+  "LLS+22, FALSE, 450",
+  "MGW+22, FALSE, 290",
+  "RKN+17, TRUE, 300",
+  "ZLH+22a, FALSE, 290",
+  "WZW+21, FALSE, 290",
+  "MPL+22, TRUE, 290",
+  "HWWS19, TRUE, 250",
+  "LWJ+21, FALSE, 250"
 
   # For SMS+12 (Bison Pool):
   #  - FASTA files were downloaded from MG-RAST (mgp100292)
@@ -250,8 +261,12 @@ filter <- function(RUNID) {
     print(cmd)
     system(cmd)
   } else if(forwardonly) {
+    # fastq-dump adds _3 suffix for some runs in RKN+17  20220607
+    infile <- paste0(RUNID, "_3.fastq")
+    if(!file.exists(infile)) infile <- paste0(RUNID, "_2.fastq")
+    if(!file.exists(infile)) infile <- paste0(RUNID, "_1.fastq")
     # Use forward reads only
-    file.copy(paste0(RUNID, "_1.fastq"), "merged.fastq", overwrite = TRUE)
+    file.copy(infile, "merged.fastq", overwrite = TRUE)
     # For Hetao Plain, file names are different 20220521
     if(study == "WLJ+16") file.copy(paste0(RUNID, "_R1.fastq"), "merged.fastq", overwrite = TRUE)
     nseq <- length(readLines("merged.fastq")) / 4
@@ -300,7 +315,7 @@ filter <- function(RUNID) {
     # For Illumina MiSeq (strange quality encoding?) 20210909
     if(study == "ECS+18") qmax <- 93
     # For Ion Torrent 20210928
-    if(study == "PCL+18") qmax <- 45
+    if(study %in% c("PCL+18", "RKN+17")) qmax <- 45
     cmd <- paste("vsearch -fastq_filter merged.fastq -fastq_trunclen", trunclen, "-fastq_qmax", qmax, "-fastq_maxee_rate", maxee_rate, "-fastaout", outfile)
     print(cmd)
     system(cmd)

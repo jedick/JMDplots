@@ -449,6 +449,26 @@ JVW+20,River & Seawater,Bacteria,A14,SRR12433304,isolation_source,Ulva laetevire
 JVW+20,River & Seawater,Bacteria,A15,SRR12433303,isolation_source,Ulva laetevirens,19.3,7.91,228.280559857771,297,349.8,-0.16296
 JVW+20,River & Seawater,Bacteria,A16,SRR12433302,isolation_source,lagoon water,19,8.1,296.830940295357,312,375.76,-0.159825
 JVW+20,River & Seawater,Bacteria,A17,SRR12433301,isolation_source,lagoon water,20,8.01,232.074954983096,300,358.75,-0.156798
+ZLH+22a,River & Seawater,Bacteria,W01,SRR12632548,NA,NA,12.1,7.86,79.375,536,584.67,-0.158171
+ZLH+22a,River & Seawater,Bacteria,W02,SRR12632547,NA,NA,13.8,7.72,132.5,291,331.99,-0.15562
+ZLH+22a,River & Seawater,Bacteria,W03,SRR12632546,NA,NA,12.4,8.09,142.5,337,398.76,-0.163627
+ZLH+22a,River & Seawater,Bacteria,W04,SRR12632545,NA,NA,13,8.08,128.125,236,297.32,-0.152695
+ZLH+22a,River & Seawater,Bacteria,W05,SRR12632544,NA,NA,12.2,8.12,175,308,371.41,-0.1569
+ZLH+22a,River & Seawater,Bacteria,W06,SRR12632543,NA,NA,13.1,8.06,236.25,286,346.2,-0.158545
+ZLH+22a,River & Seawater,Bacteria,W07,SRR12632542,NA,NA,15.8,8.16,126.875,296,362.5,-0.156191
+ZLH+22a,River & Seawater,Bacteria,W08,SRR12632541,NA,NA,19.1,8.11,4.0625,389,453.36,-0.157228
+ZLH+22a,River & Seawater,Bacteria,W09,SRR12632540,NA,NA,13.9,8.09,31.25,364,426.08,-0.15843
+ZLH+22a,River & Seawater,Bacteria,W10,SRR12632539,NA,NA,14.1,8.02,135,305,363.13,-0.157709
+ZLH+22a,River & Seawater,Bacteria,W11,SRR12632537,NA,NA,15.6,7.99,184.6875,297,353.72,-0.156433
+ZLH+22a,River & Seawater,Bacteria,W12,SRR12632536,NA,NA,17.08,8.16,108.4375,236,302.8,-0.15784
+ZLH+22a,River & Seawater,Bacteria,W13,SRR12632535,NA,NA,18.54,8.55,44.6875,351,440.71,-0.159876
+ZLH+22a,River & Seawater,Bacteria,W14,SRR12632534,NA,NA,20.9,8.44,10.625,302,386.01,-0.158778
+ZLH+22a,River & Seawater,Bacteria,W15,SRR12632533,NA,NA,14.1,8.27,23.75,389,461.38,-0.157731
+ZLH+22a,River & Seawater,Bacteria,W16,SRR12632532,NA,NA,16.5,8.17,100,335,402.24,-0.156906
+ZLH+22a,River & Seawater,Bacteria,W17,SRR12632531,NA,NA,16.9,8.16,211.5625,358,424.76,-0.15001
+ZLH+22a,River & Seawater,Bacteria,W18,SRR12632530,NA,NA,19.2,8,295.3125,358,416.01,-0.153957
+ZLH+22a,River & Seawater,Bacteria,W19,SRR12632529,NA,NA,16.1,8.08,250.625,345,406.98,-0.149352
+ZLH+22a,River & Seawater,Bacteria,W20,SRR12632528,NA,NA,17.4,8.11,18.4375,367,430.99,-0.150773
 ZZL+21,River & Seawater,Bacteria,2018_A1_1,SRR13175269,Location,Main Stream,25.4,9.9,230.9375,42.4,214.18,-0.141747
 ZZL+21,River & Seawater,Bacteria,2018_A2_1,SRR13175236,Location,Main Stream,29.5,7.04,224.375,86.1,88.5,-0.151676
 ZZL+21,River & Seawater,Bacteria,2018_A3_1,SRR13175203,Location,Main Stream,32.6,7.24,247.5,117.8,132.36,-0.15016
@@ -503,6 +523,94 @@ ZZL+21,River & Seawater,Bacteria,2020_P_20_1,SRR13175306,Location,WWTP,32.6,7.64
 ZZL+21,River & Seawater,Bacteria,2020_P_500_1,SRR13175296,Location,WWTP,33.9,7.77,221.875,117.2,164.11,-0.131403
 ZZL+21,River & Seawater,Bacteria,2020_P_50_1,SRR13175303,Location,WWTP,33,7.67,222.8125,116.53,157.23,-0.138291
 ZZL+21,River & Seawater,Bacteria,2020_T_1,SRR13175293,Location,Tributary,34.3,8.47,293.75,127.4,217.07,-0.129602
+LWJ+21,River & Seawater,Bacteria,FW10,SRR14116259,Type,Freshwater,NA,7.22,250,128,141.01,-0.148496
+LWJ+21,River & Seawater,Bacteria,FW6,SRR14116285,Type,Freshwater,NA,7.21,240.625,111,123.42,-0.152696
+LWJ+21,River & Seawater,Bacteria,FW7,SRR14116274,Type,Freshwater,NA,6.99,200,116,115.41,-0.152217
+LWJ+21,River & Seawater,Bacteria,FW8,SRR14116263,Type,Freshwater,NA,7.31,218.75,128,146.34,-0.149225
+LWJ+21,River & Seawater,Bacteria,FW9,SRR14116260,Type,Freshwater,NA,7.44,215.625,129,155.03,-0.151974
+LWJ+21,River & Seawater,Bacteria,MSW14,SRR14116286,Type,Seawater Plastic,NA,7.63,237.5,229,266.27,-0.136819
+LWJ+21,River & Seawater,Bacteria,MSW15,SRR14116284,Type,Seawater Plastic,NA,8.04,221.875,212,273.52,-0.148253
+LWJ+21,River & Seawater,Bacteria,MSW16,SRR14116283,Type,Seawater Plastic,NA,8.05,209.375,145,207.11,-0.144957
+LWJ+21,River & Seawater,Bacteria,MSW17,SRR14116282,Type,Seawater Plastic,NA,8.03,203.125,155,215.93,-0.138909
+LWJ+21,River & Seawater,Bacteria,MSW18,SRR14116281,Type,Seawater Plastic,NA,8.02,243.75,213,273.34,-0.138612
+LWJ+21,River & Seawater,Bacteria,SW1,SRR14116280,Type,Seawater,NA,8.21,281.25,236,307.58,-0.158091
+LWJ+21,River & Seawater,Bacteria,SW10,SRR14116270,Type,Seawater,NA,7.87,140.625,193,244.47,-0.155017
+LWJ+21,River & Seawater,Bacteria,SW11,SRR14116269,Type,Seawater,NA,7.96,206.25,202,258.79,-0.151724
+LWJ+21,River & Seawater,Bacteria,SW12,SRR14116268,Type,Seawater,NA,8.07,278.125,229,292.3,-0.151005
+LWJ+21,River & Seawater,Bacteria,SW13,SRR14116267,Type,Seawater,NA,7.46,234.375,173,200.21,-0.153971
+LWJ+21,River & Seawater,Bacteria,SW14,SRR14116266,Type,Seawater,NA,7.63,237.5,229,266.27,-0.154528
+LWJ+21,River & Seawater,Bacteria,SW15,SRR14116265,Type,Seawater,NA,8.04,221.875,212,273.52,-0.151495
+LWJ+21,River & Seawater,Bacteria,SW16,SRR14116264,Type,Seawater,NA,8.05,209.375,145,207.11,-0.151772
+LWJ+21,River & Seawater,Bacteria,SW17,SRR14116262,Type,Seawater,NA,8.03,203.125,155,215.93,-0.154337
+LWJ+21,River & Seawater,Bacteria,SW18,SRR14116261,Type,Seawater,NA,8.02,243.75,213,273.34,-0.153345
+LWJ+21,River & Seawater,Bacteria,SW2,SRR14116279,Type,Seawater,NA,7.89,184.375,118,170.65,-0.160224
+LWJ+21,River & Seawater,Bacteria,SW3,SRR14116278,Type,Seawater,NA,7.86,175,186,236.87,-0.158104
+LWJ+21,River & Seawater,Bacteria,SW4,SRR14116277,Type,Seawater,NA,7.93,190.625,109,164.02,-0.147487
+LWJ+21,River & Seawater,Bacteria,SW5,SRR14116276,Type,Seawater,NA,7.89,190.625,106,158.65,-0.147401
+LWJ+21,River & Seawater,Bacteria,SW6,SRR14116275,Type,Seawater,NA,7.92,196.875,110,164.42,-0.152234
+LWJ+21,River & Seawater,Bacteria,SW7,SRR14116273,Type,Seawater,NA,7.74,203.125,207,250.78,-0.156123
+LWJ+21,River & Seawater,Bacteria,SW8,SRR14116272,Type,Seawater,NA,7.72,178.125,199,241.59,-0.156688
+LWJ+21,River & Seawater,Bacteria,SW9,SRR14116271,Type,Seawater,NA,7.81,143.75,201,248.92,-0.15552
+LWJ+21,River & Seawater,Bacteria,FW1,SRR14116330,Type,Freshwater,NA,7.56,131.25,134,167.13,-0.145301
+LWJ+21,River & Seawater,Bacteria,FW11,SRR14116328,Type,Freshwater,NA,7.61,225,133,169.09,-0.150568
+LWJ+21,River & Seawater,Bacteria,FW12,SRR14116327,Type,Freshwater,NA,7.56,221.875,129,162.13,-0.151857
+LWJ+21,River & Seawater,Bacteria,FW13,SRR14116326,Type,Freshwater,NA,7.61,187.5,243,279.09,-0.153515
+LWJ+21,River & Seawater,Bacteria,FW14,SRR14116325,Type,Freshwater,NA,7.68,206.25,223,263.23,-0.148517
+LWJ+21,River & Seawater,Bacteria,FW15,SRR14116324,Type,Freshwater,NA,7.56,206.25,225,258.13,-0.149988
+LWJ+21,River & Seawater,Bacteria,FW16,SRR14116323,Type,Freshwater,NA,7.94,225,214,269.61,-0.15442
+LWJ+21,River & Seawater,Bacteria,FW17,SRR14116322,Type,Freshwater,NA,7.95,212.5,216,272.2,-0.154634
+LWJ+21,River & Seawater,Bacteria,FW18,SRR14116321,Type,Freshwater,NA,7.83,218.75,221,270.1,-0.147171
+LWJ+21,River & Seawater,Bacteria,FW2,SRR14116329,Type,Freshwater,NA,7.36,146.875,129,150.3,-0.147044
+LWJ+21,River & Seawater,Bacteria,FW3,SRR14116318,Type,Freshwater,NA,7.86,171.875,128,178.87,-0.145704
+LWJ+21,River & Seawater,Bacteria,FW4,SRR14116307,Type,Freshwater,NA,7.42,168.75,126,150.85,-0.147098
+LWJ+21,River & Seawater,Bacteria,FW5,SRR14116296,Type,Freshwater,NA,7.33,196.875,125,144.52,-0.147448
+LWJ+21,River & Seawater,Bacteria,MFW1,SRR14116320,Type,Freshwater Plastic,NA,7.56,131.25,134,167.13,-0.144265
+LWJ+21,River & Seawater,Bacteria,MFW10,SRR14116310,Type,Freshwater Plastic,NA,7.22,250,128,141.01,-0.148172
+LWJ+21,River & Seawater,Bacteria,MFW11,SRR14116309,Type,Freshwater Plastic,NA,7.61,225,133,169.09,-0.149391
+LWJ+21,River & Seawater,Bacteria,MFW12,SRR14116308,Type,Freshwater Plastic,NA,7.56,221.875,129,162.13,-0.140926
+LWJ+21,River & Seawater,Bacteria,MFW13,SRR14116306,Type,Freshwater Plastic,NA,7.61,187.5,243,279.09,-0.137507
+LWJ+21,River & Seawater,Bacteria,MFW14,SRR14116305,Type,Freshwater Plastic,NA,7.68,206.25,223,263.23,-0.136993
+LWJ+21,River & Seawater,Bacteria,MFW15,SRR14116304,Type,Freshwater Plastic,NA,7.56,206.25,225,258.13,-0.137573
+LWJ+21,River & Seawater,Bacteria,MFW16,SRR14116303,Type,Freshwater Plastic,NA,7.94,225,214,269.61,-0.137639
+LWJ+21,River & Seawater,Bacteria,MFW17,SRR14116302,Type,Freshwater Plastic,NA,7.95,212.5,216,272.2,-0.134808
+LWJ+21,River & Seawater,Bacteria,MFW18,SRR14116301,Type,Freshwater Plastic,NA,7.83,218.75,221,270.1,-0.142398
+LWJ+21,River & Seawater,Bacteria,MFW2,SRR14116319,Type,Freshwater Plastic,NA,7.36,146.875,129,150.3,-0.146804
+LWJ+21,River & Seawater,Bacteria,MFW3,SRR14116317,Type,Freshwater Plastic,NA,7.86,171.875,128,178.87,-0.152077
+LWJ+21,River & Seawater,Bacteria,MFW4,SRR14116316,Type,Freshwater Plastic,NA,7.42,168.75,126,150.85,-0.143734
+LWJ+21,River & Seawater,Bacteria,MFW5,SRR14116315,Type,Freshwater Plastic,NA,7.33,196.875,125,144.52,-0.146122
+LWJ+21,River & Seawater,Bacteria,MFW6,SRR14116314,Type,Freshwater Plastic,NA,7.21,240.625,111,123.42,-0.143742
+LWJ+21,River & Seawater,Bacteria,MFW7,SRR14116313,Type,Freshwater Plastic,NA,6.99,200,116,115.41,-0.146458
+LWJ+21,River & Seawater,Bacteria,MFW8,SRR14116312,Type,Freshwater Plastic,NA,7.31,218.75,128,146.34,-0.146728
+LWJ+21,River & Seawater,Bacteria,MFW9,SRR14116311,Type,Freshwater Plastic,NA,7.44,215.625,129,155.03,-0.145362
+LWJ+21,River & Seawater,Bacteria,MSW1,SRR14116300,Type,Seawater Plastic,NA,8.21,281.25,236,307.58,-0.142294
+LWJ+21,River & Seawater,Bacteria,MSW10,SRR14116290,Type,Seawater Plastic,NA,7.87,140.625,193,244.47,-0.142576
+LWJ+21,River & Seawater,Bacteria,MSW11,SRR14116289,Type,Seawater Plastic,NA,7.96,206.25,202,258.79,-0.146459
+LWJ+21,River & Seawater,Bacteria,MSW12,SRR14116288,Type,Seawater Plastic,NA,8.07,278.125,229,292.3,-0.150975
+LWJ+21,River & Seawater,Bacteria,MSW13,SRR14116287,Type,Seawater Plastic,NA,7.46,234.375,173,200.21,-0.139844
+LWJ+21,River & Seawater,Bacteria,MSW2,SRR14116299,Type,Seawater Plastic,NA,7.89,184.375,118,170.65,-0.14404
+LWJ+21,River & Seawater,Bacteria,MSW3,SRR14116298,Type,Seawater Plastic,NA,7.86,175,186,236.87,-0.155757
+LWJ+21,River & Seawater,Bacteria,MSW4,SRR14116297,Type,Seawater Plastic,NA,7.93,190.625,109,164.02,-0.146411
+LWJ+21,River & Seawater,Bacteria,MSW5,SRR14116295,Type,Seawater Plastic,NA,7.89,190.625,106,158.65,-0.140298
+LWJ+21,River & Seawater,Bacteria,MSW6,SRR14116294,Type,Seawater Plastic,NA,7.92,196.875,110,164.42,-0.142416
+LWJ+21,River & Seawater,Bacteria,MSW7,SRR14116293,Type,Seawater Plastic,NA,7.74,203.125,207,250.78,-0.149655
+LWJ+21,River & Seawater,Bacteria,MSW8,SRR14116292,Type,Seawater Plastic,NA,7.72,178.125,199,241.59,-0.147282
+LWJ+21,River & Seawater,Bacteria,MSW9,SRR14116291,Type,Seawater Plastic,NA,7.81,143.75,201,248.92,-0.13675
+LWJ+21,River & Seawater,Archaea,SW10,SRR14116270,Type,Seawater,NA,7.87,140.625,193,244.47,-0.124933
+LWJ+21,River & Seawater,Archaea,SW12,SRR14116268,Type,Seawater,NA,8.07,278.125,229,292.3,-0.131467
+LWJ+21,River & Seawater,Archaea,SW13,SRR14116267,Type,Seawater,NA,7.46,234.375,173,200.21,-0.126207
+LWJ+21,River & Seawater,Archaea,SW14,SRR14116266,Type,Seawater,NA,7.63,237.5,229,266.27,-0.125992
+LWJ+21,River & Seawater,Archaea,SW15,SRR14116265,Type,Seawater,NA,8.04,221.875,212,273.52,-0.128507
+LWJ+21,River & Seawater,Archaea,SW16,SRR14116264,Type,Seawater,NA,8.05,209.375,145,207.11,-0.127087
+LWJ+21,River & Seawater,Archaea,SW17,SRR14116262,Type,Seawater,NA,8.03,203.125,155,215.93,-0.131692
+LWJ+21,River & Seawater,Archaea,SW18,SRR14116261,Type,Seawater,NA,8.02,243.75,213,273.34,-0.126854
+LWJ+21,River & Seawater,Archaea,SW2,SRR14116279,Type,Seawater,NA,7.89,184.375,118,170.65,-0.125714
+LWJ+21,River & Seawater,Archaea,SW3,SRR14116278,Type,Seawater,NA,7.86,175,186,236.87,-0.127602
+LWJ+21,River & Seawater,Archaea,SW4,SRR14116277,Type,Seawater,NA,7.93,190.625,109,164.02,-0.13205
+LWJ+21,River & Seawater,Archaea,SW5,SRR14116276,Type,Seawater,NA,7.89,190.625,106,158.65,-0.132139
+LWJ+21,River & Seawater,Archaea,SW6,SRR14116275,Type,Seawater,NA,7.92,196.875,110,164.42,-0.132444
+LWJ+21,River & Seawater,Archaea,SW7,SRR14116273,Type,Seawater,NA,7.74,203.125,207,250.78,-0.125272
+LWJ+21,River & Seawater,Archaea,SW8,SRR14116272,Type,Seawater,NA,7.72,178.125,199,241.59,-0.125397
+LWJ+21,River & Seawater,Archaea,SW9,SRR14116271,Type,Seawater,NA,7.81,143.75,201,248.92,-0.126092
 GZL21,River & Seawater,Bacteria,w1mFXZ,SRR14692702,Type,Surface water,18.464,7.96,268.4375,277.3,332.84,-0.144542
 GZL21,River & Seawater,Bacteria,w1mGLZ,SRR14692720,Type,Surface water,18.832,8.33,308.4375,233.1,310.15,-0.150551
 GZL21,River & Seawater,Bacteria,w1mGPC,SRR14692687,Type,Surface water,21.959,8.07,256.5625,203.1,265.75,-0.140221
@@ -1743,6 +1851,146 @@ ZCZ+21,Groundwater,Bacteria,3CR2,SRR12785261,Location,CR2,14.7,7.62,13.75,-94,-5
 ZCZ+21,Groundwater,Bacteria,3LO,SRR12785274,Location,LO,18.3,7.66,203.75,-31,7.17,-0.161313
 ZCZ+21,Groundwater,Bacteria,3MN,SRR12785267,Location,MN,16.8,7.88,126.5625,-140,-89.37,-0.143654
 ZCZ+21,Groundwater,Bacteria,3VA,SRR12785268,Location,VA,13.1,8.14,390.625,352,416.75,-0.157194
+MGW+22,Groundwater,Bacteria,Auc03,SRR14366814,Region,Auckland,17.245,8.09,-1.875,-196.7,-133.9,-0.149747
+MGW+22,Groundwater,Bacteria,Can01,SRR14366803,Region,Canterbury,12.8,7.57,54.0625,-65.8,-33.46,-0.152297
+MGW+22,Groundwater,Bacteria,Can02,SRR14366792,Region,Canterbury,13.2,6,229.6875,224.9,168.09,-0.146775
+MGW+22,Groundwater,Bacteria,Can03,SRR14366781,Region,Canterbury,13.4,6.17,252.5,203.3,156.11,-0.149156
+MGW+22,Groundwater,Bacteria,Can04,SRR14366770,Region,Canterbury,12.5,5.81,211.5625,154,86.56,-0.151761
+MGW+22,Groundwater,Bacteria,Can05,SRR14366759,Region,Canterbury,12.1,5.83,235.625,223.4,157.18,-0.146414
+MGW+22,Groundwater,Bacteria,Can06,SRR14366748,Region,Canterbury,12.3,6.77,162.8125,177,163.97,-0.144205
+MGW+22,Groundwater,Bacteria,Can07,SRR14366737,Region,Canterbury,12,7.27,312.8125,173,188.28,-0.145958
+MGW+22,Groundwater,Bacteria,Can09,SRR14366824,Region,Canterbury,12.9,6.02,230.9375,229,173.38,-0.152252
+MGW+22,Groundwater,Bacteria,Can10,SRR14366822,Region,Canterbury,13.3,5.89,159.375,202.4,139.31,-0.161662
+MGW+22,Groundwater,Bacteria,Can11,SRR14366821,Region,Canterbury,12.9,5.46,256.875,212.8,125.4,-0.144176
+MGW+22,Groundwater,Bacteria,Can12,SRR14366820,Region,Canterbury,13.2,6.05,290.625,212,158.03,-0.147011
+MGW+22,Groundwater,Bacteria,Can13,SRR14366819,Region,Canterbury,12.4,6.37,159.6875,193.6,157.91,-0.148776
+MGW+22,Groundwater,Bacteria,Can14,SRR14366818,Region,Canterbury,13.4,6.31,289.375,194.6,155.37,-0.138521
+MGW+22,Groundwater,Bacteria,Can15,SRR14366817,Region,Canterbury,12.4,5.98,252.5,195.4,137.61,-0.144429
+MGW+22,Groundwater,Bacteria,Can16,SRR14366816,Region,Canterbury,11.9,5.87,206.25,219.7,155.79,-0.147047
+MGW+22,Groundwater,Bacteria,Can17,SRR14366815,Region,Canterbury,12.2,7.01,331.5625,176.4,176.97,-0.149113
+MGW+22,Groundwater,Bacteria,Can18,SRR14366813,Region,Canterbury,12.5,6.94,264.6875,162.5,159.1,-0.15804
+MGW+22,Groundwater,Bacteria,Wel01,SRR14366745,Region,Wellington,15.8,7.14,0.9375,-33.4,-25.37,-0.14193
+MGW+22,Groundwater,Bacteria,Wel02,SRR14366744,Region,Wellington,13.8,6.45,2.1875,-4.3,-35.61,-0.144776
+MGW+22,Groundwater,Bacteria,Wel03,SRR14366743,Region,Wellington,14.1,6.23,1.875,75.3,31.42,-0.146724
+MGW+22,Groundwater,Bacteria,Wel04,SRR14366742,Region,Wellington,14.8,6.9,2.1875,-41.9,-47.61,-0.146443
+MGW+22,Groundwater,Bacteria,Wel05,SRR14366741,Region,Wellington,14.7,6.72,2.5,-67.1,-83.09,-0.148421
+MGW+22,Groundwater,Bacteria,Wel06,SRR14366740,Region,Wellington,13.6,6.7,5.3125,-15.8,-32.87,-0.148762
+MGW+22,Groundwater,Bacteria,Wel07,SRR14366739,Region,Wellington,14,6.57,10.3125,-54.2,-78.7,-0.154438
+MGW+22,Groundwater,Bacteria,Wel08,SRR14366738,Region,Wellington,14.1,6.44,0.9375,41.9,9.98,-0.15142
+MGW+22,Groundwater,Bacteria,Wel09,SRR14366736,Region,Wellington,14.6,6.04,46.875,199.9,145.09,-0.142988
+MGW+22,Groundwater,Bacteria,Wel10,SRR14366735,Region,Wellington,15.5,6.67,5.9375,1.6,-17.3,-0.148825
+MGW+22,Groundwater,Bacteria,Wel11,SRR14366734,Region,Wellington,15.6,5.85,160.3125,180.9,115.02,-0.143025
+MGW+22,Groundwater,Bacteria,Wel12,SRR14366733,Region,Wellington,14.9,5.71,85.9375,226.9,153.17,-0.14696
+MGW+22,Groundwater,Bacteria,Wel13,SRR14366732,Region,Wellington,14.8,7.03,24.375,110.2,111.91,-0.157238
+MGW+22,Groundwater,Bacteria,Wel14,SRR14366731,Region,Wellington,15.1,5.74,95,178.2,106.14,-0.143128
+MGW+22,Groundwater,Bacteria,Wel15,SRR14366730,Region,Wellington,14.1,6.03,166.25,190.6,135.32,-0.151891
+MGW+22,Groundwater,Bacteria,Wel16,SRR14366729,Region,Wellington,16.1,5.51,270.3125,228.6,143.09,-0.143144
+MGW+22,Groundwater,Bacteria,Wel17,SRR14366728,Region,Wellington,14.2,6.07,231.875,151.7,98.68,-0.150268
+MGW+22,Groundwater,Bacteria,Wel18,SRR14366727,Region,Wellington,14.9,6.54,181.5625,99.5,73.21,-0.140597
+MGW+22,Groundwater,Bacteria,gwa01,SRR14366812,Region,Canterbury,13.6,6.62,243.75,198.6,176.98,-0.144642
+MGW+22,Groundwater,Bacteria,gwa03,SRR14366810,Region,Canterbury,16.9,6.12,231.25,214.4,163.76,-0.146886
+MGW+22,Groundwater,Bacteria,gwa04,SRR14366809,Region,Canterbury,16.9,6.12,231.25,214.4,163.76,-0.145201
+MGW+22,Groundwater,Bacteria,gwa05,SRR14366808,Region,Canterbury,15.5,6.91,131.25,175.3,170.15,-0.147014
+MGW+22,Groundwater,Bacteria,gwa06,SRR14366807,Region,Canterbury,15.5,6.91,131.25,175.3,170.15,-0.148227
+MGW+22,Groundwater,Bacteria,gwa07,SRR14366806,Region,Canterbury,15.8,6.17,134.375,211,163.42,-0.147685
+MGW+22,Groundwater,Bacteria,gwa08,SRR14366805,Region,Canterbury,15.8,6.17,134.375,211,163.42,-0.142763
+MGW+22,Groundwater,Bacteria,gwa09,SRR14366804,Region,Canterbury,14,6.45,128.125,214.6,183.26,-0.148353
+MGW+22,Groundwater,Bacteria,gwa10,SRR14366802,Region,Canterbury,14,6.45,128.125,214.6,183.26,-0.148047
+MGW+22,Groundwater,Bacteria,gwa11,SRR14366801,Region,Canterbury,13.5,7,115.625,183.6,183.6,-0.149103
+MGW+22,Groundwater,Bacteria,gwa12,SRR14366800,Region,Canterbury,13.5,7,115.625,183.6,183.6,-0.148572
+MGW+22,Groundwater,Bacteria,gwa13,SRR14366799,Region,Canterbury,14.7,6.73,12.5,191.9,176.48,-0.146784
+MGW+22,Groundwater,Bacteria,gwa14,SRR14366798,Region,Canterbury,14.6,6.22,3.125,60,15.47,-0.151962
+MGW+22,Groundwater,Bacteria,gwj01,SRR14366797,Region,Canterbury,12.9,6.4,175,210.4,176.35,-0.14305
+MGW+22,Groundwater,Bacteria,gwj02,SRR14366795,Region,Canterbury,12.9,6.4,175,210.4,176.35,-0.141142
+MGW+22,Groundwater,Bacteria,gwj03,SRR14366793,Region,Canterbury,11.7,6.85,228.125,214.3,205.82,-0.145022
+MGW+22,Groundwater,Bacteria,gwj04,SRR14366790,Region,Canterbury,11.7,6.85,228.125,214.3,205.82,-0.144941
+MGW+22,Groundwater,Bacteria,gwj05,SRR14366788,Region,Canterbury,11,6.54,138.4375,208.6,182.67,-0.147482
+MGW+22,Groundwater,Bacteria,gwj06,SRR14366786,Region,Canterbury,11,6.54,138.4375,208.6,182.67,-0.14706
+MGW+22,Groundwater,Bacteria,gwj07,SRR14366784,Region,Canterbury,12.3,6.68,133.4375,198.7,180.58,-0.146603
+MGW+22,Groundwater,Bacteria,gwj08,SRR14366782,Region,Canterbury,12.3,6.68,133.4375,198.7,180.58,-0.142366
+MGW+22,Groundwater,Bacteria,gwj09,SRR14366779,Region,Canterbury,8.1,6.97,213.4375,202.8,201.13,-0.14657
+MGW+22,Groundwater,Bacteria,gwj10,SRR14366776,Region,Canterbury,8.1,6.97,213.4375,202.8,201.13,-0.14685
+MGW+22,Groundwater,Bacteria,gwj11,SRR14366774,Region,Canterbury,7.3,7.2,234.375,187.8,198.93,-0.146337
+MGW+22,Groundwater,Bacteria,gwj12,SRR14366771,Region,Canterbury,7.3,7.2,234.375,187.8,198.93,-0.146103
+MGW+22,Groundwater,Bacteria,gwj13,SRR14366768,Region,Canterbury,10.8,6.66,33.125,197.3,178.14,-0.148914
+MGW+22,Groundwater,Bacteria,gwj14,SRR14366765,Region,Canterbury,10.8,6.66,33.125,197.3,178.14,-0.152965
+MGW+22,Groundwater,Bacteria,gwj15,SRR14366762,Region,Canterbury,9,6.49,11.5625,129.3,100.75,-0.151798
+MGW+22,Groundwater,Bacteria,gwj16,SRR14366758,Region,Canterbury,9,6.49,11.5625,129.3,100.75,-0.152688
+MGW+22,Groundwater,Bacteria,Auc01,SRR14366837,Region,Auckland,17.474,7.35,-0.9375,-129.4,-109.22,-0.138716
+MGW+22,Groundwater,Bacteria,Auc02,SRR14366836,Region,Auckland,18.271,8.39,-1.875,-200.7,-120.33,-0.155583
+MGW+22,Groundwater,Bacteria,Can08,SRR14366835,Region,Canterbury,13.5,6.6,222.1875,186.6,163.85,-0.147344
+MGW+22,Groundwater,Bacteria,Wel19,SRR14366834,Region,Wellington,15.7,6.53,157.1875,132.1,105.16,-0.153697
+MGW+22,Groundwater,Bacteria,Wel20,SRR14366833,Region,Wellington,13.6,6,21.5625,164.9,108.01,-0.142606
+MGW+22,Groundwater,Bacteria,Wel21,SRR14366832,Region,Wellington,14.8,6.35,169.6875,166.7,129.56,-0.147861
+MGW+22,Groundwater,Archaea,Auc03,SRR14366814,Region,Auckland,17.245,8.09,-1.875,-196.7,-133.9,-0.171278
+MGW+22,Groundwater,Archaea,Can01,SRR14366803,Region,Canterbury,12.8,7.57,54.0625,-65.8,-33.46,-0.182826
+MGW+22,Groundwater,Archaea,Can02,SRR14366792,Region,Canterbury,13.2,6,229.6875,224.9,168.09,-0.181945
+MGW+22,Groundwater,Archaea,Can03,SRR14366781,Region,Canterbury,13.4,6.17,252.5,203.3,156.11,-0.179364
+MGW+22,Groundwater,Archaea,Can04,SRR14366770,Region,Canterbury,12.5,5.81,211.5625,154,86.56,-0.177068
+MGW+22,Groundwater,Archaea,Can05,SRR14366759,Region,Canterbury,12.1,5.83,235.625,223.4,157.18,-0.181086
+MGW+22,Groundwater,Archaea,Can06,SRR14366748,Region,Canterbury,12.3,6.77,162.8125,177,163.97,-0.178262
+MGW+22,Groundwater,Archaea,Can07,SRR14366737,Region,Canterbury,12,7.27,312.8125,173,188.28,-0.178229
+MGW+22,Groundwater,Archaea,Can09,SRR14366824,Region,Canterbury,12.9,6.02,230.9375,229,173.38,-0.185716
+MGW+22,Groundwater,Archaea,Can11,SRR14366821,Region,Canterbury,12.9,5.46,256.875,212.8,125.4,-0.17647
+MGW+22,Groundwater,Archaea,Can12,SRR14366820,Region,Canterbury,13.2,6.05,290.625,212,158.03,-0.182125
+MGW+22,Groundwater,Archaea,Can13,SRR14366819,Region,Canterbury,12.4,6.37,159.6875,193.6,157.91,-0.181038
+MGW+22,Groundwater,Archaea,Can14,SRR14366818,Region,Canterbury,13.4,6.31,289.375,194.6,155.37,-0.175104
+MGW+22,Groundwater,Archaea,Can15,SRR14366817,Region,Canterbury,12.4,5.98,252.5,195.4,137.61,-0.179824
+MGW+22,Groundwater,Archaea,Can16,SRR14366816,Region,Canterbury,11.9,5.87,206.25,219.7,155.79,-0.179227
+MGW+22,Groundwater,Archaea,Can17,SRR14366815,Region,Canterbury,12.2,7.01,331.5625,176.4,176.97,-0.176105
+MGW+22,Groundwater,Archaea,Wel01,SRR14366745,Region,Wellington,15.8,7.14,0.9375,-33.4,-25.37,-0.173277
+MGW+22,Groundwater,Archaea,Wel02,SRR14366744,Region,Wellington,13.8,6.45,2.1875,-4.3,-35.61,-0.185776
+MGW+22,Groundwater,Archaea,Wel03,SRR14366743,Region,Wellington,14.1,6.23,1.875,75.3,31.42,-0.178308
+MGW+22,Groundwater,Archaea,Wel04,SRR14366742,Region,Wellington,14.8,6.9,2.1875,-41.9,-47.61,-0.184894
+MGW+22,Groundwater,Archaea,Wel05,SRR14366741,Region,Wellington,14.7,6.72,2.5,-67.1,-83.09,-0.17228
+MGW+22,Groundwater,Archaea,Wel06,SRR14366740,Region,Wellington,13.6,6.7,5.3125,-15.8,-32.87,-0.171168
+MGW+22,Groundwater,Archaea,Wel07,SRR14366739,Region,Wellington,14,6.57,10.3125,-54.2,-78.7,-0.169693
+MGW+22,Groundwater,Archaea,Wel08,SRR14366738,Region,Wellington,14.1,6.44,0.9375,41.9,9.98,-0.171321
+MGW+22,Groundwater,Archaea,Wel09,SRR14366736,Region,Wellington,14.6,6.04,46.875,199.9,145.09,-0.174244
+MGW+22,Groundwater,Archaea,Wel10,SRR14366735,Region,Wellington,15.5,6.67,5.9375,1.6,-17.3,-0.199277
+MGW+22,Groundwater,Archaea,Wel11,SRR14366734,Region,Wellington,15.6,5.85,160.3125,180.9,115.02,-0.177259
+MGW+22,Groundwater,Archaea,Wel12,SRR14366733,Region,Wellington,14.9,5.71,85.9375,226.9,153.17,-0.182497
+MGW+22,Groundwater,Archaea,Wel13,SRR14366732,Region,Wellington,14.8,7.03,24.375,110.2,111.91,-0.183863
+MGW+22,Groundwater,Archaea,Wel14,SRR14366731,Region,Wellington,15.1,5.74,95,178.2,106.14,-0.181228
+MGW+22,Groundwater,Archaea,Wel15,SRR14366730,Region,Wellington,14.1,6.03,166.25,190.6,135.32,-0.17889
+MGW+22,Groundwater,Archaea,Wel16,SRR14366729,Region,Wellington,16.1,5.51,270.3125,228.6,143.09,-0.180629
+MGW+22,Groundwater,Archaea,Wel17,SRR14366728,Region,Wellington,14.2,6.07,231.875,151.7,98.68,-0.182207
+MGW+22,Groundwater,Archaea,Wel18,SRR14366727,Region,Wellington,14.9,6.54,181.5625,99.5,73.21,-0.189
+MGW+22,Groundwater,Archaea,gwa01,SRR14366812,Region,Canterbury,13.6,6.62,243.75,198.6,176.98,-0.180095
+MGW+22,Groundwater,Archaea,gwa03,SRR14366810,Region,Canterbury,16.9,6.12,231.25,214.4,163.76,-0.1789
+MGW+22,Groundwater,Archaea,gwa04,SRR14366809,Region,Canterbury,16.9,6.12,231.25,214.4,163.76,-0.179432
+MGW+22,Groundwater,Archaea,gwa05,SRR14366808,Region,Canterbury,15.5,6.91,131.25,175.3,170.15,-0.182793
+MGW+22,Groundwater,Archaea,gwa06,SRR14366807,Region,Canterbury,15.5,6.91,131.25,175.3,170.15,-0.179381
+MGW+22,Groundwater,Archaea,gwa07,SRR14366806,Region,Canterbury,15.8,6.17,134.375,211,163.42,-0.182646
+MGW+22,Groundwater,Archaea,gwa08,SRR14366805,Region,Canterbury,15.8,6.17,134.375,211,163.42,-0.179744
+MGW+22,Groundwater,Archaea,gwa09,SRR14366804,Region,Canterbury,14,6.45,128.125,214.6,183.26,-0.16978
+MGW+22,Groundwater,Archaea,gwa10,SRR14366802,Region,Canterbury,14,6.45,128.125,214.6,183.26,-0.178682
+MGW+22,Groundwater,Archaea,gwa11,SRR14366801,Region,Canterbury,13.5,7,115.625,183.6,183.6,-0.179862
+MGW+22,Groundwater,Archaea,gwa12,SRR14366800,Region,Canterbury,13.5,7,115.625,183.6,183.6,-0.177659
+MGW+22,Groundwater,Archaea,gwa13,SRR14366799,Region,Canterbury,14.7,6.73,12.5,191.9,176.48,-0.184626
+MGW+22,Groundwater,Archaea,gwa14,SRR14366798,Region,Canterbury,14.6,6.22,3.125,60,15.47,-0.176207
+MGW+22,Groundwater,Archaea,gwj01,SRR14366797,Region,Canterbury,12.9,6.4,175,210.4,176.35,-0.18228
+MGW+22,Groundwater,Archaea,gwj02,SRR14366795,Region,Canterbury,12.9,6.4,175,210.4,176.35,-0.181472
+MGW+22,Groundwater,Archaea,gwj03,SRR14366793,Region,Canterbury,11.7,6.85,228.125,214.3,205.82,-0.178888
+MGW+22,Groundwater,Archaea,gwj04,SRR14366790,Region,Canterbury,11.7,6.85,228.125,214.3,205.82,-0.180053
+MGW+22,Groundwater,Archaea,gwj05,SRR14366788,Region,Canterbury,11,6.54,138.4375,208.6,182.67,-0.181925
+MGW+22,Groundwater,Archaea,gwj06,SRR14366786,Region,Canterbury,11,6.54,138.4375,208.6,182.67,-0.178655
+MGW+22,Groundwater,Archaea,gwj07,SRR14366784,Region,Canterbury,12.3,6.68,133.4375,198.7,180.58,-0.184415
+MGW+22,Groundwater,Archaea,gwj08,SRR14366782,Region,Canterbury,12.3,6.68,133.4375,198.7,180.58,-0.181016
+MGW+22,Groundwater,Archaea,gwj09,SRR14366779,Region,Canterbury,8.1,6.97,213.4375,202.8,201.13,-0.181191
+MGW+22,Groundwater,Archaea,gwj10,SRR14366776,Region,Canterbury,8.1,6.97,213.4375,202.8,201.13,-0.17946
+MGW+22,Groundwater,Archaea,gwj11,SRR14366774,Region,Canterbury,7.3,7.2,234.375,187.8,198.93,-0.178293
+MGW+22,Groundwater,Archaea,gwj12,SRR14366771,Region,Canterbury,7.3,7.2,234.375,187.8,198.93,-0.180014
+MGW+22,Groundwater,Archaea,gwj13,SRR14366768,Region,Canterbury,10.8,6.66,33.125,197.3,178.14,-0.184292
+MGW+22,Groundwater,Archaea,gwj14,SRR14366765,Region,Canterbury,10.8,6.66,33.125,197.3,178.14,-0.182504
+MGW+22,Groundwater,Archaea,gwj15,SRR14366762,Region,Canterbury,9,6.49,11.5625,129.3,100.75,-0.177632
+MGW+22,Groundwater,Archaea,gwj16,SRR14366758,Region,Canterbury,9,6.49,11.5625,129.3,100.75,-0.177033
+MGW+22,Groundwater,Archaea,Auc01,SRR14366837,Region,Auckland,17.474,7.35,-0.9375,-129.4,-109.22,-0.16049
+MGW+22,Groundwater,Archaea,Auc02,SRR14366836,Region,Auckland,18.271,8.39,-1.875,-200.7,-120.33,-0.175529
+MGW+22,Groundwater,Archaea,Can08,SRR14366835,Region,Canterbury,13.5,6.6,222.1875,186.6,163.85,-0.180957
+MGW+22,Groundwater,Archaea,Wel19,SRR14366834,Region,Wellington,15.7,6.53,157.1875,132.1,105.16,-0.188746
+MGW+22,Groundwater,Archaea,Wel20,SRR14366833,Region,Wellington,13.6,6,21.5625,164.9,108.01,-0.177146
+MGW+22,Groundwater,Archaea,Wel21,SRR14366832,Region,Wellington,14.8,6.35,169.6875,166.7,129.56,-0.180006
 CSW+22,Groundwater,Bacteria,HSB-1,SRR15661623,BTEX,High,19.07,6.74,37.8125,-118,-133.07,-0.160945
 CSW+22,Groundwater,Bacteria,HSB-2,SRR15661619,BTEX,High,17.37,7.06,36.5625,9,12.46,-0.153119
 CSW+22,Groundwater,Bacteria,LB-1,SRR15661622,BTEX,Low,20.04,6.9,35,63,57.18,-0.147553
@@ -1914,6 +2162,54 @@ BSPD17,Sediment,Bacteria,Sediment Intermediate to Anoxic 1,SRR3584401,Type,Sedim
 BSPD17,Sediment,Bacteria,Sediment Anoxic field 1,SRR3584371,Type,Sediment,NA,8.1,NA,114.2,179.27,-0.169254
 BSPD17,Sediment,Bacteria,Sediment Anoxic control 1,SRR3584406,Type,Sediment,NA,8.22,NA,106.75,178.92,-0.181667
 BSPD17,Sediment,Bacteria,Sediment Anoxic to Oxic 1,SRR3584404,Type,Sediment,NA,8.02,NA,130.8,191.14,-0.180967
+RKN+17,Sediment,Bacteria,5BactCH4Atas0-10cm,SRR4436997,Treatment,CH4,NA,7.27,NA,-207,-191.03,-0.152465
+RKN+17,Sediment,Bacteria,6BactCH4Atas0-10cm,SRR4436968,Treatment,CH4,NA,7.27,NA,-207,-191.03,-0.152004
+RKN+17,Sediment,Bacteria,7BactCH4Atas0-10cm,SRR4436999,Treatment,CH4,NA,7.27,NA,-207,-191.03,-0.152769
+RKN+17,Sediment,Bacteria,8BactCH4Atas0-10cm,SRR4436962,Treatment,CH4,NA,7.27,NA,-207,-191.03,-0.152562
+RKN+17,Sediment,Bacteria,9BactFeAtas0-10cm,SRR4436954,Treatment,CH4+Fe,NA,7.54,NA,-257.8,-225.86,-0.151674
+RKN+17,Sediment,Bacteria,10BactFeAtas0-10cm,SRR4436982,Treatment,CH4+Fe,NA,7.54,NA,-257.8,-225.86,-0.151871
+RKN+17,Sediment,Bacteria,11BactFeAtas0-10cm,SRR4436950,Treatment,CH4+Fe,NA,7.54,NA,-257.8,-225.86,-0.153002
+RKN+17,Sediment,Bacteria,12BactFeAtas0-10cm,SRR4436987,Treatment,CH4+Fe,NA,7.54,NA,-257.8,-225.86,-0.150716
+RKN+17,Sediment,Bacteria,1BactMnAtas0-10cm,SRR4436976,Treatment,CH4+Mn,NA,7.75,NA,-236.8,-192.43,-0.15294
+RKN+17,Sediment,Bacteria,2BactMnAtas0-10cm,SRR4436970,Treatment,CH4+Mn,NA,7.75,NA,-236.8,-192.43,-0.15299
+RKN+17,Sediment,Bacteria,3BactMnAtas0-10cm,SRR4436965,Treatment,CH4+Mn,NA,7.75,NA,-236.8,-192.43,-0.152798
+RKN+17,Sediment,Bacteria,4BactMnAtas0-10cm,SRR4436996,Treatment,CH4+Mn,NA,7.75,NA,-236.8,-192.43,-0.153121
+RKN+17,Sediment,Bacteria,15BactCH4Atas10-30cm,SRR4436977,Treatment,CH4,NA,7.09,NA,-146,-140.68,-0.153868
+RKN+17,Sediment,Bacteria,16BactCH4Atas10-30cm,SRR4436998,Treatment,CH4,NA,7.09,NA,-146,-140.68,-0.153874
+RKN+17,Sediment,Bacteria,17BactCH4Atas10-30cm,SRR4436957,Treatment,CH4,NA,7.09,NA,-146,-140.68,-0.153535
+RKN+17,Sediment,Bacteria,18BactCH4Atas10-30cm,SRR4436966,Treatment,CH4,NA,7.09,NA,-146,-140.68,-0.153199
+RKN+17,Sediment,Bacteria,19BactFeAtas10-30cm,SRR4437002,Treatment,CH4+Fe,NA,7.34,NA,-205,-184.89,-0.152876
+RKN+17,Sediment,Bacteria,20BactFeAtas10-30cm,SRR4436994,Treatment,CH4+Fe,NA,7.34,NA,-205,-184.89,-0.154455
+RKN+17,Sediment,Bacteria,21BactFeAtas10-30cm,SRR4436978,Treatment,CH4+Fe,NA,7.34,NA,-205,-184.89,-0.154301
+RKN+17,Sediment,Bacteria,22BactFeAtas10-30cm,SRR4436961,Treatment,CH4+Fe,NA,7.34,NA,-205,-184.89,-0.153097
+RKN+17,Sediment,Bacteria,23BactMnAtas10-30cm,SRR4436975,Treatment,CH4+Mn,NA,7.4,NA,-176.5,-152.84,-0.154687
+RKN+17,Sediment,Bacteria,24BactMnAtas10-30cm,SRR4436995,Treatment,CH4+Mn,NA,7.4,NA,-176.5,-152.84,-0.153684
+RKN+17,Sediment,Bacteria,25BactMnAtas10-30cm,SRR4436960,Treatment,CH4+Mn,NA,7.4,NA,-176.5,-152.84,-0.153954
+RKN+17,Sediment,Bacteria,26BactMnAtas10-30cm,SRR4437003,Treatment,CH4+Mn,NA,7.4,NA,-176.5,-152.84,-0.154916
+RKN+17,Sediment,Archaea,5ArchCHAtas0-10cm,SRR4436951,Treatment,CH4,NA,7.27,NA,-207,-191.03,-0.162747
+RKN+17,Sediment,Archaea,6ArchCHAtas0-10cm,SRR4437000,Treatment,CH4,NA,7.27,NA,-207,-191.03,-0.162093
+RKN+17,Sediment,Archaea,7ArchCHAtas0-10cm,SRR4436985,Treatment,CH4,NA,7.27,NA,-207,-191.03,-0.163694
+RKN+17,Sediment,Archaea,8ArchCHAtas0-10cm,SRR4436967,Treatment,CH4,NA,7.27,NA,-207,-191.03,-0.161889
+RKN+17,Sediment,Archaea,9ArchFeAtas0-10cm,SRR4436956,Treatment,CH4+Fe,NA,7.54,NA,-257.8,-225.86,-0.162476
+RKN+17,Sediment,Archaea,10ArchFeAtas0-10cm,SRR4436955,Treatment,CH4+Fe,NA,7.54,NA,-257.8,-225.86,-0.161621
+RKN+17,Sediment,Archaea,11ArchFeAtas0-10cm,SRR4436980,Treatment,CH4+Fe,NA,7.54,NA,-257.8,-225.86,-0.162677
+RKN+17,Sediment,Archaea,12ArchFeAtas0-10cm,SRR4436953,Treatment,CH4+Fe,NA,7.54,NA,-257.8,-225.86,-0.16105
+RKN+17,Sediment,Archaea,1ArchMnAtas0-10cm,SRR4436971,Treatment,CH4+Mn,NA,7.75,NA,-236.8,-192.43,-0.16171
+RKN+17,Sediment,Archaea,2ArchMnAtas0-10cm,SRR4436988,Treatment,CH4+Mn,NA,7.75,NA,-236.8,-192.43,-0.16249
+RKN+17,Sediment,Archaea,3ArchMnAtas0-10cm,SRR4436992,Treatment,CH4+Mn,NA,7.75,NA,-236.8,-192.43,-0.164046
+RKN+17,Sediment,Archaea,4ArchMnAtas0-10cm,SRR4436993,Treatment,CH4+Mn,NA,7.75,NA,-236.8,-192.43,-0.161447
+RKN+17,Sediment,Archaea,15ArchCHAtas10-30cm,SRR4436963,Treatment,CH4,NA,7.09,NA,-146,-140.68,-0.166402
+RKN+17,Sediment,Archaea,16ArchCHAtas10-30cm,SRR4436990,Treatment,CH4,NA,7.09,NA,-146,-140.68,-0.165491
+RKN+17,Sediment,Archaea,17ArchCHAtas10-30cm,SRR4436973,Treatment,CH4,NA,7.09,NA,-146,-140.68,-0.164807
+RKN+17,Sediment,Archaea,18ArchCHAtas10-30cm,SRR4436952,Treatment,CH4,NA,7.09,NA,-146,-140.68,-0.165287
+RKN+17,Sediment,Archaea,19ArchFeAtas10-30cm,SRR4436984,Treatment,CH4+Fe,NA,7.34,NA,-205,-184.89,-0.166116
+RKN+17,Sediment,Archaea,20ArchFeAtas10-30cm,SRR4436972,Treatment,CH4+Fe,NA,7.34,NA,-205,-184.89,-0.163672
+RKN+17,Sediment,Archaea,21ArchFeAtas10-30cm,SRR4437004,Treatment,CH4+Fe,NA,7.34,NA,-205,-184.89,-0.163976
+RKN+17,Sediment,Archaea,22ArchFeAtas10-30cm,SRR4436969,Treatment,CH4+Fe,NA,7.34,NA,-205,-184.89,-0.166336
+RKN+17,Sediment,Archaea,23ArchMnAtas10-30cm,SRR4436991,Treatment,CH4+Mn,NA,7.4,NA,-176.5,-152.84,-0.165133
+RKN+17,Sediment,Archaea,24ArchMnAtas10-30cm,SRR4436986,Treatment,CH4+Mn,NA,7.4,NA,-176.5,-152.84,-0.164154
+RKN+17,Sediment,Archaea,25ArchMnAtas10-30cm,SRR4436959,Treatment,CH4+Mn,NA,7.4,NA,-176.5,-152.84,-0.16531
+RKN+17,Sediment,Archaea,26ArchMnAtas10-30cm,SRR4436989,Treatment,CH4+Mn,NA,7.4,NA,-176.5,-152.84,-0.165539
 HDZ+19,Sediment,Bacteria,L10S,SRR4995753,Type,Sediment,25,7.21,NA,-225,-212.58,-0.167835
 HDZ+19,Sediment,Bacteria,L10W,SRR4995754,Type,Water,13.52,8.69,150.9375,35.6,131.72,-0.144615
 HDZ+19,Sediment,Bacteria,L1S,SRR4995622,Type,Sediment,25,7.03,NA,-383,-381.23,-0.163851

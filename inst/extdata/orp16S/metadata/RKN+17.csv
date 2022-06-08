@@ -1,0 +1,59 @@
+Name,Run,BioSample,Sample,Description,Year,Domain,Treatment,Depth,pH,"ORP (mV)"
+"Finnish Boreal Lakes",SRR4436944,SAMN05933273,CArchnonAtas10-30cm2012,"Archaea Atasko non incubated 10-30cm",2012,Archaea,non,10-30,NA,NA
+"Finnish Boreal Lakes",SRR4436945,SAMN05933271,SpiArchnonOriv0-25cm2012,"Archaea Orivesi non-incubated 0-25cm",2012,Archaea,non,0-25,NA,NA
+"Finnish Boreal Lakes",SRR4436946,SAMN05933272,LArchnonAtas0-10cm2012,"Archaea Atasko non incubated 0-10cm",2012,Archaea,non,0-10,NA,NA
+"Finnish Boreal Lakes",SRR4436951,SAMN05933549,5ArchCHAtas0-10cm,"Archaea Atasko CH4-treatment 0-10cm",2014,Archaea,CH4,0-10,7.27,-207
+"Finnish Boreal Lakes",SRR4437000,SAMN05933548,6ArchCHAtas0-10cm,"Archaea Atasko CH4-treatment 0-10cm",2014,Archaea,CH4,0-10,7.27,-207
+"Finnish Boreal Lakes",SRR4436985,SAMN05933547,7ArchCHAtas0-10cm,"Archaea Atasko CH4-treatment 0-10cm",2014,Archaea,CH4,0-10,7.27,-207
+"Finnish Boreal Lakes",SRR4436967,SAMN05933546,8ArchCHAtas0-10cm,"Archaea Atasko CH4-treatment 0-10cm",2014,Archaea,CH4,0-10,7.27,-207
+"Finnish Boreal Lakes",SRR4436997,SAMN05933463,5BactCH4Atas0-10cm,"Bacteria L. Atasko CH4-treatment 0-10cm",2014,Bacteria,CH4,0-10,7.27,-207
+"Finnish Boreal Lakes",SRR4436968,SAMN05933462,6BactCH4Atas0-10cm,"Bacteria L. Atasko CH4-treatment 0-10cm",2014,Bacteria,CH4,0-10,7.27,-207
+"Finnish Boreal Lakes",SRR4436999,SAMN05933461,7BactCH4Atas0-10cm,"Bacteria L. Atasko CH4-treatment 0-10cm",2014,Bacteria,CH4,0-10,7.27,-207
+"Finnish Boreal Lakes",SRR4436962,SAMN05933460,8BactCH4Atas0-10cm,"Bacteria L. Atasko CH4-treatment 0-10cm",2014,Bacteria,CH4,0-10,7.27,-207
+"Finnish Boreal Lakes",SRR4436956,SAMN05933545,9ArchFeAtas0-10cm,"Archaea Atasko CH4+Fe3+-treatment 0-10cm",2014,Archaea,CH4+Fe,0-10,7.54,-257.8
+"Finnish Boreal Lakes",SRR4436955,SAMN05933570,10ArchFeAtas0-10cm,"Archaea Atasko CH4+Fe3+-treatment 0-10cm",2014,Archaea,CH4+Fe,0-10,7.54,-257.8
+"Finnish Boreal Lakes",SRR4436980,SAMN05933569,11ArchFeAtas0-10cm,"Archaea Atasko CH4+Fe3+-treatment 0-10cm",2014,Archaea,CH4+Fe,0-10,7.54,-257.8
+"Finnish Boreal Lakes",SRR4436953,SAMN05933568,12ArchFeAtas0-10cm,"Archaea Atasko CH4+Fe3+-treatment 0-10cm",2014,Archaea,CH4+Fe,0-10,7.54,-257.8
+"Finnish Boreal Lakes",SRR4436954,SAMN05933459,9BactFeAtas0-10cm,"Bacteria L. Atasko CH4?treatment 0-10cm",2014,Bacteria,CH4+Fe,0-10,7.54,-257.8
+"Finnish Boreal Lakes",SRR4436982,SAMN05933484,10BactFeAtas0-10cm,"Bacteria L. Atasko CH4?treatment 0-10cm",2014,Bacteria,CH4+Fe,0-10,7.54,-257.8
+"Finnish Boreal Lakes",SRR4436950,SAMN05933483,11BactFeAtas0-10cm,"Bacteria L. Atasko CH4?treatment 0-10cm",2014,Bacteria,CH4+Fe,0-10,7.54,-257.8
+"Finnish Boreal Lakes",SRR4436987,SAMN05933482,12BactFeAtas0-10cm,"Bacteria L. Atasko CH4?treatment 0-10cm",2014,Bacteria,CH4+Fe,0-10,7.54,-257.8
+"Finnish Boreal Lakes",SRR4436971,SAMN05933560,1ArchMnAtas0-10cm,"Archaea Atasko CH4+Mn4+-treatment 0-10cm",2014,Archaea,CH4+Mn,0-10,7.75,-236.8
+"Finnish Boreal Lakes",SRR4436988,SAMN05933552,2ArchMnAtas0-10cm,"Archaea Atasko CH4+Mn4+-treatment 0-10cm",2014,Archaea,CH4+Mn,0-10,7.75,-236.8
+"Finnish Boreal Lakes",SRR4436992,SAMN05933551,3ArchMnAtas0-10cm,"Archaea Atasko CH4+Mn4+-treatment 0-10cm",2014,Archaea,CH4+Mn,0-10,7.75,-236.8
+"Finnish Boreal Lakes",SRR4436993,SAMN05933550,4ArchMnAtas0-10cm,"Archaea Atasko CH4+Mn4+-treatment 0-10cm",2014,Archaea,CH4+Mn,0-10,7.75,-236.8
+"Finnish Boreal Lakes",SRR4436976,SAMN05933474,1BactMnAtas0-10cm,"Bacteria L. Atasko CH4?treatment 0-10cm",2014,Bacteria,CH4+Mn,0-10,7.75,-236.8
+"Finnish Boreal Lakes",SRR4436970,SAMN05933466,2BactMnAtas0-10cm,"Bacteria L. Atasko CH4?treatment 0-10cm",2014,Bacteria,CH4+Mn,0-10,7.75,-236.8
+"Finnish Boreal Lakes",SRR4436965,SAMN05933465,3BactMnAtas0-10cm,"Bacteria L. Atasko CH4?treatment 0-10cm",2014,Bacteria,CH4+Mn,0-10,7.75,-236.8
+"Finnish Boreal Lakes",SRR4436996,SAMN05933464,4BactMnAtas0-10cm,"Bacteria L. Atasko CH4?treatment 0-10cm",2014,Bacteria,CH4+Mn,0-10,7.75,-236.8
+"Finnish Boreal Lakes",SRR4436963,SAMN05933565,15ArchCHAtas10-30cm,"Archaea Atasko CH4-treatment 10-30cm",2014,Archaea,CH4,10-30,7.09,-146
+"Finnish Boreal Lakes",SRR4436990,SAMN05933564,16ArchCHAtas10-30cm,"Archaea Atasko CH4-treatment 10-30cm",2014,Archaea,CH4,10-30,7.09,-146
+"Finnish Boreal Lakes",SRR4436973,SAMN05933563,17ArchCHAtas10-30cm,"Archaea Atasko CH4-treatment 10-30cm",2014,Archaea,CH4,10-30,7.09,-146
+"Finnish Boreal Lakes",SRR4436952,SAMN05933562,18ArchCHAtas10-30cm,"Archaea Atasko CH4-treatment 10-30cm",2014,Archaea,CH4,10-30,7.09,-146
+"Finnish Boreal Lakes",SRR4436977,SAMN05933479,15BactCH4Atas10-30cm,"Bacteria L. Atasko CH4-treatment 10-30cm",2014,Bacteria,CH4,10-30,7.09,-146
+"Finnish Boreal Lakes",SRR4436998,SAMN05933478,16BactCH4Atas10-30cm,"Bacteria L. Atasko CH4-treatment 10-30cm",2014,Bacteria,CH4,10-30,7.09,-146
+"Finnish Boreal Lakes",SRR4436957,SAMN05933477,17BactCH4Atas10-30cm,"Bacteria L. Atasko CH4-treatment 10-30cm",2014,Bacteria,CH4,10-30,7.09,-146
+"Finnish Boreal Lakes",SRR4436966,SAMN05933476,18BactCH4Atas10-30cm,"Bacteria L. Atasko CH4-treatment 10-30cm",2014,Bacteria,CH4,10-30,7.09,-146
+"Finnish Boreal Lakes",SRR4436984,SAMN05933561,19ArchFeAtas10-30cm,"Archaea Atasko CH4+Fe3+-treatment 10-30cm",2014,Archaea,CH4+Fe,10-30,7.34,-205
+"Finnish Boreal Lakes",SRR4436972,SAMN05933559,20ArchFeAtas10-30cm,"Archaea Atasko CH4+Fe3+-treatment 10-30cm",2014,Archaea,CH4+Fe,10-30,7.34,-205
+"Finnish Boreal Lakes",SRR4437004,SAMN05933558,21ArchFeAtas10-30cm,"Archaea Atasko CH4+Fe3+-treatment 10-30cm",2014,Archaea,CH4+Fe,10-30,7.34,-205
+"Finnish Boreal Lakes",SRR4436969,SAMN05933557,22ArchFeAtas10-30cm,"Archaea Atasko CH4+Fe3+-treatment 10-30cm",2014,Archaea,CH4+Fe,10-30,7.34,-205
+"Finnish Boreal Lakes",SRR4437002,SAMN05933475,19BactFeAtas10-30cm,"Bacteria L. Atasko CH4?treatment 10-30cm",2014,Bacteria,CH4+Fe,10-30,7.34,-205
+"Finnish Boreal Lakes",SRR4436994,SAMN05933473,20BactFeAtas10-30cm,"Bacteria L. Atasko CH4?treatment 10-30cm",2014,Bacteria,CH4+Fe,10-30,7.34,-205
+"Finnish Boreal Lakes",SRR4436978,SAMN05933472,21BactFeAtas10-30cm,"Bacteria L. Atasko CH4?treatment 10-30cm",2014,Bacteria,CH4+Fe,10-30,7.34,-205
+"Finnish Boreal Lakes",SRR4436961,SAMN05933471,22BactFeAtas10-30cm,"Bacteria L. Atasko CH4?treatment 10-30cm",2014,Bacteria,CH4+Fe,10-30,7.34,-205
+"Finnish Boreal Lakes",SRR4436991,SAMN05933556,23ArchMnAtas10-30cm,"Archaea Atasko CH4+Mn4+-treatment 10-30cm",2014,Archaea,CH4+Mn,10-30,7.4,-176.5
+"Finnish Boreal Lakes",SRR4436986,SAMN05933555,24ArchMnAtas10-30cm,"Archaea Atasko CH4+Mn4+-treatment 10-30cm",2014,Archaea,CH4+Mn,10-30,7.4,-176.5
+"Finnish Boreal Lakes",SRR4436959,SAMN05933554,25ArchMnAtas10-30cm,"Archaea Atasko CH4+Mn4+-treatment 10-30cm",2014,Archaea,CH4+Mn,10-30,7.4,-176.5
+"Finnish Boreal Lakes",SRR4436989,SAMN05933553,26ArchMnAtas10-30cm,"Archaea Atasko CH4+Mn4+-treatment 10-30cm",2014,Archaea,CH4+Mn,10-30,7.4,-176.5
+"Finnish Boreal Lakes",SRR4436975,SAMN05933470,23BactMnAtas10-30cm,"Bacteria L. Atasko CH4?treatment 10-30cm",2014,Bacteria,CH4+Mn,10-30,7.4,-176.5
+"Finnish Boreal Lakes",SRR4436995,SAMN05933469,24BactMnAtas10-30cm,"Bacteria L. Atasko CH4?treatment 10-30cm",2014,Bacteria,CH4+Mn,10-30,7.4,-176.5
+"Finnish Boreal Lakes",SRR4436960,SAMN05933468,25BactMnAtas10-30cm,"Bacteria L. Atasko CH4?treatment 10-30cm",2014,Bacteria,CH4+Mn,10-30,7.4,-176.5
+"Finnish Boreal Lakes",SRR4437003,SAMN05933467,26BactMnAtas10-30cm,"Bacteria L. Atasko CH4?treatment 10-30cm",2014,Bacteria,CH4+Mn,10-30,7.4,-176.5
+"Finnish Boreal Lakes",SRR4436958,SAMN05933567,13ArchnonAtas0-10cm,"Archaea Atasko non-incubated 0-10cm",2014,Archaea,non,0-10,NA,NA
+"Finnish Boreal Lakes",SRR4436981,SAMN05933481,13BactnonAtas0-10cm,"Bacteria L. Atasko non-incubated 0-10cm",2014,Bacteria,non,0-10,NA,NA
+"Finnish Boreal Lakes",SRR4436979,SAMN05933566,14ArchnonAtas10-30cm,"Archaea Atasko non-incubated 10-30cm",2014,Archaea,non,10-30,NA,NA
+"Finnish Boreal Lakes",SRR4436964,SAMN05933480,14BactnonAtas10-30cm,"Bacteria L. Atasko non-incubated 10-30cm",2014,Bacteria,non,10-30,NA,NA
+"Finnish Boreal Lakes",SRR4436947,SAMN05933503,LBactnonAtas0-10cm,"Bacteria L.Atasko non-incubated 0-10cm 2012",2014,Bacteria,non,0-10,NA,NA
+"Finnish Boreal Lakes",SRR4436948,SAMN05933504,CBactnonAtas10-30cm,"Bacteria L.Atasko non-incubated 10-30cm 2012",2014,Bacteria,non,10-30,NA,NA
+"Finnish Boreal Lakes",SRR4436949,SAMN05933502,SpiBactnonOriv0-25cm,"Bacteria L.Orivesi non-incubated 0-25cm 2012",2014,Bacteria,non,0-25,NA,NA

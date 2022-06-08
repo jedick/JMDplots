@@ -11,7 +11,10 @@ GSBT20_Postfilter,"Port Microbes (Postfilter)",River & Seawater,Archaea,19,70.3,
 WHL+21,"Bahe River",River & Seawater,Bacteria,52,-106.56,192.61,-0.00361357,-0.155479,-0.0348955,0.805997
 LXH+20,"Lancang River",River & Seawater,Bacteria,17,255.42,331,0.0521097,-0.171722,0.17291,0.506915
 JVW+20,"Lagoon of Venice",River & Seawater,Bacteria,17,297.81,636.72,-0.0059483,-0.15811,-0.10187,0.697245
+ZLH+22a,"Nu River",River & Seawater,Bacteria,20,297.32,584.67,-0.00389352,-0.154789,-0.0716784,0.763947
 ZZL+21,"Maozhou River",River & Seawater,Bacteria,54,-88.7,238.87,0.117259,-0.163197,0.546595,1.90282e-05
+LWJ+21,"Plastisphere",River & Seawater,Bacteria,72,115.41,307.58,-0.000553202,-0.14766,-0.00517361,0.965597
+LWJ+21,"Plastisphere",River & Seawater,Archaea,16,158.65,292.3,0.0259132,-0.133936,0.399003,0.125781
 GZL21,"Three Gorges Reservoir",River & Seawater,Bacteria,50,184.58,398.37,-0.0477532,-0.13431,-0.238839,0.0948391
 SAR+13,"Microbial Mat, Kiritimati Atoll",Lake & Pond,Bacteria,22,-161.52,-2,0.217449,-0.128877,0.961509,1.09876e-12
 SAR+13,"Microbial Mat, Kiritimati Atoll",Lake & Pond,Archaea,25,-161.52,-2,0.335373,-0.0864853,0.955623,1.06307e-13
@@ -84,6 +87,8 @@ JDP+20,"Zoovch Ovoo Uranium Deposit",Groundwater,Bacteria,8,55.21,418.73,0.02260
 GWS+19,"Golmud, Qaidam Basin",Groundwater,Bacteria,11,-23.62,254.05,-0.0144999,-0.152334,-0.123812,0.716837
 SRM+21,"Lower Chao Praya Basin",Groundwater,Bacteria,13,-91.16,180.2,-0.00928468,-0.146086,-0.119304,0.697864
 ZCZ+21,"Po Plain",Groundwater,Bacteria,18,-89.37,416.75,-0.0134,-0.153228,-0.362736,0.139031
+MGW+22,"New Zealand Aquifers",Groundwater,Bacteria,71,-133.9,205.82,0.00721335,-0.14844,0.149725,0.212671
+MGW+22,"New Zealand Aquifers",Groundwater,Archaea,69,-133.9,205.82,-0.0179169,-0.177386,-0.312071,0.00904262
 CSW+22,"Ordos Basin Groundwater",Groundwater,Bacteria,6,-133.07,169.56,-0.0341046,-0.155237,-0.432678,0.391484
 GXS+22,"Linzhou-Anyang Groundwater",Groundwater,Bacteria,14,61.58,191.58,0.0362371,-0.159477,0.221914,0.445764
 GXS+22,"Linzhou-Anyang Groundwater",Groundwater,Archaea,4,110.58,191.58,-0.00806068,-0.187441,-0.252933,0.747067
@@ -95,6 +100,8 @@ ZML+17,"Mai Po Wetland",Sediment,Archaea,33,-41.62,379.07,-0.0332503,-0.174968,-
 BYB+17,"Great Salt Lake",Sediment,Bacteria,8,-200.17,47.8,0.00674465,-0.158022,0.119524,0.778018
 BYB+17,"Great Salt Lake",Sediment,Archaea,8,-200.17,47.8,0.0787336,-0.086697,0.257876,0.537491
 BSPD17,"Baltic Sea Swedish Coast",Sediment,Bacteria,28,39.42,227.05,0.129035,-0.191306,0.319357,0.0976134
+RKN+17,"Finnish Boreal Lakes",Sediment,Bacteria,24,-225.86,-140.68,-0.0253403,-0.157734,-0.72373,6.40948e-05
+RKN+17,"Finnish Boreal Lakes",Sediment,Archaea,24,-225.86,-140.68,-0.0446353,-0.171849,-0.748367,2.605e-05
 HDZ+19,"Honghu Lake",Sediment,Bacteria,28,-381.23,160.96,0.0297409,-0.155106,0.831067,4.35892e-08
 TCN+17,"Hydrocarbonoclastic Bioreactors",Sediment,Bacteria,19,-382,254,0.0314367,-0.160892,0.500598,0.0290346
 OHL+18_DNA,"Marine and Freshwater Sediments (DNA)",Sediment,Bacteria,33,-82.25,328.49,0.0167036,-0.154764,0.722814,2.02786e-06
