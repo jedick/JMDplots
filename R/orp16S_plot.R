@@ -8,13 +8,15 @@
 # Use 'groupby' (name of column with sample groups) and 'groups' (names of sample groups) to apply the pch and col to individual samples
 plotEZ <- function(study, lineage = NULL, mincount = 100, pch = NULL, col = NULL, add = FALSE, type = "p", groupby = NULL, groups = NULL,
   legend.x = "topleft", show = c("lm", "points"), col.line = "gray62", lwd = 1, cex = 1, title.line = NA,
-  dxlim = c(0, 0), dylim = c(0, 0), size = NULL, slope.legend = NULL) {
+  dxlim = c(0, 0), dylim = c(0, 0), size = NULL, slope.legend = NULL, ylim = NULL, ylab = cplab$ZC) {
 
   if(identical(lineage, "two")) {
     # Make two plots for studies that have Bacteria and Archaea 20210913
-    out1 <- plotEZ(study, "Bacteria", mincount, pch, col, add, type, groupby, groups, legend.x, show, col.line, lwd, cex, title.line, dxlim, dylim, size)
+    out1 <- plotEZ(study, "Bacteria", mincount, pch, col, add, type, groupby, groups, legend.x, show, col.line, lwd, cex, title.line,
+                   dxlim, dylim, size, ylim, ylab = ylab)
     # Don't show legend on second (Archaea) plot 20210914
-    out2 <- plotEZ(study, "Archaea", mincount, pch, col, add, type, groupby, groups, legend.x = NA, show, col.line, lwd, cex, title.line, dxlim, dylim, size)
+    out2 <- plotEZ(study, "Archaea", mincount, pch, col, add, type, groupby, groups, legend.x = NA, show, col.line, lwd, cex, title.line,
+                   dxlim, dylim, size, ylim, ylab = ylab)
     out <- c(out1, out2)
     return(invisible(out))
   }
@@ -108,9 +110,9 @@ plotEZ <- function(study, lineage = NULL, mincount = 100, pch = NULL, col = NULL
   if(!add) {
     # Calculate x- and y-limits (with adjustment from arguments) 20220511
     xlim <- range(EZdat$Eh7) + dxlim
-    ylim <- range(EZdat$ZC) + dylim
+    if(is.null(ylim)) ylim <- range(EZdat$ZC) + dylim
     # Start new plot
-    plot(EZdat$Eh7, EZdat$ZC, xlab = "", ylab = cplab$ZC, type = "n", xlim = xlim, ylim = ylim)
+    plot(EZdat$Eh7, EZdat$ZC, xlab = "", ylab = ylab, type = "n", xlim = xlim, ylim = ylim)
     # Draw x-axis label with mtext to avoid getting cut off by small margin 20220517
     mtext("Eh7 (mV)", side = 1, line = par("mgp")[1], cex = par("cex"))
     if(!is.null(title.line)) {

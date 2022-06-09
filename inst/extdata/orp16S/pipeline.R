@@ -60,7 +60,6 @@ writeLines(con = file, text = gsub(" ", "", c(
 
   ## For orp16S paper 20210922
   "MLL+19, TRUE, 250",
-  "RSJ+21, FALSE, 290",
   "RMB+17, FALSE, 250",
   "SBP+20, FALSE, 250",
   "MWY+21, FALSE, 250",
@@ -88,7 +87,6 @@ writeLines(con = file, text = gsub(" ", "", c(
   "WFB+21, FALSE, 440",
   "KLM+16, NA, NA",
   "LMBA21, TRUE, 280",
-  "ZZZ+18, TRUE, 240",
   "BSPD17, FALSE, 400",
   "CWC+20, FALSE, 440",
   "BMOB18, TRUE, 350",
@@ -112,21 +110,17 @@ writeLines(con = file, text = gsub(" ", "", c(
   "HCW+22, TRUE, 240",
   "WKP+22, FALSE, 450",
   "CKB+22, FALSE, 290",
-  "ZWH+22, FALSE, 440",
   "WHLH21a, FALSE, 450",
-  "CYG+22, TRUE, 360",
   "PSB+21, FALSE, 250",
   "RKSK22, FALSE, 295",
   "WLJ+16, TRUE, 200",
-  "JZS+20, TRUE, 290",
-  "XKL+21, NA, NA",
 
   # 20220528-20220608
   "OHL+18, TRUE, 250",
   "LLS+22, FALSE, 450",
   "MGW+22, FALSE, 290",
   "RKN+17, TRUE, 300",
-  "ZLH+22a, FALSE, 290",
+  "ZLH+22, FALSE, 290",
   "WZW+21, FALSE, 290",
   "LWJ+21, FALSE, 250"
 
@@ -175,9 +169,8 @@ filter <- function(RUNID) {
   # The output file from this function is a FASTA file with .fa suffix
   outfile <- paste0(RUNID, ".fa")
 
-  if(study %in% c("WLJ+16", "XKL+21")) {
+  if(study %in% c("WLJ+16")) {
     # For WLJ+16, FASTQ files were downloaded from SRA cloud 20220521
-    # For XKL+21, files were downloaded from MG-RAST 20220522
     fqdump <- FALSE
   } else {
     # Generate input FASTQ files with fastq-dump
@@ -187,7 +180,7 @@ filter <- function(RUNID) {
     system(cmd)
   }
 
-  if(study %in% c("XKL+21")) {
+  if(study %in% c("XXXXXX")) {
     # These are files from MG-RAST (.fasta suffix)
     # Prefix MG-RAST ID to header so we can extract the reads in the subsample() and findchimeras() steps 20211004
     fastafile <- paste0(RUNID, ".fasta")

@@ -569,23 +569,6 @@ utegig5 <- function(pdf = FALSE) {
   layout(matrix(1:8, nrow = 2), widths = c(2.5, 4, 4, 1.5))
   par(mar = c(4, 4, 3, 1))
   
-  # Function to add significant difference letters 20220531
-  cldfun <- function(ZClist, bp) {
-    # Ugly one-liner to turn a list into a data frame with "group" column taken from names of the list elements
-    ZCdat <- do.call(rbind, sapply(1:length(ZClist), function(i) data.frame(group = names(ZClist)[i], ZC = ZClist[[i]]), simplify = FALSE))
-    # One-way ANOVA and Tukey's Honest Significant Differences
-    # Adapted from https://statdoe.com/one-way-anova-and-box-plot-in-r/
-    anova <- aov(ZC ~ group, data = ZCdat)
-    tukey <- TukeyHSD(anova)
-    # Compact letter display
-    cld <- multcompLetters4(anova, tukey, reversed = TRUE)$group$Letters
-    # Get into same order as data
-    cld <- cld[match(names(ZClist), names(cld))]
-    # Add to plot
-    n <- length(ZClist)
-    text((1:n) + 0.35, bp$stats[4, ] + 0.0045, cld)
-  }
-
   # Faded colors
   col4 <- addalpha(4, "b0")
   col2 <- addalpha(2, "b0")
@@ -623,7 +606,7 @@ utegig5 <- function(pdf = FALSE) {
       names(ZClist) <- paste0(names(ZClist), "\n(", sapply(ZClist, length), ")")
       bp <- boxplot(ZClist, ylab = ZClab, col = col, ylim = ylim, names = character(2))
       axis(1, at = 1:2, labels = names(ZClist), line = 1, lwd = 0)
-      cldfun(ZClist, bp)
+      cldfun(ZClist, bp, dy = 0.0045)
       text(1, -0.12, "Anoxic\nhabitats", font = 2, cex = 0.8)
       text(2, -0.12, "Anoxic\nand oxic\nhabitats", font = 2, cex = 0.8)
       abline(v = 1.5, lty = 2, lwd = 1.5, col = 8)
@@ -643,7 +626,7 @@ utegig5 <- function(pdf = FALSE) {
       axis(1, at = 1:4, labels = names(ZClist), line = 1, lwd = 0)
       # Names with "-" confuse multcompLetters4()
       names(ZClist) <- gsub("-", "", names(ZClist))
-      cldfun(ZClist, bp)
+      cldfun(ZClist, bp, dy = 0.0045)
       text(1.5, -0.12, "Anaerobic", font = 2, cex = 0.8)
       text(3.2, -0.11, "Anaerobic\nand aerobic", font = 2, cex = 0.8)
       abline(v = 2.5, lty = 2, lwd = 1.5, col = 8)
@@ -671,7 +654,7 @@ utegig5 <- function(pdf = FALSE) {
       names(ZClist) <- groupnames
       names(ZClist) <- paste0(names(ZClist), "\n(", sapply(ZClist, length), ")")
       bp <- boxplot(ZClist, ylab = ZClab, col = col, ylim = ylim, names = character(4))
-      cldfun(ZClist, bp)
+      cldfun(ZClist, bp, dy = 0.0045)
       axis(1, at = 1:4, labels = names(ZClist), line = 1, lwd = 0, gap.axis = 0)
       text(0.9, -0.12, "Pre-GOE\nemergence", font = 2, cex = 0.8)
       text(2.1, -0.12, "Post-GOE\nemergence", font = 2, cex = 0.8)

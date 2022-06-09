@@ -4,15 +4,15 @@
 # Group studies by environment types 20210828
 envirotype <- list(
   "River & Seawater" = c("MLL+18", "HXZ+20", "GSBT20_Prefilter", "GSBT20_Postfilter", "WHL+21", "ZLH+22", "ZZL+21", "LWJ+21", "GZL21"),
-  "Lake & Pond" = c("SAR+13", "LLC+19", "BCA+21", "HLZ+18", "BWD+19", "RSJ+21", "IBK+22", "NLE+21", "SPA+21"),
-  "Groundwater" = c("KLM+16", "WLJ+16", "XKL+21", "SRM+19", "APV+20", "YHK+20", "JZS+20", "SRM+21", "ZCZ+21", "MGW+22"),
+  "Lake & Pond" = c("SAR+13", "LLC+19", "BCA+21", "HLZ+18", "BWD+19", "IBK+22", "NLE+21", "SPA+21"),
+  "Groundwater" = c("KLM+16", "WLJ+16", "SRM+19", "APV+20", "YHK+20", "SRM+21", "ZCZ+21", "MGW+22"),
   # NOTE: Keep Hot Spring in 4th location to get red color 20210904
   "Hot Spring" = c("PCL+18_Acidic", "PCL+18_Alkaline", "BMJ+19", "GWS+20", "PBU+20", "MWY+21"),
   "Hyperalkaline" = c("SBP+20", "RMB+17", "CTS+17", "PSB+21"),
   "Sediment" = c("ZML+17", "BSPD17", "RKN+17", "HDZ+19", "OHL+18_DNA", "WHLH21", "RSS+18", "CLS+19", "HSF+19", "ZHZ+19",
                  "LMBA21_2017", "HSF+22", "ZZLL21", "WZW+21", "WFB+21", "LLS+22", "HCW+22"),
-  "Soil" = c("MLL+19", "BMOB18", "ZZZ+18", "WHLH21a", "CWC+20", "PSG+20", "XLD+20", "LJC+20", "DTJ+20", "ZWH+22",
-             "RKSK22", "DLS21_Bulk", "WKP+22", "CYG+22", "CKB+22")
+  "Soil" = c("MLL+19", "BMOB18", "WHLH21a", "CWC+20", "PSG+20", "XLD+20", "LJC+20", "DTJ+20", "RKSK22", "DLS21_Bulk",
+             "WKP+22", "CKB+22")
 )
 # Turn the list into a data frame for easier lookup 20210904
 envirodat <- do.call(rbind, lapply(seq_along(envirotype), function(i) data.frame(study = envirotype[[i]], groupnum = i)))
@@ -184,7 +184,6 @@ orp16S3 <- function(pdf = FALSE) {
     "BCA+21, 46.3615, 25.0509", # SAMN07409474
     "HLZ+18, 24.795, 118.138", # SAMN07638080
     "BWD+19, 47.120571, -88.545425", # SAMN09980099
-    "RSJ+21, 61.833, 24.283", # Materials and methods
     "IBK+22, 53.1516, 13.0262", # SAMN15366194
     "NLE+21, 32.833, 35.583", # SAMEA7280991
     "SPA+21, 45.8126, 8.7401", # SAMN17524543
@@ -202,27 +201,22 @@ orp16S3 <- function(pdf = FALSE) {
     ## Soil - put this group before Groundwater and Sediment for clearer visualization in GBA 20210927
     "MLL+19, 26.1, 112.5", # Materials and methods
     "BMOB18, 40.60842, -74.19258", # SAMN07828017  ### Laboratory
-    "ZZZ+18, 21.816, 112.464", # Materials and methods  ### Laboratory
     "WHLH21a, 37.53, 105.03", # Materials and methods
     "CWC+20, 28.226, 116.898", # Materials and methods  ### Laboratory
     "PSG+20, 36.61, -119.53", # Web search for Parlier, CA   ### Mesocosm
     "XLD+20, 27.35, 112.05", # Materials and methods   ### Laboratory
     # LJC+20 see below
     "DTJ+20, 26.45, 111.52", # SAMN14332759   ### Laboratory
-    "ZWH+22, 29.18, 119.28", # SAMN16191137   ### Laboratory
     "RKSK22, 31.97283, -81.0304", # SAMN16678415
     "DLS21_Bulk, 39.39, -75.44", # SAMN17245435  ### Mesocosm
     "WKP+22, 53.29, 17.79", # SAMN23457780
-    "CYG+22, 31.035, 118.8367", # Wikipedia Nanjing Agricultural University   ### Laboratory
     "CKB+22, 37.8635, 138.9426", # Wikipedia Niigata University   ### Laboratory
     ## Groundwater
     "KLM+16, 42.99, -82.30", # SAMN04423023
     "WLJ+16, 41, 107", # SAMN05938707
-    "XKL+21, 41.0025, 106.9664", # Materials and methods
     "SRM+19, 12.67417, 101.3889", # Materials and methods
     "APV+20, 20.12, -99.23", # Materials and methods
     "YHK+20, 51.209467, 10.791968", # SAMEA5714424
-    "JZS+20, 39.89, 116.49", # SAMN10531952
     "SRM+21, 14.83, 99.35", # SAMN14829351
     "ZCZ+21, 45.21, 9.57", # Table 1
     "MGW+22, -36.849, 174.769", # Wikipedia University of Auckland
@@ -279,15 +273,15 @@ orp16S3 <- function(pdf = FALSE) {
     # Sediment
     "BSPD17", "RKN+17", "ZHZ+19", "WZW+21", "WFB+21", "HCW+22",
     # Soil
-    "BMOB18", "ZZZ+18", "CWC+20", "PSG+20", "XLD+20", "DTJ+20",
-    "ZWH+22", "DLS21_Bulk", "CYG+22", "CKB+22"
+    "BMOB18", "CWC+20", "PSG+20", "XLD+20", "DTJ+20",
+    "DLS21_Bulk", "CKB+22"
   )
   pch <- ifelse(coords$study %in% lab, 15, 19)
   # Use smaller points for high-density regions 20210915
   cex <- ifelse(coords$study %in% c(
     "MLL+19", "XLD+20", "DTJ+20", # Hunan
-    "ZZL+21", "MLL+18", "ZML+17", "ZZLL21", "ZZZ+18", "ZHZ+19", "WHLH21", # GD-HK-MO GBA
-    "CYG+22", "CLS+19", "ZWH+22", "HCW+22", # Jiangsu-Gansu-Zhejiang
+    "ZZL+21", "MLL+18", "ZML+17", "ZZLL21", "ZHZ+19", "WHLH21", # GD-HK-MO GBA
+    "CLS+19", "HCW+22", # Jiangsu-Gansu-Zhejiang
     "WZW+21" # Mongolia
   ), 1.5, 2.5)
   # Plot sample locations
@@ -658,7 +652,6 @@ orp16S_S2 <- function(pdf = FALSE) {
     plotEZ("BCA+21", "Bacteria", groupby = "Month", groups = c("Jul", "Nov", "Feb", "Apr")),
     plotEZ("HLZ+18", "Bacteria", groupby = "Type", groups = c("Reservoir", "Pond"), legend.x = "bottomright"),
     plotEZ("BWD+19", "Bacteria", groupby = "Cover", groups = c("Ice", "Ice Free"), legend.x = "bottomright"),
-    plotEZ("RSJ+21", "two", groupby = "Lake", groups = c("Kuiva", "Lovo"), legend.x = "topright"),
     plotEZ("IBK+22", "two", groupby = "Land Use", groups = c("Arable", "Forest", "Grassland")),
     plotEZ("NLE+21", "Bacteria", groupby = "Year", groups = c("2017", "2018"), legend.x = "bottomleft"),
     plotEZ("SPA+21", "Bacteria", groupby = "Depth", groups = c("Epi", "Secchi", "Meso"), legend.x = "bottomleft"),
@@ -680,11 +673,9 @@ orp16S_S2 <- function(pdf = FALSE) {
     message("\nGroundwater"),
     plotEZ("KLM+16", "Bacteria", groupby = "Day", groups = c(-1, 246, 448, 671)),
     plotEZ("WLJ+16", "two", groupby = "Arsenic", groups = c("As < 100 \u03BCg/L", "As > 100 \u03BCg/L")),
-    plotEZ("XKL+21", "Bacteria"),
     plotEZ("SRM+19", "Bacteria", groupby = "Land Use", groups = c("Agriculture", "Community", "Landfill", "Mine")),
     plotEZ("APV+20", "two", groupby = "Type", groups = c("Piezometer", "Well", "Spring"), legend.x = "bottomleft"),
     plotEZ("YHK+20", "Bacteria", groupby = "Location", groups = c("Upper Hillslope", "Middle Slope", "Lower Footslope"), dylim = c(0, 0.005)),
-    plotEZ("JZS+20", "two", groupby = "Well", groups = c("BJ2", "BJ12", "BJ20")),
     plotEZ("SRM+21", "Bacteria", groupby = "Depth", groups = c("Surface", "Shallow", "Deep"), legend.x = "bottomleft"),
     plotEZ("ZCZ+21", "Bacteria", groupby = "Location", groups = c("LO", "CR1", "MN", "VA", "BS", "CR2"), legend.x = "topright"),
     plotEZ("MGW+22", "two", groupby = "Region", groups = c("Auckland", "Canterbury", "Taupo", "Wellington"), legend.x = "bottomleft", dylim = c(-0.006, 0)),
@@ -715,7 +706,6 @@ orp16S_S2 <- function(pdf = FALSE) {
     message("\nSoil"),
     plotEZ("MLL+19", "two", groupby = "Type", groups = c("Upland", "Paddy", "Sediment")),
     plotEZ("BMOB18", "two", groupby = "Treatment", groups = c("Acetate", "No amendment", "Pre-incubation"), dxlim = c(-50, 0)),
-    plotEZ("ZZZ+18", "two", groupby = "Treatment", groups = c("None", "AQDS", "Biochar"), legend.x = "bottomleft", dxlim = c(-50, 0)),
     plotEZ("WHLH21a", "Bacteria", groupby = "Stage", groups = c("Algae", "Cyanolichen", "Chlorolichen", "Moss"), legend.x = "bottomright"),
     plotEZ("CWC+20", "Bacteria", groupby = "Management", groups = c("Flooding", "Draining"), legend.x = "bottomright"),
     plotEZ("PSG+20", "two", groupby = "Treatment", groups = c("Initial", "NCC", "RB", "RGP", "TP"), legend.x = "bottomright"),
@@ -723,12 +713,9 @@ orp16S_S2 <- function(pdf = FALSE) {
            legend.x = "bottomright", dylim = c(-0.022, 0)),
     plotEZ("LJC+20", "Bacteria", groupby = "meanT", groups = c("MAT >= 21.5 degC", "MAT < 21.5 degC"), dylim = c(0, 0.005)),
     plotEZ("DTJ+20", "Bacteria", groupby = "Zone", groups = c("Bulk Soil", "Mature", "Elongation", "Tip")),
-    plotEZ("ZWH+22", "Bacteria", groupby = "Treatment", groups = c("Control", "Flooded", "Flooded + 0.5% silkworm excrement", "Flooded + 1% silkworm excrement"),
-           legend.x = "bottomright", dylim = c(-0.005, 0)),
     plotEZ("RKSK22", "two", groupby = "Compartment", groups = c("Bulk sediment", "Rhizosphere", "Root"), legend.x = "bottomright"),
     plotEZ("DLS21_Bulk", "Bacteria", groupby = "Treatment", groups = c("control", "char", "silicate", "husk")),
     plotEZ("WKP+22", "Bacteria", groupby = "Type", groups = c("Intercropping", "Monoculture"), legend.x = "bottomleft"),
-    plotEZ("CYG+22", "two", groupby = "Soil", groups = c("Fengyang", "Tancheng", "Shuyang")),
     plotEZ("CKB+22", "two", groupby = "Treatment", groups = c("FM 5 Mg/ha", "FM 10 Mg/ha", "RS 5 Mg/ha", "RS 10 Mg/ha"), legend.x = "bottomright")
 
   )
@@ -927,13 +914,13 @@ getmdat_orp16S <- function(study, metrics = NULL, dropNA = TRUE, size = NULL, qu
     shortstudy <- "OHL+18"
   }
   if(shortstudy %in% c(
-    "MLL+19", "HXZ+20", "BCA+21", "RSJ+21", "RMB+17", "SBP+20", "MWY+21", "SAR+13", "CTS+17", "HDZ+19",
-    "ZHZ+19", "YHK+20", "BMJ+19", "SRM+19", "HLZ+18", "XLD+20", "PSG+20", "ZCZ+21", "ZZL+21", "PBU+20", 
-    "SRM+21", "MLL+18", "BWD+19", "WHL+21", "HSF+19", "ZML+17", "DTJ+20", "WFB+21", "KLM+16", "LMBA21",
-    "ZZZ+18", "BSPD17", "CWC+20", "BMOB18", "LJC+20", "DLS21", "ZZLL21", "GWS+20", "CLS+19", "GZL21",
-    "LLC+19", "NLE+21", "APV+20", "WHLH21", "PCL+18", "GSBT20", "SPA+21", "IBK+22", "HSF+22", "HCW+22",
-    "WKP+22", "CKB+22", "ZWH+22", "WHLH21a", "CYG+22", "RSS+18", "PSB+21", "RKSK22", "WLJ+16", "JZS+20",
-    "XKL+21", "OHL+18", "LLS+22", "WZW+21", "ZLH+22", "LWJ+21", "MGW+22", "RKN+17"
+    "MLL+19", "HXZ+20", "BCA+21", "RMB+17", "SBP+20", "MWY+21", "SAR+13", "CTS+17", "HDZ+19", "ZHZ+19",
+    "YHK+20", "BMJ+19", "SRM+19", "HLZ+18", "XLD+20", "PSG+20", "ZCZ+21", "ZZL+21", "PBU+20", "SRM+21",
+    "MLL+18", "BWD+19", "WHL+21", "HSF+19", "ZML+17", "DTJ+20", "WFB+21", "KLM+16", "LMBA21", "BSPD17",
+    "CWC+20", "BMOB18", "LJC+20", "DLS21", "ZZLL21", "GWS+20", "CLS+19", "GZL21", "LLC+19", "NLE+21",
+    "APV+20", "WHLH21", "PCL+18", "GSBT20", "SPA+21", "IBK+22", "HSF+22", "HCW+22", "WKP+22", "CKB+22",
+    "WHLH21a", "RSS+18", "PSB+21", "RKSK22", "WLJ+16", "OHL+18", "LLS+22", "WZW+21", "ZLH+22", "LWJ+21",
+    "MGW+22", "RKN+17"
   )) {
     # General processing of metadata for orp16S datasets 20210820
     # Get Eh or ORP values (uses partial name matching, can match a column named "Eh (mV)")
@@ -1126,11 +1113,23 @@ orp16S_info <- function(study) {
   metrics.Bac <- try(getmetrics_orp16S(study, lineage = "Bacteria"), TRUE)
   if(inherits(metrics.Bac, "try-error")) nBac <- 0 else {
     mdat.Bac <- getmdat_orp16S(study, metrics.Bac)
+    if("Domain" %in% colnames(mdat.Bac$metadata)) {
+      # Only keep runs labeled as "Bacteria" 20220609
+      idomain <- mdat.Bac$metadata$Domain == "Bacteria"
+      mdat.Bac$metadata <- mdat.Bac$metadata[idomain, , drop = FALSE]
+      mdat.Bac$metrics <- mdat.Bac$metrics[idomain, , drop = FALSE]
+    }
     nBac <- nrow(mdat.Bac$metrics)
   }
   metrics.Arc <- try(getmetrics_orp16S(study, lineage = "Archaea"), TRUE)
   if(inherits(metrics.Arc, "try-error")) nArc <- 0 else {
     mdat.Arc <- getmdat_orp16S(study, metrics.Arc)
+    if("Domain" %in% colnames(mdat.Arc$metadata)) {
+      # Only keep runs labeled as "Arcteria" 20220609
+      idomain <- mdat.Arc$metadata$Domain == "Archaea"
+      mdat.Arc$metadata <- mdat.Arc$metadata[idomain, , drop = FALSE]
+      mdat.Arc$metrics <- mdat.Arc$metrics[idomain, , drop = FALSE]
+    }
     nArc <- nrow(mdat.Arc$metrics)
   }
   print(paste0("nBac: ", nBac, "; nArc: ", nArc))

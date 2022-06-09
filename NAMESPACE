@@ -73,7 +73,9 @@ export(
   # orp16S paper 20220516-20220517
   "orp16S_T2", "orp16S_S1", "orp16S_S3", "orp16S5",
   # utegig paper 20220602, 20220605
-  "utegig5", "utegigS2"
+  "utegig5", "utegigS2",
+  # utilities 20220609
+  "cldfun"
 )
 
 # Imports from CHNOSZ
