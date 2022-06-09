@@ -97,7 +97,7 @@ orp16S4()
 
 **Data sources (Panel A):** Daya Bay [@WHLH21], Bay of Biscay [@LMBA21], Dabu Town, Hunan Province [@MLL+19].
 
-**Data sources (Panel C):** **1** Yellowstone - Bison Pool [@SMS+12], **2** acidic and **3** circumneutral to alkaline New Zealand hot springs [@PCL+18], **4** Dallol Geothermal Area [@BMJ+19], **5** Copahue Volcano-Río Agrio [@LMG+20;@MCC+20], **6** Southwestern Yunnan [@GWSS21], **7** Eastern Tibetan Plateau [@GWS+20], **8** Uzon Caldera [@PBU+20], **9** Southern Tibetan Plateau [@MWY+21].
+**Data sources (Panel C):** **1** acidic and **2** circumneutral to alkaline New Zealand hot springs [@PCL+18], **3** Dallol Geothermal Area [@BMJ+19], **4** Eastern Tibetan Plateau [@GWS+20], **5** Uzon Caldera [@PBU+20], **6** Southern Tibetan Plateau [@MWY+21].
 
 ## Summary of regression slopes for all datasets (Table 2)
 ```{r orp16S_T2}

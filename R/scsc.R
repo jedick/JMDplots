@@ -46,7 +46,7 @@ scsc2 <- function() {
   inames <- 1:length(names)
   for(i in 1:length(nloc)) {
     diagram(a, normalize=TRUE, names=names[inames], groups=as.list(inames),
-      fill=fill[inames], cex.axis=0.75, cex.names=1.2)
+      fill=fill[inames], cex.axis=0.75, cex.names=1.2, format.names = FALSE)
     label.plot(letters[i], xfrac=0.95, yfrac=0.9, paren=TRUE, italic=TRUE)
     title(main=paste(length(inames), "locations"))
     # take out the stable species
@@ -75,7 +75,7 @@ scsc3 <- function() {
   a <- affinity(O2=c(-82, -65))
   e <- equilibrate(a, loga.balance=0, normalize=TRUE)
   mycolor <- topo.colors(length(locations))
-  diagram(e, names=locations, ylim=c(-5, -3), col=mycolor, lwd=2)
+  diagram(e, names=locations, ylim=c(-5, -3), col=mycolor, lwd=2, format.names = FALSE)
   title(main=expression("Proteins in subcellular locations of"~italic("S. cerevisiae")))
 
   # reset thermodynamic database

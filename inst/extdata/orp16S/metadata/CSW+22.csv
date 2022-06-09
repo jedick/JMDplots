@@ -1,7 +1,0 @@
-Name,Run,BioSample,LibraryName,Sample,pH,"T (°C)","ORP (mV)","DO (mg/L)",BTEX
-"Ordos Basin Groundwater",SRR15661623,SAMN21030543,MG01,HSB-1,6.74,19.07,-118,1.21,High
-"Ordos Basin Groundwater",SRR15661619,SAMN21030547,MG05,HSB-2,7.06,17.37,9,1.17,High
-"Ordos Basin Groundwater",SRR15661622,SAMN21030544,MG02,LB-1,6.9,20.04,63,1.12,Low
-"Ordos Basin Groundwater",SRR15661620,SAMN21030546,MG04,LB-2,7.22,16.91,-37,1.4,Low
-"Ordos Basin Groundwater",SRR15661618,SAMN21030548,MG06,HS,6.94,15.52,173,1.83,No
-"Ordos Basin Groundwater",SRR15661621,SAMN21030545,MG03,RW,7.3,19.07,146,2.01,No

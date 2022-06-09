@@ -126,7 +126,7 @@ orp16S3()
 orp16S_T2()
 
 # "Raw" metrics with lots of messages printed
-getmetrics_orp16S("SVH+19", quiet = FALSE)
+getmetrics_orp16S("MLL+19", quiet = FALSE)
 # Metrics with associated metadata
 metrics <- getmetrics_orp16S("SPA+21")
 mdat <- getmdat_orp16S("SPA+21", metrics = metrics)

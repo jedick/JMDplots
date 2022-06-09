@@ -1,9 +1,0 @@
-Name,Run,BioSample,SampleName,latlong,Site,"Depth (cm)","DO (mg/L)",pH,ORP
-"Saco do Mamanguá ría",SRR8580113,SAMN10935830,B1,"23.21 S 44.58 W","3 (external)",0-20,4.24,7.77,-55.6
-"Saco do Mamanguá ría",SRR8580112,SAMN10935831,B2,"23.21 S 44.58 W","3 (external)",20-40,3.56,7.68,-97.9
-"Saco do Mamanguá ría",SRR8580111,SAMN10935832,D1,"23.23 S 44.60 W","5 (middle)",0-20,6.96,7.78,10.2
-"Saco do Mamanguá ría",SRR8580110,SAMN10935833,D2,"23.23 S 44.60 W","5 (middle)",20-40,7,7.72,46
-"Saco do Mamanguá ría",SRR8580109,SAMN10935834,D5,"23.23 S 44.60 W","5 (middle)",80-100,1.66,7.67,-228
-"Saco do Mamanguá ría",SRR8580108,SAMN10935835,F1,"23.25 S 44.62 W","7 (inner)",0-20,4.4,7.55,-167.3
-"Saco do Mamanguá ría",SRR8580107,SAMN10935836,F2,"23.25 S 44.62 W","7 (inner)",20-40,3.14,7.8,-239
-"Saco do Mamanguá ría",SRR8580106,SAMN10935837,F5,"23.25 S 44.62 W","7 (inner)",80-100,3,7.69,-306
