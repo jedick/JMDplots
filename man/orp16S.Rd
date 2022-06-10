@@ -6,7 +6,6 @@
 \alias{orp16S3}
 \alias{orp16S4}
 \alias{orp16S5}
-\alias{orp16S6}
 \alias{orp16S_S1}
 \alias{orp16S_S2}
 \alias{orp16S_S3}
@@ -53,8 +52,7 @@ This table gives a brief description of each plotting function.
   \code{orp16S2} \tab Chemical and geobiochemical depth profiles in Winogradsky columns \cr
   \code{orp16S3} \tab Sample locations on world map \cr
   \code{orp16S4} \tab Linear regressions between \ZC and Eh7 at local scales \cr
-  \code{orp16S5} \tab Contamination and redox potential as factors in \ZC of groundwater bacterial communities \cr
-  \code{orp16S6} \tab Linear regressions between \ZC and Eh7 at a global scale \cr
+  \code{orp16S5} \tab Linear regressions between \ZC and Eh7 at a global scale \cr
   \code{orp16S_S1} \tab Eh-pH diagram (outline from Baas Becking et al., 1960) \cr
   \code{orp16S_S2} \tab \ZC-Eh scatterplots for each dataset \cr
   \code{orp16S_S3} \tab Comparison of Eh7, Eh, and \O2 as predictors of carbon oxidation state \cr
