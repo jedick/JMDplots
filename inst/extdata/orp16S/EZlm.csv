@@ -41,6 +41,10 @@ PSB+21,"CROMO 2",Hyperalkaline,Bacteria,81,-129.14,222.5,0.0121987,-0.155485,0.1
 KLM+16,"Sarnia nZVI Injection",Groundwater,Bacteria,28,-171.01,39.16,0.0857606,-0.156189,0.616673,0.000474444
 WLJ+16,"Hetao Basin",Groundwater,Bacteria,16,-204.75,231.38,0.0119413,-0.155304,0.240016,0.370586
 WLJ+16,"Hetao Basin",Groundwater,Archaea,6,-192.22,153.49,0.0580538,-0.151295,0.386588,0.449005
+ZDW+19,"Jianghan Plain",Groundwater,Bacteria,48,-170.52,-15.45,0.0174047,-0.161024,0.137671,0.350755
+ZDW+19,"Jianghan Plain",Groundwater,Archaea,37,-170.52,-15.45,0.0420466,-0.170686,0.16369,0.333011
+DJK+18,"Ohio Aquifers",Groundwater,Bacteria,89,-153.09,66.64,-0.00981485,-0.159704,-0.123307,0.249637
+DJK+18,"Ohio Aquifers",Groundwater,Archaea,75,-153.09,66.64,-0.0708313,-0.185417,-0.422772,0.000157697
 SRM+19,"Rayong Province",Groundwater,Bacteria,19,-364.14,246.38,0.0162127,-0.154624,0.405073,0.0853511
 APV+20,"Mezquital Valley",Groundwater,Bacteria,18,55.11,233.73,-0.0391375,-0.146699,-0.342301,0.164398
 APV+20,"Mezquital Valley",Groundwater,Archaea,9,55.11,223.95,-0.0254199,-0.166315,-0.118741,0.760928
@@ -49,6 +53,8 @@ SRM+21,"Lower Chao Praya Basin",Groundwater,Bacteria,13,-91.16,180.2,-0.00928468
 ZCZ+21,"Po Plain",Groundwater,Bacteria,18,-89.37,416.75,-0.0134,-0.153228,-0.362736,0.139031
 MGW+22,"New Zealand Aquifers",Groundwater,Bacteria,71,-133.9,205.82,0.00721335,-0.14844,0.149725,0.212671
 MGW+22,"New Zealand Aquifers",Groundwater,Archaea,69,-133.9,205.82,-0.0179169,-0.177386,-0.312071,0.00904262
+BMV+22,"Underground Gas Reservoirs",Groundwater,Bacteria,15,-423.76,-66.67,0.00892753,-0.156134,0.0843352,0.765074
+BMV+22,"Underground Gas Reservoirs",Groundwater,Archaea,13,-328.42,-66.67,0.00550987,-0.191047,0.110236,0.719962
 ZML+17,"Mai Po Wetland",Sediment,Bacteria,33,-41.62,379.07,-0.0101227,-0.158043,-0.180721,0.314199
 ZML+17,"Mai Po Wetland",Sediment,Archaea,33,-41.62,379.07,-0.0332503,-0.174968,-0.406706,0.0188332
 BSPD17,"Baltic Sea Swedish Coast",Sediment,Bacteria,28,39.42,227.05,0.129035,-0.191306,0.319357,0.0976134

@@ -1375,6 +1375,255 @@ WLJ+16,Groundwater,Archaea,IC12,IC12104,Arsenic,As > 100 μg/L,NA,8.45,NA,-278,-
 WLJ+16,Groundwater,Archaea,IC13,IC1394,Arsenic,As > 100 μg/L,NA,8.31,NA,76,153.49,-0.131301
 WLJ+16,Groundwater,Archaea,IC15,IC1592,Arsenic,As < 100 μg/L,NA,7.73,NA,-30,13.18,-0.143978
 WLJ+16,Groundwater,Archaea,IC17,IC17110,Arsenic,As < 100 μg/L,NA,6.73,NA,119,103.03,-0.149189
+ZDW+19,Groundwater,Bacteria,SY1310 03A,SRR5803955,Season,Autumn,20.8,6.7,NA,-123.9,-141.4,-0.166305
+ZDW+19,Groundwater,Bacteria,SY1312 03A,SRR5803952,Season,Autumn,19.1,6.6,NA,-133.5,-156.69,-0.159316
+ZDW+19,Groundwater,Bacteria,SY1401 03A,SRR5803965,Season,Non-monsoon,17.5,6.9,NA,-111.1,-116.87,-0.163418
+ZDW+19,Groundwater,Bacteria,SY1402 03A,SRR5804004,Season,Non-monsoon,16.8,7.1,NA,-21.2,-15.45,-0.15898
+ZDW+19,Groundwater,Bacteria,SY1403 03A,SRR5804003,Season,Non-monsoon,16.9,7.2,NA,-49.4,-37.89,-0.158608
+ZDW+19,Groundwater,Bacteria,SY1404 03A,SRR5804011,Season,Spring,18.7,6.9,NA,-104.6,-110.39,-0.162345
+ZDW+19,Groundwater,Bacteria,SY1405 03A,SRR5804007,Season,Spring,20.3,6.9,NA,-139.2,-145.02,-0.165089
+ZDW+19,Groundwater,Bacteria,SY1406 03A,SRR5803963,Season,Spring,19.9,6.9,NA,-127.2,-133.01,-0.164605
+ZDW+19,Groundwater,Bacteria,SY1407 03A,SRR5803973,Season,Monsoon,21,6.8,NA,-131.2,-142.87,-0.164188
+ZDW+19,Groundwater,Bacteria,SY1408 03A,SRR5803969,Season,Monsoon,22.6,6.9,NA,-110.6,-116.47,-0.166505
+ZDW+19,Groundwater,Bacteria,SY1409 03A,SRR5803943,Season,Monsoon,19.4,6.8,NA,-99.6,-111.21,-0.160141
+ZDW+19,Groundwater,Bacteria,SY1410 03A,SRR5803954,Season,Autumn,19.4,6.9,NA,-101.4,-107.2,-0.172285
+ZDW+19,Groundwater,Bacteria,SY1310 03B,SRR5803956,Season,Autumn,20.3,7.3,NA,-167.8,-150.33,-0.164337
+ZDW+19,Groundwater,Bacteria,SY1312 03B,SRR5803958,Season,Autumn,18.6,7.1,NA,-166.8,-161.01,-0.1614
+ZDW+19,Groundwater,Bacteria,SY1401 03B,SRR5803964,Season,Non-monsoon,17.8,7.2,NA,-168.9,-157.35,-0.160974
+ZDW+19,Groundwater,Bacteria,SY1402 03B,SRR5803986,Season,Non-monsoon,16.9,7.5,NA,-143.2,-114.43,-0.158532
+ZDW+19,Groundwater,Bacteria,SY1403 03B,SRR5803999,Season,Non-monsoon,16.5,7.4,NA,-149.7,-126.71,-0.157003
+ZDW+19,Groundwater,Bacteria,SY1404 03B,SRR5804012,Season,Spring,18.9,7.3,NA,-139.8,-122.42,-0.15867
+ZDW+19,Groundwater,Bacteria,SY1405 03B,SRR5804008,Season,Spring,20.6,7.4,NA,-169.2,-145.89,-0.165113
+ZDW+19,Groundwater,Bacteria,SY1406 03B,SRR5803962,Season,Spring,20.1,7.4,NA,-177.8,-154.53,-0.164207
+ZDW+19,Groundwater,Bacteria,SY1407 03B,SRR5803972,Season,Monsoon,22.2,7.3,NA,-188.1,-170.52,-0.162207
+ZDW+19,Groundwater,Bacteria,SY1408 03B,SRR5803968,Season,Monsoon,21.8,7.4,NA,-177.3,-153.89,-0.166945
+ZDW+19,Groundwater,Bacteria,SY1409 03B,SRR5803944,Season,Monsoon,19.7,7.2,NA,-115.8,-104.18,-0.17007
+ZDW+19,Groundwater,Bacteria,SY1410 03B,SRR5803985,Season,Autumn,19.5,7.3,NA,-113.1,-95.68,-0.1681
+ZDW+19,Groundwater,Bacteria,SY1310 05A,SRR5803959,Season,Autumn,21.3,6.8,NA,-149.9,-161.58,-0.166309
+ZDW+19,Groundwater,Bacteria,SY1312 05A,SRR5803951,Season,Autumn,17.8,7,NA,-138.8,-138.8,-0.166647
+ZDW+19,Groundwater,Bacteria,SY1401 05A,SRR5803998,Season,Non-monsoon,17,6.9,NA,-102.4,-108.16,-0.158754
+ZDW+19,Groundwater,Bacteria,SY1402 05A,SRR5804000,Season,Non-monsoon,17.8,7,NA,-138.8,-138.8,-0.167428
+ZDW+19,Groundwater,Bacteria,SY1403 05A,SRR5804001,Season,Non-monsoon,17.2,7,NA,-105,-105,-0.157005
+ZDW+19,Groundwater,Bacteria,SY1404 05A,SRR5804009,Season,Spring,17.6,7.1,NA,-106.3,-100.53,-0.161603
+ZDW+19,Groundwater,Bacteria,SY1405 05A,SRR5804005,Season,Spring,20,7,NA,-133,-133,-0.155091
+ZDW+19,Groundwater,Bacteria,SY1406 05A,SRR5803971,Season,Spring,19.9,6.9,NA,-152.2,-158.01,-0.161691
+ZDW+19,Groundwater,Bacteria,SY1407 05A,SRR5803967,Season,Monsoon,20.8,6.9,NA,-140.3,-146.13,-0.158318
+ZDW+19,Groundwater,Bacteria,SY1408 05A,SRR5803957,Season,Monsoon,24.2,7,NA,-106.3,-106.3,-0.16669
+ZDW+19,Groundwater,Bacteria,SY1409 05A,SRR5803945,Season,Monsoon,20.9,6.9,NA,-110.7,-116.53,-0.163081
+ZDW+19,Groundwater,Bacteria,SY1410 05A,SRR5803949,Season,Autumn,20.3,6.9,NA,-97.8,-103.62,-0.164359
+ZDW+19,Groundwater,Bacteria,SY1310 05B,SRR5803960,Season,Autumn,21.1,7.1,NA,-143.2,-137.36,-0.16592
+ZDW+19,Groundwater,Bacteria,SY1312 05B,SRR5803953,Season,Autumn,17.5,7.4,NA,-141.3,-118.23,-0.167151
+ZDW+19,Groundwater,Bacteria,SY1401 05B,SRR5803997,Season,Non-monsoon,17.1,7,NA,-123.3,-123.3,-0.166982
+ZDW+19,Groundwater,Bacteria,SY1402 05B,SRR5803984,Season,Non-monsoon,17.5,7.4,NA,-141.3,-118.23,-0.168366
+ZDW+19,Groundwater,Bacteria,SY1403 05B,SRR5804002,Season,Non-monsoon,16.1,7.4,NA,-124.3,-101.34,-0.165543
+ZDW+19,Groundwater,Bacteria,SY1404 05B,SRR5804010,Season,Spring,18.2,7.4,NA,-134.9,-111.78,-0.162329
+ZDW+19,Groundwater,Bacteria,SY1405 05B,SRR5804006,Season,Spring,19.7,7.2,NA,-145.6,-133.98,-0.160145
+ZDW+19,Groundwater,Bacteria,SY1406 05B,SRR5803970,Season,Spring,20.2,7.2,NA,-131.5,-119.86,-0.164633
+ZDW+19,Groundwater,Bacteria,SY1407 05B,SRR5803966,Season,Monsoon,20.1,7.2,NA,-127.7,-116.06,-0.158556
+ZDW+19,Groundwater,Bacteria,SY1408 05B,SRR5803961,Season,Monsoon,21.4,7.4,NA,-133.4,-110.02,-0.160818
+ZDW+19,Groundwater,Bacteria,SY1409 05B,SRR5803946,Season,Monsoon,19.8,7.1,NA,-134.6,-128.79,-0.163349
+ZDW+19,Groundwater,Bacteria,SY1410 05B,SRR5803950,Season,Autumn,19.2,7.1,NA,-65.1,-59.3,-0.161475
+ZDW+19,Groundwater,Archaea,SY1310 03A,SRR5803955,Season,Autumn,20.8,6.7,NA,-123.9,-141.4,-0.173066
+ZDW+19,Groundwater,Archaea,SY1312 03A,SRR5803952,Season,Autumn,19.1,6.6,NA,-133.5,-156.69,-0.173451
+ZDW+19,Groundwater,Archaea,SY1401 03A,SRR5803965,Season,Non-monsoon,17.5,6.9,NA,-111.1,-116.87,-0.1732
+ZDW+19,Groundwater,Archaea,SY1402 03A,SRR5804004,Season,Non-monsoon,16.8,7.1,NA,-21.2,-15.45,-0.167964
+ZDW+19,Groundwater,Archaea,SY1403 03A,SRR5804003,Season,Non-monsoon,16.9,7.2,NA,-49.4,-37.89,-0.175761
+ZDW+19,Groundwater,Archaea,SY1404 03A,SRR5804011,Season,Spring,18.7,6.9,NA,-104.6,-110.39,-0.182441
+ZDW+19,Groundwater,Archaea,SY1406 03A,SRR5803963,Season,Spring,19.9,6.9,NA,-127.2,-133.01,-0.169968
+ZDW+19,Groundwater,Archaea,SY1407 03A,SRR5803973,Season,Monsoon,21,6.8,NA,-131.2,-142.87,-0.165929
+ZDW+19,Groundwater,Archaea,SY1409 03A,SRR5803943,Season,Monsoon,19.4,6.8,NA,-99.6,-111.21,-0.182255
+ZDW+19,Groundwater,Archaea,SY1410 03A,SRR5803954,Season,Autumn,19.4,6.9,NA,-101.4,-107.2,-0.177669
+ZDW+19,Groundwater,Archaea,SY1310 03B,SRR5803956,Season,Autumn,20.3,7.3,NA,-167.8,-150.33,-0.168913
+ZDW+19,Groundwater,Archaea,SY1312 03B,SRR5803958,Season,Autumn,18.6,7.1,NA,-166.8,-161.01,-0.172589
+ZDW+19,Groundwater,Archaea,SY1402 03B,SRR5803986,Season,Non-monsoon,16.9,7.5,NA,-143.2,-114.43,-0.174823
+ZDW+19,Groundwater,Archaea,SY1403 03B,SRR5803999,Season,Non-monsoon,16.5,7.4,NA,-149.7,-126.71,-0.172818
+ZDW+19,Groundwater,Archaea,SY1404 03B,SRR5804012,Season,Spring,18.9,7.3,NA,-139.8,-122.42,-0.173332
+ZDW+19,Groundwater,Archaea,SY1405 03B,SRR5804008,Season,Spring,20.6,7.4,NA,-169.2,-145.89,-0.171833
+ZDW+19,Groundwater,Archaea,SY1407 03B,SRR5803972,Season,Monsoon,22.2,7.3,NA,-188.1,-170.52,-0.174548
+ZDW+19,Groundwater,Archaea,SY1408 03B,SRR5803968,Season,Monsoon,21.8,7.4,NA,-177.3,-153.89,-0.173806
+ZDW+19,Groundwater,Archaea,SY1409 03B,SRR5803944,Season,Monsoon,19.7,7.2,NA,-115.8,-104.18,-0.173956
+ZDW+19,Groundwater,Archaea,SY1410 03B,SRR5803985,Season,Autumn,19.5,7.3,NA,-113.1,-95.68,-0.171895
+ZDW+19,Groundwater,Archaea,SY1310 05A,SRR5803959,Season,Autumn,21.3,6.8,NA,-149.9,-161.58,-0.184403
+ZDW+19,Groundwater,Archaea,SY1312 05A,SRR5803951,Season,Autumn,17.8,7,NA,-138.8,-138.8,-0.192932
+ZDW+19,Groundwater,Archaea,SY1402 05A,SRR5804000,Season,Non-monsoon,17.8,7,NA,-138.8,-138.8,-0.187631
+ZDW+19,Groundwater,Archaea,SY1403 05A,SRR5804001,Season,Non-monsoon,17.2,7,NA,-105,-105,-0.178398
+ZDW+19,Groundwater,Archaea,SY1404 05A,SRR5804009,Season,Spring,17.6,7.1,NA,-106.3,-100.53,-0.188211
+ZDW+19,Groundwater,Archaea,SY1408 05A,SRR5803957,Season,Monsoon,24.2,7,NA,-106.3,-106.3,-0.173459
+ZDW+19,Groundwater,Archaea,SY1409 05A,SRR5803945,Season,Monsoon,20.9,6.9,NA,-110.7,-116.53,-0.18534
+ZDW+19,Groundwater,Archaea,SY1310 05B,SRR5803960,Season,Autumn,21.1,7.1,NA,-143.2,-137.36,-0.173473
+ZDW+19,Groundwater,Archaea,SY1312 05B,SRR5803953,Season,Autumn,17.5,7.4,NA,-141.3,-118.23,-0.171648
+ZDW+19,Groundwater,Archaea,SY1401 05B,SRR5803997,Season,Non-monsoon,17.1,7,NA,-123.3,-123.3,-0.178488
+ZDW+19,Groundwater,Archaea,SY1402 05B,SRR5803984,Season,Non-monsoon,17.5,7.4,NA,-141.3,-118.23,-0.170222
+ZDW+19,Groundwater,Archaea,SY1403 05B,SRR5804002,Season,Non-monsoon,16.1,7.4,NA,-124.3,-101.34,-0.170583
+ZDW+19,Groundwater,Archaea,SY1404 05B,SRR5804010,Season,Spring,18.2,7.4,NA,-134.9,-111.78,-0.16781
+ZDW+19,Groundwater,Archaea,SY1405 05B,SRR5804006,Season,Spring,19.7,7.2,NA,-145.6,-133.98,-0.205198
+ZDW+19,Groundwater,Archaea,SY1406 05B,SRR5803970,Season,Spring,20.2,7.2,NA,-131.5,-119.86,-0.166979
+ZDW+19,Groundwater,Archaea,SY1407 05B,SRR5803966,Season,Monsoon,20.1,7.2,NA,-127.7,-116.06,-0.169755
+ZDW+19,Groundwater,Archaea,SY1410 05B,SRR5803950,Season,Autumn,19.2,7.1,NA,-65.1,-59.3,-0.16671
+DJK+18,Groundwater,Bacteria,Athens 0.2 10/27/15,XA22,Well,Athens,14.2,7.49,NA,-172,-144.06,-0.162575
+DJK+18,Groundwater,Bacteria,Athens 0.2 7/2016,PA22,Well,Athens,14.4,7.5,NA,-165,-136.47,-0.160885
+DJK+18,Groundwater,Bacteria,Athens 0.2 2/2016,HA22,Well,Athens,14.1,7.54,NA,-166,-135.22,-0.158391
+DJK+18,Groundwater,Bacteria,Greene 0.1 2/2016,HG12,Well,Greene,11.8,7.29,NA,21,37.4,-0.160683
+DJK+18,Groundwater,Bacteria,Athens 0.1 2/2016,HA12,Well,Athens,14.1,7.54,NA,-166,-135.22,-0.153944
+DJK+18,Groundwater,Bacteria,Greene 0.2 2/2016,HG22,Well,Greene,11.8,7.29,NA,21,37.4,-0.153531
+DJK+18,Groundwater,Bacteria,Licking 0.2 7/2016,PL22,Well,Licking,12,7.32,NA,-88,-69.9,-0.153941
+DJK+18,Groundwater,Bacteria,Greene 0.1 2/2016,HG11,Well,Greene,11.8,7.29,NA,21,37.4,-0.161044
+DJK+18,Groundwater,Bacteria,Athens 0.1 7/2016,PA12,Well,Athens,14.4,7.5,NA,-165,-136.47,-0.158893
+DJK+18,Groundwater,Bacteria,Greene 0.1 7/2016,PG11,Well,Greene,12.1,7.26,NA,-14,0.72,-0.18231
+DJK+18,Groundwater,Bacteria,Greene 0.2 10/27/15,XG22,Well,Greene,11.8,7.25,NA,23,37.13,-0.158356
+DJK+18,Groundwater,Bacteria,Greene 0.2 10/27/15,XG21,Well,Greene,11.8,7.25,NA,23,37.13,-0.157815
+DJK+18,Groundwater,Bacteria,Greene 0.2 4/15/15,4G21,Well,Greene,11.8,7.25,NA,16,30.13,-0.15718
+DJK+18,Groundwater,Bacteria,Greene 0.2 7/22/15,7G22,Well,Greene,12,7.15,NA,38,46.49,-0.153785
+DJK+18,Groundwater,Bacteria,Athens 0.2 7/22/15,7A22,Well,Athens,15.4,7.47,NA,-180,-153.09,-0.166224
+DJK+18,Groundwater,Bacteria,Greene 0.2 7/2016,PG22,Well,Greene,12.1,7.26,NA,-14,0.72,-0.160253
+DJK+18,Groundwater,Bacteria,Greene 0.2 7/2016,PG21,Well,Greene,12.1,7.26,NA,-14,0.72,-0.161272
+DJK+18,Groundwater,Bacteria,Licking 0.1 7/2016,PL12,Well,Licking,12,7.32,NA,-88,-69.9,-0.160067
+DJK+18,Groundwater,Bacteria,Licking 0.1 7/8/14,XB06,Well,Licking,12,7.38,NA,-109,-87.5,-0.153256
+DJK+18,Groundwater,Bacteria,Greene 0.2 10/7/14,YA01,Well,Greene,12,7.21,NA,12,23.88,-0.159212
+DJK+18,Groundwater,Bacteria,Greene 0.2 10/7/14,YB01,Well,Greene,12,7.21,NA,12,23.88,-0.15891
+DJK+18,Groundwater,Bacteria,Greene 0.2 7/8/14,XA01,Well,Greene,12.3,7.27,NA,14,29.29,-0.154049
+DJK+18,Groundwater,Bacteria,Greene 0.2 7/22/15,7G21,Well,Greene,12,7.15,NA,38,46.49,-0.154198
+DJK+18,Groundwater,Bacteria,Greene 0.1 10/7/14,YB02,Well,Greene,12,7.21,NA,12,23.88,-0.166937
+DJK+18,Groundwater,Bacteria,Greene 0.2 4/15/15,4G22,Well,Greene,11.8,7.25,NA,16,30.13,-0.157137
+DJK+18,Groundwater,Bacteria,Licking 0.2 10/27/15,XL22,Well,Licking,11.6,7.35,NA,-91,-71.23,-0.162165
+DJK+18,Groundwater,Bacteria,Greene 0.2 2/2016,HG21,Well,Greene,11.8,7.29,NA,21,37.4,-0.153465
+DJK+18,Groundwater,Bacteria,Athens 0.2 2/2016,HA21,Well,Athens,14.1,7.54,NA,-166,-135.22,-0.159006
+DJK+18,Groundwater,Bacteria,Greene 0.2 1/19/15,G202,Well,Greene,11.2,7.1,NA,61,66.64,-0.160383
+DJK+18,Groundwater,Bacteria,Greene 0.2 1/19/15,G201,Well,Greene,11.2,7.1,NA,61,66.64,-0.160523
+DJK+18,Groundwater,Bacteria,Licking 0.2 1/19/15,L201,Well,Licking,11,7.36,NA,-94,-73.7,-0.16086
+DJK+18,Groundwater,Bacteria,Licking 0.2 2/2016,HL22,Well,Licking,11.3,7.42,NA,-74,-50.3,-0.154073
+DJK+18,Groundwater,Bacteria,Athens 0.1 4/15/15,4A11,Well,Athens,14.1,7.53,NA,-171,-140.79,-0.143055
+DJK+18,Groundwater,Bacteria,Greene 0.2 7/8/14,XB01,Well,Greene,12.3,7.27,NA,14,29.29,-0.154758
+DJK+18,Groundwater,Bacteria,Licking 0.2 10/7/14,YA04,Well,Licking,11.6,7.32,NA,-85,-66.92,-0.160413
+DJK+18,Groundwater,Bacteria,Licking 0.2 4/15/15,4L21,Well,Licking,11.5,7.36,NA,-89,-68.67,-0.158172
+DJK+18,Groundwater,Bacteria,Licking 0.2 10/27/15,XL21,Well,Licking,11.6,7.35,NA,-91,-71.23,-0.163311
+DJK+18,Groundwater,Bacteria,Licking 0.2 7/2016,PL21,Well,Licking,12,7.32,NA,-88,-69.9,-0.153662
+DJK+18,Groundwater,Bacteria,Licking 0.2 1/19/15,L202,Well,Licking,11,7.36,NA,-94,-73.7,-0.159823
+DJK+18,Groundwater,Bacteria,Greene 0.1 7/22/15,7G12,Well,Greene,12,7.15,NA,38,46.49,-0.157673
+DJK+18,Groundwater,Bacteria,Greene 0.1 7/22/15,7G11,Well,Greene,12,7.15,NA,38,46.49,-0.157439
+DJK+18,Groundwater,Bacteria,Greene 0.1 10/7/14,YA02,Well,Greene,12,7.21,NA,12,23.88,-0.167683
+DJK+18,Groundwater,Bacteria,Greene 0.1 10/27/15,XG11,Well,Greene,11.8,7.25,NA,23,37.13,-0.165657
+DJK+18,Groundwater,Bacteria,Greene 0.1 4/15/15,4G12,Well,Greene,11.8,7.25,NA,16,30.13,-0.158532
+DJK+18,Groundwater,Bacteria,Greene 0.1 10/27/15,XG12,Well,Greene,11.8,7.25,NA,23,37.13,-0.163845
+DJK+18,Groundwater,Bacteria,Greene 0.1 7/2016,PG12,Well,Greene,12.1,7.26,NA,-14,0.72,-0.182578
+DJK+18,Groundwater,Bacteria,Licking 0.2 7/8/14,XB05,Well,Licking,12,7.38,NA,-109,-87.5,-0.154882
+DJK+18,Groundwater,Bacteria,Licking 0.1 10/27/15,XL11,Well,Licking,11.6,7.35,NA,-91,-71.23,-0.15075
+DJK+18,Groundwater,Bacteria,Athens 0.2 7/22/15,7A21,Well,Athens,15.4,7.47,NA,-180,-153.09,-0.162694
+DJK+18,Groundwater,Bacteria,Athens 0.1 7/2016,PA11,Well,Athens,14.4,7.5,NA,-165,-136.47,-0.158434
+DJK+18,Groundwater,Bacteria,Athens 0.2 10/7/14,YB03,Well,Athens,14.2,7.46,NA,-170,-143.77,-0.160461
+DJK+18,Groundwater,Bacteria,Athens 0.2 10/7/14,YA03,Well,Athens,14.2,7.46,NA,-170,-143.77,-0.159645
+DJK+18,Groundwater,Bacteria,Athens 0.2 10/27/15,XA21,Well,Athens,14.2,7.49,NA,-172,-144.06,-0.162165
+DJK+18,Groundwater,Bacteria,Athens 0.2 7/2016,PA21,Well,Athens,14.4,7.5,NA,-165,-136.47,-0.160773
+DJK+18,Groundwater,Bacteria,Athens 0.2 1/19/15,A202,Well,Athens,13.7,7.35,NA,-155,-135.08,-0.16429
+DJK+18,Groundwater,Bacteria,Athens 0.2 7/8/14,XA03,Well,Athens,14.4,7.54,NA,-181,-150.19,-0.156219
+DJK+18,Groundwater,Bacteria,Athens 0.2 4/15/15,4A22,Well,Athens,14.1,7.53,NA,-171,-140.79,-0.158022
+DJK+18,Groundwater,Bacteria,Licking 0.1 2/2016,HL11,Well,Licking,11.3,7.42,NA,-74,-50.3,-0.157337
+DJK+18,Groundwater,Bacteria,Athens 0.1 2/2016,HA11,Well,Athens,14.1,7.54,NA,-166,-135.22,-0.153815
+DJK+18,Groundwater,Bacteria,Athens 0.2 1/19/15,A201,Well,Athens,13.7,7.35,NA,-155,-135.08,-0.163848
+DJK+18,Groundwater,Bacteria,Athens 0.2 4/15/15,4A21,Well,Athens,14.1,7.53,NA,-171,-140.79,-0.158383
+DJK+18,Groundwater,Bacteria,Athens 0.1 10/27/15,XA11,Well,Athens,14.2,7.49,NA,-172,-144.06,-0.157327
+DJK+18,Groundwater,Bacteria,Licking 0.2 7/22/15,7L21,Well,Licking,12.3,7.31,NA,-108,-90.44,-0.159044
+DJK+18,Groundwater,Bacteria,Licking 0.2 2/2016,HL21,Well,Licking,11.3,7.42,NA,-74,-50.3,-0.148766
+DJK+18,Groundwater,Bacteria,Licking 0.2 7/22/15,7L22,Well,Licking,12.3,7.31,NA,-108,-90.44,-0.159459
+DJK+18,Groundwater,Bacteria,Greene 0.1 7/8/14,XB02,Well,Greene,12.3,7.27,NA,14,29.29,-0.14791
+DJK+18,Groundwater,Bacteria,Licking 0.1 10/27/15,XL12,Well,Licking,11.6,7.35,NA,-91,-71.23,-0.150749
+DJK+18,Groundwater,Bacteria,Licking 0.1 4/15/15,4L11,Well,Licking,11.5,7.36,NA,-89,-68.67,-0.149855
+DJK+18,Groundwater,Bacteria,Licking 0.1 7/2016,PL11,Well,Licking,12,7.32,NA,-88,-69.9,-0.163486
+DJK+18,Groundwater,Bacteria,Athens 0.1 4/15/15,4A12,Well,Athens,14.1,7.53,NA,-171,-140.79,-0.151387
+DJK+18,Groundwater,Bacteria,Athens 0.1 1/19/15,A102,Well,Athens,13.7,7.35,NA,-155,-135.08,-0.163185
+DJK+18,Groundwater,Bacteria,Greene 0.1 7/8/14,XA02,Well,Greene,12.3,7.27,NA,14,29.29,-0.165466
+DJK+18,Groundwater,Bacteria,Greene 0.1 4/15/15,4G11,Well,Greene,11.8,7.25,NA,16,30.13,-0.162033
+DJK+18,Groundwater,Bacteria,Greene 0.1 1/19/15,G102,Well,Greene,11.2,7.1,NA,61,66.64,-0.165813
+DJK+18,Groundwater,Bacteria,Greene 0.1 1/19/15,G101,Well,Greene,11.2,7.1,NA,61,66.64,-0.168625
+DJK+18,Groundwater,Bacteria,Licking 0.1 2/2016,HL12,Well,Licking,11.3,7.42,NA,-74,-50.3,-0.155313
+DJK+18,Groundwater,Bacteria,Athens 0.1 10/27/15,XA12,Well,Athens,14.2,7.49,NA,-172,-144.06,-0.159247
+DJK+18,Groundwater,Bacteria,Athens 0.1 7/8/14,XB04,Well,Athens,14.4,7.54,NA,-181,-150.19,-0.152952
+DJK+18,Groundwater,Bacteria,Licking 0.1 1/19/15,L101,Well,Licking,11,7.36,NA,-94,-73.7,-0.167216
+DJK+18,Groundwater,Bacteria,Licking 0.1 7/8/14,XA06,Well,Licking,12,7.38,NA,-109,-87.5,-0.151005
+DJK+18,Groundwater,Bacteria,Licking 0.2 7/8/14,XA05,Well,Licking,12,7.38,NA,-109,-87.5,-0.154916
+DJK+18,Groundwater,Bacteria,Licking 0.2 4/15/15,4L22,Well,Licking,11.5,7.36,NA,-89,-68.67,-0.163029
+DJK+18,Groundwater,Bacteria,Athens 0.2 7/8/14,XB03,Well,Athens,14.4,7.54,NA,-181,-150.19,-0.157785
+DJK+18,Groundwater,Bacteria,Athens 0.1 7/22/15,7A12,Well,Athens,15.4,7.47,NA,-180,-153.09,-0.165681
+DJK+18,Groundwater,Bacteria,Licking 0.1 1/19/15,L102,Well,Licking,11,7.36,NA,-94,-73.7,-0.159716
+DJK+18,Groundwater,Bacteria,Athens 0.1 1/19/15,A101,Well,Athens,13.7,7.35,NA,-155,-135.08,-0.156782
+DJK+18,Groundwater,Bacteria,Athens 0.1 7/22/15,7A11,Well,Athens,15.4,7.47,NA,-180,-153.09,-0.164042
+DJK+18,Groundwater,Bacteria,Athens 0.1 7/8/14,XA04,Well,Athens,14.4,7.54,NA,-181,-150.19,-0.154661
+DJK+18,Groundwater,Bacteria,Licking 0.1 7/22/15,7L12,Well,Licking,12.3,7.31,NA,-108,-90.44,-0.164179
+DJK+18,Groundwater,Archaea,Athens 0.2 10/27/15,XA22,Well,Athens,14.2,7.49,NA,-172,-144.06,-0.162083
+DJK+18,Groundwater,Archaea,Athens 0.2 7/2016,PA22,Well,Athens,14.4,7.5,NA,-165,-136.47,-0.152442
+DJK+18,Groundwater,Archaea,Athens 0.2 2/2016,HA22,Well,Athens,14.1,7.54,NA,-166,-135.22,-0.158424
+DJK+18,Groundwater,Archaea,Greene 0.1 2/2016,HG12,Well,Greene,11.8,7.29,NA,21,37.4,-0.187484
+DJK+18,Groundwater,Archaea,Greene 0.2 2/2016,HG22,Well,Greene,11.8,7.29,NA,21,37.4,-0.186442
+DJK+18,Groundwater,Archaea,Licking 0.2 7/2016,PL22,Well,Licking,12,7.32,NA,-88,-69.9,-0.190444
+DJK+18,Groundwater,Archaea,Greene 0.1 2/2016,HG11,Well,Greene,11.8,7.29,NA,21,37.4,-0.187109
+DJK+18,Groundwater,Archaea,Athens 0.1 7/2016,PA12,Well,Athens,14.4,7.5,NA,-165,-136.47,-0.181705
+DJK+18,Groundwater,Archaea,Greene 0.1 7/2016,PG11,Well,Greene,12.1,7.26,NA,-14,0.72,-0.187178
+DJK+18,Groundwater,Archaea,Greene 0.2 10/27/15,XG22,Well,Greene,11.8,7.25,NA,23,37.13,-0.183605
+DJK+18,Groundwater,Archaea,Greene 0.2 10/27/15,XG21,Well,Greene,11.8,7.25,NA,23,37.13,-0.183428
+DJK+18,Groundwater,Archaea,Greene 0.2 4/15/15,4G21,Well,Greene,11.8,7.25,NA,16,30.13,-0.184331
+DJK+18,Groundwater,Archaea,Greene 0.2 7/22/15,7G22,Well,Greene,12,7.15,NA,38,46.49,-0.183854
+DJK+18,Groundwater,Archaea,Athens 0.2 7/22/15,7A22,Well,Athens,15.4,7.47,NA,-180,-153.09,-0.16185
+DJK+18,Groundwater,Archaea,Greene 0.2 7/2016,PG22,Well,Greene,12.1,7.26,NA,-14,0.72,-0.185146
+DJK+18,Groundwater,Archaea,Greene 0.2 7/2016,PG21,Well,Greene,12.1,7.26,NA,-14,0.72,-0.18502
+DJK+18,Groundwater,Archaea,Licking 0.1 7/8/14,XB06,Well,Licking,12,7.38,NA,-109,-87.5,-0.196044
+DJK+18,Groundwater,Archaea,Greene 0.2 10/7/14,YA01,Well,Greene,12,7.21,NA,12,23.88,-0.184129
+DJK+18,Groundwater,Archaea,Greene 0.2 10/7/14,YB01,Well,Greene,12,7.21,NA,12,23.88,-0.183529
+DJK+18,Groundwater,Archaea,Greene 0.2 7/8/14,XA01,Well,Greene,12.3,7.27,NA,14,29.29,-0.186649
+DJK+18,Groundwater,Archaea,Greene 0.2 7/22/15,7G21,Well,Greene,12,7.15,NA,38,46.49,-0.18448
+DJK+18,Groundwater,Archaea,Greene 0.1 10/7/14,YB02,Well,Greene,12,7.21,NA,12,23.88,-0.18542
+DJK+18,Groundwater,Archaea,Greene 0.2 4/15/15,4G22,Well,Greene,11.8,7.25,NA,16,30.13,-0.18483
+DJK+18,Groundwater,Archaea,Licking 0.2 10/27/15,XL22,Well,Licking,11.6,7.35,NA,-91,-71.23,-0.191881
+DJK+18,Groundwater,Archaea,Greene 0.2 2/2016,HG21,Well,Greene,11.8,7.29,NA,21,37.4,-0.18585
+DJK+18,Groundwater,Archaea,Athens 0.2 2/2016,HA21,Well,Athens,14.1,7.54,NA,-166,-135.22,-0.162145
+DJK+18,Groundwater,Archaea,Greene 0.2 1/19/15,G202,Well,Greene,11.2,7.1,NA,61,66.64,-0.183319
+DJK+18,Groundwater,Archaea,Greene 0.2 1/19/15,G201,Well,Greene,11.2,7.1,NA,61,66.64,-0.182891
+DJK+18,Groundwater,Archaea,Licking 0.2 1/19/15,L201,Well,Licking,11,7.36,NA,-94,-73.7,-0.188047
+DJK+18,Groundwater,Archaea,Licking 0.2 2/2016,HL22,Well,Licking,11.3,7.42,NA,-74,-50.3,-0.204989
+DJK+18,Groundwater,Archaea,Greene 0.2 7/8/14,XB01,Well,Greene,12.3,7.27,NA,14,29.29,-0.185812
+DJK+18,Groundwater,Archaea,Licking 0.2 10/7/14,YA04,Well,Licking,11.6,7.32,NA,-85,-66.92,-0.185442
+DJK+18,Groundwater,Archaea,Licking 0.2 4/15/15,4L21,Well,Licking,11.5,7.36,NA,-89,-68.67,-0.190645
+DJK+18,Groundwater,Archaea,Licking 0.2 10/27/15,XL21,Well,Licking,11.6,7.35,NA,-91,-71.23,-0.195151
+DJK+18,Groundwater,Archaea,Licking 0.2 7/2016,PL21,Well,Licking,12,7.32,NA,-88,-69.9,-0.199305
+DJK+18,Groundwater,Archaea,Licking 0.2 1/19/15,L202,Well,Licking,11,7.36,NA,-94,-73.7,-0.185086
+DJK+18,Groundwater,Archaea,Greene 0.1 7/22/15,7G12,Well,Greene,12,7.15,NA,38,46.49,-0.186473
+DJK+18,Groundwater,Archaea,Greene 0.1 7/22/15,7G11,Well,Greene,12,7.15,NA,38,46.49,-0.187438
+DJK+18,Groundwater,Archaea,Greene 0.1 10/7/14,YA02,Well,Greene,12,7.21,NA,12,23.88,-0.1865
+DJK+18,Groundwater,Archaea,Greene 0.1 10/27/15,XG11,Well,Greene,11.8,7.25,NA,23,37.13,-0.186372
+DJK+18,Groundwater,Archaea,Greene 0.1 4/15/15,4G12,Well,Greene,11.8,7.25,NA,16,30.13,-0.179743
+DJK+18,Groundwater,Archaea,Greene 0.1 10/27/15,XG12,Well,Greene,11.8,7.25,NA,23,37.13,-0.186571
+DJK+18,Groundwater,Archaea,Greene 0.1 7/2016,PG12,Well,Greene,12.1,7.26,NA,-14,0.72,-0.187188
+DJK+18,Groundwater,Archaea,Licking 0.2 7/8/14,XB05,Well,Licking,12,7.38,NA,-109,-87.5,-0.171556
+DJK+18,Groundwater,Archaea,Licking 0.1 10/27/15,XL11,Well,Licking,11.6,7.35,NA,-91,-71.23,-0.131906
+DJK+18,Groundwater,Archaea,Athens 0.2 7/22/15,7A21,Well,Athens,15.4,7.47,NA,-180,-153.09,-0.167149
+DJK+18,Groundwater,Archaea,Athens 0.1 7/2016,PA11,Well,Athens,14.4,7.5,NA,-165,-136.47,-0.173904
+DJK+18,Groundwater,Archaea,Athens 0.2 10/7/14,YB03,Well,Athens,14.2,7.46,NA,-170,-143.77,-0.177971
+DJK+18,Groundwater,Archaea,Athens 0.2 10/7/14,YA03,Well,Athens,14.2,7.46,NA,-170,-143.77,-0.169825
+DJK+18,Groundwater,Archaea,Athens 0.2 10/27/15,XA21,Well,Athens,14.2,7.49,NA,-172,-144.06,-0.155023
+DJK+18,Groundwater,Archaea,Athens 0.2 7/2016,PA21,Well,Athens,14.4,7.5,NA,-165,-136.47,-0.175702
+DJK+18,Groundwater,Archaea,Athens 0.2 1/19/15,A202,Well,Athens,13.7,7.35,NA,-155,-135.08,-0.172462
+DJK+18,Groundwater,Archaea,Athens 0.2 7/8/14,XA03,Well,Athens,14.4,7.54,NA,-181,-150.19,-0.169135
+DJK+18,Groundwater,Archaea,Athens 0.2 4/15/15,4A22,Well,Athens,14.1,7.53,NA,-171,-140.79,-0.179941
+DJK+18,Groundwater,Archaea,Licking 0.1 2/2016,HL11,Well,Licking,11.3,7.42,NA,-74,-50.3,-0.214413
+DJK+18,Groundwater,Archaea,Athens 0.1 2/2016,HA11,Well,Athens,14.1,7.54,NA,-166,-135.22,-0.179667
+DJK+18,Groundwater,Archaea,Athens 0.2 1/19/15,A201,Well,Athens,13.7,7.35,NA,-155,-135.08,-0.169754
+DJK+18,Groundwater,Archaea,Athens 0.2 4/15/15,4A21,Well,Athens,14.1,7.53,NA,-171,-140.79,-0.173802
+DJK+18,Groundwater,Archaea,Licking 0.2 7/22/15,7L21,Well,Licking,12.3,7.31,NA,-108,-90.44,-0.186834
+DJK+18,Groundwater,Archaea,Licking 0.2 7/22/15,7L22,Well,Licking,12.3,7.31,NA,-108,-90.44,-0.201745
+DJK+18,Groundwater,Archaea,Greene 0.1 7/8/14,XB02,Well,Greene,12.3,7.27,NA,14,29.29,-0.188948
+DJK+18,Groundwater,Archaea,Licking 0.1 4/15/15,4L11,Well,Licking,11.5,7.36,NA,-89,-68.67,-0.196044
+DJK+18,Groundwater,Archaea,Licking 0.1 7/2016,PL11,Well,Licking,12,7.32,NA,-88,-69.9,-0.182849
+DJK+18,Groundwater,Archaea,Athens 0.1 4/15/15,4A12,Well,Athens,14.1,7.53,NA,-171,-140.79,-0.16483
+DJK+18,Groundwater,Archaea,Greene 0.1 7/8/14,XA02,Well,Greene,12.3,7.27,NA,14,29.29,-0.186533
+DJK+18,Groundwater,Archaea,Greene 0.1 4/15/15,4G11,Well,Greene,11.8,7.25,NA,16,30.13,-0.186043
+DJK+18,Groundwater,Archaea,Greene 0.1 1/19/15,G102,Well,Greene,11.2,7.1,NA,61,66.64,-0.186377
+DJK+18,Groundwater,Archaea,Greene 0.1 1/19/15,G101,Well,Greene,11.2,7.1,NA,61,66.64,-0.186527
+DJK+18,Groundwater,Archaea,Licking 0.1 2/2016,HL12,Well,Licking,11.3,7.42,NA,-74,-50.3,-0.189543
+DJK+18,Groundwater,Archaea,Athens 0.1 10/27/15,XA12,Well,Athens,14.2,7.49,NA,-172,-144.06,-0.155999
+DJK+18,Groundwater,Archaea,Licking 0.2 7/8/14,XA05,Well,Licking,12,7.38,NA,-109,-87.5,-0.199418
+DJK+18,Groundwater,Archaea,Licking 0.2 4/15/15,4L22,Well,Licking,11.5,7.36,NA,-89,-68.67,-0.198592
+DJK+18,Groundwater,Archaea,Athens 0.2 7/8/14,XB03,Well,Athens,14.4,7.54,NA,-181,-150.19,-0.172504
+DJK+18,Groundwater,Archaea,Athens 0.1 1/19/15,A101,Well,Athens,13.7,7.35,NA,-155,-135.08,-0.189543
+DJK+18,Groundwater,Archaea,Athens 0.1 7/22/15,7A11,Well,Athens,15.4,7.47,NA,-180,-153.09,-0.189543
 SRM+19,Groundwater,Bacteria,G1,SRR6760377,Land Use,Agriculture,NA,5.26,112.1875,263.9,160.97,-0.149752
 SRM+19,Groundwater,Bacteria,G2,SRR6760378,Land Use,Agriculture,NA,7.07,125.3125,215,219.14,-0.152561
 SRM+19,Groundwater,Bacteria,G3,SRR6760375,Land Use,Community,NA,7.85,202.5,196.1,246.38,-0.154061
@@ -1625,6 +1874,34 @@ MGW+22,Groundwater,Archaea,Can08,SRR14366835,Region,Canterbury,13.5,6.6,222.1875
 MGW+22,Groundwater,Archaea,Wel19,SRR14366834,Region,Wellington,15.7,6.53,157.1875,132.1,105.16,-0.188746
 MGW+22,Groundwater,Archaea,Wel20,SRR14366833,Region,Wellington,13.6,6,21.5625,164.9,108.01,-0.177146
 MGW+22,Groundwater,Archaea,Wel21,SRR14366832,Region,Wellington,14.8,6.35,169.6875,166.7,129.56,-0.180006
+BMV+22,Groundwater,Bacteria,LO-A-6/18,SRR15720322,Type,Subsurface,21.9,7.85,NA,-201.8,-152.04,-0.16564
+BMV+22,Groundwater,Bacteria,LO-B-10/18,SRR15720321,Type,Subsurface,12.6,7.62,NA,-208,-172.85,-0.162117
+BMV+22,Groundwater,Bacteria,LO-C-10/18,SRR15720309,Type,Overflow,26.3,7.61,NA,-460,-423.76,-0.150186
+BMV+22,Groundwater,Bacteria,LO-C-11/19,SRR15720308,Type,Overflow,25.6,7.54,NA,-250,-217.99,-0.168773
+BMV+22,Groundwater,Bacteria,LO-C-6/18,SRR15720310,Type,Overflow,25.8,7.83,NA,-138.5,-89.27,-0.161844
+BMV+22,Groundwater,Bacteria,LO-D-10/18,SRR15720307,Type,Overflow,26.2,7.7,NA,-370,-328.42,-0.150449
+BMV+22,Groundwater,Bacteria,LO-D-11/19,SRR15720306,Type,Overflow,25.5,7.82,NA,-293,-244.41,-0.177443
+BMV+22,Groundwater,Bacteria,LO-E-11/19,SRR15720305,Type,Overflow,24.9,7.5,NA,-245,-215.43,-0.146862
+BMV+22,Groundwater,Bacteria,LO-F-11/19,SRR15720303,Type,Overflow,27,7.8,NA,-280,-232.36,-0.170619
+BMV+22,Groundwater,Bacteria,LO-F-5/18,SRR15720304,Type,Overflow,28.4,7.9,NA,-169.7,-115.85,-0.141031
+BMV+22,Groundwater,Bacteria,LO-G-10/18,SRR15720320,Type,Overflow,15.5,8.7,NA,-188,-90.64,-0.152979
+BMV+22,Groundwater,Bacteria,LO-G-11/19,SRR15720319,Type,Subsurface,20.8,8.6,NA,-188.7,-95.38,-0.163072
+BMV+22,Groundwater,Bacteria,LO-H-10/18,SRR15720318,Type,Subsurface,14.5,8.4,NA,-174.5,-94.6,-0.143631
+BMV+22,Groundwater,Bacteria,LO-H-11/19,SRR15720317,Type,Overflow,19.6,8.4,NA,-170.1,-88.78,-0.162821
+BMV+22,Groundwater,Bacteria,TVR-B-4/19,SRR15720311,Type,Subsurface,17,8.1,NA,-130,-66.67,-0.148008
+BMV+22,Groundwater,Archaea,LO-A-6/18,SRR15720322,Type,Subsurface,21.9,7.85,NA,-201.8,-152.04,-0.194693
+BMV+22,Groundwater,Archaea,LO-B-10/18,SRR15720321,Type,Subsurface,12.6,7.62,NA,-208,-172.85,-0.194113
+BMV+22,Groundwater,Archaea,LO-C-11/19,SRR15720308,Type,Overflow,25.6,7.54,NA,-250,-217.99,-0.195402
+BMV+22,Groundwater,Archaea,LO-C-6/18,SRR15720310,Type,Overflow,25.8,7.83,NA,-138.5,-89.27,-0.194298
+BMV+22,Groundwater,Archaea,LO-D-10/18,SRR15720307,Type,Overflow,26.2,7.7,NA,-370,-328.42,-0.188824
+BMV+22,Groundwater,Archaea,LO-D-11/19,SRR15720306,Type,Overflow,25.5,7.82,NA,-293,-244.41,-0.190959
+BMV+22,Groundwater,Archaea,LO-F-11/19,SRR15720303,Type,Overflow,27,7.8,NA,-280,-232.36,-0.193642
+BMV+22,Groundwater,Archaea,LO-F-5/18,SRR15720304,Type,Overflow,28.4,7.9,NA,-169.7,-115.85,-0.192508
+BMV+22,Groundwater,Archaea,LO-G-10/18,SRR15720320,Type,Overflow,15.5,8.7,NA,-188,-90.64,-0.196044
+BMV+22,Groundwater,Archaea,LO-G-11/19,SRR15720319,Type,Subsurface,20.8,8.6,NA,-188.7,-95.38,-0.187493
+BMV+22,Groundwater,Archaea,LO-H-10/18,SRR15720318,Type,Subsurface,14.5,8.4,NA,-174.5,-94.6,-0.193626
+BMV+22,Groundwater,Archaea,LO-H-11/19,SRR15720317,Type,Overflow,19.6,8.4,NA,-170.1,-88.78,-0.191555
+BMV+22,Groundwater,Archaea,TVR-B-4/19,SRR15720311,Type,Subsurface,17,8.1,NA,-130,-66.67,-0.181416
 ZML+17,Sediment,Bacteria,MG1WinA,ERR1220570,Type,Mangrove Forest,NA,7.07,NA,300,304.14,-0.155114
 ZML+17,Sediment,Bacteria,MG1WinB,ERR1220571,Type,Mangrove Forest,NA,6.38,NA,296,259.32,-0.166045
 ZML+17,Sediment,Bacteria,MG1WinC,ERR1220573,Type,Mangrove Forest,NA,7.21,NA,251,263.42,-0.170864
@@ -2807,39 +3084,39 @@ XLD+20,Soil,Archaea,Htt-sys2 _0day,SRR10260734,Treatment,Htt-sys,NA,4.29,NA,193.
 XLD+20,Soil,Archaea,original-soil1,SRR10260728,Treatment,Original Soil,NA,5.97,NA,287,226.07,-0.187914
 XLD+20,Soil,Archaea,original-soil2,SRR10260727,Treatment,Original Soil,NA,5.97,NA,287,226.07,-0.178013
 XLD+20,Soil,Archaea,original-soil3,SRR10260726,Treatment,Original Soil,NA,5.97,NA,287,226.07,-0.185008
-LJC+20,Soil,Bacteria,L2,SRR11128494,meanT,MAT >= 21.5 degC,NA,5.93,NA,-102,-165.3,-0.141705
-LJC+20,Soil,Bacteria,L4,SRR11128493,meanT,MAT < 21.5 degC,NA,5.43,NA,-184,-276.87,-0.145239
-LJC+20,Soil,Bacteria,L6,SRR11128482,meanT,MAT < 21.5 degC,NA,5.43,NA,-184,-276.87,-0.145341
-LJC+20,Soil,Bacteria,L7,SRR11128471,meanT,MAT >= 21.5 degC,NA,5.74,NA,-124,-198.54,-0.159656
-LJC+20,Soil,Bacteria,L10,SRR11128460,meanT,MAT < 21.5 degC,NA,4.88,NA,-138,-263.41,-0.138425
-LJC+20,Soil,Bacteria,L14,SRR11128454,meanT,MAT >= 21.5 degC,NA,5.89,NA,-42,-107.66,-0.139877
-LJC+20,Soil,Bacteria,L17,SRR11128453,meanT,MAT >= 21.5 degC,NA,5.39,NA,-147,-242.24,-0.138068
-LJC+20,Soil,Bacteria,L22,SRR11128451,meanT,MAT >= 21.5 degC,NA,5.67,NA,-140,-218.68,-0.146117
-LJC+20,Soil,Bacteria,L27,SRR11128450,meanT,MAT >= 21.5 degC,NA,5.29,NA,-98,-199.16,-0.142354
-LJC+20,Soil,Bacteria,L33,SRR11128491,meanT,MAT < 21.5 degC,NA,5.35,NA,-157,-254.61,-0.139935
-LJC+20,Soil,Bacteria,L34,SRR11128490,meanT,MAT >= 21.5 degC,NA,5.36,NA,-183,-280.02,-0.135369
-LJC+20,Soil,Bacteria,L37,SRR11128489,meanT,MAT >= 21.5 degC,NA,4.72,NA,-110,-244.88,-0.138561
-LJC+20,Soil,Bacteria,L46,SRR11128486,meanT,MAT >= 21.5 degC,NA,4.96,NA,-68,-188.68,-0.132771
-LJC+20,Soil,Bacteria,L50,SRR11128483,meanT,MAT >= 21.5 degC,NA,5.33,NA,-178,-276.79,-0.139417
-LJC+20,Soil,Bacteria,L52,SRR11128481,meanT,MAT >= 21.5 degC,NA,5.04,NA,-38,-153.95,-0.126718
-LJC+20,Soil,Bacteria,L55,SRR11128480,meanT,MAT >= 21.5 degC,NA,5.25,NA,-45,-148.52,-0.145242
-LJC+20,Soil,Bacteria,L58,SRR11128479,meanT,MAT >= 21.5 degC,NA,5.17,NA,-120,-228.26,-0.135097
-LJC+20,Soil,Bacteria,L63,SRR11128478,meanT,MAT >= 21.5 degC,NA,5.18,NA,-145,-252.66,-0.136942
-LJC+20,Soil,Bacteria,L66,SRR11128477,meanT,MAT >= 21.5 degC,NA,4.96,NA,-83,-203.68,-0.132305
-LJC+20,Soil,Bacteria,L69,SRR11128476,meanT,MAT >= 21.5 degC,NA,5.48,NA,-134,-223.92,-0.134507
-LJC+20,Soil,Bacteria,L70,SRR11128475,meanT,MAT >= 21.5 degC,NA,5.77,NA,-97,-169.76,-0.130913
-LJC+20,Soil,Bacteria,L75,SRR11128474,meanT,MAT >= 21.5 degC,NA,5.2,NA,-84,-190.48,-0.133128
-LJC+20,Soil,Bacteria,L78,SRR11128473,meanT,MAT < 21.5 degC,NA,6.89,NA,-146,-152.51,-0.147813
-LJC+20,Soil,Bacteria,L81,SRR11128472,meanT,MAT < 21.5 degC,NA,6.77,NA,-114,-127.61,-0.144685
-LJC+20,Soil,Bacteria,L83,SRR11128470,meanT,MAT < 21.5 degC,NA,6.7,NA,-193,-210.75,-0.142125
-LJC+20,Soil,Bacteria,L86,SRR11128469,meanT,MAT < 21.5 degC,NA,6.73,NA,-166,-181.97,-0.143303
-LJC+20,Soil,Bacteria,L90,SRR11128468,meanT,MAT < 21.5 degC,NA,6.53,NA,-137,-164.8,-0.146625
-LJC+20,Soil,Bacteria,L103,SRR11128463,meanT,MAT < 21.5 degC,NA,6.99,NA,-157,-157.59,-0.154206
-LJC+20,Soil,Bacteria,L108,SRR11128462,meanT,MAT < 21.5 degC,NA,7.14,NA,-197,-188.72,-0.147529
-LJC+20,Soil,Bacteria,L111,SRR11128461,meanT,MAT < 21.5 degC,NA,7.14,NA,-264,-255.72,-0.153762
-LJC+20,Soil,Bacteria,L116,SRR11128458,meanT,MAT < 21.5 degC,NA,6.64,NA,-115,-136.3,-0.14886
-LJC+20,Soil,Bacteria,L120,SRR11128457,meanT,MAT < 21.5 degC,NA,5.42,NA,-165,-258.47,-0.139076
-LJC+20,Soil,Bacteria,L125,SRR11128455,meanT,MAT < 21.5 degC,NA,6.32,NA,-153,-193.23,-0.140813
+LJC+20,Soil,Bacteria,L2,SRR11128494,meanT,MAT >= 21.5 °C,NA,5.93,NA,-102,-165.3,-0.141705
+LJC+20,Soil,Bacteria,L4,SRR11128493,meanT,MAT < 21.5 °C,NA,5.43,NA,-184,-276.87,-0.145239
+LJC+20,Soil,Bacteria,L6,SRR11128482,meanT,MAT < 21.5 °C,NA,5.43,NA,-184,-276.87,-0.145341
+LJC+20,Soil,Bacteria,L7,SRR11128471,meanT,MAT >= 21.5 °C,NA,5.74,NA,-124,-198.54,-0.159656
+LJC+20,Soil,Bacteria,L10,SRR11128460,meanT,MAT < 21.5 °C,NA,4.88,NA,-138,-263.41,-0.138425
+LJC+20,Soil,Bacteria,L14,SRR11128454,meanT,MAT >= 21.5 °C,NA,5.89,NA,-42,-107.66,-0.139877
+LJC+20,Soil,Bacteria,L17,SRR11128453,meanT,MAT >= 21.5 °C,NA,5.39,NA,-147,-242.24,-0.138068
+LJC+20,Soil,Bacteria,L22,SRR11128451,meanT,MAT >= 21.5 °C,NA,5.67,NA,-140,-218.68,-0.146117
+LJC+20,Soil,Bacteria,L27,SRR11128450,meanT,MAT >= 21.5 °C,NA,5.29,NA,-98,-199.16,-0.142354
+LJC+20,Soil,Bacteria,L33,SRR11128491,meanT,MAT < 21.5 °C,NA,5.35,NA,-157,-254.61,-0.139935
+LJC+20,Soil,Bacteria,L34,SRR11128490,meanT,MAT >= 21.5 °C,NA,5.36,NA,-183,-280.02,-0.135369
+LJC+20,Soil,Bacteria,L37,SRR11128489,meanT,MAT >= 21.5 °C,NA,4.72,NA,-110,-244.88,-0.138561
+LJC+20,Soil,Bacteria,L46,SRR11128486,meanT,MAT >= 21.5 °C,NA,4.96,NA,-68,-188.68,-0.132771
+LJC+20,Soil,Bacteria,L50,SRR11128483,meanT,MAT >= 21.5 °C,NA,5.33,NA,-178,-276.79,-0.139417
+LJC+20,Soil,Bacteria,L52,SRR11128481,meanT,MAT >= 21.5 °C,NA,5.04,NA,-38,-153.95,-0.126718
+LJC+20,Soil,Bacteria,L55,SRR11128480,meanT,MAT >= 21.5 °C,NA,5.25,NA,-45,-148.52,-0.145242
+LJC+20,Soil,Bacteria,L58,SRR11128479,meanT,MAT >= 21.5 °C,NA,5.17,NA,-120,-228.26,-0.135097
+LJC+20,Soil,Bacteria,L63,SRR11128478,meanT,MAT >= 21.5 °C,NA,5.18,NA,-145,-252.66,-0.136942
+LJC+20,Soil,Bacteria,L66,SRR11128477,meanT,MAT >= 21.5 °C,NA,4.96,NA,-83,-203.68,-0.132305
+LJC+20,Soil,Bacteria,L69,SRR11128476,meanT,MAT >= 21.5 °C,NA,5.48,NA,-134,-223.92,-0.134507
+LJC+20,Soil,Bacteria,L70,SRR11128475,meanT,MAT >= 21.5 °C,NA,5.77,NA,-97,-169.76,-0.130913
+LJC+20,Soil,Bacteria,L75,SRR11128474,meanT,MAT >= 21.5 °C,NA,5.2,NA,-84,-190.48,-0.133128
+LJC+20,Soil,Bacteria,L78,SRR11128473,meanT,MAT < 21.5 °C,NA,6.89,NA,-146,-152.51,-0.147813
+LJC+20,Soil,Bacteria,L81,SRR11128472,meanT,MAT < 21.5 °C,NA,6.77,NA,-114,-127.61,-0.144685
+LJC+20,Soil,Bacteria,L83,SRR11128470,meanT,MAT < 21.5 °C,NA,6.7,NA,-193,-210.75,-0.142125
+LJC+20,Soil,Bacteria,L86,SRR11128469,meanT,MAT < 21.5 °C,NA,6.73,NA,-166,-181.97,-0.143303
+LJC+20,Soil,Bacteria,L90,SRR11128468,meanT,MAT < 21.5 °C,NA,6.53,NA,-137,-164.8,-0.146625
+LJC+20,Soil,Bacteria,L103,SRR11128463,meanT,MAT < 21.5 °C,NA,6.99,NA,-157,-157.59,-0.154206
+LJC+20,Soil,Bacteria,L108,SRR11128462,meanT,MAT < 21.5 °C,NA,7.14,NA,-197,-188.72,-0.147529
+LJC+20,Soil,Bacteria,L111,SRR11128461,meanT,MAT < 21.5 °C,NA,7.14,NA,-264,-255.72,-0.153762
+LJC+20,Soil,Bacteria,L116,SRR11128458,meanT,MAT < 21.5 °C,NA,6.64,NA,-115,-136.3,-0.14886
+LJC+20,Soil,Bacteria,L120,SRR11128457,meanT,MAT < 21.5 °C,NA,5.42,NA,-165,-258.47,-0.139076
+LJC+20,Soil,Bacteria,L125,SRR11128455,meanT,MAT < 21.5 °C,NA,6.32,NA,-153,-193.23,-0.140813
 DTJ+20,Soil,Bacteria,SS-BS-1,SRR11278899,Zone,Bulk Soil,NA,7.28,NA,-169.92,-153.36,-0.154335
 DTJ+20,Soil,Bacteria,SS-BS-2,SRR11278898,Zone,Bulk Soil,NA,7.28,NA,-169.92,-153.36,-0.154389
 DTJ+20,Soil,Bacteria,SS-BS-3,SRR11278897,Zone,Bulk Soil,NA,7.28,NA,-169.92,-153.36,-0.153516

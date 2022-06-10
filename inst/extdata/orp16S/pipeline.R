@@ -46,7 +46,7 @@
 ## STUDY SETTINGS
 
 # Change the following line to setup the pipeline for one study
-study <- "RKN+17"
+study <- "ZDW+19"
 # Settings for all studies are stored here
 file <- tempfile()
 # Write spaces here (but don't save them) to make this easier to read
@@ -113,16 +113,19 @@ writeLines(con = file, text = gsub(" ", "", c(
   "WHLH21a, FALSE, 450",
   "PSB+21, FALSE, 250",
   "RKSK22, FALSE, 295",
+  "DJK+18, TRUE, 250",
   "WLJ+16, TRUE, 200",
 
-  # 20220528-20220608
+  # 20220528-20220610
   "OHL+18, TRUE, 250",
   "LLS+22, FALSE, 450",
   "MGW+22, FALSE, 290",
   "RKN+17, TRUE, 300",
   "ZLH+22, FALSE, 290",
   "WZW+21, FALSE, 290",
-  "LWJ+21, FALSE, 250"
+  "LWJ+21, FALSE, 250",
+  "BMV+22, FALSE, 250",
+  "ZDW+19, TRUE, 400"
 
   # For RSS+18 (Lake Hazen):
   #  - FASTQ files were downloaded from NCBI cloud
@@ -169,7 +172,8 @@ filter <- function(RUNID) {
   # The output file from this function is a FASTA file with .fa suffix
   outfile <- paste0(RUNID, ".fa")
 
-  if(study %in% c("WLJ+16")) {
+  if(study %in% c("DJK+18", "WLJ+16")) {
+    # For DJK+18, FASTQ files were downloaded from SRA cloud and split with seqtk subseq 20220521
     # For WLJ+16, FASTQ files were downloaded from SRA cloud 20220521
     fqdump <- FALSE
   } else {
@@ -209,6 +213,8 @@ filter <- function(RUNID) {
     if(!file.exists(infile)) infile <- paste0(RUNID, "_1.fastq")
     # Use forward reads only
     file.copy(infile, "merged.fastq", overwrite = TRUE)
+    # For Ohio Aquifers, file names are different 20220521
+    if(study == "DJK+18") file.copy(paste0(RUNID, ".fastq"), "merged.fastq", overwrite = TRUE)
     # For Hetao Plain, file names are different 20220521
     if(study == "WLJ+16") file.copy(paste0(RUNID, "_R1.fastq"), "merged.fastq", overwrite = TRUE)
     nseq <- length(readLines("merged.fastq")) / 4
