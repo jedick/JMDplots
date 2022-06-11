@@ -67,267 +67,136 @@ HXZ+20,River & Seawater,Bacteria,C4-100m,SRR8146449,Station,C4,NA,NA,178.7,30,30
 HXZ+20,River & Seawater,Bacteria,C4-150m,SRR8146448,Station,C4,NA,NA,154.7,34,34,-0.146443
 HXZ+20,River & Seawater,Bacteria,C4-200m,SRR8146447,Station,C4,NA,NA,152.1,42,42,-0.141443
 HXZ+20,River & Seawater,Bacteria,C4-300m,SRR8146446,Station,C4,NA,NA,133.9,46.1,46.1,-0.140369
-GSBT20_Prefilter,River & Seawater,Bacteria,BUS1,SRR9049911,Region,Asia,27.39,8.23,239.6875,13.1,86.45,-0.15395
-GSBT20_Prefilter,River & Seawater,Bacteria,BUS10,SRR9049912,Region,Asia,27.44,8.28,255.9375,10,86.34,-0.155491
-GSBT20_Prefilter,River & Seawater,Bacteria,BUS11,SRR9049910,Region,Asia,27.39,8.29,230.9375,10.4,87.32,-0.153582
-GSBT20_Prefilter,River & Seawater,Bacteria,BUS12,SRR9049916,Region,Asia,27.33,8.29,257.5,10.7,87.61,-0.15281
-GSBT20_Prefilter,River & Seawater,Bacteria,BUS14,SRR9050090,Region,Asia,26.89,6.77,208.75,54.9,41.21,-0.154038
-GSBT20_Prefilter,River & Seawater,Bacteria,BUS15,SRR9050302,Region,Asia,27.22,7.15,204.0625,41,49.94,-0.151364
-GSBT20_Prefilter,River & Seawater,Bacteria,HK1,SRR9049845,Region,Asia,30.83,8.09,189.6875,-8.1,57.64,-0.145917
-GSBT20_Prefilter,River & Seawater,Bacteria,HK10,SRR9049844,Region,Asia,28,7.96,218.4375,2.7,60.06,-0.146837
-GSBT20_Prefilter,River & Seawater,Bacteria,HK12,SRR9049850,Region,Asia,27.5,7.91,197.5,7,61.28,-0.149282
-GSBT20_Prefilter,River & Seawater,Bacteria,HK13,SRR9049986,Region,Asia,27.11,7.88,196.25,8.7,61.13,-0.150467
-GSBT20_Prefilter,River & Seawater,Bacteria,HK14,SRR9049988,Region,Asia,27.17,7.87,198.4375,5.5,57.34,-0.150078
-GSBT20_Prefilter,River & Seawater,Bacteria,HK15,SRR9049990,Region,Asia,26.39,7.78,183.125,8.5,54.86,-0.151817
-GSBT20_Prefilter,River & Seawater,Bacteria,KEW1,SRR9053302,Region,Great Lakes,4.78,9.18,396.25,59.7,179.91,-0.169502
-GSBT20_Prefilter,River & Seawater,Bacteria,KEW12,SRR9053820,Region,Great Lakes,11.72,7.83,346.875,67.1,114.01,-0.155759
-GSBT20_Prefilter,River & Seawater,Bacteria,KEW13,SRR9053818,Region,Great Lakes,11.06,7.5,345.9375,62.1,90.3,-0.148532
-GSBT20_Prefilter,River & Seawater,Bacteria,KEW14,SRR9053824,Region,Great Lakes,12.22,7.66,347.1875,73.8,111.17,-0.15377
-GSBT20_Prefilter,River & Seawater,Bacteria,KEW15,SRR9053822,Region,Great Lakes,11.61,7.62,345.3125,75.3,110.33,-0.150635
-GSBT20_Prefilter,River & Seawater,Bacteria,KEW16,SRR9053826,Region,Great Lakes,10.89,7.6,345.9375,77.3,111.11,-0.152454
-GSBT20_Prefilter,River & Seawater,Bacteria,LA1,SRR9053559,Region,West Coast U.S.,21.67,7.9,196.25,68,120.65,-0.159184
-GSBT20_Prefilter,River & Seawater,Bacteria,LA10,SRR9053558,Region,West Coast U.S.,20.11,7.96,233.75,67.4,123.26,-0.154299
-GSBT20_Prefilter,River & Seawater,Bacteria,LA11,SRR9053552,Region,West Coast U.S.,21.11,8.21,258.125,46.6,117.24,-0.16588
-GSBT20_Prefilter,River & Seawater,Bacteria,LA12,SRR9053554,Region,West Coast U.S.,21,8.21,251.875,44.7,115.32,-0.154359
-GSBT20_Prefilter,River & Seawater,Bacteria,LA13,SRR9053564,Region,West Coast U.S.,21.22,8.2,247.8125,43.2,113.29,-0.15018
-GSBT20_Prefilter,River & Seawater,Bacteria,LA14,SRR9053868,Region,West Coast U.S.,22.28,8.18,240.3125,41.2,110.37,-0.143372
-GSBT20_Prefilter,River & Seawater,Bacteria,OAK10,SRR9053239,Region,West Coast U.S.,15.94,7.58,225.625,77.1,110.37,-0.153277
-GSBT20_Prefilter,River & Seawater,Bacteria,OAK11,SRR9053241,Region,West Coast U.S.,15.39,7,229.0625,100.7,100.7,-0.151374
-GSBT20_Prefilter,River & Seawater,Bacteria,OAK12,SRR9053243,Region,West Coast U.S.,15.17,7.39,243.125,94.3,116.61,-0.152924
-GSBT20_Prefilter,River & Seawater,Bacteria,OAK14,SRR9053245,Region,West Coast U.S.,14.61,6.84,229.0625,74.4,65.26,-0.153094
-GSBT20_Prefilter,River & Seawater,Bacteria,OAK15,SRR9053269,Region,West Coast U.S.,18.22,7.8,216.875,61.7,107.95,-0.155274
-GSBT20_Prefilter,River & Seawater,Bacteria,OAK16,SRR9053271,Region,West Coast U.S.,18.39,7.77,210.9375,63.1,107.64,-0.15386
-GSBT20_Prefilter,River & Seawater,Bacteria,SEA1,SRR9053227,Region,West Coast U.S.,14.22,7.92,239.375,69.3,121.76,-0.155792
-GSBT20_Prefilter,River & Seawater,Bacteria,SEA11,SRR9053154,Region,West Coast U.S.,12.83,7.86,240.625,71.3,120.1,-0.152967
-GSBT20_Prefilter,River & Seawater,Bacteria,SEA12,SRR9053148,Region,West Coast U.S.,13.22,7.85,243.125,74,122.3,-0.15444
-GSBT20_Prefilter,River & Seawater,Bacteria,SEA13,SRR9053150,Region,West Coast U.S.,13.39,7.86,246.875,73.7,122.59,-0.154148
-GSBT20_Prefilter,River & Seawater,Bacteria,SEA14,SRR9053258,Region,West Coast U.S.,13.33,7.9,246.25,73.7,124.86,-0.153792
-GSBT20_Prefilter,River & Seawater,Bacteria,SEA15,SRR9053623,Region,West Coast U.S.,13.33,7.9,243.125,74.6,125.76,-0.153648
-GSBT20_Prefilter,River & Seawater,Bacteria,SING1,SRR9049879,Region,Asia,29.33,6.3,181.875,77.4,35.39,-0.147815
-GSBT20_Prefilter,River & Seawater,Bacteria,SING10,SRR9049880,Region,Asia,29.28,7.81,177.8125,21.7,70.3,-0.147925
-GSBT20_Prefilter,River & Seawater,Bacteria,SING12,SRR9049873,Region,Asia,29.33,7.89,178.75,22.5,75.91,-0.146785
-GSBT20_Prefilter,River & Seawater,Bacteria,SING13,SRR9050243,Region,Asia,30.06,7.89,218.75,17.4,70.94,-0.157782
-GSBT20_Prefilter,River & Seawater,Bacteria,SING14,SRR9050245,Region,Asia,29.89,7.92,185.3125,19.5,74.82,-0.164301
-GSBT20_Prefilter,River & Seawater,Bacteria,SING15,SRR9050239,Region,Asia,29.89,7.96,183.75,45.5,103.22,-0.164515
-GSBT20_Prefilter,River & Seawater,Bacteria,BALT1,SRR9053388,Region,East Coast U.S.,24.67,7.25,245,68.8,83.57,-0.146385
-GSBT20_Prefilter,River & Seawater,Bacteria,BALT10,SRR9053387,Region,East Coast U.S.,25.5,8.52,283.4375,95,185.07,-0.141483
-GSBT20_Prefilter,River & Seawater,Bacteria,BALT11,SRR9053385,Region,East Coast U.S.,25.56,8.57,285.625,95.8,188.85,-0.141661
-GSBT20_Prefilter,River & Seawater,Bacteria,BALT12,SRR9053391,Region,East Coast U.S.,25.72,8.61,295.9375,94.7,190.17,-0.141582
-GSBT20_Prefilter,River & Seawater,Bacteria,BALT13,SRR9053389,Region,East Coast U.S.,26.22,8.7,299.0625,93.1,194.08,-0.142056
-GSBT20_Prefilter,River & Seawater,Bacteria,BALT14,SRR9053481,Region,East Coast U.S.,25.89,8.78,314.6875,95.8,201.41,-0.141351
-GSBT20_Prefilter,River & Seawater,Bacteria,CHA10,SRR9053218,Region,East Coast U.S.,26.5,7.6,176.5625,68.9,104.57,-0.142228
-GSBT20_Prefilter,River & Seawater,Bacteria,CHA13,SRR9053224,Region,East Coast U.S.,26.33,7.65,176.25,72.8,111.42,-0.158346
-GSBT20_Prefilter,River & Seawater,Bacteria,CHA16,SRR9053066,Region,East Coast U.S.,26.44,7.72,176.5625,90.5,133.3,-0.163117
-GSBT20_Prefilter,River & Seawater,Bacteria,CHA17,SRR9053068,Region,East Coast U.S.,26.33,7.72,180.3125,76.7,119.48,-0.160259
-GSBT20_Prefilter,River & Seawater,Bacteria,CHA18,SRR9053070,Region,East Coast U.S.,26.44,7.74,178.125,74.7,118.69,-0.163799
-GSBT20_Prefilter,River & Seawater,Bacteria,CHA19,SRR9053072,Region,East Coast U.S.,26.5,7.76,181.5625,75.3,120.48,-0.165924
-GSBT20_Prefilter,River & Seawater,Bacteria,DS1FALLzymo1,SRR9053460,Region,Great Lakes,9.67,7.69,346.875,262.1,300.82,-0.148726
-GSBT20_Prefilter,River & Seawater,Bacteria,DS1FALLzymo13,SRR9053500,Region,Great Lakes,9.67,8.52,323.125,156,241.29,-0.152746
-GSBT20_Prefilter,River & Seawater,Bacteria,DS1FALLzymo14,SRR9053499,Region,Great Lakes,9.72,7.85,322.1875,212.8,260.51,-0.152601
-GSBT20_Prefilter,River & Seawater,Bacteria,DS1FALLzymo15,SRR9053119,Region,Great Lakes,8.72,7.65,334.6875,188.6,224.95,-0.152043
-GSBT20_Prefilter,River & Seawater,Bacteria,DS1FALLzymo16,SRR9053120,Region,Great Lakes,8.06,7.49,336.25,210.3,237.64,-0.15005
-GSBT20_Prefilter,River & Seawater,Bacteria,DS1FALLzymo18,SRR9053042,Region,Great Lakes,9.89,7.61,312.5,236.8,271.06,-0.153424
-GSBT20_Prefilter,River & Seawater,Bacteria,EUM1,SRR9050056,Region,Europe,15.06,7.96,283.125,97.5,152.4,-0.159327
-GSBT20_Prefilter,River & Seawater,Bacteria,EUM10,SRR9050272,Region,Europe,15.17,8.02,263.75,185.1,243.45,-0.157613
-GSBT20_Prefilter,River & Seawater,Bacteria,EUM11,SRR9050270,Region,Europe,15.72,8.01,273.125,166.1,223.99,-0.156422
-GSBT20_Prefilter,River & Seawater,Bacteria,EUM12,SRR9050276,Region,Europe,15.56,8.03,280.9375,151.2,210.2,-0.158427
-GSBT20_Prefilter,River & Seawater,Bacteria,EUM13,SRR9050274,Region,Europe,15.5,8.04,281.875,141.3,200.86,-0.157079
-GSBT20_Prefilter,River & Seawater,Bacteria,EUM14,SRR9050268,Region,Europe,15.56,8.07,283.75,127.1,188.39,-0.155195
-GSBT20_Prefilter,River & Seawater,Bacteria,EUV1,SRR9049922,Region,Europe,16.61,7.77,245.625,156.3,200.57,-0.153869
-GSBT20_Prefilter,River & Seawater,Bacteria,EUV10,SRR9049923,Region,Europe,17,8.2,231.5625,100.1,169.18,-0.155896
-GSBT20_Prefilter,River & Seawater,Bacteria,EUV11,SRR9049917,Region,Europe,17.22,8.19,220.9375,94,162.56,-0.156498
-GSBT20_Prefilter,River & Seawater,Bacteria,EUV13,SRR9049919,Region,Europe,17.22,8.19,220.9375,94,162.56,-0.156291
-GSBT20_Prefilter,River & Seawater,Bacteria,EUV15,SRR9049913,Region,Europe,16.94,8.2,224.375,76.7,145.77,-0.156231
-GSBT20_Prefilter,River & Seawater,Bacteria,EUV16,SRR9050070,Region,Europe,17,8.19,217.5,77.3,145.81,-0.156761
-GSBT20_Prefilter,River & Seawater,Bacteria,GAL1,SRR9053730,Region,East Coast U.S.,26.89,7.4,235,214.3,238.11,-0.145709
-GSBT20_Prefilter,River & Seawater,Bacteria,GAL11,SRR9053113,Region,East Coast U.S.,27.44,8.24,231.5625,120.3,194.25,-0.142931
-GSBT20_Prefilter,River & Seawater,Bacteria,GAL12,SRR9053463,Region,East Coast U.S.,27.44,8.28,230.9375,129.5,205.84,-0.145016
-GSBT20_Prefilter,River & Seawater,Bacteria,GAL13,SRR9053097,Region,East Coast U.S.,27.39,8.26,230.3125,124.4,199.53,-0.145096
-GSBT20_Prefilter,River & Seawater,Bacteria,GAL14,SRR9053403,Region,East Coast U.S.,27.56,8.29,216.5625,129.5,206.47,-0.148396
-GSBT20_Prefilter,River & Seawater,Bacteria,GAL15,SRR9053585,Region,East Coast U.S.,27.33,8.31,225.9375,112.3,190.4,-0.141053
-GSBT20_Prefilter,River & Seawater,Bacteria,GBFALLzymo1,SRR9053343,Region,Great Lakes,18.33,8.15,305.625,160.5,227.01,-0.144136
-GSBT20_Prefilter,River & Seawater,Bacteria,GBFALLzymo10,SRR9053342,Region,Great Lakes,20.06,8.18,302.1875,198.6,267.25,-0.144584
-GSBT20_Prefilter,River & Seawater,Bacteria,GBFALLzymo11,SRR9053345,Region,Great Lakes,20.06,8.16,307.1875,133.7,201.18,-0.142888
-GSBT20_Prefilter,River & Seawater,Bacteria,GBFALLzymo12,SRR9053344,Region,Great Lakes,20.06,8.16,302.8125,138,205.48,-0.143092
-GSBT20_Prefilter,River & Seawater,Bacteria,GBFALLzymo13,SRR9053347,Region,Great Lakes,12.33,8.15,302.1875,138.7,203.84,-0.142831
-GSBT20_Prefilter,River & Seawater,Bacteria,GBFALLzymo14,SRR9053346,Region,Great Lakes,12.39,8.16,299.375,184.1,249.82,-0.141979
-GSBT20_Prefilter,River & Seawater,Bacteria,NY1,SRR9053331,Region,East Coast U.S.,18.33,7.2,218.75,110.7,122.27,-0.152507
-GSBT20_Prefilter,River & Seawater,Bacteria,NY11,SRR9053654,Region,East Coast U.S.,20.06,7.78,196.25,140,185.38,-0.145923
-GSBT20_Prefilter,River & Seawater,Bacteria,NY12,SRR9053656,Region,East Coast U.S.,20.72,7.76,192.5,140.3,184.61,-0.144219
-GSBT20_Prefilter,River & Seawater,Bacteria,NY13,SRR9053658,Region,East Coast U.S.,20.78,7.76,194.6875,143.5,187.82,-0.144831
-GSBT20_Prefilter,River & Seawater,Bacteria,NY14,SRR9053660,Region,East Coast U.S.,20.22,7.8,199.375,138.2,184.77,-0.146928
-GSBT20_Prefilter,River & Seawater,Bacteria,NY17,SRR9053178,Region,East Coast U.S.,20.17,7.77,194.375,144.3,189.11,-0.146602
-GSBT20_Prefilter,River & Seawater,Bacteria,EUN10,SRR9050003,Region,Europe,18.94,8.13,264.375,64,129.49,-0.155386
-GSBT20_Prefilter,River & Seawater,Bacteria,EUN12,SRR9049908,Region,Europe,18.67,8.14,263.125,63.7,129.71,-0.157028
-GSBT20_Prefilter,River & Seawater,Bacteria,EUN13,SRR9049902,Region,Europe,18.56,8.14,262.1875,60.6,126.58,-0.155677
-GSBT20_Prefilter,River & Seawater,Bacteria,EUN14,SRR9050018,Region,Europe,18.61,8.14,254.375,62.7,128.69,-0.156475
-GSBT20_Prefilter,River & Seawater,Bacteria,EUN16,SRR9050266,Region,Europe,19.22,8.13,249.6875,63.3,128.85,-0.159644
-GSBT20_Prefilter,River & Seawater,Bacteria,EUN17,SRR9050264,Region,Europe,18.78,8.13,253.4375,63.6,129.05,-0.158889
-GSBT20_Prefilter,River & Seawater,Bacteria,EUR1,SRR9049813,Region,Europe,13.17,9.33,334.6875,53,185.36,-0.156895
-GSBT20_Prefilter,River & Seawater,Bacteria,EUR10,SRR9050314,Region,Europe,12.56,8.34,342.5,124.5,200.46,-0.159576
-GSBT20_Prefilter,River & Seawater,Bacteria,EUR11,SRR9049814,Region,Europe,12.72,8.86,350.9375,100.9,206.4,-0.158992
-GSBT20_Prefilter,River & Seawater,Bacteria,EUR12,SRR9049980,Region,Europe,12.61,8.65,348.125,98.6,192.15,-0.158274
-GSBT20_Prefilter,River & Seawater,Bacteria,EUR13-5,SRR9049977,Region,Europe,12.5,7.52,340.9375,96.2,125.67,-0.159153
-GSBT20_Prefilter,River & Seawater,Bacteria,EUR15,SRR9049982,Region,Europe,12.22,7.59,329.6875,103.2,136.61,-0.163459
-GSBT20_Prefilter,River & Seawater,Bacteria,EUW10,SRR9050146,Region,Europe,9.7,7.88,285,150.5,199.89,-0.160505
-GSBT20_Prefilter,River & Seawater,Bacteria,EUW11,SRR9050148,Region,Europe,9.7,7.89,285,150.3,200.25,-0.161316
-GSBT20_Prefilter,River & Seawater,Bacteria,EUW12,SRR9050150,Region,Europe,9.6,8.64,285.625,80.6,172.6,-0.159505
-GSBT20_Prefilter,River & Seawater,Bacteria,EUW13,SRR9050152,Region,Europe,9.6,7.99,285.625,110.2,165.74,-0.137258
-GSBT20_Prefilter,River & Seawater,Bacteria,EUW14,SRR9050287,Region,Europe,9.5,7.98,285.9375,96.4,151.36,-0.160856
-GSBT20_Prefilter,River & Seawater,Bacteria,EUW16,SRR9050284,Region,Europe,9.4,7.96,286.25,119.8,173.62,-0.159784
-GSBT20_Prefilter,River & Seawater,Bacteria,NEW1,SRR9053475,Region,East Coast U.S.,23.78,7.52,169.375,141.5,172.14,-0.141266
-GSBT20_Prefilter,River & Seawater,Bacteria,NEW10,SRR9053477,Region,East Coast U.S.,23.83,7.52,172.8125,122.3,152.94,-0.142265
-GSBT20_Prefilter,River & Seawater,Bacteria,NEW11,SRR9053752,Region,East Coast U.S.,23.83,7.52,174.6875,124.3,154.94,-0.142299
-GSBT20_Prefilter,River & Seawater,Bacteria,NEW12,SRR9053167,Region,East Coast U.S.,23.78,7.54,172.5,128.8,160.61,-0.141331
-GSBT20_Prefilter,River & Seawater,Bacteria,NEW13,SRR9053173,Region,East Coast U.S.,23.83,7.58,174.6875,138.8,172.98,-0.141375
-GSBT20_Prefilter,River & Seawater,Bacteria,NEW14,SRR9053171,Region,East Coast U.S.,23.78,7.58,170.9375,154.4,188.57,-0.141128
-GSBT20_Prefilter,River & Seawater,Bacteria,NOF1,SRR9053883,Region,East Coast U.S.,22.44,6.34,220,148.2,109.49,-0.141869
-GSBT20_Prefilter,River & Seawater,Bacteria,NOF10,SRR9053884,Region,East Coast U.S.,24.78,7.97,217.5,236.6,293.94,-0.141894
-GSBT20_Prefilter,River & Seawater,Bacteria,NOF11,SRR9053886,Region,East Coast U.S.,24.78,7.97,217.5,225.7,283.04,-0.140928
-GSBT20_Prefilter,River & Seawater,Bacteria,NOF12,SRR9053888,Region,East Coast U.S.,24.89,7.91,211.5625,216.5,270.31,-0.143696
-GSBT20_Prefilter,River & Seawater,Bacteria,NOF13,SRR9053318,Region,East Coast U.S.,25.83,7.92,235,244.7,299.28,-0.144665
-GSBT20_Prefilter,River & Seawater,Bacteria,NOF14,SRR9053320,Region,East Coast U.S.,25.28,7.94,186.25,234.8,290.46,-0.148065
-GSBT20_Prefilter,River & Seawater,Archaea,SEA1,SRR9053227,Region,West Coast U.S.,14.22,7.92,239.375,69.3,121.76,-0.128426
-GSBT20_Prefilter,River & Seawater,Archaea,SEA11,SRR9053154,Region,West Coast U.S.,12.83,7.86,240.625,71.3,120.1,-0.126415
+GSBT20_Prefilter,River & Seawater,Bacteria,BUS1,SRR9049911,Region,Asia,27.39,8.23,239.6875,13.1,86.45,-0.153784
+GSBT20_Prefilter,River & Seawater,Bacteria,BUS10,SRR9049912,Region,Asia,27.44,8.28,255.9375,10,86.34,-0.155528
+GSBT20_Prefilter,River & Seawater,Bacteria,BUS11,SRR9049910,Region,Asia,27.39,8.29,230.9375,10.4,87.32,-0.153625
+GSBT20_Prefilter,River & Seawater,Bacteria,HK1,SRR9049845,Region,Asia,30.83,8.09,189.6875,-8.1,57.64,-0.145833
+GSBT20_Prefilter,River & Seawater,Bacteria,HK10,SRR9049844,Region,Asia,28,7.96,218.4375,2.7,60.06,-0.147252
+GSBT20_Prefilter,River & Seawater,Bacteria,HK12,SRR9049850,Region,Asia,27.5,7.91,197.5,7,61.28,-0.149349
+GSBT20_Prefilter,River & Seawater,Bacteria,KEW1,SRR9053302,Region,Great Lakes,4.78,9.18,396.25,59.7,179.91,-0.169754
+GSBT20_Prefilter,River & Seawater,Bacteria,KEW12,SRR9053820,Region,Great Lakes,11.72,7.83,346.875,67.1,114.01,-0.156502
+GSBT20_Prefilter,River & Seawater,Bacteria,KEW13,SRR9053818,Region,Great Lakes,11.06,7.5,345.9375,62.1,90.3,-0.148441
+GSBT20_Prefilter,River & Seawater,Bacteria,LA1,SRR9053559,Region,West Coast U.S.,21.67,7.9,196.25,68,120.65,-0.159294
+GSBT20_Prefilter,River & Seawater,Bacteria,LA10,SRR9053558,Region,West Coast U.S.,20.11,7.96,233.75,67.4,123.26,-0.154146
+GSBT20_Prefilter,River & Seawater,Bacteria,LA11,SRR9053552,Region,West Coast U.S.,21.11,8.21,258.125,46.6,117.24,-0.16597
+GSBT20_Prefilter,River & Seawater,Bacteria,OAK10,SRR9053239,Region,West Coast U.S.,15.94,7.58,225.625,77.1,110.37,-0.153146
+GSBT20_Prefilter,River & Seawater,Bacteria,OAK11,SRR9053241,Region,West Coast U.S.,15.39,7,229.0625,100.7,100.7,-0.151439
+GSBT20_Prefilter,River & Seawater,Bacteria,OAK12,SRR9053243,Region,West Coast U.S.,15.17,7.39,243.125,94.3,116.61,-0.153316
+GSBT20_Prefilter,River & Seawater,Bacteria,SEA1,SRR9053227,Region,West Coast U.S.,14.22,7.92,239.375,69.3,121.76,-0.155746
+GSBT20_Prefilter,River & Seawater,Bacteria,SEA11,SRR9053154,Region,West Coast U.S.,12.83,7.86,240.625,71.3,120.1,-0.153031
+GSBT20_Prefilter,River & Seawater,Bacteria,SEA12,SRR9053148,Region,West Coast U.S.,13.22,7.85,243.125,74,122.3,-0.15448
+GSBT20_Prefilter,River & Seawater,Bacteria,SING1,SRR9049879,Region,Asia,29.33,6.3,181.875,77.4,35.39,-0.147692
+GSBT20_Prefilter,River & Seawater,Bacteria,SING10,SRR9049880,Region,Asia,29.28,7.81,177.8125,21.7,70.3,-0.147786
+GSBT20_Prefilter,River & Seawater,Bacteria,SING12,SRR9049873,Region,Asia,29.33,7.89,178.75,22.5,75.91,-0.146798
+GSBT20_Prefilter,River & Seawater,Bacteria,BALT1,SRR9053388,Region,East Coast U.S.,24.67,7.25,245,68.8,83.57,-0.146291
+GSBT20_Prefilter,River & Seawater,Bacteria,BALT10,SRR9053387,Region,East Coast U.S.,25.5,8.52,283.4375,95,185.07,-0.14126
+GSBT20_Prefilter,River & Seawater,Bacteria,BALT11,SRR9053385,Region,East Coast U.S.,25.56,8.57,285.625,95.8,188.85,-0.141586
+GSBT20_Prefilter,River & Seawater,Bacteria,CHA10,SRR9053218,Region,East Coast U.S.,26.5,7.6,176.5625,68.9,104.57,-0.142164
+GSBT20_Prefilter,River & Seawater,Bacteria,CHA13,SRR9053224,Region,East Coast U.S.,26.33,7.65,176.25,72.8,111.42,-0.158308
+GSBT20_Prefilter,River & Seawater,Bacteria,CHA16,SRR9053066,Region,East Coast U.S.,26.44,7.72,176.5625,90.5,133.3,-0.163126
+GSBT20_Prefilter,River & Seawater,Bacteria,DS1FALLzymo1,SRR9053460,Region,Great Lakes,9.67,7.69,346.875,262.1,300.82,-0.14869
+GSBT20_Prefilter,River & Seawater,Bacteria,DS1FALLzymo13,SRR9053500,Region,Great Lakes,9.67,8.52,323.125,156,241.29,-0.153141
+GSBT20_Prefilter,River & Seawater,Bacteria,DS1FALLzymo14,SRR9053499,Region,Great Lakes,9.72,7.85,322.1875,212.8,260.51,-0.152344
+GSBT20_Prefilter,River & Seawater,Bacteria,EUM1,SRR9050056,Region,Europe,15.06,7.96,283.125,97.5,152.4,-0.159584
+GSBT20_Prefilter,River & Seawater,Bacteria,EUM10,SRR9050272,Region,Europe,15.17,8.02,263.75,185.1,243.45,-0.157844
+GSBT20_Prefilter,River & Seawater,Bacteria,EUM11,SRR9050270,Region,Europe,15.72,8.01,273.125,166.1,223.99,-0.156432
+GSBT20_Prefilter,River & Seawater,Bacteria,EUV1,SRR9049922,Region,Europe,16.61,7.77,245.625,156.3,200.57,-0.153871
+GSBT20_Prefilter,River & Seawater,Bacteria,EUV10,SRR9049923,Region,Europe,17,8.2,231.5625,100.1,169.18,-0.156028
+GSBT20_Prefilter,River & Seawater,Bacteria,EUV11,SRR9049917,Region,Europe,17.22,8.19,220.9375,94,162.56,-0.156256
+GSBT20_Prefilter,River & Seawater,Bacteria,GAL1,SRR9053730,Region,East Coast U.S.,26.89,7.4,235,214.3,238.11,-0.146055
+GSBT20_Prefilter,River & Seawater,Bacteria,GAL11,SRR9053113,Region,East Coast U.S.,27.44,8.24,231.5625,120.3,194.25,-0.14296
+GSBT20_Prefilter,River & Seawater,Bacteria,GAL12,SRR9053463,Region,East Coast U.S.,27.44,8.28,230.9375,129.5,205.84,-0.145122
+GSBT20_Prefilter,River & Seawater,Bacteria,GBFALLzymo1,SRR9053343,Region,Great Lakes,18.33,8.15,305.625,160.5,227.01,-0.144204
+GSBT20_Prefilter,River & Seawater,Bacteria,GBFALLzymo10,SRR9053342,Region,Great Lakes,20.06,8.18,302.1875,198.6,267.25,-0.144659
+GSBT20_Prefilter,River & Seawater,Bacteria,GBFALLzymo11,SRR9053345,Region,Great Lakes,20.06,8.16,307.1875,133.7,201.18,-0.142653
+GSBT20_Prefilter,River & Seawater,Bacteria,NY1,SRR9053331,Region,East Coast U.S.,18.33,7.2,218.75,110.7,122.27,-0.152131
+GSBT20_Prefilter,River & Seawater,Bacteria,NY11,SRR9053654,Region,East Coast U.S.,20.06,7.78,196.25,140,185.38,-0.145804
+GSBT20_Prefilter,River & Seawater,Bacteria,NY12,SRR9053656,Region,East Coast U.S.,20.72,7.76,192.5,140.3,184.61,-0.144196
+GSBT20_Prefilter,River & Seawater,Bacteria,EUN10,SRR9050003,Region,Europe,18.94,8.13,264.375,64,129.49,-0.155163
+GSBT20_Prefilter,River & Seawater,Bacteria,EUN12,SRR9049908,Region,Europe,18.67,8.14,263.125,63.7,129.71,-0.156582
+GSBT20_Prefilter,River & Seawater,Bacteria,EUN13,SRR9049902,Region,Europe,18.56,8.14,262.1875,60.6,126.58,-0.155947
+GSBT20_Prefilter,River & Seawater,Bacteria,EUR1,SRR9049813,Region,Europe,13.17,9.33,334.6875,53,185.36,-0.157236
+GSBT20_Prefilter,River & Seawater,Bacteria,EUR10,SRR9050314,Region,Europe,12.56,8.34,342.5,124.5,200.46,-0.159498
+GSBT20_Prefilter,River & Seawater,Bacteria,EUR11,SRR9049814,Region,Europe,12.72,8.86,350.9375,100.9,206.4,-0.159054
+GSBT20_Prefilter,River & Seawater,Bacteria,EUW10,SRR9050146,Region,Europe,9.7,7.88,285,150.5,199.89,-0.161233
+GSBT20_Prefilter,River & Seawater,Bacteria,EUW11,SRR9050148,Region,Europe,9.7,7.89,285,150.3,200.25,-0.162337
+GSBT20_Prefilter,River & Seawater,Bacteria,EUW12,SRR9050150,Region,Europe,9.6,8.64,285.625,80.6,172.6,-0.160183
+GSBT20_Prefilter,River & Seawater,Bacteria,NEW1,SRR9053475,Region,East Coast U.S.,23.78,7.52,169.375,141.5,172.14,-0.141472
+GSBT20_Prefilter,River & Seawater,Bacteria,NEW10,SRR9053477,Region,East Coast U.S.,23.83,7.52,172.8125,122.3,152.94,-0.142269
+GSBT20_Prefilter,River & Seawater,Bacteria,NEW11,SRR9053752,Region,East Coast U.S.,23.83,7.52,174.6875,124.3,154.94,-0.142088
+GSBT20_Prefilter,River & Seawater,Bacteria,NOF1,SRR9053883,Region,East Coast U.S.,22.44,6.34,220,148.2,109.49,-0.141737
+GSBT20_Prefilter,River & Seawater,Bacteria,NOF10,SRR9053884,Region,East Coast U.S.,24.78,7.97,217.5,236.6,293.94,-0.141879
+GSBT20_Prefilter,River & Seawater,Bacteria,NOF11,SRR9053886,Region,East Coast U.S.,24.78,7.97,217.5,225.7,283.04,-0.141011
+GSBT20_Prefilter,River & Seawater,Archaea,SEA1,SRR9053227,Region,West Coast U.S.,14.22,7.92,239.375,69.3,121.76,-0.128449
+GSBT20_Prefilter,River & Seawater,Archaea,SEA11,SRR9053154,Region,West Coast U.S.,12.83,7.86,240.625,71.3,120.1,-0.126351
 GSBT20_Prefilter,River & Seawater,Archaea,SEA12,SRR9053148,Region,West Coast U.S.,13.22,7.85,243.125,74,122.3,-0.125748
-GSBT20_Prefilter,River & Seawater,Archaea,SEA13,SRR9053150,Region,West Coast U.S.,13.39,7.86,246.875,73.7,122.59,-0.128551
-GSBT20_Prefilter,River & Seawater,Archaea,SEA14,SRR9053258,Region,West Coast U.S.,13.33,7.9,246.25,73.7,124.86,-0.132203
-GSBT20_Prefilter,River & Seawater,Archaea,SEA15,SRR9053623,Region,West Coast U.S.,13.33,7.9,243.125,74.6,125.76,-0.129797
-GSBT20_Prefilter,River & Seawater,Archaea,SING12,SRR9049873,Region,Asia,29.33,7.89,178.75,22.5,75.91,-0.144368
-GSBT20_Prefilter,River & Seawater,Archaea,SING13,SRR9050243,Region,Asia,30.06,7.89,218.75,17.4,70.94,-0.128565
-GSBT20_Prefilter,River & Seawater,Archaea,SING14,SRR9050245,Region,Asia,29.89,7.92,185.3125,19.5,74.82,-0.172565
-GSBT20_Prefilter,River & Seawater,Archaea,SING15,SRR9050239,Region,Asia,29.89,7.96,183.75,45.5,103.22,-0.162686
-GSBT20_Prefilter,River & Seawater,Archaea,CHA16,SRR9053066,Region,East Coast U.S.,26.44,7.72,176.5625,90.5,133.3,-0.125287
-GSBT20_Prefilter,River & Seawater,Archaea,CHA17,SRR9053068,Region,East Coast U.S.,26.33,7.72,180.3125,76.7,119.48,-0.12634
-GSBT20_Prefilter,River & Seawater,Archaea,CHA18,SRR9053070,Region,East Coast U.S.,26.44,7.74,178.125,74.7,118.69,-0.124705
-GSBT20_Prefilter,River & Seawater,Archaea,CHA19,SRR9053072,Region,East Coast U.S.,26.5,7.76,181.5625,75.3,120.48,-0.124909
-GSBT20_Postfilter,River & Seawater,Bacteria,BUS10post,SRR9049909,Region,Asia,27.44,8.28,255.9375,10,86.34,-0.176262
-GSBT20_Postfilter,River & Seawater,Bacteria,BUS11post,SRR9049915,Region,Asia,27.39,8.29,230.9375,10.4,87.32,-0.177194
-GSBT20_Postfilter,River & Seawater,Bacteria,BUS12post,SRR9050298,Region,Asia,27.33,8.29,257.5,10.7,87.61,-0.177979
-GSBT20_Postfilter,River & Seawater,Bacteria,BUS15post,SRR9050299,Region,Asia,27.22,7.15,204.0625,41,49.94,-0.181416
-GSBT20_Postfilter,River & Seawater,Bacteria,BUS16post,SRR9050305,Region,Asia,27.11,7.51,204.6875,36.9,67.28,-0.17578
-GSBT20_Postfilter,River & Seawater,Bacteria,BUS17post,SRR9050303,Region,Asia,27.56,7.66,196.875,29.6,68.98,-0.177428
-GSBT20_Postfilter,River & Seawater,Bacteria,HK10post,SRR9049843,Region,Asia,28,7.96,218.4375,2.7,60.06,-0.15687
-GSBT20_Postfilter,River & Seawater,Bacteria,HK12post,SRR9049985,Region,Asia,27.5,7.91,197.5,7,61.28,-0.160468
-GSBT20_Postfilter,River & Seawater,Bacteria,HK14post,SRR9049989,Region,Asia,27.17,7.87,198.4375,5.5,57.34,-0.157397
-GSBT20_Postfilter,River & Seawater,Bacteria,HK15post,SRR9049991,Region,Asia,26.39,7.78,183.125,8.5,54.86,-0.159651
-GSBT20_Postfilter,River & Seawater,Bacteria,HK16post,SRR9049993,Region,Asia,26.94,7.91,230.3125,2.3,56.48,-0.15408
-GSBT20_Postfilter,River & Seawater,Bacteria,HK17post,SRR9050080,Region,Asia,28.44,7.99,208.75,0.2,59.44,-0.156031
-GSBT20_Postfilter,River & Seawater,Bacteria,KEW11post,SRR9053821,Region,Great Lakes,11.33,7.51,339.0625,58.4,87.19,-0.145796
-GSBT20_Postfilter,River & Seawater,Bacteria,KEW14post,SRR9053823,Region,Great Lakes,12.22,7.66,347.1875,73.8,111.17,-0.149302
-GSBT20_Postfilter,River & Seawater,Bacteria,KEW15post,SRR9053827,Region,Great Lakes,11.61,7.62,345.3125,75.3,110.33,-0.150465
-GSBT20_Postfilter,River & Seawater,Bacteria,KEW16post,SRR9053047,Region,Great Lakes,10.89,7.6,345.9375,77.3,111.11,-0.150507
-GSBT20_Postfilter,River & Seawater,Bacteria,KEW17post,SRR9053045,Region,Great Lakes,12,7.56,346.25,77.6,109.28,-0.149142
-GSBT20_Postfilter,River & Seawater,Bacteria,KEW18post,SRR9053051,Region,Great Lakes,11.11,7.57,345,81.5,113.65,-0.14837
-GSBT20_Postfilter,River & Seawater,Bacteria,LA12post,SRR9053565,Region,West Coast U.S.,21,8.21,251.875,44.7,115.32,-0.162308
-GSBT20_Postfilter,River & Seawater,Bacteria,LA14post,SRR9053865,Region,West Coast U.S.,22.28,8.18,240.3125,41.2,110.37,-0.163256
-GSBT20_Postfilter,River & Seawater,Bacteria,LA15post,SRR9053863,Region,West Coast U.S.,22.83,8.21,249.375,44,115.06,-0.163972
-GSBT20_Postfilter,River & Seawater,Bacteria,LA16post,SRR9053861,Region,West Coast U.S.,22.72,8.19,247.1875,44.3,114.16,-0.165407
-GSBT20_Postfilter,River & Seawater,Bacteria,LA17post,SRR9053871,Region,West Coast U.S.,22.44,8.18,243.75,45.2,114.4,-0.163565
-GSBT20_Postfilter,River & Seawater,Bacteria,LA1post,SRR9053511,Region,West Coast U.S.,21.67,7.9,196.25,68,120.65,-0.169544
-GSBT20_Postfilter,River & Seawater,Bacteria,OAK10post,SRR9053240,Region,West Coast U.S.,15.94,7.58,225.625,77.1,110.37,-0.168536
-GSBT20_Postfilter,River & Seawater,Bacteria,OAK11post,SRR9053242,Region,West Coast U.S.,15.39,7,229.0625,100.7,100.7,-0.169967
-GSBT20_Postfilter,River & Seawater,Bacteria,OAK16post,SRR9053266,Region,West Coast U.S.,18.39,7.77,210.9375,63.1,107.64,-0.181398
-GSBT20_Postfilter,River & Seawater,Bacteria,OAK17post,SRR9053268,Region,West Coast U.S.,18.72,7.8,216.25,65,111.33,-0.17677
-GSBT20_Postfilter,River & Seawater,Bacteria,OAK18post,SRR9053264,Region,West Coast U.S.,17.72,7.83,219.6875,65.4,113.3,-0.175889
-GSBT20_Postfilter,River & Seawater,Bacteria,OAK19post,SRR9053646,Region,West Coast U.S.,18.89,7.81,218.125,64.5,111.43,-0.178204
-GSBT20_Postfilter,River & Seawater,Bacteria,SEA11post,SRR9053149,Region,West Coast U.S.,12.83,7.86,240.625,71.3,120.1,-0.16568
-GSBT20_Postfilter,River & Seawater,Bacteria,SEA12post,SRR9053151,Region,West Coast U.S.,13.22,7.85,243.125,74,122.3,-0.16396
-GSBT20_Postfilter,River & Seawater,Bacteria,SEA13post,SRR9053262,Region,West Coast U.S.,13.39,7.86,246.875,73.7,122.59,-0.165862
-GSBT20_Postfilter,River & Seawater,Bacteria,SEA14post,SRR9053622,Region,West Coast U.S.,13.33,7.9,246.25,73.7,124.86,-0.165121
-GSBT20_Postfilter,River & Seawater,Bacteria,SEA15post,SRR9053624,Region,West Coast U.S.,13.33,7.9,243.125,74.6,125.76,-0.164886
-GSBT20_Postfilter,River & Seawater,Bacteria,SEA16post,SRR9053626,Region,West Coast U.S.,13.94,7.93,241.875,74.7,127.67,-0.165099
-GSBT20_Postfilter,River & Seawater,Bacteria,SING10post,SRR9049881,Region,Asia,29.28,7.81,177.8125,21.7,70.3,-0.162024
-GSBT20_Postfilter,River & Seawater,Bacteria,SING12post,SRR9049874,Region,Asia,29.33,7.89,178.75,22.5,75.91,-0.163311
-GSBT20_Postfilter,River & Seawater,Bacteria,SING13post,SRR9050242,Region,Asia,30.06,7.89,218.75,17.4,70.94,-0.14766
-GSBT20_Postfilter,River & Seawater,Bacteria,SING15post,SRR9050238,Region,Asia,29.89,7.96,183.75,45.5,103.22,-0.149986
-GSBT20_Postfilter,River & Seawater,Bacteria,SING16post,SRR9050240,Region,Asia,29.61,7.97,184.0625,23.4,81.67,-0.145288
-GSBT20_Postfilter,River & Seawater,Bacteria,SING17post,SRR9050236,Region,Asia,29.67,8,220.9375,19,79.08,-0.14836
-GSBT20_Postfilter,River & Seawater,Bacteria,BALT10post,SRR9053386,Region,East Coast U.S.,25.5,8.52,283.4375,95,185.07,-0.149479
-GSBT20_Postfilter,River & Seawater,Bacteria,BALT11post,SRR9053392,Region,East Coast U.S.,25.56,8.57,285.625,95.8,188.85,-0.146481
-GSBT20_Postfilter,River & Seawater,Bacteria,BALT12post,SRR9053390,Region,East Coast U.S.,25.72,8.61,295.9375,94.7,190.17,-0.144865
-GSBT20_Postfilter,River & Seawater,Bacteria,BALT13post,SRR9053396,Region,East Coast U.S.,26.22,8.7,299.0625,93.1,194.08,-0.14592
-GSBT20_Postfilter,River & Seawater,Bacteria,BALT14post,SRR9053598,Region,East Coast U.S.,25.89,8.78,314.6875,95.8,201.41,-0.149351
-GSBT20_Postfilter,River & Seawater,Bacteria,BALT15post,SRR9053217,Region,East Coast U.S.,26.11,8.81,302.5,93.6,201.07,-0.148923
-GSBT20_Postfilter,River & Seawater,Bacteria,CHA12post,SRR9053223,Region,East Coast U.S.,26.39,7.53,174.6875,69.7,101.2,-0.166149
-GSBT20_Postfilter,River & Seawater,Bacteria,CHA14post,SRR9053065,Region,East Coast U.S.,26.39,7.68,173.4375,73.8,114.21,-0.143778
-GSBT20_Postfilter,River & Seawater,Bacteria,CHA15post,SRR9053067,Region,East Coast U.S.,26.44,7.69,175,75.6,116.61,-0.144784
-GSBT20_Postfilter,River & Seawater,Bacteria,CHA17post,SRR9053071,Region,East Coast U.S.,26.33,7.72,180.3125,76.7,119.48,-0.143752
-GSBT20_Postfilter,River & Seawater,Bacteria,CHA18post,SRR9053073,Region,East Coast U.S.,26.44,7.74,178.125,74.7,118.69,-0.145138
-GSBT20_Postfilter,River & Seawater,Bacteria,CHA19post,SRR9053371,Region,East Coast U.S.,26.5,7.76,181.5625,75.3,120.48,-0.146857
-GSBT20_Postfilter,River & Seawater,Bacteria,EUM10post,SRR9050273,Region,Europe,15.17,8.02,263.75,185.1,243.45,-0.168196
-GSBT20_Postfilter,River & Seawater,Bacteria,EUM11post,SRR9050271,Region,Europe,15.72,8.01,273.125,166.1,223.99,-0.17665
-GSBT20_Postfilter,River & Seawater,Bacteria,EUM12post,SRR9050277,Region,Europe,15.56,8.03,280.9375,151.2,210.2,-0.179259
-GSBT20_Postfilter,River & Seawater,Bacteria,EUM13post,SRR9050275,Region,Europe,15.5,8.04,281.875,141.3,200.86,-0.174267
-GSBT20_Postfilter,River & Seawater,Bacteria,EUM14post,SRR9050269,Region,Europe,15.56,8.07,283.75,127.1,188.39,-0.17134
-GSBT20_Postfilter,River & Seawater,Bacteria,EUM15post,SRR9049927,Region,Europe,15.33,8.07,277.1875,117.4,178.64,-0.171166
-GSBT20_Postfilter,River & Seawater,Bacteria,EUV10post,SRR9049924,Region,Europe,17,8.2,231.5625,100.1,169.18,-0.166752
-GSBT20_Postfilter,River & Seawater,Bacteria,EUV11post,SRR9049918,Region,Europe,17.22,8.19,220.9375,94,162.56,-0.170175
-GSBT20_Postfilter,River & Seawater,Bacteria,EUV13post,SRR9049920,Region,Europe,17.22,8.19,220.9375,94,162.56,-0.174394
-GSBT20_Postfilter,River & Seawater,Bacteria,EUV15post,SRR9049914,Region,Europe,16.94,8.2,224.375,76.7,145.77,-0.173463
-GSBT20_Postfilter,River & Seawater,Bacteria,EUV16post,SRR9050069,Region,Europe,17,8.19,217.5,77.3,145.81,-0.173782
-GSBT20_Postfilter,River & Seawater,Bacteria,EUV18post,SRR9050067,Region,Europe,17.78,8.19,206.25,77.2,145.89,-0.173998
-GSBT20_Postfilter,River & Seawater,Bacteria,GAL10post,SRR9053289,Region,East Coast U.S.,27.17,8.24,234.6875,140.6,214.49,-0.161935
-GSBT20_Postfilter,River & Seawater,Bacteria,GAL12post,SRR9053402,Region,East Coast U.S.,27.44,8.28,230.9375,129.5,205.84,-0.161256
-GSBT20_Postfilter,River & Seawater,Bacteria,GAL13post,SRR9053404,Region,East Coast U.S.,27.39,8.26,230.3125,124.4,199.53,-0.157151
-GSBT20_Postfilter,River & Seawater,Bacteria,GAL14post,SRR9053618,Region,East Coast U.S.,27.56,8.29,216.5625,129.5,206.47,-0.161523
-GSBT20_Postfilter,River & Seawater,Bacteria,GAL15post,SRR9053650,Region,East Coast U.S.,27.33,8.31,225.9375,112.3,190.4,-0.146971
-GSBT20_Postfilter,River & Seawater,Bacteria,GAL16post,SRR9053566,Region,East Coast U.S.,27.39,8.28,234.375,109.6,185.93,-0.163996
-GSBT20_Postfilter,River & Seawater,Bacteria,NY10post,SRR9053655,Region,East Coast U.S.,20.06,7.79,193.4375,137.8,183.76,-0.168388
-GSBT20_Postfilter,River & Seawater,Bacteria,NY12post,SRR9053659,Region,East Coast U.S.,20.72,7.76,192.5,140.3,184.61,-0.171361
-GSBT20_Postfilter,River & Seawater,Bacteria,NY13post,SRR9053661,Region,East Coast U.S.,20.78,7.76,194.6875,143.5,187.82,-0.169194
-GSBT20_Postfilter,River & Seawater,Bacteria,NY16post,SRR9053177,Region,East Coast U.S.,20,7.71,199.375,141.3,182.6,-0.169901
-GSBT20_Postfilter,River & Seawater,Bacteria,NY17post,SRR9053181,Region,East Coast U.S.,20.17,7.77,194.375,144.3,189.11,-0.163449
-GSBT20_Postfilter,River & Seawater,Bacteria,NY18post,SRR9053179,Region,East Coast U.S.,20.06,7.74,194.0625,150,193.05,-0.167476
-GSBT20_Postfilter,River & Seawater,Bacteria,EUN10post,SRR9050004,Region,Europe,18.94,8.13,264.375,64,129.49,-0.167525
-GSBT20_Postfilter,River & Seawater,Bacteria,EUN11post,SRR9049905,Region,Europe,18.83,8.14,264.375,61.5,127.54,-0.170861
-GSBT20_Postfilter,River & Seawater,Bacteria,EUN12post,SRR9049907,Region,Europe,18.67,8.14,263.125,63.7,129.71,-0.169359
-GSBT20_Postfilter,River & Seawater,Bacteria,EUN13post,SRR9049901,Region,Europe,18.56,8.14,262.1875,60.6,126.58,-0.171084
-GSBT20_Postfilter,River & Seawater,Bacteria,EUN14post,SRR9050017,Region,Europe,18.61,8.14,254.375,62.7,128.69,-0.159041
-GSBT20_Postfilter,River & Seawater,Bacteria,EUN15post,SRR9050015,Region,Europe,18.78,8.14,254.0625,62.9,128.93,-0.158351
-GSBT20_Postfilter,River & Seawater,Bacteria,EUR10post,SRR9050110,Region,Europe,12.56,8.34,342.5,124.5,200.46,-0.148132
-GSBT20_Postfilter,River & Seawater,Bacteria,EUR11post,SRR9049815,Region,Europe,12.72,8.86,350.9375,100.9,206.4,-0.145014
-GSBT20_Postfilter,River & Seawater,Bacteria,EUR12post,SRR9049979,Region,Europe,12.61,8.65,348.125,98.6,192.15,-0.147529
-GSBT20_Postfilter,River & Seawater,Bacteria,EUR13post,SRR9049983,Region,Europe,12.67,8.46,347.8125,130.2,213,-0.151251
-GSBT20_Postfilter,River & Seawater,Bacteria,EUR15post,SRR9049981,Region,Europe,12.22,7.59,329.6875,103.2,136.61,-0.157831
-GSBT20_Postfilter,River & Seawater,Bacteria,EUR16post,SRR9049971,Region,Europe,12.22,7.83,327.5,111.2,158.19,-0.159517
-GSBT20_Postfilter,River & Seawater,Bacteria,EUW10post,SRR9050147,Region,Europe,9.7,7.88,285,150.5,199.89,-0.173934
-GSBT20_Postfilter,River & Seawater,Bacteria,EUW11post,SRR9050149,Region,Europe,9.7,7.89,285,150.3,200.25,-0.185269
-GSBT20_Postfilter,River & Seawater,Bacteria,EUW12post,SRR9050151,Region,Europe,9.6,8.64,285.625,80.6,172.6,-0.183314
-GSBT20_Postfilter,River & Seawater,Bacteria,EUW13post,SRR9050153,Region,Europe,9.6,7.99,285.625,110.2,165.74,-0.180875
-GSBT20_Postfilter,River & Seawater,Bacteria,EUW14post,SRR9050286,Region,Europe,9.5,7.98,285.9375,96.4,151.36,-0.180258
-GSBT20_Postfilter,River & Seawater,Bacteria,EUW15post,SRR9050285,Region,Europe,9.5,7.94,285.625,107.2,159.92,-0.18761
-GSBT20_Postfilter,River & Seawater,Bacteria,NEW10post,SRR9053755,Region,East Coast U.S.,23.83,7.52,172.8125,122.3,152.94,-0.146529
-GSBT20_Postfilter,River & Seawater,Bacteria,NEW11post,SRR9053168,Region,East Coast U.S.,23.83,7.52,174.6875,124.3,154.94,-0.145208
-GSBT20_Postfilter,River & Seawater,Bacteria,NEW12post,SRR9053174,Region,East Coast U.S.,23.78,7.54,172.5,128.8,160.61,-0.147412
-GSBT20_Postfilter,River & Seawater,Bacteria,NEW13post,SRR9053172,Region,East Coast U.S.,23.83,7.58,174.6875,138.8,172.98,-0.145266
-GSBT20_Postfilter,River & Seawater,Bacteria,NEW14post,SRR9053778,Region,East Coast U.S.,23.78,7.58,170.9375,154.4,188.57,-0.149598
-GSBT20_Postfilter,River & Seawater,Bacteria,NEW15post,SRR9053786,Region,East Coast U.S.,23.83,7.56,173.75,134.3,167.3,-0.149075
+GSBT20_Prefilter,River & Seawater,Archaea,SING12,SRR9049873,Region,Asia,29.33,7.89,178.75,22.5,75.91,-0.143313
+GSBT20_Prefilter,River & Seawater,Archaea,CHA16,SRR9053066,Region,East Coast U.S.,26.44,7.72,176.5625,90.5,133.3,-0.125382
+GSBT20_Postfilter,River & Seawater,Bacteria,BUS10post,SRR9049909,Region,Asia,27.44,8.28,255.9375,10,86.34,-0.176283
+GSBT20_Postfilter,River & Seawater,Bacteria,BUS11post,SRR9049915,Region,Asia,27.39,8.29,230.9375,10.4,87.32,-0.17722
+GSBT20_Postfilter,River & Seawater,Bacteria,BUS12post,SRR9050298,Region,Asia,27.33,8.29,257.5,10.7,87.61,-0.177837
+GSBT20_Postfilter,River & Seawater,Bacteria,HK10post,SRR9049843,Region,Asia,28,7.96,218.4375,2.7,60.06,-0.157022
+GSBT20_Postfilter,River & Seawater,Bacteria,HK12post,SRR9049985,Region,Asia,27.5,7.91,197.5,7,61.28,-0.160475
+GSBT20_Postfilter,River & Seawater,Bacteria,HK14post,SRR9049989,Region,Asia,27.17,7.87,198.4375,5.5,57.34,-0.157751
+GSBT20_Postfilter,River & Seawater,Bacteria,KEW11post,SRR9053821,Region,Great Lakes,11.33,7.51,339.0625,58.4,87.19,-0.145712
+GSBT20_Postfilter,River & Seawater,Bacteria,KEW14post,SRR9053823,Region,Great Lakes,12.22,7.66,347.1875,73.8,111.17,-0.148984
+GSBT20_Postfilter,River & Seawater,Bacteria,KEW15post,SRR9053827,Region,Great Lakes,11.61,7.62,345.3125,75.3,110.33,-0.150795
+GSBT20_Postfilter,River & Seawater,Bacteria,LA12post,SRR9053565,Region,West Coast U.S.,21,8.21,251.875,44.7,115.32,-0.162277
+GSBT20_Postfilter,River & Seawater,Bacteria,LA14post,SRR9053865,Region,West Coast U.S.,22.28,8.18,240.3125,41.2,110.37,-0.163248
+GSBT20_Postfilter,River & Seawater,Bacteria,LA15post,SRR9053863,Region,West Coast U.S.,22.83,8.21,249.375,44,115.06,-0.164132
+GSBT20_Postfilter,River & Seawater,Bacteria,OAK10post,SRR9053240,Region,West Coast U.S.,15.94,7.58,225.625,77.1,110.37,-0.168554
+GSBT20_Postfilter,River & Seawater,Bacteria,OAK11post,SRR9053242,Region,West Coast U.S.,15.39,7,229.0625,100.7,100.7,-0.169864
+GSBT20_Postfilter,River & Seawater,Bacteria,OAK16post,SRR9053266,Region,West Coast U.S.,18.39,7.77,210.9375,63.1,107.64,-0.181445
+GSBT20_Postfilter,River & Seawater,Bacteria,SEA11post,SRR9053149,Region,West Coast U.S.,12.83,7.86,240.625,71.3,120.1,-0.165759
+GSBT20_Postfilter,River & Seawater,Bacteria,SEA12post,SRR9053151,Region,West Coast U.S.,13.22,7.85,243.125,74,122.3,-0.164248
+GSBT20_Postfilter,River & Seawater,Bacteria,SEA13post,SRR9053262,Region,West Coast U.S.,13.39,7.86,246.875,73.7,122.59,-0.16531
+GSBT20_Postfilter,River & Seawater,Bacteria,SING10post,SRR9049881,Region,Asia,29.28,7.81,177.8125,21.7,70.3,-0.161928
+GSBT20_Postfilter,River & Seawater,Bacteria,SING12post,SRR9049874,Region,Asia,29.33,7.89,178.75,22.5,75.91,-0.163013
+GSBT20_Postfilter,River & Seawater,Bacteria,SING13post,SRR9050242,Region,Asia,30.06,7.89,218.75,17.4,70.94,-0.147627
+GSBT20_Postfilter,River & Seawater,Bacteria,BALT10post,SRR9053386,Region,East Coast U.S.,25.5,8.52,283.4375,95,185.07,-0.149281
+GSBT20_Postfilter,River & Seawater,Bacteria,BALT11post,SRR9053392,Region,East Coast U.S.,25.56,8.57,285.625,95.8,188.85,-0.146803
+GSBT20_Postfilter,River & Seawater,Bacteria,BALT12post,SRR9053390,Region,East Coast U.S.,25.72,8.61,295.9375,94.7,190.17,-0.144836
+GSBT20_Postfilter,River & Seawater,Bacteria,CHA12post,SRR9053223,Region,East Coast U.S.,26.39,7.53,174.6875,69.7,101.2,-0.1663
+GSBT20_Postfilter,River & Seawater,Bacteria,CHA14post,SRR9053065,Region,East Coast U.S.,26.39,7.68,173.4375,73.8,114.21,-0.143575
+GSBT20_Postfilter,River & Seawater,Bacteria,CHA15post,SRR9053067,Region,East Coast U.S.,26.44,7.69,175,75.6,116.61,-0.144639
+GSBT20_Postfilter,River & Seawater,Bacteria,EUM10post,SRR9050273,Region,Europe,15.17,8.02,263.75,185.1,243.45,-0.167842
+GSBT20_Postfilter,River & Seawater,Bacteria,EUM11post,SRR9050271,Region,Europe,15.72,8.01,273.125,166.1,223.99,-0.176684
+GSBT20_Postfilter,River & Seawater,Bacteria,EUM12post,SRR9050277,Region,Europe,15.56,8.03,280.9375,151.2,210.2,-0.178958
+GSBT20_Postfilter,River & Seawater,Bacteria,EUV10post,SRR9049924,Region,Europe,17,8.2,231.5625,100.1,169.18,-0.166769
+GSBT20_Postfilter,River & Seawater,Bacteria,EUV11post,SRR9049918,Region,Europe,17.22,8.19,220.9375,94,162.56,-0.169994
+GSBT20_Postfilter,River & Seawater,Bacteria,EUV13post,SRR9049920,Region,Europe,17.22,8.19,220.9375,94,162.56,-0.174712
+GSBT20_Postfilter,River & Seawater,Bacteria,GAL10post,SRR9053289,Region,East Coast U.S.,27.17,8.24,234.6875,140.6,214.49,-0.162091
+GSBT20_Postfilter,River & Seawater,Bacteria,GAL12post,SRR9053402,Region,East Coast U.S.,27.44,8.28,230.9375,129.5,205.84,-0.160958
+GSBT20_Postfilter,River & Seawater,Bacteria,GAL13post,SRR9053404,Region,East Coast U.S.,27.39,8.26,230.3125,124.4,199.53,-0.157234
+GSBT20_Postfilter,River & Seawater,Bacteria,NY10post,SRR9053655,Region,East Coast U.S.,20.06,7.79,193.4375,137.8,183.76,-0.168059
+GSBT20_Postfilter,River & Seawater,Bacteria,NY12post,SRR9053659,Region,East Coast U.S.,20.72,7.76,192.5,140.3,184.61,-0.171372
+GSBT20_Postfilter,River & Seawater,Bacteria,NY13post,SRR9053661,Region,East Coast U.S.,20.78,7.76,194.6875,143.5,187.82,-0.169046
+GSBT20_Postfilter,River & Seawater,Bacteria,EUN10post,SRR9050004,Region,Europe,18.94,8.13,264.375,64,129.49,-0.167561
+GSBT20_Postfilter,River & Seawater,Bacteria,EUN11post,SRR9049905,Region,Europe,18.83,8.14,264.375,61.5,127.54,-0.170495
+GSBT20_Postfilter,River & Seawater,Bacteria,EUN12post,SRR9049907,Region,Europe,18.67,8.14,263.125,63.7,129.71,-0.169175
+GSBT20_Postfilter,River & Seawater,Bacteria,EUR10post,SRR9050110,Region,Europe,12.56,8.34,342.5,124.5,200.46,-0.148567
+GSBT20_Postfilter,River & Seawater,Bacteria,EUR11post,SRR9049815,Region,Europe,12.72,8.86,350.9375,100.9,206.4,-0.144593
+GSBT20_Postfilter,River & Seawater,Bacteria,EUR12post,SRR9049979,Region,Europe,12.61,8.65,348.125,98.6,192.15,-0.147314
+GSBT20_Postfilter,River & Seawater,Bacteria,EUW10post,SRR9050147,Region,Europe,9.7,7.88,285,150.5,199.89,-0.173864
+GSBT20_Postfilter,River & Seawater,Bacteria,EUW11post,SRR9050149,Region,Europe,9.7,7.89,285,150.3,200.25,-0.185295
+GSBT20_Postfilter,River & Seawater,Bacteria,EUW12post,SRR9050151,Region,Europe,9.6,8.64,285.625,80.6,172.6,-0.18349
+GSBT20_Postfilter,River & Seawater,Bacteria,NEW10post,SRR9053755,Region,East Coast U.S.,23.83,7.52,172.8125,122.3,152.94,-0.146427
+GSBT20_Postfilter,River & Seawater,Bacteria,NEW11post,SRR9053168,Region,East Coast U.S.,23.83,7.52,174.6875,124.3,154.94,-0.145032
+GSBT20_Postfilter,River & Seawater,Bacteria,NEW12post,SRR9053174,Region,East Coast U.S.,23.78,7.54,172.5,128.8,160.61,-0.147146
 GSBT20_Postfilter,River & Seawater,Bacteria,NOF10post,SRR9053885,Region,East Coast U.S.,24.78,7.97,217.5,236.6,293.94,-0.153152
-GSBT20_Postfilter,River & Seawater,Bacteria,NOF11post,SRR9053887,Region,East Coast U.S.,24.78,7.97,217.5,225.7,283.04,-0.156787
-GSBT20_Postfilter,River & Seawater,Bacteria,NOF12post,SRR9053616,Region,East Coast U.S.,24.89,7.91,211.5625,216.5,270.31,-0.158437
-GSBT20_Postfilter,River & Seawater,Bacteria,NOF13post,SRR9053319,Region,East Coast U.S.,25.83,7.92,235,244.7,299.28,-0.162063
-GSBT20_Postfilter,River & Seawater,Bacteria,NOF14post,SRR9053322,Region,East Coast U.S.,25.28,7.94,186.25,234.8,290.46,-0.162257
-GSBT20_Postfilter,River & Seawater,Bacteria,NOF15post,SRR9053043,Region,East Coast U.S.,25.28,7.86,194.6875,279.9,330.82,-0.161464
+GSBT20_Postfilter,River & Seawater,Bacteria,NOF11post,SRR9053887,Region,East Coast U.S.,24.78,7.97,217.5,225.7,283.04,-0.156656
+GSBT20_Postfilter,River & Seawater,Bacteria,NOF12post,SRR9053616,Region,East Coast U.S.,24.89,7.91,211.5625,216.5,270.31,-0.158689
 GSBT20_Postfilter,River & Seawater,Archaea,LA12post,SRR9053565,Region,West Coast U.S.,21,8.21,251.875,44.7,115.32,-0.124377
-GSBT20_Postfilter,River & Seawater,Archaea,OAK10post,SRR9053240,Region,West Coast U.S.,15.94,7.58,225.625,77.1,110.37,-0.125231
-GSBT20_Postfilter,River & Seawater,Archaea,OAK11post,SRR9053242,Region,West Coast U.S.,15.39,7,229.0625,100.7,100.7,-0.12482
-GSBT20_Postfilter,River & Seawater,Archaea,OAK16post,SRR9053266,Region,West Coast U.S.,18.39,7.77,210.9375,63.1,107.64,-0.125409
-GSBT20_Postfilter,River & Seawater,Archaea,OAK17post,SRR9053268,Region,West Coast U.S.,18.72,7.8,216.25,65,111.33,-0.124752
-GSBT20_Postfilter,River & Seawater,Archaea,OAK18post,SRR9053264,Region,West Coast U.S.,17.72,7.83,219.6875,65.4,113.3,-0.125057
-GSBT20_Postfilter,River & Seawater,Archaea,OAK19post,SRR9053646,Region,West Coast U.S.,18.89,7.81,218.125,64.5,111.43,-0.124805
-GSBT20_Postfilter,River & Seawater,Archaea,SEA11post,SRR9053149,Region,West Coast U.S.,12.83,7.86,240.625,71.3,120.1,-0.132743
-GSBT20_Postfilter,River & Seawater,Archaea,SEA12post,SRR9053151,Region,West Coast U.S.,13.22,7.85,243.125,74,122.3,-0.128535
-GSBT20_Postfilter,River & Seawater,Archaea,SEA13post,SRR9053262,Region,West Coast U.S.,13.39,7.86,246.875,73.7,122.59,-0.131456
-GSBT20_Postfilter,River & Seawater,Archaea,SEA14post,SRR9053622,Region,West Coast U.S.,13.33,7.9,246.25,73.7,124.86,-0.134629
-GSBT20_Postfilter,River & Seawater,Archaea,SEA15post,SRR9053624,Region,West Coast U.S.,13.33,7.9,243.125,74.6,125.76,-0.141354
-GSBT20_Postfilter,River & Seawater,Archaea,SEA16post,SRR9053626,Region,West Coast U.S.,13.94,7.93,241.875,74.7,127.67,-0.131931
-GSBT20_Postfilter,River & Seawater,Archaea,SING10post,SRR9049881,Region,Asia,29.28,7.81,177.8125,21.7,70.3,-0.185419
-GSBT20_Postfilter,River & Seawater,Archaea,SING12post,SRR9049874,Region,Asia,29.33,7.89,178.75,22.5,75.91,-0.165688
-GSBT20_Postfilter,River & Seawater,Archaea,SING13post,SRR9050242,Region,Asia,30.06,7.89,218.75,17.4,70.94,-0.145594
-GSBT20_Postfilter,River & Seawater,Archaea,SING17post,SRR9050236,Region,Asia,29.67,8,220.9375,19,79.08,-0.150622
-GSBT20_Postfilter,River & Seawater,Archaea,CHA12post,SRR9053223,Region,East Coast U.S.,26.39,7.53,174.6875,69.7,101.2,-0.125012
-GSBT20_Postfilter,River & Seawater,Archaea,EUW11post,SRR9050149,Region,Europe,9.7,7.89,285,150.3,200.25,-0.126286
+GSBT20_Postfilter,River & Seawater,Archaea,OAK10post,SRR9053240,Region,West Coast U.S.,15.94,7.58,225.625,77.1,110.37,-0.125219
+GSBT20_Postfilter,River & Seawater,Archaea,OAK11post,SRR9053242,Region,West Coast U.S.,15.39,7,229.0625,100.7,100.7,-0.124841
+GSBT20_Postfilter,River & Seawater,Archaea,OAK16post,SRR9053266,Region,West Coast U.S.,18.39,7.77,210.9375,63.1,107.64,-0.125489
+GSBT20_Postfilter,River & Seawater,Archaea,SEA11post,SRR9053149,Region,West Coast U.S.,12.83,7.86,240.625,71.3,120.1,-0.133198
+GSBT20_Postfilter,River & Seawater,Archaea,SEA12post,SRR9053151,Region,West Coast U.S.,13.22,7.85,243.125,74,122.3,-0.129082
+GSBT20_Postfilter,River & Seawater,Archaea,SEA13post,SRR9053262,Region,West Coast U.S.,13.39,7.86,246.875,73.7,122.59,-0.1306
+GSBT20_Postfilter,River & Seawater,Archaea,SING10post,SRR9049881,Region,Asia,29.28,7.81,177.8125,21.7,70.3,-0.184798
+GSBT20_Postfilter,River & Seawater,Archaea,SING12post,SRR9049874,Region,Asia,29.33,7.89,178.75,22.5,75.91,-0.165797
+GSBT20_Postfilter,River & Seawater,Archaea,CHA12post,SRR9053223,Region,East Coast U.S.,26.39,7.53,174.6875,69.7,101.2,-0.125037
+GSBT20_Postfilter,River & Seawater,Archaea,EUW11post,SRR9050149,Region,Europe,9.7,7.89,285,150.3,200.25,-0.125634
 WHL+21,River & Seawater,Bacteria,Spring_URL_T1,SRR10417964,Season,Spring,19.27,7.34,246.25,109.17,128.9,-0.145044
 WHL+21,River & Seawater,Bacteria,Spring_URM_T1,SRR10417885,Season,Spring,18.3,7.24,253.125,105.17,119.05,-0.155969
 WHL+21,River & Seawater,Bacteria,Spring_URR_T1,SRR10417852,Season,Spring,18.27,7.24,244.375,90.03,103.91,-0.146864

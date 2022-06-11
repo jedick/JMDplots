@@ -1,10 +1,10 @@
 "study","name","envirotype","lineage","nsamp","Eh7min","Eh7max","slope","intercept","pearson.r","P.value"
 MLL+18,"Pearl River Estuary",River & Seawater,Bacteria,47,77.99,236.65,0.0172639,-0.147274,0.287444,0.0500992
 HXZ+20,"Sansha Yongle Blue Hole",River & Seawater,Bacteria,21,-331,47,0.0159578,-0.148684,0.466591,0.0329881
-GSBT20_Prefilter,"Port Microbes (Prefilter)",River & Seawater,Bacteria,120,35.39,300.82,0.0301594,-0.156353,0.265116,0.0034296
-GSBT20_Prefilter,"Port Microbes (Prefilter)",River & Seawater,Archaea,14,70.94,133.3,0.440749,-0.183256,0.617019,0.0187432
-GSBT20_Postfilter,"Port Microbes (Postfilter)",River & Seawater,Bacteria,108,49.94,330.82,0.00736286,-0.163092,0.0367767,0.705523
-GSBT20_Postfilter,"Port Microbes (Postfilter)",River & Seawater,Archaea,19,70.3,200.25,0.322982,-0.171345,0.564203,0.0118591
+GSBT20_Prefilter,"Port Microbes (Prefilter)",River & Seawater,Bacteria,60,35.39,300.82,0.0106822,-0.153255,0.0957966,0.466549
+GSBT20_Prefilter,"Port Microbes (Prefilter)",River & Seawater,Archaea,5,75.91,133.3,0.334759,-0.168237,0.97926,0.00357424
+GSBT20_Postfilter,"Port Microbes (Postfilter)",River & Seawater,Bacteria,54,57.34,293.94,0.00570636,-0.162822,0.0286791,0.836901
+GSBT20_Postfilter,"Port Microbes (Postfilter)",River & Seawater,Archaea,11,70.3,200.25,0.343365,-0.17474,0.57409,0.0647569
 WHL+21,"Bahe River",River & Seawater,Bacteria,52,-106.56,192.61,-0.00361357,-0.155479,-0.0348955,0.805997
 ZLH+22,"Nu River",River & Seawater,Bacteria,20,297.32,584.67,-0.00389352,-0.154789,-0.0716784,0.763947
 ZZL+21,"Maozhou River",River & Seawater,Bacteria,54,-88.7,238.87,0.117259,-0.163197,0.546595,1.90282e-05
