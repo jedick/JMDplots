@@ -2363,25 +2363,6 @@ ZZLL21,Sediment,Bacteria,P_10_B,SRR11451055,Type,WWTP,NA,7.29,NA,134.2,151.36,-0
 ZZLL21,Sediment,Bacteria,P_10_M,SRR11451054,Type,WWTP,NA,7.16,NA,124.6,134.06,-0.147946
 ZZLL21,Sediment,Bacteria,P_10_U,SRR11451053,Type,WWTP,NA,6.99,NA,140,139.41,-0.174557
 ZZLL21,Sediment,Bacteria,P_20_M,SRR11451042,Type,WWTP,NA,6.15,NA,206,155.72,-0.144107
-WZW+21,Sediment,Bacteria,library 11,SRR12101834,Treatment,Without C,NA,8.1,NA,-309,-243.93,-0.1819
-WZW+21,Sediment,Bacteria,library 3,SRR12101824,Treatment,Without C,NA,8.35,NA,-285,-205.14,-0.168984
-WZW+21,Sediment,Bacteria,library 1,SRR12101836,Treatment,Without C,NA,8.4,NA,-254,-171.18,-0.180633
-WZW+21,Sediment,Bacteria,library 5,SRR12101818,Treatment,Acetate,NA,8.23,NA,-347,-274.24,-0.16944
-WZW+21,Sediment,Bacteria,library 24,SRR12101820,Treatment,Acetate,NA,8.52,NA,-314,-224.08,-0.176099
-WZW+21,Sediment,Bacteria,library 17,SRR12101828,Treatment,Acetate,NA,8.42,NA,-292,-208,-0.183384
-WZW+21,Sediment,Bacteria,library 20,SRR12101825,Treatment,Acetate,NA,8.46,NA,-276,-189.63,-0.181208
-WZW+21,Sediment,Bacteria,library 7,SRR12101816,Treatment,Lactate,NA,8.51,NA,-290,-200.67,-0.181344
-WZW+21,Sediment,Bacteria,library 15,SRR12101830,Treatment,Lactate,NA,8.47,NA,-315,-228.04,-0.180495
-WZW+21,Sediment,Bacteria,library 12,SRR12101833,Treatment,Lacate,NA,8.61,NA,-318,-222.76,-0.178779
-WZW+21,Sediment,Bacteria,library 2,SRR12101835,Treatment,Lactate,NA,8.39,NA,-291,-208.77,-0.180082
-WZW+21,Sediment,Bacteria,library 8,SRR12101815,Treatment,AQS,NA,8.37,NA,-525,-443.96,-0.173451
-WZW+21,Sediment,Bacteria,library 22,SRR12101822,Treatment,AQS,NA,8.39,NA,-562,-479.77,-0.170996
-WZW+21,Sediment,Bacteria,library 10,SRR12101813,Treatment,AQS,NA,8.66,NA,-570,-471.8,-0.172846
-WZW+21,Sediment,Bacteria,library 19,SRR12101826,Treatment,AQS,NA,8.81,NA,-598,-490.93,-0.172654
-WZW+21,Sediment,Bacteria,library 23,SRR12101821,Treatment,HA,NA,8.92,NA,-327,-213.42,-0.176276
-WZW+21,Sediment,Bacteria,library 6,SRR12101817,Treatment,HA,NA,8.74,NA,-378,-275.07,-0.174075
-WZW+21,Sediment,Bacteria,library 4,SRR12101819,Treatment,HA,NA,8.55,NA,-403,-311.31,-0.183358
-WZW+21,Sediment,Bacteria,library 9,SRR12101814,Treatment,HA,NA,8.71,NA,-424,-322.84,-0.175617
 WFB+21,Sediment,Bacteria,t01d00,SRR12038439,Treatment,C. volutator,NA,NA,2,211,211,-0.148354
 WFB+21,Sediment,Bacteria,t01d15,SRR12038428,Treatment,C. volutator,NA,NA,1.7,147,147,-0.148933
 WFB+21,Sediment,Bacteria,t01d30,SRR12038417,Treatment,C. volutator,NA,NA,0,92,92,-0.149754
@@ -2461,24 +2442,6 @@ WFB+21,Sediment,Bacteria,t20d00,SRR12038407,Treatment,Manual turbation,NA,NA,0.3
 WFB+21,Sediment,Bacteria,t20d15,SRR12038406,Treatment,Manual turbation,NA,NA,0.2,151,151,-0.149478
 WFB+21,Sediment,Bacteria,t20d30,SRR12038404,Treatment,Manual turbation,NA,NA,0,87,87,-0.150453
 WFB+21,Sediment,Bacteria,t20d45,SRR12038403,Treatment,Manual turbation,NA,NA,0,59,59,-0.151517
-LLS+22,Sediment,Bacteria,SCC71,SRR14194024,Month,July,23.9,7.39,NA,-109,-86.01,-0.159764
-LLS+22,Sediment,Bacteria,SCC73,SRR14194012,Month,July,24.3,7.34,NA,-121,-100.93,-0.14994
-LLS+22,Sediment,Bacteria,SCC75,SRR14194000,Month,July,24.6,7.42,NA,-103,-78.19,-0.150758
-LLS+22,Sediment,Bacteria,SC71,SRR14193999,Month,July,24.1,7.65,NA,-120,-81.66,-0.149378
-LLS+22,Sediment,Bacteria,SC73,SRR14193997,Month,July,24.1,7.58,NA,-151,-116.79,-0.143946
-LLS+22,Sediment,Bacteria,SC75,SRR14193995,Month,July,24.5,7.62,NA,-137,-100.38,-0.149735
-LLS+22,Sediment,Bacteria,SCC101,SRR14194022,Month,October,23.4,7.55,NA,-120,-87.64,-0.14724
-LLS+22,Sediment,Bacteria,SCC103,SRR14194020,Month,October,23.1,7.56,NA,-140,-107.08,-0.148994
-LLS+22,Sediment,Bacteria,SCC105,SRR14194018,Month,October,23,7.45,NA,-131,-104.56,-0.145841
-LLS+22,Sediment,Bacteria,SC101,SRR14194017,Month,October,22.9,7.68,NA,-165,-125.06,-0.141073
-LLS+22,Sediment,Bacteria,SC103,SRR14194015,Month,October,23.4,7.76,NA,-170,-125.28,-0.146973
-LLS+22,Sediment,Bacteria,SC105,SRR14194013,Month,October,23.1,7.73,NA,-165,-122.09,-0.144774
-LLS+22,Sediment,Bacteria,SCC121,SRR14194011,Month,December,7.6,7.58,NA,-150,-117.69,-0.150749
-LLS+22,Sediment,Bacteria,SCC123,SRR14194009,Month,December,7.8,7.57,NA,-145,-113.23,-0.145077
-LLS+22,Sediment,Bacteria,SCC125,SRR14194007,Month,December,7.3,7.54,NA,-154,-123.95,-0.147519
-LLS+22,Sediment,Bacteria,SC121,SRR14194006,Month,December,7.7,7.62,NA,-145,-110.45,-0.145451
-LLS+22,Sediment,Bacteria,SC123,SRR14194004,Month,December,7.8,7.6,NA,-138,-104.55,-0.142525
-LLS+22,Sediment,Bacteria,SC125,SRR14194002,Month,December,7.4,7.61,NA,-141,-107.04,-0.143792
 HCW+22,Sediment,Bacteria,21d_Jb1_,SRR16767572,Condition,Static,NA,7.45,NA,-220.9,-194.28,-0.146867
 HCW+22,Sediment,Bacteria,21d_Jb2_,SRR16767571,Condition,Static,NA,7.45,NA,-220.9,-194.28,-0.150651
 HCW+22,Sediment,Bacteria,21d_Jb3_,SRR16767569,Condition,Static,NA,7.45,NA,-220.9,-194.28,-0.15014

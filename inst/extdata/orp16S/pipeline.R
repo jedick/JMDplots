@@ -117,11 +117,9 @@ writeLines(con = file, text = gsub(" ", "", c(
 
   # 20220528-20220610
   "OHL+18, TRUE, 250",
-  "LLS+22, FALSE, 450",
   "MGW+22, FALSE, 290",
   "RKN+17, TRUE, 300",
   "ZLH+22, FALSE, 290",
-  "WZW+21, FALSE, 290",
   "LWJ+21, FALSE, 250",
   "ZDW+19, TRUE, 400"
 

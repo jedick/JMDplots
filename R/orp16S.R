@@ -9,7 +9,7 @@ envirotype <- list(
   "Hot Spring" = c("PCL+18_Acidic", "PCL+18_Alkaline", "BMJ+19", "GWS+20", "PBU+20", "MWY+21"),
   "Hyperalkaline" = c("SBP+20", "RMB+17", "CTS+17", "PSB+21"),
   "Sediment" = c("ZML+17", "BSPD17", "RKN+17", "HDZ+19", "OHL+18_DNA", "WHLH21", "RSS+18", "CLS+19", "HSF+19", "ZHZ+19",
-                 "LMBA21_2017", "HSF+22", "ZZLL21", "WZW+21", "WFB+21", "LLS+22", "HCW+22"),
+                 "LMBA21_2017", "HSF+22", "ZZLL21", "WFB+21", "HCW+22"),
   "Soil" = c("MLL+19", "BMOB18", "WHLH21a", "CWC+20", "PSG+20", "XLD+20", "LJC+20", "DTJ+20", "RKSK22", "DLS21_Bulk",
              "WKP+22", "CKB+22")
 )
@@ -234,9 +234,7 @@ orp16S3 <- function(pdf = FALSE) {
     "LMBA21_2017, 43.42, -2.7", # Fig. 1
     "HSF+22, -9.42979, 46.49524", # SAMN14343437
     "ZZLL21, 22.68, 113.97", # SAMN16964887
-    "WZW+21, 40.967, 107.005", # SAMN14931217   ### Laboratory
     "WFB+21, 56.440893, -2.863194", # methods   ### Mesocosm
-    "LLS+22, 30.19, 122.04", # SAMN18679214
     "HCW+22, 31.3, 119.98" # Materials and methods   ### Laboratory
   )))
 
@@ -271,7 +269,7 @@ orp16S3 <- function(pdf = FALSE) {
   # Identify studies that use samples from laboratory or mesocosm experiments
   lab <- c(
     # Sediment
-    "BSPD17", "RKN+17", "ZHZ+19", "WZW+21", "WFB+21", "HCW+22",
+    "BSPD17", "RKN+17", "ZHZ+19", "WFB+21", "HCW+22",
     # Soil
     "BMOB18", "CWC+20", "PSG+20", "XLD+20", "DTJ+20",
     "DLS21_Bulk", "CKB+22"
@@ -282,7 +280,6 @@ orp16S3 <- function(pdf = FALSE) {
     "MLL+19", "XLD+20", "DTJ+20", # Hunan
     "ZZL+21", "MLL+18", "ZML+17", "ZZLL21", "ZHZ+19", "WHLH21", # GD-HK-MO GBA
     "CLS+19", "HCW+22", # Jiangsu-Gansu-Zhejiang
-    "WZW+21", # Mongolia
     "HDZ+19" # Hubei
   ), 1.5, 2.5)
   # Plot sample locations
@@ -713,10 +710,8 @@ orp16S_S2 <- function(pdf = FALSE) {
            legend.x = "bottomright", dxlim = c(0, 100)),
     plotEZ("ZZLL21", "Bacteria", groupby = "Type", groups = c("Main stream", "Animal farm", "Hospital", "WWTP", "Tributary"),
            legend.x = "bottomleft", dylim = c(-0.005, 0)),
-    plotEZ("WZW+21", "Bacteria", groupby = "Treatment", groups = c("Without C", "Acetate", "Lactate", "AQS", "HA"), legend.x = "bottomleft"),
     plotEZ("WFB+21", "Bacteria", groupby = "Treatment", groups = c("C. volutator", "H. diversicolor", "Cv & Hd", "MPB", "Manual turbation"),
            dylim = c(0, 0.002)),
-    plotEZ("LLS+22", "Bacteria", groupby = "Month", groups = c("July", "October", "December"), legend.x = "bottomleft"),
     plotEZ("HCW+22", "Bacteria", groupby = "Condition", groups = c("Static", "Weak", "Strong"), dylim = c(0, 0.007)),
 
     message("\nSoil"),
@@ -943,8 +938,8 @@ getmdat_orp16S <- function(study, metrics = NULL, dropNA = TRUE, size = NULL, qu
     "BWD+19", "WHL+21", "HSF+19", "ZML+17", "DTJ+20", "WFB+21", "KLM+16", "LMBA21", "BSPD17", "CWC+20",
     "BMOB18", "LJC+20", "DLS21", "ZZLL21", "GWS+20", "CLS+19", "GZL21", "LLC+19", "NLE+21", "APV+20",
     "WHLH21", "PCL+18", "GSBT20", "SPA+21", "IBK+22", "HSF+22", "HCW+22", "WKP+22", "CKB+22", "WHLH21a",
-    "RSS+18", "PSB+21", "RKSK22", "WLJ+16", "DJK+18", "OHL+18", "LLS+22", "WZW+21", "ZLH+22", "LWJ+21",
-    "MGW+22", "RKN+17", "ZDW+19"
+    "RSS+18", "PSB+21", "RKSK22", "WLJ+16", "DJK+18", "OHL+18", "ZLH+22", "LWJ+21", "MGW+22", "RKN+17",
+    "ZDW+19"
   )) {
     # General processing of metadata for orp16S datasets 20210820
     # Get Eh or ORP values (uses partial name matching, can match a column named "Eh (mV)")
@@ -1128,49 +1123,34 @@ getmetrics_orp16S <- function(study, mincount = 100, quiet = TRUE, ...) {
 
 # Function to gather info (study name, number of samples with Bacteria and Archaea,
 # T, pH, Eh, and Eh7 ranges) for filling in Table S1 20220513
+# Rewritten to use precomputed values from EZdat 20220611
 orp16S_info <- function(study) {
-  # Get all samples with mincount = 100
-  metrics <- getmetrics_orp16S(study)
-  # Get metadata for these samples
-  mdat <- getmdat_orp16S(study, metrics)
-  metadata <- mdat$metadata
-  iname <- match("name", tolower(colnames(metadata)))
-  name <- na.omit(metadata[, iname])[1]
-  print(name)
-  # Number of samples with Bacteria and Archaea (note mincount = 100 for each one)
-  metrics.Bac <- try(getmetrics_orp16S(study, lineage = "Bacteria"), TRUE)
-  if(inherits(metrics.Bac, "try-error")) nBac <- 0 else {
-    mdat.Bac <- getmdat_orp16S(study, metrics.Bac)
-    if("Domain" %in% colnames(mdat.Bac$metadata)) {
-      # Only keep runs labeled as "Bacteria" 20220609
-      idomain <- mdat.Bac$metadata$Domain == "Bacteria"
-      mdat.Bac$metadata <- mdat.Bac$metadata[idomain, , drop = FALSE]
-      mdat.Bac$metrics <- mdat.Bac$metrics[idomain, , drop = FALSE]
-    }
-    nBac <- nrow(mdat.Bac$metrics)
-  }
-  metrics.Arc <- try(getmetrics_orp16S(study, lineage = "Archaea"), TRUE)
-  if(inherits(metrics.Arc, "try-error")) nArc <- 0 else {
-    mdat.Arc <- getmdat_orp16S(study, metrics.Arc)
-    if("Domain" %in% colnames(mdat.Arc$metadata)) {
-      # Only keep runs labeled as "Arcteria" 20220609
-      idomain <- mdat.Arc$metadata$Domain == "Archaea"
-      mdat.Arc$metadata <- mdat.Arc$metadata[idomain, , drop = FALSE]
-      mdat.Arc$metrics <- mdat.Arc$metrics[idomain, , drop = FALSE]
-    }
-    nArc <- nrow(mdat.Arc$metrics)
-  }
+  # Get data and linear regression for this dataset
+  thisdat <- EZdat[EZdat$study == study, ]
+  thislm <- EZlm[EZlm$study == study, ]
+  # Print dataset name
+  print(name <- thislm$name[1])
+  # Number of samples with Bacteria and Archaea
+  nBac <- sum(thisdat$lineage == "Bacteria")
+  nArc <- sum(thisdat$lineage == "Archaea")
   print(paste0("nBac: ", nBac, "; nArc: ", nArc))
-  # Now print the T, pH, Eh, Eh7 ranges
-  infotext <- attributes(metadata)$infotext
-  print(infotext)
+  # Format the T, pH, Eh, Eh7 ranges
+  if(all(is.na(thisdat$T))) T <- NA else T <- round(unique(range(thisdat$T, na.rm = TRUE)), 1)
+  if(!all(is.na(T))) T <- paste(T, collapse = " to ")
+  if(all(is.na(thisdat$pH))) pH <- NA else pH <- round(unique(range(thisdat$pH, na.rm = TRUE)), 1)
+  if(!all(is.na(pH))) pH <- paste(pH, collapse = " to ")
+  if(all(is.na(thisdat$Eh))) Eh <- NA else Eh <- round(unique(range(thisdat$Eh, na.rm = TRUE)))
+  if(!all(is.na(Eh))) Eh <- paste(Eh, collapse = " to ")
+  if(all(is.na(thisdat$Eh7))) Eh7 <- NA else Eh7 <- round(unique(range(thisdat$Eh7, na.rm = TRUE)))
+  if(!all(is.na(Eh7))) Eh7 <- paste(Eh7, collapse = " to ")
+  infotxt <- paste0(study, ": T ", T, ", pH ", pH, ", Eh ", Eh, ", Eh7 ", Eh7)
+  print(infotxt)
   # Read linear fit coefficients
-  dat <- EZlm[EZlm$study == study, ]
   bacslope <- NA
   for(lineage in c("Bacteria", "Archaea")) {
-    idat <- dat$lineage == lineage
+    idat <- thislm$lineage == lineage
     if(any(idat)) {
-      slope <- dat$slope[idat]
+      slope <- thislm$slope[idat]
       slopetxt <- "-- (close to zero)"
       if(slope > 0.01) slopetxt <- "positive (> 0.01 V-1)"
       if(slope < -0.01) slopetxt <- "negative (< -0.01 V-1)"
@@ -1180,12 +1160,6 @@ orp16S_info <- function(study) {
     }
   }
   # Return values for Table S1 invisibly 20220520
-  T <- gsub(",.*", "", strsplit(infotext, "T ")[[1]][2])
-  if(T == "assumed 25") T <- NA
-  pH <- gsub(",.*", "", strsplit(infotext, "pH ")[[1]][2])
-  if(pH == "assumed 7") pH <- NA
-  Eh <- gsub(",.*", "", strsplit(infotext, "Eh ")[[1]][2])
-  Eh7 <- strsplit(infotext, "Eh7 ")[[1]][2]
   if(!is.na(bacslope)) bacslope <- strsplit(bacslope, " ")[[1]][1]
   out <- data.frame(study = study, name = name, nBac = nBac, nArc = nArc, T = T, pH = pH, Eh = Eh, Eh7 = Eh7, bacslope = bacslope)
   invisible(out)
@@ -1196,12 +1170,12 @@ orp16S_T2 <- function() {
   # All environment types
   envirotype <- unique(EZlm$envirotype)
   # Initialize output
-  out <- matrix(nrow = length(envirotype), ncol = 6)
+  out <- matrix(nrow = length(envirotype), ncol = 10)
   # Loop over Bacteria and Archaea
   lineage <- c("Bacteria", "Archaea")
   for(ilin in 1:2) {
     # Column offset
-    if(lineage[ilin] == "Archaea") dcol <- 3 else dcol <- 0
+    if(lineage[ilin] == "Archaea") dcol <- 5 else dcol <- 0
     # Loop over environment type
     for(ienv in 1:length(envirotype)) {
       # Get fitting results
@@ -1217,10 +1191,24 @@ orp16S_T2 <- function() {
       out[ienv, 1 + dcol] <- ndat
       out[ienv, 2 + dcol] <- ppos
       out[ienv, 3 + dcol] <- pneg
+      # Record counts of datasets with positive and negative slope for tallying totals 20220611
+      out[ienv, 4 + dcol] <- npos
+      out[ienv, 5 + dcol] <- nneg
     }
   }
+  # Calculate totals for Bacteria and Archaea
+  nBac <- sum(out[, 1])
+  npos.Bac <- round(sum(out[, 4]) / nBac * 100)
+  nneg.Bac <- round(sum(out[, 5]) / nBac * 100)
+  nArc <- sum(out[, 6])
+  npos.Arc <- round(sum(out[, 9]) / nArc * 100)
+  nneg.Arc <- round(sum(out[, 10]) / nArc * 100)
+  # Drop columns with positive and negative counts
+  out <- out[, c(1, 2, 3, 6, 7, 8)]
+  # Add row for total
+  out <- rbind(out, c(nBac, npos.Bac, nneg.Bac, nArc, npos.Arc, nneg.Arc))
   # Put in names
-  rownames(out) <- envirotype
+  rownames(out) <- c(envirotype, "Total")
   colnames(out) <- paste(rep(c("N", "Pos", "Neg"), 2), rep(c("Bac", "Arc"), each = 3), sep = "_")
   out
 }
