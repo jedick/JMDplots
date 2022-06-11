@@ -17,7 +17,7 @@ envirotype <- list(
 envirodat <- do.call(rbind, lapply(seq_along(envirotype), function(i) data.frame(study = envirotype[[i]], groupnum = i)))
 envirodat <- cbind(envirodat, group = names(envirotype)[envirodat$groupnum])
 
-# Set the palette for R colors (numeric index of 'col') 20210914
+# Select color palette 20210914
 orp16Scol <- palette.colors(n = length(envirotype), palette = "Classic Tableau", alpha = 0.75)
 
 # Read Eh7 - ZC data
@@ -449,6 +449,122 @@ orp16S4 <- function(pdf = FALSE) {
 
 }
 
+# Regresison slopes from local to global scale 20220611
+orp16S6 <- function(global.slopes, pdf = FALSE) {
+
+  if(pdf) pdf("Figure6.pdf", width = 8, height = 3)
+  layout(matrix(1:3, nrow = 1), widths = c(5, 4, 4.5))
+  par(mar = c(4, 4, 1, 1))
+  par(mgp = c(2.7, 1, 0))
+  # Get data for Bacteria in Groundwater
+  environment <- "Groundwater"
+  bacdat <- EZdat[EZdat$lineage == "Bacteria", ]
+  gwdat <- bacdat[bacdat$envirotype == environment, ]
+  # Set up plot
+  xlim <- range(gwdat$Eh7)
+  ylim <- range(gwdat$ZC)
+  plot(xlim, ylim, type = "n", xlab = "Eh7 (mV)", ylab = cplab$ZC)
+  # Identify datasets
+  study <- unique(gwdat$study)
+  # Colors for points and lines
+  palette <- "Okabe-Ito"
+  pcol <- palette.colors(n = length(study), palette = palette, alpha = 0.6)
+  lcol <- palette.colors(n = length(study), palette = palette, alpha = 0.8)
+  pch <- rep(22:25, length.out = length(study))
+  # Where to store linear regressions
+  yfits <- xfits <- lms <- list()
+  slopes <- c()
+  # Loop over datasets
+  for(i in 1:length(study)) {
+    # Get data for this study
+    thisstudy <- study[[i]]
+    thisdat <- gwdat[gwdat$study == thisstudy, ]
+    Eh7 <- thisdat$Eh7
+    ZC <- thisdat$ZC
+    # Plot points
+    points(Eh7, ZC, pch = pch[i], cex = 0.7, col = pcol[i], bg = "#00000030")
+    # Fit data with linear model
+    thislm <- lm(ZC ~ Eh7)
+    # Get the slope
+    slope <- thislm$coefficients[2]
+    # Multiply by 1e3 to convert from mV-1 to V-1 or umol-1 to mmol-1
+    slope <- slope * 1e3
+    # Plot linear regression
+    xfit <- range(Eh7)
+    yfit <- predict(thislm, newdata = data.frame(Eh7 = xfit))
+    lines(xfit, yfit, col = pcol[i], lwd = 2, lty = 2)
+    lms[[i]] <- thislm
+    slopes[i] <- slope
+    xfits[[i]] <- xfit
+    yfits[[i]] <- yfit
+  }
+  # Highlight the dataset with the median slope
+  imedian <- which(slopes == median(slopes))
+  lines(xfits[[imedian]], yfits[[imedian]], col = lcol[imedian], lwd = 3, lty = 2)
+  # Round to fixed number of decimal places
+  local.slope <- formatC(slopes[imedian], digits = 3, format = "f")
+
+  # Plot global regression
+  Eh7 <- gwdat$Eh7
+  ZC <- gwdat$ZC
+  thislm <- lm(ZC ~ Eh7)
+  xfit <- range(Eh7)
+  yfit <- predict(thislm, newdata = data.frame(Eh7 = xlim))
+  lines(xfit, yfit, lwd = 3, col = "#00000080")
+  # Get the slope
+  slope <- thislm$coefficients[2]
+  # Multiply by 1e3 to convert from mV-1 to V-1 or umol-1 to mmol-1
+  slope <- slope * 1e3
+  # Round to fixed number of decimal places
+  global.slope <- formatC(slope, digits = 3, format = "f")
+  label.figure("A", font = 2, cex = 1.5, xfrac = 0.03)
+
+  # Create slope legend
+  par(mar = c(4, 1, 1, 1))
+  plot.new()
+  legtxt <- c("Local regressions", bquote("Median local slope" == .(local.slope)~V^-1), bquote("Global slope" == .(global.slope)~V^-1))
+  legcol <- c(lcol[1], lcol[imedian], "#00000080")
+  legend("bottomleft", legend = legtxt, lwd = c(2, 3, 3), lty = c(2, 2, 1), col = legcol, bty = "n", seg.len = 4)
+  # Read pre-calculated dataset regressions and names
+  gwlm <- EZlm[match(study, EZlm$study), ]
+  # Make sure we haven't messed up the slopes somewhere
+  stopifnot(all.equal(gwlm$slope, slopes, tolerance = 1e-5, scale = 1))
+  # Create dataset legend
+  legtext <- gwlm$name
+  legend("topleft", legtext, pch = pch, col = pcol, bty = "n", pt.bg = "#00000030", title = environment)
+  par(mar = c(4, 4, 1, 1))
+
+  # Plot global slope vs median local slope for each environment type
+  envirotypes <- names(envirotype)
+  local.slopes <- sapply(envirotypes, function(eee){
+    baclm <- EZlm[EZlm$lineage == "Bacteria", ]
+    gwlm <- baclm[baclm$envirotype == eee, ]
+    median(gwlm$slope)
+  })
+  # Make sure the median slope matches the one we calculated above
+  stopifnot(all.equal(local.slopes[environment], slopes[imedian], check.attributes = FALSE, tolerance = 1e-5, scale = 1))
+  # Make sure local and global slopes are in same order
+  stopifnot(all(names(global.slopes$Bacteria) == names(local.slopes)))
+  # Plot global vs median local slopes
+  xylim <- range(local.slopes, global.slopes$Bacteria)
+  xylim <- c(0, 0.1)
+  plot(local.slopes, global.slopes$Bacteria, xlim = xylim, ylim = c(0, 0.08),
+       xlab = quote("Median local slope ("*V^-1*")"), ylab = quote("Global slope ("*V^-1*")"), pch = 19, col = orp16Scol)
+  lines(xylim, xylim, lty = 2, col = 8)
+  srt <- 55
+  text(0.045, 0.0525, "Global > Local", srt = srt, col = 8)
+  text(0.055, 0.0475, "Local > Global", srt = srt, col = 8)
+  # Label points
+  envtxt <- envirotypes
+  envtxt[envtxt == "Groundwater"] <- "Ground-\nwater"
+  dx <- c(0.02, 0.0185, -0.005, 0, 0.019, 0.013, -0.007)
+  dy <- c(-0.005, -0.002, 0.006, -0.004, 0, -0.003, 0)
+  text(local.slopes + dx, global.slopes$Bacteria + dy, envtxt, cex = 0.85)
+  label.figure("B", font = 2, cex = 1.5, xfrac = 0.02)
+  if(pdf) dev.off()
+
+}
+
 # Figure 5: Linear regressions between ZC and Eh7 at a global scale 20210828
 orp16S5 <- function(pdf = FALSE) {
 
@@ -469,10 +585,11 @@ orp16S5 <- function(pdf = FALSE) {
   xlim <- range(EZdat$Eh7)
   ylim <- range(EZdat$ZC)
   eedat <- EZdat[EZdat$lineage == "Bacteria", ]
-  eachenv(eedat, xlim = xlim, ylim = ylim, lineage = "Bacteria")
+  slopes <- list()
+  slopes$Bacteria <- eachenv(eedat, xlim = xlim, ylim = ylim, lineage = "Bacteria")
   par(mar = c(1, 0, 0, 0))
   eedat <- EZdat[EZdat$lineage == "Archaea", ]
-  eachenv(eedat, xlim = xlim, ylim = ylim, lineage = "Archaea")
+  slopes$Archaea <- eachenv(eedat, xlim = xlim, ylim = ylim, lineage = "Archaea")
   # Add labels
   plot.new()
   text(0.5, -0.5, "Eh7 (mV)", cex = 1.2, xpd = NA)
@@ -514,6 +631,8 @@ orp16S5 <- function(pdf = FALSE) {
   legend("left", ltext, pch = 19, col = orp16Scol[ienv], bty = "n")
 
   if(pdf) dev.off()
+  # Return slopes 20220611
+  slopes
 
 }
 
@@ -673,7 +792,7 @@ add.linear <- function(xvals, ZC, nstudy = NA, xvar = "Eh7", N_slope.legend.x = 
   # Get the slope
   slope <- thislm$coefficients[2]
   # Multiply by 1e3 to convert from mV-1 to V-1 or umol-1 to mmol-1
-  slope <- slope * 1e3
+  slopeval <- slope <- slope * 1e3
   # Round to fixed number of decimal places
   slope <- formatC(slope, digits = 3, format = "f")
   # Units for Eh7/Eh/O2
@@ -697,6 +816,8 @@ add.linear <- function(xvals, ZC, nstudy = NA, xvar = "Eh7", N_slope.legend.x = 
   ptext <- bquote(italic(P) == .(ptext))
   ltext <- c(rtext, ptext)
   legend("bottomright", legend = ltext, bty = "n", text.col = text.col)
+  # Return slope 20220611
+  slopeval
 }
 
 # Scatterplots for all samples in each environment type 20210913
@@ -712,6 +833,7 @@ eachenv <- function(eedat, add = FALSE, do.linear = TRUE, ienv = c(1, 2, 4, 5, 3
   if(is.null(ylim)) ylim <- range(eedat$ZC)
   # Get names of environment types
   envirotypes <- names(envirotype)
+  slopes <- rep(NA, length(ienv))
   # Loop over environment types
   for(i in ienv) {
     # Start plot
@@ -723,7 +845,7 @@ eachenv <- function(eedat, add = FALSE, do.linear = TRUE, ienv = c(1, 2, 4, 5, 3
     if(do.linear) {
       # Include number of studies in legend 20210925
       nstudy <- length(unique(thisdat$study))
-      add.linear(xvals, ZC, nstudy)
+      slopes[[i]] <- add.linear(xvals, ZC, nstudy)
     }
     if(!isTRUE(add)) {
       # Add plot axes and title
@@ -739,6 +861,11 @@ eachenv <- function(eedat, add = FALSE, do.linear = TRUE, ienv = c(1, 2, 4, 5, 3
     }
     # Plot points
     points(xvals, ZC, pch = 19, cex = 0.2, col = cols[i])
+  }
+  # Return slopes 20220611
+  if(do.linear) {
+    names(slopes) <- envirotypes
+    slopes
   }
 }
 

@@ -6,6 +6,7 @@
 \alias{orp16S3}
 \alias{orp16S4}
 \alias{orp16S5}
+\alias{orp16S6}
 \alias{orp16S_S1}
 \alias{orp16S_S2}
 \alias{orp16S_S3}
@@ -24,6 +25,7 @@ Plots from the paper by Dick and Meng (2021).
   orp16S3(pdf = FALSE)
   orp16S4(pdf = FALSE)
   orp16S5(pdf = FALSE)
+  orp16S6(global.slopes, pdf = FALSE)
   orp16S_S1(pdf = FALSE)
   orp16S_S2(pdf = FALSE)
   orp16S_S3(pdf = FALSE)
@@ -35,6 +37,7 @@ Plots from the paper by Dick and Meng (2021).
 
 \arguments{
   \item{pdf}{logical, make a PDF file?}
+  \item{global.slopes}{value returned by \code{orp16S5}}
   \item{study}{character, study name}
   \item{metrics}{data frame, output of \code{\link[chem16S]{getmetrics}}}
   \item{dropNA}{logical, exclude samples with NA name in metadata?}
@@ -53,6 +56,7 @@ This table gives a brief description of each plotting function.
   \code{orp16S3} \tab Sample locations on world map \cr
   \code{orp16S4} \tab Linear regressions between \ZC and Eh7 at local scales \cr
   \code{orp16S5} \tab Linear regressions between \ZC and Eh7 at a global scale \cr
+  \code{orp16S6} \tab Regresison slopes from local to global scale \cr
   \code{orp16S_S1} \tab Eh-pH diagram (outline from Baas Becking et al., 1960) \cr
   \code{orp16S_S2} \tab \ZC-Eh scatterplots for each dataset \cr
   \code{orp16S_S3} \tab Comparison of Eh7, Eh, and \O2 as predictors of carbon oxidation state \cr

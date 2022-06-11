@@ -75,7 +75,9 @@ export(
   # utegig paper 20220602, 20220605
   "utegig5", "utegigS2",
   # utilities 20220609
-  "cldfun"
+  "cldfun",
+  # orp16S paper 20220611
+  "orp16S6"
 )
 
 # Imports from CHNOSZ
@@ -158,7 +160,8 @@ importFrom("multcompView", "multcompLetters4")
 # Imports from standard packages
 importFrom("grDevices", "dev.off", "cairo_pdf", "pdf", "blues9", "colorRampPalette",
            "chull", "col2rgb", "rgb", "colorRamp", "heat.colors", "topo.colors",
-           "extendrange", "contourLines", "hcl.colors", "savePlot", "png", "palette", "dev.list")
+           "extendrange", "contourLines", "hcl.colors", "savePlot", "png", "dev.list",
+           "palette", "palette.colors")
 importFrom("graphics", "abline", "arrows", "axis", "box", "layout",
            "legend", "lines", "mtext", "par", "plot", "plot.new",
            "points", "rect", "text", "title", "smoothScatter", "strheight",
