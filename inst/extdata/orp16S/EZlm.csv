@@ -49,12 +49,9 @@ SRM+19,"Rayong Province",Groundwater,Bacteria,19,-364.14,246.38,0.0162127,-0.154
 APV+20,"Mezquital Valley",Groundwater,Bacteria,18,55.11,233.73,-0.0391375,-0.146699,-0.342301,0.164398
 APV+20,"Mezquital Valley",Groundwater,Archaea,9,55.11,223.95,-0.0254199,-0.166315,-0.118741,0.760928
 YHK+20,"Hainich Critical Zone",Groundwater,Bacteria,33,159.2,433.21,0.0247025,-0.160704,0.587564,0.000324202
-SRM+21,"Lower Chao Praya Basin",Groundwater,Bacteria,13,-91.16,180.2,-0.00928468,-0.146086,-0.119304,0.697864
 ZCZ+21,"Po Plain",Groundwater,Bacteria,18,-89.37,416.75,-0.0134,-0.153228,-0.362736,0.139031
 MGW+22,"New Zealand Aquifers",Groundwater,Bacteria,71,-133.9,205.82,0.00721335,-0.14844,0.149725,0.212671
 MGW+22,"New Zealand Aquifers",Groundwater,Archaea,69,-133.9,205.82,-0.0179169,-0.177386,-0.312071,0.00904262
-BMV+22,"Underground Gas Reservoirs",Groundwater,Bacteria,15,-423.76,-66.67,0.00892753,-0.156134,0.0843352,0.765074
-BMV+22,"Underground Gas Reservoirs",Groundwater,Archaea,13,-328.42,-66.67,0.00550987,-0.191047,0.110236,0.719962
 ZML+17,"Mai Po Wetland",Sediment,Bacteria,33,-41.62,379.07,-0.0101227,-0.158043,-0.180721,0.314199
 ZML+17,"Mai Po Wetland",Sediment,Archaea,33,-41.62,379.07,-0.0332503,-0.174968,-0.406706,0.0188332
 BSPD17,"Baltic Sea Swedish Coast",Sediment,Bacteria,28,39.42,227.05,0.129035,-0.191306,0.319357,0.0976134

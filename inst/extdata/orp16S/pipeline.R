@@ -46,7 +46,7 @@
 ## STUDY SETTINGS
 
 # Change the following line to setup the pipeline for one study
-study <- "ZDW+19"
+study <- "GSBT20"
 # Settings for all studies are stored here
 file <- tempfile()
 # Write spaces here (but don't save them) to make this easier to read
@@ -77,7 +77,6 @@ writeLines(con = file, text = gsub(" ", "", c(
   "ZCZ+21, FALSE, 450",
   "ZZL+21, FALSE, 450",
   "PBU+20, FALSE, 400",
-  "SRM+21, FALSE, 250",
   "MLL+18, TRUE, 250",
   "BWD+19, FALSE, 400",
   "WHL+21, FALSE, 400",
@@ -124,7 +123,6 @@ writeLines(con = file, text = gsub(" ", "", c(
   "ZLH+22, FALSE, 290",
   "WZW+21, FALSE, 290",
   "LWJ+21, FALSE, 250",
-  "BMV+22, FALSE, 250",
   "ZDW+19, TRUE, 400"
 
   # For RSS+18 (Lake Hazen):

@@ -1572,19 +1572,6 @@ YHK+20,Groundwater,Bacteria,H53_PNK072,ERR3374474,Location,Lower Footslope,9.47,
 YHK+20,Groundwater,Bacteria,H53_PNK075,ERR3374475,Location,Lower Footslope,9.47,7.4,0,237.5,259.93,-0.153662
 YHK+20,Groundwater,Bacteria,H53_PNK084,ERR3374476,Location,Lower Footslope,9.47,7.4,0,237.5,259.93,-0.154623
 YHK+20,Groundwater,Bacteria,H53_PNK087,ERR3374477,Location,Lower Footslope,9.47,7.4,0,237.5,259.93,-0.158655
-SRM+21,Groundwater,Bacteria,DW1,SRR11687821,Depth,Deep,28.8,6.56,66.875,-64.8,-91.16,-0.146092
-SRM+21,Groundwater,Bacteria,DW2,SRR11687820,Depth,Deep,31.5,6.64,165.9375,173.7,151.94,-0.163316
-SRM+21,Groundwater,Bacteria,DW3,SRR11687816,Depth,Deep,28.5,6.55,148.125,172.6,145.67,-0.149711
-SRM+21,Groundwater,Bacteria,DW4,SRR11687815,Depth,Deep,30.2,6.42,77.5,189.7,154.79,-0.141706
-SRM+21,Groundwater,Bacteria,DW5,SRR11687814,Depth,Deep,30,6.51,137.1875,144.3,114.83,-0.147402
-SRM+21,Groundwater,Bacteria,DW6,SRR11687813,Depth,Deep,30.6,6.89,151.25,177.5,170.87,-0.146166
-SRM+21,Groundwater,Bacteria,SW,SRR11687817,Depth,Surface,29.1,6.9,144.0625,182.9,176.9,-0.150372
-SRM+21,Groundwater,Bacteria,W1,SRR11687812,Depth,Shallow,25.8,6.42,86.5625,147.5,113.1,-0.147532
-SRM+21,Groundwater,Bacteria,W2,SRR11687811,Depth,Shallow,30,6.3,77.1875,217.2,175.1,-0.143602
-SRM+21,Groundwater,Bacteria,W3,SRR11687810,Depth,Shallow,30.6,6.24,77.8125,87,41.2,-0.142721
-SRM+21,Groundwater,Bacteria,W4,SRR11687809,Depth,Shallow,27.4,6.6,112.5,199.4,175.55,-0.152008
-SRM+21,Groundwater,Bacteria,W5,SRR11687819,Depth,Shallow,27.1,6.53,78.125,208.2,180.2,-0.143853
-SRM+21,Groundwater,Bacteria,W6,SRR11687818,Depth,Shallow,28.1,6.38,88.4375,200.5,163.44,-0.140165
 ZCZ+21,Groundwater,Bacteria,1BS,SRR12785273,Location,BS,18,7.43,163.125,-111,-86.16,-0.156579
 ZCZ+21,Groundwater,Bacteria,1CR1,SRR12785266,Location,CR1,15.3,7.61,117.1875,-117,-82.09,-0.151073
 ZCZ+21,Groundwater,Bacteria,1CR2,SRR12785263,Location,CR2,14.7,7.62,13.75,-94,-58.59,-0.153671
@@ -1743,34 +1730,6 @@ MGW+22,Groundwater,Archaea,Can08,SRR14366835,Region,Canterbury,13.5,6.6,222.1875
 MGW+22,Groundwater,Archaea,Wel19,SRR14366834,Region,Wellington,15.7,6.53,157.1875,132.1,105.16,-0.188746
 MGW+22,Groundwater,Archaea,Wel20,SRR14366833,Region,Wellington,13.6,6,21.5625,164.9,108.01,-0.177146
 MGW+22,Groundwater,Archaea,Wel21,SRR14366832,Region,Wellington,14.8,6.35,169.6875,166.7,129.56,-0.180006
-BMV+22,Groundwater,Bacteria,LO-A-6/18,SRR15720322,Type,Subsurface,21.9,7.85,NA,-201.8,-152.04,-0.16564
-BMV+22,Groundwater,Bacteria,LO-B-10/18,SRR15720321,Type,Subsurface,12.6,7.62,NA,-208,-172.85,-0.162117
-BMV+22,Groundwater,Bacteria,LO-C-10/18,SRR15720309,Type,Overflow,26.3,7.61,NA,-460,-423.76,-0.150186
-BMV+22,Groundwater,Bacteria,LO-C-11/19,SRR15720308,Type,Overflow,25.6,7.54,NA,-250,-217.99,-0.168773
-BMV+22,Groundwater,Bacteria,LO-C-6/18,SRR15720310,Type,Overflow,25.8,7.83,NA,-138.5,-89.27,-0.161844
-BMV+22,Groundwater,Bacteria,LO-D-10/18,SRR15720307,Type,Overflow,26.2,7.7,NA,-370,-328.42,-0.150449
-BMV+22,Groundwater,Bacteria,LO-D-11/19,SRR15720306,Type,Overflow,25.5,7.82,NA,-293,-244.41,-0.177443
-BMV+22,Groundwater,Bacteria,LO-E-11/19,SRR15720305,Type,Overflow,24.9,7.5,NA,-245,-215.43,-0.146862
-BMV+22,Groundwater,Bacteria,LO-F-11/19,SRR15720303,Type,Overflow,27,7.8,NA,-280,-232.36,-0.170619
-BMV+22,Groundwater,Bacteria,LO-F-5/18,SRR15720304,Type,Overflow,28.4,7.9,NA,-169.7,-115.85,-0.141031
-BMV+22,Groundwater,Bacteria,LO-G-10/18,SRR15720320,Type,Overflow,15.5,8.7,NA,-188,-90.64,-0.152979
-BMV+22,Groundwater,Bacteria,LO-G-11/19,SRR15720319,Type,Subsurface,20.8,8.6,NA,-188.7,-95.38,-0.163072
-BMV+22,Groundwater,Bacteria,LO-H-10/18,SRR15720318,Type,Subsurface,14.5,8.4,NA,-174.5,-94.6,-0.143631
-BMV+22,Groundwater,Bacteria,LO-H-11/19,SRR15720317,Type,Overflow,19.6,8.4,NA,-170.1,-88.78,-0.162821
-BMV+22,Groundwater,Bacteria,TVR-B-4/19,SRR15720311,Type,Subsurface,17,8.1,NA,-130,-66.67,-0.148008
-BMV+22,Groundwater,Archaea,LO-A-6/18,SRR15720322,Type,Subsurface,21.9,7.85,NA,-201.8,-152.04,-0.194693
-BMV+22,Groundwater,Archaea,LO-B-10/18,SRR15720321,Type,Subsurface,12.6,7.62,NA,-208,-172.85,-0.194113
-BMV+22,Groundwater,Archaea,LO-C-11/19,SRR15720308,Type,Overflow,25.6,7.54,NA,-250,-217.99,-0.195402
-BMV+22,Groundwater,Archaea,LO-C-6/18,SRR15720310,Type,Overflow,25.8,7.83,NA,-138.5,-89.27,-0.194298
-BMV+22,Groundwater,Archaea,LO-D-10/18,SRR15720307,Type,Overflow,26.2,7.7,NA,-370,-328.42,-0.188824
-BMV+22,Groundwater,Archaea,LO-D-11/19,SRR15720306,Type,Overflow,25.5,7.82,NA,-293,-244.41,-0.190959
-BMV+22,Groundwater,Archaea,LO-F-11/19,SRR15720303,Type,Overflow,27,7.8,NA,-280,-232.36,-0.193642
-BMV+22,Groundwater,Archaea,LO-F-5/18,SRR15720304,Type,Overflow,28.4,7.9,NA,-169.7,-115.85,-0.192508
-BMV+22,Groundwater,Archaea,LO-G-10/18,SRR15720320,Type,Overflow,15.5,8.7,NA,-188,-90.64,-0.196044
-BMV+22,Groundwater,Archaea,LO-G-11/19,SRR15720319,Type,Subsurface,20.8,8.6,NA,-188.7,-95.38,-0.187493
-BMV+22,Groundwater,Archaea,LO-H-10/18,SRR15720318,Type,Subsurface,14.5,8.4,NA,-174.5,-94.6,-0.193626
-BMV+22,Groundwater,Archaea,LO-H-11/19,SRR15720317,Type,Overflow,19.6,8.4,NA,-170.1,-88.78,-0.191555
-BMV+22,Groundwater,Archaea,TVR-B-4/19,SRR15720311,Type,Subsurface,17,8.1,NA,-130,-66.67,-0.181416
 ZML+17,Sediment,Bacteria,MG1WinA,ERR1220570,Type,Mangrove Forest,NA,7.07,NA,300,304.14,-0.155114
 ZML+17,Sediment,Bacteria,MG1WinB,ERR1220571,Type,Mangrove Forest,NA,6.38,NA,296,259.32,-0.166045
 ZML+17,Sediment,Bacteria,MG1WinC,ERR1220573,Type,Mangrove Forest,NA,7.21,NA,251,263.42,-0.170864
