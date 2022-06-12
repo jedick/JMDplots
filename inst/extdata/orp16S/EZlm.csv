@@ -81,8 +81,6 @@ WHLH21a,"Tengger Desert Biocrusts",Soil,Bacteria,32,398.81,451.74,0.152522,-0.20
 CWC+20,"Paddy Soil Water Management",Soil,Bacteria,84,-467.3,358.07,0.014736,-0.139688,0.582308,6.23795e-09
 PSG+20,"Anaerobic Soil Disinfestation",Soil,Bacteria,49,-265,343,0.0285476,-0.160549,0.296032,0.0388972
 PSG+20,"Anaerobic Soil Disinfestation",Soil,Archaea,20,-265,343,0.0249455,-0.159201,0.673369,0.00113645
-XLD+20,"Cd Bioleaching Remediation",Soil,Bacteria,48,32.89,337.5,-0.0051162,-0.145097,-0.0910312,0.538332
-XLD+20,"Cd Bioleaching Remediation",Soil,Archaea,38,32.89,337.5,-0.0106122,-0.16505,-0.194996,0.240721
 LJC+20,"East Asia Paddy Soil",Soil,Bacteria,33,-280.02,-107.66,-0.0172765,-0.144965,-0.117648,0.514371
 DTJ+20,"Rice Rhizosphere",Soil,Bacteria,36,-158.03,-83.3,0.13386,-0.139811,0.449765,0.00592076
 RKSK22,"Georgia Salt Marshes",Soil,Bacteria,138,-428.66,108.28,0.0102316,-0.155292,0.346734,3.09785e-05

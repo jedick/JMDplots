@@ -10,8 +10,8 @@ envirotype <- list(
   "Hyperalkaline" = c("SBP+20", "RMB+17", "CTS+17", "PSB+21"),
   "Sediment" = c("ZML+17", "BSPD17", "RKN+17", "HDZ+19", "OHL+18_DNA", "WHLH21", "RSS+18", "CLS+19", "HSF+19", "ZHZ+19",
                  "LMBA21_2017", "HSF+22", "ZZLL21", "WFB+21", "HCW+22"),
-  "Soil" = c("MLL+19", "BMOB18", "WHLH21a", "CWC+20", "PSG+20", "XLD+20", "LJC+20", "DTJ+20", "RKSK22", "DLS21_Bulk",
-             "WKP+22", "CKB+22")
+  "Soil" = c("MLL+19", "BMOB18", "WHLH21a", "CWC+20", "PSG+20", "LJC+20", "DTJ+20", "RKSK22", "DLS21_Bulk", "WKP+22",
+             "CKB+22")
 )
 # Turn the list into a data frame for easier lookup 20210904
 envirodat <- do.call(rbind, lapply(seq_along(envirotype), function(i) data.frame(study = envirotype[[i]], groupnum = i)))
@@ -203,7 +203,6 @@ orp16S3 <- function(pdf = FALSE) {
     "WHLH21a, 37.53, 105.03", # Materials and methods
     "CWC+20, 28.226, 116.898", # Materials and methods  ### Laboratory
     "PSG+20, 36.61, -119.53", # Web search for Parlier, CA   ### Mesocosm
-    "XLD+20, 27.35, 112.05", # Materials and methods   ### Laboratory
     # LJC+20 see below
     "DTJ+20, 26.45, 111.52", # SAMN14332759   ### Laboratory
     "RKSK22, 31.97283, -81.0304", # SAMN16678415
@@ -271,13 +270,13 @@ orp16S3 <- function(pdf = FALSE) {
     # Sediment
     "BSPD17", "RKN+17", "ZHZ+19", "WFB+21", "HCW+22",
     # Soil
-    "BMOB18", "CWC+20", "PSG+20", "XLD+20", "DTJ+20",
+    "BMOB18", "CWC+20", "PSG+20", "DTJ+20",
     "DLS21_Bulk", "CKB+22"
   )
   pch <- ifelse(coords$study %in% lab, 15, 19)
   # Use smaller points for high-density regions 20210915
   cex <- ifelse(coords$study %in% c(
-    "MLL+19", "XLD+20", "DTJ+20", # Hunan
+    "MLL+19", "DTJ+20", # Hunan
     "ZZL+21", "MLL+18", "ZML+17", "ZZLL21", "ZHZ+19", "WHLH21", # GD-HK-MO GBA
     "CLS+19", "HCW+22", # Jiangsu-Gansu-Zhejiang
     "HDZ+19" # Hubei
@@ -720,8 +719,6 @@ orp16S_S2 <- function(pdf = FALSE) {
     plotEZ("WHLH21a", "Bacteria", groupby = "Stage", groups = c("Algae", "Cyanolichen", "Chlorolichen", "Moss"), legend.x = "bottomright"),
     plotEZ("CWC+20", "Bacteria", groupby = "Management", groups = c("Flooding", "Draining"), legend.x = "bottomright"),
     plotEZ("PSG+20", "two", groupby = "Treatment", groups = c("Initial", "NCC", "RB", "RGP", "TP"), legend.x = "bottomright"),
-    plotEZ("XLD+20", "two", groupby = "Treatment", groups = c("Original Soil", "CK", "9K-Control", "Htt-sys", "Att-sys", "Co-sys"),
-           legend.x = "bottomright", dylim = c(-0.022, 0)),
     plotEZ("LJC+20", "Bacteria", groupby = "meanT", groups = c("MAT >= 21.5 \u00b0C", "MAT < 21.5 \u00b0C"), dylim = c(0, 0.005)),
     plotEZ("DTJ+20", "Bacteria", groupby = "Zone", groups = c("Bulk Soil", "Mature", "Elongation", "Tip")),
     plotEZ("RKSK22", "two", groupby = "Compartment", groups = c("Bulk sediment", "Rhizosphere", "Root"), legend.x = "bottomright"),
@@ -934,12 +931,11 @@ getmdat_orp16S <- function(study, metrics = NULL, dropNA = TRUE, size = NULL, qu
   }
   if(shortstudy %in% c(
     "MLL+19", "HXZ+20", "BCA+21", "RMB+17", "SBP+20", "MWY+21", "SAR+13", "CTS+17", "HDZ+19", "ZHZ+19",
-    "YHK+20", "BMJ+19", "SRM+19", "HLZ+18", "XLD+20", "PSG+20", "ZCZ+21", "ZZL+21", "PBU+20", "MLL+18",
-    "BWD+19", "WHL+21", "HSF+19", "ZML+17", "DTJ+20", "WFB+21", "KLM+16", "LMBA21", "BSPD17", "CWC+20",
-    "BMOB18", "LJC+20", "DLS21", "ZZLL21", "GWS+20", "CLS+19", "GZL21", "LLC+19", "NLE+21", "APV+20",
-    "WHLH21", "PCL+18", "GSBT20", "SPA+21", "IBK+22", "HSF+22", "HCW+22", "WKP+22", "CKB+22", "WHLH21a",
-    "RSS+18", "PSB+21", "RKSK22", "WLJ+16", "DJK+18", "OHL+18", "ZLH+22", "LWJ+21", "MGW+22", "RKN+17",
-    "ZDW+19"
+    "YHK+20", "BMJ+19", "SRM+19", "HLZ+18", "PSG+20", "ZCZ+21", "ZZL+21", "PBU+20", "MLL+18", "BWD+19",
+    "WHL+21", "HSF+19", "ZML+17", "DTJ+20", "WFB+21", "KLM+16", "LMBA21", "BSPD17", "CWC+20", "BMOB18",
+    "LJC+20", "DLS21", "ZZLL21", "GWS+20", "CLS+19", "GZL21", "LLC+19", "NLE+21", "APV+20", "WHLH21",
+    "PCL+18", "GSBT20", "SPA+21", "IBK+22", "HSF+22", "HCW+22", "WKP+22", "CKB+22", "WHLH21a", "RSS+18",
+    "PSB+21", "RKSK22", "WLJ+16", "DJK+18", "OHL+18", "ZLH+22", "LWJ+21", "MGW+22", "RKN+17", "ZDW+19"
   )) {
     # General processing of metadata for orp16S datasets 20210820
     # Get Eh or ORP values (uses partial name matching, can match a column named "Eh (mV)")
@@ -1086,7 +1082,7 @@ getmdat_orp16S <- function(study, metrics = NULL, dropNA = TRUE, size = NULL, qu
   if(is.null(pch)) stop(paste(study, "metadata file exists, but not set up for processing"))
 
   metadata <- cbind(metadata, pch, col)
-  # Use the infotext as an attribute for printing by orp16S_info 20220513
+  # Use the infotext as an attribute (was previously used by orp16S_info) 20220513
   attr(metadata, "infotext") <- infotext
   # Return both metadata and metrics, if provided 20220506
   if(is.null(metrics)) metadata else {

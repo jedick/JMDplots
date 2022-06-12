@@ -72,7 +72,6 @@ writeLines(con = file, text = gsub(" ", "", c(
   "BMJ+19, FALSE, 300",
   "SRM+19, FALSE, 250",
   "HLZ+18, FALSE, 420",
-  "XLD+20, TRUE, 250",
   "PSG+20, FALSE, 250",
   "ZCZ+21, FALSE, 450",
   "ZZL+21, FALSE, 450",
