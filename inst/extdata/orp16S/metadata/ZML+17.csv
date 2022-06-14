@@ -1,67 +1,67 @@
-name,Run,BioSample,Alias,Samples,Type,Domain,Season,"Depth (cm)",pH,"Redox (mV)"
-"Mai Po Wetland",ERR1214108,SAMEA3727282,ZZCAW1,MG1WinA,"Mangrove Forest",Archaea,Winter,0–2,7.07,300
-"Mai Po Wetland",ERR1214109,SAMEA3727283,ZZCAW2,MG1WinB,"Mangrove Forest",Archaea,Winter,10–15,6.38,296
-"Mai Po Wetland",ERR1214110,SAMEA3727284,ZZCAW3,MG1WinC,"Mangrove Forest",Archaea,Winter,20–25,7.21,251
-"Mai Po Wetland",ERR1214111,SAMEA3727285,ZZCAW4,MG1WinD,"Mangrove Forest",Archaea,Winter,40–45,7.6,219
-"Mai Po Wetland",ERR1214112,SAMEA3727286,ZZCAW5,MG2WinA,"Mangrove Forest",Archaea,Winter,0–2,7.11,264
-"Mai Po Wetland",ERR1214113,SAMEA3727287,ZZCAW6,MG2WinB,"Mangrove Forest",Archaea,Winter,10–15,6.41,259
-"Mai Po Wetland",ERR1214114,SAMEA3727288,ZZCAW7,MG2WinC,"Mangrove Forest",Archaea,Winter,20–25,6.84,235
-"Mai Po Wetland",ERR1214115,SAMEA3727289,ZZCAW8,MG2WinD,"Mangrove Forest",Archaea,Winter,40–45,7.13,217
-"Mai Po Wetland",ERR1214116,SAMEA3727290,ZZCAW9,MG3WinA,"Mangrove Forest",Archaea,Winter,0–2,6.41,266
-"Mai Po Wetland",ERR1214117,SAMEA3727291,ZZCAW10,MG3WinB,"Mangrove Forest",Archaea,Winter,10–15,6.27,209
-"Mai Po Wetland",ERR1214118,SAMEA3727292,ZZCAW11,MG3WinC,"Mangrove Forest",Archaea,Winter,20–25,6.79,202
-"Mai Po Wetland",ERR1214119,SAMEA3727293,ZZCAW12,MG3WinD,"Mangrove Forest",Archaea,Winter,40–45,7.4,209
-"Mai Po Wetland",ERR1214120,SAMEA3727294,ZZCAW13,TF1WinA,"Intertidal Mudflat",Archaea,Winter,0–5,7.06,217
-"Mai Po Wetland",ERR1214121,SAMEA3727295,ZZCAW14,TF1WinB,"Intertidal Mudflat",Archaea,Winter,13–16,7.68,212
-"Mai Po Wetland",ERR1214122,SAMEA3727296,ZZCAW15,TF2WinA,"Intertidal Mudflat",Archaea,Winter,0–5,7.45,-63.6
-"Mai Po Wetland",ERR1214123,SAMEA3727297,ZZCAW16,TF2WinB,"Intertidal Mudflat",Archaea,Winter,13–16,7.77,58
-"Mai Po Wetland",ERR1214124,SAMEA3727298,ZZCAW17,TF3WinA,"Intertidal Mudflat",Archaea,Winter,0–5,7.02,-42.8
-"Mai Po Wetland",ERR1214125,SAMEA3727299,ZZCAW18,TF3WinB,"Intertidal Mudflat",Archaea,Winter,13–16,7.52,106.6
-"Mai Po Wetland",ERR1214093,SAMEA3727267,ZZCAS1,MG1SumA,"Mangrove Forest",Archaea,Summer,0–2,6.68,398
-"Mai Po Wetland",ERR1214094,SAMEA3727268,ZZCAS2,MG1SumB,"Mangrove Forest",Archaea,Summer,10–15,7.58,171
-"Mai Po Wetland",ERR1214095,SAMEA3727269,ZZCAS3,MG1SumC,"Mangrove Forest",Archaea,Summer,20–25,7.9,95
-"Mai Po Wetland",ERR1214096,SAMEA3727270,ZZCAS4,MG2SumA,"Mangrove Forest",Archaea,Summer,0–2,5.82,348
-"Mai Po Wetland",ERR1214097,SAMEA3727271,ZZCAS5,MG2SumB,"Mangrove Forest",Archaea,Summer,10–15,6.87,291
-"Mai Po Wetland",ERR1214098,SAMEA3727272,ZZCAS6,MG2SumC,"Mangrove Forest",Archaea,Summer,20–25,6.84,244
-"Mai Po Wetland",ERR1214099,SAMEA3727273,ZZCAS7,MG3SumA,"Mangrove Forest",Archaea,Summer,0–2,6.6,312
-"Mai Po Wetland",ERR1214100,SAMEA3727274,ZZCAS8,MG3SumB,"Mangrove Forest",Archaea,Summer,10–15,7.31,298
-"Mai Po Wetland",ERR1214101,SAMEA3727275,ZZCAS9,MG3SumC,"Mangrove Forest",Archaea,Summer,20–25,7.32,241
-"Mai Po Wetland",ERR1214102,SAMEA3727276,ZZCAS10,TF1SumA,"Intertidal Mudflat",Archaea,Summer,0–5,7.1,80
-"Mai Po Wetland",ERR1214103,SAMEA3727277,ZZCAS11,TF1SumB,"Intertidal Mudflat",Archaea,Summer,13–16,7.86,179
-"Mai Po Wetland",ERR1214104,SAMEA3727278,ZZCAS12,TF2SumA,"Intertidal Mudflat",Archaea,Summer,0–5,7.38,-35
-"Mai Po Wetland",ERR1214105,SAMEA3727279,ZZCAS13,TF2SumB,"Intertidal Mudflat",Archaea,Summer,13–16,8.17,65
-"Mai Po Wetland",ERR1214106,SAMEA3727280,ZZCAS14,TF3SumA,"Intertidal Mudflat",Archaea,Summer,0–5,7.31,111
-"Mai Po Wetland",ERR1214107,SAMEA3727281,ZZCAS15,TF3SumB,"Intertidal Mudflat",Archaea,Summer,13–16,7.81,170
-"Mai Po Wetland",ERR1220570,SAMEA3727317,ZZCW1,MG1WinA,"Mangrove Forest",Bacteria,Winter,0–2,7.07,300
-"Mai Po Wetland",ERR1220571,SAMEA3727318,ZZCW2,MG1WinB,"Mangrove Forest",Bacteria,Winter,10–15,6.38,296
-"Mai Po Wetland",ERR1220573,SAMEA3727319,ZZCW3,MG1WinC,"Mangrove Forest",Bacteria,Winter,20–25,7.21,251
-"Mai Po Wetland",ERR1220574,SAMEA3727320,ZZCW4,MG1WinD,"Mangrove Forest",Bacteria,Winter,40–45,7.6,219
-"Mai Po Wetland",ERR1220576,SAMEA3727321,ZZCW5,MG2WinA,"Mangrove Forest",Bacteria,Winter,0–2,7.11,264
-"Mai Po Wetland",ERR1220577,SAMEA3727322,ZZCW6,MG2WinB,"Mangrove Forest",Bacteria,Winter,10–15,6.41,259
-"Mai Po Wetland",ERR1220579,SAMEA3727323,ZZCW7,MG2WinC,"Mangrove Forest",Bacteria,Winter,20–25,6.84,235
-"Mai Po Wetland",ERR1220580,SAMEA3727324,ZZCW8,MG2WinD,"Mangrove Forest",Bacteria,Winter,40–45,7.13,217
-"Mai Po Wetland",ERR1220582,SAMEA3727325,ZZCW9,MG3WinA,"Mangrove Forest",Bacteria,Winter,0–2,6.41,266
-"Mai Po Wetland",ERR1220583,SAMEA3727326,ZZCW10,MG3WinB,"Mangrove Forest",Bacteria,Winter,10–15,6.27,209
-"Mai Po Wetland",ERR1220585,SAMEA3727327,ZZCW11,MG3WinC,"Mangrove Forest",Bacteria,Winter,20–25,6.79,202
-"Mai Po Wetland",ERR1220586,SAMEA3727328,ZZCW12,MG3WinD,"Mangrove Forest",Bacteria,Winter,40–45,7.4,209
-"Mai Po Wetland",ERR1220588,SAMEA3727329,ZZCW13,TF1WinA,"Intertidal Mudflat",Bacteria,Winter,0–5,7.06,217
-"Mai Po Wetland",ERR1220589,SAMEA3727330,ZZCW14,TF1WinB,"Intertidal Mudflat",Bacteria,Winter,13–16,7.68,212
-"Mai Po Wetland",ERR1220591,SAMEA3727331,ZZCW15,TF2WinA,"Intertidal Mudflat",Bacteria,Winter,0–5,7.45,-63.6
-"Mai Po Wetland",ERR1220592,SAMEA3727332,ZZCW16,TF2WinB,"Intertidal Mudflat",Bacteria,Winter,13–16,7.77,58
-"Mai Po Wetland",ERR1220594,SAMEA3727333,ZZCW17,TF3WinA,"Intertidal Mudflat",Bacteria,Winter,0–5,7.02,-42.8
-"Mai Po Wetland",ERR1220595,SAMEA3727334,ZZCW18,TF3WinB,"Intertidal Mudflat",Bacteria,Winter,13–16,7.52,106.6
-"Mai Po Wetland",ERR1220547,SAMEA3727302,ZZCS1,MG1SumA,"Mangrove Forest",Bacteria,Summer,0–2,6.68,398
-"Mai Po Wetland",ERR1220549,SAMEA3727303,ZZCS2,MG1SumB,"Mangrove Forest",Bacteria,Summer,10–15,7.58,171
-"Mai Po Wetland",ERR1220550,SAMEA3727304,ZZCS3,MG1SumC,"Mangrove Forest",Bacteria,Summer,20–25,7.9,95
-"Mai Po Wetland",ERR1220552,SAMEA3727305,ZZCS4,MG2SumA,"Mangrove Forest",Bacteria,Summer,0–2,5.82,348
-"Mai Po Wetland",ERR1220553,SAMEA3727306,ZZCS5,MG2SumB,"Mangrove Forest",Bacteria,Summer,10–15,6.87,291
-"Mai Po Wetland",ERR1220555,SAMEA3727307,ZZCS6,MG2SumC,"Mangrove Forest",Bacteria,Summer,20–25,6.84,244
-"Mai Po Wetland",ERR1220556,SAMEA3727308,ZZCS7,MG3SumA,"Mangrove Forest",Bacteria,Summer,0–2,6.6,312
-"Mai Po Wetland",ERR1220558,SAMEA3727309,ZZCS8,MG3SumB,"Mangrove Forest",Bacteria,Summer,10–15,7.31,298
-"Mai Po Wetland",ERR1220559,SAMEA3727310,ZZCS9,MG3SumC,"Mangrove Forest",Bacteria,Summer,20–25,7.32,241
-"Mai Po Wetland",ERR1220561,SAMEA3727311,ZZCS10,TF1SumA,"Intertidal Mudflat",Bacteria,Summer,0–5,7.1,80
-"Mai Po Wetland",ERR1220562,SAMEA3727312,ZZCS11,TF1SumB,"Intertidal Mudflat",Bacteria,Summer,13–16,7.86,179
-"Mai Po Wetland",ERR1220564,SAMEA3727313,ZZCS12,TF2SumA,"Intertidal Mudflat",Bacteria,Summer,0–5,7.38,-35
-"Mai Po Wetland",ERR1220565,SAMEA3727314,ZZCS13,TF2SumB,"Intertidal Mudflat",Bacteria,Summer,13–16,8.17,65
-"Mai Po Wetland",ERR1220567,SAMEA3727315,ZZCS14,TF3SumA,"Intertidal Mudflat",Bacteria,Summer,0–5,7.31,111
-"Mai Po Wetland",ERR1220568,SAMEA3727316,ZZCS15,TF3SumB,"Intertidal Mudflat",Bacteria,Summer,13–16,7.81,170
+name,Run,BioSample,Alias,Samples,Type,Domain,Season,"Depth (cm)",pH,"Redox (mV)",Depth
+"Mai Po Wetland",ERR1214108,SAMEA3727282,ZZCAW1,MG1WinA,"Mangrove Forest",Archaea,Winter,0–2,7.07,300,"≤ 5 cm"
+"Mai Po Wetland",ERR1214109,SAMEA3727283,ZZCAW2,MG1WinB,"Mangrove Forest",Archaea,Winter,10–15,6.38,296,"≥ 10 cm"
+"Mai Po Wetland",ERR1214110,SAMEA3727284,ZZCAW3,MG1WinC,"Mangrove Forest",Archaea,Winter,20–25,7.21,251,"≥ 20 cm"
+"Mai Po Wetland",ERR1214111,SAMEA3727285,ZZCAW4,MG1WinD,"Mangrove Forest",Archaea,Winter,40–45,7.6,219,"≥ 20 cm"
+"Mai Po Wetland",ERR1214112,SAMEA3727286,ZZCAW5,MG2WinA,"Mangrove Forest",Archaea,Winter,0–2,7.11,264,"≤ 5 cm"
+"Mai Po Wetland",ERR1214113,SAMEA3727287,ZZCAW6,MG2WinB,"Mangrove Forest",Archaea,Winter,10–15,6.41,259,"≥ 10 cm"
+"Mai Po Wetland",ERR1214114,SAMEA3727288,ZZCAW7,MG2WinC,"Mangrove Forest",Archaea,Winter,20–25,6.84,235,"≥ 20 cm"
+"Mai Po Wetland",ERR1214115,SAMEA3727289,ZZCAW8,MG2WinD,"Mangrove Forest",Archaea,Winter,40–45,7.13,217,"≥ 20 cm"
+"Mai Po Wetland",ERR1214116,SAMEA3727290,ZZCAW9,MG3WinA,"Mangrove Forest",Archaea,Winter,0–2,6.41,266,"≤ 5 cm"
+"Mai Po Wetland",ERR1214117,SAMEA3727291,ZZCAW10,MG3WinB,"Mangrove Forest",Archaea,Winter,10–15,6.27,209,"≥ 10 cm"
+"Mai Po Wetland",ERR1214118,SAMEA3727292,ZZCAW11,MG3WinC,"Mangrove Forest",Archaea,Winter,20–25,6.79,202,"≥ 20 cm"
+"Mai Po Wetland",ERR1214119,SAMEA3727293,ZZCAW12,MG3WinD,"Mangrove Forest",Archaea,Winter,40–45,7.4,209,"≥ 20 cm"
+"Mai Po Wetland",ERR1214120,SAMEA3727294,ZZCAW13,TF1WinA,"Intertidal Mudflat",Archaea,Winter,0–5,7.06,217,"≤ 5 cm"
+"Mai Po Wetland",ERR1214121,SAMEA3727295,ZZCAW14,TF1WinB,"Intertidal Mudflat",Archaea,Winter,13–16,7.68,212,"≥ 10 cm"
+"Mai Po Wetland",ERR1214122,SAMEA3727296,ZZCAW15,TF2WinA,"Intertidal Mudflat",Archaea,Winter,0–5,7.45,-63.6,"≤ 5 cm"
+"Mai Po Wetland",ERR1214123,SAMEA3727297,ZZCAW16,TF2WinB,"Intertidal Mudflat",Archaea,Winter,13–16,7.77,58,"≥ 10 cm"
+"Mai Po Wetland",ERR1214124,SAMEA3727298,ZZCAW17,TF3WinA,"Intertidal Mudflat",Archaea,Winter,0–5,7.02,-42.8,"≤ 5 cm"
+"Mai Po Wetland",ERR1214125,SAMEA3727299,ZZCAW18,TF3WinB,"Intertidal Mudflat",Archaea,Winter,13–16,7.52,106.6,"≥ 10 cm"
+"Mai Po Wetland",ERR1214093,SAMEA3727267,ZZCAS1,MG1SumA,"Mangrove Forest",Archaea,Summer,0–2,6.68,398,"≤ 5 cm"
+"Mai Po Wetland",ERR1214094,SAMEA3727268,ZZCAS2,MG1SumB,"Mangrove Forest",Archaea,Summer,10–15,7.58,171,"≥ 10 cm"
+"Mai Po Wetland",ERR1214095,SAMEA3727269,ZZCAS3,MG1SumC,"Mangrove Forest",Archaea,Summer,20–25,7.9,95,"≥ 20 cm"
+"Mai Po Wetland",ERR1214096,SAMEA3727270,ZZCAS4,MG2SumA,"Mangrove Forest",Archaea,Summer,0–2,5.82,348,"≤ 5 cm"
+"Mai Po Wetland",ERR1214097,SAMEA3727271,ZZCAS5,MG2SumB,"Mangrove Forest",Archaea,Summer,10–15,6.87,291,"≥ 10 cm"
+"Mai Po Wetland",ERR1214098,SAMEA3727272,ZZCAS6,MG2SumC,"Mangrove Forest",Archaea,Summer,20–25,6.84,244,"≥ 20 cm"
+"Mai Po Wetland",ERR1214099,SAMEA3727273,ZZCAS7,MG3SumA,"Mangrove Forest",Archaea,Summer,0–2,6.6,312,"≤ 5 cm"
+"Mai Po Wetland",ERR1214100,SAMEA3727274,ZZCAS8,MG3SumB,"Mangrove Forest",Archaea,Summer,10–15,7.31,298,"≥ 10 cm"
+"Mai Po Wetland",ERR1214101,SAMEA3727275,ZZCAS9,MG3SumC,"Mangrove Forest",Archaea,Summer,20–25,7.32,241,"≥ 20 cm"
+"Mai Po Wetland",ERR1214102,SAMEA3727276,ZZCAS10,TF1SumA,"Intertidal Mudflat",Archaea,Summer,0–5,7.1,80,"≤ 5 cm"
+"Mai Po Wetland",ERR1214103,SAMEA3727277,ZZCAS11,TF1SumB,"Intertidal Mudflat",Archaea,Summer,13–16,7.86,179,"≥ 10 cm"
+"Mai Po Wetland",ERR1214104,SAMEA3727278,ZZCAS12,TF2SumA,"Intertidal Mudflat",Archaea,Summer,0–5,7.38,-35,"≤ 5 cm"
+"Mai Po Wetland",ERR1214105,SAMEA3727279,ZZCAS13,TF2SumB,"Intertidal Mudflat",Archaea,Summer,13–16,8.17,65,"≥ 10 cm"
+"Mai Po Wetland",ERR1214106,SAMEA3727280,ZZCAS14,TF3SumA,"Intertidal Mudflat",Archaea,Summer,0–5,7.31,111,"≤ 5 cm"
+"Mai Po Wetland",ERR1214107,SAMEA3727281,ZZCAS15,TF3SumB,"Intertidal Mudflat",Archaea,Summer,13–16,7.81,170,"≥ 10 cm"
+"Mai Po Wetland",ERR1220570,SAMEA3727317,ZZCW1,MG1WinA,"Mangrove Forest",Bacteria,Winter,0–2,7.07,300,"≤ 5 cm"
+"Mai Po Wetland",ERR1220571,SAMEA3727318,ZZCW2,MG1WinB,"Mangrove Forest",Bacteria,Winter,10–15,6.38,296,"≥ 10 cm"
+"Mai Po Wetland",ERR1220573,SAMEA3727319,ZZCW3,MG1WinC,"Mangrove Forest",Bacteria,Winter,20–25,7.21,251,"≥ 20 cm"
+"Mai Po Wetland",ERR1220574,SAMEA3727320,ZZCW4,MG1WinD,"Mangrove Forest",Bacteria,Winter,40–45,7.6,219,"≥ 20 cm"
+"Mai Po Wetland",ERR1220576,SAMEA3727321,ZZCW5,MG2WinA,"Mangrove Forest",Bacteria,Winter,0–2,7.11,264,"≤ 5 cm"
+"Mai Po Wetland",ERR1220577,SAMEA3727322,ZZCW6,MG2WinB,"Mangrove Forest",Bacteria,Winter,10–15,6.41,259,"≥ 10 cm"
+"Mai Po Wetland",ERR1220579,SAMEA3727323,ZZCW7,MG2WinC,"Mangrove Forest",Bacteria,Winter,20–25,6.84,235,"≥ 20 cm"
+"Mai Po Wetland",ERR1220580,SAMEA3727324,ZZCW8,MG2WinD,"Mangrove Forest",Bacteria,Winter,40–45,7.13,217,"≥ 20 cm"
+"Mai Po Wetland",ERR1220582,SAMEA3727325,ZZCW9,MG3WinA,"Mangrove Forest",Bacteria,Winter,0–2,6.41,266,"≤ 5 cm"
+"Mai Po Wetland",ERR1220583,SAMEA3727326,ZZCW10,MG3WinB,"Mangrove Forest",Bacteria,Winter,10–15,6.27,209,"≥ 10 cm"
+"Mai Po Wetland",ERR1220585,SAMEA3727327,ZZCW11,MG3WinC,"Mangrove Forest",Bacteria,Winter,20–25,6.79,202,"≥ 20 cm"
+"Mai Po Wetland",ERR1220586,SAMEA3727328,ZZCW12,MG3WinD,"Mangrove Forest",Bacteria,Winter,40–45,7.4,209,"≥ 20 cm"
+"Mai Po Wetland",ERR1220588,SAMEA3727329,ZZCW13,TF1WinA,"Intertidal Mudflat",Bacteria,Winter,0–5,7.06,217,"≤ 5 cm"
+"Mai Po Wetland",ERR1220589,SAMEA3727330,ZZCW14,TF1WinB,"Intertidal Mudflat",Bacteria,Winter,13–16,7.68,212,"≥ 10 cm"
+"Mai Po Wetland",ERR1220591,SAMEA3727331,ZZCW15,TF2WinA,"Intertidal Mudflat",Bacteria,Winter,0–5,7.45,-63.6,"≤ 5 cm"
+"Mai Po Wetland",ERR1220592,SAMEA3727332,ZZCW16,TF2WinB,"Intertidal Mudflat",Bacteria,Winter,13–16,7.77,58,"≥ 10 cm"
+"Mai Po Wetland",ERR1220594,SAMEA3727333,ZZCW17,TF3WinA,"Intertidal Mudflat",Bacteria,Winter,0–5,7.02,-42.8,"≤ 5 cm"
+"Mai Po Wetland",ERR1220595,SAMEA3727334,ZZCW18,TF3WinB,"Intertidal Mudflat",Bacteria,Winter,13–16,7.52,106.6,"≥ 10 cm"
+"Mai Po Wetland",ERR1220547,SAMEA3727302,ZZCS1,MG1SumA,"Mangrove Forest",Bacteria,Summer,0–2,6.68,398,"≤ 5 cm"
+"Mai Po Wetland",ERR1220549,SAMEA3727303,ZZCS2,MG1SumB,"Mangrove Forest",Bacteria,Summer,10–15,7.58,171,"≥ 10 cm"
+"Mai Po Wetland",ERR1220550,SAMEA3727304,ZZCS3,MG1SumC,"Mangrove Forest",Bacteria,Summer,20–25,7.9,95,"≥ 20 cm"
+"Mai Po Wetland",ERR1220552,SAMEA3727305,ZZCS4,MG2SumA,"Mangrove Forest",Bacteria,Summer,0–2,5.82,348,"≤ 5 cm"
+"Mai Po Wetland",ERR1220553,SAMEA3727306,ZZCS5,MG2SumB,"Mangrove Forest",Bacteria,Summer,10–15,6.87,291,"≥ 10 cm"
+"Mai Po Wetland",ERR1220555,SAMEA3727307,ZZCS6,MG2SumC,"Mangrove Forest",Bacteria,Summer,20–25,6.84,244,"≥ 20 cm"
+"Mai Po Wetland",ERR1220556,SAMEA3727308,ZZCS7,MG3SumA,"Mangrove Forest",Bacteria,Summer,0–2,6.6,312,"≤ 5 cm"
+"Mai Po Wetland",ERR1220558,SAMEA3727309,ZZCS8,MG3SumB,"Mangrove Forest",Bacteria,Summer,10–15,7.31,298,"≥ 10 cm"
+"Mai Po Wetland",ERR1220559,SAMEA3727310,ZZCS9,MG3SumC,"Mangrove Forest",Bacteria,Summer,20–25,7.32,241,"≥ 20 cm"
+"Mai Po Wetland",ERR1220561,SAMEA3727311,ZZCS10,TF1SumA,"Intertidal Mudflat",Bacteria,Summer,0–5,7.1,80,"≤ 5 cm"
+"Mai Po Wetland",ERR1220562,SAMEA3727312,ZZCS11,TF1SumB,"Intertidal Mudflat",Bacteria,Summer,13–16,7.86,179,"≥ 10 cm"
+"Mai Po Wetland",ERR1220564,SAMEA3727313,ZZCS12,TF2SumA,"Intertidal Mudflat",Bacteria,Summer,0–5,7.38,-35,"≤ 5 cm"
+"Mai Po Wetland",ERR1220565,SAMEA3727314,ZZCS13,TF2SumB,"Intertidal Mudflat",Bacteria,Summer,13–16,8.17,65,"≥ 10 cm"
+"Mai Po Wetland",ERR1220567,SAMEA3727315,ZZCS14,TF3SumA,"Intertidal Mudflat",Bacteria,Summer,0–5,7.31,111,"≤ 5 cm"
+"Mai Po Wetland",ERR1220568,SAMEA3727316,ZZCS15,TF3SumB,"Intertidal Mudflat",Bacteria,Summer,13–16,7.81,170,"≥ 10 cm"

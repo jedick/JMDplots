@@ -1,4 +1,4 @@
-name,Run,BioSample,SampleID,Well,Filter,Date,"ORP (mV)",pH,"Specific Conductivity","Temp (° C)","Arsenic (ug/L)"
+name,Run,BioSample,SampleID,Aquifer,Filter,Date,"ORP (mV)",pH,"Specific Conductivity","Temp (° C)","Arsenic (ug/L)"
 "Ohio Aquifers",XA22,NA,"Athens 0.2 10/27/15",Athens,0.2,2015-10-27,-172,7.49,1450,14.2,2.8
 "Ohio Aquifers",TG22,NA,"Greene 0.2 4/2016",Greene,0.2,2016-04-13,23,NA,663,11.7,0
 "Ohio Aquifers",TL22,NA,"Licking 0.2 4/2016",Licking,0.2,2016-04-13,-66,NA,794,11.5,6.3

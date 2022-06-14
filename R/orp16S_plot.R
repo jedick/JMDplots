@@ -21,14 +21,11 @@ plotEZ <- function(study, lineage = NULL, mincount = 100, pch = NULL, col = NULL
     return(invisible(out))
   }
 
-  # Use capture.output to hide printed output
-  null <- capture.output(
-    # Use try() to capture errors (with no mapped sequences for lineage = "Archaea")
-    metrics.in <- try(
-      suppressMessages(
-        getmetrics_orp16S(study, lineage = lineage, mincount = mincount)
-      ), silent = TRUE
-    )
+  # Use try() to capture errors (with no mapped sequences for lineage = "Archaea")
+  metrics.in <- try(
+    suppressMessages(
+      getmetrics_orp16S(study, lineage = lineage, mincount = mincount)
+    ), silent = TRUE
   )
   # Print message and skip dataset with no mapped sequences
   if(inherits(metrics.in, "try-error")) {
@@ -154,13 +151,21 @@ plotEZ <- function(study, lineage = NULL, mincount = 100, pch = NULL, col = NULL
     # Add legend
     legend <- as.character(groups)
     # Deal with mu character 20220522
+    # Also deal with less than or equal to / greater than or equal to 20220614
+    unicode <- c("\u03BC", "\u2264", "\u2265")
     legend.expr <- list()
     for(i in 1:length(legend)) {
-      if(grepl("\u03BC", legend[i])) {
-        start <- strsplit(legend[i], "\u03BC")[[1]][1]
-        end <- strsplit(legend[i], "\u03BC")[[1]][2]
-        legend.expr[[i]] <- bquote(.(start)*mu*.(end))
-      } else legend.expr[[i]] <- bquote(.(legend[i]))
+      # Use unmodified expression unless we hit one of the special characters
+      legend.expr[[i]] <- bquote(.(legend[i]))
+      for(j in 1:length(unicode)) {
+        if(grepl(unicode[j], legend[i])) {
+          start <- strsplit(legend[i], unicode[j])[[1]][1]
+          end <- strsplit(legend[i], unicode[j])[[1]][2]
+          if(j == 1) legend.expr[[i]] <- bquote(.(start)*mu*.(end))
+          if(j == 2) legend.expr[[i]] <- bquote(.(start) <= .(end))
+          if(j == 3) legend.expr[[i]] <- bquote(.(start) >= .(end))
+        } 
+      }
     }
     legend <- as.expression(legend.expr)
     legend(legend.x, legend, pch = pchtype, col = orp16Scol[coltype], pt.bg = orp16Scol[coltype], title = groupby, cex = 0.9)

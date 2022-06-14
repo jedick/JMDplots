@@ -131,7 +131,7 @@ orp16S2 <- function(pdf = FALSE) {
   lines(Eh7, MODdepth, type = "b", pch = 19)
   text(50, -2.3, "Eh7")
   text(650, -2.3, "Eh")
-  label.figure("A", font = 2, cex = 1.5)
+  label.figure("a", font = 2, cex = 1.5)
 
   # Get 16S metadata and chemical metrics for Rundell et al. (2014) experiments
   metrics.in <- getmetrics_orp16S("RBW+14")
@@ -150,7 +150,7 @@ orp16S2 <- function(pdf = FALSE) {
     text(-0.182, i - 0.25, label, adj = 1)
   }
   par(xpd = FALSE)
-  label.figure("B", font = 2, cex = 1.5)
+  label.figure("b", font = 2, cex = 1.5)
 
   # Reset layout to make orp16S3 in the examples run nicely 20211011
   if(pdf) dev.off() else layout(1)
@@ -336,7 +336,7 @@ orp16S4 <- function(pdf = FALSE) {
   plotEZ("WHLH21", "Bacteria", groupby = "Position", groups = c("Surface", "Middle", "Bottom"),
     legend.x = "bottomleft", title.line = NULL, dxlim = c(-20, 0), slope.legend = "right")
   title("Daya Bay\n(Sediment bacteria)", font.main = 1)
-  label.figure("A", font = 2, cex = 1.5, yfrac = 0.9)
+  label.figure("a", font = 2, cex = 1.8, yfrac = 0.9)
   # Bay of Biscay (Sediment)
   plotEZ("LMBA21_2017", "Bacteria", groupby = "Season", groups = c("Summer", "Winter"),
     legend.x = "bottomright", title.line = NULL, dxlim = c(0, 170), slope.legend = "bottom")
@@ -372,7 +372,7 @@ orp16S4 <- function(pdf = FALSE) {
   ltext <- names(envirotype)[i1[3:4]]
   legend("bottomright", ltext, pch = 19, col = orp16Scol[i1[3:4]])
   title("Linear regressions for bacterial communities\nin each dataset", font.main = 1, xpd = NA, line = 0.7)
-  label.figure("B", font = 2, cex = 1.5, yfrac = 1.05)
+  label.figure("b", font = 2, cex = 1.8, yfrac = 1.05)
   # Groundwater, sediment, soil
   plot(xlim, ylim, type = "n", xlab = quote(log[10]~"(Number of samples)"), ylab = quote("Slope of linear fit"~(V^-1)))
   abline(h = 0, lty = 2, lwd = 1.5, col = "gray50")
@@ -428,7 +428,7 @@ orp16S4 <- function(pdf = FALSE) {
     }
     title(paste0("Hot spring\n", tolower(lineages[k])), font.main = 1, xpd = NA, line = 0.7)
     if(k==1) {
-      label.figure("C", font = 2, cex = 1.5, yfrac = 1.025)
+      label.figure("c", font = 2, cex = 1.8, yfrac = 1.025)
       # Add legend
       lhyper <- paste0("Hypersaline (", paste(which(ihyper), collapse = ", "), ")")
       lsed <- paste0("Sediment (", paste(which(ised), collapse = ", "), ")")
@@ -520,7 +520,7 @@ orp16S_S3 <- function(global.slopes, pdf = FALSE) {
   slope <- slope * 1e3
   # Round to fixed number of decimal places
   global.slope <- formatC(slope, digits = 3, format = "f")
-  label.figure("A", font = 2, cex = 1.5, xfrac = 0.03)
+  label.figure("a", font = 2, cex = 1.8, xfrac = 0.03)
 
   # Create slope legend
   par(mar = c(4, 1, 1, 1))
@@ -572,7 +572,7 @@ orp16S_S3 <- function(global.slopes, pdf = FALSE) {
   dx <- c(0.02, 0.0185, -0.005, 0, 0.019, 0.014, -0.007)
   dy <- c(-0.005, -0.002, 0.006, -0.004, 0, 0, 0)
   text(local.slopes + dx, global.slopes$Bacteria + dy, envtxt, cex = 0.85)
-  label.figure("B", font = 2, cex = 1.5, xfrac = 0.02)
+  label.figure("b", font = 2, cex = 1.8, xfrac = 0.02)
   if(pdf) dev.off()
 
 }
@@ -607,7 +607,7 @@ orp16S5 <- function(pdf = FALSE) {
   text(0.5, -0.5, "Eh7 (mV)", cex = 1.2, xpd = NA)
   plot.new()
   text(0.2, 0.5, cplab$ZC, cex = 1.2, srt = 90, xpd = NA)
-  label.figure("A", font = 2, cex = 2, xfrac = 0.2, yfrac = 0.97)
+  label.figure("a", font = 2, cex = 2.2, xfrac = 0.2, yfrac = 0.97)
   plot.new()
   text(0.3, 0.5, "Bacteria", srt = 90, xpd = NA)
   plot.new()
@@ -625,7 +625,7 @@ orp16S5 <- function(pdf = FALSE) {
   # Add points
   eachenv(thisdat, add = TRUE, do.linear = FALSE)
   title("Bacteria", font.main = 1, line = 0.5, xpd = NA)
-  label.figure("B", font = 2, cex = 2, xfrac = 0.02, yfrac = 1)
+  label.figure("b", font = 2, cex = 2.2, xfrac = 0.02, yfrac = 1)
 
   # Now do Archaea
   plot(c(-500, 650), range(EZdat$ZC), type = "n", xlab = "Eh7 (mV)", ylab = cplab$ZC)
@@ -701,7 +701,7 @@ orp16S_S2 <- function(pdf = FALSE) {
     plotEZ("KLM+16", "Bacteria", groupby = "Day", groups = c(-1, 246, 448, 671)),
     plotEZ("WLJ+16", "two", groupby = "Arsenic", groups = c("As < 100 \u03BCg/L", "As > 100 \u03BCg/L")),
     plotEZ("ZDW+19", "two", groupby = "Season", groups = c("Non-monsoon", "Spring", "Monsoon", "Autumn"), legend.x = "bottomright"),
-    plotEZ("DJK+18", "two", groupby = "Well", groups = c("Athens", "Greene", "Licking"), legend.x = "bottomleft"),
+    plotEZ("DJK+18", "two", groupby = "Aquifer", groups = c("Athens", "Greene", "Licking"), legend.x = "bottomleft"),
     plotEZ("SRM+19", "Bacteria", groupby = "Land Use", groups = c("Agriculture", "Community", "Landfill", "Mine")),
     plotEZ("APV+20", "two", groupby = "Type", groups = c("Piezometer", "Well", "Spring"), legend.x = "bottomleft"),
     plotEZ("YHK+20", "Bacteria", groupby = "Location", groups = c("Upper Hillslope", "Middle Slope", "Lower Footslope"), dylim = c(0, 0.005)),
@@ -709,7 +709,7 @@ orp16S_S2 <- function(pdf = FALSE) {
     plotEZ("MGW+22", "two", groupby = "Region", groups = c("Auckland", "Canterbury", "Taupo", "Wellington"), legend.x = "bottomleft", dylim = c(-0.006, 0)),
 
     message("\nSediment"),
-    plotEZ("ZML+17", "two", groupby = "Type", groups = c("Mangrove Forest", "Intertidal Mudflat"), legend.x = "bottomleft"),
+    plotEZ("ZML+17", "two", groupby = "Depth", groups = c("\u2264 5 cm", "\u2265 10 cm", "\u2265 20 cm"), legend.x = "bottomleft", dylim = c(-0.003, 0)),
     plotEZ("BSPD17", "Bacteria", groupby = "Type", groups = c("Water", "Sediment")),
     plotEZ("RKN+17", "two", groupby = "Treatment", groups = c("CH4", "CH4+Fe", "CH4+Mn"), legend.x = "bottomleft"),
     plotEZ("HDZ+19", "Bacteria", groupby = "Type", groups = c("Water", "Sediment")),
@@ -735,10 +735,10 @@ orp16S_S2 <- function(pdf = FALSE) {
     plotEZ("WHLH21a", "Bacteria", groupby = "Stage", groups = c("Algae", "Cyanolichen", "Chlorolichen", "Moss"), legend.x = "bottomright"),
     plotEZ("CWC+20", "Bacteria", groupby = "Management", groups = c("Flooding", "Draining"), legend.x = "bottomright"),
     plotEZ("PSG+20", "two", groupby = "Treatment", groups = c("Initial", "NCC", "RB", "RGP", "TP"), legend.x = "bottomright"),
-    plotEZ("LJC+20", "Bacteria", groupby = "meanT", groups = c("MAT >= 21.5 \u00b0C", "MAT < 21.5 \u00b0C"), dylim = c(0, 0.005)),
+    plotEZ("LJC+20", "Bacteria", groupby = "MAT", groups = c(">= 21.5 \u00b0C", "< 21.5 \u00b0C"), dylim = c(0, 0.005)),
     plotEZ("DTJ+20", "Bacteria", groupby = "Zone", groups = c("Bulk Soil", "Mature", "Elongation", "Tip")),
     plotEZ("RKSK22", "two", groupby = "Compartment", groups = c("Bulk sediment", "Rhizosphere", "Root"), legend.x = "bottomright"),
-    plotEZ("DLS21_Bulk", "Bacteria", groupby = "Treatment", groups = c("control", "char", "silicate", "husk")),
+    plotEZ("DLS21_Bulk", "Bacteria", groupby = "Treatment", groups = c("Control", "Char", "Silicate", "Husk")),
     plotEZ("WKP+22", "Bacteria", groupby = "Type", groups = c("Intercropping", "Monoculture"), legend.x = "bottomleft"),
     plotEZ("CKB+22", "two", groupby = "Treatment", groups = c("FM 5 Mg/ha", "FM 10 Mg/ha", "RS 5 Mg/ha", "RS 10 Mg/ha"), legend.x = "bottomright")
 

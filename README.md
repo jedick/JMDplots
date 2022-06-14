@@ -6,7 +6,7 @@ This R package has code and data for plots from papers by [Jeffrey M. Dick](http
 
 ## Quick links to active papers (pre-publication drafts)
 
-- **orp16S**: Chemical adaptation of estimated bacterial community proteomes to redox potential: [data directory](inst/extdata/orp16S),
+- **orp16S**: Chemical adaptation of estimated bacterial community proteomes to redox potential: [data directory](inst/extdata/orp16S) with sequence processing pipeline,
   [R code](R/orp16S.R), [help page source](man/orp16S.Rd), [vignette source](vignettes/orp16S.Rmd)
   - A compiled HTML version of the vignette is at [chnosz.net](https://chnosz.net/JMDplots/doc/orp16S.html) (it might be out of sync with the source).
   - A preprint is on [bioRxiv](https://doi.org/10.1101/2021.10.12.464155).
