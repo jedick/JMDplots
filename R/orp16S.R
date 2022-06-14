@@ -276,9 +276,7 @@ orp16S3 <- function(pdf = FALSE) {
   pch <- ifelse(coords$study %in% lab, 15, 19)
   # Use smaller points for high-density regions 20210915
   cex <- ifelse(coords$study %in% c(
-    "MLL+19", "DTJ+20", # Hunan
     "ZZL+21", "MLL+18", "ZML+17", "ZZLL21", "ZHZ+19", "WHLH21", # GD-HK-MO GBA
-    "CLS+19", "HCW+22", # Jiangsu-Gansu-Zhejiang
     "HDZ+19" # Hubei
   ), 1.5, 2.5)
   # Plot sample locations
@@ -321,7 +319,7 @@ orp16S3 <- function(pdf = FALSE) {
 
 }
 
-# Linear regressions between ZC and Eh7 at local scales 20220517
+# Linear regressions between Eh7 and ZC at local scales 20220517
 orp16S4 <- function(pdf = FALSE) {
   if(pdf) pdf("Figure4.pdf", width = 8, height = 6)
   mat <- matrix(c(1,1,1,1, 2,2,2,2, 3,3,3,3,
@@ -445,15 +443,15 @@ orp16S4 <- function(pdf = FALSE) {
 
 }
 
-# Regresison slopes from local to global scale 20220611
-orp16S6 <- function(global.slopes, pdf = FALSE) {
+# Regression slopes from local to global scale 20220611
+orp16S_S3 <- function(global.slopes, pdf = FALSE) {
 
-  if(pdf) pdf("Figure6.pdf", width = 8, height = 3)
+  if(pdf) pdf("Figure_S3.pdf", width = 8, height = 3)
   layout(matrix(1:3, nrow = 1), widths = c(5, 4, 4.5))
   par(mar = c(4, 4, 1, 1))
   par(mgp = c(2.7, 1, 0))
   # Get data for Bacteria in Groundwater
-  environment <- "Groundwater"
+  environment <- "Hot Spring"
   bacdat <- EZdat[EZdat$lineage == "Bacteria", ]
   gwdat <- bacdat[bacdat$envirotype == environment, ]
   # Set up plot
@@ -494,11 +492,20 @@ orp16S6 <- function(global.slopes, pdf = FALSE) {
     xfits[[i]] <- xfit
     yfits[[i]] <- yfit
   }
-  # Highlight the dataset with the median slope
-  imedian <- which(slopes == median(slopes))
-  lines(xfits[[imedian]], yfits[[imedian]], col = lcol[imedian], lwd = 3, lty = 2)
+  # Highlight the dataset(s) with the median slope
+  median.slope <- median(slopes)
+  imedian <- which(slopes == median.slope)
+  if(length(imedian)==0) {
+    # We get here if there is an even number of datasets 20220613
+    # Identify the two datasets whose mean slope is the median
+    imedian <- order(abs(slopes - median(slopes)))[1:2]
+    lines(xfits[[imedian[1]]], yfits[[imedian[1]]], col = lcol[imedian[1]], lwd = 3, lty = 2)
+    lines(xfits[[imedian[2]]], yfits[[imedian[2]]], col = lcol[imedian[2]], lwd = 3, lty = 2)
+  } else {
+    lines(xfits[[imedian]], yfits[[imedian]], col = lcol[imedian], lwd = 3, lty = 2)
+  }
   # Round to fixed number of decimal places
-  local.slope <- formatC(slopes[imedian], digits = 3, format = "f")
+  local.slope <- formatC(median.slope, digits = 3, format = "f")
 
   # Plot global regression
   Eh7 <- gwdat$Eh7
@@ -518,8 +525,17 @@ orp16S6 <- function(global.slopes, pdf = FALSE) {
   # Create slope legend
   par(mar = c(4, 1, 1, 1))
   plot.new()
-  legtxt <- c("Local regressions", bquote("Median local slope" == .(local.slope)~V^-1), bquote("Global slope" == .(global.slope)~V^-1))
-  legcol <- c(lcol[1], lcol[imedian], "#00000080")
+  if(length(imedian) == 1) {
+    legtxt <- c("Local regressions", bquote("Median local slope" == .(local.slope)~V^-1), bquote("Global slope" == .(global.slope)~V^-1))
+    legcol <- c(lcol[1], lcol[imedian], "#00000080")
+  } else {
+    legtxt <- c("Local regressions", bquote("Median local slope" == .(local.slope)~V^-1), bquote("Global slope" == .(global.slope)~V^-1))
+    legcol <- c(lcol[1], NA, "#00000080")
+    legcol1 <- c(NA, lcol[imedian[1]], NA)
+    legcol2 <- c(NA, lcol[imedian[2]], NA)
+    legend("bottomleft", legend = character(3), lwd = 3, lty = 2, col = legcol1, bty = "n", seg.len = 4, inset = c(0, 0.01))
+    legend("bottomleft", legend = character(3), lwd = 3, lty = 2, col = legcol2, bty = "n", seg.len = 4, inset = c(0, -0.01))
+  }
   legend("bottomleft", legend = legtxt, lwd = c(2, 3, 3), lty = c(2, 2, 1), col = legcol, bty = "n", seg.len = 4)
   # Read pre-calculated dataset regressions and names
   gwlm <- EZlm[match(study, EZlm$study), ]
@@ -538,7 +554,7 @@ orp16S6 <- function(global.slopes, pdf = FALSE) {
     median(gwlm$slope)
   })
   # Make sure the median slope matches the one we calculated above
-  stopifnot(all.equal(local.slopes[environment], slopes[imedian], check.attributes = FALSE, tolerance = 1e-5, scale = 1))
+  stopifnot(all.equal(local.slopes[environment], median.slope, check.attributes = FALSE, tolerance = 1e-5, scale = 1))
   # Make sure local and global slopes are in same order
   stopifnot(all(names(global.slopes$Bacteria) == names(local.slopes)))
   # Plot global vs median local slopes
@@ -553,15 +569,15 @@ orp16S6 <- function(global.slopes, pdf = FALSE) {
   # Label points
   envtxt <- envirotypes
   envtxt[envtxt == "Groundwater"] <- "Ground-\nwater"
-  dx <- c(0.02, 0.0185, -0.005, 0, 0.019, 0.013, -0.007)
-  dy <- c(-0.005, -0.002, 0.006, -0.004, 0, -0.003, 0)
+  dx <- c(0.02, 0.0185, -0.005, 0, 0.019, 0.014, -0.007)
+  dy <- c(-0.005, -0.002, 0.006, -0.004, 0, 0, 0)
   text(local.slopes + dx, global.slopes$Bacteria + dy, envtxt, cex = 0.85)
   label.figure("B", font = 2, cex = 1.5, xfrac = 0.02)
   if(pdf) dev.off()
 
 }
 
-# Figure 5: Linear regressions between ZC and Eh7 at a global scale 20210828
+# Figure 5: Linear regressions between Eh7 and ZC at a global scale 20210828
 orp16S5 <- function(pdf = FALSE) {
 
   if(pdf) pdf("Figure5.pdf", width = 10, height = 7)
@@ -608,7 +624,7 @@ orp16S5 <- function(pdf = FALSE) {
   add.linear(thisdat$Eh7, thisdat$ZC, nstudy)
   # Add points
   eachenv(thisdat, add = TRUE, do.linear = FALSE)
-  title("Bacteria", font.main = 1)
+  title("Bacteria", font.main = 1, line = 0.5, xpd = NA)
   label.figure("B", font = 2, cex = 2, xfrac = 0.02, yfrac = 1)
 
   # Now do Archaea
@@ -617,7 +633,7 @@ orp16S5 <- function(pdf = FALSE) {
   nstudy <- length(unique(thisdat$study))
   add.linear(thisdat$Eh7, thisdat$ZC, nstudy)
   eachenv(thisdat, add = TRUE, do.linear = FALSE)
-  title("Archaea", font.main = 1)
+  title("Archaea", font.main = 1, line = 0.5, xpd = NA)
 
   # Add legend
   par(mar = c(4, 1, 1, 1))
@@ -649,7 +665,7 @@ orp16S_S2 <- function(pdf = FALSE) {
     plotEZ("GSBT20_Prefilter", "two", groupby = "Region", groups = c("West Coast U.S.", "Great Lakes", "East Coast U.S.", "Europe", "Asia"),
            legend.x = "bottomright", dylim = c(-0.015, 0)),
     plotEZ("GSBT20_Postfilter", "two", groupby = "Region", groups = c("West Coast U.S.", "Great Lakes", "East Coast U.S.", "Europe", "Asia"),
-           legend.x = "bottomright", dylim = c(-0.005, 0), dxlim = c(0, 50)),
+           legend.x = "bottomright", dylim = c(-0.007, 0), dxlim = c(0, 75)),
     plotEZ("WHL+21", "Bacteria", groupby = "Season", groups = c("Spring", "Summer", "Autumn", "Winter"), legend.x = "bottomleft"),
     plotEZ("ZLH+22", "Bacteria"),
     plotEZ("ZZL+21", "Bacteria", groupby = "Location", groups = c("Main Stream", "Animal Farm", "Hospital", "WWTP", "Tributary"),
@@ -1264,9 +1280,9 @@ orp16S_S1 <- function(pdf = FALSE) {
 }
 
 # Compare regressions with Eh7, Eh, and O2 20220517
-orp16S_S3 <- function(pdf = FALSE) {
+orp16S_S4 <- function(pdf = FALSE) {
 
-  if(pdf) pdf("Figure_S3.pdf", width = 6, height = 8)
+  if(pdf) pdf("Figure_S4.pdf", width = 6, height = 8)
   mat <- matrix(1:8, ncol = 2)
   layout(mat, heights = c(2, 2, 2, 1))
 

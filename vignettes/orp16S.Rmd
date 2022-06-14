@@ -90,7 +90,7 @@ orp16S3()
 
 **Data sources:** coastlineWorld dataset in R package oce [@KR21]; shapefiles for North American Great Lakes [@USGS10].
 
-## Linear regressions between `r ZC` and Eh7 at local scales (Figure 4)
+## Linear regressions between Eh7 and `r ZC` at local scales (Figure 4)
 ```{r orp16S4, message = FALSE, results = "hide", out.width='100%', fig.width = 8, fig.height = 6, pngquant = pngquant, dpi = 100}
 orp16S4()
 ```
@@ -109,14 +109,9 @@ kable(orp16S_T2(), col.names = rep(colnames, 2)) %>%
 **Note:** Positive and negative refer to slopes of linear regressions that are > 0.01 V^-1^ and < -0.01 V^-1^, respectively.
 Datasets for which the regression slopes have a smaller magnitude are not counted in either column.
 
-## Linear regressions between `r ZC` and Eh7 at a global scale (Figure 5)
+## Linear regressions between Eh7 and `r ZC` at a global scale (Figure 5)
 ```{r orp16S5, message = FALSE, results = "hide", out.width='100%', fig.width = 10, fig.height = 7, out.extra = 'class="full-width"', pngquant = pngquant, dpi = 100}
 global.slopes <- orp16S5()
-```
-
-## Regresison slopes from local to global scale (Figure 6)
-```{r orp16S6, message = FALSE, results = "hide", out.width='100%', fig.width = 8, fig.height = 3, out.extra = 'class="full-width"', pngquant = pngquant, dpi = 100}
-orp16S6(global.slopes)
 ```
 
 ## Eh-pH diagram (Figure S1)
@@ -126,9 +121,14 @@ orp16S_S1()
 
 **Data source:** Outline is from @BKM60.
 
-## Comparison of Eh7, Eh, and O~2~ as predictors of carbon oxidation state (Figure S3)
-```{r orp16S_S3, message = FALSE, results = "hide", out.width='100%', fig.width = 6, fig.height = 8, pngquant = pngquant, dpi = 100}
-orp16S_S3()
+## Regression slopes from local to global scale (Figure S3)
+```{r orp16S_S3, message = FALSE, results = "hide", out.width='100%', fig.width = 8, fig.height = 3, out.extra = 'class="full-width"', pngquant = pngquant, dpi = 100}
+orp16S_S3(global.slopes)
+```
+
+## Comparison of Eh7, Eh, and O~2~ as predictors of carbon oxidation state (Figure S4)
+```{r orp16S_S4, message = FALSE, results = "hide", out.width='100%', fig.width = 6, fig.height = 8, pngquant = pngquant, dpi = 100}
+orp16S_S4()
 ```
 
 ## References

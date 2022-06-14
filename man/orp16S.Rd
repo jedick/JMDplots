@@ -6,10 +6,10 @@
 \alias{orp16S3}
 \alias{orp16S4}
 \alias{orp16S5}
-\alias{orp16S6}
 \alias{orp16S_S1}
 \alias{orp16S_S2}
 \alias{orp16S_S3}
+\alias{orp16S_S4}
 \alias{orp16S_T2}
 \alias{getmdat_orp16S}
 \alias{getmetrics_orp16S}
@@ -25,10 +25,10 @@ Plots from the paper by Dick and Meng (2021).
   orp16S3(pdf = FALSE)
   orp16S4(pdf = FALSE)
   orp16S5(pdf = FALSE)
-  orp16S6(global.slopes, pdf = FALSE)
   orp16S_S1(pdf = FALSE)
   orp16S_S2(pdf = FALSE)
-  orp16S_S3(pdf = FALSE)
+  orp16S_S3(global.slopes, pdf = FALSE)
+  orp16S_S4(pdf = FALSE)
   orp16S_T2()
   getmdat_orp16S(study, metrics = NULL, dropNA = TRUE, size = NULL, quiet = TRUE)
   getmetrics_orp16S(study, mincount = 100, quiet = TRUE, ...)
@@ -54,12 +54,12 @@ This table gives a brief description of each plotting function.
   \code{orp16S1} \tab Thermodynamic predictive framework \cr
   \code{orp16S2} \tab Chemical and geobiochemical depth profiles in Winogradsky columns \cr
   \code{orp16S3} \tab Sample locations on world map \cr
-  \code{orp16S4} \tab Linear regressions between \ZC and Eh7 at local scales \cr
-  \code{orp16S5} \tab Linear regressions between \ZC and Eh7 at a global scale \cr
-  \code{orp16S6} \tab Regresison slopes from local to global scale \cr
+  \code{orp16S4} \tab Linear regressions between Eh7 and \ZC at local scales \cr
+  \code{orp16S5} \tab Linear regressions between Eh7 and \ZC at a global scale \cr
   \code{orp16S_S1} \tab Eh-pH diagram (outline from Baas Becking et al., 1960) \cr
   \code{orp16S_S2} \tab \ZC-Eh scatterplots for each dataset \cr
-  \code{orp16S_S3} \tab Comparison of Eh7, Eh, and \O2 as predictors of carbon oxidation state \cr
+  \code{orp16S_S3} \tab Regresssion slopes from local to global scale \cr
+  \code{orp16S_S4} \tab Comparison of Eh7, Eh, and \O2 as predictors of carbon oxidation state \cr
 }
 
 \code{orp16S_S2} creates the files \file{EZdat.csv} and \file{EZlm.csv} that are used by the other plotting functions and correspond to Datasets S1 and D2 in the paper.

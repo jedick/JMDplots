@@ -71,13 +71,13 @@ export(
   # Moving functions to chem16S package 20220506-20220513
   "getmdat_geo16S", "getmetrics_geo16S", "plotmet_geo16S", "getmdat_orp16S", "getmetrics_orp16S", "orp16S_info",
   # orp16S paper 20220516-20220517
-  "orp16S_T2", "orp16S_S1", "orp16S_S3",
+  "orp16S_T2", "orp16S_S1", "orp16S_S4",
   # utegig paper 20220602, 20220605
   "utegig5", "utegigS2",
   # utilities 20220609
   "cldfun",
   # orp16S paper 20220611
-  "orp16S6"
+  "orp16S_S3"
 )
 
 # Imports from CHNOSZ
