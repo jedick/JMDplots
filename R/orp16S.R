@@ -1025,12 +1025,12 @@ getmdat_orp16S <- function(study, metrics = NULL, dropNA = TRUE, size = NULL, qu
       units <- gsub(".*\\(|\\)", "", O2name)
       if(units %in% c("\u03BCmol/L", "\u03BCmol L-1", "umol/L", "umol L-1", "umol kg-1", "\u03BCM")) O2_umol_L <- metadata[, iO2]
       else if(units %in% c("mM", "mmol L-1")) O2_umol_L <- metadata[, iO2] * 1000
-      else if(units %in% c("mg/L", "mg L-1")) O2_umol_L <- metadata[, iO2] * 1000 / 32
+      else if(units %in% c("mg/L", "mg L-1")) O2_umol_L <- metadata[, iO2] * 1000 / 31.9988
       # This isn't needed now but leave it here for future reference 20220610
       # Source: USGS Office of Water Quality Technical Memorandum, 2011.03,
       #         Change to solubility equations for oxygen in water
       #         https://water.usgs.gov/water-resources/memos/
-      #else if(units %in% c("mL/L", "mL L-1")) O2_umol_L <- metadata[, iO2] * 1.42905 * 1000 / 32
+      #else if(units %in% c("mL/L", "mL L-1")) O2_umol_L <- metadata[, iO2] * 1.42905 * 1000 / 31.9988
       else if(units == "%") {
         # Calculate logK for O2(gas) = O2(aq)
         logK <- rep(NA, nrow(metadata))
