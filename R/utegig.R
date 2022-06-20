@@ -673,8 +673,8 @@ utegig5 <- function(pdf = FALSE) {
       ip <- add.protein(aa, as.residue = TRUE)
       a <- affinity(H2 = xlims[[i]], iprotein = ip, T = T)
       # Calculate normalized sum of ranks for each group and make diagram
-      # TODO: add affinity_rank to imports in NAMESPACE when CHNOSZ 2.0.0 is released
-      arank <- CHNOSZ::affinity_rank(a, groups)
+      # TODO: add rank_affinity to imports in NAMESPACE when CHNOSZ 2.0.0 is released
+      arank <- CHNOSZ::rank_affinity(a, groups)
       # Save graphical settings that are modified by diagram()
       opar <- par(c("mar", "mgp", "tcl", "las", "xaxs", "yaxs"))
       diagram(arank, xlim = xlims[[i]], ylim = ylims[[i]], col = col, lty = 1, lwd = 1.5, dx = dx[[i]], dy = dy[[i]],
