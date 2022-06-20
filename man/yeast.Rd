@@ -51,10 +51,6 @@ If \code{location} is NULL, \code{yeastgfp} returns the names of all known locat
       \samp{yeastgfp.csv} was downloaded on 2007-02-01 from http://yeastgfp.ucsf.edu using the Advanced Search, setting options to download the entire dataset and to include localization table and abundance, sorted by orf number.
       Used in \code{yeastgfp}.
     }
-
-    \item{\code{TBD+05.csv}}{
-      lists genes with transcriptomic expression changes in carbon limitation stress response experiments in yeast (Tai et al., 2005). Used in an example in this help page.
-    }
   }
 }
 
@@ -65,71 +61,22 @@ If \code{location} is NULL, \code{yeastgfp} returns the names of all known locat
 
 \examples{
 \dontshow{reset()}
-# the first few names in UniProt for "aminotransferase yeast"
+# The first few names in UniProt for "aminotransferase yeast"
 genes <- c("AATC", "ARO8", "BCA1", "AMPL", "BCA2", "ARO9")
 # the corresponding ORF names
 ORF <- c("YLR027C", "YGL202W", "YHR208W", "YKL103C", "YJR148W", "YHR137W")
-# we only match two of them by gene name, but all by ORF name
+# We only match two of them by gene name, but all by ORF name
 aa <- yeast.aa(genes)
 aa <- yeast.aa(ORF)
-# what are their formulas and average oxidation states of carbon
+# What are their formulas and average oxidation states of carbon
 protein.formula(aa)
 ZC(protein.formula(aa))
-
-## potential fields for overall protein compositions 
-## transcriptionally induced and repressed in aerobic
-## and anaerobic carbon limitation
-## (experiments of Tai et al., 2005)
-# the activities of ammonium and sulfate used here
-# are similar to the non-growth-limiting concentrations
-# used by Boer et al., 2003
-basis(c("glucose", "H2O", "NH4+", "hydrogen", "SO4-2", "H+"),
-  c(-1, 0, -1.3, 999, -1.4, -7))
-# the names of the experiments in TBD+05.csv
-expt <- c("Clim.aerobic.down", "Clim.aerobic.up",
-  "Clim.anaerobic.down", "Clim.anaerobic.up")
-file <- system.file("extdata/organisms/TBD+05.csv", package="JMDplots")
-dat <- read.csv(file, as.is=TRUE)
-# yeast.aa: get the amino acid compositions
-# aasum: average them together
-for(thisexpt in expt) {
-  p <- dat$protein[dat[, thisexpt]]
-  aa <- yeast.aa(p)
-  aa <- aasum(aa, average=TRUE, protein=thisexpt)
-  add.protein(aa)
-}
-species(expt, "Sce")
-a <- affinity(C6H12O6=c(-30, 0), H2=c(-20, 0))
-d <- diagram(a, normalize=TRUE, fill=NULL)
-title(main=paste("Formation potential of proteins associated with\n",
-  "transcriptional response to carbon limitation in yeast"))
-# the affinity of formation favors the proteins upregulated 
-# by carbon limitation at low chemical potentials of C6H12O6 ...
-res <- length(a$vals[[1]])
-stopifnot(c(d$predominant[1, 1], d$predominant[1, res])==grep("up", expt))
-# ... and favors proteins downregulated by aerobic conditions
-# at high hydrogen fugacities
-stopifnot(c(d$predominant[res, res], d$predominant[res, 1])==grep("down", expt))
-
-## overall oxidation state of proteins exclusively localized 
-## to cytoplasm of S. cerevisiae with/without abundance weighting
-y <- yeastgfp("cytoplasm")
-aa <- yeast.aa(y$protein)
-aaavg <- aasum(aa, average=TRUE)
-ZC(protein.formula(aaavg))
-# the average composition weighted by abundance
-waaavg <- aasum(aa, abundance=y$abundance, average=TRUE)
-ZC(protein.formula(waaavg))
 }
 
 \references{
-Boer, V. M., de Winde, J. H., Pronk, J. T. and Piper, M. D. W. (2003) The genome-wide transcriptional responses of \emph{Saccharomyces cerevisiae} grown on glucose in aerobic chemostat cultures limited for carbon, nitrogen, phosphorus, or sulfur. \emph{J. Biol. Chem.} \bold{278}, 3265--3274. \doi{10.1074/jbc.M209759200}
-
 Ghaemmaghami, S., Huh, W., Bower, K., Howson, R. W., Belle, A., Dephoure, N., O'Shea, E. K. and Weissman, J. S. (2003) Global analysis of protein expression in yeast. \emph{Nature} \bold{425}(6959), 737--741. \doi{10.1038/nature02046}
 
 Huh, W. K., Falvo, J. V., Gerke, L. C., Carroll, A. S., Howson, R. W., Weissman, J. S. and O'Shea, E. K. (2003) Global analysis of protein localization in budding yeast. \emph{Nature} \bold{425}(6959), 686--691. \doi{10.1038/nature02026}
-
-Tai, S. L., Boer, V. M., Daran-Lapujade, P., Walsh, M. C., de Winde, J. H., Daran, J.-M. and Pronk, J. T. (2005) Two-dimensional transcriptome analysis in chemostat cultures: Combinatorial effects of oxygen availability and macronutrient limitation in \emph{Saccharomyces cerevisiae}. \emph{J. Biol. Chem.} \bold{280}, 437--447. \doi{10.1074/jbc.M410573200}
 
 YeastGFP project. Yeast GFP Fusion Localization Database, http://yeastgfp.ucsf.edu; Current location: \url{https://yeastgfp.yeastgenome.org}
 }
