@@ -2,7 +2,7 @@
 
 # JMDplots
 
-This R package has code and data for plots from papers by [Jeffrey M. Dick](http://chnosz.net/jeff/).
+This R package has code and data for plots from papers (co-authored) by [Jeffrey M. Dick](http://chnosz.net/jeff/).
 
 ## Quick links to active papers (pre-publication drafts)
 
