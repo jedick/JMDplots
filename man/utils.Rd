@@ -31,7 +31,7 @@
 The file name is constructed from the function name (i.e. \code{name.pdf}).
 If \samp{exiftool} is not available, this function does nothing.
 
-\code{addalpha} adds transparency to a color by appending the value of alpha to the hexadecimal string equivalent of the color given in \code{col}.
+\code{addalpha} adds transparency to a color by appending the value of \code{alpha} to the hexadecimal representation of the color given in \code{col}.
 
 \code{cldfun} adds significant difference letters to a boxplot.
 \code{ZClist} should have the values of \ZC with names for each group.

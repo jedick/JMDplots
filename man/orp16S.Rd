@@ -63,13 +63,13 @@ This table gives a brief description of each plotting function.
 }
 
 \code{orp16S_S2} creates the files \file{EZdat.csv} and \file{EZlm.csv} that are used by the other plotting functions and correspond to Datasets S1 and D2 in the paper.
-\file{EZdat.csv} has sample data and metadata: study key, environment type, lineage (Bacteria or Archaea), sample name, SRA or MG-RAST accession number, grouping description, sample group, values of T (°C), pH, \O2 concentration (μmol/L), Eh (mV), Eh7 (mV), and \ZC.
+\file{EZdat.csv} has sample data and metadata: study key, environment type, lineage (Bacteria or Archaea), sample name, SRA or MG-RAST accession number, grouping description, sample group, values of T (°C), pH, \O2 concentration (\umol/L), Eh (mV), Eh7 (mV), and \ZC.
 \file{EZlm.csv} has regression results for each dataset and domain: study key, environment type, lineage, number of samples, Eh7 range, slope (V\S{-1}) and intercept (\ZC) of of linear regression, Pearson correlation coefficient and \emph{P}-value.
 
 \code{orp16S_T2} returns a table summarizing regression slopes for all datasets (based on \file{EZlm.csv}).
 
 \code{getmdat_orp16S} gets metadata for the indicated \code{study}, calculates Eh7 from Eh and pH and T (if available), classifies samples into 3 clusters according to their Eh values, and adds columns for plot parameters (\samp{pch}, \samp{col}).
-The function also adds a column named \samp{O2_umol_L}, with \O2 concentration in (μmol/L), which is converted from source units of \O2 concentration as needed.
+The function also adds a column named \samp{O2_umol_L}, with \O2 concentration in (\umol/L), which is converted from source units of \O2 concentration as needed.
 The default for \code{dropNA} means to exclude samples with NA name in the metadata file.
 If \code{metrics} is supplied, metadata are kept only for samples with available metrics, the sample metrics are placed in the same order as the remaining metadata, and the function returns a list with both \samp{metadata} and the sorted \samp{metrics}.
 \code{size} can be used to specify a number of samples (from among those with both metadata and \code{metrics}, if given) to be randomly selected.

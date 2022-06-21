@@ -9,7 +9,7 @@
 \alias{utegigS1}
 \alias{utegigS2}
 \alias{calc_logaH2_intermediate}
-\title{Plots from frontier of geochemical biology paper}
+\title{Plots from geochemistry of genomes paper}
 \description{
 Plots from the paper by Dick et al. (2022).
 }

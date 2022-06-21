@@ -225,10 +225,10 @@ utegig2 <- function(pdf = FALSE) {
   # Add convex hulls 20220401
   dat2 <- dat[iII, ]
   i2 <- chull(dat2$Topt, dat2$ZC)
-  polygon(dat2$Topt[i2], dat2$ZC[i2], col = "#90CAF980", border = NA)
+  polygon(dat2$Topt[i2], dat2$ZC[i2], col = "#90CAF960", border = NA)
   dat1 <- dat[setdiff(iI, which(iout)), ]
   i1 <- chull(dat1$Topt, dat1$ZC)
-  polygon(dat1$Topt[i1], dat1$ZC[i1], col = "#E5737380", border = NA)
+  polygon(dat1$Topt[i1], dat1$ZC[i1], col = "#E5737360", border = NA)
   label.figure("B", cex = 1.5, font = 2, yfrac = 0.85, xfrac = -0.05)
 
   if(pdf) dev.off()
@@ -587,8 +587,8 @@ utegig5 <- function(pdf = FALSE) {
   logK <- subcrt(c("H2", "H+", "e-"), c(-1, 2, 2), T = T)$out$logK
   pH <- Seawater.AS98$pH
   # Adjustments for label position
-  dx <- list(c(0, 0), c(4, 0, -8, 0), c(0, 0, 2, -1))
-  dy <- list(c(1, 1), c(32, 2, -68, 2), c(2, 2, 4, -6))
+  dx <- list(c(0, -0.3), c(3.83, 0, -11.2, -1.5), c(0.2, -0.4, 2, -3))
+  dy <- list(c(1, 1), c(35, 5, -68, 5), c(1.5, 3, 0, -6))
 
   for(i in 1:3) {
 
@@ -600,6 +600,7 @@ utegig5 <- function(pdf = FALSE) {
       iI <- 20:36
       iII <- 1:19
       col <- c(col2, col4)
+      lcol <- c(2, 4)
       # Make ZC plot
       ZC <- ZC(protein.formula(aa))
       ZClist <- list("Class I" = ZC[iI], "Class II" = ZC[iII])
@@ -617,10 +618,11 @@ utegig5 <- function(pdf = FALSE) {
     }
 
     if(i == 2) {
-      # Nif-bearing organisms 20220531
+      # Nif-bearing genomes 20220531
       np <- NifProteomes()
       ZClist <- np$ZClist
       col <- c(col2, col2, col4, col4)
+      lcol <- c(2, 2, 4, 4)
       bp <- boxplot(ZClist, ylab = ZClab, col = col, ylim = ylim, names = character(4))
       names(ZClist) <- paste0(names(ZClist), "\n(", sapply(ZClist, length), ")")
       axis(1, at = 1:4, labels = names(ZClist), line = 1, lwd = 0)
@@ -630,7 +632,7 @@ utegig5 <- function(pdf = FALSE) {
       text(1.5, -0.12, "Anaerobic", font = 2, cex = 0.8)
       text(3.2, -0.11, "Anaerobic\nand aerobic", font = 2, cex = 0.8)
       abline(v = 2.5, lty = 2, lwd = 1.5, col = 8)
-      title("Nif-bearing organisms\n(Poudel et al., 2018)", font.main = 1, cex.main = 1)
+      title("Nif-bearing genomes\n(Poudel et al., 2018)", font.main = 1, cex.main = 1)
       # Get the amino acid compositions and species in each group
       aa <- np$AA
       groupnames <- np$types
@@ -649,6 +651,7 @@ utegig5 <- function(pdf = FALSE) {
       ## Colors from Ren et al. (2019)
       #col <- c("#b2427e", "#c78d55", "#00a06f", "#4085c3")
       col <- c(col2, col4, col4, col4)
+      lcol <- c(2, 4, 4, 4)
       ZC <- ZCAA(aa)
       ZClist <- lapply(groupnames, function(g) ZC[aa$protein == g])
       names(ZClist) <- groupnames
@@ -669,16 +672,30 @@ utegig5 <- function(pdf = FALSE) {
       plot.new()
     } else {
       # Make affinity ranking plot 20220602
+
+      # Save graphical settings that are modified by thermo.plot.new()
+      opar <- par(c("mar", "mgp", "tcl", "las", "xaxs", "yaxs"))
+      # Start plot
+      thermo.plot.new(xlim = xlims[[i]], ylim = ylims[[i]], xlab = logaH2lab, ylab = "Average affinity ranking", yline = par("mgp")[1] + 0.3)
+      # Color reducing and oxidizing areas from organic compounds 20220621
+      file <- "H2_intermediate.csv"
+      dat <- read.csv(file.path(system.file("extdata/utegig", package = "JMDplots"), file))
+      # Just use 25 degC values
+      dat <- dat[dat$T==25, ]
+      x <- dat[, "T", drop = FALSE]
+      # Make rectangles
+      rect(xlims[[i]][1], ylims[[i]][1], dat$hiN_hipH, ylims[[i]][2], col = "#E5737360", border = NA)
+      rect(xlims[[i]][2], ylims[[i]][1], dat$loN_lopH, ylims[[i]][2], col = "#90CAF960", border = NA)
+      rect(dat$hiN_hipH, ylims[[i]][1], dat$loN_lopH, ylims[[i]][2], col = "#9E9E9E60", border = NA)
+      rect(dat$hiN_lopH, ylims[[i]][1], dat$loN_hipH, ylims[[i]][2], col = "#9E9E9E90", border = NA)
+
       # Load proteins and calculate affinity
       ip <- add.protein(aa, as.residue = TRUE)
       a <- affinity(H2 = xlims[[i]], iprotein = ip, T = T)
       # Calculate normalized sum of ranks for each group and make diagram
       # TODO: add rank_affinity to imports in NAMESPACE when CHNOSZ 2.0.0 is released
       arank <- CHNOSZ::rank_affinity(a, groups)
-      # Save graphical settings that are modified by diagram()
-      opar <- par(c("mar", "mgp", "tcl", "las", "xaxs", "yaxs"))
-      diagram(arank, xlim = xlims[[i]], ylim = ylims[[i]], col = col, lty = 1, lwd = 1.5, dx = dx[[i]], dy = dy[[i]],
-              xlab = logaH2lab, ylab = "Average affinity ranking")
+      diagram(arank, col = lcol, lty = 1, lwd = 1.5, dx = dx[[i]], dy = dy[[i]], add = TRUE)
       par(opar)
       if(i == 1) label.figure("B", cex = 1.5, font = 2, xfrac = 0.06)
 
@@ -695,6 +712,7 @@ utegig5 <- function(pdf = FALSE) {
       Ehtext <- paste(round(Eh), "mV")
       ytop2 <- ylims[[i]][2] + diff(ylims[[i]]) * 0.1
       text(logaH2, ytop2, Ehtext, xpd = NA)
+
     }
 
   }
@@ -727,13 +745,13 @@ intermediate_logaH2 <- function(class = NULL, add = FALSE, parargs = list(mar = 
   y <- dat[, 2:5]
   if(!add) matplot(x, y, type = "n", xlab = Tlab, ylab = logaH2lab, xlim = xlim, ylim = ylim, xaxs = "i")
   # Fill area between lines
-  polygon(c(dat$T, rev(dat$T)), c(dat$loN_lopH, rev(dat$hiN_hipH)), border = NA, col = "#9E9E9E80")
-  polygon(c(dat$T, rev(dat$T)), c(dat$hiN_lopH, rev(dat$loN_hipH)), border = NA, col = "#9E9E9EB0")
+  polygon(c(dat$T, rev(dat$T)), c(dat$loN_lopH, rev(dat$hiN_hipH)), border = NA, col = "#9E9E9E60")
+  polygon(c(dat$T, rev(dat$T)), c(dat$hiN_lopH, rev(dat$loN_hipH)), border = NA, col = "#9E9E9E90")
   # Fill reducing and oxidizing regions 20220401
   top <- rep(par("usr")[4], length(dat$T))
-  polygon(c(dat$T, rev(dat$T)), c(top, rev(dat$hiN_hipH)), border = NA, col = "#E5737380")
+  polygon(c(dat$T, rev(dat$T)), c(top, rev(dat$hiN_hipH)), border = NA, col = "#E5737360")
   bot <- rep(par("usr")[3], length(dat$T))
-  polygon(c(dat$T, rev(dat$T)), c(bot, rev(dat$loN_lopH)), border = NA, col = "#90CAF980")
+  polygon(c(dat$T, rev(dat$T)), c(bot, rev(dat$loN_lopH)), border = NA, col = "#90CAF960")
 
   # Don't plot ends of lines 20220401
   Tlim <- c(10, 290)

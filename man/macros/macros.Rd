@@ -33,4 +33,5 @@
 % Subscripts and superscripts 20220520
 \newcommand{\s}{\ifelse{latex}{\eqn{_{#1}}}{\ifelse{html}{\out{<sub>#1</sub>}}{#1}}}
 \newcommand{\S}{\ifelse{latex}{\eqn{^{#1}}}{\ifelse{html}{\out{<sup>#1</sup>}}{^#1}}}
-
+% To get mu in LaTeX 20220621
+\newcommand{\umol}{\ifelse{latex}{\eqn{\mu}mol}{\ifelse{html}{\out{&mu;mol}}{μmol}}}
