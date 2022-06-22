@@ -16,6 +16,7 @@ logaH2maxlab <- quote(bold(log)~bolditalic(a)[bold(H[2])]~bold("for maximum acti
 logalab <- quote(bold(log)~bolditalic(a))
 logaH2lab <- quote(bold(log)~bolditalic(a)[bold(H[2])])
 logaNH4lab <- quote(bold(log)~bolditalic(a)[bold(NH[4]^"+")])
+nH2Olab <- quote(bolditalic(n)[bold(H[2]*O)])
 
 # Identify species used in Shock and Canovas (2010)
 # Used in Energy() and calc_logaH2_intermediate()
@@ -77,90 +78,10 @@ mcol[iII] <- col4
 #methanogen_AA <- refseq[irefseq, ]
 #write.csv(methanogen_AA, "methanogen_AA.csv", row.names = FALSE, quote = FALSE)
 
-# ZC of proteins and lipids in hot springs 20210516
+# Overlay ZC on phylogenetic tree of methanogens 20210516
 utegig1 <- function(pdf = FALSE) {
 
-  if(pdf) pdf("Figure_1.pdf", width = 8.5, height = 4)
-  layout(matrix(1:3, nrow = 1), widths = c(1.07, 1, 0.4))
-  par(cex = 1)
-
-  ## Plot A: Proteins
-  par(mar = c(4, 4.2, 0.5, 1))
-  plot(c(50, 100), c(-0.22, -0.12), type = "n", xlab = Tlab, ylab = ZClab, xaxs = "i", axes = FALSE)
-  # Remove leading zeros for better visual parallel with lipids
-  at <- seq(-0.22, -0.12, 0.02)
-  labels <- gsub("-0", "-", formatC(at, digits = 2, format = "f"))
-  axis(2, at, labels)
-  axis(1)
-  box()
-  # Get ZC of Bison Pool proteins aggregated by phylum
-  aa.phyla <- read.csv(system.file("extdata/bison/DS13.csv", package = "JMDplots"))
-  ZC <- ZC(protein.formula(aa.phyla))
-  # Get T values
-  site <- gsub("bison", "", aa.phyla$protein)
-  T <- sapply(site, switch, N = 93.3, S = 79.4, R = 67.5, Q = 65.3, P = 57.1)
-  # Plot lines for each phlum
-  for(phylum in unique(aa.phyla$organism)) {
-    iphylum <- aa.phyla$organism == phylum
-    lines(T[iphylum], ZC[iphylum], col = "gray")
-  }
-
-  # Make different color groups based on temperature
-  ilo <- T < 60
-  imid <- T >= 60 & T <= 70
-  ihi <- T > 70
-  points(T[ilo], ZC[ilo], pch = 22, bg = col4)
-  points(T[imid], ZC[imid], pch = 23, bg = col8)
-  points(T[ihi], ZC[ihi], pch = 21, bg = col2)
-  # Add labels
-  text(83, -0.14, "Proteins grouped\nby major phyla")
-  label.figure("A", cex = 1.5, font = 2, xfrac = 0.06)
-
-  ## Plot B: Lipids
-  par(mar = c(4, 3, 0.5, 1))
-  plot(c(25, 100), c(-2.2, -1.2), type = "n", xlab = Tlab, ylab = "", xaxs = "i")
-  # Add "100" because it doesn't show up 20220408
-  axis(1, 100, tick = FALSE)
-  # IPL data from Boyer et al., 2020 Fig. 7
-  T <- c(29.0, 35.1, 38.1, 40.5, 51.6, 53, 59.8, 60.7, 63.1, 64.8, 70.5, 73.3, 77.3, 80.9, 82.2, 85.4, 89.0, 91.0)
-  ZC.alkyl <- c(-1.73, -1.71, -1.77, -1.80, -1.83, -1.82, -1.89, -1.90, -1.88, -1.92, -1.92, -1.84, -1.93, -1.89, -1.96, -1.95, -1.92, -1.94)
-  ZC.IPL <- c(-1.36, -1.33, -1.37, -1.38, -1.44, -1.43, -1.48, -1.54, -1.46, -1.52, -1.54, -1.45, -1.61, -1.53, -1.60, -1.56, -1.56, -1.68)
-  # Make different color groups based on temperature
-  ilo <- T < 60
-  imid <- T >= 60 & T <= 70
-  ihi <- T > 70
-  # Plot points
-  points(T[ilo], ZC.alkyl[ilo], pch = 22, bg = col4)
-  points(T[imid], ZC.alkyl[imid], pch = 23, bg = col8)
-  points(T[ihi], ZC.alkyl[ihi], pch = 21, bg = col2)
-  points(T[ilo], ZC.IPL[ilo], pch = 22, bg = col4)
-  points(T[imid], ZC.IPL[imid], pch = 23, bg = col8)
-  points(T[ihi], ZC.IPL[ihi], pch = 21, bg = col2)
-  # Label molecular groups
-  text(70, -1.32, "Intact polar lipids")
-  text(50, -2, "Alkyl chains")
-  label.figure("B", cex = 1.5, font = 2, xfrac = 0.01)
-
-  # Add legend 20220221
-  # Move to right panel 20220408
-  plot.new()
-  par(mar = c(0, 0, 0, 0))
-  par(xpd = NA)
-  legend <- as.expression(c(quote(" "*italic(T) < 60~degree*C*";"), " less reducing", "",
-                            quote(" Transition zone"), "",
-                            quote(" "*italic(T) > 70~degree*C*";"), " more reducing"))
-  legend("left", legend = legend, pch = c(22, NA, NA, 23, NA, 21, NA), pt.bg = c(col4, NA, NA, col8, NA, col2, NA),
-    bty = "n", inset = -1, y.intersp = 1)
-  par(xpd = FALSE)
-
-  if(pdf) dev.off()
-
-}
-
-# Overlay ZC on phylogenetic tree of methanogens 20210516
-utegig2 <- function(pdf = FALSE) {
-
-  if(pdf) pdf("Figure_2.pdf", width = 12, height = 8)
+  if(pdf) pdf("Figure_1.pdf", width = 12, height = 8)
   layout(matrix(1:2, nrow = 1), widths = c(1.5, 0.7))
   par(mar = c(2, 0, 1, 32))
 
@@ -186,7 +107,7 @@ utegig2 <- function(pdf = FALSE) {
   text(0, 29.5, "Class I", font = 2, adj = 0, cex = 1.2)
   text(0, 5, "Class II", font = 2, adj = 0, cex = 1.2)
   text(3200, -2.4, ZClab, adj = c(0, 0), xpd = NA)
-  label.figure("A", cex = 1.5, font = 2, yfrac = 0.97)
+  label.figure("a", cex = 1.5, font = 2, yfrac = 0.97)
   # Setup a new plot in the empty space between the tree and names
   par(new = TRUE)
   par(mar = c(2, 9, 1, 18))
@@ -229,16 +150,16 @@ utegig2 <- function(pdf = FALSE) {
   dat1 <- dat[setdiff(iI, which(iout)), ]
   i1 <- chull(dat1$Topt, dat1$ZC)
   polygon(dat1$Topt[i1], dat1$ZC[i1], col = "#E5737360", border = NA)
-  label.figure("B", cex = 1.5, font = 2, yfrac = 0.85, xfrac = -0.05)
+  label.figure("b", cex = 1.5, font = 2, yfrac = 0.85, xfrac = -0.05)
 
   if(pdf) dev.off()
 
 }
 
 # Affinities of organic synthesis reactions 20211109
-utegig3 <- function(pdf = FALSE) {
+utegig2 <- function(pdf = FALSE) {
 
-  if(pdf) pdf("Figure_3.pdf", width = 7, height = 6)
+  if(pdf) pdf("Figure_2.pdf", width = 7, height = 6)
   mat <- matrix(c(1,1,2,2,3,3,4, 0,5,5,5,5,0,0), byrow = TRUE, nrow = 2)
   layout(mat, heights = c(1, 0.7), widths = c(1.1,1,1,1,1,1,1))
   par(mar = c(4, 4, 0.5, 1), mgp = c(2.7, 1, 0))
@@ -351,7 +272,7 @@ utegig3 <- function(pdf = FALSE) {
     }
     if(ilogaH2 == 1) {
       text(-3.1, 72, quote(CH[4]))
-      label.figure("A", cex = 1.5, font = 2, yfrac = 0.97)
+      label.figure("a", cex = 1.5, font = 2, yfrac = 0.97)
     }
 
   }
@@ -370,16 +291,16 @@ utegig3 <- function(pdf = FALSE) {
 
   # Plot intermediate logaH2 20220401
   intermediate_logaH2()
-  label.figure("B", cex = 1.5, font = 2)
+  label.figure("b", cex = 1.5, font = 2)
 
   if(pdf) dev.off()
 
 }
 
 # Affinities for methanogen proteomes and logaH2 of habitable niches 20220402
-utegig4 <- function(pdf = FALSE) {
+utegig3 <- function(pdf = FALSE) {
 
-  if(pdf) pdf("Figure_4.pdf", width = 7, height = 5)
+  if(pdf) pdf("Figure_3.pdf", width = 7, height = 5)
   mat <- matrix(c(1,1,2,2,3,3,4, 5,5,5,6,6,6,0), nrow = 2, byrow = TRUE)
   layout(mat, widths = c(1.2,1,1,1,1,1,1.2))
   par(mar = c(4, 4, 0.5, 1), mgp = c(2.7, 1, 0))
@@ -433,7 +354,7 @@ utegig4 <- function(pdf = FALSE) {
     Htxt <- bquote(bold(log*bolditalic(a)[H[2]] == .(logaH2s[i])))
     if(i > 1) legend.x <- "topleft" else legend.x <- "top"
     legend(legend.x, legend = Htxt, bty = "n")
-    if(i==1) label.figure("A", cex = 1.5, font = 2, yfrac = 0.97, xfrac = 0.06)
+    if(i==1) label.figure("a", cex = 1.5, font = 2, yfrac = 0.97, xfrac = 0.06)
   }
 
   # Add legend 20220403
@@ -486,7 +407,7 @@ utegig4 <- function(pdf = FALSE) {
   text(101, tail(CL[[2]]$y, 1), "50%", adj = 0, col = 1)
   text(101, tail(CL[[3]]$y, 1), "100%", adj = 0, col = "#D50000")
   par(xpd = FALSE)
-  label.figure("B", cex = 1.5, font = 2, yfrac = 0.97)
+  label.figure("b", cex = 1.5, font = 2, yfrac = 0.97)
 
   ## Plot C: logaH2-T plot for habitable niches 20220303
   par(mar = c(4, 2.5, 1, 2.5))
@@ -556,17 +477,17 @@ utegig4 <- function(pdf = FALSE) {
   text(101, tail(CL[[2]]$y, 1), quote("50%"~A[I] > A[II]), adj = 0, col = 1)
   text(101, tail(CL[[3]]$y, 1), quote("100%"~A[I] > A[II]), adj = 0, col = "#D50000")
   par(xpd = FALSE)
-  label.figure("C", cex = 1.5, font = 2, yfrac = 0.97, xfrac = -0.02)
+  label.figure("c", cex = 1.5, font = 2, yfrac = 0.97, xfrac = -0.02)
 
   if(pdf) dev.off()
 
 }
 
 # Chemical and thermodynamic analysis of multiple lineages 20220601
-utegig5 <- function(pdf = FALSE) {
+utegig4 <- function(pdf = FALSE) {
 
-  if(pdf) pdf("Figure_5.pdf", width = 9, height = 5)
-  layout(matrix(1:8, nrow = 2), widths = c(2.5, 4, 4, 1.5))
+  if(pdf) pdf("Figure_4.pdf", width = 9, height = 5)
+  layout(matrix(1:8, nrow = 2), widths = c(2.5, 4, 4, 2.5))
   par(mar = c(4, 4, 3, 1))
   
   # Faded colors
@@ -607,18 +528,18 @@ utegig5 <- function(pdf = FALSE) {
       names(ZClist) <- paste0(names(ZClist), "\n(", sapply(ZClist, length), ")")
       bp <- boxplot(ZClist, ylab = ZClab, col = col, ylim = ylim, names = character(2))
       axis(1, at = 1:2, labels = names(ZClist), line = 1, lwd = 0)
-      cldfun(ZClist, bp, dy = 0.0045)
+      cldfun(ZClist, bp, dy = 0.006)
       text(1, -0.12, "Anoxic\nhabitats", font = 2, cex = 0.8)
       text(2, -0.12, "Anoxic\nand oxic\nhabitats", font = 2, cex = 0.8)
       abline(v = 1.5, lty = 2, lwd = 1.5, col = 8)
       title("Methanogens\n(Lyu and Lu, 2018)", font.main = 1, cex.main = 1)
-      label.figure("A", cex = 1.5, font = 2, xfrac = 0.06)
+      label.figure("a", cex = 1.5, font = 2, xfrac = 0.06)
       # Get the species in each group
       groups <- list("Class I" = iI, "Class II" = iII)
     }
 
     if(i == 2) {
-      # Nif-bearing genomes 20220531
+      # Nif-bearing organisms 20220531
       np <- NifProteomes()
       ZClist <- np$ZClist
       col <- c(col2, col2, col4, col4)
@@ -628,11 +549,11 @@ utegig5 <- function(pdf = FALSE) {
       axis(1, at = 1:4, labels = names(ZClist), line = 1, lwd = 0)
       # Names with "-" confuse multcompLetters4()
       names(ZClist) <- gsub("-", "", names(ZClist))
-      cldfun(ZClist, bp, dy = 0.0045)
+      cldfun(ZClist, bp, dy = 0.006)
       text(1.5, -0.12, "Anaerobic", font = 2, cex = 0.8)
       text(3.2, -0.11, "Anaerobic\nand aerobic", font = 2, cex = 0.8)
       abline(v = 2.5, lty = 2, lwd = 1.5, col = 8)
-      title("Nif-bearing genomes\n(Poudel et al., 2018)", font.main = 1, cex.main = 1)
+      title("Nif-bearing organisms\n(Poudel et al., 2018)", font.main = 1, cex.main = 1)
       # Get the amino acid compositions and species in each group
       aa <- np$AA
       groupnames <- np$types
@@ -657,7 +578,7 @@ utegig5 <- function(pdf = FALSE) {
       names(ZClist) <- groupnames
       names(ZClist) <- paste0(names(ZClist), "\n(", sapply(ZClist, length), ")")
       bp <- boxplot(ZClist, ylab = ZClab, col = col, ylim = ylim, names = character(4))
-      cldfun(ZClist, bp, dy = 0.0045)
+      cldfun(ZClist, bp, dy = 0.006)
       axis(1, at = 1:4, labels = names(ZClist), line = 1, lwd = 0, gap.axis = 0)
       text(0.9, -0.12, "Pre-GOE\nemergence", font = 2, cex = 0.8)
       text(2.1, -0.12, "Post-GOE\nemergence", font = 2, cex = 0.8)
@@ -697,7 +618,7 @@ utegig5 <- function(pdf = FALSE) {
       arank <- CHNOSZ::rank_affinity(a, groups)
       diagram(arank, col = lcol, lty = 1, lwd = 1.5, dx = dx[[i]], dy = dy[[i]], add = TRUE)
       par(opar)
-      if(i == 1) label.figure("B", cex = 1.5, font = 2, xfrac = 0.06)
+      if(i == 1) label.figure("b", cex = 1.5, font = 2, xfrac = 0.06)
 
       # Draw line at transition
       itrans <- which.min(abs(arank$values[[trans[[i]][1]]] - arank$values[[trans[[i]][2]]]))
@@ -717,17 +638,28 @@ utegig5 <- function(pdf = FALSE) {
 
   }
 
+  # Thaumarchaeota nH2O plot 20220622
+  nH2O <- H2OAA(aa)
+  nH2Olist <- lapply(groupnames, function(g) nH2O[aa$protein == g])
+  names(nH2Olist) <- groupnames
+  names(nH2Olist) <- paste0(names(nH2Olist), "\n(", sapply(nH2Olist, length), ")")
+  ylim <- range(nH2O)
+  bp <- boxplot(nH2Olist, ylab = nH2Olab, col = col, ylim = ylim, names = character(4))
+  cldfun(nH2Olist, bp, dy = 0.0025)
+  # Make rotated labels (modified from https://www.r-bloggers.com/rotated-axis-labels-in-r-plots/)
+  text(x = 1:4, y = par()$usr[3] - 2 * strheight("A"), labels = groupnames, srt = 45, adj = 1, xpd = TRUE)
+  axis(1, at = 1:4, labels = NA)
+  title("Thaumarchaeota", font.main = 1, cex.main = 1)
+  label.figure("c", cex = 1.5, font = 2, xfrac = 0.06)
+
   # Add legend
-  plot.new()
   plot.new()
   par(mar = c(0, 0, 0, 0))
   par(xpd = NA)
   dT <- describe.property("T", T)
   dbasis <- describe.basis(ibasis = c(1, 3, 5, 6))
-  legend("left", legend = c(dT, dbasis), bty = "n", y.intersp = 1.5, inset = c(-1, 0))
+  legend("left", legend = c(dT, dbasis), bty = "n", y.intersp = 1.5, inset = c(-0.5, 0))
   par(xpd = FALSE)
-  par(cex = 1.5, mar = c(3, 4, 3, 1))
-  label.figure("B", cex = 1.5, font = 2, xfrac = 0.06)
 
   if(pdf) dev.off()
 
@@ -890,11 +822,92 @@ calc_logaH2_intermediate <- function(class = NULL) {
 
 }
 
-# Intermediate logaH2 calculated for different compound classes 20220418
+# ZC of proteins and lipids in hot springs 20210516
 utegigS1 <- function(pdf = FALSE) {
+
+  if(pdf) pdf("Figure_S1.pdf", width = 8.5, height = 4)
+  layout(matrix(1:3, nrow = 1), widths = c(1.07, 1, 0.4))
+  par(cex = 1)
+
+  ## Plot A: Proteins
+  par(mar = c(4, 4.2, 0.5, 1))
+  plot(c(50, 100), c(-0.22, -0.12), type = "n", xlab = Tlab, ylab = ZClab, xaxs = "i", axes = FALSE)
+  # Remove leading zeros for better visual parallel with lipids
+  at <- seq(-0.22, -0.12, 0.02)
+  labels <- gsub("-0", "-", formatC(at, digits = 2, format = "f"))
+  axis(2, at, labels)
+  axis(1)
+  box()
+  # Get ZC of Bison Pool proteins aggregated by phylum
+  aa.phyla <- read.csv(system.file("extdata/bison/DS13.csv", package = "JMDplots"))
+  ZC <- ZC(protein.formula(aa.phyla))
+  # Get T values
+  site <- gsub("bison", "", aa.phyla$protein)
+  T <- sapply(site, switch, N = 93.3, S = 79.4, R = 67.5, Q = 65.3, P = 57.1)
+  # Plot lines for each phlum
+  for(phylum in unique(aa.phyla$organism)) {
+    iphylum <- aa.phyla$organism == phylum
+    lines(T[iphylum], ZC[iphylum], col = "gray")
+  }
+
+  # Make different color groups based on temperature
+  ilo <- T < 60
+  imid <- T >= 60 & T <= 70
+  ihi <- T > 70
+  points(T[ilo], ZC[ilo], pch = 22, bg = col4)
+  points(T[imid], ZC[imid], pch = 23, bg = col8)
+  points(T[ihi], ZC[ihi], pch = 21, bg = col2)
+  # Add labels
+  text(83, -0.14, "Proteins grouped\nby major phyla")
+  label.figure("a", cex = 1.5, font = 2, xfrac = 0.06)
+
+  ## Plot B: Lipids
+  par(mar = c(4, 3, 0.5, 1))
+  plot(c(25, 100), c(-2.2, -1.2), type = "n", xlab = Tlab, ylab = "", xaxs = "i")
+  # Add "100" because it doesn't show up 20220408
+  axis(1, 100, tick = FALSE)
+  # IPL data from Boyer et al., 2020 Fig. 7
+  T <- c(29.0, 35.1, 38.1, 40.5, 51.6, 53, 59.8, 60.7, 63.1, 64.8, 70.5, 73.3, 77.3, 80.9, 82.2, 85.4, 89.0, 91.0)
+  ZC.alkyl <- c(-1.73, -1.71, -1.77, -1.80, -1.83, -1.82, -1.89, -1.90, -1.88, -1.92, -1.92, -1.84, -1.93, -1.89, -1.96, -1.95, -1.92, -1.94)
+  ZC.IPL <- c(-1.36, -1.33, -1.37, -1.38, -1.44, -1.43, -1.48, -1.54, -1.46, -1.52, -1.54, -1.45, -1.61, -1.53, -1.60, -1.56, -1.56, -1.68)
+  # Make different color groups based on temperature
+  ilo <- T < 60
+  imid <- T >= 60 & T <= 70
+  ihi <- T > 70
+  # Plot points
+  points(T[ilo], ZC.alkyl[ilo], pch = 22, bg = col4)
+  points(T[imid], ZC.alkyl[imid], pch = 23, bg = col8)
+  points(T[ihi], ZC.alkyl[ihi], pch = 21, bg = col2)
+  points(T[ilo], ZC.IPL[ilo], pch = 22, bg = col4)
+  points(T[imid], ZC.IPL[imid], pch = 23, bg = col8)
+  points(T[ihi], ZC.IPL[ihi], pch = 21, bg = col2)
+  # Label molecular groups
+  text(70, -1.32, "Intact polar lipids")
+  text(50, -2, "Alkyl chains")
+  label.figure("b", cex = 1.5, font = 2, xfrac = 0.01)
+
+  # Add legend 20220221
+  # Move to right panel 20220408
+  plot.new()
+  par(mar = c(0, 0, 0, 0))
+  par(xpd = NA)
+  legend <- as.expression(c(quote(" "*italic(T) < 60~degree*C*";"), " less reducing", "",
+                            quote(" Transition zone"), "",
+                            quote(" "*italic(T) > 70~degree*C*";"), " more reducing"))
+  legend("left", legend = legend, pch = c(22, NA, NA, 23, NA, 21, NA), pt.bg = c(col4, NA, NA, col8, NA, col2, NA),
+    bty = "n", inset = -1, y.intersp = 1)
+  par(xpd = FALSE)
+
+  if(pdf) dev.off()
+
+}
+
+
+# Intermediate logaH2 calculated for different compound classes 20220418
+utegigS2 <- function(pdf = FALSE) {
   # To generate files:
   # lapply(names(specieslist), calc_logaH2_intermediate)
-  if(pdf) pdf("Figure_S1.pdf", width = 6, height = 8)
+  if(pdf) pdf("Figure_S2.pdf", width = 6, height = 8)
   par(mfrow = c(3, 2))
   parargs <- list(mar = c(4, 4, 3, 1), mgp = c(2.7, 1, 0))
   ylim <- c(-25, 0)
@@ -915,8 +928,8 @@ utegigS1 <- function(pdf = FALSE) {
 }
 
 # Comparison of ZC of proteomes predicted by Glimmer and downloaded from NCBI 20220604
-utegigS2 <- function(pdf = FALSE) {
-  if(pdf) pdf("Figure_S2.pdf", width = 4, height = 4)
+utegigS3 <- function(pdf = FALSE) {
+  if(pdf) pdf("Figure_S3.pdf", width = 4, height = 4)
   par(mar= c(4.1, 4.1, 1, 1))
   predicted <- read.csv(system.file("extdata/utegig/Thaumarchaeota_predicted_AA.csv", package = "JMDplots"))
   database <- read.csv(system.file("extdata/utegig/Thaumarchaeota_database_AA.csv", package = "JMDplots"))
