@@ -78,19 +78,21 @@ mcol[iII] <- col4
 #methanogen_AA <- refseq[irefseq, ]
 #write.csv(methanogen_AA, "methanogen_AA.csv", row.names = FALSE, quote = FALSE)
 
-# Overlay ZC on phylogenetic tree of methanogens 20210516
+# Chemical signals of adaptation to redox conditions in the reference proteomes of methanogens 20210516
 utegig1 <- function(pdf = FALSE) {
 
   if(pdf) pdf("Figure_1.pdf", width = 12, height = 8)
   layout(matrix(1:2, nrow = 1), widths = c(1.5, 0.7))
   par(mar = c(2, 0, 1, 32))
 
-  # Use colors to distinguish Class I and Class II
-  edge.color <- c(rep(4, 37), rep(2, 37))
+  # Read and rotate the tree (Class I at bottom) 20220629
   methanogen_tree <- read.tree(system.file("extdata/utegig/methanogen_tree.txt", package = "JMDplots"))
-  pp <- plot.phylo(methanogen_tree, root.edge = TRUE, edge.color = edge.color, show.tip.label = FALSE)
+  labels <- rev(methanogen_tree$tip.label)
+  methanogen_tree <- rotateConstr(methanogen_tree, labels)
+  # Make the tree with colors to distinguish Class I and Class II
+  edge.color <- c(rep(2, 37), rep(4, 37))
+  pp <- plot.phylo(methanogen_tree, root.edge = TRUE, edge.color = edge.color, show.tip.label = FALSE, rotate.tree = 90)
   # Add tip labels 20220531
-  labels <- methanogen_tree$tip.label
   labels <- gsub("_", " ", labels)
   FStxt <- "sp. FS406-22"
   iFS <- grep(FStxt, labels, fixed = TRUE)
@@ -104,8 +106,8 @@ utegig1 <- function(pdf = FALSE) {
   ZC <- ZC(protein.formula(methanogen_AA))
 
   # Add labels
-  text(0, 29.5, "Class I", font = 2, adj = 0, cex = 1.2)
-  text(0, 5, "Class II", font = 2, adj = 0, cex = 1.2)
+  text(0, 32, "Class II", font = 2, adj = 0, cex = 1.2)
+  text(0, 7, "Class I", font = 2, adj = 0, cex = 1.2)
   text(3200, -2.4, ZClab, adj = c(0, 0), xpd = NA)
   label.figure("a", cex = 1.5, font = 2, yfrac = 0.97)
   # Setup a new plot in the empty space between the tree and names
@@ -117,12 +119,11 @@ utegig1 <- function(pdf = FALSE) {
   axis(3, at = seq(-0.25, -0.15, 0.01), labels = FALSE, tcl = -0.3)
   # Plot guidelines 20220405
   abline(v = c(-0.25, -0.20, -0.15), lty = 2, col = 8)
-#  abline(h = 1:36, lty = 3, col = "gray40")
   # Plot lines from ZC to organism name
-  for(i in 1:36) lines(c(ZC[i], -0.145), c(i, i), lty = 3, col = "gray40")
+  for(i in 1:36) lines(c(rev(ZC)[i], -0.145), c(i, i), lty = 3, col = "gray40")
 
   # Plot the ZC
-  points(ZC, c(iII, iI), pch = mpch, col = mcol, bg = mbg, cex = 1.2)
+  points(ZC, rev(c(iII, iI)), pch = mpch, col = mcol, bg = mbg, cex = 1.2)
 
   # ZC-Topt plot 20220224
   par(mar = c(9, 2, 7, 1))
@@ -156,7 +157,7 @@ utegig1 <- function(pdf = FALSE) {
 
 }
 
-# Affinities of organic synthesis reactions 20211109
+# Relative stabilities of organic compounds depend on redox conditions 20211109
 utegig2 <- function(pdf = FALSE) {
 
   if(pdf) pdf("Figure_2.pdf", width = 7, height = 6)
@@ -285,19 +286,22 @@ utegig2 <- function(pdf = FALSE) {
   legend(-0.8, 0.7, legend, pch = pchs, pt.cex = c(1, 1.5, 1, 1, 1, 1),
          pt.bg = cols, col = c(1, 1, 1, 1, 1, cols[6]), bty = "n", y.intersp = 1.2)
   dT <- describe.property("T", T)
+  dP <- describe.property("P", 1)
   dbasis <- describe.basis(ibasis = c(1, 3, 6))
-  legend("topright", legend = c(dT, dbasis), bty = "n", y.intersp = 1.2)
+  legend("topright", legend = c(dT, dP, dbasis), bty = "n", y.intersp = 1.2)
   par(xpd = FALSE)
 
   # Plot intermediate logaH2 20220401
   intermediate_logaH2()
+  # Add Psat legend 20220629
+  legend("bottomright", legend = quote(bolditalic(P)[bold(sat)]), bty = "n")
   label.figure("b", cex = 1.5, font = 2)
 
   if(pdf) dev.off()
 
 }
 
-# Affinities for methanogen proteomes and logaH2 of habitable niches 20220402
+# Thermodynamic model for methanogen niche partitioning 20220402
 utegig3 <- function(pdf = FALSE) {
 
   if(pdf) pdf("Figure_3.pdf", width = 7, height = 5)
@@ -361,12 +365,13 @@ utegig3 <- function(pdf = FALSE) {
   plot.new()
   par(mar = c(0, 0, 0, 0))
   par(xpd = NA)
-  legend <- c("Class I", "", "Class II")
-  legend(-0.6, 0.6, legend = legend, pch = c(21, NA, 22), col = c(col2, NA, col4), pt.bg = c("white", NA, col4), bty = "n", y.intersp = 1.2)
-  legend(-0.45, 0.52, legend = c("Methanocaldococcus"), pch = 21, col = col2, pt.bg = col2, text.font = 3, bty = "n", cex = 0.9, pt.cex = 1)
+  legend <- c("Class II", "Class I")
+  legend(-0.6, 0.50, legend = legend, pch = c(22, 21), col = c(col4, col2), pt.bg = c(col4, "white"), bty = "n", y.intersp = 1.2)
+  legend(-0.45, 0.35, legend = c("Methanocaldococcus"), pch = 21, col = col2, pt.bg = col2, text.font = 3, bty = "n", cex = 0.9, pt.cex = 1)
   dT <- describe.property("T", T)
+  dP <- describe.property("P", 1)
   dbasis <- describe.basis(ibasis = c(1, 3, 5, 6))
-  legend("topright", legend = c(dT, dbasis), bty = "n", y.intersp = 1.1)
+  legend("topright", legend = c(dT, dP, dbasis), bty = "n", y.intersp = 1.1)
   par(xpd = FALSE)
 
   ## Plot B: Contour plot for affinity differences between Class I and Class II proteomes 20220402
@@ -483,7 +488,7 @@ utegig3 <- function(pdf = FALSE) {
 
 }
 
-# Chemical and thermodynamic analysis of multiple lineages 20220601
+# Chemical and thermodynamic analysis of evolutionary divergence along redox gradients 20220601
 utegig4 <- function(pdf = FALSE) {
 
   if(pdf) pdf("Figure_4.pdf", width = 9, height = 5)
@@ -657,8 +662,9 @@ utegig4 <- function(pdf = FALSE) {
   par(mar = c(0, 0, 0, 0))
   par(xpd = NA)
   dT <- describe.property("T", T)
+  dP <- describe.property("P", 1)
   dbasis <- describe.basis(ibasis = c(1, 3, 5, 6))
-  legend("left", legend = c(dT, dbasis), bty = "n", y.intersp = 1.5, inset = c(-0.5, 0))
+  legend("left", legend = c(dT, dP, dbasis), bty = "n", y.intersp = 1.5, inset = c(-0.5, 0))
   par(xpd = FALSE)
 
   if(pdf) dev.off()

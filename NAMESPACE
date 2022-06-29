@@ -154,7 +154,7 @@ importFrom("grid", "grid.roundrect", "gpar", "grid.draw")
 importFrom("oce", "mapPlot", "mapPoints", "mapPolygon")
 importFrom("sf", "st_coordinates", "st_read", "st_transform")
 importFrom("eulerr", "euler")
-importFrom("ape", "read.tree", "plot.phylo")
+importFrom("ape", "read.tree", "plot.phylo", "rotateConstr")
 importFrom("multcompView", "multcompLetters4")
 
 # Imports from standard packages

@@ -34,10 +34,10 @@ Plots from the paper by Dick et al. (2022).
 This table gives a brief description of each plotting function.
 
 \tabular{ll}{
-  \code{utegig1} \tab Carbon oxidation state (\ZC) of reference proteomes of methanogens \cr
-  \code{utegig2} \tab Affinities of organic synthesis reactions \cr
-  \code{utegig3} \tab Affinities for methanogen proteomes and \logaH2 of habitable niches \cr
-  \code{utegig4} \tab Chemical and thermodynamic analysis of multiple lineages \cr
+  \code{utegig1} \tab Chemical signals of adaptation to redox conditions in the reference proteomes of methanogens \cr
+  \code{utegig2} \tab Relative stabilities of organic compounds depend on redox conditions \cr
+  \code{utegig3} \tab Thermodynamic model for methanogen niche partitioning \cr
+  \code{utegig4} \tab Chemical and thermodynamic analysis of evolutionary divergence along redox gradients \cr
   \code{utegigS1} \tab \ZC of proteins and lipids in hot springs \cr
   \code{utegigS2} \tab Intermediate \logaH2 calculated for different compound classes \cr
   \code{utegigS3} \tab Comparison of \ZC of proteomes predicted by Glimmer and downloaded from NCBI \cr
