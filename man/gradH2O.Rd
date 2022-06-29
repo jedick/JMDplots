@@ -57,10 +57,6 @@ The organisms are limited to those that have at least 1000 RefSeq protein sequen
     \item{\code{Table_S2.xlsx}}{Accession numbers used and sequence processing statistics for redox gradients.}
     \item{\code{MGP.rds}}{Amino acid compositions sampled from metagenomically derived protein sequences, generated as described in \code{\link{gradox}}.}
     \item{\code{mkrds.R}}{Script to make the RDS files from multiple CSV files produced by the \dQuote{ARAST} workflow.}
-    \item{\code{Nif_homolog_genomes.csv}, \code{Nif_homolog_genomes.R}}{
-      Names of genomes (organisms) containing different nitrogenase (Nif) homologs.
-      The script reads Supplemental Table 1A of Poudel et al. (2018) and adds the columns \samp{Refseq.name} and \samp{taxid}, which contain the closest matching genome name in release 206 of the RefSeq database (see \code{\link{JMDplots-package}}) and corresponding taxonomic ID.
-    }
     \item{\code{reaction_equations.csv}}{
       Equations for metabolic reactions in \emph{E. coli} from the \samp{reactions_GPRs} worksheet from Supplementary Information 1 of Feist et al. (2007).
       This is used in \code{gradH2O0}.
@@ -80,6 +76,10 @@ Feist, A. M. et al. (2007) A genome-scale metabolic reconstruction for \emph{Esc
 Poudel, S. et al. (2018) Electron transfer to nitrogenase in different genomic and metabolic backgrounds. \emph{J. Bacteriol.} \bold{200}, e00710.1038/ismej.2010.157-17. \doi{10.1128/JB.00757-17}
 
 Rodriguez-Brito, B. et al. (2010) Viral and microbial community dynamics in four aquatic environments. \emph{ISME J.} \bold{4}, 739--751. \doi{10.1038/ismej.2010.1}
+}
+
+\seealso{
+Scripts for processing proteomes of Nif-bearing organisms have been moved to \code{\link{utegig}}.
 }
 
 \examples{

@@ -58,6 +58,11 @@ This table gives a brief description of each plotting function.
     \item{\file{methanogen_tree.txt}}{Hierarchical clustering tree for functional genes of Class I and Class I methanogens. Tree was digitized and modified from Fig. 1 of Lyu and Lu (2018) and is provided in Newick format.}
     \item{\file{Thaumarchaeota_predicted_AA.csv}}{Amino acid compositions for predicted proteomes of basal, terrestrial, and shallow-water groups of Thaumarchaeota (habitats are listed in the \samp{protein} column). Proteins were predicted using Glimmer version 3.02b (Delcher et al., 1999) from the genomes downloaded from NCBI (accession numbers in the \samp{organisms} column).}
     \item{\file{Thaumarchaeota_database_AA.csv}}{Amino acid compositions for proteomes of basal, terrestrial, shallow- and deep-water groups of Thaumarchaeota obtained from IMG (numeric TaxonID in the \samp{organisms} column) or NCBI (alphanumeric accession number in the \samp{organisms} column). Taxon IDs and accession numbers were taken from Table S1 of Ren et al. (2019)}.
+    \item{\code{Nif_homolog_genomes.R}, \code{Nif_homolog_genomes.csv}, \code{Nif_homolog_AA.csv}}{
+      The R script reads Supplemental Table 1A of Poudel et al. (2018) and adds the columns \samp{Refseq.name} and \samp{taxid}, which contain the closest matching genome name in the RefSeq database (see \code{\link[chem16S]{chem16S-package}}) and corresponding taxonomic ID.
+      Output file #1: Names of genomes (organisms) containing different nitrogenase (Nif) homologs.
+      Output file #2: Amino acid compositions of RefSeq proteomes for each matched genome.
+    }
   }
 }
 

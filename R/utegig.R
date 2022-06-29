@@ -513,8 +513,8 @@ utegig4 <- function(pdf = FALSE) {
   logK <- subcrt(c("H2", "H+", "e-"), c(-1, 2, 2), T = T)$out$logK
   pH <- Seawater.AS98$pH
   # Adjustments for label position
-  dx <- list(c(0, -0.3), c(3.83, 0, -11.2, -1.5), c(0.2, -0.4, 2, -3))
-  dy <- list(c(1, 1), c(35, 5, -68, 5), c(1.5, 3, 0, -6))
+  dx <- list(c(0, -0.3), c(3.83, 0, -8.6, -1.5), c(0.2, -0.1, 2, -3))
+  dy <- list(c(1, 1), c(32, 5, -68, 5), c(1.5, 3, 0, -6))
 
   for(i in 1:3) {
 

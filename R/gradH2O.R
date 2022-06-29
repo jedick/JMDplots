@@ -736,35 +736,21 @@ gradH2O7 <- function(pdf = FALSE) {
 # Also return individual ZC values of all proteomes 20220531
 # Also return amino acid composition of all proteomes 20220603
 NifProteomes <- function() {
-  # Read file with Nif genome classifications and taxids
-  Niffile <- system.file("extdata/gradH2O/Nif_homolog_genomes.csv", package = "JMDplots")
-  Nif <- read.csv(Niffile, as.is = TRUE)
-  # Drop NA taxids
-  Nif <- Nif[!is.na(Nif$taxid), ]
-  # Read refseq data
-  RSfile <- system.file("extdata/refseq/protein_refseq.csv.xz", package = "chem16S")
-  refseq <- read.csv(RSfile, as.is = TRUE)
+  # Read file with amino acid compositions
+  AAfile <- system.file("extdata/utegig/Nif_homolog_AA.csv", package = "JMDplots")
+  AA <- read.csv(AAfile, as.is = TRUE)
   # The Nif types, arranged from anaerobic to aerobic
   types <- c("Nif-D", "Nif-C", "Nif-B", "Nif-A")
   # Assemble the chemical metrics
   ZC.mean <- ZC.sd <- nH2O.mean <- nH2O.sd <- GRAVY.mean <- GRAVY.sd <- pI.mean <- pI.sd <- numeric()
   ZClist <- list()
-  aalist <- list()
   for(i in 1:length(types)) {
     type <- types[i]
-    # Get the taxids for genomes with this type of Nif
-    iNif <- Nif$Type == type
-    taxid <- Nif$taxid[iNif]
-    # Remove duplicated taxids 20191018
-    taxid <- taxid[!duplicated(taxid)]
-    # Get the row number in the refseq data frame
-    irefseq <- match(taxid, refseq$organism)
-    # Include only organisms with at least 1000 protein sequences
-    i1000 <- refseq$chains[irefseq] >= 1000
-    irefseq <- irefseq[i1000]
-    #print(paste(type, "represented by", length(irefseq), "nonredundant genomes with at least 1000 protein sequences"))
-    # Get the amino acid composition from refseq
-    AAcomp <- refseq[irefseq, ]
+    # Get the taxids for genomes with this Nif type
+    iAA <- AA$protein == type
+    taxid <- AA$organism[iAA]
+    # Get the amino acid compositions of all genomes with this Nif type
+    AAcomp <- AA[iAA, ]
     # Calculate ZC and nH2O
     ZC <- ZCAA(AAcomp)
     ZC.mean <- c(ZC.mean, mean(ZC))
@@ -780,13 +766,9 @@ NifProteomes <- function() {
     pI.sd <- c(pI.sd, sd(pI))
     # Store ZC values 20220531
     ZClist[[i]] <- ZC
-    # Store amino acid compositions 20220603
-    AAcomp$protein <- type
-    aalist[[i]] <- AAcomp
   }
   # Return values
   names(ZClist) <- types
-  AA <- do.call(rbind, aalist)
   list(types = types, ZC.mean = ZC.mean, ZC.sd = ZC.sd, nH2O.mean = nH2O.mean, nH2O.sd = nH2O.sd,
        GRAVY.mean = GRAVY.mean, GRAVY.sd = GRAVY.sd, pI.mean = pI.mean, pI.sd = pI.sd,
        ZClist = ZClist, AA = AA)
