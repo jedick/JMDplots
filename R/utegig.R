@@ -78,6 +78,13 @@ mcol[iII] <- col4
 #methanogen_AA <- refseq[irefseq, ]
 #write.csv(methanogen_AA, "methanogen_AA.csv", row.names = FALSE, quote = FALSE)
 
+# To get hyphen instead of minus sign 20220630
+# https://stackoverflow.com/questions/10438398/any-way-to-disable-the-minus-hack-in-pdf-poscript-output
+hyphen.in.pdf <- function(x) {
+  # We only want to make the substitution in a pdf device (won't work in png, e.g. for knitr vignettes)
+  if(identical(names(dev.cur()), "pdf")) gsub("-", "\uad", x, fixed = TRUE) else x
+}
+
 # Chemical signals of adaptation to redox conditions in the reference proteomes of methanogens 20210516
 utegig1 <- function(pdf = FALSE) {
 
@@ -99,7 +106,7 @@ utegig1 <- function(pdf = FALSE) {
   labels <- gsub(FStxt, "", labels, fixed = TRUE)
   dy <- -0.25
   text(3100, 1:36 + dy, labels, font = 3, adj = c(0, 0), xpd = NA)
-  text(4170, iFS + dy, FStxt, adj = c(0, 0), xpd = NA)
+  text(4170, iFS + dy, hyphen.in.pdf(FStxt), adj = c(0, 0), xpd = NA)
 
   # Calculate ZC from protein formulas
   methanogen_AA <- read.csv(system.file("extdata/utegig/methanogen_AA.csv", package = "JMDplots"))
@@ -141,7 +148,7 @@ utegig1 <- function(pdf = FALSE) {
   text(40, -0.145, "Class II", font = 2)
   # Uncomment this to check the alignment of separate text items below
   #text(85, -0.168, "High-ZC\nthermophiles\n(Class I)", col = 2)
-  text(85, -0.163, quote("High-"*italic(Z)[C]))
+  text(85, -0.163, bquote(.(hyphen.in.pdf("High-"))*italic(Z)[C]))
   text(85, -0.1705, "thermophiles\n(Class I)")
   text(80, -0.257, "Methanocaldococcus", font = 3)
   # Add convex hulls 20220401
@@ -471,7 +478,7 @@ utegig3 <- function(pdf = FALSE) {
   # Add labels 20220221
   text(21, -6.4, "Methanogenic\nsediments", adj = 0, cex = 0.9, col = "green4")
   lines(c(26, 22), c(-7, -7.9), col = "green4")
-  text(40, -9.5, "Non-methanogenic sediments", adj = 0, cex = 0.9, col = "gray40")
+  text(40, -9.5, hyphen.in.pdf("Non-methanogenic sediments"), adj = 0, cex = 0.9, col = "gray40")
   lines(c(26, 39), c(-9, -9.5), col = "gray40")
   par(xpd = NA)
   lines(c(100, 130), c(-2.34, -2.34), lty = 2)
@@ -544,21 +551,21 @@ utegig4 <- function(pdf = FALSE) {
     }
 
     if(i == 2) {
-      # Nif-bearing organisms 20220531
+      # Nif-encoding genomes 20220531
       np <- NifProteomes()
       ZClist <- np$ZClist
       col <- c(col2, col2, col4, col4)
       lcol <- c(2, 2, 4, 4)
       bp <- boxplot(ZClist, ylab = ZClab, col = col, ylim = ylim, names = character(4))
       names(ZClist) <- paste0(names(ZClist), "\n(", sapply(ZClist, length), ")")
-      axis(1, at = 1:4, labels = names(ZClist), line = 1, lwd = 0)
+      axis(1, at = 1:4, labels = hyphen.in.pdf(names(ZClist)), line = 1, lwd = 0)
       # Names with "-" confuse multcompLetters4()
       names(ZClist) <- gsub("-", "", names(ZClist))
       cldfun(ZClist, bp, dy = 0.006)
       text(1.5, -0.12, "Anaerobic", font = 2, cex = 0.8)
       text(3.2, -0.11, "Anaerobic\nand aerobic", font = 2, cex = 0.8)
       abline(v = 2.5, lty = 2, lwd = 1.5, col = 8)
-      title("Nif-bearing organisms\n(Poudel et al., 2018)", font.main = 1, cex.main = 1)
+      title(hyphen.in.pdf("Nif-encoding genomes\n(Poudel et al., 2018)"), font.main = 1, cex.main = 1)
       # Get the amino acid compositions and species in each group
       aa <- np$AA
       groupnames <- np$types
@@ -585,8 +592,8 @@ utegig4 <- function(pdf = FALSE) {
       bp <- boxplot(ZClist, ylab = ZClab, col = col, ylim = ylim, names = character(4))
       cldfun(ZClist, bp, dy = 0.006)
       axis(1, at = 1:4, labels = names(ZClist), line = 1, lwd = 0, gap.axis = 0)
-      text(0.9, -0.12, "Pre-GOE\nemergence", font = 2, cex = 0.8)
-      text(2.1, -0.12, "Post-GOE\nemergence", font = 2, cex = 0.8)
+      text(0.9, -0.12, hyphen.in.pdf("Pre-GOE\nemergence"), font = 2, cex = 0.8)
+      text(2.1, -0.12, hyphen.in.pdf("Post-GOE\nemergence"), font = 2, cex = 0.8)
       abline(v = 1.5, lty = 2, lwd = 1.5, col = 8)
       title("Thaumarchaeota\n(Ren et al., 2019)", font.main = 1, cex.main = 1)
       # Get the species in each group
@@ -621,7 +628,8 @@ utegig4 <- function(pdf = FALSE) {
       # Calculate normalized sum of ranks for each group and make diagram
       # TODO: add rank_affinity to imports in NAMESPACE when CHNOSZ 2.0.0 is released
       arank <- CHNOSZ::rank_affinity(a, groups)
-      diagram(arank, col = lcol, lty = 1, lwd = 1.5, dx = dx[[i]], dy = dy[[i]], add = TRUE)
+      names <- hyphen.in.pdf(names(groups))
+      diagram(arank, col = lcol, lty = 1, lwd = 1.5, dx = dx[[i]], dy = dy[[i]], names = names, add = TRUE)
       par(opar)
       if(i == 1) label.figure("b", cex = 1.5, font = 2, xfrac = 0.06)
 
