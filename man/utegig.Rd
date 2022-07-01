@@ -34,7 +34,7 @@ Plots from the paper by Dick et al. (2022).
 This table gives a brief description of each plotting function.
 
 \tabular{ll}{
-  \code{utegig1} \tab Chemical signals of adaptation to redox conditions in the reference proteomes of methanogens \cr
+  \code{utegig1} \tab Chemical adaptation to redox conditions in the reference proteomes of methanogens \cr
   \code{utegig2} \tab Relative stabilities of organic compounds depend on redox conditions \cr
   \code{utegig3} \tab Thermodynamic model for methanogen niche partitioning \cr
   \code{utegig4} \tab Chemical and thermodynamic analysis of evolutionary divergence along redox gradients \cr

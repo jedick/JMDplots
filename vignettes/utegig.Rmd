@@ -62,7 +62,7 @@ This vignette was compiled on `r Sys.Date()` with **[JMDplots](https://github.co
 library(JMDplots)
 ```
 
-## Chemical signals of adaptation to redox conditions in the reference proteomes of methanogens (Figure 1)
+## Chemical adaptation to redox conditions in the reference proteomes of methanogens (Figure 1)
 ```{r utegig1, message = FALSE, results = "hide", out.width='100%', fig.width = 12, fig.height = 8, out.extra = 'class="full-width"', pngquant = pngquant}
 utegig1()
 ```

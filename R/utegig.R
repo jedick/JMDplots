@@ -85,7 +85,7 @@ hyphen.in.pdf <- function(x) {
   if(identical(names(dev.cur()), "pdf")) gsub("-", "\uad", x, fixed = TRUE) else x
 }
 
-# Chemical signals of adaptation to redox conditions in the reference proteomes of methanogens 20210516
+# Chemical adaptation to redox conditions in the reference proteomes of methanogens 20210516
 utegig1 <- function(pdf = FALSE) {
 
   if(pdf) pdf("Figure_1.pdf", width = 12, height = 8)
@@ -511,7 +511,7 @@ utegig4 <- function(pdf = FALSE) {
   xlims <- list(c(-4, -12), c(0, -15), c(0, -15))
   ylims <- list(c(0, 40), c(0, 250), c(0, 70))
   # Where to draw transition line
-  trans <- list(c("Class I", "Class II"), c("Nif-C", "Nif-B"), c("Basal", "Terrestrial"))
+  trans <- list(c("Class I", "Class II"), c("Nif-B", "Nif-A"), c("Basal", "Terrestrial"))
 
   # Define basis species and temperature
   basis(c("CO2", "H2", "NH4+", "H2O", "H2S", "H+"), c(Seawater.AS98$CO2, Seawater.AS98$H2, Seawater.AS98$"NH4+", 0, Seawater.AS98$H2S, -Seawater.AS98$pH))
@@ -554,17 +554,17 @@ utegig4 <- function(pdf = FALSE) {
       # Nif-encoding genomes 20220531
       np <- NifProteomes()
       ZClist <- np$ZClist
-      col <- c(col2, col2, col4, col4)
-      lcol <- c(2, 2, 4, 4)
+      col <- c(col2, col2, col2, col4)
+      lcol <- c(2, 2, 2, 4)
       bp <- boxplot(ZClist, ylab = ZClab, col = col, ylim = ylim, names = character(4))
       names(ZClist) <- paste0(names(ZClist), "\n(", sapply(ZClist, length), ")")
       axis(1, at = 1:4, labels = hyphen.in.pdf(names(ZClist)), line = 1, lwd = 0)
       # Names with "-" confuse multcompLetters4()
       names(ZClist) <- gsub("-", "", names(ZClist))
       cldfun(ZClist, bp, dy = 0.006)
-      text(1.5, -0.12, "Anaerobic", font = 2, cex = 0.8)
-      text(3.2, -0.11, "Anaerobic\nand aerobic", font = 2, cex = 0.8)
-      abline(v = 2.5, lty = 2, lwd = 1.5, col = 8)
+      text(2, -0.12, "Anaerobic", font = 2, cex = 0.8)
+      text(4.1, -0.242, "Anaerobic\nand aerobic", font = 2, cex = 0.8)
+      abline(v = 3.5, lty = 2, lwd = 1.5, col = 8)
       title(hyphen.in.pdf("Nif-encoding genomes\n(Poudel et al., 2018)"), font.main = 1, cex.main = 1)
       # Get the amino acid compositions and species in each group
       aa <- np$AA
