@@ -51,7 +51,7 @@ Plots from the paper by Dick and Meng (2021).
 This table gives a brief description of each plotting function.
 
 \tabular{ll}{
-  \code{orp16S1} \tab Thermodynamic predictive framework \cr
+  \code{orp16S1} \tab Outline of methods \cr
   \code{orp16S2} \tab Chemical and geobiochemical depth profiles in Winogradsky columns \cr
   \code{orp16S3} \tab Sample locations on world map \cr
   \code{orp16S4} \tab Linear regressions between Eh7 and \ZC at local scales \cr

@@ -25,7 +25,7 @@ EZdat <- read.csv(system.file("extdata/orp16S/EZdat.csv", package = "JMDplots"))
 # Read linear fit coefficients
 EZlm <- read.csv(system.file("extdata/orp16S/EZlm.csv", package = "JMDplots"))
 
-# Figure 1: Thermodynamic predictive framework 20210830
+# Figure 1: Outline of methods 20210830
 orp16S1 <- function(pdf = FALSE) {
 
   if(pdf) pdf("Figure1.pdf", width = 6, height = 4)
@@ -131,7 +131,7 @@ orp16S2 <- function(pdf = FALSE) {
   lines(Eh7, MODdepth, type = "b", pch = 19)
   text(50, -2.3, "Eh7")
   text(650, -2.3, "Eh")
-  label.figure("a", font = 2, cex = 1.5)
+  label.figure("(a)", font = 2, cex = 1.5)
 
   # Get 16S metadata and chemical metrics for Rundell et al. (2014) experiments
   metrics.in <- getmetrics_orp16S("RBW+14")
@@ -150,7 +150,7 @@ orp16S2 <- function(pdf = FALSE) {
     text(-0.182, i - 0.25, label, adj = 1)
   }
   par(xpd = FALSE)
-  label.figure("b", font = 2, cex = 1.5)
+  label.figure("(b)", font = 2, cex = 1.5)
 
   # Reset layout to make orp16S3 in the examples run nicely 20211011
   if(pdf) dev.off() else layout(1)
@@ -336,7 +336,7 @@ orp16S4 <- function(pdf = FALSE) {
   plotEZ("WHLH21", "Bacteria", groupby = "Position", groups = c("Surface", "Middle", "Bottom"),
     legend.x = "bottomleft", title.line = NULL, dxlim = c(-20, 0), slope.legend = "right")
   title("Daya Bay\n(Sediment bacteria)", font.main = 1)
-  label.figure("a", font = 2, cex = 1.8, yfrac = 0.9)
+  label.figure("(a)", font = 2, cex = 1.8, yfrac = 0.9)
   # Bay of Biscay (Sediment)
   plotEZ("LMBA21_2017", "Bacteria", groupby = "Season", groups = c("Summer", "Winter"),
     legend.x = "bottomright", title.line = NULL, dxlim = c(0, 170), slope.legend = "bottom")
@@ -372,7 +372,7 @@ orp16S4 <- function(pdf = FALSE) {
   ltext <- names(envirotype)[i1[3:4]]
   legend("bottomright", ltext, pch = 19, col = orp16Scol[i1[3:4]])
   title("Linear regressions for bacterial communities\nin each dataset", font.main = 1, xpd = NA, line = 0.7)
-  label.figure("b", font = 2, cex = 1.8, yfrac = 1.05)
+  label.figure("(b)", font = 2, cex = 1.8, yfrac = 1.05)
   # Groundwater, sediment, soil
   plot(xlim, ylim, type = "n", xlab = quote(log[10]~"(Number of samples)"), ylab = quote("Slope of linear fit"~(V^-1)))
   abline(h = 0, lty = 2, lwd = 1.5, col = "gray50")
@@ -428,7 +428,7 @@ orp16S4 <- function(pdf = FALSE) {
     }
     title(paste0("Hot spring\n", tolower(lineages[k])), font.main = 1, xpd = NA, line = 0.7)
     if(k==1) {
-      label.figure("c", font = 2, cex = 1.8, yfrac = 1.025)
+      label.figure("(c)", font = 2, cex = 1.8, yfrac = 1.025)
       # Add legend
       lhyper <- paste0("Hypersaline (", paste(which(ihyper), collapse = ", "), ")")
       lsed <- paste0("Sediment (", paste(which(ised), collapse = ", "), ")")
@@ -520,7 +520,7 @@ orp16S_S3 <- function(global.slopes, pdf = FALSE) {
   slope <- slope * 1e3
   # Round to fixed number of decimal places
   global.slope <- formatC(slope, digits = 3, format = "f")
-  label.figure("a", font = 2, cex = 1.8, xfrac = 0.03)
+  label.figure("(a)", font = 2, cex = 1.8, xfrac = 0.04)
 
   # Create slope legend
   par(mar = c(4, 1, 1, 1))
@@ -572,7 +572,7 @@ orp16S_S3 <- function(global.slopes, pdf = FALSE) {
   dx <- c(0.02, 0.0185, -0.005, 0, 0.019, 0.014, -0.007)
   dy <- c(-0.005, -0.002, 0.006, -0.004, 0, 0, 0)
   text(local.slopes + dx, global.slopes$Bacteria + dy, envtxt, cex = 0.85)
-  label.figure("b", font = 2, cex = 1.8, xfrac = 0.02)
+  label.figure("(b)", font = 2, cex = 1.8, xfrac = 0.02)
   if(pdf) dev.off()
 
 }
@@ -607,7 +607,7 @@ orp16S5 <- function(pdf = FALSE) {
   text(0.5, -0.5, "Eh7 (mV)", cex = 1.2, xpd = NA)
   plot.new()
   text(0.2, 0.5, cplab$ZC, cex = 1.2, srt = 90, xpd = NA)
-  label.figure("a", font = 2, cex = 2.2, xfrac = 0.2, yfrac = 0.97)
+  label.figure("(a)", font = 2, cex = 2, xfrac = 0.34, yfrac = 0.965)
   plot.new()
   text(0.3, 0.5, "Bacteria", srt = 90, xpd = NA)
   plot.new()
@@ -625,7 +625,7 @@ orp16S5 <- function(pdf = FALSE) {
   # Add points
   eachenv(thisdat, add = TRUE, do.linear = FALSE)
   title("Bacteria", font.main = 1, line = 0.5, xpd = NA)
-  label.figure("b", font = 2, cex = 2.2, xfrac = 0.02, yfrac = 1)
+  label.figure("(b)", font = 2, cex = 2, xfrac = 0.02, yfrac = 1)
 
   # Now do Archaea
   plot(c(-500, 650), range(EZdat$ZC), type = "n", xlab = "Eh7 (mV)", ylab = cplab$ZC)
@@ -654,8 +654,8 @@ orp16S5 <- function(pdf = FALSE) {
 orp16S_S2 <- function(pdf = FALSE) {
 
   # Setup figure
-  if(pdf) pdf("Figure_S2.pdf", width = 12, height = 9)
-  par(mfrow = c(3, 4))
+  if(pdf) pdf("Figure_S2.pdf", width = 9, height = 12)
+  par(mfrow = c(4, 3))
 
   results <- c(
 

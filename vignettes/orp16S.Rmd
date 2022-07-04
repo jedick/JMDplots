@@ -71,7 +71,7 @@ This vignette was compiled on `r Sys.Date()` with **[JMDplots](https://github.co
 library(JMDplots)
 ```
 
-## Methods outline (Figure 1)
+## Outline of methods (Figure 1)
 ```{r orp16S1, message = FALSE, results = "hide", out.width='75%', fig.align='center', fig.width = 6, fig.height = 4, pngquant = pngquant}
 orp16S1()
 ```
