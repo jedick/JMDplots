@@ -54,7 +54,7 @@ logaH2 <- "log<i>a</i><sub>H<sub>2</sub></sub>"
 
 This vignette runs the code to make the plots from the following paper:
 
-> Dick JM, Boyer GM, Canovas PA III, Shock EL. 2022. Using thermodynamics to extract geochemical information from genomes. Manuscript in preparation.
+> Dick JM, Boyer GM, Canovas PA III, Shock EL. 2022. Using thermodynamics to extract geochemical information from genomes. Submitted manuscript.
 
 This vignette was compiled on `r Sys.Date()` with **[JMDplots](https://github.com/jedick/JMDplots)** `r packageDescription("JMDplots")$Version`.
 

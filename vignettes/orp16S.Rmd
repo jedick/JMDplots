@@ -76,7 +76,7 @@ library(JMDplots)
 orp16S1()
 ```
 
-## Chemical and geobiochemical depth profiles in Winogradsky columns (Figure 2)
+## Chemical depth profiles in Winogradsky columns (Figure 2)
 ```{r orp16S2, message = FALSE, results = "hide", out.width='80%', fig.align='center', fig.width = 7, fig.height = 5, pngquant = pngquant}
 orp16S2()
 ```

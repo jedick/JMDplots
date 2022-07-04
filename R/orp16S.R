@@ -109,7 +109,7 @@ orp16S1 <- function(pdf = FALSE) {
 
 }
 
-# Figure 2: Chemical and geobiochemical depth profiles in Winogradsky columns 20210829
+# Figure 2: Chemical depth profiles in Winogradsky columns 20210829
 orp16S2 <- function(pdf = FALSE) {
 
   if(pdf) pdf("Figure2.pdf", width = 7, height = 5)
