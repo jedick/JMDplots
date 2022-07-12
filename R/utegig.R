@@ -85,7 +85,7 @@ hyphen.in.pdf <- function(x) {
   if(identical(names(dev.cur()), "pdf")) gsub("-", "\uad", x, fixed = TRUE) else x
 }
 
-# Chemical adaptation to redox conditions in the reference proteomes of methanogens 20210516
+# Chemical analysis of reference proteomes of methanogens reveals adaptation to redox conditions 20210516
 utegig1 <- function(pdf = FALSE) {
 
   if(pdf) pdf("Figure_1.pdf", width = 12, height = 8)
@@ -116,7 +116,7 @@ utegig1 <- function(pdf = FALSE) {
   text(0, 32, "Class II", font = 2, adj = 0, cex = 1.2)
   text(0, 7, "Class I", font = 2, adj = 0, cex = 1.2)
   text(3200, -2.4, ZClab, adj = c(0, 0), xpd = NA)
-  label.figure("a", cex = 1.5, font = 2, yfrac = 0.97)
+  label.figure("(a)", cex = 1.6, font = 2, yfrac = 0.97)
   # Setup a new plot in the empty space between the tree and names
   par(new = TRUE)
   par(mar = c(2, 9, 1, 18))
@@ -158,7 +158,7 @@ utegig1 <- function(pdf = FALSE) {
   dat1 <- dat[setdiff(iI, which(iout)), ]
   i1 <- chull(dat1$Topt, dat1$ZC)
   polygon(dat1$Topt[i1], dat1$ZC[i1], col = "#E5737360", border = NA)
-  label.figure("b", cex = 1.5, font = 2, yfrac = 0.85, xfrac = -0.05)
+  label.figure("(b)", cex = 1.6, font = 2, yfrac = 0.85, xfrac = -0.05)
 
   if(pdf) dev.off()
 
@@ -280,7 +280,7 @@ utegig2 <- function(pdf = FALSE) {
     }
     if(ilogaH2 == 1) {
       text(-3.1, 72, quote(CH[4]))
-      label.figure("a", cex = 1.5, font = 2, yfrac = 0.97)
+      label.figure("(a)", cex = 1.5, font = 2, yfrac = 0.97)
     }
 
   }
@@ -302,7 +302,7 @@ utegig2 <- function(pdf = FALSE) {
   intermediate_logaH2()
   # Add Psat legend 20220629
   legend("bottomright", legend = quote(bolditalic(P)[bold(sat)]), bty = "n")
-  label.figure("b", cex = 1.5, font = 2)
+  label.figure("(b)", cex = 1.5, font = 2)
 
   if(pdf) dev.off()
 
@@ -357,7 +357,7 @@ utegig3 <- function(pdf = FALSE) {
     plot(ZC, Ares, pch = mpch[!iout], col = mcol[!iout], bg = mbg[!iout], xlab = ZClab, ylab = ylab)
     # Percentage of combinations that favor Class I over Class II
     p1 <- round(sum(sign(Ares[i1] - Ares[i2]) == 1) / ncomb * 100)
-    legend <- bquote(.(p1)*"%"~A[I] > A[II])
+    legend <- bquote(.(p1)*"%"~italic(A)[I] > italic(A)[II])
     if(i < 3) inset <- c(-0.1, 0) else inset <- c(0.05, 0)
     legend("bottomleft", legend = legend, bty = "n", inset = inset)
     if(i == 1) legend("bottomleft", c("Pairwise affinity", "differences:", ""), inset = c(-0.1, 0), bty = "n")
@@ -365,7 +365,7 @@ utegig3 <- function(pdf = FALSE) {
     Htxt <- bquote(bold(log*bolditalic(a)[H[2]] == .(logaH2s[i])))
     if(i > 1) legend.x <- "topleft" else legend.x <- "top"
     legend(legend.x, legend = Htxt, bty = "n")
-    if(i==1) label.figure("a", cex = 1.5, font = 2, yfrac = 0.97, xfrac = 0.06)
+    if(i==1) label.figure("(a)", cex = 1.5, font = 2, yfrac = 0.96, xfrac = 0.06)
   }
 
   # Add legend 20220403
@@ -419,7 +419,7 @@ utegig3 <- function(pdf = FALSE) {
   text(101, tail(CL[[2]]$y, 1), "50%", adj = 0, col = 1)
   text(101, tail(CL[[3]]$y, 1), "100%", adj = 0, col = "#D50000")
   par(xpd = FALSE)
-  label.figure("b", cex = 1.5, font = 2, yfrac = 0.97)
+  label.figure("(b)", cex = 1.5, font = 2, yfrac = 0.97)
 
   ## Plot C: logaH2-T plot for habitable niches 20220303
   par(mar = c(4, 2.5, 1, 2.5))
@@ -489,7 +489,7 @@ utegig3 <- function(pdf = FALSE) {
   text(101, tail(CL[[2]]$y, 1), quote("50%"~A[I] > A[II]), adj = 0, col = 1)
   text(101, tail(CL[[3]]$y, 1), quote("100%"~A[I] > A[II]), adj = 0, col = "#D50000")
   par(xpd = FALSE)
-  label.figure("c", cex = 1.5, font = 2, yfrac = 0.97, xfrac = -0.02)
+  label.figure("(c)", cex = 1.5, font = 2, yfrac = 0.97, xfrac = -0.02)
 
   if(pdf) dev.off()
 
@@ -545,7 +545,7 @@ utegig4 <- function(pdf = FALSE) {
       text(2, -0.12, "Anoxic\nand oxic\nhabitats", font = 2, cex = 0.8)
       abline(v = 1.5, lty = 2, lwd = 1.5, col = 8)
       title("Methanogens\n(Lyu and Lu, 2018)", font.main = 1, cex.main = 1)
-      label.figure("a", cex = 1.5, font = 2, xfrac = 0.06)
+      label.figure("(a)", cex = 1.5, font = 2, xfrac = 0.06)
       # Get the species in each group
       groups <- list("Class I" = iI, "Class II" = iII)
     }
@@ -601,15 +601,15 @@ utegig4 <- function(pdf = FALSE) {
     }
 
     if(!packageVersion("CHNOSZ") > "1.4.3") {
-      warning("Not making average affinity ranking plots because of insufficient CHNOSZ version")
+      warning("Not making average affinity rank plots because of insufficient CHNOSZ version")
       plot.new()
     } else {
-      # Make affinity ranking plot 20220602
+      # Make affinity rank plot 20220602
 
       # Save graphical settings that are modified by thermo.plot.new()
       opar <- par(c("mar", "mgp", "tcl", "las", "xaxs", "yaxs"))
       # Start plot
-      thermo.plot.new(xlim = xlims[[i]], ylim = ylims[[i]], xlab = logaH2lab, ylab = "Average affinity ranking", yline = par("mgp")[1] + 0.3)
+      thermo.plot.new(xlim = xlims[[i]], ylim = ylims[[i]], xlab = logaH2lab, ylab = "Mean rank of per-residue affinity", yline = par("mgp")[1] + 0.3)
       # Color reducing and oxidizing areas from organic compounds 20220621
       file <- "H2_intermediate.csv"
       dat <- read.csv(file.path(system.file("extdata/utegig", package = "JMDplots"), file))
@@ -631,7 +631,7 @@ utegig4 <- function(pdf = FALSE) {
       names <- hyphen.in.pdf(names(groups))
       diagram(arank, col = lcol, lty = 1, lwd = 1.5, dx = dx[[i]], dy = dy[[i]], names = names, add = TRUE)
       par(opar)
-      if(i == 1) label.figure("b", cex = 1.5, font = 2, xfrac = 0.06)
+      if(i == 1) label.figure("(b)", cex = 1.5, font = 2, xfrac = 0.06)
 
       # Draw line at transition
       itrans <- which.min(abs(arank$values[[trans[[i]][1]]] - arank$values[[trans[[i]][2]]]))
@@ -663,7 +663,7 @@ utegig4 <- function(pdf = FALSE) {
   text(x = 1:4, y = par()$usr[3] - 2 * strheight("A"), labels = groupnames, srt = 45, adj = 1, xpd = TRUE)
   axis(1, at = 1:4, labels = NA)
   title("Thaumarchaeota", font.main = 1, cex.main = 1)
-  label.figure("c", cex = 1.5, font = 2, xfrac = 0.06)
+  label.figure("(c)", cex = 1.5, font = 2, xfrac = 0.06)
 
   # Add legend
   plot.new()
@@ -836,10 +836,44 @@ calc_logaH2_intermediate <- function(class = NULL) {
 
 }
 
-# ZC of proteins and lipids in hot springs 20210516
+# Comparison of ZC of proteomes predicted by Glimmer and downloaded from NCBI 20220604
 utegigS1 <- function(pdf = FALSE) {
+  if(pdf) pdf("Figure_S1.pdf", width = 4, height = 4)
+  par(mar= c(4.1, 4.1, 1, 1))
+  predicted <- read.csv(system.file("extdata/utegig/Thaumarchaeota_predicted_AA.csv", package = "JMDplots"))
+  database <- read.csv(system.file("extdata/utegig/Thaumarchaeota_database_AA.csv", package = "JMDplots"))
+  organisms <- intersect(predicted$organism, database$organism)
+  predicted <- predicted[match(organisms, predicted$organism), ]
+  database <- database[match(organisms, database$organism), ]
+  y <- ZC_predicted <- ZCAA(predicted)
+  x <- ZC_database <- ZCAA(database)
+  # Colors from Ren et al. (2019)
+  groupcol <- c(Basal = "#b2427e", Terrestrial = "#c78d55", Shallow = "#00a06f", Deep = "#4085c3")
+  col <- groupcol[match(database$protein, names(groupcol))]
+  pch <- match(database$protein, names(groupcol)) + 13
+  plot(ZC_database, ZC_predicted, pch = pch, col = col,
+       xlab = quote(bolditalic(Z)[bold(C)]~"(NCBI proteins)"), ylab = quote(bolditalic(Z)[bold(C)]~"(Glimmer proteins)"))
+  # Add legend
+  icol <- which(!duplicated(col))
+  legend("topleft", names(col)[icol], col = col[icol], pch = pch[icol])
+  # Calculate linear regression
+  thislm <- lm(y ~ x)
+  xylim <- c(-0.22, -0.10)
+  lines(xylim, predict(thislm, data.frame(x = xylim)), col = "#00000080")
+  # Show R2 and slope
+  R2 <- summary(thislm)$r.squared
+  R2txt <- bquote(italic(R)^2 == .(formatC(R2, digits = 3, format = "f")))
+  legend("bottomright", legend = R2txt, bty = "n")
+  Slope <- coef(thislm)["x"]
+  Slopetxt <- paste("slope =", formatC(Slope, digits = 3, format = "f"))
+  legend("bottomright", legend = c(Slopetxt, ""), bty = "n")
+  if(pdf) dev.off()
+}
 
-  if(pdf) pdf("Figure_S1.pdf", width = 8.5, height = 4)
+# Association between redox gradients and ZC of proteins and lipids in alkaline Yellowstone hot springs 20210516
+utegigS2 <- function(pdf = FALSE) {
+
+  if(pdf) pdf("Figure_S2.pdf", width = 8.5, height = 4)
   layout(matrix(1:3, nrow = 1), widths = c(1.07, 1, 0.4))
   par(cex = 1)
 
@@ -873,7 +907,7 @@ utegigS1 <- function(pdf = FALSE) {
   points(T[ihi], ZC[ihi], pch = 21, bg = col2)
   # Add labels
   text(83, -0.14, "Proteins grouped\nby major phyla")
-  label.figure("a", cex = 1.5, font = 2, xfrac = 0.06)
+  label.figure("(a)", cex = 1.5, font = 2, xfrac = 0.06)
 
   ## Plot B: Lipids
   par(mar = c(4, 3, 0.5, 1))
@@ -898,7 +932,7 @@ utegigS1 <- function(pdf = FALSE) {
   # Label molecular groups
   text(70, -1.32, "Intact polar lipids")
   text(50, -2, "Alkyl chains")
-  label.figure("b", cex = 1.5, font = 2, xfrac = 0.01)
+  label.figure("(b)", cex = 1.5, font = 2, xfrac = 0.01)
 
   # Add legend 20220221
   # Move to right panel 20220408
@@ -917,11 +951,11 @@ utegigS1 <- function(pdf = FALSE) {
 }
 
 
-# Intermediate logaH2 calculated for different compound classes 20220418
-utegigS2 <- function(pdf = FALSE) {
+# logaH2-T plots for different organic compound classes 20220418
+utegigS3 <- function(pdf = FALSE) {
   # To generate files:
   # lapply(names(specieslist), calc_logaH2_intermediate)
-  if(pdf) pdf("Figure_S2.pdf", width = 6, height = 8)
+  if(pdf) pdf("Figure_S3.pdf", width = 6, height = 8)
   par(mfrow = c(3, 2))
   parargs <- list(mar = c(4, 4, 3, 1), mgp = c(2.7, 1, 0))
   ylim <- c(-25, 0)
@@ -941,36 +975,3 @@ utegigS2 <- function(pdf = FALSE) {
   if(pdf) dev.off()
 }
 
-# Comparison of ZC of proteomes predicted by Glimmer and downloaded from NCBI 20220604
-utegigS3 <- function(pdf = FALSE) {
-  if(pdf) pdf("Figure_S3.pdf", width = 4, height = 4)
-  par(mar= c(4.1, 4.1, 1, 1))
-  predicted <- read.csv(system.file("extdata/utegig/Thaumarchaeota_predicted_AA.csv", package = "JMDplots"))
-  database <- read.csv(system.file("extdata/utegig/Thaumarchaeota_database_AA.csv", package = "JMDplots"))
-  organisms <- intersect(predicted$organism, database$organism)
-  predicted <- predicted[match(organisms, predicted$organism), ]
-  database <- database[match(organisms, database$organism), ]
-  y <- ZC_predicted <- ZCAA(predicted)
-  x <- ZC_database <- ZCAA(database)
-  # Colors from Ren et al. (2019)
-  groupcol <- c(Basal = "#b2427e", Terrestrial = "#c78d55", Shallow = "#00a06f", Deep = "#4085c3")
-  col <- groupcol[match(database$protein, names(groupcol))]
-  pch <- match(database$protein, names(groupcol)) + 13
-  plot(ZC_database, ZC_predicted, pch = pch, col = col,
-       xlab = quote(bolditalic(Z)[bold(C)]~"(NCBI proteins)"), ylab = quote(bolditalic(Z)[bold(C)]~"(Glimmer proteins)"))
-  # Add legend
-  icol <- which(!duplicated(col))
-  legend("topleft", names(col)[icol], col = col[icol], pch = pch[icol])
-  # Calculate linear regression
-  thislm <- lm(y ~ x)
-  xylim <- c(-0.22, -0.10)
-  lines(xylim, predict(thislm, data.frame(x = xylim)), col = "#00000080")
-  # Show R2 and slope
-  R2 <- summary(thislm)$r.squared
-  R2txt <- bquote(italic(R)^2 == .(formatC(R2, digits = 3, format = "f")))
-  legend("bottomright", legend = R2txt, bty = "n")
-  Slope <- coef(thislm)["x"]
-  Slopetxt <- paste("slope =", formatC(Slope, digits = 3, format = "f"))
-  legend("bottomright", legend = c(Slopetxt, ""), bty = "n")
-  if(pdf) dev.off()
-}

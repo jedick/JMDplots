@@ -67,13 +67,13 @@ export(
   # utilities 20220223
   "addalpha",
   # utegig paper 20220420
-  "utegig1", "utegig2", "utegig3", "utegigS1", "utegigS2", "calc_logaH2_intermediate",
+  "utegig1", "utegig2", "utegig3", "utegigS2", "utegigS3", "calc_logaH2_intermediate",
   # Moving functions to chem16S package 20220506-20220513
   "getmdat_geo16S", "getmetrics_geo16S", "plotmet_geo16S", "getmdat_orp16S", "getmetrics_orp16S", "orp16S_info",
   # orp16S paper 20220516-20220517
   "orp16S_T2", "orp16S_S1", "orp16S_S4",
   # utegig paper 20220602, 20220605
-  "utegig4", "utegigS3",
+  "utegig4", "utegigS1",
   # utilities 20220609
   "cldfun",
   # orp16S paper 20220611

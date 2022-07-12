@@ -62,7 +62,7 @@ This vignette was compiled on `r Sys.Date()` with **[JMDplots](https://github.co
 library(JMDplots)
 ```
 
-## Chemical adaptation to redox conditions in the reference proteomes of methanogens (Figure 1)
+## Chemical analysis of reference proteomes of methanogens reveals adaptation to redox conditions (Figure 1)
 ```{r utegig1, message = FALSE, results = "hide", out.width='100%', fig.width = 12, fig.height = 8, out.extra = 'class="full-width"', pngquant = pngquant}
 utegig1()
 ```
@@ -90,21 +90,20 @@ utegig4()
 
 **Data sources:** Methanogens [@LL18], Nif-bearing organisms [@PCF+18], Thaumarchaeota [@RFH+19]. Amino acid compositions are from RefSeq proteomes (methanogens and Nif-bearing organisms) or NCBI and IMG genomes (Thaumarchaeota).
 
-## `r ZC` of proteins and lipids in hot springs (Figure S1)
-```{r utegigS1, message = FALSE, results = "hide", out.width='80%', fig.align='center', fig.width = 8.5, fig.height = 4, pngquant = pngquant}
+## Comparison of `r ZC` of proteomes predicted by Glimmer and downloaded from NCBI (Figure S1)
+```{r utegigS1, message = FALSE, results = "hide", out.width='60%', fig.align='center', fig.width = 4, fig.height = 4, pngquant = pngquant}
 utegigS1()
+```
+
+## Association between redox gradients and `r ZC` of proteins and lipids in alkaline Yellowstone hot springs (Figure S2)
+```{r utegigS2, message = FALSE, results = "hide", out.width='80%', fig.align='center', fig.width = 8.5, fig.height = 4, pngquant = pngquant}
+utegigS2()
 ```
 
 **Data sources:** Proteins [@DS13] and lipids [@BSS+20].
 
-
-## Intermediate `r logaH2` calculated for different compound classes (Figure S2)
-```{r utegigS2, message = FALSE, results = "hide", out.width='80%', fig.align='center', fig.width = 6, fig.height = 8, pngquant = pngquant}
-utegigS2()
-```
-
-## Comparison of `r ZC` of proteomes predicted by Glimmer and downloaded from NCBI (Figure S3)
-```{r utegigS3, message = FALSE, results = "hide", out.width='60%', fig.align='center', fig.width = 4, fig.height = 4, pngquant = pngquant}
+## `r logaH2`-*T* plots for different organic compound classes (Figure S3)
+```{r utegigS3, message = FALSE, results = "hide", out.width='80%', fig.align='center', fig.width = 6, fig.height = 8, pngquant = pngquant}
 utegigS3()
 ```
 

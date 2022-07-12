@@ -34,13 +34,13 @@ Plots from the paper by Dick et al. (2022).
 This table gives a brief description of each plotting function.
 
 \tabular{ll}{
-  \code{utegig1} \tab Chemical adaptation to redox conditions in the reference proteomes of methanogens \cr
+  \code{utegig1} \tab Chemical analysis of reference proteomes of methanogens reveals adaptation to redox conditions \cr
   \code{utegig2} \tab Relative stabilities of organic compounds depend on redox conditions \cr
   \code{utegig3} \tab Thermodynamic model for methanogen niche partitioning \cr
   \code{utegig4} \tab Chemical and thermodynamic analysis of evolutionary divergence along redox gradients \cr
-  \code{utegigS1} \tab \ZC of proteins and lipids in hot springs \cr
-  \code{utegigS2} \tab Intermediate \logaH2 calculated for different compound classes \cr
-  \code{utegigS3} \tab Comparison of \ZC of proteomes predicted by Glimmer and downloaded from NCBI \cr
+  \code{utegigS1} \tab Comparison of \ZC of proteomes predicted by Glimmer and downloaded from NCBI \cr
+  \code{utegigS2} \tab Association between redox gradients and \ZC of proteins and lipids in alkaline Yellowstone hot springs \cr
+  \code{utegigS3} \tab \logaH2-\T plots for different organic compound classes \cr
 }
 
 \code{calc_logaH2_intermediate} is used to find intermediate logaH2, where affinity vs ZC has a slope of 0, for a group of organic compounds.
