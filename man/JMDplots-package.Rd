@@ -3,7 +3,7 @@
 \alias{JMDplots-package}
 \alias{JMDplots}
 \docType{package}
-\title{Plots from papers (co-authored) by Jeffrey M. Dick}
+\title{Plots from papers by Jeffrey M. Dick}
 
 \description{
 This package contains data and code used to make the plots in various papers.

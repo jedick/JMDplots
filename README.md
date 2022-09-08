@@ -2,7 +2,7 @@
 
 # JMDplots
 
-This R package has code and data for plots from papers (co-authored) by [Jeffrey M. Dick](http://chnosz.net/jeff/).
+This R package has code and data for plots from papers by [Jeffrey M. Dick](https://chnosz.net/jeff/).
 
 ## Quick links to active papers (pre-publication drafts)
 
@@ -52,10 +52,10 @@ remotes::install_github("jedick/JMDplots", build_vignettes = TRUE)
 
 ## Online vignettes
 
-The vignettes can be viewed at <http://chnosz.net/JMDplots/doc/>.
+The vignettes can be viewed at <https://chnosz.net/JMDplots/doc/>.
 
 ## Licenses
 
 This package except for the file `inst/extdata/orp16S/metadata/PCL+18.csv` is licensed under the GNU General Public License v3 (GPLv3).
 
-The ORP (mV), DO (mg/L) and Feature (Stream, Spring, Lake, Terrace, or Geyser) data for New Zealand hot springs ([Power et al., 2018](https://doi.org/10.1038/s41467-018-05020-y)) in `PCL+18.csv` were obtained from the [1000 Springs Project](http://1000springs.org.nz) and are licensed under CC-BY-NC-SA.
+The ORP (mV), DO (mg/L) and Feature (Stream, Spring, Lake, Terrace, or Geyser) data for New Zealand hot springs ([Power et al., 2018](https://doi.org/10.1038/s41467-018-05020-y)) in `PCL+18.csv` were obtained from the [1000 Springs Project](https://1000springs.org.nz) and are licensed under CC-BY-NC-SA.

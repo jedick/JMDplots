@@ -101,8 +101,6 @@ aasum <- function(aa, abundance=1, average=FALSE, protein=NULL, organism=NULL) {
     abundance <- abundance[!ina]
     message("aasum: dropped ", sum(ina), " proteins with NA composition and/or abundance")
   }
-  # we don't know how to deal with different numbers of polypeptide chains
-  if(!all(aa$chains==aa$chains[1])) stop("different numbers of polypeptide chains")
   # multiply
   aa[, 6:25] <- aa[, 6:25] * abundance
   # sum
