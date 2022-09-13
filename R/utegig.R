@@ -3,7 +3,7 @@
 # 20200418 jmd first version (review of Bison Pool and amino acid synthesis [AS98])
 # 20210516 Add methanogen tree
 # 20210727 Add nH2O-ZC overview plot (deleted)
-# 20220220 Make hierarchy diagram (deleted)
+# 20220220 Make biological hierarchy diagram (deleted)
 # 20220420 Move to JMDplots
 
 # Create bold axis labels
@@ -548,6 +548,9 @@ utegig4 <- function(pdf = FALSE) {
       label.figure("(a)", cex = 1.5, font = 2, xfrac = 0.06)
       # Get the species in each group
       groups <- list("Class I" = iI, "Class II" = iII)
+      # Calculate P-values using parametric and non-parametric tests 20220913
+      Ptab1 <- KWvsANOVA(ZClist)
+      Ptab1 <- cbind(Variable = "Methanogens ZC", Ptab1)
     }
 
     if(i == 2) {
@@ -570,6 +573,8 @@ utegig4 <- function(pdf = FALSE) {
       aa <- np$AA
       groupnames <- np$types
       groups <- sapply(groupnames, function(group) aa$protein == group, simplify = FALSE)
+      Ptab2 <- KWvsANOVA(ZClist)
+      Ptab2 <- cbind(Variable = "Nif-encoding ZC", Ptab2)
     }
 
     if(i == 3) {
@@ -598,6 +603,8 @@ utegig4 <- function(pdf = FALSE) {
       title("Thaumarchaeota\n(Ren et al., 2019)", font.main = 1, cex.main = 1)
       # Get the species in each group
       groups <- sapply(groupnames, function(group) aa$protein == group, simplify = FALSE)
+      Ptab3 <- KWvsANOVA(ZClist)
+      Ptab3 <- cbind(Variable = "Thaumarchaeota ZC", Ptab3)
     }
 
     if(!packageVersion("CHNOSZ") > "1.4.3") {
@@ -664,6 +671,8 @@ utegig4 <- function(pdf = FALSE) {
   axis(1, at = 1:4, labels = NA)
   title("Thaumarchaeota", font.main = 1, cex.main = 1)
   label.figure("(c)", cex = 1.5, font = 2, xfrac = 0.06)
+  Ptab4 <- KWvsANOVA(nH2Olist)
+  Ptab4 <- cbind(Variable = "Thaumarchaeota nH2O", Ptab4)
 
   # Add legend
   plot.new()
@@ -676,6 +685,12 @@ utegig4 <- function(pdf = FALSE) {
   par(xpd = FALSE)
 
   if(pdf) dev.off()
+
+  # Return P-value table 20220913
+  out <- rbind(Ptab1, Ptab2, Ptab3, Ptab4)
+  out$p_Tukey <- signif(out$p_Tukey, 2)
+  out$p_Dunn <- signif(out$p_Dunn, 2)
+  invisible(out)
 
 }
 
@@ -975,3 +990,27 @@ utegigS3 <- function(pdf = FALSE) {
   if(pdf) dev.off()
 }
 
+# Tabulate p-values for
+# ANOVA + TukeyHSD (parametric) and
+# Kruskal-Wallis + Dunn (non-parametric)
+# 20220913
+KWvsANOVA <- function(ZClist) {
+  # Ugly one-liner to turn a list into a data frame with "group" column taken from names of the list elements
+  ZCdat <- do.call(rbind, sapply(1:length(ZClist), function(i) data.frame(group = names(ZClist)[i], ZC = ZClist[[i]]), simplify = FALSE))
+  # Remove numeric component of labels (after \n)
+  ZCdat$group <- sapply(strsplit(ZCdat$group, "\n"), "[", 1)
+  # Convert 'group' column to factor to avoid warning from dunnTest()
+  ZCdat$group <- as.factor(ZCdat$group)
+  # One-way ANOVA and Tukey's Honest Significant Differences
+  # Adapted from https://statdoe.com/one-way-anova-and-box-plot-in-r/
+  anova <- aov(ZC ~ group, data = ZCdat)
+  tukey <- TukeyHSD(anova)
+  # Kruskal-Wallis followed by Dunn test
+  # Adapted from https://www.statology.org/dunns-test-in-r/
+  dunn <- dunnTest(ZC ~ group, data = ZCdat, method = "bonferroni")
+  # Put together table
+  comparison.tukey <- rownames(tukey$group)
+  comparison.dunn <- sapply(lapply(strsplit(comparison.tukey, "-"), rev), paste, collapse = " - ")
+  idunn <- match(comparison.dunn, dunn$res$Comparison)
+  data.frame(Comparison = comparison.dunn, p_Tukey = tukey$group[, "p adj"], p_Dunn = dunn$res$P.adj[idunn])
+}
