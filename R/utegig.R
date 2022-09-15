@@ -179,7 +179,9 @@ utegig2 <- function(pdf = FALSE) {
   # NOTE: H2S is present but is not in any formation reactions 20220403
   basis(c("CO2", "H2", "NH4+", "H2O", "H2S", "H+"), c(Seawater.AS98$CO2, Seawater.AS98$H2, Seawater.AS98$"NH4+", 0, Seawater.AS98$H2S, -Seawater.AS98$pH))
   # Position of slope text
-  slopey <- c(-112, -160, -70)
+  slopey <- c(-112, -160, -50)
+  # Place to store p-values
+  pvals <- numeric()
 
   # Loop over logaH2 activities
   for(ilogaH2 in c(1, 2, 3)) {
@@ -250,6 +252,12 @@ utegig2 <- function(pdf = FALSE) {
     slopetxt <- bquote(.(word) == .(formatC(slope, digits = 1, format = "f")))
     if(round(slope, 1) == 0) slopetxt <- "Slope = 0"
     text(-0.5, slopey[ilogaH2], slopetxt)
+    # Show R2 20220915
+    R2 <- summary(thislm)$r.squared
+    R2_txt <- bquote(italic(R)^2 == .(formatC(R2, digits = 2, format = "f")))
+    text(-0.5, slopey[ilogaH2] - 20, R2_txt)
+    # Calculate p-value 20220915
+    pvals <- c(pvals, t.test(AC_all, ZC_all, paired = TRUE)$p.value)
 
     # Add title: logaH2
     Htxt <- bquote(bold(log*bolditalic(a)[H[2]] == .(logaH2)))
@@ -305,6 +313,9 @@ utegig2 <- function(pdf = FALSE) {
   label.figure("(b)", cex = 1.5, font = 2)
 
   if(pdf) dev.off()
+  # Print p-values
+  print("p-values:")
+  print(pvals)
 
 }
 

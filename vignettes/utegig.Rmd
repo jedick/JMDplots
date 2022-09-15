@@ -50,6 +50,7 @@ options(width = 80)
 ```{r HTML, include=FALSE}
 ZC <- "<i>Z</i><sub>C</sub>"
 logaH2 <- "log<i>a</i><sub>H<sub>2</sub></sub>"
+logfH2 <- "log<i>f</i><sub>H<sub>2</sub></sub>"
 ```
 
 This vignette runs the code to make the plots from the following paper:
@@ -114,20 +115,29 @@ utegigS2()
 utegigS3()
 ```
 
-## Convert `r logaH2` to Eh and oxygen fugacity
-```{r utegig_H2_O2_Eh}
-logaH2_15 <- -15
+## Convert `r logaH2` to Eh and `r logfH2`
+```{r utegig_H2_Eh}
+logaH2 <- -15
 pH <- 7
 logK1 <- suppressMessages(subcrt(c("H2", "H+", "e-"), c(-1, 2, 2), T = 25)$out$logK)
-pe <- (- logK1 - 2 * pH - logaH2_15) / 2
+pe <- (- logK1 - 2 * pH - logaH2) / 2
 Eh <- convert(pe, "Eh")
-logK2 <- suppressMessages(subcrt(c("H2O", "H2", "oxygen"), c(-1, 1, 0.5), T = 25)$out$logK)
-logfO2_15 <- 2 * (logK2 - logaH2_15)
-logaH2_30 <- -30
-logfO2_30 <- 2 * (logK2 - logaH2_30)
-print(paste0("Given logaH2 = ", logaH2_15, " and pH = ", pH, ", Eh = ", round(1000 * Eh), " mV at equilibrium"))
-print(paste0("Given logaH2 = ", logaH2_15, ", logfO2 = ", round(logfO2_15, 2), " at equilibrium"))
-print(paste0("Given logaH2 = ", logaH2_30, ", logfO2 = ", round(logfO2_30, 2), " at equilibrium"))
+# For 10^-2 pH2
+logK2 <- subcrt(c("H2", "hydrogen"), c(-1, 1), T = 25)$out$logK
+logfH2 <- logK2 + logaH2
+print(paste0("Given logaH2 = ", logaH2, " and pH = ", pH, ", Eh = ", round(1000 * Eh), " mV at equilibrium"))
+print(paste0("Given logpH2 = ", logaH2, ", logfH2 = ", round(logfH2, 2), " at equilibrium"))
+```
+
+## Convert hydrogen partial pressure to `r logaH2`
+```{r utegig_H2_H2}
+logK <- subcrt(c("hydrogen", "H2"), c(-1, 1), T = 25)$out$logK
+# For 10^-2 pH2
+logpH2 <- -2
+print(paste0("Given logpH2 = ", logpH2, ", logaH2 = ", round(logpH2 + logK, 2), " at equilibrium"))
+# For 0.55 ppmv H2
+logpH2 <- log10(0.55e-6)
+print(paste0("Given logpH2 = ", round(logpH2, 2), ", logaH2 = ", round(logpH2 + logK, 2), " at equilibrium"))
 ```
 
 ## References
