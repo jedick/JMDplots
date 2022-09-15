@@ -7,7 +7,7 @@
 \alias{utegig4}
 \alias{utegigS1}
 \alias{utegigS2}
-\alias{utegigS3}
+\alias{utegigS4}
 \alias{calc_logaH2_intermediate}
 \title{Plots from geochemistry of genomes paper}
 \description{
@@ -16,17 +16,18 @@ Plots from the paper by Dick et al. (2022).
 
 \usage{
   utegig1(pdf = FALSE)
-  utegig2(pdf = FALSE)
+  utegig2(pdf = FALSE, logact = -3)
   utegig3(pdf = FALSE)
   utegig4(pdf = FALSE)
   utegigS1(pdf = FALSE)
   utegigS2(pdf = FALSE)
-  utegigS3(pdf = FALSE)
+  utegigS4(pdf = FALSE)
   calc_logaH2_intermediate(class = NULL)
 }
 
 \arguments{
   \item{pdf}{logical, make a PDF file?}
+  \item{logact}{numeric, logarithm of activity of organic species}
   \item{class}{character, organic compound class}
 }
 
@@ -40,8 +41,10 @@ This table gives a brief description of each plotting function.
   \code{utegig4} \tab Chemical and thermodynamic analysis of evolutionary divergence along redox gradients \cr
   \code{utegigS1} \tab Comparison of \ZC of proteomes predicted by Glimmer and downloaded from NCBI \cr
   \code{utegigS2} \tab Association between redox gradients and \ZC of proteins and lipids in alkaline Yellowstone hot springs \cr
-  \code{utegigS3} \tab \logaH2-\T plots for different organic compound classes \cr
+  \code{utegigS4} \tab \logaH2-\T plots for different organic compound classes \cr
 }
+
+\code{utegig3(logact = -6)} is used to make Figure S3.
 
 \code{calc_logaH2_intermediate} is used to find intermediate logaH2, where affinity vs ZC has a slope of 0, for a group of organic compounds.
 \code{class} gives the class of compounds to consider (see description of \file{H2_intermediate_*.csv} files below), or NULL to consider compounds in all classes at once.

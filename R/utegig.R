@@ -165,11 +165,17 @@ utegig1 <- function(pdf = FALSE) {
 }
 
 # Relative stabilities of organic compounds depend on redox conditions 20211109
-utegig2 <- function(pdf = FALSE) {
+utegig2 <- function(pdf = FALSE, logact = -3) {
 
-  if(pdf) pdf("Figure_2.pdf", width = 7, height = 6)
-  mat <- matrix(c(1,1,2,2,3,3,4, 0,5,5,5,5,0,0), byrow = TRUE, nrow = 2)
-  layout(mat, heights = c(1, 0.7), widths = c(1.1,1,1,1,1,1,1))
+  if(missing(logact)) {
+    if(pdf) pdf("Figure_2.pdf", width = 7, height = 6)
+    mat <- matrix(c(1,1,2,2,3,3,4, 0,5,5,5,5,0,0), byrow = TRUE, nrow = 2)
+    layout(mat, heights = c(1, 0.7), widths = c(1.1,1,1,1,1,1,1))
+  } else {
+    if(pdf) pdf("Figure_S3.pdf", width = 7, height = 3.5)
+    mat <- matrix(c(1,1,2,2,3,3,4), byrow = TRUE, nrow = 1)
+    layout(mat, widths = c(1.1,1,1,1,1,1,1))
+  }
   par(mar = c(4, 4, 0.5, 1), mgp = c(2.7, 1, 0))
 
   # Set temperature and logaH2 activities
@@ -211,7 +217,7 @@ utegig2 <- function(pdf = FALSE) {
 
       # Load species
       myspecies <- specieslist[[i]]
-      species(myspecies, -3)
+      species(myspecies, logact)
       # Calculate affinities
       a <- affinity(T = T)
       A <- unlist(a$values)
@@ -287,8 +293,12 @@ utegig2 <- function(pdf = FALSE) {
       par(xpd = FALSE)
     }
     if(ilogaH2 == 1) {
-      text(-3.1, 72, quote(CH[4]))
-      label.figure("(a)", cex = 1.5, font = 2, yfrac = 0.97)
+      if(missing(logact)) {
+        text(-3.1, 72, quote(CH[4]))
+        label.figure("(a)", cex = 1.5, font = 2, yfrac = 0.97)
+      } else {
+        text(-3.1, 90, quote(CH[4]))
+      }
     }
 
   }
@@ -306,16 +316,21 @@ utegig2 <- function(pdf = FALSE) {
   legend("topright", legend = c(dT, dP, dbasis), bty = "n", y.intersp = 1.2)
   par(xpd = FALSE)
 
-  # Plot intermediate logaH2 20220401
-  intermediate_logaH2()
-  # Add Psat legend 20220629
-  legend("bottomright", legend = quote(bolditalic(P)[bold(sat)]), bty = "n")
-  label.figure("(b)", cex = 1.5, font = 2)
+  if(missing(logact)) {
+    # Plot intermediate logaH2 20220401
+    intermediate_logaH2()
+    # Add Psat legend 20220629
+    legend("bottomright", legend = quote(bolditalic(P)[bold(sat)]), bty = "n")
+    label.figure("(b)", cex = 1.5, font = 2)
+  }
 
   if(pdf) dev.off()
+
   # Print p-values
-  print("p-values:")
-  print(pvals)
+  if(missing(logact)) {
+    print("p-values for (a):")
+    print(signif(pvals, 2))
+  }
 
 }
 
@@ -993,10 +1008,10 @@ utegigS2 <- function(pdf = FALSE) {
 
 
 # logaH2-T plots for different organic compound classes 20220418
-utegigS3 <- function(pdf = FALSE) {
+utegigS4 <- function(pdf = FALSE) {
   # To generate files:
   # lapply(names(specieslist), calc_logaH2_intermediate)
-  if(pdf) pdf("Figure_S3.pdf", width = 6, height = 8)
+  if(pdf) pdf("Figure_S4.pdf", width = 6, height = 8)
   par(mfrow = c(3, 2))
   parargs <- list(mar = c(4, 4, 3, 1), mgp = c(2.7, 1, 0))
   ylim <- c(-25, 0)
