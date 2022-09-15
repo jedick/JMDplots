@@ -79,7 +79,7 @@ Rodriguez-Brito, B. et al. (2010) Viral and microbial community dynamics in four
 }
 
 \seealso{
-The script for processing proteomes of Nif-encoding genomes has been moved to \code{\link{utegig}}.
+The script for processing proteomes of Nif-encoding genomes has been moved to \code{\link{utogig}}.
 }
 
 \examples{

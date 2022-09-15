@@ -22,7 +22,7 @@ addalpha <- function(col, alpha) {
 }
 
 # Function to add significant difference letters 20220531
-# Moved from utegig.R and exported 20220609
+# Moved from utogig.R and exported 20220609
 cldfun <- function(ZClist, bp, dy) {
   # Ugly one-liner to turn a list into a data frame with "group" column taken from names of the list elements
   ZCdat <- do.call(rbind, sapply(1:length(ZClist), function(i) data.frame(group = names(ZClist)[i], ZC = ZClist[[i]]), simplify = FALSE))

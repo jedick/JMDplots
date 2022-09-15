@@ -6,10 +6,10 @@
 # of Poudel et al. (2018) (doi:10.1128/JB.00757-17) as a CSV file
 # (excluding the first line, which has the name and title of the table).
 
-# Modifications for 2022 utegig paper (made after publication of 2020 gradH2O paper):
+# Modifications for 2022 utogig paper (made after publication of 2020 gradH2O paper):
 # 20210527 Updated Nif_homolog_genomes.csv for RefSeq release 206
 # 20220531 Updated this script to read protein_refseq.csv.xz from the chem16S package
-# 20220629 Moved this script to extdata/utegig, but we still read ../gradH2O/PCF+18_SuppTable1A.csv
+# 20220629 Moved this script to extdata/utogig, but we still read ../gradH2O/PCF+18_SuppTable1A.csv
 
 # Read the organism names
 org <- read.csv("../gradH2O/PCF+18_SuppTable1A.csv", as.is = TRUE)

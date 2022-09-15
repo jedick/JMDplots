@@ -16,6 +16,7 @@ Please refer to the supporting information of the papers for the original script
 
 \details{
   \itemize{
+    \item \code{\link{utogig}} - Using thermodynamics to obtain geochemical information from genomes (Dick et al., 2022)
     \item \code{\link{orp16S}} - Chemical adaptation of estimated bacterial community proteomes to redox potential (Dick and Meng, 2021)
     \item \code{\link{geo16S}} - Chemical links between redox conditions and estimated community proteomes (Dick and Tan, 2022)
     \item \code{\link{evdevH2O}} - Thermodynamic model for water activity and redox potential in evolution and development (Dick, 2022)
@@ -133,4 +134,6 @@ Dick JM and Shock EL (2021) The release of energy during protein synthesis at ul
 Dick JM and Tan J (2022) Chemical links between redox conditions and estimated community proteomes from 16S rRNA and reference protein sequences. \emph{Microb. Ecol.} \doi{10.1007/s00248-022-01988-9}
 
 Dick JM (2022) A thermodynamic model for water activity and redox potential in evolution and developent. \emph{J. Mol. Evol} \bold{90}, 182--199. \doi{10.1007/s00239-022-10051-7}
+
+Dick JM, Boyer GM, Canovas PA III and Shock EL (2022) Using thermodynamics to obtain geochemical information from genomes. Manuscript in preparation.
 }

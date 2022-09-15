@@ -1,4 +1,4 @@
-# JMDplots/utegig.R
+# JMDplots/utogig.R
 # Plots for perspective paper on geochemical biology
 # 20200418 jmd first version (review of Bison Pool and amino acid synthesis [AS98])
 # 20210516 Add methanogen tree
@@ -46,7 +46,7 @@ col8 <- addalpha(8, "b0")
 col2 <- addalpha(2, "b0")
 
 # Read methanogen tree
-methanogen_tree <- read.tree(system.file("extdata/utegig/methanogen_tree.txt", package = "JMDplots"))
+methanogen_tree <- read.tree(system.file("extdata/utogig/methanogen_tree.txt", package = "JMDplots"))
 # Match species names without underscore used for labeling the tree
 methanogens <- gsub("_", " ", methanogen_tree$tip.label)
 # Indices of Class I and Class II methanogens
@@ -86,14 +86,14 @@ hyphen.in.pdf <- function(x) {
 }
 
 # Chemical analysis of reference proteomes of methanogens reveals adaptation to redox conditions 20210516
-utegig1 <- function(pdf = FALSE) {
+utogig1 <- function(pdf = FALSE) {
 
   if(pdf) pdf("Figure_1.pdf", width = 12, height = 8)
   layout(matrix(1:2, nrow = 1), widths = c(1.5, 0.7))
   par(mar = c(2, 0, 1, 32))
 
   # Read and rotate the tree (Class I at bottom) 20220629
-  methanogen_tree <- read.tree(system.file("extdata/utegig/methanogen_tree.txt", package = "JMDplots"))
+  methanogen_tree <- read.tree(system.file("extdata/utogig/methanogen_tree.txt", package = "JMDplots"))
   labels <- rev(methanogen_tree$tip.label)
   methanogen_tree <- rotateConstr(methanogen_tree, labels)
   # Make the tree with colors to distinguish Class I and Class II
@@ -109,7 +109,7 @@ utegig1 <- function(pdf = FALSE) {
   text(4170, iFS + dy, hyphen.in.pdf(FStxt), adj = c(0, 0), xpd = NA)
 
   # Calculate ZC from protein formulas
-  methanogen_AA <- read.csv(system.file("extdata/utegig/methanogen_AA.csv", package = "JMDplots"))
+  methanogen_AA <- read.csv(system.file("extdata/utogig/methanogen_AA.csv", package = "JMDplots"))
   ZC <- ZC(protein.formula(methanogen_AA))
 
   # Add labels
@@ -135,9 +135,9 @@ utegig1 <- function(pdf = FALSE) {
   # ZC-Topt plot 20220224
   par(mar = c(9, 2, 7, 1))
   # Read Topt
-  dat <- read.csv(system.file("extdata/utegig/Topt.csv", package = "JMDplots"))
+  dat <- read.csv(system.file("extdata/utogig/Topt.csv", package = "JMDplots"))
   # Append ZC column
-  methanogen_AA <- read.csv(system.file("extdata/utegig/methanogen_AA.csv", package = "JMDplots"))
+  methanogen_AA <- read.csv(system.file("extdata/utogig/methanogen_AA.csv", package = "JMDplots"))
   ZC <- ZC(protein.formula(methanogen_AA))
   dat$ZC <- ZC[match(dat$species, methanogens)]
   # Use par(xpd = NA) to show the y-axis label 20220401
@@ -165,7 +165,7 @@ utegig1 <- function(pdf = FALSE) {
 }
 
 # Relative stabilities of organic compounds depend on redox conditions 20211109
-utegig2 <- function(pdf = FALSE, logact = -3) {
+utogig2 <- function(pdf = FALSE, logact = -3) {
 
   if(missing(logact)) {
     if(pdf) pdf("Figure_2.pdf", width = 7, height = 6)
@@ -335,7 +335,7 @@ utegig2 <- function(pdf = FALSE, logact = -3) {
 }
 
 # Thermodynamic model for methanogen niche partitioning 20220402
-utegig3 <- function(pdf = FALSE) {
+utogig3 <- function(pdf = FALSE) {
 
   if(pdf) pdf("Figure_3.pdf", width = 7, height = 5)
   mat <- matrix(c(1,1,2,2,3,3,4, 5,5,5,6,6,6,0), nrow = 2, byrow = TRUE)
@@ -347,7 +347,7 @@ utegig3 <- function(pdf = FALSE) {
   T <- 25
 
   # Calculate ZC of methanogen proteomes excluding high-ZC outliers
-  methanogen_AA <- read.csv(system.file("extdata/utegig/methanogen_AA.csv", package = "JMDplots"))
+  methanogen_AA <- read.csv(system.file("extdata/utogig/methanogen_AA.csv", package = "JMDplots"))
   ZC <- ZC(protein.formula(methanogen_AA[!iout, ]))
   # Add proteins to CHNOSZ
   ip <- add.protein(methanogen_AA[!iout, ])
@@ -489,7 +489,7 @@ utegig3 <- function(pdf = FALSE) {
   text(mean(c(x1, x2)), mean(c(y1, y2)), "Lost City", col = "green4")
 
   # Add lines for sediments (Lovley and Goodwin, 1988) 20220303
-  sediment <- read.csv(system.file("extdata/utegig/LG88_Fig1.csv", package = "JMDplots"))
+  sediment <- read.csv(system.file("extdata/utogig/LG88_Fig1.csv", package = "JMDplots"))
   for(i in 1:nrow(sediment)) {
     if(sediment$type[i] == "Methane") col <- "green4" else col <- "gray40"
     if(sediment$type[i] == "Methane") lty <- 1 else lty <- 2
@@ -522,7 +522,7 @@ utegig3 <- function(pdf = FALSE) {
 }
 
 # Chemical and thermodynamic analysis of evolutionary divergence along redox gradients 20220601
-utegig4 <- function(pdf = FALSE) {
+utogig4 <- function(pdf = FALSE) {
 
   if(pdf) pdf("Figure_4.pdf", width = 9, height = 5)
   layout(matrix(1:8, nrow = 2), widths = c(2.5, 4, 4, 2.5))
@@ -554,7 +554,7 @@ utegig4 <- function(pdf = FALSE) {
     if(i == 1) {
       # Methanogen proteomes 20220424
       # Read amino acid composition and compute ZC
-      aa <- read.csv(system.file("extdata/utegig/methanogen_AA.csv", package = "JMDplots"))
+      aa <- read.csv(system.file("extdata/utogig/methanogen_AA.csv", package = "JMDplots"))
       # Indices of Class I and Class II methanogens
       iI <- 20:36
       iII <- 1:19
@@ -606,8 +606,8 @@ utegig4 <- function(pdf = FALSE) {
     if(i == 3) {
       # Thaumarchaeota 20220414
       # Amino acid compositions of predicted (Glimmer) and database (NCBI or IMG) proteomes
-      predicted <- read.csv(system.file("extdata/utegig/Thaumarchaeota_predicted_AA.csv", package = "JMDplots"))
-      database <- read.csv(system.file("extdata/utegig/Thaumarchaeota_database_AA.csv", package = "JMDplots"))
+      predicted <- read.csv(system.file("extdata/utogig/Thaumarchaeota_predicted_AA.csv", package = "JMDplots"))
+      database <- read.csv(system.file("extdata/utogig/Thaumarchaeota_database_AA.csv", package = "JMDplots"))
       # If both are available, use predicted instead of database
       aa <- rbind(predicted, database)
       aa <- aa[!duplicated(aa$organism), ]
@@ -645,7 +645,7 @@ utegig4 <- function(pdf = FALSE) {
       thermo.plot.new(xlim = xlims[[i]], ylim = ylims[[i]], xlab = logaH2lab, ylab = "Mean rank of per-residue affinity", yline = par("mgp")[1] + 0.3)
       # Color reducing and oxidizing areas from organic compounds 20220621
       file <- "H2_intermediate.csv"
-      dat <- read.csv(file.path(system.file("extdata/utegig", package = "JMDplots"), file))
+      dat <- read.csv(file.path(system.file("extdata/utogig", package = "JMDplots"), file))
       # Just use 25 degC values
       dat <- dat[dat$T==25, ]
       x <- dat[, "T", drop = FALSE]
@@ -727,7 +727,7 @@ intermediate_logaH2 <- function(class = NULL, add = FALSE, parargs = list(mar = 
   if(!add) do.call(par, parargs)
   file <- "H2_intermediate.csv"
   if(!is.null(class)) file <- paste0("H2_intermediate_", gsub(" ", "", class), ".csv")
-  dat <- read.csv(file.path(system.file("extdata/utegig", package = "JMDplots"), file))
+  dat <- read.csv(file.path(system.file("extdata/utogig", package = "JMDplots"), file))
   x <- dat[, "T", drop = FALSE]
   y <- dat[, 2:5]
   if(!add) matplot(x, y, type = "n", xlab = Tlab, ylab = logaH2lab, xlim = xlim, ylim = ylim, xaxs = "i")
@@ -893,11 +893,11 @@ calc_logaH2_intermediate <- function(class = NULL) {
 }
 
 # Comparison of ZC of proteomes predicted by Glimmer and downloaded from NCBI 20220604
-utegigS1 <- function(pdf = FALSE) {
+utogigS1 <- function(pdf = FALSE) {
   if(pdf) pdf("Figure_S1.pdf", width = 4, height = 4)
   par(mar= c(4.1, 4.1, 1, 1))
-  predicted <- read.csv(system.file("extdata/utegig/Thaumarchaeota_predicted_AA.csv", package = "JMDplots"))
-  database <- read.csv(system.file("extdata/utegig/Thaumarchaeota_database_AA.csv", package = "JMDplots"))
+  predicted <- read.csv(system.file("extdata/utogig/Thaumarchaeota_predicted_AA.csv", package = "JMDplots"))
+  database <- read.csv(system.file("extdata/utogig/Thaumarchaeota_database_AA.csv", package = "JMDplots"))
   organisms <- intersect(predicted$organism, database$organism)
   predicted <- predicted[match(organisms, predicted$organism), ]
   database <- database[match(organisms, database$organism), ]
@@ -927,7 +927,7 @@ utegigS1 <- function(pdf = FALSE) {
 }
 
 # Association between redox gradients and ZC of proteins and lipids in alkaline Yellowstone hot springs 20210516
-utegigS2 <- function(pdf = FALSE) {
+utogigS2 <- function(pdf = FALSE) {
 
   if(pdf) pdf("Figure_S2.pdf", width = 8.5, height = 4)
   layout(matrix(1:3, nrow = 1), widths = c(1.07, 1, 0.4))
@@ -1008,7 +1008,7 @@ utegigS2 <- function(pdf = FALSE) {
 
 
 # logaH2-T plots for different organic compound classes 20220418
-utegigS4 <- function(pdf = FALSE) {
+utogigS4 <- function(pdf = FALSE) {
   # To generate files:
   # lapply(names(specieslist), calc_logaH2_intermediate)
   if(pdf) pdf("Figure_S4.pdf", width = 6, height = 8)

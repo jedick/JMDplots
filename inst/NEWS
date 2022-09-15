@@ -5,7 +5,7 @@ CHANGES IN JMDplots 1.2.13
 
 - 20220506 Move RefSeq data and code for estimated community proteomes to separate chem16S package.
 
-- 20220420 Add plots for utegig paper.
+- 20220420 Add plots for utogig paper.
 
 CHANGES IN JMDplots 1.2.12
 --------------------------

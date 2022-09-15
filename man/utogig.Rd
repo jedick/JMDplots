@@ -1,13 +1,13 @@
 \encoding{UTF-8}
-\name{utegig}
-\alias{utegig}
-\alias{utegig1}
-\alias{utegig2}
-\alias{utegig3}
-\alias{utegig4}
-\alias{utegigS1}
-\alias{utegigS2}
-\alias{utegigS4}
+\name{utogig}
+\alias{utogig}
+\alias{utogig1}
+\alias{utogig2}
+\alias{utogig3}
+\alias{utogig4}
+\alias{utogigS1}
+\alias{utogigS2}
+\alias{utogigS4}
 \alias{calc_logaH2_intermediate}
 \title{Plots from geochemistry of genomes paper}
 \description{
@@ -15,13 +15,13 @@ Plots from the paper by Dick et al. (2022).
 }
 
 \usage{
-  utegig1(pdf = FALSE)
-  utegig2(pdf = FALSE, logact = -3)
-  utegig3(pdf = FALSE)
-  utegig4(pdf = FALSE)
-  utegigS1(pdf = FALSE)
-  utegigS2(pdf = FALSE)
-  utegigS4(pdf = FALSE)
+  utogig1(pdf = FALSE)
+  utogig2(pdf = FALSE, logact = -3)
+  utogig3(pdf = FALSE)
+  utogig4(pdf = FALSE)
+  utogigS1(pdf = FALSE)
+  utogigS2(pdf = FALSE)
+  utogigS4(pdf = FALSE)
   calc_logaH2_intermediate(class = NULL)
 }
 
@@ -35,26 +35,26 @@ Plots from the paper by Dick et al. (2022).
 This table gives a brief description of each plotting function.
 
 \tabular{ll}{
-  \code{utegig1} \tab Chemical analysis of reference proteomes of methanogens reveals adaptation to redox conditions \cr
-  \code{utegig2} \tab Relative stabilities of organic compounds depend on redox conditions \cr
-  \code{utegig3} \tab Thermodynamic model for methanogen niche partitioning \cr
-  \code{utegig4} \tab Chemical and thermodynamic analysis of evolutionary divergence along redox gradients \cr
-  \code{utegigS1} \tab Comparison of \ZC of proteomes predicted by Glimmer and downloaded from NCBI \cr
-  \code{utegigS2} \tab Association between redox gradients and \ZC of proteins and lipids in alkaline Yellowstone hot springs \cr
-  \code{utegigS4} \tab \logaH2-\T plots for different organic compound classes \cr
+  \code{utogig1} \tab Chemical analysis of reference proteomes of methanogens reveals adaptation to redox conditions \cr
+  \code{utogig2} \tab Relative stabilities of organic compounds depend on redox conditions \cr
+  \code{utogig3} \tab Thermodynamic model for methanogen niche partitioning \cr
+  \code{utogig4} \tab Chemical and thermodynamic analysis of evolutionary divergence along redox gradients \cr
+  \code{utogigS1} \tab Comparison of \ZC of proteomes predicted by Glimmer and downloaded from NCBI \cr
+  \code{utogigS2} \tab Association between redox gradients and \ZC of proteins and lipids in alkaline Yellowstone hot springs \cr
+  \code{utogigS4} \tab \logaH2-\T plots for different organic compound classes \cr
 }
 
-\code{utegig3(logact = -6)} is used to make Figure S3.
+\code{utogig3(logact = -6)} is used to make Figure S3.
 
 \code{calc_logaH2_intermediate} is used to find intermediate logaH2, where affinity vs ZC has a slope of 0, for a group of organic compounds.
 \code{class} gives the class of compounds to consider (see description of \file{H2_intermediate_*.csv} files below), or NULL to consider compounds in all classes at once.
 
 }
 
-\section{Files in extdata/utegig}{
+\section{Files in extdata/utogig}{
   \describe{
     \item{\file{Topt.csv}}{Optimal growth temperatures (\degC) of methanogens compiled from the literature.}
-    \item{\file{methanogen_AA.csv}}{Amino acid compositions of reference proteomes of methanogens. See \file{R/utegig.R} for the code used to make this file.}
+    \item{\file{methanogen_AA.csv}}{Amino acid compositions of reference proteomes of methanogens. See \file{R/utogig.R} for the code used to make this file.}
     \item{\file{LG88_Fig1.csv}}{H2 concentrations measured in methanogenic and non-methanogenic sediments, from Lovley and Goodwin (1988).}
     \item{\file{H2_intermediate.csv}}{Intermediate logaH2 (where the slope of affinity vs \ZC is zero) for organic compounds, calculated using \code{calc_logaH2_intermediate}.}
     \item{\file{H2_intermediate_*.csv}}{Intermediate logaH2 (where the slope of affinity vs \ZC is zero) for different classes of organic compounds (\samp{C1andC2}, \samp{Acid}, \samp{Aminoacid}, \samp{Sugar}, \samp{Nucleobase}, \samp{TCA}).}
@@ -72,7 +72,7 @@ This table gives a brief description of each plotting function.
 \references{
 Delcher, A. L., Harmon, D., Kasif, S., White, O. and Salzberg, S. L. (1999) Improved microbial gene identification with Glimmer. \emph{Nucleic Acids Res.} \bold{27}, 4636--4641. \doi{10.1093/nar/27.23.4636}
 
-Dick, J. M., Boyer, G. M., Canovas, P. A. III and Shock, E. L. (2022) Using thermodynamics to extract geochemical information from genomes. Manuscript in preparation.
+Dick, J. M., Boyer, G. M., Canovas, P. A. III and Shock, E. L. (2022) Using thermodynamics to obtain geochemical information from genomes. Manuscript in preparation.
 
 Lovley, D. R. and Goodwin, S. (1988) Hydrogen concentrations as an indicator of the predominant terminal electron-accepting reactions in aquatic sediments. \emph{Geochim. Cosmochim. Acta} \bold{52}, 2993--3003. \doi{10.1016/0016-7037(88)90163-9}
 
@@ -82,5 +82,5 @@ Ren, M., Feng, X., ..., and Luo, H. (2019) Phylogenomics suggests oxygen availab
 }
 
 \examples{
-utegigS1()
+utogigS1()
 }

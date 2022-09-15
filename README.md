@@ -10,8 +10,8 @@ This R package has code and data for plots from papers by [Jeffrey M. Dick](http
   [R code](R/orp16S.R), [help page source](man/orp16S.Rd), [vignette source](vignettes/orp16S.Rmd)
   - A compiled HTML version of the vignette is at [chnosz.net](https://chnosz.net/JMDplots/doc/orp16S.html).
   - A preprint is on [bioRxiv](https://doi.org/10.1101/2021.10.12.464155).
-- **utegig**: Using thermodynamics to extract geochemical information from genomes: [data directory](inst/extdata/utegig), [R code](R/utegig.R),
-  [help page source](man/utegig.Rd), [vignette source](vignettes/utegig.Rmd)
+- **utogig**: Using thermodynamics to obtain geochemical information from genomes: [data directory](inst/extdata/utogig), [R code](R/utogig.R),
+  [help page source](man/utogig.Rd), [vignette source](vignettes/utogig.Rmd)
 
 ## Installation
 

@@ -737,7 +737,7 @@ gradH2O7 <- function(pdf = FALSE) {
 # Also return amino acid composition of all proteomes 20220603
 NifProteomes <- function() {
   # Read file with amino acid compositions
-  AAfile <- system.file("extdata/utegig/Nif_homolog_AA.csv", package = "JMDplots")
+  AAfile <- system.file("extdata/utogig/Nif_homolog_AA.csv", package = "JMDplots")
   AA <- read.csv(AAfile, as.is = TRUE)
   # The Nif types, arranged from anaerobic to aerobic
   types <- c("Nif-D", "Nif-C", "Nif-B", "Nif-A")
