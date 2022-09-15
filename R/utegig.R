@@ -708,7 +708,7 @@ utegig4 <- function(pdf = FALSE) {
 # Plot intermediate logaH2 20220220
 # Add class argument 20220418
 intermediate_logaH2 <- function(class = NULL, add = FALSE, parargs = list(mar = c(4, 4, 1, 1), mgp = c(2.7, 1, 0)),
-  xlim = c(0, 300), ylim = NULL, lines = TRUE, redox = TRUE, pH = TRUE, NH4 = TRUE, pH.y = -9.4, NH4.y = -6.6) {
+  xlim = c(0, 300), ylim = NULL, lines = TRUE, neutral = TRUE, redox = TRUE, pH = TRUE, NH4 = TRUE, pH.y = -9.4, NH4.y = -6.6) {
   if(!add) do.call(par, parargs)
   file <- "H2_intermediate.csv"
   if(!is.null(class)) file <- paste0("H2_intermediate_", gsub(" ", "", class), ".csv")
@@ -732,12 +732,16 @@ intermediate_logaH2 <- function(class = NULL, add = FALSE, parargs = list(mar = 
   if(NH4) dat <- dat[dat$T < Tlim[2], ]
 
   x <- dat[, "T", drop = FALSE]
-  y <- dat[, 2:5]
-  # dashed/solid lines for lo/hi N
-  lty <- c(2, 2, 1, 1)
-  ## red/blue lines for lo/hi pH
-  #col <- c(2, 4, 2, 4)
-  col <- c(1, 1, 1, 1)
+  if(neutral) {
+    y <- dat[, 2:7]
+    # dashed/solid lines for lo/hi N
+    lty <- c(2, 2, 1, 1, 2, 1)
+    col <- c(1, 1, 1, 1, 6, 6)
+  } else {
+    y <- dat[, 2:5]
+    lty <- c(2, 2, 1, 1)
+    col <- c(1, 1, 1, 1)
+  }
 
   if(lines) {
     matlines(x, y, lty = lty, col = col)
@@ -763,8 +767,8 @@ intermediate_logaH2 <- function(class = NULL, add = FALSE, parargs = list(mar = 
     # Add logaNH4+ labels at high T
     NH4dat <- dat[nrow(dat), ]
     NH4lab <- character(ncol(NH4dat))
-    NH4lab[grep("loN", colnames(NH4dat))] <- -8
-    NH4lab[grep("hiN", colnames(NH4dat))] <- -3
+    NH4lab[grep("loN_", colnames(NH4dat))] <- -8
+    NH4lab[grep("hiN_", colnames(NH4dat))] <- -3
     NH4dat.x <- 293
     NH4.x <- 278
     dy <- 0
@@ -855,7 +859,18 @@ calc_logaH2_intermediate <- function(class = NULL) {
   hiN_lopH <- round(unifun(T = T), 6)
   basis(c("NH4+", "pH"), c(-3, 9))
   hiN_hipH <- round(unifun(T = T), 6)
-  out <- data.frame(T, loN_lopH, loN_hipH, hiN_lopH, hiN_hipH)
+
+  # Calculate neutral pH
+  logK <- subcrt(c("H2O", "OH-", "H+"), c(-1, 1, 1), T = T)$out$logK
+  pH <- logK / -2
+  # Given lopH == 3, hipH == 9, place neutral pH in the range [lopH, hipH] rescaled to [0, 1]
+  pHfrac <- (pH - 3) / (9 - 3)
+  # Calculate the value of logaH2 at neutral pH and low and high N
+  neutralpH_loN <- round(loN_lopH + pHfrac * (loN_hipH - loN_lopH), 6)
+  neutralpH_hiN <- round(hiN_lopH + pHfrac * (hiN_hipH - hiN_lopH), 6)
+
+  # Save results
+  out <- data.frame(T, loN_lopH, loN_hipH, hiN_lopH, hiN_hipH, neutralpH_loN, neutralpH_hiN)
   file <- "H2_intermediate.csv"
   if(!is.null(class)) file <- paste0("H2_intermediate_", gsub(" ", "", class), ".csv")
   write.csv(out, file, row.names = FALSE, quote = FALSE)
@@ -986,17 +1001,17 @@ utegigS3 <- function(pdf = FALSE) {
   parargs <- list(mar = c(4, 4, 3, 1), mgp = c(2.7, 1, 0))
   ylim <- c(-25, 0)
   titlefun <- function(class) title(paste0(class, " (", length(specieslist[[class]]), ")"))
-  intermediate_logaH2("C1 and C2",  parargs = parargs, ylim = ylim, redox = FALSE, pH = FALSE, NH4 = FALSE)
+  intermediate_logaH2("C1 and C2",  parargs = parargs, ylim = ylim, redox = FALSE, neutral = FALSE, pH = FALSE, NH4 = FALSE)
   titlefun("C1 and C2")
-  intermediate_logaH2("Acid",       parargs = parargs, ylim = ylim, redox = FALSE, pH = FALSE, NH4 = FALSE)
+  intermediate_logaH2("Acid",       parargs = parargs, ylim = ylim, redox = FALSE, neutral = FALSE, pH = FALSE, NH4 = FALSE)
   titlefun("Acid")
-  intermediate_logaH2("Amino acid", parargs = parargs, ylim = ylim, redox = FALSE, pH.y = -8.5, NH4.y = -10)
+  intermediate_logaH2("Amino acid", parargs = parargs, ylim = ylim, redox = FALSE, neutral = FALSE, pH.y = -8.5, NH4.y = -10)
   titlefun("Amino acid")
-  intermediate_logaH2("Sugar",      parargs = parargs, ylim = ylim, redox = FALSE, pH = FALSE, NH4 = FALSE)
+  intermediate_logaH2("Sugar",      parargs = parargs, ylim = ylim, redox = FALSE, neutral = FALSE, pH = FALSE, NH4 = FALSE)
   titlefun("Sugar")
-  intermediate_logaH2("Nucleobase", parargs = parargs, ylim = ylim, redox = FALSE, pH.y = -12, NH4.y = -17)
+  intermediate_logaH2("Nucleobase", parargs = parargs, ylim = ylim, redox = FALSE, neutral = FALSE, pH.y = -12, NH4.y = -17)
   titlefun("Nucleobase")
-  intermediate_logaH2("TCA cycle",  parargs = parargs, ylim = ylim, redox = FALSE, NH4 = FALSE, pH.y = -10)
+  intermediate_logaH2("TCA cycle",  parargs = parargs, ylim = ylim, redox = FALSE, neutral = FALSE, NH4 = FALSE, pH.y = -10)
   titlefun("TCA cycle")
   if(pdf) dev.off()
 }
