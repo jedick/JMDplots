@@ -263,7 +263,7 @@ utogig2 <- function(pdf = FALSE, logact = -3) {
     R2_txt <- bquote(italic(R)^2 == .(formatC(R2, digits = 2, format = "f")))
     text(-0.5, slopey[ilogaH2] - 20, R2_txt)
     # Calculate p-value 20220915
-    pvals <- c(pvals, t.test(AC_all, ZC_all, paired = TRUE)$p.value)
+    pvals <- c(pvals, cor.test(AC_all, ZC_all)$p.value)
 
     # Add title: logaH2
     Htxt <- bquote(bold(log*bolditalic(a)[H[2]] == .(logaH2)))
@@ -271,8 +271,8 @@ utogig2 <- function(pdf = FALSE, logact = -3) {
     if(ilogaH2 == 3) {
       # Add oxidation-intermediate-reduction arrow 20220221
       par(xpd = NA)
-      x1 <- -21.0
-      x2 <- -0.5
+      x1 <- -21.5
+      x2 <- 0
       dx <- 3.2
       rect(x1 - dx, -317, x2 + dx, -227, col = "white", lty = 3)
       x1.1 <- x1 + 6
@@ -282,11 +282,11 @@ utogig2 <- function(pdf = FALSE, logact = -3) {
       lines(c(x1.1, x2.1), c(-300, -300), col = 8, lwd = 2)
       # Uncomment this to check the alignment of separate text items below
       #text(x1, -288, "Reducing conditions:\nReduced compounds\nare relatively stable", adj = c(0.5, 0), col = 2)
-      text(x1, -248, "Reducing conditions:", adj = c(0.5, 0), font = 3)
-      text(x1, -288, "Reduced compounds\nare relatively stable", adj = c(0.5, 0))
+      text(x1 + 1, -248, "Reducing conditions:", adj = c(0.5, 0), font = 3)
+      text(x1 + 1, -288, "Reduced compounds are\nmore stable than oxidized ones", adj = c(0.5, 0))
       #text(x2, -288, "Oxidizing conditions:\nOxidized compounds\nare relatively stable", adj = c(0.5, 0), col = 2)
-      text(x2, -248, "Oxidizing conditions:", adj = c(0.5, 0), font = 3)
-      text(x2, -288, "Oxidized compounds\nare relatively stable", adj = c(0.5, 0))
+      text(x2 - 1, -248, "Oxidizing conditions:", adj = c(0.5, 0), font = 3)
+      text(x2 - 1, -288, "Oxidized compounds are\nmore stable than reduced ones", adj = c(0.5, 0))
       #text(mean(c(x1, x2)), -288, "Intermediate conditions:\nReduced and oxidized compounds\nare approximately equally stable", adj = c(0.5, 0), col = 2)
       text(mean(c(x1, x2)), -248, "Intermediate conditions:", adj = c(0.5, 0), font = 3)
       text(mean(c(x1, x2)), -288, "Reduced and oxidized compounds\nare approximately equally stable", adj = c(0.5, 0))
