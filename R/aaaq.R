@@ -162,7 +162,8 @@ aaaq13 <- function(pdf = FALSE) {
   if(pdf) pdf("aaaq13.pdf", width = 5, height = 4)
   par(mar = c(3, 3, 1, 1))
   # use old data for methionine sidechain
-  add.OBIGT(system.file("extdata/OBIGT/OldAA.csv", package = "JMDplots"))
+  if(packageVersion("CHNOSZ") > "1.4.3") OldAAfile <- "extdata/OBIGT/OldAA.csv" else "extdata/OBIGT/OldAA_old.csv"
+  add.OBIGT(system.file(OldAAfile, package = "JMDplots"))
   basis("CHNOSe")
   basis(c("NH3", "H2S"), c(-6, -3))
   species(c("AMY_BACSU", "O08452_PYRFU"))

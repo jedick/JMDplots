@@ -68,8 +68,8 @@ The current OBIGT database in CHNOSZ has updates for the methionine sidechain gr
 In order to reproduce the calculations from the 2011 paper, we start by loading the older values from @DLH06.
 
 ```{r add.OBIGT, message = FALSE, results = "hide"}
-file <- system.file("extdata/OBIGT/OldAA.csv", package = "JMDplots")
-add.OBIGT(file)
+if(packageVersion("CHNOSZ") > "1.4.3") OldAAfile <- "extdata/OBIGT/OldAA.csv" else "extdata/OBIGT/OldAA_old.csv"
+add.OBIGT(system.file(OldAAfile, package = "JMDplots"))
 ```
 
 ## Measured temperature and pH

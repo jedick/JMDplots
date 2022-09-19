@@ -587,8 +587,9 @@ seqcomp2OBIGT <- function(seqcomp, type="DNA") {
     mkp <- makeup(monomer_OBIGT$formula, multiplier=monocomp, sum=TRUE)
     OBIGT_out$formula[i] <- as.chemical.formula(mkp)
     # thermodynamic properties (G, H, S, and HKF parameters)
-    # the format of OBIGT changed in CHNOSZ 1.3.3; get different columns for previous versions 20191015
-    OBIGT_out[i, 9:21] <- colSums(monomer_OBIGT[, 9:21] * monocomp)
+    # OBIGT in CHNOSZ > 1.4.3 has new 'model' column 20220919
+    if(packageVersion("CHNOSZ") > "1.4.3") OBIGT_out[i, 10:22] <- colSums(monomer_OBIGT[, 10:22] * monocomp)
+    else OBIGT_out[i, 9:21] <- colSums(monomer_OBIGT[, 9:21] * monocomp)
   }
   OBIGT_out
 }

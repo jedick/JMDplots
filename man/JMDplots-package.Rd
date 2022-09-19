@@ -96,7 +96,7 @@ Please refer to the supporting information of the papers for the original script
     }
 
     \item{\code{OBIGT}}{
-      The \code{OldAA.csv} file here has thermodynamic data for glycine and methionine, [Gly] and [Met] sidechain groups, and the protein backbone group from Dick et al. (2006).
+      The \code{OldAA.csv} file has thermodynamic data for glycine and methionine, [Gly] and [Met] sidechain groups, and the protein backbone group from Dick et al. (2006).
       These data have been superseded in the default OBIGT database in CHNOSZ and are kept here in order to reproduce calculations from some papers (\code{\link{aaaq}}, \code{\link{scsc}}, and \code{\link{bison}}).
     }
 
