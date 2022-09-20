@@ -22,7 +22,7 @@ Plots from the paper by Dick et al. (2022).
   utogigS1(pdf = FALSE)
   utogigS2(pdf = FALSE)
   utogigS4(pdf = FALSE)
-  calc_logaH2_intermediate(class = NULL)
+  calc_logaH2_intermediate(class = NULL, logact = -3)
 }
 
 \arguments{
@@ -56,8 +56,8 @@ This table gives a brief description of each plotting function.
     \item{\file{Topt.csv}}{Optimal growth temperatures (\degC) of methanogens compiled from the literature.}
     \item{\file{methanogen_AA.csv}}{Amino acid compositions of reference proteomes of methanogens. See \file{R/utogig.R} for the code used to make this file.}
     \item{\file{LG88_Fig1.csv}}{H2 concentrations measured in methanogenic and non-methanogenic sediments, from Lovley and Goodwin (1988).}
-    \item{\file{H2_intermediate.csv}}{Intermediate logaH2 (where the slope of affinity vs \ZC is zero) for organic compounds, calculated using \code{calc_logaH2_intermediate}.}
-    \item{\file{H2_intermediate_*.csv}}{Intermediate logaH2 (where the slope of affinity vs \ZC is zero) for different classes of organic compounds (\samp{C1andC2}, \samp{Acid}, \samp{Aminoacid}, \samp{Sugar}, \samp{Nucleobase}, \samp{TCA}).}
+    \item{\file{H2_intermediate_-3.csv}, \file{H2_intermediate_-6.csv}}{Intermediate \logaH2 (where the slope of affinity vs \ZC is zero) for organic compounds, calculated using \code{calc_logaH2_intermediate} with \code{logact} set to -3 or -6.}
+    \item{\file{H2_intermediate_*_-3.csv}}{Intermediate \logaH2 for different classes of organic compounds (\samp{C1andC2}, \samp{Acid}, \samp{Aminoacid}, \samp{Sugar}, \samp{Nucleobase}, \samp{TCA}), all with \code{logact} set to -3.}
     \item{\file{methanogen_tree.txt}}{Hierarchical clustering tree for functional genes of Class I and Class I methanogens. Tree was digitized and modified from Fig. 1 of Lyu and Lu (2018) and is provided in Newick format.}
     \item{\file{Thaumarchaeota_predicted_AA.csv}}{Amino acid compositions for predicted proteomes of basal, terrestrial, and shallow-water groups of Thaumarchaeota (habitats are listed in the \samp{protein} column). Proteins were predicted using Glimmer version 3.02b (Delcher et al., 1999) from the genomes downloaded from NCBI (accession numbers in the \samp{organisms} column).}
     \item{\file{Thaumarchaeota_database_AA.csv}}{Amino acid compositions for proteomes of basal, terrestrial, shallow- and deep-water groups of Thaumarchaeota obtained from IMG (numeric TaxonID in the \samp{organisms} column) or NCBI (alphanumeric accession number in the \samp{organisms} column). Taxon IDs and accession numbers were taken from Table S1 of Ren et al. (2019)}.

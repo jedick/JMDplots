@@ -171,16 +171,21 @@ utogig2 <- function(pdf = FALSE, logact = -3) {
     if(pdf) pdf("Figure_2.pdf", width = 7, height = 6)
     mat <- matrix(c(1,1,2,2,3,3,4, 0,5,5,5,5,0,0), byrow = TRUE, nrow = 2)
     layout(mat, heights = c(1, 0.7), widths = c(1.1,1,1,1,1,1,1))
+    # Activity of H2 to be used with logact = -3
+    # (Second plot has zero slope)
+    logaH2s <- c(-5, -10.262, -15)
   } else {
     if(pdf) pdf("Figure_S3.pdf", width = 7, height = 3.5)
     mat <- matrix(c(1,1,2,2,3,3,4), byrow = TRUE, nrow = 1)
     layout(mat, widths = c(1.1,1,1,1,1,1,1))
+    # Activity of H2 to be used with logact = -6
+    # (Second plot has zero slope)
+    logaH2s <- c(-5, -10.351, -15)
   }
   par(mar = c(4, 4, 0.5, 1), mgp = c(2.7, 1, 0))
 
-  # Set temperature and logaH2 activities
+  # Set temperature
   T <- 25
-  logaH2s <- c(-5, -10.27, -15)
   # Use seawater composition from Amend and Shock (1998)
   # NOTE: H2S is present but is not in any formation reactions 20220403
   basis(c("CO2", "H2", "NH4+", "H2O", "H2S", "H+"), c(Seawater.AS98$CO2, Seawater.AS98$H2, Seawater.AS98$"NH4+", 0, Seawater.AS98$H2S, -Seawater.AS98$pH))
@@ -255,8 +260,8 @@ utogig2 <- function(pdf = FALSE, logact = -3) {
       word <- "linear fit"
       text(-1.53, -95, "Slope of")
     }
-    slopetxt <- bquote(.(word) == .(formatC(slope, digits = 1, format = "f")))
-    if(round(slope, 1) == 0) slopetxt <- "Slope = 0"
+    slopetxt <- bquote(.(word) == .(formatC(slope, digits = 3, format = "f")))
+    if(round(slope, 3) == 0) slopetxt <- "Slope = 0"
     text(-0.5, slopey[ilogaH2], slopetxt)
     # Show R2 20220915
     R2 <- summary(thislm)$r.squared
@@ -318,7 +323,7 @@ utogig2 <- function(pdf = FALSE, logact = -3) {
 
   if(missing(logact)) {
     # Plot intermediate logaH2 20220401
-    intermediate_logaH2()
+    intermediate_logaH2(logact = logact)
     # Add Psat legend 20220629
     legend("bottomright", legend = quote(bolditalic(P)[bold(sat)]), bty = "n")
     label.figure("(b)", cex = 1.5, font = 2)
@@ -549,6 +554,9 @@ utogig4 <- function(pdf = FALSE) {
   dx <- list(c(0, -0.3), c(3.83, 0, -8.6, -1.5), c(0.2, -0.1, 2, -3))
   dy <- list(c(1, 1), c(32, 5, -68, 5), c(1.5, 3, 0, -6))
 
+  # Place to keep logaH2 for printing 20220920
+  logaH2s <- numeric()
+
   for(i in 1:3) {
 
     if(i == 1) {
@@ -644,7 +652,7 @@ utogig4 <- function(pdf = FALSE) {
       # Start plot
       thermo.plot.new(xlim = xlims[[i]], ylim = ylims[[i]], xlab = logaH2lab, ylab = "Mean rank of per-residue affinity", yline = par("mgp")[1] + 0.3)
       # Color reducing and oxidizing areas from organic compounds 20220621
-      file <- "H2_intermediate.csv"
+      file <- "H2_intermediate_-3.csv"
       dat <- read.csv(file.path(system.file("extdata/utogig", package = "JMDplots"), file))
       # Just use 25 degC values
       dat <- dat[dat$T==25, ]
@@ -669,9 +677,11 @@ utogig4 <- function(pdf = FALSE) {
       # Draw line at transition
       itrans <- which.min(abs(arank$values[[trans[[i]][1]]] - arank$values[[trans[[i]][2]]]))
       logaH2 <- arank$vals$H2[itrans]
-      A <- arank$values[[trans[[i]][1]]][itrans]
       ytop1 <- ylims[[i]][2] + diff(ylims[[i]]) * 0.05
-      lines(c(logaH2, logaH2), c(A, ytop1), lty = 2, lwd = 1.5, col = 8, xpd = NA)
+      #A <- arank$values[[trans[[i]][1]]][itrans]
+      #lines(c(logaH2, logaH2), c(A, ytop1), lty = 2, lwd = 1.5, col = 8, xpd = NA)
+      ybot <- ylims[[i]][1]
+      lines(c(logaH2, logaH2), c(ybot, ytop1), lty = 2, lwd = 1.5, col = 8, xpd = NA)
 
       # Calculate pe and Eh (mV)
       pe <- -pH - 0.5*logaH2 - 0.5*logK
@@ -679,6 +689,8 @@ utogig4 <- function(pdf = FALSE) {
       Ehtext <- paste(round(Eh), "mV")
       ytop2 <- ylims[[i]][2] + diff(ylims[[i]]) * 0.1
       text(logaH2, ytop2, Ehtext, xpd = NA)
+
+      logaH2s <- c(logaH2s, logaH2)
 
     }
 
@@ -712,6 +724,10 @@ utogig4 <- function(pdf = FALSE) {
 
   if(pdf) dev.off()
 
+  # Print logaH2s
+  print("logaH2 at dashed lines in (b):")
+  print(round(logaH2s, 1))
+
   # Return P-value table 20220913
   out <- rbind(Ptab1, Ptab2, Ptab3, Ptab4)
   out$p_Tukey <- signif(out$p_Tukey, 2)
@@ -723,10 +739,10 @@ utogig4 <- function(pdf = FALSE) {
 # Plot intermediate logaH2 20220220
 # Add class argument 20220418
 intermediate_logaH2 <- function(class = NULL, add = FALSE, parargs = list(mar = c(4, 4, 1, 1), mgp = c(2.7, 1, 0)),
-  xlim = c(0, 300), ylim = NULL, lines = TRUE, neutral = TRUE, redox = TRUE, pH = TRUE, NH4 = TRUE, pH.y = -9.4, NH4.y = -6.6) {
+  xlim = c(0, 300), ylim = NULL, lines = TRUE, neutral = TRUE, redox = TRUE, pH = TRUE, NH4 = TRUE, pH.y = -9.4, NH4.y = -6.6, logact = -3) {
   if(!add) do.call(par, parargs)
-  file <- "H2_intermediate.csv"
-  if(!is.null(class)) file <- paste0("H2_intermediate_", gsub(" ", "", class), ".csv")
+  file <- paste0("H2_intermediate_", logact, ".csv")
+  if(!is.null(class)) file <- paste0("H2_intermediate_", gsub(" ", "", class), "_", logact, ".csv")
   dat <- read.csv(file.path(system.file("extdata/utogig", package = "JMDplots"), file))
   x <- dat[, "T", drop = FALSE]
   y <- dat[, 2:5]
@@ -808,7 +824,7 @@ intermediate_logaH2 <- function(class = NULL, add = FALSE, parargs = list(mar = 
 
 # Find intermediate logaH2: where affinity vs ZC has a slope of 0  20220219
 # Add class argument (calculate only for single compound class) 20220418
-calc_logaH2_intermediate <- function(class = NULL) {
+calc_logaH2_intermediate <- function(class = NULL, logact = -3) {
 
   # Put species names into vector
   allspecies <- unlist(specieslist)
@@ -824,7 +840,7 @@ calc_logaH2_intermediate <- function(class = NULL) {
   reset()
   basis(c("CO2", "H2", "NH4+", "H2O", "H+"), c(-3, -6, -4, 0, -7))
   # Load formed species
-  species(allspecies, -3)
+  species(allspecies, logact)
   # Species indices of basis and formed species
   basis_and_species <- c(basis()$ispecies, species()$ispecies)
 
@@ -886,8 +902,8 @@ calc_logaH2_intermediate <- function(class = NULL) {
 
   # Save results
   out <- data.frame(T, loN_lopH, loN_hipH, hiN_lopH, hiN_hipH, neutralpH_loN, neutralpH_hiN)
-  file <- "H2_intermediate.csv"
-  if(!is.null(class)) file <- paste0("H2_intermediate_", gsub(" ", "", class), ".csv")
+  file <- paste0("H2_intermediate_", logact, ".csv")
+  if(!is.null(class)) file <- paste0("H2_intermediate_", gsub(" ", "", class), "_", logact, ".csv")
   write.csv(out, file, row.names = FALSE, quote = FALSE)
 
 }
