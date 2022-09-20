@@ -334,8 +334,10 @@ utogig2 <- function(pdf = FALSE, logact = -3) {
   # Print p-values
   if(missing(logact)) {
     print("p-values for (a):")
-    print(signif(pvals, 2))
+  } else {
+    print("p-values:")
   }
+  print(signif(pvals, 2))
 
 }
 

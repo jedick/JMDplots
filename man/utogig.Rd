@@ -45,9 +45,12 @@ This table gives a brief description of each plotting function.
 }
 
 \code{utogig3(logact = -6)} is used to make Figure S3.
+\code{utogig3() and utogig3(logact -6)} print p-values that are used to make Table S5.
+\code{utogig4()} returns an invisible data frame of p-values that is used to make Table S6 and prints values of \logaH2 retrieved from the thermodynamic analysis in Figure 4b.
 
-\code{calc_logaH2_intermediate} is used to find intermediate logaH2, where affinity vs ZC has a slope of 0, for a group of organic compounds.
-\code{class} gives the class of compounds to consider (see description of \file{H2_intermediate_*.csv} files below), or NULL to consider compounds in all classes at once.
+\code{calc_logaH2_intermediate} is used to find intermediate \logaH2, where affinity vs ZC has a slope of 0, for a group of organic compounds.
+\code{class} gives the class of compounds to consider , or NULL to consider compounds in all classes at once.
+The output is saved in files named \file{H2_intermediate_*.csv} (see description below), which are used for making some of the plots.
 
 }
 
