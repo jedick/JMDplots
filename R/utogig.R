@@ -18,7 +18,7 @@ logaH2lab <- quote(bold(log)~bolditalic(a)[bold(H[2])])
 logaNH4lab <- quote(bold(log)~bolditalic(a)[bold(NH[4]^"+")])
 nH2Olab <- quote(bolditalic(n)[bold(H[2]*O)])
 
-# Identify species used in Shock and Canovas (2010)
+# Identify species used in Shock & Canovas (2010)
 # Used in Energy() and calc_logaH2_intermediate()
 specieslist <- list(
   "C1 and C2" = c("CH4", "methanol", "formaldehyde", "CO", "formic acid",
@@ -31,7 +31,7 @@ specieslist <- list(
   "TCA cycle" = c("pyruvate", "oxaloacetate-2", "citrate-3", "cis-aconitate-3", "isocitrate-3", "a-ketoglutarate-2", "succinate-2", "fumarate-2", "malate-2")
 )
 
-# Get seawater from Amend and Shock (1998)
+# Get seawater from Amend & Shock (1998)
 Seawater.AS98 <- data.frame(T = 18, CO2 = log10(1e-4), H2 = log10(2e-9), pH = -log10(5e-9), "NH4+" = log10(5e-8), H2S = log10(1e-15), check.names = FALSE)
 
 # Make semi-transparent colors 20220223
@@ -186,7 +186,7 @@ utogig2 <- function(pdf = FALSE, logact = -3) {
 
   # Set temperature
   T <- 25
-  # Use seawater composition from Amend and Shock (1998)
+  # Use seawater composition from Amend & Shock (1998)
   # NOTE: H2S is present but is not in any formation reactions 20220403
   basis(c("CO2", "H2", "NH4+", "H2O", "H2S", "H+"), c(Seawater.AS98$CO2, Seawater.AS98$H2, Seawater.AS98$"NH4+", 0, Seawater.AS98$H2S, -Seawater.AS98$pH))
   # Position of slope text
@@ -495,7 +495,7 @@ utogig3 <- function(pdf = FALSE) {
   rect(x1, y1, x2, y2, col = "#C5E1A540", border = "green4")
   text(mean(c(x1, x2)), mean(c(y1, y2)), "Lost City", col = "green4")
 
-  # Add lines for sediments (Lovley and Goodwin, 1988) 20220303
+  # Add lines for sediments (Lovley & Goodwin, 1988) 20220303
   sediment <- read.csv(system.file("extdata/utogig/LG88_Fig1.csv", package = "JMDplots"))
   for(i in 1:nrow(sediment)) {
     if(sediment$type[i] == "Methane") col <- "green4" else col <- "gray40"
@@ -580,7 +580,7 @@ utogig4 <- function(pdf = FALSE) {
       text(1, -0.12, "Anoxic\nhabitats", font = 2, cex = 0.8)
       text(2, -0.12, "Anoxic\nand oxic\nhabitats", font = 2, cex = 0.8)
       abline(v = 1.5, lty = 2, lwd = 1.5, col = 8)
-      title("Methanogens\n(Lyu and Lu, 2018)", font.main = 1, cex.main = 1)
+      title("Methanogens\n(Lyu & Lu, 2018)", font.main = 1, cex.main = 1)
       label.figure("(a)", cex = 1.5, font = 2, xfrac = 0.06)
       # Get the species in each group
       groups <- list("Class I" = iI, "Class II" = iII)
@@ -633,8 +633,8 @@ utogig4 <- function(pdf = FALSE) {
       bp <- boxplot(ZClist, ylab = ZClab, col = col, ylim = ylim, names = character(4))
       cldfun(ZClist, bp, dy = 0.006)
       axis(1, at = 1:4, labels = names(ZClist), line = 1, lwd = 0, gap.axis = 0)
-      text(0.9, -0.12, hyphen.in.pdf("Pre-GOE\nemergence"), font = 2, cex = 0.8)
-      text(2.1, -0.12, hyphen.in.pdf("Post-GOE\nemergence"), font = 2, cex = 0.8)
+      text(0.9, -0.12, hyphen.in.pdf("Pre-GOE\norigin"), font = 2, cex = 0.8)
+      text(2.1, -0.12, hyphen.in.pdf("Post-GOE\norigin"), font = 2, cex = 0.8)
       abline(v = 1.5, lty = 2, lwd = 1.5, col = 8)
       title("Thaumarchaeota\n(Ren et al., 2019)", font.main = 1, cex.main = 1)
       # Get the species in each group
@@ -709,7 +709,7 @@ utogig4 <- function(pdf = FALSE) {
   # Make rotated labels (modified from https://www.r-bloggers.com/rotated-axis-labels-in-r-plots/)
   text(x = 1:4, y = par()$usr[3] - 2 * strheight("A"), labels = groupnames, srt = 45, adj = 1, xpd = TRUE)
   axis(1, at = 1:4, labels = NA)
-  title("Thaumarchaeota", font.main = 1, cex.main = 1)
+  title("Thaumarchaeota\n(Ren et al., 2019)", font.main = 1, cex.main = 1)
   label.figure("(c)", cex = 1.5, font = 2, xfrac = 0.06)
   Ptab4 <- KWvsANOVA(nH2Olist)
   Ptab4 <- cbind(Variable = "Thaumarchaeota nH2O", Ptab4)

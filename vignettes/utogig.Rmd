@@ -52,6 +52,7 @@ ZC <- "<i>Z</i><sub>C</sub>"
 logaH2 <- "log<i>a</i><sub>H<sub>2</sub></sub>"
 logfH2 <- "log<i>f</i><sub>H<sub>2</sub></sub>"
 logfO2 <- "log<i>f</i><sub>O<sub>2</sub></sub>"
+pH2 <- "<i>p</i><sub>H<sub>2</sub></sub>"
 ```
 
 This vignette runs the code to make the plots from the following paper:
@@ -69,14 +70,14 @@ library(JMDplots)
 utogig1()
 ```
 
-**Data sources:** Hierarchical clustering tree of methanogenesis genes [@LL18]; `r ZC` calculated for reference proteomes [@DT22] based on RefSeq protein sequences [@OWB+16]. See Table 1 in the paper for references for optimal growth temperature (*T*~opt~).
+**Data sources:** Hierarchical clustering tree of methanogenesis genes [@LL18]; `r ZC` calculated for reference proteomes [@DT22] based on RefSeq protein sequences [@OWB+16]. See Table S1 in the paper's Supplementary Information for references for optimal growth temperature (*T*~opt~).
 
 ## Relative stabilities of organic compounds depend on redox conditions (Figure 2)
 ```{r utogig2, message = FALSE, out.width='100%', fig.width = 7, fig.height = 6, pngquant = pngquant, dpi = 100}
 utogig2()
 ```
 
-**Data sources:** List of organic compounds from @SC10 and TCA cycle metabolites from @CS16. See Table 2 in the paper for references for thermodynamic data.
+**Data sources:** List of organic compounds from @SC10 and TCA cycle metabolites from @CS16. See Table 1 in the paper for references for thermodynamic data.
 
 ## Thermodynamic model for methanogen niche partitioning (Figure 3)
 ```{r utogig3, message = FALSE, out.width='100%', fig.width = 7, fig.height = 5, out.extra = 'class="full-width"', pngquant = "--speed=1 --quality=25-50", dpi = 100}
@@ -121,31 +122,34 @@ utogig2(logact = -6)
 utogigS4()
 ```
 
-## Convert `r logaH2` to `r logfH2`, `r logfO2`, and Eh
-```{r utogig_H2_Eh, message = FALSE}
+## Convert `r logaH2` to Eh
+```{r utogig_logaH2_Eh, message = FALSE}
 logaH2_15 <- -15
 pH <- 7
-logK1 <- subcrt(c("H2", "hydrogen"), c(-1, 1), T = 25)$out$logK
-logfH2 <- logK1 + logaH2_15
-logK3 <- subcrt(c("H2O", "H2", "oxygen"), c(-1, 1, 0.5), T = 25)$out$logK
-logfO2 <- 2 * (logK3 - logaH2_15)
-logK3 <- subcrt(c("H2", "H+", "e-"), c(-1, 2, 2), T = 25)$out$logK
-pe <- (- logK3 - 2 * pH - logaH2_15) / 2
+(logK1 <- subcrt(c("H2", "H+", "e-"), c(-1, 2, 2), T = 25)$out$logK)
+pe <- (- logK1 - 2 * pH - logaH2_15) / 2
 Eh <- convert(pe, "Eh")
-print(paste0("Given logaH2 = ", logaH2_15, ", logfH2 = ", round(logfH2, 1), " at equilibrium"))
-print(paste0("Given logaH2 = ", logaH2_15, ", logfO2 = ", round(logfO2, 1), " at equilibrium"))
 print(paste0("Given logaH2 = ", logaH2_15, " and pH = ", pH, ", Eh = ", round(1000 * Eh), " mV at equilibrium"))
 ```
 
-## Convert hydrogen partial pressure to `r logaH2`
-```{r utogig_H2_H2, message = FALSE}
-logK <- subcrt(c("hydrogen", "H2"), c(-1, 1), T = 25)$out$logK
-# For 10^-2 pH2
+## Convert `r pH2` to `r logaH2`
+```{r utogig_pH2_logaH2, message = FALSE}
+(logK2 <- subcrt(c("H2", "hydrogen"), c(-1, 1), T = 25)$out$logK)
+# pH2 = 10^-2
 logpH2 <- -2
-print(paste0("Given logpH2 = ", logpH2, ", logaH2 = ", round(logpH2 + logK, 1), " at equilibrium"))
-# For 0.55 ppmv H2
+print(paste0("Given logpH2 = ", logpH2, ", logaH2 = ", round(logpH2 - logK2, 1), " at equilibrium"))
+# 0.55 ppmv H2
 logpH2 <- log10(0.55e-6)
-print(paste0("Given logpH2 = ", round(logpH2, 2), ", logaH2 = ", round(logpH2 + logK, 1), " at equilibrium"))
+print(paste0("Given logpH2 = ", round(logpH2, 2), ", logaH2 = ", round(logpH2 - logK2, 1), " at equilibrium"))
+```
+
+## Convert `r logaH2` to `r logfH2` and `r logfO2`
+```{r utogig_logaH2_logf, message = FALSE}
+(logK3 <- subcrt(c("H2O", "oxygen", "hydrogen"), c(-1, 0.5, 1), T = 25)$out$logK)
+logfH2 <- logaH2_15 + logK2
+logfO2 <- 2 * (logK3 - logfH2)
+print(paste0("Given logaH2 = ", logaH2_15, ", logfH2 = ", round(logfH2, 1), " at equilibrium"))
+print(paste0("Given logaH2 = ", logaH2_15, ", logfO2 = ", round(logfO2, 1), " at equilibrium"))
 ```
 
 ## References
