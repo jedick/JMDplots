@@ -97,7 +97,7 @@ importFrom("CHNOSZ",
   # fourth batch: aoscp
   "nucleic.formula", "convert", "protein.length", "read.fasta",
   # fifth batch: scsc
-  "add.protein", "label.plot",
+  "aasum", "add.protein", "label.plot",
   # sixth batch: aaaq
   "water.lines", "pinfo", "ionize.aa",
   # bison
