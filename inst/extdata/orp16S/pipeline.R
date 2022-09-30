@@ -46,7 +46,7 @@
 ## STUDY SETTINGS
 
 # Change the following line to setup the pipeline for one study
-study <- "GSBT20"
+study <- "MCR+22"
 # Settings for all studies are stored here
 file <- tempfile()
 # Write spaces here (but don't save them) to make this easier to read
@@ -120,7 +120,14 @@ writeLines(con = file, text = gsub(" ", "", c(
   "RKN+17, TRUE, 300",
   "ZLH+22, FALSE, 290",
   "LWJ+21, FALSE, 250",
-  "ZDW+19, TRUE, 400"
+  "ZDW+19, TRUE, 400",
+
+  # 20220622-20220705
+  "WKG+22, FALSE, 440",
+  "CLZ+22, TRUE, 290",
+  "RARG22, FALSE, 250",
+  # 20220917
+  "MCR+22, FALSE, 290"
 
   # For RSS+18 (Lake Hazen):
   #  - FASTQ files were downloaded from NCBI cloud
@@ -329,9 +336,6 @@ subsample <- function(do.singletons = TRUE) {
     }
     subsamptxt <- paste("Subsampled", nout, "of", nseq, "sequences")
     print(subsamptxt)
-    # Save messages about number of subsampled sequences
-    txtfile <- file.path(FASTAdir, paste0(thisRUNID, ".txt"))
-    writeLines(subsamptxt, txtfile)
   }
 
   # Clean up
