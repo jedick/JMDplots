@@ -39,3 +39,9 @@ cldfun <- function(ZClist, bp, dy) {
   text((1:n) + 0.35, bp$stats[4, ] + dy, cld)
 }
 
+# To get hyphen instead of minus sign 20220630
+# https://stackoverflow.com/questions/10438398/any-way-to-disable-the-minus-hack-in-pdf-poscript-output
+hyphen.in.pdf <- function(x) {
+  # We only want to make the substitution in a pdf device (won't work in png, e.g. for knitr vignettes)
+  if(identical(names(dev.cur()), "pdf")) gsub("-", "\uad", x, fixed = TRUE) else x
+}

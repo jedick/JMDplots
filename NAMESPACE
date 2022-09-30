@@ -77,7 +77,9 @@ export(
   # utilities 20220609
   "cldfun",
   # orp16S paper 20220611
-  "orp16S_S3"
+  "orp16S_S3",
+  # utilities 20220930
+  "hyphen.in.pdf"
 )
 
 # Imports from CHNOSZ

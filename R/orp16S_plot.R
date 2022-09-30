@@ -114,7 +114,7 @@ plotEZ <- function(study, lineage = NULL, mincount = 100, pch = NULL, col = NULL
     mtext("Eh7 (mV)", side = 1, line = par("mgp")[1], cex = par("cex"))
     if(!is.null(title.line)) {
       main <- paste0(name, " (", root, ")")
-      title(main = main, font.main = 1, line = title.line)
+      title(main = hyphen.in.pdf(main), font.main = 1, line = title.line)
       # Include suffix in subtite 20210914
       if(!is.na(suffix)) sub <- paste(sub, "-", suffix)
       # Add lineage 20210913

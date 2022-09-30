@@ -78,13 +78,6 @@ mcol[iII] <- col4
 #methanogen_AA <- refseq[irefseq, ]
 #write.csv(methanogen_AA, "methanogen_AA.csv", row.names = FALSE, quote = FALSE)
 
-# To get hyphen instead of minus sign 20220630
-# https://stackoverflow.com/questions/10438398/any-way-to-disable-the-minus-hack-in-pdf-poscript-output
-hyphen.in.pdf <- function(x) {
-  # We only want to make the substitution in a pdf device (won't work in png, e.g. for knitr vignettes)
-  if(identical(names(dev.cur()), "pdf")) gsub("-", "\uad", x, fixed = TRUE) else x
-}
-
 # Chemical analysis of reference proteomes of methanogens reveals adaptation to redox conditions 20210516
 utogig1 <- function(pdf = FALSE) {
 

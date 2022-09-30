@@ -4,6 +4,7 @@
 \alias{addexif}
 \alias{addalpha}
 \alias{cldfun}
+\alias{hyphen.in.pdf}
 \title{Some Utilities for the Package}
 \description{
   Utility functions for the package.
@@ -13,6 +14,7 @@
   addexif(name, title, paperref)
   addalpha(col, alpha)
   cldfun(ZClist, bp, dy)
+  hyphen.in.pdf(x)
 }
 
 \arguments{
@@ -24,6 +26,7 @@
   \item{ZClist}{list, values of \ZC}
   \item{bp}{output of \code{\link{boxplot}}}
   \item{dy}{numeric, how far above box to plot letters}
+  \item{x}{character, any text object}
 }
 
 \details{
@@ -35,4 +38,7 @@ If \samp{exiftool} is not available, this function does nothing.
 
 \code{cldfun} adds significant difference letters to a boxplot.
 \code{ZClist} should have the values of \ZC with names for each group.
+
+If a PDF device is active, \code{hyphen.in.pdf} replaces all instances of ASCII hyphen (\verb{-}) in \code{x} with the Unicode hyphen (\verb{\uad}).
+This is done so that hyphens don't get displayed as minus signs in R graphics output, but it only works for the PDF device.
 }
