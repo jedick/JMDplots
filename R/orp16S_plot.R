@@ -135,10 +135,16 @@ plotEZ <- function(study, lineage = NULL, mincount = 100, pch = NULL, col = NULL
     pearson <- cor.test(EZdat$Eh7, EZdat$ZC, method = "pearson")
 
     if(!is.null(slope.legend)) {
-      # Round to fixed number of decimal places
+      # Format number of samples 20221001
+      ntext <- bquote(italic(N) == .(nrow(EZdat)))
+      # Format correlation coefficient 20221001
+      rtext <- formatC(pearson$estimate, digits = 2, format = "f")
+      rtext <- bquote(italic(r) == .(rtext))
+      # Format slope
       slopenum <- formatC(slope, digits = 3, format = "f")
       stext <- bquote(.(slopenum)~V^-1)
-      legend(slope.legend, legend = stext, bty = "n")
+      ltext <- c(ntext, rtext, stext)
+      legend(slope.legend, legend = ltext, bty = "n")
     }
 
   }
@@ -167,10 +173,14 @@ plotEZ <- function(study, lineage = NULL, mincount = 100, pch = NULL, col = NULL
         } 
       }
     }
-    legend <- as.expression(legend.expr)
-    legend(legend.x, legend, pch = pchtype, col = orp16Scol[coltype], pt.bg = orp16Scol[coltype], title = groupby, cex = 0.9)
+
+    # Make legend only for groups that are in the plot 20221001
+    isgroup <- groups %in% metadata[, icol]
+    legend <- as.expression(legend.expr[isgroup])
+    legend(legend.x, legend, pch = pchtype[isgroup], col = orp16Scol[coltype][isgroup], pt.bg = orp16Scol[coltype][isgroup], title = groupby, cex = 0.9)
     # Add sample type (group) to output
     EZdat <- cbind(groupby = groupby, group = metadata[, icol], EZdat)
+
   } else {
     EZdat <- cbind(groupby = NA, group = NA, EZdat)
   }

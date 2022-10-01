@@ -95,7 +95,7 @@ orp16S1 <- function(pdf = FALSE) {
   # Use this to get rounded corners 20210927
   for(fill in c("white", Orange80)) grid.roundrect(0.5, 0.7, 0.205, 0.23, gp = gpar(fill = fill))
   text(50, 67+dy, quote(bold(C[bolditalic(c)]*H[bolditalic(h)]*N[bolditalic(n)]*O[bolditalic(o)]*S[bolditalic(s)])), col = OrangeText)
-  text(50, 58+dy, "Estimated\nCommunity\nProteomes")
+  text(50, 58+dy, "Community\nReference\nProteomes")
 
   # Plot arrows and text labels
   arrows(1*third - 1, 20+dy, 1*third + 6, 20+dy, code = 1, lty = 1, length = 0.1)
@@ -653,6 +653,82 @@ orp16S5 <- function(pdf = FALSE) {
 
 }
 
+# Comparison of 16S-based community reference proteomes with metaproteomes 20220930
+orp16S6 <- function(pdf = FALSE) {
+
+  if(pdf) pdf("Figure_6.pdf", width = 8, height = 6)
+  par(mfrow = c(1, 2))
+  ylim <- c(-0.16, -0.09)
+
+  # Plot a: ZC vs Eh for 16S data
+  groups <- c("A crust", "C crust", "G crust", "M crust")
+  plotEZ("LH21", groupby = "Type", groups = groups, title.line = NULL, slope.legend = "bottomright",
+    ylim = ylim, ylab = quote(italic(Z)[C]~"of community reference proteome"))
+  # Collection date is from BioSample data for PRJNA640847
+  title("16S rRNA gene sequencing of biocrusts\ncollected in September 2017", font.main = 1)
+
+  # Plot b: ZC vs Eh for metaproteome
+  # Amino acid composition and ZC
+  aa <- read.csv(system.file("extdata/orp16S/HWLH22_aa.csv", package = "JMDplots"))
+  ZC <- ZCAA(aa)
+  # Index the biocrust types
+  biocrust <- substr(aa$organism, 1, 1)
+  i <- sapply(biocrust, switch, A = 1, C = 2, G = 3, M = 4)
+  # pH and Eh values from Supplementary Table 2 of Han et al., 2022
+  # June 2018
+  pHs <- c(7.91, 7.69, 7.46, 7.87)
+  Ehs <- c(384.23, 392.27, 385.71, 400.55)
+  ## September 2018
+  #pHs <- c(7.90, 7.54, 7.49, 8.07)
+  #Ehs <- c(376.56, 390.25, 476.66, 394.68)
+  # Calculate Eh7
+  Eh7s <- Ehs + -59.16 * (7 - pHs)
+  Eh7 <- Eh7s[i]
+  # Get points and colors
+  pchs <- 21:24
+  pch <- pchs[i]
+  cols <- orp16Scol[1:4]
+  col <- cols[i]
+
+  # The following is adapted from plotEZ()
+  # Start new plot
+  plot(Eh7, ZC, xlab = "", type = "n",
+    ylim = ylim, ylab = quote(italic(Z)[C]~"of peptides from metaproteome"))
+  # Draw x-axis label with mtext to avoid getting cut off by small margin 20220517
+  mtext("Eh7 (mV)", side = 1, line = par("mgp")[1], cex = par("cex"))
+  points(Eh7, ZC, pch = pch, col = col, bg = col)
+
+  # Add linear fit
+  EZdat <- data.frame(Eh7, ZC)
+  EZlm <- lm(ZC ~ Eh7, EZdat)
+  Eh7lim <- range(EZlm$model$Eh7)
+  ZCpred <- predict.lm(EZlm, data.frame(Eh7 = Eh7lim))
+  # Use solid or dashed line to indicate large or small slope 20210926
+  slope <- EZlm$coefficients[2] * 1e3
+  if(is.na(slope)) lty <- 3 else if(abs(slope) < 0.01) lty <- 2 else lty <- 1
+  lines(Eh7lim, ZCpred, lty = lty)
+  # Calculate Pearson correlation 20220520
+  pearson <- cor.test(EZdat$Eh7, EZdat$ZC, method = "pearson")
+  # Format number of samples
+  ntext <- bquote(italic(N) == .(length(ZC)))
+  # Format correlation coefficient
+  rtext <- formatC(pearson$estimate, digits = 2, format = "f")
+  rtext <- bquote(italic(r) == .(rtext))
+  # Format slope
+  slopenum <- formatC(slope, digits = 3, format = "f")
+  stext <- bquote(.(slopenum)~V^-1)
+  ltext <- c(ntext, rtext, stext)
+  legend("bottomright", legend = ltext, bty = "n")
+
+  # Add legend
+  legend("topleft", legend = groups, pch = pchs, col = cols, pt.bg = cols, title = "Type", cex = 0.9)
+  # Collectoin date is from https://www.iprox.cn/page/project.html?id=IPX0003299000
+  title("Metaproteome of biocrusts\ncollected in June 2018", font.main = 1)
+
+  if(pdf) dev.off()
+
+}
+
 # Figure S2: ZC-Eh scatterplots for all studies 20210827
 # This also creates files EZdat (Eh and ZC values) and
 # EZlm (linear fits) for use by other plotting functions
@@ -961,7 +1037,7 @@ getmdat_orp16S <- function(study, metrics = NULL, dropNA = TRUE, size = NULL, qu
     "LJC+20", "DLS21", "ZZLL21", "GWS+20", "CLS+19", "GZL21", "LLC+19", "NLE+21", "APV+20", "WHLH21",
     "PCL+18", "GSBT20", "SPA+21", "IBK+22", "HSF+22", "HCW+22", "WKP+22", "CKB+22", "WHLH21a", "RSS+18",
     "PSB+21", "RKSK22", "WLJ+16", "DJK+18", "OHL+18", "ZLH+22", "LWJ+21", "MGW+22", "RKN+17", "ZDW+19",
-    "WKG+22", "CLZ+22", "RARG22", "MCR+22"
+    "WKG+22", "CLZ+22", "RARG22", "MCR+22", "LH21"
   )) {
     # General processing of metadata for orp16S datasets 20210820
     # Get Eh or ORP values (uses partial name matching, can match a column named "Eh (mV)")

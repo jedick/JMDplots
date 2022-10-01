@@ -6,6 +6,7 @@
 \alias{orp16S3}
 \alias{orp16S4}
 \alias{orp16S5}
+\alias{orp16S6}
 \alias{orp16S_S1}
 \alias{orp16S_S2}
 \alias{orp16S_S3}
@@ -25,6 +26,7 @@ Plots from the paper by Dick and Meng (2021).
   orp16S3(pdf = FALSE)
   orp16S4(pdf = FALSE)
   orp16S5(pdf = FALSE)
+  orp16S6(pdf = FALSE)
   orp16S_S1(pdf = FALSE)
   orp16S_S2(pdf = FALSE)
   orp16S_S3(global.slopes, pdf = FALSE)
@@ -56,6 +58,7 @@ This table gives a brief description of each plotting function.
   \code{orp16S3} \tab Sample locations on world map \cr
   \code{orp16S4} \tab Linear regressions between Eh7 and \ZC at local scales \cr
   \code{orp16S5} \tab Linear regressions between Eh7 and \ZC at a global scale \cr
+  \code{orp16S6} \tab Comparison of 16S-based community reference proteomes with metaproteomes \cr
   \code{orp16S_S1} \tab Eh-pH diagram (outline from Baas Becking et al., 1960) \cr
   \code{orp16S_S2} \tab \ZC-Eh scatterplots for each dataset \cr
   \code{orp16S_S3} \tab Regresssion slopes from local to global scale \cr
@@ -93,6 +96,7 @@ The function also returns information in a data frame, which is used to fill in 
     \item{\file{EZdat.csv}}{Data for all samples, created by \code{orp16S_S2}.}
     \item{\file{EZlm.csv}}{Linear fits between Eh7 and \ZC for each dataset created by \code{orp16S_S2}.}
     \item{\file{BKM60.csv}}{Outline of Eh-pH range of natural environments, digitized from Fig. 32 of Baas Becking et al. (1960).}
+    \item{\file{HWLH22_aa.csv}}{Sum of amino acid composition of all peptides in each sample from the metaproteomic study of Han et al. (2022).}
   }
 }
 
@@ -110,6 +114,8 @@ The function also returns information in a data frame, which is used to fill in 
 Baas Becking, L. G. M., Kaplan, I. R. and Moore, D. (1960) Limits of the natural environment in terms of pH and oxidation-reduction potentials. \emph{Journal of Geology} \bold{68}, 243--284. \url{https://www.jstor.org/stable/30059218}
 
 Dick, J. M. and Meng, D. (2021) Local and global chemical shaping of bacterial communities by redox potential. bioRxiv. \doi{10.1101/2021.10.12.464155}
+
+Han, Y., Wang, Q., Li, Q. and Hu, C. (2022) Active metabolism and biomass dynamics of biocrusts are shaped by variation in their successional state and seasonal energy sources. \emph{Science of the Total Environment} \bold{831}, 154756. \doi{10.1016/j.scitotenv.2022.154756}
 
 USGS (2010) Great Lakes and Watersheds Shapefiles. ScienceBase Catalog, U.S. Geological Survey. \doi{https://www.sciencebase.gov/catalog/item/530f8a0ee4b0e7e46bd300dd}
 }
