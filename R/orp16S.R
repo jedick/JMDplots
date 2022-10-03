@@ -665,7 +665,7 @@ orp16S6 <- function(pdf = FALSE) {
   plotEZ("LH21", groupby = "Type", groups = groups, title.line = NULL, slope.legend = "bottomright",
     ylim = ylim, ylab = quote(italic(Z)[C]~"of community reference proteome"))
   # Collection date is from BioSample data for PRJNA640847
-  title("16S rRNA gene sequencing of biocrusts\ncollected in September 2017", font.main = 1)
+  title("16S rRNA gene sequences of biocrusts\ncollected in September 2017", font.main = 1)
 
   # Plot b: ZC vs Eh for metaproteome
   # Amino acid composition and ZC
@@ -723,7 +723,7 @@ orp16S6 <- function(pdf = FALSE) {
   # Add legend
   legend("topleft", legend = groups, pch = pchs, col = cols, pt.bg = cols, title = "Type", cex = 0.9)
   # Collectoin date is from https://www.iprox.cn/page/project.html?id=IPX0003299000
-  title("Metaproteome of biocrusts\ncollected in June 2018", font.main = 1)
+  title("Metaproteomes of biocrusts\ncollected in June 2018", font.main = 1)
 
   if(pdf) dev.off()
 
@@ -847,10 +847,9 @@ orp16S_S2 <- function(pdf = FALSE) {
   lineage <- sapply(results[names(results) == "lineage"], "[")
   nsamp <- sapply(model, nrow)
   pearson.r <- unlist(lapply(results[names(results) == "pearson"], "[[", "estimate"))
-  P.value <- unlist(lapply(results[names(results) == "pearson"], "[[", "p.value"))
   # Note: slope is mutiplied by 1e3 to convert from mV-1 to V-1
   EZlm <- data.frame(study, name, envirotype, lineage, nsamp, Eh7min, Eh7max,
-    slope = signif(slope * 1e3, 6), intercept = signif(intercept, 6), pearson.r = signif(pearson.r, 6), P.value = signif(P.value, 6))
+    slope = signif(slope * 1e3, 6), intercept = signif(intercept, 6), pearson.r = signif(pearson.r, 6))
   # Save data and results to files
   write.csv(EZdat, "EZdat.csv", row.names = FALSE, quote = FALSE)
   write.csv(EZlm, "EZlm.csv", row.names = FALSE, quote = 2)
@@ -899,16 +898,10 @@ add.linear <- function(xvals, ZC, nstudy = NA, xvar = "Eh7", N_slope.legend.x = 
 
   # Calculate Pearson correlation 20211009
   pearson <- cor.test(xvals, ZC, method = "pearson")
-  # Get P-value
-  pval <- pearson$p.value
   # Format correlation coefficient
   rtext <- formatC(pearson$estimate, digits = 2, format = "f")
   rtext <- bquote(italic(r) == .(rtext))
-  # Format P-value
-  ptext <- formatC(signif(pval, 1))
-  ptext <- bquote(italic(P) == .(ptext))
-  ltext <- c(rtext, ptext)
-  legend("bottomright", legend = ltext, bty = "n", text.col = text.col)
+  legend("bottomright", legend = rtext, bty = "n", text.col = text.col)
   # Return slope 20220611
   slopeval
 }
@@ -1029,6 +1022,12 @@ getmdat_orp16S <- function(study, metrics = NULL, dropNA = TRUE, size = NULL, qu
     Molecule <- sapply(strsplit(study, "_"), "[", 2)
     if(!is.na(Molecule)) metadata <- metadata[metadata$Molecule == Molecule, ]
     shortstudy <- "OHL+18"
+  }
+  if(grepl("WHLH21a", study)) {
+    # WHLH21a, WHLH21a_Jun, WHLH21a_Sep
+    Month <- sapply(strsplit(study, "_"), "[", 2)
+    if(!is.na(Month)) metadata <- metadata[grepl(Month, metadata$LibraryName), ]
+    shortstudy <- "WHLH21a"
   }
   if(shortstudy %in% c(
     "MLL+19", "HXZ+20", "BCA+21", "RMB+17", "SBP+20", "MWY+21", "SAR+13", "CTS+17", "HDZ+19", "ZHZ+19",
