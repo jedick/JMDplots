@@ -25,7 +25,7 @@ Plots from the paper by Dick and Meng (2021).
   orp16S2(pdf = FALSE)
   orp16S3(pdf = FALSE)
   orp16S4(pdf = FALSE)
-  orp16S5(pdf = FALSE)
+  orp16S5(pdf = FALSE, EMP_primers = FALSE)
   orp16S6(pdf = FALSE)
   orp16S_S1(pdf = FALSE)
   orp16S_S2(pdf = FALSE)
@@ -39,6 +39,7 @@ Plots from the paper by Dick and Meng (2021).
 
 \arguments{
   \item{pdf}{logical, make a PDF file?}
+  \item{EMP_primers}{logical, include only datasets using Earth Microbime Project primers (515F/806R)?}
   \item{global.slopes}{value returned by \code{orp16S5}}
   \item{study}{character, study name}
   \item{metrics}{data frame, output of \code{\link[chem16S]{getmetrics}}}
@@ -57,7 +58,7 @@ This table gives a brief description of each plotting function.
   \code{orp16S2} \tab Chemical depth profiles in Winogradsky columns \cr
   \code{orp16S3} \tab Sample locations on world map \cr
   \code{orp16S4} \tab Linear regressions between Eh7 and \ZC at local scales \cr
-  \code{orp16S5} \tab Linear regressions between Eh7 and \ZC at a global scale \cr
+  \code{orp16S5} \tab Linear regressions between Eh7 and \ZC at a global scale. Set \code{EMP_primers} to TRUE to make Figure S5. \cr
   \code{orp16S6} \tab Comparison of 16S-based community reference proteomes with metaproteomes \cr
   \code{orp16S_S1} \tab Eh-pH diagram (outline from Baas Becking et al., 1960) \cr
   \code{orp16S_S2} \tab \ZC-Eh scatterplots for each dataset \cr

@@ -131,7 +131,7 @@ orp16S2 <- function(pdf = FALSE) {
   lines(Eh7, MODdepth, type = "b", pch = 19)
   text(50, -2.3, "Eh7")
   text(650, -2.3, "Eh")
-  label.figure("A", font = 2, cex = 1.5)
+  label.figure("a", font = 2, cex = 1.5)
 
   # Get 16S metadata and chemical metrics for Rundell et al. (2014) experiments
   metrics.in <- getmetrics_orp16S("RBW+14")
@@ -150,7 +150,7 @@ orp16S2 <- function(pdf = FALSE) {
     text(-0.182, i - 0.25, label, adj = 1)
   }
   par(xpd = FALSE)
-  label.figure("B", font = 2, cex = 1.5)
+  label.figure("b", font = 2, cex = 1.5)
 
   # Reset layout to make orp16S3 in the examples run nicely 20211011
   if(pdf) dev.off() else layout(1)
@@ -341,7 +341,7 @@ orp16S4 <- function(pdf = FALSE) {
   plotEZ("WHLH21", "Bacteria", groupby = "Position", groups = c("Surface", "Middle", "Bottom"),
     legend.x = "bottomleft", title.line = NULL, dxlim = c(-20, 0), slope.legend = "right")
   title("Daya Bay\n(Sediment bacteria)", font.main = 1)
-  label.figure("A", font = 2, cex = 1.8, yfrac = 0.9)
+  label.figure("a", font = 2, cex = 1.8, yfrac = 0.9)
   # Bay of Biscay (Sediment)
   plotEZ("LMBA21_2017", "Bacteria", groupby = "Season", groups = c("Summer", "Winter"),
     legend.x = "bottomright", title.line = NULL, dxlim = c(0, 170), slope.legend = "bottom")
@@ -377,7 +377,7 @@ orp16S4 <- function(pdf = FALSE) {
   ltext <- names(envirotype)[i1[3:4]]
   legend("bottomright", ltext, pch = 19, col = orp16Scol[i1[3:4]])
   title("Linear regressions for bacterial communities\nin each dataset", font.main = 1, xpd = NA, line = 0.7)
-  label.figure("B", font = 2, cex = 1.8, yfrac = 1.05)
+  label.figure("b", font = 2, cex = 1.8, yfrac = 1.05)
   # Groundwater, sediment, soil
   plot(xlim, ylim, type = "n", xlab = quote(log[10]~"(Number of samples)"), ylab = quote("Slope of linear fit"~(V^-1)))
   abline(h = 0, lty = 2, lwd = 1.5, col = "gray50")
@@ -433,7 +433,7 @@ orp16S4 <- function(pdf = FALSE) {
     }
     title(paste0("Hot spring\n", tolower(lineages[k])), font.main = 1, xpd = NA, line = 0.7)
     if(k==1) {
-      label.figure("C", font = 2, cex = 1.8, yfrac = 1.025)
+      label.figure("c", font = 2, cex = 1.8, yfrac = 1.025)
       # Add legend
       lhyper <- paste0("Hypersaline (", paste(which(ihyper), collapse = ", "), ")")
       lsed <- paste0("Sediment (", paste(which(ised), collapse = ", "), ")")
@@ -525,7 +525,7 @@ orp16S_S3 <- function(global.slopes, pdf = FALSE) {
   slope <- slope * 1e3
   # Round to fixed number of decimal places
   global.slope <- formatC(slope, digits = 3, format = "f")
-  label.figure("A", font = 2, cex = 1.8, xfrac = 0.04)
+  label.figure("a", font = 2, cex = 1.8, xfrac = 0.04)
 
   # Create slope legend
   par(mar = c(4, 1, 1, 1))
@@ -577,15 +577,18 @@ orp16S_S3 <- function(global.slopes, pdf = FALSE) {
   dx <- c(0.02, 0.0185, -0.0025, 0, 0.019, 0.014, -0.007)
   dy <- c(-0.005, -0.002, 0.006, -0.004, 0, 0, 0)
   text(local.slopes + dx, global.slopes$Bacteria + dy, envtxt, cex = 0.85)
-  label.figure("B", font = 2, cex = 1.8, xfrac = 0.02)
+  label.figure("b", font = 2, cex = 1.8, xfrac = 0.02)
   if(pdf) dev.off()
 
 }
 
 # Figure 5: Linear regressions between Eh7 and ZC at a global scale 20210828
-orp16S5 <- function(pdf = FALSE) {
+orp16S5 <- function(pdf = FALSE, EMP_primers = FALSE) {
 
-  if(pdf) pdf("Figure_5.pdf", width = 10, height = 7)
+  if(pdf) {
+    if(EMP_primers) pdf("Figure_S5.pdf", width = 10, height = 7)
+    else pdf("Figure_5.pdf", width = 10, height = 7)
+  }
   mat <- matrix(c(
     16, 16, rep(1:7, each = 6), 17, 17,
     16, 16, rep(8:14, each = 6), 18, 18,
@@ -596,6 +599,22 @@ orp16S5 <- function(pdf = FALSE) {
   layout(mat, heights = c(2, 2, 0.5, 0.5, 4))
   par(mar = c(4, 4, 1, 1))
   par(mgp = c(2.5, 1, 0))
+
+  ## Take only datasets that use EMP primers 20221004
+  if(EMP_primers) {
+    uses_EMP_primers <- c(
+      "MLL+18", "LWJ+21", "RARG22",                                     # River & Seawater
+                                                                        # Lake & Pond
+      "PCL+18_Acidic", "PCL+18_Alkaline", "BMJ+19", "GWS+20", "MWY+21", # Hot Spring
+      "SBP+20", "RMB+17",                                               # Hyperalkaline
+      "WLJ+16", "ZDW+19", "DJK+18", "APV+20", "MGW+22",                 # Groundwater
+      "OHL+18_DNA", "ZHZ+19",                                           # Sediment
+      "MLL+19", "PSG+20", "RKSK22", "CKB+22"                            # Soil
+    )
+    EZdat <- EZdat[EZdat$study %in% uses_EMP_primers, ]
+    # Make sure we didn't miss any studies (check for typos ...)
+    stopifnot(all(uses_EMP_primers %in% EZdat$study))
+  }
 
   ## Panel A: Scatterplots and fits for Bacteria and Archaea in each environment
   par(mar = c(0, 0, 1, 0))
@@ -612,12 +631,12 @@ orp16S5 <- function(pdf = FALSE) {
   text(0.5, -0.5, "Eh7 (mV)", cex = 1.2, xpd = NA)
   plot.new()
   text(0.2, 0.5, cplab$ZC, cex = 1.2, srt = 90, xpd = NA)
-  label.figure("A", font = 2, cex = 2, xfrac = 0.34, yfrac = 0.965)
+  label.figure("a", font = 2, cex = 2, xfrac = 0.34, yfrac = 0.965)
   plot.new()
   text(0.3, 0.5, "Bacteria", srt = 90, xpd = NA)
   plot.new()
   text(0.3, 0.5, "Archaea", srt = 90, xpd = NA)
-
+ 
   ## Panel B: Scatterplots and fits for Bacteria and Archaea in all environments 20210914
   # Start plot for Bacteria
   par(mar = c(4, 4, 1, 1))
@@ -630,7 +649,7 @@ orp16S5 <- function(pdf = FALSE) {
   # Add points
   eachenv(thisdat, add = TRUE, do.linear = FALSE)
   title("Bacteria", font.main = 1, line = 0.5, xpd = NA)
-  label.figure("B", font = 2, cex = 2, xfrac = 0.02, yfrac = 1)
+  label.figure("b", font = 2, cex = 2, xfrac = 0.02, yfrac = 1)
 
   # Now do Archaea
   plot(c(-500, 650), range(EZdat$ZC), type = "n", xlab = "Eh7 (mV)", ylab = cplab$ZC)
@@ -649,7 +668,7 @@ orp16S5 <- function(pdf = FALSE) {
 
   if(pdf) dev.off()
   # Return slopes 20220611
-  slopes
+  invisible(slopes)
 
 }
 
@@ -667,7 +686,7 @@ orp16S6 <- function(pdf = FALSE) {
 
     study <- paste0("WHLH21a_", month)
     longmonth <- ifelse(month == "Jun", "June", "September")
-    label <- ifelse(month == "Jun", "A", "B")
+    label <- ifelse(month == "Jun", "a", "b")
     legend.x <- ifelse(month == "Jun", "topright", NA)
 
     # Plot 1: ZC vs Eh7 for 16S data
@@ -956,7 +975,7 @@ eachenv <- function(eedat, add = FALSE, do.linear = TRUE, ienv = c(1, 2, 4, 5, 3
     if(do.linear) {
       # Include number of studies in legend 20210925
       nstudy <- length(unique(thisdat$study))
-      slopes[[i]] <- add.linear.global(xvals, ZC, nstudy)
+      if(nrow(thisdat) > 0) slopes[[i]] <- add.linear.global(xvals, ZC, nstudy)
     }
     if(!isTRUE(add)) {
       # Add plot axes and title

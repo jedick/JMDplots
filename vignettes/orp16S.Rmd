@@ -138,4 +138,9 @@ orp16S_S3(global.slopes)
 orp16S_S4()
 ```
 
+## Global analysis including only datasets using 515F/806R primers from the Earth Microbiome Project (EMP) (Figure S5)
+```{r orp16S_S5, message = FALSE, results = "hide", out.width='100%', fig.width = 10, fig.height = 7, out.extra = 'class="full-width"', pngquant = pngquant, dpi = 100}
+orp16S5(EMP_primers = TRUE)
+```
+
 ## References

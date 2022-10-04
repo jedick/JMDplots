@@ -1,25 +1,25 @@
 Name,Run,LibraryName,BioSample,SampleName,"T (°C)",pH,"O2 (mg/L)","redox (mV)",Region,Location
-"Unconfined Aquifer SE of Melbourne",SRR20642091,"Subsample AA.12",SAMN29926968,AA.1,16.3,6.7,4.465,106.95,"Agricultural region",Upstream
-"Unconfined Aquifer SE of Melbourne",SRR20642107,"Subsample AB.11",SAMN29926969,AB.1,15.1,7.15,5.92,28.9,"Agricultural region",Upstream
-"Unconfined Aquifer SE of Melbourne",SRR20642094,"Subsample AB.23",SAMN29926970,AB.2,15.3,6.93,5.89,111.3,"Agricultural region",Upstream
-"Unconfined Aquifer SE of Melbourne",SRR20642093,"Subsample AB.31",SAMN29926971,AB.3,17,7.27,4.77,33.8,"Agricultural region",Upstream
-"Unconfined Aquifer SE of Melbourne",SRR20642125,"Subsample BA.12",SAMN29926972,BA.1,14.8,6.68,0.22,32.8,"Wastewater treatment plant",WWTP
-"Unconfined Aquifer SE of Melbourne",SRR20642123,"Subsample BA.21",SAMN29926973,BA.2,18,6.73,0.51,61.2,"Wastewater treatment plant",WWTP
-"Unconfined Aquifer SE of Melbourne",SRR20642117,"Subsample BA.33",SAMN29926974,BA.3,20,6.72,0.48,21.1,"Wastewater treatment plant",WWTP
-"Unconfined Aquifer SE of Melbourne",SRR20642114,"Subsample BB.13",SAMN29926975,BB.1,15.3,6.78,0.15,32.2,"Wastewater treatment plant",WWTP
-"Unconfined Aquifer SE of Melbourne",SRR20642113,"Subsample BB.21",SAMN29926976,BB.2,18.4,6.69,0.21,68.71,"Wastewater treatment plant",WWTP
-"Unconfined Aquifer SE of Melbourne",SRR20642110,"Subsample BB.31",SAMN29926977,BB.3,19.8,6.81,0.47,23.3,"Wastewater treatment plant",WWTP
-"Unconfined Aquifer SE of Melbourne",SRR20642105,"Subsample CA.12",SAMN29926978,CA.1,14.4,6.92,0.24,30.5,"Grazing Farmland",Farm
-"Unconfined Aquifer SE of Melbourne",SRR20642103,"Subsample CA.22",SAMN29926979,CA.2,15.1,6.84,0.2,77.2,"Grazing Farmland",Farm
-"Unconfined Aquifer SE of Melbourne",SRR20642102,"Subsample CA.31",SAMN29926980,CA.3,17.1,7.01,0.64,29.1,"Grazing Farmland",Farm
-"Unconfined Aquifer SE of Melbourne",SRR20642098,"Subsample CB.12",SAMN29926981,CB.1,15.4,6.9,0.17,20.7,"Grazing Farmland",Farm
-"Unconfined Aquifer SE of Melbourne",SRR20642095,"Subsample CB.21",SAMN29926982,CB.2,15.5,6.87,0.19,79.9,"Grazing Farmland",Farm
-"Unconfined Aquifer SE of Melbourne",SRR20642086,"Subsample CB.31",SAMN29926983,CB.3,16,7.24,0.56,29,"Grazing Farmland",Farm
-"Unconfined Aquifer SE of Melbourne",SRR20642081,"Subsample CC.13",SAMN29926984,CC.1,14.7,6.79,0.12,33.4,"Grazing Farmland",Farm
-"Unconfined Aquifer SE of Melbourne",SRR20642080,"Subsample CC.21",SAMN29926985,CC.2,15.3,7.19,0.61,35.9,"Grazing Farmland",Farm
-"Unconfined Aquifer SE of Melbourne",SRR20642074,"Subsample CD.13",SAMN29926986,CD.1,13.6,6.78,0.22,24,"Grazing Farmland",Farm
-"Unconfined Aquifer SE of Melbourne",SRR20642072,"Subsample CD.22",SAMN29926987,CD.2,15.8,6.73,0.76,-8.4,"Grazing Farmland",Farm
-"Unconfined Aquifer SE of Melbourne",SRR20642070,"Subsample DA.11",SAMN29926988,DA.1,15.5,7.43,0.24,5.5,Swamp,Swamp
-"Unconfined Aquifer SE of Melbourne",SRR20642066,"Subsample DA.21",SAMN29926989,DA.2,15.3,7.37,0.74,-59.6,Swamp,Swamp
-"Unconfined Aquifer SE of Melbourne",SRR20642063,"Subsample DB.11",SAMN29926990,DB.1,15.1,7.44,0.17,-106.9,Swamp,Swamp
-"Unconfined Aquifer SE of Melbourne",SRR20642058,"Subsample DB.23",SAMN29926991,DB.2,14.3,7.77,0.69,-83.5,Swamp,Swamp
+"Aquifer SE of Melbourne",SRR20642091,"Subsample AA.12",SAMN29926968,AA.1,16.3,6.7,4.465,106.95,"Agricultural region",Upstream
+"Aquifer SE of Melbourne",SRR20642107,"Subsample AB.11",SAMN29926969,AB.1,15.1,7.15,5.92,28.9,"Agricultural region",Upstream
+"Aquifer SE of Melbourne",SRR20642094,"Subsample AB.23",SAMN29926970,AB.2,15.3,6.93,5.89,111.3,"Agricultural region",Upstream
+"Aquifer SE of Melbourne",SRR20642093,"Subsample AB.31",SAMN29926971,AB.3,17,7.27,4.77,33.8,"Agricultural region",Upstream
+"Aquifer SE of Melbourne",SRR20642125,"Subsample BA.12",SAMN29926972,BA.1,14.8,6.68,0.22,32.8,"Wastewater treatment plant",WWTP
+"Aquifer SE of Melbourne",SRR20642123,"Subsample BA.21",SAMN29926973,BA.2,18,6.73,0.51,61.2,"Wastewater treatment plant",WWTP
+"Aquifer SE of Melbourne",SRR20642117,"Subsample BA.33",SAMN29926974,BA.3,20,6.72,0.48,21.1,"Wastewater treatment plant",WWTP
+"Aquifer SE of Melbourne",SRR20642114,"Subsample BB.13",SAMN29926975,BB.1,15.3,6.78,0.15,32.2,"Wastewater treatment plant",WWTP
+"Aquifer SE of Melbourne",SRR20642113,"Subsample BB.21",SAMN29926976,BB.2,18.4,6.69,0.21,68.71,"Wastewater treatment plant",WWTP
+"Aquifer SE of Melbourne",SRR20642110,"Subsample BB.31",SAMN29926977,BB.3,19.8,6.81,0.47,23.3,"Wastewater treatment plant",WWTP
+"Aquifer SE of Melbourne",SRR20642105,"Subsample CA.12",SAMN29926978,CA.1,14.4,6.92,0.24,30.5,"Grazing Farmland",Farm
+"Aquifer SE of Melbourne",SRR20642103,"Subsample CA.22",SAMN29926979,CA.2,15.1,6.84,0.2,77.2,"Grazing Farmland",Farm
+"Aquifer SE of Melbourne",SRR20642102,"Subsample CA.31",SAMN29926980,CA.3,17.1,7.01,0.64,29.1,"Grazing Farmland",Farm
+"Aquifer SE of Melbourne",SRR20642098,"Subsample CB.12",SAMN29926981,CB.1,15.4,6.9,0.17,20.7,"Grazing Farmland",Farm
+"Aquifer SE of Melbourne",SRR20642095,"Subsample CB.21",SAMN29926982,CB.2,15.5,6.87,0.19,79.9,"Grazing Farmland",Farm
+"Aquifer SE of Melbourne",SRR20642086,"Subsample CB.31",SAMN29926983,CB.3,16,7.24,0.56,29,"Grazing Farmland",Farm
+"Aquifer SE of Melbourne",SRR20642081,"Subsample CC.13",SAMN29926984,CC.1,14.7,6.79,0.12,33.4,"Grazing Farmland",Farm
+"Aquifer SE of Melbourne",SRR20642080,"Subsample CC.21",SAMN29926985,CC.2,15.3,7.19,0.61,35.9,"Grazing Farmland",Farm
+"Aquifer SE of Melbourne",SRR20642074,"Subsample CD.13",SAMN29926986,CD.1,13.6,6.78,0.22,24,"Grazing Farmland",Farm
+"Aquifer SE of Melbourne",SRR20642072,"Subsample CD.22",SAMN29926987,CD.2,15.8,6.73,0.76,-8.4,"Grazing Farmland",Farm
+"Aquifer SE of Melbourne",SRR20642070,"Subsample DA.11",SAMN29926988,DA.1,15.5,7.43,0.24,5.5,Swamp,Swamp
+"Aquifer SE of Melbourne",SRR20642066,"Subsample DA.21",SAMN29926989,DA.2,15.3,7.37,0.74,-59.6,Swamp,Swamp
+"Aquifer SE of Melbourne",SRR20642063,"Subsample DB.11",SAMN29926990,DB.1,15.1,7.44,0.17,-106.9,Swamp,Swamp
+"Aquifer SE of Melbourne",SRR20642058,"Subsample DB.23",SAMN29926991,DB.2,14.3,7.77,0.69,-83.5,Swamp,Swamp
