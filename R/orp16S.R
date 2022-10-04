@@ -131,7 +131,7 @@ orp16S2 <- function(pdf = FALSE) {
   lines(Eh7, MODdepth, type = "b", pch = 19)
   text(50, -2.3, "Eh7")
   text(650, -2.3, "Eh")
-  label.figure("(a)", font = 2, cex = 1.5)
+  label.figure("A", font = 2, cex = 1.5)
 
   # Get 16S metadata and chemical metrics for Rundell et al. (2014) experiments
   metrics.in <- getmetrics_orp16S("RBW+14")
@@ -150,7 +150,7 @@ orp16S2 <- function(pdf = FALSE) {
     text(-0.182, i - 0.25, label, adj = 1)
   }
   par(xpd = FALSE)
-  label.figure("(b)", font = 2, cex = 1.5)
+  label.figure("B", font = 2, cex = 1.5)
 
   # Reset layout to make orp16S3 in the examples run nicely 20211011
   if(pdf) dev.off() else layout(1)
@@ -341,7 +341,7 @@ orp16S4 <- function(pdf = FALSE) {
   plotEZ("WHLH21", "Bacteria", groupby = "Position", groups = c("Surface", "Middle", "Bottom"),
     legend.x = "bottomleft", title.line = NULL, dxlim = c(-20, 0), slope.legend = "right")
   title("Daya Bay\n(Sediment bacteria)", font.main = 1)
-  label.figure("(a)", font = 2, cex = 1.8, yfrac = 0.9)
+  label.figure("A", font = 2, cex = 1.8, yfrac = 0.9)
   # Bay of Biscay (Sediment)
   plotEZ("LMBA21_2017", "Bacteria", groupby = "Season", groups = c("Summer", "Winter"),
     legend.x = "bottomright", title.line = NULL, dxlim = c(0, 170), slope.legend = "bottom")
@@ -377,7 +377,7 @@ orp16S4 <- function(pdf = FALSE) {
   ltext <- names(envirotype)[i1[3:4]]
   legend("bottomright", ltext, pch = 19, col = orp16Scol[i1[3:4]])
   title("Linear regressions for bacterial communities\nin each dataset", font.main = 1, xpd = NA, line = 0.7)
-  label.figure("(b)", font = 2, cex = 1.8, yfrac = 1.05)
+  label.figure("B", font = 2, cex = 1.8, yfrac = 1.05)
   # Groundwater, sediment, soil
   plot(xlim, ylim, type = "n", xlab = quote(log[10]~"(Number of samples)"), ylab = quote("Slope of linear fit"~(V^-1)))
   abline(h = 0, lty = 2, lwd = 1.5, col = "gray50")
@@ -433,7 +433,7 @@ orp16S4 <- function(pdf = FALSE) {
     }
     title(paste0("Hot spring\n", tolower(lineages[k])), font.main = 1, xpd = NA, line = 0.7)
     if(k==1) {
-      label.figure("(c)", font = 2, cex = 1.8, yfrac = 1.025)
+      label.figure("C", font = 2, cex = 1.8, yfrac = 1.025)
       # Add legend
       lhyper <- paste0("Hypersaline (", paste(which(ihyper), collapse = ", "), ")")
       lsed <- paste0("Sediment (", paste(which(ised), collapse = ", "), ")")
@@ -525,7 +525,7 @@ orp16S_S3 <- function(global.slopes, pdf = FALSE) {
   slope <- slope * 1e3
   # Round to fixed number of decimal places
   global.slope <- formatC(slope, digits = 3, format = "f")
-  label.figure("(a)", font = 2, cex = 1.8, xfrac = 0.04)
+  label.figure("A", font = 2, cex = 1.8, xfrac = 0.04)
 
   # Create slope legend
   par(mar = c(4, 1, 1, 1))
@@ -577,7 +577,7 @@ orp16S_S3 <- function(global.slopes, pdf = FALSE) {
   dx <- c(0.02, 0.0185, -0.0025, 0, 0.019, 0.014, -0.007)
   dy <- c(-0.005, -0.002, 0.006, -0.004, 0, 0, 0)
   text(local.slopes + dx, global.slopes$Bacteria + dy, envtxt, cex = 0.85)
-  label.figure("(b)", font = 2, cex = 1.8, xfrac = 0.02)
+  label.figure("B", font = 2, cex = 1.8, xfrac = 0.02)
   if(pdf) dev.off()
 
 }
@@ -612,7 +612,7 @@ orp16S5 <- function(pdf = FALSE) {
   text(0.5, -0.5, "Eh7 (mV)", cex = 1.2, xpd = NA)
   plot.new()
   text(0.2, 0.5, cplab$ZC, cex = 1.2, srt = 90, xpd = NA)
-  label.figure("(a)", font = 2, cex = 2, xfrac = 0.34, yfrac = 0.965)
+  label.figure("A", font = 2, cex = 2, xfrac = 0.34, yfrac = 0.965)
   plot.new()
   text(0.3, 0.5, "Bacteria", srt = 90, xpd = NA)
   plot.new()
@@ -630,7 +630,7 @@ orp16S5 <- function(pdf = FALSE) {
   # Add points
   eachenv(thisdat, add = TRUE, do.linear = FALSE)
   title("Bacteria", font.main = 1, line = 0.5, xpd = NA)
-  label.figure("(b)", font = 2, cex = 2, xfrac = 0.02, yfrac = 1)
+  label.figure("B", font = 2, cex = 2, xfrac = 0.02, yfrac = 1)
 
   # Now do Archaea
   plot(c(-500, 650), range(EZdat$ZC), type = "n", xlab = "Eh7 (mV)", ylab = cplab$ZC)
@@ -904,17 +904,31 @@ add.linear.local <- function(Eh7, ZC, col = "gray62", lwd = 1, legend = NULL) {
   pearson <- cor.test(EZdat$Eh7, EZdat$ZC, method = "pearson")
 
   if(!is.null(legend)) {
-    # Format number of samples 20221001
-    ntext <- bquote(italic(N) == .(nrow(EZdat)))
+
     # Format correlation coefficient 20221001
-    rtext <- formatC(pearson$estimate, digits = 2, format = "f")
-    rtext <- bquote(italic(r) == .(rtext))
+    rval <- formatC(pearson$estimate, digits = 2, format = "f")
     # Format slope
-    slopenum <- formatC(slope, digits = 3, format = "f")
-    stext <- bquote(italic(m) == .(slopenum)~V^-1)
-    ltext <- c(ntext, rtext, stext)
-    legend(legend, legend = ltext, bty = "n")
+    slopeval <- formatC(slope, digits = 3, format = "f")
+
+    if(legend == "title") {
+      # Put statistics in subtitle 20221004
+      main <- bquote(list(
+        italic(N) == .(nrow(EZdat)),
+        italic(r) == .(rval),
+        italic(m) == .(slopeval)~V^-1
+      ))
+      title(main = main, line = 0.75, cex.main = 1)
+    } else {
+      # Format number of samples 20221001
+      ntext <- bquote(italic(N) == .(nrow(EZdat)))
+      rtext <- bquote(italic(r) == .(rval))
+      stext <- bquote(italic(m) == .(slopeval)~V^-1)
+      ltext <- c(ntext, rtext, stext)
+      legend(legend, legend = ltext, bty = "n")
+    }
   }
+  # Return results for plotEZ() 20221004
+  invisible(list(EZlm = EZlm, Eh7lim = Eh7lim, ZCpred = ZCpred, pearson = pearson))
 }
 
 # Scatterplots for all samples in each environment type 20210913

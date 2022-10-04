@@ -8,15 +8,15 @@
 # Use 'groupby' (name of column with sample groups) and 'groups' (names of sample groups) to apply the pch and col to individual samples
 plotEZ <- function(study, lineage = NULL, mincount = 100, pch = NULL, col = NULL, add = FALSE, type = "p", groupby = NULL, groups = NULL,
   legend.x = "topleft", show = c("lm", "points"), col.line = "gray62", lwd = 1, cex = 1, title.line = NA,
-  dxlim = c(0, 0), dylim = c(0, 0), size = NULL, slope.legend = NULL, ylim = NULL, ylab = cplab$ZC) {
+  dxlim = c(0, 0), dylim = c(0, 0), size = NULL, slope.legend = "title", ylim = NULL, ylab = cplab$ZC) {
 
   if(identical(lineage, "two")) {
     # Make two plots for studies that have Bacteria and Archaea 20210913
     out1 <- plotEZ(study, "Bacteria", mincount, pch, col, add, type, groupby, groups, legend.x, show, col.line, lwd, cex, title.line,
-                   dxlim, dylim, size, ylim, ylab = ylab)
+                   dxlim, dylim, size, slope.legend, ylim, ylab = ylab)
     # Don't show legend on second (Archaea) plot 20210914
     out2 <- plotEZ(study, "Archaea", mincount, pch, col, add, type, groupby, groups, legend.x = NA, show, col.line, lwd, cex, title.line,
-                   dxlim, dylim, size, ylim, ylab = ylab)
+                   dxlim, dylim, size, slope.legend, ylim, ylab = ylab)
     out <- c(out1, out2)
     return(invisible(out))
   }
@@ -114,39 +114,17 @@ plotEZ <- function(study, lineage = NULL, mincount = 100, pch = NULL, col = NULL
     mtext("Eh7 (mV)", side = 1, line = par("mgp")[1], cex = par("cex"))
     if(!is.null(title.line)) {
       main <- paste0(name, " (", root, ")")
-      title(main = hyphen.in.pdf(main), font.main = 1, line = title.line)
+      title(main = hyphen.in.pdf(main), font.main = 1, line = 2.5)
       # Include suffix in subtite 20210914
       if(!is.na(suffix)) sub <- paste(sub, "-", suffix)
       # Add lineage 20210913
       if(!is.null(lineage)) sub <- paste(sub, "-", lineage)
-      title(main = sub, line = 0.5, cex.main = 1)
+      title(main = sub, line = 1.5, cex.main = 1)
     }
   }
   # Add linear fit
   if("lm" %in% show) {
-    EZlm <- lm(ZC ~ Eh7, EZdat)
-    Eh7lim <- range(EZlm$model$Eh7)
-    ZCpred <- predict.lm(EZlm, data.frame(Eh7 = Eh7lim))
-    # Use solid or dashed line to indicate large or small slope 20210926
-    slope <- EZlm$coefficients[2] * 1e3
-    if(is.na(slope)) lty <- 3 else if(abs(slope) < 0.01) lty <- 2 else lty <- 1
-    lines(Eh7lim, ZCpred, col = col.line, lwd = lwd, lty = lty)
-    # Calculate Pearson correlation 20220520
-    pearson <- cor.test(EZdat$Eh7, EZdat$ZC, method = "pearson")
-
-    if(!is.null(slope.legend)) {
-      # Format number of samples 20221001
-      ntext <- bquote(italic(N) == .(nrow(EZdat)))
-      # Format correlation coefficient 20221001
-      rtext <- formatC(pearson$estimate, digits = 2, format = "f")
-      rtext <- bquote(italic(r) == .(rtext))
-      # Format slope
-      slopenum <- formatC(slope, digits = 3, format = "f")
-      stext <- bquote(italic(m) == .(slopenum)~V^-1)
-      ltext <- c(ntext, rtext, stext)
-      legend(slope.legend, legend = ltext, bty = "n")
-    }
-
+    adlilo <- add.linear.local(EZdat$Eh7, EZdat$ZC, col.line, lwd, slope.legend)
   }
   # Add points
   if("points" %in% show) {
@@ -194,7 +172,7 @@ plotEZ <- function(study, lineage = NULL, mincount = 100, pch = NULL, col = NULL
   if(length(envirotype) == 0) envirotype <- ""
   EZdat <- cbind(study = study, envirotype = envirotype, lineage = lineage, sample = metadata[, sampcol], Run = metadata$Run, EZdat)
   out <- list(study = study, name = name, envirotype = envirotype, lineage = lineage, metadata = metadata, EZdat = EZdat)
-  if("lm" %in% show) out <- c(out, list(EZlm = EZlm, Eh7lim = Eh7lim, ZCpred = ZCpred, pearson = pearson))
+  if("lm" %in% show) out <- c(out, list(EZlm = adlilo$EZlm, Eh7lim = adlilo$Eh7lim, ZCpred = adlilo$ZCpred, pearson = adlilo$pearson))
   invisible(out)
 
 }
