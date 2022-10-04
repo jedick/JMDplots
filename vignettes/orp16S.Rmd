@@ -115,11 +115,11 @@ global.slopes <- orp16S5()
 ```
 
 ## Comparison of 16S-based community reference proteomes with metaproteomes (Figure 6)
-```{r orp16S6, message = FALSE, results = "hide", out.width='80%', fig.align='center', fig.width = 8, fig.height = 6, pngquant = pngquant, dpi = 100}
+```{r orp16S6, message = FALSE, results = "hide", out.width='100%', fig.align='center', fig.width = 8, fig.height = 7, pngquant = pngquant, dpi = 100}
 orp16S6()
 ```
 
-**Data sources:** 16S rRNA gene sequences [@LH21], metaproteomes [@HWLH22].
+**Data sources:** 16S rRNA gene sequences [@WHLH21a], metaproteomes [@HWLH22].
 
 ## Eh-pH diagram (Figure S1)
 ```{r orp16S_S1, message = FALSE, results = "hide", out.width='100%', fig.width = 8, fig.height = 6, pngquant = pngquant}

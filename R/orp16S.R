@@ -626,7 +626,7 @@ orp16S5 <- function(pdf = FALSE) {
   thisdat <- EZdat[EZdat$lineage == "Bacteria", ]
   # Add linear fit; include number of studies in legend 20210925
   nstudy <- length(unique(thisdat$study))
-  add.linear(thisdat$Eh7, thisdat$ZC, nstudy)
+  add.linear.global(thisdat$Eh7, thisdat$ZC, nstudy)
   # Add points
   eachenv(thisdat, add = TRUE, do.linear = FALSE)
   title("Bacteria", font.main = 1, line = 0.5, xpd = NA)
@@ -636,7 +636,7 @@ orp16S5 <- function(pdf = FALSE) {
   plot(c(-500, 650), range(EZdat$ZC), type = "n", xlab = "Eh7 (mV)", ylab = cplab$ZC)
   thisdat <- EZdat[EZdat$lineage == "Archaea", ]
   nstudy <- length(unique(thisdat$study))
-  add.linear(thisdat$Eh7, thisdat$ZC, nstudy)
+  add.linear.global(thisdat$Eh7, thisdat$ZC, nstudy)
   eachenv(thisdat, add = TRUE, do.linear = FALSE)
   title("Archaea", font.main = 1, line = 0.5, xpd = NA)
 
@@ -656,78 +656,63 @@ orp16S5 <- function(pdf = FALSE) {
 # Comparison of 16S-based community reference proteomes with metaproteomes 20220930
 orp16S6 <- function(pdf = FALSE) {
 
-  if(pdf) pdf("Figure_6.pdf", width = 8, height = 6)
-  par(mfrow = c(1, 2))
-  ylim <- c(-0.16, -0.09)
+  if(pdf) pdf("Figure_6.pdf", width = 8, height = 7)
+  par(mfrow = c(2, 2))
+  par(mar = c(4.5, 4, 3.5, 1))
+  par(mgp = c(2.5, 1, 0))
+  ylim <- c(-0.16, -0.08)
 
-  # Plot a: ZC vs Eh for 16S data
-  groups <- c("A crust", "C crust", "G crust", "M crust")
-  plotEZ("LH21", groupby = "Type", groups = groups, title.line = NULL, slope.legend = "bottomright",
-    ylim = ylim, ylab = quote(italic(Z)[C]~"of community reference proteome"))
-  # Collection date is from BioSample data for PRJNA640847
-  title("16S rRNA gene sequences of biocrusts\ncollected in September 2017", font.main = 1)
+  # Loop over months
+  for(month in c("Jun", "Sep")) {
 
-  # Plot b: ZC vs Eh for metaproteome
-  # Amino acid composition and ZC
-  aa <- read.csv(system.file("extdata/orp16S/HWLH22_aa.csv", package = "JMDplots"))
-  ZC <- ZCAA(aa)
-  # Index the biocrust types
-  biocrust <- substr(aa$organism, 1, 1)
-  i <- sapply(biocrust, switch, A = 1, C = 2, G = 3, M = 4)
-  # pH and Eh values from Supplementary Table 2 of Han et al., 2022
-  # June 2018
-  pHs <- c(7.91, 7.69, 7.46, 7.87)
-  Ehs <- c(384.23, 392.27, 385.71, 400.55)
-  ## September 2018
-  #pHs <- c(7.90, 7.54, 7.49, 8.07)
-  #Ehs <- c(376.56, 390.25, 476.66, 394.68)
-  # Calculate Eh7
-  Eh7s <- Ehs + -59.16 * (7 - pHs)
-  Eh7 <- Eh7s[i]
-  # Get points and colors
-  pchs <- 21:24
-  pch <- pchs[i]
-  cols <- orp16Scol[1:4]
-  col <- cols[i]
+    study <- paste0("WHLH21a_", month)
+    longmonth <- ifelse(month == "Jun", "June", "September")
+    label <- ifelse(month == "Jun", "A", "B")
+    legend.x <- ifelse(month == "Jun", "topright", NA)
 
-  # The following is adapted from plotEZ()
-  # Start new plot
-  plot(Eh7, ZC, xlab = "", type = "n",
-    ylim = ylim, ylab = quote(italic(Z)[C]~"of peptides from metaproteome"))
-  # Draw x-axis label with mtext to avoid getting cut off by small margin 20220517
-  mtext("Eh7 (mV)", side = 1, line = par("mgp")[1], cex = par("cex"))
-  points(Eh7, ZC, pch = pch, col = col, bg = col)
+    # Plot 1: ZC vs Eh7 for 16S data
+    plotEZ(study, "Bacteria", groupby = "Stage", groups = c("Algae", "Cyanolichen", "Chlorolichen", "Moss"), legend.x = legend.x,
+      ylim = ylim, title.line = NULL, slope.legend = "topleft", ylab = quote(italic(Z)[C]~"of community reference proteome"))
+    # Collection date is from BioSample data for PRJNA640847
+    title(paste("16S rRNA gene sequences of biocrusts\ncollected in", longmonth, "2018"), font.main = 1)
+    label.figure(label, font = 2, cex = 1.5)
+    # Get 16S data
+    metrics <- getmetrics_orp16S("WHLH21a")
+    mdat <- getmdat_orp16S(study, metrics = metrics)
+    ZC_16S <- mdat$metrics$ZC
 
-  # Add linear fit
-  EZdat <- data.frame(Eh7, ZC)
-  EZlm <- lm(ZC ~ Eh7, EZdat)
-  Eh7lim <- range(EZlm$model$Eh7)
-  ZCpred <- predict.lm(EZlm, data.frame(Eh7 = Eh7lim))
-  # Use solid or dashed line to indicate large or small slope 20210926
-  slope <- EZlm$coefficients[2] * 1e3
-  if(is.na(slope)) lty <- 3 else if(abs(slope) < 0.01) lty <- 2 else lty <- 1
-  lines(Eh7lim, ZCpred, lty = lty)
-  # Calculate Pearson correlation 20220520
-  pearson <- cor.test(EZdat$Eh7, EZdat$ZC, method = "pearson")
-  # Format number of samples
-  ntext <- bquote(italic(N) == .(length(ZC)))
-  # Format correlation coefficient
-  rtext <- formatC(pearson$estimate, digits = 2, format = "f")
-  rtext <- bquote(italic(r) == .(rtext))
-  # Format slope
-  slopenum <- formatC(slope, digits = 3, format = "f")
-  stext <- bquote(.(slopenum)~V^-1)
-  ltext <- c(ntext, rtext, stext)
-  legend("bottomright", legend = ltext, bty = "n")
+    # Plot 2: ZC vs Eh for metaproteome
+    # Amino acid composition and ZC
+    file <- paste0("extdata/orp16S/HWLH22_", month, "_2018_aa.csv")
+    aa <- read.csv(system.file(file, package = "JMDplots"))
+    ZC <- ZCAA(aa)
+    # Match 16S to MP samples
+    iaa <- match(mdat$metadata$LibraryName, paste0(aa$abbrv, aa$organism))
+    ZC_MP <- ZCAA(aa)[iaa]
+    # Get point symbols and color
+    groups <- c("Algae", "Cyanolichen", "Chlorolichen", "Moss")
+    igroup <- match(mdat$metadata$Stage, groups)
+    pch <- (21:24)[igroup]
+    col <- orp16Scol[igroup]
+    # Make plot
+    Eh7 <- mdat$metadata$Eh7
+    # The following is adapted from plotEZ()
+    # Start new plot
+    plot(Eh7, ZC_MP, xlab = "", type = "n",
+      ylim = ylim, ylab = quote(italic(Z)[C]~"of peptides from metaproteome"))
+    # Draw x-axis label with mtext to avoid getting cut off by small margin 20220517
+    mtext("Eh7 (mV)", side = 1, line = par("mgp")[1], cex = par("cex"))
+    points(Eh7, ZC_MP, pch = pch, col = col, bg = col)
+    add.linear.local(Eh7, ZC_MP, legend = "bottomleft")
+    # Collection date is from https://www.iprox.cn/page/project.html?id=IPX0003299000
+    title(paste("Metaproteomes of biocrusts\ncollected in", longmonth, "2018"), font.main = 1)
 
-  # Add legend
-  legend("topleft", legend = groups, pch = pchs, col = cols, pt.bg = cols, title = "Type", cex = 0.9)
-  # Collectoin date is from https://www.iprox.cn/page/project.html?id=IPX0003299000
-  title("Metaproteomes of biocrusts\ncollected in June 2018", font.main = 1)
+  }
 
   if(pdf) dev.off()
 
 }
+
 
 # Figure S2: ZC-Eh scatterplots for all studies 20210827
 # This also creates files EZdat (Eh and ZC values) and
@@ -861,7 +846,7 @@ orp16S_S2 <- function(pdf = FALSE) {
 ### UNEXPORTED FUNCTIONS ###
 ############################
 
-add.linear <- function(xvals, ZC, nstudy = NA, xvar = "Eh7", N_slope.legend.x = "topright", N_slope.legend.inset = 0) {
+add.linear.global <- function(xvals, ZC, nstudy = NA, xvar = "Eh7", N_slope.legend.x = "topright", N_slope.legend.inset = 0) {
   # Plot linear fit and confidence interval 20210920
   text.col <- "black"
   line.col <- "gray62"
@@ -906,6 +891,32 @@ add.linear <- function(xvals, ZC, nstudy = NA, xvar = "Eh7", N_slope.legend.x = 
   slopeval
 }
 
+add.linear.local <- function(Eh7, ZC, col = "gray62", lwd = 1, legend = NULL) {
+  EZdat <- data.frame(Eh7, ZC)
+  EZlm <- lm(ZC ~ Eh7, EZdat)
+  Eh7lim <- range(EZlm$model$Eh7)
+  ZCpred <- predict.lm(EZlm, data.frame(Eh7 = Eh7lim))
+  # Use solid or dashed line to indicate large or small slope 20210926
+  slope <- EZlm$coefficients[2] * 1e3
+  if(is.na(slope)) lty <- 3 else if(abs(slope) < 0.01) lty <- 2 else lty <- 1
+  lines(Eh7lim, ZCpred, col = col, lwd = lwd, lty = lty)
+  # Calculate Pearson correlation 20220520
+  pearson <- cor.test(EZdat$Eh7, EZdat$ZC, method = "pearson")
+
+  if(!is.null(legend)) {
+    # Format number of samples 20221001
+    ntext <- bquote(italic(N) == .(nrow(EZdat)))
+    # Format correlation coefficient 20221001
+    rtext <- formatC(pearson$estimate, digits = 2, format = "f")
+    rtext <- bquote(italic(r) == .(rtext))
+    # Format slope
+    slopenum <- formatC(slope, digits = 3, format = "f")
+    stext <- bquote(italic(m) == .(slopenum)~V^-1)
+    ltext <- c(ntext, rtext, stext)
+    legend(legend, legend = ltext, bty = "n")
+  }
+}
+
 # Scatterplots for all samples in each environment type 20210913
 eachenv <- function(eedat, add = FALSE, do.linear = TRUE, ienv = c(1, 2, 4, 5, 3, 6, 7), cols = orp16Scol,
   lineage = NULL, xlim = NULL, ylim = NULL, xvar = "Eh7") {
@@ -931,7 +942,7 @@ eachenv <- function(eedat, add = FALSE, do.linear = TRUE, ienv = c(1, 2, 4, 5, 3
     if(do.linear) {
       # Include number of studies in legend 20210925
       nstudy <- length(unique(thisdat$study))
-      slopes[[i]] <- add.linear(xvals, ZC, nstudy)
+      slopes[[i]] <- add.linear.global(xvals, ZC, nstudy)
     }
     if(!isTRUE(add)) {
       # Add plot axes and title
@@ -1036,7 +1047,7 @@ getmdat_orp16S <- function(study, metrics = NULL, dropNA = TRUE, size = NULL, qu
     "LJC+20", "DLS21", "ZZLL21", "GWS+20", "CLS+19", "GZL21", "LLC+19", "NLE+21", "APV+20", "WHLH21",
     "PCL+18", "GSBT20", "SPA+21", "IBK+22", "HSF+22", "HCW+22", "WKP+22", "CKB+22", "WHLH21a", "RSS+18",
     "PSB+21", "RKSK22", "WLJ+16", "DJK+18", "OHL+18", "ZLH+22", "LWJ+21", "MGW+22", "RKN+17", "ZDW+19",
-    "WKG+22", "CLZ+22", "RARG22", "MCR+22", "LH21"
+    "WKG+22", "CLZ+22", "RARG22", "MCR+22"
   )) {
     # General processing of metadata for orp16S datasets 20210820
     # Get Eh or ORP values (uses partial name matching, can match a column named "Eh (mV)")
@@ -1382,17 +1393,17 @@ orp16S_S4 <- function(pdf = FALSE) {
     plot(c(-500, 700), range(hasO2dat$ZC), type = "n", xlab = "Eh7 (mV)", ylab = cplab$ZC)
     # Add linear fit; include number of studies in legend 20210925
     nstudy <- length(unique(thisdat$study))
-    add.linear(thisdat$Eh7, thisdat$ZC, nstudy)
+    add.linear.global(thisdat$Eh7, thisdat$ZC, nstudy)
     # Add points
     eachenv(thisdat, add = TRUE, do.linear = FALSE, xvar = "Eh7")
     title(lineage, font.main = 1)
     # ZC-Eh plot
     plot(c(-500, 700), range(hasO2dat$ZC), type = "n", xlab = "Eh (mV)", ylab = cplab$ZC)
-    add.linear(thisdat$Eh, thisdat$ZC, nstudy, xvar = "Eh")
+    add.linear.global(thisdat$Eh, thisdat$ZC, nstudy, xvar = "Eh")
     eachenv(thisdat, add = TRUE, do.linear = FALSE, xvar = "Eh")
     # ZC-O2 plot
     plot(c(0, 750), range(hasO2dat$ZC), type = "n", xlab = quote(O[2]~"("*mu*"mol l"^{-1}*")"), ylab = cplab$ZC)
-    add.linear(thisdat$O2_umol_L, thisdat$ZC, nstudy, xvar = "O2")
+    add.linear.global(thisdat$O2_umol_L, thisdat$ZC, nstudy, xvar = "O2")
     eachenv(thisdat, add = TRUE, do.linear = FALSE, xvar = "O2")
     # Add legend
     par(mar = c(0, 0, 0, 0))

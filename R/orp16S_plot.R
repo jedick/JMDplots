@@ -142,7 +142,7 @@ plotEZ <- function(study, lineage = NULL, mincount = 100, pch = NULL, col = NULL
       rtext <- bquote(italic(r) == .(rtext))
       # Format slope
       slopenum <- formatC(slope, digits = 3, format = "f")
-      stext <- bquote(.(slopenum)~V^-1)
+      stext <- bquote(italic(m) == .(slopenum)~V^-1)
       ltext <- c(ntext, rtext, stext)
       legend(slope.legend, legend = ltext, bty = "n")
     }

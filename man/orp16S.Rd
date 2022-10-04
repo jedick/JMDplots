@@ -96,7 +96,8 @@ The function also returns information in a data frame, which is used to fill in 
     \item{\file{EZdat.csv}}{Data for all samples, created by \code{orp16S_S2}.}
     \item{\file{EZlm.csv}}{Linear fits between Eh7 and \ZC for each dataset created by \code{orp16S_S2}.}
     \item{\file{BKM60.csv}}{Outline of Eh-pH range of natural environments, digitized from Fig. 32 of Baas Becking et al. (1960).}
-    \item{\file{HWLH22_aa.csv}}{Sum of amino acid composition of all peptides in each sample from the metaproteomic study of Han et al. (2022).}
+    \item{\file{HWLH22_Jun_2018_aa.csv}, \file{HWLH22_Sep_2018_aa.csv}}{Sum of amino acid composition of all peptides in each sample from the metaproteomic study of Han et al. (2022).}
+    \item{\file{mkaa.R}}{Script used to process source metaproteomic data to make the \file{*aa.csv} files.}
   }
 }
 
