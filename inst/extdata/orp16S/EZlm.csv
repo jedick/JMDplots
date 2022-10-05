@@ -23,17 +23,17 @@ IBK+22,"German Kettle Holes",Lake & Pond,Bacteria,37,116.95,455.32,0.0218728,-0.
 IBK+22,"German Kettle Holes",Lake & Pond,Archaea,38,116.95,455.32,0.0151571,-0.182572,0.144708
 NLE+21,"Lake Kinneret, Israel",Lake & Pond,Bacteria,21,-224,276,-0.00475035,-0.158955,-0.318673
 SPA+21,"Lake Varese, Italy",Lake & Pond,Bacteria,28,-169.39,407.57,-0.0123816,-0.153602,-0.505135
-PCL+18_Acidic,"New Zealand Hot Springs (Acidic)",Hot Spring,Bacteria,42,-386.33,240.37,0.0300793,-0.171898,0.194736
-PCL+18_Acidic,"New Zealand Hot Springs (Acidic)",Hot Spring,Archaea,22,-368.63,144.9,-0.00614681,-0.183089,-0.0452005
-PCL+18_Alkaline,"New Zealand Hot Springs (Alkaline)",Hot Spring,Bacteria,39,-301.29,262.43,0.10873,-0.198819,0.497684
-PCL+18_Alkaline,"New Zealand Hot Springs (Alkaline)",Hot Spring,Archaea,6,-284.72,155.31,-0.169087,-0.171068,-0.760304
-BMJ+19,"Dallol Geothermal Area",Hot Spring,Bacteria,19,-141.98,128.37,0.0912369,-0.139805,0.452702
-BMJ+19,"Dallol Geothermal Area",Hot Spring,Archaea,6,-86.86,124.54,-0.00594581,-0.0807413,-0.214569
-GWS+20,"Eastern Tibetan Plateau",Hot Spring,Bacteria,14,-282.33,108.16,0.180266,-0.181016,0.650725
-GWS+20,"Eastern Tibetan Plateau",Hot Spring,Archaea,5,-109.36,108.16,0.0933903,-0.198548,0.431247
-PBU+20,"Uzon Caldera",Hot Spring,Bacteria,10,-156.08,293.33,0.0208161,-0.158726,0.160373
-MWY+21,"Southern Tibetan Plateau",Hot Spring,Bacteria,13,-149.44,10.96,0.0833159,-0.161443,0.596254
-MWY+21,"Southern Tibetan Plateau",Hot Spring,Archaea,7,-149.44,6.64,-0.0334246,-0.180848,-0.216332
+PCL+18_Acidic,"New Zealand Hot Springs (Acidic)",Geothermal,Bacteria,42,-386.33,240.37,0.0300793,-0.171898,0.194736
+PCL+18_Acidic,"New Zealand Hot Springs (Acidic)",Geothermal,Archaea,22,-368.63,144.9,-0.00614681,-0.183089,-0.0452005
+PCL+18_Alkaline,"New Zealand Hot Springs (Alkaline)",Geothermal,Bacteria,39,-301.29,262.43,0.10873,-0.198819,0.497684
+PCL+18_Alkaline,"New Zealand Hot Springs (Alkaline)",Geothermal,Archaea,6,-284.72,155.31,-0.169087,-0.171068,-0.760304
+BMJ+19,"Dallol Geothermal Area",Geothermal,Bacteria,19,-141.98,128.37,0.0912369,-0.139805,0.452702
+BMJ+19,"Dallol Geothermal Area",Geothermal,Archaea,6,-86.86,124.54,-0.00594581,-0.0807413,-0.214569
+GWS+20,"Eastern Tibetan Plateau",Geothermal,Bacteria,14,-282.33,108.16,0.180266,-0.181016,0.650725
+GWS+20,"Eastern Tibetan Plateau",Geothermal,Archaea,5,-109.36,108.16,0.0933903,-0.198548,0.431247
+PBU+20,"Uzon Caldera",Geothermal,Bacteria,10,-156.08,293.33,0.0208161,-0.158726,0.160373
+MWY+21,"Southern Tibetan Plateau",Geothermal,Bacteria,13,-149.44,10.96,0.0833159,-0.161443,0.596254
+MWY+21,"Southern Tibetan Plateau",Geothermal,Archaea,7,-149.44,6.64,-0.0334246,-0.180848,-0.216332
 SBP+20,"CROMO 1",Hyperalkaline,Bacteria,24,-126.19,26.1,0.0443281,-0.155967,0.319058
 RMB+17,"Samail Ophiolite",Hyperalkaline,Bacteria,19,-310.56,268.14,0.0295168,-0.159202,0.581201
 RMB+17,"Samail Ophiolite",Hyperalkaline,Archaea,12,-118.25,268.14,0.0637734,-0.191701,0.837401

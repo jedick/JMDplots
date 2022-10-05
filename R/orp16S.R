@@ -5,8 +5,8 @@ envirotype <- list(
   "River & Seawater" = c("MLL+18", "HXZ+20", "GSBT20_Prefilter", "GSBT20_Postfilter", "WHL+21", "ZLH+22", "ZZL+21", "LWJ+21", "GZL21", "RARG22"),
   "Lake & Pond" = c("SAR+13", "LLC+19", "BCA+21", "HLZ+18", "BWD+19", "IBK+22", "NLE+21", "SPA+21"),
   "Groundwater" = c("KLM+16", "WLJ+16", "ZDW+19", "DJK+18", "SRM+19", "APV+20", "YHK+20", "ZCZ+21", "MGW+22", "MCR+22"),
-  # NOTE: Keep Hot Spring in 4th location to get red color 20210904
-  "Hot Spring" = c("PCL+18_Acidic", "PCL+18_Alkaline", "BMJ+19", "GWS+20", "PBU+20", "MWY+21"),
+  # NOTE: Keep Geothermal in 4th location to get red color 20210904
+  "Geothermal" = c("PCL+18_Acidic", "PCL+18_Alkaline", "BMJ+19", "GWS+20", "PBU+20", "MWY+21"),
   "Hyperalkaline" = c("SBP+20", "RMB+17", "CTS+17", "PSB+21"),
   "Sediment" = c("ZML+17", "BSPD17", "RKN+17", "HDZ+19", "OHL+18_DNA", "WHLH21", "RSS+18", "CLS+19", "HSF+19", "ZHZ+19",
                  "LMBA21_2017", "HSF+22", "ZZLL21", "WFB+21", "HCW+22", "WKG+22"),
@@ -187,7 +187,7 @@ orp16S3 <- function(pdf = FALSE) {
     "IBK+22, 53.1516, 13.0262", # SAMN15366194
     "NLE+21, 32.833, 35.583", # SAMEA7280991
     "SPA+21, 45.8126, 8.7401", # SAMN17524543
-    ## Hot Spring
+    ## Geothermal (Hot Spring)
     "PCL+18_Acidic, -38.5, 176.0", # Fig. 1
     "BMJ+19, 14.089567, 40.348583", # SAMN11581539
     "GWS+20, 30.12, 101.94", # SAMN13430433
@@ -367,7 +367,7 @@ orp16S4 <- function(pdf = FALSE) {
   # NOTE: conversion to V-1 has been moved to orp16S_S2() 20220520
   ymaxabs <- max(abs(lmbac$slope[j1 | j2]))
   ylim <- c(-ymaxabs*1.2, ymaxabs)
-  # River & seawater, lake & pond, hot spring, alkaline spring
+  # River & seawater, lake & pond, geothermal, hyperalkaline
   plot(xlim, ylim, type = "n", xlab = quote(log[10]~"(Number of samples)"), ylab = quote("Slope of linear fit"~(V^-1)))
   abline(h = 0, lty = 2, lwd = 1.5, col = "gray50")
   points(log10(lmbac$nsamp[j1]), lmbac$slope[j1], pch = 19, col = orp16Scol[env$groupnum[j1]])
@@ -385,8 +385,8 @@ orp16S4 <- function(pdf = FALSE) {
   ltext <- names(envirotype)[i2]
   legend("bottomright", ltext, pch = 19, col = orp16Scol[i2])
 
-  ## Panel C: Distinctions in carbon oxidation state estimated for different hot springs 20210930
-  # Use Hot Spring datasets
+  ## Panel C: Distinctions in carbon oxidation state estimated for different geothermal areas 20210930
+  # Use Geothermal datasets
   i <- 4
   studies <- envirotype[[i]]
   # Assign colors
@@ -431,7 +431,7 @@ orp16S4 <- function(pdf = FALSE) {
         }
       })
     }
-    title(paste0("Hot spring\n", tolower(lineages[k])), font.main = 1, xpd = NA, line = 0.7)
+    title(paste0("Geothermal\n", tolower(lineages[k])), font.main = 1, xpd = NA, line = 0.7)
     if(k==1) {
       label.figure("c", font = 2, cex = 1.8, yfrac = 1.025)
       # Add legend
@@ -455,8 +455,8 @@ orp16S_S3 <- function(global.slopes, pdf = FALSE) {
   layout(matrix(1:3, nrow = 1), widths = c(5, 4, 4.5))
   par(mar = c(4, 4, 1, 1))
   par(mgp = c(2.7, 1, 0))
-  # Get data for Bacteria in Groundwater
-  environment <- "Hot Spring"
+  # Get data for Bacteria
+  environment <- "Geothermal"
   bacdat <- EZdat[EZdat$lineage == "Bacteria", ]
   gwdat <- bacdat[bacdat$envirotype == environment, ]
   # Set up plot
@@ -605,7 +605,7 @@ orp16S5 <- function(pdf = FALSE, EMP_primers = FALSE) {
     uses_EMP_primers <- c(
       "MLL+18", "LWJ+21", "RARG22",                                     # River & Seawater
                                                                         # Lake & Pond
-      "PCL+18_Acidic", "PCL+18_Alkaline", "BMJ+19", "GWS+20", "MWY+21", # Hot Spring
+      "PCL+18_Acidic", "PCL+18_Alkaline", "BMJ+19", "GWS+20", "MWY+21", # Geothermal
       "SBP+20", "RMB+17",                                               # Hyperalkaline
       "WLJ+16", "ZDW+19", "DJK+18", "APV+20", "MGW+22",                 # Groundwater
       "OHL+18_DNA", "ZHZ+19",                                           # Sediment
@@ -769,7 +769,7 @@ orp16S_S2 <- function(pdf = FALSE) {
     plotEZ("NLE+21", "Bacteria", groupby = "Year", groups = c("2017", "2018"), legend.x = "bottomleft"),
     plotEZ("SPA+21", "Bacteria", groupby = "Depth", groups = c("Epi", "Secchi", "Meso"), legend.x = "bottomleft"),
 
-    message("\nHot Spring"),
+    message("\nGeothermal"),
     plotEZ("PCL+18_Acidic", "two", legend.x = "bottomright"),
     plotEZ("PCL+18_Alkaline", "two"),
     plotEZ("BMJ+19", "two", groupby = "Environment", groups = c("Hydrothermal Pond", "Yellow Lake", "Black Lake", "Assale Lake", "Cave Water")),
