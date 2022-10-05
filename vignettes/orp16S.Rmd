@@ -97,7 +97,7 @@ orp16S4()
 
 **Data sources (a):** Daya Bay [@WHLH21], Bay of Biscay [@LMBA21], Hunan Province [@MLL+19].
 
-**Data sources (c):** **1** acidic and **2** circumneutral to alkaline New Zealand hot springs [@PCL+18], **3** Dallol Geothermal Area [@BMJ+19], **4** Eastern Tibetan Plateau [@GWS+20], **5** Uzon Caldera [@PBU+20], **6** Southern Tibetan Plateau [@MWY+21].
+**Data sources (c):** **1** acidic and **2** circumneutral to alkaline New Zealand hot springs [@PCL+18], **3** Eastern Tibetan Plateau [@GWS+20], **4** Uzon Caldera [@PBU+20], **5** Southern Tibetan Plateau [@MWY+21].
 
 ## Summary of regression slopes for all datasets (Table 2)
 ```{r orp16S_T2}

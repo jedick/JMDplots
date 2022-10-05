@@ -6,7 +6,7 @@ envirotype <- list(
   "Lake & Pond" = c("SAR+13", "LLC+19", "BCA+21", "HLZ+18", "BWD+19", "IBK+22", "NLE+21", "SPA+21"),
   "Groundwater" = c("KLM+16", "WLJ+16", "ZDW+19", "DJK+18", "SRM+19", "APV+20", "YHK+20", "ZCZ+21", "MGW+22", "MCR+22"),
   # NOTE: Keep Geothermal in 4th location to get red color 20210904
-  "Geothermal" = c("PCL+18_Acidic", "PCL+18_Alkaline", "BMJ+19", "GWS+20", "PBU+20", "MWY+21"),
+  "Geothermal" = c("PCL+18_Acidic", "PCL+18_Alkaline", "GWS+20", "PBU+20", "MWY+21"),
   "Hyperalkaline" = c("SBP+20", "RMB+17", "CTS+17", "PSB+21"),
   "Sediment" = c("ZML+17", "BSPD17", "RKN+17", "HDZ+19", "OHL+18_DNA", "WHLH21", "RSS+18", "CLS+19", "HSF+19", "ZHZ+19",
                  "LMBA21_2017", "HSF+22", "ZZLL21", "WFB+21", "HCW+22", "WKG+22"),
@@ -189,7 +189,6 @@ orp16S3 <- function(pdf = FALSE) {
     "SPA+21, 45.8126, 8.7401", # SAMN17524543
     ## Geothermal (Hot Spring)
     "PCL+18_Acidic, -38.5, 176.0", # Fig. 1
-    "BMJ+19, 14.089567, 40.348583", # SAMN11581539
     "GWS+20, 30.12, 101.94", # SAMN13430433
     "PBU+20, 54.4395, 160.144194", # SAMN14538724
     # MWY+21 see below
@@ -395,28 +394,25 @@ orp16S4 <- function(pdf = FALSE) {
   # Use red for acidic
   iacid <- studies %in% c("PCL+18_Acidic", "LMG+20")
   col[iacid] <- orp16Scol[4]
-  # Use turquoise for hypersaline
-  ihyper <- studies %in% c("BMJ+19")
-  col[ihyper] <- "turquoise3"
   # Use gray for sediments
   ised <- studies %in% c("PBU+20", "MWY+21")
   col[ised] <- "gray"
 
   # Offset for labels 20211012
   dx <- list(
-    c(40, -190, 40, -220, 40, -180),
-    c(-380, -130, 20, -120, NA, -200)
+    c(40, -190, -220, 40, -180),
+    c(-380, -130, -120, NA, -200)
   )
   dy <- list(
-    c(0, -0.015, 0, -0.03, 0, -0.01),
-    c(-0.002, 0.03, 0, -0.007, NA, 0.007)
+    c(0, -0.015, -0.03, 0, -0.01),
+    c(-0.002, 0.03, -0.007, NA, 0.007)
   )
 
   # Loop over Bacteria and Archaea
   lineages <- c("Bacteria", "Archaea")
   for(k in 1:2) {
     dat <- EZlm[EZlm$lineage == lineages[k], ]
-    plot(c(-450, 400), c(-0.23, -0.08), type = "n", xlab = "Eh7 (mV)", ylab = cplab$ZC)
+    plot(c(-450, 400), c(-0.24, -0.12), type = "n", xlab = "Eh7 (mV)", ylab = cplab$ZC)
     for(j in seq_along(studies)) {
       with(dat[dat$study == studies[j], ], {
         # Divide by 1e3 to convert slope from V-1 to mV-1 20220520
@@ -435,12 +431,11 @@ orp16S4 <- function(pdf = FALSE) {
     if(k==1) {
       label.figure("c", font = 2, cex = 1.8, yfrac = 1.025)
       # Add legend
-      lhyper <- paste0("Hypersaline (", paste(which(ihyper), collapse = ", "), ")")
-      lsed <- paste0("Sediment (", paste(which(ised), collapse = ", "), ")")
       lacid <- paste0("Acidic (", paste(which(iacid), collapse = ", "), ")")
       lneut <- "Circumneutral to"
       lalk <- paste0("alkaline (", paste(which(col == orp16Scol[1]), collapse = ", "), ")")
-      legend("topleft", c(lhyper, lsed, lacid, lneut, lalk), col = c("turquoise3", "gray", orp16Scol[4], orp16Scol[1], NA), lwd = 2, bty = "n")
+      lsed <- paste0("Sediment (", paste(which(ised), collapse = ", "), ")")
+      legend("topleft", c(lacid, lneut, lalk, lsed), col = c(orp16Scol[4], orp16Scol[1], NA, "gray"), lwd = 2, bty = "n")
     }
   }
 
@@ -603,13 +598,13 @@ orp16S5 <- function(pdf = FALSE, EMP_primers = FALSE) {
   ## Take only datasets that use EMP primers 20221004
   if(EMP_primers) {
     uses_EMP_primers <- c(
-      "MLL+18", "LWJ+21", "RARG22",                                     # River & Seawater
-                                                                        # Lake & Pond
-      "PCL+18_Acidic", "PCL+18_Alkaline", "BMJ+19", "GWS+20", "MWY+21", # Geothermal
-      "SBP+20", "RMB+17",                                               # Hyperalkaline
-      "WLJ+16", "ZDW+19", "DJK+18", "APV+20", "MGW+22",                 # Groundwater
-      "OHL+18_DNA", "ZHZ+19",                                           # Sediment
-      "MLL+19", "PSG+20", "RKSK22", "CKB+22"                            # Soil
+      "MLL+18", "LWJ+21", "RARG22",                           # River & Seawater
+                                                              # Lake & Pond
+      "PCL+18_Acidic", "PCL+18_Alkaline", "GWS+20", "MWY+21", # Geothermal
+      "SBP+20", "RMB+17",                                     # Hyperalkaline
+      "WLJ+16", "ZDW+19", "DJK+18", "APV+20", "MGW+22",       # Groundwater
+      "OHL+18_DNA", "ZHZ+19",                                 # Sediment
+      "MLL+19", "PSG+20", "RKSK22", "CKB+22"                  # Soil
     )
     EZdat <- EZdat[EZdat$study %in% uses_EMP_primers, ]
     # Make sure we didn't miss any studies (check for typos ...)
@@ -619,13 +614,13 @@ orp16S5 <- function(pdf = FALSE, EMP_primers = FALSE) {
   ## Panel A: Scatterplots and fits for Bacteria and Archaea in each environment
   par(mar = c(0, 0, 1, 0))
   xlim <- range(EZdat$Eh7)
-  ylim <- range(EZdat$ZC)
+  ylim <- range(EZdat$ZC, -0.1)
   eedat <- EZdat[EZdat$lineage == "Bacteria", ]
-  slopes <- list()
-  slopes$Bacteria <- eachenv(eedat, xlim = xlim, ylim = ylim, lineage = "Bacteria")
+  global.slopes <- list()
+  global.slopes$Bacteria <- eachenv(eedat, xlim = xlim, ylim = ylim, lineage = "Bacteria")
   par(mar = c(1, 0, 0, 0))
   eedat <- EZdat[EZdat$lineage == "Archaea", ]
-  slopes$Archaea <- eachenv(eedat, xlim = xlim, ylim = ylim, lineage = "Archaea")
+  global.slopes$Archaea <- eachenv(eedat, xlim = xlim, ylim = ylim, lineage = "Archaea")
   # Add labels
   plot.new()
   text(0.5, -0.5, "Eh7 (mV)", cex = 1.2, xpd = NA)
@@ -668,7 +663,7 @@ orp16S5 <- function(pdf = FALSE, EMP_primers = FALSE) {
 
   if(pdf) dev.off()
   # Return slopes 20220611
-  invisible(slopes)
+  invisible(global.slopes)
 
 }
 
@@ -772,7 +767,6 @@ orp16S_S2 <- function(pdf = FALSE) {
     message("\nGeothermal"),
     plotEZ("PCL+18_Acidic", "two", legend.x = "bottomright"),
     plotEZ("PCL+18_Alkaline", "two"),
-    plotEZ("BMJ+19", "two", groupby = "Environment", groups = c("Hydrothermal Pond", "Yellow Lake", "Black Lake", "Assale Lake", "Cave Water")),
     plotEZ("GWS+20", "two", groupby = "Hydrothermal Field", groups = c("Batang", "Litang", "Kangding")),
     plotEZ("PBU+20", "Bacteria", groupby = "Type", groups = c("Cauldron", "Sampling Pit", "Spring", "Geyser Valley (Control)"), legend.x = "bottomright"),
     plotEZ("MWY+21", "two", groupby = "Location", groups = c("Quseyongba", "Moluojiang", "Daggyai", "Quzhuomu"), legend.x = "bottomright"),
@@ -1075,12 +1069,12 @@ getmdat_orp16S <- function(study, metrics = NULL, dropNA = TRUE, size = NULL, qu
   }
   if(shortstudy %in% c(
     "MLL+19", "HXZ+20", "BCA+21", "RMB+17", "SBP+20", "MWY+21", "SAR+13", "CTS+17", "HDZ+19", "ZHZ+19",
-    "YHK+20", "BMJ+19", "SRM+19", "HLZ+18", "PSG+20", "ZCZ+21", "ZZL+21", "PBU+20", "MLL+18", "BWD+19",
-    "WHL+21", "HSF+19", "ZML+17", "DTJ+20", "WFB+21", "KLM+16", "LMBA21", "BSPD17", "CWC+20", "BMOB18",
-    "LJC+20", "DLS21", "ZZLL21", "GWS+20", "CLS+19", "GZL21", "LLC+19", "NLE+21", "APV+20", "WHLH21",
-    "PCL+18", "GSBT20", "SPA+21", "IBK+22", "HSF+22", "HCW+22", "WKP+22", "CKB+22", "WHLH21a", "RSS+18",
-    "PSB+21", "RKSK22", "WLJ+16", "DJK+18", "OHL+18", "ZLH+22", "LWJ+21", "MGW+22", "RKN+17", "ZDW+19",
-    "WKG+22", "CLZ+22", "RARG22", "MCR+22"
+    "YHK+20", "SRM+19", "HLZ+18", "PSG+20", "ZCZ+21", "ZZL+21", "PBU+20", "MLL+18", "BWD+19", "WHL+21",
+    "HSF+19", "ZML+17", "DTJ+20", "WFB+21", "KLM+16", "LMBA21", "BSPD17", "CWC+20", "BMOB18", "LJC+20",
+    "DLS21",  "ZZLL21", "GWS+20", "CLS+19", "GZL21",  "LLC+19", "NLE+21", "APV+20", "WHLH21", "PCL+18",
+    "GSBT20", "SPA+21", "IBK+22", "HSF+22", "HCW+22", "WKP+22", "CKB+22", "WHLH21a", "RSS+18", "PSB+21",
+    "RKSK22", "WLJ+16", "DJK+18", "OHL+18", "ZLH+22", "LWJ+21", "MGW+22", "RKN+17", "ZDW+19", "WKG+22",
+    "CLZ+22", "RARG22", "MCR+22"
   )) {
     # General processing of metadata for orp16S datasets 20210820
     # Get Eh or ORP values (uses partial name matching, can match a column named "Eh (mV)")
@@ -1417,13 +1411,14 @@ orp16S_S4 <- function(pdf = FALSE) {
 
   # Use only samples with non-NA O2
   hasO2dat <- EZdat[!is.na(EZdat$O2_umol_L), ] 
+  ylim <- range(hasO2dat$ZC, -0.1)
 
   # Loop over domains
   for(lineage in c("Bacteria", "Archaea")) {
     par(mar = c(4, 4, 1.5, 1))
     thisdat <- hasO2dat[hasO2dat$lineage == lineage, ]
     # ZC-Eh7 plot
-    plot(c(-500, 700), range(hasO2dat$ZC), type = "n", xlab = "Eh7 (mV)", ylab = cplab$ZC)
+    plot(c(-500, 700), ylim, type = "n", xlab = "Eh7 (mV)", ylab = cplab$ZC)
     # Add linear fit; include number of studies in legend 20210925
     nstudy <- length(unique(thisdat$study))
     add.linear.global(thisdat$Eh7, thisdat$ZC, nstudy)
@@ -1431,11 +1426,11 @@ orp16S_S4 <- function(pdf = FALSE) {
     eachenv(thisdat, add = TRUE, do.linear = FALSE, xvar = "Eh7")
     title(lineage, font.main = 1)
     # ZC-Eh plot
-    plot(c(-500, 700), range(hasO2dat$ZC), type = "n", xlab = "Eh (mV)", ylab = cplab$ZC)
+    plot(c(-500, 700), ylim, type = "n", xlab = "Eh (mV)", ylab = cplab$ZC)
     add.linear.global(thisdat$Eh, thisdat$ZC, nstudy, xvar = "Eh")
     eachenv(thisdat, add = TRUE, do.linear = FALSE, xvar = "Eh")
     # ZC-O2 plot
-    plot(c(0, 750), range(hasO2dat$ZC), type = "n", xlab = quote(O[2]~"("*mu*"mol l"^{-1}*")"), ylab = cplab$ZC)
+    plot(c(0, 750), ylim, type = "n", xlab = quote(O[2]~"("*mu*"mol l"^{-1}*")"), ylab = cplab$ZC)
     add.linear.global(thisdat$O2_umol_L, thisdat$ZC, nstudy, xvar = "O2")
     eachenv(thisdat, add = TRUE, do.linear = FALSE, xvar = "O2")
     # Add legend
