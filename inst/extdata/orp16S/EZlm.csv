@@ -13,8 +13,8 @@ LWJ+21,"Plastisphere",River & Seawater,Archaea,16,158.65,292.3,0.0259132,-0.1339
 GZL21,"Three Gorges Reservoir",River & Seawater,Bacteria,50,184.58,398.37,-0.0477532,-0.13431,-0.238839
 RARG22,"Taxco AMD",River & Seawater,Bacteria,27,271.53,542.72,0.02558,-0.162071,0.418918
 RARG22,"Taxco AMD",River & Seawater,Archaea,9,271.53,518.68,0.00444689,-0.198408,0.887915
-SAR+13,"Microbial Mat, Kiritimati Atoll",Lake & Pond,Bacteria,22,-161.52,-2,0.217449,-0.128877,0.961509
-SAR+13,"Microbial Mat, Kiritimati Atoll",Lake & Pond,Archaea,25,-161.52,-2,0.335373,-0.0864853,0.955623
+SAR+13,"Microbial Mat, Kiritimati Atoll",Lake & Pond,Bacteria,21,-161.52,-2,0.231236,-0.127903,0.963946
+SAR+13,"Microbial Mat, Kiritimati Atoll",Lake & Pond,Archaea,20,-161.52,-2,0.297248,-0.0872491,0.963635
 LLC+19,"Xidong Reservoir, Xiamen",Lake & Pond,Bacteria,36,29,563,0.00113517,-0.136343,0.0748432
 BCA+21,"Ursu Lake, Romania",Lake & Pond,Bacteria,36,-433.66,231.18,0.0248211,-0.162936,0.796614
 HLZ+18,"Xiamen Reservoirs and Ponds",Lake & Pond,Bacteria,27,-3.99,522.71,0.0363921,-0.15093,0.649557
@@ -38,7 +38,7 @@ RMB+17,"Samail Ophiolite",Hyperalkaline,Archaea,12,-118.25,268.14,0.0637734,-0.1
 CTS+17,"Santa Elena Ophiolite",Hyperalkaline,Bacteria,32,-78.17,243.34,-0.0311877,-0.150462,-0.264358
 CTS+17,"Santa Elena Ophiolite",Hyperalkaline,Archaea,31,-78.17,243.34,-0.116889,-0.159393,-0.671698
 PSB+21,"CROMO 2",Hyperalkaline,Bacteria,81,-129.14,222.5,0.0121987,-0.155485,0.108546
-KLM+16,"Sarnia nZVI Injection",Groundwater,Bacteria,28,-171.01,39.16,0.0857606,-0.156189,0.616673
+KLM+16,"Sarnia nZVI Injection",Groundwater,Bacteria,28,-171.01,39.16,0.0880175,-0.154615,0.638755
 WLJ+16,"Hetao Basin",Groundwater,Bacteria,16,-204.75,231.38,0.0119413,-0.155304,0.240016
 WLJ+16,"Hetao Basin",Groundwater,Archaea,6,-192.22,153.49,0.0580538,-0.151295,0.386588
 ZDW+19,"Jianghan Plain",Groundwater,Bacteria,48,-170.52,-15.45,0.0174047,-0.161024,0.137671

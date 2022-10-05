@@ -136,6 +136,8 @@ orp16S3()
 orp16S_T2()
 
 # "Raw" metrics with lots of messages printed
+# NOTE: the messages include values for the last two columns of Table S2 of the paper
+# (% Classification to genus level and % Mapping to NCBI taxonomy)
 getmetrics_orp16S("MLL+19", quiet = FALSE)
 # Metrics with associated metadata
 metrics <- getmetrics_orp16S("SPA+21")

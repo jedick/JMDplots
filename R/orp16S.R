@@ -521,7 +521,7 @@ orp16S6 <- function(pdf = FALSE, EMP_primers = FALSE) {
       "MLL+18", "LWJ+21", "RARG22",                           # River & Seawater
                                                               # Lake & Pond
       "PCL+18_Acidic", "PCL+18_Alkaline", "GWS+20", "MWY+21", # Geothermal
-      "SBP+20", "RMB+17",                                     # Hyperalkaline
+      "SBP+20", "RMB+17", "PSB+21",                           # Hyperalkaline
       "WLJ+16", "ZDW+19", "DJK+18", "APV+20", "MGW+22",       # Groundwater
       "OHL+18_DNA", "ZHZ+19",                                 # Sediment
       "MLL+19", "PSG+20", "RKSK22", "CKB+22"                  # Soil
