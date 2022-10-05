@@ -7,10 +7,10 @@
 \alias{orp16S4}
 \alias{orp16S5}
 \alias{orp16S6}
+\alias{orp16S7}
 \alias{orp16S_S1}
 \alias{orp16S_S2}
 \alias{orp16S_S3}
-\alias{orp16S_S4}
 \alias{orp16S_T2}
 \alias{getmdat_orp16S}
 \alias{getmetrics_orp16S}
@@ -25,12 +25,12 @@ Plots from the paper by Dick and Meng (2021).
   orp16S2(pdf = FALSE)
   orp16S3(pdf = FALSE)
   orp16S4(pdf = FALSE)
-  orp16S5(pdf = FALSE, EMP_primers = FALSE)
-  orp16S6(pdf = FALSE)
+  orp16S5(pdf = FALSE)
+  orp16S6(pdf = FALSE, EMP_primers = FALSE)
+  orp16S7(pdf = FALSE)
   orp16S_S1(pdf = FALSE)
-  orp16S_S2(pdf = FALSE)
-  orp16S_S3(global.slopes, pdf = FALSE)
-  orp16S_S4(pdf = FALSE)
+  orp16S_S2(global.slopes, pdf = FALSE)
+  orp16S_S3(pdf = FALSE)
   orp16S_T2()
   getmdat_orp16S(study, metrics = NULL, dropNA = TRUE, size = NULL, quiet = TRUE)
   getmetrics_orp16S(study, mincount = 100, quiet = TRUE, ...)
@@ -57,16 +57,16 @@ This table gives a brief description of each plotting function.
   \code{orp16S1} \tab Outline of methods \cr
   \code{orp16S2} \tab Chemical depth profiles in Winogradsky columns \cr
   \code{orp16S3} \tab Sample locations on world map \cr
-  \code{orp16S4} \tab Linear regressions between Eh7 and \ZC at local scales \cr
-  \code{orp16S5} \tab Linear regressions between Eh7 and \ZC at a global scale. Set \code{EMP_primers} to TRUE to make Figure S5. \cr
-  \code{orp16S6} \tab Comparison of 16S-based community reference proteomes with metaproteomes \cr
-  \code{orp16S_S1} \tab Eh-pH diagram (outline from Baas Becking et al., 1960) \cr
-  \code{orp16S_S2} \tab \ZC-Eh scatterplots for each dataset \cr
-  \code{orp16S_S3} \tab Regresssion slopes from local to global scale \cr
-  \code{orp16S_S4} \tab Comparison of Eh7, Eh, and \O2 as predictors of carbon oxidation state \cr
+  \code{orp16S4} \tab Eh-pH diagram for all environment types (outline is from Baas Becking et al., 1960) \cr
+  \code{orp16S5} \tab Linear regressions between Eh7 and \ZC at local scales \cr
+  \code{orp16S6} \tab Linear regressions between Eh7 and \ZC at a global scale. Set \code{EMP_primers} to TRUE to make Figure S4. \cr
+  \code{orp16S7} \tab Comparison of 16S-based community reference proteomes with metaproteomes \cr
+  \code{orp16S_S1} \tab \ZC-Eh scatterplots for each dataset \cr
+  \code{orp16S_S2} \tab Regresssion slopes from local to global scale \cr
+  \code{orp16S_S3} \tab Comparison of Eh7, Eh, and \O2 as predictors of carbon oxidation state \cr
 }
 
-\code{orp16S_S2} creates the files \file{EZdat.csv} and \file{EZlm.csv} that are used by the other plotting functions and correspond to Datasets S1 and D2 in the paper.
+\code{orp16S_S1} creates the files \file{EZdat.csv} and \file{EZlm.csv} that are used by the other plotting functions and correspond to Datasets S1 and D2 in the paper.
 \file{EZdat.csv} has sample data and metadata: study key, environment type, lineage (Bacteria or Archaea), sample name, SRA or MG-RAST accession number, grouping description, sample group, values of T (°C), pH, \O2 concentration (\umol/L), Eh (mV), Eh7 (mV), and \ZC.
 \file{EZlm.csv} has regression results for each dataset and domain: study key, environment type, lineage, number of samples, Eh7 range, slope (V\S{-1}) and intercept (\ZC) of of linear regression, and Pearson correlation coefficient.
 
@@ -94,8 +94,8 @@ The function also returns information in a data frame, which is used to fill in 
       RDP Classifier results combined into a single CSV file for each study, created with the \code{classify} and \code{mkRDP} function2 in \file{pipeline.R}.
     }
     \item{\file{hydro_p}}{Shapefiles for the North American Great Lakes, downloaded from USGS (2010).}
-    \item{\file{EZdat.csv}}{Data for all samples, created by \code{orp16S_S2}.}
-    \item{\file{EZlm.csv}}{Linear fits between Eh7 and \ZC for each dataset created by \code{orp16S_S2}.}
+    \item{\file{EZdat.csv}}{Data for all samples, created by \code{orp16S_S1}.}
+    \item{\file{EZlm.csv}}{Linear fits between Eh7 and \ZC for each dataset created by \code{orp16S_S1}.}
     \item{\file{BKM60.csv}}{Outline of Eh-pH range of natural environments, digitized from Fig. 32 of Baas Becking et al. (1960).}
     \item{\file{HWLH22_Jun_2018_aa.csv}, \file{HWLH22_Sep_2018_aa.csv}}{Sum of amino acid composition of all peptides in each sample from the metaproteomic study of Han et al. (2022).}
     \item{\file{mkaa.R}}{Script used to process source metaproteomic data to make the \file{*aa.csv} files.}
@@ -109,7 +109,7 @@ The function also returns information in a data frame, which is used to fill in 
 }
 
 \seealso{
-\code{\link{plotEZ}} is used to make the \ZC-Eh7 scatterplots and linear fits in \code{orp16S4} and \code{orp16S_S2}.
+\code{\link{plotEZ}} is used to make the \ZC-Eh7 scatterplots and linear fits in \code{orp16S5} and \code{orp16S_S1}.
 }
 
 \references{

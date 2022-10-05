@@ -323,9 +323,63 @@ orp16S3 <- function(pdf = FALSE) {
 
 }
 
-# Linear regressions between Eh7 and ZC at local scales 20220517
+# Eh-pH diagram for all environment types 20220516
 orp16S4 <- function(pdf = FALSE) {
   if(pdf) pdf("Figure_4.pdf", width = 8, height = 6)
+  layout(t(matrix(1:2)), widths = c(3, 1))
+  # Get data for unique samples
+  ssr <- paste(EZdat$study, EZdat$sample, EZdat$Run, sep = "_")
+  idup <- duplicated(ssr)
+  thisdat <- EZdat[!idup, ]
+  # Remove NA pH
+  thisdat <- thisdat[!is.na(thisdat$pH), ]
+  # Get colors
+  ienv <- match(thisdat$envirotype, names(envirotype))
+  col <- orp16Scol[ienv]
+  # Make plot
+  par(mar = c(4, 4, 1, 1))
+  plot(thisdat$pH, thisdat$Eh, col = col, pch = 19, cex = 0.5, xlab = "pH", ylab = "Eh (mV)",
+       xlim = c(-2, 14), ylim = c(-600, 1000), xaxs = "i", yaxs = "i", axes = FALSE)
+  box()
+  axis(1, at = seq(-2, 14, 2))
+  axis(2, at = seq(-600, 1000, 200))
+  # Add outline from Bass Becking et al. (1960)
+  BKM60 <- read.csv(system.file("extdata/orp16S/BKM60.csv", package = "JMDplots"))
+  segment <- NULL
+  top <- subset(BKM60, segment == "top")
+  lines(top$pH, top$Eh)
+  bottom <- subset(BKM60, segment == "bottom")
+  lines(bottom$pH, bottom$Eh)
+  left <- subset(BKM60, segment == "left")
+  for(i in 1:(nrow(left)/2)) {
+    ii <- c(i*2-1, i*2)
+    lines(left$pH[ii], left$Eh[ii])
+  }
+  right <- subset(BKM60, segment == "right")
+  for(i in 1:(nrow(right)/2)) {
+    ii <- c(i*2-1, i*2)
+    lines(right$pH[ii], right$Eh[ii])
+  }
+  O2 <- subset(BKM60, segment == "O2")
+  lines(O2$pH, O2$Eh, lwd = 2)
+  H2 <- subset(BKM60, segment == "H2")
+  lines(H2$pH, H2$Eh, lwd = 2)
+  text(0, 55, quote(H^"+"), cex = 1.2, srt = -30)
+  text(-0.5, -35, quote(H[2]), cex = 1.2, srt = -30)
+  text(5.5, 840, quote(H[2]*O), cex = 1.2, srt = -30)
+  text(6, 930, quote(O[2]), cex = 1.2, srt = -30)
+  # Add legend
+  par(mar = c(4, 1, 1, 1))
+  plot.new()
+  ienv = c(1, 2, 4, 5, 3, 6, 7)
+  ltext <- names(envirotype)[ienv]
+  legend("left", ltext, pch = 19, col = orp16Scol[ienv], bty = "n")
+  if(pdf) dev.off()
+}
+
+# Linear regressions between Eh7 and ZC at local scales 20220517
+orp16S5 <- function(pdf = FALSE) {
+  if(pdf) pdf("Figure_5.pdf", width = 8, height = 6)
   mat <- matrix(c(1,1,1,1, 2,2,2,2, 3,3,3,3,
                   0,0,0,0,0,0,0,0,0,0,0,0,
                   4,4,4,4,4, 0, 6,6,6, 7,7,7,
@@ -363,7 +417,7 @@ orp16S4 <- function(pdf = FALSE) {
   j2 <- env$groupnum %in% i2
   xlim <- range(log10(lmbac$nsamp[j1 | j2]))
   # Multiply by 1e3 to use V-1 instead of mV-1 20210913
-  # NOTE: conversion to V-1 has been moved to orp16S_S2() 20220520
+  # NOTE: conversion to V-1 has been moved to orp16S_S1() 20220520
   ymaxabs <- max(abs(lmbac$slope[j1 | j2]))
   ylim <- c(-ymaxabs*1.2, ymaxabs)
   # River & seawater, lake & pond, geothermal, hyperalkaline
@@ -443,10 +497,287 @@ orp16S4 <- function(pdf = FALSE) {
 
 }
 
-# Regression slopes from local to global scale 20220611
-orp16S_S3 <- function(global.slopes, pdf = FALSE) {
+# Figure 6: Linear regressions between Eh7 and ZC at a global scale 20210828
+orp16S6 <- function(pdf = FALSE, EMP_primers = FALSE) {
 
-  if(pdf) pdf("Figure_S3.pdf", width = 8, height = 3)
+  if(pdf) {
+    if(EMP_primers) pdf("Figure_S4.pdf", width = 10, height = 7)
+    else pdf("Figure_6.pdf", width = 10, height = 7)
+  }
+  mat <- matrix(c(
+    16, 16, rep(1:7, each = 6), 17, 17,
+    16, 16, rep(8:14, each = 6), 18, 18,
+    rep(15, 46),
+    rep(0, 46),
+    rep(0, 5), rep(19, 16), rep(20, 16), rep(21, 9)
+  ), nrow = 5, byrow = TRUE)
+  layout(mat, heights = c(2, 2, 0.5, 0.5, 4))
+  par(mar = c(4, 4, 1, 1))
+  par(mgp = c(2.5, 1, 0))
+
+  ## Take only datasets that use EMP primers 20221004
+  if(EMP_primers) {
+    uses_EMP_primers <- c(
+      "MLL+18", "LWJ+21", "RARG22",                           # River & Seawater
+                                                              # Lake & Pond
+      "PCL+18_Acidic", "PCL+18_Alkaline", "GWS+20", "MWY+21", # Geothermal
+      "SBP+20", "RMB+17",                                     # Hyperalkaline
+      "WLJ+16", "ZDW+19", "DJK+18", "APV+20", "MGW+22",       # Groundwater
+      "OHL+18_DNA", "ZHZ+19",                                 # Sediment
+      "MLL+19", "PSG+20", "RKSK22", "CKB+22"                  # Soil
+    )
+    EZdat <- EZdat[EZdat$study %in% uses_EMP_primers, ]
+    # Make sure we didn't miss any studies (check for typos ...)
+    stopifnot(all(uses_EMP_primers %in% EZdat$study))
+  }
+
+  ## Panel A: Scatterplots and fits for Bacteria and Archaea in each environment
+  par(mar = c(0, 0, 1, 0))
+  xlim <- range(EZdat$Eh7)
+  ylim <- range(EZdat$ZC, -0.1)
+  eedat <- EZdat[EZdat$lineage == "Bacteria", ]
+  global.slopes <- list()
+  global.slopes$Bacteria <- eachenv(eedat, xlim = xlim, ylim = ylim, lineage = "Bacteria")
+  par(mar = c(1, 0, 0, 0))
+  eedat <- EZdat[EZdat$lineage == "Archaea", ]
+  global.slopes$Archaea <- eachenv(eedat, xlim = xlim, ylim = ylim, lineage = "Archaea")
+  # Add labels
+  plot.new()
+  text(0.5, -0.5, "Eh7 (mV)", cex = 1.2, xpd = NA)
+  plot.new()
+  text(0.2, 0.5, cplab$ZC, cex = 1.2, srt = 90, xpd = NA)
+  label.figure("a", font = 2, cex = 2, xfrac = 0.34, yfrac = 0.965)
+  plot.new()
+  text(0.3, 0.5, "Bacteria", srt = 90, xpd = NA)
+  plot.new()
+  text(0.3, 0.5, "Archaea", srt = 90, xpd = NA)
+ 
+  ## Panel B: Scatterplots and fits for Bacteria and Archaea in all environments 20210914
+  # Start plot for Bacteria
+  par(mar = c(4, 4, 1, 1))
+  plot(c(-500, 650), range(EZdat$ZC), type = "n", xlab = "Eh7 (mV)", ylab = cplab$ZC)
+  # Use Bacteria only
+  thisdat <- EZdat[EZdat$lineage == "Bacteria", ]
+  # Add linear fit; include number of studies in legend 20210925
+  nstudy <- length(unique(thisdat$study))
+  add.linear.global(thisdat$Eh7, thisdat$ZC, nstudy)
+  # Add points
+  eachenv(thisdat, add = TRUE, do.linear = FALSE)
+  title("Bacteria", font.main = 1, line = 0.5, xpd = NA)
+  label.figure("b", font = 2, cex = 2, xfrac = 0.02, yfrac = 1)
+
+  # Now do Archaea
+  plot(c(-500, 650), range(EZdat$ZC), type = "n", xlab = "Eh7 (mV)", ylab = cplab$ZC)
+  thisdat <- EZdat[EZdat$lineage == "Archaea", ]
+  nstudy <- length(unique(thisdat$study))
+  add.linear.global(thisdat$Eh7, thisdat$ZC, nstudy)
+  eachenv(thisdat, add = TRUE, do.linear = FALSE)
+  title("Archaea", font.main = 1, line = 0.5, xpd = NA)
+
+  # Add legend
+  par(mar = c(4, 1, 1, 1))
+  plot.new()
+  ienv = c(1, 2, 4, 5, 3, 6, 7)
+  ltext <- names(envirotype)[ienv]
+  legend("left", ltext, pch = 19, col = orp16Scol[ienv], bty = "n")
+
+  if(pdf) dev.off()
+  # Return slopes 20220611
+  invisible(global.slopes)
+
+}
+
+# Comparison of 16S-based community reference proteomes with metaproteomes 20220930
+orp16S7 <- function(pdf = FALSE) {
+
+  if(pdf) pdf("Figure_7.pdf", width = 8, height = 7)
+  par(mfrow = c(2, 2))
+  par(mar = c(4.5, 4, 3.5, 1))
+  par(mgp = c(2.5, 1, 0))
+  ylim <- c(-0.16, -0.08)
+
+  # Loop over months
+  for(month in c("Jun", "Sep")) {
+
+    study <- paste0("WHLH21a_", month)
+    longmonth <- ifelse(month == "Jun", "June", "September")
+    label <- ifelse(month == "Jun", "a", "b")
+    legend.x <- ifelse(month == "Jun", "topright", NA)
+
+    # Plot 1: ZC vs Eh7 for 16S data
+    plotEZ(study, "Bacteria", groupby = "Stage", groups = c("Algae", "Cyanolichen", "Chlorolichen", "Moss"), legend.x = legend.x,
+      ylim = ylim, title.line = NULL, slope.legend = "topleft", ylab = quote(italic(Z)[C]~"of community reference proteome"))
+    # Collection date is from BioSample data for PRJNA640847
+    title(paste("16S rRNA gene sequences of biocrusts\ncollected in", longmonth, "2018"), font.main = 1)
+    label.figure(label, font = 2, cex = 1.5)
+    # Get 16S data
+    metrics <- getmetrics_orp16S("WHLH21a")
+    mdat <- getmdat_orp16S(study, metrics = metrics)
+    ZC_16S <- mdat$metrics$ZC
+
+    # Plot 2: ZC vs Eh for metaproteome
+    # Amino acid composition and ZC
+    file <- paste0("extdata/orp16S/HWLH22_", month, "_2018_aa.csv")
+    aa <- read.csv(system.file(file, package = "JMDplots"))
+    ZC <- ZCAA(aa)
+    # Match 16S to MP samples
+    iaa <- match(mdat$metadata$LibraryName, paste0(aa$abbrv, aa$organism))
+    ZC_MP <- ZCAA(aa)[iaa]
+    # Get point symbols and color
+    groups <- c("Algae", "Cyanolichen", "Chlorolichen", "Moss")
+    igroup <- match(mdat$metadata$Stage, groups)
+    pch <- (21:24)[igroup]
+    col <- orp16Scol[igroup]
+    # Make plot
+    Eh7 <- mdat$metadata$Eh7
+    # The following is adapted from plotEZ()
+    # Start new plot
+    plot(Eh7, ZC_MP, xlab = "", type = "n",
+      ylim = ylim, ylab = quote(italic(Z)[C]~"of peptides from metaproteome"))
+    # Draw x-axis label with mtext to avoid getting cut off by small margin 20220517
+    mtext("Eh7 (mV)", side = 1, line = par("mgp")[1], cex = par("cex"))
+    points(Eh7, ZC_MP, pch = pch, col = col, bg = col)
+    add.linear.local(Eh7, ZC_MP, legend = "bottomleft")
+    # Collection date is from https://www.iprox.cn/page/project.html?id=IPX0003299000
+    title(paste("Metaproteomes of biocrusts\ncollected in", longmonth, "2018"), font.main = 1)
+
+  }
+
+  if(pdf) dev.off()
+
+}
+
+
+# Figure S1: ZC-Eh scatterplots for all studies 20210827
+# This also creates files EZdat (Eh and ZC values) and
+# EZlm (linear fits) for use by other plotting functions
+orp16S_S1 <- function(pdf = FALSE) {
+
+  # Setup figure
+  if(pdf) pdf("Figure_S1.pdf", width = 9, height = 12)
+  par(mfrow = c(4, 3))
+
+  results <- c(
+
+    message("\nRiver & Seawater"),
+    plotEZ("MLL+18", "Bacteria", groupby = "Season", groups = c("Summer", "Winter"), legend.x = "bottomright"),
+    plotEZ("HXZ+20", "Bacteria", groupby = "Station", groups = c("SYBL", "C4")),
+    plotEZ("GSBT20_Prefilter", "two", groupby = "Region", groups = c("West Coast U.S.", "Great Lakes", "East Coast U.S.", "Europe", "Asia"),
+           legend.x = "bottomright", dylim = c(-0.015, 0)),
+    plotEZ("GSBT20_Postfilter", "two", groupby = "Region", groups = c("West Coast U.S.", "Great Lakes", "East Coast U.S.", "Europe", "Asia"),
+           legend.x = "bottomright", dylim = c(-0.007, 0), dxlim = c(0, 75)),
+    plotEZ("WHL+21", "Bacteria", groupby = "Season", groups = c("Spring", "Summer", "Autumn", "Winter"), legend.x = "bottomleft"),
+    plotEZ("ZLH+22", "Bacteria"),
+    plotEZ("ZZL+21", "Bacteria", groupby = "Location", groups = c("Main Stream", "Animal Farm", "Hospital", "WWTP", "Tributary"),
+           legend.x = "bottomright", dxlim = c(0, 100)),
+    plotEZ("LWJ+21", "two", groupby = "Type", groups = c("Freshwater", "Freshwater Plastic", "Seawater", "Seawater Plastic"), dylim = c(0, 0.01)),
+    plotEZ("GZL21", "Bacteria", groupby = "Type", groups = c("Surface water", "Middle water", "Bottom water"), legend.x = "bottomleft"),
+    plotEZ("RARG22", "two", groupby = "Group", groups = c("AMD", "Abiotic Treatment", "Biotic Treatment", "Stream")),
+
+    message("\nLake & Pond"),
+    plotEZ("SAR+13", "two", groupby = "Zone", groups = c("Photic-oxic", "Transition", "Anoxic")),
+    plotEZ("LLC+19", "Bacteria", groupby = "Size", groups = c("Free-living", "Particle-associated")),
+    plotEZ("BCA+21", "Bacteria", groupby = "Month", groups = c("Jul", "Nov", "Feb", "Apr")),
+    plotEZ("HLZ+18", "Bacteria", groupby = "Type", groups = c("Reservoir", "Pond"), legend.x = "bottomright"),
+    plotEZ("BWD+19", "Bacteria", groupby = "Cover", groups = c("Ice", "Ice Free"), legend.x = "bottomright"),
+    plotEZ("IBK+22", "two", groupby = "Land Use", groups = c("Arable", "Forest", "Grassland")),
+    plotEZ("NLE+21", "Bacteria", groupby = "Year", groups = c("2017", "2018"), legend.x = "bottomleft"),
+    plotEZ("SPA+21", "Bacteria", groupby = "Depth", groups = c("Epi", "Secchi", "Meso"), legend.x = "bottomleft"),
+
+    message("\nGeothermal"),
+    plotEZ("PCL+18_Acidic", "two", legend.x = "bottomright"),
+    plotEZ("PCL+18_Alkaline", "two"),
+    plotEZ("GWS+20", "two", groupby = "Hydrothermal Field", groups = c("Batang", "Litang", "Kangding")),
+    plotEZ("PBU+20", "Bacteria", groupby = "Type", groups = c("Cauldron", "Sampling Pit", "Spring", "Geyser Valley (Control)"), legend.x = "bottomright"),
+    plotEZ("MWY+21", "two", groupby = "Location", groups = c("Quseyongba", "Moluojiang", "Daggyai", "Quzhuomu"), legend.x = "bottomright"),
+
+    message("\nHyperalkaline"),
+    plotEZ("SBP+20", "Bacteria", groupby = "pH Group", groups = c("< 10", "> 10")),
+    plotEZ("RMB+17", "two", groupby = "pH Group", groups = c("< 10", "> 10")),
+    plotEZ("CTS+17", "two", groupby = "Type", groups = c("River", "Well", "Spring"), legend.x = "bottomleft"),
+    plotEZ("PSB+21", "Bacteria", groupby = "O2 range", groups = c("> 0.5 mg/L", "0.2-0.5 mg/L", "< 0.2 mg/L"), dxlim = c(-100, 0), dylim = c(0, 0.01)),
+
+    message("\nGroundwater"),
+    plotEZ("KLM+16", "Bacteria", groupby = "Day", groups = c(-1, 246, 448, 671)),
+    plotEZ("WLJ+16", "two", groupby = "Arsenic", groups = c("As < 100 \u03BCg/L", "As > 100 \u03BCg/L")),
+    plotEZ("ZDW+19", "two", groupby = "Season", groups = c("Non-monsoon", "Spring", "Monsoon", "Autumn"), legend.x = "bottomright"),
+    plotEZ("DJK+18", "two", groupby = "Aquifer", groups = c("Athens", "Greene", "Licking"), legend.x = "bottomleft"),
+    plotEZ("SRM+19", "Bacteria", groupby = "Land Use", groups = c("Agriculture", "Community", "Landfill", "Mine")),
+    plotEZ("APV+20", "two", groupby = "Type", groups = c("Piezometer", "Well", "Spring"), legend.x = "bottomleft"),
+    plotEZ("YHK+20", "Bacteria", groupby = "Location", groups = c("Upper Hillslope", "Middle Slope", "Lower Footslope"), dylim = c(0, 0.005)),
+    plotEZ("ZCZ+21", "Bacteria", groupby = "Location", groups = c("LO", "CR1", "MN", "VA", "BS", "CR2"), legend.x = "topright"),
+    plotEZ("MGW+22", "two", groupby = "Region", groups = c("Auckland", "Canterbury", "Taupo", "Wellington"), legend.x = "bottomleft", dylim = c(-0.006, 0)),
+    plotEZ("MCR+22", "two", groupby = "Location", groups = c("Upstream", "WWTP", "Farm", "Swamp"), legend.x = "bottomleft"),
+
+    message("\nSediment"),
+    plotEZ("ZML+17", "two", groupby = "Depth", groups = c("\u2264 5 cm", "\u2265 10 cm", "\u2265 20 cm"), legend.x = "bottomleft", dylim = c(-0.003, 0)),
+    plotEZ("BSPD17", "Bacteria", groupby = "Type", groups = c("Water", "Sediment")),
+    plotEZ("RKN+17", "two", groupby = "Treatment", groups = c("CH4", "CH4+Fe", "CH4+Mn"), legend.x = "bottomleft"),
+    plotEZ("HDZ+19", "Bacteria", groupby = "Type", groups = c("Water", "Sediment")),
+    plotEZ("OHL+18_DNA", "two", groupby = "Location", groups = c("Kal\u00f8 Vig", "Lake Constance", "Norsminde Fjord")),
+    plotEZ("WHLH21", "Bacteria", groupby = "Position", groups = c("Surface", "Middle", "Bottom"), legend.x = "bottomleft"),
+    plotEZ("RSS+18", "Bacteria", groupby = "Site", groups = c("Deep Hole", "Snowgoose Bay", "John's Island", "Skeleton Lake"), dylim = c(0, 0.005)),
+    plotEZ("CLS+19", "two", groupby = "Type", groups = c("Water", "Sediment"), legend.x = "bottomright", dylim = c(-0.002, 0)),
+    plotEZ("HSF+19", "Bacteria", groupby = "Type", groups = c("Water", "Sediment-Water Interface", "Sediment"), legend.x = "topright"),
+    plotEZ("ZHZ+19", "two", groupby = "Treatment", groups = c("Original", "Nitrate-reducing", "Ferric-reducing", "Sulfate-reducing", "Methanogenic"),
+           dylim = c(0, 0.005)),
+    plotEZ("LMBA21_2017", "two", groupby = "Season", groups = c("Summer", "Winter"), legend.x = "bottomright", dylim = c(-0.005, 0)),
+    plotEZ("HSF+22", "Bacteria", groupby = "Location", groups = c("West Lagoon", "North Lagoon", "South Lagoon", "Cinq Cases"),
+           legend.x = "bottomright", dxlim = c(0, 100)),
+    plotEZ("ZZLL21", "Bacteria", groupby = "Type", groups = c("Main stream", "Animal farm", "Hospital", "WWTP", "Tributary"),
+           legend.x = "bottomleft", dylim = c(-0.005, 0)),
+    plotEZ("WFB+21", "Bacteria", groupby = "Treatment", groups = c("C. volutator", "H. diversicolor", "Cv & Hd", "MPB", "Manual turbation"),
+           dylim = c(0, 0.002)),
+    plotEZ("HCW+22", "Bacteria", groupby = "Condition", groups = c("Static", "Weak", "Strong"), dylim = c(0, 0.007)),
+    plotEZ("WKG+22", "Bacteria", groupby = "Season", groups = c("Spring", "Summer", "Autumn", "Winter")),
+
+    message("\nSoil"),
+    plotEZ("MLL+19", "two", groupby = "Type", groups = c("Upland", "Paddy", "Sediment")),
+    plotEZ("BMOB18", "two", groupby = "Treatment", groups = c("Acetate", "No amendment", "Pre-incubation"), dxlim = c(-50, 0)),
+    plotEZ("WHLH21a", "Bacteria", groupby = "Stage", groups = c("Algae", "Cyanolichen", "Chlorolichen", "Moss"), legend.x = "bottomright"),
+    plotEZ("CWC+20", "Bacteria", groupby = "Management", groups = c("Flooding", "Draining"), legend.x = "bottomright"),
+    plotEZ("PSG+20", "two", groupby = "Treatment", groups = c("Initial", "NCC", "RB", "RGP", "TP"), legend.x = "bottomright"),
+    plotEZ("LJC+20", "Bacteria", groupby = "MAT", groups = c(">= 21.5 \u00b0C", "< 21.5 \u00b0C"), dylim = c(0, 0.005)),
+    plotEZ("DTJ+20", "Bacteria", groupby = "Zone", groups = c("Bulk Soil", "Mature", "Elongation", "Tip")),
+    plotEZ("RKSK22", "two", groupby = "Compartment", groups = c("Bulk sediment", "Rhizosphere", "Root"), legend.x = "bottomright"),
+    plotEZ("DLS21_Bulk", "Bacteria", groupby = "Treatment", groups = c("Control", "Char", "Silicate", "Husk")),
+    plotEZ("WKP+22", "Bacteria", groupby = "Type", groups = c("Intercropping", "Monoculture"), legend.x = "bottomleft"),
+    plotEZ("CKB+22", "two", groupby = "Treatment", groups = c("FM 5 Mg/ha", "FM 10 Mg/ha", "RS 5 Mg/ha", "RS 10 Mg/ha"), legend.x = "bottomright"),
+    plotEZ("CLZ+22", "Bacteria")
+
+  )
+  # Done plotting!
+  if(pdf) dev.off()
+
+  # Assemble all data
+  EZdat <- do.call(rbind, results[names(results) == "EZdat"])
+  # Assemble all linear model results
+  coefficients <- sapply(results[names(results) == "EZlm"], "[", "coefficients")
+  intercept <- sapply(coefficients, "[[", "(Intercept)")
+  slope <- sapply(coefficients, "[[", "Eh7")
+  model <- lapply(results[names(results) == "EZlm"], "[[", "model")
+  Eh7lim <- sapply(lapply(model, "[", "Eh7"), "range")
+  Eh7min <- Eh7lim[1, ]
+  Eh7max <- Eh7lim[2, ]
+  study <- sapply(results[names(results) == "study"], "[")
+  name <- sapply(results[names(results) == "name"], "[")
+  envirotype <- sapply(results[names(results) == "envirotype"], "[")
+  lineage <- sapply(results[names(results) == "lineage"], "[")
+  nsamp <- sapply(model, nrow)
+  pearson.r <- unlist(lapply(results[names(results) == "pearson"], "[[", "estimate"))
+  # Note: slope is mutiplied by 1e3 to convert from mV-1 to V-1
+  EZlm <- data.frame(study, name, envirotype, lineage, nsamp, Eh7min, Eh7max,
+    slope = signif(slope * 1e3, 6), intercept = signif(intercept, 6), pearson.r = signif(pearson.r, 6))
+  # Save data and results to files
+  write.csv(EZdat, "EZdat.csv", row.names = FALSE, quote = FALSE)
+  write.csv(EZlm, "EZlm.csv", row.names = FALSE, quote = 2)
+
+}
+
+# Regression slopes from local to global scale 20220611
+orp16S_S2 <- function(global.slopes, pdf = FALSE) {
+
+  if(pdf) pdf("Figure_S2.pdf", width = 8, height = 3)
   layout(matrix(1:3, nrow = 1), widths = c(5, 4, 4.5))
   par(mar = c(4, 4, 1, 1))
   par(mgp = c(2.7, 1, 0))
@@ -577,282 +908,6 @@ orp16S_S3 <- function(global.slopes, pdf = FALSE) {
 
 }
 
-# Figure 5: Linear regressions between Eh7 and ZC at a global scale 20210828
-orp16S5 <- function(pdf = FALSE, EMP_primers = FALSE) {
-
-  if(pdf) {
-    if(EMP_primers) pdf("Figure_S5.pdf", width = 10, height = 7)
-    else pdf("Figure_5.pdf", width = 10, height = 7)
-  }
-  mat <- matrix(c(
-    16, 16, rep(1:7, each = 6), 17, 17,
-    16, 16, rep(8:14, each = 6), 18, 18,
-    rep(15, 46),
-    rep(0, 46),
-    rep(0, 5), rep(19, 16), rep(20, 16), rep(21, 9)
-  ), nrow = 5, byrow = TRUE)
-  layout(mat, heights = c(2, 2, 0.5, 0.5, 4))
-  par(mar = c(4, 4, 1, 1))
-  par(mgp = c(2.5, 1, 0))
-
-  ## Take only datasets that use EMP primers 20221004
-  if(EMP_primers) {
-    uses_EMP_primers <- c(
-      "MLL+18", "LWJ+21", "RARG22",                           # River & Seawater
-                                                              # Lake & Pond
-      "PCL+18_Acidic", "PCL+18_Alkaline", "GWS+20", "MWY+21", # Geothermal
-      "SBP+20", "RMB+17",                                     # Hyperalkaline
-      "WLJ+16", "ZDW+19", "DJK+18", "APV+20", "MGW+22",       # Groundwater
-      "OHL+18_DNA", "ZHZ+19",                                 # Sediment
-      "MLL+19", "PSG+20", "RKSK22", "CKB+22"                  # Soil
-    )
-    EZdat <- EZdat[EZdat$study %in% uses_EMP_primers, ]
-    # Make sure we didn't miss any studies (check for typos ...)
-    stopifnot(all(uses_EMP_primers %in% EZdat$study))
-  }
-
-  ## Panel A: Scatterplots and fits for Bacteria and Archaea in each environment
-  par(mar = c(0, 0, 1, 0))
-  xlim <- range(EZdat$Eh7)
-  ylim <- range(EZdat$ZC, -0.1)
-  eedat <- EZdat[EZdat$lineage == "Bacteria", ]
-  global.slopes <- list()
-  global.slopes$Bacteria <- eachenv(eedat, xlim = xlim, ylim = ylim, lineage = "Bacteria")
-  par(mar = c(1, 0, 0, 0))
-  eedat <- EZdat[EZdat$lineage == "Archaea", ]
-  global.slopes$Archaea <- eachenv(eedat, xlim = xlim, ylim = ylim, lineage = "Archaea")
-  # Add labels
-  plot.new()
-  text(0.5, -0.5, "Eh7 (mV)", cex = 1.2, xpd = NA)
-  plot.new()
-  text(0.2, 0.5, cplab$ZC, cex = 1.2, srt = 90, xpd = NA)
-  label.figure("a", font = 2, cex = 2, xfrac = 0.34, yfrac = 0.965)
-  plot.new()
-  text(0.3, 0.5, "Bacteria", srt = 90, xpd = NA)
-  plot.new()
-  text(0.3, 0.5, "Archaea", srt = 90, xpd = NA)
- 
-  ## Panel B: Scatterplots and fits for Bacteria and Archaea in all environments 20210914
-  # Start plot for Bacteria
-  par(mar = c(4, 4, 1, 1))
-  plot(c(-500, 650), range(EZdat$ZC), type = "n", xlab = "Eh7 (mV)", ylab = cplab$ZC)
-  # Use Bacteria only
-  thisdat <- EZdat[EZdat$lineage == "Bacteria", ]
-  # Add linear fit; include number of studies in legend 20210925
-  nstudy <- length(unique(thisdat$study))
-  add.linear.global(thisdat$Eh7, thisdat$ZC, nstudy)
-  # Add points
-  eachenv(thisdat, add = TRUE, do.linear = FALSE)
-  title("Bacteria", font.main = 1, line = 0.5, xpd = NA)
-  label.figure("b", font = 2, cex = 2, xfrac = 0.02, yfrac = 1)
-
-  # Now do Archaea
-  plot(c(-500, 650), range(EZdat$ZC), type = "n", xlab = "Eh7 (mV)", ylab = cplab$ZC)
-  thisdat <- EZdat[EZdat$lineage == "Archaea", ]
-  nstudy <- length(unique(thisdat$study))
-  add.linear.global(thisdat$Eh7, thisdat$ZC, nstudy)
-  eachenv(thisdat, add = TRUE, do.linear = FALSE)
-  title("Archaea", font.main = 1, line = 0.5, xpd = NA)
-
-  # Add legend
-  par(mar = c(4, 1, 1, 1))
-  plot.new()
-  ienv = c(1, 2, 4, 5, 3, 6, 7)
-  ltext <- names(envirotype)[ienv]
-  legend("left", ltext, pch = 19, col = orp16Scol[ienv], bty = "n")
-
-  if(pdf) dev.off()
-  # Return slopes 20220611
-  invisible(global.slopes)
-
-}
-
-# Comparison of 16S-based community reference proteomes with metaproteomes 20220930
-orp16S6 <- function(pdf = FALSE) {
-
-  if(pdf) pdf("Figure_6.pdf", width = 8, height = 7)
-  par(mfrow = c(2, 2))
-  par(mar = c(4.5, 4, 3.5, 1))
-  par(mgp = c(2.5, 1, 0))
-  ylim <- c(-0.16, -0.08)
-
-  # Loop over months
-  for(month in c("Jun", "Sep")) {
-
-    study <- paste0("WHLH21a_", month)
-    longmonth <- ifelse(month == "Jun", "June", "September")
-    label <- ifelse(month == "Jun", "a", "b")
-    legend.x <- ifelse(month == "Jun", "topright", NA)
-
-    # Plot 1: ZC vs Eh7 for 16S data
-    plotEZ(study, "Bacteria", groupby = "Stage", groups = c("Algae", "Cyanolichen", "Chlorolichen", "Moss"), legend.x = legend.x,
-      ylim = ylim, title.line = NULL, slope.legend = "topleft", ylab = quote(italic(Z)[C]~"of community reference proteome"))
-    # Collection date is from BioSample data for PRJNA640847
-    title(paste("16S rRNA gene sequences of biocrusts\ncollected in", longmonth, "2018"), font.main = 1)
-    label.figure(label, font = 2, cex = 1.5)
-    # Get 16S data
-    metrics <- getmetrics_orp16S("WHLH21a")
-    mdat <- getmdat_orp16S(study, metrics = metrics)
-    ZC_16S <- mdat$metrics$ZC
-
-    # Plot 2: ZC vs Eh for metaproteome
-    # Amino acid composition and ZC
-    file <- paste0("extdata/orp16S/HWLH22_", month, "_2018_aa.csv")
-    aa <- read.csv(system.file(file, package = "JMDplots"))
-    ZC <- ZCAA(aa)
-    # Match 16S to MP samples
-    iaa <- match(mdat$metadata$LibraryName, paste0(aa$abbrv, aa$organism))
-    ZC_MP <- ZCAA(aa)[iaa]
-    # Get point symbols and color
-    groups <- c("Algae", "Cyanolichen", "Chlorolichen", "Moss")
-    igroup <- match(mdat$metadata$Stage, groups)
-    pch <- (21:24)[igroup]
-    col <- orp16Scol[igroup]
-    # Make plot
-    Eh7 <- mdat$metadata$Eh7
-    # The following is adapted from plotEZ()
-    # Start new plot
-    plot(Eh7, ZC_MP, xlab = "", type = "n",
-      ylim = ylim, ylab = quote(italic(Z)[C]~"of peptides from metaproteome"))
-    # Draw x-axis label with mtext to avoid getting cut off by small margin 20220517
-    mtext("Eh7 (mV)", side = 1, line = par("mgp")[1], cex = par("cex"))
-    points(Eh7, ZC_MP, pch = pch, col = col, bg = col)
-    add.linear.local(Eh7, ZC_MP, legend = "bottomleft")
-    # Collection date is from https://www.iprox.cn/page/project.html?id=IPX0003299000
-    title(paste("Metaproteomes of biocrusts\ncollected in", longmonth, "2018"), font.main = 1)
-
-  }
-
-  if(pdf) dev.off()
-
-}
-
-
-# Figure S2: ZC-Eh scatterplots for all studies 20210827
-# This also creates files EZdat (Eh and ZC values) and
-# EZlm (linear fits) for use by other plotting functions
-orp16S_S2 <- function(pdf = FALSE) {
-
-  # Setup figure
-  if(pdf) pdf("Figure_S2.pdf", width = 9, height = 12)
-  par(mfrow = c(4, 3))
-
-  results <- c(
-
-    message("\nRiver & Seawater"),
-    plotEZ("MLL+18", "Bacteria", groupby = "Season", groups = c("Summer", "Winter"), legend.x = "bottomright"),
-    plotEZ("HXZ+20", "Bacteria", groupby = "Station", groups = c("SYBL", "C4")),
-    plotEZ("GSBT20_Prefilter", "two", groupby = "Region", groups = c("West Coast U.S.", "Great Lakes", "East Coast U.S.", "Europe", "Asia"),
-           legend.x = "bottomright", dylim = c(-0.015, 0)),
-    plotEZ("GSBT20_Postfilter", "two", groupby = "Region", groups = c("West Coast U.S.", "Great Lakes", "East Coast U.S.", "Europe", "Asia"),
-           legend.x = "bottomright", dylim = c(-0.007, 0), dxlim = c(0, 75)),
-    plotEZ("WHL+21", "Bacteria", groupby = "Season", groups = c("Spring", "Summer", "Autumn", "Winter"), legend.x = "bottomleft"),
-    plotEZ("ZLH+22", "Bacteria"),
-    plotEZ("ZZL+21", "Bacteria", groupby = "Location", groups = c("Main Stream", "Animal Farm", "Hospital", "WWTP", "Tributary"),
-           legend.x = "bottomright", dxlim = c(0, 100)),
-    plotEZ("LWJ+21", "two", groupby = "Type", groups = c("Freshwater", "Freshwater Plastic", "Seawater", "Seawater Plastic"), dylim = c(0, 0.01)),
-    plotEZ("GZL21", "Bacteria", groupby = "Type", groups = c("Surface water", "Middle water", "Bottom water"), legend.x = "bottomleft"),
-    plotEZ("RARG22", "two", groupby = "Group", groups = c("AMD", "Abiotic Treatment", "Biotic Treatment", "Stream")),
-
-    message("\nLake & Pond"),
-    plotEZ("SAR+13", "two", groupby = "Zone", groups = c("Photic-oxic", "Transition", "Anoxic")),
-    plotEZ("LLC+19", "Bacteria", groupby = "Size", groups = c("Free-living", "Particle-associated")),
-    plotEZ("BCA+21", "Bacteria", groupby = "Month", groups = c("Jul", "Nov", "Feb", "Apr")),
-    plotEZ("HLZ+18", "Bacteria", groupby = "Type", groups = c("Reservoir", "Pond"), legend.x = "bottomright"),
-    plotEZ("BWD+19", "Bacteria", groupby = "Cover", groups = c("Ice", "Ice Free"), legend.x = "bottomright"),
-    plotEZ("IBK+22", "two", groupby = "Land Use", groups = c("Arable", "Forest", "Grassland")),
-    plotEZ("NLE+21", "Bacteria", groupby = "Year", groups = c("2017", "2018"), legend.x = "bottomleft"),
-    plotEZ("SPA+21", "Bacteria", groupby = "Depth", groups = c("Epi", "Secchi", "Meso"), legend.x = "bottomleft"),
-
-    message("\nGeothermal"),
-    plotEZ("PCL+18_Acidic", "two", legend.x = "bottomright"),
-    plotEZ("PCL+18_Alkaline", "two"),
-    plotEZ("GWS+20", "two", groupby = "Hydrothermal Field", groups = c("Batang", "Litang", "Kangding")),
-    plotEZ("PBU+20", "Bacteria", groupby = "Type", groups = c("Cauldron", "Sampling Pit", "Spring", "Geyser Valley (Control)"), legend.x = "bottomright"),
-    plotEZ("MWY+21", "two", groupby = "Location", groups = c("Quseyongba", "Moluojiang", "Daggyai", "Quzhuomu"), legend.x = "bottomright"),
-
-    message("\nHyperalkaline"),
-    plotEZ("SBP+20", "Bacteria", groupby = "pH Group", groups = c("< 10", "> 10")),
-    plotEZ("RMB+17", "two", groupby = "pH Group", groups = c("< 10", "> 10")),
-    plotEZ("CTS+17", "two", groupby = "Type", groups = c("River", "Well", "Spring"), legend.x = "bottomleft"),
-    plotEZ("PSB+21", "Bacteria", groupby = "O2 range", groups = c("> 0.5 mg/L", "0.2-0.5 mg/L", "< 0.2 mg/L"), dxlim = c(-100, 0), dylim = c(0, 0.01)),
-
-    message("\nGroundwater"),
-    plotEZ("KLM+16", "Bacteria", groupby = "Day", groups = c(-1, 246, 448, 671)),
-    plotEZ("WLJ+16", "two", groupby = "Arsenic", groups = c("As < 100 \u03BCg/L", "As > 100 \u03BCg/L")),
-    plotEZ("ZDW+19", "two", groupby = "Season", groups = c("Non-monsoon", "Spring", "Monsoon", "Autumn"), legend.x = "bottomright"),
-    plotEZ("DJK+18", "two", groupby = "Aquifer", groups = c("Athens", "Greene", "Licking"), legend.x = "bottomleft"),
-    plotEZ("SRM+19", "Bacteria", groupby = "Land Use", groups = c("Agriculture", "Community", "Landfill", "Mine")),
-    plotEZ("APV+20", "two", groupby = "Type", groups = c("Piezometer", "Well", "Spring"), legend.x = "bottomleft"),
-    plotEZ("YHK+20", "Bacteria", groupby = "Location", groups = c("Upper Hillslope", "Middle Slope", "Lower Footslope"), dylim = c(0, 0.005)),
-    plotEZ("ZCZ+21", "Bacteria", groupby = "Location", groups = c("LO", "CR1", "MN", "VA", "BS", "CR2"), legend.x = "topright"),
-    plotEZ("MGW+22", "two", groupby = "Region", groups = c("Auckland", "Canterbury", "Taupo", "Wellington"), legend.x = "bottomleft", dylim = c(-0.006, 0)),
-    plotEZ("MCR+22", "two", groupby = "Location", groups = c("Upstream", "WWTP", "Farm", "Swamp"), legend.x = "bottomleft"),
-
-    message("\nSediment"),
-    plotEZ("ZML+17", "two", groupby = "Depth", groups = c("\u2264 5 cm", "\u2265 10 cm", "\u2265 20 cm"), legend.x = "bottomleft", dylim = c(-0.003, 0)),
-    plotEZ("BSPD17", "Bacteria", groupby = "Type", groups = c("Water", "Sediment")),
-    plotEZ("RKN+17", "two", groupby = "Treatment", groups = c("CH4", "CH4+Fe", "CH4+Mn"), legend.x = "bottomleft"),
-    plotEZ("HDZ+19", "Bacteria", groupby = "Type", groups = c("Water", "Sediment")),
-    plotEZ("OHL+18_DNA", "two", groupby = "Location", groups = c("Kal\u00f8 Vig", "Lake Constance", "Norsminde Fjord")),
-    plotEZ("WHLH21", "Bacteria", groupby = "Position", groups = c("Surface", "Middle", "Bottom"), legend.x = "bottomleft"),
-    plotEZ("RSS+18", "Bacteria", groupby = "Site", groups = c("Deep Hole", "Snowgoose Bay", "John's Island", "Skeleton Lake"), dylim = c(0, 0.005)),
-    plotEZ("CLS+19", "two", groupby = "Type", groups = c("Water", "Sediment"), legend.x = "bottomright", dylim = c(-0.002, 0)),
-    plotEZ("HSF+19", "Bacteria", groupby = "Type", groups = c("Water", "Sediment-Water Interface", "Sediment"), legend.x = "topright"),
-    plotEZ("ZHZ+19", "two", groupby = "Treatment", groups = c("Original", "Nitrate-reducing", "Ferric-reducing", "Sulfate-reducing", "Methanogenic"),
-           dylim = c(0, 0.005)),
-    plotEZ("LMBA21_2017", "two", groupby = "Season", groups = c("Summer", "Winter"), legend.x = "bottomright", dylim = c(-0.005, 0)),
-    plotEZ("HSF+22", "Bacteria", groupby = "Location", groups = c("West Lagoon", "North Lagoon", "South Lagoon", "Cinq Cases"),
-           legend.x = "bottomright", dxlim = c(0, 100)),
-    plotEZ("ZZLL21", "Bacteria", groupby = "Type", groups = c("Main stream", "Animal farm", "Hospital", "WWTP", "Tributary"),
-           legend.x = "bottomleft", dylim = c(-0.005, 0)),
-    plotEZ("WFB+21", "Bacteria", groupby = "Treatment", groups = c("C. volutator", "H. diversicolor", "Cv & Hd", "MPB", "Manual turbation"),
-           dylim = c(0, 0.002)),
-    plotEZ("HCW+22", "Bacteria", groupby = "Condition", groups = c("Static", "Weak", "Strong"), dylim = c(0, 0.007)),
-    plotEZ("WKG+22", "Bacteria", groupby = "Season", groups = c("Spring", "Summer", "Autumn", "Winter")),
-
-    message("\nSoil"),
-    plotEZ("MLL+19", "two", groupby = "Type", groups = c("Upland", "Paddy", "Sediment")),
-    plotEZ("BMOB18", "two", groupby = "Treatment", groups = c("Acetate", "No amendment", "Pre-incubation"), dxlim = c(-50, 0)),
-    plotEZ("WHLH21a", "Bacteria", groupby = "Stage", groups = c("Algae", "Cyanolichen", "Chlorolichen", "Moss"), legend.x = "bottomright"),
-    plotEZ("CWC+20", "Bacteria", groupby = "Management", groups = c("Flooding", "Draining"), legend.x = "bottomright"),
-    plotEZ("PSG+20", "two", groupby = "Treatment", groups = c("Initial", "NCC", "RB", "RGP", "TP"), legend.x = "bottomright"),
-    plotEZ("LJC+20", "Bacteria", groupby = "MAT", groups = c(">= 21.5 \u00b0C", "< 21.5 \u00b0C"), dylim = c(0, 0.005)),
-    plotEZ("DTJ+20", "Bacteria", groupby = "Zone", groups = c("Bulk Soil", "Mature", "Elongation", "Tip")),
-    plotEZ("RKSK22", "two", groupby = "Compartment", groups = c("Bulk sediment", "Rhizosphere", "Root"), legend.x = "bottomright"),
-    plotEZ("DLS21_Bulk", "Bacteria", groupby = "Treatment", groups = c("Control", "Char", "Silicate", "Husk")),
-    plotEZ("WKP+22", "Bacteria", groupby = "Type", groups = c("Intercropping", "Monoculture"), legend.x = "bottomleft"),
-    plotEZ("CKB+22", "two", groupby = "Treatment", groups = c("FM 5 Mg/ha", "FM 10 Mg/ha", "RS 5 Mg/ha", "RS 10 Mg/ha"), legend.x = "bottomright"),
-    plotEZ("CLZ+22", "Bacteria")
-
-  )
-  # Done plotting!
-  if(pdf) dev.off()
-
-  # Assemble all data
-  EZdat <- do.call(rbind, results[names(results) == "EZdat"])
-  # Assemble all linear model results
-  coefficients <- sapply(results[names(results) == "EZlm"], "[", "coefficients")
-  intercept <- sapply(coefficients, "[[", "(Intercept)")
-  slope <- sapply(coefficients, "[[", "Eh7")
-  model <- lapply(results[names(results) == "EZlm"], "[[", "model")
-  Eh7lim <- sapply(lapply(model, "[", "Eh7"), "range")
-  Eh7min <- Eh7lim[1, ]
-  Eh7max <- Eh7lim[2, ]
-  study <- sapply(results[names(results) == "study"], "[")
-  name <- sapply(results[names(results) == "name"], "[")
-  envirotype <- sapply(results[names(results) == "envirotype"], "[")
-  lineage <- sapply(results[names(results) == "lineage"], "[")
-  nsamp <- sapply(model, nrow)
-  pearson.r <- unlist(lapply(results[names(results) == "pearson"], "[[", "estimate"))
-  # Note: slope is mutiplied by 1e3 to convert from mV-1 to V-1
-  EZlm <- data.frame(study, name, envirotype, lineage, nsamp, Eh7min, Eh7max,
-    slope = signif(slope * 1e3, 6), intercept = signif(intercept, 6), pearson.r = signif(pearson.r, 6))
-  # Save data and results to files
-  write.csv(EZdat, "EZdat.csv", row.names = FALSE, quote = FALSE)
-  write.csv(EZlm, "EZlm.csv", row.names = FALSE, quote = 2)
-
-}
 
 
 ############################
@@ -1348,64 +1403,10 @@ orp16S_T2 <- function() {
   out
 }
 
-# Global Eh-pH diagram 20220516
-orp16S_S1 <- function(pdf = FALSE) {
-  if(pdf) pdf("Figure_S1.pdf", width = 8, height = 6)
-  layout(t(matrix(1:2)), widths = c(3, 1))
-  # Get data for unique samples
-  ssr <- paste(EZdat$study, EZdat$sample, EZdat$Run, sep = "_")
-  idup <- duplicated(ssr)
-  thisdat <- EZdat[!idup, ]
-  # Remove NA pH
-  thisdat <- thisdat[!is.na(thisdat$pH), ]
-  # Get colors
-  ienv <- match(thisdat$envirotype, names(envirotype))
-  col <- orp16Scol[ienv]
-  # Make plot
-  par(mar = c(4, 4, 1, 1))
-  plot(thisdat$pH, thisdat$Eh, col = col, pch = 19, cex = 0.5, xlab = "pH", ylab = "Eh (mV)",
-       xlim = c(-2, 14), ylim = c(-600, 1000), xaxs = "i", yaxs = "i", axes = FALSE)
-  box()
-  axis(1, at = seq(-2, 14, 2))
-  axis(2, at = seq(-600, 1000, 200))
-  # Add outline from Bass Becking et al. (1960)
-  BKM60 <- read.csv(system.file("extdata/orp16S/BKM60.csv", package = "JMDplots"))
-  segment <- NULL
-  top <- subset(BKM60, segment == "top")
-  lines(top$pH, top$Eh)
-  bottom <- subset(BKM60, segment == "bottom")
-  lines(bottom$pH, bottom$Eh)
-  left <- subset(BKM60, segment == "left")
-  for(i in 1:(nrow(left)/2)) {
-    ii <- c(i*2-1, i*2)
-    lines(left$pH[ii], left$Eh[ii])
-  }
-  right <- subset(BKM60, segment == "right")
-  for(i in 1:(nrow(right)/2)) {
-    ii <- c(i*2-1, i*2)
-    lines(right$pH[ii], right$Eh[ii])
-  }
-  O2 <- subset(BKM60, segment == "O2")
-  lines(O2$pH, O2$Eh, lwd = 2)
-  H2 <- subset(BKM60, segment == "H2")
-  lines(H2$pH, H2$Eh, lwd = 2)
-  text(0, 55, quote(H^"+"), cex = 1.2, srt = -30)
-  text(-0.5, -35, quote(H[2]), cex = 1.2, srt = -30)
-  text(5.5, 840, quote(H[2]*O), cex = 1.2, srt = -30)
-  text(6, 930, quote(O[2]), cex = 1.2, srt = -30)
-  # Add legend
-  par(mar = c(4, 1, 1, 1))
-  plot.new()
-  ienv = c(1, 2, 4, 5, 3, 6, 7)
-  ltext <- names(envirotype)[ienv]
-  legend("left", ltext, pch = 19, col = orp16Scol[ienv], bty = "n")
-  if(pdf) dev.off()
-}
-
 # Compare regressions with Eh7, Eh, and O2 20220517
-orp16S_S4 <- function(pdf = FALSE) {
+orp16S_S3 <- function(pdf = FALSE) {
 
-  if(pdf) pdf("Figure_S4.pdf", width = 6, height = 8)
+  if(pdf) pdf("Figure_S3.pdf", width = 6, height = 8)
   mat <- matrix(1:8, ncol = 2)
   layout(mat, heights = c(2, 2, 2, 1))
 
