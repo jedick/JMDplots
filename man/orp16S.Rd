@@ -8,10 +8,12 @@
 \alias{orp16S5}
 \alias{orp16S6}
 \alias{orp16S7}
+\alias{orp16S8}
 \alias{orp16S_S1}
 \alias{orp16S_S2}
 \alias{orp16S_S3}
 \alias{orp16S_T2}
+\alias{orp16S_D3}
 \alias{getmdat_orp16S}
 \alias{getmetrics_orp16S}
 \alias{orp16S_info}
@@ -28,10 +30,12 @@ Plots from the paper by Dick and Meng (2021).
   orp16S5(pdf = FALSE)
   orp16S6(pdf = FALSE, EMP_primers = FALSE)
   orp16S7(pdf = FALSE)
+  orp16S8(pdf = FALSE)
   orp16S_S1(pdf = FALSE)
   orp16S_S2(global.slopes, pdf = FALSE)
   orp16S_S3(pdf = FALSE)
   orp16S_T2()
+  orp16S_D3(mincount = 100)
   getmdat_orp16S(study, metrics = NULL, dropNA = TRUE, size = NULL, quiet = TRUE)
   getmetrics_orp16S(study, mincount = 100, quiet = TRUE, ...)
   orp16S_info(study)
@@ -41,12 +45,12 @@ Plots from the paper by Dick and Meng (2021).
   \item{pdf}{logical, make a PDF file?}
   \item{EMP_primers}{logical, include only datasets using Earth Microbime Project primers (515F/806R)?}
   \item{global.slopes}{value returned by \code{orp16S5}}
+  \item{mincount}{integer, samples with less than this number of RDP classifications are excluded}
   \item{study}{character, study name}
   \item{metrics}{data frame, output of \code{\link[chem16S]{getmetrics}}}
   \item{dropNA}{logical, exclude samples with NA name in metadata?}
   \item{size}{numeric, number of samples to randomly select}
   \item{quiet}{logical, change to FALSE to print details about data processing}
-  \item{mincount}{integer, samples with less than this number of RDP classifications are excluded}
   \item{...}{additional arguments passed to \code{\link[chem16S]{readRDP}}}
 }
 
@@ -61,6 +65,7 @@ This table gives a brief description of each plotting function.
   \code{orp16S5} \tab Linear regressions between Eh7 and \ZC at local scales \cr
   \code{orp16S6} \tab Linear regressions between Eh7 and \ZC at a global scale. Set \code{EMP_primers} to TRUE to make Figure S4. \cr
   \code{orp16S7} \tab Comparison of 16S-based community reference proteomes with metaproteomes \cr
+  \code{orp16S8} \tab Names and \ZC of the most abundant genera at low and high Eh7 in geothermal and hyperalkaline areas \cr
   \code{orp16S_S1} \tab \ZC-Eh scatterplots for each dataset \cr
   \code{orp16S_S2} \tab Regresssion slopes from local to global scale \cr
   \code{orp16S_S3} \tab Comparison of Eh7, Eh, and \O2 as predictors of carbon oxidation state \cr
@@ -70,7 +75,8 @@ This table gives a brief description of each plotting function.
 \file{EZdat.csv} has sample data and metadata: study key, environment type, lineage (Bacteria or Archaea), sample name, SRA or MG-RAST accession number, grouping description, sample group, values of T (°C), pH, \O2 concentration (\umol/L), Eh (mV), Eh7 (mV), and \ZC.
 \file{EZlm.csv} has regression results for each dataset and domain: study key, environment type, lineage, number of samples, Eh7 range, slope (V\S{-1}) and intercept (\ZC) of of linear regression, and Pearson correlation coefficient.
 
-\code{orp16S_T2} returns a table summarizing regression slopes for all datasets (based on \file{EZlm.csv}).
+\code{orp16S_T2} returns a table summarizing regression slopes for all datasets (based on \file{EZlm.csv}), corresponding to Table 2 in the paper.
+\code{orp16S_D3} creates a file with percent of RDP classifications to genus level mapped to the NCBI taxonomy, and genus names and \code{ZC} for the groups of samples corresponding to the first and fourth quartile of Eh7 values (i.e., reducing and oxidizing conditions), corresponding to Dataset S3 in the paper.
 
 \code{getmdat_orp16S} gets metadata for the indicated \code{study}, calculates Eh7 from Eh and pH and T (if available), classifies samples into 3 clusters according to their Eh values, and adds columns for plot parameters (\samp{pch}, \samp{col}).
 The function also adds a column named \samp{O2_umol_L}, with \O2 concentration in (\umol/L), which is converted from source units of \O2 concentration as needed.
@@ -99,6 +105,7 @@ The function also returns information in a data frame, which is used to fill in 
     \item{\file{BKM60.csv}}{Outline of Eh-pH range of natural environments, digitized from Fig. 32 of Baas Becking et al. (1960).}
     \item{\file{HWLH22_Jun_2018_aa.csv}, \file{HWLH22_Sep_2018_aa.csv}}{Sum of amino acid composition of all peptides in each sample from the metaproteomic study of Han et al. (2022).}
     \item{\file{mkaa.R}}{Script used to process source metaproteomic data to make the \file{*aa.csv} files.}
+    \item{\file{Dataset_S3.csv}}{File created by \code{orp16S_D3}.}
   }
 }
 

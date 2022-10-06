@@ -125,6 +125,13 @@ orp16S7()
 
 **Data sources:** 16S rRNA gene sequences [@WHLH21a], metaproteomes [@HWLH22].
 
+## Names and `r ZC` of the most abundant genera at low and high Eh7 in geothermal and hyperalkaline areas (Figure 8)
+```{r orp16S8, message = FALSE, results = "hide", out.width='100%', fig.align='center', fig.width = 8.5, fig.height = 5, pngquant = pngquant, dpi = 100}
+orp16S8()
+```
+
+Bold and normal text are used for archaea and bacteria, respectively.
+
 ## Regression slopes from local to global scale (Figure S2)
 ```{r orp16S_S2, message = FALSE, results = "hide", out.width='100%', fig.width = 8, fig.height = 3, out.extra = 'class="full-width"', pngquant = pngquant, dpi = 100}
 orp16S_S2(global.slopes)
@@ -138,6 +145,15 @@ orp16S_S3()
 ## Global analysis including only datasets using 515F/806R primers from the Earth Microbiome Project (EMP) (Figure S4)
 ```{r orp16S_S4, message = FALSE, results = "hide", out.width='100%', fig.width = 10, fig.height = 7, out.extra = 'class="full-width"', pngquant = pngquant, dpi = 100}
 orp16S6(EMP_primers = TRUE)
+```
+
+## Genus-level RDP classifications mapped to NCBI taxonomy (in-text calculation)
+```{r mapperc}
+# Read Dataset S3 (created by orp16S_D3())
+dat <- read.csv(system.file("extdata/orp16S/Dataset_S3.csv", package = "JMDplots"))
+perc_bac <- round(mean(subset(dat, lineage == "Bacteria")$mapperc))
+perc_arc <- round(mean(subset(dat, lineage == "Archaea")$mapperc))
+message(paste0(perc_bac, "% for bacteria, ", perc_arc, "% for archaea"))
 ```
 
 ## References

@@ -1435,3 +1435,177 @@ orp16S_S3 <- function(pdf = FALSE) {
   if(pdf) dev.off()
 
 }
+
+# Find the most abundant genera at high and low Eh7 20221006
+orp16S_D3 <- function(mincount = 100) {
+
+  # Use EZlm as a template for our output
+  EZlm <- read.csv(system.file("extdata/orp16S/EZlm.csv", package = "JMDplots"))
+
+  # Get amino acid compositions of taxa compiled from RefSeq sequences
+  AAfile <- system.file("extdata/chem16S/taxon_AA.csv", package = "chem16S")
+  taxon_AA <- read.csv(AAfile, as.is = TRUE)
+  # Calculate ZC for all taxa
+  ZC <- ZCAA(taxon_AA)
+
+  out <- lapply(1:nrow(EZlm), function(i) {
+
+    study <- EZlm$study[i]
+    lineage <- EZlm$lineage[i]
+
+    Q1.genus <- NA
+    Q1.ZC <- NA
+    Q4.genus <- NA
+    Q4.ZC <- NA
+    mapperc <- 0
+
+    # Get RDP counts, mapping to NCBI taxonomy, and chemical metrics
+    studyfile <- gsub("_.*", "", study)
+    datadir <- system.file("extdata/orp16S/RDP", package = "JMDplots")
+    RDPfile <- file.path(datadir, paste0(studyfile, ".tab.xz"))
+    # If there is no .xz file, look for a .tab file 20210607
+    if(!file.exists(RDPfile)) RDPfile <- file.path(datadir, paste0(studyfile, ".tab"))
+    # Use try() to catch error for no mapped sequences for Archaea
+    RDP <- try(readRDP(RDPfile, lineage = lineage, mincount = mincount), silent = TRUE)
+    if(!inherits(RDP, "try-error")) {
+
+      # Calculate metrics to make sure we get the same samples used in the analysis for the paper
+      map <- mapRDP(RDP)
+      metrics <- getmetrics_orp16S(study, lineage = lineage, mincount = mincount)
+      mdat <- getmdat_orp16S(study, metrics)
+      metadata <- mdat$metadata
+      # Drop rows with NA Eh7
+      ina <- is.na(metadata$Eh7)
+      metadata <- metadata[!ina, ]
+
+      # Keep only genus-level classifications
+      igenus <- RDP$rank == "genus"
+      RDP <- RDP[igenus, , drop = FALSE]
+      map <- map[igenus]
+      # Calculate percentage of mapped genera
+      is.mapped <- !is.na(map)
+      totcount <- sum(RDP[, -(1:4), drop = FALSE])
+      mapcount <- sum(RDP[is.mapped, -(1:4), drop = FALSE])
+      mapperc <- round(mapcount / totcount * 100, 2)
+      # Keep only the mapped taxa
+      RDP <- RDP[is.mapped, , drop = FALSE]
+      map <- map[is.mapped]
+
+      # Get the lower and upper quartiles for Eh7
+      Eh7 <- metadata$Eh7
+      Qval <- quantile(Eh7, probs = c(0, 0.25, 0.5, 0.75, 1))
+      # Use try() to catch error if 'breaks' are not unique (e.g. only 3 values for Eh7)
+      Qind <- try(cut(Eh7, Qval, labels = 1:4, include.lowest = TRUE), silent = TRUE)
+      if(inherits(Qind, "try-error")) {
+        Q1 <- Eh7 <= Qval[2]
+        Q4 <- Eh7 >= Qval[4]
+      } else {
+        Q1 <- which(Qind == 1)
+        Q4 <- which(Qind == 4)
+      }
+
+      # Find the most abundant genus for Q1 and Q4 (low and high Eh7)
+      Q1run <- metadata$Run[Q1]
+      Q1count <- rowSums(RDP[, Q1run, drop = FALSE])
+      Q1max <- which.max(Q1count)
+      Q1map <- map[Q1max]
+      Q4run <- metadata$Run[Q4]
+      Q4count <- rowSums(RDP[, Q4run, drop = FALSE])
+      Q4max <- which.max(Q4count)
+      Q4map <- map[Q4max]
+
+      # Get genus names and ZC for Q1 and Q4
+      Q1.genus <- taxon_AA$organism[Q1map]
+      Q1.ZC <- round(ZC[Q1map], 6)
+      Q4.genus <- taxon_AA$organism[Q4map]
+      Q4.ZC <- round(ZC[Q4map], 6)
+
+    }
+
+    out <- data.frame(mapperc, Q1.genus, Q1.ZC, Q4.genus, Q4.ZC)
+    out
+
+  })
+
+  out <- do.call(rbind, out)
+  # Prepend study, name, envirotype, lineage columns from EZlm
+  out <- cbind(EZlm[, 1:4], out)
+  # Save to file
+  write.csv(out, "Dataset_S3.csv", row.names = FALSE, quote = 2)
+
+}
+
+# Names and ZC of the most abundant genera at low and high Eh7 in geothermal and hyperalkaline areas 20221006
+orp16S8 <- function(pdf = FALSE) {
+  if(pdf) pdf("Figure_8.pdf", width = 8.5, height = 5)
+  # Read output of orp16S_D3()
+  gg <- read.csv(system.file("extdata/orp16S/Dataset_S3.csv", package = "JMDplots"))
+  # Keep Geothermal and Hyperalkaline datasets
+  gg <- gg[gg$envirotype %in% c("Geothermal", "Hyperalkaline"), ]
+  # Get colors
+  ienv <- match(gg$envirotype, names(envirotype))
+  col <- orp16Scol[ienv]
+  # Start plot
+  par(mar = c(3, 4, 0.5, 0.5))
+  plot(c(1, 9.5), range(gg$Q1.ZC, gg$Q4.ZC), xlab = "", xaxt = "n", ylab = cplab$"ZC", type = "n")
+  abline(h = seq(-0.22, -0.14, 0.02), lty = 3, col = 8, lwd = 1.5)
+  axis(1, at = c(3.25, 7.75), labels = c("Low - High", "Low - High"), tick = FALSE, padj = -1.5)
+  axis(1, at = 5.5, labels = quote(cdots*cdots*cdots*cdots*cdots*cdots*Eh7*cdots*cdots*cdots*cdots*cdots*cdots), tick = FALSE, padj = -1.5)
+  axis(1, at = c(3.25, 7.75), labels = c("Geothermal", "Hyperalkaline"), tick = FALSE, padj = 1, font.axis = 2)
+
+  # Add points and labels for Geothermal
+  igeo <- gg$envirotype == "Geothermal"
+  iarc <- gg$lineage[igeo] == "Archaea"
+  # Low Eh7
+  ZC <- gg$Q1.ZC[igeo]
+  genus <- gg$Q1.genus[igeo]
+  idup <- duplicated(genus)
+  x <- ifelse(idup, 3.12, 3)
+  points(x, ZC, col = col[igeo], pch = 19)
+  dy <- rep(0, sum(igeo))
+  dy[genus == "Schleiferia"] <- 0.002
+  dy[genus == "Methanobrevibacter"] <- -0.002
+  dy[genus == "Hydrogenobaculum"] <- 0.003
+  dy[genus == "Fervidicoccus"] <- -0.0005
+  text(rep(3, sum(igeo))[iarc & !idup], (ZC + dy)[iarc & !idup], paste0(genus, " ")[iarc & !idup], adj = 1, font = 2)
+  text(rep(3, sum(igeo))[!iarc & !idup], (ZC + dy)[!iarc & !idup], paste0(genus, " ")[!iarc & !idup], adj = 1)
+  # High Eh7
+  ZC <- gg$Q4.ZC[igeo]
+  genus <- gg$Q4.genus[igeo]
+  idup <- duplicated(genus)
+  x <- ifelse(idup, 3.38, 3.5)
+  points(x, ZC, col = col[igeo], pch = 19)
+  dy <- rep(0, sum(igeo))
+  dy[genus == "Roseiflexus"] <- 0.003
+  dy[genus == "Acidithiobacillus"] <- -0.001
+  dy[genus == "Vogesella"] <- -0.0025
+  dy[genus == "Bacillus"] <- 0.001
+  dy[genus == "Thermus"] <- -0.001
+  text(rep(3.5, sum(igeo))[iarc & !idup], (ZC + dy)[iarc & !idup], paste0(" ", genus)[iarc & !idup], adj = 0, font = 2)
+  text(rep(3.5, sum(igeo))[!iarc & !idup], (ZC + dy)[!iarc & !idup], paste0(" ", genus)[!iarc & !idup], adj = 0)
+
+  # Add points and labels for Hyperalkaline
+  ihyper <- gg$envirotype == "Hyperalkaline"
+  iarc <- gg$lineage[ihyper] == "Archaea"
+  # Low Eh7
+  ZC <- gg$Q1.ZC[ihyper]
+  genus <- gg$Q1.genus[ihyper]
+  idup <- duplicated(genus)
+  x <- ifelse(idup, 7.62, 7.5)
+  points(x, ZC, col = col[ihyper], pch = 19)
+  text(rep(7.5, sum(ihyper))[iarc & !idup], ZC[iarc & !idup], paste0(genus, " ")[iarc & !idup], adj = 1, font = 2)
+  text(rep(7.5, sum(ihyper))[!iarc & !idup], ZC[!iarc & !idup], paste0(genus, " ")[!iarc & !idup], adj = 1)
+  # High Eh7
+  ZC <- gg$Q4.ZC[ihyper]
+  genus <- gg$Q4.genus[ihyper]
+  idup <- duplicated(genus)
+  x <- ifelse(idup, 7.88, 8)
+  points(x, ZC, col = col[ihyper], pch = 19)
+  dy <- rep(0, sum(ihyper))
+  dy[genus == "Nitrososphaera"] <- 0.0005
+  dy[genus == "Acinetobacter"] <- -0.0005
+  text(rep(8, sum(ihyper))[iarc & !idup], (ZC + dy)[iarc & !idup], paste0(" ", genus)[iarc & !idup], adj = 0, font = 2)
+  text(rep(8, sum(ihyper))[!iarc & !idup], (ZC + dy)[!iarc & !idup], paste0(" ", genus)[!iarc & !idup], adj = 0)
+
+  if(pdf) dev.off()
+}

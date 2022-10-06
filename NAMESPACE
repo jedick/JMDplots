@@ -80,8 +80,8 @@ export(
   "orp16S_S2",
   # utilities 20220930
   "hyphen.in.pdf",
-  # orp16S paper 20221001
-  "orp16S7"
+  # orp16S paper 20221001-20221006
+  "orp16S7", "orp16S_D3", "orp16S8"
 )
 
 # Imports from CHNOSZ
