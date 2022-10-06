@@ -1341,9 +1341,8 @@ orp16S_info <- function(study) {
     idat <- thislm$lineage == lineage
     if(any(idat)) {
       slope <- thislm$slope[idat]
-      slopetxt <- "-- (close to zero)"
-      if(slope > 0.01) slopetxt <- "positive (> 0.01 V-1)"
-      if(slope < -0.01) slopetxt <- "negative (< -0.01 V-1)"
+      if(slope > 0) slopetxt <- "positive"
+      if(slope < 0) slopetxt <- "negative"
       if(lineage == "Bacteria") bacslope <- slopetxt
       slopetxt <- paste("Slope of ZC-Eh7 correlation for", lineage, "is", slopetxt)
       print(slopetxt)
@@ -1355,51 +1354,39 @@ orp16S_info <- function(study) {
   invisible(out)
 }
 
-# Summary table of regression slopes 20220516
+# Table of regression slopes (positive/negative) and p-values 20220516
 orp16S_T2 <- function() {
   # All environment types
   envirotype <- unique(EZlm$envirotype)
-  # Initialize output
-  out <- matrix(nrow = length(envirotype), ncol = 10)
   # Loop over Bacteria and Archaea
-  lineage <- c("Bacteria", "Archaea")
-  for(ilin in 1:2) {
-    # Column offset
-    if(lineage[ilin] == "Archaea") dcol <- 5 else dcol <- 0
+  out <- lapply(c("Bacteria", "Archaea"), function(lineage) {
+    # Initialize table
+    out <- matrix(nrow = length(envirotype), ncol = 4)
     # Loop over environment type
     for(ienv in 1:length(envirotype)) {
-      # Get fitting results
-      thisdat <- EZlm[EZlm$lineage == lineage[ilin] & EZlm$envirotype == envirotype[ienv], ]
-      # Get number of datasets and count those with positive and negative slopes
+      # Get regression results
+      thisdat <- EZlm[EZlm$lineage == lineage & EZlm$envirotype == envirotype[ienv], ]
+      # Number of datasets and numbers with positive and negative slopes
       ndat <- nrow(thisdat)
-      npos <- sum(thisdat$slope > 0.01)
-      nneg <- sum(thisdat$slope < -0.01)
-      # Calcualate percentages
-      ppos <- round(npos / ndat * 100)
-      pneg <- round(nneg / ndat * 100)
-      # Enter values into table
-      out[ienv, 1 + dcol] <- ndat
-      out[ienv, 2 + dcol] <- ppos
-      out[ienv, 3 + dcol] <- pneg
-      # Record counts of datasets with positive and negative slope for tallying totals 20220611
-      out[ienv, 4 + dcol] <- npos
-      out[ienv, 5 + dcol] <- nneg
+      npos <- sum(thisdat$slope > 0)
+      nneg <- sum(thisdat$slope < 0)
+      # Enter counts into table
+      out[ienv, 1] <- ndat
+      out[ienv, 2] <- npos
+      out[ienv, 3] <- nneg
     }
-  }
-  # Calculate totals for Bacteria and Archaea
-  nBac <- sum(out[, 1])
-  npos.Bac <- round(sum(out[, 4]) / nBac * 100)
-  nneg.Bac <- round(sum(out[, 5]) / nBac * 100)
-  nArc <- sum(out[, 6])
-  npos.Arc <- round(sum(out[, 9]) / nArc * 100)
-  nneg.Arc <- round(sum(out[, 10]) / nArc * 100)
-  # Drop columns with positive and negative counts
-  out <- out[, c(1, 2, 3, 6, 7, 8)]
-  # Add row for total
-  out <- rbind(out, c(nBac, npos.Bac, nneg.Bac, nArc, npos.Arc, nneg.Arc))
-  # Put in names
+    # Add a row for totals
+    out <- rbind(out, colSums(out))
+    # Calculate binomial probabilities
+    for(i in 1:nrow(out)) out[i, 4] <- binom.test(out[i, 2], out[i, 1], p = 0.5, alternative = "greater")$p.value
+    out[1:length(envirotype), 4] <- round(out[1:length(envirotype), 4], 3)
+    out[nrow(out), 4] <- round(out[nrow(out), 4], 5)
+    out
+  })
+  out <- do.call(cbind, out)
+  # Add names
   rownames(out) <- c(envirotype, "Total")
-  colnames(out) <- paste(rep(c("N", "Pos", "Neg"), 2), rep(c("Bac", "Arc"), each = 3), sep = "_")
+  colnames(out) <- paste(rep(c("N", "Pos", "Neg", "p"), 2), rep(c("Bac", "Arc"), each = 4), sep = "_")
   out
 }
 

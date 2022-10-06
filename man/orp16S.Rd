@@ -81,7 +81,7 @@ If \code{metrics} is supplied, metadata are kept only for samples with available
 \code{getmetrics_orp16S} calculates chemical metrics (\ZC and \nH2O) for the indicated study.
 \code{...} is used to supply argument to \code{\link[chem16S]{readRDP}}; note that the default of \code{mincount = 100} was used for data processing in the paper (see \code{\link{plotEZ}}).
 
-\code{orp16S_info} prints general information about a study (more specifically, a dataset): name, number of samples with Bacteria and Archaea (with \code{mincount = 100}), bibligraphic key, range of T, pH, Eh, and Eh7, and whether the slope of the \ZC-Eh7 correlations for Bacteria and Archaea (if available) are negative (< -0.01 V\S{-1}), positive (> 0.01 V\S{-1}), or close to zero.
+\code{orp16S_info} prints general information about a study (more specifically, a dataset): name, number of samples with Bacteria and Archaea (with \code{mincount = 100}), bibligraphic key, range of T, pH, Eh, and Eh7, and whether the slope of the \ZC-Eh7 correlations for Bacteria and Archaea (if available) are negative or positive.
 The function also returns information in a data frame, which is used to fill in Table S1 of the paper.
 
 }

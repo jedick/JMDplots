@@ -108,13 +108,10 @@ orp16S5()
 
 ## Summary of regression slopes for all datasets (Table 2)
 ```{r orp16S_T2}
-colnames <- c("Number", "% Positive", "% Negative")
+colnames <- c("Ntot", "Npos", "Nneg", "p")
 kable(orp16S_T2(), col.names = rep(colnames, 2)) %>%
-  add_header_above(c(" " = 1, "Bacteria" = 3, "Archaea" = 3))
+  add_header_above(c(" " = 1, "Bacteria" = 4, "Archaea" = 4))
 ```
-
-**Note:** Positive and negative refer to slopes of linear regressions that are > 0.01 V^-1^ and < -0.01 V^-1^, respectively.
-Datasets for which the regression slopes have a smaller magnitude are not counted in either column.
 
 ## Linear regressions between Eh7 and `r ZC` at a global scale (Figure 6)
 ```{r orp16S6, message = FALSE, results = "hide", out.width='100%', fig.width = 10, fig.height = 7, out.extra = 'class="full-width"', pngquant = pngquant, dpi = 100}
