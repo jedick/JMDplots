@@ -61,6 +61,7 @@ writeLines(con = file, text = gsub(" ", "", c(
   ## For orp16S paper 20210922
   "MLL+19, TRUE, 250",
   "RMB+17, FALSE, 250",
+  "NTB+21, TRUE, 150",
   "SBP+20, FALSE, 250",
   "MWY+21, FALSE, 250",
   "SAR+13, NA, NA",
@@ -72,6 +73,7 @@ writeLines(con = file, text = gsub(" ", "", c(
   "SRM+19, FALSE, 250",
   "HLZ+18, FALSE, 420",
   "PSG+20, FALSE, 250",
+  "KSR+21, FALSE, 440",
   "ZCZ+21, FALSE, 450",
   "ZZL+21, FALSE, 450",
   "PBU+20, FALSE, 400",

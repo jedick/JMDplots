@@ -7,7 +7,7 @@ envirotype <- list(
   "Groundwater" = c("KLM+16", "WLJ+16", "ZDW+19", "DJK+18", "SRM+19", "APV+20", "YHK+20", "ZCZ+21", "MGW+22", "MCR+22"),
   # NOTE: Keep Geothermal in 4th location to get red color 20210904
   "Geothermal" = c("PCL+18_Acidic", "PCL+18_Alkaline", "GWS+20", "PBU+20", "MWY+21"),
-  "Hyperalkaline" = c("SBP+20", "RMB+17", "CTS+17", "PSB+21"),
+  "Hyperalkaline" = c("SBP+20", "RMB+17", "CTS+17", "KSR+21", "PSB+21", "NTB+21"),
   "Sediment" = c("ZML+17", "BSPD17", "RKN+17", "HDZ+19", "OHL+18_DNA", "WHLH21", "RSS+18", "CLS+19", "HSF+19", "ZHZ+19",
                  "LMBA21_2017", "HSF+22", "ZZLL21", "WFB+21", "HCW+22", "WKG+22"),
   "Soil" = c("MLL+19", "BMOB18", "WHLH21a", "CWC+20", "PSG+20", "LJC+20", "DTJ+20", "RKSK22", "DLS21_Bulk", "WKP+22",
@@ -196,7 +196,9 @@ orp16S3 <- function(pdf = FALSE) {
     "SBP+20, 38.862, -122.414", # SAMN03850954
     "RMB+17, 22.9052, 58.6606", # SAMN05981641
     "CTS+17, 10.94323, -85.63485", # SAMN06226041
+    "KSR+21, 44.264340, 8.46442", # SAMN17101425
     "PSB+21, 38.8621, -122.4304", # SAMN17252996
+    "NTB+21, 22.881, 58.701", # SAMN19998441
     ## Soil - put this group before Groundwater and Sediment for clearer visualization in GBA 20210927
     "MLL+19, 26.1, 112.5", # Materials and methods
     "BMOB18, 40.60842, -74.19258", # SAMN07828017  ### Laboratory
@@ -605,7 +607,7 @@ orp16S7 <- function(pdf = FALSE) {
     legend.x <- ifelse(month == "Jun", "topright", NA)
 
     # Plot 1: ZC vs Eh7 for 16S data
-    plotEZ(study, "Bacteria", groupby = "Stage", groups = c("Algae", "Cyanolichen", "Chlorolichen", "Moss"), legend.x = legend.x,
+    plotEZ(study, "Bacteria", groupby = "Stage", groups = c("Cyanobacteria", "Cyanolichen", "Chlorolichen", "Moss"), legend.x = legend.x,
       ylim = ylim, title.line = NULL, slope.legend = "topleft", ylab = quote(italic(Z)[C]~"of community reference proteome"))
     # Collection date is from BioSample data for PRJNA640847
     title(paste("16S rRNA gene sequences of biocrusts\ncollected in", longmonth, "2018"), font.main = 1)
@@ -624,7 +626,7 @@ orp16S7 <- function(pdf = FALSE) {
     iaa <- match(mdat$metadata$LibraryName, paste0(aa$abbrv, aa$organism))
     ZC_MP <- ZCAA(aa)[iaa]
     # Get point symbols and color
-    groups <- c("Algae", "Cyanolichen", "Chlorolichen", "Moss")
+    groups <- c("Cyanobacteria", "Cyanolichen", "Chlorolichen", "Moss")
     igroup <- match(mdat$metadata$Stage, groups)
     pch <- (21:24)[igroup]
     col <- orp16Scol[igroup]
@@ -695,7 +697,9 @@ orp16S_S1 <- function(pdf = FALSE) {
     plotEZ("SBP+20", "Bacteria", groupby = "pH Group", groups = c("< 10", "> 10")),
     plotEZ("RMB+17", "two", groupby = "pH Group", groups = c("< 10", "> 10")),
     plotEZ("CTS+17", "two", groupby = "Type", groups = c("River", "Well", "Spring"), legend.x = "bottomleft"),
+    plotEZ("KSR+21", "Bacteria", groupby = "Location", groups = c("Lerone", "Branega", "Branega Creek Water")),
     plotEZ("PSB+21", "Bacteria", groupby = "O2 range", groups = c("> 0.5 mg/L", "0.2-0.5 mg/L", "< 0.2 mg/L"), dxlim = c(-100, 0), dylim = c(0, 0.01)),
+    plotEZ("NTB+21", "two", groupby = "Well", groups = c("BA1A", "BA1D")),
 
     message("\nGroundwater"),
     plotEZ("KLM+16", "Bacteria", groupby = "Day", groups = c(-1, 246, 448, 671)),
@@ -734,7 +738,7 @@ orp16S_S1 <- function(pdf = FALSE) {
     message("\nSoil"),
     plotEZ("MLL+19", "two", groupby = "Type", groups = c("Upland", "Paddy", "Sediment")),
     plotEZ("BMOB18", "two", groupby = "Treatment", groups = c("Acetate", "No amendment", "Pre-incubation"), dxlim = c(-50, 0)),
-    plotEZ("WHLH21a", "Bacteria", groupby = "Stage", groups = c("Algae", "Cyanolichen", "Chlorolichen", "Moss"), legend.x = "bottomright"),
+    plotEZ("WHLH21a", "Bacteria", groupby = "Stage", groups = c("Cyanobacteria", "Cyanolichen", "Chlorolichen", "Moss"), legend.x = "bottomright"),
     plotEZ("CWC+20", "Bacteria", groupby = "Management", groups = c("Flooding", "Draining"), legend.x = "bottomright"),
     plotEZ("PSG+20", "two", groupby = "Treatment", groups = c("Initial", "NCC", "RB", "RGP", "TP"), legend.x = "bottomright"),
     plotEZ("LJC+20", "Bacteria", groupby = "MAT", groups = c(">= 21.5 \u00b0C", "< 21.5 \u00b0C"), dylim = c(0, 0.005)),
@@ -1123,13 +1127,13 @@ getmdat_orp16S <- function(study, metrics = NULL, dropNA = TRUE, size = NULL, qu
     shortstudy <- "WHLH21a"
   }
   if(shortstudy %in% c(
-    "MLL+19", "HXZ+20", "BCA+21", "RMB+17", "SBP+20", "MWY+21", "SAR+13", "CTS+17", "HDZ+19", "ZHZ+19",
-    "YHK+20", "SRM+19", "HLZ+18", "PSG+20", "ZCZ+21", "ZZL+21", "PBU+20", "MLL+18", "BWD+19", "WHL+21",
-    "HSF+19", "ZML+17", "DTJ+20", "WFB+21", "KLM+16", "LMBA21", "BSPD17", "CWC+20", "BMOB18", "LJC+20",
-    "DLS21",  "ZZLL21", "GWS+20", "CLS+19", "GZL21",  "LLC+19", "NLE+21", "APV+20", "WHLH21", "PCL+18",
-    "GSBT20", "SPA+21", "IBK+22", "HSF+22", "HCW+22", "WKP+22", "CKB+22", "WHLH21a", "RSS+18", "PSB+21",
-    "RKSK22", "WLJ+16", "DJK+18", "OHL+18", "ZLH+22", "LWJ+21", "MGW+22", "RKN+17", "ZDW+19", "WKG+22",
-    "CLZ+22", "RARG22", "MCR+22"
+    "MLL+19", "HXZ+20", "BCA+21", "RMB+17", "SBP+20", "NTB+21", "MWY+21", "SAR+13", "CTS+17", "HDZ+19",
+    "ZHZ+19", "YHK+20", "SRM+19", "HLZ+18", "PSG+20", "KSR+21", "ZCZ+21", "ZZL+21", "PBU+20", "MLL+18",
+    "BWD+19", "WHL+21", "HSF+19", "ZML+17", "DTJ+20", "WFB+21", "KLM+16", "LMBA21", "BSPD17", "CWC+20",
+    "BMOB18", "LJC+20", "DLS21",  "ZZLL21", "GWS+20", "CLS+19", "GZL21",  "LLC+19", "NLE+21", "APV+20",
+    "WHLH21", "PCL+18", "GSBT20", "SPA+21", "IBK+22", "HSF+22", "HCW+22", "WKP+22", "CKB+22", "WHLH21a",
+    "RSS+18", "PSB+21", "RKSK22", "WLJ+16", "DJK+18", "OHL+18", "ZLH+22", "LWJ+21", "MGW+22", "RKN+17",
+    "ZDW+19", "WKG+22", "CLZ+22", "RARG22", "MCR+22"
   )) {
     # General processing of metadata for orp16S datasets 20210820
     # Get Eh or ORP values (uses partial name matching, can match a column named "Eh (mV)")
@@ -1593,8 +1597,11 @@ orp16S8 <- function(pdf = FALSE) {
   idup <- duplicated(genus)
   x <- ifelse(idup, 7.62, 7.5)
   points(x, ZC, col = col[ihyper], pch = 19)
-  text(rep(7.5, sum(ihyper))[iarc & !idup], ZC[iarc & !idup], paste0(genus, " ")[iarc & !idup], adj = 1, font = 2)
-  text(rep(7.5, sum(ihyper))[!iarc & !idup], ZC[!iarc & !idup], paste0(genus, " ")[!iarc & !idup], adj = 1)
+  dy <- rep(0, sum(ihyper))
+  dy[genus == "Silanimonas"] <- 0.0005
+  dy[genus == "Hydrogenophaga"] <- -0.0005
+  text(rep(7.5, sum(ihyper))[iarc & !idup], (ZC + dy)[iarc & !idup], paste0(genus, " ")[iarc & !idup], adj = 1, font = 2)
+  text(rep(7.5, sum(ihyper))[!iarc & !idup], (ZC + dy)[!iarc & !idup], paste0(genus, " ")[!iarc & !idup], adj = 1)
   # High Eh7
   ZC <- gg$Q4.ZC[ihyper]
   genus <- gg$Q4.genus[ihyper]
@@ -1602,6 +1609,10 @@ orp16S8 <- function(pdf = FALSE) {
   x <- ifelse(idup, 7.88, 8)
   points(x, ZC, col = col[ihyper], pch = 19)
   dy <- rep(0, sum(ihyper))
+  dy[genus == "Hydrogenophaga"] <- 0.0022
+  dy[genus == "Comamonas"] <- -0.00052
+  dy[genus == "Sulfuritortus"] <- 0.0015
+  dy[genus == "Alkalinema"] <- -0.0015
   dy[genus == "Nitrososphaera"] <- 0.0005
   dy[genus == "Acinetobacter"] <- -0.0005
   text(rep(8, sum(ihyper))[iarc & !idup], (ZC + dy)[iarc & !idup], paste0(" ", genus)[iarc & !idup], adj = 0, font = 2)

@@ -37,7 +37,10 @@ RMB+17,"Samail Ophiolite",Hyperalkaline,Bacteria,96.99,Meiothermus,-0.171089,Aci
 RMB+17,"Samail Ophiolite",Hyperalkaline,Archaea,90.86,Methanobacterium,-0.196044,Nitrososphaera,-0.165969
 CTS+17,"Santa Elena Ophiolite",Hyperalkaline,Bacteria,96.67,Silanimonas,-0.13857,Sulfuritortus,-0.151842
 CTS+17,"Santa Elena Ophiolite",Hyperalkaline,Archaea,99.65,Nitrosopumilus,-0.189543,Nitrosopumilus,-0.189543
+KSR+21,"Voltri Massif",Hyperalkaline,Bacteria,76.8,Hydrogenophaga,-0.141121,Alkalinema,-0.152223
 PSB+21,"CROMO 2",Hyperalkaline,Bacteria,97.91,Dethiobacter,-0.176156,Dethiobacter,-0.176156
+NTB+21,"Samail Ophiolite Packers",Hyperalkaline,Bacteria,99.86,Silanimonas,-0.13857,Comamonas,-0.141386
+NTB+21,"Samail Ophiolite Packers",Hyperalkaline,Archaea,100,Nitrosopumilus,-0.189543,Nitrososphaera,-0.165969
 KLM+16,"Sarnia nZVI Injection",Groundwater,Bacteria,93.4,Dehalococcoides,-0.179574,Pseudomonas,-0.149005
 WLJ+16,"Hetao Basin",Groundwater,Bacteria,98.34,Psychrobacter,-0.150801,Acinetobacter,-0.168755
 WLJ+16,"Hetao Basin",Groundwater,Archaea,59.85,Methanomassiliicoccus,-0.163205,Nitrososphaera,-0.165969
