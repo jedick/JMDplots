@@ -178,7 +178,7 @@ importFrom("stats", "lm", "na.omit", "predict", "sd", "predict.lm", "residuals",
            "density", "formula", "t.test", "approx", "splinefun", "xtabs",
            "coefficients", "loess", "wilcox.test", "weighted.mean",
            "kmeans", "qt", "cor.test", "coef", "aggregate", "cor", "uniroot",
-           "TukeyHSD", "aov", "binom.test")
+           "TukeyHSD", "aov", "binom.test", "confint")
 importFrom("utils", "read.csv", "demo", "tail", "write.csv",
            "capture.output", "browseURL", "head", "combn", "read.table", "packageVersion",
            "assignInNamespace")

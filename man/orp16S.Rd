@@ -62,8 +62,8 @@ This table gives a brief description of each plotting function.
   \code{orp16S2} \tab Chemical depth profiles in Winogradsky columns \cr
   \code{orp16S3} \tab Sample locations on world map \cr
   \code{orp16S4} \tab Eh-pH diagram for all environment types (outline is from Baas Becking et al., 1960) \cr
-  \code{orp16S5} \tab Linear regressions between Eh7 and \ZC at local scales \cr
-  \code{orp16S6} \tab Linear regressions between Eh7 and \ZC at a global scale. Set \code{EMP_primers} to TRUE to make Figure S4. \cr
+  \code{orp16S5} \tab Associations between Eh7 and \ZC at local scales \cr
+  \code{orp16S6} \tab Associations between Eh7 and \ZC at a global scale. Set \code{EMP_primers} to TRUE to make Figure S4. \cr
   \code{orp16S7} \tab Comparison of 16S-based community reference proteomes with metaproteomes \cr
   \code{orp16S8} \tab Names and \ZC of the most abundant genera at low and high Eh7 in geothermal and hyperalkaline areas \cr
   \code{orp16S_S1} \tab \ZC-Eh scatterplots for each dataset \cr

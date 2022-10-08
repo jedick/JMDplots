@@ -379,7 +379,7 @@ orp16S4 <- function(pdf = FALSE) {
   if(pdf) dev.off()
 }
 
-# Linear regressions between Eh7 and ZC at local scales 20220517
+# Associations between Eh7 and ZC at local scales 20220517
 orp16S5 <- function(pdf = FALSE) {
   if(pdf) pdf("Figure_5.pdf", width = 8, height = 6)
   mat <- matrix(c(1,1,1,1, 2,2,2,2, 3,3,3,3,
@@ -399,11 +399,11 @@ orp16S5 <- function(pdf = FALSE) {
   label.figure("a", font = 2, cex = 1.8, yfrac = 0.9)
   # Bay of Biscay (Sediment)
   plotEZ("LMBA21_2017", "Bacteria", groupby = "Season", groups = c("Summer", "Winter"),
-    legend.x = "bottomright", title.line = NULL, dxlim = c(0, 170), slope.legend = "bottom")
+    legend.x = "bottomright", title.line = NULL, dxlim = c(0, 170), dylim = c(-0.01, 0), slope.legend = "bottom")
   title("Bay of Biscay\n(Sediment bacteria)", font.main = 1)
   # Hunan Soil (Soil)
   plotEZ("MLL+19", "Bacteria", groupby = "Type", groups = c("Upland", "Paddy", "Sediment"),
-    title.line = NULL, dylim = c(0, 0.005), slope.legend = "top")
+    title.line = NULL, dylim = c(0, 0.01), slope.legend = "top")
   title("Hunan Province\n(Soil and sediment bacteria)", font.main = 1)
 
   ## Panel B: Slope vs log10(number of samples) for all datasets
@@ -499,7 +499,7 @@ orp16S5 <- function(pdf = FALSE) {
 
 }
 
-# Figure 6: Linear regressions between Eh7 and ZC at a global scale 20210828
+# Figure 6: Associations between Eh7 and ZC at a global scale 20210828
 orp16S6 <- function(pdf = FALSE, EMP_primers = FALSE) {
 
   if(pdf) {
@@ -674,7 +674,7 @@ orp16S_S1 <- function(pdf = FALSE) {
            legend.x = "bottomright", dxlim = c(0, 100)),
     plotEZ("LWJ+21", "two", groupby = "Type", groups = c("Freshwater", "Freshwater Plastic", "Seawater", "Seawater Plastic"), dylim = c(0, 0.01)),
     plotEZ("GZL21", "Bacteria", groupby = "Type", groups = c("Surface water", "Middle water", "Bottom water"), legend.x = "bottomleft"),
-    plotEZ("RARG22", "two", groupby = "Group", groups = c("AMD", "Abiotic Treatment", "Biotic Treatment", "Stream")),
+    plotEZ("RARG22", "two", groupby = "Group", groups = c("AMD", "Abiotic Treatment", "Biotic Treatment", "Stream"), dylim = c(0, 0.007)),
 
     message("\nLake & Pond"),
     plotEZ("SAR+13", "two", groupby = "Zone", groups = c("Photic-oxic", "Transition", "Anoxic")),
@@ -733,7 +733,7 @@ orp16S_S1 <- function(pdf = FALSE) {
     plotEZ("WFB+21", "Bacteria", groupby = "Treatment", groups = c("C. volutator", "H. diversicolor", "Cv & Hd", "MPB", "Manual turbation"),
            dylim = c(0, 0.002)),
     plotEZ("HCW+22", "Bacteria", groupby = "Condition", groups = c("Static", "Weak", "Strong"), dylim = c(0, 0.007)),
-    plotEZ("WKG+22", "Bacteria", groupby = "Season", groups = c("Spring", "Summer", "Autumn", "Winter")),
+    plotEZ("WKG+22", "Bacteria", groupby = "Season", groups = c("Spring", "Summer", "Autumn", "Winter"), dylim = c(0, 0.002)),
 
     message("\nSoil"),
     plotEZ("MLL+19", "two", groupby = "Type", groups = c("Upland", "Paddy", "Sediment")),
@@ -763,15 +763,19 @@ orp16S_S1 <- function(pdf = FALSE) {
   Eh7lim <- sapply(lapply(model, "[", "Eh7"), "range")
   Eh7min <- Eh7lim[1, ]
   Eh7max <- Eh7lim[2, ]
+  # Get MOE95 (95% CI) 20221008
+  CI95 <- lapply(results[names(results) == "EZlm"], "confint", parm = "Eh7", level = 0.95)
+  MOE95 <- sapply(lapply(CI95, range), diff) / 2
+  # Get study name etc.
   study <- sapply(results[names(results) == "study"], "[")
   name <- sapply(results[names(results) == "name"], "[")
   envirotype <- sapply(results[names(results) == "envirotype"], "[")
   lineage <- sapply(results[names(results) == "lineage"], "[")
   nsamp <- sapply(model, nrow)
   pearson.r <- unlist(lapply(results[names(results) == "pearson"], "[[", "estimate"))
-  # Note: slope is mutiplied by 1e3 to convert from mV-1 to V-1
+  # Note: slope and MOE95 are mutiplied by 1e3 to convert from mV-1 to V-1
   EZlm <- data.frame(study, name, envirotype, lineage, nsamp, Eh7min, Eh7max,
-    slope = signif(slope * 1e3, 6), intercept = signif(intercept, 6), pearson.r = signif(pearson.r, 6))
+    slope = signif(slope * 1e3, 6), MOE95 = signif(MOE95 * 1e3, 6), intercept = signif(intercept, 6), pearson.r = signif(pearson.r, 6))
   # Save data and results to files
   write.csv(EZdat, "EZdat.csv", row.names = FALSE, quote = FALSE)
   write.csv(EZlm, "EZlm.csv", row.names = FALSE, quote = 2)
@@ -913,13 +917,12 @@ orp16S_S2 <- function(global.slopes, pdf = FALSE) {
 }
 
 
-
 ############################
 ### UNEXPORTED FUNCTIONS ###
 ############################
 
+# Calculate and plot linear regression and return coefficients 20210920
 add.linear.global <- function(xvals, ZC, nstudy = NA, xvar = "Eh7", N_slope.legend.x = "topright", N_slope.legend.inset = 0) {
-  # Plot linear fit and confidence interval 20210920
   text.col <- "black"
   line.col <- "gray62"
   # Use lighter colors for environments with few datasets 20210925
@@ -934,23 +937,32 @@ add.linear.global <- function(xvals, ZC, nstudy = NA, xvar = "Eh7", N_slope.lege
   }
   # Fit data with linear model
   thislm <- lm(ZC ~ xvals)
-  # Draw linear fit
+  # Draw linear regression
   xlim <- range(xvals)
   plx <- predict(thislm, newdata = data.frame(xvals = xlim), se = T)
   lines(xlim, plx$fit, col = line.col)
+
+  # Add legend with number of samples
+  Ntext <- bquote(italic(N) == .(length(ZC)))
+  legend(N_slope.legend.x, legend = Ntext, bty = "n", text.col = text.col, inset = N_slope.legend.inset)
+
   # Get the slope
   slope <- thislm$coefficients[2]
+  # Get the MOE for 95% confidence interval 20221008
+  CI95 <- confint(thislm, "xvals", level = 0.95)
+  stopifnot(all.equal(mean(CI95), as.numeric(slope)))
+  MOE95 <- diff(range(CI95)) / 2
   # Multiply by 1e3 to convert from mV-1 to V-1 or umol-1 to mmol-1
-  slopeval <- slope <- slope * 1e3
+  slope <- slope * 1e3
+  MOE95 <- MOE95 * 1e3
   # Round to fixed number of decimal places
-  slope <- formatC(slope, digits = 3, format = "f")
+  slopetxt <- formatC(slope, digits = 3, format = "f")
+  MOE95txt <- formatC(MOE95, digits = 3, format = "f")
   # Units for Eh7/Eh/O2
-  if(xvar %in% c("Eh7", "Eh")) stext <- bquote(.(slope)~V^-1)
-  if(xvar == "O2") stext <- bquote(.(slope)~L~mmol^-1)
-  # Also show number of samples
-  Ntext <- bquote(italic(N) == .(length(ZC)))
+  if(xvar %in% c("Eh7", "Eh")) slopeleg <- bquote(italic(m) == .(slopetxt) %+-% .(MOE95txt) ~ V^-1)
+  if(xvar == "O2") slopeleg <- bquote(italic(m) == .(slopetxt) %+-% .(MOE95txt) ~ L~mmol^-1)
   # Add text to plot
-  legend <- as.expression(c(Ntext, stext))
+  legend <- as.expression(c("", slopeleg))
   legend(N_slope.legend.x, legend = legend, bty = "n", text.col = text.col, inset = N_slope.legend.inset)
 
   # Calculate Pearson correlation 20211009
@@ -960,17 +972,26 @@ add.linear.global <- function(xvals, ZC, nstudy = NA, xvar = "Eh7", N_slope.lege
   rtext <- bquote(italic(r) == .(rtext))
   legend("bottomright", legend = rtext, bty = "n", text.col = text.col)
   # Return slope 20220611
-  slopeval
+  slope
 }
 
 add.linear.local <- function(Eh7, ZC, col = "gray62", lwd = 1, legend = NULL) {
+
+  # Get slope and MOE95 (95% CI) for linear regression
   EZdat <- data.frame(Eh7, ZC)
   EZlm <- lm(ZC ~ Eh7, EZdat)
+  slope <- EZlm$coefficients[2]
+  CI95 <- confint(EZlm, "Eh7", level = 0.95)
+  stopifnot(all.equal(mean(CI95), as.numeric(slope)))
+  MOE95 <- diff(range(CI95)) / 2
+  # Convert from mV-1 to V-1
+  slope <- slope * 1e3
+  MOE95 <- MOE95 * 1e3
+  # Use solid or dashed line to indicate large or small slope 20210926
+  if(is.na(slope)) lty <- 3 else if(abs(slope) < 0.01) lty <- 2 else lty <- 1
+  # Plot regression line
   Eh7lim <- range(EZlm$model$Eh7)
   ZCpred <- predict.lm(EZlm, data.frame(Eh7 = Eh7lim))
-  # Use solid or dashed line to indicate large or small slope 20210926
-  slope <- EZlm$coefficients[2] * 1e3
-  if(is.na(slope)) lty <- 3 else if(abs(slope) < 0.01) lty <- 2 else lty <- 1
   lines(Eh7lim, ZCpred, col = col, lwd = lwd, lty = lty)
   # Calculate Pearson correlation 20220520
   pearson <- cor.test(EZdat$Eh7, EZdat$ZC, method = "pearson")
@@ -978,29 +999,31 @@ add.linear.local <- function(Eh7, ZC, col = "gray62", lwd = 1, legend = NULL) {
   if(!is.null(legend)) {
 
     # Format correlation coefficient 20221001
-    rval <- formatC(pearson$estimate, digits = 2, format = "f")
-    # Format slope
-    slopeval <- formatC(slope, digits = 3, format = "f")
+    rtxt <- formatC(pearson$estimate, digits = 2, format = "f")
+    # Format slope and MOE95
+    slopetxt <- formatC(slope, digits = 3, format = "f")
+    MOE95txt <- formatC(MOE95, digits = 3, format = "f")
 
     if(legend == "title") {
       # Put statistics in subtitle 20221004
       main <- bquote(list(
         italic(N) == .(nrow(EZdat)),
-        italic(r) == .(rval),
-        italic(m) == .(slopeval)~V^-1
+        italic(r) == .(rtxt),
+        italic(m) == .(slopetxt) %+-% .(MOE95txt) ~ V^-1
       ))
       title(main = main, line = 0.75, cex.main = 1)
     } else {
-      # Format number of samples 20221001
+      # Put statistics in plot 20221001
       ntext <- bquote(italic(N) == .(nrow(EZdat)))
-      rtext <- bquote(italic(r) == .(rval))
-      stext <- bquote(italic(m) == .(slopeval)~V^-1)
-      ltext <- c(ntext, rtext, stext)
-      legend(legend, legend = ltext, bty = "n")
+      rtext <- bquote(italic(r) == .(rtxt))
+      stext <- bquote(italic(m) == .(slopetxt))
+      MOEtext <- bquote(phantom(xx) %+-% .(MOE95txt) ~ V^-1)
+      ltext <- c(ntext, rtext, stext, MOEtext)
+      legend(legend, legend = ltext, bty = "n", cex = 0.85)
     }
   }
   # Return results for plotEZ() 20221004
-  invisible(list(EZlm = EZlm, Eh7lim = Eh7lim, ZCpred = ZCpred, pearson = pearson))
+  invisible(list(EZlm = EZlm, Eh7lim = Eh7lim, ZCpred = ZCpred, pearson = pearson, MOE95 = MOE95))
 }
 
 # Scatterplots for all samples in each environment type 20210913
@@ -1403,7 +1426,7 @@ orp16S_S3 <- function(pdf = FALSE) {
 
   # Use only samples with non-NA O2
   hasO2dat <- EZdat[!is.na(EZdat$O2_umol_L), ] 
-  ylim <- range(hasO2dat$ZC, -0.1)
+  ylim <- range(hasO2dat$ZC, -0.09)
 
   # Loop over domains
   for(lineage in c("Bacteria", "Archaea")) {
