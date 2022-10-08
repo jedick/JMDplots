@@ -63,10 +63,10 @@ orp16S1 <- function(pdf = FALSE) {
 
   # Plot shapes and text for biological methods
   text(20, 79+dy, "Biological Methods", col = RedText, font = 2)
-  for(bg in c("white", Red80)) points(20, 60+dy, pch = 21, cex = 18, bg = bg)
+  for(bg in c("white", Red80)) points(20, 60+dy, pch = 21, cex = 17, bg = bg)
   text(20, 66+dy, "RefSeq", font = 2, col = RedText)
   text(20, 57+dy, "Reference\nproteomes\nof taxa")
-  for(bg in c("white", Red80)) points(20, 20+dy, pch = 21, cex = 18, bg = bg)
+  for(bg in c("white", Red80)) points(20, 20+dy, pch = 21, cex = 17, bg = bg)
   text(20, 25+dy, "16S + RDP", font = 2, col = RedText)
   text(20, 18+dy, "Taxonomic\nabundances")
 
@@ -80,13 +80,20 @@ orp16S1 <- function(pdf = FALSE) {
   myrect <- function(x, y, w, h, ...) rect(x - w/2, y - h/2, x + w/2, y + h/2, ...)
   # T, Eh, pH, O2
   for(col in c("white", Blue80)) myrect(73, 16+dy, 5, 6, col = col)
-  text(73, 16+dy, "T", col = BlueText)
-  for(col in c("white", Blue80)) myrect(80, 20+dy, 7, 7, col = col)
-  text(80, 20+dy, "Eh", font = 2, cex = 1.2, col = BlueText)
+  text(73, 17.3+dy, "T", col = BlueText, adj = c(0.5, 1))
+  for(col in c("white", Blue80)) myrect(80, 16+dy, 7, 7, col = col)
+  text(80, 17.3+dy, "Eh", col = BlueText, adj = c(0.5, 1))
   for(col in c("white", Blue80)) myrect(87.5, 16+dy, 6, 6, col = col)
-  text(87.5, 16+dy, "pH", col = BlueText)
-  for(col in c("white", Blue80)) myrect(80, 11+dy, 5, 6, col = col)
-  text(80, 11+dy, quote(O[2]), col = BlueText)
+  text(87.5, 17.3+dy, "pH", col = BlueText, adj = c(0.5, 1))
+  for(col in c("white", Blue80)) myrect(80, 8+dy, 5, 6, col = col)
+  text(80, 8+dy, quote(O[2]), col = BlueText)
+  # Add Eh7 and lines to source data 20221008
+  for(col in c("white", Blue80)) myrect(80, 25.5+dy, 7, 7, col = col)
+  text(80, 25.5+dy, "Eh7", font = 2, col = BlueText)
+  lines(c(73, 87.5), c(19.5, 19.5))
+  lines(c(73, 73), c(16.5, 19.5))
+  lines(c(80, 80), c(17, 19.5))
+  lines(c(87.5, 87.5), c(16.5, 19.5))
 
   # Plot inner rectangle and text
   third <- 100/3
@@ -99,11 +106,11 @@ orp16S1 <- function(pdf = FALSE) {
 
   # Plot arrows and text labels
   arrows(1*third - 1, 20+dy, 1*third + 6, 20+dy, code = 1, lty = 1, length = 0.1)
-  arrows(2*third - 4, 16+dy, 2*third + 3, 16+dy, code = 2, lty = 1, length = 0.1)
+  arrows(2*third - 4, 16+dy, 2*third + 2.5, 16+dy, code = 2, lty = 1, length = 0.1)
   text(50, 18+dy, "Community and\nenvironmental data")
-  arrows(80, 26+dy, 80, 46+dy, code = 3, lwd = 1.5, length = 0.1, col = BlueText)
-  text(46, 42+dy, "Thermodynamic prediction", font = 2, cex = 0.9, adj = c(0, 1))
-  text(49, 42+dy, "\nCarbon oxidation state\nis positively correlated\nwith redox potential", font = 3, cex = 0.9, adj = c(0, 1))
+  arrows(80, 31+dy, 80, 46.5+dy, code = 3, lwd = 1.5, length = 0.1, col = BlueText)
+  text(46, 46+dy, "Thermodynamic prediction", font = 2, cex = 0.9, adj = c(0, 1))
+  text(46, 46+dy, "\nPositive correlation between\ncarbon oxidation state\nand redox potential", font = 3, cex = 0.9, adj = c(0, 1))
 
   if(pdf) dev.off()
 
@@ -131,7 +138,7 @@ orp16S2 <- function(pdf = FALSE) {
   lines(Eh7, MODdepth, type = "b", pch = 19)
   text(50, -2.3, "Eh7")
   text(650, -2.3, "Eh")
-  label.figure("a", font = 2, cex = 1.5)
+  label.figure("a", font = 2, cex = 1.7)
 
   # Get 16S metadata and chemical metrics for Rundell et al. (2014) experiments
   metrics.in <- getmetrics_orp16S("RBW+14")
@@ -150,7 +157,7 @@ orp16S2 <- function(pdf = FALSE) {
     text(-0.182, i - 0.25, label, adj = 1)
   }
   par(xpd = FALSE)
-  label.figure("b", font = 2, cex = 1.5)
+  label.figure("b", font = 2, cex = 1.7)
 
   # Reset layout to make orp16S3 in the examples run nicely 20211011
   if(pdf) dev.off() else layout(1)
@@ -396,7 +403,7 @@ orp16S5 <- function(pdf = FALSE) {
   plotEZ("WHLH21", "Bacteria", groupby = "Position", groups = c("Surface", "Middle", "Bottom"),
     legend.x = "bottomleft", title.line = NULL, dxlim = c(-20, 0), slope.legend = "right")
   title("Daya Bay\n(Sediment bacteria)", font.main = 1)
-  label.figure("a", font = 2, cex = 1.8, yfrac = 0.9)
+  label.figure("a", font = 2, cex = 2, yfrac = 0.9)
   # Bay of Biscay (Sediment)
   plotEZ("LMBA21_2017", "Bacteria", groupby = "Season", groups = c("Summer", "Winter"),
     legend.x = "bottomright", title.line = NULL, dxlim = c(0, 170), dylim = c(-0.01, 0), slope.legend = "bottom")
@@ -432,7 +439,7 @@ orp16S5 <- function(pdf = FALSE) {
   ltext <- names(envirotype)[i1[3:4]]
   legend("bottomright", ltext, pch = 19, col = orp16Scol[i1[3:4]])
   title("Linear regressions for bacterial communities\nin each dataset", font.main = 1, xpd = NA, line = 0.7)
-  label.figure("b", font = 2, cex = 1.8, yfrac = 1.05)
+  label.figure("b", font = 2, cex = 2, yfrac = 1.05)
   # Groundwater, sediment, soil
   plot(xlim, ylim, type = "n", xlab = quote(log[10]~"(Number of samples)"), ylab = quote("Slope of linear fit"~(V^-1)))
   abline(h = 0, lty = 2, lwd = 1.5, col = "gray50")
@@ -485,7 +492,7 @@ orp16S5 <- function(pdf = FALSE) {
     }
     title(paste0("Geothermal\n", tolower(lineages[k])), font.main = 1, xpd = NA, line = 0.7)
     if(k==1) {
-      label.figure("c", font = 2, cex = 1.8, yfrac = 1.025)
+      label.figure("c", font = 2, cex = 2, yfrac = 1.025)
       # Add legend
       lacid <- paste0("Acidic (", paste(which(iacid), collapse = ", "), ")")
       lneut <- "Circumneutral to"
@@ -548,7 +555,7 @@ orp16S6 <- function(pdf = FALSE, EMP_primers = FALSE) {
   text(0.5, -0.5, "Eh7 (mV)", cex = 1.2, xpd = NA)
   plot.new()
   text(0.2, 0.5, cplab$ZC, cex = 1.2, srt = 90, xpd = NA)
-  label.figure("a", font = 2, cex = 2, xfrac = 0.34, yfrac = 0.965)
+  label.figure("a", font = 2, cex = 2.4, xfrac = 0.2, yfrac = 0.97)
   plot.new()
   text(0.3, 0.5, "Bacteria", srt = 90, xpd = NA)
   plot.new()
@@ -566,7 +573,7 @@ orp16S6 <- function(pdf = FALSE, EMP_primers = FALSE) {
   # Add points
   eachenv(thisdat, add = TRUE, do.linear = FALSE)
   title("Bacteria", font.main = 1, line = 0.5, xpd = NA)
-  label.figure("b", font = 2, cex = 2, xfrac = 0.02, yfrac = 1)
+  label.figure("b", font = 2, cex = 2.4, xfrac = 0.05, yfrac = 1)
 
   # Now do Archaea
   plot(c(-500, 650), range(EZdat$ZC), type = "n", xlab = "Eh7 (mV)", ylab = cplab$ZC)
@@ -611,7 +618,7 @@ orp16S7 <- function(pdf = FALSE) {
       ylim = ylim, title.line = NULL, slope.legend = "topleft", ylab = quote(italic(Z)[C]~"of community reference proteome"))
     # Collection date is from BioSample data for PRJNA640847
     title(paste("16S rRNA gene sequences of biocrusts\ncollected in", longmonth, "2018"), font.main = 1)
-    label.figure(label, font = 2, cex = 1.5)
+    label.figure(label, font = 2, cex = 2)
     # Get 16S data
     metrics <- getmetrics_orp16S("WHLH21a")
     mdat <- getmdat_orp16S(study, metrics = metrics)
@@ -859,7 +866,7 @@ orp16S_S2 <- function(global.slopes, pdf = FALSE) {
   slope <- slope * 1e3
   # Round to fixed number of decimal places
   global.slope <- formatC(slope, digits = 3, format = "f")
-  label.figure("a", font = 2, cex = 1.8, xfrac = 0.04)
+  label.figure("a", font = 2, cex = 2, xfrac = 0.04)
 
   # Create slope legend
   par(mar = c(4, 1, 1, 1))
@@ -911,7 +918,7 @@ orp16S_S2 <- function(global.slopes, pdf = FALSE) {
   dx <- c(0.02, 0.0185, -0.0025, 0, 0.019, 0.014, -0.007)
   dy <- c(-0.005, -0.002, 0.006, -0.004, 0, 0, 0)
   text(local.slopes + dx, global.slopes$Bacteria + dy, envtxt, cex = 0.85)
-  label.figure("b", font = 2, cex = 1.8, xfrac = 0.02)
+  label.figure("b", font = 2, cex = 2, xfrac = 0.02)
   if(pdf) dev.off()
 
 }
