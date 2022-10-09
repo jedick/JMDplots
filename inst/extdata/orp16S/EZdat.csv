@@ -1538,6 +1538,12 @@ SRM+19,Groundwater,Bacteria,G16,SRR6760385,Land Use,Community,NA,7.1,243.7591409
 SRM+19,Groundwater,Bacteria,G17,SRR6760382,Land Use,Community,NA,7.5,125.004687675788,138.4,167.98,-0.152281
 SRM+19,Groundwater,Bacteria,G18,SRR6760383,Land Use,Community,NA,6.7,135.63008612823,161.8,144.05,-0.161216
 SRM+19,Groundwater,Bacteria,G19,SRR6760381,Land Use,Mine,NA,7.4,101.878820455767,-49.5,-25.84,-0.158825
+APV+20,Groundwater,Bacteria,Canal.Feb,SRR7775194,Type,Canal,20.54,8.93,0,-379.4,-266.94,-0.198125
+APV+20,Groundwater,Bacteria,Canal.May,SRR7775192,Type,Canal,22.92,6.73,0,-44.2,-60.06,-0.194603
+APV+20,Groundwater,Bacteria,Canal.Aug,SRR7775193,Type,Canal,21.36,6.92,0,-45.5,-50.17,-0.176615
+APV+20,Groundwater,Bacteria,Canal.Oct,SRR7775190,Type,Canal,21.52,7.69,0,-67,-26.66,-0.166928
+APV+20,Groundwater,Bacteria,Canal.Nov,SRR7775189,Type,Canal,21.42,7.1,0,-46.2,-40.36,-0.200122
+APV+20,Groundwater,Bacteria,Canal.Jan,SRR7775191,Type,Canal,17.44,7.8,0,-34.8,11.32,-0.188219
 APV+20,Groundwater,Bacteria,Piezometer.Feb,SRR7775188,Type,Piezometer,17.77,6.89,57.5021563308624,75.1,68.75,-0.143467
 APV+20,Groundwater,Bacteria,Piezometer.May,SRR7775186,Type,Piezometer,20.56,7.27,122.192082203083,218,233.73,-0.157281
 APV+20,Groundwater,Bacteria,Piezometer.Aug,SRR7775187,Type,Piezometer,18.46,7.11,134.380039251472,167.5,173.86,-0.148086

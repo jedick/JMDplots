@@ -714,7 +714,7 @@ orp16S_S1 <- function(pdf = FALSE) {
     plotEZ("ZDW+19", "two", groupby = "Season", groups = c("Non-monsoon", "Spring", "Monsoon", "Autumn"), legend.x = "bottomright"),
     plotEZ("DJK+18", "two", groupby = "Aquifer", groups = c("Athens", "Greene", "Licking"), legend.x = "bottomleft"),
     plotEZ("SRM+19", "Bacteria", groupby = "Land Use", groups = c("Agriculture", "Community", "Landfill", "Mine")),
-    plotEZ("APV+20", "two", groupby = "Type", groups = c("Piezometer", "Well", "Spring"), legend.x = "bottomleft"),
+    plotEZ("APV+20", "two", groupby = "Type", groups = c("Canal", "Piezometer", "Well", "Spring")),
     plotEZ("YHK+20", "Bacteria", groupby = "Location", groups = c("Upper Hillslope", "Middle Slope", "Lower Footslope"), dylim = c(0, 0.005)),
     plotEZ("ZCZ+21", "Bacteria", groupby = "Location", groups = c("LO", "CR1", "MN", "VA", "BS", "CR2"), legend.x = "topright"),
     plotEZ("MGW+22", "two", groupby = "Region", groups = c("Auckland", "Canterbury", "Taupo", "Wellington"), legend.x = "bottomleft", dylim = c(-0.006, 0)),

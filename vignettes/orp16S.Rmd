@@ -147,14 +147,6 @@ orp16S_S3()
 orp16S6(EMP_primers = TRUE)
 ```
 
-## Binomial tests of outcomes of global-scale correlations (in-text calculation)
-```{r binom.test}
-# Point estimates of slopes
-binom.test(7, 7, alternative = "greater")$p.value
-# Minimum slopes in 95% CI (worst-case scenario)
-binom.test(6, 7, alternative = "greater")$p.value
-```
-
 ## Genus-level RDP classifications mapped to NCBI taxonomy (in-text calculation)
 ```{r mapperc}
 # Read Dataset S3 (created by orp16S_D3())

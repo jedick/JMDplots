@@ -49,7 +49,7 @@ ZDW+19,"Jianghan Plain",Groundwater,Archaea,37,-170.52,-15.45,0.0420466,0.086955
 DJK+18,"Ohio Aquifers",Groundwater,Bacteria,89,-153.09,66.64,-0.00981485,0.0168322,-0.159704,-0.123307
 DJK+18,"Ohio Aquifers",Groundwater,Archaea,75,-153.09,66.64,-0.0708313,0.0354165,-0.185417,-0.422772
 SRM+19,"Rayong Province",Groundwater,Bacteria,19,-364.14,246.38,0.0162127,0.0187251,-0.154624,0.405073
-APV+20,"Mezquital Valley",Groundwater,Bacteria,18,55.11,233.73,-0.0391375,0.0569351,-0.146699,-0.342301
+APV+20,"Mezquital Valley",Groundwater,Bacteria,24,-266.94,233.73,0.107187,0.0385201,-0.173312,0.776007
 APV+20,"Mezquital Valley",Groundwater,Archaea,9,55.11,223.95,-0.0254199,0.189979,-0.166315,-0.118741
 YHK+20,"Hainich Critical Zone",Groundwater,Bacteria,33,159.2,433.21,0.0247025,0.0124617,-0.160704,0.587564
 ZCZ+21,"Po Plain",Groundwater,Bacteria,18,-89.37,416.75,-0.0134,0.0182447,-0.153228,-0.362736
