@@ -483,8 +483,7 @@ orp16S5 <- function(pdf = FALSE) {
         Eh7 <- c(Eh7min, Eh7max)
         ZC <- y(Eh7)
         if(length(Eh7) > 0) {
-          if(abs(slope) < 0.01) lty <- 2 else lty <- 1
-          lines(Eh7, ZC, col = col[j], lwd = 2, lty = lty)
+          lines(Eh7, ZC, col = col[j], lwd = 2)
           # Add number to identify dataset
           text(tail(Eh7, 1) + dx[[k]][j], tail(ZC, 1) + dy[[k]][j], j)
         }
@@ -1462,6 +1461,7 @@ orp16S_S3 <- function(pdf = FALSE) {
     ltext <- names(envirotype)[ienv]
     # Add number of samples in each environment 20220518
     nsamp <- table(thisdat$envirotype)[ltext]
+    nsamp[is.na(nsamp)] <- 0
     ltext <- paste0(ltext, " (", nsamp, ")")
     legend("bottom", ltext, pch = 19, col = orp16Scol[ienv], bty = "n")
   }
@@ -1583,8 +1583,7 @@ orp16S8 <- function(pdf = FALSE) {
   par(mar = c(3, 4, 0.5, 0.5))
   plot(c(1, 9.5), range(gg$Q1.ZC, gg$Q4.ZC), xlab = "", xaxt = "n", ylab = cplab$"ZC", type = "n")
   abline(h = seq(-0.22, -0.14, 0.02), lty = 3, col = 8, lwd = 1.5)
-  axis(1, at = c(3.25, 7.75), labels = c("Low - High", "Low - High"), tick = FALSE, padj = -1.5)
-  axis(1, at = 5.5, labels = quote(cdots*cdots*cdots*cdots*cdots*cdots*Eh7*cdots*cdots*cdots*cdots*cdots*cdots), tick = FALSE, padj = -1.5)
+  axis(1, at = c(3.25, 7.75), labels = c("Low Eh7 - High Eh7", "Low Eh7 - High Eh7"), tick = FALSE, padj = -1.5)
   axis(1, at = c(3.25, 7.75), labels = c("Geothermal", "Hyperalkaline"), tick = FALSE, padj = 1, font.axis = 2)
 
   # Add points and labels for Geothermal

@@ -111,7 +111,7 @@ writeLines(con = file, text = gsub(" ", "", c(
   "CKB+22, FALSE, 290",
   "WHLH21a, FALSE, 450",
   "PSB+21, FALSE, 250",
-  "RKSK22, FALSE, 295",
+  "RKSK22, FALSE, 290",
   "DJK+18, TRUE, 250",
   "WLJ+16, TRUE, 200",
 

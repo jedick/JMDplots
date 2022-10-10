@@ -89,8 +89,8 @@ PSG+20,"Anaerobic Soil Disinfestation",Soil,Bacteria,49.34,Neobacillus,-0.198398
 PSG+20,"Anaerobic Soil Disinfestation",Soil,Archaea,99.94,Nitrososphaera,-0.165969,Nitrososphaera,-0.165969
 LJC+20,"East Asia Paddy Soil",Soil,Bacteria,88.66,Pseudarthrobacter,-0.135409,Pseudarthrobacter,-0.135409
 DTJ+20,"Rice Rhizosphere",Soil,Bacteria,70.96,Neobacillus,-0.198398,Ramlibacter,-0.137588
-RKSK22,"Georgia Salt Marshes",Soil,Bacteria,80.28,Sulfurovum,-0.195376,Desulfosarcina,-0.164162
-RKSK22,"Georgia Salt Marshes",Soil,Archaea,43.37,Methanomassiliicoccus,-0.163205,Nitrosopumilus,-0.189543
+RKSK22,"Georgia Salt Marshes",Soil,Bacteria,79.96,Sulfurovum,-0.195376,Desulfosarcina,-0.164162
+RKSK22,"Georgia Salt Marshes",Soil,Archaea,43.64,Methanomassiliicoccus,-0.163205,Nitrosopumilus,-0.189543
 DLS21_Bulk,"Paddy Soil Amendments 1 (Bulk)",Soil,Bacteria,69.4,Geobacter,-0.159682,Geobacter,-0.159682
 WKP+22,"Maize Intercropping, Poland",Soil,Bacteria,73.97,Luteitalea,-0.126219,Luteitalea,-0.126219
 CKB+22,"Paddy Soil Amendments 2",Soil,Bacteria,65.73,Neobacillus,-0.198398,Neobacillus,-0.198398

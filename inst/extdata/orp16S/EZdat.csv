@@ -2965,231 +2965,233 @@ DTJ+20,Soil,Bacteria,MS-SY-TZ,SRR11278909,Zone,Tip,NA,6.47,NA,-63.84,-95.19,-0.1
 DTJ+20,Soil,Bacteria,MS-YD-MZ,SRR11278907,Zone,Mature,NA,6.35,NA,-49.08,-87.53,-0.150667
 DTJ+20,Soil,Bacteria,MS-YD-EZ,SRR11278906,Zone,Elongation,NA,6.37,NA,-55.27,-92.54,-0.151444
 DTJ+20,Soil,Bacteria,MS-YD-TZ,SRR11278905,Zone,Tip,NA,6.29,NA,-65.55,-107.55,-0.151416
-RKSK22,Soil,Bacteria,Sapelo18_Bulk_sediment_T1_P1_0-5,SRR12995242,Compartment,Bulk sediment,NA,7.5,NA,78.7,108.28,-0.148495
-RKSK22,Soil,Bacteria,Sapelo18_Bulk_sediment_T1_P1_5-10,SRR12995243,Compartment,Bulk sediment,NA,6.8,NA,-143.3,-155.13,-0.15096
-RKSK22,Soil,Bacteria,Sapelo18_Bulk_sediment_T1_P2_0-5,SRR12995272,Compartment,Bulk sediment,NA,6.2,NA,-287,-334.32,-0.154396
-RKSK22,Soil,Bacteria,Sapelo18_Bulk_sediment_T1_P2_5-10,SRR12995224,Compartment,Bulk sediment,NA,6.7,NA,-373.7,-391.45,-0.159792
-RKSK22,Soil,Bacteria,Sapelo18_Bulk_sediment_T1_P3_0-5,SRR12995250,Compartment,Bulk sediment,NA,6.4,NA,-332.3,-367.79,-0.154495
-RKSK22,Soil,Bacteria,Sapelo18_Bulk_sediment_T1_P3_5-10,SRR12995261,Compartment,Bulk sediment,NA,6.6,NA,-405,-428.66,-0.155815
-RKSK22,Soil,Bacteria,Sapelo18_Bulk_sediment_T1_P4_0-5,SRR12995290,Compartment,Bulk sediment,NA,6.7,NA,-254.5,-272.25,-0.153486
-RKSK22,Soil,Bacteria,Sapelo18_Bulk_sediment_T1_P4_5-10,SRR12995301,Compartment,Bulk sediment,NA,6.6,NA,-310.5,-334.16,-0.156543
-RKSK22,Soil,Bacteria,Sapelo18_Bulk_sediment_T2_P1_5-10,SRR12995279,Compartment,Bulk sediment,NA,6.2,NA,20,-27.32,-0.150088
-RKSK22,Soil,Bacteria,Sapelo18_Bulk_sediment_T2_P2_5-10,SRR12995241,Compartment,Bulk sediment,NA,6.6,NA,-226.5,-250.16,-0.15349
-RKSK22,Soil,Bacteria,Sapelo18_Bulk_sediment_T3_P3_0-5,SRR12995235,Compartment,Bulk sediment,NA,6.5,NA,-362,-391.58,-0.159644
-RKSK22,Soil,Bacteria,Sapelo18_Bulk_sediment_T4_P1_0-5,SRR12995218,Compartment,Bulk sediment,NA,7.1,NA,18,23.92,-0.149014
-RKSK22,Soil,Bacteria,Sapelo18_Bulk_sediment_T4_P1_5-10,SRR12995223,Compartment,Bulk sediment,NA,6,NA,-29,-88.16,-0.149357
-RKSK22,Soil,Bacteria,Sapelo18_Bulk_sediment_T4_P2_0-5,SRR12995216,Compartment,Bulk sediment,NA,6.8,NA,-295.5,-307.33,-0.155846
-RKSK22,Soil,Bacteria,Sapelo18_Bulk_sediment_T4_P2_5-10,SRR12995217,Compartment,Bulk sediment,NA,6.8,NA,-385.5,-397.33,-0.157307
-RKSK22,Soil,Bacteria,Sapelo18_Bulk_sediment_T4_P3_0-5,SRR12995214,Compartment,Bulk sediment,NA,6.5,NA,-271.5,-301.08,-0.156188
-RKSK22,Soil,Bacteria,Sapelo18_Bulk_sediment_T4_P3_5-10,SRR12995215,Compartment,Bulk sediment,NA,6.6,NA,-347.5,-371.16,-0.15644
-RKSK22,Soil,Bacteria,Sapelo2018_Endosphere_T1_P1_0-5,SRR12995276,Compartment,Root,NA,6.8,NA,-143.3,-155.13,-0.157035
-RKSK22,Soil,Bacteria,Sapelo2018_Endosphere_T1_P1_5-10,SRR12995213,Compartment,Root,NA,7.5,NA,78.7,108.28,-0.156577
-RKSK22,Soil,Bacteria,Sapelo2018_Endosphere_T1_P2_0-5,SRR12995273,Compartment,Root,NA,6.7,NA,-373.7,-391.45,-0.159911
-RKSK22,Soil,Bacteria,Sapelo2018_Endosphere_T1_P2_5-10,SRR12995274,Compartment,Root,NA,6.2,NA,-287,-334.32,-0.162191
-RKSK22,Soil,Bacteria,Sapelo2018_Endosphere_T1_P3_0-5,SRR12995270,Compartment,Root,NA,6.6,NA,-405,-428.66,-0.154879
-RKSK22,Soil,Bacteria,Sapelo2018_Endosphere_T1_P3_5-10,SRR12995271,Compartment,Root,NA,6.4,NA,-332.3,-367.79,-0.173555
-RKSK22,Soil,Bacteria,Sapelo2018_Endosphere_T1_P4_0-5,SRR12995268,Compartment,Root,NA,6.6,NA,-310.5,-334.16,-0.156899
-RKSK22,Soil,Bacteria,Sapelo2018_Endosphere_T1_P4_5-10,SRR12995269,Compartment,Root,NA,6.7,NA,-254.5,-272.25,-0.163044
-RKSK22,Soil,Bacteria,Sapelo2018_Endosphere_T2_P1_0-5,SRR12995266,Compartment,Root,NA,6.2,NA,20,-27.32,-0.158697
-RKSK22,Soil,Bacteria,Sapelo2018_Endosphere_T2_P1_5-10,SRR12995267,Compartment,Root,NA,7.1,NA,34.5,40.42,-0.164086
-RKSK22,Soil,Bacteria,Sapelo2018_Endosphere_T2_P2_0-5,SRR12995264,Compartment,Root,NA,6.6,NA,-226.5,-250.16,-0.161008
-RKSK22,Soil,Bacteria,Sapelo2018_Endosphere_T2_P2_5-10,SRR12995265,Compartment,Root,NA,7.1,NA,-66,-60.08,-0.158504
-RKSK22,Soil,Bacteria,Sapelo2018_Endosphere_T2_P3_0-5,SRR12995262,Compartment,Root,NA,6.5,NA,-346,-375.58,-0.147544
-RKSK22,Soil,Bacteria,Sapelo2018_Endosphere_T2_P3_5-10,SRR12995263,Compartment,Root,NA,6.5,NA,-143,-172.58,-0.16412
-RKSK22,Soil,Bacteria,Sapelo2018_Endosphere_T4_P1_0-5,SRR12995259,Compartment,Root,NA,6,NA,-29,-88.16,-0.154261
-RKSK22,Soil,Bacteria,Sapelo2018_Endosphere_T4_P1_5-10,SRR12995260,Compartment,Root,NA,7.1,NA,18,23.92,-0.160035
-RKSK22,Soil,Bacteria,Sapelo2018_Endosphere_T4_P2_0-5,SRR12995257,Compartment,Root,NA,6.8,NA,-385.5,-397.33,-0.15275
-RKSK22,Soil,Bacteria,Sapelo2018_Endosphere_T4_P2_5-10,SRR12995258,Compartment,Root,NA,6.8,NA,-295.5,-307.33,-0.155921
-RKSK22,Soil,Bacteria,Sapelo2018_Endosphere_T4_P3_0-5,SRR12995255,Compartment,Root,NA,6.6,NA,-347.5,-371.16,-0.157255
-RKSK22,Soil,Bacteria,Sapelo2018_Endosphere_T4_P3_5-10,SRR12995256,Compartment,Root,NA,6.5,NA,-271.5,-301.08,-0.166444
-RKSK22,Soil,Bacteria,Sapelo2018_Rhizosphere_T1_P1_0-5,SRR12995253,Compartment,Rhizosphere,NA,6.8,NA,-143.3,-155.13,-0.151531
-RKSK22,Soil,Bacteria,Sapelo2018_Rhizosphere_T1_P1_5-10,SRR12995254,Compartment,Rhizosphere,NA,7.5,NA,78.7,108.28,-0.152717
-RKSK22,Soil,Bacteria,Sapelo2018_Rhizosphere_T1_P2_0-5,SRR12995251,Compartment,Rhizosphere,NA,6.7,NA,-373.7,-391.45,-0.157585
-RKSK22,Soil,Bacteria,Sapelo2018_Rhizosphere_T1_P2_5-10,SRR12995252,Compartment,Rhizosphere,NA,6.2,NA,-287,-334.32,-0.16055
-RKSK22,Soil,Bacteria,Sapelo2018_Rhizosphere_T1_P3_0-5,SRR12995248,Compartment,Rhizosphere,NA,6.6,NA,-405,-428.66,-0.158442
-RKSK22,Soil,Bacteria,Sapelo2018_Rhizosphere_T1_P3_5-10,SRR12995249,Compartment,Rhizosphere,NA,6.4,NA,-332.3,-367.79,-0.16015
-RKSK22,Soil,Bacteria,Sapelo2018_Rhizosphere_T1_P4_0-5,SRR12995246,Compartment,Rhizosphere,NA,6.6,NA,-310.5,-334.16,-0.158489
-RKSK22,Soil,Bacteria,Sapelo2018_Rhizosphere_T1_P4_5-10,SRR12995247,Compartment,Rhizosphere,NA,6.7,NA,-254.5,-272.25,-0.160167
-RKSK22,Soil,Bacteria,Sapelo2018_Rhizosphere_T2_P1_0-5,SRR12995244,Compartment,Rhizosphere,NA,6.2,NA,20,-27.32,-0.151765
-RKSK22,Soil,Bacteria,Sapelo2018_Rhizosphere_T2_P1_5-10,SRR12995245,Compartment,Rhizosphere,NA,7.1,NA,34.5,40.42,-0.156885
-RKSK22,Soil,Bacteria,Sapelo2018_Rhizosphere_T2_P2_0-5,SRR12995304,Compartment,Rhizosphere,NA,6.6,NA,-226.5,-250.16,-0.160902
-RKSK22,Soil,Bacteria,Sapelo2018_Rhizosphere_T2_P2_5-10,SRR12995306,Compartment,Rhizosphere,NA,7.1,NA,-66,-60.08,-0.161231
-RKSK22,Soil,Bacteria,Sapelo2018_Rhizosphere_T2_P3_0-5,SRR12995302,Compartment,Rhizosphere,NA,6.5,NA,-346,-375.58,-0.157929
-RKSK22,Soil,Bacteria,Sapelo2018_Rhizosphere_T2_P3_5-10,SRR12995303,Compartment,Rhizosphere,NA,6.5,NA,-143,-172.58,-0.161761
-RKSK22,Soil,Bacteria,Sapelo2018_Rhizosphere_T4_P1_0-5,SRR12995299,Compartment,Rhizosphere,NA,6,NA,-29,-88.16,-0.151232
-RKSK22,Soil,Bacteria,Sapelo2018_Rhizosphere_T4_P1_5-10,SRR12995300,Compartment,Rhizosphere,NA,7.1,NA,18,23.92,-0.156674
-RKSK22,Soil,Bacteria,Sapelo2018_Rhizosphere_T4_P2_0-5,SRR12995297,Compartment,Rhizosphere,NA,6.8,NA,-385.5,-397.33,-0.157308
-RKSK22,Soil,Bacteria,Sapelo2018_Rhizosphere_T4_P2_5-10,SRR12995298,Compartment,Rhizosphere,NA,6.8,NA,-295.5,-307.33,-0.161445
-RKSK22,Soil,Bacteria,Sapelo2018_Rhizosphere_T4_P3_0-5,SRR12995295,Compartment,Rhizosphere,NA,6.6,NA,-347.5,-371.16,-0.156183
-RKSK22,Soil,Bacteria,Sapelo2018_Rhizosphere_T4_P3_5-10,SRR12995296,Compartment,Rhizosphere,NA,6.5,NA,-271.5,-301.08,-0.159305
-RKSK22,Soil,Bacteria,Sapelo2019_Bulk_sediment_T1_P1_0-5,SRR12995293,Compartment,Bulk sediment,NA,6.7,NA,-114,-131.75,-0.151455
-RKSK22,Soil,Bacteria,Sapelo2019_Bulk_sediment_T1_P1_5-10,SRR12995294,Compartment,Bulk sediment,NA,6.6,NA,-140.7,-164.36,-0.153805
-RKSK22,Soil,Bacteria,Sapelo2019_Bulk_sediment_T1_P2_0-5,SRR12995291,Compartment,Bulk sediment,NA,7.4,NA,-289,-265.34,-0.15577
-RKSK22,Soil,Bacteria,Sapelo2019_Bulk_sediment_T1_P2_5-10,SRR12995292,Compartment,Bulk sediment,NA,6.6,NA,-385,-408.66,-0.159714
-RKSK22,Soil,Bacteria,Sapelo2019_Bulk_sediment_T1_P3_0-5,SRR12995288,Compartment,Bulk sediment,NA,6.6,NA,-377,-400.66,-0.156468
-RKSK22,Soil,Bacteria,Sapelo2019_Bulk_sediment_T1_P3_5-10,SRR12995289,Compartment,Bulk sediment,NA,7.1,NA,-397.5,-391.58,-0.160259
-RKSK22,Soil,Bacteria,Sapelo2019_Bulk_sediment_T1_P4_0-5,SRR12995286,Compartment,Bulk sediment,NA,6.5,NA,-276.5,-306.08,-0.151758
-RKSK22,Soil,Bacteria,Sapelo2019_Bulk_sediment_T1_P4_5-10,SRR12995287,Compartment,Bulk sediment,NA,6.7,NA,-326,-343.75,-0.15974
-RKSK22,Soil,Bacteria,Sapelo2019_Bulk_sediment_T3_P1_0-5,SRR12995284,Compartment,Bulk sediment,NA,6.6,NA,-48.5,-72.16,-0.148826
-RKSK22,Soil,Bacteria,Sapelo2019_Bulk_sediment_T3_P1_5-10,SRR12995285,Compartment,Bulk sediment,NA,6,NA,-109.5,-168.66,-0.151477
-RKSK22,Soil,Bacteria,Sapelo2019_Bulk_sediment_T3_P2_0-5,SRR12995282,Compartment,Bulk sediment,NA,6.9,NA,-68,-73.92,-0.153583
-RKSK22,Soil,Bacteria,Sapelo2019_Bulk_sediment_T3_P2_5-10,SRR12995283,Compartment,Bulk sediment,NA,6,NA,-63,-122.16,-0.152782
-RKSK22,Soil,Bacteria,Sapelo2019_Bulk_sediment_T3_P3_0-5,SRR12995280,Compartment,Bulk sediment,NA,6.9,NA,-371,-376.92,-0.1631
-RKSK22,Soil,Bacteria,Sapelo2019_Bulk_sediment_T3_P3_5-10,SRR12995281,Compartment,Bulk sediment,NA,6.6,NA,-388.5,-412.16,-0.160258
-RKSK22,Soil,Bacteria,Sapelo2019_Bulk_sediment_T4_P1_0-5,SRR12995277,Compartment,Bulk sediment,NA,6.9,NA,86,80.08,-0.150617
-RKSK22,Soil,Bacteria,Sapelo2019_Bulk_sediment_T4_P1_5-10,SRR12995278,Compartment,Bulk sediment,NA,6.4,NA,42,6.51,-0.150292
-RKSK22,Soil,Bacteria,Sapelo2019_Bulk_sediment_T4_P2_5-10,SRR12995275,Compartment,Bulk sediment,NA,6.5,NA,-395.5,-425.08,-0.156328
-RKSK22,Soil,Bacteria,Sapelo2019_Endosphere_T3_P1_0-5,SRR12995308,Compartment,Root,NA,6.6,NA,-48.5,-72.16,-0.158795
-RKSK22,Soil,Bacteria,Sapelo2019_Endosphere_T3_P1_0-5_b,SRR12995309,Compartment,Root,NA,6.6,NA,-48.5,-72.16,-0.162926
-RKSK22,Soil,Bacteria,Sapelo2019_Endosphere_T3_P1_5-10,SRR12995310,Compartment,Root,NA,6,NA,-109.5,-168.66,-0.162876
-RKSK22,Soil,Bacteria,Sapelo2019_Endosphere_T3_P1_5-10_b,SRR12995311,Compartment,Root,NA,6,NA,-109.5,-168.66,-0.163028
-RKSK22,Soil,Bacteria,Sapelo2019_Endosphere_T3_P2_0-5_b,SRR12995212,Compartment,Root,NA,6.9,NA,-68,-73.92,-0.163269
-RKSK22,Soil,Bacteria,Sapelo2019_Endosphere_T3_P2_5-10,SRR12995305,Compartment,Root,NA,6,NA,-63,-122.16,-0.161009
-RKSK22,Soil,Bacteria,Sapelo2019_Endosphere_T3_P2_5-10_b,SRR12995307,Compartment,Root,NA,6,NA,-63,-122.16,-0.158891
-RKSK22,Soil,Bacteria,Sapelo18_Bulk_sediment_T2_P1_0-5,SRR12995316,Compartment,Bulk sediment,NA,7.1,NA,34.5,40.42,-0.149068
-RKSK22,Soil,Bacteria,Sapelo18_Bulk_sediment_T2_P2_0-5,SRR12995406,Compartment,Bulk sediment,NA,7.1,NA,-66,-60.08,-0.150728
-RKSK22,Soil,Bacteria,Sapelo18_Bulk_sediment_T2_P3_0-5,SRR12995384,Compartment,Bulk sediment,NA,6.5,NA,-143,-172.58,-0.156376
-RKSK22,Soil,Bacteria,Sapelo18_Bulk_sediment_T2_P3_5-10,SRR12995395,Compartment,Bulk sediment,NA,6.5,NA,-346,-375.58,-0.158853
-RKSK22,Soil,Bacteria,Sapelo18_Bulk_sediment_T3_P1_0-5,SRR12995362,Compartment,Bulk sediment,NA,7.3,NA,-147,-129.25,-0.147515
-RKSK22,Soil,Bacteria,Sapelo18_Bulk_sediment_T3_P1_5-10,SRR12995373,Compartment,Bulk sediment,NA,6.5,NA,36.5,6.92,-0.148831
-RKSK22,Soil,Bacteria,Sapelo18_Bulk_sediment_T3_P2_0-5,SRR12995340,Compartment,Bulk sediment,NA,7,NA,89.5,89.5,-0.153473
-RKSK22,Soil,Bacteria,Sapelo18_Bulk_sediment_T3_P2_5-10,SRR12995351,Compartment,Bulk sediment,NA,5.5,NA,119,30.27,-0.155461
-RKSK22,Soil,Bacteria,Sapelo18_Bulk_sediment_T3_P3_5-10,SRR12995329,Compartment,Bulk sediment,NA,6.7,NA,-340.5,-358.25,-0.159714
-RKSK22,Soil,Bacteria,Sapelo2019_Bulk_sediment_T4_P2_0-5,SRR12995323,Compartment,Bulk sediment,NA,6.6,NA,-297.5,-321.16,-0.155464
-RKSK22,Soil,Bacteria,Sapelo2019_Bulk_sediment_T4_P3_0-5,SRR12995321,Compartment,Bulk sediment,NA,6.9,NA,-334,-339.92,-0.155444
-RKSK22,Soil,Bacteria,Sapelo2019_Bulk_sediment_T4_P3_5-10,SRR12995322,Compartment,Bulk sediment,NA,6.3,NA,-361,-402.41,-0.161181
-RKSK22,Soil,Bacteria,Sapelo2019_Endosphere_T1_P1_0-5,SRR12995319,Compartment,Root,NA,6.7,NA,-114,-131.75,-0.171369
-RKSK22,Soil,Bacteria,Sapelo2019_Endosphere_T1_P1_5-10,SRR12995320,Compartment,Root,NA,6.6,NA,-140.7,-164.36,-0.157091
-RKSK22,Soil,Bacteria,Sapelo2019_Endosphere_T1_P2_0-5,SRR12995317,Compartment,Root,NA,7.4,NA,-289,-265.34,-0.166389
-RKSK22,Soil,Bacteria,Sapelo2019_Endosphere_T1_P2_5-10,SRR12995318,Compartment,Root,NA,6.6,NA,-385,-408.66,-0.16939
-RKSK22,Soil,Bacteria,Sapelo2019_Endosphere_T1_P3_0-5,SRR12995314,Compartment,Root,NA,6.6,NA,-377,-400.66,-0.159489
-RKSK22,Soil,Bacteria,Sapelo2019_Endosphere_T1_P3_5-10,SRR12995315,Compartment,Root,NA,7.1,NA,-397.5,-391.58,-0.162699
-RKSK22,Soil,Bacteria,Sapelo2019_Endosphere_T1_P4_0-5,SRR12995312,Compartment,Root,NA,6.5,NA,-276.5,-306.08,-0.163768
-RKSK22,Soil,Bacteria,Sapelo2019_Endosphere_T1_P4_5-10,SRR12995313,Compartment,Root,NA,6.7,NA,-326,-343.75,-0.161149
-RKSK22,Soil,Bacteria,Sapelo2019_Endosphere_T3_P3_0-5,SRR12995411,Compartment,Root,NA,6.9,NA,-371,-376.92,-0.161516
-RKSK22,Soil,Bacteria,Sapelo2019_Endosphere_T4_P1_0-5,SRR12995409,Compartment,Root,NA,6.9,NA,86,80.08,-0.156393
-RKSK22,Soil,Bacteria,Sapelo2019_Endosphere_T4_P1_5-10,SRR12995410,Compartment,Root,NA,6.4,NA,42,6.51,-0.161758
-RKSK22,Soil,Bacteria,Sapelo2019_Endosphere_T4_P2_0-5,SRR12995407,Compartment,Root,NA,6.6,NA,-297.5,-321.16,-0.159266
-RKSK22,Soil,Bacteria,Sapelo2019_Endosphere_T4_P2_5-10,SRR12995408,Compartment,Root,NA,6.5,NA,-395.5,-425.08,-0.1589
-RKSK22,Soil,Bacteria,Sapelo2019_Endosphere_T4_P3_0-5,SRR12995404,Compartment,Root,NA,6.9,NA,-334,-339.92,-0.156198
-RKSK22,Soil,Bacteria,Sapelo2019_Endosphere_T4_P3_5-10,SRR12995405,Compartment,Root,NA,6.3,NA,-361,-402.41,-0.160379
-RKSK22,Soil,Bacteria,Sapelo2019_Rhizosphere_T1_P1_0-5,SRR12995402,Compartment,Rhizosphere,NA,6.7,NA,-114,-131.75,-0.155888
-RKSK22,Soil,Bacteria,Sapelo2019_Rhizosphere_T1_P1_5-10,SRR12995403,Compartment,Rhizosphere,NA,6.6,NA,-140.7,-164.36,-0.155824
-RKSK22,Soil,Bacteria,Sapelo2019_Rhizosphere_T1_P2_0-5,SRR12995400,Compartment,Rhizosphere,NA,7.4,NA,-289,-265.34,-0.16545
-RKSK22,Soil,Bacteria,Sapelo2019_Rhizosphere_T1_P2_5-10,SRR12995401,Compartment,Rhizosphere,NA,6.6,NA,-385,-408.66,-0.167076
-RKSK22,Soil,Bacteria,Sapelo2019_Rhizosphere_T1_P3_0-5,SRR12995398,Compartment,Rhizosphere,NA,6.6,NA,-377,-400.66,-0.159537
-RKSK22,Soil,Bacteria,Sapelo2019_Rhizosphere_T1_P3_5-10,SRR12995399,Compartment,Rhizosphere,NA,7.1,NA,-397.5,-391.58,-0.160655
-RKSK22,Soil,Bacteria,Sapelo2019_Rhizosphere_T1_P4_0-5,SRR12995396,Compartment,Rhizosphere,NA,6.5,NA,-276.5,-306.08,-0.160073
-RKSK22,Soil,Bacteria,Sapelo2019_Rhizosphere_T1_P4_5-10,SRR12995397,Compartment,Rhizosphere,NA,6.7,NA,-326,-343.75,-0.159937
-RKSK22,Soil,Bacteria,Sapelo2019_Rhizosphere_T3_P1_0-5,SRR12995391,Compartment,Rhizosphere,NA,6.6,NA,-48.5,-72.16,-0.15555
-RKSK22,Soil,Bacteria,Sapelo2019_Rhizosphere_T3_P1_0-5_b,SRR12995392,Compartment,Rhizosphere,NA,6.6,NA,-48.5,-72.16,-0.15691
-RKSK22,Soil,Bacteria,Sapelo2019_Rhizosphere_T3_P1_5-10,SRR12995393,Compartment,Rhizosphere,NA,6,NA,-109.5,-168.66,-0.15733
-RKSK22,Soil,Bacteria,Sapelo2019_Rhizosphere_T3_P1_5-10_b,SRR12995394,Compartment,Rhizosphere,NA,6,NA,-109.5,-168.66,-0.155953
-RKSK22,Soil,Bacteria,Sapelo2019_Rhizosphere_T3_P2_0-5,SRR12995387,Compartment,Rhizosphere,NA,6.9,NA,-68,-73.92,-0.155144
-RKSK22,Soil,Bacteria,Sapelo2019_Rhizosphere_T3_P2_0-5_b,SRR12995388,Compartment,Rhizosphere,NA,6.9,NA,-68,-73.92,-0.154874
-RKSK22,Soil,Bacteria,Sapelo2019_Rhizosphere_T3_P2_5-10,SRR12995389,Compartment,Rhizosphere,NA,6,NA,-63,-122.16,-0.158889
-RKSK22,Soil,Bacteria,Sapelo2019_Rhizosphere_T3_P2_5-10_b,SRR12995390,Compartment,Rhizosphere,NA,6,NA,-63,-122.16,-0.158397
-RKSK22,Soil,Bacteria,Sapelo2019_Rhizosphere_T3_P3_0-5,SRR12995382,Compartment,Rhizosphere,NA,6.9,NA,-371,-376.92,-0.157195
-RKSK22,Soil,Bacteria,Sapelo2019_Rhizosphere_T3_P3_0-5_b,SRR12995383,Compartment,Rhizosphere,NA,6.9,NA,-371,-376.92,-0.155522
-RKSK22,Soil,Bacteria,Sapelo2019_Rhizosphere_T3_P3_5-10,SRR12995385,Compartment,Rhizosphere,NA,6.6,NA,-388.5,-412.16,-0.16
-RKSK22,Soil,Bacteria,Sapelo2019_Rhizosphere_T3_P3_5-10_b,SRR12995386,Compartment,Rhizosphere,NA,6.6,NA,-388.5,-412.16,-0.161242
-RKSK22,Soil,Bacteria,Sapelo2019_Rhizosphere_T4_P1_0-5,SRR12995380,Compartment,Rhizosphere,NA,6.9,NA,86,80.08,-0.155476
-RKSK22,Soil,Bacteria,Sapelo2019_Rhizosphere_T4_P1_5-10,SRR12995381,Compartment,Rhizosphere,NA,6.4,NA,42,6.51,-0.155531
-RKSK22,Soil,Bacteria,Sapelo2019_Rhizosphere_T4_P2_0-5,SRR12995378,Compartment,Rhizosphere,NA,6.6,NA,-297.5,-321.16,-0.157594
-RKSK22,Soil,Bacteria,Sapelo2019_Rhizosphere_T4_P2_5-10,SRR12995379,Compartment,Rhizosphere,NA,6.5,NA,-395.5,-425.08,-0.157029
-RKSK22,Soil,Bacteria,Sapelo2019_Rhizosphere_T4_P3_0-5,SRR12995376,Compartment,Rhizosphere,NA,6.9,NA,-334,-339.92,-0.158516
-RKSK22,Soil,Bacteria,Sapelo2019_Rhizosphere_T4_P3_5-10,SRR12995377,Compartment,Rhizosphere,NA,6.3,NA,-361,-402.41,-0.161741
-RKSK22,Soil,Bacteria,Sapelo2019_Endosphere_T3_P2_0-5,SRR12995415,Compartment,Root,NA,6.9,NA,-68,-73.92,-0.162204
-RKSK22,Soil,Bacteria,Sapelo2019_Endosphere_T3_P3_0-5_b,SRR12995412,Compartment,Root,NA,6.9,NA,-371,-376.92,-0.147096
-RKSK22,Soil,Bacteria,Sapelo2019_Endosphere_T3_P3_5-10,SRR12995413,Compartment,Root,NA,6.6,NA,-388.5,-412.16,-0.163542
-RKSK22,Soil,Bacteria,Sapelo2019_Endosphere_T3_P3_5-10_b,SRR12995414,Compartment,Root,NA,6.6,NA,-388.5,-412.16,-0.161335
-RKSK22,Soil,Archaea,Sapelo18_Bulk_sediment_T1_P1_5-10,SRR12995243,Compartment,Bulk sediment,NA,6.8,NA,-143.3,-155.13,-0.19046
-RKSK22,Soil,Archaea,Sapelo18_Bulk_sediment_T1_P3_0-5,SRR12995250,Compartment,Bulk sediment,NA,6.4,NA,-332.3,-367.79,-0.163729
-RKSK22,Soil,Archaea,Sapelo18_Bulk_sediment_T1_P3_5-10,SRR12995261,Compartment,Bulk sediment,NA,6.6,NA,-405,-428.66,-0.149398
-RKSK22,Soil,Archaea,Sapelo18_Bulk_sediment_T2_P1_5-10,SRR12995279,Compartment,Bulk sediment,NA,6.2,NA,20,-27.32,-0.190139
-RKSK22,Soil,Archaea,Sapelo18_Bulk_sediment_T2_P2_5-10,SRR12995241,Compartment,Bulk sediment,NA,6.6,NA,-226.5,-250.16,-0.183262
-RKSK22,Soil,Archaea,Sapelo18_Bulk_sediment_T3_P3_0-5,SRR12995235,Compartment,Bulk sediment,NA,6.5,NA,-362,-391.58,-0.137028
-RKSK22,Soil,Archaea,Sapelo18_Bulk_sediment_T4_P1_0-5,SRR12995218,Compartment,Bulk sediment,NA,7.1,NA,18,23.92,-0.190071
-RKSK22,Soil,Archaea,Sapelo18_Bulk_sediment_T4_P1_5-10,SRR12995223,Compartment,Bulk sediment,NA,6,NA,-29,-88.16,-0.18935
-RKSK22,Soil,Archaea,Sapelo18_Bulk_sediment_T4_P2_0-5,SRR12995216,Compartment,Bulk sediment,NA,6.8,NA,-295.5,-307.33,-0.14394
-RKSK22,Soil,Archaea,Sapelo18_Bulk_sediment_T4_P2_5-10,SRR12995217,Compartment,Bulk sediment,NA,6.8,NA,-385.5,-397.33,-0.146409
-RKSK22,Soil,Archaea,Sapelo18_Bulk_sediment_T4_P3_5-10,SRR12995215,Compartment,Bulk sediment,NA,6.6,NA,-347.5,-371.16,-0.137368
-RKSK22,Soil,Archaea,Sapelo2018_Endosphere_T1_P2_5-10,SRR12995274,Compartment,Root,NA,6.2,NA,-287,-334.32,-0.177374
-RKSK22,Soil,Archaea,Sapelo2018_Endosphere_T2_P2_5-10,SRR12995265,Compartment,Root,NA,7.1,NA,-66,-60.08,-0.163244
-RKSK22,Soil,Archaea,Sapelo2018_Endosphere_T2_P3_5-10,SRR12995263,Compartment,Root,NA,6.5,NA,-143,-172.58,-0.151915
-RKSK22,Soil,Archaea,Sapelo2018_Endosphere_T4_P3_0-5,SRR12995255,Compartment,Root,NA,6.6,NA,-347.5,-371.16,-0.155072
-RKSK22,Soil,Archaea,Sapelo2018_Rhizosphere_T1_P1_0-5,SRR12995253,Compartment,Rhizosphere,NA,6.8,NA,-143.3,-155.13,-0.189504
-RKSK22,Soil,Archaea,Sapelo2018_Rhizosphere_T1_P1_5-10,SRR12995254,Compartment,Rhizosphere,NA,7.5,NA,78.7,108.28,-0.189579
-RKSK22,Soil,Archaea,Sapelo2018_Rhizosphere_T1_P2_0-5,SRR12995251,Compartment,Rhizosphere,NA,6.7,NA,-373.7,-391.45,-0.180045
-RKSK22,Soil,Archaea,Sapelo2018_Rhizosphere_T1_P3_0-5,SRR12995248,Compartment,Rhizosphere,NA,6.6,NA,-405,-428.66,-0.153185
-RKSK22,Soil,Archaea,Sapelo2018_Rhizosphere_T1_P3_5-10,SRR12995249,Compartment,Rhizosphere,NA,6.4,NA,-332.3,-367.79,-0.153928
-RKSK22,Soil,Archaea,Sapelo2018_Rhizosphere_T2_P1_5-10,SRR12995245,Compartment,Rhizosphere,NA,7.1,NA,34.5,40.42,-0.15372
-RKSK22,Soil,Archaea,Sapelo2018_Rhizosphere_T2_P2_0-5,SRR12995304,Compartment,Rhizosphere,NA,6.6,NA,-226.5,-250.16,-0.164465
-RKSK22,Soil,Archaea,Sapelo2018_Rhizosphere_T2_P2_5-10,SRR12995306,Compartment,Rhizosphere,NA,7.1,NA,-66,-60.08,-0.147801
-RKSK22,Soil,Archaea,Sapelo2018_Rhizosphere_T2_P3_5-10,SRR12995303,Compartment,Rhizosphere,NA,6.5,NA,-143,-172.58,-0.154043
-RKSK22,Soil,Archaea,Sapelo2018_Rhizosphere_T4_P1_0-5,SRR12995299,Compartment,Rhizosphere,NA,6,NA,-29,-88.16,-0.191937
-RKSK22,Soil,Archaea,Sapelo2018_Rhizosphere_T4_P1_5-10,SRR12995300,Compartment,Rhizosphere,NA,7.1,NA,18,23.92,-0.194185
-RKSK22,Soil,Archaea,Sapelo2018_Rhizosphere_T4_P2_0-5,SRR12995297,Compartment,Rhizosphere,NA,6.8,NA,-385.5,-397.33,-0.160427
-RKSK22,Soil,Archaea,Sapelo2018_Rhizosphere_T4_P2_5-10,SRR12995298,Compartment,Rhizosphere,NA,6.8,NA,-295.5,-307.33,-0.168156
-RKSK22,Soil,Archaea,Sapelo2018_Rhizosphere_T4_P3_0-5,SRR12995295,Compartment,Rhizosphere,NA,6.6,NA,-347.5,-371.16,-0.150899
-RKSK22,Soil,Archaea,Sapelo2018_Rhizosphere_T4_P3_5-10,SRR12995296,Compartment,Rhizosphere,NA,6.5,NA,-271.5,-301.08,-0.165347
-RKSK22,Soil,Archaea,Sapelo2019_Bulk_sediment_T1_P1_0-5,SRR12995293,Compartment,Bulk sediment,NA,6.7,NA,-114,-131.75,-0.189912
-RKSK22,Soil,Archaea,Sapelo2019_Bulk_sediment_T1_P1_5-10,SRR12995294,Compartment,Bulk sediment,NA,6.6,NA,-140.7,-164.36,-0.189642
-RKSK22,Soil,Archaea,Sapelo2019_Bulk_sediment_T1_P2_0-5,SRR12995291,Compartment,Bulk sediment,NA,7.4,NA,-289,-265.34,-0.143675
-RKSK22,Soil,Archaea,Sapelo2019_Bulk_sediment_T1_P3_0-5,SRR12995288,Compartment,Bulk sediment,NA,6.6,NA,-377,-400.66,-0.140868
-RKSK22,Soil,Archaea,Sapelo2019_Bulk_sediment_T1_P3_5-10,SRR12995289,Compartment,Bulk sediment,NA,7.1,NA,-397.5,-391.58,-0.144083
-RKSK22,Soil,Archaea,Sapelo2019_Bulk_sediment_T1_P4_5-10,SRR12995287,Compartment,Bulk sediment,NA,6.7,NA,-326,-343.75,-0.174832
-RKSK22,Soil,Archaea,Sapelo2019_Bulk_sediment_T3_P1_0-5,SRR12995284,Compartment,Bulk sediment,NA,6.6,NA,-48.5,-72.16,-0.189983
-RKSK22,Soil,Archaea,Sapelo2019_Bulk_sediment_T3_P1_5-10,SRR12995285,Compartment,Bulk sediment,NA,6,NA,-109.5,-168.66,-0.188745
-RKSK22,Soil,Archaea,Sapelo2019_Bulk_sediment_T3_P2_0-5,SRR12995282,Compartment,Bulk sediment,NA,6.9,NA,-68,-73.92,-0.189435
-RKSK22,Soil,Archaea,Sapelo2019_Bulk_sediment_T3_P2_5-10,SRR12995283,Compartment,Bulk sediment,NA,6,NA,-63,-122.16,-0.189269
-RKSK22,Soil,Archaea,Sapelo2019_Bulk_sediment_T3_P3_0-5,SRR12995280,Compartment,Bulk sediment,NA,6.9,NA,-371,-376.92,-0.144995
-RKSK22,Soil,Archaea,Sapelo2019_Bulk_sediment_T3_P3_5-10,SRR12995281,Compartment,Bulk sediment,NA,6.6,NA,-388.5,-412.16,-0.141881
-RKSK22,Soil,Archaea,Sapelo2019_Bulk_sediment_T4_P1_0-5,SRR12995277,Compartment,Bulk sediment,NA,6.9,NA,86,80.08,-0.190033
-RKSK22,Soil,Archaea,Sapelo2019_Bulk_sediment_T4_P1_5-10,SRR12995278,Compartment,Bulk sediment,NA,6.4,NA,42,6.51,-0.188945
-RKSK22,Soil,Archaea,Sapelo2019_Bulk_sediment_T4_P2_5-10,SRR12995275,Compartment,Bulk sediment,NA,6.5,NA,-395.5,-425.08,-0.140405
-RKSK22,Soil,Archaea,Sapelo18_Bulk_sediment_T2_P1_0-5,SRR12995316,Compartment,Bulk sediment,NA,7.1,NA,34.5,40.42,-0.190774
-RKSK22,Soil,Archaea,Sapelo18_Bulk_sediment_T2_P2_0-5,SRR12995406,Compartment,Bulk sediment,NA,7.1,NA,-66,-60.08,-0.188318
-RKSK22,Soil,Archaea,Sapelo18_Bulk_sediment_T2_P3_5-10,SRR12995395,Compartment,Bulk sediment,NA,6.5,NA,-346,-375.58,-0.15117
-RKSK22,Soil,Archaea,Sapelo18_Bulk_sediment_T3_P3_5-10,SRR12995329,Compartment,Bulk sediment,NA,6.7,NA,-340.5,-358.25,-0.145356
-RKSK22,Soil,Archaea,Sapelo2019_Bulk_sediment_T4_P2_0-5,SRR12995323,Compartment,Bulk sediment,NA,6.6,NA,-297.5,-321.16,-0.145579
-RKSK22,Soil,Archaea,Sapelo2019_Bulk_sediment_T4_P3_0-5,SRR12995321,Compartment,Bulk sediment,NA,6.9,NA,-334,-339.92,-0.134574
-RKSK22,Soil,Archaea,Sapelo2019_Bulk_sediment_T4_P3_5-10,SRR12995322,Compartment,Bulk sediment,NA,6.3,NA,-361,-402.41,-0.144817
-RKSK22,Soil,Archaea,Sapelo2019_Endosphere_T1_P1_5-10,SRR12995320,Compartment,Root,NA,6.6,NA,-140.7,-164.36,-0.189513
-RKSK22,Soil,Archaea,Sapelo2019_Endosphere_T1_P2_0-5,SRR12995317,Compartment,Root,NA,7.4,NA,-289,-265.34,-0.167098
-RKSK22,Soil,Archaea,Sapelo2019_Endosphere_T1_P3_0-5,SRR12995314,Compartment,Root,NA,6.6,NA,-377,-400.66,-0.134933
-RKSK22,Soil,Archaea,Sapelo2019_Endosphere_T1_P3_5-10,SRR12995315,Compartment,Root,NA,7.1,NA,-397.5,-391.58,-0.141666
-RKSK22,Soil,Archaea,Sapelo2019_Endosphere_T1_P4_0-5,SRR12995312,Compartment,Root,NA,6.5,NA,-276.5,-306.08,-0.169499
-RKSK22,Soil,Archaea,Sapelo2019_Endosphere_T1_P4_5-10,SRR12995313,Compartment,Root,NA,6.7,NA,-326,-343.75,-0.166217
-RKSK22,Soil,Archaea,Sapelo2019_Endosphere_T4_P2_5-10,SRR12995408,Compartment,Root,NA,6.5,NA,-395.5,-425.08,-0.152083
-RKSK22,Soil,Archaea,Sapelo2019_Endosphere_T4_P3_0-5,SRR12995404,Compartment,Root,NA,6.9,NA,-334,-339.92,-0.135074
-RKSK22,Soil,Archaea,Sapelo2019_Endosphere_T4_P3_5-10,SRR12995405,Compartment,Root,NA,6.3,NA,-361,-402.41,-0.146662
-RKSK22,Soil,Archaea,Sapelo2019_Rhizosphere_T1_P1_0-5,SRR12995402,Compartment,Rhizosphere,NA,6.7,NA,-114,-131.75,-0.188542
-RKSK22,Soil,Archaea,Sapelo2019_Rhizosphere_T1_P1_5-10,SRR12995403,Compartment,Rhizosphere,NA,6.6,NA,-140.7,-164.36,-0.188525
-RKSK22,Soil,Archaea,Sapelo2019_Rhizosphere_T1_P2_0-5,SRR12995400,Compartment,Rhizosphere,NA,7.4,NA,-289,-265.34,-0.182467
-RKSK22,Soil,Archaea,Sapelo2019_Rhizosphere_T1_P2_5-10,SRR12995401,Compartment,Rhizosphere,NA,6.6,NA,-385,-408.66,-0.187661
-RKSK22,Soil,Archaea,Sapelo2019_Rhizosphere_T1_P3_0-5,SRR12995398,Compartment,Rhizosphere,NA,6.6,NA,-377,-400.66,-0.159765
-RKSK22,Soil,Archaea,Sapelo2019_Rhizosphere_T1_P3_5-10,SRR12995399,Compartment,Rhizosphere,NA,7.1,NA,-397.5,-391.58,-0.147442
-RKSK22,Soil,Archaea,Sapelo2019_Rhizosphere_T1_P4_5-10,SRR12995397,Compartment,Rhizosphere,NA,6.7,NA,-326,-343.75,-0.180267
-RKSK22,Soil,Archaea,Sapelo2019_Rhizosphere_T3_P1_0-5,SRR12995391,Compartment,Rhizosphere,NA,6.6,NA,-48.5,-72.16,-0.190913
-RKSK22,Soil,Archaea,Sapelo2019_Rhizosphere_T3_P1_0-5_b,SRR12995392,Compartment,Rhizosphere,NA,6.6,NA,-48.5,-72.16,-0.190208
-RKSK22,Soil,Archaea,Sapelo2019_Rhizosphere_T3_P1_5-10,SRR12995393,Compartment,Rhizosphere,NA,6,NA,-109.5,-168.66,-0.190627
-RKSK22,Soil,Archaea,Sapelo2019_Rhizosphere_T3_P1_5-10_b,SRR12995394,Compartment,Rhizosphere,NA,6,NA,-109.5,-168.66,-0.183984
-RKSK22,Soil,Archaea,Sapelo2019_Rhizosphere_T3_P2_0-5,SRR12995387,Compartment,Rhizosphere,NA,6.9,NA,-68,-73.92,-0.18986
-RKSK22,Soil,Archaea,Sapelo2019_Rhizosphere_T3_P2_0-5_b,SRR12995388,Compartment,Rhizosphere,NA,6.9,NA,-68,-73.92,-0.190503
-RKSK22,Soil,Archaea,Sapelo2019_Rhizosphere_T3_P2_5-10,SRR12995389,Compartment,Rhizosphere,NA,6,NA,-63,-122.16,-0.169917
-RKSK22,Soil,Archaea,Sapelo2019_Rhizosphere_T3_P2_5-10_b,SRR12995390,Compartment,Rhizosphere,NA,6,NA,-63,-122.16,-0.174929
-RKSK22,Soil,Archaea,Sapelo2019_Rhizosphere_T3_P3_0-5,SRR12995382,Compartment,Rhizosphere,NA,6.9,NA,-371,-376.92,-0.150801
-RKSK22,Soil,Archaea,Sapelo2019_Rhizosphere_T3_P3_0-5_b,SRR12995383,Compartment,Rhizosphere,NA,6.9,NA,-371,-376.92,-0.152947
-RKSK22,Soil,Archaea,Sapelo2019_Rhizosphere_T3_P3_5-10,SRR12995385,Compartment,Rhizosphere,NA,6.6,NA,-388.5,-412.16,-0.155585
-RKSK22,Soil,Archaea,Sapelo2019_Rhizosphere_T3_P3_5-10_b,SRR12995386,Compartment,Rhizosphere,NA,6.6,NA,-388.5,-412.16,-0.153041
-RKSK22,Soil,Archaea,Sapelo2019_Rhizosphere_T4_P1_0-5,SRR12995380,Compartment,Rhizosphere,NA,6.9,NA,86,80.08,-0.187595
-RKSK22,Soil,Archaea,Sapelo2019_Rhizosphere_T4_P1_5-10,SRR12995381,Compartment,Rhizosphere,NA,6.4,NA,42,6.51,-0.187796
-RKSK22,Soil,Archaea,Sapelo2019_Rhizosphere_T4_P2_5-10,SRR12995379,Compartment,Rhizosphere,NA,6.5,NA,-395.5,-425.08,-0.151525
-RKSK22,Soil,Archaea,Sapelo2019_Rhizosphere_T4_P3_0-5,SRR12995376,Compartment,Rhizosphere,NA,6.9,NA,-334,-339.92,-0.152631
-RKSK22,Soil,Archaea,Sapelo2019_Rhizosphere_T4_P3_5-10,SRR12995377,Compartment,Rhizosphere,NA,6.3,NA,-361,-402.41,-0.158484
-RKSK22,Soil,Archaea,Sapelo2019_Endosphere_T3_P3_5-10,SRR12995413,Compartment,Root,NA,6.6,NA,-388.5,-412.16,-0.165754
-RKSK22,Soil,Archaea,Sapelo2019_Endosphere_T3_P3_5-10_b,SRR12995414,Compartment,Root,NA,6.6,NA,-388.5,-412.16,-0.142529
+RKSK22,Soil,Bacteria,Sapelo18_Bulk_sediment_T1_P1_0-5,SRR12995242,Compartment,Bulk sediment,NA,7.5,NA,78.7,108.28,-0.149864
+RKSK22,Soil,Bacteria,Sapelo18_Bulk_sediment_T1_P1_5-10,SRR12995243,Compartment,Bulk sediment,NA,6.8,NA,-143.3,-155.13,-0.151578
+RKSK22,Soil,Bacteria,Sapelo18_Bulk_sediment_T1_P2_0-5,SRR12995272,Compartment,Bulk sediment,NA,6.2,NA,-287,-334.32,-0.155193
+RKSK22,Soil,Bacteria,Sapelo18_Bulk_sediment_T1_P2_5-10,SRR12995224,Compartment,Bulk sediment,NA,6.7,NA,-373.7,-391.45,-0.159532
+RKSK22,Soil,Bacteria,Sapelo18_Bulk_sediment_T1_P3_0-5,SRR12995250,Compartment,Bulk sediment,NA,6.4,NA,-332.3,-367.79,-0.154855
+RKSK22,Soil,Bacteria,Sapelo18_Bulk_sediment_T1_P3_5-10,SRR12995261,Compartment,Bulk sediment,NA,6.6,NA,-405,-428.66,-0.156582
+RKSK22,Soil,Bacteria,Sapelo18_Bulk_sediment_T1_P4_0-5,SRR12995290,Compartment,Bulk sediment,NA,6.7,NA,-254.5,-272.25,-0.153609
+RKSK22,Soil,Bacteria,Sapelo18_Bulk_sediment_T1_P4_5-10,SRR12995301,Compartment,Bulk sediment,NA,6.6,NA,-310.5,-334.16,-0.156878
+RKSK22,Soil,Bacteria,Sapelo18_Bulk_sediment_T2_P1_5-10,SRR12995279,Compartment,Bulk sediment,NA,6.2,NA,20,-27.32,-0.150533
+RKSK22,Soil,Bacteria,Sapelo18_Bulk_sediment_T2_P2_5-10,SRR12995241,Compartment,Bulk sediment,NA,6.6,NA,-226.5,-250.16,-0.154008
+RKSK22,Soil,Bacteria,Sapelo18_Bulk_sediment_T3_P3_0-5,SRR12995235,Compartment,Bulk sediment,NA,6.5,NA,-362,-391.58,-0.159943
+RKSK22,Soil,Bacteria,Sapelo18_Bulk_sediment_T4_P1_0-5,SRR12995218,Compartment,Bulk sediment,NA,7.1,NA,18,23.92,-0.148919
+RKSK22,Soil,Bacteria,Sapelo18_Bulk_sediment_T4_P1_5-10,SRR12995223,Compartment,Bulk sediment,NA,6,NA,-29,-88.16,-0.149865
+RKSK22,Soil,Bacteria,Sapelo18_Bulk_sediment_T4_P2_0-5,SRR12995216,Compartment,Bulk sediment,NA,6.8,NA,-295.5,-307.33,-0.157245
+RKSK22,Soil,Bacteria,Sapelo18_Bulk_sediment_T4_P2_5-10,SRR12995217,Compartment,Bulk sediment,NA,6.8,NA,-385.5,-397.33,-0.157675
+RKSK22,Soil,Bacteria,Sapelo18_Bulk_sediment_T4_P3_0-5,SRR12995214,Compartment,Bulk sediment,NA,6.5,NA,-271.5,-301.08,-0.156617
+RKSK22,Soil,Bacteria,Sapelo18_Bulk_sediment_T4_P3_5-10,SRR12995215,Compartment,Bulk sediment,NA,6.6,NA,-347.5,-371.16,-0.156593
+RKSK22,Soil,Bacteria,Sapelo2018_Endosphere_T1_P1_0-5,SRR12995276,Compartment,Root,NA,6.8,NA,-143.3,-155.13,-0.157178
+RKSK22,Soil,Bacteria,Sapelo2018_Endosphere_T1_P1_5-10,SRR12995213,Compartment,Root,NA,7.5,NA,78.7,108.28,-0.157153
+RKSK22,Soil,Bacteria,Sapelo2018_Endosphere_T1_P2_0-5,SRR12995273,Compartment,Root,NA,6.7,NA,-373.7,-391.45,-0.160123
+RKSK22,Soil,Bacteria,Sapelo2018_Endosphere_T1_P2_5-10,SRR12995274,Compartment,Root,NA,6.2,NA,-287,-334.32,-0.162874
+RKSK22,Soil,Bacteria,Sapelo2018_Endosphere_T1_P3_0-5,SRR12995270,Compartment,Root,NA,6.6,NA,-405,-428.66,-0.155871
+RKSK22,Soil,Bacteria,Sapelo2018_Endosphere_T1_P3_5-10,SRR12995271,Compartment,Root,NA,6.4,NA,-332.3,-367.79,-0.173539
+RKSK22,Soil,Bacteria,Sapelo2018_Endosphere_T1_P4_0-5,SRR12995268,Compartment,Root,NA,6.6,NA,-310.5,-334.16,-0.157275
+RKSK22,Soil,Bacteria,Sapelo2018_Endosphere_T1_P4_5-10,SRR12995269,Compartment,Root,NA,6.7,NA,-254.5,-272.25,-0.162902
+RKSK22,Soil,Bacteria,Sapelo2018_Endosphere_T2_P1_0-5,SRR12995266,Compartment,Root,NA,6.2,NA,20,-27.32,-0.159046
+RKSK22,Soil,Bacteria,Sapelo2018_Endosphere_T2_P1_5-10,SRR12995267,Compartment,Root,NA,7.1,NA,34.5,40.42,-0.164138
+RKSK22,Soil,Bacteria,Sapelo2018_Endosphere_T2_P2_0-5,SRR12995264,Compartment,Root,NA,6.6,NA,-226.5,-250.16,-0.16054
+RKSK22,Soil,Bacteria,Sapelo2018_Endosphere_T2_P2_5-10,SRR12995265,Compartment,Root,NA,7.1,NA,-66,-60.08,-0.158859
+RKSK22,Soil,Bacteria,Sapelo2018_Endosphere_T2_P3_0-5,SRR12995262,Compartment,Root,NA,6.5,NA,-346,-375.58,-0.14801
+RKSK22,Soil,Bacteria,Sapelo2018_Endosphere_T2_P3_5-10,SRR12995263,Compartment,Root,NA,6.5,NA,-143,-172.58,-0.164148
+RKSK22,Soil,Bacteria,Sapelo2018_Endosphere_T4_P1_0-5,SRR12995259,Compartment,Root,NA,6,NA,-29,-88.16,-0.154423
+RKSK22,Soil,Bacteria,Sapelo2018_Endosphere_T4_P1_5-10,SRR12995260,Compartment,Root,NA,7.1,NA,18,23.92,-0.159836
+RKSK22,Soil,Bacteria,Sapelo2018_Endosphere_T4_P2_0-5,SRR12995257,Compartment,Root,NA,6.8,NA,-385.5,-397.33,-0.153313
+RKSK22,Soil,Bacteria,Sapelo2018_Endosphere_T4_P2_5-10,SRR12995258,Compartment,Root,NA,6.8,NA,-295.5,-307.33,-0.156627
+RKSK22,Soil,Bacteria,Sapelo2018_Endosphere_T4_P3_0-5,SRR12995255,Compartment,Root,NA,6.6,NA,-347.5,-371.16,-0.157098
+RKSK22,Soil,Bacteria,Sapelo2018_Endosphere_T4_P3_5-10,SRR12995256,Compartment,Root,NA,6.5,NA,-271.5,-301.08,-0.166465
+RKSK22,Soil,Bacteria,Sapelo2018_Rhizosphere_T1_P1_0-5,SRR12995253,Compartment,Rhizosphere,NA,6.8,NA,-143.3,-155.13,-0.15189
+RKSK22,Soil,Bacteria,Sapelo2018_Rhizosphere_T1_P1_5-10,SRR12995254,Compartment,Rhizosphere,NA,7.5,NA,78.7,108.28,-0.153077
+RKSK22,Soil,Bacteria,Sapelo2018_Rhizosphere_T1_P2_0-5,SRR12995251,Compartment,Rhizosphere,NA,6.7,NA,-373.7,-391.45,-0.157592
+RKSK22,Soil,Bacteria,Sapelo2018_Rhizosphere_T1_P2_5-10,SRR12995252,Compartment,Rhizosphere,NA,6.2,NA,-287,-334.32,-0.161141
+RKSK22,Soil,Bacteria,Sapelo2018_Rhizosphere_T1_P3_0-5,SRR12995248,Compartment,Rhizosphere,NA,6.6,NA,-405,-428.66,-0.159001
+RKSK22,Soil,Bacteria,Sapelo2018_Rhizosphere_T1_P3_5-10,SRR12995249,Compartment,Rhizosphere,NA,6.4,NA,-332.3,-367.79,-0.161149
+RKSK22,Soil,Bacteria,Sapelo2018_Rhizosphere_T1_P4_0-5,SRR12995246,Compartment,Rhizosphere,NA,6.6,NA,-310.5,-334.16,-0.158623
+RKSK22,Soil,Bacteria,Sapelo2018_Rhizosphere_T1_P4_5-10,SRR12995247,Compartment,Rhizosphere,NA,6.7,NA,-254.5,-272.25,-0.160627
+RKSK22,Soil,Bacteria,Sapelo2018_Rhizosphere_T2_P1_0-5,SRR12995244,Compartment,Rhizosphere,NA,6.2,NA,20,-27.32,-0.152451
+RKSK22,Soil,Bacteria,Sapelo2018_Rhizosphere_T2_P1_5-10,SRR12995245,Compartment,Rhizosphere,NA,7.1,NA,34.5,40.42,-0.157447
+RKSK22,Soil,Bacteria,Sapelo2018_Rhizosphere_T2_P2_0-5,SRR12995304,Compartment,Rhizosphere,NA,6.6,NA,-226.5,-250.16,-0.161043
+RKSK22,Soil,Bacteria,Sapelo2018_Rhizosphere_T2_P2_5-10,SRR12995306,Compartment,Rhizosphere,NA,7.1,NA,-66,-60.08,-0.161291
+RKSK22,Soil,Bacteria,Sapelo2018_Rhizosphere_T2_P3_0-5,SRR12995302,Compartment,Rhizosphere,NA,6.5,NA,-346,-375.58,-0.158395
+RKSK22,Soil,Bacteria,Sapelo2018_Rhizosphere_T2_P3_5-10,SRR12995303,Compartment,Rhizosphere,NA,6.5,NA,-143,-172.58,-0.162317
+RKSK22,Soil,Bacteria,Sapelo2018_Rhizosphere_T4_P1_0-5,SRR12995299,Compartment,Rhizosphere,NA,6,NA,-29,-88.16,-0.151125
+RKSK22,Soil,Bacteria,Sapelo2018_Rhizosphere_T4_P1_5-10,SRR12995300,Compartment,Rhizosphere,NA,7.1,NA,18,23.92,-0.156464
+RKSK22,Soil,Bacteria,Sapelo2018_Rhizosphere_T4_P2_0-5,SRR12995297,Compartment,Rhizosphere,NA,6.8,NA,-385.5,-397.33,-0.158047
+RKSK22,Soil,Bacteria,Sapelo2018_Rhizosphere_T4_P2_5-10,SRR12995298,Compartment,Rhizosphere,NA,6.8,NA,-295.5,-307.33,-0.162071
+RKSK22,Soil,Bacteria,Sapelo2018_Rhizosphere_T4_P3_0-5,SRR12995295,Compartment,Rhizosphere,NA,6.6,NA,-347.5,-371.16,-0.156848
+RKSK22,Soil,Bacteria,Sapelo2018_Rhizosphere_T4_P3_5-10,SRR12995296,Compartment,Rhizosphere,NA,6.5,NA,-271.5,-301.08,-0.160467
+RKSK22,Soil,Bacteria,Sapelo2019_Bulk_sediment_T1_P1_0-5,SRR12995293,Compartment,Bulk sediment,NA,6.7,NA,-114,-131.75,-0.151237
+RKSK22,Soil,Bacteria,Sapelo2019_Bulk_sediment_T1_P1_5-10,SRR12995294,Compartment,Bulk sediment,NA,6.6,NA,-140.7,-164.36,-0.154007
+RKSK22,Soil,Bacteria,Sapelo2019_Bulk_sediment_T1_P2_0-5,SRR12995291,Compartment,Bulk sediment,NA,7.4,NA,-289,-265.34,-0.156285
+RKSK22,Soil,Bacteria,Sapelo2019_Bulk_sediment_T1_P2_5-10,SRR12995292,Compartment,Bulk sediment,NA,6.6,NA,-385,-408.66,-0.16003
+RKSK22,Soil,Bacteria,Sapelo2019_Bulk_sediment_T1_P3_0-5,SRR12995288,Compartment,Bulk sediment,NA,6.6,NA,-377,-400.66,-0.157305
+RKSK22,Soil,Bacteria,Sapelo2019_Bulk_sediment_T1_P3_5-10,SRR12995289,Compartment,Bulk sediment,NA,7.1,NA,-397.5,-391.58,-0.160755
+RKSK22,Soil,Bacteria,Sapelo2019_Bulk_sediment_T1_P4_0-5,SRR12995286,Compartment,Bulk sediment,NA,6.5,NA,-276.5,-306.08,-0.152376
+RKSK22,Soil,Bacteria,Sapelo2019_Bulk_sediment_T1_P4_5-10,SRR12995287,Compartment,Bulk sediment,NA,6.7,NA,-326,-343.75,-0.160016
+RKSK22,Soil,Bacteria,Sapelo2019_Bulk_sediment_T3_P1_0-5,SRR12995284,Compartment,Bulk sediment,NA,6.6,NA,-48.5,-72.16,-0.149654
+RKSK22,Soil,Bacteria,Sapelo2019_Bulk_sediment_T3_P1_5-10,SRR12995285,Compartment,Bulk sediment,NA,6,NA,-109.5,-168.66,-0.152348
+RKSK22,Soil,Bacteria,Sapelo2019_Bulk_sediment_T3_P2_0-5,SRR12995282,Compartment,Bulk sediment,NA,6.9,NA,-68,-73.92,-0.153316
+RKSK22,Soil,Bacteria,Sapelo2019_Bulk_sediment_T3_P2_5-10,SRR12995283,Compartment,Bulk sediment,NA,6,NA,-63,-122.16,-0.153099
+RKSK22,Soil,Bacteria,Sapelo2019_Bulk_sediment_T3_P3_0-5,SRR12995280,Compartment,Bulk sediment,NA,6.9,NA,-371,-376.92,-0.162816
+RKSK22,Soil,Bacteria,Sapelo2019_Bulk_sediment_T3_P3_5-10,SRR12995281,Compartment,Bulk sediment,NA,6.6,NA,-388.5,-412.16,-0.160902
+RKSK22,Soil,Bacteria,Sapelo2019_Bulk_sediment_T4_P1_0-5,SRR12995277,Compartment,Bulk sediment,NA,6.9,NA,86,80.08,-0.150388
+RKSK22,Soil,Bacteria,Sapelo2019_Bulk_sediment_T4_P1_5-10,SRR12995278,Compartment,Bulk sediment,NA,6.4,NA,42,6.51,-0.151237
+RKSK22,Soil,Bacteria,Sapelo2019_Bulk_sediment_T4_P2_5-10,SRR12995275,Compartment,Bulk sediment,NA,6.5,NA,-395.5,-425.08,-0.157323
+RKSK22,Soil,Bacteria,Sapelo2019_Endosphere_T3_P1_0-5,SRR12995308,Compartment,Root,NA,6.6,NA,-48.5,-72.16,-0.158454
+RKSK22,Soil,Bacteria,Sapelo2019_Endosphere_T3_P1_0-5_b,SRR12995309,Compartment,Root,NA,6.6,NA,-48.5,-72.16,-0.163057
+RKSK22,Soil,Bacteria,Sapelo2019_Endosphere_T3_P1_5-10,SRR12995310,Compartment,Root,NA,6,NA,-109.5,-168.66,-0.162768
+RKSK22,Soil,Bacteria,Sapelo2019_Endosphere_T3_P1_5-10_b,SRR12995311,Compartment,Root,NA,6,NA,-109.5,-168.66,-0.163147
+RKSK22,Soil,Bacteria,Sapelo2019_Endosphere_T3_P2_0-5_b,SRR12995212,Compartment,Root,NA,6.9,NA,-68,-73.92,-0.163463
+RKSK22,Soil,Bacteria,Sapelo2019_Endosphere_T3_P2_5-10,SRR12995305,Compartment,Root,NA,6,NA,-63,-122.16,-0.160774
+RKSK22,Soil,Bacteria,Sapelo2019_Endosphere_T3_P2_5-10_b,SRR12995307,Compartment,Root,NA,6,NA,-63,-122.16,-0.159181
+RKSK22,Soil,Bacteria,Sapelo18_Bulk_sediment_T2_P1_0-5,SRR12995316,Compartment,Bulk sediment,NA,7.1,NA,34.5,40.42,-0.149713
+RKSK22,Soil,Bacteria,Sapelo18_Bulk_sediment_T2_P2_0-5,SRR12995406,Compartment,Bulk sediment,NA,7.1,NA,-66,-60.08,-0.151071
+RKSK22,Soil,Bacteria,Sapelo18_Bulk_sediment_T2_P3_0-5,SRR12995384,Compartment,Bulk sediment,NA,6.5,NA,-143,-172.58,-0.156621
+RKSK22,Soil,Bacteria,Sapelo18_Bulk_sediment_T2_P3_5-10,SRR12995395,Compartment,Bulk sediment,NA,6.5,NA,-346,-375.58,-0.159646
+RKSK22,Soil,Bacteria,Sapelo18_Bulk_sediment_T3_P1_0-5,SRR12995362,Compartment,Bulk sediment,NA,7.3,NA,-147,-129.25,-0.148461
+RKSK22,Soil,Bacteria,Sapelo18_Bulk_sediment_T3_P1_5-10,SRR12995373,Compartment,Bulk sediment,NA,6.5,NA,36.5,6.92,-0.149374
+RKSK22,Soil,Bacteria,Sapelo18_Bulk_sediment_T3_P2_0-5,SRR12995340,Compartment,Bulk sediment,NA,7,NA,89.5,89.5,-0.153837
+RKSK22,Soil,Bacteria,Sapelo18_Bulk_sediment_T3_P2_5-10,SRR12995351,Compartment,Bulk sediment,NA,5.5,NA,119,30.27,-0.156286
+RKSK22,Soil,Bacteria,Sapelo18_Bulk_sediment_T3_P3_5-10,SRR12995329,Compartment,Bulk sediment,NA,6.7,NA,-340.5,-358.25,-0.16005
+RKSK22,Soil,Bacteria,Sapelo2019_Bulk_sediment_T4_P2_0-5,SRR12995323,Compartment,Bulk sediment,NA,6.6,NA,-297.5,-321.16,-0.155765
+RKSK22,Soil,Bacteria,Sapelo2019_Bulk_sediment_T4_P3_0-5,SRR12995321,Compartment,Bulk sediment,NA,6.9,NA,-334,-339.92,-0.155532
+RKSK22,Soil,Bacteria,Sapelo2019_Bulk_sediment_T4_P3_5-10,SRR12995322,Compartment,Bulk sediment,NA,6.3,NA,-361,-402.41,-0.161354
+RKSK22,Soil,Bacteria,Sapelo2019_Endosphere_T1_P1_0-5,SRR12995319,Compartment,Root,NA,6.7,NA,-114,-131.75,-0.17138
+RKSK22,Soil,Bacteria,Sapelo2019_Endosphere_T1_P1_5-10,SRR12995320,Compartment,Root,NA,6.6,NA,-140.7,-164.36,-0.157197
+RKSK22,Soil,Bacteria,Sapelo2019_Endosphere_T1_P2_0-5,SRR12995317,Compartment,Root,NA,7.4,NA,-289,-265.34,-0.166303
+RKSK22,Soil,Bacteria,Sapelo2019_Endosphere_T1_P2_5-10,SRR12995318,Compartment,Root,NA,6.6,NA,-385,-408.66,-0.16928
+RKSK22,Soil,Bacteria,Sapelo2019_Endosphere_T1_P3_0-5,SRR12995314,Compartment,Root,NA,6.6,NA,-377,-400.66,-0.159951
+RKSK22,Soil,Bacteria,Sapelo2019_Endosphere_T1_P3_5-10,SRR12995315,Compartment,Root,NA,7.1,NA,-397.5,-391.58,-0.163045
+RKSK22,Soil,Bacteria,Sapelo2019_Endosphere_T1_P4_0-5,SRR12995312,Compartment,Root,NA,6.5,NA,-276.5,-306.08,-0.16442
+RKSK22,Soil,Bacteria,Sapelo2019_Endosphere_T1_P4_5-10,SRR12995313,Compartment,Root,NA,6.7,NA,-326,-343.75,-0.161016
+RKSK22,Soil,Bacteria,Sapelo2019_Endosphere_T3_P3_0-5,SRR12995411,Compartment,Root,NA,6.9,NA,-371,-376.92,-0.161264
+RKSK22,Soil,Bacteria,Sapelo2019_Endosphere_T4_P1_0-5,SRR12995409,Compartment,Root,NA,6.9,NA,86,80.08,-0.156789
+RKSK22,Soil,Bacteria,Sapelo2019_Endosphere_T4_P1_5-10,SRR12995410,Compartment,Root,NA,6.4,NA,42,6.51,-0.16189
+RKSK22,Soil,Bacteria,Sapelo2019_Endosphere_T4_P2_0-5,SRR12995407,Compartment,Root,NA,6.6,NA,-297.5,-321.16,-0.159948
+RKSK22,Soil,Bacteria,Sapelo2019_Endosphere_T4_P2_5-10,SRR12995408,Compartment,Root,NA,6.5,NA,-395.5,-425.08,-0.159323
+RKSK22,Soil,Bacteria,Sapelo2019_Endosphere_T4_P3_0-5,SRR12995404,Compartment,Root,NA,6.9,NA,-334,-339.92,-0.156298
+RKSK22,Soil,Bacteria,Sapelo2019_Endosphere_T4_P3_5-10,SRR12995405,Compartment,Root,NA,6.3,NA,-361,-402.41,-0.160926
+RKSK22,Soil,Bacteria,Sapelo2019_Rhizosphere_T1_P1_0-5,SRR12995402,Compartment,Rhizosphere,NA,6.7,NA,-114,-131.75,-0.156044
+RKSK22,Soil,Bacteria,Sapelo2019_Rhizosphere_T1_P1_5-10,SRR12995403,Compartment,Rhizosphere,NA,6.6,NA,-140.7,-164.36,-0.156225
+RKSK22,Soil,Bacteria,Sapelo2019_Rhizosphere_T1_P2_0-5,SRR12995400,Compartment,Rhizosphere,NA,7.4,NA,-289,-265.34,-0.165283
+RKSK22,Soil,Bacteria,Sapelo2019_Rhizosphere_T1_P2_5-10,SRR12995401,Compartment,Rhizosphere,NA,6.6,NA,-385,-408.66,-0.166668
+RKSK22,Soil,Bacteria,Sapelo2019_Rhizosphere_T1_P3_0-5,SRR12995398,Compartment,Rhizosphere,NA,6.6,NA,-377,-400.66,-0.160172
+RKSK22,Soil,Bacteria,Sapelo2019_Rhizosphere_T1_P3_5-10,SRR12995399,Compartment,Rhizosphere,NA,7.1,NA,-397.5,-391.58,-0.161722
+RKSK22,Soil,Bacteria,Sapelo2019_Rhizosphere_T1_P4_0-5,SRR12995396,Compartment,Rhizosphere,NA,6.5,NA,-276.5,-306.08,-0.160342
+RKSK22,Soil,Bacteria,Sapelo2019_Rhizosphere_T1_P4_5-10,SRR12995397,Compartment,Rhizosphere,NA,6.7,NA,-326,-343.75,-0.159884
+RKSK22,Soil,Bacteria,Sapelo2019_Rhizosphere_T3_P1_0-5,SRR12995391,Compartment,Rhizosphere,NA,6.6,NA,-48.5,-72.16,-0.155925
+RKSK22,Soil,Bacteria,Sapelo2019_Rhizosphere_T3_P1_0-5_b,SRR12995392,Compartment,Rhizosphere,NA,6.6,NA,-48.5,-72.16,-0.157001
+RKSK22,Soil,Bacteria,Sapelo2019_Rhizosphere_T3_P1_5-10,SRR12995393,Compartment,Rhizosphere,NA,6,NA,-109.5,-168.66,-0.15697
+RKSK22,Soil,Bacteria,Sapelo2019_Rhizosphere_T3_P1_5-10_b,SRR12995394,Compartment,Rhizosphere,NA,6,NA,-109.5,-168.66,-0.156127
+RKSK22,Soil,Bacteria,Sapelo2019_Rhizosphere_T3_P2_0-5,SRR12995387,Compartment,Rhizosphere,NA,6.9,NA,-68,-73.92,-0.155605
+RKSK22,Soil,Bacteria,Sapelo2019_Rhizosphere_T3_P2_0-5_b,SRR12995388,Compartment,Rhizosphere,NA,6.9,NA,-68,-73.92,-0.15511
+RKSK22,Soil,Bacteria,Sapelo2019_Rhizosphere_T3_P2_5-10,SRR12995389,Compartment,Rhizosphere,NA,6,NA,-63,-122.16,-0.159104
+RKSK22,Soil,Bacteria,Sapelo2019_Rhizosphere_T3_P2_5-10_b,SRR12995390,Compartment,Rhizosphere,NA,6,NA,-63,-122.16,-0.158649
+RKSK22,Soil,Bacteria,Sapelo2019_Rhizosphere_T3_P3_0-5,SRR12995382,Compartment,Rhizosphere,NA,6.9,NA,-371,-376.92,-0.157524
+RKSK22,Soil,Bacteria,Sapelo2019_Rhizosphere_T3_P3_0-5_b,SRR12995383,Compartment,Rhizosphere,NA,6.9,NA,-371,-376.92,-0.155364
+RKSK22,Soil,Bacteria,Sapelo2019_Rhizosphere_T3_P3_5-10,SRR12995385,Compartment,Rhizosphere,NA,6.6,NA,-388.5,-412.16,-0.160446
+RKSK22,Soil,Bacteria,Sapelo2019_Rhizosphere_T3_P3_5-10_b,SRR12995386,Compartment,Rhizosphere,NA,6.6,NA,-388.5,-412.16,-0.162239
+RKSK22,Soil,Bacteria,Sapelo2019_Rhizosphere_T4_P1_0-5,SRR12995380,Compartment,Rhizosphere,NA,6.9,NA,86,80.08,-0.155798
+RKSK22,Soil,Bacteria,Sapelo2019_Rhizosphere_T4_P1_5-10,SRR12995381,Compartment,Rhizosphere,NA,6.4,NA,42,6.51,-0.156102
+RKSK22,Soil,Bacteria,Sapelo2019_Rhizosphere_T4_P2_0-5,SRR12995378,Compartment,Rhizosphere,NA,6.6,NA,-297.5,-321.16,-0.158091
+RKSK22,Soil,Bacteria,Sapelo2019_Rhizosphere_T4_P2_5-10,SRR12995379,Compartment,Rhizosphere,NA,6.5,NA,-395.5,-425.08,-0.157263
+RKSK22,Soil,Bacteria,Sapelo2019_Rhizosphere_T4_P3_0-5,SRR12995376,Compartment,Rhizosphere,NA,6.9,NA,-334,-339.92,-0.158702
+RKSK22,Soil,Bacteria,Sapelo2019_Rhizosphere_T4_P3_5-10,SRR12995377,Compartment,Rhizosphere,NA,6.3,NA,-361,-402.41,-0.161658
+RKSK22,Soil,Bacteria,Sapelo2019_Endosphere_T3_P2_0-5,SRR12995415,Compartment,Root,NA,6.9,NA,-68,-73.92,-0.162287
+RKSK22,Soil,Bacteria,Sapelo2019_Endosphere_T3_P3_0-5_b,SRR12995412,Compartment,Root,NA,6.9,NA,-371,-376.92,-0.147416
+RKSK22,Soil,Bacteria,Sapelo2019_Endosphere_T3_P3_5-10,SRR12995413,Compartment,Root,NA,6.6,NA,-388.5,-412.16,-0.162739
+RKSK22,Soil,Bacteria,Sapelo2019_Endosphere_T3_P3_5-10_b,SRR12995414,Compartment,Root,NA,6.6,NA,-388.5,-412.16,-0.161642
+RKSK22,Soil,Archaea,Sapelo18_Bulk_sediment_T1_P1_5-10,SRR12995243,Compartment,Bulk sediment,NA,6.8,NA,-143.3,-155.13,-0.188254
+RKSK22,Soil,Archaea,Sapelo18_Bulk_sediment_T1_P3_0-5,SRR12995250,Compartment,Bulk sediment,NA,6.4,NA,-332.3,-367.79,-0.146957
+RKSK22,Soil,Archaea,Sapelo18_Bulk_sediment_T1_P3_5-10,SRR12995261,Compartment,Bulk sediment,NA,6.6,NA,-405,-428.66,-0.130548
+RKSK22,Soil,Archaea,Sapelo18_Bulk_sediment_T2_P1_5-10,SRR12995279,Compartment,Bulk sediment,NA,6.2,NA,20,-27.32,-0.189195
+RKSK22,Soil,Archaea,Sapelo18_Bulk_sediment_T2_P2_5-10,SRR12995241,Compartment,Bulk sediment,NA,6.6,NA,-226.5,-250.16,-0.170578
+RKSK22,Soil,Archaea,Sapelo18_Bulk_sediment_T3_P3_0-5,SRR12995235,Compartment,Bulk sediment,NA,6.5,NA,-362,-391.58,-0.132573
+RKSK22,Soil,Archaea,Sapelo18_Bulk_sediment_T4_P1_0-5,SRR12995218,Compartment,Bulk sediment,NA,7.1,NA,18,23.92,-0.188782
+RKSK22,Soil,Archaea,Sapelo18_Bulk_sediment_T4_P1_5-10,SRR12995223,Compartment,Bulk sediment,NA,6,NA,-29,-88.16,-0.189172
+RKSK22,Soil,Archaea,Sapelo18_Bulk_sediment_T4_P2_0-5,SRR12995216,Compartment,Bulk sediment,NA,6.8,NA,-295.5,-307.33,-0.132987
+RKSK22,Soil,Archaea,Sapelo18_Bulk_sediment_T4_P2_5-10,SRR12995217,Compartment,Bulk sediment,NA,6.8,NA,-385.5,-397.33,-0.133951
+RKSK22,Soil,Archaea,Sapelo18_Bulk_sediment_T4_P3_0-5,SRR12995214,Compartment,Bulk sediment,NA,6.5,NA,-271.5,-301.08,-0.127585
+RKSK22,Soil,Archaea,Sapelo18_Bulk_sediment_T4_P3_5-10,SRR12995215,Compartment,Bulk sediment,NA,6.6,NA,-347.5,-371.16,-0.131452
+RKSK22,Soil,Archaea,Sapelo2018_Endosphere_T2_P2_5-10,SRR12995265,Compartment,Root,NA,7.1,NA,-66,-60.08,-0.139369
+RKSK22,Soil,Archaea,Sapelo2018_Endosphere_T2_P3_5-10,SRR12995263,Compartment,Root,NA,6.5,NA,-143,-172.58,-0.165652
+RKSK22,Soil,Archaea,Sapelo2018_Rhizosphere_T1_P1_0-5,SRR12995253,Compartment,Rhizosphere,NA,6.8,NA,-143.3,-155.13,-0.187884
+RKSK22,Soil,Archaea,Sapelo2018_Rhizosphere_T1_P1_5-10,SRR12995254,Compartment,Rhizosphere,NA,7.5,NA,78.7,108.28,-0.188888
+RKSK22,Soil,Archaea,Sapelo2018_Rhizosphere_T1_P2_0-5,SRR12995251,Compartment,Rhizosphere,NA,6.7,NA,-373.7,-391.45,-0.180848
+RKSK22,Soil,Archaea,Sapelo2018_Rhizosphere_T1_P3_0-5,SRR12995248,Compartment,Rhizosphere,NA,6.6,NA,-405,-428.66,-0.141997
+RKSK22,Soil,Archaea,Sapelo2018_Rhizosphere_T1_P3_5-10,SRR12995249,Compartment,Rhizosphere,NA,6.4,NA,-332.3,-367.79,-0.137709
+RKSK22,Soil,Archaea,Sapelo2018_Rhizosphere_T2_P1_5-10,SRR12995245,Compartment,Rhizosphere,NA,7.1,NA,34.5,40.42,-0.14203
+RKSK22,Soil,Archaea,Sapelo2018_Rhizosphere_T2_P2_0-5,SRR12995304,Compartment,Rhizosphere,NA,6.6,NA,-226.5,-250.16,-0.161647
+RKSK22,Soil,Archaea,Sapelo2018_Rhizosphere_T2_P2_5-10,SRR12995306,Compartment,Rhizosphere,NA,7.1,NA,-66,-60.08,-0.131405
+RKSK22,Soil,Archaea,Sapelo2018_Rhizosphere_T2_P3_5-10,SRR12995303,Compartment,Rhizosphere,NA,6.5,NA,-143,-172.58,-0.132065
+RKSK22,Soil,Archaea,Sapelo2018_Rhizosphere_T4_P1_0-5,SRR12995299,Compartment,Rhizosphere,NA,6,NA,-29,-88.16,-0.188149
+RKSK22,Soil,Archaea,Sapelo2018_Rhizosphere_T4_P2_0-5,SRR12995297,Compartment,Rhizosphere,NA,6.8,NA,-385.5,-397.33,-0.142936
+RKSK22,Soil,Archaea,Sapelo2018_Rhizosphere_T4_P2_5-10,SRR12995298,Compartment,Rhizosphere,NA,6.8,NA,-295.5,-307.33,-0.142188
+RKSK22,Soil,Archaea,Sapelo2018_Rhizosphere_T4_P3_0-5,SRR12995295,Compartment,Rhizosphere,NA,6.6,NA,-347.5,-371.16,-0.141284
+RKSK22,Soil,Archaea,Sapelo2018_Rhizosphere_T4_P3_5-10,SRR12995296,Compartment,Rhizosphere,NA,6.5,NA,-271.5,-301.08,-0.13849
+RKSK22,Soil,Archaea,Sapelo2019_Bulk_sediment_T1_P1_0-5,SRR12995293,Compartment,Bulk sediment,NA,6.7,NA,-114,-131.75,-0.188389
+RKSK22,Soil,Archaea,Sapelo2019_Bulk_sediment_T1_P1_5-10,SRR12995294,Compartment,Bulk sediment,NA,6.6,NA,-140.7,-164.36,-0.185697
+RKSK22,Soil,Archaea,Sapelo2019_Bulk_sediment_T1_P2_0-5,SRR12995291,Compartment,Bulk sediment,NA,7.4,NA,-289,-265.34,-0.131757
+RKSK22,Soil,Archaea,Sapelo2019_Bulk_sediment_T1_P2_5-10,SRR12995292,Compartment,Bulk sediment,NA,6.6,NA,-385,-408.66,-0.129079
+RKSK22,Soil,Archaea,Sapelo2019_Bulk_sediment_T1_P3_0-5,SRR12995288,Compartment,Bulk sediment,NA,6.6,NA,-377,-400.66,-0.131378
+RKSK22,Soil,Archaea,Sapelo2019_Bulk_sediment_T1_P3_5-10,SRR12995289,Compartment,Bulk sediment,NA,7.1,NA,-397.5,-391.58,-0.137522
+RKSK22,Soil,Archaea,Sapelo2019_Bulk_sediment_T1_P4_5-10,SRR12995287,Compartment,Bulk sediment,NA,6.7,NA,-326,-343.75,-0.151338
+RKSK22,Soil,Archaea,Sapelo2019_Bulk_sediment_T3_P1_0-5,SRR12995284,Compartment,Bulk sediment,NA,6.6,NA,-48.5,-72.16,-0.187183
+RKSK22,Soil,Archaea,Sapelo2019_Bulk_sediment_T3_P1_5-10,SRR12995285,Compartment,Bulk sediment,NA,6,NA,-109.5,-168.66,-0.189346
+RKSK22,Soil,Archaea,Sapelo2019_Bulk_sediment_T3_P2_0-5,SRR12995282,Compartment,Bulk sediment,NA,6.9,NA,-68,-73.92,-0.187863
+RKSK22,Soil,Archaea,Sapelo2019_Bulk_sediment_T3_P2_5-10,SRR12995283,Compartment,Bulk sediment,NA,6,NA,-63,-122.16,-0.187518
+RKSK22,Soil,Archaea,Sapelo2019_Bulk_sediment_T3_P3_0-5,SRR12995280,Compartment,Bulk sediment,NA,6.9,NA,-371,-376.92,-0.131952
+RKSK22,Soil,Archaea,Sapelo2019_Bulk_sediment_T3_P3_5-10,SRR12995281,Compartment,Bulk sediment,NA,6.6,NA,-388.5,-412.16,-0.132178
+RKSK22,Soil,Archaea,Sapelo2019_Bulk_sediment_T4_P1_0-5,SRR12995277,Compartment,Bulk sediment,NA,6.9,NA,86,80.08,-0.189318
+RKSK22,Soil,Archaea,Sapelo2019_Bulk_sediment_T4_P1_5-10,SRR12995278,Compartment,Bulk sediment,NA,6.4,NA,42,6.51,-0.188809
+RKSK22,Soil,Archaea,Sapelo2019_Bulk_sediment_T4_P2_5-10,SRR12995275,Compartment,Bulk sediment,NA,6.5,NA,-395.5,-425.08,-0.133315
+RKSK22,Soil,Archaea,Sapelo18_Bulk_sediment_T2_P1_0-5,SRR12995316,Compartment,Bulk sediment,NA,7.1,NA,34.5,40.42,-0.189831
+RKSK22,Soil,Archaea,Sapelo18_Bulk_sediment_T2_P2_0-5,SRR12995406,Compartment,Bulk sediment,NA,7.1,NA,-66,-60.08,-0.187603
+RKSK22,Soil,Archaea,Sapelo18_Bulk_sediment_T2_P3_5-10,SRR12995395,Compartment,Bulk sediment,NA,6.5,NA,-346,-375.58,-0.142955
+RKSK22,Soil,Archaea,Sapelo18_Bulk_sediment_T3_P2_0-5,SRR12995340,Compartment,Bulk sediment,NA,7,NA,89.5,89.5,-0.177578
+RKSK22,Soil,Archaea,Sapelo18_Bulk_sediment_T3_P2_5-10,SRR12995351,Compartment,Bulk sediment,NA,5.5,NA,119,30.27,-0.156245
+RKSK22,Soil,Archaea,Sapelo18_Bulk_sediment_T3_P3_5-10,SRR12995329,Compartment,Bulk sediment,NA,6.7,NA,-340.5,-358.25,-0.130757
+RKSK22,Soil,Archaea,Sapelo2019_Bulk_sediment_T4_P2_0-5,SRR12995323,Compartment,Bulk sediment,NA,6.6,NA,-297.5,-321.16,-0.13266
+RKSK22,Soil,Archaea,Sapelo2019_Bulk_sediment_T4_P3_0-5,SRR12995321,Compartment,Bulk sediment,NA,6.9,NA,-334,-339.92,-0.122353
+RKSK22,Soil,Archaea,Sapelo2019_Bulk_sediment_T4_P3_5-10,SRR12995322,Compartment,Bulk sediment,NA,6.3,NA,-361,-402.41,-0.134044
+RKSK22,Soil,Archaea,Sapelo2019_Endosphere_T1_P1_5-10,SRR12995320,Compartment,Root,NA,6.6,NA,-140.7,-164.36,-0.188239
+RKSK22,Soil,Archaea,Sapelo2019_Endosphere_T1_P2_0-5,SRR12995317,Compartment,Root,NA,7.4,NA,-289,-265.34,-0.151014
+RKSK22,Soil,Archaea,Sapelo2019_Endosphere_T1_P2_5-10,SRR12995318,Compartment,Root,NA,6.6,NA,-385,-408.66,-0.176047
+RKSK22,Soil,Archaea,Sapelo2019_Endosphere_T1_P3_0-5,SRR12995314,Compartment,Root,NA,6.6,NA,-377,-400.66,-0.143617
+RKSK22,Soil,Archaea,Sapelo2019_Endosphere_T1_P3_5-10,SRR12995315,Compartment,Root,NA,7.1,NA,-397.5,-391.58,-0.132592
+RKSK22,Soil,Archaea,Sapelo2019_Endosphere_T1_P4_0-5,SRR12995312,Compartment,Root,NA,6.5,NA,-276.5,-306.08,-0.178284
+RKSK22,Soil,Archaea,Sapelo2019_Endosphere_T1_P4_5-10,SRR12995313,Compartment,Root,NA,6.7,NA,-326,-343.75,-0.155418
+RKSK22,Soil,Archaea,Sapelo2019_Endosphere_T4_P2_5-10,SRR12995408,Compartment,Root,NA,6.5,NA,-395.5,-425.08,-0.136973
+RKSK22,Soil,Archaea,Sapelo2019_Endosphere_T4_P3_0-5,SRR12995404,Compartment,Root,NA,6.9,NA,-334,-339.92,-0.136918
+RKSK22,Soil,Archaea,Sapelo2019_Endosphere_T4_P3_5-10,SRR12995405,Compartment,Root,NA,6.3,NA,-361,-402.41,-0.13116
+RKSK22,Soil,Archaea,Sapelo2019_Rhizosphere_T1_P1_0-5,SRR12995402,Compartment,Rhizosphere,NA,6.7,NA,-114,-131.75,-0.188827
+RKSK22,Soil,Archaea,Sapelo2019_Rhizosphere_T1_P1_5-10,SRR12995403,Compartment,Rhizosphere,NA,6.6,NA,-140.7,-164.36,-0.186437
+RKSK22,Soil,Archaea,Sapelo2019_Rhizosphere_T1_P2_0-5,SRR12995400,Compartment,Rhizosphere,NA,7.4,NA,-289,-265.34,-0.156981
+RKSK22,Soil,Archaea,Sapelo2019_Rhizosphere_T1_P2_5-10,SRR12995401,Compartment,Rhizosphere,NA,6.6,NA,-385,-408.66,-0.179042
+RKSK22,Soil,Archaea,Sapelo2019_Rhizosphere_T1_P3_0-5,SRR12995398,Compartment,Rhizosphere,NA,6.6,NA,-377,-400.66,-0.150398
+RKSK22,Soil,Archaea,Sapelo2019_Rhizosphere_T1_P3_5-10,SRR12995399,Compartment,Rhizosphere,NA,7.1,NA,-397.5,-391.58,-0.144585
+RKSK22,Soil,Archaea,Sapelo2019_Rhizosphere_T1_P4_5-10,SRR12995397,Compartment,Rhizosphere,NA,6.7,NA,-326,-343.75,-0.181763
+RKSK22,Soil,Archaea,Sapelo2019_Rhizosphere_T3_P1_0-5,SRR12995391,Compartment,Rhizosphere,NA,6.6,NA,-48.5,-72.16,-0.188427
+RKSK22,Soil,Archaea,Sapelo2019_Rhizosphere_T3_P1_0-5_b,SRR12995392,Compartment,Rhizosphere,NA,6.6,NA,-48.5,-72.16,-0.185707
+RKSK22,Soil,Archaea,Sapelo2019_Rhizosphere_T3_P1_5-10,SRR12995393,Compartment,Rhizosphere,NA,6,NA,-109.5,-168.66,-0.188338
+RKSK22,Soil,Archaea,Sapelo2019_Rhizosphere_T3_P1_5-10_b,SRR12995394,Compartment,Rhizosphere,NA,6,NA,-109.5,-168.66,-0.181208
+RKSK22,Soil,Archaea,Sapelo2019_Rhizosphere_T3_P2_0-5,SRR12995387,Compartment,Rhizosphere,NA,6.9,NA,-68,-73.92,-0.188451
+RKSK22,Soil,Archaea,Sapelo2019_Rhizosphere_T3_P2_0-5_b,SRR12995388,Compartment,Rhizosphere,NA,6.9,NA,-68,-73.92,-0.189456
+RKSK22,Soil,Archaea,Sapelo2019_Rhizosphere_T3_P2_5-10,SRR12995389,Compartment,Rhizosphere,NA,6,NA,-63,-122.16,-0.159252
+RKSK22,Soil,Archaea,Sapelo2019_Rhizosphere_T3_P3_0-5,SRR12995382,Compartment,Rhizosphere,NA,6.9,NA,-371,-376.92,-0.141455
+RKSK22,Soil,Archaea,Sapelo2019_Rhizosphere_T3_P3_0-5_b,SRR12995383,Compartment,Rhizosphere,NA,6.9,NA,-371,-376.92,-0.137725
+RKSK22,Soil,Archaea,Sapelo2019_Rhizosphere_T3_P3_5-10,SRR12995385,Compartment,Rhizosphere,NA,6.6,NA,-388.5,-412.16,-0.141917
+RKSK22,Soil,Archaea,Sapelo2019_Rhizosphere_T3_P3_5-10_b,SRR12995386,Compartment,Rhizosphere,NA,6.6,NA,-388.5,-412.16,-0.136087
+RKSK22,Soil,Archaea,Sapelo2019_Rhizosphere_T4_P1_0-5,SRR12995380,Compartment,Rhizosphere,NA,6.9,NA,86,80.08,-0.187693
+RKSK22,Soil,Archaea,Sapelo2019_Rhizosphere_T4_P1_5-10,SRR12995381,Compartment,Rhizosphere,NA,6.4,NA,42,6.51,-0.186876
+RKSK22,Soil,Archaea,Sapelo2019_Rhizosphere_T4_P2_0-5,SRR12995378,Compartment,Rhizosphere,NA,6.6,NA,-297.5,-321.16,-0.149649
+RKSK22,Soil,Archaea,Sapelo2019_Rhizosphere_T4_P2_5-10,SRR12995379,Compartment,Rhizosphere,NA,6.5,NA,-395.5,-425.08,-0.15194
+RKSK22,Soil,Archaea,Sapelo2019_Rhizosphere_T4_P3_0-5,SRR12995376,Compartment,Rhizosphere,NA,6.9,NA,-334,-339.92,-0.132982
+RKSK22,Soil,Archaea,Sapelo2019_Rhizosphere_T4_P3_5-10,SRR12995377,Compartment,Rhizosphere,NA,6.3,NA,-361,-402.41,-0.134667
+RKSK22,Soil,Archaea,Sapelo2019_Endosphere_T3_P3_5-10,SRR12995413,Compartment,Root,NA,6.6,NA,-388.5,-412.16,-0.15891
+RKSK22,Soil,Archaea,Sapelo2019_Endosphere_T3_P3_5-10_b,SRR12995414,Compartment,Root,NA,6.6,NA,-388.5,-412.16,-0.141229
 DLS21_Bulk,Soil,Bacteria,1AB,SRR13375755,Treatment,Control,NA,7.53,NA,73,104.35,-0.156
 DLS21_Bulk,Soil,Bacteria,2AB,SRR13375744,Treatment,Char,NA,7.6,NA,69,104.49,-0.162104
 DLS21_Bulk,Soil,Bacteria,3AB,SRR13375731,Treatment,Silicate,NA,7.54,NA,46,77.94,-0.168711
