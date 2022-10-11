@@ -106,7 +106,7 @@ orp16S5()
 
 **Data sources (c):** **1** acidic and **2** circumneutral to alkaline New Zealand hot springs [@PCL+18], **3** Eastern Tibetan Plateau [@GWS+20], **4** Uzon Caldera [@PBU+20], **5** Southern Tibetan Plateau [@MWY+21].
 
-## Summary of regression slopes for all datasets (Table 2)
+## Summary of regression slopes (Table 2)
 ```{r orp16S_T2}
 colnames <- c("Ntot", "Npos", "Nneg", "p")
 kable(orp16S_T2(), col.names = rep(colnames, 2)) %>%

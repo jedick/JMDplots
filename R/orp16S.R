@@ -1257,6 +1257,8 @@ getmdat_orp16S <- function(study, metrics = NULL, dropNA = TRUE, size = NULL, qu
       }
       else if(identical(units, O2name)) warning(paste0(study, ": no units given for ", O2name))
       else stop(paste0(study, ": unrecognized units for oxygen concentration: ", units))
+      # Round value 20221011
+      O2_umol_L <- round(O2_umol_L, 2)
     }
     metadata <- cbind(metadata, O2_umol_L = O2_umol_L)
 
