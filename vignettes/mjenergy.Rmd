@@ -60,7 +60,7 @@ ZC <- "<i>Z</i><sub>C</sub>"
 
 This vignette runs the code to make the plots from the following paper:
 
-> Dick JM, Shock EL. 2021. The release of energy during protein synthesis at ultramafic-hosted submarine hydrothermal ecosystems. *Journal of Geophysical Research: Biogeosciences* e2021JG006436. doi: [10.1029/2021JG006436](https://doi.org/10.1029/2021JG006436)
+> Dick JM, Shock EL. 2021. The release of energy during protein synthesis at ultramafic-hosted submarine hydrothermal ecosystems. *Journal of Geophysical Research: Biogeosciences* **126**(11): e2021JG006436. doi: [10.1029/2021JG006436](https://doi.org/10.1029/2021JG006436)
 
 This vignette was compiled on `r Sys.Date()` with **[JMDplots](https://github.com/jedick/JMDplots)** `r packageDescription("JMDplots")$Version` and **[CHNOSZ](http://chnosz.net)** `r packageDescription("CHNOSZ")$Version`.
 
