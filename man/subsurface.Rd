@@ -15,9 +15,9 @@ For the example here, the \code{extdata/subsurface/data} directory has additiona
 }
 
 \references{
-Orsi, W. D, Edgcomb, V. P., Christman, G. D. and Biddle, J. F. (2013) Gene expression in the deep biosphere. \emph{Nature} \bold{499}, 205-208. \doi{10.1038/nature12230}
+Orsi WD, Edgcomb VP, Christman GD and Biddle JF (2013) Gene expression in the deep biosphere. \emph{Nature} \bold{499}, 205-208. \doi{10.1038/nature12230}
 
-Tully, B. J., Wheat, C. G., Glazer, B. T. and Huber, J. A. (2018) A dynamic microbial community with high functional redundancy inhabits the cold, oxic subseafloor aquifer \emph{ISME J.} \bold{12}, 1-16. \doi{10.1038/ismej.2017.187}
+Tully BJ, Wheat CG, Glazer BT and Huber JA (2018) A dynamic microbial community with high functional redundancy inhabits the cold, oxic subseafloor aquifer \emph{ISME J.} \bold{12}, 1-16. \doi{10.1038/ismej.2017.187}
 }
 
 \examples{

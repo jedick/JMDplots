@@ -74,9 +74,9 @@ ZC(protein.formula(aa))
 }
 
 \references{
-Ghaemmaghami, S., Huh, W., Bower, K., Howson, R. W., Belle, A., Dephoure, N., O'Shea, E. K. and Weissman, J. S. (2003) Global analysis of protein expression in yeast. \emph{Nature} \bold{425}(6959), 737--741. \doi{10.1038/nature02046}
+Ghaemmaghami S, Huh W, Bower K, Howson RW, Belle A, Dephoure N, O'Shea EK and Weissman JS (2003) Global analysis of protein expression in yeast. \emph{Nature} \bold{425}(6959), 737--741. \doi{10.1038/nature02046}
 
-Huh, W. K., Falvo, J. V., Gerke, L. C., Carroll, A. S., Howson, R. W., Weissman, J. S. and O'Shea, E. K. (2003) Global analysis of protein localization in budding yeast. \emph{Nature} \bold{425}(6959), 686--691. \doi{10.1038/nature02026}
+Huh WK, Falvo JV, Gerke LC, Carroll AS, Howson RW, Weissman JS and O'Shea EK (2003) Global analysis of protein localization in budding yeast. \emph{Nature} \bold{425}(6959), 686--691. \doi{10.1038/nature02026}
 
 YeastGFP project. Yeast GFP Fusion Localization Database, http://yeastgfp.ucsf.edu; Current location: \url{https://yeastgfp.yeastgenome.org}
 }

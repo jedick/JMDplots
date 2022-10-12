@@ -63,19 +63,19 @@ The output files (CSV) from the vignettes are included in the package, and they 
 \references{
 GTEx Consortium (2017) Genetic effects on gene expression across human tissues. \emph{Nature} \bold{550}, 204--213. \doi{10.1038/nature24277}
 
-Fabre, B., Korona, D., Lees, J. G., Lazar, I., Livneh, I., Brunet, M., Orengo, C. A., Russell, S. and Lilley, K. S. (2019) Comparison of \emph{Drosophila melanogaster} embryo and adult proteome by SWATH-MS reveals differential regulation of protein synthesis, degradation machinery, and metabolism modules. \emph{J. Proteome Res.} \bold{18}, 2525--2534. \doi{10.1021/acs.jproteome.9b00076}
+Fabre B, Korona D, Lees JG, Lazar I, Livneh I, Brunet M, Orengo CA, Russell S and Lilley KS (2019) Comparison of \emph{Drosophila melanogaster} embryo and adult proteome by SWATH-MS reveals differential regulation of protein synthesis, degradation machinery, and metabolism modules. \emph{J. Proteome Res.} \bold{18}, 2525--2534. \doi{10.1021/acs.jproteome.9b00076}
 
-Gasch, A. P., Spellman, P. T., Kao, C. M, Carmel-Harel, O., Eisen, M. B., Storz, G., Botstein, D. and Brown, P. O. (2000) Genomic expression programs in the response of yeast cells to environmental changes. \emph{Mol. Biol. Cell} \bold{11}, 4241--4257. \doi{10.1091/mbc.11.12.4241}
+Gasch AP, Spellman PT, Kao CM, Carmel-Harel O, Eisen MB, Storz G, Botstein D and Brown PO (2000) Genomic expression programs in the response of yeast cells to environmental changes. \emph{Mol. Biol. Cell} \bold{11}, 4241--4257. \doi{10.1091/mbc.11.12.4241}
 
-Hutter, C. and Zenklusen, J. C. (2018) The Cancer Genome Atlas: Creating lasting value beyond its data. \emph{Cell} \bold{173}, 283--285. \doi{10.1016/j.cell.2018.03.042}
+Hutter C and Zenklusen JC (2018) The Cancer Genome Atlas: Creating lasting value beyond its data. \emph{Cell} \bold{173}, 283--285. \doi{10.1016/j.cell.2018.03.042}
 
-Tang, Z., Kang, B., Li, C., Chen, T. and Zhang, Z. (2019) GEPIA2: an enhanced web server for large-scale expression profiling and interactive analysis. \emph{Nucleic Acids Res.} \bold{47}, W556--W560. \doi{10.1093/nar/gkz430}
+Tang Z, Kang B, Li C, Chen T and Zhang Z (2019) GEPIA2: an enhanced web server for large-scale expression profiling and interactive analysis. \emph{Nucleic Acids Res.} \bold{47}, W556--W560. \doi{10.1093/nar/gkz430}
 
 The Cancer Genome Atlas Research Network et al. (2013) The Cancer Genome Atlas Pan-Cancer analysis project. \emph{Nat. Genetics} \bold{45}, 1113--1120. \doi{10.1038/ng.2764}
 
-Tsai, H.-J. et al. (2019) Hypo-osmotic-like stress underlies general cellular defects of aneuploidy. \emph{Nature} \bold{570}, 117--121. \doi{10.1038/s41586-019-1187-2}
+Tsai H-J et al. (2019) Hypo-osmotic-like stress underlies general cellular defects of aneuploidy. \emph{Nature} \bold{570}, 117--121. \doi{10.1038/s41586-019-1187-2}
 
-Uhlen, M. et al. (2015) A pathology atlas of the human cancer transcriptome. \emph{Science} \bold{357}, eaan2507. \doi{10.1126/science.aan2507}
+Uhlen M et al. (2015) A pathology atlas of the human cancer transcriptome. \emph{Science} \bold{357}, eaan2507. \doi{10.1126/science.aan2507}
 }
 
 \seealso{

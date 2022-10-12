@@ -98,9 +98,9 @@ If \code{metrics} is supplied, the samples are sorted in the same order as the m
 }
 
 \references{
-Aßhauer, K. P., Wemheuer, B., Daniel, R. and Meinicke, P. (2015) Tax4Fun: predicting functional profiles from metagenomic 16S rRNA data. \emph{Bioinformatics} \bold{31}, 2882--2884. \doi{10.1093/bioinformatics/btv287}
+Aßhauer KP, Wemheuer B, Daniel R and Meinicke P (2015) Tax4Fun: predicting functional profiles from metagenomic 16S rRNA data. \emph{Bioinformatics} \bold{31}, 2882--2884. \doi{10.1093/bioinformatics/btv287}
 
-Dick, J. M. and Tan, J. (2022) Chemical links between redox conditions and estimated community proteomes from 16S rRNA and reference protein sequences. \emph{Microb. Ecol.} \doi{10.1007/s00248-022-01988-9}
+Dick JM and Tan J (2022) Chemical links between redox conditions and estimated community proteomes from 16S rRNA and reference protein sequences. \emph{Microb. Ecol.} \doi{10.1007/s00248-022-01988-9}
 }
 
 \examples{

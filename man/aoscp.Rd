@@ -80,9 +80,9 @@ If \code{file} is not NULL, then value of \ZC are calculated from the amino acid
 }
 
 \references{
-Dick, J. M. (2014) Average oxidation state of carbon in proteins. \emph{J. R. Soc. Interface} \bold{11}, 20131095. \doi{10.1098/rsif.2013.1095}
+Dick JM (2014) Average oxidation state of carbon in proteins. \emph{J. R. Soc. Interface} \bold{11}, 20131095. \doi{10.1098/rsif.2013.1095}
 
-Almén, M. S., Nordström, K. J. V., Fredriksson, R. and Schiöth, H. B. (2009) Mapping the human membrane proteome: a majority of the human membrane proteins can be classified according to function and evolutionary origin. \emph{BMC Biol.} \bold{7}, 50. \doi{10.1186/1741-7007-7-50}
+Almén MS, Nordström KJV, Fredriksson R and Schiöth HB (2009) Mapping the human membrane proteome: a majority of the human membrane proteins can be classified according to function and evolutionary origin. \emph{BMC Biol.} \bold{7}, 50. \doi{10.1186/1741-7007-7-50}
 }
 
 \examples{

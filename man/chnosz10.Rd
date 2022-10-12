@@ -69,13 +69,13 @@ This table gives a brief description of each function.
 }
 
 \references{
-Caporuscio, F. A., Palaich, S. E. M., Cheshire, M. C. and Jové Colon, C. F. (2017) Corrosion of copper and authigenic sulfide mineral growth in hydrothermal bentonite experiments. \emph{J. Nucl. Mater.} \bold{485}, 137--146. \doi{10.1016/j.jnucmat.2016.12.036}
+Caporuscio FA, Palaich SEM, Cheshire MC and Jové Colon CF (2017) Corrosion of copper and authigenic sulfide mineral growth in hydrothermal bentonite experiments. \emph{J. Nucl. Mater.} \bold{485}, 137--146. \doi{10.1016/j.jnucmat.2016.12.036}
 
-Dick, J. M., Yu, M., Tan, J. and Lu, A. (2019) Changes in carbon oxidation state of metagenomes along geochemical redox gradients. \emph{Front. Microbiol.} \bold{10}, 120. \doi{10.3389/fmicb.2019.00120}
+Dick JM (2019) CHNOSZ: Thermodynamic calculations and diagrams for geochemistry. \emph{Front. Earth Sci.} \bold{7}:180. \doi{10.3389/feart.2019.00180}
 
-Manning, C. E., Shock, E. L. and Sverjensky, D. A. (2013) The chemistry of carbon in aqueous fluids at crustal and upper-mantle conditions: Experimental and theoretical constraints. \emph{Rev. Mineral. Geochem.} \bold{75}, 109--148. \doi{10.2138/rmg.2013.75.5}
+Manning CE, Shock EL and Sverjensky DA (2013) The chemistry of carbon in aqueous fluids at crustal and upper-mantle conditions: Experimental and theoretical constraints. \emph{Rev. Mineral. Geochem.} \bold{75}, 109--148. \doi{10.2138/rmg.2013.75.5}
 
-Sverjensky, D. A., Stagno, V. and Huang, F. (2014) Important role for organic carbon in subduction-zone fluids in the deep carbon cycle. \emph{Nat. Geosci.} \bold{7}, 909--913. \doi{10.1038/ngeo2291}
+Sverjensky DA, Stagno V and Huang F (2014) Important role for organic carbon in subduction-zone fluids in the deep carbon cycle. \emph{Nat. Geosci.} \bold{7}, 909--913. \doi{10.1038/ngeo2291}
 }
 
 \examples{

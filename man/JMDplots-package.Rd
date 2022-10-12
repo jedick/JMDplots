@@ -129,7 +129,7 @@ Dick JM, Yu M and Tan J (2020) Uncovering chemical signatures of salinity gradie
 
 Dick JM (2021) Water as a reactant in the differential expression of proteins in cancer. \emph{Comp. Sys. Onco.} \bold{1}:e1007. \doi{10.1002/cso2.1007}
 
-Dick JM and Shock EL (2021) The release of energy during protein synthesis at ultramafic-hosted submarine hydrothermal ecosystems. \emph{JGR: Biogeosciences} \bold{126}, e2021JG006436. \doi{10.1029/2021JG006436}
+Dick JM and Shock EL (2021) The release of energy during protein synthesis at ultramafic-hosted submarine hydrothermal ecosystems. \emph{J. Geophys. Res.: Biogeosciences} \bold{126}, e2021JG006436. \doi{10.1029/2021JG006436}
 
 Dick JM and Tan J (2022) Chemical links between redox conditions and estimated community proteomes from 16S rRNA and reference protein sequences. \emph{Microb. Ecol.} \doi{10.1007/s00248-022-01988-9}
 

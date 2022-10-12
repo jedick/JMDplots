@@ -73,15 +73,15 @@ The output is saved in files named \file{H2_intermediate_*.csv} (see description
 }
 
 \references{
-Delcher, A. L., Harmon, D., Kasif, S., White, O. and Salzberg, S. L. (1999) Improved microbial gene identification with Glimmer. \emph{Nucleic Acids Res.} \bold{27}, 4636--4641. \doi{10.1093/nar/27.23.4636}
+Delcher AL, Harmon D, Kasif S, White O and Salzberg SL (1999) Improved microbial gene identification with Glimmer. \emph{Nucleic Acids Res.} \bold{27}, 4636--4641. \doi{10.1093/nar/27.23.4636}
 
-Dick, J. M., Boyer, G. M., Canovas, P. A. III and Shock, E. L. (2022) Using thermodynamics to obtain geochemical information from genomes. Manuscript in preparation.
+Dick JM, Boyer GM, Canovas PA III and Shock EL (2022) Using thermodynamics to obtain geochemical information from genomes. Manuscript in preparation.
 
-Lovley, D. R. and Goodwin, S. (1988) Hydrogen concentrations as an indicator of the predominant terminal electron-accepting reactions in aquatic sediments. \emph{Geochim. Cosmochim. Acta} \bold{52}, 2993--3003. \doi{10.1016/0016-7037(88)90163-9}
+Lovley DR and Goodwin S (1988) Hydrogen concentrations as an indicator of the predominant terminal electron-accepting reactions in aquatic sediments. \emph{Geochim. Cosmochim. Acta} \bold{52}, 2993--3003. \doi{10.1016/0016-7037(88)90163-9}
 
-Lyu, Z. and Lu, Y. (2018) Metabolic shift at the class level sheds light on adaptation of methanogens to oxidative environments. \emph{ISME J.} \bold{12}, 411--423. \doi{10.1038/ismej.2017.173}
+Lyu Z and Lu Y (2018) Metabolic shift at the class level sheds light on adaptation of methanogens to oxidative environments. \emph{ISME J.} \bold{12}, 411--423. \doi{10.1038/ismej.2017.173}
 
-Ren, M., Feng, X., ..., and Luo, H. (2019) Phylogenomics suggests oxygen availability as a driving force in Thaumarchaeota evolution. \emph{ISME J.} \bold{13}, 2150--2161. \doi{10.1038/s41396-019-0418-8}
+Ren M, Feng X et al. (2019) Phylogenomics suggests oxygen availability as a driving force in Thaumarchaeota evolution. \emph{ISME J.} \bold{13}, 2150--2161. \doi{10.1038/s41396-019-0418-8}
 }
 
 \examples{

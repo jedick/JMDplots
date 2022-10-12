@@ -61,13 +61,13 @@ This table gives a brief description of each function.
 }
 
 \references{
-Dick, J. M., Yu, M., Tan, J. and Lu, A. (2019) Changes in carbon oxidation state of metagenomes along geochemical redox gradients. \emph{Front. Microbiol.} \bold{10}, 120. \doi{10.3389/fmicb.2019.00120}
+Dick JM, Yu M, Tan J and Lu A (2019) Changes in carbon oxidation state of metagenomes along geochemical redox gradients. \emph{Front. Microbiol.} \bold{10}, 120. \doi{10.3389/fmicb.2019.00120}
 
-Nakamura, Y., Gojobori, T. and Ikemura, T. (2000) Codon usage tabulated from international DNA sequence databases: status for the year 2000. \emph{Nucleic Acids Res.} \bold{28}, 292. \doi{10.1093/nar/28.1.292}
+Nakamura Y, Gojobori T and Ikemura T (2000) Codon usage tabulated from international DNA sequence databases: status for the year 2000. \emph{Nucleic Acids Res.} \bold{28}, 292. \doi{10.1093/nar/28.1.292}
 
-Rho, M., Tang, H. and Ye, Y. (2010) FragGeneScan: predicting genes in short and error-prone reads. \emph{Nucleic Acids Res.} \bold{38}, e191. \doi{10.1093/nar/gkq747}
+Rho M, Tang H and Ye Y (2010) FragGeneScan: predicting genes in short and error-prone reads. \emph{Nucleic Acids Res.} \bold{38}, e191. \doi{10.1093/nar/gkq747}
 
-Wood, D. E. and Salzberg, S. L. (2014) Kraken: ultrafast metagenomic sequence classification using exact alignments. \emph{Genome Biol.} \bold{15}, R46. \doi{10.1186/gb-2014-15-3-r46}
+Wood DE and Salzberg SL (2014) Kraken: ultrafast metagenomic sequence classification using exact alignments. \emph{Genome Biol.} \bold{15}, R46. \doi{10.1186/gb-2014-15-3-r46}
 }
 
 \examples{

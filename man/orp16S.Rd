@@ -120,11 +120,11 @@ The function also returns information in a data frame, which is used to fill in 
 }
 
 \references{
-Baas Becking, L. G. M., Kaplan, I. R. and Moore, D. (1960) Limits of the natural environment in terms of pH and oxidation-reduction potentials. \emph{Journal of Geology} \bold{68}, 243--284. \url{https://www.jstor.org/stable/30059218}
+Baas Becking LGM, Kaplan IR and Moore D (1960) Limits of the natural environment in terms of pH and oxidation-reduction potentials. \emph{Journal of Geology} \bold{68}, 243--284. \url{https://www.jstor.org/stable/30059218}
 
-Dick, J. M. and Meng, D. (2021) Local and global chemical shaping of bacterial communities by redox potential. bioRxiv. \doi{10.1101/2021.10.12.464155}
+Dick JM and Meng D (2021) Local and global chemical shaping of bacterial communities by redox potential. bioRxiv. \doi{10.1101/2021.10.12.464155}
 
-Han, Y., Wang, Q., Li, Q. and Hu, C. (2022) Active metabolism and biomass dynamics of biocrusts are shaped by variation in their successional state and seasonal energy sources. \emph{Science of the Total Environment} \bold{831}, 154756. \doi{10.1016/j.scitotenv.2022.154756}
+Han Y, Wang Q, Li Q and Hu C (2022) Active metabolism and biomass dynamics of biocrusts are shaped by variation in their successional state and seasonal energy sources. \emph{Science of the Total Environment} \bold{831}, 154756. \doi{10.1016/j.scitotenv.2022.154756}
 
 USGS (2010) Great Lakes and Watersheds Shapefiles. ScienceBase Catalog, U.S. Geological Survey. \doi{https://www.sciencebase.gov/catalog/item/530f8a0ee4b0e7e46bd300dd}
 }
