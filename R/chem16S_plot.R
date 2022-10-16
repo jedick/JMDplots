@@ -35,7 +35,7 @@ taxacomp <- function(groups = c("Bacteria", "Archaea"), xlim = NULL, ylim = NULL
 
   # Read chemical metrics of all taxa
   datadir <- system.file("extdata/RefSeq", package = "chem16S")
-  metrics <- read.csv(file.path(datadir, "taxon_metrics.csv"), as.is = TRUE)
+  metrics <- read.csv(file.path(datadir, "taxon_metrics.csv.xz"), as.is = TRUE)
   # Default point symbols
   taxa <- groups
   if(is.null(pch)) pch <- rep(21, length(taxa))

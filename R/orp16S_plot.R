@@ -211,7 +211,7 @@ plotMA <- function(study, lineage = NULL, mincount = 100, pch = NULL, col = NULL
   MAMTperc <- formatC(taxoncounts[iMAMT] / sum(taxoncounts) * 100, format = "f", digits = 1)
   # Get ZC of the MAMT
   datadir <- system.file("extdata/RefSeq", package = "chem16S")
-  taxon_metrics <- read.csv(file.path(datadir, "taxon_metrics.csv"), as.is = TRUE)
+  taxon_metrics <- read.csv(file.path(datadir, "taxon_metrics.csv.xz"), as.is = TRUE)
   MAMTZC <- taxon_metrics$ZC[map[iMAMT]]
 
   # Assign pch and col to sample groups

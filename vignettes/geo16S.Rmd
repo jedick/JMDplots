@@ -86,7 +86,7 @@ Table_S5 <- geo16S1()
 
 ```{r taxon_metrics}
 datadir <- system.file("extdata/RefSeq", package = "chem16S")
-taxon_metrics <- read.csv(file.path(datadir, "taxon_metrics.csv"), as.is = TRUE)
+taxon_metrics <- read.csv(file.path(datadir, "taxon_metrics.csv.xz"), as.is = TRUE)
 subset(taxon_metrics, group %in% c("Halanaerobium", "Thermoanaerobacter"))
 ```
 

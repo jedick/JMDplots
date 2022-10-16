@@ -1095,7 +1095,7 @@ geo16S_S1 <- function(pdf = FALSE) {
 
   text(5, 10, "Amino Acid Compositions\nfor Taxonomic Groups\n(Reference Proteomes)", adj = c(0, 1), font = 2)
   # Read file with precomputed metrics for taxa at different ranks
-  metrics <- read.csv(system.file("extdata/RefSeq/taxon_metrics.csv", package = "chem16S"))
+  metrics <- read.csv(system.file("extdata/RefSeq/taxon_metrics.csv.xz", package = "chem16S"))
   ranks <- c("superkingdom", "phylum", "class", "order", "family", "genus")
   plural <- c("superkingdoms (*)", "phyla", "classes", "orders", "families", "genera")
   for(irank in 1:6) {
@@ -1127,7 +1127,7 @@ geo16S_S2 <- function(pdf = FALSE) {
   if(pdf) pdf("geo16S_S2.pdf", width = 12, height = 6)
 
   # Read file with precomputed metrics for taxa at different ranks
-  metrics <- read.csv(system.file("extdata/RefSeq/taxon_metrics.csv", package = "chem16S"))
+  metrics <- read.csv(system.file("extdata/RefSeq/taxon_metrics.csv.xz", package = "chem16S"))
   # Get tables of all taxonomic names and amino acid compositions
   names <- read.csv(system.file("extdata/RefSeq/taxid_names.csv.xz", package = "JMDplots"))
   # Take out viruses
@@ -1225,7 +1225,7 @@ geo16S_S3 <- function(pdf = FALSE) {
   xlim <- c(-0.3, 0)
   ylim <- c(-0.85, -0.65)
 
-  metrics <- read.csv(system.file("extdata/RefSeq/taxon_metrics.csv", package = "chem16S"))
+  metrics <- read.csv(system.file("extdata/RefSeq/taxon_metrics.csv.xz", package = "chem16S"))
   names <- read.csv(system.file("extdata/RefSeq/taxid_names.csv.xz", package = "JMDplots"))
   # Only keep taxa with non-NA genus and phylum
   names <- names[!(is.na(names$genus) | is.na(names$phylum)), ]

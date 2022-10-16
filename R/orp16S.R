@@ -1479,7 +1479,7 @@ orp16S_D3 <- function(mincount = 100) {
   EZlm <- read.csv(system.file("extdata/orp16S/EZlm.csv", package = "JMDplots"))
 
   # Get amino acid compositions of taxa compiled from RefSeq sequences
-  AAfile <- system.file("extdata/RefSeq/taxon_AA.csv", package = "chem16S")
+  AAfile <- system.file("extdata/RefSeq/taxon_AA.csv.xz", package = "chem16S")
   taxon_AA <- read.csv(AAfile, as.is = TRUE)
   # Calculate ZC for all taxa
   ZC <- ZCAA(taxon_AA)
