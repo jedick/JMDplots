@@ -210,7 +210,7 @@ plotMA <- function(study, lineage = NULL, mincount = 100, pch = NULL, col = NULL
   MAMTname <- paste(RDP$rank[iMAMT], RDP$name[iMAMT], sep = "_")
   MAMTperc <- formatC(taxoncounts[iMAMT] / sum(taxoncounts) * 100, format = "f", digits = 1)
   # Get ZC of the MAMT
-  datadir <- system.file("extdata/chem16S", package = "chem16S")
+  datadir <- system.file("extdata/RefSeq", package = "chem16S")
   taxon_metrics <- read.csv(file.path(datadir, "taxon_metrics.csv"), as.is = TRUE)
   MAMTZC <- taxon_metrics$ZC[map[iMAMT]]
 

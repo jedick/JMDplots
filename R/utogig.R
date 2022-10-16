@@ -72,7 +72,7 @@ mcol[iII] <- col4
 ## To make methanogen_AA.csv
 ## Read RefSeq amino acid compositions
 ## NOTE: taxids are in 'organism' column, species names are in 'ref' column
-#refseq <- read.csv(system.file("extdata/refseq/protein_refseq.csv.xz", package = "chem16S"), as.is = TRUE)
+#refseq <- read.csv(system.file("extdata/RefSeq/protein_refseq.csv.xz", package = "chem16S"), as.is = TRUE)
 #irefseq <- match(methanogens, refseq$ref)
 ## Amino acid compositions of reference proteomes of methanogens
 #methanogen_AA <- refseq[irefseq, ]
