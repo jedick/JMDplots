@@ -93,7 +93,7 @@ subset(taxon_metrics, group %in% c("Halanaerobium", "Thermoanaerobacter"))
 `r ZC` for reference proteomes of *Halanaerobium* species (numeric names are NCBI taxids):
 
 ```{r Halanaerobium_ZC}
-datadir <- system.file("extdata/RefSeq", package = "chem16S")
+datadir <- system.file("extdata/RefSeq", package = "JMDplots")
 refseq <- read.csv(file.path(datadir, "protein_refseq.csv.xz"))
 ZC.refseq <- ZCAA(refseq)
 names(ZC.refseq) <- refseq$organism

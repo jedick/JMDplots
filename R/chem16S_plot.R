@@ -13,8 +13,8 @@
 # super-sequenced species (biased to high ZC/low nH2O) 20210604
 getrefseq <- function(filterspecies = TRUE) {
   # Read RefSeq amino acid compositions and taxid names
-  refseq <- read.csv(system.file("extdata/RefSeq/protein_refseq.csv.xz", package = "chem16S"), as.is = TRUE)
-  taxa <- read.csv(system.file("extdata/RefSeq/taxid_names.csv.xz", package = "chem16S"), as.is = TRUE)
+  refseq <- read.csv(system.file("extdata/RefSeq/protein_refseq.csv.xz", package = "JMDplots"), as.is = TRUE)
+  taxa <- read.csv(system.file("extdata/RefSeq/taxid_names.csv.xz", package = "JMDplots"), as.is = TRUE)
   if(filterspecies) {
     # Take out species with > 20000 sequences
     ispecies <- !is.na(taxa$species)
@@ -72,7 +72,7 @@ taxacomp <- function(groups = c("Bacteria", "Archaea"), xlim = NULL, ylim = NULL
 
   # Proteobacteria 20200925
   # How to count the representatives in each proteobacterial class:
-  #> taxa <- read.csv(system.file("extdata/RefSeq/taxid_names.csv.xz", package = "chem16S"), as.is = TRUE)
+  #> taxa <- read.csv(system.file("extdata/RefSeq/taxid_names.csv.xz", package = "JMDplots"), as.is = TRUE)
   #> sort(table(na.omit(taxa$class[taxa$phylum == "Proteobacteria"])), decreasing = TRUE)
   #
   #  Gammaproteobacteria   Alphaproteobacteria    Betaproteobacteria 

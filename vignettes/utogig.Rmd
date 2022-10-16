@@ -86,19 +86,19 @@ utogig3()
 
 **Data sources:** Lost City *T* and H~2~ concentration [@KKF+05], Rainbow vent fluid mixing model [@SC10], methanogenic and non-methanogenic sediments [@LG88].
 
-## Chemical and thermodynamic analysis of evolutionary divergence along redox gradients (Figure 4 and Table S6)
+## Chemical and thermodynamic analysis of evolutionary divergence along redox gradients (Figure 4)
 ```{r utogig4, message = FALSE, out.width='100%', fig.width = 9, fig.height = 5, out.extra = 'class="full-width"', dpi = 100}
-Ptab <- utogig4()
+Table_S6 <- utogig4()
 ```
+
+**Data sources:** Methanogens [@LL18], Nif-bearing organisms [@PCF+18], Thaumarchaeota [@RFH+19]. Amino acid compositions are from RefSeq proteomes (methanogens and Nif-bearing organisms) or NCBI and IMG genomes (Thaumarchaeota).
 
 ## Parametric and non-parametric tests of comparisons in Figure 4 (Table S6)
 - **p_Tukey**: One-way ANOVA followed by Tukey's Honest Significant Difference test.
 - **p_Dunn**: Kruskal-Wallis test followed by Dunn's test with Bonferroni correction for multiple comparisons.
-```{r Ptab, message = FALSE, out.width='100%', fig.width = 9, fig.height = 5, out.extra = 'class="full-width"', dpi = 100}
-kable(Ptab, row.names = FALSE, digits = 99, format.args = list(scientific = TRUE))
+```{r Table_S6, message = FALSE, out.width='100%', fig.width = 9, fig.height = 5, out.extra = 'class="full-width"', dpi = 100}
+kable(Table_S6, row.names = FALSE, digits = 99, format.args = list(scientific = TRUE))
 ```
-
-**Data sources:** Methanogens [@LL18], Nif-bearing organisms [@PCF+18], Thaumarchaeota [@RFH+19]. Amino acid compositions are from RefSeq proteomes (methanogens and Nif-bearing organisms) or NCBI and IMG genomes (Thaumarchaeota).
 
 ## Comparison of `r ZC` of proteomes predicted by Glimmer and downloaded from NCBI (Figure S1)
 ```{r utogigS1, out.width='60%', fig.align='center', fig.width = 4, fig.height = 4, pngquant = pngquant}

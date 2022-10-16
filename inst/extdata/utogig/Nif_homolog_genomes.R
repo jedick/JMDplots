@@ -8,15 +8,14 @@
 
 # Modifications for 2022 utogig paper (made after publication of 2020 gradH2O paper):
 # 20210527 Updated Nif_homolog_genomes.csv for RefSeq release 206
-# 20220531 Updated this script to read protein_refseq.csv.xz from the chem16S package
 # 20220629 Moved this script to extdata/utogig, but we still read ../gradH2O/PCF+18_SuppTable1A.csv
 
 # Read the organism names
 org <- read.csv("../gradH2O/PCF+18_SuppTable1A.csv", as.is = TRUE)
 
 # Read RefSeq amino acid compositions and taxon names
-refseq <- read.csv(system.file("extdata/RefSeq/protein_refseq.csv.xz", package = "chem16S"), as.is = TRUE)
-taxa <- read.csv(system.file("extdata/RefSeq/taxid_names.csv.xz", package = "chem16S"), as.is = TRUE)
+refseq <- read.csv(system.file("extdata/RefSeq/protein_refseq.csv.xz", package = "JMDplots"), as.is = TRUE)
+taxa <- read.csv(system.file("extdata/RefSeq/taxid_names.csv.xz", package = "JMDplots"), as.is = TRUE)
 # Make sure the data tables have consistent taxids
 stopifnot(all(refseq$organism == taxa$taxid))
 # Keep taxids classified at species level 20220104

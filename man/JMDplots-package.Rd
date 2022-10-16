@@ -100,6 +100,11 @@ Please refer to the supporting information of the papers for the original script
       These data have been superseded in the default OBIGT database in CHNOSZ and are kept here in order to reproduce calculations from some papers (\code{\link{aaaq}}, \code{\link{scsc}}, and \code{\link{bison}}).
     }
 
+    \item{\code{RefSeq}}{
+      This directory has two files, \file{protein_refseq.csv.xz} (amino acid compositions of species-level archaeal, bacterial, and viral taxa in the RefSeq database) and \file{taxid_names.csv.xz} (taxonomic names for each of those species).
+      The scripts to produce these files, and further processed data files, are in the \code{extdata/RefSeq} directory of \pkg{chem16S} (see \code{\link[chem16S]{chem16S-package}}).
+    }
+
   }
 
 }

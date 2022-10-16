@@ -1129,7 +1129,7 @@ geo16S_S2 <- function(pdf = FALSE) {
   # Read file with precomputed metrics for taxa at different ranks
   metrics <- read.csv(system.file("extdata/RefSeq/taxon_metrics.csv", package = "chem16S"))
   # Get tables of all taxonomic names and amino acid compositions
-  names <- read.csv(system.file("extdata/RefSeq/taxid_names.csv.xz", package = "chem16S"))
+  names <- read.csv(system.file("extdata/RefSeq/taxid_names.csv.xz", package = "JMDplots"))
   # Take out viruses
   ivirus <- names$superkingdom == "Viruses"
   ivirus[is.na(ivirus)] <- TRUE
@@ -1226,7 +1226,7 @@ geo16S_S3 <- function(pdf = FALSE) {
   ylim <- c(-0.85, -0.65)
 
   metrics <- read.csv(system.file("extdata/RefSeq/taxon_metrics.csv", package = "chem16S"))
-  names <- read.csv(system.file("extdata/RefSeq/taxid_names.csv.xz", package = "chem16S"))
+  names <- read.csv(system.file("extdata/RefSeq/taxid_names.csv.xz", package = "JMDplots"))
   # Only keep taxa with non-NA genus and phylum
   names <- names[!(is.na(names$genus) | is.na(names$phylum)), ]
 
@@ -1289,7 +1289,7 @@ geo16S_S4 <- function(pdf = FALSE) {
   SILVAphyla <- readLines(file.path(datadir, "SILVAphyla.txt"))
   SILVAgenera <- readLines(file.path(datadir, "SILVAgenera.txt"))
   # Read NCBI names
-  NCBI <- read.csv(system.file("extdata/RefSeq/taxid_names.csv.xz", package = "chem16S"))
+  NCBI <- read.csv(system.file("extdata/RefSeq/taxid_names.csv.xz", package = "JMDplots"))
   NCBIphyla <- unique(na.omit(NCBI$phylum))
   NCBIgenera <- unique(na.omit(NCBI$genus))
 
