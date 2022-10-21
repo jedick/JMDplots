@@ -3,7 +3,7 @@
 # Group studies by environment types 20210828
 envirotype <- list(
   "River & Seawater" = c("MLL+18", "HXZ+20", "GSBT20_Prefilter", "GSBT20_Postfilter", "WHL+21", "ZLH+22", "ZZL+21", "LWJ+21", "GZL21", "RARG22"),
-  "Lake & Pond" = c("SAR+13", "LLC+19", "BCA+21", "HLZ+18", "BWD+19", "IBK+22", "NLE+21", "SPA+21"),
+  "Lake & Pond" = c("SAR+13", "LLC+19", "BCA+21", "HLZ+18", "BWD+19", "IBK+22", "NLE+21", "MTC21", "SPA+21"),
   "Groundwater" = c("KLM+16", "WLJ+16", "ZDW+19", "DJK+18", "SRM+19", "APV+20", "YHK+20", "ZCZ+21", "MGW+22", "MCR+22"),
   # NOTE: Keep Geothermal in 4th location to get red color 20210904
   "Geothermal" = c("PCL+18_Acidic", "PCL+18_Alkaline", "GWS+20", "PBU+20", "MWY+21"),
@@ -193,6 +193,7 @@ orp16S3 <- function(pdf = FALSE) {
     "BWD+19, 47.120571, -88.545425", # SAMN09980099
     "IBK+22, 53.1516, 13.0262", # SAMN15366194
     "NLE+21, 32.833, 35.583", # SAMEA7280991
+    "MTC21, 41.396, -0.058", # SAMN10716683
     "SPA+21, 45.8126, 8.7401", # SAMN17524543
     ## Geothermal (Hot Spring)
     "PCL+18_Acidic, -38.5, 176.0", # Fig. 1
@@ -527,7 +528,7 @@ orp16S6 <- function(pdf = FALSE, EMP_primers = FALSE) {
   if(EMP_primers) {
     uses_EMP_primers <- c(
       "MLL+18", "LWJ+21", "RARG22",                           # River & Seawater
-                                                              # Lake & Pond
+      "MTC21",                                                # Lake & Pond
       "PCL+18_Acidic", "PCL+18_Alkaline", "GWS+20", "MWY+21", # Geothermal
       "SBP+20", "RMB+17", "PSB+21",                           # Hyperalkaline
       "WLJ+16", "ZDW+19", "DJK+18", "APV+20", "MGW+22",       # Groundwater
@@ -578,7 +579,7 @@ orp16S6 <- function(pdf = FALSE, EMP_primers = FALSE) {
   plot(c(-500, 650), range(EZdat$ZC), type = "n", xlab = "Eh7 (mV)", ylab = cplab$ZC)
   thisdat <- EZdat[EZdat$lineage == "Archaea", ]
   nstudy <- length(unique(thisdat$study))
-  add.linear.global(thisdat$Eh7, thisdat$ZC, nstudy)
+  add.linear.global(thisdat$Eh7, thisdat$ZC, nstudy, inset = c(0, 0.05))
   eachenv(thisdat, add = TRUE, do.linear = FALSE)
   title("Archaea", font.main = 1, line = 0.5, xpd = NA)
 
@@ -690,6 +691,7 @@ orp16S_S1 <- function(pdf = FALSE) {
     plotEZ("BWD+19", "Bacteria", groupby = "Cover", groups = c("Ice", "Ice Free"), legend.x = "bottomright"),
     plotEZ("IBK+22", "two", groupby = "Land Use", groups = c("Arable", "Forest", "Grassland")),
     plotEZ("NLE+21", "Bacteria", groupby = "Year", groups = c("2017", "2018"), legend.x = "bottomleft"),
+    plotEZ("MTC21", "two", groupby = "Year", groups = c(2012, 2013, 2014)),
     plotEZ("SPA+21", "Bacteria", groupby = "Depth", groups = c("Epi", "Secchi", "Meso"), legend.x = "bottomleft"),
 
     message("\nGeothermal"),
@@ -914,8 +916,8 @@ orp16S_S2 <- function(global.slopes, pdf = FALSE) {
   # Label points
   envtxt <- envirotypes
   envtxt[envtxt == "Groundwater"] <- "Ground-\nwater"
-  dx <- c(0.02, 0.0185, -0.0025, 0, 0.019, 0.014, -0.007)
-  dy <- c(-0.005, -0.002, 0.006, -0.004, 0, 0, 0)
+  dx <- c(0.023, 0.017, -0.0025, 0, 0.019, 0.01, -0.007)
+  dy <- c(0.0015, 0.0005, 0.006, -0.004, 0, -0.0028, -0.0005)
   text(local.slopes + dx, global.slopes$Bacteria + dy, envtxt, cex = 0.85)
   label.figure("b", font = 2, cex = 2, xfrac = 0.02)
   if(pdf) dev.off()
@@ -928,7 +930,7 @@ orp16S_S2 <- function(global.slopes, pdf = FALSE) {
 ############################
 
 # Calculate and plot linear regression and return coefficients 20210920
-add.linear.global <- function(xvals, ZC, nstudy = NA, xvar = "Eh7", N_slope.legend.x = "topright", N_slope.legend.inset = 0) {
+add.linear.global <- function(xvals, ZC, nstudy = NA, xvar = "Eh7", legend.x = "topright", inset = 0) {
   text.col <- "black"
   line.col <- "gray62"
   # Use lighter colors for environments with few datasets 20210925
@@ -950,7 +952,7 @@ add.linear.global <- function(xvals, ZC, nstudy = NA, xvar = "Eh7", N_slope.lege
 
   # Add legend with number of samples
   Ntext <- bquote(italic(N) == .(length(ZC)))
-  legend(N_slope.legend.x, legend = Ntext, bty = "n", text.col = text.col, inset = N_slope.legend.inset)
+  legend(legend.x, legend = Ntext, bty = "n", text.col = text.col, inset = inset)
 
   # Get the slope
   slope <- thislm$coefficients[2]
@@ -969,7 +971,7 @@ add.linear.global <- function(xvals, ZC, nstudy = NA, xvar = "Eh7", N_slope.lege
   if(xvar == "O2") slopeleg <- bquote(italic(m) == .(slopetxt) %+-% .(MOE95txt) ~ L~mmol^-1)
   # Add text to plot
   legend <- as.expression(c("", slopeleg))
-  legend(N_slope.legend.x, legend = legend, bty = "n", text.col = text.col, inset = N_slope.legend.inset)
+  legend(legend.x, legend = legend, bty = "n", text.col = text.col, inset = inset)
 
   # Calculate Pearson correlation 20211009
   pearson <- cor.test(xvals, ZC, method = "pearson")
@@ -1057,7 +1059,10 @@ eachenv <- function(eedat, add = FALSE, do.linear = TRUE, ienv = c(1, 2, 4, 5, 3
     if(do.linear) {
       # Include number of studies in legend 20210925
       nstudy <- length(unique(thisdat$study))
-      if(nrow(thisdat) > 0) slopes[[i]] <- add.linear.global(xvals, ZC, nstudy)
+      # Adjust legend position for Archaea in Lake & Pond (high ZC in hypersaline lakes) 20221021
+      inset <- c(0, 0)
+      if(lineage == "Archaea" & envirotypes[i] == "Lake & Pond") inset <- c(0, 0.05)
+      if(nrow(thisdat) > 0) slopes[[i]] <- add.linear.global(xvals, ZC, nstudy, inset = inset)
     }
     if(!isTRUE(add)) {
       # Add plot axes and title
@@ -1162,7 +1167,7 @@ getmdat_orp16S <- function(study, metrics = NULL, dropNA = TRUE, size = NULL, qu
     "BMOB18", "LJC+20", "DLS21",  "ZZLL21", "GWS+20", "CLS+19", "GZL21",  "LLC+19", "NLE+21", "APV+20",
     "WHLH21", "PCL+18", "GSBT20", "SPA+21", "IBK+22", "HSF+22", "HCW+22", "WKP+22", "CKB+22", "WHLH21a",
     "RSS+18", "PSB+21", "RKSK22", "WLJ+16", "DJK+18", "OHL+18", "ZLH+22", "LWJ+21", "MGW+22", "RKN+17",
-    "ZDW+19", "WKG+22", "CLZ+22", "RARG22", "MCR+22"
+    "ZDW+19", "WKG+22", "CLZ+22", "RARG22", "MCR+22", "MTC21"
   )) {
     # General processing of metadata for orp16S datasets 20210820
     # Get Eh or ORP values (uses partial name matching, can match a column named "Eh (mV)")
@@ -1475,15 +1480,13 @@ orp16S_S3 <- function(pdf = FALSE) {
 # Find the most abundant genera at high and low Eh7 20221006
 orp16S_D3 <- function(mincount = 100) {
 
-  # Use EZlm as a template for our output
-  EZlm <- read.csv(system.file("extdata/orp16S/EZlm.csv", package = "JMDplots"))
-
   # Get amino acid compositions of taxa compiled from RefSeq sequences
   AAfile <- system.file("extdata/RefSeq/taxon_AA.csv.xz", package = "chem16S")
   taxon_AA <- read.csv(AAfile, as.is = TRUE)
   # Calculate ZC for all taxa
   ZC <- ZCAA(taxon_AA)
 
+  # Use EZlm as a template for our output
   out <- lapply(1:nrow(EZlm), function(i) {
 
     study <- EZlm$study[i]

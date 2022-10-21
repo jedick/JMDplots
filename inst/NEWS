@@ -1,3 +1,10 @@
+CHANGES IN JMDplots 1.2.16
+--------------------------
+
+- 20221025 Revise plots for orp16S paper.
+
+- 20221016 Move RefSeq taxonomy and species-level compositions here from chem16S package.
+
 CHANGES IN JMDplots 1.2.15
 --------------------------
 
