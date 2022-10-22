@@ -34,7 +34,7 @@ Plots from the paper by Dick and Meng (2021).
   orp16S_S1(pdf = FALSE)
   orp16S_S2(global.slopes, pdf = FALSE)
   orp16S_S3(pdf = FALSE)
-  orp16S_T2()
+  orp16S_T2(samesign = FALSE)
   orp16S_D3(mincount = 100)
   getmdat_orp16S(study, metrics = NULL, dropNA = TRUE, size = NULL, quiet = TRUE)
   getmetrics_orp16S(study, mincount = 100, quiet = TRUE, ...)
@@ -45,6 +45,7 @@ Plots from the paper by Dick and Meng (2021).
   \item{pdf}{logical, make a PDF file?}
   \item{EMP_primers}{logical, include only datasets using Earth Microbime Project primers (515F/806R)?}
   \item{global.slopes}{value returned by \code{orp16S5}}
+  \item{samesign}{logical, only count slopes with same sign of minimum and maximum values in the 95\% CI?}
   \item{mincount}{integer, samples with less than this number of RDP classifications are excluded}
   \item{study}{character, study name}
   \item{metrics}{data frame, output of \code{\link[chem16S]{getmetrics}}}
@@ -76,6 +77,7 @@ This table gives a brief description of each plotting function.
 \file{EZlm.csv} has regression results for each dataset and domain: study key, environment type, lineage, number of samples, Eh7 range, slope (V\S{-1}) and intercept (\ZC) of of linear regression, and Pearson correlation coefficient.
 
 \code{orp16S_T2} returns a table summarizing regression slopes for all datasets (based on \file{EZlm.csv}), corresponding to Table 2 in the paper.
+\code{orp16S_T2(samesign = TRUE)} generates the values listed in Table S3 in the paper.
 \code{orp16S_D3} creates a file with percent of RDP classifications to genus level mapped to the NCBI taxonomy, and genus names and \code{ZC} for the groups of samples corresponding to the first and fourth quartile of Eh7 values (i.e., reducing and oxidizing conditions), corresponding to Dataset S3 in the paper.
 
 \code{getmdat_orp16S} gets metadata for the indicated \code{study}, calculates Eh7 from Eh and pH and T (if available), classifies samples into 3 clusters according to their Eh values, and adds columns for plot parameters (\samp{pch}, \samp{col}).

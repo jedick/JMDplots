@@ -1395,7 +1395,7 @@ orp16S_info <- function(study) {
 }
 
 # Table of regression slopes (positive/negative) and p-values 20220516
-orp16S_T2 <- function() {
+orp16S_T2 <- function(samesign = FALSE) {
   # All environment types
   envirotype <- unique(EZlm$envirotype)
   # Loop over Bacteria and Archaea
@@ -1406,6 +1406,8 @@ orp16S_T2 <- function() {
     for(ienv in 1:length(envirotype)) {
       # Get regression results
       thisdat <- EZlm[EZlm$lineage == lineage & EZlm$envirotype == envirotype[ienv], ]
+      # Filter to keep only datasets with same sign of minimum and maximum slope within 95% CI 20221022
+      if(samesign) thisdat <- thisdat[sign(thisdat$slope + thisdat$MOE95) == sign(thisdat$slope - thisdat$MOE95), ]
       # Number of datasets and numbers with positive and negative slopes
       ndat <- nrow(thisdat)
       npos <- sum(thisdat$slope > 0)
@@ -1418,7 +1420,7 @@ orp16S_T2 <- function() {
     # Add a row for totals
     out <- rbind(out, colSums(out))
     # Calculate binomial probabilities
-    for(i in 1:nrow(out)) out[i, 4] <- binom.test(out[i, 2], out[i, 1], p = 0.5, alternative = "greater")$p.value
+    for(i in 1:nrow(out)) if(out[i, 1] != 0) out[i, 4] <- binom.test(out[i, 2], out[i, 1], p = 0.5, alternative = "greater")$p.value
     out[1:length(envirotype), 4] <- round(out[1:length(envirotype), 4], 3)
     out[nrow(out), 4] <- round(out[nrow(out), 4], 5)
     out
