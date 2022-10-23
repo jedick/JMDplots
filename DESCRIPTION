@@ -1,6 +1,6 @@
-Date: 2022-10-22
+Date: 2022-10-23
 Package: JMDplots
-Version: 1.2.15-5
+Version: 1.2.15-6
 Title: Plots from Papers by Jeffrey M. Dick
 Authors@R: c(
     person("Jeffrey", "Dick", , "jeff@chnosz.net", role = c("aut", "cre"),
