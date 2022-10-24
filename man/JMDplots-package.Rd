@@ -17,7 +17,7 @@ Please refer to the supporting information of the papers for the original script
 \details{
   \itemize{
     \item \code{\link{utogig}} - Using thermodynamics to obtain geochemical information from genomes (Dick et al., 2022)
-    \item \code{\link{orp16S}} - Chemical adaptation of estimated bacterial community proteomes to redox potential (Dick and Meng, 2021)
+    \item \code{\link{orp16S}} - Chemical adaptation of reference proteomes for bacterial communities (Dick and Meng, 2021)
     \item \code{\link{geo16S}} - Chemical links between redox conditions and estimated community proteomes (Dick and Tan, 2022)
     \item \code{\link{evdevH2O}} - Thermodynamic model for water activity and redox potential in evolution and development (Dick, 2022)
     \item \code{\link{mjenergy}} - Energy release in protein synthesis (Dick and Shock, 2021)

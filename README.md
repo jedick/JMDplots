@@ -2,7 +2,7 @@
 
 # JMDplots
 
-This R package has code and data for plots from papers by [Jeffrey M. Dick](https://chnosz.net/jeff/).
+This R package has code and data for papers by [Jeffrey M. Dick](https://chnosz.net/jeff/).
 
 ## Quick links to active papers (pre-publication drafts)
 
@@ -49,6 +49,9 @@ If you want to build the vignettes yourself, be aware that it may be possible to
 ```R
 remotes::install_github("jedick/JMDplots", build_vignettes = TRUE)
 ```
+
+NOTE (2022-10-24): The development version of CHNOSZ is required for the affinity ranking calculations in the `utogig.Rmd` vignette.
+To install the development version, use `install.packages("CHNOSZ", repos = "https://R-Forge.R-project.org")` or `remotes::install_github("jedick/CHNOSZ")`.
 
 ## Online vignettes
 

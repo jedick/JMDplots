@@ -1,3 +1,4 @@
+# JMDplots/orp16S.R
 # Plots for paper on ZC-ORP correlations 20210827
 
 # Group studies by environment types 20210828
@@ -1109,7 +1110,7 @@ orp16S_info <- function(study) {
 }
 
 # Table of regression slopes (positive/negative) and p-values 20220516
-orp16S_T1 <- function(samesign = FALSE) {
+orp16S_T2 <- function(samesign = FALSE) {
   # All environment types
   envirotype <- unique(EZlm$envirotype)
   # Loop over Bacteria and Archaea
@@ -1558,7 +1559,7 @@ add.linear.global <- function(xvals, ZC, nstudy = NA, xvar = "Eh7", legend.x = "
   MOE95txt <- formatC(MOE95, digits = 3, format = "f")
   # Units for Eh7/Eh/O2
   if(xvar %in% c("Eh7", "Eh")) slopeleg <- bquote(italic(m) == .(slopetxt) %+-% .(MOE95txt) ~ V^-1)
-  if(xvar == "O2") slopeleg <- bquote(italic(m) == .(slopetxt) %+-% .(MOE95txt) ~ L~mmol^-1)
+  if(xvar == "O2") slopeleg <- bquote(italic(m) == .(slopetxt) %+-% .(MOE95txt) ~ l~mmol^-1)
   # Add text to plot
   legend <- as.expression(c("", slopeleg))
   legend(legend.x, legend = legend, bty = "n", text.col = text.col, inset = inset)

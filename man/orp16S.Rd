@@ -13,7 +13,7 @@
 \alias{orp16S_S4}
 \alias{orp16S_S5}
 \alias{orp16S_info}
-\alias{orp16S_T1}
+\alias{orp16S_T2}
 \alias{orp16S_D3}
 \alias{getmdat_orp16S}
 \alias{getmetrics_orp16S}
@@ -37,7 +37,7 @@ Plots from the paper by Dick and Meng (2021).
   orp16S_S5(pdf = FALSE)
 
   orp16S_info(study)
-  orp16S_T1(samesign = FALSE)
+  orp16S_T2(samesign = FALSE)
   orp16S_D3(mincount = 100)
 
   getmdat_orp16S(study, metrics = NULL, dropNA = TRUE, size = NULL, quiet = TRUE)
@@ -80,8 +80,8 @@ This table gives a brief description of each plotting function.
 \file{EZdat.csv} has sample data and metadata: study key, environment type, lineage (Bacteria or Archaea), sample name, SRA or MG-RAST accession number, grouping description, sample group, values of T (°C), pH, \O2 concentration (\umol/L), Eh (mV), Eh7 (mV), and \ZC.
 \file{EZlm.csv} has regression results for each dataset and domain: study key, environment type, lineage, number of samples, Eh7 range, slope (V\S{-1}) and intercept (\ZC) of of linear regression, and Pearson correlation coefficient.
 
-\code{orp16S_T1} returns a table summarizing regression slopes for all datasets (based on \file{EZlm.csv}), corresponding to Table 1 in the paper.
-\code{orp16S_T1(samesign = TRUE)} generates the values listed in Table S3 in the paper.
+\code{orp16S_T2} returns a table summarizing regression slopes for all datasets (based on \file{EZlm.csv}), corresponding to Table 2 in the paper.
+\code{orp16S_T2(samesign = TRUE)} generates the values listed in Table S3 in the paper.
 \code{orp16S_D3} creates a file with percent of RDP classifications to genus level mapped to the NCBI taxonomy, and genus names and \code{ZC} for the groups of samples corresponding to the first and fourth quartile of Eh7 values (i.e., reducing and oxidizing conditions), corresponding to Dataset S3 in the paper.
 
 \code{getmdat_orp16S} gets metadata for the indicated \code{study}, calculates Eh7 from Eh and pH and T (if available), classifies samples into 3 clusters according to their Eh values, and adds columns for plot parameters (\samp{pch}, \samp{col}).
@@ -146,7 +146,7 @@ orp16S2()
 orp16S_S1()
 
 # Summarize results for individual datasets
-orp16S_T1()
+orp16S_T2()
 
 # "Raw" metrics with lots of messages printed
 # NOTE: the messages include values for the last two columns of Table S2 of the paper

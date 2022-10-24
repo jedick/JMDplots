@@ -1,10 +1,10 @@
 ---
-title: "Chemical adaptation of bacterial communities to redox potential (2022)"
+title: "Chemical adaptation of reference proteomes for bacterial communities (2022)"
 output: 
   rmarkdown::html_vignette:
     mathjax: null
 vignette: >
-  %\VignetteIndexEntry{Chemical adaptation of bacterial communities to redox potential (2022)}
+  %\VignetteIndexEntry{Chemical adaptation of reference proteomes for bacterial communities (2022)}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 bibliography: [orp16S.bib, JMDplots.bib]
@@ -92,17 +92,17 @@ orp16S3()
 
 **Data sources (c):** **1** acidic and **2** circumneutral to alkaline New Zealand hot springs [@PCL+18], **3** Eastern Tibetan Plateau [@GWS+20], **4** Uzon Caldera [@PBU+20], **5** Southern Tibetan Plateau [@MWY+21].
 
-## Tally of regression slopes and binomial *p*-values (Table 1)
-```{r orp16S_T1}
+## Tally of regression slopes and binomial *p*-values (Table 2)
+```{r orp16S_T2}
 colnames <- c("Ntot", "Npos", "Nneg", "p")
-kable(orp16S_T1(), col.names = rep(colnames, 2)) %>%
+kable(orp16S_T2(), col.names = rep(colnames, 2)) %>%
   add_header_above(c(" " = 1, "Bacteria" = 4, "Archaea" = 4))
 ```
 
 ## Tally of regression slopes with same sign of minimum and maximum values in 95% confidence interval (Table S3)
-```{r orp16S_T1_S3}
+```{r orp16S_T2_S3}
 colnames <- c("Ntot", "Npos", "Nneg", "p")
-kable(orp16S_T1(samesign = TRUE), col.names = rep(colnames, 2)) %>%
+kable(orp16S_T2(samesign = TRUE), col.names = rep(colnames, 2)) %>%
   add_header_above(c(" " = 1, "Bacteria" = 4, "Archaea" = 4))
 ```
 
