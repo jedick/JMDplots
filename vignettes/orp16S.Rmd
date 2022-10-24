@@ -65,7 +65,7 @@ This vignette runs the code to make the plots from the following paper:
 >
 > Preprint available at bioRxiv. doi: [10.1101/2021.10.12.464155](https://doi.org/10.1101/2021.10.12.464155)
 
-This vignette was compiled on `r Sys.Date()` with **[JMDplots](https://github.com/jedick/JMDplots)** `r packageDescription("JMDplots")$Version`.
+This vignette was compiled on `r Sys.Date()` with **[JMDplots](https://github.com/jedick/JMDplots)** `r packageDescription("JMDplots")$Version` and **[chem16S](https://github.com/jedick/chem16S)** `r packageDescription("chem16S")$Version`.
 
 ```{r library, message = FALSE, results = "hide"}
 library(JMDplots)

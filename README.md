@@ -47,7 +47,7 @@ browseVignettes("JMDplots")
 If you want to build the vignettes yourself, be aware that it may be possible to build them without [pandoc](https://pandoc.org/), but having pandoc available will make them look better.
 
 ```R
-remotes::install_github("jedick/JMDplots", build_vignettes = TRUE)
+remotes::install_github("jedick/JMDplots", dependencies = TRUE, build_vignettes = TRUE)
 ```
 
 NOTE (2022-10-24): The development version of CHNOSZ is required for the affinity ranking calculations in the `utogig.Rmd` vignette.

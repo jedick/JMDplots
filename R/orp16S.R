@@ -469,8 +469,8 @@ orp16S6 <- function(pdf = FALSE) {
   dy[genus == "Methanobrevibacter"] <- -0.002
   dy[genus == "Hydrogenobaculum"] <- 0.003
   dy[genus == "Fervidicoccus"] <- -0.0005
-  text(rep(3, sum(igeo))[iarc & !idup], (ZC + dy)[iarc & !idup], paste0(genus, " ")[iarc & !idup], adj = 1, font = 2)
-  text(rep(3, sum(igeo))[!iarc & !idup], (ZC + dy)[!iarc & !idup], paste0(genus, " ")[!iarc & !idup], adj = 1)
+  text(rep(3, sum(igeo))[iarc & !idup], (ZC + dy)[iarc & !idup], paste0(genus, " ")[iarc & !idup], adj = 1, font = 4)
+  text(rep(3, sum(igeo))[!iarc & !idup], (ZC + dy)[!iarc & !idup], paste0(genus, " ")[!iarc & !idup], adj = 1, font = 3)
   # High Eh7
   ZC <- gg$Q4.ZC[igeo]
   genus <- gg$Q4.genus[igeo]
@@ -483,8 +483,8 @@ orp16S6 <- function(pdf = FALSE) {
   dy[genus == "Vogesella"] <- -0.0025
   dy[genus == "Bacillus"] <- 0.001
   dy[genus == "Thermus"] <- -0.001
-  text(rep(3.5, sum(igeo))[iarc & !idup], (ZC + dy)[iarc & !idup], paste0(" ", genus)[iarc & !idup], adj = 0, font = 2)
-  text(rep(3.5, sum(igeo))[!iarc & !idup], (ZC + dy)[!iarc & !idup], paste0(" ", genus)[!iarc & !idup], adj = 0)
+  text(rep(3.5, sum(igeo))[iarc & !idup], (ZC + dy)[iarc & !idup], paste0(" ", genus)[iarc & !idup], adj = 0, font = 4)
+  text(rep(3.5, sum(igeo))[!iarc & !idup], (ZC + dy)[!iarc & !idup], paste0(" ", genus)[!iarc & !idup], adj = 0, font = 3)
 
   # Add points and labels for Hyperalkaline
   ihyper <- gg$envirotype == "Hyperalkaline"
@@ -498,8 +498,8 @@ orp16S6 <- function(pdf = FALSE) {
   dy <- rep(0, sum(ihyper))
   dy[genus == "Silanimonas"] <- 0.0005
   dy[genus == "Hydrogenophaga"] <- -0.0005
-  text(rep(7.5, sum(ihyper))[iarc & !idup], (ZC + dy)[iarc & !idup], paste0(genus, " ")[iarc & !idup], adj = 1, font = 2)
-  text(rep(7.5, sum(ihyper))[!iarc & !idup], (ZC + dy)[!iarc & !idup], paste0(genus, " ")[!iarc & !idup], adj = 1)
+  text(rep(7.5, sum(ihyper))[iarc & !idup], (ZC + dy)[iarc & !idup], paste0(genus, " ")[iarc & !idup], adj = 1, font = 4)
+  text(rep(7.5, sum(ihyper))[!iarc & !idup], (ZC + dy)[!iarc & !idup], paste0(genus, " ")[!iarc & !idup], adj = 1, font = 3)
   # High Eh7
   ZC <- gg$Q4.ZC[ihyper]
   genus <- gg$Q4.genus[ihyper]
@@ -513,8 +513,8 @@ orp16S6 <- function(pdf = FALSE) {
   dy[genus == "Alkalinema"] <- -0.0015
   dy[genus == "Nitrososphaera"] <- 0.0005
   dy[genus == "Acinetobacter"] <- -0.0005
-  text(rep(8, sum(ihyper))[iarc & !idup], (ZC + dy)[iarc & !idup], paste0(" ", genus)[iarc & !idup], adj = 0, font = 2)
-  text(rep(8, sum(ihyper))[!iarc & !idup], (ZC + dy)[!iarc & !idup], paste0(" ", genus)[!iarc & !idup], adj = 0)
+  text(rep(8, sum(ihyper))[iarc & !idup], (ZC + dy)[iarc & !idup], paste0(" ", genus)[iarc & !idup], adj = 0, font = 4)
+  text(rep(8, sum(ihyper))[!iarc & !idup], (ZC + dy)[!iarc & !idup], paste0(" ", genus)[!iarc & !idup], adj = 0, font = 3)
 
   if(pdf) dev.off()
 }

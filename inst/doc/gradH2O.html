@@ -123,13 +123,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   for (var i = 0; i < sheets.length; i++) {
     if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
     try { var rules = sheets[i].cssRules; } catch (e) { continue; }
-    for (var j = 0; j < rules.length; j++) {
+    var j = 0;
+    while (j < rules.length) {
       var rule = rules[j];
       // check if there is a div.sourceCode rule
-      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") continue;
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") {
+        j++;
+        continue;
+      }
       var style = rule.style.cssText;
       // check if color or background-color is set
-      if (rule.style.color === '' && rule.style.backgroundColor === '') continue;
+      if (rule.style.color === '' && rule.style.backgroundColor === '') {
+        j++;
+        continue;
+      }
       // replace div.sourceCode by a pre.sourceCode rule
       sheets[i].deleteRule(j);
       sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
@@ -341,7 +348,7 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 <blockquote>
 <p>Dick JM, Yu M, Tan J. 2020. Uncovering chemical signatures of salinity gradients through compositional analysis of protein sequences. <em>Biogeosciences</em> <strong>17</strong>(23): 6145–6162. doi: <a href="https://doi.org/10.5194/bg-17-6145-2020">10.5194/bg-17-6145-2020</a></p>
 </blockquote>
-<p>This vignette was compiled on 2022-10-11 with <strong><a href="https://github.com/jedick/JMDplots">JMDplots</a></strong> 1.2.15 and <strong><a href="https://github.com/jedick/canprot">canprot</a></strong> 1.1.2.</p>
+<p>This vignette was compiled on 2022-10-24 with <strong><a href="https://github.com/jedick/JMDplots">JMDplots</a></strong> 1.2.16 and <strong><a href="https://github.com/jedick/canprot">canprot</a></strong> 1.1.2.</p>
 <p>For Figure 3, the RefSeq database release 206 is used for the proteomes of <em>nif</em>-bearing organisms (release 201 was used in the paper).</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="kw">library</span>(JMDplots)</span>
 <span id="cb1-2"><a href="#cb1-2"></a><span class="co"># read canprot&#39;s &#39;basis&#39; option</span></span>
