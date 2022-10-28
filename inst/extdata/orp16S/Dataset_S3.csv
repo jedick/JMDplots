@@ -67,7 +67,7 @@ RKN+17,"Finnish Boreal Lakes",Sediment,Archaea,94.63,Methanothrix,-0.154636,Meth
 HDZ+19,"Honghu Lake",Sediment,Bacteria,88.93,Acinetobacter,-0.168755,Candidatus Pelagibacter,-0.221309
 OHL+18_DNA,"Marine and Freshwater Sediments (DNA)",Sediment,Bacteria,83.96,Synechococcus,-0.142684,Synechococcus,-0.142684
 OHL+18_DNA,"Marine and Freshwater Sediments (DNA)",Sediment,Archaea,34.8,Methanomassiliicoccus,-0.163205,Methanoregula,-0.170944
-WHLH21,"Daya Bay",Sediment,Bacteria,94.67,Candidatus Scalindua,-0.182387,Candidatus Scalindua,-0.182387
+WHLH21a,"Daya Bay",Sediment,Bacteria,94.67,Candidatus Scalindua,-0.182387,Candidatus Scalindua,-0.182387
 RSS+18,"Lake Hazen, Nunavut",Sediment,Bacteria,73.85,Nitrospira,-0.150235,Nitrospira,-0.150235
 CLS+19,"Jinchuan River",Sediment,Bacteria,85.17,Cloacibacterium,-0.190612,Nitrospira,-0.150235
 CLS+19,"Jinchuan River",Sediment,Archaea,99.1,Methanothrix,-0.154636,Methanothrix,-0.154636
@@ -85,7 +85,7 @@ MLL+19,"Dabu Town, Hunan Province",Soil,Bacteria,68.46,Luteitalea,-0.126219,Acid
 MLL+19,"Dabu Town, Hunan Province",Soil,Archaea,97.13,Methanomassiliicoccus,-0.163205,Nitrososphaera,-0.165969
 BMOB18,"Urban Wetland Soils",Soil,Bacteria,89.02,Sulfurovum,-0.195376,Verrucomicrobia subdivision 3,-0.140551
 BMOB18,"Urban Wetland Soils",Soil,Archaea,95.69,Methanomassiliicoccus,-0.163205,Methanomassiliicoccus,-0.163205
-WHLH21a,"Tengger Desert Biocrusts",Soil,Bacteria,73.93,Rubellimicrobium,-0.129332,Microvirga,-0.144769
+WHLH21,"Tengger Desert Biocrusts",Soil,Bacteria,73.93,Rubellimicrobium,-0.129332,Microvirga,-0.144769
 CWC+20,"Paddy Soil Water Management",Soil,Bacteria,72.92,Sphingobium,-0.131549,Sphingobium,-0.131549
 PSG+20,"Anaerobic Soil Disinfestation",Soil,Bacteria,49.34,Neobacillus,-0.198398,Luteitalea,-0.126219
 PSG+20,"Anaerobic Soil Disinfestation",Soil,Archaea,99.94,Nitrososphaera,-0.165969,Nitrososphaera,-0.165969

@@ -46,7 +46,7 @@
 ## STUDY SETTINGS
 
 # Change the following line to setup the pipeline for one study
-study <- "MCR+22"
+study <- "MTC21"
 # Settings for all studies are stored here
 file <- tempfile()
 # Write spaces here (but don't save them) to make this easier to read
@@ -98,7 +98,7 @@ writeLines(con = file, text = gsub(" ", "", c(
   "APV+20, FALSE, 250",
   "NLE+21, FALSE, 440",
   "LLC+19, TRUE, 400",
-  "WHLH21, TRUE, 440",
+  "WHLH21a, TRUE, 440",
   "PCL+18, TRUE, 250",
 
   # More orp16S 20220504
@@ -109,7 +109,7 @@ writeLines(con = file, text = gsub(" ", "", c(
   "HCW+22, TRUE, 240",
   "WKP+22, FALSE, 450",
   "CKB+22, FALSE, 290",
-  "WHLH21a, FALSE, 450",
+  "WHLH21, FALSE, 450",
   "PSB+21, FALSE, 250",
   "RKSK22, FALSE, 290",
   "DJK+18, TRUE, 250",
@@ -128,7 +128,9 @@ writeLines(con = file, text = gsub(" ", "", c(
   "CLZ+22, TRUE, 290",
   "RARG22, FALSE, 250",
   # 20220917
-  "MCR+22, FALSE, 290"
+  "MCR+22, FALSE, 290",
+  # 20221020
+  "MTC21, FALSE, 250"
 
   # For RSS+18 (Lake Hazen):
   #  - FASTQ files were downloaded from NCBI cloud

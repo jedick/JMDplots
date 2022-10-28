@@ -1,45 +1,21 @@
-Name,Run,BioSample,LibraryName,SampleName,pH,Eh,Condition,Stage
-NA,SRR9071712,SAMN11660019,Ae1,Ae1,9.37,287.8,Simulated,Early
-NA,SRR9071707,SAMN11660020,Ae2,Ae2,9.37,287.8,Simulated,Early
-NA,SRR9071710,SAMN11660021,Ae3,Ae3,9.37,287.8,Simulated,Early
-NA,SRR9071711,SAMN11660022,Ae4,Ae4,9.37,287.8,Simulated,Early
-NA,SRR9071708,SAMN11660027,Al1,Al1,9.45,323.78,Simulated,Later
-NA,SRR9071709,SAMN11660028,Al2,Al2,9.45,323.78,Simulated,Later
-NA,SRR9071706,SAMN11660029,Al3,Al3,9.45,323.78,Simulated,Later
-NA,SRR9071713,SAMN11660030,Al4,Al4,9.45,323.78,Simulated,Later
-NA,SRR9071716,SAMN11660023,Am1,Am1,9.54,317.03,Simulated,Middle
-NA,SRR9071717,SAMN11660024,Am2,Am2,9.54,317.03,Simulated,Middle
-NA,SRR9071714,SAMN11660025,Am3,Am3,9.54,317.03,Simulated,Middle
-NA,SRR9071715,SAMN11660026,Am4,Am4,9.54,317.03,Simulated,Middle
-"Tengger Desert Biocrusts",SRR12264746,SAMN15526080,Jun_18A1,18A1,7.85,348.53,Natural,Cyanobacteria
-"Tengger Desert Biocrusts",SRR12264745,SAMN15526081,Jun_18A2,18A2,7.85,348.53,Natural,Cyanobacteria
-"Tengger Desert Biocrusts",SRR12264754,SAMN15526082,Jun_18A3,18A3,7.85,348.53,Natural,Cyanobacteria
-"Tengger Desert Biocrusts",SRR12264753,SAMN15526083,Jun_18A4,18A4,7.85,348.53,Natural,Cyanobacteria
-"Tengger Desert Biocrusts",SRR12264752,SAMN15526084,Jun_18C1,18C1,7.8,379.84,Natural,Cyanolichen
-"Tengger Desert Biocrusts",SRR12264751,SAMN15526085,Jun_18C2,18C2,7.8,379.84,Natural,Cyanolichen
-"Tengger Desert Biocrusts",SRR12264750,SAMN15526086,Jun_18C3,18C3,7.8,379.84,Natural,Cyanolichen
-"Tengger Desert Biocrusts",SRR12264749,SAMN15526087,Jun_18C4,18C4,7.8,379.84,Natural,Cyanolichen
-"Tengger Desert Biocrusts",SRR12264748,SAMN15526088,Jun_18G1,18G1,7.71,396.71,Natural,Chlorolichen
-"Tengger Desert Biocrusts",SRR12264747,SAMN15526089,Jun_18G2,18G2,7.71,396.71,Natural,Chlorolichen
-"Tengger Desert Biocrusts",SRR12264744,SAMN15526090,Jun_18G3,18G3,7.71,396.71,Natural,Chlorolichen
-"Tengger Desert Biocrusts",SRR12264743,SAMN15526091,Jun_18G4,18G4,7.71,396.71,Natural,Chlorolichen
-"Tengger Desert Biocrusts",SRR12264758,SAMN15526092,Jun_18M1,18M1,7.68,411.51,Natural,Moss
-"Tengger Desert Biocrusts",SRR12264757,SAMN15526093,Jun_18M2,18M2,7.68,411.51,Natural,Moss
-"Tengger Desert Biocrusts",SRR12264756,SAMN15526094,Jun_18M3,18M3,7.68,411.51,Natural,Moss
-"Tengger Desert Biocrusts",SRR12264755,SAMN15526095,Jun_18M4,18M4,7.68,411.51,Natural,Moss
-"Tengger Desert Biocrusts",SRR12284207,SAMN15578150,Sep_18A1,18A5,7.85,348.53,Natural,Cyanobacteria
-"Tengger Desert Biocrusts",SRR12284206,SAMN15578151,Sep_18A2,18A6,7.85,348.53,Natural,Cyanobacteria
-"Tengger Desert Biocrusts",SRR12284199,SAMN15578152,Sep_18A3,18A7,7.85,348.53,Natural,Cyanobacteria
-"Tengger Desert Biocrusts",SRR12284198,SAMN15578153,Sep_18A4,18A8,7.85,348.53,Natural,Cyanobacteria
-"Tengger Desert Biocrusts",SRR12284197,SAMN15578154,Sep_18C1,18C5,7.8,379.84,Natural,Cyanolichen
-"Tengger Desert Biocrusts",SRR12284196,SAMN15578155,Sep_18C2,18C6,7.8,379.84,Natural,Cyanolichen
-"Tengger Desert Biocrusts",SRR12284195,SAMN15578156,Sep_18C3,18C7,7.8,379.84,Natural,Cyanolichen
-"Tengger Desert Biocrusts",SRR12284194,SAMN15578157,Sep_18C4,18C8,7.8,379.84,Natural,Cyanolichen
-"Tengger Desert Biocrusts",SRR12284193,SAMN15578158,Sep_18G1,18G5,7.71,396.71,Natural,Chlorolichen
-"Tengger Desert Biocrusts",SRR12284192,SAMN15578159,Sep_18G2,18G6,7.71,396.71,Natural,Chlorolichen
-"Tengger Desert Biocrusts",SRR12284205,SAMN15578160,Sep_18G3,18G7,7.71,396.71,Natural,Chlorolichen
-"Tengger Desert Biocrusts",SRR12284204,SAMN15578161,Sep_18G4,18G8,7.71,396.71,Natural,Chlorolichen
-"Tengger Desert Biocrusts",SRR12284203,SAMN15578162,Sep_18M1,18M5,7.68,411.51,Natural,Moss
-"Tengger Desert Biocrusts",SRR12284202,SAMN15578163,Sep_18M2,18M6,7.68,411.51,Natural,Moss
-"Tengger Desert Biocrusts",SRR12284201,SAMN15578164,Sep_18M3,18M7,7.68,411.51,Natural,Moss
-"Tengger Desert Biocrusts",SRR12284200,SAMN15578165,Sep_18M4,18M8,7.68,411.51,Natural,Moss
+name,Run,LibraryName,BioSample,SampleName,Season,Position,"Depth (cm)","ORP (mV)"
+"Daya Bay",SRR5974409,S1SS,SAMN07498198,S1SS,Summer,Surface,2,-224
+"Daya Bay",SRR5974408,S1MS,SAMN07498199,S1MS,Summer,Middle,42,-324
+"Daya Bay",SRR5974413,S1BS,SAMN07498200,S1BS,Summer,Bottom,88,-360
+"Daya Bay",SRR5974412,S5SS,SAMN07498201,S5SS,Summer,Surface,2,-129
+"Daya Bay",SRR5974421,S5MS,SAMN07498202,S5MS,Summer,Middle,42,-202
+"Daya Bay",SRR5974422,S5BS,SAMN07498203,S5BS,Summer,Bottom,87,-226
+"Daya Bay",SRR5974419,S8SS,SAMN07498204,S8SS,Summer,Surface,2,-212
+"Daya Bay",SRR5974420,S8MS,SAMN07498205,S8MS,Summer,Middle,42,-74
+"Daya Bay",SRR5974415,S13SS,SAMN07498206,S13SS,Summer,Surface,2,-134
+"Daya Bay",SRR5974414,S13MS,SAMN07498207,S13MS,Summer,Middle,42,-129
+"Daya Bay",SRR5974411,S13BS,SAMN07498208,S13BS,Summer,Bottom,87,-168
+"Daya Bay",SRR5974410,S1SW,SAMN07498209,S1SW,Winter,Surface,2,-189
+"Daya Bay",SRR5974406,S1MW,SAMN07498210,S1MW,Winter,Middle,42,-234
+"Daya Bay",SRR5974423,S1BW,SAMN07498211,S1BW,Winter,Bottom,88,-312
+"Daya Bay",SRR5974407,S5SW,SAMN07498212,S5SW,Winter,Surface,2,-145
+"Daya Bay",SRR5974418,S5MW,SAMN07498213,S5MW,Winter,Middle,42,-214
+"Daya Bay",SRR5974405,S8SW,SAMN07498214,S8SW,Winter,Surface,2,-169
+"Daya Bay",SRR5974404,S13SW,SAMN07498215,S13SW,Winter,Surface,2,-154
+"Daya Bay",SRR5974417,S13MW,SAMN07498216,S13MW,Winter,Middle,42,-172
+"Daya Bay",SRR5974416,S13BW,SAMN07498217,S13BW,Winter,Bottom,87,-287

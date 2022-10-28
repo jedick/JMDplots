@@ -88,7 +88,7 @@ orp16S2()
 orp16S3()
 ```
 
-**Data sources (a):** Daya Bay [@WHLH21], Bay of Biscay [@LMBA21], Hunan Province [@MLL+19].
+**Data sources (a):** Daya Bay [@WHLH21a], Bay of Biscay [@LMBA21], Hunan Province [@MLL+19].
 
 **Data sources (c):** **1** acidic and **2** circumneutral to alkaline New Zealand hot springs [@PCL+18], **3** Eastern Tibetan Plateau [@GWS+20], **4** Uzon Caldera [@PBU+20], **5** Southern Tibetan Plateau [@MWY+21].
 
@@ -116,7 +116,7 @@ global.slopes <- orp16S4()
 orp16S5()
 ```
 
-**Data sources:** 16S rRNA gene sequences [@WHLH21a], metaproteomes [@HWLH22].
+**Data sources:** 16S rRNA gene sequences [@WHLH21], metaproteomes [@HWLH22].
 
 ## Most abundant genera at low and high Eh7 in geothermal and hyperalkaline areas (Figure 6)
 ```{r orp16S6, message = FALSE, results = "hide", out.width='100%', fig.align='center', fig.width = 8.5, fig.height = 5, pngquant = pngquant, dpi = 100}

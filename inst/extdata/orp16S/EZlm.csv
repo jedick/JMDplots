@@ -67,7 +67,7 @@ RKN+17,"Finnish Boreal Lakes",Sediment,Archaea,24,-225.86,-140.68,-0.0446353,0.0
 HDZ+19,"Honghu Lake",Sediment,Bacteria,28,-381.23,160.96,0.0297409,0.00802352,-0.155106,0.831067
 OHL+18_DNA,"Marine and Freshwater Sediments (DNA)",Sediment,Bacteria,33,-82.25,328.49,0.0167036,0.0058497,-0.154764,0.722814
 OHL+18_DNA,"Marine and Freshwater Sediments (DNA)",Sediment,Archaea,10,-82.25,133.66,-0.079531,0.0984481,-0.134689,-0.550047
-WHLH21,"Daya Bay",Sediment,Bacteria,20,-360,-74,-0.178061,0.132633,-0.197137,-0.553623
+WHLH21a,"Daya Bay",Sediment,Bacteria,20,-360,-74,-0.178061,0.132633,-0.197137,-0.553623
 RSS+18,"Lake Hazen, Nunavut",Sediment,Bacteria,28,113.53,527.09,0.00265643,0.00702264,-0.14945,0.150745
 CLS+19,"Jinchuan River",Sediment,Bacteria,24,7.82,259.82,0.0132792,0.0270078,-0.155008,0.212435
 CLS+19,"Jinchuan River",Sediment,Archaea,21,7.82,259.82,0.0185231,0.0277565,-0.170233,0.305155
@@ -85,7 +85,7 @@ MLL+19,"Dabu Town, Hunan Province",Soil,Bacteria,30,-374.58,300.25,0.0172708,0.0
 MLL+19,"Dabu Town, Hunan Province",Soil,Archaea,16,-374.58,259.34,-0.00170555,0.0311167,-0.161419,-0.0314034
 BMOB18,"Urban Wetland Soils",Soil,Bacteria,36,-339.79,-75.79,0.0611527,0.0348566,-0.149139,0.521666
 BMOB18,"Urban Wetland Soils",Soil,Archaea,35,-339.79,-75.79,-0.0344131,0.0305786,-0.193319,-0.370249
-WHLH21a,"Tengger Desert Biocrusts",Soil,Bacteria,32,398.81,451.74,0.152522,0.107688,-0.205937,0.466984
+WHLH21,"Tengger Desert Biocrusts",Soil,Bacteria,32,398.81,451.74,0.152522,0.107688,-0.205937,0.466984
 CWC+20,"Paddy Soil Water Management",Soil,Bacteria,84,-467.3,358.07,0.014736,0.0045196,-0.139688,0.582308
 PSG+20,"Anaerobic Soil Disinfestation",Soil,Bacteria,49,-265,343,0.0285476,0.0270295,-0.160549,0.296032
 PSG+20,"Anaerobic Soil Disinfestation",Soil,Archaea,20,-265,343,0.0249455,0.0135624,-0.159201,0.673369

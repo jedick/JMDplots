@@ -9,9 +9,9 @@ envirotype <- list(
   # NOTE: Keep Geothermal in 4th location to get red color 20210904
   "Geothermal" = c("PCL+18_Acidic", "PCL+18_Alkaline", "GWS+20", "PBU+20", "MWY+21"),
   "Hyperalkaline" = c("SBP+20", "RMB+17", "CTS+17", "KSR+21", "PSB+21", "NTB+21"),
-  "Sediment" = c("ZML+17", "BSPD17", "RKN+17", "HDZ+19", "OHL+18_DNA", "WHLH21", "RSS+18", "CLS+19", "HSF+19", "ZHZ+19",
+  "Sediment" = c("ZML+17", "BSPD17", "RKN+17", "HDZ+19", "OHL+18_DNA", "WHLH21a", "RSS+18", "CLS+19", "HSF+19", "ZHZ+19",
                  "LMBA21_2017", "HSF+22", "ZZLL21", "WFB+21", "HCW+22", "WKG+22"),
-  "Soil" = c("MLL+19", "BMOB18", "WHLH21a", "CWC+20", "PSG+20", "LJC+20", "DTJ+20", "RKSK22", "DLS21_Bulk", "WKP+22",
+  "Soil" = c("MLL+19", "BMOB18", "WHLH21", "CWC+20", "PSG+20", "LJC+20", "DTJ+20", "RKSK22", "DLS21_Bulk", "WKP+22",
              "CKB+22", "CLZ+22")
 )
 # Turn the list into a data frame for easier lookup 20210904
@@ -183,7 +183,7 @@ orp16S3 <- function(pdf = FALSE) {
 
   ## Panel A: Analysis of selected datasets 20211003
   # Daya Bay (Sediment)
-  plotEZ("WHLH21", "Bacteria", groupby = "Position", groups = c("Surface", "Middle", "Bottom"),
+  plotEZ("WHLH21a", "Bacteria", groupby = "Position", groups = c("Surface", "Middle", "Bottom"),
     legend.x = "bottomleft", title.line = NULL, dxlim = c(-20, 0), slope.legend = "right")
   title("Daya Bay\n(Sediment bacteria)", font.main = 1)
   label.figure("a", font = 2, cex = 2, yfrac = 0.9)
@@ -390,7 +390,7 @@ orp16S5 <- function(pdf = FALSE) {
   # Loop over months
   for(month in c("Jun", "Sep")) {
 
-    study <- paste0("WHLH21a_", month)
+    study <- paste0("WHLH21_", month)
     longmonth <- ifelse(month == "Jun", "June", "September")
     label <- ifelse(month == "Jun", "a", "b")
     legend.x <- ifelse(month == "Jun", "topright", NA)
@@ -402,7 +402,7 @@ orp16S5 <- function(pdf = FALSE) {
     title(paste("16S rRNA gene sequences of biocrusts\ncollected in", longmonth, "2018"), font.main = 1)
     label.figure(label, font = 2, cex = 2)
     # Get 16S data
-    metrics <- getmetrics_orp16S("WHLH21a")
+    metrics <- getmetrics_orp16S("WHLH21")
     mdat <- getmdat_orp16S(study, metrics = metrics)
     ZC_16S <- mdat$metrics$ZC
 
@@ -569,7 +569,7 @@ orp16S_S1 <- function(pdf = FALSE) {
     ## Soil - put this group before Groundwater and Sediment for clearer visualization in GBA 20210927
     "MLL+19, 26.1, 112.5", # Materials and methods
     "BMOB18, 40.60842, -74.19258", # SAMN07828017  ### Laboratory
-    "WHLH21a, 37.53, 105.03", # Materials and methods
+    "WHLH21, 37.53, 105.03", # Materials and methods
     "CWC+20, 28.226, 116.898", # Materials and methods  ### Laboratory
     "PSG+20, 36.61, -119.53", # Web search for Parlier, CA   ### Mesocosm
     # LJC+20 see below
@@ -596,7 +596,7 @@ orp16S_S1 <- function(pdf = FALSE) {
     "RKN+17, 62.03, 29.98", # SAMN05933570   ### Laboratory
     "HDZ+19, 29.901, 113.52435", # SAMN05990289
     "OHL+18_DNA, 56.02, 10.26", # Experimental procedures
-    "WHLH21, 23.52, 113.495", # Materials and methods
+    "WHLH21a, 23.52, 113.495", # Materials and methods
     "RSS+18, 82, -71", # Introduction
     "CLS+19, 32.22, 118.83", # SAMN08683376
     "HSF+19, 47.803, 16.709", # methods
@@ -648,7 +648,7 @@ orp16S_S1 <- function(pdf = FALSE) {
   pch <- ifelse(coords$study %in% lab, 15, 19)
   # Use smaller points for high-density regions 20210915
   cex <- ifelse(coords$study %in% c(
-    "ZZL+21", "MLL+18", "ZML+17", "ZZLL21", "ZHZ+19", "WHLH21", # GD-HK-MO GBA
+    "ZZL+21", "MLL+18", "ZML+17", "ZZLL21", "ZHZ+19", "WHLH21a", # GD-HK-MO GBA
     "HDZ+19", # Hubei
     "WKG+22" # Poland
   ), 1.5, 2.5)
@@ -816,7 +816,7 @@ orp16S_S3 <- function(pdf = FALSE) {
     plotEZ("RKN+17", "two", groupby = "Treatment", groups = c("CH4", "CH4+Fe", "CH4+Mn"), legend.x = "bottomleft"),
     plotEZ("HDZ+19", "Bacteria", groupby = "Type", groups = c("Water", "Sediment")),
     plotEZ("OHL+18_DNA", "two", groupby = "Location", groups = c("Kal\u00f8 Vig", "Lake Constance", "Norsminde Fjord")),
-    plotEZ("WHLH21", "Bacteria", groupby = "Position", groups = c("Surface", "Middle", "Bottom"), legend.x = "bottomleft"),
+    plotEZ("WHLH21a", "Bacteria", groupby = "Position", groups = c("Surface", "Middle", "Bottom"), legend.x = "bottomleft"),
     plotEZ("RSS+18", "Bacteria", groupby = "Site", groups = c("Deep Hole", "Snowgoose Bay", "John's Island", "Skeleton Lake"), dylim = c(0, 0.005)),
     plotEZ("CLS+19", "two", groupby = "Type", groups = c("Water", "Sediment"), legend.x = "bottomright", dylim = c(-0.002, 0)),
     plotEZ("HSF+19", "Bacteria", groupby = "Type", groups = c("Water", "Sediment-Water Interface", "Sediment"), legend.x = "topright"),
@@ -835,7 +835,7 @@ orp16S_S3 <- function(pdf = FALSE) {
     message("\nSoil"),
     plotEZ("MLL+19", "two", groupby = "Type", groups = c("Upland", "Paddy", "Sediment")),
     plotEZ("BMOB18", "two", groupby = "Treatment", groups = c("Acetate", "No amendment", "Pre-incubation"), dxlim = c(-50, 0)),
-    plotEZ("WHLH21a", "Bacteria", groupby = "Stage", groups = c("Cyanobacteria", "Cyanolichen", "Chlorolichen", "Moss"), legend.x = "bottomright"),
+    plotEZ("WHLH21", "Bacteria", groupby = "Stage", groups = c("Cyanobacteria", "Cyanolichen", "Chlorolichen", "Moss"), legend.x = "bottomright"),
     plotEZ("CWC+20", "Bacteria", groupby = "Management", groups = c("Flooding", "Draining"), legend.x = "bottomright"),
     plotEZ("PSG+20", "two", groupby = "Treatment", groups = c("Initial", "NCC", "RB", "RGP", "TP"), legend.x = "bottomright"),
     plotEZ("LJC+20", "Bacteria", groupby = "MAT", groups = c(">= 21.5 \u00b0C", "< 21.5 \u00b0C"), dylim = c(0, 0.005)),
@@ -1319,18 +1319,18 @@ getmdat_orp16S <- function(study, metrics = NULL, dropNA = TRUE, size = NULL, qu
     if(!is.na(Molecule)) metadata <- metadata[metadata$Molecule == Molecule, ]
     shortstudy <- "OHL+18"
   }
-  if(grepl("WHLH21a", study)) {
-    # WHLH21a, WHLH21a_Jun, WHLH21a_Sep
+  if(grepl("WHLH21", study)) {
+    # WHLH21, WHLH21_Jun, WHLH21_Sep
     Month <- sapply(strsplit(study, "_"), "[", 2)
     if(!is.na(Month)) metadata <- metadata[grepl(Month, metadata$LibraryName), ]
-    shortstudy <- "WHLH21a"
+    shortstudy <- "WHLH21"
   }
   if(shortstudy %in% c(
     "MLL+19", "HXZ+20", "BCA+21", "RMB+17", "SBP+20", "NTB+21", "MWY+21", "SAR+13", "CTS+17", "HDZ+19",
     "ZHZ+19", "YHK+20", "SRM+19", "HLZ+18", "PSG+20", "KSR+21", "ZCZ+21", "ZZL+21", "PBU+20", "MLL+18",
     "BWD+19", "WHL+21", "HSF+19", "ZML+17", "DTJ+20", "WFB+21", "KLM+16", "LMBA21", "BSPD17", "CWC+20",
     "BMOB18", "LJC+20", "DLS21",  "ZZLL21", "GWS+20", "CLS+19", "GZL21",  "LLC+19", "NLE+21", "APV+20",
-    "WHLH21", "PCL+18", "GSBT20", "SPA+21", "IBK+22", "HSF+22", "HCW+22", "WKP+22", "CKB+22", "WHLH21a",
+    "WHLH21a", "PCL+18", "GSBT20", "SPA+21", "IBK+22", "HSF+22", "HCW+22", "WKP+22", "CKB+22", "WHLH21",
     "RSS+18", "PSB+21", "RKSK22", "WLJ+16", "DJK+18", "OHL+18", "ZLH+22", "LWJ+21", "MGW+22", "RKN+17",
     "ZDW+19", "WKG+22", "CLZ+22", "RARG22", "MCR+22", "MTC21"
   )) {
