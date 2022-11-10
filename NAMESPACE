@@ -62,7 +62,7 @@ export(
   # can16S paper 20210604
   "getrefseq",
   # orp16S paper 20211003-20211008
-  "orp16S_1", "orp16S_S1", "orp16S_3", "orp16S_4", "orp16S_S3",
+  "orp16S_1", "orp16S_2", "orp16S_3", "orp16S_4", "orp16S_S3",
   "plotEZ", "plotMA",
   # utilities 20220223
   "addalpha",
@@ -71,7 +71,7 @@ export(
   # Moving functions to chem16S package 20220506-20220513
   "getmdat_geo16S", "getmetrics_geo16S", "plotmet_geo16S", "getmdat_orp16S", "getmetrics_orp16S", "orp16S_info",
   # orp16S paper 20220516-20220517
-  "orp16S_T2", "orp16S_S2", "orp16S_S5",
+  "orp16S_T2", "orp16S_S5",
   # utogig paper 20220602, 20220605
   "utogig4", "utogigS1",
   # utilities 20220609

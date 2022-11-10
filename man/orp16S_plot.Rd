@@ -46,8 +46,8 @@ Make plots of \ZC vs Eh7 and \ZC vs abundance of Most Abundant Mapped Taxon.
 
 \code{plotEZ} is used to make \ZC-Eh7 scatterplots for a single study.
 By default, \ZC is calculated for estimated proteomes using all bacterial and archaeal sequences.
-Set \code{lineage} to \samp{Bacteria} or \samp{Archaea} to make one plot for one of the domains, or to \samp{two} to make two plots for both domains.
-The latter option is used in \code{\link{orp16S_S1}} for the Figure S1 in the paper.
+Set \code{lineage} to \samp{Bacteria} or \samp{Archaea} to make one plot, or to \samp{two} to make two plots (one for each domain).
+The latter option is used in \code{\link{orp16S_S1}} for some of the plots in Figure S1 in the paper.
 
 \code{plotMA} plots \ZC vs the percent abundance of most abundant mapped taxon (MAMT).
 The plot title shows the percentages of MAMT and MAUT (most abundant unmapped taxon).

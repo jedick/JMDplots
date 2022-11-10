@@ -2,12 +2,11 @@
 \name{orp16S}
 \alias{orp16S}
 \alias{orp16S_1}
+\alias{orp16S_2}
 \alias{orp16S_3}
 \alias{orp16S_4}
 \alias{orp16S_5}
 \alias{orp16S_6}
-\alias{orp16S_S1}
-\alias{orp16S_S2}
 \alias{orp16S_S3}
 \alias{orp16S_S4}
 \alias{orp16S_S5}
@@ -28,8 +27,6 @@ Plots from the paper by Dick and Meng (2021).
   orp16S_5(pdf = FALSE)
   orp16S_6(pdf = FALSE)
 
-  orp16S_S1(pdf = FALSE)
-  orp16S_S2(pdf = FALSE)
   orp16S_S3(pdf = FALSE)
   orp16S_S4(global.slopes, pdf = FALSE)
   orp16S_S5(pdf = FALSE)
@@ -61,13 +58,12 @@ This table gives a brief description of each plotting function.
 
 \tabular{ll}{
   \code{orp16S_1} \tab Methods overview and chemical depth profiles in Winogradsky columns \cr
+  \code{orp16S_2} \tab Sample locations on world map and Eh-pH diagram (outline is from Baas Becking et al., 1960) \cr
   \code{orp16S_3} \tab Associations between Eh7 and \ZC at local scales \cr
   \code{orp16S_4} \tab Associations between Eh7 and \ZC at a global scale. Set \code{EMP_primers} to TRUE to make Figure S6. \cr
   \code{orp16S_5} \tab Comparison of 16S_-based community reference proteomes with metaproteomes \cr
   \code{orp16S_6} \tab Most abundant genera at low and high Eh7 in geothermal and hyperalkaline areas \cr
 
-  \code{orp16S_S1} \tab Sample locations on world map \cr
-  \code{orp16S_S2} \tab Eh-pH diagram for all environment types (outline is from Baas Becking et al., 1960) \cr
   \code{orp16S_S3} \tab \ZC-Eh scatterplots for each dataset \cr
   \code{orp16S_S4} \tab Regresssion slopes from local to global scale \cr
   \code{orp16S_S5} \tab Comparison of Eh7, Eh, and \O2 as predictors of carbon oxidation state \cr
@@ -136,8 +132,8 @@ USGS (2010) Great Lakes and Watersheds Shapefiles. ScienceBase Catalog, U.S. Geo
 # Methods outline and Winogradsky columns
 orp16S_1()
 
-# World map
-orp16S_S1()
+# Sample locations and Eh-pH diagram
+orp16S_2()
 
 # Summarize results for individual datasets
 orp16S_T2()

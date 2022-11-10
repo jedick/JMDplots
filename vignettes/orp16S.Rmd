@@ -76,16 +76,21 @@ library(JMDplots)
 orp16S_1()
 ```
 
-**Data sources:** ORP and pH for Eh7 calculation [@DFYS19]; 16S rRNA gene sequences for `r ZC` calculation [@RBW+14].
+**Data sources:** **(b)** ORP and pH [@DFYS19] to calculate Eh7. **(c)** 16S rRNA gene sequences [@RBW+14] to calculate `r ZC`.
+
+## Sample locations on world map and Eh-pH diagram (Figure 2)
+```{r orp16S_2, message = FALSE, results = "hide", out.width='100%', fig.width = 26, fig.height = 23, out.extra = 'class="full-width"', pngquant = pngquant, dpi = 100}
+orp16S_2()
+```
+
+**Data sources:** **(a)** coastlineWorld dataset in R package oce [@KR21]; shapefiles for North American Great Lakes [@USGS10]. **(b)** Outline is from @BKM60.
 
 ## Associations between Eh7 and `r ZC` at local scales (Figure 3)
 ```{r orp16S_3, message = FALSE, results = "hide", out.width='100%', fig.width = 8, fig.height = 6, pngquant = pngquant, dpi = 100}
 orp16S_3()
 ```
 
-**Data sources (a):** Daya Bay [@WHLH21a], Bay of Biscay [@LMBA21], Hunan Province [@MLL+19].
-
-**Data sources (c):** **1** acidic and **2** circumneutral to alkaline New Zealand hot springs [@PCL+18], **3** Eastern Tibetan Plateau [@GWS+20], **4** Uzon Caldera [@PBU+20], **5** Southern Tibetan Plateau [@MWY+21].
+**Data sources:** **(a)** Daya Bay [@WHLH21a], Bay of Biscay [@LMBA21], Hunan Province [@MLL+19]. **(c)** **1** acidic and **2** circumneutral to alkaline New Zealand hot springs [@PCL+18], **3** Eastern Tibetan Plateau [@GWS+20], **4** Uzon Caldera [@PBU+20], **5** Southern Tibetan Plateau [@MWY+21].
 
 ## Tally of regression slopes and binomial *p*-values (Table 2)
 ```{r orp16S_T2}
@@ -119,21 +124,6 @@ orp16S_6()
 ```
 
 Bold and normal text are used for archaea and bacteria, respectively.
-
-## Sample locations on world map (Figure S1)
-```{r orp16S_S1, message = FALSE, results = "hide", out.width='100%', fig.width = 26, fig.height = 15, out.extra = 'class="full-width"', pngquant = pngquant, dpi = 100}
-orp16S_S1()
-```
-
-**Data sources:** coastlineWorld dataset in R package oce [@KR21]; shapefiles for North American Great Lakes [@USGS10].
-
-## Eh-pH diagram for all environment types (Figure S2)
-```{r orp16S_S2, message = FALSE, results = "hide", out.width='100%', fig.width = 8, fig.height = 6, pngquant = pngquant}
-orp16S_S2()
-```
-
-**Data source:** Outline is from @BKM60.
-
 
 ## Regression slopes from local to global scale (Figure S4)
 ```{r orp16S_S4, message = FALSE, results = "hide", out.width='100%', fig.width = 8, fig.height = 3, out.extra = 'class="full-width"', pngquant = pngquant, dpi = 100}

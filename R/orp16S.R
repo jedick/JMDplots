@@ -30,8 +30,8 @@ EZlm <- read.csv(system.file("extdata/orp16S/EZlm.csv", package = "JMDplots"))
 ### Functions for main figures ###
 ##################################
 
-# Figure 1: Methods overview and Winogradsky columns 20221110
 
+# Figure 1: Methods overview and Winogradsky columns 20221110
 orp16S_1 <- function(pdf = FALSE) {
 
   if(pdf) pdf("Figure_1.pdf", width = 6/(8/15), height = 4)
@@ -166,364 +166,16 @@ orp16S_1 <- function(pdf = FALSE) {
 
 }
 
-# Figure 3: Associations between Eh7 and ZC at local scales 20220517
-orp16S_3 <- function(pdf = FALSE) {
-  if(pdf) pdf("Figure_3.pdf", width = 8, height = 6)
-  mat <- matrix(c(1,1,1,1, 2,2,2,2, 3,3,3,3,
-                  0,0,0,0,0,0,0,0,0,0,0,0,
-                  4,4,4,4,4, 0, 6,6,6, 7,7,7,
-                  5,5,5,5,5, 0, 6,6,6, 7,7,7),
-                nrow = 4, byrow = TRUE)
-  layout(mat, heights = c(3, 0.75, 3, 3))
-  par(mar = c(3, 4, 3, 1))
-  par(mgp = c(2.5, 1, 0))
 
-  ## Panel A: Analysis of selected datasets 20211003
-  # Daya Bay (Sediment)
-  plotEZ("WHLH21a", "Bacteria", groupby = "Position", groups = c("Surface", "Middle", "Bottom"),
-    legend.x = "bottomleft", title.line = NULL, dxlim = c(-20, 0), slope.legend = "right")
-  title("Daya Bay\n(Sediment bacteria)", font.main = 1)
-  label.figure("a", font = 2, cex = 2, yfrac = 0.9)
-  # Bay of Biscay (Sediment)
-  plotEZ("LMBA21_2017", "Bacteria", groupby = "Season", groups = c("Summer", "Winter"),
-    legend.x = "bottomright", title.line = NULL, dxlim = c(0, 170), dylim = c(-0.01, 0), slope.legend = "bottom")
-  title("Bay of Biscay\n(Sediment bacteria)", font.main = 1)
-  # Hunan Soil (Soil)
-  plotEZ("MLL+19", "Bacteria", groupby = "Type", groups = c("Upland", "Paddy", "Sediment"),
-    title.line = NULL, dylim = c(0, 0.01), slope.legend = "top")
-  title("Hunan Province\n(Soil and sediment bacteria)", font.main = 1)
+# Figure 2: Sample locations and Eh-pH diagram 20221110
+orp16S_2 <- function(pdf = FALSE) {
 
-  ## Panel B: Slope vs log10(number of samples) for all datasets
-  par(mar = c(3.6, 4, 1, 1))
-  # Use Bacteria only 20210913
-  lmbac <- EZlm[EZlm$lineage == "Bacteria", ]
-  # Get color according to environment group
-  env <- envirodat[match(lmbac$study, envirodat$study), ]
-  # Get range for included samples 20210905
-  i1 <- c(1, 2, 4, 5)
-  j1 <- env$groupnum %in% i1
-  i2 <- c(3, 6, 7)
-  j2 <- env$groupnum %in% i2
-  xlim <- range(log10(lmbac$nsamp[j1 | j2]))
-  # Multiply by 1e3 to use V-1 instead of mV-1 20210913
-  # NOTE: conversion to V-1 has been moved to orp16S_S3() 20220520
-  ymaxabs <- max(abs(lmbac$slope[j1 | j2]))
-  ylim <- c(-ymaxabs*1.2, ymaxabs)
-  # River & seawater, lake & pond, geothermal, hyperalkaline
-  plot(xlim, ylim, type = "n", xlab = quote(log[10]~"(Number of samples)"), ylab = quote("Slope of linear fit"~(V^-1)))
-  abline(h = 0, lty = 2, lwd = 1.5, col = "gray50")
-  points(log10(lmbac$nsamp[j1]), lmbac$slope[j1], pch = 19, col = orp16Scol[env$groupnum[j1]])
-  # Add legend
-  ltext <- names(envirotype)[i1[1:2]]
-  legend("bottomleft", ltext, pch = 19, col = orp16Scol[i1[1:2]])
-  ltext <- names(envirotype)[i1[3:4]]
-  legend("bottomright", ltext, pch = 19, col = orp16Scol[i1[3:4]])
-  title("Linear regressions for bacterial communities\nin each dataset", font.main = 1, xpd = NA, line = 0.7)
-  label.figure("b", font = 2, cex = 2, yfrac = 1.05)
-  # Groundwater, sediment, soil
-  plot(xlim, ylim, type = "n", xlab = quote(log[10]~"(Number of samples)"), ylab = quote("Slope of linear fit"~(V^-1)))
-  abline(h = 0, lty = 2, lwd = 1.5, col = "gray50")
-  points(log10(lmbac$nsamp[j2]), lmbac$slope[j2], pch = 19, col = orp16Scol[env$groupnum[j2]])
-  ltext <- names(envirotype)[i2]
-  legend("bottomright", ltext, pch = 19, col = orp16Scol[i2])
+  ## Figure 2a: Sample locations on world map
 
-  ## Panel C: Distinctions in carbon oxidation state estimated for different geothermal areas 20210930
-  # Use Geothermal datasets
-  i <- 4
-  studies <- envirotype[[i]]
-  # Assign colors
-  # Use blue for neutral/alkaline
-  col <- rep(orp16Scol[1], length(studies))
-  # Use red for acidic
-  iacid <- studies %in% c("PCL+18_Acidic", "LMG+20")
-  col[iacid] <- orp16Scol[4]
-  # Use gray for sediments
-  ised <- studies %in% c("PBU+20", "MWY+21")
-  col[ised] <- "gray"
-
-  # Offset for labels 20211012
-  dx <- list(
-    c(40, -190, -220, 40, -180),
-    c(-380, -130, -120, NA, -200)
-  )
-  dy <- list(
-    c(0, -0.015, -0.03, 0, -0.01),
-    c(-0.002, 0.03, -0.007, NA, 0.007)
-  )
-
-  # Loop over Bacteria and Archaea
-  lineages <- c("Bacteria", "Archaea")
-  for(k in 1:2) {
-    dat <- EZlm[EZlm$lineage == lineages[k], ]
-    plot(c(-450, 400), c(-0.24, -0.12), type = "n", xlab = "Eh7 (mV)", ylab = cplab$ZC)
-    for(j in seq_along(studies)) {
-      with(dat[dat$study == studies[j], ], {
-        # Divide by 1e3 to convert slope from V-1 to mV-1 20220520
-        y <- function(x) intercept + slope * x / 1e3
-        Eh7 <- c(Eh7min, Eh7max)
-        ZC <- y(Eh7)
-        if(length(Eh7) > 0) {
-          lines(Eh7, ZC, col = col[j], lwd = 2)
-          # Add number to identify dataset
-          text(tail(Eh7, 1) + dx[[k]][j], tail(ZC, 1) + dy[[k]][j], j)
-        }
-      })
-    }
-    title(paste0("Geothermal\n", tolower(lineages[k])), font.main = 1, xpd = NA, line = 0.7)
-    if(k==1) {
-      label.figure("c", font = 2, cex = 2, yfrac = 1.025)
-      # Add legend
-      lacid <- paste0("Acidic (", paste(which(iacid), collapse = ", "), ")")
-      lneut <- "Circumneutral to"
-      lalk <- paste0("alkaline (", paste(which(col == orp16Scol[1]), collapse = ", "), ")")
-      lsed <- paste0("Sediment (", paste(which(ised), collapse = ", "), ")")
-      legend("topleft", c(lacid, lneut, lalk, lsed), col = c(orp16Scol[4], orp16Scol[1], NA, "gray"), lwd = 2, bty = "n")
-    }
-  }
-
-  if(pdf) dev.off()
-
-}
-
-# Figure 4: Associations between Eh7 and ZC at a global scale 20210828
-orp16S_4 <- function(pdf = FALSE, EMP_primers = FALSE) {
-
-  if(pdf) {
-    if(EMP_primers) pdf("Figure_S6.pdf", width = 10, height = 7)
-    else pdf("Figure_4.pdf", width = 10, height = 7)
-  }
-  mat <- matrix(c(
-    16, 16, rep(1:7, each = 6), 17, 17,
-    16, 16, rep(8:14, each = 6), 18, 18,
-    rep(15, 46),
-    rep(0, 46),
-    rep(0, 5), rep(19, 16), rep(20, 16), rep(21, 9)
-  ), nrow = 5, byrow = TRUE)
-  layout(mat, heights = c(2, 2, 0.5, 0.5, 4))
-  par(mar = c(4, 4, 1, 1))
-  par(mgp = c(2.5, 1, 0))
-
-  ## Take only datasets that use EMP primers 20221004
-  if(EMP_primers) {
-    uses_EMP_primers <- c(
-      "MLL+18", "LWJ+21", "RARG22",                           # River & Seawater
-      "MTC21",                                                # Lake & Pond
-      "PCL+18_Acidic", "PCL+18_Alkaline", "GWS+20", "MWY+21", # Geothermal
-      "SBP+20", "RMB+17", "PSB+21",                           # Hyperalkaline
-      "WLJ+16", "ZDW+19", "DJK+18", "APV+20", "MGW+22",       # Groundwater
-      "OHL+18_DNA", "ZHZ+19",                                 # Sediment
-      "MLL+19", "PSG+20", "RKSK22", "CKB+22"                  # Soil
-    )
-    EZdat <- EZdat[EZdat$study %in% uses_EMP_primers, ]
-    # Make sure we didn't miss any studies (check for typos ...)
-    stopifnot(all(uses_EMP_primers %in% EZdat$study))
-  }
-
-  ## Panel A: Scatterplots and fits for Bacteria and Archaea in each environment
-  par(mar = c(0, 0, 1, 0))
-  xlim <- range(EZdat$Eh7)
-  ylim <- range(EZdat$ZC, -0.1)
-  eedat <- EZdat[EZdat$lineage == "Bacteria", ]
-  global.slopes <- list()
-  global.slopes$Bacteria <- eachenv(eedat, xlim = xlim, ylim = ylim, lineage = "Bacteria")
-  par(mar = c(1, 0, 0, 0))
-  eedat <- EZdat[EZdat$lineage == "Archaea", ]
-  global.slopes$Archaea <- eachenv(eedat, xlim = xlim, ylim = ylim, lineage = "Archaea")
-  # Add labels
-  plot.new()
-  text(0.5, -0.5, "Eh7 (mV)", cex = 1.2, xpd = NA)
-  plot.new()
-  text(0.2, 0.5, cplab$ZC, cex = 1.2, srt = 90, xpd = NA)
-  label.figure("a", font = 2, cex = 2.4, xfrac = 0.2, yfrac = 0.97)
-  plot.new()
-  text(0.3, 0.5, "Bacteria", srt = 90, xpd = NA)
-  plot.new()
-  text(0.3, 0.5, "Archaea", srt = 90, xpd = NA)
- 
-  ## Panel B: Scatterplots and fits for Bacteria and Archaea in all environments 20210914
-  # Start plot for Bacteria
-  par(mar = c(4, 4, 1, 1))
-  plot(c(-500, 650), range(EZdat$ZC), type = "n", xlab = "Eh7 (mV)", ylab = cplab$ZC)
-  # Use Bacteria only
-  thisdat <- EZdat[EZdat$lineage == "Bacteria", ]
-  # Add linear fit; include number of studies in legend 20210925
-  nstudy <- length(unique(thisdat$study))
-  add.linear.global(thisdat$Eh7, thisdat$ZC, nstudy)
-  # Add points
-  eachenv(thisdat, add = TRUE, do.linear = FALSE)
-  title("Bacteria", font.main = 1, line = 0.5, xpd = NA)
-  label.figure("b", font = 2, cex = 2.4, xfrac = 0.05, yfrac = 1)
-
-  # Now do Archaea
-  plot(c(-500, 650), range(EZdat$ZC), type = "n", xlab = "Eh7 (mV)", ylab = cplab$ZC)
-  thisdat <- EZdat[EZdat$lineage == "Archaea", ]
-  nstudy <- length(unique(thisdat$study))
-  add.linear.global(thisdat$Eh7, thisdat$ZC, nstudy, inset = c(0, 0.05))
-  eachenv(thisdat, add = TRUE, do.linear = FALSE)
-  title("Archaea", font.main = 1, line = 0.5, xpd = NA)
-
-  # Add legend
-  par(mar = c(4, 1, 1, 1))
-  plot.new()
-  ienv = c(1, 2, 4, 5, 3, 6, 7)
-  ltext <- names(envirotype)[ienv]
-  legend("left", ltext, pch = 19, col = orp16Scol[ienv], bty = "n")
-
-  if(pdf) dev.off()
-  # Return slopes 20220611
-  invisible(global.slopes)
-
-}
-
-# Figure 5: Comparison of 16S-based community reference proteomes with metaproteomes 20220930
-orp16S_5 <- function(pdf = FALSE) {
-
-  if(pdf) pdf("Figure_5.pdf", width = 8, height = 7)
-  par(mfrow = c(2, 2))
-  par(mar = c(4.5, 4, 3.5, 1))
-  par(mgp = c(2.5, 1, 0))
-  ylim <- c(-0.16, -0.08)
-
-  # Loop over months
-  for(month in c("Jun", "Sep")) {
-
-    study <- paste0("WHLH21_", month)
-    longmonth <- ifelse(month == "Jun", "June", "September")
-    label <- ifelse(month == "Jun", "a", "b")
-    legend.x <- ifelse(month == "Jun", "topright", NA)
-
-    # Plot 1: ZC vs Eh7 for 16S data
-    plotEZ(study, "Bacteria", groupby = "Stage", groups = c("Cyanobacteria", "Cyanolichen", "Chlorolichen", "Moss"), legend.x = legend.x,
-      ylim = ylim, title.line = NULL, slope.legend = "topleft", ylab = quote(italic(Z)[C]~"of community reference proteome"))
-    # Collection date is from BioSample data for PRJNA640847
-    title(paste("16S rRNA gene sequences of biocrusts\ncollected in", longmonth, "2018"), font.main = 1)
-    label.figure(label, font = 2, cex = 2)
-    # Get 16S data
-    metrics <- getmetrics_orp16S("WHLH21")
-    mdat <- getmdat_orp16S(study, metrics = metrics)
-    ZC_16S <- mdat$metrics$ZC
-
-    # Plot 2: ZC vs Eh for metaproteome
-    # Amino acid composition and ZC
-    file <- paste0("extdata/orp16S/HWLH22_", month, "_2018_aa.csv")
-    aa <- read.csv(system.file(file, package = "JMDplots"))
-    ZC <- ZCAA(aa)
-    # Match 16S to MP samples
-    iaa <- match(mdat$metadata$LibraryName, paste0(aa$abbrv, aa$organism))
-    ZC_MP <- ZCAA(aa)[iaa]
-    # Get point symbols and color
-    groups <- c("Cyanobacteria", "Cyanolichen", "Chlorolichen", "Moss")
-    igroup <- match(mdat$metadata$Stage, groups)
-    pch <- (21:24)[igroup]
-    col <- orp16Scol[igroup]
-    # Make plot
-    Eh7 <- mdat$metadata$Eh7
-    # The following is adapted from plotEZ()
-    # Start new plot
-    plot(Eh7, ZC_MP, xlab = "", type = "n",
-      ylim = ylim, ylab = quote(italic(Z)[C]~"of peptides from metaproteome"))
-    # Draw x-axis label with mtext to avoid getting cut off by small margin 20220517
-    mtext("Eh7 (mV)", side = 1, line = par("mgp")[1], cex = par("cex"))
-    points(Eh7, ZC_MP, pch = pch, col = col, bg = col)
-    add.linear.local(Eh7, ZC_MP, legend = "bottomleft")
-    # Collection date is from https://www.iprox.cn/page/project.html?id=IPX0003299000
-    title(paste("Metaproteomes of biocrusts\ncollected in", longmonth, "2018"), font.main = 1)
-
-  }
-
-  if(pdf) dev.off()
-
-}
-
-# Figure 6: Most abundant genera at low and high Eh7 in geothermal and hyperalkaline areas 20221006
-orp16S_6 <- function(pdf = FALSE) {
-  if(pdf) pdf("Figure_6.pdf", width = 8.5, height = 5)
-  # Read output of orp16S_D3()
-  gg <- read.csv(system.file("extdata/orp16S/Dataset_S3.csv", package = "JMDplots"))
-  # Keep Geothermal and Hyperalkaline datasets
-  gg <- gg[gg$envirotype %in% c("Geothermal", "Hyperalkaline"), ]
-  # Get colors
-  ienv <- match(gg$envirotype, names(envirotype))
-  col <- orp16Scol[ienv]
-  # Start plot
-  par(mar = c(3, 4, 0.5, 0.5))
-  plot(c(1, 9.5), range(gg$Q1.ZC, gg$Q4.ZC), xlab = "", xaxt = "n", ylab = cplab$"ZC", type = "n")
-  abline(h = seq(-0.22, -0.14, 0.02), lty = 3, col = 8, lwd = 1.5)
-  axis(1, at = c(3.25, 7.75), labels = c("Low Eh7 - High Eh7", "Low Eh7 - High Eh7"), tick = FALSE, padj = -1.5)
-  axis(1, at = c(3.25, 7.75), labels = c("Geothermal", "Hyperalkaline"), tick = FALSE, padj = 1, font.axis = 2)
-
-  # Add points and labels for Geothermal
-  igeo <- gg$envirotype == "Geothermal"
-  iarc <- gg$lineage[igeo] == "Archaea"
-  # Low Eh7
-  ZC <- gg$Q1.ZC[igeo]
-  genus <- gg$Q1.genus[igeo]
-  idup <- duplicated(genus)
-  x <- ifelse(idup, 3.12, 3)
-  points(x, ZC, col = col[igeo], pch = 19)
-  dy <- rep(0, sum(igeo))
-  dy[genus == "Schleiferia"] <- 0.002
-  dy[genus == "Methanobrevibacter"] <- -0.002
-  dy[genus == "Hydrogenobaculum"] <- 0.003
-  dy[genus == "Fervidicoccus"] <- -0.0005
-  text(rep(3, sum(igeo))[iarc & !idup], (ZC + dy)[iarc & !idup], paste0(genus, " ")[iarc & !idup], adj = 1, font = 4)
-  text(rep(3, sum(igeo))[!iarc & !idup], (ZC + dy)[!iarc & !idup], paste0(genus, " ")[!iarc & !idup], adj = 1, font = 3)
-  # High Eh7
-  ZC <- gg$Q4.ZC[igeo]
-  genus <- gg$Q4.genus[igeo]
-  idup <- duplicated(genus)
-  x <- ifelse(idup, 3.38, 3.5)
-  points(x, ZC, col = col[igeo], pch = 19)
-  dy <- rep(0, sum(igeo))
-  dy[genus == "Roseiflexus"] <- 0.003
-  dy[genus == "Acidithiobacillus"] <- -0.001
-  dy[genus == "Vogesella"] <- -0.0025
-  dy[genus == "Bacillus"] <- 0.001
-  dy[genus == "Thermus"] <- -0.001
-  text(rep(3.5, sum(igeo))[iarc & !idup], (ZC + dy)[iarc & !idup], paste0(" ", genus)[iarc & !idup], adj = 0, font = 4)
-  text(rep(3.5, sum(igeo))[!iarc & !idup], (ZC + dy)[!iarc & !idup], paste0(" ", genus)[!iarc & !idup], adj = 0, font = 3)
-
-  # Add points and labels for Hyperalkaline
-  ihyper <- gg$envirotype == "Hyperalkaline"
-  iarc <- gg$lineage[ihyper] == "Archaea"
-  # Low Eh7
-  ZC <- gg$Q1.ZC[ihyper]
-  genus <- gg$Q1.genus[ihyper]
-  idup <- duplicated(genus)
-  x <- ifelse(idup, 7.62, 7.5)
-  points(x, ZC, col = col[ihyper], pch = 19)
-  dy <- rep(0, sum(ihyper))
-  dy[genus == "Silanimonas"] <- 0.0005
-  dy[genus == "Hydrogenophaga"] <- -0.0005
-  text(rep(7.5, sum(ihyper))[iarc & !idup], (ZC + dy)[iarc & !idup], paste0(genus, " ")[iarc & !idup], adj = 1, font = 4)
-  text(rep(7.5, sum(ihyper))[!iarc & !idup], (ZC + dy)[!iarc & !idup], paste0(genus, " ")[!iarc & !idup], adj = 1, font = 3)
-  # High Eh7
-  ZC <- gg$Q4.ZC[ihyper]
-  genus <- gg$Q4.genus[ihyper]
-  idup <- duplicated(genus)
-  x <- ifelse(idup, 7.88, 8)
-  points(x, ZC, col = col[ihyper], pch = 19)
-  dy <- rep(0, sum(ihyper))
-  dy[genus == "Hydrogenophaga"] <- 0.0022
-  dy[genus == "Comamonas"] <- -0.00052
-  dy[genus == "Sulfuritortus"] <- 0.0015
-  dy[genus == "Alkalinema"] <- -0.0015
-  dy[genus == "Nitrososphaera"] <- 0.0005
-  dy[genus == "Acinetobacter"] <- -0.0005
-  text(rep(8, sum(ihyper))[iarc & !idup], (ZC + dy)[iarc & !idup], paste0(" ", genus)[iarc & !idup], adj = 0, font = 4)
-  text(rep(8, sum(ihyper))[!iarc & !idup], (ZC + dy)[!iarc & !idup], paste0(" ", genus)[!iarc & !idup], adj = 0, font = 3)
-
-  if(pdf) dev.off()
-}
-
-###########################################
-### Functions for supplementary figures ###
-###########################################
-
-# Figure S1: Sample locations on world map
-orp16S_S1 <- function(pdf = FALSE) {
-
-  if(pdf) pdf("Figure_S1.pdf", width = 26, height = 15)
+  if(pdf) pdf("Figure_2.pdf", width = 26, height = 15+9-1)
+  mat <- matrix(c(1,1,1,1, 1,2,3,1, 0,2,3,0), nrow = 3, byrow = TRUE)
+  layout(mat, heights = c(14, 1, 8), widths = c(7, 9, 3, 7))
+  par(cex = 1)
 
   # Coordinates for orp16S datasets
   file <- tempfile()
@@ -684,15 +336,10 @@ orp16S_S1 <- function(pdf = FALSE) {
   legend("bottomright", ltext, pch = c(19, 15, 20, NA, 17, 1), col = c(1, 1, 1, NA, orp16Scol[1], 1),
          bty = "n", cex = 2, pt.cex = c(3, 3, 3, 3, 2, 2), inset = c(0, -0.03))
   par(xpd = FALSE)
+  label.figure("a", font = 2, cex = 4)
 
-  if(pdf) dev.off()
-
-}
-
-# Figure S2: Eh-pH diagram for all environment types 20220516
-orp16S_S2 <- function(pdf = FALSE) {
-  if(pdf) pdf("Figure_S2.pdf", width = 8, height = 6)
-  layout(t(matrix(1:2)), widths = c(3, 1))
+  ## Figure 2b: Eh-pH diagram for all environment types 20220516
+  par(cex = 2)
   # Get data for unique samples
   ssr <- paste(EZdat$study, EZdat$sample, EZdat$Run, sep = "_")
   idup <- duplicated(ssr)
@@ -734,14 +381,376 @@ orp16S_S2 <- function(pdf = FALSE) {
   text(-0.5, -35, quote(H[2]), cex = 1.2, srt = -30)
   text(5.5, 840, quote(H[2]*O), cex = 1.2, srt = -30)
   text(6, 930, quote(O[2]), cex = 1.2, srt = -30)
+  label.figure("b", font = 2, cex = 2)
+
+  # Add legend
+  par(mar = c(4, 1, 1, 1))
+  plot.new()
+  ienv = c(1, 2, 4, 5, 3, 6, 7)
+  ltext <- names(envirotype)[ienv]
+  legend("left", ltext, pch = 19, col = orp16Scol[ienv], bty = "n", xpd = NA)
+
+  if(pdf) dev.off()
+
+}
+
+
+# Figure 3: Associations between Eh7 and ZC at local scales 20220517
+orp16S_3 <- function(pdf = FALSE) {
+  if(pdf) pdf("Figure_3.pdf", width = 8, height = 6)
+  mat <- matrix(c(1,1,1,1, 2,2,2,2, 3,3,3,3,
+                  0,0,0,0,0,0,0,0,0,0,0,0,
+                  4,4,4,4,4, 0, 6,6,6, 7,7,7,
+                  5,5,5,5,5, 0, 6,6,6, 7,7,7),
+                nrow = 4, byrow = TRUE)
+  layout(mat, heights = c(3, 0.75, 3, 3))
+  par(mar = c(3, 4, 3, 1))
+  par(mgp = c(2.5, 1, 0))
+
+  ## Panel A: Analysis of selected datasets 20211003
+  # Daya Bay (Sediment)
+  plotEZ("WHLH21a", "Bacteria", groupby = "Position", groups = c("Surface", "Middle", "Bottom"),
+    legend.x = "bottomleft", title.line = NULL, dxlim = c(-20, 0), slope.legend = "right")
+  title("Daya Bay\n(Sediment bacteria)", font.main = 1)
+  label.figure("a", font = 2, cex = 2, yfrac = 0.9)
+  # Bay of Biscay (Sediment)
+  plotEZ("LMBA21_2017", "Bacteria", groupby = "Season", groups = c("Summer", "Winter"),
+    legend.x = "bottomright", title.line = NULL, dxlim = c(0, 170), dylim = c(-0.01, 0), slope.legend = "bottom")
+  title("Bay of Biscay\n(Sediment bacteria)", font.main = 1)
+  # Hunan Soil (Soil)
+  plotEZ("MLL+19", "Bacteria", groupby = "Type", groups = c("Upland", "Paddy", "Sediment"),
+    title.line = NULL, dylim = c(0, 0.01), slope.legend = "top")
+  title("Hunan Province\n(Soil and sediment bacteria)", font.main = 1)
+
+  ## Panel B: Slope vs log10(number of samples) for all datasets
+  par(mar = c(3.6, 4, 1, 1))
+  # Use Bacteria only 20210913
+  lmbac <- EZlm[EZlm$lineage == "Bacteria", ]
+  # Get color according to environment group
+  env <- envirodat[match(lmbac$study, envirodat$study), ]
+  # Get range for included samples 20210905
+  i1 <- c(1, 2, 4, 5)
+  j1 <- env$groupnum %in% i1
+  i2 <- c(3, 6, 7)
+  j2 <- env$groupnum %in% i2
+  xlim <- range(log10(lmbac$nsamp[j1 | j2]))
+  # Multiply by 1e3 to use V-1 instead of mV-1 20210913
+  # NOTE: conversion to V-1 has been moved to orp16S_S3() 20220520
+  ymaxabs <- max(abs(lmbac$slope[j1 | j2]))
+  ylim <- c(-ymaxabs*1.2, ymaxabs)
+  # River & seawater, lake & pond, geothermal, hyperalkaline
+  plot(xlim, ylim, type = "n", xlab = quote(log[10]~"(Number of samples)"), ylab = quote("Slope of linear fit"~(V^-1)))
+  abline(h = 0, lty = 2, lwd = 1.5, col = "gray50")
+  points(log10(lmbac$nsamp[j1]), lmbac$slope[j1], pch = 19, col = orp16Scol[env$groupnum[j1]])
+  # Add legend
+  ltext <- names(envirotype)[i1[1:2]]
+  legend("bottomleft", ltext, pch = 19, col = orp16Scol[i1[1:2]])
+  ltext <- names(envirotype)[i1[3:4]]
+  legend("bottomright", ltext, pch = 19, col = orp16Scol[i1[3:4]])
+  title("Linear regressions for bacterial communities\nin each dataset", font.main = 1, xpd = NA, line = 0.7)
+  label.figure("b", font = 2, cex = 2, yfrac = 1.05)
+  # Groundwater, sediment, soil
+  plot(xlim, ylim, type = "n", xlab = quote(log[10]~"(Number of samples)"), ylab = quote("Slope of linear fit"~(V^-1)))
+  abline(h = 0, lty = 2, lwd = 1.5, col = "gray50")
+  points(log10(lmbac$nsamp[j2]), lmbac$slope[j2], pch = 19, col = orp16Scol[env$groupnum[j2]])
+  ltext <- names(envirotype)[i2]
+  legend("bottomright", ltext, pch = 19, col = orp16Scol[i2])
+
+  ## Panel C: Distinctions in carbon oxidation state estimated for different geothermal areas 20210930
+  # Use Geothermal datasets
+  i <- 4
+  studies <- envirotype[[i]]
+  # Assign colors
+  # Use blue for neutral/alkaline
+  col <- rep(orp16Scol[1], length(studies))
+  # Use red for acidic
+  iacid <- studies %in% c("PCL+18_Acidic", "LMG+20")
+  col[iacid] <- orp16Scol[4]
+  # Use gray for sediments
+  ised <- studies %in% c("PBU+20", "MWY+21")
+  col[ised] <- "gray"
+
+  # Offset for labels 20211012
+  dx <- list(
+    c(40, -190, -220, 40, -180),
+    c(-380, -130, -120, NA, -200)
+  )
+  dy <- list(
+    c(0, -0.015, -0.03, 0, -0.01),
+    c(-0.002, 0.03, -0.007, NA, 0.007)
+  )
+
+  # Loop over Bacteria and Archaea
+  lineages <- c("Bacteria", "Archaea")
+  for(k in 1:2) {
+    dat <- EZlm[EZlm$lineage == lineages[k], ]
+    plot(c(-450, 400), c(-0.24, -0.12), type = "n", xlab = "Eh7 (mV)", ylab = cplab$ZC)
+    for(j in seq_along(studies)) {
+      with(dat[dat$study == studies[j], ], {
+        # Divide by 1e3 to convert slope from V-1 to mV-1 20220520
+        y <- function(x) intercept + slope * x / 1e3
+        Eh7 <- c(Eh7min, Eh7max)
+        ZC <- y(Eh7)
+        if(length(Eh7) > 0) {
+          lines(Eh7, ZC, col = col[j], lwd = 2)
+          # Add number to identify dataset
+          text(tail(Eh7, 1) + dx[[k]][j], tail(ZC, 1) + dy[[k]][j], j)
+        }
+      })
+    }
+    title(paste0("Geothermal\n", tolower(lineages[k])), font.main = 1, xpd = NA, line = 0.7)
+    if(k==1) {
+      label.figure("c", font = 2, cex = 2, yfrac = 1.025)
+      # Add legend
+      lacid <- paste0("Acidic (", paste(which(iacid), collapse = ", "), ")")
+      lneut <- "Circumneutral to"
+      lalk <- paste0("alkaline (", paste(which(col == orp16Scol[1]), collapse = ", "), ")")
+      lsed <- paste0("Sediment (", paste(which(ised), collapse = ", "), ")")
+      legend("topleft", c(lacid, lneut, lalk, lsed), col = c(orp16Scol[4], orp16Scol[1], NA, "gray"), lwd = 2, bty = "n")
+    }
+  }
+
+  if(pdf) dev.off()
+
+}
+
+
+# Figure 4: Associations between Eh7 and ZC at a global scale 20210828
+orp16S_4 <- function(pdf = FALSE, EMP_primers = FALSE) {
+
+  if(pdf) {
+    if(EMP_primers) pdf("Figure_S6.pdf", width = 10, height = 7)
+    else pdf("Figure_4.pdf", width = 10, height = 7)
+  }
+  mat <- matrix(c(
+    16, 16, rep(1:7, each = 6), 17, 17,
+    16, 16, rep(8:14, each = 6), 18, 18,
+    rep(15, 46),
+    rep(0, 46),
+    rep(0, 5), rep(19, 16), rep(20, 16), rep(21, 9)
+  ), nrow = 5, byrow = TRUE)
+  layout(mat, heights = c(2, 2, 0.5, 0.5, 4))
+  par(mar = c(4, 4, 1, 1))
+  par(mgp = c(2.5, 1, 0))
+
+  ## Take only datasets that use EMP primers 20221004
+  if(EMP_primers) {
+    uses_EMP_primers <- c(
+      "MLL+18", "LWJ+21", "RARG22",                           # River & Seawater
+      "MTC21",                                                # Lake & Pond
+      "PCL+18_Acidic", "PCL+18_Alkaline", "GWS+20", "MWY+21", # Geothermal
+      "SBP+20", "RMB+17", "PSB+21",                           # Hyperalkaline
+      "WLJ+16", "ZDW+19", "DJK+18", "APV+20", "MGW+22",       # Groundwater
+      "OHL+18_DNA", "ZHZ+19",                                 # Sediment
+      "MLL+19", "PSG+20", "RKSK22", "CKB+22"                  # Soil
+    )
+    EZdat <- EZdat[EZdat$study %in% uses_EMP_primers, ]
+    # Make sure we didn't miss any studies (check for typos ...)
+    stopifnot(all(uses_EMP_primers %in% EZdat$study))
+  }
+
+  ## Panel A: Scatterplots and fits for Bacteria and Archaea in each environment
+  par(mar = c(0, 0, 1, 0))
+  xlim <- range(EZdat$Eh7)
+  ylim <- range(EZdat$ZC, -0.1)
+  eedat <- EZdat[EZdat$lineage == "Bacteria", ]
+  global.slopes <- list()
+  global.slopes$Bacteria <- eachenv(eedat, xlim = xlim, ylim = ylim, lineage = "Bacteria")
+  par(mar = c(1, 0, 0, 0))
+  eedat <- EZdat[EZdat$lineage == "Archaea", ]
+  global.slopes$Archaea <- eachenv(eedat, xlim = xlim, ylim = ylim, lineage = "Archaea")
+  # Add labels
+  plot.new()
+  text(0.5, -0.5, "Eh7 (mV)", cex = 1.2, xpd = NA)
+  plot.new()
+  text(0.2, 0.5, cplab$ZC, cex = 1.2, srt = 90, xpd = NA)
+  label.figure("a", font = 2, cex = 2.4, xfrac = 0.2, yfrac = 0.97)
+  plot.new()
+  text(0.3, 0.5, "Bacteria", srt = 90, xpd = NA)
+  plot.new()
+  text(0.3, 0.5, "Archaea", srt = 90, xpd = NA)
+ 
+  ## Panel B: Scatterplots and fits for Bacteria and Archaea in all environments 20210914
+  # Start plot for Bacteria
+  par(mar = c(4, 4, 1, 1))
+  plot(c(-500, 650), range(EZdat$ZC), type = "n", xlab = "Eh7 (mV)", ylab = cplab$ZC)
+  # Use Bacteria only
+  thisdat <- EZdat[EZdat$lineage == "Bacteria", ]
+  # Add linear fit; include number of studies in legend 20210925
+  nstudy <- length(unique(thisdat$study))
+  add.linear.global(thisdat$Eh7, thisdat$ZC, nstudy)
+  # Add points
+  eachenv(thisdat, add = TRUE, do.linear = FALSE)
+  title("Bacteria", font.main = 1, line = 0.5, xpd = NA)
+  label.figure("b", font = 2, cex = 2.4, xfrac = 0.05, yfrac = 1)
+
+  # Now do Archaea
+  plot(c(-500, 650), range(EZdat$ZC), type = "n", xlab = "Eh7 (mV)", ylab = cplab$ZC)
+  thisdat <- EZdat[EZdat$lineage == "Archaea", ]
+  nstudy <- length(unique(thisdat$study))
+  add.linear.global(thisdat$Eh7, thisdat$ZC, nstudy, inset = c(0, 0.05))
+  eachenv(thisdat, add = TRUE, do.linear = FALSE)
+  title("Archaea", font.main = 1, line = 0.5, xpd = NA)
+
   # Add legend
   par(mar = c(4, 1, 1, 1))
   plot.new()
   ienv = c(1, 2, 4, 5, 3, 6, 7)
   ltext <- names(envirotype)[ienv]
   legend("left", ltext, pch = 19, col = orp16Scol[ienv], bty = "n")
+
+  if(pdf) dev.off()
+  # Return slopes 20220611
+  invisible(global.slopes)
+
+}
+
+
+# Figure 5: Comparison of 16S-based community reference proteomes with metaproteomes 20220930
+orp16S_5 <- function(pdf = FALSE) {
+
+  if(pdf) pdf("Figure_5.pdf", width = 8, height = 7)
+  par(mfrow = c(2, 2))
+  par(mar = c(4.5, 4, 3.5, 1))
+  par(mgp = c(2.5, 1, 0))
+  ylim <- c(-0.16, -0.08)
+
+  # Loop over months
+  for(month in c("Jun", "Sep")) {
+
+    study <- paste0("WHLH21_", month)
+    longmonth <- ifelse(month == "Jun", "June", "September")
+    label <- ifelse(month == "Jun", "a", "b")
+    legend.x <- ifelse(month == "Jun", "topright", NA)
+
+    # Plot 1: ZC vs Eh7 for 16S data
+    plotEZ(study, "Bacteria", groupby = "Stage", groups = c("Cyanobacteria", "Cyanolichen", "Chlorolichen", "Moss"), legend.x = legend.x,
+      ylim = ylim, title.line = NULL, slope.legend = "topleft", ylab = quote(italic(Z)[C]~"of community reference proteome"))
+    # Collection date is from BioSample data for PRJNA640847
+    title(paste("16S rRNA gene sequences of biocrusts\ncollected in", longmonth, "2018"), font.main = 1)
+    label.figure(label, font = 2, cex = 2)
+    # Get 16S data
+    metrics <- getmetrics_orp16S("WHLH21")
+    mdat <- getmdat_orp16S(study, metrics = metrics)
+    ZC_16S <- mdat$metrics$ZC
+
+    # Plot 2: ZC vs Eh for metaproteome
+    # Amino acid composition and ZC
+    file <- paste0("extdata/orp16S/HWLH22_", month, "_2018_aa.csv")
+    aa <- read.csv(system.file(file, package = "JMDplots"))
+    ZC <- ZCAA(aa)
+    # Match 16S to MP samples
+    iaa <- match(mdat$metadata$LibraryName, paste0(aa$abbrv, aa$organism))
+    ZC_MP <- ZCAA(aa)[iaa]
+    # Get point symbols and color
+    groups <- c("Cyanobacteria", "Cyanolichen", "Chlorolichen", "Moss")
+    igroup <- match(mdat$metadata$Stage, groups)
+    pch <- (21:24)[igroup]
+    col <- orp16Scol[igroup]
+    # Make plot
+    Eh7 <- mdat$metadata$Eh7
+    # The following is adapted from plotEZ()
+    # Start new plot
+    plot(Eh7, ZC_MP, xlab = "", type = "n",
+      ylim = ylim, ylab = quote(italic(Z)[C]~"of peptides from metaproteome"))
+    # Draw x-axis label with mtext to avoid getting cut off by small margin 20220517
+    mtext("Eh7 (mV)", side = 1, line = par("mgp")[1], cex = par("cex"))
+    points(Eh7, ZC_MP, pch = pch, col = col, bg = col)
+    add.linear.local(Eh7, ZC_MP, legend = "bottomleft")
+    # Collection date is from https://www.iprox.cn/page/project.html?id=IPX0003299000
+    title(paste("Metaproteomes of biocrusts\ncollected in", longmonth, "2018"), font.main = 1)
+
+  }
+
+  if(pdf) dev.off()
+
+}
+
+
+# Figure 6: Most abundant genera at low and high Eh7 in geothermal and hyperalkaline areas 20221006
+orp16S_6 <- function(pdf = FALSE) {
+  if(pdf) pdf("Figure_6.pdf", width = 8.5, height = 5)
+  # Read output of orp16S_D3()
+  gg <- read.csv(system.file("extdata/orp16S/Dataset_S3.csv", package = "JMDplots"))
+  # Keep Geothermal and Hyperalkaline datasets
+  gg <- gg[gg$envirotype %in% c("Geothermal", "Hyperalkaline"), ]
+  # Get colors
+  ienv <- match(gg$envirotype, names(envirotype))
+  col <- orp16Scol[ienv]
+  # Start plot
+  par(mar = c(3, 4, 0.5, 0.5))
+  plot(c(1, 9.5), range(gg$Q1.ZC, gg$Q4.ZC), xlab = "", xaxt = "n", ylab = cplab$"ZC", type = "n")
+  abline(h = seq(-0.22, -0.14, 0.02), lty = 3, col = 8, lwd = 1.5)
+  axis(1, at = c(3.25, 7.75), labels = c("Low Eh7 - High Eh7", "Low Eh7 - High Eh7"), tick = FALSE, padj = -1.5)
+  axis(1, at = c(3.25, 7.75), labels = c("Geothermal", "Hyperalkaline"), tick = FALSE, padj = 1, font.axis = 2)
+
+  # Add points and labels for Geothermal
+  igeo <- gg$envirotype == "Geothermal"
+  iarc <- gg$lineage[igeo] == "Archaea"
+  # Low Eh7
+  ZC <- gg$Q1.ZC[igeo]
+  genus <- gg$Q1.genus[igeo]
+  idup <- duplicated(genus)
+  x <- ifelse(idup, 3.12, 3)
+  points(x, ZC, col = col[igeo], pch = 19)
+  dy <- rep(0, sum(igeo))
+  dy[genus == "Schleiferia"] <- 0.002
+  dy[genus == "Methanobrevibacter"] <- -0.002
+  dy[genus == "Hydrogenobaculum"] <- 0.003
+  dy[genus == "Fervidicoccus"] <- -0.0005
+  text(rep(3, sum(igeo))[iarc & !idup], (ZC + dy)[iarc & !idup], paste0(genus, " ")[iarc & !idup], adj = 1, font = 4)
+  text(rep(3, sum(igeo))[!iarc & !idup], (ZC + dy)[!iarc & !idup], paste0(genus, " ")[!iarc & !idup], adj = 1, font = 3)
+  # High Eh7
+  ZC <- gg$Q4.ZC[igeo]
+  genus <- gg$Q4.genus[igeo]
+  idup <- duplicated(genus)
+  x <- ifelse(idup, 3.38, 3.5)
+  points(x, ZC, col = col[igeo], pch = 19)
+  dy <- rep(0, sum(igeo))
+  dy[genus == "Roseiflexus"] <- 0.003
+  dy[genus == "Acidithiobacillus"] <- -0.001
+  dy[genus == "Vogesella"] <- -0.0025
+  dy[genus == "Bacillus"] <- 0.001
+  dy[genus == "Thermus"] <- -0.001
+  text(rep(3.5, sum(igeo))[iarc & !idup], (ZC + dy)[iarc & !idup], paste0(" ", genus)[iarc & !idup], adj = 0, font = 4)
+  text(rep(3.5, sum(igeo))[!iarc & !idup], (ZC + dy)[!iarc & !idup], paste0(" ", genus)[!iarc & !idup], adj = 0, font = 3)
+
+  # Add points and labels for Hyperalkaline
+  ihyper <- gg$envirotype == "Hyperalkaline"
+  iarc <- gg$lineage[ihyper] == "Archaea"
+  # Low Eh7
+  ZC <- gg$Q1.ZC[ihyper]
+  genus <- gg$Q1.genus[ihyper]
+  idup <- duplicated(genus)
+  x <- ifelse(idup, 7.62, 7.5)
+  points(x, ZC, col = col[ihyper], pch = 19)
+  dy <- rep(0, sum(ihyper))
+  dy[genus == "Silanimonas"] <- 0.0005
+  dy[genus == "Hydrogenophaga"] <- -0.0005
+  text(rep(7.5, sum(ihyper))[iarc & !idup], (ZC + dy)[iarc & !idup], paste0(genus, " ")[iarc & !idup], adj = 1, font = 4)
+  text(rep(7.5, sum(ihyper))[!iarc & !idup], (ZC + dy)[!iarc & !idup], paste0(genus, " ")[!iarc & !idup], adj = 1, font = 3)
+  # High Eh7
+  ZC <- gg$Q4.ZC[ihyper]
+  genus <- gg$Q4.genus[ihyper]
+  idup <- duplicated(genus)
+  x <- ifelse(idup, 7.88, 8)
+  points(x, ZC, col = col[ihyper], pch = 19)
+  dy <- rep(0, sum(ihyper))
+  dy[genus == "Hydrogenophaga"] <- 0.0022
+  dy[genus == "Comamonas"] <- -0.00052
+  dy[genus == "Sulfuritortus"] <- 0.0015
+  dy[genus == "Alkalinema"] <- -0.0015
+  dy[genus == "Nitrososphaera"] <- 0.0005
+  dy[genus == "Acinetobacter"] <- -0.0005
+  text(rep(8, sum(ihyper))[iarc & !idup], (ZC + dy)[iarc & !idup], paste0(" ", genus)[iarc & !idup], adj = 0, font = 4)
+  text(rep(8, sum(ihyper))[!iarc & !idup], (ZC + dy)[!iarc & !idup], paste0(" ", genus)[!iarc & !idup], adj = 0, font = 3)
+
   if(pdf) dev.off()
 }
+
+###########################################
+### Functions for supplementary figures ###
+###########################################
 
 # Figure S3: ZC-Eh scatterplots for all studies 20210827
 # This also creates files EZdat (Eh and ZC values) and
