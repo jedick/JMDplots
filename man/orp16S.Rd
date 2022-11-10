@@ -1,12 +1,11 @@
 \encoding{UTF-8}
 \name{orp16S}
 \alias{orp16S}
-\alias{orp16S1}
-\alias{orp16S2}
-\alias{orp16S3}
-\alias{orp16S4}
-\alias{orp16S5}
-\alias{orp16S6}
+\alias{orp16S_1}
+\alias{orp16S_3}
+\alias{orp16S_4}
+\alias{orp16S_5}
+\alias{orp16S_6}
 \alias{orp16S_S1}
 \alias{orp16S_S2}
 \alias{orp16S_S3}
@@ -23,12 +22,11 @@ Plots from the paper by Dick and Meng (2021).
 }
 
 \usage{
-  orp16S1(pdf = FALSE)
-  orp16S2(pdf = FALSE)
-  orp16S3(pdf = FALSE)
-  orp16S4(pdf = FALSE, EMP_primers = FALSE)
-  orp16S5(pdf = FALSE)
-  orp16S6(pdf = FALSE)
+  orp16S_1(pdf = FALSE)
+  orp16S_3(pdf = FALSE)
+  orp16S_4(pdf = FALSE, EMP_primers = FALSE)
+  orp16S_5(pdf = FALSE)
+  orp16S_6(pdf = FALSE)
 
   orp16S_S1(pdf = FALSE)
   orp16S_S2(pdf = FALSE)
@@ -47,7 +45,7 @@ Plots from the paper by Dick and Meng (2021).
 \arguments{
   \item{pdf}{logical, make a PDF file?}
   \item{EMP_primers}{logical, include only datasets using Earth Microbime Project primers (515F/806R)?}
-  \item{global.slopes}{value returned by \code{orp16S3}}
+  \item{global.slopes}{value returned by \code{orp16S_3}}
   \item{study}{character, study name}
   \item{samesign}{logical, only count slopes with same sign of minimum and maximum values in the 95\% CI?}
   \item{mincount}{integer, samples with less than this number of RDP classifications are excluded}
@@ -62,12 +60,11 @@ Plots from the paper by Dick and Meng (2021).
 This table gives a brief description of each plotting function.
 
 \tabular{ll}{
-  \code{orp16S1} \tab Schematic of data and methods \cr
-  \code{orp16S2} \tab Chemical depth profiles in Winogradsky columns \cr
-  \code{orp16S3} \tab Associations between Eh7 and \ZC at local scales \cr
-  \code{orp16S4} \tab Associations between Eh7 and \ZC at a global scale. Set \code{EMP_primers} to TRUE to make Figure S6. \cr
-  \code{orp16S5} \tab Comparison of 16S-based community reference proteomes with metaproteomes \cr
-  \code{orp16S6} \tab Most abundant genera at low and high Eh7 in geothermal and hyperalkaline areas \cr
+  \code{orp16S_1} \tab Methods overview and chemical depth profiles in Winogradsky columns \cr
+  \code{orp16S_3} \tab Associations between Eh7 and \ZC at local scales \cr
+  \code{orp16S_4} \tab Associations between Eh7 and \ZC at a global scale. Set \code{EMP_primers} to TRUE to make Figure S6. \cr
+  \code{orp16S_5} \tab Comparison of 16S_-based community reference proteomes with metaproteomes \cr
+  \code{orp16S_6} \tab Most abundant genera at low and high Eh7 in geothermal and hyperalkaline areas \cr
 
   \code{orp16S_S1} \tab Sample locations on world map \cr
   \code{orp16S_S2} \tab Eh-pH diagram for all environment types (outline is from Baas Becking et al., 1960) \cr
@@ -122,7 +119,7 @@ The function also returns information in a data frame, which is used to fill in 
 }
 
 \seealso{
-\code{\link{plotEZ}} is used to make the \ZC-Eh7 scatterplots and linear fits in \code{orp16S3} and \code{orp16S_S3}.
+\code{\link{plotEZ}} is used to make the \ZC-Eh7 scatterplots and linear fits in \code{orp16S_3} and \code{orp16S_S3}.
 }
 
 \references{
@@ -136,11 +133,8 @@ USGS (2010) Great Lakes and Watersheds Shapefiles. ScienceBase Catalog, U.S. Geo
 }
 
 \examples{
-# Methods outline
-orp16S1()
-
-# Winogradsky columns
-orp16S2()
+# Methods outline and Winogradsky columns
+orp16S_1()
 
 # World map
 orp16S_S1()

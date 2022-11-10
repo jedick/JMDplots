@@ -71,21 +71,16 @@ This vignette was compiled on `r Sys.Date()` with **[JMDplots](https://github.co
 library(JMDplots)
 ```
 
-## Schematic of data and methods (Figure 1)
-```{r orp16S1, message = FALSE, results = "hide", out.width='75%', fig.align='center', fig.width = 6, fig.height = 4, pngquant = pngquant}
-orp16S1()
-```
-
-## Chemical depth profiles in Winogradsky columns (Figure 2)
-```{r orp16S2, message = FALSE, results = "hide", out.width='80%', fig.align='center', fig.width = 7, fig.height = 5, pngquant = pngquant}
-orp16S2()
+## Methods overview and chemical depth profiles in Winogradsky columns (Figure 1)
+```{r orp16S_1, message = FALSE, results = "hide", out.width='100%', fig.width = 11.25, fig.height = 4, out.extra = 'class="full-width"', pngquant = pngquant, dpi = 100}
+orp16S_1()
 ```
 
 **Data sources:** ORP and pH for Eh7 calculation [@DFYS19]; 16S rRNA gene sequences for `r ZC` calculation [@RBW+14].
 
 ## Associations between Eh7 and `r ZC` at local scales (Figure 3)
-```{r orp16S3, message = FALSE, results = "hide", out.width='100%', fig.width = 8, fig.height = 6, pngquant = pngquant, dpi = 100}
-orp16S3()
+```{r orp16S_3, message = FALSE, results = "hide", out.width='100%', fig.width = 8, fig.height = 6, pngquant = pngquant, dpi = 100}
+orp16S_3()
 ```
 
 **Data sources (a):** Daya Bay [@WHLH21a], Bay of Biscay [@LMBA21], Hunan Province [@MLL+19].
@@ -107,20 +102,20 @@ kable(orp16S_T2(samesign = TRUE), col.names = rep(colnames, 2)) %>%
 ```
 
 ## Associations between Eh7 and `r ZC` at a global scale (Figure 4)
-```{r orp16S4, message = FALSE, results = "hide", out.width='100%', fig.width = 10, fig.height = 7, out.extra = 'class="full-width"', pngquant = pngquant, dpi = 100}
-global.slopes <- orp16S4()
+```{r orp16S_4, message = FALSE, results = "hide", out.width='100%', fig.width = 10, fig.height = 7, out.extra = 'class="full-width"', pngquant = pngquant, dpi = 100}
+global.slopes <- orp16S_4()
 ```
 
 ## Comparison of 16S-based community reference proteomes with metaproteomes (Figure 5)
-```{r orp16S5, message = FALSE, results = "hide", out.width='100%', fig.align='center', fig.width = 8, fig.height = 7, pngquant = pngquant, dpi = 100}
-orp16S5()
+```{r orp16S_5, message = FALSE, results = "hide", out.width='100%', fig.align='center', fig.width = 8, fig.height = 7, pngquant = pngquant, dpi = 100}
+orp16S_5()
 ```
 
 **Data sources:** 16S rRNA gene sequences [@WHLH21], metaproteomes [@HWLH22].
 
 ## Most abundant genera at low and high Eh7 in geothermal and hyperalkaline areas (Figure 6)
-```{r orp16S6, message = FALSE, results = "hide", out.width='100%', fig.align='center', fig.width = 8.5, fig.height = 5, pngquant = pngquant, dpi = 100}
-orp16S6()
+```{r orp16S_6, message = FALSE, results = "hide", out.width='100%', fig.align='center', fig.width = 8.5, fig.height = 5, pngquant = pngquant, dpi = 100}
+orp16S_6()
 ```
 
 Bold and normal text are used for archaea and bacteria, respectively.
@@ -152,7 +147,7 @@ orp16S_S5()
 
 ## Global analysis including only datasets using 515F/806R primers from the Earth Microbiome Project (EMP) (Figure S6)
 ```{r orp16S_S6, message = FALSE, results = "hide", out.width='100%', fig.width = 10, fig.height = 7, out.extra = 'class="full-width"', pngquant = pngquant, dpi = 100}
-orp16S4(EMP_primers = TRUE)
+orp16S_4(EMP_primers = TRUE)
 ```
 
 ## Genus-level RDP classifications mapped to NCBI taxonomy (in-text calculation)

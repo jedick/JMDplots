@@ -30,10 +30,15 @@ EZlm <- read.csv(system.file("extdata/orp16S/EZlm.csv", package = "JMDplots"))
 ### Functions for main figures ###
 ##################################
 
-# Figure 1: Schematic of data and methods 20210830
-orp16S1 <- function(pdf = FALSE) {
+# Figure 1: Methods overview and Winogradsky columns 20221110
 
-  if(pdf) pdf("Figure_1.pdf", width = 6, height = 4)
+orp16S_1 <- function(pdf = FALSE) {
+
+  if(pdf) pdf("Figure_1.pdf", width = 6/(8/15), height = 4)
+
+  # Figure 1a: Schematic of data and methods 20210830
+  layout(matrix(1:3, nrow = 1), widths = c(8, 3, 4))
+  par(cex = 1)
 
   # Define colors; adapted from
   # https://cdn.elifesciences.org/author-guide/tables-colour.pdf
@@ -53,7 +58,7 @@ orp16S1 <- function(pdf = FALSE) {
   plot(c(5, 95), c(1, 80), type = "n", axes = FALSE, xlab = "", ylab = "")
   # Uncomment this as a guide for making the 'grid' one 20210927
   #box(lwd = 2)
-  grid.roundrect(0.5, 0.5, 0.99, 0.99, gp = gpar(fill = "azure"))
+  grid.roundrect(0.5*(8/15), 0.5, 0.49, 0.99, gp = gpar(fill = "azure"))
 
   dy <- -2.5
 
@@ -105,7 +110,7 @@ orp16S1 <- function(pdf = FALSE) {
   # Uncomment this to make the original rectangle (as a guide for the 'grid' one)
   #for(bg in c("white", Orange80)) rect(1.2*third, 50+dy, 1.8*third, 70+dy, col = bg)
   # Use this to get rounded corners 20210927
-  for(fill in c("white", Orange80)) grid.roundrect(0.5, 0.7, 0.205, 0.23, gp = gpar(fill = fill))
+  for(fill in c("white", Orange80)) grid.roundrect(0.5*(8/15), 0.7, 0.11, 0.23, gp = gpar(fill = fill))
   text(50, 67+dy, quote(bold(C[bolditalic(c)]*H[bolditalic(h)]*N[bolditalic(n)]*O[bolditalic(o)]*S[bolditalic(s)])), col = OrangeText)
   text(50, 58+dy, "Community\nreference\nproteomes")
 
@@ -116,17 +121,9 @@ orp16S1 <- function(pdf = FALSE) {
   arrows(80, 31+dy, 80, 46.5+dy, code = 3, lwd = 1.5, length = 0.1, col = BlueText)
   text(46, 46+dy, "Thermodynamic prediction", font = 2, cex = 0.9, adj = c(0, 1))
   text(46, 46+dy, "\nPositive correlation between\ncarbon oxidation state\nand redox potential", font = 3, cex = 0.9, adj = c(0, 1))
+  label.figure("a", font = 2, cex = 1.7, xfrac = 0.015, yfrac = 0.97)
 
-  if(pdf) dev.off()
-
-}
-
-# Figure 2: Chemical depth profiles in Winogradsky columns 20210829
-orp16S2 <- function(pdf = FALSE) {
-
-  if(pdf) pdf("Figure_2.pdf", width = 7, height = 5)
-
-  layout(t(matrix(1:2)), widths = c(3, 4))
+  ## Figure 1b: Chemical depth profiles in Winogradsky columns 20210829
   par(mar = c(4, 4, 1, 1), mgp = c(2.5, 1, 0))
 
   # ORP measurements from Diez-Ercilla et al. (2019)
@@ -143,7 +140,7 @@ orp16S2 <- function(pdf = FALSE) {
   lines(Eh7, MODdepth, type = "b", pch = 19)
   text(50, -2.3, "Eh7")
   text(650, -2.3, "Eh")
-  label.figure("a", font = 2, cex = 1.7)
+  label.figure("b", font = 2, cex = 1.7, yfrac = 0.97)
 
   # Get 16S metadata and chemical metrics for Rundell et al. (2014) experiments
   metrics.in <- getmetrics_orp16S("RBW+14")
@@ -162,15 +159,15 @@ orp16S2 <- function(pdf = FALSE) {
     text(-0.182, i - 0.25, label, adj = 1)
   }
   par(xpd = FALSE)
-  label.figure("b", font = 2, cex = 1.7)
+  label.figure("c", font = 2, cex = 1.7, yfrac = 0.97)
 
-  # Reset layout to make orp16S3 in the examples run nicely 20211011
+  # Reset layout to make orp16S_3 in the examples run nicely 20211011
   if(pdf) dev.off() else layout(1)
 
 }
 
 # Figure 3: Associations between Eh7 and ZC at local scales 20220517
-orp16S3 <- function(pdf = FALSE) {
+orp16S_3 <- function(pdf = FALSE) {
   if(pdf) pdf("Figure_3.pdf", width = 8, height = 6)
   mat <- matrix(c(1,1,1,1, 2,2,2,2, 3,3,3,3,
                   0,0,0,0,0,0,0,0,0,0,0,0,
@@ -289,7 +286,7 @@ orp16S3 <- function(pdf = FALSE) {
 }
 
 # Figure 4: Associations between Eh7 and ZC at a global scale 20210828
-orp16S4 <- function(pdf = FALSE, EMP_primers = FALSE) {
+orp16S_4 <- function(pdf = FALSE, EMP_primers = FALSE) {
 
   if(pdf) {
     if(EMP_primers) pdf("Figure_S6.pdf", width = 10, height = 7)
@@ -379,7 +376,7 @@ orp16S4 <- function(pdf = FALSE, EMP_primers = FALSE) {
 }
 
 # Figure 5: Comparison of 16S-based community reference proteomes with metaproteomes 20220930
-orp16S5 <- function(pdf = FALSE) {
+orp16S_5 <- function(pdf = FALSE) {
 
   if(pdf) pdf("Figure_5.pdf", width = 8, height = 7)
   par(mfrow = c(2, 2))
@@ -439,7 +436,7 @@ orp16S5 <- function(pdf = FALSE) {
 }
 
 # Figure 6: Most abundant genera at low and high Eh7 in geothermal and hyperalkaline areas 20221006
-orp16S6 <- function(pdf = FALSE) {
+orp16S_6 <- function(pdf = FALSE) {
   if(pdf) pdf("Figure_6.pdf", width = 8.5, height = 5)
   # Read output of orp16S_D3()
   gg <- read.csv(system.file("extdata/orp16S/Dataset_S3.csv", package = "JMDplots"))
@@ -1060,7 +1057,7 @@ orp16S_S5 <- function(pdf = FALSE) {
 
 }
 
-### NOTE: Figure S6 is made with orp16S4(EMP_primers = FALSE)
+### NOTE: Figure S6 is made with orp16S_4(EMP_primers = FALSE)
 
 ##########################################
 ### Functions for tables and datasets ####
