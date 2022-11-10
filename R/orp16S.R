@@ -435,7 +435,7 @@ orp16S_3 <- function(pdf = FALSE) {
   j2 <- env$groupnum %in% i2
   xlim <- range(log10(lmbac$nsamp[j1 | j2]))
   # Multiply by 1e3 to use V-1 instead of mV-1 20210913
-  # NOTE: conversion to V-1 has been moved to orp16S_S3() 20220520
+  # NOTE: conversion to V-1 has been moved to orp16S_S1() 20220520
   ymaxabs <- max(abs(lmbac$slope[j1 | j2]))
   ylim <- c(-ymaxabs*1.2, ymaxabs)
   # River & seawater, lake & pond, geothermal, hyperalkaline
@@ -519,7 +519,7 @@ orp16S_3 <- function(pdf = FALSE) {
 orp16S_4 <- function(pdf = FALSE, EMP_primers = FALSE) {
 
   if(pdf) {
-    if(EMP_primers) pdf("Figure_S6.pdf", width = 10, height = 7)
+    if(EMP_primers) pdf("Figure_S3.pdf", width = 10, height = 7)
     else pdf("Figure_4.pdf", width = 10, height = 7)
   }
   mat <- matrix(c(
@@ -752,13 +752,13 @@ orp16S_6 <- function(pdf = FALSE) {
 ### Functions for supplementary figures ###
 ###########################################
 
-# Figure S3: ZC-Eh scatterplots for all studies 20210827
+# Figure S1: ZC-Eh scatterplots for all studies 20210827
 # This also creates files EZdat (Eh and ZC values) and
 # EZlm (linear fits) for use by other plotting functions
-orp16S_S3 <- function(pdf = FALSE) {
+orp16S_S1 <- function(pdf = FALSE) {
 
   # Setup figure
-  if(pdf) pdf("Figure_S3.pdf", width = 9, height = 12)
+  if(pdf) pdf("Figure_S1.pdf", width = 9, height = 12)
   par(mfrow = c(4, 3))
 
   results <- c(
@@ -885,144 +885,11 @@ orp16S_S3 <- function(pdf = FALSE) {
 
 }
 
-# Figure S4: Regression slopes from local to global scale 20220611
-orp16S_S4 <- function(global.slopes, pdf = FALSE) {
 
-  if(pdf) pdf("Figure_S4.pdf", width = 8, height = 3)
-  layout(matrix(1:3, nrow = 1), widths = c(5, 4, 4.5))
-  par(mar = c(4, 4, 1, 1))
-  par(mgp = c(2.7, 1, 0))
-  # Get data for Bacteria
-  environment <- "Geothermal"
-  bacdat <- EZdat[EZdat$lineage == "Bacteria", ]
-  gwdat <- bacdat[bacdat$envirotype == environment, ]
-  # Set up plot
-  xlim <- range(gwdat$Eh7)
-  ylim <- range(gwdat$ZC)
-  plot(xlim, ylim, type = "n", xlab = "Eh7 (mV)", ylab = cplab$ZC)
-  # Identify datasets
-  study <- unique(gwdat$study)
-  # Colors for points and lines
-  palette <- "Okabe-Ito"
-  pcol <- palette.colors(n = length(study), palette = palette, alpha = 0.6)
-  lcol <- palette.colors(n = length(study), palette = palette, alpha = 0.8)
-  pch <- rep(22:25, length.out = length(study))
-  # Where to store linear regressions
-  yfits <- xfits <- lms <- list()
-  slopes <- c()
-  # Loop over datasets
-  for(i in 1:length(study)) {
-    # Get data for this study
-    thisstudy <- study[[i]]
-    thisdat <- gwdat[gwdat$study == thisstudy, ]
-    Eh7 <- thisdat$Eh7
-    ZC <- thisdat$ZC
-    # Plot points
-    points(Eh7, ZC, pch = pch[i], cex = 0.7, col = pcol[i], bg = "#00000030")
-    # Fit data with linear model
-    thislm <- lm(ZC ~ Eh7)
-    # Get the slope
-    slope <- thislm$coefficients[2]
-    # Multiply by 1e3 to convert from mV-1 to V-1 or umol-1 to mmol-1
-    slope <- slope * 1e3
-    # Plot linear regression
-    xfit <- range(Eh7)
-    yfit <- predict(thislm, newdata = data.frame(Eh7 = xfit))
-    lines(xfit, yfit, col = pcol[i], lwd = 2, lty = 2)
-    lms[[i]] <- thislm
-    slopes[i] <- slope
-    xfits[[i]] <- xfit
-    yfits[[i]] <- yfit
-  }
-  # Highlight the dataset(s) with the median slope
-  median.slope <- median(slopes)
-  imedian <- which(slopes == median.slope)
-  if(length(imedian)==0) {
-    # We get here if there is an even number of datasets 20220613
-    # Identify the two datasets whose mean slope is the median
-    imedian <- order(abs(slopes - median(slopes)))[1:2]
-    lines(xfits[[imedian[1]]], yfits[[imedian[1]]], col = lcol[imedian[1]], lwd = 3, lty = 2)
-    lines(xfits[[imedian[2]]], yfits[[imedian[2]]], col = lcol[imedian[2]], lwd = 3, lty = 2)
-  } else {
-    lines(xfits[[imedian]], yfits[[imedian]], col = lcol[imedian], lwd = 3, lty = 2)
-  }
-  # Round to fixed number of decimal places
-  local.slope <- formatC(median.slope, digits = 3, format = "f")
+# Figure S2: Compare regressions with Eh7, Eh, and O2 20220517
+orp16S_S2 <- function(pdf = FALSE) {
 
-  # Plot global regression
-  Eh7 <- gwdat$Eh7
-  ZC <- gwdat$ZC
-  thislm <- lm(ZC ~ Eh7)
-  xfit <- range(Eh7)
-  yfit <- predict(thislm, newdata = data.frame(Eh7 = xlim))
-  lines(xfit, yfit, lwd = 3, col = "#00000080")
-  # Get the slope
-  slope <- thislm$coefficients[2]
-  # Multiply by 1e3 to convert from mV-1 to V-1 or umol-1 to mmol-1
-  slope <- slope * 1e3
-  # Round to fixed number of decimal places
-  global.slope <- formatC(slope, digits = 3, format = "f")
-  label.figure("a", font = 2, cex = 2, xfrac = 0.04)
-
-  # Create slope legend
-  par(mar = c(4, 1, 1, 1))
-  plot.new()
-  if(length(imedian) == 1) {
-    legtxt <- c("Local regressions", bquote("Median local slope" == .(local.slope)~V^-1), bquote("Global slope" == .(global.slope)~V^-1))
-    legcol <- c(lcol[1], lcol[imedian], "#00000080")
-  } else {
-    legtxt <- c("Local regressions", bquote("Median local slope" == .(local.slope)~V^-1), bquote("Global slope" == .(global.slope)~V^-1))
-    legcol <- c(lcol[1], NA, "#00000080")
-    legcol1 <- c(NA, lcol[imedian[1]], NA)
-    legcol2 <- c(NA, lcol[imedian[2]], NA)
-    legend("bottomleft", legend = character(3), lwd = 3, lty = 2, col = legcol1, bty = "n", seg.len = 4, inset = c(0, 0.01))
-    legend("bottomleft", legend = character(3), lwd = 3, lty = 2, col = legcol2, bty = "n", seg.len = 4, inset = c(0, -0.01))
-  }
-  legend("bottomleft", legend = legtxt, lwd = c(2, 3, 3), lty = c(2, 2, 1), col = legcol, bty = "n", seg.len = 4)
-  # Read pre-calculated dataset regressions and names
-  gwlm <- EZlm[match(study, EZlm$study), ]
-  # Make sure we haven't messed up the slopes somewhere
-  stopifnot(all.equal(gwlm$slope, slopes, tolerance = 1e-5, scale = 1))
-  # Create dataset legend
-  legtext <- gwlm$name
-  legend("topleft", legtext, pch = pch, col = pcol, bty = "n", pt.bg = "#00000030", title = environment)
-  par(mar = c(4, 4, 1, 1))
-
-  # Plot global slope vs median local slope for each environment type
-  envirotypes <- names(envirotype)
-  local.slopes <- sapply(envirotypes, function(eee){
-    baclm <- EZlm[EZlm$lineage == "Bacteria", ]
-    gwlm <- baclm[baclm$envirotype == eee, ]
-    median(gwlm$slope)
-  })
-  # Make sure the median slope matches the one we calculated above
-  stopifnot(all.equal(local.slopes[environment], median.slope, check.attributes = FALSE, tolerance = 1e-5, scale = 1))
-  # Make sure local and global slopes are in same order
-  stopifnot(all(names(global.slopes$Bacteria) == names(local.slopes)))
-  # Plot global vs median local slopes
-  xylim <- range(local.slopes, global.slopes$Bacteria)
-  xylim <- c(0, 0.1)
-  plot(local.slopes, global.slopes$Bacteria, xlim = xylim, ylim = c(0, 0.08),
-       xlab = quote("Median local slope ("*V^-1*")"), ylab = quote("Global slope ("*V^-1*")"), pch = 19, col = orp16Scol)
-  lines(xylim, xylim, lty = 2, col = 8)
-  srt <- 55
-  text(0.045, 0.0525, "Global > Local", srt = srt, col = 8)
-  text(0.055, 0.0475, "Local > Global", srt = srt, col = 8)
-  # Label points
-  envtxt <- envirotypes
-  envtxt[envtxt == "Groundwater"] <- "Ground-\nwater"
-  dx <- c(0.023, 0.017, -0.0025, 0, 0.019, 0.01, -0.007)
-  dy <- c(0.0015, 0.0005, 0.006, -0.004, 0, -0.0028, -0.0005)
-  text(local.slopes + dx, global.slopes$Bacteria + dy, envtxt, cex = 0.85)
-  label.figure("b", font = 2, cex = 2, xfrac = 0.02)
-  if(pdf) dev.off()
-
-}
-
-# Figure S5: Compare regressions with Eh7, Eh, and O2 20220517
-orp16S_S5 <- function(pdf = FALSE) {
-
-  if(pdf) pdf("Figure_S5.pdf", width = 6, height = 8)
+  if(pdf) pdf("Figure_S2.pdf", width = 6, height = 8)
   mat <- matrix(1:8, ncol = 2)
   layout(mat, heights = c(2, 2, 2, 1))
 
@@ -1066,7 +933,7 @@ orp16S_S5 <- function(pdf = FALSE) {
 
 }
 
-### NOTE: Figure S6 is made with orp16S_4(EMP_primers = FALSE)
+### NOTE: Figure S3 is made with orp16S_4(EMP_primers = FALSE)
 
 ##########################################
 ### Functions for tables and datasets ####
@@ -1116,7 +983,7 @@ orp16S_info <- function(study) {
 }
 
 # Table of regression slopes (positive/negative) and p-values 20220516
-orp16S_T2 <- function(samesign = FALSE) {
+orp16S_T1 <- function(samesign = FALSE) {
   # All environment types
   envirotype <- unique(EZlm$envirotype)
   # Loop over Bacteria and Archaea
@@ -1153,8 +1020,8 @@ orp16S_T2 <- function(samesign = FALSE) {
   out
 }
 
-### NOTE: Dataset S1 is the EZdat.csv file made with orp16S_S3()
-### NOTE: Dataset S2 is the EZlm.csv file made with orp16S_S3()
+### NOTE: Dataset S1 is the EZdat.csv file made with orp16S_S1()
+### NOTE: Dataset S2 is the EZlm.csv file made with orp16S_S1()
 
 # Dataset S3: Most abundant genera at high and low Eh7 20221006
 orp16S_D3 <- function(mincount = 100) {

@@ -92,17 +92,17 @@ orp16S_3()
 
 **Data sources:** **(a)** Daya Bay [@WHLH21a], Bay of Biscay [@LMBA21], Hunan Province [@MLL+19]. **(c)** **1** acidic and **2** circumneutral to alkaline New Zealand hot springs [@PCL+18], **3** Eastern Tibetan Plateau [@GWS+20], **4** Uzon Caldera [@PBU+20], **5** Southern Tibetan Plateau [@MWY+21].
 
-## Tally of regression slopes and binomial *p*-values (Table 2)
-```{r orp16S_T2}
+## Tally of regression slopes and binomial *p*-values (Table 1a)
+```{r orp16S_T1a}
 colnames <- c("Ntot", "Npos", "Nneg", "p")
-kable(orp16S_T2(), col.names = rep(colnames, 2)) %>%
+kable(orp16S_T1(), col.names = rep(colnames, 2)) %>%
   add_header_above(c(" " = 1, "Bacteria" = 4, "Archaea" = 4))
 ```
 
-## Tally of regression slopes with same sign of minimum and maximum values in 95% confidence interval (Table S3)
-```{r orp16S_T2_S3}
+## Tally of regression slopes with same sign of minimum and maximum values in 95% confidence interval (Table 1b)
+```{r orp16S_T1b}
 colnames <- c("Ntot", "Npos", "Nneg", "p")
-kable(orp16S_T2(samesign = TRUE), col.names = rep(colnames, 2)) %>%
+kable(orp16S_T1(samesign = TRUE), col.names = rep(colnames, 2)) %>%
   add_header_above(c(" " = 1, "Bacteria" = 4, "Archaea" = 4))
 ```
 
@@ -125,18 +125,13 @@ orp16S_6()
 
 Bold and normal text are used for archaea and bacteria, respectively.
 
-## Regression slopes from local to global scale (Figure S4)
-```{r orp16S_S4, message = FALSE, results = "hide", out.width='100%', fig.width = 8, fig.height = 3, out.extra = 'class="full-width"', pngquant = pngquant, dpi = 100}
-orp16S_S4(global.slopes)
+## Comparison of Eh7, Eh, and O~2~ as predictors of carbon oxidation state (Figure S2)
+```{r orp16S_S2, message = FALSE, results = "hide", out.width='100%', fig.width = 6, fig.height = 8, pngquant = pngquant, dpi = 100}
+orp16S_S2()
 ```
 
-## Comparison of Eh7, Eh, and O~2~ as predictors of carbon oxidation state (Figure S5)
-```{r orp16S_S5, message = FALSE, results = "hide", out.width='100%', fig.width = 6, fig.height = 8, pngquant = pngquant, dpi = 100}
-orp16S_S5()
-```
-
-## Global analysis including only datasets using 515F/806R primers from the Earth Microbiome Project (EMP) (Figure S6)
-```{r orp16S_S6, message = FALSE, results = "hide", out.width='100%', fig.width = 10, fig.height = 7, out.extra = 'class="full-width"', pngquant = pngquant, dpi = 100}
+## Global analysis including only datasets using 515F/806R primers from the Earth Microbiome Project (EMP) (Figure S3)
+```{r orp16S_S3, message = FALSE, results = "hide", out.width='100%', fig.width = 10, fig.height = 7, out.extra = 'class="full-width"', pngquant = pngquant, dpi = 100}
 orp16S_4(EMP_primers = TRUE)
 ```
 
