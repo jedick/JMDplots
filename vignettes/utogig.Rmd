@@ -57,7 +57,9 @@ pH2 <- "<i>p</i><sub>H<sub>2</sub></sub>"
 
 This vignette runs the code to make the plots from the following paper:
 
-> Dick JM, Boyer GM, Canovas PA III, Shock EL. 2022. Using thermodynamics to obtain geochemical information from genomes. Submitted manuscript.
+> Dick JM, Boyer GM, Canovas PA III, Shock EL. 2022. Using thermodynamics to obtain geochemical information from genomes. *Geobiology* doi: [10.1111/gbi.12532](https://doi.org/10.1111/gbi.12532)
+
+[Click here](https://onlinelibrary.wiley.com/share/author/Q9GIUWDD4K8NQ4IDJK4C?target=10.1111/gbi.12532) for full-text access to a view-only version of the paper.
 
 This vignette was compiled on `r Sys.Date()` with **[JMDplots](https://github.com/jedick/JMDplots)** `r packageDescription("JMDplots")$Version` and **[CHNOSZ](http://chnosz.net)** `r packageDescription("CHNOSZ")$Version`.
 
