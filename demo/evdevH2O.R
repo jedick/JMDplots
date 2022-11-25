@@ -9,7 +9,7 @@
 
 require("JMDplots")
 
-# Change this to TRUE to save the PNG file
+# Set this to TRUE to make a PNG file
 do.png <- FALSE
 if(do.png) png("evdevH2O.png", width = 800, height = 600)
 
@@ -73,7 +73,7 @@ JMDplots:::my.filled.contour(e$vals$O2, e$vals$H2O, d$predominant.values, xlab =
       points(optO2, optH2O, pch = 21, bg = 7, cex = 1.5)
     }
     par(xpd = FALSE)
-    title("Maximum activities of phylostrata\non a background of human proteins", font.main = 1)
+    title("Target proteins for phylostrata (points)\non human proteome background (fields)", font.main = 1)
   },
   key.axes = {
     opar <- par(tcl = 0)
@@ -83,6 +83,7 @@ JMDplots:::my.filled.contour(e$vals$O2, e$vals$H2O, d$predominant.values, xlab =
   },
   add2 = TRUE
 )
+label.figure("A", cex = 1.5)
 
 ## Plot 2: Virtual Eh for Liebeskind gene ages
 PS_source <- "LMM16"
@@ -143,6 +144,7 @@ text(xtext, -320, "Cytosol", adj = c(0.5, -0.4))
 text(xtext, -380, "Mitochondria", adj = c(0.5, -0.3))
 # Plot virtual Eh
 lines(PS, mV, lwd = 2, col = 2) 
+label.figure("B", cex = 1.5, xfrac = 0.03)
 
 if(do.png) {
   # Close and compress the PNG file

@@ -662,8 +662,8 @@ utogig4 <- function(pdf = FALSE) {
       ip <- add.protein(aa, as.residue = TRUE)
       a <- affinity(H2 = xlims[[i]], iprotein = ip, T = T)
       # Calculate normalized sum of ranks for each group and make diagram
-      # TODO: add rank_affinity to imports in NAMESPACE when CHNOSZ 2.0.0 is released
-      arank <- CHNOSZ::rank_affinity(a, groups)
+      # TODO: add rank.affinity to imports in NAMESPACE when CHNOSZ 2.0.0 is released
+      arank <- CHNOSZ::rank.affinity(a, groups)
       names <- hyphen.in.pdf(names(groups))
       diagram(arank, col = lcol, lty = 1, lwd = 1.5, dx = dx[[i]], dy = dy[[i]], names = names, add = TRUE)
       par(opar)
