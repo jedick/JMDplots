@@ -337,7 +337,12 @@ alpha.equil <- function(i = 1, ip.phyla) {
   a.blast <- alpha.blast()
   # calculate Gibbs energy of transformation (DGtr) and find optimal logaH2
   iblast <- match(colnames(a.residue), colnames(a.blast))
-  r <- revisit(e, "DGtr", log10(a.blast[i, iblast]), plot.it = FALSE)
+  # Vectorize lists of loga1 and Astar (into matrices) for DGtr()
+  loga1 <- sapply(e$loga.equil, c)
+  loga2 <- log10(a.blast[i, iblast])
+  Astar <- sapply(e$Astar, c)
+  DGtr <- DGtr(loga1, loga2, Astar)
+  logaH2.opt <- e$vals$H2[which.min(DGtr)]
   # return the calculated activities, logaH2 range, DGtr values, and optimal logaH2
-  return(list(alpha = a.residue, H2vals = a$vals[[1]], DGtr = r$H, logaH2.opt = r$xopt))
+  return(list(alpha = a.residue, H2vals = a$vals[[1]], DGtr = DGtr, logaH2.opt = logaH2.opt))
 }

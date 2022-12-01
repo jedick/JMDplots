@@ -9,7 +9,6 @@
 \alias{chnosz10S1}
 \alias{chnosz10S2}
 \alias{chnosz10S3}
-\alias{chnosz10S4}
 \alias{chnosz10S5}
 \alias{chnosz10S6A}
 \alias{chnosz10S6B}
@@ -31,7 +30,6 @@ Plots from the paper by Dick (2019).
   chnosz10S1(pdf = FALSE)
   chnosz10S2(pdf = FALSE)
   chnosz10S3(pdf = FALSE)
-  chnosz10S4(pdf = FALSE)
   chnosz10S5(pdf = FALSE)
   chnosz10S6A(pdf = FALSE)
   chnosz10S6B(pdf = FALSE)
@@ -57,7 +55,6 @@ This table gives a brief description of each function.
   \code{chnosz10S1} \tab Comparison of \logK and maximum affinity methods \cr
   \code{chnosz10S2} \tab Eh-pH diagram like Fig. 5A of Caporuscio et al. (2017) \cr
   \code{chnosz10S3} \tab Gibbs energy of transformation for an assemblage of n-alkanes \cr
-  \code{chnosz10S4} \tab \code{\link[CHNOSZ]{findit}} calculations for sulfur species \cr
   \code{chnosz10S5} \tab Debye-Hückel extended term parameter extrapolated from plots of Manning et al. (2013) \cr
   \code{chnosz10S6A} \tab \code{chnosz106} modified to exclude DEW data for acetate \cr
   \code{chnosz10S6B} \tab \code{chnosz10S6A} modified to use default \code{\link[CHNOSZ:nonideal]{bgamma}} equation \cr

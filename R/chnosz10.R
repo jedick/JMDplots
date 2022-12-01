@@ -559,64 +559,6 @@ chnosz10S3 <- function(pdf = FALSE) {
   }
 }
 
-# findit() calculations for sulfur species 20190604
-chnosz10S4 <- function(pdf = FALSE) {
-  # set up plot
-  if(pdf) pdf("chnosz10S4.pdf", width = 8, height = 8)
-  par(mfrow = c(2, 2))
-  # the ranges of the parameters we will optimize
-  vars <- list(O2 = c(-80, -40), pH = c(4, 14), T = c(0, 200))
-  # set constant values of pH and T for the 1-D optimization
-  # (and T for the 2-D optimization)
-  pH <- 7
-  T <- 25
-  # set up chemical system
-  basis("CHNOS+")
-  basis("pH", pH)
-  species(c("H2S", "S2-2", "S3-2", "S2O3-2", "S2O4-2", "S3O6-2",
-    "S5O6-2", "S2O6-2", "HSO3-", "SO2", "HSO4-"))
-  # objective function: standard deviations of the logarithms of activity the species
-  objective <- "SD"
-  # optimize logfO2 at constant T and pH
-  f1 <- findit(vars[1], objective, T = T, niter = 4)
-  title("1-D optimization", font.main = 1)
-  legend("bottomright", c(paste("T =", T, "degC"), paste("pH =", pH)), bg = "white")
-  label.figure("A", cex = 1.5)
-  # optimize logfO2 and pH at constant T
-  f2 <- findit(vars[1:2], objective, T = T, res = 20, niter = 5)
-  title("2-D optimization", font.main = 1)
-  legend("bottomright", c(paste("T =", T, "degC")), bg = "white")
-  label.figure("B", cex = 1.5)
-  # optimize logfO2, pH and T (at constant P ...)
-  f3 <- findit(vars, objective, res = 20, niter = 5)
-  title("3-D optimization", font.main = 1)
-  label.figure("C", cex = 1.5)
-  # the results
-  f1.out <- sapply(f1$value, tail, 1)
-  f2.out <- sapply(f2$value, tail, 1)
-  f3.out <- sapply(f3$value, tail, 1)
-  f1.out <- data.frame(nd = 1, t(f1.out))
-  f2.out <- data.frame(nd = 2, t(f2.out))
-  f3.out <- data.frame(nd = 3, t(f3.out))
-  out <- merge(merge(f1.out, f2.out, all = TRUE), f3.out, all = TRUE)
-  # show the results in a legend
-  ltxt <- c("n", out$nd,
-            "logfO2", formatC(out$O2, digits = 1, format = "f"),
-            "pH", formatC(out$pH, digits = 1, format = "f"),
-            "T", formatC(out$T, digits = 1, format = "f"),
-            "SD", formatC(out$SD, digits = 3, format = "f"))
-  ltxt[ltxt == "NA"] <- "-"
-  opar <- par(mar = c(0, 0, 0, 0))
-  plot.new()
-  legend("center", ltxt, ncol = 5)
-  text(0.5, 0.7, "Optimized parameters")
-  par(opar)
-  if(pdf) {
-    dev.off()
-    addexif("chnosz10S4", "findit() calculations for sulfur species", "https://doi.org/10.3389/feart.2019.00180")
-  }
-}
-
 # Debye-Hückel extended term parameter extrapolated from plots of Manning et al., 2013
 chnosz10S5 <- function(pdf = FALSE) {
   if(pdf) pdf("chnosz10S5.pdf", width = 6, height = 6)

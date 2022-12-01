@@ -1,6 +1,5 @@
 TCGA            Chemical analysis of The Cancer Genome Atlas
 HPA             Chemical analysis of The Human Protein Atlas
 osmotic_gene    Chemical analysis of transcriptomes for hyperosmotic stress
-revisit-yeast   Demo for CHNOSZ::revisit() with yeast proteins
 bugstab         Relative stabilities of microbial proteins in colorectal cancer and healthy tissue
 evdevH2O        Graphical abstract for research profile on website

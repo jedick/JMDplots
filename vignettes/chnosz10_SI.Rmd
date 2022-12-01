@@ -18,7 +18,7 @@ pngquant <- "--speed=1 --quality=0-25"
 if (!nzchar(Sys.which("pngquant"))) pngquant <- NULL 
 ```
 
-This vignette runs the code to make the supplementary figures from the following paper:
+This vignette runs the code to make most of the supplementary figures from the following paper:
 
 > Dick JM. 2019. CHNOSZ: Thermodynamic calculations and diagrams for geochemistry. *Frontiers in Earth Science* **7**: 180. doi: [10.3389/feart.2019.00180](https://doi.org/10.3389/feart.2019.00180)
 
@@ -44,9 +44,8 @@ chnosz10S3()
 ```
 
 ## `findit()` calculations for sulfur species (Figure S4)
-```{r chnosz10S4, message = FALSE, fig.align='center', out.width='100%', fig.width = 8, fig.height = 8, pngquant = pngquant}
-chnosz10S4()
-```
+*This feature and figure were removed in CHNOSZ 2.0.0 and JMDplots 1.2.17, respectively.
+Please refer to earlier versions of the packages.*
 
 ## Debye-Hückel extended term parameter extrapolated from plots of [Manning et al. (2013)](https://doi.org/10.2138/rmg.2013.75.5) (Figure S5)
 ```{r chnosz10S5, message = FALSE, fig.align='center', out.width='75%', fig.width = 6, fig.height = 6, pngquant = pngquant}
