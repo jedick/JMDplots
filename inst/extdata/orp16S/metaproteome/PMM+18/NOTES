@@ -1,0 +1,25 @@
+[20220829]
+
+https://ftp.pride.ebi.ac.uk/pride/data/archive/2018/04/PXD009105
+--> https://ftp.pride.ebi.ac.uk/pride/data/archive/2018/04/PXD009105/140826_StM_Chimney39surface53surface_fw_rev_cont.fasta
+
+[20221028] Sample descriptions from BDB+21
+Dff (diffuse): RMR-D = 053-ROV-03 --> "shimmering orange chimney for Eoghan"
+Fcsd (focused): RMR5 = 039-ROV-01 --> "chimney tip, venting gray smoke"
+
+[20221227] Counting number of protein IDs in mztab files
+1a: 
+ DffDRAFT FcsdDRAFT 
+     1037       689 
+
+1b:
+ DffDRAFT FcsdDRAFT 
+      934       622 
+
+2a:
+ DffDRAFT FcsdDRAFT 
+       94       689 
+
+2b:
+ DffDRAFT FcsdDRAFT 
+       73       648 

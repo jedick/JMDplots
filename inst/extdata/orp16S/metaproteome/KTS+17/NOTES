@@ -1,0 +1,33 @@
+[20221019]
+The mass spectrometry metaproteomics data and protein
+sequence databases have been deposited to the ProteomeXchange Consortium via
+the PRIDE54 partner repository with the data set identifiers PXD006118 (pure
+culture and mock community data), PXD006343 (soda lake biomats), and
+PXD006366 (re-analyses of the saliva metaproteomes by Grassl et al.9). A detailed
+overview of the pure culture and mock community metaproteomic data for method
+development can be found in Supplementary Table 5.
+
+--> http://proteomecentral.proteomexchange.org/cgi/GetDataset?ID=PXD006343
+
+This data is a case study done in the context of developing methods for
+assessing the taxonomic composition of microbial communities using
+metaproteomics. For this study with analyzed phototrophic biomats from two Soda
+Lakes in the Canadian Rocky Mountains using metaproteomics. For protein
+identification we generated a metagenome from which we predicted and annotated
+the protein sequences used to analyze the metaproteomes. The database is
+available in this PRIDE submission. Lake1 refers to Goodenough Lake (GEM,
+51°19'47.64"N 121°38'28.90"W) and Lake2 referes to Last Chance Lake (LCM,
+51°19'39.3" N 121°37'59.3"W).
+
+--> https://ftp.pride.ebi.ac.uk/pride/data/archive/2017/05/PXD006343/
+
+wget "https://ftp.pride.ebi.ac.uk/pride/data/archive/2017/05/PXD006343/README.txt"
+
+Lake 1 (SRR5291562)
+wget "https://ftp.pride.ebi.ac.uk/pride/data/archive/2017/05/PXD006343/GEM-(01).pep.xml"
+
+Lake 2 (SRR5291553)
+wget "https://ftp.pride.ebi.ac.uk/pride/data/archive/2017/05/PXD006343/LCM-(01).pep.xml"
+
+Protein database
+wget "https://ftp.pride.ebi.ac.uk/pride/data/archive/2017/05/PXD006343/SodaLakes_AllCombined_Cluster95ID_V2.fasta"

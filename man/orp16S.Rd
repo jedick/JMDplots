@@ -7,6 +7,7 @@
 \alias{orp16S_4}
 \alias{orp16S_5}
 \alias{orp16S_6}
+\alias{orp16S_7}
 \alias{orp16S_S1}
 \alias{orp16S_S2}
 \alias{orp16S_info}
@@ -21,10 +22,12 @@ Plots from the paper by Dick and Meng (2021).
 
 \usage{
   orp16S_1(pdf = FALSE)
+  orp16S_2(pdf = FALSE)
   orp16S_3(pdf = FALSE)
-  orp16S_4(pdf = FALSE, EMP_primers = FALSE)
+  orp16S_4(pdf = FALSE)
   orp16S_5(pdf = FALSE)
-  orp16S_6(pdf = FALSE)
+  orp16S_6(pdf = FALSE, EMP_primers = FALSE)
+  orp16S_7(pdf = FALSE)
 
   orp16S_S1(pdf = FALSE)
   orp16S_S2(pdf = FALSE)
@@ -54,12 +57,13 @@ Plots from the paper by Dick and Meng (2021).
 This table gives a brief description of each plotting function.
 
 \tabular{ll}{
-  \code{orp16S_1} \tab Methods overview and chemical depth profiles in Winogradsky columns \cr
-  \code{orp16S_2} \tab Sample locations on world map and Eh-pH diagram (outline is from Baas Becking et al., 1960) \cr
-  \code{orp16S_3} \tab Associations between Eh7 and \ZC at local scales \cr
-  \code{orp16S_4} \tab Associations between Eh7 and \ZC at a global scale. Set \code{EMP_primers} to TRUE to make Figure S3. \cr
-  \code{orp16S_5} \tab Comparison of 16S_-based community reference proteomes with metaproteomes \cr
-  \code{orp16S_6} \tab Most abundant genera at low and high Eh7 in geothermal and hyperalkaline areas \cr
+  \code{orp16S_1} \tab Thermodynamic model for the relationship between carbon oxidation state of reference proteomes and redox potential \cr
+  \code{orp16S_2} \tab \ZC of reference proteomes compared with metaproteomes and with growth conditions \cr
+  \code{orp16S_3} \tab Methods overview and chemical depth profiles in Winogradsky columns \cr
+  \code{orp16S_4} \tab Sample locations on world map and Eh-pH diagram (outline is from Baas Becking et al., 1960) \cr
+  \code{orp16S_5} \tab Associations between Eh7 and \ZC at local scales \cr
+  \code{orp16S_6} \tab Associations between Eh7 and \ZC at a global scale. Set \code{EMP_primers} to TRUE to make Figure S3. \cr
+  \code{orp16S_7} \tab Most abundant genera at low and high Eh7 in geothermal and hyperalkaline areas \cr
 
   \code{orp16S_S1} \tab \ZC-Eh scatterplots for each dataset \cr
   \code{orp16S_S2} \tab Comparison of Eh7, Eh, and \O2 as predictors of carbon oxidation state \cr
@@ -98,9 +102,11 @@ The function also returns information in a data frame, which is used to fill in 
     \item{\file{EZdat.csv}}{Data for all samples, created by \code{orp16S_S1}.}
     \item{\file{EZlm.csv}}{Linear fits between Eh7 and \ZC for each dataset created by \code{orp16S_S1}.}
     \item{\file{BKM60.csv}}{Outline of Eh-pH range of natural environments, digitized from Fig. 32 of Baas Becking et al. (1960).}
-    \item{\file{HWLH22_Jun_2018_aa.csv}, \file{HWLH22_Sep_2018_aa.csv}}{Sum of amino acid composition of all peptides in each sample from the metaproteomic study of Han et al. (2022).}
+    \item{\file{MR18_Table_S1.csv}}{List of strictly anaerobic and aerotolerant genera from Table S1 of Million and Raoult (2018).}
     \item{\file{mkaa.R}}{Script used to process source metaproteomic data to make the \file{*aa.csv} files.}
     \item{\file{Dataset_S3.csv}}{File created by \code{orp16S_D3}.}
+    \item{\file{metaproteome/*/*_aa.csv}}{Amino acid composition of proteins in metaproteomic experiments.}
+    \item{\file{metaproteome/*/mkaa.R}}{Scripts to process metaproteomic data for amino acid compositions.}
   }
 }
 
@@ -119,17 +125,17 @@ Baas Becking LGM, Kaplan IR and Moore D (1960) Limits of the natural environment
 
 Dick JM and Meng D (2021) Local and global chemical shaping of bacterial communities by redox potential. bioRxiv. \doi{10.1101/2021.10.12.464155}
 
-Han Y, Wang Q, Li Q and Hu C (2022) Active metabolism and biomass dynamics of biocrusts are shaped by variation in their successional state and seasonal energy sources. \emph{Science of the Total Environment} \bold{831}, 154756. \doi{10.1016/j.scitotenv.2022.154756}
+Million M and Raoult D (2018) Linking gut redox to human microbiome. \emph{Human Microbiome Journal} \bold{10}, 27--32. \doi{10.1016/j.humic.2018.07.002}
 
 USGS (2010) Great Lakes and Watersheds Shapefiles. ScienceBase Catalog, U.S. Geological Survey. \doi{https://www.sciencebase.gov/catalog/item/530f8a0ee4b0e7e46bd300dd}
 }
 
 \examples{
 # Methods outline and Winogradsky columns
-orp16S_1()
+orp16S_3()
 
 # Sample locations and Eh-pH diagram
-orp16S_2()
+orp16S_4()
 
 # Summarize results for individual datasets
 orp16S_T1()
@@ -171,7 +177,7 @@ write.csv(allenv, "Table_S1_values.csv", row.names = FALSE)
 
 # Check that references for all studies are available
 mdatdir <- system.file("extdata/orp16S/metadata", package = "JMDplots")
-studies <- gsub(".csv", "", dir(mdatdir))
+studies <- sapply(strsplit(dir(mdatdir), ".", fixed = TRUE), "[", 1)
 bibfile <- system.file("doc/orp16S.bib", package = "JMDplots")
 bibentry <- bibtex::read.bib(bibfile)
 stopifnot(all(studies \%in\% names(bibentry)))

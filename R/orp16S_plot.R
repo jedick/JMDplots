@@ -109,9 +109,9 @@ plotEZ <- function(study, lineage = NULL, mincount = 100, pch = NULL, col = NULL
     xlim <- range(EZdat$Eh7) + dxlim
     if(is.null(ylim)) ylim <- range(EZdat$ZC) + dylim
     # Start new plot
-    plot(EZdat$Eh7, EZdat$ZC, xlab = "", ylab = ylab, type = "n", xlim = xlim, ylim = ylim)
+    plot(EZdat$Eh7 / 1000, EZdat$ZC, xlab = "", ylab = ylab, type = "n", xlim = xlim / 1000, ylim = ylim)
     # Draw x-axis label with mtext to avoid getting cut off by small margin 20220517
-    mtext("Eh7 (mV)", side = 1, line = par("mgp")[1], cex = par("cex"))
+    mtext("Eh7 (V)", side = 1, line = par("mgp")[1], cex = par("cex"))
     if(!is.null(title.line)) {
       main <- paste0(name, " (", root, ")")
       title(main = hyphen.in.pdf(main), font.main = 1, line = 2.5)
@@ -128,7 +128,7 @@ plotEZ <- function(study, lineage = NULL, mincount = 100, pch = NULL, col = NULL
   }
   # Add points
   if("points" %in% show) {
-    points(EZdat$Eh7, EZdat$ZC, pch = pch, col = col, bg = col, type = type, cex = cex)
+    points(EZdat$Eh7 / 1000, EZdat$ZC, pch = pch, col = col, bg = col, type = type, cex = cex)
   }
 
   if(!is.null(groupby) & !is.null(groups)) {

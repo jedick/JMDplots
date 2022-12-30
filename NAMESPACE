@@ -62,7 +62,7 @@ export(
   # can16S paper 20210604
   "getrefseq",
   # orp16S paper 20211003-20211008
-  "orp16S_1", "orp16S_2", "orp16S_3", "orp16S_4", "orp16S_S1",
+  "orp16S_3", "orp16S_4", "orp16S_5", "orp16S_6", "orp16S_S1",
   "plotEZ", "plotMA",
   # utilities 20220223
   "addalpha",
@@ -79,7 +79,9 @@ export(
   # utilities 20220930
   "hyphen.in.pdf",
   # orp16S paper 20221001-20221006
-  "orp16S_5", "orp16S_D3", "orp16S_6"
+  "orp16S_D3", "orp16S_7",
+  # orp16S paper 20221230
+  "orp16S_1", "orp16S_2"
 )
 
 # Imports from CHNOSZ
