@@ -7,7 +7,6 @@
 \alias{orp16S_4}
 \alias{orp16S_5}
 \alias{orp16S_6}
-\alias{orp16S_7}
 \alias{orp16S_S1}
 \alias{orp16S_S2}
 \alias{orp16S_info}
@@ -27,7 +26,6 @@ Plots from the paper by Dick and Meng (2021).
   orp16S_4(pdf = FALSE)
   orp16S_5(pdf = FALSE)
   orp16S_6(pdf = FALSE, EMP_primers = FALSE)
-  orp16S_7(pdf = FALSE)
 
   orp16S_S1(pdf = FALSE)
   orp16S_S2(pdf = FALSE)
@@ -63,7 +61,6 @@ This table gives a brief description of each plotting function.
   \code{orp16S_4} \tab Sample locations on world map and Eh-pH diagram (outline is from Baas Becking et al., 1960) \cr
   \code{orp16S_5} \tab Associations between Eh7 and \ZC at local scales \cr
   \code{orp16S_6} \tab Associations between Eh7 and \ZC at a global scale. Set \code{EMP_primers} to TRUE to make Figure S3. \cr
-  \code{orp16S_7} \tab Most abundant genera at low and high Eh7 in geothermal and hyperalkaline areas \cr
 
   \code{orp16S_S1} \tab \ZC-Eh scatterplots for each dataset \cr
   \code{orp16S_S2} \tab Comparison of Eh7, Eh, and \O2 as predictors of carbon oxidation state \cr

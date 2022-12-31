@@ -78,8 +78,8 @@ export(
   "cldfun",
   # utilities 20220930
   "hyphen.in.pdf",
-  # orp16S paper 20221001-20221006
-  "orp16S_D3", "orp16S_7",
+  # orp16S paper 20221001
+  "orp16S_D3",
   # orp16S paper 20221230
   "orp16S_1", "orp16S_2"
 )

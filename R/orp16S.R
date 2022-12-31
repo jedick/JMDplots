@@ -668,14 +668,19 @@ orp16S_5 <- function(pdf = FALSE) {
   i2 <- c(3, 6, 7)
   j2 <- env$groupnum %in% i2
   xlim <- range(log10(lmbac$nsamp[j1 | j2]))
-  # Multiply by 1e3 to use V-1 instead of mV-1 20210913
-  # NOTE: conversion to V-1 has been moved to orp16S_S1() 20220520
+  # Get range of slopes (absolute value)
   ymaxabs <- max(abs(lmbac$slope[j1 | j2]))
   ylim <- c(-ymaxabs*1.2, ymaxabs)
   # River & seawater, lake & pond, geothermal, hyperalkaline
   plot(xlim, ylim, type = "n", xlab = quote(log[10]~"(Number of samples)"), ylab = quote("Slope of linear fit"~(V^-1)))
   abline(h = 0, lty = 2, lwd = 1.5, col = "gray50")
-  points(log10(lmbac$nsamp[j1]), lmbac$slope[j1], pch = 19, col = orp16Scol[env$groupnum[j1]])
+  abline(h = c(-0.1, 0.1), lty = 3, lwd = 1.5, col = "gray50")
+  x1 <- log10(lmbac$nsamp[j1])
+  y1 <- lmbac$slope[j1]
+  col1 <- orp16Scol[env$groupnum[j1]]
+  # Make bigger points for larger slopes 20221230
+  cex1 <- ifelse(abs(y1) > 0.1, 1.5, 1)
+  points(x1, y1, pch = 19, col = col1, cex = cex1)
   # Add legend
   ltext <- names(envirotype)[i1[1:2]]
   legend("bottomleft", ltext, pch = 19, col = orp16Scol[i1[1:2]])
@@ -686,9 +691,14 @@ orp16S_5 <- function(pdf = FALSE) {
   # Groundwater, sediment, soil
   plot(xlim, ylim, type = "n", xlab = quote(log[10]~"(Number of samples)"), ylab = quote("Slope of linear fit"~(V^-1)))
   abline(h = 0, lty = 2, lwd = 1.5, col = "gray50")
-  points(log10(lmbac$nsamp[j2]), lmbac$slope[j2], pch = 19, col = orp16Scol[env$groupnum[j2]])
+  abline(h = c(-0.1, 0.1), lty = 3, lwd = 1.5, col = "gray50")
+  x2 <- log10(lmbac$nsamp[j2])
+  y2 <- lmbac$slope[j2]
+  col2 <- orp16Scol[env$groupnum[j2]]
+  cex2 <- ifelse(abs(y2) > 0.1, 1.5, 1)
+  points(x2, y2, pch = 19, col = col2, cex = cex2)
   ltext <- names(envirotype)[i2]
-  legend("bottomright", ltext, pch = 19, col = orp16Scol[i2])
+  legend("bottomright", ltext, pch = 19, col = orp16Scol[i2], bg = "white")
 
   ## Panel C: Distinctions in carbon oxidation state estimated for different geothermal areas 20210930
   # Use Geothermal datasets
@@ -839,87 +849,6 @@ orp16S_6 <- function(pdf = FALSE, EMP_primers = FALSE) {
 
 }
 
-
-# Figure 7: Most abundant genera at low and high Eh7 in geothermal and hyperalkaline areas 20221006
-orp16S_7 <- function(pdf = FALSE) {
-  if(pdf) pdf("Figure_7.pdf", width = 8.5, height = 5)
-  # Read output of orp16S_D3()
-  gg <- read.csv(system.file("extdata/orp16S/Dataset_S3.csv", package = "JMDplots"))
-  # Keep Geothermal and Hyperalkaline datasets
-  gg <- gg[gg$envirotype %in% c("Geothermal", "Hyperalkaline"), ]
-  # Get colors
-  ienv <- match(gg$envirotype, names(envirotype))
-  col <- orp16Scol[ienv]
-  # Start plot
-  par(mar = c(3, 4, 0.5, 0.5))
-  plot(c(1, 9.5), range(gg$Q1.ZC, gg$Q4.ZC), xlab = "", xaxt = "n", ylab = cplab$"ZC", type = "n")
-  abline(h = seq(-0.22, -0.14, 0.02), lty = 3, col = 8, lwd = 1.5)
-  axis(1, at = c(3.25, 7.75), labels = c("Low Eh7 - High Eh7", "Low Eh7 - High Eh7"), tick = FALSE, padj = -1.5)
-  axis(1, at = c(3.25, 7.75), labels = c("Geothermal", "Hyperalkaline"), tick = FALSE, padj = 1, font.axis = 2)
-
-  # Add points and labels for Geothermal
-  igeo <- gg$envirotype == "Geothermal"
-  iarc <- gg$lineage[igeo] == "Archaea"
-  # Low Eh7
-  ZC <- gg$Q1.ZC[igeo]
-  genus <- gg$Q1.genus[igeo]
-  idup <- duplicated(genus)
-  x <- ifelse(idup, 3.12, 3)
-  points(x, ZC, col = col[igeo], pch = 19)
-  dy <- rep(0, sum(igeo))
-  dy[genus == "Schleiferia"] <- 0.002
-  dy[genus == "Methanobrevibacter"] <- -0.002
-  dy[genus == "Hydrogenobaculum"] <- 0.003
-  dy[genus == "Fervidicoccus"] <- -0.0005
-  text(rep(3, sum(igeo))[iarc & !idup], (ZC + dy)[iarc & !idup], paste0(genus, " ")[iarc & !idup], adj = 1, font = 4)
-  text(rep(3, sum(igeo))[!iarc & !idup], (ZC + dy)[!iarc & !idup], paste0(genus, " ")[!iarc & !idup], adj = 1, font = 3)
-  # High Eh7
-  ZC <- gg$Q4.ZC[igeo]
-  genus <- gg$Q4.genus[igeo]
-  idup <- duplicated(genus)
-  x <- ifelse(idup, 3.38, 3.5)
-  points(x, ZC, col = col[igeo], pch = 19)
-  dy <- rep(0, sum(igeo))
-  dy[genus == "Roseiflexus"] <- 0.003
-  dy[genus == "Acidithiobacillus"] <- -0.001
-  dy[genus == "Vogesella"] <- -0.0025
-  dy[genus == "Bacillus"] <- 0.001
-  dy[genus == "Thermus"] <- -0.001
-  text(rep(3.5, sum(igeo))[iarc & !idup], (ZC + dy)[iarc & !idup], paste0(" ", genus)[iarc & !idup], adj = 0, font = 4)
-  text(rep(3.5, sum(igeo))[!iarc & !idup], (ZC + dy)[!iarc & !idup], paste0(" ", genus)[!iarc & !idup], adj = 0, font = 3)
-
-  # Add points and labels for Hyperalkaline
-  ihyper <- gg$envirotype == "Hyperalkaline"
-  iarc <- gg$lineage[ihyper] == "Archaea"
-  # Low Eh7
-  ZC <- gg$Q1.ZC[ihyper]
-  genus <- gg$Q1.genus[ihyper]
-  idup <- duplicated(genus)
-  x <- ifelse(idup, 7.62, 7.5)
-  points(x, ZC, col = col[ihyper], pch = 19)
-  dy <- rep(0, sum(ihyper))
-  dy[genus == "Silanimonas"] <- 0.0005
-  dy[genus == "Hydrogenophaga"] <- -0.0005
-  text(rep(7.5, sum(ihyper))[iarc & !idup], (ZC + dy)[iarc & !idup], paste0(genus, " ")[iarc & !idup], adj = 1, font = 4)
-  text(rep(7.5, sum(ihyper))[!iarc & !idup], (ZC + dy)[!iarc & !idup], paste0(genus, " ")[!iarc & !idup], adj = 1, font = 3)
-  # High Eh7
-  ZC <- gg$Q4.ZC[ihyper]
-  genus <- gg$Q4.genus[ihyper]
-  idup <- duplicated(genus)
-  x <- ifelse(idup, 7.88, 8)
-  points(x, ZC, col = col[ihyper], pch = 19)
-  dy <- rep(0, sum(ihyper))
-  dy[genus == "Hydrogenophaga"] <- 0.0022
-  dy[genus == "Comamonas"] <- -0.00052
-  dy[genus == "Sulfuritortus"] <- 0.0015
-  dy[genus == "Alkalinema"] <- -0.0015
-  dy[genus == "Nitrososphaera"] <- 0.0005
-  dy[genus == "Acinetobacter"] <- -0.0005
-  text(rep(8, sum(ihyper))[iarc & !idup], (ZC + dy)[iarc & !idup], paste0(" ", genus)[iarc & !idup], adj = 0, font = 4)
-  text(rep(8, sum(ihyper))[!iarc & !idup], (ZC + dy)[!iarc & !idup], paste0(" ", genus)[!iarc & !idup], adj = 0, font = 3)
-
-  if(pdf) dev.off()
-}
 
 ###########################################
 ### Functions for supplementary figures ###
