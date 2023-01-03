@@ -1303,12 +1303,8 @@ getmdat_orp16S <- function(study, metrics = NULL, dropNA = TRUE, size = NULL, qu
 
   ## Additional datasets for comparison with metaproteomes 20221222
   if(study %in% c(
-    # 20220828 Pu-erh Tea Leaves
-    "ZZS+15",
-    # 20220829 Gut Starch Diet, Columbia River Sediment, Manus Basin Inactive Chimney, M.B. Active Chimneys
-    "MLL+17", "RBM+22", "MPB+19", "RYP+14",
-    # 20220830 Ulcerative Colitis, Seawater Incubations
-    "TWC+22", "MHT+20",
+    # 20220829 Manus Basin Inactive Chimney, M.B. Active Chimneys
+    "MPB+19", "RYP+14",
     # 20221028 Soda Lake Biomats, Mock Communities, Saanich Inlet
     "KTS+17", "KTS+17.mock", "HTZ+17"
   )) {

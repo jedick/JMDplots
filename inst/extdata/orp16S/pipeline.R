@@ -130,7 +130,16 @@ writeLines(con = file, text = gsub(" ", "", c(
   # 20220917
   "MCR+22, FALSE, 290",
   # 20221020
-  "MTC21, FALSE, 250"
+  "MTC21, FALSE, 250",
+
+  # Metaproteome comparisons:
+  # Manus Basin 20220827
+  "MPB+19, TRUE, 420",
+  "RYP+14, NA, NA",
+  # Soda lakes, mock communities, and Saanich Inlet 20221228
+  "KTS+17, FALSE, 440",
+  "KTS+17.mock, FALSE, 440",
+  "HTZ+17, NA, NA"
 
   # For RSS+18 (Lake Hazen):
   #  - FASTQ files were downloaded from NCBI cloud
