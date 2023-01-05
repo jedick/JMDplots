@@ -1,10 +1,10 @@
 ---
-title: "Chemical adaptation of reference proteomes for bacterial communities (2022)"
+title: "Geochemical influences on protein evolution (2023)"
 output: 
   rmarkdown::html_vignette:
     mathjax: null
 vignette: >
-  %\VignetteIndexEntry{Chemical adaptation of reference proteomes for bacterial communities (2022)}
+  %\VignetteIndexEntry{Geochemical influences on protein evolution (2023)}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 bibliography: [orp16S.bib, JMDplots.bib]
@@ -61,7 +61,7 @@ ZC <- "<i>Z</i><sub>C</sub>"
 
 This vignette runs the code to make the plots from the following paper:
 
-> Dick JM, Meng D. 2022. Reference proteomes for bacterial communities reveal chemical adaptation to redox conditions at a global scale. Submitted manuscript.
+> Dick JM, Meng D. 2023. Community reference proteomes suggest widespread influence of geochemistry on the evolution of bacterial proteins. Submitted manuscript.
 >
 > Preprint available at bioRxiv. doi: [10.1101/2021.10.12.464155](https://doi.org/10.1101/2021.10.12.464155)
 

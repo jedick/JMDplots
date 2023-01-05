@@ -14,7 +14,7 @@
 \alias{orp16S_D3}
 \alias{getmdat_orp16S}
 \alias{getmetrics_orp16S}
-\title{Plots from chemical shaping of bacterial communities paper}
+\title{Plots from geochemical influences on protein evolution paper}
 \description{
 Plots from the paper by Dick and Meng (2021).
 }
