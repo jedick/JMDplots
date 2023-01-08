@@ -14,7 +14,7 @@
 \alias{orp16S_D3}
 \alias{getmdat_orp16S}
 \alias{getmetrics_orp16S}
-\title{Plots from geochemical influences on protein evolution paper}
+\title{Plots from geochemical influence on protein evolution paper}
 \description{
 Plots from the paper by Dick and Meng (2021).
 }
@@ -56,7 +56,7 @@ This table gives a brief description of each plotting function.
 
 \tabular{ll}{
   \code{orp16S_1} \tab Thermodynamic model for the relationship between carbon oxidation state of reference proteomes and redox potential \cr
-  \code{orp16S_2} \tab \ZC of reference proteomes compared with metaproteomes and with growth conditions \cr
+  \code{orp16S_2} \tab \ZC of reference proteomes compared with oxygen tolerance and with metaproteomes \cr
   \code{orp16S_3} \tab Methods overview and chemical depth profiles in Winogradsky columns \cr
   \code{orp16S_4} \tab Sample locations on world map and Eh-pH diagram (outline is from Baas Becking et al., 1960) \cr
   \code{orp16S_5} \tab Associations between Eh7 and \ZC at local scales \cr

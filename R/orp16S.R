@@ -173,7 +173,7 @@ orp16S_1 <- function(pdf = FALSE) {
 }
 
 
-# ZC of reference proteomes compared with metaproteomes and with growth conditions 20221228
+# ZC of reference proteomes compared with oxygen tolerance and with metaproteomes 20221228
 orp16S_2 <- function(pdf = FALSE) {
 
   # Setup plot
@@ -195,8 +195,18 @@ orp16S_2 <- function(pdf = FALSE) {
   ylim <- c(-0.24, -0.095)
   # Match genus names to RefSeq
   iref <- match(dat$Genus.name, aa$organism)
-  values <- values[iref]
+  # Print coverage information
+  nna <- sum(is.na(iref))
+  print(paste(nna, "genera not matched to RefSeq"))
+  # Report archaeal genera 20230107
+  genera <- aa[iref, ]$organism
+  taxa <- read.csv(system.file("extdata/RefSeq/taxid_names.csv.xz", package = "JMDplots"), as.is = TRUE)
+  itax <- match(genera, taxa$genus)
+  taxa <- taxa[itax, ]
+  archaeal_genera <- taxa$genus[taxa$superkingdom == "Archaea"]
+  print(paste("Archaeal genera:", paste(archaeal_genera, collapse = " ")))
   # Get values for obligate anaerobes and aerotolerant genera
+  values <- values[iref]
   values <- list(
     Anaerobe = values[dat$Obligate.anerobic.prokaryote == 1],
     Aerotolerant = values[dat$Obligate.anerobic.prokaryote == 0]
@@ -220,11 +230,8 @@ orp16S_2 <- function(pdf = FALSE) {
   md <- round(diff(sapply(values, mean, na.rm = TRUE)), 4)
   main <- paste("Mean difference =", md)
   title(main, font.main = 1, cex.main = 1, line = -0.9)
-  title("Bacterial growth conditions", font.main = 1)
+  title("Oxygen tolerance", font.main = 1)
   label.figure("a", font = 2, cex = 1.5, xfrac = 0.04)
-  # Print coverage information
-  nna <- sum(is.na(iref))
-  print(paste(nna, "genera not matched to RefSeq"))
 
   # Panel A: ZC of community reference proteomes vs metaproteomes 20221222
   par(mar = c(4, 4, 2.5, 1))
@@ -342,8 +349,8 @@ orp16S_3 <- function(pdf = FALSE) {
   arrows(2*third - 4, 16+dy, 2*third + 2.5, 16+dy, code = 2, lty = 1, length = 0.1)
   text(50, 18+dy, "Community and\nenvironmental data")
   arrows(80, 31+dy, 80, 46.5+dy, code = 3, lwd = 1.5, length = 0.1, col = BlueText)
-  text(46, 46+dy, "Thermodynamic prediction", font = 2, cex = 0.9, adj = c(0, 1))
-  text(46, 46+dy, "\nPositive correlation between\ncarbon oxidation state\nand redox potential", font = 3, cex = 0.9, adj = c(0, 1))
+  text(78, 46+dy, "Thermodynamic prediction", font = 2, cex = 0.9, adj = c(1, 1))
+  text(78, 46+dy, "\nPositive correlation between\ncarbon oxidation state\nand redox potential", font = 3, cex = 0.9, adj = c(1, 1))
   label.figure("a", font = 2, cex = 1.5, xfrac = 0.015, yfrac = 0.97)
 
   ## Figure 1b: Chemical depth profiles in Winogradsky columns 20210829

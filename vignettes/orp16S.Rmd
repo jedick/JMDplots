@@ -1,10 +1,10 @@
 ---
-title: "Geochemical influences on protein evolution (2023)"
+title: "Geochemical influence on protein evolution (2023)"
 output: 
   rmarkdown::html_vignette:
     mathjax: null
 vignette: >
-  %\VignetteIndexEntry{Geochemical influences on protein evolution (2023)}
+  %\VignetteIndexEntry{Geochemical influence on protein evolution (2023)}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 bibliography: [orp16S.bib, JMDplots.bib]
@@ -61,7 +61,7 @@ ZC <- "<i>Z</i><sub>C</sub>"
 
 This vignette runs the code to make the plots from the following paper:
 
-> Dick JM, Meng D. 2023. Community reference proteomes suggest widespread influence of geochemistry on the evolution of bacterial proteins. Submitted manuscript.
+> Dick JM, Meng D. 2023. Community reference proteomes suggest widespread influence of geochemistry on bacterial protein evolution. Submitted manuscript.
 >
 > Preprint available at bioRxiv. doi: [10.1101/2021.10.12.464155](https://doi.org/10.1101/2021.10.12.464155)
 
@@ -76,8 +76,8 @@ library(JMDplots)
 orp16S_1()
 ```
 
-## `r ZC` of reference proteomes compared with metaproteomes and with growth conditions (Figure 2)
-```{r orp16S_2, message = FALSE, results = "hide", out.width='100%', fig.width = 8, fig.height = 3.5, out.extra = 'class="full-width"', pngquant = pngquant, dpi = 100}
+## `r ZC` of reference proteomes compared with oxygen tolerance and with metaproteomes (Figure 2)
+```{r orp16S_2, message = FALSE, out.width='100%', fig.width = 8, fig.height = 3.5, out.extra = 'class="full-width"', pngquant = pngquant, dpi = 100}
 orp16S_2()
 ```
 
@@ -133,6 +133,7 @@ orp16S_S2()
 orp16S_6(EMP_primers = TRUE)
 ```
 
+<!-- Removed in revision 20230107
 ## Genus-level RDP classifications mapped to NCBI taxonomy (in-text calculation)
 ```{r mapperc}
 # Read Dataset S3 (created by orp16S_D3())
@@ -141,5 +142,6 @@ perc_bac <- round(mean(subset(dat, lineage == "Bacteria")$mapperc))
 perc_arc <- round(mean(subset(dat, lineage == "Archaea")$mapperc))
 message(paste0(perc_bac, "% for bacteria, ", perc_arc, "% for archaea"))
 ```
+-->
 
 ## References
