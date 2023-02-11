@@ -4,9 +4,6 @@
 # 20210416 Initial commit to JMDplots
 # 20210527 Updated plots for RefSeq release 206
 
-# Read taxon_AA.csv once, to make things faster 20221017
-RefSeq_taxon_AA <- read.csv(system.file("extdata/RefSeq/taxon_AA.csv.xz", package = "chem16S"))
-
 # Figure 1: Distinct chemical parameters of reference proteomes for taxonomic groups 20200925
 geo16S1 <- function(pdf = FALSE) {
 
@@ -1826,7 +1823,7 @@ getmetrics_geo16S <- function(study, quiet = TRUE, ...) {
   if(!file.exists(RDPfile)) RDPfile <- file.path(datadir, paste0(studyfile, ".tab"))
   RDP <- readRDP(RDPfile, quiet = quiet, ...)
   map <- mapRDP(RDP, quiet = quiet)
-  getmetrics(RDP, map = map, taxon_AA = RefSeq_taxon_AA)
+  getmetrics(RDP, map = map, taxon_AA = taxon_AA$RefSeq)
 }
 
 # Function to calculate and plot metrics for a given study 20220506

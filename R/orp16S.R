@@ -189,7 +189,7 @@ orp16S_2 <- function(pdf = FALSE) {
   # Clean up names
   dat$Genus.name <- gsub(" ", "", dat$Genus.name)
   # Get amino acid compositions for genera
-  aa <- read.csv(system.file("extdata/RefSeq/taxon_AA.csv.xz", package = "chem16S"))
+  aa <- taxon_AA$RefSeq
   # Calculate ZC
   values <- ZCAA(aa)
   ylim <- c(-0.24, -0.095)
@@ -236,7 +236,7 @@ orp16S_2 <- function(pdf = FALSE) {
   # Panel A: ZC of community reference proteomes vs metaproteomes 20221222
   par(mar = c(4, 4, 2.5, 1))
   # Calculate chemical metrics
-  dat <- getMP()
+  dat <- getMP_orp16S()
   ZClim <- c(-0.20, -0.10)
   plot(ZClim, ZClim, xlab = quote(italic(Z)[C]~"of metaproteome"), ylab = quote(italic(Z)[C]~"of community reference proteome"), type = "n")
   lines(ZClim, ZClim, lty = 2, col = 8)
@@ -1136,8 +1136,7 @@ orp16S_T1 <- function(samesign = FALSE) {
 orp16S_D3 <- function(mincount = 100) {
 
   # Get amino acid compositions of taxa compiled from RefSeq sequences
-  AAfile <- system.file("extdata/RefSeq/taxon_AA.csv.xz", package = "chem16S")
-  taxon_AA <- read.csv(AAfile, as.is = TRUE)
+  taxon_AA <- taxon_AA$RefSeq
   # Calculate ZC for all taxa
   ZC <- ZCAA(taxon_AA)
 
@@ -1678,14 +1677,14 @@ eachenv <- function(eedat, add = FALSE, do.linear = TRUE, ienv = c(1, 2, 4, 5, 3
 }
 
 # Gather values of ZC and nH2O for metaproteomes and 16S-based estimates 20220828
-getMP <- function() {
+getMP_orp16S <- function() {
 
   # List sources of metaproteomic and 16S data
   studies_MP <- c("MPB+19", "PMM+18", "KTS+17", "KTS+17.mock", "HTZ+17")
   studies_16S <- c("MPB+19", "RYP+14", "KTS+17", "KTS+17.mock", "HTZ+17")
   n <- length(studies_16S)
   pchs <- c(24, 25, 12, 18, 20)
-  bgs <- sapply(c(5, 6, NA, NA, NA), "add.alpha", alpha = "d0")
+  bgs <- sapply(c(5, 6, NA, NA, NA), add.alpha, alpha = "d0")
   cols <- c(1, 1, 2, 3, "#00000080")
 
   out <- lapply(seq_along(studies_16S), function(i) {

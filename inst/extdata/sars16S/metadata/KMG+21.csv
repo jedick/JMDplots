@@ -1,0 +1,42 @@
+Name,Run,Experiment,LibraryName,BioSample,SampleName,SRA_title,Status
+"COVID-19 Gut",SRR13843926,SRX10222314,MK23,SAMN18103398,"covid-19 study group","BACTERIAL V3-V4 seq",COVID-19
+"COVID-19 Gut",SRR13843927,SRX10222313,MK9,SAMN18103398,"covid-19 study group","BACTERIAL V3-V4 seq",COVID-19
+"COVID-19 Gut",SRR13843928,SRX10222312,MK8,SAMN18103398,"covid-19 study group","BACTERIAL V3-V4 seq",COVID-19
+"COVID-19 Gut",SRR13843929,SRX10222311,MK7,SAMN18103398,"covid-19 study group","BACTERIAL V3-V4 seq",COVID-19
+"COVID-19 Gut",SRR13843930,SRX10222310,MK6,SAMN18103398,"covid-19 study group","BACTERIAL V3-V4 seq",COVID-19
+"COVID-19 Gut",SRR13843931,SRX10222309,MK5,SAMN18103398,"covid-19 study group","BACTERIAL V3-V4 seq",COVID-19
+"COVID-19 Gut",SRR13843932,SRX10222308,MK4,SAMN18103398,"covid-19 study group","BACTERIAL V3-V4 seq",COVID-19
+"COVID-19 Gut",SRR13843933,SRX10222307,MK3,SAMN18103398,"covid-19 study group","BACTERIAL V3-V4 seq",COVID-19
+"COVID-19 Gut",SRR13843934,SRX10222306,MK20,SAMN18103398,"covid-19 study group","BACTERIAL V3-V4 seq",COVID-19
+"COVID-19 Gut",SRR13843935,SRX10222305,MK19,SAMN18103398,"covid-19 study group","BACTERIAL V3-V4 seq",COVID-19
+"COVID-19 Gut",SRR13843936,SRX10222304,MK18,SAMN18103398,"covid-19 study group","BACTERIAL V3-V4 seq",COVID-19
+"COVID-19 Gut",SRR13843937,SRX10222303,MK17,SAMN18103398,"covid-19 study group","BACTERIAL V3-V4 seq",COVID-19
+"COVID-19 Gut",SRR13843938,SRX10222302,MK16,SAMN18103398,"covid-19 study group","BACTERIAL V3-V4 seq",COVID-19
+"COVID-19 Gut",SRR13843939,SRX10222301,MK24,SAMN18103398,"covid-19 study group","BACTERIAL V3-V4 seq",COVID-19
+"COVID-19 Gut",SRR13843940,SRX10222300,MK14,SAMN18103398,"covid-19 study group","BACTERIAL V3-V4 seq",COVID-19
+"COVID-19 Gut",SRR13843941,SRX10222299,MK13,SAMN18103398,"covid-19 study group","BACTERIAL V3-V4 seq",COVID-19
+"COVID-19 Gut",SRR13843942,SRX10222298,MK12,SAMN18103398,"covid-19 study group","BACTERIAL V3-V4 seq",COVID-19
+"COVID-19 Gut",SRR13843943,SRX10222297,MK11,SAMN18103398,"covid-19 study group","BACTERIAL V3-V4 seq",COVID-19
+"COVID-19 Gut",SRR13843944,SRX10222296,MK22,SAMN18103398,"covid-19 study group","BACTERIAL V3-V4 seq",COVID-19
+"COVID-19 Gut",SRR13843945,SRX10222295,MK21,SAMN18103398,"covid-19 study group","BACTERIAL V3-V4 seq",COVID-19
+"COVID-19 Gut",SRR13843946,SRX10222335,MK43,SAMN18103609,"covid-19 study group and control","gut bacterial metagenome of healthy control group",Control
+"COVID-19 Gut",SRR13843947,SRX10222334,MK33,SAMN18103609,"covid-19 study group and control","gut bacterial metagenome of healthy control group",Control
+"COVID-19 Gut",SRR13843948,SRX10222333,MK42,SAMN18103609,"covid-19 study group and control","gut bacterial metagenome of healthy control group",Control
+"COVID-19 Gut",SRR13843949,SRX10222332,MK30,SAMN18103609,"covid-19 study group and control","gut bacterial metagenome of covid-19 patients",COVID-19
+"COVID-19 Gut",SRR13843950,SRX10222331,MK29,SAMN18103609,"covid-19 study group and control","gut bacterial metagenome of covid-19 patients",COVID-19
+"COVID-19 Gut",SRR13843951,SRX10222330,MK28,SAMN18103609,"covid-19 study group and control","gut bacterial metagenome of covid-19 patients",COVID-19
+"COVID-19 Gut",SRR13843952,SRX10222329,MK27,SAMN18103609,"covid-19 study group and control","gut bacterial metagenome of covid-19 patients",COVID-19
+"COVID-19 Gut",SRR13843953,SRX10222328,MK47,SAMN18103609,"covid-19 study group and control","gut bacterial metagenome of healthy control group",Control
+"COVID-19 Gut",SRR13843954,SRX10222327,MK26,SAMN18103609,"covid-19 study group and control","gut bacterial metagenome of covid-19 patients",COVID-19
+"COVID-19 Gut",SRR13843955,SRX10222326,MK46,SAMN18103609,"covid-19 study group and control","gut bacterial metagenome of healthy control group",Control
+"COVID-19 Gut",SRR13843956,SRX10222325,MK45,SAMN18103609,"covid-19 study group and control","gut bacterial metagenome of healthy control group",Control
+"COVID-19 Gut",SRR13843957,SRX10222324,MK44,SAMN18103609,"covid-19 study group and control","gut bacterial metagenome of healthy control group",Control
+"COVID-19 Gut",SRR13843958,SRX10222323,MK40,SAMN18103609,"covid-19 study group and control","gut bacterial metagenome of healthy control group",Control
+"COVID-19 Gut",SRR13843959,SRX10222322,MK39,SAMN18103609,"covid-19 study group and control","gut bacterial metagenome of healthy control group",Control
+"COVID-19 Gut",SRR13843960,SRX10222321,MK38,SAMN18103609,"covid-19 study group and control","gut bacterial metagenome of healthy control group",Control
+"COVID-19 Gut",SRR13843961,SRX10222320,MK37,SAMN18103609,"covid-19 study group and control","gut bacterial metagenome of healthy control group",Control
+"COVID-19 Gut",SRR13843962,SRX10222319,MK36,SAMN18103609,"covid-19 study group and control","gut bacterial metagenome of healthy control group",Control
+"COVID-19 Gut",SRR13843963,SRX10222318,MK35,SAMN18103609,"covid-19 study group and control","gut bacterial metagenome of healthy control group",Control
+"COVID-19 Gut",SRR13843964,SRX10222317,MK34,SAMN18103609,"covid-19 study group and control","gut bacterial metagenome of healthy control group",Control
+"COVID-19 Gut",SRR13843965,SRX10222316,MK41,SAMN18103609,"covid-19 study group and control","gut bacterial metagenome of healthy control covid-19 patients",NA
+"COVID-19 Gut",SRR13843966,SRX10222315,MK24,SAMN18103609,"covid-19 study group and control","gut bacterial metagenome of covid-19 patients",NA

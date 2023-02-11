@@ -13,3 +13,18 @@ JMDplots <- new.env()
     gradH2O_MGP <- readRDS(system.file("extdata/gradH2O/MGP.rds", package = "JMDplots"))
   })
 }
+
+# Function to add transparency to given color 20220223
+# TODO: Remove this when CHNOSZ 2.0.0 is released
+add.alpha <- function(col, alpha) {
+  x <- col2rgb(col)
+  newcol <- rgb(x[1], x[2], x[3], maxColorValue = 255)
+  newcol <- paste0(newcol, alpha)
+  newcol
+}
+
+# For geo16S, orp16S, and sars16S: read taxon_AA.csv once, to make things faster 20221017
+taxon_AA <- list(
+  RefSeq = read.csv(system.file("extdata/RefSeq/taxon_AA.csv.xz", package = "chem16S")),
+  GTDB = read.csv(system.file("extdata/GTDB/taxon_AA.csv.xz", package = "chem16S"))
+)
