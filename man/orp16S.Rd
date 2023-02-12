@@ -93,14 +93,13 @@ The function also returns information in a data frame, which is used to fill in 
     \item{\file{pipeline.R}}{Pipeline for sequence data processing (uses external programs fastq-dump, vsearch, seqtk, RDP Classifier).}
     \item{\file{metadata/*.csv}}{Sample metadata for each study.}
     \item{\file{RDP/*.csv.xz}}{
-      RDP Classifier results combined into a single CSV file for each study, created with the \code{classify} and \code{mkRDP} function2 in \file{pipeline.R}.
+      RDP Classifier results combined into a single CSV file for each study, created with the \code{classify} and \code{mkRDP} functions in \file{pipeline.R}.
     }
     \item{\file{hydro_p}}{Shapefiles for the North American Great Lakes, downloaded from USGS (2010).}
     \item{\file{EZdat.csv}}{Data for all samples, created by \code{orp16S_S1}.}
     \item{\file{EZlm.csv}}{Linear fits between Eh7 and \ZC for each dataset created by \code{orp16S_S1}.}
     \item{\file{BKM60.csv}}{Outline of Eh-pH range of natural environments, digitized from Fig. 32 of Baas Becking et al. (1960).}
     \item{\file{MR18_Table_S1.csv}}{List of strictly anaerobic and aerotolerant genera from Table S1 of Million and Raoult (2018).}
-    \item{\file{mkaa.R}}{Script used to process source metaproteomic data to make the \file{*aa.csv} files.}
     \item{\file{Dataset_S3.csv}}{File created by \code{orp16S_D3}.}
     \item{\file{metaproteome/*/*_aa.csv}}{Amino acid composition of proteins in metaproteomic experiments.}
     \item{\file{metaproteome/*/mkaa.R}}{Scripts to process metaproteomic data for amino acid compositions.}

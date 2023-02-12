@@ -81,7 +81,9 @@ export(
   # orp16S paper 20221001
   "orp16S_D3",
   # orp16S paper 20221230
-  "orp16S_1", "orp16S_2"
+  "orp16S_1", "orp16S_2",
+  # sars16S paper 20230212
+  "sars16S_1", "sars16S_2", "sars16S_3", "sars16S_4", "COVID_means"
 )
 
 # Imports from CHNOSZ

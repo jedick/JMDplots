@@ -17,7 +17,7 @@ col_Gut <- "#E69F00"
 ### Plotting Functions ###
 ##########################
 
-# Chemical metrics of reference proteomes and comparison with metaproteomes 20221125
+# Chemical metrics of reference proteomes as a function of oxygen tolerance and comparison with metaproteomes 20221125
 sars16S_1 <- function(pdf = FALSE) {
 
   # Setup plot
@@ -70,9 +70,9 @@ sars16S_1 <- function(pdf = FALSE) {
       legend("topleft", legend = mdtext, bty = "n", inset = c(-0.05, -0.02))
       # Print coverage
       coverage <- round(sum(!is.na(iref)) / length(iref) * 100, 1)
-      ctext <- paste0("Coverage = ", coverage, "%")
+      ctext <- paste0("(A) ", coverage, "% of genus names in 'List of Prokaryotes ...' matched to GTDB")
       if(metric == "ZC") print(ctext)
-      if(metric == "ZC") label.figure("A. Genus reference proteomes", cex = 1.5, font = 2, adj = 0, xfrac = 0.02)
+      if(metric == "ZC") label.figure("A. Genus reference proteomes based on GTDB", cex = 1.5, font = 2, adj = 0, xfrac = 0.02)
 
   }
 
@@ -122,9 +122,12 @@ sars16S_1 <- function(pdf = FALSE) {
 
 }
 
-# Chemical metrics of communities in body sites; viral inactivation and cross-omic comparison 20221125
-sars16S_2 <- function(pdf = FALSE, refdb = "GTDB") {
+# Chemical metrics of community reference proteomes across body sites,
+# after viral inactivation treatment, and multi-omics comparison 20221125
+sars16S_2 <- function(pdf = FALSE) {
 
+  # Use GTDB-based reference proteomes
+  refdb <- "GTDB"
   if(refdb == "GTDB") PDFfile <- "Figure_2.pdf" else PDFfile <- "Figure_2_RefSeq.pdf"
   if(pdf) pdf(PDFfile, width = 8, height = 6)
   mat <- matrix(c(
@@ -211,7 +214,7 @@ sars16S_2 <- function(pdf = FALSE, refdb = "GTDB") {
   legend("center", legend = c("Nasal", "Skin", "Oral", "Gut"), pch = c(pch_Nasal, pch_Skin, pch_Oral, pch_Gut),
     pt.bg = c(col_Nasal, col_Skin, col_Oral, col_Gut), col = NA, bty = "n", cex = 1.5)
 
-  ### Panels C-#: nH2O-ZC for reference proteomes, metagenomes and metaproteomes from various body sites 20221118
+  ### Panels C-E: nH2O-ZC for reference proteomes, metagenomes and metaproteomes from various body sites 20221118
   par(mar = c(4, 4, 3, 1))
   xlim <- c(-0.2, -0.10)
   ylim <- c(-0.84, -0.60)
@@ -329,9 +332,11 @@ sars16S_2 <- function(pdf = FALSE, refdb = "GTDB") {
 }
 
 # Differences of chemical metrics of oropharyngeal, nasopharyngeal, and
-# gut microbiomes between control subjects and COVID-19 positive patients 20220806
-sars16S_3 <- function(pdf = FALSE, refdb = "GTDB") {
+# gut microbiomes between controls and COVID-19 positive patients 20220806
+sars16S_3 <- function(pdf = FALSE) {
 
+  # Use GTDB-based reference proteomes
+  refdb <- "GTDB"
   # Start plot
   if(refdb == "GTDB") PDFfile <- "Figure_3.pdf" else PDFfile <- "Figure_3_RefSeq.pdf"
   if(pdf) pdf(PDFfile, width = 15, height = 12)
@@ -512,7 +517,7 @@ sars16S_3 <- function(pdf = FALSE, refdb = "GTDB") {
   if(pdf) dev.off()
 }
 
-# Summary of evidence for chemical variation of the human microbiome 20230112
+# Overview of chemical variation of the human microbiome inferred from multi-omics datasets 20230112
 sars16S_4 <- function(pdf = FALSE) {
 
   if(pdf) pdf("Figure_4.pdf", width = 8, height = 6)
@@ -691,8 +696,10 @@ getMP_sars16S <- function(refdb = "RefSeq", zero_AA = NULL) {
 }
 
 # Calculate mean values of chemical metrics for patients and controls in COVID-19 datasets 20220823
-COVID_means <- function(refdb = "GTDB") {
+COVID_means <- function() {
 
+  # Use GTDB-based reference proteomes
+  refdb <- "GTDB"
   # Function to calculate mean ZC and nH2O for patients and controls
   getmeans <- function(study) {
     print(study)
@@ -748,6 +755,8 @@ COVID_means <- function(refdb = "GTDB") {
   D_nH2O <- out$nH2O_up - out$nH2O_dn
   out <- cbind(out, D_ZC, D_nH2O)
   file <- paste0("COVID_means_", refdb, ".csv")
+  # Round values 20230212
+  out[, 5:12] <- signif(out[, 5:12], 6)
   write.csv(out, file, row.names = FALSE, quote = FALSE)
 
 }
