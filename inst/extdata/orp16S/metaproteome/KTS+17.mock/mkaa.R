@@ -1,7 +1,13 @@
-# chem16S/metaproteome/KTS+17.mock/protein/mkaa.R
+# orp16S/metaproteome/KTS+17.mock/protein/mkaa.R
 # Sum amino acid composition of protein sequences for each sample
 # 20221029 jmd version 1
 # 20221222 revised to get protein sequences
+
+# REQUIRED FILES:
+# Mock_Comm_RefDB_V3.fasta.xz
+#   - Downloaded from https://ftp.pride.ebi.ac.uk/pride/data/archive/2017/05/PXD006118/Mock_Comm_RefDB_V3.fasta
+# Run4and5_*.pep.xml (12 files)
+#   - Downloaded from https://ftp.pride.ebi.ac.uk/pride/data/archive/2017/05/PXD006118/
 
 # Get amino acid composition of proteins in reference database
 refaa <- CHNOSZ::read.fasta("Mock_Comm_RefDB_V3.fasta.xz")
@@ -15,8 +21,7 @@ samples <- c("C1", "C2", "C3", "C4", "P1", "P2", "P3", "P4", "U1", "U2", "U3", "
 out <- lapply(samples, function(sample) {
 
   ## Read source data
-  # Use files for 260 min 1D-LC-MS/MS run
-  # https://ftp.pride.ebi.ac.uk/pride/data/archive/2017/05/PXD006118/
+  # Use files for 260 min 1D-LC-MS/MS runs
   file <- paste0("Run4and5_", sample, ".pep.xml.xz")
   print(file)
   dat <- readLines(file)

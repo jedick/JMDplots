@@ -1,5 +1,11 @@
+# sars16S/metaproteome/JZW+22/mkaa.R
 # Calculate amino acid composition from proteins
 # 20230207 jmd
+
+# REQUIRED FILE:
+# proteinGroups.txt
+#   - Downloaded from https://ftp.pride.ebi.ac.uk/pride/data/archive/2022/11/PXD026727/results_Total.zip
+#   - Extracted proteinGroups.txt from ZIP file
 
 # List faa files dowloaded from HOMD
 faafiles <- dir("/home/sequence/HOMD/JZW+22_PROKKA")

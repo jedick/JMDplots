@@ -1,6 +1,11 @@
-# chem16S/metaproteome/GNT+21/download_HOMD.R
+# sars16S/metaproteome/GNT+21/download_HOMD.R
 # Download selected faa files from Human Oral Microbome Database
 # 20221105 jmd
+
+# REQUIRED FILE:
+# TableS9-S12_Majority_Protein_IDs.txt
+#   - Majority protein IDs extracted from SI Tables of Granato et al. (2021)
+#   - Only lists IDs starting with SEQF (for HOMD database)
 
 # Get bacterial protein IDs from SI Tables of GNT+21
 dat <- readLines("TableS9-S12_Majority_Protein_IDs.txt")

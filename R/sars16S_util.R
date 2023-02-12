@@ -1,3 +1,6 @@
+# JMDplots/sars16S_util.R
+# Supporting functions for sars16S paper
+
 # Get metadata for a study, appending columns for pch and col 20200914
 getmdat_sars16S <- function(study, metrics = NULL, dropNA = TRUE, quiet = TRUE) {
   # Read metadata file
@@ -202,14 +205,10 @@ getmdat_sars16S <- function(study, metrics = NULL, dropNA = TRUE, quiet = TRUE) 
 
   # Datasets for metaproteome comparisons
   if(study %in% c(
-    # 20220827 Mushroom Spring
-    "TWO+16",
-    # 20220828 Biocathode Microbiome, Aerobic Granules, Pu-erh Tea Leaves
-    "LHM+15", "CJPN22", "ZZS+15",
-    # 20220829 Gut Starch Diet, Columbia River Sediment, Manus Basin Inactive Chimney, M.B. Active Chimneys
-    "MLL+17", "RBM+22", "MPB+19", "RYP+14",
-    # 20220830 Ulcerative Colitis, Seawater Incubations, Thermophilic Anaerobic Digester, Desert Biocrusts
-    "TWC+22", "MHT+20", "HFZ+17", "WHLH21",
+    # 20220829 Gut Starch Diet, Manus Basin Inactive Chimney, M.B. Active Chimneys
+    "MLL+17", "MPB+19", "RYP+14",
+    # 20220830 Ulcerative Colitis,
+    "TWC+22",
     # 20221028 Soda Lake Biomats, Mock Communities, Saanich Inlet
     "KTS+17", "KTS+17.mock", "HTZ+17"
   )) {

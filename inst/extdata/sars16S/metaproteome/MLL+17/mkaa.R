@@ -1,9 +1,33 @@
-# chem16S/metaproteome/MLL+17/mkaa.R
-# Calculate amino acid compositions from metaproteome data
-# and UniProt sequences
+# sars16S/metaproteome/MLL+17/mkaa.R
+# Calculate amino acid compositions from metaproteome data and UniProt sequences
 # 20220829
 
-# For mapping, use UniParc instead of UniProtKB to get obsolete sequences
+# REQUIRED FILES:
+# Maier_Proteomics_Analysis.csv
+#   - Downloaded from https://zenodo.org/record/838741/files/Maier_Proteomics_Analysis.xlsx?download=1
+#   - Merged two rows of header text
+#   - Moved UniProt ID to first column
+#   - Export selected columns (UniProtID and 24 runs) as CSV file
+# uniparc.tsv and uniparc.fasta
+#   - Created from https://www.uniprot.org/id-mapping on 2022-08-29
+#   - Mapped unique_IDs.txt with (From database: UniProtKB AC/ID) and (To database: UniParc)
+#   - Choose Download -> Format: TSV with default options -> save file as uniparc_in.tsv
+#   - Choose Download -> Format: FASTA with Compressed: No -> save file as uniparc.fasta
+
+# Additional processing for uniparc_in.tsv to make uniparc.tsv
+#   - Save selected columns and first UniProt ID:
+# dat <- read.csv("uniparc_in.tsv", sep = "\t")
+# dat$UniProtKB <- sapply(strsplit(dat$UniProtKB, ";"), "[", 1)
+# dat <- dat[, c("From", "Entry", "UniProtKB")]
+# write.table(dat, "uniparc.tsv", sep = "\t", quote = FALSE, row.names = FALSE)
+
+# INTERMEDIATE FILE:
+# unique_IDs.txt
+#   - List of unique UniProt IDs without organism strings
+#   - Created with these commands:
+# dat <- read.csv("Maier_Proteomics_Analysis.csv", na.strings="-")
+# IDs <- na.omit(unique(sapply(strsplit(dat$UniProt.ID, "_"), "[", 1)))
+# writeLines(IDs, "unique_IDs.txt")
 
 # Read data
 dat <- read.csv("Maier_Proteomics_Analysis.csv")
@@ -11,7 +35,8 @@ uniparc <- CHNOSZ::read.fasta("uniparc.fasta")
 # Normalize protein IDs
 dat$UniProt.ID <- sapply(strsplit(dat$UniProt.ID, "_"), "[", 1)
 #uniparc$protein <- sapply(strsplit(uniparc$protein, "\\|"), "[", 2)
-# Get ID mapping
+# Get ID mapping results
+# For mapping, use UniParc instead of UniProtKB to get obsolete sequences
 map <- read.csv("uniparc.tsv", sep = "\t")
 imap <- match(dat$UniProt.ID, map$From)
 Entry <- map$Entry[imap]

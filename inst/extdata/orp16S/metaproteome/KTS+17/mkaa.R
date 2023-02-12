@@ -1,7 +1,15 @@
-# chem16S/metaproteome/KTS+17/protein/mkaa.R
+# orp16S/metaproteome/KTS+17/mkaa.R
 # Sum amino acid composition of protein sequences for each sample
 # 20221029 jmd version 1
 # 20221227 revised to get protein sequences
+
+# REQUIRED FILES:
+# SodaLakes_AllCombined_Cluster95ID_V2.fasta.xz
+#   - Downloaded from https://ftp.pride.ebi.ac.uk/pride/data/archive/2017/05/PXD006343/SodaLakes_AllCombined_Cluster95ID_V2.fasta
+# GEM-(01).pep.xml
+#   - Downloaded from https://ftp.pride.ebi.ac.uk/pride/data/archive/2017/05/PXD006343/GEM-(01).pep.xml
+# LCM-(01).pep.xml
+#   - Downloaded from https://ftp.pride.ebi.ac.uk/pride/data/archive/2017/05/PXD006343/LCM-(01).pep.xml
 
 # Get amino acid composition of proteins in reference database
 refaa <- CHNOSZ::read.fasta("SodaLakes_AllCombined_Cluster95ID_V2.fasta.xz")

@@ -1,6 +1,7 @@
-# JMDplots/sars16S_plot.R
+# JMDplots/sars16S.R
 # Plots for chem16S paper 20220202
 # Renamed to sars16S 20220907
+# Moved to JMDplots 20230211
 
 # Plot symbols and colors for body sites 20221125
 pch_Oral <- 21
@@ -357,23 +358,6 @@ sars16S_3 <- function(pdf = FALSE, refdb = "GTDB") {
     itype <- means$type == type
     label <- 1:sum(itype)
 
-#    # Add contour (2D kernel density estimate) 20221105
-#    # The following is modified from canprot/diffplot.R
-#    dens <- MASS::kde2d(means$D_ZC[itype], means$D_nH2O[itype], n = 200)
-#    # Add 50% contour (or other fractions specified by 'probs') 20191126
-#    probs <- 0.5
-#    # https://stackoverflow.com/questions/16225530/contours-of-percentiles-on-level-plot
-#    # (snippet from emdbook::HPDregionplot from @benbolker)
-#    dx <- diff(dens$x[1:2])
-#    dy <- diff(dens$y[1:2])
-#    sz <- sort(dens$z)
-#    c1 <- cumsum(sz) * dx * dy
-#    levels <- sapply(probs, function(x) {
-#      approx(c1, sz, xout = 1 - x)$y
-#    })
-#    # Don't try to plot contours for NA levels 20191207
-#    if(!any(is.na(levels))) contour(dens, drawlabels = FALSE, levels = levels, add = TRUE, lty = 3, lwd = 1.5)
-
     # Add points
     points(means$D_ZC[itype], means$D_nH2O[itype], pch = pch[[type]], col = col[[type]], bg = col[[type]])
     dx <- rep(0, sum(itype))
@@ -412,8 +396,9 @@ sars16S_3 <- function(pdf = FALSE, refdb = "GTDB") {
   taxonomies <- c("Bacteria", "All")
   for(i in 1:2) {
     taxonomy <- taxonomies[i]
-    if(taxonomy == "All") aa <- read.csv("/home/chem16S/metaproteome/HZX+21/HZX+21_aa.csv")
-    if(taxonomy == "Bacteria") aa <- read.csv("/home/chem16S/metaproteome/HZX+21/HZX+21_bacteria_aa.csv")
+    datadir <- system.file("extdata/sars16S", package = "JMDplots")
+    if(taxonomy == "All") aa <- read.csv(file.path(datadir, "metaproteome/HZX+21/HZX+21_aa.csv"))
+    if(taxonomy == "Bacteria") aa <- read.csv(file.path(datadir, "metaproteome/HZX+21/HZX+21_bacteria_aa.csv"))
     # Identify control and COVID-19 patients
     icontrol <- grep("Ctrl", aa$organism)
     icovid <- grep("P", aa$organism)
@@ -671,9 +656,14 @@ getMP_sars16S <- function(refdb = "RefSeq", zero_AA = NULL) {
     # Get 16S estimates
     metrics <- getmetrics_sars16S(studies_16S[i], refdb = refdb, zero_AA = zero_AA)
     mdat <- getmdat_sars16S(studies_16S[i], metrics)
-    # Get metaproteome values
-    datadir <- system.file("extdata/sars16S", package = "JMDplots")
-    aa <- read.csv(paste0(datadir, "/metaproteome/", studies_MP[i], "/", studies_MP[i], "_aa.csv"))
+    # Get metaproteome values - look in orp16S then sars16S directory
+    datadir <- system.file("extdata/orp16S", package = "JMDplots")
+    file <- paste0(datadir, "/metaproteome/", studies_MP[i], "/", studies_MP[i], "_aa.csv")
+    if(!file.exists(file)) {
+      datadir <- system.file("extdata/sars16S", package = "JMDplots")
+      file <- paste0(datadir, "/metaproteome/", studies_MP[i], "/", studies_MP[i], "_aa.csv")
+    }
+    aa <- read.csv(file)
     # Set abundances of selected amino acids to zero 20221018
     if(!is.null(zero_AA)) aa[, zero_AA] <- 0
     # Match 16S samples to metaproteome
@@ -759,54 +749,6 @@ COVID_means <- function(refdb = "GTDB") {
   out <- cbind(out, D_ZC, D_nH2O)
   file <- paste0("COVID_means_", refdb, ".csv")
   write.csv(out, file, row.names = FALSE, quote = FALSE)
-
-}
-
-
-# Metagenomes from different body sites 20221124
-MGplot <- function(pdf = FALSE) {
-
-#  # Studies are for nasal, nasal, oral, oral, gut, gut
-#  studies <- c("LLZ+21", "BNS+22", "SDF+21", "CZH+22", "ZZL+20", "YZL+21")
-#  pchs <- c(22, 22, 21, 21, 24, 24)
-#  cols <- c("#56B4E9", "#56B4E9", "#D62728", "#D62728", "#E69F00", "#E69F00")
-#  # Setup plot
-#  plot(c(-0.22, -0.08), c(-1, -0.7), type = "n", xlab = cplab$ZC, ylab = cplab$nH2O)
-
-  # Setup figure
-  if(pdf) pdf("MGplot.pdf", width = 10, height = 5)
-  par(mfrow = c(1, 2))
-  par(mar = c(4, 4, 1, 1))
-  # Studies are for nasal, oral, gut
-  pchs <- c(pch_Nasal, pch_Oral, pch_Gut)
-  cols <- c(col_Nasal, col_Oral, col_Gut)
-
-  # Loop over groups of studies
-  for(j in 1:2) {
-
-    # Setup plot
-    plot(c(-0.20, -0.12), c(-0.84, -0.72), type = "n", xlab = cplab$ZC, ylab = cplab$nH2O)
-
-    if(j == 1) studies <- c("LLZ+21", "CZH+22", "ZZL+20")
-    if(j == 2) studies <- c("BNS+22", "SDF+21", "YZL+21")
-
-    for(i in 1:length(studies)) {
-      datadir <- system.file("extdata/sars16S", package = "JMDplots")
-      file <- paste0(datadir, "/ARAST/", studies[i], "_AA.csv")
-      dat <- read.csv(file)
-      ZC <- ZCAA(dat)
-      nH2O <- H2OAA(dat)
-      points(ZC, nH2O, pch = pchs[i], bg = cols[i])
-#      # Add center dot for odd-numbered studies
-#      if(i %% 2 != 0) points(ZC, nH2O, pch = ".", cex = 4)
-    }
-    # Add legend
-    legend <- paste(studies, c("Nasal", "Oral", "Gut"))
-    legend("topright", legend, pch = pchs, pt.bg = cols, bty = "n")
-
-  }
-
-  if(pdf) dev.off()
 
 }
 

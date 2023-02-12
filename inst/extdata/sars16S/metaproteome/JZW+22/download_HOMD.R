@@ -1,8 +1,13 @@
-# chem16S/metaproteome/JZW+22/download_HOMD.R
+# sars16S/metaproteome/JZW+22/download_HOMD.R
 # Download selected faa files from Human Oral Microbome Database
 # 20230207 jmd
 
-# Get bacterial protein IDs from protein groups table of PXD026727
+# REQUIRED FILE:
+# proteinGroups.txt
+#   - Downloaded from https://ftp.pride.ebi.ac.uk/pride/data/archive/2022/11/PXD026727/results_Total.zip
+#   - Extracted proteinGroups.txt from ZIP file
+
+# Read IDs from protein groups table
 dat <- read.csv("proteinGroups.txt", sep = "\t")
 protein.IDs <- dat$Majority.protein.IDs
 # Get first IDs

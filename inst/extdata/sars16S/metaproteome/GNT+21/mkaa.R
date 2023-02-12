@@ -1,5 +1,11 @@
-# Calculate amino acid composition from proteins
+# sars16S/metaproteome/GNT+21/mkaa.R
+# Calculate amino acid composition from protein sequences
 # 20221112 jmd
+
+# REQUIRED FILES:
+# Table_S9.csv
+# Table_S11.csv
+#   - CSV files exported from Tables S9 and S11 of Granato et al. (2021)
 
 # List faa files dowloaded from HOMD
 faafiles <- dir("/home/sequence/HOMD/GNT+21_PROKKA")
