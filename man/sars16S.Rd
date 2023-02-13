@@ -28,7 +28,7 @@ This table briefly describes each plotting function.
 
 \tabular{ll}{
   \code{sars16S_1} \tab Chemical metrics of reference proteomes as a function of oxygen tolerance and comparison with metaproteomes \cr
-  \code{sars16S_2} \tab Chemical metrics of community reference proteomes across body sites, after viral inactivation treatment, and multi-omics comparison \cr
+  \code{sars16S_2} \tab Chemical variation of microbial proteins across body sites, after viral inactivation treatment, and multi-omics comparison \cr
   \code{sars16S_3} \tab Differences of chemical metrics of nasopharyngeal, oropharyngeal, and gut microbiomes between controls and COVID-19 patients \cr
   \code{sars16S_4} \tab Overview of chemical variation of the human microbiome inferred from multi-omics datasets \cr
 }

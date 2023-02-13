@@ -7,7 +7,6 @@ This R package has code and data for papers by [Jeffrey M. Dick](https://chnosz.
 ## Quick links to active papers (pre-publication drafts)
 
 - **sars16S**: Chemical variation of the human microbiome: [data directory](inst/extdata/sars16S), [R code](R/sars16S.R), [help page source](man/sars16S.Rd), [vignette source](vignettes/sars16S.Rmd)
-
 - **orp16S**: Influence of redox potential on protein evolution: [data directory](inst/extdata/orp16S) with sequence processing pipeline, [R code](R/orp16S.R), [help page source](man/orp16S.Rd), [vignette source](vignettes/orp16S.Rmd)
   - A compiled HTML version of the vignette is at [chnosz.net](https://chnosz.net/JMDplots/doc/orp16S.html).
   - A preprint is on [bioRxiv](https://doi.org/10.1101/2021.10.12.464155).
@@ -20,16 +19,23 @@ First install the **remotes** packages from CRAN.
 install.packages("remotes")
 ```
 
-Then install [**chem16S**](../chem16S).
-This package is used to calculate chemical metrics of estimated community proteomes from 16S rRNA data.
+Then install other required packages.
+- [**chem16S**](../chem16S) processes 16S-based taxonomic classifications to calculate chemical metrics of community reference proteomes.
+- [**CHNOSZ**](../CHNOSZ) is used for thermodynamic calculations.
+- [**canprot**](../canprot) has data and functions for chemical metrics of proteins.
 
 ```R
 remotes::install_github("jedick/chem16S")
-
+remotes::install_github("jedick/CHNOSZ")
 ```
 
-Then install **JMDplots**.
-This command will also install prebuilt vignettes.
+NOTES
+- 2022-10-24: The development version of CHNOSZ is required for the affinity ranking calculations in the `utogig.Rmd` vignette.
+- 2023-02-12: The development version of CHNOSZ is required for the `as.residue` argument for `add.protein()`, used in the `orp16S.Rmd` vignette.
+- To install the development version built on Windows (no need to install Rtools and compile it yourself), use `install.packages("CHNOSZ", repos = "https://R-Forge.R-project.org")`.
+
+Finally, install **JMDplots**.
+This command will install prebuilt vignettes; they may not be up-to-date with the code.
 
 ```R
 remotes::install_github("jedick/JMDplots")
@@ -43,14 +49,11 @@ browseVignettes("JMDplots")
 
 ## Building vignettes
 
-If you want to build the vignettes yourself, be aware that it may be possible to build them without [pandoc](https://pandoc.org/), but having pandoc available will make them look better.
+If you want to build the vignettes yourself, note that it might be possible to build them without [pandoc](https://pandoc.org/), but having pandoc available will make them look better.
 
 ```R
 remotes::install_github("jedick/JMDplots", dependencies = TRUE, build_vignettes = TRUE)
 ```
-
-NOTE (2022-10-24): The development version of CHNOSZ is required for the affinity ranking calculations in the `utogig.Rmd` vignette.
-To install the development version, use `install.packages("CHNOSZ", repos = "https://R-Forge.R-project.org")` or `remotes::install_github("jedick/CHNOSZ")`.
 
 ## Online vignettes
 

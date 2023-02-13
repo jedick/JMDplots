@@ -65,12 +65,13 @@ sars16S_1 <- function(pdf = FALSE) {
       ptext <- bquote(italic(p) == .(format(signif(pval, 1), scientific = 2)))
       legend("bottomright", legend = ptext, bty = "n", inset = c(0, -0.03))
       # Show mean difference
-      md <- round(diff(sapply(values, mean, na.rm = TRUE)), 4)
-      mdtext <- paste("MD =", md)
-      legend("topleft", legend = mdtext, bty = "n", inset = c(-0.05, -0.02))
+      md <- format(round(diff(sapply(values, mean, na.rm = TRUE)), 4), scientific = 1)
+      if(metric == "ZC") difftxt <- bquote(Delta*italic(Z)[C] == .(md))
+      if(metric == "nH2O") difftxt <- bquote(Delta*italic(n)[H[2]*O] == .(md))
+      legend("topleft", legend = difftxt, bty = "n", inset = c(-0.05, -0.02))
       # Print coverage
       coverage <- round(sum(!is.na(iref)) / length(iref) * 100, 1)
-      ctext <- paste0("(A) ", coverage, "% of genus names in 'List of Prokaryotes ...' matched to GTDB")
+      ctext <- paste0("A. ", coverage, "% of genus names in 'List of Prokaryotes ...' matched to GTDB")
       if(metric == "ZC") print(ctext)
       if(metric == "ZC") label.figure("A. Genus reference proteomes based on GTDB", cex = 1.5, font = 2, adj = 0, xfrac = 0.02)
 
@@ -122,7 +123,7 @@ sars16S_1 <- function(pdf = FALSE) {
 
 }
 
-# Chemical metrics of community reference proteomes across body sites,
+# Chemical variation of microbial proteins across body sites,
 # after viral inactivation treatment, and multi-omics comparison 20221125
 sars16S_2 <- function(pdf = FALSE) {
 
@@ -169,7 +170,7 @@ sars16S_2 <- function(pdf = FALSE) {
 
   legend("bottomleft", legend = c("", "  No treatment", "", "  Viral inactivation"), inset = c(-0.05, 0), bg = "white", bty = "n", cex = 0.9)
   legend("bottomleft", legend = c("Large symbols", "", "Small symbols", ""), text.font = 2, inset = c(-0.05, 0), bty = "n", cex = 0.9)
-  title(hyphen.in.pdf("Community reference proteomes\n(Boix-Amor\u00f3s et al., 2021)"), font.main = 1)
+  title(hyphen.in.pdf("Community reference proteomes\n(data from Boix-Amor\u00f3s et al., 2021)"), font.main = 1)
   label.figure("A", font = 2, cex = 1.8, yfrac = 0.97)
 
   # Panel B: Viral inactivation
@@ -501,7 +502,7 @@ sars16S_3 <- function(pdf = FALSE) {
       legend <- bquote(italic(p) == .(format(signif(x_pvalue, 1), scientific = 2)))
       legend(legend.x, legend = legend, bty = "n", inset = c(-0.1, -0.05))
       # Add title
-      if(SRAprefix == "SRR1232") main <- "Zuo et al." else main <- "Yeoh et al."
+      if(SRAprefix == "SRR1232") main <- "Zuo'20" else main <- "Yeoh'21"
       title(main, font.main = 1, line = 0.5)
       # Show mean difference
       x_diff <- mean(x_list[[2]]) - mean(x_list[[1]])
@@ -535,7 +536,7 @@ sars16S_4 <- function(pdf = FALSE) {
 
   ## Header text
   y <- 12
-  text(8, y, "Evidence for chemical\nvariation of microbiome", adj = c(0, 1))
+  text(8, y, "Significant differences\nof chemical metrics", adj = c(0, 1))
   y <- 10.75
   text(4, y, "Body\nSite", adj = c(0, 1))
   text(5.5, y, "\nComparison", adj = c(0, 1))
@@ -549,7 +550,7 @@ sars16S_4 <- function(pdf = FALSE) {
   y <- 9.5
   lines(c(4, 12 + dx), c(y, y))
 
-  ## Normal body sites
+  ## Body sites
   # Nasal
   y <- 9
   text(4, y, "Nasal", adj = c(0, 1))
@@ -574,6 +575,7 @@ sars16S_4 <- function(pdf = FALSE) {
   text(8, y, "2a,c", adj = c(0, 1), cex = 0.8, font = 2)
   text(8 + 4/3 + dx, y, "2d", adj = c(0, 1), cex = 0.8, font = 2)
   text(8 + 8/3 + dx, y, "2e", adj = c(0, 1), cex = 0.8, font = 2)
+  text(8 + 13/6 + dx, y - 0.4, "(Gut vs oral)", adj = c(0.5, 1), cex = 0.8)
 
   # Dividing line
   y <- 5
@@ -589,16 +591,18 @@ sars16S_4 <- function(pdf = FALSE) {
   text(8, y, "2b", adj = c(0, 1), cex = 0.8, font = 2)
 
   # Dividing line
-  y <- 2.5
+  y <- 2.9
   lines(c(4, 12 + dx), c(y, y))
 
   ## COVID
-  y <- 1.5
+  y <- 2.5
   text(4, y, "Gut", adj = c(0, 1))
   text(5.5, y, hyphen.in.pdf("COVID-19\nvs control"), adj = c(0, 1))
   text(8-dx, y, quote(phantom(.) %down% italic(Z)[C]), adj = c(0, 1))
   text(8 + 4/3, y, quote(phantom(.) %down% italic(Z)[C]), adj = c(0, 1))
   text(8 + 8/3, y, quote(phantom(.) %down% italic(Z)[C]), adj = c(0, 1))
+  y <- 1.5
+  text(8 + 4/3, y, quote(phantom(.) %down% italic(n)[H[2]*O]), adj = c(0, 1))
   # Figure numbers
   y <- 0.5
   text(8, y, "3a", adj = c(0, 1), cex = 0.8, font = 2)
@@ -633,7 +637,9 @@ sars16S_4 <- function(pdf = FALSE) {
   text(10.3, 4.3, "Dehydration", col = col_Gut, adj = c(0.5, -0.1), cex = 0.9, font = 3)
   # COVID-19
   lines(c(11.7, 15.2), c(1.3, 1.6), col = 8)
-  text(13.4, 1.44, "Reduction", col = col_Oral, adj = c(0.5, -0.1), cex = 0.9, font = 3, srt = 4.8)
+  text(13.4, 1.44, "Dehydration", col = col_Gut, adj = c(0.5, -0.1), cex = 0.9, font = 3, srt = 4.8)
+  lines(c(11.7, 15.2), c(2.3, 1.6), col = 8)
+  text(13.4, 1.96, "Reduction", col = col_Oral, adj = c(0.5, -0.1), cex = 0.9, font = 3, srt = -11.3)
 
   if(pdf) dev.off()
 
