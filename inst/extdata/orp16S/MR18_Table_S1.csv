@@ -208,7 +208,7 @@ Dysgonomonas,0
 Edwardsiella,0
 Eggerthella,1
 Eikenella,0
-Elbe,"UNKNOWN "
+Elbe,UNKNOWN
 Elizabethkingia,0
 Elusimicrobium,1
 Enorma,1
@@ -238,7 +238,7 @@ Flexibacter,0
 Frankia,0
 Fusicatenibacter,1
 Fusobacterium,1
-Garciella,"UNKNOWN "
+Garciella,UNKNOWN
 Garciella,1
 Gardnerella,0
 Gemella,0
@@ -293,7 +293,7 @@ Janthinobacterium,0
 Jeotgalicoccus,0
 Jonesia,0
 Jonquetella,1
-Kaistibacter,"UNKNOWN "
+Kaistibacter,UNKNOWN
 Kallipyga,1
 Kineococcus,0
 Kineosporia,0
@@ -303,7 +303,7 @@ Klebsiella,0
 Kluyvera,0
 Kocuria,0
 Kofleria,0
-Kopriimonas,"UNKNOWN "
+Kopriimonas,UNKNOWN
 Kopriimonas,0
 Kosakonia,0
 Kribella,0
@@ -326,7 +326,7 @@ Leclercia,0
 Leeia,0
 Leifsonia,0
 Lelliottia,0
-Lentimonas,"UNKNOWN "
+Lentimonas,UNKNOWN
 Lentimonas,0
 Leptothrix,0
 Leptotrichia,0
@@ -349,7 +349,7 @@ Marinobacter,0
 Marinobacter,0
 Marinomonas,0
 Marispirillum,0
-"Marmoricola ",0
+Marmoricola,0
 Marvinbryantia,1
 Massilia,0
 Mechercharimyces,0
@@ -390,7 +390,7 @@ Neisseria,0
 Neptunomonas,0
 Nesterenkonia,0
 Nicoletella,0
-"Nitratireductor ",0
+Nitratireductor,0
 Nitrincola,0
 Nitrosomonas,0
 Nitrosospira,0
@@ -399,7 +399,7 @@ Nocardia,0
 Nocardioides,0
 Nocardiopsis,0
 Nonomuraea,0
-"Nosocomiicoccus ",0
+Nosocomiicoccus,0
 Novosphingobium,0
 Oceanirhabdus,1
 Oceanobacillus,0
@@ -452,7 +452,7 @@ Phyllobacterium,0
 Pilibacter,1
 Pilimelia,0
 Pirellula,0
-"Planctomyces ",0
+Planctomyces,0
 Planobacterium,0
 Planococcus,0
 Planomicrobium,0
@@ -478,7 +478,7 @@ Pseudoalteromonas,0
 Pseudobutyrivibrio,1
 Pseudoclavibacter,0
 Pseudoflavonifractor,1
-"Pseudoflavonifractor ",1
+Pseudoflavonifractor,1
 Pseudomaricurvus,1
 Pseudomonas,0
 Pseudoramibacter,1
@@ -503,7 +503,7 @@ Rhodopirellula,0
 Rhodopseudomonas,0
 Rhodovulum,0
 Riemerella,0
-"Rikenella ",1
+Rikenella,1
 Robinsoniella,1
 Roseateles,0
 Roseburia,1
@@ -518,7 +518,7 @@ Rummeliibacillus,0
 Saccharibacillus,0
 Saccharofermentans,1
 Saccharomonospora,0
-"Saccharospirillum ",0
+Saccharospirillum,0
 Saccharothrix,0
 Salicola,0
 Salinarimonas,0
@@ -531,7 +531,7 @@ Sarcina,0
 Scardovia,1
 Schlegella,0
 Schumannella,1
-"Schwartzia ",1
+Schwartzia,1
 Scopulibacillus,0
 Sedimentibacter,1
 Sediminibacillus,0
@@ -573,7 +573,7 @@ Staphylococcus,0
 Stenotrophomonas,0
 Stomatobaculum,1
 Streptoalloteichus,0
-"Streptobacillus ",0
+Streptobacillus,0
 Streptococcus,0
 Streptomyces,0
 Subdoligranulum,1
@@ -591,7 +591,7 @@ Tepidibacter,0
 Tepidimicrobium,1
 Tepidimonas,0
 Tepidiphilus,0
-Terrahaemophilus,"UNKNOWN "
+Terrahaemophilus,UNKNOWN
 Tetragenococcus,0
 Tetrasphaera,0
 Thalassobacillus,0
