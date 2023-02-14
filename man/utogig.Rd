@@ -11,7 +11,7 @@
 \alias{calc_logaH2_intermediate}
 \title{Using thermodynamics to obtain geochemical information from genomes}
 \description{
-Plots from the paper by Dick et al. (2022).
+Plots from the paper by Dick et al. (2023).
 }
 
 \usage{
@@ -75,7 +75,7 @@ The output is saved in files named \file{H2_intermediate_*.csv} (see description
 \references{
 Delcher AL, Harmon D, Kasif S, White O and Salzberg SL (1999) Improved microbial gene identification with Glimmer. \emph{Nucleic Acids Res.} \bold{27}, 4636--4641. \doi{10.1093/nar/27.23.4636}
 
-Dick JM, Boyer GM, Canovas PA III and Shock EL (2022) Using thermodynamics to obtain geochemical information from genomes. Manuscript in preparation.
+Dick JM, Boyer GM, Canovas PA III and Shock EL (2023) Using thermodynamics to obtain geochemical information from genomes. \emph{Geobiology} \bold{21}, 262--273. \doi{10.1111/gbi.12532}
 
 Lovley DR and Goodwin S (1988) Hydrogen concentrations as an indicator of the predominant terminal electron-accepting reactions in aquatic sediments. \emph{Geochim. Cosmochim. Acta} \bold{52}, 2993--3003. \doi{10.1016/0016-7037(88)90163-9}
 
