@@ -7,7 +7,7 @@
 \alias{groupplots}
 \alias{mergedplot}
 \alias{get_colors}
-\title{Plots from cancer potential diagrams papers}
+\title{Chemical portraits of cancer proteomes}
 \description{
 Plots from the papers by Dick (2016 and 2017).
 }

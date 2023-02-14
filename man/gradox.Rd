@@ -8,7 +8,7 @@
 \alias{gradox3}
 \alias{gradox4}
 \alias{gradox5}
-\title{Plots from redox gradients paper}
+\title{Carbon oxidation state of proteins inferred from metagenomes in redox gradients}
 \description{
 Plots from the paper by Dick et al. (2019).
 }

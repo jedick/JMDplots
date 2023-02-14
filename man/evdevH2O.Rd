@@ -11,7 +11,7 @@
 \alias{evdevH2O8}
 \alias{runMaximAct}
 \alias{LYSC_example}
-\title{Plots from thermodynamics in evolution and development paper}
+\title{Water activity and redox potential in evolution and development}
 \description{
 Plots from the paper by Dick (2022).
 }

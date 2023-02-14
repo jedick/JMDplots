@@ -8,7 +8,7 @@
 \alias{aoscp5}
 \alias{aoscp6}
 \alias{aoscp99}
-\title{Plots from oxidation state of carbon paper}
+\title{Average oxidation state of carbon in proteins}
 \description{
 Plots from the paper by Dick (2014).
 }

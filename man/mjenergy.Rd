@@ -7,7 +7,7 @@
 \alias{calc_affinity}
 \alias{mjenergy_Table_S3}
 \alias{mjenergy_Dataset_S1}
-\title{Plots from energy release in protein synthesis paper}
+\title{Energy release during protein synthesis at ultramafic-hosted hydrothermal systems}
 \description{
 Plots from the paper by Dick and Shock (2021).
 Affinities are calculated for each protein in the \emph{Methanocaldococcus jannaschii} (\emph{Mj}) proteome.

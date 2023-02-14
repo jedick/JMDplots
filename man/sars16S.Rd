@@ -6,7 +6,7 @@
 \alias{sars16S_3}
 \alias{sars16S_4}
 \alias{COVID_means}
-\title{Plots from human microbiome paper}
+\title{Chemical variation of the human microbiome}
 \description{
 Plots from the paper by Dick (2023).
 }
@@ -89,7 +89,7 @@ This table briefly describes each plotting function.
 \references{
 Dick JM, Yu M, Tan J and Lu A (2019) Changes in carbon oxidation state of metagenomes along geochemical redox gradients. \emph{Front. Microbiol.} \bold{10}, 120. \doi{10.3389/fmicb.2019.00120}
 
-Dick JM (2023) Two dimensions of chemical variation of the human microbiome across body sites and in COVID-19 patients. Manuscript in preparation.
+Dick JM (2023) Two dimensions of chemical variation of the human microbiome across body sites and in COVID-19 patients. bioRxiv. \doi{10.1101/2023.02.12.528246}
 
 Ke S, Weiss ST and Liu Y-Y (2022) Dissecting the role of the human microbiome in COVID-19 via metagenome-assembled genomes. \emph{Nat. Commun.} \bold{13}, 5253. \doi{10.1038/s41467-022-32991-w}
 

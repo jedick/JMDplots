@@ -16,7 +16,7 @@
 \alias{chnosz10S8}
 \alias{chnosz10S9}
 \alias{chnosz10S10}
-\title{Plots from CHNOSZ paper}
+\title{Thermodynamic calculations and diagrams for geochemistry}
 \description{
 Plots from the paper by Dick (2019).
 }

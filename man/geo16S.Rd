@@ -15,7 +15,7 @@
 \alias{getmdat_geo16S}
 \alias{getmetrics_geo16S}
 \alias{plotmet_geo16S}
-\title{Plots from geobiochemistry of 16S sequences paper}
+\title{Chemical links between redox conditions and community reference proteomes}
 \description{
 Plots from the paper by Dick and Tan (2022).
 }
@@ -54,7 +54,7 @@ This table gives a brief description of each plotting function.
   \code{geo16S1} \tab Distinct chemical parameters of reference proteomes for major taxonomic groups \cr
   \code{geo16S2} \tab Estimated community proteomes from different environments have distinct chemical signatures \cr
   \code{geo16S3} \tab Lower carbon oxidation state is tied to oxygen depletion in water columns \cr
-  \code{geo16S4} \tab Common trends of carbon oxidation state of estimated community proteomes for shale gas wells and hydrothermal systems \cr
+  \code{geo16S4} \tab Common trends of carbon oxidation state of community reference proteomes for shale gas wells and hydrothermal systems \cr
   \code{geo16S5} \tab Comparison of protein \ZC from metagenomic or metatranscriptomic data with estimates from 16S and reference sequences \cr
   \code{geo16S_S1} \tab RefSeq and 16S rRNA data processing outline \cr
   \code{geo16S_S2} \tab Scatterplots of \ZC and \nH2O for genera vs higher taxonomic levels \cr
@@ -107,7 +107,7 @@ Dick JM and Tan J (2022) Chemical links between redox conditions and estimated c
 # Make Figure 1
 geo16S1()
 
-# Get metrics of estimated community proteomes and paired metadata for one study
+# Get metrics of community reference proteomes and paired metadata for one study
 metrics <- getmetrics_geo16S("BCA+21")
 mdat <- getmdat_geo16S("BCA+21", metrics = metrics)
 

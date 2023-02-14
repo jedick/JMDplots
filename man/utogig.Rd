@@ -9,7 +9,7 @@
 \alias{utogigS2}
 \alias{utogigS4}
 \alias{calc_logaH2_intermediate}
-\title{Plots from geochemistry of genomes paper}
+\title{Using thermodynamics to obtain geochemical information from genomes}
 \description{
 Plots from the paper by Dick et al. (2022).
 }

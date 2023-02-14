@@ -10,7 +10,7 @@
 \alias{gradH2O6}
 \alias{gradH2O7}
 \alias{NifProteomes}
-\title{Plots from salinity gradients paper}
+\title{Signatures of salinity gradients in the chemical composition of proteins}
 \description{
 Plots from the paper by Dick et al. (2020).
 }

@@ -10,7 +10,7 @@
 \alias{canH2OT2}
 \alias{canH2OS1}
 \alias{canH2OS2}
-\title{Plots from water in cancer paper}
+\title{Water as a reactant in the differential expression of proteins in cancer}
 \description{
 Plots from the paper by Dick (2020).
 Function names ending with \samp{T*} and \samp{S*} refer to supplementary tables and figures.

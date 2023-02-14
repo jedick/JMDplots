@@ -9,7 +9,7 @@
 \alias{bison6}
 \alias{bison7}
 \alias{bison8}
-\title{Plots from Bison Pool hot spring papers}
+\title{Relative stabilities of proteins inferred from a hot-spring metagenome}
 \description{
 Plots from the papers by Dick and Shock (2011 and 2013).
 }

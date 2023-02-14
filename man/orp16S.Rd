@@ -14,7 +14,7 @@
 \alias{orp16S_D3}
 \alias{getmdat_orp16S}
 \alias{getmetrics_orp16S}
-\title{Plots from geochemical influence on protein evolution paper}
+\title{Geochemical influence on protein evolution}
 \description{
 Plots from the paper by Dick and Meng (2021).
 }

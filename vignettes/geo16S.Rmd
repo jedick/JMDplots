@@ -1,10 +1,10 @@
 ---
-title: "Chemical links between redox gradients and estimated community proteomes (2022)"
+title: "Chemical links between redox conditions and community reference proteomes (2022)"
 output: 
   rmarkdown::html_vignette:
     mathjax: null
 vignette: >
-  %\VignetteIndexEntry{Chemical links between redox gradients and estimated community proteomes (2022)}
+  %\VignetteIndexEntry{Chemical links between redox conditions and community reference proteomes (2022)}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 bibliography: JMDplots.bib

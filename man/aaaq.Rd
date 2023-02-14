@@ -4,7 +4,7 @@
 \alias{aaaq4}
 \alias{aaaq10}
 \alias{aaaq13}
-\title{Plots from amino acid group additivity paper}
+\title{Amino acid group additivity}
 \description{
 Plots from the paper by Dick et al. (2006).
 }

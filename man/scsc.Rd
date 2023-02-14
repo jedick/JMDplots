@@ -3,7 +3,7 @@
 \alias{scsc}
 \alias{scsc2}
 \alias{scsc3}
-\title{Plots from yeast subcellular location paper}
+\title{Yeast subcellular location}
 \description{
 Plots from the paper by Dick (2009).
 }
