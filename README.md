@@ -9,7 +9,7 @@ This R package has code and data for papers by [Jeffrey M. Dick](https://chnosz.
 - **sars16S**: Chemical variation of the human microbiome: [data directory](inst/extdata/sars16S), [R code](R/sars16S.R), [help page source](man/sars16S.Rd), [vignette source](vignettes/sars16S.Rmd)
   - A compiled HTML version of the vignette is at [chnosz.net](https://chnosz.net/JMDplots/doc/sars16S.html).
   - A preprint is on [bioRxiv](https://doi.org/10.1101/2023.02.12.528246).
-- **orp16S**: Chemical adaptation of bacterial proteins to redox conditions: [data directory](inst/extdata/orp16S) with sequence processing pipeline, [R code](R/orp16S.R), [help page source](man/orp16S.Rd), [vignette source](vignettes/orp16S.Rmd)
+- **orp16S**: Geochemical influence on protein evolution: [data directory](inst/extdata/orp16S) with sequence processing pipeline, [R code](R/orp16S.R), [help page source](man/orp16S.Rd), [vignette source](vignettes/orp16S.Rmd)
   - A compiled HTML version of the vignette is at [chnosz.net](https://chnosz.net/JMDplots/doc/orp16S.html).
   - A preprint is on [bioRxiv](https://doi.org/10.1101/2021.10.12.464155).
 

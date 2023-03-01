@@ -531,7 +531,7 @@ sars16S_4 <- function(pdf = FALSE) {
   plot(xlim, ylim, type = "n", axes = FALSE, xlab = "", ylab = "")
 
   # -dx for adjusting math text with phantom(.)
-  # +dx for adjusting columns after "Reference proteome"
+  # +dx for adjusting columns after "Community reference proteome"
   dx <- 0.2
 
   ## Header text
@@ -540,7 +540,7 @@ sars16S_4 <- function(pdf = FALSE) {
   y <- 10.75
   text(4, y, "Body\nSite", adj = c(0, 1))
   text(5.5, y, "\nComparison", adj = c(0, 1))
-  text(8, y, "Reference\nproteome", adj = c(0, 1), cex = 0.8, font = 2)
+  text(8 - dx, y, "Community\nreference\nproteome", adj = c(0, 1), cex = 0.8, font = 2)
   text(8 + 4/3 + dx, y, hyphen.in.pdf("Meta-\ngenome/\nMAG"), adj = c(0, 1), cex = 0.8, font = 2)
   text(8 + 8/3 + dx, y, hyphen.in.pdf("Meta-\nproteome"), adj = c(0, 1), cex = 0.8, font = 2)
   y <- 10.1
@@ -618,7 +618,7 @@ sars16S_4 <- function(pdf = FALSE) {
   # Aspect ratio of image is 1:1
   testtube <- readPNG(file.path(datadir, "images/testtube.png"))
   rasterImage(testtube, 11.5, 3.8, 12.5, 4.8)
-  text(12.2, 3.95, "EtOH", cex = 0.8)
+  text(12.5, 3.95, "75% EtOH", cex = 0.8)
 
   ## Add lines and text
   # Nasal

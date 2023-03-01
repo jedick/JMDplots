@@ -61,7 +61,7 @@ ZC <- "<i>Z</i><sub>C</sub>"
 
 This vignette runs the code to make the plots from the following paper:
 
-> Dick JM, Meng D. 2023. Community reference proteomes suggest widespread influence of geochemistry on bacterial protein evolution. Submitted manuscript.
+> Dick JM, Meng D. 2023. Community- and genome-based evidence for a shaping influence of redox potential on bacterial protein evolution. Submitted manuscript.
 >
 > Preprint available at bioRxiv. doi: [10.1101/2021.10.12.464155](https://doi.org/10.1101/2021.10.12.464155)
 
@@ -133,8 +133,7 @@ orp16S_S2()
 orp16S_6(EMP_primers = TRUE)
 ```
 
-<!-- Removed in revision 20230107
-## Genus-level RDP classifications mapped to NCBI taxonomy (in-text calculation)
+## Genus-level RDP classifications mapped to NCBI taxonomy (values mentioned in text)
 ```{r mapperc}
 # Read Dataset S3 (created by orp16S_D3())
 dat <- read.csv(system.file("extdata/orp16S/Dataset_S3.csv", package = "JMDplots"))
@@ -142,6 +141,5 @@ perc_bac <- round(mean(subset(dat, lineage == "Bacteria")$mapperc))
 perc_arc <- round(mean(subset(dat, lineage == "Archaea")$mapperc))
 message(paste0(perc_bac, "% for bacteria, ", perc_arc, "% for archaea"))
 ```
--->
 
 ## References
