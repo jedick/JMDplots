@@ -562,3 +562,47 @@ aoscp99 <- function(pdf = FALSE) {
     addexif("aoscp99", "ZC of ferredoxin, thioredoxin, and glutaredoxin vs midpoint reduction potential", "Dick (2014) (unpublished)")
   }
 }
+
+### Unexported functions ###
+
+nucleic.formula <- function(nucleic=NULL) {
+  # Compute the formula, e.g.
+  # DNA <- count.aa(list("AGCT", "TTTT"), type="DNA")  # a dataframe of counts
+  # nf <- nucleic.formula(DNA)  # a series of formulas
+  # FIXME: This only adds the formulas of the nucleobases; dehydration and phosphorylation are not yet accounted for!
+  # 20090926 jmd
+  letts <- c("A", "C", "G", "T", "U")
+  names <- c("adenine", "cytosine", "guanine", "thymine", "uracil")
+  formulas <- c("C5H5N5", "C4H5N3O", "C5H5N5O", "C5H6N2O2", "C4H4N2O2")
+  # The locations of the letters in the data frame
+  i.lett <- match(letts, colnames(nucleic))
+  # We'll normally have at least one NA (U or A for DNA or RNA)
+  ina <- is.na(i.lett)
+  # The chemical formula of bases, in the order appearing above
+  f.base <- formulas[!ina]
+  # Loop over the base counts
+  f.out <- character()
+  for(i in 1:nrow(nucleic)) {
+    # Use makeup() with multipliers and sum=TRUE  20120119 jmd
+    f <- as.chemical.formula(makeup(f.base, multiplier=as.numeric(nucleic[i, i.lett[!ina]]), sum=TRUE))
+    f.out <- c(f.out, f)
+  }
+  return(f.out)
+}
+
+nucleic.complement <- function(nucleic=NULL, type="DNA") {
+  # Return the nucleobase complement
+  # nucleic.complement(nucleic, "DNA")  # DNA complement
+  # nucleic.complement(nucleic, "RNA")  # RNA complement
+  # The reference sequence, and its DNA and RNA complements
+  ref <- c("A", "C", "G", "T", "U")
+  DNA <- c("T", "G", "C", "A", "A")
+  RNA <- c("U", "G", "C", "A", "A")
+  iref <- match(colnames(nucleic), ref)
+  i.base <- which(!is.na(iref))
+  colnames(nucleic)[i.base] <- get(type)[iref[i.base]]
+  # Be nice and re-alphabetize the columns
+  o.base <- order(colnames(nucleic)[i.base])
+  nucleic <- nucleic[, i.base[o.base], drop=FALSE]
+  return(nucleic)
+}
