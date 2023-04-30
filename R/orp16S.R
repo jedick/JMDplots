@@ -33,7 +33,7 @@ EZlm <- read.csv(system.file("extdata/orp16S/EZlm.csv", package = "JMDplots"))
 # Figure 1: Thermodynamic model for the relationship between carbon oxidation state of reference proteomes and redox potential 20221213
 orp16S_1 <- function(pdf = FALSE) {
   # Setup plot
-  if(pdf) pdf("Figure_1.pdf", width = 7, height = 6)
+  if(pdf) pdf("Figure_1.pdf", width = 7, height = 6, bg = "white")
   mat <- matrix(c(1,1,1,2,2,2, 1,1,1,3,3,3, 4,4,5,5,6,6), nrow = 3, byrow = TRUE)
   layout(mat)
 
@@ -177,7 +177,7 @@ orp16S_1 <- function(pdf = FALSE) {
 orp16S_2 <- function(pdf = FALSE) {
 
   # Setup plot
-  if(pdf) pdf("Figure_2.pdf", width = 8, height = 3.5)
+  if(pdf) pdf("Figure_2.pdf", width = 8, height = 3.5, bg = "white")
   mat <- matrix(1:3, nrow = 1)
   layout(mat, widths = c(0.9, 1.4, 0.9))
   par(mgp = c(2.5, 1, 0))
@@ -215,7 +215,7 @@ orp16S_2 <- function(pdf = FALSE) {
   axis(1, 1, labels = "Strictly\nAnaerobic", tick = FALSE, line = 0.7)
   axis(1, 2, labels = "Aerotolerant", tick = FALSE, line = 0.3)
   # Add p-values
-  ptext <- bquote(italic(p) == .(signif(t.test(values$Anaerobe, values$Aerotolerant)$p.value, 3)))
+  ptext <- bquote(italic(P) == .(signif(t.test(values$Anaerobe, values$Aerotolerant)$p.value, 3)))
   legend("bottomright", legend = ptext, bty = "n")
   # Show number of genera below names
   n <- c(
@@ -264,7 +264,7 @@ orp16S_2 <- function(pdf = FALSE) {
 # Figure 3: Methods overview and Winogradsky columns 20221110
 orp16S_3 <- function(pdf = FALSE) {
 
-  if(pdf) pdf("Figure_3.pdf", width = 6/(8/15), height = 4)
+  if(pdf) pdf("Figure_3.pdf", width = 6/(8/15), height = 4, bg = "white")
 
   # Figure 1a: Schematic of data and methods 20210830
   layout(matrix(1:3, nrow = 1), widths = c(8, 3.5, 3.5))
@@ -402,7 +402,7 @@ orp16S_4 <- function(pdf = FALSE) {
 
   ## Panel A: Sample locations on world map
 
-  if(pdf) pdf("Figure_4.pdf", width = 26, height = 15+9-1)
+  if(pdf) pdf("Figure_4.pdf", width = 26, height = 15+9-1, bg = "white")
   mat <- matrix(c(1,1,1,1, 1,2,3,1, 0,2,3,0), nrow = 3, byrow = TRUE)
   layout(mat, heights = c(14, 1, 8), widths = c(7, 9, 3, 7))
   par(cex = 1)
@@ -595,7 +595,7 @@ orp16S_4 <- function(pdf = FALSE) {
        xlim = c(-2, 14), ylim = c(-0.6, 1), xaxs = "i", yaxs = "i", axes = FALSE)
   box()
   axis(1, at = seq(-2, 14, 2))
-  axis(2, at = round(seq(-0.6, 1, 0.2), 1))
+  axis(2, at = round(seq(-0.6, 1, 0.2), 1), gap.axis = 0)
   # Add outline from Bass Becking et al. (1960)
   BKM60 <- read.csv(system.file("extdata/orp16S/BKM60.csv", package = "JMDplots"))
   BKM60$Eh <- BKM60$Eh / 1000 # Units: V
@@ -638,7 +638,7 @@ orp16S_4 <- function(pdf = FALSE) {
 
 # Figure 5: Associations between Eh7 and ZC at local scales 20220517
 orp16S_5 <- function(pdf = FALSE) {
-  if(pdf) pdf("Figure_5.pdf", width = 8, height = 6)
+  if(pdf) pdf("Figure_5.pdf", width = 8, height = 6, bg = "white")
   mat <- matrix(c(1,1,1,1, 2,2,2,2, 3,3,3,3,
                   0,0,0,0,0,0,0,0,0,0,0,0,
                   4,4,4,4,4, 0, 6,6,6, 7,7,7,
@@ -679,7 +679,7 @@ orp16S_5 <- function(pdf = FALSE) {
   ymaxabs <- max(abs(lmbac$slope[j1 | j2]))
   ylim <- c(-ymaxabs*1.2, ymaxabs)
   # River & seawater, lake & pond, geothermal, hyperalkaline
-  plot(xlim, ylim, type = "n", xlab = quote(log[10]~"(Number of samples)"), ylab = quote("Slope of linear fit"~(V^-1)))
+  plot(xlim, ylim, type = "n", xlab = quote(log[10]~"(Number of samples)"), ylab = quote("Slope of linear fit"~(1/V)))
   abline(h = 0, lty = 2, lwd = 1.5, col = "gray50")
   abline(h = c(-0.1, 0.1), lty = 3, lwd = 1.5, col = "gray50")
   x1 <- log10(lmbac$nsamp[j1])
@@ -696,7 +696,7 @@ orp16S_5 <- function(pdf = FALSE) {
   title("Linear regressions for bacterial communities\nin each dataset", font.main = 1, xpd = NA, line = 0.7)
   label.figure("b", font = 2, cex = 2.3, yfrac = 1.05)
   # Groundwater, sediment, soil
-  plot(xlim, ylim, type = "n", xlab = quote(log[10]~"(Number of samples)"), ylab = quote("Slope of linear fit"~(V^-1)))
+  plot(xlim, ylim, type = "n", xlab = quote(log[10]~"(Number of samples)"), ylab = quote("Slope of linear fit"~(1/V)))
   abline(h = 0, lty = 2, lwd = 1.5, col = "gray50")
   abline(h = c(-0.1, 0.1), lty = 3, lwd = 1.5, col = "gray50")
   x2 <- log10(lmbac$nsamp[j2])
@@ -770,8 +770,8 @@ orp16S_5 <- function(pdf = FALSE) {
 orp16S_6 <- function(pdf = FALSE, EMP_primers = FALSE) {
 
   if(pdf) {
-    if(EMP_primers) pdf("Figure_S3.pdf", width = 10, height = 7)
-    else pdf("Figure_6.pdf", width = 10, height = 7)
+    if(EMP_primers) pdf("Figure_S3.pdf", width = 10, height = 7, bg = "white")
+    else pdf("Figure_6.pdf", width = 10, height = 7, bg = "white")
   }
   mat <- matrix(c(
     16, 16, rep(1:7, each = 6), 17, 17,
@@ -867,7 +867,7 @@ orp16S_6 <- function(pdf = FALSE, EMP_primers = FALSE) {
 orp16S_S1 <- function(pdf = FALSE) {
 
   # Setup figure
-  if(pdf) pdf("Figure_S1.pdf", width = 9, height = 12)
+  if(pdf) pdf("Figure_S1.pdf", width = 9, height = 12, bg = "white")
   par(mfrow = c(4, 3))
 
   results <- c(
@@ -998,7 +998,7 @@ orp16S_S1 <- function(pdf = FALSE) {
 # Figure S2: Compare regressions with Eh7, Eh, and O2 20220517
 orp16S_S2 <- function(pdf = FALSE) {
 
-  if(pdf) pdf("Figure_S2.pdf", width = 6, height = 8)
+  if(pdf) pdf("Figure_S2.pdf", width = 6, height = 8, bg = "white")
   mat <- matrix(1:8, ncol = 2)
   layout(mat, heights = c(2, 2, 2, 1))
 
@@ -1023,7 +1023,7 @@ orp16S_S2 <- function(pdf = FALSE) {
     add.linear.global(thisdat$Eh, thisdat$ZC, nstudy, xvar = "Eh")
     eachenv(thisdat, add = TRUE, do.linear = FALSE, xvar = "Eh")
     # ZC-O2 plot
-    plot(c(0, 750), ylim, type = "n", xlab = quote(O[2]~"("*mu*"mol l"^{-1}*")"), ylab = cplab$ZC)
+    plot(c(0, 750), ylim, type = "n", xlab = quote(O[2]~"("*mu*"mol"/"liter"*")"), ylab = cplab$ZC)
     add.linear.global(thisdat$O2_umol_L, thisdat$ZC, nstudy, xvar = "O2", scale = 1)
     eachenv(thisdat, add = TRUE, do.linear = FALSE, xvar = "O2")
     # Add legend
@@ -1551,8 +1551,8 @@ add.linear.global <- function(xvals, ZC, nstudy = NA, xvar = "Eh7", legend.x = "
   slopetxt <- formatC(slope, digits = 3, format = "f")
   MOE95txt <- formatC(MOE95, digits = 3, format = "f")
   # Units for Eh7/Eh/O2
-  if(xvar %in% c("Eh7", "Eh")) slopeleg <- bquote(italic(m) == .(slopetxt) %+-% .(MOE95txt) ~ V^-1)
-  if(xvar == "O2") slopeleg <- bquote(italic(m) == .(slopetxt) %+-% .(MOE95txt) ~ l~mmol^-1)
+  if(xvar %in% c("Eh7", "Eh")) slopeleg <- bquote(italic(m) == .(slopetxt) %+-% .(MOE95txt) / V)
+  if(xvar == "O2") slopeleg <- bquote(italic(m) == .(slopetxt) %+-% .(MOE95txt) ~ liter / mmol)
   # Add text to plot
   legend <- as.expression(c("", slopeleg))
   legend(legend.x, legend = legend, bty = "n", text.col = text.col, inset = inset)
@@ -1601,7 +1601,7 @@ add.linear.local <- function(Eh7, ZC, col = "gray62", lwd = 1, legend = NULL, ce
       main <- bquote(list(
         italic(N) == .(nrow(EZdat)),
         italic(r) == .(rtxt),
-        italic(m) == .(slopetxt) %+-% .(MOE95txt) ~ V^-1
+        italic(m) == .(slopetxt) %+-% .(MOE95txt) / V
       ))
       title(main = main, line = 0.75, cex.main = 1)
     } else {
@@ -1609,7 +1609,7 @@ add.linear.local <- function(Eh7, ZC, col = "gray62", lwd = 1, legend = NULL, ce
       ntext <- bquote(italic(N) == .(nrow(EZdat)))
       rtext <- bquote(italic(r) == .(rtxt))
       stext <- bquote(italic(m) == .(slopetxt))
-      MOEtext <- bquote(phantom(xx) %+-% .(MOE95txt) ~ V^-1)
+      MOEtext <- bquote(phantom(xx) %+-% .(MOE95txt) / V)
       if(nounits) MOEtext <- bquote(phantom(xx) %+-% .(MOE95txt))
       if(with.N) ltext <- c(ntext, rtext, stext, MOEtext)
       if(!with.N) ltext <- c(rtext, stext, MOEtext)
