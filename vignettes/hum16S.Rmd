@@ -1,10 +1,10 @@
 ---
-title: "Chemical variation of the human microbiome (2023)"
+title: "Chemical characteristics of human microbiomes (2023)"
 output: 
   rmarkdown::html_vignette:
     mathjax: null
 vignette: >
-  %\VignetteIndexEntry{Chemical variation of the human microbiome (2023)}
+  %\VignetteIndexEntry{Chemical characteristics of human microbiomes (2023)}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 bibliography: [orp16S.bib, JMDplots.bib]
@@ -30,9 +30,9 @@ ZC <- "<i>Z</i><sub>C</sub>"
 
 This vignette runs the code to make the plots from the following paper:
 
-> Dick JM. 2023. Two dimensions of chemical variation of the human microbiome across body sites and in COVID-19 patients. Manuscript in preparation.
+> Dick JM. 2023. Chemical characteristics of human microbiomes inferred from multi-omics data. Manuscript in preparation.
 > 
-> Preprint available at bioRxiv. doi: [10.1101/2023.02.12.528246](https://doi.org/10.1101/2023.02.12.528246)
+> A preprint entitled "Two dimensions of chemical variation of the human microbiome across body sites and in COVID-19 patients" is available at bioRxiv. doi: [10.1101/2023.02.12.528246](https://doi.org/10.1101/2023.02.12.528246)
 
 This vignette was compiled on `r Sys.Date()` with
 **[JMDplots](https://github.com/jedick/JMDplots)** `r packageDescription("JMDplots")$Version`,
@@ -44,29 +44,29 @@ library(JMDplots)
 ```
 
 ## Chemical metrics of reference proteomes as a function of oxygen tolerance and comparison with metaproteomes (Figure 1)
-```{r sars16S_1, message = FALSE, out.width='100%', fig.align='center', fig.width = 7, fig.height = 5, pngquant = pngquant, dpi = 100}
-sars16S_1()
+```{r hum16S_1, message = FALSE, out.width='100%', fig.align='center', fig.width = 7, fig.height = 5, pngquant = pngquant, dpi = 100}
+hum16S_1()
 ```
 
 **Data sources:** **(A)** *List of Prokaryotes according to their Aerotolerant or Obligate Anaerobic Metabolism* [@MR18]; **(B)** Gut Starch Diet [@MLL+17], Ulcerative Colitis Gut [@TWC+22], Manus Basin Inactive Chimney [@MPB+19], Manus Basin Active Chimneys [@PMM+18;@RYP+14], Soda Lake Biomats [@KTS+17], Mock Communities [@KTS+17], Saanich Inlet [@HTZ+17].
 
 ## Chemical variation of microbial proteins across body sites, after viral inactivation treatment, and multi-omics comparison (Figure 2)
-```{r sars16S_2, message = FALSE, out.width='100%', fig.width = 8, fig.height = 6, pngquant = pngquant, dpi = 100}
-sars16S_2()
+```{r hum16S_2, message = FALSE, out.width='100%', fig.width = 8, fig.height = 6, pngquant = pngquant, dpi = 100}
+hum16S_2()
 ```
 
 **Data sources:** **(A)** @BPB+21; **(B)** @BPB+21; **(C)** See Table 1 in manuscript; **(D)** @LLZ+21, @CZH+22, @ZZL+20; **(E)** @TWC+22, @MLL+17, @JZW+22, @GNT+21.
 
 ## Differences of chemical metrics of nasopharyngeal, oropharyngeal, and gut microbiomes between controls and COVID-19 patients (Figure 3)
-```{r sars16S_3, message = FALSE, out.width='100%', fig.width = 15, fig.height = 12, pngquant = pngquant, dpi = 100}
-sars16S_3()
+```{r hum16S_3, message = FALSE, out.width='100%', fig.width = 15, fig.height = 12, pngquant = pngquant, dpi = 100}
+hum16S_3()
 ```
 
 **Data sources:** **(A)** See Table 1 in manuscript; **(B)** @HZX+21; **(C)** MAGs [@KWL22], based on data from @ZZL+20 and @YZL+21.
 
 ## Overview of chemical variation of the human microbiome inferred from multi-omics datasets (Figure 4)
-```{r sars16S_4, message = FALSE, out.width='100%', fig.width = 8, fig.height = 6, pngquant = pngquant, dpi = 100}
-sars16S_4()
+```{r hum16S_4, message = FALSE, out.width='100%', fig.width = 8, fig.height = 6, pngquant = pngquant, dpi = 100}
+hum16S_4()
 ```
 
 ## References

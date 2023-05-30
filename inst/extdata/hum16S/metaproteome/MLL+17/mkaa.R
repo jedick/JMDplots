@@ -1,4 +1,4 @@
-# sars16S/metaproteome/MLL+17/mkaa.R
+# hum16S/metaproteome/MLL+17/mkaa.R
 # Calculate amino acid compositions from metaproteome data and UniProt sequences
 # 20220829
 

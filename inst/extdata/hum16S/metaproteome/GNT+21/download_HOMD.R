@@ -1,4 +1,4 @@
-# sars16S/metaproteome/GNT+21/download_HOMD.R
+# hum16S/metaproteome/GNT+21/download_HOMD.R
 # Download selected faa files from Human Oral Microbome Database
 # 20221105 jmd
 

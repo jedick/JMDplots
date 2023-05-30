@@ -1,4 +1,4 @@
-# sars16S/metaproteome/HZX+21/mkaa.R
+# hum16S/metaproteome/HZX+21/mkaa.R
 # Sum amino acid composition of bacterial UniProt sequences for each sample
 # 20220830
 

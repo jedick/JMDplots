@@ -1,4 +1,4 @@
-# sars16S/metaproteom/TWC+22/mkaa.R
+# hum16S/metaproteome/TWC+22/mkaa.R
 # Extract UniProt IDs from protein database accessions
 # and sum amino acid compositions for each sample
 # 20220830

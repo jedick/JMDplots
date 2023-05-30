@@ -23,7 +23,7 @@ add.alpha <- function(col, alpha) {
   newcol
 }
 
-# For geo16S, orp16S, and sars16S: read taxon_AA.csv once, to make things faster 20221017
+# For geo16S, orp16S, and hum16S: read taxon_AA.csv once, to make things faster 20221017
 taxon_AA <- list(
   RefSeq = read.csv(system.file("extdata/RefSeq/taxon_AA.csv.xz", package = "chem16S")),
   GTDB = read.csv(system.file("extdata/GTDB/taxon_AA.csv.xz", package = "chem16S"))

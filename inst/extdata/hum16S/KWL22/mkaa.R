@@ -1,4 +1,4 @@
-# sars16S/metaproteom/KWL22/mkaa.R
+# hum16S/metaproteom/KWL22/mkaa.R
 # Get amino acid compositions from protein sequence files
 # 20221028 jmd
 

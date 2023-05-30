@@ -1,12 +1,12 @@
-# JMDplots/sars16S_util.R
-# Supporting functions for sars16S paper
+# JMDplots/hum16S_util.R
+# Supporting functions for hum16S paper
 
 # Get metadata for a study, appending columns for pch and col 20200914
-getmdat_sars16S <- function(study, metrics = NULL, dropNA = TRUE, quiet = TRUE) {
+getmdat_hum16S <- function(study, metrics = NULL, dropNA = TRUE, quiet = TRUE) {
   # Read metadata file
   # Remove suffix after underscore 20200929
   studyfile <- gsub("_.*", "", study)
-  datadir <- system.file("extdata/sars16S", package = "JMDplots")
+  datadir <- system.file("extdata/hum16S", package = "JMDplots")
   file <- file.path(datadir, "metadata", paste0(studyfile, ".csv"))
   metadata <- read.csv(file, as.is = TRUE, check.names = FALSE)
 
@@ -15,14 +15,14 @@ getmdat_sars16S <- function(study, metrics = NULL, dropNA = TRUE, quiet = TRUE) 
     iname <- match("name", tolower(colnames(metadata)))
     noname <- is.na(metadata[, iname])
     if(any(noname)) {
-      if(!quiet) print(paste0("getmdat_sars16S [", study, "]: dropping ", sum(noname), " samples with NA name"))
+      if(!quiet) print(paste0("getmdat_hum16S [", study, "]: dropping ", sum(noname), " samples with NA name"))
       metadata <- metadata[!is.na(metadata[, iname]), ]
     }
   }
   # Use NULL pch as flag for unavailable dataset 20210820
   pch <- NULL
 
-  # For sars16S paper 20220202
+  # For hum16S paper 20220202
 
   # 20210801 COVID-19 Gut
   if(study == "MMP+21") {
@@ -235,11 +235,11 @@ getmdat_sars16S <- function(study, metrics = NULL, dropNA = TRUE, quiet = TRUE) 
 }
 
 # Function to calculate metrics for a given study 20220506
-getmetrics_sars16S <- function(study, lineage = NULL, mincount = 100, refdb = "GTDB", return_AA = FALSE, zero_AA = NULL, quiet = TRUE, ...) {
+getmetrics_hum16S <- function(study, lineage = NULL, mincount = 100, refdb = "GTDB", return_AA = FALSE, zero_AA = NULL, quiet = TRUE, ...) {
   # Remove suffix after underscore 20200929
   studyfile <- gsub("_.*", "", study)
-  #if(refdb == "RefSeq") datadir <- system.file("extdata/sars16S/RDP", package = "JMDplots")
-  if(refdb == "GTDB") datadir <- system.file("extdata/sars16S/RDP-GTDB", package = "JMDplots")
+  #if(refdb == "RefSeq") datadir <- system.file("extdata/hum16S/RDP", package = "JMDplots")
+  if(refdb == "GTDB") datadir <- system.file("extdata/hum16S/RDP-GTDB", package = "JMDplots")
   RDPfile <- file.path(datadir, paste0(studyfile, ".tab.xz"))
   # If there is no .xz file, look for a .tab file 20210607
   if(!file.exists(RDPfile)) RDPfile <- file.path(datadir, paste0(studyfile, ".tab"))
@@ -249,9 +249,9 @@ getmetrics_sars16S <- function(study, lineage = NULL, mincount = 100, refdb = "G
 }
 
 # Function to calculate and plot metrics for a given study 20220506
-plotmet_sars16S <- function(study, lineage = NULL, refdb = "GTDB", quiet = TRUE, ...) {
-  metrics <- getmetrics_sars16S(study, lineage = lineage, refdb = refdb, quiet = quiet)
-  mdat <- getmdat_sars16S(study, metrics)
+plotmet_hum16S <- function(study, lineage = NULL, refdb = "GTDB", quiet = TRUE, ...) {
+  metrics <- getmetrics_hum16S(study, lineage = lineage, refdb = refdb, quiet = quiet)
+  mdat <- getmdat_hum16S(study, metrics)
   pm <- plotmet(mdat, ...)
   # Prepend study column
   cbind(study = study, pm)

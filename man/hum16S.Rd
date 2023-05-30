@@ -1,10 +1,10 @@
 \encoding{UTF-8}
-\name{sars16S}
-\alias{sars16S}
-\alias{sars16S_1}
-\alias{sars16S_2}
-\alias{sars16S_3}
-\alias{sars16S_4}
+\name{hum16S}
+\alias{hum16S}
+\alias{hum16S_1}
+\alias{hum16S_2}
+\alias{hum16S_3}
+\alias{hum16S_4}
 \alias{COVID_means}
 \title{Chemical variation of the human microbiome}
 \description{
@@ -12,10 +12,10 @@ Plots from the paper by Dick (2023).
 }
 
 \usage{
-  sars16S_1(pdf = FALSE)
-  sars16S_2(pdf = FALSE)
-  sars16S_3(pdf = FALSE)
-  sars16S_4(pdf = FALSE)
+  hum16S_1(pdf = FALSE)
+  hum16S_2(pdf = FALSE)
+  hum16S_3(pdf = FALSE)
+  hum16S_4(pdf = FALSE)
   COVID_means()
 }
 
@@ -27,10 +27,10 @@ Plots from the paper by Dick (2023).
 This table briefly describes each plotting function.
 
 \tabular{ll}{
-  \code{sars16S_1} \tab Chemical metrics of reference proteomes as a function of oxygen tolerance and comparison with metaproteomes \cr
-  \code{sars16S_2} \tab Chemical variation of microbial proteins across body sites, after viral inactivation treatment, and multi-omics comparison \cr
-  \code{sars16S_3} \tab Differences of chemical metrics of nasopharyngeal, oropharyngeal, and gut microbiomes between controls and COVID-19 patients \cr
-  \code{sars16S_4} \tab Overview of chemical variation of the human microbiome inferred from multi-omics datasets \cr
+  \code{hum16S_1} \tab Chemical metrics of reference proteomes as a function of oxygen tolerance and comparison with metaproteomes \cr
+  \code{hum16S_2} \tab Chemical variation of microbial proteins across body sites, after viral inactivation treatment, and multi-omics comparison \cr
+  \code{hum16S_3} \tab Differences of chemical metrics of nasopharyngeal, oropharyngeal, and gut microbiomes between controls and COVID-19 patients \cr
+  \code{hum16S_4} \tab Overview of chemical variation of the human microbiome inferred from multi-omics datasets \cr
 }
 
 \code{COVID_means} is used to precompute mean values of chemical metrics for controls and COVID-19 patients in each study (chemical metrics are for community reference proteomes; source data are 16S rRNA sequences).
@@ -49,7 +49,7 @@ This table briefly describes each plotting function.
 }
 
 \section{Data and scripts for metagenomes}{
-  These files are in \file{extdata/sars16S/ARAST}.
+  These files are in \file{extdata/hum16S/ARAST}.
   \describe{
     \item{\file{ARAST}}{Directory with scripts and output for metagenomes}
     \item{\file{ARAST/ARAST.R}}{Processing pipeline (modified from Dick et al. (2019) to implement removal of human sequences)}
@@ -60,7 +60,7 @@ This table briefly describes each plotting function.
 }
 
 \section{Data and scripts for metaproteomes}{
-  These files are in \file{extdata/sars16S/metaproteome}.
+  These files are in \file{extdata/hum16S/metaproteome}.
   See the comments in each \file{mkaa.R} for the required files that contain source data.
   Required files are available from databases or SI tables and are not included here.
   \describe{
@@ -70,7 +70,7 @@ This table briefly describes each plotting function.
 }
 
 \section{Data and scripts for metagenome-assembled genomes (MAGs)}{
-  These files are in \file{extdata/sars16S/KWL22}.
+  These files are in \file{extdata/hum16S/KWL22}.
   \describe{
     \item{\file{KWL22}}{Directory with scripts and data for analyzing MAGs from Ke et al. (2022)}
     \item{\file{KWL22/COVID19_metadata.txt}}{Downloaded from \url{https://github.com/Owenke247/COVID-19/blob/main/Pre-processed_Files/COVID19_metadata.txt}}
@@ -82,7 +82,7 @@ This table briefly describes each plotting function.
 \section{Other files}{
   \describe{
     \item{\file{extdata/orp16S/MR18_Table_S1.csv}}{List of strictly anaerobic and aerotolerant genera from Table S1 of Million and Raoult (2018).}
-    \item{\file{extdata/sars16S/COVID_means_GTDB.csv}}{Mean values of chemical metrics for samples in 16S studies, created with \code{COVID_means}.}
+    \item{\file{extdata/hum16S/COVID_means_GTDB.csv}}{Mean values of chemical metrics for samples in 16S studies, created with \code{COVID_means}.}
   }
 }
 
@@ -98,5 +98,5 @@ Million M and Raoult D (2018) Linking gut redox to human microbiome. \emph{Human
 
 \examples{
 # Summary figure
-sars16S_4()
+hum16S_4()
 }
