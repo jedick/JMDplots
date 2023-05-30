@@ -1,10 +1,10 @@
 ---
-title: "Chemical links between redox conditions and community reference proteomes (2022)"
+title: "Chemical links between redox conditions and community reference proteomes (2023)"
 output: 
   rmarkdown::html_vignette:
     mathjax: null
 vignette: >
-  %\VignetteIndexEntry{Chemical links between redox conditions and community reference proteomes (2022)}
+  %\VignetteIndexEntry{Chemical links between redox conditions and community reference proteomes (2023)}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 bibliography: JMDplots.bib
@@ -63,7 +63,7 @@ ZC <- "<i>Z</i><sub>C</sub>"
 
 This vignette runs the code to make the plots from the following paper first published by Springer Nature:
 
-> Dick JM, Tan J. 2022. Chemical links between redox conditions and estimated community proteomes from 16S rRNA and reference protein sequences. *Microbial Ecology*. doi: [10.1007/s00248-022-01988-9](https://doi.org/10.1007/s00248-022-01988-9)
+> Dick JM, Tan J. 2023. Chemical links between redox conditions and estimated community proteomes from 16S rRNA and reference protein sequences. *Microbial Ecology* **85**(4): 1338-1355. doi: [10.1007/s00248-022-01988-9](https://doi.org/10.1007/s00248-022-01988-9)
 
 Use this link for full-text access to a view-only version of the paper: [https://rdcu.be/cMCDa](https://rdcu.be/cMCDa).
 A preprint of the paper is available on bioRxiv at doi: [10.1101/2021.05.31.446500](https://doi.org/10.1101/2021.05.31.446500).

@@ -17,7 +17,7 @@
 \alias{plotmet_geo16S}
 \title{Chemical links between redox conditions and community reference proteomes}
 \description{
-Plots from the paper by Dick and Tan (2022).
+Plots from the paper by Dick and Tan (2023).
 }
 
 \usage{
@@ -100,7 +100,7 @@ If \code{metrics} is supplied, the samples are sorted in the same order as the m
 \references{
 Aßhauer KP, Wemheuer B, Daniel R and Meinicke P (2015) Tax4Fun: predicting functional profiles from metagenomic 16S rRNA data. \emph{Bioinformatics} \bold{31}, 2882--2884. \doi{10.1093/bioinformatics/btv287}
 
-Dick JM and Tan J (2022) Chemical links between redox conditions and estimated community proteomes from 16S rRNA and reference protein sequences. \emph{Microb. Ecol.} \doi{10.1007/s00248-022-01988-9}
+Dick JM and Tan J (2023) Chemical links between redox conditions and estimated community proteomes from 16S rRNA and reference protein sequences. \emph{Microb. Ecol.} \bold{85}, 1338--1355. \doi{10.1007/s00248-022-01988-9}
 }
 
 \examples{
