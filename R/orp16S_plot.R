@@ -187,8 +187,8 @@ plotMA <- function(study, lineage = NULL, mincount = 100, pch = NULL, col = NULL
   RDPfile <- file.path(datadir, paste0(studyfile, ".tab.xz"))
   # If there is no .xz file, look for a .tab file 20210607
   if(!file.exists(RDPfile)) RDPfile <- file.path(datadir, paste0(studyfile, ".tab"))
-  RDP <- readRDP(RDPfile, lineage = lineage, mincount = mincount)
-  map <- mapRDP(RDP)
+  RDP <- read_RDP(RDPfile, lineage = lineage, mincount = mincount)
+  map <- map_taxa(RDP)
   metrics <- getmetrics_orp16S(study, lineage = lineage, mincount = mincount)
   mdat <- getmdat_orp16S(study, metrics)
   metadata <- mdat$metadata

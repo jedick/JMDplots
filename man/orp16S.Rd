@@ -44,11 +44,11 @@ Plots from the paper by Dick and Meng (2023).
   \item{study}{character, study name}
   \item{samesign}{logical, only count slopes with same sign of minimum and maximum values in the 95\% CI?}
   \item{mincount}{integer, samples with less than this number of RDP classifications are excluded}
-  \item{metrics}{data frame, output of \code{\link[chem16S]{getmetrics}}}
+  \item{metrics}{data frame, output of \code{\link[chem16S]{get_metrics}}}
   \item{dropNA}{logical, exclude samples with NA name in metadata?}
   \item{size}{numeric, number of samples to randomly select}
   \item{quiet}{logical, change to FALSE to print details about data processing}
-  \item{...}{additional arguments passed to \code{\link[chem16S]{readRDP}}}
+  \item{...}{additional arguments passed to \code{\link[chem16S]{read_RDP}}}
 }
 
 \details{
@@ -81,7 +81,7 @@ If \code{metrics} is supplied, metadata are kept only for samples with available
 \code{size} can be used to specify a number of samples (from among those with both metadata and \code{metrics}, if given) to be randomly selected.
 
 \code{getmetrics_orp16S} calculates chemical metrics (\ZC and \nH2O) for the indicated study.
-\code{...} is used to supply argument to \code{\link[chem16S]{readRDP}}; note that the default of \code{mincount = 100} was used for data processing in the paper (see \code{\link{plotEZ}}).
+\code{...} is used to supply argument to \code{\link[chem16S]{read_RDP}}; note that the default of \code{mincount = 100} was used for data processing in the paper (see \code{\link{plotEZ}}).
 
 \code{orp16S_info} prints general information about a study (more specifically, a dataset): name, number of samples with Bacteria and Archaea (with \code{mincount = 100}), bibligraphic key, range of T, pH, Eh, and Eh7, and whether the slope of the \ZC-Eh7 correlations for Bacteria and Archaea (if available) are negative or positive.
 The function also returns information in a data frame, which is used to fill in Table S1 of the paper.
@@ -154,7 +154,7 @@ orp16S_info("PCL+18_Acidic")
 orp16S_info("PCL+18_Alkaline")
 
 # There's no plotmet_orp16S, but this is what it would look like in one line
-plotmet(getmdat_orp16S("MLL+19", getmetrics_orp16S("MLL+19")))
+plot_metrics(getmdat_orp16S("MLL+19", getmetrics_orp16S("MLL+19")))
 
 \dontrun{
 # Get unexported object with datasets in each environment type

@@ -65,7 +65,7 @@ geo16S2 <- function(pdf = FALSE) {
   p1 <- plotmet_geo16S("BGPF13", title = FALSE, points = FALSE)
 #  title("Yellowstone hot springs\nBowen De Le\u00f3n et al., 2013", font.main = 1)
   title("Yellowstone hot springs", font.main = 1)
-  addhull(p1$ZC, p1$nH2O, 2, TRUE)
+  add_hull(p1$ZC, p1$nH2O, 2, TRUE)
   pointfun(p1)
   legend <- c("Archaea", "Bacteria")
   legend("bottomleft", legend, pch = c(23, 22), col = c(1, 1), pt.bg = c(6, 5), bg = "white")
@@ -73,7 +73,7 @@ geo16S2 <- function(pdf = FALSE) {
   p2 <- plotmet_geo16S("SVH+19", title = FALSE, points = FALSE)
 #  title("Black Sea\nSollai et al., 2019", font.main = 1)
   title("Black Sea", font.main = 1)
-  addhull(p2$ZC, p2$nH2O, "blue", TRUE, lty = 2)
+  add_hull(p2$ZC, p2$nH2O, "blue", TRUE, lty = 2)
   pointfun(p2)
   legend <- c("Oxic", "Suboxic", "Euxinic")
   legend("bottomright", legend, pch = c(24, 20, 25), pt.bg = c(4, 1, 2), bg = "white")
@@ -81,7 +81,7 @@ geo16S2 <- function(pdf = FALSE) {
   p3 <- plotmet_geo16S("HLA+16", title = FALSE, points = FALSE)
 #  title("Baltic Sea\nHerlemann et al., 2016", font.main = 1)
   title("Baltic Sea", font.main = 1)
-  addhull(p3$ZC, p3$nH2O, "blue", TRUE)
+  add_hull(p3$ZC, p3$nH2O, "blue", TRUE)
   pointfun(p3)
   legend <- c("< 6", "6-20", "> 20")
   legend("bottomright", legend, pch = c(24, 20, 21), col = c(1, 1, 1), pt.bg = c(3, NA, 4), bg = "white", title = "Salinity")
@@ -89,7 +89,7 @@ geo16S2 <- function(pdf = FALSE) {
   p4 <- plotmet_geo16S("MPB+17", title = FALSE, points = FALSE)
 #  title("Manus Basin submarine vents\nMeier et al., 2017", font.main = 1)
   title("Manus Basin submarine vents", font.main = 1)
-  addhull(p4$ZC, p4$nH2O, 2, TRUE, lty = 2)
+  add_hull(p4$ZC, p4$nH2O, 2, TRUE, lty = 2)
   pointfun(p4)
   legend <- as.expression(c(quote(italic(T)~"< 50 \u00B0C"), quote(italic(T)~"> 50 \u00B0C")))
   legend("bottomleft", legend, pch = c(21, 23), col = c(1, 1), pt.bg = c(4, 2), bg = "white", title = "Water")
@@ -98,7 +98,7 @@ geo16S2 <- function(pdf = FALSE) {
   p5 <- plotmet_geo16S("ZLM+16", title = FALSE, points = FALSE)
 #  title("Tibetan Plateau lakes\nZhong et al., 2016", font.main = 1)
   title("Tibetan Plateau lakes", font.main = 1)
-  addhull(p5$ZC, p5$nH2O, "turquoise3", TRUE, lty = 2)
+  add_hull(p5$ZC, p5$nH2O, "turquoise3", TRUE, lty = 2)
   pointfun(p5)
   legend <- c("< 10 g/L", "24-99 g/L", "> 300 g/L")
   legend("topright", legend, pch = c(24, 20, 21), col = c(1, 1, 1), pt.bg = c(3, NA, 4), bg = "white", title = "Salinity")
@@ -106,7 +106,7 @@ geo16S2 <- function(pdf = FALSE) {
   p6 <- plotmet_geo16S("JHM+16", title = FALSE, points = FALSE)
 #  title("Lake Fryxell oxygen gradient\nJungblut et al., 2016", font.main = 1)
   title("Lake Fryxell oxygen gradient", font.main = 1)
-  addhull(p6$ZC, p6$nH2O, "tan1", TRUE)
+  add_hull(p6$ZC, p6$nH2O, "tan1", TRUE)
   pointfun(p6)
   legend <- c("Oxic", "Transition", "Anoxic")
   legend("bottomright", legend, pch = c(24, 20, 25), pt.bg = c(4, 1, 2), bg = "white")
@@ -114,7 +114,7 @@ geo16S2 <- function(pdf = FALSE) {
   p7 <- plotmet_geo16S("HCW+13", title = FALSE, points = FALSE, ylim = c(-0.7685, -0.7585))
 #  title("Guerrero Negro mat layers\nHarris et al., 2013", font.main = 1)
   title("Guerrero Negro mat layers", font.main = 1)
-  addhull(p7$ZC, p7$nH2O, "tan1", TRUE, lty = 2)
+  add_hull(p7$ZC, p7$nH2O, "tan1", TRUE, lty = 2)
   pointfun(p7)
   text(c(-0.1512, -0.1572, -0.1576), c(-0.7587, -0.7645, -0.7684), c("0-1 mm", "1-2 mm", "2-3 mm"))
   legend <- c("Photic/oxic", "Low sulfide", "High sulfide")
@@ -123,7 +123,7 @@ geo16S2 <- function(pdf = FALSE) {
   p8 <- plotmet_geo16S("XDZ+17", title = FALSE, points = FALSE)
 #  title("Qarhan Salt Lake and\nnormal soils, Xie et al., 2017", font.main = 1)
   title("Qarhan Salt Lake\nand normal soils", font.main = 1)
-  addhull(p8$ZC, p8$nH2O, "turquoise3", TRUE)
+  add_hull(p8$ZC, p8$nH2O, "turquoise3", TRUE)
   pointfun(p8)
   legend <- c("Normal", "Saline")
   legend("topright", legend, pch = c(24, 21), pt.bg = c(3, 4), bg = "white")
@@ -139,14 +139,14 @@ geo16S2 <- function(pdf = FALSE) {
   plot(xlim, ylim, xlab = "", ylab = "", type = "n")
   lmlines()
   # Add convex hulls for each dataset in this figure
-  addhull(p1$ZC, p1$nH2O, 2, TRUE)
-  addhull(p2$ZC, p2$nH2O, "blue", TRUE, lty = 2)
-  addhull(p3$ZC, p3$nH2O, "blue", TRUE)
-  addhull(p4$ZC, p4$nH2O, 2, TRUE, lty = 2)
-  addhull(p5$ZC, p5$nH2O, "turquoise3", TRUE, lty = 2)
-  addhull(p6$ZC, p6$nH2O, "tan1", TRUE)
-  addhull(p7$ZC, p7$nH2O, "tan1", TRUE, lty = 2)
-  addhull(p8$ZC, p8$nH2O, "turquoise3", TRUE)
+  add_hull(p1$ZC, p1$nH2O, 2, TRUE)
+  add_hull(p2$ZC, p2$nH2O, "blue", TRUE, lty = 2)
+  add_hull(p3$ZC, p3$nH2O, "blue", TRUE)
+  add_hull(p4$ZC, p4$nH2O, 2, TRUE, lty = 2)
+  add_hull(p5$ZC, p5$nH2O, "turquoise3", TRUE, lty = 2)
+  add_hull(p6$ZC, p6$nH2O, "tan1", TRUE)
+  add_hull(p7$ZC, p7$nH2O, "tan1", TRUE, lty = 2)
+  add_hull(p8$ZC, p8$nH2O, "turquoise3", TRUE)
   par(opar)
 
   # Add environment type labels 20210427
@@ -419,7 +419,7 @@ geo16S4 <- function(pdf = FALSE) {
   # Loop over studies
   for(i in 1:4) {
     pm <- plotmet_geo16S(studies[[i]], plot.it = FALSE, extracolumn = "type")
-    # Determine sample groups from values of pch returned by plotmet()  20210901
+    # Determine sample groups from values of pch returned by plot_metrics()  20210901
     i1 <- pm$pch == 1
     i2 <- pm$pch == 21
     means <- list(ZC1 = mean(pm$ZC[i1]), ZC2 = mean(pm$ZC[i2]), nH2O1 = mean(pm$nH2O[i1]), nH2O2 = mean(pm$nH2O[i2]))
@@ -462,7 +462,7 @@ geo16S4 <- function(pdf = FALSE) {
   # Loop over studies
   for(i in 1:3) {
     pm <- plotmet_geo16S(studies[[i]], plot.it = FALSE, extracolumn = "type")
-    # Determine sample groups from values of pch returned by plotmet()  20210901
+    # Determine sample groups from values of pch returned by plot_metrics()  20210901
     i1 <- pm$pch == 1
     i2 <- pm$pch == 21
     means <- list(ZC1 = mean(pm$ZC[i1]), ZC2 = mean(pm$ZC[i2]), nH2O1 = mean(pm$nH2O[i1]), nH2O2 = mean(pm$nH2O[i2]))
@@ -513,7 +513,7 @@ geo16S4 <- function(pdf = FALSE) {
              "IF day 0", "SW day 0", "SW day 0",
              "oxic", "oxic"
   )
-  # Values of pch (from getmdat()/plotmet()) for oxidized and reduced sample groups
+  # Values of pch (from getmdat()/plot_metrics()) for oxidized and reduced sample groups
   pch_ox <- c(24, 24, 21, 24,
             24, 24, 24, 24,
             1, 1, 1, 1,
@@ -532,7 +532,7 @@ geo16S4 <- function(pdf = FALSE) {
   for(i in 1:length(study)) {
     # Get metrics for samples in this study
     pm <- plotmet_geo16S(study[[i]], plot.it = FALSE)
-    # Determine oxidized and reduced sample groups from values of pch returned by plotmet()  20210901
+    # Determine oxidized and reduced sample groups from values of pch returned by plot_metrics()  20210901
     pm <- pm[!is.na(pm$pch), ]
     iox <- pm$pch == pch_ox[i]
     ired <- pm$pch == pch_red[i]
@@ -1821,16 +1821,16 @@ getmetrics_geo16S <- function(study, quiet = TRUE, ...) {
   RDPfile <- file.path(datadir, paste0(studyfile, ".tab.xz"))
   # If there is no .xz file, look for a .tab file 20210607
   if(!file.exists(RDPfile)) RDPfile <- file.path(datadir, paste0(studyfile, ".tab"))
-  RDP <- readRDP(RDPfile, quiet = quiet, ...)
-  map <- mapRDP(RDP, quiet = quiet)
-  getmetrics(RDP, map = map, taxon_AA = taxon_AA$RefSeq)
+  RDP <- read_RDP(RDPfile, quiet = quiet, ...)
+  map <- map_taxa(RDP, quiet = quiet)
+  get_metrics(RDP, map = map, taxon_AA = taxon_AA$RefSeq)
 }
 
 # Function to calculate and plot metrics for a given study 20220506
 plotmet_geo16S <- function(study, quiet = TRUE, ...) {
   metrics <- getmetrics_geo16S(study, quiet = quiet)
   mdat <- getmdat_geo16S(study, metrics)
-  pm <- plotmet(mdat, ...)
+  pm <- plot_metrics(mdat, ...)
   # Prepend study column
   cbind(study = study, pm)
 }

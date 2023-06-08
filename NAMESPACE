@@ -139,7 +139,7 @@ importFrom("canprot",
 # Imports from chem16S
 importFrom("chem16S",
   # 20220506
-  "readRDP", "mapRDP", "getmetrics", "plotmet", "addhull"
+  "read_RDP", "map_taxa", "get_metrics", "plot_metrics", "add_hull"
 )
 
 # Imports from other packages

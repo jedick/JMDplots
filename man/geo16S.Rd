@@ -41,10 +41,10 @@ Plots from the paper by Dick and Tan (2023).
   \item{pdf}{logical, make a PDF file?}
   \item{H2O}{logical, make plots for \nH2O instead of \ZC?}
   \item{study}{character, study name}
-  \item{metrics}{data frame, output of \code{\link[chem16S]{getmetrics}}}
+  \item{metrics}{data frame, output of \code{\link[chem16S]{get_metrics}}}
   \item{dropNA}{logical, exclude samples with NA name in metadata?}
   \item{quiet}{logical, change to FALSE to print details about data processing}
-  \item{...}{additional arguments passed to \code{\link[chem16S]{readRDP}} (for \code{getmetrics_geo16S}) or \code{\link[chem16S]{plotmet}} (for \code{plotmet_geo16S})}
+  \item{...}{additional arguments passed to \code{\link[chem16S]{read_RDP}} (for \code{getmetrics_geo16S}) or \code{\link[chem16S]{plot_metrics}} (for \code{plotmet_geo16S})}
 }
 
 \details{
@@ -70,7 +70,7 @@ The default for \code{dropNA} means to exclude samples with NA name in the metad
 If \code{metrics} is supplied, the samples are sorted in the same order as the metadata file, and the function returns a list with both \samp{metadata} and the sorted \samp{metrics}.
 
 \code{getmetrics_geo16S} calculates chemical metrics (\ZC and \nH2O) for the indicated study.
-\code{...} is used to supply arguments to \code{\link[chem16S]{readRDP}}.
+\code{...} is used to supply arguments to \code{\link[chem16S]{read_RDP}}.
 
 }
 

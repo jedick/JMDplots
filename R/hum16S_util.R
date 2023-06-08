@@ -243,16 +243,16 @@ getmetrics_hum16S <- function(study, lineage = NULL, mincount = 100, refdb = "GT
   RDPfile <- file.path(datadir, paste0(studyfile, ".tab.xz"))
   # If there is no .xz file, look for a .tab file 20210607
   if(!file.exists(RDPfile)) RDPfile <- file.path(datadir, paste0(studyfile, ".tab"))
-  RDP <- readRDP(RDPfile, lineage = lineage, mincount = mincount, quiet = quiet, ...)
-  map <- mapRDP(RDP, refdb = refdb, quiet = quiet)
-  getmetrics(RDP, map = map, refdb = refdb, taxon_AA = taxon_AA[[refdb]], return_AA = return_AA, zero_AA = zero_AA)
+  RDP <- read_RDP(RDPfile, lineage = lineage, mincount = mincount, quiet = quiet, ...)
+  map <- map_taxa(RDP, refdb = refdb, quiet = quiet)
+  get_metrics(RDP, map = map, refdb = refdb, taxon_AA = taxon_AA[[refdb]], return_AA = return_AA, zero_AA = zero_AA)
 }
 
 # Function to calculate and plot metrics for a given study 20220506
 plotmet_hum16S <- function(study, lineage = NULL, refdb = "GTDB", quiet = TRUE, ...) {
   metrics <- getmetrics_hum16S(study, lineage = lineage, refdb = refdb, quiet = quiet)
   mdat <- getmdat_hum16S(study, metrics)
-  pm <- plotmet(mdat, ...)
+  pm <- plot_metrics(mdat, ...)
   # Prepend study column
   cbind(study = study, pm)
 }
