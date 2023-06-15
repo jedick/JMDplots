@@ -17,7 +17,7 @@ Please refer to the supporting information of the papers for the original script
 \details{
   \itemize{
     \item \code{\link{utogig}} - Using thermodynamics to obtain geochemical information from genomes (Dick et al., 2023)
-    \item \code{\link{orp16S}} - Geochemical influence on protein evolution (Dick and Meng, 2023)
+    \item \code{\link{orp16S}} - Influence of redox potential on bacterial protein evolution (Dick and Meng, 2023)
     \item \code{\link{geo16S}} - Chemical links between redox conditions and community reference proteomes (Dick and Tan, 2022)
     \item \code{\link{evdevH2O}} - Thermodynamic model for water activity and redox potential in evolution and development (Dick, 2022)
     \item \code{\link{mjenergy}} - Energy release in protein synthesis (Dick and Shock, 2021)
@@ -114,7 +114,7 @@ Dick JM, LaRowe DE and Helgeson HC (2006) Temperature, pressure, and electrochem
 
 Dick JM (2009) Calculation of the relative metastabilities of proteins in subcellular compartments of \emph{Saccharomyces cerevisiae}. \emph{BMC Syst. Biol.} \bold{3}, 75. \doi{10.1186/1752-0509-3-75}
 
-Dick JM and Meng D (2023) Community- and genome-based evidence for a shaping influence of redox potential on bacterial protein evolution. Submitted manuscript.
+Dick JM and Meng D (2023) Community- and genome-based evidence for a shaping influence of redox potential on bacterial protein evolution. \emph{mSystems}. \doi{10.1128/msystems.00014-23}
 
 Dick JM and Shock EL (2011) Calculation of the relative chemical stabilities of proteins as a function of temperature and redox chemistry in a hot spring. \emph{PLOS One} \bold{6}, e22782. \doi{10.1371/journal.pone.0022782}
 

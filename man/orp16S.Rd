@@ -14,7 +14,7 @@
 \alias{orp16S_D3}
 \alias{getmdat_orp16S}
 \alias{getmetrics_orp16S}
-\title{Geochemical influence on protein evolution}
+\title{Influence of redox potential on bacterial protein evolution}
 \description{
 Plots from the paper by Dick and Meng (2023).
 }
@@ -119,7 +119,7 @@ The function also returns information in a data frame, which is used to fill in 
 \references{
 Baas Becking LGM, Kaplan IR and Moore D (1960) Limits of the natural environment in terms of pH and oxidation-reduction potentials. \emph{Journal of Geology} \bold{68}, 243--284. \url{https://www.jstor.org/stable/30059218}
 
-Dick JM and Meng D (2023) Community- and genome-based evidence for a shaping influence of redox potential on bacterial protein evolution. Submitted manuscript.
+Dick JM and Meng D (2023) Community- and genome-based evidence for a shaping influence of redox potential on bacterial protein evolution. \emph{mSystems}. \doi{10.1128/msystems.00014-23}
 
 Million M and Raoult D (2018) Linking gut redox to human microbiome. \emph{Human Microbiome Journal} \bold{10}, 27--32. \doi{10.1016/j.humic.2018.07.002}
 

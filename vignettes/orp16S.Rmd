@@ -1,10 +1,10 @@
 ---
-title: "Geochemical influence on protein evolution (2023)"
+title: "Influence of redox potential on bacterial protein evolution (2023)"
 output: 
   rmarkdown::html_vignette:
     mathjax: null
 vignette: >
-  %\VignetteIndexEntry{Geochemical influence on protein evolution (2023)}
+  %\VignetteIndexEntry{Influence of redox potential on bacterial protein evolution (2023)}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 bibliography: [orp16S.bib, JMDplots.bib]
@@ -61,9 +61,7 @@ ZC <- "<i>Z</i><sub>C</sub>"
 
 This vignette runs the code to make the plots from the following paper:
 
-> Dick JM, Meng D. 2023. Community- and genome-based evidence for a shaping influence of redox potential on bacterial protein evolution. Submitted manuscript.
->
-> Preprint available at bioRxiv. doi: [10.1101/2021.10.12.464155](https://doi.org/10.1101/2021.10.12.464155)
+> Dick JM, Meng D. 2023. Community- and genome-based evidence for a shaping influence of redox potential on bacterial protein evolution. *mSystems*. doi: [10.1128/msystems.00014-23](https://doi.org/10.1128/msystems.00014-23)
 
 This vignette was compiled on `r Sys.Date()` with **[JMDplots](https://github.com/jedick/JMDplots)** `r packageDescription("JMDplots")$Version` and **[chem16S](https://github.com/jedick/chem16S)** `r packageDescription("chem16S")$Version`.
 
