@@ -1,5 +1,5 @@
 # evdevH2O/Main/mkmetrics.R
-# Calculate ZC and nH2O and get gene age for each protein in the consensus tables of Liebeskind et al. (2016)
+# Calculate Zc and nH2O and get gene age for each protein in the consensus tables of Liebeskind et al. (2016)
 # 20211103 jmd
 
 # Input file (provided here):
@@ -10,10 +10,10 @@
 # Output files:
 # modeAges.csv: names of mode ages for each organism
 # In metrics/ directory:
-# <OSCODE>.csv: ID, modeAge, ZC, nH2O for each protein (one file for each organism, 31 total)
+# <OSCODE>.csv: ID, modeAge, Zc, nH2O for each protein (one file for each organism, 31 total)
 
 # NOTE: change to make output <OSCODE>.csv files smaller 20211220:
-# ZC and nH2O values are rounded at 3 instead of 6 decimal places
+# Zc and nH2O values are rounded at 3 instead of 6 decimal places
 # csv files are xz compressed after running this script
 
 # Other input files (must be downloaded separately):
@@ -60,9 +60,9 @@ for(i in 1:nrow(refprot)) {
   aa <- CHNOSZ::read.fasta(file)
   # Get Protein IDs
   aa$protein <- sapply(strsplit(aa$protein, "\\|"), "[", 2)
-  # Calculate ZC and nH2O
-  ZC <- ZC(protein.formula(aa))
-  nH2O <- as.numeric(H2OAA(aa))
+  # Calculate Zc and nH2O
+  Zc <- ZC(protein.formula(aa))
+  nH2O <- as.numeric(nH2O(aa))
   # Read gene age table
   agefile <- file.path("Main", paste0("main_", refprot$OSCODE[i], ".csv"))
   ages <- read.csv(agefile, check.names = FALSE, row.names = 1)
@@ -71,9 +71,9 @@ for(i in 1:nrow(refprot)) {
   # Match protein ID to reference sequence data
   iaa <- match(rownames(ages), aa$protein)
   # Build output data frame
-  out <- data.frame(ID = rownames(ages), modeAge = modeAge, ZC = round(ZC[iaa], 3), nH2O = round(nH2O[iaa], 3))
-  # Exclude NA values of ZC (i.e. Liebeskind protein ID not in reference proteome)
-  out <- out[!is.na(out$ZC), ]
+  out <- data.frame(ID = rownames(ages), modeAge = modeAge, Zc = round(Zc[iaa], 3), nH2O = round(nH2O[iaa], 3))
+  # Exclude NA values of Zc (i.e. Liebeskind protein ID not in reference proteome)
+  out <- out[!is.na(out$Zc), ]
   outfile <- file.path("metrics", paste0(refprot$OSCODE[i], ".csv"))
   write.csv(out, outfile, row.names = FALSE, quote = FALSE)
   # Add row to modeAges data frame

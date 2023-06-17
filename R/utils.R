@@ -23,19 +23,19 @@ addalpha <- function(col, alpha) {
 
 # Function to add significant difference letters 20220531
 # Moved from utogig.R and exported 20220609
-cldfun <- function(ZClist, bp, dy) {
+cldfun <- function(Zclist, bp, dy) {
   # Ugly one-liner to turn a list into a data frame with "group" column taken from names of the list elements
-  ZCdat <- do.call(rbind, sapply(1:length(ZClist), function(i) data.frame(group = names(ZClist)[i], ZC = ZClist[[i]]), simplify = FALSE))
+  Zcdat <- do.call(rbind, sapply(1:length(Zclist), function(i) data.frame(group = names(Zclist)[i], Zc = Zclist[[i]]), simplify = FALSE))
   # One-way ANOVA and Tukey's Honest Significant Differences
   # Adapted from https://statdoe.com/one-way-anova-and-box-plot-in-r/
-  anova <- aov(ZC ~ group, data = ZCdat)
+  anova <- aov(Zc ~ group, data = Zcdat)
   tukey <- TukeyHSD(anova)
   # Compact letter display
   cld <- multcompLetters4(anova, tukey, reversed = TRUE)$group$Letters
   # Get into same order as data
-  cld <- cld[match(names(ZClist), names(cld))]
+  cld <- cld[match(names(Zclist), names(cld))]
   # Add to plot
-  n <- length(ZClist)
+  n <- length(Zclist)
   text((1:n) + 0.35, bp$stats[4, ] + dy, cld)
 }
 

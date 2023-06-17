@@ -2,12 +2,12 @@
 # Plots for perspective paper on geochemical biology
 # 20200418 jmd first version (review of Bison Pool and amino acid synthesis [AS98])
 # 20210516 Add methanogen tree
-# 20210727 Add nH2O-ZC overview plot (deleted)
+# 20210727 Add nH2O-Zc overview plot (deleted)
 # 20220220 Make biological hierarchy diagram (deleted)
 # 20220420 Move to JMDplots
 
 # Create bold axis labels
-ZClab <- quote(bolditalic(Z)[bold(C)])
+Zclab <- quote(bolditalic(Z)[bold(C)])
 Tlab <- quote(bolditalic(T)~bold("("*degree*C*")"))
 Alab <- quote(bold("Affinity"~(kJ~"(mol C)"^{-1})))
 Aresiduelab <- quote(bold("Affinity"~(kJ~"(mol residue)"^{-1})))
@@ -101,56 +101,56 @@ utogig1 <- function(pdf = FALSE) {
   text(3100, 1:36 + dy, labels, font = 3, adj = c(0, 0), xpd = NA)
   text(4170, iFS + dy, hyphen.in.pdf(FStxt), adj = c(0, 0), xpd = NA)
 
-  # Calculate ZC from protein formulas
+  # Calculate Zc from protein formulas
   methanogen_AA <- read.csv(system.file("extdata/utogig/methanogen_AA.csv", package = "JMDplots"))
-  ZC <- ZC(protein.formula(methanogen_AA))
+  Zc <- ZC(protein.formula(methanogen_AA))
 
   # Add labels
   text(0, 32, "Class II", font = 2, adj = 0, cex = 1.2)
   text(0, 7, "Class I", font = 2, adj = 0, cex = 1.2)
-  text(3200, -2.4, ZClab, adj = c(0, 0), xpd = NA)
+  text(3200, -2.4, Zclab, adj = c(0, 0), xpd = NA)
   label.figure("(a)", cex = 1.6, font = 2, yfrac = 0.97)
   # Setup a new plot in the empty space between the tree and names
   par(new = TRUE)
   par(mar = c(2, 9, 1, 18))
-  plot(range(ZC), c(1, length(ZC)), type = "n", ylab = "", axes = FALSE)
+  plot(range(Zc), c(1, length(Zc)), type = "n", ylab = "", axes = FALSE)
   axis(1, at = seq(-0.25, -0.15, 0.01), labels = FALSE, tcl = -0.3)
   axis(1, at = c(-0.25, -0.2, -0.15))
   axis(3, at = seq(-0.25, -0.15, 0.01), labels = FALSE, tcl = -0.3)
   # Plot guidelines 20220405
   abline(v = c(-0.25, -0.20, -0.15), lty = 2, col = 8)
-  # Plot lines from ZC to organism name
-  for(i in 1:36) lines(c(rev(ZC)[i], -0.145), c(i, i), lty = 3, col = "gray40")
+  # Plot lines from Zc to organism name
+  for(i in 1:36) lines(c(rev(Zc)[i], -0.145), c(i, i), lty = 3, col = "gray40")
 
-  # Plot the ZC
-  points(ZC, rev(c(iII, iI)), pch = mpch, col = mcol, bg = mbg, cex = 1.2)
+  # Plot the Zc
+  points(Zc, rev(c(iII, iI)), pch = mpch, col = mcol, bg = mbg, cex = 1.2)
 
-  # ZC-Topt plot 20220224
+  # Zc-Topt plot 20220224
   par(mar = c(9, 2, 7, 1))
   # Read Topt
   dat <- read.csv(system.file("extdata/utogig/Topt.csv", package = "JMDplots"))
-  # Append ZC column
+  # Append Zc column
   methanogen_AA <- read.csv(system.file("extdata/utogig/methanogen_AA.csv", package = "JMDplots"))
-  ZC <- ZC(protein.formula(methanogen_AA))
-  dat$ZC <- ZC[match(dat$species, methanogens)]
+  Zc <- ZC(protein.formula(methanogen_AA))
+  dat$Zc <- Zc[match(dat$species, methanogens)]
   # Use par(xpd = NA) to show the y-axis label 20220401
   par(xpd = NA)
-  plot(dat$Topt, dat$ZC, pch = mpch, col = mcol, bg = mbg, xlab = Toptlab, ylab = ZClab, ylim = c(-0.26, -0.14))
+  plot(dat$Topt, dat$Zc, pch = mpch, col = mcol, bg = mbg, xlab = Toptlab, ylab = Zclab, ylim = c(-0.26, -0.14))
   par(xpd = FALSE)
   text(50, -0.24, "Class I", font = 2)
   text(40, -0.145, "Class II", font = 2)
   # Uncomment this to check the alignment of separate text items below
-  #text(85, -0.168, "High-ZC\nthermophiles\n(Class I)", col = 2)
+  #text(85, -0.168, "High-Zc\nthermophiles\n(Class I)", col = 2)
   text(85, -0.163, bquote(.(hyphen.in.pdf("High-"))*italic(Z)[C]))
   text(85, -0.1705, "thermophiles\n(Class I)")
   text(80, -0.257, "Methanocaldococcus", font = 3)
   # Add convex hulls 20220401
   dat2 <- dat[iII, ]
-  i2 <- chull(dat2$Topt, dat2$ZC)
-  polygon(dat2$Topt[i2], dat2$ZC[i2], col = "#90CAF960", border = NA)
+  i2 <- chull(dat2$Topt, dat2$Zc)
+  polygon(dat2$Topt[i2], dat2$Zc[i2], col = "#90CAF960", border = NA)
   dat1 <- dat[setdiff(iI, which(iout)), ]
-  i1 <- chull(dat1$Topt, dat1$ZC)
-  polygon(dat1$Topt[i1], dat1$ZC[i1], col = "#E5737360", border = NA)
+  i1 <- chull(dat1$Topt, dat1$Zc)
+  polygon(dat1$Topt[i1], dat1$Zc[i1], col = "#E5737360", border = NA)
   label.figure("(b)", cex = 1.6, font = 2, yfrac = 0.85, xfrac = -0.05)
 
   if(pdf) dev.off()
@@ -202,7 +202,7 @@ utogig2 <- function(pdf = FALSE, logact = -3) {
       par(mar = c(4, 3, 0.5, 1))
     }
 
-    plot(xlim, ylim, type = "n", xlab = ZClab, ylab = ylab)
+    plot(xlim, ylim, type = "n", xlab = Zclab, ylab = ylab)
     abline(h = 0, lty = 4)
 
     pchs <- c(21:25, 20)
@@ -210,7 +210,7 @@ utogig2 <- function(pdf = FALSE, logact = -3) {
 
     # Loop over groups of species
     # Start with n-carboxylic acids (i = 2)
-    AC_all <- ZC_all <- numeric()
+    AC_all <- Zc_all <- numeric()
     for(i in c(2, 1, 3, 4, 5, 6)) {
 
       # Load species
@@ -229,21 +229,21 @@ utogig2 <- function(pdf = FALSE, logact = -3) {
       nC <- sapply(makeup(info(myspecies)), "[", "C")
       AC <- A / nC
       # Calculate carbon oxidation state
-      ZC <- ZC(info(myspecies))
+      Zc <- ZC(info(myspecies))
       # Adjust point size for n-carboxylic acids
       cex <- 1
       if(i == 2) cex <- 1.5
-      if(i < 6) points(ZC, AC, pch = pchs[i], bg = cols[i], cex = cex)
-      else points(ZC, AC, pch = pchs[i], col = cols[i], cex = cex)
+      if(i < 6) points(Zc, AC, pch = pchs[i], bg = cols[i], cex = cex)
+      else points(Zc, AC, pch = pchs[i], col = cols[i], cex = cex)
       AC_all <- c(AC_all, AC)
-      ZC_all <- c(ZC_all, ZC)
+      Zc_all <- c(Zc_all, Zc)
 
     }
 
     # Calculate linear fit
-    thislm <- lm(AC_all ~ ZC_all)
-    x <- range(ZC_all)
-    y <- predict.lm(thislm, data.frame(ZC_all = x))
+    thislm <- lm(AC_all ~ Zc_all)
+    x <- range(Zc_all)
+    y <- predict.lm(thislm, data.frame(Zc_all = x))
     # Plot linear fit
     lines(x, y, lty = 2, lwd = 2, col = 8)
     # Add legend with slope
@@ -261,7 +261,7 @@ utogig2 <- function(pdf = FALSE, logact = -3) {
     R2_txt <- bquote(italic(R)^2 == .(formatC(R2, digits = 2, format = "f")))
     text(-0.5, slopey[ilogaH2] - 20, R2_txt)
     # Calculate p-value 20220915
-    pvals <- c(pvals, cor.test(AC_all, ZC_all)$p.value)
+    pvals <- c(pvals, cor.test(AC_all, Zc_all)$p.value)
 
     # Add title: logaH2
     Htxt <- bquote(bold(log*bolditalic(a)[H[2]] == .(logaH2)))
@@ -346,15 +346,15 @@ utogig3 <- function(pdf = FALSE) {
   basis(c("CO2", "H2", "NH4+", "H2O", "H2S", "H+"), c(Seawater.AS98$CO2, Seawater.AS98$H2, Seawater.AS98$"NH4+", 0, Seawater.AS98$H2S, -Seawater.AS98$pH))
   T <- 25
 
-  # Calculate ZC of methanogen proteomes excluding high-ZC outliers
+  # Calculate Zc of methanogen proteomes excluding high-Zc outliers
   methanogen_AA <- read.csv(system.file("extdata/utogig/methanogen_AA.csv", package = "JMDplots"))
-  ZC <- ZC(protein.formula(methanogen_AA[!iout, ]))
+  Zc <- ZC(protein.formula(methanogen_AA[!iout, ]))
   # Add proteins to CHNOSZ
   ip <- add.protein(methanogen_AA[!iout, ])
   pl <- protein.length(ip)
 
   # Create combinations between Class I and II methanogens
-  # Class I methanogens excluding high-ZC outliers
+  # Class I methanogens excluding high-Zc outliers
   iIin <- setdiff(1:length(ip), iII)
   ncomb <- length(iIin) * length(iII)
   i1 <- rep(iIin, length.out = ncomb)
@@ -380,7 +380,7 @@ utogig3 <- function(pdf = FALSE) {
     A <- A / 1000
     # Calculate affinity per residue
     Ares <- A / pl
-    plot(ZC, Ares, pch = mpch[!iout], col = mcol[!iout], bg = mbg[!iout], xlab = ZClab, ylab = ylab)
+    plot(Zc, Ares, pch = mpch[!iout], col = mcol[!iout], bg = mbg[!iout], xlab = Zclab, ylab = ylab)
     # Percentage of combinations that favor Class I over Class II
     p1 <- round(sum(sign(Ares[i1] - Ares[i2]) == 1) / ncomb * 100)
     legend <- bquote(.(p1)*"%"~italic(A)[I] > italic(A)[II])
@@ -556,20 +556,20 @@ utogig4 <- function(pdf = FALSE) {
 
     if(i == 1) {
       # Methanogen proteomes 20220424
-      # Read amino acid composition and compute ZC
+      # Read amino acid composition and compute Zc
       aa <- read.csv(system.file("extdata/utogig/methanogen_AA.csv", package = "JMDplots"))
       # Indices of Class I and Class II methanogens
       iI <- 20:36
       iII <- 1:19
       col <- c(col2, col4)
       lcol <- c(2, 4)
-      # Make ZC plot
-      ZC <- ZC(protein.formula(aa))
-      ZClist <- list("Class I" = ZC[iI], "Class II" = ZC[iII])
-      names(ZClist) <- paste0(names(ZClist), "\n(", sapply(ZClist, length), ")")
-      bp <- boxplot(ZClist, ylab = ZClab, col = col, ylim = ylim, names = character(2))
-      axis(1, at = 1:2, labels = names(ZClist), line = 1, lwd = 0)
-      cldfun(ZClist, bp, dy = 0.006)
+      # Make Zc plot
+      Zc <- ZC(protein.formula(aa))
+      Zclist <- list("Class I" = Zc[iI], "Class II" = Zc[iII])
+      names(Zclist) <- paste0(names(Zclist), "\n(", sapply(Zclist, length), ")")
+      bp <- boxplot(Zclist, ylab = Zclab, col = col, ylim = ylim, names = character(2))
+      axis(1, at = 1:2, labels = names(Zclist), line = 1, lwd = 0)
+      cldfun(Zclist, bp, dy = 0.006)
       text(1, -0.12, "Anoxic\nhabitats", font = 2, cex = 0.8)
       text(2, -0.12, "Anoxic\nand oxic\nhabitats", font = 2, cex = 0.8)
       abline(v = 1.5, lty = 2, lwd = 1.5, col = 8)
@@ -578,22 +578,22 @@ utogig4 <- function(pdf = FALSE) {
       # Get the species in each group
       groups <- list("Class I" = iI, "Class II" = iII)
       # Calculate P-values using parametric and non-parametric tests 20220913
-      Ptab1 <- KWvsANOVA(ZClist)
-      Ptab1 <- cbind(Variable = "Methanogens ZC", Ptab1)
+      Ptab1 <- KWvsANOVA(Zclist)
+      Ptab1 <- cbind(Variable = "Methanogens Zc", Ptab1)
     }
 
     if(i == 2) {
       # Nif-encoding genomes 20220531
       np <- NifProteomes()
-      ZClist <- np$ZClist
+      Zclist <- np$ZClist
       col <- c(col2, col2, col2, col4)
       lcol <- c(2, 2, 2, 4)
-      bp <- boxplot(ZClist, ylab = ZClab, col = col, ylim = ylim, names = character(4))
-      names(ZClist) <- paste0(names(ZClist), "\n(", sapply(ZClist, length), ")")
-      axis(1, at = 1:4, labels = hyphen.in.pdf(names(ZClist)), line = 1, lwd = 0)
+      bp <- boxplot(Zclist, ylab = Zclab, col = col, ylim = ylim, names = character(4))
+      names(Zclist) <- paste0(names(Zclist), "\n(", sapply(Zclist, length), ")")
+      axis(1, at = 1:4, labels = hyphen.in.pdf(names(Zclist)), line = 1, lwd = 0)
       # Names with "-" confuse multcompLetters4()
-      names(ZClist) <- gsub("-", "", names(ZClist))
-      cldfun(ZClist, bp, dy = 0.006)
+      names(Zclist) <- gsub("-", "", names(Zclist))
+      cldfun(Zclist, bp, dy = 0.006)
       text(2, -0.12, "Anaerobic", font = 2, cex = 0.8)
       text(4.1, -0.242, "Anaerobic\nand aerobic", font = 2, cex = 0.8)
       abline(v = 3.5, lty = 2, lwd = 1.5, col = 8)
@@ -602,8 +602,8 @@ utogig4 <- function(pdf = FALSE) {
       aa <- np$AA
       groupnames <- np$types
       groups <- sapply(groupnames, function(group) aa$protein == group, simplify = FALSE)
-      Ptab2 <- KWvsANOVA(ZClist)
-      Ptab2 <- cbind(Variable = "Nif-encoding ZC", Ptab2)
+      Ptab2 <- KWvsANOVA(Zclist)
+      Ptab2 <- cbind(Variable = "Nif-encoding Zc", Ptab2)
     }
 
     if(i == 3) {
@@ -619,21 +619,21 @@ utogig4 <- function(pdf = FALSE) {
       #col <- c("#b2427e", "#c78d55", "#00a06f", "#4085c3")
       col <- c(col2, col4, col4, col4)
       lcol <- c(2, 4, 4, 4)
-      ZC <- ZCAA(aa)
-      ZClist <- lapply(groupnames, function(g) ZC[aa$protein == g])
-      names(ZClist) <- groupnames
-      names(ZClist) <- paste0(names(ZClist), "\n(", sapply(ZClist, length), ")")
-      bp <- boxplot(ZClist, ylab = ZClab, col = col, ylim = ylim, names = character(4))
-      cldfun(ZClist, bp, dy = 0.006)
-      axis(1, at = 1:4, labels = names(ZClist), line = 1, lwd = 0, gap.axis = 0)
+      Zc <- Zc(aa)
+      Zclist <- lapply(groupnames, function(g) Zc[aa$protein == g])
+      names(Zclist) <- groupnames
+      names(Zclist) <- paste0(names(Zclist), "\n(", sapply(Zclist, length), ")")
+      bp <- boxplot(Zclist, ylab = Zclab, col = col, ylim = ylim, names = character(4))
+      cldfun(Zclist, bp, dy = 0.006)
+      axis(1, at = 1:4, labels = names(Zclist), line = 1, lwd = 0, gap.axis = 0)
       text(0.9, -0.12, hyphen.in.pdf("Pre-GOE\norigin"), font = 2, cex = 0.8)
       text(2.1, -0.12, hyphen.in.pdf("Post-GOE\norigin"), font = 2, cex = 0.8)
       abline(v = 1.5, lty = 2, lwd = 1.5, col = 8)
       title("Thaumarchaeota\n(Ren et al., 2019)", font.main = 1, cex.main = 1)
       # Get the species in each group
       groups <- sapply(groupnames, function(group) aa$protein == group, simplify = FALSE)
-      Ptab3 <- KWvsANOVA(ZClist)
-      Ptab3 <- cbind(Variable = "Thaumarchaeota ZC", Ptab3)
+      Ptab3 <- KWvsANOVA(Zclist)
+      Ptab3 <- cbind(Variable = "Thaumarchaeota Zc", Ptab3)
     }
 
     if(!packageVersion("CHNOSZ") > "1.4.3") {
@@ -692,7 +692,7 @@ utogig4 <- function(pdf = FALSE) {
   }
 
   # Thaumarchaeota nH2O plot 20220622
-  nH2O <- H2OAA(aa)
+  nH2O <- nH2O(aa)
   nH2Olist <- lapply(groupnames, function(g) nH2O[aa$protein == g])
   names(nH2Olist) <- groupnames
   names(nH2Olist) <- paste0(names(nH2Olist), "\n(", sapply(nH2Olist, length), ")")
@@ -817,7 +817,7 @@ intermediate_logaH2 <- function(class = NULL, add = FALSE, parargs = list(mar = 
   }
 }
 
-# Find intermediate logaH2: where affinity vs ZC has a slope of 0  20220219
+# Find intermediate logaH2: where affinity vs Zc has a slope of 0  20220219
 # Add class argument (calculate only for single compound class) 20220418
 calc_logaH2_intermediate <- function(class = NULL, logact = -3) {
 
@@ -829,7 +829,7 @@ calc_logaH2_intermediate <- function(class = NULL, logact = -3) {
   # Calculate carbon number and oxidation state
   ispecies <- suppressMessages(info(allspecies))
   nC <- sapply(makeup(ispecies), "[", "C")
-  ZC <- ZC(ispecies)
+  Zc <- ZC(ispecies)
 
   # Load basis species with default activities
   reset()
@@ -839,7 +839,7 @@ calc_logaH2_intermediate <- function(class = NULL, logact = -3) {
   # Species indices of basis and formed species
   basis_and_species <- c(basis()$ispecies, species()$ispecies)
 
-  # Function to calculate slope of affinity - ZC linear fit
+  # Function to calculate slope of affinity - Zc linear fit
   slopefun <- function(H2, T, sout, plot.it = FALSE) {
     # Set H2 activity
     basis("H2", H2)
@@ -856,7 +856,7 @@ calc_logaH2_intermediate <- function(class = NULL, logact = -3) {
     AC <- A / nC
 
     # Calculate linear fit
-    thislm <- lm(AC ~ ZC)
+    thislm <- lm(AC ~ Zc)
     # Get slope
     slope <- thislm$coefficients[[2]]
     slope
@@ -903,7 +903,7 @@ calc_logaH2_intermediate <- function(class = NULL, logact = -3) {
 
 }
 
-# Comparison of ZC of proteomes predicted by Glimmer and downloaded from NCBI 20220604
+# Comparison of Zc of proteomes predicted by Glimmer and downloaded from NCBI 20220604
 utogigS1 <- function(pdf = FALSE) {
   if(pdf) pdf("Figure_S1.pdf", width = 4, height = 4)
   par(mar= c(4.1, 4.1, 1, 1))
@@ -912,13 +912,13 @@ utogigS1 <- function(pdf = FALSE) {
   organisms <- intersect(predicted$organism, database$organism)
   predicted <- predicted[match(organisms, predicted$organism), ]
   database <- database[match(organisms, database$organism), ]
-  y <- ZC_predicted <- ZCAA(predicted)
-  x <- ZC_database <- ZCAA(database)
+  y <- Zc_predicted <- Zc(predicted)
+  x <- Zc_database <- Zc(database)
   # Colors from Ren et al. (2019)
   groupcol <- c(Basal = "#b2427e", Terrestrial = "#c78d55", Shallow = "#00a06f", Deep = "#4085c3")
   col <- groupcol[match(database$protein, names(groupcol))]
   pch <- match(database$protein, names(groupcol)) + 13
-  plot(ZC_database, ZC_predicted, pch = pch, col = col,
+  plot(Zc_database, Zc_predicted, pch = pch, col = col,
        xlab = quote(bolditalic(Z)[bold(C)]~"(NCBI proteins)"), ylab = quote(bolditalic(Z)[bold(C)]~"(Glimmer proteins)"))
   # Add legend
   icol <- which(!duplicated(col))
@@ -937,7 +937,7 @@ utogigS1 <- function(pdf = FALSE) {
   if(pdf) dev.off()
 }
 
-# Association between redox gradients and ZC of proteins and lipids in alkaline Yellowstone hot springs 20210516
+# Association between redox gradients and Zc of proteins and lipids in alkaline Yellowstone hot springs 20210516
 utogigS2 <- function(pdf = FALSE) {
 
   if(pdf) pdf("Figure_S2.pdf", width = 8.5, height = 4)
@@ -946,32 +946,32 @@ utogigS2 <- function(pdf = FALSE) {
 
   ## Plot A: Proteins
   par(mar = c(4, 4.2, 0.5, 1))
-  plot(c(50, 100), c(-0.22, -0.12), type = "n", xlab = Tlab, ylab = ZClab, xaxs = "i", axes = FALSE)
+  plot(c(50, 100), c(-0.22, -0.12), type = "n", xlab = Tlab, ylab = Zclab, xaxs = "i", axes = FALSE)
   # Remove leading zeros for better visual parallel with lipids
   at <- seq(-0.22, -0.12, 0.02)
   labels <- gsub("-0", "-", formatC(at, digits = 2, format = "f"))
   axis(2, at, labels)
   axis(1)
   box()
-  # Get ZC of Bison Pool proteins aggregated by phylum
+  # Get Zc of Bison Pool proteins aggregated by phylum
   aa.phyla <- read.csv(system.file("extdata/bison/DS13.csv", package = "JMDplots"))
-  ZC <- ZC(protein.formula(aa.phyla))
+  Zc <- ZC(protein.formula(aa.phyla))
   # Get T values
   site <- gsub("bison", "", aa.phyla$protein)
   T <- sapply(site, switch, N = 93.3, S = 79.4, R = 67.5, Q = 65.3, P = 57.1)
   # Plot lines for each phlum
   for(phylum in unique(aa.phyla$organism)) {
     iphylum <- aa.phyla$organism == phylum
-    lines(T[iphylum], ZC[iphylum], col = "gray")
+    lines(T[iphylum], Zc[iphylum], col = "gray")
   }
 
   # Make different color groups based on temperature
   ilo <- T < 60
   imid <- T >= 60 & T <= 70
   ihi <- T > 70
-  points(T[ilo], ZC[ilo], pch = 22, bg = col4)
-  points(T[imid], ZC[imid], pch = 23, bg = col8)
-  points(T[ihi], ZC[ihi], pch = 21, bg = col2)
+  points(T[ilo], Zc[ilo], pch = 22, bg = col4)
+  points(T[imid], Zc[imid], pch = 23, bg = col8)
+  points(T[ihi], Zc[ihi], pch = 21, bg = col2)
   # Add labels
   text(83, -0.14, "Proteins grouped\nby major phyla")
   label.figure("(a)", cex = 1.5, font = 2, xfrac = 0.06)
@@ -983,19 +983,19 @@ utogigS2 <- function(pdf = FALSE) {
   axis(1, 100, tick = FALSE)
   # IPL data from Boyer et al., 2020 Fig. 7
   T <- c(29.0, 35.1, 38.1, 40.5, 51.6, 53, 59.8, 60.7, 63.1, 64.8, 70.5, 73.3, 77.3, 80.9, 82.2, 85.4, 89.0, 91.0)
-  ZC.alkyl <- c(-1.73, -1.71, -1.77, -1.80, -1.83, -1.82, -1.89, -1.90, -1.88, -1.92, -1.92, -1.84, -1.93, -1.89, -1.96, -1.95, -1.92, -1.94)
-  ZC.IPL <- c(-1.36, -1.33, -1.37, -1.38, -1.44, -1.43, -1.48, -1.54, -1.46, -1.52, -1.54, -1.45, -1.61, -1.53, -1.60, -1.56, -1.56, -1.68)
+  Zc.alkyl <- c(-1.73, -1.71, -1.77, -1.80, -1.83, -1.82, -1.89, -1.90, -1.88, -1.92, -1.92, -1.84, -1.93, -1.89, -1.96, -1.95, -1.92, -1.94)
+  Zc.IPL <- c(-1.36, -1.33, -1.37, -1.38, -1.44, -1.43, -1.48, -1.54, -1.46, -1.52, -1.54, -1.45, -1.61, -1.53, -1.60, -1.56, -1.56, -1.68)
   # Make different color groups based on temperature
   ilo <- T < 60
   imid <- T >= 60 & T <= 70
   ihi <- T > 70
   # Plot points
-  points(T[ilo], ZC.alkyl[ilo], pch = 22, bg = col4)
-  points(T[imid], ZC.alkyl[imid], pch = 23, bg = col8)
-  points(T[ihi], ZC.alkyl[ihi], pch = 21, bg = col2)
-  points(T[ilo], ZC.IPL[ilo], pch = 22, bg = col4)
-  points(T[imid], ZC.IPL[imid], pch = 23, bg = col8)
-  points(T[ihi], ZC.IPL[ihi], pch = 21, bg = col2)
+  points(T[ilo], Zc.alkyl[ilo], pch = 22, bg = col4)
+  points(T[imid], Zc.alkyl[imid], pch = 23, bg = col8)
+  points(T[ihi], Zc.alkyl[ihi], pch = 21, bg = col2)
+  points(T[ilo], Zc.IPL[ilo], pch = 22, bg = col4)
+  points(T[imid], Zc.IPL[imid], pch = 23, bg = col8)
+  points(T[ihi], Zc.IPL[ihi], pch = 21, bg = col2)
   # Label molecular groups
   text(70, -1.32, "Intact polar lipids")
   text(50, -2, "Alkyl chains")
@@ -1046,20 +1046,20 @@ utogigS4 <- function(pdf = FALSE) {
 # ANOVA + TukeyHSD (parametric) and
 # Kruskal-Wallis + Dunn (non-parametric)
 # 20220913
-KWvsANOVA <- function(ZClist) {
+KWvsANOVA <- function(Zclist) {
   # Ugly one-liner to turn a list into a data frame with "group" column taken from names of the list elements
-  ZCdat <- do.call(rbind, sapply(1:length(ZClist), function(i) data.frame(group = names(ZClist)[i], ZC = ZClist[[i]]), simplify = FALSE))
+  Zcdat <- do.call(rbind, sapply(1:length(Zclist), function(i) data.frame(group = names(Zclist)[i], Zc = Zclist[[i]]), simplify = FALSE))
   # Remove numeric component of labels (after \n)
-  ZCdat$group <- sapply(strsplit(ZCdat$group, "\n"), "[", 1)
+  Zcdat$group <- sapply(strsplit(Zcdat$group, "\n"), "[", 1)
   # Convert 'group' column to factor to avoid warning from dunnTest()
-  ZCdat$group <- as.factor(ZCdat$group)
+  Zcdat$group <- as.factor(Zcdat$group)
   # One-way ANOVA and Tukey's Honest Significant Differences
   # Adapted from https://statdoe.com/one-way-anova-and-box-plot-in-r/
-  anova <- aov(ZC ~ group, data = ZCdat)
+  anova <- aov(Zc ~ group, data = Zcdat)
   tukey <- TukeyHSD(anova)
   # Kruskal-Wallis followed by Dunn test
   # Adapted from https://www.statology.org/dunns-test-in-r/
-  dunn <- dunnTest(ZC ~ group, data = ZCdat, method = "bonferroni")
+  dunn <- dunnTest(Zc ~ group, data = Zcdat, method = "bonferroni")
   # Put together table
   comparison.tukey <- rownames(tukey$group)
   comparison.dunn <- sapply(lapply(strsplit(comparison.tukey, "-"), rev), paste, collapse = " - ")

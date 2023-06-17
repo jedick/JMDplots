@@ -58,7 +58,7 @@ options(width = 80)
 logfO2 <- "log<i>f</i><sub>O<sub>2</sub></sub>"
 logaH2O <- "log<i>a</i><sub>H<sub>2</sub>O</sub>"
 nH2O <- "<i>n</i><sub>H<sub>2</sub>O</sub>"
-ZC <- "<i>Z</i><sub>C</sub>"
+Zc <- "<i>Z</i><sub>C</sub>"
 ```
 
 This vignette runs the code to make the plots from the following paper first published by Springer Nature:
@@ -82,7 +82,7 @@ Table_S5 <- geo16S1()
 **Data source:** NCBI Reference Sequence (RefSeq) database [@OWB+16]. **Numbered symbols**: (1) Methanococci, (2) Archaeoglobi, (3) Thermococci, (4) Halobacteria, (5) Clostridia.
 
 ### Specific values mentioned in the text
-`r ZC` for reference proteomes of genera that are abundant in produced fluids of shale gas wells:
+`r Zc` for reference proteomes of genera that are abundant in produced fluids of shale gas wells:
 
 ```{r taxon_metrics}
 datadir <- system.file("extdata/RefSeq", package = "chem16S")
@@ -90,18 +90,18 @@ taxon_metrics <- read.csv(file.path(datadir, "taxon_metrics.csv.xz"), as.is = TR
 subset(taxon_metrics, group %in% c("Halanaerobium", "Thermoanaerobacter"))
 ```
 
-`r ZC` for reference proteomes of *Halanaerobium* species (numeric names are NCBI taxids):
+`r Zc` for reference proteomes of *Halanaerobium* species (numeric names are NCBI taxids):
 
-```{r Halanaerobium_ZC}
+```{r Halanaerobium_Zc}
 datadir <- system.file("extdata/RefSeq", package = "JMDplots")
 refseq <- read.csv(file.path(datadir, "protein_refseq.csv.xz"))
-ZC.refseq <- ZCAA(refseq)
-names(ZC.refseq) <- refseq$organism
+Zc.refseq <- Zc(refseq)
+names(Zc.refseq) <- refseq$organism
 
 names <- read.csv(file.path(datadir, "taxid_names.csv.xz"))
 is.Halanaerobium <- names$genus %in% "Halanaerobium" & !is.na(names$species)
-(ZC.Halanaerobium <- round(ZC.refseq[is.Halanaerobium], 3))
-range(ZC.Halanaerobium)
+(Zc.Halanaerobium <- round(Zc.refseq[is.Halanaerobium], 3))
+range(Zc.Halanaerobium)
 ```
 
 ## Estimated community proteomes from different environments have distinct chemical signatures (Figure 2)
@@ -125,7 +125,7 @@ Table_S8 <- geo16S4()
 
 **Data sources:** Northwestern Pennsylvania stream water and sediment [@UKD+18], Pennsylvania State Forests stream water in spring and fall [@MMA+20], Marcellus Shale [@CHM+14], Denver--Julesburg Basin [@HRR+18], Duvernay Formation [@ZLF+19].
 
-## Comparison of protein `r ZC` from metagenomic or metatranscriptomic data with estimates from 16S and reference sequences (Figure 5)
+## Comparison of protein `r Zc` from metagenomic or metatranscriptomic data with estimates from 16S and reference sequences (Figure 5)
 ```{r geo16S5, message = FALSE, results = "hide", out.width='100%', fig.width = 10, fig.height = 6, out.extra = 'class="full-width"', pngquant = pngquant}
 Table_S9 <- geo16S5()
 ```
@@ -142,12 +142,12 @@ Table_S9 <- geo16S5()
 geo16S_S1()
 ```
 
-## Scatterplots of `r ZC` and `r nH2O` for bacterial and archaeal genera vs higher taxonomic levels (Figure S2)
+## Scatterplots of `r Zc` and `r nH2O` for bacterial and archaeal genera vs higher taxonomic levels (Figure S2)
 ```{r geo16S_S2, message = FALSE, results = "hide", out.width='100%', fig.width = 12, fig.height = 6, out.extra = 'class="full-width"', pngquant = pngquant}
 geo16S_S2()
 ```
 
-## `r nH2O`-`r ZC` plots for major phyla and their genera (Figure S3)
+## `r nH2O`-`r Zc` plots for major phyla and their genera (Figure S3)
 ```{r geo16S_S3, message = FALSE, results = "hide", out.width='100%', fig.width = 13, fig.height = 11, pngquant = pngquant}
 geo16S_S3()
 ```
@@ -159,12 +159,12 @@ Table_S10 <- geo16S_S4()
 
 **Data sources:** **RefSeq (NCBI):** Names of taxa with protein sequences in RefSeq as listed in `system.file("extdata/RefSeq/taxid_names.csv.xz", package = "chem16S")`; **RDP:** `trainset18_062020_speciesrank.fa` in <https://sourceforge.net/projects/rdp-classifier/files/RDP_Classifier_TrainingData/RDPClassifier_16S_trainsetNo18_rawtrainingdata.zip>; **SILVA:** <https://www.arb-silva.de/fileadmin/silva_databases/release_138_1/Exports/SILVA_138.1_SSURef_NR99_tax_silva.fasta.gz>.
 
-## Correlations between `r ZC` estimated from metagenomes and 16S rRNA sequences (Figure S5)
+## Correlations between `r Zc` estimated from metagenomes and 16S rRNA sequences (Figure S5)
 ```{r geo16S_S5, message = FALSE, results = "hide", out.width='100%', fig.width = 10, fig.height = 6, out.extra = 'class="full-width"', pngquant = pngquant}
 geo16S_S5()
 ```
 
-## Correlation of `r ZC` with GC content of metagenomic and 16S amplicon reads (Figure S6)
+## Correlation of `r Zc` with GC content of metagenomic and 16S amplicon reads (Figure S6)
 ```{r geo16S_S6, message = FALSE, results = "hide", out.width='100%', fig.width = 8, fig.height = 7, pngquant = pngquant}
 geo16S_S6()
 ```

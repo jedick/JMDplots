@@ -2,14 +2,14 @@
 # Plotting functions for reference (RefSeq) and estimated community proteomes
 # Separated from chem16S.R 20210607
 
-# taxacomp()               # nH2O-ZC plot for taxa (default: Bacteria, Archaea) and their children
+# taxacomp()               # nH2O-Zc plot for taxa (default: Bacteria, Archaea) and their children
 
 ######################
 # Plotting functions #
 ######################
 
 # Get amino acid compositions for taxids in RefSeq, excluding
-# super-sequenced species (biased to high ZC/low nH2O) 20210604
+# super-sequenced species (biased to high Zc/low nH2O) 20210604
 getrefseq <- function(filterspecies = TRUE) {
   # Read RefSeq amino acid compositions and taxid names
   refseq <- read.csv(system.file("extdata/RefSeq/protein_refseq.csv.xz", package = "JMDplots"), as.is = TRUE)
@@ -28,7 +28,7 @@ getrefseq <- function(filterspecies = TRUE) {
   list(refseq = refseq, taxa = taxa)
 }
 
-# Make a nH2O-ZC plot for selected taxa and all their children 20200911
+# Make a nH2O-Zc plot for selected taxa and all their children 20200911
 taxacomp <- function(groups = c("Bacteria", "Archaea"), xlim = NULL, ylim = NULL,
   col = seq_along(groups), legend.x = "topleft", identify = FALSE, pch = NULL, hline = NULL, filterspecies = TRUE, lcol = NULL) {
 
@@ -128,11 +128,11 @@ taxacomp <- function(groups = c("Bacteria", "Archaea"), xlim = NULL, ylim = NULL
   # Initialize plot
   if(is.null(xlim)) xlim <- c(-0.25, -0.05)
   if(is.null(ylim)) ylim <- c(-0.82, -0.68)
-  plot(xlim, ylim, xlab = canprot::cplab$ZC, ylab = canprot::cplab$nH2O, type = "n", xaxs = "i", yaxs = "i")
+  plot(xlim, ylim, xlab = canprot::cplab$Zc, ylab = canprot::cplab$nH2O, type = "n", xaxs = "i", yaxs = "i")
   # Add horizontal lines to show range of following plot 20200925
   if(!is.null(hline)) abline(h = hline, lty = 2, col = "gray40")
   # Store all values for identify()
-  ZC <- nH2O <- numeric()
+  Zc <- nH2O <- numeric()
   names <- character()
 
   # Loop 1: Get values to plot
@@ -160,12 +160,12 @@ taxacomp <- function(groups = c("Bacteria", "Archaea"), xlim = NULL, ylim = NULL
         # Keep species with at least 1000 sequences
         refseq_species <- refseq_species[refseq_species$chains >= 1000, ]
       }
-      # Find species in this genus and calculate ZC and nH2O
+      # Find species in this genus and calculate Zc and nH2O
       ispecies <- refseq_species$abbrv == thisgroup
       sp.refseq <- refseq_species[ispecies, ]
-      sp.ZC <- ZCAA(sp.refseq)
-      sp.nH2O <- H2OAA(sp.refseq)
-      children <- data.frame(group = sp.refseq$ref, chains = sp.refseq$chains, ZC = sp.ZC, nH2O = sp.nH2O)
+      sp.Zc <- Zc(sp.refseq)
+      sp.nH2O <- nH2O(sp.refseq)
+      children <- data.frame(group = sp.refseq$ref, chains = sp.refseq$chains, Zc = sp.Zc, nH2O = sp.nH2O)
     } else {
       # Get the chemical metrics for all children
       ichildren <- metrics$parent == thisgroup
@@ -175,7 +175,7 @@ taxacomp <- function(groups = c("Bacteria", "Archaea"), xlim = NULL, ylim = NULL
     vals[[i]] <- list(group = group, children = children)
 
     # Keep values for identification
-    ZC <- c(ZC, group$ZC, children$ZC)
+    Zc <- c(Zc, group$Zc, children$Zc)
     nH2O <- c(nH2O, group$nH2O, children$nH2O)
     names <- c(names, group$group, children$group)
   }
@@ -184,14 +184,14 @@ taxacomp <- function(groups = c("Bacteria", "Archaea"), xlim = NULL, ylim = NULL
   for(i in seq_along(taxa)) {
     group <- vals[[i]]$group
     children <- vals[[i]]$children
-    for(j in seq_along(children$ZC)) lines(c(group$ZC, children$ZC[j]), c(group$nH2O, children$nH2O[j]), col = lcol[i], lty = lty)
+    for(j in seq_along(children$Zc)) lines(c(group$Zc, children$Zc[j]), c(group$nH2O, children$nH2O[j]), col = lcol[i], lty = lty)
   }
 
   # Loop 3: Plot points for parents
   for(i in seq_along(taxa)) {
     group <- vals[[i]]$group
     children <- vals[[i]]$children
-    points(group$ZC, group$nH2O, pch = pch[i], cex = 1.5, col = col[i], bg = col[i])
+    points(group$Zc, group$nH2O, pch = pch[i], cex = 1.5, col = col[i], bg = col[i])
   }
 
   # Loop 4: Plot points for children
@@ -203,24 +203,24 @@ taxacomp <- function(groups = c("Bacteria", "Archaea"), xlim = NULL, ylim = NULL
     if(is.numeric(col[i])) {
       if((col[i] - 1) %% 8 == 0) pt.col <- "white"
     }
-    points(children$ZC, children$nH2O, pch = pch[i], cex = 0.7, col = pt.col, bg = col[i], lwd = 0.5)
+    points(children$Zc, children$nH2O, pch = pch[i], cex = 0.7, col = pt.col, bg = col[i], lwd = 0.5)
     # Label Halobacteria and Nanohaloarchaea 20200930
     thisgroup <- taxa[i]
     if(thisgroup == "Euryarchaeota") {
       ihalo <- match(c("Methanococci", "Archaeoglobi", "Thermococci", "Halobacteria"), children$group)
       dy <- ifelse(groups == "majorcellular", 0.0025, 0.005)
       dx <- c(0, 0, 0, 0.002)
-      text(children$ZC[ihalo] + dx, children$nH2O[ihalo] + dy, c(1, 2, 3, 4))
+      text(children$Zc[ihalo] + dx, children$nH2O[ihalo] + dy, c(1, 2, 3, 4))
     }
     # Label Clostridia 20200930
     if(thisgroup == "Firmicutes" & identical(groups, "majorcellular")) {
       iclos <- match("Clostridia", children$group)
-      text(children$ZC[iclos], children$nH2O[iclos] + 0.0025, 5)
+      text(children$Zc[iclos], children$nH2O[iclos] + 0.0025, 5)
     }
 #    # Label Pisoniviricetes 20210520
 #    if(thisgroup == "Pisuviricota") {
 #      ipison <- match("Pisoniviricetes", children$group)
-#      text(children$ZC[ipison], children$nH2O[ipison] - 0.0025, 5)
+#      text(children$Zc[ipison], children$nH2O[ipison] - 0.0025, 5)
 #    }
   }
 
@@ -238,7 +238,7 @@ taxacomp <- function(groups = c("Bacteria", "Archaea"), xlim = NULL, ylim = NULL
     col <- c(NA, col[1:6], NA, col[7:11])
     legend("bottomleft", legend, text.font = c(2, 1,1,1,1,1,1, 2, 1,1,1,1,1), pch = pch, col = col, pt.bg = col, cex = 0.9, bg = "white")
   } else if(!is.null(legend.x) & !identical(legend.x, NA)) legend(legend.x, taxa, pch = pch, col = seq_along(taxa), pt.bg = seq_along(taxa), cex = 0.9, bg = "white")
-  if(identify) identify(ZC, nH2O, names)
+  if(identify) identify(Zc, nH2O, names)
   # Return values invisibly 20210603
   invisible(vals)
 }

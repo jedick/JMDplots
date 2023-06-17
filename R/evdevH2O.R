@@ -9,7 +9,7 @@
 # CHNOSZ > 1.4.0 to get species' activities in predominant.values
 
 # Create bold axis labels
-ZClab <- expression(bolditalic(Z)[bold(C)])
+Zclab <- expression(bolditalic(Z)[bold(C)])
 nH2Olab <- expression(bolditalic(n)[bold(H[2]*O)])
 DnH2Olab <- expression(bold(Delta)*bolditalic(n)[bold(H[2]*O)])
 logaH2Olab <- expression(bold(log)*bolditalic(a)[bold(H[2]*O)])
@@ -40,7 +40,7 @@ evdevH2O1 <- function(pdf = FALSE) {
     if(organism == "Dme") aa <- read.csv(system.file("extdata/organisms/UP000000803_7227.csv.xz", package = "JMDplots"), as.is = TRUE)
     if(organism == "Bsu") aa <- read.csv(system.file("extdata/organisms/UP000001570_224308.csv.xz", package = "JMDplots"), as.is = TRUE)
     protein.formula <- protein.formula(aa)
-    ZC <- ZC(protein.formula)
+    Zc <- ZC(protein.formula)
 
     # Loop over basis species
     for(basis in c("QEC", "CHNOS")) {
@@ -56,11 +56,11 @@ evdevH2O1 <- function(pdf = FALSE) {
         # Make scatter plot
         values <- residue.basis[, species]
         ylab <- cplab[[paste0("n", species)]]
-        smoothScatter(ZC, values, xlab = cplab$ZC, ylab = ylab)
+        smoothScatter(Zc, values, xlab = cplab$Zc, ylab = ylab)
         # Add linear fit
-        thislm <- lm(values ~ ZC)
-        x <- range(ZC)
-        y <- predict.lm(thislm, data.frame(ZC = x))
+        thislm <- lm(values ~ Zc)
+        x <- range(Zc)
+        y <- predict.lm(thislm, data.frame(Zc = x))
         lines(x, y, lty = 2, lwd = 2, col = 8)
         # Add legend with R-squared value
         R2 <- summary(thislm)$r.squared
@@ -104,13 +104,13 @@ evdevH2O2 <- function(pdf = FALSE, boot.R = 99) {
   par(xpd = FALSE)
   par(opar)
 
-  # Plots 1-3: Protein length and number, ZC, nH2O for Trigos phylostrata
+  # Plots 1-3: Protein length and number, Zc, nH2O for Trigos phylostrata
   memo <- plotphylo("nAA", PS_source = "TPPG17", boot.R = boot.R)
   plotphylo("n", PS_source = "TPPG17", memo = memo)
   text(10.5, 500, "length", cex = 0.8)
   text(6, 320, "number / 10", cex = 0.8)
   label.figure("a", cex = 1.7, yfrac = 0.96, xfrac = 0.05, font = 2)
-  plotphylo("ZC", PS_source = "TPPG17", memo = memo, boot.R = boot.R)
+  plotphylo("Zc", PS_source = "TPPG17", memo = memo, boot.R = boot.R)
   plotphylo("nH2O", PS_source = "TPPG17", memo = memo, boot.R = boot.R)
 
   # Make legend for Liebeskind phylostrata
@@ -125,19 +125,19 @@ evdevH2O2 <- function(pdf = FALSE, boot.R = 99) {
   par(xpd = FALSE)
   par(opar)
 
-  # Plots 4-6: Protein length and number, ZC, nH2O for Liebeskind gene ages
+  # Plots 4-6: Protein length and number, Zc, nH2O for Liebeskind gene ages
   memo <- plotphylo("nAA", PS_source = "LMM16", xlab = "GA", boot.R = boot.R)
   plotphylo("n", PS_source = "LMM16", memo = memo)
   text(2.5, 620, "length", cex = 0.8)
   text(4.5, 70, "number / 10", cex = 0.8)
   label.figure("b", cex = 1.7, yfrac = 0.96, xfrac = 0.05, font = 2)
-  plotphylo("ZC", PS_source = "LMM16", memo = memo, xlab = "GA", boot.R = boot.R)
+  plotphylo("Zc", PS_source = "LMM16", memo = memo, xlab = "GA", boot.R = boot.R)
   plotphylo("nH2O", PS_source = "LMM16", memo = memo, xlab = "GA", boot.R = boot.R)
 
   if(pdf) dev.off()
 }
 
-# Evolution of protein ZC in eukaryotic lineages 20211103
+# Evolution of protein Zc in eukaryotic lineages 20211103
 evdevH2O3 <- function(pdf = FALSE, H2O = FALSE) {
 
   # Setup figure
@@ -157,18 +157,18 @@ evdevH2O3 <- function(pdf = FALSE, H2O = FALSE) {
   irp <- c(irp[!ishuman], irp[ishuman])
   refprot <- refprot[irp, ]
 
-  # Start ZC or nH2O plot
-  if(!H2O) plot(c(1, 9), c(-0.18, -0.02), xlab = "Gene Age", ylab = ZClab, type = "n", font.lab = 2)
+  # Start Zc or nH2O plot
+  if(!H2O) plot(c(1, 9), c(-0.18, -0.02), xlab = "Gene Age", ylab = Zclab, type = "n", font.lab = 2)
   if(H2O) plot(c(1, 9), c(-0.9, -0.65), xlab = "Gene Age", ylab = nH2Olab, type = "n", font.lab = 2)
   # Add drop line at gene age 5 (Opisthokonta)
   abline(v = 5, lty = 2, col = "gray40")
   # Loop over proteomes
   for(i in 1:nrow(refprot)) {
-    # Read modeAge and ZC/nH2O values
+    # Read modeAge and Zc/nH2O values
     dat <- read.csv(file.path(datadir, "metrics", paste0(refprot$OSCODE[i], ".csv.xz")))
-    # Get mean ZC/nH2O for each modeAge
+    # Get mean Zc/nH2O for each modeAge
     modeAge <- 1:max(dat$modeAge)
-    if(!H2O) X <- sapply(modeAge, function(Age) mean(subset(dat, modeAge == Age)$ZC))
+    if(!H2O) X <- sapply(modeAge, function(Age) mean(subset(dat, modeAge == Age)$Zc))
     if(H2O) X <- sapply(modeAge, function(Age) mean(subset(dat, modeAge == Age)$nH2O))
     # Add lines to plot
     col <- "#99999980"
@@ -224,9 +224,9 @@ evdevH2O3 <- function(pdf = FALSE, H2O = FALSE) {
     # Order data by Age
     AA <- AA[order(AA$protein), ]
     Age <- AA$protein
-    # Calculate ZC or nH2O
+    # Calculate Zc or nH2O
     if(!H2O) X <- ZC(protein.formula(AA))
-    if(H2O) X <- H2OAA(AA)
+    if(H2O) X <- nH2O(AA)
 
     # Get linear model coefficients
     # Some parts adapted from https://github.com/MaselLab/ProteinEvolution/blob/master/Figures/BoxAndWhiskerPlots_LinearModelSlopes_MetricsVsAge.py
@@ -237,7 +237,7 @@ evdevH2O3 <- function(pdf = FALSE, H2O = FALSE) {
     R2 <- summary(LinearModel)$r.squared
 
     # Setup plot
-    if(H2O) ylab <- nH2Olab else ylab <- ZClab
+    if(H2O) ylab <- nH2Olab else ylab <- Zclab
     plot(Age, X, type = "n", xlab = "Age (Mya)", ylab = ylab, xlim = rev(range(Age)), font.lab = 2)
     # Draw horizontal line at LUCA 20220217
     LUCA.X <- median(X[AA$protein == max(Age)])
@@ -539,68 +539,68 @@ evdevH2O6 <- function(pdf = FALSE) {
   LMM16 <- read.csv(system.file(paste0("extdata/evdevH2O/phylostrata/LMM16.csv.xz"), package = "JMDplots"), as.is = TRUE)
   Entry <- na.omit(intersect(TPPG17$Entry, LMM16$UniProt))
   Hsa <- protcomp(Entry)$aa
-  Hsa_ZC <- ZCAA(Hsa)
-  Hsa_nH2O <- H2OAA(Hsa)
+  Hsa_Zc <- Zc(Hsa)
+  Hsa_nH2O <- nH2O(Hsa)
   # Fly proteome
   Dme <- read.csv(system.file("extdata/organisms/UP000000803_7227.csv.xz", package = "JMDplots"), as.is = TRUE)
-  Dme_ZC <- ZCAA(Dme)
-  Dme_nH2O <- H2OAA(Dme)
+  Dme_Zc <- Zc(Dme)
+  Dme_nH2O <- nH2O(Dme)
   # Bacillus subtilis proteome
   Bsu <- read.csv(system.file("extdata/organisms/UP000001570_224308.csv.xz", package = "JMDplots"), as.is = TRUE)
-  Bsu_ZC <- ZCAA(Bsu)
-  Bsu_nH2O <- H2OAA(Bsu)
+  Bsu_Zc <- Zc(Bsu)
+  Bsu_nH2O <- nH2O(Bsu)
 
   # Phylostrata target proteins
   gpa <- getphyloaa("TPPG17")
-  PS_ZC <- ZCAA(gpa$aa)
-  PS_nH2O <- H2OAA(gpa$aa)
+  PS_Zc <- Zc(gpa$aa)
+  PS_nH2O <- nH2O(gpa$aa)
   # Biofilm target proteins
   devodir <- system.file("extdata/evdevH2O/devodata", package = "JMDplots")
   biofilm <- read.csv(file.path(devodir, "FOK+21_mean_aa.csv"), as.is = TRUE)
-  biofilm_ZC <- ZCAA(biofilm)
-  biofilm_nH2O <- H2OAA(biofilm)
+  biofilm_Zc <- Zc(biofilm)
+  biofilm_nH2O <- nH2O(biofilm)
   # Fly target proteins
   devodir <- system.file("extdata/evdevH2O/devodata", package = "JMDplots")
   fly <- read.csv(file.path(devodir, "CBS+17_mean_aa.csv"), as.is = TRUE)
-  fly_ZC <- ZCAA(fly)
-  fly_nH2O <- H2OAA(fly)
+  fly_Zc <- Zc(fly)
+  fly_nH2O <- nH2O(fly)
 
   # Get total range for all proteomes
-  ZClim <- range(Hsa_ZC, Dme_ZC, Bsu_ZC)
+  Zclim <- range(Hsa_Zc, Dme_Zc, Bsu_Zc)
   nH2Olim <- range(Hsa_nH2O, Dme_nH2O, Bsu_nH2O)
 
   # Human background
-  smoothScatter(Hsa_ZC, Hsa_nH2O, xlim = ZClim, ylim = nH2Olim, xlab = ZClab, ylab = nH2Olab)
-  abline(v = median(Hsa_ZC), h = median(Hsa_nH2O), lty = 2, col = "darkgray")
-  title(paste(length(Hsa_ZC), "human proteins"), font.main = 1)
+  smoothScatter(Hsa_Zc, Hsa_nH2O, xlim = Zclim, ylim = nH2Olim, xlab = Zclab, ylab = nH2Olab)
+  abline(v = median(Hsa_Zc), h = median(Hsa_nH2O), lty = 2, col = "darkgray")
+  title(paste(length(Hsa_Zc), "human proteins"), font.main = 1)
   # PS target
-  points(PS_ZC, PS_nH2O, pch = 15, col = 3, cex = 0.5)
+  points(PS_Zc, PS_nH2O, pch = 15, col = 3, cex = 0.5)
   # biofilm target
-  points(biofilm_ZC, biofilm_nH2O, pch = 16, col = 5, cex = 0.5)
+  points(biofilm_Zc, biofilm_nH2O, pch = 16, col = 5, cex = 0.5)
   # fly target
-  points(fly_ZC, fly_nH2O, pch = 17, col = 6, cex = 0.5)
+  points(fly_Zc, fly_nH2O, pch = 17, col = 6, cex = 0.5)
 
   # Fly background
-  smoothScatter(Dme_ZC, Dme_nH2O, xlim = ZClim, ylim = nH2Olim, xlab = ZClab, ylab = nH2Olab)
-  abline(v = median(Dme_ZC), h = median(Dme_nH2O), lty = 2, col = "darkgray")
-  title(bquote(.(length(Dme_ZC))~italic("D. melanogaster")~"proteins"), font.main = 1)
+  smoothScatter(Dme_Zc, Dme_nH2O, xlim = Zclim, ylim = nH2Olim, xlab = Zclab, ylab = nH2Olab)
+  abline(v = median(Dme_Zc), h = median(Dme_nH2O), lty = 2, col = "darkgray")
+  title(bquote(.(length(Dme_Zc))~italic("D. melanogaster")~"proteins"), font.main = 1)
   # PS target
-  points(PS_ZC, PS_nH2O, pch = 15, col = 3, cex = 0.5)
+  points(PS_Zc, PS_nH2O, pch = 15, col = 3, cex = 0.5)
   # biofilm target
-  points(biofilm_ZC, biofilm_nH2O, pch = 16, col = 5, cex = 0.5)
+  points(biofilm_Zc, biofilm_nH2O, pch = 16, col = 5, cex = 0.5)
   # fly target
-  points(fly_ZC, fly_nH2O, pch = 17, col = 6, cex = 0.5)
+  points(fly_Zc, fly_nH2O, pch = 17, col = 6, cex = 0.5)
 
   # B. subtilis background
-  smoothScatter(Bsu_ZC, Bsu_nH2O, xlim = ZClim, ylim = nH2Olim, xlab = ZClab, ylab = nH2Olab)
-  abline(v = median(Bsu_ZC), h = median(Bsu_nH2O), lty = 2, col = "darkgray")
-  title(bquote(.(length(Bsu_ZC))~italic("B. subtilis")~"proteins"), font.main = 1)
+  smoothScatter(Bsu_Zc, Bsu_nH2O, xlim = Zclim, ylim = nH2Olim, xlab = Zclab, ylab = nH2Olab)
+  abline(v = median(Bsu_Zc), h = median(Bsu_nH2O), lty = 2, col = "darkgray")
+  title(bquote(.(length(Bsu_Zc))~italic("B. subtilis")~"proteins"), font.main = 1)
   # PS target
-  points(PS_ZC, PS_nH2O, pch = 15, col = 3, cex = 0.5)
+  points(PS_Zc, PS_nH2O, pch = 15, col = 3, cex = 0.5)
   # biofilm target
-  points(biofilm_ZC, biofilm_nH2O, pch = 16, col = 5, cex = 0.5)
+  points(biofilm_Zc, biofilm_nH2O, pch = 16, col = 5, cex = 0.5)
   # fly target
-  points(fly_ZC, fly_nH2O, pch = 17, col = 6, cex = 0.5)
+  points(fly_Zc, fly_nH2O, pch = 17, col = 6, cex = 0.5)
 
   # Plot logaH2O, logfO2, and Eh calculated for phylostrata target proteins
   # with background proteins from different organisms  20210712
@@ -734,9 +734,9 @@ evdevH2O7 <- function(pdf = FALSE, boot.R = 99) {
   plot_CI_and_mean(X)
   label.figure("b", cex = 1.5, xfrac = 0.025, font = 2)
 
-  # Plot C: ZC
-  X <- getFOK21("ZC", boot.R = boot.R)
-  plot(c(1, 11), range(X$mean, X$low, X$high), type = "n", xlab = NA, ylab = ZClab, xaxt = "n", font.lab = 2)
+  # Plot C: Zc
+  X <- getFOK21("Zc", boot.R = boot.R)
+  plot(c(1, 11), range(X$mean, X$low, X$high), type = "n", xlab = NA, ylab = Zclab, xaxt = "n", font.lab = 2)
   text(x = 1:11, y = par()$usr[3] - 1.5 * strheight("A"), labels = aa$protein[isT], srt = 45, adj = 1, xpd = TRUE)
   axis(1, at = 1:11, labels = NA)
   abline(v = c(5, 9), lty = 3, lwd = 1.5, col = "gray40")
@@ -836,7 +836,7 @@ evdevH2O8 <- function(pdf = FALSE, boot.R = 99) {
   devodir <- system.file("extdata/evdevH2O/devodata", package = "JMDplots")
   aa <- read.csv(file.path(devodir, "CBS+17_mean_aa.csv"), as.is = TRUE)
 #  # Plot nH2O for model proteins
-#  plot(H2OAA(aa), type = "b", xaxt = "n", xlab = "Developmental stage", ylab = nH2Olab, cex = 1.5)
+#  plot(nH2O(aa), type = "b", xaxt = "n", xlab = "Developmental stage", ylab = nH2Olab, cex = 1.5)
 
   # Get mean nH2O and bootstrap confidence interval for weighted mean 20210708
   H2O <- getCBS17(boot.R = boot.R)
@@ -905,26 +905,26 @@ evdevH2O8 <- function(pdf = FALSE, boot.R = 99) {
   title("Developmental proteome (DP) and\nDifferentially expressed proteins (DEP)", font.main = 1)
 
   ## Plot D:
-  # ZC and nH2O of differentially expressed proteins in dataset of Fabre et al., 2019  20210401
+  # Zc and nH2O of differentially expressed proteins in dataset of Fabre et al., 2019  20210401
 
   # Get amino acid composition of differentially expressed proteins
   pd <- pdat_fly("FKL+19_protein")
-  # Get ZC and nH2O for all proteins
-  ZC <- ZCAA(pd$pcomp$aa)
-  nH2O <- H2OAA(pd$pcomp$aa)
-  # Get ZC and nH2O for proteins with higher expression in embryo and adult
-  ZC_embryo <- ZC[!pd$up2]
-  ZC_adult <- ZC[pd$up2]
+  # Get Zc and nH2O for all proteins
+  Zc <- Zc(pd$pcomp$aa)
+  nH2O <- nH2O(pd$pcomp$aa)
+  # Get Zc and nH2O for proteins with higher expression in embryo and adult
+  Zc_embryo <- Zc[!pd$up2]
+  Zc_adult <- Zc[pd$up2]
   nH2O_embryo <- nH2O[!pd$up2]
   nH2O_adult <- nH2O[pd$up2]
 
-  # First two plots: boxplots for ZC and nH2O 20210403
-  # Make boxplot for ZC
-  ZCdat <- list(embryo = ZC_embryo, adult = ZC_adult)
-  boxplot(ZCdat, ylab = ZClab, outpch = 21, outbg = "#55555580", outcol = NA)
+  # First two plots: boxplots for Zc and nH2O 20210403
+  # Make boxplot for Zc
+  Zcdat <- list(embryo = Zc_embryo, adult = Zc_adult)
+  boxplot(Zcdat, ylab = Zclab, outpch = 21, outbg = "#55555580", outcol = NA)
   # Add p-value
-  ZC_pvalue <- wilcox.test(ZC_embryo, ZC_adult)$p.value
-  legend <- bquote(italic(P) == .(signif(ZC_pvalue, 3)))
+  Zc_pvalue <- wilcox.test(Zc_embryo, Zc_adult)$p.value
+  legend <- bquote(italic(P) == .(signif(Zc_pvalue, 3)))
   legend("topright", legend = legend, bty = "n")
   label.figure("d", cex = 1.7, yfrac = 0.96, xfrac = 0.05, font = 2)
   # Make boxplot for nH2O
@@ -950,12 +950,12 @@ evdevH2O8 <- function(pdf = FALSE, boot.R = 99) {
   col <- c(4, 2)
   cex <- c(0.8, 0.9)
 
-  # Plot median ZC and nH2O of differentially expressed proteins
-  plot(c(-0.145, -0.135), c(-0.76, -0.72), xlab = ZClab, ylab = nH2Olab, type = "n")
-  ZCmed <- c(median(ZC_embryo), median(ZC_adult))
+  # Plot median Zc and nH2O of differentially expressed proteins
+  plot(c(-0.145, -0.135), c(-0.76, -0.72), xlab = Zclab, ylab = nH2Olab, type = "n")
+  Zcmed <- c(median(Zc_embryo), median(Zc_adult))
   nH2Omed <- c(median(nH2O_embryo), median(nH2O_adult))
-  points(ZCmed, nH2Omed, pch = pch, col = col, cex = cex * 2)
-  text(ZCmed, nH2Omed - 0.0025, c("embryo", "adult"))
+  points(Zcmed, nH2Omed, pch = pch, col = col, cex = cex * 2)
+  text(Zcmed, nH2Omed - 0.0025, c("embryo", "adult"))
   label.figure("e", cex = 1.7, yfrac = 0.96, xfrac = 0.05, font = 2)
 
   # Add title for second two plots
@@ -1130,8 +1130,8 @@ LYSC_example <- function() {
 ### UNEXPORTED FUNCTIONS ###
 ############################
 
-# Mean ZC and nH2O of phylostrata 20191122
-plotphylo <- function(var = "ZC", PS_source = "TPPG17", memo = NULL, xlab = "PS", boot.R = 99) {
+# Mean Zc and nH2O of phylostrata 20191122
+plotphylo <- function(var = "Zc", PS_source = "TPPG17", memo = NULL, xlab = "PS", boot.R = 99) {
   if(is.null(memo)) {
     dat <- read.csv(system.file("extdata/evdevH2O/phylostrata/TPPG17.csv.xz", package = "JMDplots"), as.is = TRUE)
     if(PS_source == "LMM16") {
@@ -1151,13 +1151,13 @@ plotphylo <- function(var = "ZC", PS_source = "TPPG17", memo = NULL, xlab = "PS"
     dat <- memo$dat
     AA <- memo$AA
   }
-  # Use AA functions (H2OAA, ZCAA) because protcomp no longer returns these values 20201216
-  X <- switch(var, ZC = ZCAA(AA), nH2O = H2OAA(AA), nAA = protein.length(AA), n = NA, Cost = CostAA(AA))
+  # Use canprot functions (nH2O, Zc) because protcomp no longer returns these values 20201216
+  X <- switch(var, Zc = Zc(AA), nH2O = nH2O(AA), nAA = protein.length(AA), n = NA, Cost = CostAA(AA))
   # Get mean chemical metrics for each phylostratum
   PS <- sort(unique(dat$Phylostrata))
   high.X <- low.X <- cum.X <- mean.X <- numeric()
   for(p in PS) {
-    if(var %in% c("ZC", "nH2O", "nAA", "Cost")) {
+    if(var %in% c("Zc", "nH2O", "nAA", "Cost")) {
       # Point mean
       this.X <- X[dat$Phylostrata == p]
       mean.X <- c(mean.X, mean(this.X))
@@ -1177,8 +1177,8 @@ plotphylo <- function(var = "ZC", PS_source = "TPPG17", memo = NULL, xlab = "PS"
       cum.X <- c(cum.X, sum(dat$Phylostrata <= p))
     }
   }
-  ylab <- switch(var, ZC = ZClab, nH2O = nH2Olab, nAA = quote("Protein length or"~italic(n)/10), Cost = "Cost")
-  if(var %in% c("ZC", "nH2O", "nAA", "Cost")) {
+  ylab <- switch(var, Zc = Zclab, nH2O = nH2Olab, nAA = quote("Protein length or"~italic(n)/10), Cost = "Cost")
+  if(var %in% c("Zc", "nH2O", "nAA", "Cost")) {
     ylim <- range(c(mean.X, low.X, high.X))
     # Extend the ylim to zero for protein length and number plot 20210713
     if(var == "nAA") ylim <- range(0, ylim)

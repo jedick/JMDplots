@@ -69,7 +69,7 @@ plotMG <- function(dataset="Guerrero_Negro_IMG_MG", plottype="bars",
       rdsdata <- paste0(paper, "_MGP")
       filestart <- dataset
     }
-    if(H2O) Xfun <- H2OAA else Xfun <- ZCAA
+    if(H2O) Xfun <- nH2O else Xfun <- Zc
     if(is.null(col)) col <- "darkgreen"
   } else {
     # data directory for DNA

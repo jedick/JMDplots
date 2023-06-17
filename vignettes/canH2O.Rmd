@@ -24,7 +24,7 @@ options(width = 40)
 
 ```{r HTML, include=FALSE}
 ## some frequently used HTML expressions
-ZC <- "<i>Z</i><sub>C</sub>"
+Zc <- "<i>Z</i><sub>C</sub>"
 nH2O <- "<i>n</i><sub>H<sub>2</sub>O</sub>"
 nAA <- "<i>n</i><sub>AA</sub>"
 nO2 <- "<i>n</i><sub>O<sub>2</sub></sub>"
@@ -49,12 +49,12 @@ The **`r basis`** basis species (`r basis.text(basis)`, H~2~O, O~2~) are used fo
 canH2O1()
 ```
 
-## Median differences of protein length, `r nH2O` and `r ZC` for cell culture and cancer tissue (Figure 2)
+## Median differences of protein length, `r nH2O` and `r Zc` for cell culture and cancer tissue (Figure 2)
 ```{r canH2O2, message = FALSE, fig.align='center', out.width='100%', fig.width = 8, fig.height = 6, pngquant = pngquant}
 canH2O2()
 ```
 
-## `r nH2O`-`r ZC` plots for TCGA and HPA datasets (Figure 3)
+## `r nH2O`-`r Zc` plots for TCGA and HPA datasets (Figure 3)
 ```{r canH2O3, message = FALSE, fig.align='center', out.width='100%', fig.width = 10, fig.height = 4, pngquant = pngquant}
 canH2O3()
 ```
@@ -79,12 +79,12 @@ kable(canH2OT2(), align = "r")
 kable(canH2OT1())
 ```
 
-## `r nO2`-`r ZC` and `r nH2O`-`r ZC` correlations using QEC basis species (Figure S1)
+## `r nO2`-`r Zc` and `r nH2O`-`r Zc` correlations using QEC basis species (Figure S1)
 ```{r canH2OS1, message = FALSE, fig.align='center', out.width='100%', fig.width = 7, fig.height = 3.5, pngquant = pngquant}
 canH2OS1()
 ```
 
-## HPA-TCGA scatterplots for `r ZC` and `r nH2O` (Figure S2)
+## HPA-TCGA scatterplots for `r Zc` and `r nH2O` (Figure S2)
 ```{r canH2OS2, message = FALSE, warning = FALSE, fig.align='center', out.width='100%', fig.width = 8, fig.height = 4, pngquant = pngquant}
 canH2OS2()
 ```

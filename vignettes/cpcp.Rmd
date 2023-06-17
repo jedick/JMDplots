@@ -226,8 +226,8 @@ for(basis in c("QEC", "CHNOS")) {
   protein.basis <- CHNOSZ::protein.basis(aa)
   protein.length <- CHNOSZ::protein.length(aa)
   residue.basis <- protein.basis / protein.length
-  smoothScatter(ZC, residue.basis[, "O2"], xlab = cplab$ZC, ylab = cplab$nO2)
-  smoothScatter(ZC, residue.basis[, "H2O"], xlab = cplab$ZC, ylab = cplab$nH2O)
+  smoothScatter(ZC, residue.basis[, "O2"], xlab = cplab$Zc, ylab = cplab$nO2)
+  smoothScatter(ZC, residue.basis[, "H2O"], xlab = cplab$Zc, ylab = cplab$nH2O)
   if(basis=="QEC") mtext(QEClab, outer = TRUE, cex = 1.2, line = -1.5)
   if(basis=="CHNOS") mtext(CHNOSlab, outer = TRUE, cex = 1.2, line = -15)
 }

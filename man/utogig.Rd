@@ -39,8 +39,8 @@ This table gives a brief description of each plotting function.
   \code{utogig2} \tab Relative stabilities of organic compounds depend on redox conditions \cr
   \code{utogig3} \tab Thermodynamic model for methanogen niche partitioning \cr
   \code{utogig4} \tab Chemical and thermodynamic analysis of evolutionary divergence along redox gradients \cr
-  \code{utogigS1} \tab Comparison of \ZC of proteomes predicted by Glimmer and downloaded from NCBI \cr
-  \code{utogigS2} \tab Association between redox gradients and \ZC of proteins and lipids in alkaline Yellowstone hot springs \cr
+  \code{utogigS1} \tab Comparison of \Zc of proteomes predicted by Glimmer and downloaded from NCBI \cr
+  \code{utogigS2} \tab Association between redox gradients and \Zc of proteins and lipids in alkaline Yellowstone hot springs \cr
   \code{utogigS4} \tab \logaH2-\T plots for different organic compound classes \cr
 }
 
@@ -48,7 +48,7 @@ This table gives a brief description of each plotting function.
 \code{utogig3() and utogig3(logact -6)} print p-values that are used to make Table S5.
 \code{utogig4()} returns an invisible data frame of p-values that is used to make Table S6 and prints values of \logaH2 retrieved from the thermodynamic analysis in Figure 4b.
 
-\code{calc_logaH2_intermediate} is used to find intermediate \logaH2, where affinity vs ZC has a slope of 0, for a group of organic compounds.
+\code{calc_logaH2_intermediate} is used to find intermediate \logaH2, where affinity vs Zc has a slope of 0, for a group of organic compounds.
 \code{class} gives the class of compounds to consider , or NULL to consider compounds in all classes at once.
 The output is saved in files named \file{H2_intermediate_*.csv} (see description below), which are used for making some of the plots.
 
@@ -59,7 +59,7 @@ The output is saved in files named \file{H2_intermediate_*.csv} (see description
     \item{\file{Topt.csv}}{Optimal growth temperatures (\degC) of methanogens compiled from the literature.}
     \item{\file{methanogen_AA.csv}}{Amino acid compositions of reference proteomes of methanogens. See \file{R/utogig.R} for the code used to make this file.}
     \item{\file{LG88_Fig1.csv}}{H2 concentrations measured in methanogenic and non-methanogenic sediments, from Lovley and Goodwin (1988).}
-    \item{\file{H2_intermediate_-3.csv}, \file{H2_intermediate_-6.csv}}{Intermediate \logaH2 (where the slope of affinity vs \ZC is zero) for organic compounds, calculated using \code{calc_logaH2_intermediate} with \code{logact} set to -3 or -6.}
+    \item{\file{H2_intermediate_-3.csv}, \file{H2_intermediate_-6.csv}}{Intermediate \logaH2 (where the slope of affinity vs \Zc is zero) for organic compounds, calculated using \code{calc_logaH2_intermediate} with \code{logact} set to -3 or -6.}
     \item{\file{H2_intermediate_*_-3.csv}}{Intermediate \logaH2 for different classes of organic compounds (\samp{C1andC2}, \samp{Acid}, \samp{Aminoacid}, \samp{Sugar}, \samp{Nucleobase}, \samp{TCA}), all with \code{logact} set to -3.}
     \item{\file{methanogen_tree.txt}}{Hierarchical clustering tree for functional genes of Class I and Class I methanogens. Tree was digitized and modified from Fig. 1 of Lyu and Lu (2018) and is provided in Newick format.}
     \item{\file{Thaumarchaeota_predicted_AA.csv}}{Amino acid compositions for predicted proteomes of basal, terrestrial, and shallow-water groups of Thaumarchaeota (habitats are listed in the \samp{protein} column). Proteins were predicted using Glimmer version 3.02b (Delcher et al., 1999) from the genomes downloaded from NCBI (accession numbers in the \samp{organisms} column).}

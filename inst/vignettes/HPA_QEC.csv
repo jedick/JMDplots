@@ -1,4 +1,4 @@
-"dataset","description","tags","n1","n2","ZC.down","ZC.up","ZC.diff","nH2O.down","nH2O.up","nH2O.diff","nAA.down","nAA.up","nAA.diff","MW.down","MW.up","MW.diff"
+"dataset","description","tags","n1","n2","Zc.down","Zc.up","Zc.diff","nH2O.down","nH2O.up","nH2O.diff","nAA.down","nAA.up","nAA.diff","MW.down","MW.up","MW.diff"
 HPA19_1,"breast cancer / breast",,77,512,-0.1245,-0.1288,-0.0043,-0.7845,-0.7634,0.0211,491,482,-9,112.1011,111.9985,-0.1026
 HPA19_2,"cervical cancer / cervix, uterine",,367,207,-0.1261,-0.1294,-0.0033,-0.7634,-0.7591,0.0044,461,513,52,112.0459,111.486,-0.5599
 HPA19_3,"colorectal cancer / colon",,263,423,-0.1212,-0.1275,-0.0063,-0.773,-0.7691,0.0039,445,493,48,112.0128,111.6828,-0.33

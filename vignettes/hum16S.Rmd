@@ -25,7 +25,7 @@ options(width = 80)
 ```
 
 ```{r HTML, include=FALSE}
-ZC <- "<i>Z</i><sub>C</sub>"
+Zc <- "<i>Z</i><sub>C</sub>"
 ```
 
 This vignette runs the code to make the plots from the following paper:

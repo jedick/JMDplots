@@ -4,11 +4,11 @@
 ## Uncomment to source and run these functions interactively (developer mode)
 #source("orp16S.R")
 
-# Plot ZC values vs Eh7 for a single study 20210827
+# Plot Zc values vs Eh7 for a single study 20210827
 # Use 'groupby' (name of column with sample groups) and 'groups' (names of sample groups) to apply the pch and col to individual samples
 plotEZ <- function(study, lineage = NULL, mincount = 100, pch = NULL, col = NULL, add = FALSE, type = "p", groupby = NULL, groups = NULL,
   legend.x = "topleft", show = c("lm", "points"), col.line = "gray62", lwd = 1, cex = 1, title.line = NA,
-  dxlim = c(0, 0), dylim = c(0, 0), size = NULL, slope.legend = "title", ylim = NULL, ylab = cplab$ZC) {
+  dxlim = c(0, 0), dylim = c(0, 0), size = NULL, slope.legend = "title", ylim = NULL, ylab = cplab$Zc) {
 
   if(identical(lineage, "two")) {
     # Make two plots for studies that have Bacteria and Archaea 20210913
@@ -47,14 +47,14 @@ plotEZ <- function(study, lineage = NULL, mincount = 100, pch = NULL, col = NULL
   }
 
   nsamp <- nrow(metadata)
-  # Remove samples with NA Eh7 or ZC 20210822
-  metadata <- metadata[!(is.na(metadata$Eh7) | is.na(metrics$ZC)), ]
+  # Remove samples with NA Eh7 or Zc 20210822
+  metadata <- metadata[!(is.na(metadata$Eh7) | is.na(metrics$Zc)), ]
   metrics <- metrics[metrics$Run %in% metadata$Run, ]
   stopifnot(all(metadata$Run == metrics$Run))
-  # Print message about number of samples and Eh7 and ZC range
-  ZCtext <- paste(range(round(metrics$ZC, 3)), collapse = " to ")
+  # Print message about number of samples and Eh7 and Zc range
+  Zctext <- paste(range(round(metrics$Zc, 3)), collapse = " to ")
   if(!is.null(lineage)) ltext <- paste0(lineage, ": ") else ltext <- ""
-  print(paste0(study, ": ", ltext, nrow(metadata), "/", nsamp, " samples, ZC ", ZCtext))
+  print(paste0(study, ": ", ltext, nrow(metadata), "/", nsamp, " samples, Zc ", Zctext))
 
   # Assign pch and col to sample groups
   if(!is.null(groupby) & !is.null(groups)) {
@@ -86,7 +86,7 @@ plotEZ <- function(study, lineage = NULL, mincount = 100, pch = NULL, col = NULL
   if(is.null(pch)) pch <- 19
   if(is.null(col)) col <- "#40404080"
 
-  # Make data frame with Eh7 and ZC values
+  # Make data frame with Eh7 and Zc values
   # Add T and pH 20220516
   # Add O2_umol_L 20220517
   iT <- match("T", colnames(metadata))  # matches "T"
@@ -95,7 +95,7 @@ plotEZ <- function(study, lineage = NULL, mincount = 100, pch = NULL, col = NULL
   if(is.na(iT)) T <- NA else T <- metadata[, iT]
   ipH <- match("pH", colnames(metadata))
   if(is.na(ipH)) pH <- NA else pH <- metadata[, ipH]
-  EZdat <- data.frame(T = T, pH = pH, O2_umol_L = metadata$O2_umol_L, Eh = metadata$Ehorig, Eh7 = metadata$Eh7, ZC = round(metrics$ZC, 6))
+  EZdat <- data.frame(T = T, pH = pH, O2_umol_L = metadata$O2_umol_L, Eh = metadata$Ehorig, Eh7 = metadata$Eh7, Zc = round(metrics$Zc, 6))
   # Get dataset name
   iname <- match("name", tolower(colnames(metadata)))
   name <- na.omit(metadata[, iname])[1]
@@ -107,9 +107,9 @@ plotEZ <- function(study, lineage = NULL, mincount = 100, pch = NULL, col = NULL
   if(!add) {
     # Calculate x- and y-limits (with adjustment from arguments) 20220511
     xlim <- range(EZdat$Eh7) + dxlim
-    if(is.null(ylim)) ylim <- range(EZdat$ZC) + dylim
+    if(is.null(ylim)) ylim <- range(EZdat$Zc) + dylim
     # Start new plot
-    plot(EZdat$Eh7 / 1000, EZdat$ZC, xlab = "", ylab = ylab, type = "n", xlim = xlim / 1000, ylim = ylim)
+    plot(EZdat$Eh7 / 1000, EZdat$Zc, xlab = "", ylab = ylab, type = "n", xlim = xlim / 1000, ylim = ylim)
     # Draw x-axis label with mtext to avoid getting cut off by small margin 20220517
     mtext("Eh7 (V)", side = 1, line = par("mgp")[1], cex = par("cex"))
     if(!is.null(title.line)) {
@@ -124,11 +124,11 @@ plotEZ <- function(study, lineage = NULL, mincount = 100, pch = NULL, col = NULL
   }
   # Add linear fit
   if("lm" %in% show) {
-    adlilo <- add.linear.local(EZdat$Eh7, EZdat$ZC, col.line, lwd, slope.legend)
+    adlilo <- add.linear.local(EZdat$Eh7, EZdat$Zc, col.line, lwd, slope.legend)
   }
   # Add points
   if("points" %in% show) {
-    points(EZdat$Eh7 / 1000, EZdat$ZC, pch = pch, col = col, bg = col, type = type, cex = cex)
+    points(EZdat$Eh7 / 1000, EZdat$Zc, pch = pch, col = col, bg = col, type = type, cex = cex)
   }
 
   if(!is.null(groupby) & !is.null(groups)) {
@@ -172,12 +172,12 @@ plotEZ <- function(study, lineage = NULL, mincount = 100, pch = NULL, col = NULL
   if(length(envirotype) == 0) envirotype <- ""
   EZdat <- cbind(study = study, envirotype = envirotype, lineage = lineage, sample = metadata[, sampcol], Run = metadata$Run, EZdat)
   out <- list(study = study, name = name, envirotype = envirotype, lineage = lineage, metadata = metadata, EZdat = EZdat)
-  if("lm" %in% show) out <- c(out, list(EZlm = adlilo$EZlm, Eh7lim = adlilo$Eh7lim, ZCpred = adlilo$ZCpred, pearson = adlilo$pearson))
+  if("lm" %in% show) out <- c(out, list(EZlm = adlilo$EZlm, Eh7lim = adlilo$Eh7lim, Zcpred = adlilo$Zcpred, pearson = adlilo$pearson))
   invisible(out)
 
 }
 
-# Plot ZC vs percentage of most abundant mapped taxon (MAMT) and
+# Plot Zc vs percentage of most abundant mapped taxon (MAMT) and
 # show percentages of MAMT and MAUT (most abundant unmapped taxon) 20211007
 plotMA <- function(study, lineage = NULL, mincount = 100, pch = NULL, col = NULL, groupby = NULL, groups = NULL, legend.x = "topright") {
 
@@ -209,10 +209,10 @@ plotMA <- function(study, lineage = NULL, mincount = 100, pch = NULL, col = NULL
   # Get the name and abundance of the MAMT
   MAMTname <- paste(RDP$rank[iMAMT], RDP$name[iMAMT], sep = "_")
   MAMTperc <- formatC(taxoncounts[iMAMT] / sum(taxoncounts) * 100, format = "f", digits = 1)
-  # Get ZC of the MAMT
+  # Get Zc of the MAMT
   datadir <- system.file("extdata/RefSeq", package = "chem16S")
   taxon_metrics <- read.csv(file.path(datadir, "taxon_metrics.csv.xz"), as.is = TRUE)
-  MAMTZC <- taxon_metrics$ZC[map[iMAMT]]
+  MAMTZc <- taxon_metrics$Zc[map[iMAMT]]
 
   # Assign pch and col to sample groups
   if(!is.null(groupby) & !is.null(groups)) {
@@ -242,12 +242,12 @@ plotMA <- function(study, lineage = NULL, mincount = 100, pch = NULL, col = NULL
   # Calculate the abundance of the MAMT within each sample
   samplecounts <- colSums(RDPnum)
   perc <- as.numeric(RDPnum[iMAMT, ] / samplecounts * 100)
-  # Start plot with percentage and ZC range
-  plot(range(perc), range(metrics$ZC, MAMTZC), type = "n", xlab = "Abundance of MAMT (%)", ylab = cplab$ZC)
-  # Add line for ZC of MAMT
-  abline(h = MAMTZC, lty = 2)
-  # Add points for community ZC vs abundance of MAMT
-  points(perc, metrics$ZC, pch = pch, col = col, bg = col)
+  # Start plot with percentage and Zc range
+  plot(range(perc), range(metrics$Zc, MAMTZc), type = "n", xlab = "Abundance of MAMT (%)", ylab = cplab$Zc)
+  # Add line for Zc of MAMT
+  abline(h = MAMTZc, lty = 2)
+  # Add points for community Zc vs abundance of MAMT
+  points(perc, metrics$Zc, pch = pch, col = col, bg = col)
 
   # Get MAUT
   unmapped_groups <- attr(map, "unmapped_groups")

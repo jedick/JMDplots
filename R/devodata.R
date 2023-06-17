@@ -1,6 +1,6 @@
 # JMDplots/devodata
 # Get abundance-weighted means and bootstrap confidence intervals
-# for chemical metrics (protein length, ZC, nH2O) of developmental proteomes
+# for chemical metrics (protein length, Zc, nH2O) of developmental proteomes
 # 20210708 jmd first version
 
 getCBS17 <- function(metric = "H2O", boot.R = 99) {
@@ -26,8 +26,8 @@ getCBS17 <- function(metric = "H2O", boot.R = 99) {
   pl <- protein.length(aa)
 
   # Calculate the metric for each protein
-  if(metric == "ZC") X <- ZCAA(aa)
-  if(metric == "H2O") X <- H2OAA(aa)
+  if(metric == "Zc") X <- Zc(aa)
+  if(metric == "H2O") X <- nH2O(aa)
   if(metric == "length") X <- protein.length(aa)
 
   # https://stackoverflow.com/questions/46231261/bootstrap-weighted-mean-in-r
@@ -79,8 +79,8 @@ getFOK21 <- function(metric = "H2O", boot.R = 99) {
   pl <- protein.length(aa)
 
   # Calculate the metric for each protein
-  if(metric == "ZC") X <- ZCAA(aa)
-  if(metric == "H2O") X <- H2OAA(aa)
+  if(metric == "Zc") X <- Zc(aa)
+  if(metric == "H2O") X <- nH2O(aa)
   if(metric == "length") X <- protein.length(aa)
 
   # https://stackoverflow.com/questions/46231261/bootstrap-weighted-mean-in-r

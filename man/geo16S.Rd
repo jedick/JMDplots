@@ -39,7 +39,7 @@ Plots from the paper by Dick and Tan (2023).
 
 \arguments{
   \item{pdf}{logical, make a PDF file?}
-  \item{H2O}{logical, make plots for \nH2O instead of \ZC?}
+  \item{H2O}{logical, make plots for \nH2O instead of \Zc?}
   \item{study}{character, study name}
   \item{metrics}{data frame, output of \code{\link[chem16S]{get_metrics}}}
   \item{dropNA}{logical, exclude samples with NA name in metadata?}
@@ -55,13 +55,13 @@ This table gives a brief description of each plotting function.
   \code{geo16S2} \tab Estimated community proteomes from different environments have distinct chemical signatures \cr
   \code{geo16S3} \tab Lower carbon oxidation state is tied to oxygen depletion in water columns \cr
   \code{geo16S4} \tab Common trends of carbon oxidation state of community reference proteomes for shale gas wells and hydrothermal systems \cr
-  \code{geo16S5} \tab Comparison of protein \ZC from metagenomic or metatranscriptomic data with estimates from 16S and reference sequences \cr
+  \code{geo16S5} \tab Comparison of protein \Zc from metagenomic or metatranscriptomic data with estimates from 16S and reference sequences \cr
   \code{geo16S_S1} \tab RefSeq and 16S rRNA data processing outline \cr
-  \code{geo16S_S2} \tab Scatterplots of \ZC and \nH2O for genera vs higher taxonomic levels \cr
-  \code{geo16S_S3} \tab \nH2O-\ZC plots for major phyla and their genera \cr
+  \code{geo16S_S2} \tab Scatterplots of \Zc and \nH2O for genera vs higher taxonomic levels \cr
+  \code{geo16S_S3} \tab \nH2O-\Zc plots for major phyla and their genera \cr
   \code{geo16S_S4} \tab Venn diagrams for phylum and genus names in the RefSeq (NCBI), RDP, and SILVA taxonomies \cr
-  \code{geo16S_S5} \tab Correlations between \ZC estimated from metagenomes and 16S rRNA sequences \cr
-  \code{geo16S_S6} \tab Correlation of \ZC with GC content of metagenomic and 16S amplicon reads \cr
+  \code{geo16S_S5} \tab Correlations between \Zc estimated from metagenomes and 16S rRNA sequences \cr
+  \code{geo16S_S6} \tab Correlation of \Zc with GC content of metagenomic and 16S amplicon reads \cr
 }
 
 \code{getmdat_geo16S} gets metadata for the indicated \code{study} and adds columns for plot parameters (\code{pch}, \code{col}).
@@ -69,7 +69,7 @@ For some datasets, sample subsets are indicated by appending a suffix to the stu
 The default for \code{dropNA} means to exclude samples with NA name in the metadata file, which is used to exclude outliers from the analysis.
 If \code{metrics} is supplied, the samples are sorted in the same order as the metadata file, and the function returns a list with both \samp{metadata} and the sorted \samp{metrics}.
 
-\code{getmetrics_geo16S} calculates chemical metrics (\ZC and \nH2O) for the indicated study.
+\code{getmetrics_geo16S} calculates chemical metrics (\Zc and \nH2O) for the indicated study.
 \code{...} is used to supply arguments to \code{\link[chem16S]{read_RDP}}.
 
 }
@@ -115,7 +115,7 @@ mdat <- getmdat_geo16S("BCA+21", metrics = metrics)
 metadata <- getmdat_geo16S("BCA+21", dropNA = FALSE)
 stopifnot(nrow(metadata) > nrow(mdat$metadata))
 
-# Make a nH2O-ZC plot with lots of messages printed
+# Make a nH2O-Zc plot with lots of messages printed
 # Symbols are coded in getmetrics_geo16S
 # (blue: oxic, black: suboxic, red: euxinic)
 plotmet_geo16S("SVH+19", quiet = FALSE)

@@ -1,4 +1,4 @@
-"dataset","description","tags","n1","n2","ZC.down","ZC.up","ZC.diff","nH2O.down","nH2O.up","nH2O.diff","nAA.down","nAA.up","nAA.diff","MW.down","MW.up","MW.diff"
+"dataset","description","tags","n1","n2","Zc.down","Zc.up","Zc.diff","nH2O.down","nH2O.up","nH2O.diff","nAA.down","nAA.up","nAA.diff","MW.down","MW.up","MW.diff"
 GEPIA2_ACC,"ACC",,2013,391,-0.12,-0.1292,-0.0091,-0.7757,-0.7613,0.0144,516,309,-207,111.6532,111.7317,0.0784
 GEPIA2_BLCA,"BLCA",,1722,735,-0.1108,-0.1286,-0.0178,-0.7749,-0.7481,0.0268,510,396,-114,111.3772,111.5743,0.197
 GEPIA2_BRCA,"BRCA",,1749,1256,-0.1175,-0.1322,-0.0147,-0.7742,-0.7614,0.0128,473,384,-89,111.3756,111.7746,0.399

@@ -58,14 +58,14 @@ geo16S2 <- function(pdf = FALSE) {
   # Function to add points
   pointfun <- function(pcomp) {
     ifill <- pcomp$pch > 20
-    points(pcomp$ZC[ifill], pcomp$nH2O[ifill], pch = pcomp$pch[ifill], col = 1, bg = pcomp$col[ifill])
-    points(pcomp$ZC[!ifill], pcomp$nH2O[!ifill], pch = pcomp$pch[!ifill], col = pcomp$col[!ifill])
+    points(pcomp$Zc[ifill], pcomp$nH2O[ifill], pch = pcomp$pch[ifill], col = 1, bg = pcomp$col[ifill])
+    points(pcomp$Zc[!ifill], pcomp$nH2O[!ifill], pch = pcomp$pch[!ifill], col = pcomp$col[!ifill])
   }
 
   p1 <- plotmet_geo16S("BGPF13", title = FALSE, points = FALSE)
 #  title("Yellowstone hot springs\nBowen De Le\u00f3n et al., 2013", font.main = 1)
   title("Yellowstone hot springs", font.main = 1)
-  add_hull(p1$ZC, p1$nH2O, 2, TRUE)
+  add_hull(p1$Zc, p1$nH2O, 2, TRUE)
   pointfun(p1)
   legend <- c("Archaea", "Bacteria")
   legend("bottomleft", legend, pch = c(23, 22), col = c(1, 1), pt.bg = c(6, 5), bg = "white")
@@ -73,7 +73,7 @@ geo16S2 <- function(pdf = FALSE) {
   p2 <- plotmet_geo16S("SVH+19", title = FALSE, points = FALSE)
 #  title("Black Sea\nSollai et al., 2019", font.main = 1)
   title("Black Sea", font.main = 1)
-  add_hull(p2$ZC, p2$nH2O, "blue", TRUE, lty = 2)
+  add_hull(p2$Zc, p2$nH2O, "blue", TRUE, lty = 2)
   pointfun(p2)
   legend <- c("Oxic", "Suboxic", "Euxinic")
   legend("bottomright", legend, pch = c(24, 20, 25), pt.bg = c(4, 1, 2), bg = "white")
@@ -81,7 +81,7 @@ geo16S2 <- function(pdf = FALSE) {
   p3 <- plotmet_geo16S("HLA+16", title = FALSE, points = FALSE)
 #  title("Baltic Sea\nHerlemann et al., 2016", font.main = 1)
   title("Baltic Sea", font.main = 1)
-  add_hull(p3$ZC, p3$nH2O, "blue", TRUE)
+  add_hull(p3$Zc, p3$nH2O, "blue", TRUE)
   pointfun(p3)
   legend <- c("< 6", "6-20", "> 20")
   legend("bottomright", legend, pch = c(24, 20, 21), col = c(1, 1, 1), pt.bg = c(3, NA, 4), bg = "white", title = "Salinity")
@@ -89,7 +89,7 @@ geo16S2 <- function(pdf = FALSE) {
   p4 <- plotmet_geo16S("MPB+17", title = FALSE, points = FALSE)
 #  title("Manus Basin submarine vents\nMeier et al., 2017", font.main = 1)
   title("Manus Basin submarine vents", font.main = 1)
-  add_hull(p4$ZC, p4$nH2O, 2, TRUE, lty = 2)
+  add_hull(p4$Zc, p4$nH2O, 2, TRUE, lty = 2)
   pointfun(p4)
   legend <- as.expression(c(quote(italic(T)~"< 50 \u00B0C"), quote(italic(T)~"> 50 \u00B0C")))
   legend("bottomleft", legend, pch = c(21, 23), col = c(1, 1), pt.bg = c(4, 2), bg = "white", title = "Water")
@@ -98,7 +98,7 @@ geo16S2 <- function(pdf = FALSE) {
   p5 <- plotmet_geo16S("ZLM+16", title = FALSE, points = FALSE)
 #  title("Tibetan Plateau lakes\nZhong et al., 2016", font.main = 1)
   title("Tibetan Plateau lakes", font.main = 1)
-  add_hull(p5$ZC, p5$nH2O, "turquoise3", TRUE, lty = 2)
+  add_hull(p5$Zc, p5$nH2O, "turquoise3", TRUE, lty = 2)
   pointfun(p5)
   legend <- c("< 10 g/L", "24-99 g/L", "> 300 g/L")
   legend("topright", legend, pch = c(24, 20, 21), col = c(1, 1, 1), pt.bg = c(3, NA, 4), bg = "white", title = "Salinity")
@@ -106,7 +106,7 @@ geo16S2 <- function(pdf = FALSE) {
   p6 <- plotmet_geo16S("JHM+16", title = FALSE, points = FALSE)
 #  title("Lake Fryxell oxygen gradient\nJungblut et al., 2016", font.main = 1)
   title("Lake Fryxell oxygen gradient", font.main = 1)
-  add_hull(p6$ZC, p6$nH2O, "tan1", TRUE)
+  add_hull(p6$Zc, p6$nH2O, "tan1", TRUE)
   pointfun(p6)
   legend <- c("Oxic", "Transition", "Anoxic")
   legend("bottomright", legend, pch = c(24, 20, 25), pt.bg = c(4, 1, 2), bg = "white")
@@ -114,7 +114,7 @@ geo16S2 <- function(pdf = FALSE) {
   p7 <- plotmet_geo16S("HCW+13", title = FALSE, points = FALSE, ylim = c(-0.7685, -0.7585))
 #  title("Guerrero Negro mat layers\nHarris et al., 2013", font.main = 1)
   title("Guerrero Negro mat layers", font.main = 1)
-  add_hull(p7$ZC, p7$nH2O, "tan1", TRUE, lty = 2)
+  add_hull(p7$Zc, p7$nH2O, "tan1", TRUE, lty = 2)
   pointfun(p7)
   text(c(-0.1512, -0.1572, -0.1576), c(-0.7587, -0.7645, -0.7684), c("0-1 mm", "1-2 mm", "2-3 mm"))
   legend <- c("Photic/oxic", "Low sulfide", "High sulfide")
@@ -123,7 +123,7 @@ geo16S2 <- function(pdf = FALSE) {
   p8 <- plotmet_geo16S("XDZ+17", title = FALSE, points = FALSE)
 #  title("Qarhan Salt Lake and\nnormal soils, Xie et al., 2017", font.main = 1)
   title("Qarhan Salt Lake\nand normal soils", font.main = 1)
-  add_hull(p8$ZC, p8$nH2O, "turquoise3", TRUE)
+  add_hull(p8$Zc, p8$nH2O, "turquoise3", TRUE)
   pointfun(p8)
   legend <- c("Normal", "Saline")
   legend("topright", legend, pch = c(24, 21), pt.bg = c(3, 4), bg = "white")
@@ -139,14 +139,14 @@ geo16S2 <- function(pdf = FALSE) {
   plot(xlim, ylim, xlab = "", ylab = "", type = "n")
   lmlines()
   # Add convex hulls for each dataset in this figure
-  add_hull(p1$ZC, p1$nH2O, 2, TRUE)
-  add_hull(p2$ZC, p2$nH2O, "blue", TRUE, lty = 2)
-  add_hull(p3$ZC, p3$nH2O, "blue", TRUE)
-  add_hull(p4$ZC, p4$nH2O, 2, TRUE, lty = 2)
-  add_hull(p5$ZC, p5$nH2O, "turquoise3", TRUE, lty = 2)
-  add_hull(p6$ZC, p6$nH2O, "tan1", TRUE)
-  add_hull(p7$ZC, p7$nH2O, "tan1", TRUE, lty = 2)
-  add_hull(p8$ZC, p8$nH2O, "turquoise3", TRUE)
+  add_hull(p1$Zc, p1$nH2O, 2, TRUE)
+  add_hull(p2$Zc, p2$nH2O, "blue", TRUE, lty = 2)
+  add_hull(p3$Zc, p3$nH2O, "blue", TRUE)
+  add_hull(p4$Zc, p4$nH2O, 2, TRUE, lty = 2)
+  add_hull(p5$Zc, p5$nH2O, "turquoise3", TRUE, lty = 2)
+  add_hull(p6$Zc, p6$nH2O, "tan1", TRUE)
+  add_hull(p7$Zc, p7$nH2O, "tan1", TRUE, lty = 2)
+  add_hull(p8$Zc, p8$nH2O, "turquoise3", TRUE)
   par(opar)
 
   # Add environment type labels 20210427
@@ -162,7 +162,7 @@ geo16S2 <- function(pdf = FALSE) {
 
   # Return data for Supplementary Table 20210831
   out <- rbind(p1, p2, p3, p4, p5, p6, p7, p8)
-  out$ZC <- round(out$ZC, 6)
+  out$Zc <- round(out$Zc, 6)
   out$nH2O <- round(out$nH2O, 6)
   invisible(out)
 
@@ -222,14 +222,14 @@ geo16S3 <- function(pdf = FALSE) {
       par(xpd = FALSE)
       next
     }
-    # ZC range for plots
-    if(study[i] == "BCA+21") ZClim <- c(-0.180, -0.145) else ZClim <- c(-0.170, -0.140)
+    # Zc range for plots
+    if(study[i] == "BCA+21") Zclim <- c(-0.180, -0.145) else Zclim <- c(-0.170, -0.140)
     if(study[i] == "__BSMG__") {
       ## Get data for Black Sea metagenome
       ARASTdir <- system.file("extdata/geo16S/ARAST", package = "JMDplots")
       aa <- read.csv(file.path(ARASTdir, "Black_Sea_AA.csv"))
-      ZC <- ZCAA(aa)
-      nH2O <- H2OAA(aa)
+      Zc <- Zc(aa)
+      nH2O <- nH2O(aa)
       depth = c(50, 70, 80, 85, 90, 95, 100, 105,
         110, 130, 170, 250, 500, 1000, 2000)
       Metagenome = c("SRR12347146", "SRR12347145", "SRR12347139", "SRR12347138", "SRR12347137", "SRR12347136", "SRR12347135", "SRR12347134",
@@ -257,9 +257,9 @@ geo16S3 <- function(pdf = FALSE) {
       # Now exclude NA samples
       mdat <- mdat[!is.na(mdat$name), ]
       depth <- mdat$depth
-      # Get the ZC and nH2O values
+      # Get the Zc and nH2O values
       imet <- match(mdat$Run, metrics$Run)
-      ZC <- metrics$ZC[imet]
+      Zc <- metrics$Zc[imet]
       nH2O <- metrics$nH2O[imet]
     }
 
@@ -279,7 +279,7 @@ geo16S3 <- function(pdf = FALSE) {
     if(i > 1) if(titlesub[i]==titlesub[i-1]) newplot <- FALSE
     if(newplot) {
       if(study[i] %in% c("SVH+19", "__BSMG__")) {
-        plot(ZC, depth, xlim = ZClim, ylim = ylim, xlab = axis.label("ZC"), ylab = "Depth (m)", type = "b", yaxt = "n")
+        plot(Zc, depth, xlim = Zclim, ylim = ylim, xlab = axis.label("Zc"), ylab = "Depth (m)", type = "b", yaxt = "n")
         axis(2, at = seq(100, 700, 100), labels = c(100, 200, 300, 400, 500, 1000, 2000), gap.axis = 0)
         # Plot y-axis break 20210715
         par(xpd = NA)
@@ -287,22 +287,22 @@ geo16S3 <- function(pdf = FALSE) {
         text(-0.1712, 542, "/", srt = 90)
         text(-0.1712, 556, "/", srt = 90)
         par(xpd = FALSE)
-      } else plot(ZC, depth, xlim = ZClim, ylim = ylim, xlab = axis.label("ZC"), ylab = "Depth (m)", type = "b")
+      } else plot(Zc, depth, xlim = Zclim, ylim = ylim, xlab = axis.label("Zc"), ylab = "Depth (m)", type = "b")
     } else {
       # Add to plot if the title hasn't changed
-      points(ZC, depth, type = "b", pch = 0)
+      points(Zc, depth, type = "b", pch = 0)
     }
-    # Save ZC and depth for Spearman correlation 20220114
-    ZCdepth <- list(ZC = ZC, depth = depth)
+    # Save Zc and depth for Spearman correlation 20220114
+    Zcdepth <- list(Zc = Zc, depth = depth)
 
     if(newplot) {
       # Add title in lower right
       if(grepl("Outside", subtitle[i])) {
-        text(ZClim[1], ylim[1], title[i], adj = c(0, 0), font = 2)
-        text(ZClim[1], ylim[1], subtitle[i], adj = c(0, 0))
+        text(Zclim[1], ylim[1], title[i], adj = c(0, 0), font = 2)
+        text(Zclim[1], ylim[1], subtitle[i], adj = c(0, 0))
       } else {
-        text(ZClim[2], ylim[1], title[i], adj = c(1, 0), font = 2)
-        text(ZClim[2], ylim[1], subtitle[i], adj = c(1, 0))
+        text(Zclim[2], ylim[1], title[i], adj = c(1, 0), font = 2)
+        text(Zclim[2], ylim[1], subtitle[i], adj = c(1, 0))
       }
       # Plot O2 concentrations
       nc <- nchar(title[i])
@@ -328,44 +328,44 @@ geo16S3 <- function(pdf = FALSE) {
         text(44, 76, "0.2-\n1.6 \u00B5m")
         text(135, 138, "1.6-\n30 \u00B5m")
       }
-      # Restore xlim for plotting ZC
+      # Restore xlim for plotting Zc
       par(new = TRUE)
-      plot(0, 0, type = "n", axes = FALSE, xlab = "", ylab = "", xlim = ZClim, ylim = ylim)
+      plot(0, 0, type = "n", axes = FALSE, xlab = "", ylab = "", xlim = Zclim, ylim = ylim)
     }
     # Save O2 and depth for Spearman correlation 20220114
     O2depth <- list(O2 = alldat[, icol], depth = depth)
 
     # Add Spearman correlation 20220114
-    depths <- intersect(ZCdepth$depth, O2depth$depth)
-    iZC <- match(depths, ZCdepth$depth)
+    depths <- intersect(Zcdepth$depth, O2depth$depth)
+    iZc <- match(depths, Zcdepth$depth)
     iO2 <- match(depths, O2depth$depth)
-    # Calculate Spearman rank correlation; use = "complete.obs" to drop pairs with NA ZC
-    spearman <- cor(ZCdepth$ZC[iZC], O2depth$O2[iO2], use = "complete.obs", method = "spearman")
+    # Calculate Spearman rank correlation; use = "complete.obs" to drop pairs with NA Zc
+    spearman <- cor(Zcdepth$Zc[iZc], O2depth$O2[iO2], use = "complete.obs", method = "spearman")
     rtxt <- bquote(rho == .(formatC(spearman, digits = 2, format = "f")))
     if(grepl("ETNP", title[i])) {
       # For ETNP, put the correlations next to the lines for different size fractions
-      if(newplot) text(ZClim[2], ylim[1], rtxt, adj = c(3, 0.1))
-      else text(ZClim[2], ylim[1], rtxt, adj = c(1.9, 0.1))
+      if(newplot) text(Zclim[2], ylim[1], rtxt, adj = c(3, 0.1))
+      else text(Zclim[2], ylim[1], rtxt, adj = c(1.9, 0.1))
     } else {
-      if(grepl("Outside", subtitle[i])) text(ZClim[1], ylim[1], rtxt, adj = c(0, 0.1))
-      else text(ZClim[2], ylim[1], rtxt, adj = c(1, 0.1))
+      if(grepl("Outside", subtitle[i])) text(Zclim[1], ylim[1], rtxt, adj = c(0, 0.1))
+      else text(Zclim[2], ylim[1], rtxt, adj = c(1, 0.1))
     }
 
     # Assemble the data for Supplementary Table
     sd <- alldat[, c("study", "name", "Run", "sample", "depth")]
-    sd <- cbind(sd, "O2 (umol kg-1)" = NA, "O2 (umol L-1)" = NA, "O2 (mg L-1)" = NA, ZC = NA, nH2O = NA)
+    sd <- cbind(sd, "O2 (umol kg-1)" = NA, "O2 (umol L-1)" = NA, "O2 (mg L-1)" = NA, Zc = NA, nH2O = NA)
     # Names of the columns with chemical concentrations
     cnames <- c("O2 (umol kg-1)", "O2 (umol L-1)", "O2 (mg L-1)")
     for(cname in cnames) if(cname %in% colnames(alldat)) sd[, cname] <- alldat[, cname]
     if(study[i] == "__BSMG__") {
-      sd$ZC <- ZC
+      sd$Zc <- Zc
       sd$nH2O <- nH2O
     } else {
-      # Put ZC and nH2O values in correct place
+      # Put Zc and nH2O values in correct place
       metrics <- metrics[imet, ]
       metrics <- metrics[!is.na(metrics$Run), ]
       isd <- match(metrics$Run, sd$Run)
-      sd$ZC[isd] <- metrics$ZC
+      sd$Zc[isd] <- metrics$Zc
       sd$nH2O[isd] <- metrics$nH2O
     }
 
@@ -384,13 +384,13 @@ geo16S3 <- function(pdf = FALSE) {
 
   # Return data for Supplementary Table 20210831
   out <- do.call(rbind, out)
-  out$ZC <- round(out$ZC, 6)
+  out$Zc <- round(out$Zc, 6)
   out$nH2O <- round(out$nH2O, 6)
   invisible(out)
 
 }
 
-# Figure 4: Shale gas datasets and ZC difference between oxidized and reduced samples 20210414
+# Figure 4: Shale gas datasets and Zc difference between oxidized and reduced samples 20210414
 geo16S4 <- function(pdf = FALSE) {
 
   if(pdf) pdf("geo16S4.pdf", width = 10, height = 6)
@@ -411,7 +411,7 @@ geo16S4 <- function(pdf = FALSE) {
 
   studies <- c("UKD+18.water_2014", "UKD+18.sediment_2014", "MMA+20_spring", "MMA+20_fall")
   # Start plot
-  plot(c(-0.148, -0.140), c(-0.748, -0.735), type = "n", xlab = cplab$ZC, ylab = cplab$nH2O)
+  plot(c(-0.148, -0.140), c(-0.748, -0.735), type = "n", xlab = cplab$Zc, ylab = cplab$nH2O)
   pch <- 21:25
   xadj <- c(0.5, 0.5, 0.5, -0.5)
   yadj <- c(-0.8, -0.8, -0.8, 0.5)
@@ -422,16 +422,16 @@ geo16S4 <- function(pdf = FALSE) {
     # Determine sample groups from values of pch returned by plot_metrics()  20210901
     i1 <- pm$pch == 1
     i2 <- pm$pch == 21
-    means <- list(ZC1 = mean(pm$ZC[i1]), ZC2 = mean(pm$ZC[i2]), nH2O1 = mean(pm$nH2O[i1]), nH2O2 = mean(pm$nH2O[i2]))
-    points(means$ZC1, means$nH2O1, pch = pch[i], cex = 1.5, lwd = 2, bg = "#ffffffa0")
-    lines(c(means$ZC1, means$ZC2), c(means$nH2O1, means$nH2O2))
-    points(means$ZC2, means$nH2O2, pch = pch[i], cex = 1.8, lwd = 2, bg = "#df536ba0")
+    means <- list(Zc1 = mean(pm$Zc[i1]), Zc2 = mean(pm$Zc[i2]), nH2O1 = mean(pm$nH2O[i1]), nH2O2 = mean(pm$nH2O[i2]))
+    points(means$Zc1, means$nH2O1, pch = pch[i], cex = 1.5, lwd = 2, bg = "#ffffffa0")
+    lines(c(means$Zc1, means$Zc2), c(means$nH2O1, means$nH2O2))
+    points(means$Zc2, means$nH2O2, pch = pch[i], cex = 1.8, lwd = 2, bg = "#df536ba0")
     # Plot number of samples next to points 20210902
-    n1 <- length(pm$ZC[i1])
-    n2 <- length(pm$ZC[i2])
+    n1 <- length(pm$Zc[i1])
+    n2 <- length(pm$Zc[i2])
     if(i==4) dyadj <- 0.2 else dyadj <- 0
-    text(means$ZC1, means$nH2O1, n1, adj = c(xadj[i], yadj[i] - dyadj))
-    text(means$ZC2, means$nH2O2, n2, adj = c(xadj[i], yadj[i] + dyadj))
+    text(means$Zc1, means$nH2O1, n1, adj = c(xadj[i], yadj[i] - dyadj))
+    text(means$Zc2, means$nH2O2, n2, adj = c(xadj[i], yadj[i] + dyadj))
     # Save values for Supplementary Table 20210901
     outB[[i]] <- pm
   }
@@ -456,7 +456,7 @@ geo16S4 <- function(pdf = FALSE) {
   # Panel D: Multiple studies
   studies <- c("CHM+14_injected-49", "HRR+18_injected-22", "ZLF+19_injected-18")
   # Start plot
-  plot(c(-0.22, -0.14), c(-0.75, -0.71), type = "n", xlab = cplab$ZC, ylab = cplab$nH2O)
+  plot(c(-0.22, -0.14), c(-0.75, -0.71), type = "n", xlab = cplab$Zc, ylab = cplab$nH2O)
   pch <- 21:25
   outD <- list()
   # Loop over studies
@@ -465,16 +465,16 @@ geo16S4 <- function(pdf = FALSE) {
     # Determine sample groups from values of pch returned by plot_metrics()  20210901
     i1 <- pm$pch == 1
     i2 <- pm$pch == 21
-    means <- list(ZC1 = mean(pm$ZC[i1]), ZC2 = mean(pm$ZC[i2]), nH2O1 = mean(pm$nH2O[i1]), nH2O2 = mean(pm$nH2O[i2]))
-    points(means$ZC1, means$nH2O1, pch = pch[i], cex = 1.5, lwd = 2, bg = "#ffffffa0")
-    lines(c(means$ZC1, means$ZC2), c(means$nH2O1, means$nH2O2))
-    points(means$ZC2, means$nH2O2, pch = pch[i], cex = 1.8, lwd = 2, bg = "#df536ba0")
+    means <- list(Zc1 = mean(pm$Zc[i1]), Zc2 = mean(pm$Zc[i2]), nH2O1 = mean(pm$nH2O[i1]), nH2O2 = mean(pm$nH2O[i2]))
+    points(means$Zc1, means$nH2O1, pch = pch[i], cex = 1.5, lwd = 2, bg = "#ffffffa0")
+    lines(c(means$Zc1, means$Zc2), c(means$nH2O1, means$nH2O2))
+    points(means$Zc2, means$nH2O2, pch = pch[i], cex = 1.8, lwd = 2, bg = "#df536ba0")
     # Plot number of samples next to points 20210902
-    n1 <- length(pm$ZC[i1])
-    n2 <- length(pm$ZC[i2])
+    n1 <- length(pm$Zc[i1])
+    n2 <- length(pm$Zc[i2])
     if(i == 3) adj <- c(-1, 1) else adj <- c(-1, 0.5)
-    text(means$ZC1, means$nH2O1, n1, adj = adj)
-    text(means$ZC2, means$nH2O2, n2, adj = c(0.2, -1))
+    text(means$Zc1, means$nH2O1, n1, adj = adj)
+    text(means$Zc2, means$nH2O2, n2, adj = c(0.2, -1))
     outD[[i]] <- pm
   }
   # Add labels
@@ -485,7 +485,7 @@ geo16S4 <- function(pdf = FALSE) {
   legend("topright", c("Source water\nor injected fluids", "Produced water"), pch = c(21, 21), pt.bg = c("#ffffffa0", "#df536ba0"), pt.cex = c(1.4, 1.7), lwd = 2, lty = NA)
   label.figure("D", cex = 1.5, xfrac = 0.03, font = 2)
 
-  ## Panel E: ZC differences between oxidized and reduced sample subsets in various studies
+  ## Panel E: Zc differences between oxidized and reduced sample subsets in various studies
   study <- c(
     "GBL+15", "JHM+16_O2", "MPB+17", "BCA+21",
     "SVH+19_O2", "MZG+20_Zug", "MZG+20_Lugano", "HXZ+20",
@@ -527,8 +527,8 @@ geo16S4 <- function(pdf = FALSE) {
             25, 25
   )
 
-  # Loop over studies and get ZC difference
-  P <- n1 <- n2 <- DZC <- numeric()
+  # Loop over studies and get Zc difference
+  P <- n1 <- n2 <- DZc <- numeric()
   for(i in 1:length(study)) {
     # Get metrics for samples in this study
     pm <- plotmet_geo16S(study[[i]], plot.it = FALSE)
@@ -536,35 +536,35 @@ geo16S4 <- function(pdf = FALSE) {
     pm <- pm[!is.na(pm$pch), ]
     iox <- pm$pch == pch_ox[i]
     ired <- pm$pch == pch_red[i]
-    # Keep track of the mean difference of ZC
-    DZC <- c(DZC, mean(pm$ZC[ired]) - mean(pm$ZC[iox]))
+    # Keep track of the mean difference of Zc
+    DZc <- c(DZc, mean(pm$Zc[ired]) - mean(pm$Zc[iox]))
     # Keep track of number of samples 20210902
-    n1 <- c(n1, length(pm$ZC[iox]))
-    n2 <- c(n2, length(pm$ZC[ired]))
+    n1 <- c(n1, length(pm$Zc[iox]))
+    n2 <- c(n2, length(pm$Zc[ired]))
   }
 
   # Include numbers of samples in condition text 20210902
   condition <- paste0(cond2, " (", n2, ") - ", cond1, " (", n1, ")")
 
-  # Order samples by Delta ZC 20220118
-  orderDZC <- order(DZC)
-  DZC <- DZC[orderDZC]
-  description <- description[orderDZC]
-  condition <- condition[orderDZC]
+  # Order samples by Delta Zc 20220118
+  orderDZc <- order(DZc)
+  DZc <- DZc[orderDZc]
+  description <- description[orderDZc]
+  condition <- condition[orderDZc]
 
   # Setup plot
-  nsamp <- length(DZC)
+  nsamp <- length(DZc)
   par(mar = c(4, 12, 3, 0.5), las = 1)
-  plot(c(min(DZC), 0.01), c(nsamp + 0.5, 0.5), ylim = c(nsamp + 0.5, 0.5), yaxs = "i", yaxt = "n", ylab = "", xlab = cplab$DZC, type = "n")
+  plot(c(min(DZc), 0.01), c(nsamp + 0.5, 0.5), ylim = c(nsamp + 0.5, 0.5), yaxs = "i", yaxt = "n", ylab = "", xlab = cplab$DZc, type = "n")
   title("Mean differences between oxidized                         ", font.main = 1, line = 1.6)
   title("and reduced sample groups                         ", font.main = 1, line = 0.5)
-  # Add line at DZC = 0
+  # Add line at DZc = 0
   abline(v = 0, lty = 2, col = "gray40")
   # Use red for shale gas and hydrothermal systems
   col <- rep(1, length(description))
   col[description %in% c("Bison Pool", "Manus Basin (water samples)", "Marcellus Shale", "Denver-Julesburg Basin", "Duvernay Formation")] <- 2
-  # Plot Delta ZC 
-  for(i in 1:nsamp) lines(c(DZC[i], DZC[i]), c(i - 0.5, i + 0.5), lwd = 2, col = col[i])
+  # Plot Delta Zc 
+  for(i in 1:nsamp) lines(c(DZc[i], DZc[i]), c(i - 0.5, i + 0.5), lwd = 2, col = col[i])
 
   # Add dataset description and conditions
   axis(2, at = 1:nsamp - 0.2, labels = description, tick = FALSE)
@@ -579,13 +579,13 @@ geo16S4 <- function(pdf = FALSE) {
   out <- rbind(outB, outD)
   out <- out[, !colnames(out) %in% c("pch", "col")]
   out$nH2O <- round(out$nH2O, 6)
-  out$ZC <- round(out$ZC, 6)
+  out$Zc <- round(out$Zc, 6)
   invisible(out)
 
 }
 
 # Function to plot individual datasets for geo16S5 20220112
-# Use H2O = FALSE for ZC, H2O = TRUE for nH2O
+# Use H2O = FALSE for Zc, H2O = TRUE for nH2O
 MG16S <- function(which, plot.lines = TRUE, lowest.level = NULL, lineage = NULL, rm.outliers = FALSE, H2O = FALSE, cex = 1) {
 
   # For MG datasets analyzed in this study (others are from gradox paper)
@@ -621,7 +621,7 @@ MG16S <- function(which, plot.lines = TRUE, lowest.level = NULL, lineage = NULL,
     mdat <- getmdat_geo16S("HCW+13", metrics)
     dat_16S <- mdat$metrics
 
-    if(H2O) metric_16S <- dat_16S$nH2O else metric_16S <- dat_16S$ZC
+    if(H2O) metric_16S <- dat_16S$nH2O else metric_16S <- dat_16S$Zc
     # Check that the sample names are the same
     stopifnot(all.equal(rev(rownames(dat_MG$meancomp)), gsub(".*_", "", dat_16S$sample)))
     # Add lines and points
@@ -649,7 +649,7 @@ MG16S <- function(which, plot.lines = TRUE, lowest.level = NULL, lineage = NULL,
     # Use smallest size fraction
     dat_16S <- subset(dat_16S, grepl("1.6micron", dat_16S$sample))
     metadata <- metadata[metadata$Run %in% dat_16S$Run, ]
-    if(H2O) metric_16S <- dat_16S$nH2O else metric_16S <- dat_16S$ZC
+    if(H2O) metric_16S <- dat_16S$nH2O else metric_16S <- dat_16S$Zc
     # Check that the sample names are the same
     stopifnot(all.equal(rev(rownames(dat_MG$meancomp)), gsub("_.*", "", dat_16S$sample)))
     # Add lines and points
@@ -677,7 +677,7 @@ MG16S <- function(which, plot.lines = TRUE, lowest.level = NULL, lineage = NULL,
     # Use smallest size fraction
     dat_16S <- subset(dat_16S, grepl("1.6micron", dat_16S$sample))
     metadata <- metadata[metadata$Run %in% dat_16S$Run, ]
-    if(H2O) metric_16S <- dat_16S$nH2O else metric_16S <- dat_16S$ZC
+    if(H2O) metric_16S <- dat_16S$nH2O else metric_16S <- dat_16S$Zc
     # Check that the sample names are the same
     stopifnot(all.equal(rev(rownames(dat_MT$meancomp)), gsub("_.*", "", dat_16S$sample)))
     # Add lines and points
@@ -705,7 +705,7 @@ MG16S <- function(which, plot.lines = TRUE, lowest.level = NULL, lineage = NULL,
     mdat <- getmdat_geo16S("SMS+12", metrics)
     dat_16S <- mdat$metrics
     metadata <- mdat$metadata
-    if(H2O) metric_16S <- dat_16S$nH2O else metric_16S <- dat_16S$ZC
+    if(H2O) metric_16S <- dat_16S$nH2O else metric_16S <- dat_16S$Zc
     # Check that the sample names are the same
     stopifnot(all.equal(rownames(dat_MG$meancomp), metadata$"Field Code"))
     # Add lines and points
@@ -731,7 +731,7 @@ MG16S <- function(which, plot.lines = TRUE, lowest.level = NULL, lineage = NULL,
     mdat <- getmdat_geo16S("EH18", metrics)
     dat_16S <- mdat$metrics
     metadata <- mdat$metadata
-    if(H2O) metric_16S <- dat_16S$nH2O else metric_16S <- dat_16S$ZC
+    if(H2O) metric_16S <- dat_16S$nH2O else metric_16S <- dat_16S$Zc
     # Check that the sample names are the same
     stopifnot(all.equal(rev(rownames(dat_MT$meancomp)), gsub(".*_", "", dat_16S$sample)))
     # Add lines and points
@@ -751,7 +751,7 @@ MG16S <- function(which, plot.lines = TRUE, lowest.level = NULL, lineage = NULL,
   if(which == "Marcellus_Shale") {
     ## Marcellus metagenomes (Daly et al., 2016) 20211218
     aa <- read.csv(file.path(ARASTdir, "Marcellus_Shale_AA.csv"))
-    if(H2O) metric_MG <- H2OAA(aa) else metric_MG <- ZCAA(aa)
+    if(H2O) metric_MG <- nH2O(aa) else metric_MG <- Zc(aa)
     # Marcellus 16S (Cluff et al., 2014)
     metrics <- getmetrics_geo16S("CHM+14", lowest.level = lowest.level, lineage = lineage)
     mdat <- getmdat_geo16S("CHM+14", metrics)
@@ -772,7 +772,7 @@ MG16S <- function(which, plot.lines = TRUE, lowest.level = NULL, lineage = NULL,
     # Get 16S runs corresponding to metagenomes
     idat <- match(Amplicon, dat_16S$Run)
     dat_16S <- dat_16S[idat, ]
-    if(H2O) metric_16S <- dat_16S$nH2O else metric_16S <- dat_16S$ZC
+    if(H2O) metric_16S <- dat_16S$nH2O else metric_16S <- dat_16S$Zc
     # Assign colors: open circle for injected fluid, gray for flowback, red for produced
     metadata <- metadata[idat, ]
     col <- rep(4, nrow(metadata))
@@ -785,7 +785,7 @@ MG16S <- function(which, plot.lines = TRUE, lowest.level = NULL, lineage = NULL,
   if(which == "Manus_Basin") {
     ## Manus Basin metagenomes (Meier et al., 2017) 20220110
     aa <- read.csv(file.path(ARASTdir, "Manus_Basin_AA.csv"))
-    if(H2O) metric_MG <- H2OAA(aa) else metric_MG <- ZCAA(aa)
+    if(H2O) metric_MG <- nH2O(aa) else metric_MG <- Zc(aa)
     # Manus Basin 16S (Meier et al., 2017)
     metrics <- getmetrics_geo16S("MPB+17", lowest.level = lowest.level, lineage = lineage)
     mdat <- getmdat_geo16S("MPB+17", metrics)
@@ -801,7 +801,7 @@ MG16S <- function(which, plot.lines = TRUE, lowest.level = NULL, lineage = NULL,
     # Get 16S runs corresponding to metagenomes
     idat <- match(Amplicon, dat_16S$Run)
     dat_16S <- dat_16S[idat, ]
-    if(H2O) metric_16S <- dat_16S$nH2O else metric_16S <- dat_16S$ZC
+    if(H2O) metric_16S <- dat_16S$nH2O else metric_16S <- dat_16S$Zc
     # Assign colors: blue for < 10 degC, red for > 50 degC
     metadata <- metadata[idat, ]
     col <- rep("white", nrow(metadata))
@@ -813,7 +813,7 @@ MG16S <- function(which, plot.lines = TRUE, lowest.level = NULL, lineage = NULL,
   if(which == "Black_Sea") {
     ## Black Sea metagenome (Villanueva et al., 2021) 20220115
     aa <- read.csv(file.path(ARASTdir, "Black_Sea_AA.csv"))
-    if(H2O) metric_MG <- H2OAA(aa) else metric_MG <- ZCAA(aa)
+    if(H2O) metric_MG <- nH2O(aa) else metric_MG <- Zc(aa)
     # 16S data (Sollai et al., 2019)
     metrics <- getmetrics_geo16S("SVH+19")
     ## TODO: add missing arguments 20220506
@@ -821,7 +821,7 @@ MG16S <- function(which, plot.lines = TRUE, lowest.level = NULL, lineage = NULL,
     mdat <- getmdat_geo16S("SVH+19", metrics)
     dat_16S <- mdat$metrics
     metadata <- mdat$metadata
-    if(H2O) metric_16S <- dat_16S$nH2O else metric_16S <- dat_16S$ZC
+    if(H2O) metric_16S <- dat_16S$nH2O else metric_16S <- dat_16S$Zc
     Sample = c(50, 70, 80, 85, 90, 95, 100, 105,
       110, 130, 170, 250, 500, 1000, 2000)
     Metagenome = c("SRR12347146", "SRR12347145", "SRR12347139", "SRR12347138", "SRR12347137", "SRR12347136", "SRR12347135", "SRR12347134",
@@ -854,9 +854,9 @@ MG16S <- function(which, plot.lines = TRUE, lowest.level = NULL, lineage = NULL,
     # Make sure the 16S and metagenomes are paired correctly
     stopifnot(all(na.omit(met$Run == dat$Amplicon)))
     stopifnot(all(aa$protein == dat$Metagenome))
-    # Get ZC values
-    if(H2O) metric_16S <- met$nH2O else metric_16S <- met$ZC
-    if(H2O) metric_MG <- H2OAA(aa) else metric_MG <- ZCAA(aa)
+    # Get Zc values
+    if(H2O) metric_16S <- met$nH2O else metric_16S <- met$Zc
+    if(H2O) metric_MG <- nH2O(aa) else metric_MG <- Zc(aa)
     # Don't plot MG with low numbers of protein fragments 20220122
     ilow <- aa$chains < 50000
     if(any(ilow)) {
@@ -866,7 +866,7 @@ MG16S <- function(which, plot.lines = TRUE, lowest.level = NULL, lineage = NULL,
       aa <- aa[!ilow, ]
       dat <- dat[!ilow, ]
     }
-    # Remove outliers (anomalously high ZC in metagenome) 20221215
+    # Remove outliers (anomalously high Zc in metagenome) 20221215
     if(rm.outliers & !H2O) {
       iout.Nasal <- dat$Body.site=="Nasal cavity" & metric_MG > -0.12
       iout.UG <- dat$Body.site=="UG tract" & metric_MG > -0.14
@@ -897,9 +897,9 @@ MG16S <- function(which, plot.lines = TRUE, lowest.level = NULL, lineage = NULL,
     dat <- AWDM15[AWDM15$Name == "Guts", ]
     stopifnot(all(met$Run == paste0("mgm", dat$Amplicon)))
     stopifnot(all(aa$protein == paste0("mgm", dat$Metagenome)))
-    # Get ZC values
-    if(H2O) metric_16S <- met$nH2O else metric_16S <- met$ZC
-    if(H2O) metric_MG <- H2OAA(aa) else metric_MG <- ZCAA(aa)
+    # Get Zc values
+    if(H2O) metric_16S <- met$nH2O else metric_16S <- met$Zc
+    if(H2O) metric_MG <- nH2O(aa) else metric_MG <- Zc(aa)
     points(metric_MG, metric_16S, pch = 21, bg = c2, col = c1, cex = cex)
     # Get sample name and ID for Supplemental Table 20220125
     Sample <- dat$Sample.name
@@ -921,9 +921,9 @@ MG16S <- function(which, plot.lines = TRUE, lowest.level = NULL, lineage = NULL,
     # Make sure the 16S and metagenomes are paired correctly
     stopifnot(all(met$Run == paste0("mgm", dat$Amplicon)))
     stopifnot(all(aa$protein == paste0("mgm", dat$Metagenome)))
-    # Get ZC values
-    if(H2O) metric_16S <- met$nH2O else metric_16S <- met$ZC
-    if(H2O) metric_MG <- H2OAA(aa) else metric_MG <- ZCAA(aa)
+    # Get Zc values
+    if(H2O) metric_16S <- met$nH2O else metric_16S <- met$Zc
+    if(H2O) metric_MG <- nH2O(aa) else metric_MG <- Zc(aa)
     points(metric_MG, metric_16S, pch = 21, bg = c4, col = c1, cex = cex)
     # Get sample name and ID for Supplemental Table 20220125
     Sample <- dat$Sample.name
@@ -935,7 +935,7 @@ MG16S <- function(which, plot.lines = TRUE, lowest.level = NULL, lineage = NULL,
 
 }
 
-# Comparison of protein ZC from metagenomic or metatranscriptomic data with estimates from 16S and reference sequences 20211017
+# Comparison of protein Zc from metagenomic or metatranscriptomic data with estimates from 16S and reference sequences 20211017
 # Add Marcellus, HMP, and Soils and Guts 20211218
 geo16S5 <- function(pdf = FALSE) {
 
@@ -1033,7 +1033,7 @@ geo16S5 <- function(pdf = FALSE) {
   title("Manus Basin Vents and Black Sea", font.main = 1, cex.main = 1.1)
   label.figure("C", cex = 1.5, font = 2, xfrac = 0.04, yfrac = 0.96)
 
-  ### Panels D-E: Plot ZC of 16S vs metagenomes for datasets used in Tax4Fun/PICRUSt papers 20211215
+  ### Panels D-E: Plot Zc of 16S vs metagenomes for datasets used in Tax4Fun/PICRUSt papers 20211215
 
   # Start plot D
   xlab <- quote(italic(Z)[C]~"from shotgun metagenome")
@@ -1063,8 +1063,8 @@ geo16S5 <- function(pdf = FALSE) {
     sample = unlist(lapply(out, "[[", "Sample")),
     ID_MG = unlist(lapply(out, "[[", "Metagenome")),
     ID_16S = unlist(lapply(out, "[[", "Amplicon")),
-    ZC_MG = round(unlist(lapply(out, "[[", "metric_MG")), 6),
-    ZC_16S = round(unlist(lapply(out, "[[", "metric_16S")), 6)
+    Zc_MG = round(unlist(lapply(out, "[[", "metric_MG")), 6),
+    Zc_16S = round(unlist(lapply(out, "[[", "metric_16S")), 6)
   )
   invisible(out)
 
@@ -1087,7 +1087,7 @@ geo16S_S1 <- function(pdf = FALSE) {
   text(1, 4, "6. Calculate mean AA[order] from all AA[species] in each order", adj = 0)
   text(1, 3, "7. Calculate mean AA[class] from all AA[species] in each class", adj = 0)
   text(1, 2, "8. Calculate mean AA[phylum] from all AA[species] in each phylum", adj = 0)
-#  text(1, 1, "9. Calculate and record ZC and nH2O for all taxonomic groups at each level", adj = 0)
+#  text(1, 1, "9. Calculate and record Zc and nH2O for all taxonomic groups at each level", adj = 0)
 
   text(3.35, 10, "(Data Source)", adj = c(0, 1), font = 2)
   text(3.35, 9, "(NCBI taxonomy files)", adj = 0, font = 2)
@@ -1115,14 +1115,14 @@ geo16S_S1 <- function(pdf = FALSE) {
   text(6.5, 6, "4. Mapping step 2: Automatic text match between RDP and NCBI names", adj = 0)
   text(6.5, 5, "5. Multiply classification counts by reference proteomes", adj = 0)
   text(6.5, 4, "6. Divide by number of classifications to get estimated community proteome (AA[community])", adj = 0)
-  text(6.5, 3, "7. Use AA[community] to calculate ZC and nH2O (see Dick et al., 2020)", adj = 0)
+  text(6.5, 3, "7. Use AA[community] to calculate Zc and nH2O (see Dick et al., 2020)", adj = 0)
   text(6.5, 2, "8. Visualize data", adj = 0)
 
   if(pdf) dev.off()
 
 }
 
-# Scatterplots of ZC and nH2O for genera vs higher taxonomic levels 20211130
+# Scatterplots of Zc and nH2O for genera vs higher taxonomic levels 20211130
 geo16S_S2 <- function(pdf = FALSE) {
   if(pdf) pdf("geo16S_S2.pdf", width = 12, height = 6)
 
@@ -1139,9 +1139,9 @@ geo16S_S2 <- function(pdf = FALSE) {
   gfocp <- apply(names[, c("genus", "family", "order", "class", "phylum")], 1, paste, collapse = " ")
   names <- names[!duplicated(gfocp), ]
 
-  # Initialize list of ZC and nH2O values for taxa in each rank
+  # Initialize list of Zc and nH2O values for taxa in each rank
   NAvec <- rep(NA, nrow(names))
-  nH2O <- ZC <- list(genus = NAvec, family = NAvec, order = NAvec, class = NAvec, phylum = NAvec, superkingdom = NAvec)
+  nH2O <- Zc <- list(genus = NAvec, family = NAvec, order = NAvec, class = NAvec, phylum = NAvec, superkingdom = NAvec)
 
   for(rank in c("genus", "family", "order", "class", "phylum", "superkingdom")) {
     icol <- match(rank, colnames(names))
@@ -1153,37 +1153,37 @@ geo16S_S2 <- function(pdf = FALSE) {
     imetrics <- match(names[, icol][isrank], thismet$group)
     # Make sure all taxa are in this rank
     stopifnot(all(na.omit(unique(thismet$rank[imetrics])) %in% rank))
-    # Store ZC and nH2O values
-    ZC[[rank]][isrank] <- thismet$ZC[imetrics]
-    names(ZC[[rank]])[isrank] <- names[, icol][isrank]
+    # Store Zc and nH2O values
+    Zc[[rank]][isrank] <- thismet$Zc[imetrics]
+    names(Zc[[rank]])[isrank] <- names[, icol][isrank]
     nH2O[[rank]][isrank] <- thismet$nH2O[imetrics]
     names(nH2O[[rank]])[isrank] <- names[, icol][isrank]
   }
 
 #  # Print number of genera
-#  ngenus <- length(names(ZC[["genus"]]))
+#  ngenus <- length(names(Zc[["genus"]]))
 #  print(paste("There are", ngenus, "genera"))
 
   # Make plots
   par(mfrow = c(2, 5))
   par(mgp = c(2.9, 1, 0))
   # Identify superkingdoms
-  iArc <- names(ZC[["superkingdom"]]) == "Archaea"
-  iBac <- names(ZC[["superkingdom"]]) == "Bacteria"
+  iArc <- names(Zc[["superkingdom"]]) == "Archaea"
+  iBac <- names(Zc[["superkingdom"]]) == "Bacteria"
 
   cex <- 2
   cex.an <- 1
-  # Outer loop: ZC or nH2O
-  for(metric in c("ZC", "nH2O")) {
+  # Outer loop: Zc or nH2O
+  for(metric in c("Zc", "nH2O")) {
     
     # Inner loop: higher-level ranks
     ranks <- c("family", "order", "class", "phylum", "superkingdom")
     for(rank in ranks) {
-      if(metric == "ZC") { x <- ZC[["genus"]]; y <- ZC[[rank]] }
+      if(metric == "Zc") { x <- Zc[["genus"]]; y <- Zc[[rank]] }
       if(metric == "nH2O") { x <- nH2O[["genus"]]; y <- nH2O[[rank]] }
       xylim <- range(na.omit(x))
       # Start plot and add 1:1 line
-      if(metric == "ZC") plot(xylim, xylim, type = "n", xlab = quote("genus"~italic(Z)[C]), ylab = bquote(.(rank)~italic(Z)[C]))
+      if(metric == "Zc") plot(xylim, xylim, type = "n", xlab = quote("genus"~italic(Z)[C]), ylab = bquote(.(rank)~italic(Z)[C]))
       if(metric == "nH2O") plot(xylim, xylim, type = "n", xlab = quote("genus"~italic(n)[H[2]*O]), ylab = bquote(.(rank)~italic(n)[H[2]*O]))
       lines(xylim, xylim, lty = 2, col = "gray40")
       # Add points: Bacteria then Archaea
@@ -1199,11 +1199,11 @@ geo16S_S2 <- function(pdf = FALSE) {
       Slope <- coef(thislm)["x"]
       Slopetxt <- paste("slope =", formatC(Slope, digits = 3, format = "f"))
       legend("bottomright", legend = Slopetxt, bty = "n")
-      if(metric == "ZC") {
+      if(metric == "Zc") {
         # Add title with number of taxa at this rank
         plural <- switch(rank, "genus" = "genera", "family" = "families", "order" = "orders",
           "class" = "classes", "phylum" = "phyla", "superkingdom" = "superkingdoms")
-        ntaxa <- length(unique(names(ZC[[rank]])))
+        ntaxa <- length(unique(names(Zc[[rank]])))
         title(paste(ntaxa, plural), font.main = 1)
       }
     }
@@ -1213,7 +1213,7 @@ geo16S_S2 <- function(pdf = FALSE) {
 
 }
 
-# nH2O-ZC plots for major phyla and their genera 20220114
+# nH2O-Zc plots for major phyla and their genera 20220114
 geo16S_S3 <- function(pdf = FALSE) {
 
   if(pdf) pdf("geo16S_S3.pdf", width = 13, height = 11)
@@ -1240,7 +1240,7 @@ geo16S_S3 <- function(pdf = FALSE) {
     if(length(genera) < 50) lwd <- 2 else lwd <- 1
     if(length(genera) < 50) alpha <- "a0" else alpha <- "50"
     newcol <- addalpha(col, alpha)
-    for(i in igenera) lines(c(metrics$ZC[iphylum], metrics$ZC[i]), c(metrics$nH2O[iphylum], metrics$nH2O[i]), col = newcol, lwd = lwd)
+    for(i in igenera) lines(c(metrics$Zc[iphylum], metrics$Zc[i]), c(metrics$nH2O[iphylum], metrics$nH2O[i]), col = newcol, lwd = lwd)
     lwd
   }
 
@@ -1252,13 +1252,13 @@ geo16S_S3 <- function(pdf = FALSE) {
   phyla[14:15, ] <- phyla[15:14, ]
 
   # Plot first 8 phyla
-  plot(xlim, ylim, xlab = canprot::cplab$ZC, ylab = canprot::cplab$nH2O, type = "n", xaxs = "i", yaxs = "i")
+  plot(xlim, ylim, xlab = canprot::cplab$Zc, ylab = canprot::cplab$nH2O, type = "n", xaxs = "i", yaxs = "i")
   lwd <- lapply(1:8, function(i) {plotit(phyla$group[i], col = i)} )
   legend("topright", phyla$group[1:8], col = 1:8, lwd = lwd, cex = 0.8, bg = "white")
   label.figure("A", font = 2, cex = 1.5, xfrac = 0.03)
 
   # Plot second 8 phyla
-  plot(xlim, ylim, xlab = canprot::cplab$ZC, ylab = canprot::cplab$nH2O, type = "n", xaxs = "i", yaxs = "i")
+  plot(xlim, ylim, xlab = canprot::cplab$Zc, ylab = canprot::cplab$nH2O, type = "n", xaxs = "i", yaxs = "i")
   lwd <- lapply(9:16, function(i) {plotit(phyla$group[i], col = i)} )
   legend("topright", phyla$group[9:16], col = 1:8, lwd = lwd, cex = 0.8, bg = "white")
   label.figure("B", font = 2, cex = 1.5, xfrac = 0.03)
@@ -1267,7 +1267,7 @@ geo16S_S3 <- function(pdf = FALSE) {
   phyla <- metrics[metrics$rank == "phylum" & metrics$parent != "Viruses", ]
   phyla <- phyla[phyla$ntaxa >= 18 & phyla$ntaxa <= 60, ]
   phyla <- phyla[order(phyla$ntaxa, decreasing = TRUE), ]
-  plot(xlim, ylim, xlab = canprot::cplab$ZC, ylab = canprot::cplab$nH2O, type = "n", xaxs = "i", yaxs = "i")
+  plot(xlim, ylim, xlab = canprot::cplab$Zc, ylab = canprot::cplab$nH2O, type = "n", xaxs = "i", yaxs = "i")
   lwd <- lapply(1:8, function(i) {plotit(phyla$group[i], col = i)} )
   legend <- phyla$group[1:8]
   legend <- gsub("Candidatus Thermoplasmatota", "Candidatus", legend)
@@ -1342,7 +1342,7 @@ geo16S_S4 <- function(pdf = FALSE) {
 
 }
 
-# Correlations between ZC estimated from MG and 16S 20220112
+# Correlations between Zc estimated from MG and 16S 20220112
 geo16S_S5 <- function(pdf = FALSE, H2O = FALSE) {
 
   if(pdf) pdf("geo16S_S5.pdf", width = 10, height = 6)
@@ -1413,7 +1413,7 @@ geo16S_S5 <- function(pdf = FALSE, H2O = FALSE) {
 
 }
 
-# Correlation of ZC with GC content of metagenomic and 16S amplicon reads 20220126
+# Correlation of Zc with GC content of metagenomic and 16S amplicon reads 20220126
 geo16S_S6 <- function(pdf = FALSE) {
 
   if(pdf) pdf("geo16S_S6.pdf", width = 8, height = 7)
@@ -1465,9 +1465,9 @@ geo16S_S6 <- function(pdf = FALSE) {
         aa <- aa[!ilow, ]
         dat <- dat[!ilow, ]
       }
-      # Get ZC
-      ZC_16S <- met$ZC
-      ZC_MG <- ZCAA(aa)
+      # Get Zc
+      Zc_16S <- met$Zc
+      Zc_MG <- Zc(aa)
       # Get GC
       GC_16S <- dat$GC_16S
       GC_MG <- dat$GC_MG
@@ -1481,7 +1481,7 @@ geo16S_S6 <- function(pdf = FALSE) {
     if(name == "Marcellus") {
       ## Marcellus metagenomes (Daly et al., 2016) 20211218
       aa <- read.csv(file.path(ARASTdir, "Marcellus_Shale_AA.csv"))
-      ZC_MG <- ZCAA(aa)
+      Zc_MG <- Zc(aa)
       # Marcellus 16S (Cluff et al., 2014)
       metrics <- getmetrics_geo16S("CHM+14", lowest.level = lowest.level, lineage = lineage)
       mdat <- getmdat_geo16S("CHM+14", metrics)
@@ -1500,7 +1500,7 @@ geo16S_S6 <- function(pdf = FALSE) {
       # Get 16S runs corresponding to metagenomes
       idat <- match(Amplicon, dat_16S$Run)
       dat_16S <- dat_16S[idat, ]
-      ZC_16S <- dat_16S$ZC
+      Zc_16S <- dat_16S$Zc
       # Assign colors: open circle for injected fluid, gray for flowback, red for produced
       metadata <- metadata[idat, ]
       col <- rep(4, nrow(metadata))
@@ -1524,18 +1524,18 @@ geo16S_S6 <- function(pdf = FALSE) {
       R2txt
     }
 
-    ## Plot A: ZC MG vs GC MG
-    plot(range(GC_MG), range(ZC_MG, na.rm = TRUE), xlab = "%GC content - metagenome", ylab = quote("Protein"~italic(Z)[C]~"- metagenome"), type = "n")
-    points(GC_MG, ZC_MG, pch = pch, bg = col, col = c1)
-    R2txt <- lmfun(GC_MG, ZC_MG)
+    ## Plot A: Zc MG vs GC MG
+    plot(range(GC_MG), range(Zc_MG, na.rm = TRUE), xlab = "%GC content - metagenome", ylab = quote("Protein"~italic(Z)[C]~"- metagenome"), type = "n")
+    points(GC_MG, Zc_MG, pch = pch, bg = col, col = c1)
+    R2txt <- lmfun(GC_MG, Zc_MG)
     legend(legend.x, legend = R2txt, bty = "n")
 
     if(name == "Marcellus") legend("bottomright", c("Injected", "Flowback", "Produced"), pch = 23, pt.bg = c(4, 8, 2))
 
-    ## Plot B: ZC 16S vs GC 16S
-    plot(range(GC_16S), range(ZC_16S, na.rm = TRUE), xlab = "%GC content - 16S amplicon", ylab = quote("Protein"~italic(Z)[C]~"- 16S amplicon"), type = "n")
-    points(GC_16S, ZC_16S, pch = pch, bg = col, col = c1)
-    R2txt <- lmfun(GC_16S, ZC_16S)
+    ## Plot B: Zc 16S vs GC 16S
+    plot(range(GC_16S), range(Zc_16S, na.rm = TRUE), xlab = "%GC content - 16S amplicon", ylab = quote("Protein"~italic(Z)[C]~"- 16S amplicon"), type = "n")
+    points(GC_16S, Zc_16S, pch = pch, bg = col, col = c1)
+    R2txt <- lmfun(GC_16S, Zc_16S)
     legend(legend.x, legend = R2txt, bty = "n")
 
     if(name == "HMP") legend("topleft", c("Skin", "Nasal cavity", "Oral cavity", "GI tract", "UG tract"), pch = c(24, 25, 21, 24, 25), pt.bg = c(c5, c4, c8, c2, c6), col = c1)
@@ -1808,7 +1808,7 @@ getmdat_geo16S <- function(study, metrics = NULL, dropNA = TRUE) {
     # Insert sample column in metrics
     # Use first column name starting with "sample" or "Sample" 20210818
     sampcol <- grep("^sample", colnames(metadata), ignore.case = TRUE)[1]
-    metrics <- data.frame(Run = metrics$Run, sample = metadata[, sampcol], nH2O = metrics$nH2O, ZC = metrics$ZC)
+    metrics <- data.frame(Run = metrics$Run, sample = metadata[, sampcol], nH2O = metrics$nH2O, Zc = metrics$Zc)
     list(metadata = metadata, metrics = metrics)
   }
 }

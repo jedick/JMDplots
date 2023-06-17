@@ -34,7 +34,7 @@ datasets <- pdat_hypoxia(2017)
 ```
 
 ```{r comptab, message=FALSE, results = "hide"}
-pdat <- lapply(datasets, pdat_hypoxia, basis = "QEC")
+pdat <- lapply(datasets, pdat_hypoxia)
 comptab <- lapply(pdat, get_comptab, plot.it = FALSE, mfun = "mean", oldstyle = TRUE)
 ```
 

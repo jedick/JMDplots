@@ -58,7 +58,7 @@ options(width = 80)
 logfO2 <- "log<i>f</i><sub>O<sub>2</sub></sub>"
 logaH2O <- "log<i>a</i><sub>H<sub>2</sub>O</sub>"
 nH2O <- "<i>n</i><sub>H<sub>2</sub>O</sub>"
-ZC <- "<i>Z</i><sub>C</sub>"
+Zc <- "<i>Z</i><sub>C</sub>"
 ```
 
 This vignette runs the code to make the plots from the following paper first published by Springer Nature:
@@ -91,7 +91,7 @@ evdevH2O2(boot.R = 99)
 
 **Data sources:** Phylostrata are from @TPPG17. Consensus gene ages are from @LMM16.
 
-## Evolution of protein `r ZC` in eukaryotic lineages (Figure 3)
+## Evolution of protein `r Zc` in eukaryotic lineages (Figure 3)
 ```{r evdevH2O3, message = FALSE, results = "hide", out.width='100%', fig.width = 10, fig.height = 6, out.extra='class="full-width"', pngquant = pngquant, dpi = 100}
 evdevH2O3()
 ```
@@ -132,7 +132,7 @@ evdevH2O8(boot.R = 99)
 **Data sources:**
 **a** Whole-organism water content is from @CR66.
 **b** Stoichiometric hydration state of proteins is calculated in this study using proteomic data from @CBS+17.
-**d** `r ZC` and `r nH2O` of differentially expressed proteins in embryos and adult flies is calculated in this study using proteomic data from @FKL+19.
+**d** `r Zc` and `r nH2O` of differentially expressed proteins in embryos and adult flies is calculated in this study using proteomic data from @FKL+19.
 
 
 ## Specific values mentioned in the text
@@ -149,16 +149,16 @@ message("Unmapped genes in each phylostratum:")
 table(dat$Phylostrata[is.na(dat$Entry)])
 ```
 
-### Calculating `r ZC` of chicken egg-white lysozyme from the chemical formula
-```{r LYSC_ZC_formula}
+### Calculating `r Zc` of chicken egg-white lysozyme from the chemical formula
+```{r LYSC_Zc_formula}
 (pf <- protein.formula("LYSC_CHICK"))
 CHNOSZ::ZC(pf)
 ```
 
-### Calculating `r ZC` of lysozyme from the amino acid composition
-```{r LYSC_ZC_aa}
+### Calculating `r Zc` of lysozyme from the amino acid composition
+```{r LYSC_Zc_aa}
 (aa <- pinfo(pinfo("LYSC_CHICK")))
-canprot::ZCAA(aa)
+canprot::Zc(aa)
 ```
 
 ### Per-residue chemical formula, formation reaction, equilibrium constant, and activity product

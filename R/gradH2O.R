@@ -681,13 +681,13 @@ gradH2O7 <- function(pdf = FALSE) {
   label.figure("(b)", cex = 1.8)
   mtext("NaCl or organic solutes", line = 1)
 
-  # Plot C: transcriptomes nH2O-ZC
+  # Plot C: transcriptomes nH2O-Zc
   # Add the p-values to the axis labels
-  p.ZC <- formatC(t.test(osmotic_gene$ZC.down, osmotic_gene$ZC.up, paired = TRUE)$p.value, 3, format = "f")
+  p.Zc <- formatC(t.test(osmotic_gene$Zc.down, osmotic_gene$Zc.up, paired = TRUE)$p.value, 3, format = "f")
   p.nH2O <- formatC(t.test(osmotic_gene$nH2O.down, osmotic_gene$nH2O.up, paired = TRUE)$p.value, 3, format = "f")
-  labtext <- c(bquote(italic(p)==.(p.ZC)), bquote(italic(p)==.(p.nH2O)))
+  labtext <- c(bquote(italic(p)==.(p.Zc)), bquote(italic(p)==.(p.nH2O)))
   diffplot(osmotic_gene, pt.text = NA, contour = FALSE, labtext = labtext, cex = 1.2)
-  points(mean(osmotic_gene$ZC.diff), mean(osmotic_gene$nH2O.diff), pch = 19, cex = 1.7)
+  points(mean(osmotic_gene$Zc.diff), mean(osmotic_gene$nH2O.diff), pch = 19, cex = 1.7)
   legend("topleft", c("non-halophiles", "mean"), pch = c(1, 19), bty = "n")
   label.figure("(c)", cex = 1.8, yfrac = 0.85)
 
@@ -708,12 +708,12 @@ gradH2O7 <- function(pdf = FALSE) {
   pch <- c(rep(0, nrow(osmotic_bact)), rep(2, nrow(osmotic_halo)))
   col <- c(rep(4, nrow(osmotic_bact)), rep(2, nrow(osmotic_halo)))
 
-  # Plot E: proteomes nH2O-ZC
-  p.ZC <- formatC(t.test(alldat$ZC.down, alldat$ZC.up, paired = TRUE)$p.value, 3, format = "f")
+  # Plot E: proteomes nH2O-Zc
+  p.Zc <- formatC(t.test(alldat$Zc.down, alldat$Zc.up, paired = TRUE)$p.value, 3, format = "f")
   p.nH2O <- formatC(t.test(alldat$nH2O.down, alldat$nH2O.up, paired = TRUE)$p.value, 3, format = "f")
-  labtext <- c(bquote(italic(p)==.(p.ZC)), bquote(italic(p)==bold(.(p.nH2O))))
+  labtext <- c(bquote(italic(p)==.(p.Zc)), bquote(italic(p)==bold(.(p.nH2O))))
   diffplot(alldat, pt.text = NA, contour = FALSE, labtext = labtext, cex = 1.2, pch = pch, col = col)
-  points(mean(alldat$ZC.diff), mean(alldat$nH2O.diff), pch = 19, cex = 1.7)
+  points(mean(alldat$Zc.diff), mean(alldat$nH2O.diff), pch = 19, cex = 1.7)
   label.figure("(e)", cex = 1.8, yfrac = 0.85)
 
   # Plot F: proteomes GRAVY-pI
@@ -752,10 +752,10 @@ NifProteomes <- function() {
     # Get the amino acid compositions of all genomes with this Nif type
     AAcomp <- AA[iAA, ]
     # Calculate ZC and nH2O
-    ZC <- ZCAA(AAcomp)
+    ZC <- Zc(AAcomp)
     ZC.mean <- c(ZC.mean, mean(ZC))
     ZC.sd <- c(ZC.sd, sd(ZC))
-    H2O <- H2OAA(AAcomp)
+    H2O <- nH2O(AAcomp)
     nH2O.mean <- c(nH2O.mean, mean(H2O))
     nH2O.sd <- c(nH2O.sd, sd(H2O))
     GRAVY <- GRAVY(AAcomp)

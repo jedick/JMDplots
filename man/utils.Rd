@@ -13,7 +13,7 @@
 \usage{
   addexif(name, title, paperref)
   addalpha(col, alpha)
-  cldfun(ZClist, bp, dy)
+  cldfun(Zclist, bp, dy)
   hyphen.in.pdf(x)
 }
 
@@ -23,7 +23,7 @@
   \item{paperref}{character, reference (added to Subject in PDF metadata)}
   \item{col}{color specification (see \code{\link{col2rgb}})}
   \item{alpha}{character, hexadecimal value of alpha}
-  \item{ZClist}{list, values of \ZC}
+  \item{Zclist}{list, values of \Zc}
   \item{bp}{output of \code{\link{boxplot}}}
   \item{dy}{numeric, how far above box to plot letters}
   \item{x}{character, any text object}
@@ -37,7 +37,7 @@ If \samp{exiftool} is not available, this function does nothing.
 \code{addalpha} adds transparency to a color by appending the value of \code{alpha} to the hexadecimal representation of the color given in \code{col}.
 
 \code{cldfun} adds significant difference letters to a boxplot.
-\code{ZClist} should have the values of \ZC with names for each group.
+\code{Zclist} should have the values of \Zc with names for each group.
 
 If a PDF device is active, \code{hyphen.in.pdf} replaces all instances of ASCII hyphen (\verb{-}) in \code{x} with the Unicode hyphen (\verb{\uad}).
 This is done so that hyphens don't get displayed as minus signs in R graphics output, but it only works for the PDF device.

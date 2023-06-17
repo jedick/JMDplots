@@ -1,4 +1,4 @@
-study,envirotype,lineage,sample,Run,groupby,group,T,pH,O2_umol_L,Eh,Eh7,ZC
+study,envirotype,lineage,sample,Run,groupby,group,T,pH,O2_umol_L,Eh,Eh7,Zc
 MLL+18,River & Seawater,Bacteria,HEM1,SRR3476633,Season,Summer,31.2,8.16,188.13,43.72,113.77,-0.143946
 MLL+18,River & Seawater,Bacteria,HEM2,SRR3476634,Season,Summer,31.2,8.16,188.13,43.72,113.77,-0.144283
 MLL+18,River & Seawater,Bacteria,HEM3,SRR3476635,Season,Summer,31.2,8.16,188.13,43.72,113.77,-0.152933

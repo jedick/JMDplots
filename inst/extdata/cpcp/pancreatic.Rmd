@@ -34,7 +34,7 @@ datasets <- pdat_pancreatic(2017)
 ```
 
 ```{r comptab, message=FALSE, results = "hide"}
-pdat <- lapply(datasets, pdat_pancreatic, basis = "QEC")
+pdat <- lapply(datasets, pdat_pancreatic)
 comptab <- lapply(pdat, get_comptab, plot.it = FALSE, mfun = "mean", oldstyle = TRUE)
 ```
 

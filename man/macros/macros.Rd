@@ -35,3 +35,5 @@
 \newcommand{\S}{\ifelse{latex}{\eqn{^{#1}}}{\ifelse{html}{\out{<sup>#1</sup>}}{^#1}}}
 % To get mu in LaTeX 20220621
 \newcommand{\umol}{\ifelse{latex}{\eqn{\mu}mol}{\ifelse{html}{\out{&mu;mol}}{μmol}}}
+% For more recent papers (canprot::ZCAA() renamed to canprot::Zc()) 20230617
+\newcommand{\Zc}{\ifelse{latex}{\eqn{Z_\mathrm{C}}}{\ifelse{html}{\out{<I>Z</I><sub>C</sub>}}{Zc}}}

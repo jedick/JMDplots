@@ -42,9 +42,9 @@ canH2O1 <- function(pdf = FALSE) {
   textplain(pos[p1, ] + c(0, 0.12), lab = "Literature Search", font = 2)
   textrect(pos[p2, ], r2, ry, lab = c("UniProt IDs", "Up   Down", "...      ...   "), cex = cex, box.col = cols[2])
   textplain(pos[p2, ] + c(0, 0.12), lab = c("Differential", "Expression"), font = 2, height = 0.04)
-  ZCtext <- quote(italic(Z)[C]~"oxidation state")
+  Zctext <- quote(italic(Z)[C]~"oxidation state")
   nH2Otext <- quote(italic(n)[H[2]*O]~"hydration state")
-  comptext <- as.expression(c(ZCtext, nH2Otext))
+  comptext <- as.expression(c(Zctext, nH2Otext))
   textrect(pos[p3, ], r3, ry, lab = comptext, cex = cex, box.col = cols[2])
   textplain(pos[p3, ] + c(0, 0.12), lab = c("Compositional", "Analysis"), font = 2, height = 0.04)
 
@@ -144,8 +144,8 @@ canH2O1 <- function(pdf = FALSE) {
   mtext("oxidation state", 1, 0.5)
   mtext("hydration state", 2, 0.5)
   # draw arrows to mean values, muliplied by a constant to scale to (-1, 1) axis range
-  for(i in 5:1) arrows(0, 0, 40*mean(culture[[i]]$ZC.diff), 40*mean(culture[[i]]$nH2O.diff), col = col1[i], lwd = 3, length = 0.15)
-  for(i in 1:6) arrows(0, 0, 40*mean(cancer[[i]]$ZC.diff), 40*mean(cancer[[i]]$nH2O.diff), col = col2[i], lwd = 3, length = 0.15)
+  for(i in 5:1) arrows(0, 0, 40*mean(culture[[i]]$Zc.diff), 40*mean(culture[[i]]$nH2O.diff), col = col1[i], lwd = 3, length = 0.15)
+  for(i in 1:6) arrows(0, 0, 40*mean(cancer[[i]]$Zc.diff), 40*mean(cancer[[i]]$nH2O.diff), col = col2[i], lwd = 3, length = 0.15)
 
   # restore these defaults to be able to re-run this script with expected results
   par(xaxs = "r", yaxs = "r")
@@ -155,7 +155,7 @@ canH2O1 <- function(pdf = FALSE) {
   }
 }
 
-# median differences of nH2O and ZC for cell culture and cancer tissue 20191126
+# median differences of nH2O and Zc for cell culture and cancer tissue 20191126
 canH2O2 <- function(pdf = FALSE) {
   if(pdf) pdf("canH2O2.pdf", width = 8, height = 6)
   # layout with spaces between groups of plots
@@ -196,7 +196,7 @@ canH2O2 <- function(pdf = FALSE) {
   col2 <- c("#E377C2", "#8C564B", "#FF7F0E", "#7F7F7F", "#9467BD", "#D62728")
   col <- c(col1, col2)
 
-  # make scatter plots for nH2O and ZC in cell culture and cancer types
+  # make scatter plots for nH2O and Zc in cell culture and cancer types
   lapply(1:length(alldat), function(i) {
     thisone <- names(alldat)[i]
     if(thisone %in% cond1) {
@@ -250,11 +250,11 @@ canH2O2 <- function(pdf = FALSE) {
 
   if(pdf) {
     dev.off()
-    addexif("canH2O2", "Median differences of protein length, nH2O and ZC for cell culture and cancer tissue", "Dick (2021)")
+    addexif("canH2O2", "Median differences of protein length, nH2O and Zc for cell culture and cancer tissue", "Dick (2021)")
   }
 }
 
-# nH2O-ZC plots for TCGA and HPA datasets 20191126
+# nH2O-Zc plots for TCGA and HPA datasets 20191126
 canH2O3 <- function(pdf = FALSE) {
   vigout2 <- system.file("vignettes", package = "JMDplots")
   HPA <- read.csv(file.path(vigout2, paste0("HPA_", getOption("basis"), ".csv")), as.is = TRUE)
@@ -308,18 +308,18 @@ canH2O3 <- function(pdf = FALSE) {
     list(levels = levels, dat = dat)
   }
 
-  TCGAstuff <- densfun(TCGA$ZC.diff, TCGA$nH2O.diff)
+  TCGAstuff <- densfun(TCGA$Zc.diff, TCGA$nH2O.diff)
   TCGAdens <- TCGAstuff$dat
   TCGAlevels <- TCGAstuff$levels
-  HPAstuff <- densfun(HPA$ZC.diff, HPA$nH2O.diff)
+  HPAstuff <- densfun(HPA$Zc.diff, HPA$nH2O.diff)
   HPAdens <- HPAstuff$dat
   HPAlevels <- HPAstuff$levels
 
-  # median differences of nH2O-ZC for HPA and TCGA datasets
+  # median differences of nH2O-Zc for HPA and TCGA datasets
   # common elements for both plots
   pl1.common <- list(
     theme_bw(),
-    xlab(canprot::cplab$DZC),
+    xlab(canprot::cplab$DZc),
     ylab(canprot::cplab$DnH2O),
     geom_hline(yintercept = 0, linetype = 3, colour = "gray30"),
     geom_vline(xintercept = 0, linetype = 3, colour = "gray30"),
@@ -327,15 +327,15 @@ canH2O3 <- function(pdf = FALSE) {
   )
   # create plots
   nudge_x <- ifelse(TCGA_labels %in% c("SKCM"), 0.001, 0)
-  # workaround for "no visible binding for global variable ‘ZC.diff’" etc. in R CMD check 20200317
-  ZC.diff <- nH2O.diff <- x <- y <- z <- NULL
+  # workaround for "no visible binding for global variable ‘Zc.diff’" etc. in R CMD check 20200317
+  Zc.diff <- nH2O.diff <- x <- y <- z <- NULL
   pl1 <- list(
-    ggplot(TCGA, aes(ZC.diff, nH2O.diff, label = TCGA_labels)) + 
+    ggplot(TCGA, aes(Zc.diff, nH2O.diff, label = TCGA_labels)) + 
       pl1.common + geom_point(color = colTCGA, size = 1.5, shape = shapeTCGA, stroke = 1.5) + 
       geom_contour(data = TCGAdens, aes(x, y, z = z), breaks = TCGAlevels, inherit.aes = FALSE, color = "slateblue4", lty = 2) +
       ggrepel::geom_text_repel(size = 2.5, nudge_x = nudge_x, seed = 42, box.padding = 0.12, point.padding = 0.1) +
       ggtitle("TCGA / GTEx") + labs(tag = expression(bold(A))),
-    ggplot(HPA, aes(ZC.diff, nH2O.diff, label = HPA_labels)) + 
+    ggplot(HPA, aes(Zc.diff, nH2O.diff, label = HPA_labels)) + 
       pl1.common + geom_point(color = colHPA, size = 1.5, shape = shapeHPA, stroke = 1.5) + 
       geom_contour(data = HPAdens, aes(x, y, z = z), breaks = HPAlevels, inherit.aes = FALSE, color = "darkslategray4", lty = 2) +
       ggrepel::geom_text_repel(size = 3, seed = 42) +
@@ -347,7 +347,7 @@ canH2O3 <- function(pdf = FALSE) {
   ml <- gridExtra::marrangeGrob(pl1, layout_matrix = mat, top = NULL)
   if(pdf) {
     ggsave("canH2O3.pdf", ml, width = 10, height = 4)
-    addexif("canH2O3", "nH2O-ZC and plots for TCGA and HPA datasets", "Dick (2021)")
+    addexif("canH2O3", "nH2O-Zc and plots for TCGA and HPA datasets", "Dick (2021)")
   } else ml
 }
 
@@ -363,7 +363,7 @@ canH2O4 <- function(pdf = FALSE) {
   dntxt <- paste("Proteins coded by", sum(!pdat$up2), "down-regulated genes")
   legend("center", c(dntxt, uptxt, ""), lty = c(1, 2, NA), col = c(1, 2, NA), bty = "n")
   par(mar = c(3.5, 3.5, 0.5, 0.5))
-  qdist(pdat, "ZC")
+  qdist(pdat, "Zc")
   label.figure("A", xfrac = 0.04, yfrac = 1, font = 2, cex = 1.5)
   qdist(pdat, "nH2O")
   label.figure("B", xfrac = 0.04, yfrac = 1, font = 2, cex = 1.5)
@@ -372,12 +372,12 @@ canH2O4 <- function(pdf = FALSE) {
   yeast_stress <- read.csv(file.path(vigout2, paste0("yeast_stress_", getOption("basis"), ".csv")), as.is = TRUE)
   ihyper <- grepl("sorbitol", yeast_stress$dataset)
   ihypo <- grepl("Hypo", yeast_stress$dataset)
-  # plot ZC
-  plot(c(1, 7), extendrange(yeast_stress$ZC.diff), xlab = "Time (minutes)", ylab = cplab$DZC, xaxt = "n", type = "n")
+  # plot Zc
+  plot(c(1, 7), extendrange(yeast_stress$Zc.diff), xlab = "Time (minutes)", ylab = cplab$DZc, xaxt = "n", type = "n")
   abline(h = 0, lty = 3, col = "gray30")
   axis(1, at = 1:7, labels = c(5, 15, 30, 45, 60, 90, 120))
-  lines(1:7, yeast_stress$ZC.diff[ihyper], pch = 1, type = "b")
-  lines(1:5, yeast_stress$ZC.diff[ihypo], pch = 0, type = "b")
+  lines(1:7, yeast_stress$Zc.diff[ihyper], pch = 1, type = "b")
+  lines(1:5, yeast_stress$Zc.diff[ihypo], pch = 0, type = "b")
   text(c(2.5, 2.7), c(-0.006, 0.0135), c("hyperosmotic", "hypoosmotic"))
   label.figure("C", xfrac = 0.04, yfrac = 1, font = 2, cex = 1.5)
   # plot nH2O
@@ -413,7 +413,7 @@ canH2OT2 <- function() {
   # make data frames for mean differences and p-values
   # include comparison of up- and down-regulated proteins for "Secreted" in hypoxia compared to "Hypoxia" (whole-cell)
   pdat <- mdat <- data.frame(condition = c(names(culture), names(cancer), names(pancan), "up", "down"))
-  for(property in c("ZC", "nH2O")) {
+  for(property in c("Zc", "nH2O")) {
     pvals <- mvals <- numeric()
     idn <- grep(paste0(property, ".down"), colnames(culture[[1]]))
     iup <- grep(paste0(property, ".up"), colnames(culture[[1]]))
@@ -480,7 +480,7 @@ canH2OT1 <- function() {
   out
 }
 
-# nO2-ZC and nH2O-ZC correlations using QEC basis species 20201016
+# nO2-Zc and nH2O-Zc correlations using QEC basis species 20201016
 canH2OS1 <- function(pdf = FALSE) {
   # set up figure
   if(pdf) pdf("canH2OS1.pdf", width = 7, height = 3.5)
@@ -493,7 +493,7 @@ canH2OS1 <- function(pdf = FALSE) {
   # define axis labels
   nH2Olab <- expression(italic(n)[H[2] * O])
   nO2lab <- expression(italic(n)[O[2]])
-  ZClab <- expression(italic(Z)[C])
+  Zclab <- expression(italic(Z)[C])
 
   # function to plot values for amino acids
   aaplot <- function(x, y, xlab, ylab, legend.x, lmlim = c(-1, 1)) {
@@ -506,21 +506,21 @@ canH2OS1 <- function(pdf = FALSE) {
   AAcomp <- as.data.frame(diag(20))
   names(AAcomp) <- aminoacids(3)
 
-  # plot 1: nO2-ZC of amino acids
-  aaplot(ZCAA(AAcomp), O2AA(AAcomp, "QEC"), ZClab, nO2lab, "bottomright")
+  # plot 1: nO2-Zc of amino acids
+  aaplot(Zc(AAcomp), nO2(AAcomp, "QEC"), Zclab, nO2lab, "bottomright")
   label.figure("A", cex = 1.7, font = 2)
 
-  # plot 2: nH2O-ZC of amino acids
-  aaplot(ZCAA(AAcomp), H2OAA(AAcomp, "QEC"), ZClab, nH2Olab, "bottomright")
+  # plot 2: nH2O-Zc of amino acids
+  aaplot(Zc(AAcomp), nH2O(AAcomp, "QEC"), Zclab, nH2Olab, "bottomright")
   label.figure("B", cex = 1.7, font = 2)
 
   if(pdf) {
     dev.off()
-    addexif("canH2OS1", "nO2-ZC and nH2O-ZC correlations using QEC basis species", "Dick (2021)")
+    addexif("canH2OS1", "nO2-Zc and nH2O-Zc correlations using QEC basis species", "Dick (2021)")
   }
 }
 
-# HPA-TCGA scatterplots for ZC and nH2O 20200127
+# HPA-TCGA scatterplots for Zc and nH2O 20200127
 canH2OS2 <- function(pdf = FALSE) {
   vigout2 <- system.file("vignettes", package = "JMDplots")
   HPA <- read.csv(file.path(vigout2, paste0("HPA_", getOption("basis"), ".csv")), as.is = TRUE)
@@ -546,8 +546,8 @@ canH2OS2 <- function(pdf = FALSE) {
   iHPA <- match(HTmap, HPA$description)
   iTCGA <- match(names(HTmap), TCGA$description)
 
-  # HPA-TCGA scatterplots for ZC and nH2O
-  ZC <- data.frame(TCGA = TCGA$ZC.diff[iTCGA], HPA = HPA$ZC.diff[iHPA])
+  # HPA-TCGA scatterplots for Zc and nH2O
+  Zc <- data.frame(TCGA = TCGA$Zc.diff[iTCGA], HPA = HPA$Zc.diff[iHPA])
   nH2O <- data.frame(TCGA = TCGA$nH2O.diff[iTCGA], HPA = HPA$nH2O.diff[iHPA])
 
   labels <- TCGA_labels[iTCGA]
@@ -555,11 +555,11 @@ canH2OS2 <- function(pdf = FALSE) {
   size <- 1.5
   shape <- 15
 
-  r.squared.ZC <- format(summary(lm(HPA ~ TCGA, ZC))$r.squared, digits = 2)
-  ZC.title <- paste0("italic(R)^2 == '", r.squared.ZC, "'")
-  pl1 <- ggplot(ZC, aes(x = TCGA, y = HPA, label = labels)) +
+  r.squared.Zc <- format(summary(lm(HPA ~ TCGA, Zc))$r.squared, digits = 2)
+  Zc.title <- paste0("italic(R)^2 == '", r.squared.Zc, "'")
+  pl1 <- ggplot(Zc, aes(x = TCGA, y = HPA, label = labels)) +
     theme_classic() + geom_smooth(method = "lm") +
-    annotate("text", -Inf, Inf, label = ZC.title, parse = TRUE, hjust = -0.2, vjust = 1.5) +
+    annotate("text", -Inf, Inf, label = Zc.title, parse = TRUE, hjust = -0.2, vjust = 1.5) +
     xlab(quote(Delta*italic(Z)[C]*" (TCGA / GTEx)")) +
     ylab(quote(Delta*italic(Z)[C]*" (HPA)")) +
     geom_hline(yintercept = 0, linetype = 3, colour = "gray30") +
@@ -592,7 +592,7 @@ canH2OS2 <- function(pdf = FALSE) {
   ml <- gridExtra::marrangeGrob(c(pl1, pl2), layout_matrix = mat, top = NULL)
   if(pdf) {
     ggsave("canH2OS2.pdf", ml, width = 8, height = 4)
-    addexif("canH2OS2", "HPA-TCGA scatterplots for ZC and nH2O", "Dick (2021)")
+    addexif("canH2OS2", "HPA-TCGA scatterplots for Zc and nH2O", "Dick (2021)")
   }
   else ml
 }
@@ -628,7 +628,7 @@ HTmap <- c(
 ############################
 
 # function to plot 50 percentile contours / extracted from canH2O2 20191201
-contplot <- function(dat, main, col, xvar = "ZC", yvar = "nH2O", dx = NULL, dy = NULL,
+contplot <- function(dat, main, col, xvar = "Zc", yvar = "nH2O", dx = NULL, dy = NULL,
                      labtext = NULL, names = NULL) {
   xlab <- canprot::cplab[[paste0("D", strsplit(xvar, "_")[[1]][1])]]
   ylab <- canprot::cplab[[paste0("D", strsplit(yvar, "_")[[1]][1])]]

@@ -28,7 +28,7 @@ hum16S_1 <- function(pdf = FALSE) {
   par(mar = c(3, 4, 3, 1))
   par(mgp = c(2.5, 1, 0))
 
-  ## Panel A: Differences of ZC and nH2O between obligate anaerobic and aerotolerant genera 20221017
+  ## Panel A: Differences of Zc and nH2O between obligate anaerobic and aerotolerant genera 20221017
 
   # Use GTDB-based reference proteomes
   refdb <- "GTDB"
@@ -38,18 +38,18 @@ hum16S_1 <- function(pdf = FALSE) {
   # Clean up names
   dat$Genus.name <- gsub(" ", "", dat$Genus.name)
 
-  # Loop over ZC and nH2O
-  for(metric in c("ZC", "nH2O")) {
+  # Loop over Zc and nH2O
+  for(metric in c("Zc", "nH2O")) {
 
       # Get amino acid compositions for genera
       aa <- taxon_AA[[refdb]]
-      # Calculate ZC or nH2O
-      if(metric == "ZC") {
-        values <- ZCAA(aa)
+      # Calculate Zc or nH2O
+      if(metric == "Zc") {
+        values <- Zc(aa)
         ylim <- c(-0.24, -0.1)
       }
       if(metric == "nH2O") {
-        values <- H2OAA(aa)
+        values <- nH2O(aa)
         ylim <- c(-0.82, -0.65)
       }
       # Match genus names to RefSeq
@@ -67,18 +67,18 @@ hum16S_1 <- function(pdf = FALSE) {
       legend("bottomright", legend = ptext, bty = "n", inset = c(0, -0.03))
       # Show mean difference
       md <- format(round(diff(sapply(values, mean, na.rm = TRUE)), 4), scientific = 1)
-      if(metric == "ZC") difftxt <- bquote(Delta*italic(Z)[C] == .(md))
+      if(metric == "Zc") difftxt <- bquote(Delta*italic(Z)[C] == .(md))
       if(metric == "nH2O") difftxt <- bquote(Delta*italic(n)[H[2]*O] == .(md))
       legend("topleft", legend = difftxt, bty = "n", inset = c(-0.05, -0.02))
       # Print coverage
       coverage <- round(sum(!is.na(iref)) / length(iref) * 100, 1)
       ctext <- paste0("A. ", coverage, "% of genus names in 'List of Prokaryotes ...' matched to GTDB")
-      if(metric == "ZC") print(ctext)
-      if(metric == "ZC") label.figure("A. Genus reference proteomes based on GTDB", cex = 1.5, font = 2, adj = 0, xfrac = 0.02)
+      if(metric == "Zc") print(ctext)
+      if(metric == "Zc") label.figure("A. Genus reference proteomes based on GTDB", cex = 1.5, font = 2, adj = 0, xfrac = 0.02)
 
   }
 
-  ## Panel B: ZC and nH2O from metaproteomes and reference proteomes 20220827
+  ## Panel B: Zc and nH2O from metaproteomes and reference proteomes 20220827
   par(mar = c(4, 4, 2.5, 1))
   par(mgp = c(2.5, 1, 0))
 
@@ -88,13 +88,13 @@ hum16S_1 <- function(pdf = FALSE) {
   # Calculate chemical metrics
   dat <- getMP_hum16S(refdb)
 
-  # Make ZC plot
-  ZClim <- c(-0.20, -0.05)
-  plot(ZClim, ZClim, xlab = quote(italic(Z)[C]~"of metaproteome"), ylab = quote(italic(Z)[C]~"of reference proteome"), type = "n")
-  lines(ZClim, ZClim, lty = 2, col = 8)
-  points(dat$ZC_MP, dat$ZC_16S, pch = dat$pch, bg = dat$bg, col = dat$col)
+  # Make Zc plot
+  Zclim <- c(-0.20, -0.05)
+  plot(Zclim, Zclim, xlab = quote(italic(Z)[C]~"of metaproteome"), ylab = quote(italic(Z)[C]~"of reference proteome"), type = "n")
+  lines(Zclim, Zclim, lty = 2, col = 8)
+  points(dat$Zc_MP, dat$Zc_16S, pch = dat$pch, bg = dat$bg, col = dat$col)
   # Show RMSD in legend 20221018
-  RMSDtxt <- paste("RMSD =", round(RMSD(dat$ZC_MP, dat$ZC_16S), 3))
+  RMSDtxt <- paste("RMSD =", round(RMSD(dat$Zc_MP, dat$Zc_16S), 3))
   legend("topleft", RMSDtxt, bty = "n")
 
   # Label figure
@@ -143,12 +143,12 @@ hum16S_2 <- function(pdf = FALSE) {
   ## Panels A-B: Community reference proteomes for body sites and viral inactivation
   ## based on 16S rRNA gene sequences from Boix-Amoros et al. (2021) 20220814
 
-  # Panel A: nH2O-ZC plot for all samples
+  # Panel A: nH2O-Zc plot for all samples
   par(mar = c(4, 4, 3, 1))
   # Plot small symbols: Any treatment
   Any <- plotmet_hum16S("BPB+21_AnyTreatment", extracolumn = c("Subject", "Site", "Treatment"),
     refdb = refdb, title = FALSE, pt.open.col = NA, plot.bg = FALSE, xlim = c(-0.20, -0.12),
-    xlab = canprot::cplab$ZC, ylab = canprot::cplab$nH2O)
+    xlab = canprot::cplab$Zc, ylab = canprot::cplab$nH2O)
   # Plot large symbols: No treatment
   No <- plotmet_hum16S("BPB+21_NoTreatment", add = TRUE, cex = 2, extracolumn = c("Subject", "Site"),
     refdb = refdb, title = FALSE, pt.open.col = NA, plot.bg = FALSE)
@@ -157,8 +157,8 @@ hum16S_2 <- function(pdf = FALSE) {
   AnyNo[[2]] <- cbind(AnyNo[[2]], Treatment = NA)
   AnyNo <- do.call(rbind, AnyNo)
   AnyNo <- AnyNo[AnyNo$Site != "Control", ]
-  ANhull <- chull(AnyNo$ZC, AnyNo$nH2O)
-  polygon(AnyNo$ZC[ANhull], AnyNo$nH2O[ANhull], border = 8, lty = 2)
+  ANhull <- chull(AnyNo$Zc, AnyNo$nH2O)
+  polygon(AnyNo$Zc[ANhull], AnyNo$nH2O[ANhull], border = 8, lty = 2)
 
   # Plot p-values 20230204
   # Use metrics for untreated samples
@@ -167,7 +167,7 @@ hum16S_2 <- function(pdf = FALSE) {
   # Use metrics for gut and oral samples
   igut <- No$Site == "feces"
   ioral <- No$Site == "Oral cavity"
-  plot.p.values(met$ZC[igut], met$ZC[ioral], met$nH2O[igut], met$nH2O[ioral], ypos = "top")
+  plot.p.values(met$Zc[igut], met$Zc[ioral], met$nH2O[igut], met$nH2O[ioral], ypos = "top")
 
   legend("bottomleft", legend = c("", "  No treatment", "", "  Viral inactivation"), inset = c(-0.05, 0), bg = "white", bty = "n", cex = 0.9)
   legend("bottomleft", legend = c("Large symbols", "", "Small symbols", ""), text.font = 2, inset = c(-0.05, 0), bty = "n", cex = 0.9)
@@ -192,15 +192,15 @@ hum16S_2 <- function(pdf = FALSE) {
     pch <- sapply(Treated$Site, switch, "Oral cavity" = pch_Oral, "Nasal cavity" = pch_Nasal, "Skin of forearm" = pch_Skin, "feces" = pch_Gut, NA)
     col <- sapply(Treated$Site, switch, "Oral cavity" = col_Oral, "Nasal cavity" = col_Nasal, "Skin of forearm" = col_Skin, "feces" = col_Gut, NA)
     col <- sapply(col, add.alpha, "d0")
-    # Calculate D_nH2O and D_ZC
+    # Calculate D_nH2O and D_Zc
     D_nH2O <- Treated$nH2O - No$nH2O
-    D_ZC <- Treated$ZC - No$ZC
-    # Plot D_nH2O and D_ZC
-    plot(D_ZC, D_nH2O, xlab = canprot::cplab$DZC, ylab = canprot::cplab$DnH2O, xlim = c(-0.03, 0.03), ylim = c(-0.03, 0.015), type = "n")
+    D_Zc <- Treated$Zc - No$Zc
+    # Plot D_nH2O and D_Zc
+    plot(D_Zc, D_nH2O, xlab = canprot::cplab$DZc, ylab = canprot::cplab$DnH2O, xlim = c(-0.03, 0.03), ylim = c(-0.03, 0.015), type = "n")
     abline(h = 0, v = 0, lty = 2, col = 8)
-    points(D_ZC, D_nH2O, pch = pch, bg = col, col = NA)
+    points(D_Zc, D_nH2O, pch = pch, bg = col, col = NA)
     # Plot p-values 20230204
-    plot.p.values(No$ZC, Treated$ZC, No$nH2O, Treated$nH2O, paired = TRUE)
+    plot.p.values(No$Zc, Treated$Zc, No$nH2O, Treated$nH2O, paired = TRUE)
     title(Treatment, font.main = 1)
   }
 
@@ -216,14 +216,14 @@ hum16S_2 <- function(pdf = FALSE) {
   legend("center", legend = c("Nasal", "Skin", "Oral", "Gut"), pch = c(pch_Nasal, pch_Skin, pch_Oral, pch_Gut),
     pt.bg = c(col_Nasal, col_Skin, col_Oral, col_Gut), col = NA, bty = "n", cex = 1.5)
 
-  ### Panels C-E: nH2O-ZC for reference proteomes, metagenomes and metaproteomes from various body sites 20221118
+  ### Panels C-E: nH2O-Zc for reference proteomes, metagenomes and metaproteomes from various body sites 20221118
   par(mar = c(4, 4, 3, 1))
   xlim <- c(-0.2, -0.10)
   ylim <- c(-0.84, -0.60)
 
   ## Panel C: Plot 16S-based reference proteomes for controls in COVID-19 datasets 20220822
   # Setup plot
-  plot(xlim, ylim, xlab = canprot::cplab$ZC, ylab = canprot::cplab$nH2O, type = "n")
+  plot(xlim, ylim, xlab = canprot::cplab$Zc, ylab = canprot::cplab$nH2O, type = "n")
   # Colors and point symbols for sample types
   col <- list(oro = col_Oral, naso = col_Nasal, gut = col_Gut)
   col <- lapply(col, add.alpha, "d0")
@@ -235,14 +235,14 @@ hum16S_2 <- function(pdf = FALSE) {
   for(type in c("gut", "oro", "naso")) {
     itype <- means$type == type
     # Plot points for control samples
-    points(means$ZC_dn[itype], means$nH2O_dn[itype], pch = pch[[type]], bg = col[[type]], col = NA)
+    points(means$Zc_dn[itype], means$nH2O_dn[itype], pch = pch[[type]], bg = col[[type]], col = NA)
   }
   # Plot convex hull from Panel A
-  polygon(AnyNo$ZC[ANhull], AnyNo$nH2O[ANhull], border = 8, lty = 2)
+  polygon(AnyNo$Zc[ANhull], AnyNo$nH2O[ANhull], border = 8, lty = 2)
   # Plot p-values 20230204
   gut <- subset(means, type == "gut")
   oro <- subset(means, type == "oro")
-  plot.p.values(gut$ZC_dn, oro$ZC_dn, gut$nH2O_dn, oro$nH2O_dn)
+  plot.p.values(gut$Zc_dn, oro$Zc_dn, gut$nH2O_dn, oro$nH2O_dn)
   legend("topleft", legend = c("Nasopharyngeal", "Oropharyngeal", "Gut"), pch = c(pch_Nasal, pch_Oral, pch_Gut),
     pt.bg = c(col_Nasal, col_Oral, col_Gut), col = NA, bty = "n")
   legend("topright", c("Various", "studies -", "see Table 1"), bty = "n")
@@ -251,7 +251,7 @@ hum16S_2 <- function(pdf = FALSE) {
 
   ## Panel D: Metagenomes from different body sites 20221124
   # Setup plot
-  plot(xlim, ylim, xlab = canprot::cplab$ZC, ylab = canprot::cplab$nH2O, type = "n")
+  plot(xlim, ylim, xlab = canprot::cplab$Zc, ylab = canprot::cplab$nH2O, type = "n")
   # Studies are for gut, oral, nasal
   studies <- c("ZZL+20", "CZH+22", "LLZ+21")
   pchs <- c(pch_Gut, pch_Oral, pch_Nasal)
@@ -261,16 +261,16 @@ hum16S_2 <- function(pdf = FALSE) {
     datadir <- system.file("extdata/hum16S", package = "JMDplots")
     file <- paste0(datadir, "/ARAST/", studies[i], "_AA.csv")
     dat <- read.csv(file)
-    ZC <- ZCAA(dat)
-    nH2O <- H2OAA(dat)
-    points(ZC, nH2O, pch = pchs[i], bg = cols[i], col = NA)
-    if(studies[i] == "ZZL+20") gut <- list(ZC = ZC, nH2O = nH2O)
-    if(studies[i] == "CZH+22") oro <- list(ZC = ZC, nH2O = nH2O)
+    Zc <- Zc(dat)
+    nH2O <- nH2O(dat)
+    points(Zc, nH2O, pch = pchs[i], bg = cols[i], col = NA)
+    if(studies[i] == "ZZL+20") gut <- list(Zc = Zc, nH2O = nH2O)
+    if(studies[i] == "CZH+22") oro <- list(Zc = Zc, nH2O = nH2O)
   }
   # Plot convex hull from Panel A
-  polygon(AnyNo$ZC[ANhull], AnyNo$nH2O[ANhull], border = 8, lty = 2)
+  polygon(AnyNo$Zc[ANhull], AnyNo$nH2O[ANhull], border = 8, lty = 2)
   # Plot p-values 20230204
-  plot.p.values(gut$ZC, oro$ZC, gut$nH2O, oro$nH2O)
+  plot.p.values(gut$Zc, oro$Zc, gut$nH2O, oro$nH2O)
   # Add legend
   legend <- c("Nasopharyngeal", "Oropharyngeal", "Gut")
   legend("topleft", legend, pch = rev(pchs), pt.bg = c(col_Nasal, col_Oral, col_Gut), col = NA, bty = "n")
@@ -281,7 +281,7 @@ hum16S_2 <- function(pdf = FALSE) {
 
   ## Panel E: Metaproteomes from various body sites 20221114
   # Setup plot
-  plot(xlim, ylim, xlab = canprot::cplab$ZC, ylab = canprot::cplab$nH2O, type = "n")
+  plot(xlim, ylim, xlab = canprot::cplab$Zc, ylab = canprot::cplab$nH2O, type = "n")
   # Define studies and point symbols
   studies_MP <- c(
     "TWC+22", "MLL+17", # Gut
@@ -298,27 +298,27 @@ hum16S_2 <- function(pdf = FALSE) {
   cols <- sapply(cols, add.alpha, "d0")
   cexs <- ifelse(studies_MP %in% c("JZW+22"), 0.7, 1)
   # Store all data to calculate p-values 20230203
-  gut.ZC <- gut.nH2O <- oral.ZC <- oral.nH2O <- numeric()
+  gut.Zc <- gut.nH2O <- oral.Zc <- oral.nH2O <- numeric()
   # Loop over studies
   for(i in 1:length(studies_MP)) {
     # Get amino acid composition from metaproteome
     studydir <- strsplit(studies_MP[i], "_")[[1]][1]
     datadir <- system.file("extdata/hum16S", package = "JMDplots")
     aa <- read.csv(paste0(datadir, "/metaproteome/", studydir, "/", studies_MP[i], "_aa.csv"))
-    # Calculate ZC and nH2O
-    ZC <- ZCAA(aa)
-    nH2O <- H2OAA(aa)
+    # Calculate Zc and nH2O
+    Zc <- Zc(aa)
+    nH2O <- nH2O(aa)
     # Add points
-    points(ZC, nH2O, pch = pchs[i], bg = cols[i], cex = cexs[i], col = NA)
-    if(studies_MP[i] %in% c("TWC+22", "MLL+17")) gut.ZC <- c(gut.ZC, ZC)
+    points(Zc, nH2O, pch = pchs[i], bg = cols[i], cex = cexs[i], col = NA)
+    if(studies_MP[i] %in% c("TWC+22", "MLL+17")) gut.Zc <- c(gut.Zc, Zc)
     if(studies_MP[i] %in% c("TWC+22", "MLL+17")) gut.nH2O <- c(gut.nH2O, nH2O)
-    if(studies_MP[i] %in% c("GNT+21_cells", "JZW+22")) oral.ZC <- c(oral.ZC, ZC)
+    if(studies_MP[i] %in% c("GNT+21_cells", "JZW+22")) oral.Zc <- c(oral.Zc, Zc)
     if(studies_MP[i] %in% c("GNT+21_cells", "JZW+22")) oral.nH2O <- c(oral.nH2O, nH2O)
   }
   # Plot convex hull from Panel A
-  polygon(AnyNo$ZC[ANhull], AnyNo$nH2O[ANhull], border = 8, lty = 2)
+  polygon(AnyNo$Zc[ANhull], AnyNo$nH2O[ANhull], border = 8, lty = 2)
   # Plot p-values 20230204
-  plot.p.values(gut.ZC, oral.ZC, gut.nH2O, oral.nH2O)
+  plot.p.values(gut.Zc, oral.Zc, gut.nH2O, oral.nH2O)
   # Add legend
   legend("topright", c("Jiang'22", "Granato'21"), title = "Oral",
     pch = c(pch_Oral, pch_Oral), pt.bg = col_Oral, col = NA,
@@ -349,7 +349,7 @@ hum16S_3 <- function(pdf = FALSE) {
   par(cex = 1.2)
   par(mar = c(4, 4, 3, 1))
   startplot <- function() {
-    plot(c(-0.008, 0.010), c(-0.012, 0.020), type  = "n", pch = ".", xlab = cplab$DZC, ylab = cplab$DnH2O)
+    plot(c(-0.008, 0.010), c(-0.012, 0.020), type  = "n", pch = ".", xlab = cplab$DZc, ylab = cplab$DnH2O)
     abline(h = 0, v = 0, lty = 2, col = 8)
   }
   # Colors and point symbols for sample types
@@ -359,14 +359,14 @@ hum16S_3 <- function(pdf = FALSE) {
   datadir <- system.file("extdata/hum16S", package = "JMDplots")
   means <- read.csv(file.path(datadir, "COVID_means_GTDB.csv"))
 
-  ## Panel A: nH2O-ZC plots for 16S data for nasopharyngeal, oral/oropharyngeal, and gut datasets
+  ## Panel A: nH2O-Zc plots for 16S data for nasopharyngeal, oral/oropharyngeal, and gut datasets
   for(type in c("naso", "oro", "gut")) {
     startplot()
     itype <- means$type == type
     label <- 1:sum(itype)
 
     # Add points
-    points(means$D_ZC[itype], means$D_nH2O[itype], pch = pch[[type]], col = col[[type]], bg = col[[type]])
+    points(means$D_Zc[itype], means$D_nH2O[itype], pch = pch[[type]], col = col[[type]], bg = col[[type]])
     dx <- rep(0, sum(itype))
     dy <- rep(0.0018, sum(itype))
     if(type == "gut") {
@@ -376,12 +376,12 @@ hum16S_3 <- function(pdf = FALSE) {
       dx[10] <- 0.0003
     }
     # Label points
-    text(means$D_ZC[itype] + dx, means$D_nH2O[itype] + dy, label, cex = 0.8)
-    # For gut, plot dropline at mean difference for bacterial metaproteome ZC 20220902
+    text(means$D_Zc[itype] + dx, means$D_nH2O[itype] + dy, label, cex = 0.8)
+    # For gut, plot dropline at mean difference for bacterial metaproteome Zc 20220902
     at <- c(-0.0027, -0.0019)
     if(type == "gut") axis(1, at = at, labels = FALSE, tcl = -3, col = 8, lty = 2, lwd = 1.5)
     # Plot p-values 20230204
-    plot.p.values(means$ZC_dn[itype], means$ZC_up[itype], means$nH2O_dn[itype], means$nH2O_up[itype], paired = TRUE)
+    plot.p.values(means$Zc_dn[itype], means$Zc_up[itype], means$nH2O_dn[itype], means$nH2O_up[itype], paired = TRUE)
     # Add plot title
     titles <- c(naso = "Nasopharyngeal", oro = "Oropharyngeal", gut = "Gut")
     title(titles[type], font.main = 1, line = 0.5)
@@ -392,11 +392,11 @@ hum16S_3 <- function(pdf = FALSE) {
     if(type == "naso") label.figure(label, font = 2, xfrac = 0.695, yfrac = 0.95, cex = 1.1)
   }
 
-  # Common nH2O and ZC limits for boxplots in Panels B and C
+  # Common nH2O and Zc limits for boxplots in Panels B and C
   nH2Olim <- c(-0.83, -0.68)
-  ZClim <- c(-0.23, -0.09)
+  Zclim <- c(-0.23, -0.09)
 
-  ## Panel B: boxplots of ZC and nH2O of bacterial metaproteome in control and COVID-19 patients 20220830
+  ## Panel B: boxplots of Zc and nH2O of bacterial metaproteome in control and COVID-19 patients 20220830
   par(mar = c(3, 4, 4, 1))
   par(mgp = c(2.5, 1, 0))
   # Loop over taxonomy
@@ -409,12 +409,12 @@ hum16S_3 <- function(pdf = FALSE) {
     # Identify control and COVID-19 patients
     icontrol <- grep("Ctrl", aa$organism)
     icovid <- grep("P", aa$organism)
-    # Calculate ZC and nH2O
-    ZC <- ZCAA(aa)
-    nH2O <- H2OAA(aa)
-    ZC_list <- list(Control = ZC[icontrol], "COVID-19" = ZC[icovid])
+    # Calculate Zc and nH2O
+    Zc <- Zc(aa)
+    nH2O <- nH2O(aa)
+    Zc_list <- list(Control = Zc[icontrol], "COVID-19" = Zc[icovid])
     nH2O_list <- list(Control = nH2O[icontrol], "COVID-19" = nH2O[icovid])
-    names(ZC_list)[2] <- hyphen.in.pdf(names(ZC_list)[2])
+    names(Zc_list)[2] <- hyphen.in.pdf(names(Zc_list)[2])
     names(nH2O_list)[2] <- hyphen.in.pdf(names(nH2O_list)[2])
 
     # Add number of samples to group names
@@ -440,22 +440,22 @@ hum16S_3 <- function(pdf = FALSE) {
     if(taxonomy == "Bacteria") label.figure("B. Gut metaproteomes (He et al., 2021)", font = 2, xfrac = 0.55, cex = 1.1)
 
     # Add number of samples to group names
-    len <- sapply(ZC_list, length)
-    labels <- paste0(names(ZC_list), " (", len, ")")
-    names(ZC_list) <- ""
-    # Make ZC plot
-    boxplot(ZC_list, ylab = cplab$ZC, ylim = c(-0.16, -0.10))
+    len <- sapply(Zc_list, length)
+    labels <- paste0(names(Zc_list), " (", len, ")")
+    names(Zc_list) <- ""
+    # Make Zc plot
+    boxplot(Zc_list, ylab = cplab$Zc, ylim = c(-0.16, -0.10))
     # Make rotated labels (modified from https://www.r-bloggers.com/rotated-axis-labels-in-r-plots/)
     text(x = (1:2)+0.5, y = par()$usr[3] - 1.5 * strheight("A"), labels = labels, srt = 15, adj = 1, xpd = TRUE)
     # Add p-value
-    ZC_pvalue <- wilcox.test(ZC_list[[1]], ZC_list[[2]])$p.value
-    legend <- bquote(italic(p) == .(format(signif(ZC_pvalue, 1), scientific = 2)))
+    Zc_pvalue <- wilcox.test(Zc_list[[1]], Zc_list[[2]])$p.value
+    legend <- bquote(italic(p) == .(format(signif(Zc_pvalue, 1), scientific = 2)))
     legend("topleft", legend = legend, bty = "n", inset = c(-0.1, -0.05))
     # Add title
     title(main, font.main = 1, line = 0.5)
     # Show mean difference
-    ZC_diff <- mean(ZC_list[[2]]) - mean(ZC_list[[1]])
-    diffval <- signif(ZC_diff, 2)
+    Zc_diff <- mean(Zc_list[[2]]) - mean(Zc_list[[1]])
+    diffval <- signif(Zc_diff, 2)
     # Make sure we plotted the ticks in Panel A at the correct locations
     stopifnot(diffval == at[i])
     difftxt <- bquote(Delta*italic(Z)[C] == .(diffval))
@@ -465,25 +465,25 @@ hum16S_3 <- function(pdf = FALSE) {
   arrows(-0.6, -0.083, 0.3, -0.065, length = 0.2, col = 8, lwd = 1.5, xpd = NA)
   arrows(0.7, -0.083, 0.5, -0.065, length = 0.2, col = 8, lwd = 1.5, xpd = NA)
 
-  ## Panel C: Boxplots for nH2O and ZC in fecal MAGs 20221029
+  ## Panel C: Boxplots for nH2O and Zc in fecal MAGs 20221029
   # Read amino acid compositions of proteins predicted from MAGs
   datadir <- system.file("extdata/hum16S", package = "JMDplots")
   aa <- read.csv(file.path(datadir, "KWL22/KWL22_MAGs_prodigal_aa.csv.xz"))
   # https://github.com/Owenke247/COVID-19/blob/main/Pre-processed_Files/COVID19_metadata.txt
   dat <- read.csv(file.path(datadir, "KWL22/COVID19_metadata.txt"), sep = "\t")
 
-  # Loop over nH2O and ZC
-  for(metric in c("nH2O", "ZC")) {
+  # Loop over nH2O and Zc
+  for(metric in c("nH2O", "Zc")) {
     # Loop over SRA run prefixes:
     # Zuo et al. (PRJNA624223) and Yeoh et al. (PRJNA650244)
     for(SRAprefix in c("SRR1232", "SRR1307")) {
       # Get amino acid compositions for this BioProject
       iaa <- grep(SRAprefix, aa$protein)
       thisaa <- aa[iaa, ]
-      # Calculate ZC or nH2O
-      if(metric == "ZC") x <- ZCAA(thisaa) else x <- H2OAA(thisaa)
-      if(metric == "ZC") ylim <- ZClim else ylim <- nH2Olim
-      if(metric == "ZC") legend.x <- "topleft" else legend.x <- "bottomleft"
+      # Calculate Zc or nH2O
+      if(metric == "Zc") x <- Zc(thisaa) else x <- nH2O(thisaa)
+      if(metric == "Zc") ylim <- Zclim else ylim <- nH2Olim
+      if(metric == "Zc") legend.x <- "topleft" else legend.x <- "bottomleft"
       # Get names of groups
       idat <- match(thisaa$protein, dat$Dat)
       group <- dat$Group[idat]
@@ -508,7 +508,7 @@ hum16S_3 <- function(pdf = FALSE) {
       # Show mean difference
       x_diff <- mean(x_list[[2]]) - mean(x_list[[1]])
       diffval <- signif(x_diff, 2)
-      if(metric == "ZC") difftxt <- bquote(Delta*italic(Z)[C] == .(diffval))
+      if(metric == "Zc") difftxt <- bquote(Delta*italic(Z)[C] == .(diffval))
       if(metric == "nH2O") difftxt <- bquote(Delta*italic(n)[H[2]*O] == .(diffval))
       title(difftxt)
       figlab <- hyphen.in.pdf("C. Gut metagenome-assembled genomes (Ke et al., 2022)")
@@ -650,7 +650,7 @@ hum16S_4 <- function(pdf = FALSE) {
 ### Data Processing Functions  ###
 ##################################
 
-# Gather values of ZC and nH2O for metaproteomes and 16S-based estimates 20220828
+# Gather values of Zc and nH2O for metaproteomes and 16S-based estimates 20220828
 # Add refdb argument 20221017
 # Add zero_AA argument 20221018
 getMP_hum16S <- function(refdb = "RefSeq", zero_AA = NULL) {
@@ -690,8 +690,8 @@ getMP_hum16S <- function(refdb = "RefSeq", zero_AA = NULL) {
     data.frame(Name = metadata$Name,
       Study_16S = studies_16S[i], Run_16S = metadata$Run, Sample_16S = metadata$Sample,
       Study_MP = studies_MP[i], Sample_MP = aa$organism,
-      ZC_16S = round(metrics$ZC, 6), ZC_MP = round(ZCAA(aa), 6),
-      nH2O_16S = round(metrics$nH2O, 6), nH2O_MP = round(H2OAA(aa), 6),
+      Zc_16S = round(metrics$Zc, 6), Zc_MP = round(Zc(aa), 6),
+      nH2O_16S = round(metrics$nH2O, 6), nH2O_MP = round(nH2O(aa), 6),
       #pch = metadata$pch, col = metadata$col
       pch = pchs[i], bg = bgs[i], col = cols[i]
     )
@@ -707,7 +707,7 @@ COVID_means <- function() {
 
   # Use GTDB-based reference proteomes
   refdb <- "GTDB"
-  # Function to calculate mean ZC and nH2O for patients and controls
+  # Function to calculate mean Zc and nH2O for patients and controls
   getmeans <- function(study) {
     print(study)
     metrics <- getmetrics_hum16S(study, refdb = refdb)
@@ -716,16 +716,16 @@ COVID_means <- function() {
     iup <- sapply(mdat$metadata$pch == 25, isTRUE)
     idn <- sapply(mdat$metadata$pch == 24, isTRUE)
     # Calculate means of chemical metrics
-    ZC_dn <- mean(mdat$metrics$ZC[idn])
+    Zc_dn <- mean(mdat$metrics$Zc[idn])
     nH2O_dn <- mean(mdat$metrics$nH2O[idn])
-    ZC_up <- mean(mdat$metrics$ZC[iup])
+    Zc_up <- mean(mdat$metrics$Zc[iup])
     nH2O_up <- mean(mdat$metrics$nH2O[iup])
     # Calculate p-values 20220905
-    ZC_pvalue <- wilcox.test(mdat$metrics$ZC[idn], mdat$metrics$ZC[iup])$p.value
+    Zc_pvalue <- wilcox.test(mdat$metrics$Zc[idn], mdat$metrics$Zc[iup])$p.value
     nH2O_pvalue <- wilcox.test(mdat$metrics$nH2O[idn], mdat$metrics$nH2O[iup])$p.value
     # Return values
     # Include number of samples and p-values 20220905
-    list(n_dn = sum(idn), n_up = sum(iup), ZC_dn = ZC_dn, nH2O_dn = nH2O_dn, ZC_up = ZC_up, nH2O_up = nH2O_up, ZC_pvalue = ZC_pvalue, nH2O_pvalue = nH2O_pvalue)
+    list(n_dn = sum(idn), n_up = sum(iup), Zc_dn = Zc_dn, nH2O_dn = nH2O_dn, Zc_up = Zc_up, nH2O_up = nH2O_up, Zc_pvalue = Zc_pvalue, nH2O_pvalue = nH2O_pvalue)
   }
 
   # List datasets
@@ -733,7 +733,7 @@ COVID_means <- function() {
     # Nasopharyngeal datasets
     naso = c("CSC+22", "ENJ+21", "GKJ+22", "HMH+21", "MLW+21_Nasopharyngeal", "PMM+22", "SGC+21", "SRS+22", "VCV+21"),
     # Oral/oropharyngeal datasets
-    oro = c("GBS+22", "GWL+21", "IZC+21", "MAC+21", "MLW+21_Oropharyngeal", "RFH+22_Oral", "RWC+21_Oral", "WCJ+21_Oral", "XLZ+21"),
+    oro = c("GBS+22", "GWL+21", "IZc+21", "MAC+21", "MLW+21_Oropharyngeal", "RFH+22_Oral", "RWC+21_Oral", "WCJ+21_Oral", "XLZ+21"),
     # Gut datasets
     gut = c("CGC+22", "FBD+22", "GCW+20", "KMG+21", "MIK+22", "MMP+21", "NGH+21", "RFH+22_Gut", "RWC+21_Gut", "RDM+22", "SRK+22", "WCJ+21_Gut", "ZZZ+21")
   )
@@ -744,23 +744,23 @@ COVID_means <- function() {
     means <- lapply(studies[[i]], getmeans)
     n_dn <- sapply(means, "[[", "n_dn")
     n_up <- sapply(means, "[[", "n_up")
-    ZC_dn <- sapply(means, "[[", "ZC_dn")
+    Zc_dn <- sapply(means, "[[", "Zc_dn")
     nH2O_dn <- sapply(means, "[[", "nH2O_dn")
-    ZC_up <- sapply(means, "[[", "ZC_up")
+    Zc_up <- sapply(means, "[[", "Zc_up")
     nH2O_up <- sapply(means, "[[", "nH2O_up")
-    ZC_pvalue <- sapply(means, "[[", "ZC_pvalue")
+    Zc_pvalue <- sapply(means, "[[", "Zc_pvalue")
     nH2O_pvalue <- sapply(means, "[[", "nH2O_pvalue")
     thisout <- data.frame(type = names(studies)[i], study = studies[[i]], n_dn = n_dn, n_up = n_up,
-      ZC_dn = ZC_dn, nH2O_dn = nH2O_dn, ZC_up = ZC_up, nH2O_up = nH2O_up, ZC_pvalue = ZC_pvalue, nH2O_pvalue = nH2O_pvalue)
+      Zc_dn = Zc_dn, nH2O_dn = nH2O_dn, Zc_up = Zc_up, nH2O_up = nH2O_up, Zc_pvalue = Zc_pvalue, nH2O_pvalue = nH2O_pvalue)
     out[[i]] <- thisout
   }
 
   # Put together data frames
   out <- do.call(rbind,out)
   # Calculate mean differences of chemical metrics
-  D_ZC <- out$ZC_up - out$ZC_dn
+  D_Zc <- out$Zc_up - out$Zc_dn
   D_nH2O <- out$nH2O_up - out$nH2O_dn
-  out <- cbind(out, D_ZC, D_nH2O)
+  out <- cbind(out, D_Zc, D_nH2O)
   file <- paste0("COVID_means_", refdb, ".csv")
   # Round values 20230212
   out[, 5:12] <- signif(out[, 5:12], 6)
@@ -769,15 +769,15 @@ COVID_means <- function() {
 }
 
 # Function to add p-values to x and y axes 20230204
-plot.p.values <- function(ZC.1, ZC.2, nH2O.1, nH2O.2, paired = FALSE, ypos = "bottom") {
-  p.ZC <- format(signif(wilcox.test(ZC.1, ZC.2, paired = paired)$p.value, 1), scientific = 2)
+plot.p.values <- function(Zc.1, Zc.2, nH2O.1, nH2O.2, paired = FALSE, ypos = "bottom") {
+  p.Zc <- format(signif(wilcox.test(Zc.1, Zc.2, paired = paired)$p.value, 1), scientific = 2)
   p.nH2O <- format(signif(wilcox.test(nH2O.1, nH2O.2, paired = paired)$p.value, 1), scientific = 2)
-  p.ZC.txt <- bquote(italic(p) == .(p.ZC))
+  p.Zc.txt <- bquote(italic(p) == .(p.Zc))
   p.nH2O.txt <- bquote(italic(p) == .(p.nH2O))
   pu <- par("usr")
   dx <- (pu[2] - pu[1]) / 30
   dy <- (pu[4] - pu[3]) / 30
-  text(pu[2] - dx, pu[3] + dy/2, p.ZC.txt, adj = c(1, 0), cex = 0.9)
+  text(pu[2] - dx, pu[3] + dy/2, p.Zc.txt, adj = c(1, 0), cex = 0.9)
   if(ypos == "bottom") text(pu[1] + dx/2, pu[3] + dy, p.nH2O.txt, srt = 90, adj = c(0, 1), cex = 0.9)
   if(ypos == "top") text(pu[1] + dx/2, pu[4] - dy, p.nH2O.txt, srt = 90, adj = c(1, 1), cex = 0.9)
 }

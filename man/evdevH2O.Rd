@@ -33,7 +33,7 @@ Plots from the paper by Dick (2022).
 \arguments{
   \item{pdf}{logical, make a PDF file?}
   \item{boot.R}{integer, number of bootstrap replicates}
-  \item{H2O}{logical, make plots for \nH2O instead of \ZC?}
+  \item{H2O}{logical, make plots for \nH2O instead of \Zc?}
   \item{dataset}{character, dataset to use for constructing target proteins}
   \item{seed}{numeric, seeds to use for subsampling background proteins from human proteome}
   \item{nbackground}{numeric, number of background proteins to sample}
@@ -48,7 +48,7 @@ This table gives a brief description of each plotting function.
 \tabular{ll}{
   \code{evdevH2O1} \tab Comparison of different sets of basis species \cr
   \code{evdevH2O2} \tab Protein length and chemical metrics for phylostratigraphic age groups \cr
-  \code{evdevH2O3} \tab Evolution of protein \ZC in eukaryotic lineages \cr
+  \code{evdevH2O3} \tab Evolution of protein \Zc in eukaryotic lineages \cr
   \code{evdevH2O4} \tab Thermodynamic analysis of optimal \logaH2O and \logfO2 for target proteins \cr
   \code{evdevH2O5} \tab Optimal \logaH2O and \logfO2 and virtual Eh for target proteins \cr
   \code{evdevH2O6} \tab Chemical metrics for and thermodynamic parameters with different background proteomes \cr
@@ -88,12 +88,12 @@ If \code{writeFiles} is TRUE, a PNG plot file is created and optimal \logfO2 or 
 \section{Files in extdata/evdevH2O/LMM16}{
   \describe{
     \item{\code{mkmetrics.R}}{
-      Script to calculate \ZC and \nH2O and get gene ages for proteins in the consensus tables of Liebeskind et al. (2016).
+      Script to calculate \Zc and \nH2O and get gene ages for proteins in the consensus tables of Liebeskind et al. (2016).
       This script requires files available from UniProt and Zenodo (\doi{10.5281/zenodo.51708}); see comments for details.
     }
     \item{\code{reference_proteomes.csv}}{IDs of UniProt reference proteomes for 31 organisms in Liebeskind et al. (2016) (input file for \code{mkmetrics.R}).}
     \item{\code{modeAges.csv}}{Names of gene age categories for each organism (output by \code{mkmetrics.R}).}
-    \item{\code{metrics/*.csv.xz}}{Files with ID, modeAge, \ZC, \nH2O for each protein (output by \code{mkmetrics.R}).}
+    \item{\code{metrics/*.csv.xz}}{Files with ID, modeAge, \Zc, \nH2O for each protein (output by \code{mkmetrics.R}).}
   }
 }
 

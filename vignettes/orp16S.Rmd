@@ -56,7 +56,7 @@ options(width = 80)
 ```
 
 ```{r HTML, include=FALSE}
-ZC <- "<i>Z</i><sub>C</sub>"
+Zc <- "<i>Z</i><sub>C</sub>"
 ```
 
 This vignette runs the code to make the plots from the following paper:
@@ -74,7 +74,7 @@ library(JMDplots)
 orp16S_1()
 ```
 
-## `r ZC` of reference proteomes compared with oxygen tolerance and with metaproteomes (Figure 2)
+## `r Zc` of reference proteomes compared with oxygen tolerance and with metaproteomes (Figure 2)
 ```{r orp16S_2, message = FALSE, out.width='100%', fig.width = 8, fig.height = 3.5, out.extra = 'class="full-width"', pngquant = pngquant, dpi = 100}
 orp16S_2()
 ```
@@ -86,7 +86,7 @@ orp16S_2()
 orp16S_3()
 ```
 
-**Data sources:** **(b)** ORP and pH [@DFYS19] to calculate Eh7. **(c)** 16S rRNA gene sequences [@RBW+14] to calculate `r ZC`.
+**Data sources:** **(b)** ORP and pH [@DFYS19] to calculate Eh7. **(c)** 16S rRNA gene sequences [@RBW+14] to calculate `r Zc`.
 
 ## Sample locations on world map and Eh-pH diagram (Figure 4)
 ```{r orp16S_4, message = FALSE, results = "hide", out.width='100%', fig.width = 26, fig.height = 23, out.extra = 'class="full-width"', pngquant = pngquant, dpi = 100}
@@ -95,7 +95,7 @@ orp16S_4()
 
 **Data sources:** **(a)** coastlineWorld dataset in R package oce [@KR22]; shapefiles for North American Great Lakes [@USGS10]. **(b)** Outline is from @BKM60.
 
-## Associations between Eh7 and `r ZC` at local scales (Figure 5)
+## Associations between Eh7 and `r Zc` at local scales (Figure 5)
 ```{r orp16S_5, message = FALSE, results = "hide", out.width='100%', fig.width = 8, fig.height = 6, pngquant = pngquant, dpi = 100}
 orp16S_5()
 ```
@@ -116,7 +116,7 @@ kable(orp16S_T1(samesign = TRUE), col.names = rep(colnames, 2)) %>%
   add_header_above(c(" " = 1, "Bacteria" = 4, "Archaea" = 4))
 ```
 
-## Associations between Eh7 and `r ZC` at a global scale (Figure 6)
+## Associations between Eh7 and `r Zc` at a global scale (Figure 6)
 ```{r orp16S_6, message = FALSE, results = "hide", out.width='100%', fig.width = 10, fig.height = 7, out.extra = 'class="full-width"', pngquant = pngquant, dpi = 100}
 global.slopes <- orp16S_6()
 ```
