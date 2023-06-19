@@ -2,3 +2,6 @@ vignettes/*.html
 vignettes/*.png
 inst/vignettes/*.html
 inst/extdata/cpcp/*.html
+
+# Backup files (created by ghostwriter) 20230602 jmd
+*.backup
