@@ -1163,7 +1163,7 @@ orp16S_D3 <- function(mincount = 100) {
     if(!inherits(RDP, "try-error")) {
 
       # Calculate metrics to make sure we get the same samples used in the analysis for the paper
-      map <- map_taxa(RDP)
+      map <- map_taxa(RDP, refdb = "RefSeq")
       metrics <- getmetrics_orp16S(study, lineage = lineage, mincount = mincount)
       mdat <- getmdat_orp16S(study, metrics)
       metadata <- mdat$metadata
@@ -1505,8 +1505,8 @@ getmetrics_orp16S <- function(study, mincount = 100, quiet = TRUE, ...) {
   # If there is no .xz file, look for a .tab file 20210607
   if(!file.exists(RDPfile)) RDPfile <- file.path(datadir, paste0(studyfile, ".tab"))
   RDP <- read_RDP(RDPfile, mincount = mincount, quiet = quiet, ...)
-  map <- map_taxa(RDP, quiet = quiet)
-  get_metrics(RDP, map)
+  map <- map_taxa(RDP, refdb = "RefSeq", quiet = quiet)
+  get_metrics(RDP, refdb = "RefSeq", map)
 }
 
 ############################

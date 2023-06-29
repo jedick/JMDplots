@@ -28,6 +28,7 @@ remotes::install_github("jedick/chem16S")
 ```
 
 > **Note**
+>
 > As of 2023-06-17, **JMDplots** depends on the development version of **canprot** from GitHub, not the released version on CRAN.
 
 Finally, install **JMDplots**.

@@ -1822,8 +1822,8 @@ getmetrics_geo16S <- function(study, quiet = TRUE, ...) {
   # If there is no .xz file, look for a .tab file 20210607
   if(!file.exists(RDPfile)) RDPfile <- file.path(datadir, paste0(studyfile, ".tab"))
   RDP <- read_RDP(RDPfile, quiet = quiet, ...)
-  map <- map_taxa(RDP, quiet = quiet)
-  get_metrics(RDP, map = map, taxon_AA = taxon_AA$RefSeq)
+  map <- map_taxa(RDP, refdb = "RefSeq", quiet = quiet)
+  get_metrics(RDP, map = map, refdb = "RefSeq", taxon_AA = taxon_AA$RefSeq)
 }
 
 # Function to calculate and plot metrics for a given study 20220506
