@@ -147,11 +147,11 @@ hum16S_2 <- function(pdf = FALSE) {
   par(mar = c(4, 4, 3, 1))
   # Plot small symbols: Any treatment
   Any <- plotmet_hum16S("BPB+21_AnyTreatment", extracolumn = c("Subject", "Site", "Treatment"),
-    refdb = refdb, title = FALSE, pt.open.col = NA, plot.bg = FALSE, xlim = c(-0.20, -0.12),
+    refdb = refdb, title = FALSE, pt.open.col = NA, xlim = c(-0.20, -0.12),
     xlab = canprot::cplab$Zc, ylab = canprot::cplab$nH2O)
   # Plot large symbols: No treatment
   No <- plotmet_hum16S("BPB+21_NoTreatment", add = TRUE, cex = 2, extracolumn = c("Subject", "Site"),
-    refdb = refdb, title = FALSE, pt.open.col = NA, plot.bg = FALSE)
+    refdb = refdb, title = FALSE, pt.open.col = NA)
   # Draw convex hull around all samples 20221125
   AnyNo <- list(Any, No)
   AnyNo[[2]] <- cbind(AnyNo[[2]], Treatment = NA)
