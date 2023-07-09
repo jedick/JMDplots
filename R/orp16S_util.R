@@ -1,4 +1,4 @@
-# JMDplots/orp16S_plot.R
+# JMDplots/orp16S_util.R
 # Plotting functions used in orp16S paper 20211007
 
 ## Uncomment to source and run these functions interactively (developer mode)

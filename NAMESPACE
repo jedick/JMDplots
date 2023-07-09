@@ -83,7 +83,9 @@ export(
   # orp16S paper 20221230
   "orp16S_1", "orp16S_2",
   # hum16S paper 20230212
-  "hum16S_1", "hum16S_2", "hum16S_3", "hum16S_4", "COVID_means"
+  "hum16S_1", "hum16S_2", "hum16S_3", "hum16S_4", "COVID_means",
+  # chem16S paper 20230709
+  "chem16S_1"
 )
 
 # Imports from CHNOSZ
@@ -139,7 +141,9 @@ importFrom("canprot",
 # Imports from chem16S
 importFrom("chem16S",
   # 20220506
-  "read_RDP", "map_taxa", "get_metrics", "plot_metrics", "add_hull"
+  "read_RDP", "map_taxa", "get_metrics", "plot_metrics", "add_hull",
+  # 20230709
+  "plot_ps_metrics", "plot_ps_metrics2"
 )
 
 # Imports from other packages
@@ -153,7 +157,8 @@ importFrom("ggplot2", "theme_bw", "xlab", "ylab", "geom_hline", "geom_vline", "t
            "element_text", "ggplot", "aes", "geom_point", "ggtitle", "labs", "xlim", "ylim",
            "theme_void", "geom_text", "annotate", "unit",
            "ggplot_gtable", "ggplot_build", "theme_classic", "element_rect", "ggsave",
-           "geom_smooth", "geom_contour")
+           "geom_smooth", "geom_contour",
+           "theme_set", "coord_cartesian", "facet_wrap", "geom_line", "geom_polygon", "guides", "guide_legend")
 importFrom("grid", "grid.roundrect", "gpar", "grid.draw")
 importFrom("oce", "mapPlot", "mapPoints", "mapPolygon")
 importFrom("sf", "st_coordinates", "st_read", "st_transform")
@@ -181,7 +186,7 @@ importFrom("stats", "lm", "na.omit", "predict", "sd", "predict.lm", "residuals",
            "TukeyHSD", "aov", "binom.test", "confint")
 importFrom("utils", "read.csv", "demo", "tail", "write.csv",
            "capture.output", "browseURL", "head", "combn", "read.table", "packageVersion",
-           "assignInNamespace")
+           "assignInNamespace", "data")
 
 S3method(dunnTest,default)
 S3method(dunnTest,formula)

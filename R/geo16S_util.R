@@ -1,4 +1,4 @@
-# JMDplots/chem16S_plot.R
+# JMDplots/geo16S_util.R
 # Plotting functions for reference (RefSeq) and estimated community proteomes
 # Separated from chem16S.R 20210607
 

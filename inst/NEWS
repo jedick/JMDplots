@@ -1,5 +1,7 @@
-CHANGES IN JMDplots 1.2.17-7
-----------------------------
+CHANGES IN JMDplots 1.2.17-14
+-----------------------------
+
+- 20230709 Add plots for chem16S paper.
 
 - 20230530 Rename sars16S to hum16S.
 

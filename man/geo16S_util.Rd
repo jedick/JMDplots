@@ -1,6 +1,6 @@
 \encoding{UTF-8}
-\name{chem16S_plot}
-\alias{chem16S_plot}
+\name{geo16S_util}
+\alias{geo16S_util}
 \alias{taxacomp}
 \alias{getrefseq}
 \title{Plot chemical metrics of taxa and community proteomes estimated from 16S rRNA gene sequences}

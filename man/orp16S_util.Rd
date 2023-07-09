@@ -1,6 +1,6 @@
 \encoding{UTF-8}
-\name{orp16S_plot}
-\alias{orp16S_plot}
+\name{orp16S_util}
+\alias{orp16S_util}
 \alias{plotEZ}
 \alias{plotMA}
 \title{Plotting functions for orp16S paper}
