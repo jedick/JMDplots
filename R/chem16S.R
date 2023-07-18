@@ -32,8 +32,8 @@ chem16S_1 <- function(pdf = FALSE) {
 
   # Define text
   input_text <- data.frame(label = '  library(chem16S)
-    library(phyloseq); data(GlobalPatterns)
-    ps_metrics(GlobalPatterns, refdb = "RefSeq") |> head(n = 2)
+  data(GlobalPatterns, package = "phyloseq")
+  ps_metrics(GlobalPatterns, refdb = "RefSeq") |> head(n = 3)
 
 
 
@@ -45,35 +45,37 @@ chem16S_1 <- function(pdf = FALSE) {
 
 
 
-    data(mouse.GTDB)
-    ps_metrics(mouse.GTDB) |> head(n = 2)
+  data(mouse.GTDB, package = "chem16S")
+  ps_metrics(mouse.GTDB) |> head(n = 3)
 
 
 
 
-  ')
+
+')
 
   output_text <- data.frame(label = '>
-  >
-  >
-  [1] "map_taxa: using these manual mapping(s) to NCBI RefSeq:"
-  order_Rhizobiales --> order_Hyphomicrobiales (0.2%)
-  order_Clostridiales --> order_Eubacteriales (0.6%)
-  family_Ruminococcaceae --> family_Oscillospiraceae (3.1%)
-  [1] "map_taxa: can\'t map groups order_Stramenopiles (12.94%),
-  family_ACK-M1 (3.27%), 374 others (11.75%)"
-  [1] "map_taxa: mapping rate to RefSeq taxonomy is 71.9%"
-                  Zc        nO2       nH2O
-  CL3     -0.1439756 -0.6697709 -0.7475996
-  CC1     -0.1447548 -0.6701114 -0.7450737
-
-  >
-  >
-  [1] "map_taxa: mapping rate to GTDB taxonomy is 100.0%"
-                 Zc        nO2       nH2O
-  F3D0   -0.1572185 -0.7051765 -0.7704916
-  F3D141 -0.1549137 -0.7020583 -0.7755448
-  ')
+>
+>
+[1] "map_taxa: using these manual mapping(s) to NCBI RefSeq:"
+order_Rhizobiales --> order_Hyphomicrobiales (0.2%)
+order_Clostridiales --> order_Eubacteriales (0.6%)
+family_Ruminococcaceae --> family_Oscillospiraceae (3.1%)
+[1] "map_taxa: can\'t map groups order_Stramenopiles (12.94%),
+family_ACK-M1 (3.27%), 374 others (11.75%)"
+[1] "map_taxa: mapping rate to RefSeq taxonomy is 71.9%"
+            Zc        nO2       nH2O
+CL3 -0.1439756 -0.6697709 -0.7475996
+CC1 -0.1447548 -0.6701114 -0.7450737
+SV1 -0.1403848 -0.6623117 -0.7428770
+>
+>
+[1] "map_taxa: mapping rate to GTDB taxonomy is 100.0%"
+               Zc        nO2       nH2O
+F3D0   -0.1572185 -0.7051765 -0.7704916
+F3D141 -0.1549137 -0.7020583 -0.7755448
+F3D142 -0.1540525 -0.7008292 -0.7777001
+')
                             
   # NULL assignments are needed to avoid "Undefined global functions or variables" in R CMD check
   label <- NULL
@@ -109,6 +111,8 @@ chem16S_1 <- function(pdf = FALSE) {
     theme(legend.key.size = unit(0.4, "cm"),
           legend.title = element_text(size = 12),
           legend.text = element_text(size = 9)) +
+    # Change legend title 20230716
+    labs(color = "Sample type", fill = "Sample type") +
     # Change the point symbols in the color legend 20230707
     # https://stackoverflow.com/questions/13456765/ggplot2-custom-legend-shapes
     guides(colour = guide_legend(override.aes = list(shape = c(17, 19, 19, 17, 19, 19, 17, 19, 17))))
