@@ -1,11 +1,11 @@
-# hum16S/pipeline.R
+# microhum/pipeline.R
 # Dump 16S rRNA gene sequences from SRA, merge and filter, subsample, find chimeras, and run RDP Classifier
 
 # 20200909 Initial version by Jeffrey M. Dick (for geo16S paper)
 # 20210922 Add --skip-technical --clip options to fastq-dump
 #          Don't use fastq_filter --stripleft for 454 data
 # 20220512 Use GNU parallel in classify()
-# 20221013 Add GTDB option (for hum16S paper)
+# 20221013 Add GTDB option (for microhum paper)
 
 ## SYSTEM REQUIREMENTS
 # (version numbers for information only)

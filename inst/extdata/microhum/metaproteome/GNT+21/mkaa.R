@@ -1,4 +1,4 @@
-# hum16S/metaproteome/GNT+21/mkaa.R
+# microhum/metaproteome/GNT+21/mkaa.R
 # Calculate amino acid composition from protein sequences
 # 20221112 jmd
 

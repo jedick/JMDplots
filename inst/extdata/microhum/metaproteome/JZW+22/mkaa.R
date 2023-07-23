@@ -1,4 +1,4 @@
-# hum16S/metaproteome/JZW+22/mkaa.R
+# microhum/metaproteome/JZW+22/mkaa.R
 # Calculate amino acid composition from proteins
 # 20230207 jmd
 

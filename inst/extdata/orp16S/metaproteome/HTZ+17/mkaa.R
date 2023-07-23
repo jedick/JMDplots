@@ -1,7 +1,7 @@
 # orp16S/metaproteome/HTZ+17/mkaa.R
 # Process Saanich Inlet metaproteome
 # 20220501 jmd version 1
-# 20221028 revised for hum16S paper
+# 20221028 revised for microhum paper
 # 20221227 Use ScanCount for protein abundance
 
 # REQUIRED FILES:

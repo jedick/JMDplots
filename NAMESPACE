@@ -82,8 +82,8 @@ export(
   "orp16S_D3",
   # orp16S paper 20221230
   "orp16S_1", "orp16S_2",
-  # hum16S paper 20230212
-  "hum16S_1", "hum16S_2", "hum16S_3", "hum16S_4", "COVID_means",
+  # microhum paper 20230212
+  "microhum_1", "microhum_2", "microhum_3", "microhum_4", "COVID_means",
   # chem16S paper 20230709
   "chem16S_1"
 )

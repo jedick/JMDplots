@@ -1,8 +1,9 @@
-# JMDplots/hum16S.R
+# JMDplots/microhum.R
 # Plots for chem16S paper 20220202
 # Renamed to sars16S 20220907
 # Moved to JMDplots 20230211
 # Renamed to hum16S 20230530
+# Renamed to microhum 20230723
 
 # Plot symbols and colors for body sites 20221125
 pch_Oral <- 21
@@ -19,7 +20,7 @@ col_Gut <- "#E69F00"
 ##########################
 
 # Chemical metrics of reference proteomes as a function of oxygen tolerance and comparison with metaproteomes 20221125
-hum16S_1 <- function(pdf = FALSE) {
+microhum_1 <- function(pdf = FALSE) {
 
   # Setup plot
   if(pdf) pdf("Figure_1.pdf", width = 7, height = 5)
@@ -86,7 +87,7 @@ hum16S_1 <- function(pdf = FALSE) {
   RMSD <- function(x, y) sqrt( mean( (y - x) ^ 2 ) )
 
   # Calculate chemical metrics
-  dat <- getMP_hum16S(refdb)
+  dat <- getMP_microhum(refdb)
 
   # Make Zc plot
   Zclim <- c(-0.20, -0.05)
@@ -126,7 +127,7 @@ hum16S_1 <- function(pdf = FALSE) {
 
 # Chemical variation of microbial proteins across body sites,
 # after viral inactivation treatment, and multi-omics comparison 20221125
-hum16S_2 <- function(pdf = FALSE) {
+microhum_2 <- function(pdf = FALSE) {
 
   # Use GTDB-based reference proteomes
   refdb <- "GTDB"
@@ -146,11 +147,11 @@ hum16S_2 <- function(pdf = FALSE) {
   # Panel A: nH2O-Zc plot for all samples
   par(mar = c(4, 4, 3, 1))
   # Plot small symbols: Any treatment
-  Any <- plotmet_hum16S("BPB+21_AnyTreatment", extracolumn = c("Subject", "Site", "Treatment"),
+  Any <- plotmet_microhum("BPB+21_AnyTreatment", extracolumn = c("Subject", "Site", "Treatment"),
     refdb = refdb, title = FALSE, pt.open.col = NA, xlim = c(-0.20, -0.12),
     xlab = canprot::cplab$Zc, ylab = canprot::cplab$nH2O)
   # Plot large symbols: No treatment
-  No <- plotmet_hum16S("BPB+21_NoTreatment", add = TRUE, cex = 2, extracolumn = c("Subject", "Site"),
+  No <- plotmet_microhum("BPB+21_NoTreatment", add = TRUE, cex = 2, extracolumn = c("Subject", "Site"),
     refdb = refdb, title = FALSE, pt.open.col = NA)
   # Draw convex hull around all samples 20221125
   AnyNo <- list(Any, No)
@@ -162,7 +163,7 @@ hum16S_2 <- function(pdf = FALSE) {
 
   # Plot p-values 20230204
   # Use metrics for untreated samples
-  met <- getmetrics_hum16S("BPB+21_NoTreatment", refdb = refdb)
+  met <- getmetrics_microhum("BPB+21_NoTreatment", refdb = refdb)
   met <- met[match(No$Run, met$Run), ]
   # Use metrics for gut and oral samples
   igut <- No$Site == "feces"
@@ -229,7 +230,7 @@ hum16S_2 <- function(pdf = FALSE) {
   col <- lapply(col, add.alpha, "d0")
   pch <- list(oro = pch_Oral, naso = pch_Nasal, gut = pch_Gut)
   # Read precomputed mean values 20220823
-  datadir <- system.file("extdata/hum16S", package = "JMDplots")
+  datadir <- system.file("extdata/microhum", package = "JMDplots")
   means <- read.csv(file.path(datadir, "COVID_means_GTDB.csv"))
   # Loop over body sites
   for(type in c("gut", "oro", "naso")) {
@@ -258,7 +259,7 @@ hum16S_2 <- function(pdf = FALSE) {
   cols <- c(col_Gut, col_Oral, col_Nasal)
   cols <- sapply(cols, add.alpha, "b0")
   for(i in 1:length(studies)) {
-    datadir <- system.file("extdata/hum16S", package = "JMDplots")
+    datadir <- system.file("extdata/microhum", package = "JMDplots")
     file <- paste0(datadir, "/ARAST/", studies[i], "_AA.csv")
     dat <- read.csv(file)
     Zc <- Zc(dat)
@@ -303,7 +304,7 @@ hum16S_2 <- function(pdf = FALSE) {
   for(i in 1:length(studies_MP)) {
     # Get amino acid composition from metaproteome
     studydir <- strsplit(studies_MP[i], "_")[[1]][1]
-    datadir <- system.file("extdata/hum16S", package = "JMDplots")
+    datadir <- system.file("extdata/microhum", package = "JMDplots")
     aa <- read.csv(paste0(datadir, "/metaproteome/", studydir, "/", studies_MP[i], "_aa.csv"))
     # Calculate Zc and nH2O
     Zc <- Zc(aa)
@@ -335,7 +336,7 @@ hum16S_2 <- function(pdf = FALSE) {
 
 # Differences of chemical metrics of oropharyngeal, nasopharyngeal, and
 # gut microbiomes between controls and COVID-19 positive patients 20220806
-hum16S_3 <- function(pdf = FALSE) {
+microhum_3 <- function(pdf = FALSE) {
 
   # Use GTDB-based reference proteomes
   refdb <- "GTDB"
@@ -356,7 +357,7 @@ hum16S_3 <- function(pdf = FALSE) {
   col <- list(naso = col_Nasal, oro = col_Oral, gut = col_Gut)
   pch <- list(naso = pch_Nasal, oro = pch_Oral, gut = pch_Gut)
   # Read precomputed mean values 20220823
-  datadir <- system.file("extdata/hum16S", package = "JMDplots")
+  datadir <- system.file("extdata/microhum", package = "JMDplots")
   means <- read.csv(file.path(datadir, "COVID_means_GTDB.csv"))
 
   ## Panel A: nH2O-Zc plots for 16S data for nasopharyngeal, oral/oropharyngeal, and gut datasets
@@ -403,7 +404,7 @@ hum16S_3 <- function(pdf = FALSE) {
   taxonomies <- c("Bacteria", "All")
   for(i in 1:2) {
     taxonomy <- taxonomies[i]
-    datadir <- system.file("extdata/hum16S", package = "JMDplots")
+    datadir <- system.file("extdata/microhum", package = "JMDplots")
     if(taxonomy == "All") aa <- read.csv(file.path(datadir, "metaproteome/HZX+21/HZX+21_aa.csv"))
     if(taxonomy == "Bacteria") aa <- read.csv(file.path(datadir, "metaproteome/HZX+21/HZX+21_bacteria_aa.csv"))
     # Identify control and COVID-19 patients
@@ -467,7 +468,7 @@ hum16S_3 <- function(pdf = FALSE) {
 
   ## Panel C: Boxplots for nH2O and Zc in fecal MAGs 20221029
   # Read amino acid compositions of proteins predicted from MAGs
-  datadir <- system.file("extdata/hum16S", package = "JMDplots")
+  datadir <- system.file("extdata/microhum", package = "JMDplots")
   aa <- read.csv(file.path(datadir, "KWL22/KWL22_MAGs_prodigal_aa.csv.xz"))
   # https://github.com/Owenke247/COVID-19/blob/main/Pre-processed_Files/COVID19_metadata.txt
   dat <- read.csv(file.path(datadir, "KWL22/COVID19_metadata.txt"), sep = "\t")
@@ -520,7 +521,7 @@ hum16S_3 <- function(pdf = FALSE) {
 }
 
 # Overview of chemical variation of the human microbiome inferred from multi-omics datasets 20230112
-hum16S_4 <- function(pdf = FALSE) {
+microhum_4 <- function(pdf = FALSE) {
 
   if(pdf) pdf("Figure_4.pdf", width = 8, height = 6)
 
@@ -612,7 +613,7 @@ hum16S_4 <- function(pdf = FALSE) {
 
   ## Draw images
   # Aspect ratio of image is ca. 4:9
-  datadir <- system.file("extdata/hum16S", package = "JMDplots")
+  datadir <- system.file("extdata/microhum", package = "JMDplots")
   body <- readPNG(file.path(datadir, "images/body.png"))
   rasterImage(body, 0, 5.6, 1.6, 9.2)
   rasterImage(body, 16, 0, 14.4, 3.6)
@@ -653,7 +654,7 @@ hum16S_4 <- function(pdf = FALSE) {
 # Gather values of Zc and nH2O for metaproteomes and 16S-based estimates 20220828
 # Add refdb argument 20221017
 # Add zero_AA argument 20221018
-getMP_hum16S <- function(refdb = "RefSeq", zero_AA = NULL) {
+getMP_microhum <- function(refdb = "RefSeq", zero_AA = NULL) {
 
   studies_MP <- c("MLL+17", "TWC+22", "MPB+19", "PMM+18", 
     "KTS+17", "KTS+17.mock", "HTZ+17")
@@ -666,13 +667,13 @@ getMP_hum16S <- function(refdb = "RefSeq", zero_AA = NULL) {
 
   out <- lapply(seq_along(studies_16S), function(i) {
     # Get 16S estimates
-    metrics <- getmetrics_hum16S(studies_16S[i], refdb = refdb, zero_AA = zero_AA)
-    mdat <- getmdat_hum16S(studies_16S[i], metrics)
-    # Get metaproteome values - look in orp16S then hum16S directory
+    metrics <- getmetrics_microhum(studies_16S[i], refdb = refdb, zero_AA = zero_AA)
+    mdat <- getmdat_microhum(studies_16S[i], metrics)
+    # Get metaproteome values - look in orp16S then microhum directory
     datadir <- system.file("extdata/orp16S", package = "JMDplots")
     file <- paste0(datadir, "/metaproteome/", studies_MP[i], "/", studies_MP[i], "_aa.csv")
     if(!file.exists(file)) {
-      datadir <- system.file("extdata/hum16S", package = "JMDplots")
+      datadir <- system.file("extdata/microhum", package = "JMDplots")
       file <- paste0(datadir, "/metaproteome/", studies_MP[i], "/", studies_MP[i], "_aa.csv")
     }
     aa <- read.csv(file)
@@ -710,8 +711,8 @@ COVID_means <- function() {
   # Function to calculate mean Zc and nH2O for patients and controls
   getmeans <- function(study) {
     print(study)
-    metrics <- getmetrics_hum16S(study, refdb = refdb)
-    mdat <- getmdat_hum16S(study, metrics)
+    metrics <- getmetrics_microhum(study, refdb = refdb)
+    mdat <- getmdat_microhum(study, metrics)
     # "up" for disease/positive, "down" for control/negative
     iup <- sapply(mdat$metadata$pch == 25, isTRUE)
     idn <- sapply(mdat$metadata$pch == 24, isTRUE)

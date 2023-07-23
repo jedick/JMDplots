@@ -1,4 +1,4 @@
-# hum16S/metaproteome/JZW+22/download_HOMD.R
+# microhum/metaproteome/JZW+22/download_HOMD.R
 # Download selected faa files from Human Oral Microbome Database
 # 20230207 jmd
 
