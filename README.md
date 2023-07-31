@@ -6,7 +6,7 @@ This R package has code and data for papers by [Jeffrey M. Dick](https://chnosz.
 
 ## Quick links to active papers (pre-publication drafts)
 
-- **microhum**: On the roles of water and oxygen in the genomic adaptation of human microbiomes: [data directory](inst/extdata/microhum), [R code](R/microhum.R), [help page source](man/microhum.Rd), [vignette source](vignettes/microhum.Rmd)
+- **microhum**: Water and oxygen in the genomic adaptation of human microbiomes: [data directory](inst/extdata/microhum), [R code](R/microhum.R), [help page source](man/microhum.Rd), [vignette source](vignettes/microhum.Rmd)
   - A compiled HTML version of the vignette is at [chnosz.net](https://chnosz.net/JMDplots/doc/microhum.html).
   - A preprint is on [bioRxiv](https://doi.org/10.1101/2023.02.12.528246).
 

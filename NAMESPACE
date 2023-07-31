@@ -83,9 +83,11 @@ export(
   # orp16S paper 20221230
   "orp16S_1", "orp16S_2",
   # microhum paper 20230212
-  "microhum_1", "microhum_2", "microhum_3", "microhum_4", "COVID_means",
+  "microhum_1", "microhum_2", "microhum_3", "microhum_4", "dataset_metrics",
   # chem16S paper 20230709
-  "chem16S_1"
+  "chem16S_1",
+  # microhum paper 20230212
+  "microhum_S1", "microhum_S2"
 )
 
 # Imports from CHNOSZ
@@ -143,7 +145,9 @@ importFrom("chem16S",
   # 20220506
   "read_RDP", "map_taxa", "get_metrics", "plot_metrics", "add_hull",
   # 20230709
-  "plot_ps_metrics", "plot_ps_metrics2"
+  "plot_ps_metrics", "plot_ps_metrics2",
+  # 20230731
+  "calc_metrics", "chemlab"
 )
 
 # Imports from other packages
@@ -170,7 +174,7 @@ importFrom("multcompView", "multcompLetters4")
 importFrom("grDevices", "dev.off", "cairo_pdf", "pdf", "blues9", "colorRampPalette",
            "chull", "col2rgb", "rgb", "colorRamp", "heat.colors", "topo.colors",
            "extendrange", "contourLines", "hcl.colors", "savePlot", "png", "dev.list",
-           "palette", "palette.colors", "dev.cur")
+           "palette", "palette.colors", "dev.cur", "adjustcolor")
 importFrom("graphics", "abline", "arrows", "axis", "box", "layout",
            "legend", "lines", "mtext", "par", "plot", "plot.new",
            "points", "rect", "text", "title", "smoothScatter", "strheight",

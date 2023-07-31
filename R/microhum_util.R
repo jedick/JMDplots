@@ -191,6 +191,85 @@ getmdat_microhum <- function(study, metrics = NULL, dropNA = TRUE, quiet = TRUE)
     col <- sapply(metadata$Status, switch, Control = 4, "COVID-19" = 2, NA)
   }
 
+  # 20230321 Ulcerative colitis
+  if(study == "TWC+22") {
+    status <- ifelse(grepl("UC", metadata$Sample), "UC", "Healthy")
+    pch <- sapply(status, switch, Healthy = 24, UC = 25, NA)
+    col <- sapply(status, switch, Healthy = 4, UC = 2, NA)
+  }
+  # 20230322 IBD
+  if(study == "LAA+19") {
+    pch <- sapply(metadata$Disease, switch, nonIBD = 24, UC = 25, CD = 25, NA)
+    col <- sapply(metadata$Disease, switch, nonIBD = 4, UC = 2, CD = 2, NA)
+  }
+  # 20230322 IBD
+  if(study == "MDV+22") {
+    pch <- sapply(metadata$Subject_ID, switch, Healthy_control = 24, 25)
+    col <- sapply(metadata$Subject_ID, switch, Healthy_control = 4, 2)
+  }
+  # 20230323 Ulcerative colitis
+  if(study == "ZTG+21") {
+    status <- ifelse(grepl("UC", metadata$SampleName), "UC", "Healthy")
+    pch <- sapply(status, switch, Healthy = 24, UC = 25, NA)
+    col <- sapply(status, switch, Healthy = 4, UC = 2, NA)
+  }
+  # 20230323 IBD
+  if(study == "ASM+23") {
+    pch <- sapply(metadata$Status, switch, Control = 24, Patient = 25)
+    col <- sapply(metadata$Status, switch, Control = 4, Patient = 2)
+  }
+  # 20230323 IBD
+  if(study == "AAM+20") {
+    pch <- sapply(metadata$Disease, switch, Control = 24, "Ulcerative Colitis" = 25, "Crohn's Disease" = 25)
+    col <- sapply(metadata$Disease, switch, Control = 4, "Ulcerative Colitis" = 2, "Crohn's Disease" = 2)
+  }
+  # 20230323 IBD
+  if(study == "RAF+20") {
+    status <- ifelse(grepl("HT", metadata$SampleName), "Healthy", "IBD")
+    pch <- sapply(status, switch, Healthy = 24, IBD = 25, NA)
+    col <- sapply(status, switch, Healthy = 4, IBD = 2, NA)
+  }
+  # 20230324 IBD
+  if(study == "LZD+19") {
+    # Stool samples from patients and controls
+    idat <- metadata$Tissue == "Stool"
+    idat[is.na(idat)] <- FALSE
+    metadata <- metadata[idat, ]
+    pch <- sapply(metadata$Disease, switch, "Healthy subject" = 24, "Inflammatory Bowel Disease" = 25, NA)
+    col <- sapply(metadata$Disease, switch, "Healthy subject" = 4, "Inflammatory Bowel Disease" = 2, NA)
+  }
+  if(study == "LZD+19_mucosa") {
+    # Inflamed and not inflamed tissue from patients and controls
+    icontrol <- metadata$Disease == "Healthy subject" & metadata$Tissue == "Not Inflamed"
+    ipatient <- metadata$Disease == "Inflammatory Bowel Disease" & metadata$Tissue == "Inflamed"
+    idat <- icontrol | ipatient
+    idat[is.na(idat)] <- FALSE
+    metadata <- metadata[idat, ]
+    pch <- sapply(metadata$Disease, switch, "Healthy subject" = 24, "Inflammatory Bowel Disease" = 25, NA)
+    col <- sapply(metadata$Disease, switch, "Healthy subject" = 4, "Inflammatory Bowel Disease" = 2, NA)
+  }
+  # 20230325 IBD
+  if(study == "WGL+19") {
+    pch <- sapply(metadata$Disease, switch, HC = 24, UC = 25, CD = 25)
+    col <- sapply(metadata$Disease, switch, HC = 4, UC = 2, CD = 2)
+  }
+  # 20230327 IBD
+  if(study == "GKD+14") {
+    metadata <- metadata[metadata$Location == "stool", ]
+    pch <- sapply(metadata$Diagnosis, switch, "Not IBD" = 24, CD = 25)
+    col <- sapply(metadata$Diagnosis, switch, "Not IBD" = 4, CD = 2)
+  }
+  if(study == "GKD+14_Rectum") {
+    metadata <- metadata[metadata$Location == "Rectum", ]
+    pch <- sapply(metadata$Diagnosis, switch, "Not IBD" = 24, CD = 25)
+    col <- sapply(metadata$Diagnosis, switch, "Not IBD" = 4, CD = 2)
+  }
+  if(study == "GKD+14_Ileum") {
+    metadata <- metadata[metadata$Location == "Terminal Ileum", ]
+    pch <- sapply(metadata$Diagnosis, switch, "Not IBD" = 24, CD = 25)
+    col <- sapply(metadata$Diagnosis, switch, "Not IBD" = 4, CD = 2)
+  }
+
   # 20220814 Body sites
   # BPB+21_NoTreatment, BPB+21_AnyTreatment
   if(grepl("BPB\\+21", study)) {
@@ -201,19 +280,6 @@ getmdat_microhum <- function(study, metrics = NULL, dropNA = TRUE, quiet = TRUE)
     }
     pch <- sapply(metadata$Site, switch, "Oral cavity" = 21, "Nasal cavity" = 22, "Skin of forearm" = 23, "feces" = 24, NA)
     col <- sapply(metadata$Site, switch, "Oral cavity" = "#D62728d0", "Nasal cavity" = "#56B4E9d0", "Skin of forearm" = "#9467BDd0", "feces" = "#E69F00d0", NA)
-  }
-
-  # Datasets for metaproteome comparisons
-  if(study %in% c(
-    # 20220829 Gut Starch Diet, Manus Basin Inactive Chimney, M.B. Active Chimneys
-    "MLL+17", "MPB+19", "RYP+14",
-    # 20220830 Ulcerative Colitis,
-    "TWC+22",
-    # 20221028 Soda Lake Biomats, Mock Communities, Saanich Inlet
-    "KTS+17", "KTS+17.mock", "HTZ+17"
-  )) {
-    pch <- 20
-    col <- 1
   }
 
   if(is.null(pch)) stop(paste(study, "metadata file exists, but not set up for processing"))
@@ -235,24 +301,23 @@ getmdat_microhum <- function(study, metrics = NULL, dropNA = TRUE, quiet = TRUE)
 }
 
 # Function to calculate metrics for a given study 20220506
-getmetrics_microhum <- function(study, lineage = NULL, mincount = 100, refdb = "GTDB", return_AA = FALSE, zero_AA = NULL, quiet = TRUE, ...) {
+getmetrics_microhum <- function(study, lineage = NULL, mincount = 100, return_AA = FALSE, zero_AA = NULL, quiet = TRUE, ...) {
   # Remove suffix after underscore 20200929
   studyfile <- gsub("_.*", "", study)
-  #if(refdb == "RefSeq") datadir <- system.file("extdata/microhum/RDP", package = "JMDplots")
-  if(refdb == "GTDB") datadir <- system.file("extdata/microhum/RDP-GTDB", package = "JMDplots")
+  datadir <- system.file("extdata/microhum/RDP-GTDB", package = "JMDplots")
   RDPfile <- file.path(datadir, paste0(studyfile, ".tab.xz"))
   # If there is no .xz file, look for a .tab file 20210607
   if(!file.exists(RDPfile)) RDPfile <- file.path(datadir, paste0(studyfile, ".tab"))
   RDP <- read_RDP(RDPfile, lineage = lineage, mincount = mincount, quiet = quiet, ...)
-  map <- map_taxa(RDP, refdb = refdb, quiet = quiet)
-  get_metrics(RDP, map = map, refdb = refdb, taxon_AA = taxon_AA[[refdb]], return_AA = return_AA, zero_AA = zero_AA)
+  map <- map_taxa(RDP, quiet = quiet)
+  get_metrics(RDP, map = map, taxon_AA = taxon_AA[["GTDB"]], return_AA = return_AA, zero_AA = zero_AA)
 }
 
 # Function to calculate and plot metrics for a given study 20220506
-plotmet_microhum <- function(study, lineage = NULL, refdb = "GTDB", quiet = TRUE, ...) {
-  metrics <- getmetrics_microhum(study, lineage = lineage, refdb = refdb, quiet = quiet)
+plotmet_microhum <- function(study, lineage = NULL, quiet = TRUE, ...) {
+  metrics <- getmetrics_microhum(study, lineage = lineage, quiet = quiet)
   mdat <- getmdat_microhum(study, metrics)
-  pm <- plot_metrics(mdat, ...)
+  pm <- plot_metrics(mdat, xvar = "nO2", yvar = "nH2O", ...)
   # Prepend study column
   cbind(study = study, pm)
 }

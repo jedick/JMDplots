@@ -1,10 +1,10 @@
 ---
-title: "On the roles of water and oxygen in the genomic adaptation of human microbiomes (2023)"
+title: "Water and oxygen in the genomic adaptation of human microbiomes (2023)"
 output: 
   rmarkdown::html_vignette:
     mathjax: null
 vignette: >
-  %\VignetteIndexEntry{On the roles of water and oxygen in the genomic adaptation of human microbiomes (2023)}
+  %\VignetteIndexEntry{Water and oxygen in the genomic adaptation of human microbiomes (2023)}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 bibliography: [orp16S.bib, JMDplots.bib]
@@ -25,12 +25,13 @@ options(width = 80)
 ```
 
 ```{r HTML, include=FALSE}
-Zc <- "<i>Z</i><sub>C</sub>"
+nH2O <- "<i>n</i><sub>H<sub>2</sub>O</sub>"
+nO2 <- "<i>n</i><sub>O<sub>2</sub></sub>"
 ```
 
 This vignette runs the code to make the plots from the following paper:
 
-> Dick JM. 2023. On the roles of water and oxygen in the genomic adaptation of human microbiomes. Manuscript in preparation.
+> Dick JM. 2023. Water and oxygen in the genomic adaptation of human microbiomes. Manuscript in preparation.
 > 
 > A preprint entitled "Two dimensions of chemical variation of the human microbiome across body sites and in COVID-19 patients" is available at bioRxiv. doi: [10.1101/2023.02.12.528246](https://doi.org/10.1101/2023.02.12.528246)
 
@@ -43,30 +44,45 @@ This vignette was compiled on `r Sys.Date()` with
 library(JMDplots)
 ```
 
-## Chemical metrics of reference proteomes as a function of oxygen tolerance and comparison with metaproteomes (Figure 1)
-```{r microhum_1, message = FALSE, out.width='100%', fig.align='center', fig.width = 7, fig.height = 5, pngquant = pngquant, dpi = 100}
+## Chemical variation of microbial proteins across body sites and multi-omics comparison (Figure 1)
+```{r microhum_1, message = FALSE, out.width='100%', fig.width = 7, fig.height = 6, pngquant = pngquant, dpi = 100}
 microhum_1()
 ```
 
-**Data sources:** **(A)** *List of Prokaryotes according to their Aerotolerant or Obligate Anaerobic Metabolism* [@MR18]; **(B)** Gut Starch Diet [@MLL+17], Ulcerative Colitis Gut [@TWC+22], Manus Basin Inactive Chimney [@MPB+19], Manus Basin Active Chimneys [@PMM+18;@RYP+14], Soda Lake Biomats [@KTS+17], Mock Communities [@KTS+17], Saanich Inlet [@HTZ+17].
+**Data sources:** **(A)** @BPB+21; **(B)** See Table 1 in manuscript; **(C)** @LLZ+21, @CZH+22, @ZZL+20; **(D)** @TWC+22, @MLL+17, @JZW+22, @GNT+21.
 
-## Chemical variation of microbial proteins across body sites, after viral inactivation treatment, and multi-omics comparison (Figure 2)
-```{r microhum_2, message = FALSE, out.width='100%', fig.width = 8, fig.height = 6, pngquant = pngquant, dpi = 100}
+## Differences of chemical metrics between controls and COVID-19/IBD patients (Figure 2)
+```{r microhum_2, message = FALSE, out.width='100%', fig.width = 13, fig.height = 12, pngquant = pngquant, dpi = 100}
 microhum_2()
 ```
 
-**Data sources:** **(A)** @BPB+21; **(B)** @BPB+21; **(C)** See Table 1 in manuscript; **(D)** @LLZ+21, @CZH+22, @ZZL+20; **(E)** @TWC+22, @MLL+17, @JZW+22, @GNT+21.
+**Data sources:** **(A)** See Table 1 in manuscript; **(B)** MAGs [@KWL22], based on data from @YZL+21; **(C)** @HZX+21; **(D)** See Table 1 in manuscript.
 
-## Differences of chemical metrics of nasopharyngeal, oropharyngeal, and gut microbiomes between controls and COVID-19 patients (Figure 3)
-```{r microhum_3, message = FALSE, out.width='100%', fig.width = 15, fig.height = 12, pngquant = pngquant, dpi = 100}
+## Overview of chemical variation of human microbiomes inferred from multi-omics datasets (Figure 3)
+```{r microhum_3, message = FALSE, out.width='100%', fig.width = 8, fig.height = 6, pngquant = pngquant, dpi = 100}
 microhum_3()
 ```
 
-**Data sources:** **(A)** See Table 1 in manuscript; **(B)** @HZX+21; **(C)** MAGs [@KWL22], based on data from @ZZL+20 and @YZL+21.
-
-## Overview of chemical variation of the human microbiome inferred from multi-omics datasets (Figure 4)
-```{r microhum_4, message = FALSE, out.width='100%', fig.width = 8, fig.height = 6, pngquant = pngquant, dpi = 100}
+## Oxygen tolerance of genera in body sites, COVID-19, and IBD (Figure 4)
+```{r microhum_4, message = FALSE, out.width='100%', fig.width = 10, fig.height = 9, pngquant = pngquant, dpi = 100}
 microhum_4()
 ```
+
+**Data sources:** **(A)--(B)** *List of Prokaryotes according to their Aerotolerant or Obligate Anaerobic Metabolism* [@MR18] with modifications made in this study; **(C)** See Table 1 in manuscript.
+
+## Changes of chemical metrics for microbiomes associated with viral inactivation (Figure S1)
+```{r microhum_S1, message = FALSE, out.width='100%', fig.width = 6, fig.height = 4, pngquant = pngquant, dpi = 100}
+microhum_S1()
+```
+
+**Data source:** @BPB+21.
+
+
+## Differences of `r nO2` and `r nH2O` between obligate anaerobic and aerotolerant genera (Figure S2)
+```{r microhum_S2, message = FALSE, out.width='75%', fig.align='center', fig.width = 7, fig.height = 4, pngquant = pngquant, dpi = 100}
+microhum_S2()
+```
+
+**Data source:** *List of Prokaryotes according to their Aerotolerant or Obligate Anaerobic Metabolism* [@MR18] with modifications made in this study.
 
 ## References

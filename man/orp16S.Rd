@@ -90,7 +90,7 @@ The function also returns information in a data frame, which is used to fill in 
 
 \section{Files in extdata/orp16S}{
   \describe{
-    \item{\file{pipeline.R}}{Pipeline for sequence data processing (uses external programs fastq-dump, vsearch, seqtk, RDP Classifier).}
+    \item{\file{pipeline.R}}{Pipeline for sequence data processing (uses external programs fastq-dump, vsearch, seqtk, RDP Classifier, and GNU Parallel (Tange, 2023)).}
     \item{\file{metadata/*.csv}}{Sample metadata for each study.}
     \item{\file{RDP/*.csv.xz}}{
       RDP Classifier results combined into a single CSV file for each study, created with the \code{classify} and \code{mkRDP} functions in \file{pipeline.R}.
@@ -122,6 +122,8 @@ Baas Becking LGM, Kaplan IR and Moore D (1960) Limits of the natural environment
 Dick JM and Meng D (2023) Community- and genome-based evidence for a shaping influence of redox potential on bacterial protein evolution. \emph{mSystems}. \doi{10.1128/msystems.00014-23}
 
 Million M and Raoult D (2018) Linking gut redox to human microbiome. \emph{Human Microbiome Journal} \bold{10}, 27--32. \doi{10.1016/j.humic.2018.07.002}
+
+Tange O (2023) GNU Parallel 20230222 ('Gaziantep'). \doi{10.5281/zenodo.7668338}
 
 USGS (2010) Great Lakes and Watersheds Shapefiles. ScienceBase Catalog, U.S. Geological Survey. \doi{https://www.sciencebase.gov/catalog/item/530f8a0ee4b0e7e46bd300dd}
 }
