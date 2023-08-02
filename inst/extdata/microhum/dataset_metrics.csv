@@ -1,4 +1,4 @@
-type,study,n_dn,n_up,Zc_dn,Zc_up,Zc_pvalue,nO2_dn,nO2_up,nO2_pvalue,nH2O_dn,nH2O_up,nH2O_pvalue,control_anaerobe,disease_anaerobe,control_aerobe,disease_aerobe,control_unknown,disease_unknown,D_Zc,D_nO2,D_nH2O
+type,study,n_dn,n_up,Zc_dn,Zc_up,Zc_pvalue,nO2_dn,nO2_up,nO2_pvalue,nH2O_dn,nH2O_up,nH2O_pvalue,control_anaerobe,disease_anaerobe,control_aerotolerant,disease_aerotolerant,control_unknown,disease_unknown,D_Zc,D_nO2,D_nH2O
 naso,CSC+22,38,38,-0.154668,-0.155167,1,-0.690666,-0.693704,0.376529,-0.742268,-0.749001,1.43793e-06,10.391,19.0875,73.8531,59.3382,15.7558,21.5743,-0.000499447,-0.003038,-0.00673216
 naso,ENJ+21,10,9,-0.157546,-0.162508,0.0534759,-0.694358,-0.703988,0.0534759,-0.739092,-0.743044,0.0101323,14.4295,5.57865,66.792,86.8014,18.7785,7.61996,-0.00496224,-0.00962992,-0.00395269
 naso,GKJ+22,26,63,-0.16535,-0.162539,0.668247,-0.711548,-0.704748,0.429853,-0.748538,-0.744619,0.00900336,48.0998,28.9968,48.2474,67.238,3.65281,3.76518,0.00281069,0.0068004,0.00391917

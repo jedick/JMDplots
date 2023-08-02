@@ -5,7 +5,7 @@
 source("ARAST.R")
 
 # Function to calculate amino acid composition from inferred protein sequences
-mkAA <- function(faafiles, environment) {
+mkAA <- function(faafiles, environment, Control = NULL) {
   # Get Run IDs from file name
   ID <- sapply(strsplit(basename(faafiles), ".fast*"), "[", 1)
   # Create blank data frame for amino acid composition for each sample
@@ -23,6 +23,8 @@ mkAA <- function(faafiles, environment) {
     out[i, 5:25] <- colSums(aa[, 5:25])
   }
   outfile <- paste0(environment, "_AA.csv")
+  # Identify Control and COVID-19 samples in 'ref' column 20230731
+  if(!is.null(Control)) out$ref <- ifelse(ID %in% Control, "Control", "COVID-19")
   write.csv(out, outfile, row.names = FALSE, quote = FALSE)
 }
 
@@ -40,8 +42,12 @@ lapply(files, process, techtype = "illumina")
 
 # The inferred amino acid sequences of protein-coding genes
 faafiles <- paste0("/home/ARAST/work/", ID, ".fasta_coding.faa.gz")
+
+# List of control samples (from Figure S1 of Liu et al., 2021 and SRA run info PRJNA656660)
+Control <- c("SRR12442173", "SRR12442175", "SRR12442176")
+
 # Generate table of summed amino acid frequencies for each sample
-mkAA(faafiles, "LLZ+21")
+mkAA(faafiles, "LLZ+21", Control)
 
 ########
 ## Process gut metagenomes [ZZL+20]
@@ -66,8 +72,15 @@ lapply(files, process, techtype = "illumina")
 
 # The inferred amino acid sequences of protein-coding genes
 faafiles <- paste0("/home/ARAST/work/", ID, ".fasta_coding.faa.gz")
+
+# List of control samples (from BioSample metadata PRJNA624223)
+Control <- c("SRR12328893", "SRR12328894", "SRR12328895", "SRR12328897", "SRR12328898",
+             "SRR12328899", "SRR12328900", "SRR12328901", "SRR12328902", "SRR12328903",
+             "SRR12328904", "SRR12328905", "SRR12328906", "SRR12328908", "SRR12328909"
+)
+
 # Generate table of summed amino acid frequencies for each sample
-mkAA(faafiles, "ZZL+20")
+mkAA(faafiles, "ZZL+20", Control)
 
 ########
 ## Process oropharyngeal metagenomes [CZH+22]

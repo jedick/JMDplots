@@ -31,7 +31,7 @@ nO2 <- "<i>n</i><sub>O<sub>2</sub></sub>"
 
 This vignette runs the code to make the plots from the following paper:
 
-> Dick JM. 2023. Water and oxygen in the genomic adaptation of human microbiomes. Manuscript in preparation.
+> Dick JM. 2023. Water and oxygen in the genomic adaptation of human microbiomes. Submitted manuscript.
 > 
 > A preprint entitled "Two dimensions of chemical variation of the human microbiome across body sites and in COVID-19 patients" is available at bioRxiv. doi: [10.1101/2023.02.12.528246](https://doi.org/10.1101/2023.02.12.528246)
 

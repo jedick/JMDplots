@@ -168,7 +168,7 @@ microhum_1 <- function(pdf = FALSE) {
   legend("topleft", c(hyphen.in.pdf("Thuy-Boun'22"), "Maier'17"), title = "Gut", title.adj = 0.4,
     pch = c(pch_Gut, 25), pt.bg = col_Gut, col = NA,
     cex = 0.8, bg = "transparent", inset = c(0, 0.2))
-  title(hyphen.in.pdf("Metaproteomes\n(not COVID-19 studies)"), font.main = 1)
+  title(hyphen.in.pdf("Metaproteomes\n(controls and patients, not COVID-19)"), font.main = 1)
   label.figure("D", font = 2, cex = 1.8, yfrac = 0.96)
 
   if(pdf) dev.off()
@@ -520,9 +520,9 @@ microhum_4 <- function(pdf = FALSE) {
     if(site == "COVID_control") label.figure(hyphen.in.pdf(ctitle), font = 2, xfrac = 1.92, yfrac = 0.97, cex = 1.5)
   }
 
-  # Panel C: Percent of facultative aerobic genera in COVID-19 or IBD vs controls 20230726
+  # Panel C: Percent of aerotolerant genera in COVID-19 or IBD vs controls 20230726
   startplot <- function(ylab) {
-    plot(c(0, 100), c(0, 100), type = "n", xlab = "Controls (% fac. aerobe)", ylab = ylab)
+    plot(c(0, 100), c(0, 100), type = "n", xlab = "Controls (% aerotolerant)", ylab = ylab)
     lines(c(0, 100), c(0, 100), lty = 2, col = 8)
   }
   # Colors and point symbols for sample types
@@ -532,13 +532,13 @@ microhum_4 <- function(pdf = FALSE) {
   datadir <- system.file("extdata/microhum", package = "JMDplots")
   metrics <- read.csv(file.path(datadir, "dataset_metrics.csv"))
 
-  # Calculate percentage of facultative aerobes among genera with known oxygen tolerance 20230726
-  control <- metrics$control_aerobe / (metrics$control_aerobe + metrics$control_anaerobe) * 100
-  disease <- metrics$disease_aerobe / (metrics$disease_aerobe + metrics$disease_anaerobe) * 100
+  # Calculate percentage of aerotolerant genera among those with known oxygen tolerance 20230726
+  control <- metrics$control_aerotolerant / (metrics$control_aerotolerant + metrics$control_anaerobe) * 100
+  disease <- metrics$disease_aerotolerant / (metrics$disease_aerotolerant + metrics$disease_anaerobe) * 100
 
   # Loop over sample groups
   for(type in c("naso", "oro", "gut", "IBD")) {
-    if(type == "IBD") startplot("IBD (% fac. aerobe)") else startplot(hyphen.in.pdf("COVID-19 (% fac. aerobe)"))
+    if(type == "IBD") startplot("IBD (% aerotolerant)") else startplot(hyphen.in.pdf("COVID-19 (% aerotolerant)"))
     itype <- metrics$type == type
     label <- 1:sum(itype)
 
@@ -574,7 +574,7 @@ microhum_4 <- function(pdf = FALSE) {
     label <- bquote(bold(.(start) * Delta == .(covid) ~ "minus control)"))
 
     if(type == "naso") label.figure(
-      hyphen.in.pdf("C. Cumulative abundance of facultative aerobes in COVID-19 and IBD (data sources listed in Table 1)"),
+      hyphen.in.pdf("C. Cumulative abundance of aerotolerant genera in COVID-19 and IBD (data sources listed in Table 1)"),
       font = 2, xfrac = 1.6, yfrac = 0.97, cex = 1.5
     )
   }
@@ -774,11 +774,11 @@ dataset_metrics <- function() {
     # Calculate oxygen tolerance 20230725
     disease <- calc.oxytol(study = study)
     disease_anaerobe <- sum(disease$abundance[disease$oxygen.tolerance == "obligate anaerobe"])
-    disease_aerobe <- sum(disease$abundance[disease$oxygen.tolerance == "facultative aerobe"])
+    disease_aerotolerant <- sum(disease$abundance[disease$oxygen.tolerance == "aerotolerant"])
     disease_unknown <- sum(disease$abundance[disease$oxygen.tolerance == "unknown"])
     control <- calc.oxytol("control", study = study)
     control_anaerobe <- sum(control$abundance[control$oxygen.tolerance == "obligate anaerobe"])
-    control_aerobe <- sum(control$abundance[control$oxygen.tolerance == "facultative aerobe"])
+    control_aerotolerant <- sum(control$abundance[control$oxygen.tolerance == "aerotolerant"])
     control_unknown <- sum(control$abundance[control$oxygen.tolerance == "unknown"])
     # Include number of samples 20220905
     data.frame(n_dn = sum(idn), n_up = sum(iup),
@@ -786,7 +786,7 @@ dataset_metrics <- function() {
          nO2_dn = nO2_dn, nO2_up = nO2_up, nO2_pvalue = nO2_pvalue, 
          nH2O_dn = nH2O_dn, nH2O_up = nH2O_up, nH2O_pvalue = nH2O_pvalue,
          control_anaerobe = control_anaerobe, disease_anaerobe = disease_anaerobe, 
-         control_aerobe = control_aerobe, disease_aerobe = disease_aerobe,
+         control_aerotolerant = control_aerotolerant, disease_aerotolerant = disease_aerotolerant,
          control_unknown = control_unknown, disease_unknown = disease_unknown
     )
   }
@@ -907,14 +907,14 @@ calc.oxytol <- function(site = "Feces", study = NULL) {
   # Read the table of oxygen tolerance for genera
   dat <- read.csv(system.file("extdata/microhum/MR18_Table_S1_modified.csv", package = "JMDplots"))
   obligate.anaerobe <- dat$Genus.name[dat$Obligate.anerobic.prokaryote %in% c(1, 2)]
-  facultative.aerobe <- dat$Genus.name[dat$Obligate.anerobic.prokaryote == 0]
+  aerotolerant <- dat$Genus.name[dat$Obligate.anerobic.prokaryote == 0]
   # List each genus and remove suffixes (_A, _B, etc.)
   genus <- rownames(RDP)
   genus <- sapply(strsplit(genus, "_"), "[", 1)
   # Assign oxygen tolerance
   oxygen.tolerance <- rep("unknown", length(genus))
   oxygen.tolerance[genus %in% obligate.anaerobe] <- "obligate anaerobe"
-  oxygen.tolerance[genus %in% facultative.aerobe] <- "facultative aerobe"
+  oxygen.tolerance[genus %in% aerotolerant] <- "aerotolerant"
 
   # Make summary table
   data.frame(oxygen.tolerance, abundance, nO2)
@@ -927,7 +927,7 @@ plot.oxytol <- function(dat) {
   total.abundance <- 0
   plot(c(-0.81, -0.595), c(0, 100), xlab = chemlab("nO2"), ylab = "Abundance (%)", type = "n")
   # List classifications and colors
-  oxytols <- c("obligate anaerobe", "facultative aerobe", "unknown")
+  oxytols <- c("obligate anaerobe", "aerotolerant", "unknown")
   cols <- c(2, 4, 8)
   # Loop over classifications
   for(i in 1:3) {

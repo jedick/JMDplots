@@ -19,8 +19,8 @@ install.packages("remotes")
 ```
 
 Then install other required packages.
-- [**canprot**](https://github.com/jedick/canprot) has functions for calculating chemical metrics of proteins and data for differential expression of proteins in cancer and cell-culture experiments.
-- [**chem16S**](https://github.com/jedick/chem16S) processes 16S-based taxonomic classifications to calculate chemical metrics of community reference proteomes.
+- [**canprot**](https://github.com/jedick/canprot) has data and functions for analyzing differential expression of proteins in cancer and cell-culture experiments.
+- [**chem16S**](https://github.com/jedick/chem16S) processes 16S rRNA-based taxonomic classifications to calculate chemical metrics of community reference proteomes.
 
 ```R
 remotes::install_github("jedick/canprot")
@@ -30,6 +30,7 @@ remotes::install_github("jedick/chem16S")
 > **Note**
 >
 > As of 2023-06-17, **JMDplots** depends on the development version of **canprot** from GitHub, not the released version on CRAN.
+> As of 2023-07-31, **JMDplots** depends on the development version of **chem16S** from GitHub, not the released version on CRAN.
 
 Finally, install **JMDplots**.
 This command will install prebuilt vignettes; they might not be up-to-date with the code.
