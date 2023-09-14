@@ -9,6 +9,7 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 bibliography: JMDplots.bib
 csl: elementa.csl
+link-citations: true
 ---
 
 ```{r setup, include=FALSE}
@@ -27,7 +28,7 @@ pKa <- "p<i>K</i><sub>a</sub>"
 
 This vignette runs the code to make selected plots from the following paper:
 
-> Dick JM, LaRowe DE, Helgeson HC. 2006. Temperature, pressure, and electrochemical constraints on protein speciation: Group additivity calculation of the standard molal thermodynamic properties of ionized unfolded proteins. *Biogeosciences* **3**(3): 311–336. doi: [10.5194/bg-3-311-2006](https://doi.org/10.5194/bg-3-311-2006)
+> Dick JM, LaRowe DE, Helgeson HC. 2006. Temperature, pressure, and electrochemical constraints on protein speciation: Group additivity calculation of the standard molal thermodynamic properties of ionized unfolded proteins. *Biogeosciences* **3**(3): 311–-336. doi: [10.5194/bg-3-311-2006](https://doi.org/10.5194/bg-3-311-2006)
 
 These plots have been modified from the original figures to add a neutral pH line to Figure 4 and a legend and colored labels to Figure 13.
 

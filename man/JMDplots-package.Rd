@@ -114,7 +114,7 @@ Dick JM, LaRowe DE and Helgeson HC (2006) Temperature, pressure, and electrochem
 
 Dick JM (2009) Calculation of the relative metastabilities of proteins in subcellular compartments of \emph{Saccharomyces cerevisiae}. \emph{BMC Syst. Biol.} \bold{3}, 75. \doi{10.1186/1752-0509-3-75}
 
-Dick JM and Meng D (2023) Community- and genome-based evidence for a shaping influence of redox potential on bacterial protein evolution. \emph{mSystems}. \doi{10.1128/msystems.00014-23}
+Dick JM and Meng D (2023) Community- and genome-based evidence for a shaping influence of redox potential on bacterial protein evolution. \emph{mSystems} \bold{8}, e00014-23. \doi{10.1128/msystems.00014-23}
 
 Dick JM and Shock EL (2011) Calculation of the relative chemical stabilities of proteins as a function of temperature and redox chemistry in a hot spring. \emph{PLOS One} \bold{6}, e22782. \doi{10.1371/journal.pone.0022782}
 

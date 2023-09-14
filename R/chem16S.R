@@ -93,7 +93,7 @@ F3D142 -0.1540525 -0.7008292 -0.7777001
   pB1 <- plot_ps_metrics(mouse.GTDB, x = "Day", metrics = "Zc") +
     facet_wrap(~When, scales = "free_x") + geom_line(colour = red) +
     labs(title = "(B) Mouse gut dataset")
-  pB2 <- plot_ps_metrics(mouse.GTDB, x = "Day", metrics = "nH2O") +
+  pB2 <- plot_ps_metrics(mouse.GTDB, x = "Day", metrics = "nH2O", quiet = TRUE) +
     facet_wrap(~When, scales = "free_x") + geom_line(colour = blue)
   pB <- pB1 / pB2
 
@@ -106,7 +106,7 @@ F3D142 -0.1540525 -0.7008292 -0.7777001
     geom_polygon(aes(fill = SampleType), alpha = 0.5) + geom_point(size = 3) +
     labs(title = "(C) GlobalPatterns dataset") +
     theme(legend.position = "none")
-  pC2 <- plot_ps_metrics2(GlobalPatterns, "O/C", "H/C", color = "SampleType", shape = "Human", refdb = "RefSeq") +
+  pC2 <- plot_ps_metrics2(GlobalPatterns, "O/C", "H/C", color = "SampleType", shape = "Human", refdb = "RefSeq", quiet = TRUE) +
     geom_polygon(aes(fill = SampleType), alpha = 0.5) + geom_point(size = 3) +
     theme(legend.key.size = unit(0.4, "cm"),
           legend.title = element_text(size = 12),

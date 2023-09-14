@@ -9,6 +9,7 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 bibliography: [orp16S.bib, JMDplots.bib]
 csl: elementa.csl
+link-citations: true
 ---
 
 <style>
@@ -61,7 +62,7 @@ Zc <- "<i>Z</i><sub>C</sub>"
 
 This vignette runs the code to make the plots from the following paper:
 
-> Dick JM, Meng D. 2023. Community- and genome-based evidence for a shaping influence of redox potential on bacterial protein evolution. *mSystems*. doi: [10.1128/msystems.00014-23](https://doi.org/10.1128/msystems.00014-23)
+> Dick JM, Meng D. 2023. Community- and genome-based evidence for a shaping influence of redox potential on bacterial protein evolution. *mSystems* **8**(3): e00014-23. doi: [10.1128/msystems.00014-23](https://doi.org/10.1128/msystems.00014-23)
 
 This vignette was compiled on `r Sys.Date()` with **[JMDplots](https://github.com/jedick/JMDplots)** `r packageDescription("JMDplots")$Version` and **[chem16S](https://github.com/jedick/chem16S)** `r packageDescription("chem16S")$Version`.
 

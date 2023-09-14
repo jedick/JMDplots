@@ -9,6 +9,7 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 bibliography: JMDplots.bib
 csl: elementa.csl
+link-citations: true
 ---
 <script>
 function ToggleDiv(ID) {
