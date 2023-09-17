@@ -9,16 +9,14 @@
 This package contains data and code used to make the plots in various papers.
 Each paper is identified with a project name, as listed in the table below.
 The plots are available in the corresponding vignettes in the package.
-
-Note that the code in this package is not identical to that used in the papers, but has been minimally modified to be included in this package.
-Please refer to the supporting information of the papers for the original scripts.
 }
 
 \details{
   \itemize{
-    \item \code{\link{utogig}} - Using thermodynamics to obtain geochemical information from genomes (Dick et al., 2023)
+    \item \code{\link{chem16S}} - Community-level chemical metrics (Dick and Kang, 2023)
     \item \code{\link{orp16S}} - Influence of redox potential on bacterial protein evolution (Dick and Meng, 2023)
-    \item \code{\link{geo16S}} - Chemical links between redox conditions and community reference proteomes (Dick and Tan, 2022)
+    \item \code{\link{geo16S}} - Chemical links between redox conditions and community reference proteomes (Dick and Tan, 2023)
+    \item \code{\link{utogig}} - Using thermodynamics to obtain geochemical information from genomes (Dick et al., 2023)
     \item \code{\link{evdevH2O}} - Thermodynamic model for water activity and redox potential in evolution and development (Dick, 2022)
     \item \code{\link{mjenergy}} - Energy release in protein synthesis (Dick and Shock, 2021)
     \item \code{\link{canH2O}} - Water as a reactant in the differential expression of proteins in cancer (Dick, 2021)
@@ -114,8 +112,6 @@ Dick JM, LaRowe DE and Helgeson HC (2006) Temperature, pressure, and electrochem
 
 Dick JM (2009) Calculation of the relative metastabilities of proteins in subcellular compartments of \emph{Saccharomyces cerevisiae}. \emph{BMC Syst. Biol.} \bold{3}, 75. \doi{10.1186/1752-0509-3-75}
 
-Dick JM and Meng D (2023) Community- and genome-based evidence for a shaping influence of redox potential on bacterial protein evolution. \emph{mSystems} \bold{8}, e00014-23. \doi{10.1128/msystems.00014-23}
-
 Dick JM and Shock EL (2011) Calculation of the relative chemical stabilities of proteins as a function of temperature and redox chemistry in a hot spring. \emph{PLOS One} \bold{6}, e22782. \doi{10.1371/journal.pone.0022782}
 
 Dick JM and Shock EL (2013) A metastable equilibrium model for the relative abundance of microbial phyla in a hot spring. \emph{PLOS One} \bold{8}, e72395. \doi{10.1371/journal.pone.0072395}
@@ -136,9 +132,13 @@ Dick JM (2021) Water as a reactant in the differential expression of proteins in
 
 Dick JM and Shock EL (2021) The release of energy during protein synthesis at ultramafic-hosted submarine hydrothermal ecosystems. \emph{J. Geophys. Res.: Biogeosciences} \bold{126}, e2021JG006436. \doi{10.1029/2021JG006436}
 
-Dick JM and Tan J (2023) Chemical links between redox conditions and estimated community proteomes from 16S rRNA and reference protein sequences. \emph{Microb. Ecol.} \bold{85}, 1338--1355. \doi{10.1007/s00248-022-01988-9}
-
 Dick JM (2022) A thermodynamic model for water activity and redox potential in evolution and developent. \emph{J. Mol. Evol} \bold{90}, 182--199. \doi{10.1007/s00239-022-10051-7}
 
 Dick JM, Boyer GM, Canovas PA III and Shock EL (2023) Using thermodynamics to obtain geochemical information from genomes. \emph{Geobiology} \bold{21}, 262--273. \doi{10.1111/gbi.12532}
+
+Dick JM and Tan J (2023) Chemical links between redox conditions and estimated community proteomes from 16S rRNA and reference protein sequences. \emph{Microb. Ecol.} \bold{85}, 1338--1355. \doi{10.1007/s00248-022-01988-9}
+
+Dick JM and Meng D (2023) Community- and genome-based evidence for a shaping influence of redox potential on bacterial protein evolution. \emph{mSystems} \bold{8}, e00014-23. \doi{10.1128/msystems.00014-23}
+
+Dick JM and Kang X (2023) \emph{chem16S}: community-level chemical metrics for exploring genomic adaptation to environments. \emph{Bioinformatics} \bold{39}, btad564. \doi{10.1093/bioinformatics/btad564}
 }

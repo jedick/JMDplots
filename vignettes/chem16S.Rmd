@@ -55,7 +55,7 @@ nO2 <- "<i>n</i><sub>O<sub>2</sub></sub>"
 
 This vignette runs the code to make the plots from the following paper:
 
-> Dick JM and Kang X. 2023. *chem16S*: Community-level chemical metrics for exploring genomic adaptation to environments. *Bioinformatics*. doi: [10.1093/bioinformatics/btad564](https://doi.org/10.1093/bioinformatics/btad564)
+> Dick JM, Kang X. 2023. *chem16S*: community-level chemical metrics for exploring genomic adaptation to environments. *Bioinformatics* **39**(9): btad564. doi: [10.1093/bioinformatics/btad564](https://doi.org/10.1093/bioinformatics/btad564)
 
 This vignette was compiled on `r Sys.Date()` with
 **[JMDplots](https://github.com/jedick/JMDplots)** `r packageDescription("JMDplots")$Version` and

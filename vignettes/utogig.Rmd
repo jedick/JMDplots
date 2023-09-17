@@ -73,7 +73,7 @@ library(JMDplots)
 utogig1()
 ```
 
-**Data sources:** Hierarchical clustering tree of methanogenesis genes [@LL18]; `r Zc` calculated for reference proteomes [@DT22] based on RefSeq protein sequences [@OWB+16]. See Table S1 in the paper's Supplementary Information for references for optimal growth temperature (*T*~opt~).
+**Data sources:** Hierarchical clustering tree of methanogenesis genes [@LL18]; `r Zc` calculated for reference proteomes [@DT23] based on RefSeq protein sequences [@OWB+16]. See Table S1 in the paper's Supplementary Information for references for optimal growth temperature (*T*~opt~).
 
 ## Relative stabilities of organic compounds depend on redox conditions (Figure 2)
 ```{r utogig2, message = FALSE, out.width='100%', fig.width = 7, fig.height = 6, pngquant = pngquant, dpi = 100}

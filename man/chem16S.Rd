@@ -20,7 +20,7 @@ Plots from the paper by Dick and Kang (2023).
 }
 
 \references{
-Dick JM and Kang X (2023) \emph{chem16S}: Community-level chemical metrics for exploring genomic adaptation to environments. Submitted manuscript.
+Dick JM and Kang X (2023) \emph{chem16S}: community-level chemical metrics for exploring genomic adaptation to environments. \emph{Bioinformatics} \bold{39}, btad564. \doi{10.1093/bioinformatics/btad564}
 }
 
 \examples{
