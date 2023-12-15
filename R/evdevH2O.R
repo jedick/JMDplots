@@ -188,7 +188,7 @@ evdevH2O3 <- function(pdf = FALSE, H2O = FALSE) {
   if(H2O) y <- -0.625 else y <- -0.003
   text(1, y, 4290, srt = 45) # Cellular organisms
   text(4, y, 2101, srt = 45) # Eukaryota
-  text(5, y, 1105, srt = 45) # Eukaryota
+  text(5, y, 1105, srt = 45) # Opisthokonta
   text(6, y, 948, srt = 45)  # Eumetazoa
   text(7, y, 615, srt = 45)  # Vertebrata
   text(8, y, 177, srt = 45)  # Mammalia

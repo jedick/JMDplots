@@ -60,9 +60,10 @@ for(i in 1:nrow(refprot)) {
   aa <- CHNOSZ::read.fasta(file)
   # Get Protein IDs
   aa$protein <- sapply(strsplit(aa$protein, "\\|"), "[", 2)
-  # Calculate Zc and nH2O
-  Zc <- ZC(protein.formula(aa))
-  nH2O <- as.numeric(nH2O(aa))
+  # Calculate metrics
+  Zc <- as.numeric(Zc(aa))
+  nO2 <- as.numeric(nO2(aa))
+  nH2O <- as.numeric(nH2O(aa, terminal_H2O = 1))
   # Read gene age table
   agefile <- file.path("Main", paste0("main_", refprot$OSCODE[i], ".csv"))
   ages <- read.csv(agefile, check.names = FALSE, row.names = 1)
@@ -71,7 +72,7 @@ for(i in 1:nrow(refprot)) {
   # Match protein ID to reference sequence data
   iaa <- match(rownames(ages), aa$protein)
   # Build output data frame
-  out <- data.frame(ID = rownames(ages), modeAge = modeAge, Zc = round(Zc[iaa], 3), nH2O = round(nH2O[iaa], 3))
+  out <- data.frame(ID = rownames(ages), modeAge = modeAge, Zc = round(Zc[iaa], 3), nO2 = round(nO2[iaa], 3), nH2O = round(nH2O[iaa], 3))
   # Exclude NA values of Zc (i.e. Liebeskind protein ID not in reference proteome)
   out <- out[!is.na(out$Zc), ]
   outfile <- file.path("metrics", paste0(refprot$OSCODE[i], ".csv"))
