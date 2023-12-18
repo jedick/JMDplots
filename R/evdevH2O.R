@@ -157,19 +157,27 @@ evdevH2O3 <- function(pdf = FALSE, H2O = FALSE) {
   irp <- c(irp[!ishuman], irp[ishuman])
   refprot <- refprot[irp, ]
 
+  # Instead of using precomputed metrics,
+  # read summed amino acid compositions for proteins in each modeAge in each organism 20231218
+  aa <- read.csv(file.path(datadir, "modeAges_aa.csv"))
+
   # Start Zc or nH2O plot
   if(!H2O) plot(c(1, 9), c(-0.18, -0.02), xlab = "Gene Age", ylab = Zclab, type = "n", font.lab = 2)
   if(H2O) plot(c(1, 9), c(-0.9, -0.65), xlab = "Gene Age", ylab = nH2Olab, type = "n", font.lab = 2)
   # Add drop line at gene age 5 (Opisthokonta)
   abline(v = 5, lty = 2, col = "gray40")
+
   # Loop over proteomes
   for(i in 1:nrow(refprot)) {
-    # Read modeAge and Zc/nH2O values
-    dat <- read.csv(file.path(datadir, "metrics", paste0(refprot$OSCODE[i], ".csv.xz")))
-    # Get mean Zc/nH2O for each modeAge
-    modeAge <- 1:max(dat$modeAge)
-    if(!H2O) X <- sapply(modeAge, function(Age) mean(subset(dat, modeAge == Age)$Zc))
-    if(H2O) X <- sapply(modeAge, function(Age) mean(subset(dat, modeAge == Age)$nH2O))
+
+    # Get modeAge and amino acid composition for this organism
+    OSCODE <- refprot$OSCODE[i]
+    myaa <- aa[aa$organism == OSCODE, ]
+    modeAge <- myaa$protein
+    # Get Zc or nH2O for each modeAge
+    if(!H2O) X <- Zc(myaa)
+    if(H2O) X <- nH2O(myaa)
+
     # Add lines to plot
     col <- "#99999980"
     lwd <- 1
@@ -178,7 +186,9 @@ evdevH2O3 <- function(pdf = FALSE, H2O = FALSE) {
       lwd <- 2
     }
     lines(modeAge, X, col = col, lwd = lwd)
+
   }
+
   # Add text to indicate divergence at Opisthokonta
   if(H2O) y <- -0.65 else y <- -0.03
   text(3.95, y, "Common ancestors", adj = c(0.5, 0.5))
@@ -198,7 +208,7 @@ evdevH2O3 <- function(pdf = FALSE, H2O = FALSE) {
   label.figure("a", font = 2, cex = 1.6)
 
   # Assemble age groups for legend
-  modeAges <- read.csv(file.path(datadir, "modeAges.csv"))
+  modeAges <- read.csv(file.path(datadir, "modeAges_names.csv"))
   legend <- sapply(1:9, function(i) {
     agetab <- table(modeAges[, paste0("X", i)])
     paste0(i, ": ", paste0(names(agetab), " (", agetab, ")", collapse = ", "))

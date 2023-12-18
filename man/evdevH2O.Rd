@@ -87,13 +87,13 @@ If \code{writeFiles} is TRUE, a PNG plot file is created and optimal \logfO2 or 
 
 \section{Files in extdata/evdevH2O/LMM16}{
   \describe{
-    \item{\code{mkmetrics.R}}{
-      Script to calculate \Zc and \nH2O and get gene ages for proteins in the consensus tables of Liebeskind et al. (2016).
-      This script requires files available from UniProt and Zenodo (\doi{10.5281/zenodo.51708}); see comments for details.
+    \item{\code{mkaa.R}}{
+      Script to sum amino acid composition of all proteins in each gene age category for each organism in the consensus tables of Liebeskind et al. (2016).
+      This script requires files available from UniProt and Zenodo (\doi{10.5281/zenodo.51708}); see comments in the script for details.
     }
-    \item{\code{reference_proteomes.csv}}{IDs of UniProt reference proteomes for 31 organisms in Liebeskind et al. (2016) (input file for \code{mkmetrics.R}).}
-    \item{\code{modeAges.csv}}{Names of gene age categories for each organism (output by \code{mkmetrics.R}).}
-    \item{\code{metrics/*.csv.xz}}{Files with ID, modeAge, \Zc, \nH2O for each protein (output by \code{mkmetrics.R}).}
+    \item{\code{reference_proteomes.csv}}{IDs of UniProt reference proteomes for 31 organisms in Liebeskind et al. (2016) (input file for \code{mkaa.R}).}
+    \item{\code{modeAges_names.csv}}{Names of gene age categories for each organism (output by \code{mkaa.R}).}
+    \item{\code{modeAges_aa.csv}}{Summed amino acid composition for proteins in each gene age category (output by \code{mkaa.R}).}
   }
 }
 

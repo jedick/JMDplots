@@ -69,14 +69,22 @@ This vignette runs the code to make the plots from the following paper first pub
 Use this link for full-text access to a view-only version of the paper: [https://rdcu.be/cITho](https://rdcu.be/cITho).
 A preprint of the paper is available on bioRxiv at doi: [10.1101/2021.01.29.428804](https://doi.org/10.1101/2021.01.29.428804).
 
+On 2023-12-18, Figure 3a was modified from the original publication to use chemical metrics computed from
+the sum of amino acid compositions of proteins in each gene age category.
+The original publication used mean values of pre-computed chemical metrics for all proteins in each gene age category.
+The tables of chemical metrics for all proteins were removed to save space in the current version of the package;
+they remain available in the Zenodo archive up to JMDplots version 1.2.18 (<https://doi.org/10.5281/zenodo.8207128>).
+Compared to the original publication, the summation of amino acid compositions gives greater weight to longer proteins.
+The lines shift somewhat because of this revision, but the overall trends are unchanged.
+
 This vignette was compiled on `r Sys.Date()` with **[JMDplots](https://github.com/jedick/JMDplots)** `r packageDescription("JMDplots")$Version`, **[CHNOSZ](http://chnosz.net)** `r packageDescription("CHNOSZ")$Version`, and **[canprot](https://github.com/jedick/canprot)** `r packageDescription("canprot")$Version`.
+
+To reduce running time, the plots in this vignette are made with 99 bootstrap replicates.
+To reproduce the plots in the paper, the value of `boot.R` in the function calls below should be changed to 999.
 
 ```{r library, message = FALSE, results = "hide"}
 library(JMDplots)
 ```
-
-To reduce running time, the plots in this vignette are made with 99 bootstrap replicates.
-To reproduce the plots in the paper, the value of `boot.R` in the function calls below should be changed to 999.
 
 ## Comparison of different sets of basis species (Figure 1)
 ```{r evdevH2O1, message = FALSE, results = "hide", out.width='100%', fig.width = 8, fig.height = 6, pngquant = pngquant, dpi = 100}
