@@ -1,8 +1,9 @@
 CHANGES IN JMDplots 1.2.19
 --------------------------
 
-- 20231218 Save space by summing amino acid compositions for proteins in each
-  gene age category (post-publication update of Fig. 3a in the evdevH2O paper).
+- 20231218 extdata/evdevH2O/LMM16: Save space by summing amino acid
+  compositions for proteins in each gene age category (post-publication
+  update of Fig. 3a in the evdevH2O paper).
 
 CHANGES IN JMDplots 1.2.18
 --------------------------

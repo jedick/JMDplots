@@ -14,11 +14,18 @@ pch_Nasal <- 22
 pch_Skin <- 23
 pch_Gut <- 24
 pch_IBD <- 25
+pch_UG <- 25
 col_Oral <- "#D62728"
 col_Nasal <- "#56B4E9"
 col_Skin <- "#9467BD"
 col_Gut <- "#E69F00"
 col_IBD <- "#009E73"
+col_UG <- "#9E9E9E"
+
+# Location of data files
+getdatadir <- function() {
+  datadir <- system.file("extdata/microhum", package = "JMDplots")
+}
 
 ##########################
 ### Plotting Functions ###
@@ -57,8 +64,8 @@ microhum_1 <- function(pdf = FALSE) {
   plot.p.values(met$nO2[igut], met$nO2[ioral], met$nH2O[igut], met$nH2O[ioral], ypos = "bottom")
 
   # Make legend
-  legend("topright", legend = c("Nasal", "Skin", "Oral", "Gut"), pch = c(pch_Nasal, pch_Skin, pch_Oral, pch_Gut),
-    pt.bg = c(col_Nasal, col_Skin, col_Oral, col_Gut), col = NA, bty = "n", cex = 0.8)
+  legend("topright", legend = c("Skin", "Nasal", "Oral", "Gut"), pch = c(pch_Skin, pch_Nasal, pch_Oral, pch_Gut),
+    pt.bg = c(col_Skin, col_Nasal, col_Oral, col_Gut), col = NA, bty = "n", cex = 0.8)
   title(hyphen.in.pdf("Community reference proteomes\n(data from Boix-Amor\u00f3s et al., 2021)"), font.main = 1)
   label.figure("A", font = 2, cex = 1.8, yfrac = 0.97)
 
@@ -70,8 +77,7 @@ microhum_1 <- function(pdf = FALSE) {
   col <- lapply(col, add.alpha, "d0")
   pch <- list(oro = pch_Oral, naso = pch_Nasal, gut = pch_Gut)
   # Read precomputed mean values 20220823
-  datadir <- system.file("extdata/microhum", package = "JMDplots")
-  means <- read.csv(file.path(datadir, "dataset_metrics.csv"))
+  means <- read.csv(file.path(getdatadir(), "dataset_metrics.csv"))
   # Loop over body sites
   for(type in c("gut", "oro", "naso")) {
     itype <- means$type == type
@@ -100,8 +106,7 @@ microhum_1 <- function(pdf = FALSE) {
   cols <- c(col_Gut, col_Oral, col_Nasal)
   cols <- sapply(cols, add.alpha, "b0")
   for(i in 1:length(studies)) {
-    datadir <- system.file("extdata/microhum", package = "JMDplots")
-    file <- paste0(datadir, "/ARAST/", studies[i], "_AA.csv")
+    file <- paste0(getdatadir(), "/ARAST/", studies[i], "_AA.csv")
     dat <- read.csv(file)
     nO2 <- nO2(dat)
     nH2O <- nH2O(dat)
@@ -145,8 +150,7 @@ microhum_1 <- function(pdf = FALSE) {
   for(i in 1:length(studies_MP)) {
     # Get amino acid composition from metaproteome
     studydir <- strsplit(studies_MP[i], "_")[[1]][1]
-    datadir <- system.file("extdata/microhum", package = "JMDplots")
-    aa <- read.csv(paste0(datadir, "/metaproteome/", studydir, "/", studies_MP[i], "_aa.csv"))
+    aa <- read.csv(paste0(getdatadir(), "/metaproteome/", studydir, "/", studies_MP[i], "_aa.csv"))
     # Calculate nO2 and nH2O
     nO2 <- nO2(aa)
     nH2O <- nH2O(aa)
@@ -194,8 +198,7 @@ microhum_2 <- function(pdf = FALSE) {
   col <- list(naso = col_Nasal, oro = col_Oral, gut = col_Gut, IBD = col_IBD)
   pch <- list(naso = pch_Nasal, oro = pch_Oral, gut = pch_Gut, IBD = pch_IBD)
   # Read precomputed mean values 20220823
-  datadir <- system.file("extdata/microhum", package = "JMDplots")
-  means <- read.csv(file.path(datadir, "dataset_metrics.csv"))
+  means <- read.csv(file.path(getdatadir(), "dataset_metrics.csv"))
 
   ## Panel A: nH2O-nO2 plots for nasopharyngeal, oral/oropharyngeal, and gut communities
   par(mar = c(4, 4, 3, 1))
@@ -239,10 +242,9 @@ microhum_2 <- function(pdf = FALSE) {
   ## Panel B: Boxplots for nH2O and nO2 in fecal MAGs 20221029
   par(mar = c(4, 4, 3, 1))
   # Read amino acid compositions of proteins predicted from MAGs
-  datadir <- system.file("extdata/microhum", package = "JMDplots")
-  aa <- read.csv(file.path(datadir, "KWL22/KWL22_MAGs_prodigal_aa.csv.xz"))
+  aa <- read.csv(file.path(getdatadir(), "KWL22/KWL22_MAGs_prodigal_aa.csv.xz"))
   # https://github.com/Owenke247/COVID-19/blob/main/Pre-processed_Files/COVID19_metadata.txt
-  dat <- read.csv(file.path(datadir, "KWL22/COVID19_metadata.txt"), sep = "\t")
+  dat <- read.csv(file.path(getdatadir(), "KWL22/COVID19_metadata.txt"), sep = "\t")
 
   # Set SRA run prefix to choose study:
   # SRR1232: Zuo et al. (PRJNA624223)
@@ -289,9 +291,8 @@ microhum_2 <- function(pdf = FALSE) {
   ## Panel C: boxplots of nO2 and nH2O of bacterial metaproteome in control and COVID-19 patients 20220830
   # Limit to bacterial taxonomy
   taxonomy <- "Bacteria"
-  datadir <- system.file("extdata/microhum", package = "JMDplots")
-  if(taxonomy == "All") aa <- read.csv(file.path(datadir, "metaproteome/HZX+21/HZX+21_aa.csv"))
-  if(taxonomy == "Bacteria") aa <- read.csv(file.path(datadir, "metaproteome/HZX+21/HZX+21_bacteria_aa.csv"))
+  if(taxonomy == "All") aa <- read.csv(file.path(getdatadir(), "metaproteome/HZX+21/HZX+21_aa.csv"))
+  if(taxonomy == "Bacteria") aa <- read.csv(file.path(getdatadir(), "metaproteome/HZX+21/HZX+21_bacteria_aa.csv"))
   # Identify control and COVID-19 patients
   icontrol <- grep("Ctrl", aa$organism)
   icovid <- grep("P", aa$organism)
@@ -467,12 +468,11 @@ microhum_3 <- function(pdf = FALSE) {
 
   ## Draw images
   # Aspect ratio of image is ca. 4:9
-  datadir <- system.file("extdata/microhum", package = "JMDplots")
-  body <- readPNG(file.path(datadir, "images/body.png"))
+  body <- readPNG(file.path(getdatadir(), "images/body.png"))
   rasterImage(body, 0, 5.6, 1.6, 9.2)
   rasterImage(body, 16, 0, 14.4, 3.6)
   # Aspect ratio of image is 1:1
-  testtube <- readPNG(file.path(datadir, "images/testtube.png"))
+  testtube <- readPNG(file.path(getdatadir(), "images/testtube.png"))
   rasterImage(testtube, 11.5, 3.8, 12.5, 4.8)
   text(12.5, 3.95, "75% EtOH", cex = 0.8)
 
@@ -529,8 +529,7 @@ microhum_4 <- function(pdf = FALSE) {
   col <- list(naso = col_Nasal, oro = col_Oral, gut = col_Gut, IBD = col_IBD)
   pch <- list(naso = pch_Nasal, oro = pch_Oral, gut = pch_Gut, IBD = pch_IBD)
   # Read precomputed values
-  datadir <- system.file("extdata/microhum", package = "JMDplots")
-  metrics <- read.csv(file.path(datadir, "dataset_metrics.csv"))
+  metrics <- read.csv(file.path(getdatadir(), "dataset_metrics.csv"))
 
   # Calculate percentage of aerotolerant genera among those with known oxygen tolerance 20230726
   control <- metrics$control_aerotolerant / (metrics$control_aerotolerant + metrics$control_anaerobe) * 100
@@ -632,8 +631,8 @@ microhum_S1 <- function(pdf = FALSE) {
   plottreated("Heat")
   # Make legend
   plot.new()
-  legend("center", legend = c("Nasal", "Skin", "Oral", "Gut"), pch = c(pch_Nasal, pch_Skin, pch_Oral, pch_Gut),
-    pt.bg = c(col_Nasal, col_Skin, col_Oral, col_Gut), col = NA, bty = "n", cex = 1.5)
+  legend("center", legend = c("Skin", "Nasal", "Oral", "Gut"), pch = c(pch_Skin, pch_Nasal, pch_Oral, pch_Gut),
+    pt.bg = c(col_Skin, col_Nasal, col_Oral, col_Gut), col = NA, bty = "n", cex = 1.5)
   plottreated("Psoralen")
   plottreated("Trizol")
 
@@ -850,11 +849,9 @@ plot.p.values <- function(X.1, X.2, Y.1, Y.2, paired = FALSE, ypos = "top") {
 # Summarize abundances of genera in body sites and list their oxygen tolerance 20230725
 calc.oxytol <- function(site = "Feces", study = NULL) {
   
-  datadir <- system.file("extdata/microhum", package = "JMDplots")
-
   if(tolower(site) %in% c("feces", "nasal", "oral", "skin")) {
     # Identify RDP file
-    RDPfile <- paste0(datadir, "/RDP-GTDB/BPB+21.tab.xz")
+    RDPfile <- paste0(getdatadir(), "/RDP-GTDB/BPB+21.tab.xz")
     # Read metadata
     mdat <- getmdat_microhum("BPB+21_NoTreatment")
     # Get run IDs for this body site
@@ -862,14 +859,14 @@ calc.oxytol <- function(site = "Feces", study = NULL) {
   }
 
   if(tolower(site) %in% c("covid", "covid_control")) {
-    RDPfile <- paste0(datadir, "/RDP-GTDB/SRK+22.tab.xz")
+    RDPfile <- paste0(getdatadir(), "/RDP-GTDB/SRK+22.tab.xz")
     mdat <- getmdat_microhum("SRK+22")
     if(tolower(site) == "covid") Run <- mdat$Run[grep("Covid19", mdat$Status)]
     if(tolower(site) == "covid_control") Run <- mdat$Run[grep("Control", mdat$Status)]
   }
 
   if(tolower(site) %in% c("ibd", "ibd_control")) {
-    RDPfile <- paste0(datadir, "/RDP-GTDB/WGL+19.tab.xz")
+    RDPfile <- paste0(getdatadir(), "/RDP-GTDB/WGL+19.tab.xz")
     mdat <- getmdat_microhum("WGL+19")
     if(tolower(site) == "ibd") Run <- mdat$Run[mdat$Disease != "HC"]
     if(tolower(site) == "ibd_control") Run <- mdat$Run[mdat$Disease == "HC"]

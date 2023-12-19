@@ -278,8 +278,16 @@ getmdat_microhum <- function(study, metrics = NULL, dropNA = TRUE, quiet = TRUE)
       if(Treatment == "NoTreatment") metadata <- metadata[metadata$Treatment == "No_treatment", ]
       if(Treatment == "AnyTreatment") metadata <- metadata[metadata$Treatment != "No_treatment", ]
     }
-    pch <- sapply(metadata$Site, switch, "Oral cavity" = 21, "Nasal cavity" = 22, "Skin of forearm" = 23, "feces" = 24, NA)
-    col <- sapply(metadata$Site, switch, "Oral cavity" = "#D62728d0", "Nasal cavity" = "#56B4E9d0", "Skin of forearm" = "#9467BDd0", "feces" = "#E69F00d0", NA)
+    pch <- sapply(metadata$Site, switch, "Oral cavity" = pch_Oral, "Nasal cavity" = pch_Nasal, "Skin of forearm" = pch_Skin, "feces" = pch_Gut, NA)
+    col <- sapply(metadata$Site, switch, "Oral cavity" = adjustcolor(col_Oral, 0.8), "Nasal cavity" = adjustcolor(col_Nasal, 0.9),
+      "Skin of forearm" = adjustcolor(col_Skin, 0.8), "feces" = adjustcolor(col_Gut, 0.8), NA)
+  }
+
+  # 20231219 Human Microbiome Project
+  if(study == "HMP12") {
+    pch <- sapply(metadata$"Body site", switch, "Skin" = pch_Skin, "Nasal cavity" = pch_Nasal, "Oral cavity" = pch_Oral, "GI tract" = pch_Gut, "UG tract" = pch_UG)
+    col <- sapply(metadata$"Body site", switch, "Skin" = adjustcolor(col_Skin, 0.8), "Nasal cavity" = adjustcolor(col_Nasal, 0.8),
+      "Oral cavity" = adjustcolor(col_Oral, 0.8), "GI tract" = adjustcolor(col_Gut, 0.8), "UG tract" = adjustcolor(col_UG, 0.8))
   }
 
   if(is.null(pch)) stop(paste(study, "metadata file exists, but not set up for processing"))
