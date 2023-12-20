@@ -106,7 +106,7 @@ microhum_1 <- function(pdf = FALSE) {
   cols <- c(col_Gut, col_Oral, col_Nasal)
   cols <- sapply(cols, add.alpha, "b0")
   for(i in 1:length(studies)) {
-    file <- paste0(getdatadir(), "/ARAST/", studies[i], "_AA.csv")
+    file <- paste0(getdatadir(), "/ARAST/", studies[i], "_aa.csv")
     dat <- read.csv(file)
     nO2 <- nO2(dat)
     nH2O <- nH2O(dat)
