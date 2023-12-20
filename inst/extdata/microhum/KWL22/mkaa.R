@@ -1,4 +1,4 @@
-# microhum/metaproteom/KWL22/mkaa.R
+# microhum/KWL22/mkaa.R
 # Get amino acid compositions from protein sequence files
 # 20221028 jmd
 

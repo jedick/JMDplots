@@ -77,7 +77,7 @@ microhum_1 <- function(pdf = FALSE) {
   col <- lapply(col, add.alpha, "d0")
   pch <- list(oro = pch_Oral, naso = pch_Nasal, gut = pch_Gut)
   # Read precomputed mean values 20220823
-  means <- read.csv(file.path(getdatadir(), "dataset_metrics.csv"))
+  means <- read.csv(file.path(getdatadir(), "16S/dataset_metrics.csv"))
   # Loop over body sites
   for(type in c("gut", "oro", "naso")) {
     itype <- means$type == type
@@ -106,7 +106,7 @@ microhum_1 <- function(pdf = FALSE) {
   cols <- c(col_Gut, col_Oral, col_Nasal)
   cols <- sapply(cols, add.alpha, "b0")
   for(i in 1:length(studies)) {
-    file <- paste0(getdatadir(), "/ARAST/", studies[i], "_aa.csv")
+    file <- file.path(getdatadir(), "ARAST", paste0(studies[i], "_aa.csv"))
     dat <- read.csv(file)
     nO2 <- nO2(dat)
     nH2O <- nH2O(dat)
@@ -150,7 +150,7 @@ microhum_1 <- function(pdf = FALSE) {
   for(i in 1:length(studies_MP)) {
     # Get amino acid composition from metaproteome
     studydir <- strsplit(studies_MP[i], "_")[[1]][1]
-    aa <- read.csv(paste0(getdatadir(), "/metaproteome/", studydir, "/", studies_MP[i], "_aa.csv"))
+    aa <- read.csv(file.path(getdatadir(), "metaproteome", studydir, paste0(studies_MP[i], "_aa.csv")))
     # Calculate nO2 and nH2O
     nO2 <- nO2(aa)
     nH2O <- nH2O(aa)
@@ -198,7 +198,7 @@ microhum_2 <- function(pdf = FALSE) {
   col <- list(naso = col_Nasal, oro = col_Oral, gut = col_Gut, IBD = col_IBD)
   pch <- list(naso = pch_Nasal, oro = pch_Oral, gut = pch_Gut, IBD = pch_IBD)
   # Read precomputed mean values 20220823
-  means <- read.csv(file.path(getdatadir(), "dataset_metrics.csv"))
+  means <- read.csv(file.path(getdatadir(), "16S/dataset_metrics.csv"))
 
   ## Panel A: nH2O-nO2 plots for nasopharyngeal, oral/oropharyngeal, and gut communities
   par(mar = c(4, 4, 3, 1))
@@ -529,7 +529,7 @@ microhum_4 <- function(pdf = FALSE) {
   col <- list(naso = col_Nasal, oro = col_Oral, gut = col_Gut, IBD = col_IBD)
   pch <- list(naso = pch_Nasal, oro = pch_Oral, gut = pch_Gut, IBD = pch_IBD)
   # Read precomputed values
-  metrics <- read.csv(file.path(getdatadir(), "dataset_metrics.csv"))
+  metrics <- read.csv(file.path(getdatadir(), "16S/dataset_metrics.csv"))
 
   # Calculate percentage of aerotolerant genera among those with known oxygen tolerance 20230726
   control <- metrics$control_aerotolerant / (metrics$control_aerotolerant + metrics$control_anaerobe) * 100
@@ -851,7 +851,7 @@ calc.oxytol <- function(site = "Feces", study = NULL) {
   
   if(tolower(site) %in% c("feces", "nasal", "oral", "skin")) {
     # Identify RDP file
-    RDPfile <- paste0(getdatadir(), "/RDP-GTDB/BPB+21.tab.xz")
+    RDPfile <- file.path(getdatadir(), "16S/RDP-GTDB/BPB+21.tab.xz")
     # Read metadata
     mdat <- getmdat_microhum("BPB+21_NoTreatment")
     # Get run IDs for this body site
@@ -859,14 +859,14 @@ calc.oxytol <- function(site = "Feces", study = NULL) {
   }
 
   if(tolower(site) %in% c("covid", "covid_control")) {
-    RDPfile <- paste0(getdatadir(), "/RDP-GTDB/SRK+22.tab.xz")
+    RDPfile <- file.path(getdatadir(), "16S/RDP-GTDB/SRK+22.tab.xz")
     mdat <- getmdat_microhum("SRK+22")
     if(tolower(site) == "covid") Run <- mdat$Run[grep("Covid19", mdat$Status)]
     if(tolower(site) == "covid_control") Run <- mdat$Run[grep("Control", mdat$Status)]
   }
 
   if(tolower(site) %in% c("ibd", "ibd_control")) {
-    RDPfile <- paste0(getdatadir(), "/RDP-GTDB/WGL+19.tab.xz")
+    RDPfile <- file.path(getdatadir(), "16S/RDP-GTDB/WGL+19.tab.xz")
     mdat <- getmdat_microhum("WGL+19")
     if(tolower(site) == "ibd") Run <- mdat$Run[mdat$Disease != "HC"]
     if(tolower(site) == "ibd_control") Run <- mdat$Run[mdat$Disease == "HC"]
@@ -876,7 +876,7 @@ calc.oxytol <- function(site = "Feces", study = NULL) {
   if(!is.null(study)) {
     # Remove suffix after underscore 20200929
     studyfile <- gsub("_.*", "", study)
-    RDPfile <- paste0("RDP-GTDB/", studyfile, ".tab.xz")
+    RDPfile <- file.path(getdatadir(), paste0("16S/RDP-GTDB/", studyfile, ".tab.xz"))
     mdat <- getmdat_microhum(study)
     if(tolower(site) == "control") Run <- mdat$Run[mdat$pch == 24] else Run <- mdat$Run[mdat$pch == 25]
   }

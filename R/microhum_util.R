@@ -7,7 +7,7 @@ getmdat_microhum <- function(study, metrics = NULL, dropNA = TRUE, quiet = TRUE)
   # Remove suffix after underscore 20200929
   studyfile <- gsub("_.*", "", study)
   datadir <- system.file("extdata/microhum", package = "JMDplots")
-  file <- file.path(datadir, "metadata", paste0(studyfile, ".csv"))
+  file <- file.path(datadir, "16S/metadata", paste0(studyfile, ".csv"))
   metadata <- read.csv(file, as.is = TRUE, check.names = FALSE)
 
   if(dropNA) {
@@ -312,7 +312,7 @@ getmdat_microhum <- function(study, metrics = NULL, dropNA = TRUE, quiet = TRUE)
 getmetrics_microhum <- function(study, lineage = NULL, mincount = 100, return_AA = FALSE, zero_AA = NULL, quiet = TRUE, ...) {
   # Remove suffix after underscore 20200929
   studyfile <- gsub("_.*", "", study)
-  datadir <- system.file("extdata/microhum/RDP-GTDB", package = "JMDplots")
+  datadir <- system.file("extdata/microhum/16S/RDP-GTDB", package = "JMDplots")
   RDPfile <- file.path(datadir, paste0(studyfile, ".tab.xz"))
   # If there is no .xz file, look for a .tab file 20210607
   if(!file.exists(RDPfile)) RDPfile <- file.path(datadir, paste0(studyfile, ".tab"))

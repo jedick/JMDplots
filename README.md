@@ -4,11 +4,46 @@
 
 This R package has code and data for papers by [Jeffrey M. Dick](https://chnosz.net/jeff/).
 
-## Quick links to active papers (pre-publication drafts)
+## Index to analysis scripts, datafiles, and external links
 
-- **microhum**: Water and oxygen in the genomic adaptation of human microbiomes: [data directory](inst/extdata/microhum), [R code](R/microhum.R), [help page source](man/microhum.Rd), [vignette source](vignettes/microhum.Rmd)
-  - A compiled HTML version of the vignette is at [chnosz.net](https://chnosz.net/JMDplots/vignettes/microhum.html).
-  - A preprint is on [bioRxiv](https://doi.org/10.1101/2023.02.12.528246).
+<details>
+
+<summary>Water and oxygen in the genomic adaptation of human microbiomes</summary>
+
+- [inst/extdata/microhum](inst/extdata/microhum): scripts and processed data files
+
+  - [ARAST](inst/extdata/microhum/ARAST): metagenomes
+
+    - [ARAST.R](inst/extdata/microhum/ARAST/ARAST.R): *script*: metagenome processing pipeline
+    - [runARAST.R](inst/extdata/microhum/ARAST/runARAST.R): *script*: run pipeline for particular metagenomes
+    - [*_aa.csv](inst/extdata/microhum/ARAST/): *output files*: amino acid composision
+    - [*_stats.csv](inst/extdata/microhum/ARAST/): *output files*: processing statistics
+
+  - [KWL22](inst/extdata/microhum/KWL22): metagenome-assembled genomes (MAGs) from [Ke et al. (2022)](https://doi.org/10.1038/s41467-022-32991-w)
+  - [metaproteome](inst/extdata/microhum/metaproteome): process metaproteomes
+
+    - [*/mkaa.R](inst/extdata/microhum/metaproteome): *scripts*: metaproteomes processing
+    - [*/aa.csv](inst/extdata/microhum/metaproteome): *output files*: amino acid composition
+
+  - [16S](inst/extdata/microhum/16S): 16S rRNA
+
+    - [metadata](inst/extdata/microhum/16S/metadata): *data*: sample metadata for 16S rRNA datasets
+    - [pipeline.R](inst/extdata/microhum/16S/pipeline.R): *script*: 16S rRNA processing pipeline
+    - [RDP-GTDB](inst/extdata/microhum/16S/RDP-GTDB): *output files*: taxonomic classifications for 16S rRNA datasets
+
+  - [images](inst/extdata/microhum/images): drawings for figure in paper
+
+  - [MR18_Table_S1_modified.csv](inst/extdata/microhum/MR18_Table_S1_modified.csv): *data*: List of Prokaryotes according to their Aerotolerant or Obligate Anaerobic Metabolism, modified from [Million and Raoult (2018)](https://doi.org/10.1016/j.humic.2018.07.002)
+
+- [R/microhum.R](R/microhum.R): code for plots
+- [man/microhum.Rd](man/microhum.Rd): manual page
+- [vignettes/microhum.Rmd](vignettes/microhum.Rmd): vignette (runs code to make each plot)
+
+  - [microhum.html](https://chnosz.net/JMDplots/vignettes/microhum.html): compiled HTML version of the vignette (external link)
+
+- [bioRxiv](https://doi.org/10.1101/2023.02.12.528246): preprint (external link)
+
+</details>
 
 ## Installation
 

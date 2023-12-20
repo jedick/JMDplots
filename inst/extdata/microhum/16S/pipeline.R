@@ -15,6 +15,8 @@
 # vsearch 2.15.0       https://github.com/torognes/vsearch
 # seqtk 1.3-r115       https://github.com/lh3/seqtk
 # RDP Classifier 2.13  https://sourceforge.net/projects/rdp-classifier/
+# RDP Classifier training files based on GTDB release 207
+#                      https://doi.org/10.5281/zenodo.7633100
 # Java openjdk version 1.8.0_252 (for RDP); GNU utils (cat, awk, grep)
 
 ## USAGE
@@ -39,13 +41,13 @@
 # To run RDP Classifier after chimera removal:
 # > classify(RUNID)
 # To combine output of RDP Classifier into one file
-#   - Result is saved in RDP/<study>.tab below the current directory
+#   - Result is saved in <study>.tab in the RDP/ or RDP-GTDB/ directory
 # > mkRDP()
 
 ## STUDY SETTINGS
 
 # Change the following line to setup the pipeline for one study
-study <- "GKD+14"
+study <- "HMP12"
 # Settings for all studies are stored here
 file <- tempfile()
 # Write spaces here (but don't save them) to make this easier to read
@@ -99,7 +101,9 @@ writeLines(con = file, text = gsub(" ", "", c(
   "AAM+20, NA, NA",
   "LZD+19, NA, NA",
   "WGL+19, FALSE, 250",
-  "GKD+14, FALSE, 250"
+  "GKD+14, FALSE, 250",
+  # Human Microbiome Project 20231214
+  "HMP12, TRUE, 400"
 )))
 
 # This reads and applies the settings
@@ -145,9 +149,7 @@ filter <- function(RUNID) {
   # The output file from this function is a FASTA file with .fa suffix
   outfile <- paste0(RUNID, ".fa")
 
-  if(study %in% c("DJK+18", "WLJ+16", "TWC+22")) {
-    # For DJK+18, FASTQ files were downloaded from SRA cloud and split with seqtk subseq 20220521
-    # For WLJ+16, FASTQ files were downloaded from SRA cloud 20220521
+  if(study %in% c("TWC+22")) {
     # For TWC+22, FASTQ files were downloaded from Zenodo 20220829
     fqdump <- FALSE
   } else {
@@ -178,10 +180,8 @@ filter <- function(RUNID) {
     if(!file.exists(infile)) infile <- paste0(RUNID, "_1.fastq")
     # Use forward reads only
     file.copy(infile, "merged.fastq", overwrite = TRUE)
-    # For Ohio Aquifers, file names are different 20220521
-    if(study == "DJK+18") file.copy(paste0(RUNID, ".fastq"), "merged.fastq", overwrite = TRUE)
-    # For Hetao Plain, file names are different 20220521
-    if(study == "WLJ+16") file.copy(paste0(RUNID, "_R1.fastq"), "merged.fastq", overwrite = TRUE)
+    # For Human Microbiome Project, reads are in different file 20211216
+    if(study == "HMP12") file.copy(paste0(RUNID, "_4.fastq"), "merged.fastq", overwrite = TRUE)
     nseq <- length(readLines("merged.fastq")) / 4
     print(paste0("Using forward reads only (", nseq, " sequences)"))
   } else {

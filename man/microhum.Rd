@@ -47,12 +47,13 @@ The data files listed below are stored in \file{extdata/microhum}:
 
 \section{Data and scripts for 16S rRNA datasets}{
   \describe{
-    \item{\file{pipeline.R}}{Pipeline for sequence data processing (uses external programs fastq-dump, vsearch, seqtk, RDP Classifier, and GNU Parallel (Tange, 2023))}
-    \item{\file{RDP-GTDB/*.tab.xz}}{
+    \item{\file{16S/pipeline.R}}{Pipeline for sequence data processing (uses external programs fastq-dump, vsearch, seqtk, RDP Classifier, and GNU Parallel (Tange, 2023))}
+    \item{\file{16S/RDP-GTDB/*.tab.xz}}{
       RDP Classifier results combined into a single CSV file for each study, created with the \code{classify} and \code{mkRDP} functions in \file{pipeline.R}.
       GTDB 16S SSU rRNA training files for RDP Classifier are available at \url{https://doi.org/10.5281/zenodo.7633100}.
     }
-    \item{\file{metadata/*.csv}}{Sample metadata for each study}
+    \item{\file{16S/metadata/*.csv}}{Sample metadata for each study}
+    \item{\file{16S/dataset_metrics.csv}}{Mean values of chemical metrics for samples in 16S studies, created with \code{dataset_metrics}}
   }
 }
 
@@ -89,7 +90,6 @@ The data files listed below are stored in \file{extdata/microhum}:
 \section{Other files}{
   \describe{
     \item{\file{MR18_Table_S1_modified.csv}}{List of strictly anaerobic and aerotolerant genera modified from Table S1 of Million and Raoult (2018)}
-    \item{\file{dataset_metrics.csv}}{Mean values of chemical metrics for samples in 16S studies, created with \code{dataset_metrics}}
     \item{\file{images/body.png}, \file{images/testtube.png}}{Images used for \code{microhum_3}}
   }
 }
