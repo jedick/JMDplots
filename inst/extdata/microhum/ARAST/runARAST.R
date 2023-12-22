@@ -6,14 +6,14 @@
 # runARAST("ZZL+20") # Process gut metagenomes
 # runARAST("CZH+22") # Process oropharyngeal metagenomes
 # runARAST("HMP12")  # Process Human Microbiome Project metagenomes
-# runARAST("HMP12", decontamination = FALSE) # Process HMP metagenomes without decontamination step
+# runARAST("HMP12", screening = FALSE) # Process HMP metagenomes without screening step
 
 # This loads the ARAST() function for the processing pipeline
 source("ARAST.R")
 # Set working directory
 workdir <- "/home/ARAST/work"
 
-runARAST <- function(dataset, decontamination = TRUE) {
+runARAST <- function(dataset, screening = TRUE, cleanup = TRUE) {
 
   # Set techtype for all datasets
   techtype <- "illumina"
@@ -93,19 +93,21 @@ runARAST <- function(dataset, decontamination = TRUE) {
       "SRR353633", "SRR514852"
     )
 
-    ID <- ID[c(44, 63, 92)]
+## For testing with a few runs
+#ID <- ID[c(44, 63, 92)]
+#ID <- ID[c(80, 89)]
   }
 
   if(is.null(ID)) stop("invalid dataset")
   # Setting for ARAST
-  if(decontamination) {
+  if(screening) {
     run <- "protein" 
     aafile <- paste0(dataset, "_aa.csv")
     statsfile <- paste0(dataset, "_stats.csv")
   } else {
-    run <- "protein_no_decontamination"
-    aafile <- paste0(dataset, "_no_decontamination_aa.csv")
-    statsfile <- paste0(dataset, "_no_decontamination_stats.csv")
+    run <- "protein_no_screening"
+    aafile <- paste0(dataset, "_no_screening_aa.csv")
+    statsfile <- paste0(dataset, "_no_screening_stats.csv")
   }
   # Names of files to keep processing statistics for each run
   statfiles <- file.path(workdir, paste0(ID, "_stats.csv"))
@@ -139,11 +141,11 @@ runARAST <- function(dataset, decontamination = TRUE) {
       next
     }
     # Run ARAST pipeline on 128 GB workstation
-    ARAST(inputfile, run = run, techtype = techtype, mem_MB = 30000, mem_GB = 100)
+    ARAST(inputfile, run = run, techtype = techtype, mem_MB = 30000, mem_GB = 100, cleanup = cleanup)
     ## Or use this command for 16 GB laptop
-    #ARAST(inputfile, run = run, techtype = techtype, mem_MB = 6144, mem_GB = 16)
+    #ARAST(inputfile, run = run, techtype = techtype, mem_MB = 6144, mem_GB = 16, cleanup = cleanup)
     # Remove FASTQ files
-    file.remove(dir(workdir, "*.fastq", full.names = TRUE))
+    if(cleanup) file.remove(dir(workdir, "*.fastq", full.names = TRUE))
   }
 
   # Create blank data frame to hold amino acid compositions of proteins in each sample
@@ -158,8 +160,8 @@ runARAST <- function(dataset, decontamination = TRUE) {
   # Loop over files with the amino acid sequences of inferred protein-coding genes
   faafiles <- file.path(workdir, paste0(ID, "_coding.faa.gz"))
   # Only process files that exist
-  faafiles <- faafiles[file.exists(faafiles)]
-  for(i in seq_along(faafiles)) {
+  iexist <- file.exists(faafiles)
+  for(i in seq_along(faafiles)[iexist]) {
 #    # Calculate amino acid composition for each sequence ... but it's slow
 #    myaa <- CHNOSZ::read.fasta(faafiles[i])
 #    aa[i, 5:25] <- colSums(aa[, 5:25])

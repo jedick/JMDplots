@@ -21,7 +21,7 @@
 
 # SYSTEM SOFTWARE: modified from MG-RAST's "Processing Information and Downloads" seen for ERX242607_sra_data.fasta
 # skewer_0.2.2 (https://github.com/relipmoc/skewer)
-# bowtie_v2.5.0 (https://github.com/BenLangmead/bowtie2) [used by autoskewer and for decontamination step]
+# bowtie_v2.5.0 (https://github.com/BenLangmead/bowtie2) [used by autoskewer and for screening step]
 # autoskewer (https://github.com/MG-RAST/autoskewer)
 # ea-utils (https://github.com/ExpressionAnalysis/ea-utils) [fastq-mcf, used by filter_sequences]
 # biopython (pip install biopython) [used by seq_length_stats.py]
@@ -29,25 +29,41 @@
 # sortmerna (https://github.com/biocore/sortmerna)
 # FragGeneScan_FGS1.18 (https://github.com/MG-RAST/FGS)
 
+# LOCAL MODIFICATIONS to autoskewer.py (20231222):
+# $ diff autoskewer.py.orig  autoskewer.py
+# 1c1
+# < #!/usr/bin/env python
+# ---
+# > #!/usr/bin/env python2.7
+# 133c133
+# <     skewoptions = "-k 5 -l 0 --quiet -t 8 -r .2 -m any"
+# ---
+# >     skewoptions = "-k 5 --quiet -t 16 -r .2 -m any"
+#
+# Why?
+# -l 0 (0 minimum read length allowed after trimming) causes the following downstream error in filter_sequences:
+#    fastq-mcf: fastq-mcf.cpp:184: void inbuffer::reset(): Assertion `max_buf > 0' failed.
+# So, take away the -l option to let skewer use the default (-l 18)
+# Also, use -t 16 to adjust the number of threads for skewer
+
 # DATABASE:
-# download md5rna.clust (pipeline-master/CWL/Inputs/DBs/getpredata.sh) [used by sortmerna]
+# Download md5rna.clust (pipeline-master/CWL/Inputs/DBs/getpredata.sh) [used by sortmerna]
 #   curl "http://shock.metagenomics.anl.gov/node/c4c76c22-297b-4404-af5c-8cd98e580f2a?download" > md5rna.clust
-# set up index for sortmerna:
+# Set up index for sortmerna:
 #   indexdb --ref md5rna.clust,md5rna.clust.index
 # Human genome index for bowtie2
 #   wget https://genome-idx.s3.amazonaws.com/bt/GRCh38_noalt_as.zip
 
-ARAST <- function(inputfile, proc = parallel::detectCores(), run = "protein", run.gzip = TRUE, techtype = "illumina", mem_MB = 6144, mem_GB = 16) {
+ARAST <- function(inputfile, proc = parallel::detectCores(), run = "protein", run.gzip = TRUE, techtype = "illumina", mem_MB = 6144, mem_GB = 16, cleanup = TRUE) {
 
   # This function processes a single FASTA or FASTQ file
   #   'proc' number of threads for bowtie and sortmerna
-  #     NOTE: Edit skewoptions in the autoskewer.py script to adjust number of threads for skewer
   #   'techtype' can be sanger, 454, or illumina (sequencing technology needed for FragGeneScan)
   #   'mem_MB' is used by arast_sortme_rna.pl
   #     NOTE: value is limited by free memory resources; tested values include 3941 for 8 GB RAM and 6144 for 16 GB RAM
   #   'mem_GB' is used by dereplication.py
   #   'run' specifies which steps to run:
-  #     DNA: trimming, denoising, artifact removal, decontamination
+  #     DNA: trimming, denoising, artifact removal, screening (host sequence removal)
   #     RNA: DNA steps plus RNA genecalling with sortmerna
   #     protein: DNA and RNA steps plus protein genecalling with FragGeneScan
   #     FGS: FragGeneScan only
@@ -57,7 +73,7 @@ ARAST <- function(inputfile, proc = parallel::detectCores(), run = "protein", ru
   if(run == "DNA") steps <- c(0:5, 23:24)
   if(run == "RNA") steps <- c(0:6, 23:24)
   if(run == "protein") steps <- c(0:9, 23:24)
-  if(run == "protein_no_decontamination") steps <- c(0:4, 6:9, 23:24)
+  if(run == "protein_no_screening") steps <- c(0:4, 6:9, 23:24)
   if(run == "FGS") steps <- c(0:1, 9, 23:24)
 
   if(length(steps) == 0) stop("Invalid value for 'run' argument")
@@ -105,10 +121,10 @@ ARAST <- function(inputfile, proc = parallel::detectCores(), run = "protein", ru
   if(2 %in% steps) {
     print("######## 2. Adapter Trimming ########")
     scrubbedfile <- file.path(workdir, paste0(ID, "_scrubbed.", filetype))
-    autoskewer(inputfile, scrubbedfile, tmpdir)
+    autoskewer(inputfile, scrubbedfile, tmpdir, cleanup)
     tmpfiles <- c(tmpfiles, scrubbedfile)
     scrubbed_sequences <- count_sequences(scrubbedfile, filetype)
-    stats <- c(stats, scrubbed_sequencs = scrubbed_sequences)
+    stats <- c(stats, scrubbed_sequences = scrubbed_sequences)
   } else scrubbedfile <- inputfile
 
   if(3 %in% steps) {
@@ -124,7 +140,7 @@ ARAST <- function(inputfile, proc = parallel::detectCores(), run = "protein", ru
   if(4 %in% steps) {
     print("######## 4. Removal of sequencing artifacts ########")
     derepfile <- file.path(workdir, paste0(ID, "_dereplicated.fasta"))
-    dereplication(passedfile, derepfile, tmpdir, mem_GB)
+    dereplication(passedfile, derepfile, tmpdir, mem_GB, cleanup)
     # Mark this as a temporary file unless this is the final step
     if(5 %in% steps) tmpfiles <- c(tmpfiles, derepfile) else outfiles <- c(outfiles, derepfile)
     dereplicated_sequences <- count_sequences(derepfile, "fasta")
@@ -133,12 +149,12 @@ ARAST <- function(inputfile, proc = parallel::detectCores(), run = "protein", ru
 
   if(5 %in% steps) {
     print("######## 5. Host DNA contamination removal ########")
-    decontamfile <- file.path(workdir, paste0(ID, "_decontaminated.fasta"))
-    bowtie2(derepfile, decontamfile, proc, tmpdir)
-    if(6 %in% steps) tmpfiles <- c(tmpfiles, decontamfile) else outfiles <- c(outfiles, decontamfile)
-    decontaminated_sequences <- count_sequences(decontamfile, "fasta")
-    stats <- c(stats, decontaminated_sequences = decontaminated_sequences)
-  } else decontamfile <- derepfile
+    screenedfile <- file.path(workdir, paste0(ID, "_screened.fasta"))
+    bowtie2(derepfile, screenedfile, proc, tmpdir)
+    if(6 %in% steps) tmpfiles <- c(tmpfiles, screenedfile) else outfiles <- c(outfiles, screenedfile)
+    screened_sequences <- count_sequences(screenedfile, "fasta")
+    stats <- c(stats, screened_sequences = screened_sequences)
+  } else screenedfile <- derepfile
 
   if(6 %in% steps) {
     print("######## 6. RNA feature identification (rRNA genecalling) ########")
@@ -146,13 +162,13 @@ ARAST <- function(inputfile, proc = parallel::detectCores(), run = "protein", ru
     index <- paste0(rna_nr, ".index")
     rRNAfile <- file.path(workdir, paste0(ID, "_rRNA.fasta"))
     not_rRNAfile <- file.path(workdir, paste0(ID, "_not-rRNA.fasta"))
-    sortmerna(decontamfile, rRNAfile, not_rRNAfile, proc, mem_MB, rna_nr, index)
+    sortmerna(screenedfile, rRNAfile, not_rRNAfile, proc, mem_MB, rna_nr, index)
     outfiles <- c(outfiles, rRNAfile)
     if(9 %in% steps) tmpfiles <- c(tmpfiles, not_rRNAfile) else outfiles <- c(outfiles, not_rRNAfile)
     rRNA_sequences <- count_sequences(rRNAfile, "fasta")
     not_rRNA_sequences <- count_sequences(not_rRNAfile, "fasta")
     stats <- c(stats, rRNA_sequences = rRNA_sequences, not_rRNA_sequences = not_rRNA_sequences)
-  } else not_rRNAfile <- decontamfile
+  } else not_rRNAfile <- screenedfile
 
   # NOTE: Steps labelled 00000000 are in the MG-RAST pipeline but are not implemented here
   if(7 %in% steps) print("00000000 7. RNA clustering (not implemented) 00000000")
@@ -162,7 +178,7 @@ ARAST <- function(inputfile, proc = parallel::detectCores(), run = "protein", ru
   if(9 %in% steps) {
     print("######## 9. Identify putative protein coding features (genecalling) ########")
     codingfile <- file.path(workdir, paste0(ID, "_coding"))
-    genecalling(not_rRNAfile, codingfile, techtype, tmpdir, proc)
+    genecalling(not_rRNAfile, codingfile, techtype, tmpdir, proc, cleanup)
     if(file.exists(paste0(codingfile, ".faa"))) {
       fnafile <- paste0(codingfile, ".fna")
       faafile <- paste0(codingfile, ".faa")
@@ -182,7 +198,7 @@ ARAST <- function(inputfile, proc = parallel::detectCores(), run = "protein", ru
   if(23 %in% steps) {
     print("######## 23. Summary statistics ########")
     # Remove temporary files and compress output files
-    system(paste("rm -f", paste(tmpfiles, collapse = " ")))
+    if(cleanup) system(paste("rm -f", paste(tmpfiles, collapse = " ")))
     if(run.gzip & length(outfiles) > 0) system(paste("gzip -f", paste(outfiles, collapse = " ")))
     # Save stats file
     statsfile <- file.path(workdir, paste0(ID, "_stats.csv"))
@@ -194,13 +210,15 @@ ARAST <- function(inputfile, proc = parallel::detectCores(), run = "protein", ru
 }
 
 # Run autoskewer.py 20180310
-autoskewer <- function(file, scrubbedfile, tmpdir) {
+autoskewer <- function(file, scrubbedfile, tmpdir, cleanup) {
   cmd <- paste("autoskewer.py -v -i", file, "-o", scrubbedfile, "-l ~/tmp/scrubbed.log -t", tmpdir)
   system(cmd)
-  # Clean up tmpdir
-  tmpfiles <- file.path(tmpdir, "*")
-  cmd <- paste("rm", tmpfiles)
-  system(cmd)
+  if(cleanup) {
+    # Clean up tmpdir
+    tmpfiles <- file.path(tmpdir, "*")
+    cmd <- paste("rm", tmpfiles)
+    system(cmd)
+  }
 }
 
 # Run filter_sequences 20180309
@@ -233,7 +251,7 @@ preprocess <- function(file, passedfile, removedfile, filetype) {
 
 # Run dereplication.py 20180310
 # Based on MG-RAST/pipeline/mgcmd/mgrast_dereplicate.pl
-dereplication <- function(file, derepfile, tmpdir, mem_GB) {
+dereplication <- function(file, derepfile, tmpdir, mem_GB, cleanup) {
   prefix_size <- 50
   run_dir <- tmpdir
   input <- file
@@ -242,7 +260,7 @@ dereplication <- function(file, derepfile, tmpdir, mem_GB) {
   system(cmd)
   # Rename and clean up files
   system(paste("mv", paste0(tmpdir, ".passed.fna"), derepfile))
-  system(paste("rm", paste0(tmpdir, ".*")))
+  if(cleanup) system(paste("rm", paste0(tmpdir, ".*")))
 }
 
 # Run sortmerna 20180310
@@ -272,7 +290,7 @@ sortmerna <- function(file, rRNAfile, not_rRNAfile, proc, mem_MB, rna_nr, index)
 
 # Run FragGeneScan 20180309
 # Based on MG-RAST/pipeline/mgcmd/mgrast_genecalling.pl
-genecalling <- function(file, codingfile, techtype = c("sanger", "454", "illumina"), tmpdir, proc) {
+genecalling <- function(file, codingfile, techtype = c("sanger", "454", "illumina"), tmpdir, proc, cleanup) {
   out_prefix <- codingfile
   # mgrast_genecalling.pl chooses training files with highest error rate for given techtype
   if(techtype == "sanger") type <- "sanger_10"
@@ -283,21 +301,23 @@ genecalling <- function(file, codingfile, techtype = c("sanger", "454", "illumin
   # try this instead:
   ##cmd <- paste("run_FragGeneScan.pl -genome", file, "-out", codingfile, "-complete 0 -train", type) 
   system(cmd)
-  # Clean up files
-  system(paste("rm", paste0(codingfile, ".out")))
-  ##system(paste("rm", file.path(tmpdir, "*")))
+  if(cleanup) {
+    # Clean up files
+    system(paste("rm", paste0(codingfile, ".out")))
+    ##system(paste("rm", file.path(tmpdir, "*")))
+  }
 }
 
 # Run bowtie2 (host sequence removal) 20221117
 # Based on MG-RAST/pipeline/mgcmd/mgrast_bowtie_screen.pl
-bowtie2 <- function(file, decontamfile, proc, tmpdir) {
+bowtie2 <- function(file, screenedfile, proc, tmpdir) {
   refdb <- "/home/ARAST/genome-idx/GRCh38_noalt_as/GRCh38_noalt_as"
   # 'reorder' option outputs sequences in same order as input file
   cmd <- paste("bowtie2 -f --reorder -p", proc, "--un", tmpdir, "-x", refdb, "-U", file, "> /dev/null")
   print(cmd)
   system(cmd)
   # Rename output file
-  file.rename(file.path(tmpdir, "un-seqs"), decontamfile)
+  file.rename(file.path(tmpdir, "un-seqs"), screenedfile)
 }
 
 # Function to count number of sequences in FASTA or FASTQ file 20231217

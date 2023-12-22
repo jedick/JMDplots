@@ -5,9 +5,6 @@
 # Renamed to hum16S 20230530
 # Renamed to microhum 20230723
 
-# Load required packages
-library(png)  # readPNG()
-
 # Plot symbols and colors for body sites 20221125
 pch_Oral <- 21
 pch_Nasal <- 22
@@ -31,10 +28,163 @@ getdatadir <- function() {
 ### Plotting Functions ###
 ##########################
 
-# Chemical variation of microbial proteins across body sites and multi-omics comparison 20221125
+# Compatibility of inferences from shotgun metagenomes and community reference proteomes
+# 20211218 First version: comparison of Zc used in geo16S paper
+#          Based on samples used by Aßhauer et al. (2015) (Tax4Fun paper) with additions by Dick and Tan (2023)
+# 20231218 Added human DNA screening and nH2O-nO2 plots for microhum paper
 microhum_1 <- function(pdf = FALSE) {
 
-  if(pdf) pdf("Figure_1.pdf", width = 7, height = 6)
+  if(pdf) pdf("Figure_1.pdf", width = 10, height = 6)
+  mat <- matrix(c(1,1,2,2,3,3,4,4, 0,5,5,5,6,6,6,0), nrow = 2, byrow = TRUE)
+  layout(mat)
+  par(mar = c(3.5, 3.5, 2, 1), mgp = c(2.5, 1, 0))
+  par(cex = 0.8)
+
+  # Get chemical metrics for community reference proteomes
+  metrics <- getmetrics_microhum("HMP12")
+  # Get sample metadata
+  metadata <- getmdat_microhum("HMP12")
+  # Define colors and symbols
+  bg <- sapply(metadata$"Body site", switch, "Skin" = col_Skin, "Nasal cavity" = col_Nasal, "Oral cavity" = col_Oral, "GI tract" = col_Gut, "UG tract" = col_UG)
+  pch <- sapply(metadata$"Body site", switch, "Skin" = pch_Skin, "Nasal cavity" = pch_Nasal, "Oral cavity" = pch_Oral, "GI tract" = pch_Gut, "UG tract" = pch_UG)
+  # Use semi-transparent colors for symbol outline 20220122
+  c1 <- addalpha(1, "80")
+  c1_light <- addalpha(1, "40")
+
+  # Define cutoff for number of proteins (% of MG reads)
+  cutoff <- 40
+
+  ## Top row: nO2 and nH2O of community reference proteome vs shotgun metagenome
+  # Loop over metrics
+  for(metric in c("nO2", "nH2O")) {
+    
+    if(metric == "Zc") {
+      xlim <- c(-0.2, -0.08)
+      ylim <- c(-0.2, -0.12)
+      main <- "Carbon oxidation state (Zc)"
+    }
+
+    if(metric == "nO2") {
+      xlim <- c(-0.8, -0.55)
+      ylim <- c(-0.8, -0.6)
+      main <- quote("Stoichiometric oxidation state (" * italic(n)[O[2]] * ")")
+    }
+
+    if(metric == "nH2O") {
+      xlim <- c(-1.05, -0.72)
+      ylim <- c(-0.8, -0.72)
+      main <- quote("Stoichiometric hydration state (" * italic(n)[H[2]*O] * ")")
+    }
+
+    # Compute min/max limits for 1:1 line
+    xylim <- c(min(xlim, ylim), max(xlim, ylim))
+
+    # Loop over MG pipelines
+    for(pipeline in c("no_screening", "screening")) {
+
+      # Read MG datasets processed without or with contamination removal
+      if(pipeline=="no_screening") {
+        MG_aafile <- file.path(getdatadir(), "ARAST/HMP12_no_screening_aa.csv")
+        xlab <- "Metagenomes - NO screening"
+      }
+      if(pipeline=="screening") {
+        MG_aafile <- file.path(getdatadir(), "ARAST/HMP12_aa.csv")
+        xlab <- "Metagenomes - WITH screening"
+      }
+      MG_aa <- read.csv(MG_aafile)
+
+      # Put MG and 16S samples in same order
+      i16S <- match(metadata$Run, metrics$Run)
+      metrics <- metrics[i16S, ]
+      iMG <- match(metadata$Metagenome, MG_aa$protein)
+      MG_aa <- MG_aa[iMG, ]
+      # Make sure the 16S and metagenomes are paired correctly
+      stopifnot(all(na.omit(metrics$Run == metadata$Run)))
+      stopifnot(all(MG_aa$protein == metadata$Metagenome))
+
+      # Get chemical metric for community reference proteomes
+      metric_16S <- metrics[, metric]
+      # Get chemical metric for metagenomes
+      # This executes canprot::Zc(), canprot::nO2(), or canprot::nH2O()
+      metric_MG <- get(metric)(MG_aa)
+
+      # Start plot
+      if(metric == "nO2" & pipeline == "no_screening") ylab <- "Community reference proteomes" else ylab <- ""
+      plot(xlim, ylim, type = "n", xlab = xlab, ylab = ylab)
+      lines(xylim, xylim, lty = 2, col = "gray40")
+      # Use open symbols (no color) for MG with low numbers of protein fragments 20231218
+      ilow <- MG_aa$chains / MG_aa$ref * 100 < cutoff
+      ilow[is.na(ilow)] <- TRUE
+      mybg <- bg
+      mybg[ilow] <- "transparent"
+      col <- ifelse(ilow, c1_light, c1)
+      points(metric_MG, metric_16S, pch = pch, bg = mybg, col = col)
+
+      # Show R-squared values excluding MG with low numbers of protein fragments 20231219
+      mylm <- lm(metric_16S[!ilow] ~ metric_MG[!ilow])
+      R2 <- round(summary(mylm)$r.squared, 2)
+      R2txt <- bquote(italic(R)^2 == .(R2))
+      legend("bottomleft", legend = R2txt, bty = "n", cex = 0.85)
+
+      if(pipeline == "no_screening") {
+        if(metric == "nO2") {
+          legend("topleft", c("Skin", "Nasal cavity", "Oral cavity", "GI tract", "UG tract"),
+            pch = c(pch_Skin, pch_Nasal, pch_Oral, pch_Gut, pch_UG),
+            pt.bg = c(col_Skin, col_Nasal, col_Oral, col_Gut, col_UG), col = c1, bty = "n", cex = 0.7)
+          # Use mtext to put title over two plots
+          mtext(main, at = -0.5, line = 0.5)
+          label.figure("A", font = 2, cex = 1.8, yfrac = 0.97)
+        }
+        if(metric == "nH2O") {
+          mtext(main, at = -0.65, line = 0.5)
+          label.figure("B", font = 2, cex = 1.8, yfrac = 0.97)
+        }
+      }
+
+      if(pipeline == "screening" & metric == "nO2") {
+        cutoff_txt <- c(paste("<", cutoff, "% of reads"), paste(">", cutoff, "% of reads"))
+        legend("bottomright", cutoff_txt, pch = pch_UG, pt.bg = c("transparent", col_UG), col = c(c1_light, c1),
+          bty = "n", cex = 0.7, title = "Protein sequences in MG")
+        legend("bottomright", c("", ""), pch = pch_Nasal, pt.bg = c("transparent", col_Nasal), col = c(c1_light, c1),
+          bty = "n", cex = 0.7, inset = c(0.5, 0))
+      }
+
+    }
+  }
+
+  ## Bottom row: nH2O vs nO2 for community reference proteomes and metagenomes
+  xlim <- c(-0.77, -0.63)
+  ylim <- c(-0.82, -0.72)
+  par(mar = c(4, 4, 3, 1))
+  par(cex.lab = 1.2)
+  plotmet_microhum("HMP12", title = FALSE, pt.open.col = c1, xlim = xlim, ylim = ylim)
+  legend("bottomright", c("Skin", "Nasal cavity", "Oral cavity", "GI tract", "UG tract"),
+    pch = c(pch_Skin, pch_Nasal, pch_Oral, pch_Gut, pch_UG),
+    pt.bg = c(col_Skin, col_Nasal, col_Oral, col_Gut, col_UG), col = c1, bty = "n", cex = 0.9)
+  title("Community reference proteomes", font.main = 1)
+  label.figure("C", font = 2, cex = 1.8, xfrac = 0.12, yfrac = 0.92)
+
+  # Read amino acid composition of proteins inferred from metagenome
+  MG_aafile <- file.path(getdatadir(), "ARAST/HMP12_aa.csv")
+  MG_aa <- read.csv(MG_aafile)
+  # Exclude samples with low numbers of proteins
+  ilow <- MG_aa$chains / MG_aa$ref * 100 < cutoff
+  ilow[is.na(ilow)] <- TRUE
+  MG_aa[ilow, ] <- NA
+  # Put into order of metadata table
+  iMG <- match(metadata$Metagenome, MG_aa$protein)
+  MG_aa <- MG_aa[iMG, ]
+  plot(nO2(MG_aa), nH2O(MG_aa), xlim = xlim, ylim = ylim, xlab = chemlab("nO2"), ylab = chemlab("nH2O"), pch = pch, bg = bg, col = col)
+  title("Metagenomes - WITH screening", font.main = 1)
+
+  if(pdf) dev.off()
+
+}
+
+# Chemical variation of microbial proteins across body sites and multi-omics comparison 20221125
+microhum_2 <- function(pdf = FALSE) {
+
+  if(pdf) pdf("Figure_2.pdf", width = 7, height = 6)
   par(mfrow = c(2, 2))
   par(mgp = c(2.5, 1, 0))
 
@@ -69,7 +219,7 @@ microhum_1 <- function(pdf = FALSE) {
   title(hyphen.in.pdf("Community reference proteomes\n(data from Boix-Amor\u00f3s et al., 2021)"), font.main = 1)
   label.figure("A", font = 2, cex = 1.8, yfrac = 0.97)
 
-  ## Panel B: Plot 16S-based reference proteomes for controls in COVID-19 datasets 20220822
+  ## Panel B: Community reference proteomes for controls in COVID-19 datasets 20220822
   # Setup plot
   plot(xlim, ylim, xlab = canprot::cplab$nO2, ylab = canprot::cplab$nH2O, type = "n")
   # Colors and point symbols for sample types
@@ -180,10 +330,10 @@ microhum_1 <- function(pdf = FALSE) {
 }
 
 # Differences of chemical metrics between controls and COVID-19/IBD patients 20220806
-microhum_2 <- function(pdf = FALSE) {
+microhum_3 <- function(pdf = FALSE) {
 
   # Start plot
-  if(pdf) pdf("Figure_2.pdf", width = 13, height = 12)
+  if(pdf) pdf("Figure_3.pdf", width = 13, height = 12)
   mat <- matrix(c(1,1,1,1, 2,2,2,2, 3,3,3,3, 4,4,4, 5,5,5, 6,6,6, 7,7,7, 0,0,0,0, 8,8,8,8, 0,0,0,0), nrow = 3, byrow = TRUE)
   layout(mat)
 
@@ -373,9 +523,9 @@ microhum_2 <- function(pdf = FALSE) {
 }
 
 # Overview of chemical variation of human microbiomes inferred from multi-omics datasets 20230112
-microhum_3 <- function(pdf = FALSE) {
+microhum_4 <- function(pdf = FALSE) {
 
-  if(pdf) pdf("Figure_3.pdf", width = 8, height = 6)
+  if(pdf) pdf("Figure_4.pdf", width = 8, height = 6)
 
   ylim <- c(0, 12)
   xlim <- c(0, 16)
@@ -502,10 +652,10 @@ microhum_3 <- function(pdf = FALSE) {
 }
 
 # Oxygen tolerance of genera in body sites, COVID-19, and IBD 20230726
-microhum_4 <- function(pdf = FALSE) {
+microhum_5 <- function(pdf = FALSE) {
 
   # Start plot
-  if(pdf) pdf("Figure_4.pdf", width = 10, height = 9)
+  if(pdf) pdf("Figure_5.pdf", width = 10, height = 9)
   par(mfrow = c(3, 4))
   par(mar = c(4, 4, 2.8, 1), mgp = c(2.5, 1, 0))
 
@@ -582,10 +732,37 @@ microhum_4 <- function(pdf = FALSE) {
 
 }
 
-# Changes of chemical metrics for microbiomes associated with viral inactivation 20221125
+# Amount of putative human DNA removed from HMP metagenomes in screening step 20231222
 microhum_S1 <- function(pdf = FALSE) {
+  if(pdf) pdf("Figure_S1.pdf", width = 10, height = 8)
+  # Get sequence processing statistics
+  statsfile <- file.path(getdatadir(), "ARAST/HMP12_stats.csv")
+  stats <- read.csv(statsfile)
+  # Get sample metadata and put in same order as processed sequences
+  mdat <- getmdat_microhum("HMP12")
+  imdat <- match(stats$ID, mdat$Metagenome)
+  mdat <- mdat[imdat, ]
+  # Calculate number of sequences removed by screening
+  n_removed <- stats$scrubbed_sequences - stats$screened_sequences
+  # Calculate number of removed sequences as percentage of input sequences
+  perc_removed <- n_removed / stats$input_sequences * 100
+  # Setup plot
+  par(mfrow = c(3, 2))
+  par(cex = 0.8)
+  # Loop over body sites
+  sites <- c("Skin", "Nasal cavity", "Oral cavity", "GI tract", "UG tract")
+  col <- c(col_Skin, col_Nasal, col_Oral, col_Gut, col_UG)
+  for(i in seq_along(sites)) {
+    hist(perc_removed[mdat$"Body site" == sites[i]], breaks = seq(0, 100, 20), col = col[i],
+      xlab = "Percentage of sequences removed by human DNA screening", main = sites[i])
+  }
+  if(pdf) dev.off()
+}
 
-  if(pdf) pdf("Figure_S1.pdf", width = 6, height = 4)
+# Changes of chemical metrics for microbiomes associated with viral inactivation 20221125
+microhum_S2 <- function(pdf = FALSE) {
+
+  if(pdf) pdf("Figure_S2.pdf", width = 6, height = 4)
   par(mfrow = c(2, 3))
   par(mgp = c(2.5, 1, 0))
   par(mar = c(4, 4, 2, 1))
@@ -642,10 +819,10 @@ microhum_S1 <- function(pdf = FALSE) {
 
 # Differences of Zc and nH2O between obligate anaerobic and aerotolerant genera 20221017
 # Changed Zc to nO2 20230729
-microhum_S2 <- function(pdf = FALSE) {
+microhum_S3 <- function(pdf = FALSE) {
 
   # Setup plot
-  if(pdf) pdf("Figure_S2.pdf", width = 7, height = 4)
+  if(pdf) pdf("Figure_S3.pdf", width = 7, height = 4)
   par(mfrow = c(1, 2))
   par(mar = c(3, 4, 1, 1))
   par(mgp = c(2.5, 1, 0))
@@ -711,33 +888,6 @@ microhum_S2 <- function(pdf = FALSE) {
     legend("topleft", legend = difftxt, bty = "n", inset = c(-0.05, -0.02))
 
   }
-
-  if(pdf) dev.off()
-
-}
-
-# Plot nH2O vs Zc of amino acid residues 20221018
-# Changed Zc to nO2 20230729
-microhum_S3 <- function(pdf = FALSE) {
-
-  if(pdf) pdf("Figure_S3", width = 4, height = 4)
-  par(mar = c(4, 4, 1, 1))
-  par(mgp = c(2.5, 1, 0))
-
-  # Get nH2O and nO2
-  basis("QEC")
-  species(aminoacids(""))
-  nH2O <- species()$H2O
-  nO2 <- species()$O2
-  # Subtract 1 to get residues (no terminal H2O)
-  nH2O <- nH2O - 1
-  # Get one-letter abbreviations
-  AA <- aminoacids()
-  # Make plot
-  plot(nO2, nH2O, xlab = cplab$nO2, ylab = cplab$nH2O, type = "n")
-  col <- ifelse(AA %in% c("W", "Y", "F"), 2, 1)
-  font <- ifelse(AA %in% c("W", "Y", "F"), 2, 1)
-  text(nO2, nH2O, AA, col = col, font = font)
 
   if(pdf) dev.off()
 

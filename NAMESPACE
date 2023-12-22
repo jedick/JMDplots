@@ -83,11 +83,13 @@ export(
   # orp16S paper 20221230
   "orp16S_1", "orp16S_2",
   # microhum paper 20230212
-  "microhum_1", "microhum_2", "microhum_3", "microhum_4", "dataset_metrics",
+  "microhum_2", "microhum_3", "microhum_4", "microhum_5", "dataset_metrics",
   # chem16S paper 20230709
   "chem16S_1",
   # microhum paper 20230212
-  "microhum_S1", "microhum_S2"
+  "microhum_S2", "microhum_S3",
+  # microhum paper 20231222
+  "microhum_1", "microhum_S1"
 )
 
 # Imports from CHNOSZ

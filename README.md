@@ -5,11 +5,11 @@
 This R package has code and data for papers by [Jeffrey M. Dick](https://chnosz.net/jeff/).
 Plots from the papers are reproduced in the vignettes, which are installed with the package and can be viewed at <https://chnosz.net/JMDplots/vignettes/>.
 
-## Analysis scripts and data files for papers
+## Analysis scripts and data files
 
 Click on the paper titles for a list of files.
 Published papers are indicated by the year with a DOI link.
-Preprints, if available, are linked at the end of each list.
+Links to preprints, if available, are at the end of each list.
 *The manual page for each paper has additional details about scripts, data files, and plotting functions.*
 
 <!-- Put a space before <details> to make ghostwriter format the lists correctly -->
@@ -51,7 +51,7 @@ Preprints, if available, are linked at the end of each list.
 
 - [R/microhum.R](R/microhum.R): code for plots
 - [man/microhum.Rd](man/microhum.Rd): manual page
-- [vignettes/microhum.Rmd](vignettes/microhum.Rmd): vignette including Figures 1&ndash;4 and S1&ndash;S2
+- [vignettes/microhum.Rmd](vignettes/microhum.Rmd): vignette including Figures 1&ndash;4 and S1&ndash;S3
 
   - [microhum.html](https://chnosz.net/JMDplots/vignettes/microhum.html): compiled HTML version of the vignette (external link)
 
@@ -69,14 +69,14 @@ Preprints, if available, are linked at the end of each list.
 
     - [chem16S.html](https://chnosz.net/JMDplots/vignettes/chem16S.html): compiled HTML version of the vignette (external link)
 
-  - [../chem16S/inst/extdata](../chem16S/inst/extdata): scripts and processed data files (*NOTE: these files are in the chem16S package; see [chem16S-package.Rd](../chem16S/man/chem16S-package.Rd) for details*)
+  - [../chem16S/inst/extdata](https://github.com/jedick/chem16S/blob/main/inst/extdata): scripts and processed data files (*NOTE: these files are in the chem16S package; see [chem16S-package.Rd](https://github.com/jedick/chem16S/blob/main/man/chem16S-package.Rd) for details*)
 
-    - [RefSeq](../chem16S/inst/extdata/RefSeq): processing scripts and output files of amino acid composition of genus- and higher-level taxa derived from the [RefSeq database](https://www.ncbi.nlm.nih.gov/refseq/)
-    - [GTDB](../chem16S/inst/extdata/GTDB): processing scripts and output files of amino acid composition of genus- and higher-level taxa derived from the [Genome Taxonomy Database (GTDB)](https://gtdb.ecogenomic.org/)
-    - [metadata](../chem16S/inst/extdata/metadata): sample metadata for 16S rRNA datasets: Heart Lake Geyser Basin in Yellowstone National Park ([Bowen De León et al., 2012](https://doi.org/10.3389/fmicb.2013.00330)), Baltic Sea ([Herlemann et al., 2016](https://doi.org/10.3389/fmicb.2016.01883)), and Bison Pool in Yellowstone National Park ([Swingley et al., 2012](https://doi.org/10.1371/journal.pone.0038108))
-    - [RDP](../chem16S/inst/extdata/RDP): output of RDP Classifier for the above 16S rRNA datasets using the default training set
-    - [RDP-GTDB](../chem16S/inst/extdata/RDP-GTDB): output of RDP Classifier for the above 16S rRNA datasets using a [GTDB-based training set](https://doi.org/10.5281/zenodo.7633100)
-    - [DADA2](../chem16S/inst/extdata/DADA2): Analysis of two 16S rRNA datasets with [DADA2](https://doi.org/10.18129/B9.bioc.dada2) using a [GTDB-based training set](https://doi.org/10.5281/zenodo.6655692): marine sediment from the Humboldt Sulfuretum ([Fonseca et al., 2022](https://doi.org/10.3389/fmicb.2022.1016418)) and hot springs in the Qinghai-Tibet Plateau ([Zhang et al., 2023](https://doi.org/10.3389/fmicb.2022.994179))
+    - [RefSeq](https://github.com/jedick/chem16S/blob/main/inst/extdata/RefSeq): processing scripts and output files of amino acid composition of genus- and higher-level taxa derived from the [RefSeq database](https://www.ncbi.nlm.nih.gov/refseq/)
+    - [GTDB](https://github.com/jedick/chem16S/blob/main/inst/extdata/GTDB): processing scripts and output files of amino acid composition of genus- and higher-level taxa derived from the [Genome Taxonomy Database (GTDB)](https://gtdb.ecogenomic.org/)
+    - [metadata](https://github.com/jedick/chem16S/blob/main/inst/extdata/metadata): sample metadata for 16S rRNA datasets: Heart Lake Geyser Basin in Yellowstone National Park ([Bowen De León et al., 2012](https://doi.org/10.3389/fmicb.2013.00330)), Baltic Sea ([Herlemann et al., 2016](https://doi.org/10.3389/fmicb.2016.01883)), and Bison Pool in Yellowstone National Park ([Swingley et al., 2012](https://doi.org/10.1371/journal.pone.0038108))
+    - [RDP](https://github.com/jedick/chem16S/blob/main/inst/extdata/RDP): output of RDP Classifier for the above 16S rRNA datasets using the default training set
+    - [RDP-GTDB](https://github.com/jedick/chem16S/blob/main/inst/extdata/RDP-GTDB): output of RDP Classifier for the above 16S rRNA datasets using a [GTDB-based training set](https://doi.org/10.5281/zenodo.7633100)
+    - [DADA2](https://github.com/jedick/chem16S/blob/main/inst/extdata/DADA2): Analysis of two 16S rRNA datasets with [DADA2](https://doi.org/10.18129/B9.bioc.dada2) using a [GTDB-based training set](https://doi.org/10.5281/zenodo.6655692): marine sediment from the Humboldt Sulfuretum ([Fonseca et al., 2022](https://doi.org/10.3389/fmicb.2022.1016418)) and hot springs in the Qinghai-Tibet Plateau ([Zhang et al., 2023](https://doi.org/10.3389/fmicb.2022.994179))
 
 </details>
 
@@ -158,11 +158,13 @@ browseVignettes("JMDplots")
 
 ## Building vignettes
 
-It might be possible to build the vignettes without [pandoc](https://pandoc.org/), but having pandoc available will make them look better.
-
 ```R
 remotes::install_github("jedick/JMDplots", dependencies = TRUE, build_vignettes = TRUE)
 ```
+
+> **Note**
+> It might be possible to build the vignettes without [pandoc](https://pandoc.org/),
+> but having pandoc available will make them look better.
 
 ## Licenses
 
