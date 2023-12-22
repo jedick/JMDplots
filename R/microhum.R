@@ -24,7 +24,7 @@ col_UG <- "#9E9E9E"
 
 # Location of data files
 getdatadir <- function() {
-  datadir <- system.file("extdata/microhum", package = "JMDplots")
+  system.file("extdata/microhum", package = "JMDplots")
 }
 
 ##########################
@@ -876,7 +876,7 @@ calc.oxytol <- function(site = "Feces", study = NULL) {
   if(!is.null(study)) {
     # Remove suffix after underscore 20200929
     studyfile <- gsub("_.*", "", study)
-    RDPfile <- file.path(getdatadir(), paste0("16S/RDP-GTDB/", studyfile, ".tab.xz"))
+    RDPfile <- file.path(getdatadir(), "16S/RDP-GTDB", paste0(studyfile, ".tab.xz"))
     mdat <- getmdat_microhum(study)
     if(tolower(site) == "control") Run <- mdat$Run[mdat$pch == 24] else Run <- mdat$Run[mdat$pch == 25]
   }

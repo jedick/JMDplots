@@ -3,17 +3,19 @@
 # JMDplots
 
 This R package has code and data for papers by [Jeffrey M. Dick](https://chnosz.net/jeff/).
-The vignettes in this package have many plots from my papers and can be viewed at <https://chnosz.net/JMDplots/vignettes/>.
+Plots from the papers are reproduced in the vignettes, which are installed with the package and can be viewed at <https://chnosz.net/JMDplots/vignettes/>.
 
-## Analysis scripts, data files, and external links for papers
+## Analysis scripts and data files for papers
 
-Click on the titles for a detailed list of files; click on the years to go to the published papers.
-The manual page for each paper has additional details about scripts, data files, and plotting functions.
+Click on the paper titles for a list of files.
+Published papers are indicated by the year with a DOI link.
+Preprints, if available, are linked at the end of each list.
+*The manual page for each paper has additional details about scripts, data files, and plotting functions.*
 
 <!-- Put a space before <details> to make ghostwriter format the lists correctly -->
  <details>
 
-<summary>Water and oxygen in the genomic adaptation of human microbiomes (*submitted manuscript*)</summary>
+<summary>Water and oxygen in the genomic adaptation of human microbiomes (<i>submitted manuscript</i>)</summary>
 
 - [inst/extdata/microhum](inst/extdata/microhum): scripts and processed data files
 
@@ -49,11 +51,32 @@ The manual page for each paper has additional details about scripts, data files,
 
 - [R/microhum.R](R/microhum.R): code for plots
 - [man/microhum.Rd](man/microhum.Rd): manual page
-- [vignettes/microhum.Rmd](vignettes/microhum.Rmd): vignette including Figures 1--4 and S1--S2
+- [vignettes/microhum.Rmd](vignettes/microhum.Rmd): vignette including Figures 1&ndash;4 and S1&ndash;S2
 
   - [microhum.html](https://chnosz.net/JMDplots/vignettes/microhum.html): compiled HTML version of the vignette (external link)
 
 - [bioRxiv](https://doi.org/10.1101/2023.02.12.528246): preprint (external link)
+
+</details>
+
+ <details>
+
+<summary><i>chem16S</i>: community-level chemical metrics for exploring genomic adaptation to environments (<a href="https://doi.org/10.1093/bioinformatics/btad564">2023</a>)</summary>
+
+  - [R/chem16S.R](R/chem16S.R): code for plots
+  - [man/chem16S.Rd](man/chem16S.Rd): manual page
+  - [vignettes/chem16S.Rmd](vignettes/chem16S.Rmd): vignette including Figure 1
+
+    - [chem16S.html](https://chnosz.net/JMDplots/vignettes/chem16S.html): compiled HTML version of the vignette (external link)
+
+  - [../chem16S/inst/extdata](../chem16S/inst/extdata): scripts and processed data files (*NOTE: these files are in the chem16S package; see [chem16S-package.Rd](../chem16S/man/chem16S-package.Rd) for details*)
+
+    - [RefSeq](../chem16S/inst/extdata/RefSeq): processing scripts and output files of amino acid composition of genus- and higher-level taxa derived from the [RefSeq database](https://www.ncbi.nlm.nih.gov/refseq/)
+    - [GTDB](../chem16S/inst/extdata/GTDB): processing scripts and output files of amino acid composition of genus- and higher-level taxa derived from the [Genome Taxonomy Database (GTDB)](https://gtdb.ecogenomic.org/)
+    - [metadata](../chem16S/inst/extdata/metadata): sample metadata for 16S rRNA datasets: Heart Lake Geyser Basin in Yellowstone National Park ([Bowen De León et al., 2012](https://doi.org/10.3389/fmicb.2013.00330)), Baltic Sea ([Herlemann et al., 2016](https://doi.org/10.3389/fmicb.2016.01883)), and Bison Pool in Yellowstone National Park ([Swingley et al., 2012](https://doi.org/10.1371/journal.pone.0038108))
+    - [RDP](../chem16S/inst/extdata/RDP): output of RDP Classifier for the above 16S rRNA datasets using the default training set
+    - [RDP-GTDB](../chem16S/inst/extdata/RDP-GTDB): output of RDP Classifier for the above 16S rRNA datasets using a [GTDB-based training set](https://doi.org/10.5281/zenodo.7633100)
+    - [DADA2](../chem16S/inst/extdata/DADA2): Analysis of two 16S rRNA datasets with [DADA2](https://doi.org/10.18129/B9.bioc.dada2) using a [GTDB-based training set](https://doi.org/10.5281/zenodo.6655692): marine sediment from the Humboldt Sulfuretum ([Fonseca et al., 2022](https://doi.org/10.3389/fmicb.2022.1016418)) and hot springs in the Qinghai-Tibet Plateau ([Zhang et al., 2023](https://doi.org/10.3389/fmicb.2022.994179))
 
 </details>
 
@@ -67,8 +90,8 @@ The manual page for each paper has additional details about scripts, data files,
     - [pipeline.R](inst/extdata/orp16S/pipeline.R): *script*: 16S rRNA processing pipeline
     - [RDP](inst/extdata/orp16S/RDP): *output files*: taxonomic classifications for 16S rRNA datasets made using the RDP Classifier with its default training set
     - [hydro_p](inst/extdata/orp16S/hydro_p): *data*: shapefiles for the North American Great Lakes, downloaded from [USGS (2010)](https://www.sciencebase.gov/catalog/item/530f8a0ee4b0e7e46bd300dd)
-    - [EZdat.csv](inst/extdata/orp16S/EZdat.csv): *output file*: sample data and computed values of Eh7 and \Zc
-    - [EZlm.csv](inst/extdata/orp16S/EZlm.csv): *output file*: linear fits between Eh7 and \Zc for each dataset
+    - [EZdat.csv](inst/extdata/orp16S/EZdat.csv): *output file*: sample data and computed values of Eh7 and *Z*<sub>c</sub>
+    - [EZlm.csv](inst/extdata/orp16S/EZlm.csv): *output file*: linear fits between Eh7 and *Z*<sub>c</sub> for each dataset
     - [BKM60.csv](inst/extdata/orp16S/BKM60.csv): *data*: outline of Eh-pH range of natural environments, digitized from Fig. 32 of [Baas Becking et al. (1960)](https://doi.org/10.1086/626659)
     - [MR18_Table_S1.csv](inst/extdata/orp16S/MR18_Table_S1.csv): *data*: list of strictly anaerobic and aerotolerant genera from Table S1 of [Million and Raoult (2018)](https://doi.org/10.1016/j.humic.2018.07.002)
 
@@ -79,7 +102,7 @@ The manual page for each paper has additional details about scripts, data files,
 
   - [R/orp16S.R](R/orp16S.R): code for plots
   - [man/orp16S.Rd](man/orp16S.Rd): manual page
-  - [vignettes/orp16S.Rmd](vignettes/orp16S.Rmd): vignette including Figures 1--6, S1--S2, and Table 1
+  - [vignettes/orp16S.Rmd](vignettes/orp16S.Rmd): vignette including Figures 1&ndash;6, S1&ndash;S2, and Table 1
 
     - [orp16S.html](https://chnosz.net/JMDplots/vignettes/orp16S.html): compiled HTML version of the vignette (external link)
 
@@ -94,7 +117,7 @@ The manual page for each paper has additional details about scripts, data files,
   - [inst/extdata/utogig](inst/extdata/utogig): scripts and processed data files
   - [R/utogig.R](R/utogig.R): code for plots
   - [man/utogig.Rd](man/utogig.Rd): manual page
-  - [vignettes/utogig.Rmd](vignettes/utogig.Rmd): vignette including Figures 1--4, S1--S4, Table S6, and conversions between redox scales
+  - [vignettes/utogig.Rmd](vignettes/utogig.Rmd): vignette including Figures 1&ndash;4, S1&ndash;S4, Table S6, and conversions between redox scales
 
     - [utogig.html](https://chnosz.net/JMDplots/vignettes/utogig.html): compiled HTML version of the vignette (external link)
 
