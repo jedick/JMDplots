@@ -363,10 +363,10 @@ microhum_3 <- function(pdf = FALSE) {
     dx <- rep(0, sum(itype))
     dy <- rep(0.0018, sum(itype))
     if(type == "gut") {
-      dy[c(1, 3, 6)] <- -0.0018
-      dx[1] <- -0.0002
-      dx[3] <- 0.0003
-      dx[10] <- 0.0003
+      dy[c(5, 6, 7)] <- -0.0018
+      dx[5] <- -0.0002
+      dx[6] <- 0.0003
+      dx[9] <- 0.0003
     }
     # Label points
     text(means$D_nO2[itype] + dx, means$D_nH2O[itype] + dy, label, cex = 0.8)
@@ -696,21 +696,21 @@ microhum_5 <- function(pdf = FALSE) {
     dx <- rep(0, sum(itype))
     dy <- rep(4, sum(itype))
     if(type == "naso") {
-      dy[5] <- -4
+      dy[9] <- -4
     }
     if(type == "oro") {
-      dy[7] <- 0
-      dx[7] <- -4
+      dy[9] <- 0
+      dx[9] <- -4
     }
     if(type == "gut") {
-      dy[c(4, 10)] <- -4
+      dy[c(3, 9)] <- -4
     }
     if(type == "IBD") {
-      dy[2] <- -4
-      dy[7] <- 0
-      dx[7] <- 4
-      dx[6] <- 2
-      dx[5] <- -2
+      dy[7] <- -4
+      dy[10] <- 0
+      dx[10] <- 4
+      dx[4] <- 2
+      dx[3] <- -2
     }
     # Label points
     text(control[itype] + dx, disease[itype] + dy, label)
@@ -945,13 +945,13 @@ dataset_metrics <- function() {
   # List COVID-19 and IBD datasets
   microhum_studies <- list(
     # COVID-19 nasopharyngeal
-    naso = c("CSC+22", "ENJ+21", "GKJ+22", "HMH+21", "MLW+21_Nasopharyngeal", "PMM+22", "SGC+21", "SRS+22", "VCV+21"),
+    naso = c("ENJ+21", "PMM+22", "SGC+21", "HMH+21", "VCV+21", "SRS+22", "CSC+22", "GKJ+22", "MLW+21_Nasopharyngeal"),
     # COVID-19 oral/oropharyngeal
-    oro = c("GBS+22", "GWL+21", "IZC+21", "MAC+21", "MLW+21_Oropharyngeal", "RFH+22_Oral", "RWC+21_Oral", "WCJ+21_Oral", "XLZ+21"),
+    oro = c("RFH+22_Oral", "IZC+21", "GBS+22", "WCJ+21_Oral", "XLZ+21", "MAC+21", "MLW+21_Oropharyngeal", "GWL+21", "RWC+21_Oral"),
     # COVID-19 gut
-    gut = c("CGC+22", "FBD+22", "GCW+20", "KMG+21", "MIK+22", "MMP+21", "NGH+21", "RFH+22_Gut", "RWC+21_Gut", "RDM+22", "SRK+22", "WCJ+21_Gut", "ZZZ+21"),
+    gut = c("ZZZ+21", "RFH+22_Gut", "KMG+21", "WCJ+21_Gut", "CGC+22", "GCW+20", "MMP+21", "NGH+21", "RDM+22", "MIK+22", "FBD+22", "RWC+21_Gut", "SRK+22"),
     # IBD gut
-    IBD = c("TWC+22", "LAA+19", "MDV+22", "ZTG+21", "ASM+23", "AAM+20", "RAF+20", "LZD+19", "WGL+19", "GKD+14")
+    IBD = c("TWC+22", "ZTG+21", "ASM+23", "AAM+20", "LZD+19", "MDV+22", "LAA+19", "GKD+14", "WGL+19", "RAF+20")
   )
   # Loop over groups of datasets
   for(i in 1:4) {
@@ -996,30 +996,30 @@ plot.p.values <- function(X.1, X.2, Y.1, Y.2, paired = FALSE, ypos = "top") {
   if(ypos == "top") text(pu[1] + dx/2, pu[4] - dy, p.Y.txt, srt = 90, adj = c(1, 1), cex = 0.9)
 }
 
-# Summarize abundances of genera in body sites and list their oxygen tolerance 20230725
-calc.oxytol <- function(site = "Feces", study = NULL) {
+# Summarize abundances of genera in segments (body sites, disease, or control) and list their oxygen tolerance 20230725
+calc.oxytol <- function(segment = "Feces", study = NULL) {
   
-  if(tolower(site) %in% c("feces", "nasal", "oral", "skin")) {
+  if(tolower(segment) %in% c("feces", "nasal", "oral", "skin")) {
     # Identify RDP file
     RDPfile <- file.path(getdatadir(), "16S/RDP-GTDB/BPB+21.tab.xz")
     # Read metadata
     mdat <- getmdat_microhum("BPB+21_NoTreatment")
-    # Get run IDs for this body site
-    Run <- mdat$Run[grep(tolower(site), tolower(mdat$Site))]
+    # Get run IDs for this body segment
+    Run <- mdat$Run[grep(tolower(segment), tolower(mdat$Site))]
   }
 
-  if(tolower(site) %in% c("covid", "covid_control")) {
+  if(tolower(segment) %in% c("covid", "covid_control")) {
     RDPfile <- file.path(getdatadir(), "16S/RDP-GTDB/SRK+22.tab.xz")
     mdat <- getmdat_microhum("SRK+22")
-    if(tolower(site) == "covid") Run <- mdat$Run[grep("Covid19", mdat$Status)]
-    if(tolower(site) == "covid_control") Run <- mdat$Run[grep("Control", mdat$Status)]
+    if(tolower(segment) == "covid") Run <- mdat$Run[grep("Covid19", mdat$Status)]
+    if(tolower(segment) == "covid_control") Run <- mdat$Run[grep("Control", mdat$Status)]
   }
 
-  if(tolower(site) %in% c("ibd", "ibd_control")) {
+  if(tolower(segment) %in% c("ibd", "ibd_control")) {
     RDPfile <- file.path(getdatadir(), "16S/RDP-GTDB/WGL+19.tab.xz")
     mdat <- getmdat_microhum("WGL+19")
-    if(tolower(site) == "ibd") Run <- mdat$Run[mdat$Disease != "HC"]
-    if(tolower(site) == "ibd_control") Run <- mdat$Run[mdat$Disease == "HC"]
+    if(tolower(segment) == "ibd") Run <- mdat$Run[mdat$Disease != "HC"]
+    if(tolower(segment) == "ibd_control") Run <- mdat$Run[mdat$Disease == "HC"]
   }
 
   # Get classifications and metadata for any COVID-19 or IBD study
@@ -1028,7 +1028,7 @@ calc.oxytol <- function(site = "Feces", study = NULL) {
     studyfile <- gsub("_.*", "", study)
     RDPfile <- file.path(getdatadir(), "16S/RDP-GTDB", paste0(studyfile, ".tab.xz"))
     mdat <- getmdat_microhum(study)
-    if(tolower(site) == "control") Run <- mdat$Run[mdat$pch == 24] else Run <- mdat$Run[mdat$pch == 25]
+    if(tolower(segment) == "control") Run <- mdat$Run[mdat$pch == 24] else Run <- mdat$Run[mdat$pch == 25]
   }
 
   # Read RDP file
@@ -1068,7 +1068,7 @@ calc.oxytol <- function(site = "Feces", study = NULL) {
 
 }
 
-# Line plot proportion of abundance vs nO2, grouped by oxygen tolerance 20230725
+# Line plot: genus abundance vs nO2, grouped by oxygen tolerance 20230725
 plot.oxytol <- function(dat) {
   # Start with 0 total abundance
   total.abundance <- 0
