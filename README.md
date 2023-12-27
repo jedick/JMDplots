@@ -45,8 +45,6 @@ Links to preprints, if available, are at the end of each list.
     - [pipeline.R](inst/extdata/microhum/16S/pipeline.R): *script*: 16S rRNA processing pipeline
     - [RDP-GTDB](inst/extdata/microhum/16S/RDP-GTDB): *output files*: taxonomic classifications for 16S rRNA datasets made using the RDP Classifier with a [training set based on GTDB release 207](https://doi.org/10.5281/zenodo.7633100)
 
-  - [images](inst/extdata/microhum/images): drawings for figure in paper
-
   - [MR18_Table_S1_modified.csv](inst/extdata/microhum/MR18_Table_S1_modified.csv): *data*: List of Prokaryotes according to their Aerotolerant or Obligate Anaerobic Metabolism, modified from [Million and Raoult (2018)](https://doi.org/10.1016/j.humic.2018.07.002)
 
 - [R/microhum.R](R/microhum.R): code for plots
