@@ -625,19 +625,24 @@ microhum_4 <- function(pdf = FALSE) {
 microhum_5 <- function(pdf = FALSE) {
 
   # Start plot
-  if(pdf) pdf("Figure_5.pdf", width = 10, height = 9)
-  par(mfrow = c(3, 4))
-  par(mar = c(4, 4, 2.8, 1), mgp = c(2.5, 1, 0))
+  if(pdf) pdf("Figure_5.pdf", width = 12, height = 9)
+  mat <- cbind(matrix(1:12, nrow = 3, byrow = TRUE), c(13, 0, 0))
+  layout(mat, widths = c(2, 2, 2, 2, 1))
+  par(mar = c(4, 4, 2.8, 1), mgp = c(2.5, 1, 0), cex.lab = 1.2)
 
   # Panels A and B: oxygen tolerance of genera in body sites / in selected COVID-19 and IBD studies
   for(site in c("Nasal", "Oral", "Skin", "Feces", "COVID_control", "COVID", "IBD_control", "IBD")) {
     dat <- calc.oxytol(site)
     plot.oxytol(dat)
-    title(site, font.main = 1, line = 0.5)
-    btitle <- "A. Oxygen tolerance of genera in body sites (data from Boix-Amor\u00f3s et al., 2021)"
-    if(site == "Nasal") label.figure(btitle, font = 2, xfrac = 1.29, yfrac = 0.97, cex = 1.5)
-    ctitle <- "B. Oxygen tolerance of genera in selected COVID-19 and IBD studies (data from Schult et al., 2022 and Weng et al., 2019)"
-    if(site == "COVID_control") label.figure(hyphen.in.pdf(ctitle), font = 2, xfrac = 1.92, yfrac = 0.97, cex = 1.5)
+    main <- hyphen.in.pdf(gsub("COVID", "COVID-19", site))
+    title(main, font.main = 1, line = 0.5)
+    # Add panel title
+    atitle <- bquote(bold("A. Genus abundance vs"~bolditalic(n)[O[2]]~.(
+      hyphen.in.pdf("for body sites (data from Boix-Amor\u00f3s et al., 2021)"))))
+    if(site == "Nasal") label.figure(atitle, font = 2, xfrac = 1.17, yfrac = 0.965, cex = 1.5)
+    btitle <- bquote(bold("B. Genus abundance vs"~bolditalic(n)[O[2]]~.(
+      hyphen.in.pdf("for COVID-19 (data from Schult et al., 2022) and IBD (data from Lloyd-Price et al., 2019)"))))
+    if(site == "COVID_control") label.figure(btitle, font = 2, xfrac = 1.7, yfrac = 0.965, cex = 1.5)
   }
 
   # Panel C: Percent of aerotolerant genera in COVID-19 or IBD vs controls 20230726
@@ -687,16 +692,19 @@ microhum_5 <- function(pdf = FALSE) {
     # Add plot title
     titles <- c(naso = "Nasopharyngeal", oro = "Oropharyngeal", gut = hyphen.in.pdf("Gut (COVID-19)"), IBD = "Gut (IBD)")
     title(titles[type], font.main = 1, line = 0.5)
-    # Add panel title
-    start <- hyphen.in.pdf("A. Community reference proteomes (")
-    covid <- hyphen.in.pdf("COVID-19")
-    label <- bquote(bold(.(start) * Delta == .(covid) ~ "minus control)"))
 
     if(type == "naso") label.figure(
       hyphen.in.pdf("C. Cumulative abundance of aerotolerant genera in COVID-19 and IBD (data sources listed in Table 1)"),
-      font = 2, xfrac = 1.6, yfrac = 0.97, cex = 1.5
+      font = 2, xfrac = 1.505, yfrac = 0.965, cex = 1.5
     )
   }
+
+  # Add legend for colors 20231228
+  plot.new()
+  cols <- adjustcolor(rev(c(2, 4, 8)), alpha.f = 0.3)
+  legend("topright", c("Unassigned", "Aerotolerant", "Obligate anaerobe"), title = "Oxygen\ntolerance",
+    pch = 15, col = cols, pt.cex = 2, bty = "n", xpd = NA, cex = 1.2, inset = c(-0.2, 0))
+
 
   if(pdf) dev.off()
 
@@ -1002,15 +1010,15 @@ calc.oxytol <- function(segment = "Feces", study = NULL) {
   if(tolower(segment) %in% c("covid", "covid_control")) {
     RDPfile <- file.path(getdatadir(), "16S/RDP-GTDB/SRK+22.tab.xz")
     mdat <- getmdat_microhum("SRK+22")
-    if(tolower(segment) == "covid") Run <- mdat$Run[grep("Covid19", mdat$Status)]
-    if(tolower(segment) == "covid_control") Run <- mdat$Run[grep("Control", mdat$Status)]
+    if(tolower(segment) == "covid") Run <- mdat$Run[mdat$pch == 25]
+    if(tolower(segment) == "covid_control") Run <- mdat$Run[mdat$pch == 24]
   }
 
   if(tolower(segment) %in% c("ibd", "ibd_control")) {
-    RDPfile <- file.path(getdatadir(), "16S/RDP-GTDB/WGL+19.tab.xz")
-    mdat <- getmdat_microhum("WGL+19")
-    if(tolower(segment) == "ibd") Run <- mdat$Run[mdat$Disease != "HC"]
-    if(tolower(segment) == "ibd_control") Run <- mdat$Run[mdat$Disease == "HC"]
+    RDPfile <- file.path(getdatadir(), "16S/RDP-GTDB/LAA+19.tab.xz")
+    mdat <- getmdat_microhum("LAA+19")
+    if(tolower(segment) == "ibd") Run <- mdat$Run[mdat$pch == 25]
+    if(tolower(segment) == "ibd_control") Run <- mdat$Run[mdat$pch == 24]
   }
 
   # Get classifications and metadata for any COVID-19 or IBD study
@@ -1071,7 +1079,7 @@ plot.oxytol <- function(dat) {
     rect(head(thisdat$nO2, 1), head(y1, 1), tail(thisdat$nO2, 1), tail(y2, 1), col = adjustcolor(cols[i], alpha.f = 0.3), border = NA)
     # Plot a line for the mean
     nO2.mean <- sum(thisdat$nO2 * thisdat$abundance) / sum(thisdat$abundance)
-    lines(c(nO2.mean, nO2.mean), c(head(y1, 1), tail(y2, 1)), lwd = 1.5, col = "white")
+    lines(c(nO2.mean, nO2.mean), c(head(y1, 1), tail(y2, 1)), lwd = 3, col = "white")
     # Loop over genera
     for(j in 1:nrow(thisdat)) {
       # Plot a line with length corresponding to abundance of this genus
