@@ -66,9 +66,14 @@ microhum_3()
 
 **Data sources:** **(A)** See Table 1 in manuscript; **(B)** MAGs [@KWL22], based on data from @YZL+21; **(C)** @HZX+21; **(D)** See Table 1 in manuscript.
 
-## Oxygen tolerance of genera in body sites, COVID-19, and IBD (Figure 4)
-```{r microhum_4, message = FALSE, out.width='100%', fig.width = 10, fig.height = 9, pngquant = pngquant, dpi = 100}
+## Differences of relative abundances of genera between controls and patients (Figure 4)
+```{r microhum_4, message = FALSE, out.width='100%', fig.width = 10, fig.height = 8.5, pngquant = pngquant, dpi = 100}
 microhum_4()
+```
+
+## Oxygen tolerance of genera in body sites, COVID-19, and IBD (Figure 5)
+```{r microhum_5, message = FALSE, out.width='100%', fig.width = 10, fig.height = 9, pngquant = pngquant, dpi = 100}
+microhum_5()
 ```
 
 **Data sources:** **(A)--(B)** *List of Prokaryotes according to their Aerotolerant or Obligate Anaerobic Metabolism* [@MR18] with modifications made in this study; **(C)** See Table 1 in manuscript.

@@ -5,6 +5,7 @@
 \alias{microhum_2}
 \alias{microhum_3}
 \alias{microhum_4}
+\alias{microhum_5}
 \alias{microhum_S1}
 \alias{microhum_S2}
 \alias{microhum_S3}
@@ -19,6 +20,7 @@ Plots from the paper by Dick (2023).
   microhum_2(pdf = FALSE)
   microhum_3(pdf = FALSE)
   microhum_4(pdf = FALSE)
+  microhum_5(pdf = FALSE)
   microhum_S1(pdf = FALSE)
   microhum_S2(pdf = FALSE)
   microhum_S3(pdf = FALSE)
@@ -36,7 +38,8 @@ This table briefly describes each plotting function.
   \code{microhum_1} \tab Compatibility of inferences from shotgun metagenomes and community reference proteomes \cr
   \code{microhum_2} \tab Chemical variation of microbial proteins across body sites and multi-omics comparison \cr
   \code{microhum_3} \tab Differences of chemical metrics between controls and COVID-19/IBD patients \cr
-  \code{microhum_4} \tab Oxygen tolerance of genera in body sites, COVID-19, and IBD \cr
+  \code{microhum_4} \tab Differences of relative abundances of genera between controls and patients \cr
+  \code{microhum_5} \tab Oxygen tolerance of genera in body sites, COVID-19, and IBD \cr
   \code{microhum_S1} \tab Amount of putative human DNA removed from HMP metagenomes in screening step \cr
   \code{microhum_S2} \tab Changes of chemical metrics for microbiomes associated with viral inactivation \cr
   \code{microhum_S3} \tab Differences of \nO2 and \nH2O between obligate anaerobic and aerotolerant genera \cr

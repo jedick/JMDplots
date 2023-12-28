@@ -522,11 +522,110 @@ microhum_3 <- function(pdf = FALSE) {
   if(pdf) dev.off()
 }
 
-# Oxygen tolerance of genera in body sites, COVID-19, and IBD 20230726
+# Differences of relative abundances of genera between controls and patients 20231227
 microhum_4 <- function(pdf = FALSE) {
 
+  if(pdf) pdf("Figure_4.pdf", width = 10, height = 8.5)
+
+  # First, get the genera with largest abundance differences in individual COVID-19 gut and IBD datasets
+  covid <- get_abundance("gut")
+  ibd <- get_abundance("IBD")
+  # Get the unique genus names
+  genus_names <- unique(c(colnames(covid), colnames(ibd)))
+  # Then, get the abundance differences for these genera in COVID-19 gut and IBD datasets
+  COVID <- get_abundance("gut", genus_names)
+  IBD <- get_abundance("IBD", genus_names)
+
+  # Setup plot
+  layout(matrix(c(3, 1, 2)), heights = c(0.3, 1, 1))
+  par(mar = c(7, 5, 0, 4))
+  par(tcl = -0.3)
+  par(las = 1)
+  par(cex.lab = 1.2)
+  par(mgp = c(3.2, 1, 0))
+  # Define colors and breaks for heatmap
+  col <- function(n) hcl.colors(n, "RdYlBu")
+  breaks <- c(-.25, -.10, -.05, 0, .05, .10, .25)
+
+  for(disease in c("COVID", "IBD")) {
+
+    # Get differential abundance data
+    D_abundance <- get(disease)
+    # Convert to matrix to use plot.matrix
+    D_abundance <- as.matrix(D_abundance)
+    # Get amino acid compositions of reference proteomes for genera and calculate nO2
+    AAcomp <- taxon_AA[["GTDB"]]
+    AAcomp <- AAcomp[match(colnames(D_abundance), AAcomp$organism), ]
+    nO2 <- calc_metrics(AAcomp, "nO2")[, 1]
+    # Reorder genera from most reduced to most oxidized
+    onO2 <- order(nO2)
+    D_abundance <- D_abundance[, onO2]
+    nO2 <- nO2[onO2]
+
+    # Truncate values to the range for the color scale
+    islo <- D_abundance < min(breaks)
+    D_abundance[islo] <- min(breaks)
+    ishi <- D_abundance > max(breaks)
+    D_abundance[ishi] <- max(breaks)
+
+    # Plot heatmap
+    ## This isn't needed because import("plot.matrix") has been added to NAMESPACE
+    #requireNamespace("plot.matrix")
+    # Temporarily suppress the x-axis
+    opar <- par(xaxt = "n")
+    plot(D_abundance, col = col, breaks = breaks, main = "", xlab = "", ylab = paste(disease, "Dataset"))
+    par(opar)
+
+    # Add triangles to indicate values beyond the color scale
+    pch <- c(6, 2)
+    islh <- list(islo, ishi)
+    for(i in 1:2) {
+      isi <- islh[[i]]
+      if(any(isi)) {
+        xy <- which(isi, arr.ind = TRUE)
+        x <- xy[, 2]
+        y <- nrow(D_abundance) + 1 - xy[, 1]
+        points(x, y, pch = pch[i], col = "white")
+      }
+    }
+
+    # Find oxygen tolerance of genera
+    genus <- colnames(D_abundance)
+    oxygen.tolerance <- get.oxytol(genus)
+    # Add symbols to indicate obligate anaerobes
+    ianaerobe <- oxygen.tolerance == "obligate anaerobe"
+    genus[ianaerobe] <- paste(genus[ianaerobe], "*")
+    genus[genus == "Bifidobacterium"] <- "Bifidobacterium +"
+    labels <- genus
+    # Make rotated labels (modified from https://www.r-bloggers.com/rotated-axis-labels-in-r-plots/)
+    text(x = seq_along(labels), y = par()$usr[3] - strheight("A"), labels = labels, srt = 40, adj = 1, xpd = TRUE)
+    # Add tick marks
+    axis(1, at = seq_along(labels), labels = FALSE)
+    if(disease == "COVID") {
+      # Add legend title
+      text(29.5, -1.5, "Change in\nrelative abundance\n(patient - control)", xpd = NA, cex = 1.2)
+    }
+
+  }
+
+  # Plot nO2 of genera at top
+  par(mar = c(1, 5, 1, 4))
+  # Calculate x-axis limits to account for width of boxes and legend in heatmap
+  xlim <- c(1 - 0.5, ncol(D_abundance) + 2)
+  plot(xlim, range(nO2), xaxs = "i", xaxt = "n", xlab = "", yaxs = "i", ylab = quote(italic(n)[O[2]]~"of genus RP"), type = "n", bty = "n")
+  for(i in 1:ncol(D_abundance)) lines(c(i-0.5, i+0.5), rep(nO2[i], 2), lwd = 2)
+
+
+  if(pdf) dev.off()
+
+}
+
+
+# Oxygen tolerance of genera in body sites, COVID-19, and IBD 20230726
+microhum_5 <- function(pdf = FALSE) {
+
   # Start plot
-  if(pdf) pdf("Figure_4.pdf", width = 10, height = 9)
+  if(pdf) pdf("Figure_5.pdf", width = 10, height = 9)
   par(mfrow = c(3, 4))
   par(mar = c(4, 4, 2.8, 1), mgp = c(2.5, 1, 0))
 
@@ -848,6 +947,10 @@ dataset_metrics <- function() {
 
 }
 
+#############################
+### Unexported Functions  ###
+#############################
+
 # Function to add p-values to x and y axes 20230204
 plot.p.values <- function(X.1, X.2, Y.1, Y.2, paired = FALSE, ypos = "top") {
   p.value.X <- wilcox.test(X.1, X.2, paired = paired)$p.value
@@ -865,6 +968,23 @@ plot.p.values <- function(X.1, X.2, Y.1, Y.2, paired = FALSE, ypos = "top") {
   text(pu[2] - dx, pu[3] + dy/2, p.X.txt, adj = c(1, 0), cex = 0.9)
   if(ypos == "bottom") text(pu[1] + dx/2, pu[3] + dy, p.Y.txt, srt = 90, adj = c(0, 1), cex = 0.9)
   if(ypos == "top") text(pu[1] + dx/2, pu[4] - dy, p.Y.txt, srt = 90, adj = c(1, 1), cex = 0.9)
+}
+
+# Get oxygen tolerance for specified genera 20231227
+get.oxytol <- function(genus) {
+
+  # Read the table of oxygen tolerance for genera
+  dat <- read.csv(system.file("extdata/microhum/MR18_Table_S1_modified.csv", package = "JMDplots"))
+  obligate.anaerobe <- dat$Genus.name[dat$Obligate.anerobic.prokaryote %in% c(1, 2)]
+  aerotolerant <- dat$Genus.name[dat$Obligate.anerobic.prokaryote == 0]
+  # Remove suffixes used in GTDB (_A, _B, etc.)
+  genus <- sapply(strsplit(genus, "_"), "[", 1)
+  # Assign oxygen tolerance
+  oxygen.tolerance <- rep("unknown", length(genus))
+  oxygen.tolerance[genus %in% obligate.anaerobe] <- "obligate anaerobe"
+  oxygen.tolerance[genus %in% aerotolerant] <- "aerotolerant"
+  oxygen.tolerance
+
 }
 
 # Summarize abundances of genera in segments (body sites, disease, or control) and list their oxygen tolerance 20230725
@@ -921,18 +1041,9 @@ calc.oxytol <- function(segment = "Feces", study = NULL) {
   AAcomp <- taxon_AA[["GTDB"]]
   AAcomp <- AAcomp[match(names(abundance), AAcomp$organism), ]
   nO2 <- calc_metrics(AAcomp, "nO2")[, 1]
-
-  # Read the table of oxygen tolerance for genera
-  dat <- read.csv(system.file("extdata/microhum/MR18_Table_S1_modified.csv", package = "JMDplots"))
-  obligate.anaerobe <- dat$Genus.name[dat$Obligate.anerobic.prokaryote %in% c(1, 2)]
-  aerotolerant <- dat$Genus.name[dat$Obligate.anerobic.prokaryote == 0]
-  # List each genus and remove suffixes (_A, _B, etc.)
+  # Get oxygen tolerance
   genus <- rownames(RDP)
-  genus <- sapply(strsplit(genus, "_"), "[", 1)
-  # Assign oxygen tolerance
-  oxygen.tolerance <- rep("unknown", length(genus))
-  oxygen.tolerance[genus %in% obligate.anaerobe] <- "obligate anaerobe"
-  oxygen.tolerance[genus %in% aerotolerant] <- "aerotolerant"
+  oxygen.tolerance <- get.oxytol(genus)
 
   # Make summary table
   data.frame(oxygen.tolerance, abundance, nO2)
@@ -978,3 +1089,67 @@ plot.oxytol <- function(dat) {
  }
 }
 
+# Get differences of relative abundance of genera in COVID and IBD
+# 20231225 first version jmd
+get_abundance <- function(study_type, genus_names = NULL) {
+
+  # List studies with datasets
+  metrics <- read.csv(file.path(getdatadir(), "16S/dataset_metrics.csv"))
+  studies <- metrics$study[metrics$type == study_type]
+
+  # Loop over studies
+  for(istudy in seq_along(studies)) {
+
+    # Remove suffix after underscore
+    studyname <- strsplit(studies[istudy], "_")[[1]][1]
+    RDPfile <- file.path(getdatadir(), "16S/RDP-GTDB", paste0(studyname, ".tab.xz"))
+    mdat <- getmdat_microhum(studies[istudy])
+
+    # Read RDP file
+    RDP <- read_RDP(RDPfile, quiet = TRUE)
+    # Keep only genus-level classifications
+    RDP <- RDP[RDP$rank == "genus", ]
+    # Use genus names for row names
+    rownames(RDP) <- RDP$name
+
+    # Loop over control and disease
+    for(segment in c("control", "disease")) {
+      if(segment == "control") in.segment <- sapply(mdat$pch == 24, isTRUE)
+      if(segment == "disease") in.segment <- sapply(mdat$pch == 25, isTRUE)
+      myRuns <- mdat$Run[in.segment]
+      # Remove runs without taxonomic classifications
+      # (possibly due to low-count samples discarded by read_RDP)
+      myRuns <- myRuns[myRuns %in% colnames(RDP)]
+      # Get genus-level classifications for these runs
+      myRDP <- RDP[, myRuns]
+      # Sum genus abundances for all samples in this segment
+      myabundance <- t(rowSums(myRDP))
+      if(istudy == 1) abundance <- myabundance else {
+        abundance <- get(segment)
+        abundance <- merge(abundance, myabundance, all = TRUE, sort = FALSE)
+      }
+      assign(segment, abundance)
+    }
+
+  }
+
+  # Make sure genus names are the same for control and disease
+  stopifnot(all(colnames(control) == colnames(disease)))
+  # Set NA counts to 0 and normalize counts to sum to 1
+  control[is.na(control)] <- 0
+  control <- control / rowSums(control)
+  disease[is.na(disease)] <- 0
+  disease <- disease / rowSums(disease)
+  # Calculate differences of abundance of genera between disease and control
+  D_abundance_all <- disease - control
+
+  if(!is.null(genus_names)) {
+    return(D_abundance_all[, genus_names])
+  } else {
+    # Find the genera with the largest change
+    cutoff <- 0.05
+    is_top <- apply(abs(D_abundance_all) > cutoff, 2, any)
+    return(D_abundance_all[, is_top])
+  }
+
+}
