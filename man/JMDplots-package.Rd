@@ -99,8 +99,14 @@ The plots are available in the corresponding vignettes in the package.
     }
 
     \item{\code{RefSeq}}{
-      This directory has two files, \file{protein_refseq.csv.xz} (amino acid compositions of species-level archaeal, bacterial, and viral taxa in the RefSeq database) and \file{taxid_names.csv.xz} (taxonomic names for each of those species).
-      The scripts to produce these files, and further processed data files, are in the \code{extdata/RefSeq} directory of \pkg{chem16S} (see \code{\link[chem16S]{chem16S-package}}).
+      \file{genome_AA.csv.xz} has amino acid compositions of species-level archaeal, bacterial, and viral taxa in the RefSeq database, and \file{taxonomy.csv.xz} has taxonomic names for each of those species.
+      The scripts to produce these files are in the \code{extdata/RefSeq} directory of \pkg{chem16S} (see \code{\link[chem16S]{chem16S-package}}).
+      \file{taxon_metrics.R} and \file{taxon_metrics.csv.xz} are script and output of selected chemical metrics (\Zc and \nH2O) of reference proteomes for taxa at genus and higher ranks.
+    }
+
+    \item{\code{GTDB}}{
+      file{genome_AA.csv.xz} has amino acid compositions of genomes in the GTDB database, and \file{taxonomy.csv.xz} has taxonomic names for each of those species.
+      The scripts to produce these files are in the \code{extdata/GTDB} directory of \pkg{chem16S} (see \code{\link[chem16S]{chem16S-package}}).
     }
 
   }

@@ -380,7 +380,7 @@ aoscp5 <- function(pdf = FALSE, file = NULL) {
   par(las = 1)
 
   # get amino acid compositions of microbial proteins generated from the RefSeq database 
-  #file <- "protein_refseq.csv.xz"
+  #file <- "genome_AA.csv.xz"
   if(!is.null(file)) {
     aa <- read.csv(file, as.is = TRUE)
     # calculate ZC

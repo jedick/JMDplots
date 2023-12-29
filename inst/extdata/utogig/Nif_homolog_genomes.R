@@ -14,8 +14,8 @@
 org <- read.csv("../gradH2O/PCF+18_SuppTable1A.csv", as.is = TRUE)
 
 # Read RefSeq amino acid compositions and taxon names
-refseq <- read.csv(system.file("extdata/RefSeq/protein_refseq.csv.xz", package = "JMDplots"), as.is = TRUE)
-taxa <- read.csv(system.file("extdata/RefSeq/taxid_names.csv.xz", package = "JMDplots"), as.is = TRUE)
+refseq <- read.csv(system.file("extdata/RefSeq/genome_AA.csv.xz", package = "JMDplots"), as.is = TRUE)
+taxa <- read.csv(system.file("extdata/RefSeq/taxonomy.csv.xz", package = "JMDplots"), as.is = TRUE)
 # Make sure the data tables have consistent taxids
 stopifnot(all(refseq$organism == taxa$taxid))
 # Keep taxids classified at species level 20220104

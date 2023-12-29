@@ -10,7 +10,7 @@ Plots from the papers are reproduced in the vignettes, which are installed with 
 Click on the paper titles for a list of files.
 Published papers are indicated by the year with a DOI link.
 Links to preprints, if available, are at the end of each list.
-*The manual page for each paper has additional details about scripts, data files, and plotting functions.*
+See the manual page associated with each paper for additional details about scripts, data files, and plotting functions.
 
 <!-- Put a space before <details> to make ghostwriter format the lists correctly -->
  <details>

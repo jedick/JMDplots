@@ -30,7 +30,7 @@ Functions to plot chemical metrics (\ZC and \nH2O) for estimated microbial commu
 
 \details{
 
-\code{getrefseq} retrieves amino acid compositions and taxonomic names from the files \code{extdata/RefSeq/protein_refseq.csv.xz} and \code{extdata/RefSeq/taxid_names.csv.xz}.
+\code{getrefseq} retrieves amino acid compositions and taxonomic names from the files \code{extdata/RefSeq/genome_AA.csv.xz} and \code{extdata/RefSeq/taxonomy.csv.xz}.
 By default, any species with greater than 20000 reference sequences is omitted; set \code{filterspecies} to FALSE to include all available species.
 
 \code{taxacomp} plots the \ZC and \nH2O of taxonomic groups in RefSeq and their children.
