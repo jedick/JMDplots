@@ -136,7 +136,7 @@ mjenergy2 <- function(pdf = FALSE) {
   par(mar = c(3.5, 3.5, 1, 1), mgp = c(2.45, 1, 0), las = 1)
 
   # Read amino acid compositions of Mj proteins
-  aa <- read.csv(system.file("extdata/organisms/UP000000805_243232.csv.xz", package = "JMDplots"), as.is = TRUE)
+  aa <- read.csv(system.file("extdata/RefDB/organisms/UP000000805_243232.csv.xz", package = "JMDplots"), as.is = TRUE)
   # Calculate frequency (percentage) of each amino acid
   AAsum <- colSums(aa[, 6:25])
   AAperc <- 100 * AAsum / sum(AAsum)
@@ -183,7 +183,7 @@ mjenergy3 <- function(pdf = FALSE, write.csv = FALSE) {
   par(cex = 1.1)
 
   # Read amino acid compositions of Mj proteins
-  aa <- read.csv(system.file("extdata/organisms/UP000000805_243232.csv.xz", package = "JMDplots"), as.is = TRUE)
+  aa <- read.csv(system.file("extdata/RefDB/organisms/UP000000805_243232.csv.xz", package = "JMDplots"), as.is = TRUE)
   # Calculate ZC of Mj proteins
   ZC <- ZC(protein.formula(aa))
   # Calculate the 1st and 3rd quartiles
@@ -384,7 +384,7 @@ mjenergy_Table_S3 <- function() {
 # Data Set S1: Chemical formulas of proteins 20210813
 mjenergy_Dataset_S1 <- function(write.csv = FALSE) {
   # Read amino acid compositions of Mj proteins
-  aa <- read.csv(system.file("extdata/organisms/UP000000805_243232.csv.xz", package = "JMDplots"), as.is = TRUE)
+  aa <- read.csv(system.file("extdata/RefDB/organisms/UP000000805_243232.csv.xz", package = "JMDplots"), as.is = TRUE)
   # Calculate protein formulas and length
   pf <- protein.formula(aa)
   pl <- protein.length(aa)

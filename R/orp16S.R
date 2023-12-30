@@ -46,7 +46,7 @@ orp16S_1 <- function(pdf = FALSE) {
     "Methanofollis liminatans"
   )
   # Get reference proteomes
-  refseq <- read.csv(system.file("extdata/RefSeq/genome_AA.csv.xz", package = "JMDplots"))
+  refseq <- read.csv(system.file("extdata/RefDB/RefSeq/genome_AA.csv.xz", package = "JMDplots"))
   irefseq <- match(species, refseq$ref)
   aa <- refseq[irefseq, ]
   ip <- add.protein(aa, as.residue = TRUE)
@@ -135,7 +135,7 @@ orp16S_1 <- function(pdf = FALSE) {
 
   # Use RefSeq amino acid compositions and taxon names
   species_aa <- refseq
-  taxa <- read.csv(system.file("extdata/RefSeq/taxonomy.csv.xz", package = "JMDplots"), as.is = TRUE)
+  taxa <- read.csv(system.file("extdata/RefDB/RefSeq/taxonomy.csv.xz", package = "JMDplots"), as.is = TRUE)
   # Make sure the data tables have consistent taxids
   stopifnot(all(species_aa$organism == taxa$taxid))
   # Keep only Bacteria and Archaea classified at species level 20220104
@@ -200,7 +200,7 @@ orp16S_2 <- function(pdf = FALSE) {
   print(paste(nna, "genera not matched to RefSeq"))
   # Report archaeal genera 20230107
   genera <- aa[iref, ]$organism
-  taxa <- read.csv(system.file("extdata/RefSeq/taxonomy.csv.xz", package = "JMDplots"), as.is = TRUE)
+  taxa <- read.csv(system.file("extdata/RefDB/RefSeq/taxonomy.csv.xz", package = "JMDplots"), as.is = TRUE)
   itax <- match(genera, taxa$genus)
   taxa <- taxa[itax, ]
   archaeal_genera <- taxa$genus[taxa$superkingdom == "Archaea"]

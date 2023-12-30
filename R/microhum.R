@@ -594,9 +594,9 @@ microhum_4 <- function(pdf = FALSE) {
     oxygen.tolerance <- get.oxytol(genus)
     # Add symbols to indicate obligate anaerobes
     ianaerobe <- oxygen.tolerance == "obligate anaerobe"
-    genus[ianaerobe] <- paste(genus[ianaerobe], "*")
-    genus[genus == "Bifidobacterium"] <- "Bifidobacterium +"
     labels <- genus
+    labels[ianaerobe] <- paste(labels[ianaerobe], "*")
+    labels[labels == "Bifidobacterium"] <- "Bifidobacterium +"
     # Make rotated labels (modified from https://www.r-bloggers.com/rotated-axis-labels-in-r-plots/)
     text(x = seq_along(labels), y = par()$usr[3] - strheight("A"), labels = labels, srt = 40, adj = 1, xpd = TRUE)
     # Add tick marks
@@ -615,8 +615,11 @@ microhum_4 <- function(pdf = FALSE) {
   plot(xlim, range(nO2), xaxs = "i", xaxt = "n", xlab = "", yaxs = "i", ylab = quote(italic(n)[O[2]]~"of genus RP"), type = "n", bty = "n")
   for(i in 1:ncol(D_abundance)) lines(c(i-0.5, i+0.5), rep(nO2[i], 2), lwd = 2)
 
-
   if(pdf) dev.off()
+
+  # Return list of genera 20231230
+  #writeLines(genus, "Figure_4_genera.txt")
+  invisible(genus)
 
 }
 

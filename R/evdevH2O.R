@@ -37,8 +37,8 @@ evdevH2O1 <- function(pdf = FALSE) {
 
     # Get amino acid compositions of human proteins
     if(organism == "Hsa") aa <- get("human_base", human)
-    if(organism == "Dme") aa <- read.csv(system.file("extdata/organisms/UP000000803_7227.csv.xz", package = "JMDplots"), as.is = TRUE)
-    if(organism == "Bsu") aa <- read.csv(system.file("extdata/organisms/UP000001570_224308.csv.xz", package = "JMDplots"), as.is = TRUE)
+    if(organism == "Dme") aa <- read.csv(system.file("extdata/RefDB/organisms/UP000000803_7227.csv.xz", package = "JMDplots"), as.is = TRUE)
+    if(organism == "Bsu") aa <- read.csv(system.file("extdata/RefDB/organisms/UP000001570_224308.csv.xz", package = "JMDplots"), as.is = TRUE)
     protein.formula <- protein.formula(aa)
     Zc <- ZC(protein.formula)
 
@@ -552,11 +552,11 @@ evdevH2O6 <- function(pdf = FALSE) {
   Hsa_Zc <- Zc(Hsa)
   Hsa_nH2O <- nH2O(Hsa)
   # Fly proteome
-  Dme <- read.csv(system.file("extdata/organisms/UP000000803_7227.csv.xz", package = "JMDplots"), as.is = TRUE)
+  Dme <- read.csv(system.file("extdata/RefDB/organisms/UP000000803_7227.csv.xz", package = "JMDplots"), as.is = TRUE)
   Dme_Zc <- Zc(Dme)
   Dme_nH2O <- nH2O(Dme)
   # Bacillus subtilis proteome
-  Bsu <- read.csv(system.file("extdata/organisms/UP000001570_224308.csv.xz", package = "JMDplots"), as.is = TRUE)
+  Bsu <- read.csv(system.file("extdata/RefDB/organisms/UP000001570_224308.csv.xz", package = "JMDplots"), as.is = TRUE)
   Bsu_Zc <- Zc(Bsu)
   Bsu_nH2O <- nH2O(Bsu)
 
@@ -1038,11 +1038,11 @@ runMaximAct <- function(dataset = "TPPG17", seed = 1:100, nbackground = 2000, re
   # Human (Hsa) is the default background in MaximAct()
   if(identical(bg_organism, "Hsa")) AA_background <- NULL
   else if(identical(bg_organism, "Sce")) AA_background <- yeast.aa()
-  else if(identical(bg_organism, "Eco")) AA_background <- read.csv(system.file("extdata/organisms/UP000000625_83333.csv.xz", package = "JMDplots"), as.is = TRUE)
-  else if(identical(bg_organism, "Dme")) AA_background <- read.csv(system.file("extdata/organisms/UP000000803_7227.csv.xz", package = "JMDplots"), as.is = TRUE)
-  else if(identical(bg_organism, "Bsu")) AA_background <- read.csv(system.file("extdata/organisms/UP000001570_224308.csv.xz", package = "JMDplots"), as.is = TRUE)
+  else if(identical(bg_organism, "Eco")) AA_background <- read.csv(system.file("extdata/RefDB/organisms/UP000000625_83333.csv.xz", package = "JMDplots"), as.is = TRUE)
+  else if(identical(bg_organism, "Dme")) AA_background <- read.csv(system.file("extdata/RefDB/organisms/UP000000803_7227.csv.xz", package = "JMDplots"), as.is = TRUE)
+  else if(identical(bg_organism, "Bsu")) AA_background <- read.csv(system.file("extdata/RefDB/organisms/UP000001570_224308.csv.xz", package = "JMDplots"), as.is = TRUE)
   else if(identical(bg_organism, "Mja")) {
-    AA_background <- read.csv(system.file("extdata/organisms/UP000000805_243232.csv.xz", package = "JMDplots"), as.is = TRUE)
+    AA_background <- read.csv(system.file("extdata/RefDB/organisms/UP000000805_243232.csv.xz", package = "JMDplots"), as.is = TRUE)
     # We use all the proteins (1787) without sampling
     seed = 1
     # Offset logfO2 and logaH2O

@@ -86,7 +86,7 @@ Table_S5 <- geo16S1()
 `r Zc` for reference proteomes of genera that are abundant in produced fluids of shale gas wells:
 
 ```{r taxon_metrics}
-datadir <- system.file("extdata/RefSeq", package = "JMDplots")
+datadir <- system.file("extdata/RefDB/RefSeq", package = "JMDplots")
 taxon_metrics <- read.csv(file.path(datadir, "taxon_metrics.csv.xz"), as.is = TRUE)
 subset(taxon_metrics, group %in% c("Halanaerobium", "Thermoanaerobacter"))
 ```
@@ -94,7 +94,7 @@ subset(taxon_metrics, group %in% c("Halanaerobium", "Thermoanaerobacter"))
 `r Zc` for reference proteomes of *Halanaerobium* species (numeric names are NCBI taxids):
 
 ```{r Halanaerobium_Zc}
-datadir <- system.file("extdata/RefSeq", package = "JMDplots")
+datadir <- system.file("extdata/RefDB/RefSeq", package = "JMDplots")
 refseq <- read.csv(file.path(datadir, "genome_AA.csv.xz"))
 Zc.refseq <- Zc(refseq)
 names(Zc.refseq) <- refseq$organism
@@ -158,7 +158,7 @@ geo16S_S3()
 Table_S10 <- geo16S_S4()
 ```
 
-**Data sources:** **RefSeq (NCBI):** Names of taxa with protein sequences in RefSeq as listed in `system.file("extdata/RefSeq/taxonomy.csv.xz", package = "JMDplots")`; **RDP:** `trainset18_062020_speciesrank.fa` in <https://sourceforge.net/projects/rdp-classifier/files/RDP_Classifier_TrainingData/RDPClassifier_16S_trainsetNo18_rawtrainingdata.zip>; **SILVA:** <https://www.arb-silva.de/fileadmin/silva_databases/release_138_1/Exports/SILVA_138.1_SSURef_NR99_tax_silva.fasta.gz>.
+**Data sources:** **RefSeq (NCBI):** Names of taxa with protein sequences in RefSeq as listed in `system.file("extdata/RefDB/RefSeq/taxonomy.csv.xz", package = "JMDplots")`; **RDP:** `trainset18_062020_speciesrank.fa` in <https://sourceforge.net/projects/rdp-classifier/files/RDP_Classifier_TrainingData/RDPClassifier_16S_trainsetNo18_rawtrainingdata.zip>; **SILVA:** <https://www.arb-silva.de/fileadmin/silva_databases/release_138_1/Exports/SILVA_138.1_SSURef_NR99_tax_silva.fasta.gz>.
 
 ## Correlations between `r Zc` estimated from metagenomes and 16S rRNA sequences (Figure S5)
 ```{r geo16S_S5, message = FALSE, results = "hide", out.width='100%', fig.width = 10, fig.height = 6, out.extra = 'class="full-width"', pngquant = pngquant}

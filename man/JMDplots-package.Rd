@@ -40,7 +40,7 @@ The plots are available in the corresponding vignettes in the package.
       These files are provided to illustrate the usage of user-provided data sets; see \code{\link{subsurface}}.
     }
 
-    \item{\code{organisms}}{
+    \item{\code{RefDB/organisms}}{
 
       \describe{
 
@@ -98,15 +98,15 @@ The plots are available in the corresponding vignettes in the package.
       These data have been superseded in the default OBIGT database in CHNOSZ and are kept here in order to reproduce calculations from some papers (\code{\link{aaaq}}, \code{\link{scsc}}, and \code{\link{bison}}).
     }
 
-    \item{\code{RefSeq}}{
+    \item{\code{RefDB/RefSeq}}{
       \file{genome_AA.csv.xz} has amino acid compositions of species-level archaeal, bacterial, and viral taxa in the RefSeq database, and \file{taxonomy.csv.xz} has taxonomic names for each of those species.
       The scripts to produce these files are in the \code{extdata/RefSeq} directory of \pkg{chem16S} (see \code{\link[chem16S]{chem16S-package}}).
       \file{taxon_metrics.R} and \file{taxon_metrics.csv.xz} are script and output of selected chemical metrics (\Zc and \nH2O) of reference proteomes for taxa at genus and higher ranks.
     }
 
-    \item{\code{GTDB}}{
-      file{genome_AA.csv.xz} has amino acid compositions of genomes in the GTDB database, and \file{taxonomy.csv.xz} has taxonomic names for each of those species.
-      The scripts to produce these files are in the \code{extdata/GTDB} directory of \pkg{chem16S} (see \code{\link[chem16S]{chem16S-package}}).
+    \item{\code{RefDB/GTDB}}{
+      file{genome_AA.csv.xz} has amino acid compositions of predicted proteins from GTDB, and \file{taxonomy.csv.xz} has taxonomic names for each of those species.
+      The scripts to produce these files are provided in \pkg{chem16S} (see \code{\link[chem16S]{chem16S-package}}).
     }
 
   }

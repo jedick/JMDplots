@@ -4,7 +4,7 @@
 yeast.aa <- function(protein = NULL) {
   # Return the composition of one or more proteins from S. cerevisiae (Sce)
   # Extracted from get.protein 20120519
-  datafile <- system.file("extdata/organisms/Sce.csv.xz", package="JMDplots")
+  datafile <- system.file("extdata/RefDB/organisms/Sce.csv.xz", package="JMDplots")
   mydata <- read.csv(datafile, as.is=TRUE)
   # If particular proteins are not given,
   # use all proteins except those with NA amino acid composition 20210712
@@ -62,7 +62,7 @@ yeastgfp <- function(location=NULL, exclusive=TRUE) {
   # return a list of ORFs and protein abundances for a subcellular location
   # using data from the YeastGFP project 
   # (yeastgfp.csv data file added to CHNOSZ_0.8, 20090422)
-  ypath <- "extdata/organisms/yeastgfp.csv.xz"
+  ypath <- "extdata/RefDB/organisms/yeastgfp.csv.xz"
   yfile <- system.file(ypath, package="JMDplots")
   # yeastgfp preprocessing
   ygfp <- read.csv(yfile)

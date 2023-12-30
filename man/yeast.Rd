@@ -43,7 +43,7 @@ For \code{yeastgfp}, a list with elements named \code{protein} (names of protein
 If \code{location} is NULL, \code{yeastgfp} returns the names of all known locations, and if the length of \code{location} is >1, the \code{protein} and \code{abundance} values are lists of the results for each location.
 }
 
-\section{Files in extdata/organisms}{
+\section{Files in extdata/RefDB/organisms}{
   \describe{
     \item{\code{yeastgfp.csv.xz}}{
       Has 28 columns; the names of the first five are \code{yORF}, \code{gene name}, \code{GFP tagged?}, \code{GFP visualized?}, and \code{abundance}.
