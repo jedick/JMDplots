@@ -46,6 +46,7 @@ See the manual page associated with each paper for additional details about scri
     - [RDP-GTDB](inst/extdata/microhum/16S/RDP-GTDB): *output files*: taxonomic classifications for 16S rRNA datasets made using the RDP Classifier with a [training set based on GTDB release 207](https://doi.org/10.5281/zenodo.7633100)
 
   - [MR18_Table_S1_modified.csv](inst/extdata/microhum/MR18_Table_S1_modified.csv): *data*: List of Prokaryotes according to their Aerotolerant or Obligate Anaerobic Metabolism, modified from [Million and Raoult (2018)](https://doi.org/10.1016/j.humic.2018.07.002)
+  - [Figure_5_genera.txt](inst/extdata/microhum/Figure_5_genera.txt): *data*: List of genera in Figure 5, created from the value invisibly returned by `microhum_5()`.
 
 - [R/microhum.R](R/microhum.R): code for plots
 - [man/microhum.Rd](man/microhum.Rd): manual page

@@ -7,10 +7,9 @@ plot_starburst <- function(
   hline = NULL, legend.x = NA, identify = FALSE) {
 
   # Compute chemical metrics of all taxa in reference database
-  if(refdb == "MGnify") aa_refdb <- read.csv("MGnify/taxon_AA.csv.xz") else {
-    datadir <- system.file(file.path("extdata", refdb), package = "chem16S")
-    aa_refdb <- read.csv(file.path(datadir, "taxon_AA.csv.xz"))
-  }
+  datadir <- system.file(file.path("extdata", refdb), package = "chem16S")
+  if(refdb == "MGnify") datadir <- system.file(file.path("extdata/RefDB", refdb), package = "JMDplots")
+  aa_refdb <- read.csv(file.path(datadir, "taxon_AA.csv.xz"))
   refdb_metrics <- data.frame(
     rank = aa_refdb$protein,
     taxon = aa_refdb$organism,
@@ -53,13 +52,8 @@ plot_starburst <- function(
       if(is.null(aa_species)) {
 
         # Read amino acid compositions and taxonomy for the specified reference database
-        if(refdb == "MGnify") {
-          aa_refdb_all <- read.csv("MGnify/genome_AA.csv.xz")
-          taxonomy <- read.csv("MGnify/taxonomy.csv.xz")
-        } else {
-          aa_refdb_all <- read.csv(system.file(file.path("extdata/RefDB", refdb, "genome_AA.csv.xz"), package = "JMDplots"))
-          taxonomy <- read.csv(system.file(file.path("extdata/RefDB", refdb, "taxonomy.csv.xz"), package = "JMDplots"))
-        }
+        aa_refdb_all <- read.csv(system.file(file.path("extdata/RefDB", refdb, "genome_AA.csv.xz"), package = "JMDplots"))
+        taxonomy <- read.csv(system.file(file.path("extdata/RefDB", refdb, "taxonomy.csv.xz"), package = "JMDplots"))
 
         if(refdb == "RefSeq" & remove_species_20000) {
           # Take out species with > 20000 sequences (biased to high Zc/low nH2O in RefSeq) 20210604

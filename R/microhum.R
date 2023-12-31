@@ -181,10 +181,119 @@ microhum_1 <- function(pdf = FALSE) {
 
 }
 
-# Chemical variation of microbial proteins across body sites and multi-omics comparison 20221125
+# Chemical metrics are broadly different among genera and are similar between GTDB and low-contamination genomes from MGnify
+# 20231230
 microhum_2 <- function(pdf = FALSE) {
 
-  if(pdf) pdf("Figure_2.pdf", width = 7, height = 6)
+  if(pdf) pdf("Figure_2.pdf", width = 12, height = 7)
+  mat <- matrix(c(1,1,2,2, 3,4,5,6), byrow = TRUE, nrow = 2)
+  layout(mat, heights = c(2, 1))
+  par(mgp = c(2.9, 1, 0))
+  par(cex.lab = 1.2)
+  par(mar = c(5.1, 4.1, 3.1, 2.1))
+  # Get genera from Figure 4
+  genera <- readLines(system.file("extdata/microhum/Figure_5_genera.txt", package = "JMDplots"))
+  # Get colors
+  col <- hcl.colors("Dynamic", n = length(genera))
+  # Loop over reference databases
+  refdb <- c("GTDB", "MGnify")
+  main <- c("GTDB (used for community reference proteomes)", "MGnify (contamination < 2% and completeness > 95%)")
+  genus_vals <- list()
+  metrics <- c("nO2", "nH2O")
+  for(i in seq_along(refdb)) {
+    # Make plot
+    vals <- plot_starburst(genera, metrics, xlim = c(-0.81, -0.58), ylim = c(-0.83, -0.69), refdb = refdb[i], pch = NA, col = col)
+    # Add points for genera
+    gvals <- do.call(rbind, sapply(vals, "[", 1))
+    X <- gvals$Xvals
+    Y <- gvals$Yvals
+    points(X, Y, pch = ".", cex = 2, col = "#00000080")
+    # Get labels for genera
+    labels <- paste0(" ", gvals$taxon)
+    xadj <- rep(0, length(labels))
+    yadj <- rep(0.5, length(labels))
+    yadj[gvals$taxon == "Bacteroides"] <- 0.2
+    yadj[gvals$taxon == "Phocaeicola"] <- 1.2
+    xadj[gvals$taxon == "Phocaeicola"] <- 0.1
+    yadj[gvals$taxon == "Blautia_A"] <- 1.2
+    xadj[gvals$taxon == "Blautia_A"] <- 0.1
+    yadj[gvals$taxon == "Anaerobutyricum"] <- -0.2
+    xadj[gvals$taxon == "Anaerobutyricum"] <- 0.05
+    yadj[gvals$taxon == "Escherichia"] <- 0.8
+    yadj[gvals$taxon == "Enterococcus"] <- -0.2
+    xadj[gvals$taxon == "Enterococcus"] <- 0.08
+    yadj[gvals$taxon == "Anaerostipes"] <- -0.3
+    xadj[gvals$taxon == "Anaerostipes"] <- 0.08
+    yadj[gvals$taxon == "Pediococcus"] <- 0.2
+    yadj[gvals$taxon == "Lactobacillus"] <- 0.2
+    yadj[gvals$taxon == "Enterococcus_B"] <- 0.4
+    yadj[gvals$taxon == "Haemophilus_D"] <- 0.8
+    for(j in seq_along(labels)) text(X[j], Y[j], labels[j], adj = c(xadj[j], yadj[j]), cex = 0.8)
+    title(main = main[i], font.main = 1)
+    # Keep points for correlation plot
+    colnames(gvals)[colnames(gvals) == "Xvals"] <- metrics[1]
+    colnames(gvals)[colnames(gvals) == "Yvals"] <- metrics[2]
+    genus_vals[[i]] <- gvals
+    if(i == 1) label.figure("A", font = 2, cex = 2, xfrac = 0.025)
+  }
+  names(genus_vals) <- refdb
+
+
+  # Plot nO2 and nH2O for GTDB vs MGnify
+  par(mar = c(4, 4.1, 2.1, 2.1))
+  for(i in seq_along(metrics)) {
+    x <- genus_vals$MGnify[, metrics[i]]
+    y <- genus_vals$GTDB[, metrics[i]]
+    plot(x, y, xlab = "MGnify", ylab = "GTDB", pch = 16, col = col)
+    # Show R-squared values
+    mylm <- lm(y ~ x)
+    R2 <- round(summary(mylm)$r.squared, 2)
+    R2txt <- bquote(italic(R)^2 == .(R2))
+    legend("bottomright", legend = R2txt, bty = "n", cex = 0.9)
+    title(chemlab(metrics[i]))
+    if(i == 1) {
+      mtext("Genus reference proteomes", line = 1, adj = 3.8, cex = 0.8, xpd = NA)
+      label.figure("B", font = 2, cex = 2)
+    }
+  }
+
+  # Plot nO2 and nH2O for GTDB vs RDP
+  # Classifications made using GTDB 16S rRNA training set (this study)
+  met_microhum <- getmetrics_microhum("HMP12")
+  mdat_microhum <- getmdat_microhum("HMP12", metrics = met_microhum)
+  pch <- mdat_microhum$metadata$pch
+  col <- adjustcolor(mdat_microhum$metadata$col, alpha.f = 0.6)
+  # Classifications made using rDP 16S rRNA training set (geo16S paper)
+  met_geo16S <- getmetrics_geo16S("HMP12")
+  mdat_geo16S <- getmdat_geo16S("HMP12", metrics = met_geo16S)
+  stopifnot(all.equal(mdat_microhum$metrics$Run, mdat_geo16S$metrics$Run))
+  for(i in seq_along(metrics)) {
+    x <- mdat_geo16S$metrics[, metrics[i]]
+    y <- mdat_microhum$metrics[, metrics[i]]
+    plot(x, y, xlab = "RDP training set", ylab = "GTDB training set", pch = pch, bg = col)
+    # Show R-squared values
+    mylm <- lm(y ~ x)
+    R2 <- round(summary(mylm)$r.squared, 2)
+    R2txt <- bquote(italic(R)^2 == .(R2))
+    legend("bottomright", legend = R2txt, bty = "n", cex = 0.9)
+    title(chemlab(metrics[i]))
+    if(i == 1) {
+      legend("topleft", c("Skin", "Nasal cavity", "Oral cavity", "GI tract", "UG tract"),
+        pch = c(pch_Skin, pch_Nasal, pch_Oral, pch_Gut, pch_UG),
+        pt.bg = c(col_Skin, col_Nasal, col_Oral, col_Gut, col_UG), col = adjustcolor(1, alpha.f = 0.5), bty = "n", cex = 0.7)
+      mtext("HMP 16S rRNA samples", line = 1, adj = 2.8, cex = 0.8, xpd = NA)
+      label.figure("C", font = 2, cex = 2)
+    }
+  }
+
+  if(pdf) dev.off()
+
+}
+
+# Chemical variation of microbial proteins across body sites (multi-omics comparison) 20221125
+microhum_3 <- function(pdf = FALSE) {
+
+  if(pdf) pdf("Figure_3.pdf", width = 7, height = 6)
   par(mfrow = c(2, 2))
   par(mgp = c(2.5, 1, 0))
 
@@ -330,10 +439,10 @@ microhum_2 <- function(pdf = FALSE) {
 }
 
 # Differences of chemical metrics between controls and COVID-19/IBD patients 20220806
-microhum_3 <- function(pdf = FALSE) {
+microhum_4 <- function(pdf = FALSE) {
 
   # Start plot
-  if(pdf) pdf("Figure_3.pdf", width = 13, height = 12)
+  if(pdf) pdf("Figure_4.pdf", width = 13, height = 12)
   mat <- matrix(c(1,1,1,1, 2,2,2,2, 3,3,3,3, 4,4,4, 5,5,5, 6,6,6, 7,7,7, 0,0,0,0, 8,8,8,8, 0,0,0,0), nrow = 3, byrow = TRUE)
   layout(mat)
 
@@ -523,9 +632,9 @@ microhum_3 <- function(pdf = FALSE) {
 }
 
 # Differences of relative abundances of genera between controls and patients 20231227
-microhum_4 <- function(pdf = FALSE) {
+microhum_5 <- function(pdf = FALSE) {
 
-  if(pdf) pdf("Figure_4.pdf", width = 10, height = 8.5)
+  if(pdf) pdf("Figure_5.pdf", width = 10, height = 8.5)
 
   # First, get the genera with largest abundance differences in individual COVID-19 gut and IBD datasets
   covid <- get_abundance("gut")
@@ -618,17 +727,17 @@ microhum_4 <- function(pdf = FALSE) {
   if(pdf) dev.off()
 
   # Return list of genera 20231230
-  #writeLines(genus, "Figure_4_genera.txt")
+  #writeLines(genus, "Figure_5_genera.txt")
   invisible(genus)
 
 }
 
 
 # Oxygen tolerance of genera in body sites, COVID-19, and IBD 20230726
-microhum_5 <- function(pdf = FALSE) {
+microhum_6 <- function(pdf = FALSE) {
 
   # Start plot
-  if(pdf) pdf("Figure_5.pdf", width = 12, height = 9)
+  if(pdf) pdf("Figure_6.pdf", width = 12, height = 9)
   mat <- cbind(matrix(1:12, nrow = 3, byrow = TRUE), c(13, 0, 0))
   layout(mat, widths = c(2, 2, 2, 2, 1))
   par(mar = c(4, 4, 2.8, 1), mgp = c(2.5, 1, 0), cex.lab = 1.2)

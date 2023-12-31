@@ -6,13 +6,14 @@
 \alias{microhum_3}
 \alias{microhum_4}
 \alias{microhum_5}
+\alias{microhum_6}
 \alias{microhum_S1}
 \alias{microhum_S2}
 \alias{microhum_S3}
 \alias{dataset_metrics}
 \title{Water and oxygen in the genomic adaptation of human microbiomes}
 \description{
-Plots from the paper by Dick (2023).
+Plots from the revised manuscript by Dick (2023).
 }
 
 \usage{
@@ -21,6 +22,7 @@ Plots from the paper by Dick (2023).
   microhum_3(pdf = FALSE)
   microhum_4(pdf = FALSE)
   microhum_5(pdf = FALSE)
+  microhum_6(pdf = FALSE)
   microhum_S1(pdf = FALSE)
   microhum_S2(pdf = FALSE)
   microhum_S3(pdf = FALSE)
@@ -36,10 +38,11 @@ This table briefly describes each plotting function.
 
 \tabular{ll}{
   \code{microhum_1} \tab Compatibility of inferences from shotgun metagenomes and community reference proteomes \cr
-  \code{microhum_2} \tab Chemical variation of microbial proteins across body sites and multi-omics comparison \cr
-  \code{microhum_3} \tab Differences of chemical metrics between controls and COVID-19/IBD patients \cr
-  \code{microhum_4} \tab Differences of relative abundances of genera between controls and patients \cr
-  \code{microhum_5} \tab Oxygen tolerance of genera in body sites, COVID-19, and IBD \cr
+  \code{microhum_2} \tab Chemical metrics are broadly different among genera and are similar between GTDB and low-contamination genomes from MGnify \cr
+  \code{microhum_3} \tab Chemical variation of microbial proteins across body sites (multi-omics comparison) \cr
+  \code{microhum_4} \tab Differences of chemical metrics between controls and COVID-19/IBD patients \cr
+  \code{microhum_5} \tab Differences of relative abundances of genera between controls and patients \cr
+  \code{microhum_6} \tab Oxygen tolerance of genera in body sites, COVID-19, and IBD \cr
   \code{microhum_S1} \tab Amount of putative human DNA removed from HMP metagenomes in screening step \cr
   \code{microhum_S2} \tab Changes of chemical metrics for microbiomes associated with viral inactivation \cr
   \code{microhum_S3} \tab Differences of \nO2 and \nH2O between obligate anaerobic and aerotolerant genera \cr
@@ -96,6 +99,7 @@ The data files listed below are stored in \file{extdata/microhum}:
 \section{Other files}{
   \describe{
     \item{\file{MR18_Table_S1_modified.csv}}{List of strictly anaerobic and aerotolerant genera modified from Table S1 of Million and Raoult (2018)}
+    \item{\file{Figure_5_genera.txt}}{List of genera in Figure 5, created from the value invisibly returned by \code{microhum_5}}
   }
 }
 

@@ -52,28 +52,33 @@ microhum_1()
 
 **Data source:** @HMP12.
 
-## Chemical variation of microbial proteins across body sites and multi-omics comparison (Figure 2)
-```{r microhum_2, message = FALSE, out.width='100%', fig.width = 7, fig.height = 6, pngquant = pngquant, dpi = 100}
+## Chemical metrics are broadly different among genera and are similar between GTDB and low-contamination genomes from MGnify (Figure 2)
+```{r microhum_2, message = FALSE, out.width='100%', fig.width = 12, fig.height = 7, pngquant = pngquant, dpi = 100}
 microhum_2()
+```
+
+## Chemical variation of microbial proteins across body sites (multi-omics comparison) (Figure 3)
+```{r microhum_3, message = FALSE, out.width='100%', fig.width = 7, fig.height = 6, pngquant = pngquant, dpi = 100}
+microhum_3()
 ```
 
 **Data sources:** **(A)** @BPB+21; **(B)** See Table 1 in manuscript; **(C)** @LLZ+21, @CZH+22, @ZZL+20; **(D)** @TWC+22, @MLL+17, @JZW+22, @GNT+21.
 
-## Differences of chemical metrics between controls and COVID-19/IBD patients (Figure 3)
-```{r microhum_3, message = FALSE, out.width='100%', fig.width = 13, fig.height = 12, pngquant = pngquant, dpi = 100}
-microhum_3()
+## Differences of chemical metrics between controls and COVID-19/IBD patients (Figure 4)
+```{r microhum_4, message = FALSE, out.width='100%', fig.width = 13, fig.height = 12, pngquant = pngquant, dpi = 100}
+microhum_4()
 ```
 
 **Data sources:** **(A)** See Table 1 in manuscript; **(B)** MAGs [@KWL22], based on data from @YZL+21; **(C)** @HZX+21; **(D)** See Table 1 in manuscript.
 
-## Differences of relative abundances of genera between controls and patients (Figure 4)
-```{r microhum_4, message = FALSE, out.width='100%', fig.width = 10, fig.height = 8.5, pngquant = pngquant, dpi = 100}
-microhum_4()
+## Differences of relative abundances of genera between controls and patients (Figure 5)
+```{r microhum_5, message = FALSE, out.width='100%', fig.width = 10, fig.height = 8.5, pngquant = pngquant, dpi = 100}
+microhum_5()
 ```
 
-## Oxygen tolerance of genera in body sites, COVID-19, and IBD (Figure 5)
-```{r microhum_5, message = FALSE, out.width='100%', fig.width = 12, fig.height = 9, pngquant = pngquant, dpi = 100}
-microhum_5()
+## Oxygen tolerance of genera in body sites, COVID-19, and IBD (Figure 6)
+```{r microhum_6, message = FALSE, out.width='100%', fig.width = 12, fig.height = 9, pngquant = pngquant, dpi = 100}
+microhum_6()
 ```
 
 **Data sources:** **(A)--(B)** *List of Prokaryotes according to their Aerotolerant or Obligate Anaerobic Metabolism* [@MR18] with modifications made in this study; **(C)** See Table 1 in manuscript.
