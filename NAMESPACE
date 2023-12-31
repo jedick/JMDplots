@@ -52,15 +52,12 @@ export(
   "pdat_fly",
   # geo16S paper 20210416-20210610
   "geo16S1", "geo16S2", "geo16S3", "geo16S4",
-  "taxacomp", 
   "geo16S5", # 20211018
   "geo16S_S1", "geo16S_S2", # 20220105
   "geo16S_S3", # 20220112
   "geo16S_S4", # 20220117
   "geo16S_S5", # 20220114
   "geo16S_S6", # 20220126
-  # can16S paper 20210604
-  "getrefseq",
   # orp16S paper 20211003-20211008
   "orp16S_3", "orp16S_4", "orp16S_5", "orp16S_6", "orp16S_S1",
   "plotEZ", "plotMA",
@@ -91,7 +88,9 @@ export(
   # microhum paper 20231222
   "microhum_1", "microhum_S1",
   # microhum paper 20231227
-  "microhum_4"
+  "microhum_4",
+  # function used in geo16S and microhum 20231231
+  "plot_starburst"
 )
 
 # Imports from CHNOSZ

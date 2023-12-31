@@ -10,7 +10,47 @@ geo16S1 <- function(pdf = FALSE) {
   if(pdf) pdf("geo16S1.pdf", width = 11, height = 5)
   par(mfrow = c(1, 3))
 
-  tc1 <- taxacomp("majorphyla", legend.x = "bottomleft", hline = c(-0.81, -0.68))
+  # Read chemical metrics of all taxa
+  datadir <- system.file("extdata/RefDB/RefSeq", package = "JMDplots")
+  metrics <- read.csv(file.path(datadir, "taxon_metrics.csv.xz"), as.is = TRUE)
+
+  ## Panel A: Major phyla
+  # Get names of phyla with more than 500 representatives
+  phyla <- metrics[metrics$rank == "phylum", ]
+  phyla <- phyla[phyla$ntaxa > 500, ]
+  phyla <- phyla[order(phyla$ntaxa, decreasing = TRUE), ]
+  # Move viruses to end 20200926
+  ivirus <- phyla$parent == "Viruses"
+  phyla <- rbind(phyla[!ivirus, ], phyla[ivirus, ])
+  taxa <- phyla$group
+  xlim <- c(-0.25, -0.05)
+  ylim <- c(-0.9, -0.65)
+  pch <- ifelse(phyla$parent == "Bacteria", 21, ifelse(phyla$parent == "Archaea", 24, 23))
+  # Set colors for points
+  col <- seq_along(taxa)
+  # Use semi-transparent colors for lines 20210518
+  lcol <- palette()
+  lcol[1] <- "#000000"  # black
+  lcol[8] <- "#9e9e9e"  # gray62
+  lcol <- paste0(lcol, "80")
+  lcol <- rep(lcol, length.out = length(col))
+
+  # Make the plot
+  ps1 <- plot_starburst(taxa, metrics = c("Zc", "nH2O"), refdb = "RefSeq", xlim = xlim, ylim = ylim,
+    pch = pch, lcol = lcol, hline = c(-0.81, -0.68), terminal_H2O = 1)
+  # Label Halobacteria and Nanohaloarchaea 20200930
+  iEury <- match("Euryarchaeota", names(ps1))
+  children <- ps1[[iEury]]$children
+  ihalo <- match(c("Methanococci", "Archaeoglobi", "Thermococci", "Halobacteria"), children$taxon)
+  dy <- 0.005
+  dx <- c(0, 0, 0, 0.002)
+  text(children$Xvals[ihalo] + dx, children$Yvals[ihalo] + dy, c(1, 2, 3, 4))
+  # Add legend
+  len <- length(taxa)
+  legend <- c("Cellular", taxa[1:6], "Viruses", taxa[7:11])
+  pch <- c(NA, pch[1:6], NA, pch[7:11])
+  col <- c(NA, col[1:6], NA, col[7:11])
+  legend("bottomleft", legend, text.font = c(2, 1,1,1,1,1,1, 2, 1,1,1,1,1), pch = pch, col = col, pt.bg = col, cex = 0.9, bg = "white")
   title("Major phyla and their classes", font.main = 1, cex.main = 1.4)
   label.figure("A", font = 2, cex = 1.6)
   # Draw lines indicating zoom area in next plot
@@ -19,7 +59,47 @@ geo16S1 <- function(pdf = FALSE) {
   lines(c(-0.05, -0.015), c(-0.68, -0.65), lty = 2, col = "gray40")
   par(xpd = FALSE)
 
-  tc2 <- taxacomp("majorcellular", legend.x = "bottomleft", hline = c(-0.77, -0.71))
+  ## Panel B: Major cellular phyla
+  # This is like Major phyla but excludes Viruses
+  phyla <- metrics[metrics$rank == "phylum" & metrics$parent != "Viruses", ]
+  phyla <- phyla[phyla$ntaxa > 60, ]
+  phyla <- phyla[order(phyla$ntaxa, decreasing = TRUE), ]
+  # Swap Chloroflexi and Crenarchaeota so latter doesn't have same color as Euryarchaeota 20210527
+  phyla[14:15, ] <- phyla[15:14, ]
+  taxa <- phyla$group
+  xlim <- c(-0.25, -0.05)
+  ylim <- c(-0.81, -0.68)
+  pch <- rep(22, length(taxa))
+  pch[1:8] <- 21
+  pch[phyla$parent == "Archaea"] <- 24
+  # Set colors for points
+  col <- seq_along(taxa)
+  # Use semi-transparent colors for lines 20210518
+  lcol <- palette()
+  lcol[1] <- "#000000"  # black
+  lcol[8] <- "#9e9e9e"  # gray62
+  lcol <- paste0(lcol, "80")
+  lcol <- rep(lcol, length.out = length(col))
+
+  # Make the plot
+  ps2 <- plot_starburst(taxa, metrics = c("Zc", "nH2O"), refdb = "RefSeq", xlim = xlim, ylim = ylim,
+    pch = pch, lcol = lcol, hline = c(-0.77, -0.71), terminal_H2O = 1)
+  # Label Halobacteria and Nanohaloarchaea 20200930
+  iEury <- match("Euryarchaeota", names(ps1))
+  children <- ps1[[iEury]]$children
+  ihalo <- match(c("Methanococci", "Archaeoglobi", "Thermococci", "Halobacteria"), children$taxon)
+  dy <- 0.0025
+  dx <- c(0, 0, 0, 0.002)
+  text(children$Xvals[ihalo] + dx, children$Yvals[ihalo] + dy, c(1, 2, 3, 4))
+  # Label Clostridia 20200930
+  iFirm <- match("Firmicutes", names(ps1))
+  children <- ps1[[iFirm]]$children
+  iclos <- match("Clostridia", children$taxon)
+  text(children$Xvals[iclos], children$Yvals[iclos] + 0.0025, 5)
+  # Add legend
+  len <- length(taxa)
+  legend("bottomleft", taxa[1:8], pch = pch[1:8], col = col[1:8], pt.bg = col[1:8], cex = 0.9, bg = "white")
+  legend("bottomright", taxa[9:len], pch = pch[9:len], col = col[9:len], pt.bg = col[9:len], cex = 0.9, bg = "white")
   title("Major cellular phyla and their classes", font.main = 1, cex.main = 1.4)
   label.figure("B", font = 2, cex = 1.6)
   par(xpd = NA)
@@ -27,18 +107,49 @@ geo16S1 <- function(pdf = FALSE) {
   lines(c(-0.05, -0.015), c(-0.71, -0.68), lty = 2, col = "gray40")
   par(xpd = FALSE)
 
-  tc3 <- taxacomp("proteobacteria", legend.x = "topright")
+  ## Panel C: Proteobacteria 20200925
+  # How to count the representatives in each proteobacterial class:
+  #> taxa <- read.csv(system.file("extdata/RefDB/RefSeq/taxonomy.csv.xz", package = "JMDplots"), as.is = TRUE)
+  #> sort(table(na.omit(taxa$class[taxa$phylum == "Proteobacteria"])), decreasing = TRUE)
+  #
+  #  Gammaproteobacteria   Alphaproteobacteria    Betaproteobacteria 
+  #                 8269                  5667                  2456 
+  #Epsilonproteobacteria   Deltaproteobacteria           Oligoflexia 
+  #                  451                   441                    32 
+  #    Acidithiobacillia     Hydrogenophilalia    Zetaproteobacteria 
+  #                   20                    11                    11 
+  taxa <- c("Alphaproteobacteria", "Betaproteobacteria", "Gammaproteobacteria", "Deltaproteobacteria", "Epsilonproteobacteria", "Zetaproteobacteria",
+            "Acidithiobacillia", "Hydrogenophilalia", "Oligoflexia")
+  pch <- rep(21:23, 3)
+  xlim <- c(-0.25, -0.05)
+  ylim <- c(-0.77, -0.71)
+  # Set colors for points
+  col <- seq_along(taxa)
+  # Use semi-transparent colors for lines 20210518
+  lcol <- palette()
+  lcol[1] <- "#000000"  # black
+  lcol[8] <- "#9e9e9e"  # gray62
+  lcol <- paste0(lcol, "80")
+  lcol <- rep(lcol, length.out = length(col))
+
+  # Make the plot
+  ps3 <- plot_starburst(taxa, metrics = c("Zc", "nH2O"), refdb = "RefSeq", xlim = xlim, ylim = ylim,
+    pch = pch, lcol = lcol, terminal_H2O = 1)
+  # Add legend
+  len <- length(taxa)
+  legend("topright", taxa[1:6], pch = pch[1:6], col = col[1:6], pt.bg = col[1:6], cex = 0.9, bg = "white")
+  legend("bottomleft", taxa[7:len], pch = pch[7:len], col = col[7:len], pt.bg = col[7:len], cex = 0.9, bg = "white")
   title("Proteobacterial classes and their orders", font.main = 1, cex.main = 1.4)
   label.figure("C", font = 2, cex = 1.6)
 
   if(pdf) dev.off()
 
   # Return data for Supplementary Table 20210831
-  datA <- do.call(rbind, lapply(tc1, function(x) {do.call(rbind, x)}))
+  datA <- do.call(rbind, lapply(ps1, function(x) {do.call(rbind, x)}))
   datA <- cbind(plot = "A", datA)
-  datB <- do.call(rbind, lapply(tc2, function(x) {do.call(rbind, x)}))
+  datB <- do.call(rbind, lapply(ps2, function(x) {do.call(rbind, x)}))
   datB <- cbind(plot = "B", datB)
-  datC <- do.call(rbind, lapply(tc3, function(x) {do.call(rbind, x)}))
+  datC <- do.call(rbind, lapply(ps3, function(x) {do.call(rbind, x)}))
   datC <- cbind(plot = "C", datC)
   out <- rbind(datA, datB, datC)
   rownames(out) <- NULL
@@ -1808,7 +1919,7 @@ getmdat_geo16S <- function(study, metrics = NULL, dropNA = TRUE) {
     # Insert sample column in metrics
     # Use first column name starting with "sample" or "Sample" 20210818
     sampcol <- grep("^sample", colnames(metadata), ignore.case = TRUE)[1]
-    metrics <- data.frame(Run = metrics$Run, sample = metadata[, sampcol], nH2O = metrics$nH2O, Zc = metrics$Zc)
+    metrics <- cbind(data.frame(Run = metrics$Run, sample = metadata[, sampcol]), metrics[, -1, drop = FALSE])
     list(metadata = metadata, metrics = metrics)
   }
 }
