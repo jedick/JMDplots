@@ -16,13 +16,9 @@ plot_starburst <- function(
     ntaxa = aa_refdb$ref,
     parent = aa_refdb$abbrv,
     # Use get() to call canprot::Zc, canprot::nO2, or canprot::nH2O
-    Xvals = get(metrics[1])(aa_refdb),
-    Yvals = get(metrics[2])(aa_refdb)
+    Xvals = get(metrics[1])(aa_refdb, terminal_H2O = terminal_H2O),
+    Yvals = get(metrics[2])(aa_refdb, terminal_H2O = terminal_H2O)
   )
-  if(terminal_H2O != 0) {
-    if(metrics[1] == "nH2O") refdb_metrics$Xvals <- nH2O(aa_refdb, terminal_H2O = terminal_H2O)
-    if(metrics[2] == "nH2O") refdb_metrics$Yvals <- nH2O(aa_refdb, terminal_H2O = terminal_H2O)
-  }
   # Default point symbols
   if(is.null(pch)) pch <- 21
   pch <- rep(pch, length.out = length(taxa))
@@ -82,13 +78,9 @@ plot_starburst <- function(
       children_metrics <- data.frame(
         taxon = aa_children$ref,
         chains = aa_children$chains,
-        Xvals = get(metrics[1])(aa_children),
-        Yvals = get(metrics[2])(aa_children)
+        Xvals = get(metrics[1])(aa_children, terminal_H2O = terminal_H2O),
+        Yvals = get(metrics[2])(aa_children, terminal_H2O = terminal_H2O)
       )
-      if(terminal_H2O != 0) {
-        if(metrics[1] == "nH2O") children_metrics$Xvals <- nH2O(aa_children, terminal_H2O = terminal_H2O)
-        if(metrics[2] == "nH2O") children_metrics$Yvals <- nH2O(aa_children, terminal_H2O = terminal_H2O)
-      }
 
     } else {
 
