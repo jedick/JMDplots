@@ -105,8 +105,17 @@ The plots are available in the corresponding vignettes in the package.
     }
 
     \item{\code{RefDB/GTDB}}{
-      file{genome_AA.csv.xz} has amino acid compositions of predicted proteins from GTDB, and \file{taxonomy.csv.xz} has taxonomic names for each of those species.
+      \file{genome_AA.csv.xz} has amino acid compositions of predicted proteins from GTDB, and \file{taxonomy.csv.xz} has taxonomic names for each of those species.
       The scripts to produce these files are provided in \pkg{chem16S} (see \code{\link[chem16S]{chem16S-package}}).
+    }
+
+    \item{\code{RefDB/UHGG}}{
+      \file{MGnify_genomes.csv} lists all 4744 species-level clusters in the Unified Human Gastrointestinal Genome (UHGG v.2.0.1) from MGnify, obtained from \url{https://www.ebi.ac.uk/metagenomics/genome-catalogues/human-gut-v2-0-1} on 2023-12-29.
+      \file{getMGnify.R} has the commands used to download FASTA files for proteins and to scrape the website for taxonomic information.
+      \file{taxonomy.csv.xz} has the taxonomy for 2350 selected genomes with contamination < 2% and completeness > 95%.
+      \file{genome_AA.R} calculates amino acid compositions of the selected genomes from FASTA files and writes the output file \file{genome_AA.csv.xz}.
+      \file{taxon_AA.R} combines amino acid compositions of genomes to generate reference proteomes for genera and higher taxonomic levels and writes the output file \file{taxon_AA.csv.xz}.
+      \file{fullset} has versions of \file{taxonomy.csv.xz}, \file{genome_AA.csv.xz}, and \file{taxon_AA.csv.xz} for the full set of 4744 genomes.
     }
 
   }

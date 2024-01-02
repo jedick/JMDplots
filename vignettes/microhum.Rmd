@@ -14,6 +14,7 @@ link-citations: true
 
 ```{r setup, include=FALSE}
 library(knitr)
+library(kableExtra)
 ## Use pngquant to reduce size of PNG images
 knit_hooks$set(pngquant = hook_pngquant)
 pngquant <- "--speed=1 --quality=0-25"
@@ -52,10 +53,12 @@ microhum_1()
 
 **Data source:** @HMP12.
 
-## Chemical metrics are broadly different among genera and are similar between GTDB and low-contamination genomes from MGnify (Figure 2)
+## Chemical metrics are broadly different among genera and are similar between GTDB and low-contamination genomes from UHGG (Figure 2)
 ```{r microhum_2, message = FALSE, out.width='100%', fig.width = 12, fig.height = 7, pngquant = pngquant, dpi = 100}
 microhum_2()
 ```
+
+**Data sources:** Genome Taxonomy Database (GTDB r207) [@PCR+22]; Unified Human Gastrointestinal Genome (UHGG v2.0.1) [@ANB+21].
 
 ## Chemical variation of microbial proteins across body sites (multi-omics comparison) (Figure 3)
 ```{r microhum_3, message = FALSE, out.width='100%', fig.width = 7, fig.height = 6, pngquant = pngquant, dpi = 100}
@@ -101,5 +104,41 @@ microhum_S3()
 ```
 
 **Data source:** *List of Prokaryotes according to their Aerotolerant or Obligate Anaerobic Metabolism* [@MR18] with modifications made in this study.
+
+## Summary of metagenome sequence processing (Table S2)
+```{r microhum_table_S2}
+datadir <- system.file("extdata/microhum/ARAST", package = "JMDplots")
+dataset <- c("HMP12", "HMP12_no_screening", "LLZ+21", "CZH+22", "ZZL+20", "LAA+19")
+summary_list <- lapply(dataset, function(this_dataset) {
+  file <- file.path(datadir, paste0(this_dataset, "_stats.csv"))
+  dat <- read.csv(file)
+  runs <- nrow(dat)
+  average_input_sequences <- sum(dat$input_sequences) / runs
+  protein_prediction_rate <- dat$coding_sequences / dat$input_sequences * 100
+  runs_with_low_protein_prediction <- sum(protein_prediction_rate < 40)
+  average_protein_prediction_rate <- round(sum(protein_prediction_rate) / runs, 2)
+  average_protein_length <- round(sum(dat$protein_length) / runs, 2)
+  data.frame(runs, average_input_sequences, average_protein_prediction_rate,
+    runs_with_low_protein_prediction, average_protein_length)
+})
+description <- c("HMP with human DNA screening", "HMP without screening",
+  "COVID-19 nasopharyngeal", "COVID-19 oropharyngeal", "COVID-19 gut", "IBD gut")
+summary_table <- cbind(description, dataset, do.call(rbind, summary_list))
+col.names <- c("Description", "Dataset", "Number of sequencing runs", "Average number of input sequences",
+  "Average protein prediction rate (%)", "Runs with protein prediction rate < 40%",
+  "Average protein length")
+kable(summary_table, col.names = col.names)
+```
+
+## Number of genomes and genera in GTDB and UHGG (Unified Human Gastrointestinal Genome from MGnify)
+```{r genomes_genera}
+GTDB_taxonomy <- read.csv(system.file("extdata/RefDB/GTDB/taxonomy.csv.xz", package = "JMDplots"))
+print(paste("GTDB:", nrow(GTDB_taxonomy), "genomes and", length(unique(GTDB_taxonomy$genus)), "genera"))
+UHGG_taxonomy_full <- read.csv(system.file("extdata/RefDB/UHGG/fullset/taxonomy.csv.xz", package = "JMDplots"))
+print(paste("UHGG (contamination < 5% and completeness > 50%):", nrow(UHGG_taxonomy_full), "species-level clusters and", length(unique(UHGG_taxonomy_full$genus)), "genera"))
+UHGG_taxonomy <- read.csv(system.file("extdata/RefDB/UHGG/taxonomy.csv.xz", package = "JMDplots"))
+print(paste("UHGG (contamination < 2% and completeness > 95%):", nrow(UHGG_taxonomy), "species-level clusters and", length(unique(UHGG_taxonomy$genus)), "genera"))
+```
+
 
 ## References

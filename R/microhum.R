@@ -181,7 +181,7 @@ microhum_1 <- function(pdf = FALSE) {
 
 }
 
-# Chemical metrics are broadly different among genera and are similar between GTDB and low-contamination genomes from MGnify
+# Chemical metrics are broadly different among genera and are similar between GTDB and low-contamination genomes from UHGG
 # 20231230
 microhum_2 <- function(pdf = FALSE) {
 
@@ -196,8 +196,8 @@ microhum_2 <- function(pdf = FALSE) {
   # Get colors
   col <- hcl.colors("Dynamic", n = length(genera))
   # Loop over reference databases
-  refdb <- c("GTDB", "MGnify")
-  main <- c("GTDB (used for community reference proteomes)", "MGnify (contamination < 2% and completeness > 95%)")
+  refdb <- c("GTDB", "UHGG")
+  main <- c("GTDB (used for community reference proteomes)", "UHGG (contamination < 2% and completeness > 95%)")
   genus_vals <- list()
   metrics <- c("nO2", "nH2O")
   for(i in seq_along(refdb)) {
@@ -234,17 +234,23 @@ microhum_2 <- function(pdf = FALSE) {
     colnames(gvals)[colnames(gvals) == "Xvals"] <- metrics[1]
     colnames(gvals)[colnames(gvals) == "Yvals"] <- metrics[2]
     genus_vals[[i]] <- gvals
-    if(i == 1) label.figure("A", font = 2, cex = 2, xfrac = 0.025)
+    label.figure(LETTERS[i], font = 2, cex = 2, xfrac = 0.025)
   }
   names(genus_vals) <- refdb
 
 
-  # Plot nO2 and nH2O for GTDB vs MGnify
+  # Plot nO2 and nH2O for GTDB vs UHGG
   par(mar = c(4, 4.1, 2.1, 2.1))
   for(i in seq_along(metrics)) {
-    x <- genus_vals$MGnify[, metrics[i]]
+    x <- genus_vals$UHGG[, metrics[i]]
     y <- genus_vals$GTDB[, metrics[i]]
-    plot(x, y, xlab = "MGnify", ylab = "GTDB", pch = 16, col = col)
+    # Start plot
+    plot(x, y, xlab = "UHGG", ylab = "GTDB", type = "n")
+    # Compute min/max limits for 1:1 line
+    xylim <- extendrange(c(min(x, y), max(x, y)))
+    lines(xylim, xylim, lty = 2, col = "gray40")
+    # Plot points
+    points(x, y, pch = 16, col = col)
     # Show R-squared values
     mylm <- lm(y ~ x)
     R2 <- round(summary(mylm)$r.squared, 2)
@@ -253,7 +259,7 @@ microhum_2 <- function(pdf = FALSE) {
     title(chemlab(metrics[i]))
     if(i == 1) {
       mtext("Genus reference proteomes", line = 1, adj = 3.8, cex = 0.8, xpd = NA)
-      label.figure("B", font = 2, cex = 2)
+      label.figure("C", font = 2, cex = 2)
     }
   }
 
@@ -270,7 +276,13 @@ microhum_2 <- function(pdf = FALSE) {
   for(i in seq_along(metrics)) {
     x <- mdat_geo16S$metrics[, metrics[i]]
     y <- mdat_microhum$metrics[, metrics[i]]
-    plot(x, y, xlab = "RDP training set", ylab = "GTDB training set", pch = pch, bg = col)
+    # Start plot
+    plot(x, y, xlab = "RDP training set", ylab = "GTDB training set", type = "n")
+    # Compute min/max limits for 1:1 line
+    xylim <- extendrange(c(min(x, y), max(x, y)))
+    lines(xylim, xylim, lty = 2, col = "gray40")
+    # Plot points
+    points(x, y, pch = pch, bg = col)
     # Show R-squared values
     mylm <- lm(y ~ x)
     R2 <- round(summary(mylm)$r.squared, 2)
@@ -282,7 +294,7 @@ microhum_2 <- function(pdf = FALSE) {
         pch = c(pch_Skin, pch_Nasal, pch_Oral, pch_Gut, pch_UG),
         pt.bg = c(col_Skin, col_Nasal, col_Oral, col_Gut, col_UG), col = black50, bty = "n", cex = 0.7)
       mtext("HMP 16S rRNA samples", line = 1, adj = 2.8, cex = 0.8, xpd = NA)
-      label.figure("C", font = 2, cex = 2)
+      label.figure("D", font = 2, cex = 2)
     }
   }
 

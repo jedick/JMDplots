@@ -8,7 +8,7 @@ plot_starburst <- function(
 
   # Compute chemical metrics of all taxa in reference database
   datadir <- system.file(file.path("extdata", refdb), package = "chem16S")
-  if(refdb == "MGnify") datadir <- system.file(file.path("extdata/RefDB", refdb), package = "JMDplots")
+  if(refdb == "UHGG") datadir <- system.file(file.path("extdata/RefDB", refdb), package = "JMDplots")
   aa_refdb <- read.csv(file.path(datadir, "taxon_AA.csv.xz"))
   refdb_metrics <- data.frame(
     rank = aa_refdb$protein,

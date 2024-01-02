@@ -38,7 +38,7 @@ This table briefly describes each plotting function.
 
 \tabular{ll}{
   \code{microhum_1} \tab Compatibility of inferences from shotgun metagenomes and community reference proteomes \cr
-  \code{microhum_2} \tab Chemical metrics are broadly different among genera and are similar between GTDB and low-contamination genomes from MGnify \cr
+  \code{microhum_2} \tab Chemical metrics are broadly different among genera and are similar between GTDB and low-contamination genomes from UHGG \cr
   \code{microhum_3} \tab Chemical variation of microbial proteins across body sites (multi-omics comparison) \cr
   \code{microhum_4} \tab Differences of chemical metrics between controls and COVID-19/IBD patients \cr
   \code{microhum_5} \tab Differences of relative abundances of genera between controls and patients \cr
