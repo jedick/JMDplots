@@ -69,10 +69,11 @@ The data files listed below are stored in \file{extdata/microhum}:
 \section{Data and scripts for metagenomes}{
   \describe{
     \item{\file{ARAST}}{Directory with scripts and output for metagenomes}
-    \item{\file{ARAST/ARAST.R}}{Processing pipeline (modified from Dick et al. (2019) to implement removal of human sequences)}
+    \item{\file{ARAST/ARAST.R}}{Processing pipeline (modified from Dick et al. (2019) to implement screening for human sequences)}
     \item{\file{ARAST/arast_sortme_rna.pl}, \file{ARAST/sort_helper.sh}}{Helper scripts for ARAST.R}
     \item{\file{ARAST/runARAST.R}}{Script to run pipeline with specific settings for each dataset}
-    \item{\file{ARAST/*_aa.csv}}{Output of runARAST.R with amino acid compositions of protein sequences inferred from metagenomes}
+    \item{\file{ARAST/*_aa.csv}}{Summed amino acid compositions of protein sequences inferred from each metagenomic sequencing run (produced by runARAST.R)}
+    \item{\file{ARAST/*_stats.csv}}{Metagenome sequence processing statistics (produced by runARAST.R)}
   }
 }
 

@@ -17,23 +17,23 @@ runARAST <- function(dataset, screening = TRUE, cleanup = TRUE) {
 
   # Set techtype for all datasets
   techtype <- "illumina"
-  # Start with empty list of SRA Run IDs and IDs of control samples
-  ID <- NULL
-  Control <- NULL
+  # Start with empty list of SRA Run IDs and sample groups
+  Run <- Control <- COVID <- IBD <- UC <- CD <- NULL
 
   if(dataset == "LLZ+21") {
     # Nasopharyngeal metagenomes 
-    ID <- c("SRR12442171", "SRR12442172", "SRR12442173",
+    Run <- c("SRR12442171", "SRR12442172", "SRR12442173",
             "SRR12442174", "SRR12442175", "SRR12442176",
             "SRR12442177", "SRR12442178", "SRR12442179"
     )
     # List of control samples (from Figure S1 of Liu et al., 2021 and SRA run info PRJNA656660)
     Control <- c("SRR12442173", "SRR12442175", "SRR12442176")
+    COVID <- setdiff(Run, Control)
   }
 
   if(dataset == "ZZL+20") {
     # Gut metagenomes
-    ID <- c(
+    Run <- c(
       "SRR12328886", "SRR12328887", "SRR12328888", "SRR12328889", "SRR12328890", "SRR12328891", 
       "SRR12328892", "SRR12328893", "SRR12328894", "SRR12328895", "SRR12328896", "SRR12328897", 
       "SRR12328898", "SRR12328899", "SRR12328900", "SRR12328901", "SRR12328902", "SRR12328903", 
@@ -54,11 +54,12 @@ runARAST <- function(dataset, screening = TRUE, cleanup = TRUE) {
        "SRR12328899", "SRR12328900", "SRR12328901", "SRR12328902", "SRR12328903",
        "SRR12328904", "SRR12328905", "SRR12328906", "SRR12328908", "SRR12328909"
     )
+    COVID <- setdiff(Run, Control)
   }
 
   if(dataset == "CZH+22") {
     # Oropharyngeal metagenomes
-    ID <- c(
+    Run <- c(
       "ERR7672491", "ERR7672496", "ERR7672497", "ERR7672501", "ERR7672502", "ERR7672506", "ERR7672511", "ERR7672513", "ERR7672515", "ERR7672519", 
       "ERR7672520", "ERR7672526", "ERR7672532", "ERR7672536", "ERR7672539", "ERR7672540", "ERR7672545", "ERR7672546", "ERR7672548", "ERR7672551", 
       "ERR7672553", "ERR7672559", "ERR7672564", "ERR7672583", "ERR7672586", "ERR7672587", "ERR7672590", "ERR7672593", "ERR7672594", "ERR7672597", 
@@ -73,11 +74,12 @@ runARAST <- function(dataset, screening = TRUE, cleanup = TRUE) {
       "ERR7672788", "ERR7672790", "ERR7672792", "ERR7672794", "ERR7672796", "ERR7672797", "ERR7672798", "ERR7672800", "ERR7672802", "ERR7672805", 
       "ERR7672807", "ERR7672808"
     )
+    # Couldn't find Control and COVID samples in metadata
   }
 
   if(dataset == "HMP12") {
-    # HMP metagenomes (HMP Consortium, 2012)
-    ID <- c(
+    # Various body sites (HMP Consortium, 2012)
+    Run <- c(
       # Samples used in Tax4Fun paper
       "SRR059889", "SRR060375", "SRR060433", "SRR060445", "SRR061143", "SRR061144", "SRR061153", "SRR061157", "SRR061164", "SRR061168", 
       "SRR061169", "SRR061171", "SRR061182", "SRR061183", "SRR061191", "SRR061196", "SRR061198", "SRR061202", "SRR061205", "SRR061222", 
@@ -92,79 +94,101 @@ runARAST <- function(dataset, screening = TRUE, cleanup = TRUE) {
       "SRR062442", "SRR062458", "SRR062461", "SRR062522", "SRR063912", "SRR063925", "SRR346655", "SRR346690", "SRR346709", "SRR346717", 
       "SRR353633", "SRR514852"
     )
-
-## For testing with a few runs
-#ID <- ID[c(44, 63, 92)]
-#ID <- ID[c(80, 89)]
   }
 
-  if(is.null(ID)) stop("invalid dataset")
+  if(dataset == "LAA+19") {
+    # Gut metagenomes (Lloyd-Price et al., 2019)
+    Run <- c(
+      "SRR5962888", "SRR5962886", "SRR5950683", "SRR5962905", "SRR5962899", "SRR5962887", "SRR5950679", "SRR5950681", "SRR5962892", "SRR5962883",
+      "SRR5962893", "SRR5962891", "SRR5950675", "SRR5962882", "SRR5950687", "SRR5950677", "SRR5962907", "SRR5962906", "SRR5962898", "SRR5962901",
+      "SRR5962900", "SRR5962908", "SRR5950690", "SRR5962902", "SRR5950693", "SRR5962897", "SRR5962890", "SRR5950685", "SRR5962904", "SRR5950682",
+      "SRR5950714", "SRR5950737", "SRR5950719", "SRR5950715", "SRR5950723", "SRR5950751", "SRR5950700", "SRR5950713", "SRR5950762", "SRR5950763",
+      "SRR5950765", "SRR5950764", "SRR5950793", "SRR5950497", "SRR5950498", "SRR5950759", "SRR5950777", "SRR5950495", "SRR5950523", "SRR5950533",
+      "SRR5950520", "SRR5950506", "SRR5950524", "SRR5950548", "SRR5950511", "SRR5950525", "SRR5950614", "SRR5950567", "SRR5950573", "SRR5950571",
+      "SRR5950570", "SRR5950607", "SRR5950642", "SRR5950635", "SRR5950637", "SRR5950650", "SRR5950666", "SRR5950646", "SRR5950671", "SRR5950657",
+      "SRR5950647", "SRR5950652", "SRR5950651", "SRR5950664", "SRR5950641", "SRR5950631", "SRR5950661", "SRR5950663"
+    )
+    UC <- c(
+      "SRR5962888", "SRR5962886", "SRR5950683", "SRR5950679", "SRR5962907", "SRR5962898", "SRR5962900", "SRR5962908", "SRR5950685", "SRR5950723", 
+      "SRR5950751", "SRR5950700", "SRR5950762", "SRR5950495", "SRR5950523", "SRR5950570", "SRR5950637", "SRR5950650", "SRR5950671", "SRR5950657", 
+      "SRR5950647", "SRR5950651", "SRR5950641", "SRR5950663"
+    )
+    CD <- c(
+      "SRR5962905", "SRR5962899", "SRR5962887", "SRR5950681", "SRR5962892", "SRR5962891", "SRR5950675", "SRR5950687", "SRR5950677", "SRR5962901", 
+      "SRR5962897", "SRR5962890", "SRR5950682", "SRR5950714", "SRR5950737", "SRR5950713", "SRR5950763", "SRR5950765", "SRR5950764", "SRR5950793", 
+      "SRR5950497", "SRR5950533", "SRR5950548", "SRR5950525", "SRR5950614", "SRR5950567", "SRR5950573", "SRR5950607", "SRR5950635", "SRR5950666", 
+      "SRR5950631", "SRR5950661"
+    )
+    Control <- setdiff(Run, c(UC, CD))
+  }
+
+  if(is.null(Run)) stop("invalid dataset")
   # Setting for ARAST
   if(screening) {
-    run <- "protein" 
+    mode <- "protein" 
     aafile <- paste0(dataset, "_aa.csv")
     statsfile <- paste0(dataset, "_stats.csv")
   } else {
-    run <- "protein_no_screening"
+    mode <- "protein_no_screening"
     aafile <- paste0(dataset, "_no_screening_aa.csv")
     statsfile <- paste0(dataset, "_no_screening_stats.csv")
   }
   # Names of files to keep processing statistics for each run
-  statfiles <- file.path(workdir, paste0(ID, "_stats.csv"))
+  statfiles <- file.path(workdir, paste0(Run, "_stats.csv"))
 
-  # Loop over IDs
-  for(i in 1:length(ID)) {
+  # Loop over Runs
+  for(i in 1:length(Run)) {
     # If statistics file already exists then assume that this run has been processed
     if(file.exists(statfiles[i])) {
-      print(paste("*** Skipping", ID[i], "because statistics file exists ***"))
+      print(paste("*** Skipping", Run[i], "because statistics file exists ***"))
       next
     }
     # Dump FASTQ files
     # NOTE: If all SRA files have been prefetch'ed, run vdb-config -i and turn off
     # "Enable Remote Access" to prevent fastq-dump from dying when there is no internet
-    cmd <- paste("fastq-dump -O", workdir, "--skip-technical --clip --split-3 --read-filter pass", ID[i])
+    cmd <- paste("fastq-dump -O", workdir, "--skip-technical --clip --split-3 --read-filter pass", Run[i])
     print(cmd)
     fastq_dump.log <- system(cmd, intern = TRUE)
     # Save output of fastq_dump for putting together processing statistics in ARAST()
-    writeLines(fastq_dump.log, file.path(workdir, paste0(ID[i], "_fastq-dump.log")))
+    writeLines(fastq_dump.log, file.path(workdir, paste0(Run[i], "_fastq-dump.log")))
     # If fastq_dump produced no output, then it probably didn't work, so skip this run
     if(length(fastq_dump.log) == 0) {
-      print(paste("*** Skipping", ID[i], "because fastq_dump produced no output ***"))
+      print(paste("*** Skipping", Run[i], "because fastq_dump produced no output ***"))
       next
     }
     # Use file with forward reads ...
-    inputfile <- file.path(workdir, paste0(ID[i], "_pass_1.fastq"))
+    inputfile <- file.path(workdir, paste0(Run[i], "_pass_1.fastq"))
     # ... or unsplit file, if only that is available
-    if(!file.exists(inputfile)) inputfile <- file.path(workdir, paste0(ID[i], "_pass.fastq"))
+    if(!file.exists(inputfile)) inputfile <- file.path(workdir, paste0(Run[i], "_pass.fastq"))
     if(!file.exists(inputfile)) {
-      print(paste("*** Skipping", ID[i], "because no input file could be found ***"))
+      print(paste("*** Skipping", Run[i], "because no input file could be found ***"))
       next
     }
     # Run ARAST pipeline on 128 GB workstation
-    ARAST(inputfile, run = run, techtype = techtype, mem_MB = 30000, mem_GB = 100, cleanup = cleanup)
+    ARAST(inputfile, mode = mode, techtype = techtype, mem_MB = 30000, mem_GB = 100, cleanup = cleanup)
     ## Or use this command for 16 GB laptop
-    #ARAST(inputfile, run = run, techtype = techtype, mem_MB = 6144, mem_GB = 16, cleanup = cleanup)
+    #ARAST(inputfile, mode = mode, techtype = techtype, mem_MB = 6144, mem_GB = 16, cleanup = cleanup)
     # Remove FASTQ files
     if(cleanup) file.remove(dir(workdir, "*.fastq", full.names = TRUE))
   }
 
   # Create blank data frame to hold amino acid compositions of proteins in each sample
-  aa <- as.data.frame(matrix(ncol = 25, nrow = length(ID)))
+  aa <- as.data.frame(matrix(ncol = 25, nrow = length(Run)))
   colnames(aa) <- c("protein", "organism", "ref", "abbrv", "chains",
     "Ala", "Cys", "Asp", "Glu", "Phe", "Gly", "His", "Ile", "Lys", "Leu",
     "Met", "Asn", "Pro", "Gln", "Arg", "Ser", "Thr", "Val", "Trp", "Tyr"
   )
-  # Put in run IDs and dataset name
-  aa$protein <- ID
+  # Put in Run IDs and dataset name
+  aa$protein <- Run
   aa$organism <- dataset
   # Loop over files with the amino acid sequences of inferred protein-coding genes
-  faafiles <- file.path(workdir, paste0(ID, "_coding.faa.gz"))
+  faafiles <- file.path(workdir, paste0(Run, "_coding.faa.gz"))
   # Only process files that exist
   iexist <- file.exists(faafiles)
   for(i in seq_along(faafiles)[iexist]) {
-#    # Calculate amino acid composition for each sequence ... but it's slow
-#    myaa <- CHNOSZ::read.fasta(faafiles[i])
-#    aa[i, 5:25] <- colSums(aa[, 5:25])
+    ## Slow way: Calculate amino acid composition for each sequence
+    #myaa <- CHNOSZ::read.fasta(faafiles[i])
+    #aa[i, 5:25] <- colSums(aa[, 5:25])
     # Faster way: count total number of each amino acid in file 20231217
     # https://unix.stackexchange.com/questions/5010/how-can-i-count-the-number-of-different-characters-in-a-file
     cmd <- paste('zcat', faafiles[i], '| grep -v "^>" | fold -b -w1 | sort --buffer-size=8G | uniq -c')
@@ -172,9 +196,10 @@ runARAST <- function(dataset, screening = TRUE, cleanup = TRUE) {
     uniq_output <- system(cmd, intern = TRUE)
     # Find amino acids in output of uniq command
     iAA <- sapply(c("A", "C", "D", "E", "F", "G", "H", "I", "K", "L", "M", "N", "P", "Q", "R", "S", "T", "V", "W", "Y"), grep, uniq_output)
+    uniq_output_iAA <- uniq_output[iAA]
     # Convert output of uniq to numeric counts
-    counts <- as.numeric(gsub("[A-Z]", "", gsub(" ", "", uniq_output)))
-    aa[i, 6:25] <- counts[iAA]
+    counts <- as.numeric(gsub("[A-Z]", "", gsub(" ", "", uniq_output_iAA)))
+    aa[i, 6:25] <- counts
     # Get number of protein sequences
     cmd <- paste("zcat", faafiles[i], "| wc -l")
     wc_output <- system(cmd, intern = TRUE)
@@ -183,8 +208,12 @@ runARAST <- function(dataset, screening = TRUE, cleanup = TRUE) {
     aa$chains[i] <- nseq
   }
 
-  # Identify Control and COVID-19 samples in 'abbrv' column 20230731
-  if(!is.null(Control)) aa$abbrv <- ifelse(ID %in% Control, "Control", "COVID-19")
+  # Label sample groups in 'abbrv' column 20230731
+  aa$abbrv[Run %in% Control] <- "Control"
+  aa$abbrv[Run %in% COVID] <- "COVID-19"
+  aa$abbrv[Run %in% IBD] <- "IBD"
+  aa$abbrv[Run %in% UC] <- "UC"
+  aa$abbrv[Run %in% CD] <- "CD"
 
   # Gather statistics for all runs 20231217
   stats <- do.call(rbind, lapply(statfiles, function(file) read.csv(file)))

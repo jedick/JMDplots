@@ -23,7 +23,7 @@ See the manual page associated with each paper for additional details about scri
 
     - [ARAST.R](inst/extdata/microhum/ARAST/ARAST.R): *script*: metagenome processing pipeline
     - [runARAST.R](inst/extdata/microhum/ARAST/runARAST.R): *script*: run pipeline for particular metagenomes
-    - [*_aa.csv](inst/extdata/microhum/ARAST/): *output files*: amino acid composision
+    - [*_aa.csv](inst/extdata/microhum/ARAST/): *output files*: amino acid composition
     - [*_stats.csv](inst/extdata/microhum/ARAST/): *output files*: processing statistics
 
   - [KWL22](inst/extdata/microhum/KWL22): analysis of metagenome-assembled genomes (MAGs) from [Ke et al. (2022)](https://doi.org/10.1038/s41467-022-32991-w)

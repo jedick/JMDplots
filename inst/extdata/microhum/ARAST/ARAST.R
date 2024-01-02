@@ -1,23 +1,23 @@
 # ARAST.R
-# Pipeline in R similar to MG-RAST
+# "Abbreviated RAST": Metagenome analysis pipeline in R inspired by MG-RAST
 # (only up to RNA and protein genecalling steps)
 
 # 20180310 v0 by Jeffrey M. Dick
 # 20181117 v1 - Used in gradox paper (https://doi.org/10.3389/fmicb.2019.00120)
 #   Script is on Zenodo: https://doi.org/10.5281/zenodo.2314933
 # 20211216 v2 - Used in geo16S paper (https://doi.org/10.1007/s00248-022-01988-9)
-#   Add techtype argument to ARAST() (script no longer has hardcoded list of IDs and techtypes)
-# 20221118 v3
+#   Add techtype argument to ARAST(); script no longer has hardcoded list of Run IDs and techtypes
+# 20221118 v3 - Used in microhum preprint (https://doi.org/10.1101/2023.02.12.528246)
 #   Remove human DNA using bowtie2 (step 5 added to script)
 # 20231216 v4 - Used in microhum paper
-#   Output processing statistics
+#   Save file with processing statistics
 
 # USAGE EXAMPLES
 # To process a batch of files:
 #   files <- dir("/home/ARAST/work/", ".fasta", full.names = TRUE)
 #   lapply(files, ARAST)
 # To stop after the dereplication step and don't gzip the output:
-#   lapply(files, ARAST, run = "DNA", run.gzip = FALSE)
+#   lapply(files, ARAST, mode = "DNA", run.gzip = FALSE)
 
 # SYSTEM SOFTWARE: modified from MG-RAST's "Processing Information and Downloads" seen for ERX242607_sra_data.fasta
 # skewer_0.2.2 (https://github.com/relipmoc/skewer)
@@ -54,7 +54,7 @@
 # Human genome index for bowtie2
 #   wget https://genome-idx.s3.amazonaws.com/bt/GRCh38_noalt_as.zip
 
-ARAST <- function(inputfile, proc = parallel::detectCores(), run = "protein", run.gzip = TRUE, techtype = "illumina", mem_MB = 6144, mem_GB = 16, cleanup = TRUE) {
+ARAST <- function(inputfile, proc = parallel::detectCores(), mode = "protein", run.gzip = TRUE, techtype = "illumina", mem_MB = 6144, mem_GB = 16, cleanup = TRUE) {
 
   # This function processes a single FASTA or FASTQ file
   #   'proc' number of threads for bowtie and sortmerna
@@ -62,7 +62,7 @@ ARAST <- function(inputfile, proc = parallel::detectCores(), run = "protein", ru
   #   'mem_MB' is used by arast_sortme_rna.pl
   #     NOTE: value is limited by free memory resources; tested values include 3941 for 8 GB RAM and 6144 for 16 GB RAM
   #   'mem_GB' is used by dereplication.py
-  #   'run' specifies which steps to run:
+  #   'mode' specifies processing mode:
   #     DNA: trimming, denoising, artifact removal, screening (host sequence removal)
   #     RNA: DNA steps plus RNA genecalling with sortmerna
   #     protein: DNA and RNA steps plus protein genecalling with FragGeneScan
@@ -70,19 +70,19 @@ ARAST <- function(inputfile, proc = parallel::detectCores(), run = "protein", ru
 
   ## What steps to run
   steps <- numeric()
-  if(run == "DNA") steps <- c(0:5, 23:24)
-  if(run == "RNA") steps <- c(0:6, 23:24)
-  if(run == "protein") steps <- c(0:9, 23:24)
-  if(run == "protein_no_screening") steps <- c(0:4, 6:9, 23:24)
-  if(run == "FGS") steps <- c(0:1, 9, 23:24)
+  if(mode == "DNA") steps <- c(0:5, 23:24)
+  if(mode == "RNA") steps <- c(0:6, 23:24)
+  if(mode == "protein") steps <- c(0:9, 23:24)
+  if(mode == "protein_no_screening") steps <- c(0:4, 6:9, 23:24)
+  if(mode == "FGS") steps <- c(0:1, 9, 23:24)
 
-  if(length(steps) == 0) stop("Invalid value for 'run' argument")
+  if(length(steps) == 0) stop("Invalid value for 'mode' argument")
 
   if(0 %in% steps) {
     print("######## 0. Set up environment ########")
-    # Get working directory and run ID from file name
+    # Get working directory and Run ID from file name
     workdir <- dirname(inputfile)
-    ID <- strsplit(basename(inputfile), "_")[[1]][1]
+    Run <- strsplit(basename(inputfile), "_")[[1]][1]
     # File type: fasta or fastq
     if(grepl("\\.fasta$", inputfile)) filetype <- "fasta" else
     if(grepl("\\.fna$", inputfile)) filetype <- "fasta" else
@@ -90,7 +90,7 @@ ARAST <- function(inputfile, proc = parallel::detectCores(), run = "protein", ru
       print(paste("Not processing", inputfile, "which is not fasta or fastq"))
       return()
     }
-    print(paste0("Processing ", filetype, " file for ", ID, " (", techtype, " sequencing)"))
+    print(paste0("Processing ", filetype, " file for ", Run, " (", techtype, " sequencing)"))
     tmpdir <- file.path(workdir, "tmp")
     if(!dir.exists(tmpdir)) dir.create(tmpdir)
     # Keep list of temporary and output files
@@ -100,18 +100,18 @@ ARAST <- function(inputfile, proc = parallel::detectCores(), run = "protein", ru
   if(1 %in% steps) {
     print("######## 1. Initial sequence statistics ########")
     # Initialize list of statistics
-    stats <- list(ID = ID)
+    stats <- list(Run = Run)
     # Read output from fastq-dump, if available
-    fastq_dump.logfile <- file.path(workdir, paste0(ID, "_fastq-dump.log"))
+    fastq_dump.logfile <- file.path(workdir, paste0(Run, "_fastq-dump.log"))
     if(file.exists(fastq_dump.logfile)) {
       fastq_dump.log <- readLines(fastq_dump.logfile)
       # Find lines starting with "Read" and "Written"
       iRead <- grep("^Read", fastq_dump.log)
       iWritten <- grep("^Written", fastq_dump.log)
-      available_spots <- as.numeric(strsplit(fastq_dump.log[iRead], " ")[[1]][2])
+      spots <- as.numeric(strsplit(fastq_dump.log[iRead], " ")[[1]][2])
       passed_read_filter <- as.numeric(strsplit(fastq_dump.log[iWritten], " ")[[1]][2])
-      # List numbers of available spots and those written by fastq-dump --read-filter pass
-      stats <- c(stats, available_spots = available_spots, passed_read_filter = passed_read_filter)
+      # List number of spots and passed reads (those written by fastq-dump --read-filter pass)
+      stats <- c(stats, spots = spots, passed_read_filter = passed_read_filter)
     }
     # Count number of sequences in input file
     input_sequences <- count_sequences(inputfile, filetype)
@@ -120,7 +120,7 @@ ARAST <- function(inputfile, proc = parallel::detectCores(), run = "protein", ru
 
   if(2 %in% steps) {
     print("######## 2. Adapter Trimming ########")
-    scrubbedfile <- file.path(workdir, paste0(ID, "_scrubbed.", filetype))
+    scrubbedfile <- file.path(workdir, paste0(Run, "_scrubbed.", filetype))
     autoskewer(inputfile, scrubbedfile, tmpdir, cleanup)
     tmpfiles <- c(tmpfiles, scrubbedfile)
     scrubbed_sequences <- count_sequences(scrubbedfile, filetype)
@@ -129,8 +129,8 @@ ARAST <- function(inputfile, proc = parallel::detectCores(), run = "protein", ru
 
   if(3 %in% steps) {
     print("######## 3. Denoising and normalization ########")
-    passedfile <- file.path(workdir, paste0(ID, "_passed.fasta"))
-    removedfile <- file.path(workdir, paste0(ID, "_removed.fasta"))
+    passedfile <- file.path(workdir, paste0(Run, "_passed.fasta"))
+    removedfile <- file.path(workdir, paste0(Run, "_removed.fasta"))
     preprocess(scrubbedfile, passedfile, removedfile, filetype)
     tmpfiles <- c(tmpfiles, passedfile, removedfile)
     passed_sequences <- count_sequences(passedfile, "fasta")
@@ -139,7 +139,7 @@ ARAST <- function(inputfile, proc = parallel::detectCores(), run = "protein", ru
 
   if(4 %in% steps) {
     print("######## 4. Removal of sequencing artifacts ########")
-    derepfile <- file.path(workdir, paste0(ID, "_dereplicated.fasta"))
+    derepfile <- file.path(workdir, paste0(Run, "_dereplicated.fasta"))
     dereplication(passedfile, derepfile, tmpdir, mem_GB, cleanup)
     # Mark this as a temporary file unless this is the final step
     if(5 %in% steps) tmpfiles <- c(tmpfiles, derepfile) else outfiles <- c(outfiles, derepfile)
@@ -149,7 +149,7 @@ ARAST <- function(inputfile, proc = parallel::detectCores(), run = "protein", ru
 
   if(5 %in% steps) {
     print("######## 5. Host DNA contamination removal ########")
-    screenedfile <- file.path(workdir, paste0(ID, "_screened.fasta"))
+    screenedfile <- file.path(workdir, paste0(Run, "_screened.fasta"))
     bowtie2(derepfile, screenedfile, proc, tmpdir)
     if(6 %in% steps) tmpfiles <- c(tmpfiles, screenedfile) else outfiles <- c(outfiles, screenedfile)
     screened_sequences <- count_sequences(screenedfile, "fasta")
@@ -160,8 +160,8 @@ ARAST <- function(inputfile, proc = parallel::detectCores(), run = "protein", ru
     print("######## 6. RNA feature identification (rRNA genecalling) ########")
     rna_nr = "/home/ARAST/REFDB/md5rna.clust"
     index <- paste0(rna_nr, ".index")
-    rRNAfile <- file.path(workdir, paste0(ID, "_rRNA.fasta"))
-    not_rRNAfile <- file.path(workdir, paste0(ID, "_not-rRNA.fasta"))
+    rRNAfile <- file.path(workdir, paste0(Run, "_rRNA.fasta"))
+    not_rRNAfile <- file.path(workdir, paste0(Run, "_not-rRNA.fasta"))
     sortmerna(screenedfile, rRNAfile, not_rRNAfile, proc, mem_MB, rna_nr, index)
     outfiles <- c(outfiles, rRNAfile)
     if(9 %in% steps) tmpfiles <- c(tmpfiles, not_rRNAfile) else outfiles <- c(outfiles, not_rRNAfile)
@@ -177,7 +177,7 @@ ARAST <- function(inputfile, proc = parallel::detectCores(), run = "protein", ru
 
   if(9 %in% steps) {
     print("######## 9. Identify putative protein coding features (genecalling) ########")
-    codingfile <- file.path(workdir, paste0(ID, "_coding"))
+    codingfile <- file.path(workdir, paste0(Run, "_coding"))
     genecalling(not_rRNAfile, codingfile, techtype, tmpdir, proc, cleanup)
     if(file.exists(paste0(codingfile, ".faa"))) {
       fnafile <- paste0(codingfile, ".fna")
@@ -201,7 +201,7 @@ ARAST <- function(inputfile, proc = parallel::detectCores(), run = "protein", ru
     if(cleanup) system(paste("rm -f", paste(tmpfiles, collapse = " ")))
     if(run.gzip & length(outfiles) > 0) system(paste("gzip -f", paste(outfiles, collapse = " ")))
     # Save stats file
-    statsfile <- file.path(workdir, paste0(ID, "_stats.csv"))
+    statsfile <- file.path(workdir, paste0(Run, "_stats.csv"))
     write.csv(as.data.frame(stats), statsfile, row.names = FALSE, quote = FALSE)
   }
 
