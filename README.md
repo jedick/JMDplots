@@ -15,7 +15,7 @@ See the manual page associated with each paper for additional details about scri
 <!-- Put a space before <details> to make ghostwriter format the lists correctly -->
  <details>
 
-<summary>Water and oxygen in the genomic adaptation of human microbiomes (<i>submitted manuscript</i>)</summary>
+<summary>Water and oxygen in the genomic adaptation of human microbiota (<i>submitted manuscript</i>)</summary>
 
 - [inst/extdata/microhum](inst/extdata/microhum): scripts and processed data files
 

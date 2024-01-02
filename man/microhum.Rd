@@ -11,7 +11,7 @@
 \alias{microhum_S2}
 \alias{microhum_S3}
 \alias{dataset_metrics}
-\title{Water and oxygen in the genomic adaptation of human microbiomes}
+\title{Water and oxygen in the genomic adaptation of human microbiota}
 \description{
 Plots from the revised manuscript by Dick (2023).
 }

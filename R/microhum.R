@@ -452,8 +452,8 @@ microhum_4 <- function(pdf = FALSE) {
   if(pdf) pdf("Figure_4.pdf", width = 13, height = 12)
   mat <- matrix(c(
     1,1,1,1, 2,2,2,2, 3,3,3,3,
-    4,4, 5,5, 6,6, 7,7, 0,0, 0,0,
-    8,8,8,8, 9,9, 10,10, 11,11, 12,12
+    4,4, 5,5, 6,6, 7,7, 8,8, 9,9,
+    10,10,10,10, 11,11, 12,12, 13,13, 14,14
     ), nrow = 3, byrow = TRUE
   )
   layout(mat)
@@ -505,8 +505,10 @@ microhum_4 <- function(pdf = FALSE) {
   }
 
   # Common nH2O and nO2 limits for boxplots
-  nH2Olim <- c(-0.87, -0.68)
-  nO2lim <- c(-0.75, -0.65)
+  ylims <- list(
+    nH2O = c(-0.87, -0.68),
+    nO2 = c(-0.75, -0.65)
+  )
 
   # Function to make boxplots
   boxplotfun <- function(metric, x_list, ylim) {
@@ -548,8 +550,9 @@ microhum_4 <- function(pdf = FALSE) {
     iaa <- grep(SRAprefix, aa$protein)
     thisaa <- aa[iaa, ]
     # Calculate nO2 or nH2O
-    if(metric == "nO2") x <- nO2(thisaa) else x <- nH2O(thisaa)
-    if(metric == "nO2") ylim <- c(-0.85, -0.55) else ylim <- nH2Olim
+    x <- get(metric)(thisaa)
+    ylim <- ylims[[metric]]
+    if(metric == "nO2") ylim <- c(-0.85, -0.55)
     # Get names of groups
     idat <- match(thisaa$protein, dat$Dat)
     group <- dat$Group[idat]
@@ -562,31 +565,40 @@ microhum_4 <- function(pdf = FALSE) {
     if(metric == "nH2O" & SRAprefix == "SRR1307") label.figure(figlab, font = 2, adj = 0)
   }
 
-  ## Panel C: boxplots of nO2 and nH2O of bacterial metaproteome in control and COVID-19 patients 20220830
+  ## Panels C and D: boxplots of nO2 and nH2O of bacterial metaproteome in control and COVID-19 patients 20220830
   # Limit to bacterial taxonomy
   taxonomy <- "Bacteria"
-  if(taxonomy == "All") aa <- read.csv(file.path(getdatadir(), "metaproteome/HZX+21/HZX+21_aa.csv"))
-  if(taxonomy == "Bacteria") aa <- read.csv(file.path(getdatadir(), "metaproteome/HZX+21/HZX+21_bacteria_aa.csv"))
-  # Identify control and COVID-19 patients
-  icontrol <- grep("Ctrl", aa$organism)
-  icovid <- grep("P", aa$organism)
-  # Loop over nH2O and nO2
-  for(metric in c("nH2O", "nO2")) {
-    # Calculate nO2 or nH2O
-    if(metric == "nO2") {
-      x <- nO2(aa) 
-      ylim <- nO2lim
-    } else {
-      x <- nH2O(aa)
-      ylim <- nH2Olim
+  # Loop over datasets
+  for(study in c("HZX+21", "GPM+22")) {
+    if(study == "HZX+21") {
+      if(taxonomy == "All") aa <- read.csv(file.path(getdatadir(), "metaproteome/HZX+21/HZX+21_aa.csv"))
+      if(taxonomy == "Bacteria") aa <- read.csv(file.path(getdatadir(), "metaproteome/HZX+21/HZX+21_bacteria_aa.csv"))
+      # Identify control and COVID-19 patients
+      icontrol <- grep("Ctrl", aa$organism)
+      icovid <- grep("P", aa$organism)
     }
-    x_list <- list(Control = x[icontrol], "COVID-19" = x[icovid])
-    names(x_list)[2] <- hyphen.in.pdf(names(x_list)[2])
-    boxplotfun(metric, x_list, ylim)
-    if(metric == "nH2O") label.figure("C. Gut metaproteomes (He et al., 2021)", font = 2, adj = -0.05)
+    if(study == "GPM+22") {
+      if(taxonomy == "All") aa <- read.csv(file.path(getdatadir(), "metaproteome/GPM+22/GPM+22_aa.csv"))
+      if(taxonomy == "Bacteria") aa <- read.csv(file.path(getdatadir(), "metaproteome/GPM+22/GPM+22_bacteria_aa.csv"))
+      # Identify control and COVID-19 patients
+      icontrol <- grep("negative", aa$abbrv)
+      icovid <- grep("positive", aa$abbrv)
+    }
+    # Loop over nH2O and nO2
+    for(metric in c("nH2O", "nO2")) {
+      # Calculate nO2 or nH2O
+      x <- get(metric)(aa)
+      ylim <- ylims[[metric]]
+      if(metric == "nO2" & study == "GPM+22") ylim <- c(-0.8, -0.6)
+      x_list <- list(Control = x[icontrol], "COVID-19" = x[icovid])
+      names(x_list)[2] <- hyphen.in.pdf(names(x_list)[2])
+      boxplotfun(metric, x_list, ylim)
+      if(metric == "nH2O" & study == "HZX+21") label.figure("C. Gut metaproteomes (He et al., 2021)", font = 2, adj = -0.05)
+      if(metric == "nH2O" & study == "GPM+22") label.figure("D. Gut metaproteomes (Grenga et al., 2022)", font = 2, adj = 0)
+    }
   }
 
-  ## Panel D: nH2O-nO2 plots for community reference proteomes in IBD 20230723
+  ## Panel E: nH2O-nO2 plots for community reference proteomes in IBD 20230723
   par(mar = c(4, 4, 3, 1))
   type <- "IBD"
   startplot()
@@ -603,7 +615,7 @@ microhum_4 <- function(pdf = FALSE) {
   # Add plot title
   title("Gut (IBD)", font.main = 1, line = 0.5)
   # Add panel title
-  start <- hyphen.in.pdf("D. CRPs (")
+  start <- hyphen.in.pdf("E. CRPs (")
   ibd <- hyphen.in.pdf("IBD")
   label <- bquote(bold(.(start) * Delta == .(ibd) ~ "minus control)"))
   label.figure(label, font = 2, yfrac = 0.95, adj = 0.04)
@@ -618,14 +630,13 @@ microhum_4 <- function(pdf = FALSE) {
   for(disease in c("UC", "CD")) {
     for(metric in c("nH2O", "nO2")) {
       # Calculate nO2 or nH2O
-      if(metric == "nO2") x <- nO2(aa) else x <- nH2O(aa)
-      if(metric == "nO2") ylim <- nO2lim else ylim <- nH2Olim
-      if(metric == "nO2") legend.x <- "topleft" else legend.x <- "bottomleft"
+      x <- get(metric)(aa)
+      ylim <- ylims[[metric]]
       # Make list of values in control and patient groups
       x_list <- list(Control = x[aa$abbrv == "Control"], IBD = x[aa$abbrv == disease])
       names(x_list)[2] <- disease
       boxplotfun(metric, x_list, ylim)
-      figlab <- hyphen.in.pdf("E. Gut metagenomes (Lloyd-Price et al., 2019)")
+      figlab <- hyphen.in.pdf("F. Gut metagenomes (Lloyd-Price et al., 2019)")
       if(metric == "nH2O" & disease == "UC") label.figure(figlab, font = 2, adj = 0)
     }
   }
@@ -733,7 +744,6 @@ microhum_5 <- function(pdf = FALSE) {
   invisible(genus)
 
 }
-
 
 # Oxygen tolerance of genera in body sites, COVID-19, and IBD 20230726
 microhum_6 <- function(pdf = FALSE) {
