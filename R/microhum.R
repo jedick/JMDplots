@@ -212,22 +212,37 @@ microhum_2 <- function(pdf = FALSE) {
     labels <- paste0(" ", gvals$taxon)
     xadj <- rep(0, length(labels))
     yadj <- rep(0.5, length(labels))
-    yadj[gvals$taxon == "Bacteroides"] <- 0.2
-    yadj[gvals$taxon == "Phocaeicola"] <- 1.2
-    xadj[gvals$taxon == "Phocaeicola"] <- 0.1
-    yadj[gvals$taxon == "Blautia_A"] <- 1.2
-    xadj[gvals$taxon == "Blautia_A"] <- 0.1
-    yadj[gvals$taxon == "Anaerobutyricum"] <- -0.2
-    xadj[gvals$taxon == "Anaerobutyricum"] <- 0.05
-    yadj[gvals$taxon == "Escherichia"] <- 0.8
-    yadj[gvals$taxon == "Enterococcus"] <- -0.2
-    xadj[gvals$taxon == "Enterococcus"] <- 0.08
-    yadj[gvals$taxon == "Anaerostipes"] <- -0.3
-    xadj[gvals$taxon == "Anaerostipes"] <- 0.08
-    yadj[gvals$taxon == "Pediococcus"] <- 0.2
-    yadj[gvals$taxon == "Lactobacillus"] <- 0.2
-    yadj[gvals$taxon == "Enterococcus_B"] <- 0.4
-    yadj[gvals$taxon == "Haemophilus_D"] <- 0.8
+    if(refdb[i] == "GTDB") {
+      yadj[gvals$taxon == "Bacteroides"] <- 0.2
+      yadj[gvals$taxon == "Phocaeicola"] <- 1.2
+      xadj[gvals$taxon == "Phocaeicola"] <- 0.1
+      yadj[gvals$taxon == "Blautia_A"] <- 1.2
+      xadj[gvals$taxon == "Blautia_A"] <- 0.5
+      yadj[gvals$taxon == "Anaerobutyricum"] <- -0.5
+      xadj[gvals$taxon == "Anaerobutyricum"] <- 0.05
+      xadj[gvals$taxon == "Escherichia"] <- 0.2
+      yadj[gvals$taxon == "Escherichia"] <- 1.4
+      yadj[gvals$taxon == "Enterococcus"] <- -0.2
+      xadj[gvals$taxon == "Enterococcus"] <- 0.08
+      yadj[gvals$taxon == "Anaerostipes"] <- -0.3
+      xadj[gvals$taxon == "Anaerostipes"] <- 0.08
+      yadj[gvals$taxon == "Pediococcus"] <- 0.2
+      yadj[gvals$taxon == "Enterococcus_B"] <- 0.4
+      yadj[gvals$taxon == "Haemophilus_D"] <- 0.8
+      yadj[gvals$taxon == "Latilactobacillus"] <- -0.1
+      xadj[gvals$taxon == "Lactobacillus"] <- 1.03
+    }
+    if(refdb[i] == "UHGG") {
+      yadj[gvals$taxon == "Finegoldia"] <- 0
+      xadj[gvals$taxon == "Enterococcus"] <- 1.03
+      yadj[gvals$taxon == "Latilactobacillus"] <- 0
+      yadj[gvals$taxon == "Campylobacter_B"] <- 0.8
+      yadj[gvals$taxon == "Anaerobutyricum"] <- 0.8
+      xadj[gvals$taxon == "Enterococcus_B"] <- 1.03
+      yadj[gvals$taxon == "Lactobacillus"] <- 0.3
+      yadj[gvals$taxon == "Bacteroides"] <- 0
+      yadj[gvals$taxon == "Phocaeicola"] <- 1
+    }
     for(j in seq_along(labels)) text(X[j], Y[j], labels[j], adj = c(xadj[j], yadj[j]), cex = 0.8)
     title(main = main[i], font.main = 1)
     # Keep points for correlation plot
@@ -238,7 +253,6 @@ microhum_2 <- function(pdf = FALSE) {
   }
   names(genus_vals) <- refdb
 
-
   # Plot nO2 and nH2O for GTDB vs UHGG
   par(mar = c(4, 4.1, 2.1, 2.1))
   for(i in seq_along(metrics)) {
@@ -247,7 +261,7 @@ microhum_2 <- function(pdf = FALSE) {
     # Start plot
     plot(x, y, xlab = "UHGG", ylab = "GTDB", type = "n")
     # Compute min/max limits for 1:1 line
-    xylim <- extendrange(c(min(x, y), max(x, y)))
+    xylim <- extendrange(c(min(x, y, na.rm = TRUE), max(x, y, na.rm = TRUE)))
     lines(xylim, xylim, lty = 2, col = "gray40")
     # Plot points
     points(x, y, pch = 16, col = col)

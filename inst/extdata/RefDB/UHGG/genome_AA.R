@@ -1,5 +1,5 @@
 # Read and sum amino acid composition of all proteins for each genome 20221022
-# Script modified for MGnify, based on GTDB/genome_AA.R in chem16S 20231230
+# Script modified for UHGG from GTDB/genome_AA.R in chem16S 20231230
 genome_AA <- function() {
 
   # Read taxonomy file
@@ -25,6 +25,8 @@ genome_AA <- function() {
 
   # Put in full genome names (with version suffix .1, .2, etc.)
   aa$organism <- genome
+  # Put in species names 20240104
+  aa$ref <- taxonomy$species
   # Use generic protein name
   aa$protein <- "MGnify"
 
