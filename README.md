@@ -124,8 +124,7 @@ See the manual page associated with each paper for additional details about scri
 
 ## Reference databases
 
-Amino acid compositions and taxonomic information have been obtained from the Saccharomyces Genome Database, UniProt, RefSeq, GTDB, and MGnify.
-These files are used for the chemical analysis of genomic variation for various papers.
+Amino acid compositions and taxonomic information have been obtained from the *Saccharomyces* Genome Database (SGD), UniProt, RefSeq, GTDB, and MGnify.
 See [man/JMDplots-package.Rd](man/JMDplots-package.Rd) for further details.
 
 <!-- Put a space before <details> to make ghostwriter format the lists correctly -->
@@ -133,25 +132,26 @@ See [man/JMDplots-package.Rd](man/JMDplots-package.Rd) for further details.
 
 <summary>Reference databases</summary>
 
-- [inst/extdata/RefDB/organisms](inst/extdata/RefDB/organisms): Data files for particular organisms (names are followd by links to vignettes for related papers). Data were downloaded from [SGD](https://www.yeastgenome.org/) or [UniProt](https://www.uniprot.org/).
+- [inst/extdata/RefDB/organisms](inst/extdata/RefDB/organisms): Data for particular organisms, downloaded from [SGD](https://www.yeastgenome.org/) or [UniProt](https://www.uniprot.org/).
 
-  - [Sce.csv.xz](inst/extdata/RefDB/organisms/Sce.csv.xz): *Saccharomyces cerevisiae* ([scsc](https://chnosz.net/JMDplots/vignettes/scsc.html) and [aoscp](https://chnosz.net/JMDplots/vignettes/aoscp.html) papers)
-  - [UP000000805_243232.csv.xz](inst/extdata/RefDB/organisms/UP000000805_243232.csv.xz): *Methanocaldococcus jannaschii* ([mjenergy](https://chnosz.net/JMDplots/vignettes/mjenergy.html) paper)
+  - [Sce.csv.xz](inst/extdata/RefDB/organisms/Sce.csv.xz): *Saccharomyces cerevisiae* (used in the [scsc](https://chnosz.net/JMDplots/vignettes/scsc.html) and [aoscp](https://chnosz.net/JMDplots/vignettes/aoscp.html) papers)
+  - [yeastgfp.csv.xz](inst/extdata/RefDB/organisms/yeastgfp.csv.xz): Subcellular localization and abundance of proteins in *S. cerevisiae* (used in the [scsc](https://chnosz.net/JMDplots/vignettes/scsc.html) paper)
+  - [UP000000805_243232.csv.xz](inst/extdata/RefDB/organisms/UP000000805_243232.csv.xz): *Methanocaldococcus jannaschii* (used in the [mjenergy](https://chnosz.net/JMDplots/vignettes/mjenergy.html) paper)
   - [UP000000625_83333.csv.xz](inst/extdata/RefDB/organisms/UP000000625_83333.csv.xz): *Escherichia coli* K12
-  - [UP000000803_7227.csv.xz](inst/extdata/RefDB/organisms/UP000000803_7227.csv.xz): *Drosophila melanogaster* ([evdevH2O](https://chnosz.net/JMDplots/vignettes/evdevH2O.html) paper)
-  - [UP000001570_224308.csv.xz](inst/extdata/RefDB/organisms/UP000001570_224308.csv.xz): *Bacillus subtilis* strain 168 ([evdevH2O](https://chnosz.net/JMDplots/vignettes/evdevH2O.html) paper)
+  - [UP000000803_7227.csv.xz](inst/extdata/RefDB/organisms/UP000000803_7227.csv.xz): *Drosophila melanogaster* (used in the [evdevH2O](https://chnosz.net/JMDplots/vignettes/evdevH2O.html) paper)
+  - [UP000001570_224308.csv.xz](inst/extdata/RefDB/organisms/UP000001570_224308.csv.xz): *Bacillus subtilis* strain 168 (used in the [evdevH2O](https://chnosz.net/JMDplots/vignettes/evdevH2O.html) paper)
 
-- [inst/extdata/RefDB/RefSeq](inst/extdata/RefDB/RefSeq): Data files processed from [RefSeq](https://www.ncbi.nlm.nih.gov/refseq/), used in the [geo16S](https://chnosz.net/JMDplots/vignettes/geo16S.html) and [orp16S](https://chnosz.net/JMDplots/vignettes/orp16S.html) papers
+- [inst/extdata/RefDB/RefSeq](inst/extdata/RefDB/RefSeq): Data files processed from [RefSeq](https://www.ncbi.nlm.nih.gov/refseq/) and used in the [geo16S](https://chnosz.net/JMDplots/vignettes/geo16S.html) and [orp16S](https://chnosz.net/JMDplots/vignettes/orp16S.html) papers
   - [genome_AA.csv.xz](inst/extdata/RefDB/RefSeq/genome_AA.csv.xz): Amino acid compositions of species-level archaeal, bacterial, and viral taxa in the RefSeq database
   - [taxonomy.csv.xz](inst/extdata/RefDB/RefSeq/taxonomy.csv.xz): Taxonomic names for the species
   - Scripts to produce these files are in [**chem16S**](https://github.com/jedick/chem16S)
 
-- [inst/extdata/RefDB/GTDB](inst/extdata/RefDB/GTDB): Data files processed from [GTDB](https://gtdb.ecogenomic.org/), used in the [microhum](https://chnosz.net/JMDplots/vignettes/microhum.html) manuscript
+- [inst/extdata/RefDB/GTDB](inst/extdata/RefDB/GTDB): Data files processed from [GTDB](https://gtdb.ecogenomic.org/) and used in the [microhum](https://chnosz.net/JMDplots/vignettes/microhum.html) manuscript
   - [genome_AA.csv.xz](inst/extdata/RefDB/GTDB/genome_AA.csv.xz): Amino acid compositions of predicted proteins
   - [taxonomy.csv.xz](inst/extdata/RefDB/GTDB/taxonomy.csv.xz): Taxonomic names
   - Scripts to produce these files are in [**chem16S**](https://github.com/jedick/chem16S)
 
-- [inst/extdata/RefDB/UHGG](inst/extdata/RefDB/UHGG): Data files processed from MGnify's [UHGG](https://www.ebi.ac.uk/metagenomics/genome-catalogues/human-gut-v2-0-1), used in the [microhum](https://chnosz.net/JMDplots/vignettes/microhum.html) manuscript
+- [inst/extdata/RefDB/UHGG](inst/extdata/RefDB/UHGG): Data files processed from MGnify's [UHGG](https://www.ebi.ac.uk/metagenomics/genome-catalogues/human-gut-v2-0-1) and used in the [microhum](https://chnosz.net/JMDplots/vignettes/microhum.html) manuscript
   - [MGnify_genomes.csv](inst/extdata/RefDB/UHGG/MGnify_genomes.csv): List of 4744 species-level clusters in the Unified Human Gastrointestinal Genome ([UHGG v.2.0.1](https://www.ebi.ac.uk/metagenomics/genome-catalogues/human-gut-v2-0-1))
   - [getMGnify.R](inst/extdata/RefDB/UHGG/getMGnify.R): Commands used to download FASTA files for proteins and to scrape the website for taxonomic information
   - [taxonomy.csv.xz](inst/extdata/RefDB/UHGG/taxonomy.csv.xz): Taxonomy for 2350 selected genomes with contamination < 2% and completeness > 95%

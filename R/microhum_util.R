@@ -22,12 +22,15 @@ getmdat_microhum <- function(study, metrics = NULL, dropNA = TRUE, quiet = TRUE)
   pch <- NULL
 
   # For microhum paper 20220202
+  # NOTE: 'pch' is used to define sample group for other functions,
+  # i.e. pch = 24 for control and pch = 25 for patient
 
   # 20210801 COVID-19 Gut
   if(study == "MMP+21") {
     pch <- sapply(metadata$Severity, switch, Mild = 24, Moderate = 20, Severe = 25)
     col <- sapply(metadata$Severity, switch, Mild = 4, Moderate = 1, Severe = 2)
   }
+
   # 20220803 COVID-19 Gut
   if(study == "CGC+22") {
     pch <- sapply(metadata$Type, switch, Control = 24, Convalescence = 20, Acute = 25, NA)
@@ -40,8 +43,6 @@ getmdat_microhum <- function(study, metrics = NULL, dropNA = TRUE, quiet = TRUE)
   }
   # 20220803 COVID-19 Oral
   if(study == "GBS+22") {
-#    pch <- sapply(metadata$Sex, switch, "female" = 24, "male" = 25)
-#    col <- sapply(metadata$Sex, switch, "female" = 4, "male" = 2)
     pch <- sapply(metadata$Status, switch, "non-infected" = 24, "infected" = 25)
     col <- sapply(metadata$Status, switch, "non-infected" = 4, "infected" = 2)
   }
@@ -64,8 +65,8 @@ getmdat_microhum <- function(study, metrics = NULL, dropNA = TRUE, quiet = TRUE)
   }
   # 20220805 COVID-19 Oral
   if(study == "MAC+21") {
-#    # Remove samples with discord between lab and qPCR results
-#    metadata <- metadata[!sapply(metadata$Concord_Discord == "DISCORD", isTRUE), ]
+    ## Remove samples with discord between lab and qPCR results
+    #metadata <- metadata[!sapply(metadata$Concord_Discord == "DISCORD", isTRUE), ]
     # covid_status_per_lab is in [0, 1], so add 1 to get [1, 2],
     # which correspond to the unnamed arguments for switch
     pch <- sapply(metadata$covid_status_per_lab + 1, switch, 24, 25)
@@ -154,6 +155,20 @@ getmdat_microhum <- function(study, metrics = NULL, dropNA = TRUE, quiet = TRUE)
     pch <- sapply(metadata$Status, switch, Control = 24, Patient = 25)
     col <- sapply(metadata$Status, switch, Control = 4, Patient = 2)
   }
+
+  # 20220814 Body sites
+  # BPB+21_NoTreatment, BPB+21_AnyTreatment
+  if(grepl("BPB\\+21", study)) {
+    Treatment <- sapply(strsplit(study, "_"), "[", 2)
+    if(!is.na(Treatment)) {
+      if(Treatment == "NoTreatment") metadata <- metadata[metadata$Treatment == "No_treatment", ]
+      if(Treatment == "AnyTreatment") metadata <- metadata[metadata$Treatment != "No_treatment", ]
+    }
+    pch <- sapply(metadata$Site, switch, "Oral cavity" = pch_Oral, "Nasal cavity" = pch_Nasal, "Skin of forearm" = pch_Skin, "feces" = pch_Gut, NA)
+    col <- sapply(metadata$Site, switch, "Oral cavity" = adjustcolor(col_Oral, 0.8), "Nasal cavity" = adjustcolor(col_Nasal, 0.9),
+      "Skin of forearm" = adjustcolor(col_Skin, 0.8), "feces" = adjustcolor(col_Gut, 0.8), NA)
+  }
+
   # 20221012 COVID-19 Nasopharyngeal
   if(study == "CSC+22") {
     pch <- sapply(metadata$SarsCov2, switch, neg = 24, pos = 25)
@@ -269,25 +284,52 @@ getmdat_microhum <- function(study, metrics = NULL, dropNA = TRUE, quiet = TRUE)
     col <- sapply(metadata$Diagnosis, switch, "Not IBD" = 4, CD = 2)
   }
 
-  # 20220814 Body sites
-  # BPB+21_NoTreatment, BPB+21_AnyTreatment
-  if(grepl("BPB\\+21", study)) {
-    Treatment <- sapply(strsplit(study, "_"), "[", 2)
-    if(!is.na(Treatment)) {
-      if(Treatment == "NoTreatment") metadata <- metadata[metadata$Treatment == "No_treatment", ]
-      if(Treatment == "AnyTreatment") metadata <- metadata[metadata$Treatment != "No_treatment", ]
-    }
-    pch <- sapply(metadata$Site, switch, "Oral cavity" = pch_Oral, "Nasal cavity" = pch_Nasal, "Skin of forearm" = pch_Skin, "feces" = pch_Gut, NA)
-    col <- sapply(metadata$Site, switch, "Oral cavity" = adjustcolor(col_Oral, 0.8), "Nasal cavity" = adjustcolor(col_Nasal, 0.9),
-      "Skin of forearm" = adjustcolor(col_Skin, 0.8), "feces" = adjustcolor(col_Gut, 0.8), NA)
-  }
-
   # 20231219 Human Microbiome Project
   if(study == "HMP12") {
     pch <- sapply(metadata$"Body site", switch, "Skin" = pch_Skin, "Nasal cavity" = pch_Nasal, "Oral cavity" = pch_Oral, "GI tract" = pch_Gut, "UG tract" = pch_UG)
     col <- sapply(metadata$"Body site", switch, "Skin" = adjustcolor(col_Skin, 0.8), "Nasal cavity" = adjustcolor(col_Nasal, 0.8),
       "Oral cavity" = adjustcolor(col_Oral, 0.8), "GI tract" = adjustcolor(col_Gut, 0.8), "UG tract" = adjustcolor(col_UG, 0.8))
   }
+
+  # 20240104 COVID-19 Gut
+  if(study == "AHM+21") {
+    pch <- sapply(metadata$COVID, switch, negative = 24, positive = 25)
+    col <- sapply(metadata$COVID, switch, negative = 4, positive = 2)
+  }
+  if(study == "MZW+23") {
+    pch <- ifelse(grepl("HC", metadata$SampleName), 24, 25)
+    col <- ifelse(grepl("HC", metadata$SampleName), 4, 2)
+  }
+  if(study == "WZL+23") {
+    pch <- ifelse(grepl("HC", metadata$Sample), 24, 25)
+    col <- ifelse(grepl("HC", metadata$Sample), 4, 2)
+  }
+  # 20240104 IBD Gut
+  if(study == "BKK+17") {
+    pch <- ifelse(grepl("Control", metadata$SampleName), 24, 25)
+    col <- ifelse(grepl("Control", metadata$SampleName), 4, 2)
+  }
+  if(study == "DKK+23") {
+    pch <- ifelse(grepl("HC", metadata$SampleName), 24, 25)
+    col <- ifelse(grepl("HC", metadata$SampleName), 4, 2)
+  }
+  if(study == "HBL+17") {
+    pch <- ifelse(metadata$diagnosis == "HC", 24, 25)
+    col <- ifelse(metadata$diagnosis == "HC", 4, 2)
+  }
+  if(study == "MLL+16") {
+    pch <- ifelse(metadata$Disease == "Healthy", 24, 25)
+    col <- ifelse(metadata$Disease == "Healthy", 4, 2)
+  }
+  if(study == "PYL+23") {
+    pch <- ifelse(grepl("^C", metadata$SampleName), 24, 25)
+    col <- ifelse(grepl("^C", metadata$SampleName), 4, 2)
+  }
+  if(study == "REP+23") {
+    pch <- ifelse(metadata$Group == "control", 24, 25)
+    col <- ifelse(metadata$Group == "control", 4, 2)
+  }
+
 
   if(is.null(pch)) stop(paste(study, "metadata file exists, but not set up for processing"))
 

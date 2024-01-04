@@ -7,8 +7,7 @@
 # 20220512 Use GNU parallel in classify()
 # 20221013 Add GTDB option (for microhum paper)
 
-## SYSTEM REQUIREMENTS
-# (version numbers for information only)
+## SYSTEM DEPENDENCIES
 
 # R 4.0.0              https://www.r-project.org/
 # fastq-dump 2.9.0     https://ncbi.github.io/sra-tools/
@@ -47,7 +46,7 @@
 ## STUDY SETTINGS
 
 # Change the following line to setup the pipeline for one study
-study <- "HMP12"
+study <- "WZL+23"
 # Settings for all studies are stored here
 file <- tempfile()
 # Write spaces here (but don't save them) to make this easier to read
@@ -103,7 +102,17 @@ writeLines(con = file, text = gsub(" ", "", c(
   "WGL+19, FALSE, 250",
   "GKD+14, FALSE, 250",
   # Human Microbiome Project 20231214
-  "HMP12, TRUE, 400"
+  "HMP12, TRUE, 400",
+  # COVID and IBD gut 20231231
+  "AHM+21, FALSE, 250",
+  "BKK+17, TRUE, 440",
+  "DKK+23, TRUE, 400",
+  "HBL+17, TRUE, 99",
+  "MLL+16, FALSE, 250",
+  "MZW+23, FALSE, 410",
+  "PYL+23, FALSE, 440",
+  "REP+23, FALSE, 310",
+  "WZL+23, FALSE, 410"
 )))
 
 # This reads and applies the settings
@@ -293,6 +302,13 @@ subsample <- function(do.singletons = TRUE) {
   # Loop over samples
   allRUNID <- gsub("\\.fa$", "", dir(pattern = "\\.fa$"))
   for(thisRUNID in allRUNID) {
+    # Output .fa file in FASTAdir
+    outfile <- file.path(FASTAdir, paste0(thisRUNID, ".fa"))
+    # Skip if output .fa file already exists
+    if(file.exists(outfile)) {
+      print(paste("File exists - skipping subsampling:", outfile))
+      next
+    }
     # Extract sequences for this sample
     thisfile <- paste0(thisRUNID, ".fasta")
     # https://stackoverflow.com/questions/26144692/printing-a-sequence-from-a-fasta-file
@@ -300,12 +316,10 @@ subsample <- function(do.singletons = TRUE) {
     # (this is needed for numeric or short sample names that can match other parts of the header)
     print(cmd <- paste0("awk '/>", thisRUNID, "/{p++;print;next} /^>/{p=0} p' not_singletons.fasta > ", thisfile))
     system(cmd)
-
-    # Subsample 10000 sequences - put output in .fa file in FASTAdir
+    # Subsample 10000 sequences
     print(cmd <- paste('grep "^>"', thisfile))
     thisfile.headers <- system(cmd, intern = TRUE)
     nout <- nseq <- length(thisfile.headers)
-    outfile <- file.path(FASTAdir, paste0(thisRUNID, ".fa"))
     if(nseq > 10000) {
       print(cmd <- paste("vsearch -fastx_subsample", thisfile, "-sample_size 10000 -randseed 1234 -fastaout", outfile))
       system(cmd)

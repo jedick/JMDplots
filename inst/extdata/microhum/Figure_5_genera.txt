@@ -9,7 +9,9 @@ Lactobacillus
 Staphylococcus
 Anaerostipes
 Streptococcus
+Ligilactobacillus
 Pediococcus
+Latilactobacillus
 Haemophilus_D
 Phascolarctobacterium
 Phocaeicola
@@ -21,6 +23,7 @@ Anaerobutyricum
 Fusicatenibacter
 Escherichia
 Prevotella
+Pseudocitrobacter
 Alistipes
 Faecalibacterium
 Akkermansia

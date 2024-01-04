@@ -473,8 +473,8 @@ microhum_4 <- function(pdf = FALSE) {
   # Define plot settings
   par(cex = 1.2)
   par(mgp = c(2.5, 1, 0))
-  startplot <- function() {
-    plot(c(-0.010, 0.010), c(-0.012, 0.020), type  = "n", pch = ".", xlab = cplab$DnO2, ylab = cplab$DnH2O)
+  startplot <- function(xlim = c(-0.01, 0.01), ylim = c(-0.015, 0.020)) {
+    plot(xlim, ylim, type  = "n", pch = ".", xlab = cplab$DnO2, ylab = cplab$DnH2O)
     abline(h = 0, v = 0, lty = 2, col = 8)
   }
   # Colors and point symbols for sample types
@@ -488,19 +488,26 @@ microhum_4 <- function(pdf = FALSE) {
   par(mar = c(4, 4, 3, 1))
   for(type in c("naso", "oro", "gut")) {
 
-    startplot()
+    if(type == "naso") startplot(c(-0.01, 0.017)) else if(type == "oro") startplot(c(-0.017, 0.01)) else startplot()
     itype <- means$type == type
     label <- 1:sum(itype)
 
     # Add points
     points(means$D_nO2[itype], means$D_nH2O[itype], pch = pch[[type]], col = black50, bg = col[[type]])
     dx <- rep(0, sum(itype))
-    dy <- rep(0.0018, sum(itype))
+    dy <- 0.002
+    if(type == "gut") dy <- 0.0022
+    dy <- rep(dy, sum(itype))
+    if(type == "naso") {
+      dx[6] <- 0.0002
+    }
     if(type == "gut") {
-      dy[c(5, 6, 7)] <- -0.0018
-      dx[5] <- -0.0002
-      dx[6] <- 0.0003
-      dx[9] <- 0.0003
+      dy[c(1, 3, 6, 7, 11)] <- -0.0018
+      dx[6] <- -0.0002
+      dx[7] <- 0.0003
+      dy[8] <- 0
+      dx[8] <- -0.0007
+      dx[10] <- 0.0003
     }
     # Label points
     text(means$D_nO2[itype] + dx, means$D_nH2O[itype] + dy, label, cex = 0.8)
@@ -613,14 +620,23 @@ microhum_4 <- function(pdf = FALSE) {
   ## Panel E: nH2O-nO2 plots for community reference proteomes in IBD 20230723
   par(mar = c(4, 4, 3, 1))
   type <- "IBD"
-  startplot()
+  startplot(c(-0.025, 0.005), c(-0.01, 0.025))
   itype <- means$type == type
   label <- 1:sum(itype)
   # Add points
   points(means$D_nO2[itype], means$D_nH2O[itype], pch = pch[[type]], col = black50, bg = col[[type]])
+  # Label points
   dx <- rep(0, sum(itype))
   dy <- rep(0.0018, sum(itype))
-  # Label points
+  dx[13] <- -0.0015
+  dy[13] <- 0.001
+  dx[15] <- 0.0002
+  dx[9] <- 0.0008
+  dy[9] <- -0.0012
+  dx[5] <- 0.0012
+  dy[5] <- 0
+  dy[c(12, 16)] <- 0
+  dx[c(12, 16)] <- 0.0015
   text(means$D_nO2[itype] + dx, means$D_nH2O[itype] + dy, label, cex = 0.8)
   # Plot p-values 20230204
   plot.p.values(means$nO2_dn[itype], means$nO2_up[itype], means$nH2O_dn[itype], means$nH2O_up[itype], paired = TRUE)
@@ -707,7 +723,9 @@ microhum_5 <- function(pdf = FALSE) {
     #requireNamespace("plot.matrix")
     # Temporarily suppress the x-axis
     opar <- par(xaxt = "n")
-    plot(D_abundance, col = col, breaks = breaks, main = "", xlab = "", ylab = paste(disease, "Dataset"))
+    ylab <- paste(disease, "dataset")
+    ylab <- gsub("COVID", hyphen.in.pdf("COVID-19"), ylab)
+    plot(D_abundance, col = col, breaks = breaks, main = "", xlab = "", ylab = ylab)
     par(opar)
 
     # Add triangles to indicate values beyond the color scale
@@ -737,7 +755,7 @@ microhum_5 <- function(pdf = FALSE) {
     axis(1, at = seq_along(labels), labels = FALSE)
     if(disease == "COVID") {
       # Add legend title
-      text(29.5, -1.5, "Change in\nrelative abundance\n(patient - control)", xpd = NA, cex = 1.2)
+      text(ncol(D_abundance) + 1.5, -2, "Change in\nrelative abundance\n(patient - control)", xpd = NA, cex = 1.2)
     }
 
   }
@@ -782,9 +800,9 @@ microhum_6 <- function(pdf = FALSE) {
   }
 
   # Panel C: Percent of aerotolerant genera in COVID-19 or IBD vs controls 20230726
-  startplot <- function(ylab) {
-    plot(c(0, 100), c(0, 100), type = "n", xlab = "Controls (% aerotolerant)", ylab = ylab)
-    lines(c(0, 100), c(0, 100), lty = 2, col = 8)
+  startplot <- function(ylab, xymax = 100) {
+    plot(c(0, xymax), c(0, xymax), type = "n", xlab = "Controls (% aerotolerant)", ylab = ylab)
+    lines(c(0, xymax), c(0, xymax), lty = 2, col = 8)
   }
   # Colors and point symbols for sample types
   col <- list(naso = col_Nasal, oro = col_Oral, gut = col_Gut, IBD = col_IBD)
@@ -799,14 +817,19 @@ microhum_6 <- function(pdf = FALSE) {
 
   # Loop over sample groups
   for(type in c("naso", "oro", "gut", "IBD")) {
-    if(type == "IBD") startplot("IBD (% aerotolerant)") else startplot(hyphen.in.pdf("COVID-19 (% aerotolerant)"))
+    if(type == "IBD") ylab <- "IBD (% aerotolerant)" else ylab <- hyphen.in.pdf("COVID-19 (% aerotolerant)")
+    if(type %in% c("gut", "IBD")) xymax <- 60 else xymax <- 100
+    startplot(ylab, xymax)
     itype <- metrics$type == type
     label <- 1:sum(itype)
 
     # Add points
     points(control[itype], disease[itype], pch = pch[[type]], col = black50, bg = col[[type]])
     dx <- rep(0, sum(itype))
-    dy <- rep(4, sum(itype))
+    dy <- 4
+    if(type == "gut") dy <- 3
+    if(type == "IBD") dy <- 2.2
+    dy <- rep(dy, sum(itype))
     if(type == "naso") {
       dy[9] <- -4
     }
@@ -815,14 +838,21 @@ microhum_6 <- function(pdf = FALSE) {
       dx[9] <- -4
     }
     if(type == "gut") {
-      dy[c(3, 9)] <- -4
+      dy[c(4, 10)] <- -2.5
+      dy[2] <- 0
+      dx[2] <- -2
     }
     if(type == "IBD") {
-      dy[7] <- -4
-      dy[10] <- 0
-      dx[10] <- 4
-      dx[4] <- 2
-      dx[3] <- -2
+      dy[c(8, 11)] <- -3
+      dy[c(13, 16)] <- 0
+      dx[c(13, 16)] <- 3
+      dx[5] <- 2
+      dy[5] <- 1
+      dx[c(6, 7)] <- -2
+      dx[7] <- -1.5
+      dy[6] <- 0
+      dy[7] <- -2
+      dx[10] <- -1
     }
     # Label points
     text(control[itype] + dx, disease[itype] + dy, label)
@@ -1064,9 +1094,11 @@ dataset_metrics <- function() {
     # COVID-19 oral/oropharyngeal
     oro = c("RFH+22_Oral", "IZC+21", "GBS+22", "WCJ+21_Oral", "XLZ+21", "MAC+21", "MLW+21_Oropharyngeal", "GWL+21", "RWC+21_Oral"),
     # COVID-19 gut
-    gut = c("ZZZ+21", "RFH+22_Gut", "KMG+21", "WCJ+21_Gut", "CGC+22", "GCW+20", "MMP+21", "NGH+21", "RDM+22", "MIK+22", "FBD+22", "RWC+21_Gut", "SRK+22"),
+    gut = c("MZW+23", "ZZZ+21", "RFH+22_Gut", "KMG+21", "WCJ+21_Gut", "CGC+22", "GCW+20", "MMP+21",
+            "NGH+21", "RDM+22", "MIK+22", "WZL+23", "AHM+21", "FBD+22", "RWC+21_Gut", "SRK+22"),
     # IBD gut
-    IBD = c("TWC+22", "ZTG+21", "ASM+23", "AAM+20", "LZD+19", "MDV+22", "LAA+19", "GKD+14", "WGL+19", "RAF+20")
+    IBD = c("TWC+22", "ZTG+21", "ASM+23", "DKK+23", "AAM+20", "PYL+23", "MLL+16", "LZD+19",
+            "BKK+17", "MDV+22", "LAA+19", "REP+23", "HBL+17", "GKD+14", "WGL+19", "RAF+20")
   )
   # Loop over groups of datasets
   for(i in 1:4) {
@@ -1087,7 +1119,7 @@ dataset_metrics <- function() {
 
   # Round values 20230212
   out[, 5:22] <- signif(out[, 5:22], 6)
-  file <- "dataset_metrics.csv"
+  file <- "16S/dataset_metrics.csv"
   write.csv(out, file, row.names = FALSE, quote = FALSE)
 
 }

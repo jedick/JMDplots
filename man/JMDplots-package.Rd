@@ -81,6 +81,13 @@ The plots are available in the corresponding vignettes in the package.
           Used in \code{\link{evdevH2O}}.
         }
 
+        \item{\code{yeastgfp.csv.xz}}{
+          Has 28 columns; the names of the first five are \code{yORF}, \code{gene name}, \code{GFP tagged?}, \code{GFP visualized?}, and \code{abundance}.
+          The remaining columns correspond to the 23 subcellular localizations considered in the YeastGFP project (Huh et al., 2003 and Ghaemmaghami et al., 2003) and hold values of either \code{T} or \code{F} for each protein.
+          \samp{yeastgfp.csv} was downloaded on 2007-02-01 from http://yeastgfp.ucsf.edu using the Advanced Search, setting options to download the entire dataset and to include localization table and abundance, sorted by orf number.
+          Used in \code{\link{yeastgfp}}.
+        }
+
 
       }
 

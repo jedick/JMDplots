@@ -76,7 +76,7 @@ microhum_4()
 
 ## Differences of relative abundances of genera between controls and patients (Figure 5)
 ```{r microhum_5, message = FALSE, out.width='100%', fig.width = 10, fig.height = 8.5, pngquant = pngquant, dpi = 100}
-microhum_5()
+Figure_5_genera <- microhum_5()
 ```
 
 ## Oxygen tolerance of genera in body sites, COVID-19, and IBD (Figure 6)
@@ -140,5 +140,10 @@ UHGG_taxonomy <- read.csv(system.file("extdata/RefDB/UHGG/taxonomy.csv.xz", pack
 print(paste("UHGG (contamination < 2% and completeness > 95%):", nrow(UHGG_taxonomy), "species-level clusters and", length(unique(UHGG_taxonomy$genus)), "genera"))
 ```
 
+## List genera identified in Figure 5 that are not present in UHGG
+```{r genera_not_in_UHGG}
+not_in_UHGG <- paste(Figure_5_genera[!Figure_5_genera %in% UHGG_taxonomy_full$genus], collapse = " ")
+paste("Figure 5 shows", length(Figure_5_genera), "genera; of these,", not_in_UHGG, "is not in UHGG")
+```
 
 ## References

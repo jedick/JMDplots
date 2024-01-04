@@ -43,18 +43,6 @@ For \code{yeastgfp}, a list with elements named \code{protein} (names of protein
 If \code{location} is NULL, \code{yeastgfp} returns the names of all known locations, and if the length of \code{location} is >1, the \code{protein} and \code{abundance} values are lists of the results for each location.
 }
 
-\section{Files in extdata/RefDB/organisms}{
-  \describe{
-    \item{\code{yeastgfp.csv.xz}}{
-      Has 28 columns; the names of the first five are \code{yORF}, \code{gene name}, \code{GFP tagged?}, \code{GFP visualized?}, and \code{abundance}.
-      The remaining columns correspond to the 23 subcellular localizations considered in the YeastGFP project (Huh et al., 2003 and Ghaemmaghami et al., 2003) and hold values of either \code{T} or \code{F} for each protein.
-      \samp{yeastgfp.csv} was downloaded on 2007-02-01 from http://yeastgfp.ucsf.edu using the Advanced Search, setting options to download the entire dataset and to include localization table and abundance, sorted by orf number.
-      Used in \code{yeastgfp}.
-    }
-  }
-}
-
-
 \seealso{
 \code{\link{scsc}}
 }
