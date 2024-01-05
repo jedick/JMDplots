@@ -115,7 +115,7 @@ ARAST <- function(inputfile, proc = parallel::detectCores(), mode = "protein", r
     }
     # Count number of sequences in input file
     input_sequences <- count_sequences(inputfile, filetype)
-    stats <- c(stats, inputfile = inputfile, input_sequences = input_sequences)
+    stats <- c(stats, inputfile = basename(inputfile), input_sequences = input_sequences)
   } else stop("Step 1 is required")
 
   if(2 %in% steps) {
