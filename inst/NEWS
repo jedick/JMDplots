@@ -1,8 +1,12 @@
 CHANGES IN JMDplots 1.2.19
 --------------------------
 
+- 20240109 utogig4() now shows average rankings for groups as *percentage*
+  values.
+
 - 20231231 plot_starburst() shows chemical metrics of parent taxa and their
-  children.
+  children. This is a new function modified from taxacomp() previously in
+  geo16S_util.R and is used geo16S1() and microhum_2().
 
 - 20231218 extdata/evdevH2O/LMM16: Save space by summing amino acid
   compositions for proteins in each gene age category (post-publication

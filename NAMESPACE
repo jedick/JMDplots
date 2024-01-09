@@ -118,7 +118,9 @@ importFrom("CHNOSZ",
   # evdevH2O
   "protein.OBIGT", "syslab",
   # mjenergy
-  "E.units"
+  "E.units",
+  # utogig
+  "rank.affinity"
 )
 
 # Imports from canprot

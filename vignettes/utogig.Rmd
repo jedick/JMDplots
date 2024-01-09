@@ -62,6 +62,9 @@ This vignette runs the code to make the plots from the following paper:
 
 [Click here](https://onlinelibrary.wiley.com/share/author/Q9GIUWDD4K8NQ4IDJK4C?target=10.1111/gbi.12532) for full-text access to a view-only version of the paper.
 
+On 2024-01-09, Figure 4 was modified from the original publication to show *percentages* of average affinity rankings of groups.
+This does not change the crossover points of the lines (on the *x* axis), but does make the absolute positions of the lines (on the *y* axis) not depend on the number of genomes in each group.
+
 This vignette was compiled on `r Sys.Date()` with **[JMDplots](https://github.com/jedick/JMDplots)** `r packageDescription("JMDplots")$Version` and **[CHNOSZ](http://chnosz.net)** `r packageDescription("CHNOSZ")$Version`.
 
 ```{r library, message = FALSE}
