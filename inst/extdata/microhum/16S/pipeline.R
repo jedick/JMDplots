@@ -78,8 +78,6 @@ writeLines(con = file, text = gsub(" ", "", c(
   "RFH+22, FALSE, 440",
   # Tissue experiments 20220721
   "BPB+21, FALSE, 250",
-  # IBD 20220827
-  "TWC+22, FALSE, 310",
   # COVID 20220921-20220922
   "FBD+22, TRUE, 305",
   "MIK+22, FALSE, 440",
@@ -107,7 +105,6 @@ writeLines(con = file, text = gsub(" ", "", c(
   "DKK+23, TRUE, 400",
   "HBL+17, TRUE, 99",
   "MLL+16, FALSE, 250",
-  "MZW+23, FALSE, 410",
   "PYL+23, FALSE, 440",
   "REP+23, FALSE, 310",
   "WZL+23, FALSE, 410"
@@ -156,16 +153,16 @@ filter <- function(RUNID) {
   # The output file from this function is a FASTA file with .fa suffix
   outfile <- paste0(RUNID, ".fa")
 
-  if(study %in% c("TWC+22")) {
-    # For TWC+22, FASTQ files were downloaded from Zenodo 20220829
-    fqdump <- FALSE
-  } else {
+#  if(study %in% c("TWC+22")) {
+#    # For TWC+22, FASTQ files were downloaded from Zenodo 20220829
+#    fqdump <- FALSE
+#  } else {
     # Generate input FASTQ files with fastq-dump
     fqdump <- TRUE
     cmd <- paste("fastq-dump --split-files --skip-technical --clip", RUNID)
     print(cmd)
     system(cmd)
-  }
+#  }
 
   if(is454) {
     # For 454 studies, fastq-dump --skip-technical puts biological sequences into file with highest-numbered suffix 
@@ -246,13 +243,13 @@ filter <- function(RUNID) {
     system(cmd)
   }
 
-  if(study %in% c("TWC+22")) {
-    # Prefix Run ID to header so we can extract the reads in the subsample() and findchimeras() steps 20220829
-    lines <- readLines(outfile)
-    ihead <- grep("^>", lines)
-    lines[ihead] <- paste0(">", RUNID, ";", gsub("^>", "", lines[ihead]))
-    writeLines(lines, outfile)
-  }
+#  if(study %in% c("TWC+22")) {
+#    # Prefix Run ID to header so we can extract the reads in the subsample() and findchimeras() steps 20220829
+#    lines <- readLines(outfile)
+#    ihead <- grep("^>", lines)
+#    lines[ihead] <- paste0(">", RUNID, ";", gsub("^>", "", lines[ihead]))
+#    writeLines(lines, outfile)
+#  }
 
   # Clean up
   if(fqdump) file.remove(Sys.glob("*.fastq"))

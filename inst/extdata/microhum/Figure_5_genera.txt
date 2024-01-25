@@ -9,7 +9,6 @@ Staphylococcus
 Anaerostipes
 Streptococcus
 Ligilactobacillus
-Pediococcus
 Latilactobacillus
 Haemophilus_D
 Phascolarctobacterium
@@ -18,8 +17,6 @@ Acinetobacter
 Bacteroides
 Veillonella
 Blautia_A
-Anaerobutyricum
-Fusicatenibacter
 Escherichia
 Prevotella
 Pseudocitrobacter

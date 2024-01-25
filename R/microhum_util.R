@@ -199,12 +199,6 @@ getmdat_microhum <- function(study, metrics = NULL, dropNA = TRUE, quiet = TRUE)
     col <- sapply(metadata$Status, switch, Control = 4, "COVID-19" = 2, NA)
   }
 
-  # 20230321 Ulcerative colitis
-  if(study == "TWC+22") {
-    status <- ifelse(grepl("UC", metadata$Sample), "UC", "Healthy")
-    pch <- sapply(status, switch, Healthy = 24, UC = 25, NA)
-    col <- sapply(status, switch, Healthy = 4, UC = 2, NA)
-  }
   # 20230322 IBD
   if(study == "LAA+19") {
     pch <- sapply(metadata$Disease, switch, nonIBD = 24, UC = 25, CD = 25, NA)
@@ -289,10 +283,6 @@ getmdat_microhum <- function(study, metrics = NULL, dropNA = TRUE, quiet = TRUE)
   if(study == "AHM+21") {
     pch <- sapply(metadata$COVID, switch, negative = 24, positive = 25)
     col <- sapply(metadata$COVID, switch, negative = 4, positive = 2)
-  }
-  if(study == "MZW+23") {
-    pch <- ifelse(grepl("HC", metadata$SampleName), 24, 25)
-    col <- ifelse(grepl("HC", metadata$SampleName), 4, 2)
   }
   if(study == "WZL+23") {
     pch <- ifelse(grepl("HC", metadata$Sample), 24, 25)

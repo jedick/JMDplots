@@ -218,13 +218,10 @@ microhum_2 <- function(pdf = FALSE) {
       xadj[gvals$taxon == "Phocaeicola"] <- 0.1
       yadj[gvals$taxon == "Blautia_A"] <- 1.2
       xadj[gvals$taxon == "Blautia_A"] <- 0.5
-      yadj[gvals$taxon == "Anaerobutyricum"] <- -0.5
-      xadj[gvals$taxon == "Anaerobutyricum"] <- 0.05
       xadj[gvals$taxon == "Escherichia"] <- 0.2
       yadj[gvals$taxon == "Escherichia"] <- 1.4
       yadj[gvals$taxon == "Anaerostipes"] <- -0.3
       xadj[gvals$taxon == "Anaerostipes"] <- 0.08
-      yadj[gvals$taxon == "Pediococcus"] <- 0.2
       yadj[gvals$taxon == "Enterococcus_B"] <- 0.4
       yadj[gvals$taxon == "Haemophilus_D"] <- 0.8
       yadj[gvals$taxon == "Latilactobacillus"] <- -0.1
@@ -234,7 +231,6 @@ microhum_2 <- function(pdf = FALSE) {
       yadj[gvals$taxon == "Finegoldia"] <- 0
       yadj[gvals$taxon == "Latilactobacillus"] <- 0
       yadj[gvals$taxon == "Campylobacter_B"] <- 0.8
-      yadj[gvals$taxon == "Anaerobutyricum"] <- 0.8
       xadj[gvals$taxon == "Enterococcus_B"] <- 1.03
       yadj[gvals$taxon == "Lactobacillus"] <- 0.3
       yadj[gvals$taxon == "Bacteroides"] <- 0
@@ -513,12 +509,12 @@ microhum_4 <- function(pdf = FALSE) {
       dx[6] <- 0.0002
     }
     if(type == "gut") {
-      dy[c(1, 3, 6, 7, 10)] <- -0.0018
-      dx[6] <- -0.0002
-      dx[7] <- 0.0003
-      dy[8] <- 0
-      dx[8] <- -0.0007
-      dx[9] <- 0.0003
+      dy[c(2, 5, 6, 9)] <- -0.0018
+      dx[5] <- -0.0002
+      dx[6] <- 0.0003
+      dy[7] <- 0
+      dx[7] <- -0.0007
+      dx[8] <- 0.0003
     }
     # Label points
     text(means$D_nO2[itype] + dx, means$D_nH2O[itype] + dy, label, cex = 0.8)
@@ -639,15 +635,15 @@ microhum_4 <- function(pdf = FALSE) {
   # Label points
   dx <- rep(0, sum(itype))
   dy <- rep(0.0018, sum(itype))
-  dx[13] <- -0.0015
-  dy[13] <- 0.001
-  dx[15] <- 0.0002
-  dx[9] <- 0.0008
-  dy[9] <- -0.0012
-  dx[5] <- 0.0012
-  dy[5] <- 0
-  dy[c(12, 16)] <- 0
-  dx[c(12, 16)] <- 0.0015
+  dx[12] <- -0.0015
+  dy[12] <- 0.001
+  dx[14] <- 0.0002
+  dx[8] <- 0.0008
+  dy[8] <- -0.0012
+  dx[4] <- 0.0012
+  dy[4] <- 0
+  dy[c(11, 15)] <- 0
+  dx[c(11, 15)] <- 0.0015
   text(means$D_nO2[itype] + dx, means$D_nH2O[itype] + dy, label, cex = 0.8)
   # Plot p-values 20230204
   plot.p.values(means$nO2_dn[itype], means$nO2_up[itype], means$nH2O_dn[itype], means$nH2O_up[itype], paired = TRUE)
@@ -849,21 +845,21 @@ microhum_6 <- function(pdf = FALSE) {
       dx[9] <- -4
     }
     if(type == "gut") {
-      dy[c(4, 9)] <- -2.5
-      dy[2] <- 0
-      dx[2] <- -2
+      dy[c(3, 8)] <- -2.5
+      dy[1] <- 0
+      dx[1] <- -2
     }
     if(type == "IBD") {
-      dy[c(8, 11)] <- -3
-      dy[c(13, 16)] <- 0
-      dx[c(13, 16)] <- 3
-      dx[5] <- 2
-      dy[5] <- 1
-      dx[c(6, 7)] <- -2
-      dx[7] <- -1.5
-      dy[6] <- 0
-      dy[7] <- -2
-      dx[10] <- -1
+      dy[c(7, 10)] <- -3
+      dy[c(12, 15)] <- 0
+      dx[c(12, 15)] <- 3
+      dx[4] <- 2
+      dy[4] <- 1
+      dx[c(5, 6)] <- -2
+      dx[6] <- -1.5
+      dy[5] <- 0
+      dy[6] <- -2
+      dx[9] <- -1
     }
     # Label points
     text(control[itype] + dx, disease[itype] + dy, label)
@@ -1105,10 +1101,10 @@ dataset_metrics <- function() {
     # COVID-19 oral/oropharyngeal
     oro = c("RFH+22_Oral", "IZC+21", "GBS+22", "WCJ+21_Oral", "XLZ+21", "MAC+21", "MLW+21_Oropharyngeal", "GWL+21", "RWC+21_Oral"),
     # COVID-19 gut
-    gut = c("MZW+23", "ZZZ+21", "RFH+22_Gut", "KMG+21", "WCJ+21_Gut", "CGC+22", "GCW+20",
-            "NGH+21", "RDM+22", "MIK+22", "WZL+23", "AHM+21", "FBD+22", "RWC+21_Gut", "SRK+22"),
+    gut = c("ZZZ+21", "RFH+22_Gut", "KMG+21", "WCJ+21_Gut", "CGC+22", "GCW+20", "NGH+21",
+            "RDM+22", "MIK+22", "WZL+23", "AHM+21", "FBD+22", "RWC+21_Gut", "SRK+22"),
     # IBD gut
-    IBD = c("TWC+22", "ZTG+21", "ASM+23", "DKK+23", "AAM+20", "PYL+23", "MLL+16", "LZD+19",
+    IBD = c("ZTG+21", "ASM+23", "DKK+23", "AAM+20", "PYL+23", "MLL+16", "LZD+19",
             "BKK+17", "MDV+22", "LAA+19", "REP+23", "HBL+17", "GKD+14", "WGL+19", "RAF+20")
   )
   # Loop over groups of datasets
