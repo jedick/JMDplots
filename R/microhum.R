@@ -222,8 +222,6 @@ microhum_2 <- function(pdf = FALSE) {
       xadj[gvals$taxon == "Anaerobutyricum"] <- 0.05
       xadj[gvals$taxon == "Escherichia"] <- 0.2
       yadj[gvals$taxon == "Escherichia"] <- 1.4
-      yadj[gvals$taxon == "Enterococcus"] <- -0.2
-      xadj[gvals$taxon == "Enterococcus"] <- 0.08
       yadj[gvals$taxon == "Anaerostipes"] <- -0.3
       xadj[gvals$taxon == "Anaerostipes"] <- 0.08
       yadj[gvals$taxon == "Pediococcus"] <- 0.2
@@ -234,7 +232,6 @@ microhum_2 <- function(pdf = FALSE) {
     }
     if(refdb[i] == "UHGG") {
       yadj[gvals$taxon == "Finegoldia"] <- 0
-      xadj[gvals$taxon == "Enterococcus"] <- 1.03
       yadj[gvals$taxon == "Latilactobacillus"] <- 0
       yadj[gvals$taxon == "Campylobacter_B"] <- 0.8
       yadj[gvals$taxon == "Anaerobutyricum"] <- 0.8
@@ -516,12 +513,12 @@ microhum_4 <- function(pdf = FALSE) {
       dx[6] <- 0.0002
     }
     if(type == "gut") {
-      dy[c(1, 3, 6, 7, 11)] <- -0.0018
+      dy[c(1, 3, 6, 7, 10)] <- -0.0018
       dx[6] <- -0.0002
       dx[7] <- 0.0003
       dy[8] <- 0
       dx[8] <- -0.0007
-      dx[10] <- 0.0003
+      dx[9] <- 0.0003
     }
     # Label points
     text(means$D_nO2[itype] + dx, means$D_nH2O[itype] + dy, label, cex = 0.8)
@@ -852,7 +849,7 @@ microhum_6 <- function(pdf = FALSE) {
       dx[9] <- -4
     }
     if(type == "gut") {
-      dy[c(4, 10)] <- -2.5
+      dy[c(4, 9)] <- -2.5
       dy[2] <- 0
       dx[2] <- -2
     }
@@ -1108,7 +1105,7 @@ dataset_metrics <- function() {
     # COVID-19 oral/oropharyngeal
     oro = c("RFH+22_Oral", "IZC+21", "GBS+22", "WCJ+21_Oral", "XLZ+21", "MAC+21", "MLW+21_Oropharyngeal", "GWL+21", "RWC+21_Oral"),
     # COVID-19 gut
-    gut = c("MZW+23", "ZZZ+21", "RFH+22_Gut", "KMG+21", "WCJ+21_Gut", "CGC+22", "GCW+20", "MMP+21",
+    gut = c("MZW+23", "ZZZ+21", "RFH+22_Gut", "KMG+21", "WCJ+21_Gut", "CGC+22", "GCW+20",
             "NGH+21", "RDM+22", "MIK+22", "WZL+23", "AHM+21", "FBD+22", "RWC+21_Gut", "SRK+22"),
     # IBD gut
     IBD = c("TWC+22", "ZTG+21", "ASM+23", "DKK+23", "AAM+20", "PYL+23", "MLL+16", "LZD+19",

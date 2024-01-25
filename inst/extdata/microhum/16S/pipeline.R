@@ -53,8 +53,6 @@ file <- tempfile()
 writeLines(con = file, text = gsub(" ", "", c(
   # For 454 experiments, set forwardonly to NA
   "study, forwardonly, trunclen",
-  # COVID 20210731
-  "MMP+21, TRUE, 200",
   # COVID 20210717
   "XLZ+21, TRUE, 250",
   "MAC+21, FALSE, 350",

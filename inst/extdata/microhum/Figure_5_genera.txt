@@ -3,7 +3,6 @@ Campylobacter_B
 Finegoldia
 Anaerococcus
 Enterococcus_B
-Enterococcus
 Catenibacterium
 Lactobacillus
 Staphylococcus

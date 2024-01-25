@@ -25,12 +25,6 @@ getmdat_microhum <- function(study, metrics = NULL, dropNA = TRUE, quiet = TRUE)
   # NOTE: 'pch' is used to define sample group for other functions,
   # i.e. pch = 24 for control and pch = 25 for patient
 
-  # 20210801 COVID-19 Gut
-  if(study == "MMP+21") {
-    pch <- sapply(metadata$Severity, switch, Mild = 24, Moderate = 20, Severe = 25)
-    col <- sapply(metadata$Severity, switch, Mild = 4, Moderate = 1, Severe = 2)
-  }
-
   # 20220803 COVID-19 Gut
   if(study == "CGC+22") {
     pch <- sapply(metadata$Type, switch, Control = 24, Convalescence = 20, Acute = 25, NA)
