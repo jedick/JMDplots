@@ -91,7 +91,7 @@ The data files listed below are stored in \file{extdata/microhum}:
 \section{Data and scripts for metagenome-assembled genomes (MAGs)}{
   \describe{
     \item{\file{KWL22}}{Directory with scripts and data for analyzing MAGs from Ke et al. (2022)}
-    \item{\file{KWL22/COVID19_metadata.txt}}{Downloaded from \url{https://github.com/Owenke247/COVID-19/blob/main/Pre-processed_Files/COVID19_metadata.txt}}
+    \item{\file{KWL22/BioSample_metadata.txt}}{BioSample metadata obtained from NCBI BioProjects PRJNA624223 and PRJNA650244}
     \item{\file{KWL22/mkaa.R}}{Script to get amino acid compositions for proteins predicted by Prodigal}
     \item{\file{KWL22/KWL22_MAGs_prodigal_aa.csv.xz}}{Output of mkaa.R with amino acid compositions of proteins for 5403 MAGs}
   }

@@ -30,9 +30,7 @@ See the manual page associated with each paper for additional details about scri
 
     - [mkaa.R](inst/extdata/microhum/KWL22/mkaa.R): *script*: metaproteome processing
     - [KWL22_MAGs_prodigal_aa.csv.xz](inst/extdata/microhum/KWL22/KWL22_MAGs_prodigal_aa.csv.xz): *output file*: amino acid composition
-<!--
-    - [COVID19_metadata.txt](inst/extdata/microhum/KWL22/COVID19_metadata.txt): *data*: downloaded from <https://github.com/Owenke247/COVID-19/blob/main/Pre-processed_Files/COVID19_metadata.txt>
--->
+    - [BioSample_metadata.txt](inst/extdata/microhum/KWL22/BioSample_metadata.txt): *data*: BioSample metadata for MAGs obtained from NCBI BioProjects [PRJNA624223](https://www.ncbi.nlm.nih.gov/bioproject/PRJNA624223/) and [PRJNA650244](https://www.ncbi.nlm.nih.gov/bioproject/PRJNA650244/).
 
   - [metaproteome](inst/extdata/microhum/metaproteome): analysis of metaproteomes
 

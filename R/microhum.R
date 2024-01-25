@@ -564,8 +564,8 @@ microhum_4 <- function(pdf = FALSE) {
   ## Panel B: Boxplots for nH2O and nO2 in fecal MAGs 20221029
   # Read amino acid compositions of proteins predicted from MAGs
   aa <- read.csv(file.path(getdatadir(), "KWL22/KWL22_MAGs_prodigal_aa.csv.xz"))
-  # https://github.com/Owenke247/COVID-19/blob/main/Pre-processed_Files/COVID19_metadata.txt
-  dat <- read.csv(file.path(getdatadir(), "KWL22/COVID19_metadata.txt"), sep = "\t")
+  # BioSample metadata
+  dat <- read.csv(file.path(getdatadir(), "KWL22/BioSample_metadata.csv"))
   # Set SRA run prefix to choose study:
   # SRR1232: Zuo et al. (PRJNA624223)
   # SRR1307: Yeoh et al. (PRJNA650244)
@@ -580,11 +580,11 @@ microhum_4 <- function(pdf = FALSE) {
     ylim <- ylims[[metric]]
     if(metric == "nO2") ylim <- c(-0.85, -0.55)
     # Get names of groups
-    idat <- match(thisaa$protein, dat$Dat)
+    idat <- match(thisaa$protein, dat$Run)
     group <- dat$Group[idat]
     # Make list of values in each group
     if(SRAprefix == "SRR1232") x_list <- list(Control = x[group == "Healthy_controls"], "COVID-19" = x[group == "COVID19"])
-    if(SRAprefix == "SRR1307") x_list <- list(Control = x[group == "Healthy_control"], "COVID-19" = x[group == "COVID19"])
+    if(SRAprefix == "SRR1307") x_list <- list(Control = x[group == "non-COVID-19"], "COVID-19" = x[group == "COVID-19"])
     # Make boxplot
     boxplotfun(metric, x_list, ylim)
     figlab <- hyphen.in.pdf("B. Gut MAGs (Ke et al., 2022; Yeoh et al., 2021)")
