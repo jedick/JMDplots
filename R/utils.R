@@ -13,14 +13,6 @@ addexif <- function(name, title, paperref) {
   tryCatch(system(cmd), error = function(e) {})
 }
 
-# Add transparency to given color (moved from geo16S.R and exported on 20220223)
-addalpha <- function(col, alpha) {
-  x <- col2rgb(col)
-  newcol <- rgb(x[1], x[2], x[3], maxColorValue = 255)
-  newcol <- paste0(newcol, alpha)
-  newcol
-}
-
 # Function to add significant difference letters 20220531
 # Moved from utogig.R and exported 20220609
 cldfun <- function(Zclist, bp, dy) {

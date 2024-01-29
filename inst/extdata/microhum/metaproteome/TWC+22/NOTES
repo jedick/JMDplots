@@ -1,0 +1,21 @@
+[20220829]
+
+https://ftp.pride.ebi.ac.uk/pride/data/archive/2021/06/PXD022433
+
+
+for i in H1 H2 H3 H4 H5 H6 H7 H8 UC1 UC2 UC4 UC5 UC6 UC8 UC9 UC11 UC15 UC23F; do
+  wget https://ftp.pride.ebi.ac.uk/pride/data/archive/2021/06/PXD022433/$i.mzid.gz
+done
+
+OLD (peptides):
+
+for i in H1 H2 H3 H4 H5 H6 H7 H8 UC1 UC2 UC4 UC5 UC6 UC8 UC9 UC11 UC15 UC23F; do
+  zcat $i.mzid.gz  | grep PeptideSequence | sed -e s/.*\<PeptideSequence\>//g | sed -e s/\<.*//g > ${i}_peptides.txt
+done
+
+[20220830]
+
+NEW (get protein database accessions):
+for i in H1 H2 H3 H4 H5 H6 H7 H8 UC1 UC2 UC4 UC5 UC6 UC8 UC9 UC11 UC15 UC23F; do
+  zcat $i.mzid.gz | grep \<PeptideEvidence\ | grep isDecoy\=\"false\"  | sed -e s/.*\"DBSeq_//g | sed -e s/\".*//g > ${i}_proteinID.txt
+done

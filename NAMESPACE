@@ -61,8 +61,6 @@ export(
   # orp16S paper 20211003-20211008
   "orp16S_3", "orp16S_4", "orp16S_5", "orp16S_6", "orp16S_S1",
   "plotEZ", "plotMA",
-  # utilities 20220223
-  "addalpha",
   # utogig paper 20220420
   "utogig1", "utogig2", "utogig3", "utogigS2", "utogigS4", "calc_logaH2_intermediate",
   # Moving functions to chem16S package 20220506-20220513

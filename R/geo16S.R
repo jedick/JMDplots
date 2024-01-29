@@ -714,12 +714,12 @@ MG16S <- function(which, plot.lines = TRUE, lowest.level = NULL, lineage = NULL,
   }
 
   # Use semi-transparent colors 20220122
-  c1 <- addalpha(1, "80")
-  c2 <- addalpha(2, "b0")
-  c4 <- addalpha(4, "b0")
-  c5 <- addalpha(5, "b0")
-  c6 <- addalpha(6, "b0")
-  c8 <- addalpha(8, "b0")
+  c1 <- adjustcolor(1, alpha.f = 0.5)
+  c2 <- adjustcolor(2, alpha.f = 0.69)
+  c4 <- adjustcolor(4, alpha.f = 0.69)
+  c5 <- adjustcolor(5, alpha.f = 0.69)
+  c6 <- adjustcolor(6, alpha.f = 0.69)
+  c8 <- adjustcolor(8, alpha.f = 0.69)
 
   if(which == "Guerrero_Negro") {
     ## Guerrero Negro metagenome (Kunin et al., 2008)
@@ -1114,12 +1114,12 @@ geo16S5 <- function(pdf = FALSE) {
   label.figure("B", cex = 1.5, font = 2, xfrac = 0.04, yfrac = 0.96)
 
   # Use semi-transparent colors 20220122
-  c1 <- addalpha(1, "80")
-  c2 <- addalpha(2, "b0")
-  c4 <- addalpha(4, "b0")
-  c5 <- addalpha(5, "b0")
-  c6 <- addalpha(6, "b0")
-  c8 <- addalpha(8, "b0")
+  c1 <- adjustcolor(1, alpha.f = 0.5)
+  c2 <- adjustcolor(2, alpha.f = 0.69)
+  c4 <- adjustcolor(4, alpha.f = 0.69)
+  c5 <- adjustcolor(5, alpha.f = 0.69)
+  c6 <- adjustcolor(6, alpha.f = 0.69)
+  c8 <- adjustcolor(8, alpha.f = 0.69)
 
   # Start plot C
   xlab <- quote(italic(Z)[C]~"from shotgun metagenome")
@@ -1349,8 +1349,8 @@ geo16S_S3 <- function(pdf = FALSE) {
     igenera <- match(genera, metrics$group)
     # Use thicker lines and less transparency for phyla with fewer genera
     if(length(genera) < 50) lwd <- 2 else lwd <- 1
-    if(length(genera) < 50) alpha <- "a0" else alpha <- "50"
-    newcol <- addalpha(col, alpha)
+    if(length(genera) < 50) alpha.f <- 0.626 else alpha.f <- 0.312
+    newcol <- adjustcolor(col, alpha.f = alpha.f)
     for(i in igenera) lines(c(metrics$Zc[iphylum], metrics$Zc[i]), c(metrics$nH2O[iphylum], metrics$nH2O[i]), col = newcol, lwd = lwd)
     lwd
   }
@@ -1543,12 +1543,12 @@ geo16S_S6 <- function(pdf = FALSE) {
   AWDM15 <- read.csv(AWDM15file)
 
   # Use semi-transparent colors 20220122
-  c1 <- addalpha(1, "80")
-  c2 <- addalpha(2, "b0")
-  c4 <- addalpha(4, "b0")
-  c5 <- addalpha(5, "b0")
-  c6 <- addalpha(6, "b0")
-  c8 <- addalpha(8, "b0")
+  c1 <- adjustcolor(1, alpha.f = 0.5)
+  c2 <- adjustcolor(2, alpha.f = 0.69)
+  c4 <- adjustcolor(4, alpha.f = 0.69)
+  c5 <- adjustcolor(5, alpha.f = 0.69)
+  c6 <- adjustcolor(6, alpha.f = 0.69)
+  c8 <- adjustcolor(8, alpha.f = 0.69)
 
   for(name in c("Marcellus", "HMP")) {
 

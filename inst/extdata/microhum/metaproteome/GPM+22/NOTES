@@ -1,0 +1,20 @@
+[20220831]
+
+Table S1. Taxa identified and corresponding abundance based on the TSMs
+assigned at various taxonomical levels (superkingdom (Table S1a), phylum (Table
+S1b), class (Table S1c), order (Table S1d), family (Table S1e), and genus
+(Table S1f)).
+
+PXD024990
+
+[20220905]
+https://www.ebi.ac.uk/pride/archive/projects/PXD024990
+
+--> https://ftp.pride.ebi.ac.uk/pride/data/archive/2022/09/PXD024990/
+Get *.dat and *.mzid.gz files (all begin with "F")
+
+lftp https://ftp.pride.ebi.ac.uk/pride/data/archive/2022/09/PXD024990/
+mget F*
+
+# Keep top of *.dat files
+for i in `ls *.dat`; do head -n 83 $i > head/$i; done

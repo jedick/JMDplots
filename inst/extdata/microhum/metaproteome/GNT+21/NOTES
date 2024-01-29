@@ -1,0 +1,35 @@
+[20221104]
+
+The mass spectrometry proteomic data have been deposited in the
+ProteomeXchange Consortium (http://proteomecentral.proteomexch
+ange.org) via the PRIDE partner repository [78] with the dataset iden­
+tifier PXD022859. 
+
+http://proteomecentral.proteomexchange.org/cgi/GetDataset?ID=PXD022859
+(not yet publicly released --> sent email to pride-support@ebi.ac.uk)
+
+[20221105]
+
+Both meta-databases were merged with the human proteome. As a result, we
+identified a total of 187 (25%) microbial proteins and 569 (75%) human proteins
+(Supplementary Tables 9–12) in the saliva supernatant and cells using both
+databases (redundant and non-redundant). The intensities of these unique and
+razor peptides were further used for meta-protein quantification (Supplementary
+Table 9–12).
+
+--> TableS9-S12_Majority_Protein_IDs.txt
+
+To evaluate our metaproteomics data, we used a two-step data
+analysis: i) First, we built two different databases retrieved from human
+oral microbiome database (HOMD) [44] and Uniprot sources. 
+
+Download files with download_HOMD.R
+--> SEQF2791.faa not found
+
+[20221112]
+
+Download SEQF1616.faa (after SEQF2791 in Majority protein IDs for Table S12)
+
+[20230208]
+Table_S9.csv: saliva cells
+Table_S11.csv: saliva supernatant

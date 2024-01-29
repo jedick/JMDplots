@@ -35,15 +35,9 @@ specieslist <- list(
 Seawater.AS98 <- data.frame(T = 18, CO2 = log10(1e-4), H2 = log10(2e-9), pH = -log10(5e-9), "NH4+" = log10(5e-8), H2S = log10(1e-15), check.names = FALSE)
 
 # Make semi-transparent colors 20220223
-addalpha <- function(col, alpha) {
-  x <- col2rgb(col)
-  newcol <- rgb(x[1], x[2], x[3], maxColorValue = 255)
-  newcol <- paste0(newcol, alpha)
-  newcol
-}
-col4 <- addalpha(4, "b0")
-col8 <- addalpha(8, "b0")
-col2 <- addalpha(2, "b0")
+col4 <- adjustcolor(4, alpha.f = 0.69)
+col8 <- adjustcolor(8, alpha.f = 0.69)
+col2 <- adjustcolor(2, alpha.f = 0.69)
 
 # Read methanogen tree
 methanogen_tree <- read.tree(system.file("extdata/utogig/methanogen_tree.txt", package = "JMDplots"))
@@ -206,7 +200,7 @@ utogig2 <- function(pdf = FALSE, logact = -3) {
     abline(h = 0, lty = 4)
 
     pchs <- c(21:25, 20)
-    cols <- sapply(c(7, 5, 8, 5, 3, 1), addalpha, alpha = "b0")
+    cols <- adjustcolor(c(7, 5, 8, 5, 3, 1), alpha.f = 0.69)
 
     # Loop over groups of species
     # Start with n-carboxylic acids (i = 2)
@@ -529,8 +523,8 @@ utogig4 <- function(pdf = FALSE) {
   par(mar = c(4, 4, 3, 1))
   
   # Faded colors
-  col4 <- addalpha(4, "b0")
-  col2 <- addalpha(2, "b0")
+  col4 <- adjustcolor(4, alpha.f = 0.69)
+  col2 <- adjustcolor(2, alpha.f = 0.69)
   # y-axis limits for boxplots
   ylim <- c(-0.25, -0.10)
   # Axis limits for affinity plots
