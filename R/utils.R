@@ -13,11 +13,15 @@ addexif <- function(name, title, paperref) {
   tryCatch(system(cmd), error = function(e) {})
 }
 
-# Function to add significant difference letters 20220531
+# Function to add significant difference letters to boxplot 20220531
 # Moved from utogig.R and exported 20220609
 cldfun <- function(Zclist, bp, dy) {
-  # Ugly one-liner to turn a list into a data frame with "group" column taken from names of the list elements
-  Zcdat <- do.call(rbind, sapply(1:length(Zclist), function(i) data.frame(group = names(Zclist)[i], Zc = Zclist[[i]]), simplify = FALSE))
+  # Add names if missing 20240202
+  if(is.null(names(Zclist))) names(Zclist) <- 1:length(Zclist)
+  # Remove empty elements 20240202
+  Zclist_1 <- Zclist[sapply(Zclist, length) != 0]
+  # Turn the list into a data frame with "group" column taken from names of the list elements
+  Zcdat <- do.call(rbind, sapply(1:length(Zclist_1), function(i) data.frame(group = names(Zclist_1)[i], Zc = Zclist_1[[i]]), simplify = FALSE))
   # One-way ANOVA and Tukey's Honest Significant Differences
   # Adapted from https://statdoe.com/one-way-anova-and-box-plot-in-r/
   anova <- aov(Zc ~ group, data = Zcdat)

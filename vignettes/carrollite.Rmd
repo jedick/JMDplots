@@ -1,0 +1,107 @@
+---
+title: "Stability of carrollite (2024)"
+output: 
+  rmarkdown::html_vignette:
+    mathjax: null
+vignette: >
+  %\VignetteIndexEntry{Stability of carrollite (2024)}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+bibliography: JMDplots.bib
+csl: elementa.csl
+link-citations: true
+---
+
+```{r setup, include=FALSE}
+library(knitr)
+## Use pngquant to reduce size of PNG images
+knit_hooks$set(pngquant = hook_pngquant)
+pngquant <- "--speed=1 --quality=0-25"
+# In case pngquant isn't available
+if (!nzchar(Sys.which("pngquant"))) pngquant <- NULL 
+```
+
+```{r HTML, include = FALSE}
+# Thermodynamic properties
+DG0f <- "&Delta;<i>G</i>&deg;<sub><i>f</i></sub>"
+S0 <- "<i>S</i>&deg;"
+Cp <- "<i>C<sub>p</sub></i>"
+logK <- "log&thinsp;<i>K</i>"
+logfO2 <- "log<i>f</i><sub>O<sub>2</sub></sub>"
+```
+
+This vignette runs the code to make selected plots from the following paper:
+
+> von der Heyden BP, Dick J, Rosenfels RC, Carlton L, Lilova K, Navrotsky A, Subramani T, Woodfield BF, Gibson A 2024. Growth and stability of stratiform carrollite (CuCo~2~S~4~) in the Tenke-Fungurume ore district, Central African Copperbelt. *The Canadian Journal of Mineralogy and Petrology* **62**(1): 77--93. doi: [10.3389/feart.2019.00180](https://doi.org/10.3389/feart.2019.00180)
+
+This vignette was compiled on `r Sys.Date()` with **[JMDplots](https://github.com/jedick/JMDplots)** `r packageDescription("JMDplots")$Version` and **[CHNOSZ](http://chnosz.net)** `r packageDescription("CHNOSZ")$Version`.
+
+```{r JMDplots, message = FALSE, results = "hide"}
+library(JMDplots)
+# Set plot resolution
+res <- if(nzchar(Sys.getenv("BUILD_LARGE_VIGNETTES"))) 400 else 75
+```
+
+## Check thermodynamic parameters for carrollite
+This compares the thermodynamic parameters for carrollite in the OBIGT database with values calculated on-the-fly.
+The latter values include computed parameters for the high-temperature polymorph and heat capacity coefficients for both polymorphs.
+After the test, we reset the OBIGT database so the testing data don't get in the way of the following calculations.
+```{r check_carrollite, message = FALSE}
+# Calculate parameters
+calc <- calc_carrollite()
+# Get parameters stored in OBIGT
+ref <- info(info("carrollite", c("cr", "cr2")))
+# Columns of OBIGT with parameters to check
+ichk <- 10:22
+stopifnot(all.equal(calc$cr[, ichk], ref[1, ichk], check.attributes = FALSE, tolerance = 1e-4))
+stopifnot(all.equal(calc$cr2[, ichk], ref[2, ichk], check.attributes = FALSE, tolerance = 1e-4))
+reset()
+```
+
+## Add thermodynamic parameters for aqueous Co complexes
+This uses `CHNOSZ::logB.to.OBIGT()` to fit formation constants for aqueous Co complexes [@MZW11] to an equation with two adjustable parameters (`r DG0f` and `r S0`) that are then added to OBIGT.
+```{r add_Co_aqueous, collapse = TRUE}
+complexes <- add_Co_aqueous()
+```
+
+The fitted parameters are listed below for comparison with Table 1 in the paper.
+```{r Co_aqueous_table, message = FALSE}
+Co <- info(info(c("CoCl+", "CoCl2", "CoCl3-", "CoCl4-2")))
+Co$G <- round(Co$G)
+Co$H <- round(Co$H)
+Co$S <- round(Co$S, 3)
+rownames(Co) <- Co$name
+kable(Co[, c("G", "H", "S")])
+```
+
+## `r logfO2`-pH diagram with carrollite (Figure 5)
+```{r carrollite_5, message = FALSE, fig.align = "center", out.width = "100%", fig.width = 9, fig.height = 4, pngquant = pngquant}
+carrollite_5(res)
+```
+
+## Comparison of Cu-Co and Fe-Cu diagrams (Figure 8)
+```{r carrollite_8, message = FALSE, fig.align = "center", out.width = "100%", fig.width = 9, fig.height = 4, pngquant = pngquant}
+carrollite_8(res)
+```
+
+## Experimental and fitted `r Cp` for carrollite (Figure S3)
+```{r carrollite_S3, message = FALSE, fig.align = "center", out.width = "50%", fig.width = 5, fig.height = 5, pngquant = pngquant}
+carrollite_S3()
+```
+
+## Experimental and fitted formation constants for Cl^-^ complexes (Figure S4)
+```{r carrollite_S4, message = FALSE, fig.align = "center", out.width = "50%", fig.width = 5, fig.height = 5, pngquant = pngquant}
+carrollite_S4(complexes)
+```
+
+## `r logK` of reactions showing temperatures of linnaeite in and carrollite out (Figure S5)
+```{r carrollite_S5, message = FALSE, fig.align = "center", out.width = "75%", fig.width = 7, fig.height = 5, pngquant = pngquant}
+carrollite_S5()
+```
+
+## Compare mosaic stack (with carrollite) to `CHNOSZ::solubility()` calculation for Co or Cu without carrollite (Figure S6)
+```{r carrollite_S6, message = FALSE, fig.align = "center", out.width = "100%", fig.width = 8, fig.height = 3, pngquant = pngquant}
+carrollite_S6(res)
+```
+
+## References

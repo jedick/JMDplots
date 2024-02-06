@@ -37,3 +37,5 @@
 \newcommand{\umol}{\ifelse{latex}{\eqn{\mu}mol}{\ifelse{html}{\out{&mu;mol}}{μmol}}}
 % For more recent papers (canprot::ZCAA() renamed to canprot::Zc()) 20230617
 \newcommand{\Zc}{\ifelse{latex}{\eqn{Z_\mathrm{C}}}{\ifelse{html}{\out{<I>Z</I><sub>C</sub>}}{Zc}}}
+% 20240206
+\newcommand{\Cp}{\ifelse{latex}{\eqn{C_P}}{\ifelse{html}{\out{<I>C<sub>P</sub></I>}}{Cp}}}

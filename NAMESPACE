@@ -88,7 +88,10 @@ export(
   # microhum paper 20231227, 20231231
   "microhum_5", "microhum_2",
   # function used in geo16S and microhum 20231231
-  "plot_starburst"
+  "plot_starburst",
+  # carrollite paper 20240205
+  "calc_carrollite", "add_Co_aqueous", "carrollite_5", "carrollite_8",
+  "carrollite_S3", "carrollite_S4", "carrollite_S5", "carrollite_S6"
 )
 
 # Imports from CHNOSZ
@@ -118,7 +121,10 @@ importFrom("CHNOSZ",
   # mjenergy
   "E.units",
   # utogig
-  "rank.affinity"
+  "rank.affinity",
+  # carrollite
+  "logB.to.OBIGT", "T.units", "check.GHS", "retrieve", "stack_mosaic",
+  "lT", "lP", "lNaCl", "lS", "lex"
 )
 
 # Imports from canprot
