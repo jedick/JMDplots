@@ -355,7 +355,7 @@ microhum_3 <- function(pdf = FALSE) {
   col <- lapply(col, adjustcolor, alpha.f = 0.8)
   pch <- list(oro = pch_Oral, naso = pch_Nasal, gut = pch_Gut)
   # Read precomputed mean values 20220823
-  means <- read.csv(file.path(getdatadir(), "16S/dataset_metrics.csv"))
+  means <- read.csv(file.path(getdatadir(), "16S/dataset_metrics_all.csv"))
   # Loop over body sites
   for(type in c("gut", "oro", "naso")) {
     itype <- means$type == type
@@ -489,7 +489,7 @@ microhum_4 <- function(pdf = FALSE) {
   col <- lapply(col, adjustcolor, alpha.f = 0.8)
   pch <- list(naso = pch_Nasal, oro = pch_Oral, gut = pch_Gut, IBD = pch_IBD)
   # Read precomputed mean values 20220823
-  means <- read.csv(file.path(getdatadir(), "16S/dataset_metrics.csv"))
+  means <- read.csv(file.path(getdatadir(), "16S/dataset_metrics_all.csv"))
 
   ## Panel A: nH2O-nO2 plots for nasopharyngeal, oral/oropharyngeal, and gut communities
   par(mar = c(4, 4, 3, 1))
@@ -816,7 +816,7 @@ microhum_6 <- function(pdf = FALSE) {
   col <- lapply(col, adjustcolor, alpha.f = 0.8)
   pch <- list(naso = pch_Nasal, oro = pch_Oral, gut = pch_Gut, IBD = pch_IBD)
   # Read precomputed values
-  metrics <- read.csv(file.path(getdatadir(), "16S/dataset_metrics.csv"))
+  metrics <- read.csv(file.path(getdatadir(), "16S/dataset_metrics_all.csv"))
 
   # Calculate percentage of aerotolerant genera among those with known oxygen tolerance 20230726
   control <- metrics$control_aerotolerant / (metrics$control_aerotolerant + metrics$control_anaerobe) * 100
@@ -864,7 +864,7 @@ microhum_6 <- function(pdf = FALSE) {
     # Label points
     text(control[itype] + dx, disease[itype] + dy, label)
     # Add plot title
-    titles <- c(naso = "Nasopharyngeal", oro = "Oropharyngeal", gut = hyphen.in.pdf("Gut (COVID-19)"), IBD = "Gut (IBD)")
+    titles <- hyphen.in.pdf(c(naso = "Nasopharyngeal (COVID-19)", oro = "Oropharyngeal (COVID-19)", gut = "Gut (COVID-19)", IBD = "Gut (IBD)"))
     title(titles[type], font.main = 1, line = 0.5)
 
     if(type == "naso") label.figure(
@@ -911,7 +911,7 @@ microhum_S1 <- function(pdf = FALSE) {
   if(pdf) dev.off()
 }
 
-# Changes of chemical metrics for microbiomes associated with viral inactivation 20221125
+# Differences of nO2 and nH2O between untreated and viral-inactivated samples 20221125
 microhum_S2 <- function(pdf = FALSE) {
 
   if(pdf) pdf("Figure_S2.pdf", width = 6, height = 4)
@@ -1045,54 +1045,145 @@ microhum_S3 <- function(pdf = FALSE) {
 
 }
 
+# Differences of nO2 and nH2O between subcommunities of obligate anaerobes and aerotolerant genera in controls and patients 20240212
+microhum_S4 <- function(pdf = FALSE) {
+
+  if(pdf) pdf("Figure_S4.pdf", width = 10, height = 3.5)
+  par(mfrow = c(1, 3))
+
+  # Colors and point symbols for sample types
+  col <- list(naso = col_Nasal, oro = col_Oral, gut = col_Gut, IBD = col_IBD)
+  col <- lapply(col, adjustcolor, alpha.f = 0.8)
+  pch <- list(naso = pch_Nasal, oro = pch_Oral, gut = pch_Gut, IBD = pch_IBD)
+
+  # Read precomputed values
+  anaerobe <- read.csv(file.path(getdatadir(), "16S/dataset_metrics_anaerobe.csv"))
+  aerotolerant <- read.csv(file.path(getdatadir(), "16S/dataset_metrics_aerotolerant.csv"))
+
+  # nO2 differences
+  plot(aerotolerant$nO2_dn - anaerobe$nO2_dn, aerotolerant$nO2_up - anaerobe$nO2_up,
+    xlab = "Control", ylab = "Patient", pch = unlist(pch[anaerobe$type]), bg = unlist(col[anaerobe$type]))
+  abline(h = 0, v = 0, lty = 2, col = 8)
+  legend("bottomright", legend = c("Nasopharyngeal", "Oropharyngeal", "Gut"), pch = c(pch_Nasal, pch_Oral, pch_Gut),
+    pt.bg = c(col_Nasal, col_Oral, col_Gut), col = black50, bty = "n", cex = 0.8, title = hyphen.in.pdf("COVID-19"), inset = c(0, 0.12))
+  legend("bottomright", legend = "Gut", pch = pch_IBD, pt.bg = col_IBD, col = black50, bty = "n", cex = 0.8, title = "                  IBD", inset = c(0.135, 0))
+  title(quote(Delta*italic(n)[O[2]] ~ "(aerotolerant - obligate anaerobe)"), font.main = 1)
+
+  # nH2O differences
+  plot(aerotolerant$nH2O_dn - anaerobe$nH2O_dn, aerotolerant$nH2O_up - anaerobe$nH2O_up,
+    xlab = "Control", ylab = "Patient", pch = unlist(pch[anaerobe$type]), bg = unlist(col[anaerobe$type]))
+  abline(h = 0, v = 0, lty = 2, col = 8)
+  title(quote(Delta*italic(n)[H[2]*O] ~ "(aerotolerant - obligate anaerobe)"), font.main = 1)
+
+  # Table of p-values
+  plot.new()
+  xs <- seq(0.4, 1, length.out = 4)
+  text(xs, rep(0.8, 4), c("Control", "Patient", "Control", "Patient"), adj = 1)
+  text(c(0.46, 0.88), rep(0.85, 2), c(expression(italic(n)[O[2]]), expression(italic(n)[H[2]*O])), adj = 1)
+  text(0.63, 0.92, "P-values")
+  ys <- seq(0.7, 0.3, length.out = 4)
+  text(rep(-0.2, 4), ys, hyphen.in.pdf(c("Nasopharyngeal", "Oropharyngeal", "Gut (COVID-19)", "Gut (IBD)")), adj = 0, xpd = NA)
+  # Loop over metrics
+  metrics <- c("nO2", "nH2O")
+  for(i in 1:length(metrics)) {
+    # Loop over control and patient
+    groups <- c("dn", "up")
+    for(j in 1:length(groups)) {
+      # Name of column with metrics
+      colname <- paste(metrics[i], groups[j], sep = "_")
+      # Loop over dataset types
+      types <- c("naso", "oro", "gut", "IBD")
+      for(k in 1:length(types)) {
+        itype <- anaerobe$type == types[k]
+        # Get metrics for anaerobic and aerotolerant subcommunities
+        anaer <- anaerobe[itype, colname]
+        aero <- aerotolerant[itype, colname]
+        # Calculate p-value
+        p.value <- wilcox.test(anaer, aero, paired = TRUE)$p.value
+        ptext <- format(signif(p.value, 1), scientific = 2)
+        # Use bold text for p < 0.05
+        if(p.value < 0.05) font <- 2 else font <- 1
+        text(xs[j*2 - 2 + i], ys[k], ptext, adj = 1, font = font)
+      }
+    }
+  }
+
+  if(pdf) dev.off()
+
+}
+
 ##################################
 ### Data Processing Functions  ###
 ##################################
 
 # Calculate mean values of chemical metrics for patients and controls 20220823
-# Include abundance of genera grouped according to oxygen tolerance 20230725
+# Include abundances of genera in oxygen tolerance groups 20230725
 dataset_metrics <- function() {
+
+  # Define oxygen tolerance groups
+  oxytols <- c("all", "anaerobe", "aerotolerant", "unknown")
 
   # Function to calculate mean values of metrics for patients and controls
   getmeans <- function(study) {
+
     print(study)
-    metrics <- getmetrics_microhum(study)
-    mdat <- getmdat_microhum(study, metrics)
-    # "up" for disease/positive, "down" for control/negative
-    iup <- sapply(mdat$metadata$pch == 25, isTRUE)
-    idn <- sapply(mdat$metadata$pch == 24, isTRUE)
-    # Calculate means of chemical metrics
-    Zc_dn <- mean(mdat$metrics$Zc[idn])
-    Zc_up <- mean(mdat$metrics$Zc[iup])
-    nO2_dn <- mean(mdat$metrics$nO2[idn])
-    nO2_up <- mean(mdat$metrics$nO2[iup])
-    nH2O_dn <- mean(mdat$metrics$nH2O[idn])
-    nH2O_up <- mean(mdat$metrics$nH2O[iup])
-    # Calculate p-values 20220905
-    Zc_pvalue <- wilcox.test(mdat$metrics$Zc[idn], mdat$metrics$Zc[iup])$p.value
-    nO2_pvalue <- wilcox.test(mdat$metrics$nO2[idn], mdat$metrics$nO2[iup])$p.value
-    nH2O_pvalue <- wilcox.test(mdat$metrics$nH2O[idn], mdat$metrics$nH2O[iup])$p.value
-    # Calculate oxygen tolerance 20230725
-    disease <- calc.oxytol(study = study)
-    disease_anaerobe <- sum(disease$abundance[disease$oxygen.tolerance == "obligate anaerobe"])
-    disease_aerotolerant <- sum(disease$abundance[disease$oxygen.tolerance == "aerotolerant"])
-    disease_unknown <- sum(disease$abundance[disease$oxygen.tolerance == "unknown"])
-    control <- calc.oxytol("control", study = study)
-    control_anaerobe <- sum(control$abundance[control$oxygen.tolerance == "obligate anaerobe"])
-    control_aerotolerant <- sum(control$abundance[control$oxygen.tolerance == "aerotolerant"])
-    control_unknown <- sum(control$abundance[control$oxygen.tolerance == "unknown"])
-    # Include number of samples 20220905
-    data.frame(n_dn = sum(idn), n_up = sum(iup),
-         Zc_dn = Zc_dn, Zc_up = Zc_up, Zc_pvalue = Zc_pvalue, 
-         nO2_dn = nO2_dn, nO2_up = nO2_up, nO2_pvalue = nO2_pvalue, 
-         nH2O_dn = nH2O_dn, nH2O_up = nH2O_up, nH2O_pvalue = nH2O_pvalue,
-         control_anaerobe = control_anaerobe, disease_anaerobe = disease_anaerobe, 
-         control_aerotolerant = control_aerotolerant, disease_aerotolerant = disease_aerotolerant,
-         control_unknown = control_unknown, disease_unknown = disease_unknown
-    )
+    # Loop over subsets by oxygen tolerance 20240211
+    means <- sapply(oxytols, function(oxytol) {
+
+      # Calculate chemical metrics for each run
+      metrics <- getmetrics_microhum(study, oxytol)
+      # Remove runs with NA metrics (for oxytol != "all")
+      metrics <- metrics[!is.na(metrics$Zc), ]
+      # Get metadata for the remaining runs
+      mdat <- getmdat_microhum(study, metrics)
+      # "up" for disease/positive, "down" for control/negative
+      is.up <- sapply(mdat$metadata$pch == 25, isTRUE)
+      is.dn <- sapply(mdat$metadata$pch == 24, isTRUE)
+
+      # Calculate means of chemical metrics
+      Zc_dn <- mean(mdat$metrics$Zc[is.dn])
+      Zc_up <- mean(mdat$metrics$Zc[is.up])
+      nO2_dn <- mean(mdat$metrics$nO2[is.dn])
+      nO2_up <- mean(mdat$metrics$nO2[is.up])
+      nH2O_dn <- mean(mdat$metrics$nH2O[is.dn])
+      nH2O_up <- mean(mdat$metrics$nH2O[is.up])
+      # Calculate p-values 20220905
+      Zc_pvalue <- wilcox.test(mdat$metrics$Zc[is.dn], mdat$metrics$Zc[is.up])$p.value
+      nO2_pvalue <- wilcox.test(mdat$metrics$nO2[is.dn], mdat$metrics$nO2[is.up])$p.value
+      nH2O_pvalue <- wilcox.test(mdat$metrics$nH2O[is.dn], mdat$metrics$nH2O[is.up])$p.value
+      # Include number of samples 20220905
+      mymeans <- data.frame(n_dn = sum(is.dn), n_up = sum(is.up),
+           Zc_dn = Zc_dn, Zc_up = Zc_up, Zc_pvalue = Zc_pvalue, 
+           nO2_dn = nO2_dn, nO2_up = nO2_up, nO2_pvalue = nO2_pvalue, 
+           nH2O_dn = nH2O_dn, nH2O_up = nH2O_up, nH2O_pvalue = nH2O_pvalue
+      )
+      if(oxytol == "all") {
+        # Sum abundances of genera in oxygen tolerance groups 20230725
+        disease <- calc.oxytol(study = study)
+        disease_anaerobe <- sum(disease$abundance[disease$oxygen.tolerance == "obligate anaerobe"])
+        disease_aerotolerant <- sum(disease$abundance[disease$oxygen.tolerance == "aerotolerant"])
+        disease_unknown <- sum(disease$abundance[disease$oxygen.tolerance == "unknown"])
+        control <- calc.oxytol("control", study = study)
+        control_anaerobe <- sum(control$abundance[control$oxygen.tolerance == "obligate anaerobe"])
+        control_aerotolerant <- sum(control$abundance[control$oxygen.tolerance == "aerotolerant"])
+        control_unknown <- sum(control$abundance[control$oxygen.tolerance == "unknown"])
+        # Include number of samples 20220905
+        mymeans <- cbind(mymeans, data.frame(
+             control_anaerobe = control_anaerobe, disease_anaerobe = disease_anaerobe, 
+             control_aerotolerant = control_aerotolerant, disease_aerotolerant = disease_aerotolerant,
+             control_unknown = control_unknown, disease_unknown = disease_unknown
+        ))
+      }
+      mymeans
+
+    })
+
+    names(means) <- oxytols
+    means
+
   }
 
-  out <- list()
+  out <- list(all = list(), anaerobe = list(), aerotolerant = list(), unknown = list())
 
   # List COVID-19 and IBD datasets
   microhum_studies <- list(
@@ -1107,27 +1198,35 @@ dataset_metrics <- function() {
     IBD = c("ZTG+21", "ASM+23", "DKK+23", "AAM+20", "PYL+23", "MLL+16", "LZD+19",
             "BKK+17", "MDV+22", "LAA+19", "REP+23", "HBL+17", "GKD+14", "WGL+19", "RAF+20")
   )
+
   # Loop over groups of datasets
   for(i in 1:4) {
     # Calculate means for each dataset
     means <- lapply(microhum_studies[[i]], getmeans)
-    means <- do.call(rbind, means)
-    means <- cbind(type = names(microhum_studies)[i], study = microhum_studies[[i]], means)
-    out[[i]] <- means
+    # Loop over oxygen tolerance groups 20240211
+    for(j in 1:4) {
+      mymeans <- sapply(means, "[", j)
+      mymeans <- do.call(rbind, mymeans)
+      mymeans <- cbind(type = names(microhum_studies)[i], study = microhum_studies[[i]], mymeans)
+      out[[j]][[i]] <- mymeans
+    }
   }
-  # Put together data frames
-  out <- do.call(rbind, out)
 
-  # Calculate mean differences of chemical metrics
-  D_Zc <- out$Zc_up - out$Zc_dn
-  D_nO2 <- out$nO2_up - out$nO2_dn
-  D_nH2O <- out$nH2O_up - out$nH2O_dn
-  out <- cbind(out, D_Zc, D_nO2, D_nH2O)
-
-  # Round values 20230212
-  out[, 5:22] <- signif(out[, 5:22], 6)
-  file <- "16S/dataset_metrics.csv"
-  write.csv(out, file, row.names = FALSE, quote = FALSE)
+  # Loop over oxygen tolerance groups
+  for(j in 1:4) {
+    # Put together groups of datasets
+    myout <- do.call(rbind, out[[j]])
+    # Calculate mean differences of chemical metrics
+    D_Zc <- myout$Zc_up - myout$Zc_dn
+    D_nO2 <- myout$nO2_up - myout$nO2_dn
+    D_nH2O <- myout$nH2O_up - myout$nH2O_dn
+    myout <- cbind(myout, D_Zc, D_nO2, D_nH2O)
+    # Round values 20230212
+    if(j == 1) myout[, 5:22] <- signif(myout[, 5:22], 6)
+    if(j > 1) myout[, 5:16] <- signif(myout[, 5:16], 6)
+    file <- paste0("16S/dataset_metrics_", oxytols[j], ".csv")
+    write.csv(myout, file, row.names = FALSE, quote = FALSE)
+  }
 
 }
 
@@ -1278,7 +1377,7 @@ plot.oxytol <- function(dat) {
 get_abundance <- function(study_type, genus_names = NULL) {
 
   # List studies with datasets
-  metrics <- read.csv(file.path(getdatadir(), "16S/dataset_metrics.csv"))
+  metrics <- read.csv(file.path(getdatadir(), "16S/dataset_metrics_all.csv"))
   studies <- metrics$study[metrics$type == study_type]
 
   # Loop over studies

@@ -334,13 +334,30 @@ getmdat_microhum <- function(study, metrics = NULL, dropNA = TRUE, quiet = TRUE)
 }
 
 # Function to calculate metrics for a given study 20220506
-getmetrics_microhum <- function(study, lineage = NULL, mincount = 100, return_AA = FALSE, zero_AA = NULL, quiet = TRUE, ...) {
+getmetrics_microhum <- function(study, oxytol = NULL, lineage = NULL, mincount = 100, return_AA = FALSE, zero_AA = NULL, quiet = TRUE, ...) {
   # Remove suffix after underscore 20200929
   studyfile <- gsub("_.*", "", study)
   RDPfile <- file.path(getdatadir(), "16S/RDP-GTDB", paste0(studyfile, ".tab.xz"))
   # If there is no .xz file, look for a .tab file 20210607
   if(!file.exists(RDPfile)) RDPfile <- file.path(getdatadir(), "16S/RDP-GTDB", paste0(studyfile, ".tab"))
   RDP <- read_RDP(RDPfile, lineage = lineage, mincount = mincount, quiet = quiet, ...)
+  # Keep subset of genera with specified oxygen tolerance 20240211
+  if(!is.null(oxytol) & !identical(oxytol, "all")) {
+    # Keep only genus-level classifications
+    RDP <- RDP[RDP$rank == "genus", ]
+    # Remove suffixes used in GTDB (_A, _B, etc.)
+    genus <- sapply(strsplit(RDP$name, "_"), "[", 1)
+    # Read the table of oxygen tolerance for genera
+    dat <- read.csv(system.file("extdata/microhum/MR18_Table_S1_modified.csv", package = "JMDplots"))
+    # List genera with known oxygen tolerance
+    obligate.anaerobe <- dat$Genus.name[dat$Obligate.anerobic.prokaryote %in% c(1, 2)]
+    aerotolerant <- dat$Genus.name[dat$Obligate.anerobic.prokaryote == 0]
+    # Identify subset of classifications with specified oxygen tolerance
+    if(oxytol == "anaerobe") isub <- genus %in% obligate.anaerobe
+    if(oxytol == "aerotolerant") isub <- genus %in% aerotolerant
+    if(oxytol == "unknown") isub <- ! (genus %in% obligate.anaerobe | genus %in% aerotolerant)
+    RDP <- RDP[isub, ]
+  }
   map <- map_taxa(RDP, quiet = quiet)
   get_metrics(RDP, map = map, taxon_AA = taxon_AA[["GTDB"]], return_AA = return_AA, zero_AA = zero_AA)
 }

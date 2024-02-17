@@ -196,6 +196,8 @@ mjenergy3 <- function(pdf = FALSE, write.csv = FALSE) {
     # Read Shock and Canovas (2010) modelling results
     file <- system.file(paste0("extdata/mjenergy/SC10_", vent, ".csv"), package = "JMDplots")
     SC10 <- read.csv(file, check.names = FALSE)
+    # Reorder to get increasing T in plots a and c (needed for CHNOSZ 2.1.0) 20240211
+    SC10 <- SC10[nrow(SC10):1, ]
     # Stay below 250 °C
     SC10 <- SC10[SC10$T < 250, ]
     # Set basis species

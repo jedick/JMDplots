@@ -155,6 +155,7 @@ filter <- function(RUNID) {
 
 #  if(study %in% c("TWC+22")) {
 #    # For TWC+22, FASTQ files were downloaded from Zenodo 20220829
+#    # https://doi.org/10.5281/zenodo.5717460
 #    fqdump <- FALSE
 #  } else {
     # Generate input FASTQ files with fastq-dump

@@ -10,6 +10,7 @@
 \alias{microhum_S1}
 \alias{microhum_S2}
 \alias{microhum_S3}
+\alias{microhum_S4}
 \alias{dataset_metrics}
 \title{Water and oxygen in the genomic adaptation of human microbiota}
 \description{
@@ -26,6 +27,7 @@ Plots from the revised manuscript by Dick (2023).
   microhum_S1(pdf = FALSE)
   microhum_S2(pdf = FALSE)
   microhum_S3(pdf = FALSE)
+  microhum_S4(pdf = FALSE)
   dataset_metrics()
 }
 
@@ -44,8 +46,9 @@ This table briefly describes each plotting function.
   \code{microhum_5} \tab Differences of relative abundances of genera between controls and patients \cr
   \code{microhum_6} \tab Oxygen tolerance of genera in body sites, COVID-19, and IBD \cr
   \code{microhum_S1} \tab Amount of putative human DNA removed from HMP metagenomes in screening step \cr
-  \code{microhum_S2} \tab Changes of chemical metrics for microbiomes associated with viral inactivation \cr
-  \code{microhum_S3} \tab Differences of \nO2 and \nH2O between obligate anaerobic and aerotolerant genera \cr
+  \code{microhum_S2} \tab Differences of \nO2 and \nH2O between untreated and viral-inactivated samples \cr
+  \code{microhum_S3} \tab Chemical metrics of reference proteomes for genera with known oxygen tolerance \cr
+  \code{microhum_S3} \tab Differences of \nO2 and \nH2O between subcommunities of obligate anaerobes and aerotolerant genera in controls and patients \cr
 }
 
 \code{dataset_metrics} is used to precompute mean values of chemical metrics for controls and COVID-19/IBD patients in each study (chemical metrics are for community reference proteomes; source data are 16S rRNA sequences).
