@@ -72,7 +72,7 @@ microhum_3()
 microhum_4()
 ```
 
-**Data sources:** **(A)** See Table 1 in manuscript; **(B)** MAGs [@KWL22], based on data from @YZL+21; **(C)** @HZX+21; **(D)** @GPM+22; **(E)** See Table 1 in manuscript; **(F)** @LAA+19.
+**Data sources:** **(A)** See Table 1 in manuscript; **(B)** MAGs [@KWL22], based on data from @YZL+21 and @ZZL+20; **(C)** @HZX+21 and @GPM+22; **(D)** See Table 1 in manuscript; **(E)** @LAA+19.
 
 ## Differences of relative abundances of genera between controls and patients (Figure 5)
 ```{r microhum_5, message = FALSE, out.width='100%', fig.width = 10, fig.height = 8.5, pngquant = pngquant, dpi = 100}

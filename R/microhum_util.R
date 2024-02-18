@@ -30,11 +30,6 @@ getmdat_microhum <- function(study, metrics = NULL, dropNA = TRUE, quiet = TRUE)
     pch <- sapply(metadata$Type, switch, Control = 24, Convalescence = 20, Acute = 25, NA)
     col <- sapply(metadata$Type, switch, Control = 4, Convalescence = 1, Acute = 2, NA)
   }
-  # 20220803 COVID-19 Nasopharyngeal
-  if(study == "ENJ+21") {
-    pch <- sapply(metadata$Description, switch, "COVID-19-NEGATIVE" = 24, "Blank-Control" = 20, "COVID-19-POSITIVE" = 25, NA)
-    col <- sapply(metadata$Description, switch, "COVID-19-NEGATIVE" = 4, "Blank-Control" = 1, "COVID-19-POSITIVE" = 2, NA)
-  }
   # 20220803 COVID-19 Oral
   if(study == "GBS+22") {
     pch <- sapply(metadata$Status, switch, "non-infected" = 24, "infected" = 25)
