@@ -38,8 +38,8 @@ getdatadir <- function() {
 microhum_1 <- function(pdf = FALSE) {
 
   if(pdf) pdf("Figure_1.pdf", width = 10, height = 6)
-  mat <- matrix(c(1,1,2,2,3,3,4,4, 0,5,5,5,6,6,6,0), nrow = 2, byrow = TRUE)
-  layout(mat)
+  mat <- matrix(c(1,1,2,2,3,3,4,4, 0,0,0,0,0,0,0,0, 0,5,5,5,6,6,6,0), nrow = 3, byrow = TRUE)
+  layout(mat, heights = c(1, 0.08, 1))
   par(mar = c(3.5, 3.5, 2, 1), mgp = c(2.5, 1, 0))
   par(cex = 0.8)
 
