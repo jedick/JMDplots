@@ -31,11 +31,9 @@ nH2O <- "<i>n</i><sub>H<sub>2</sub>O</sub>"
 nO2 <- "<i>n</i><sub>O<sub>2</sub></sub>"
 ```
 
-This vignette runs the code to make the plots from the following manuscript:
+This vignette runs the functions to make the plots from the following manuscript:
 
-> Dick JM. 2024. Adaptations of microbial genomes to human body chemistry. Submitted manuscript.
-> 
-> A preprint entitled "Two dimensions of chemical variation of the human microbiome across body sites and in COVID-19 patients" is available at bioRxiv. doi: [10.1101/2023.02.12.528246](https://doi.org/10.1101/2023.02.12.528246)
+> Dick JM. 2024. Adaptations of microbial genomes to human body chemistry. bioRxiv preprint doi: [10.1101/2023.02.12.528246](https://doi.org/10.1101/2023.02.12.528246)
 
 This vignette was compiled on `r Sys.Date()` with
 **[JMDplots](https://github.com/jedick/JMDplots)** `r packageDescription("JMDplots")$Version`,
@@ -46,7 +44,7 @@ This vignette was compiled on `r Sys.Date()` with
 library(JMDplots)
 ```
 
-## Compatibility of inferences from shotgun metagenomes and community reference proteomes (Figure 1)
+## Consistency between shotgun metagenomes and community reference proteomes (Figure 1)
 ```{r microhum_1, message = FALSE, out.width='100%', fig.width = 10, fig.height = 6, pngquant = pngquant, dpi = 100}
 microhum_1()
 ```
@@ -54,8 +52,8 @@ microhum_1()
 **Data source:** @HMP12.
 
 ## Amount of putative human DNA removed from HMP metagenomes in screening step (Figure 1--figure supplement 1)
-```{r microhum_S1, message = FALSE, out.width='100%', fig.width = 10, fig.height = 8, pngquant = pngquant, dpi = 100}
-microhum_S1()
+```{r microhum_1_1, message = FALSE, out.width='100%', fig.width = 10, fig.height = 8, pngquant = pngquant, dpi = 100}
+microhum_1_1()
 ```
 
 ## Chemical metrics are broadly different among genera and are similar between GTDB and low-contamination genomes from UHGG (Figure 2)
@@ -73,13 +71,13 @@ microhum_3()
 **Data sources:** **(A)** @BPB+21; **(B)** See Table 1 in manuscript; **(C)** @LLZ+21, @CZH+22, @ZZL+20; **(D)** @TWC+22, @MLL+17, @JZW+22, @GNT+21.
 
 ## Differences of `r nO2` and `r nH2O` between untreated and viral-inactivated samples (Figure 3--figure supplement 1)
-```{r microhum_S2, message = FALSE, out.width='100%', fig.width = 6, fig.height = 4, pngquant = pngquant, dpi = 100}
-microhum_S2()
+```{r microhum_3_1, message = FALSE, out.width='100%', fig.width = 6, fig.height = 4, pngquant = pngquant, dpi = 100}
+microhum_3_1()
 ```
 
 **Data source:** @BPB+21.
 
-## Differences of chemical metrics between controls and COVID-19/IBD patients (Figure 4)
+## Differences of chemical metrics between controls and COVID-19 or IBD patients (Figure 4)
 ```{r microhum_4, message = FALSE, out.width='100%', fig.width = 13, fig.height = 12, pngquant = pngquant, dpi = 100}
 microhum_4()
 ```
@@ -92,8 +90,8 @@ Figure_5_genera <- microhum_5()
 ```
 
 ## Chemical metrics of reference proteomes for genera with known oxygen tolerance (Figure 5--figure supplement 1)
-```{r microhum_S3, message = FALSE, out.width='75%', fig.align='center', fig.width = 7, fig.height = 4, pngquant = pngquant, dpi = 100}
-microhum_S3()
+```{r microhum_5_1, message = FALSE, out.width='75%', fig.align='center', fig.width = 7, fig.height = 4, pngquant = pngquant, dpi = 100}
+microhum_5_1()
 ```
 
 **Data source:** *List of Prokaryotes according to their Aerotolerant or Obligate Anaerobic Metabolism* [@MR18] with modifications made in this study.
@@ -107,8 +105,8 @@ microhum_6()
 **Data sources:** **(A)--(B)** *List of Prokaryotes according to their Aerotolerant or Obligate Anaerobic Metabolism* [@MR18] with modifications made in this study; **(C)** See Table 1 in manuscript.
 
 ## Differences of `r nO2` and `r nH2O` between subcommunities of obligate anaerobes and aerotolerant genera in controls and patients (Figure 6--figure supplement 1)
-```{r microhum_S4, message = FALSE, out.width='100%', fig.align='center', fig.width = 10, fig.height = 3.5, pngquant = pngquant, dpi = 100}
-microhum_S4()
+```{r microhum_6_1, message = FALSE, out.width='100%', fig.align='center', fig.width = 10, fig.height = 3.5, pngquant = pngquant, dpi = 100}
+microhum_6_1()
 ```
 
 ## Summary of metagenome sequence processing (part of Supplementary File 1)

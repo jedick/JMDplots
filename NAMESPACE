@@ -82,11 +82,11 @@ export(
   # chem16S paper 20230709
   "chem16S_1",
   # microhum paper 20230212
-  "microhum_S2", "microhum_S3",
+  "microhum_3_1", "microhum_5_1",
   # microhum paper 20231222
-  "microhum_1", "microhum_S1",
+  "microhum_1", "microhum_1_1",
   # microhum paper 20231227, 20231231, 20240212
-  "microhum_5", "microhum_2", "microhum_S4",
+  "microhum_5", "microhum_2", "microhum_6_1",
   # function used in geo16S and microhum 20231231
   "plot_starburst",
   # carrollite paper 20240205

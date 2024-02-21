@@ -7,14 +7,14 @@
 \alias{microhum_4}
 \alias{microhum_5}
 \alias{microhum_6}
-\alias{microhum_S1}
-\alias{microhum_S2}
-\alias{microhum_S3}
-\alias{microhum_S4}
+\alias{microhum_1_1}
+\alias{microhum_3_1}
+\alias{microhum_5_1}
+\alias{microhum_6_1}
 \alias{dataset_metrics}
-\title{Water and oxygen in the genomic adaptation of human microbiota}
+\title{Adaptations of microbial genomes to human body chemistry}
 \description{
-Plots from the revised manuscript by Dick (2023).
+Plots from the manuscript by Dick (2024).
 }
 
 \usage{
@@ -24,10 +24,10 @@ Plots from the revised manuscript by Dick (2023).
   microhum_4(pdf = FALSE)
   microhum_5(pdf = FALSE)
   microhum_6(pdf = FALSE)
-  microhum_S1(pdf = FALSE)
-  microhum_S2(pdf = FALSE)
-  microhum_S3(pdf = FALSE)
-  microhum_S4(pdf = FALSE)
+  microhum_1_1(pdf = FALSE)
+  microhum_3_1(pdf = FALSE)
+  microhum_5_1(pdf = FALSE)
+  microhum_6_1(pdf = FALSE)
   dataset_metrics()
 }
 
@@ -39,16 +39,16 @@ Plots from the revised manuscript by Dick (2023).
 This table briefly describes each plotting function.
 
 \tabular{ll}{
-  \code{microhum_1} \tab Compatibility of inferences from shotgun metagenomes and community reference proteomes \cr
+  \code{microhum_1} \tab Consistency between shotgun metagenomes and community reference proteomes \cr
   \code{microhum_2} \tab Chemical metrics are broadly different among genera and are similar between GTDB and low-contamination genomes from UHGG \cr
   \code{microhum_3} \tab Chemical variation of microbial proteins across body sites (multi-omics comparison) \cr
-  \code{microhum_4} \tab Differences of chemical metrics between controls and COVID-19/IBD patients \cr
+  \code{microhum_4} \tab Differences of chemical metrics between controls and COVID-19 or IBD patients \cr
   \code{microhum_5} \tab Differences of relative abundances of genera between controls and patients \cr
   \code{microhum_6} \tab Oxygen tolerance of genera in body sites, COVID-19, and IBD \cr
-  \code{microhum_S1} \tab Amount of putative human DNA removed from HMP metagenomes in screening step \cr
-  \code{microhum_S2} \tab Differences of \nO2 and \nH2O between untreated and viral-inactivated samples \cr
-  \code{microhum_S3} \tab Chemical metrics of reference proteomes for genera with known oxygen tolerance \cr
-  \code{microhum_S3} \tab Differences of \nO2 and \nH2O between subcommunities of obligate anaerobes and aerotolerant genera in controls and patients \cr
+  \code{microhum_1_1} \tab Amount of putative human DNA removed from HMP metagenomes in screening step \cr
+  \code{microhum_3_1} \tab Differences of \nO2 and \nH2O between untreated and viral-inactivated samples \cr
+  \code{microhum_5_1} \tab Chemical metrics of reference proteomes for genera with known oxygen tolerance \cr
+  \code{microhum_5_1} \tab Differences of \nO2 and \nH2O between subcommunities of obligate anaerobes and aerotolerant genera in controls and patients \cr
 }
 
 \code{dataset_metrics} is used to precompute mean values of chemical metrics for controls and COVID-19/IBD patients in each study (chemical metrics are for community reference proteomes; source data are 16S rRNA sequences).
@@ -110,7 +110,7 @@ The data files listed below are stored in \file{extdata/microhum}:
 \references{
 Dick JM, Yu M, Tan J and Lu A (2019) Changes in carbon oxidation state of metagenomes along geochemical redox gradients. \emph{Front. Microbiol.} \bold{10}, 120. \doi{10.3389/fmicb.2019.00120}
 
-Dick JM (2023) Two dimensions of chemical variation of the human microbiome across body sites and in COVID-19 patients. bioRxiv. \doi{10.1101/2023.02.12.528246}
+Dick JM (2024) Adaptations of microbial genomes to human body chemistry. bioRxiv. \doi{10.1101/2023.02.12.528246}
 
 Ke S, Weiss ST and Liu Y-Y (2022) Dissecting the role of the human microbiome in COVID-19 via metagenome-assembled genomes. \emph{Nat. Commun.} \bold{13}, 5253. \doi{10.1038/s41467-022-32991-w}
 

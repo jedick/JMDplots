@@ -1,6 +1,8 @@
 CHANGES IN JMDplots 1.2.19
 --------------------------
 
+- 20240221 Revise plots for microhum paper.
+
 - 20240206 Add plots for carrollite paper.
 
 - 20240109 utogig4() now shows average rankings for groups as *percentage*

@@ -15,7 +15,7 @@ See the manual page associated with each paper for additional details about scri
 <!-- Put a space before <details> to make ghostwriter format the lists correctly -->
  <details>
 
-<summary>Water and oxygen in the genomic adaptation of human microbiota (<i>submitted manuscript</i>)</summary>
+<summary>Adaptations of microbial genomes to human body chemistry (<i>submitted manuscript</i>)</summary>
 
 - [inst/extdata/microhum](inst/extdata/microhum): scripts and processed data files
 
@@ -48,7 +48,7 @@ See the manual page associated with each paper for additional details about scri
 
 - [R/microhum.R](R/microhum.R): code for plots
 - [man/microhum.Rd](man/microhum.Rd): manual page
-- [vignettes/microhum.Rmd](vignettes/microhum.Rmd): vignette including Figures 1&ndash;4 and S1&ndash;S3
+- [vignettes/microhum.Rmd](vignettes/microhum.Rmd): vignette including Figures 1&ndash;6 and figure supplements.
 
   - [microhum.html](https://chnosz.net/JMDplots/vignettes/microhum.html): compiled HTML version of the vignette (external link)
 

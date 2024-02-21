@@ -31,7 +31,7 @@ getdatadir <- function() {
 ### Plotting Functions ###
 ##########################
 
-# Compatibility of inferences from shotgun metagenomes and community reference proteomes
+# Consistency between shotgun metagenomes and community reference proteomes
 # 20211218 First version: comparison of Zc used in geo16S paper
 #          Based on samples used by Aßhauer et al. (2015) (Tax4Fun paper) with additions by Dick and Tan (2023)
 # 20231218 Added human DNA screening and nH2O-nO2 plots for microhum paper
@@ -464,17 +464,11 @@ microhum_3 <- function(pdf = FALSE) {
 
 }
 
-# Differences of chemical metrics between controls and COVID-19/IBD patients 20220806
+# Differences of chemical metrics between controls and COVID-19 or IBD patients 20220806
 microhum_4 <- function(pdf = FALSE) {
 
   # Start plot
   if(pdf) pdf("Figure_4.pdf", width = 13, height = 12)
-#  mat <- matrix(c(
-#    1,1,1,1, 2,2,2,2, 3,3,3,3,
-#    4,4, 5,5, 6,6, 7,7, 8,8, 9,9,
-#    10,10,10,10, 11,11, 12,12, 13,13, 14,14
-#    ), nrow = 3, byrow = TRUE
-#  )
   mat <- matrix(c(
     1,1,1,1,1,1,1,1,     2,2,2,2,2,2,2,2,     3,3,3,3,3,3,3,3,
     4,4,4, 5,5,5, 6,6,6, 7,7,7, 8,8,8, 9,9,9, 10,10,10, 11,11,11,
@@ -897,8 +891,8 @@ microhum_6 <- function(pdf = FALSE) {
 }
 
 # Amount of putative human DNA removed from HMP metagenomes in screening step 20231222
-microhum_S1 <- function(pdf = FALSE) {
-  if(pdf) pdf("Figure_S1.pdf", width = 10, height = 8)
+microhum_1_1 <- function(pdf = FALSE) {
+  if(pdf) pdf("Figure_1-1.pdf", width = 10, height = 8)
   # Get sequence processing statistics
   statsfile <- file.path(getdatadir(), "ARAST/HMP12_stats.csv")
   stats <- read.csv(statsfile)
@@ -924,9 +918,9 @@ microhum_S1 <- function(pdf = FALSE) {
 }
 
 # Differences of nO2 and nH2O between untreated and viral-inactivated samples 20221125
-microhum_S2 <- function(pdf = FALSE) {
+microhum_3_1 <- function(pdf = FALSE) {
 
-  if(pdf) pdf("Figure_S2.pdf", width = 6, height = 4)
+  if(pdf) pdf("Figure_3-1.pdf", width = 6, height = 4)
   par(mfrow = c(2, 3))
   par(mgp = c(2.5, 1, 0))
   par(mar = c(4, 4, 2, 1))
@@ -983,10 +977,10 @@ microhum_S2 <- function(pdf = FALSE) {
 
 # Differences of Zc and nH2O between obligate anaerobic and aerotolerant genera 20221017
 # Changed Zc to nO2 20230729
-microhum_S3 <- function(pdf = FALSE) {
+microhum_5_1 <- function(pdf = FALSE) {
 
   # Setup plot
-  if(pdf) pdf("Figure_S3.pdf", width = 7, height = 4)
+  if(pdf) pdf("Figure_5-1.pdf", width = 7, height = 4)
   par(mfrow = c(1, 2))
   par(mar = c(3, 4, 1, 1))
   par(mgp = c(2.5, 1, 0))
@@ -1058,9 +1052,9 @@ microhum_S3 <- function(pdf = FALSE) {
 }
 
 # Differences of nO2 and nH2O between subcommunities of obligate anaerobes and aerotolerant genera in controls and patients 20240212
-microhum_S4 <- function(pdf = FALSE) {
+microhum_6_1 <- function(pdf = FALSE) {
 
-  if(pdf) pdf("Figure_S4.pdf", width = 10, height = 3.5)
+  if(pdf) pdf("Figure_6-1.pdf", width = 10, height = 3.5)
   par(mfrow = c(1, 3))
 
   # Colors and point symbols for sample types
