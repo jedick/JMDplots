@@ -14,7 +14,7 @@ print(system.time(
       print(sep, quote = FALSE)
       print(paste("|", f, basis, "|"), quote = FALSE)
       print(sep, quote = FALSE)
-      render(f)
+      rmarkdown::render(f)
       from <- gsub("Rmd", "html", f)
       to <- file.path("../doc", from)
       file.rename(from, to)

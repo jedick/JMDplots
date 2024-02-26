@@ -1,0 +1,25 @@
+"dataset","description","tags","n1","n2","Zc.down","Zc.up","Zc.diff","nH2O.down","nH2O.up","nH2O.diff","nAA.down","nAA.up","nAA.diff","MW.down","MW.up","MW.diff"
+PW08_2h,"_Saccharomyces cerevisiae_ in very high glucose (300 g/L) vs control (20 g/L) for 2 h",yeast,38,44,-0.1561,-0.1603,-0.0041,-0.6954,-0.7405,-0.0451,443,435,-8,109.0966,110.9794,1.8828
+PW08_10h,"_Saccharomyces cerevisiae_ in very high glucose (300 g/L) vs control (20 g/L) for 10 h",yeast,33,62,-0.1571,-0.1595,-0.0025,-0.7071,-0.7438,-0.0367,395,499.5,104.5,110.7734,110.8676,0.0942
+PW08_12h,"_Saccharomyces cerevisiae_ in very high glucose (300 g/L) vs control (20 g/L) for 12 h",yeast,18,65,-0.1679,-0.1604,0.0075,-0.7031,-0.7324,-0.0293,405.5,481,75.5,110.0721,110.7637,0.6916
+WCM+09,"mouse pancreatic islets in 16.7 mM vs 5.6 mM glucose",,63,94,-0.1303,-0.1429,-0.0126,-0.7144,-0.7572,-0.0428,322,358,36,111.7337,111.5843,-0.1494
+WFSL09,"bovine aortal endothelial cells in 22 mM vs 5 mM glucose",,67,46,-0.1331,-0.1586,-0.0256,-0.7181,-0.7091,0.009,320,346,26,109.6393,112.6967,3.0575
+MFD+10,"rat INS-1E cells in 25 mM vs 11 mM glucose",,51,20,-0.1223,-0.1564,-0.0341,-0.7448,-0.7319,0.0129,362,374.5,12.5,111.299,110.559,-0.74
+CCC+12_25mM,"retinal pigmented epithelium in 25 mM glucose vs 5.5 mM glucose",,17,11,-0.1193,-0.1351,-0.0157,-0.7358,-0.7735,-0.0377,318,279,-39,113.3358,111.6829,-1.6529
+CCC+12_100mM,"retinal pigmented epithelium in 100 mM glucose vs 5.5 mM glucose",,21,24,-0.121,-0.1252,-0.0042,-0.74,-0.7581,-0.0181,318,302,-16,113.2287,111.9645,-1.2642
+SFG+12,"human pancreatic islets in 15 mM vs 5 mM glucose",,34,57,-0.138,-0.1326,0.0053,-0.7672,-0.7557,0.0115,398,514,116,112.7822,112.7154,-0.0669
+CCCC13_25mM,"Chang liver cells in 25 mM  vs 5.5 mM glucose",,32,39,-0.1147,-0.1122,0.0024,-0.7633,-0.7633,0,568,298,-270,112.5536,111.8213,-0.7323
+CCCC13_100mM,"Chang liver cells in 100 mM  vs 5.5 mM glucose",,19,50,-0.1408,-0.1085,0.0324,-0.727,-0.7652,-0.0382,296,393.5,97.5,112.9603,112.452,-0.5083
+CCW+13,"rat INS-1beta cells in 27 mM vs 11 mM glucose",,126,60,-0.1525,-0.1588,-0.0064,-0.7537,-0.7598,-0.0061,338.5,334.5,-4,111.3753,112.1547,0.7794
+LDB+15_all,"Chinese hamster ovary cells in 15 g/L vs 5 g/L glucose",,294,205,-0.1208,-0.1438,-0.0231,-0.7458,-0.7604,-0.0146,434,390,-44,111.8305,112.0923,0.2618
+BTX+17_HG,"HUVEC eMPs in 5.6 mmol/l glucose + 19.4 mmol/l D-glucose vs 5.6 mmol/l glucose",,28,333,-0.1497,-0.1452,0.0044,-0.7836,-0.7523,0.0313,407,390,-17,111.9964,111.823,-0.1733
+BTX+17_LG,"HUVEC eMPs in 5.6 mmol/l glucose + 19.4 mmol/l L-glucose vs 5.6 mmol/l glucose",,24,377,-0.1434,-0.1461,-0.0027,-0.7395,-0.7591,-0.0196,427.5,406,-21.5,111.1945,112.1401,0.9456
+SFKD17_1EG,"secretome of murine islets of Langerhans in 25 mM vs 11 mM glucose for 1 day",,59,54,-0.1279,-0.1235,0.0045,-0.7608,-0.7885,-0.0277,276,387,111,112.0741,111.7957,-0.2784
+SFKD17_2EG,"secretome of murine islets of Langerhans in 25 mM vs 11 mM glucose for 2 days",,82,104,-0.1277,-0.1283,-6e-04,-0.773,-0.7532,0.0198,336,348.5,12.5,111.7293,111.1015,-0.6279
+IXA+19,"human aortal endothelial cells in 20 mM vs 5 mM glucose",,49,331,-0.1398,-0.1338,0.0061,-0.7118,-0.7511,-0.0392,394,521,127,112.1457,111.9546,-0.1911
+MHP+20_H9c2,"rat H9c2 cells in 30 mM vs 5 mM glucose",,17,20,-0.1697,-0.1478,0.0219,-0.7207,-0.7606,-0.0399,512,417.5,-94.5,111.5407,112.5462,1.0055
+MHP+20_HEK,"human embryonic kidney cells in 30 mM vs 5 mM glucose",,127,39,-0.1319,-0.1531,-0.0212,-0.734,-0.7445,-0.0105,411,467,56,110.7548,112.013,1.2583
+MPR+20_3h.high.glucose,"human aortic endothelial cells in 3h.high.glucose",,109,133,-0.1398,-0.1262,0.0136,-0.7433,-0.7379,0.0054,323,376,53,112.2566,111.9358,-0.3208
+MPR+20_24h.high.glucose,"human aortic endothelial cells in 24h.high.glucose",,224,98,-0.1344,-0.1277,0.0067,-0.7467,-0.7465,2e-04,380,333.5,-46.5,111.8143,111.9827,0.1684
+MPR+20_3h.high.mannitol,"human aortic endothelial cells in 3h.high.mannitol",,154,127,-0.1377,-0.1282,0.0095,-0.7589,-0.7654,-0.0064,376,340,-36,112.0541,112.0326,-0.0215
+MPR+20_24h.high.mannitol,"human aortic endothelial cells in 24h.high.mannitol",,178,128,-0.1348,-0.1247,0.0101,-0.7523,-0.7753,-0.023,354,373,19,111.9636,112.0097,0.046

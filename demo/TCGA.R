@@ -1,1 +1,2 @@
-makevig("TCGA")
+library(JMDplots)
+mkvig("TCGA")

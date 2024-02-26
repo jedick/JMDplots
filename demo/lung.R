@@ -1,0 +1,2 @@
+library(JMDplots)
+mkvig("lung")

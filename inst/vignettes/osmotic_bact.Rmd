@@ -1,0 +1,103 @@
+---
+title: "Hyperosmotic Stress in Bacteria"
+output:
+  html_vignette:
+    mathjax: null
+vignette: >
+  %\VignetteIndexEntry{Hyperosmotic Stress in Bacteria}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+bibliography: cpdat.bib
+csl: peerj.csl
+---
+
+```{r setup, include=FALSE}
+library(JMDplots)
+library(knitr)
+## use pngquant to reduce size of PNG images
+knit_hooks$set(pngquant = hook_pngquant)
+pngquant <- "--speed=1 --quality=0-25"
+# in case pngquant isn't available (R-Forge?)
+if (!nzchar(Sys.which("pngquant"))) pngquant <- NULL 
+# read 'basis' option
+basis <- getOption("basis")
+```
+
+This vignette from the R package [JMDplots](https://github.com/jedick/JMDplots) version `r packageDescription("JMDplots")$Version` shows chemical metrics for proteins that are differentially expressed in hyperosmotic compared to control conditions.
+The analysis is described in more detail in a paper ([<span title="Uncovering chemical signatures of salinity gradients through compositional analysis of protein sequences">Dick et al., 2020</span>](https://doi.org/10.5194/bg-17-6145-2020)).
+Abbreviations:
+
+  * <i>Z</i><sub>C</sub> &ndash; average oxidation state of carbon.
+  * <i>n</i><sub>H<sub>2</sub>O</sub> &ndash; stoichiometric hydration state per residue ([<span title="Uncovering chemical signatures of salinity gradients through compositional analysis of protein sequences">Dick et al., 2020</span>](https://doi.org/10.5194/bg-17-6145-2020)) computed using the **`r basis`** basis species (`r basis.text(basis)`, H~2~O, O~2~).
+  * pI &ndash; isoelectric point; GRAVY &ndash; grand average of hydropathicity.
+  * <i>n</i><sub>AA</sub> &ndash; protein length; MW &ndash; molecular weight per residue.
+
+<style type="text/css">
+body {
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+</style>
+
+```{r datasets}
+datasets <- pdat_osmotic_bact(2020)
+```
+
+```{r comptab, results="hide", message=FALSE, echo = FALSE}
+pdat1 <- lapply(datasets, pdat_osmotic_bact)
+comptab1 <- lapply(pdat1, get_comptab)
+comptab2 <- lapply(pdat1, get_comptab, "pI", "GRAVY")
+comptab3 <- lapply(pdat1, get_comptab, "nAA", "MW")
+```
+
+Differences are calculated as (median value for up-regulated proteins) - (median value for down-regulated proteins).
+Dashed lines enclose the 50% confidence region for highest probability density.
+
+```{r diffplot, fig.width=9, fig.height=8, fig.align = "center", echo = FALSE, pngquant = pngquant}
+layout(matrix(c(0, 2, 1, 2, 1, 3, 0, 3), nrow = 2))
+par(cex = 1, mar = c(4, 4, 1, 1), mgp = c(2.5, 1, 0))
+diffplot(comptab1, labtext = NA)
+diffplot(comptab2, c("pI", "GRAVY"), labtext = NA)
+diffplot(comptab3, c("nAA", "MW"), labtext = NA)
+```
+
+In the table, values of &Delta;<i>Z</i><sub>C</sub>, &Delta;<i>n</i><sub>H<sub>2</sub>O</sub>, and &Delta;GRAVY are multiplied by 1000, values of &Delta;pI and &Delta;MW are multiplied by 100, and negative values are shown in bold.
+Abbreviations:
+
+  * _n_~down~ &ndash; number of down-regulated proteins; _n_~up~ &ndash; number of up-regulated proteins; aw &ndash; water activity; LB &ndash; lysogeny broth; WT &ndash; wild-type; MMO &ndash; medium minus osmoprotectants.
+
+```{r xsummary, results="asis", echo = FALSE}
+library(xtable)
+out <- xsummary3(comptab1, comptab2, comptab3)
+# round values and include dataset tags
+tags <- sapply(sapply(strsplit(datasets, "="), "[", -1), paste, collapse = ";")
+out <- cbind(out[, 1:2], tags = tags, out[, 3:19])
+out[, 6:20] <- round(out[, 6:20], 4)
+file <- paste0("osmotic_bact_", basis, ".csv")
+write.csv(out, file, row.names = FALSE, quote = 2)
+```
+
+## Data Sources
+
+__a__. Additional file 3: Table S2 of @PNWB09.
+__b__. Supplementary Table 8 of @FTR+10. Only proteins with consistent expression ratios (all > 1 or all < 1) at each time point (15, 60, and 180 min.) were included.
+__c__. Supporting Information Table 1 of @LPK+13 (sheets "Up-Down Proteins" and "Unknown function").
+__d__. __e__. Supplementary Tables S3A and S3B of @QHT+13.
+__f__. Table 1 (proteins) and supplemental Table S2 (genes) of @ADW+14.
+__g__. __h__. __i__. __j__. Supporting Information Table S2 of @KKG+14.
+__k__. __l__. Supporting Information Table of @PBP+14, filtered to include proteins with _p_-value < 0.05.
+__m__. __n__. Additional file Table S2 of @KLB+15.
+__o__. __p__. Supplementary Table S6 of @SKV+16, filtered to include proteins with fold change > 2 or < 0.5 for the ratios Glucose / LB (lysogeny broth) or Osmotic-stress glucose / LB.
+__q__. Supplementary Table 1 (sheets "0.76 fold down regulated" and "1.3 fold up regulated") of @KAK+17.
+__r__. Supplemental Table S-2 of @LYS+17, filtered to include proteins with log~2~ fold change > 1 or < -1 and _p_-value < 0.05.
+__s__. Supplementary Figure 1 of @HGC+18.
+__t__. Supplementary Table 1 of @KSK+18 (amino acid compositions computed from protein sequences in the list of gene annotations).
+__u__. __v__. Tables S1–S6 of @LJC+18. For each of the wild-type and ∆_sigB_ mutant, only proteins that were identified in multicellular vesicles in a single condition (0.5 M salt stress or without salt stress) were included.
+__w__. __x__. Extracted from proteinGroups.txt in PRIDE project [PXD010072](https://www.ebi.ac.uk/pride/archive/projects/PXD010072)/MaxQuantOutput.tar.gz [@TSC18], filtered to include proteins with non-zero LFQ intensity values for all replicates in each experiment; the medians of these values were used to compute fold changes; proteins with fold change > 1.5 or < 2/3 were kept.
+__y__. Table 2 of @LWS+19.
+__z__. __A__. Supplementary Tables S4 and S5 of @MGF+19, filtered to include proteins with fold change >= 2 or <= 0.5.
+__B__. Supplementary Table 1 (sheets ">2.0 Fold" and "< 0.5 Fold") of @AST+20.
+__C__. __D__. Supplementary Table 1 of @GBR+20 (column "MMO+NaCl/MMO" for CIRM129 and CIRM1025).
+
+## References

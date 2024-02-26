@@ -1,0 +1,31 @@
+"dataset","description","tags","n1","n2","Zc.down","Zc.up","Zc.diff","nH2O.down","nH2O.up","nH2O.diff","pI.down","pI.up","pI.diff","GRAVY.down","GRAVY.up","GRAVY.diff","nAA.down","nAA.up","nAA.diff"
+PNWB09,"_Synechocystis_ sp. PCC6803 in 6% w/v NaCl vs no added salt",,77,55,-0.148,-0.1435,0.0045,-0.7626,-0.7372,0.0254,5.37,5.29,-0.08,-0.2684,-0.2418,0.0267,295,367,72
+FTR+10,"_Corynebacterium glutamicum_ in 750 mM NaCl vs control medium",,27,65,-0.1214,-0.1193,0.0021,-0.728,-0.7134,0.0146,5.41,4.97,-0.44,-0.0923,-0.2113,-0.1191,319,446,127
+LPK+13,"_Lactobacillus johnsonii_ with vs without 0.1-0.3% bile salt",,123,88,-0.1568,-0.1307,0.0262,-0.673,-0.7383,-0.0653,5.85,5.175,-0.675,-0.4274,-0.3602,0.0673,261,339.5,78.5
+QHT+13_Protein.24.h,"_Synechocystis_ sp. PCC 6803 Protein in 4% w/v vs 0% added NaCl for 24 h",,42,26,-0.1396,-0.1814,-0.0418,-0.6779,-0.7316,-0.0537,7.135,5.635,-1.5,-0.2607,-0.1499,0.1108,191,147,-44
+QHT+13_Protein.48.h,"_Synechocystis_ sp. PCC 6803 Protein in 4% w/v vs 0% added NaCl for 48 h",,46,62,-0.1467,-0.1634,-0.0168,-0.7603,-0.7313,0.029,5.48,5.235,-0.245,-0.2256,-0.2226,0.003,356,164.5,-191.5
+ADW+14_Protein,"_Bifidobacterium longum_ BBMN68 Protein with vs without 0.75 g/l ox bile",,20,24,-0.127,-0.1191,0.0079,-0.7337,-0.7274,0.0063,5.03,5.365,0.335,-0.2197,-0.1921,0.0276,330,405,75
+KKG+14_Protein_immediate,"_Escherichia coli_ Protein in NaCl (0.967 aw) vs control for immediate",,30,158,-0.154,-0.1662,-0.0121,-0.7103,-0.7295,-0.0191,5.93,6.26,0.33,-0.2602,-0.1387,0.1215,228,396,168
+KKG+14_Protein_30min,"_Escherichia coli_ Protein in NaCl (0.967 aw) vs control for 30 min",,21,162,-0.1576,-0.1723,-0.0147,-0.7043,-0.7246,-0.0203,5.61,6.37,0.76,-0.2753,-0.135,0.1403,248,370.5,122.5
+KKG+14_Protein_80min,"_Escherichia coli_ Protein in NaCl (0.967 aw) vs control for 80 min",,37,126,-0.1441,-0.1728,-0.0288,-0.6969,-0.7246,-0.0276,5.61,6.615,1.005,-0.2643,-0.1033,0.161,286,367.5,81.5
+KKG+14_Protein_310min,"_Escherichia coli_ Protein in NaCl (0.967 aw) vs control for 310 min",,12,399,-0.1452,-0.1469,-0.0017,-0.7113,-0.7424,-0.0311,5.33,5.9,0.57,-0.2389,-0.1909,0.048,207.5,338,130.5
+PBP+14_4.C,"_Listeria monocytogenes_ in 3% NaCl vs control at 4.C",,54,86,-0.1748,-0.1588,0.016,-0.7003,-0.6995,8e-04,5.36,5.2,-0.16,-0.1838,-0.2337,-0.0498,399,350.5,-48.5
+PBP+14_37.C,"_Listeria monocytogenes_ in 3% NaCl vs control at 37.C",,60,25,-0.1744,-0.171,0.0034,-0.6972,-0.6943,0.0028,5.375,5.34,-0.035,-0.202,-0.2185,-0.0164,325.5,344,18.5
+KLB+15_prot-suc,"_Caulobacter crescentus_ Protein in 200 mM sucrose vs M2 minimal salts medium",,33,33,-0.1529,-0.1325,0.0204,-0.6676,-0.7273,-0.0598,5.34,5.95,0.61,-0.1657,-0.1107,0.055,463,473,10
+KLB+15_prot-NaCl,"_Caulobacter crescentus_ Protein in 40/50 mM NaCl vs M2 minimal salts medium",,33,27,-0.1439,-0.1246,0.0193,-0.6776,-0.726,-0.0483,5.28,5.98,0.7,-0.177,-0.1023,0.0747,481,479,-2
+SKV+16_Glucose_LB,"_Escherichia coli_ in Glucose vs LB",,743,282,-0.144,-0.1391,0.0048,-0.7297,-0.7425,-0.0128,5.97,5.89,-0.08,-0.1928,-0.1793,0.0135,309,310.5,1.5
+SKV+16_Osmotic.stress.glucose_LB,"_Escherichia coli_ in Osmotic.stress.glucose vs LB",,978,343,-0.1438,-0.1382,0.0056,-0.7337,-0.7421,-0.0085,5.995,5.78,-0.215,-0.1861,-0.2052,-0.0192,318,268,-50
+KAK+17,"_Lactobacillus fermentum_ with vs without 1.2% w/v bile salts",,106,81,-0.172,-0.1381,0.0339,-0.7005,-0.7374,-0.0369,9.305,5.13,-4.175,-0.2887,-0.2588,0.0299,271.5,320,48.5
+LYS+17,"_Lactobacillus salivarius_ LI01 with vs without 0.15% ox bile",,177,205,-0.1694,-0.1673,0.0021,-0.7223,-0.759,-0.0367,5.59,5.77,0.18,-0.3307,-0.2523,0.0784,275,289,14
+HGC+18,"_Lactobacillus casei_ BL23 in hyper-concentrated vs isotonic sweet whey",,116,64,-0.1497,-0.1367,0.013,-0.6803,-0.7311,-0.0508,5.68,5.135,-0.545,-0.2968,-0.3121,-0.0153,268,301,33
+KSK+18,"_Acidihalobacter prosperus_ DSM 14174 30 g/L / 5 g/L NaCl",,292,316,-0.1184,-0.1251,-0.0066,-0.7383,-0.7273,0.011,5.855,5.78,-0.075,-0.1766,-0.1456,0.031,345,242.5,-102.5
+LJC+18_wt,"_Listeria monocytogenes_ WT in 0.5 M NaCl vs control medium",,65,66,-0.1862,-0.2062,-0.0201,-0.6634,-0.6721,-0.0087,6.55,6.15,-0.4,-0.2614,-0.1551,0.1063,273,304,31
+LJC+18_mutant,"_Listeria monocytogenes_ mutant in 0.5 M NaCl vs control medium",,37,30,-0.1806,-0.194,-0.0134,-0.6484,-0.6589,-0.0106,6.5,6.92,0.42,-0.3515,-0.2244,0.1271,277,184,-93
+TSC18_WT,"_Caulobacter crescentus_ WT in 300 mM sucrose vs control",,91,28,-0.1268,-0.1215,0.0053,-0.7342,-0.7326,0.0015,6.53,5.58,-0.95,-0.1494,-0.1133,0.0361,495,288,-207
+TSC18_GsrN,"_Caulobacter crescentus_ GsrN in 300 mM sucrose vs control",,99,107,-0.1311,-0.1294,0.0017,-0.7227,-0.7041,0.0187,6.45,5.67,-0.78,-0.1277,-0.1348,-0.007,510,266,-244
+LWS+19,"_Lactobacillus plantarum_ FS5-5 in 6-8% w/v vs 0% NaCl",,72,46,-0.1528,-0.1391,0.0137,-0.6978,-0.7399,-0.0421,6.115,5.3,-0.815,-0.1491,-0.1975,-0.0483,324.5,334.5,10
+MGF+19_10,"_Staphylococcus aureus_ in 10% vs 0% NaCl",,88,58,-0.1735,-0.141,0.0325,-0.7195,-0.7579,-0.0384,7.02,4.91,-2.11,-0.4391,-0.381,0.0581,308,194,-114
+MGF+19_20,"_Staphylococcus aureus_ in 20% vs 0% NaCl",,184,99,-0.1708,-0.1466,0.0241,-0.736,-0.7323,0.0037,6.415,5.09,-1.325,-0.3699,-0.3577,0.0122,324,204,-120
+AST+20,"_Lactobacillus fermentum_ with vs without 0.3% to 1.5% w/v bile salts",,368,378,-0.1511,-0.1529,-0.0018,-0.7298,-0.7333,-0.0035,6.27,5.915,-0.355,-0.3197,-0.322,-0.0023,236,264.5,28.5
+GBR+20_CIRM129,"_Propionibacterium freudenreichii_ CIRM129 in NaCl vs MMO",,90,74,-0.096,-0.1107,-0.0147,-0.7303,-0.6955,0.0348,4.935,5.185,0.25,-0.1337,-0.2377,-0.104,319,269,-50
+GBR+20_CIRM1025,"_Propionibacterium freudenreichii_ CIRM1025 in NaCl vs MMO",,64,78,-0.0984,-0.1075,-0.0091,-0.6975,-0.6848,0.0127,5.015,5.13,0.115,-0.1082,-0.1448,-0.0366,330,248,-82

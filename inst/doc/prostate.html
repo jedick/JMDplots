@@ -1,0 +1,1180 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+
+
+<title>Prostate Cancer</title>
+
+<script>// Hide empty <a> tag within highlighted CodeBlock for screen reader accessibility (see https://github.com/jgm/pandoc/issues/6352#issuecomment-626106786) -->
+// v0.0.1
+// Written by JooYoung Seo (jooyoung@psu.edu) and Atsushi Yasumoto on June 1st, 2020.
+
+document.addEventListener('DOMContentLoaded', function() {
+  const codeList = document.getElementsByClassName("sourceCode");
+  for (var i = 0; i < codeList.length; i++) {
+    var linkList = codeList[i].getElementsByTagName('a');
+    for (var j = 0; j < linkList.length; j++) {
+      if (linkList[j].innerHTML === "") {
+        linkList[j].setAttribute('aria-hidden', 'true');
+      }
+    }
+  }
+});
+</script>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+
+
+<style type="text/css">
+  code {
+    white-space: pre;
+  }
+  .sourceCode {
+    overflow: visible;
+  }
+</style>
+<style type="text/css" data-origin="pandoc">
+code.sourceCode > span { display: inline-block; line-height: 1.25; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+
+</style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    var j = 0;
+    while (j < rules.length) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") {
+        j++;
+        continue;
+      }
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' && rule.style.backgroundColor === '') {
+        j++;
+        continue;
+      }
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
+</script>
+
+
+
+
+<style type="text/css">body {
+background-color: #fff;
+margin: 1em auto;
+max-width: 700px;
+overflow: visible;
+padding-left: 2em;
+padding-right: 2em;
+font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+font-size: 14px;
+line-height: 1.35;
+}
+#TOC {
+clear: both;
+margin: 0 0 10px 10px;
+padding: 4px;
+width: 400px;
+border: 1px solid #CCCCCC;
+border-radius: 5px;
+background-color: #f6f6f6;
+font-size: 13px;
+line-height: 1.3;
+}
+#TOC .toctitle {
+font-weight: bold;
+font-size: 15px;
+margin-left: 5px;
+}
+#TOC ul {
+padding-left: 40px;
+margin-left: -1.5em;
+margin-top: 5px;
+margin-bottom: 5px;
+}
+#TOC ul ul {
+margin-left: -2em;
+}
+#TOC li {
+line-height: 16px;
+}
+table {
+margin: 1em auto;
+border-width: 1px;
+border-color: #DDDDDD;
+border-style: outset;
+border-collapse: collapse;
+}
+table th {
+border-width: 2px;
+padding: 5px;
+border-style: inset;
+}
+table td {
+border-width: 1px;
+border-style: inset;
+line-height: 18px;
+padding: 5px 5px;
+}
+table, table th, table td {
+border-left-style: none;
+border-right-style: none;
+}
+table thead, table tr.even {
+background-color: #f7f7f7;
+}
+p {
+margin: 0.5em 0;
+}
+blockquote {
+background-color: #f6f6f6;
+padding: 0.25em 0.75em;
+}
+hr {
+border-style: solid;
+border: none;
+border-top: 1px solid #777;
+margin: 28px 0;
+}
+dl {
+margin-left: 0;
+}
+dl dd {
+margin-bottom: 13px;
+margin-left: 13px;
+}
+dl dt {
+font-weight: bold;
+}
+ul {
+margin-top: 0;
+}
+ul li {
+list-style: circle outside;
+}
+ul ul {
+margin-bottom: 0;
+}
+pre, code {
+background-color: #f7f7f7;
+border-radius: 3px;
+color: #333;
+white-space: pre-wrap; 
+}
+pre {
+border-radius: 3px;
+margin: 5px 0px 10px 0px;
+padding: 10px;
+}
+pre:not([class]) {
+background-color: #f7f7f7;
+}
+code {
+font-family: Consolas, Monaco, 'Courier New', monospace;
+font-size: 85%;
+}
+p > code, li > code {
+padding: 2px 0px;
+}
+div.figure {
+text-align: center;
+}
+img {
+background-color: #FFFFFF;
+padding: 2px;
+border: 1px solid #DDDDDD;
+border-radius: 3px;
+border: 1px solid #CCCCCC;
+margin: 0 5px;
+}
+h1 {
+margin-top: 0;
+font-size: 35px;
+line-height: 40px;
+}
+h2 {
+border-bottom: 4px solid #f7f7f7;
+padding-top: 10px;
+padding-bottom: 2px;
+font-size: 145%;
+}
+h3 {
+border-bottom: 2px solid #f7f7f7;
+padding-top: 10px;
+font-size: 120%;
+}
+h4 {
+border-bottom: 1px solid #f7f7f7;
+margin-left: 8px;
+font-size: 105%;
+}
+h5, h6 {
+border-bottom: 1px solid #ccc;
+font-size: 105%;
+}
+a {
+color: #0033dd;
+text-decoration: none;
+}
+a:hover {
+color: #6666ff; }
+a:visited {
+color: #800080; }
+a:visited:hover {
+color: #BB00BB; }
+a[href^="http:"] {
+text-decoration: underline; }
+a[href^="https:"] {
+text-decoration: underline; }
+
+code > span.kw { color: #555; font-weight: bold; } 
+code > span.dt { color: #902000; } 
+code > span.dv { color: #40a070; } 
+code > span.bn { color: #d14; } 
+code > span.fl { color: #d14; } 
+code > span.ch { color: #d14; } 
+code > span.st { color: #d14; } 
+code > span.co { color: #888888; font-style: italic; } 
+code > span.ot { color: #007020; } 
+code > span.al { color: #ff0000; font-weight: bold; } 
+code > span.fu { color: #900; font-weight: bold; } 
+code > span.er { color: #a61717; background-color: #e3d2d2; } 
+</style>
+
+
+
+
+</head>
+
+<body>
+
+
+
+
+<h1 class="title toc-ignore">Prostate Cancer</h1>
+
+
+
+<p>This vignette from the R package <a href="https://github.com/jedick/JMDplots">JMDplots</a> version 1.2.19-1 shows chemical metrics for proteins that are differentially expressed in prostate cancer compared to normal tissue. The analysis is described in more detail in a paper (<a href="https://doi.org/10.1002/cso2.1007"><span title="Water as a reactant in the differential expression of proteins in cancer">Dick, 2021</a></a>). Abbreviations:</p>
+<ul>
+<li><i>Z</i><sub>C</sub> – average oxidation state of carbon.</li>
+<li><i>n</i><sub>H<sub>2</sub>O</sub> – stoichiometric hydration state per residue (<a href="https://doi.org/10.5194/bg-17-6145-2020"><span title="Uncovering chemical signatures of salinity gradients through compositional analysis of protein sequences">Dick et al., 2020</span></a>) computed using the <strong>QEC</strong> basis species (glutamine, glutamic acid, cysteine, H<sub>2</sub>O, O<sub>2</sub>).</li>
+</ul>
+<style type="text/css">
+body {
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+</style>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a>datasets &lt;-<span class="st"> </span><span class="kw">pdat_prostate</span>(<span class="dv">2020</span>)</span></code></pre></div>
+<p>Differences are calculated as (median value for up-regulated proteins) - (median value for down-regulated proteins). Dashed lines enclose the 50% confidence region for highest probability density.</p>
+<p><img src="data:image/png;base64,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" style="display: block; margin: auto;" /></p>
+<p>In the table, values of Δ<i>Z</i><sub>C</sub> and Δ<i>n</i><sub>H<sub>2</sub>O</sub> are multiplied by 1000, values of ΔMW are multiplied by 100, and negative values are shown in bold. Abbreviations:</p>
+<ul>
+<li><em>n</em><sub>down</sub> – number of down-regulated proteins; <em>n</em><sub>up</sub> – number of up-regulated proteins; PCa – prostate cancer; BPH – benign prostatic hyperplasia; FFPE – formalin-fixed paraffin-embedded; OCT – optimal cutting temperature compound-embedded; TMA – tissue microarray; GS – Gleason Score; CiRT – common internal retention time.</li>
+<li><i>n</i><sub>AA</sub> – protein length; MW – molecular weight per residue.</li>
+</ul>
+<!-- html table generated in R 4.3.2 by xtable 1.8-4 package -->
+<!-- Mon Feb 26 15:55:35 2024 -->
+<table border="1">
+<tr>
+<td align="center" colspan="6">
+</td>
+<td align="center" colspan="2">
+</td>
+</tr>
+<tr>
+<th>
+set
+</th>
+<th>
+reference (description)
+</th>
+<th>
+<i>n</i><sub>down</sub>
+</th>
+<th>
+<i>n</i><sub>up</sub>
+</th>
+<th>
+Δ<i>Z</i><sub>C</sub>
+</th>
+<th>
+Δ<i>n</i><sub>H<sub>2</sub>O</sub>
+</th>
+<th>
+Δ<i>n</i><sub>AA</sub>
+</th>
+<th>
+ΔMW
+</th>
+</tr>
+<tr>
+<td>
+a
+</td>
+<td>
+<code>GTR+08</code> (PCa / BPH)
+</td>
+<td align="right">
+35
+</td>
+<td align="right">
+29
+</td>
+<td align="right">
+<B>-32</B>
+</td>
+<td align="right">
+4
+</td>
+<td align="right">
+<B>-150</B>
+</td>
+<td align="right">
+146
+</td>
+</tr>
+<tr>
+<td>
+b
+</td>
+<td>
+<code>KPB+10</code> (PCa / adjacent benign)
+</td>
+<td align="right">
+68
+</td>
+<td align="right">
+69
+</td>
+<td align="right">
+<B>-17</B>
+</td>
+<td align="right">
+6
+</td>
+<td align="right">
+<B>-124</B>
+</td>
+<td align="right">
+129
+</td>
+</tr>
+<tr>
+<td>
+c
+</td>
+<td>
+<code>HZH+12</code> (PCa / adjacent benign Protein)
+</td>
+<td align="right">
+22
+</td>
+<td align="right">
+37
+</td>
+<td align="right">
+<B>-15</B>
+</td>
+<td align="right">
+26
+</td>
+<td align="right">
+50
+</td>
+<td align="right">
+<B>-231</B>
+</td>
+</tr>
+<tr>
+<td>
+d
+</td>
+<td>
+<code>JHZ+13</code> (PCa / adjacent benign)
+</td>
+<td align="right">
+23
+</td>
+<td align="right">
+36
+</td>
+<td align="right">
+<B>-22</B>
+</td>
+<td align="right">
+30
+</td>
+<td align="right">
+72
+</td>
+<td align="right">
+<B>-84</B>
+</td>
+</tr>
+<tr>
+<td>
+e
+</td>
+<td>
+<code>LCS+14</code> (glycoproteins PCa / normal)
+</td>
+<td align="right">
+82
+</td>
+<td align="right">
+138
+</td>
+<td align="right">
+<B>-8</B>
+</td>
+<td align="right">
+9
+</td>
+<td align="right">
+<B>-106</B>
+</td>
+<td align="right">
+<B>-6</B>
+</td>
+</tr>
+<tr>
+<td>
+f
+</td>
+<td>
+<code>CZL+16</code> (protein expression bioinformatics)
+</td>
+<td align="right">
+74
+</td>
+<td align="right">
+157
+</td>
+<td align="right">
+<B>-41</B>
+</td>
+<td align="right">
+<B>-10</B>
+</td>
+<td align="right">
+<B>-56</B>
+</td>
+<td align="right">
+50
+</td>
+</tr>
+<tr>
+<td>
+g
+</td>
+<td>
+<code>IWT+16</code> (FFPE tumor / adjacent benign)
+</td>
+<td align="right">
+223
+</td>
+<td align="right">
+426
+</td>
+<td align="right">
+<B>-27</B>
+</td>
+<td align="right">
+36
+</td>
+<td align="right">
+222
+</td>
+<td align="right">
+116
+</td>
+</tr>
+<tr>
+<td>
+h
+</td>
+<td>
+<code>GLZ+18</code> (acinar PCa / matched BPH)
+</td>
+<td align="right">
+87
+</td>
+<td align="right">
+114
+</td>
+<td align="right">
+<B>-33</B>
+</td>
+<td align="right">
+30
+</td>
+<td align="right">
+<B>-59</B>
+</td>
+<td align="right">
+22
+</td>
+</tr>
+<tr>
+<td>
+i
+</td>
+<td>
+<code>GLZ+18</code> (ductal PCa / matched BPH)
+</td>
+<td align="right">
+347
+</td>
+<td align="right">
+303
+</td>
+<td align="right">
+<B>-33</B>
+</td>
+<td align="right">
+10
+</td>
+<td align="right">
+<B>-63</B>
+</td>
+<td align="right">
+19
+</td>
+</tr>
+<tr>
+<td>
+j
+</td>
+<td>
+<code>LAJ+18</code> (PC / BPH)
+</td>
+<td align="right">
+273
+</td>
+<td align="right">
+220
+</td>
+<td align="right">
+<B>-35</B>
+</td>
+<td align="right">
+22
+</td>
+<td align="right">
+110
+</td>
+<td align="right">
+86
+</td>
+</tr>
+<tr>
+<td>
+k
+</td>
+<td>
+<code>LAJ+18</code> (CRPC / BPH)
+</td>
+<td align="right">
+313
+</td>
+<td align="right">
+193
+</td>
+<td align="right">
+<B>-25</B>
+</td>
+<td align="right">
+24
+</td>
+<td align="right">
+7
+</td>
+<td align="right">
+19
+</td>
+</tr>
+<tr>
+<td>
+l
+</td>
+<td>
+<code>MAN+18</code> (PCa / BPH)
+</td>
+<td align="right">
+44
+</td>
+<td align="right">
+33
+</td>
+<td align="right">
+3
+</td>
+<td align="right">
+<B>-28</B>
+</td>
+<td align="right">
+36
+</td>
+<td align="right">
+<B>-25</B>
+</td>
+</tr>
+<tr>
+<td>
+m
+</td>
+<td>
+<code>KRN+19</code> (PCa G1 / BPH)
+</td>
+<td align="right">
+32
+</td>
+<td align="right">
+43
+</td>
+<td align="right">
+<B>-24</B>
+</td>
+<td align="right">
+28
+</td>
+<td align="right">
+67
+</td>
+<td align="right">
+<B>-7</B>
+</td>
+</tr>
+<tr>
+<td>
+n
+</td>
+<td>
+<code>KRN+19</code> (PCa G2 / BPH)
+</td>
+<td align="right">
+30
+</td>
+<td align="right">
+22
+</td>
+<td align="right">
+<B>-39</B>
+</td>
+<td align="right">
+10
+</td>
+<td align="right">
+212
+</td>
+<td align="right">
+226
+</td>
+</tr>
+<tr>
+<td>
+o
+</td>
+<td>
+<code>KRN+19</code> (PCa G3 / BPH)
+</td>
+<td align="right">
+43
+</td>
+<td align="right">
+24
+</td>
+<td align="right">
+<B>-36</B>
+</td>
+<td align="right">
+29
+</td>
+<td align="right">
+189
+</td>
+<td align="right">
+175
+</td>
+</tr>
+<tr>
+<td>
+p
+</td>
+<td>
+<code>KRN+19</code> (PCa G4 / BPH)
+</td>
+<td align="right">
+44
+</td>
+<td align="right">
+51
+</td>
+<td align="right">
+<B>-19</B>
+</td>
+<td align="right">
+20
+</td>
+<td align="right">
+57
+</td>
+<td align="right">
+113
+</td>
+</tr>
+<tr>
+<td>
+q
+</td>
+<td>
+<code>KRN+19</code> (PCa G5 / BPH)
+</td>
+<td align="right">
+22
+</td>
+<td align="right">
+24
+</td>
+<td align="right">
+<B>-15</B>
+</td>
+<td align="right">
+48
+</td>
+<td align="right">
+47
+</td>
+<td align="right">
+<B>-35</B>
+</td>
+</tr>
+<tr>
+<td>
+r
+</td>
+<td>
+<code>MMF+20</code> (FFPE PCa / adjacent benign GS=6)
+</td>
+<td align="right">
+40
+</td>
+<td align="right">
+136
+</td>
+<td align="right">
+<B>-16</B>
+</td>
+<td align="right">
+<B>-35</B>
+</td>
+<td align="right">
+<B>-141</B>
+</td>
+<td align="right">
+11
+</td>
+</tr>
+<tr>
+<td>
+s
+</td>
+<td>
+<code>MMF+20</code> (FFPE PCa / adjacent benign GS=6 and GS&gt;=8)
+</td>
+<td align="right">
+37
+</td>
+<td align="right">
+143
+</td>
+<td align="right">
+<B>-1</B>
+</td>
+<td align="right">
+<B>-1</B>
+</td>
+<td align="right">
+18
+</td>
+<td align="right">
+<B>-55</B>
+</td>
+</tr>
+<tr>
+<td>
+t
+</td>
+<td>
+<code>TOT+19</code> (FFPE TMA PCa / normal)
+</td>
+<td align="right">
+36
+</td>
+<td align="right">
+86
+</td>
+<td align="right">
+<B>-32</B>
+</td>
+<td align="right">
+34
+</td>
+<td align="right">
+<B>-226</B>
+</td>
+<td align="right">
+28
+</td>
+</tr>
+<tr>
+<td>
+u
+</td>
+<td>
+<code>ZYW+19</code> (OCT LG PCa / adjacent normal)
+</td>
+<td align="right">
+143
+</td>
+<td align="right">
+54
+</td>
+<td align="right">
+<B>-43</B>
+</td>
+<td align="right">
+6
+</td>
+<td align="right">
+<B>-141</B>
+</td>
+<td align="right">
+116
+</td>
+</tr>
+<tr>
+<td>
+v
+</td>
+<td>
+<code>ZYW+19</code> (OCT HG PCa / adjacent normal)
+</td>
+<td align="right">
+215
+</td>
+<td align="right">
+94
+</td>
+<td align="right">
+<B>-17</B>
+</td>
+<td align="right">
+40
+</td>
+<td align="right">
+<B>-208</B>
+</td>
+<td align="right">
+31
+</td>
+</tr>
+<tr>
+<td>
+w
+</td>
+<td>
+<code>KHN+20</code> (PCa / control)
+</td>
+<td align="right">
+227
+</td>
+<td align="right">
+125
+</td>
+<td align="right">
+<B>-19</B>
+</td>
+<td align="right">
+40
+</td>
+<td align="right">
+47
+</td>
+<td align="right">
+<B>-85</B>
+</td>
+</tr>
+<tr>
+<td>
+x
+</td>
+<td>
+<code>LDM+20</code> (PCa / BPH)
+</td>
+<td align="right">
+73
+</td>
+<td align="right">
+72
+</td>
+<td align="right">
+<B>-20</B>
+</td>
+<td align="right">
+45
+</td>
+<td align="right">
+2
+</td>
+<td align="right">
+<B>-55</B>
+</td>
+</tr>
+<tr>
+<td>
+y
+</td>
+<td>
+<code>SHC+20</code> (FFPE PCa / BPH)
+</td>
+<td align="right">
+58
+</td>
+<td align="right">
+308
+</td>
+<td align="right">
+<B>-34</B>
+</td>
+<td align="right">
+36
+</td>
+<td align="right">
+<B>-246</B>
+</td>
+<td align="right">
+52
+</td>
+</tr>
+<tr>
+<td>
+z
+</td>
+<td>
+<code>ZKL+20</code> (mouse Pten-KO / WT)
+</td>
+<td align="right">
+48
+</td>
+<td align="right">
+55
+</td>
+<td align="right">
+2
+</td>
+<td align="right">
+44
+</td>
+<td align="right">
+49
+</td>
+<td align="right">
+<B>-32</B>
+</td>
+</tr>
+<tr>
+<td>
+A
+</td>
+<td>
+<code>ZZX+20</code> (tumor / normal CiRT)
+</td>
+<td align="right">
+104
+</td>
+<td align="right">
+1451
+</td>
+<td align="right">
+<B>-23</B>
+</td>
+<td align="right">
+14
+</td>
+<td align="right">
+<B>-241</B>
+</td>
+<td align="right">
+90
+</td>
+</tr>
+</table>
+<div id="data-sources" class="section level2">
+<h2>Data Sources</h2>
+<p>Gene names or other identifiers were converted to UniProt accession numbers using the <a href="https://www.uniprot.org/mapping/">UniProt mapping tool</a>.</p>
+<p><strong>a</strong>. Table 2 of <span class="citation">Garbis et al. (2008)</span>. <strong>b</strong>. Supplementary Tables 3 and 4 of <span class="citation">Khan et al. (2010)</span>. <strong>c</strong>. Table S2 of <span class="citation">Han et al. (2012)</span>. <strong>d</strong>. Table S1 of <span class="citation">Jiang et al. (2013)</span>. <strong>e</strong>. Supplemental Table S7 of <span class="citation">Liu et al. (2014)</span>. <strong>f</strong>. Supplementary Table 1 <span class="citation">Chen et al. (2016)</span> (proteins recorded with only Down-regulation or Up-regulation). <strong>g</strong>. Supplementary Table S3 of <span class="citation">Iglesias-Gato et al. (2016)</span>, filtered to include proteins listed with FDR &lt; 0.1. <strong>h</strong>. <strong>i</strong>. Extracted from Table S4 <span class="citation">Guo et al. (2018)</span>. Values were quantile normalized, then ratios were calculated between the median values for each cancer type (acinar and ductal) and corresponding normal tissue; ratios &gt; 1.5 or &lt; 2/3 were used to identify differentially expressed proteins. <strong>j</strong>. <strong>k</strong>. Extracted from Supplementary Data 1 of <span class="citation">Latonen et al. (2018)</span> (sheet “Area-proteins”) by applying quantile normalization to peak areas then calculating median values across all runs and samples for each of BPH , PC (primary prostate cancer), and CRPC (castration resistant prostate cancer). A cutoff of 2-fold in ratios of medians (PC / BPH or CRPC / BPH) was used to identify differentially expressed proteins. <strong>l</strong>. Table 2 of <span class="citation">Martiny et al. (2018)</span>. <strong>m</strong>. <strong>n</strong>. <strong>o</strong>. <strong>p</strong>. <strong>q</strong>. Supporting Information Table S3 of <span class="citation">Kawahara et al. (2019)</span> (G1–G5: PCa grades). <strong>r</strong>. <strong>s</strong>. Tables S4d (GS = 6) and S4f (GS ≥ 8 or GS = 6) of <span class="citation">Mantsiou et al. (2020)</span> (GS: Gleason Score). <strong>t</strong>. Supplementary Table S3a of <span class="citation">Turiák et al. (2019)</span>. <strong>u</strong>. <strong>v</strong>. Table S5 of <span class="citation">Zhou et al. (2019)</span> (LG: low-grade PCa; HG: high-grade PCa). <strong>w</strong>. Supplemental Table S2 of <span class="citation">Kwon et al. (2020)</span>, filtered to include proteins with log<sub>2</sub> fold change &gt; 1 or &lt; -1 in at least one experiment. <strong>x</strong>. Table S2 of <span class="citation">Latosinska et al. (2020)</span>. <strong>y</strong>. Table S2, Sheet D:S3-SWATH_protein_matrix of <span class="citation">Sun et al. (2020)</span>, filtered to include proteins quantified in at least 50% of both tumor and normal samples and with median fold change &gt; 2 or &lt; 0.5. <strong>z</strong>. Table S4 of <span class="citation">Zhang et al. (2020)</span> (<em>Pten</em> gene knockout vs wild-type). <strong>A</strong>. Supplementary Tables S3E–S3F of <span class="citation">Zhu et al. (2020)</span>.</p>
+</div>
+<div id="references" class="section level2 unnumbered">
+<h2>References</h2>
+<div id="refs" class="references">
+<div id="ref-CZL+16">
+<p>Chen C, Zhang L-G, Liu J, Han H, Chen N, Yao A-L, Kang S-S, Gao W-X, Shen H, Zhang L-J, Li Y-P, Cao F-H, Li Z-G. 2016. Bioinformatics analysis of differentially expressed proteins in prostate cancer based on proteomics data. <em>OncoTargets and Therapy</em> 9:1545–1557. DOI: <a href="https://doi.org/10.2147/OTT.S98807">10.2147/OTT.S98807</a>.</p>
+</div>
+<div id="ref-GTR+08">
+<p>Garbis SD, Tyritzis SI, Roumeliotis T, Zerefos P, Giannopoulou EG, Vlahou A, Kossida S, Diaz J, Vourekas S, Tamvakopoulos C, Pavlakis K, Sanoudou D, Constantinides CA. 2008. Search for potential markers for prostate cancer diagnosis, prognosis and treatment in clinical tissue specimens using amine-specific isobaric tagging (iTRAQ) with two-dimensional liquid chromatography and tandem mass spectrometry. <em>Journal of Proteome Research</em> 7:3146–3158. DOI: <a href="https://doi.org/10.1021/pr800060r">10.1021/pr800060r</a>.</p>
+</div>
+<div id="ref-GLZ+18">
+<p>Guo T, Li L, Zhong Q, Rupp NJ, Charmpi K, Wong CE, Wagner U, Rueschoff JH, Jochum W, Fankhauser CD, Saba K, Poyet C, Wild PJ, Aebersold R, Beyer A. 2018. Multi-region proteome analysis quantifies spatial heterogeneity of prostate tissue biomarkers. <em>Life Science Alliance</em> 1:e201800042. DOI: <a href="https://doi.org/10.26508/lsa.201800042">10.26508/lsa.201800042</a>.</p>
+</div>
+<div id="ref-HZH+12">
+<p>Han Z-D, Zhang Y-Q, He H-C, Dai Q-S, Qin G-Q, Chen J-H, Cai C, Fu X, Bi X-C, Zhu J-G, Liao D-J, Lu X-P, Mo Z-Y, Zhu Y-P, Zhong W-D. 2012. Identification of novel serological tumor markers for human prostate cancer using integrative transcriptome and proteome analysis. <em>Medical Oncology</em> 29:2877–2888. DOI: <a href="https://doi.org/10.1007/s12032-011-0149-9">10.1007/s12032-011-0149-9</a>.</p>
+</div>
+<div id="ref-IWT+16">
+<p>Iglesias-Gato D, Wikström P, Tyanova S, Lavallee C, Thysell E, Carlsson J, Hägglöf C, Cox J, Andrén O, Stattin P, Egevad L, Widmark A, Bjartell A, Collins CC, Bergh A, Geiger T, Mann M, Flores-Morales A. 2016. The proteome of primary prostate cancer. <em>European Urology</em> 69:942–952. DOI: <a href="https://doi.org/10.1016/j.eururo.2015.10.053">10.1016/j.eururo.2015.10.053</a>.</p>
+</div>
+<div id="ref-JHZ+13">
+<p>Jiang F-N, He H-C, Zhang Y-Q, Yang D-L, Huang J-H, Zhu Y-X, Mo R-J, Chen G, Yang S-B, Chen Y-R, Zhong W-D, Zhou W-L. 2013. An integrative proteomics and interaction network-based classifier for prostate cancer diagnosis. <em>PLOS One</em> 8:e63941. DOI: <a href="https://doi.org/10.1371/journal.pone.0063941">10.1371/journal.pone.0063941</a>.</p>
+</div>
+<div id="ref-KRN+19">
+<p>Kawahara R, Recuero S, Nogueira FCS, Domont GB, Leite KRM, Srougi M, Thaysen-Andersen M, Palmisano G. 2019. Tissue proteome signatures associated with five grades of prostate cancer and benign prostatic hyperplasia. <em>Proteomics</em> 19:1900174. DOI: <a href="https://doi.org/10.1002/pmic.201900174">10.1002/pmic.201900174</a>.</p>
+</div>
+<div id="ref-KPB+10">
+<p>Khan AP, Poisson LM, Bhat VB, Fermin D, Zhao R, Kalyana-Sundaram S, Michailidis G, Nesvizhskii AI, Omenn GS, Chinnaiyan AM, Sreekumar A. 2010. Quantitative proteomic profiling of prostate cancer reveals a role for miR-128 in prostate cancer. <em>Molecular &amp; Cellular Proteomics</em> 9:298–312. DOI: <a href="https://doi.org/10.1074/mcp.M900159-MCP200">10.1074/mcp.M900159-MCP200</a>.</p>
+</div>
+<div id="ref-KHN+20">
+<p>Kwon OK, Ha Y-S, Na A-Y, Chun SY, Kwon TG, Lee JN, Lee S. 2020. Identification of novel prognosis and prediction markers in advanced prostate cancer tissues based on quantitative proteomics. <em>Cancer Genomics - Proteomics</em> 17:195–208. DOI: <a href="https://doi.org/10.21873/cgp.20180">10.21873/cgp.20180</a>.</p>
+</div>
+<div id="ref-LAJ+18">
+<p>Latonen L, Afyounian E, Jylha A, Nattinen J, Aapola U, Annala M, Kivinummi KK, Tammela TTL, Beuerman RW, Uusitalo H, Nykter M, Visakorpi T. 2018. Integrative proteomics in prostate cancer uncovers robustness against genomic and transcriptomic aberrations during disease progression. <em>Nature Communications</em> 9:1176. DOI: <a href="https://doi.org/10.1038/s41467-018-03573-6">10.1038/s41467-018-03573-6</a>.</p>
+</div>
+<div id="ref-LDM+20">
+<p>Latosinska A, Davalieva K, Makridakis M, Mullen W, Schanstra JP, Vlahou A, Mischak H, Frantzi M. 2020. Molecular changes in tissue proteome during prostate cancer development: Proof-of-principle investigation. <em>Diagnostics</em> 10:655. DOI: <a href="https://doi.org/10.3390/diagnostics10090655">10.3390/diagnostics10090655</a>.</p>
+</div>
+<div id="ref-LCS+14">
+<p>Liu Y, Chen J, Sethi A, Li QK, Chen L, Collins B, Gillet LCJ, Wollscheid B, Zhang H, Aebersold R. 2014. Glycoproteomic analysis of prostate cancer tissues by SWATH mass spectrometry discovers N-acylethanolamine acid amidase and protein tyrosine kinase 7 as signatures for tumor aggressiveness. <em>Molecular &amp; Cellular Proteomics</em> 13:1753–1768. DOI: <a href="https://doi.org/10.1074/mcp.M114.038273">10.1074/mcp.M114.038273</a>.</p>
+</div>
+<div id="ref-MMF+20">
+<p>Mantsiou A, Makridakis M, Fasoulakis K, Katafigiotis I, Constantinides CA, Zoidakis J, Roubelakis MG, Vlahou A, Lygirou V. 2020. Proteomics analysis of formalin fixed paraffin embedded tissues in the investigation of prostate cancer. <em>Journal of Proteome Research</em> 19:2631–2642. DOI: <a href="https://doi.org/10.1021/acs.jproteome.9b00587">10.1021/acs.jproteome.9b00587</a>.</p>
+</div>
+<div id="ref-MAN+18">
+<p>Martiny PB, Alcoba DD, Neto BS, Carvalho PC, Brum IS. 2018. A proteomic glimpse into the oncogenesis of prostate cancer. <em>Journal of Applied Biomedicine</em> 16:328–336. DOI: <a href="https://doi.org/10.1016/j.jab.2018.05.003">10.1016/j.jab.2018.05.003</a>.</p>
+</div>
+<div id="ref-SHC+20">
+<p>Sun R, Hunter C, Chen C, Ge W, Morrice N, Liang S, Zhu T, Yuan C, Ruan G, Zhang Q, Cai X, Yu X, Chen L, Dai S, Luan Z, Aebersold R, Zhu Y, Guo T. 2020. Accelerated protein biomarker discovery from FFPE tissue samples using single-shot, short gradient microflow SWATH MS. <em>Journal of Proteome Research</em> 19:2732–2741. DOI: <a href="https://doi.org/10.1021/acs.jproteome.9b00671">10.1021/acs.jproteome.9b00671</a>.</p>
+</div>
+<div id="ref-TOT+19">
+<p>Turiák L, Ozohanics O, Tóth G, Ács A, Révész Á, Vékey K, Telekes A, Drahos L. 2019. High sensitivity proteomics of prostate cancer tissue microarrays to discriminate between healthy and cancerous tissue. <em>Journal of Proteomics</em> 197:82–91. DOI: <a href="https://doi.org/10.1016/j.jprot.2018.11.009">10.1016/j.jprot.2018.11.009</a>.</p>
+</div>
+<div id="ref-ZKL+20">
+<p>Zhang J, Kim S, Li L, Kemp CJ, Jiang C, Lü J. 2020. Proteomic and transcriptomic profiling of <em>Pten</em> gene-knockout mouse model of prostate cancer. <em>The Prostate</em> 80:588–605. DOI: <a href="https://doi.org/10.1002/pros.23972">10.1002/pros.23972</a>.</p>
+</div>
+<div id="ref-ZYW+19">
+<p>Zhou B, Yan Y, Wang Y, You S, Freeman MR, Yang W. 2019. Quantitative proteomic analysis of prostate tissue specimens identifies deregulated protein complexes in primary prostate cancer. <em>Clinical Proteomics</em> 16:15. DOI: <a href="https://doi.org/10.1186/s12014-019-9236-2">10.1186/s12014-019-9236-2</a>.</p>
+</div>
+<div id="ref-ZZX+20">
+<p>Zhu T, Zhu Y, Xuan Y, Gao H, Cai X, Piersma SR, Pham TV, Schelfhorst T, Haas RRGD, Bijnsdorp IV, Sun R, Yue L, Ruan G, Zhang Q, Hu M, Zhou Y, Van Houdt WJ, Le Large TYS, Cloos J, Wojtuszkiewicz A, Koppers-Lalic D, Böttger F, Scheepbouwer C, Brakenhoff RH, van Leenders GJLH, Ijzermans JNM, Martens JWM, Steenbergen RDM, Grieken NC, Selvarajan S, Mantoo S, Lee SS, Yeow SJY, Alkaff SMF, Xiang N, Sun Y, Yi X, Dai S, Liu W, Lu T, Wu Z, Liang X, Wang M, Shao Y, Zheng X, Xu K, Yang Q, Meng Y, Lu C, Zhu J, Zheng J, Wang B, Lou S, Dai Y, Xu C, Yu C, Ying H, Lim TK, Wu J, Gao X, Luan Z, Teng X, Wu P, Huang S, Tao Z, Iyer NG, Zhou S, Shao W, Lam H, Ma D, Ji J, Kon OL, Zheng S, Aebersold R, Jimenez CR, Guo T. 2020. DPHL: A DIA pan-human protein mass spectrometry library for robust biomarker discovery. <em>Genomics, Proteomics &amp; Bioinformatics</em> 18:104–119. DOI: <a href="https://doi.org/10.1016/j.gpb.2019.11.008">10.1016/j.gpb.2019.11.008</a>.</p>
+</div>
+</div>
+</div>
+
+
+
+<!-- code folding -->
+
+
+
+</body>
+</html>

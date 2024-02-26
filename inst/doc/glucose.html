@@ -1,0 +1,1086 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+
+
+<title>High Glucose</title>
+
+<script>// Hide empty <a> tag within highlighted CodeBlock for screen reader accessibility (see https://github.com/jgm/pandoc/issues/6352#issuecomment-626106786) -->
+// v0.0.1
+// Written by JooYoung Seo (jooyoung@psu.edu) and Atsushi Yasumoto on June 1st, 2020.
+
+document.addEventListener('DOMContentLoaded', function() {
+  const codeList = document.getElementsByClassName("sourceCode");
+  for (var i = 0; i < codeList.length; i++) {
+    var linkList = codeList[i].getElementsByTagName('a');
+    for (var j = 0; j < linkList.length; j++) {
+      if (linkList[j].innerHTML === "") {
+        linkList[j].setAttribute('aria-hidden', 'true');
+      }
+    }
+  }
+});
+</script>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+
+
+<style type="text/css">
+  code {
+    white-space: pre;
+  }
+  .sourceCode {
+    overflow: visible;
+  }
+</style>
+<style type="text/css" data-origin="pandoc">
+code.sourceCode > span { display: inline-block; line-height: 1.25; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+
+</style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    var j = 0;
+    while (j < rules.length) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") {
+        j++;
+        continue;
+      }
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' && rule.style.backgroundColor === '') {
+        j++;
+        continue;
+      }
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
+</script>
+
+
+
+
+<style type="text/css">body {
+background-color: #fff;
+margin: 1em auto;
+max-width: 700px;
+overflow: visible;
+padding-left: 2em;
+padding-right: 2em;
+font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+font-size: 14px;
+line-height: 1.35;
+}
+#TOC {
+clear: both;
+margin: 0 0 10px 10px;
+padding: 4px;
+width: 400px;
+border: 1px solid #CCCCCC;
+border-radius: 5px;
+background-color: #f6f6f6;
+font-size: 13px;
+line-height: 1.3;
+}
+#TOC .toctitle {
+font-weight: bold;
+font-size: 15px;
+margin-left: 5px;
+}
+#TOC ul {
+padding-left: 40px;
+margin-left: -1.5em;
+margin-top: 5px;
+margin-bottom: 5px;
+}
+#TOC ul ul {
+margin-left: -2em;
+}
+#TOC li {
+line-height: 16px;
+}
+table {
+margin: 1em auto;
+border-width: 1px;
+border-color: #DDDDDD;
+border-style: outset;
+border-collapse: collapse;
+}
+table th {
+border-width: 2px;
+padding: 5px;
+border-style: inset;
+}
+table td {
+border-width: 1px;
+border-style: inset;
+line-height: 18px;
+padding: 5px 5px;
+}
+table, table th, table td {
+border-left-style: none;
+border-right-style: none;
+}
+table thead, table tr.even {
+background-color: #f7f7f7;
+}
+p {
+margin: 0.5em 0;
+}
+blockquote {
+background-color: #f6f6f6;
+padding: 0.25em 0.75em;
+}
+hr {
+border-style: solid;
+border: none;
+border-top: 1px solid #777;
+margin: 28px 0;
+}
+dl {
+margin-left: 0;
+}
+dl dd {
+margin-bottom: 13px;
+margin-left: 13px;
+}
+dl dt {
+font-weight: bold;
+}
+ul {
+margin-top: 0;
+}
+ul li {
+list-style: circle outside;
+}
+ul ul {
+margin-bottom: 0;
+}
+pre, code {
+background-color: #f7f7f7;
+border-radius: 3px;
+color: #333;
+white-space: pre-wrap; 
+}
+pre {
+border-radius: 3px;
+margin: 5px 0px 10px 0px;
+padding: 10px;
+}
+pre:not([class]) {
+background-color: #f7f7f7;
+}
+code {
+font-family: Consolas, Monaco, 'Courier New', monospace;
+font-size: 85%;
+}
+p > code, li > code {
+padding: 2px 0px;
+}
+div.figure {
+text-align: center;
+}
+img {
+background-color: #FFFFFF;
+padding: 2px;
+border: 1px solid #DDDDDD;
+border-radius: 3px;
+border: 1px solid #CCCCCC;
+margin: 0 5px;
+}
+h1 {
+margin-top: 0;
+font-size: 35px;
+line-height: 40px;
+}
+h2 {
+border-bottom: 4px solid #f7f7f7;
+padding-top: 10px;
+padding-bottom: 2px;
+font-size: 145%;
+}
+h3 {
+border-bottom: 2px solid #f7f7f7;
+padding-top: 10px;
+font-size: 120%;
+}
+h4 {
+border-bottom: 1px solid #f7f7f7;
+margin-left: 8px;
+font-size: 105%;
+}
+h5, h6 {
+border-bottom: 1px solid #ccc;
+font-size: 105%;
+}
+a {
+color: #0033dd;
+text-decoration: none;
+}
+a:hover {
+color: #6666ff; }
+a:visited {
+color: #800080; }
+a:visited:hover {
+color: #BB00BB; }
+a[href^="http:"] {
+text-decoration: underline; }
+a[href^="https:"] {
+text-decoration: underline; }
+
+code > span.kw { color: #555; font-weight: bold; } 
+code > span.dt { color: #902000; } 
+code > span.dv { color: #40a070; } 
+code > span.bn { color: #d14; } 
+code > span.fl { color: #d14; } 
+code > span.ch { color: #d14; } 
+code > span.st { color: #d14; } 
+code > span.co { color: #888888; font-style: italic; } 
+code > span.ot { color: #007020; } 
+code > span.al { color: #ff0000; font-weight: bold; } 
+code > span.fu { color: #900; font-weight: bold; } 
+code > span.er { color: #a61717; background-color: #e3d2d2; } 
+</style>
+
+
+
+
+</head>
+
+<body>
+
+
+
+
+<h1 class="title toc-ignore">High Glucose</h1>
+
+
+
+<p>This vignette from the R package <a href="https://github.com/jedick/JMDplots">JMDplots</a> version 1.2.19-1 shows chemical metrics for proteins that are differentially expressed in high-glucose compared to control conditions. The analysis is described in more detail in a paper (<a href="https://doi.org/10.1002/cso2.1007"><span title="Water as a reactant in the differential expression of proteins in cancer">Dick, 2021</a></a>). Abbreviations:</p>
+<ul>
+<li><i>Z</i><sub>C</sub> – average oxidation state of carbon.</li>
+<li><i>n</i><sub>H<sub>2</sub>O</sub> – stoichiometric hydration state per residue (<a href="https://doi.org/10.5194/bg-17-6145-2020"><span title="Uncovering chemical signatures of salinity gradients through compositional analysis of protein sequences">Dick et al., 2020</span></a>) computed using the <strong>QEC</strong> basis species (glutamine, glutamic acid, cysteine, H<sub>2</sub>O, O<sub>2</sub>).</li>
+</ul>
+<style type="text/css">
+body {
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+</style>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a>datasets &lt;-<span class="st"> </span><span class="kw">pdat_glucose</span>(<span class="dv">2020</span>)</span></code></pre></div>
+<p>Differences are calculated as (median value for up-regulated proteins) - (median value for down-regulated proteins). Dashed lines enclose the 50% confidence region for highest probability density.</p>
+<p><img src="data:image/png;base64,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" style="display: block; margin: auto;" /></p>
+<p>In the table, values of Δ<i>Z</i><sub>C</sub> and Δ<i>n</i><sub>H<sub>2</sub>O</sub> are multiplied by 1000, values of ΔMW are multiplied by 100, and negative values are shown in bold. Abbreviations:</p>
+<ul>
+<li><em>n</em><sub>down</sub> – number of down-regulated proteins; <em>n</em><sub>up</sub> – number of up-regulated proteins; HUVEC – human umbilical vein endothelial cells; eMP – endothelial-derived microparticles.</li>
+<li><i>n</i><sub>AA</sub> – protein length; MW – molecular weight per residue.</li>
+</ul>
+<!-- html table generated in R 4.3.2 by xtable 1.8-4 package -->
+<!-- Mon Feb 26 15:55:12 2024 -->
+<table border="1">
+<tr>
+<td align="center" colspan="6">
+</td>
+<td align="center" colspan="2">
+</td>
+</tr>
+<tr>
+<th>
+set
+</th>
+<th>
+reference (description)
+</th>
+<th>
+<i>n</i><sub>down</sub>
+</th>
+<th>
+<i>n</i><sub>up</sub>
+</th>
+<th>
+Δ<i>Z</i><sub>C</sub>
+</th>
+<th>
+Δ<i>n</i><sub>H<sub>2</sub>O</sub>
+</th>
+<th>
+Δ<i>n</i><sub>AA</sub>
+</th>
+<th>
+ΔMW
+</th>
+</tr>
+<tr>
+<td>
+a
+</td>
+<td>
+<code>PW08</code> (<i>Saccharomyces cerevisiae</i> in very high glucose (300 g/L) vs control (20 g/L) for 2 h)
+</td>
+<td align="right">
+38
+</td>
+<td align="right">
+44
+</td>
+<td align="right">
+<B>-4</B>
+</td>
+<td align="right">
+<B>-45</B>
+</td>
+<td align="right">
+<B>-8</B>
+</td>
+<td align="right">
+188
+</td>
+</tr>
+<tr>
+<td>
+b
+</td>
+<td>
+<code>PW08</code> (<i>Saccharomyces cerevisiae</i> in very high glucose (300 g/L) vs control (20 g/L) for 10 h)
+</td>
+<td align="right">
+33
+</td>
+<td align="right">
+62
+</td>
+<td align="right">
+<B>-2</B>
+</td>
+<td align="right">
+<B>-37</B>
+</td>
+<td align="right">
+104
+</td>
+<td align="right">
+9
+</td>
+</tr>
+<tr>
+<td>
+c
+</td>
+<td>
+<code>PW08</code> (<i>Saccharomyces cerevisiae</i> in very high glucose (300 g/L) vs control (20 g/L) for 12 h)
+</td>
+<td align="right">
+18
+</td>
+<td align="right">
+65
+</td>
+<td align="right">
+8
+</td>
+<td align="right">
+<B>-29</B>
+</td>
+<td align="right">
+76
+</td>
+<td align="right">
+69
+</td>
+</tr>
+<tr>
+<td>
+d
+</td>
+<td>
+<code>WCM+09</code> (mouse pancreatic islets in 16.7 mM vs 5.6 mM glucose)
+</td>
+<td align="right">
+63
+</td>
+<td align="right">
+94
+</td>
+<td align="right">
+<B>-13</B>
+</td>
+<td align="right">
+<B>-43</B>
+</td>
+<td align="right">
+36
+</td>
+<td align="right">
+<B>-15</B>
+</td>
+</tr>
+<tr>
+<td>
+e
+</td>
+<td>
+<code>WFSL09</code> (bovine aortal endothelial cells in 22 mM vs 5 mM glucose)
+</td>
+<td align="right">
+67
+</td>
+<td align="right">
+46
+</td>
+<td align="right">
+<B>-26</B>
+</td>
+<td align="right">
+9
+</td>
+<td align="right">
+26
+</td>
+<td align="right">
+306
+</td>
+</tr>
+<tr>
+<td>
+f
+</td>
+<td>
+<code>MFD+10</code> (rat INS-1E cells in 25 mM vs 11 mM glucose)
+</td>
+<td align="right">
+51
+</td>
+<td align="right">
+20
+</td>
+<td align="right">
+<B>-34</B>
+</td>
+<td align="right">
+13
+</td>
+<td align="right">
+12
+</td>
+<td align="right">
+<B>-74</B>
+</td>
+</tr>
+<tr>
+<td>
+g
+</td>
+<td>
+<code>CCC+12</code> (retinal pigmented epithelium in 25 mM glucose vs 5.5 mM glucose)
+</td>
+<td align="right">
+17
+</td>
+<td align="right">
+11
+</td>
+<td align="right">
+<B>-16</B>
+</td>
+<td align="right">
+<B>-38</B>
+</td>
+<td align="right">
+<B>-39</B>
+</td>
+<td align="right">
+<B>-165</B>
+</td>
+</tr>
+<tr>
+<td>
+h
+</td>
+<td>
+<code>CCC+12</code> (retinal pigmented epithelium in 100 mM glucose vs 5.5 mM glucose)
+</td>
+<td align="right">
+21
+</td>
+<td align="right">
+24
+</td>
+<td align="right">
+<B>-4</B>
+</td>
+<td align="right">
+<B>-18</B>
+</td>
+<td align="right">
+<B>-16</B>
+</td>
+<td align="right">
+<B>-126</B>
+</td>
+</tr>
+<tr>
+<td>
+i
+</td>
+<td>
+<code>SFG+12</code> (human pancreatic islets in 15 mM vs 5 mM glucose)
+</td>
+<td align="right">
+34
+</td>
+<td align="right">
+57
+</td>
+<td align="right">
+5
+</td>
+<td align="right">
+11
+</td>
+<td align="right">
+116
+</td>
+<td align="right">
+<B>-7</B>
+</td>
+</tr>
+<tr>
+<td>
+j
+</td>
+<td>
+<code>CCCC13</code> (Chang liver cells in 25 mM vs 5.5 mM glucose)
+</td>
+<td align="right">
+32
+</td>
+<td align="right">
+39
+</td>
+<td align="right">
+2
+</td>
+<td align="right">
+0
+</td>
+<td align="right">
+<B>-270</B>
+</td>
+<td align="right">
+<B>-73</B>
+</td>
+</tr>
+<tr>
+<td>
+k
+</td>
+<td>
+<code>CCCC13</code> (Chang liver cells in 100 mM vs 5.5 mM glucose)
+</td>
+<td align="right">
+19
+</td>
+<td align="right">
+50
+</td>
+<td align="right">
+32
+</td>
+<td align="right">
+<B>-38</B>
+</td>
+<td align="right">
+98
+</td>
+<td align="right">
+<B>-51</B>
+</td>
+</tr>
+<tr>
+<td>
+l
+</td>
+<td>
+<code>CCW+13</code> (rat INS-1beta cells in 27 mM vs 11 mM glucose)
+</td>
+<td align="right">
+126
+</td>
+<td align="right">
+60
+</td>
+<td align="right">
+<B>-6</B>
+</td>
+<td align="right">
+<B>-6</B>
+</td>
+<td align="right">
+<B>-4</B>
+</td>
+<td align="right">
+78
+</td>
+</tr>
+<tr>
+<td>
+m
+</td>
+<td>
+<code>LDB+15</code> (Chinese hamster ovary cells in 15 g/L vs 5 g/L glucose)
+</td>
+<td align="right">
+294
+</td>
+<td align="right">
+205
+</td>
+<td align="right">
+<B>-23</B>
+</td>
+<td align="right">
+<B>-15</B>
+</td>
+<td align="right">
+<B>-44</B>
+</td>
+<td align="right">
+26
+</td>
+</tr>
+<tr>
+<td>
+n
+</td>
+<td>
+<code>BTX+17</code> (HUVEC eMPs in 5.6 mmol/l glucose + 19.4 mmol/l D-glucose vs 5.6 mmol/l glucose)
+</td>
+<td align="right">
+28
+</td>
+<td align="right">
+333
+</td>
+<td align="right">
+4
+</td>
+<td align="right">
+31
+</td>
+<td align="right">
+<B>-17</B>
+</td>
+<td align="right">
+<B>-17</B>
+</td>
+</tr>
+<tr>
+<td>
+o
+</td>
+<td>
+<code>BTX+17</code> (HUVEC eMPs in 5.6 mmol/l glucose + 19.4 mmol/l L-glucose vs 5.6 mmol/l glucose)
+</td>
+<td align="right">
+24
+</td>
+<td align="right">
+377
+</td>
+<td align="right">
+<B>-3</B>
+</td>
+<td align="right">
+<B>-20</B>
+</td>
+<td align="right">
+<B>-22</B>
+</td>
+<td align="right">
+95
+</td>
+</tr>
+<tr>
+<td>
+p
+</td>
+<td>
+<code>SFKD17</code> (secretome of murine islets of Langerhans in 25 mM vs 11 mM glucose for 1 day)
+</td>
+<td align="right">
+59
+</td>
+<td align="right">
+54
+</td>
+<td align="right">
+4
+</td>
+<td align="right">
+<B>-28</B>
+</td>
+<td align="right">
+111
+</td>
+<td align="right">
+<B>-28</B>
+</td>
+</tr>
+<tr>
+<td>
+q
+</td>
+<td>
+<code>SFKD17</code> (secretome of murine islets of Langerhans in 25 mM vs 11 mM glucose for 2 days)
+</td>
+<td align="right">
+82
+</td>
+<td align="right">
+104
+</td>
+<td align="right">
+<B>-1</B>
+</td>
+<td align="right">
+20
+</td>
+<td align="right">
+12
+</td>
+<td align="right">
+<B>-63</B>
+</td>
+</tr>
+<tr>
+<td>
+r
+</td>
+<td>
+<code>IXA+19</code> (human aortal endothelial cells in 20 mM vs 5 mM glucose)
+</td>
+<td align="right">
+49
+</td>
+<td align="right">
+331
+</td>
+<td align="right">
+6
+</td>
+<td align="right">
+<B>-39</B>
+</td>
+<td align="right">
+127
+</td>
+<td align="right">
+<B>-19</B>
+</td>
+</tr>
+<tr>
+<td>
+s
+</td>
+<td>
+<code>MHP+20</code> (rat H9c2 cells in 30 mM vs 5 mM glucose)
+</td>
+<td align="right">
+17
+</td>
+<td align="right">
+20
+</td>
+<td align="right">
+22
+</td>
+<td align="right">
+<B>-40</B>
+</td>
+<td align="right">
+<B>-94</B>
+</td>
+<td align="right">
+101
+</td>
+</tr>
+<tr>
+<td>
+t
+</td>
+<td>
+<code>MHP+20</code> (human embryonic kidney cells in 30 mM vs 5 mM glucose)
+</td>
+<td align="right">
+127
+</td>
+<td align="right">
+39
+</td>
+<td align="right">
+<B>-21</B>
+</td>
+<td align="right">
+<B>-10</B>
+</td>
+<td align="right">
+56
+</td>
+<td align="right">
+126
+</td>
+</tr>
+<tr>
+<td>
+u
+</td>
+<td>
+<code>MPR+20</code> (human aortic endothelial cells in 3h.high.glucose)
+</td>
+<td align="right">
+109
+</td>
+<td align="right">
+133
+</td>
+<td align="right">
+14
+</td>
+<td align="right">
+5
+</td>
+<td align="right">
+53
+</td>
+<td align="right">
+<B>-32</B>
+</td>
+</tr>
+<tr>
+<td>
+v
+</td>
+<td>
+<code>MPR+20</code> (human aortic endothelial cells in 24h.high.glucose)
+</td>
+<td align="right">
+224
+</td>
+<td align="right">
+98
+</td>
+<td align="right">
+7
+</td>
+<td align="right">
+0
+</td>
+<td align="right">
+<B>-46</B>
+</td>
+<td align="right">
+17
+</td>
+</tr>
+<tr>
+<td>
+w
+</td>
+<td>
+<code>MPR+20</code> (human aortic endothelial cells in 3h.high.mannitol)
+</td>
+<td align="right">
+154
+</td>
+<td align="right">
+127
+</td>
+<td align="right">
+10
+</td>
+<td align="right">
+<B>-6</B>
+</td>
+<td align="right">
+<B>-36</B>
+</td>
+<td align="right">
+<B>-2</B>
+</td>
+</tr>
+<tr>
+<td>
+x
+</td>
+<td>
+<code>MPR+20</code> (human aortic endothelial cells in 24h.high.mannitol)
+</td>
+<td align="right">
+178
+</td>
+<td align="right">
+128
+</td>
+<td align="right">
+10
+</td>
+<td align="right">
+<B>-23</B>
+</td>
+<td align="right">
+19
+</td>
+<td align="right">
+5
+</td>
+</tr>
+</table>
+<div id="data-sources" class="section level2">
+<h2>Data Sources</h2>
+<p><strong>a</strong>. <strong>b</strong>. <strong>c</strong>. Supporting Information Table of <span class="citation">Pham &amp; Wright (2008)</span>, filtered to include proteins with expression ratios &lt; 0.9 or &gt; 1.1 and with <em>p</em>-values &lt; 0.05. <strong>d</strong>. Supplemetary Table ST4 of <span class="citation">Waanders et al. (2009)</span>, filtered to include the proteins with ANOVA <em>p</em>-value &lt; 0.01 (red- and blue-highlighted rows in the source table), and applying the authors’ criterion that proteins be identified by 2 or more unique peptides in at least 4 of the 8 most intense LC-MS/MS runs. <strong>e</strong>. <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2818370/">Supplementary Table</a> of <span class="citation">Wang et al. (2009)</span>, filtered to include proteins with fold change &gt; 1.2 or &lt; 0.8. <strong>f</strong>. Table 1 of <span class="citation">Maris et al. (2010)</span>. <strong>g</strong>. <strong>h</strong>. Table 1 of <span class="citation">Chen et al. (2012)</span>. <strong>i</strong>. Proteins identified as differentially abundant in Supporting Information Table S5 of <span class="citation">Schrimpe-Rutledge et al. (2012)</span>, filtered to include proteins with fold change &gt; 2 or &lt; 0.5. <strong>j</strong>. <strong>k</strong>. Table 1 of <span class="citation">Chen et al. (2013a)</span>. <strong>l</strong>. Supplementary Table 1 of <span class="citation">Chen et al. (2013b)</span>, filtered to include proteins with average fold change &gt; 2.5 or &lt; 0.4. <strong>m</strong>. Supporting Information Table S4 of <span class="citation">Liu et al. (2015)</span> for up- (Cluster 1) and down- (Cluster 5) regulated proteins. <strong>n</strong>. <strong>o</strong>. Electronic supplementary material Table 1 of <span class="citation">Burger et al. (2017)</span>. <strong>p</strong>. <strong>q</strong>. Supplementary Table S1 of <span class="citation">Schmudlach et al. (2017)</span>, filtered to include proteins with fold change &gt; 2 or &lt; 0.5 (ratios were computed from medians of iBAQ values for three replicates after quantile normalization). <strong>r</strong>. Supplementary Tables 1 and 2 of <span class="citation">Irshad et al. (2019)</span>. <strong>s</strong>. <strong>t</strong>. Supplementary Table 2 of <span class="citation">Meneses-Romero et al. (2020)</span> (sheets “H9c2” and “HEK”). <strong>u</strong>. <strong>v</strong>. <strong>w</strong>. <strong>x</strong>. Treatment with high glucose (12.5 mmol/L) or high mannitol (7.0 mmol/L + 5.5 mmol/L glucose) followed by insulin, compared to normal glucose (5.5 mmol/L) followed by insulin. Source: Supplementary Tables S2–S6 of <span class="citation">Madonna et al. (2020)</span> (proteins uniquely identified in treatment and control conditions).</p>
+</div>
+<div id="references" class="section level2 unnumbered">
+<h2>References</h2>
+<div id="refs" class="references">
+<div id="ref-BTX+17">
+<p>Burger D, Turner M, Xiao F, Munkonda MN, Akbari S, Burns KD. 2017. High glucose increases the formation and pro-oxidative activity of endothelial microparticles. <em>Diabetologia</em> 60:1791–1800. DOI: <a href="https://doi.org/10.1007/s00125-017-4331-2">10.1007/s00125-017-4331-2</a>.</p>
+</div>
+<div id="ref-CCC+12">
+<p>Chen Y-H, Chen J-Y, Chen Y-W, Lin S-T, Chan H-L. 2012. High glucose-induced proteome alterations in retinal pigmented epithelium cells and its possible relevance to diabetic retinopathy. <em>Molecular Biosystems</em> 8:3107–3124. DOI: <a href="https://doi.org/10.1039/C2MB25331C">10.1039/C2MB25331C</a>.</p>
+</div>
+<div id="ref-CCCC13">
+<p>Chen J-Y, Chou H-C, Chen Y-H, Chan H-L. 2013a. High glucose-induced proteome alterations in hepatocytes and its possible relevance to diabetic liver disease. <em>Journal of Nutritional Biochemistry</em> 24:1889–1910. DOI: <a href="https://doi.org/10.1016/j.jnutbio.2013.05.006">10.1016/j.jnutbio.2013.05.006</a>.</p>
+</div>
+<div id="ref-CCW+13">
+<p>Chen X, Cui Z, Wei S, Hou J, Xie Z, Peng X, Li J, Cai T, Hang H, Yang F. 2013b. Chronic high glucose induced INS-1β cell mitochondrial dysfunction: A comparative mitochondrial proteome with SILAC. <em>Proteomics</em> 13:3030–3039. DOI: <a href="https://doi.org/10.1002/pmic.201200448">10.1002/pmic.201200448</a>.</p>
+</div>
+<div id="ref-IXA+19">
+<p>Irshad Z, Xue M, Ashour A, Larkin JR, Thornalley PJ, Rabbani N. 2019. Activation of the unfolded protein response in high glucose treated endothelial cells is mediated by methylglyoxal. <em>Scientific Reports</em> 9:7889. DOI: <a href="https://doi.org/10.1038/s41598-019-44358-1">10.1038/s41598-019-44358-1</a>.</p>
+</div>
+<div id="ref-LDB+15">
+<p>Liu Z, Dai S, Bones J, Ray S, Cha S, Karger BL, Li JJ, Wilson L, Hinckle G, Rossomando A. 2015. A quantitative proteomic analysis of cellular responses to high glucose media in Chinese hamster ovary cells. <em>Biotechnology Progress</em> 31:1026–1038. DOI: <a href="https://doi.org/10.1002/btpr.2090">10.1002/btpr.2090</a>.</p>
+</div>
+<div id="ref-MPR+20">
+<p>Madonna R, Pieragostino D, Rossi C, Confalone P, Cicalini I, Minnucci I, Zucchelli M, Del Boccio P, De Caterina R. 2020. Simulated hyperglycemia impairs insulin signaling in endothelial cells through a hyperosmolar mechanism. <em>Vascular Pharmacology</em> 130:106678. DOI: <a href="https://doi.org/10.1016/j.vph.2020.106678">10.1016/j.vph.2020.106678</a>.</p>
+</div>
+<div id="ref-MFD+10">
+<p>Maris M, Ferreira GB, D’Hertog W, Cnop M, Waelkens E, Overbergh L, Mathieu C. 2010. High glucose induces dysfunction in insulin secretory cells by different pathways: A proteomic approach. <em>Journal of Proteome Research</em> 9:6274–6287. DOI: <a href="https://doi.org/10.1021/pr100557w">10.1021/pr100557w</a>.</p>
+</div>
+<div id="ref-MHP+20">
+<p>Meneses-Romero E, Hernández-Orihuela L, Pando-Robles V, López TD, Oses-Prieto JA, Burlingame AL, Batista CVF. 2020. Quantitative proteomic analysis reveals high interference on protein expression of H9c2 cells activated with glucose and cardiotonic steroids. <em>Journal of Proteomics</em> 211:103536. DOI: <a href="https://doi.org/10.1016/j.jprot.2019.103536">10.1016/j.jprot.2019.103536</a>.</p>
+</div>
+<div id="ref-PW08">
+<p>Pham TK, Wright PC. 2008. The proteomic response of <em>Saccharomyces cerevisiae</em> in very high glucose conditions with amino acid supplementation. <em>Journal of Proteome Research</em> 7:4766–4774. DOI: <a href="https://doi.org/10.1021/pr800331s">10.1021/pr800331s</a>.</p>
+</div>
+<div id="ref-SFKD17">
+<p>Schmudlach A, Felton J, Kennedy RT, Dovichi NJ. 2017. Bottom-up proteomics analysis of the secretome of murine islets of Langerhans in elevated glucose levels. <em>Analyst</em> 142:284–291. DOI: <a href="https://doi.org/10.1039/C6AN02268E">10.1039/C6AN02268E</a>.</p>
+</div>
+<div id="ref-SFG+12">
+<p>Schrimpe-Rutledge AC, Fontès G, Gritsenko MA, Norbeck AD, Anderson DJ, Waters KM, Adkins JN, Smith RD, Poitout V, Metz TO. 2012. Discovery of novel glucose-regulated proteins in isolated human pancreatic islets using LC–MS/MS-based proteomics. <em>Journal of Proteome Research</em> 11:3520–3532. DOI: <a href="https://doi.org/10.1021/pr3002996">10.1021/pr3002996</a>.</p>
+</div>
+<div id="ref-WCM+09">
+<p>Waanders LF, Chwalek K, Monetti M, Kumar C, Lammert E, Mann M. 2009. Quantitative proteomic analysis of single pancreatic islets. <em>Proceedings of the National Academy of Sciences</em> 106:18902–18907. DOI: <a href="https://doi.org/10.1073/pnas.0908351106">10.1073/pnas.0908351106</a>.</p>
+</div>
+<div id="ref-WFSL09">
+<p>Wang X-L, Fu A, Spiro C, Lee H-C. 2009. Proteomic analysis of vascular endothelial cells: Effects of laminar shear stress and high glucose. <em>Journal of Proteomics &amp; Bioinformatics</em> 2:445–445. DOI: <a href="https://doi.org/10.4172/jpb.1000104">10.4172/jpb.1000104</a>.</p>
+</div>
+</div>
+</div>
+
+
+
+<!-- code folding -->
+
+
+
+</body>
+</html>

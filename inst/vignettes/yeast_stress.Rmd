@@ -12,8 +12,6 @@ csl: peerj.csl
 ---
 
 ```{r setup, include=FALSE}
-library(canprot)
-library(CHNOSZ)
 library(knitr)
 ## use pngquant to reduce size of PNG images
 knit_hooks$set(pngquant = hook_pngquant)

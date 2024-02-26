@@ -1,0 +1,109 @@
+---
+title: "Liver Cancer"
+output:
+  html_vignette:
+    mathjax: null
+vignette: >
+  %\VignetteIndexEntry{Liver Cancer}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+bibliography: cpdat.bib
+csl: peerj.csl
+---
+
+```{r setup, include=FALSE}
+library(JMDplots)
+library(knitr)
+## use pngquant to reduce size of PNG images
+knit_hooks$set(pngquant = hook_pngquant)
+pngquant <- "--speed=1 --quality=0-25"
+# in case pngquant isn't available (R-Forge?)
+if (!nzchar(Sys.which("pngquant"))) pngquant <- NULL 
+# read 'basis' option
+basis <- getOption("basis")
+```
+
+This vignette from the R package [JMDplots](https://github.com/jedick/JMDplots) version `r packageDescription("JMDplots")$Version` shows chemical metrics for proteins that are differentially expressed in liver cancer compared to normal tissue.
+The analysis is described in more detail in a paper ([<span title="Water as a reactant in the differential expression of proteins in cancer">Dick, 2021</a>](https://doi.org/10.1002/cso2.1007)).
+Abbreviations:
+
+  * <i>Z</i><sub>C</sub> &ndash; average oxidation state of carbon.
+  * <i>n</i><sub>H<sub>2</sub>O</sub> &ndash; stoichiometric hydration state per residue ([<span title="Uncovering chemical signatures of salinity gradients through compositional analysis of protein sequences">Dick et al., 2020</span>](https://doi.org/10.5194/bg-17-6145-2020)) computed using the **`r basis`** basis species (`r basis.text(basis)`, H~2~O, O~2~).
+
+<style type="text/css">
+body {
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+</style>
+
+```{r datasets}
+datasets <- pdat_liver(2020)
+```
+
+```{r comptab, results="hide", message=FALSE, echo = FALSE}
+pdat1 <- lapply(datasets, pdat_liver)
+comptab1 <- lapply(pdat1, get_comptab)
+comptab2 <- lapply(pdat1, get_comptab, "nAA", "MW")
+```
+
+Differences are calculated as (median value for up-regulated proteins) - (median value for down-regulated proteins).
+Dashed lines enclose the 50% confidence region for highest probability density.
+
+```{r diffplot, fig.width=5, fig.height=5, fig.align = "center", echo = FALSE, pngquant = pngquant}
+par(mar = c(4, 4, 1, 1))
+diffplot(comptab1, labtext = NA)
+```
+
+In the table, values of &Delta;<i>Z</i><sub>C</sub> and &Delta;<i>n</i><sub>H<sub>2</sub>O</sub> are multiplied by 1000, values of &Delta;MW are multiplied by 100, and negative values are shown in bold.
+Abbreviations:
+
+  * _n_~down~ &ndash; number of down-regulated proteins; _n_~up~ &ndash; number of up-regulated proteins; EGF &ndash; epidermal growth factor; G1, G2, G3 &ndash; well-differentiated, moderately differentiated, poorly differentiated tumors; T1, T2, T3 &ndash; T1N0M0, T2N0M0, T3N0M0 tumor-node-metastasis classification.
+  * <i>n</i><sub>AA</sub> &ndash; protein length; MW &ndash; molecular weight per residue.
+
+```{r xsummary, results="asis", echo = FALSE}
+library(xtable)
+out <- xsummary2(comptab1, comptab2)
+# round values and include dataset tags
+tags <- sapply(sapply(strsplit(datasets, "="), "[", -1), paste, collapse = ";")
+out <- cbind(out[, 1:2], tags = tags, out[, 3:16])
+out[, 6:17] <- round(out[, 6:17], 4)
+file <- paste0("liver_", basis, ".csv")
+write.csv(out, file, row.names = FALSE, quote = 2)
+```
+
+## Data Sources
+Gene names or other identifiers were converted to UniProt accession numbers using the <a href="https://www.uniprot.org/mapping/">UniProt mapping tool</a>, except for IPI accession numbers, which were converted using the <a href="https://david-d.ncifcrf.gov/conversion.jsp">DAVID 6.7 conversion tool</a>.
+
+__a__. Table III of @LHT+04.
+__b__. Tables 2 and 3 of @BLP+05.
+__c__. Table 2 of @LTZ+05.
+__d__. Table 1 of @DTS+07, including proteins identified in either tumor homogenates or laser microdissected samples.
+__e__. Supplemental Table S1 of @SXS+07.
+__f__. Tables 1--3 of @CHN+08.
+__g__. Supplemental Tables S3A and S3C of @RLA+10, filtered to include proteins with _p_-value < 0.05.
+__h__. __i__. IPI numbers from Supplemental Tables S3 (nuclear proteins) and S4 (cytoskeletal proteins) of @LMG+11, filtered to include proteins with median fold-change > 2 or < 0.5.
+__j__. Supplemental Table 5 of @LRL+12.
+__k__. Supplementary Table 3 of @KOK+13.
+__l__. Supplemental Data S5 (sheet "LF_proteins") of @MBK+13.
+__m__. Supporting Information SI-S2 of @XWS+14.
+__n__. Table 1 of @BSG15.
+__o__. Supplementary Table S1 of @RPM+15, filtered to include proteins with > 1 peptide used for quantification and fold change > 2 in either direction.
+__p__. __q__. __r__. Supplementary Data Table S2 of @NBM+16 (sheets "G1 vs C", "G2 vs C", and "G3 vs C"), filtered to include proteins with _p_-value < 0.05, quantified in at least half of both tumor and control samples, and median log~2~ fold change > 1 or < -1.
+__s__. Supporting Information Table S-4 (sheet "Filtered protein list") of @NMB+16.
+__t__. __u__. __v__. Supplementary Tables S3--S5 of @QXC+16.
+__w__. Table 4 of @GJZ+17.
+__x__. Supplementary Table S5 of @GWS+17.
+__y__. Supplementary Table 5 of @QPP+17, filtered to include proteins with median fold change > 2 or < 0.5 (UniProt IDs from Supplementary Table 1).
+__z__. __A__. __B__. __C__. Supplementary Table S3 of @WLL+17, filtered to include proteins with _p_-value < 0.05 and fold change > 2 or < 0.5.
+__D__. Supplemental Table S2 of @BOK+18 (data for tumor vs. peritumor), filtered to include proteins with _q_-value < 0.05, quantified in at least 3 tumors, same direction of change in all tumors, and median log~2~ fold change > 1 or < -1.
+__E__. Supplementary Table S2 of @YXZ+18.
+__F__. [Dataset](https://github.com/saezlab/Berndt_Egners_Mastrobuoni/blob/master/data/Proteom-Daten%20Bl6%20vs%2016w%20AG%20Kempa.xlsx) of @BEM+20, filtered to include proteins quantified in more than half of each of control and cancer samples and median fold change > 2 or < 0.5.
+__G__. __H__. Supplemental Table S3 of @GZD+19 (sheets "1. 1,274 DF proteins" and "2. 859 DF phosphoproteins"), filtered to include proteins with log~2~ fold change > 1 or < -1.
+__I__. Supplementary Table 6 of @JSZ+19.
+__J__. Supporting Information Table S5 of @ZZL+19 (sheet "c_proteins"), filtered to include proteins quantified in at least half of tumor and normal samples and with fold change > 2 or < 0.5. 
+__K__. Supporting Information Table S4 of @GZL+20 (sheet "B_Molecule").
+__L__. __M__. Supplementary Tables S1--S2 (proteins with differential expression between non-tumor and tumor regions) and S3--S4 (all proteins identified in each region) of @SCL+20. Common accession numbers in Tables S3 and S4 were eliminated to yield proteins uniquely identified in either tumor or non-tumor regions.
+
+## References

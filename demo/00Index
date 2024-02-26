@@ -1,5 +1,18 @@
-TCGA            Chemical analysis of The Cancer Genome Atlas
-HPA             Chemical analysis of The Human Protein Atlas
-osmotic_gene    Chemical analysis of transcriptomes for hyperosmotic stress
+X3D             3D Cell Culture (chemical analysis of differential expression data)
+breast          Breast Cancer (chemical analysis of differential expression data)
+colorectal      Colorectal Cancer (chemical analysis of differential expression data)
+glucose         High Glucose (chemical analysis of differential expression data)
+hypoxia         Cell Extracts in Hypoxia (chemical analysis of differential expression data)
+liver           Liver Cancer (chemical analysis of differential expression data)
+lung            Lung Cancer (chemical analysis of differential expression data)
+osmotic_bact    Hyperosmotic Stress in Bacteria (chemical analysis of differential expression data)
+osmotic_euk     Hyperosmotic Stress in Eukaryotic Cells (chemical analysis of differential expression data)
+osmotic_halo    Osmotic Stress in Halophiles (chemical analysis of differential expression data)
+pancreatic      Pancreatic Cancer (chemical analysis of differential expression data)
+prostate        Prostate Cancer (chemical analysis of differential expression data)
+secreted        Secreted Proteins in Hypoxia (chemical analysis of differential expression data)
+TCGA            The Cancer Genome Atlas (chemical analysis of differential expression data)
+HPA             The Human Protein Atlas (chemical analysis of differential expression data)
+osmotic_gene    Transcriptomes for hyperosmotic stress (chemical analysis of differential expression data)
 bugstab         Relative stabilities of microbial proteins in colorectal cancer and healthy tissue
 evdevH2O        Graphical abstract for research profile on website

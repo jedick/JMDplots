@@ -1,0 +1,1349 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+
+
+<title>Cell Extracts in Hypoxia</title>
+
+<script>// Hide empty <a> tag within highlighted CodeBlock for screen reader accessibility (see https://github.com/jgm/pandoc/issues/6352#issuecomment-626106786) -->
+// v0.0.1
+// Written by JooYoung Seo (jooyoung@psu.edu) and Atsushi Yasumoto on June 1st, 2020.
+
+document.addEventListener('DOMContentLoaded', function() {
+  const codeList = document.getElementsByClassName("sourceCode");
+  for (var i = 0; i < codeList.length; i++) {
+    var linkList = codeList[i].getElementsByTagName('a');
+    for (var j = 0; j < linkList.length; j++) {
+      if (linkList[j].innerHTML === "") {
+        linkList[j].setAttribute('aria-hidden', 'true');
+      }
+    }
+  }
+});
+</script>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+
+
+<style type="text/css">
+  code {
+    white-space: pre;
+  }
+  .sourceCode {
+    overflow: visible;
+  }
+</style>
+<style type="text/css" data-origin="pandoc">
+code.sourceCode > span { display: inline-block; line-height: 1.25; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+
+</style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    var j = 0;
+    while (j < rules.length) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") {
+        j++;
+        continue;
+      }
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' && rule.style.backgroundColor === '') {
+        j++;
+        continue;
+      }
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
+</script>
+
+
+
+
+<style type="text/css">body {
+background-color: #fff;
+margin: 1em auto;
+max-width: 700px;
+overflow: visible;
+padding-left: 2em;
+padding-right: 2em;
+font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+font-size: 14px;
+line-height: 1.35;
+}
+#TOC {
+clear: both;
+margin: 0 0 10px 10px;
+padding: 4px;
+width: 400px;
+border: 1px solid #CCCCCC;
+border-radius: 5px;
+background-color: #f6f6f6;
+font-size: 13px;
+line-height: 1.3;
+}
+#TOC .toctitle {
+font-weight: bold;
+font-size: 15px;
+margin-left: 5px;
+}
+#TOC ul {
+padding-left: 40px;
+margin-left: -1.5em;
+margin-top: 5px;
+margin-bottom: 5px;
+}
+#TOC ul ul {
+margin-left: -2em;
+}
+#TOC li {
+line-height: 16px;
+}
+table {
+margin: 1em auto;
+border-width: 1px;
+border-color: #DDDDDD;
+border-style: outset;
+border-collapse: collapse;
+}
+table th {
+border-width: 2px;
+padding: 5px;
+border-style: inset;
+}
+table td {
+border-width: 1px;
+border-style: inset;
+line-height: 18px;
+padding: 5px 5px;
+}
+table, table th, table td {
+border-left-style: none;
+border-right-style: none;
+}
+table thead, table tr.even {
+background-color: #f7f7f7;
+}
+p {
+margin: 0.5em 0;
+}
+blockquote {
+background-color: #f6f6f6;
+padding: 0.25em 0.75em;
+}
+hr {
+border-style: solid;
+border: none;
+border-top: 1px solid #777;
+margin: 28px 0;
+}
+dl {
+margin-left: 0;
+}
+dl dd {
+margin-bottom: 13px;
+margin-left: 13px;
+}
+dl dt {
+font-weight: bold;
+}
+ul {
+margin-top: 0;
+}
+ul li {
+list-style: circle outside;
+}
+ul ul {
+margin-bottom: 0;
+}
+pre, code {
+background-color: #f7f7f7;
+border-radius: 3px;
+color: #333;
+white-space: pre-wrap; 
+}
+pre {
+border-radius: 3px;
+margin: 5px 0px 10px 0px;
+padding: 10px;
+}
+pre:not([class]) {
+background-color: #f7f7f7;
+}
+code {
+font-family: Consolas, Monaco, 'Courier New', monospace;
+font-size: 85%;
+}
+p > code, li > code {
+padding: 2px 0px;
+}
+div.figure {
+text-align: center;
+}
+img {
+background-color: #FFFFFF;
+padding: 2px;
+border: 1px solid #DDDDDD;
+border-radius: 3px;
+border: 1px solid #CCCCCC;
+margin: 0 5px;
+}
+h1 {
+margin-top: 0;
+font-size: 35px;
+line-height: 40px;
+}
+h2 {
+border-bottom: 4px solid #f7f7f7;
+padding-top: 10px;
+padding-bottom: 2px;
+font-size: 145%;
+}
+h3 {
+border-bottom: 2px solid #f7f7f7;
+padding-top: 10px;
+font-size: 120%;
+}
+h4 {
+border-bottom: 1px solid #f7f7f7;
+margin-left: 8px;
+font-size: 105%;
+}
+h5, h6 {
+border-bottom: 1px solid #ccc;
+font-size: 105%;
+}
+a {
+color: #0033dd;
+text-decoration: none;
+}
+a:hover {
+color: #6666ff; }
+a:visited {
+color: #800080; }
+a:visited:hover {
+color: #BB00BB; }
+a[href^="http:"] {
+text-decoration: underline; }
+a[href^="https:"] {
+text-decoration: underline; }
+
+code > span.kw { color: #555; font-weight: bold; } 
+code > span.dt { color: #902000; } 
+code > span.dv { color: #40a070; } 
+code > span.bn { color: #d14; } 
+code > span.fl { color: #d14; } 
+code > span.ch { color: #d14; } 
+code > span.st { color: #d14; } 
+code > span.co { color: #888888; font-style: italic; } 
+code > span.ot { color: #007020; } 
+code > span.al { color: #ff0000; font-weight: bold; } 
+code > span.fu { color: #900; font-weight: bold; } 
+code > span.er { color: #a61717; background-color: #e3d2d2; } 
+</style>
+
+
+
+
+</head>
+
+<body>
+
+
+
+
+<h1 class="title toc-ignore">Cell Extracts in Hypoxia</h1>
+
+
+
+<p>This vignette from the R package <a href="https://github.com/jedick/JMDplots">JMDplots</a> version 1.2.19-1 shows chemical metrics for proteins that are differentially expressed in hypoxia compared to control conditions. The analysis is described in more detail in a paper (<a href="https://doi.org/10.1002/cso2.1007"><span title="Water as a reactant in the differential expression of proteins in cancer">Dick, 2021</a></a>). Abbreviations:</p>
+<ul>
+<li><i>Z</i><sub>C</sub> – average oxidation state of carbon.</li>
+<li><i>n</i><sub>H<sub>2</sub>O</sub> – stoichiometric hydration state per residue (<a href="https://doi.org/10.5194/bg-17-6145-2020"><span title="Uncovering chemical signatures of salinity gradients through compositional analysis of protein sequences">Dick et al., 2020</span></a>) computed using the <strong>QEC</strong> basis species (glutamine, glutamic acid, cysteine, H<sub>2</sub>O, O<sub>2</sub>).</li>
+</ul>
+<style type="text/css">
+body {
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+</style>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a>datasets &lt;-<span class="st"> </span><span class="kw">pdat_hypoxia</span>(<span class="dv">2020</span>)</span></code></pre></div>
+<p>Differences are calculated as (median value for up-regulated proteins) - (median value for down-regulated proteins). Dashed lines enclose the 50% confidence region for highest probability density.</p>
+<p><img src="data:image/png;base64,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" style="display: block; margin: auto;" /></p>
+<p>In the table, values of Δ<i>Z</i><sub>C</sub> and Δ<i>n</i><sub>H<sub>2</sub>O</sub> are multiplied by 1000, values of ΔMW are multiplied by 100, and negative values are shown in bold. Abbreviations:</p>
+<ul>
+<li><em>n</em><sub>down</sub> – number of down-regulated proteins; <em>n</em><sub>up</sub> – number of up-regulated proteins; Hx48 – hypoxia 48 h; Hx72 – hypoxia 72 h; -S – supernatant fraction; -P – pellet fraction; DMSO – dimethyl sulfoxide; NO.sul – nitric oxide-donating sulindac; sul – sulindac; 4Gy – radiation; POS – primay origin canine osteosarcoma (OS) cells; HMPOS – metastatic origin canine OS cells.</li>
+<li><i>n</i><sub>AA</sub> – protein length; MW – molecular weight per residue.</li>
+</ul>
+<!-- html table generated in R 4.3.2 by xtable 1.8-4 package -->
+<!-- Mon Feb 26 15:55:15 2024 -->
+<table border="1">
+<tr>
+<td align="center" colspan="6">
+</td>
+<td align="center" colspan="2">
+</td>
+</tr>
+<tr>
+<th>
+set
+</th>
+<th>
+reference (description)
+</th>
+<th>
+<i>n</i><sub>down</sub>
+</th>
+<th>
+<i>n</i><sub>up</sub>
+</th>
+<th>
+Δ<i>Z</i><sub>C</sub>
+</th>
+<th>
+Δ<i>n</i><sub>H<sub>2</sub>O</sub>
+</th>
+<th>
+Δ<i>n</i><sub>AA</sub>
+</th>
+<th>
+ΔMW
+</th>
+</tr>
+<tr>
+<td>
+a
+</td>
+<td>
+<code>SBB+06</code> (mouse malignant melanoma plasma membrane)
+</td>
+<td align="right">
+574
+</td>
+<td align="right">
+289
+</td>
+<td align="right">
+<B>-2</B>
+</td>
+<td align="right">
+10
+</td>
+<td align="right">
+112
+</td>
+<td align="right">
+<B>-50</B>
+</td>
+</tr>
+<tr>
+<td>
+b
+</td>
+<td>
+<code>FWH+13</code> (THP-1 macrophages)
+</td>
+<td align="right">
+56
+</td>
+<td align="right">
+40
+</td>
+<td align="right">
+8
+</td>
+<td align="right">
+14
+</td>
+<td align="right">
+18
+</td>
+<td align="right">
+<B>-92</B>
+</td>
+</tr>
+<tr>
+<td>
+c
+</td>
+<td>
+<code>RHD+13</code> (A431 epithelial carcinoma cells Hx48)
+</td>
+<td align="right">
+211
+</td>
+<td align="right">
+92
+</td>
+<td align="right">
+9
+</td>
+<td align="right">
+<B>-1</B>
+</td>
+<td align="right">
+78
+</td>
+<td align="right">
+<B>-73</B>
+</td>
+</tr>
+<tr>
+<td>
+d
+</td>
+<td>
+<code>RHD+13</code> (A431 epithelial carcinoma cells Hx72)
+</td>
+<td align="right">
+88
+</td>
+<td align="right">
+67
+</td>
+<td align="right">
+<B>-19</B>
+</td>
+<td align="right">
+<B>-21</B>
+</td>
+<td align="right">
+72
+</td>
+<td align="right">
+<B>-86</B>
+</td>
+</tr>
+<tr>
+<td>
+e
+</td>
+<td>
+<code>VTMF13</code> (SH-SY5Y neuroblastoma cells)
+</td>
+<td align="right">
+141
+</td>
+<td align="right">
+64
+</td>
+<td align="right">
+<B>-13</B>
+</td>
+<td align="right">
+31
+</td>
+<td align="right">
+<B>-4</B>
+</td>
+<td align="right">
+1
+</td>
+</tr>
+<tr>
+<td>
+f
+</td>
+<td>
+<code>DCH+14</code> (mouse 4T1 cells)
+</td>
+<td align="right">
+71
+</td>
+<td align="right">
+60
+</td>
+<td align="right">
+16
+</td>
+<td align="right">
+<B>-33</B>
+</td>
+<td align="right">
+<B>-300</B>
+</td>
+<td align="right">
+7
+</td>
+</tr>
+<tr>
+<td>
+g
+</td>
+<td>
+<code>DYL+14</code> (A431 epithelial carcinoma cells Hx48-S)
+</td>
+<td align="right">
+65
+</td>
+<td align="right">
+34
+</td>
+<td align="right">
+30
+</td>
+<td align="right">
+<B>-45</B>
+</td>
+<td align="right">
+122
+</td>
+<td align="right">
+<B>-51</B>
+</td>
+</tr>
+<tr>
+<td>
+h
+</td>
+<td>
+<code>DYL+14</code> (A431 epithelial carcinoma cells Hx72-S)
+</td>
+<td align="right">
+137
+</td>
+<td align="right">
+61
+</td>
+<td align="right">
+2
+</td>
+<td align="right">
+<B>-28</B>
+</td>
+<td align="right">
+18
+</td>
+<td align="right">
+<B>-50</B>
+</td>
+</tr>
+<tr>
+<td>
+i
+</td>
+<td>
+<code>DYL+14</code> (A431 epithelial carcinoma cells Hx48-P)
+</td>
+<td align="right">
+74
+</td>
+<td align="right">
+44
+</td>
+<td align="right">
+7
+</td>
+<td align="right">
+<B>-6</B>
+</td>
+<td align="right">
+124
+</td>
+<td align="right">
+113
+</td>
+</tr>
+<tr>
+<td>
+j
+</td>
+<td>
+<code>DYL+14</code> (A431 epithelial carcinoma cells Hx72-P)
+</td>
+<td align="right">
+67
+</td>
+<td align="right">
+53
+</td>
+<td align="right">
+<B>-9</B>
+</td>
+<td align="right">
+<B>-13</B>
+</td>
+<td align="right">
+20
+</td>
+<td align="right">
+2
+</td>
+</tr>
+<tr>
+<td>
+k
+</td>
+<td>
+<code>BSA+15</code> (HeLa cervical cancer cells)
+</td>
+<td align="right">
+53
+</td>
+<td align="right">
+72
+</td>
+<td align="right">
+6
+</td>
+<td align="right">
+<B>-17</B>
+</td>
+<td align="right">
+225
+</td>
+<td align="right">
+<B>-155</B>
+</td>
+</tr>
+<tr>
+<td>
+l
+</td>
+<td>
+<code>HWA+16</code> (U87MG and 786-O cancer cells)
+</td>
+<td align="right">
+137
+</td>
+<td align="right">
+164
+</td>
+<td align="right">
+0
+</td>
+<td align="right">
+<B>-23</B>
+</td>
+<td align="right">
+22
+</td>
+<td align="right">
+<B>-75</B>
+</td>
+</tr>
+<tr>
+<td>
+m
+</td>
+<td>
+<code>LCS16</code> (HCT116 colon cancer translation)
+</td>
+<td align="right">
+469
+</td>
+<td align="right">
+1024
+</td>
+<td align="right">
+<B>-21</B>
+</td>
+<td align="right">
+<B>-21</B>
+</td>
+<td align="right">
+323
+</td>
+<td align="right">
+38
+</td>
+</tr>
+<tr>
+<td>
+n
+</td>
+<td>
+<code>CGH+17</code> (mouse cardiac fibroblasts whole)
+</td>
+<td align="right">
+38
+</td>
+<td align="right">
+48
+</td>
+<td align="right">
+<B>-12</B>
+</td>
+<td align="right">
+16
+</td>
+<td align="right">
+<B>-374</B>
+</td>
+<td align="right">
+33
+</td>
+</tr>
+<tr>
+<td>
+o
+</td>
+<td>
+<code>ZXS+17</code> (U87 and U251 glioblastoma cells)
+</td>
+<td align="right">
+143
+</td>
+<td align="right">
+122
+</td>
+<td align="right">
+26
+</td>
+<td align="right">
+<B>-57</B>
+</td>
+<td align="right">
+61
+</td>
+<td align="right">
+3
+</td>
+</tr>
+<tr>
+<td>
+p
+</td>
+<td>
+<code>CLY+18</code> (HCT116 colon cancer cells proteome)
+</td>
+<td align="right">
+108
+</td>
+<td align="right">
+127
+</td>
+<td align="right">
+<B>-6</B>
+</td>
+<td align="right">
+8
+</td>
+<td align="right">
+<B>-117</B>
+</td>
+<td align="right">
+<B>-159</B>
+</td>
+</tr>
+<tr>
+<td>
+q
+</td>
+<td>
+<code>GBH+18</code> (SW620 colorectal cancer cells)
+</td>
+<td align="right">
+237
+</td>
+<td align="right">
+67
+</td>
+<td align="right">
+9
+</td>
+<td align="right">
+<B>-4</B>
+</td>
+<td align="right">
+<B>-12</B>
+</td>
+<td align="right">
+<B>-1</B>
+</td>
+</tr>
+<tr>
+<td>
+r
+</td>
+<td>
+<code>LKK+18</code> (hUCB mesehnchymal stem cells)
+</td>
+<td align="right">
+44
+</td>
+<td align="right">
+62
+</td>
+<td align="right">
+8
+</td>
+<td align="right">
+38
+</td>
+<td align="right">
+65
+</td>
+<td align="right">
+73
+</td>
+</tr>
+<tr>
+<td>
+s
+</td>
+<td>
+<code>WTG+18</code> (adipose-derived mesehnchymal stem cells)
+</td>
+<td align="right">
+163
+</td>
+<td align="right">
+57
+</td>
+<td align="right">
+9
+</td>
+<td align="right">
+<B>-32</B>
+</td>
+<td align="right">
+49
+</td>
+<td align="right">
+10
+</td>
+</tr>
+<tr>
+<td>
+t
+</td>
+<td>
+<code>CSK+19</code> (HeLa cervical cancer cells)
+</td>
+<td align="right">
+36
+</td>
+<td align="right">
+45
+</td>
+<td align="right">
+4
+</td>
+<td align="right">
+1
+</td>
+<td align="right">
+6
+</td>
+<td align="right">
+<B>-47</B>
+</td>
+</tr>
+<tr>
+<td>
+u
+</td>
+<td>
+<code>GPT+19</code> (MIAPaCa-2 pancreatic cancer cells pulse/trace Light serum replete)
+</td>
+<td align="right">
+62
+</td>
+<td align="right">
+180
+</td>
+<td align="right">
+2
+</td>
+<td align="right">
+19
+</td>
+<td align="right">
+<B>-44</B>
+</td>
+<td align="right">
+<B>-43</B>
+</td>
+</tr>
+<tr>
+<td>
+v
+</td>
+<td>
+<code>GPT+19</code> (MIAPaCa-2 pancreatic cancer cells pulse/trace Heavy serum replete)
+</td>
+<td align="right">
+196
+</td>
+<td align="right">
+57
+</td>
+<td align="right">
+<B>-10</B>
+</td>
+<td align="right">
+7
+</td>
+<td align="right">
+<B>-160</B>
+</td>
+<td align="right">
+<B>-106</B>
+</td>
+</tr>
+<tr>
+<td>
+w
+</td>
+<td>
+<code>KAN+19</code> (cancer-associated fibroblasts proteome)
+</td>
+<td align="right">
+221
+</td>
+<td align="right">
+124
+</td>
+<td align="right">
+20
+</td>
+<td align="right">
+<B>-4</B>
+</td>
+<td align="right">
+114
+</td>
+<td align="right">
+86
+</td>
+</tr>
+<tr>
+<td>
+x
+</td>
+<td>
+<code>LLL+19</code> (human periodontal ligament cells)
+</td>
+<td align="right">
+67
+</td>
+<td align="right">
+153
+</td>
+<td align="right">
+<B>-27</B>
+</td>
+<td align="right">
+32
+</td>
+<td align="right">
+<B>-216</B>
+</td>
+<td align="right">
+<B>-9</B>
+</td>
+</tr>
+<tr>
+<td>
+y
+</td>
+<td>
+<code>BCMS20</code> (MCF-7 breast cancer cells)
+</td>
+<td align="right">
+153
+</td>
+<td align="right">
+161
+</td>
+<td align="right">
+19
+</td>
+<td align="right">
+<B>-38</B>
+</td>
+<td align="right">
+<B>-192</B>
+</td>
+<td align="right">
+<B>-108</B>
+</td>
+</tr>
+<tr>
+<td>
+z
+</td>
+<td>
+<code>RVN+20</code> (PC-3 prostate cancer cells in DMSO)
+</td>
+<td align="right">
+116
+</td>
+<td align="right">
+86
+</td>
+<td align="right">
+<B>-40</B>
+</td>
+<td align="right">
+<B>-20</B>
+</td>
+<td align="right">
+230
+</td>
+<td align="right">
+32
+</td>
+</tr>
+<tr>
+<td>
+A
+</td>
+<td>
+<code>RVN+20</code> (PC-3 prostate cancer cells in NO.sul)
+</td>
+<td align="right">
+28
+</td>
+<td align="right">
+33
+</td>
+<td align="right">
+<B>-15</B>
+</td>
+<td align="right">
+<B>-7</B>
+</td>
+<td align="right">
+247
+</td>
+<td align="right">
+82
+</td>
+</tr>
+<tr>
+<td>
+B
+</td>
+<td>
+<code>RVN+20</code> (PC-3 prostate cancer cells in sul)
+</td>
+<td align="right">
+17
+</td>
+<td align="right">
+54
+</td>
+<td align="right">
+<B>-47</B>
+</td>
+<td align="right">
+<B>-11</B>
+</td>
+<td align="right">
+<B>-203</B>
+</td>
+<td align="right">
+34
+</td>
+</tr>
+<tr>
+<td>
+C
+</td>
+<td>
+<code>RVN+20</code> (PC-3 prostate cancer cells in DMSO.4Gy)
+</td>
+<td align="right">
+24
+</td>
+<td align="right">
+38
+</td>
+<td align="right">
+<B>-20</B>
+</td>
+<td align="right">
+<B>-21</B>
+</td>
+<td align="right">
+40
+</td>
+<td align="right">
+<B>-119</B>
+</td>
+</tr>
+<tr>
+<td>
+D
+</td>
+<td>
+<code>RVN+20</code> (PC-3 prostate cancer cells in NO.sul.4Gy)
+</td>
+<td align="right">
+21
+</td>
+<td align="right">
+52
+</td>
+<td align="right">
+46
+</td>
+<td align="right">
+<B>-4</B>
+</td>
+<td align="right">
+88
+</td>
+<td align="right">
+82
+</td>
+</tr>
+<tr>
+<td>
+E
+</td>
+<td>
+<code>RVN+20</code> (PC-3 prostate cancer cells in sul.4Gy)
+</td>
+<td align="right">
+34
+</td>
+<td align="right">
+25
+</td>
+<td align="right">
+15
+</td>
+<td align="right">
+<B>-46</B>
+</td>
+<td align="right">
+<B>-54</B>
+</td>
+<td align="right">
+<B>-110</B>
+</td>
+</tr>
+<tr>
+<td>
+F
+</td>
+<td>
+<code>SPJ+20</code> (canine POS cells)
+</td>
+<td align="right">
+43
+</td>
+<td align="right">
+102
+</td>
+<td align="right">
+4
+</td>
+<td align="right">
+<B>-22</B>
+</td>
+<td align="right">
+<B>-30</B>
+</td>
+<td align="right">
+7
+</td>
+</tr>
+<tr>
+<td>
+G
+</td>
+<td>
+<code>SPJ+20</code> (canine HMPOS cells)
+</td>
+<td align="right">
+62
+</td>
+<td align="right">
+69
+</td>
+<td align="right">
+5
+</td>
+<td align="right">
+<B>-15</B>
+</td>
+<td align="right">
+<B>-74</B>
+</td>
+<td align="right">
+<B>-8</B>
+</td>
+</tr>
+</table>
+<div id="data-sources" class="section level2">
+<h2>Data Sources</h2>
+<p>Where given, gene names or other identifiers were converted to UniProt accession numbers using the <a href="https://www.uniprot.org/mapping/">UniProt mapping tool</a>.</p>
+<p><strong>a</strong>. Supplemental Table 1 of <span class="citation">Stockwin et al. (2006)</span>, filtered to include proteins with expression ratio ≥ 1.7 or ≤ 0.58. <strong>b</strong>. Supplemental Table 2A of <span class="citation">Fuhrmann et al. (2013)</span> (control virus cells). <strong>c</strong>. <strong>d</strong>. Supplemental Table S1 of <span class="citation">Ren et al. (2013)</span>, filtered to include proteins with iTRAQ ratios &lt; 0.83 or &gt; 1.2 and <em>p</em>-value &lt; 0.05. <strong>e</strong>. Supporting Information table of <span class="citation">Villeneuve et al. (2013)</span>, filtered to include proteins with a normalized expression ratio of &gt; 1.2 or &lt; 0.83. <strong>f</strong>. Supporting Information Table S1 <span class="citation">Djidja et al. (2014)</span>. <strong>g</strong>. <strong>h</strong>. <strong>i</strong>. <strong>j</strong>. Supplemental Table S1 of <span class="citation">Dutta et al. (2014)</span>, filtered to include proteins with <em>p</em>-value &lt; 0.05 (-S: supernatant fraction; -P: pellet fraction). <strong>k</strong>. Supplementary Table S1 of <span class="citation">Bousquet et al. (2015)</span>. <strong>l</strong>. Supplemental Information Table S1 of <span class="citation">Ho et al. (2016)</span>, filtered to include proteins with a fold change of &lt; 0.5 or &gt; 1 and that were detected in only hypoxic or only normoxic conditions. <strong>m</strong>. Gene names from <span class="citation">Lai, Chang &amp; Sun (2016)</span> (data files provided by Ming-Chih Lai). <strong>n</strong>. Extracted from Table S2E (whole cell lysate) of <span class="citation">Cosme et al. (2017)</span>, keeping proteins with FDR &lt; 0.05. <strong>o</strong>. Supplemental Table S4 of <span class="citation">Zhang et al. (2017)</span>. <strong>p</strong>. Supplementary Tables S6-S7 (proteome) of <span class="citation">Chen et al. (2018)</span>. <strong>q</strong>. List of up- and down-regulated proteins from <span class="citation">Greenhough et al. (2018)</span> (provided by Alex Greenhough), filtered to include proteins with average fold change ≥ 1.5 or ≤ 2/3. <strong>r</strong>. Gene names from Figure 1F of <span class="citation">Lee et al. (2018)</span>. <strong>s</strong>. Supplemental file 1 of <span class="citation">Wobma et al. (2018)</span> (provided by Gordana Vunjak-Novakovic), filtered to include proteins with Normalized Ratio [Hypoxia MSC/Control MSC] ≥ 1.5 or ≤ 2/3 and <em>p</em>-value &lt; 0.05. <strong>t</strong>. Gene names from Supplementary file S1 of <span class="citation">Chachami et al. (2019)</span> for the two replicates labelled as “input_Log2ratioHL_firstIP” and “input_Log2ratioLH_secondIP” (soluble extracts before immunoprecipitation), filtered to include proteins where Log2ratio is &gt; 0.2 or &lt; -0.2 for both replicates. <strong>u</strong>. <strong>v</strong>. Supplementary Data 1 of <span class="citation">Gupta et al. (2019)</span>, filtered to include proteins with <em>p</em>-value &lt; 0.05 and fold-change &gt; 2 or &lt; 0.5 <strong>w</strong>. Proteins identified as up- or down-regulated &gt; 1 SD in Data File S1 of <span class="citation">Kugeratski et al. (2019)</span> (sheet “Proteome”). <strong>x</strong>. Additional file 1: Table S1 of <span class="citation">Li et al. (2019)</span>. <strong>y</strong>. Gene names from Supplementary Information Tables S6 and S7 of <span class="citation">Bush et al. (2020)</span>. <strong>z</strong>. <strong>A</strong>. <strong>B</strong>. <strong>C</strong>. <strong>D</strong>. <strong>E</strong>. Supplementary Table 1A of <span class="citation">Ross et al. (2020)</span>, filtered to include proteins with median fold change between normoxic and hypoxic conditions in any individual treatment &gt; 1.5 or &lt; 2/3. <strong>F</strong>. <strong>G</strong>. Supplementary Tables S3b (sheet “HPNP”) and S3c (sheet “HHNH”) of <span class="citation">Song et al. (2020)</span>.</p>
+</div>
+<div id="acknowledgements" class="section level2">
+<h2>Acknowledgements</h2>
+<p>Thanks to Alex Greenhough, Ming-Chih Lai, and Gordana Vunjak-Novakovic for providing data files.</p>
+</div>
+<div id="references" class="section level2 unnumbered">
+<h2>References</h2>
+<div id="refs" class="references">
+<div id="ref-BSA+15">
+<p>Bousquet PA, Sandvik JA, Arntzen MØ, Jeppesen Edin NF, Christoffersen S, Krengel U, Pettersen EO, Thiede B. 2015. Hypoxia strongly affects mitochondrial ribosomal proteins and translocases, as shown by quantitative proteomics of HeLa cells. <em>International Journal of Proteomics</em> 2015:678527. DOI: <a href="https://doi.org/10.1155/2015/678527">10.1155/2015/678527</a>.</p>
+</div>
+<div id="ref-BCMS20">
+<p>Bush JT, Chan MC, Mohammed S, Schofield C. 2020. Quantitative MS-based proteomics comparing the MCF-7 cellular response to hypoxia and a 2-oxoglutarate analogue. <em>ChemBioChem</em> 21:1647–1655. DOI: <a href="https://doi.org/10.1002/cbic.201900719">10.1002/cbic.201900719</a>.</p>
+</div>
+<div id="ref-CSK+19">
+<p>Chachami G, Stankovic-Valentin N, Karagiota A, Basagianni A, Plessmann U, Urlaub H, Melchior F, Simos G. 2019. Hypoxia-induced changes in SUMO conjugation affect transcriptional regulation under low oxygen. <em>Molecular &amp; Cellular Proteomics</em> 18:1197–1209. DOI: <a href="https://doi.org/10.1074/mcp.RA119.001401">10.1074/mcp.RA119.001401</a>.</p>
+</div>
+<div id="ref-CLY+18">
+<p>Chen J-T, Liu C-C, Yu J-S, Li H-H, Lai M-C. 2018. Integrated omics profiling identifies hypoxia-regulated genes in HCT116 colon cancer cells. <em>Journal of Proteomics</em> 188:139–151. DOI: <a href="https://doi.org/10.1016/j.jprot.2018.02.031">10.1016/j.jprot.2018.02.031</a>.</p>
+</div>
+<div id="ref-CGH+17">
+<p>Cosme J, Guo H, Hadipour-Lakmehsari S, Emili A, Gramolini AO. 2017. Hypoxia-induced changes in the fibroblast secretome, exosome, and whole-cell proteome using cultured, cardiac-derived cells isolated from neonatal mice. <em>Journal of Proteome Research</em> 16:2836–2847. DOI: <a href="https://doi.org/10.1021/acs.jproteome.7b00144">10.1021/acs.jproteome.7b00144</a>.</p>
+</div>
+<div id="ref-DCH+14">
+<p>Djidja M-C, Chang J, Hadjiprocopis A, Schmich F, Sinclair J, Mršnik M, Schoof EM, Barker HE, Linding R, Jørgensen C, Erler JT. 2014. Identification of hypoxia-regulated proteins using MALDI-mass spectrometry imaging combined with quantitative proteomics. <em>Journal of Proteome Research</em> 13:2297–2313. DOI: <a href="https://doi.org/10.1021/pr401056c">10.1021/pr401056c</a>.</p>
+</div>
+<div id="ref-DYL+14">
+<p>Dutta B, Yan R, Lim SK, Tam JP, Sze SK. 2014. Quantitative profiling of chromatome dynamics reveals a novel role for HP1BP3 in hypoxia-induced oncogenesis. <em>Molecular &amp; Cellular Proteomics</em> 13:3236–3249. DOI: <a href="https://doi.org/10.1074/mcp.M114.038232">10.1074/mcp.M114.038232</a>.</p>
+</div>
+<div id="ref-FWH+13">
+<p>Fuhrmann DC, Wittig I, Heide H, Dehne N, Brüne B. 2013. Chronic hypoxia alters mitochondrial composition in human macrophages. <em>Biochimica et Biophysica Acta (BBA) - Proteins and Proteomics</em> 1834:2750–2760. DOI: <a href="https://doi.org/10.1016/j.bbapap.2013.09.023">10.1016/j.bbapap.2013.09.023</a>.</p>
+</div>
+<div id="ref-GBH+18">
+<p>Greenhough A, Bagley C, Heesom KJ, Gurevich DB, Gay D, Bond M, Collard TJ, Paraskeva C, Martin P, Sansom OJ, Malik K, Williams AC. 2018. Cancer cell adaptation to hypoxia involves a HIF-GPRC5A-YAP axis. <em>EMBO Molecular Medicine</em> 10:e8699. DOI: <a href="https://doi.org/10.15252/emmm.201708699">10.15252/emmm.201708699</a>.</p>
+</div>
+<div id="ref-GPT+19">
+<p>Gupta N, Park JE, Tse W, Low JK, Kon OL, McCarthy N, Sze SK. 2019. ERO1α promotes hypoxic tumor progression and is associated with poor prognosis in pancreatic cancer. <em>Oncotarget</em> 10:5970–5982. DOI: <a href="https://doi.org/10.18632/oncotarget.27235">10.18632/oncotarget.27235</a>.</p>
+</div>
+<div id="ref-HWA+16">
+<p>Ho JJD, Wang M, Audas TE, Kwon D, Carlsson SK, Timpano S, Evagelou SL, Brothers S, Gonzalgo ML, Krieger JR, Chen S, Uniacke J, Lee S. 2016. Systemic reprogramming of translation efficiencies on oxygen stimulus. <em>Cell Reports</em> 14:1293–1300. DOI: <a href="https://doi.org/10.1016/j.celrep.2016.01.036">10.1016/j.celrep.2016.01.036</a>.</p>
+</div>
+<div id="ref-KAN+19">
+<p>Kugeratski FG, Atkinson SJ, Neilson LJ, Lilla S, Knight JRP, Serneels J, Juin A, Ismail S, Bryant DM, Markert EK, Machesky LM, Mazzone M, Sansom OJ, Zanivan S. 2019. Hypoxic cancer-associated fibroblasts increase NCBP2-AS2/HIAR to promote endothelial sprouting through enhanced VEGF signaling. <em>Science Signaling</em> 12:eaan8247. DOI: <a href="https://doi.org/10.1126/scisignal.aan8247">10.1126/scisignal.aan8247</a>.</p>
+</div>
+<div id="ref-LCS16">
+<p>Lai M-C, Chang C-M, Sun HS. 2016. Hypoxia induces autophagy through translational up-regulation of lysosomal proteins in human colon cancer cells. <em>PLOS One</em> 11:e0153627. DOI: <a href="https://doi.org/10.1371/journal.pone.0153627">10.1371/journal.pone.0153627</a>.</p>
+</div>
+<div id="ref-LKK+18">
+<p>Lee J, Kim H-S, Kim S-M, Kim D-I, Lee C-W. 2018. Hypoxia upregulates mitotic cyclins which contribute to the multipotency of human mesenchymal stem cells by expanding proliferation lifespan. <em>Molecules and Cells</em> 41:207–213. DOI: <a href="https://doi.org/10.14348/molcells.2018.2231">10.14348/molcells.2018.2231</a>.</p>
+</div>
+<div id="ref-LLL+19">
+<p>Li Q, Luo T, Lu W, Yi X, Zhao Z, Liu J. 2019. Proteomic analysis of human periodontal ligament cells under hypoxia. <em>Proteome Science</em> 17:3. DOI: <a href="https://doi.org/10.1186/s12953-019-0151-2">10.1186/s12953-019-0151-2</a>.</p>
+</div>
+<div id="ref-RHD+13">
+<p>Ren Y, Hao P, Dutta B, Cheow ESH, Sim KH, Gan CS, Lim SK, Sze SK. 2013. Hypoxia modulates A431 cellular pathways association to tumor radioresistance and enhanced migration revealed by comprehensive proteomic and functional studies. <em>Molecular &amp; Cellular Proteomics</em> 12:485–498. DOI: <a href="https://doi.org/10.1074/mcp.M112.018325">10.1074/mcp.M112.018325</a>.</p>
+</div>
+<div id="ref-RVN+20">
+<p>Ross JA, Vissers JPC, Nanda J, Stewart GD, Husi H, Habib FK, Hammond DE, Gethings LA. 2020. The influence of hypoxia on the prostate cancer proteome. <em>Clinical Chemistry and Laboratory Medicine</em> 58:980–993. DOI: <a href="https://doi.org/10.1515/cclm-2019-0626">10.1515/cclm-2019-0626</a>.</p>
+</div>
+<div id="ref-SPJ+20">
+<p>Song Z, Pearce MC, Jiang Y, Yang L, Goodall C, Miranda CL, Milovancev M, Bracha S, Kolluri SK, Maier CS. 2020. Delineation of hypoxia-induced proteome shifts in osteosarcoma cells with different metastatic propensities. <em>Scientific Reports</em> 10:727. DOI: <a href="https://doi.org/10.1038/s41598-019-56878-x">10.1038/s41598-019-56878-x</a>.</p>
+</div>
+<div id="ref-SBB+06">
+<p>Stockwin LH, Blonder J, Bumke MA, Lucas DA, Chan KC, Conrads TP, Issaq HJ, Veenstra TD, Newton DL, Rybak SM. 2006. Proteomic analysis of plasma membrane from hypoxia-adapted malignant melanoma. <em>Journal of Proteome Research</em> 5:2996–3007. DOI: <a href="https://doi.org/10.1021/pr0601739">10.1021/pr0601739</a>.</p>
+</div>
+<div id="ref-VTMF13">
+<p>Villeneuve L, Tiede LM, Morsey B, Fox HS. 2013. Quantitative proteomics reveals oxygen-dependent changes in neuronal mitochondria affecting function and sensitivity to rotenone. <em>Journal of Proteome Research</em> 12:4599–4606. DOI: <a href="https://doi.org/10.1021/pr400758d">10.1021/pr400758d</a>.</p>
+</div>
+<div id="ref-WTG+18">
+<p>Wobma HM, Tamargo MA, Goeta S, Brown LM, Duran-Struuck R, Vunjak-Novakovic G. 2018. The influence of hypoxia and IFN-<span class="math inline"><em>γ</em></span> on the proteome and metabolome of therapeutic mesenchymal stem cells. <em>Biomaterials</em> 167:226–234. DOI: <a href="https://doi.org/10.1016/j.biomaterials.2018.03.027">10.1016/j.biomaterials.2018.03.027</a>.</p>
+</div>
+<div id="ref-ZXS+17">
+<p>Zhang K, Xu P, Sowers JL, Machuca DF, Mirfattah B, Herring J, Tang H, Chen Y, Tian B, Brasier AR, Sowers LC. 2017. Proteome analysis of hypoxic glioblastoma cells reveals sequential metabolic adaptation of one-carbon metabolic pathways. <em>Molecular &amp; Cellular Proteomics</em> 16:1906–1921. DOI: <a href="https://doi.org/10.1074/mcp.RA117.000154">10.1074/mcp.RA117.000154</a>.</p>
+</div>
+</div>
+</div>
+
+
+
+<!-- code folding -->
+
+
+
+</body>
+</html>

@@ -1,0 +1,99 @@
+---
+title: "3D Cell Culture"
+output:
+  html_vignette:
+    mathjax: null
+vignette: >
+  %\VignetteIndexEntry{3D Cell Culture}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+bibliography: cpdat.bib
+csl: peerj.csl
+---
+
+```{r setup, include=FALSE}
+library(JMDplots)
+library(knitr)
+## use pngquant to reduce size of PNG images
+knit_hooks$set(pngquant = hook_pngquant)
+pngquant <- "--speed=1 --quality=0-25"
+# in case pngquant isn't available (R-Forge?)
+if (!nzchar(Sys.which("pngquant"))) pngquant <- NULL 
+# read 'basis' option
+basis <- getOption("basis")
+```
+
+This vignette from the R package [JMDplots](https://github.com/jedick/JMDplots) version `r packageDescription("JMDplots")$Version` shows chemical metrics for proteins that are differentially expressed in 3D compared to 2D culture conditions.
+The analysis is described in more detail in a paper ([<span title="Water as a reactant in the differential expression of proteins in cancer">Dick, 2021</a>](https://doi.org/10.1002/cso2.1007)).
+Abbreviations:
+
+  * <i>Z</i><sub>C</sub> &ndash; average oxidation state of carbon.
+  * <i>n</i><sub>H<sub>2</sub>O</sub> &ndash; stoichiometric hydration state per residue ([<span title="Uncovering chemical signatures of salinity gradients through compositional analysis of protein sequences">Dick et al., 2020</span>](https://doi.org/10.5194/bg-17-6145-2020)) computed using the **`r basis`** basis species (`r basis.text(basis)`, H~2~O, O~2~).
+
+<style type="text/css">
+body {
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+</style>
+
+```{r datasets}
+datasets <- pdat_3D(2020)
+```
+
+```{r comptab, results="hide", message=FALSE, echo = FALSE}
+pdat1 <- lapply(datasets, pdat_3D)
+comptab1 <- lapply(pdat1, get_comptab)
+comptab2 <- lapply(pdat1, get_comptab, "nAA", "MW")
+```
+
+Differences are calculated as (median value for up-regulated proteins) - (median value for down-regulated proteins).
+Dashed lines enclose the 50% confidence region for highest probability density.
+
+```{r diffplot, fig.width=5, fig.height=5, fig.align = "center", echo = FALSE, pngquant = pngquant}
+par(mar = c(4, 4, 1, 1))
+diffplot(comptab1, labtext = NA)
+```
+
+In the table, values of &Delta;<i>Z</i><sub>C</sub> and &Delta;<i>n</i><sub>H<sub>2</sub>O</sub> are multiplied by 1000, values of &Delta;MW are multiplied by 100, and negative values are shown in bold.
+Abbreviations:
+
+  * _n_~down~ &ndash; number of down-regulated proteins; _n_~up~ &ndash; number of up-regulated proteins; P2 &ndash; passage 2; P5 &ndash; passage 5; MSC &ndash; mesenchymal stromal cells.
+  * <i>n</i><sub>AA</sub> &ndash; protein length; MW &ndash; molecular weight per residue.
+
+```{r xsummary, results="asis", echo = FALSE}
+library(xtable)
+out <- xsummary2(comptab1, comptab2)
+# round values and include dataset tags
+tags <- sapply(sapply(strsplit(datasets, "="), "[", -1), paste, collapse = ";")
+out <- cbind(out[, 1:2], tags = tags, out[, 3:16])
+out[, 6:17] <- round(out[, 6:17], 4)
+file <- paste0("3D_", basis, ".csv")
+write.csv(out, file, row.names = FALSE, quote = 2)
+```
+
+## Data Sources
+Gene names or other identifiers were converted to UniProt accession numbers using the <a href="https://www.uniprot.org/mapping/">UniProt mapping tool</a>.
+
+__a__. Gene names from Supporting Information Table 1S of @PLC+10.
+__b__. __c__. Sheets 2 and 3 in Table S1 of @MHG+12.
+__d__. __e__. Supplemental Table 1C of @MVC+12, filtered to include proteins with expression ratios < 0.77 or > 1.3.
+__f__. Supplemental Table S5 of @YYW+13.
+__g__. __h__. Supplemental Table S4 of @ZMH+13.
+__i__. Table S1 of @HKX+14.
+__j__. __k__. __l__. Supplemental Table S1 of @KDS+14 (hESC: human embryonic stem cells; hiPSC: human induced pluripotent stem cells; hPSC: human pluripotent stem cells).
+__m__. Table S2 of @RKP+14, filtered to include proteins that have differences in spectral counts recorded in at least two of three experiments, absolute overall fold change is ≥ 1.5 or ≤ 2/3, and _p_-value is < 0.05.
+__n__. Supplementary Figure 2 of @SAS+14.
+__o__. P1&lowbar;Data sheet in the Supporting Information file of @WRK+14.
+__p__. Supplemental Table S1 of @MTK+15, filtered to exclude marked contaminants and reverse sequences and to include proteins with "Ratio H/L normalized" > 1.5 or < 2/3.
+__q__. Tables S1a and S1b of @YLW+16.
+__r__. Tables S2 and S3 of @KJK+18.
+__s__. __t__. Supplementary Table 3 of @TGD18. 
+__u__. Extracted from proteinGroups.txt in ProteomeXchange Dataset [PXD008244](http://ftp.pride.ebi.ac.uk/pride/data/archive/2019/04/PXD008244)/txt.zip [@EWK+19], including proteins quantified in at least two replicates in each condition (adherent and spheroid) and with median fold change > 2 or < 0.5.
+__v__. Extracted from Supplementary Table 1 of @GADS19. Values were quantile normalized, then ratios were calculated between 3D and 2D cultures for each treatment (control, CBD, UVA, UVA+CBD, UVB, UVB+CBD). Ratios > 1.2 or < 1/1.2 in at least 4 treatments were used to identify differentially expressed proteins.
+__w__. Supplementary Data I, sheet "Volcano plot 2Dv3D" of @HLC19.
+__x__. __y__. __z__. Supporting Table 1 of @LPK+19, sheets "3P2P" (mono-cultured preadipocytes), "3A2A" (mono-cultured adipocytes), "3C2C" (co-cultured adipocytes with macrophages), filtered to include proteins marked as "T-test Significant" and with absolute value of "N: T-test Difference" > log~2~(0.5).
+__A__. Supplementary Table S2 of @DKM+20, filtered to include proteins with fold change > 2 or < 0.5 for all donors.
+
+## References

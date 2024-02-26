@@ -606,7 +606,7 @@ gradH2O7 <- function(pdf = FALSE) {
 
   # Read CSV files with results of chemical analysis for differential expression
   osmotic_gene <- read.csv(system.file(paste0("vignettes/osmotic_gene_", getOption("basis"), ".csv"), package = "JMDplots"))
-  osmotic_bact <- read.csv(system.file(paste0("vignettes/osmotic_bact_", getOption("basis"), ".csv"), package = "canprot"))
+  osmotic_bact <- read.csv(system.file(paste0("vignettes/osmotic_bact_", getOption("basis"), ".csv"), package = "JMDplots"))
   DnH2Olab <- quote(Delta*italic(n)[H[2]*O])
   log10timelab <- quote(log[10]*("time, minutes"))
 
@@ -701,7 +701,7 @@ gradH2O7 <- function(pdf = FALSE) {
   mtext("Proteins coded by differentially expressed genes", adj = 1, line = 1.5)
 
   # Get proteomic data for halophiles
-  osmotic_halo <- read.csv(system.file(paste0("vignettes/osmotic_halo_", getOption("basis"), ".csv"), package = "canprot"))
+  osmotic_halo <- read.csv(system.file(paste0("vignettes/osmotic_halo_", getOption("basis"), ".csv"), package = "JMDplots"))
   # Combine halophile and non-halophile data for hyperosmotic stress proteomics
   osmotic_halo <- osmotic_halo[osmotic_halo$tags!="hypoosmotic", ]
   alldat <- rbind(osmotic_bact, osmotic_halo)

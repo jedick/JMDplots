@@ -45,7 +45,7 @@ These data, but not this function, are used in the \code{\link{evdevH2O}} plots.
 
 \examples{
 # Get protein expression data for one dataset
-pd <- canprot::pdat_colorectal("JKMF10")
+pd <- pdat_colorectal("JKMF10")
 # Get phylostrata
 PS(pd$pcomp$uniprot)
 

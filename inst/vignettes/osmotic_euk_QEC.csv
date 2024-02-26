@@ -1,0 +1,23 @@
+"dataset","description","tags","n1","n2","Zc.down","Zc.up","Zc.diff","nH2O.down","nH2O.up","nH2O.diff","nAA.down","nAA.up","nAA.diff","MW.down","MW.up","MW.diff"
+DAA+05,"thick ascending limb of Henle's loop cells in 600 (NaCl added) vs 300 mosmol/kg medium",,14,24,-0.1112,-0.1458,-0.0347,-0.7079,-0.6898,0.0181,448,342.5,-105.5,112.5052,111.6344,-0.8709
+MHN+08_Hyper,"mouse CGR8 embryonic stem cells in 500 (NaCl added) vs 340 mOsM medium",,23,23,-0.1213,-0.1361,-0.0148,-0.7608,-0.7265,0.0343,240,301,61,111.6452,110.0279,-1.6173
+LTH+11_Protein_30,"_Saccharomyces cerevisiae_ Protein in 0.7 M NaCl vs control medium for 30 min",yeast,686,203,-0.1529,-0.1471,0.0058,-0.7424,-0.7364,0.006,421,427,6,112.5041,111.7156,-0.7886
+LTH+11_Protein_60,"_Saccharomyces cerevisiae_ Protein in 0.7 M NaCl vs control medium for 60 min",yeast,554,335,-0.1539,-0.1482,0.0057,-0.7374,-0.7532,-0.0158,411.5,434,22.5,112.5736,111.949,-0.6246
+LTH+11_Protein_90,"_Saccharomyces cerevisiae_ Protein in 0.7 M NaCl vs control medium for 90 min",yeast,537,352,-0.153,-0.1485,0.0046,-0.7379,-0.7468,-0.0089,398,446.5,48.5,112.5621,111.9405,-0.6216
+LTH+11_Protein_120,"_Saccharomyces cerevisiae_ Protein in 0.7 M NaCl vs control medium for 120 min",yeast,538,351,-0.1528,-0.1485,0.0043,-0.7374,-0.7514,-0.014,401.5,437,35.5,112.6065,111.8186,-0.7879
+LTH+11_Protein_240,"_Saccharomyces cerevisiae_ Protein in 0.7 M NaCl vs control medium for 240 min",yeast,564,325,-0.1508,-0.1531,-0.0023,-0.7374,-0.7474,-0.0101,409.5,437,27.5,112.697,111.6938,-1.0033
+OBBH11,"adipose-derived stem cells in 400 mOsm vs 300 mOsm NaCl",,148,144,-0.1314,-0.1355,-0.0042,-0.7491,-0.7254,0.0237,444.5,376.5,-68,111.5353,111.5222,-0.0132
+LFY+12_C1h,"cytoplasm of HEK293 cells in 500 (NaCl added) vs 300 mosmol/kg medium for 1 h",,19,36,-0.1591,-0.1397,0.0193,-0.6978,-0.7399,-0.0421,364,485,121,109.1833,111.0631,1.8798
+LFY+12_C8h,"cytoplasm of HEK293 cells in 500 (NaCl added) vs 300 mosmol/kg medium for 8 h",,20,34,-0.1364,-0.1567,-0.0203,-0.7227,-0.7176,0.0051,443.5,459,15.5,110.4416,110.3586,-0.083
+LFY+12_C2p,"cytoplasm of HEK293 cells in 500 (NaCl added) vs 300 mosmol/kg medium for 2 passages",,33,66,-0.1451,-0.1506,-0.0055,-0.6702,-0.7385,-0.0683,493,446,-47,109.9949,110.8328,0.8379
+LFY+12_N1h,"nucleus of HEK293 cells in 500 (NaCl added) vs 300 mosmol/kg medium for 1 h",,49,80,-0.11,-0.122,-0.012,-0.7506,-0.7412,0.0093,450,587.5,137.5,111.9393,111.5163,-0.423
+LFY+12_N8h,"nucleus of HEK293 cells in 500 (NaCl added) vs 300 mosmol/kg medium for 8 h",,39,64,-0.105,-0.1233,-0.0183,-0.7472,-0.7418,0.0054,434,572.5,138.5,112.0326,111.1367,-0.8959
+LFY+12_N2p,"nucleus of HEK293 cells in 500 (NaCl added) vs 300 mosmol/kg medium for 2 passages",,22,67,-0.1059,-0.1208,-0.0149,-0.6983,-0.734,-0.0357,670,573,-97,110.4044,111.5279,1.1236
+CLG+15,"human conjunctival epithelial cells in 380 or 480 mOsm vs 280 mOsm NaCl",,25,38,-0.1494,-0.1534,-0.004,-0.7456,-0.7196,0.026,548,438,-110,111.4288,111.0563,-0.3725
+SCG+15_nodelay,"_Saccharomyces cervisiae_ in 0.4 M NaCl vs control - nodelay",,567,266,-0.1388,-0.1523,-0.0136,-0.7392,-0.7525,-0.0133,386,372,-14,111.9923,111.7866,-0.2057
+SCG+15_delayed,"_Saccharomyces cervisiae_ in 0.4 M NaCl vs control - delayed",,219,67,-0.1481,-0.1435,0.0046,-0.7371,-0.7659,-0.0288,446,391,-55,112.8937,112.7297,-0.164
+YDZ+15,"_Yarrowia lipolytica_ in 4.21 osmol/kg vs 3.17 osmol/kg NaCl",yeast,14,28,-0.1413,-0.1248,0.0165,-0.6947,-0.7414,-0.0467,427.5,330,-97.5,109.1124,108.9957,-0.1167
+GAM+16_HTS,"human small airway epithelial cells in HTS vs isotonic",,211,396,-0.1443,-0.1269,0.0173,-0.7576,-0.7524,0.0052,323,506.5,183.5,112.3007,111.7735,-0.5273
+GAM+16_HTS.Cmx,"human small airway epithelial cells in HTS.Cmx vs isotonic.Cmx",,303,250,-0.1397,-0.1337,0.0061,-0.7558,-0.7522,0.0036,308,480,172,111.8913,111.7727,-0.1186
+RBP+16,"_Paracoccidioides lutzii_ in 0.1 M KCl vs medium with no added KCl",yeast,160,141,-0.1371,-0.134,0.0031,-0.7046,-0.758,-0.0534,341,341,0,110.0261,110.0514,0.0253
+JBG+18,"_Candida albicans_ in 1 M NaCl vs medium with no added NaCl",yeast,84,63,-0.1506,-0.153,-0.0023,-0.7253,-0.7523,-0.027,365,350,-15,112.8926,111.6431,-1.2494

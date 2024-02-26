@@ -1,1 +1,2 @@
-makevig("osmotic_gene")
+library(JMDplots)
+mkvig("osmotic_gene")

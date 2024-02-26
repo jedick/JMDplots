@@ -29,7 +29,7 @@ export(
   # canH2O supplementary tables and figures 20200205
   "canH2OT1", "canH2OT2", "canH2OS1", "canH2OS2",
   # canH2O paper 20200420
-  "pdat_osmotic_gene", "makevig", "pdat_aneuploidy",
+  "pdat_osmotic_gene", "pdat_aneuploidy",
   # 20200508
   "pdat_yeast_stress",
   # Bison Pool papers 20200712
@@ -91,7 +91,19 @@ export(
   "plot_starburst",
   # carrollite paper 20240205
   "calc_carrollite", "add_Co_aqueous", "carrollite_5", "carrollite_8",
-  "carrollite_S3", "carrollite_S4", "carrollite_S5", "carrollite_S6"
+  "carrollite_S3", "carrollite_S4", "carrollite_S5", "carrollite_S6",
+
+  # Moved from canprot 20240226
+  "pdat_colorectal",
+  "pdat_pancreatic", "pdat_hypoxia",
+  # 20191226-20191230
+  ".pdat_multi", "pdat_secreted", "pdat_breast", "pdat_lung", "pdat_prostate", "pdat_3D",
+  # 20200402, 20200411
+  "pdat_liver", "pdat_glucose",
+  # 20200414
+  "mkvig",
+  # 20200418
+  ".pdat_osmotic", "pdat_osmotic_bact", "pdat_osmotic_euk", "pdat_osmotic_halo"
 )
 
 # Imports from CHNOSZ
@@ -132,17 +144,13 @@ importFrom("canprot",
   # first batch: gradH2O1 20190930
   "human",
   # second batch: gradH2O6 20191008
-  "diffplot", "get_comptab", "pdat_osmotic_bact",
+  "diffplot", "get_comptab",
   # moved to canprot 20191027
   "Zc", "nH2O", "GRAVY", "pI",
-  # new protein expression data 20191104
-  "pdat_osmotic_halo",
   # for pdat_HPA() and pdat_TCGA() 20200204
   "cleanup", "protcomp",
   # for plotphylo() 20200204
   "check_IDs",
-  # for pdat_osmotic_gene() 20200421
-  "pdat_osmotic_euk",
   # for canH2O5() 20200505, 20200508
   "qdist", "cplab",
   # for canH2OS1() 20201016

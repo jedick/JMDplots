@@ -1,0 +1,1331 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+
+
+<title>Colorectal Cancer</title>
+
+<script>// Hide empty <a> tag within highlighted CodeBlock for screen reader accessibility (see https://github.com/jgm/pandoc/issues/6352#issuecomment-626106786) -->
+// v0.0.1
+// Written by JooYoung Seo (jooyoung@psu.edu) and Atsushi Yasumoto on June 1st, 2020.
+
+document.addEventListener('DOMContentLoaded', function() {
+  const codeList = document.getElementsByClassName("sourceCode");
+  for (var i = 0; i < codeList.length; i++) {
+    var linkList = codeList[i].getElementsByTagName('a');
+    for (var j = 0; j < linkList.length; j++) {
+      if (linkList[j].innerHTML === "") {
+        linkList[j].setAttribute('aria-hidden', 'true');
+      }
+    }
+  }
+});
+</script>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+
+
+<style type="text/css">
+  code {
+    white-space: pre;
+  }
+  .sourceCode {
+    overflow: visible;
+  }
+</style>
+<style type="text/css" data-origin="pandoc">
+code.sourceCode > span { display: inline-block; line-height: 1.25; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+
+</style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    var j = 0;
+    while (j < rules.length) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") {
+        j++;
+        continue;
+      }
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' && rule.style.backgroundColor === '') {
+        j++;
+        continue;
+      }
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
+</script>
+
+
+
+
+<style type="text/css">body {
+background-color: #fff;
+margin: 1em auto;
+max-width: 700px;
+overflow: visible;
+padding-left: 2em;
+padding-right: 2em;
+font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+font-size: 14px;
+line-height: 1.35;
+}
+#TOC {
+clear: both;
+margin: 0 0 10px 10px;
+padding: 4px;
+width: 400px;
+border: 1px solid #CCCCCC;
+border-radius: 5px;
+background-color: #f6f6f6;
+font-size: 13px;
+line-height: 1.3;
+}
+#TOC .toctitle {
+font-weight: bold;
+font-size: 15px;
+margin-left: 5px;
+}
+#TOC ul {
+padding-left: 40px;
+margin-left: -1.5em;
+margin-top: 5px;
+margin-bottom: 5px;
+}
+#TOC ul ul {
+margin-left: -2em;
+}
+#TOC li {
+line-height: 16px;
+}
+table {
+margin: 1em auto;
+border-width: 1px;
+border-color: #DDDDDD;
+border-style: outset;
+border-collapse: collapse;
+}
+table th {
+border-width: 2px;
+padding: 5px;
+border-style: inset;
+}
+table td {
+border-width: 1px;
+border-style: inset;
+line-height: 18px;
+padding: 5px 5px;
+}
+table, table th, table td {
+border-left-style: none;
+border-right-style: none;
+}
+table thead, table tr.even {
+background-color: #f7f7f7;
+}
+p {
+margin: 0.5em 0;
+}
+blockquote {
+background-color: #f6f6f6;
+padding: 0.25em 0.75em;
+}
+hr {
+border-style: solid;
+border: none;
+border-top: 1px solid #777;
+margin: 28px 0;
+}
+dl {
+margin-left: 0;
+}
+dl dd {
+margin-bottom: 13px;
+margin-left: 13px;
+}
+dl dt {
+font-weight: bold;
+}
+ul {
+margin-top: 0;
+}
+ul li {
+list-style: circle outside;
+}
+ul ul {
+margin-bottom: 0;
+}
+pre, code {
+background-color: #f7f7f7;
+border-radius: 3px;
+color: #333;
+white-space: pre-wrap; 
+}
+pre {
+border-radius: 3px;
+margin: 5px 0px 10px 0px;
+padding: 10px;
+}
+pre:not([class]) {
+background-color: #f7f7f7;
+}
+code {
+font-family: Consolas, Monaco, 'Courier New', monospace;
+font-size: 85%;
+}
+p > code, li > code {
+padding: 2px 0px;
+}
+div.figure {
+text-align: center;
+}
+img {
+background-color: #FFFFFF;
+padding: 2px;
+border: 1px solid #DDDDDD;
+border-radius: 3px;
+border: 1px solid #CCCCCC;
+margin: 0 5px;
+}
+h1 {
+margin-top: 0;
+font-size: 35px;
+line-height: 40px;
+}
+h2 {
+border-bottom: 4px solid #f7f7f7;
+padding-top: 10px;
+padding-bottom: 2px;
+font-size: 145%;
+}
+h3 {
+border-bottom: 2px solid #f7f7f7;
+padding-top: 10px;
+font-size: 120%;
+}
+h4 {
+border-bottom: 1px solid #f7f7f7;
+margin-left: 8px;
+font-size: 105%;
+}
+h5, h6 {
+border-bottom: 1px solid #ccc;
+font-size: 105%;
+}
+a {
+color: #0033dd;
+text-decoration: none;
+}
+a:hover {
+color: #6666ff; }
+a:visited {
+color: #800080; }
+a:visited:hover {
+color: #BB00BB; }
+a[href^="http:"] {
+text-decoration: underline; }
+a[href^="https:"] {
+text-decoration: underline; }
+
+code > span.kw { color: #555; font-weight: bold; } 
+code > span.dt { color: #902000; } 
+code > span.dv { color: #40a070; } 
+code > span.bn { color: #d14; } 
+code > span.fl { color: #d14; } 
+code > span.ch { color: #d14; } 
+code > span.st { color: #d14; } 
+code > span.co { color: #888888; font-style: italic; } 
+code > span.ot { color: #007020; } 
+code > span.al { color: #ff0000; font-weight: bold; } 
+code > span.fu { color: #900; font-weight: bold; } 
+code > span.er { color: #a61717; background-color: #e3d2d2; } 
+</style>
+
+
+
+
+</head>
+
+<body>
+
+
+
+
+<h1 class="title toc-ignore">Colorectal Cancer</h1>
+
+
+
+<p>This vignette from the R package <a href="https://github.com/jedick/JMDplots">JMDplots</a> version 1.2.19-1 shows chemical metrics for proteins that are differentially expressed in colorectal cancer compared to normal tissue. The analysis is described in more detail in a paper (<a href="https://doi.org/10.1002/cso2.1007"><span title="Water as a reactant in the differential expression of proteins in cancer">Dick, 2021</a></a>). Abbreviations:</p>
+<ul>
+<li><i>Z</i><sub>C</sub> – average oxidation state of carbon.</li>
+<li><i>n</i><sub>H<sub>2</sub>O</sub> – stoichiometric hydration state per residue (<a href="https://doi.org/10.5194/bg-17-6145-2020"><span title="Uncovering chemical signatures of salinity gradients through compositional analysis of protein sequences">Dick et al., 2020</span></a>) computed using the <strong>QEC</strong> basis species (glutamine, glutamic acid, cysteine, H<sub>2</sub>O, O<sub>2</sub>).</li>
+</ul>
+<style type="text/css">
+body {
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+</style>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a>datasets &lt;-<span class="st"> </span><span class="kw">pdat_colorectal</span>(<span class="dv">2020</span>)</span></code></pre></div>
+<p>Differences are calculated as (median value for up-regulated proteins) - (median value for down-regulated proteins). Dashed lines enclose the 50% confidence region for highest probability density.</p>
+<p><img src="data:image/png;base64,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" style="display: block; margin: auto;" /></p>
+<p>In the table, values of Δ<i>Z</i><sub>C</sub> and Δ<i>n</i><sub>H<sub>2</sub>O</sub> are multiplied by 1000, values of ΔMW are multiplied by 100, and negative values are shown in bold. Abbreviations:</p>
+<ul>
+<li><em>n</em><sub>down</sub> – number of down-regulated proteins; <em>n</em><sub>up</sub> – number of up-regulated proteins; T – tumor; N – normal; LCM – laser capture microdisecction; FFPE – formalin-fixed paraffin-embedded; MSS – microsatellite stable; CIS – carcinoma in situ; ICC – invasive colonic carcinoma.</li>
+<li><i>n</i><sub>AA</sub> – protein length; MW – molecular weight per residue.</li>
+</ul>
+<!-- html table generated in R 4.3.2 by xtable 1.8-4 package -->
+<!-- Mon Feb 26 15:55:10 2024 -->
+<table border="1">
+<tr>
+<td align="center" colspan="6">
+</td>
+<td align="center" colspan="2">
+</td>
+</tr>
+<tr>
+<th>
+set
+</th>
+<th>
+reference (description)
+</th>
+<th>
+<i>n</i><sub>down</sub>
+</th>
+<th>
+<i>n</i><sub>up</sub>
+</th>
+<th>
+Δ<i>Z</i><sub>C</sub>
+</th>
+<th>
+Δ<i>n</i><sub>H<sub>2</sub>O</sub>
+</th>
+<th>
+Δ<i>n</i><sub>AA</sub>
+</th>
+<th>
+ΔMW
+</th>
+</tr>
+<tr>
+<td>
+a
+</td>
+<td>
+<code>WTK+08</code> (T / N)
+</td>
+<td align="right">
+57
+</td>
+<td align="right">
+70
+</td>
+<td align="right">
+1
+</td>
+<td align="right">
+2
+</td>
+<td align="right">
+<B>-64</B>
+</td>
+<td align="right">
+5
+</td>
+</tr>
+<tr>
+<td>
+b
+</td>
+<td>
+<code>XZC+10</code> (stage I / normal)
+</td>
+<td align="right">
+48
+</td>
+<td align="right">
+166
+</td>
+<td align="right">
+<B>-3</B>
+</td>
+<td align="right">
+10
+</td>
+<td align="right">
+<B>-100</B>
+</td>
+<td align="right">
+<B>-16</B>
+</td>
+</tr>
+<tr>
+<td>
+c
+</td>
+<td>
+<code>XZC+10</code> (stage II / normal)
+</td>
+<td align="right">
+77
+</td>
+<td align="right">
+321
+</td>
+<td align="right">
+11
+</td>
+<td align="right">
+2
+</td>
+<td align="right">
+4
+</td>
+<td align="right">
+<B>-21</B>
+</td>
+</tr>
+<tr>
+<td>
+d
+</td>
+<td>
+<code>ZYS+10</code> (microdissected T / N)
+</td>
+<td align="right">
+60
+</td>
+<td align="right">
+57
+</td>
+<td align="right">
+18
+</td>
+<td align="right">
+18
+</td>
+<td align="right">
+<B>-7</B>
+</td>
+<td align="right">
+<B>-38</B>
+</td>
+</tr>
+<tr>
+<td>
+e
+</td>
+<td>
+<code>BPV+11</code> (stage I / normal)
+</td>
+<td align="right">
+109
+</td>
+<td align="right">
+72
+</td>
+<td align="right">
+3
+</td>
+<td align="right">
+<B>-12</B>
+</td>
+<td align="right">
+42
+</td>
+<td align="right">
+<B>-101</B>
+</td>
+</tr>
+<tr>
+<td>
+f
+</td>
+<td>
+<code>BPV+11</code> (stage II / normal)
+</td>
+<td align="right">
+164
+</td>
+<td align="right">
+140
+</td>
+<td align="right">
+19
+</td>
+<td align="right">
+0
+</td>
+<td align="right">
+93
+</td>
+<td align="right">
+<B>-29</B>
+</td>
+</tr>
+<tr>
+<td>
+g
+</td>
+<td>
+<code>BPV+11</code> (stage III / normal)
+</td>
+<td align="right">
+63
+</td>
+<td align="right">
+131
+</td>
+<td align="right">
+23
+</td>
+<td align="right">
+<B>-13</B>
+</td>
+<td align="right">
+<B>-36</B>
+</td>
+<td align="right">
+38
+</td>
+</tr>
+<tr>
+<td>
+h
+</td>
+<td>
+<code>BPV+11</code> (stage IV / normal)
+</td>
+<td align="right">
+42
+</td>
+<td align="right">
+26
+</td>
+<td align="right">
+<B>-8</B>
+</td>
+<td align="right">
+16
+</td>
+<td align="right">
+<B>-28</B>
+</td>
+<td align="right">
+<B>-110</B>
+</td>
+</tr>
+<tr>
+<td>
+i
+</td>
+<td>
+<code>JCF+11</code> (T / N)
+</td>
+<td align="right">
+72
+</td>
+<td align="right">
+45
+</td>
+<td align="right">
+16
+</td>
+<td align="right">
+<B>-2</B>
+</td>
+<td align="right">
+<B>-36</B>
+</td>
+<td align="right">
+<B>-20</B>
+</td>
+</tr>
+<tr>
+<td>
+j
+</td>
+<td>
+<code>MRK+11</code> (adenocarcinoma / normal)
+</td>
+<td align="right">
+350
+</td>
+<td align="right">
+232
+</td>
+<td align="right">
+28
+</td>
+<td align="right">
+36
+</td>
+<td align="right">
+212
+</td>
+<td align="right">
+35
+</td>
+</tr>
+<tr>
+<td>
+k
+</td>
+<td>
+<code>SHHS11</code> (LCM T / N)
+</td>
+<td align="right">
+28
+</td>
+<td align="right">
+43
+</td>
+<td align="right">
+<B>-16</B>
+</td>
+<td align="right">
+21
+</td>
+<td align="right">
+62
+</td>
+<td align="right">
+<B>-114</B>
+</td>
+</tr>
+<tr>
+<td>
+l
+</td>
+<td>
+<code>FGW+12</code> (T / matched N)
+</td>
+<td align="right">
+48
+</td>
+<td align="right">
+34
+</td>
+<td align="right">
+<B>-22</B>
+</td>
+<td align="right">
+50
+</td>
+<td align="right">
+48
+</td>
+<td align="right">
+156
+</td>
+</tr>
+<tr>
+<td>
+m
+</td>
+<td>
+<code>KYK+12</code> (MSS-type T / N)
+</td>
+<td align="right">
+73
+</td>
+<td align="right">
+175
+</td>
+<td align="right">
+20
+</td>
+<td align="right">
+6
+</td>
+<td align="right">
+125
+</td>
+<td align="right">
+70
+</td>
+</tr>
+<tr>
+<td>
+n
+</td>
+<td>
+<code>WOD+12</code> (LCM FFPE T / adjacent N)
+</td>
+<td align="right">
+79
+</td>
+<td align="right">
+677
+</td>
+<td align="right">
+9
+</td>
+<td align="right">
+27
+</td>
+<td align="right">
+193
+</td>
+<td align="right">
+157
+</td>
+</tr>
+<tr>
+<td>
+o
+</td>
+<td>
+<code>CZD+14</code> (T / N)
+</td>
+<td align="right">
+52
+</td>
+<td align="right">
+74
+</td>
+<td align="right">
+6
+</td>
+<td align="right">
+43
+</td>
+<td align="right">
+<B>-160</B>
+</td>
+<td align="right">
+51
+</td>
+</tr>
+<tr>
+<td>
+p
+</td>
+<td>
+<code>STK+15</code> (membrane enriched T / N)
+</td>
+<td align="right">
+113
+</td>
+<td align="right">
+66
+</td>
+<td align="right">
+<B>-4</B>
+</td>
+<td align="right">
+7
+</td>
+<td align="right">
+6
+</td>
+<td align="right">
+100
+</td>
+</tr>
+<tr>
+<td>
+q
+</td>
+<td>
+<code>WDO+15</code> (LCM FFPE T / adjacent N)
+</td>
+<td align="right">
+879
+</td>
+<td align="right">
+1281
+</td>
+<td align="right">
+14
+</td>
+<td align="right">
+25
+</td>
+<td align="right">
+129
+</td>
+<td align="right">
+44
+</td>
+</tr>
+<tr>
+<td>
+r
+</td>
+<td>
+<code>LXM+16</code> (biopsy T / N)
+</td>
+<td align="right">
+191
+</td>
+<td align="right">
+178
+</td>
+<td align="right">
+<B>-4</B>
+</td>
+<td align="right">
+15
+</td>
+<td align="right">
+<B>-24</B>
+</td>
+<td align="right">
+65
+</td>
+</tr>
+<tr>
+<td>
+s
+</td>
+<td>
+<code>PHL+16</code> (CIS / N)
+</td>
+<td align="right">
+169
+</td>
+<td align="right">
+138
+</td>
+<td align="right">
+16
+</td>
+<td align="right">
+<B>-6</B>
+</td>
+<td align="right">
+284
+</td>
+<td align="right">
+142
+</td>
+</tr>
+<tr>
+<td>
+t
+</td>
+<td>
+<code>PHL+16</code> (ICC / N)
+</td>
+<td align="right">
+129
+</td>
+<td align="right">
+100
+</td>
+<td align="right">
+19
+</td>
+<td align="right">
+<B>-20</B>
+</td>
+<td align="right">
+309
+</td>
+<td align="right">
+160
+</td>
+</tr>
+<tr>
+<td>
+u
+</td>
+<td>
+<code>CTW+17</code> (organoid T / N)
+</td>
+<td align="right">
+227
+</td>
+<td align="right">
+78
+</td>
+<td align="right">
+<B>-2</B>
+</td>
+<td align="right">
+24
+</td>
+<td align="right">
+<B>-120</B>
+</td>
+<td align="right">
+66
+</td>
+</tr>
+<tr>
+<td>
+v
+</td>
+<td>
+<code>HZW+17</code> (T / adjacent N)
+</td>
+<td align="right">
+126
+</td>
+<td align="right">
+589
+</td>
+<td align="right">
+11
+</td>
+<td align="right">
+24
+</td>
+<td align="right">
+172
+</td>
+<td align="right">
+130
+</td>
+</tr>
+<tr>
+<td>
+w
+</td>
+<td>
+<code>LLL+17</code> (LCM cancer / non-neoplastic mucosa)
+</td>
+<td align="right">
+110
+</td>
+<td align="right">
+77
+</td>
+<td align="right">
+<B>-6</B>
+</td>
+<td align="right">
+10
+</td>
+<td align="right">
+247
+</td>
+<td align="right">
+148
+</td>
+</tr>
+<tr>
+<td>
+x
+</td>
+<td>
+<code>NKG+17</code> (T / N)
+</td>
+<td align="right">
+48
+</td>
+<td align="right">
+77
+</td>
+<td align="right">
+10
+</td>
+<td align="right">
+<B>-15</B>
+</td>
+<td align="right">
+<B>-68</B>
+</td>
+<td align="right">
+<B>-66</B>
+</td>
+</tr>
+<tr>
+<td>
+y
+</td>
+<td>
+<code>QMB+17</code> (FFPE T / N)
+</td>
+<td align="right">
+25
+</td>
+<td align="right">
+53
+</td>
+<td align="right">
+<B>-23</B>
+</td>
+<td align="right">
+53
+</td>
+<td align="right">
+<B>-63</B>
+</td>
+<td align="right">
+4
+</td>
+</tr>
+<tr>
+<td>
+z
+</td>
+<td>
+<code>TMS+17</code> (epithelial T / N)
+</td>
+<td align="right">
+158
+</td>
+<td align="right">
+166
+</td>
+<td align="right">
+29
+</td>
+<td align="right">
+17
+</td>
+<td align="right">
+61
+</td>
+<td align="right">
+70
+</td>
+</tr>
+<tr>
+<td>
+A
+</td>
+<td>
+<code>ZLY+17</code> (T / N)
+</td>
+<td align="right">
+58
+</td>
+<td align="right">
+54
+</td>
+<td align="right">
+18
+</td>
+<td align="right">
+13
+</td>
+<td align="right">
+<B>-22</B>
+</td>
+<td align="right">
+<B>-11</B>
+</td>
+</tr>
+<tr>
+<td>
+B
+</td>
+<td>
+<code>AKG+18</code> (T / N)
+</td>
+<td align="right">
+43
+</td>
+<td align="right">
+426
+</td>
+<td align="right">
+<B>-31</B>
+</td>
+<td align="right">
+32
+</td>
+<td align="right">
+<B>-46</B>
+</td>
+<td align="right">
+56
+</td>
+</tr>
+<tr>
+<td>
+C
+</td>
+<td>
+<code>STA+19</code> (non-metastatic colon cancer, T / N)
+</td>
+<td align="right">
+437
+</td>
+<td align="right">
+317
+</td>
+<td align="right">
+11
+</td>
+<td align="right">
+30
+</td>
+<td align="right">
+78
+</td>
+<td align="right">
+57
+</td>
+</tr>
+<tr>
+<td>
+D
+</td>
+<td>
+<code>STA+19</code> (metastatic colon cancer, T / N)
+</td>
+<td align="right">
+436
+</td>
+<td align="right">
+356
+</td>
+<td align="right">
+25
+</td>
+<td align="right">
+40
+</td>
+<td align="right">
+68
+</td>
+<td align="right">
+9
+</td>
+</tr>
+<tr>
+<td>
+E
+</td>
+<td>
+<code>VHW+19</code> (T / adjacent N)
+</td>
+<td align="right">
+417
+</td>
+<td align="right">
+31
+</td>
+<td align="right">
+<B>-32</B>
+</td>
+<td align="right">
+33
+</td>
+<td align="right">
+<B>-49</B>
+</td>
+<td align="right">
+106
+</td>
+</tr>
+<tr>
+<td>
+F
+</td>
+<td>
+<code>WYL+19</code> (tumor-associated / normal vascular endothelial cells)
+</td>
+<td align="right">
+97
+</td>
+<td align="right">
+119
+</td>
+<td align="right">
+10
+</td>
+<td align="right">
+<B>-15</B>
+</td>
+<td align="right">
+<B>-150</B>
+</td>
+<td align="right">
+162
+</td>
+</tr>
+</table>
+<div id="data-sources" class="section level2">
+<h2>Data Sources</h2>
+<p>Gene names or other identifiers were converted to UniProt accession numbers using the <a href="https://www.uniprot.org/mapping/">UniProt mapping tool</a>, except for IPI accession numbers, which were converted using the <a href="https://david-d.ncifcrf.gov/conversion.jsp">DAVID 6.7 conversion tool</a>.</p>
+<p><strong>a</strong>. Table 1 and Supplementary Data 1 of <span class="citation">Watanabe et al. (2008)</span> (Swiss-Prot and UniProt accession numbers from Supplementary Data 2). <strong>b</strong>. <strong>c</strong>. IPI accession numbers from Supplemental Table 4 of <span class="citation">Xie et al. (2010)</span>. <strong>d</strong>. IPI accession numbers from Supplemental Table 4 of <span class="citation">Zhang et al. (2010)</span>. <strong>e</strong>. <strong>f</strong>. <strong>g</strong>. <strong>h</strong>. Gene names from supplemental Table 9 of <span class="citation">Besson et al. (2011)</span>. <strong>i</strong>. Supplementary Table 2 of <span class="citation">Jankova et al. (2011)</span>. <strong>j</strong>. Table S8 of <span class="citation">Mikula et al. (2011)</span>. <strong>k</strong>. Supplementary Table 1 of <span class="citation">Shi et al. (2011)</span>. <strong>l</strong>. Appendix of <span class="citation">Fan et al. (2012)</span>. <strong>m</strong>. Gene names from Supplementary Table 4 of <span class="citation">Kang et al. (2012)</span>, filtered to include proteins with expression ratio &gt; 2 or &lt; 0.5 in both mTRAQ and cICAT analyses. <strong>n</strong>. Supplementary Table 4 of <span class="citation">Wiśniewski et al. (2012)</span>. <strong>o</strong>. Table 2 of <span class="citation">Chen et al. (2014)</span>. <strong>p</strong>. Ensembl protein IDs from Supporting Table 2 of <span class="citation">Sethi et al. (2015)</span>. <strong>q</strong>. Proteins marked as having a significant change between normal tissue (N) and adenocarcinoma (C) in SI Table 3 of <span class="citation">Wiśniewski et al. (2015)</span>. <strong>r</strong>. SI Table S3 of <span class="citation">Liu et al. (2016)</span>, filtered to include proteins with <em>p</em>-value &lt; 0.05. <strong>s</strong>. <strong>t</strong>. Gene names from Supplementary Table 4 of <span class="citation">Peng et al. (2016)</span>, for differential expression between normal colonic mucosa (NC) and carcinoma in situ (CIS) or invasive colorectal cancer (ICC). <strong>u</strong>. Table S3 of <span class="citation">Cristobal et al. (2017)</span>. <strong>v</strong>. Dataset 6A of <span class="citation">Hao et al. (2017)</span>. <strong>w</strong>. Supplementary Material Table S1 of <span class="citation">Li et al. (2017)</span>. <strong>x</strong>. Table 2 of <span class="citation">Nishio et al. (2017)</span>. <strong>y</strong>. Table S2 of <span class="citation">Quesada-Calvo et al. (2017)</span>, filtered to include comparisons between adenocarcinoma and diverticular disease. <strong>z</strong>. Table S1 of <span class="citation">Tu et al. (2017)</span>, filtered to include proteins that are consistently up- or down-regulated in at least 11 of 12 patients. <strong>A</strong>. IPI accession numbers from Table S2 of <span class="citation">Zhang et al. (2017)</span>. <strong>B</strong>. Supplementary Table 1B of <span class="citation">Atak et al. (2018)</span>, filtered to include proteins with expression ratio &gt; 3/2 or &lt; 2/3. <strong>C</strong>. <strong>D</strong>. Supplementary Table S2 of <span class="citation">Saleem et al. (2019)</span>, filtered to include proteins with log<sub>2</sub> ratio &gt; ± the standard deviation of values for all quantified proteins. <strong>E</strong>. <a href="http://linkedomics.org/cptac-colon">Online data</a> from <span class="citation">Vasaikar et al. (2019)</span> (file: Human__CPTAC_COAD__PNNL__Proteome__TMT__03_01_2017__BCM__Gene__Tumor_Normal_log2FC.cct), filtered to include proteins with median log<sub>2</sub> ratio &gt; 1 or &lt; -1. <strong>F</strong>. Supplementary Information Table S2 of <span class="citation">Wang et al. (2019)</span>.</p>
+</div>
+<div id="references" class="section level2 unnumbered">
+<h2>References</h2>
+<div id="refs" class="references">
+<div id="ref-AKG+18">
+<p>Atak A, Khurana S, Gollapalli K, Reddy PJ, Levy R, Ben-Salmon S, Hollander D, Donyo M, Heit A, Hotz-Wagenblatt A, Biran H, Sharan R, Rane S, Shelar A, Ast G, Srivastava S. 2018. Quantitative mass spectrometry analysis reveals a panel of nine proteins as diagnostic markers for colon adenocarcinomas. <em>Oncotarget</em> 9:13530–13544. DOI: <a href="https://doi.org/10.18632/oncotarget.24418">10.18632/oncotarget.24418</a>.</p>
+</div>
+<div id="ref-BPV+11">
+<p>Besson D, Pavageau A-H, Valo I, Bourreau A, Bélanger A, Eymerit-Morin C, Moulière A, Chassevent A, Boisdron-Celle M, Morel A, Solassol J, Campone M, Gamelin E, Barré B, Coqueret O, Guette C. 2011. A quantitative proteomic approach of the different stages of colorectal cancer establishes OLFM4 as a new nonmetastatic tumor marker. <em>Molecular &amp; Cellular Proteomics</em> 10:M111.009712. DOI: <a href="https://doi.org/10.1074/mcp.M111.009712">10.1074/mcp.M111.009712</a>.</p>
+</div>
+<div id="ref-CZD+14">
+<p>Chen S, Zhang J, Duan L, Zhang Y, Li C, Liu D, Ouyang C, Lu F, Liu X. 2014. Identification of HnRNP M as a novel biomarker for colorectal carcinoma by quantitative proteomics. <em>American Journal of Physiology-Gastrointestinal and Liver Physiology</em> 306:G394–G403. DOI: <a href="https://doi.org/10.1152/ajpgi.00328.2013">10.1152/ajpgi.00328.2013</a>.</p>
+</div>
+<div id="ref-CTW+17">
+<p>Cristobal A, Toorn HWP van den, Wetering M van de, Clevers H, Heck AJR, Mohammed S. 2017. Personalized proteome profiles of healthy and tumor human colon organoids reveal both individual diversity and basic features of colorectal cancer. <em>Cell Reports</em> 18:263–274. DOI: <a href="https://doi.org/10.1016/j.celrep.2016.12.016">10.1016/j.celrep.2016.12.016</a>.</p>
+</div>
+<div id="ref-FGW+12">
+<p>Fan N-J, Gao C-F, Wang C-S, Lv J-J, Zhao G, Sheng X-H, Wang X-L, Li D-H, Liu Q-Y, Yin J. 2012. Discovery and verification of gelsolin as a potential biomarker of colorectal adenocarcinoma in a Chinese population: Examining differential protein expression using an iTRAQ labelling-based proteomics approach. <em>Canadian Journal of Gastroenterology</em> 26:41–47. DOI: <a href="https://doi.org/10.1155/2012/645218">10.1155/2012/645218</a>.</p>
+</div>
+<div id="ref-HZW+17">
+<p>Hao J-J, Zhi X, Wang Y, Zhang Z, Hao Z, Ye R, Tang Z, Qian F, Wang Q, Zhu J. 2017. Comprehensive proteomic characterization of the human colorectal carcinoma reveals signature proteins and perturbed pathways. <em>Scientific Reports</em> 7:42436. DOI: <a href="https://doi.org/10.1038/srep42436">10.1038/srep42436</a>.</p>
+</div>
+<div id="ref-JCF+11">
+<p>Jankova L, Chan C, Fung CLS, Song X, Kwun SY, Cowley MJ, Kaplan W, Dent OF, Bokey EL, Chapuis PH, Baker MS, Robertson GR, Clarke SJ, Molloy MP. 2011. Proteomic comparison of colorectal tumours and non-neoplastic mucosa from paired patient samples using iTRAQ mass spectrometry. <em>Molecular Biosystems</em> 7:2997–3005. DOI: <a href="https://doi.org/10.1039/C1MB05236E">10.1039/C1MB05236E</a>.</p>
+</div>
+<div id="ref-KYK+12">
+<p>Kang U-B, Yeom J, Kim H-J, Kim H, Lee C. 2012. Expression profiling of more than 3500 proteins of MSS-type colorectal cancer by stable isotope labeling and mass spectrometry. <em>Journal of Proteomics</em> 75:3050–3062. DOI: <a href="https://doi.org/10.1016/j.jprot.2011.11.021">10.1016/j.jprot.2011.11.021</a>.</p>
+</div>
+<div id="ref-LLL+17">
+<p>Li G, Li M, Liang X, Xiao Z, Zhang P, Shao M, Peng F, Chen Y, Li Y, Chen Z. 2017. Identifying DCN and HSPD1 as potential biomarkers in colon cancer using 2D-LC-MS/MS combined with iTRAQ technology. <em>Journal of Cancer</em> 8:479–489. DOI: <a href="https://doi.org/10.7150/jca.17192">10.7150/jca.17192</a>.</p>
+</div>
+<div id="ref-LXM+16">
+<p>Liu X, Xu Y, Meng Q, Zheng Q, Wu J, Wang C, Jia W, Figeys D, Chang Y, Zhou H. 2016. Proteomic analysis of minute amount of colonic biopsies by enteroscopy sampling. <em>Biochemical and Biophysical Research Communications</em> 476:286–292. DOI: <a href="https://doi.org/10.1016/j.bbrc.2016.05.114">10.1016/j.bbrc.2016.05.114</a>.</p>
+</div>
+<div id="ref-MRK+11">
+<p>Mikula M, Rubel T, Karczmarski J, Goryca K, Dadlez M, Ostrowski J. 2011. Integrating proteomic and transcriptomic high-throughput surveys for search of new biomarkers of colon tumors. <em>Functional and Integrative Genomics</em> 11:215–224. DOI: <a href="https://doi.org/10.1007/s10142-010-0200-5">10.1007/s10142-010-0200-5</a>.</p>
+</div>
+<div id="ref-NKG+17">
+<p>Nishio T, Kurabe N, Goto-Inoue N, Nakamura T, Sugimura H, Setou M, Maekawa M. 2017. Immunohistochemical expression analysis of leucine-rich PPR-motif-containing protein (LRPPRC), a candidate colorectal cancer biomarker identified by shotgun proteomics using iTRAQ. <em>Clinica Chimica Acta</em> 471:276–282. DOI: <a href="https://doi.org/10.1016/j.cca.2017.06.011">10.1016/j.cca.2017.06.011</a>.</p>
+</div>
+<div id="ref-PHL+16">
+<p>Peng F, Huang Y, Li M-Y, Li G-Q, Huang H-C, Guan R, Chen Z-C, Liang S-P, Chen Y-H. 2016. Dissecting characteristics and dynamics of differentially expressed proteins during multistage carcinogenesis of human colorectal cancer. <em>World Journal of Gastroenterology</em> 22:4515–4528. DOI: <a href="https://doi.org/10.3748/wjg.v22.i18.4515">10.3748/wjg.v22.i18.4515</a>.</p>
+</div>
+<div id="ref-QMB+17">
+<p>Quesada-Calvo F, Massot C, Bertrand V, Longuespée R, Blétard N, Somja J, Mazzucchelli G, Smargiasso N, Baiwir D, De Pauw-Gillet M-C, Delvenne P, Malaise M, Coimbra Marques C, Polus M, De Pauw E, Meuwis M-A, Louis E. 2017. OLFM4, KNG1 and Sec24C identified by proteomics and immunohistochemistry as potential markers of early colorectal cancer stages. <em>Clinical Proteomics</em> 14:9. DOI: <a href="https://doi.org/10.1186/s12014-017-9143-3">10.1186/s12014-017-9143-3</a>.</p>
+</div>
+<div id="ref-STA+19">
+<p>Saleem S, Tariq S, Aleem I, Shaheed S-u, Tahseen M, Atiq A, Hassan S, Abu Bakar M, Khattak S, Syed AA, Ahmad AH, Hussain M, Yusuf MA, Sutton C. 2019. Proteomics analysis of colon cancer progression. <em>Clinical Proteomics</em> 16:44. DOI: <a href="https://doi.org/10.1186/s12014-019-9264-y">10.1186/s12014-019-9264-y</a>.</p>
+</div>
+<div id="ref-STK+15">
+<p>Sethi MK, Thaysen-Andersen M, Kim H, Park CK, Baker MS, Packer NH, Paik Y-K, Hancock WS, Fanayan S. 2015. Quantitative proteomic analysis of paired colorectal cancer and non-tumorigenic tissues reveals signature proteins and perturbed pathways involved in CRC progression and metastasis. <em>Journal of Proteomics</em> 126:54–67. DOI: <a href="https://doi.org/10.1016/j.jprot.2015.05.037">10.1016/j.jprot.2015.05.037</a>.</p>
+</div>
+<div id="ref-SHHS11">
+<p>Shi H, Hood KA, Hayes MT, Stubbs RS. 2011. Proteomic analysis of advanced colorectal cancer by laser capture microdissection and two-dimensional difference gel electrophoresis. <em>Journal of Proteomics</em> 75:339–351. DOI: <a href="https://doi.org/10.1016/j.jprot.2011.07.025">10.1016/j.jprot.2011.07.025</a>.</p>
+</div>
+<div id="ref-TMS+17">
+<p>Tu C, Mojica W, Straubinger RM, Li J, Shen S, Qu M, Nie L, Roberts R, An B, Qu J. 2017. Quantitative proteomic profiling of paired cancerous and normal colon epithelial cells isolated freshly from colorectal cancer patients. <em>Proteomics: Clinical Applications</em> 11:1600155. DOI: <a href="https://doi.org/10.1002/prca.201600155">10.1002/prca.201600155</a>.</p>
+</div>
+<div id="ref-VHW+19">
+<p>Vasaikar S, Huang C, Wang X, Petyuk VA, Savage SR, Wen B, Dou Y, Zhang Y, Shi Z, Arshad OA, Gritsenko MA, Zimmerman LJ, McDermott JE, Clauss TR, Moore RJ, Zhao R, Monroe ME, Wang Y-T, Chambers MC, Slebos RJC, Lau KS, Mo Q, Ding L, Ellis M, Thiagarajan M, Kinsinger CR, Rodriguez H, Smith RD, Rodland KD, Liebler DC, Liu T, Zhang B, Pandey A, Paulovich A, Hoofnagle A, Mani DR, Chan DW, Ransohoff DF, Fenyo D, Tabb DL, Levine DA, Boja ES, Kuhn E, White FM, Whiteley GA, Zhu H, Zhang H, Shih I-M, Bavarva J, Whiteaker J, Ketchum KA, Clauser KR, Ruggles K, Elburn K, Hannick L, Watson M, Oberti M, Mesri M, Sanders ME, Borucki M, Gillette MA, Snyder M, Edwards NJ, Vatanian N, Rudnick PA, McGarvey PB, Mertins P, Townsend RR, Thangudu RR, Rivers RC, Payne SH, Davies SR, Cai S, Stein SE, Carr SA, Skates SJ, Madhavan S, Hiltke T, Chen X, Zhao Y, Wang Y, Zhang Z. 2019. Proteogenomic analysis of human colon cancer reveals new therapeutic opportunities. <em>Cell</em> 177:1035–1049. DOI: <a href="https://doi.org/10.1016/j.cell.2019.03.030">10.1016/j.cell.2019.03.030</a>.</p>
+</div>
+<div id="ref-WYL+19">
+<p>Wang G, Yang Q, Li M, Zhang Y, Cai Y, Liang X, Fu Y, Xiao Z, Zhou M, Xie Z, Huang H, Huang Y, Chen Y, He Q, Peng F, Chen Z. 2019. Quantitative proteomic profiling of tumor-associated vascular endothelial cells in colorectal cancer. <em>Biology Open</em> 8:bio042838. DOI: <a href="https://doi.org/10.1242/bio.042838">10.1242/bio.042838</a>.</p>
+</div>
+<div id="ref-WTK+08">
+<p>Watanabe M, Takemasa I, Kawaguchi N, Miyake M, Nishimura N, Matsubara T, Matsuo E-i, Sekimoto M, Nagai K, Matsuura N, Monden M, Nishimura O. 2008. An application of the 2-nitrobenzenesulfenyl method to proteomic profiling of human colorectal carcinoma: A novel approach for biomarker discovery. <em>Proteomics: Clinical Applications</em> 2:925–935. DOI: <a href="https://doi.org/10.1002/prca.200780111">10.1002/prca.200780111</a>.</p>
+</div>
+<div id="ref-WDO+15">
+<p>Wiśniewski JR, Duś-Szachniewicz K, Ostasiewicz P, Ziółkowski P, Rakus D, Mann M. 2015. Absolute proteome analysis of colorectal mucosa, adenoma, and cancer reveals drastic changes in fatty acid metabolism and plasma membrane transporters. <em>Journal of Proteome Research</em> 14:4005–4018. DOI: <a href="https://doi.org/10.1021/acs.jproteome.5b00523">10.1021/acs.jproteome.5b00523</a>.</p>
+</div>
+<div id="ref-WOD+12">
+<p>Wiśniewski JR, Ostasiewicz P, Duś K, Zielińska DF, Gnad F, Mann M. 2012. Extensive quantitative remodeling of the proteome between normal colon tissue and adenocarcinoma. <em>Molecular Systems Biology</em> 8:611. DOI: <a href="https://doi.org/10.1038/msb.2012.44">10.1038/msb.2012.44</a>.</p>
+</div>
+<div id="ref-XZC+10">
+<p>Xie L-Q, Zhao C, Cai S-J, Xu Y, Huang L-Y, Bian J-S, Shen C-P, Lu H-J, Yang P-Y. 2010. Novel proteomic strategy reveal combined <span class="math inline"><em>α</em><sub>1</sub></span> antitrypsin and cathepsin D as biomarkers for colorectal cancer early screening. <em>Journal of Proteome Research</em> 9:4701–4709. DOI: <a href="https://doi.org/10.1021/pr100406z">10.1021/pr100406z</a>.</p>
+</div>
+<div id="ref-ZLY+17">
+<p>Zhang Y, Liu Y, Ye Y, Shen D, Zhang H, Huang H, Li S, Wang S, Ren J. 2017. Quantitative proteome analysis of colorectal cancer-related differential proteins. <em>Journal of Cancer Research and Clinical Oncology</em> 143:233–241. DOI: <a href="https://doi.org/10.1007/s00432-016-2274-5">10.1007/s00432-016-2274-5</a>.</p>
+</div>
+<div id="ref-ZYS+10">
+<p>Zhang Y, Ye Y, Shen D, Jiang K, Zhang H, Sun W, Zhang J, Xu F, Cui Z, Wang S. 2010. Identification of transgelin-2 as a biomarker of colorectal cancer by laser capture microdissection and quantitative proteome analysis. <em>Cancer Science</em> 101:523–529. DOI: <a href="https://doi.org/10.1111/j.1349-7006.2009.01424.x">10.1111/j.1349-7006.2009.01424.x</a>.</p>
+</div>
+</div>
+</div>
+
+
+
+<!-- code folding -->
+
+
+
+</body>
+</html>

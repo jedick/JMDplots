@@ -1,0 +1,1522 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+
+
+<title>Liver Cancer</title>
+
+<script>// Hide empty <a> tag within highlighted CodeBlock for screen reader accessibility (see https://github.com/jgm/pandoc/issues/6352#issuecomment-626106786) -->
+// v0.0.1
+// Written by JooYoung Seo (jooyoung@psu.edu) and Atsushi Yasumoto on June 1st, 2020.
+
+document.addEventListener('DOMContentLoaded', function() {
+  const codeList = document.getElementsByClassName("sourceCode");
+  for (var i = 0; i < codeList.length; i++) {
+    var linkList = codeList[i].getElementsByTagName('a');
+    for (var j = 0; j < linkList.length; j++) {
+      if (linkList[j].innerHTML === "") {
+        linkList[j].setAttribute('aria-hidden', 'true');
+      }
+    }
+  }
+});
+</script>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+
+
+<style type="text/css">
+  code {
+    white-space: pre;
+  }
+  .sourceCode {
+    overflow: visible;
+  }
+</style>
+<style type="text/css" data-origin="pandoc">
+code.sourceCode > span { display: inline-block; line-height: 1.25; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+
+</style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    var j = 0;
+    while (j < rules.length) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") {
+        j++;
+        continue;
+      }
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' && rule.style.backgroundColor === '') {
+        j++;
+        continue;
+      }
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
+</script>
+
+
+
+
+<style type="text/css">body {
+background-color: #fff;
+margin: 1em auto;
+max-width: 700px;
+overflow: visible;
+padding-left: 2em;
+padding-right: 2em;
+font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+font-size: 14px;
+line-height: 1.35;
+}
+#TOC {
+clear: both;
+margin: 0 0 10px 10px;
+padding: 4px;
+width: 400px;
+border: 1px solid #CCCCCC;
+border-radius: 5px;
+background-color: #f6f6f6;
+font-size: 13px;
+line-height: 1.3;
+}
+#TOC .toctitle {
+font-weight: bold;
+font-size: 15px;
+margin-left: 5px;
+}
+#TOC ul {
+padding-left: 40px;
+margin-left: -1.5em;
+margin-top: 5px;
+margin-bottom: 5px;
+}
+#TOC ul ul {
+margin-left: -2em;
+}
+#TOC li {
+line-height: 16px;
+}
+table {
+margin: 1em auto;
+border-width: 1px;
+border-color: #DDDDDD;
+border-style: outset;
+border-collapse: collapse;
+}
+table th {
+border-width: 2px;
+padding: 5px;
+border-style: inset;
+}
+table td {
+border-width: 1px;
+border-style: inset;
+line-height: 18px;
+padding: 5px 5px;
+}
+table, table th, table td {
+border-left-style: none;
+border-right-style: none;
+}
+table thead, table tr.even {
+background-color: #f7f7f7;
+}
+p {
+margin: 0.5em 0;
+}
+blockquote {
+background-color: #f6f6f6;
+padding: 0.25em 0.75em;
+}
+hr {
+border-style: solid;
+border: none;
+border-top: 1px solid #777;
+margin: 28px 0;
+}
+dl {
+margin-left: 0;
+}
+dl dd {
+margin-bottom: 13px;
+margin-left: 13px;
+}
+dl dt {
+font-weight: bold;
+}
+ul {
+margin-top: 0;
+}
+ul li {
+list-style: circle outside;
+}
+ul ul {
+margin-bottom: 0;
+}
+pre, code {
+background-color: #f7f7f7;
+border-radius: 3px;
+color: #333;
+white-space: pre-wrap; 
+}
+pre {
+border-radius: 3px;
+margin: 5px 0px 10px 0px;
+padding: 10px;
+}
+pre:not([class]) {
+background-color: #f7f7f7;
+}
+code {
+font-family: Consolas, Monaco, 'Courier New', monospace;
+font-size: 85%;
+}
+p > code, li > code {
+padding: 2px 0px;
+}
+div.figure {
+text-align: center;
+}
+img {
+background-color: #FFFFFF;
+padding: 2px;
+border: 1px solid #DDDDDD;
+border-radius: 3px;
+border: 1px solid #CCCCCC;
+margin: 0 5px;
+}
+h1 {
+margin-top: 0;
+font-size: 35px;
+line-height: 40px;
+}
+h2 {
+border-bottom: 4px solid #f7f7f7;
+padding-top: 10px;
+padding-bottom: 2px;
+font-size: 145%;
+}
+h3 {
+border-bottom: 2px solid #f7f7f7;
+padding-top: 10px;
+font-size: 120%;
+}
+h4 {
+border-bottom: 1px solid #f7f7f7;
+margin-left: 8px;
+font-size: 105%;
+}
+h5, h6 {
+border-bottom: 1px solid #ccc;
+font-size: 105%;
+}
+a {
+color: #0033dd;
+text-decoration: none;
+}
+a:hover {
+color: #6666ff; }
+a:visited {
+color: #800080; }
+a:visited:hover {
+color: #BB00BB; }
+a[href^="http:"] {
+text-decoration: underline; }
+a[href^="https:"] {
+text-decoration: underline; }
+
+code > span.kw { color: #555; font-weight: bold; } 
+code > span.dt { color: #902000; } 
+code > span.dv { color: #40a070; } 
+code > span.bn { color: #d14; } 
+code > span.fl { color: #d14; } 
+code > span.ch { color: #d14; } 
+code > span.st { color: #d14; } 
+code > span.co { color: #888888; font-style: italic; } 
+code > span.ot { color: #007020; } 
+code > span.al { color: #ff0000; font-weight: bold; } 
+code > span.fu { color: #900; font-weight: bold; } 
+code > span.er { color: #a61717; background-color: #e3d2d2; } 
+</style>
+
+
+
+
+</head>
+
+<body>
+
+
+
+
+<h1 class="title toc-ignore">Liver Cancer</h1>
+
+
+
+<p>This vignette from the R package <a href="https://github.com/jedick/JMDplots">JMDplots</a> version 1.2.19-1 shows chemical metrics for proteins that are differentially expressed in liver cancer compared to normal tissue. The analysis is described in more detail in a paper (<a href="https://doi.org/10.1002/cso2.1007"><span title="Water as a reactant in the differential expression of proteins in cancer">Dick, 2021</a></a>). Abbreviations:</p>
+<ul>
+<li><i>Z</i><sub>C</sub> – average oxidation state of carbon.</li>
+<li><i>n</i><sub>H<sub>2</sub>O</sub> – stoichiometric hydration state per residue (<a href="https://doi.org/10.5194/bg-17-6145-2020"><span title="Uncovering chemical signatures of salinity gradients through compositional analysis of protein sequences">Dick et al., 2020</span></a>) computed using the <strong>QEC</strong> basis species (glutamine, glutamic acid, cysteine, H<sub>2</sub>O, O<sub>2</sub>).</li>
+</ul>
+<style type="text/css">
+body {
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+</style>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a>datasets &lt;-<span class="st"> </span><span class="kw">pdat_liver</span>(<span class="dv">2020</span>)</span></code></pre></div>
+<p>Differences are calculated as (median value for up-regulated proteins) - (median value for down-regulated proteins). Dashed lines enclose the 50% confidence region for highest probability density.</p>
+<p><img src="data:image/png;base64,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" style="display: block; margin: auto;" /></p>
+<p>In the table, values of Δ<i>Z</i><sub>C</sub> and Δ<i>n</i><sub>H<sub>2</sub>O</sub> are multiplied by 1000, values of ΔMW are multiplied by 100, and negative values are shown in bold. Abbreviations:</p>
+<ul>
+<li><em>n</em><sub>down</sub> – number of down-regulated proteins; <em>n</em><sub>up</sub> – number of up-regulated proteins; EGF – epidermal growth factor; G1, G2, G3 – well-differentiated, moderately differentiated, poorly differentiated tumors; T1, T2, T3 – T1N0M0, T2N0M0, T3N0M0 tumor-node-metastasis classification.</li>
+<li><i>n</i><sub>AA</sub> – protein length; MW – molecular weight per residue.</li>
+</ul>
+<!-- html table generated in R 4.3.2 by xtable 1.8-4 package -->
+<!-- Mon Feb 26 15:55:17 2024 -->
+<table border="1">
+<tr>
+<td align="center" colspan="6">
+</td>
+<td align="center" colspan="2">
+</td>
+</tr>
+<tr>
+<th>
+set
+</th>
+<th>
+reference (description)
+</th>
+<th>
+<i>n</i><sub>down</sub>
+</th>
+<th>
+<i>n</i><sub>up</sub>
+</th>
+<th>
+Δ<i>Z</i><sub>C</sub>
+</th>
+<th>
+Δ<i>n</i><sub>H<sub>2</sub>O</sub>
+</th>
+<th>
+Δ<i>n</i><sub>AA</sub>
+</th>
+<th>
+ΔMW
+</th>
+</tr>
+<tr>
+<td>
+a
+</td>
+<td>
+<code>LHT+04</code> (T / N)
+</td>
+<td align="right">
+79
+</td>
+<td align="right">
+44
+</td>
+<td align="right">
+29
+</td>
+<td align="right">
+<B>-28</B>
+</td>
+<td align="right">
+16
+</td>
+<td align="right">
+83
+</td>
+</tr>
+<tr>
+<td>
+b
+</td>
+<td>
+<code>BLP+05</code> (T / N)
+</td>
+<td align="right">
+61
+</td>
+<td align="right">
+22
+</td>
+<td align="right">
+33
+</td>
+<td align="right">
+10
+</td>
+<td align="right">
+53
+</td>
+<td align="right">
+6
+</td>
+</tr>
+<tr>
+<td>
+c
+</td>
+<td>
+<code>LTZ+05</code> (T / N)
+</td>
+<td align="right">
+35
+</td>
+<td align="right">
+39
+</td>
+<td align="right">
+<B>-3</B>
+</td>
+<td align="right">
+<B>-18</B>
+</td>
+<td align="right">
+<B>-16</B>
+</td>
+<td align="right">
+50
+</td>
+</tr>
+<tr>
+<td>
+d
+</td>
+<td>
+<code>DTS+07</code> (T / N)
+</td>
+<td align="right">
+20
+</td>
+<td align="right">
+23
+</td>
+<td align="right">
+23
+</td>
+<td align="right">
+15
+</td>
+<td align="right">
+90
+</td>
+<td align="right">
+4
+</td>
+</tr>
+<tr>
+<td>
+e
+</td>
+<td>
+<code>SXS+07</code> (T / N)
+</td>
+<td align="right">
+46
+</td>
+<td align="right">
+21
+</td>
+<td align="right">
+17
+</td>
+<td align="right">
+55
+</td>
+<td align="right">
+168
+</td>
+<td align="right">
+112
+</td>
+</tr>
+<tr>
+<td>
+f
+</td>
+<td>
+<code>CHN+08</code> (T / N)
+</td>
+<td align="right">
+93
+</td>
+<td align="right">
+58
+</td>
+<td align="right">
+51
+</td>
+<td align="right">
+<B>-24</B>
+</td>
+<td align="right">
+92
+</td>
+<td align="right">
+48
+</td>
+</tr>
+<tr>
+<td>
+g
+</td>
+<td>
+<code>RLA+10</code> (T / N rat transitional endoplasmic reticulum)
+</td>
+<td align="right">
+130
+</td>
+<td align="right">
+135
+</td>
+<td align="right">
+26
+</td>
+<td align="right">
+38
+</td>
+<td align="right">
+<B>-24</B>
+</td>
+<td align="right">
+<B>-23</B>
+</td>
+</tr>
+<tr>
+<td>
+h
+</td>
+<td>
+<code>LMG+11</code> (T / N nuclear)
+</td>
+<td align="right">
+411
+</td>
+<td align="right">
+264
+</td>
+<td align="right">
+28
+</td>
+<td align="right">
+20
+</td>
+<td align="right">
+80
+</td>
+<td align="right">
+<B>-18</B>
+</td>
+</tr>
+<tr>
+<td>
+i
+</td>
+<td>
+<code>LMG+11</code> (T / N cytoskeletal)
+</td>
+<td align="right">
+280
+</td>
+<td align="right">
+273
+</td>
+<td align="right">
+39
+</td>
+<td align="right">
+18
+</td>
+<td align="right">
+84
+</td>
+<td align="right">
+26
+</td>
+</tr>
+<tr>
+<td>
+j
+</td>
+<td>
+<code>LRL+12</code> (T / N)
+</td>
+<td align="right">
+102
+</td>
+<td align="right">
+161
+</td>
+<td align="right">
+32
+</td>
+<td align="right">
+4
+</td>
+<td align="right">
+<B>-7</B>
+</td>
+<td align="right">
+114
+</td>
+</tr>
+<tr>
+<td>
+k
+</td>
+<td>
+<code>KOK+13</code> (T / N)
+</td>
+<td align="right">
+53
+</td>
+<td align="right">
+38
+</td>
+<td align="right">
+19
+</td>
+<td align="right">
+49
+</td>
+<td align="right">
+54
+</td>
+<td align="right">
+108
+</td>
+</tr>
+<tr>
+<td>
+l
+</td>
+<td>
+<code>MBK+13</code> (T / N)
+</td>
+<td align="right">
+192
+</td>
+<td align="right">
+280
+</td>
+<td align="right">
+17
+</td>
+<td align="right">
+11
+</td>
+<td align="right">
+1
+</td>
+<td align="right">
+102
+</td>
+</tr>
+<tr>
+<td>
+m
+</td>
+<td>
+<code>XWS+14</code> (T / N)
+</td>
+<td align="right">
+135
+</td>
+<td align="right">
+504
+</td>
+<td align="right">
+<B>-27</B>
+</td>
+<td align="right">
+15
+</td>
+<td align="right">
+<B>-82</B>
+</td>
+<td align="right">
+144
+</td>
+</tr>
+<tr>
+<td>
+n
+</td>
+<td>
+<code>BSG15</code> (T / N EGF transgenic mice)
+</td>
+<td align="right">
+34
+</td>
+<td align="right">
+71
+</td>
+<td align="right">
+30
+</td>
+<td align="right">
+<B>-39</B>
+</td>
+<td align="right">
+104
+</td>
+<td align="right">
+163
+</td>
+</tr>
+<tr>
+<td>
+o
+</td>
+<td>
+<code>RPM+15</code> (T / N)
+</td>
+<td align="right">
+131
+</td>
+<td align="right">
+479
+</td>
+<td align="right">
+40
+</td>
+<td align="right">
+9
+</td>
+<td align="right">
+72
+</td>
+<td align="right">
+118
+</td>
+</tr>
+<tr>
+<td>
+p
+</td>
+<td>
+<code>NBM+16</code> (T / N G1)
+</td>
+<td align="right">
+42
+</td>
+<td align="right">
+80
+</td>
+<td align="right">
+18
+</td>
+<td align="right">
+8
+</td>
+<td align="right">
+<B>-56</B>
+</td>
+<td align="right">
+69
+</td>
+</tr>
+<tr>
+<td>
+q
+</td>
+<td>
+<code>NBM+16</code> (T / N G2)
+</td>
+<td align="right">
+81
+</td>
+<td align="right">
+82
+</td>
+<td align="right">
+32
+</td>
+<td align="right">
+0
+</td>
+<td align="right">
+154
+</td>
+<td align="right">
+29
+</td>
+</tr>
+<tr>
+<td>
+r
+</td>
+<td>
+<code>NBM+16</code> (T / N G3)
+</td>
+<td align="right">
+237
+</td>
+<td align="right">
+556
+</td>
+<td align="right">
+29
+</td>
+<td align="right">
+9
+</td>
+<td align="right">
+33
+</td>
+<td align="right">
+124
+</td>
+</tr>
+<tr>
+<td>
+s
+</td>
+<td>
+<code>NMB+16</code> (T / N)
+</td>
+<td align="right">
+121
+</td>
+<td align="right">
+426
+</td>
+<td align="right">
+16
+</td>
+<td align="right">
+<B>-6</B>
+</td>
+<td align="right">
+166
+</td>
+<td align="right">
+126
+</td>
+</tr>
+<tr>
+<td>
+t
+</td>
+<td>
+<code>QXC+16</code> (T / N T1)
+</td>
+<td align="right">
+198
+</td>
+<td align="right">
+132
+</td>
+<td align="right">
+20
+</td>
+<td align="right">
+25
+</td>
+<td align="right">
+<B>-106</B>
+</td>
+<td align="right">
+63
+</td>
+</tr>
+<tr>
+<td>
+u
+</td>
+<td>
+<code>QXC+16</code> (T / N T2)
+</td>
+<td align="right">
+193
+</td>
+<td align="right">
+172
+</td>
+<td align="right">
+7
+</td>
+<td align="right">
+36
+</td>
+<td align="right">
+<B>-82</B>
+</td>
+<td align="right">
+112
+</td>
+</tr>
+<tr>
+<td>
+v
+</td>
+<td>
+<code>QXC+16</code> (T / N T3)
+</td>
+<td align="right">
+202
+</td>
+<td align="right">
+185
+</td>
+<td align="right">
+27
+</td>
+<td align="right">
+4
+</td>
+<td align="right">
+<B>-54</B>
+</td>
+<td align="right">
+51
+</td>
+</tr>
+<tr>
+<td>
+w
+</td>
+<td>
+<code>GJZ+17</code> (T / N)
+</td>
+<td align="right">
+26
+</td>
+<td align="right">
+25
+</td>
+<td align="right">
+9
+</td>
+<td align="right">
+27
+</td>
+<td align="right">
+71
+</td>
+<td align="right">
+<B>-65</B>
+</td>
+</tr>
+<tr>
+<td>
+x
+</td>
+<td>
+<code>GWS+17</code> (T / N)
+</td>
+<td align="right">
+145
+</td>
+<td align="right">
+191
+</td>
+<td align="right">
+23
+</td>
+<td align="right">
+7
+</td>
+<td align="right">
+<B>-29</B>
+</td>
+<td align="right">
+143
+</td>
+</tr>
+<tr>
+<td>
+y
+</td>
+<td>
+<code>QPP+17</code> (T / N)
+</td>
+<td align="right">
+121
+</td>
+<td align="right">
+72
+</td>
+<td align="right">
+0
+</td>
+<td align="right">
+17
+</td>
+<td align="right">
+<B>-56</B>
+</td>
+<td align="right">
+42
+</td>
+</tr>
+<tr>
+<td>
+z
+</td>
+<td>
+<code>WLL+17</code> (T / N small)
+</td>
+<td align="right">
+48
+</td>
+<td align="right">
+31
+</td>
+<td align="right">
+<B>-28</B>
+</td>
+<td align="right">
+37
+</td>
+<td align="right">
+<B>-140</B>
+</td>
+<td align="right">
+60
+</td>
+</tr>
+<tr>
+<td>
+A
+</td>
+<td>
+<code>WLL+17</code> (T / N medium)
+</td>
+<td align="right">
+21
+</td>
+<td align="right">
+39
+</td>
+<td align="right">
+<B>-1</B>
+</td>
+<td align="right">
+<B>-1</B>
+</td>
+<td align="right">
+<B>-8</B>
+</td>
+<td align="right">
+<B>-116</B>
+</td>
+</tr>
+<tr>
+<td>
+B
+</td>
+<td>
+<code>WLL+17</code> (T / N large)
+</td>
+<td align="right">
+39
+</td>
+<td align="right">
+63
+</td>
+<td align="right">
+12
+</td>
+<td align="right">
+41
+</td>
+<td align="right">
+<B>-23</B>
+</td>
+<td align="right">
+<B>-153</B>
+</td>
+</tr>
+<tr>
+<td>
+C
+</td>
+<td>
+<code>WLL+17</code> (T / N huge)
+</td>
+<td align="right">
+60
+</td>
+<td align="right">
+129
+</td>
+<td align="right">
+<B>-16</B>
+</td>
+<td align="right">
+20
+</td>
+<td align="right">
+116
+</td>
+<td align="right">
+80
+</td>
+</tr>
+<tr>
+<td>
+D
+</td>
+<td>
+<code>BOK+18</code> (T / N)
+</td>
+<td align="right">
+108
+</td>
+<td align="right">
+59
+</td>
+<td align="right">
+<B>-12</B>
+</td>
+<td align="right">
+12
+</td>
+<td align="right">
+72
+</td>
+<td align="right">
+199
+</td>
+</tr>
+<tr>
+<td>
+E
+</td>
+<td>
+<code>YXZ+18</code> (T / N)
+</td>
+<td align="right">
+145
+</td>
+<td align="right">
+111
+</td>
+<td align="right">
+28
+</td>
+<td align="right">
+34
+</td>
+<td align="right">
+<B>-140</B>
+</td>
+<td align="right">
+64
+</td>
+</tr>
+<tr>
+<td>
+F
+</td>
+<td>
+<code>BEM+20</code> (T / N mouse)
+</td>
+<td align="right">
+93
+</td>
+<td align="right">
+138
+</td>
+<td align="right">
+29
+</td>
+<td align="right">
+28
+</td>
+<td align="right">
+24
+</td>
+<td align="right">
+<B>-22</B>
+</td>
+</tr>
+<tr>
+<td>
+G
+</td>
+<td>
+<code>GZD+19</code> (T / N protein)
+</td>
+<td align="right">
+403
+</td>
+<td align="right">
+52
+</td>
+<td align="right">
+26
+</td>
+<td align="right">
+60
+</td>
+<td align="right">
+85
+</td>
+<td align="right">
+66
+</td>
+</tr>
+<tr>
+<td>
+H
+</td>
+<td>
+<code>GZD+19</code> (T / N phosphoprotein)
+</td>
+<td align="right">
+213
+</td>
+<td align="right">
+68
+</td>
+<td align="right">
+36
+</td>
+<td align="right">
+22
+</td>
+<td align="right">
+140
+</td>
+<td align="right">
+216
+</td>
+</tr>
+<tr>
+<td>
+I
+</td>
+<td>
+<code>JSZ+19</code> (T / N)
+</td>
+<td align="right">
+359
+</td>
+<td align="right">
+1649
+</td>
+<td align="right">
+22
+</td>
+<td align="right">
+30
+</td>
+<td align="right">
+80
+</td>
+<td align="right">
+85
+</td>
+</tr>
+<tr>
+<td>
+J
+</td>
+<td>
+<code>ZZL+19</code> (T / N)
+</td>
+<td align="right">
+162
+</td>
+<td align="right">
+173
+</td>
+<td align="right">
+18
+</td>
+<td align="right">
+15
+</td>
+<td align="right">
+<B>-108</B>
+</td>
+<td align="right">
+125
+</td>
+</tr>
+<tr>
+<td>
+K
+</td>
+<td>
+<code>GZL+20</code> (T / N)
+</td>
+<td align="right">
+234
+</td>
+<td align="right">
+769
+</td>
+<td align="right">
+20
+</td>
+<td align="right">
+11
+</td>
+<td align="right">
+<B>-37</B>
+</td>
+<td align="right">
+54
+</td>
+</tr>
+<tr>
+<td>
+L
+</td>
+<td>
+<code>SCL+20</code> (T / N mitochondrial differential)
+</td>
+<td align="right">
+38
+</td>
+<td align="right">
+43
+</td>
+<td align="right">
+5
+</td>
+<td align="right">
+7
+</td>
+<td align="right">
+<B>-44</B>
+</td>
+<td align="right">
+<B>-65</B>
+</td>
+</tr>
+<tr>
+<td>
+M
+</td>
+<td>
+<code>SCL+20</code> (T / N mitochondrial unique)
+</td>
+<td align="right">
+419
+</td>
+<td align="right">
+966
+</td>
+<td align="right">
+22
+</td>
+<td align="right">
+<B>-1</B>
+</td>
+<td align="right">
+60
+</td>
+<td align="right">
+18
+</td>
+</tr>
+</table>
+<div id="data-sources" class="section level2">
+<h2>Data Sources</h2>
+<p>Gene names or other identifiers were converted to UniProt accession numbers using the <a href="https://www.uniprot.org/mapping/">UniProt mapping tool</a>, except for IPI accession numbers, which were converted using the <a href="https://david-d.ncifcrf.gov/conversion.jsp">DAVID 6.7 conversion tool</a>.</p>
+<p><strong>a</strong>. Table III of <span class="citation">Li et al. (2004)</span>. <strong>b</strong>. Tables 2 and 3 of <span class="citation">Blanc et al. (2005)</span>. <strong>c</strong>. Table 2 of <span class="citation">Li et al. (2005)</span>. <strong>d</strong>. Table 1 of <span class="citation">Dos Santos et al. (2007)</span>, including proteins identified in either tumor homogenates or laser microdissected samples. <strong>e</strong>. Supplemental Table S1 of <span class="citation">Sun et al. (2007)</span>. <strong>f</strong>. Tables 1–3 of <span class="citation">Chaerkady et al. (2008)</span>. <strong>g</strong>. Supplemental Tables S3A and S3C of <span class="citation">Roy et al. (2010)</span>, filtered to include proteins with <em>p</em>-value &lt; 0.05. <strong>h</strong>. <strong>i</strong>. IPI numbers from Supplemental Tables S3 (nuclear proteins) and S4 (cytoskeletal proteins) of <span class="citation">Lee et al. (2011)</span>, filtered to include proteins with median fold-change &gt; 2 or &lt; 0.5. <strong>j</strong>. Supplemental Table 5 of <span class="citation">Li et al. (2012)</span>. <strong>k</strong>. Supplementary Table 3 of <span class="citation">Kimura et al. (2013)</span>. <strong>l</strong>. Supplemental Data S5 (sheet “LF_proteins”) of <span class="citation">Megger et al. (2013)</span>. <strong>m</strong>. Supporting Information SI-S2 of <span class="citation">Xu et al. (2014)</span>. <strong>n</strong>. Table 1 of <span class="citation">Borlak, Singh &amp; Gazzana (2015)</span>. <strong>o</strong>. Supplementary Table S1 of <span class="citation">Reis et al. (2015)</span>, filtered to include proteins with &gt; 1 peptide used for quantification and fold change &gt; 2 in either direction. <strong>p</strong>. <strong>q</strong>. <strong>r</strong>. Supplementary Data Table S2 of <span class="citation">Naboulsi et al. (2016a)</span> (sheets “G1 vs C”, “G2 vs C”, and “G3 vs C”), filtered to include proteins with <em>p</em>-value &lt; 0.05, quantified in at least half of both tumor and control samples, and median log<sub>2</sub> fold change &gt; 1 or &lt; -1. <strong>s</strong>. Supporting Information Table S-4 (sheet “Filtered protein list”) of <span class="citation">Naboulsi et al. (2016b)</span>. <strong>t</strong>. <strong>u</strong>. <strong>v</strong>. Supplementary Tables S3–S5 of <span class="citation">Qi et al. (2016)</span>. <strong>w</strong>. Table 4 of <span class="citation">Guo et al. (2017)</span>. <strong>x</strong>. Supplementary Table S5 of <span class="citation">Gao et al. (2017)</span>. <strong>y</strong>. Supplementary Table 5 of <span class="citation">Qiao et al. (2017)</span>, filtered to include proteins with median fold change &gt; 2 or &lt; 0.5 (UniProt IDs from Supplementary Table 1). <strong>z</strong>. <strong>A</strong>. <strong>B</strong>. <strong>C</strong>. Supplementary Table S3 of <span class="citation">Wang et al. (2017)</span>, filtered to include proteins with <em>p</em>-value &lt; 0.05 and fold change &gt; 2 or &lt; 0.5. <strong>D</strong>. Supplemental Table S2 of <span class="citation">Buczak et al. (2018)</span> (data for tumor vs. peritumor), filtered to include proteins with <em>q</em>-value &lt; 0.05, quantified in at least 3 tumors, same direction of change in all tumors, and median log<sub>2</sub> fold change &gt; 1 or &lt; -1. <strong>E</strong>. Supplementary Table S2 of <span class="citation">Yang et al. (2018)</span>. <strong>F</strong>. <a href="https://github.com/saezlab/Berndt_Egners_Mastrobuoni/blob/master/data/Proteom-Daten%20Bl6%20vs%2016w%20AG%20Kempa.xlsx">Dataset</a> of <span class="citation">Berndt et al. (2020)</span>, filtered to include proteins quantified in more than half of each of control and cancer samples and median fold change &gt; 2 or &lt; 0.5. <strong>G</strong>. <strong>H</strong>. Supplemental Table S3 of <span class="citation">Gao et al. (2019)</span> (sheets “1. 1,274 DF proteins” and “2. 859 DF phosphoproteins”), filtered to include proteins with log<sub>2</sub> fold change &gt; 1 or &lt; -1. <strong>I</strong>. Supplementary Table 6 of <span class="citation">Jiang et al. (2019)</span>. <strong>J</strong>. Supporting Information Table S5 of <span class="citation">Zhu et al. (2019)</span> (sheet “c_proteins”), filtered to include proteins quantified in at least half of tumor and normal samples and with fold change &gt; 2 or &lt; 0.5. <strong>K</strong>. Supporting Information Table S4 of <span class="citation">Gao et al. (2020)</span> (sheet “B_Molecule”). <strong>L</strong>. <strong>M</strong>. Supplementary Tables S1–S2 (proteins with differential expression between non-tumor and tumor regions) and S3–S4 (all proteins identified in each region) of <span class="citation">Shin et al. (2020)</span>. Common accession numbers in Tables S3 and S4 were eliminated to yield proteins uniquely identified in either tumor or non-tumor regions.</p>
+</div>
+<div id="references" class="section level2 unnumbered">
+<h2>References</h2>
+<div id="refs" class="references">
+<div id="ref-BEM+20">
+<p>Berndt N, Egners A, Mastrobuoni G, Vvedenskaya O, Fragoulis A, Dugourd A, Bulik S, Pietzke M, Bielow C, van Gassel R, Damink SWO, Erdem M, Saez-Rodriguez J, Holzhütter H-G, Kempa S, Cramer T. 2020. Kinetic modelling of quantitative proteome data predicts metabolic reprogramming of liver cancer. <em>British Journal of Cancer</em> 122:233–244. DOI: <a href="https://doi.org/10.1038/s41416-019-0659-3">10.1038/s41416-019-0659-3</a>.</p>
+</div>
+<div id="ref-BLP+05">
+<p>Blanc J-F, Lalanne C, Plomion C, Schmitter J-M, Bathany K, Gion J-M, Bioulac-Sage P, Balabaud C, Bonneu M, Rosenbaum J. 2005. Proteomic analysis of differentially expressed proteins in hepatocellular carcinoma developed in patients with chronic viral hepatitis C. <em>Proteomics</em> 5:3778–3789. DOI: <a href="https://doi.org/10.1002/pmic.200401194">10.1002/pmic.200401194</a>.</p>
+</div>
+<div id="ref-BSG15">
+<p>Borlak J, Singh P, Gazzana G. 2015. Proteome mapping of epidermal growth factor induced hepatocellular carcinomas identifies novel cell metabolism targets and mitogen activated protein kinase signalling events. <em>BMC Genomics</em> 16:124. DOI: <a href="https://doi.org/10.1186/s12864-015-1312-z">10.1186/s12864-015-1312-z</a>.</p>
+</div>
+<div id="ref-BOK+18">
+<p>Buczak K, Ori A, Kirkpatrick JM, Holzer K, Dauch D, Roessler S, Endris V, Lasitschka F, Parca L, Schmidt A, Zender L, Schirmacher P, Krijgsveld J, Singer S, Beck M. 2018. Spatial tissue proteomics quantifies inter- and intratumor heterogeneity in hepatocellular carcinoma (HCC). <em>Molecular &amp; Cellular Proteomics</em> 17:810–825. DOI: <a href="https://doi.org/10.1074/mcp.RA117.000189">10.1074/mcp.RA117.000189</a>.</p>
+</div>
+<div id="ref-CHN+08">
+<p>Chaerkady R, Harsha HC, Nalli A, Gucek M, Vivekanandan P, Akhtar J, Cole RN, Simmers J, Schulick RD, Singh S, Torbenson M, Pandey A, Thuluvath PJ. 2008. A quantitative proteomic approach for identification of potential biomarkers in hepatocellular carcinoma. <em>Journal of Proteome Research</em> 7:4289–4298. DOI: <a href="https://doi.org/10.1021/pr800197z">10.1021/pr800197z</a>.</p>
+</div>
+<div id="ref-DTS+07">
+<p>Dos Santos A, Thiers V, Sar S, Derian N, Bensalem N, Yilmaz F, Bralet M-P, Ducot B, Bréchot C, Demaugre F. 2007. Contribution of laser microdissection-based technology to proteomic analysis in hepatocellular carcinoma developing on cirrhosis. <em>Proteomics - Clinical Applications</em> 1:545–554. DOI: <a href="https://doi.org/10.1002/prca.200600474">10.1002/prca.200600474</a>.</p>
+</div>
+<div id="ref-GWS+17">
+<p>Gao Y, Wang X, Sang Z, Li Z, Liu F, Mao J, Yan D, Zhao Y, Wang H, Li P, Ying X, Zhang X, He K, Wang H. 2017. Quantitative proteomics by SWATH-MS reveals sophisticated metabolic reprogramming in hepatocellular carcinoma tissues. <em>Scientific Reports</em> 7:45913. DOI: <a href="https://doi.org/10.1038/srep45913">10.1038/srep45913</a>.</p>
+</div>
+<div id="ref-GZL+20">
+<p>Gao H, Zhang F, Liang S, Zhang Q, Lyu M, Qian L, Liu W, Ge W, Chen C, Yi X, Zhu J, Lu C, Sun P, Liu K, Zhu Y, Guo T. 2020. Accelerated lysis and proteolytic digestion of biopsy-level fresh-frozen and FFPE tissue samples using pressure cycling technology. <em>Journal of Proteome Research</em> 19:1982–1990. DOI: <a href="https://doi.org/10.1021/acs.jproteome.9b00790">10.1021/acs.jproteome.9b00790</a>.</p>
+</div>
+<div id="ref-GZD+19">
+<p>Gao Q, Zhu H, Dong L, Shi W, Chen R, Song Z, Huang C, Li J, Dong X, Zhou Y, Liu Q, Ma L, Wang X, Zhou J, Liu Y, Boja E, Robles AI, Ma W, Wang P, Li Y, Ding L, Wen B, Zhang B, Rodriguez H, Gao D, Zhou H, Fan J. 2019. Integrated proteogenomic characterization of hbv-related hepatocellular carcinoma. <em>Cell</em> 179:561–577. DOI: <a href="https://doi.org/10.1016/j.cell.2019.08.052">10.1016/j.cell.2019.08.052</a>.</p>
+</div>
+<div id="ref-GJZ+17">
+<p>Guo J, Jing R, Zhong J-H, Dong X, Li Y-X, Liu Y-K, Huang T-R, Zhang C-Y. 2017. Identification of CD14 as a potential biomarker of hepatocellular carcinoma using iTRAQ quantitative proteomics. <em>Oncotarget</em> 8:62011–62028. DOI: <a href="https://doi.org/10.18632/oncotarget.18782">10.18632/oncotarget.18782</a>.</p>
+</div>
+<div id="ref-JSZ+19">
+<p>Jiang Y, Sun A, Zhao Y, Ying W, Sun H, Yang X, Xing B, Sun W, Ren L, Hu B, Li C, Zhang L, Qin G, Zhang M, Chen N, Zhang M, Huang Y, Zhou J, Zhao Y, Liu M, Zhu X, Qiu Y, Sun Y, Huang C, Yan M, Wang M, Liu W, Tian F, Xu H, Zhou J, Wu Z, Shi T, Zhu W, Qin J, Xie L, Fan J, Qian X, He F, He F, Qian X, Qin J, Jiang Y, Ying W, Sun W, Zhu Y, Zhu W, Wang Y, Yang D, Liu W, Liu Q, Yang X, Zhen B, Wu Z, Fan J, Sun H, Qian J, Hong T, Shen L, Xing B, Yang P, Shen H, Zhang L, Cheng S, Cai J, Zhao X, Sun Y, Xiao T, Mao Y, Chen X, Wu D, Chen L, Dong J, Deng H, Tan M, Wu Z, Zhao Q, Shen Z, Chen X, Gao Y, Sun W, Wang T, Liu S, Lin L, Zi J, Lou X, Zeng R, Wu Y, Cai S, Jiang B, Chen A, Li Z, Yang F, Chen X, Sun Y, Wang Q, Zhang Y, Wang G, Chen Z, Qin W, Li Z, Chinese Human Proteome Project Consortium (CNHPP). 2019. Proteomics identifies new therapeutic targets of early-stage hepatocellular carcinoma. <em>Nature</em> 567:257–261. DOI: <a href="https://doi.org/10.1038/s41586-019-0987-8">10.1038/s41586-019-0987-8</a>.</p>
+</div>
+<div id="ref-KOK+13">
+<p>Kimura K, Ojima H, Kubota D, Sakumoto M, Nakamura Y, Tomonaga T, Kosuge T, Kondo T. 2013. Proteomic identification of the macrophage-capping protein as a protein contributing to the malignant features of hepatocellular carcinoma. <em>Journal of Proteomics</em> 78:362–373. DOI: <a href="https://doi.org/10.1016/j.jprot.2012.10.004">10.1016/j.jprot.2012.10.004</a>.</p>
+</div>
+<div id="ref-LMG+11">
+<p>Lee Y-Y, McKinney KQ, Ghosh S, Iannitti DA, Martinie JB, Caballes FR, Russo MW, Ahrens WA, Lundgren DH, Han DK, Bonkovsky HL, Hwang S-I. 2011. Subcellular tissue proteomics of hepatocellular carcinoma for molecular signature discovery. <em>Journal of Proteome Research</em> 10:5070–5083. DOI: <a href="https://doi.org/10.1021/pr2005204">10.1021/pr2005204</a>.</p>
+</div>
+<div id="ref-LHT+04">
+<p>Li C, Hong Y, Tan Y-X, Zhou H, Ai J-H, Li S-J, Zhang L, Xia Q-C, Wu J-R, Wang H-Y, Zeng R. 2004. Accurate qualitative and quantitative proteomic analysis of clinical hepatocellular carcinoma using laser capture microdissection coupled with isotope-coded affinity tag and two-dimensional liquid chromatography mass spectrometry. <em>Molecular &amp; Cellular Proteomics</em> 3:399–409. DOI: <a href="https://doi.org/10.1074/mcp.M300133-MCP200">10.1074/mcp.M300133-MCP200</a>.</p>
+</div>
+<div id="ref-LRL+12">
+<p>Li C, Ruan H-Q, Liu Y-S, Xu M-J, Dai J, Sheng Q-H, Tan Y-X, Yao Z-Z, Wang H-Y, Wu J-R, Zeng R. 2012. Quantitative proteomics reveal up-regulated protein expression of the SET complex associated with hepatocellular carcinoma. <em>Journal of Proteome Research</em> 11:871–885. DOI: <a href="https://doi.org/10.1021/pr2006999">10.1021/pr2006999</a>.</p>
+</div>
+<div id="ref-LTZ+05">
+<p>Li C, Tan Y-X, Zhou H, Ding S-J, Li S-J, Ma D-j, Man X-b, Hong Y, Zhang L, Li L, Xia Q-C, Wu J-R, Wang H-Y, Zeng R. 2005. Proteomic analysis of hepatitis B virus-associated hepatocellular carcinoma: Identification of potential tumor markers. <em>Proteomics</em> 5:1125–1139. DOI: <a href="https://doi.org/10.1002/pmic.200401141">10.1002/pmic.200401141</a>.</p>
+</div>
+<div id="ref-MBK+13">
+<p>Megger DA, Bracht T, Kohl M, Ahrens M, Naboulsi W, Weber F, Hoffmann A-C, Stephan C, Kuhlmann K, Eisenacher M, Schlaak JF, Baba HA, Meyer HE, Sitek B. 2013. Proteomic differences between hepatocellular carcinoma and nontumorous liver tissue investigated by a combined gel-based and label-free quantitative proteomics study. <em>Molecular &amp; Cellular Proteomics</em> 12:2006–2020. DOI: <a href="https://doi.org/10.1074/mcp.M113.028027">10.1074/mcp.M113.028027</a>.</p>
+</div>
+<div id="ref-NBM+16">
+<p>Naboulsi W, Bracht T, Megger DA, Reis H, Ahrens M, Turewicz M, Eisenacher M, Tautges S, Canbay AE, Meyer HE, Weber F, Baba HA, Sitek B. 2016a. Quantitative proteome analysis reveals the correlation between endocytosis-associated proteins and hepatocellular carcinoma dedifferentiation. <em>Biochimica et Biophysica Acta (BBA) - Proteins and Proteomics</em> 1864:1579–1585. DOI: <a href="https://doi.org/10.1016/j.bbapap.2016.08.005">10.1016/j.bbapap.2016.08.005</a>.</p>
+</div>
+<div id="ref-NMB+16">
+<p>Naboulsi W, Megger DA, Bracht T, Kohl M, Turewicz M, Eisenacher M, Voss DM, Schlaak JF, Hoffmann A-C, Weber F, Baba HA, Meyer HE, Sitek B. 2016b. Quantitative tissue proteomics analysis reveals versican as potential biomarker for early-stage hepatocellular carcinoma. <em>Journal of Proteome Research</em> 15:38–47. DOI: <a href="https://doi.org/10.1021/acs.jproteome.5b00420">10.1021/acs.jproteome.5b00420</a>.</p>
+</div>
+<div id="ref-QPP+17">
+<p>Qiao Z, Pan X, Parlayan C, Ojima H, Kondo T. 2017. Proteomic study of hepatocellular carcinoma using a novel modified aptamer-based array (SOMAscan™) platform. <em>Biochimica et Biophysica Acta (BBA) - Proteins and Proteomics</em> 1865:434–443. DOI: <a href="https://doi.org/10.1016/j.bbapap.2016.09.011">10.1016/j.bbapap.2016.09.011</a>.</p>
+</div>
+<div id="ref-QXC+16">
+<p>Qi Y, Xu F, Chen L, Li Y, Xu Z, Zhang Y, Wei W, Su N, Zhang T, Fan F, Wang X, Qin X, Zhang L, Liu Y, Xu P. 2016. Quantitative proteomics reveals FLNC as a potential progression marker for the development of hepatocellular carcinoma. <em>Oncotarget</em> 7:68242–68252. DOI: <a href="https://doi.org/10.18632/oncotarget.11921">10.18632/oncotarget.11921</a>.</p>
+</div>
+<div id="ref-RPM+15">
+<p>Reis H, Pütter C, Megger DA, Bracht T, Weber F, Hoffmann A-C, Bertram S, Wohlschläger J, Hagemann S, Eisenacher M, Scherag A, Schlaak JF, Canbay A, Meyer HE, Sitek B, Baba HA. 2015. A structured proteomic approach identifies 14-3-3Sigma as a novel and reliable protein biomarker in panel based differential diagnostics of liver tumors. <em>Biochimica et Biophysica Acta (BBA) - Proteins and Proteomics</em> 1854:641–650. DOI: <a href="https://doi.org/10.1016/j.bbapap.2014.10.024">10.1016/j.bbapap.2014.10.024</a>.</p>
+</div>
+<div id="ref-RLA+10">
+<p>Roy L, LaBoissière S, Abdou E, Thibault G, Hamel N, Taheri M, Boismenu D, Lanoix J, Kearney RE, Paiement J. 2010. Proteomic analysis of the transitional endoplasmic reticulum in hepatocellular carcinoma: An organelle perspective on cancer. <em>Biochimica et Biophysica Acta (BBA) - Proteins and Proteomics</em> 1804:1869–1881. DOI: <a href="https://doi.org/10.1016/j.bbapap.2010.05.008">10.1016/j.bbapap.2010.05.008</a>.</p>
+</div>
+<div id="ref-SCL+20">
+<p>Shin H, Cha H-J, Lee MJ, Na K, Park D, Kim C-Y, Han DH, Kim H, Paik Y-K. 2020. Identification of ALDH6A1 as a potential molecular signature in hepatocellular carcinoma via quantitative profiling of the mitochondrial proteome. <em>Journal of Proteome Research</em> 19:1684–1695. DOI: <a href="https://doi.org/10.1021/acs.jproteome.9b00846">10.1021/acs.jproteome.9b00846</a>.</p>
+</div>
+<div id="ref-SXS+07">
+<p>Sun W, Xing B, Sun Y, Du X, Lu M, Hao C, Lu Z, Mi W, Wu S, Wei H, Gao X, Zhu Y, Jiang Y, Qian X, He F. 2007. Proteome analysis of hepatocellular carcinoma by two-dimensional difference gel electrophoresis: Novel protein markers in hepatocellular carcinoma tissues. <em>Molecular &amp; Cellular Proteomics</em> 6:1798–1808. DOI: <a href="https://doi.org/10.1074/mcp.M600449-MCP200">10.1074/mcp.M600449-MCP200</a>.</p>
+</div>
+<div id="ref-WLL+17">
+<p>Wang Y, Liu H, Liang D, Huang Y, Zeng Y, Xing X, Xia J, Lin M, Han X, Liao N, Liu X, Liu J. 2017. Reveal the molecular signatures of hepatocellular carcinoma with different sizes by iTRAQ based quantitative proteomics. <em>Journal of Proteomics</em> 150:230–241. DOI: <a href="https://doi.org/10.1016/j.jprot.2016.09.008">10.1016/j.jprot.2016.09.008</a>.</p>
+</div>
+<div id="ref-XWS+14">
+<p>Xu B, Wang F, Song C, Sun Z, Cheng K, Tan Y, Wang H, Zou H. 2014. Large-scale proteome quantification of hepatocellular carcinoma tissues by a three-dimensional liquid chromatography strategy integrated with sample preparation. <em>Journal of Proteome Research</em> 13:3645–3654. DOI: <a href="https://doi.org/10.1021/pr500200s">10.1021/pr500200s</a>.</p>
+</div>
+<div id="ref-YXZ+18">
+<p>Yang J, Xie Q, Zhou H, Chang L, Wei W, Wang Y, Li H, Deng Z, Xiao Y, Wu J, Xu P, Hong X. 2018. Proteomic analysis and NIR-II imaging of MCM2 protein in hepatocellular carcinoma. <em>Journal of Proteome Research</em> 17:2428–2439. DOI: <a href="https://doi.org/10.1021/acs.jproteome.8b00181">10.1021/acs.jproteome.8b00181</a>.</p>
+</div>
+<div id="ref-ZZL+19">
+<p>Zhu Y, Zhu J, Lu C, Zhang Q, Xie W, Sun P, Dong X, Yue L, Sun Y, Yi X, Zhu T, Ruan G, Aebersold R, Huang S, Guo T. 2019. Identification of protein abundance changes in hepatocellular carcinoma tissues using PCT–SWATH. <em>Proteomics: Clinical Applications</em> 13:1700179. DOI: <a href="https://doi.org/10.1002/prca.201700179">10.1002/prca.201700179</a>.</p>
+</div>
+</div>
+</div>
+
+
+
+<!-- code folding -->
+
+
+
+</body>
+</html>

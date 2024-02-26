@@ -1,0 +1,1180 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+
+
+<title>3D Cell Culture</title>
+
+<script>// Hide empty <a> tag within highlighted CodeBlock for screen reader accessibility (see https://github.com/jgm/pandoc/issues/6352#issuecomment-626106786) -->
+// v0.0.1
+// Written by JooYoung Seo (jooyoung@psu.edu) and Atsushi Yasumoto on June 1st, 2020.
+
+document.addEventListener('DOMContentLoaded', function() {
+  const codeList = document.getElementsByClassName("sourceCode");
+  for (var i = 0; i < codeList.length; i++) {
+    var linkList = codeList[i].getElementsByTagName('a');
+    for (var j = 0; j < linkList.length; j++) {
+      if (linkList[j].innerHTML === "") {
+        linkList[j].setAttribute('aria-hidden', 'true');
+      }
+    }
+  }
+});
+</script>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+
+
+<style type="text/css">
+  code {
+    white-space: pre;
+  }
+  .sourceCode {
+    overflow: visible;
+  }
+</style>
+<style type="text/css" data-origin="pandoc">
+code.sourceCode > span { display: inline-block; line-height: 1.25; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+
+</style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    var j = 0;
+    while (j < rules.length) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") {
+        j++;
+        continue;
+      }
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' && rule.style.backgroundColor === '') {
+        j++;
+        continue;
+      }
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
+</script>
+
+
+
+
+<style type="text/css">body {
+background-color: #fff;
+margin: 1em auto;
+max-width: 700px;
+overflow: visible;
+padding-left: 2em;
+padding-right: 2em;
+font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+font-size: 14px;
+line-height: 1.35;
+}
+#TOC {
+clear: both;
+margin: 0 0 10px 10px;
+padding: 4px;
+width: 400px;
+border: 1px solid #CCCCCC;
+border-radius: 5px;
+background-color: #f6f6f6;
+font-size: 13px;
+line-height: 1.3;
+}
+#TOC .toctitle {
+font-weight: bold;
+font-size: 15px;
+margin-left: 5px;
+}
+#TOC ul {
+padding-left: 40px;
+margin-left: -1.5em;
+margin-top: 5px;
+margin-bottom: 5px;
+}
+#TOC ul ul {
+margin-left: -2em;
+}
+#TOC li {
+line-height: 16px;
+}
+table {
+margin: 1em auto;
+border-width: 1px;
+border-color: #DDDDDD;
+border-style: outset;
+border-collapse: collapse;
+}
+table th {
+border-width: 2px;
+padding: 5px;
+border-style: inset;
+}
+table td {
+border-width: 1px;
+border-style: inset;
+line-height: 18px;
+padding: 5px 5px;
+}
+table, table th, table td {
+border-left-style: none;
+border-right-style: none;
+}
+table thead, table tr.even {
+background-color: #f7f7f7;
+}
+p {
+margin: 0.5em 0;
+}
+blockquote {
+background-color: #f6f6f6;
+padding: 0.25em 0.75em;
+}
+hr {
+border-style: solid;
+border: none;
+border-top: 1px solid #777;
+margin: 28px 0;
+}
+dl {
+margin-left: 0;
+}
+dl dd {
+margin-bottom: 13px;
+margin-left: 13px;
+}
+dl dt {
+font-weight: bold;
+}
+ul {
+margin-top: 0;
+}
+ul li {
+list-style: circle outside;
+}
+ul ul {
+margin-bottom: 0;
+}
+pre, code {
+background-color: #f7f7f7;
+border-radius: 3px;
+color: #333;
+white-space: pre-wrap; 
+}
+pre {
+border-radius: 3px;
+margin: 5px 0px 10px 0px;
+padding: 10px;
+}
+pre:not([class]) {
+background-color: #f7f7f7;
+}
+code {
+font-family: Consolas, Monaco, 'Courier New', monospace;
+font-size: 85%;
+}
+p > code, li > code {
+padding: 2px 0px;
+}
+div.figure {
+text-align: center;
+}
+img {
+background-color: #FFFFFF;
+padding: 2px;
+border: 1px solid #DDDDDD;
+border-radius: 3px;
+border: 1px solid #CCCCCC;
+margin: 0 5px;
+}
+h1 {
+margin-top: 0;
+font-size: 35px;
+line-height: 40px;
+}
+h2 {
+border-bottom: 4px solid #f7f7f7;
+padding-top: 10px;
+padding-bottom: 2px;
+font-size: 145%;
+}
+h3 {
+border-bottom: 2px solid #f7f7f7;
+padding-top: 10px;
+font-size: 120%;
+}
+h4 {
+border-bottom: 1px solid #f7f7f7;
+margin-left: 8px;
+font-size: 105%;
+}
+h5, h6 {
+border-bottom: 1px solid #ccc;
+font-size: 105%;
+}
+a {
+color: #0033dd;
+text-decoration: none;
+}
+a:hover {
+color: #6666ff; }
+a:visited {
+color: #800080; }
+a:visited:hover {
+color: #BB00BB; }
+a[href^="http:"] {
+text-decoration: underline; }
+a[href^="https:"] {
+text-decoration: underline; }
+
+code > span.kw { color: #555; font-weight: bold; } 
+code > span.dt { color: #902000; } 
+code > span.dv { color: #40a070; } 
+code > span.bn { color: #d14; } 
+code > span.fl { color: #d14; } 
+code > span.ch { color: #d14; } 
+code > span.st { color: #d14; } 
+code > span.co { color: #888888; font-style: italic; } 
+code > span.ot { color: #007020; } 
+code > span.al { color: #ff0000; font-weight: bold; } 
+code > span.fu { color: #900; font-weight: bold; } 
+code > span.er { color: #a61717; background-color: #e3d2d2; } 
+</style>
+
+
+
+
+</head>
+
+<body>
+
+
+
+
+<h1 class="title toc-ignore">3D Cell Culture</h1>
+
+
+
+<p>This vignette from the R package <a href="https://github.com/jedick/JMDplots">JMDplots</a> version 1.2.19-1 shows chemical metrics for proteins that are differentially expressed in 3D compared to 2D culture conditions. The analysis is described in more detail in a paper (<a href="https://doi.org/10.1002/cso2.1007"><span title="Water as a reactant in the differential expression of proteins in cancer">Dick, 2021</a></a>). Abbreviations:</p>
+<ul>
+<li><i>Z</i><sub>C</sub> – average oxidation state of carbon.</li>
+<li><i>n</i><sub>H<sub>2</sub>O</sub> – stoichiometric hydration state per residue (<a href="https://doi.org/10.5194/bg-17-6145-2020"><span title="Uncovering chemical signatures of salinity gradients through compositional analysis of protein sequences">Dick et al., 2020</span></a>) computed using the <strong>QEC</strong> basis species (glutamine, glutamic acid, cysteine, H<sub>2</sub>O, O<sub>2</sub>).</li>
+</ul>
+<style type="text/css">
+body {
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+</style>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a>datasets &lt;-<span class="st"> </span><span class="kw">pdat_3D</span>(<span class="dv">2020</span>)</span></code></pre></div>
+<p>Differences are calculated as (median value for up-regulated proteins) - (median value for down-regulated proteins). Dashed lines enclose the 50% confidence region for highest probability density.</p>
+<p><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAeAAAAHgCAMAAABKCk6nAAAACXBIWXMAAA7DAAAOwwHHb6hkAAAARVBMVEX///9tbm6AgYGcnJv08+urq6uztLNPTk8SEBMnISTGxsfT09Lk4+L9450YWqfh+/9pIwmsXhwMHGXoo1ZNmuSEz/q29P7DmnsLAAAfXklEQVR42uydi3qbOBCF0QWNbmBj4rz/o1YSOMapbzEYsDhnv7Rpt9u1+S2dmdFIKgoIgiAIgiAIgiAIgiAIgiAIgiAIgiAIgiAoY7kSWlTyzYAJWlRavRuwwiy2pAiA3ygpAThriRKAs5Z1AAwB8If4reKMCQ8PztVuNXEhmCYPD85x+BJ1diu5tvDg/MTo51ulPTw4NykzMFtO8ODcZOKbbI02X7v4KwcPzktehx8qc0xfYQhzeHBesqdJWe6/wo8lwYPzUiIqG2OMjoAVwYMzHMHN4fu/EQwPziQL1mGkNvVONmkEM3hwbiIRgqx9CKLbQFiuKhEG4EnmaDNgyhjy4OzEz5WOwbfw4JwIdyw9DQczPDgfKaOJMaO5XNfrAuDJ5Esu7K/wGh6ct+DBuUfX8GAIgD9Y8GB4MADDgwEYAmB4MADDgwEYHgzA8GB4MADDgwEYHgzAEADDgwEYHgzAN+SdhwdnK0c67mRhHoCzFNc8onVMCwDOUKzvnRWlMwKAs1N56n0PHuy1BeDcZALTKh0F+h1GMQFwZrImpsDO2rijtCiW3YsGwG+IsPrto63hMQ+mEoAzC7G6uKoyXykPPm8XBuCcAFdpt/+ZNwDnM0XHDcJyX++6WvSyTwCAp1c6VanVIYg2vD/fAYCzUjzRwVurbNxtONjwD8CZyA2KGxenHAJwJlK6S42kFAsXsgD4PbKGhPOWDC29nATAb1JJxhgSi7+OyZ7/re4U9GR9NOB4QGMdC65FW+8A+NlP/ccAlo1mzByOAHxdH9+Tlc5HlmnRBICvxVqf3pNVpfWwRBiAc/Tg7oTzQu4P3wCcpwcf0pJJtTd7AM7QgwPZ+hRtAXCGHjwczB55cIZ5cBGXTdS9Dyo8+KMBy9bopK7aAcC5eXCjWWmdU3yfqh0AnFsebI4/8XQNwPl5cHv4mZlbAM7QgzGCM/dg2RhuvZSu3OsLD3b6RxctSd5vCvDn58Gy6THeirEKfW77VhT/JJUF9EF5cBi9orS7m//+B7AkUwZLkuXybSzw4Al1AizNz1zNjdwI4IzO6Ghv1aJPgIl1MXe1Pw7vyIYHfwjgin/dHcFxS2W6m7M97Pobs6GcpujUXxjgyiZ+EMRGhnAWHvxgsaEHnA6tCNNzZWJpJO3egQd/Qpr0cLGhB9wRbeq+4KW3EWZ9vgc/Xmy4AFyZvvS1kRH8S4oRsVJ+EOAnSpWnKdp1f+qQYu2tTNEXHqyM4UoJmvforLcvNvSAu3MMuhAreBPbBuChB4tT6uAMZTiCXXLd/gMhjd0G4IEHl4N7hYl9CuCbiw3/FzoYhSC6N2rayAAePiltCxkrut7FX7gPAfyHxQZJJH9/tyEPjpl/mu9SoWfGOsB8iw0F09yGwc71dsbv2YPjGtoZ8IxB5myLDdGHWUiaDXOb4Tvw4OjAZ8Aznn43J+AtS18CNg6A8/LgSDQB7ioB81XyAHgeD47H3cl9bcU+Ak7HlQJwTh6sItKK0VfahTnj8ZUAPNeDHjwHO+NaCwDP48GFP5/tb+c8OwuA5/HgVIJOE7Znes5+FgCex4PjcObaEM191Q4AzymnyrmXWQB4Jg9eLLgD4Jk8GIBz92AAhgAYHgzA8GAAhgcDMDwYgOHBAAwPhgcDMATA8GAAhgcDMDwYgOHBAAwPhgcDMDwYgCEAhgcDMDwYgOHBAAwPhgcDMDwYgOHBAAwBMDwYgOHBAAwPBmB4MDwYgOHBAAwPBmB4MADDgwEYHgzAk3pwScYYZgE404+GIeG85aPv4gXgVXpw+XPcIR95gQcAr9GDnR7exyMBODcPJiHtzttduomHMQDOTM4UlWHGHIQx+jjuihYAXqEHc1ZU+7qQ8fj/pi5G3RM3FrAsGQXxbwCezoOZiFctdzc9tnW672EpwJWJZyATaV3vAHgqDyaRbmhJgJt6tyDgMJF0XGVrvgB4KnF+BtzWu1GMRgI+Xy/74PZRePAfpOhiBI+6wmMywC0AT5cHa1tRvEQrjeBxN1lONEWH7zBFT5cHD4sbblwpa2SQ1WpNjDEyCLImFfu5gdeZcTfCj02TKh4XPYgdkSZN58GRsBbxv/VMj1xxRKFjjR4cRy5pY/T4O3hQ6FijB3fyboIbllDoyFxTRdEodEzrwWsBjELHuzx4dYBR6Jjcg1c1Rf8qdHjG+390yOiswNdSX28qdEh+kmaycOVWv/zir2FsmuRR6MjZg1HoyNyDB27My8wBx4wneJGh8K0Oij9zodzKX/ZUgNtblY4sACtGEWhRKuflIMXlgXj8fZtrHryBKVoKVVrG1T1U3mjiDh78efLChLmYwvB9MBNLxcWVAZuBB+e92MB117IqhX5mVbbUVMqVvQUsNtzM/8pCGn6ehcVTH3fSPicPzrar0lFciR1uGvFPds7IYcyVUy06r8UGw2VkGmlVjFh8l3/ofSMjZB4enOViwykRijtI0iSlmvg25R+6Vy1ptZJ3g67K31Ms06cZluIE2x52hXTxXf5pi5BzeeTB2XVVikEXFNkL66G/Giq36/bgaq+1+do9GMOZLTYME970bAaA/zoWQtZkVwy4Ml9e2n293UIH42mKPhZpm0Gh/9wCJ5lx6wXcJFOV9L0VwI5+pbrWxAfQ6M5/lHnB0JVfMeDj8Kf8AV8pVnXFDWkTJfOCnyYP9qsGLLcCmF+ZTZ0+eyh7ZQtYzIO9FusE3Ka4OGYJmwDsr2U06gTHE72c8TjDVglYNiE43h9GDuDPAOxu+7LhpRL04rvo8mBJtEbA4d0JrnbFBgDzO0dRWU7ExIs+esqD/ToBhwmaQoLQHvMGHJKZdwFYfS2af0t2zB3wCHv9g8UvlRHfBxxCaMlY5oDf+OQHtehS+xUClip2M3znDfidufUgdxbGrwuw7JV1kGXNW6fnCw8WYlWAZaM75VzoUKtZtl1kih5dxVo7YKXfvNrj3eUmfQnA8+a/7+XrSOvLYzZIAHA+4prHjS2en4vRXlsAni2+enNQy9JtC/FE78FRV6WRawGce5ClbrfBeiXK0clxQimrvTletNwyvpoRLH2nPEfw7fjKkqa4i3CkXaYWPdF0badiudWGje5Ncjf58n5h346rYKZukMI2hzIt12gPwLPK3+bro22m2XSMX/L0tqu9Tu1cw45ML1YAuOLESpcx4NsDzxftqZufRizUd6e0y9PfNTi0Xc4bSV8FHBvNQgKnTb3LEbC//ZJiovoD2I+YWDuiJw++uHZBmMUBxxshQoAv2NiWylUCHuwZ/A99vMEmAHZpK8OYukTa9lLY04fl4jGbcvERvD9O9j9YHWB5Z+ZVlACHGDq1KonX52jXDdMesL/Y12TZ0oBv7iTLAfC99sgyAdZfwaTqE+9XH6wYeDBbru3u+ghm+3p8N9ZKAd+LHfsR/N13k45JX9NJ/IInk5u/fvUwyEohFnGbZZD1YGLtAX+PLDspXfbrweK/opmzywIuuhDL6ENuQZZ6kPbH+lMbq7NNHMHj+qjuXAGszOKA+6gysxFsH53DECflVte2jNud+dgCY3eJ97UnbNQaAFdTxAZrAuwfN3CEELuqFdHXLsyxo+uLN/cHz1ecvgnY873Wh7wAP7GAIOk0ofIJKk43+6KllosCliLQJdVmBvgZYpJrEqVgmp4fv1KQ0Yb95QMhFx3BFOiKXTxjJcM06QlcjBh/Ir5yqjuKNJ5/dj2aWusZHQex6+swGQGe+FzYMNINhYHLpPg5nYX/bn2+d0aHXBDw6WDCnEaw1ZMCdoalv88z3cdiFX3/t45wZ2+SYAsCDglw2s6Q0Qj20yYmXpeF7+jp/pMTL4QtiD//NywZZKngwmGezmgE02svo2TXM9kYj3fn7ygqzRmwM097sLELAu7jaJMP4JdehTNGOO+E+V3SSkw7wIwXJGRskIiAfxW/7nkwZ4sCjh9JbjYZRQ9s+5Q3i185cVoqioClDQ9QUXOwap/6Ty+f5739wTO17myiJ8u/FLGmLvWWSDXHwPoiPk6/CoDlvg4PUOq4ft5eAbwGb9oAYPlagBVtuzUiDM3/6tIpQGpq2dS72Iyj4+xcdVO0/YQ8ODPAL52AlLow0rp/FQHLiyGcCo1NHfimqnIC3HYt7k/nwWnz9T/2riy5URiIog2tJHac5P5HHbolMLZjEIuE7EEfk5qqxEZ6qPd+fQC8wVqYbofqDg5JJU+ke1Ofhff03Bqhv4C81fAbZxDRd+mZUY4Opw+At9nisggHVDYPAKb03gL2IroV3pRclNZSP6jqqaNxB8B7OlYUQfzEGq07gLHZqBXfDXC1yvY/3EC9vLlPR47rYCkOgHdcGEts9JckeIPJjVfDWrEPlYmN/OFaewZ/Qx4SjON80Vk84XcH2C7+eh+U4tZ5EX0X66CduQxEhQY7vXHOQxWvg5/3zxwAx68VTYJQnw6EnWgeC/1guklWA8mh/wJneZmC6M0BXlNWBX1KzUlLUMHuMXKMI8HI+CCsWD+YHwAvW26VoYrpXQulw04v28XEzAaBHACtFGglPHUHwAv06LrdMYXHPmTZmCkExj00MNyMljD4srXQ2AFw/heEtA6uHvLkbKtAyICpy2paIsBOiFDe8/2GAKP1tALdCR0s5JB2xyUpll4/N0kpHL1zKW9ANN393ZrQwa14bh+x+WkYFtAk6XdYPfnMcT/8uzyAXcpQoGMwVHcqCDrFF20ga3H+kvSETUIpijy2mF2IsbzyAE7Ys8mJIowxouW6dwi7GYEF4I94d0EAI8LFAezSNQ84TbjP/060P0z5wcwnLUJWI0ml5VoR/R1U8fe5OICT+QdDDojxBqap2YU4raNkgKETz/98Op3yDbkqfXgssC2NxsqmdLDWNwCXJ6LbOxzeUU53nR/sYEampHnoxnwhtC/RuSv1mHv6aGT1AJdnZJUS6KCK1NbW5PplPF1/phnUQVf3ecR5OliimwQVQeynSDcphNzb5/zdE+C+5dP1I6gSNuAGTdkBPKY4J3Uwuwl0mPIAbjS0YEmp9hwQDUV1DZEUDPmOIylh38AdwEIu18GWG9W9A0WGKvsR7/yidwtVWih/PH2Yi4Zp7F5B2oQFbQHRDuCVdRlGS9E+vyEqTQHPJn5wVQ0nZecGGLhwkBQHiVP8eaeccBJKYzuAxyqrovLBIV2YyGvfDODLbgBDMc2V22p4d50RJsG5eSrCALAdi6dM6WCRfhzaRiK6D3nsAHDgl+xG4fal57VUYB3IOG1sCXCDRR2HH7YUAB5tW5zSwRnqKtdnkyQhROodjSwVTpufPMAcjBege8bT4yxqfG/rYcEADRYVXYZSj9bq+O1iUctPv3iAgVlaay0f5ht2c9N4BoCxE0xJLQFg1JCtDY2E7dz8jrOPXh0tPgAvAmF2kd/gucpVNVkZWtUSfYVV/Upe/OubSpz57PklW5AZilGfyZxuPhvGG2mMAW68+J8iBp7SwRmawLcCuKFiLxHdB4AQYDjz1pHBo+NngopyKkTkM8cNY+b6wkza0kbUk3d90g+uXgbgy47Jhs7OAYDxLhLqIW018/m7M7THLjBImYsm9PRRZSWSrF4H4KelvRkAdqG63Zkww7V2Pi9z/vj0hM2ETR6C7zPDC79dIvnoD94KYe8LGdlZSIgoYIbTCabycHDBm/YCU6K+q7UkszN0sKPlA1xEsgGawWCMyLVPBRG9KGEMSl0SBTCjvvhtO4AndLCQxQNcRLLBv2m27w4CUY2lErp1naBJe2qXvYjm4nNTET1lvBd/g6+RrB2TDY/XmWBBlleoANxUedbAyPrc1Mia0ME5ps2+QbLhz4tBSIhcwo8pan7vJjlGcVDFhsc+oYO1fSGAL+UADBaW08J7SFUj6SRJxzDQseXcqgkdnAHfd0g2PO4J7o3tvpiT8eCjIRq6t7vfiQpV/j9+cAnJhoflI0xOaiJqQdRouJhLTY1ztVbA1cLZ2lL2t/OD3ZNkw54A9xKQTraXuD7VVGPgfOP0zrgOlvwFAPYvqts30LFi+9en455KZdM1zpOlqlcB+DIyX2kHgEU0UL72kvsOUavyCtQ8lODvCHB8Eg7yiPwcoiEJ3NJRHazrA+CFe4oFuJsmG2ZRbl9LPTqzIU/SahOAG1kWwLF7sj2v90O9XhY/+GUAHlt7+cFR5z8A+DdtMfUB8Jb3JtaVdbq7vNj8Wm8uokd0sOEHwBnMMYvROONTJWTzR32ug7lyB8DpF6aRGuLjNHGcHrMu3nMdnG0m+DsCzKPDUTf1ltOTdzjDwdnLaLMg5ie7CT021wV+S4BnGEvX5j4+XcIOpHTw8TR6TwMdTBQRpmbaO+mEVQfAy2+wmvMyoNcM/Q988mWoe+MsUsD2Opj3SYxasayH8ZY6eFbGj2I513RwxJPSea4FruO0QK+DsbmCY4baKXMAnHdTPIqt0JtFHuCOxiF2BbZpgfGgWpMD4EyO8KyNuAHAkefW6eCbsDNXB8BrVwKAw53tAI7r6w86OCQGvYhu1fEB8Fp8E8QcQw1zB3BcSXPQwXb4ckhi5AHwJuJ0f4DDqod/y+cq8APgP3a1fWP1IhEddPD1BvMB3gfAy1eKiUS3RlZctr7zg7u//cCiEUIPgFcumyCYcOMmRXY/dH6wh5T7afDZ8gxvDHCK5ePWHuC57Ps4Cq/Svr0nqxF9ADxDC/dBxmhSuj4WLQBhZ7FXWfMD4PXXLUU40GopHJLSxWqAaz6Y+Ak9k7QtB8CxWCT52LmkdJ0ONlq3r4WOoG05AI5cev9yt4F95jvTbW3y9z29K8CkCNUfdLDZsUXpXQHOGkwY0cGWsH0f4W2t6LoIgKWi/AD4fZemu/ePHgCnWtACd/BkpTSz9jxcThUUYTFxAJxuZztaN0YRO/SDD4BTiMi97Ggc612MpnhfgPMmbfpvZVo++MEHwGmU8A6eErsdCpBfBwsJ3IMDMorDit502Vulm1sH2xZbx12Lcn0AvLlhJXff6bUR55rafGuAMyrhWus/rPa8OtipK5hW2fcHOGfH/t8KP68OxgQLZ5QBJ11HOLIbwC5D6kxn6QLi7KmmnaGDnalXKmwOFX3NiVD5NWC93gdgR5TWnj0w5aIZqp9CzGqt8dseRmv/kjWfhAk05AzCHqiQMN0FYObrVxxLLL8zcMnx0bc0UgfzYPU6umZCJfMdjEqiiO541vYAmPXlFjxxhWGGaOUohJE6+NpuaPXyRw7yyjGJTOj7AWwGISau9w/HL399JuuC4nQwGcS+VnA7YGwWx4mfvncV0ZgFaEgt4T0zL8tNJbTcxoYD8pcGDwO6D6lc/jmVHx7jp4EFCzM/wF4xNjpMaknL2GiSCWkbc3Jx84NJ5bkUccgEX06JijfHtW7Sb3XtvcgPsM/y9AzxaSePJBIQsRhE6WDslAPr1w+ZWO7b9cGNatB7kR9gr/z9wKoqOaluCgHRekaR/l2UDkZJ355HaHta0Rkp+pfD9b0XuwGs8wC8PYMsNCdsGqPxEJw/woSTNYgIRQBiS6+9F/kB9gWtPcCJC5i3J+11M2yrKB3sT6D5CoOJlprRlhLKLMUJI4OASX6AfSK+B7ioFoTN5YeIkgh4LCf1s8JqqLWfvSgtd/xRPmR1k7DRlpvPVCI04bIzVXqcH+xjAc6fyLJSMto9GFP1XwogK8DD4IZRyS+w205h0jQsdcNDIIteeHalfjN3PGt7hCr7mVWtUZC+rGa74js527iKjEWLLgTN5aLm4cCTe/6LfGAbgBvxOQNgmFlFjbNMZsnnbfYl80VBbD7YaE1rI4haVswdGCI6jjaxPcBhDmQswDhPTmuZNA7dWpWEwu7oFlfYLXrW+HxwTaSWdKE2wQvMz0p9PJo1K2cXAn+ywn+ezbbbqaLDSk0Yo1KzTepnhdq5SXBUEfisaBccvKWBWwuwpu0xsvMXfSaN9gG4B8Rosn7IJycLxXyemqxQmtQBfMumvHYC+BmZY2aL6MRrYJfyDYod66V9Tnlqsu5usN3wBgO2ug+TlwPw0F11ar9QSqa6aB8s6gDeUgdXXrl/FwYwekYwKecC8bJ2w2u0MDFV6euGoy2BFd2cVFkAYzSo3a9/p51aMePEyTW0R5nqooOQOqOhKxL4wZzSogAOIkuffPheO7f0Cpt1j5+rLloMI1l2Y4CdqcdUzY4zG84+fA94L/WF6brjydabxILXwOn9RIiVAPOLd4LVx29JABsffTl737zFmy/dpqnrl0h3GakIpfKxRnslwGeYBmRtTU9fP+UAjKG7VgHzTgcvVL8O2en0cqacnL1JjlH6x2jstYGOn96W/igHYMipXsvYgoU196ytJqHTwMqlSeuX5+gYTIa+FATwzZS6rtJ4pp0lFFU1N5+YphULjbSX5+go9Aa3Urm/Oq7LPs+0s4ht/7DRUmv1DQnX6kXXOoD5GfJ+nFsRCk4KARjkq2fRZ4Pys3lPAgGhRn8EMbWsA+P1OTogR4XrmY21VzaJEyUJkcPWMBe8pyfWyFCygtaGcCdKqCaEw/5HHQwnaQUT5j7O4Ui3so75ulk1Y+JGdXJvgClJW+RHOjV9XZOqhgAvG8X0vjxZnHVLl5VIpUHWPs8Acok3PXT6fHeWpKpec20F8OVZwl/WBe2Wa+0a3z5b1U8sY+d1CvcAf9XmBDvjiwB+I56shn5X5QPslHa9azehVsH3bTQjEuPsy8qV/weuyqIAJpTqq+/+KKTNIJEM4bCrG7isAeMtdPBEsqEogFupLOTXL6OI2z2Fh5PDQgEIkPQAW8Wr11zJkw0lAYym8EW3/hMELx7E7h19N5Xc92WD7l5mKr6+Dp5ONpQEMCJ6UT+SYNxt6PrYP6Agup+Ks9CZf3kdHBGqLO8Gf/1ClsgMbrBlWpk/HWLJ6prJxUQiL6+DI5INpelg/8znLwoyWNTCgsP0jJiWCyIleWGemP/sBmOxlgcYnvZfe2e65CoIRGFRMkAMLlHz/o96WRR1bmYJg6LkfD9Saau0Gg7QgAKCKTZV7/Qx+BcvGw4lsO4ZO4F3eEN0/nHwzy8bDiVwlgtqZrK6YY+Vq0mMg5+/bDiqwNk0BU1zfizHjjvRoUMxOY3A2UUIUui9DvbYTDqVuehFZ/rwAqt2Myek2Gev8FTmos8l8J5lqYTA4AQC0/N0svblHc5NemuB8T4YMRgCAwiMGAyBEYMhMGIwBEYMhsCIwYjBEBgxGAIDCIwYDIERgyEwYvCJBaY0/TL2vgJfmf4alF0TL0HvKjBlQn+XdSsE21AExOBo+s5nMhOxncKIwdGSvVgaTE51NhcE/lXNElQfstsVeruYx3aH+yAGx0p1Qds+o409jWC74/UQgyOh16BVtbw3g16GdttsiyTE4FgC6+NcH13VVVQfVH3WPbAg8DcCK2XbQd7NqcybCYwYHK+JVm0ze8iGVL7bFCIGH1hgUox787Vmr+DNttNEDI43TMqo3ixL5o+MiuOfjASBjznRgRgcCyqm4wjpllOViMHxFCYiL/XWsoJsWMsQg2PGYSI4FyTl+PveAu/STiAGpw1icOIgBgMIjBh8cIHJRVGQ4DByfFh4J/PLa4itBS70lq5McBGa4E/kfINHhn8ie5F9ugHX8NOB4d/xhZ+TzoMf+/Zx0A/IPs4gMIPAqMGvQVCDUYNRgxGDUYNRg1GDEYNRg1GDUYMh8BfQ8PMpZ3ji7XYCJwEAAAAAAAAAAAAAAODk0OWn/c6gZVl7P3F578L47vjEHyiXtzrD28fnHv4lzaE9DIc+/90dTOoM2XAuBr8ndmJxmvzSMHsx+KC9cfc6w/yp6mAerq5G9jAcnfJENqMTztA/tP3mQNrv0ioW9y4NKTwFpk31UL4Na8M42vk88rmHq6uRPQxZgSsj7LA2zGHD1O89mrlXNv1nQ6W78Uur1O6p29eGZIurATxcXY3sYThsgqTo14ZSuvQMmNSUkilZC6O7l54C27Ot23v9n+GVfV94uLoa18OQAoveKTsburKp6DF4tlYu35aGFINn9RjzajzCfGWo2tIH8nB1NbKHIQXmtvXsV4bqHPSZZzxyGVWvDF1twgvseg9/93B1NbKHoYZHCsmXNXgyrFevl71SPfH2XGCdXg+Bb+qJ9ZfZJxufMrinwH4ehgq/alRgw+IkcDM30ZlHh4Oadt3GsrEBnAxVZK7Xi/p5Mfv0uK1vx6A2Zp8zdL/Xv5fwycPV1dcFDuphyGpspbThdjZMOR67Xl6leSockyEbu67SqzyPvZaqXhverd9TD9dXI3sYcpikvdE/eprJGWbc1Pn1sty99PrpQb4x2NxniltZzgZtfXPvuYd/SXNoD4M21PfczDDZkflo0FbkhPv17929OqGrB/kKrHwjeaMqGLUzB9boeJUrLnUgD/+S5tAeBlU4Z3o8bkflk5FR9af3negt7L2S9bNhM9ZzIjDrGMtrNxNjjc4ujvepJM89XLoa20MAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAMBbILlboGmpkCdJ0YpxExGzTPLa8AF5khK06ZcrAWNvhQFC0/Ghm9cqQt/0Wuh7Pa9vlRwLgFLrYjWL5ZlHWIcLgrfQbjUvjbhPAtioi2X3ILAbcLXz/nSSMILedBKD4H4MxHofDydpd7/cPhr0t1LoYj2mhnrRgaaNlpoiHicwCL6b2Y0PUXW8Mn/1/j0SsTiZPjSf5ifb8Y/ZtQgCJ667gMCJh2bdt+7QyUqWWysYQzudtMTXGzIBAADApvwDBGZ5M8Yju+wAAAAASUVORK5CYII=" style="display: block; margin: auto;" /></p>
+<p>In the table, values of Δ<i>Z</i><sub>C</sub> and Δ<i>n</i><sub>H<sub>2</sub>O</sub> are multiplied by 1000, values of ΔMW are multiplied by 100, and negative values are shown in bold. Abbreviations:</p>
+<ul>
+<li><em>n</em><sub>down</sub> – number of down-regulated proteins; <em>n</em><sub>up</sub> – number of up-regulated proteins; P2 – passage 2; P5 – passage 5; MSC – mesenchymal stromal cells.</li>
+<li><i>n</i><sub>AA</sub> – protein length; MW – molecular weight per residue.</li>
+</ul>
+<!-- html table generated in R 4.3.2 by xtable 1.8-4 package -->
+<!-- Mon Feb 26 15:54:56 2024 -->
+<table border="1">
+<tr>
+<td align="center" colspan="6">
+</td>
+<td align="center" colspan="2">
+</td>
+</tr>
+<tr>
+<th>
+set
+</th>
+<th>
+reference (description)
+</th>
+<th>
+<i>n</i><sub>down</sub>
+</th>
+<th>
+<i>n</i><sub>up</sub>
+</th>
+<th>
+Δ<i>Z</i><sub>C</sub>
+</th>
+<th>
+Δ<i>n</i><sub>H<sub>2</sub>O</sub>
+</th>
+<th>
+Δ<i>n</i><sub>AA</sub>
+</th>
+<th>
+ΔMW
+</th>
+</tr>
+<tr>
+<td>
+a
+</td>
+<td>
+<code>PLC+10</code> (HepG2 hepatocellular carcinoma cells)
+</td>
+<td align="right">
+35
+</td>
+<td align="right">
+47
+</td>
+<td align="right">
+<B>-4</B>
+</td>
+<td align="right">
+34
+</td>
+<td align="right">
+<B>-155</B>
+</td>
+<td align="right">
+165
+</td>
+</tr>
+<tr>
+<td>
+b
+</td>
+<td>
+<code>MHG+12</code> (MCF-7 breast cancer cells P5)
+</td>
+<td align="right">
+409
+</td>
+<td align="right">
+337
+</td>
+<td align="right">
+<B>-18</B>
+</td>
+<td align="right">
+<B>-10</B>
+</td>
+<td align="right">
+<B>-194</B>
+</td>
+<td align="right">
+<B>-33</B>
+</td>
+</tr>
+<tr>
+<td>
+c
+</td>
+<td>
+<code>MHG+12</code> (MCF-7 breast cancer cells P2)
+</td>
+<td align="right">
+248
+</td>
+<td align="right">
+214
+</td>
+<td align="right">
+<B>-14</B>
+</td>
+<td align="right">
+<B>-3</B>
+</td>
+<td align="right">
+<B>-168</B>
+</td>
+<td align="right">
+<B>-69</B>
+</td>
+</tr>
+<tr>
+<td>
+d
+</td>
+<td>
+<code>MVC+12</code> (HT29 colon cancer cells perinecrotic)
+</td>
+<td align="right">
+48
+</td>
+<td align="right">
+52
+</td>
+<td align="right">
+<B>-5</B>
+</td>
+<td align="right">
+<B>-13</B>
+</td>
+<td align="right">
+128
+</td>
+<td align="right">
+<B>-11</B>
+</td>
+</tr>
+<tr>
+<td>
+e
+</td>
+<td>
+<code>MVC+12</code> (HT29 colon cancer cells necrotic)
+</td>
+<td align="right">
+101
+</td>
+<td align="right">
+186
+</td>
+<td align="right">
+<B>-20</B>
+</td>
+<td align="right">
+<B>-21</B>
+</td>
+<td align="right">
+118
+</td>
+<td align="right">
+<B>-29</B>
+</td>
+</tr>
+<tr>
+<td>
+f
+</td>
+<td>
+<code>YYW+13</code> (HNSCC tumor spheres)
+</td>
+<td align="right">
+58
+</td>
+<td align="right">
+65
+</td>
+<td align="right">
+0
+</td>
+<td align="right">
+<B>-9</B>
+</td>
+<td align="right">
+44
+</td>
+<td align="right">
+<B>-107</B>
+</td>
+</tr>
+<tr>
+<td>
+g
+</td>
+<td>
+<code>ZMH+13</code> (HUVEC Matrigel 12h)
+</td>
+<td align="right">
+48
+</td>
+<td align="right">
+58
+</td>
+<td align="right">
+<B>-15</B>
+</td>
+<td align="right">
+<B>-14</B>
+</td>
+<td align="right">
+180
+</td>
+<td align="right">
+<B>-141</B>
+</td>
+</tr>
+<tr>
+<td>
+h
+</td>
+<td>
+<code>ZMH+13</code> (HUVEC Matrigel 24h)
+</td>
+<td align="right">
+196
+</td>
+<td align="right">
+239
+</td>
+<td align="right">
+<B>-26</B>
+</td>
+<td align="right">
+<B>-42</B>
+</td>
+<td align="right">
+143
+</td>
+<td align="right">
+<B>-95</B>
+</td>
+</tr>
+<tr>
+<td>
+i
+</td>
+<td>
+<code>HKX+14</code> (U251 glioma cells)
+</td>
+<td align="right">
+295
+</td>
+<td align="right">
+68
+</td>
+<td align="right">
+4
+</td>
+<td align="right">
+<B>-27</B>
+</td>
+<td align="right">
+121
+</td>
+<td align="right">
+<B>-113</B>
+</td>
+</tr>
+<tr>
+<td>
+j
+</td>
+<td>
+<code>KDS+14</code> (hESC spheroids)
+</td>
+<td align="right">
+270
+</td>
+<td align="right">
+52
+</td>
+<td align="right">
+<B>-9</B>
+</td>
+<td align="right">
+<B>-18</B>
+</td>
+<td align="right">
+52
+</td>
+<td align="right">
+62
+</td>
+</tr>
+<tr>
+<td>
+k
+</td>
+<td>
+<code>KDS+14</code> (hiPSC spheroids)
+</td>
+<td align="right">
+422
+</td>
+<td align="right">
+53
+</td>
+<td align="right">
+<B>-8</B>
+</td>
+<td align="right">
+<B>-13</B>
+</td>
+<td align="right">
+16
+</td>
+<td align="right">
+88
+</td>
+</tr>
+<tr>
+<td>
+l
+</td>
+<td>
+<code>KDS+14</code> (hPSC spheroids)
+</td>
+<td align="right">
+612
+</td>
+<td align="right">
+98
+</td>
+<td align="right">
+<B>-11</B>
+</td>
+<td align="right">
+<B>-27</B>
+</td>
+<td align="right">
+<B>-32</B>
+</td>
+<td align="right">
+22
+</td>
+</tr>
+<tr>
+<td>
+m
+</td>
+<td>
+<code>RKP+14</code> (colorectal cancer-derived cells)
+</td>
+<td align="right">
+93
+</td>
+<td align="right">
+174
+</td>
+<td align="right">
+15
+</td>
+<td align="right">
+3
+</td>
+<td align="right">
+<B>-82</B>
+</td>
+<td align="right">
+75
+</td>
+</tr>
+<tr>
+<td>
+n
+</td>
+<td>
+<code>SAS+14</code> (SK-N-BE2 neuroblastoma spheroids)
+</td>
+<td align="right">
+70
+</td>
+<td align="right">
+116
+</td>
+<td align="right">
+10
+</td>
+<td align="right">
+<B>-17</B>
+</td>
+<td align="right">
+<B>-117</B>
+</td>
+<td align="right">
+14
+</td>
+</tr>
+<tr>
+<td>
+o
+</td>
+<td>
+<code>WRK+14</code> (HepG2/C3A hepatocellular carcinoma)
+</td>
+<td align="right">
+125
+</td>
+<td align="right">
+291
+</td>
+<td align="right">
+<B>-22</B>
+</td>
+<td align="right">
+<B>-24</B>
+</td>
+<td align="right">
+22
+</td>
+<td align="right">
+116
+</td>
+</tr>
+<tr>
+<td>
+p
+</td>
+<td>
+<code>MTK+15</code> (OV-90AD ovarian cancer multicellular aggregates)
+</td>
+<td align="right">
+39
+</td>
+<td align="right">
+90
+</td>
+<td align="right">
+<B>-15</B>
+</td>
+<td align="right">
+<B>-40</B>
+</td>
+<td align="right">
+<B>-30</B>
+</td>
+<td align="right">
+<B>-74</B>
+</td>
+</tr>
+<tr>
+<td>
+q
+</td>
+<td>
+<code>YLW+16</code> (HT29 colon carcinoma)
+</td>
+<td align="right">
+116
+</td>
+<td align="right">
+225
+</td>
+<td align="right">
+<B>-36</B>
+</td>
+<td align="right">
+<B>-19</B>
+</td>
+<td align="right">
+<B>-108</B>
+</td>
+<td align="right">
+<B>-39</B>
+</td>
+</tr>
+<tr>
+<td>
+r
+</td>
+<td>
+<code>KJK+18</code> (SW480 colorectal cancer)
+</td>
+<td align="right">
+247
+</td>
+<td align="right">
+136
+</td>
+<td align="right">
+<B>-56</B>
+</td>
+<td align="right">
+<B>-34</B>
+</td>
+<td align="right">
+98
+</td>
+<td align="right">
+<B>-2</B>
+</td>
+</tr>
+<tr>
+<td>
+s
+</td>
+<td>
+<code>TGD18</code> (normal human skin fibroblasts)
+</td>
+<td align="right">
+15
+</td>
+<td align="right">
+57
+</td>
+<td align="right">
+28
+</td>
+<td align="right">
+<B>-33</B>
+</td>
+<td align="right">
+<B>-185</B>
+</td>
+<td align="right">
+142
+</td>
+</tr>
+<tr>
+<td>
+t
+</td>
+<td>
+<code>TGD18</code> (cancer-associated fibroblasts)
+</td>
+<td align="right">
+43
+</td>
+<td align="right">
+90
+</td>
+<td align="right">
+27
+</td>
+<td align="right">
+<B>-37</B>
+</td>
+<td align="right">
+30
+</td>
+<td align="right">
+28
+</td>
+</tr>
+<tr>
+<td>
+u
+</td>
+<td>
+<code>EWK+19</code> (glioblastoma spheroids)
+</td>
+<td align="right">
+110
+</td>
+<td align="right">
+171
+</td>
+<td align="right">
+4
+</td>
+<td align="right">
+16
+</td>
+<td align="right">
+86
+</td>
+<td align="right">
+<B>-72</B>
+</td>
+</tr>
+<tr>
+<td>
+v
+</td>
+<td>
+<code>GADS19</code> (skin fibroblasts)
+</td>
+<td align="right">
+94
+</td>
+<td align="right">
+49
+</td>
+<td align="right">
+11
+</td>
+<td align="right">
+<B>-34</B>
+</td>
+<td align="right">
+196
+</td>
+<td align="right">
+134
+</td>
+</tr>
+<tr>
+<td>
+w
+</td>
+<td>
+<code>HLC19</code> (HepG2 hepatocellular carcinoma cells)
+</td>
+<td align="right">
+573
+</td>
+<td align="right">
+590
+</td>
+<td align="right">
+<B>-24</B>
+</td>
+<td align="right">
+<B>-50</B>
+</td>
+<td align="right">
+<B>-10</B>
+</td>
+<td align="right">
+<B>-44</B>
+</td>
+</tr>
+<tr>
+<td>
+x
+</td>
+<td>
+<code>LPK+19</code> (mouse 3T3-L1 preadipocytes)
+</td>
+<td align="right">
+76
+</td>
+<td align="right">
+105
+</td>
+<td align="right">
+<B>-32</B>
+</td>
+<td align="right">
+<B>-38</B>
+</td>
+<td align="right">
+18
+</td>
+<td align="right">
+<B>-108</B>
+</td>
+</tr>
+<tr>
+<td>
+y
+</td>
+<td>
+<code>LPK+19</code> (mouse 3T3-L1 adipocytes)
+</td>
+<td align="right">
+97
+</td>
+<td align="right">
+208
+</td>
+<td align="right">
+<B>-58</B>
+</td>
+<td align="right">
+18
+</td>
+<td align="right">
+<B>-147</B>
+</td>
+<td align="right">
+<B>-59</B>
+</td>
+</tr>
+<tr>
+<td>
+z
+</td>
+<td>
+<code>LPK+19</code> (mouse 3T3-L1 macrophages)
+</td>
+<td align="right">
+220
+</td>
+<td align="right">
+134
+</td>
+<td align="right">
+<B>-1</B>
+</td>
+<td align="right">
+26
+</td>
+<td align="right">
+<B>-130</B>
+</td>
+<td align="right">
+<B>-32</B>
+</td>
+</tr>
+<tr>
+<td>
+A
+</td>
+<td>
+<code>DKM+20</code> (bone marrow-derived MSCs aggregates)
+</td>
+<td align="right">
+57
+</td>
+<td align="right">
+117
+</td>
+<td align="right">
+<B>-31</B>
+</td>
+<td align="right">
+<B>-21</B>
+</td>
+<td align="right">
+<B>-234</B>
+</td>
+<td align="right">
+<B>-37</B>
+</td>
+</tr>
+</table>
+<div id="data-sources" class="section level2">
+<h2>Data Sources</h2>
+<p>Gene names or other identifiers were converted to UniProt accession numbers using the <a href="https://www.uniprot.org/mapping/">UniProt mapping tool</a>.</p>
+<p><strong>a</strong>. Gene names from Supporting Information Table 1S of <span class="citation">Pruksakorn et al. (2010)</span>. <strong>b</strong>. <strong>c</strong>. Sheets 2 and 3 in Table S1 of <span class="citation">Morrison et al. (2012)</span>. <strong>d</strong>. <strong>e</strong>. Supplemental Table 1C of <span class="citation">McMahon et al. (2012)</span>, filtered to include proteins with expression ratios &lt; 0.77 or &gt; 1.3. <strong>f</strong>. Supplemental Table S5 of <span class="citation">Yan et al. (2013)</span>. <strong>g</strong>. <strong>h</strong>. Supplemental Table S4 of <span class="citation">Zanivan et al. (2013)</span>. <strong>i</strong>. Table S1 of <span class="citation">He et al. (2014)</span>. <strong>j</strong>. <strong>k</strong>. <strong>l</strong>. Supplemental Table S1 of <span class="citation">Konze et al. (2014)</span> (hESC: human embryonic stem cells; hiPSC: human induced pluripotent stem cells; hPSC: human pluripotent stem cells). <strong>m</strong>. Table S2 of <span class="citation">Rajcevic et al. (2014)</span>, filtered to include proteins that have differences in spectral counts recorded in at least two of three experiments, absolute overall fold change is ≥ 1.5 or ≤ 2/3, and <em>p</em>-value is &lt; 0.05. <strong>n</strong>. Supplementary Figure 2 of <span class="citation">Saini et al. (2014)</span>. <strong>o</strong>. P1_Data sheet in the Supporting Information file of <span class="citation">Wrzesinski et al. (2014)</span>. <strong>p</strong>. Supplemental Table S1 of <span class="citation">Musrap et al. (2015)</span>, filtered to exclude marked contaminants and reverse sequences and to include proteins with “Ratio H/L normalized” &gt; 1.5 or &lt; 2/3. <strong>q</strong>. Tables S1a and S1b of <span class="citation">Yue et al. (2016)</span>. <strong>r</strong>. Tables S2 and S3 of <span class="citation">Kim et al. (2018)</span>. <strong>s</strong>. <strong>t</strong>. Supplementary Table 3 of <span class="citation">Toelle, Gaggioli &amp; Dengjel (2018)</span>. <strong>u</strong>. Extracted from proteinGroups.txt in ProteomeXchange Dataset <a href="http://ftp.pride.ebi.ac.uk/pride/data/archive/2019/04/PXD008244">PXD008244</a>/txt.zip <span class="citation">(Erhart et al., 2019)</span>, including proteins quantified in at least two replicates in each condition (adherent and spheroid) and with median fold change &gt; 2 or &lt; 0.5. <strong>v</strong>. Extracted from Supplementary Table 1 of <span class="citation">Gęgotek et al. (2019)</span>. Values were quantile normalized, then ratios were calculated between 3D and 2D cultures for each treatment (control, CBD, UVA, UVA+CBD, UVB, UVB+CBD). Ratios &gt; 1.2 or &lt; 1/1.2 in at least 4 treatments were used to identify differentially expressed proteins. <strong>w</strong>. Supplementary Data I, sheet “Volcano plot 2Dv3D” of <span class="citation">Hurrell, Lilley &amp; Cromarty (2019)</span>. <strong>x</strong>. <strong>y</strong>. <strong>z</strong>. Supporting Table 1 of <span class="citation">Lee et al. (2019)</span>, sheets “3P2P” (mono-cultured preadipocytes), “3A2A” (mono-cultured adipocytes), “3C2C” (co-cultured adipocytes with macrophages), filtered to include proteins marked as “T-test Significant” and with absolute value of “N: T-test Difference” &gt; log<sub>2</sub>(0.5). <strong>A</strong>. Supplementary Table S2 of <span class="citation">Doron et al. (2020)</span>, filtered to include proteins with fold change &gt; 2 or &lt; 0.5 for all donors.</p>
+</div>
+<div id="references" class="section level2 unnumbered">
+<h2>References</h2>
+<div id="refs" class="references">
+<div id="ref-DKM+20">
+<p>Doron G, Klontzas ME, Mantalaris A, Guldberg RE, Temenoff JS. 2020. Multiomics characterization of mesenchymal stromal cells cultured in monolayer and as aggregates. <em>Biotechnology and Bioengineering</em> 117:1761–1778. DOI: <a href="https://doi.org/10.1002/bit.27317">10.1002/bit.27317</a>.</p>
+</div>
+<div id="ref-EWK+19">
+<p>Erhart F, Weiss T, Klingenbrunner S, Fischhuber K, Reitermaier R, Halfmann A, Blauensteiner B, Lötsch D, Spiegl-Kreinecker S, Berger W, Sialana FJ, Lubec G, Felzmann T, Dohnal A, Visus C. 2019. Spheroid glioblastoma culture conditions as antigen source for dendritic cell-based immunotherapy: Spheroid proteins are survival-relevant targets but can impair immunogenic interferon γ production. <em>Cytotherapy</em> 21:643–658. DOI: <a href="https://doi.org/10.1016/j.jcyt.2019.03.002">10.1016/j.jcyt.2019.03.002</a>.</p>
+</div>
+<div id="ref-GADS19">
+<p>Gęgotek A, Atalay S, Domingues P, Skrzydlewska E. 2019. The differences in the proteome profile of cannabidiol-treated skin fibroblasts following UVA or UVB irradiation in 2D and 3D cell cultures. <em>Cells</em> 8:995. DOI: <a href="https://doi.org/10.3390/cells8090995">10.3390/cells8090995</a>.</p>
+</div>
+<div id="ref-HKX+14">
+<p>He W, Kuang Y, Xing X, Simpson RJ, Huang H, Yang T, Chen J, Yang L, Liu E, He W, Gu J. 2014. Proteomic comparison of 3D and 2D glioma models reveals increased HLA-E expression in 3D models is associated with resistance to NK cell-mediated cytotoxicity. <em>Journal of Proteome Research</em> 13:2272–2281. DOI: <a href="https://doi.org/10.1021/pr500064m">10.1021/pr500064m</a>.</p>
+</div>
+<div id="ref-HLC19">
+<p>Hurrell T, Lilley KS, Cromarty AD. 2019. Proteomic responses of HepG2 cell monolayers and 3D spheroids to selected hepatotoxins. <em>Toxicology Letters</em> 300:40–50. DOI: <a href="https://doi.org/10.1016/j.toxlet.2018.10.030">10.1016/j.toxlet.2018.10.030</a>.</p>
+</div>
+<div id="ref-KJK+18">
+<p>Kim YE, Jeon HJ, Kim D, Lee SY, Kim KY, Hong J, Maeng PJ, Kim K-R, Kang D. 2018. Quantitative proteomic analysis of 2D and 3D cultured colorectal cancer cells: Profiling of tankyrase inhibitor XAV939-induced proteome. <em>Scientific Reports</em> 8:13255. DOI: <a href="https://doi.org/10.1038/s41598-018-31564-6">10.1038/s41598-018-31564-6</a>.</p>
+</div>
+<div id="ref-KDS+14">
+<p>Konze SA, Diepen L van, Schröder A, Olmer R, Möller H, Pich A, Weißmann R, Kuss AW, Zweigerdt R, Buettner FFR. 2014. Cleavage of E-cadherin and β-catenin by calpain affects Wnt signaling and spheroid formation in suspension cultures of human pluripotent stem cells. <em>Molecular &amp; Cellular Proteomics</em> 13:990–1007. DOI: <a href="https://doi.org/10.1074/mcp.M113.033423">10.1074/mcp.M113.033423</a>.</p>
+</div>
+<div id="ref-LPK+19">
+<p>Lee SY, Park SB, Kim YE, Yoo HM, Hong J, Choi K-J, Kim KY, Kang D. 2019. iTRAQ-based quantitative proteomic comparison of 2D and 3D adipocyte cell models co-cultured with macrophages using online 2D-nanoLC-ESI-MS/MS. <em>Scientific Reports</em> 9:16746. DOI: <a href="https://doi.org/10.1038/s41598-019-53196-0">10.1038/s41598-019-53196-0</a>.</p>
+</div>
+<div id="ref-MVC+12">
+<p>McMahon KM, Volpato M, Chi HY, Musiwaro P, Poterlowicz K, Peng Y, Scally AJ, Patterson LH, Phillips RM, Sutton CW. 2012. Characterization of changes in the proteome in different regions of 3D multicell tumor spheroids. <em>Journal of Proteome Research</em> 11:2863–2875. DOI: <a href="https://doi.org/10.1021/pr2012472">10.1021/pr2012472</a>.</p>
+</div>
+<div id="ref-MHG+12">
+<p>Morrison BJ, Hastie ML, Grewal YS, Bruce ZC, Schmidt C, Reynolds BA, Gorman JJ, Lopez JA. 2012. Proteomic comparison of MCF-7 tumoursphere and monolayer cultures. <em>PLOS One</em> 7:e52692. DOI: <a href="https://doi.org/10.1371/journal.pone.0052692">10.1371/journal.pone.0052692</a>.</p>
+</div>
+<div id="ref-MTK+15">
+<p>Musrap N, Tuccitto A, Karagiannis GS, Saraon P, Batruch I, Diamandis EP. 2015. Comparative proteomics of ovarian cancer aggregate formation reveals an increased expression of calcium-activated chloride channel regulator 1 (CLCA1). <em>Journal of Biological Chemistry</em> 290:17218–17227. DOI: <a href="https://doi.org/10.1074/jbc.m115.639773">10.1074/jbc.m115.639773</a>.</p>
+</div>
+<div id="ref-PLC+10">
+<p>Pruksakorn D, Lirdprapamongkol K, Chokchaichamnankit D, Subhasitanont P, Chiablaem K, Svasti J, Srisomsap C. 2010. Metabolic alteration of HepG2 in scaffold-based 3-D culture: Proteomic approach. <em>Proteomics</em> 10:3896–3904. DOI: <a href="https://doi.org/10.1002/pmic.201000137">10.1002/pmic.201000137</a>.</p>
+</div>
+<div id="ref-RKP+14">
+<p>Rajcevic U, Knol J, Piersma S, Bougnaud S, Fack F, Sundlisaeter E, Sondenaa K, Myklebust R, Pham T, Niclou S, Jimenez C. 2014. Colorectal cancer derived organotypic spheroids maintain essential tissue characteristics but adapt their metabolism in culture. <em>Proteome Science</em> 12:39. DOI: <a href="https://doi.org/10.1186/1477-5956-12-39">10.1186/1477-5956-12-39</a>.</p>
+</div>
+<div id="ref-SAS+14">
+<p>Saini RKR, Attarha S, da Silva Santos C, Kolakowska J, Funa K, Souchelnytskyi S. 2014. Proteomics of dedifferentiation of SK-N-BE2 neuroblastoma cells. <em>Biochemical and Biophysical Research Communications</em> 454:202–209. DOI: <a href="https://doi.org/10.1016/j.bbrc.2014.10.065">10.1016/j.bbrc.2014.10.065</a>.</p>
+</div>
+<div id="ref-TGD18">
+<p>Toelle RC, Gaggioli C, Dengjel J. 2018. Three-dimensional cell culture conditions affect the proteome of cancer-associated fibroblasts. <em>Journal of Proteome Research</em> 17:2780–2789. DOI: <a href="https://doi.org/10.1021/acs.jproteome.8b00237">10.1021/acs.jproteome.8b00237</a>.</p>
+</div>
+<div id="ref-WRK+14">
+<p>Wrzesinski K, Rogowska-Wrzesinska A, Kanlaya R, Borkowski K, Schwämmle V, Dai J, Joensen KE, Wojdyla K, Carvalho VB, Fey SJ. 2014. The cultural divide: Exponential growth in classical 2D and metabolic equilibrium in 3D environments. <em>PLOS One</em> 9:e106973. DOI: <a href="https://doi.org/10.1371/journal.pone.0106973">10.1371/journal.pone.0106973</a>.</p>
+</div>
+<div id="ref-YYW+13">
+<p>Yan M, Yang X, Wang L, Clark D, Zuo H, Ye D, Chen W, Zhang P. 2013. Plasma membrane proteomics of tumor spheres identify CD166 as a novel marker for cancer stem-like cells in head and neck squamous cell carcinoma. <em>Molecular &amp; Cellular Proteomics</em> 12:3271–3284. DOI: <a href="https://doi.org/10.1074/mcp.M112.025460">10.1074/mcp.M112.025460</a>.</p>
+</div>
+<div id="ref-YLW+16">
+<p>Yue X, Lukowski JK, Weaver EM, Skube SB, Hummon AB. 2016. Quantitative proteomic and phosphoproteomic comparison of 2D and 3D colon cancer cell culture models. <em>Journal of Proteome Research</em> 15:4265–4276. DOI: <a href="https://doi.org/10.1021/acs.jproteome.6b00342">10.1021/acs.jproteome.6b00342</a>.</p>
+</div>
+<div id="ref-ZMH+13">
+<p>Zanivan S, Maione F, Hein MY, Hernández-Fernaud JR, Ostasiewicz P, Giraudo E, Mann M. 2013. SILAC-based proteomics of human primary endothelial cell morphogenesis unveils tumor angiogenic markers. <em>Molecular &amp; Cellular Proteomics</em> 12:3599–3611. DOI: <a href="https://doi.org/10.1074/mcp.M113.031344">10.1074/mcp.M113.031344</a>.</p>
+</div>
+</div>
+</div>
+
+
+
+<!-- code folding -->
+
+
+
+</body>
+</html>

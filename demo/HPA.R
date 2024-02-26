@@ -1,1 +1,2 @@
-makevig("HPA")
+library(JMDplots)
+mkvig("HPA")
