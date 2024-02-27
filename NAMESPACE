@@ -103,7 +103,9 @@ export(
   # 20200414
   "mkvig",
   # 20200418
-  ".pdat_osmotic", "pdat_osmotic_bact", "pdat_osmotic_euk", "pdat_osmotic_halo"
+  ".pdat_osmotic", "pdat_osmotic_bact", "pdat_osmotic_euk", "pdat_osmotic_halo",
+  "check_IDs", "cleanup", "get_comptab", "diffplot", "qdist",
+  "xsummary", "xsummary2", "xsummary3"
 )
 
 # Imports from CHNOSZ
@@ -143,18 +145,16 @@ importFrom("CHNOSZ",
 importFrom("canprot",
   # first batch: gradH2O1 20190930
   "human",
-  # second batch: gradH2O6 20191008
-  "diffplot", "get_comptab",
   # moved to canprot 20191027
   "Zc", "nH2O", "GRAVY", "pI",
   # for pdat_HPA() and pdat_TCGA() 20200204
-  "cleanup", "protcomp",
-  # for plotphylo() 20200204
-  "check_IDs",
+  "protcomp",
   # for canH2O5() 20200505, 20200508
-  "qdist", "cplab",
+  "cplab",
   # for canH2OS1() 20201016
-  "nO2"
+  "nO2",
+  # for get_comptab() 20240227
+  "CLES"
 )
 
 # Imports from chem16S
@@ -206,10 +206,10 @@ importFrom("stats", "lm", "na.omit", "predict", "sd", "predict.lm", "residuals",
            "density", "formula", "t.test", "approx", "splinefun", "xtabs",
            "coefficients", "loess", "wilcox.test", "weighted.mean",
            "kmeans", "qt", "cor.test", "coef", "aggregate", "cor", "uniroot",
-           "TukeyHSD", "aov", "binom.test", "confint")
+           "TukeyHSD", "aov", "binom.test", "confint", "ecdf", "knots")
 importFrom("utils", "read.csv", "demo", "tail", "write.csv",
            "capture.output", "browseURL", "head", "combn", "read.table", "packageVersion",
-           "assignInNamespace", "data")
+           "assignInNamespace", "data", "relist", "write.table")
 
 S3method(dunnTest,default)
 S3method(dunnTest,formula)

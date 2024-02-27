@@ -348,8 +348,8 @@ get_colors <- function(x, max50=FALSE) {
   # read precomputed colors:
   # colorspace::diverge_hcl(1000, c = 100, l = c(50, 90), power = 1)
   # colorspace::diverge_hcl(2000, c = 100, l = c(50, 90), power = 1)
-  if(max50) file <- system.file("extdata/misc/bluered1000.txt", package = "canprot")
-  else file <- system.file("extdata/misc/bluered2000.txt", package = "canprot")
+  if(max50) file <- system.file("extdata/misc/bluered1000.txt", package = "JMDplots")
+  else file <- system.file("extdata/misc/bluered2000.txt", package = "JMDplots")
   dcol <- read.table(file, as.is=TRUE)[[1]]
   # the range of values
   xrange <- range(x)
