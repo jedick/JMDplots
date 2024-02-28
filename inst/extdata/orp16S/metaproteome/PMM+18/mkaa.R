@@ -19,7 +19,7 @@
 # Fcsd (focused): RMR5 = 039-ROV-01 --> "chimney tip, venting gray smoke"
 
 # Read protein database
-refaa <- CHNOSZ::read.fasta("140826_StM_Chimney39surface53surface_fw_rev_cont.fasta.xz")
+refaa <- canprot::read.fasta("140826_StM_Chimney39surface53surface_fw_rev_cont.fasta.xz")
 refaa$protein <- gsub("\r", "", refaa$protein)
 
 # Files with PRT block extracted from the mztab.gz file
@@ -43,7 +43,7 @@ out <- lapply(files, function(file) {
   # Multiply amino acid compositions by PSMs
   aa[, 5:25] <- aa[, 5:25] * dat$num_psms_ms_run.1.
   # Sum amino acid compositions
-  CHNOSZ::aasum(aa)
+  canprot::aasum(aa)
 
 })
 

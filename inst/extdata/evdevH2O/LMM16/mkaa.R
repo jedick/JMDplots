@@ -69,7 +69,7 @@ for(i in 1:nrow(refprot)) {
 
   # Read amino acid composition from FASTA file
   file <- file.path("UniProt", paste0(refprot$Proteome_ID[i], "_", refprot$Tax_ID[i], ".fasta.gz"))
-  aa <- CHNOSZ::read.fasta(file)
+  aa <- canprot::read.fasta(file)
   # Get UniProt IDs
   aa$protein <- sapply(strsplit(aa$protein, "\\|"), "[", 2)
   # Match ages to amino acid data

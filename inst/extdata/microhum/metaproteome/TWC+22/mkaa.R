@@ -44,7 +44,7 @@ writeLines(uniqueIDs, "uniqueIDs.txt")
 #   - Use ID mapping tool to filter by taxonomy: bacteria
 #   - Download FASTA (canonical sequences) -> save as uniprot_bacteria.fasta
 
-uniprot <- CHNOSZ::read.fasta("uniprot_bacteria.fasta")
+uniprot <- canprot::read.fasta("uniprot_bacteria.fasta")
 # Remove "sp|" prefix
 uniprot$protein <- sapply(strsplit(uniprot$protein, "\\|"), "[", 2)
 # Read mapping table
@@ -57,7 +57,7 @@ aa <- lapply(samples, function(sample) {
   Entry <- map$Entry[imap]
   iuni <- match(Entry, uniprot$protein)
   # Sum amino acid composition
-  CHNOSZ::aasum(uniprot[iuni, ])
+  canprot::aasum(uniprot[iuni, ])
 })
 
 aa <- do.call(rbind, aa)

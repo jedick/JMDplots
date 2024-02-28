@@ -15,8 +15,8 @@ files <- dir("prodigal", full.names = TRUE)
 out <- lapply(1:length(files), function(i) {
   if(i %% 100 == 0) print(i)
   file <- files[i]
-  aa <- suppressMessages(CHNOSZ::read.fasta(file))
-  aa <- CHNOSZ::aasum(aa)
+  aa <- suppressMessages(canprot::read.fasta(file))
+  aa <- canprot::aasum(aa)
   # Get run and bin ID from file name
   run_bin <- gsub(".fa.faa.xz", "", gsub("prodigal/", "", file, fixed = TRUE))
   aa$protein <- strsplit(run_bin, "_")[[1]][1]

@@ -2,10 +2,8 @@
 # Average oxidation state of carbon in proteins
 # by Jeffrey M. Dick, 2013-11-24
 
-# load and setup CHNOSZ
+# load CHNOSZ
 library(CHNOSZ)
-# this is not needed now 20191018
-#data(thermo)
 
 # to make ZC_HUMAN.csv or ZC_membrane.csv
 mkZC <- function(which="HUMAN") {
@@ -16,7 +14,7 @@ mkZC <- function(which="HUMAN") {
   # http://www.biomedcentral.com/content/supplementary/1741-7007-7-50-S2.zip
   if(which=="HUMAN") lines <- readLines("fasta/human/HUMAN.fasta.gz")
   else if(which=="membrane") lines <- readLines("fasta/human/membrane.fa.gz")
-  aa <- read.fasta("", lines=lines)
+  aa <- canprot::read.fasta("", lines=lines)
   pl <- protein.length(aa)
   pf <- protein.formula(aa)
   ZC <- ZC(pf)

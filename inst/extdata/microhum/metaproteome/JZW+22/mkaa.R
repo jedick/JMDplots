@@ -37,7 +37,7 @@ aaprot <- lapply(prots, function(prot) {
   org <- substr(prot, 1, 8)
   # Read the faa file
   faafile <- paste0("/home/sequence/HOMD/JZW+22_PROKKA/", org, ".faa.xz")
-  aa <- CHNOSZ::read.fasta(faafile)
+  aa <- canprot::read.fasta(faafile)
   iaa <- match(prot, aa$protein)
   # Return the amino acid composition for this protein
   aa[iaa, ]
@@ -49,7 +49,7 @@ aaprot <- do.call(rbind, aaprot)
 icol <- grep("LFQ.intensity", colnames(dat))
 # Loop over samples
 aa <- lapply(icol, function(i) {
-  aa <- aasum(aaprot, abundance = dat[, i])
+  aa <- canprot::aasum(aaprot, abundance = dat[, i])
   # Set 'chains' to number of proteins with non-zero LFQ intensity
   aa$chains <- sum(dat[, i] > 0)
   aa
