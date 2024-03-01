@@ -58,7 +58,7 @@ usedin <- list(
 # e.g. mplot("Guerrero_Negro", "IMG_MG")
 mplot <- function(study, seqtype, plottype = "bars", ylim = NULL, plot.RNA = TRUE, taxid = NULL,
   dsDNA = TRUE, abbrev = NULL, col = NULL, add.label = TRUE, maxdepth = NULL, H2O = FALSE,
-  plot.it = TRUE, add.title = TRUE, yline = 2, basis = getOption("basis"), datadir = NULL, mdata = studies,
+  plot.it = TRUE, add.title = TRUE, yline = 2, datadir = NULL, mdata = studies,
   add = FALSE, pch = 19, var = NULL, srt = 45, ilabel = NULL) {
   # get metadata
   md <- get.mdata(mdata, study, seqtype)
@@ -95,10 +95,7 @@ mplot <- function(study, seqtype, plottype = "bars", ylim = NULL, plot.RNA = TRU
   if(is.null(ylim)) {
     if(identical(var, "GRAVY")) ylim <- c(-0.3, -0.05)
     else if(identical(var, "pI")) ylim <- c(4, 9)
-    else if(H2O) {
-      if(getOption("basis") == "QCa") ylim <- c(-1.10, -1.02)
-      if(getOption("basis") == "QEC") ylim <- c(-0.78, -0.7)
-    }
+    else if(H2O) ylim <- c(-0.78, -0.7)
     else ylim <- mylim
   }
   # if taxids are given, plot total ZC first (DNA, not RNA) and add ZC for each species
@@ -119,13 +116,13 @@ mplot <- function(study, seqtype, plottype = "bars", ylim = NULL, plot.RNA = TRU
       plotMG(paste0(study, "_", seqtype), plottype, samples, xlabels, group, xlab, ylim, abbrev, dsDNA,
              plot.RNA = FALSE, taxid = taxid[i], lwd = lwd, lty = lty, lwd.bars = lwd.bars, col = col, extendrange = TRUE,
              add.label = add.label, plot_real_x = mdata[[study]][["plot_real_x"]], maxdepth = maxdepth, H2O = H2O,
-             plot.it = plot.it, add.title = add.title, yline = yline, basis = basis, techtype = techtype, dx = dx, dy = dy, datadir = datadir)
+             plot.it = plot.it, add.title = add.title, yline = yline, techtype = techtype, dx = dx, dy = dy, datadir = datadir)
     }
   } 
   else plotMG(paste0(study, "_", seqtype), plottype, samples, xlabels, group, xlab, ylim, abbrev, dsDNA,
               plot.RNA, taxid, col = col,
               add.label = add.label, plot_real_x = mdata[[study]][["plot_real_x"]], maxdepth = maxdepth, H2O = H2O,
-              plot.it = plot.it, add.title = add.title, yline = yline, basis = basis, techtype = techtype, dx = dx, dy = dy, datadir = datadir,
+              plot.it = plot.it, add.title = add.title, yline = yline, techtype = techtype, dx = dx, dy = dy, datadir = datadir,
               add = add, all.labels = all.labels, pch = pch, var = var, srt = srt, ilabel = ilabel)
 }
 
@@ -216,7 +213,7 @@ mcomp <- function(mout, yvar="RNA") {
 # make page of plots for MGP/MTP 20180225
 # add subset and H2O arguments 20181231
 # add plot.it argument 20190711
-ppage <- function(subset = "gradoxSI", H2O = FALSE, set.par = TRUE, plot.it = TRUE, basis = getOption("basis"), add.label = TRUE, mfrow = NULL) {
+ppage <- function(subset = "gradoxSI", H2O = FALSE, set.par = TRUE, plot.it = TRUE, add.label = TRUE, mfrow = NULL) {
   if(is.list(subset)) {
     # when subset is a list, it gives the studies
     studies <- subset
@@ -266,7 +263,7 @@ ppage <- function(subset = "gradoxSI", H2O = FALSE, set.par = TRUE, plot.it = TR
       if(identical(subset, "eiler") & !grepl("_MG", seqtype)) next
       # add "P" for proteins
       seqtype <- paste0(seqtype, "P")
-      X <- list(mplot(study, seqtype, add.label = add.label, H2O = H2O, plot.it = plot.it, basis = basis, datadir = datadir, mdata = studies))
+      X <- list(mplot(study, seqtype, add.label = add.label, H2O = H2O, plot.it = plot.it, datadir = datadir, mdata = studies))
       names(X) <- paste0(study, "_", seqtype)
       pout <- c(pout, X)
     }
@@ -331,10 +328,7 @@ pcomp <- function(mout, pout, seqtype="MG", vars = NULL, parts=c("plot", "legend
         if(is.null(xlim)) xlim <- c(-0.22, -0.098)
         xlab <- quote(italic(Z)[C])
       }
-      if(is.null(ylim)) {
-        if(getOption("basis") == "QCa") ylim <- c(-1.10, -1.02)
-        if(getOption("basis") == "QEC") ylim <- c(-0.78, -0.7)
-      }
+      if(is.null(ylim)) ylim <- c(-0.78, -0.7)
       ylab <- quote(italic(n)[H[2]*O])
     } else if(vars=="pIG") {
       if(is.null(xlim)) xlim <- c(4, 9)

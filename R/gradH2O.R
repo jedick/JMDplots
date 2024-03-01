@@ -224,9 +224,8 @@ gradH2O3 <- function(pdf = FALSE, vars = "H2O-ZC") {
   # define axis labels
   nH2Olab <- expression(italic(n)[H[2] * O])
   ZClab <- expression(italic(Z)[C])
-  # set y-axis limit depending on basis species 20201011
-  if(getOption("basis") == "QCa") ylim <- c(-1.10, -1.02)
-  if(getOption("basis") == "QEC") ylim <- c(-0.78, -0.70)
+  # set y-axis limit 20201011
+  ylim <- c(-0.78, -0.70)
 
   # plot 1: compare ZC and nH2O of proteins in datasets from gradox paper
   plot(c(-0.22, -0.12), ylim, xlab = ZClab, ylab = NA, type = "n")
@@ -234,8 +233,7 @@ gradH2O3 <- function(pdf = FALSE, vars = "H2O-ZC") {
   lmlines()
   mgradox <- ppage("gradoxGS", plot.it = FALSE)
   pgradox <- ppage("gradoxGS", H2O = TRUE, plot.it = FALSE)
-  if(getOption("basis") == "QCa") {labdx <- NULL; labdy <- 0.003}
-  if(getOption("basis") == "QEC") {labdx <- c(0, 0, -0.0125); labdy <- c(0.003, 0.003, 0.002)}
+  labdx <- c(0, 0, -0.0125); labdy <- c(0.003, 0.003, 0.002)
   pcomp(mgradox, pgradox, reorder = FALSE, add = TRUE, vars = vars, font = 2, labdx = labdx, labdy = labdy)
   # add proteomes from Nif-encoding genomes 20191014
   np <- NifProteomes()
@@ -252,40 +250,21 @@ gradH2O3 <- function(pdf = FALSE, vars = "H2O-ZC") {
   }
   # add text labels
   if(vars == "H2O-ZC") {
-    if(getOption("basis") == "QCa") {
-      text(-0.213, -1.0885, "hot spring", cex = 0.8, srt = 12)
-      text(-0.213, -1.091, "source", cex = 0.8, srt = 12)
-      text(-0.172, -1.062, "phototrophic", cex = 0.8, srt = 12)
-      text(-0.172, -1.0645, "zone", cex = 0.8, srt = 12)
-      text(-0.127, -0.002, "> 3 mm", adj = 0, cex = 0.8)
-      text(-0.1395, -1.078, "3 mm", adj = 0, cex = 0.8)
-      text(-0.135, -1.0665, "2 mm", adj = 0, cex = 0.8)
-      text(-0.132, -1.0555, "1 mm", adj = 0, cex = 0.8)
-      text(-0.182, -1.094, "vent", cex = 0.8, srt = 12)
-      text(-0.182, -1.097, "  fluids", cex = 0.8, srt = 12)
-      text(-0.151, -1.079, "plume", cex = 0.8, srt = 12)
-      text(-0.151, -1.0815, "and", cex = 0.8, srt = 12)
-      text(-0.151, -1.0840, "  seawater", cex = 0.8, srt = 12)
-      text(c(-0.196, -0.222, -0.191, -0.155), c(-1.0455, -1.0645, -1.055, -1.039), c("Nif-D", "Nif-C", "Nif-B", "Nif-A"), adj = 0, cex = 0.8)
-      text(-0.218, 0.0365, "NF", cex=0.7, font = 2)
-    }
-    if(getOption("basis") == "QEC") {
-      text(-0.210, -0.7535, "hot spring", cex = 0.8)
-      text(-0.210, -0.7565, "source", cex = 0.8)
-      text(-0.154, -0.773, "phototrophic", cex = 0.8)
-      text(-0.154, -0.776, "zone", cex = 0.8)
-      text(-0.191, -0.767, "photosynthetic", cex = 0.8)
-      text(-0.191, -0.770, "fringe", cex = 0.8)
-      lines(c(-0.156, -0.156), c(-0.771, -0.765))
-      text(-0.131, -0.776, "> 3 mm", cex = 0.8)
-      text(-0.129, -0.765, "2 mm", cex = 0.8)
-      text(-0.126, -0.757, "1 mm", cex = 0.8)
-      text(-0.180, -0.746, "vent fluids", cex = 0.8, srt = -23)
-      text(-0.156, -0.751, "plume", cex = 0.8)
-      text(-0.146, -0.746, "seawater", cex = 0.8)
-      lines(c(-0.1475, -0.1475), c(-0.748, -0.7625))
-      text(c(-0.197, -0.222, -0.177, -0.151), c(-0.706, -0.708, -0.728, -0.7365), c("Nif-D", "Nif-C", "Nif-B", "Nif-A"), adj = 0, cex = 0.8)
-    }
+    text(-0.210, -0.7535, "hot spring", cex = 0.8)
+    text(-0.210, -0.7565, "source", cex = 0.8)
+    text(-0.154, -0.773, "phototrophic", cex = 0.8)
+    text(-0.154, -0.776, "zone", cex = 0.8)
+    text(-0.191, -0.767, "photosynthetic", cex = 0.8)
+    text(-0.191, -0.770, "fringe", cex = 0.8)
+    lines(c(-0.156, -0.156), c(-0.771, -0.765))
+    text(-0.131, -0.776, "> 3 mm", cex = 0.8)
+    text(-0.129, -0.765, "2 mm", cex = 0.8)
+    text(-0.126, -0.757, "1 mm", cex = 0.8)
+    text(-0.180, -0.746, "vent fluids", cex = 0.8, srt = -23)
+    text(-0.156, -0.751, "plume", cex = 0.8)
+    text(-0.146, -0.746, "seawater", cex = 0.8)
+    lines(c(-0.1475, -0.1475), c(-0.748, -0.7625))
+    text(c(-0.197, -0.222, -0.177, -0.151), c(-0.706, -0.708, -0.728, -0.7365), c("Nif-D", "Nif-C", "Nif-B", "Nif-A"), adj = 0, cex = 0.8)
   }
   if(vars == "pIG") {
     text(c(5.00, 7.49, 5.65, 5.68), c(-0.123, -0.130, -0.109, -0.066), c("Nif-D", "Nif-C", "Nif-B", "Nif-A"), adj = 0)
@@ -303,14 +282,8 @@ gradH2O3 <- function(pdf = FALSE, vars = "H2O-ZC") {
   pcomp(mbaltics, pbaltics, reorder = FALSE, add = TRUE, labels.at = NA, vars = vars, pch = list(c(17, 17, 17, 17, 19, 19, 19, 19, 19, 19)))
   # add text labels
   if(vars == "H2O-ZC") {
-    if(getOption("basis") == "QCa") {
-      text(-0.138, -1.031, "< 6 PSU")
-      text(-0.139, -1.060, "> 6 PSU")
-    }
-    if(getOption("basis") == "QEC") {
-      text(-0.140, -0.724, "< 6 PSU")
-      text(-0.137, -0.747, "> 6 PSU")
-    }
+    text(-0.140, -0.724, "< 6 PSU")
+    text(-0.137, -0.747, "> 6 PSU")
   }
   title("Baltic Sea", font.main = 1, line = 1.2)
   title("surface", font.main = 1, line = 0.2)
@@ -325,14 +298,8 @@ gradH2O3 <- function(pdf = FALSE, vars = "H2O-ZC") {
   pcomp(mbalticd, pbalticd, reorder = FALSE, add = TRUE, labels.at = NA, vars = vars, pch = list(c(17, 17, 17, 17, 19, 19, 19, 19, 19)))
   # add text labels
   if(vars == "H2O-ZC") {
-    if(getOption("basis") == "QCa") {
-      text(-0.151, -1.052, "< 6 PSU")
-      text(-0.136, -1.080, "> 6 PSU")
-    }
-    if(getOption("basis") == "QEC") {
-      text(-0.148, -0.73, "< 6 PSU")
-      text(-0.140, -0.75, "> 6 PSU")
-    }
+    text(-0.148, -0.73, "< 6 PSU")
+    text(-0.140, -0.75, "> 6 PSU")
   }
   title("Baltic Sea", font.main = 1, line = 1.2)
   title("chl a max", font.main = 1, line = 0.2)
@@ -354,10 +321,7 @@ gradH2O4 <- function(pdf = FALSE, var = NULL) {
   par(cex.lab = 1.5)
 
   for(i in 1:nvar) {
-    if(identical(var[i], "pI")) ylim <- c(5, 7.5) else {
-      if(getOption("basis") == "QCa") ylim <- NULL
-      if(getOption("basis") == "QEC") ylim <- c(-0.785, -0.715)
-    }
+    if(identical(var[i], "pI")) ylim <- c(5, 7.5) else ylim <- c(-0.785, -0.715)
     figlab <- c("(a)", "(b)", "(c)")
     if(i==2) figlab <- c("(d)", "(e)", "(f)")
 
@@ -407,8 +371,7 @@ gradH2O5 <- function(pdf = FALSE) {
   par(las = 1, mar = c(4, 4.2, 2, 1), mgp = c(2.5, 0.8, 0))
   par(cex.lab = 1.5)
   xlim <- c(-0.2, -0.08)
-  if(getOption("basis") == "QCa") ylim <- c(-1.15, -1)
-  if(getOption("basis") == "QEC") ylim <- c(-0.8, -0.72)
+  ylim <- c(-0.8, -0.72)
   nH2Olab <- expression(italic(n)[H[2] * O])
   ZClab <- expression(italic(Z)[C])
 
@@ -421,23 +384,13 @@ gradH2O5 <- function(pdf = FALSE) {
   pcomp(mout, pout, add = TRUE, lty = 0, labels.at = NA)
   hullfun(mout, pout, c(1, 3), "green3", c("riverFL", "riverPA"))
   hullfun(mout, pout, c(1, 3), "blue", c("plumeFL", "plumePA"))
-  if(getOption("basis") == "QCa") {
-    text(c(-0.129, -0.132), c(-1.055, -1.095), c("river", "plume"))
-    rect(-0.20, -1.05, -0.18, -0.995, col = "white", border = NA)
-    rect(-0.20, -1.038, -0.10, -0.995, col = "white", border = NA)
-    legend("topleft", c("free-living", "particle-associated"), pch = c(20, 15), col = "blue", bty = "n", inset = c(0.2, 0))
-    legend("topleft", legend = c(NA, NA), pch = c(21, 22), col = "green3", pt.cex = c(0.7, 1), bty = "n", inset = c(0.14, 0))
-    text(c(-0.18, -0.17), c(-1.027, -1.027), c("river", "plume"), srt = 40, adj = 1)
-  }
-  if(getOption("basis") == "QEC") {
-    text(c(-0.128, -0.130), c(-0.755, -0.775), c("river", "plume"))
-    rect(-0.181, -0.733, -0.09, par("usr")[4] - 0.0003, col = "white", border = NA)
-    rect(-0.11, -0.737, -0.094, par("usr")[4] - 0.0003, col = "white", border = NA)
-    legend("topright", legend = c(NA, NA), pch = c(21, 22), col = "green3", pt.cex = c(0.7, 1), bty = "n", inset = c(0.1, 0))
-    legend("topright", legend = c(NA, NA), pch = c(20, 15), col = "blue", bty = "n", inset = c(0.17, 0))
-    legend("topright", c("free-living", "particle-associated"), adj = 1, bty = "n", inset = c(-0.2, 0))
-    text(c(-0.107, -0.097), c(-0.735, -0.735), c("plume", "river"), srt = 40, adj = 1)
-  }
+  text(c(-0.128, -0.130), c(-0.755, -0.775), c("river", "plume"))
+  rect(-0.181, -0.733, -0.09, par("usr")[4] - 0.0003, col = "white", border = NA)
+  rect(-0.11, -0.737, -0.094, par("usr")[4] - 0.0003, col = "white", border = NA)
+  legend("topright", legend = c(NA, NA), pch = c(21, 22), col = "green3", pt.cex = c(0.7, 1), bty = "n", inset = c(0.1, 0))
+  legend("topright", legend = c(NA, NA), pch = c(20, 15), col = "blue", bty = "n", inset = c(0.17, 0))
+  legend("topright", c("free-living", "particle-associated"), adj = 1, bty = "n", inset = c(-0.2, 0))
+  text(c(-0.107, -0.097), c(-0.735, -0.735), c("plume", "river"), srt = 40, adj = 1)
   title("Amazon River metagenomes", font.main = 1)
   label.figure("(a)", xfrac = 0.1, cex = 1.8)
   # plot 2: GRAVY - pI
@@ -455,8 +408,7 @@ gradH2O5 <- function(pdf = FALSE) {
   pcomp(mout, pout, "MT", add = TRUE, lty = 0, labels.at = NA)
   hullfun(mout, pout, c(2, 4), "green3", c("riverFL", "riverPA"))
   hullfun(mout, pout, c(2, 4), "blue", c("plumeFL", "plumePA"))
-  if(getOption("basis") == "QCa") text(c(-0.125, -0.12), c(-1.035, -1.073), c("river", "plume"))
-  if(getOption("basis") == "QEC") text(c(-0.166, -0.122), c(-0.745, -0.774), c("river", "plume"))
+  text(c(-0.166, -0.122), c(-0.745, -0.774), c("river", "plume"))
   title("Amazon River metatranscriptomes", font.main = 1)
   label.figure("(b)", xfrac = 0.1, cex = 1.8)
   # plot 4: GRAVY - pI
@@ -481,14 +433,8 @@ gradH2O5 <- function(pdf = FALSE) {
   poutH <- ppage("hypersaline", H2O = TRUE, plot.it = FALSE)
   pcomp(moutH, poutH, reorder = FALSE, add = TRUE, labdx = c(-0.002, 0.030, 0.056), labdy = c(-0.005, -0.011, 0.004))
   hullfun(moutH, poutH, 1:3, "turquoise3")
-  if(getOption("basis") == "QCa") {
-    text(c(-0.18, -0.148, -0.10), c(-1.042, -1.095, -1.088), c("freshwater", "marine", "hypersaline"))
-    rect(-0.148, -1.15, -0.076, -1.11, col = "white", border = NA)
-  }
-  if(getOption("basis") == "QEC") {
-    text(c(-0.158, -0.183), c(-0.726, -0.758), c("freshwater", "marine"))
-    rect(-0.148, par("usr")[3] + 0.0003, par("usr")[2] - 0.0004, -0.779, col = "white", border = NA)
-  }
+  text(c(-0.158, -0.183), c(-0.726, -0.758), c("freshwater", "marine"))
+  rect(-0.148, par("usr")[3] + 0.0003, par("usr")[2] - 0.0004, -0.779, col = "white", border = NA)
   legend("bottomright", c("lower salinity", "higher salinity"), pch = c(0, 15), col = "turquoise3", bty = "n")
   legend("bottomright", c("hypersaline datasets", "", ""), bty = "n")
   title("Freshwater - marine - hypersaline", font.main = 1)
@@ -518,8 +464,7 @@ gradH2O6 <- function(pdf = FALSE) {
   par(cex.lab = 1.3)
   nH2Olab <- expression(italic(n)[H[2] * O])
   ZClab <- expression(italic(Z)[C])
-  if(getOption("basis") == "QCa") ylim <- c(-1.12, -1.02)
-  if(getOption("basis") == "QEC") ylim <- c(-0.78, -0.7)
+  ylim <- c(-0.78, -0.7)
 
   # Baltic Sea nH2O - ZC
   mout <- ppage("balticsurface", plot.it = FALSE)
@@ -528,8 +473,7 @@ gradH2O6 <- function(pdf = FALSE) {
   mtext(nH2Olab, side = 2, las = 0, line = 3.2, cex = 1.5)
   lmlines(0.02)
   pcomp(mout, pout, add = TRUE, reorder = FALSE, font = 2, labdy = 0.003, labels.at = NA)
-  if(getOption("basis") == "QCa") text(c(-0.128, -0.128), c(-1.035, -1.075), c("< 6 PSU", "> 6 PSU"))
-  if(getOption("basis") == "QEC") text(c(-0.128, -0.128), c(-0.725, -0.753), c("< 6 PSU", "> 6 PSU"))
+  text(c(-0.128, -0.128), c(-0.725, -0.753), c("< 6 PSU", "> 6 PSU"))
   title("Baltic Sea", font.main = 1)
   label.figure("(a)", cex = 1.7)
   # Baltic Sea GRAVY - pI
@@ -545,8 +489,7 @@ gradH2O6 <- function(pdf = FALSE) {
   mtext(nH2Olab, side = 2, las = 0, line = 3.2, cex = 1.5)
   lmlines(0.02)
   pcomp(mout, pout, add = TRUE, reorder = FALSE, font = 2, labdy = 0.003, labels.at = NA)
-  if(getOption("basis") == "QCa") text(c(-0.185, -0.185, -0.155), c(-1.08, -1.06, -1.035), c("FW", "LS", "MS-HS"))
-  if(getOption("basis") == "QEC") text(c(-0.185, -0.128, -0.125), c(-0.76, -0.755, -0.725), c("FW", "LS", "MS-HS"))
+  text(c(-0.185, -0.128, -0.125), c(-0.76, -0.755, -0.725), c("FW", "LS", "MS-HS"))
   title("Fish ponds and salterns", font.main = 1)
   label.figure("(b)", cex = 1.7)
   # Rodriguez-Brito et al. GRAVY - pI
@@ -605,14 +548,13 @@ gradH2O7 <- function(pdf = FALSE) {
   }
 
   # Read CSV files with results of chemical analysis for differential expression
-  osmotic_gene <- read.csv(system.file(paste0("vignettes/osmotic_gene_", getOption("basis"), ".csv"), package = "JMDplots"))
-  osmotic_bact <- read.csv(system.file(paste0("vignettes/osmotic_bact_", getOption("basis"), ".csv"), package = "JMDplots"))
+  osmotic_gene <- read.csv(system.file(paste0("vignettes/osmotic_gene.csv"), package = "JMDplots"))
+  osmotic_bact <- read.csv(system.file(paste0("vignettes/osmotic_bact.csv"), package = "JMDplots"))
   DnH2Olab <- quote(Delta*italic(n)[H[2]*O])
   log10timelab <- quote(log[10]*("time, minutes"))
 
   # plot A: time-course experiments
-  if(getOption("basis") == "QCa") ylim <- c(-0.12, 0.12)
-  if(getOption("basis") == "QEC") ylim <- c(-0.07, 0.10)
+  ylim <- c(-0.07, 0.10)
   plot(c(0.5, 4), ylim, xlab = log10timelab, ylab = DnH2Olab, type = "n")
   abline(h = 0, lty = 2, col = "gray40")
   # transcriptomic data
@@ -644,7 +586,6 @@ gradH2O7 <- function(pdf = FALSE) {
   mtext("Time-course experiments", line = 1)
 
   # plot B: NaCl or organic solutes
-  if(getOption("basis") == "QCa") ylim <- c(-0.07, 0.11)
   plot(c(-0.2, 1.2), ylim, xlab = "Solute", ylab = DnH2Olab, type = "n", xaxt = "n")
   axis(1, at = c(0, 1), labels = c("NaCl", "Organic"))
   abline(h = 0, lty = 2, col = "gray40")
@@ -701,7 +642,7 @@ gradH2O7 <- function(pdf = FALSE) {
   mtext("Proteins coded by differentially expressed genes", adj = 1, line = 1.5)
 
   # Get proteomic data for halophiles
-  osmotic_halo <- read.csv(system.file(paste0("vignettes/osmotic_halo_", getOption("basis"), ".csv"), package = "JMDplots"))
+  osmotic_halo <- read.csv(system.file(paste0("vignettes/osmotic_halo.csv"), package = "JMDplots"))
   # Combine halophile and non-halophile data for hyperosmotic stress proteomics
   osmotic_halo <- osmotic_halo[osmotic_halo$tags!="hypoosmotic", ]
   alldat <- rbind(osmotic_bact, osmotic_halo)
@@ -832,9 +773,8 @@ lmlines <- function(step = 0.01) {
     # Calculate ZC of the amino acids
     aa <- aminoacids("")
     ZC.aa <- ZC(info(aa, "aq"))
-    # Load amino acids with QCa or QEC basis 20200914
-    if(getOption("basis") == "QCa") basis(c("glutamine", "cysteine", "acetic acid", "H2O", "O2"))
-    if(getOption("basis") == "QEC") basis(c("glutamine", "glutamic acid", "cysteine", "H2O", "O2"))
+    # Load amino acids QEC basis 20200914
+    basis(c("glutamine", "glutamic acid", "cysteine", "H2O", "O2"))
     species(aa)
     # Make linear regression
     lm <- lm(species()$H2O ~ ZC.aa)
@@ -843,8 +783,7 @@ lmlines <- function(step = 0.01) {
     reset()
   } else {
     # Use previously computed intercept and slope 20200920
-    if(getOption("basis") == "QCa") coef <- c(-0.4830396, 0.1579203)
-    if(getOption("basis") == "QEC") coef <- c(-0.1242780, -0.3088251)
+    coef <- c(-0.1242780, -0.3088251)
   }
   x <- par("usr")[1:2]
   y <- coef[1] + coef[2] * x

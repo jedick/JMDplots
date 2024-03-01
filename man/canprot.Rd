@@ -20,7 +20,7 @@
   check_IDs(dat, IDcol, aa_file = NULL, updates_file = NULL)
   cleanup(dat, IDcol, up2 = NULL)
   get_comptab(pdat, var1 = "Zc", var2 = "nH2O", plot.it = FALSE,
-    mfun = "median", oldstyle = FALSE, basis = getOption("basis"))
+    mfun = "median", oldstyle = FALSE)
   diffplot(comptab, vars = c("Zc", "nH2O"), col = "black", plot.rect = FALSE,
            pt.text = c(letters, LETTERS), cex.text = 0.85, oldstyle = FALSE,
            pch = 1, cex = 2.1, contour = TRUE, col.contour = par("fg"),
@@ -44,7 +44,6 @@
   \item{plot.it}{logical, make a scatterplot?}
   \item{mfun}{character, either \samp{median} or \samp{mean}}
   \item{oldstyle}{logical, also calculate \code{\link{CLES}} and \emph{p}-values?}
-  \item{basis}{character, keyword for basis species to use}
   \item{comptab}{list or data frame, output of \code{get_comptab}}
   \item{vars}{character, which variables (chemical metrics) to calculate or plot}
   \item{col}{character or numeric, color(s) for the points}
@@ -102,8 +101,6 @@ Alternatively, if \code{IDcol} is a logical value, it selects proteins to be unc
 \item{The differences are calculated as (median for up-regulated proteins) - (median for down-regulated proteins).
 If \code{mfun} is \samp{mean}, means of the groups are used instead.}
 \item{If \code{oldstyle} is TRUE, the function also calculates the common language effect size (\code{\link{CLES}}, in percent) and \emph{p}-value for each variable.}
-\item{The \code{basis} argument is used to select the basis species, which are used for the calculation of \nH2O and \nO2.
-The default for \code{getOption("basis")} is to use the \samp{QEC} basis species (see \code{\link{metrics}}).}
 \item{Volume is calculated using amino acid group additivity as described by Dick et al. (2006).}
 \item{Set \code{plot.it} to \code{TRUE} to make a scatterplot.
 Open red squares and filled blue circles stand for up-regulated and down-regulated proteins, respectively.}

@@ -243,10 +243,6 @@ geo16S2 <- function(pdf = FALSE) {
   opar <- par(mar = c(2.5, 2.5, 0.5, 0.5))
   xlim <- c(-0.22, -0.09)
   ylim <- c(-0.77, -0.71)
-  if(options("basis")$basis == "QCa") {
-    xlim <- c(-0.22, -0.09)
-    ylim <- c(-1.12, -1)
-  }
   plot(xlim, ylim, xlab = "", ylab = "", type = "n")
   lmlines()
   # Add convex hulls for each dataset in this figure

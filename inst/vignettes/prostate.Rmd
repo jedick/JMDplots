@@ -19,8 +19,6 @@ knit_hooks$set(pngquant = hook_pngquant)
 pngquant <- "--speed=1 --quality=0-25"
 # in case pngquant isn't available (R-Forge?)
 if (!nzchar(Sys.which("pngquant"))) pngquant <- NULL 
-# read 'basis' option
-basis <- getOption("basis")
 ```
 
 This vignette from the R package [JMDplots](https://github.com/jedick/JMDplots) version `r packageDescription("JMDplots")$Version` shows chemical metrics for proteins that are differentially expressed in prostate cancer compared to normal tissue.
@@ -28,7 +26,7 @@ The analysis is described in more detail in a paper ([<span title="Water as a re
 Abbreviations:
 
   * <i>Z</i><sub>C</sub> &ndash; average oxidation state of carbon.
-  * <i>n</i><sub>H<sub>2</sub>O</sub> &ndash; stoichiometric hydration state per residue ([<span title="Uncovering chemical signatures of salinity gradients through compositional analysis of protein sequences">Dick et al., 2020</span>](https://doi.org/10.5194/bg-17-6145-2020)) computed using the **`r basis`** basis species (`r basis.text(basis)`, H~2~O, O~2~).
+  * <i>n</i><sub>H<sub>2</sub>O</sub> &ndash; stoichiometric hydration state per residue ([<span title="Uncovering chemical signatures of salinity gradients through compositional analysis of protein sequences">Dick et al., 2020</span>](https://doi.org/10.5194/bg-17-6145-2020)) computed using the QEC basis species (glutamine, glutamic acid, cysteine, H~2~O, O~2~).
 
 <style type="text/css">
 body {
@@ -69,7 +67,7 @@ out <- xsummary2(comptab1, comptab2)
 tags <- sapply(sapply(strsplit(datasets, "="), "[", -1), paste, collapse = ";")
 out <- cbind(out[, 1:2], tags = tags, out[, 3:16])
 out[, 6:17] <- round(out[, 6:17], 4)
-file <- paste0("prostate_", basis, ".csv")
+file <- paste0("prostate.csv")
 write.csv(out, file, row.names = FALSE, quote = 2)
 ```
 

@@ -47,11 +47,9 @@ For Figure 3, the RefSeq database release `r release` is used for the proteomes 
 
 ```{r library, message = FALSE, results = "hide"}
 library(JMDplots)
-# read canprot's 'basis' option
-basis <- getOption("basis")
 ```
 
-The **`r basis`** basis species (`r basis.text(basis)`, H~2~O, O~2~) are used for the analysis of stoichiometric hydration state (`r nH2O`).
+The QEC basis species (glutamine, glutamic acid, cysteine, H~2~O, O~2~) are used for the analysis of stoichiometric hydration state (`r nH2O`).
 
 ## Number of reactions for each amino acid in _E. coli_ metabolic reconstruction
 Reaction equations used for this calculation are from <a href="https://doi.org/10.1038/msb4100155" title="A genome-scale metabolic reconstruction for Escherichia coli K-12 MG1655 that accounts for 1260 ORFs and thermodynamic information">Feist et al. (2007)</a>.

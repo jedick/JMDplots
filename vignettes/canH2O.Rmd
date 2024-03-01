@@ -38,11 +38,9 @@ This vignette was compiled on `r Sys.Date()` with **[JMDplots](https://github.co
 
 ```{r library, message = FALSE, results = "hide"}
 library(JMDplots)
-# Read canprot's 'basis' option
-basis <- getOption("basis")
 ```
 
-The **`r basis`** basis species (`r basis.text(basis)`, H~2~O, O~2~) are used for the analysis of stoichiometric hydration state (`r nH2O`).
+The QEC basis species (glutamine, glutamic acid, cysteine, H~2~O, O~2~) are used for the analysis of stoichiometric hydration state (`r nH2O`).
 
 ## Study overview (Figure 1)
 ```{r canH2O1, message = FALSE, fig.align='center', out.width='75%', fig.width = 7, fig.height = 7, pngquant = pngquant}
