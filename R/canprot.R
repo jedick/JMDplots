@@ -42,7 +42,7 @@ check_IDs <- function(dat, IDcol, aa_file = NULL, updates_file = NULL) {
   # for NJVS19 dataset 20191226
   if(any(grepl("\\|", ID))) ID <- sapply(strsplit(ID, "\\|"), "[", 2)
   # Human proteins
-  aa <- get("human_aa", human)
+  aa <- get("human_aa", canprot)
   # Add amino acid compositions from external file if specified
   if(!is.null(aa_file)) {
     aa_dat <- read.csv(aa_file, as.is=TRUE)
@@ -54,7 +54,7 @@ check_IDs <- function(dat, IDcol, aa_file = NULL, updates_file = NULL) {
   ina <- is.na(knownIDs)
   knownIDs[ina] <- aa$protein[ina]
   # Also include obsolete UniProt ID
-  updates <- get("uniprot_updates", human)
+  updates <- get("uniprot_updates", canprot)
   if(!is.null(updates_file)) {
     updates_dat <- read.csv(updates_file, as.is = TRUE)
     updates <- rbind(updates_dat, updates)
@@ -146,27 +146,9 @@ get_comptab <- function(pdat, var1="Zc", var2="nH2O", plot.it=FALSE, mfun="media
   # The columns for the amino acids
   icol <- match(AA3, colnames(pdat$pcomp$aa))
   nAA <- function() rowSums(pdat$pcomp$aa[, icol])
-  V0 <- function() {
-    # Memoize the volumes so we don't depend on the CHNOSZ database 20200509
-    #indices <- info(c(paste0("[", AA3, "]"), "[UPBB]", "[AABB]"))
-    #volumes <- get("thermo", CHNOSZ::CHNOSZ)$obigt$V[indices]
-    volumes <- c(26.864, 39.913, 41.116, 56.621, 88.545, 9.606, 65.753, 72.204, 
-                 75.048, 74.2, 71.832, 43.826, 49.049, 60.078, 105.825, 27.042, 
-                 44.03, 57.279, 110.045, 90.904, 26.296, 33.585)
-    # Standard molal volumes of amino acid sidechains and protein backbone and terminal groups
-    vAA <- volumes[1:20]
-    vUPBB <- volumes[21]
-    vAABB <- volumes[22]
-    # The total volume of amino acid residues
-    VAA <- rowSums(t(t(pdat$pcomp$aa[, icol]) * vAA))
-    # The total volume of the backbone and terminal groups
-    chains <- pdat$pcomp$aa$chains
-    plength <- nAA()
-    VUPBB <- (plength - chains) * vUPBB
-    VAABB <- chains * vAABB
-    # The per-residue volume (total volume of the protein divided by the length)
-    (VAA + VUPBB + VAABB) / plength
-  }
+  # Memoize the volumes so we don't depend on the CHNOSZ database 20200509
+  # Changed to canprot::V0 20240301
+  V0 <- function() canprot::V0(pdat$pcomp$aa)
   # GRAVY and pI added 20191028
   # canprot:: is used to access the functions in the package namespace, not the ones defined here
   GRAVY <- function() canprot::GRAVY(pdat$pcomp$aa)

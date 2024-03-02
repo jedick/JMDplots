@@ -36,7 +36,7 @@ evdevH2O1 <- function(pdf = FALSE) {
   for(organism in c("Hsa", "Dme", "Bsu")) {
 
     # Get amino acid compositions of human proteins
-    if(organism == "Hsa") aa <- get("human_base", human)
+    if(organism == "Hsa") aa <- get("human_base", canprot)
     if(organism == "Dme") aa <- read.csv(system.file("extdata/RefDB/organisms/UP000000803_7227.csv.xz", package = "JMDplots"), as.is = TRUE)
     if(organism == "Bsu") aa <- read.csv(system.file("extdata/RefDB/organisms/UP000001570_224308.csv.xz", package = "JMDplots"), as.is = TRUE)
     protein.formula <- protein.formula(aa)

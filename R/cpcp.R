@@ -11,7 +11,7 @@ Ehplot <- function(T=37, pH=7.4, xlim = c(-75, -55), ylim = c(-10, 10), dy = 0.2
     pe <- convert(Eh, "pe", T=convert(T, "K"))
     return(0.5*logfO2 - 2*pH - 2*pe - logK)
   }
-  plot(0, 0, xlim=xlim, ylim=ylim, xlab=cplab$logfO2, ylab=cplab$logaH2O, type="n", xaxs="i", yaxs="i")
+  plot(0, 0, xlim=xlim, ylim=ylim, xlab=quote(log~italic("f")[O[2]]), ylab=quote(log~italic("a")[H[2]*O]), type="n", xaxs="i", yaxs="i")
   for(Eh in seq(-0.8, 0.2, by=dy)) {
     lines(logfO2, logaH2O(logfO2, Eh)) 
     text(-61+19*Eh, logaH2O(-61+19*Eh, Eh) + 1, Eh)
@@ -100,10 +100,10 @@ rankplot <- function(pdat, T=37, what="rankdiff", main=NULL, res=300, plot.it=TR
     # calculate weighted rank difference in percent
     rankdiff <- 100*rankdiff(rank_H, rank_C, n_H, n_C)
     print(paste("weighted rank difference % range", paste(range(rankdiff), collapse=" ")))
-    if(!plot.it) return(list(xs=xs, ys=ys, rankdiff=rankdiff, xlab=cplab$logfO2, ylab=cplab$logaH2O))
+    if(!plot.it) return(list(xs=xs, ys=ys, rankdiff=rankdiff, xlab=quote(log~italic("f")[O[2]]), ylab=quote(log~italic("a")[H[2]*O])))
     # display greater healthy and cancer ranks by colored zones on image
     col <- get_colors(rankdiff, max50=TRUE)
-    image(xs, ys, rankdiff, col=col, useRaster=TRUE, xlab=cplab$logfO2, ylab=cplab$logaH2O)
+    image(xs, ys, rankdiff, col=col, useRaster=TRUE, xlab=quote(log~italic("f")[O[2]]), ylab=quote(log~italic("a")[H[2]*O]))
     # show equal-rank line
     contour(xs, ys, rankdiff, levels=0, add=TRUE, drawlabels=FALSE)
     contour(xs, ys, rankdiff, levels=seq(-100, 100, by=10), lty=3, add=TRUE, drawlabels=FALSE)

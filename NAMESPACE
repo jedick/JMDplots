@@ -69,8 +69,6 @@ export(
   "orp16S_T1", "orp16S_S2",
   # utogig paper 20220602, 20220605
   "utogig4", "utogigS1",
-  # utilities 20220609
-  "cldfun",
   # utilities 20220930
   "hyphen.in.pdf",
   # orp16S paper 20221001
@@ -144,7 +142,7 @@ importFrom("CHNOSZ",
 # Imports from canprot
 importFrom("canprot",
   # first batch: gradH2O1 20190930
-  "human",
+  "canprot",
   # moved from JMDplots to canprot 20191027
   "Zc", "nH2O", "GRAVY", "pI",
   # for pdat_HPA() and pdat_TCGA() 20200204
@@ -156,7 +154,9 @@ importFrom("canprot",
   # for get_comptab() 20240227
   "CLES",
   # moved from CHNOSZ to canprot 20240228
-  "read.fasta", "aasum"
+  "read.fasta", "aasum",
+  # moved from JMDplots to canprot 20240301
+  "add.cld"
 )
 
 # Imports from chem16S
