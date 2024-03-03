@@ -302,7 +302,7 @@ carrollite_5 <- function(res = 500, pdf = FALSE) {
     lwd <- list(1.5, 0, 0)
     col <- list(8, 4, 4)
     col.names <- list("#888888", c(1, 1, 1, 1, "white", 1), 6)
-    fill <- list(NA, c("white", "#aaacac", "#e0e2e2", "#e8eca7", "#5e5f60", "#8f9091"), add.alpha(6, "50"))
+    fill <- list(NA, c("white", "#aaacac", "#e0e2e2", "#e8eca7", "#5e5f60", "#8f9091"), adjustcolor(6, alpha.f = 0.312))
     names <- list(names1, names2, names12)
 
     if(T < 200) {
@@ -414,7 +414,7 @@ carrollite_8 <- function(res, pdf = FALSE) {
     lwd <- list(1.5, 0, 0)
     col <- list(8, 4, 4)
     col.names <- list("#888888", c(1, 1, 1, 1, "white", 1), 6)
-    fill <- list(NA, c("white", "#aaacac", "#e0e2e2", "#e8eca7", "#8f9091"), add.alpha(6, "50"))
+    fill <- list(NA, c("white", "#aaacac", "#e0e2e2", "#e8eca7", "#8f9091"), adjustcolor(6, alpha.f = 0.312))
 
     dx <- list(c(0, -3.5, 0, -2.3, 0), c(0, 2.5, 3.7, 2, 0.3), 2.2)
     dy <- list(c(0, 0, 0, 0, 0), c(0, -2, 0, -1.5, -1), 0)

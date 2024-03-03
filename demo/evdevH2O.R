@@ -37,7 +37,7 @@ nbackground <- 200
 TPPG17 <- read.csv(system.file(paste0("extdata/evdevH2O/phylostrata/TPPG17.csv.xz"), package = "JMDplots"), as.is = TRUE)
 LMM16 <- read.csv(system.file(paste0("extdata/evdevH2O/phylostrata/LMM16.csv.xz"), package = "JMDplots"), as.is = TRUE)
 Entry <- na.omit(intersect(TPPG17$Entry, LMM16$UniProt))
-aaback <- protcomp(Entry)$aa
+aaback <- human.aa(Entry)
 seed <- 24
 set.seed(seed)
 iback <- sample(1:nrow(aaback), nbackground)

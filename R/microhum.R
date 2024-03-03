@@ -719,7 +719,7 @@ microhum_5 <- function(pdf = FALSE) {
     # Get amino acid compositions of reference proteomes for genera and calculate nO2
     AAcomp <- taxon_AA[["GTDB"]]
     AAcomp <- AAcomp[match(colnames(D_abundance), AAcomp$organism), ]
-    nO2 <- calc_metrics(AAcomp, "nO2")[, 1]
+    nO2 <- calc.metrics(AAcomp, "nO2")[, 1]
     # Reorder genera from most reduced to most oxidized
     onO2 <- order(nO2)
     D_abundance <- D_abundance[, onO2]
@@ -1329,7 +1329,7 @@ calc.oxytol <- function(segment = "Feces", study = NULL) {
   # Get amino acid compositions of reference proteomes for genera and calculate nO2
   AAcomp <- taxon_AA[["GTDB"]]
   AAcomp <- AAcomp[match(names(abundance), AAcomp$organism), ]
-  nO2 <- calc_metrics(AAcomp, "nO2")[, 1]
+  nO2 <- calc.metrics(AAcomp, "nO2")[, 1]
   # Get oxygen tolerance
   genus <- rownames(RDP)
   oxygen.tolerance <- get.oxytol(genus)

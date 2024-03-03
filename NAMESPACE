@@ -145,8 +145,8 @@ importFrom("canprot",
   "canprot",
   # moved from JMDplots to canprot 20191027
   "Zc", "nH2O", "GRAVY", "pI",
-  # for pdat_HPA() and pdat_TCGA() 20200204
-  "protcomp",
+  # for pdat_* functions 20200204
+  "human.aa",
   # for canH2O5() 20200505, 20200508
   "cplab",
   # for canH2OS1() 20201016
@@ -156,7 +156,9 @@ importFrom("canprot",
   # moved from CHNOSZ to canprot 20240228
   "read.fasta", "aasum",
   # moved from JMDplots to canprot 20240301
-  "add.cld"
+  "add.cld",
+  # moved from chem16S to canprot 20240302
+  "calc.metrics"
 )
 
 # Imports from chem16S
@@ -166,7 +168,7 @@ importFrom("chem16S",
   # 20230709
   "plot_ps_metrics", "plot_ps_metrics2",
   # 20230731
-  "calc_metrics", "chemlab"
+  "chemlab"
 )
 
 # Imports from other packages

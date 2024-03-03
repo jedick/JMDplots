@@ -68,7 +68,7 @@ Trigos AS, Pearson RB, Papenfuss AT and Goode DL (2017) Altered interactions bet
 
 \examples{
 # Run MaximAct() for mean amino acid compositions of proteins in phylostrata
-AA_target <- getphyloaa("TPPG17")$aa
+AA_target <- getphyloaa("TPPG17")
 MA <- MaximAct(AA_target, seed = 1:3, nbackground = 200, O2 = c(-72,-65,15), H2O = c(-2,5,15))
 # logfO2 increases and logaH2O decreases between phylostrata 1 and 16
 O2 <- colMeans(MA$O2)

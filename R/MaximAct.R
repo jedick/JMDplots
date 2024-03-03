@@ -24,7 +24,7 @@ MaximAct <- function(AA_target, seed = 1:100, nbackground = 2000, plot.it = TRUE
     # Take the intersection of lists of proteins from the two sources
     Entry <- na.omit(intersect(TPPG17$Entry, LMM16$UniProt))
     # Get amino acid compositions of the proteins
-    AA_background <- protcomp(Entry)$aa
+    AA_background <- human.aa(Entry)
   }
 
   # Set up system
@@ -156,7 +156,7 @@ getphyloaa <- function(PS_source) {
   }
   dat <- check_IDs(dat, "Entry")
   dat <- cleanup(dat, "Entry")
-  pcomp <- protcomp(dat$Entry)
+  human_aa <- human.aa(dat$Entry)
   # Set up blank amino acid data frame
   PS <- sort(unique(dat$Phylostrata))
   aa <- thermo()$protein[rep(1, length(PS)), ]
@@ -168,10 +168,10 @@ getphyloaa <- function(PS_source) {
   # Loop over phylostrata
   for(i in seq_along(PS)) {
     iPS <- dat$Phylostrata == PS[i]
-    aaPS <- pcomp$aa[iPS, ]
+    aaPS <- human_aa[iPS, ]
     aamean <- colMeans(aaPS[, 6:25])
     aa[i, 6:25] <- aamean
   }
-  # Return both the mean compositions (aa) and all proteins (pcomp)
-  list(aa = aa, pcomp = pcomp)
+  # Return the mean compositions (aa)
+  aa
 }

@@ -57,7 +57,7 @@
 
 \details{
 
-The \code{pdat_} functions assemble lists of up- and down-regulated proteins and retrieve their amino acid compositions using \code{\link{protcomp}}.
+The \code{pdat_} functions assemble lists of up- and down-regulated proteins and retrieve their amino acid compositions using \code{\link[canprot]{human.aa}}.
 The result can be used with \code{\link{get_comptab}} to make a table of chemical metrics that can then be plotted with \code{\link{diffplot}}.
 
 If \code{dataset} is \samp{2020} (the default) or \samp{2017}, the function returns the names of all datasets in the compilation for the respective year.
@@ -146,7 +146,7 @@ A list consisting of:
 \describe{
   \item{\code{dataset}}{Name of the dataset}
   \item{\code{description}}{Descriptive text for the dataset, used for making the tables in the vignettes}
-  \item{\code{pcomp}}{UniProt IDs together with amino acid compositions obtained using \code{\link{protcomp}}}
+  \item{\code{pcomp}}{UniProt IDs together with amino acid compositions obtained using \code{\link[canprot]{human.aa}}}
   \item{\code{up2}}{Logical vector with length equal to the number of proteins; TRUE for up-regulated proteins and FALSE for down-regulated proteins}
 }
 }

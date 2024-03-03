@@ -1684,7 +1684,7 @@ getMP_orp16S <- function() {
   studies_16S <- c("MPB+19", "RYP+14", "KTS+17", "KTS+17.mock", "HTZ+17")
   n <- length(studies_16S)
   pchs <- c(24, 25, 12, 18, 20)
-  bgs <- sapply(c(5, 6, NA, NA, NA), add.alpha, alpha = "d0")
+  bgs <- c(adjustcolor(c(5, 6), alpha.f = 0.815), NA, NA, NA)
   cols <- c(1, 1, 2, 3, "#00000080")
 
   out <- lapply(seq_along(studies_16S), function(i) {
@@ -1717,4 +1717,3 @@ getMP_orp16S <- function() {
   do.call(rbind, out)
 
 }
-

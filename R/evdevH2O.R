@@ -284,10 +284,10 @@ evdevH2O4 <- function(pdf = FALSE) {
   par(mar = c(3, 3.1, 3, 1), mgp = c(2, 0.5, 0))
 
   # Get mean amino acid compositions
-  gpa <- getphyloaa("TPPG17")
-  PS <- gpa$aa$protein
+  gp_aa <- getphyloaa("TPPG17")
+  PS <- gp_aa$protein
   # Load target proteins 
-  ipPS <- add.protein(gpa$aa)
+  ipPS <- add.protein(gp_aa)
   # Set up system
   basis("QEC")
   res <- 128
@@ -343,7 +343,7 @@ evdevH2O4 <- function(pdf = FALSE) {
   TPPG17 <- read.csv(system.file(paste0("extdata/evdevH2O/phylostrata/TPPG17.csv.xz"), package = "JMDplots"), as.is = TRUE)
   LMM16 <- read.csv(system.file(paste0("extdata/evdevH2O/phylostrata/LMM16.csv.xz"), package = "JMDplots"), as.is = TRUE)
   Entry <- na.omit(intersect(TPPG17$Entry, LMM16$UniProt))
-  aaback <- protcomp(Entry)$aa
+  aaback <- human.aa(Entry)
   set.seed(seed)
   iback <- sample(1:nrow(aaback), nbackground)
   ipback <- add.protein(aaback[iback, ])
@@ -352,7 +352,7 @@ evdevH2O4 <- function(pdf = FALSE) {
   e <- equilibrate(a, as.residue = TRUE, loga.balance = 0)
   d <- diagram(e, plot.it = FALSE)
   # Get optimal logfO2 and logaH2O from MaximAct() for cross-checking 20210404
-  MA <- MaximAct(gpa$aa, seed = seed, nbackground = nbackground, O2 = c(O2, res), H2O = c(H2O, res), plot.it = FALSE)
+  MA <- MaximAct(gp_aa, seed = seed, nbackground = nbackground, O2 = c(O2, res), H2O = c(H2O, res), plot.it = FALSE)
   # Make color-scale diagram for predominant protein activities
   my.filled.contour(e$vals$O2, e$vals$H2O, d$predominant.values, xlab = logfO2lab, ylab = logaH2Olab,
     nlevels = 50,
@@ -548,7 +548,7 @@ evdevH2O6 <- function(pdf = FALSE) {
   TPPG17 <- read.csv(system.file(paste0("extdata/evdevH2O/phylostrata/TPPG17.csv.xz"), package = "JMDplots"), as.is = TRUE)
   LMM16 <- read.csv(system.file(paste0("extdata/evdevH2O/phylostrata/LMM16.csv.xz"), package = "JMDplots"), as.is = TRUE)
   Entry <- na.omit(intersect(TPPG17$Entry, LMM16$UniProt))
-  Hsa <- protcomp(Entry)$aa
+  Hsa <- human.aa(Entry)
   Hsa_Zc <- Zc(Hsa)
   Hsa_nH2O <- nH2O(Hsa)
   # Fly proteome
@@ -561,9 +561,9 @@ evdevH2O6 <- function(pdf = FALSE) {
   Bsu_nH2O <- nH2O(Bsu)
 
   # Phylostrata target proteins
-  gpa <- getphyloaa("TPPG17")
-  PS_Zc <- Zc(gpa$aa)
-  PS_nH2O <- nH2O(gpa$aa)
+  gp_aa <- getphyloaa("TPPG17")
+  PS_Zc <- Zc(gp_aa)
+  PS_nH2O <- nH2O(gp_aa)
   # Biofilm target proteins
   devodir <- system.file("extdata/evdevH2O/devodata", package = "JMDplots")
   biofilm <- read.csv(file.path(devodir, "FOK+21_mean_aa.csv"), as.is = TRUE)
@@ -1000,7 +1000,7 @@ runMaximAct <- function(dataset = "TPPG17", seed = 1:100, nbackground = 2000, re
     if(dataset == "TPPG17") xlab <- "Trigos phylostrata"
     if(dataset == "LMM16") xlab <- "Liebeskind gene ages"
     # Get mean amino acid compositions for phylostrata
-    AA_target <- getphyloaa(dataset)$aa
+    AA_target <- getphyloaa(dataset)
     O2 <- c(-72, -65)
     H2O <- c(-2, 3)
   } else if(dataset %in% c("transcriptome", "proteome")) {
@@ -1154,9 +1154,8 @@ plotphylo <- function(var = "Zc", PS_source = "TPPG17", memo = NULL, xlab = "PS"
     dat <- check_IDs(dat, "Entry")
     # Remove genes with no UniProt mapping 20210718
     dat <- dat[!is.na(dat$Entry), ]
-    # Run protcomp and suppress warning about duplicated IDs 20210718
-    pcomp <- suppressWarnings(protcomp(dat$Entry))
-    AA <- pcomp$aa
+    # Run human without warning about duplicated IDs 20210718
+    AA <- human.aa(dat$Entry, warn.if.duplicated = FALSE)
   } else {
     dat <- memo$dat
     AA <- memo$AA

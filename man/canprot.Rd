@@ -199,7 +199,7 @@ up2 <- dat$Ratio..cancer.normal. > 1
 # Remove two unavailable and one duplicated proteins
 dat <- cleanup(dat, "Entry", up2)
 # Now we can retrieve the amino acid compositions
-pcomp <- canprot::protcomp(dat$Entry)
+aa <- canprot::human.aa(dat$Entry)
 
 # Read another data file
 datadir <- paste0(system.file("extdata", package = "JMDplots"), "/canH2O/colorectal/")
