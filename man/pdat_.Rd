@@ -22,7 +22,7 @@
 \alias{pdat_aneuploidy}
 \alias{pdat_yeast_stress}
 \alias{pdat_fly}
-\title{Get Protein Expression Data}
+\title{Get protein expression data}
 \description{
   These functions are used to retrieve the amino acid compositions of differentially expressed proteins or proteins corresponding to differentially expressed genes.
 }

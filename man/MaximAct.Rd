@@ -2,7 +2,7 @@
 \name{MaximAct}
 \alias{MaximAct}
 \alias{getphyloaa}
-\title{Calculate optimal logaH2O and logfO2 for target proteins}
+\title{Calculate optimal \logaH2O and \logfO2 for target proteins}
 \description{
 Calculate the \logaH2O and \logfO2 that maximize the activities of given target proteins on a proteomic background.
 }

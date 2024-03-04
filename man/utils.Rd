@@ -3,7 +3,7 @@
 \alias{utils}
 \alias{addexif}
 \alias{hyphen.in.pdf}
-\title{Some Utilities for the Package}
+\title{Some utilities for the package}
 \description{
   Utility functions for the package.
 }

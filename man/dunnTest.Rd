@@ -5,7 +5,7 @@
 \alias{dunnTest.default}
 \alias{dunnTest.formula}
 \alias{print.dunnTest}
-\title{Dunn's Kruskal-Wallis Multiple Comparisons.}
+\title{Dunn's Kruskal-Wallis Multiple Comparisons}
 \usage{
 dunnTest(x, ...)
 

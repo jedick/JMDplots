@@ -4,7 +4,7 @@
 \alias{yeast.aa}
 \alias{yeastgfp}
 \alias{yeast.ZC}
-\title{Composition, Localization, and Abundances of Proteins in Yeast}
+\title{Composition, localization, and abundances of proteins in yeast}
 \description{
 Retrieve the amino acid compositions of one or more proteins from \emph{Saccharomyces cerevisiae} and get localizations and abundances reported by the YeastGFP project or locations from the SGD gene associations.
 }

@@ -662,7 +662,7 @@ geo16S4 <- function(pdf = FALSE) {
   # Setup plot
   nsamp <- length(DZc)
   par(mar = c(4, 12, 3, 0.5), las = 1)
-  plot(c(min(DZc), 0.01), c(nsamp + 0.5, 0.5), ylim = c(nsamp + 0.5, 0.5), yaxs = "i", yaxt = "n", ylab = "", xlab = cplab$DZc, type = "n")
+  plot(c(min(DZc), 0.01), c(nsamp + 0.5, 0.5), ylim = c(nsamp + 0.5, 0.5), yaxs = "i", yaxt = "n", ylab = "", xlab = quote(Delta*italic(Z)[C]), type = "n")
   title("Mean differences between oxidized                         ", font.main = 1, line = 1.6)
   title("and reduced sample groups                         ", font.main = 1, line = 0.5)
   # Add line at DZc = 0
@@ -1359,13 +1359,13 @@ geo16S_S3 <- function(pdf = FALSE) {
   phyla[14:15, ] <- phyla[15:14, ]
 
   # Plot first 8 phyla
-  plot(xlim, ylim, xlab = canprot::cplab$Zc, ylab = canprot::cplab$nH2O, type = "n", xaxs = "i", yaxs = "i")
+  plot(xlim, ylim, xlab = cplab$Zc, ylab = cplab$nH2O, type = "n", xaxs = "i", yaxs = "i")
   lwd <- lapply(1:8, function(i) {plotit(phyla$group[i], col = i)} )
   legend("topright", phyla$group[1:8], col = 1:8, lwd = lwd, cex = 0.8, bg = "white")
   label.figure("A", font = 2, cex = 1.5, xfrac = 0.03)
 
   # Plot second 8 phyla
-  plot(xlim, ylim, xlab = canprot::cplab$Zc, ylab = canprot::cplab$nH2O, type = "n", xaxs = "i", yaxs = "i")
+  plot(xlim, ylim, xlab = cplab$Zc, ylab = cplab$nH2O, type = "n", xaxs = "i", yaxs = "i")
   lwd <- lapply(9:16, function(i) {plotit(phyla$group[i], col = i)} )
   legend("topright", phyla$group[9:16], col = 1:8, lwd = lwd, cex = 0.8, bg = "white")
   label.figure("B", font = 2, cex = 1.5, xfrac = 0.03)
@@ -1374,7 +1374,7 @@ geo16S_S3 <- function(pdf = FALSE) {
   phyla <- metrics[metrics$rank == "phylum" & metrics$parent != "Viruses", ]
   phyla <- phyla[phyla$ntaxa >= 18 & phyla$ntaxa <= 60, ]
   phyla <- phyla[order(phyla$ntaxa, decreasing = TRUE), ]
-  plot(xlim, ylim, xlab = canprot::cplab$Zc, ylab = canprot::cplab$nH2O, type = "n", xaxs = "i", yaxs = "i")
+  plot(xlim, ylim, xlab = cplab$Zc, ylab = cplab$nH2O, type = "n", xaxs = "i", yaxs = "i")
   lwd <- lapply(1:8, function(i) {plotit(phyla$group[i], col = i)} )
   legend <- phyla$group[1:8]
   legend <- gsub("Candidatus Thermoplasmatota", "Candidatus", legend)

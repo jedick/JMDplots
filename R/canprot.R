@@ -237,14 +237,17 @@ diffplot <- function(comptab, vars=c("Zc", "nH2O"), col="black", plot.rect=FALSE
   Y_d <- comptab[, iY[1]]
 
   # Figure out axis labels
-  # Only use part before underscore 20191207
-  Dx <- paste0("D", strsplit(vars[1], "_")[[1]][1])
-  Dy <- paste0("D", strsplit(vars[2], "_")[[1]][1])
   if(oldstyle) {
-    # "oldstyle" labels including overbar
-    cplabbar <- cplab
-    cplabbar$nH2O <- quote(bar(italic(n))[H[2]*O])
-    cplabbar$DnH2O <- quote(Delta*bar(italic(n))[H[2]*O])
+    cplabbar <- list(
+      Zc = quote(italic(Z)[C]),
+      DZc = quote(Delta*italic(Z)[C]),
+      # "oldstyle" labels including overbar
+      nH2O = quote(bar(italic(n))[H[2]*O]),
+      DnH2O = quote(Delta*bar(italic(n))[H[2]*O])
+    )
+    # Only use part before underscore 20191207
+    Dx <- paste0("D", strsplit(vars[1], "_")[[1]][1])
+    Dy <- paste0("D", strsplit(vars[2], "_")[[1]][1])
     xvar <- cplabbar[[Dx]]
     yvar <- cplabbar[[Dy]]
     # For oldstyle plots, also get common language effect size and p-value
@@ -253,8 +256,8 @@ diffplot <- function(comptab, vars=c("Zc", "nH2O"), col="black", plot.rect=FALSE
     Y_e <- signif(comptab[, iY[2]], 2)
     Y_p <- comptab[, iY[3]]
   } else {
-    xvar <- cplab[[Dx]]
-    yvar <- cplab[[Dy]]
+    xvar <- bquote(Delta * .(cplab[[strsplit(vars[1], "_")[[1]][1]]]))
+    yvar <- bquote(Delta * .(cplab[[strsplit(vars[2], "_")[[1]][1]]]))
   }
   # Use colnames to figure out whether the difference is of the mean or median
   if(is.null(labtext)) {

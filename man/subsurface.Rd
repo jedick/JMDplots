@@ -1,7 +1,7 @@
 \encoding{UTF-8}
 \name{subsurface}
 \alias{subsurface}
-\title{User-provided compositional data for metagenomes}
+\title{User-provided data for metagenomes}
 \description{
 Metadata for two subsurface metagenomes, used as an example of user-provided data.
 }

@@ -349,7 +349,7 @@ microhum_3 <- function(pdf = FALSE) {
 
   ## Panel B: Community reference proteomes for controls in COVID-19 datasets 20220822
   # Setup plot
-  plot(xlim, ylim, xlab = canprot::cplab$nO2, ylab = canprot::cplab$nH2O, type = "n")
+  plot(xlim, ylim, xlab = cplab$nO2, ylab = cplab$nH2O, type = "n")
   # Colors and point symbols for sample types
   col <- list(oro = col_Oral, naso = col_Nasal, gut = col_Gut)
   col <- lapply(col, adjustcolor, alpha.f = 0.8)
@@ -377,7 +377,7 @@ microhum_3 <- function(pdf = FALSE) {
   ylim <- c(-0.84, -0.60)
 
   # Setup plot
-  plot(xlim, ylim, xlab = canprot::cplab$nO2, ylab = canprot::cplab$nH2O, type = "n")
+  plot(xlim, ylim, xlab = cplab$nO2, ylab = cplab$nH2O, type = "n")
   # Studies are for gut, oral, nasal
   studies <- c("ZZL+20", "CZH+22", "LLZ+21")
   pchs <- c(pch_Gut, pch_Oral, pch_Nasal)
@@ -413,7 +413,7 @@ microhum_3 <- function(pdf = FALSE) {
 
   ## Panel D: Metaproteomes from various body sites 20221114
   # Setup plot
-  plot(xlim, ylim, xlab = canprot::cplab$nO2, ylab = canprot::cplab$nH2O, type = "n")
+  plot(xlim, ylim, xlab = cplab$nO2, ylab = cplab$nH2O, type = "n")
   # Define studies and point symbols
   studies_MP <- c(
     "TWC+22", "MLL+17", # Gut
@@ -481,7 +481,7 @@ microhum_4 <- function(pdf = FALSE) {
   par(cex = 1.2)
   par(mgp = c(2.5, 1, 0))
   startplot <- function(xlim = c(-0.01, 0.01), ylim = c(-0.015, 0.020)) {
-    plot(xlim, ylim, type  = "n", pch = ".", xlab = cplab$DnO2, ylab = cplab$DnH2O)
+    plot(xlim, ylim, type  = "n", pch = ".", xlab = quote(Delta*italic(n)[O[2]]), ylab = quote(Delta*italic(n)[H[2]*O]))
     abline(h = 0, v = 0, lty = 2, col = 8)
   }
   # Colors and point symbols for sample types
@@ -953,7 +953,7 @@ microhum_3_1 <- function(pdf = FALSE) {
     D_nH2O <- Treated$nH2O - No$nH2O
     D_nO2 <- Treated$nO2 - No$nO2
     # Plot D_nH2O and D_nO2
-    plot(D_nO2, D_nH2O, xlab = canprot::cplab$DnO2, ylab = canprot::cplab$DnH2O, xlim = c(-0.03, 0.03), ylim = c(-0.03, 0.015), type = "n")
+    plot(D_nO2, D_nH2O, xlab = quote(Delta*italic(n)[O[2]]), ylab = quote(Delta*italic(n)[H[2]*O]), xlim = c(-0.03, 0.03), ylim = c(-0.03, 0.015), type = "n")
     abline(h = 0, v = 0, lty = 2, col = 8)
     points(D_nO2, D_nH2O, pch = pch, bg = col, col = NA)
     # Plot p-values 20230204

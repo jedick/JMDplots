@@ -319,8 +319,8 @@ canH2O3 <- function(pdf = FALSE) {
   # common elements for both plots
   pl1.common <- list(
     theme_bw(),
-    xlab(canprot::cplab$DZc),
-    ylab(canprot::cplab$DnH2O),
+    xlab(quote(Delta*italic(Z)[C])),
+    ylab(quote(Delta*italic(n)[H[2]*O])),
     geom_hline(yintercept = 0, linetype = 3, colour = "gray30"),
     geom_vline(xintercept = 0, linetype = 3, colour = "gray30"),
     theme(plot.tag = element_text(size = 20), plot.title = element_text(hjust = 0.5))
@@ -373,7 +373,7 @@ canH2O4 <- function(pdf = FALSE) {
   ihyper <- grepl("sorbitol", yeast_stress$dataset)
   ihypo <- grepl("Hypo", yeast_stress$dataset)
   # plot Zc
-  plot(c(1, 7), extendrange(yeast_stress$Zc.diff), xlab = "Time (minutes)", ylab = cplab$DZc, xaxt = "n", type = "n")
+  plot(c(1, 7), extendrange(yeast_stress$Zc.diff), xlab = "Time (minutes)", ylab = quote(Delta*italic(Z)[C]), xaxt = "n", type = "n")
   abline(h = 0, lty = 3, col = "gray30")
   axis(1, at = 1:7, labels = c(5, 15, 30, 45, 60, 90, 120))
   lines(1:7, yeast_stress$Zc.diff[ihyper], pch = 1, type = "b")
@@ -381,7 +381,7 @@ canH2O4 <- function(pdf = FALSE) {
   text(c(2.5, 2.7), c(-0.006, 0.0135), c("hyperosmotic", "hypoosmotic"))
   label.figure("C", xfrac = 0.04, yfrac = 1, font = 2, cex = 1.5)
   # plot nH2O
-  plot(c(1, 7), extendrange(yeast_stress$nH2O.diff), xlab = "Time (minutes)", ylab = cplab$DnH2O, xaxt = "n", type = "n")
+  plot(c(1, 7), extendrange(yeast_stress$nH2O.diff), xlab = "Time (minutes)", ylab = quote(Delta*italic(n)[H[2]*O]), xaxt = "n", type = "n")
   abline(h = 0, lty = 3, col = "gray30")
   axis(1, at = 1:7, labels = c(5, 15, 30, 45, 60, 90, 120))
   lines(1:7, yeast_stress$nH2O.diff[ihyper], pch = 1, type = "b")
@@ -630,11 +630,11 @@ HTmap <- c(
 # function to plot 50 percentile contours / extracted from canH2O2 20191201
 contplot <- function(dat, main, col, xvar = "Zc", yvar = "nH2O", dx = NULL, dy = NULL,
                      labtext = NULL, names = NULL) {
-  xlab <- canprot::cplab[[paste0("D", strsplit(xvar, "_")[[1]][1])]]
-  ylab <- canprot::cplab[[paste0("D", strsplit(yvar, "_")[[1]][1])]]
+  xlab <- bquote(Delta * .(cplab[[strsplit(xvar, "_")[[1]][1]]]))
+  ylab <- bquote(Delta * .(cplab[[strsplit(yvar, "_")[[1]][1]]]))
   if(!is.null(labtext)) {
-    xlab <- substitute(xlab ~ "("*labtext*")", list(xlab = xlab[[1]], labtext = labtext))
-    ylab <- substitute(ylab ~ "("*labtext*")", list(ylab = ylab[[1]], labtext = labtext))
+    xlab <- substitute(xlab ~ "("*labtext*")", list(xlab = xlab, labtext = labtext))
+    ylab <- substitute(ylab ~ "("*labtext*")", list(ylab = ylab, labtext = labtext))
   }
   plot(c(-0.06, 0.06), c(-0.06, 0.06), xlab = xlab, ylab = ylab, type = "n")
   abline(h = 0, v = 0, lty = 3, col = "grey30")

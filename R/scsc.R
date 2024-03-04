@@ -30,7 +30,9 @@ scsc2 <- function() {
   aa <- yeast.aa(gfp$protein)
   # calculate average amino acid compositions 
   for(i in 1:length(names)) {
-    avgaa <- aasum(aa[[i]], gfp$abundance[[i]], average=TRUE, protein=names[i])
+    abundance <- gfp$abundance[[i]]
+    avgaa <- aasum(aa[[i]], abundance, average=TRUE)
+    avgaa$protein <- names[i]
     add.protein(avgaa)
   }
   species(names, "Sce")
@@ -69,7 +71,9 @@ scsc3 <- function() {
   gfp <- yeastgfp(locations)
   aa <- yeast.aa(gfp$protein)
   for(i in 1:length(locations)) {
-    avgaa <- aasum(aa[[i]], gfp$abundance[[i]], average=TRUE, protein=locations[i])
+    abundance <- gfp$abundance[[i]]
+    avgaa <- aasum(aa[[i]], abundance, average=TRUE)
+    avgaa$protein <- locations[i]
     add.protein(avgaa)
   }
   basis("CHNOS+")

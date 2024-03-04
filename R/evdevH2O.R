@@ -1161,7 +1161,7 @@ plotphylo <- function(var = "Zc", PS_source = "TPPG17", memo = NULL, xlab = "PS"
     AA <- memo$AA
   }
   # Use canprot functions (nH2O, Zc) because protcomp no longer returns these values 20201216
-  X <- switch(var, Zc = Zc(AA), nH2O = nH2O(AA), nAA = protein.length(AA), n = NA, Cost = CostAA(AA))
+  X <- switch(var, Zc = Zc(AA), nH2O = nH2O(AA), nAA = protein.length(AA), n = NA, Cost = Cost(AA))
   # Get mean chemical metrics for each phylostratum
   PS <- sort(unique(dat$Phylostrata))
   high.X <- low.X <- cum.X <- mean.X <- numeric()
@@ -1207,23 +1207,6 @@ plotphylo <- function(var = "Zc", PS_source = "TPPG17", memo = NULL, xlab = "PS"
   }
   # return the dat and AA for memoization 20191211
   invisible(list(dat = dat, AA = AA))
-}
-
-# Calculate metabolic cost from amino acid compositions of proteins 20211220
-CostAA <- function(AAcomp) {
-  # Amino acid cost from Akashi and Gojobori (2002)
-  # doi:10.1073/pnas.062526999
-  Cost <- c(Ala = 11.7, Cys = 24.7, Asp = 12.7, Glu = 15.3, Phe = 52.0,
-            Gly = 11.7, His = 38.3, Ile = 32.3, Lys = 30.3, Leu = 27.3,
-            Met = 34.3, Asn = 14.7, Pro = 20.3, Gln = 16.3, Arg = 27.3,
-            Ser = 11.7, Thr = 18.7, Val = 23.3, Trp = 74.3, Tyr = 50.0)
-  # find columns with names for the amino acids
-  isAA <- colnames(AAcomp) %in% names(Cost)
-  iAA <- match(colnames(AAcomp)[isAA], names(Cost))
-  # calculate total of cost values for each protein
-  sumCost <- rowSums(t(t(AAcomp[, isAA]) * Cost[iAA]))
-  # divide by length of proteins to get average
-  sumCost / rowSums(AAcomp[, isAA])
 }
 
 ### Modification of filled.contour.R by Jeffrey M. Dick 20201219

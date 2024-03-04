@@ -158,7 +158,9 @@ importFrom("canprot",
   # moved from JMDplots to canprot 20240301
   "add.cld",
   # moved from chem16S to canprot 20240302
-  "calc.metrics"
+  "calc.metrics",
+  # moved from JMDplots to canprot 20240304
+  "Cost"
 )
 
 # Imports from chem16S
