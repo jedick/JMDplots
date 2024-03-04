@@ -41,7 +41,7 @@ The functions are exported in the package so they are available to user scripts.
   \item{col}{character, line color}
   \item{add.label}{logical, label the plot with MG (metagenome) or MT (metatranscriptome)?}
   \item{maxdepth}{numeric, maximum sample depth (meters)}
-  \item{H2O}{logical, plot \nH2O instead of \ZC?}
+  \item{H2O}{logical, plot \nH2O instead of \Zc?}
   \item{plot.it}{logical, make a plot (use FALSE to return processed data without plotting)?}
   \item{add.title}{logical, add a title to the plot?}
   \item{yline}{numeric, margin position for y-axis label}
@@ -77,15 +77,15 @@ For \code{mplot}, the \code{seqtype} contains the name of the database followed 
 These can be changed to \samp{_MGP} and \samp{_MTP} to indicate protein sequences.
 
 \code{mplot} plots a compositional variable for a particular combination of \code{study} and \code{seqtype}.
-The variable plotted is \ZC by default, but this can be changed to \nH2O with \code{H2O = TRUE} or GRAVY or pI (specified in the \code{var} argument).
-\ZC of both DNA and RNA are plotted, with an offset of -0.28 applied to that of RNA, so that values can be shown on the same scale (see Dick et al., 2019).
+The variable plotted is \Zc by default, but this can be changed to \nH2O with \code{H2O = TRUE} or GRAVY or pI (specified in the \code{var} argument).
+\Zc of both DNA and RNA are plotted, with an offset of -0.28 applied to that of RNA, so that values can be shown on the same scale (see Dick et al., 2019).
 The default value of \code{plottype}, \samp{bars}, specifies a plot with mean values connected by dashed lines and error bars for each sample.
 A polygon plot (shaded area instead of error bars) is made if the first character of \code{plottype} is \samp{#}.
 In this case, \code{plottype} is interpreted as the fill color for the polygon.
 
-\code{mcomp} makes a scatterplot of (\ZC of RNA - \ZC of DNA) vs \ZC of DNA.
+\code{mcomp} makes a scatterplot of (\Zc of RNA - \Zc of DNA) vs \Zc of DNA.
 Set \code{yvar} to \samp{GC} to change the y-axis to GC ratio of DNA.
-(For double-stranded DNA, this should be a linear function of \ZC.)
+(For double-stranded DNA, this should be a linear function of \Zc.)
 
 For \code{pcomp}, \code{seqtype} is just \samp{MG} or \samp{MT}.
 The variables (\code{vars}) are automatically determined based on the values of \code{mout} and \code{pout}.

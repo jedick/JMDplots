@@ -65,9 +65,3 @@ aoscp5()
 ```{r aoscp6, message = FALSE, fig.align='center', out.width='100%', fig.width = 8, fig.height = 5, pngquant = pngquant}
 aoscp6()
 ```
-
-## `r ZC` of ferredoxin, thioredoxin, and glutaredoxin vs midpoint reduction potential (unpublished)
-```{r aoscp99, message = FALSE, fig.align='center', out.width='75%', fig.width = 6, fig.height = 5, pngquant = pngquant}
-aoscp99()
-```
-

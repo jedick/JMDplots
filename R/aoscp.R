@@ -102,7 +102,7 @@ aoscp1 <- function(pdf = FALSE) {
 # histograms of ZC of all human proteins and human membrane proteins
 aoscp2 <- function(pdf = FALSE) {
   # read the HUMAN data file
-  file <- system.file("/extdata/aoscp/ZC_HUMAN.csv.xz", package = "JMDplots")
+  file <- system.file("/extdata/aoscp/Zc_HUMAN.csv.xz", package = "JMDplots")
   HUMAN <- read.csv(file)
   # only take sequences containing at least 50 amino acids
   if("length" %in% colnames(HUMAN)) {
@@ -110,7 +110,7 @@ aoscp2 <- function(pdf = FALSE) {
     ZC.HUMAN <- HUMAN$ZC[i50.HUMAN]
   } else ZC.HUMAN <- HUMAN$ZC
   # read the membrane data file
-  file <- system.file("/extdata/aoscp/ZC_membrane.csv.xz", package = "JMDplots")
+  file <- system.file("/extdata/aoscp/Zc_membrane.csv.xz", package = "JMDplots")
   membrane <- read.csv(file)
   # only take sequences containing at least 50 amino acids
   if("length" %in% colnames(membrane)) {
@@ -391,12 +391,12 @@ aoscp5 <- function(pdf = FALSE, file = NULL) {
     name <- gsub("]$","",unlist(lapply(lapply(strsplit(aa$ref, ")[", fixed=TRUE), rev), "[", 1)))
     # get number of amino acids
     naa <- as.numeric(aa$abbrv)
-    # save the calculated values in ZC_refseq.csv
+    # save the calculated values in Zc_refseq.csv
     out <- data.frame(taxid=aa$organism, name=name, length=naa, ZC=round(zc, 4))
-    write.csv(out, "ZC_refseq.csv", row.names=FALSE, quote=2)
+    write.csv(out, "Zc_refseq.csv", row.names=FALSE, quote=2)
   } else {
-    # read the calculated values from ZC_refseq.csv
-    file <- system.file("extdata/aoscp/ZC_refseq.csv.xz", package = "JMDplots")
+    # read the calculated values from Zc_refseq.csv
+    file <- system.file("extdata/aoscp/Zc_refseq.csv.xz", package = "JMDplots")
     dat <- read.csv(file, as.is = TRUE)
     name <- dat$name
     naa <- dat$length
@@ -510,56 +510,6 @@ aoscp6 <- function(pdf = FALSE) {
   if(pdf) {
     dev.off()
     addexif("aoscp6", "ZC and Topt of different rubiscos and thermodynamic comparison", "https://doi.org/10.1098/rsif.2013.1095")
-  }
-}
-
-# ZC of ferredoxin, thioredoxin, and glutaredoxin vs midpoint reduction potential
-aoscp99 <- function(pdf = FALSE) {
-  # read data
-  file <- system.file("extdata/aoscp/midpoint.csv", package = "JMDplots")
-  dat <- read.csv(file, as.is=TRUE)
-  # add proteins, with start-stop arguments to drop signal sequences
-  aa <- thermo()$protein[0, ]
-  for(i in 1:nrow(dat)) {
-    file <- system.file(paste("extdata/aoscp/midpoint/", dat$id[i] ,".fasta", sep=""), package = "JMDplots")
-    aa <- rbind(aa, read.fasta(file, start=dat$start[i], stop=dat$stop[i]))
-  }
-  # make ferredoxin-thioredoxin reductase dimer (variable chain/catalytic chain)
-  iFTR <- grep("FTR", dat$protein)
-  aa[iFTR[1], 6:24] <- colSums(aa[iFTR, 6:24])
-  aa <- aa[-iFTR[2], ]
-  dat$protein[iFTR[1]] <- paste(dat$protein[iFTR], collapse=":")
-  dat <- dat[-iFTR[2], ]
-  # calculate ZC
-  ZC <- ZC(protein.formula(aa))
-  # use different pch for E. coli and spinach
-  pch <- rep(19, length(ZC))
-  pch[dat$organism=="spinach"] <- 0
-  # start plot
-  if(pdf) pdf("aoscp99.pdf", width=6, height=5, family="Times")
-  par(las = 1)
-  plot(dat$E0, ZC, pch=pch, xlim=c(-450, -100), ylim=c(-0.28, -0.04),
-    xlab=expression(list(italic(E)*degree*"'", mV)),
-    ylab=expression(italic(Z)[C]))
-  # add dashed lines
-  lines(dat$E0[dat$organism=="ecoli"], ZC[dat$organism=="ecoli"], lty=2)
-  lines(dat$E0[dat$organism=="spinach"], ZC[dat$organism=="spinach"], lty=2)
-  # add labels
-  pos <- numeric(length(ZC))
-  pos[dat$organism=="ecoli"] <- 4
-  pos[dat$organism=="spinach"] <- 2
-  dx <- dy <- numeric(length(ZC))
-  dx[dat$protein=="DsbA"] <- -10
-  dy[dat$protein=="DsbA"] <- -0.012
-  dx[dat$protein=="DsbC"] <- -20
-  dy[dat$protein=="DsbC"] <- -0.012
-  text(dat$E0+dx, ZC+dy, dat$protein, pos=pos)
-  # add legend
-  legend("bottomright", pch=c(19, 0), legend=c(expression(italic("E. coli")), "spinach"))
-  # done!
-  if(pdf) {
-    dev.off()
-    addexif("aoscp99", "ZC of ferredoxin, thioredoxin, and glutaredoxin vs midpoint reduction potential", "Dick (2014) (unpublished)")
   }
 }
 

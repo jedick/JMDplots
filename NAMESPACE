@@ -14,7 +14,7 @@ export(
   # Nif-encoding genomes 20191015
   "NifProteomes",
   # aoscp paper 20191018
-  "aoscp1", "aoscp2", "aoscp3", "aoscp4", "aoscp5", "aoscp6", "aoscp99",
+  "aoscp1", "aoscp2", "aoscp3", "aoscp4", "aoscp5", "aoscp6",
   "yeast.aa", "yeastgfp", "yeast.ZC",
   # scsc paper 20191019
   "scsc2", "scsc3",
@@ -91,16 +91,16 @@ export(
   "calc_carrollite", "add_Co_aqueous", "carrollite_5", "carrollite_8",
   "carrollite_S3", "carrollite_S4", "carrollite_S5", "carrollite_S6",
 
-  # Moved from canprot 20240226
+  ## Moved from canprot 20240226
   "pdat_colorectal",
   "pdat_pancreatic", "pdat_hypoxia",
-  # 20191226-20191230
+  ## 20191226-20191230
   ".pdat_multi", "pdat_secreted", "pdat_breast", "pdat_lung", "pdat_prostate", "pdat_3D",
-  # 20200402, 20200411
+  ## 20200402, 20200411
   "pdat_liver", "pdat_glucose",
-  # 20200414
+  ## 20200414
   "mkvig",
-  # 20200418
+  ## 20200418
   ".pdat_osmotic", "pdat_osmotic_bact", "pdat_osmotic_euk", "pdat_osmotic_halo",
   "check_IDs", "cleanup", "get_comptab", "diffplot", "qdist",
   "xsummary", "xsummary2", "xsummary3"

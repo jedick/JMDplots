@@ -44,7 +44,7 @@ The default arguments correspond to the example calculation discussed in the pap
 
 The files described below correspond to Tables S1 and S2 in the supporting information for the paper.
 \code{mjenergy_Table_S3} outputs the amino acid synthesis reactions that are listed in Table S3.
-\code{mjenergy_Dataset_S1} outputs the UniProt accession number, elemental composition, sequence length, and \ZC for each protein in the \emph{Mj} proteome.
+\code{mjenergy_Dataset_S1} outputs the UniProt accession number, elemental composition, sequence length, and \Zc for each protein in the \emph{Mj} proteome.
 Use \code{mjenergy_Dataset_S1(write.csv = TRUE)} to instead save the results in a file named \samp{Dataset_S1.csv}, which corresponds to Dataset S1 in the paper.
 
 Use \code{mjenergy3(write.csv = TRUE)} to save the affinities (MJ / mol protein) in two files named \samp{Dataset_S2.csv} and \samp{Dataset_S3.csv} for Rainbow and Endeavor vent fields.

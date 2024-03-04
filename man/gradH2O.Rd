@@ -39,15 +39,15 @@ This table gives a brief description of each function.
 \tabular{ll}{
   \code{gradH2O0} \tab Number of reactions for each amino acid in \emph{E. coli} metabolic reconstruction (no plot) \cr
   \code{gradH2O1} \tab Comparison of different sets of basis species \cr
-  \code{gradH2O2} \tab Schematic of \nH2O and \ZC calculations \cr
-  \code{gradH2O3} \tab \nH2O-\ZC scatterplots for redox gradients and the Baltic Sea \cr
+  \code{gradH2O2} \tab Schematic of \nH2O and \Zc calculations \cr
+  \code{gradH2O3} \tab \nH2O-\Zc scatterplots for redox gradients and the Baltic Sea \cr
   \code{gradH2O4} \tab \nH2O for Baltic Sea metagenome and metatranscriptome in different size fractions \cr
-  \code{gradH2O5} \tab \nH2O-\ZC for freshwater, marine, and hypersaline environments \cr
-  \code{gradH2O6} \tab \nH2O-\ZC and GRAVY-pI plots for Baltic Sea and Rodriguez-Brito et al. data \cr
+  \code{gradH2O5} \tab \nH2O-\Zc for freshwater, marine, and hypersaline environments \cr
+  \code{gradH2O6} \tab \nH2O-\Zc and GRAVY-pI plots for Baltic Sea and Rodriguez-Brito et al. data \cr
   \code{gradH2O7} \tab Differential gene and protein expression; time-course experiments and NaCl or organic solutes \cr
 }
 
-\code{NifProteomes}, which is used in \code{gradH2O3}, calculates the mean and standard deviation of \ZC and \nH2O for proteomes encoding different homologs of nitrogenase (Nif-D, Nif-C, Nif-B, or Nif-A), as listed by Poudel et al. (2018).
+\code{NifProteomes}, which is used in \code{gradH2O3}, calculates the mean and standard deviation of \Zc and \nH2O for proteomes encoding different homologs of nitrogenase (Nif-D, Nif-C, Nif-B, or Nif-A), as listed by Poudel et al. (2018).
 The organisms are limited to those that have at least 1000 RefSeq protein sequences, and any duplicated organism names are removed.
 }
 
@@ -62,7 +62,7 @@ The organisms are limited to those that have at least 1000 RefSeq protein sequen
       This is used in \code{gradH2O0}.
     }
     \item{\code{AAbasis.csv}, \code{AAbasis.R}}{
-      Slopes and R-squared values for linear models of \nH2O-\ZC and \nO2-\ZC for all combinations of basis species including \H2O, \O2, and 3 amino acids or \H2O, \O2, 2 amino acids, and acetic acid.
+      Slopes and R-squared values for linear models of \nH2O-\Zc and \nO2-\Zc for all combinations of basis species including \H2O, \O2, and 3 amino acids or \H2O, \O2, 2 amino acids, and acetic acid.
       \code{AAbasis.R} is the script used to make the CSV file.
     }
   }

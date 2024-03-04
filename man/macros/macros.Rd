@@ -1,5 +1,5 @@
 % extracted from CHNOSZ's macros.Rd 20190929
-\newcommand{\ZC}{\ifelse{latex}{\eqn{Z_\mathrm{C}}}{\ifelse{html}{\out{<I>Z</I><sub>C</sub>}}{ZC}}}
+%\newcommand{\ZC}{\ifelse{latex}{\eqn{Z_\mathrm{C}}}{\ifelse{html}{\out{<I>Z</I><sub>C</sub>}}{ZC}}}
 \newcommand{\logK}{\ifelse{latex}{\eqn{\log K}}{\ifelse{html}{\out{log<i>K</i>}}{log K}}}
 % 20190930
 \newcommand{\nH2O}{\ifelse{latex}{\eqn{n_{\mathrm{H_{2}O}}}}{\ifelse{html}{\out{<i>n</i><sub>H<sub>2</sub>O</sub>}}{nH2O}}}
@@ -35,7 +35,7 @@
 \newcommand{\S}{\ifelse{latex}{\eqn{^{#1}}}{\ifelse{html}{\out{<sup>#1</sup>}}{^#1}}}
 % To get mu in LaTeX 20220621
 \newcommand{\umol}{\ifelse{latex}{\eqn{\mu}mol}{\ifelse{html}{\out{&mu;mol}}{μmol}}}
-% For more recent papers (canprot::ZCAA() renamed to canprot::Zc()) 20230617
+% \ZC changed to \Zc (and canprot::ZCAA() renamed to canprot::Zc()) 20230617
 \newcommand{\Zc}{\ifelse{latex}{\eqn{Z_\mathrm{C}}}{\ifelse{html}{\out{<I>Z</I><sub>C</sub>}}{Zc}}}
 % 20240206
 \newcommand{\Cp}{\ifelse{latex}{\eqn{C_P}}{\ifelse{html}{\out{<I>C<sub>P</sub></I>}}{Cp}}}

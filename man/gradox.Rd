@@ -25,8 +25,8 @@ Plots from the paper by Dick et al. (2019).
 
 \arguments{
   \item{pdf}{logical, make a PDF file?}
-  \item{mout}{list, value returned by \code{gradoxS1} (DNA \ZC)}
-  \item{pout}{list, value returned by \code{gradoxS2} (protein \ZC)}
+  \item{mout}{list, value returned by \code{gradoxS1} (DNA \Zc)}
+  \item{pout}{list, value returned by \code{gradoxS2} (protein \Zc)}
   \item{maxdepth}{numeric, maximum sample depth (meters)}
 }
 
@@ -34,13 +34,13 @@ Plots from the paper by Dick et al. (2019).
 This table gives a brief description of each function.
 
 \tabular{ll}{
-  \code{gradox1} \tab Some general characteristics of \ZC of DNA, RNA, and proteins \cr
-  \code{gradox2} \tab Selected plots of metagenomic DNA, RNA, and protein \ZC \cr
-  \code{gradoxS1} \tab All plots of DNA and RNA \ZC \cr
-  \code{gradoxS2} \tab All plots of protein \ZC \cr
-  \code{gradox3} \tab \ZC of proteins vs DNA (metagenomes and metatranscriptomes) \cr
+  \code{gradox1} \tab Some general characteristics of \Zc of DNA, RNA, and proteins \cr
+  \code{gradox2} \tab Selected plots of metagenomic DNA, RNA, and protein \Zc \cr
+  \code{gradoxS1} \tab All plots of DNA and RNA \Zc \cr
+  \code{gradoxS2} \tab All plots of protein \Zc \cr
+  \code{gradox3} \tab \Zc of proteins vs DNA (metagenomes and metatranscriptomes) \cr
   \code{gradox4} \tab Thermodynamic calculations of relative stabilities along redox gradients \cr
-  \code{gradox5} \tab \ZC of reads classified to selected abundant species \cr
+  \code{gradox5} \tab \Zc of reads classified to selected abundant species \cr
 }
 }
 
