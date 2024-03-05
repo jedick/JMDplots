@@ -1,5 +1,6 @@
 # JMDplots/vignettes/mkall.R
-# Process all vignettes and move html files to ../inst/doc
+# This script compiles all the vignettes and moves them to inst/doc
+# so they will be installed when the package is installed from GitHub
 # 20200802
 
 files <- dir(pattern = "Rmd")

@@ -1,0 +1,1438 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+
+
+<title>Hyperosmotic Stress in Bacteria</title>
+
+<script>// Hide empty <a> tag within highlighted CodeBlock for screen reader accessibility (see https://github.com/jgm/pandoc/issues/6352#issuecomment-626106786) -->
+// v0.0.1
+// Written by JooYoung Seo (jooyoung@psu.edu) and Atsushi Yasumoto on June 1st, 2020.
+
+document.addEventListener('DOMContentLoaded', function() {
+  const codeList = document.getElementsByClassName("sourceCode");
+  for (var i = 0; i < codeList.length; i++) {
+    var linkList = codeList[i].getElementsByTagName('a');
+    for (var j = 0; j < linkList.length; j++) {
+      if (linkList[j].innerHTML === "") {
+        linkList[j].setAttribute('aria-hidden', 'true');
+      }
+    }
+  }
+});
+</script>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+
+
+<style type="text/css">
+  code {
+    white-space: pre;
+  }
+  .sourceCode {
+    overflow: visible;
+  }
+</style>
+<style type="text/css" data-origin="pandoc">
+code.sourceCode > span { display: inline-block; line-height: 1.25; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+
+</style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    var j = 0;
+    while (j < rules.length) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") {
+        j++;
+        continue;
+      }
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' && rule.style.backgroundColor === '') {
+        j++;
+        continue;
+      }
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
+</script>
+
+
+
+
+<style type="text/css">body {
+background-color: #fff;
+margin: 1em auto;
+max-width: 700px;
+overflow: visible;
+padding-left: 2em;
+padding-right: 2em;
+font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+font-size: 14px;
+line-height: 1.35;
+}
+#TOC {
+clear: both;
+margin: 0 0 10px 10px;
+padding: 4px;
+width: 400px;
+border: 1px solid #CCCCCC;
+border-radius: 5px;
+background-color: #f6f6f6;
+font-size: 13px;
+line-height: 1.3;
+}
+#TOC .toctitle {
+font-weight: bold;
+font-size: 15px;
+margin-left: 5px;
+}
+#TOC ul {
+padding-left: 40px;
+margin-left: -1.5em;
+margin-top: 5px;
+margin-bottom: 5px;
+}
+#TOC ul ul {
+margin-left: -2em;
+}
+#TOC li {
+line-height: 16px;
+}
+table {
+margin: 1em auto;
+border-width: 1px;
+border-color: #DDDDDD;
+border-style: outset;
+border-collapse: collapse;
+}
+table th {
+border-width: 2px;
+padding: 5px;
+border-style: inset;
+}
+table td {
+border-width: 1px;
+border-style: inset;
+line-height: 18px;
+padding: 5px 5px;
+}
+table, table th, table td {
+border-left-style: none;
+border-right-style: none;
+}
+table thead, table tr.even {
+background-color: #f7f7f7;
+}
+p {
+margin: 0.5em 0;
+}
+blockquote {
+background-color: #f6f6f6;
+padding: 0.25em 0.75em;
+}
+hr {
+border-style: solid;
+border: none;
+border-top: 1px solid #777;
+margin: 28px 0;
+}
+dl {
+margin-left: 0;
+}
+dl dd {
+margin-bottom: 13px;
+margin-left: 13px;
+}
+dl dt {
+font-weight: bold;
+}
+ul {
+margin-top: 0;
+}
+ul li {
+list-style: circle outside;
+}
+ul ul {
+margin-bottom: 0;
+}
+pre, code {
+background-color: #f7f7f7;
+border-radius: 3px;
+color: #333;
+white-space: pre-wrap; 
+}
+pre {
+border-radius: 3px;
+margin: 5px 0px 10px 0px;
+padding: 10px;
+}
+pre:not([class]) {
+background-color: #f7f7f7;
+}
+code {
+font-family: Consolas, Monaco, 'Courier New', monospace;
+font-size: 85%;
+}
+p > code, li > code {
+padding: 2px 0px;
+}
+div.figure {
+text-align: center;
+}
+img {
+background-color: #FFFFFF;
+padding: 2px;
+border: 1px solid #DDDDDD;
+border-radius: 3px;
+border: 1px solid #CCCCCC;
+margin: 0 5px;
+}
+h1 {
+margin-top: 0;
+font-size: 35px;
+line-height: 40px;
+}
+h2 {
+border-bottom: 4px solid #f7f7f7;
+padding-top: 10px;
+padding-bottom: 2px;
+font-size: 145%;
+}
+h3 {
+border-bottom: 2px solid #f7f7f7;
+padding-top: 10px;
+font-size: 120%;
+}
+h4 {
+border-bottom: 1px solid #f7f7f7;
+margin-left: 8px;
+font-size: 105%;
+}
+h5, h6 {
+border-bottom: 1px solid #ccc;
+font-size: 105%;
+}
+a {
+color: #0033dd;
+text-decoration: none;
+}
+a:hover {
+color: #6666ff; }
+a:visited {
+color: #800080; }
+a:visited:hover {
+color: #BB00BB; }
+a[href^="http:"] {
+text-decoration: underline; }
+a[href^="https:"] {
+text-decoration: underline; }
+
+code > span.kw { color: #555; font-weight: bold; } 
+code > span.dt { color: #902000; } 
+code > span.dv { color: #40a070; } 
+code > span.bn { color: #d14; } 
+code > span.fl { color: #d14; } 
+code > span.ch { color: #d14; } 
+code > span.st { color: #d14; } 
+code > span.co { color: #888888; font-style: italic; } 
+code > span.ot { color: #007020; } 
+code > span.al { color: #ff0000; font-weight: bold; } 
+code > span.fu { color: #900; font-weight: bold; } 
+code > span.er { color: #a61717; background-color: #e3d2d2; } 
+</style>
+
+
+
+
+</head>
+
+<body>
+
+
+
+
+<h1 class="title toc-ignore">Hyperosmotic Stress in Bacteria</h1>
+
+
+
+<p>This vignette from the R package <a href="https://github.com/jedick/JMDplots">JMDplots</a> version 1.2.19-9 shows chemical metrics for proteins that are differentially expressed in hyperosmotic compared to control conditions. The analysis is described in more detail in a paper (<a href="https://doi.org/10.5194/bg-17-6145-2020"><span title="Uncovering chemical signatures of salinity gradients through compositional analysis of protein sequences">Dick et al., 2020</span></a>). Abbreviations:</p>
+<ul>
+<li><i>Z</i><sub>C</sub> – average oxidation state of carbon.</li>
+<li><i>n</i><sub>H<sub>2</sub>O</sub> – stoichiometric hydration state per residue (<a href="https://doi.org/10.5194/bg-17-6145-2020"><span title="Uncovering chemical signatures of salinity gradients through compositional analysis of protein sequences">Dick et al., 2020</span></a>) computed using the QEC basis species (glutamine, glutamic acid, cysteine, H<sub>2</sub>O, O<sub>2</sub>).</li>
+<li>pI – isoelectric point; GRAVY – grand average of hydropathicity.</li>
+<li><i>n</i><sub>AA</sub> – protein length; MW – molecular weight per residue.</li>
+</ul>
+<style type="text/css">
+body {
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+</style>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a>datasets &lt;-<span class="st"> </span><span class="kw">pdat_osmotic_bact</span>(<span class="dv">2020</span>)</span></code></pre></div>
+<p>Differences are calculated as (median value for up-regulated proteins) - (median value for down-regulated proteins). Dashed lines enclose the 50% confidence region for highest probability density.</p>
+<p><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAA2AAAAMACAMAAAB1uPTMAAAACXBIWXMAAA7DAAAOwwHHb6hkAAAARVBMVEX///9wcXHj4uKXl5jw9fWAgIElJkEVFBZOTk+tra2/v7/Q0NFgX18OSJa79v7/+tnJfDFNFhP2umyMQhCBy/f85qI6h9JgObKCAAAgAElEQVR42uydiXbiOBBFbW2lDTDr/3/qaLHB6bEMGJMY/O456SQ9Ax04upGqVCpVFQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAP8QZMCsCYwr00EqDGSGDMQX6gmFA4P0EXzkgmGPTHywY3k8AwcqCSCJF5N3ExxuO9xNAsBKW6qgW41RPTM5YvJ8AgpXmHwp+7JwTldAe7yeAYPNGX+SqXUOBzVaoSYs9xGAAgpXwsqoadaqq83EjHE3ZOkIMBiBYafYJSp3pFL88y+20HwExGIBgBayKE9i2+5bXeD8BBJsP44Ngm+vC0GjEYACCzSiY/jGDTRIMMRiAYKX4KSwRDzkGq8I8JqcsERGDAQhWImbp92mNeFCnSlm8nwCCzYgMQdhhrzj3dKmMmvIUiMEABCvaETeXd1LrelsxmjSBIQYDEKwII9l+ZWmaKYjBAAQbMUwr6ZgzX3dAEYKBvx0QxmulOausVxS+mHrCHjEYgGADepHm1hp/XSJOfiLEYACC/QvvMhpM69e6wyAGAxDs//PXbWHnPd5PAMHmROT5izlx+2bycyEGAxDsnwViLDo875VOZVKTShARgwEINvZv7Y6XWCC1zafCEIMBCDYbysUJ7GKt2ccpjBzeTwDB5iOmOOIKMXBqfUMMBiDYbDOYjYJFt1jn24wx2Et9TCEY+PwBUcfd5UYZm05bOnrluf6JwZzPfUwZBAOrFSz3jzr4WESfW0s9AbNBHhtWl8rEz76WvRWmJBnVYpI4BAOrjRl87+yyfSaJaMPsFMVixlobHicMl7WNlSFaGlFJ1c1cTEkIBtYqmLgNf/vYPrMwdXyMcGI4BnNGamvpFn4xshAMrFSwMMHoXMxRP+YBCzOUuxuDKSNJeZ1XntMOSEMw8B0DgisKYRTV97MR9tFeOClb0hDZY+pU9bfbaxAM/PGAYNa4R0Qc71nf2wdLjUtZ2sSO86PnEAz83nBuB+LZftSAkPrOErK3D5ay/zse1ohUU1guSggGfonznkilBoS9TrpfMSB6MVgy6qgsi5vYRmkIBn6J3VFxc6TLRwkm/JNl9ty3NcRNqtIPr4hBMPArE1iK+tO4+xjBHPlHNsh6MRiLO2oNaXU5htlaEKu0dhAMvJ9DbgAfDfsUwdyDbab6tYipJiQe49yFj9jUtOJUCwgG3h+CpfhLNOr0KYI9WiXf3wfrby7bXELMvIFg4O00Kf5K17V+WZLjB7fupfyPCzkg2LoQzaVdLO4/QbD68XtWfs50TinumOOqf8ZMKAfBwB+zpAEh1eOB07/nwUzsY+p/Tl/mD2rrIdjKYEZKyZ34gAFhnjmB+VBPDqY0BANv5HykTN5tXvaAmLCiY9aOPkhwCAbex+6oTOpB6I50+q4BEWMwE7vb0yOFwxAMvGUCu12E3Gy+a0AYLrTqjr6MvgbNIRh4D4fPEcw9WUHorLqmHO2oYY4kBAPvmcH2p+ti8fJz1HWohQwI9ew8U/u+Q2OrRKZqCAbeQhN7VhjD6/1tLksjUnVQvYgf9OlzyKmBTtzlO+vtvQ004SEYeNMiUeckotwW/geSi/g5ny7A8LnP/SlPzYyW8oZDsNUhGBvZv12GYOzpeTSf+jqotsbybp8ADsHAG9mV9osWMoM9H7Pl19NtP9w7AF3pGoKBNy4VS8W+HytYGsjn/f7S921kHv+lhokQDDPY8gSTzx/e0jFxEQKwNlF6v8pKKA7BwO9nFxYg2JQu9TymHUMA5ppYBfZIEpI5CAbmTx/cKfZdgmD1hJ8h3kC7MzrVSunF7OZBsJVxv9h3CYJNucdIGGKceHyk4PTgFGgYBANzRl73i30XIJidcqbE8KAVS8s+4ZV+bCuZKwHBwIwT2P1axCXMYFNGvbM2rA2PG2dqqoV4cI3oPQQD83H4DMH+p85DK7nglNmHGCzdDGYfWyS+P5UIwVY1gxWLfZcqGPNBGUX3JySRr3zYVC4nB9VjtVYMgoEZKRX7Lkmw/mUNJt9UGRtg31k3mrTaa9Re0Sa+NLmQXxQQbGWLxOUX+/ZyiJzC+tCm2/Tu9c926bbM2FL1nIo5+MOlUAKCgVlTCMsu9nW3PWJG7rxXKm8q3LvDIRmVSn2PMbyUDwv23j0zCAaWJVjPDC9z1LiLExOjeCFRXQqthNFVm7pJfzx+K5gjBsHAagTj1womQaJNy4jjRkhS3BipCmW8hkdPmhB/pfyNeMIaqSEYWI1gN6y65j0PSmnu27zH4JB1Np5ibuji0uUxz0gjlIVgYH2CxUVfJxjpWOCRSihd4bSzCOY1l4P2p+uVDwtIc0AwsCjB7G2025tgcVYyerdPuc/BUnnBeu2i/vzKBwgGFipYL8SKW8fd8S61rWR9UCYZNpT3i73pmSZpnS3GaSOJDgbBwBoEE/0SpxAbZcHO8dYlZY6kk27cD8Vg6c9aq3KmsQzXEAysQTCjfw778/5ijCTaxoVhV0pp9fxeWwgGViDYz7OWSp51wEsd1ovuKphTgzHYS2IrCAZWINjPwnmm8gXoTqXkfCeY0cMx2EyxHwQD35vk+Gde8lQbZyWl8d8JNtRSwL24xntXqh6CgQULFiYxGdMWuRDxTJd0Ypnc57yfEAwsSDBTUIclp3ZNyiLWQ8eQ78RgzPB7DTgYBAPfLlixaMncZq3hm5tHYzCjSHtN4yVR76n5hWBgOYKJ8kF/Q7kbqdVqUISRGKy7mS88x9gZFi8hGPhuwczIBldqHqCJns8W5hZTOyeCaiNNbhxBMPDdgo2f8xfWlOOocgyWqzTO+3hqc7Tb1Fsy9RAMLEcwNj1ZXozB2pxjm+K3IxvKlkEw8NWCvUAxBsvLzl3TFgr/doofgoGvEOzOsvOs20JhP7nig1ljBQQDnyuYfKEaoxiD1dmorgpkLMyzIzLETL8OHw6CgU8V7JUsQzEGa+uqrmVWIzNYOYnZZfoFfzaLCcHWBnPWlm8v+kvBXrq5vBeDuTq2fvTtyG4Pj3WCjW02l38AFTfQdnGFyJ5stg3BVsWu2efrizYLbDw606nHmqSLPbGVZtka0RNsXOJSMUduodPEY59t1RYEA0MrnSYWpztn+V4t7/oi+cpYvMZg+tpkW2ZfUsvfTrDx9qWFq9NZeqLzvk6/lp77PQDB1sTnXf7wdAxW65tOkjg3gqU+b2ef/mb8QrDCPlxeZR42bZNGEhAMDPKR1xc9FYPlySa9UBcvk601eduWMcab+SbtJafUfvyVlN80bSEYGJ7BbgvD4+IEm+XIY9t4OwhmiKd22kKS8VRzw8Of5X/DybrmbESS+N7lX1DeQDAwnOM4Ku6YEMws8ArZ10oB2xisTRIeVDrfkldzlizjXntenr6sUjUPBg4nMJJRjbLWpItbNAQDJcOaxV6Czl4rZm9jsDYPeFC5TVT+1tx7atm243Y02Jc7Tovxmhel9/H2lqfSiBBsbYo5w81IWeufCcZfuy65jcE6wUjvjqfcsDSs6/T43hUPodnhlCQf7MsdD7Lk1WFMc9infhNAsLWx1I3meUZit0RMfeqrc5ypm83oObM2MZLyF4KCPgPvjeZt1jV+0hyCgRLL3WiWryU52hisS3JQmLk224aaS3RifPmZiqk6wQb9cWRyqXB40lpXEAyU/FryRvMcMViXpg+CheUcbdrNq/H6DdcKdo53kw3OdrYrQWTPZvoh2Jr44o3mrhax3WgOglVHTaez4hsx1uujawQSBMuXOw/Pdk4raex4ph+CrZ4FbzTzuZ4ol0rFnP+R1HZ3jNaMNrNnrWDZr6KMVurRTD8EAwveaDavFvrezoOlYl/pudrvN/lmsfFTlu0MpoJfTr68XQDB1kxxo9nRFc0q7n/9w/sXn0Pefu5YI0Wx/dT1v4Uoa+SxJMPnI3klla+40rO+Ngi2LsNKG82iI81g4tc/iE18rIhbDqKNwbq/E/FkJOu+z9W+5eeQMa4KS+ZGxdaIse/UjK8Ngq0MsciN5ok3frF0tJLqoZfDu6IMc+8QcjrhFQT7j70zW1MbhqFwvMobhHXe/1Eb2QHCEiAhi5voXLSdfm0JU//Iko+l8lj9laHnGBFgpAwA6zfdSwDDCrtnFRjP/0LyFzL47HFE3yI6OUo4uaG7ThFg69QBNjKnIkcfqeuRlAfxqidHdMj7r0itT9HU4JMuCbB16qxE8Z8D5oBXmzosy5wwzfqJDG8gMLw7NnjvUQKMND9goQ8d2uJxuZT+uNn+3s+DWyXsCFP4CLC1KUOzb7dL+Ndt4cWPEo/Ph8idDCfASD8pz65SvcKPYDVg/IjppAk/PwYfY7wKAbYmZdpVqtcixA6iKQdL9/h/B0wEAoz0W2kjT7Ov6ZP74CUTfBeS7/DDgv3+3NoSYKSftKSuUhhv0sdE/NH87hY2BQFG+i2C5dxVqkfGdANMgsjzMQmwNSnLrlKyZ/2vilmxTM/RMK+MI8BI8xOWYVepvrUFD74ucmAjmp8r7NwTYKQBEMvB7Ms9H2AJ2muPNQvulZtRCqNBs+/IMYIAI42v8QFDC7yG6yi7XqfMSQ6M5ZJXGPlX88EsBOu5U/BNldKDJMBICwDMJgu8FJAaQP10l1ng3cq4hp9nNKuLuUOyLzaQYaT3TYCRJgXMXj1NMpkvRsp9qhfi5fG0MzhVRX285MVHCmAEGGlSwJrj66QeMO15zMFk9ULlUf+5I579fU6weEGAkf5/wHAA3gGNkLu/13kPd67XWn/MwXDnWeJhX3SvOD3X95MAW56io9eccgQsVjSin+RYzym5u8clVfXgGvpEtsccLIj6HDodRn/IwjgBRvpau41Dg942Q8Bi740bYILdTbPzEHz6U/rnFY9N6hNgsd2hfnsO7YAAI32rs4lo7f4yBCweKt8As6ZZpPe32UGq88HxYw6GnThKvMhyiJ6V90YPbQkw0rc6JJfheZMhYPYBsNBIjmRzNpfqWrx/zMFwYZdHow38yU9bRDFihkaALS+CpXY2hxwBizwhYKlPtVKC3ZZ5xdQBi+plwHENHb2FjzlYbbYvk2eEf57+QICRvqxxxEtfrRe+ZgUsRpLyqM3mmDIjKe+ypljyixFOsd9eiIO3an9pnfX+GJkXBBipwx5xr0O9M8oOMIV7ROm9xPPluyaf1yEnaffoO27bHnMwr8GwvU59otxYx8gE2DpjmBWi765nZMCah8v+bmuWdnFV9ErXrmXHwt5DDmZBmCD9VmKnQ/tuvykdAUbqrGgR2m2zA6yi6vICONSOmwfAqp3tLu7runaguc/B0JAlAwgZHcFv8zkVCDBS50KHKs5hmyNgFVOgPPciLvvmRjAV+nYpO/vNAyyhPk+Lvv23+0MPnAAjdd4kVvHrHEKOgFXrnmnQaeE1MUpDvM77dEIeOro57nKwGJXOR4DNycu3a1zqkQEgwBYawnCWgcgTsIaat5lrZ6L3jS965mDxlHn/J+NJ89tg6EJBgJE6fpjXyrHI8QhYsxjPzMtaSPccLBZIYrE//sBhxv8MAmxxOtRtNzYyf8DuPxjMpXe1/+0p+BWwWJGUBBhpYMY2vf/qrG3bFF7yd8JA91XZzMG+jmDBE2CkcQBr20HO2xcR+2voIHrE3rscDL7LwcQEt8QIsFUBVrK9Zslsn8UAPjfYq92dgzFM7WIVEd9r23VmN3KFngBbHWDlEUJIcx8yAWyUdtXVppA3OXr9TiVMsfYJsDUVOWLOX8YuFXkANlyB796LKG43Nnmrj2OSXsAE2PLEk14AlIY/RMLyAKwYzIX74EW8DlsWMzetJ8DWpHr4AxKWCWB6qDDyeB/Maq2EYKBbCoWOE2CkoVWRdSFsnwdgbLyXcyow5Vv3pp4AI/WIUSwo2/7hfK6nFpU7yAOwl/3UpBXCdowwstOfH7QlIwG2Ir720T4O+uN15rJlQU59Dva80DkDw1i4Nq/vlYN9WvahIMBI3ZWcC9XmqN0nxb1zvr20MPsAPg9M9ihP+E7J3HRvkgBbWBXjvYE+9iSNNfxtdoBxK6yvkqNqRTphS7HluU6tJMBWK/m+G6LcAbPeeyf2OpcJlzatQG/AhFDtbyuoqqdkunrALpchO+RgXBJgpJ4RLMDGv0vRLli1Np2aHLBktBCQDIgCNI8t3XAubJfWUt/nYBwcAUbqCZiJJQ7W0vPmcNtB7rIZgo7zIITmZUwMgxBQ9247dTJ6fJ2DST3pOyTAlqbSibBvKcKfbxvDYzaAcfDoHUzwa18wcwWsGMGOO10BkQBbcC72emGWRy08l5LbI+SSg1W7O4d9QRNgFVESELC4RSy0//EdP+M8LV8E2CLlQkuGVe5qJ3BbjWOWKqLEQFUBxr1EotheK2Y6RjCbacWRAFteHsb2b/oFlN4K+2TE4+EiYNM/sUesDjrovca7W9ZYZc8du2l8l4NxAoz0WwamKrqY23VsyCHFRXMA5owWxQH+cN6QwaPma4P6gfdzM7TQJsCWRJc1AMHJ9tteVx0y8SLWEYyDOqRbatoWbg+MYam+iyP3mxzMT1qgJ8CWpgOAsQmbj4CdlcgpB5Nc19dAPXjFzrG3fqeC+hc5GIcZFjsBtiTAzKXV6G7Tdy80i1WqWoVylwArLNRxxnXarX6Rg81SByHAFiQXLjFs93+ZfZ2WmHTJePytqm2uEEzDIpYmAbbILKwVsEzNvsEUh83WhN0fDjXigjHVMV36lINJT4CRhtAZ64ht95UzNPum5W/w9pdkIETPwPVh/yeNIsBIQzEW2qxSGZp9a4kqgbQigO4Zad7nYHJigxQBttIySI5m3wsDloUQe2iMcBqs5+KLAFtXaMvR7Pu8JvvM7Hqfg83noyLA1qQ8zb7P+ZTpfpeZvIikHAjL0uz7OqPqNuCsPQdzgQAjTZfqvDT7DgYYjkcxYZBFJSC4Qf4ZS4CRpk3F2HYkwHDAl+s34OsVrPr76yotOZhk2hcEGGlSHfQ4gN1GVLqBGkLhLpGJbyhrycEkkwUBRloGYCHENA/TuwGNtWgA+/xQ3uX5vSbACLChAENHIcaSbYphA4YObzEWde2mbXNwMxJgK1TpRjH73q8lM3DdXFaZ3ZuN51MOZrXOIagRYKSBAJMpZqUtYlGIEYZXeo5x8mVTuqccLJOVTYCRBgLMp0EpF5ejH2vCuBMBZ6N4e3fpppGDeWV4Nt9PAow0DmDDTYdt4Qx7rDoEzXmeNoket74KNMuo4EGAkQYCrCbqAthI883vX1JKGzToCjSp0J/iuxpACDDS/wJYkVrUXABTE3iueMBRYgZHiZEXkbR0wBhrACYnmNHqQMUuA1KApXMw0tIBk7FbTQ0YCxPwha/HMQGboyEbAUaaFrB6xXs8aFZ6/FSoeY7sgBNgpIUDhp3W4jp3Ro+/3uuDtvpqtjEEGGnpgOEAc20MaDHd0q0BE5oAIy0esCKeS02zW6s3hZfmIkCAkdYA2HRPWjQBkyAJMBIBNuCTyiZgliIYiQAbUrVZngAjEWBjSIQmYEwRYCQCbEDVXpEEmAdPgJEIsCFlYx0xdlDlwMiLSMpGJV8CYNiRrTxih0cLgryIpHx0aJ1e9F8BVnhdRS7Bbs0Bbg3uZ9y6eucJsHXqHJIMmPC3AMDw9jJjEajYk0PFES0MZrzR7AxooyFwAmyNkQvAoPbVT8sA7JaQiVtbRqnmMtfLoOOEUa4u/XkIsHURto+bw6VsEZuhzBWNGWBzmeuNkUXpeemlrwkjwFZW3tjBn1wiYNinrfGFmMVcrzSXB7Q761PB08EBAbYyyfNenxYImOS6vu65jwdj05+LSaHT+Guc1Hu6ME6ArTGI6eUBZlX0SmHZPu4OJ3d2eDCqQupcpbnygGcHyX5MgK1Q5+MCc7AUMK6zp22Ymi9b4GH3GU5BR8AK4wgw0mJysETUFTA3bRImsX8BwoRz5kM8/S6CIMDWF7zCHvMEI+TScjB7H8HEtBEM42eJ5Q2z11ZAHNAb5xASYKtSlX4xJYQy0LZJ/H/PwWLKcwUsTOtNjGP+WPA7OCnDTAQs/h4Btqr4tf97+tVScjAXx7lcAJPTHoSlrsYe6m9rrCL6+HsE2JrUGAx2aWWxmBysWtANpgKb9rXTGZyuP7YOCJhRBNjqIthyAZMcj3kvX03RlvEZsPJYW7QOsC1EegQCbE0qj5t0/lrGTcyycjD0+qbV7Du0ZeR+CBTTmddOi/QE1khWx1MCbGVJGIDW6DhoScH+Zy9itLKbEPTXE9h9qL4dgB3uf1Ws0EcfPQjnjYEgCwJsjXICb0zZhyUl7T/2zkRJURgKgOYgCRDFc/7/U9cEUFyPEQjjQXfVbolVQyGkeXkhvLRY8dE/T+Yqf3qSVGZVLGwvxi/mHCZCVkVAiaNlouyaB7NHupZPFUz3HzX0Tp/GR0Zr4M7nTXcLGyPYTPuKX/g+WE+U0WHaRRzZL0eP6mvTdgpLIxYINne2bqm/LwfrNy5RhrFUvTiEeU3Z6Ikf2tuskDL3lxkggsFXCNY/5IWpVWFWbpAsSeXtUpjrSWgIBl8hWO8cTDQTP6pdfGDhJioygGAzy72+dbJv7xysbvlb08xumWruIoLNiu+d7Ns7B4tz3RfVpnki6HMEg9Hx63sn+/Ymq3/o2tRTWgxdRBjN9qvnIvajMN3zIKdanAXBZhXBvlew/s/BTGj6200dwHyGYDCaL57s2782fWFltWsysHyy9TERbGZJ2LdO9h2AOtX/zaYr8oZgM+P2ZN8Z5mAxhrm8lKUyE9ayR7A59hTv+zWjHCxYqZyxxk9ZyB7BZkhnMHHGOdijnWXeeSURDBAsPdJZkefKW6ERDBBscA52LzNrepvSG4lg0J9D9n2C5anmEsrO2mKZQTBIy+xzsFBtrVxVZQxeTiEYIFhKUa1eVDu/cTa8JlZaBAMES5iDZSJOeFk1iaopEQwQbEgOpjMT34y7/Da8Fxbrbx/MaQEHBANysL45WG59oRcyd5dBKgjRFUwhGCBYf9Rp+mFuu26KywjmiGCAYP1zsKJTp637OdbC6Qg2upwbgsEcc7D4MlilMhVGMkSnkGFY96ha70P1klW7kDmCATlYrxwsvs582PhsF8YKZfdtsKzjlLQFggGC9SYW5AgD8VUeQthFzTZ3qkEqzfiTgWBwTzBdFuXHHHe/HMzXRRGtV9c127SrC+BoleJmg2BwW7DcWOOsFfIzjrtfDtYYJdXu1mD88ac776xLcXtBMLgl2PE2HluGTLC0zxvmYHUXcd+u6XxV1lfmeZGmSgeCwQ3BtKkTkarUhf3CJhIHObbWZz5EMG2nW3AWweCGYKIZSgsPg8Yv7fN+OdgiDg+2w/Tjl1ZBMOgjmGydik9bxSesydfzOVh+70EzgsH0gmWi7h/KKNhkVW9fl4OFdynlyS+K3sDfChZbxdYa5+Igmym/8IeqeiHlwk3qF4LNDHlM5w/Ci/zh8kXBqDi+VhcAdsX7/7D+74PJsF6eNUovEAwSEYRZH1vV5vHyRcGouH7xto5gHyDYsJocevLjQrA5ERYtOv7Tvy1fFB68HuxJsE8YRizf9CaAYHMizL5rarY9XF0lvLNxjmCF4cwhGDwTwY5yHZ4QLD4m2pk83wTBzCe0ES0RDF5NtVvu9e7YRazW9uEKl+HRUJU5UfjV6aHzN+ZgCAZpQ9jO2jB2Zu2PfiTYeWkf7Y3+hF9GDgbvoZjyzgl1t7RvO5u+sE4VZS6s15w0BINUnN+Byr0xLvuQt1UmycGkRDDomYXl3hnns9Xvgn0WyXMwFbvSo5+xI9is2G7C/Cfnfs3BPo7EOVhpolpSje0iI9is4temncCxffigefaU7RJGC+0dgsGzAey8MNjj52CfR9ocrPuSqRMIBrMXLGkOptxC7Yss1weltBw1UwzB5kQ9D7H5RA52F1NUO+OFdS7bLLXIEAyeDGHWOi+E38TVr8jBbiNtmPNyjPL11M3CIRg8G8MyZ6wxYv9/CtNCDhaGEJu34Y53oaNgo1bhQzAITcqeEJ/5C1LmYGfBYtpaGgSD3pEs/64GkTIH0/ZCsJwuIvRPxu4kYTSIRXhBpyvYqEX4OJ8zRX9Zg0j6HCw3CxVeN83D5OhyVFlSBIOvaBBp5yK6zhIYRi0QDJ7k18m+5GABaYRuP40r+4tg80q9fp3sS4Oo45azWallIexV/CpUpp5fGYLzOav41U721Xcn+5KDtR6Fsonm6n04ZY3IxFE/jWBwFcB+n4tIDvZQY99UOZbOSASD+Qj2NzU5vDsFruy5WiUINq8u4q+TfWkQj8JkVyovEAz+D2G/TvYlB3tArCEeKnOF+5R86vkYgs2Le5N9ycGe6YbaphdQx3+nEAz63u3JwR5I7C/yWCUQDG52FM2KBjGAaFRHMI9gMBfB/iIHU0QwmKtgL8jBPDkY3OTgvk+wP3kOFgv2Hzb1KKJ+qhgOggEN4uk+YvfdZp6DwYwE+5v1wZzvyMZMDpiPYH80F9G5Zi6iZy4izEmwv1ofTFmXqcxZwWx6IAebIogVmchy3gcDcjDOJ7xfgxD5FSI5Pv0e0+/yxpnoj0EwuMgx3DV2prgUSNoU/ELzFm9CfPIxP5W8InFhuPKAYAgGCPaJgpUIBghGBAMEI4IBIBgRDBCMCAYIRgQDeKVg+fsLRgSDPyK5XwupU+9xgrmIJVceAAAAAAAAAAAAAAAAAAAAAAAAYBRlqW9ulGXaPcpy4MzEqru/08bFty8+QoB7hFV67M+Nja1dptzjNn4Y0oDDX5r9/xsX3774CAHuRofdcrVY2/3VxrHdLRPu8bDpfNvThh9drZu1BE8bF9+++AgB7oeH0KKOjexqY73cLRPu8eDih5/++4sW1WtNdjYuvn3xEQI8br5Hm1b/bWzNfqBg9/a4ODfqXsS/af/ytHHx7YuPEOB+Y4stq+lrnTfCnXyoYLf3eIoWvftzPyezzhsX3774CAEexQfdbWztRmh2AwW7s+VNhxIAACAASURBVMeYQC31cMH0TcH0648Q4CayKIrV+mZjO2z2Q8LDgz3WrXfAmMQEgiU+QoDb7SyMSjcpiOnmI2a1Wx5VOf6nk+1xcOututnWaaNKkIOlOkKA+2xj+2oiQbtR7ep1fQY9Z7q5Rz289xVDTNWOIrYbF9+++AgB7hJHuuN/ZdnZGD6CcGeP1W5o643jDuG/qlidN04f3uAIAR5160QWukaxfbUbYwS7vcetXWaZ6rHocaePaDJhTxY0G6cPb3CEAI8ihHfZUSm9/jlv1M3wJ+Eet/U6kEOCRKWcU7oZ4Wg3zh/e4AgBAAAAAAAAAAAAAAAAAAAAAAAAAAAAAMZTZc08+SqroRINQDq27bvU9SskG0uxQoB0AWy37NYC4FV+gJQcNvv12alY2xoAUrE2q3O1jWpnyMAAkvYQO/WiWI4BICkxerW1rNcMcACk7iGeKrJtz35VeaZIxgBGUtdlrIv2bs8DiIeNUIJ0DCBFD7GOY51a1nUx+gOCAYyjGZU/2J9qd17B8mDoHgKk6CHaugKoXa6tqT+uEAwgDZVq5h9meftJIRjAxN6RgwFM2nX0KmMUEWCqGMZzMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAvoMwhKZrrxfXq4Jp1uCENNud6cb26Fywnin/S+eR6fdj55IJF9IiegiwlgvU7Y2OulCw1gn0c+dDTUHprjbVCI1iPHzH8Orlwuo1CsE8b6ymH/Z2wKtyOS9H25RHsCYb6IZ2JgxKFMxLB5oB3x+tdhT5L2RiGYBP2LG0We+RBUSvf53xWuVIrLtgEOZgy4c+2y3B2y/qSI9h0OZgLfi3Wy/rUv8P5jJd+u7FHfjSCpc7BtO12LDOPYJPmYMWFUyZ/B8HMalFtlnst13aPYKlzsLxuKFU9rKWtRrApczBf/5ksuyf/9YJtzf4cWBEsJUKdznI8lQWCTUmTdjUtWdu3EWyFYNPkYM25awWLd1gEmywHa4xqW7LV7yHYYUMEmygH8/8JliPYlDlYY9RbCWaNcZtwQIfND4KlzsFEdiGYoYs4aQ5myq5g8h26iIdMeO+CWtslo4jJaYa1GsHqK45g06W8WVcw5T/jfCLY8BysGSpuBPMZgk2ag8m6U1gLdvmI5A3O56FAsNQ52KKIA1v1g2ZVX34EmywHW4j4d+uY7DjxZudzfaePiGDDc7BgVXvfypo76j/2rkVJUR2IkvdTUZT9/09dOgHEEQSEIMSktmZ3dut6mTQn6dOP0wlgwThY9cPL+u7DUmYJYD9Bw4RUBhvCG9MngIVcTCCNsUYC7WM/y0fn5jUBbH0O5k5jyQW3eqv9/PF+MMykEJLhnexnIXgCWEAO9oX9/PF+sJ3tZ347DbiIuFkJYEs4WALYphxsf/tZl3G8AMyIdtmErv0YzLk+JZJ2UOwoHYj7OrBw462WA6eGYGmTZ3IwrIgyQQzmMmoXp0FwOicOdgSAja4EsJkcTHMhkeWCBAJY6dhyEXVpm4wPYLk2CWBrcLBGfMO0OZmVAfYL3Q8kPoAVYiCKmAA2ayFJS+J3EnEa5AZL7UXpBvtZDqYFbYvnM4tCACy/xd9elDhY4mD9C6p7W4DhPmWjZQBzcd2T+1PMEg8xcbBcMcbIsBhqAtgMDuY6UiqAEeJef0tWNlhutCIMPrv4l0UMsIjyYLc628XvCWAr3HPSAUwi6y4YgrYHQOJge9rP/OaVUKm5DbkcCWAzOJhr8nPe2+1f1i9stBIASqb+PF+9EgfbE8BK3qYrh0hzAtgMDlbfYOd6O/uaalcCwJ+ob6fyBkWw29FwsCIBbFUOZsQTwFbnYN0rK2aXPhgHw4xXdGhOsf3CG6wtRcxv/xLAli/or2wBRlePIk55gh3bCxMrJdLfewA0v11sob0uQjKlFEFXfk4AW8zBnCJ6CzBmAwYhisMdiBQJq7RinI96A2E4GJWytuKMhuel9iqkDyKyc5YANpuDUQLjqFDnhZEoc5UcxT1TvQM+1gLY5WiVN7Rt6lajY1nDcDAkHy7bZMmOFexFMabHdDm+zcFIdSQbbJiQtHNK+teIsn5Zo58FGLzSOatcxHtFVc0XOJgR9AGwyaJTqZLje4s1vg5Fj3lvFbAkUcQKi9c3WPEIFh6tdlSB83w9EXIT/9w3my+QzXsEHRhKANs5B1MdbWbWeWOoQhYRHMJg5fXE6nU7GMC4hjk+8MyXiqNyvT0HA4+9vLKrL6owIgFs3xwMnIxc09p9lFO9mmUGeziGB3MRoYisnuMDGYaR+yMIBxP+hDrn/mxKANs5B2OcMQJtjzl80XwTgD2yKQcDmJbwyOfutxtzMOoBdm+EYBPAdr2gb5kxKSry5bP1U2cCr9ZfdKz2IvUHYF8gYd5FbACGE8D2zMGYUI5GFEJor8zFdxKV2oO9IHkhJHmq5eKefHXwtjUHAy++AZjRSCaA7ZeDseri4oycC3U7CR+YkjoBrMGSVJhiJbvpLqhqqUdk5ezcW0QWmoPBrekBxiv4V0cAowlg++RgBt4WwZm8norTTZyzL7iIu7WXbnGlu8I/ECS/QJSjvJ3OdGS3wtQiSuYAZiqvI5M8M3ZKLiwB7AsLzt8LtxCTKq/CzXeYGvWNHmBYaJet4//oU0IZQ9D14hJ4534xhQ0ejbmvxLn44Jb0IYwqhphOAPsmB4Pz93Kqvlb06yJdyNmyBLDmpir4mRpyrYBEOrEM9zbnBnrn++WAQnOw6mM5V5QTqpqqrdeEN0VCMoIeqnsJYNtzMHdbXU5MZi6+Ab69mjwQOHKA0Vb1xzGu7hVBatKjuRzbrGD9YMqV3lY28EPEXtKXuCnAMc1DJoBtz8EgIgYxZ+nHW2NR4WtyD0bkAIPwYKvcSDPUfYGxhVkjgo8zrICaHJK4ytu6/fFPNJPCxaWJysk5kzYB7Ftgq2sCmC8I1NzOGFcaOcBAhqQBWPXbH1USqpX+shxAHV6pAUafqTNww4tASPJ7Rv383wSwrvmICtXN98LBspKQ8407nXg2Q7j+hwB2OvfK/kwhSwH3J+sCLHty7bGrt/8HILs3yfAEsI4DIq3lAtEQn/6UB4MoIngRULiEDZ8F6h9zET97moCaHDWiWoA9nQ62zZTdm3M0AayxbH2PYCtMgI9/zYNVLuIN3iQyr+oncoDh5yAH/3C0dbgHrI/DGmDP2RVLngDmTJUA5peuYZWbgU7iVRfjFBRbQfJOz8Rz7GF6SVyYHivoTflK39eI6VAXYM9V/WAbBzDnIvpyk6X2ypWVXNpBxYCDAIw2YbzLn+xLEA7WJCpde+VM1hc7wIwwbaIZiw8pccATstYz9wD7I27uEHXhzAU51rnBiquf0izEP3pkgLX6Mq5Smn+4Kdq6kZ56jINlrpoeQTW9nfsuRF8q9SiPwPzTZwmpi0h4G6an8vkBvY5l5ZmUjwaJhe1F17qDgA4OdDsGwLyvjw11ACMfjb2lUkAfMibC0vcczP8NQUzNP2rjL/ZVwsJmGSQ+plJBtekRNznoFmSG21cCCXJFnkWqFaKIsQiP+nTGRVTeLgDMfOIjUt7449RyGuxRf6BdhYK6pxAI7/RtIaBVqIl8PQCaPBjcNqvkwWIBGG66VfMbAIyKT978Dt+1doSDJYCNWWTRfgWGJlVWSktozyFLXILTgD+zRiVHfm2oV3loF5F2JKtndKs+kSrhc1tO1vBV1EupBLDt1te06TGvSbVu3MelQQ4hpEXIXodUwA5iMOCjD4CpDwzU5kCc2MULixvWpgfpUZIAtq4T90X3VkjEEG+b2pbaq2SSC87R/dgGg26RB8Ak+QyiD4CZ6XegoVQngMWzqCKMmM3sdRCDQW1Ffj3pC4RFtZhPAB6aQ5deUa9+DqbnI3l54vIHJpLGOKO5OPZ0FaitKK1kxYli8cGejAGsl4N1OmLxNrqIPzKRVEYIsMNpnf9ZqCl7U5+lX1oX8dbrIvZxsG7H+TZa578ykZQkgO3QKKAJD8NxPivPcRXyN86shI1gE1LVz5giW8iA7XwiqUaSS4KzmNbCPNhxhwn0sVMkLfu0IQzC9FlO2L0/TN/HwZ7/aiKwlw1/2DPANOdMa2VXaBiKZ0bzcYcJrL+TbxPN43kwxcIbbM8TSdupX3h5IUxQDuZlozbSUBkaJoBRs6IYqj1p39+WSr1wMPJh19nC4Q+7nUjabdtBSwESkIN52SgmpzL1hQAbGiZAWfUQ8Iv9DMDeF/u+AO7TprOllQF7nUjKVWfWDFd7NXJbqmGkpBvYq/N/PtYwgTCnsG9X6duJPxyM9qUC9DYG2+VEUhCwyOfPmtmag4FsVFG72VZuCrCdGex799gAw3jeZ/vxfPOVDJbrfR2ITp8NvKB5s2a25mAIdcJDkyrc1gJYyVQC2DuX8Pl9Jn04nBSpX8lgxXPU1zyiwfYr++NmX5T87rVYJ4/C2JiDuYavFmCT6uHWAlghfj2KuIb/QTcz2N8bDDfrS/ZySYqK0ddxTrlPEuZquC8nUNxz7/aWwx9ochHfbs9ao24iLfb1P1Zxqofs8WXKXqE4mHdkufR6YJndgb0SwF452GA3DMbbGazUu7KX7+8pr+Kfd8UWwjXQUzpEgeKwj54jEt5ekahKbcnBqFhCMNYC2M5K2xqxJuleJLaQCIbiYHUoJss8VdzgBotFVWrLtWy4VaQAy1AHUx8kCbGGU4sg5LSAtTZBVFFcGMoBzH0Jz8GiUZXakIPpN4VAhoU1WCnbdd0ZwB6FMBW+5v6M0BUOAIXKBrhkLOcCvEyi1lVpdpM1WxdxUrYuid5szcEofucohTVY4f2NPQIso9KXO2M2B1/aDeP7mzlvOBi026/Kx+CebYIclKsEsD1ysHdrPHq2sB/stFcXEQ6hCg0VImZosUIBPh7hYBguHo7UKj4j5Swr7i5M38hGBXYR41CV2vAlMoSRYWOPTxNZ2v5w3y/AgEnN8+nMxHAR1UyuUxOLm+mxmtstahFjUZXaioMRIartkoMtT9oGNlibCSjJ0e31ZiMG7kAl0GJO9iIbFdZesahKbcTBmt4CjD6ekTTBYFiBB/Ph5x/FXlS+IVdD/2SY4MvDHs+yUYEBFo3BtuBg5NG7o4K1q+Q3Ifg5v92jttd7BtTczppZi57dSE23fdAEsA1B1u2N66/sNWiw4WWqwS5cldfzIMeKxF52QoQBQiBKMfnizc2faZMAdgQOBuqmkEG5utE3fRocVkDU2bxr2RwzWH69ZwCwkp9jttf76Ab2fFc1QEMvPIrRBLDYOJivT8hv/O7sz1CP20P93Ik381nGDFb+BsBG3upnJ5y+DBrDViWARcbBtKsteIgsaNnr9tQkfFCWYvQGqz4/ehdxLMRAGlE8bHL3m/iazlQC2GYEzE+mbQH2MoTMCJrlRCI3ujkbqggeNVghOBJoUFg0BnvpCcX2vjz/cvLFfKwnC4YlTgCLZmmhzDPAXirZIMlcXjl349sGp2yOG6y4vpPGjsFeo8M5cNMTfan3obf5mAmTABbLYqxuWG4B9oIgMLcriHHe3VBZ4iSD0ajthUc7v2Wj6tE6yr3/idoAYQlgSyIXkGSfRpchD+YO3hZgL1FEeAdcKZObE50NvEWjBqPNitZe4yO0SbN9bYVsPwlTLAFsx6yKS2KwIXy0OKAupX9qcyIvvQ41wPAygJXXZn5KtFFEM4U7NTdY820Kchzu+mrzl2SkRZlVxnYXCntoVepX78S7iHepi3djbEejiEr9Z+9KtBTFoajZV0Xc/v9TOy8JSikkAaQBlT5T03Oqp9rkcZP7tvuIe878Qr/XXrjx0xqATRVa/AHs/x+jLYToVBSYSohWhUvMRl5IWQcm4xBaRDzA+jTcSg3W1z70FfaS0PvidyHycdu7Kkt+AFunDb1hqkBXUhoSCjU+mL/2OCLEiq4IcQjTHxiC+Sy9w1ZKDfa5iWaS71EB27RlQRMzS83MKbIfwEaSEM/gToL7PAstHzqrGUI9I7BCfV3QnBqdaG6e08cCrHDOU0t4QKc4PLM/gK3xGLW7EPMLZes920hRA6WSoB71uhJ+mCwaXSpV2aAIID6WIhYcZvjOFrDn46k9o/PG6n8AG/f41uPHLdGtkKcfjZWqKH1l43wWLscX+waAWfKpYfoSwWoJ00+E5D6amqudN/QHsHdwOvzWffSIegCMda2yfXIWanKE+SwpZfYPVfYtf3SBig1pJm1r5+8uO7D5LfaqEpmJVRjM+PeWk/dhzBe3eYD5JvzOWNS4acPUTDAYxY9fn8o4SoyohfGhoopcsFDbBdgVFH2hhba/9m0NBkOeebmz73102xcWVue9Il5G5jUU9fQaDCisSPsYaYPVjykp39yuYoSORTFuF0zWaeN0rQA7eQ1GwTTprd5egcEeswiV0O/6oWEcCJMW1v2StDLPPX4lPhg23h2YAjAYD1tbotKJ5tUzjsnGaRR4fTbQ5pYkyZoBdvXQWt9Q7Qebk23q8K7DSrV+En6+GdkL8c/6YBi5S4cLaTLD57IGi4boTDRvhHEkn5J2fy8J6l7OytOLbBmHkmsGWPT0Vys86uWOrwxElWkYUfgm3HJ8JyTkGdJ4OF69giYlAk0DWKN82Jlo3gbjyHBYXPhn3JkfqjqzhYh0xmTzG26wlQMsZKwcvupUF8iYHxww4a6eAoaR8cHI/Q6kktMpBquiAuypD2CrZxw5MJSAMKx2HxeZxQ8zawWYsO7Fve3WrOzbBPhi7x1/315iC1kWgfBfqke7naO0U96abpQe/ZtXlXI2Icx2Jpq3wDiy8QuY9IB0wS13reMhIxb8vBOjiD6Xt98lKnMWN1hMKp0iJ3pvHgk/hwt0z3rTPpgk1fFylOhwkvaSjnrldRGPvqO5c5zUFhhHjkoLhbFhIsnC41iGuMa7D0Y3B7CWWVc7QjYA7H7DSj3nX4ZGhSmpoNWZE1Xzmz7vTdImJQbr7bbcAuNIcznR1F2wFO8LUd3GHQ2C/0omJCfnq+aYDjBskuPO1kERq/O9d3zO4mnapzmf9sGU3OGaM3LeA4MTDM1lsC0wjvT9Fax3tYeOjtU2j9S7isUJTZ4RYMl9FRoTnbW9iK0UYIGPgNEOawWYj8EehfNLYDS8WYiPJ30wYp03t2fI0R/35nNlRxvsfKnOcQDY/rBNxpG86SM/uII/ncheSS1MFYfY+EoOfF8WlV11nvMF6vMAswlD0aNAyhijSc3XGvb1Vjn5MP1h1pwiSa006YMxgRwu+OG4F+jEJRkPMHuJxb7SOXSjVrFmgAEMiGoAljgr77WIEJ+F38jWqroGGWGxHMDOveOX2+OmVhz2bc9ZIPO1jls+lnxiIWD/MGgg8bOwSb7yJqf59HfeFLbNI9B6AQZs3xImkeKXHNs3EvxNC5n70N5cwfkKBYqd/SmzeQ55e1XH/rT/NiZcPvTv2Gz72M08ynwwSQT2B5TbQwe2tJhY3mD64F6mXLvKlf25yilpnjUDDAJU8rzXKvCl/niVtzImjrTg+6b5y8DLuHX5uIouBjD30XovsesDeucVh32VsApTQ/h8Wq658eUJH0wL6Ko1R37ABqpAiJxksKO4uH+4uI1byJopIiCKhxreS3IrnnfwrojnAfZfFXDKGMcR6uTc83K7nTkxmFKsnkpvzKOq267AMpT4OfR6uU+Q8MEQaJKShg1QkS75L9Omv0Xtt67TfeVR3wxFrMUdYP01A6TDw3oADIu1AQxYopW2wzt034nNEZdnShSfb1D2NZP8IjiXjWARYCqzYSW1iK188ou9Vh/1TYWRbCPNCq9bOU5KAEYWBNipTiidV0YRpT+8/SHj9BRklxM+mD+IsYQSBQM3rZ5kMCggh9eoM9G1hahvahOdC+1rLYEGp+q2cR9FPPdSxLm88zzAnAe2P4z/Cz4fYCX4Svlg0VcHv4lblZvenG9X2SPnf1Wd44s2EfVNhatkUPKy7nhIdR7Jjk1z7gyz0gc5WL8VFgBYXTSo4yns+0UAo0XVUWkfzO9guHJ4pmMtazA4EOm99PLJSpuI+qZWLy20i1aGJo+1Z77nVUgrwi4hTI97/LtlAFY2bPMp7PuhAIs9x2k+MvgG5K2Xnwr5jqhUT6XGRqK+idNMBvUHY4cVfeYSzQ6TaCmATXx/PgdglHDoOeajjrp0HuwBMJyTDSkAGFbk0F053hv13Yy9iIR4sODpYx+/hjlapVI9Z+dyFJEc0qf6ZsO+gx7DA03XvFWyQWVhgjJVixh0j45eIpizqQYDRQB+CHqor9/si/puxV7Ap7EpmA/2cvX5Yl/D/nciPQ8wUgshexPdmw77DmKHj77lVj2ILDVXshbRCESPkBnWefPnE81cpWY0bzzqWzaNrYtkBMlJZHZrAxhoJzkUddeObjvsO+RpM8O7jA56UxE2tkIyhjgnZKrBIEwPALt+s2xbH09PghIvBjAfw6hFB1Xceth3CPf3pAvuhas9RA+7SKMKK6VwVhcRK4aI2bHJN9j1B7BxcYOZwojlxdka1S8JumFhX6yVphs1mdsnX4PEPfmKDSUF6rmKC2ml4Khsn/OKIWWlUv0U8SsANoZYMLYswCoiX3VUhoR9iXvVZFaJf62Pu6tOe3rau2vMvcGlbZvURnUIJYpsXvBzswY7OTQL1Bsl3DbATFll65jLaKaeyzKAVSBoYC8dx2Vp2BfLEIPLzJJZb4jDKw0eb6c9cDCvHVagdG/vQUYqX18NjEeconmDnepUlHDbACPzlY4bvhjATrZ3cEJp2NeHn0MK3mwRYYAoR77OlyuHMnX4zwIHjIDEIdUgtEIx/7ts7TVYnhqs6XSDVfowST5p3QBDZXfTKJZkFgIYtKqwQ+9HoEVhXxje6LiL44iX2Yd2zkMR3Wc+SsgvyZsvviipkBIGfDB4mNsj8Yc7CjixqJJD+6BLooiTFrpqgBVOt5Tr+cQFieZIDStW87EGwzB++NyUQTO7PYBBjOkETmgo5GY7lF+E5lRy5RibvMCUKt4WF73/36R13NB3GOw4pTR79QAru5vJlgBGH06YHmswiD6PaeRZkXcNRwSwL6ypWwDe2bypGYIZK/S4NxRK7lv0JkxjPvn5zg+ZkKJ9yU+4rKE5VvL9Lw82MMqhlwFYdMIS0jd5g3lNhJJW1BWzf9m6f8peQhbuKR8wp0o8IhhRuzcGXu9+WNHNXjBCNqjXoF8erH1AooTsaHMeLgOwkGO+1lPCvoCoa0tMQW/PZlQ2gh6YF1JcJPyMxVo4F1Yp+4BlaFBpcvOqucKKzp2vHiFbesY/+2DO5WWGUsNEgnjME6cvLfadBjCPqDNXUQ6IbxBggBekjVF+6G8RxCRQviM/83pPjWlFTz2SoCg3Tteh0WXb/QCWDzWN8MGcy0sbpPV7cfN4LgUA86W+0wAW5KvLBO1WTDyYdM4N1KwRWQYwEGvGx32Y5fxoRAnrv1eXxe0w+gewjAFGQsC5vCcRJ2LY3rORLgSwSrujFqlJALuzIF/6ofhu40/ZrGduUWDYgh+oYykZgL3Raf5QgBWnmf9uKLi87oyj+CRuqfQKXgZgu+BHiElRqSbL6gHG1cbxVXaBOSYsSFXvjT7yg3PBHi5WoMgNwIadnEWJ5g8FWPHh8tc+PsXCD3HHiV3lZ76i2t2wow2m4/ENYzGs3Di+dqww3amMsO7mr8784O6vR+VHiFfdgxxhP9B7DHb94EQzKg1ykBfPDQBGl0gSDWAc6szHG0w1Lj6Wku6+43EXnR+Cyd0XS1tBKtzMEN49bvdS3vzdieZxS9rtgg8W1I57AWbYsgAbV+LWGMxwzpQm9osSmX7KgEFSWqb+1iL6js0IsJhgKzXEL9E82AfzAIMbLEwd7K0hnUVSu8iuzec1kwym4VUjePu4KU4ywFyXsGp3f/0hxvekWhM3xoK+C2D2QxPNtPwukJ0UMXztp4izhBGLpquEMo5qCkXc2GMIUWZaiMPfVFAorZRXxqdP30EatzKfhL3NYLnTcqsiRQP2nXQHOfzXRJBjjvRRSTW9JaAVe6rF7UsARgS3yIqeaOeAV5xAQ4oxGrl/P73TmHGHuuEaLJNk2zatTT86+Ax9DBCmpxqGyia6IOaoMCoYwHfzPmI9Mk6/PYBRKU3k5LaTSNByy2JKIDnNMJb2PxksJdu2ZW36IcN/n24iiWKQQzKSimHPEX0rqOQAS1xr/pEt6J34goB5xS7dbchDStbCYell/BRJ9o+Z9xksJdu2ZZGiIXPKn0xEfVeD5yVc/OcsbDHAPrMFvctvkoEY+xr4DmuUS8B6KLqjSTpubUzKhRiQm5kk27Zlbfoh/hF5OTQF4dJg94VqbjcFMKxgvHi/17w1gNEmR+VXPClyC861vyn8JIYUtRzQKTFJtm3z2vSjHx0oot718JLo5q0OYNfzxqWYexigO+rDGygmtK7dm3Sq+kbpP/auRTtRGIg276ciqP3/T93MJCjKQyBBq2vOsa2160qGm3nfmepGUeVMxEnatjfmpl/kH9Ehu+RCTclHrcQNGhVnAEwTQryCr2JAYEiqzd27DhMYMfWDARXNqR4dpWOrAGbMRJPOEj2ZR9v2ttz0y7oh9aBdAhcPBfXj+71BJfWcdpXLkn2T483nTQ3bdQgLHKXYpzFaYs3ZBLDwxbmJLAu1JQU2Tdv2ntz0fFmKig3aJVCKGE2xMYthg6bmPMw2nwcwRNRBESEgadLXYPMYlp1oZ1ofpLHH3b5YkeksgX0cbRvJDEygXXKufxOwxkZIWP/HAPaB3PSQ6K+OOyEEASurZ9fN6cZ2WsX6DSCDNF6LfXAACHmSwCrLBHvEUX43kZSzdkFpCRL7/KWHUXTZ39//zjP4bpDDPDzX4mmffQbAzgyQ1NYi366D0uFWMozUY7MG3g1gFLvzTunM6Gc3Z9gqpp10pK/1G0aM/0PhSgLsvHdKRQAAHdZJREFUXE87WemvbieS0raC0QO3uWV/7WGX/b2+/51n6edzvQvfJXvaZ59BegPkYkG7skG/udFRnOJj5oN50kbgggGs2eMAVU9/XSx8rqS+gM6U8S8eRxFlODd5MEv/4+EPbMguwUaeWFD/RFqzGbWIMnHejFmBnFL+QQLjirFEtcpW9YbGSWJYv0FlYg6fYuRfxmY0t+GyGTMp3rDYN78GF5sVLmXr41VXTDwfYAgrFNtgHOPTEs1x3mS8tMW81kiGrTxzWL8Bd7pXSnup/MQtvWww1Vzq7JH5YO9Y7LucCZoO2SWdPWRlDrsyAEOBVQRJDfvn5cclmn+QRc8zjFHwgfDg9L2gtNaMKCDZjjpEWQNT0SZmNC9D8cyO5hFz4x2LfVfMMtBDdsk1pKgnNN2LAJasjgGD/9MSzXGfGfFkcC715BGH5KSRxVgxG4m4UguEc08SGHY0a6kA6bsx+zE76sstY+ZJvbNyOdM8G4LO1S6Z8mjo0wF2lcRhYADfx+XBHoluylzR/qcRQfvZYCHCDX76KV8cMIM6+7J6n7VQ3pITKEzXSj8jVsAKWW1olzChpy9QuKcD7NAaE00/Tt/8twDjtO9VAW/NAUbG1rI+CR09gZQ3G5/RzEsLbCoCUqTY17VjSpl6xhiTFdFQutAu2XDNyFseobudWqL6gd9Rk4ObdoFm/nOJy/UP5uG70DE3cfuaDM7WYUeARlZLpo7yZDlX8TXDRt7TyOKJyylZFij2pdeIKFXsTx6DbzUfjFcpkDE0XmUs0UwvZgomLsXHPLgJD6kYDz9bqWznNavCawFgih/UqdFK7sPvmY6vOzbynuC2LfkMeSZniWJfLbICEAsthlUKJwP2z/fBQCyGjdXefF6i+bHJIi8hX9OtGsX4x0EKKZGh1fifG0L6MRfebSCwqU+fW+xr1c8hjVIMBszGwxSZfDaJZunBJAV88A9LND9c3fEBptNFiYgKACMxywR4o5cI2JgPtjguPC2w/PP3obyI+Gl2++pY/4ILvi1PrlvZjpexDYS9CmAVG603hFet+y8ARgVSYMMZftb7m5xl1GA7rN/YQTiEd4IAY3kwx4oKrFY+M3r+UF7hiA+a6yzDlcLFbmkjcrnybs/wwUqnmmcCDEfIygmANWqk9u3DAOakiJ0PpxjW6fTuYTlODKYGrzX4YN0w9pPyYAZmkUpi+YYAc5C6aXZnuQfmqi3L+uhabZLjg6kXAMwCwzrbN18NFvY/GumNTBXBHRsRtBkCrDruHFPbBIQfCowyjwRlbkOAHXaH3+rI4H5Q7uezFnk2wHCErGh5UcsL7M2WSjZRG+fGE5xag4POafDBCCFQh+RvBTXig7ktiEcRZLXMps7m1A3Yf1A6eZbhCg8yHDELWCIXn2Xr3/kP8bPPaC+S7WE4CLDPK/adBbBzXcfEX3jKoGxDKk+FpE3YDRF0l+iGv6hzzBRyqecAzAFXd+7wBwtOgerXY0I6vYIebSw8YJulnGiGbnynPFhVK52SEQMA+8hi3+kNQ0qi4IDFJDtXVEejkQpl2q4U16nD50IG73WE71IV12BnJMInq0MdSV7cK5S68z3C1O6V8O0sRJlx42RFAs1zARY9MBjTPACwTy32nTLRfezd43E7jL5mxZwy4djX3stOgYNLoQ4jdf+ed6qwwI5Z4OrIS7djw4Pha+8/9AVUkQV59eIGyA2GX3vdmMayRu/8EbLe9gH2/xX7xgbkOKfVhS+yW1ELdQ3UxLksThAvLIAObUR+ZzWmk9YXFhiYGy7rBonyEp3b297fcRdKBJdFksuF0kQQOVhuxbPGNGb5YGVTzbNHyMZZ3ne/bf5DgN1UFxCNrbJMaxzHdalrcFIRxkQwDU3cHMiD9amRKC0ssMqSGkOIPAtgOILzkuvr0fU4Ha8uqxKRtirdyeIzT+PxAK3ba2wU8QqAAZp8z2/+QFapORKQ1+l5yKTXSGOxz7GNqbG2HpaoxGMK4cIiDsuM6myDIGMZnByoWS+5voHUUNLPOfqr42MVNwcZ6keltRpqmn3kg+kXAWxofR6r1OMdowE/3lBqYXoe7h/SlsTmFBeNKlexvQl3oDRYjJDUewley3kCq0RWmD7+J9dc3waRjK4673FZ++xAQ1CL+KGdX/zhuflDAPsPi31hx3gM1blksFeH8GR/2U6uoJpIElL/qmRt7TAP5u5awtckg+dqMJkzQja5IW3kaoPBdEilFYd2neKIvBEjfJ352emjMa9NhX+LfRebHzdqqL337BE1Bj6F3BDSgzVSRbUVfbCeraWKA6yy4Csrz/ZrLy9qMBsdgJTrk+UB1ubPqkgvd7MTLhsSulvEaOSbA2xOVOqD1q0aQo8YwwGR9JymPY2c9ErFUHz0we4B5lRxgdUZRVIdeSHR1SXXt0VBb5thP0RL9oZZS2cXtBMZZNJofzp7fVr8fpR9AfbSM6n7BIt9GyBp213GdsD92AKMY14l+WD21n1e5ZJNC0xYXkJeqTEg5frsBiogIapJBQo3FS35Jl2A1EEJe1TeBgQvjVo4+QXY31non3MXq/aisw6oSiYiHJ5QoRh9MH+7F94WF5jtrIwoIniR11yf3oAXICKqacsTfNH/gitm8XiITaF8qaVQMtX8BVjmsh2HIRHuRQ0miah/IUmLGgx8MFrC1HpoIl5mTe3HoyBs3EeL8jKdjyq28GFYHK/b5nY6TS/Z+svpGKA3qH/BlFgKmJJBnS/AVkjw5tmFdf5CuKdxWsYJwvQ/3oPBcfgNPtjq9sEFAjtCJQfFNXRTNZCsw/lhgwwrHXmx9tzgRG5Rm45RxEOKIjoMRUeFnh2SYIpxPNOkXwuwkqnmL8BWWIW3B5yVUhhrfMtsiR5Mm4LnWpHWsr9zufgWAoOKGz3aiQZ3XFXvTpweHtWOmvA2Lub6HkDFeK3J4jP/mgfjBNPBlOEsmtyIpYDzILxJMBGxZScIYnEPJadfgL1y9YheLNHB26Jdv+xS42KVItZBAwm7P8M3EtgExgBgKa7wsLSNMy1jru+BwtDMGCGXAuOqz7VuKzmI5LntL5HmihC8vlohwDaYW/kF2Jbr4YnolK2Sl+OUoUJLKXuKYGVFziyBnUk92A8WAbafBbB5y7fek1lamEhlpC8lWgfN1ezjz7kKDAMyZ6gUc7D5/KdiRBH7BdhbrYebZpO5yC9Fif3W5ZWBs3kAE3oUYEm3lgEYudbpUrXwVgqmoRbAbwAbcUz94ZluKp5951oThfETbYTSSpOlZcnCfgH20ijHw0gX9UGs0+ztK0OKM0qlWD1WutYoKXW9++kG8HLkhQxbkKSIp8pSr5IbQWK7zyE4hhlq/dYsgAh95KEO8LLYUuP0oop9Ib4A++uLm5v5Iz1ODi42EdgEulCzEe81QKvZ8QLyQi0cUBuHIa3KlyUOoQQwnsnplCZZ0hhPtUDuxaK1vqhiv2BB/Rdgz1mQB7ORU41uKLDjjLBEQXldalaw7H7VbRkVeRobGHYob3ci+etOwxdk12K8tYmXwL8gd9sXYOu2bak15BwPh6nj3Im8HSmQaMY7ugTNHt6H0AxnY8OOWg2wBAIiMgEWK9ekwP5Erry4vveiys8vwF4NsMXWEJdtmoxqnUFEOi0w1lmTACtCFBsBpnAU2VqAxShk0mDS5t7ZkB+vDio4mvugUTFb3mZMlgQo+RdgLw5zLM5dahKn1PhT+Fms3/dCAiuiwXjUYAFb1VC726wVqyYSwFQ2C1wkE4mloULrjnYszjr/BdhfUmFEgdXCqYUmRqrs6nrS2VznyygDaLsWyQvUT3XcWYtdXWwNBU4MRIY3CZ+Xa5l7O0YmgghTfWN+lgwNfgG2vQpbeFlatLQl4K6Q9XRnMxPNoz5YNUgU666+2xKUYE0LUP4gmtcliWOF9Fmcfm7JrFYuCqY4nn4sXcoaDeb8F2DvtaCmIAIM5G3X9+zOK5VS5DAIsMJEsbzLmbgSHfxKwShKtBtwr4ixRkid7M01Pli5MOIXYE9Z9Aqwqv7Nkd+MPJiCMbeDPOfFiWI7JwVbiw4gEabQRzxEzbpqs4WWUH7Mb0zEWW4zhVGT6UD8AuzFmCGLAGaeATCIo6Q630GAlSeK/cfelSi5CcNQbPm2s7mW/v+nFh+QZAOEM5hEmk6nnXY3C+IhPVl60kkXjboZQhrWn1j57v2lJs/UfUwdfg5mfVuVE/6SpEWAbWxsDCEPI8IpRZS/bMYQfq/DynOT+rUCbAWh2ApZwikxQX/w8QaxJROzGkthQmhwJ0e9L5E6QRUCbHMzY3Ii1USw0+FHzZB0749gvlEqtnK0R7A1hGKZ0XqZx5EtvY/2ph48oBcRbpOlsJzMDwJswnMASvj5LzKC1YMIZfpAfqycs5nn1XaVtM6tfZlb5kKxSyVmd3oHPfr3f/LDe1BxhQDbzLyur7XaSf7Ka/bW76slxINmLyMmyKoOCwtJXTuC8haKXeppVPfxFQgMqR+Gtirvo6iBjiniVtaMGFKlXgBROKLSYjCrmxth5Rzh2sHrcDp7ETMWioWFZo8n9GzEkuP18HO8HoKXEWDbGBfs4hvvjtcqFJHu9ShMJZ6skygHFaFEnqQnVncY7ZFt69sFvKm/7HbD/aGCeeOoIBFgm5iXXkuahz/VW493BSNWpYFJNiBsqWNhnOMmnrSpw7IF2GJeGv8lQRS2bE4HNQJsowDm37F++ilU4bgjHeGI3ytLSRPmwYqw2JsVCLDJwKnPgYdzsIkRDAG2kYk0ABFdQWXH+QprRhGDt8RtPGWu5t6HA8z0BpnmHHgNDsbuORhHgG1jsYXm+i+N3Fd/bXV3Eq6tAAbNToj4kMgMIliR7zacntP7esO8Pwde4ZNVXG4fq4jLLZRBgI28nBQCUnDqgkvo3PYAC4svq7ucNDmoNJk7bGN/dQ+EcUFLoODl2ODVW2oKAB9efSCKvAFGVW2SfBbAooRE3AZWtx7wJ4eGFY0VwCK+KrwlDkZIgQDr//yOAyh/DnzxKaKvQxC3OAfzzVTsBjabOcCYMTr8Mh8GsKRmmBqNkswLPMUlFyOYSq2B/mT6VW6GAOsNYb5XNyxj8RWmV+fA02aXmxNO70/kYNtY3E1Qr7WqO7TN36tMW8QPcX/j/fIQBNir5Ke7BhGKM+G3nlIRBc5hGkkD30gGJKhZIsA2MsX91OK/P5k6dY8QonFH2G/U97QynIMBR4BNNRvlomqAdSrEWSUd572Kr32JlybOxQ2hCLCtXrASirht72GJ1lO6wWORI2Q1VaCrONgi87rfALA2bARENSli59LNNHGiCpDz7hNDgG2GMBH3s1n1hwiY+xJzmLD0nRwXYL7r3pqFisufD7BWghUFD6XgJDRbdESw+pUHYQHHWMdWga/RbWXYi7ghDxdSVL+eDsC0uFuNaOvz0LSXzxJWIMAG3t+OiHIRFuJehvaNRA/QHHviCNIZOmQhGgLsDVHMGtr+aNycQ510oEH5G8CetekRYL08t/W6L9V7LXZztp8De5Gr8uwnCXyUG7e+pkkwmBMMAZaxsWb3DQXiiGZecsJqjQAbkYU/P+JaMCplmkcQ7Rmih115Pvwcz4GnjTkNi6/GI1E/zaptBFimxoW836JthOR0ulT2NwKsPcRUuUASUzWynSHF5WC/oaVwXJ0i7ac/RdGtikxzQIBlnEGCDk+B8BdPl12v+LUAY1LaoCTCuDStoiasAVhY9j6m0p62AiclIK2mrkdEgL2VqNme/WAIsF4zT81QoMDvdAAnFe1o5UiHj0XsAB0TwWLKcTpLnyL6r8Rm350ZcrCx1+meCRbTZ0Fil0ZrK0fkYBXA/G6VUevKUovp6RDVFCRF4dGdWT4cjFpjLMveX+yPMlCIRz5FPF47T5pjFbHmYGP2c6Tzs1osUlpUlfpWm+ew4ymt6Dv85O4v9pil0QSwiK92jdLp52DpsxqA4X6wvVkeHIydJNHWWgNn8bsvf9UAS+3T7SLAOiGMju3kSBlnApgRBQIMOdgEW0XZd01U3UcnFgeO489tunqlpvUixi1lNcAUUAQYcrAJtoI2/ap2LynkL7x6LTTbnDvuc+imF6O76Z273RQQuAQdOdi0CHZLDK97AFhBbpN0fhLPx90wi0e7JxOmzYPFmgr1nwbSgkOAIQebUuO4CrCUMaoX2g+2usGtbqFITGxPh5+4KHZQajnYQSp2cRhVYXpBVCDAvomDFcfTohsu35FbN2+msBw2/kmtocnhdWGFFJDGZRFgyMEmQcxq0IbuyV+s7nNXEixjhrz8Gaf2OdEIZwoFAgw52Nf4yzTLh4wTfjMMRX8hwLLkYDe7yAPbjb/s2O3NFAGGHGxbh5Vd8xh5+mvkQrx5jU4EBy6Rg6G/1uBg8V0oCgQYcrClKgcJ/7Ixl+uVE2Xf8jlCI8CQg8220yMHY7Vl7C+QbiDE5nAwUAUCDDnY0gDbhb8YHxhe52CEWAQYcrCJVkJj1x0CLN7JAV3ykM+PiwD7Jg52uVEtuVeAGSn0t/irsqN2SijHfxBgO+Bgd0Mqp70CLPQ0rbAfLIZHlRnALmcpwhYw+Y8hwPLnYJemB3HHAIsAMitwMCp1XgA7ntPoObuc/yHAsudgFcJqgF32DDD/xAnZXY6Aqd9z+Yuf+0Lc1wDft3Owj+LMlsiFixnEFQgw5GDzv0dJfj4AYCn3bhuunMDBjPNDPITmBbDjuaZeJaaIe+BgT+/F3fvLOvmc2I3mYExJbhmzZPHLn5vSS6kcIe7cVfVFgOXFwT4OYD74+EVRdg4Ho5KYqEL1cpbz3f4qufLbssjvBzns4znYhwEs3hc5QwtKcVKrvC1d6MCD5i/kYEfDPs9fVAdlKDaBg2mhFD1q7jeS9unpbAqwC3Kw3XCwD34hWimIZmrsPWX+xIlfQ2QnPEuAnXZ+rvJNHOyjMw7DFcCfaZxezygetrJU4esYKnVGIcCQgyHAXmQMUqoh2h0gJNggM3rUwAPAFlQdne2vT2ge/UIO9vEAo4GT+U4PzXXXKhnmkwpifFoZHmUCkB3AyipxTXZFgA3lYAyUEAoYAmy1MH9LAH2Vm/rzaF2vQwzvOu2ErDdBh81IvlGizC9FvCWGmCIO5WAgnTZGu2mNPgiwAfZ8Z/3Qhwea8slWANwdKfbLi06SE3U92MyKHLf5BwTYQHO13DoVDgGWBx5VKI5oVsJvtmV6+lgmo7UhwB45GK8SkyM45X4LpjgCbDUONsbEXchr3a+eHWe+UykiiK47Dubfj+VZgCbywKa8LBFgozjYQEA26TpTC49cLuWvkuttHoidcTCf4IcNwsVF/hacIMDew8FeIUyE3Sq04scsT4B1SjEjwB6TEdusmaSpQIwAyyLFCOUPt7j04mL+Yhs9EDvjYDKGruZxRoDlwMH+8OQdcDAEWAcHk4+97OMXUSHAVuBgGT//L1WlEGAPHMzXOG4RjGEE24iDWe4cMfkD7LWqFALs7+04pvXI/LdK/BFgW5gRgoDmSurMATZAVQoB9pDf+9UdF/82Op7E75Q9A/N0EcMg2Oks5eHnizkY1MAyguQNsAGiNwiwBw4WzjSruB+2JIN4s8OCv05SESe7hpq/gIOZKk8/av5bAltDqA0BtiUHS2ea1HeewpSmnNkAix2tny1S1MvBmDRVmi648+kXlTZngA1QlfoigBng8Jo3WxH3XFk1ybezAZZeilvL7FHgXLNN0KeSwnE48OcuZ4ANUJX6GoCBFIQTITnr42D+j7y6aUp2/Mf1I1gOALNCOk6UdOtsU6av7mDMlT3Alp3+Wv75f6kq9SUAYyo1yVMlaB8Hi//JGLqFwy4CjAkDEHdrIDYAWF1lqN41q5TKezmYT8xvACskzRpg8T7RlT9gB7TaNbLvXLAeDrapw+IE+qF4bCd5O8Ai+bx4ESezCgeC1wCrU8RC2PwB1qez9x0A8/XAJulSPF+HMWoD1suulOMNAIuFheM5YHzZleNDzCPKFzlUPGOSDAGWv/lHpgEYbfEZanLcjITDp8shzuiusU6vN+tzPr75Mv3FA8xmzsEQYJGzh7JBCUG6su2ac9NFLNV2HCwkiBUJLMOyMlhjpUnfPzYxM3AwwncAsFJ9OcDCQ3ISKklXcp4pB7t7J6rNJB5i3a5CVyy02BVyxP5exHp+2Ucwu3KGiN30i1gYnDxV4IrPDLj93s83AEzE8MHCE756nbwN4fEelsCs3P3z/0URzHOw0MjbMqicOQejqrb1JR4CorxSNXe+zLFGBHtRebcy7gFjfP1uXwTYghys/m0HHOzPClmmaxPr+yvWyQnn/HxIkk7v5GD+cokUzimpaIEA24WFKmKdIrZVEbPTpj9tJ/HgeIr0oTq2xgcO0OQwAG/p1EKALeNRdVfkcCTX+3m0jW0IMCpp0iU5nv+9/xzsvYYAW+gyfSdHLNO3dnLkwcEG7BJ4h79AXJJw+IWv0slBEWCfZkyp1IvoBvQibnU/y/M/k+y0pQpYXVxgsE6VQSHAPs+4VBy46miSz4SD3VoCNgVYnNnnTqp1GgEBAfaJQUxzsv6I08wBvtO/LABWvXGAEKCf/1QgwN6Evr30In6Ev76KgxHdZmSGuT1+7Zwv5nc3bolzqmNPnO3wV4fNuaol79AfUwv+WKBn2erniqBaTaKNsPs7t8Dbua85u8Nf6nvdqObZRtH0f3vn1t0qCITRJoqkSbxf/v9PPQJKbbt6zspAjpLu/ZDlyyTOjB8MSOBy3afXvQeMf08BtipgiV8W+73a3wT2WOEbcR2hirgI8qC3hcCOKTCFwBAYAkuoBxsVAkNgCOxpAos3N4rAEBglIgJDYAiMHgyBITB6MASGwOjBEBgCQ2AIDIE9kVvA2rxzirbnfWyfncZ4XxXTy4i3lf+CBckAAAAAAAAAAAAAAAAAAAAAAAAJI9/t9hawlPF8k68uq6/C/9rXYXecHy113p/vF/Kg+syEpCiG/SbmEfzbjU6XQsP257ML/sXYG1uhTMZWT+I7tgcSS56/RsfaoyYajdnObNg6JvdwDWrdL1n1F1LxB9pvYx7Bv92YA1sKDc3po7JHvTbnC3WtUCb6JLMc2ymvG5lM6r7sjyawOfjGn+HDMbmHPqjm+2xm/IVU/YH2m5hH8G/HVrDsZQLr7pWNgSx0w9tyvLzgh6tRljebGaFt/Z4fLrH2bGVzxJd3TO7hGlT3OWfGX4gb7jD7bcwj+LdfkopBKLBNGMXarv7rr1pHa7G7x2w5TSy8YyEeuqB2ruTUg78Qd69h9tuYR/Fvp1Fyv6RHZJzd24AiWy5OmaU9V/bt7cUENt+VdyzIw0VgxSqwIlBgRTSBxfFvrwKxChBY3xZTLtd2Ue0jsPyFBGYGwd8fwDxAYNUqsCpQYNXzBJbCROL5er1W9ozexwVmbV0YH37U69n25vT1cOxXWwR2myORL/McgQ/g56AisGh9l9Z66ss5uvNHLrBdxzUPPnXmfOJS2H8ttmKBvcwYzE6BD4u+PhwTefg5qEccg4X5t3uetPDNwmhlKZ71DnlapbOI9vWOeOR3vBJxfUniHQvxcJ1FHJyr/kKcoyFCzJZZxBj+7YewQWhM4yRtTcICLxRY5xr94VUE5sPgHQvx0H1bbeovk1V/IW68w+y3MY/iX3ICmzuhk2qlySyVylQmemLflZrNBbbzHauTcBHImKleK3Wo1DbzDc1RHD4ck3vog9rpUtnhsb8Qd69h9puYR/Bv1zwJb7jOLpeTrFEfl2MHJdZ1c7kUMltzx5lsgNxd7K8eKreNC+K0cUzq4Sao433Jqr+Q6iPQfhPzYP8AAAAAAAAAAAAAAAAAAAAAAAAAAAAADkqdqS8rr7N3ogIQifHrP8uS2pwL4OA0xZetTBAYQLwKsZ/cNkSjqsYsqxBYIoWHGghCCnR6WHc1uhf3thgQWBqFhy4ropBCouwGqLndySE3W3YgsDRGzidNF5ZEoia/d9ByZgACS6HwKKp+IgxJVIjLfnduTy674ToCOzxz0ZHYYUK/N1FOVggstcJjpEZMpEJct5akRExn5Dy3iOQpiUTZVrBuSyY5EsKliBoxgQpRuy0026Lq9IVp+pRGzokdOPk7W8JMLWS5eSFmXzSzFjGJCnHZhB6SGY4xZk6mXVy6ro6UJVd2QBKpKlxhr6kRE2oWFUPmVIqNtbBnPSIAAAAAAAAAAAAAAAAAAAAAAAAAAABE5Q9KFkRqKlbGIQAAAABJRU5ErkJggg==" style="display: block; margin: auto;" /></p>
+<p>In the table, values of Δ<i>Z</i><sub>C</sub>, Δ<i>n</i><sub>H<sub>2</sub>O</sub>, and ΔGRAVY are multiplied by 1000, values of ΔpI and ΔMW are multiplied by 100, and negative values are shown in bold. Abbreviations:</p>
+<ul>
+<li><em>n</em><sub>down</sub> – number of down-regulated proteins; <em>n</em><sub>up</sub> – number of up-regulated proteins; aw – water activity; LB – lysogeny broth; WT – wild-type; MMO – medium minus osmoprotectants.</li>
+</ul>
+<!-- html table generated in R 4.3.3 by xtable 1.8-4 package -->
+<!-- Tue Mar  5 15:17:22 2024 -->
+<table border="1">
+<tr>
+<th>
+set
+</th>
+<th>
+reference (description)
+</th>
+<th>
+<i>n</i><sub>down</sub>
+</th>
+<th>
+<i>n</i><sub>up</sub>
+</th>
+<th>
+Δ<i>Z</i><sub>C</sub>
+</th>
+<th>
+Δ<i>n</i><sub>H<sub>2</sub>O</sub>
+</th>
+<th>
+ΔpI
+</th>
+<th>
+ΔGRAVY
+</th>
+<th>
+Δ<i>n</i><sub>AA</sub>
+</th>
+<th>
+ΔMW
+</th>
+</tr>
+<tr>
+<td>
+a
+</td>
+<td>
+<code>PNWB09</code> (<i>Synechocystis</i> sp. PCC6803 in 6% w/v NaCl vs no added salt)
+</td>
+<td align="right">
+77
+</td>
+<td align="right">
+55
+</td>
+<td align="right">
+4
+</td>
+<td align="right">
+25
+</td>
+<td align="right">
+<B>-8</B>
+</td>
+<td align="right">
+27
+</td>
+<td align="right">
+72
+</td>
+<td align="right">
+<B>-120</B>
+</td>
+</tr>
+<tr>
+<td>
+b
+</td>
+<td>
+<code>FTR+10</code> (<i>Corynebacterium glutamicum</i> in 750 mM NaCl vs control medium)
+</td>
+<td align="right">
+27
+</td>
+<td align="right">
+65
+</td>
+<td align="right">
+2
+</td>
+<td align="right">
+15
+</td>
+<td align="right">
+<B>-44</B>
+</td>
+<td align="right">
+<B>-119</B>
+</td>
+<td align="right">
+127
+</td>
+<td align="right">
+97
+</td>
+</tr>
+<tr>
+<td>
+c
+</td>
+<td>
+<code>LPK+13</code> (<i>Lactobacillus johnsonii</i> with vs without 0.1-0.3% bile salt)
+</td>
+<td align="right">
+123
+</td>
+<td align="right">
+88
+</td>
+<td align="right">
+26
+</td>
+<td align="right">
+<B>-65</B>
+</td>
+<td align="right">
+<B>-68</B>
+</td>
+<td align="right">
+67
+</td>
+<td align="right">
+78
+</td>
+<td align="right">
+<B>-62</B>
+</td>
+</tr>
+<tr>
+<td>
+d
+</td>
+<td>
+<code>QHT+13</code> (<i>Synechocystis</i> sp. PCC 6803 Protein in 4% w/v vs 0% added NaCl for 24 h)
+</td>
+<td align="right">
+42
+</td>
+<td align="right">
+26
+</td>
+<td align="right">
+<B>-42</B>
+</td>
+<td align="right">
+<B>-54</B>
+</td>
+<td align="right">
+<B>-150</B>
+</td>
+<td align="right">
+111
+</td>
+<td align="right">
+<B>-44</B>
+</td>
+<td align="right">
+48
+</td>
+</tr>
+<tr>
+<td>
+e
+</td>
+<td>
+<code>QHT+13</code> (<i>Synechocystis</i> sp. PCC 6803 Protein in 4% w/v vs 0% added NaCl for 48 h)
+</td>
+<td align="right">
+46
+</td>
+<td align="right">
+62
+</td>
+<td align="right">
+<B>-17</B>
+</td>
+<td align="right">
+29
+</td>
+<td align="right">
+<B>-25</B>
+</td>
+<td align="right">
+3
+</td>
+<td align="right">
+<B>-192</B>
+</td>
+<td align="right">
+<B>-46</B>
+</td>
+</tr>
+<tr>
+<td>
+f
+</td>
+<td>
+<code>ADW+14</code> (<i>Bifidobacterium longum</i> BBMN68 Protein with vs without 0.75 g/l ox bile)
+</td>
+<td align="right">
+20
+</td>
+<td align="right">
+24
+</td>
+<td align="right">
+8
+</td>
+<td align="right">
+6
+</td>
+<td align="right">
+34
+</td>
+<td align="right">
+28
+</td>
+<td align="right">
+75
+</td>
+<td align="right">
+<B>-84</B>
+</td>
+</tr>
+<tr>
+<td>
+g
+</td>
+<td>
+<code>KKG+14</code> (<i>Escherichia coli</i> Protein in NaCl (0.967 aw) vs control for immediate)
+</td>
+<td align="right">
+30
+</td>
+<td align="right">
+158
+</td>
+<td align="right">
+<B>-12</B>
+</td>
+<td align="right">
+<B>-19</B>
+</td>
+<td align="right">
+33
+</td>
+<td align="right">
+121
+</td>
+<td align="right">
+168
+</td>
+<td align="right">
+123
+</td>
+</tr>
+<tr>
+<td>
+h
+</td>
+<td>
+<code>KKG+14</code> (<i>Escherichia coli</i> Protein in NaCl (0.967 aw) vs control for 30 min)
+</td>
+<td align="right">
+21
+</td>
+<td align="right">
+162
+</td>
+<td align="right">
+<B>-15</B>
+</td>
+<td align="right">
+<B>-20</B>
+</td>
+<td align="right">
+76
+</td>
+<td align="right">
+140
+</td>
+<td align="right">
+122
+</td>
+<td align="right">
+139
+</td>
+</tr>
+<tr>
+<td>
+i
+</td>
+<td>
+<code>KKG+14</code> (<i>Escherichia coli</i> Protein in NaCl (0.967 aw) vs control for 80 min)
+</td>
+<td align="right">
+37
+</td>
+<td align="right">
+126
+</td>
+<td align="right">
+<B>-29</B>
+</td>
+<td align="right">
+<B>-28</B>
+</td>
+<td align="right">
+100
+</td>
+<td align="right">
+161
+</td>
+<td align="right">
+82
+</td>
+<td align="right">
+175
+</td>
+</tr>
+<tr>
+<td>
+j
+</td>
+<td>
+<code>KKG+14</code> (<i>Escherichia coli</i> Protein in NaCl (0.967 aw) vs control for 310 min)
+</td>
+<td align="right">
+12
+</td>
+<td align="right">
+399
+</td>
+<td align="right">
+<B>-2</B>
+</td>
+<td align="right">
+<B>-31</B>
+</td>
+<td align="right">
+57
+</td>
+<td align="right">
+48
+</td>
+<td align="right">
+130
+</td>
+<td align="right">
+127
+</td>
+</tr>
+<tr>
+<td>
+k
+</td>
+<td>
+<code>PBP+14</code> (<i>Listeria monocytogenes</i> in 3% NaCl vs control at 4.C)
+</td>
+<td align="right">
+54
+</td>
+<td align="right">
+86
+</td>
+<td align="right">
+16
+</td>
+<td align="right">
+1
+</td>
+<td align="right">
+<B>-16</B>
+</td>
+<td align="right">
+<B>-50</B>
+</td>
+<td align="right">
+<B>-48</B>
+</td>
+<td align="right">
+<B>-86</B>
+</td>
+</tr>
+<tr>
+<td>
+l
+</td>
+<td>
+<code>PBP+14</code> (<i>Listeria monocytogenes</i> in 3% NaCl vs control at 37.C)
+</td>
+<td align="right">
+60
+</td>
+<td align="right">
+25
+</td>
+<td align="right">
+3
+</td>
+<td align="right">
+3
+</td>
+<td align="right">
+<B>-4</B>
+</td>
+<td align="right">
+<B>-16</B>
+</td>
+<td align="right">
+18
+</td>
+<td align="right">
+<B>-49</B>
+</td>
+</tr>
+<tr>
+<td>
+m
+</td>
+<td>
+<code>KLB+15</code> (<i>Caulobacter crescentus</i> Protein in 200 mM sucrose vs M2 minimal salts medium)
+</td>
+<td align="right">
+33
+</td>
+<td align="right">
+33
+</td>
+<td align="right">
+20
+</td>
+<td align="right">
+<B>-60</B>
+</td>
+<td align="right">
+61
+</td>
+<td align="right">
+55
+</td>
+<td align="right">
+10
+</td>
+<td align="right">
+<B>-35</B>
+</td>
+</tr>
+<tr>
+<td>
+n
+</td>
+<td>
+<code>KLB+15</code> (<i>Caulobacter crescentus</i> Protein in 40/50 mM NaCl vs M2 minimal salts medium)
+</td>
+<td align="right">
+33
+</td>
+<td align="right">
+27
+</td>
+<td align="right">
+19
+</td>
+<td align="right">
+<B>-48</B>
+</td>
+<td align="right">
+70
+</td>
+<td align="right">
+75
+</td>
+<td align="right">
+<B>-2</B>
+</td>
+<td align="right">
+<B>-80</B>
+</td>
+</tr>
+<tr>
+<td>
+o
+</td>
+<td>
+<code>SKV+16</code> (<i>Escherichia coli</i> in Glucose vs LB)
+</td>
+<td align="right">
+743
+</td>
+<td align="right">
+282
+</td>
+<td align="right">
+5
+</td>
+<td align="right">
+<B>-13</B>
+</td>
+<td align="right">
+<B>-8</B>
+</td>
+<td align="right">
+14
+</td>
+<td align="right">
+2
+</td>
+<td align="right">
+<B>-43</B>
+</td>
+</tr>
+<tr>
+<td>
+p
+</td>
+<td>
+<code>SKV+16</code> (<i>Escherichia coli</i> in Osmotic.stress.glucose vs LB)
+</td>
+<td align="right">
+978
+</td>
+<td align="right">
+343
+</td>
+<td align="right">
+6
+</td>
+<td align="right">
+<B>-8</B>
+</td>
+<td align="right">
+<B>-21</B>
+</td>
+<td align="right">
+<B>-19</B>
+</td>
+<td align="right">
+<B>-50</B>
+</td>
+<td align="right">
+<B>-73</B>
+</td>
+</tr>
+<tr>
+<td>
+q
+</td>
+<td>
+<code>KAK+17</code> (<i>Lactobacillus fermentum</i> with vs without 1.2% w/v bile salts)
+</td>
+<td align="right">
+106
+</td>
+<td align="right">
+81
+</td>
+<td align="right">
+34
+</td>
+<td align="right">
+<B>-37</B>
+</td>
+<td align="right">
+<B>-418</B>
+</td>
+<td align="right">
+30
+</td>
+<td align="right">
+48
+</td>
+<td align="right">
+<B>-142</B>
+</td>
+</tr>
+<tr>
+<td>
+r
+</td>
+<td>
+<code>LYS+17</code> (<i>Lactobacillus salivarius</i> LI01 with vs without 0.15% ox bile)
+</td>
+<td align="right">
+177
+</td>
+<td align="right">
+205
+</td>
+<td align="right">
+2
+</td>
+<td align="right">
+<B>-37</B>
+</td>
+<td align="right">
+18
+</td>
+<td align="right">
+78
+</td>
+<td align="right">
+14
+</td>
+<td align="right">
+76
+</td>
+</tr>
+<tr>
+<td>
+s
+</td>
+<td>
+<code>HGC+18</code> (<i>Lactobacillus casei</i> BL23 in hyper-concentrated vs isotonic sweet whey)
+</td>
+<td align="right">
+116
+</td>
+<td align="right">
+64
+</td>
+<td align="right">
+13
+</td>
+<td align="right">
+<B>-51</B>
+</td>
+<td align="right">
+<B>-54</B>
+</td>
+<td align="right">
+<B>-15</B>
+</td>
+<td align="right">
+33
+</td>
+<td align="right">
+1
+</td>
+</tr>
+<tr>
+<td>
+t
+</td>
+<td>
+<code>KSK+18</code> (<i>Acidihalobacter prosperus</i> DSM 14174 30 g/L / 5 g/L NaCl)
+</td>
+<td align="right">
+292
+</td>
+<td align="right">
+316
+</td>
+<td align="right">
+<B>-7</B>
+</td>
+<td align="right">
+11
+</td>
+<td align="right">
+<B>-8</B>
+</td>
+<td align="right">
+31
+</td>
+<td align="right">
+<B>-102</B>
+</td>
+<td align="right">
+<B>-45</B>
+</td>
+</tr>
+<tr>
+<td>
+u
+</td>
+<td>
+<code>LJC+18</code> (<i>Listeria monocytogenes</i> WT in 0.5 M NaCl vs control medium)
+</td>
+<td align="right">
+65
+</td>
+<td align="right">
+66
+</td>
+<td align="right">
+<B>-20</B>
+</td>
+<td align="right">
+<B>-9</B>
+</td>
+<td align="right">
+<B>-40</B>
+</td>
+<td align="right">
+106
+</td>
+<td align="right">
+31
+</td>
+<td align="right">
+46
+</td>
+</tr>
+<tr>
+<td>
+v
+</td>
+<td>
+<code>LJC+18</code> (<i>Listeria monocytogenes</i> mutant in 0.5 M NaCl vs control medium)
+</td>
+<td align="right">
+37
+</td>
+<td align="right">
+30
+</td>
+<td align="right">
+<B>-13</B>
+</td>
+<td align="right">
+<B>-11</B>
+</td>
+<td align="right">
+42
+</td>
+<td align="right">
+127
+</td>
+<td align="right">
+<B>-93</B>
+</td>
+<td align="right">
+99
+</td>
+</tr>
+<tr>
+<td>
+w
+</td>
+<td>
+<code>TSC18</code> (<i>Caulobacter crescentus</i> WT in 300 mM sucrose vs control)
+</td>
+<td align="right">
+91
+</td>
+<td align="right">
+28
+</td>
+<td align="right">
+5
+</td>
+<td align="right">
+2
+</td>
+<td align="right">
+<B>-95</B>
+</td>
+<td align="right">
+36
+</td>
+<td align="right">
+<B>-207</B>
+</td>
+<td align="right">
+<B>-16</B>
+</td>
+</tr>
+<tr>
+<td>
+x
+</td>
+<td>
+<code>TSC18</code> (<i>Caulobacter crescentus</i> GsrN in 300 mM sucrose vs control)
+</td>
+<td align="right">
+99
+</td>
+<td align="right">
+107
+</td>
+<td align="right">
+2
+</td>
+<td align="right">
+19
+</td>
+<td align="right">
+<B>-78</B>
+</td>
+<td align="right">
+<B>-7</B>
+</td>
+<td align="right">
+<B>-244</B>
+</td>
+<td align="right">
+<B>-29</B>
+</td>
+</tr>
+<tr>
+<td>
+y
+</td>
+<td>
+<code>LWS+19</code> (<i>Lactobacillus plantarum</i> FS5-5 in 6-8% w/v vs 0% NaCl)
+</td>
+<td align="right">
+72
+</td>
+<td align="right">
+46
+</td>
+<td align="right">
+14
+</td>
+<td align="right">
+<B>-42</B>
+</td>
+<td align="right">
+<B>-81</B>
+</td>
+<td align="right">
+<B>-48</B>
+</td>
+<td align="right">
+10
+</td>
+<td align="right">
+59
+</td>
+</tr>
+<tr>
+<td>
+z
+</td>
+<td>
+<code>MGF+19</code> (<i>Staphylococcus aureus</i> in 10% vs 0% NaCl)
+</td>
+<td align="right">
+88
+</td>
+<td align="right">
+58
+</td>
+<td align="right">
+33
+</td>
+<td align="right">
+<B>-38</B>
+</td>
+<td align="right">
+<B>-211</B>
+</td>
+<td align="right">
+58
+</td>
+<td align="right">
+<B>-114</B>
+</td>
+<td align="right">
+<B>-32</B>
+</td>
+</tr>
+<tr>
+<td>
+A
+</td>
+<td>
+<code>MGF+19</code> (<i>Staphylococcus aureus</i> in 20% vs 0% NaCl)
+</td>
+<td align="right">
+184
+</td>
+<td align="right">
+99
+</td>
+<td align="right">
+24
+</td>
+<td align="right">
+4
+</td>
+<td align="right">
+<B>-133</B>
+</td>
+<td align="right">
+12
+</td>
+<td align="right">
+<B>-120</B>
+</td>
+<td align="right">
+<B>-148</B>
+</td>
+</tr>
+<tr>
+<td>
+B
+</td>
+<td>
+<code>AST+20</code> (<i>Lactobacillus fermentum</i> with vs without 0.3% to 1.5% w/v bile salts)
+</td>
+<td align="right">
+368
+</td>
+<td align="right">
+378
+</td>
+<td align="right">
+<B>-2</B>
+</td>
+<td align="right">
+<B>-4</B>
+</td>
+<td align="right">
+<B>-36</B>
+</td>
+<td align="right">
+<B>-2</B>
+</td>
+<td align="right">
+28
+</td>
+<td align="right">
+16
+</td>
+</tr>
+<tr>
+<td>
+C
+</td>
+<td>
+<code>GBR+20</code> (<i>Propionibacterium freudenreichii</i> CIRM129 in NaCl vs MMO)
+</td>
+<td align="right">
+90
+</td>
+<td align="right">
+74
+</td>
+<td align="right">
+<B>-15</B>
+</td>
+<td align="right">
+35
+</td>
+<td align="right">
+25
+</td>
+<td align="right">
+<B>-104</B>
+</td>
+<td align="right">
+<B>-50</B>
+</td>
+<td align="right">
+138
+</td>
+</tr>
+<tr>
+<td>
+D
+</td>
+<td>
+<code>GBR+20</code> (<i>Propionibacterium freudenreichii</i> CIRM1025 in NaCl vs MMO)
+</td>
+<td align="right">
+64
+</td>
+<td align="right">
+78
+</td>
+<td align="right">
+<B>-9</B>
+</td>
+<td align="right">
+13
+</td>
+<td align="right">
+11
+</td>
+<td align="right">
+<B>-37</B>
+</td>
+<td align="right">
+<B>-82</B>
+</td>
+<td align="right">
+127
+</td>
+</tr>
+</table>
+<div id="data-sources" class="section level2">
+<h2>Data Sources</h2>
+<p><strong>a</strong>. Additional file 3: Table S2 of <span class="citation">Pandhal et al. (2009)</span>. <strong>b</strong>. Supplementary Table 8 of <span class="citation">Fränzel et al. (2010)</span>. Only proteins with consistent expression ratios (all &gt; 1 or all &lt; 1) at each time point (15, 60, and 180 min.) were included. <strong>c</strong>. Supporting Information Table 1 of <span class="citation">Lee et al. (2013)</span> (sheets “Up-Down Proteins” and “Unknown function”). <strong>d</strong>. <strong>e</strong>. Supplementary Tables S3A and S3B of <span class="citation">Qiao et al. (2013)</span>. <strong>f</strong>. Table 1 (proteins) and supplemental Table S2 (genes) of <span class="citation">An et al. (2014)</span>. <strong>g</strong>. <strong>h</strong>. <strong>i</strong>. <strong>j</strong>. Supporting Information Table S2 of <span class="citation">Kocharunchitt et al. (2014)</span>. <strong>k</strong>. <strong>l</strong>. Supporting Information Table of <span class="citation">Pittman et al. (2014)</span>, filtered to include proteins with <em>p</em>-value &lt; 0.05. <strong>m</strong>. <strong>n</strong>. Additional file Table S2 of <span class="citation">Kohler et al. (2015)</span>. <strong>o</strong>. <strong>p</strong>. Supplementary Table S6 of <span class="citation">Schmidt et al. (2016)</span>, filtered to include proteins with fold change &gt; 2 or &lt; 0.5 for the ratios Glucose / LB (lysogeny broth) or Osmotic-stress glucose / LB. <strong>q</strong>. Supplementary Table 1 (sheets “0.76 fold down regulated” and “1.3 fold up regulated”) of <span class="citation">Kaur et al. (2017)</span>. <strong>r</strong>. Supplemental Table S-2 of <span class="citation">Lv et al. (2017)</span>, filtered to include proteins with log<sub>2</sub> fold change &gt; 1 or &lt; -1 and <em>p</em>-value &lt; 0.05. <strong>s</strong>. Supplementary Figure 1 of <span class="citation">Huang et al. (2018)</span>. <strong>t</strong>. Supplementary Table 1 of <span class="citation">Khaleque et al. (2018)</span> (amino acid compositions computed from protein sequences in the list of gene annotations). <strong>u</strong>. <strong>v</strong>. Tables S1–S6 of <span class="citation">Lee et al. (2018)</span>. For each of the wild-type and ∆<em>sigB</em> mutant, only proteins that were identified in multicellular vesicles in a single condition (0.5 M salt stress or without salt stress) were included. <strong>w</strong>. <strong>x</strong>. Extracted from proteinGroups.txt in PRIDE project <a href="https://www.ebi.ac.uk/pride/archive/projects/PXD010072">PXD010072</a>/MaxQuantOutput.tar.gz <span class="citation">(Tien, Stein &amp; Crosson, 2018)</span>, filtered to include proteins with non-zero LFQ intensity values for all replicates in each experiment; the medians of these values were used to compute fold changes; proteins with fold change &gt; 1.5 or &lt; 2/3 were kept. <strong>y</strong>. Table 2 of <span class="citation">Li et al. (2019)</span>. <strong>z</strong>. <strong>A</strong>. Supplementary Tables S4 and S5 of <span class="citation">Ming et al. (2019)</span>, filtered to include proteins with fold change &gt;= 2 or &lt;= 0.5. <strong>B</strong>. Supplementary Table 1 (sheets “&gt;2.0 Fold” and “&lt; 0.5 Fold”) of <span class="citation">Ali et al. (2020)</span>. <strong>C</strong>. <strong>D</strong>. Supplementary Table 1 of <span class="citation">Gaucher et al. (2020)</span> (column “MMO+NaCl/MMO” for CIRM129 and CIRM1025).</p>
+</div>
+<div id="references" class="section level2 unnumbered">
+<h2>References</h2>
+<div id="refs" class="references">
+<div id="ref-AST+20">
+<p>Ali SA, Singh P, Tomar SK, Mohanty AK, Behare P. 2020. Proteomics fingerprints of systemic mechanisms of adaptation to bile in <em>Lactobacillus fermentum</em>. <em>Journal of Proteomics</em> 213:103600. DOI: <a href="https://doi.org/10.1016/j.jprot.2019.103600">10.1016/j.jprot.2019.103600</a>.</p>
+</div>
+<div id="ref-ADW+14">
+<p>An H, Douillard FP, Wang G, Zhai Z, Yang J, Song S, Cui J, Ren F, Luo Y, Zhang B, Hao Y. 2014. Integrated transcriptomic and proteomic analysis of the bile stress response in a centenarian-originated probiotic <em>Bifidobacterium longum</em> BBMN68. <em>Molecular &amp; Cellular Proteomics</em> 13:2558–2572. DOI: <a href="https://doi.org/10.1074/mcp.M114.039156">10.1074/mcp.M114.039156</a>.</p>
+</div>
+<div id="ref-FTR+10">
+<p>Fränzel B, Trötschel C, Rückert C, Kalinowski J, Poetsch A, Wolters DA. 2010. Adaptation of <em>Corynebacterium glutamicum</em> to salt-stress conditions. <em>Proteomics</em> 10:445–457. DOI: <a href="https://doi.org/10.1002/pmic.200900482">10.1002/pmic.200900482</a>.</p>
+</div>
+<div id="ref-GBR+20">
+<p>Gaucher F, Bonnassie S, Rabah H, Leverrier P, Pottier S, Jardin J, Briard-Bion V, Marchand P, Jeantet R, Blanc P, Jan G. 2020. Data from a proteomic analysis highlight different osmoadaptations in two strain of <em>Propionibacterium freudenreichii</em>. <em>Data in Brief</em> 28:104932. DOI: <a href="https://doi.org/10.1016/j.dib.2019.104932">10.1016/j.dib.2019.104932</a>.</p>
+</div>
+<div id="ref-HGC+18">
+<p>Huang S, Gaucher F, Cauty C, Jardin J, Le Loir Y, Jeantet R, Chen XD, Jan G. 2018. Growth in hyper-concentrated sweet whey triggers multi stress tolerance and spray drying survival in <em>Lactobacillus casei</em> BL23: From the molecular basis to new perspectives for sustainable probiotic production. <em>Frontiers in Microbiology</em> 9:2548. DOI: <a href="https://doi.org/10.3389/fmicb.2018.02548">10.3389/fmicb.2018.02548</a>.</p>
+</div>
+<div id="ref-KAK+17">
+<p>Kaur G, Ali SA, Kumar S, Mohanty AK, Behare P. 2017. Label-free quantitative proteomic analysis of <em>Lactobacillus fermentum</em> NCDC 400 during bile salt exposure. <em>Journal of Proteomics</em> 167:36–45. DOI: <a href="https://doi.org/10.1016/j.jprot.2017.08.008">10.1016/j.jprot.2017.08.008</a>.</p>
+</div>
+<div id="ref-KSK+18">
+<p>Khaleque HN, Shafique R, Kaksonen AH, Boxall NJ, Watkin ELJ. 2018. Quantitative proteomics using SWATH-MS identifies mechanisms of chloride tolerance in the halophilic acidophile <em>Acidihalobacter prosperus</em> DSM 14174. <em>Research in Microbiology</em> 169:638–648. DOI: <a href="https://doi.org/10.1016/j.resmic.2018.07.002">10.1016/j.resmic.2018.07.002</a>.</p>
+</div>
+<div id="ref-KKG+14">
+<p>Kocharunchitt C, King T, Gobius K, Bowman JP, Ross T. 2014. Global genome response of <em>Escherichia coli</em> O157:H7 Sakai during dynamic changes in growth kinetics induced by an abrupt downshift in water activity. <em>PLOS One</em> 9:e90422. DOI: <a href="https://doi.org/10.1371/journal.pone.0090422">10.1371/journal.pone.0090422</a>.</p>
+</div>
+<div id="ref-KLB+15">
+<p>Kohler C, Lourenço RF, Bernhardt J, Albrecht D, Schüler J, Hecker M, Gomes SL. 2015. A comprehensive genomic, transcriptomic and proteomic analysis of a hyperosmotic stress sensitive <span class="math inline"><em>α</em></span>-proteobacterium. <em>BMC Microbiology</em> 15:1–15. DOI: <a href="https://doi.org/10.1186/s12866-015-0404-x">10.1186/s12866-015-0404-x</a>.</p>
+</div>
+<div id="ref-LJC+18">
+<p>Lee T, Jun SH, Choi CW, Kim SI, Lee JC, Shin JH. 2018. Salt stress affects global protein expression profiles of extracellular membrane-derived vesicles of <em>Listeria monocytogenes</em>. <em>Microbial Pathogenesis</em> 115:272–279. DOI: <a href="https://doi.org/10.1016/j.micpath.2017.12.071">10.1016/j.micpath.2017.12.071</a>.</p>
+</div>
+<div id="ref-LPK+13">
+<p>Lee JY, Pajarillo EAB, Kim MJ, Chae JP, Kang D-K. 2013. Proteomic and transcriptional analysis of <em>Lactobacillus johnsonii</em> PF01 during bile salt exposure by iTRAQ shotgun proteomics and quantitative RT-PCR. <em>Journal of Proteome Research</em> 12:432–443. DOI: <a href="https://doi.org/10.1021/pr300794y">10.1021/pr300794y</a>.</p>
+</div>
+<div id="ref-LWS+19">
+<p>Li M, Wang Q, Song X, Guo J, Wu J, Wu R. 2019. iTRAQ-based proteomic analysis of responses of <em>Lactobacillus plantarum</em> fs5-5 to salt tolerance. <em>Annals of Microbiology</em> 69:377–394. DOI: <a href="https://doi.org/10.1007/s13213-018-1425-0">10.1007/s13213-018-1425-0</a>.</p>
+</div>
+<div id="ref-LYS+17">
+<p>Lv L-X, Yan R, Shi H-Y, Shi D, Fang D-Q, Jiang H-Y, Wu W-R, Guo F-F, Jiang X-W, Gu S-L, Chen Y-B, Yao J, Li L-J. 2017. Integrated transcriptomic and proteomic analysis of the bile stress response in probiotic <em>Lactobacillus salivarius</em> LI01. <em>Journal of Proteomics</em> 150:216–229. DOI: <a href="https://doi.org/10.1016/j.jprot.2016.08.021">10.1016/j.jprot.2016.08.021</a>.</p>
+</div>
+<div id="ref-MGF+19">
+<p>Ming T, Geng L, Feng Y, Lu C, Zhou J, Li Y, Zhang D, He S, Li Y, Cheong L, Su X. 2019. iTRAQ-based quantitative proteomic profiling of <em>Staphylococcus aureus</em> under different osmotic stress conditions. <em>Frontiers in Microbiology</em> 10:1082. DOI: <a href="https://doi.org/10.3389/fmicb.2019.01082">10.3389/fmicb.2019.01082</a>.</p>
+</div>
+<div id="ref-PNWB09">
+<p>Pandhal J, Noirel J, Wright PC, Biggs CA. 2009. A systems biology approach to investigate the response of <em>Synechocystis</em> sp. PCC6803 to a high salt environment. <em>Saline Systems</em> 5:8. DOI: <a href="https://doi.org/10.1186/1746-1448-5-8">10.1186/1746-1448-5-8</a>.</p>
+</div>
+<div id="ref-PBP+14">
+<p>Pittman JR, Buntyn JO, Posadas G, Nanduri B, Pendarvis K, Donaldson JR. 2014. Proteomic analysis of cross protection provided between cold and osmotic stress in <em>Listeria monocytogenes</em>. <em>Journal of Proteome Research</em> 13:1896–1904. DOI: <a href="https://doi.org/10.1021/pr401004a">10.1021/pr401004a</a>.</p>
+</div>
+<div id="ref-QHT+13">
+<p>Qiao J, Huang S, Te R, Wang J, Chen L, Zhang W. 2013. Integrated proteomic and transcriptomic analysis reveals novel genes and regulatory mechanisms involved in salt stress responses in <em>Synechocystis</em> sp. PCC 6803. <em>Applied Microbiology and Biotechnology</em> 97:8253–8264. DOI: <a href="https://doi.org/10.1007/s00253-013-5139-8">10.1007/s00253-013-5139-8</a>.</p>
+</div>
+<div id="ref-SKV+16">
+<p>Schmidt A, Kochanowski K, Vedelaar S, Ahrné E, Volkmer B, Callipo L, Knoops K, Bauer M, Aebersold R, Heinemann M. 2016. The quantitative and condition-dependent <em>Escherichia coli</em> proteome. <em>Nature Biotechnology</em> 34:104–110. DOI: <a href="https://doi.org/10.1038/nbt.3418">10.1038/nbt.3418</a>.</p>
+</div>
+<div id="ref-TSC18">
+<p>Tien MZ, Stein BJ, Crosson S. 2018. Coherent feedforward regulation of gene expression by <em>Caulobacter</em> σ<sup>T</sup> and GsrN during hyperosmotic stress. <em>Journal of Bacteriology</em> 200:e00349–18. DOI: <a href="https://doi.org/10.1128/JB.00349-18">10.1128/JB.00349-18</a>.</p>
+</div>
+</div>
+</div>
+
+
+
+<!-- code folding -->
+
+
+
+</body>
+</html>

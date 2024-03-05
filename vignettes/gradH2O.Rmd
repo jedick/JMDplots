@@ -102,6 +102,6 @@ gradH2O7()
 
 **Data sources:** *Panel (a):* a--c: @KKG+14; d--f: @SLM+14; g--i: @FRH+15; j--k: @HLL17; l--n: @QHT+13.
 *Panel (b):* A--B: @KSA+02; C--D: @HZP+05; E--F: @KLB+15; G--J: @FRH+15; K--L: @SBB+09; M--N: @WGB+13.
-*Panels (c) to (f):* See the vignettes `canprot::mkvig("osmotic_bact")` and `canprot::mkvig("osmotic_halo")`. Links to static vignettes for website: [osmotic_bact](../../canprot/doc/osmotic_bact.html) and [osmotic_halo](../../canprot/doc/osmotic_halo.html).
+*Panels (c) to (f):* See the vignettes `JMDplots::mkvig("osmotic_bact")` and `JMDplots::mkvig("osmotic_halo")`. Links to static vignettes: [osmotic_bact](../diffexpr/osmotic_bact.html) and [osmotic_halo](../diffexpr/osmotic_halo.html).
 
 ## References
