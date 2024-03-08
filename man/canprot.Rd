@@ -84,7 +84,7 @@ The source IDs should be provided in the \code{IDcol} column of \code{dat}; mult
 The function keeps the first \dQuote{known} ID for each protein, which must be present in one of these groups:
 \itemize{
   \item The \code{\link{human_aa}} dataset of amino acid compositions.
-  \item Old UniProt IDs that are mapped to new UniProt IDs in \code{\link{uniprot_updates}} or in \code{updates_file} if specified.
+  \item Old UniProt IDs that are mapped to new UniProt IDs in \file{extdata/diffexpr/uniprot_updates.csv} or in \code{updates_file} if specified.
   \item IDs of proteins in \code{aa_file}, which lists amino acid compositions in the format described for \code{\link{human_aa}} (see \code{extdata/protein/human_extra.csv} for an example and \code{\link[CHNOSZ]{thermo}$protein} for more details).
 }
 
@@ -192,7 +192,7 @@ check_IDs(dat, "Entry")
 
 # Set up a workflow to clean data and retrieve amino acid compositions
 extdatadir <- system.file("extdata", package = "JMDplots")
-datadir <- paste0(extdatadir, "/canH2O/pancreatic/")
+datadir <- paste0(extdatadir, "/diffexpr/pancreatic/")
 dataset <- "CYD+05"
 dat <- read.csv(paste0(datadir, dataset, ".csv.xz"), as.is = TRUE)
 up2 <- dat$Ratio..cancer.normal. > 1
@@ -202,7 +202,7 @@ dat <- cleanup(dat, "Entry", up2)
 aa <- canprot::human.aa(dat$Entry)
 
 # Read another data file
-datadir <- paste0(system.file("extdata", package = "JMDplots"), "/canH2O/colorectal/")
+datadir <- paste0(system.file("extdata", package = "JMDplots"), "/diffexpr/colorectal/")
 dataset <- "STK+15"
 dat <- read.csv(paste0(datadir, "STK+15.csv.xz"), as.is = TRUE)
 # Remove unavailable proteins

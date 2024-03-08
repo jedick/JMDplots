@@ -27,7 +27,7 @@ pdat_osmotic_bact <- function(dataset = 2020) {
   study <- strsplit(dataset, "_")[[1]][1]
   stage <- paste(strsplit(dataset, "_")[[1]][-1], collapse="_")
   extdatadir <- system.file("extdata", package="JMDplots")
-  datadir <- paste0(extdatadir, "/canH2O/osmotic/")
+  datadir <- paste0(extdatadir, "/diffexpr/osmotic/")
   if(study=="KKG+12") {
     # 20160918 Escherichia coli, Kocharunchitt et al., 2012
     # KKG+12_25C_aw0.985, KKG+12_14C_aw0.985, KKG+12_25C_aw0.967, KKG+12_14C_aw0.967

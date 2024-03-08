@@ -46,7 +46,7 @@ pdat_hypoxia <- function(dataset = 2020) {
   study <- strsplit(dataset, "_")[[1]][1]
   stage <- paste(strsplit(dataset, "_")[[1]][-1], collapse="_")
   extdatadir <- system.file("extdata", package="JMDplots")
-  datadir <- paste0(extdatadir, "/canH2O/hypoxia/")
+  datadir <- paste0(extdatadir, "/diffexpr/hypoxia/")
   if(study=="BSA+15") {
     # 20160412 HeLa hypoxia, Bousquet et al., 2005
     dat <- read.csv(paste0(datadir, "BSA+15.csv.xz"), as.is=TRUE)

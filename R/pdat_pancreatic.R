@@ -40,7 +40,7 @@ pdat_pancreatic <- function(dataset = 2020) {
   study <- strsplit(dataset, "_")[[1]][1]
   stage <- paste(strsplit(dataset, "_")[[1]][-1], collapse="_")
   extdatadir <- system.file("extdata", package="JMDplots")
-  datadir <- paste0(extdatadir, "/canH2O/pancreatic/")
+  datadir <- paste0(extdatadir, "/diffexpr/pancreatic/")
   if(study=="KKC+16") {
     # 20160717 mouse PDAC, Kuo et al., 2016
     # KKC+16_T1, KKC+16_T2, KKC+16_T3, KKC+16_T4 (10, 5, 3.5, 2.5 weeks)

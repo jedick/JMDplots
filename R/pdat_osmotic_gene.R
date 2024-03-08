@@ -34,7 +34,7 @@ pdat_osmotic_gene <- function(dataset = 2020) {
   study <- strsplit(dataset, "_")[[1]][1]
   stage <- paste(strsplit(dataset, "_")[[1]][-1], collapse="_")
   extdatadir <- system.file("extdata", package="JMDplots")
-  datadir <- paste0(extdatadir, "/expression/osmotic/")
+  datadir <- paste0(extdatadir, "/diffexpr/osmotic_gene/")
   if(study %in% c("KLB+15", "KKG+14", "ADW+14", "QHT+13")) {
     return(pdat_osmotic_bact(dataset))
   } else if(study=="HMO+10") {

@@ -18,7 +18,7 @@ pdat_osmotic_halo <- function(dataset = 2020) {
   study <- strsplit(dataset, "_")[[1]][1]
   stage <- paste(strsplit(dataset, "_")[[1]][-1], collapse="_")
   extdatadir <- system.file("extdata", package="JMDplots")
-  datadir <- paste0(extdatadir, "/canH2O/halophiles/")
+  datadir <- paste0(extdatadir, "/diffexpr/halophiles/")
   if(study=="ZLZ+16") {
     # 20191103 Nocardiopsis xinjiangensis, Zhang et al., 2016
     # ZLZ+16_10, ZLZ+16_17.5

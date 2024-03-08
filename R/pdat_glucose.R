@@ -23,7 +23,7 @@ pdat_glucose <- function(dataset = 2020) {
   study <- strsplit(dataset, "_")[[1]][1]
   stage <- paste(strsplit(dataset, "_")[[1]][-1], collapse="_")
   extdatadir <- system.file("extdata", package="JMDplots")
-  datadir <- paste0(extdatadir, "/canH2O/glucose/")
+  datadir <- paste0(extdatadir, "/diffexpr/glucose/")
   if(study=="PW08") {
     # 20160918 yeast VHG
     # PW08_2h, PW08_10h, PW08_12h

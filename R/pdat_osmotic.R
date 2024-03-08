@@ -26,7 +26,7 @@
   study <- strsplit(dataset, "_")[[1]][1]
   stage <- paste(strsplit(dataset, "_")[[1]][-1], collapse="_")
   extdatadir <- system.file("extdata", package="JMDplots")
-  datadir <- paste0(extdatadir, "/canH2O/osmotic/")
+  datadir <- paste0(extdatadir, "/diffexpr/osmotic/")
   if(study=="TSZ+13") {
     # 20161113 eel gill (Anguilla japonica), Tse et al., 2013
     dat <- read.csv(paste0(datadir, "TSZ+13.csv.xz"), as.is=TRUE)

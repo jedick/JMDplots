@@ -25,7 +25,7 @@ pdat_3D <- function(dataset = 2020) {
   study <- strsplit(dataset, "_")[[1]][1]
   stage <- paste(strsplit(dataset, "_")[[1]][-1], collapse = "_")
   extdatadir <- system.file("extdata", package = "JMDplots")
-  datadir <- paste0(extdatadir, "/canH2O/3D/")
+  datadir <- paste0(extdatadir, "/diffexpr/3D/")
   if(study=="MVC+12") {
     # 20160413 spheriod hypoxia, McMahon et al., 2012
     # MVC+12_perinecrotic, MVC+12_necrotic

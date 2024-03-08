@@ -25,7 +25,7 @@ pdat_lung <- function(dataset = 2020) {
   study <- strsplit(dataset, "_")[[1]][1]
   stage <- paste(strsplit(dataset, "_")[[1]][-1], collapse="_")
   extdatadir <- system.file("extdata", package="JMDplots")
-  datadir <- paste0(extdatadir, "/canH2O/lung/")
+  datadir <- paste0(extdatadir, "/diffexpr/lung/")
   if(study=="HHH+16") {
     # 20160720 lung stages, Hu et al., 2016
     # HHH+16_pN0, HHH+16_pN1, HHH+16_pN2.M1

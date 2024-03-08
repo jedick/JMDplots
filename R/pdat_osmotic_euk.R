@@ -22,7 +22,7 @@ pdat_osmotic_euk <- function(dataset = 2020) {
   study <- strsplit(dataset, "_")[[1]][1]
   stage <- paste(strsplit(dataset, "_")[[1]][-1], collapse="_")
   extdatadir <- system.file("extdata", package="JMDplots")
-  datadir <- paste0(extdatadir, "/canH2O/osmotic/")
+  datadir <- paste0(extdatadir, "/diffexpr/osmotic/")
   if(study=="CLG+15") {
     # 20160925 conjunctival epithelial cells, Chen et al., 2015
     dat <- read.csv(paste0(datadir, "CLG+15.csv.xz"), as.is=TRUE)

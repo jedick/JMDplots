@@ -42,7 +42,7 @@ pdat_colorectal <- function(dataset = 2020) {
   study <- strsplit(dataset, "_")[[1]][1]
   stage <- paste(strsplit(dataset, "_")[[1]][-1], collapse="_")
   extdatadir <- system.file("extdata", package="JMDplots")
-  datadir <- paste0(extdatadir, "/canH2O/colorectal/")
+  datadir <- paste0(extdatadir, "/diffexpr/colorectal/")
   if(study=="JKMF10") {
     # 20150520 up- and down-regulated CRC-associated proteins reported in 4 or more studies, from Jimenez et al., 2010
     description <- "serum biomarkers up / down"

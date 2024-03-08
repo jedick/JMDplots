@@ -29,7 +29,7 @@ pdat_liver <- function(dataset = 2020) {
   study <- strsplit(dataset, "_")[[1]][1]
   stage <- paste(strsplit(dataset, "_")[[1]][-1], collapse="_")
   extdatadir <- system.file("extdata", package="JMDplots")
-  datadir <- paste0(extdatadir, "/canH2O/liver/")
+  datadir <- paste0(extdatadir, "/diffexpr/liver/")
   if(study=="MBK+13") {
     # 20160417 Megger et al., 2013
     dat <- read.csv(paste0(datadir, "MBK+13.csv.xz"), as.is=TRUE)

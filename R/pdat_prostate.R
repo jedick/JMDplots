@@ -24,7 +24,7 @@ pdat_prostate <- function(dataset = 2020) {
   study <- strsplit(dataset, "_")[[1]][1]
   stage <- paste(strsplit(dataset, "_")[[1]][-1], collapse="_")
   extdatadir <- system.file("extdata", package="JMDplots")
-  datadir <- paste0(extdatadir, "/canH2O/prostate/")
+  datadir <- paste0(extdatadir, "/diffexpr/prostate/")
   if(study=="KPB+10") {
     # 20160420 localized and metastatic prostate cancer, Khan et al., 2010
     # KPB+10_localized, KPB+10_metastatic

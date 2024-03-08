@@ -21,7 +21,7 @@ pdat_TCGA <- function(dataset = 2020) {
   study <- strsplit(dataset, "_")[[1]][1]
   stage <- paste(strsplit(dataset, "_")[[1]][-1], collapse="_")
   extdatadir <- system.file("extdata", package="JMDplots")
-  datadir <- paste0(extdatadir, "/expression/pancan/")
+  datadir <- paste0(extdatadir, "/diffexpr/pancan/")
   if(study=="GEPIA2") {
     # 20191125 expression levels derived from GEPIA2
     # GEPIA2_ACC, GEPIA2_BLCA, ...
@@ -60,7 +60,7 @@ pdat_HPA <- function(dataset = 2020) {
   study <- strsplit(dataset, "_")[[1]][1]
   stage <- paste(strsplit(dataset, "_")[[1]][-1], collapse="_")
   extdatadir <- system.file("extdata", package="JMDplots")
-  datadir <- paste0(extdatadir, "/expression/pancan/")
+  datadir <- paste0(extdatadir, "/diffexpr/pancan/")
   if(study=="HPA19") {
     # 20191121 expression levels derived from Human Protein Atlas, 2019
     # HPA19_1 .. HPA19_18
@@ -120,7 +120,7 @@ pdat_aneuploidy <- function(dataset = 2020) {
   study <- strsplit(dataset, "_")[[1]][1]
   stage <- paste(strsplit(dataset, "_")[[1]][-1], collapse = "_")
   extdatadir <- system.file("extdata", package="JMDplots")
-  datadir <- paste0(extdatadir, "/expression/aneuploidy/")
+  datadir <- paste0(extdatadir, "/diffexpr/aneuploidy/")
   if(study=="TNC+19") {
     # 20200425 yeast aneuploidy, Tsai et al., 2019
     dat <- read.csv(paste0(datadir, "TNC+19.csv.xz"), as.is=TRUE)
@@ -149,7 +149,7 @@ pdat_yeast_stress <- function(dataset = 2020) {
   study <- strsplit(dataset, "_")[[1]][1]
   stage <- paste(strsplit(dataset, "_")[[1]][-1], collapse = "_")
   extdatadir <- system.file("extdata", package="JMDplots")
-  datadir <- paste0(extdatadir, "/expression/yeast_stress/")
+  datadir <- paste0(extdatadir, "/diffexpr/yeast_stress/")
   if(study=="GSK+00") {
     # 20200508 yeast gene expression, Gasch et al., 2000
     # GSK+00_X1M.sorbitol...5.min and others
@@ -189,7 +189,7 @@ pdat_fly <- function(dataset = NULL) {
   if(study=="FKL+19") {
     # 20200102 Drosophila adult vs embryo, Fabre et al., 2019
     # FKL+19_mRNA, FKL+19_protein
-    dat <- read.csv(file.path(extdatadir, "expression/development/FKL+19.csv"), as.is = TRUE)
+    dat <- read.csv(file.path(extdatadir, "diffexpr/development/FKL+19.csv"), as.is = TRUE)
     description <- paste("Drosophila adult / embryo", stage)
     if(stage == "protein") {
       # get differentially expressed proteins

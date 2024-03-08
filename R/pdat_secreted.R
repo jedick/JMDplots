@@ -22,7 +22,7 @@ pdat_secreted <- function(dataset = 2020) {
   study <- strsplit(dataset, "_")[[1]][1]
   stage <- paste(strsplit(dataset, "_")[[1]][-1], collapse="_")
   extdatadir <- system.file("extdata", package="JMDplots")
-  datadir <- paste0(extdatadir, "/canH2O/secreted/")
+  datadir <- paste0(extdatadir, "/diffexpr/secreted/")
   if(study=="LRS+14") {
     # 20160717 rat heart myoblast secretome, Li et al., 2014
     # LRS+14_Hy, LRS+14_Re

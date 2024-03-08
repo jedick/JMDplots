@@ -16,7 +16,7 @@
   study <- strsplit(dataset, "_")[[1]][1]
   stage <- paste(strsplit(dataset, "_")[[1]][-1], collapse="_")
   extdatadir <- system.file("extdata", package="JMDplots")
-  datadir <- paste0(extdatadir, "/canH2O/multi/")
+  datadir <- paste0(extdatadir, "/diffexpr/multi/")
   if(study=="CGH+17") {
     # 20190324 mouse cardiac fibroblast exosomes, secretome, whole-cell lysate, Cosme et al., 2017
     # CGH+17_exosomes, CGH+17_secretome, CGH+17_whole

@@ -27,7 +27,7 @@ pdat_breast <- function(dataset = 2020) {
   study <- strsplit(dataset, "_")[[1]][1]
   stage <- paste(strsplit(dataset, "_")[[1]][-1], collapse="_")
   extdatadir <- system.file("extdata", package="JMDplots")
-  datadir <- paste0(extdatadir, "/canH2O/breast/")
+  datadir <- paste0(extdatadir, "/diffexpr/breast/")
   if(study=="GTM+12") {
     # 20160411 higher in benign breast growth or IDC than normal adjacent tissue, Gormley et al., 2012
     # GTM+12_benign, GTM+12_IDC, GTM+12_IDC.benign

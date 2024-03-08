@@ -53,8 +53,9 @@ check_IDs <- function(dat, IDcol, aa_file = NULL, updates_file = NULL) {
   # If that is NA (i.e. no | separator is present) use the entire string
   ina <- is.na(knownIDs)
   knownIDs[ina] <- aa$protein[ina]
-  # Also include obsolete UniProt ID
-  updates <- get("uniprot_updates", canprot)
+  # Also include obsolete UniProt IDs
+  uniprot_updates <- system.file("extdata/diffexpr/uniprot_updates.csv", package = "JMDplots")
+  updates <- read.csv(uniprot_updates)
   if(!is.null(updates_file)) {
     updates_dat <- read.csv(updates_file, as.is = TRUE)
     updates <- rbind(updates_dat, updates)
