@@ -11,7 +11,7 @@
 #   - Save the PRH header line and PRT block extracted from the mztab.gz file
 
 # Read protein database
-refaa <- canprot::read.fasta("DEAD_Chimneys_20170720_nr_fw_rev_cont.fasta.xz")
+refaa <- canprot::read_fasta("DEAD_Chimneys_20170720_nr_fw_rev_cont.fasta.xz")
 refaa$protein <- gsub("\r", "", refaa$protein)
 
 # The PRT block extracted from the mztab.gz file
@@ -26,7 +26,7 @@ aa <- refaa[irefaa, ]
 # Multiply amino acid compositions by PSMs
 aa[, 5:25] <- aa[, 5:25] * dat$num_psms_ms_run.1.
 # Sum amino acid compositions
-aa <- canprot::aasum(aa)
+aa <- canprot::sum_aa(aa)
 aa$protein <- "metaproteome"
 aa$organism <- "StM-R1"
 aa$ref <- "MPB+19"

@@ -36,7 +36,7 @@ evdevH2O1 <- function(pdf = FALSE) {
   for(organism in c("Hsa", "Dme", "Bsu")) {
 
     # Get amino acid compositions of human proteins
-    if(organism == "Hsa") aa <- get("human_base", canprot)
+    if(organism == "Hsa") aa <- get("human.base", canprot)
     if(organism == "Dme") aa <- read.csv(system.file("extdata/RefDB/organisms/UP000000803_7227.csv.xz", package = "JMDplots"), as.is = TRUE)
     if(organism == "Bsu") aa <- read.csv(system.file("extdata/RefDB/organisms/UP000001570_224308.csv.xz", package = "JMDplots"), as.is = TRUE)
     protein.formula <- protein.formula(aa)
@@ -343,7 +343,7 @@ evdevH2O4 <- function(pdf = FALSE) {
   TPPG17 <- read.csv(system.file(paste0("extdata/evdevH2O/phylostrata/TPPG17.csv.xz"), package = "JMDplots"), as.is = TRUE)
   LMM16 <- read.csv(system.file(paste0("extdata/evdevH2O/phylostrata/LMM16.csv.xz"), package = "JMDplots"), as.is = TRUE)
   Entry <- na.omit(intersect(TPPG17$Entry, LMM16$UniProt))
-  aaback <- human.aa(Entry)
+  aaback <- human_aa(Entry)
   set.seed(seed)
   iback <- sample(1:nrow(aaback), nbackground)
   ipback <- add.protein(aaback[iback, ])
@@ -548,7 +548,7 @@ evdevH2O6 <- function(pdf = FALSE) {
   TPPG17 <- read.csv(system.file(paste0("extdata/evdevH2O/phylostrata/TPPG17.csv.xz"), package = "JMDplots"), as.is = TRUE)
   LMM16 <- read.csv(system.file(paste0("extdata/evdevH2O/phylostrata/LMM16.csv.xz"), package = "JMDplots"), as.is = TRUE)
   Entry <- na.omit(intersect(TPPG17$Entry, LMM16$UniProt))
-  Hsa <- human.aa(Entry)
+  Hsa <- human_aa(Entry)
   Hsa_Zc <- Zc(Hsa)
   Hsa_nH2O <- nH2O(Hsa)
   # Fly proteome
@@ -1155,7 +1155,7 @@ plotphylo <- function(var = "Zc", PS_source = "TPPG17", memo = NULL, xlab = "PS"
     # Remove genes with no UniProt mapping 20210718
     dat <- dat[!is.na(dat$Entry), ]
     # Run human without warning about duplicated IDs 20210718
-    AA <- human.aa(dat$Entry, warn.if.duplicated = FALSE)
+    AA <- human_aa(dat$Entry, warn_if_duplicated = FALSE)
   } else {
     dat <- memo$dat
     AA <- memo$AA

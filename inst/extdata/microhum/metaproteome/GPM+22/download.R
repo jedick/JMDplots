@@ -24,7 +24,7 @@ if(FALSE) {
   # cat all_IDs.txt | efetch -db protein -format fasta > all_proteins.fasta
 
   # Get amino acid composition of all proteins
-  aa <- canprot::read.fasta("all_proteins.fasta")
+  aa <- canprot::read_fasta("all_proteins.fasta")
   write.csv(aa, "all_proteins_AA.csv", row.names = FALSE, quote = FALSE)
   writeLines(aa$protein, "all_proteins_ID.txt")
 

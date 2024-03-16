@@ -8,7 +8,7 @@ vignette: >
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 bibliography: data_sources.bib
-csl: ../../vignettes/peerj.csl
+csl: ../../diffexpr/peerj.csl
 ---
 
 This vignette from the R package [JMDplots](https://github.com/jedick/JMDplots) version `r packageDescription("JMDplots")$Version` approximately reproduces calculations of compositional oxidation state and hydration state that are described in a paper published in _PeerJ_ ([Dick, 2017](https://doi.org/10.7717/peerj.3421)).

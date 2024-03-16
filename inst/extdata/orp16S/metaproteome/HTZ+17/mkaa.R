@@ -14,7 +14,7 @@
 #   - Only includes samples that have both pyrotag and metaproteomes in years 2010-2011
 
 # Get amino acid composition for each protein sequence
-refaa <- canprot::read.fasta("SaanichInlet_LP_ORFs_2015-01-13_Filtered.fasta.xz")
+refaa <- canprot::read_fasta("SaanichInlet_LP_ORFs_2015-01-13_Filtered.fasta.xz")
 # Remove trailing \r of some IDs
 refaa$protein <- gsub("\r", "", refaa$protein)
 
@@ -35,7 +35,7 @@ out <- lapply(1:nrow(samp), function(i) {
   # Multiply amino acid composition by ScanCount
   aa[, 5:25] <- aa[, 5:25] * thisdat$ScanCount
   # Sum amino acid composition
-  canprot::aasum(aa)
+  canprot::sum_aa(aa)
 })
 
 out <- do.call(rbind, out)

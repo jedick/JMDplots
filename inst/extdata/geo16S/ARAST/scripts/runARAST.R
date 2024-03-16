@@ -19,7 +19,7 @@ mkAA <- function(faafiles, environment) {
   out$organism <- environment
   # Read each file and calculate amino acid composition
   for(i in seq_along(faafiles)) {
-    aa <- canprot::read.fasta(faafiles[i])
+    aa <- canprot::read_fasta(faafiles[i])
     out[i, 5:25] <- colSums(aa[, 5:25])
   }
   outfile <- paste0(environment, "_AA.csv")

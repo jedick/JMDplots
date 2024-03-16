@@ -17,14 +17,14 @@ MaximAct <- function(AA_target, seed = 1:100, nbackground = 2000, plot.it = TRUE
   if(is.null(AA_background)) {
     # Get background proteins:
     ## (UniProt reference human proteome) 20210215
-    #AA_background <- readRDS(system.file("/extdata/protein/human_base.rds", package = "canprot"))
+    #AA_background <- readRDS(system.file("/extdata/protein/human.base.rds", package = "canprot"))
     # Only use proteins that have phylostrata assignments in both Trigos and Liebeskind datasets 20210402
     TPPG17 <- read.csv(system.file(paste0("extdata/evdevH2O/phylostrata/TPPG17.csv.xz"), package = "JMDplots"), as.is = TRUE)
     LMM16 <- read.csv(system.file(paste0("extdata/evdevH2O/phylostrata/LMM16.csv.xz"), package = "JMDplots"), as.is = TRUE)
     # Take the intersection of lists of proteins from the two sources
     Entry <- na.omit(intersect(TPPG17$Entry, LMM16$UniProt))
     # Get amino acid compositions of the proteins
-    AA_background <- human.aa(Entry)
+    AA_background <- human_aa(Entry)
   }
 
   # Set up system
@@ -156,7 +156,7 @@ getphyloaa <- function(PS_source) {
   }
   dat <- check_IDs(dat, "Entry")
   dat <- cleanup(dat, "Entry")
-  human_aa <- human.aa(dat$Entry)
+  human.aa <- human_aa(dat$Entry)
   # Set up blank amino acid data frame
   PS <- sort(unique(dat$Phylostrata))
   aa <- thermo()$protein[rep(1, length(PS)), ]
@@ -168,7 +168,7 @@ getphyloaa <- function(PS_source) {
   # Loop over phylostrata
   for(i in seq_along(PS)) {
     iPS <- dat$Phylostrata == PS[i]
-    aaPS <- human_aa[iPS, ]
+    aaPS <- human.aa[iPS, ]
     aamean <- colMeans(aaPS[, 6:25])
     aa[i, 6:25] <- aamean
   }

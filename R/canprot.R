@@ -42,7 +42,7 @@ check_IDs <- function(dat, IDcol, aa_file = NULL, updates_file = NULL) {
   # for NJVS19 dataset 20191226
   if(any(grepl("\\|", ID))) ID <- sapply(strsplit(ID, "\\|"), "[", 2)
   # Human proteins
-  aa <- get("human_aa", canprot)
+  aa <- get("human.aa", canprot)
   # Add amino acid compositions from external file if specified
   if(!is.null(aa_file)) {
     aa_dat <- read.csv(aa_file, as.is=TRUE)

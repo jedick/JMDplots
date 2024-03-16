@@ -31,7 +31,7 @@ scsc2 <- function() {
   # calculate average amino acid compositions 
   for(i in 1:length(names)) {
     abundance <- gfp$abundance[[i]]
-    avgaa <- aasum(aa[[i]], abundance, average=TRUE)
+    avgaa <- sum_aa(aa[[i]], abundance, average=TRUE)
     avgaa$protein <- names[i]
     add.protein(avgaa)
   }
@@ -72,7 +72,7 @@ scsc3 <- function() {
   aa <- yeast.aa(gfp$protein)
   for(i in 1:length(locations)) {
     abundance <- gfp$abundance[[i]]
-    avgaa <- aasum(aa[[i]], abundance, average=TRUE)
+    avgaa <- sum_aa(aa[[i]], abundance, average=TRUE)
     avgaa$protein <- locations[i]
     add.protein(avgaa)
   }

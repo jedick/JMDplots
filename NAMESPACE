@@ -121,9 +121,9 @@ importFrom("CHNOSZ",
   # third batch: gradH2O
   "protein.formula", "protein.basis",
   # fourth batch: aoscp
-  "convert", "protein.length", # read.fasta() moved to canprot
+  "convert", "protein.length", # read.fasta() moved to canprot::read_fasta()
   # fifth batch: scsc
-  "add.protein", "label.plot", # aasum() moved to canprot
+  "add.protein", "label.plot", # aasum() moved to canprot::sum_aa()
   # sixth batch: aaaq
   "water.lines", "pinfo", "ionize.aa",
   # cpcp
@@ -146,7 +146,7 @@ importFrom("canprot",
   # moved from JMDplots to canprot 20191027
   "Zc", "nH2O", "GRAVY", "pI",
   # for pdat_* functions 20200204
-  "human.aa",
+  "human_aa",
   # for canH2O5() 20200505, 20200508
   "cplab",
   # for canH2OS1() 20201016
@@ -154,11 +154,11 @@ importFrom("canprot",
   # for get_comptab() 20240227
   "CLES",
   # moved from CHNOSZ to canprot 20240228
-  "read.fasta", "aasum",
+  "read_fasta", "sum_aa",
   # moved from JMDplots to canprot 20240301, 20240304
-  "add.cld", "Cost",
+  "add_cld", "Cost",
   # moved from chem16S to canprot 20240302, 20240310
-  "calc.metrics", "add.hull"
+  "calc_metrics", "add_hull"
 )
 
 # Imports from chem16S

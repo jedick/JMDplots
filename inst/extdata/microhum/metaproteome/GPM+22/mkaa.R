@@ -43,7 +43,7 @@ for(type in c("all", "bacterial")) {
     perc_match <- sum(!is.na(iall)) / length(iall) * 100
     perc_unique <- length(unique(iall)) / length(iall) * 100
     print(paste0(run, " ", round(perc_match, 1), "% matched ", round(perc_unique, 1), "% unique"))
-    aa <- canprot::aasum(all_aa[iall, ])
+    aa <- canprot::sum_aa(all_aa[iall, ])
     # Get the patient ID from the dat file
     dat <- readLines(paste0(run, ".dat"))
     pid <- gsub(".mgf", "", strsplit(dat[10], "Feces_")[[1]][2])

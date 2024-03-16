@@ -83,9 +83,9 @@ The available vignettes are listed here:
 The source IDs should be provided in the \code{IDcol} column of \code{dat}; multiple IDs for one protein can be separated by a semicolon.
 The function keeps the first \dQuote{known} ID for each protein, which must be present in one of these groups:
 \itemize{
-  \item The \code{\link{human_aa}} dataset of amino acid compositions.
+  \item The \code{\link[canprot]{human.aa}} dataset of amino acid compositions.
   \item Old UniProt IDs that are mapped to new UniProt IDs in \file{extdata/diffexpr/uniprot_updates.csv} or in \code{updates_file} if specified.
-  \item IDs of proteins in \code{aa_file}, which lists amino acid compositions in the format described for \code{\link{human_aa}} (see \code{extdata/protein/human_extra.csv} for an example and \code{\link[CHNOSZ]{thermo}$protein} for more details).
+  \item IDs of proteins in \code{aa_file}, which lists amino acid compositions in the format described for \code{\link{human.aa}} (see \code{\link[CHNOSZ]{thermo}$protein} for details).
 }
 
 \code{cleanup} removes proteins with unavailable IDs, ambiguous expression ratios, and duplicated IDs.
@@ -199,7 +199,7 @@ up2 <- dat$Ratio..cancer.normal. > 1
 # Remove two unavailable and one duplicated proteins
 dat <- cleanup(dat, "Entry", up2)
 # Now we can retrieve the amino acid compositions
-aa <- canprot::human.aa(dat$Entry)
+aa <- canprot::human_aa(dat$Entry)
 
 # Read another data file
 datadir <- paste0(system.file("extdata", package = "JMDplots"), "/diffexpr/colorectal/")

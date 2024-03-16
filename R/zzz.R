@@ -22,7 +22,7 @@ taxon_AA <- list(
 
 # For pdat_* functions: re-implement protcomp() here (no longer provided by canprot) 20240303
 protcomp <- function(uniprot = NULL, aa_file = NULL) {
-  aa <- human.aa(uniprot, aa_file, stop.if.missing = TRUE, warn.if.duplicated = TRUE)
+  aa <- human_aa(uniprot, aa_file, stop_if_missing = TRUE, warn_if_duplicated = TRUE)
   # Return list with UniProt IDs and amino acid composition
   list(uniprot = uniprot, aa = aa)
 }

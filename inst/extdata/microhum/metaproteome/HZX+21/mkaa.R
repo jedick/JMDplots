@@ -47,7 +47,7 @@ for(taxonomy in c("", "_bacteria")) {
   uniprotIDs <- sapply(strsplit(dat$Accession, "\\|"), "[", 2)
 
   # Get amino acid composition from FASTA file
-  uniprot <- canprot::read.fasta(paste0("uniprot", taxonomy, ".fasta"))
+  uniprot <- canprot::read_fasta(paste0("uniprot", taxonomy, ".fasta"))
   # Remove "tr|" and "sp|" prefixes
   uniprot$protein <- sapply(strsplit(uniprot$protein, "\\|"), "[", 2)
   # Read mapping table
@@ -73,7 +73,7 @@ for(taxonomy in c("", "_bacteria")) {
     # Multiply amino acid composition by spectral counts
     aa <- uniprot[, 5:25] * dat[, sample]
     aa <- cbind(uniprot[, 1:4], aa)
-    canprot::aasum(aa)
+    canprot::sum_aa(aa)
   })
 
   aa <- do.call(rbind, aa)

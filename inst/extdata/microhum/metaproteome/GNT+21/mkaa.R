@@ -41,7 +41,7 @@ for(table in c("S9", "S11")) {
     org <- substr(prot, 1, 8)
     # Read the faa file
     faafile <- paste0("/home/sequence/HOMD/GNT+21_PROKKA/", org, ".faa.xz")
-    aa <- canprot::read.fasta(faafile)
+    aa <- canprot::read_fasta(faafile)
     iaa <- match(prot, aa$protein)
     # Return the amino acid composition for this protein
     aa[iaa, ]
@@ -57,7 +57,7 @@ for(table in c("S9", "S11")) {
     LFQ <- dat[, i]
     LFQ[is.na(LFQ)] <- 0
     # Multiply amino acid composition by LFQ and take the sum
-    aa <- canprot::aasum(aaprot, abundance = LFQ)
+    aa <- canprot::sum_aa(aaprot, abundance = LFQ)
     # Set 'chains' to number of proteins with non-zero LFQ intensity
     aa$chains <- sum(dat[, i] > 0)
     aa

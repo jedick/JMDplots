@@ -12,7 +12,7 @@
 #   - Downloaded from https://ftp.pride.ebi.ac.uk/pride/data/archive/2017/05/PXD006343/LCM-(01).pep.xml
 
 # Get amino acid composition of proteins in reference database
-refaa <- canprot::read.fasta("SodaLakes_AllCombined_Cluster95ID_V2.fasta.xz")
+refaa <- canprot::read_fasta("SodaLakes_AllCombined_Cluster95ID_V2.fasta.xz")
 # Remove control character
 refaa$protein <- gsub("\r", "", refaa$protein)
 # Just use first identifier (e.g., OTU_X_325115443|emb|CBZ50998.1| -> OTU_X_325115443)
@@ -42,7 +42,7 @@ out <- lapply(samples, function(sample) {
   ## Sum amino acid composition of proteins
   iref <- match(proteins, refaa$protein)
   stopifnot(all(!is.na(iref)))
-  canprot::aasum(refaa[iref, ])
+  canprot::sum_aa(refaa[iref, ])
 
 })
 

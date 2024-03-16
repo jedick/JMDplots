@@ -8,7 +8,7 @@ vignette: >
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 bibliography: data_sources.bib
-csl: ../../vignettes/peerj.csl
+csl: ../../diffexpr/peerj.csl
 ---
 
 This vignette from the R package [JMDplots](https://github.com/jedick/JMDplots) version `r packageDescription("JMDplots")$Version` approximately reproduces calculations of compositional oxidation state and hydration state and thermodynamic potential that are described in two papers published in _PeerJ_ ([Dick, 2016](https://doi.org/10.7717/peerj.2238) and [Dick, 2017](https://doi.org/10.7717/peerj.3421)).
@@ -90,7 +90,7 @@ The list of proteins used in this study was taken from Supplementary Table 4 of 
 <b>u</b>. @YLZ+12 analyzed the conditioned media of paired stage I or IIA CRC and normal tissues from 9 patients using lectin affinity capture for glycoprotein (secreted protein) enrichment by nano LC-MS/MS to identify 68 up-regulated and 55 down-regulated differentially expressed proteins.
 IPI accession numbers listed in Supplementary Table 2 of @YLZ+12 were converted to UniProt IDs using the DAVID conversion tool.
 <b>v</b>. @MCZ+13 used laser capture microdissection (LCM) to separate stromal cells from 8 colon adenocarcinoma and 8 non-neoplastic tissue samples, which were pooled and analyzed by iTRAQ to identify 70 differentially expressed proteins.
-Here, gi numbers listed in Table 1 of @MCZ+13 were converted to UniProt IDs using the UniProt mapping tool; FASTA sequences of 31 proteins not found in UniProt were downloaded from NCBI and amino acid compositions were added to [human_extra.csv](../html/human.html).
+Here, gi numbers listed in Table 1 of @MCZ+13 were converted to UniProt IDs using the UniProt mapping tool; FASTA sequences of 31 proteins not found in UniProt were downloaded from NCBI and amino acid compositions were added to `human.extra.csv` in the canprot package.
 <b>w</b>. @KWA+14 used differential biochemical extraction to isolate the chromatin-binding fraction in frozen samples of colon adenomas (3 patients) and carcinomas (5 patients), and LC-MS/MS was used for protein identification and label-free quantification.
 The results were combined with a database search to generate a list of 106 proteins with nuclear annotations and at least a three-fold expression difference.
 Here, gene names from Table 2 of @KWA+14 were converted to UniProt IDs.

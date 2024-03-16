@@ -197,7 +197,7 @@ runARAST <- function(dataset, screening = TRUE, cleanup = TRUE) {
   iexist <- file.exists(faafiles)
   for(i in seq_along(faafiles)[iexist]) {
     ## Slow way: Calculate amino acid composition for each sequence
-    #myaa <- canprot::read.fasta(faafiles[i])
+    #myaa <- canprot::read_fasta(faafiles[i])
     #aa[i, 5:25] <- colSums(aa[, 5:25])
     # Faster way: count total number of each amino acid in file 20231217
     # https://unix.stackexchange.com/questions/5010/how-can-i-count-the-number-of-different-characters-in-a-file

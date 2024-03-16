@@ -14,7 +14,7 @@ mkZC <- function(which="HUMAN") {
   # http://www.biomedcentral.com/content/supplementary/1741-7007-7-50-S2.zip
   if(which=="HUMAN") lines <- readLines("fasta/human/HUMAN.fasta.gz")
   else if(which=="membrane") lines <- readLines("fasta/human/membrane.fa.gz")
-  aa <- canprot::read.fasta("", lines=lines)
+  aa <- canprot::read_fasta("", lines=lines)
   pl <- protein.length(aa)
   pf <- protein.formula(aa)
   ZC <- ZC(pf)

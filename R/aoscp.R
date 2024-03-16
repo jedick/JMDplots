@@ -452,7 +452,7 @@ aoscp6 <- function(pdf = FALSE) {
   aa <- thermo()$protein[0, ]
   for(ID in dat$ID) {
     file <- system.file(paste("extdata/aoscp/rubisco/", ID ,".fasta", sep=""), package = "JMDplots")
-    aa <- rbind(aa, read.fasta(file))
+    aa <- rbind(aa, read_fasta(file))
   }
   # calculate ZC
   ZC <- ZC(protein.formula(aa))
@@ -476,7 +476,7 @@ aoscp6 <- function(pdf = FALSE) {
   aa <- thermo()$protein[0, ]
   for(ID in IDs) {
     file <- system.file(paste("extdata/aoscp/rubisco/", ID ,".fasta", sep=""), package = "JMDplots")
-    aa <- rbind(aa, read.fasta(file))
+    aa <- rbind(aa, read_fasta(file))
   }
   ip <- add.protein(aa)
   # set up basis species and calculate affinities

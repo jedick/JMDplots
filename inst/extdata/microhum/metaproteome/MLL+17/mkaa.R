@@ -31,7 +31,7 @@
 
 # Read data
 dat <- read.csv("Maier_Proteomics_Analysis.csv")
-uniparc <- canprot::read.fasta("uniparc.fasta")
+uniparc <- canprot::read_fasta("uniparc.fasta")
 # Normalize protein IDs
 dat$UniProt.ID <- sapply(strsplit(dat$UniProt.ID, "_"), "[", 1)
 #uniparc$protein <- sapply(strsplit(uniparc$protein, "\\|"), "[", 2)

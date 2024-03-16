@@ -10,7 +10,7 @@
 #   - Downloaded from https://ftp.pride.ebi.ac.uk/pride/data/archive/2017/05/PXD006118/
 
 # Get amino acid composition of proteins in reference database
-refaa <- canprot::read.fasta("Mock_Comm_RefDB_V3.fasta.xz")
+refaa <- canprot::read_fasta("Mock_Comm_RefDB_V3.fasta.xz")
 # Remove functional descriptions after ID (as in "AK199_peg.3220\tSEED:fig|6666666.200881.peg.3220\telements")
 refaa$protein <- sapply(strsplit(refaa$protein, "\t"), "[", 1)
 # Make sure IDs are unique
@@ -39,7 +39,7 @@ out <- lapply(samples, function(sample) {
   ## Sum amino acid composition of proteins
   iref <- match(proteins, refaa$protein)
   stopifnot(all(!is.na(iref)))
-  aa <- canprot::aasum(refaa[iref, ])
+  aa <- canprot::sum_aa(refaa[iref, ])
   aa$protein <- "metaproteome-proteins"
   aa$organism <- sample
   aa$ref <- "KTS+17.mock"

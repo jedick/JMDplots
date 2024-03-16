@@ -59,7 +59,7 @@ The plots are available in the corresponding vignettes in the package.
           The server timestamp on \code{UP000000805_243232.fasta.gz} was Dec. 2, 2020; the reference proteome was last modified on August 22, 2020 according to \url{https://www.uniprot.org/proteomes/UP000000805}.
           The commands used to create \code{UP000000805_243232.csv.gz} are:
           \verb{
-            aa <- canprot::read.fasta("UP000000805_243232.fasta.gz")
+            aa <- canprot::read_fasta("UP000000805_243232.fasta.gz")
             write.csv(aa, "UP000000805_243232.csv", row.names = FALSE, quote = FALSE)
             system("xz UP000000805_243232.csv")
           }
@@ -68,7 +68,7 @@ The plots are available in the corresponding vignettes in the package.
 
         \item{\code{UP000000625_83333.csv.xz}}{
           This data file has amino acid compositions of 4392 proteins in the UniProt reference proteome of \emph{Escherichia coli} K12 (\url{https://www.uniprot.org/proteomes/UP000000625}; last modified 2021-03-07, file timestamp 2021-06-16, accessed on 2021-07-12).
-          The data frame was created by running \code{canprot::read.fasta("UP000000625_83333.fasta.gz")}.
+          The data frame was created by running \code{canprot::read_fasta("UP000000625_83333.fasta.gz")}.
         }
 
         \item{\code{UP000000803_7227.csv.xz}}{
