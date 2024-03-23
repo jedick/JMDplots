@@ -1,11 +1,11 @@
 # JMDplots/canH2O.R
-# make plots for the paper:
+# Make plots for the paper:
 # Water as a reactant in the differential expression of proteins in cancer
 # 20191126 jmd first version
 # 20200203 started moving functions to JMDplots
 # 20200404 include liver cancer
 
-# study overview 20191203
+# Study overview 20191203
 canH2O1 <- function(pdf = FALSE) {
   if(pdf) pdf("canH2O1.pdf", width = 7, height = 7)
   opar <- par(mar = c(0, 0, 0, 0))
@@ -13,10 +13,10 @@ canH2O1 <- function(pdf = FALSE) {
   layout(mat, widths = c(0.2, 1, 1), heights = c(1.5, 1))
   par(cex = 1)
   openplotmat(frame.plot = TRUE)
-  # three rows with eleven positions
+  # Three rows with eleven positions
   npos <- c(11, 11, 11)
   pos <- coordinates(npos)
-  # the positions and x-sizes of the boxes
+  # Positions and x-sizes of the boxes
   p1 <- 2; r1 <- 0.08
   p2 <- 5; r2 <- 0.1
   p3 <- 9; r3 <- 0.15
@@ -24,7 +24,8 @@ canH2O1 <- function(pdf = FALSE) {
   p5 <- 16; r5 <- 0.16
   p6 <- 13; r6 <- 0.07
   p7 <- 28; r7 <- 0.09
-  pO <- p1 + 2*npos[1] # the position for the overview plot
+  # Position for the overview plot
+  pO <- p1 + 2*npos[1] 
 
   straightarrow(from = pos[p1, ], to = pos[p2, ], arr.pos = 0.56, endhead = TRUE)
   straightarrow(from = pos[p2, ], to = pos[p3, ], arr.pos = 0.53, endhead = TRUE)
@@ -33,7 +34,7 @@ canH2O1 <- function(pdf = FALSE) {
   curvedarrow(from = pos[p4, ] + c(-0.06, -0.01), to = pos[pO, ] + c(0.27, 0.33), curve = -0.3, arr.pos = 0.40, endhead = TRUE)
   curvedarrow(from = pos[p6, ] + c(-0.07, 0), to = pos[pO, ] + c(0.01, 0.27), curve = 0.2, arr.pos = 0.75, endhead = TRUE)
 
-  # hard-coded colors (palette.colors is not available in R < 4.0.0) 20200415
+  # Hard-coded colors (palette.colors is not available in R < 4.0.0) 20200415
   #cols <- palette.colors(8, "Set 2")
   cols <- c("#66C2A5", "#FC8D62", "#8DA0CB", "#E78AC3", "#A6D854", "#FFD92F", "#E5C494", "#B3B3B3")
   cex <- 1.3
@@ -48,7 +49,7 @@ canH2O1 <- function(pdf = FALSE) {
   textrect(pos[p3, ], r3, ry, lab = comptext, cex = cex, box.col = cols[2])
   textplain(pos[p3, ] + c(0, 0.12), lab = c("Compositional", "Analysis"), font = 2, height = 0.04)
 
-  # show numbers of datasets 
+  # Show numbers of datasets 
   cond1 <- c("hypoxia", "secreted", "osmotic_euk", "glucose", "3D")
   cond2 <- c("breast", "colorectal", "liver", "lung", "pancreatic", "prostate")
   vigout <- system.file("diffexpr", package = "JMDplots")
@@ -61,12 +62,12 @@ canH2O1 <- function(pdf = FALSE) {
   cansets <- unlist(sapply(cancer, "[[", "dataset"))
   nstudies <- length(unique(sapply(strsplit(c(cultsets, cansets), "_"), "[", 1)))
 
-  # add "Cancer vs normal" box
+  # Add "Cancer vs normal" box
   textrect(pos[p4, ] + c(0.02, 0.065), r4, ry + 0.015, lab = "", cex = cex, box.col = cols[4])
   calab <- paste(sapply(cancer, nrow), cond2)
   textplain(pos[p4, ] + c(-0.087, 0.065), lab = calab, height = 0.105, cex = cex, adj = c(0, 0.5))
   textplain(pos[p4, ] + c(0.02, 0.2), lab = c("Cancer", "vs normal"), font = 2, height = 0.04)
-  # add color legend 20200506
+  # Add color legend 20200506
   #col2 <- palette.colors(8, "Classic Tableau")[c(7, 6, 2, 8, 5, 4)]
   col2 <- c("#E377C2", "#8C564B", "#FF7F0E", "#7F7F7F", "#9467BD", "#D62728")
   # function to get y-coordinates of text lines, extracted from diagram::textplain()
@@ -84,15 +85,15 @@ canH2O1 <- function(pdf = FALSE) {
   xcancer <- rep(pos[p4, 1] + 0.117, length(ycancer))
   points(xcancer, ycancer, bg = col2, pch = 21, cex = 1.7)
 
-  # add "Cell culture" box
+  # Add "Cell culture" box
   textrect(pos[p5, ] + c(-0.011, 0.08), r5, ry, lab = "", cex = cex, box.col = cols[3])
   # sum osmotic (salt) and glucose datasets for hyperosmotic stress 20200411
   culab <- sapply(culture, nrow)
   culab["osmotic_euk"] <- culab["osmotic_euk"] + culab["glucose"]
   culab <- culab[-4]
-  # change "osmotic_euk" to "hyperosmotic" 20200414
+  # Change "osmotic_euk" to "hyperosmotic" 20200414
   names(culab)[3] <- "hyperosmotic"
-  # write "secreted in hypoxia" and "3D vs 2D culture" 20200118
+  # Write "secreted in hypoxia" and "3D vs 2D culture" 20200118
   culab <- paste(culab, names(culab))
   shlab <- c(paste(culab[2], "in"), "     hypoxia")
   textplain(pos[p5, ] + c(-0.163, 0.095), lab = shlab, height = 0.038, cex = cex, adj = c(0, 0.5))
@@ -100,16 +101,16 @@ canH2O1 <- function(pdf = FALSE) {
   culab[5] <- paste(culab[5], "vs 2D culture")
   textplain(pos[p5, ] + c(-0.163, 0.08), lab = culab, height = 0.09, cex = cex, adj = c(0, 0.5))
   textplain(pos[p5, ] + c(-0.02, 0.2), lab = c("Cell", "culture"), font = 2, height = 0.04)
-  # add color legend 20200506
+  # Add color legend 20200506
   #col1 <- palette.colors(9, "Okabe-Ito")[c(6, 4, 9, 3, 2)]
   col1 <- c(blue = "#0072B2", bluishgreen = "#009E73", gray = "#999999", skyblue = "#56B4E9", orange = "#E69F00")
   yculture <- ycoords(pos[p5, ] + c(-0.16, 0.08), lab = culab, height = 0.09)
   xculture <- rep(pos[p5, 1] + 0.13, length(yculture))
-  # point salt-inducded hyperosmotic stress on same line as glucose
+  # Point for salt-inducded hyperosmotic stress on same line as glucose
   points(xculture[-3], yculture[-3], bg = col1[-3], pch = 21, cex = 1.7)
   points(xculture[3] - 0.025, yculture[4], bg = col1[3], pch = 21, cex = 1.7)
 
-  # add dataset summary, pan-cancer, and findings text
+  # Add dataset summary, pan-cancer, and findings text
   textplain(pos[21, ] + c(-0.02, 0.1), lab = c(paste("Total:", total), "datasets", paste("from", nstudies), "studies"),
             adj = c(0, 0.5), font = 3, height = 0.07, cex = 1.2)
 
@@ -135,7 +136,7 @@ canH2O1 <- function(pdf = FALSE) {
   hydtext <- as.expression(c(hydtext1, hydtext2))
   textplain(pos[26, ] + c(0.21, -0.08), lab = hydtext, height = 0.04)
 
-  # make overview plot
+  # Make overview plot
   plot.new()
   par(mar = c(2, 2, 0, 0), xaxs = "i", yaxs = "i")
   plot.window(c(-1, 1), c(-1, 1))
@@ -147,7 +148,7 @@ canH2O1 <- function(pdf = FALSE) {
   for(i in 5:1) arrows(0, 0, 40*mean(culture[[i]]$Zc.diff), 40*mean(culture[[i]]$nH2O.diff), col = col1[i], lwd = 3, length = 0.15)
   for(i in 1:6) arrows(0, 0, 40*mean(cancer[[i]]$Zc.diff), 40*mean(cancer[[i]]$nH2O.diff), col = col2[i], lwd = 3, length = 0.15)
 
-  # restore these defaults to be able to re-run this script with expected results
+  # Restore these defaults to be able to re-run this script with expected results
   par(xaxs = "r", yaxs = "r")
   if(pdf) {
     dev.off()
@@ -155,11 +156,11 @@ canH2O1 <- function(pdf = FALSE) {
   }
 }
 
-# median differences of nH2O and Zc for cell culture and cancer tissue 20191126
+# Median differences of nH2O and Zc for cell culture and cancer tissue 20191126
 canH2O2 <- function(pdf = FALSE) {
   if(pdf) pdf("canH2O2.pdf", width = 8, height = 6)
-  # layout with spaces between groups of plots
-  # spaces
+  # Layout with spaces between groups of plots
+  # Spaces
   p00 <- rep(0, 2); p0 <- rep(0, 15)
   # (A) cell culture
   p1 <- rep(1, 15); p2 <- rep(2, 15); p3 <- rep(3, 15); p4 <- rep(4, 15); p5 <- rep(5, 15)
@@ -168,7 +169,7 @@ canH2O2 <- function(pdf = FALSE) {
   p9 <- rep(9, 15); p10 <- rep(10, 15); p11 <- rep(11, 15)
   # (C) credible regions
   p12 <- rep(12, 15); p13 <- rep(13, 15)
-  # assemble columns (each one is 48 units high)
+  # Assemble columns (each one is 48 units high)
   c1 <- c(0, p1, p00, p6, p9)
   c2 <- c(0, p2, p00, p7, p10)
   c3 <- c(0, p3, p00, p8, p11)
@@ -179,7 +180,7 @@ canH2O2 <- function(pdf = FALSE) {
   layout(mat, widths = c(1, 1, 1, 0.5, 0.5, 1))
   par(mar = c(3.2, 3.3, 1.5, 1), mgp = c(2.2, 1, 0))
 
-  # read data for all conditions
+  # Read data for all conditions
   cond1 <- c("hypoxia", "secreted", "osmotic_euk", "glucose", "3D")
   cond2 <- c("breast", "colorectal", "liver", "lung", "pancreatic", "prostate")
   conds <- c(cond1, cond2)
@@ -196,17 +197,17 @@ canH2O2 <- function(pdf = FALSE) {
   col2 <- c("#E377C2", "#8C564B", "#FF7F0E", "#7F7F7F", "#9467BD", "#D62728")
   col <- c(col1, col2)
 
-  # make scatter plots for nH2O and Zc in cell culture and cancer types
+  # Make scatter plots for nH2O and Zc in cell culture and cancer types
   lapply(1:length(alldat), function(i) {
     thisone <- names(alldat)[i]
     if(thisone %in% cond1) {
-      # use open/filled symbols for cancer/non-cancer cells 20200103
+      # Use open/filled symbols for cancer/non-cancer cells 20200103
       pch <- rep(21, nrow(alldat[[i]]))
       pch[grepl("cancer", alldat[[i]]$tags)] <- 19
       # use squares for yeast datasets 20200407
       pch[grepl("yeast", alldat[[i]]$tags)] <- 0
     } else {
-      # use filled/open symbols for human/[mouse or rat] cancer 20200415
+      # Use filled/open symbols for human/[mouse or rat] cancer 20200415
       pch <- rep(19, nrow(alldat[[i]]))
       pch[grepl("mouse", alldat[[i]]$tags)] <- 21
       pch[grepl("rat", alldat[[i]]$tags)] <- 21
@@ -231,7 +232,7 @@ canH2O2 <- function(pdf = FALSE) {
     if(thisone == "breast") label.figure("B", cex = 2, font = 2, yfrac = 1)
   })
   
-  # compare density contours for cell culture and cancer types 20191126
+  # Compare density contours for cell culture and cancer types 20191126
   # CSV files generated by running the cancer and cell culture vignettes
   vigout <- system.file("diffexpr", package = "JMDplots")
   conddat <- function(cond) read.csv(paste0(vigout, "/", cond, ".csv"), as.is = TRUE)
@@ -264,7 +265,7 @@ canH2O3 <- function(pdf = FALSE) {
   HPA_labels <- sapply(strsplit(HPA_labels, " "), "[", 1)
   HPA_labels[grepl("head", HPA_labels)] <- "head and neck"
 
-  # get colors for six cancers in paper 20191208
+  # Get colors for six cancers in paper 20191208
   cond2 <- c("breast", "colorectal", "liver", "lung", "pancreatic", "prostate")
   #col2 <- palette.colors(8, "Classic Tableau")[c(7, 6, 2, 8, 5, 4)]
   col2 <- c("#E377C2", "#8C564B", "#FF7F0E", "#7F7F7F", "#9467BD", "#D62728")
@@ -273,7 +274,7 @@ canH2O3 <- function(pdf = FALSE) {
   colHPA[jHPA] <- col2
   shapeHPA <- rep(15, nrow(HPA))
   shapeHPA[jHPA] <- 19
-  # now do TCGA
+  # Now do TCGA
   TCGAnames <- names(HTmap)[match(cond2, sapply(strsplit(HTmap, " "), "[", 1))]
   jTCGA <- match(TCGAnames, TCGA$description)
   colTCGA <- rep("darkslategray", nrow(TCGA))
@@ -281,11 +282,11 @@ canH2O3 <- function(pdf = FALSE) {
   shapeTCGA <- rep(15, nrow(TCGA))
   shapeTCGA[jTCGA] <- 19
 
-  # calculate 2D density and 50% probability level 20200318
+  # Calculate 2D density and 50% probability level 20200318
   densfun <- function(x, y) {
     n <- 200
     dens <- kde2d(x, y, n = n)
-    # find 50% probability level
+    # Find 50% probability level
     # https://stackoverflow.com/questions/16225530/contours-of-percentiles-on-level-plot
     # (snippet from emdbook::HPDregionplot from @benbolker)
     dx <- diff(dens$x[1:2])
@@ -296,8 +297,8 @@ canH2O3 <- function(pdf = FALSE) {
     levels <- sapply(probs, function(x) {
       approx(c1, sz, xout = 1 - x)$y
     })
-    # turn density into data frame for ggplot
-    # get x- and y- values
+    # Turn density into data frame for ggplot
+    # Get x- and y- values
     xr <- range(x)
     xs <- seq(xr[1], xr[2], length.out = n)
     yr <- range(y)
@@ -315,8 +316,8 @@ canH2O3 <- function(pdf = FALSE) {
   HPAdens <- HPAstuff$dat
   HPAlevels <- HPAstuff$levels
 
-  # median differences of nH2O-Zc for HPA and TCGA datasets
-  # common elements for both plots
+  # Median differences of nH2O-Zc for HPA and TCGA datasets
+  # Common elements for both plots
   pl1.common <- list(
     theme_bw(),
     xlab(quote(Delta*italic(Z)[C])),
@@ -325,9 +326,9 @@ canH2O3 <- function(pdf = FALSE) {
     geom_vline(xintercept = 0, linetype = 3, colour = "gray30"),
     theme(plot.tag = element_text(size = 20), plot.title = element_text(hjust = 0.5))
   )
-  # create plots
+  # Create plots
   nudge_x <- ifelse(TCGA_labels %in% c("SKCM"), 0.001, 0)
-  # workaround for "no visible binding for global variable ‘Zc.diff’" etc. in R CMD check 20200317
+  # Workaround for "no visible binding for global variable ‘Zc.diff’" etc. in R CMD check 20200317
   Zc.diff <- nH2O.diff <- x <- y <- z <- NULL
   pl1 <- list(
     ggplot(TCGA, aes(Zc.diff, nH2O.diff, label = TCGA_labels)) + 
@@ -342,7 +343,7 @@ canH2O3 <- function(pdf = FALSE) {
       ggtitle("HPA") + labs(tag = expression(bold(B)))
   )
 
-  # put together the figure
+  # Put together the figure
   mat <- matrix(c(1, 2), byrow = TRUE, nrow = 1)
   ml <- gridExtra::marrangeGrob(pl1, layout_matrix = mat, top = NULL)
   if(pdf) {
@@ -351,10 +352,10 @@ canH2O3 <- function(pdf = FALSE) {
   } else ml
 }
 
-# differentially expressed genes in aneuploid and osmotically shocked yeast cells 20200505
+# Differentially expressed genes in aneuploid and osmotically shocked yeast cells 20200505
 canH2O4 <- function(pdf = FALSE) {
   if(pdf) pdf("canH2O4.pdf", width = 5, height = 4)
-  # aneuploid yeast cells (Tsai et al., 2019)
+  # Aneuploid yeast cells (Tsai et al., 2019)
   pdat <- pdat_aneuploidy("TNC+19")
   layout(matrix(c(1, 2, 4, 1, 3, 5), nrow = 3), heights = c(0.2, 1, 1))
   par(mar = c(0, 0, 0, 0), mgp = c(2.2, 0.8, 0))
@@ -367,12 +368,12 @@ canH2O4 <- function(pdf = FALSE) {
   label.figure("A", xfrac = 0.04, yfrac = 1, font = 2, cex = 1.5)
   qdist(pdat, "nH2O")
   label.figure("B", xfrac = 0.04, yfrac = 1, font = 2, cex = 1.5)
-  # hyper- and hypo-osmotic experiments (Gasch et al., 2000)
+  # Hyper- and hypo-osmotic experiments (Gasch et al., 2000)
   vigout2 <- system.file("diffexpr", package = "JMDplots")
   yeast_stress <- read.csv(file.path(vigout2, paste0("yeast_stress.csv")), as.is = TRUE)
   ihyper <- grepl("sorbitol", yeast_stress$dataset)
   ihypo <- grepl("Hypo", yeast_stress$dataset)
-  # plot Zc
+  # Plot Zc
   plot(c(1, 7), extendrange(yeast_stress$Zc.diff), xlab = "Time (minutes)", ylab = quote(Delta*italic(Z)[C]), xaxt = "n", type = "n")
   abline(h = 0, lty = 3, col = "gray30")
   axis(1, at = 1:7, labels = c(5, 15, 30, 45, 60, 90, 120))
@@ -380,7 +381,7 @@ canH2O4 <- function(pdf = FALSE) {
   lines(1:5, yeast_stress$Zc.diff[ihypo], pch = 0, type = "b")
   text(c(2.5, 2.7), c(-0.006, 0.0135), c("hyperosmotic", "hypoosmotic"))
   label.figure("C", xfrac = 0.04, yfrac = 1, font = 2, cex = 1.5)
-  # plot nH2O
+  # Plot nH2O
   plot(c(1, 7), extendrange(yeast_stress$nH2O.diff), xlab = "Time (minutes)", ylab = quote(Delta*italic(n)[H[2]*O]), xaxt = "n", type = "n")
   abline(h = 0, lty = 3, col = "gray30")
   axis(1, at = 1:7, labels = c(5, 15, 30, 45, 60, 90, 120))
@@ -398,7 +399,7 @@ canH2O4 <- function(pdf = FALSE) {
 ### TABLE 2 ###
 ###############
 
-# mean differences and p-values for all datasets in each condition 20200125
+# Mean differences and p-values for all datasets in each condition 20200125
 canH2OT2 <- function() {
   cond1 <- c("hypoxia", "secreted", "osmotic_euk", "glucose", "3D")
   cond2 <- c("breast", "colorectal", "liver", "lung", "pancreatic", "prostate")
@@ -410,8 +411,8 @@ canH2OT2 <- function() {
   vigout2 <- system.file("diffexpr", package = "JMDplots")
   conddat <- function(cond) read.csv(paste0(vigout2, "/", cond, ".csv"))
   pancan <- lapply(cond3, conddat); names(pancan) <- cond3
-  # make data frames for mean differences and p-values
-  # include comparison of up- and down-regulated proteins for "Secreted" in hypoxia compared to "Hypoxia" (whole-cell)
+  # Make data frames for mean differences and p-values
+  # Include comparison of up- and down-regulated proteins for "Secreted" in hypoxia compared to "Hypoxia" (whole-cell)
   pdat <- mdat <- data.frame(condition = c(names(culture), names(cancer), names(pancan), "up", "down"))
   for(property in c("Zc", "nH2O")) {
     pvals <- mvals <- numeric()
@@ -445,7 +446,7 @@ canH2OT2 <- function() {
     mdat <- cbind(mdat, mcol)
     pdat <- cbind(pdat, pcol)
   }
-  # format values and put p-values in parentheses (bold for values below 0.05 significance threshold)
+  # Format values and put p-values in parentheses (bold for values below 0.05 significance threshold)
   fmts <- c(NA, "%.3f", "%.3f")
   for(icol in 2:3) {
     for(irow in 1:nrow(mdat)) {
@@ -456,7 +457,7 @@ canH2OT2 <- function() {
       mdat[irow, icol] <- paste(sprintf(fmts[icol], as.numeric(mdat[irow, icol])), ptxt)
     }
   }
-  # adjustments for pretty kable output
+  # Adjustments for pretty kable output
   rownames(mdat) <- mdat[, 1]
   rownames(mdat)[rownames(mdat)=="osmotic_euk"] <- "salt"
   mdat <- mdat[, -1]
@@ -468,12 +469,12 @@ canH2OT2 <- function() {
 ### SI TABLES AND FIGURES ###
 #############################
 
-# stoichiometric matrix for amino acids with QEC basis species 20200104
+# Stoichiometric matrix for amino acids with QEC basis species 20200104
 canH2OT1 <- function() {
   basis("QEC")
   species(aminoacids(""))
   out <- species()[, c(9, 1:5)]
-  # adjustments for pretty kable output
+  # Adjustments for pretty kable output
   rownames(out) <- out[, 1]
   out <- out[, -1]
   colnames(out) <- gsub("([[:digit:]])", "~\\1~", colnames(out))
@@ -490,27 +491,27 @@ canH2OS1 <- function(pdf = FALSE) {
   par(las = 1)
   par(cex.lab = 1.2)
 
-  # define axis labels
+  # Define axis labels
   nH2Olab <- expression(italic(n)[H[2] * O])
   nO2lab <- expression(italic(n)[O[2]])
   Zclab <- expression(italic(Z)[C])
 
-  # function to plot values for amino acids
+  # Function to plot values for amino acids
   aaplot <- function(x, y, xlab, ylab, legend.x, lmlim = c(-1, 1)) {
     plot(x, y, type = "p", pch = aminoacids(1), xlab = xlab, ylab = NA)
     mtext(ylab, side = 2, line = 2.4, las = 0, cex = 1.2)
     lmfun(x, y, legend.x, lmlim)
   }
 
-  # set up amino acid compositions (one amino acid per composition)
+  # Set up amino acid compositions (one amino acid per composition)
   AAcomp <- as.data.frame(diag(20))
   names(AAcomp) <- aminoacids(3)
 
-  # plot 1: nO2-Zc of amino acids
+  # Plot 1: nO2-Zc of amino acids
   aaplot(Zc(AAcomp), nO2(AAcomp, "QEC"), Zclab, nO2lab, "bottomright")
   label.figure("A", cex = 1.7, font = 2)
 
-  # plot 2: nH2O-Zc of amino acids
+  # Plot 2: nH2O-Zc of amino acids
   aaplot(Zc(AAcomp), nH2O(AAcomp, "QEC"), Zclab, nH2Olab, "bottomright")
   label.figure("B", cex = 1.7, font = 2)
 
@@ -530,7 +531,7 @@ canH2OS2 <- function(pdf = FALSE) {
   HPA_labels <- sapply(strsplit(HPA_labels, " "), "[", 1)
   HPA_labels[grepl("head", HPA_labels)] <- "head and neck"
 
-  # get colors for 6 cancers in paper 20191208
+  # Get colors for 6 cancers in paper 20191208
   cond2 <- c("breast", "colorectal", "liver", "lung", "pancreatic", "prostate")
   #col2 <- palette.colors(8, "Classic Tableau")[c(7, 6, 2, 8, 5, 4)]
   col2 <- c("#E377C2", "#8C564B", "#FF7F0E", "#7F7F7F", "#9467BD", "#D62728")
@@ -587,7 +588,7 @@ canH2OS2 <- function(pdf = FALSE) {
           panel.border = element_rect(colour = "black", fill=NA))
   pl2 <- list(pl2)
 
-  # put together the figure
+  # Put together the figure
   mat <- matrix(1:2, nrow = 1)
   ml <- gridExtra::marrangeGrob(c(pl1, pl2), layout_matrix = mat, top = NULL)
   if(pdf) {
@@ -601,7 +602,7 @@ canH2OS2 <- function(pdf = FALSE) {
 ### UNEXPORTED OBJECT ###
 #########################
 
-# mapping between HPA and TCGA names
+# Mapping between HPA and TCGA names
 HTmap <- c(
   BRCA = "breast cancer / breast",
   CESC = "cervical cancer / cervix, uterine",
@@ -627,7 +628,7 @@ HTmap <- c(
 ### UNEXPORTED FUNCTIONS ###
 ############################
 
-# function to plot 50 percentile contours / extracted from canH2O2 20191201
+# Function to plot 50 percentile contours / extracted from canH2O2 20191201
 contplot <- function(dat, main, col, xvar = "Zc", yvar = "nH2O", dx = NULL, dy = NULL,
                      labtext = NULL, names = NULL) {
   xlab <- bquote(Delta * .(cplab[[strsplit(xvar, "_")[[1]][1]]]))
@@ -650,8 +651,8 @@ contplot <- function(dat, main, col, xvar = "Zc", yvar = "nH2O", dx = NULL, dy =
   title(main, font.main = 1)
 }
 
-# function to plot linear model
-# extracted from canH2OS1 20200224
+# Function to plot linear model
+# Extracted from canH2OS1 20200224
 lmfun <- function(x, y, legend.x = NULL, lmlim = NULL, ...) {
   mylm <- lm(y ~ x)
   if(is.null(lmlim)) lmlim <- range(x)

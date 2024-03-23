@@ -196,7 +196,8 @@ utogig2 <- function(pdf = FALSE, logact = -3) {
       par(mar = c(4, 3, 0.5, 1))
     }
 
-    plot(xlim, ylim, type = "n", xlab = Zclab, ylab = ylab)
+    plot(xlim, ylim, type = "n", xlab = Zclab, ylab = ylab, xaxt = "n")
+    axis(1, gap.axis = 0)
     abline(h = 0, lty = 4)
 
     pchs <- c(21:25, 20)

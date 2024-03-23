@@ -11,7 +11,7 @@ Lines are drawn from the parent to each of the children, creating a starburst pa
   plot_starburst(taxa = c("Bacteria", "Archaea"), metrics = c("Zc", "nH2O"),
     refdb = "RefSeq", remove_species_20000 = TRUE, terminal_H2O = 0,
     xlim = NULL, ylim = NULL, pch = NULL, col = seq_along(taxa), lcol = NULL,
-    hline = NULL, legend.x = NA, identify = FALSE)
+    lwd = rep(1, length(taxa)), hline = NULL, legend.x = NA, identify = FALSE)
 }
 
 \arguments{
@@ -25,6 +25,7 @@ Lines are drawn from the parent to each of the children, creating a starburst pa
   \item{pch}{plotting symbols}
   \item{col}{colors for plotting symbols and lines}
   \item{lcol}{colors for lines; default corresponds to \code{\link{adjustcolor}(col, alpha.f = 0.5)}}
+  \item{lwd}{line widths}
   \item{hline}{numeric, coordinates of horizontal lines to add}
   \item{legend.x}{position of \code{\link{legend}}; default is to draw no legend}
   \item{identify}{logical, run \code{\link{identify}} for interactive identification of points?}

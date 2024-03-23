@@ -36,7 +36,7 @@ This table gives a brief description of each function.
 
 \tabular{ll}{
   \code{canH2O1} \tab Study overview \cr
-  \code{canH2O2} \tab Median differences of protein length, \nH2O and \Zc for cell culture and cancer tissue \cr
+  \code{canH2O2} \tab Median differences of \nH2O and \Zc for cell culture and cancer tissue \cr
   \code{canH2O3} \tab \nH2O-\Zc plots for TCGA and HPA datasets \cr
   \code{canH2O4} \tab Differentially expressed genes in aneuploid and osmotically shocked yeast cells \cr
   \code{canH2OT1} \tab Stoichiometric matrix for amino acids with QEC basis species \cr

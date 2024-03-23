@@ -4,7 +4,7 @@ plot_starburst <- function(
   taxa = c("Bacteria", "Archaea"), metrics = c("Zc", "nH2O"), refdb = "RefSeq",
   remove_species_20000 = TRUE, terminal_H2O = 0,
   xlim = NULL, ylim = NULL, pch = NULL, col = seq_along(taxa), lcol = NULL,
-  hline = NULL, legend.x = NA, identify = FALSE) {
+  lwd = rep(1, length(taxa)), hline = NULL, legend.x = NA, identify = FALSE) {
 
   # Compute chemical metrics of all taxa in reference database
   datadir <- system.file(file.path("extdata", refdb), package = "chem16S")
@@ -110,7 +110,7 @@ plot_starburst <- function(
     taxon_metrics <- vals[[i]]$taxon
     children_metrics <- vals[[i]]$children
     for(j in seq_along(children_metrics$Xvals)) lines(c(taxon_metrics$Xvals, children_metrics$Xvals[j]),
-      c(taxon_metrics$Yvals, children_metrics$Yvals[j]), col = lcol[i])
+      c(taxon_metrics$Yvals, children_metrics$Yvals[j]), col = lcol[i], lwd = lwd[i])
   }
 
   # Loop 3: Plot points for parents
