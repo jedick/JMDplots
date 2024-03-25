@@ -1,10 +1,10 @@
 \encoding{UTF-8}
 \name{plot_starburst}
 \alias{plot_starburst}
-\title{Plot chemical metrics for taxa and their children}
+\title{Starburst plot for parent and children taxa}
 \description{
-Plots chemical metrics of reference proteomes for selected taxa and their children.
-Lines are drawn from the parent to each of the children, creating a starburst pattern.
+Plots chemical metrics of reference proteomes for parent taxa and their children.
+Lines are drawn from each parent to all of its children, creating a starburst pattern.
 }
 
 \usage{
@@ -45,6 +45,7 @@ Subsequently, in other publications, the contribution of terminal groups to \nH2
 }
 
 \examples{
-# Default plot for Bacteria and Archaea parents with lines drawn to children phyla
+# Default plot for Bacteria and Archaea (parents)
+# with lines drawn to phyla in each domain (children)
 plot_starburst(legend.x = "bottomleft")
 }
