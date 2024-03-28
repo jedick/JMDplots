@@ -103,7 +103,10 @@ export(
   ## 20200418
   ".pdat_osmotic", "pdat_osmotic_bact", "pdat_osmotic_euk", "pdat_osmotic_halo",
   "check_IDs", "cleanup", "get_comptab", "diffplot", "qdist",
-  "xsummary", "xsummary2", "xsummary3"
+  "xsummary", "xsummary2", "xsummary3",
+
+  # genoGOE paper 20240328
+  "genoGOE_1"
 )
 
 # Imports from CHNOSZ
