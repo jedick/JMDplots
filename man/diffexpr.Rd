@@ -1,6 +1,6 @@
 \encoding{UTF-8}
-\name{canprot}
-\alias{canprot}
+\name{diffexpr}
+\alias{diffexpr}
 \alias{mkvig}
 \alias{check_IDs}
 \alias{cleanup}

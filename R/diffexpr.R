@@ -1,7 +1,6 @@
-# JMDplots/canprot.R
-# This file has functions previously in the canprot package
-# that are used for chemical analysis of differential expression data
-# in the gradH2O and canH2O papers.
+# JMDplots/diffexpr.R
+# This file has functions, which were previously in the canprot package,
+# for chemical analysis of differential expression data
 # 20240426 Functions moved from canprot package
 
 # Compile and view vignettes from command line
@@ -130,7 +129,6 @@ cleanup <- function(dat, IDcol, up2 = NULL) {
   dat
 }
 
-# canprot/R/get_comptab.R
 # Merge old Zc_nH2O() and CNS() functions, and add volume 20170718
 # CNS: elemental abundance (C, N, S) per residue 20170124
 # Zc_nH2O: plot and summarize Zc and nH2O/residue of proteins 20160706
@@ -219,7 +217,6 @@ get_comptab <- function(pdat, var1="Zc", var2="nH2O", plot.it=FALSE, mfun="media
   return(invisible(out))
 }
 
-# canprot/R/diffplot.R
 # Plot mean or median differences of Zc and nH2O, or other variables
 # 20160715 jmd
 # 20190329 add oldstyle = FALSE (no drop lines; show kernel density)
