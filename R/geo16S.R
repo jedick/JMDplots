@@ -11,7 +11,7 @@ geo16S1 <- function(pdf = FALSE) {
   par(mfrow = c(1, 3))
 
   # Read chemical metrics of all taxa
-  datadir <- system.file("extdata/RefDB/RefSeq", package = "JMDplots")
+  datadir <- system.file("RefDB/RefSeq_206", package = "JMDplots")
   metrics <- read.csv(file.path(datadir, "taxon_metrics.csv.xz"), as.is = TRUE)
 
   ## Panel A: Major phyla
@@ -36,7 +36,7 @@ geo16S1 <- function(pdf = FALSE) {
   lcol <- rep(lcol, length.out = length(col))
 
   # Make the plot
-  ps1 <- plot_starburst(taxa, metrics = c("Zc", "nH2O"), refdb = "RefSeq", xlim = xlim, ylim = ylim,
+  ps1 <- plot_starburst(taxa, metrics = c("Zc", "nH2O"), refdb = "RefSeq_206", xlim = xlim, ylim = ylim,
     pch = pch, lcol = lcol, hline = c(-0.81, -0.68), terminal_H2O = 1)
   # Label Halobacteria and Nanohaloarchaea 20200930
   iEury <- match("Euryarchaeota", names(ps1))
@@ -82,7 +82,7 @@ geo16S1 <- function(pdf = FALSE) {
   lcol <- rep(lcol, length.out = length(col))
 
   # Make the plot
-  ps2 <- plot_starburst(taxa, metrics = c("Zc", "nH2O"), refdb = "RefSeq", xlim = xlim, ylim = ylim,
+  ps2 <- plot_starburst(taxa, metrics = c("Zc", "nH2O"), refdb = "RefSeq_206", xlim = xlim, ylim = ylim,
     pch = pch, lcol = lcol, hline = c(-0.77, -0.71), terminal_H2O = 1)
   # Label Halobacteria and Nanohaloarchaea 20200930
   iEury <- match("Euryarchaeota", names(ps1))
@@ -109,7 +109,7 @@ geo16S1 <- function(pdf = FALSE) {
 
   ## Panel C: Proteobacteria 20200925
   # How to count the representatives in each proteobacterial class:
-  #> taxa <- read.csv(system.file("extdata/RefDB/RefSeq/taxonomy.csv.xz", package = "JMDplots"), as.is = TRUE)
+  #> taxa <- read.csv(system.file("RefDB/RefSeq_206/taxonomy.csv.xz", package = "JMDplots"), as.is = TRUE)
   #> sort(table(na.omit(taxa$class[taxa$phylum == "Proteobacteria"])), decreasing = TRUE)
   #
   #  Gammaproteobacteria   Alphaproteobacteria    Betaproteobacteria 
@@ -133,7 +133,7 @@ geo16S1 <- function(pdf = FALSE) {
   lcol <- rep(lcol, length.out = length(col))
 
   # Make the plot
-  ps3 <- plot_starburst(taxa, metrics = c("Zc", "nH2O"), refdb = "RefSeq", xlim = xlim, ylim = ylim,
+  ps3 <- plot_starburst(taxa, metrics = c("Zc", "nH2O"), refdb = "RefSeq_206", xlim = xlim, ylim = ylim,
     pch = pch, lcol = lcol, terminal_H2O = 1)
   # Add legend
   len <- length(taxa)
@@ -1202,7 +1202,7 @@ geo16S_S1 <- function(pdf = FALSE) {
 
   text(5, 10, "Amino Acid Compositions\nfor Taxonomic Groups\n(Reference Proteomes)", adj = c(0, 1), font = 2)
   # Read file with precomputed metrics for taxa at different ranks
-  metrics <- read.csv(system.file("extdata/RefDB/RefSeq/taxon_metrics.csv.xz", package = "JMDplots"))
+  metrics <- read.csv(system.file("RefDB/RefSeq_206/taxon_metrics.csv.xz", package = "JMDplots"))
   ranks <- c("superkingdom", "phylum", "class", "order", "family", "genus")
   plural <- c("superkingdoms (*)", "phyla", "classes", "orders", "families", "genera")
   for(irank in 1:6) {
@@ -1234,9 +1234,9 @@ geo16S_S2 <- function(pdf = FALSE) {
   if(pdf) pdf("geo16S_S2.pdf", width = 12, height = 6)
 
   # Read file with precomputed metrics for taxa at different ranks
-  metrics <- read.csv(system.file("extdata/RefDB/RefSeq/taxon_metrics.csv.xz", package = "JMDplots"))
+  metrics <- read.csv(system.file("RefDB/RefSeq_206/taxon_metrics.csv.xz", package = "JMDplots"))
   # Get tables of all taxonomic names and amino acid compositions
-  names <- read.csv(system.file("extdata/RefDB/RefSeq/taxonomy.csv.xz", package = "JMDplots"))
+  names <- read.csv(system.file("RefDB/RefSeq_206/taxonomy.csv.xz", package = "JMDplots"))
   # Take out viruses
   ivirus <- names$superkingdom == "Viruses"
   ivirus[is.na(ivirus)] <- TRUE
@@ -1332,8 +1332,8 @@ geo16S_S3 <- function(pdf = FALSE) {
   xlim <- c(-0.3, 0)
   ylim <- c(-0.85, -0.65)
 
-  metrics <- read.csv(system.file("extdata/RefDB/RefSeq/taxon_metrics.csv.xz", package = "JMDplots"))
-  names <- read.csv(system.file("extdata/RefDB/RefSeq/taxonomy.csv.xz", package = "JMDplots"))
+  metrics <- read.csv(system.file("RefDB/RefSeq_206/taxon_metrics.csv.xz", package = "JMDplots"))
+  names <- read.csv(system.file("RefDB/RefSeq_206/taxonomy.csv.xz", package = "JMDplots"))
   # Only keep taxa with non-NA genus and phylum
   names <- names[!(is.na(names$genus) | is.na(names$phylum)), ]
 
@@ -1396,7 +1396,7 @@ geo16S_S4 <- function(pdf = FALSE) {
   SILVAphyla <- readLines(file.path(datadir, "SILVAphyla.txt"))
   SILVAgenera <- readLines(file.path(datadir, "SILVAgenera.txt"))
   # Read NCBI names
-  NCBI <- read.csv(system.file("extdata/RefDB/RefSeq/taxonomy.csv.xz", package = "JMDplots"))
+  NCBI <- read.csv(system.file("RefDB/RefSeq_206/taxonomy.csv.xz", package = "JMDplots"))
   NCBIphyla <- unique(na.omit(NCBI$phylum))
   NCBIgenera <- unique(na.omit(NCBI$genus))
 
@@ -1929,8 +1929,8 @@ getmetrics_geo16S <- function(study, quiet = TRUE, ...) {
   # If there is no .xz file, look for a .tab file 20210607
   if(!file.exists(RDPfile)) RDPfile <- file.path(datadir, paste0(studyfile, ".tab"))
   RDP <- read_RDP(RDPfile, quiet = quiet, ...)
-  map <- map_taxa(RDP, refdb = "RefSeq", quiet = quiet)
-  get_metrics(RDP, map = map, refdb = "RefSeq", taxon_AA = taxon_AA$RefSeq)
+  map <- map_taxa(RDP, refdb = "RefSeq_206", quiet = quiet)
+  get_metrics(RDP, map = map, refdb = "RefSeq_206", taxon_AA = taxon_AA$RefSeq_206)
 }
 
 # Function to calculate and plot metrics for a given study 20220506

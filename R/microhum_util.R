@@ -354,7 +354,7 @@ getmetrics_microhum <- function(study, oxytol = NULL, lineage = NULL, mincount =
     RDP <- RDP[isub, ]
   }
   map <- map_taxa(RDP, quiet = quiet)
-  get_metrics(RDP, map = map, taxon_AA = taxon_AA[["GTDB"]], return_AA = return_AA, zero_AA = zero_AA)
+  get_metrics(RDP, map = map, taxon_AA = taxon_AA[["GTDB_207"]], return_AA = return_AA, zero_AA = zero_AA)
 }
 
 # Function to calculate and plot metrics for a given study 20220506

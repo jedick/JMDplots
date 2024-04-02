@@ -16,8 +16,8 @@ JMDplots <- new.env()
 
 # For geo16S, orp16S, and microhum: read taxon_AA.csv once, to make things faster 20221017
 taxon_AA <- list(
-  RefSeq = read.csv(system.file("extdata/RefSeq/taxon_AA.csv.xz", package = "chem16S")),
-  GTDB = read.csv(system.file("extdata/GTDB/taxon_AA.csv.xz", package = "chem16S"))
+  RefSeq_206 = read.csv(system.file("RefDB/RefSeq_206/taxon_AA.csv.xz", package = "chem16S")),
+  GTDB_207 = read.csv(system.file("RefDB/GTDB_207/taxon_AA.csv.xz", package = "chem16S"))
 )
 
 # For pdat_* functions: re-implement protcomp() here (no longer provided by canprot) 20240303

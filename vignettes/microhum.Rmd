@@ -136,11 +136,11 @@ kable(summary_table, col.names = col.names)
 
 ## Number of genomes and genera in GTDB and UHGG (Unified Human Gastrointestinal Genome from MGnify)
 ```{r genomes_genera}
-GTDB_taxonomy <- read.csv(system.file("extdata/RefDB/GTDB/taxonomy.csv.xz", package = "JMDplots"))
+GTDB_taxonomy <- read.csv(system.file("RefDB/GTDB_207/taxonomy.csv.xz", package = "JMDplots"))
 print(paste("GTDB:", nrow(GTDB_taxonomy), "genomes and", length(unique(GTDB_taxonomy$genus)), "genera"))
-UHGG_taxonomy_full <- read.csv(system.file("extdata/RefDB/UHGG/fullset/taxonomy.csv.xz", package = "JMDplots"))
+UHGG_taxonomy_full <- read.csv(system.file("RefDB/UHGG_2.0.1/fullset/taxonomy.csv.xz", package = "JMDplots"))
 print(paste("UHGG (contamination < 5% and completeness > 50%):", nrow(UHGG_taxonomy_full), "species-level clusters and", length(unique(UHGG_taxonomy_full$genus)), "genera"))
-UHGG_taxonomy <- read.csv(system.file("extdata/RefDB/UHGG/taxonomy.csv.xz", package = "JMDplots"))
+UHGG_taxonomy <- read.csv(system.file("RefDB/UHGG_2.0.1/taxonomy.csv.xz", package = "JMDplots"))
 print(paste("UHGG (contamination < 2% and completeness > 95%):", nrow(UHGG_taxonomy), "species-level clusters and", length(unique(UHGG_taxonomy$genus)), "genera"))
 ```
 

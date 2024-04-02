@@ -188,7 +188,7 @@ plotMA <- function(study, lineage = NULL, mincount = 100, pch = NULL, col = NULL
   # If there is no .xz file, look for a .tab file 20210607
   if(!file.exists(RDPfile)) RDPfile <- file.path(datadir, paste0(studyfile, ".tab"))
   RDP <- read_RDP(RDPfile, lineage = lineage, mincount = mincount)
-  map <- map_taxa(RDP, refdb = "RefSeq")
+  map <- map_taxa(RDP, refdb = "RefSeq_206")
   metrics <- getmetrics_orp16S(study, lineage = lineage, mincount = mincount)
   mdat <- getmdat_orp16S(study, metrics)
   metadata <- mdat$metadata
@@ -210,7 +210,7 @@ plotMA <- function(study, lineage = NULL, mincount = 100, pch = NULL, col = NULL
   MAMTname <- paste(RDP$rank[iMAMT], RDP$name[iMAMT], sep = "_")
   MAMTperc <- formatC(taxoncounts[iMAMT] / sum(taxoncounts) * 100, format = "f", digits = 1)
   # Get Zc of the MAMT
-  datadir <- system.file("extdata/RefDB/RefSeq", package = "JMDplots")
+  datadir <- system.file("RefDB/RefSeq_206", package = "JMDplots")
   taxon_metrics <- read.csv(file.path(datadir, "taxon_metrics.csv.xz"), as.is = TRUE)
   MAMTZc <- taxon_metrics$Zc[map[iMAMT]]
 

@@ -33,7 +33,7 @@ chem16S_1 <- function(pdf = FALSE) {
   # Define text
   input_text <- data.frame(label = '  library(chem16S)
   data(GlobalPatterns, package = "phyloseq")
-  ps_metrics(GlobalPatterns, refdb = "RefSeq") |> head(n = 3)
+  ps_metrics(GlobalPatterns, refdb = "RefSeq_206") |> head(n = 3)
 
 
 
@@ -102,11 +102,11 @@ F3D142 -0.1540525 -0.7008292 -0.7777001
   Human = phyloseq::get_variable(GlobalPatterns, "SampleType") %in% c("Feces", "Mock", "Skin", "Tongue")
   phyloseq::sample_data(GlobalPatterns)$Human <- factor(Human)
   SampleType <- NULL
-  pC1 <- plot_ps_metrics2(GlobalPatterns, color = "SampleType", shape = "Human", refdb = "RefSeq") +
+  pC1 <- plot_ps_metrics2(GlobalPatterns, color = "SampleType", shape = "Human", refdb = "RefSeq_206") +
     geom_polygon(aes(fill = SampleType), alpha = 0.5) + geom_point(size = 3) +
     labs(title = "(C) GlobalPatterns dataset") +
     theme(legend.position = "none")
-  pC2 <- plot_ps_metrics2(GlobalPatterns, c("O/C", "H/C"), color = "SampleType", shape = "Human", refdb = "RefSeq", quiet = TRUE) +
+  pC2 <- plot_ps_metrics2(GlobalPatterns, c("O/C", "H/C"), color = "SampleType", shape = "Human", refdb = "RefSeq_206", quiet = TRUE) +
     geom_polygon(aes(fill = SampleType), alpha = 0.5) + geom_point(size = 3) +
     theme(legend.key.size = unit(0.4, "cm"),
           legend.title = element_text(size = 12),

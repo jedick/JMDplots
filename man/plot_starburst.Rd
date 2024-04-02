@@ -9,7 +9,7 @@ Lines are drawn from each parent to all of its children, creating a starburst pa
 
 \usage{
   plot_starburst(taxa = c("Bacteria", "Archaea"), metrics = c("Zc", "nH2O"),
-    refdb = "RefSeq", remove_species_20000 = TRUE, terminal_H2O = 0,
+    refdb = "RefSeq_206", remove_species_20000 = TRUE, terminal_H2O = 0,
     xlim = NULL, ylim = NULL, pch = NULL, col = seq_along(taxa), lcol = NULL,
     lwd = rep(1, length(taxa)), hline = NULL, legend.x = NA, identify = FALSE)
 }
@@ -35,8 +35,8 @@ Lines are drawn from each parent to all of its children, creating a starburst pa
 
 \code{plot_starburst} plots the indicated chemical \code{metrics} of the reference proteome for each taxon in \code{taxa}.
 Lines are drawn from each taxon to all of their children at the next lowest taxonomic rank.
-Use \code{refdb} to change the reference database; the default retrieves amino acid compositions and taxonomic names from the files \code{extdata/RefDB/RefSeq/genome_AA.csv.xz} and \code{extdata/RefDB/RefSeq/taxonomy.csv.xz}.
-\code{remove_species_20000} removes all species with more than 20000 reference sequences (applies only for \code{refdb == "RefSeq"}).
+Use \code{refdb} to change the reference database; the default retrieves amino acid compositions and taxonomic names from the files \code{RefDB/RefSeq_206/genome_AA.csv.xz} and \code{RefDB/RefSeq_206/taxonomy.csv.xz}.
+\code{remove_species_20000} removes all species with more than 20000 reference sequences (applies only for \code{refdb == "RefSeq_206"}).
 
 \code{terminal_H2O} and \code{hline} are provided to enable reproduction of the published figure for \code{\link{geo16S1}}.
 In that figure, the \nH2O values include the contribution of terminal groups (i.e., 1 \H2O per protein, divided by the length of the protein).
