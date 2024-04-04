@@ -57,6 +57,9 @@ This vignette runs the code to make the plots from the following paper:
 
 > Dick JM, Kang X. 2023. *chem16S*: community-level chemical metrics for exploring genomic adaptation to environments. *Bioinformatics* **39**(9): btad564. doi: [10.1093/bioinformatics/btad564](https://doi.org/10.1093/bioinformatics/btad564)
 
+Update: on 2024-04-04, the GTDB reference database in chem16S was updated from r207 to r214 and the mouse.GTDB dataset was also updated.
+As a result, Figure 1 A and B in this vignette now have small numerical differences from the published version of the figure.
+
 This vignette was compiled on `r Sys.Date()` with
 **[JMDplots](https://github.com/jedick/JMDplots)** `r packageDescription("JMDplots")$Version` and
 **[chem16S](https://github.com/jedick/chem16S)** `r packageDescription("chem16S")$Version`.

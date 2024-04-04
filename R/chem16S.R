@@ -45,8 +45,8 @@ chem16S_1 <- function(pdf = FALSE) {
 
 
 
-  data(mouse.GTDB, package = "chem16S")
-  ps_metrics(mouse.GTDB) |> head(n = 3)
+  data(mouse.GTDB_214, package = "chem16S")
+  ps_metrics(mouse.GTDB_214, refdb = "GTDB_214") |> head(n = 3)
 
 
 
@@ -72,9 +72,9 @@ SV1 -0.1403848 -0.6623117 -0.7428770
 >
 [1] "map_taxa: mapping rate to GTDB taxonomy is 100.0%"
                Zc        nO2       nH2O
-F3D0   -0.1572185 -0.7051765 -0.7704916
-F3D141 -0.1549137 -0.7020583 -0.7755448
-F3D142 -0.1540525 -0.7008292 -0.7777001
+F3D0   -0.1557431 -0.7017494 -0.7685725
+F3D141 -0.1531863 -0.6980892 -0.7732248
+F3D142 -0.1528417 -0.6979087 -0.7756479
 ')
                             
   # NULL assignments are needed to avoid "Undefined global functions or variables" in R CMD check
@@ -88,12 +88,12 @@ F3D142 -0.1540525 -0.7008292 -0.7777001
     labs(title = "(A) Chemical metrics")
 
   ## Panel B: Mouse gut dataset
-  mouse.GTDB <- NULL
-  data(mouse.GTDB, package = "chem16S", envir = environment())
-  pB1 <- plot_ps_metrics(mouse.GTDB, x = "Day", metrics = "Zc") +
+  mouse.GTDB_214 <- NULL
+  data(mouse.GTDB_214, package = "chem16S", envir = environment())
+  pB1 <- plot_ps_metrics(mouse.GTDB_214, refdb = "GTDB_214", x = "Day", metrics = "Zc") +
     facet_wrap(~When, scales = "free_x") + geom_line(colour = red) +
     labs(title = "(B) Mouse gut dataset")
-  pB2 <- plot_ps_metrics(mouse.GTDB, x = "Day", metrics = "nH2O", quiet = TRUE) +
+  pB2 <- plot_ps_metrics(mouse.GTDB_214, refdb = "GTDB_214", x = "Day", metrics = "nH2O", quiet = TRUE) +
     facet_wrap(~When, scales = "free_x") + geom_line(colour = blue)
   pB <- pB1 / pB2
 

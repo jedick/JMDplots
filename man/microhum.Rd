@@ -65,7 +65,7 @@ The data files listed below are stored in \file{extdata/microhum}:
       GTDB 16S SSU rRNA training files for RDP Classifier are available at \url{https://doi.org/10.5281/zenodo.7633100}.
     }
     \item{\file{16S/metadata/*.csv}}{Sample metadata for each study}
-    \item{\file{16S/dataset_metrics.csv}}{Mean values of chemical metrics for samples in 16S studies, created with \code{dataset_metrics}}
+    \item{\file{16S/dataset_metrics_*.csv}}{Mean values of chemical metrics for samples in 16S studies, created with \code{dataset_metrics}}
   }
 }
 

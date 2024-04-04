@@ -353,7 +353,7 @@ getmetrics_microhum <- function(study, oxytol = NULL, lineage = NULL, mincount =
     if(oxytol == "unknown") isub <- ! (genus %in% obligate.anaerobe | genus %in% aerotolerant)
     RDP <- RDP[isub, ]
   }
-  map <- map_taxa(RDP, quiet = quiet)
+  map <- map_taxa(RDP, refdb = "GTDB_207", taxon_AA = taxon_AA[["GTDB_207"]], quiet = quiet)
   get_metrics(RDP, map = map, taxon_AA = taxon_AA[["GTDB_207"]], return_AA = return_AA, zero_AA = zero_AA)
 }
 
