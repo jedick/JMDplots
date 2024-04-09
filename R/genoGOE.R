@@ -2,6 +2,7 @@
 # Plot for the manuscript by Dick (2024) about the genomic record of Earth's surface oxygenation
 # 20231206 jmd first version
 # 20240328 moved to JMDplots
+# 20240409 add genoGOE_2()
 
 # Carbon oxidation state of proteins as a function of gene age in two lineages
 genoGOE_1 <- function(pdf = FALSE, metric = "Zc") {
@@ -117,6 +118,89 @@ genoGOE_1 <- function(pdf = FALSE, metric = "Zc") {
   # Outer axis labels
   mtext(ylab, side = 2, line = 3, adj = -0.68, font = 2)
   mtext("Gene\nage\n(Ma)", side = 4, line = 1.5, font = 2, las = 1, at = -0.0215, adj = 0.5)
+
+  if(pdf) dev.off()
+
+}
+
+# Chemical analysis and thermodynamic calculations for ancestral Rubiscos
+# Can be used to make logaH2O-logfO2, logfO2-pH, or Eh-pH diagram (x = O2 or pH, y = H2O, O2, or Eh)
+# 'basis' can be QEC or CHNOS
+genoGOE_2 <- function(pdf = FALSE, x = "pH", y = "Eh", basis = "QEC") {
+
+  if(pdf) pdf("Figure_2.pdf", width = 10, height = 5)
+  par(mfrow = c(1, 2))
+
+  # Read amino acid compositions
+  fasta_file <- system.file("extdata/fasta/KHAB17.fasta", package = "canprot")
+  aa <- read_fasta(fasta_file)
+  # Assign protein names
+  aa$protein <- sapply(strsplit(aa$protein, "_"), "[", 2)
+
+  # Panel A: Zc vs ancestry
+
+  xlab <- "Ancestral sequences (older to younger)"
+  plot(Zc(aa), type = "b", xaxt = "n", xlab = xlab, ylab = cplab$Zc)
+  axis(1, at = 1:6, aa$protein)
+  abline(v = 3.5, lty = 2, col = 6, lwd = 2)
+  axis(3, at = 3.5, "GOE (proposed)")
+  label.figure("A", cex = 1.5)
+
+  # Panel B: Relative stability diagram
+
+  # Add proteins to CHNOSZ
+  ip <- add.protein(aa)
+  # Set plot resolution
+  res <- 500
+
+  # Setup basis species for charged proteins
+  if(x == "pH" | y == "Eh") basis <- paste0(basis, "+")
+  basis(basis)
+  # Setup basis species for Eh diagram
+  if(y == "Eh") swap.basis("O2", "e-")
+  
+  # Get axis limits
+  lims <- list(pH = c(0, 14), Eh = c(-0.5, 0.8), O2 = c(-90, 0), H2O = c(-10, 10))
+  # Create argument list for affinity()
+  aff_args0 <- list(c(lims[[x]], res), c(lims[[y]], res), iprotein = ip)
+  names(aff_args0)[1:2] <- c(x, y)
+
+  # Calculate maximum affinity among all protein
+  a0 <- do.call(affinity, aff_args0)
+  d0 <- diagram(a0, plot.it = FALSE)
+
+  # The affinity range
+  aff_range <- range(d0$predominant.values)
+  # The fraction of the balanced range (equal negative and positive endpoints) that is missing from the actual range
+  miss_frac <- ( max(abs(aff_range)) - max(aff_range) ) / max(abs(aff_range)) / 2
+  # Total number of colors in the diverging scale
+  ntot <- 200
+  # How many colors to take away to center the scale on zero affinity
+  nout <- round(miss_frac * ntot)
+  nuse <- ntot - nout
+  col <- hcl.colors(ntot, palette = "Blue-Red 3")[1:nuse]
+  # Start plot with colors for affinity
+  thermo.plot.new(lims[[x]], lims[[y]], xlab = axis.label(x), ylab = axis.label(y))
+  image(d0$vals[[1]], d0$vals[[2]], d0$predominant.values, add = TRUE, col = col, useRaster = TRUE)
+
+  # Plot stability lines
+  # Anc_I is metastable; remove IB and IA/B to see it
+  aff_args1 <- aff_args0
+  aff_args1$iprotein <- ip[1:4]
+  a1 <- do.call(affinity, aff_args1)
+  #diagram(a1, lty = 2, lwd = 2, col = 6, col.names = 6, names = names, add = TRUE)
+  diagram(a1, lty = 2, lwd = 2, col = 6, col.names = 6, names = names, add = TRUE, limit.water = TRUE, fill.NA = "gray80")
+  # Overlay lines for all proteins
+  d <- diagram(a0, font = 2, lwd = 3, add = TRUE, limit.water = TRUE)
+  # Add water stability lines
+  water.lines(d, lty = 1, col = 8)
+  # Add contour line at zero affinity
+  contour(d0$vals[[1]], d0$vals[[2]], d0$predominant.values, levels = 0, col = 4, lty = 4, lwd = 2, add = TRUE, drawlabels = FALSE)
+  # Replot frame and axis ticks
+  box()
+  thermo.axis()
+
+  label.figure("B", cex = 1.5)
 
   if(pdf) dev.off()
 

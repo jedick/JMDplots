@@ -105,8 +105,8 @@ export(
   "check_IDs", "cleanup", "get_comptab", "diffplot", "qdist",
   "xsummary", "xsummary2", "xsummary3",
 
-  # genoGOE paper 20240328
-  "genoGOE_1"
+  # genoGOE paper 20240328, 20240409
+  "genoGOE_1", "genoGOE_2"
 )
 
 # Imports from CHNOSZ
@@ -216,7 +216,7 @@ importFrom("stats", "lm", "na.omit", "predict", "sd", "predict.lm", "residuals",
            "TukeyHSD", "aov", "binom.test", "confint", "ecdf", "knots")
 importFrom("utils", "read.csv", "demo", "tail", "write.csv",
            "capture.output", "browseURL", "head", "combn", "read.table", "packageVersion",
-           "assignInNamespace", "data", "relist", "write.table")
+           "data", "relist", "write.table")
 
 S3method(dunnTest,default)
 S3method(dunnTest,formula)
