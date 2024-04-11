@@ -51,13 +51,16 @@ if (!nzchar(Sys.which("pngquant"))) pngquant <- NULL
 ZC <- "<i>Z</i><sub>C</sub>"
 ```
 
-This vignette runs the code to make selected plots from the following papers:
+This vignette runs the code to make selected plots modified from the following papers:
 
 > Dick JM, Shock EL. 2011. Calculation of the relative chemical stabilities of proteins as a function of temperature and redox chemistry in a hot spring. *PLOS One* **6**(8): e22782. doi: [10.1371/journal.pone.0022782](https://doi.org/10.1371/journal.pone.0022782)
 >
 > Dick JM, Shock EL. 2013. A metastable equilibrium model for the relative abundances of microbial phyla in a hot spring. *PLOS One* **8**(9): e72395. doi: [10.1371/journal.pone.0072395](https://doi.org/10.1371/journal.pone.0072395)
 
-These plots have been modified from the original figures to make greater use of color.
+List of modifications:
+
+- 2020-07-12: Plots have been modified from the originals to make more use of color.
+- 2024-04-11: Oxygen was added to Figure 1.
 
 This vignette was compiled on `r Sys.Date()` with **[JMDplots](https://github.com/jedick/JMDplots)** `r packageDescription("JMDplots")$Version` and **[CHNOSZ](http://chnosz.net)** `r packageDescription("CHNOSZ")$Version`.
 
@@ -69,12 +72,12 @@ The current OBIGT database in CHNOSZ has updates for the methionine sidechain gr
 In order to reproduce the calculations from the 2011 paper, we start by loading the older values from @DLH06.
 
 ```{r add.OBIGT, message = FALSE, results = "hide"}
-if(packageVersion("CHNOSZ") > "1.4.3") OldAAfile <- "extdata/OBIGT/OldAA.csv" else OldAAfile <- "extdata/OBIGT/OldAA_old.csv"
+OldAAfile <- "extdata/OBIGT/OldAA.csv"
 add.OBIGT(system.file(OldAAfile, package = "JMDplots"))
 ```
 
-## Measured temperature and pH
-```{r bison1, message = FALSE, fig.align='center', out.width='80%', fig.width = 6, fig.height = 3, pngquant = pngquant}
+## Measured temperature, pH, and dissolved oxygen
+```{r bison1, message = FALSE, fig.align='center', out.width='100%', fig.width = 6, fig.height = 2, pngquant = pngquant, dpi = 150}
 bison1()
 ```
 [Link to original figure](https://doi.org/10.1371/journal.pone.0022782.g005).

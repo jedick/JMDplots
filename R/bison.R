@@ -4,20 +4,30 @@
 
 # Measured temperature and pH
 bison1 <- function() {
-  par(mfrow = c(1, 2), mar = c(3.5, 3.5, 1, 1), mgp = c(2.5, 1, 0), las = 1)
+
+  par(mfrow = c(1, 3), mar = c(3.5, 3.5, 1, 1), mgp = c(2.4, 1, 0), las = 1)
+
   # T plot
-  plot(extendrange(distance), extendrange(bison.T), xlab = "Distance, m", ylab = axis.label("T"), type = "n")
+  plot(extendrange(distance), extendrange(bison.T), xlab = "Distance (m)", ylab = axis.label("T"), type = "n")
   lines(xpoints, Tfun(xpoints))
   points(distance, bison.T, pch = 21, bg = "white", cex = 2)
   points(distance, bison.T, pch = 21, bg = site.cols.alpha, cex = 2)
   text(distance, bison.T, 1:5, cex = 0.8)
 
   # pH plot
-  plot(extendrange(distance), extendrange(bison.pH), xlab = "Distance, m", ylab = "pH", type = "n")
+  plot(extendrange(distance), extendrange(bison.pH), xlab = "Distance (m)", ylab = "pH", type = "n")
   lines(xpoints, pHfun(xpoints))
   points(distance, bison.pH, pch = 21, bg = "white", cex = 2)
   points(distance, bison.pH, pch = 21, bg = site.cols.alpha, cex = 2)
   text(distance, bison.pH, 1:5, cex = 0.8)
+
+  # O2 plot
+  plot(extendrange(distance), extendrange(bison.O2), xlab = "Distance (m)", ylab = quote(O[2]~"(mg/L)"), type = "n")
+  lines(xpoints, O2fun(xpoints))
+  points(distance, bison.O2, pch = 21, bg = "white", cex = 2)
+  points(distance, bison.O2, pch = 21, bg = site.cols.alpha, cex = 2)
+  text(distance, bison.O2, 1:5, cex = 0.8)
+
 }
 
 # Carbon oxidation state of proteins
@@ -198,10 +208,8 @@ bison7 <- function(equil.results) {
   logK.S <- subcrt(c("HS-", "H2O", "SO4-2", "H+", "H2"), c(-1, -4, 1, 1, 4), T=bison.T)$out$logK
   logaH2.S <- (logK.S + bison.pH - loga.SO4 + loga.HS) / 4
 
-  # Dissolved oxygen measurements (mg/L)
-  DO <- c(0.173, 0.776, 0.9, 1.6, 2.8)
   # Convert to log molarity (log activity) then to logaH2
-  logaO2 <- log10(DO/1000/32)
+  logaO2 <- log10(bison.O2/1000/32)
   logK <- subcrt(c("O2", "H2", "H2O"), c(-0.5, -1, 1), T=bison.T)$out$logK
   logaH2.O <- 0 - 0.5*logaO2 - logK
 
@@ -272,10 +280,14 @@ sitenames <- paste("bison", sites, sep = "")
 bison.T <- c(93.3, 79.4, 67.5, 65.3, 57.1)
 bison.pH <- c(7.350, 7.678, 7.933, 7.995, 8.257)
 
+# Dissolved oxygen measurements (mg/L)
+bison.O2 <- c(0.173, 0.776, 0.9, 1.6, 2.8)
+
 # distance and fitted T and pH values
 distance <- c(0, 6, 11, 14, 22)
 Tfun <- splinefun(distance, bison.T, method = "mono")
 pHfun <- splinefun(distance, bison.pH, method = "mono")
+O2fun <- splinefun(distance, bison.O2, method = "mono")
 xpoints <- seq(0, 22, length.out = 128)
 
 # read the amino acid compositions
