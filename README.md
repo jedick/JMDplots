@@ -15,6 +15,32 @@ See the manual page associated with each paper for additional details about scri
 <!-- Put a space before <details> to make ghostwriter format the lists correctly -->
  <details>
 
+<summary>Genomes record the Great Oxidation Event (<i>in-preparation manuscript</i>)</summary>
+
+- [inst/extdata/genoGOE](inst/extdata/genoGOE): scripts and processed data files
+
+  - [methanogen_genomes.csv](inst/extdata/genoGOE/methanogen_genomes.csv): genome IDs and taxonomy in GTDB r220 for 19 Class I and 19 Class II methanogen species selected from Fig. 1 of [Lyu and Lu (2018)](https://doi.org/10.1038/ismej.2017.173)
+  - [process_GTDB.R](inst/extdata/genoGOE/process_GTDB.R): script to obtain DNA and protein sequences for 53 archaeal marker genes in GTDB and amino acid compositions for all proteins in 38 methanogen genomes
+  - [ar53_msa_marker_info_r220_XHZ+06.csv](inst/extdata/genoGOE/ar53_msa_marker_info_r220_XHZ+06.csv): list of archaeal marker genes from GTDB augmented with protein abundance information for *Methanococcus maripaludis* from [Xia et al. (2006)](https://doi.org/10.1074/mcp.M500369-MCP200)
+  - [methanogen](inst/extdata/genoGOE/methanogen): sequences and amino acid compositions generated using `process_GTDB.R`
+
+    - [marker/fna](inst/extdata/genoGOE/methanogen/marker/fna): Nucleotide sequences of marker genes
+    - [marker/faa](inst/extdata/genoGOE/methanogen/marker/faa): Amino acid sequences of marker genes
+    - [aa](inst/extdata/genoGOE/methanogen/aa): Amino acid compositions of all proteins
+
+- [inst/extdata/evdevH2O/LMM16](inst/extdata/evdevH2O/LMM16): scripts and processed data files for consensus gene ages from [Liebeskind et al. (2016)](https://doi.org/10.1093/gbe/evw113), modified from the files used by [Dick (2022)](https://doi.org/10.1007/s00239-022-10051-7)
+
+    - [mkaa.R](inst/extdata/evdevH2O/LMM16/mkaa.R): *script*: sum amino acid compositions of proteins in each gene age category
+    - [reference_proteomes.csv](inst/extdata/evdevH2O/LMM16/reference_proteomes.csv): *data*: IDs of UniProt reference proteomes for 31 organisms
+    - [modeAges_names.csv](inst/extdata/evdevH2O/LMM16/modeAges_names.csv): *output file*: Names of gene age categories for each organism
+    - [modeAgesaa.csv](inst/extdata/evdevH2O/LMM16/modeAgesaa.csv): *output file*: Summed amino acid composition for proteins in each gene age category
+
+- [../canprot/inst/extdata/fasta/KHAB17.fasta](../canprot/inst/extdata/fasta/KHAB17.fasta): reconstructed ancestral Rubisco sequences taken from [Kaçar et al. (2017)](https://doi.org/10.1111/gbi.12243)
+
+</details>
+
+ <details>
+
 <summary>Adaptations of microbial genomes to human body chemistry (<i>submitted manuscript</i>)</summary>
 
 - [inst/extdata/microhum](inst/extdata/microhum): scripts and processed data files

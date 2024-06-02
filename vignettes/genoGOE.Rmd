@@ -1,0 +1,92 @@
+---
+title: "Genomes record the Great Oxidation Event (2024)"
+output: 
+  rmarkdown::html_vignette:
+    mathjax: null
+vignette: >
+  %\VignetteIndexEntry{Genomes record the Great Oxidation Event (2024)}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+bibliography: JMDplots.bib
+csl: elementa.csl
+link-citations: true
+---
+
+<style>
+/* https://gomakethings.com/how-to-break-an-image-out-of-its-parent-container-with-css/ */
+@media (min-width: 700px) {
+  .full-width {
+    left: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+    max-width: 100vw;
+    position: relative;
+    right: 50%;
+    width: 100vw;
+  }
+}
+@media (min-width: 900px) {
+  .full-width {
+    left: 50vw; /* fallback if needed */
+    left: calc(50vw - 100px);
+    width: 900px;
+    position: relative;
+  }
+}
+</style>
+
+```{r setup, include=FALSE}
+library(knitr)
+## use pngquant to reduce size of PNG images
+knit_hooks$set(pngquant = hook_pngquant)
+pngquant <- "--speed=1 --quality=0-25"
+# in case pngquant isn't available
+if (!nzchar(Sys.which("pngquant"))) pngquant <- NULL 
+
+## colorize messages 20171031
+## adapted from https://gist.github.com/yihui/2629886#file-knitr-color-msg-rnw
+color_block = function(color) {
+  function(x, options) sprintf('<pre style="color:%s">%s</pre>', color, x)
+}
+knit_hooks$set(warning = color_block('magenta'), error = color_block('red'), message = color_block('blue'))
+```
+
+```{r options, include=FALSE}
+options(width = 80)
+```
+
+```{r HTML, include=FALSE}
+ZC <- "<i>Z</i><sub>C</sub>"
+```
+This vignette runs the functions to make the plots from the following manuscript:
+
+> Dick JM. 2024. Genomes record the Great Oxidation Event. Manuscript in preparation.
+
+This vignette was compiled on `r Sys.Date()` with **[JMDplots](https://github.com/jedick/JMDplots)** `r packageDescription("JMDplots")$Version` and **[CHNOSZ](http://chnosz.net)** `r packageDescription("CHNOSZ")$Version`.
+
+```{r library, message = FALSE, results = "hide"}
+library(JMDplots)
+```
+
+## Protein oxidation is pervasive in genomes of methanogens that diverged after the GOE (Figure 1)
+```{r genoGOE1, message = FALSE, results = "hide", out.width='100%', fig.width = 8, fig.height = 6, pngquant = pngquant}
+genoGOE_1()
+```
+
+**Data sources:** List of Class I and II methanogen species [@LL18], archaeal marker genes used in GTDB [@RCM+21], and protein abundance in *Methanococcus maripaludis* [@XHZ+06].
+
+## Gene age groups in eukaryotic genomes show protein oxidation around the GOE and NOE (Figure 2)
+```{r genoGOE2, message = FALSE, results = "hide", out.width='100%', fig.width = 7, fig.height = 6, pngquant = pngquant}
+genoGOE_2()
+```
+
+**Data sources:** Consensus gene ages [@LMM16], protein sequences [@Uni23], and divergence times [@KSC+22].
+
+## Oxidation of reconstructed ancestral Rubisco sequences around the GOE corresponds to high-Eh conditions (Figure 3)
+```{r genoGOE3, message = FALSE, results = "hide", out.width='100%', fig.width = 9, fig.height = 4.5, pngquant = pngquant}
+genoGOE_3()
+```
+
+**Data source:** Reconstructed ancestral sequences of Rubisco [@KHAB17].
+
+## References

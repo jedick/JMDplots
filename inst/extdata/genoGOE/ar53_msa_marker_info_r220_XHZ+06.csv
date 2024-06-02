@@ -1,0 +1,54 @@
+"Marker Id",Name,Description,"Length (bp)","Single copy (%)","Ubiquity (%)",OLN,"Name (XHZ+06)",CAI,"Karlin Index","Unique Peptides","Redundant Peptides","Avg Intensity",MW
+PFAM_PF00410.20,Ribosomal_S8,"Ribosomal protein S8",126,90.53,91.31,MMP1414,"rpsH SSU ribosomal protein S8P",0.753,1.668,7,204,19817189,14323
+PFAM_PF00466.21,Ribosomal_L10,"Ribosomal protein L10",100,90.02,90.77,MMP0259,"LSU ribosomal protein L10E",0.756,1.663,20,189,20048163,35805
+PFAM_PF00687.22,Ribosomal_L1,"Ribosomal protein L1p/L10e family",204,90.27,91.48,MMP0260,"rplA LSU ribosomal protein L1P",0.595,1.307,14,636,12359278,23131
+PFAM_PF00827.18,Ribosomal_L15e,"Ribosomal L15",189,88.52,90.8,MMP0298,"rpl15 LSU ribosomal protein L15E ",0.789,1.81,5,111,29021509,22220
+PFAM_PF00900.21,Ribosomal_S4e,"Ribosomal family S4e",75,89.11,89.67,MMP1411,"SSU ribosomal protein S4E",0.754,1.207,14,337,20993414,27070
+PFAM_PF01000.27,RNA_pol_A_bac,"RNA polymerase Rpb3/RpoA insert domain",112,91.69,92.43,MMP1322,"rpoD DNA-directed RNA polymerase, subunit D",0.681,0.738,8,73,15151411,20138
+PFAM_PF01015.19,Ribosomal_S3Ae,"Ribosomal S3Ae family",195,89.1,90.51,MMP0669,"SSU ribosomal protein S3AE",0.768,1.807,11,142,9164474,25432
+PFAM_PF01090.20,Ribosomal_S19e,"Ribosomal protein S19e",137,90.32,91.19,MMP0156,"Ribosomal protein S19E (S16A)",0.762,1.581,7,150,31775666,15601
+PFAM_PF01200.19,Ribosomal_S28e,"Ribosomal protein S28e",64,91.34,91.94,MMP0640,"SSU ribosomal protein S28E",0.789,1.79,2,58,47600548,8457
+PFAM_PF01280.21,Ribosomal_L19e,"Ribosomal protein L19e",144,90.25,91.4,MMP1417,"LSU ribosomal protein L19E",0.693,1.221,5,178,18102704,17301
+PFAM_PF04919.13,DUF655,"Protein of unknown function (DUF655)",181,91.6,92.89,MMP0091,"conserved hypothetical archaeal protein",0.606,0.566,8,91,12001652,23123
+PFAM_PF07541.13,EIF_2_alpha,"Eukaryotic translation initiation factor 2 alpha subunit",114,89.3,90.32,MMP1707,"aIF2 alpha translation initiation factor aIF-2, subunit alpha",0.669,0.746,14,103,8984067,29894
+TIGR_TIGR00037,eIF_5A,"translation elongation factor IF5A",130,89.86,90.56,MMP0952,"aIF-5A translation initiation factor IF-5a",0.839,1.782,6,188,15432168,14323
+TIGR_TIGR00064,ftsY,"signal recognition particle-docking protein FtsY",279,88,88.55,MMP0683,"ftsY signal recognition particle receptor Sralpha",0.67,0.411,11,39,4860923,42007
+TIGR_TIGR00111,pelota,"mRNA surveillance protein pelota",351,79.57,80.41,MMP0085,"conserved hypothetical protein",0.607,0.364,3,10,2328448,39474
+TIGR_TIGR00134,gatE_arch,"glutamyl-tRNA(Gln) amidotransferase, subunit E",622,88.79,91.09,MMP1265,"Glutamyl-tRNA(Gln) amidotransferase subunit E",0.68,0.535,24,274,5868066,71171
+TIGR_TIGR00279,uL16_euk_arch,"ribosomal protein uL16",172,89.5,90.27,MMP1289,"Ribosomal protein L10E",0.781,1.59,7,230,11348182,19371
+TIGR_TIGR00291,RNA_SBDS,"rRNA metabolism protein, SBDS family",231,91.41,92.15,MMP0250,"conserved hypothetical protein",0.569,0.649,9,90,3777936,26500
+TIGR_TIGR00323,eIF-6,"putative translation initiation factor eIF-6",215,77.24,77.59,MMP0061,"aIF6 Translation initiation factor IF6",0.629,0.815,4,12,658500,24595
+TIGR_TIGR00335,primase_sml,"putative DNA primase, eukaryotic-type, small subunit",324,72.14,73.33,MMP0071,"DNA primase, small subunit",0.606,0.367,2,2,3178855,42294
+TIGR_TIGR00373,TIGR00373,"transcription factor E",162,66.77,69.13,MMP0036,"tfe Transcription factor E",0.603,0.462,3,5,36575269,22048
+TIGR_TIGR00405,KOW_elon_Spt5,"transcription elongation factor Spt5",145,90.73,91.62,MMP1434,"LSU ribosomal protein L24A",0.657,0.828,8,49,2937688,16027
+TIGR_TIGR00448,rpoE,"DNA-directed RNA polymerase",179,90.66,91.05,MMP0440,"DNA-directed RNA polymerase subunit E'",0.687,1.013,3,18,20879402,21012
+TIGR_TIGR00483,EF-1_alpha,"translation elongation factor EF-1, subunit alpha",427,83.49,87.05,MMP1370,"aEF-1 alpha translation elongation factor EF-1, subunit alpha",0.844,2.574,34,3074,17155288,46397
+TIGR_TIGR00491,aIF-2,"translation initiation factor aIF-2",594,89.91,90.34,MMP0284,"infB translation inititation factor aIF2",0.663,0.374,18,65,4840934,66154
+TIGR_TIGR00522,dph5,"diphthine synthase",258,82.23,82.72,MMP0588,"dph5 Diphthine synthase",0.671,0.523,3,11,2535103,28771
+TIGR_TIGR00967,3a0501s007,"preprotein translocase, SecY subunit",414,79.74,80.52,MMP1422,"secY Aldehyde dehydrogenase:SecY protein",0.638,0.643,4,56,7033239,48277
+TIGR_TIGR00982,uS12_E_A,"ribosomal protein uS12",139,90,90.68,MMP1367,"rpsL SSU ribosomal protein S12",0.8,1.693,4,63,15441770,16156
+TIGR_TIGR01008,uS3_euk_arch,"ribosomal protein uS3",195,89.64,90.05,MMP1404,"rpsC SSU ribosomal protein S3P",0.808,1.444,12,468,16690691,23254
+TIGR_TIGR01012,uS2_euk_arch,"ribosomal protein uS2",196,91.7,92.52,MMP0667,"SSU Ribosomal protein S2",0.745,1.943,11,184,69868172,25262
+TIGR_TIGR01018,uS4_arch,"ribosomal protein uS4",162,91.69,92.37,MMP1320,"SSU ribosomal protein S4P (S9E)",0.727,1.744,9,236,17713471,20462
+TIGR_TIGR01020,uS5_euk_arch,"ribosomal protein uS5",212,90.12,90.82,MMP1419,"rpsE SSU ribosomal protein S5P",0.804,2.126,12,265,12603750,24376
+TIGR_TIGR01028,uS7_euk_arch,"ribosomal protein uS7",186,90.22,90.75,MMP1368,"SSU ribosomal protein S7P",0.755,1.742,13,622,10129808,20796
+TIGR_TIGR01046,uS10_euk_arch,"ribosomal protein uS10",99,87.56,88.24,MMP1371,"rpsJ SSU ribosomal protein S10",0.8,1.697,5,388,7173005,11545
+TIGR_TIGR01052,top6b,"DNA topoisomerase VI, B subunit",488,82.28,87.51,MMP0989,"top6B DNA topoisomerase VI B",0.666,0.464,17,89,4860069,76160
+TIGR_TIGR01171,rplB_bact,"ribosomal protein uL2",275,10.94,11.02,MMP1546,"LSU Ribosomal protein L2P",0.743,1.358,9,285,20510724,25768
+TIGR_TIGR01213,pseudo_Pus10arc,"tRNA pseudouridine(54/55) synthase",387,69.91,71.8,MMP0094,"Conserved hypothetical protein",0.605,0.51,17,41,1528286,54489
+TIGR_TIGR01952,nusA_arch,"NusA family KH domain protein, archaeal",141,74.87,79.16,MMP1366,"KH domain:KH domain, type 1",0.782,1.089,8,136,11749752,19404
+TIGR_TIGR02236,recomb_radA,"DNA repair and recombination protein RadA",311,81.16,87.78,MMP1222,"radA DNA repair and recombination protein radA",0.743,1.049,10,215,4241319,35146
+TIGR_TIGR02338,gimC_beta,"prefoldin, beta subunit",110,85.98,86.37,MMP0245,"pfdB Prefoldin beta subunit (GimC beta subunit)",0.744,1.185,6,38,8741572,13477
+TIGR_TIGR02389,RNA_pol_rpoA2,"DNA-directed RNA polymerase, subunit A''",367,72.16,72.62,MMP1364,"rpoA2 RNA polymerase, A/beta'/A' subunit",0.684,0.801,17,152,9267147,42795
+TIGR_TIGR02390,RNA_pol_rpoA1,"DNA-directed RNA polymerase subunit A'",867,83.17,83.71,MMP1363,"rpoA1,rpoT RNA polymerase, alpha subunit",0.701,1.147,30,221,12472963,98847
+TIGR_TIGR03626,L3_arch,"ribosomal protein uL3",331,78.92,79.16,MMP1543,"LSU Ribosomal protein L3P",0.771,2.135,20,562,23632757,36652
+TIGR_TIGR03627,uS9_arch,"ribosomal protein uS9",130,62.82,63.04,MMP1325,"rpsI SSU ribosomal protein S9P",0.761,1.663,6,108,15389655,14877
+TIGR_TIGR03628,arch_S11P,"ribosomal protein uS11",117,64.34,64.59,MMP1321,"rpsK SSU ribosomal protein S11",0.772,1.409,9,83,26039613,13418
+TIGR_TIGR03629,uS13_arch,"ribosomal protein uS13",144,53.16,53.28,MMP1319,"rpsM SSU ribosomal protein S13",0.726,1.552,7,83,13180889,17139
+TIGR_TIGR03670,rpoB_arch,"DNA-directed RNA polymerase subunit B",599,82.3,82.76,MMP1362,"rpoB1 Glycoside hydrolase, family 1:DNA-directed RNA polymerase, beta subunit:ATP/GTP-binding site",0.72,1.262,28,387,7540125,68555
+TIGR_TIGR03671,cca_archaeal,"CCA-adding enzyme",410,83.81,84.49,MMP0949,"tRNA nucleotidyltransferase",0.614,0.481,2,2,162530,52115
+TIGR_TIGR03672,rpl4p_arch,"50S ribosomal protein uL4",251,70.23,70.35,MMP1544,"LSU Ribosomal protein L4P",0.798,1.207,17,564,8384238,27126
+TIGR_TIGR03673,uL14_arch,"50S ribosomal protein uL14",131,44.83,45.02,MMP1409,"rplN LSU ribosomal protein L14P",0.801,1.652,10,531,8064674,14268
+TIGR_TIGR03674,fen_arch,"flap structure-specific endonuclease",338,79.42,82.33,MMP1313,"fen-1 flap endonuclease",0.626,0.471,4,30,613032,36806
+TIGR_TIGR03676,aRF1/eRF1,"peptide chain release factor 1, archaeal and eukaryotic forms",403,86.49,91.12,MMP1131,"peptide chain release factor aRF, subunit 1",0.646,0.571,11,64,10647811,47250
+TIGR_TIGR03680,eif2g_arch,"translation initiation factor 2, gamma subunit",407,80.22,80.29,MMP1208,"aIF2 gamma translation initiation factor aIF-2, subunit gamma",0.687,0.806,22,203,12884436,43943

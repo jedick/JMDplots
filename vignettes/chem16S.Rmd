@@ -75,6 +75,6 @@ chem16S_1()
 
 **Data sources:**
 The `GlobalPatterns` dataset is from the [**phyloseq**](https://doi.org/10.18129/B9.bioc.phyloseq) package [@MH13] and is adapted from @CLW+11.
-The mouse gut dataset was created by analyzing sequence data from @SSZ+12 (downloaded [here](https://mothur.s3.us-east-2.amazonaws.com/wiki/miseqsopdata.zip) and used in the [mothur MiSeq SOP](https://mothur.org/wiki/miseq_sop/) and [DADA2 Pipeline Tutorial](https://benjjneb.github.io/dada2/tutorial.html)) with the DADA2 pipeline modified to use the GTDB training set [@Ali22] for taxonomic classifications.
+The mouse gut dataset was created by analyzing sequence data from @SSZ+12 (downloaded [here](https://mothur.s3.us-east-2.amazonaws.com/wiki/miseqsopdata.zip) and used in the [mothur MiSeq SOP](https://mothur.org/wiki/miseq_sop/) and [DADA2 Pipeline Tutorial](https://benjjneb.github.io/dada2/tutorial.html)) with the DADA2 pipeline modified to use the GTDB training set [@Ali23] for taxonomic classifications.
 
 ## References

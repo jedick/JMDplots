@@ -1,13 +1,199 @@
 # JMDplots/genoGEO.R
-# Plot for the manuscript by Dick (2024) about the genomic record of Earth's surface oxygenation
+# Make plots for paper:
+# Genomes record the Great Oxidation Event
 # 20231206 jmd first version
-# 20240328 moved to JMDplots
-# 20240409 add genoGOE_2()
+# 20240328 Moved to JMDplots
+# 20240409 Add Rubisco plots
+# 20240528 Analyze methanogen genomes
+
+# Figure 1: Comparison of methanogen genomes
+genoGOE_1 <- function(pdf = FALSE) {
+
+  if(pdf) cairo_pdf("Figure_1.pdf", width = 8, height = 6)
+  mat <- matrix(c(1,2,3, 1,2,4, 5,5,5), nrow = 3, byrow = TRUE)
+  layout(mat, heights = c(1, 1, 2))
+  opar <- par(mgp = c(2.8, 1, 0), mar = c(5.1, 4.1, 2.1, 2.1))
+
+  # Read methanogen genomes information
+  mgfile <- system.file("extdata/genoGOE/methanogen_genomes.csv", package = "JMDplots")
+  mg <- read.csv(mgfile)
+  # Genomes in Halobacteriota
+  Halo <- mg$Genome[mg$Methanogen_class == "II"]
+  # Genomes in Methanobacteriota
+  Methano <- mg$Genome[mg$Methanogen_class == "I"]
+
+  # Panel A: Zc and GC of marker genes 20240528
+
+  # Read data for GTDB marker genes
+  markerfile <- system.file("extdata/genoGOE/ar53_msa_marker_info_r220_XHZ+06.csv", package = "JMDplots")
+  markerdat <- read.csv(markerfile)
+  markerid <- sapply(strsplit(markerdat$Marker.Id, "_"), "[", 2)
+  methanogendir <- system.file("extdata/genoGOE/methanogen", package = "JMDplots")
+
+  # NULL values for variables used in subset()
+  protein <- gene <- NULL
+
+  get_Zc <- function(phylum = "Halo") {
+    files <- file.path(methanogendir, "marker", "faa", paste0(markerid, ".faa.xz"))
+    aalist <- lapply(files, function(file) {
+      aa <- suppressMessages(read_fasta(file))
+      fivenum(Zc(subset(aa, protein %in% get(phylum))))
+    })
+    do.call(rbind, aalist)
+  }
+
+  get_GC <- function(phylum = "Halo") {
+    files <- file.path(methanogendir, "marker", "fna", paste0(markerid, ".fna.xz"))
+    nalist <- lapply(files, function(file) {
+      na <- suppressMessages(read_fasta(file, molecule = "DNA"))
+      na <- subset(na, gene %in% get(phylum))
+      GC <- (na$G + na$C) / (na$G + na$C + na$A + na$T)
+      fivenum(GC)
+    })
+    do.call(rbind, nalist)
+  }
+
+  # Get Zc for species in each phylum
+  Zc_Halo <- get_Zc("Halo")
+  Zc_Methano <- get_Zc("Methano")
+
+  # Order by median Zc of Methanobacteriota
+  iord <- order(Zc_Methano[, 3])
+  Zc_Halo <- Zc_Halo[iord, ]
+  Zc_Methano <- Zc_Methano[iord, ]
+
+  # Plot IQR of Zc
+  plot(c(1, 53), c(-0.28, -0.04), xlab = "Marker gene", ylab = quote("Protein"~italic(Z)[C]), type = "n")
+  for(i in 1:53) {
+    lines(c(i, i) - 0.1, Zc_Methano[i, c(2, 4)], col = 2)
+    lines(c(i, i) + 0.1, Zc_Halo[i, c(2, 4)], col = 4)
+  }
+  # Add legend for methanogen Class I and II
+  legend("bottomright", "Class I", lty = 1, col = 2, bty = "n")
+  legend("topleft", "Class II", lty = 1, col = 4, bty = "n")
+  label.figure("A", font = 2, cex = 1.5)
+
+  # Get GC for species in each phylum
+  GC_Halo <- get_GC("Halo")
+  GC_Methano <- get_GC("Methano")
+  GC_Halo <- GC_Halo[iord, ]
+  GC_Methano <- GC_Methano[iord, ]
+
+  # Plot IQR of GC
+  plot(c(1, 53), c(0.25, 0.65), xlab = "Marker gene", ylab = "GC content", type = "n")
+  for(i in 1:53) {
+    lines(c(i, i) - 0.1, GC_Methano[i, c(2, 4)], col = 2)
+    lines(c(i, i) + 0.1, GC_Halo[i, c(2, 4)], col = 4)
+  }
+
+  # Plot Delta Zc vs Delta GC
+  par(mar = c(4.1, 4.1, 1.1, 2.1))
+  Delta_Zc <- na.omit(Zc_Halo[, 3] - Zc_Methano[, 3])
+  Delta_GC <- na.omit(GC_Halo[, 3] - GC_Methano[, 3])
+  plot(Delta_GC, Delta_Zc, xlab = quote(Delta*"GC"),
+    ylab = quote(Delta*italic(Z)[C]~"(Class II \u2212 Class I)                                                         "),
+    pch = 19, col = adjustcolor(1, alpha.f = 0.5), xpd = NA)
+  # Calculate linear fit
+  mylm <- lm(Delta_Zc ~ Delta_GC)
+  x <- range(Delta_GC)
+  y <- predict.lm(mylm, data.frame(Delta_GC = x))
+  # Plot linear fit and show R2
+  lines(x, y, lty = 2, lwd = 1.5, col = 8)
+  R2 <- summary(mylm)$r.squared
+  R2_txt <- bquote(italic(R)^2 == .(formatC(R2, digits = 2, format = "f")))
+  legend("topleft", legend = R2_txt, bty = "n", inset = c(-0.05, 0))
+
+  # Plot Delta Zc vs log10 protein abundance in M. maripaludis 20240531
+  Delta_Zc <- Zc_Halo[, 3] - Zc_Methano[, 3]
+  abundance <- markerdat$Redundant.Peptides / markerdat$MW
+  log10a <- log10(abundance)
+  plot(log10a, Delta_Zc, xlab = quote(log[10]~"protein abundance in"~italic("M. maripaludis")), ylab = "", pch = 19, col = adjustcolor(1, alpha.f = 0.5))
+  # Calculate linear fit
+  mylm <- lm(Delta_Zc ~ log10a)
+  x <- range(log10a)
+  y <- predict.lm(mylm, data.frame(log10a = x))
+  # Plot linear fit and show R2
+  lines(x, y, lty = 2, lwd = 1.5, col = 8)
+  R2 <- summary(mylm)$r.squared
+  R2_txt <- bquote(italic(R)^2 == .(formatC(R2, digits = 2, format = "f")))
+  legend("topleft", legend = R2_txt, bty = "n", inset = c(-0.05, 0))
+
+  par(opar)
+
+  # Panel B: Zc controlled for various factors 20240529
+   
+  # Get values of Zc, GC, and Cost
+  genomes <- mg$Genome
+  values <- lapply(genomes, function(genome) {
+    aa <- read.csv(file.path(methanogendir, "aa", paste0(genome, "_aa.csv.xz")))
+    data.frame(
+      Zc = Zc(aa),
+      GC = aa$abbrv,
+      Cost = Cost(aa)
+    )
+  })
+  names(values) <- genomes
+
+  # NULL values for variables used in subset()
+  GC <- Cost <- NULL
+  # Get mean Zc for segment (phylum x condition)
+  get_mean_Zc <- function(phylum = "Halo", condition = "all") {
+    genomes <- get(phylum)
+    myval <- values[genomes]
+    if(condition == "low_GC") myval <- lapply(myval, subset, GC < 0.34)
+    if(condition == "mid_GC") myval <- lapply(myval, subset, GC >= 0.34 & GC <= 0.36)
+    if(condition == "high_GC") myval <- lapply(myval, subset, GC > 0.36)
+    if(condition == "low_Cost") myval <- lapply(myval, subset, Cost < 23)
+    if(condition == "mid_Cost") myval <- lapply(myval, subset, Cost >= 23 & Cost <= 24)
+    if(condition == "high_Cost") myval <- lapply(myval, subset, Cost > 25)
+    print(paste("median", median(sapply(myval, nrow)), "proteins for", phylum, condition))
+    sapply(sapply(myval, "[", "Zc"), "mean")
+  }
+
+  Zc <- data.frame(
+    Methano_all = get_mean_Zc("Methano", "all"),
+    Halo_all = get_mean_Zc("Halo", "all"),
+    Methano_low_GC = get_mean_Zc("Methano", "low_GC"),
+    Halo_low_GC = get_mean_Zc("Halo", "low_GC"),
+    Methano_mid_GC = get_mean_Zc("Methano", "mid_GC"),
+    Halo_mid_GC = get_mean_Zc("Halo", "mid_GC"),
+    Methano_high_GC = get_mean_Zc("Methano", "high_GC"),
+    Halo_high_GC = get_mean_Zc("Halo", "high_GC"),
+    Methano_low_Cost = get_mean_Zc("Methano", "low_Cost"),
+    Halo_low_Cost = get_mean_Zc("Halo", "low_Cost"),
+    Methano_mid_Cost = get_mean_Zc("Methano", "mid_Cost"),
+    Halo_mid_Cost = get_mean_Zc("Halo", "mid_Cost"),
+    Methano_high_Cost = get_mean_Zc("Methano", "high_Cost"),
+    Halo_high_Cost = get_mean_Zc("Halo", "high_Cost")
+  )
+
+  # Don't plot overall line
+  what <- c(FALSE, TRUE, TRUE, TRUE)
+  # Start beanplot with all proteins
+  par(mar = c(3.1, 4.1, 4.1, 2.1))
+  bp <- beanplot(Zc[, 1:2], side = "both", col = list(c(2, 7, 2, 2), c(4, 3, 4, 4)), xlim = c(0.5, 7.5), what = what, names = "")
+  # Add means for species in each phylum
+  abline(h = bp$stats[1], col = 2, lty = 2)
+  abline(h = bp$stats[2], col = 4, lty = 2)
+  # Add beans for GC and Cost
+  beanplot(Zc[, 3:14], side = "both", col = list(c(2, 7, 2, 2), c(4, 3, 4, 4)), xlim = c(0.5, 7.5), what = what, names = character(6), add = TRUE, at = 2:7)
+  mtext(quote("Protein"~italic(Z)[C]), 2, line = 2.8, cex = par("cex"))
+
+  # Add group names
+  axis(1, at = 2:4, labels = c("GC < 0.34", "0.34 \u2264 GC \u2264 0.36", "GC > 0.36"))
+  axis(1, at = 5:7, labels = c("Cost < 23", "23 \u2264 Cost \u2264 25", "Cost > 25"))
+  axis(3, at = c(1, 3, 6), labels = c("All Proteins", "Control for GC content", "Control for metabolic cost"), tick = FALSE, font = 2)
+
+  label.figure("B", font = 2, cex = 1.5, xfrac = 0.018)
+
+  if(pdf) dev.off()
+
+}
 
 # Carbon oxidation state of proteins as a function of gene age in two lineages
-genoGOE_1 <- function(pdf = FALSE, metric = "Zc") {
+genoGOE_2 <- function(pdf = FALSE, metric = "Zc") {
 
-  if(pdf) pdf("Figure_1.pdf", width = 7, height = 6)
+  if(pdf) pdf("Figure_2.pdf", width = 7, height = 6)
   layout(matrix(1:2), heights = c(1.2, 1.7))
 
   # Gene ages from Liebeskind et al. (2016)
@@ -126,9 +312,9 @@ genoGOE_1 <- function(pdf = FALSE, metric = "Zc") {
 # Chemical analysis and thermodynamic calculations for ancestral Rubiscos
 # Can be used to make logaH2O-logfO2, logfO2-pH, or Eh-pH diagram (x = O2 or pH, y = H2O, O2, or Eh)
 # 'basis' can be QEC or CHNOS
-genoGOE_2 <- function(pdf = FALSE, x = "pH", y = "Eh", basis = "QEC") {
+genoGOE_3 <- function(pdf = FALSE, x = "pH", y = "Eh", basis = "QEC") {
 
-  if(pdf) pdf("Figure_2.pdf", width = 10, height = 5)
+  if(pdf) pdf("Figure_3.pdf", width = 9, height = 4.5)
   par(mfrow = c(1, 2))
 
   # Read amino acid compositions
@@ -140,11 +326,12 @@ genoGOE_2 <- function(pdf = FALSE, x = "pH", y = "Eh", basis = "QEC") {
   # Panel A: Zc vs ancestry
 
   xlab <- "Ancestral sequences (older to younger)"
-  plot(Zc(aa), type = "b", xaxt = "n", xlab = xlab, ylab = cplab$Zc)
+  par(mar = c(4.0, 4.0, 2.5, 1.0), mgp = c(2.5, 1, 0))
+  plot(Zc(aa), type = "b", xaxt = "n", xlab = xlab, ylab = cplab$Zc, pch = 19)
   axis(1, at = 1:6, aa$protein)
-  abline(v = 3.5, lty = 2, col = 6, lwd = 2)
+  abline(v = 3.5, lty = 2, col = "darkgreen", lwd = 2)
   axis(3, at = 3.5, "GOE (proposed)")
-  label.figure("A", cex = 1.5)
+  label.figure("A", cex = 1.5, font = 2)
 
   # Panel B: Relative stability diagram
 
@@ -165,7 +352,7 @@ genoGOE_2 <- function(pdf = FALSE, x = "pH", y = "Eh", basis = "QEC") {
   aff_args0 <- list(c(lims[[x]], res), c(lims[[y]], res), iprotein = ip)
   names(aff_args0)[1:2] <- c(x, y)
 
-  # Calculate maximum affinity among all protein
+  # Calculate maximum affinity among all proteins
   a0 <- do.call(affinity, aff_args0)
   d0 <- diagram(a0, plot.it = FALSE)
 
@@ -178,7 +365,7 @@ genoGOE_2 <- function(pdf = FALSE, x = "pH", y = "Eh", basis = "QEC") {
   # How many colors to take away to center the scale on zero affinity
   nout <- round(miss_frac * ntot)
   nuse <- ntot - nout
-  col <- hcl.colors(ntot, palette = "Blue-Red 3")[1:nuse]
+  col <- hcl.colors(ntot, palette = "Blue-Yellow 2")[1:nuse]
   # Start plot with colors for affinity
   thermo.plot.new(lims[[x]], lims[[y]], xlab = axis.label(x), ylab = axis.label(y))
   image(d0$vals[[1]], d0$vals[[2]], d0$predominant.values, add = TRUE, col = col, useRaster = TRUE)
@@ -188,10 +375,14 @@ genoGOE_2 <- function(pdf = FALSE, x = "pH", y = "Eh", basis = "QEC") {
   aff_args1 <- aff_args0
   aff_args1$iprotein <- ip[1:4]
   a1 <- do.call(affinity, aff_args1)
-  #diagram(a1, lty = 2, lwd = 2, col = 6, col.names = 6, names = names, add = TRUE)
-  diagram(a1, lty = 2, lwd = 2, col = 6, col.names = 6, names = names, add = TRUE, limit.water = TRUE, fill.NA = "gray80")
+  dx <- c(0.9, 1, 0, 2)
+  dy <- c(-0.06, 0.28, 0, 0)
+  diagram(a1, lty = 2, lwd = 2, font = 2, col = "darkgreen", col.names = "darkgreen",
+    names = names, add = TRUE, limit.water = TRUE, fill.NA = "gray80", dx = dx, dy = dy)
   # Overlay lines for all proteins
-  d <- diagram(a0, font = 2, lwd = 3, add = TRUE, limit.water = TRUE)
+  dx <- c(0.9, 1.7, 0, 0, -1.6, 2.5)
+  dy <- c(-0.06, -0.09, 0, 0, -0.05, -0.3)
+  d <- diagram(a0, font = 2, lwd = 3, add = TRUE, limit.water = TRUE, dx = dx, dy = dy)
   # Add water stability lines
   water.lines(d, lty = 1, col = 8)
   # Add contour line at zero affinity
@@ -200,7 +391,7 @@ genoGOE_2 <- function(pdf = FALSE, x = "pH", y = "Eh", basis = "QEC") {
   box()
   thermo.axis()
 
-  label.figure("B", cex = 1.5)
+  label.figure("B", cex = 1.5, font = 2)
 
   if(pdf) dev.off()
 

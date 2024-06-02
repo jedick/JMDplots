@@ -1,0 +1,39 @@
+Genome,Domain,Phylum,Class,Order,Family,Genu,Speies,Methanogen_class,Other_name
+RS_GCF_000013725.1,Archaea,Halobacteriota,Methanosarcinia,Methanosarcinales,Methanosarcinaceae,Methanococcoides,"Methanococcoides burtonii",II,
+RS_GCF_000196655.1,Archaea,Halobacteriota,Methanosarcinia,Methanosarcinales,Methanosarcinaceae,Methanohalobium,"Methanohalobium evestigatum",II,
+RS_GCF_000025865.1,Archaea,Halobacteriota,Methanosarcinia,Methanosarcinales,Methanosarcinaceae,Methanohalophilus,"Methanohalophilus mahii",II,
+RS_GCF_000328665.1,Archaea,Halobacteriota,Methanosarcinia,Methanosarcinales,Methanosarcinaceae,Methanomethylovorans,"Methanomethylovorans hollandica",II,
+RS_GCF_000217995.1,Archaea,Halobacteriota,Methanosarcinia,Methanosarcinales,Methanosarcinaceae,Methanosalsum,"Methanosalsum zhilinae",II,
+RS_GCF_000014945.1,Archaea,Halobacteriota,Methanosarcinia,Methanotrichales,Methanotrichaceae,Methanothrix_B,"Methanothrix_B thermoacetophila",II,"Methanosaeta thermophila"
+RS_GCF_000007345.1,Archaea,Halobacteriota,Methanosarcinia,Methanosarcinales,Methanosarcinaceae,Methanosarcina,"Methanosarcina acetivorans",II,
+RS_GCF_000970025.1,Archaea,Halobacteriota,Methanosarcinia,Methanosarcinales,Methanosarcinaceae,Methanosarcina,"Methanosarcina barkeri",II,
+RS_GCF_000970205.1,Archaea,Halobacteriota,Methanosarcinia,Methanosarcinales,Methanosarcinaceae,Methanosarcina,"Methanosarcina mazei",II,
+RS_GCF_000251105.1,Archaea,Halobacteriota,Methanocellia,Methanocellales,Methanocellaceae,Methanocella,"Methanocella conradii",II,
+RS_GCF_000063445.1,Archaea,Halobacteriota,Methanocellia,Methanocellales,Methanocellaceae,Methanocella_A,"Methanocella_A arvoryzae",II,
+RS_GCF_000011005.1,Archaea,Halobacteriota,Methanocellia,Methanocellales,Methanocellaceae,Methanocella,"Methanocella paludicola",II,
+RS_GCF_000017625.1,Archaea,Halobacteriota,Methanomicrobia,Methanomicrobiales,Methanospirillaceae,Methanoregula,"Methanoregula boonei",II,
+RS_GCF_000021965.1,Archaea,Halobacteriota,Methanomicrobia,Methanomicrobiales,Methanospirillaceae,Methanosphaerula,"Methanosphaerula palustris",II,
+RS_GCF_000015825.1,Archaea,Halobacteriota,Methanomicrobia,Methanomicrobiales,Methanoculleaceae,Methanoculleus,"Methanoculleus marisnigri",II,
+RS_GCF_000147875.1,Archaea,Halobacteriota,Methanomicrobia,Methanomicrobiales,Methanomicrobiaceae,Methanolacinia,"Methanolacinia petrolearia",II,
+RS_GCF_000275865.1,Archaea,Halobacteriota,Methanomicrobia,Methanomicrobiales,Methanofollaceae,Methanofollis,"Methanofollis liminatans",II,
+RS_GCF_000243255.1,Archaea,Halobacteriota,Methanomicrobia,Methanomicrobiales,Methanomicrobiaceae,Methanoplanus,"Methanoplanus limicola",II,
+RS_GCF_000013445.1,Archaea,Halobacteriota,Methanomicrobia,Methanomicrobiales,Methanospirillaceae,Methanospirillum,"Methanospirillum hungatei",II,
+RS_GCF_000024185.1,Archaea,Methanobacteriota,Methanobacteria,Methanobacteriales,Methanobacteriaceae,Methanobrevibacter,"Methanobrevibacter ruminantium",I,
+RS_GCF_024807035.1,Archaea,Methanobacteriota_A,Methanococci,Methanococcales,Methanococcaceae,Methanococcus,"Methanococcus voltae",I,"Methanococcus voltae PS "
+RS_GCF_000016525.1,Archaea,Methanobacteriota,Methanobacteria,Methanobacteriales,Methanobacteriaceae,Methanobrevibacter_A,"Methanobrevibacter_A smithii",I,
+RS_GCF_000008645.1,Archaea,Methanobacteriota,Methanobacteria,Methanobacteriales,Methanothermobacteraceae,Methanothermobacter,"Methanothermobacter thermautotrophicus",I,
+RS_GCF_000166095.1,Archaea,Methanobacteriota,Methanobacteria,Methanobacteriales,Methanothermaceae,Methanothermus,"Methanothermus fervidus",I,
+RS_GCF_000012545.1,Archaea,Methanobacteriota,Methanobacteria,Methanobacteriales,Methanobacteriaceae,Methanosphaera,"Methanosphaera stadtmanae",I,
+RS_GCF_000145295.1,Archaea,Methanobacteriota,Methanobacteria,Methanobacteriales,Methanothermobacteraceae,Methanothermobacter,"Methanothermobacter marburgensis",I,
+RS_GCF_000017185.1,Archaea,Methanobacteriota_A,Methanococci,Methanococcales,Methanococcaceae,Methanothermococcus_A,"Methanothermococcus_A aeolicus",I,
+RS_GCF_000023985.1,Archaea,Methanobacteriota_A,Methanococci,Methanococcales,Methanocaldococcaceae,Methanocaldococcus,"Methanocaldococcus fervens",I,
+RS_GCF_000092305.1,Archaea,Methanobacteriota_A,Methanococci,Methanococcales,Methanocaldococcaceae,Methanocaldococcus_A,"Methanocaldococcus_A infernus",I,
+RS_GCF_000091665.1,Archaea,Methanobacteriota_A,Methanococci,Methanococcales,Methanocaldococcaceae,Methanocaldococcus,"Methanocaldococcus jannaschii",I,
+RS_GCF_000025525.1,Archaea,Methanobacteriota_A,Methanococci,Methanococcales,Methanocaldococcaceae,Methanocaldococcus,"Methanocaldococcus sp000025525",I,"Methanocaldococcus sp. FS406-22"
+RS_GCF_000024625.1,Archaea,Methanobacteriota_A,Methanococci,Methanococcales,Methanocaldococcaceae,Methanocaldococcus,"Methanocaldococcus vulcanius",I,
+RS_GCF_000179575.2,Archaea,Methanobacteriota_A,Methanococci,Methanococcales,Methanococcaceae,Methanothermococcus_A,"Methanothermococcus_A okinawensis",I,
+RS_GCF_000016125.1,Archaea,Methanobacteriota_A,Methanococci,Methanococcales,Methanococcaceae,Methanococcus,"Methanococcus maripaludis_D",I,"Methanococcus maripaludis C5"
+RS_GCF_002945325.1,Archaea,Methanobacteriota_A,Methanococci,Methanococcales,Methanococcaceae,Methanococcus,"Methanococcus maripaludis",I,"Methanococcus maripaludis strain DSM 2067"
+RS_GCF_000017165.1,Archaea,Methanobacteriota_A,Methanococci,Methanococcales,Methanococcaceae,Methanococcus,"Methanococcus vannielii",I,
+RS_GCF_017875395.1,Archaea,Methanobacteriota_A,Methanococci,Methanococcales,Methanococcaceae,Methanococcus,"Methanococcus voltae_C",I,"Methanococcus voltae strain DSM 14649"
+RS_GCF_000007185.1,Archaea,Methanobacteriota,Methanopyri,Methanopyrales,Methanopyraceae,Methanopyrus,"Methanopyrus kandleri",I,
