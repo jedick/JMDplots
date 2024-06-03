@@ -314,7 +314,7 @@ genoGOE_2 <- function(pdf = FALSE, metric = "Zc") {
 # 'basis' can be QEC or CHNOS
 genoGOE_3 <- function(pdf = FALSE, x = "pH", y = "Eh", basis = "QEC") {
 
-  if(pdf) pdf("Figure_3.pdf", width = 9, height = 4.5)
+  if(pdf) cairo_pdf("Figure_3.pdf", width = 9, height = 4.5)
   par(mfrow = c(1, 2))
 
   # Read amino acid compositions
@@ -327,7 +327,18 @@ genoGOE_3 <- function(pdf = FALSE, x = "pH", y = "Eh", basis = "QEC") {
 
   xlab <- "Ancestral sequences (older to younger)"
   par(mar = c(4.0, 4.0, 2.5, 1.0), mgp = c(2.5, 1, 0))
-  plot(Zc(aa), type = "b", xaxt = "n", xlab = xlab, ylab = cplab$Zc, pch = 19)
+  # Get point locations
+  xs <- 1:6
+  ys <- Zc(aa)
+  # Start plot
+  plot(xs, ys, type = "n", xaxt = "n", xlab = xlab, ylab = cplab$Zc)
+  # Plot main branch (excluding Anc I/III')
+  lines(xs[-3], ys[-3], type = "b", pch = NA)
+  # Plot sub-branch (Anc I/III')
+  lines(xs[2:4], ys[2:4], type = "b", pch = NA, lty = 2, col = 8)
+  # Add points
+  points(xs[-3], ys[-3], pch = 19)
+  points(xs[3], ys[3], pch = 19, col = 8)
   axis(1, at = 1:6, aa$protein)
   abline(v = 3.5, lty = 2, col = "darkgreen", lwd = 2)
   axis(3, at = 3.5, "GOE (proposed)")
@@ -373,16 +384,25 @@ genoGOE_3 <- function(pdf = FALSE, x = "pH", y = "Eh", basis = "QEC") {
   # Plot stability lines
   # Anc_I is metastable; remove IB and IA/B to see it
   aff_args1 <- aff_args0
-  aff_args1$iprotein <- ip[1:4]
+  aff_args1$iprotein <- ip[c(2,4)]
   a1 <- do.call(affinity, aff_args1)
-  dx <- c(0.9, 1, 0, 2)
-  dy <- c(-0.06, 0.28, 0, 0)
+  dx <- c(0.5, 2.8)
+  dy <- c(0.36, -0.03)
   diagram(a1, lty = 2, lwd = 2, font = 2, col = "darkgreen", col.names = "darkgreen",
     names = names, add = TRUE, limit.water = TRUE, fill.NA = "gray80", dx = dx, dy = dy)
+  # Visualize Anc_I - Anc_IA/B boundary 20240603
+  aff_args2 <- aff_args0
+  aff_args2$iprotein <- ip[c(4,5)]
+  a2 <- do.call(affinity, aff_args2)
+  dx <- c(3.8, -0.3)
+  dy <- c(-0.05, -0.44)
+  diagram(a2, lty = 2, lwd = 2, font = 2, col = "darkorange2", col.names = "darkorange2",
+    names = names, add = TRUE, limit.water = FALSE, fill.NA = "gray80", dx = dx, dy = dy)
+
   # Overlay lines for all proteins
-  dx <- c(0.9, 1.7, 0, 0, -1.6, 2.5)
-  dy <- c(-0.06, -0.09, 0, 0, -0.05, -0.3)
-  d <- diagram(a0, font = 2, lwd = 3, add = TRUE, limit.water = TRUE, dx = dx, dy = dy)
+  dx <- c(0.2, 2.2, 0, 0, -1.4, 3.0)
+  dy <- c(-0.02, -0.10, 0, 0, -0.17, -0.3)
+  d <- diagram(a0, font = 2, lwd = 2, add = TRUE, limit.water = TRUE, dx = dx, dy = dy)
   # Add water stability lines
   water.lines(d, lty = 1, col = 8)
   # Add contour line at zero affinity

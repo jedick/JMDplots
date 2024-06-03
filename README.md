@@ -15,7 +15,7 @@ See the manual page associated with each paper for additional details about scri
 <!-- Put a space before <details> to make ghostwriter format the lists correctly -->
  <details>
 
-<summary>Genomes record the Great Oxidation Event (<i>in-preparation manuscript</i>)</summary>
+<summary>`genoGOE`: Genomes record the Great Oxidation Event (<i>in-preparation manuscript</i>)</summary>
 
 - [inst/extdata/genoGOE](inst/extdata/genoGOE): scripts and processed data files
 
@@ -33,15 +33,15 @@ See the manual page associated with each paper for additional details about scri
     - [mkaa.R](inst/extdata/evdevH2O/LMM16/mkaa.R): *script*: sum amino acid compositions of proteins in each gene age category
     - [reference_proteomes.csv](inst/extdata/evdevH2O/LMM16/reference_proteomes.csv): *data*: IDs of UniProt reference proteomes for 31 organisms
     - [modeAges_names.csv](inst/extdata/evdevH2O/LMM16/modeAges_names.csv): *output file*: Names of gene age categories for each organism
-    - [modeAgesaa.csv](inst/extdata/evdevH2O/LMM16/modeAgesaa.csv): *output file*: Summed amino acid composition for proteins in each gene age category
+    - [modeAges_aa.csv](inst/extdata/evdevH2O/LMM16/modeAges_aa.csv): *output file*: Summed amino acid composition for proteins in each gene age category
 
-- [../canprot/inst/extdata/fasta/KHAB17.fasta](../canprot/inst/extdata/fasta/KHAB17.fasta): reconstructed ancestral Rubisco sequences taken from [Kaçar et al. (2017)](https://doi.org/10.1111/gbi.12243)
+- [../canprot/inst/extdata/fasta/KHAB17.fasta](https://github.com/jedick/canprot/blob/main/inst/extdata/fasta/KHAB17.fasta): reconstructed ancestral Rubisco sequences taken from [Kaçar et al. (2017)](https://doi.org/10.1111/gbi.12243)
 
 </details>
 
  <details>
 
-<summary>Adaptations of microbial genomes to human body chemistry (<i>submitted manuscript</i>)</summary>
+<summary>`microhum`: Adaptations of microbial genomes to human body chemistry (<i>submitted manuscript</i>)</summary>
 
 - [inst/extdata/microhum](inst/extdata/microhum): scripts and processed data files
 
@@ -84,7 +84,7 @@ See the manual page associated with each paper for additional details about scri
 
  <details>
 
-<summary><i>chem16S</i>: community-level chemical metrics for exploring genomic adaptation to environments (<a href="https://doi.org/10.1093/bioinformatics/btad564">2023</a>)</summary>
+<summary>`chem16S`: Community-level chemical metrics for exploring genomic adaptation to environments (<a href="https://doi.org/10.1093/bioinformatics/btad564">2023</a>)</summary>
 
   - [R/chem16S.R](R/chem16S.R): code for plots
   - [man/chem16S.Rd](man/chem16S.Rd): manual page
@@ -105,7 +105,7 @@ See the manual page associated with each paper for additional details about scri
 
  <details>
 
-<summary>Community- and genome-based evidence for a shaping influence of redox potential on bacterial protein evolution (<a href="https://doi.org/10.1128/msystems.00014-23">2023</a>)</summary>
+<summary>`orp16S`: Community- and genome-based evidence for a shaping influence of redox potential on bacterial protein evolution (<a href="https://doi.org/10.1128/msystems.00014-23">2023</a>)</summary>
 
   - [inst/extdata/orp16S](inst/extdata/orp16S): scripts and processed data files
 
@@ -135,7 +135,7 @@ See the manual page associated with each paper for additional details about scri
 
  <details>
 
-<summary>Using thermodynamics to obtain geochemical information from genomes (<a href="https://doi.org/10.1111/gbi.12532">2023</a>)</summary>
+<summary>`utogig`: Using thermodynamics to obtain geochemical information from genomes (<a href="https://doi.org/10.1111/gbi.12532">2023</a>)</summary>
 
   - [inst/extdata/utogig](inst/extdata/utogig): scripts and processed data files
   - [R/utogig.R](R/utogig.R): code for plots
