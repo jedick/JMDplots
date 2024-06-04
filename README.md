@@ -15,7 +15,7 @@ See the manual page associated with each paper for additional details about scri
 <!-- Put a space before <details> to make ghostwriter format the lists correctly -->
  <details>
 
-<summary>`genoGOE`: Genomes record the Great Oxidation Event (<i>in-preparation manuscript</i>)</summary>
+<summary><code>genoGOE</code>: Genomes record the Great Oxidation Event (<i>in-preparation manuscript</i>)</summary>
 
 - [inst/extdata/genoGOE](inst/extdata/genoGOE): scripts and processed data files
 
@@ -41,7 +41,7 @@ See the manual page associated with each paper for additional details about scri
 
  <details>
 
-<summary>`microhum`: Adaptations of microbial genomes to human body chemistry (<i>submitted manuscript</i>)</summary>
+<summary><code>microhum</code>: Adaptations of microbial genomes to human body chemistry (<i>submitted manuscript</i>)</summary>
 
 - [inst/extdata/microhum](inst/extdata/microhum): scripts and processed data files
 
@@ -84,7 +84,7 @@ See the manual page associated with each paper for additional details about scri
 
  <details>
 
-<summary>`chem16S`: Community-level chemical metrics for exploring genomic adaptation to environments (<a href="https://doi.org/10.1093/bioinformatics/btad564">2023</a>)</summary>
+<summary><code>chem16S</code>: Community-level chemical metrics for exploring genomic adaptation to environments (<a href="https://doi.org/10.1093/bioinformatics/btad564">2023</a>)</summary>
 
   - [R/chem16S.R](R/chem16S.R): code for plots
   - [man/chem16S.Rd](man/chem16S.Rd): manual page
@@ -105,7 +105,7 @@ See the manual page associated with each paper for additional details about scri
 
  <details>
 
-<summary>`orp16S`: Community- and genome-based evidence for a shaping influence of redox potential on bacterial protein evolution (<a href="https://doi.org/10.1128/msystems.00014-23">2023</a>)</summary>
+<summary><code>orp16S</code>: Community- and genome-based evidence for a shaping influence of redox potential on bacterial protein evolution (<a href="https://doi.org/10.1128/msystems.00014-23">2023</a>)</summary>
 
   - [inst/extdata/orp16S](inst/extdata/orp16S): scripts and processed data files
 
@@ -135,7 +135,7 @@ See the manual page associated with each paper for additional details about scri
 
  <details>
 
-<summary>`utogig`: Using thermodynamics to obtain geochemical information from genomes (<a href="https://doi.org/10.1111/gbi.12532">2023</a>)</summary>
+<summary><code>utogig</code>: Using thermodynamics to obtain geochemical information from genomes (<a href="https://doi.org/10.1111/gbi.12532">2023</a>)</summary>
 
   - [inst/extdata/utogig](inst/extdata/utogig): scripts and processed data files
   - [R/utogig.R](R/utogig.R): code for plots
