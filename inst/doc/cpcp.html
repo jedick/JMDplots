@@ -364,7 +364,7 @@ function ToggleDiv(ID) {
 <p>Dick JM. 2016. Proteomic indicators of oxidation and hydration state in colorectal cancer. <em>PeerJ</em> <strong>4</strong>: e2238. doi: <a href="https://doi.org/10.7717/peerj.2238">10.7717/peerj.2238</a></p>
 <p>Dick JM. 2017. Chemical composition and the potential for proteomic transformation in cancer, hypoxia, and hyperosmotic stress. <em>PeerJ</em> <strong>5</strong>: e3421. doi: <a href="https://doi.org/10.7717/peerj.3421">10.7717/peerj.3421</a></p>
 </blockquote>
-<p>This vignette was compiled on 2024-02-22 with <strong><a href="https://github.com/jedick/JMDplots">JMDplots</a></strong> 1.2.19 and <strong><a href="https://github.com/jedick/canprot">canprot</a></strong> 1.1.2-14.</p>
+<p>This vignette was compiled on 2024-07-03 with <strong><a href="https://github.com/jedick/JMDplots">JMDplots</a></strong> 1.2.20 and <strong><a href="https://github.com/jedick/canprot">canprot</a></strong> 2.0.0.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="kw">library</span>(JMDplots)</span></code></pre></div>
 <div id="microbial-proteins-in-colorectal-cancer-2016-figure-4" class="section level2">
 <h2>Microbial proteins in colorectal cancer (2016 Figure 4)</h2>
@@ -456,7 +456,7 @@ The last plot shows effective values of Eh (redox potential) as a function of th
 Identify the datasets for protein expression.
 
 
-```r
+``` r
 datasets <- c("JKMF10", "UNS+14", "WKP+14", "MRK+11_AD.NC", "MRK+11_AC.AD", "MRK+11_AC.NC", "JCF+11", "KWA+14")
 ```
 
@@ -464,7 +464,7 @@ Set up the diagram and make the plots.
 To reduce the time needed to create the vignette, the plots here are made at lower resolution than those in the paper.
 
 
-```r
+``` r
 #par(mfrow=c(3, 3))
 #par(xaxs="i", yaxs="i", las=1, mar=c(4, 4, 2, 2), mgp=c(2.6, 1, 0), cex=1)
 #for(i in seq_along(datasets)) {
@@ -497,7 +497,7 @@ To reduce the time needed to create the vignette, the plots here are made at low
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a>QEClab &lt;-<span class="st"> </span>CHNOSZ<span class="op">::</span><span class="kw">syslab</span>(<span class="kw">c</span>(<span class="st">&quot;glutamine&quot;</span>, <span class="st">&quot;glutamic acid&quot;</span>, <span class="st">&quot;cysteine&quot;</span>, <span class="st">&quot;H2O&quot;</span>, <span class="st">&quot;O2&quot;</span>))</span>
 <span id="cb5-2"><a href="#cb5-2"></a>CHNOSlab &lt;-<span class="st"> </span>CHNOSZ<span class="op">::</span><span class="kw">syslab</span>(<span class="kw">c</span>(<span class="st">&quot;CO2&quot;</span>, <span class="st">&quot;NH3&quot;</span>, <span class="st">&quot;H2S&quot;</span>, <span class="st">&quot;H2O&quot;</span>, <span class="st">&quot;O2&quot;</span>))</span></code></pre></div>
 <p>Next, get the amino acid compositions of all proteins in the UniProt human proteome and calculate the protein formulas and <i>Z</i><sub>C</sub>. Note that <i>Z</i><sub>C</sub> is a sum of elemental ratios and is independent of the choice of basis species.</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a>aa &lt;-<span class="st"> </span><span class="kw">get</span>(<span class="st">&quot;human_base&quot;</span>, human)</span>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a>aa &lt;-<span class="st"> </span><span class="kw">get</span>(<span class="st">&quot;human.base&quot;</span>, canprot)</span>
 <span id="cb6-2"><a href="#cb6-2"></a>protein.formula &lt;-<span class="st"> </span>CHNOSZ<span class="op">::</span><span class="kw">protein.formula</span>(aa)</span>
 <span id="cb6-3"><a href="#cb6-3"></a>ZC &lt;-<span class="st"> </span>CHNOSZ<span class="op">::</span><span class="kw">ZC</span>(protein.formula)</span></code></pre></div>
 <p>Now set up the figure and plot the per-residue elemental compositions of the proteins projected into different sets of basis species.</p>

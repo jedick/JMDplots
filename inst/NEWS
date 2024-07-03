@@ -1,7 +1,9 @@
-CHANGES IN JMDplots 1.2.19-20
------------------------------
+CHANGES IN JMDplots 1.2.20
+--------------------------
 
 - 20240409 Add genoGOE plots.
+
+- 20240320 Add GTDB version 214 reference database.
 
 CHANGES IN JMDplots 1.2.19
 --------------------------
