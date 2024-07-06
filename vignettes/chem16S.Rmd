@@ -57,8 +57,10 @@ This vignette runs the code to make the plots from the following paper:
 
 > Dick JM, Kang X. 2023. *chem16S*: community-level chemical metrics for exploring genomic adaptation to environments. *Bioinformatics* **39**(9): btad564. doi: [10.1093/bioinformatics/btad564](https://doi.org/10.1093/bioinformatics/btad564)
 
-Update: on 2024-04-04, the GTDB reference database in chem16S was updated from r207 to r214 and the mouse.GTDB dataset was also updated.
-As a result, Figure 1 A and B in this vignette now have small numerical differences from the published version of the figure.
+Update: The published version of this figure used GTDB version 207 for taxonomic classifications and the reference database.
+As of 2024-07-06, the GTDB reference database in chem16S is at version 220 (GTDB r220), but the taxonomic classfications in the mouse.GTDB dataset were made with GTDB r214.
+Consequently, Figure 1A shows mapping rate between two versions of the GTDB (r214 and r220) of less than 100%.
+The small numerical differences from the published version of the figure do not affect the overall trends in chemical metrics.
 
 This vignette was compiled on `r Sys.Date()` with
 **[JMDplots](https://github.com/jedick/JMDplots)** `r packageDescription("JMDplots")$Version` and
@@ -75,6 +77,6 @@ chem16S_1()
 
 **Data sources:**
 The `GlobalPatterns` dataset is from the [**phyloseq**](https://doi.org/10.18129/B9.bioc.phyloseq) package [@MH13] and is adapted from @CLW+11.
-The mouse gut dataset was created by analyzing sequence data from @SSZ+12 (downloaded [here](https://mothur.s3.us-east-2.amazonaws.com/wiki/miseqsopdata.zip) and used in the [mothur MiSeq SOP](https://mothur.org/wiki/miseq_sop/) and [DADA2 Pipeline Tutorial](https://benjjneb.github.io/dada2/tutorial.html)) with the DADA2 pipeline modified to use the GTDB training set [@Ali23] for taxonomic classifications.
+The mouse gut dataset was created by analyzing sequence data from @SSZ+12 (downloaded [here](https://mothur.s3.us-east-2.amazonaws.com/wiki/miseqsopdata.zip) and used in the [mothur MiSeq SOP](https://mothur.org/wiki/miseq_sop/) and [DADA2 Pipeline Tutorial](https://benjjneb.github.io/dada2/tutorial.html)) with the DADA2 pipeline modified to use 16S rRNA sequences from GTDB [@Ali23] for taxonomic classifications.
 
 ## References

@@ -46,7 +46,7 @@ chem16S_1 <- function(pdf = FALSE) {
 
 
   data(mouse.GTDB_214, package = "chem16S")
-  ps_metrics(mouse.GTDB_214, refdb = "GTDB_214") |> head(n = 3)
+  ps_metrics(mouse.GTDB_214, refdb = "GTDB_220") |> head(n = 3)
 
 
 
@@ -63,18 +63,21 @@ order_Clostridiales --> order_Eubacteriales (0.6%)
 family_Ruminococcaceae --> family_Oscillospiraceae (3.1%)
 [1] "map_taxa: can\'t map groups order_Stramenopiles (12.94%),
 family_ACK-M1 (3.27%), 374 others (11.75%)"
-[1] "map_taxa: mapping rate to RefSeq taxonomy is 71.9%"
+[1] "map_taxa: mapping rate to RefSeq_206 taxonomy is 71.9%"
             Zc        nO2       nH2O
 CL3 -0.1439756 -0.6697709 -0.7475996
 CC1 -0.1447548 -0.6701114 -0.7450737
 SV1 -0.1403848 -0.6623117 -0.7428770
 >
 >
-[1] "map_taxa: mapping rate to GTDB taxonomy is 100.0%"
+[1] "map_taxa: can\'t map groups genus_Ventrimonas (1.09%),
+genus_CAG-95 (0.7%), 8 others (1.22%)"
+[1] "map_taxa: mapping rate to GTDB_220 taxonomy is 97.0%"
                Zc        nO2       nH2O
-F3D0   -0.1557431 -0.7017494 -0.7685725
-F3D141 -0.1531863 -0.6980892 -0.7732248
-F3D142 -0.1528417 -0.6979087 -0.7756479
+F3D0   -0.1553323 -0.7009578 -0.7688654
+F3D141 -0.1526643 -0.6971256 -0.7737557
+F3D142 -0.1524078 -0.6970441 -0.7757458
+
 ')
                             
   # NULL assignments are needed to avoid "Undefined global functions or variables" in R CMD check
@@ -90,10 +93,10 @@ F3D142 -0.1528417 -0.6979087 -0.7756479
   ## Panel B: Mouse gut dataset
   mouse.GTDB_214 <- NULL
   data(mouse.GTDB_214, package = "chem16S", envir = environment())
-  pB1 <- plot_ps_metrics(mouse.GTDB_214, refdb = "GTDB_214", x = "Day", metrics = "Zc") +
+  pB1 <- plot_ps_metrics(mouse.GTDB_214, refdb = "GTDB_220", x = "Day", metrics = "Zc") +
     facet_wrap(~When, scales = "free_x") + geom_line(colour = red) +
     labs(title = "(B) Mouse gut dataset")
-  pB2 <- plot_ps_metrics(mouse.GTDB_214, refdb = "GTDB_214", x = "Day", metrics = "nH2O", quiet = TRUE) +
+  pB2 <- plot_ps_metrics(mouse.GTDB_214, refdb = "GTDB_220", x = "Day", metrics = "nH2O", quiet = TRUE) +
     facet_wrap(~When, scales = "free_x") + geom_line(colour = blue)
   pB <- pB1 / pB2
 

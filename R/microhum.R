@@ -196,7 +196,7 @@ microhum_2 <- function(pdf = FALSE) {
   # Get colors
   col <- hcl.colors("Dynamic", n = length(genera))
   # Loop over reference databases
-  refdb <- c("GTDB_207", "UHGG_2.0.1")
+  refdb <- c("GTDB_220", "UHGG_2.0.1")
   main <- c("GTDB (used for community reference proteomes)", "UHGG (contamination < 2% and completeness > 95%)")
   genus_vals <- list()
   metrics <- c("nO2", "nH2O")
@@ -717,7 +717,7 @@ microhum_5 <- function(pdf = FALSE) {
     # Convert to matrix to use plot.matrix
     D_abundance <- as.matrix(D_abundance)
     # Get amino acid compositions of reference proteomes for genera and calculate nO2
-    AAcomp <- taxon_AA[["GTDB_207"]]
+    AAcomp <- taxon_AA[["GTDB_220"]]
     AAcomp <- AAcomp[match(colnames(D_abundance), AAcomp$organism), ]
     nO2 <- calc_metrics(AAcomp, "nO2")[, 1]
     # Reorder genera from most reduced to most oxidized
@@ -996,7 +996,7 @@ microhum_5_1 <- function(pdf = FALSE) {
   stopifnot(length(intersect(dat$Genus.name[isAnaerobe], dat$Genus.name[isAerotolerant])) == 0)
 
   # Use GTDB-based reference proteomes
-  refdb <- "GTDB_207"
+  refdb <- "GTDB_220"
   # Get amino acid compositions for genera
   aa <- taxon_AA[[refdb]]
   aa <- aa[aa$protein == "genus", ]
@@ -1327,7 +1327,7 @@ calc.oxytol <- function(segment = "Feces", study = NULL) {
   abundance <- abundance / sum(abundance) * 100
 
   # Get amino acid compositions of reference proteomes for genera and calculate nO2
-  AAcomp <- taxon_AA[["GTDB_207"]]
+  AAcomp <- taxon_AA[["GTDB_220"]]
   AAcomp <- AAcomp[match(names(abundance), AAcomp$organism), ]
   nO2 <- calc_metrics(AAcomp, "nO2")[, 1]
   # Get oxygen tolerance
