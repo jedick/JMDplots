@@ -633,7 +633,7 @@ microhum_4 <- function(pdf = FALSE) {
   ## Panel D: nH2O-nO2 plots for community reference proteomes in IBD 20230723
   par(mar = c(4, 4, 3, 1))
   type <- "IBD"
-  startplot(c(-0.025, 0.005), c(-0.01, 0.025))
+  startplot(c(-0.030, 0.005), c(-0.01, 0.025))
   itype <- means$type == type
   label <- 1:sum(itype)
   # Add points
@@ -644,12 +644,12 @@ microhum_4 <- function(pdf = FALSE) {
   dx[12] <- -0.0015
   dy[12] <- 0.001
   dx[14] <- 0.0002
-  dx[8] <- 0.0008
-  dy[8] <- -0.0012
-  dx[4] <- 0.0012
-  dy[4] <- 0
-  dy[c(11, 15)] <- 0
-  dx[c(11, 15)] <- 0.0015
+  dx[8] <- 0.0012
+  dy[8] <- -0.0005
+  dx[4] <- 0.0014
+  dy[4] <- 0.0005
+  dx[c(10, 11, 15)] <- 0.0015
+  dy[c(10, 11, 15)] <- -0.0015
   text(means$D_nO2[itype] + dx, means$D_nH2O[itype] + dy, label, cex = 0.8)
   # Plot p-values 20230204
   plot.p.values(means$nO2_dn[itype], means$nO2_up[itype], means$nH2O_dn[itype], means$nH2O_up[itype], paired = TRUE)

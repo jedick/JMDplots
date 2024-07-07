@@ -61,7 +61,6 @@ writeLines(con = file, text = gsub(" ", "", c(
   "WCJ+21, FALSE, 290",
   "MLW+21, FALSE, 300",
   "ZZZ+21, TRUE, 400",
-  "ENJ+21, FALSE, 290",
   "GBS+22, FALSE, 290",
   "GKJ+22, FALSE, 290",
   "HMH+21, FALSE, 460",
@@ -131,16 +130,12 @@ FASTAdir <- file.path(studydir, "fasta")
 # Reference database for chimera detection
 refdb <- "/home/chem16S/SILVA/SILVA_138.1_SSURef_NR99_tax_silva.fasta.gz"
 # RDP jar file
-RDPjar <- "/opt/rdp_classifier_2.13/dist/classifier.jar"
+RDPjar <- "/opt/rdp_classifier_2.14/dist/classifier.jar"
 # Use GTDB <- TRUE and set GTDBpath to use the GTDB training set
 #GTDB <- FALSE
 GTDB <- TRUE
 # Path to rRNAClassifier.properties
-GTDBpath <- "/home/chem16S/RDP/GTDB/genus/training_files/rRNAClassifier.properties"
-
-# RDP Classifier version (java -jar /opt/rdp_classifier_2.13/dist/classifier.jar version)
-#Gene:16srrna    Trainset No:18  Taxonomy Version:RDP 16S rRNA training setNo 18 07/2020
-#RDP Classifier Version:RDP Naive Bayesian rRNA Classifier Version 2.11, September 2015
+GTDBpath <- "/home/chem16S/RDP/GTDB/220.0/genus/training_files/rRNAClassifier.properties"
 
 filter <- function(RUNID) {
   message("============================================")

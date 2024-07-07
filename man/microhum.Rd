@@ -62,7 +62,7 @@ The data files listed below are stored in \file{extdata/microhum}:
     \item{\file{16S/pipeline.R}}{Pipeline for sequence data processing (uses external programs fastq-dump, vsearch, seqtk, RDP Classifier, and GNU Parallel (Tange, 2023))}
     \item{\file{16S/RDP-GTDB/*.tab.xz}}{
       RDP Classifier results combined into a single CSV file for each study, created with the \code{classify} and \code{mkRDP} functions in \file{pipeline.R}.
-      GTDB 16S SSU rRNA training files for RDP Classifier are available at \url{https://doi.org/10.5281/zenodo.7633100}.
+      RDP Classifier training files for 16S rRNA sequences from GTDB are available at \url{https://doi.org/10.5281/zenodo.7633099}.
     }
     \item{\file{16S/metadata/*.csv}}{Sample metadata for each study}
     \item{\file{16S/dataset_metrics_*.csv}}{Mean values of chemical metrics for samples in 16S studies, created with \code{dataset_metrics}}
