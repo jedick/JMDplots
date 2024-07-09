@@ -66,13 +66,14 @@ This table gives a brief description of each plotting function.
   \code{orp16S_S2} \tab Comparison of Eh7, Eh, and \O2 as predictors of carbon oxidation state \cr
 }
 
-\code{orp16S_S1} creates the files \file{EZdat.csv} and \file{EZlm.csv} that are used by the other plotting functions and correspond to Datasets S1 and D2 in the paper.
+\code{orp16S_S1} makes Figure S1 and creates the files \file{EZdat.csv} and \file{EZlm.csv} that are used by the other plotting functions.
 \file{EZdat.csv} has sample data and metadata: study key, environment type, lineage (Bacteria or Archaea), sample name, SRA or MG-RAST accession number, grouping description, sample group, values of T (°C), pH, \O2 concentration (\umol/L), Eh (mV), Eh7 (mV), and \Zc.
 \file{EZlm.csv} has regression results for each dataset and domain: study key, environment type, lineage, number of samples, Eh7 range, slope (V\S{-1}) and intercept (\Zc) of of linear regression, and Pearson correlation coefficient.
 
 \code{orp16S_T1} returns a table summarizing regression slopes for all datasets (based on \file{EZlm.csv}), corresponding to Table 1a in the paper.
 \code{orp16S_T1(samesign = TRUE)} generates the values listed in Table 1b in the paper.
-\code{orp16S_D3} creates a file with percent of RDP classifications to genus level mapped to the NCBI taxonomy, and genus names and \code{Zc} for the groups of samples corresponding to the first and fourth quartile of Eh7 values (i.e., reducing and oxidizing conditions), corresponding to Dataset S3 in the paper.
+\code{orp16S_D3} creates a file with percent of genus-level taxonomic RDP classifications to mapped to the NCBI taxonomy [*], and genus names and \code{Zc} for the groups of samples corresponding to the first and fourth quartile of Eh7 values (i.e., reducing and oxidizing conditions); this file formerly was Dataset S3 in the paper.
+[*] POST-PUBLICATION UPDATE: Taxonomic classifications and reference proteomes are now both made using GTDB version 220, so mapping rate is 100%.
 
 \code{getmdat_orp16S} gets metadata for the indicated \code{study}, calculates Eh7 from Eh and pH and T (if available), classifies samples into 3 clusters according to their Eh values, and adds columns for plot parameters (\samp{pch}, \samp{col}).
 The function also adds a column named \samp{O2_umol_L}, with \O2 concentration in (\umol/L), which is converted from source units of \O2 concentration as needed.
@@ -141,6 +142,7 @@ orp16S_T1()
 # "Raw" metrics with lots of messages printed
 # NOTE: the messages include values for the last two columns of Table S2 of the paper
 # (% Classification to genus level and % Mapping to NCBI taxonomy)
+# POST-PUBLICATION UPDATE: Mapping is now 100% because of switch to GTDB
 getmetrics_orp16S("MLL+19", quiet = FALSE)
 # Metrics with associated metadata
 metrics <- getmetrics_orp16S("SPA+21")

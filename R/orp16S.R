@@ -40,15 +40,15 @@ orp16S_1 <- function(pdf = FALSE) {
   # Species with optimal growth temperatures from 30-40 °C
   species <- c(
     # Class I
-    "Methanococcus vannielii", "Methanococcus maripaludis", "Methanococcus voltae", "Methanobrevibacter smithii",
+    "Methanococcus vannielii", "Methanococcus maripaludis", "Methanococcus voltae", "Methanobrevibacter_A smithii",
     # Class II
     #"Methanosarcina barkeri", "Methanoplanus limicola", "Methanofollis liminatans"
     "Methanofollis liminatans"
   )
   # Get reference proteomes
-  refseq <- read.csv(system.file("RefDB/RefSeq_206/genome_AA.csv.xz", package = "JMDplots"))
-  irefseq <- match(species, refseq$ref)
-  aa <- refseq[irefseq, ]
+  gtdb <- read.csv(system.file("RefDB/GTDB_220/genome_AA.csv.xz", package = "JMDplots"))
+  igtdb <- match(species, gtdb$ref)
+  aa <- gtdb[igtdb, ]
   ip <- add.protein(aa, as.residue = TRUE)
 
   # Plot theoretical (equilibrium) Eh-pH diagram
@@ -120,7 +120,7 @@ orp16S_1 <- function(pdf = FALSE) {
   # Use coarser resolution for scatterplot
   ipoint <- seq(1, 385, length.out = 97)
   # Use values in the range [-0.3, -0.1]
-  iEh7 <- which(xvals >= -0.26 & xvals <= -0.14)
+  iEh7 <- which(xvals >= -0.3 & xvals <= -0.1)
   iuse <- intersect(ipoint, iEh7)
   xvals <- xvals[iuse]
   # Get Zc values
@@ -133,17 +133,24 @@ orp16S_1 <- function(pdf = FALSE) {
   title("Met. Equil. sampled at pH = 7", font.main = 1)
   label.figure("c", cex = 1.7, font = 2)
 
-  # Use RefSeq amino acid compositions and taxon names
-  species_aa <- refseq
-  taxa <- read.csv(system.file("RefDB/RefSeq_206/taxonomy.csv.xz", package = "JMDplots"), as.is = TRUE)
-  # Make sure the data tables have consistent taxids
-  stopifnot(all(species_aa$organism == taxa$taxid))
-  # Keep only Bacteria and Archaea classified at species level 20220104
-  isspecies <- !is.na(taxa$species)
-  ivirus <- taxa$superkingdom == "Viruses"
-  ivirus[is.na(ivirus)] <- FALSE
-  species_aa <- species_aa[isspecies & !ivirus, ]
-  taxa <- taxa[isspecies & !ivirus, ]
+  # Use GTDB amino acid compositions and taxon names
+  species_aa <- gtdb
+  taxa <- read.csv(system.file("RefDB/GTDB_220/taxonomy.csv.xz", package = "JMDplots"), as.is = TRUE)
+  if(FALSE) {
+    # Old code for RefSeq
+    # Make sure the data tables have consistent taxids
+    stopifnot(all(species_aa$organism == taxa$taxid))
+    # Keep only Bacteria and Archaea classified at species level 20220104
+    isspecies <- !is.na(taxa$species)
+    ivirus <- taxa$superkingdom == "Viruses"
+    ivirus[is.na(ivirus)] <- FALSE
+    species_aa <- species_aa[isspecies & !ivirus, ]
+    taxa <- taxa[isspecies & !ivirus, ]
+  } else {
+    # New code for GTDB 20240709
+    # Make sure the data tables have consistent genome names
+    stopifnot(all(species_aa$organism == taxa$genome))
+  }
   # Keep only species with at least 500 sequences
   ilow <- species_aa$chains < 500
   species_aa <- species_aa[!ilow, ]
@@ -151,14 +158,14 @@ orp16S_1 <- function(pdf = FALSE) {
 
   # Plot 2: Random Zc vs Eh7
   set.seed(42)
-  # Randomly sample rows from RefSeq data frame
+  # Randomly sample rows from GTDB data frame
   ispecies <- sample(1:nrow(species_aa), length(Zc))
   randvals <- Zc(species_aa[ispecies, ])
   ylim <- range(c(randvals, -0.08))
   plot(xvals, randvals, xlab = "Eh7 (V)", ylab = "", ylim = ylim, pch = 19, cex = 0.5, col = "#00000080")
   mtext(axis.label("Zc"), side = 2, line = 2.5, cex = par("cex"), las = 0)
   add.linear.local(xvals, randvals, legend = "topleft", cex = 1, inset = c(-0.08, -0.05), with.N = FALSE, scale = 1)
-  title("Random species from RefSeq", font.main = 1)
+  title("Random species from GTDB", font.main = 1)
 
   # Plot 3: Theoretical + random Zc vs Eh7
   Zc_shaped <- (Zc + 4*randvals) / 5
@@ -189,18 +196,18 @@ orp16S_2 <- function(pdf = FALSE) {
   # Clean up names
   dat$Genus.name <- gsub(" ", "", dat$Genus.name)
   # Get amino acid compositions for genera
-  aa <- taxon_AA$RefSeq_206
+  aa <- taxon_AA$GTDB_220
   # Calculate Zc
   values <- Zc(aa)
   ylim <- c(-0.24, -0.095)
-  # Match genus names to RefSeq
+  # Match genus names to GTDB
   iref <- match(dat$Genus.name, aa$organism)
   # Print coverage information
   nna <- sum(is.na(iref))
-  print(paste(nna, "genera not matched to RefSeq"))
+  print(paste(nna, "genera not matched to GTDB"))
   # Report archaeal genera 20230107
   genera <- aa[iref, ]$organism
-  taxa <- read.csv(system.file("RefDB/RefSeq_206/taxonomy.csv.xz", package = "JMDplots"), as.is = TRUE)
+  taxa <- read.csv(system.file("RefDB/GTDB_220/taxonomy.csv.xz", package = "JMDplots"), as.is = TRUE)
   itax <- match(genera, taxa$genus)
   taxa <- taxa[itax, ]
   archaeal_genera <- taxa$genus[taxa$superkingdom == "Archaea"]
@@ -304,7 +311,7 @@ orp16S_3 <- function(pdf = FALSE) {
   # Plot shapes and text for biological methods
   text(20, 79+dy, "Biological Methods", col = RedText, font = 2)
   for(bg in c("white", Red80)) points(20, 60+dy, pch = 21, cex = 17, bg = bg)
-  text(20, 66+dy, "RefSeq", font = 2, col = RedText)
+  text(20, 66+dy, "GTDB", font = 2, col = RedText)
   text(20, 57+dy, "Reference\nproteomes\nof taxa")
   for(bg in c("white", Red80)) points(20, 20+dy, pch = 21, cex = 17, bg = bg)
   text(20, 25+dy, "16S + RDP", font = 2, col = RedText)
@@ -1135,8 +1142,8 @@ orp16S_T1 <- function(samesign = FALSE) {
 # Dataset S3: Most abundant genera at high and low Eh7 20221006
 orp16S_D3 <- function(mincount = 100) {
 
-  # Get amino acid compositions of taxa compiled from RefSeq sequences
-  taxon_AA <- taxon_AA$RefSeq_206
+  # Get amino acid compositions of taxa compiled from GTDB sequences
+  taxon_AA <- taxon_AA$GTDB_220
   # Calculate Zc for all taxa
   Zc <- Zc(taxon_AA)
 
@@ -1154,7 +1161,7 @@ orp16S_D3 <- function(mincount = 100) {
 
     # Get RDP counts, mapping to NCBI taxonomy, and chemical metrics
     studyfile <- gsub("_.*", "", study)
-    datadir <- system.file("extdata/orp16S/RDP", package = "JMDplots")
+    datadir <- system.file("extdata/orp16S/RDP-GTDB", package = "JMDplots")
     RDPfile <- file.path(datadir, paste0(studyfile, ".tab.xz"))
     # If there is no .xz file, look for a .tab file 20210607
     if(!file.exists(RDPfile)) RDPfile <- file.path(datadir, paste0(studyfile, ".tab"))
@@ -1163,7 +1170,8 @@ orp16S_D3 <- function(mincount = 100) {
     if(!inherits(RDP, "try-error")) {
 
       # Calculate metrics to make sure we get the same samples used in the analysis for the paper
-      map <- map_taxa(RDP, refdb = "RefSeq_206")
+      # Changed refdb from RefSeq_206 to GTDB_220 on 20240709
+      map <- map_taxa(RDP, refdb = "GTDB_220")
       metrics <- getmetrics_orp16S(study, lineage = lineage, mincount = mincount)
       mdat <- getmdat_orp16S(study, metrics)
       metadata <- mdat$metadata
@@ -1500,13 +1508,14 @@ getmdat_orp16S <- function(study, metrics = NULL, dropNA = TRUE, size = NULL, qu
 getmetrics_orp16S <- function(study, mincount = 100, quiet = TRUE, ...) {
   # Remove suffix after underscore 20200929
   studyfile <- gsub("_.*", "", study)
-  datadir <- system.file("extdata/orp16S/RDP", package = "JMDplots")
+  datadir <- system.file("extdata/orp16S/RDP-GTDB", package = "JMDplots")
   RDPfile <- file.path(datadir, paste0(studyfile, ".tab.xz"))
   # If there is no .xz file, look for a .tab file 20210607
   if(!file.exists(RDPfile)) RDPfile <- file.path(datadir, paste0(studyfile, ".tab"))
   RDP <- read_RDP(RDPfile, mincount = mincount, quiet = quiet, ...)
-  map <- map_taxa(RDP, refdb = "RefSeq_206", quiet = quiet)
-  get_metrics(RDP, refdb = "RefSeq_206", map)
+  # Changed refdb from RefSeq_206 to GTDB_220 on 20240709
+  map <- map_taxa(RDP, refdb = "GTDB_220", quiet = quiet)
+  get_metrics(RDP, refdb = "GTDB_220", map)
 }
 
 ############################

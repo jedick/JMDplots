@@ -64,6 +64,9 @@ This vignette runs the code to make the plots from the following paper:
 
 > Dick JM, Meng D. 2023. Community- and genome-based evidence for a shaping influence of redox potential on bacterial protein evolution. *mSystems* **8**(3): e00014-23. doi: [10.1128/msystems.00014-23](https://doi.org/10.1128/msystems.00014-23)
 
+**Post-publication update** on 2024-07-09: The reference database for constructing community reference proteomes has been changed from RefSeq 206 to GTDB 220.
+Correspondingly, taxonomic classifications now use [RDP Classifier training files for 16S rRNA sequences from GTDB](https://zenodo.org/doi/10.5281/zenodo.7633099) instead of the default RDP Classifier training set. As a result of the slightly different values, the x-axis scale in Fig. 1c has been expanded, and the particular random selection of species has a slope further from zero in the center plot of this panel.
+
 This vignette was compiled on `r Sys.Date()` with **[JMDplots](https://github.com/jedick/JMDplots)** `r packageDescription("JMDplots")$Version` and **[chem16S](https://github.com/jedick/chem16S)** `r packageDescription("chem16S")$Version`.
 
 ```{r library, message = FALSE, results = "hide"}
@@ -132,7 +135,8 @@ orp16S_S2()
 orp16S_6(EMP_primers = TRUE)
 ```
 
-## Genus-level RDP classifications mapped to NCBI taxonomy (values mentioned in text)
+## Genus-level taxonomic classifications (using 16S rRNA sequences from GTDB) mapped to the GTDB taxonomy
+**NOTE**: With the switch to GTDB on both ends, this shows 100% mapping rate, higher than the values mentioned in the article for mapping between classifications using the RDP training set and NCBI taxonomy.
 ```{r mapperc}
 # Read Dataset S3 (created by orp16S_D3())
 dat <- read.csv(system.file("extdata/orp16S/Dataset_S3.csv", package = "JMDplots"))
