@@ -162,15 +162,20 @@ trunclen <- settings$trunclen[istudy]
 
 # Working directory
 workdir <- "~/tmp/chem16S"
+# Data directory for study
+studydir <- file.path("/home/chem16S", study)
 # Output directory for FASTA files
 FASTAdir <- file.path("/home/chem16S", study, "fasta")
 # Reference database for chimera detection
 refdb <- "/home/chem16S/SILVA/SILVA_138.1_SSURef_NR99_tax_silva.fasta.gz"
-#refdb <- "/home/chem16S/chimera/gold.fa"
 # RDP jar file
-RDPjar <- "/opt/rdp_classifier_2.13/dist/classifier.jar"
-# Output directory for RDP Classifier
-RDPdir <- file.path("/home/chem16S", study, "RDP")
+RDPjar <- "/opt/rdp_classifier_2.14/dist/classifier.jar"
+# Use GTDB <- TRUE and set GTDBpath to use the GTDB training set
+#GTDB <- FALSE
+GTDB <- TRUE
+# Path to rRNAClassifier.properties
+GTDBpath <- "/home/chem16S/RDP/GTDB/220.0/genus/training_files/rRNAClassifier.properties"
+
 # RDP Classifier version (java -jar /opt/rdp_classifier_2.13/dist/classifier.jar version)
 #Gene:16srrna    Trainset No:18  Taxonomy Version:RDP 16S rRNA training setNo 18 07/2020
 #RDP Classifier Version:RDP Naive Bayesian rRNA Classifier Version 2.11, September 2015
@@ -388,8 +393,10 @@ findchimeras <- function(threads = 8) {
 
 # Run RDP Classifier on one or multiple files 20200910
 # Use GNU parallel 20220509
-classify <- function(RUNID, conf = 0.8, jobs = 4) {
+classify <- function(RUNID, conf = 0.8, jobs = 4, dryrun = FALSE) {
 
+  # Output directory for RDP Classifier
+  if(GTDB) RDPdir <- file.path(studydir, "RDP-GTDB") else RDPdir <- file.path(studydir, "RDP")
   # Make sure RDP output directory exists 20200915
   if(!dir.exists(RDPdir)) stop(paste("directory", RDPdir, "does not exist"))
   # Force evaluation of RUNID before changing the directory
@@ -417,17 +424,25 @@ classify <- function(RUNID, conf = 0.8, jobs = 4) {
   tabfiles <- paste0(RUNID, ".tab")
   writeLines(tabfiles, "tabfiles")
 
-  cmd <- paste("parallel --link --jobs", jobs, "java -jar /opt/rdp_classifier_2.13/dist/classifier.jar classify -c 0.8 -h {3} -o {2} {1} :::: fastafiles tabfiles txtfiles")
+  if(GTDB) {
+    # Command for GTDB training set 20221013
+    cmd <- paste("parallel --link --jobs", jobs, "java -jar", RDPjar, "classify -c", conf,
+                 "-t", GTDBpath, "-h {3} -o {2} {1} :::: fastafiles tabfiles txtfiles")
+  } else {
+    cmd <- paste("parallel --link --jobs", jobs, "java -jar", RDPjar, "classify -c", conf,
+                 "-h {3} -o {2} {1} :::: fastafiles tabfiles txtfiles")
+  }
   message("=======================================")
   message(paste0("Classifying ", n, " runs with ", jobs, " jobs [", study, "]"))
   message("=======================================")
 
-  system(cmd)
+  print(cmd)
+  if(dryrun) print("DRY RUN") else system(cmd)
 
   # Clean up
   file.remove(c("fastafiles", "tabfiles", "txtfiles"))
-  file.remove(Sys.glob(paste0("cnadjusted_*")))
   file.remove(Sys.glob(paste0("*.tab")))
+  if(!GTDB) file.remove(Sys.glob(paste0("cnadjusted_*")))
   for(i in 1:n) {
     thisRUNID <- allRUNID[i]
     file.remove(thisRUNID)
@@ -445,6 +460,8 @@ mkRDP <- function() {
   # Remove any existing .txt files
   file.remove(Sys.glob("*.txt"))
 
+  if(GTDB) RDPdir <- file.path(studydir, "RDP-GTDB") else RDPdir <- file.path(studydir, "RDP")
+
   # Loop over runs
   runs <- gsub(".txt", "", dir(RDPdir))
   for(run in runs) {
@@ -458,11 +475,10 @@ mkRDP <- function() {
   # Now list all the RDP result files
   files <- dir(pattern = "txt")
   # Name of output file
-  outfile <- file.path(olddir, "RDP", paste0(study, ".tab"))
+  if(GTDB) outdir <- "RDP-GTDB" else outdir <- "RDP"
+  outfile <- file.path(olddir, outdir, paste0(study, ".tab"))
   # Remove output file in case it exists
   if(file.exists(outfile)) file.remove(outfile)
-  # RDP jar file
-  RDPjar <- "/opt/rdp_classifier_2.13/dist/classifier.jar"
   # Run merge-count command
   print(cmd <- paste("java -jar", RDPjar, "merge-count", outfile, paste(files, collapse = " ")))
   system(cmd)

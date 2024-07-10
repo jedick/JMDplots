@@ -7,7 +7,7 @@ GSBT20_Postfilter,"Port Microbes (Postfilter)",River & Seawater,Bacteria,100,Pel
 GSBT20_Postfilter,"Port Microbes (Postfilter)",River & Seawater,Archaea,100,Nitrosopelagicus,-0.191482,MGIIa-L1,-0.121573
 WHL+21,"Bahe River",River & Seawater,Bacteria,100,Flavobacterium,-0.187496,Flavobacterium,-0.187496
 ZLH+22,"Nu River",River & Seawater,Bacteria,100,Flavobacterium,-0.187496,Flavobacterium,-0.187496
-ZZL+21,"Maozhou River",River & Seawater,Bacteria,99.93,Aliarcobacter,-0.216706,MAG-120802,-0.173734
+ZZL+21,"Maozhou River",River & Seawater,Bacteria,100,Aliarcobacter,-0.216706,MAG-120802,-0.173734
 LWJ+21,"Plastisphere",River & Seawater,Bacteria,100,Ralstonia,-0.138285,Pseudoalteromonas,-0.159476
 LWJ+21,"Plastisphere",River & Seawater,Archaea,100,Poseidonia,-0.110885,Poseidonia,-0.110885
 GZL21,"Three Gorges Reservoir",River & Seawater,Bacteria,100,Acinetobacter,-0.168641,Acinetobacter,-0.168641
@@ -18,7 +18,7 @@ SAR+13,"Microbial Mat, Kiritimati Atoll",Lake & Pond,Archaea,100,EX4572-165,-0.1
 LLC+19,"Xidong Reservoir, Xiamen",Lake & Pond,Bacteria,100,MAG-120802,-0.173734,MAG-120802,-0.173734
 BCA+21,"Ursu Lake, Romania",Lake & Pond,Bacteria,100,JAGXLP01,-0.156741,Vibrio,-0.160208
 HLZ+18,"Xiamen Reservoirs and Ponds",Lake & Pond,Bacteria,100,Polynucleobacter,-0.173587,BACL27,-0.153017
-BWD+19,"Keweenaw Waterway, Michigan",Lake & Pond,Bacteria,99.98,Flavobacterium,-0.187496,Flavobacterium,-0.187496
+BWD+19,"Keweenaw Waterway, Michigan",Lake & Pond,Bacteria,100,Flavobacterium,-0.187496,Flavobacterium,-0.187496
 IBK+22,"German Kettle Holes",Lake & Pond,Bacteria,100,Flavobacterium,-0.187496,Flavobacterium,-0.187496
 IBK+22,"German Kettle Holes",Lake & Pond,Archaea,100,21-14-0-10-32-9,-0.201873,21-14-0-10-32-9,-0.201873
 NLE+21,"Lake Kinneret, Israel",Lake & Pond,Bacteria,100,Chlorobium,-0.16957,Chlorobium,-0.16957
@@ -29,13 +29,13 @@ PCL+18_Acidic,"New Zealand Hot Springs (Acidic)",Geothermal,Bacteria,100,Hydroge
 PCL+18_Acidic,"New Zealand Hot Springs (Acidic)",Geothermal,Archaea,100,ARK-15,-0.217965,JAFMDN01,-0.217479
 PCL+18_Alkaline,"New Zealand Hot Springs (Alkaline)",Geothermal,Bacteria,100,Venenivibrio,-0.243541,Sulfurihydrogenibium,-0.237351
 PCL+18_Alkaline,"New Zealand Hot Springs (Alkaline)",Geothermal,Archaea,100,ARK-15,-0.217965,DSFO01,-0.240156
-GWS+20,"Eastern Tibetan Plateau",Geothermal,Bacteria,99.88,Thermus,-0.193672,Vogesella,-0.151142
+GWS+20,"Eastern Tibetan Plateau",Geothermal,Bacteria,100,Thermus,-0.193672,Vogesella,-0.151142
 GWS+20,"Eastern Tibetan Plateau",Geothermal,Archaea,100,CAKZTQ01,-0.182703,CAKZTQ01,-0.182703
 PBU+20,"Uzon Caldera",Geothermal,Bacteria,100,Rothia,-0.133517,Bacillus,-0.185534
-MWY+21,"Southern Tibetan Plateau",Geothermal,Bacteria,99.99,Thermostichus,-0.159577,Thermosynechococcus,-0.167586
+MWY+21,"Southern Tibetan Plateau",Geothermal,Bacteria,100,Thermostichus,-0.159577,Thermosynechococcus,-0.167586
 MWY+21,"Southern Tibetan Plateau",Geothermal,Archaea,100,Methanothermobacter,-0.164765,Methanothermobacter,-0.164765
 SBP+20,"CROMO 1",Hyperalkaline,Bacteria,100,Dethiobacter,-0.176418,Serpentinimonas,-0.142183
-RMB+17,"Samail Ophiolite",Hyperalkaline,Bacteria,99.91,Meiothermus,-0.171418,Acinetobacter,-0.168641
+RMB+17,"Samail Ophiolite",Hyperalkaline,Bacteria,100,Meiothermus,-0.171418,Acinetobacter,-0.168641
 RMB+17,"Samail Ophiolite",Hyperalkaline,Archaea,100,Methanobacterium_D,-0.205626,Nitrososphaera,-0.170957
 CTS+17,"Santa Elena Ophiolite",Hyperalkaline,Bacteria,100,Acidovorax,-0.141494,Sulfuritortus,-0.152388
 CTS+17,"Santa Elena Ophiolite",Hyperalkaline,Archaea,100,JASEEV01,-0.192474,Nitrosotenuis,-0.192641
@@ -43,7 +43,7 @@ KSR+21,"Voltri Massif",Hyperalkaline,Bacteria,100,JAAUTJ01,-0.146038,Silanimonas
 PSB+21,"CROMO 2",Hyperalkaline,Bacteria,100,Dethiobacter,-0.176418,Serpentinimonas,-0.142183
 NTB+21,"Samail Ophiolite Packers",Hyperalkaline,Bacteria,100,UBA7950,-0.188407,Meiothermus,-0.171418
 NTB+21,"Samail Ophiolite Packers",Hyperalkaline,Archaea,100,Nitrosotenuis,-0.192641,Nitrososphaera,-0.170957
-KLM+16,"Sarnia nZVI Injection",Groundwater,Bacteria,99,Macellibacteroides,-0.175197,JAUXWC01,-0.14296
+KLM+16,"Sarnia nZVI Injection",Groundwater,Bacteria,100,Macellibacteroides,-0.175197,JAUXWC01,-0.14296
 WLJ+16,"Hetao Basin",Groundwater,Bacteria,100,Psychrobacter,-0.151222,Acinetobacter,-0.168641
 WLJ+16,"Hetao Basin",Groundwater,Archaea,100,JAHFTW01,-0.139737,JACPJP01,-0.218979
 ZDW+19,"Jianghan Plain",Groundwater,Bacteria,100,Sediminibacterium,-0.186219,Sediminibacterium,-0.186219
@@ -53,7 +53,7 @@ DJK+18,"Ohio Aquifers",Groundwater,Archaea,100,UBA9640,-0.191569,GCA-2688775,-0.
 SRM+19,"Rayong Province",Groundwater,Bacteria,100,Acinetobacter,-0.168641,Acinetobacter,-0.168641
 APV+20,"Mezquital Valley",Groundwater,Bacteria,100,Aliarcobacter,-0.216706,Caldora,-0.159013
 APV+20,"Mezquital Valley",Groundwater,Archaea,100,GCA-2688775,-0.208759,TA-20,-0.199676
-YHK+20,"Hainich Critical Zone",Groundwater,Bacteria,99.95,UBA1546,-0.205869,C7867-001,-0.171269
+YHK+20,"Hainich Critical Zone",Groundwater,Bacteria,100,UBA1546,-0.205869,C7867-001,-0.171428
 ZCZ+21,"Po Plain",Groundwater,Bacteria,100,Sphingomonas,-0.131196,Pseudomonas_E,-0.14925
 MGW+22,"New Zealand Aquifers",Groundwater,Bacteria,100,Ga0077554,-0.151152,Gp6-AA45,-0.131483
 MGW+22,"New Zealand Aquifers",Groundwater,Archaea,100,Methanoperedens,-0.193082,TA-20,-0.199676
@@ -69,7 +69,7 @@ OHL+18_DNA,"Marine and Freshwater Sediments (DNA)",Sediment,Bacteria,100,Caldora
 OHL+18_DNA,"Marine and Freshwater Sediments (DNA)",Sediment,Archaea,100,RBG-16-57-9,-0.166947,UBA8941,-0.184874
 WHLH21a,"Daya Bay",Sediment,Bacteria,100,Scalindua,-0.186962,Scalindua,-0.186962
 RSS+18,"Lake Hazen, Nunavut",Sediment,Bacteria,100,Caldora,-0.159013,SCUD01,-0.132709
-CLS+19,"Jinchuan River",Sediment,Bacteria,99.99,Cloacibacterium,-0.191773,Pirellula_B,-0.132315
+CLS+19,"Jinchuan River",Sediment,Bacteria,100,Cloacibacterium,-0.191773,Pirellula_B,-0.132315
 CLS+19,"Jinchuan River",Sediment,Archaea,100,Methanothrix,-0.162292,Methanothrix,-0.162292
 HSF+19,"Lake Neusiedl",Sediment,Bacteria,100,Escherichia,-0.15851,Fonsibacter,-0.229723
 ZHZ+19,"Hydrocarbon Biodegradation",Sediment,Bacteria,100,UBA6092,-0.162153,UBA6092,-0.162153
@@ -77,13 +77,13 @@ ZHZ+19,"Hydrocarbon Biodegradation",Sediment,Archaea,100,SM1-50,-0.186865,SM1-50
 LMBA21_2017,"Bay of Biscay (2017)",Sediment,Bacteria,100,Sulfurovum,-0.196908,Caldora,-0.159013
 LMBA21_2017,"Bay of Biscay (2017)",Sediment,Archaea,100,Nitrosopumilus,-0.187338,Nitrosopumilus,-0.187338
 HSF+22,"Aldabra Atoll",Sediment,Bacteria,100,Vreelandella,-0.14,Stutzerimonas,-0.144297
-ZZLL21,"Maozhou River Hyporheic Zone",Sediment,Bacteria,99.99,Pseudomonas_E,-0.14925,Pseudomonas_E,-0.14925
+ZZLL21,"Maozhou River Hyporheic Zone",Sediment,Bacteria,100,Pseudomonas_E,-0.14925,Pseudomonas_E,-0.14925
 WFB+21,"Estuarine Sediment Mesocosms",Sediment,Bacteria,100,Caldora,-0.159013,Caldora,-0.159013
-HCW+22,"Hydrodynamic Experiments",Sediment,Bacteria,99.99,Acinetobacter,-0.168641,Streptococcus,-0.182275
+HCW+22,"Hydrodynamic Experiments",Sediment,Bacteria,100,Acinetobacter,-0.168641,Streptococcus,-0.182275
 WKG+22,"Cardinal Pond, Poland",Sediment,Bacteria,100,RBG-16-49-23,-0.198722,RBG-16-49-23,-0.198722
 MLL+19,"Dabu Town, Hunan Province",Soil,Bacteria,100,UBA6092,-0.162153,SCQL01,-0.141324
 MLL+19,"Dabu Town, Hunan Province",Soil,Archaea,100,UBA9642,-0.196488,TA-20,-0.199676
-BMOB18,"Urban Wetland Soils",Soil,Bacteria,99.62,Sulfurovum,-0.196908,Thiobacillus,-0.147734
+BMOB18,"Urban Wetland Soils",Soil,Bacteria,100,Sulfurovum,-0.196908,Thiobacillus,-0.147734
 BMOB18,"Urban Wetland Soils",Soil,Archaea,100,Termiticorpusculum,-0.19441,Termiticorpusculum,-0.19441
 WHLH21,"Tengger Desert Biocrusts",Soil,Bacteria,100,Microcoleus,-0.162957,Microvirga,-0.144525
 CWC+20,"Paddy Soil Water Management",Soil,Bacteria,100,Sphingobium,-0.132443,Sphingobium,-0.132443

@@ -1,100 +1,100 @@
 "study","name","envirotype","lineage","nsamp","Eh7min","Eh7max","slope","MOE95","intercept","pearson.r"
-MLL+18,"Pearl River Estuary",River & Seawater,Bacteria,47,77.99,236.65,0.0147773,0.0289786,-0.155447,0.151342
-HXZ+20,"Sansha Yongle Blue Hole",River & Seawater,Bacteria,21,-331,47,0.0190738,0.0336622,-0.159449,0.262534
-GSBT20_Prefilter,"Port Microbes (Prefilter)",River & Seawater,Bacteria,60,35.39,300.82,-0.0140164,0.026163,-0.155707,-0.139436
+MLL+18,"Pearl River Estuary",River & Seawater,Bacteria,47,77.99,236.65,0.0147373,0.0289725,-0.155447,0.150973
+HXZ+20,"Sansha Yongle Blue Hole",River & Seawater,Bacteria,21,-331,47,0.0190526,0.0336344,-0.159468,0.262464
+GSBT20_Prefilter,"Port Microbes (Prefilter)",River & Seawater,Bacteria,60,35.39,300.82,-0.0139908,0.0261618,-0.155715,-0.139192
 GSBT20_Prefilter,"Port Microbes (Prefilter)",River & Seawater,Archaea,5,75.91,133.3,0.293938,0.0850853,-0.159453,0.987816
-GSBT20_Postfilter,"Port Microbes (Postfilter)",River & Seawater,Bacteria,54,57.34,293.94,-0.0108439,0.0453806,-0.170217,-0.0663476
-GSBT20_Postfilter,"Port Microbes (Postfilter)",River & Seawater,Archaea,12,70.3,200.25,0.296275,0.356871,-0.165109,0.504917
-WHL+21,"Bahe River",River & Seawater,Bacteria,52,-106.56,192.61,-0.0102657,0.0234165,-0.161146,-0.123574
-ZLH+22,"Nu River",River & Seawater,Bacteria,20,297.32,584.67,-0.00348824,0.0319768,-0.1594,-0.0539402
-ZZL+21,"Maozhou River",River & Seawater,Bacteria,54,-88.7,238.87,0.0668887,0.0451601,-0.171145,0.381063
-LWJ+21,"Plastisphere",River & Seawater,Bacteria,72,115.41,307.58,0.0117972,0.0436071,-0.156976,0.0643565
-LWJ+21,"Plastisphere",River & Seawater,Archaea,16,158.65,292.3,-0.0365362,0.0738891,-0.120993,-0.272699
-GZL21,"Three Gorges Reservoir",River & Seawater,Bacteria,50,184.58,398.37,-0.0451026,0.0558175,-0.149024,-0.228307
-RARG22,"Taxco AMD",River & Seawater,Bacteria,27,271.53,542.72,0.0209605,0.0203494,-0.163154,0.390577
-RARG22,"Taxco AMD",River & Seawater,Archaea,9,271.53,518.68,0.00589444,0.00348698,-0.194633,0.833879
-SAR+13,"Microbial Mat, Kiritimati Atoll",Lake & Pond,Bacteria,22,-161.52,-2,0.196904,0.0612834,-0.131406,0.831821
-SAR+13,"Microbial Mat, Kiritimati Atoll",Lake & Pond,Archaea,27,-161.52,-2,0.492967,0.141741,-0.12,0.819987
-LLC+19,"Xidong Reservoir, Xiamen",Lake & Pond,Bacteria,36,29,563,0.00853733,0.00639685,-0.159897,0.421755
-BCA+21,"Ursu Lake, Romania",Lake & Pond,Bacteria,36,-433.66,231.18,0.0281236,0.00609851,-0.166316,0.849073
-HLZ+18,"Xiamen Reservoirs and Ponds",Lake & Pond,Bacteria,27,-3.99,522.71,0.000563996,0.014377,-0.158506,0.0161567
-BWD+19,"Keweenaw Waterway, Michigan",Lake & Pond,Bacteria,81,131.46,302.04,0.0194177,0.0219646,-0.171553,0.194206
-IBK+22,"German Kettle Holes",Lake & Pond,Bacteria,37,116.95,455.32,0.0463384,0.0291537,-0.18154,0.47883
-IBK+22,"German Kettle Holes",Lake & Pond,Archaea,38,116.95,455.32,-0.0173993,0.0132154,-0.191169,-0.406585
-NLE+21,"Lake Kinneret, Israel",Lake & Pond,Bacteria,21,-224,276,-0.0100907,0.0101907,-0.169215,-0.429395
-MTC21,"Monegros Desert, Spain",Lake & Pond,Bacteria,138,220.78,451.73,-0.0128374,0.0286542,-0.152876,-0.0757529
-MTC21,"Monegros Desert, Spain",Lake & Pond,Archaea,32,230.72,402.04,-0.323437,0.298142,-0.060724,-0.374984
-SPA+21,"Lake Varese, Italy",Lake & Pond,Bacteria,28,-169.39,407.57,-0.0172089,0.00885577,-0.164871,-0.616677
-PCL+18_Acidic,"New Zealand Hot Springs (Acidic)",Geothermal,Bacteria,42,-386.33,240.37,0.02861,0.048166,-0.17249,0.186485
-PCL+18_Acidic,"New Zealand Hot Springs (Acidic)",Geothermal,Archaea,22,-368.63,144.9,0.0463505,0.0418397,-0.207463,0.459059
-PCL+18_Alkaline,"New Zealand Hot Springs (Alkaline)",Geothermal,Bacteria,39,-301.29,262.43,0.0895787,0.0570863,-0.19798,0.463236
-PCL+18_Alkaline,"New Zealand Hot Springs (Alkaline)",Geothermal,Archaea,9,-284.72,155.31,-0.0186498,0.0866605,-0.218185,-0.188876
-GWS+20,"Eastern Tibetan Plateau",Geothermal,Bacteria,14,-282.33,108.16,0.16627,0.115423,-0.181764,0.671437
-GWS+20,"Eastern Tibetan Plateau",Geothermal,Archaea,8,-109.36,108.16,0.105213,0.173533,-0.195858,0.518052
-PBU+20,"Uzon Caldera",Geothermal,Bacteria,10,-156.08,293.33,0.0147632,0.0878297,-0.162263,0.135773
-MWY+21,"Southern Tibetan Plateau",Geothermal,Bacteria,13,-149.44,10.96,0.0487241,0.0946827,-0.166611,0.323177
-MWY+21,"Southern Tibetan Plateau",Geothermal,Archaea,9,-149.44,10.96,-0.0804505,0.152165,-0.192355,-0.427232
-SBP+20,"CROMO 1",Hyperalkaline,Bacteria,24,-126.19,26.1,0.0613783,0.0483333,-0.151632,0.489589
-RMB+17,"Samail Ophiolite",Hyperalkaline,Bacteria,19,-310.56,268.14,0.0176153,0.0250084,-0.165145,0.339079
-RMB+17,"Samail Ophiolite",Hyperalkaline,Archaea,13,-118.25,268.14,0.00931885,0.0312623,-0.191354,0.194056
-CTS+17,"Santa Elena Ophiolite",Hyperalkaline,Bacteria,32,-78.17,243.34,-0.0313236,0.0377771,-0.150877,-0.295375
-CTS+17,"Santa Elena Ophiolite",Hyperalkaline,Archaea,32,-78.17,243.34,0.00433541,0.0217246,-0.185817,0.0742048
-KSR+21,"Voltri Massif",Hyperalkaline,Bacteria,8,186.05,486.23,0.0101997,0.00958633,-0.154318,0.728317
-PSB+21,"CROMO 2",Hyperalkaline,Bacteria,81,-129.14,222.5,0.0258131,0.0213083,-0.153765,0.261824
-NTB+21,"Samail Ophiolite Packers",Hyperalkaline,Bacteria,8,-172.31,230.79,0.084582,0.0264001,-0.183149,0.954493
-NTB+21,"Samail Ophiolite Packers",Hyperalkaline,Archaea,5,193.37,230.79,-0.0397693,0.356165,-0.177788,-0.200976
-KLM+16,"Sarnia nZVI Injection",Groundwater,Bacteria,28,-171.01,39.16,0.101457,0.061403,-0.163701,0.554366
-WLJ+16,"Hetao Basin",Groundwater,Bacteria,16,-204.75,231.38,0.0249984,0.0327048,-0.160999,0.401318
-WLJ+16,"Hetao Basin",Groundwater,Archaea,11,-192.22,153.49,-0.0581918,0.0972254,-0.190537,-0.411364
-ZDW+19,"Jianghan Plain",Groundwater,Bacteria,48,-170.52,-15.45,0.0332216,0.0633019,-0.163833,0.153901
-ZDW+19,"Jianghan Plain",Groundwater,Archaea,39,-170.52,-15.45,-0.0124465,0.0589411,-0.197837,-0.0701678
-DJK+18,"Ohio Aquifers",Groundwater,Bacteria,89,-153.09,66.64,-0.00485243,0.0248364,-0.17091,-0.0415973
-DJK+18,"Ohio Aquifers",Groundwater,Archaea,83,-153.09,66.64,0.0113665,0.00728997,-0.201609,0.325883
-SRM+19,"Rayong Province",Groundwater,Bacteria,19,-364.14,246.38,0.0259811,0.015735,-0.160731,0.64539
-APV+20,"Mezquital Valley",Groundwater,Bacteria,24,-266.94,233.73,0.0930204,0.0365916,-0.177016,0.747117
-APV+20,"Mezquital Valley",Groundwater,Archaea,11,55.11,223.95,0.018937,0.148591,-0.194728,0.0956583
-YHK+20,"Hainich Critical Zone",Groundwater,Bacteria,33,159.2,433.21,0.0530449,0.0196792,-0.192789,0.702601
-ZCZ+21,"Po Plain",Groundwater,Bacteria,18,-89.37,416.75,-0.000134026,0.0161055,-0.159803,-0.00441029
-MGW+22,"New Zealand Aquifers",Groundwater,Bacteria,71,-133.9,205.82,0.0210564,0.0180095,-0.159982,0.27034
-MGW+22,"New Zealand Aquifers",Groundwater,Archaea,69,-133.9,205.82,-0.0233755,0.0114179,-0.191381,-0.446661
-MCR+22,"Aquifer SE of Melbourne",Groundwater,Bacteria,24,-81.74,107.29,-0.00486944,0.124509,-0.163159,-0.0172896
-MCR+22,"Aquifer SE of Melbourne",Groundwater,Archaea,12,-38.42,107.29,-0.0961203,0.164977,-0.188755,-0.379766
-ZML+17,"Mai Po Wetland",Sediment,Bacteria,33,-41.62,379.07,-0.00853205,0.0177323,-0.16263,-0.173577
-ZML+17,"Mai Po Wetland",Sediment,Archaea,33,-41.62,379.07,0.00482154,0.0144735,-0.199559,0.121129
-BSPD17,"Baltic Sea Swedish Coast",Sediment,Bacteria,28,39.42,227.05,0.112924,0.168961,-0.194996,0.260148
-RKN+17,"Finnish Boreal Lakes",Sediment,Bacteria,24,-225.86,-140.68,-0.130942,0.0385664,-0.186296,-0.832257
-RKN+17,"Finnish Boreal Lakes",Sediment,Archaea,24,-225.86,-140.68,-0.0367379,0.0167444,-0.182206,-0.696294
-HDZ+19,"Honghu Lake",Sediment,Bacteria,28,-381.23,160.96,0.00795637,0.00875957,-0.165938,0.343834
-OHL+18_DNA,"Marine and Freshwater Sediments (DNA)",Sediment,Bacteria,33,-82.25,328.49,0.0121412,0.00508916,-0.156275,0.658036
-OHL+18_DNA,"Marine and Freshwater Sediments (DNA)",Sediment,Archaea,23,-82.25,328.49,0.0169087,0.0114136,-0.192714,0.557931
-WHLH21a,"Daya Bay",Sediment,Bacteria,20,-360,-74,-0.168983,0.115048,-0.19593,-0.588206
-RSS+18,"Lake Hazen, Nunavut",Sediment,Bacteria,28,113.53,527.09,0.0191683,0.00735642,-0.158442,0.724269
-CLS+19,"Jinchuan River",Sediment,Bacteria,24,7.82,259.82,0.0354282,0.0405422,-0.159848,0.360411
-CLS+19,"Jinchuan River",Sediment,Archaea,21,7.82,259.82,0.0116236,0.0414013,-0.179254,0.133602
-HSF+19,"Lake Neusiedl",Sediment,Bacteria,21,-223.84,508.61,-0.0335286,0.00852487,-0.164594,-0.883752
-ZHZ+19,"Hydrocarbon Biodegradation",Sediment,Bacteria,27,-418,-77,0.0205404,0.00810424,-0.155944,0.722157
-ZHZ+19,"Hydrocarbon Biodegradation",Sediment,Archaea,27,-418,-77,-0.0203293,0.0109127,-0.184995,-0.608769
-LMBA21_2017,"Bay of Biscay (2017)",Sediment,Bacteria,47,-204,476,0.0236039,0.00646707,-0.158295,0.738674
-LMBA21_2017,"Bay of Biscay (2017)",Sediment,Archaea,18,-202,436,0.006365,0.0045075,-0.191196,0.599167
-HSF+22,"Aldabra Atoll",Sediment,Bacteria,120,-301.96,398.11,0.0144362,0.00693935,-0.155633,0.3546
-ZZLL21,"Maozhou River Hyporheic Zone",Sediment,Bacteria,71,-71.3,256.75,0.025837,0.0293903,-0.157382,0.206574
-WFB+21,"Estuarine Sediment Mesocosms",Sediment,Bacteria,79,59,211,0.00601713,0.00323051,-0.153315,0.38932
-HCW+22,"Hydrodynamic Experiments",Sediment,Bacteria,45,-211.59,-56.52,-0.00156377,0.0218007,-0.155428,-0.0220547
-WKG+22,"Cardinal Pond, Poland",Sediment,Bacteria,40,158.18,486.37,-0.00142772,0.0311642,-0.165882,-0.0150432
-MLL+19,"Dabu Town, Hunan Province",Soil,Bacteria,30,-374.58,300.25,0.014951,0.00519994,-0.153207,0.74387
-MLL+19,"Dabu Town, Hunan Province",Soil,Archaea,20,-374.58,259.34,-0.0218992,0.00910405,-0.189586,-0.765885
-BMOB18,"Urban Wetland Soils",Soil,Bacteria,36,-339.79,-75.79,0.0344605,0.0239244,-0.163365,0.448654
-BMOB18,"Urban Wetland Soils",Soil,Archaea,36,-339.79,-75.79,-0.00331803,0.0143029,-0.192695,-0.0805895
-WHLH21,"Tengger Desert Biocrusts",Soil,Bacteria,32,398.81,451.74,0.138976,0.104684,-0.201879,0.443631
-CWC+20,"Paddy Soil Water Management",Soil,Bacteria,84,-467.3,358.07,0.0153904,0.00559259,-0.146374,0.517358
-PSG+20,"Anaerobic Soil Disinfestation",Soil,Bacteria,49,-265,343,0.0342409,0.0389798,-0.17057,0.249609
-PSG+20,"Anaerobic Soil Disinfestation",Soil,Archaea,20,-265,343,0.0240334,0.013842,-0.173389,0.651945
-LJC+20,"East Asia Paddy Soil",Soil,Bacteria,33,-280.02,-107.66,-0.0094629,0.049474,-0.144156,-0.0698923
-DTJ+20,"Rice Rhizosphere",Soil,Bacteria,36,-158.03,-83.3,0.0260057,0.121554,-0.153592,0.0743584
-RKSK22,"Georgia Salt Marshes",Soil,Bacteria,138,-428.66,108.28,0.013982,0.00511015,-0.157385,0.42088
-RKSK22,"Georgia Salt Marshes",Soil,Archaea,122,-428.66,108.28,0.0170037,0.00384478,-0.194934,0.624381
-DLS21_Bulk,"Paddy Soil Amendments 1 (Bulk)",Soil,Bacteria,56,-17.49,255.75,-0.00138758,0.0217058,-0.155015,-0.0174384
-WKP+22,"Maize Intercropping, Poland",Soil,Bacteria,30,394.07,554.72,-0.0034598,0.0280324,-0.143428,-0.0477235
-CKB+22,"Paddy Soil Amendments 2",Soil,Bacteria,34,-166.67,316.3,0.0190514,0.00659988,-0.172641,0.720641
-CKB+22,"Paddy Soil Amendments 2",Soil,Archaea,7,-164.53,-99.89,-0.0137481,0.0601753,-0.187203,-0.25403
-CLZ+22,"Soil-Water Interface",Soil,Bacteria,25,-178,186,0.0122599,0.00755254,-0.144362,0.573568
+GSBT20_Postfilter,"Port Microbes (Postfilter)",River & Seawater,Bacteria,54,57.34,293.94,-0.010719,0.0453419,-0.170246,-0.0656424
+GSBT20_Postfilter,"Port Microbes (Postfilter)",River & Seawater,Archaea,12,70.3,200.25,0.296278,0.356876,-0.165109,0.504917
+WHL+21,"Bahe River",River & Seawater,Bacteria,52,-106.56,192.61,-0.0102318,0.0234219,-0.161153,-0.123143
+ZLH+22,"Nu River",River & Seawater,Bacteria,20,297.32,584.67,-0.00349577,0.0319641,-0.159403,-0.0540777
+ZZL+21,"Maozhou River",River & Seawater,Bacteria,54,-88.7,238.87,0.0671237,0.0452351,-0.17125,0.381665
+LWJ+21,"Plastisphere",River & Seawater,Bacteria,72,115.41,307.58,0.0117508,0.0436175,-0.156992,0.0640891
+LWJ+21,"Plastisphere",River & Seawater,Archaea,16,158.65,292.3,-0.0365409,0.0738855,-0.120993,-0.272744
+GZL21,"Three Gorges Reservoir",River & Seawater,Bacteria,50,184.58,398.37,-0.0451958,0.0558016,-0.148998,-0.228816
+RARG22,"Taxco AMD",River & Seawater,Bacteria,27,271.53,542.72,0.0209507,0.0204127,-0.163166,0.389395
+RARG22,"Taxco AMD",River & Seawater,Archaea,9,271.53,518.68,0.00589254,0.00348498,-0.194633,0.833943
+SAR+13,"Microbial Mat, Kiritimati Atoll",Lake & Pond,Bacteria,22,-161.52,-2,0.196865,0.0612842,-0.131409,0.831767
+SAR+13,"Microbial Mat, Kiritimati Atoll",Lake & Pond,Archaea,27,-161.52,-2,0.492983,0.141754,-0.120007,0.819972
+LLC+19,"Xidong Reservoir, Xiamen",Lake & Pond,Bacteria,36,29,563,0.00853988,0.00639677,-0.159903,0.421863
+BCA+21,"Ursu Lake, Romania",Lake & Pond,Bacteria,36,-433.66,231.18,0.028177,0.00612535,-0.166366,0.848481
+HLZ+18,"Xiamen Reservoirs and Ponds",Lake & Pond,Bacteria,27,-3.99,522.71,0.000583593,0.0143737,-0.158526,0.0167217
+BWD+19,"Keweenaw Waterway, Michigan",Lake & Pond,Bacteria,81,131.46,302.04,0.0194328,0.0219622,-0.171562,0.194372
+IBK+22,"German Kettle Holes",Lake & Pond,Bacteria,37,116.95,455.32,0.0463331,0.0291599,-0.181544,0.47871
+IBK+22,"German Kettle Holes",Lake & Pond,Archaea,38,116.95,455.32,-0.0175112,0.0132483,-0.191216,-0.407918
+NLE+21,"Lake Kinneret, Israel",Lake & Pond,Bacteria,21,-224,276,-0.0100781,0.0101911,-0.169221,-0.428944
+MTC21,"Monegros Desert, Spain",Lake & Pond,Bacteria,138,220.78,451.73,-0.0128543,0.028722,-0.152896,-0.0756742
+MTC21,"Monegros Desert, Spain",Lake & Pond,Archaea,32,230.72,402.04,-0.323278,0.298254,-0.0608176,-0.374706
+SPA+21,"Lake Varese, Italy",Lake & Pond,Bacteria,28,-169.39,407.57,-0.0172087,0.00885531,-0.164872,-0.616691
+PCL+18_Acidic,"New Zealand Hot Springs (Acidic)",Geothermal,Bacteria,42,-386.33,240.37,0.0286219,0.048163,-0.172495,0.186571
+PCL+18_Acidic,"New Zealand Hot Springs (Acidic)",Geothermal,Archaea,22,-368.63,144.9,0.0463915,0.0418365,-0.207465,0.459407
+PCL+18_Alkaline,"New Zealand Hot Springs (Alkaline)",Geothermal,Bacteria,39,-301.29,262.43,0.0895194,0.0570748,-0.198007,0.463068
+PCL+18_Alkaline,"New Zealand Hot Springs (Alkaline)",Geothermal,Archaea,9,-284.72,155.31,-0.0187374,0.0865509,-0.218208,-0.189964
+GWS+20,"Eastern Tibetan Plateau",Geothermal,Bacteria,14,-282.33,108.16,0.166223,0.115392,-0.18181,0.671433
+GWS+20,"Eastern Tibetan Plateau",Geothermal,Archaea,8,-109.36,108.16,0.105276,0.173736,-0.195871,0.517833
+PBU+20,"Uzon Caldera",Geothermal,Bacteria,10,-156.08,293.33,0.0147744,0.0878486,-0.162266,0.135845
+MWY+21,"Southern Tibetan Plateau",Geothermal,Bacteria,13,-149.44,10.96,0.0487955,0.0943203,-0.166599,0.324714
+MWY+21,"Southern Tibetan Plateau",Geothermal,Archaea,9,-149.44,10.96,-0.0809329,0.152858,-0.192434,-0.427733
+SBP+20,"CROMO 1",Hyperalkaline,Bacteria,24,-126.19,26.1,0.0614012,0.0482839,-0.151636,0.490109
+RMB+17,"Samail Ophiolite",Hyperalkaline,Bacteria,19,-310.56,268.14,0.0179485,0.0248792,-0.165253,0.346313
+RMB+17,"Samail Ophiolite",Hyperalkaline,Archaea,13,-118.25,268.14,0.00925022,0.0313142,-0.191357,0.192372
+CTS+17,"Santa Elena Ophiolite",Hyperalkaline,Bacteria,32,-78.17,243.34,-0.0313505,0.0377871,-0.150891,-0.295535
+CTS+17,"Santa Elena Ophiolite",Hyperalkaline,Archaea,32,-78.17,243.34,0.00434708,0.0217135,-0.185816,0.0744413
+KSR+21,"Voltri Massif",Hyperalkaline,Bacteria,8,186.05,486.23,0.0102118,0.00959508,-0.154337,0.728411
+PSB+21,"CROMO 2",Hyperalkaline,Bacteria,81,-129.14,222.5,0.0258108,0.0213043,-0.153769,0.261848
+NTB+21,"Samail Ophiolite Packers",Hyperalkaline,Bacteria,8,-172.31,230.79,0.0844959,0.0264299,-0.183163,0.95431
+NTB+21,"Samail Ophiolite Packers",Hyperalkaline,Archaea,5,193.37,230.79,-0.0418812,0.359028,-0.177378,-0.209574
+KLM+16,"Sarnia nZVI Injection",Groundwater,Bacteria,28,-171.01,39.16,0.101338,0.060977,-0.163878,0.556587
+WLJ+16,"Hetao Basin",Groundwater,Bacteria,16,-204.75,231.38,0.0250139,0.0327049,-0.161011,0.401525
+WLJ+16,"Hetao Basin",Groundwater,Archaea,11,-192.22,153.49,-0.0583403,0.0973,-0.190584,-0.411974
+ZDW+19,"Jianghan Plain",Groundwater,Bacteria,48,-170.52,-15.45,0.0334096,0.0632645,-0.163818,0.15484
+ZDW+19,"Jianghan Plain",Groundwater,Archaea,39,-170.52,-15.45,-0.012456,0.0591937,-0.197934,-0.0699226
+DJK+18,"Ohio Aquifers",Groundwater,Bacteria,89,-153.09,66.64,-0.00520227,0.0248861,-0.170985,-0.0445017
+DJK+18,"Ohio Aquifers",Groundwater,Archaea,83,-153.09,66.64,0.0120808,0.00761189,-0.201791,0.33108
+SRM+19,"Rayong Province",Groundwater,Bacteria,19,-364.14,246.38,0.0260084,0.0157689,-0.160757,0.644974
+APV+20,"Mezquital Valley",Groundwater,Bacteria,24,-266.94,233.73,0.0929942,0.0366051,-0.177031,0.746902
+APV+20,"Mezquital Valley",Groundwater,Archaea,11,55.11,223.95,0.019028,0.148733,-0.194781,0.0960234
+YHK+20,"Hainich Critical Zone",Groundwater,Bacteria,33,159.2,433.21,0.052946,0.0197021,-0.192817,0.701522
+ZCZ+21,"Po Plain",Groundwater,Bacteria,18,-89.37,416.75,-0.00011871,0.0161082,-0.15981,-0.00390567
+MGW+22,"New Zealand Aquifers",Groundwater,Bacteria,71,-133.9,205.82,0.0209145,0.0180252,-0.16,0.268433
+MGW+22,"New Zealand Aquifers",Groundwater,Archaea,69,-133.9,205.82,-0.0233019,0.011434,-0.191407,-0.44503
+MCR+22,"Aquifer SE of Melbourne",Groundwater,Bacteria,24,-81.74,107.29,-0.00504161,0.124472,-0.1632,-0.017906
+MCR+22,"Aquifer SE of Melbourne",Groundwater,Archaea,12,-38.42,107.29,-0.096005,0.165006,-0.188777,-0.379317
+ZML+17,"Mai Po Wetland",Sediment,Bacteria,33,-41.62,379.07,-0.00861377,0.0177687,-0.162664,-0.17484
+ZML+17,"Mai Po Wetland",Sediment,Archaea,33,-41.62,379.07,0.00482206,0.0144732,-0.19956,0.121144
+BSPD17,"Baltic Sea Swedish Coast",Sediment,Bacteria,28,39.42,227.05,0.113182,0.168907,-0.195072,0.26078
+RKN+17,"Finnish Boreal Lakes",Sediment,Bacteria,24,-225.86,-140.68,-0.131114,0.0386253,-0.186341,-0.832201
+RKN+17,"Finnish Boreal Lakes",Sediment,Archaea,24,-225.86,-140.68,-0.0367423,0.0167374,-0.18222,-0.696487
+HDZ+19,"Honghu Lake",Sediment,Bacteria,28,-381.23,160.96,0.0079667,0.00876266,-0.165947,0.34412
+OHL+18_DNA,"Marine and Freshwater Sediments (DNA)",Sediment,Bacteria,33,-82.25,328.49,0.0122064,0.0050918,-0.156324,0.659838
+OHL+18_DNA,"Marine and Freshwater Sediments (DNA)",Sediment,Archaea,23,-82.25,328.49,0.0169042,0.0114317,-0.192735,0.557221
+WHLH21a,"Daya Bay",Sediment,Bacteria,20,-360,-74,-0.16898,0.11505,-0.19593,-0.588194
+RSS+18,"Lake Hazen, Nunavut",Sediment,Bacteria,28,113.53,527.09,0.0191429,0.00734753,-0.158465,0.724229
+CLS+19,"Jinchuan River",Sediment,Bacteria,24,7.82,259.82,0.0355471,0.0405577,-0.159923,0.361343
+CLS+19,"Jinchuan River",Sediment,Archaea,21,7.82,259.82,0.01163,0.0414074,-0.179256,0.133655
+HSF+19,"Lake Neusiedl",Sediment,Bacteria,21,-223.84,508.61,-0.0335216,0.00852215,-0.164601,-0.883773
+ZHZ+19,"Hydrocarbon Biodegradation",Sediment,Bacteria,27,-418,-77,0.0205334,0.00809968,-0.15596,0.722234
+ZHZ+19,"Hydrocarbon Biodegradation",Sediment,Archaea,27,-418,-77,-0.0203367,0.0109129,-0.185003,-0.608903
+LMBA21_2017,"Bay of Biscay (2017)",Sediment,Bacteria,47,-204,476,0.0234572,0.00640351,-0.158366,0.739895
+LMBA21_2017,"Bay of Biscay (2017)",Sediment,Archaea,18,-202,436,0.00640134,0.00452182,-0.191211,0.600135
+HSF+22,"Aldabra Atoll",Sediment,Bacteria,120,-301.96,398.11,0.0143878,0.00694974,-0.155667,0.353098
+ZZLL21,"Maozhou River Hyporheic Zone",Sediment,Bacteria,71,-71.3,256.75,0.0258492,0.0293942,-0.157391,0.206641
+WFB+21,"Estuarine Sediment Mesocosms",Sediment,Bacteria,79,59,211,0.00596243,0.00322458,-0.153349,0.386916
+HCW+22,"Hydrodynamic Experiments",Sediment,Bacteria,45,-211.59,-56.52,-0.00154037,0.0217871,-0.155447,-0.0217385
+WKG+22,"Cardinal Pond, Poland",Sediment,Bacteria,40,158.18,486.37,-0.0014823,0.0311613,-0.16587,-0.0156196
+MLL+19,"Dabu Town, Hunan Province",Soil,Bacteria,30,-374.58,300.25,0.0149322,0.0051909,-0.15322,0.744031
+MLL+19,"Dabu Town, Hunan Province",Soil,Archaea,20,-374.58,259.34,-0.0218829,0.00910749,-0.18959,-0.76553
+BMOB18,"Urban Wetland Soils",Soil,Bacteria,36,-339.79,-75.79,0.0342438,0.0239965,-0.16351,0.445321
+BMOB18,"Urban Wetland Soils",Soil,Archaea,36,-339.79,-75.79,-0.0033019,0.0143227,-0.192702,-0.0800902
+WHLH21,"Tengger Desert Biocrusts",Soil,Bacteria,32,398.81,451.74,0.138984,0.104684,-0.201884,0.443651
+CWC+20,"Paddy Soil Water Management",Soil,Bacteria,84,-467.3,358.07,0.0153852,0.00559245,-0.146379,0.517239
+PSG+20,"Anaerobic Soil Disinfestation",Soil,Bacteria,49,-265,343,0.0342442,0.0389714,-0.170573,0.249682
+PSG+20,"Anaerobic Soil Disinfestation",Soil,Archaea,20,-265,343,0.0240352,0.0138415,-0.17339,0.651988
+LJC+20,"East Asia Paddy Soil",Soil,Bacteria,33,-280.02,-107.66,-0.00935215,0.0494399,-0.144144,-0.0691257
+DTJ+20,"Rice Rhizosphere",Soil,Bacteria,36,-158.03,-83.3,0.0256585,0.121985,-0.153674,0.0731137
+RKSK22,"Georgia Salt Marshes",Soil,Bacteria,138,-428.66,108.28,0.0139221,0.00508218,-0.157478,0.421295
+RKSK22,"Georgia Salt Marshes",Soil,Archaea,122,-428.66,108.28,0.0170426,0.00385445,-0.194954,0.624294
+DLS21_Bulk,"Paddy Soil Amendments 1 (Bulk)",Soil,Bacteria,56,-17.49,255.75,-0.00139673,0.0217137,-0.155022,-0.0175471
+WKP+22,"Maize Intercropping, Poland",Soil,Bacteria,30,394.07,554.72,-0.00344735,0.0280403,-0.143446,-0.0475388
+CKB+22,"Paddy Soil Amendments 2",Soil,Bacteria,34,-166.67,316.3,0.0190435,0.00660606,-0.172642,0.720173
+CKB+22,"Paddy Soil Amendments 2",Soil,Archaea,7,-164.53,-99.89,-0.013746,0.0602945,-0.187205,-0.253524
+CLZ+22,"Soil-Water Interface",Soil,Bacteria,25,-178,186,0.0122595,0.00755355,-0.144366,0.573506

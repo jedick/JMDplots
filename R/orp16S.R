@@ -189,7 +189,7 @@ orp16S_2 <- function(pdf = FALSE) {
   layout(mat, widths = c(0.9, 1.4, 0.9))
   par(mgp = c(2.5, 1, 0))
 
-  # Panel B: Zc in obligate anaerobic and aerotolerant genera 20221017
+  # Panel A: Zc in obligate anaerobic and aerotolerant genera 20221017
   par(mar = c(4, 4, 2.5, 1))
   # Read table from Million and Raoult, 2018
   dat <- read.csv(system.file("extdata/orp16S/MR18_Table_S1.csv", package = "JMDplots"))
@@ -200,17 +200,19 @@ orp16S_2 <- function(pdf = FALSE) {
   # Calculate Zc
   values <- Zc(aa)
   ylim <- c(-0.24, -0.095)
+  # Remove suffixes used in GTDB (_A, _B, etc.)
+  genome <- sapply(strsplit(aa$organism, "_"), "[", 1)
   # Match genus names to GTDB
-  iref <- match(dat$Genus.name, aa$organism)
+  iref <- match(dat$Genus.name, genome)
   # Print coverage information
   nna <- sum(is.na(iref))
   print(paste(nna, "genera not matched to GTDB"))
   # Report archaeal genera 20230107
-  genera <- aa[iref, ]$organism
-  taxa <- read.csv(system.file("RefDB/GTDB_220/taxonomy.csv.xz", package = "JMDplots"), as.is = TRUE)
-  itax <- match(genera, taxa$genus)
-  taxa <- taxa[itax, ]
-  archaeal_genera <- taxa$genus[taxa$superkingdom == "Archaea"]
+  genera <- aa[na.omit(iref), ]$organism
+  taxonomy <- read.csv(system.file("RefDB/GTDB_220/taxonomy.csv.xz", package = "JMDplots"), as.is = TRUE)
+  itax <- match(genera, taxonomy$genus)
+  taxonomy <- taxonomy[itax, ]
+  archaeal_genera <- taxonomy$genus[taxonomy$domain == "Archaea"]
   print(paste("Archaeal genera:", paste(archaeal_genera, collapse = " ")))
   # Get values for obligate anaerobes and aerotolerant genera
   values <- values[iref]
@@ -240,7 +242,7 @@ orp16S_2 <- function(pdf = FALSE) {
   title("Oxygen tolerance", font.main = 1)
   label.figure("a", font = 2, cex = 1.5, xfrac = 0.04)
 
-  # Panel A: Zc of community reference proteomes vs metaproteomes 20221222
+  # Panel B: Zc of community reference proteomes vs metaproteomes 20221222
   par(mar = c(4, 4, 2.5, 1))
   # Calculate chemical metrics
   dat <- getMP_orp16S()
@@ -730,12 +732,12 @@ orp16S_5 <- function(pdf = FALSE) {
 
   # Offset for labels 20211012
   dx <- list(
-    c(0.04, -0.19, -0.22, 0.04, -0.18),
-    c(-0.38, -0.13, -0.12, NA, -0.20)
+    c(0.04, 0.04, -0.22, 0.04, -0.19),
+    c(0.04, 0.04, 0.04, 0, -0.21)
   )
   dy <- list(
-    c(0, -0.015, -0.03, 0, -0.01),
-    c(-0.002, 0.03, -0.007, NA, 0.007)
+    c(0, 0, -0.03, 0, -0.008),
+    c(0, 0, 0, 0, 0.014)
   )
 
   # Loop over Bacteria and Archaea
