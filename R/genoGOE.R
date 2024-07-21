@@ -334,8 +334,6 @@ genoGOE_3 <- function(pdf = FALSE, x = "pH", y = "Eh", basis = "QEC") {
   plot(xs, ys, type = "n", xaxt = "n", xlab = xlab, ylab = cplab$Zc)
   # Plot main branch (excluding Anc I/III')
   lines(xs[-3], ys[-3], type = "b", pch = NA)
-  # Plot sub-branch (Anc I/III')
-  lines(xs[2:4], ys[2:4], type = "b", pch = NA, lty = 2, col = 8)
   # Add points
   points(xs[-3], ys[-3], pch = 19)
   points(xs[3], ys[3], pch = 19, col = 8)

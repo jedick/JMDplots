@@ -34,6 +34,22 @@ link-citations: true
   }
 }
 </style>
+<script>
+function ToggleDiv(ID) {
+  var D = document.getElementById("D-" + ID);
+  var B = document.getElementById("B-" + ID);
+  if (D.style.display === "none") {
+    // open the div and change button text
+    D.style.display = "block";
+    B.innerText = "Hide code";
+  } else {
+    // close the div and change button text
+    D.style.display = "none";
+    B.innerText = "Show code";
+  }
+}
+</script>
+
 
 ```{r setup, include=FALSE}
 library(knitr)
@@ -62,7 +78,10 @@ This vignette runs the functions to make the plots from the following manuscript
 
 > Dick JM. 2024. Genomes record the Great Oxidation Event. Manuscript in preparation.
 
-This vignette was compiled on `r Sys.Date()` with **[JMDplots](https://github.com/jedick/JMDplots)** `r packageDescription("JMDplots")$Version` and **[CHNOSZ](http://chnosz.net)** `r packageDescription("CHNOSZ")$Version`.
+This vignette was compiled on `r Sys.Date()` with
+**[JMDplots](https://github.com/jedick/JMDplots)** `r packageDescription("JMDplots")$Version`,
+**[canprot](https://github.com/jedick/canprot)** `r packageDescription("canprot")$Version`, and
+**[CHNOSZ](http://chnosz.net)** `r packageDescription("CHNOSZ")$Version`.
 
 ```{r library, message = FALSE, results = "hide"}
 library(JMDplots)
@@ -88,5 +107,65 @@ genoGOE_3()
 ```
 
 **Data source:** Reconstructed ancestral sequences of Rubisco [@KHAB17].
+
+## Composition reaction for ancestral Rubisco I/II/III (Reaction 1)
+
+<button id="B-composition_calculation" onclick="ToggleDiv('composition_calculation')">Show code</button>
+<div id="D-composition_calculation" style="display: none">
+```{r composition_calculation, message = FALSE, results = "hide"}
+# Setup basis species and swap in e- for O2
+# NOTE: This sets pH to 7; changing it will change the charge (Z) and affinity below
+basis("QEC+")
+swap.basis("O2", "e-")
+
+# Calculate Eh from pe
+pe <- -basis()$logact[rownames(basis()) == "e-"]
+Eh <- round(convert(pe, "Eh"), 3)
+
+# Read amino acid compositions and add the first protein to CHNOSZ
+fasta_file <- system.file("extdata/fasta/KHAB17.fasta", package = "canprot")
+aa <- read_fasta(fasta_file)[1, ]
+ip <- add.protein(aa)
+
+# Run affinity() to calculate the affinity of the composition reaction for the first protein
+affinity_out <- affinity(iprotein = ip)
+affinity_protein <- affinity_out$values[[1]]
+
+# Run protein.basis() to calculate the stoichiometry of the composition reaction
+reaction_protein <- protein.basis(ip)
+
+# NOTE: Affinity and reaction stoichiometry are already corrected for pH
+# Next we construct the elemental formula of the uncharged protein ...
+elements_protein <- protein.formula(ip)
+# ... and make the pH correction
+Z_protein <- ionize.aa(aa)[[1]]
+elements_protein <- cbind(elements_protein, Z = 2)
+elements_protein[, "H"] <- elements_protein[, "H"] + Z_protein
+
+# Divide values by protein length and do some rounding
+plength <- protein.length(ip)
+affinity_residue <- round(affinity_protein / plength, 3)
+reaction_residue <- round(reaction_protein / plength, 3)
+elements_residue <- round(elements_protein / plength, 3)
+# Format the elemental formula
+formula_residue <- as.chemical.formula(round(elements_residue, 3))
+
+# Print the results
+print(paste("Eh:", Eh, "volt"))
+print(paste("Elemental formula of protein per residue:", formula_residue))
+print("Stoichiometry of composition reaction:")
+print(reaction_residue)
+print(paste("Affinity/2.303RT of composition reaction:", affinity_residue))
+```
+</div>
+
+```{r composition_resuls, echo = FALSE}
+print(paste("Eh:", Eh, "volt"))
+print(paste("Elemental formula of protein per residue:", formula_residue))
+print("Stoichiometry of composition reaction:")
+print(reaction_residue)
+print(paste("Affinity/2.303RT of composition reaction:", affinity_residue))
+```
+
 
 ## References
