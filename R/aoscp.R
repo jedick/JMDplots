@@ -485,8 +485,8 @@ aoscp6 <- function(pdf = FALSE) {
   # plot 1: Gibbs energy per residue
   a.res <- mapply("/", a$values, protein.length(aa))
   G.res <- convert(a.res, "G")
-  # Convert to calories if needed (for later CHNOSZ versions) 20220401
-  if(packageVersion("CHNOSZ") > "1.4.3") G.res <- convert(G.res, "cal")
+  # Convert to calories (because Joules are now default in CHNOSZ) 20220401
+  G.res <- convert(G.res, "cal")
   par(mar=c(4, 4, 1, 1))
   plot(c(-0.4, 0.0), c(-50, 200), type="n", xlab=axis.label("Eh"),
     ylab=expression(list(Delta*italic(G), kcal~"(mol residue)"^{-1})~"  "), las=1)

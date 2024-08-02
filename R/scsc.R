@@ -10,7 +10,7 @@ scsc2 <- function() {
   ## Oxygen fugacity - activity of H2O predominance 
   ## diagrams for average protein composition in 23 YeastGFP localizations
   # use superseded properties of [Met], [Gly], and [UPBB] (Dick et al., 2006)
-  if(packageVersion("CHNOSZ") > "1.4.3") OldAAfile <- "extdata/OBIGT/OldAA.csv" else OldAAfile <- "extdata/OBIGT/OldAA_old.csv"
+  OldAAfile <- "extdata/OBIGT/OldAA.csv"
   add.OBIGT(system.file(OldAAfile, package = "JMDplots"))
   # arranged by decreasing metastability:
   # order of this list of locations is based on the 
@@ -65,7 +65,7 @@ scsc2 <- function() {
 
 scsc3 <- function() {
   ## This figure is similar to Fig. 3 of Dick (2009). 
-  if(packageVersion("CHNOSZ") > "1.4.3") OldAAfile <- "extdata/OBIGT/OldAA.csv" else OldAAfile <- "extdata/OBIGT/OldAA_old.csv"
+  OldAAfile <- "extdata/OBIGT/OldAA.csv"
   add.OBIGT(system.file(OldAAfile, package = "JMDplots"))
   locations <- yeastgfp()
   gfp <- yeastgfp(locations)

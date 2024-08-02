@@ -61,7 +61,7 @@ Plot (E) is a composite figure in which the intensity of shading corresponds to 
 <div id="D-bugstab" style="display: none">
 ```{r bugstab, eval = FALSE}
 # To reproduce the calculations in the paper, use superseded data for [Gly] and [UPBB] 20190206
-if(packageVersion("CHNOSZ") > "1.4.3") OldAAfile <- "extdata/OBIGT/OldAA.csv" else OldAAfile <- "extdata/OBIGT/OldAA_old.csv"
+OldAAfile <- "extdata/OBIGT/OldAA.csv"
 add.OBIGT(system.file(OldAAfile, package = "JMDplots"), c("[Gly]", "[UPBB]"))
 # Set up graphics device
 layout(cbind(matrix(sapply(list(c(1, 2), c(3, 4)), function(x) rep(rep(x, each=3), 3)), nrow=6, byrow=TRUE),

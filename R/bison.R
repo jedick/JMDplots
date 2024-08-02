@@ -125,7 +125,7 @@ bison5 <- function() {
     # use old parameters for first row and current ones for second row
     reset()
     if(j==1) {
-      if(packageVersion("CHNOSZ") > "1.4.3") OldAAfile <- "extdata/OBIGT/OldAA.csv" else OldAAfile <- "extdata/OBIGT/OldAA_old.csv"
+      OldAAfile <- "extdata/OBIGT/OldAA.csv"
       add.OBIGT(system.file(OldAAfile, package = "JMDplots"))
     }
     # setup basis species and proteins

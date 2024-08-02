@@ -217,7 +217,6 @@ utogig2 <- function(pdf = FALSE, logact = -3) {
       # Convert to Gibbs energy (J/mol)
       TK <- convert(T, "K")
       A <- -convert(A, "G", TK)
-      if(packageVersion("CHNOSZ") <= "1.4.3") A <- convert(A, "J")
       # Convert to kJ/mol
       A <- A / 1000
       # Divide A by number of carbon
@@ -370,7 +369,6 @@ utogig3 <- function(pdf = FALSE) {
     # Convert to Gibbs energy (J/mol)
     TK <- convert(T, "K")
     A <- -convert(A, "G", TK)
-    if(packageVersion("CHNOSZ") <= "1.4.3") A <- convert(A, "J")
     # Convert to kJ/mol
     A <- A / 1000
     # Calculate affinity per residue
@@ -631,57 +629,51 @@ utogig4 <- function(pdf = FALSE) {
       Ptab3 <- cbind(Variable = "Thaumarchaeota Zc", Ptab3)
     }
 
-    if(!packageVersion("CHNOSZ") > "1.4.3") {
-      warning("Not making average affinity rank plots because of insufficient CHNOSZ version")
-      plot.new()
-    } else {
-      # Make affinity rank plot 20220602
+    # Make affinity rank plot 20220602
 
-      # Save graphical settings that are modified by thermo.plot.new()
-      opar <- par(c("mar", "mgp", "tcl", "las", "xaxs", "yaxs"))
-      # Start plot
-      thermo.plot.new(xlim = xlims[[i]], ylim = ylims[[i]], xlab = logaH2lab, ylab = "Mean rank of per-residue affinity (%)", yline = par("mgp")[1] + 0.3)
-      # Color reducing and oxidizing areas from organic compounds 20220621
-      file <- "H2_intermediate_-3.csv"
-      dat <- read.csv(file.path(system.file("extdata/utogig", package = "JMDplots"), file))
-      # Just use 25 degC values
-      dat <- dat[dat$T==25, ]
-      x <- dat[, "T", drop = FALSE]
-      # Make rectangles
-      rect(xlims[[i]][1], ylims[[i]][1], dat$hiN_hipH, ylims[[i]][2], col = "#E5737360", border = NA)
-      rect(xlims[[i]][2], ylims[[i]][1], dat$loN_lopH, ylims[[i]][2], col = "#90CAF960", border = NA)
-      rect(dat$hiN_hipH, ylims[[i]][1], dat$loN_lopH, ylims[[i]][2], col = "#9E9E9E60", border = NA)
-      rect(dat$hiN_lopH, ylims[[i]][1], dat$loN_hipH, ylims[[i]][2], col = "#9E9E9E90", border = NA)
+    # Save graphical settings that are modified by thermo.plot.new()
+    opar <- par(c("mar", "mgp", "tcl", "las", "xaxs", "yaxs"))
+    # Start plot
+    thermo.plot.new(xlim = xlims[[i]], ylim = ylims[[i]], xlab = logaH2lab, ylab = "Mean rank of per-residue affinity (%)", yline = par("mgp")[1] + 0.3)
+    # Color reducing and oxidizing areas from organic compounds 20220621
+    file <- "H2_intermediate_-3.csv"
+    dat <- read.csv(file.path(system.file("extdata/utogig", package = "JMDplots"), file))
+    # Just use 25 degC values
+    dat <- dat[dat$T==25, ]
+    x <- dat[, "T", drop = FALSE]
+    # Make rectangles
+    rect(xlims[[i]][1], ylims[[i]][1], dat$hiN_hipH, ylims[[i]][2], col = "#E5737360", border = NA)
+    rect(xlims[[i]][2], ylims[[i]][1], dat$loN_lopH, ylims[[i]][2], col = "#90CAF960", border = NA)
+    rect(dat$hiN_hipH, ylims[[i]][1], dat$loN_lopH, ylims[[i]][2], col = "#9E9E9E60", border = NA)
+    rect(dat$hiN_lopH, ylims[[i]][1], dat$loN_hipH, ylims[[i]][2], col = "#9E9E9E90", border = NA)
 
-      # Load proteins and calculate affinity
-      ip <- add.protein(aa, as.residue = TRUE)
-      a <- affinity(H2 = xlims[[i]], iprotein = ip, T = T)
-      # Calculate normalized sum of ranks for each group and make diagram
-      arank <- rank.affinity(a, groups)
-      names <- hyphen.in.pdf(names(groups))
-      diagram(arank, col = lcol, lty = 1, lwd = 1.5, dx = dx[[i]], dy = dy[[i]], names = names, add = TRUE)
-      par(opar)
-      if(i == 1) label.figure("(b)", cex = 1.5, font = 2, xfrac = 0.06)
+    # Load proteins and calculate affinity
+    ip <- add.protein(aa, as.residue = TRUE)
+    a <- affinity(H2 = xlims[[i]], iprotein = ip, T = T)
+    # Calculate normalized sum of ranks for each group and make diagram
+    arank <- rank.affinity(a, groups)
+    names <- hyphen.in.pdf(names(groups))
+    diagram(arank, col = lcol, lty = 1, lwd = 1.5, dx = dx[[i]], dy = dy[[i]], names = names, add = TRUE)
+    par(opar)
+    if(i == 1) label.figure("(b)", cex = 1.5, font = 2, xfrac = 0.06)
 
-      # Draw line at transition
-      itrans <- which.min(abs(arank$values[[trans[[i]][1]]] - arank$values[[trans[[i]][2]]]))
-      logaH2 <- arank$vals$H2[itrans]
-      ytop1 <- ylims[[i]][2] + diff(ylims[[i]]) * 0.05
-      #A <- arank$values[[trans[[i]][1]]][itrans]
-      #lines(c(logaH2, logaH2), c(A, ytop1), lty = 2, lwd = 1.5, col = 8, xpd = NA)
-      ybot <- ylims[[i]][1]
-      lines(c(logaH2, logaH2), c(ybot, ytop1), lty = 2, lwd = 1.5, col = 8, xpd = NA)
+    # Draw line at transition
+    itrans <- which.min(abs(arank$values[[trans[[i]][1]]] - arank$values[[trans[[i]][2]]]))
+    logaH2 <- arank$vals$H2[itrans]
+    ytop1 <- ylims[[i]][2] + diff(ylims[[i]]) * 0.05
+    #A <- arank$values[[trans[[i]][1]]][itrans]
+    #lines(c(logaH2, logaH2), c(A, ytop1), lty = 2, lwd = 1.5, col = 8, xpd = NA)
+    ybot <- ylims[[i]][1]
+    lines(c(logaH2, logaH2), c(ybot, ytop1), lty = 2, lwd = 1.5, col = 8, xpd = NA)
 
-      # Calculate pe and Eh (mV)
-      pe <- -pH - 0.5*logaH2 - 0.5*logK
-      Eh <- 1000 * convert(pe, "Eh", pH = pH)
-      Ehtext <- paste(round(Eh), "mV")
-      ytop2 <- ylims[[i]][2] + diff(ylims[[i]]) * 0.1
-      text(logaH2, ytop2, Ehtext, xpd = NA)
+    # Calculate pe and Eh (mV)
+    pe <- -pH - 0.5*logaH2 - 0.5*logK
+    Eh <- 1000 * convert(pe, "Eh", pH = pH)
+    Ehtext <- paste(round(Eh), "mV")
+    ytop2 <- ylims[[i]][2] + diff(ylims[[i]]) * 0.1
+    text(logaH2, ytop2, Ehtext, xpd = NA)
 
-      logaH2s <- c(logaH2s, logaH2)
-
-    }
+    logaH2s <- c(logaH2s, logaH2)
 
   }
 
@@ -843,7 +835,6 @@ calc_logaH2_intermediate <- function(class = NULL, logact = -3) {
     # Convert to Gibbs energy (J/mol)
     TK <- convert(T, "K")
     A <- -convert(A, "G", TK)
-    if(packageVersion("CHNOSZ") <= "1.4.3") A <- convert(A, "J")
     # Convert to kJ/mol
     A <- convert(A, "J") / 1000
     # Divide A by number of carbon

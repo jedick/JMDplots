@@ -217,7 +217,7 @@ importFrom("stats", "lm", "na.omit", "predict", "sd", "predict.lm", "residuals",
            "kmeans", "qt", "cor.test", "coef", "aggregate", "cor", "uniroot",
            "TukeyHSD", "aov", "binom.test", "confint", "ecdf", "knots")
 importFrom("utils", "read.csv", "demo", "tail", "write.csv",
-           "capture.output", "browseURL", "head", "combn", "read.table", "packageVersion",
+           "capture.output", "browseURL", "head", "combn", "read.table",
            "data", "relist", "write.table")
 
 S3method(dunnTest,default)
