@@ -5,8 +5,9 @@
 # 20240328 Moved to JMDplots
 # 20240409 Add Rubisco plots
 # 20240528 Analyze methanogen genomes
+# 20240803 Compare Rubisco proteins and unrelated genomes (Fig. 3C)
 
-# Figure 1: Comparison of methanogen genomes
+# Figure 1: Genome-wide differences of oxidation state between two lineages of methanogens
 genoGOE_1 <- function(pdf = FALSE) {
 
   if(pdf) cairo_pdf("Figure_1.pdf", width = 8, height = 6)
@@ -71,7 +72,7 @@ genoGOE_1 <- function(pdf = FALSE) {
   # Add legend for methanogen Class I and II
   legend("bottomright", "Class I", lty = 1, col = 2, bty = "n")
   legend("topleft", "Class II", lty = 1, col = 4, bty = "n")
-  label.figure("A", font = 2, cex = 1.5)
+  label.figure("A", font = 2, cex = 1.6)
 
   # Get GC for species in each phylum
   GC_Halo <- get_GC("Halo")
@@ -85,6 +86,7 @@ genoGOE_1 <- function(pdf = FALSE) {
     lines(c(i, i) - 0.1, GC_Methano[i, c(2, 4)], col = 2)
     lines(c(i, i) + 0.1, GC_Halo[i, c(2, 4)], col = 4)
   }
+  label.figure("B", font = 2, cex = 1.6)
 
   # Plot Delta Zc vs Delta GC
   par(mar = c(4.1, 4.1, 1.1, 2.1))
@@ -102,6 +104,7 @@ genoGOE_1 <- function(pdf = FALSE) {
   R2 <- summary(mylm)$r.squared
   R2_txt <- bquote(italic(R)^2 == .(formatC(R2, digits = 2, format = "f")))
   legend("topleft", legend = R2_txt, bty = "n", inset = c(-0.05, 0))
+  label.figure("C", font = 2, cex = 1.6, yfrac = 0.9)
 
   # Plot Delta Zc vs log10 protein abundance in M. maripaludis 20240531
   Delta_Zc <- Zc_Halo[, 3] - Zc_Methano[, 3]
@@ -184,13 +187,13 @@ genoGOE_1 <- function(pdf = FALSE) {
   axis(1, at = 5:7, labels = c("Cost < 23", "23 \u2264 Cost \u2264 25", "Cost > 25"))
   axis(3, at = c(1, 3, 6), labels = c("All Proteins", "Control for GC content", "Control for metabolic cost"), tick = FALSE, font = 2)
 
-  label.figure("B", font = 2, cex = 1.5, xfrac = 0.018)
+  label.figure("D", font = 2, cex = 1.6, xfrac = 0.018)
 
   if(pdf) dev.off()
 
 }
 
-# Carbon oxidation state of proteins as a function of gene age in two lineages
+# Figure 2: Carbon oxidation state of proteins in eukaryotic gene age groups
 genoGOE_2 <- function(pdf = FALSE, metric = "Zc") {
 
   if(pdf) pdf("Figure_2.pdf", width = 7, height = 6)
@@ -300,6 +303,8 @@ genoGOE_2 <- function(pdf = FALSE, metric = "Zc") {
     # Add labels for divergence times
     at <- seq_along(Mya)
     axis(Mya_axis, at, Mya)
+    # Add plot label 20240803
+    label.plot(LETTERS[j], font = 2, cex = 1.2, xfrac = 0.04)
   }
   # Outer axis labels
   mtext(ylab, side = 2, line = 3, adj = -0.68, font = 2)
@@ -309,13 +314,12 @@ genoGOE_2 <- function(pdf = FALSE, metric = "Zc") {
 
 }
 
-# Chemical analysis and thermodynamic calculations for ancestral Rubiscos
-# Can be used to make logaH2O-logfO2, logfO2-pH, or Eh-pH diagram (x = O2 or pH, y = H2O, O2, or Eh)
-# 'basis' can be QEC or CHNOS
-genoGOE_3 <- function(pdf = FALSE, x = "pH", y = "Eh", basis = "QEC") {
+# Figure 3: Evolutionary oxidation of ancestral Rubiscos and thermodynamic prediction of redox boundaries around the GOE
+genoGOE_3 <- function(pdf = FALSE) {
 
-  if(pdf) cairo_pdf("Figure_3.pdf", width = 9, height = 4.5)
-  par(mfrow = c(1, 2))
+  if(pdf) cairo_pdf("Figure_3.pdf", width = 9, height = 9)
+  layout(matrix(c(1,1, 2,2, 0,3,3,0), nrow = 2, byrow = TRUE))
+  par(cex = 1)
 
   # Read amino acid compositions
   fasta_file <- system.file("extdata/fasta/KHAB17.fasta", package = "canprot")
@@ -339,32 +343,23 @@ genoGOE_3 <- function(pdf = FALSE, x = "pH", y = "Eh", basis = "QEC") {
   points(xs[3], ys[3], pch = 19, col = 8)
   axis(1, at = 1:6, aa$protein)
   abline(v = 3.5, lty = 2, col = "darkgreen", lwd = 2)
-  axis(3, at = 3.5, "GOE (proposed)")
+  text(2.5, -0.125, "GOE (proposed)")
+  title("Evolutionary oxidation of Rubisco proteins", font.main = 1)
   label.figure("A", cex = 1.5, font = 2)
 
   # Panel B: Relative stability diagram
 
   # Add proteins to CHNOSZ
-  ip <- add.protein(aa)
-  # Set plot resolution
-  res <- 500
-
-  # Setup basis species for charged proteins
-  if(x == "pH" | y == "Eh") basis <- paste0(basis, "+")
-  basis(basis)
-  # Setup basis species for Eh diagram
-  if(y == "Eh") swap.basis("O2", "e-")
+  ip <- add.protein(aa, as.residue = TRUE)
+  # Setup basis species for Eh-pH diagram
+  basis("QEC+")
+  swap.basis("O2", "e-")
+  # Set resolution
+  res <- 400
   
-  # Get axis limits
-  lims <- list(pH = c(0, 14), Eh = c(-0.5, 0.8), O2 = c(-90, 0), H2O = c(-10, 10))
-  # Create argument list for affinity()
-  aff_args0 <- list(c(lims[[x]], res), c(lims[[y]], res), iprotein = ip)
-  names(aff_args0)[1:2] <- c(x, y)
-
   # Calculate maximum affinity among all proteins
-  a0 <- do.call(affinity, aff_args0)
+  a0 <- affinity(pH = c(0, 14, res), Eh = c(-0.5, 0.8, res), iprotein = ip)
   d0 <- diagram(a0, plot.it = FALSE)
-
   # The affinity range
   aff_range <- range(d0$predominant.values)
   # The fraction of the balanced range (equal negative and positive endpoints) that is missing from the actual range
@@ -376,40 +371,121 @@ genoGOE_3 <- function(pdf = FALSE, x = "pH", y = "Eh", basis = "QEC") {
   nuse <- ntot - nout
   col <- hcl.colors(ntot, palette = "Blue-Yellow 2")[1:nuse]
   # Start plot with colors for affinity
-  thermo.plot.new(lims[[x]], lims[[y]], xlab = axis.label(x), ylab = axis.label(y))
+  thermo.plot.new(c(0, 14), c(-0.5, 0.8), xlab = "pH", ylab = axis.label("Eh"))
   image(d0$vals[[1]], d0$vals[[2]], d0$predominant.values, add = TRUE, col = col, useRaster = TRUE)
 
-  # Plot stability lines
-  # Anc_I is metastable; remove IB and IA/B to see it
-  aff_args1 <- aff_args0
-  aff_args1$iprotein <- ip[c(2,4)]
-  a1 <- do.call(affinity, aff_args1)
-  dx <- c(0.5, 2.8)
-  dy <- c(0.36, -0.03)
-  diagram(a1, lty = 2, lwd = 2, font = 2, col = "darkgreen", col.names = "darkgreen",
-    names = names, add = TRUE, limit.water = TRUE, fill.NA = "gray80", dx = dx, dy = dy)
-  # Visualize Anc_I - Anc_IA/B boundary 20240603
-  aff_args2 <- aff_args0
-  aff_args2$iprotein <- ip[c(4,5)]
-  a2 <- do.call(affinity, aff_args2)
-  dx <- c(3.8, -0.3)
-  dy <- c(-0.05, -0.44)
-  diagram(a2, lty = 2, lwd = 2, font = 2, col = "darkorange2", col.names = "darkorange2",
-    names = names, add = TRUE, limit.water = FALSE, fill.NA = "gray80", dx = dx, dy = dy)
+  # Loop over individual pairs
+  for(pre in 1:3) {
+    for(post in 4:6) {
+      a <- affinity(pH = c(0, 14, res), Eh = c(-0.5, 0.8, res), iprotein = ip[c(pre, post)])
+      if(pre == 1 & post == 4) limit.water <- TRUE else limit.water <- FALSE
+      d <- diagram(a, add = TRUE, names = "", lty = 2, col = "#000000b0", limit.water = limit.water, fill.NA = "gray80")
+      # Only label lines for reaction with Anc. I
+      if(post == 4) {
+        # Sort x values and get x and y values of boundary line
+        order <- order(d$linesout[[1]])
+        xs <- d$linesout[[1]][order]
+        ys <- d$linesout[[2]][order]
+        # Get a single value along the length of the line
+        ilab <- floor(length(xs) * pre * 3 / 10)
+        x <- xs[ilab]
+        y <- ys[ilab]
+        text(x, y - 0.03, aa$protein[pre], cex = 0.6)
+        text(x, y + 0.03, aa$protein[post], cex = 0.6)
+      }
+    }
+  }
 
-  # Overlay lines for all proteins
-  dx <- c(0.2, 2.2, 0, 0, -1.4, 3.0)
-  dy <- c(-0.02, -0.10, 0, 0, -0.17, -0.3)
-  d <- diagram(a0, font = 2, lwd = 2, add = TRUE, limit.water = TRUE, dx = dx, dy = dy)
-  # Add water stability lines
-  water.lines(d, lty = 1, col = 8)
-  # Add contour line at zero affinity
-  contour(d0$vals[[1]], d0$vals[[2]], d0$predominant.values, levels = 0, col = 4, lty = 4, lwd = 2, add = TRUE, drawlabels = FALSE)
+  # Calculate affinity of composition reactions for all proteins
+  aout <- affinity(pH = c(0, 14, res), Eh = c(-0.5, 0.8, res), iprotein = ip)
+  # Set up groups for affinity ranking:
+  # 3 pre-GOE and 3 post-GOE proteins
+  groups <- list(pre = c(TRUE, TRUE, TRUE, FALSE, FALSE, FALSE), post = c(FALSE, FALSE, FALSE, TRUE, TRUE, TRUE))
+  arank <- rank.affinity(aout, groups = groups)
+  diagram(arank, lwd = 2, col = 4, add = TRUE, names = "")
+  text(6, -0.20, "Pre-GOE proteins\nranked higher", col = 4, font = 2, cex = 0.8)
+  text(8.5, 0.01, "Post-GOE proteins\nranked higher", col = 4, font = 2, cex = 0.8)
+  legend("bottomleft", c("Pairwise comparisons", "Average ranking"),
+    lty = c(2, 1), lwd = c(1, 2), col = c(1, 4), bg = "white", cex = 0.8)
+
   # Replot frame and axis ticks
   box()
   thermo.axis()
-
+  title("Redox boundaries for Rubisco proteins", font.main = 1)
   label.figure("B", cex = 1.5, font = 2)
+
+  # Panel C: Comparison between Rubisco proteins and Methanogen and Nitrososphaeria genomes
+  for(i in 1:3) {
+
+    if(i == 1) {
+      # Methanogen proteomes 20220424
+      # Read amino acid composition and compute Zc
+      aa <- read.csv(system.file("extdata/utogig/methanogen_AA.csv", package = "JMDplots"))
+      # Indices of Class I and Class II methanogens
+      iI <- 20:36
+      iII <- 1:19
+      # Get the species in each group
+      groups <- list("Class I" = iI, "Class II" = iII)
+      col <- 2
+      add <- FALSE
+    }
+
+    if(i == 2) {
+      # Thaumarchaeota 20220414
+      # Amino acid compositions of predicted (Glimmer) and database (NCBI or IMG) proteomes
+      predicted <- read.csv(system.file("extdata/utogig/Thaumarchaeota_predicted_AA.csv", package = "JMDplots"))
+      database <- read.csv(system.file("extdata/utogig/Thaumarchaeota_database_AA.csv", package = "JMDplots"))
+      # If both are available, use predicted instead of database
+      aa <- rbind(predicted, database)
+      aa <- aa[!duplicated(aa$organism), ]
+      groupnames <- c("Basal", "Terrestrial", "Shallow", "Deep")
+      # Get the species in each group
+      groups <- sapply(groupnames, function(group) aa$protein == group, simplify = FALSE)
+      # Compare Basal to Terrestrial 20240802
+      groups <- groups[1:2]
+      col <- 7
+      add <- TRUE
+    }
+
+    if(i == 3) {
+      # Rubisco 20240802
+      # Read amino acid compositions
+      fasta_file <- system.file("extdata/fasta/KHAB17.fasta", package = "canprot")
+      aa <- read_fasta(fasta_file)
+      # Assign protein names
+      aa$protein <- sapply(strsplit(aa$protein, "_"), "[", 2)
+      # Set up groups for affinity ranking:
+      # 3 pre-GOE and 3 post-GOE proteins
+      groups = list(pre = c(TRUE, TRUE, TRUE, FALSE, FALSE, FALSE), post = c(FALSE, FALSE, FALSE, TRUE, TRUE, TRUE))
+      col <- 4
+      add <- TRUE
+    }
+
+    # Make affinity rank plot 20220602
+    # Load proteins and calculate affinity
+    ip <- add.protein(aa, as.residue = TRUE)
+    aout <- affinity(pH = c(4, 10, res), Eh = c(-0.3, 0.1, res), iprotein = ip)
+    # Calculate average ranking for each group and make diagram
+    arank <- rank.affinity(aout, groups)
+    diagram(arank, col = col, lwd = 2, add = add, names = "")
+
+  }
+
+  # Label lines
+  text(6.5, -0.037, "Rubisco\nproteins", adj = 0, cex = 0.8)
+  text(7.4, -0.081, hyphen.in.pdf("Post-GOE"), srt = -31, cex = 0.75)
+  text(7.33, -0.102, hyphen.in.pdf("Pre-GOE"), srt = -31, cex = 0.75)
+
+  text(6.9, -0.155, "Methanogen\ngenomes", adj = 0, cex = 0.8)
+  text(7.35, -0.215, "Class I", srt = -41, cex = 0.75)
+  text(7.5, -0.2, "Class II", srt = -41, cex = 0.75)
+
+  text(5, -0.21, "Nitrososphaeria\ngenomes", adj = 0, cex = 0.8)
+  text(6.03, -0.17, "Basal", srt = -41, cex = 0.75)
+  text(6.2, -0.155, "Terrestrial", srt = -41, cex = 0.75)
+
+  title("Redox boundaries for Rubisco proteins and unrelated genomes", font.main = 1, xpd = NA)
+  label.figure("C", cex = 1.5, font = 2, xfrac = -0.1)
 
   if(pdf) dev.off()
 

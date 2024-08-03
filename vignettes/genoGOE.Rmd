@@ -87,26 +87,26 @@ This vignette was compiled on `r Sys.Date()` with
 library(JMDplots)
 ```
 
-## Protein oxidation is pervasive in genomes of methanogens that diverged after the GOE (Figure 1)
+## Genome-wide differences of oxidation state between two lineages of methanogens (Figure 1)
 ```{r genoGOE1, message = FALSE, results = "hide", out.width='100%', fig.width = 8, fig.height = 6, pngquant = pngquant}
 genoGOE_1()
 ```
 
 **Data sources:** List of Class I and II methanogen species [@LL18], archaeal marker genes used in GTDB [@RCM+21], and protein abundance in *Methanococcus maripaludis* [@XHZ+06].
 
-## Gene age groups in eukaryotic genomes show protein oxidation around the GOE and NOE (Figure 2)
+## Carbon oxidation state of proteins in eukaryotic gene age groups (Figure 2)
 ```{r genoGOE2, message = FALSE, results = "hide", out.width='100%', fig.width = 7, fig.height = 6, pngquant = pngquant}
 genoGOE_2()
 ```
 
 **Data sources:** Consensus gene ages [@LMM16], protein sequences [@Uni23], and divergence times [@KSC+22].
 
-## Oxidation of reconstructed ancestral Rubisco sequences around the GOE corresponds to high-Eh conditions (Figure 3)
-```{r genoGOE3, message = FALSE, results = "hide", out.width='100%', fig.width = 9, fig.height = 4.5, pngquant = pngquant}
+## Evolutionary oxidation of ancestral Rubiscos and thermodynamic prediction of redox boundaries around the GOE (Figure 3)
+```{r genoGOE3, message = FALSE, results = "hide", out.width='100%', fig.width = 9, fig.height = 9, pngquant = pngquant}
 genoGOE_3()
 ```
 
-**Data source:** Reconstructed ancestral sequences of Rubisco [@KHAB17].
+**Data sources:** Reconstructed ancestral sequences of Rubisco [@KHAB17] and lists of methanogen [@LL18] and Nitrososphaeria [@RFH+19] genomes.
 
 ## Composition reaction for ancestral Rubisco I/II/III (Reaction 1)
 
@@ -166,6 +166,5 @@ print("Stoichiometry of composition reaction:")
 print(reaction_residue)
 print(paste("Affinity/2.303RT of composition reaction:", affinity_residue))
 ```
-
 
 ## References
