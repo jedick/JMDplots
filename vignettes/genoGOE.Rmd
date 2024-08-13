@@ -102,7 +102,7 @@ genoGOE_2()
 **Data sources:** Consensus gene ages [@LMM16], protein sequences [@Uni23], and divergence times [@KSC+22].
 
 ## Evolutionary oxidation of ancestral Rubiscos and thermodynamic prediction of redox boundaries around the GOE (Figure 3)
-```{r genoGOE3, message = FALSE, results = "hide", out.width='100%', fig.width = 9, fig.height = 9, pngquant = pngquant}
+```{r genoGOE3, message = FALSE, results = "hide", out.width='100%', fig.width = 9, fig.height = 11, pngquant = pngquant}
 genoGOE_3()
 ```
 
