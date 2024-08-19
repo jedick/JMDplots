@@ -1,4 +1,4 @@
-Genome,Domain,Phylum,Class,Order,Family,Genu,Speies,Methanogen_class,Other_name
+Genome,Domain,Phylum,Class,Order,Family,Genus,Species,Methanogen_class,Other_name
 RS_GCF_000013725.1,Archaea,Halobacteriota,Methanosarcinia,Methanosarcinales,Methanosarcinaceae,Methanococcoides,"Methanococcoides burtonii",II,
 RS_GCF_000196655.1,Archaea,Halobacteriota,Methanosarcinia,Methanosarcinales,Methanosarcinaceae,Methanohalobium,"Methanohalobium evestigatum",II,
 RS_GCF_000025865.1,Archaea,Halobacteriota,Methanosarcinia,Methanosarcinales,Methanosarcinaceae,Methanohalophilus,"Methanohalophilus mahii",II,

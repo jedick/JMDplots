@@ -483,7 +483,7 @@ genoGOE_3 <- function(pdf = FALSE) {
   arrows(0.1, 0.1, 0.1, 0.3, length = 0.2, lwd = 2, col = 2)
   arrows(0.05, 0.4, 0.05, 0.6, length = 0.2, lwd = 2, col = 4)
   text(0.5, 0.35, "1: Proteins in many organisms\nbecame more oxidized\nover the GOE")
-  text(0.05, 0.85, "2: Rubisco records\nmore oxidizing conditions\ncompared to genomes of\nnon-photosynthetic organisns\nat the time of the GOE")
+  text(0.05, 0.85, hyphen.in.pdf("2: Rubisco records\nmore oxidizing conditions\ncompared to genomes of\nnon-photosynthetic organisms\nat the time of the GOE"))
 
   if(pdf) dev.off()
 
