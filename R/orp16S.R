@@ -1517,7 +1517,7 @@ getmetrics_orp16S <- function(study, mincount = 100, quiet = TRUE, ...) {
   RDP <- read_RDP(RDPfile, mincount = mincount, quiet = quiet, ...)
   # Changed refdb from RefSeq_206 to GTDB_220 on 20240709
   map <- map_taxa(RDP, refdb = "GTDB_220", quiet = quiet)
-  get_metrics(RDP, refdb = "GTDB_220", map)
+  get_metrics(RDP, map = map, refdb = "GTDB_220")
 }
 
 ############################

@@ -57,10 +57,7 @@ This vignette runs the code to make the plots from the following paper:
 
 > Dick JM, Kang X. 2023. *chem16S*: community-level chemical metrics for exploring genomic adaptation to environments. *Bioinformatics* **39**(9): btad564. doi: [10.1093/bioinformatics/btad564](https://doi.org/10.1093/bioinformatics/btad564)
 
-Update: The published version of this figure used GTDB version 207 for taxonomic classifications and the reference database.
-As of 2024-07-06, the GTDB reference database in chem16S is at version 220 (GTDB r220), but the taxonomic classfications in the mouse.GTDB dataset were made with GTDB r214.
-Consequently, Figure 1A shows mapping rate between two versions of the GTDB (r214 and r220) of less than 100%.
-The small numerical differences from the published version of the figure do not affect the overall trends in chemical metrics.
+Update (2024-11-21): The figure has been updated to use GTDB release 220 for reference proteomes and taxonomic classification of the mouse dataset.
 
 This vignette was compiled on `r Sys.Date()` with
 **[JMDplots](https://github.com/jedick/JMDplots)** `r packageDescription("JMDplots")$Version` and

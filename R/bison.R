@@ -31,47 +31,51 @@ bison1 <- function() {
 }
 
 # Carbon oxidation state of proteins
-bison2 <- function() {
-  par(mfrow = c(1, 2), las = 1)
+bison2 <- function(plots = 1:2, add.titles = TRUE) {
+  if(length(plots) == 2) par(mfrow = c(1, 2), las = 1)
 
-  # Proteins groups by functional annotations (2011 plot)
-  plot(0, 0, xlim = c(-0.5, 5), ylim = c(-0.35, -0.10), xlab = "Site", xaxt = "n", ylab = axis.label("ZC"))
-  axis(1, at = 1:5)
-  col <- c(4, rep(1, 20))
-  lwd <- c(4, rep(1, 20))
-  lty <- c(1, rep(2, 20))
-  clab <- c("hydrolase", "overall", "protease", "oxidoreductase", "transport", "membrane", "permease")
-  pf.annot <- protein.formula(aa.annot)
-  ZC.annot <- ZC(pf.annot)
-  for(i in 1:length(classes)) {
-    lines(1:5, ZC.annot[(1:5)+5*(i-1)], col = col[i], lwd = lwd[i], lty = lty[i])
-    if(classes[i]=="overall") text(0.95, ZC.annot[1+5*(i-1)], "all proteins", adj = 1, font = 2)
-    else if(classes[i] %in% clab) text(0.95, ZC.annot[1+5*(i-1)], classes[i], adj = 1)
+  if(1 %in% plots) {
+    # Proteins groups by functional annotations (2011 plot)
+    plot(0, 0, xlim = c(-0.5, 5), ylim = c(-0.35, -0.10), xlab = "Site", xaxt = "n", ylab = axis.label("ZC"))
+    axis(1, at = 1:5)
+    col <- c(4, rep(1, 20))
+    lwd <- c(4, rep(1, 20))
+    lty <- c(1, rep(2, 20))
+    clab <- c("hydrolase", "overall", "protease", "oxidoreductase", "transport", "membrane", "permease")
+    pf.annot <- protein.formula(aa.annot)
+    ZC.annot <- ZC(pf.annot)
+    for(i in 1:length(classes)) {
+      lines(1:5, ZC.annot[(1:5)+5*(i-1)], col = col[i], lwd = lwd[i], lty = lty[i])
+      if(classes[i]=="overall") text(0.95, ZC.annot[1+5*(i-1)], "all proteins", adj = 1, font = 2)
+      else if(classes[i] %in% clab) text(0.95, ZC.annot[1+5*(i-1)], classes[i], adj = 1)
+    }
+    if(add.titles) title(main = "Annotations")
   }
-  title(main = "Annotations")
 
-  # Proteins grouped by phyla (2013 plot)
-  # Colorful revision made on 20171217 (moved here from CHNOSZ/demo/bison.R)
-  pf.phyla <- protein.formula(aa.phyla)
-  ZC.phyla <- ZC(pf.phyla)
-  plot(0, 0, xlim = c(1, 5), ylim = c(-0.23, -0.14), xlab = "Site", ylab = NA)
-  mtext(axis.label("ZC"), side = 2, line = 3, las = 0)
-  for(i in 1:length(phyla.abc)) {
-    # skip Euryarchaeota because it occurs at one location, on top of Dein.-Thermus and Firmicutes
-    if(phyla.abc[i]=="Euryarchaeota") next
-    # which of the model proteins correspond to this phylum
-    iphy <- which(aa.phyla$organism==phyla.abc[i])
-    # the locations (of 1, 2, 3, 4, 5) where this phylum is found
-    ilocs <- match(aa.phyla$protein[iphy], sitenames)
-    # the plotting symbol: determined by alphabetical position of the phylum
-    points(ilocs, ZC.phyla[iphy], pch = i-1, cex = 1.2)
-    # lines to connect the phyla
-    lines(ilocs, ZC.phyla[iphy], type = "c", col = phyla.cols[i], lwd = 2)
+  if(2 %in% plots) {
+    # Proteins grouped by phyla (2013 plot)
+    # Colorful revision made on 20171217 (moved here from CHNOSZ/demo/bison.R)
+    pf.phyla <- protein.formula(aa.phyla)
+    ZC.phyla <- ZC(pf.phyla)
+    plot(0, 0, xlim = c(1, 5), ylim = c(-0.23, -0.14), xlab = "Site", ylab = NA)
+    mtext(axis.label("ZC"), side = 2, line = 3, las = 0)
+    for(i in 1:length(phyla.abc)) {
+      # skip Euryarchaeota because it occurs at one location, on top of Dein.-Thermus and Firmicutes
+      if(phyla.abc[i]=="Euryarchaeota") next
+      # which of the model proteins correspond to this phylum
+      iphy <- which(aa.phyla$organism==phyla.abc[i])
+      # the locations (of 1, 2, 3, 4, 5) where this phylum is found
+      ilocs <- match(aa.phyla$protein[iphy], sitenames)
+      # the plotting symbol: determined by alphabetical position of the phylum
+      points(ilocs, ZC.phyla[iphy], pch = i-1, cex = 1.2)
+      # lines to connect the phyla
+      lines(ilocs, ZC.phyla[iphy], type = "c", col = phyla.cols[i], lwd = 2)
+    }
+    text(c(4.75, 2.0, 4.0, 4.0, 4.0, 2.0, 3.0, NA, 2.9, 1.3, 3.0),
+         c(-0.146, -0.224, -0.161, -0.184, -0.145, -0.201, -0.144, NA, -0.176, -0.158, -0.192),
+         phyla.abbrv, cex = 0.9)
+    if(add.titles) title(main = "Major phyla")
   }
-  text(c(4.75, 2.0, 4.0, 4.0, 4.0, 2.0, 3.0, NA, 2.9, 1.3, 3.0),
-       c(-0.146, -0.224, -0.161, -0.184, -0.145, -0.201, -0.144, NA, -0.176, -0.158, -0.192),
-       phyla.abbrv, cex = 0.9)
-  title(main = "Major phyla")
 
 }
 

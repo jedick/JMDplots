@@ -45,8 +45,8 @@ chem16S_1 <- function(pdf = FALSE) {
 
 
 
-  data(mouse.GTDB_214, package = "chem16S")
-  ps_metrics(mouse.GTDB_214, refdb = "GTDB_220") |> head(n = 3)
+  data(mouse.GTDB_220, package = "chem16S")
+  ps_metrics(mouse.GTDB_220, refdb = "GTDB_220") |> head(n = 3)
 
 
 
@@ -54,7 +54,9 @@ chem16S_1 <- function(pdf = FALSE) {
 
 ')
 
-  output_text <- data.frame(label = '>
+  output_text <- data.frame(label = '
+
+>
 >
 >
 [1] "map_taxa: using these manual mapping(s) to NCBI RefSeq:"
@@ -70,13 +72,12 @@ CC1 -0.1447548 -0.6701114 -0.7450737
 SV1 -0.1403848 -0.6623117 -0.7428770
 >
 >
-[1] "map_taxa: can\'t map groups genus_Ventrimonas (1.09%),
-genus_CAG-95 (0.7%), 8 others (1.22%)"
-[1] "map_taxa: mapping rate to GTDB_220 taxonomy is 97.0%"
+[1] "map_taxa: mapping rate to GTDB_220 taxonomy is 100.0%"
                Zc        nO2       nH2O
-F3D0   -0.1553323 -0.7009578 -0.7688654
-F3D141 -0.1526643 -0.6971256 -0.7737557
-F3D142 -0.1524078 -0.6970441 -0.7757458
+F3D0   -0.1552860 -0.7007930 -0.7685925
+F3D141 -0.1526968 -0.6973336 -0.7739600
+F3D142 -0.1523662 -0.6972366 -0.7765823
+
 
 ')
                             
@@ -91,12 +92,12 @@ F3D142 -0.1524078 -0.6970441 -0.7757458
     labs(title = "(A) Chemical metrics")
 
   ## Panel B: Mouse gut dataset
-  mouse.GTDB_214 <- NULL
-  data(mouse.GTDB_214, package = "chem16S", envir = environment())
-  pB1 <- plot_ps_metrics(mouse.GTDB_214, refdb = "GTDB_220", x = "Day", metrics = "Zc") +
+  mouse.GTDB_220 <- NULL
+  data(mouse.GTDB_220, package = "chem16S", envir = environment())
+  pB1 <- plot_ps_metrics(mouse.GTDB_220, refdb = "GTDB_220", x = "Day", metrics = "Zc") +
     facet_wrap(~When, scales = "free_x") + geom_line(colour = red) +
     labs(title = "(B) Mouse gut dataset")
-  pB2 <- plot_ps_metrics(mouse.GTDB_214, refdb = "GTDB_220", x = "Day", metrics = "nH2O", quiet = TRUE) +
+  pB2 <- plot_ps_metrics(mouse.GTDB_220, refdb = "GTDB_220", x = "Day", metrics = "nH2O", quiet = TRUE) +
     facet_wrap(~When, scales = "free_x") + geom_line(colour = blue)
   pB <- pB1 / pB2
 

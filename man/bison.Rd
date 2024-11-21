@@ -16,7 +16,7 @@ Plots from the papers by Dick and Shock (2011 and 2013).
 
 \usage{
   bison1()
-  bison2()
+  bison2(plots = 1:2, add.titles = TRUE)
   bison3()
   bison4()
   bison5()
@@ -26,6 +26,8 @@ Plots from the papers by Dick and Shock (2011 and 2013).
 }
 
 \arguments{
+  \item{plots}{numbers of plots to make}
+  \item{add.titles}{logical, add titles to plots?}
   \item{plot.it}{logical, make a plot?}
   \item{equil.results}{list, value returned by \code{bison6}}
 }

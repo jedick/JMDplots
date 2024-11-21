@@ -183,8 +183,8 @@ genoGOE_1 <- function(pdf = FALSE) {
   mtext(quote("Protein"~italic(Z)[C]), 2, line = 2.8, cex = par("cex"))
 
   # Add group names
-  axis(1, at = 2:4, labels = c("GC < 0.34", "0.34 <= GC <= 0.36", "GC > 0.36"))
-  axis(1, at = 5:7, labels = c("Cost < 23", "23 <= Cost <= 25", "Cost > 25"))
+  axis(1, at = 2:4, labels = c("GC < 0.34", "0.34 < GC < 0.36", "GC > 0.36"))
+  axis(1, at = 5:7, labels = c("Cost < 23", "23 < Cost < 25", "Cost > 25"))
   axis(3, at = c(1, 3, 6), labels = c("All Proteins", "Control for GC content", "Control for metabolic cost"), tick = FALSE, font = 2)
 
   label.figure("D", font = 2, cex = 1.6, xfrac = 0.018)
