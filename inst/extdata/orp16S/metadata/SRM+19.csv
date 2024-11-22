@@ -1,4 +1,4 @@
-name,Run,BioSample,sample,"Land Use",pH,"DO (mg/L)","ORP (mV)"
+Name,Run,BioSample,sample,"Land Use",pH,"DO (mg/L)","ORP (mV)"
 "Rayong Province",SRR6760377,SAMN08574247,G1,Agriculture,5.26,3.59,263.9
 "Rayong Province",SRR6760378,SAMN08574248,G2,Agriculture,7.07,4.01,215
 "Rayong Province",SRR6760375,SAMN08574249,G3,Community,7.85,6.48,196.1

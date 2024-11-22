@@ -1,4 +1,4 @@
-name,Run,BioSample,sample,site,year,Location,Temperature,pH,"EC (μs/cm)","DO (mg/L)","ORP (mV)"
+Name,Run,BioSample,sample,site,year,Location,Temperature,pH,"EC (μs/cm)","DO (mg/L)","ORP (mV)"
 "Maozhou River",SRR13175269,SAMN16964804,2018_A1_1,A1,2018,"Main Stream",25.4,9.9,214,7.39,42.4
 "Maozhou River",SRR13175236,SAMN16964807,2018_A2_1,A2,2018,"Main Stream",29.5,7.04,535,7.18,86.1
 "Maozhou River",SRR13175203,SAMN16964810,2018_A3_1,A3,2018,"Main Stream",32.6,7.24,817,7.92,117.8

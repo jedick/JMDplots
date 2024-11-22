@@ -1,4 +1,4 @@
-name,Run,BioSample,sample,Date,Source,Treatment,"Day past transplant","ORP (mV)",pH
+Name,Run,BioSample,sample,Date,Source,Treatment,"Day past transplant","ORP (mV)",pH
 "Paddy Soil Amendments 1",SRR13375755,SAMN17245293,1AB,2016-06-22,"bulk soil",Control,20,73,7.53
 "Paddy Soil Amendments 1",SRR13375744,SAMN17245294,2AB,2016-06-22,"bulk soil",Char,20,69,7.6
 "Paddy Soil Amendments 1",SRR13375731,SAMN17245295,3AB,2016-06-22,"bulk soil",Silicate,20,46,7.54

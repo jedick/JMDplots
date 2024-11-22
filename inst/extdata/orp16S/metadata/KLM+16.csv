@@ -1,4 +1,4 @@
-name,Run,BioSample,SampleName,Day,pH,"ORP (mV)","DO (mg/L)"
+Name,Run,BioSample,SampleName,Day,pH,"ORP (mV)","DO (mg/L)"
 "Sarnia nZVI Injection",SRR3123713,SAMN04422996,Injection_Well_Nov2010,-1,7.29,22,1.71
 "Sarnia nZVI Injection",SRR3123714,SAMN04422997,Injection_Well_Aug2011,246,9.33,-259,0.09
 "Sarnia nZVI Injection",SRR3123715,SAMN04422998,Injection_Well_Oct2012,671,7.45,-133,0.64

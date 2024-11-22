@@ -1,4 +1,4 @@
-name,Run,LibraryName,BioSample,SampleName,Season,Position,"Depth (cm)","ORP (mV)"
+Name,Run,LibraryName,BioSample,SampleName,Season,Position,"Depth (cm)","ORP (mV)"
 "Daya Bay",SRR5974409,S1SS,SAMN07498198,S1SS,Summer,Surface,2,-224
 "Daya Bay",SRR5974408,S1MS,SAMN07498199,S1MS,Summer,Middle,42,-324
 "Daya Bay",SRR5974413,S1BS,SAMN07498200,S1BS,Summer,Bottom,88,-360

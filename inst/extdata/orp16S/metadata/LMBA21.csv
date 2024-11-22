@@ -1,4 +1,4 @@
-name,Run,BioSample,SampleName,Station,Environment,Date,Season,Year,"Redox (mV)","O2 (%)","Water depth at sampling (low tide)",Salinity
+Name,Run,BioSample,SampleName,Station,Environment,Date,Season,Year,"Redox (mV)","O2 (%)","Water depth at sampling (low tide)",Salinity
 "Bay of Biscay",ERR3711613,SAMEA6356560,EOK05_Wi2019,EOK05,Estuarine,2019-03-04,Winter,2019,169,91,0,8.2
 "Bay of Biscay",ERR3711614,SAMEA6356561,EOK10_Su2017,EOK10,Estuarine,2017-08-24,Summer,2017,-94,94.8,0,32.4
 "Bay of Biscay",ERR3711615,SAMEA6356562,EOK10_Su2018,EOK10,Estuarine,2018-08-21,Summer,2018,-16,98.8,0,23.7

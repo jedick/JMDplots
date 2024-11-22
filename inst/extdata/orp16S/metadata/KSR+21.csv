@@ -1,4 +1,4 @@
-name,Run,BioSample,SampleName,Location,pH,"TpH (°C)","Eh (mV)","O2 (μmol/L)"
+Name,Run,BioSample,SampleName,Location,pH,"TpH (°C)","Eh (mV)","O2 (μmol/L)"
 "Voltri Massif",SRR13283383,SAMN17101426,VE01-02.B,Lerone,11.24,24.2,-56,NA
 "Voltri Massif",SRR13283382,SAMN17101427,VE01-03.C,Lerone,11.21,27.6,-63,NA
 "Voltri Massif",SRR13283381,SAMN17101428,VE02-01.B,Lerone,11.34,21,-36,NA

@@ -1,4 +1,4 @@
-name,Run,BioSample,SampleName,Treatment,"Eh (mV)"
+Name,Run,BioSample,SampleName,Treatment,"Eh (mV)"
 "Anaerobic Soil Disinfestation",SRR10216672,SAMN12876818,Initial,Initial,343
 "Anaerobic Soil Disinfestation",SRR10216653,SAMN12876835,T1_D21_NCC_1,NCC,-78
 "Anaerobic Soil Disinfestation",SRR10216652,SAMN12876836,T1_D21_NCC_2,NCC,-78

@@ -1,4 +1,4 @@
-name,Run,LibraryName,BioSample,"sample ID",Type,Depth,ORP(mV),EC(us/cm),pH,TOC(mg/kg)
+Name,Run,LibraryName,BioSample,"sample ID",Type,Depth,ORP(mV),EC(us/cm),pH,TOC(mg/kg)
 "Maozhou River Hyporheic Zone",SRR11450995,A0_M3,SAMN14484286,A0_M,"Main stream",10-20cm,252.2,20.29,6.44,1.18
 "Maozhou River Hyporheic Zone",SRR11450962,A1_B3,SAMN14484292,A1_B,"Main stream",20-30cm,155,78.2,8.72,0
 "Maozhou River Hyporheic Zone",SRR11450951,A1_M3,SAMN14484293,A1_M,"Main stream",10-20cm,144.2,67.8,8.53,0

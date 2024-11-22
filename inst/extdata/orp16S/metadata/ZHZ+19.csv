@@ -1,4 +1,4 @@
-name,Run,BioSample,sample,environment,hydrocarbon,Treatment,"ORP (mV)"
+Name,Run,BioSample,sample,environment,hydrocarbon,Treatment,"ORP (mV)"
 "Hydrocarbon Biodegradation",SRR8607593,SAMN10986706,AR-Sludge,"Anaerobic Returned Sludge",NA,NA,NA
 "Hydrocarbon Biodegradation",SRR8607580,SAMN10986703,C-Soil,"Contaminated Soil",NA,NA,NA
 "Hydrocarbon Biodegradation",SRR8607581,SAMN10986704,O-Sludge,"Oil Sludge",NA,NA,NA

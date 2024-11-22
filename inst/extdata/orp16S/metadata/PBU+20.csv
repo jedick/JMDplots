@@ -1,4 +1,4 @@
-name,Run,BioSample,sample,description,Type,"Temperature (°C)",pH,"Eh (mV)"
+Name,Run,BioSample,sample,description,Type,"Temperature (°C)",pH,"Eh (mV)"
 "Uzon Caldera",SRR11496425,SAMN14538722,U20Bur,"Burlyashchiy spring",Spring,89,6.91,132
 "Uzon Caldera",SRR11496432,SAMN14538715,U3kot,"unnamed cauldron",Cauldron,86,4.4,120
 "Uzon Caldera",SRR11496426,SAMN14538721,U3_5yasher,"Yashcheritsa spring",Spring,77,4.52,406

@@ -1,4 +1,4 @@
-name,Run,LibraryName,BioSample,"Sample name",Type,Description,replicate,pH,"Redox (mV)"
+Name,Run,LibraryName,BioSample,"Sample name",Type,Description,replicate,pH,"Redox (mV)"
 "Baltic Sea Swedish Coast",SRR3584323,1_P933_1035,SAMN05163191,"Water Oxic field 1",Water,"Oxic field",1,8.12,160.8
 "Baltic Sea Swedish Coast",SRR3584432,24_P933_1058,SAMN05163191,"Water Oxic control 1 day 0",Water,"Oxic control day 0",1,8.35,133.1
 "Baltic Sea Swedish Coast",SRR3584499,85_P1130_2026,SAMN05163191,"Water Oxic control 1 day 12",Water,"Oxic control day 12",1,7.57,142.8

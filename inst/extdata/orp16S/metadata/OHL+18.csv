@@ -1,4 +1,4 @@
-name,Run,BioSample,Sample,SampleName,"Experiment Title",Molecule,Location,Layer,"O2 (μM)","Redox (mV)",pH
+Name,Run,BioSample,Sample,SampleName,"Experiment Title",Molecule,Location,Layer,"O2 (μM)","Redox (mV)",pH
 "Marine and Freshwater Sediments",SRR5826265,SAMN07346302,CK361,CKV,"cDNA-Seq of Kalo Vig sediment, layer 1",cDNA,"Kalø Vig",1,125,150,7.9
 "Marine and Freshwater Sediments",SRR5826264,SAMN07346302,CK362,CKV,"cDNA-Seq of Kalo Vig sediment, layer 2",cDNA,"Kalø Vig",2,0,75,7.5
 "Marine and Freshwater Sediments",SRR5826267,SAMN07346302,CK363,CKV,"cDNA-Seq of Kalo Vig sediment, layer 3",cDNA,"Kalø Vig",3,0,50,7.5

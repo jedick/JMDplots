@@ -1,4 +1,4 @@
-name,Run,BioSample,sample,"depth (mm)",source,Treatment,"Redox (mV)","O2 (μmol/L)"
+Name,Run,BioSample,sample,"depth (mm)",source,Treatment,"Redox (mV)","O2 (μmol/L)"
 "Estuarine Sediment Mesocosms",SRR12038450,SAMN15295796,exneg,None,"intertidal sediment microcosm",NA,NA,NA
 "Estuarine Sediment Mesocosms",SRR12038402,SAMN15295877,expos,None,"Starting sediment",NA,NA,NA
 "Estuarine Sediment Mesocosms",SRR12038451,SAMN15295795,pcrneg,None,"intertidal sediment microcosm",NA,NA,NA

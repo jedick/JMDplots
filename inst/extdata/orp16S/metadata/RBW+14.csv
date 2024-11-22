@@ -1,4 +1,4 @@
-name,Run,BioSample,SampleName,pond,supplement,replicate,layer,description,depth
+Name,Run,BioSample,SampleName,pond,supplement,replicate,layer,description,depth
 "Winogradsky Columns",SRR1123369,SAMN02581153,"W3-1 A",Buxton,"vegetable scraps",1,SWI,"white layer at top",0
 "Winogradsky Columns",SRR1123678,SAMN02581174,"W3-1 C",Buxton,"vegetable scraps",1,"8 cm","black with grey flecks",8
 "Winogradsky Columns",SRR1123538,SAMN02581142,"W3-1 D",Buxton,"vegetable scraps",1,"12 cm","black with grey flecks",12

@@ -1,4 +1,4 @@
-name,Run,BioSample,Alias,Samples,Type,Domain,Season,"Depth (cm)",pH,"Redox (mV)",Depth
+Name,Run,BioSample,Alias,Samples,Type,Domain,Season,"Depth (cm)",pH,"Redox (mV)",Depth
 "Mai Po Wetland",ERR1214108,SAMEA3727282,ZZCAW1,MG1WinA,"Mangrove Forest",Archaea,Winter,0–2,7.07,300,"≤ 5 cm"
 "Mai Po Wetland",ERR1214109,SAMEA3727283,ZZCAW2,MG1WinB,"Mangrove Forest",Archaea,Winter,10–15,6.38,296,"≥ 10 cm"
 "Mai Po Wetland",ERR1214110,SAMEA3727284,ZZCAW3,MG1WinC,"Mangrove Forest",Archaea,Winter,20–25,7.21,251,"≥ 20 cm"

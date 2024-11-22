@@ -1,4 +1,4 @@
-name,Run,BioSample,sample,LibraryName,Type,"Eh (mV)",pH
+Name,Run,BioSample,sample,LibraryName,Type,"Eh (mV)",pH
 "Dabu Town, Hunan Province",SRR5435165,SAMN06704748,Upland_soil_1,UP1,Upland,415.4,4.6
 "Dabu Town, Hunan Province",SRR5435164,SAMN06704749,Upland_soil_2,UP2,Upland,376.1,4.79
 "Dabu Town, Hunan Province",SRR5435163,SAMN06704750,Upland_soil_3,UP3,Upland,373.2,4.6

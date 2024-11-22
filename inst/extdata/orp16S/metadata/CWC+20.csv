@@ -1,4 +1,4 @@
-name,Run,BioSample,sample,Layer,Management,Treatment,Lindane,Day,"Eh (mV)",pH
+Name,Run,BioSample,sample,Layer,Management,Treatment,Lindane,Day,"Eh (mV)",pH
 "Paddy Soil Water Management",SRR10091965,SAMN12721166,PP-C-1-0,Topsoil,,NA,NA,0,415,4.43
 "Paddy Soil Water Management",SRR10091954,SAMN12721167,PP-C-2-0,Topsoil,,NA,NA,0,415,4.43
 "Paddy Soil Water Management",SRR10091943,SAMN12721168,PP-C-3-0,Topsoil,,NA,NA,0,415,4.43

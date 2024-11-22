@@ -1,4 +1,4 @@
-name,Run,BioSample,sample,Location,Type,"Sampling date","T (°C)","Cond (μS/cm)",pH,"ORP (mV)","DO (mg/L)"
+Name,Run,BioSample,sample,Location,Type,"Sampling date","T (°C)","Cond (μS/cm)",pH,"ORP (mV)","DO (mg/L)"
 "Xiamen Reservoirs and Ponds",SRR6037836,SAMN07638069,JM221703,Tingxi,Reservoir,2017-03-14,17.99,14.7,8.01,352,9.72
 "Xiamen Reservoirs and Ponds",SRR6037837,SAMN07638070,JM231703,Tingxi,Reservoir,2017-03-23,17.69,14.1,7.5,383,9.86
 "Xiamen Reservoirs and Ponds",SRR6037838,SAMN07638071,JM241703,Tingxi,Reservoir,2017-04-01,19.27,16,7.74,453,10.24

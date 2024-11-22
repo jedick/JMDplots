@@ -1,4 +1,4 @@
-name,Run,BioSample,Sample,"Temperature (°C)",pH,Type,Feature,"ORP (mV)","DO (mg/L)"
+Name,Run,BioSample,Sample,"Temperature (°C)",pH,Type,Feature,"ORP (mV)","DO (mg/L)"
 "New Zealand Hot Springs",ERR2240139,SAMEA104459832,P1.0013,33.4,2.14,Acidic,Stream,440.5,2.5
 "New Zealand Hot Springs",ERR2240140,SAMEA104459833,P1.0014,85.2,2.13,Acidic,Spring,27.2,4.9
 "New Zealand Hot Springs",ERR2240191,SAMEA104459884,P1.0067,26.1,2.33,Acidic,Stream,425,2.73

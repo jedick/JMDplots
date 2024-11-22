@@ -1,4 +1,4 @@
-name,Run,LibraryName,BioSample,SampleName,Marsh,Treatment,pH,"Redox (mV)"
+Name,Run,LibraryName,BioSample,SampleName,Marsh,Treatment,pH,"Redox (mV)"
 "Urban Wetland Soils",SRR6206143,II_MESO_A_1,SAMN07827970,II.Acetate.site.1,"Iona Island",Acetate,7.09,-220
 "Urban Wetland Soils",SRR6206144,II_MESO_A_2,SAMN07827971,II.Acetate.site.4,"Iona Island",Acetate,7.09,-220
 "Urban Wetland Soils",SRR6206141,II_MESO_A_3,SAMN07827972,II.Acetate.site.6,"Iona Island",Acetate,7.09,-220

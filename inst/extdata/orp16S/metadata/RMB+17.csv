@@ -1,4 +1,4 @@
-name,Run,BioSample,sample,"pH Group",year,"depth (m)",pH,"redox (mV)","hydrogen (mM)","methane (mM)","DO (mM)"
+Name,Run,BioSample,sample,"pH Group",year,"depth (m)",pH,"redox (mV)","hydrogen (mM)","methane (mM)","DO (mM)"
 "Samail Ophiolite",SRR5000256,SAMN05981622,NSHQ10.2016,"< 10",2016,50,8.75,NA,0,0,NA
 "Samail Ophiolite",SRR5000240,SAMN05981623,NSHQ14.2014,"> 10",2014,18,11.38,-31.6,0.67,0.17,NA
 "Samail Ophiolite",SRR5000245,SAMN05981624,NSHQ14.2015,"> 10",2015,20,11.26,-307,2.88,0.12,0.01

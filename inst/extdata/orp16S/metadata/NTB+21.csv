@@ -1,4 +1,4 @@
-name,Run,BioSample,sample,description,Well,year,depth,T,pH,Eh
+Name,Run,BioSample,sample,description,Well,year,depth,T,pH,Eh
 "Samail Ophiolite Packers",SRR15018372,SAMN19998420,A108,BA1A_2019_108-132,BA1A,2019,108-132,36.5,10.67,-249
 "Samail Ophiolite Packers",SRR15018369,SAMN19998421,A30,BA1A_2019_0-30,BA1A,2019,0-30,34.9,8.1,128
 "Samail Ophiolite Packers",SRR15018368,SAMN19998422,A41,BA1A_2019_41-65,BA1A,2019,41-65,35,8.2,120

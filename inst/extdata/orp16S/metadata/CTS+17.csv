@@ -1,4 +1,4 @@
-name,Run,BioSample,sample,LibraryName,Domain,Type,T,pH,ORP
+Name,Run,BioSample,sample,LibraryName,Domain,Type,T,pH,ORP
 "Santa Elena Ophiolite",SRR5176891,SAMN06226024,Serp_SE_MurcielagoUp1_Feb2014,Serp_SE_MurcielagoUp1_Feb2014_Bv4v5,Bacteria,River,24,8.9,35
 "Santa Elena Ophiolite",SRR5176924,SAMN06226024,Serp_SE_MurcielagoUp1_Feb2014,Serp_SE_MurcielagoUp1_Feb2014_Av4v5,Archaea,River,24,8.9,35
 "Santa Elena Ophiolite",SRR5176923,SAMN06226025,Serp_SE_MurcielagoUp2_Feb2014,Serp_SE_MurcielagoUp2_Feb2014_Av4v5,Archaea,River,24,8.9,35

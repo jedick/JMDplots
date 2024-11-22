@@ -1,4 +1,4 @@
-name,Run,BioSample,SampleName,Site,Type,Position,Latitude,Longitude,Depth,"Temperature (°C)",pH,"DO (mg/L)","ORP (mV)"
+Name,Run,BioSample,SampleName,Site,Type,Position,Latitude,Longitude,Depth,"Temperature (°C)",pH,"DO (mg/L)","ORP (mV)"
 "Three Gorges Reservoir",SRR14692645,SAMN19460476,s_mFXZ,fuxingzhen,Sediment,Main stream,30.29638333,108.1198333,29,NA,NA,NA,NA
 "Three Gorges Reservoir",SRR14692653,SAMN19460469,s_mGLZ,gulingzhen,Sediment,Main stream,30.94366667,109.0819167,58,NA,NA,NA,NA
 "Three Gorges Reservoir",SRR14692638,SAMN19460482,s_mGPC,gaopingcun,Sediment,Main stream,29.72143333,107.1373167,22,NA,NA,NA,NA

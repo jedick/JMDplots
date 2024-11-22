@@ -1,4 +1,4 @@
-name,Run,BioSample,SampleName,site,Season,replicate,"Temp (°C)",pH,"DO (mg/L)","ORP (mV)"
+Name,Run,BioSample,SampleName,site,Season,replicate,"Temp (°C)",pH,"DO (mg/L)","ORP (mV)"
 "Pearl River Estuary",SRR3476633,SAMN04932606,HEM1,HEM,Summer,1,31.2,8.16,6.02,43.72
 "Pearl River Estuary",SRR3476634,SAMN04932607,HEM2,HEM,Summer,2,31.2,8.16,6.02,43.72
 "Pearl River Estuary",SRR3476635,SAMN04932608,HEM3,HEM,Summer,3,31.2,8.16,6.02,43.72

@@ -1,4 +1,4 @@
-name,Run,BioSample,SampleName,Season,Site,"T (°C)",pH,"Cond (us/cm)","ORP (mV)","DO (mg/L)"
+Name,Run,BioSample,SampleName,Season,Site,"T (°C)",pH,"Cond (us/cm)","ORP (mV)","DO (mg/L)"
 "Bahe River",SRR10417964,SAMN13242172,Spring_URL_T1,Spring,URL,19.27,7.34,102.03,109.17,7.88
 "Bahe River",SRR10417885,SAMN13242175,Spring_URM_T1,Spring,URM,18.3,7.24,98.8,105.17,8.1
 "Bahe River",SRR10417852,SAMN13242178,Spring_URR_T1,Spring,URR,18.27,7.24,103.4,90.03,7.82

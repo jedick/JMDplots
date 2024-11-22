@@ -1,4 +1,4 @@
-name,Run,BioSample,Sample,Depth,Year,"ORP (mV)","T (°C)","DO (mg L-1)"
+Name,Run,BioSample,Sample,Depth,Year,"ORP (mV)","T (°C)","DO (mg L-1)"
 "Lake Kinneret, Israel",ERR4575187,SAMEA7280990,1.5m-2017,1.5,2017,260,31.2,8.7
 "Lake Kinneret, Israel",ERR4578913,SAMEA7280991,5m-2017,5,2017,262,30.8,8.7
 "Lake Kinneret, Israel",ERR4575188,SAMEA7280981,13m-2017,13,2017,276,27,1.9

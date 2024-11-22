@@ -1,4 +1,4 @@
-name,Run,BioSample,sample,LibraryName,Type,depth,pH,"Eh (mV)"
+Name,Run,BioSample,sample,LibraryName,Type,depth,pH,"Eh (mV)"
 "Lake Neusiedl",SRR8266694,SAMN10498638,RN17_K1_1,RN17_K1_DNA_Bac_1c,"Sediment-Water Interface",0,7.29,-241
 "Lake Neusiedl",SRR8266691,SAMN10498638,RN17_K1_1,RN17_K1_DNA_Bac_1b,"Sediment-Water Interface",0,7.29,-241
 "Lake Neusiedl",SRR8266692,SAMN10498638,RN17_K1_1,RN17_K1_DNA_Bac_1a,"Sediment-Water Interface",0,7.29,-241

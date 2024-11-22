@@ -1,4 +1,4 @@
-name,Run,BioSample,SampleName,Domain,Type,Location,pH,"T (°C)","ORP (mV)","DO (mg/L)","Cond (μs/cm-1)"
+Name,Run,BioSample,SampleName,Domain,Type,Location,pH,"T (°C)","ORP (mV)","DO (mg/L)","Cond (μs/cm-1)"
 "Jinchuan River",SRR6823395,SAMN08683324,AB1,Bacteria,Water,"Baota Bridge",7.8,20.3,31,1.7,496
 "Jinchuan River",SRR6823394,SAMN08683325,AB2,Bacteria,Water,"Baota Bridge",7.9,19.5,28,0.4,463
 "Jinchuan River",SRR6823393,SAMN08683326,AB3,Bacteria,Water,"Baota Bridge",7.6,20.3,28,0.2,478

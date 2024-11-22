@@ -1,4 +1,4 @@
-name,Run,BioSample,sample,LibraryName,name,Location,pH,"T (°C)","Eh (mV)",longitude,latitude
+Name,Run,BioSample,sample,LibraryName,name,Location,pH,"T (°C)","Eh (mV)",longitude,latitude
 "Southern Tibetan Plateau",SRR12042860,SAMN15208251,ZBR5293101,Q9,QSYB09-3,Quseyongba,8.9,70,-278.8,81.5806,30.5848
 "Southern Tibetan Plateau",SRR12042856,SAMN15208258,zbr5294101,Q10,QSYB09-4,Quseyongba,8.96,66,-274.1,81.5806,30.5848
 "Southern Tibetan Plateau",SRR12042857,SAMN15208210,MJL5101,Q47,MLJ-05,Moluojiang,8.48,87,-94.8,80.4914,31.369

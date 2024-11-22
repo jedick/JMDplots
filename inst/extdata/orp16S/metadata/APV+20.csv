@@ -1,4 +1,4 @@
-name,Run,LibraryName,BioSample,ScientificName,SampleName,Type,Month,"DO (mg/L)",pH,"Temp (°C)","EC (µS/cm)","ORP (mV)"
+Name,Run,LibraryName,BioSample,ScientificName,SampleName,Type,Month,"DO (mg/L)",pH,"Temp (°C)","EC (µS/cm)","ORP (mV)"
 "Mezquital Valley",SRR7775194,Canal.Feb,SAMN09941378,"wastewater metagenome",Canal.Feb,Canal,February,0,8.93,20.54,1369,-379.4
 "Mezquital Valley",SRR7775192,Canal.May,SAMN09941380,"wastewater metagenome",Canal.May,Canal,May,0,6.73,22.92,1309,-44.2
 "Mezquital Valley",SRR7775193,Canal.Aug,SAMN09941377,"wastewater metagenome",Canal.Aug,Canal,August,0,6.92,21.36,1221,-45.5

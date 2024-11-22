@@ -1,4 +1,4 @@
-name,Run,LibraryName,BioSample,SampleName,Compartment,Spartina,Depth,Location,Year,Eh,pH,Salinity
+Name,Run,LibraryName,BioSample,SampleName,Compartment,Spartina,Depth,Location,Year,Eh,pH,Salinity
 "Georgia Salt Marshes",SRR12995242,Spartina002,SAMN16678213,Sapelo18_Bulk_sediment_T1_P1_0-5,"Bulk sediment",Tall,0-5,Sapelo,2018,78.7,7.5,30.02
 "Georgia Salt Marshes",SRR12995243,Spartina001,SAMN16678212,Sapelo18_Bulk_sediment_T1_P1_5-10,"Bulk sediment",Tall,10-05,Sapelo,2018,-143.3,6.8,23.24
 "Georgia Salt Marshes",SRR12995272,Spartina004,SAMN16678215,Sapelo18_Bulk_sediment_T1_P2_0-5,"Bulk sediment",Medium,0-5,Sapelo,2018,-287,6.2,35.7

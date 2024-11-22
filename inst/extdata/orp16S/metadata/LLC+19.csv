@@ -1,4 +1,4 @@
-name,Run,BioSample,SampleName,Number,Date,"Day of year",Size,Depth,"ORP (mV)","DO (mg/L)"
+Name,Run,BioSample,SampleName,Number,Date,"Day of year",Size,Depth,"ORP (mV)","DO (mg/L)"
 "Xidong Reservoir, Xiamen",SRR3233719,SAMN04549068,XD1BF,3,2014-10-24,297,Free-living,Bottom,29,0
 "Xidong Reservoir, Xiamen",SRR3233744,SAMN04549086,XD1BP,21,2014-10-24,297,Particle-associated,Bottom,29,0
 "Xidong Reservoir, Xiamen",SRR3233666,SAMN04549067,XD1MF,2,2014-10-24,297,Free-living,Middle,277,6

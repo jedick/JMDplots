@@ -1,4 +1,4 @@
-name,Run,BioSample,SampleName,LibraryName,Location,"T (°C)",pH,"Eh (mV)","O2 (mg L-1)"
+Name,Run,BioSample,SampleName,LibraryName,Location,"T (°C)",pH,"Eh (mV)","O2 (mg L-1)"
 "Po Plain",SRR12785273,SAMN16386284,1BS,13BS-1,BS,18,7.43,-111,5.22
 "Po Plain",SRR12785266,SAMN16386275,1CR1,4CR1-1,CR1,15.3,7.61,-117,3.75
 "Po Plain",SRR12785263,SAMN16386278,1CR2,7CR2-1,CR2,14.7,7.62,-94,0.44

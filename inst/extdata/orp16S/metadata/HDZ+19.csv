@@ -1,4 +1,4 @@
-name,Run,BioSample,sample,Type,"T (°C)","DO (mg/L)",pH,"ORP (mV)"
+Name,Run,BioSample,sample,Type,"T (°C)","DO (mg/L)",pH,"ORP (mV)"
 "Honghu Lake",SRR4995753,SAMN05990286,L10S,Sediment,25,NA,7.21,-225
 "Honghu Lake",SRR4995754,SAMN05990274,L10W,Water,13.52,4.83,8.69,35.6
 "Honghu Lake",SRR4995622,SAMN05990279,L1S,Sediment,25,NA,7.03,-383

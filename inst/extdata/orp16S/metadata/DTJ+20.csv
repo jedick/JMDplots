@@ -1,4 +1,4 @@
-name,Run,BioSample,SampleName,Zone,"Redox (mV)",pH
+Name,Run,BioSample,SampleName,Zone,"Redox (mV)",pH
 "Rice Rhizosphere",SRR11278899,SAMN14332730,SS-BS-1,"Bulk Soil",-169.92,7.28
 "Rice Rhizosphere",SRR11278898,SAMN14332731,SS-BS-2,"Bulk Soil",-169.92,7.28
 "Rice Rhizosphere",SRR11278897,SAMN14332732,SS-BS-3,"Bulk Soil",-169.92,7.28

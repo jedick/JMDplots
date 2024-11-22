@@ -1,4 +1,4 @@
-name,Run,BioSample,SampleName,DATE,Cover,"Cond (µS/cm)","Temp (°C)",pH,"ORP (mV)","DO (mg/L)"
+Name,Run,BioSample,SampleName,DATE,Cover,"Cond (µS/cm)","Temp (°C)",pH,"ORP (mV)","DO (mg/L)"
 "Keweenaw Waterway, Michigan",SRR7787953,SAMN09979989,Nov2rep2,Nov2,"Ice Free",74.3,8.9,8.02,177.4,11.4
 "Keweenaw Waterway, Michigan",SRR7788208,SAMN09979992,Nov3rep2,Nov3,"Ice Free",73.3,8.8,8,246.1,11.39
 "Keweenaw Waterway, Michigan",SRR7788204,SAMN09979996,Nov4rep3,Nov4,"Ice Free",75.7,9.3,8.05,222.6,11.52

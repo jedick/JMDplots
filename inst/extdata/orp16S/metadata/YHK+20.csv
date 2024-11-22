@@ -1,4 +1,4 @@
-name,Run,BioSample,sample,ID,Location,campaign,"Depth (m)","T (°C)","EC (μS/cm)",pH,"ORP (mV)","DO (mg/L)"
+Name,Run,BioSample,sample,ID,Location,campaign,"Depth (m)","T (°C)","EC (μS/cm)",pH,"ORP (mV)","DO (mg/L)"
 "Hainich Critical Zone",ERR3374440,SAMEA5714387,H13_PNK087,H13,"Upper Hillslope",PNK087,5.1,8.13,458.7,7.4,410.8,10.3
 "Hainich Critical Zone",ERR3374441,SAMEA5714388,H14_PNK066,H14,"Upper Hillslope",PNK066,7.5,7.86,480.8,7,420.8,0.3
 "Hainich Critical Zone",ERR3374442,SAMEA5714389,H14_PNK072,H14,"Upper Hillslope",PNK072,7.5,7.86,480.8,7,420.8,0.3

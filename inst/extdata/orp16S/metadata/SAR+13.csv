@@ -1,4 +1,4 @@
-name,Run,BioSample,sample,Domain,Zone,pH,"Redox (mV)"
+Name,Run,BioSample,sample,Domain,Zone,pH,"Redox (mV)"
 "Microbial Mat, Kiritimati Atoll",SRR554403,SAMN01162119,"Layer 1",Bacteria,Photic-oxic,7.71,-44
 "Microbial Mat, Kiritimati Atoll",SRR554433,SAMN01162119,"Layer 1",Archaea,Photic-oxic,7.71,-44
 "Microbial Mat, Kiritimati Atoll",SRR554434,SAMN01162119,"Layer 1",Archaea,Photic-oxic,7.71,-44
