@@ -93,6 +93,7 @@ F3D142 -0.1523662 -0.6972366 -0.7765823
 
   ## Panel B: Mouse gut dataset
   mouse.GTDB_220 <- NULL
+  print("Console output for Panel B:")
   data(mouse.GTDB_220, package = "chem16S", envir = environment())
   pB1 <- plot_ps_metrics(mouse.GTDB_220, refdb = "GTDB_220", x = "Day", metrics = "Zc") +
     facet_wrap(~When, scales = "free_x") + geom_line(colour = red) +
@@ -102,6 +103,7 @@ F3D142 -0.1523662 -0.6972366 -0.7765823
   pB <- pB1 / pB2
 
   ## Panel C: GlobalPatterns dataset
+  print("Console output for Panel C:")
   data(GlobalPatterns, package = "phyloseq", envir = environment())
   Human = phyloseq::get_variable(GlobalPatterns, "SampleType") %in% c("Feces", "Mock", "Skin", "Tongue")
   phyloseq::sample_data(GlobalPatterns)$Human <- factor(Human)
