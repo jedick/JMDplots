@@ -46,7 +46,7 @@
 ## STUDY SETTINGS
 
 # Change the following line to setup the pipeline for one study
-study <- "WZL+23"
+study <- "HMA+22"
 # Settings for all studies are stored here
 file <- tempfile()
 # Write spaces here (but don't save them) to make this easier to read
@@ -106,7 +106,10 @@ writeLines(con = file, text = gsub(" ", "", c(
   "MLL+16, FALSE, 250",
   "PYL+23, FALSE, 440",
   "REP+23, FALSE, 310",
-  "WZL+23, FALSE, 410"
+  "WZL+23, FALSE, 410",
+  # COVID gut and nasopharyngeal 20240220
+  "GCP+23, FALSE, 440",
+  "HMA+22, FALSE, 250"
 )))
 
 # This reads and applies the settings

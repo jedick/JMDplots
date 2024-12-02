@@ -642,7 +642,7 @@ microhum_4 <- function(pdf = FALSE) {
   dx <- rep(0, sum(itype))
   dy <- rep(0.0018, sum(itype))
   dx[12] <- -0.0015
-  dy[12] <- 0.001
+  dy[12] <- 0.0012
   dx[14] <- 0.0002
   dx[8] <- 0.0012
   dy[8] <- -0.0005
@@ -806,10 +806,10 @@ microhum_6 <- function(pdf = FALSE) {
     # Add panel title
     atitle <- bquote(bold("A. Genus abundance vs"~bolditalic(n)*O[2]~.(
       hyphen.in.pdf("for body sites (data from Boix-Amor\u00f3s et al., 2021)"))))
-    if(site == "Nasal") label.figure(atitle, font = 2, xfrac = 1.17, yfrac = 0.965, cex = 1.5)
+    if(site == "Nasal") label.figure(atitle, font = 2, xfrac = 1.18, yfrac = 0.965, cex = 1.5)
     btitle <- bquote(bold("B. Genus abundance vs"~bolditalic(n)*O[2]~.(
       hyphen.in.pdf("for COVID-19 (data from Schult et al., 2022) and IBD (data from Lloyd-Price et al., 2019)"))))
-    if(site == "COVID_control") label.figure(btitle, font = 2, xfrac = 1.7, yfrac = 0.965, cex = 1.5)
+    if(site == "COVID_control") label.figure(btitle, font = 2, xfrac = 1.71, yfrac = 0.965, cex = 1.5)
   }
 
   # Panel C: Percent of aerotolerant genera in COVID-19 or IBD vs controls 20230726
@@ -1194,12 +1194,12 @@ dataset_metrics <- function() {
   # List COVID-19 and IBD datasets
   microhum_studies <- list(
     # COVID-19 nasopharyngeal
-    naso = c("PMM+22", "SGC+21", "HMH+21", "VCV+21", "SRS+22", "CSC+22", "GKJ+22", "MLW+21_Nasopharyngeal"),
+    naso = c("PMM+22", "SGC+21", "HMH+21", "VCV+21", "SRS+22", "CSC+22", "GKJ+22", "MLW+21_Nasopharyngeal", "HMA+22"),
     # COVID-19 oral/oropharyngeal
     oro = c("RFH+22_Oral", "IZC+21", "GBS+22", "WCJ+21_Oral", "XLZ+21", "MAC+21", "MLW+21_Oropharyngeal", "GWL+21", "RWC+21_Oral"),
     # COVID-19 gut
     gut = c("ZZZ+21", "RFH+22_Gut", "KMG+21", "WCJ+21_Gut", "CGC+22", "GCW+20", "NGH+21",
-            "RDM+22", "MIK+22", "WZL+23", "AHM+21", "FBD+22", "RWC+21_Gut", "SRK+22"),
+            "RDM+22", "MIK+22", "WZL+23", "AHM+21", "FBD+22", "RWC+21_Gut", "SRK+22", "GCP+23"),
     # IBD gut
     IBD = c("ZTG+21", "ASM+23", "DKK+23", "AAM+20", "PYL+23", "MLL+16", "LZD+19",
             "BKK+17", "MDV+22", "LAA+19", "REP+23", "HBL+17", "GKD+14", "WGL+19", "RAF+20")

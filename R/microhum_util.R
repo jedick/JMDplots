@@ -308,6 +308,16 @@ getmdat_microhum <- function(study, metrics = NULL, dropNA = TRUE, quiet = TRUE)
     pch <- ifelse(metadata$Group == "control", 24, 25)
     col <- ifelse(metadata$Group == "control", 4, 2)
   }
+  # 20241202 COVID-19 Gut
+  if(study == "GCP+23") {
+    pch <- sapply(metadata$Group, switch, nonCOVID = 24, COVID = 25)
+    col <- sapply(metadata$Group, switch, nonCOVID = 4, COVID = 2)
+  }
+  # 20241202 COVID-19 Nasopharyngeal
+  if(study == "HMA+22") {
+    pch <- sapply(metadata$corona, switch, Negative = 24, Positive = 25, NA)
+    col <- sapply(metadata$corona, switch, Negative = 4, Positive = 2, NA)
+  }
 
 
   if(is.null(pch)) stop(paste(study, "metadata file exists, but not set up for processing"))
