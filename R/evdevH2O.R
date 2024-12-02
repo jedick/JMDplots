@@ -10,10 +10,10 @@
 
 # Create bold axis labels
 Zclab <- expression(bolditalic(Z)[bold(C)])
-nH2Olab <- expression(bolditalic(n)[bold(H[2]*O)])
-DnH2Olab <- expression(bold(Delta)*bolditalic(n)[bold(H[2]*O)])
-logaH2Olab <- expression(bold(log)*bolditalic(a)[bold(H[2]*O)])
-logfO2lab <- expression(bold(log)*bolditalic(f)[bold(O[2])])
+nH2Olab <- expression(bolditalic(n)*bold(H[2]*O))
+DnH2Olab <- expression(bold(Delta)*bolditalic(n)*bold(H[2]*O))
+logaH2Olab <- expression(bold(log)~bolditalic(a)*bold(H[2]*O))
+logfO2lab <- expression(bold(log)~bolditalic(f)*bold(O[2]))
 Ehlab <- expression(bold("Eh (mV)"))
 
 # Comparison of different sets of basis species 20220216

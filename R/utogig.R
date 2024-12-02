@@ -12,11 +12,11 @@ Tlab <- quote(bolditalic(T)~bold("("*degree*C*")"))
 Alab <- quote(bold("Affinity"~(kJ~"(mol C)"^{-1})))
 Aresiduelab <- quote(bold("Affinity"~(kJ~"(mol residue)"^{-1})))
 Toptlab <- quote(bolditalic(T)[bold(opt)]~bold("("*degree*C*")"))
-logaH2maxlab <- quote(bold(log)~bolditalic(a)[bold(H[2])]~bold("for maximum activity"))
+logaH2maxlab <- quote(bold(log)~bolditalic(a)*bold(H[2])[bold("for maximum activity")])
 logalab <- quote(bold(log)~bolditalic(a))
-logaH2lab <- quote(bold(log)~bolditalic(a)[bold(H[2])])
-logaNH4lab <- quote(bold(log)~bolditalic(a)[bold(NH[4]^"+")])
-nH2Olab <- quote(bolditalic(n)[bold(H[2]*O)])
+logaH2lab <- quote(bold(log)~bolditalic(a)*bold(H[2]))
+logaNH4lab <- quote(bold(log)~bolditalic(a)*bold(NH[4]^"+"))
+nH2Olab <- quote(bolditalic(n)*bold(H[2]*O))
 
 # Identify species used in Shock & Canovas (2010)
 # Used in Energy() and calc_logaH2_intermediate()
@@ -258,7 +258,7 @@ utogig2 <- function(pdf = FALSE, logact = -3) {
     pvals <- c(pvals, cor.test(AC_all, Zc_all)$p.value)
 
     # Add title: logaH2
-    Htxt <- bquote(bold(log*bolditalic(a)[H[2]] == .(logaH2)))
+    Htxt <- bquote(bold(log~bolditalic(a)*H[2] == .(logaH2)))
     title(Htxt, line = -1, cex.main = 1)
     if(ilogaH2 == 3) {
       # Add oxidation-intermediate-reduction arrow 20220221
@@ -381,7 +381,7 @@ utogig3 <- function(pdf = FALSE) {
     legend("bottomleft", legend = legend, bty = "n", inset = inset)
     if(i == 1) legend("bottomleft", c("Pairwise affinity", "differences:", ""), inset = c(-0.1, 0), bty = "n")
     # Add legend: logaH2
-    Htxt <- bquote(bold(log*bolditalic(a)[H[2]] == .(logaH2s[i])))
+    Htxt <- bquote(bold(log~bolditalic(a)*H[2] == .(logaH2s[i])))
     if(i > 1) legend.x <- "topleft" else legend.x <- "top"
     legend(legend.x, legend = Htxt, bty = "n")
     if(i==1) label.figure("(a)", cex = 1.5, font = 2, yfrac = 0.96, xfrac = 0.06)
@@ -463,7 +463,7 @@ utogig3 <- function(pdf = FALSE) {
   polygon(c(Tvals, rev(Tvals)), c(logaH2.min, rep(par("usr")[3], length(Tvals))), col = "gray80", lty = 0)
   lines(Tvals, logaH2.min, lty = 3)
   box()
-  text(83, -6.4, quote(italic(a)[CH[4]] / italic(a)[CO[2]] == 10^0), srt = srt)
+  text(83, -6.4, quote(italic(a)*CH[4] / italic(a)*CO[2] == 10^0), srt = srt)
   # Add lines for aCO2/aCH4 = 10^2 and 10^4 20220303
   lines(Tvals[33:100], logaH2.min[33:100] + 2, lty = 3)
   text(94, -4.1, quote(10^2), srt = srt)

@@ -67,13 +67,13 @@ microhum_1 <- function(pdf = FALSE) {
     if(metric == "nO2") {
       xlim <- c(-0.8, -0.55)
       ylim <- c(-0.8, -0.6)
-      main <- quote("Stoichiometric oxidation state (" * italic(n)[O[2]] * ")")
+      main <- quote("Stoichiometric oxidation state (" * italic(n)*O[2] * ")")
     }
 
     if(metric == "nH2O") {
       xlim <- c(-1.05, -0.72)
       ylim <- c(-0.8, -0.72)
-      main <- quote("Stoichiometric hydration state (" * italic(n)[H[2]*O] * ")")
+      main <- quote("Stoichiometric hydration state (" * italic(n)*H[2]*O * ")")
     }
 
     # Compute min/max limits for 1:1 line
@@ -481,7 +481,7 @@ microhum_4 <- function(pdf = FALSE) {
   par(cex = 1.2)
   par(mgp = c(2.5, 1, 0))
   startplot <- function(xlim = c(-0.01, 0.01), ylim = c(-0.015, 0.020)) {
-    plot(xlim, ylim, type  = "n", pch = ".", xlab = quote(Delta*italic(n)[O[2]]), ylab = quote(Delta*italic(n)[H[2]*O]))
+    plot(xlim, ylim, type  = "n", pch = ".", xlab = quote(Delta*italic(n)*O[2]), ylab = quote(Delta*italic(n)*H[2]*O))
     abline(h = 0, v = 0, lty = 2, col = 8)
   }
   # Colors and point symbols for sample types
@@ -556,8 +556,8 @@ microhum_4 <- function(pdf = FALSE) {
     # Show median difference
     x_diff <- median(x_list[[2]]) - median(x_list[[1]])
     diffval <- signif(x_diff, 2)
-    if(metric == "nO2") difftxt <- bquote(Delta*italic(n)[O[2]] == .(diffval))
-    if(metric == "nH2O") difftxt <- bquote(Delta*italic(n)[H[2]*O] == .(diffval))
+    if(metric == "nO2") difftxt <- bquote(Delta*italic(n)*O[2] == .(diffval))
+    if(metric == "nH2O") difftxt <- bquote(Delta*italic(n)*H[2]*O == .(diffval))
     if(squeeze) cex.main <- 0.9 else cex.main <- 1
     if(squeeze) adj <- 0.6 else adj <- 0.5
     title(difftxt, line = 0.7, cex.main = cex.main, adj = adj, xpd = NA)
@@ -777,7 +777,7 @@ microhum_5 <- function(pdf = FALSE) {
   par(mar = c(1, 5, 1, 4))
   # Calculate x-axis limits to account for width of boxes and legend in heatmap
   xlim <- c(1 - 0.5, ncol(D_abundance) + 2)
-  plot(xlim, range(nO2), xaxs = "i", xaxt = "n", xlab = "", yaxs = "i", ylab = quote(italic(n)[O[2]]~"of genus RP"), type = "n", bty = "n")
+  plot(xlim, range(nO2), xaxs = "i", xaxt = "n", xlab = "", yaxs = "i", ylab = quote(italic(n)*O[2]~"of genus RP"), type = "n", bty = "n")
   for(i in 1:ncol(D_abundance)) lines(c(i-0.5, i+0.5), rep(nO2[i], 2), lwd = 2)
 
   if(pdf) dev.off()
@@ -804,10 +804,10 @@ microhum_6 <- function(pdf = FALSE) {
     main <- hyphen.in.pdf(gsub("COVID", "COVID-19", site))
     title(main, font.main = 1, line = 0.5)
     # Add panel title
-    atitle <- bquote(bold("A. Genus abundance vs"~bolditalic(n)[O[2]]~.(
+    atitle <- bquote(bold("A. Genus abundance vs"~bolditalic(n)*O[2]~.(
       hyphen.in.pdf("for body sites (data from Boix-Amor\u00f3s et al., 2021)"))))
     if(site == "Nasal") label.figure(atitle, font = 2, xfrac = 1.17, yfrac = 0.965, cex = 1.5)
-    btitle <- bquote(bold("B. Genus abundance vs"~bolditalic(n)[O[2]]~.(
+    btitle <- bquote(bold("B. Genus abundance vs"~bolditalic(n)*O[2]~.(
       hyphen.in.pdf("for COVID-19 (data from Schult et al., 2022) and IBD (data from Lloyd-Price et al., 2019)"))))
     if(site == "COVID_control") label.figure(btitle, font = 2, xfrac = 1.7, yfrac = 0.965, cex = 1.5)
   }
@@ -953,7 +953,7 @@ microhum_3_1 <- function(pdf = FALSE) {
     D_nH2O <- Treated$nH2O - No$nH2O
     D_nO2 <- Treated$nO2 - No$nO2
     # Plot D_nH2O and D_nO2
-    plot(D_nO2, D_nH2O, xlab = quote(Delta*italic(n)[O[2]]), ylab = quote(Delta*italic(n)[H[2]*O]), xlim = c(-0.03, 0.03), ylim = c(-0.03, 0.015), type = "n")
+    plot(D_nO2, D_nH2O, xlab = quote(Delta*italic(n)*O[2]), ylab = quote(Delta*italic(n)*H[2]*O), xlim = c(-0.03, 0.03), ylim = c(-0.03, 0.015), type = "n")
     abline(h = 0, v = 0, lty = 2, col = 8)
     points(D_nO2, D_nH2O, pch = pch, bg = col, col = NA)
     # Plot p-values 20230204
@@ -1041,8 +1041,8 @@ microhum_5_1 <- function(pdf = FALSE) {
     legend("bottomright", legend = ptext, bty = "n", inset = c(0, -0.03))
     # Show mean difference
     md <- format(round(diff(sapply(values, mean, na.rm = TRUE)), 4), scientific = 1)
-    if(metric == "nO2") difftxt <- bquote(Delta*italic(n)[O[2]] == .(md))
-    if(metric == "nH2O") difftxt <- bquote(Delta*italic(n)[H[2]*O] == .(md))
+    if(metric == "nO2") difftxt <- bquote(Delta*italic(n)*O[2] == .(md))
+    if(metric == "nH2O") difftxt <- bquote(Delta*italic(n)*H[2]*O == .(md))
     legend("topleft", legend = difftxt, bty = "n", inset = c(-0.05, -0.02))
 
   }
@@ -1073,19 +1073,19 @@ microhum_6_1 <- function(pdf = FALSE) {
   legend("bottomright", legend = c("Nasopharyngeal", "Oropharyngeal", "Gut"), pch = c(pch_Nasal, pch_Oral, pch_Gut),
     pt.bg = c(col_Nasal, col_Oral, col_Gut), col = black50, bty = "n", cex = 0.8, title = hyphen.in.pdf("COVID-19"), inset = c(0, 0.12))
   legend("bottomright", legend = "Gut", pch = pch_IBD, pt.bg = col_IBD, col = black50, bty = "n", cex = 0.8, title = "                  IBD", inset = c(0.135, 0))
-  title(quote(Delta*italic(n)[O[2]] ~ "(aerotolerant - obligate anaerobe)"), font.main = 1)
+  title(quote(Delta*italic(n)*O[2] ~ "(aerotolerant - obligate anaerobe)"), font.main = 1)
 
   # nH2O differences
   plot(aerotolerant$nH2O_dn - anaerobe$nH2O_dn, aerotolerant$nH2O_up - anaerobe$nH2O_up,
     xlab = "Control", ylab = "Patient", pch = unlist(pch[anaerobe$type]), bg = unlist(col[anaerobe$type]))
   abline(h = 0, v = 0, lty = 2, col = 8)
-  title(quote(Delta*italic(n)[H[2]*O] ~ "(aerotolerant - obligate anaerobe)"), font.main = 1)
+  title(quote(Delta*italic(n)*H[2]*O ~ "(aerotolerant - obligate anaerobe)"), font.main = 1)
 
   # Table of p-values
   plot.new()
   xs <- seq(0.4, 1, length.out = 4)
   text(xs, rep(0.8, 4), c("Control", "Patient", "Control", "Patient"), adj = 1)
-  text(c(0.46, 0.88), rep(0.85, 2), c(expression(italic(n)[O[2]]), expression(italic(n)[H[2]*O])), adj = 1)
+  text(c(0.46, 0.88), rep(0.85, 2), c(expression(italic(n)*O[2]), expression(italic(n)*H[2]*O)), adj = 1)
   text(0.63, 0.92, "P-values")
   ys <- seq(0.7, 0.3, length.out = 4)
   text(rep(-0.2, 4), ys, hyphen.in.pdf(c("Nasopharyngeal", "Oropharyngeal", "Gut (COVID-19)", "Gut (IBD)")), adj = 0, xpd = NA)

@@ -492,8 +492,8 @@ canH2OS1 <- function(pdf = FALSE) {
   par(cex.lab = 1.2)
 
   # Define axis labels
-  nH2Olab <- expression(italic(n)[H[2] * O])
-  nO2lab <- expression(italic(n)[O[2]])
+  nH2Olab <- expression(italic(n)*H[2]*O)
+  nO2lab <- expression(italic(n)*O[2])
   Zclab <- expression(italic(Z)[C])
 
   # Function to plot values for amino acids

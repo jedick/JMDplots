@@ -50,9 +50,10 @@ options(width = 80)
 
 ```{r HTML, include=FALSE}
 Zc <- "<i>Z</i><sub>C</sub>"
-logaH2 <- "log<i>a</i><sub>H<sub>2</sub></sub>"
-logfH2 <- "log<i>f</i><sub>H<sub>2</sub></sub>"
-logfO2 <- "log<i>f</i><sub>O<sub>2</sub></sub>"
+# https://stackoverflow.com/questions/595365/how-to-render-narrow-non-breaking-spaces-in-html-for-windows
+logaH2 <- "log&#x202F;<i>a</i>H<sub>2</sub>"
+logfH2 <- "log&#x202F;<i>f</i>H<sub>2</sub>"
+logfO2 <- "log&#x202F;<i>f</i>O<sub>2</sub>"
 pH2 <- "<i>p</i><sub>H<sub>2</sub></sub>"
 ```
 

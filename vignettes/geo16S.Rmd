@@ -56,9 +56,10 @@ options(width = 80)
 ```
 
 ```{r HTML, include=FALSE}
-logfO2 <- "log<i>f</i><sub>O<sub>2</sub></sub>"
-logaH2O <- "log<i>a</i><sub>H<sub>2</sub>O</sub>"
-nH2O <- "<i>n</i><sub>H<sub>2</sub>O</sub>"
+# https://stackoverflow.com/questions/595365/how-to-render-narrow-non-breaking-spaces-in-html-for-windows
+logfO2 <- "log&#x202F;<i>f</i>O<sub>2</sub>"
+logaH2O <- "log&#x202F;<i>a</i>H<sub>2</sub>O"
+nH2O <- "<i>n</i>H<sub>2</sub>O"
 Zc <- "<i>Z</i><sub>C</sub>"
 ```
 

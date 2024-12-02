@@ -2,7 +2,7 @@
 %\newcommand{\ZC}{\ifelse{latex}{\eqn{Z_\mathrm{C}}}{\ifelse{html}{\out{<I>Z</I><sub>C</sub>}}{ZC}}}
 \newcommand{\logK}{\ifelse{latex}{\eqn{\log K}}{\ifelse{html}{\out{log<i>K</i>}}{log K}}}
 % 20190930
-\newcommand{\nH2O}{\ifelse{latex}{\eqn{n_{\mathrm{H_{2}O}}}}{\ifelse{html}{\out{<i>n</i><sub>H<sub>2</sub>O</sub>}}{nH2O}}}
+\newcommand{\nH2O}{\ifelse{latex}{\eqn{n\mathrm{H_{2}O}}}{\ifelse{html}{\out{<i>n</i>H<sub>2</sub>O}}{nH2O}}}
 % 20191005
 \newcommand{\H2O}{\ifelse{latex}{\eqn{\mathrm{H_{2}O}}}{\ifelse{html}{\out{H<sub>2</sub>O}}{H2O}}}
 % 20191020
@@ -14,10 +14,11 @@
 \newcommand{\O2}{\ifelse{latex}{\eqn{\mathrm{O_{2}}}}{\ifelse{html}{\out{O<sub>2</sub>}}{O2}}}
 % 20200204
 \newcommand{\nAA}{\ifelse{latex}{\eqn{n_{\mathrm{AA}}}}{\ifelse{html}{\out{<i>n</i><sub>AA</sub>}}{nAA}}}
-\newcommand{\nO2}{\ifelse{latex}{\eqn{n_{\mathrm{O_{2}}}}}{\ifelse{html}{\out{<i>n</i><sub>O<sub>2</sub></sub>}}{nO2}}}
+\newcommand{\nO2}{\ifelse{latex}{\eqn{n\mathrm{O_{2}}}}{\ifelse{html}{\out{<i>n</i>O<sub>2</sub>}}{nO2}}}
 % 20201015
-\newcommand{\logfO2}{\ifelse{latex}{\eqn{\log f_{\mathrm{O_{2}}}}}{\ifelse{html}{\out{log<i>f</i><sub>O<sub>2</sub></sub>}}{logfO2}}}
-\newcommand{\logaH2O}{\ifelse{latex}{\eqn{\log a_{\mathrm{H_{2}O}}}}{\ifelse{html}{\out{log<i>a</i><sub>H<sub>2</sub>O</sub>}}{logaH2O}}}
+% https://stackoverflow.com/questions/595365/how-to-render-narrow-non-breaking-spaces-in-html-for-windows
+\newcommand{\logfO2}{\ifelse{latex}{\eqn{\log f\mathrm{O_{2}}}}{\ifelse{html}{\out{log&#x202F;<i>f</i>O<sub>2</sub>}}{logfO2}}}
+\newcommand{\logaH2O}{\ifelse{latex}{\eqn{\log a\mathrm{H_{2}O}}}{\ifelse{html}{\out{log&#x202F;<i>a</i>H<sub>2</sub>O}}{logaH2O}}}
 % 20210205
 \newcommand{\degC}{\ifelse{latex}{\eqn{^{\circ}}C}{\ifelse{html}{\out{&deg;}C}{°C}}}
 % 20210401
@@ -29,7 +30,7 @@
 \newcommand{\H2S}{\ifelse{latex}{\eqn{\mathrm{H_{2}S}}}{\ifelse{html}{\out{H<sub>2</sub>S}}{H2S}}}
 \newcommand{\CH4}{\ifelse{latex}{\eqn{\mathrm{CH_{4}}}}{\ifelse{html}{\out{CH<sub>4</sub>}}{CH4}}}
 % 20220420
-\newcommand{\logaH2}{\ifelse{latex}{\eqn{\log a_{\mathrm{H_{2}}}}}{\ifelse{html}{\out{log<i>a</i><sub>H<sub>2</sub></sub>}}{logaH2}}}
+\newcommand{\logaH2}{\ifelse{latex}{\eqn{\log a\mathrm{H_{2}}}}{\ifelse{html}{\out{log&#x202F;<i>a</i>H<sub>2</sub>}}{logaH2}}}
 % Subscripts and superscripts 20220520
 \newcommand{\s}{\ifelse{latex}{\eqn{_{#1}}}{\ifelse{html}{\out{<sub>#1</sub>}}{#1}}}
 \newcommand{\S}{\ifelse{latex}{\eqn{^{#1}}}{\ifelse{html}{\out{<sup>#1</sup>}}{^#1}}}

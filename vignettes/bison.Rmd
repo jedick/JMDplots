@@ -49,6 +49,8 @@ if (!nzchar(Sys.which("pngquant"))) pngquant <- NULL
 ```{r HTML, include=FALSE}
 ## some frequently used HTML expressions
 ZC <- "<i>Z</i><sub>C</sub>"
+# https://stackoverflow.com/questions/595365/how-to-render-narrow-non-breaking-spaces-in-html-for-windows
+logaH2 <- 'log&#x202F;<i>a</i>H<sub>2</sub>'
 ```
 
 This vignette runs the code to make selected plots modified from the following papers:
@@ -112,8 +114,8 @@ bison4()
 [Link to original figure](https://doi.org/10.1371/journal.pone.0022782.g005).
 The first plot is a theoretical predominance diagram for the overall model proteins from each site as a function of temperature and activity of hydrogen.
 The dotted line is placed so that it passes through the stability fields of the proteins at approximately the actual temperatures where they are located in the hot spring.
-This is Equation 2 in the 2011 paper: log*a*~H2~ = -11 + (3/40) *T*,°C.
-The second plot shows the effect of changing both temperature and pH (interpolated from measured values) together with log*a*~H2~ (from the line in the first plot) on the predicted relative abundances of the proteins in metastable equilibrium.
+This is Equation 2 in the 2011 paper: `r logaH2` = -11 + (3/40) *T*,°C.
+The second plot shows the effect of changing both temperature and pH (interpolated from measured values) together with `r logaH2` (from the line in the first plot) on the predicted relative abundances of the proteins in metastable equilibrium.
 
 ## Comparing old and new group additivity parameters
 ```{r bison5, message = FALSE, fig.align='center', out.width='100%', fig.width = 6, fig.height = 4, pngquant = pngquant}
@@ -129,9 +131,9 @@ The remaining figures in this vignette use the updated parameters (i.e. the curr
 equil.results <- bison6()
 ```
 [Link to original figure](https://doi.org/10.1371/journal.pone.0072395.g003).
-The top row shows calculated relative abundances of the phyla based on metastable equilibrium among the model proteins as a function of log*a*~H2~.
+The top row shows calculated relative abundances of the phyla based on metastable equilibrium among the model proteins as a function of `r logaH2`.
 The bottom row shows the Gibbs energy of transformation (Δ*G~tr~*) between the equilibrium and actual relative abundances.
-Lines are drawn at values calculated with Equation 2 (see above) and at the minimum Δ*G~tr~*, i.e. the optimal values of log*a*~H2~ for the model.
+Lines are drawn at values calculated with Equation 2 (see above) and at the minimum Δ*G~tr~*, i.e. the optimal values of `r logaH2` for the model.
 Plots are made for only three sites, but the function returns results for all five sites, which are used below.
 
 ## Activity of hydrogen comparison
@@ -139,7 +141,7 @@ Plots are made for only three sites, but the function returns results for all fi
 bison7(equil.results)
 ```
 Links to original figures: [2011](https://doi.org/10.1371/journal.pone.0022782.g009), [2013](https://doi.org/10.1371/journal.pone.0072395.g004)
-The plot on the right, from the 2011 paper, shows effective values of log*a*~H2~ calculated from oxidation-reduction potential (ORP) measurements in 2009 and sulfate/sulfide ratios and dissolved oxygen concentrations measured in 2005.
+The plot on the right, from the 2011 paper, shows effective values of `r logaH2` calculated from oxidation-reduction potential (ORP) measurements in 2009 and sulfate/sulfide ratios and dissolved oxygen concentrations measured in 2005.
 The different redox reactions are clearly not in mutual equilibrium, but they all indicate relatively oxidizing conditions at lower temperatures.
 Equation 2 is derived from the relative stabilities of proteins *across* sites (see above).
 The plot on the right, from the 2013 paper, shows the results of optimizing the metastable equilibrium model for phylum abundances *within* sites.

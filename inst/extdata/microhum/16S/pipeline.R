@@ -14,8 +14,8 @@
 # vsearch 2.15.0       https://github.com/torognes/vsearch
 # seqtk 1.3-r115       https://github.com/lh3/seqtk
 # RDP Classifier 2.13  https://sourceforge.net/projects/rdp-classifier/
-# RDP Classifier training files based on GTDB release 207
-#                      https://doi.org/10.5281/zenodo.7633100
+# RDP Classifier training files based on GTDB release 220
+#                      https://doi.org/10.5281/zenodo.12703477
 # Java openjdk version 1.8.0_252 (for RDP); GNU utils (cat, awk, grep)
 
 ## USAGE

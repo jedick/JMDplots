@@ -1291,7 +1291,7 @@ geo16S_S2 <- function(pdf = FALSE) {
       xylim <- range(na.omit(x))
       # Start plot and add 1:1 line
       if(metric == "Zc") plot(xylim, xylim, type = "n", xlab = quote("genus"~italic(Z)[C]), ylab = bquote(.(rank)~italic(Z)[C]))
-      if(metric == "nH2O") plot(xylim, xylim, type = "n", xlab = quote("genus"~italic(n)[H[2]*O]), ylab = bquote(.(rank)~italic(n)[H[2]*O]))
+      if(metric == "nH2O") plot(xylim, xylim, type = "n", xlab = quote("genus"~italic(n)*H[2]*O), ylab = bquote(.(rank)~italic(n)*H[2]*O))
       lines(xylim, xylim, lty = 2, col = "gray40")
       # Add points: Bacteria then Archaea
       points(x[iBac], y[iBac], pch = ".", col = "steelblue3", cex = cex)
@@ -1478,8 +1478,8 @@ geo16S_S5 <- function(pdf = FALSE, H2O = FALSE) {
 
     ## Panel 1: Various Environments
     if(H2O) {
-      xlab <- quote(italic(n)[H[2]*O]~"from shotgun metagenome or metatranscriptome")
-      ylab <- quote(italic(n)[H[2]*O]~"estimated from 16S rRNA")
+      xlab <- quote(italic(n)*H[2]*O~"from shotgun metagenome or metatranscriptome")
+      ylab <- quote(italic(n)*H[2]*O~"estimated from 16S rRNA")
     } else {
       xlab <- quote(italic(Z)[C]~"from shotgun metagenome or metatranscriptome")
       ylab <- quote(italic(Z)[C]~"estimated from 16S rRNA")
@@ -1494,7 +1494,7 @@ geo16S_S5 <- function(pdf = FALSE, H2O = FALSE) {
     title("Various Environments + Marcellus + Manus + Black Sea     ", font.main = 1, cex.main = 1.1, line = 1)
 
     ## Panel 2: Human Microbiome Project
-    if(H2O) xlab <- quote(italic(n)[H[2]*O]~"from shotgun metagenome") else xlab <- quote(italic(Z)[C]~"from shotgun metagenome")
+    if(H2O) xlab <- quote(italic(n)*H[2]*O~"from shotgun metagenome") else xlab <- quote(italic(Z)[C]~"from shotgun metagenome")
     if(H2O) xylimHMP <- c(-0.95, -0.70) else xylimHMP <- xylim
     plot(xylimHMP, xylimHMP, type = "n", xlab = xlab, ylab = ylab)
     lines(xylimHMP, xylimHMP, lty = 2, col = "gray40")

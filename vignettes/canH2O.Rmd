@@ -25,9 +25,8 @@ options(width = 40)
 ```{r HTML, include=FALSE}
 ## some frequently used HTML expressions
 Zc <- "<i>Z</i><sub>C</sub>"
-nH2O <- "<i>n</i><sub>H<sub>2</sub>O</sub>"
-nAA <- "<i>n</i><sub>AA</sub>"
-nO2 <- "<i>n</i><sub>O<sub>2</sub></sub>"
+nH2O <- "<i>n</i>H<sub>2</sub>O"
+nO2 <- "<i>n</i>O<sub>2</sub>"
 ```
 
 This vignette runs the code to make the plots from the following paper:

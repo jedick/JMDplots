@@ -1,5 +1,7 @@
-CHANGES IN JMDplots 1.2.20-3
-----------------------------
+CHANGES IN JMDplots 1.2.20-13
+-----------------------------
+
+- 20241202 Don't subscript elemental formulas in labels.
 
 - 20240706 Update GTDB reference database to version 220.
 

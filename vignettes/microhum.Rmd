@@ -35,6 +35,9 @@ This vignette runs the functions to make the plots from the following manuscript
 
 > Dick JM. 2024. Adaptations of microbial genomes to human body chemistry. bioRxiv preprint doi: [10.1101/2023.02.12.528246](https://doi.org/10.1101/2023.02.12.528246)
 
+**Update:** In July 2024, the taxonomic classifications and reference database were updated to use GTDB release 220.
+There are small changes in the figures compared to the preprint, which used GTDB release 207.
+
 This vignette was compiled on `r Sys.Date()` with
 **[JMDplots](https://github.com/jedick/JMDplots)** `r packageDescription("JMDplots")$Version`,
 **[chem16S](https://github.com/jedick/chem16S)** `r packageDescription("chem16S")$Version`, and
@@ -61,7 +64,7 @@ microhum_1_1()
 microhum_2()
 ```
 
-**Data sources:** Genome Taxonomy Database (GTDB r207) [@PCR+22]; Unified Human Gastrointestinal Genome (UHGG v2.0.1) [@ANB+21].
+**Data sources:** Genome Taxonomy Database (GTDB release 220) [@PCR+22]; Unified Human Gastrointestinal Genome (UHGG v2.0.1) [@ANB+21].
 
 ## Chemical variation of microbial proteins across body sites (multi-omics comparison) (Figure 3)
 ```{r microhum_3, message = FALSE, out.width='100%', fig.width = 7, fig.height = 6, pngquant = pngquant, dpi = 100}

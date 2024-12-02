@@ -54,8 +54,8 @@ gradH2O1 <- function(pdf = FALSE) {
   par(cex.lab = 1.2)
 
   # define axis labels
-  nH2Olab <- expression(italic(n)[H[2] * O])
-  nO2lab <- expression(italic(n)[O[2]])
+  nH2Olab <- expression(italic(n)*H[2]*O)
+  nO2lab <- expression(italic(n)*O[2])
   ZClab <- expression(italic(Z)[C])
 
   # function to plot linear model
@@ -153,7 +153,7 @@ gradH2O2 <- function(pdf = FALSE) {
   text(0.30, 0.95, "Elemental composition")
   text(0.80, 0.95, "Amino acid composition")
   text(0.05, 0.80, "Basis\nspecies", srt = 90, cex = 0.9)
-  text(0.05, 0.65, quote(italic(n)[H[2]*O]))
+  text(0.05, 0.65, quote(italic(n)*H[2]*O))
   text(0.05, 0.52, quote(italic(Z)[C]))
 
   # Use LYSC_CHICK
@@ -222,7 +222,7 @@ gradH2O3 <- function(pdf = FALSE, vars = "H2O-ZC") {
   par(cex.lab = 1.3)
 
   # define axis labels
-  nH2Olab <- expression(italic(n)[H[2] * O])
+  nH2Olab <- expression(italic(n)*H[2]*O)
   ZClab <- expression(italic(Z)[C])
   # set y-axis limit 20201011
   ylim <- c(-0.78, -0.70)
@@ -372,7 +372,7 @@ gradH2O5 <- function(pdf = FALSE) {
   par(cex.lab = 1.5)
   xlim <- c(-0.2, -0.08)
   ylim <- c(-0.8, -0.72)
-  nH2Olab <- expression(italic(n)[H[2] * O])
+  nH2Olab <- expression(italic(n)*H[2]*O)
   ZClab <- expression(italic(Z)[C])
 
   # plots 1-2: Amazon river metagenome
@@ -462,7 +462,7 @@ gradH2O6 <- function(pdf = FALSE) {
   layout(matrix(1:4, nrow = 2))
   par(mar = c(4, 4.5, 2, 1), las = 1, cex = 1.2)
   par(cex.lab = 1.3)
-  nH2Olab <- expression(italic(n)[H[2] * O])
+  nH2Olab <- expression(italic(n)*H[2]*O)
   ZClab <- expression(italic(Z)[C])
   ylim <- c(-0.78, -0.7)
 
@@ -550,7 +550,7 @@ gradH2O7 <- function(pdf = FALSE) {
   # Read CSV files with results of chemical analysis for differential expression
   osmotic_gene <- read.csv(system.file(paste0("diffexpr/osmotic_gene.csv"), package = "JMDplots"))
   osmotic_bact <- read.csv(system.file(paste0("diffexpr/osmotic_bact.csv"), package = "JMDplots"))
-  DnH2Olab <- quote(Delta*italic(n)[H[2]*O])
+  DnH2Olab <- quote(Delta*italic(n)*H[2]*O)
   log10timelab <- quote(log[10]*("time, minutes"))
 
   # plot A: time-course experiments
@@ -751,8 +751,8 @@ plotbasisfun <- function(zoom = FALSE) {
   AAbasis <- read.csv(file, as.is = TRUE)
 
   # set up plot
-  xlab <- quote(italic(R)^2~"of"~italic(n)[O[2]] - italic(Z)[C]~"fits")
-  ylab <- quote(italic(R)^2~"of"~italic(n)[H[2]*O] - italic(Z)[C]~"fits")
+  xlab <- quote(italic(R)^2~"of"~italic(n)*O[2] - italic(Z)[C]~"fits")
+  ylab <- quote(italic(R)^2~"of"~italic(n)*H[2]*O - italic(Z)[C]~"fits")
   plot(c(0, 1), c(0, 0.8), xlab = xlab, ylab = ylab, type = "n")
   x <- extendrange(c(0.9, 0.93))
   y <- extendrange(c(0, 0.03))

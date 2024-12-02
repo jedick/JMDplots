@@ -240,8 +240,8 @@ diffplot <- function(comptab, vars=c("Zc", "nH2O"), col="black", plot.rect=FALSE
       Zc = quote(italic(Z)[C]),
       DZc = quote(Delta*italic(Z)[C]),
       # "oldstyle" labels including overbar
-      nH2O = quote(bar(italic(n))[H[2]*O]),
-      DnH2O = quote(Delta*bar(italic(n))[H[2]*O])
+      nH2O = quote(bar(italic(n))*H[2]*O),
+      DnH2O = quote(Delta*bar(italic(n))*H[2]*O)
     )
     # Only use part before underscore 20191207
     Dx <- paste0("D", strsplit(vars[1], "_")[[1]][1])
