@@ -7,10 +7,10 @@
 \alias{microhum_4}
 \alias{microhum_5}
 \alias{microhum_6}
-\alias{microhum_1_1}
-\alias{microhum_3_1}
-\alias{microhum_5_1}
-\alias{microhum_6_1}
+\alias{microhum_S1}
+\alias{microhum_S2}
+\alias{microhum_S3}
+\alias{microhum_S4}
 \alias{dataset_metrics}
 \title{Adaptations of microbial genomes to human body chemistry}
 \description{
@@ -24,10 +24,10 @@ Plots from the manuscript by Dick (2024).
   microhum_4(pdf = FALSE)
   microhum_5(pdf = FALSE)
   microhum_6(pdf = FALSE)
-  microhum_1_1(pdf = FALSE)
-  microhum_3_1(pdf = FALSE)
-  microhum_5_1(pdf = FALSE)
-  microhum_6_1(pdf = FALSE)
+  microhum_S1(pdf = FALSE)
+  microhum_S2(pdf = FALSE)
+  microhum_S3(pdf = FALSE)
+  microhum_S4(pdf = FALSE)
   dataset_metrics()
 }
 
@@ -45,10 +45,10 @@ This table briefly describes each plotting function.
   \code{microhum_4} \tab Differences of chemical metrics between controls and COVID-19 or IBD patients \cr
   \code{microhum_5} \tab Differences of relative abundances of genera between controls and patients \cr
   \code{microhum_6} \tab Oxygen tolerance of genera in body sites, COVID-19, and IBD \cr
-  \code{microhum_1_1} \tab Amount of putative human DNA removed from HMP metagenomes in screening step \cr
-  \code{microhum_3_1} \tab Differences of \nO2 and \nH2O between untreated and viral-inactivated samples \cr
-  \code{microhum_5_1} \tab Chemical metrics of reference proteomes for genera with known oxygen tolerance \cr
-  \code{microhum_5_1} \tab Differences of \nO2 and \nH2O between subcommunities of obligate anaerobes and aerotolerant genera in controls and patients \cr
+  \code{microhum_S1} \tab Amount of putative human DNA removed from HMP metagenomes in screening step \cr
+  \code{microhum_S2} \tab Differences of \nO2 and \nH2O between untreated and viral-inactivated samples \cr
+  \code{microhum_S3} \tab Chemical metrics of reference proteomes for genera with known oxygen tolerance \cr
+  \code{microhum_S4} \tab Differences of \nO2 and \nH2O between subcommunities of obligate anaerobes and aerotolerant genera in controls and patients \cr
 }
 
 \code{dataset_metrics} is used to precompute mean values of chemical metrics for controls and COVID-19/IBD patients in each study (chemical metrics are for community reference proteomes; source data are 16S rRNA sequences).

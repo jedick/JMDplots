@@ -891,8 +891,8 @@ microhum_6 <- function(pdf = FALSE) {
 }
 
 # Amount of putative human DNA removed from HMP metagenomes in screening step 20231222
-microhum_1_1 <- function(pdf = FALSE) {
-  if(pdf) pdf("Figure_1-1.pdf", width = 10, height = 8)
+microhum_S1 <- function(pdf = FALSE) {
+  if(pdf) pdf("Figure_S1.pdf", width = 10, height = 8)
   # Get sequence processing statistics
   statsfile <- file.path(getdatadir(), "ARAST/HMP12_stats.csv")
   stats <- read.csv(statsfile)
@@ -918,9 +918,9 @@ microhum_1_1 <- function(pdf = FALSE) {
 }
 
 # Differences of nO2 and nH2O between untreated and viral-inactivated samples 20221125
-microhum_3_1 <- function(pdf = FALSE) {
+microhum_S2 <- function(pdf = FALSE) {
 
-  if(pdf) pdf("Figure_3-1.pdf", width = 6, height = 4)
+  if(pdf) pdf("Figure_S2.pdf", width = 6, height = 4)
   par(mfrow = c(2, 3))
   par(mgp = c(2.5, 1, 0))
   par(mar = c(4, 4, 2, 1))
@@ -977,10 +977,10 @@ microhum_3_1 <- function(pdf = FALSE) {
 
 # Differences of Zc and nH2O between obligate anaerobic and aerotolerant genera 20221017
 # Changed Zc to nO2 20230729
-microhum_5_1 <- function(pdf = FALSE) {
+microhum_S3 <- function(pdf = FALSE) {
 
   # Setup plot
-  if(pdf) pdf("Figure_5-1.pdf", width = 7, height = 4)
+  if(pdf) pdf("Figure_S3.pdf", width = 7, height = 4)
   par(mfrow = c(1, 2))
   par(mar = c(3, 4, 1, 1))
   par(mgp = c(2.5, 1, 0))
@@ -1052,9 +1052,9 @@ microhum_5_1 <- function(pdf = FALSE) {
 }
 
 # Differences of nO2 and nH2O between subcommunities of obligate anaerobes and aerotolerant genera in controls and patients 20240212
-microhum_6_1 <- function(pdf = FALSE) {
+microhum_S4 <- function(pdf = FALSE) {
 
-  if(pdf) pdf("Figure_6-1.pdf", width = 10, height = 3.5)
+  if(pdf) pdf("Figure_S4.pdf", width = 10, height = 3.5)
   par(mfrow = c(1, 3))
 
   # Colors and point symbols for sample types
@@ -1199,7 +1199,7 @@ dataset_metrics <- function() {
     oro = c("RFH+22_Oral", "IZC+21", "GBS+22", "WCJ+21_Oral", "XLZ+21", "MAC+21", "MLW+21_Oropharyngeal", "GWL+21", "RWC+21_Oral"),
     # COVID-19 gut
     gut = c("ZZZ+21", "RFH+22_Gut", "KMG+21", "WCJ+21_Gut", "CGC+22", "GCW+20", "NGH+21",
-            "RDM+22", "MIK+22", "WZL+23", "AHM+21", "FBD+22", "RWC+21_Gut", "SRK+22", "GCP+23"),
+            "RDM+22", "MIK+22", "WZL+23", "AHM+21", "GCP+23", "FBD+22", "RWC+21_Gut", "SRK+22"),
     # IBD gut
     IBD = c("ZTG+21", "ASM+23", "DKK+23", "AAM+20", "PYL+23", "MLL+16", "LZD+19",
             "BKK+17", "MDV+22", "LAA+19", "REP+23", "HBL+17", "GKD+14", "WGL+19", "RAF+20")
