@@ -86,7 +86,7 @@ Figure_5_genera <- microhum_5()
 microhum_6()
 ```
 
-**Data sources:** **(A)--(B)** *List of Prokaryotes according to their Aerotolerant or Obligate Anaerobic Metabolism* [@MR18] with modifications made in this study; **(C)** See Table 1 in manuscript.
+**Data sources:** **(a)--(b)** *List of Prokaryotes according to their Aerotolerant or Obligate Anaerobic Metabolism* [@MR18] with modifications made in this study; **(c)** See Table 1 in manuscript.
 
 
 ## Amount of putative human DNA removed from HMP metagenomes in screening step (Figure S1)

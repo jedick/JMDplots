@@ -133,11 +133,11 @@ microhum_1 <- function(pdf = FALSE) {
             pt.bg = c(col_Skin, col_Nasal, col_Oral, col_Gut, col_UG), col = black50, bty = "n", cex = 0.7)
           # Use mtext to put title over two plots
           mtext(main, at = -0.5, line = 0.5)
-          label.figure("A", font = 2, cex = 1.8, yfrac = 0.97)
+          label.figure("a", font = 2, cex = 1.8, yfrac = 0.97)
         }
         if(metric == "nH2O") {
           mtext(main, at = -0.65, line = 0.5)
-          label.figure("B", font = 2, cex = 1.8, yfrac = 0.97)
+          label.figure("b", font = 2, cex = 1.8, yfrac = 0.97)
         }
       }
 
@@ -162,7 +162,7 @@ microhum_1 <- function(pdf = FALSE) {
     pch = c(pch_Skin, pch_Nasal, pch_Oral, pch_Gut, pch_UG),
     pt.bg = c(col_Skin, col_Nasal, col_Oral, col_Gut, col_UG), col = black50, bty = "n", cex = 0.9)
   title("Community reference proteomes", font.main = 1)
-  label.figure("C", font = 2, cex = 1.8, xfrac = 0.12, yfrac = 0.92)
+  label.figure("c", font = 2, cex = 1.8, xfrac = 0.12, yfrac = 0.92)
 
   # Read amino acid composition of proteins inferred from metagenome
   MG_aafile <- file.path(getdatadir(), "ARAST/HMP12_aa.csv")
@@ -191,7 +191,7 @@ microhum_2 <- function(pdf = FALSE) {
   par(mgp = c(2.9, 1, 0))
   par(cex.lab = 1.2)
   par(mar = c(5.1, 4.1, 3.1, 2.1))
-  # Get genera from Figure 4
+  # Get genera from Figure 5
   genera <- readLines(system.file("extdata/microhum/Figure_5_genera.txt", package = "JMDplots"))
   # Get colors
   col <- hcl.colors("Dynamic", n = length(genera))
@@ -202,7 +202,7 @@ microhum_2 <- function(pdf = FALSE) {
   metrics <- c("nO2", "nH2O")
   for(i in seq_along(refdb)) {
     # Make plot
-    vals <- plot_starburst(genera, metrics, xlim = c(-0.81, -0.58), ylim = c(-0.83, -0.69), refdb = refdb[i], pch = NA, col = col)
+    vals <- plot_starburst(genera, metrics, xlim = c(-0.8, -0.57), ylim = c(-0.825, -0.70), refdb = refdb[i], pch = NA, col = col)
     # Add points for genera
     gvals <- do.call(rbind, sapply(vals, "[", 1))
     X <- gvals$Xvals
@@ -213,36 +213,51 @@ microhum_2 <- function(pdf = FALSE) {
     xadj <- rep(0, length(labels))
     yadj <- rep(0.5, length(labels))
     if(grepl("GTDB", refdb[i])) {
-      yadj[gvals$taxon == "Bacteroides"] <- 0.2
-      yadj[gvals$taxon == "Phocaeicola"] <- 1.2
-      xadj[gvals$taxon == "Phocaeicola"] <- 0.1
+      yadj[gvals$taxon == "Bacteroides"] <- 1.2
+      xadj[gvals$taxon == "Bacteroides"] <- 0.2
+      xadj[gvals$taxon == "Phocaeicola"] <- 1.03
       yadj[gvals$taxon == "Blautia_A"] <- 1.2
       xadj[gvals$taxon == "Blautia_A"] <- 0.5
-      xadj[gvals$taxon == "Escherichia"] <- 0.2
-      yadj[gvals$taxon == "Escherichia"] <- 1.4
+      xadj[gvals$taxon == "Agathobacter"] <- 1.03
       yadj[gvals$taxon == "Anaerostipes"] <- -0.3
       xadj[gvals$taxon == "Anaerostipes"] <- 0.08
       yadj[gvals$taxon == "Enterococcus_B"] <- 0.4
       yadj[gvals$taxon == "Haemophilus_D"] <- 0.8
-      yadj[gvals$taxon == "Latilactobacillus"] <- -0.1
+      xadj[gvals$taxon == "Latilactobacillus"] <- 1.03
       xadj[gvals$taxon == "Lactobacillus"] <- 1.03
+      xadj[gvals$taxon == "Enterococcus_B"] <- 1.03
+      xadj[gvals$taxon == "Enterococcus_A"] <- 1.03
+      yadj[gvals$taxon == "Ligilactobacillus"] <- 0
+      yadj[gvals$taxon == "Dialister"] <- 0.3
+      yadj[gvals$taxon == "Streptococcus"] <- 0.8
+      yadj[gvals$taxon == "Succinivibrio"] <- 0.3
+      yadj[gvals$taxon == "Veillonella"] <- 0.7
+      yadj[gvals$taxon == "Vescimonas"] <- 0.2
+      yadj[gvals$taxon == "Faecalibacterium"] <- 0.9
+      yadj[gvals$taxon == "Gemmiger"] <- 0.9
+      yadj[gvals$taxon == "Akkermansia"] <- 0.1
     }
     if(grepl("UHGG", refdb[i])) {
       yadj[gvals$taxon == "Finegoldia"] <- 0
       yadj[gvals$taxon == "Latilactobacillus"] <- 0
-      yadj[gvals$taxon == "Campylobacter_B"] <- 0.8
       xadj[gvals$taxon == "Enterococcus_B"] <- 1.03
       yadj[gvals$taxon == "Lactobacillus"] <- 0.3
       yadj[gvals$taxon == "Bacteroides"] <- 0
       yadj[gvals$taxon == "Phocaeicola"] <- 1
+      xadj[gvals$taxon == "Blautia_A"] <- 1.03
+      xadj[gvals$taxon == "Escherichia"] <- 1.03
     }
-    for(j in seq_along(labels)) text(X[j], Y[j], labels[j], adj = c(xadj[j], yadj[j]), cex = 0.8)
+    # Get oxygen tolerance of genera 20241205
+    oxygen.tolerance <- get.oxytol(gvals$taxon)
+    # Use bold for obligate anaerobes
+    fonts <- ifelse(oxygen.tolerance == "obligate anaerobe", 2, 1)
+    for(j in seq_along(labels)) text(X[j], Y[j], labels[j], adj = c(xadj[j], yadj[j]), font = fonts[j], cex = 0.8)
     title(main = main[i], font.main = 1)
     # Keep points for correlation plot
     colnames(gvals)[colnames(gvals) == "Xvals"] <- metrics[1]
     colnames(gvals)[colnames(gvals) == "Yvals"] <- metrics[2]
     genus_vals[[i]] <- gvals
-    label.figure(LETTERS[i], font = 2, cex = 2, xfrac = 0.025)
+    label.figure(letters[i], font = 2, cex = 2, xfrac = 0.025)
   }
   names(genus_vals) <- refdb
 
@@ -266,7 +281,7 @@ microhum_2 <- function(pdf = FALSE) {
     title(chemlab(metrics[i]))
     if(i == 1) {
       mtext("Genus reference proteomes", line = 1, adj = 3.8, cex = 0.8, xpd = NA)
-      label.figure("C", font = 2, cex = 2)
+      label.figure("c", font = 2, cex = 2)
     }
   }
 
@@ -301,7 +316,7 @@ microhum_2 <- function(pdf = FALSE) {
         pch = c(pch_Skin, pch_Nasal, pch_Oral, pch_Gut, pch_UG),
         pt.bg = c(col_Skin, col_Nasal, col_Oral, col_Gut, col_UG), col = black50, bty = "n", cex = 0.7)
       mtext("HMP 16S rRNA samples", line = 1, adj = 2.8, cex = 0.8, xpd = NA)
-      label.figure("D", font = 2, cex = 2)
+      label.figure("d", font = 2, cex = 2)
     }
   }
 
@@ -345,7 +360,7 @@ microhum_3 <- function(pdf = FALSE) {
   legend("topright", legend = c("Skin", "Nasal", "Oral", "Gut"), pch = c(pch_Skin, pch_Nasal, pch_Oral, pch_Gut),
     pt.bg = c(col_Skin, col_Nasal, col_Oral, col_Gut), col = black50, bty = "n", cex = 0.8)
   title(hyphen.in.pdf("Community reference proteomes\n(data from Boix-Amor\u00f3s et al., 2021)"), font.main = 1)
-  label.figure("A", font = 2, cex = 1.8, yfrac = 0.97)
+  label.figure("a", font = 2, cex = 1.8, yfrac = 0.97)
 
   ## Panel B: Community reference proteomes for controls in COVID-19 datasets 20220822
   # Setup plot
@@ -371,7 +386,7 @@ microhum_3 <- function(pdf = FALSE) {
   legend("topright", legend = c("Nasopharyngeal", "Oropharyngeal", "Gut"), pch = c(pch_Nasal, pch_Oral, pch_Gut),
     pt.bg = c(col_Nasal, col_Oral, col_Gut), col = black50, bty = "n", cex = 0.8)
   title(hyphen.in.pdf("Community reference proteomes\n(controls in COVID-19 studies)"), font.main = 1)
-  label.figure("B", font = 2, cex = 1.8, yfrac = 0.96)
+  label.figure("b", font = 2, cex = 1.8, yfrac = 0.96)
 
   ## Panel C: Metagenomes from different body sites 20221124
   ylim <- c(-0.84, -0.60)
@@ -409,7 +424,7 @@ microhum_3 <- function(pdf = FALSE) {
   legend("topright", legend = character(3), pch = rev(pchs), pt.bg = "transparent", col = black25, bty = "n", cex = 0.8, inset = c(0.68, 0))
   legend("topright", legend = c("", "", "", "<40 >40  Protein prediction rate (%)"), bty = "n", cex = 0.8, inset = c(0.115, 0))
   title(hyphen.in.pdf("Proteins from metagenomes\n(controls and COVID-19 patients)"), font.main = 1)
-  label.figure("C", font = 2, cex = 1.8, yfrac = 0.96)
+  label.figure("c", font = 2, cex = 1.8, yfrac = 0.96)
 
   ## Panel D: Metaproteomes from various body sites 20221114
   # Setup plot
@@ -458,7 +473,7 @@ microhum_3 <- function(pdf = FALSE) {
     pch = c(pch_Gut, 25), pt.bg = col_Gut, col = black50,
     cex = 0.8, bg = "transparent", inset = c(0, 0.2))
   title(hyphen.in.pdf("Metaproteomes\n(controls and patients, not COVID-19)"), font.main = 1)
-  label.figure("D", font = 2, cex = 1.8, yfrac = 0.96)
+  label.figure("d", font = 2, cex = 1.8, yfrac = 0.96)
 
   if(pdf) dev.off()
 
@@ -524,7 +539,7 @@ microhum_4 <- function(pdf = FALSE) {
     titles <- hyphen.in.pdf(c(naso = "Nasopharyngeal (COVID-19)", oro = "Oropharyngeal (COVID-19)", gut = "Gut (COVID-19)"))
     title(titles[type], font.main = 1, line = 0.5)
     # Add panel title
-    start <- hyphen.in.pdf("A. Community reference proteomes (")
+    start <- hyphen.in.pdf("a. Community reference proteomes (")
     covid <- hyphen.in.pdf("COVID-19")
     label <- bquote(bold(.(start) * Delta == .(covid) ~ "minus control)"))
     if(type == "naso") label.figure(label, font = 2, yfrac = 0.95, adj = 0.02)
@@ -590,7 +605,7 @@ microhum_4 <- function(pdf = FALSE) {
       if(SRAprefix == "SRR1307") x_list <- list(Control = x[group == "non-COVID-19"], "COVID-19" = x[group == "COVID-19"])
       # Make boxplot
       boxplotfun(metric, x_list, ylim, squeez = TRUE)
-      if(metric == "nO2" & SRAprefix == "SRR1307") label.figure(hyphen.in.pdf("B. Gut MAGs (COVID-19)"), font = 2, adj = 0, yfrac = 1.02)
+      if(metric == "nO2" & SRAprefix == "SRR1307") label.figure(hyphen.in.pdf("b. Gut MAGs (COVID-19)"), font = 2, adj = 0, yfrac = 1.02)
       if(metric == "nO2" & SRAprefix == "SRR1307") label.figure("(Ke et al., 2022; Yeoh et al., 2021)", font = 2, adj = 0)
       if(metric == "nO2" & SRAprefix == "SRR1232") label.figure("(Ke et al., 2022; Zuo et al., 2020)", font = 2, adj = 0)
     }
@@ -624,7 +639,7 @@ microhum_4 <- function(pdf = FALSE) {
       x_list <- list(Control = x[icontrol], "COVID-19" = x[icovid])
       names(x_list)[2] <- hyphen.in.pdf(names(x_list)[2])
       boxplotfun(metric, x_list, ylim, squeeze = TRUE)
-      if(metric == "nO2" & study == "HZX+21") label.figure(hyphen.in.pdf("C. Gut Metaproteomes (COVID-19)"), font = 2, yfrac = 1.02, xfrac = 0.5)
+      if(metric == "nO2" & study == "HZX+21") label.figure(hyphen.in.pdf("c. Gut Metaproteomes (COVID-19)"), font = 2, yfrac = 1.02, xfrac = 0.5)
       if(metric == "nO2" & study == "HZX+21") label.figure("(He et al., 2021)", font = 2, xfrac = 0.25)
       if(metric == "nO2" & study == "GPM+22") label.figure("(Grenga et al., 2022)", font = 2, xfrac = 0.3)
     }
@@ -656,7 +671,7 @@ microhum_4 <- function(pdf = FALSE) {
   # Add plot title
   title("Gut (IBD)", font.main = 1, line = 0.5)
   # Add panel title
-  start <- hyphen.in.pdf("D. CRPs (")
+  start <- hyphen.in.pdf("d. CRPs (")
   ibd <- hyphen.in.pdf("IBD")
   label <- bquote(bold(.(start) * Delta == .(ibd) ~ "minus control)"))
   label.figure(label, font = 2, yfrac = 0.95, adj = 0.04)
@@ -677,7 +692,7 @@ microhum_4 <- function(pdf = FALSE) {
       x_list <- list(Control = x[aa$abbrv == "Control"], IBD = x[aa$abbrv == disease])
       names(x_list)[2] <- disease
       boxplotfun(metric, x_list, ylim)
-      figlab <- hyphen.in.pdf("E. Gut metagenomes (Lloyd-Price et al., 2019)")
+      figlab <- hyphen.in.pdf("e. Gut metagenomes (Lloyd-Price et al., 2019)")
       if(metric == "nH2O" & disease == "UC") label.figure(figlab, font = 2, adj = 0)
     }
   }
@@ -757,13 +772,13 @@ microhum_5 <- function(pdf = FALSE) {
     # Find oxygen tolerance of genera
     genus <- colnames(D_abundance)
     oxygen.tolerance <- get.oxytol(genus)
-    # Add symbols to indicate obligate anaerobes
+    # Identify obligate anaerobes
     ianaerobe <- oxygen.tolerance == "obligate anaerobe"
-    labels <- genus
-    labels[ianaerobe] <- paste(labels[ianaerobe], "*")
-    labels[labels == "Bifidobacterium"] <- "Bifidobacterium +"
+    genus[genus == "Bifidobacterium"] <- "Bifidobacterium *"
     # Make rotated labels (modified from https://www.r-bloggers.com/rotated-axis-labels-in-r-plots/)
-    text(x = seq_along(labels), y = par()$usr[3] - strheight("A"), labels = labels, srt = 40, adj = 1, xpd = TRUE)
+    # Use bold for obligate anaerobes 20241205
+    text(x = seq_along(genus)[ianaerobe], y = par()$usr[3] - strheight("A"), labels = genus[ianaerobe], srt = 40, adj = 1, font = 2, xpd = TRUE)
+    text(x = seq_along(genus)[!ianaerobe], y = par()$usr[3] - strheight("A"), labels = genus[!ianaerobe], srt = 40, adj = 1, xpd = TRUE)
     # Add tick marks
     axis(1, at = seq_along(labels), labels = FALSE)
     if(disease == "COVID") {
@@ -804,10 +819,10 @@ microhum_6 <- function(pdf = FALSE) {
     main <- hyphen.in.pdf(gsub("COVID", "COVID-19", site))
     title(main, font.main = 1, line = 0.5)
     # Add panel title
-    atitle <- bquote(bold("A. Genus abundance vs"~bolditalic(n)*O[2]~.(
+    atitle <- bquote(bold("a. Genus abundance vs"~bolditalic(n)*O[2]~.(
       hyphen.in.pdf("for body sites (data from Boix-Amor\u00f3s et al., 2021)"))))
     if(site == "Nasal") label.figure(atitle, font = 2, xfrac = 1.18, yfrac = 0.965, cex = 1.5)
-    btitle <- bquote(bold("B. Genus abundance vs"~bolditalic(n)*O[2]~.(
+    btitle <- bquote(bold("b. Genus abundance vs"~bolditalic(n)*O[2]~.(
       hyphen.in.pdf("for COVID-19 (data from Schult et al., 2022) and IBD (data from Lloyd-Price et al., 2019)"))))
     if(site == "COVID_control") label.figure(btitle, font = 2, xfrac = 1.71, yfrac = 0.965, cex = 1.5)
   }
@@ -844,7 +859,8 @@ microhum_6 <- function(pdf = FALSE) {
     if(type == "IBD") dy <- 2.2
     dy <- rep(dy, sum(itype))
     if(type == "naso") {
-      dy[8] <- -4
+      dy[9] <- 5
+      dy[8] <- -5
     }
     if(type == "oro") {
       dy[9] <- 0
@@ -856,16 +872,16 @@ microhum_6 <- function(pdf = FALSE) {
       dx[1] <- -2
     }
     if(type == "IBD") {
-      dy[c(7, 10)] <- -3
-      dy[c(12, 15)] <- 0
-      dx[c(12, 15)] <- 3
-      dx[4] <- 2
-      dy[4] <- 1
-      dx[c(5, 6)] <- -2
-      dx[6] <- -1.5
+      dy[3] <- -3
+      dy[12] <- 0
+      dx[12] <- 3
+      dx[5] <- -2
       dy[5] <- 0
-      dy[6] <- -2
-      dx[9] <- -1
+      dx[15] <- -3
+      dy[15] <- -1
+      dx[6] <- 2
+      dy[6] <- -1
+      dx[10] <- 2
     }
     # Label points
     text(control[itype] + dx, disease[itype] + dy, label)
@@ -874,7 +890,7 @@ microhum_6 <- function(pdf = FALSE) {
     title(titles[type], font.main = 1, line = 0.5)
 
     if(type == "naso") label.figure(
-      hyphen.in.pdf("C. Cumulative abundance of aerotolerant genera in COVID-19 and IBD (data sources listed in Table 1)"),
+      hyphen.in.pdf("c. Cumulative abundance of aerotolerant genera in COVID-19 and IBD (data sources listed in Table 1)"),
       font = 2, xfrac = 1.505, yfrac = 0.965, cex = 1.5
     )
   }
