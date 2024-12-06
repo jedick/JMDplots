@@ -933,7 +933,7 @@ microhum_S1 <- function(pdf = FALSE) {
   if(pdf) dev.off()
 }
 
-# Differences of nO2 and nH2O between untreated and viral-inactivated samples 20221125
+# Differences of oxygen and water content of proteins between untreated and viral-inactivated samples 20221125
 microhum_S2 <- function(pdf = FALSE) {
 
   if(pdf) pdf("Figure_S2.pdf", width = 6, height = 4)
@@ -1067,7 +1067,8 @@ microhum_S3 <- function(pdf = FALSE) {
 
 }
 
-# Differences of nO2 and nH2O between subcommunities of obligate anaerobes and aerotolerant genera in controls and patients 20240212
+# Differences of oxygen and water content of proteins between subcommunities of
+# obligate anaerobes and aerotolerant genera in controls and patients 20240212
 microhum_S4 <- function(pdf = FALSE) {
 
   if(pdf) pdf("Figure_S4.pdf", width = 10, height = 3.5)

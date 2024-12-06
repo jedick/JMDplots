@@ -36,7 +36,8 @@ This vignette runs the functions to make the plots from the following manuscript
 > Dick JM. 2024. Adaptations of microbial genomes to human body chemistry. bioRxiv preprint doi: [10.1101/2023.02.12.528246](https://doi.org/10.1101/2023.02.12.528246)
 
 **Update:** In July 2024, the taxonomic classifications and reference database were updated to use GTDB release 220.
-There are small changes in the figures compared to the preprint, which used GTDB release 207.
+The plots therefore display minor differences compared to the preprint, which used GTDB release 207.
+In addition, two 16S rRNA gene sequence datasets have been added for nasopharyngeal and gut communities in COVID-19.
 
 This vignette was compiled on `r Sys.Date()` with
 **[JMDplots](https://github.com/jedick/JMDplots)** `r packageDescription("JMDplots")$Version`,
@@ -94,7 +95,7 @@ microhum_6()
 microhum_S1()
 ```
 
-## Differences of `r nO2` and `r nH2O` between untreated and viral-inactivated samples (Figure S2)
+## Differences of oxygen and water content of proteins between untreated and viral-inactivated samples (Figure S2)
 ```{r microhum_S2, message = FALSE, out.width='100%', fig.width = 6, fig.height = 4, pngquant = pngquant, dpi = 100}
 microhum_S2()
 ```
@@ -108,7 +109,7 @@ microhum_S3()
 
 **Data source:** *List of Prokaryotes according to their Aerotolerant or Obligate Anaerobic Metabolism* [@MR18] with modifications made in this study.
 
-## Differences of `r nO2` and `r nH2O` between subcommunities of obligate anaerobes and aerotolerant genera in controls and patients (Figure S4)
+## Differences of oxygen and water content of proteins between subcommunities of obligate anaerobes and aerotolerant genera in controls and patients (Figure S4)
 ```{r microhum_S4, message = FALSE, out.width='100%', fig.align='center', fig.width = 10, fig.height = 3.5, pngquant = pngquant, dpi = 100}
 microhum_S4()
 ```
