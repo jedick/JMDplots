@@ -520,16 +520,12 @@ microhum_4 <- function(pdf = FALSE) {
     dy <- 0.002
     if(type == "gut") dy <- 0.0022
     dy <- rep(dy, sum(itype))
-    if(type == "naso") {
-      dx[5] <- 0.0002
-    }
     if(type == "gut") {
-      dy[c(2, 5, 6, 9)] <- -0.0018
+      dy[c(2, 5, 6, 8)] <- -0.002
       dx[5] <- -0.0002
-      dx[6] <- 0.0003
-      dy[7] <- 0
-      dx[7] <- -0.0007
-      dx[8] <- 0.0003
+      dx[6] <- 0.0002
+      dy[9] <- 0.001
+      dx[9] <- 0.0006
     }
     # Label points
     text(means$D_nO2[itype] + dx, means$D_nH2O[itype] + dy, label, cex = 0.8)
@@ -656,15 +652,15 @@ microhum_4 <- function(pdf = FALSE) {
   # Label points
   dx <- rep(0, sum(itype))
   dy <- rep(0.0018, sum(itype))
-  dx[12] <- -0.0015
-  dy[12] <- 0.0012
+  dx[11] <- -0.0015
   dx[14] <- 0.0002
-  dx[8] <- 0.0012
+  dx[c(4, 8)] <- 0.0014
+  dy[4] <- 0.0006
   dy[8] <- -0.0005
-  dx[4] <- 0.0014
-  dy[4] <- 0.0005
-  dx[c(10, 11, 15)] <- 0.0015
-  dy[c(10, 11, 15)] <- -0.0015
+  dx[9] <- 0.001
+  dy[9] <- -0.001
+  dx[c(10, 15)] <- 0.0015
+  dy[c(10, 15)] <- -0.0015
   text(means$D_nO2[itype] + dx, means$D_nH2O[itype] + dy, label, cex = 0.8)
   # Plot p-values 20230204
   plot.p.values(means$nO2_dn[itype], means$nO2_up[itype], means$nH2O_dn[itype], means$nH2O_up[itype], paired = TRUE)
@@ -774,11 +770,12 @@ microhum_5 <- function(pdf = FALSE) {
     oxygen.tolerance <- get.oxytol(genus)
     # Identify obligate anaerobes
     ianaerobe <- oxygen.tolerance == "obligate anaerobe"
-    genus[genus == "Bifidobacterium"] <- "Bifidobacterium *"
+    labels <- genus
+    labels[labels == "Bifidobacterium"] <- "Bifidobacterium *"
     # Make rotated labels (modified from https://www.r-bloggers.com/rotated-axis-labels-in-r-plots/)
     # Use bold for obligate anaerobes 20241205
-    text(x = seq_along(genus)[ianaerobe], y = par()$usr[3] - strheight("A"), labels = genus[ianaerobe], srt = 40, adj = 1, font = 2, xpd = TRUE)
-    text(x = seq_along(genus)[!ianaerobe], y = par()$usr[3] - strheight("A"), labels = genus[!ianaerobe], srt = 40, adj = 1, xpd = TRUE)
+    text(x = seq_along(labels)[ianaerobe], y = par()$usr[3] - strheight("A"), labels = labels[ianaerobe], srt = 40, adj = 1, font = 2, xpd = TRUE)
+    text(x = seq_along(labels)[!ianaerobe], y = par()$usr[3] - strheight("A"), labels = labels[!ianaerobe], srt = 40, adj = 1, xpd = TRUE)
     # Add tick marks
     axis(1, at = seq_along(labels), labels = FALSE)
     if(disease == "COVID") {
@@ -867,16 +864,16 @@ microhum_6 <- function(pdf = FALSE) {
       dx[9] <- -4
     }
     if(type == "gut") {
-      dy[c(3, 8)] <- -2.5
+      dy[c(3, 9)] <- -2.5
       dy[1] <- 0
       dx[1] <- -2
     }
     if(type == "IBD") {
       dy[3] <- -3
-      dy[12] <- 0
-      dx[12] <- 3
-      dx[5] <- -2
-      dy[5] <- 0
+      dy[11] <- 0
+      dx[11] <- 3
+      dx[7] <- -2
+      dy[7] <- 0
       dx[15] <- -3
       dy[15] <- -1
       dx[6] <- 2
@@ -991,7 +988,7 @@ microhum_S2 <- function(pdf = FALSE) {
 
 }
 
-# Differences of Zc and nH2O between obligate anaerobic and aerotolerant genera 20221017
+# Chemical features of reference proteomes for genera with known oxygen tolerance 20221017
 # Changed Zc to nO2 20230729
 microhum_S3 <- function(pdf = FALSE) {
 
@@ -1067,8 +1064,8 @@ microhum_S3 <- function(pdf = FALSE) {
 
 }
 
-# Differences of oxygen and water content of proteins between subcommunities of
-# obligate anaerobes and aerotolerant genera in controls and patients 20240212
+# Differences of chemical features of proteins between subcommunities of obligate
+# anaerobes and aerotolerant genera from controls and patients 20240212
 microhum_S4 <- function(pdf = FALSE) {
 
   if(pdf) pdf("Figure_S4.pdf", width = 10, height = 3.5)
@@ -1211,15 +1208,15 @@ dataset_metrics <- function() {
   # List COVID-19 and IBD datasets
   microhum_studies <- list(
     # COVID-19 nasopharyngeal
-    naso = c("PMM+22", "SGC+21", "HMH+21", "VCV+21", "SRS+22", "CSC+22", "GKJ+22", "MLW+21_Nasopharyngeal", "HMA+22"),
+    naso = c("PMM+22", "SGC+21", "VCV+21", "CSC+22", "HMH+21", "GKJ+22", "SRS+22", "MLW+21_Nasopharyngeal", "HMA+22"),
     # COVID-19 oral/oropharyngeal
-    oro = c("RFH+22_Oral", "IZC+21", "GBS+22", "WCJ+21_Oral", "XLZ+21", "MAC+21", "MLW+21_Oropharyngeal", "GWL+21", "RWC+21_Oral"),
+    oro = c("RFH+22_Oral", "IZC+21", "GBS+22", "WCJ+21_Oral", "MAC+21", "XLZ+21", "MLW+21_Oropharyngeal", "GWL+21", "RWC+21_Oral"),
     # COVID-19 gut
     gut = c("ZZZ+21", "RFH+22_Gut", "KMG+21", "WCJ+21_Gut", "CGC+22", "GCW+20", "NGH+21",
-            "RDM+22", "MIK+22", "WZL+23", "AHM+21", "GCP+23", "FBD+22", "RWC+21_Gut", "SRK+22"),
+            "MIK+22", "RDM+22", "WZL+23", "AHM+21", "GCP+23", "RWC+21_Gut", "FBD+22", "SRK+22"),
     # IBD gut
-    IBD = c("ZTG+21", "ASM+23", "DKK+23", "AAM+20", "PYL+23", "MLL+16", "LZD+19",
-            "BKK+17", "MDV+22", "LAA+19", "REP+23", "HBL+17", "GKD+14", "WGL+19", "RAF+20")
+    IBD = c("ZTG+21", "ASM+23", "DKK+23", "AAM+20", "LZD+19", "MLL+16", "PYL+23",
+            "BKK+17", "REP+23", "LAA+19", "HBL+17", "MDV+22", "GKD+14", "WGL+19", "RAF+20")
   )
 
   # Loop over groups of datasets

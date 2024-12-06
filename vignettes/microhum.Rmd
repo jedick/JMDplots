@@ -102,14 +102,14 @@ microhum_S2()
 
 **Data source:** @BPB+21.
 
-## Chemical metrics of reference proteomes for genera with known oxygen tolerance (Figure S3)
+## Chemical features of reference proteomes for genera with known oxygen tolerance (Figure S3)
 ```{r microhum_S3, message = FALSE, out.width='75%', fig.align='center', fig.width = 7, fig.height = 4, pngquant = pngquant, dpi = 100}
 microhum_S3()
 ```
 
 **Data source:** *List of Prokaryotes according to their Aerotolerant or Obligate Anaerobic Metabolism* [@MR18] with modifications made in this study.
 
-## Differences of oxygen and water content of proteins between subcommunities of obligate anaerobes and aerotolerant genera in controls and patients (Figure S4)
+## Differences of chemical features of proteins between subcommunities of obligate anaerobes and aerotolerant genera from controls and patients (Figure S4)
 ```{r microhum_S4, message = FALSE, out.width='100%', fig.align='center', fig.width = 10, fig.height = 3.5, pngquant = pngquant, dpi = 100}
 microhum_S4()
 ```
