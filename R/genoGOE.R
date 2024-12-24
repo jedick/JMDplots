@@ -16,7 +16,7 @@ genoGOE_1 <- function(pdf = FALSE) {
   opar <- par(mgp = c(2.8, 1, 0), mar = c(5.1, 4.1, 2.1, 2.1))
 
   # Read methanogen genomes information
-  mgfile <- system.file("extdata/genoGOE/methanogen_genomes.csv", package = "JMDplots")
+  mgfile <- system.file("extdata/genoGOE/GTDB/methanogen_genomes.csv", package = "JMDplots")
   mg <- read.csv(mgfile)
   # Genomes in Halobacteriota
   Halo <- mg$Genome[mg$Methanogen_class == "II"]
@@ -26,7 +26,7 @@ genoGOE_1 <- function(pdf = FALSE) {
   # Panel A: Zc and GC of marker genes 20240528
 
   # Read data for GTDB marker genes
-  markerfile <- system.file("extdata/genoGOE/ar53_msa_marker_info_r220_XHZ+06.csv", package = "JMDplots")
+  markerfile <- system.file("extdata/genoGOE/GTDB/ar53_msa_marker_info_r220_XHZ+06.csv", package = "JMDplots")
   markerdat <- read.csv(markerfile)
   markerid <- sapply(strsplit(markerdat$Marker.Id, "_"), "[", 2)
   methanogendir <- system.file("extdata/genoGOE/methanogen", package = "JMDplots")
@@ -351,11 +351,11 @@ genoGOE_3 <- function(pdf = FALSE) {
 
   # Add proteins to CHNOSZ
   ip <- add.protein(aa, as.residue = TRUE)
-  # Setup basis species for Eh-pH diagram
+  # Setup basis species and swap O2 for e- to make Eh-pH diagram
   basis("QEC+")
   swap.basis("O2", "e-")
   # Set resolution
-  res <- 400
+  res <- 300
   
   # Loop over individual pairs
   for(pre in 1:3) {
@@ -402,7 +402,73 @@ genoGOE_3 <- function(pdf = FALSE) {
   text(9.5, 0.15, "Rubiscos became\nmore oxidized\nover the GOE", cex = 0.9)
   label.figure("C", cex = 1.5, font = 2, yfrac = 0.936)
 
+
   # Panel D: Comparison between Rubiscos and methanogen and Nitrososphaeria genomes
+  yvar <- "O2"
+  genoGOE_3D(yvar, res)
+
+  # Label lines
+  if(yvar == "Eh") {
+    text(8.1, -0.07, "Rubiscos", cex = 0.8)
+    text(7.4, -0.081, hyphen.in.pdf("Post-GOE"), srt = -27, cex = 0.75)
+    text(7.33, -0.105, hyphen.in.pdf("Pre-GOE"), srt = -27, cex = 0.75)
+
+    text(8.3, -0.19, "Methanogen\ngenomes", cex = 0.8)
+    text(7.35, -0.215, "Class I", srt = -33, cex = 0.75)
+    text(7.5, -0.2, "Class II", srt = -33, cex = 0.75)
+
+    text(4.9, -0.18, "Nitrososphaeria\ngenomes", cex = 0.8)
+    text(6.03, -0.17, "Basal", srt = -33, cex = 0.75)
+    text(6.2, -0.155, "Terrestrial", srt = -33, cex = 0.75)
+  }
+  if(yvar == "O2") {
+    text(7, -61, " Rubiscos", cex = 0.8, adj = 0)
+    text(7, -61, hyphen.in.pdf("Pre-GOE "), cex = 0.75, adj = 1, srt = 20)
+    text(7, -59.8, hyphen.in.pdf("Post-GOE "), cex = 0.75, adj = 1, srt = 20)
+
+    text(7, -67, " Methanogen genomes", cex = 0.8, adj = 0)
+    text(6.5, -67.8, "Class I ", cex = 0.75)
+    text(6.5, -66.7, "Class II ", cex = 0.75)
+
+    text(7, -69.2, " Nitrososphaeria genomes", cex = 0.8, adj = 0)
+    text(6.5, -70.2, "Basal ", cex = 0.75)
+    text(6.5, -69.2, "Terrestrial ", cex = 0.75)
+  }
+
+  title("Groupwise relative stabilities of Rubiscos\nand unrelated genomes", font.main = 1, xpd = NA)
+  label.figure("D", cex = 1.5, font = 2, yfrac = 0.936)
+
+  # Add more arrows 20240812
+  plot.new()
+  par(xpd = NA)
+  if(yvar == "Eh") {
+    arrows(0, 0.1, 0, 0.3, length = 0.2, lwd = 2, col = 7)
+    arrows(0.1, 0.1, 0.1, 0.3, length = 0.2, lwd = 2, col = 2)
+    arrows(0.05, 0.4, 0.05, 0.6, length = 0.2, lwd = 2, col = 4)
+    text(0.5, 0.35, "1: Proteins in many organisms\nbecame more oxidized\nover the GOE")
+    text(0.05, 0.85, hyphen.in.pdf("2: Rubisco records\nmore oxidizing conditions\ncompared to genomes of\nnon-photosynthetic organisms\nat the time of the GOE"))
+  }
+  if(yvar == "O2") {
+    arrows(-0.08, 0.12, -0.08, 0.32, length = 0.2, lwd = 2, col = 7)
+    arrows(-0.02, 0.18, -0.02, 0.38, length = 0.2, lwd = 2, col = 2)
+    arrows(-0.05, 0.7, -0.05, 0.9, length = 0.2, lwd = 2, col = 4)
+    text(0.05, 0.25, "1: Protein sequences in many lineages\nwere oxidized over the GOE", adj =0)
+    text(0.05, 0.8, hyphen.in.pdf("2: Rubisco records more oxidizing conditions\ncompared to genomes of non-photosynthetic\norganisms at the time of the GOE"), adj = 0)
+  }
+
+  if(pdf) dev.off()
+
+}
+
+
+# Code for Figure 3D
+# Comparison of Rubiscos and methanogen and Nitrososphaeria genomes
+genoGOE_3D <- function(yvar = "Eh", res = 400, add = FALSE, lwd = 2, pHlim = c(4, 10), Ehlim = c(-0.3, 0.1), O2lim = c(-72.5, -58), alpha.f = 1, Eh7_las = 1) {
+
+  # Setup basis species
+  basis("QEC+")
+  # Swap O2 for e- to make Eh-pH diagram
+  if(yvar == "Eh") swap.basis("O2", "e-")
 
   for(i in 1:3) {
 
@@ -416,7 +482,7 @@ genoGOE_3 <- function(pdf = FALSE) {
       # Get the species in each group
       groups <- list("Class I" = iI, "Class II" = iII)
       col <- 2
-      add <- FALSE
+      add <- add
     }
 
     if(i == 2) {
@@ -450,41 +516,130 @@ genoGOE_3 <- function(pdf = FALSE) {
       add <- TRUE
     }
 
-    # Make affinity rank plot 20220602
+    # Make affinity ranking plot 20220602
     # Load proteins and calculate affinity
     ip <- add.protein(aa, as.residue = TRUE)
-    aout <- affinity(pH = c(4, 10, res), Eh = c(-0.3, 0.1, res), iprotein = ip)
+    if(yvar == "Eh") aout <- affinity(pH = c(pHlim, res), Eh = c(Ehlim, res), iprotein = ip)
+    if(yvar == "O2") aout <- affinity(pH = c(pHlim, res), O2 = c(O2lim, res), iprotein = ip)
     # Calculate average ranking for each group and make diagram
     arank <- rank.affinity(aout, groups)
-    diagram(arank, col = col, lwd = 2, add = add, names = "")
+    diagram(arank, col = adjustcolor(col, alpha.f = alpha.f), lwd = lwd, add = add, names = "")
+
+    # Add Eh7 axis 20241218
+    if(yvar == "O2") {
+      # Calculate range of pe at pH = 7
+      # H2O = 0.5 O2(gas) + 2 H+ + 2 e- 
+      # logK = -41.55
+      # --> pe7 = 0.25 * logfO2 + 13.775
+      # --> logfO2 = 4 * pe7 - 55.1
+      Eh7_to_logfO2 <- function(Eh7) {
+        pe7 <- convert(Eh7, "pe")
+        logfO2 <- 4 * pe7 - 55.1
+        logfO2
+      }
+      Eh7ticks <- seq(-0.25, 0.05, 0.05)
+      logfO2ticks <- Eh7_to_logfO2(Eh7ticks)
+      axis(4, at = logfO2ticks, labels = Eh7ticks, tcl = -0.3, mgp = c(2, 0.5, 0))
+      mtext("Eh7 (V)", 4, line = 3, las = Eh7_las)
+    }
 
   }
 
-  # Label lines
-  text(8.1, -0.07, "Rubiscos", cex = 0.8)
-  text(7.4, -0.081, hyphen.in.pdf("Post-GOE"), srt = -27, cex = 0.75)
-  text(7.33, -0.105, hyphen.in.pdf("Pre-GOE"), srt = -27, cex = 0.75)
+}
 
-  text(8.3, -0.19, "Methanogen\ngenomes", cex = 0.8)
-  text(7.35, -0.215, "Class I", srt = -33, cex = 0.75)
-  text(7.5, -0.2, "Class II", srt = -33, cex = 0.75)
+# Evolutionary oxidation and relative stabilities for genomes with S-cycling genes 20241211
+genoGOE_4 <- function(pdf = FALSE) {
+  # genoGOE/sulfur_genomes.R
+  # 20241211 add Eh-pH affinity ranking
+  # 20241223 convert to logfO2-pH
 
-  text(4.9, -0.18, "Nitrososphaeria\ngenomes", cex = 0.8)
-  text(6.03, -0.17, "Basal", srt = -33, cex = 0.75)
-  text(6.2, -0.155, "Terrestrial", srt = -33, cex = 0.75)
+  # List genomes with single sulfur-cycling genes
+  genomes <- list(
+    dsrAB = c("GCA_002782605.1", "GCF_000517565.1", "GCA_002878135.1"),
+    soxC = c("GCF_000153205.1", "GCF_000024725.1", "GCA_001914955.1", "GCA_002731275.1", 
+      "GCA_002007425.1", "GCA_001780165.1", "GCA_002721445.1", "GCF_900129635.1", 
+      "GCA_002162915.1", "GCA_002712885.1", "GCF_000484535.1", "GCF_000969705.1", 
+      "GCF_002148795.1", "GCF_002514725.1", "GCF_900106035.1", "GCA_002687025.1", 
+      "GCA_003222815.1", "GCF_900187885.1", "GCA_002712165.1", "GCA_002705185.1", 
+      "GCA_003228115.1"),
+    soxABXYZ = c("GCF_000021565.1", "GCF_900142435.1", "GCA_000830255.1", "GCF_000227215.1"),
+    aprAB = c("GCA_001800245.1", "GCA_002898195.1", "GCA_002717185.1", "GCF_000328625.1", 
+      "GCF_002252565.1", "GCA_001805205.1", "GCA_001784555.1", "GCA_001443375.1"),
+    dmsA = c("GCF_000384115.1", "GCA_001593855.1", "GCF_000020005.1", "GCA_003242675.1", 
+      "GCA_001771285.1", "GCA_002717245.1", "GCA_003223635.1", "GCF_001051235.1", 
+      "GCA_001304035.1", "GCF_000772535.1", "GCA_002898895.1", "GCF_001049895.1", 
+      "GCF_001860525.1", "GCA_001775395.1", "GCA_001775995.1", "GCA_001830835.1", 
+      "GCF_000487995.1", "GCA_002747435.1", "GCA_002839495.1", "GCA_001515205.2", 
+      "GCA_001742785.1", "GCA_001775755.1", "GCA_001768675.1"),
+    mddA = c("GCA_003223145.1", "GCA_001872725.1", "GCF_000018105.1", "GCA_001447805.1", 
+      "GCA_002400775.1", "GCA_001563325.1", "GCA_002746235.1", "GCA_001780825.1", 
+      "GCF_000970205.1", "GCA_002746185.1", "GCA_002790835.1", "GCF_001886815.1", 
+      "GCF_000192575.1", "GCA_002256595.1", "GCF_900111015.1", "GCA_001664505.1", 
+      "GCA_002841995.1", "GCA_002699105.1", "GCF_002563855.1", "GCA_003219195.1"),
+    dmdA = c("GCA_002707655.1", "GCF_900102465.1", "GCA_001800745.1", "GCF_001029505.1", 
+      "GCA_002717565.1", "GCA_002701885.1", "GCA_002722565.1")
+  )
 
-  title("Groupwise relative stabilities of Rubiscos\nand unrelated genomes", font.main = 1, xpd = NA)
-  label.figure("D", cex = 1.5, font = 2, yfrac = 0.936)
+  # Get amino acid compositions and Zc for genomes
+  aa <- read.csv(system.file("extdata/genoGOE/MCK+23/genome_aa.csv", package = "JMDplots"))
+  Zcvals <- Zc(aa)
+  # List Zc for each genome in list
+  Zclist <- lapply(genomes, function(genome) Zcvals[aa$organism %in% genome])
+  # Add number of genomes to labels
+  names(Zclist) <- paste0(names(Zclist), "\n(", sapply(Zclist, length), ")")
+  # Use colors from Mateos et al., 2023
+  dsr <- "#bcb2ce"
+  sox <- "#45b78d"
+  mdd <- "#c24a96"
+  # Colors for protein groups
+  col <- c(dsr, sox, sox, dsr, mdd, mdd, mdd)
 
-  # Add more arrows 20240812
-  plot.new()
-  par(xpd = NA)
-  arrows(0, 0.1, 0, 0.3, length = 0.2, lwd = 2, col = 7)
-  arrows(0.1, 0.1, 0.1, 0.3, length = 0.2, lwd = 2, col = 2)
-  arrows(0.05, 0.4, 0.05, 0.6, length = 0.2, lwd = 2, col = 4)
-  text(0.5, 0.35, "1: Proteins in many organisms\nbecame more oxidized\nover the GOE")
-  text(0.05, 0.85, hyphen.in.pdf("2: Rubisco records\nmore oxidizing conditions\ncompared to genomes of\nnon-photosynthetic organisms\nat the time of the GOE"))
+  # Plot Zc of genomes with S-cycling genes from Mateos et al. (2023)  20240916
+  sulfur_Zc <- function() {
+    # Setup plot
+    par(mar = c(4.1, 4.1, 4.1, 2.1))
+    n <- length(Zclist)
+    boxplot(Zclist, col = col, names = character(n), xlab = "Age of earliest gene event (Ga)", ylab = "Zc of all proteins in genome")
+    text(2.5, -0.24, hyphen.in.pdf("Dissimilatory sulfate-sulfite-sulfide oxidation/reduction"), col = dsr)
+    text(2.8, -0.12, hyphen.in.pdf("Sulfate-thiosulfate\noxidation/reduction"), col = sox)
+    text(6, -0.22, "Organic sulfur cycling", col = mdd)
+    # Ages from Table 2 of Mateos et al.
+    ages <- c("3.3-3.35", "2.65-2.88", "2.6", "2.33-2.47", "2.28", "1.77", "0-2.38")
+    axis(1, at = 1:n, labels = ages, lwd = 0)
+    axis(3, at = 1:n, labels = names(Zclist), line = -0.5, lwd = 0)
+    title(hyphen.in.pdf("Sulfur-cycling gene or gene cluster (# of exclusive genomes)"), font.main = 1, line = 3)
+  }
 
+  # Affinity ranking for genomes with different S-cycling genes
+  sulfur_affinity <- function() {
+    par(mar = c(4.1, 4.1, 4.1, 4.1))
+    basis("QEC+")
+    # Keep genomes with single sulfur-cycling genes listed above
+    myaa <- aa[aa$organism %in% unlist(genomes), ]
+    # Load proteins for each genome
+    ip <- add.protein(myaa, as.residue = TRUE)
+    # Set resolution
+    res <- 150
+    # Calculate affinity of composition reactions as a function of Eh and pH
+    a <- affinity(pH = c(3, 10, res), O2 = c(-72.5, -58, res), iprotein = ip)
+    # Group genomes according to presence of sulfur-cycling genes
+    groups <- sapply(genomes, function(genome) match(genome, myaa$organism))
+    # Calculate normalized sum of ranks for each group and make diagram
+    arank <- rank.affinity(a, groups)
+    # Lighten colors
+    fill <- adjustcolor(col, alpha.f = 0.3)
+    diagram(arank, fill = fill, lty = 1, lwd = 1.5)
+  }
+
+  if(pdf) pdf("Figure_4.pdf", width = 8, height = 13)
+  layout(matrix(1:2), heights = c(5, 8))
+  sulfur_Zc()
+  label.figure("A", font = 2, cex = 1.6)
+  sulfur_affinity()
+  # Overlay stability boundaries for other genomes
+  genoGOE_3D("O2", add = TRUE, lwd = 4, pHlim = c(3, 10), alpha.f = 0.7, Eh7_las = 0)
+  title(main = hyphen.in.pdf("Groupwise relative stabilities of genomes with different S-cycling genes"), font.main = 1)
+  label.figure("B", font = 2, cex = 1.6)
   if(pdf) dev.off()
 
 }

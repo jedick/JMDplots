@@ -105,8 +105,8 @@ export(
   "check_IDs", "cleanup", "get_comptab", "diffplot", "qdist",
   "xsummary", "xsummary2", "xsummary3",
 
-  # genoGOE paper 20240328, 20240409, 20240602
-  "genoGOE_2", "genoGOE_3", "genoGOE_1"
+  # genoGOE paper 20240328, 20240409, 20240602, 20241224
+  "genoGOE_2", "genoGOE_3", "genoGOE_1", "genoGOE_4"
 )
 
 # Imports from CHNOSZ

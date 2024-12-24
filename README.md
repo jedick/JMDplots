@@ -15,18 +15,28 @@ See the manual page associated with each paper for additional details about scri
 <!-- Put a space before <details> to make ghostwriter format the lists correctly -->
  <details>
 
-<summary><code>genoGOE</code>: Genomes record the Great Oxidation Event (<i>in-preparation manuscript</i>)</summary>
+<summary><code>genoGOE</code>: Earth's oxygenation recorded in genomes (<i>in-preparation manuscript</i>)</summary>
 
 - [inst/extdata/genoGOE](inst/extdata/genoGOE): scripts and processed data files
 
-  - [methanogen_genomes.csv](inst/extdata/genoGOE/methanogen_genomes.csv): genome IDs and taxonomy in GTDB r220 for 19 Class I and 19 Class II methanogen species selected from Fig. 1 of [Lyu and Lu (2018)](https://doi.org/10.1038/ismej.2017.173)
-  - [process_GTDB.R](inst/extdata/genoGOE/process_GTDB.R): script to obtain DNA and protein sequences for 53 archaeal marker genes in GTDB and amino acid compositions for all proteins in 38 methanogen genomes
-  - [ar53_msa_marker_info_r220_XHZ+06.csv](inst/extdata/genoGOE/ar53_msa_marker_info_r220_XHZ+06.csv): list of archaeal marker genes from GTDB augmented with protein abundance information for *Methanococcus maripaludis* from [Xia et al. (2006)](https://doi.org/10.1074/mcp.M500369-MCP200)
+  - [GTDB](inst/extdata/genoGOE/GTDB): Processing data from GTDB with additional features
+
+    - [methanogen_genomes.csv](inst/extdata/genoGOE/GTDB/methanogen_genomes.csv): genome IDs and taxonomy in GTDB r220 for 19 Class I and 19 Class II methanogen species selected from Fig. 1 of [Lyu and Lu (2018)](https://doi.org/10.1038/ismej.2017.173)
+    - [process_GTDB.R](inst/extdata/genoGOE/GTDB/process_GTDB.R): script to obtain DNA and protein sequences for 53 archaeal marker genes in GTDB and amino acid compositions for all proteins in 38 methanogen genomes
+    - [ar53_msa_marker_info_r220_XHZ+06.csv](inst/extdata/genoGOE/GTDB/ar53_msa_marker_info_r220_XHZ+06.csv): list of archaeal marker genes from GTDB with protein abundance information for *Methanococcus maripaludis* added from [Xia et al. (2006)](https://doi.org/10.1074/mcp.M500369-MCP200)
+
   - [methanogen](inst/extdata/genoGOE/methanogen): sequences and amino acid compositions generated using `process_GTDB.R`
 
     - [marker/fna](inst/extdata/genoGOE/methanogen/marker/fna): Nucleotide sequences of marker genes
     - [marker/faa](inst/extdata/genoGOE/methanogen/marker/faa): Amino acid sequences of marker genes
     - [aa](inst/extdata/genoGOE/methanogen/aa): Amino acid compositions of all proteins
+
+  - [MCK+23](inst/extdata/genoGOE/MCK+23): Data for genomes with sulfur-cycling genes from [Mateos et al. (2023)](https://doi.org/10.1126/sciadv.ade4847)
+
+    - [get_genomes.R](inst/extdata/genoGOE/MCK+23/get_genomes.R): Script to identify genomes from bootstrap files, download genomes from NCBI, and make the following CSV files
+    - [genomes.csv](inst/extdata/genoGOE/MCK+23/genomes.csv): Table of genomes with binary labels denoting presence of specific S-cycling gene
+    - [genomes_aa.csv](inst/extdata/genoGOE/MCK+23/genomes_aa.csv): Amino acid composition for each genome with availability in NCBI
+    - [sulfur_genomes.xlsx](inst/extdata/genoGOE/MCK+23/sulfur_genomes.xlsx): Spreadsheet listing genomes that exclusively contain one S-cycling gene or gene cluster
 
 - [inst/extdata/evdevH2O/LMM16](inst/extdata/evdevH2O/LMM16): scripts and processed data files for consensus gene ages from [Liebeskind et al. (2016)](https://doi.org/10.1093/gbe/evw113), modified from the files used by [Dick (2022)](https://doi.org/10.1007/s00239-022-10051-7)
 

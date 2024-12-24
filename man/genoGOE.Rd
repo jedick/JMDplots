@@ -4,15 +4,17 @@
 \alias{genoGOE_1}
 \alias{genoGOE_2}
 \alias{genoGOE_3}
-\title{Genomes record the Great Oxidation Event}
+\alias{genoGOE_4}
+\title{Earth's oxygenation recorded in genomes}
 \description{
-Plots from the manuscript by Dick (2024).
+Plots from the manuscript by Dick (2025).
 }
 
 \usage{
   genoGOE_1(pdf = FALSE)
   genoGOE_2(pdf = FALSE, metric = "Zc")
   genoGOE_3(pdf = FALSE)
+  genoGOE_4(pdf = FALSE)
 }
 
 \arguments{
@@ -25,12 +27,13 @@ Plots from the manuscript by Dick (2024).
 \tabular{ll}{
   \code{genoGOE_1} \tab Genome-wide differences of oxidation state between two lineages of methanogens \cr
   \code{genoGOE_2} \tab Carbon oxidation state of proteins in eukaryotic gene age groups \cr
-  \code{genoGOE_3} \tab Evolutionary oxidation of ancestral Rubiscos and thermodynamic prediction of redox boundaries around the GOE \cr
+  \code{genoGOE_3} \tab Evolutionary oxidation of ancestral Rubiscos and relative stabilities as a function of redox and pH \cr
+  \code{genoGOE_4} \tab Evolutionary oxidation and relative stabilities for genomes with S-cycling genes \cr
 }
 }
 
 \references{
-Dick J (2024) Manuscript in preparation.
+Dick JM (2025) Manuscript in preparation.
 }
 
 \examples{
