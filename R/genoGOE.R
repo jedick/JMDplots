@@ -631,8 +631,8 @@ genoGOE_4 <- function(pdf = FALSE) {
     diagram(arank, fill = fill, lty = 1, lwd = 1.5)
   }
 
-  if(pdf) pdf("Figure_4.pdf", width = 8, height = 13)
-  layout(matrix(1:2), heights = c(5, 8))
+  if(pdf) pdf("Figure_4.pdf", width = 8, height = 12)
+  layout(matrix(1:2), heights = c(5, 7))
   sulfur_Zc()
   label.figure("A", font = 2, cex = 1.6)
   sulfur_affinity()

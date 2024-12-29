@@ -278,7 +278,7 @@ chnosz107 <- function(pdf = FALSE) {
   reset()
   r2 <- subcrt(c("boehmite", "H2O", "SiO2", "kaolinite"), c(-1, -0.5, -1, 0.5), T = T, P = 1000, exceed.Ttr = TRUE) 
   ## third calculation: get SiO2(aq) from SHS89
-  add.OBIGT("AS04")
+  add.OBIGT("SiO2")
   r3 <- subcrt(c("boehmite", "H2O", "SiO2", "kaolinite"), c(-1, -0.5, -1, 0.5), T = T, P = 1000, exceed.Ttr = TRUE) 
   ## log activity of SiO2 is -ve logK
   lines(T, -r1$out$logK, col = "blue1", lty = 2)
@@ -290,7 +290,7 @@ chnosz107 <- function(pdf = FALSE) {
   title(main = describe.reaction(r1$reaction), cex.main = 1.1)
   legend("bottomright", lty = c(0, 2, 0, 1, 2), pch = c(1, NA, 4, NA, NA), lwd = c(1, 1, 1, 1.5, 1),
          col = c("black", "blue", "red", "black", "red"), bty = "n", cex = 0.9,
-         legend = c("Hemley et al., 1980", "SUPCRT92", "SUPCRTBL", "CHNOSZ", 'add.OBIGT("AS04")'))
+         legend = c("Hemley et al., 1980", "SUPCRT92", "SUPCRTBL", "CHNOSZ", 'add.OBIGT("SiO2")'))
   legend("topleft", c("Boehmite - Kaolinite", "After Zhu and Lu, 2009 Fig. A1"), bty = "n")
   reset()
   # Helgeson et al., 1978 (HDNB78): http://www.worldcat.org/oclc/13594862
@@ -337,7 +337,7 @@ chnosz107 <- function(pdf = FALSE) {
   ### plot 3: kaolinite solubility
   ###########
   # After Tutolo et al., 2014, Fig. 2 (doi:10.1016/j.gca.2014.02.036)
-  dat <- read.csv(system.file("extdata/cpetc/TKSS14_Fig2.csv", package = "CHNOSZ"))
+  dat <- read.csv(system.file("extdata/misc/TKSS14_Fig2.csv", package = "CHNOSZ"))
   thermo.plot.new(c(3.5, 1.5), c(-2, 14), quote(1000 / italic(T)*"(K)"), quote(p*italic(K)))
   points(dat)
   # plot line: default database
@@ -347,7 +347,7 @@ chnosz107 <- function(pdf = FALSE) {
   pK <- -sres$out$logK
   lines(invTK, pK, lwd = 1.5)
   # plot line: SiO2 from Apps and Spycher, 2004
-  add.OBIGT("AS04")
+  add.OBIGT("SiO2")
   sres <- subcrt(c("kaolinite", "OH-", "H2O", "Al(OH)4-", "SiO2"), c(-1, -2, -1, 2, 2), T = T)
   pK <- -sres$out$logK
   lines(invTK, pK, col = "red", lty = 2)
@@ -367,7 +367,7 @@ chnosz107 <- function(pdf = FALSE) {
   par(xpd = FALSE)
   legend("topright", c("Kaolinite solubility", "After Tutolo et al., 2014 Fig. 2"), bty = "n")
   legend("bottomleft", lty = c(0, 0, 2, 0, 1, 2), pch = c(1, NA, NA, 4, NA, NA), lwd = c(1, 1, 1, 1, 1.5, 1), col = c("black", "black", "blue", "red", "black", "red"),
-         legend = c("Various sources \u2013", "  see Tutolo et al., 2014", "SUPCRT92", "SUPCRTBL", "CHNOSZ", 'add.OBIGT("AS04")'), bty = "n", cex = 0.9)
+         legend = c("Various sources \u2013", "  see Tutolo et al., 2014", "SUPCRT92", "SUPCRTBL", "CHNOSZ", 'add.OBIGT("SiO2")'), bty = "n", cex = 0.9)
   reset()
 
   ###########
@@ -384,7 +384,7 @@ chnosz107 <- function(pdf = FALSE) {
   a <- affinity("K+" = c(4, 7), "Na+" = c(6, 9), T = T, P = P)
   diagram(a, lwd = 1.5, xlab = ratlab("K+"), ylab = ratlab("Na+"), names = NA)
   # plot experimental data
-  dat <- read.csv(system.file("extdata/cpetc/Mer75_Table4.csv", package = "CHNOSZ"))
+  dat <- read.csv(system.file("extdata/misc/Mer75_Table4.csv", package = "CHNOSZ"))
   points(dat$log.aK..aH.., dat$log.aNa..aH..)
   # plot line calculated using SUPCRT92 data
   add.OBIGT("SUPCRT92")
