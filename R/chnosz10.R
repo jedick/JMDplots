@@ -134,8 +134,8 @@ chnosz105 <- function(pdf = FALSE) {
   do.call(species, sargs)
   a <- affinity(pH = c(0, 10), IS = 0)
   s <- solubility(a, in.terms.of = "Al+3")
-  diagram(s, type = "loga.balance", ylim = c(-10, 0), lwd = 3, col = "green3", mar=mar, mgp=mgp)
-  diagram(s, add = TRUE, adj = c(0, 1, 2.5, 0, -1.5), dy = c(0, 0, 4, 0, 0), names = c(-3, -4))
+  diagram(s, ylim = c(-10, 0), lwd = 3, col = "green3", mar=mar, mgp=mgp)
+  diagram(s, type = "loga.equil", add = TRUE, adj = c(0, 1, 2.5, 0, -1.5), dy = c(0, 0, 4, 0, 0), names = c(-3, -4))
   legend("topright", c("25 \u00b0C", "1 bar"), bty = "n")
   # add labels with custom placement 20190606
   text(1, -0.7, expr.species("AlOH+2"))
@@ -753,8 +753,8 @@ chnosz10S8 <- function(pdf = FALSE) {
     do.call(species, sargs)
     a <- affinity(pH = c(pH, res), T = T, IS = IS)
     s <- solubility(a, dissociate = dissociate)
-    diagram(s, ylim = c(-10, 4), type = "loga.balance", lwd = 4, col = "green2")
-    diagram(s, add = TRUE, dy = c(1, 0.7, 0.2))
+    diagram(s, ylim = c(-10, 4), lwd = 4, col = "green2")
+    diagram(s, type = "loga.equil", add = TRUE, dy = c(1, 0.7, 0.2))
     lexpr <- as.expression(c("total", expr.species("CO2", state = "aq"),
       expr.species("HCO3-"), expr.species("CO3-2")))
     legend("topright", lty = c(1, 1:3), lwd = c(4, 2, 2, 2),
@@ -845,13 +845,13 @@ chnosz10S9 <- function(pdf = FALSE) {
     # estimate solution composition for given amounts of NaCl and KCl
     chl <- chloride(T = seq(100, 550, 10), P = 1000, m_NaCl = m_NaCl, m_KCl = m_KCl)
     # calculate affinity and solubility
-    if(i==3) a <- affinity(T = seq(100, 550, 10), `Cl-` = log10(chl$m_Cl), P = 1000, IS = chl$IS)
-    else a <- affinity(T = seq(100, 550, 10), `Cl-` = log10(chl$m_Cl), `K+` = log10(chl$m_K), P = 1000, IS = chl$IS)
+    if(i==3) a <- affinity(T = seq(100, 550, 10), `Cl-` = log10(chl$m_Clminus), P = 1000, IS = chl$IS)
+    else a <- affinity(T = seq(100, 550, 10), `Cl-` = log10(chl$m_Clminus), `K+` = log10(chl$m_Kplus), P = 1000, IS = chl$IS)
     s <- solubility(a)
     sol.out[[i]] <- s
     # make diagram and show total log molality
-    diagram(s, ylim = c(-9, -4), col = col, lwd = 2, lty = 1, names = "")
-    diagram(s, add = TRUE, type = "loga.balance", lwd = 3)
+    diagram(s, type = "loga.equil", ylim = c(-9, -4), col = col, lwd = 2, lty = 1, names = "")
+    diagram(s, add = TRUE, lwd = 3)
     # label lines
     names <- as.expression(sapply(s$species$name, expr.species))
     text(names.x, names.y, names)
@@ -988,13 +988,13 @@ chnosz10S10 <- function(pdf = FALSE) {
     # estimate solution composition for given amounts of NaCl and KCl
     chl <- chloride(T = seq(100, 550, 10), P = 1000, m_NaCl = m_NaCl, m_KCl = m_KCl)
     # calculate affinity and solubility
-    if(i==2) a <- affinity(T = seq(100, 550, 10), `Cl-` = log10(chl$m_Cl), P = 1000, IS = chl$IS)
-    else a <- affinity(T = seq(100, 550, 10), `Cl-` = log10(chl$m_Cl), `K+` = log10(chl$m_K), P = 1000, IS = chl$IS)
+    if(i==2) a <- affinity(T = seq(100, 550, 10), `Cl-` = log10(chl$m_Clminus), P = 1000, IS = chl$IS)
+    else a <- affinity(T = seq(100, 550, 10), `Cl-` = log10(chl$m_Clminus), `K+` = log10(chl$m_Kplus), P = 1000, IS = chl$IS)
     s <- solubility(a)
     sol.out[[i]] <- s
     # make diagram and show total log molality
-    diagram(s, ylim = c(-12, -4), col = col, lwd = 2, lty = 1, names = "")
-    diagram(s, add = TRUE, type = "loga.balance", lwd = 3)
+    diagram(s, type = "loga.equil", ylim = c(-12, -4), col = col, lwd = 2, lty = 1, names = "")
+    diagram(s, add = TRUE, lwd = 3)
     # label lines
     names <- as.expression(sapply(s$species$name, expr.species))
     text(names.x, names.y, names)
@@ -1087,12 +1087,12 @@ chnosz10S10 <- function(pdf = FALSE) {
 # NaCl solution with total chloride equal to specified NaCl + KCl solution,
 # then estimate the molality of K+ in that solution 20181109
 chloride <- function(T, P, m_NaCl, m_KCl) {
-  NaCl <- NaCl(T = T, P = P, m_tot = m_NaCl + m_KCl)
+  NaCl <- NaCl(m_NaCl = m_NaCl + m_KCl, T = T, P = P)
   # calculate logK of K+ + Cl- = KCl, adjusted for ionic strength
   logKadj <- subcrt(c("K+", "Cl-", "KCl"), c(-1, -1, 1), T = T, P = P, IS = NaCl$IS)$out$logK
   # what is the molality of K+ from 0.5 mol/kg KCl, assuming total chloride from above
-  m_K <- m_KCl / (10^logKadj * NaCl$m_Cl + 1)
-  list(IS = NaCl$IS, m_Cl = NaCl$m_Cl, m_K = m_K)
+  m_Kplus <- m_KCl / (10^logKadj * NaCl$m_Clminus + 1)
+  list(IS = NaCl$IS, m_Clminus = NaCl$m_Clminus, m_Kplus = m_Kplus)
 }
 
 ## Function used in chnosz10S9 and chnosz10S10

@@ -250,8 +250,8 @@ carrollite_5 <- function(res = 500, pdf = FALSE) {
     basis(c(metal, "H2S", "Cl-", "oxygen", "H2O", "H+"))
     basis("H2S", log10(Stot))
     # Estimate ionic strength and molality of Cl-
-    NaCl <- NaCl(T = T, P = P, m_tot = mNaCl)
-    basis("Cl-", log10(NaCl$m_Cl))
+    NaCl <- NaCl(m_NaCl = mNaCl, T = T, P = P)
+    basis("Cl-", log10(NaCl$m_Clminus))
 
     # Add minerals and aqueous species
     icr <- retrieve(metal, c("H", "O", "S", "Cl"), state = "cr")
@@ -271,7 +271,7 @@ carrollite_5 <- function(res = 500, pdf = FALSE) {
     # Color for solubility contours
     if(metal == "Cu") scol <- 2
     if(metal == "Co") scol <- "blue2"
-    diagram(sout, type = "loga.balance", levels = levels, contour.method = "flattest", add = TRUE, col = scol, lwd = 1, cex = 0.8)
+    diagram(sout, levels = levels, contour.method = "flattest", add = TRUE, col = scol, lwd = 1, cex = 0.8)
 
   }
 
@@ -282,8 +282,8 @@ carrollite_5 <- function(res = 500, pdf = FALSE) {
     basis(c("Cu", "Co", "Cl-", "H2S", "H2O", "oxygen", "H+"))
     basis("H2S", log10(Stot))
     # Estimate ionic strength and molality of Cl-
-    NaCl <- NaCl(T = T, m_tot = mNaCl)
-    basis("Cl-", log10(NaCl$m_Cl))
+    NaCl <- NaCl(m_NaCl = mNaCl, T = T)
+    basis("Cl-", log10(NaCl$m_Clminus))
 
     # Speciate aqueous sulfur
     bases <- c("H2S", "HS-", "HSO4-", "SO4-2")
@@ -393,8 +393,8 @@ carrollite_8 <- function(res, pdf = FALSE) {
     basis(c("Cu", "Co", "Cl-", "H2S", "H2O", "oxygen", "H+"))
     basis("H2S", log10(Stot))
     # Estimate ionic strength and molality of Cl-
-    NaCl <- NaCl(T = T, m_tot = mNaCl)
-    basis("Cl-", log10(NaCl$m_Cl))
+    NaCl <- NaCl(m_NaCl = mNaCl, T = T)
+    basis("Cl-", log10(NaCl$m_Clminus))
 
     # Speciate aqueous sulfur
     bases <- c("H2S", "HS-", "HSO4-", "SO4-2")
@@ -443,8 +443,8 @@ carrollite_8 <- function(res, pdf = FALSE) {
     basis(c("Fe", "Cu", "Cl-", "H2S", "H2O", "oxygen", "H+"))
     basis("H2S", log10(Stot))
     # Estimate ionic strength and molality of Cl-
-    NaCl <- NaCl(T = T, m_tot = mNaCl)
-    basis("Cl-", log10(NaCl$m_Cl))
+    NaCl <- NaCl(m_NaCl = mNaCl, T = T)
+    basis("Cl-", log10(NaCl$m_Clminus))
 
     # Speciate aqueous sulfur
     bases <- c("H2S", "HS-", "HSO4-", "SO4-2")
@@ -697,8 +697,8 @@ carrollite_S6 <- function(res = 500, pdf = FALSE) {
     # Molality of NaCl
     mNaCl <- 1000 * wNaCl / (mass("NaCl") * (1 - wNaCl))
     # Estimate ionic strength and molality of Cl-
-    NaCl <- NaCl(T = T, P = P, m_tot = mNaCl)
-    basis("Cl-", log10(NaCl$m_Cl))
+    NaCl <- NaCl(m_NaCl = mNaCl, T = T, P = P)
+    basis("Cl-", log10(NaCl$m_Clminus))
 
     # Add minerals and aqueous species
     icr <- retrieve(metal, c("H", "O", "S", "Cl"), state = "cr")
