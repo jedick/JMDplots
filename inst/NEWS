@@ -1,5 +1,7 @@
-CHANGES IN JMDplots 1.2.20-13
------------------------------
+CHANGES IN JMDplots 1.2.21
+--------------------------
+
+- 20250116 Update plots for microhum paper.
 
 - 20241202 Don't subscript elemental formulas in labels.
 

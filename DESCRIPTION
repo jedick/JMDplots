@@ -1,6 +1,6 @@
-Date: 2025-01-08
+Date: 2025-01-16
 Package: JMDplots
-Version: 1.2.20-22
+Version: 1.2.21
 Title: Plots from Papers by Jeffrey M. Dick
 Authors@R: c(
     person("Jeffrey", "Dick", , "jeff@chnosz.net", role = c("aut", "cre"),
@@ -8,7 +8,7 @@ Authors@R: c(
     )
 Author: Jeffrey Dick [aut, cre] (0000-0002-0687-5890)
 Maintainer: Jeffrey Dick <jeff@chnosz.net>
-Depends: R (>= 3.2.0), CHNOSZ (> 2.1.0), canprot (>= 2.0.0), chem16S (> 1.1.0)
+Depends: R (>= 3.2.0), CHNOSZ (> 2.1.0), canprot (>= 2.0.0), chem16S (>= 1.2.0)
 Imports: shiny, timevis, png, MASS, diagram, ggplot2, ggrepel, gridExtra, rmarkdown,
   boot, grid, oce, sf, eulerr, ape, multcompView, dunn.test, plot.matrix, xtable, beanplot
 Suggests: bibtex, knitr, kableExtra, phyloseq, patchwork

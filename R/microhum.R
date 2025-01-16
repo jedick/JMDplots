@@ -67,13 +67,13 @@ microhum_1 <- function(pdf = FALSE) {
     if(metric == "nO2") {
       xlim <- c(-0.8, -0.55)
       ylim <- c(-0.8, -0.6)
-      main <- quote("Stoichiometric oxidation state (" * italic(n)*O[2] * ")")
+      main <- quote("Stoichiometric oxygen content (" * italic(n)*O[2] * ")")
     }
 
     if(metric == "nH2O") {
       xlim <- c(-1.05, -0.72)
       ylim <- c(-0.8, -0.72)
-      main <- quote("Stoichiometric hydration state (" * italic(n)*H[2]*O * ")")
+      main <- quote("Stoichiometric water content (" * italic(n)*H[2]*O * ")")
     }
 
     # Compute min/max limits for 1:1 line
