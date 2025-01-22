@@ -138,7 +138,8 @@ importFrom("CHNOSZ",
   # utogig
   "rank.affinity",
   # carrollite
-  "logB.to.OBIGT", "T.units", "check.GHS", "retrieve", "stack_mosaic",
+  # NOTE: add import of "logB.to.OBIGT" after CHNOSZ 2.2.0 is released 20250122
+  "T.units", "check.GHS", "retrieve", "stack_mosaic",
   "lT", "lP", "lNaCl", "lS", "lex"
 )
 
@@ -224,3 +225,6 @@ S3method(dunnTest,default)
 S3method(dunnTest,formula)
 S3method(print,dunnTest)
 export(dunnTest)
+
+# For checking CHNOSZ version 20250122
+importFrom("utils", "packageVersion")
