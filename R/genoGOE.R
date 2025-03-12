@@ -23,7 +23,7 @@ genoGOE_1 <- function(pdf = FALSE) {
   # Genomes in Methanobacteriota
   Methano <- mg$Genome[mg$Methanogen_class == "I"]
 
-  # Panel A: Zc and GC of marker genes 20240528
+  # Panels A-B: Zc and GC of marker genes 20240528
 
   # Read data for GTDB marker genes
   markerfile <- system.file("extdata/genoGOE/GTDB/ar53_msa_marker_info_r220_XHZ+06.csv", package = "JMDplots")
@@ -69,10 +69,15 @@ genoGOE_1 <- function(pdf = FALSE) {
     lines(c(i, i) - 0.1, Zc_Methano[i, c(2, 4)], col = 2)
     lines(c(i, i) + 0.1, Zc_Halo[i, c(2, 4)], col = 4)
   }
-  # Add legend for methanogen Class I and II
+  # Add legend for Class I and II methanogens
   legend("bottomright", "Class I", lty = 1, col = 2, bty = "n")
   legend("topleft", "Class II", lty = 1, col = 4, bty = "n")
   label.figure("A", font = 2, cex = 1.6)
+  # Calculate p-value 20250304
+  # Use median value in each group (3rd column) and paired observations
+  p <- t.test(Zc_Halo[, 3], Zc_Methano[, 3], paired = TRUE)$p.value
+  ptext <- bquote(italic(p) == .(signif(p, 2)))
+  text(5, par("usr")[3], ptext, adj = c(0, -0.5))
 
   # Get GC for species in each phylum
   GC_Halo <- get_GC("Halo")
@@ -87,6 +92,13 @@ genoGOE_1 <- function(pdf = FALSE) {
     lines(c(i, i) + 0.1, GC_Halo[i, c(2, 4)], col = 4)
   }
   label.figure("B", font = 2, cex = 1.6)
+  # Calculate p-value 20250304
+  # Use median value in each group (3rd column) and paired observations
+  p <- t.test(GC_Halo[, 3], GC_Methano[, 3], paired = TRUE)$p.value
+  ptext <- bquote(italic(p) == .(signif(p, 2)))
+  text(5, par("usr")[3], ptext, adj = c(0, -0.5))
+
+  # Panel C: Delta Zc for marker genes
 
   # Plot Delta Zc vs Delta GC
   par(mar = c(4.1, 4.1, 1.1, 2.1))
@@ -123,7 +135,7 @@ genoGOE_1 <- function(pdf = FALSE) {
 
   par(opar)
 
-  # Panel B: Zc controlled for various factors 20240529
+  # Panel D: Zc controlled for various factors 20240529
    
   # Get values of Zc, GC, and Cost
   genomes <- mg$Genome
@@ -178,9 +190,13 @@ genoGOE_1 <- function(pdf = FALSE) {
   # Add means for species in each phylum
   abline(h = bp$stats[1], col = 2, lty = 2)
   abline(h = bp$stats[2], col = 4, lty = 2)
+  # Add labels for methanogen classes
+  text(0.6, bp$stats[1] + 0.008, "Class I")
+  text(1.6, bp$stats[2] + 0.008, "Class II")
   # Add beans for GC and Cost
   beanplot(Zc[, 3:14], side = "both", col = list(c(2, 7, 2, 2), c(4, 3, 4, 4)), xlim = c(0.5, 7.5), what = what, names = character(6), add = TRUE, at = 2:7)
   mtext(quote("Protein"~italic(Z)[C]), 2, line = 2.8, cex = par("cex"))
+
 
   # Add group names
   axis(1, at = 2:4, labels = c("GC < 0.34", "0.34 < GC < 0.36", "GC > 0.36"))

@@ -101,21 +101,13 @@ add_Co_aqueous <- function() {
   for(i in 1:4) {
     # Don't try to fit NA values
     ina <- is.na(logB_table3[[i]])
-    if(packageVersion("CHNOSZ") > "2.1.0") {
-      CHNOSZ::logK.to.OBIGT(logB_table3[[i]][!ina], species.Cl[[i]], coeff.Cl[[i]], T = T_table3[!ina], P = "Psat", npar = 2, tolerance = tolerance[i])
-    } else {
-      CHNOSZ::logB.to.OBIGT(logB_table3[[i]][!ina], species.Cl[[i]], coeff.Cl[[i]], T = T_table3[!ina], P = "Psat", npar = 2, tolerance = tolerance[i])
-    }
+    CHNOSZ::logK.to.OBIGT(logB_table3[[i]][!ina], species.Cl[[i]], coeff.Cl[[i]], T = T_table3[!ina], P = "Psat", npar = 2, tolerance = tolerance[i])
   }
   # Fit solubility data for HS complexes
   ## Use HS- reaction only
   for(i in 1:1) {
     ina <- is.na(logB_table4[[i]])
-    if(packageVersion("CHNOSZ") > "2.1.0") {
-      CHNOSZ::logK.to.OBIGT(logB_table4[[i]][!ina], species.HS[[i]], coeff.HS[[i]], T = T_table4[!ina], P = "Psat", npar = 2, tolerance = 0.1)
-    } else {
-      CHNOSZ::logB.to.OBIGT(logB_table4[[i]][!ina], species.HS[[i]], coeff.HS[[i]], T = T_table4[!ina], P = "Psat", npar = 2, tolerance = 0.1)
-    }
+    CHNOSZ::logK.to.OBIGT(logB_table4[[i]][!ina], species.HS[[i]], coeff.HS[[i]], T = T_table4[!ina], P = "Psat", npar = 2, tolerance = 0.1)
   }
 
   # Return values for making Figure S4 20240206
