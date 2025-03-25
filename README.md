@@ -38,6 +38,9 @@ See the manual page associated with each paper for additional details about scri
     - [genomes_aa.csv](inst/extdata/genoGOE/MCK+23/genomes_aa.csv): Amino acid composition for each genome with availability in NCBI
     - [sulfur_genomes.xlsx](inst/extdata/genoGOE/MCK+23/sulfur_genomes.xlsx): Spreadsheet listing genomes that exclusively contain one S-cycling gene or gene cluster
 
+  - [GMKK20](inst/extdata/genoGOE/GMKK20): Data for extant and reconstructed ancestral nitrogenase sequences taken from [Garcia et al. (2020)](https://doi.org/10.1111/gbi.12381)
+  	- [nitrogenase_aa.csv](inst/extdata/genoGOE/GMKK20/nitrogenase_aa.csv): Amino acid compositions computed from the [Extant-MLAnc_Align.fasta](https://github.com/kacarlab/AncientNitrogenase/blob/master/Extant-MLAnc_Align.fasta) file in the [kacarlab](https://github.com/kacarlab) GitHub repo
+
 - [inst/extdata/evdevH2O/LMM16](inst/extdata/evdevH2O/LMM16): scripts and processed data files for consensus gene ages from [Liebeskind et al. (2016)](https://doi.org/10.1093/gbe/evw113), modified from the files used by [Dick (2022)](https://doi.org/10.1007/s00239-022-10051-7)
 
     - [mkaa.R](inst/extdata/evdevH2O/LMM16/mkaa.R): *script*: sum amino acid compositions of proteins in each gene age category

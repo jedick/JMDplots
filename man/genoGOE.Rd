@@ -5,6 +5,7 @@
 \alias{genoGOE_2}
 \alias{genoGOE_3}
 \alias{genoGOE_4}
+\alias{genoGOE_5}
 \title{Earth's oxygenation recorded in genomes}
 \description{
 Plots from the manuscript by Dick (2025).
@@ -15,6 +16,7 @@ Plots from the manuscript by Dick (2025).
   genoGOE_2(pdf = FALSE, metric = "Zc")
   genoGOE_3(pdf = FALSE)
   genoGOE_4(pdf = FALSE)
+  genoGOE_5(pdf = FALSE)
 }
 
 \arguments{
@@ -29,6 +31,7 @@ Plots from the manuscript by Dick (2025).
   \code{genoGOE_2} \tab Carbon oxidation state of proteins in eukaryotic gene age groups \cr
   \code{genoGOE_3} \tab Evolutionary oxidation of ancestral Rubiscos and relative stabilities as a function of redox and pH \cr
   \code{genoGOE_4} \tab Evolutionary oxidation and relative stabilities for genomes with S-cycling genes \cr
+  \code{genoGOE_5} \tab Carbon oxidation state of ancestral and extant nitrogenases \cr
 }
 }
 

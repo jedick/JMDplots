@@ -666,3 +666,63 @@ genoGOE_4 <- function(pdf = FALSE) {
   if(pdf) dev.off()
 
 }
+
+# Carbon oxidation state of ancestral and extant nitrogenases
+# 20240216 first version
+# 20250325 added to JMDplots
+genoGOE_5 <- function(pdf = FALSE) {
+
+  if(pdf) pdf("Figure_5.pdf", width = 8, height = 6)
+
+  ## Read FASTA file of ancient and extant sequences,
+  ## downloaded from https://github.com/kacarlab/AncientNitrogenase.git
+  #aa <- canprot::read_fasta("GMKK20/Extant-MLAnc_Align.fasta")
+  # Get precomputed amino acid sequences from Extant-MLAnc_Align.fasta,
+  aa <- read.csv(system.file("extdata/genoGOE/GMKK20/nitrogenase_aa.csv", package = "JMDplots"))
+
+  # List representative extant nitrogenases for different ancestral nodes (GMKK20 Fig. 3)
+  extant_names <- hyphen.in.pdf(c("Clfx", "F-Mc", "Mb-Mc", "Anf/Vnf", "Nif-II/Nif-I"))
+  #extant_names <- hyphen.in.pdf(c("Clfx", "F-Mc", "Mb-Mc", "Anf", "Vnf", "Nif-II (C. kluyveri)", "Nif-I (A. vinelandii)"))
+  extant_proteins <- list(
+    D = "Nif_Roseiflexus_castenholzii",
+    C = "Nif_Methanocaldo_infernus",
+    B = "Nif_Methanobacterium_paludis",
+    A = c("Anf_Azotobacter_vinelandii_DJ", "Vnf_Azotobacter_vinelandii_DJ"),
+    E = c("Nif_Clostridium_kluyveri", "Nif_Azotobacter_vinelandii_DJ")
+  )
+  # Use colors from GMKK20 Fig. 2
+  cols <- c(D = "#e8c44c", C = "#27a08d", B = "#b779dc", A = "#df674f", E = "#759dce")
+
+  # Start plot
+  plot(extendrange(c(1, 5)), c(-0.20, -0.12), xlab = "Form of nitrogenase", ylab = axis.label("ZC"), type = "n", axes = FALSE)
+  axis(side = 1, at = seq_along(extant_names), labels = extant_names)
+  axis(side = 2)
+  box()
+
+  # Index to label the extant proteins in order
+  pch <- 1
+  # Loop over ancestral nodes
+  for(inode in seq_along(extant_proteins)) {
+    # Calculate Zc of the ancestral proteins
+    node <- names(extant_proteins)[inode]
+    ianc <- grepl(paste0("^Anc", node), aa$protein)
+    Zc_anc <- Zc(aa[ianc, ])
+    # Plot lines for ancestral proteins
+    dx <- 0.25
+    for(Zc in Zc_anc) lines(c(inode-dx, inode+dx), c(Zc, Zc), col = cols[inode])
+    # Calculate Zc of the extant protein(s)
+    iext <- match(extant_proteins[[inode]], aa$protein)
+    for(i in iext) {
+      Zc <- Zc(aa[i, ])
+      points(inode, Zc, pch = as.character(pch))
+      points(inode, Zc, cex = 2.5, col = cols[inode])
+      pch <- pch + 1
+    }
+  }
+  # Add legend and title
+  legend("topright", c("Extant", "Ancestral"), lty = c(NA, 1), pch = c(1, NA), pt.cex = 2.5, bty = "n")
+  title("Carbon oxidation state of nitrogenase sequences", font.main = 1)
+
+  if(pdf) dev.off()
+
+}
