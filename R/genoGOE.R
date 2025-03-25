@@ -601,8 +601,6 @@ genoGOE_4 <- function(pdf = FALSE) {
   Zcvals <- Zc(aa)
   # List Zc for each genome in list
   Zclist <- lapply(genomes, function(genome) Zcvals[aa$organism %in% genome])
-  # Add number of genomes to labels
-  names(Zclist) <- paste0(names(Zclist), "\n(", sapply(Zclist, length), ")")
   # Use colors from Mateos et al., 2023
   dsr <- "#bcb2ce"
   sox <- "#45b78d"
@@ -622,7 +620,10 @@ genoGOE_4 <- function(pdf = FALSE) {
     # Ages from Table 2 of Mateos et al.
     ages <- c("3.3-3.35", "2.65-2.88", "2.6", "2.33-2.47", "2.28", "1.77", "0-2.38")
     axis(1, at = 1:n, labels = ages, lwd = 0)
-    axis(3, at = 1:n, labels = names(Zclist), line = -0.5, lwd = 0)
+    axis(3, at = 1:n, labels = names(Zclist), line = 0.5, lwd = 0, font = 3)
+    # Add number of genomes to labels
+    n_genomes <- paste0("(", sapply(Zclist, length), ")")
+    axis(3, at = 1:n, labels = n_genomes, line = -0.5, lwd = 0)
     title(hyphen.in.pdf("Sulfur-cycling gene or gene cluster (# of exclusive genomes)"), font.main = 1, line = 3)
   }
 
@@ -644,7 +645,13 @@ genoGOE_4 <- function(pdf = FALSE) {
     arank <- rank.affinity(a, groups)
     # Lighten colors
     fill <- adjustcolor(col, alpha.f = 0.3)
-    diagram(arank, fill = fill, lty = 1, lwd = 1.5)
+    # Adjust labels
+    names <- names(genomes)
+    names[5] <- ""
+    diagram(arank, fill = fill, lty = 1, lwd = 1.5, font = 3, names = names)
+    text(4.3, -68.6, "dmsA", font = 3)
+    lines(c(4.04, 3.68), c(-68.60, -68.76))
+    lines(c(3.28, 3.17), c(-65.30, -66.25))
   }
 
   if(pdf) pdf("Figure_4.pdf", width = 8, height = 12)
@@ -654,7 +661,7 @@ genoGOE_4 <- function(pdf = FALSE) {
   sulfur_affinity()
   # Overlay stability boundaries for other genomes
   genoGOE_3D("O2", add = TRUE, lwd = 4, pHlim = c(3, 10), alpha.f = 0.7, Eh7_las = 0)
-  title(main = hyphen.in.pdf("Groupwise relative stabilities of genomes with different S-cycling genes"), font.main = 1)
+  title(main = hyphen.in.pdf("Groupwise relative stabilities of proteins in\ngenomes with different S-cycling genes"), font.main = 1)
   label.figure("B", font = 2, cex = 1.6)
   if(pdf) dev.off()
 
