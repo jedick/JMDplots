@@ -116,7 +116,7 @@ genoGOE_4()
 **Data sources:** Genomes with different S-cycling genes [@MCK+23].
 
 ## Carbon oxidation state of ancestral and extant nitrogenases (Figure 5)
-```{r genoGOE5, message = FALSE, results = "hide", out.width='100%', fig.width = 8, fig.height = 6, pngquant = pngquant}
+```{r genoGOE5, message = FALSE, results = "hide", out.width='100%', fig.width = 7, fig.height = 5.5, pngquant = pngquant}
 genoGOE_5()
 ```
 

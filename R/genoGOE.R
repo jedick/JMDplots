@@ -201,7 +201,7 @@ genoGOE_1 <- function(pdf = FALSE) {
   # Add group names
   axis(1, at = 2:4, labels = c("GC < 0.34", "0.34 < GC < 0.36", "GC > 0.36"))
   axis(1, at = 5:7, labels = c("Cost < 23", "23 < Cost < 25", "Cost > 25"))
-  axis(3, at = c(1, 3, 6), labels = c("All Proteins", "Control for GC content", "Control for metabolic cost"), tick = FALSE, font = 2)
+  axis(3, at = c(1, 3, 6), labels = c("Entire genomes", "Control for GC content", "Control for metabolic cost"), tick = FALSE, font = 2)
 
   label.figure("D", font = 2, cex = 1.6, xfrac = 0.018)
 
@@ -670,57 +670,60 @@ genoGOE_4 <- function(pdf = FALSE) {
 # Carbon oxidation state of ancestral and extant nitrogenases
 # 20240216 first version
 # 20250325 added to JMDplots
+# 20250327 use more representative extant nitrogenases (Garcia et al. Fig. 6)
 genoGOE_5 <- function(pdf = FALSE) {
 
-  if(pdf) pdf("Figure_5.pdf", width = 8, height = 6)
+  if(pdf) pdf("Figure_5.pdf", width = 7, height = 5.5)
 
   ## Read FASTA file of ancient and extant sequences,
   ## downloaded from https://github.com/kacarlab/AncientNitrogenase.git
   #aa <- canprot::read_fasta("GMKK20/Extant-MLAnc_Align.fasta")
-  # Get precomputed amino acid sequences from Extant-MLAnc_Align.fasta,
+  # Get amino acid sequences precomputed from Extant-MLAnc_Align.fasta
   aa <- read.csv(system.file("extdata/genoGOE/GMKK20/nitrogenase_aa.csv", package = "JMDplots"))
 
-  # List representative extant nitrogenases for different ancestral nodes (GMKK20 Fig. 3)
-  extant_names <- hyphen.in.pdf(c("Clfx", "F-Mc", "Mb-Mc", "Anf/Vnf", "Nif-II/Nif-I"))
-  #extant_names <- hyphen.in.pdf(c("Clfx", "F-Mc", "Mb-Mc", "Anf", "Vnf", "Nif-II (C. kluyveri)", "Nif-I (A. vinelandii)"))
-  extant_proteins <- list(
-    D = "Nif_Roseiflexus_castenholzii",
-    C = "Nif_Methanocaldo_infernus",
-    B = "Nif_Methanobacterium_paludis",
-    A = c("Anf_Azotobacter_vinelandii_DJ", "Vnf_Azotobacter_vinelandii_DJ"),
-    E = c("Nif_Clostridium_kluyveri", "Nif_Azotobacter_vinelandii_DJ")
+  # List forms of nitrogenase and their ancestors
+  form_to_anc <- list(
+    "Clfx" = "D",
+    "F-Mc" = "C",
+    "Mb-Mc" = "B",
+    "Anf" = "A",
+    "Vnf" = "A",
+    "Nif-II" = "E",
+    "Nif-I" = "E"
   )
-  # Use colors from GMKK20 Fig. 2
-  cols <- c(D = "#e8c44c", C = "#27a08d", B = "#b779dc", A = "#df674f", E = "#759dce")
+  # Use colors from Garcia et al. (2020) Fig. 2
+  cols <- c(A = "#df674f", B = "#b779dc", C = "#27a08d", D = "#e8c44c", E = "#759dce")
+  pt_cols <- adjustcolor(cols, alpha.f = 0.75)
+  names(pt_cols) <- names(cols)
 
   # Start plot
-  plot(extendrange(c(1, 5)), c(-0.20, -0.12), xlab = "Form of nitrogenase", ylab = axis.label("ZC"), type = "n", axes = FALSE)
-  axis(side = 1, at = seq_along(extant_names), labels = extant_names)
+  plot(extendrange(c(1, 7)), c(-0.20, -0.12), xlab = "Form of nitrogenase", ylab = axis.label("ZC"), type = "n", axes = FALSE)
+  axis(side = 1, at = seq_along(form_to_anc), labels = hyphen.in.pdf(names(form_to_anc)))
   axis(side = 2)
   box()
 
-  # Index to label the extant proteins in order
-  pch <- 1
-  # Loop over ancestral nodes
-  for(inode in seq_along(extant_proteins)) {
+  # Loop over nitrogenase forms
+  for(iform in seq_along(form_to_anc)) {
+
     # Calculate Zc of the ancestral proteins
-    node <- names(extant_proteins)[inode]
+    node <- form_to_anc[[iform]]
     ianc <- grepl(paste0("^Anc", node), aa$protein)
     Zc_anc <- Zc(aa[ianc, ])
+
     # Plot lines for ancestral proteins
     dx <- 0.25
-    for(Zc in Zc_anc) lines(c(inode-dx, inode+dx), c(Zc, Zc), col = cols[inode])
-    # Calculate Zc of the extant protein(s)
-    iext <- match(extant_proteins[[inode]], aa$protein)
-    for(i in iext) {
-      Zc <- Zc(aa[i, ])
-      points(inode, Zc, pch = as.character(pch))
-      points(inode, Zc, cex = 2.5, col = cols[inode])
-      pch <- pch + 1
-    }
+    for(Zc in Zc_anc) lines(c(iform-dx, iform+dx), c(Zc, Zc), col = cols[node])
+
+    # Calculate Zc of the extant proteins
+    form <- names(form_to_anc[iform])
+    iext <- which(aa$ref == form)
+    Zc_ext <- Zc(aa[iext, ])
+    points(rep(iform, length(Zc_ext)), Zc_ext, pch = 19, col = pt_cols[node])
+
   }
+
   # Add legend and title
-  legend("topright", c("Extant", "Ancestral"), lty = c(NA, 1), pch = c(1, NA), pt.cex = 2.5, bty = "n")
+  legend("bottomright", c("Extant", "Ancestral"), lty = c(NA, 1), pch = c(19, NA), bty = "n")
   title("Carbon oxidation state of nitrogenase sequences", font.main = 1)
 
   if(pdf) dev.off()
