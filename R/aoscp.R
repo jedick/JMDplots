@@ -178,7 +178,7 @@ aoscp2 <- function(pdf = FALSE) {
 }
 
 # draw yeast cell color-coded with median ZC of proteins in different locations
-aoscp3 <- function(png=FALSE, pdf=FALSE, outline=FALSE) {
+aoscp3 <- function(pdf=FALSE, outline=FALSE) {
   # set 'png' to TRUE to make the base plot (no labels)
   # set 'outline' to TRUE to skip plotting the cell components
   # (in order to quickly test outline, labels and color bar)
@@ -216,89 +216,91 @@ aoscp3 <- function(png=FALSE, pdf=FALSE, outline=FALSE) {
   col <- cR(ZC01)
   # round the values so cytoplasm is 255 255 255
   col <- round(col)
+
   # to make base plot (PNG)
-  if(png) {
-    png("aoscp3.png", width=1384, height=785)
-    plot.window(c(0, 1), c(0, 1))
-    par(mar=c(0, 0, 0, 0))
-    plot.new()
-    # get dimensions from outline PNG
-    file <- system.file("/extdata/aoscp/cell/outline.png", package = "JMDplots")
+  # Save output in temporary file 20250415
+  pngfile <- tempfile(fileext=".png")
+  png(pngfile, width=1384, height=785)
+  plot.window(c(0, 1), c(0, 1))
+  par(mar=c(0, 0, 0, 0))
+  plot.new()
+  # get dimensions from outline PNG
+  file <- system.file("/extdata/aoscp/cell/outline.png", package = "JMDplots")
+  img <- png::readPNG(file)
+  if(outline) ZC <- list(outline=NULL, extracellular=NULL)
+  # loop over locations
+  for(j in 1:length(ZC)) {
+    file <- system.file(paste0("/extdata/aoscp/cell/", names(ZC)[j], ".png"), package = "JMDplots")
     img <- png::readPNG(file)
-    if(outline) ZC <- list(outline=NULL, extracellular=NULL)
-    # loop over locations
-    for(j in 1:length(ZC)) {
-      file <- system.file(paste0("/extdata/aoscp/cell/", names(ZC)[j], ".png"), package = "JMDplots")
-      img <- png::readPNG(file)
-      if(!outline) {
-        # points are where the alpha is not zero
-        isthere <- img[, , 4]!=0
-        # set the colors
-        for(i in 1:3) {
-          imgnew <- img[, , i]
-          imgnew[isthere] <- col[j, i]/255
-          img[, , i] <- imgnew
-        }
+    if(!outline) {
+      # points are where the alpha is not zero
+      isthere <- img[, , 4]!=0
+      # set the colors
+      for(i in 1:3) {
+        imgnew <- img[, , i]
+        imgnew[isthere] <- col[j, i]/255
+        img[, , i] <- imgnew
       }
-      pu <- par("usr")
-      rasterImage(img, pu[1], pu[3], pu[2], pu[4])
     }
-    invisible(dev.off())
-  } else {
-    # to make labeled plot (PDF)
-    if(pdf) pdf("aoscp3.pdf", width=12, height=8, family="Times")
-    layout(t(matrix(c(1, 1, 1, 1, 1, 2))))
-    # plot base
-    img <- readPNG("aoscp3.png")
-    # scale dimensions 5/4
-    d <- dim(img[, , 1])
-    r <- d[1] / d[2] * 5/4
-    y1 <- (1 - r)/2
-    y2 <- y1 + r
-    plot.new()
-    rasterImage(img, 0, y1, 1, y2)
-    # draw labels
-    # cex <- 4   # for PNG
-    cex <- 3
-    text(0.02, 0.85, "endoplasmic\nreticulum", cex=cex, adj=0)
-    lines(c(0.095, 0.21), c(0.795, 0.6), lwd=2)
-    text(0.35, 0.9, "nucleus", cex=cex)
-    lines(c(0.34, 0.37), c(0.87, 0.64), lwd=2)
-    text(0.53, 0.88, "nucleolus", cex=cex)
-    lines(c(0.5, 0.4), c(0.85, 0.58), lwd=2)
-    text(0.66, 0.77, "bud\nneck", cex=cex, adj=0)
-    lines(c(0.69, 0.7), c(0.71, 0.57), lwd=2)
-    text(0.83, 0.76, "bud tip", cex=cex)
-    lines(c(0.83, 0.8), c(0.73, 0.55), lwd=2)
-    text(0.29, 0.08, "cytoplasm", cex=cex)
-    lines(c(0.29, 0.32), c(0.11, 0.3), lwd=2)
-    text(0.47, 0.1, "vacuole", cex=cex)
-    lines(c(0.45, 0.44), c(0.12, 0.31), lwd=2)
-    text(0.67, 0.11, "mitochondrion", cex=cex)
-    lines(c(0.64, 0.61), c(0.14, 0.38), lwd=2)
-    text(0.81, 0.16, "extracellular", cex=cex)
-    lines(c(0.81, 0.83), c(0.18, 0.3), lwd=2)
-    text(0.02, 0.15, "Golgi\napparatus", cex=cex, adj=0)
-    lines(c(0.09, 0.18), c(0.21, 0.38), lwd=2)
-    # draw color legend
-    plot.new()
-    plot.window(xlim=c(0, 1), ylim=c(ZCmin, ZCmax))
-    par(las=1, mar=c(6, 0, 4, 10), cex=cex/2)
-    axis(4, at=seq(-0.21, -0.095, 0.023))
-    # make color bar
-    rst <- array(1, c(101, 1, 4))
-    col <- cR(seq(1, 0, -0.01))/255
-    rst[, , 1] <- col[, 1]
-    rst[, , 2] <- col[, 2]
-    rst[, , 3] <- col[, 3]
-    # use angle=180 to get the right orientation
-    rasterImage(rst, -1, ZCmin, 1, ZCmax)
-    title(main=expression(italic(Z)[C]))
-    if(pdf) {
-      dev.off()
-      addexif("aoscp3", "Yeast cell color-coded with median carbon oxidation state of proteins in different locations", "https://doi.org/10.1098/rsif.2013.1095")
-    }
+    pu <- par("usr")
+    rasterImage(img, pu[1], pu[3], pu[2], pu[4])
   }
+  dev.off()
+
+  # to make labeled plot (PDF)
+  if(pdf) pdf("aoscp3.pdf", width=12, height=8, family="Times")
+  layout(t(matrix(c(1, 1, 1, 1, 1, 2))))
+  # plot base
+  img <- readPNG(pngfile)
+  # scale dimensions 5/4
+  d <- dim(img[, , 1])
+  r <- d[1] / d[2] * 5/4
+  y1 <- (1 - r)/2
+  y2 <- y1 + r
+  plot.new()
+  rasterImage(img, 0, y1, 1, y2)
+  # draw labels
+  # cex <- 4   # for PNG
+  cex <- 3
+  text(0.02, 0.85, "endoplasmic\nreticulum", cex=cex, adj=0)
+  lines(c(0.095, 0.21), c(0.795, 0.6), lwd=2)
+  text(0.35, 0.9, "nucleus", cex=cex)
+  lines(c(0.34, 0.37), c(0.87, 0.64), lwd=2)
+  text(0.53, 0.88, "nucleolus", cex=cex)
+  lines(c(0.5, 0.4), c(0.85, 0.58), lwd=2)
+  text(0.66, 0.77, "bud\nneck", cex=cex, adj=0)
+  lines(c(0.69, 0.7), c(0.71, 0.57), lwd=2)
+  text(0.83, 0.76, "bud tip", cex=cex)
+  lines(c(0.83, 0.8), c(0.73, 0.55), lwd=2)
+  text(0.29, 0.08, "cytoplasm", cex=cex)
+  lines(c(0.29, 0.32), c(0.11, 0.3), lwd=2)
+  text(0.47, 0.1, "vacuole", cex=cex)
+  lines(c(0.45, 0.44), c(0.12, 0.31), lwd=2)
+  text(0.67, 0.11, "mitochondrion", cex=cex)
+  lines(c(0.64, 0.61), c(0.14, 0.38), lwd=2)
+  text(0.81, 0.16, "extracellular", cex=cex)
+  lines(c(0.81, 0.83), c(0.18, 0.3), lwd=2)
+  text(0.02, 0.15, "Golgi\napparatus", cex=cex, adj=0)
+  lines(c(0.09, 0.18), c(0.21, 0.38), lwd=2)
+  # draw color legend
+  plot.new()
+  plot.window(xlim=c(0, 1), ylim=c(ZCmin, ZCmax))
+  par(las=1, mar=c(6, 0, 4, 10), cex=cex/2)
+  axis(4, at=seq(-0.21, -0.095, 0.023))
+  # make color bar
+  rst <- array(1, c(101, 1, 4))
+  col <- cR(seq(1, 0, -0.01))/255
+  rst[, , 1] <- col[, 1]
+  rst[, , 2] <- col[, 2]
+  rst[, , 3] <- col[, 3]
+  # use angle=180 to get the right orientation
+  rasterImage(rst, -1, ZCmin, 1, ZCmax)
+  title(main=expression(italic(Z)[C]))
+  if(pdf) {
+    dev.off()
+    addexif("aoscp3", "Yeast cell color-coded with median carbon oxidation state of proteins in different locations", "https://doi.org/10.1098/rsif.2013.1095")
+  }
+
 }
 
 # ZC and Eh ranges in yeast and ER-cytoplasm electron-transfer scheme

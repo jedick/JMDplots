@@ -283,8 +283,8 @@ genoGOE_2 <- function(pdf = FALSE, metric = "Zc") {
       # Add lines to plot
       lines(modeAge, vals, col = col[j])
     }
-    if(j == 1) inset <- c(-0.02, 0.5) else inset <- c(-0.02, 0.28)
-    legend("topleft", lineages[j], bty = "n", inset = inset)
+    if(j == 1) inset <- c(-0.02, 0.37) else inset <- c(-0.02, 0.22)
+    legend("topleft", paste(lineages[j], "genomes", sep = "\n"), bty = "n", inset = inset)
     # Lines for GOE
     lines(c(2.1, 2.5), c(yOE, yOE), lwd = 4, col = 2)
     if(j == 1) {

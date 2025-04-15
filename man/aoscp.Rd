@@ -15,7 +15,7 @@ Plots from the paper by Dick (2014).
 \usage{
   aoscp1(pdf = FALSE)
   aoscp2(pdf = FALSE)
-  aoscp3(png = FALSE, pdf = FALSE, outline = FALSE)
+  aoscp3(pdf = FALSE, outline = FALSE)
   aoscp4(pdf = FALSE)
   aoscp5(pdf = FALSE, file = NULL)
   aoscp6(pdf = FALSE)
@@ -23,7 +23,6 @@ Plots from the paper by Dick (2014).
 
 \arguments{
   \item{pdf}{logical, make a PDF file?}
-  \item{png}{logical, make the base PNG file (no labels)?}
   \item{outline}{logical, draw only the outlines?}
   \item{file}{character, file with amino acid compositions of organisms}
 }

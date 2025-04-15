@@ -46,8 +46,6 @@ aoscp2()
 
 ## Drawing of yeast cell color-coded with median `r ZC` of proteins in different locations (Figure 3)
 ```{r aoscp3, message = FALSE, fig.align='center', out.width='100%', fig.width = 12, fig.height = 8, pngquant = pngquant}
-# first make the base plot, then add labels
-aoscp3(TRUE)
 aoscp3()
 ```
 
