@@ -347,14 +347,18 @@ microhum_3 <- function(pdf = FALSE) {
   BShull <- chull(BodySites$nO2, BodySites$nH2O)
   polygon(BodySites$nO2[BShull], BodySites$nH2O[BShull], border = 8, lty = 2)
 
-  # Plot p-values 20230204
+  # Plot mean difference 20250424
   # Use metrics for untreated samples
   met <- getmetrics_microhum("BPB+21_NoTreatment")
   met <- met[match(BodySites$Run, met$Run), ]
   # Use metrics for gut and oral samples
   igut <- BodySites$Site == "feces"
   ioral <- BodySites$Site == "Oral cavity"
-  plot.p.values(met$nO2[igut], met$nO2[ioral], met$nH2O[igut], met$nH2O[ioral], ypos = "bottom")
+  iskin <- BodySites$Site == "Skin of forearm"
+  inasal <- BodySites$Site == "Nasal cavity"
+  plot_d(met$nO2[igut], met$nO2[ioral], met$nH2O[igut], met$nH2O[ioral], label = "O-G", offset = 0, ypos = "bottom")
+  plot_d(met$nO2[igut], met$nO2[iskin], met$nH2O[igut], met$nH2O[iskin], label = "S-G", offset = 1, ypos = "bottom")
+  plot_d(met$nO2[igut], met$nO2[inasal], met$nH2O[igut], met$nH2O[inasal], label = "N-G", offset = 2, ypos = "bottom")
 
   # Make legend
   legend("topright", legend = c("Skin", "Nasal", "Oral", "Gut"), pch = c(pch_Skin, pch_Nasal, pch_Oral, pch_Gut),
@@ -379,10 +383,12 @@ microhum_3 <- function(pdf = FALSE) {
   }
   # Plot convex hull from Panel A
   polygon(BodySites$nO2[BShull], BodySites$nH2O[BShull], border = 8, lty = 2)
-  # Plot p-values 20230204
+  # Plot mean difference 202504024
   gut <- subset(means, type == "gut")
   oro <- subset(means, type == "oro")
-  plot.p.values(gut$nO2_dn, oro$nO2_dn, gut$nH2O_dn, oro$nH2O_dn, ypos = "bottom")
+  naso <- subset(means, type == "naso")
+  plot_d(gut$nO2_dn, oro$nO2_dn, gut$nH2O_dn, oro$nH2O_dn, label = "O-G", offset = 0, ypos = "bottom")
+  plot_d(gut$nO2_dn, naso$nO2_dn, gut$nH2O_dn, naso$nH2O_dn, label = "N-G", offset = 1, ypos = "bottom")
   legend("topright", legend = c("Nasopharyngeal", "Oropharyngeal", "Gut"), pch = c(pch_Nasal, pch_Oral, pch_Gut),
     pt.bg = c(col_Nasal, col_Oral, col_Gut), col = black50, bty = "n", cex = 0.8)
   title(hyphen.in.pdf("Community reference proteomes\n(controls in COVID-19 studies)"), font.main = 1)
@@ -413,11 +419,13 @@ microhum_3 <- function(pdf = FALSE) {
     points(nO2, nH2O, pch = pchs[i], bg = mybg, col = col)
     if(studies[i] == "ZZL+20") gut <- list(nO2 = nO2[!ilow], nH2O = nH2O[!ilow])
     if(studies[i] == "CZH+22") oro <- list(nO2 = nO2[!ilow], nH2O = nH2O[!ilow])
+    if(studies[i] == "LLZ+21") naso <- list(nO2 = nO2[!ilow], nH2O = nH2O[!ilow])
   }
   # Plot convex hull from Panel A
   polygon(BodySites$nO2[BShull], BodySites$nH2O[BShull], border = 8, lty = 2)
-  # Plot p-values 20230204
-  plot.p.values(gut$nO2, oro$nO2, gut$nH2O, oro$nH2O, ypos = "bottom")
+  # Plot mean difference 20250424
+  plot_d(gut$nO2, oro$nO2, gut$nH2O, oro$nH2O, label = "O-G", offset = 0, ypos = "bottom")
+  plot_d(gut$nO2, naso$nO2, gut$nH2O, naso$nH2O, label = "N-G", offset = 1, ypos = "bottom")
   # Add legend
   legend <- c("Nasopharyngeal (Liu'21)", "Oropharyngeal (de Castilhos'22)", "Gut (Zuo'20)")
   legend("topright", legend, pch = rev(pchs), pt.bg = c(col_Nasal, col_Oral, col_Gut), col = black50, bty = "n", cex = 0.8)
@@ -444,7 +452,7 @@ microhum_3 <- function(pdf = FALSE) {
   )
   cols <- sapply(cols, adjustcolor, alpha.f = 0.8)
   cexs <- ifelse(studies_MP %in% c("JZW+22"), 0.7, 1)
-  # Store all data to calculate p-values 20230203
+  # Store all data to calculate mean difference 20230203
   gut.nO2 <- gut.nH2O <- oral.nO2 <- oral.nH2O <- numeric()
   # Loop over studies
   for(i in 1:length(studies_MP)) {
@@ -463,8 +471,8 @@ microhum_3 <- function(pdf = FALSE) {
   }
   # Plot convex hull from Panel A
   polygon(BodySites$nO2[BShull], BodySites$nH2O[BShull], border = 8, lty = 2)
-  # Plot p-values 20230204
-  plot.p.values(gut.nO2, oral.nO2, gut.nH2O, oral.nH2O, ypos = "bottom")
+  # Plot mean difference 20250424
+  plot_d(gut.nO2, oral.nO2, gut.nH2O, oral.nH2O, label = "O-G", offset = 0, ypos = "bottom")
   # Add legend
   legend("topright", c("Jiang'22", "Granato'21"), title = "Oral",
     pch = c(pch_Oral, pch_Oral), pt.bg = col_Oral, col = black50,
@@ -495,10 +503,6 @@ microhum_4 <- function(pdf = FALSE) {
   # Define plot settings
   par(cex = 1.2)
   par(mgp = c(2.5, 1, 0))
-  startplot <- function(xlim = c(-0.01, 0.01), ylim = c(-0.015, 0.020)) {
-    plot(xlim, ylim, type  = "n", pch = ".", xlab = quote(Delta*italic(n)*O[2]), ylab = quote(Delta*italic(n)*H[2]*O))
-    abline(h = 0, v = 0, lty = 2, col = 8)
-  }
   # Colors and point symbols for sample types
   col <- list(naso = col_Nasal, oro = col_Oral, gut = col_Gut, IBD = col_IBD)
   col <- lapply(col, adjustcolor, alpha.f = 0.8)
@@ -510,7 +514,9 @@ microhum_4 <- function(pdf = FALSE) {
   par(mar = c(4, 4, 3, 1))
   for(type in c("naso", "oro", "gut")) {
 
-    if(type == "naso") startplot(c(-0.01, 0.017)) else if(type == "oro") startplot(c(-0.017, 0.01)) else startplot()
+    # Start plot
+    plot(c(-0.015, 0.015), c(-0.020, 0.020), type  = "n", pch = ".", xlab = quote(Delta*italic(n)*O[2]), ylab = quote(Delta*italic(n)*H[2]*O))
+    abline(h = 0, v = 0, lty = 2, col = 8)
     itype <- means$type == type
     label <- 1:sum(itype)
 
@@ -529,8 +535,8 @@ microhum_4 <- function(pdf = FALSE) {
     }
     # Label points
     text(means$D_nO2[itype] + dx, means$D_nH2O[itype] + dy, label, cex = 0.8)
-    # Plot p-values 20230204
-    plot.p.values(means$nO2_dn[itype], means$nO2_up[itype], means$nH2O_dn[itype], means$nH2O_up[itype], paired = TRUE)
+    # Plot mean difference 20250424
+    plot_d(means$nO2_dn[itype], means$nO2_up[itype], means$nH2O_dn[itype], means$nH2O_up[itype], paired = TRUE)
     # Add plot title
     titles <- hyphen.in.pdf(c(naso = "Nasopharyngeal (COVID-19)", oro = "Oropharyngeal (COVID-19)", gut = "Gut (COVID-19)"))
     title(titles[type], font.main = 1, line = 0.5)
@@ -548,7 +554,7 @@ microhum_4 <- function(pdf = FALSE) {
   )
 
   # Function to make boxplots
-  boxplotfun <- function(metric, x_list, ylim, squeeze = FALSE) {
+  boxplotfun <- function(metric, x_list, ylim, squeeze = FALSE, add_label = TRUE) {
     if(squeeze) opar <- par(mar = c(4, 2.5, 3.5, 0.5)) else opar <- par(mar = c(4, 4, 3, 1))
     # Add number of samples to group names
     len <- sapply(x_list, length)
@@ -558,20 +564,20 @@ microhum_4 <- function(pdf = FALSE) {
     boxplot(x_list, ylim = ylim, ylab = cplab[[metric]], xlab = "")
     # Make rotated labels (modified from https://www.r-bloggers.com/rotated-axis-labels-in-r-plots/)
     text(x = (1:2)+0.5, y = par()$usr[3] - 1.5 * strheight("A"), labels = labels, srt = 25, adj = 1, xpd = NA)
-    # Add p-value
-    x_pvalue <- wilcox.test(x_list[[1]], x_list[[2]])$p.value
-    legend <- bquote(italic(p) == .(format(signif(x_pvalue, 1), scientific = 2)))
-    if(x_pvalue < 0.05) legend <- bquote(bolditalic(p) == bold(.(format(signif(x_pvalue, 1), scientific = 2))))
-    if(squeeze) inset <- c(-0.25, -0.05) else inset <- c(-0.2, -0.05)
-    legend("bottomleft", legend = legend, bty = "n", inset = inset, cex = 0.9)
-    # Show median difference
-    x_diff <- median(x_list[[2]]) - median(x_list[[1]])
-    diffval <- signif(x_diff, 2)
-    if(metric == "nO2") difftxt <- bquote(Delta*italic(n)*O[2] == .(diffval))
-    if(metric == "nH2O") difftxt <- bquote(Delta*italic(n)*H[2]*O == .(diffval))
+    if(add_label) {
+      # Add label inside the plot 20250424
+      if(squeeze) inset <- c(-0.25, -0.05) else inset <- c(-0.2, -0.05)
+      if(metric == "nO2") legend <- quote(italic(n)*O[2])
+      if(metric == "nH2O") legend <- quote(italic(n)*H[2]*O)
+      legend("bottomleft", legend = as.expression(legend), bty = "n", inset = inset, cex = 0.9)
+    }
+    # Show standardized median difference
+    x_d <- cohen.d(x_list[[2]], x_list[[1]])$estimate
+    dval <- signif(x_d, 1)
+    dtxt <- bquote(italic(d) == .(dval))
     if(squeeze) cex.main <- 0.9 else cex.main <- 1
     if(squeeze) adj <- 0.6 else adj <- 0.5
-    title(difftxt, line = 0.7, cex.main = cex.main, adj = adj, xpd = NA)
+    title(dtxt, line = 0.7, font.main = 1, cex.main = cex.main, adj = adj, xpd = NA)
     par(opar)
   }
 
@@ -644,7 +650,8 @@ microhum_4 <- function(pdf = FALSE) {
   ## Panel D: nH2O-nO2 plots for community reference proteomes in IBD 20230723
   par(mar = c(4, 4, 3, 1))
   type <- "IBD"
-  startplot(c(-0.030, 0.005), c(-0.01, 0.025))
+  plot(c(-0.030, 0.005), c(-0.01, 0.025), type  = "n", pch = ".", xlab = quote(Delta*italic(n)*O[2]), ylab = quote(Delta*italic(n)*H[2]*O))
+  abline(h = 0, v = 0, lty = 2, col = 8)
   itype <- means$type == type
   label <- 1:sum(itype)
   # Add points
@@ -662,8 +669,8 @@ microhum_4 <- function(pdf = FALSE) {
   dx[c(10, 15)] <- 0.0015
   dy[c(10, 15)] <- -0.0015
   text(means$D_nO2[itype] + dx, means$D_nH2O[itype] + dy, label, cex = 0.8)
-  # Plot p-values 20230204
-  plot.p.values(means$nO2_dn[itype], means$nO2_up[itype], means$nH2O_dn[itype], means$nH2O_up[itype], paired = TRUE)
+  # Plot mean difference 20250424
+  plot_d(means$nO2_dn[itype], means$nO2_up[itype], means$nH2O_dn[itype], means$nH2O_up[itype], paired = TRUE)
   # Add plot title
   title("Gut (IBD)", font.main = 1, line = 0.5)
   # Add panel title
@@ -687,7 +694,7 @@ microhum_4 <- function(pdf = FALSE) {
       # Make list of values in control and patient groups
       x_list <- list(Control = x[aa$abbrv == "Control"], IBD = x[aa$abbrv == disease])
       names(x_list)[2] <- disease
-      boxplotfun(metric, x_list, ylim)
+      boxplotfun(metric, x_list, ylim, add_label = FALSE)
       figlab <- hyphen.in.pdf("e. Gut metagenomes (Lloyd-Price et al., 2019)")
       if(metric == "nH2O" & disease == "UC") label.figure(figlab, font = 2, adj = 0)
     }
@@ -812,7 +819,7 @@ microhum_6 <- function(pdf = FALSE) {
   # Panels A and B: oxygen tolerance of genera in body sites / in selected COVID-19 and IBD studies
   for(site in c("Nasal", "Oral", "Skin", "Feces", "COVID_control", "COVID", "IBD_control", "IBD")) {
     dat <- calc.oxytol(site)
-    plot.oxytol(dat)
+    plot_oxytol(dat)
     main <- hyphen.in.pdf(gsub("COVID", "COVID-19", site))
     title(main, font.main = 1, line = 0.5)
     # Add panel title
@@ -969,8 +976,8 @@ microhum_S2 <- function(pdf = FALSE) {
     plot(D_nO2, D_nH2O, xlab = quote(Delta*italic(n)*O[2]), ylab = quote(Delta*italic(n)*H[2]*O), xlim = c(-0.03, 0.03), ylim = c(-0.03, 0.015), type = "n")
     abline(h = 0, v = 0, lty = 2, col = 8)
     points(D_nO2, D_nH2O, pch = pch, bg = col, col = NA)
-    # Plot p-values 20230204
-    plot.p.values(No$nO2, Treated$nO2, No$nH2O, Treated$nH2O, paired = TRUE)
+    # Plot mean difference 20250424
+    plot_d(No$nO2, Treated$nO2, No$nH2O, Treated$nH2O, paired = TRUE)
     title(Treatment, font.main = 1)
   }
 
@@ -1048,10 +1055,10 @@ microhum_S3 <- function(pdf = FALSE) {
       )
     }
     boxplot(values, ylab = cplab[[metric]], ylim = c(-0.83, -0.59), col = c("palevioletred", "lightblue"))
-    # Calculate p-value
-    pval <- wilcox.test(values$Anaerobe, values$Aerotolerant)$p.value
-    ptext <- bquote(italic(p) == .(format(signif(pval, 1), scientific = 2)))
-    legend("bottomright", legend = ptext, bty = "n", inset = c(0, -0.03))
+    # Calculate standardized mean difference
+    dval <- cohen.d(values$Aerotolerant, values$Anaerobe)$estimate
+    dtext <- bquote(italic(d) == .(format(signif(dval, 1), scientific = 2)))
+    legend("bottomright", legend = dtext, bty = "n", inset = c(0, -0.03))
     # Show mean difference
     md <- format(round(diff(sapply(values, mean, na.rm = TRUE)), 4), scientific = 1)
     if(metric == "nO2") difftxt <- bquote(Delta*italic(n)*O[2] == .(md))
@@ -1095,12 +1102,12 @@ microhum_S4 <- function(pdf = FALSE) {
   abline(h = 0, v = 0, lty = 2, col = 8)
   title(quote(Delta*italic(n)*H[2]*O ~ "(aerotolerant - obligate anaerobe)"), font.main = 1)
 
-  # Table of p-values
+  # Table of standardized mean differences
   plot.new()
   xs <- seq(0.4, 1, length.out = 4)
   text(xs, rep(0.8, 4), c("Control", "Patient", "Control", "Patient"), adj = 1)
   text(c(0.46, 0.88), rep(0.85, 2), c(expression(italic(n)*O[2]), expression(italic(n)*H[2]*O)), adj = 1)
-  text(0.63, 0.92, "P-values")
+  text(0.63, 0.92, quote("Standardized mean difference ("*italic(d)*")"))
   ys <- seq(0.7, 0.3, length.out = 4)
   text(rep(-0.2, 4), ys, hyphen.in.pdf(c("Nasopharyngeal", "Oropharyngeal", "Gut (COVID-19)", "Gut (IBD)")), adj = 0, xpd = NA)
   # Loop over metrics
@@ -1119,11 +1126,10 @@ microhum_S4 <- function(pdf = FALSE) {
         anaer <- anaerobe[itype, colname]
         aero <- aerotolerant[itype, colname]
         # Calculate p-value
-        p.value <- wilcox.test(anaer, aero, paired = TRUE)$p.value
-        ptext <- format(signif(p.value, 1), scientific = 2)
-        # Use bold text for p < 0.05
-        if(p.value < 0.05) font <- 2 else font <- 1
-        text(xs[j*2 - 2 + i], ys[k], ptext, adj = 1, font = font)
+        d.value <- cohen.d(aero, anaer, paired = TRUE)$estimate
+        if(abs(d.value) >= 1) d.value <- signif(d.value, 2) else d.value <- signif(d.value, 1)
+        dtext <- format(d.value, nsmall = 1)
+        text(xs[i*2 - 2 + j], ys[k], dtext, adj = 1)
       }
     }
   }
@@ -1167,15 +1173,11 @@ dataset_metrics <- function() {
       nO2_up <- mean(mdat$metrics$nO2[is.up])
       nH2O_dn <- mean(mdat$metrics$nH2O[is.dn])
       nH2O_up <- mean(mdat$metrics$nH2O[is.up])
-      # Calculate p-values 20220905
-      Zc_pvalue <- wilcox.test(mdat$metrics$Zc[is.dn], mdat$metrics$Zc[is.up])$p.value
-      nO2_pvalue <- wilcox.test(mdat$metrics$nO2[is.dn], mdat$metrics$nO2[is.up])$p.value
-      nH2O_pvalue <- wilcox.test(mdat$metrics$nH2O[is.dn], mdat$metrics$nH2O[is.up])$p.value
       # Include number of samples 20220905
       mymeans <- data.frame(n_dn = sum(is.dn), n_up = sum(is.up),
-           Zc_dn = Zc_dn, Zc_up = Zc_up, Zc_pvalue = Zc_pvalue, 
-           nO2_dn = nO2_dn, nO2_up = nO2_up, nO2_pvalue = nO2_pvalue, 
-           nH2O_dn = nH2O_dn, nH2O_up = nH2O_up, nH2O_pvalue = nH2O_pvalue
+           Zc_dn = Zc_dn, Zc_up = Zc_up,
+           nO2_dn = nO2_dn, nO2_up = nO2_up,
+           nH2O_dn = nH2O_dn, nH2O_up = nH2O_up
       )
       if(oxytol == "all") {
         # Sum abundances of genera in oxygen tolerance groups 20230725
@@ -1242,8 +1244,8 @@ dataset_metrics <- function() {
     D_nH2O <- myout$nH2O_up - myout$nH2O_dn
     myout <- cbind(myout, D_Zc, D_nO2, D_nH2O)
     # Round values 20230212
-    if(j == 1) myout[, 5:22] <- signif(myout[, 5:22], 6)
-    if(j > 1) myout[, 5:16] <- signif(myout[, 5:16], 6)
+    if(j == 1) myout[, 5:19] <- signif(myout[, 5:19], 6)
+    if(j > 1) myout[, 5:13] <- signif(myout[, 5:13], 6)
     file <- paste0("16S/dataset_metrics_", oxytols[j], ".csv")
     write.csv(myout, file, row.names = FALSE, quote = FALSE)
   }
@@ -1255,22 +1257,20 @@ dataset_metrics <- function() {
 #############################
 
 # Function to add p-values to x and y axes 20230204
-plot.p.values <- function(X.1, X.2, Y.1, Y.2, paired = FALSE, ypos = "top") {
-  p.value.X <- wilcox.test(X.1, X.2, paired = paired)$p.value
-  p.value.Y <- wilcox.test(Y.1, Y.2, paired = paired)$p.value
-  p.X <- format(signif(p.value.X, 1), scientific = 2)
-  p.Y <- format(signif(p.value.Y, 1), scientific = 2)
-  p.X.txt <- bquote(italic(p) == .(p.X))
-  p.Y.txt <- bquote(italic(p) == .(p.Y))
-  # Use bold text for significant p-values 20230723
-  if(p.value.X < 0.05) p.X.txt <- bquote(bolditalic(p) == bold(.(p.X)))
-  if(p.value.Y < 0.05) p.Y.txt <- bquote(bolditalic(p) == bold(.(p.Y)))
+# Changed p-value to Cohen's d (standardized mean difference) 20250424
+plot_d <- function(X.1, X.2, Y.1, Y.2, label = "", offset = 0, ypos = "top", paired = FALSE) {
+  X.d <- cohen.d(X.2, X.1, na.rm = TRUE, paired = paired)$estimate
+  if(abs(X.d) >= 1) X.d <- signif(X.d, 2) else X.d <- signif(X.d, 1)
+  X.txt <- bquote(italic(d)[.(label)] == .(format(X.d, nsmall = 1)))
+  Y.d <- cohen.d(Y.2, Y.1, na.rm = TRUE, paired = paired)$estimate
+  if(abs(Y.d) >= 1) Y.d <- signif(Y.d, 2) else Y.d <- signif(Y.d, 1)
+  Y.txt <- bquote(italic(d)[.(label)] == .(format(Y.d, nsmall = 1)))
   pu <- par("usr")
   dx <- (pu[2] - pu[1]) / 30
   dy <- (pu[4] - pu[3]) / 30
-  text(pu[2] - dx, pu[3] + dy/2, p.X.txt, adj = c(1, 0), cex = 0.9)
-  if(ypos == "bottom") text(pu[1] + dx/2, pu[3] + dy, p.Y.txt, srt = 90, adj = c(0, 1), cex = 0.9)
-  if(ypos == "top") text(pu[1] + dx/2, pu[4] - dy, p.Y.txt, srt = 90, adj = c(1, 1), cex = 0.9)
+  text(pu[2] - dx, pu[3] + dy/2 + 2*dy * offset, X.txt, adj = c(1, 0), cex = 0.9)
+  if(ypos == "bottom") text(pu[1] + dx/2 + 1.5*dx * offset, pu[3] + dy, Y.txt, srt = 90, adj = c(0, 1), cex = 0.9)
+  if(ypos == "top") text(pu[1] + dx/2 + 1.5*dx * offset, pu[4] - dy, Y.txt, srt = 90, adj = c(1, 1), cex = 0.9)
 }
 
 # Get oxygen tolerance for specified genera 20231227
@@ -1354,7 +1354,7 @@ calc.oxytol <- function(segment = "Feces", study = NULL) {
 }
 
 # Line plot: genus abundance vs nO2, grouped by oxygen tolerance 20230725
-plot.oxytol <- function(dat) {
+plot_oxytol <- function(dat) {
   # Start with 0 total abundance
   total.abundance <- 0
   plot(c(-0.81, -0.595), c(0, 100), xlab = chemlab("nO2"), ylab = "Abundance (%)", type = "n")

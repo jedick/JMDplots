@@ -195,6 +195,7 @@ importFrom("eulerr", "euler")
 importFrom("ape", "read.tree", "plot.phylo", "rotateConstr")
 importFrom("multcompView", "multcompLetters4")
 importFrom("beanplot", "beanplot")
+importFrom("effsize", "cohen.d")
 
 # We need a method provided by the package, not an exported function, so import the whole package 20211230
 import("plot.matrix")
