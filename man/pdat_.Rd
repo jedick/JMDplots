@@ -151,10 +151,6 @@ A list consisting of:
 }
 }
 
-\seealso{
-\code{\link{canprot}}
-}
-
 \examples{
 # list datasets for cancer types in TCGA
 pdat_TCGA(2020)

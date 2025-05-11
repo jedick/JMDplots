@@ -106,7 +106,10 @@ export(
   "xsummary", "xsummary2", "xsummary3",
 
   # genoGOE paper 20240328, 20240409, 20240602, 20241224, 20250325
-  "genoGOE_2", "genoGOE_3", "genoGOE_1", "genoGOE_4", "genoGOE_5"
+  "genoGOE_2", "genoGOE_3", "genoGOE_1", "genoGOE_4", "genoGOE_5",
+
+  # Moved from CHNOSZ 20250511
+  "protein.equil"
 )
 
 # Imports from CHNOSZ
@@ -140,7 +143,9 @@ importFrom("CHNOSZ",
   # carrollite
   # NOTE: add import of "logB.to.OBIGT" after CHNOSZ 2.2.0 is released 20250122
   "T.units", "check.GHS", "retrieve", "stack_mosaic",
-  "lT", "lP", "lNaCl", "lS", "lex"
+  "lT", "lP", "lNaCl", "lS", "lex",
+  # for protein.equil() 20250511
+  "basis.elements"
 )
 
 # Imports from canprot

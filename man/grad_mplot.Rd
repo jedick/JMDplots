@@ -89,8 +89,8 @@ Set \code{yvar} to \samp{GC} to change the y-axis to GC ratio of DNA.
 
 For \code{pcomp}, \code{seqtype} is just \samp{MG} or \samp{MT}.
 The variables (\code{vars}) are automatically determined based on the values of \code{mout} and \code{pout}.
-Use \code{vars = "GRAVY"} or \code{vars = "pI"} to plot the values of \code{\link{GRAVY}} or \code{\link{pI}} instead of \code{\link{Zc}}.
-Use \code{vars = "pIG"} to make a \code{\link{GRAVY}}-\code{\link{pI}} plot.
+Use \code{vars = "GRAVY"} or \code{vars = "pI"} to plot the values of \code{\link[canprot]{GRAVY}} or \code{\link[canprot]{pI}} instead of \code{\link[canprot]{Zc}}.
+Use \code{vars = "pIG"} to make a \code{\link[canprot]{GRAVY}}-\code{\link[canprot]{pI}} plot.
 
 \code{datadir} and \code{mdata} are used to specify alternate location of compositional data and metadata for metagenomic studies.
 This permits the processing of user-provided data sets; see \code{\link{subsurface}} for some examples.

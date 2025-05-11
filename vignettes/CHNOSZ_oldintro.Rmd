@@ -679,7 +679,7 @@ species(c("chalcocite", "tenorite", "cuprite", "copper"), add = TRUE)
 
 Note that chalcocite (Cu<sub>2</sub>S) undergoes polymorphic transitions.
 To get the temperatures of the polymorphic transitions from `thermo()$OBIGT` (in Kelvin, regardless of the <span style="color:red">`T.units()`</span>), we can use <span style="color:green">`info()`</span>.
-We see that at 200 °C (473.15 K) the second phase is stable; this one is automatially used by CHNOSZ for this diagram.
+We see that at 200 °C (473.15 K) the second phase is stable; this one is automatically used by CHNOSZ for this diagram.
 ```{r info_chalcocite, message=FALSE}
 info(info("chalcocite", c("cr", "cr2", "cr3")))$T
 ```

@@ -43,7 +43,7 @@
   \item{var2}{character, the second variable}
   \item{plot.it}{logical, make a scatterplot?}
   \item{mfun}{character, either \samp{median} or \samp{mean}}
-  \item{oldstyle}{logical, also calculate \code{\link{CLES}} and \emph{p}-values?}
+  \item{oldstyle}{logical, also calculate \code{\link[canprot]{CLES}} and \emph{p}-values?}
   \item{comptab}{list or data frame, output of \code{get_comptab}}
   \item{vars}{character, which variables (chemical metrics) to calculate or plot}
   \item{col}{character or numeric, color(s) for the points}
@@ -85,7 +85,7 @@ The function keeps the first \dQuote{known} ID for each protein, which must be p
 \itemize{
   \item The \code{\link[canprot]{human.aa}} dataset of amino acid compositions.
   \item Old UniProt IDs that are mapped to new UniProt IDs in \file{extdata/diffexpr/uniprot_updates.csv} or in \code{updates_file} if specified.
-  \item IDs of proteins in \code{aa_file}, which lists amino acid compositions in the format described for \code{\link{human.aa}} (see \code{\link[CHNOSZ]{thermo}$protein} for details).
+  \item IDs of proteins in \code{aa_file}, which lists amino acid compositions in the format described for \code{\link[canprot]{human.aa}} (see \code{\link[CHNOSZ]{thermo}$protein} for details).
 }
 
 \code{cleanup} removes proteins with unavailable IDs, ambiguous expression ratios, and duplicated IDs.
@@ -100,7 +100,7 @@ Alternatively, if \code{IDcol} is a logical value, it selects proteins to be unc
 \item{Differentially expressed proteins are identified by the value of \code{pdat$up2} (TRUE for up-regulated proteins and FALSE for down-regulated proteins).}
 \item{The differences are calculated as (median for up-regulated proteins) - (median for down-regulated proteins).
 If \code{mfun} is \samp{mean}, means of the groups are used instead.}
-\item{If \code{oldstyle} is TRUE, the function also calculates the common language effect size (\code{\link{CLES}}, in percent) and \emph{p}-value for each variable.}
+\item{If \code{oldstyle} is TRUE, the function also calculates the common language effect size (\code{\link[canprot]{CLES}}, in percent) and \emph{p}-value for each variable.}
 \item{Volume is calculated using amino acid group additivity as described by Dick et al. (2006).}
 \item{Set \code{plot.it} to \code{TRUE} to make a scatterplot.
 Open red squares and filled blue circles stand for up-regulated and down-regulated proteins, respectively.}
@@ -128,7 +128,7 @@ The median difference is shown by a gray horizontal line drawn between the distr
 
 \code{xsummary} makes an HTML table summarizing chemical differences using \code{\link[xtable]{xtable}}.
 Bold and underline formatting is used to highlight significant chemical differences.
-The \emph{p}-value is bolded if it is less than 0.05, and the percent common language effect size (\code{\link{CLES}}) is bolded if it is <= 40 or >= 60.
+The \emph{p}-value is bolded if it is less than 0.05, and the percent common language effect size (\code{\link[canprot]{CLES}}) is bolded if it is <= 40 or >= 60.
 The mean (or median) difference is [underlined / bolded] if [only one of / both] the \emph{p}-value and CLES pass these cutoffs.
 The generated table is written to the console, and can be used in a vignette using the \code{results = "asis"} chunk option.
 
@@ -153,7 +153,7 @@ The overall style of the plot is controlled by \code{oldstyle}.
   \item{\code{oldstyle = TRUE}}{
     This style was used for the historical (2017) vignettes, which have been moved to the \samp{extdata/cpcp} directory in \pkg{JMDplots} (\url{https://github.com/jedick/JMDplots}).
     For each dataset, the point symbol is a filled square if the \emph{p}-values of both the x-variable and y-variable are less than 0.05, a filled circle if the \emph{p}-value of one of the x- or y-variables is less than 0.05, and an open circle otherwise.
-    A solid line is drawn from the point to the corresponding axis if the rounded, absolute value of (\code{\link{CLES}} in percent - 50) of the x- or y-variable is greater than or equal 10.
+    A solid line is drawn from the point to the corresponding axis if the rounded, absolute value of (\code{\link[canprot]{CLES}} in percent - 50) of the x- or y-variable is greater than or equal 10.
     Otherwise, a dashed line is drawn from the point to the corresponding axis if the \emph{p}-value of the x- or y-variable is less than 0.05.
     Otherwise, no line is drawn.
   }
