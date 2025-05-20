@@ -1,3 +1,12 @@
+CHANGES IN JMDplots 1.2.22
+--------------------------
+
+- 20250511 Move equilibrium.Rmd and protein.equil() from CHNOSZ.
+
+- 20250424 Update plots for microhum paper.
+
+- 20250328 Update plots for genoGOE paper.
+
 CHANGES IN JMDplots 1.2.21
 --------------------------
 

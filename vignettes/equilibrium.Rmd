@@ -8,7 +8,7 @@ vignette: >
   %\VignetteIndexEntry{Equilibrium in CHNOSZ}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
-bibliography: CHNOSZ_vig.bib
+bibliography: JMDplots.bib
 csl: elementa.csl
 link-citations: true
 ---
@@ -66,7 +66,7 @@ if (!nzchar(Sys.which("pngquant"))) pngquant <- NULL
 
 # Set dpi 20231129
 knitr::opts_chunk$set(
-  dpi = if(nzchar(Sys.getenv("CHNOSZ_BUILD_LARGE_VIGNETTES"))) 100 else 72
+  dpi = 150
 )
 ```
 
@@ -82,7 +82,7 @@ Scope of this document:
 - Some illustrative examples of equilibrium calculations are provided, using proteins as a case study.
 - The main use case for `equilibriate()` is to calculate and visualize distributions of aqueous species subject to the limitations below.
 - A different function, `solubility()`, can be used to obtain the distributions of aqueous species in equilibrium with one or more minerals.
-- Many types of relative stablity diagrams (e.g. mineral and aqueous species predominance diagrams) can be made using the *maximum affinity method* (basis - species - [affinity|mosaic] - diagram) and do not require either of the `equilibrate()` or `solubility()` functions.
+- Many types of relative stability diagrams (e.g. mineral and aqueous species predominance diagrams) can be made using the *maximum affinity method* (basis - species - [affinity|mosaic] - diagram) and do not require either of the `equilibrate()` or `solubility()` functions.
 
 Limitations:
 

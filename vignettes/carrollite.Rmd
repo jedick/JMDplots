@@ -39,7 +39,7 @@ This vignette was compiled on `r Sys.Date()` with **[JMDplots](https://github.co
 ```{r JMDplots, message = FALSE, results = "hide"}
 library(JMDplots)
 # Set plot resolution
-res <- if(nzchar(Sys.getenv("BUILD_LARGE_VIGNETTES"))) 400 else 75
+res <- 200
 ```
 
 ## Check thermodynamic parameters for carrollite
