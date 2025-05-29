@@ -528,7 +528,7 @@ utogig4 <- function(pdf = FALSE) {
   ylim <- c(-0.25, -0.10)
   # Axis limits for affinity plots
   xlims <- list(c(-4, -12), c(0, -15), c(0, -15))
-  ylims <- list(c(0, 80), c(0, 50), c(0, 50))
+  ylims <- list(c(0, 100), c(0, 60), c(0, 50))
   # Where to draw transition line
   trans <- list(c("Class I", "Class II"), c("Nif-B", "Nif-A"), c("Basal", "Terrestrial"))
 
@@ -539,8 +539,8 @@ utogig4 <- function(pdf = FALSE) {
   logK <- subcrt(c("H2", "H+", "e-"), c(-1, 2, 2), T = T)$out$logK
   pH <- Seawater.AS98$pH
   # Adjustments for label position
-  dx <- list(c(0, -0.3), c(3.83, 0, -5, -1.5), c(0.2, -0.1, 2, -3))
-  dy <- list(c(2, 1), c(-1.3, 0.7, 0, 1), c(1.5, 3, 0, -6))
+  dx <- list(c(0, -0.3), c(3.83, 0, -8, -1.5), c(-0.2, -0.1, 2, -3))
+  dy <- list(c(2, 1), c(-1.3, 0.7, -8, 1), c(1.5, 3, 0, -6))
 
   # Place to keep logaH2 for printing 20220920
   logaH2s <- numeric()
@@ -651,7 +651,7 @@ utogig4 <- function(pdf = FALSE) {
     ip <- add.protein(aa, as.residue = TRUE)
     a <- affinity(H2 = xlims[[i]], iprotein = ip, T = T)
     # Calculate normalized sum of ranks for each group and make diagram
-    arank <- rank.affinity(a, groups)
+    arank <- rank.affinity(a, groups, percent = TRUE)
     names <- hyphen.in.pdf(names(groups))
     diagram(arank, col = lcol, lty = 1, lwd = 1.5, dx = dx[[i]], dy = dy[[i]], names = names, add = TRUE)
     par(opar)

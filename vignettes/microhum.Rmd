@@ -1,10 +1,10 @@
 ---
-title: "Chemical features of proteins in human microbiomes (2025)"
+title: "Chemical features of proteins in microbial genomes (2025)"
 output: 
   rmarkdown::html_vignette:
     mathjax: null
 vignette: >
-  %\VignetteIndexEntry{Chemical features of proteins in human microbiomes (2025)}
+  %\VignetteIndexEntry{Chemical features of proteins in microbial genomes (2025)}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 bibliography: [orp16S.bib, JMDplots.bib]
@@ -31,11 +31,9 @@ nH2O <- "<i>n</i><sub>H<sub>2</sub>O</sub>"
 nO2 <- "<i>n</i><sub>O<sub>2</sub></sub>"
 ```
 
-This vignette runs the functions to make the plots from the following manuscript:
+This vignette runs the functions to make the plots from the following paper:
 
-> Dick JM. 2025. Chemical features of proteins in microbial genomes associated with body sites and gut inflammation. Submitted manuscript.
-
-A preprint of the manuscript is available on bioRxiv at doi: [10.1101/2023.02.12.528246](https://doi.org/10.1101/2023.02.12.528246).
+> Dick JM. 2025. Chemical features of proteins in microbial genomes associated with body sites and gut inflammation. *Biomed. Inform.* **1**(1): 0005 doi: [10.55092/bi20250003](https://doi.org/10.55092/bi20250003)
 
 This vignette was compiled on `r Sys.Date()` with
 **[JMDplots](https://github.com/jedick/JMDplots)** `r packageDescription("JMDplots")$Version`,

@@ -14,7 +14,7 @@
 \alias{dataset_metrics}
 \title{Adaptations of microbial genomes to human body chemistry}
 \description{
-Plots from the manuscript by Dick (2024).
+Plots from the paper by Dick (2025).
 }
 
 \usage{
@@ -110,7 +110,7 @@ The data files listed below are stored in \file{extdata/microhum}:
 \references{
 Dick JM, Yu M, Tan J and Lu A (2019) Changes in carbon oxidation state of metagenomes along geochemical redox gradients. \emph{Front. Microbiol.} \bold{10}, 120. \doi{10.3389/fmicb.2019.00120}
 
-Dick JM (2024) Adaptations of microbial genomes to human body chemistry. bioRxiv. \doi{10.1101/2023.02.12.528246}
+Dick JM (2025) Chemical features of proteins in microbial genomes associated with body sites and gut inflammation. \emph{Biomed. Inform.} \bold{1}, 0005. \doi{10.55092/bi20250003}
 
 Ke S, Weiss ST and Liu Y-Y (2022) Dissecting the role of the human microbiome in COVID-19 via metagenome-assembled genomes. \emph{Nat. Commun.} \bold{13}, 5253. \doi{10.1038/s41467-022-32991-w}
 

@@ -13,6 +13,7 @@ The plots are available in the corresponding vignettes in the package.
 
 \details{
   \itemize{
+    \item \code{\link{microhum}} - Chemical features of proteins in microbial genomes (Dick, 2025)
     \item \code{\link{chem16S}} - Community-level chemical metrics (Dick and Kang, 2023)
     \item \code{\link{orp16S}} - Influence of redox potential on bacterial protein evolution (Dick and Meng, 2023)
     \item \code{\link{geo16S}} - Chemical links between redox conditions and community reference proteomes (Dick and Tan, 2023)
@@ -163,4 +164,6 @@ Dick JM and Tan J (2023) Chemical links between redox conditions and estimated c
 Dick JM and Meng D (2023) Community- and genome-based evidence for a shaping influence of redox potential on bacterial protein evolution. \emph{mSystems} \bold{8}, e00014-23. \doi{10.1128/msystems.00014-23}
 
 Dick JM and Kang X (2023) \emph{chem16S}: community-level chemical metrics for exploring genomic adaptation to environments. \emph{Bioinformatics} \bold{39}, btad564. \doi{10.1093/bioinformatics/btad564}
+
+Dick JM (2025) Chemical features of proteins in microbial genomes associated with body sites and gut inflammation. \emph{Biomed. Inform.} \bold{1}, 0005. \doi{10.55092/bi20250003}
 }
