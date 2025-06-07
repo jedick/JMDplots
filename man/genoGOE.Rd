@@ -12,7 +12,7 @@ Plots from the manuscript by Dick (2025).
 }
 
 \usage{
-  genoGOE_1(pdf = FALSE)
+  genoGOE_1(pdf = FALSE, panel = NULL)
   genoGOE_2(pdf = FALSE, metric = "Zc")
   genoGOE_3(pdf = FALSE)
   genoGOE_4(pdf = FALSE)
@@ -21,6 +21,7 @@ Plots from the manuscript by Dick (2025).
 
 \arguments{
   \item{pdf}{logical, make a PDF file?}
+  \item{panel}{character, create only this panel (disables figure layout, PDF output, and panel labeling)}
   \item{metric}{character, which metric to plot (see \code{\link[canprot]{metrics}})}
 }
 

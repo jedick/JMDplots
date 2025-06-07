@@ -8,11 +8,14 @@
 # 20240803 Compare Rubisco proteins and unrelated genomes (Fig. 3C)
 
 # Figure 1: Genome-wide differences of oxidation state between two lineages of methanogens
-genoGOE_1 <- function(pdf = FALSE) {
+genoGOE_1 <- function(pdf = FALSE, panel = NULL) {
 
-  if(pdf) pdf("Figure_1.pdf", width = 8, height = 6)
-  mat <- matrix(c(1,2,3, 1,2,4, 5,5,5), nrow = 3, byrow = TRUE)
-  layout(mat, heights = c(1, 1, 2))
+  if(is.null(panel)) {
+    if(pdf) pdf("Figure_1.pdf", width = 8, height = 6)
+    mat <- matrix(c(1,2,3, 1,2,4, 5,5,5), nrow = 3, byrow = TRUE)
+    layout(mat, heights = c(1, 1, 2))
+  }
+  panels <- if(is.null(panel)) LETTERS[1:4] else panel
   opar <- par(mgp = c(2.8, 1, 0), mar = c(5.1, 4.1, 2.1, 2.1))
 
   # Read methanogen genomes information
@@ -63,21 +66,23 @@ genoGOE_1 <- function(pdf = FALSE) {
   Zc_Halo <- Zc_Halo[iord, ]
   Zc_Methano <- Zc_Methano[iord, ]
 
-  # Plot IQR of Zc
-  plot(c(1, 53), c(-0.28, -0.04), xlab = "Marker gene", ylab = quote("Protein"~italic(Z)[C]), type = "n")
-  for(i in 1:53) {
-    lines(c(i, i) - 0.1, Zc_Methano[i, c(2, 4)], col = 2)
-    lines(c(i, i) + 0.1, Zc_Halo[i, c(2, 4)], col = 4)
+  if("A" %in% panels) {
+    # Plot IQR of Zc
+    plot(c(1, 53), c(-0.28, -0.04), xlab = "Marker gene", ylab = quote("Protein"~italic(Z)[C]), type = "n")
+    for(i in 1:53) {
+      lines(c(i, i) - 0.1, Zc_Methano[i, c(2, 4)], col = 2)
+      lines(c(i, i) + 0.1, Zc_Halo[i, c(2, 4)], col = 4)
+    }
+    # Add legend for Class I and II methanogens
+    legend("bottomright", "Class I", lty = 1, col = 2, bty = "n")
+    legend("topleft", "Class II", lty = 1, col = 4, bty = "n")
+    if(is.null(panel)) label.figure("A", font = 2, cex = 1.6)
+    # Calculate p-value 20250304
+    # Use median value in each group (3rd column) and paired observations
+    p <- t.test(Zc_Halo[, 3], Zc_Methano[, 3], paired = TRUE)$p.value
+    ptext <- bquote(italic(p) == .(signif(p, 2)))
+    text(5, par("usr")[3], ptext, adj = c(0, -0.5))
   }
-  # Add legend for Class I and II methanogens
-  legend("bottomright", "Class I", lty = 1, col = 2, bty = "n")
-  legend("topleft", "Class II", lty = 1, col = 4, bty = "n")
-  label.figure("A", font = 2, cex = 1.6)
-  # Calculate p-value 20250304
-  # Use median value in each group (3rd column) and paired observations
-  p <- t.test(Zc_Halo[, 3], Zc_Methano[, 3], paired = TRUE)$p.value
-  ptext <- bquote(italic(p) == .(signif(p, 2)))
-  text(5, par("usr")[3], ptext, adj = c(0, -0.5))
 
   # Get GC for species in each phylum
   GC_Halo <- get_GC("Halo")
@@ -85,127 +90,142 @@ genoGOE_1 <- function(pdf = FALSE) {
   GC_Halo <- GC_Halo[iord, ]
   GC_Methano <- GC_Methano[iord, ]
 
-  # Plot IQR of GC
-  plot(c(1, 53), c(0.25, 0.65), xlab = "Marker gene", ylab = "GC content", type = "n")
-  for(i in 1:53) {
-    lines(c(i, i) - 0.1, GC_Methano[i, c(2, 4)], col = 2)
-    lines(c(i, i) + 0.1, GC_Halo[i, c(2, 4)], col = 4)
+  if("B" %in% panels) {
+    # Plot IQR of GC
+    plot(c(1, 53), c(0.25, 0.65), xlab = "Marker gene", ylab = "GC content", type = "n")
+    for(i in 1:53) {
+      lines(c(i, i) - 0.1, GC_Methano[i, c(2, 4)], col = 2)
+      lines(c(i, i) + 0.1, GC_Halo[i, c(2, 4)], col = 4)
+    }
+    if(is.null(panel)) label.figure("B", font = 2, cex = 1.6)
+    # Calculate p-value 20250304
+    # Use median value in each group (3rd column) and paired observations
+    p <- t.test(GC_Halo[, 3], GC_Methano[, 3], paired = TRUE)$p.value
+    ptext <- bquote(italic(p) == .(signif(p, 2)))
+    text(5, par("usr")[3], ptext, adj = c(0, -0.5))
   }
-  label.figure("B", font = 2, cex = 1.6)
-  # Calculate p-value 20250304
-  # Use median value in each group (3rd column) and paired observations
-  p <- t.test(GC_Halo[, 3], GC_Methano[, 3], paired = TRUE)$p.value
-  ptext <- bquote(italic(p) == .(signif(p, 2)))
-  text(5, par("usr")[3], ptext, adj = c(0, -0.5))
 
   # Panel C: Delta Zc for marker genes
 
-  # Plot Delta Zc vs Delta GC
-  par(mar = c(4.1, 4.1, 1.1, 2.1))
-  Delta_Zc <- na.omit(Zc_Halo[, 3] - Zc_Methano[, 3])
-  Delta_GC <- na.omit(GC_Halo[, 3] - GC_Methano[, 3])
-  plot(Delta_GC, Delta_Zc, xlab = quote(Delta*"GC"),
-    ylab = quote(Delta*italic(Z)[C]~"(Class II - Class I)                                                         "),
-    pch = 19, col = adjustcolor(1, alpha.f = 0.5), xpd = NA)
-  # Calculate linear fit
-  mylm <- lm(Delta_Zc ~ Delta_GC)
-  x <- range(Delta_GC)
-  y <- predict.lm(mylm, data.frame(Delta_GC = x))
-  # Plot linear fit and show R2
-  lines(x, y, lty = 2, lwd = 1.5, col = 8)
-  R2 <- summary(mylm)$r.squared
-  R2_txt <- bquote(italic(R)^2 == .(formatC(R2, digits = 2, format = "f")))
-  legend("topleft", legend = R2_txt, bty = "n", inset = c(-0.05, 0))
-  label.figure("C", font = 2, cex = 1.6, yfrac = 0.9)
+  if("C" %in% panels) {
 
-  # Plot Delta Zc vs log10 protein abundance in M. maripaludis 20240531
-  Delta_Zc <- Zc_Halo[, 3] - Zc_Methano[, 3]
-  abundance <- markerdat$Redundant.Peptides / markerdat$MW
-  log10a <- log10(abundance)
-  plot(log10a, Delta_Zc, xlab = quote(log[10]~"protein abundance in"~italic("M. maripaludis")), ylab = "", pch = 19, col = adjustcolor(1, alpha.f = 0.5))
-  # Calculate linear fit
-  mylm <- lm(Delta_Zc ~ log10a)
-  x <- range(log10a)
-  y <- predict.lm(mylm, data.frame(log10a = x))
-  # Plot linear fit and show R2
-  lines(x, y, lty = 2, lwd = 1.5, col = 8)
-  R2 <- summary(mylm)$r.squared
-  R2_txt <- bquote(italic(R)^2 == .(formatC(R2, digits = 2, format = "f")))
-  legend("topleft", legend = R2_txt, bty = "n", inset = c(-0.05, 0))
+    # If plotting only this panel, only make the abundance plot
+    if(is.null(panel)) {
+      # Plot Delta Zc vs Delta GC
+      par(mar = c(4.1, 4.1, 1.1, 2.1))
+      Delta_Zc <- na.omit(Zc_Halo[, 3] - Zc_Methano[, 3])
+      Delta_GC <- na.omit(GC_Halo[, 3] - GC_Methano[, 3])
+      plot(Delta_GC, Delta_Zc, xlab = quote(Delta*"GC"),
+        ylab = quote(Delta*italic(Z)[C]~"(Class II - Class I)                                                         "),
+        pch = 19, col = adjustcolor(1, alpha.f = 0.5), xpd = NA)
+      # Calculate linear fit
+      mylm <- lm(Delta_Zc ~ Delta_GC)
+      x <- range(Delta_GC)
+      y <- predict.lm(mylm, data.frame(Delta_GC = x))
+      # Plot linear fit and show R2
+      lines(x, y, lty = 2, lwd = 1.5, col = 8)
+      R2 <- summary(mylm)$r.squared
+      R2_txt <- bquote(italic(R)^2 == .(formatC(R2, digits = 2, format = "f")))
+      legend("topleft", legend = R2_txt, bty = "n", inset = c(-0.05, 0))
+      if(is.null(panel)) label.figure("C", font = 2, cex = 1.6, yfrac = 0.9)
+    }
+
+    ylab <- if(is.null(panel)) "" else quote(Delta*italic(Z)[C]~"(Class II - Class I)")
+    # Plot Delta Zc vs log10 protein abundance in M. maripaludis 20240531
+    Delta_Zc <- Zc_Halo[, 3] - Zc_Methano[, 3]
+    abundance <- markerdat$Redundant.Peptides / markerdat$MW
+    log10a <- log10(abundance)
+    plot(log10a, Delta_Zc, xlab = quote(log[10]~"protein abundance in"~italic("M. maripaludis")), ylab = ylab, pch = 19, col = adjustcolor(1, alpha.f = 0.5))
+    # Calculate linear fit
+    mylm <- lm(Delta_Zc ~ log10a)
+    x <- range(log10a)
+    y <- predict.lm(mylm, data.frame(log10a = x))
+    # Plot linear fit and show R2
+    lines(x, y, lty = 2, lwd = 1.5, col = 8)
+    # Add horizontal line at Delta ZC = 0
+    abline(h = 0, lty = 3)
+    R2 <- summary(mylm)$r.squared
+    R2_txt <- bquote(italic(R)^2 == .(formatC(R2, digits = 2, format = "f")))
+    legend("topleft", legend = R2_txt, bty = "n", inset = c(-0.05, 0))
+
+  }
 
   par(opar)
 
   # Panel D: Zc controlled for various factors 20240529
-   
-  # Get values of Zc, GC, and Cost
-  genomes <- mg$Genome
-  values <- lapply(genomes, function(genome) {
-    aa <- read.csv(file.path(methanogendir, "aa", paste0(genome, "_aa.csv.xz")))
-    data.frame(
-      Zc = Zc(aa),
-      GC = aa$abbrv,
-      Cost = Cost(aa)
-    )
-  })
-  names(values) <- genomes
 
-  # NULL values for variables used in subset()
-  GC <- Cost <- NULL
-  # Get mean Zc for segment (phylum x condition)
-  get_mean_Zc <- function(phylum = "Halo", condition = "all") {
-    genomes <- get(phylum)
-    myval <- values[genomes]
-    if(condition == "low_GC") myval <- lapply(myval, subset, GC < 0.34)
-    if(condition == "mid_GC") myval <- lapply(myval, subset, GC >= 0.34 & GC <= 0.36)
-    if(condition == "high_GC") myval <- lapply(myval, subset, GC > 0.36)
-    if(condition == "low_Cost") myval <- lapply(myval, subset, Cost < 23)
-    if(condition == "mid_Cost") myval <- lapply(myval, subset, Cost >= 23 & Cost <= 24)
-    if(condition == "high_Cost") myval <- lapply(myval, subset, Cost > 25)
-    print(paste("median", median(sapply(myval, nrow)), "proteins for", phylum, condition))
-    sapply(sapply(myval, "[", "Zc"), "mean")
+  if("D" %in% panels) {
+   
+    # Get values of Zc, GC, and Cost
+    genomes <- mg$Genome
+    values <- lapply(genomes, function(genome) {
+      aa <- read.csv(file.path(methanogendir, "aa", paste0(genome, "_aa.csv.xz")))
+      data.frame(
+        Zc = Zc(aa),
+        GC = aa$abbrv,
+        Cost = Cost(aa)
+      )
+    })
+    names(values) <- genomes
+
+    # NULL values for variables used in subset()
+    GC <- Cost <- NULL
+    # Get mean Zc for segment (phylum x condition)
+    get_mean_Zc <- function(phylum = "Halo", condition = "all") {
+      genomes <- get(phylum)
+      myval <- values[genomes]
+      if(condition == "low_GC") myval <- lapply(myval, subset, GC < 0.34)
+      if(condition == "mid_GC") myval <- lapply(myval, subset, GC >= 0.34 & GC <= 0.36)
+      if(condition == "high_GC") myval <- lapply(myval, subset, GC > 0.36)
+      if(condition == "low_Cost") myval <- lapply(myval, subset, Cost < 23)
+      if(condition == "mid_Cost") myval <- lapply(myval, subset, Cost >= 23 & Cost <= 24)
+      if(condition == "high_Cost") myval <- lapply(myval, subset, Cost > 25)
+      print(paste("median", median(sapply(myval, nrow)), "proteins for", phylum, condition))
+      sapply(sapply(myval, "[", "Zc"), "mean")
+    }
+
+    Zc <- data.frame(
+      Methano_all = get_mean_Zc("Methano", "all"),
+      Halo_all = get_mean_Zc("Halo", "all"),
+      Methano_low_GC = get_mean_Zc("Methano", "low_GC"),
+      Halo_low_GC = get_mean_Zc("Halo", "low_GC"),
+      Methano_mid_GC = get_mean_Zc("Methano", "mid_GC"),
+      Halo_mid_GC = get_mean_Zc("Halo", "mid_GC"),
+      Methano_high_GC = get_mean_Zc("Methano", "high_GC"),
+      Halo_high_GC = get_mean_Zc("Halo", "high_GC"),
+      Methano_low_Cost = get_mean_Zc("Methano", "low_Cost"),
+      Halo_low_Cost = get_mean_Zc("Halo", "low_Cost"),
+      Methano_mid_Cost = get_mean_Zc("Methano", "mid_Cost"),
+      Halo_mid_Cost = get_mean_Zc("Halo", "mid_Cost"),
+      Methano_high_Cost = get_mean_Zc("Methano", "high_Cost"),
+      Halo_high_Cost = get_mean_Zc("Halo", "high_Cost")
+    )
+
+    # Don't plot overall line
+    what <- c(FALSE, TRUE, TRUE, TRUE)
+    # Start beanplot with all proteins
+    par(mar = c(3.1, 4.1, 4.1, 2.1))
+    bp <- beanplot(Zc[, 1:2], side = "both", col = list(c(2, 7, 2, 2), c(4, 3, 4, 4)), xlim = c(0.5, 7.5), what = what, names = "")
+    # Add means for species in each phylum
+    abline(h = bp$stats[1], col = 2, lty = 2)
+    abline(h = bp$stats[2], col = 4, lty = 2)
+    # Add labels for methanogen classes
+    text(0.6, bp$stats[1] + 0.008, "Class I")
+    text(1.6, bp$stats[2] + 0.008, "Class II")
+    # Add beans for GC and Cost
+    beanplot(Zc[, 3:14], side = "both", col = list(c(2, 7, 2, 2), c(4, 3, 4, 4)), xlim = c(0.5, 7.5), what = what, names = character(6), add = TRUE, at = 2:7)
+    mtext(quote("Protein"~italic(Z)[C]), 2, line = 2.8, cex = par("cex"))
+
+    # Add group names
+    axis(1, at = 2:4, labels = c("GC < 0.34", "0.34 < GC < 0.36", "GC > 0.36"))
+    axis(1, at = 5:7, labels = c("Cost < 23", "23 < Cost < 25", "Cost > 25"))
+    axis(3, at = c(1, 3, 6), labels = c("Entire genomes", "Control for GC content", "Control for metabolic cost"), tick = FALSE, font = 2)
+
+    if(is.null(panel)) label.figure("D", font = 2, cex = 1.6, xfrac = 0.018)
+
   }
 
-  Zc <- data.frame(
-    Methano_all = get_mean_Zc("Methano", "all"),
-    Halo_all = get_mean_Zc("Halo", "all"),
-    Methano_low_GC = get_mean_Zc("Methano", "low_GC"),
-    Halo_low_GC = get_mean_Zc("Halo", "low_GC"),
-    Methano_mid_GC = get_mean_Zc("Methano", "mid_GC"),
-    Halo_mid_GC = get_mean_Zc("Halo", "mid_GC"),
-    Methano_high_GC = get_mean_Zc("Methano", "high_GC"),
-    Halo_high_GC = get_mean_Zc("Halo", "high_GC"),
-    Methano_low_Cost = get_mean_Zc("Methano", "low_Cost"),
-    Halo_low_Cost = get_mean_Zc("Halo", "low_Cost"),
-    Methano_mid_Cost = get_mean_Zc("Methano", "mid_Cost"),
-    Halo_mid_Cost = get_mean_Zc("Halo", "mid_Cost"),
-    Methano_high_Cost = get_mean_Zc("Methano", "high_Cost"),
-    Halo_high_Cost = get_mean_Zc("Halo", "high_Cost")
-  )
-
-  # Don't plot overall line
-  what <- c(FALSE, TRUE, TRUE, TRUE)
-  # Start beanplot with all proteins
-  par(mar = c(3.1, 4.1, 4.1, 2.1))
-  bp <- beanplot(Zc[, 1:2], side = "both", col = list(c(2, 7, 2, 2), c(4, 3, 4, 4)), xlim = c(0.5, 7.5), what = what, names = "")
-  # Add means for species in each phylum
-  abline(h = bp$stats[1], col = 2, lty = 2)
-  abline(h = bp$stats[2], col = 4, lty = 2)
-  # Add labels for methanogen classes
-  text(0.6, bp$stats[1] + 0.008, "Class I")
-  text(1.6, bp$stats[2] + 0.008, "Class II")
-  # Add beans for GC and Cost
-  beanplot(Zc[, 3:14], side = "both", col = list(c(2, 7, 2, 2), c(4, 3, 4, 4)), xlim = c(0.5, 7.5), what = what, names = character(6), add = TRUE, at = 2:7)
-  mtext(quote("Protein"~italic(Z)[C]), 2, line = 2.8, cex = par("cex"))
-
-
-  # Add group names
-  axis(1, at = 2:4, labels = c("GC < 0.34", "0.34 < GC < 0.36", "GC > 0.36"))
-  axis(1, at = 5:7, labels = c("Cost < 23", "23 < Cost < 25", "Cost > 25"))
-  axis(3, at = c(1, 3, 6), labels = c("Entire genomes", "Control for GC content", "Control for metabolic cost"), tick = FALSE, font = 2)
-
-  label.figure("D", font = 2, cex = 1.6, xfrac = 0.018)
-
-  if(pdf) dev.off()
+  if(pdf & is.null(panel)) dev.off()
 
 }
 
