@@ -584,7 +584,7 @@ genoGOE_3D <- function(yvar = "Eh", res = 400, add = FALSE, lwd = 2, pHlim = c(4
 }
 
 # Evolutionary oxidation and relative stabilities for genomes with S-cycling genes 20241211
-genoGOE_4 <- function(pdf = FALSE) {
+genoGOE_4 <- function(pdf = FALSE, panel = NULL) {
   # genoGOE/sulfur_genomes.R
   # 20241211 add Eh-pH affinity ranking
   # 20241223 convert to logfO2-pH
@@ -674,16 +674,24 @@ genoGOE_4 <- function(pdf = FALSE) {
     lines(c(3.28, 3.17), c(-65.30, -66.25))
   }
 
-  if(pdf) pdf("Figure_4.pdf", width = 8, height = 12)
-  layout(matrix(1:2), heights = c(5, 7))
-  sulfur_Zc()
-  label.figure("A", font = 2, cex = 1.6)
-  sulfur_affinity()
-  # Overlay stability boundaries for other genomes
-  genoGOE_3D("O2", add = TRUE, lwd = 4, pHlim = c(3, 10), alpha.f = 0.7, Eh7_las = 0)
-  title(main = hyphen.in.pdf("Groupwise relative stabilities of proteins in\ngenomes with different S-cycling genes"), font.main = 1)
-  label.figure("B", font = 2, cex = 1.6)
-  if(pdf) dev.off()
+  if(is.null(panel)) {
+    if(pdf) pdf("Figure_4.pdf", width = 8, height = 12)
+    layout(matrix(1:2), heights = c(5, 7))
+  }
+  panels <- if(is.null(panel)) LETTERS[1:4] else panel
+
+  if("A" %in% panels) {
+    sulfur_Zc()
+    if(is.null(panel)) label.figure("A", font = 2, cex = 1.6)
+  }
+  if("B" %in% panels) {
+    sulfur_affinity()
+    # Overlay stability boundaries for other genomes
+    genoGOE_3D("O2", add = TRUE, lwd = 4, pHlim = c(3, 10), alpha.f = 0.7, Eh7_las = 0)
+    title(main = hyphen.in.pdf("Groupwise relative stabilities of proteins in\ngenomes with different S-cycling genes"), font.main = 1)
+    if(is.null(panel)) label.figure("B", font = 2, cex = 1.6)
+  }
+  if(pdf & is.null(panel)) dev.off()
 
 }
 

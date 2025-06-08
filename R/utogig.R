@@ -515,10 +515,13 @@ utogig3 <- function(pdf = FALSE) {
 }
 
 # Chemical and thermodynamic analysis of evolutionary divergence along redox gradients 20220601
-utogig4 <- function(pdf = FALSE) {
+utogig4 <- function(pdf = FALSE, panel = NULL) {
 
-  if(pdf) pdf("Figure_4.pdf", width = 9, height = 5)
-  layout(matrix(1:8, nrow = 2), widths = c(2.5, 4, 4, 2.5))
+  if(is.null(panel)) {
+    if(pdf) pdf("Figure_4.pdf", width = 9, height = 5)
+    layout(matrix(1:8, nrow = 2), widths = c(2.5, 4, 4, 2.5))
+  }
+  panels <- if(is.null(panel)) letters[1:3] else panel
   par(mar = c(4, 4, 3, 1))
   
   # Faded colors
@@ -547,173 +550,195 @@ utogig4 <- function(pdf = FALSE) {
 
   for(i in 1:3) {
 
-    if(i == 1) {
-      # Methanogen proteomes 20220424
-      # Read amino acid composition and compute Zc
-      aa <- read.csv(system.file("extdata/utogig/methanogen_AA.csv", package = "JMDplots"))
-      # Indices of Class I and Class II methanogens
-      iI <- 20:36
-      iII <- 1:19
-      col <- c(col2, col4)
-      lcol <- c(2, 4)
-      # Make Zc plot
-      Zc <- ZC(protein.formula(aa))
-      Zclist <- list("Class I" = Zc[iI], "Class II" = Zc[iII])
-      names(Zclist) <- paste0(names(Zclist), "\n(", sapply(Zclist, length), ")")
-      bp <- boxplot(Zclist, ylab = Zclab, col = col, ylim = ylim, names = character(2))
-      axis(1, at = 1:2, labels = names(Zclist), line = 1, lwd = 0)
-      add_cld(Zclist, bp)
-      text(1, -0.12, "Anoxic\nhabitats", font = 2, cex = 0.8)
-      text(2, -0.12, "Anoxic\nand oxic\nhabitats", font = 2, cex = 0.8)
-      abline(v = 1.5, lty = 2, lwd = 1.5, col = 8)
-      title("Methanogens\n(Lyu & Lu, 2018)", font.main = 1, cex.main = 1)
-      label.figure("(a)", cex = 1.5, font = 2, xfrac = 0.06)
-      # Get the species in each group
-      groups <- list("Class I" = iI, "Class II" = iII)
-      # Calculate P-values using parametric and non-parametric tests 20220913
-      Ptab1 <- KWvsANOVA(Zclist)
-      Ptab1 <- cbind(Variable = "Methanogens Zc", Ptab1)
+    if("a" %in% panels) {
+
+      if(i == 1) {
+        # Methanogen proteomes 20220424
+        # Read amino acid composition and compute Zc
+        aa <- read.csv(system.file("extdata/utogig/methanogen_AA.csv", package = "JMDplots"))
+        # Indices of Class I and Class II methanogens
+        iI <- 20:36
+        iII <- 1:19
+        col <- c(col2, col4)
+        lcol <- c(2, 4)
+        # Make Zc plot
+        Zc <- ZC(protein.formula(aa))
+        Zclist <- list("Class I" = Zc[iI], "Class II" = Zc[iII])
+        names(Zclist) <- paste0(names(Zclist), "\n(", sapply(Zclist, length), ")")
+        bp <- boxplot(Zclist, ylab = Zclab, col = col, ylim = ylim, names = character(2))
+        axis(1, at = 1:2, labels = names(Zclist), line = 1, lwd = 0)
+        add_cld(Zclist, bp)
+        text(1, -0.12, "Anoxic\nhabitats", font = 2, cex = 0.8)
+        text(2, -0.12, "Anoxic\nand oxic\nhabitats", font = 2, cex = 0.8)
+        abline(v = 1.5, lty = 2, lwd = 1.5, col = 8)
+        title("Methanogens\n(Lyu & Lu, 2018)", font.main = 1, cex.main = 1)
+        if(is.null(panel)) label.figure("(a)", cex = 1.5, font = 2, xfrac = 0.06)
+        # Get the species in each group
+        groups <- list("Class I" = iI, "Class II" = iII)
+        # Calculate P-values using parametric and non-parametric tests 20220913
+        Ptab1 <- KWvsANOVA(Zclist)
+        Ptab1 <- cbind(Variable = "Methanogens Zc", Ptab1)
+      }
+
+      if(i == 2) {
+        # Nif-encoding genomes 20220531
+        np <- NifProteomes()
+        Zclist <- np$ZClist
+        col <- c(col2, col2, col2, col4)
+        lcol <- c(2, 2, 2, 4)
+        bp <- boxplot(Zclist, ylab = Zclab, col = col, ylim = ylim, names = character(4))
+        names(Zclist) <- paste0(names(Zclist), "\n(", sapply(Zclist, length), ")")
+        axis(1, at = 1:4, labels = hyphen.in.pdf(names(Zclist)), line = 1, lwd = 0)
+        # Names with "-" confuse multcompLetters4()
+        names(Zclist) <- gsub("-", "", names(Zclist))
+        add_cld(Zclist, bp)
+        text(2, -0.12, "Anaerobic", font = 2, cex = 0.8)
+        text(4.1, -0.242, "Anaerobic\nand aerobic", font = 2, cex = 0.8)
+        abline(v = 3.5, lty = 2, lwd = 1.5, col = 8)
+        title(hyphen.in.pdf("Nif-encoding genomes\n(Poudel et al., 2018)"), font.main = 1, cex.main = 1)
+        # Get the amino acid compositions and species in each group
+        aa <- np$AA
+        groupnames <- np$types
+        groups <- sapply(groupnames, function(group) aa$protein == group, simplify = FALSE)
+        Ptab2 <- KWvsANOVA(Zclist)
+        Ptab2 <- cbind(Variable = "Nif-encoding Zc", Ptab2)
+      }
+
+      if(i == 3) {
+        # Thaumarchaeota 20220414
+        # Amino acid compositions of predicted (Glimmer) and database (NCBI or IMG) proteomes
+        predicted <- read.csv(system.file("extdata/utogig/Thaumarchaeota_predicted_AA.csv", package = "JMDplots"))
+        database <- read.csv(system.file("extdata/utogig/Thaumarchaeota_database_AA.csv", package = "JMDplots"))
+        # If both are available, use predicted instead of database
+        aa <- rbind(predicted, database)
+        aa <- aa[!duplicated(aa$organism), ]
+        groupnames <- c("Basal", "Terrestrial", "Shallow", "Deep")
+        ## Colors from Ren et al. (2019)
+        #col <- c("#b2427e", "#c78d55", "#00a06f", "#4085c3")
+        col <- c(col2, col4, col4, col4)
+        lcol <- c(2, 4, 4, 4)
+        Zc <- Zc(aa)
+        Zclist <- lapply(groupnames, function(g) Zc[aa$protein == g])
+        names(Zclist) <- groupnames
+        names(Zclist) <- paste0(names(Zclist), "\n(", sapply(Zclist, length), ")")
+        bp <- boxplot(Zclist, ylab = Zclab, col = col, ylim = ylim, names = character(4))
+        add_cld(Zclist, bp)
+        axis(1, at = 1:4, labels = names(Zclist), line = 1, lwd = 0, gap.axis = 0)
+        text(0.9, -0.12, hyphen.in.pdf("Pre-GOE\norigin"), font = 2, cex = 0.8)
+        text(2.1, -0.12, hyphen.in.pdf("Post-GOE\norigin"), font = 2, cex = 0.8)
+        abline(v = 1.5, lty = 2, lwd = 1.5, col = 8)
+        # Change Thaumarchaeota to Nitrososphaeria 20250608
+        title("Nitrososphaeria\n", font.main = 3, cex.main = 1)
+        title("\n(Ren et al., 2019)", font.main = 1, cex.main = 1)
+        # Get the species in each group
+        groups <- sapply(groupnames, function(group) aa$protein == group, simplify = FALSE)
+        Ptab3 <- KWvsANOVA(Zclist)
+        Ptab3 <- cbind(Variable = "Thaumarchaeota Zc", Ptab3)
+      }
+
     }
 
-    if(i == 2) {
-      # Nif-encoding genomes 20220531
-      np <- NifProteomes()
-      Zclist <- np$ZClist
-      col <- c(col2, col2, col2, col4)
-      lcol <- c(2, 2, 2, 4)
-      bp <- boxplot(Zclist, ylab = Zclab, col = col, ylim = ylim, names = character(4))
-      names(Zclist) <- paste0(names(Zclist), "\n(", sapply(Zclist, length), ")")
-      axis(1, at = 1:4, labels = hyphen.in.pdf(names(Zclist)), line = 1, lwd = 0)
-      # Names with "-" confuse multcompLetters4()
-      names(Zclist) <- gsub("-", "", names(Zclist))
-      add_cld(Zclist, bp)
-      text(2, -0.12, "Anaerobic", font = 2, cex = 0.8)
-      text(4.1, -0.242, "Anaerobic\nand aerobic", font = 2, cex = 0.8)
-      abline(v = 3.5, lty = 2, lwd = 1.5, col = 8)
-      title(hyphen.in.pdf("Nif-encoding genomes\n(Poudel et al., 2018)"), font.main = 1, cex.main = 1)
-      # Get the amino acid compositions and species in each group
-      aa <- np$AA
-      groupnames <- np$types
-      groups <- sapply(groupnames, function(group) aa$protein == group, simplify = FALSE)
-      Ptab2 <- KWvsANOVA(Zclist)
-      Ptab2 <- cbind(Variable = "Nif-encoding Zc", Ptab2)
+    if("b" %in% panels) {
+
+      # Make affinity rank plot 20220602
+
+      # Save graphical settings that are modified by thermo.plot.new()
+      opar <- par(c("mar", "mgp", "tcl", "las", "xaxs", "yaxs"))
+      # Start plot
+      thermo.plot.new(xlim = xlims[[i]], ylim = ylims[[i]], xlab = logaH2lab, ylab = "Mean rank of per-residue affinity (%)", yline = par("mgp")[1] + 0.3)
+      # Color reducing and oxidizing areas from organic compounds 20220621
+      file <- "H2_intermediate_-3.csv"
+      dat <- read.csv(file.path(system.file("extdata/utogig", package = "JMDplots"), file))
+      # Just use 25 degC values
+      dat <- dat[dat$T==25, ]
+      x <- dat[, "T", drop = FALSE]
+      # Make rectangles
+      rect(xlims[[i]][1], ylims[[i]][1], dat$hiN_hipH, ylims[[i]][2], col = "#E5737360", border = NA)
+      rect(xlims[[i]][2], ylims[[i]][1], dat$loN_lopH, ylims[[i]][2], col = "#90CAF960", border = NA)
+      rect(dat$hiN_hipH, ylims[[i]][1], dat$loN_lopH, ylims[[i]][2], col = "#9E9E9E60", border = NA)
+      rect(dat$hiN_lopH, ylims[[i]][1], dat$loN_hipH, ylims[[i]][2], col = "#9E9E9E90", border = NA)
+
+      # Load proteins and calculate affinity
+      ip <- add.protein(aa, as.residue = TRUE)
+      a <- affinity(H2 = xlims[[i]], iprotein = ip, T = T)
+      # Calculate normalized sum of ranks for each group and make diagram
+      arank <- rank.affinity(a, groups, percent = TRUE)
+      names <- hyphen.in.pdf(names(groups))
+      diagram(arank, col = lcol, lty = 1, lwd = 1.5, dx = dx[[i]], dy = dy[[i]], names = names, add = TRUE)
+      par(opar)
+      if(i == 1 & is.null(panel)) label.figure("(b)", cex = 1.5, font = 2, xfrac = 0.06)
+
+      # Draw line at transition
+      itrans <- which.min(abs(arank$values[[trans[[i]][1]]] - arank$values[[trans[[i]][2]]]))
+      logaH2 <- arank$vals$H2[itrans]
+      ytop1 <- ylims[[i]][2] + diff(ylims[[i]]) * 0.05
+      #A <- arank$values[[trans[[i]][1]]][itrans]
+      #lines(c(logaH2, logaH2), c(A, ytop1), lty = 2, lwd = 1.5, col = 8, xpd = NA)
+      ybot <- ylims[[i]][1]
+      lines(c(logaH2, logaH2), c(ybot, ytop1), lty = 2, lwd = 1.5, col = 8, xpd = NA)
+
+      # Calculate pe and Eh (mV)
+      pe <- -pH - 0.5*logaH2 - 0.5*logK
+      Eh <- 1000 * convert(pe, "Eh", pH = pH)
+      Ehtext <- paste(round(Eh), "mV")
+      ytop2 <- ylims[[i]][2] + diff(ylims[[i]]) * 0.1
+      text(logaH2, ytop2, Ehtext, xpd = NA)
+
+      logaH2s <- c(logaH2s, logaH2)
+    
     }
-
-    if(i == 3) {
-      # Thaumarchaeota 20220414
-      # Amino acid compositions of predicted (Glimmer) and database (NCBI or IMG) proteomes
-      predicted <- read.csv(system.file("extdata/utogig/Thaumarchaeota_predicted_AA.csv", package = "JMDplots"))
-      database <- read.csv(system.file("extdata/utogig/Thaumarchaeota_database_AA.csv", package = "JMDplots"))
-      # If both are available, use predicted instead of database
-      aa <- rbind(predicted, database)
-      aa <- aa[!duplicated(aa$organism), ]
-      groupnames <- c("Basal", "Terrestrial", "Shallow", "Deep")
-      ## Colors from Ren et al. (2019)
-      #col <- c("#b2427e", "#c78d55", "#00a06f", "#4085c3")
-      col <- c(col2, col4, col4, col4)
-      lcol <- c(2, 4, 4, 4)
-      Zc <- Zc(aa)
-      Zclist <- lapply(groupnames, function(g) Zc[aa$protein == g])
-      names(Zclist) <- groupnames
-      names(Zclist) <- paste0(names(Zclist), "\n(", sapply(Zclist, length), ")")
-      bp <- boxplot(Zclist, ylab = Zclab, col = col, ylim = ylim, names = character(4))
-      add_cld(Zclist, bp)
-      axis(1, at = 1:4, labels = names(Zclist), line = 1, lwd = 0, gap.axis = 0)
-      text(0.9, -0.12, hyphen.in.pdf("Pre-GOE\norigin"), font = 2, cex = 0.8)
-      text(2.1, -0.12, hyphen.in.pdf("Post-GOE\norigin"), font = 2, cex = 0.8)
-      abline(v = 1.5, lty = 2, lwd = 1.5, col = 8)
-      title("Thaumarchaeota\n(Ren et al., 2019)", font.main = 1, cex.main = 1)
-      # Get the species in each group
-      groups <- sapply(groupnames, function(group) aa$protein == group, simplify = FALSE)
-      Ptab3 <- KWvsANOVA(Zclist)
-      Ptab3 <- cbind(Variable = "Thaumarchaeota Zc", Ptab3)
-    }
-
-    # Make affinity rank plot 20220602
-
-    # Save graphical settings that are modified by thermo.plot.new()
-    opar <- par(c("mar", "mgp", "tcl", "las", "xaxs", "yaxs"))
-    # Start plot
-    thermo.plot.new(xlim = xlims[[i]], ylim = ylims[[i]], xlab = logaH2lab, ylab = "Mean rank of per-residue affinity (%)", yline = par("mgp")[1] + 0.3)
-    # Color reducing and oxidizing areas from organic compounds 20220621
-    file <- "H2_intermediate_-3.csv"
-    dat <- read.csv(file.path(system.file("extdata/utogig", package = "JMDplots"), file))
-    # Just use 25 degC values
-    dat <- dat[dat$T==25, ]
-    x <- dat[, "T", drop = FALSE]
-    # Make rectangles
-    rect(xlims[[i]][1], ylims[[i]][1], dat$hiN_hipH, ylims[[i]][2], col = "#E5737360", border = NA)
-    rect(xlims[[i]][2], ylims[[i]][1], dat$loN_lopH, ylims[[i]][2], col = "#90CAF960", border = NA)
-    rect(dat$hiN_hipH, ylims[[i]][1], dat$loN_lopH, ylims[[i]][2], col = "#9E9E9E60", border = NA)
-    rect(dat$hiN_lopH, ylims[[i]][1], dat$loN_hipH, ylims[[i]][2], col = "#9E9E9E90", border = NA)
-
-    # Load proteins and calculate affinity
-    ip <- add.protein(aa, as.residue = TRUE)
-    a <- affinity(H2 = xlims[[i]], iprotein = ip, T = T)
-    # Calculate normalized sum of ranks for each group and make diagram
-    arank <- rank.affinity(a, groups, percent = TRUE)
-    names <- hyphen.in.pdf(names(groups))
-    diagram(arank, col = lcol, lty = 1, lwd = 1.5, dx = dx[[i]], dy = dy[[i]], names = names, add = TRUE)
-    par(opar)
-    if(i == 1) label.figure("(b)", cex = 1.5, font = 2, xfrac = 0.06)
-
-    # Draw line at transition
-    itrans <- which.min(abs(arank$values[[trans[[i]][1]]] - arank$values[[trans[[i]][2]]]))
-    logaH2 <- arank$vals$H2[itrans]
-    ytop1 <- ylims[[i]][2] + diff(ylims[[i]]) * 0.05
-    #A <- arank$values[[trans[[i]][1]]][itrans]
-    #lines(c(logaH2, logaH2), c(A, ytop1), lty = 2, lwd = 1.5, col = 8, xpd = NA)
-    ybot <- ylims[[i]][1]
-    lines(c(logaH2, logaH2), c(ybot, ytop1), lty = 2, lwd = 1.5, col = 8, xpd = NA)
-
-    # Calculate pe and Eh (mV)
-    pe <- -pH - 0.5*logaH2 - 0.5*logK
-    Eh <- 1000 * convert(pe, "Eh", pH = pH)
-    Ehtext <- paste(round(Eh), "mV")
-    ytop2 <- ylims[[i]][2] + diff(ylims[[i]]) * 0.1
-    text(logaH2, ytop2, Ehtext, xpd = NA)
-
-    logaH2s <- c(logaH2s, logaH2)
 
   }
 
-  # Thaumarchaeota nH2O plot 20220622
-  nH2O <- nH2O(aa)
-  nH2Olist <- lapply(groupnames, function(g) nH2O[aa$protein == g])
-  names(nH2Olist) <- groupnames
-  names(nH2Olist) <- paste0(names(nH2Olist), "\n(", sapply(nH2Olist, length), ")")
-  ylim <- range(nH2O)
-  bp <- boxplot(nH2Olist, ylab = nH2Olab, col = col, ylim = ylim, names = character(4))
-  add_cld(nH2Olist, bp)
-  # Make rotated labels (modified from https://www.r-bloggers.com/rotated-axis-labels-in-r-plots/)
-  text(x = 1:4, y = par()$usr[3] - 2 * strheight("A"), labels = groupnames, srt = 45, adj = 1, xpd = TRUE)
-  axis(1, at = 1:4, labels = NA)
-  title("Thaumarchaeota\n(Ren et al., 2019)", font.main = 1, cex.main = 1)
-  label.figure("(c)", cex = 1.5, font = 2, xfrac = 0.06)
-  Ptab4 <- KWvsANOVA(nH2Olist)
-  Ptab4 <- cbind(Variable = "Thaumarchaeota nH2O", Ptab4)
+  if("c" %in% panels) {
 
-  # Add legend
-  plot.new()
-  par(mar = c(0, 0, 0, 0))
-  par(xpd = NA)
-  dT <- describe.property("T", T)
-  dP <- describe.property("P", 1)
-  dbasis <- describe.basis(ibasis = c(1, 3, 5, 6))
-  legend("left", legend = c(dT, dP, dbasis), bty = "n", y.intersp = 1.5, inset = c(-0.5, 0))
-  par(xpd = FALSE)
+    # Thaumarchaeota nH2O plot 20220622
+    nH2O <- nH2O(aa)
+    nH2Olist <- lapply(groupnames, function(g) nH2O[aa$protein == g])
+    names(nH2Olist) <- groupnames
+    names(nH2Olist) <- paste0(names(nH2Olist), "\n(", sapply(nH2Olist, length), ")")
+    ylim <- range(nH2O)
+    bp <- boxplot(nH2Olist, ylab = nH2Olab, col = col, ylim = ylim, names = character(4))
+    add_cld(nH2Olist, bp)
+    # Make rotated labels (modified from https://www.r-bloggers.com/rotated-axis-labels-in-r-plots/)
+    text(x = 1:4, y = par()$usr[3] - 2 * strheight("A"), labels = groupnames, srt = 45, adj = 1, xpd = TRUE)
+    axis(1, at = 1:4, labels = NA)
+    title("Thaumarchaeota\n(Ren et al., 2019)", font.main = 1, cex.main = 1)
+    if(is.null(panel)) label.figure("(c)", cex = 1.5, font = 2, xfrac = 0.06)
+    Ptab4 <- KWvsANOVA(nH2Olist)
+    Ptab4 <- cbind(Variable = "Thaumarchaeota nH2O", Ptab4)
 
-  if(pdf) dev.off()
+  }
 
-  # Print logaH2s
-  print("logaH2 at dashed lines in (b):")
-  print(round(logaH2s, 1))
+  if("b" %in% panels) {
 
-  # Return P-value table 20220913
-  out <- rbind(Ptab1, Ptab2, Ptab3, Ptab4)
-  out$p_Tukey <- signif(out$p_Tukey, 2)
-  out$p_Dunn <- signif(out$p_Dunn, 2)
-  invisible(out)
+    # Add legend
+    plot.new()
+    par(mar = c(0, 0, 0, 0))
+    par(xpd = NA)
+    dT <- describe.property("T", T)
+    dP <- describe.property("P", 1)
+    dbasis <- describe.basis(ibasis = c(1, 3, 5, 6))
+    legend("left", legend = c(dT, dP, dbasis), bty = "n", y.intersp = 1.5, inset = c(-0.5, 0))
+    par(xpd = FALSE)
+
+  }
+
+  if(is.null(panel)) {
+
+    if(pdf) dev.off()
+
+    # Print logaH2s
+    print("logaH2 at dashed lines in (b):")
+    print(round(logaH2s, 1))
+
+    # Return P-value table 20220913
+    out <- rbind(Ptab1, Ptab2, Ptab3, Ptab4)
+    out$p_Tukey <- signif(out$p_Tukey, 2)
+    out$p_Dunn <- signif(out$p_Dunn, 2)
+    invisible(out)
+
+  }
 
 }
 

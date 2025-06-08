@@ -18,7 +18,7 @@ Plots from the paper by Dick et al. (2023).
   utogig1(pdf = FALSE)
   utogig2(pdf = FALSE, logact = -3)
   utogig3(pdf = FALSE)
-  utogig4(pdf = FALSE)
+  utogig4(pdf = FALSE, panel = NULL)
   utogigS1(pdf = FALSE)
   utogigS2(pdf = FALSE)
   utogigS4(pdf = FALSE)
@@ -28,6 +28,7 @@ Plots from the paper by Dick et al. (2023).
 \arguments{
   \item{pdf}{logical, make a PDF file?}
   \item{logact}{numeric, logarithm of activity of organic species}
+  \item{panel}{character, create only this panel (disables figure layout, PDF output, and panel labeling)}
   \item{class}{character, organic compound class}
 }
 

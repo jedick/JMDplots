@@ -15,7 +15,7 @@ Plots from the manuscript by Dick (2025).
   genoGOE_1(pdf = FALSE, panel = NULL)
   genoGOE_2(pdf = FALSE, metric = "Zc")
   genoGOE_3(pdf = FALSE)
-  genoGOE_4(pdf = FALSE)
+  genoGOE_4(pdf = FALSE, panel = NULL)
   genoGOE_5(pdf = FALSE)
 }
 
