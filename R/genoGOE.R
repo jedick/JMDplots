@@ -217,8 +217,8 @@ genoGOE_1 <- function(pdf = FALSE, panel = NULL) {
     mtext(quote("Protein"~italic(Z)[C]), 2, line = 2.8, cex = par("cex"))
 
     # Add group names
-    axis(1, at = 2:4, labels = c("GC < 0.34", "0.34 < GC < 0.36", "GC > 0.36"))
-    axis(1, at = 5:7, labels = c("Cost < 23", "23 < Cost < 25", "Cost > 25"))
+    axis(1, at = 2:4, labels = c("GC < 0.34", "0.34 < GC < 0.36", "GC > 0.36"), gap.axis = 0)
+    axis(1, at = 5:7, labels = c("Cost < 23", "23 < Cost < 25", "Cost > 25"), gap.axis = 0)
     axis(3, at = c(1, 3, 6), labels = c("Entire genomes", "Control for GC content", "Control for metabolic cost"), tick = FALSE, font = 2)
 
     if(is.null(panel)) label.figure("D", font = 2, cex = 1.6, xfrac = 0.018)
@@ -351,11 +351,14 @@ genoGOE_2 <- function(pdf = FALSE, metric = "Zc") {
 }
 
 # Figure 3: Evolutionary oxidation of ancestral Rubiscos and thermodynamic prediction of redox boundaries around the GOE
-genoGOE_3 <- function(pdf = FALSE) {
+genoGOE_3 <- function(pdf = FALSE, panel = NULL) {
 
-  if(pdf) pdf("Figure_3.pdf", width = 9, height = 11)
-  layout(matrix(c(0,1,1,0, 2,2,3,3, 4,4,5,5), nrow = 3, byrow = TRUE))
-  par(cex = 1)
+  if(is.null(panel)) {
+    if(pdf) pdf("Figure_3.pdf", width = 9, height = 11)
+    layout(matrix(c(0,1,1,0, 2,2,3,3, 4,4,5,5), nrow = 3, byrow = TRUE))
+    par(cex = 1)
+  }
+  panels <- if(is.null(panel)) LETTERS[1:5] else panel
 
   # Read amino acid compositions
   fasta_file <- system.file("extdata/fasta/KHAB17.fasta", package = "canprot")
@@ -363,27 +366,31 @@ genoGOE_3 <- function(pdf = FALSE) {
   # Assign protein names
   aa$protein <- sapply(strsplit(aa$protein, "_"), "[", 2)
 
-  # Panel A: Zc vs ancestry
+  if("A" %in% panels) {
 
-  xlab <- "Ancestral sequences (older to younger)"
-  par(mar = c(4.0, 4.0, 2.5, 1.0), mgp = c(2.5, 1, 0))
-  # Get point locations
-  xs <- 1:6
-  ys <- Zc(aa)
-  # Start plot
-  plot(xs, ys, type = "n", xaxt = "n", xlab = xlab, ylab = cplab$Zc)
-  # Plot main branch (excluding Anc I/III')
-  lines(xs[-3], ys[-3], type = "b", pch = NA)
-  # Add points
-  points(xs[-3], ys[-3], pch = 19)
-  points(xs[3], ys[3], pch = 19, col = 8)
-  axis(1, at = 1:6, aa$protein)
-  abline(v = 3.5, lty = 2, col = 4, lwd = 2)
-  text(2.5, -0.126, "GOE (proposed)")
-  title("Evolutionary oxidation of Rubiscos", font.main = 1)
-  label.figure("A", cex = 1.5, font = 2, yfrac = 0.936)
+    # Panel A: Zc vs ancestry
 
-  # Panel B: Pairwise stability boundaries for Rubisco
+    xlab <- "Ancestral sequences (older to younger)"
+    par(mar = c(4.0, 4.0, 2.5, 1.0), mgp = c(2.5, 1, 0))
+    # Get point locations
+    xs <- 1:6
+    ys <- Zc(aa)
+    # Start plot
+    plot(xs, ys, type = "n", xaxt = "n", xlab = xlab, ylab = cplab$Zc)
+    # Plot main branch (excluding Anc I/III')
+    lines(xs[-3], ys[-3], type = "b", pch = NA)
+    # Add points
+    points(xs[-3], ys[-3], pch = 19)
+    points(xs[3], ys[3], pch = 19, col = 8)
+    axis(1, at = 1:6, aa$protein)
+    abline(v = 3.5, lty = 2, col = 4, lwd = 2)
+    text(2.7, -0.13, "GOE\n(estimated)")
+    if(is.null(panel)) {
+      title("Evolutionary oxidation of Rubiscos", font.main = 1)
+      label.figure("A", cex = 1.5, font = 2, yfrac = 0.936)
+    }
+
+  }
 
   # Add proteins to CHNOSZ
   ip <- add.protein(aa, as.residue = TRUE)
@@ -393,106 +400,123 @@ genoGOE_3 <- function(pdf = FALSE) {
   # Set resolution
   res <- 300
   
-  # Loop over individual pairs
-  for(pre in 1:3) {
-    for(post in 4:6) {
-      add <- TRUE
-      if(pre == 1 & post == 4) add <- FALSE
-      a <- affinity(pH = c(0, 14, res), Eh = c(-0.5, 0.8, res), iprotein = ip[c(pre, post)])
-      d <- diagram(a, names = "", lty = 2, col = "#000000b0", add = add, limit.water = !add, fill.NA = "gray80", xlab = "pH", ylab = axis.label("Eh"))
-      # Only label lines for reaction with Anc. I
-      if(post == 4) {
-        # Sort x values and get x and y values of boundary line
-        order <- order(d$linesout[[1]])
-        xs <- d$linesout[[1]][order]
-        ys <- d$linesout[[2]][order]
-        # Get a single value along the length of the line
-        ilab <- floor(length(xs) * pre * 3 / 10)
-        x <- xs[ilab]
-        y <- ys[ilab]
-        text(x, y - 0.03, aa$protein[pre], cex = 0.6)
-        text(x, y + 0.03, aa$protein[post], cex = 0.6)
+  # Panel B: Pairwise stability boundaries for Rubisco
+
+  if("B" %in% panels) {
+
+    # Loop over individual pairs
+    for(pre in 1:3) {
+      for(post in 4:6) {
+        add <- TRUE
+        if(pre == 1 & post == 4) add <- FALSE
+        a <- affinity(pH = c(0, 14, res), Eh = c(-0.5, 0.8, res), iprotein = ip[c(pre, post)])
+        d <- diagram(a, names = "", lty = 2, col = "#000000b0", add = add, limit.water = !add, fill.NA = "gray80", xlab = "pH", ylab = axis.label("Eh"))
+        # Only label lines for reaction with Anc. I
+        if(post == 4) {
+          # Sort x values and get x and y values of boundary line
+          order <- order(d$linesout[[1]])
+          xs <- d$linesout[[1]][order]
+          ys <- d$linesout[[2]][order]
+          # Get a single value along the length of the line
+          ilab <- floor(length(xs) * pre * 3 / 10)
+          x <- xs[ilab]
+          y <- ys[ilab]
+          text(x, y - 0.03, aa$protein[pre], cex = 0.6)
+          text(x, y + 0.03, aa$protein[post], cex = 0.6)
+        }
       }
     }
+
+    text(5.5, 0.64, hyphen.in.pdf("Higher AFFINITY\nfor post-GOE protein\nin each pair"), cex = 0.8)
+    text(4.5, -0.15, hyphen.in.pdf("Higher AFFINITY for\npre-GOE protein in each pair"), cex = 0.8, srt = -24)
+    title("Pairwise relative stabilities of Rubiscos", font.main = 1)
+    if(is.null(panel)) label.figure("B", cex = 1.5, font = 2, yfrac = 0.936)
+
   }
 
-  text(5.5, 0.64, hyphen.in.pdf("Higher AFFINITY\nfor post-GOE protein\nin each pair"), cex = 0.8)
-  text(4.5, -0.15, hyphen.in.pdf("Higher AFFINITY for\npre-GOE protein in each pair"), cex = 0.8, srt = -24)
-  title("Pairwise relative stabilities of Rubiscos", font.main = 1)
-  label.figure("B", cex = 1.5, font = 2, yfrac = 0.936)
+  if("C" %in% panels) {
 
-  # Panel C: Groupwise stability boundaries for Rubisco
+    # Panel C: Groupwise stability boundaries for Rubisco
 
-  # Calculate affinity of composition reactions for all proteins
-  aout <- affinity(pH = c(0, 14, res), Eh = c(-0.5, 0.8, res), iprotein = ip)
-  # Set up groups for affinity ranking:
-  # 3 pre-GOE and 3 post-GOE proteins
-  groups <- list(pre = c(TRUE, TRUE, TRUE, FALSE, FALSE, FALSE), post = c(FALSE, FALSE, FALSE, TRUE, TRUE, TRUE))
-  arank <- rank.affinity(aout, groups = groups)
-  diagram(arank, lwd = 2, col = 4, names = "", xlab = "pH", ylab = axis.label("Eh"))
-  text(3.5, -0.07, hyphen.in.pdf("Higher affinity RANKING\nfor pre-GOE proteins"), col = 4, font = 2, cex = 0.8, srt = -24)
-  text(3.5, 0.25, hyphen.in.pdf("Higher affinity RANKING\nfor post-GOE proteins"), col = 4, font = 2, cex = 0.8, srt = -24)
-  title("Groupwise relative stabilities of Rubiscos", font.main = 1)
-  # Add arrow
-  arrows(7, -0.2, 7, 0.1, length = 0.2, lwd = 2, col = 4)
-  text(9.5, 0.15, "Rubiscos became\nmore oxidized\nover the GOE", cex = 0.9)
-  label.figure("C", cex = 1.5, font = 2, yfrac = 0.936)
+    # Calculate affinity of composition reactions for all proteins
+    aout <- affinity(pH = c(0, 14, res), Eh = c(-0.5, 0.8, res), iprotein = ip)
+    # Set up groups for affinity ranking:
+    # 3 pre-GOE and 3 post-GOE proteins
+    groups <- list(pre = c(TRUE, TRUE, TRUE, FALSE, FALSE, FALSE), post = c(FALSE, FALSE, FALSE, TRUE, TRUE, TRUE))
+    arank <- rank.affinity(aout, groups = groups)
+    diagram(arank, lwd = 2, col = 4, names = "", xlab = "pH", ylab = axis.label("Eh"))
+    text(3.5, -0.07, hyphen.in.pdf("Higher affinity RANKING\nfor pre-GOE proteins"), col = 4, font = 2, cex = 0.8, srt = -24)
+    text(3.5, 0.25, hyphen.in.pdf("Higher affinity RANKING\nfor post-GOE proteins"), col = 4, font = 2, cex = 0.8, srt = -24)
+    title("Groupwise relative stabilities of Rubiscos", font.main = 1)
+    # Add arrow
+    arrows(7, -0.2, 7, 0.1, length = 0.2, lwd = 2, col = 4)
+    text(9.5, 0.15, "Rubiscos became\nmore oxidized\nover the GOE", cex = 0.9)
+    if(is.null(panel)) label.figure("C", cex = 1.5, font = 2, yfrac = 0.936)
 
-
-  # Panel D: Comparison between Rubiscos and methanogen and Nitrososphaeria genomes
-  yvar <- "O2"
-  genoGOE_3D(yvar, res)
-
-  # Label lines
-  if(yvar == "Eh") {
-    text(8.1, -0.07, "Rubiscos", cex = 0.8)
-    text(7.4, -0.081, hyphen.in.pdf("Post-GOE"), srt = -27, cex = 0.75)
-    text(7.33, -0.105, hyphen.in.pdf("Pre-GOE"), srt = -27, cex = 0.75)
-
-    text(8.3, -0.19, "Methanogen\ngenomes", cex = 0.8)
-    text(7.35, -0.215, "Class I", srt = -33, cex = 0.75)
-    text(7.5, -0.2, "Class II", srt = -33, cex = 0.75)
-
-    text(4.9, -0.18, "Nitrososphaeria\ngenomes", cex = 0.8)
-    text(6.03, -0.17, "Basal", srt = -33, cex = 0.75)
-    text(6.2, -0.155, "Terrestrial", srt = -33, cex = 0.75)
-  }
-  if(yvar == "O2") {
-    text(7, -61, " Rubiscos", cex = 0.8, adj = 0)
-    text(7, -61, hyphen.in.pdf("Pre-GOE "), cex = 0.75, adj = 1, srt = 20)
-    text(7, -59.8, hyphen.in.pdf("Post-GOE "), cex = 0.75, adj = 1, srt = 20)
-
-    text(7, -67, " Methanogen genomes", cex = 0.8, adj = 0)
-    text(6.5, -67.8, "Class I ", cex = 0.75)
-    text(6.5, -66.7, "Class II ", cex = 0.75)
-
-    text(7, -69.2, " Nitrososphaeria genomes", cex = 0.8, adj = 0)
-    text(6.5, -70.2, "Basal ", cex = 0.75)
-    text(6.5, -69.2, "Terrestrial ", cex = 0.75)
   }
 
-  title("Groupwise relative stabilities of Rubiscos\nand unrelated genomes", font.main = 1, xpd = NA)
-  label.figure("D", cex = 1.5, font = 2, yfrac = 0.936)
+  if("D" %in% panels) {
 
-  # Add more arrows 20240812
-  plot.new()
-  par(xpd = NA)
-  if(yvar == "Eh") {
-    arrows(0, 0.1, 0, 0.3, length = 0.2, lwd = 2, col = 7)
-    arrows(0.1, 0.1, 0.1, 0.3, length = 0.2, lwd = 2, col = 2)
-    arrows(0.05, 0.4, 0.05, 0.6, length = 0.2, lwd = 2, col = 4)
-    text(0.5, 0.35, "1: Proteins in many organisms\nbecame more oxidized\nover the GOE")
-    text(0.05, 0.85, hyphen.in.pdf("2: Rubisco records\nmore oxidizing conditions\ncompared to genomes of\nnon-photosynthetic organisms\nat the time of the GOE"))
-  }
-  if(yvar == "O2") {
-    arrows(-0.08, 0.12, -0.08, 0.32, length = 0.2, lwd = 2, col = 7)
-    arrows(-0.02, 0.18, -0.02, 0.38, length = 0.2, lwd = 2, col = 2)
-    arrows(-0.05, 0.7, -0.05, 0.9, length = 0.2, lwd = 2, col = 4)
-    text(0.05, 0.25, "1: Protein sequences in many lineages\nwere oxidized over the GOE", adj =0)
-    text(0.05, 0.8, hyphen.in.pdf("2: Rubisco records more oxidizing conditions\ncompared to genomes of non-photosynthetic\norganisms at the time of the GOE"), adj = 0)
+    # Panel D: Comparison between Rubiscos and methanogen and Nitrososphaeria genomes
+    yvar <- "O2"
+    genoGOE_3D(yvar, res)
+
+    # Label lines
+    if(yvar == "Eh") {
+      text(8.1, -0.07, "Rubiscos", cex = 0.8)
+      text(7.4, -0.081, hyphen.in.pdf("Post-GOE"), srt = -27, cex = 0.75)
+      text(7.33, -0.105, hyphen.in.pdf("Pre-GOE"), srt = -27, cex = 0.75)
+
+      text(8.3, -0.19, "Methanogen\ngenomes", cex = 0.8)
+      text(7.35, -0.215, "Class I", srt = -33, cex = 0.75)
+      text(7.5, -0.2, "Class II", srt = -33, cex = 0.75)
+
+      text(4.9, -0.18, "Nitrososphaeria\ngenomes", cex = 0.8)
+      text(6.03, -0.17, "Basal", srt = -33, cex = 0.75)
+      text(6.2, -0.155, "Terrestrial", srt = -33, cex = 0.75)
+    }
+    if(yvar == "O2") {
+      text(7, -61, " Rubiscos", cex = 0.8, adj = 0)
+      text(7, -61, hyphen.in.pdf("Pre-GOE "), cex = 0.75, adj = 1, srt = 20)
+      text(7, -59.8, hyphen.in.pdf("Post-GOE "), cex = 0.75, adj = 1, srt = 20)
+
+      text(7, -67, " Methanogen genomes", cex = 0.8, adj = 0)
+      text(6.5, -67.8, "Class I ", cex = 0.75)
+      text(6.5, -66.7, "Class II ", cex = 0.75)
+
+      text(7, -69.2, " Nitrososphaeria genomes", cex = 0.8, adj = 0)
+      text(6.5, -70.2, "Basal ", cex = 0.75)
+      text(6.5, -69.2, "Terrestrial ", cex = 0.75)
+    }
+
+    title("Groupwise relative stabilities of Rubiscos\nand unrelated genomes", font.main = 1, xpd = NA)
+    if(is.null(panel)) label.figure("D", cex = 1.5, font = 2, yfrac = 0.936)
+
   }
 
-  if(pdf) dev.off()
+  if("E" %in% panels) {
+
+    # Add more arrows 20240812
+    plot.new()
+    par(xpd = NA)
+    if(yvar == "Eh") {
+      arrows(0, 0.1, 0, 0.3, length = 0.2, lwd = 2, col = 7)
+      arrows(0.1, 0.1, 0.1, 0.3, length = 0.2, lwd = 2, col = 2)
+      arrows(0.05, 0.4, 0.05, 0.6, length = 0.2, lwd = 2, col = 4)
+      text(0.5, 0.35, "1: Proteins in many organisms\nbecame more oxidized\nover the GOE")
+      text(0.05, 0.85, hyphen.in.pdf("2: Rubisco records\nmore oxidizing conditions\ncompared to genomes of\nnon-photosynthetic organisms\nat the time of the GOE"))
+    }
+    if(yvar == "O2") {
+      arrows(-0.08, 0.12, -0.08, 0.32, length = 0.2, lwd = 2, col = 7)
+      arrows(-0.02, 0.18, -0.02, 0.38, length = 0.2, lwd = 2, col = 2)
+      arrows(-0.05, 0.7, -0.05, 0.9, length = 0.2, lwd = 2, col = 4)
+      text(0.05, 0.25, "1: Protein sequences in many lineages\nwere oxidized over the GOE", adj =0)
+      text(0.05, 0.8, hyphen.in.pdf("2: Rubisco records more oxidizing conditions\ncompared to genomes of non-photosynthetic\norganisms at the time of the GOE"), adj = 0)
+    }
+
+  }
+
+  if(pdf & is.null(panel)) dev.off()
 
 }
 
