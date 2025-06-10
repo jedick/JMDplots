@@ -489,8 +489,10 @@ genoGOE_3 <- function(pdf = FALSE, panel = NULL) {
       text(6.5, -69.2, "Terrestrial ", cex = 0.75)
     }
 
-    title("Groupwise relative stabilities of Rubiscos\nand unrelated genomes", font.main = 1, xpd = NA)
-    if(is.null(panel)) label.figure("D", cex = 1.5, font = 2, yfrac = 0.936)
+    if(is.null(panel)) {
+      title("Groupwise relative stabilities of Rubiscos\nand unrelated genomes", font.main = 1, xpd = NA)
+      label.figure("D", cex = 1.5, font = 2, yfrac = 0.936)
+    }
 
   }
 
@@ -523,14 +525,14 @@ genoGOE_3 <- function(pdf = FALSE, panel = NULL) {
 
 # Code for Figure 3D
 # Comparison of Rubiscos and methanogen and Nitrososphaeria genomes
-genoGOE_3D <- function(yvar = "Eh", res = 400, add = FALSE, lwd = 2, pHlim = c(4, 10), Ehlim = c(-0.3, 0.1), O2lim = c(-72.5, -58), alpha.f = 1, Eh7_las = 1) {
+genoGOE_3D <- function(yvar = "Eh", res = 400, add = FALSE, lwd = 2, pHlim = c(4, 10), Ehlim = c(-0.3, 0.1), O2lim = c(-72.5, -58), alpha.f = 1, Eh7_las = 1, datasets = 1:3) {
 
   # Setup basis species
   basis("QEC+")
   # Swap O2 for e- to make Eh-pH diagram
   if(yvar == "Eh") swap.basis("O2", "e-")
 
-  for(i in 1:3) {
+  for(i in datasets) {
 
     if(i == 1) {
       # Methanogen proteomes 20220424
@@ -585,24 +587,24 @@ genoGOE_3D <- function(yvar = "Eh", res = 400, add = FALSE, lwd = 2, pHlim = c(4
     arank <- rank.affinity(aout, groups)
     diagram(arank, col = adjustcolor(col, alpha.f = alpha.f), lwd = lwd, add = add, names = "")
 
-    # Add Eh7 axis 20241218
-    if(yvar == "O2") {
-      # Calculate range of pe at pH = 7
-      # H2O = 0.5 O2(gas) + 2 H+ + 2 e- 
-      # logK = -41.55
-      # --> pe7 = 0.25 * logfO2 + 13.775
-      # --> logfO2 = 4 * pe7 - 55.1
-      Eh7_to_logfO2 <- function(Eh7) {
-        pe7 <- convert(Eh7, "pe")
-        logfO2 <- 4 * pe7 - 55.1
-        logfO2
-      }
-      Eh7ticks <- seq(-0.25, 0.05, 0.05)
-      logfO2ticks <- Eh7_to_logfO2(Eh7ticks)
-      axis(4, at = logfO2ticks, labels = Eh7ticks, tcl = -0.3, mgp = c(2, 0.5, 0))
-      mtext("Eh7 (V)", 4, line = 3, las = Eh7_las)
-    }
+  }
 
+  # Add Eh7 axis 20241218
+  if(yvar == "O2") {
+    # Calculate range of pe at pH = 7
+    # H2O = 0.5 O2(gas) + 2 H+ + 2 e- 
+    # logK = -41.55
+    # --> pe7 = 0.25 * logfO2 + 13.775
+    # --> logfO2 = 4 * pe7 - 55.1
+    Eh7_to_logfO2 <- function(Eh7) {
+      pe7 <- convert(Eh7, "pe")
+      logfO2 <- 4 * pe7 - 55.1
+      logfO2
+    }
+    Eh7ticks <- seq(-0.25, 0.05, 0.05)
+    logfO2ticks <- Eh7_to_logfO2(Eh7ticks)
+    axis(4, at = logfO2ticks, labels = Eh7ticks, tcl = -0.3, mgp = c(2, 0.5, 0))
+    mtext("Eh7 (V)", 4, line = 3, las = Eh7_las)
   }
 
 }
@@ -672,8 +674,8 @@ genoGOE_4 <- function(pdf = FALSE, panel = NULL) {
   }
 
   # Affinity ranking for genomes with different S-cycling genes
-  sulfur_affinity <- function() {
-    par(mar = c(4.1, 4.1, 4.1, 4.1))
+  sulfur_affinity <- function(panel) {
+    if(is.null(panel)) par(mar = c(4.1, 4.1, 4.1, 4.1))
     basis("QEC+")
     # Keep genomes with single sulfur-cycling genes listed above
     myaa <- aa[aa$organism %in% unlist(genomes), ]
@@ -691,11 +693,14 @@ genoGOE_4 <- function(pdf = FALSE, panel = NULL) {
     fill <- adjustcolor(col, alpha.f = 0.3)
     # Adjust labels
     names <- names(genomes)
-    names[5] <- ""
-    diagram(arank, fill = fill, lty = 1, lwd = 1.5, font = 3, names = names)
-    text(4.3, -68.6, "dmsA", font = 3)
-    lines(c(4.04, 3.68), c(-68.60, -68.76))
-    lines(c(3.28, 3.17), c(-65.30, -66.25))
+    dy <- rep(0, length(names))
+    #dy[names == "mddA"] <- 1
+    #dy[names == "soxC"] <- 1
+    #names[5] <- ""
+    diagram(arank, fill = fill, lty = 1, lwd = 1.5, font = 3, names = names, dy = dy, col = "gray40")
+    #text(4.3, -68.6, "dmsA", font = 3)
+    #lines(c(4.04, 3.68), c(-68.60, -68.76))
+    #lines(c(3.28, 3.17), c(-65.30, -66.25))
   }
 
   if(is.null(panel)) {
@@ -709,11 +714,16 @@ genoGOE_4 <- function(pdf = FALSE, panel = NULL) {
     if(is.null(panel)) label.figure("A", font = 2, cex = 1.6)
   }
   if("B" %in% panels) {
-    sulfur_affinity()
-    # Overlay stability boundaries for other genomes
-    genoGOE_3D("O2", add = TRUE, lwd = 4, pHlim = c(3, 10), alpha.f = 0.7, Eh7_las = 0)
-    title(main = hyphen.in.pdf("Groupwise relative stabilities of proteins in\ngenomes with different S-cycling genes"), font.main = 1)
-    if(is.null(panel)) label.figure("B", font = 2, cex = 1.6)
+    sulfur_affinity(panel)
+    if(is.null(panel)) {
+      # Overlay stability boundaries for other genomes
+      genoGOE_3D("O2", add = TRUE, lwd = 4, pHlim = c(3, 10), alpha.f = 0.7, Eh7_las = 0)
+      title(main = hyphen.in.pdf("Groupwise relative stabilities of proteins in\ngenomes with different S-cycling genes"), font.main = 1)
+      label.figure("B", font = 2, cex = 1.6)
+    } else {
+      # Only add Eh7 axis
+      genoGOE_3D("O2", add = TRUE, Eh7_las = 0, datasets = numeric())
+    }
   }
   if(pdf & is.null(panel)) dev.off()
 
@@ -723,9 +733,9 @@ genoGOE_4 <- function(pdf = FALSE, panel = NULL) {
 # 20240216 first version
 # 20250325 added to JMDplots
 # 20250327 use more representative extant nitrogenases (Garcia et al. Fig. 6)
-genoGOE_5 <- function(pdf = FALSE) {
+genoGOE_5 <- function(pdf = FALSE, panel = NULL) {
 
-  if(pdf) pdf("Figure_5.pdf", width = 7, height = 5.5)
+  if(pdf & is.null(panel)) pdf("Figure_5.pdf", width = 7, height = 5.5)
 
   ## Read FASTA file of ancient and extant sequences,
   ## downloaded from https://github.com/kacarlab/AncientNitrogenase.git
@@ -750,7 +760,7 @@ genoGOE_5 <- function(pdf = FALSE) {
 
   # Start plot
   plot(extendrange(c(1, 7)), c(-0.20, -0.12), xlab = "Form of nitrogenase", ylab = axis.label("ZC"), type = "n", axes = FALSE)
-  axis(side = 1, at = seq_along(form_to_anc), labels = hyphen.in.pdf(names(form_to_anc)))
+  axis(side = 1, at = seq_along(form_to_anc), labels = hyphen.in.pdf(names(form_to_anc)), gap.axis = 0)
   axis(side = 2)
   box()
 
@@ -776,8 +786,8 @@ genoGOE_5 <- function(pdf = FALSE) {
 
   # Add legend and title
   legend("bottomright", c("Extant", "Ancestral"), lty = c(NA, 1), pch = c(19, NA), bty = "n")
-  title("Carbon oxidation state of nitrogenase sequences", font.main = 1)
+  if(is.null(panel)) title("Carbon oxidation state of nitrogenase sequences", font.main = 1)
 
-  if(pdf) dev.off()
+  if(pdf & is.null(panel)) dev.off()
 
 }
