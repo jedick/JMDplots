@@ -648,7 +648,7 @@ genoGOE_4 <- function(pdf = FALSE, panel = NULL) {
   # List Zc for each genome in list
   Zclist <- lapply(genomes, function(genome) Zcvals[aa$organism %in% genome])
   # Use colors from Mateos et al., 2023
-  dsr <- "#bcb2ce"
+  dsr <- "#9c92ae" # "#bcb2ce"
   sox <- "#45b78d"
   mdd <- "#c24a96"
   # Colors for protein groups
@@ -660,13 +660,13 @@ genoGOE_4 <- function(pdf = FALSE, panel = NULL) {
     par(mar = c(4.1, 4.1, 4.1, 2.1))
     n <- length(Zclist)
     boxplot(Zclist, col = col, names = character(n), xlab = "Age of earliest gene event (Ga)", ylab = "Zc of all proteins in genome")
-    text(2.5, -0.24, hyphen.in.pdf("Dissimilatory sulfate-sulfite-sulfide oxidation/reduction"), col = dsr)
-    text(2.8, -0.12, hyphen.in.pdf("Sulfate-thiosulfate\noxidation/reduction"), col = sox)
-    text(6, -0.22, "Organic sulfur cycling", col = mdd)
+    text(3.1, -0.24, hyphen.in.pdf("Dissimilatory sulfate-sulfite-sulfide oxidation/reduction"), col = dsr)
+    text(3.1, -0.12, hyphen.in.pdf("Sulfate-thiosulfate\noxidation/reduction"), col = sox)
+    text(6.2, -0.22, "Organic sulfur cycling", col = mdd)
     # Ages from Table 2 of Mateos et al.
-    ages <- c("3.3-3.35", "2.65-2.88", "2.6", "2.33-2.47", "2.28", "1.77", "0-2.38")
-    axis(1, at = 1:n, labels = ages, lwd = 0)
-    axis(3, at = 1:n, labels = names(Zclist), line = 0.5, lwd = 0, font = 3)
+    ages <- c("3.3-3.35  ", "  2.65-2.88", "2.6", "2.33-2.47", "2.28", "1.77", "0-2.38")
+    axis(1, at = 1:n, labels = ages, lwd = 0, gap.axis = -1)
+    axis(3, at = 1:n, labels = names(Zclist), line = 0.5, lwd = 0, font = 3, gap.axis = 0)
     # Add number of genomes to labels
     n_genomes <- paste0("(", sapply(Zclist, length), ")")
     axis(3, at = 1:n, labels = n_genomes, line = -0.5, lwd = 0)
@@ -704,7 +704,7 @@ genoGOE_4 <- function(pdf = FALSE, panel = NULL) {
   }
 
   if(is.null(panel)) {
-    if(pdf) pdf("Figure_4.pdf", width = 8, height = 12)
+    if(pdf) pdf("Figure_4.pdf", width = 6.5, height = 10)
     layout(matrix(1:2), heights = c(5, 7))
   }
   panels <- if(is.null(panel)) LETTERS[1:4] else panel

@@ -109,7 +109,7 @@ genoGOE_3()
 **Data sources:** Reconstructed ancestral sequences of Rubisco [@KHAB17] and lists of methanogen [@LL18] and Nitrososphaeria [@RFH+19] genomes.
 
 ## Evolutionary oxidation and relative stabilities for genomes with S-cycling genes (Figure 4)
-```{r genoGOE4, message = FALSE, results = "hide", out.width='100%', fig.width = 8, fig.height = 12, pngquant = pngquant}
+```{r genoGOE4, message = FALSE, results = "hide", out.width='100%', fig.width = 6.5, fig.height = 10, pngquant = pngquant}
 genoGOE_4()
 ```
 
