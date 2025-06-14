@@ -515,14 +515,14 @@ utogig3 <- function(pdf = FALSE) {
 }
 
 # Chemical and thermodynamic analysis of evolutionary divergence along redox gradients 20220601
-utogig4 <- function(pdf = FALSE, panel = NULL) {
+utogig4 <- function(pdf = FALSE, panel = NULL, subpanel = 1:3) {
 
   if(is.null(panel)) {
     if(pdf) pdf("Figure_4.pdf", width = 9, height = 5)
     layout(matrix(1:8, nrow = 2), widths = c(2.5, 4, 4, 2.5))
+    par(mar = c(4, 4, 3, 1))
   }
   panels <- if(is.null(panel)) letters[1:3] else panel
-  par(mar = c(4, 4, 3, 1))
   
   # Faded colors
   col4 <- adjustcolor(4, alpha.f = 0.69)
@@ -548,7 +548,7 @@ utogig4 <- function(pdf = FALSE, panel = NULL) {
   # Place to keep logaH2 for printing 20220920
   logaH2s <- numeric()
 
-  for(i in 1:3) {
+  for(i in subpanel) {
 
     if("a" %in% panels) {
 
@@ -567,12 +567,17 @@ utogig4 <- function(pdf = FALSE, panel = NULL) {
         names(Zclist) <- paste0(names(Zclist), "\n(", sapply(Zclist, length), ")")
         bp <- boxplot(Zclist, ylab = Zclab, col = col, ylim = ylim, names = character(2))
         axis(1, at = 1:2, labels = names(Zclist), line = 1, lwd = 0)
-        add_cld(Zclist, bp)
-        text(1, -0.12, "Anoxic\nhabitats", font = 2, cex = 0.8)
-        text(2, -0.12, "Anoxic\nand oxic\nhabitats", font = 2, cex = 0.8)
         abline(v = 1.5, lty = 2, lwd = 1.5, col = 8)
-        title("Methanogens\n(Lyu & Lu, 2018)", font.main = 1, cex.main = 1)
-        if(is.null(panel)) label.figure("(a)", cex = 1.5, font = 2, xfrac = 0.06)
+        if(is.null(panel)) {
+          add_cld(Zclist, bp)
+          text(1, -0.12, "Anoxic\nhabitats", font = 2, cex = 0.8)
+          text(2, -0.12, "Anoxic\nand oxic\nhabitats", font = 2, cex = 0.8)
+          title("Methanogens\n(Lyu & Lu, 2018)", font.main = 1, cex.main = 1)
+          label.figure("(a)", cex = 1.5, font = 2, xfrac = 0.06)
+        } else {
+          text(1, -0.12, "Pre-GOE\norigin", font = 2, cex = 0.8)
+          text(2, -0.12, "Post-GOE\norigin", font = 2, cex = 0.8)
+        }
         # Get the species in each group
         groups <- list("Class I" = iI, "Class II" = iII)
         # Calculate P-values using parametric and non-parametric tests 20220913
@@ -591,11 +596,13 @@ utogig4 <- function(pdf = FALSE, panel = NULL) {
         axis(1, at = 1:4, labels = hyphen.in.pdf(names(Zclist)), line = 1, lwd = 0)
         # Names with "-" confuse multcompLetters4()
         names(Zclist) <- gsub("-", "", names(Zclist))
-        add_cld(Zclist, bp)
         text(2, -0.12, "Anaerobic", font = 2, cex = 0.8)
         text(4.1, -0.242, "Anaerobic\nand aerobic", font = 2, cex = 0.8)
         abline(v = 3.5, lty = 2, lwd = 1.5, col = 8)
-        title(hyphen.in.pdf("Nif-encoding genomes\n(Poudel et al., 2018)"), font.main = 1, cex.main = 1)
+        if(is.null(panel)) {
+          add_cld(Zclist, bp)
+          title(hyphen.in.pdf("Nif-encoding genomes\n(Poudel et al., 2018)"), font.main = 1, cex.main = 1)
+        }
         # Get the amino acid compositions and species in each group
         aa <- np$AA
         groupnames <- np$types
@@ -622,14 +629,16 @@ utogig4 <- function(pdf = FALSE, panel = NULL) {
         names(Zclist) <- groupnames
         names(Zclist) <- paste0(names(Zclist), "\n(", sapply(Zclist, length), ")")
         bp <- boxplot(Zclist, ylab = Zclab, col = col, ylim = ylim, names = character(4))
-        add_cld(Zclist, bp)
         axis(1, at = 1:4, labels = names(Zclist), line = 1, lwd = 0, gap.axis = 0)
         text(0.9, -0.12, hyphen.in.pdf("Pre-GOE\norigin"), font = 2, cex = 0.8)
         text(2.1, -0.12, hyphen.in.pdf("Post-GOE\norigin"), font = 2, cex = 0.8)
         abline(v = 1.5, lty = 2, lwd = 1.5, col = 8)
-        # Change Thaumarchaeota to Nitrososphaeria 20250608
-        title("Nitrososphaeria\n", font.main = 3, cex.main = 1)
-        title("\n(Ren et al., 2019)", font.main = 1, cex.main = 1)
+        if(is.null(panel)) {
+          add_cld(Zclist, bp)
+          # Change Thaumarchaeota to Nitrososphaeria 20250608
+          title("Nitrososphaeria\n", font.main = 3, cex.main = 1)
+          title("\n(Ren et al., 2019)", font.main = 1, cex.main = 1)
+        }
         # Get the species in each group
         groups <- sapply(groupnames, function(group) aa$protein == group, simplify = FALSE)
         Ptab3 <- KWvsANOVA(Zclist)
