@@ -6,7 +6,7 @@
 \alias{genoGOE_3}
 \alias{genoGOE_4}
 \alias{genoGOE_5}
-\title{Evolutionary oxidation of proteins}
+\title{Evolutionary oxidation of proteins in Earth's history}
 \description{
 Plots from the manuscript by Dick et al. (2025).
 }
@@ -16,7 +16,6 @@ Plots from the manuscript by Dick et al. (2025).
   genoGOE_2(pdf = FALSE, metric = "Zc")
   genoGOE_3(pdf = FALSE)
   genoGOE_4(pdf = FALSE, panel = NULL)
-  genoGOE_5(pdf = FALSE, panel = NULL)
 }
 
 \arguments{
@@ -31,8 +30,7 @@ Plots from the manuscript by Dick et al. (2025).
   \code{genoGOE_1} \tab Genome-wide differences of oxidation state between two lineages of methanogens \cr
   \code{genoGOE_2} \tab Carbon oxidation state of proteins in eukaryotic gene age groups \cr
   \code{genoGOE_3} \tab Carbon oxidation state of reconstructed ancestral sequences and extant proteins \cr
-  \code{genoGOE_4} \tab Evolutionary oxidation of ancestral Rubiscos and relative stabilities as a function of redox and pH \cr
-  \code{genoGOE_5} \tab Evolutionary oxidation and relative stabilities for genomes with S-cycling genes \cr
+  \code{genoGOE_4} \tab From carbon oxidation state to relative stability diagrams \cr
 }
 }
 
