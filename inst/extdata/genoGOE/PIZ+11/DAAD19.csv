@@ -1,0 +1,11 @@
+name,PDB,Age,Lineage
+LBCA,4BA7,4.2,Bacteria
+LPBCA,2YJ7,2.4,Bacteria
+LGPCA,2YN1,1.6,Bacteria
+Ecoli,2TRX,0,Bacteria
+AECA,3ZIV,4.2,Arc-Euk
+LACA,2YNX,4.1,Arc-Euk
+LECA,2YOI,1.6,Arc-Euk
+LAFCA,2YPM,1.4,Arc-Euk
+Human,1ERU,0,Arc-Euk
+Archaea,2E0Q,0,Archaea

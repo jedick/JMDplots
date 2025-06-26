@@ -105,8 +105,8 @@ export(
   "check_IDs", "cleanup", "get_comptab", "diffplot", "qdist",
   "xsummary", "xsummary2", "xsummary3",
 
-  # genoGOE paper 20240328, 20240409, 20240602, 20241224, 20250325
-  "genoGOE_2", "genoGOE_3", "genoGOE_1", "genoGOE_4", "genoGOE_5",
+  # genoGOE paper 20240328, 20240409, 20240602, 20241224, 20250626
+  "genoGOE_2", "genoGOE_4", "genoGOE_1", "genoGOE_5", "genoGOE_3",
 
   # Moved from CHNOSZ 20250511
   "protein.equil"

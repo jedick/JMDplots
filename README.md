@@ -15,7 +15,7 @@ See the manual page associated with each paper for additional details about scri
 <!-- Put a space before <details> to make ghostwriter format the lists correctly -->
  <details>
 
-<summary><code>genoGOE</code>: Earth's oxygenation recorded in genomes (<i>in-preparation manuscript</i>)</summary>
+<summary><code>genoGOE</code>: Evolutionary oxidation of proteins (<i>in-preparation manuscript</i>)</summary>
 
 - [inst/extdata/genoGOE](inst/extdata/genoGOE): scripts and processed data files
 
@@ -40,6 +40,13 @@ See the manual page associated with each paper for additional details about scri
 
   - [GMKK20](inst/extdata/genoGOE/GMKK20): Data for extant and reconstructed ancestral nitrogenase sequences taken from [Garcia et al. (2020)](https://doi.org/10.1111/gbi.12381)
   	- [nitrogenase_aa.csv](inst/extdata/genoGOE/GMKK20/nitrogenase_aa.csv): Amino acid compositions computed from the [Extant-MLAnc_Align.fasta](https://github.com/kacarlab/AncientNitrogenase/blob/master/Extant-MLAnc_Align.fasta) file in the [kacarlab](https://github.com/kacarlab) GitHub repo
+
+  - [PIZ+11](inst/extdata/genoGOE/PIZ+11): Data for reconstructed ancestral thioredoxin sequences derived from [Perez-Jimenez et al. (2011)](https://doi.org/10.1038/nsmb.2020)
+  	- [thioredoxin.fasta](inst/extdata/genoGOE/PIZ+11/thioredoxin.fasta): Protein sequences obtained from the RCSB PDB using the accessions listed in the next file.
+  	- [DAAD19.csv](inst/extdata/genoGOE/PIZ+11/DAAD19.csv): RCSB PDB IDs and ages for proteins listed by [Del Galdo et al. (2019)](https://doi.org/10.1007/s00239-019-09894-4).
+
+  - [CDY+25](inst/extdata/genoGOE/CDY+25): Data for reconstructed ancestral 3-isopropylmalate dehydrogenases sequences taken from [Cui et al. (2025)](https://doi.org/10.1002/pro.70071)
+  	- [IPMDH.fasta](inst/extdata/genoGOE/CDY+25/IPMDH.fasta): Protein sequences from the Supporting Information of Cui et al. (2025).
 
 - [inst/extdata/evdevH2O/LMM16](inst/extdata/evdevH2O/LMM16): scripts and processed data files for consensus gene ages from [Liebeskind et al. (2016)](https://doi.org/10.1093/gbe/evw113), modified from the files used by [Dick (2022)](https://doi.org/10.1007/s00239-022-10051-7)
 

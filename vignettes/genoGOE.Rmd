@@ -1,10 +1,10 @@
 ---
-title: "Earth's oxygenation recorded in genomes (2025)"
+title: "Evolutionary oxidation of proteins (2025)"
 output: 
   rmarkdown::html_vignette:
     mathjax: null
 vignette: >
-  %\VignetteIndexEntry{Earth's oxygenation recorded in genomes (2025)}
+  %\VignetteIndexEntry{Evolutionary oxidation of proteins (2025)}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 bibliography: JMDplots.bib
@@ -76,7 +76,7 @@ ZC <- "<i>Z</i><sub>C</sub>"
 ```
 This vignette runs the functions to make the plots from the following manuscript:
 
-> Dick JM. 2025. Earth's oxygenation recorded in genomes. Manuscript in preparation.
+> Dick JM et al. 2025. Evolutionary oxidation of proteins. Manuscript in preparation.
 
 This vignette was compiled on `r Sys.Date()` with
 **[JMDplots](https://github.com/jedick/JMDplots)** `r packageDescription("JMDplots")$Version`,
@@ -101,26 +101,26 @@ genoGOE_2()
 
 **Data sources:** Consensus gene ages [@LMM16], protein sequences [@Uni23], and divergence times [@KSC+22].
 
-## Evolutionary oxidation of ancestral Rubiscos and thermodynamic prediction of redox boundaries around the GOE (Figure 3)
-```{r genoGOE3, message = FALSE, results = "hide", out.width='100%', fig.width = 9, fig.height = 11, pngquant = pngquant}
+## Carbon oxidation state of ancestral reconstructed sequences and extant proteins (Figure 3)
+```{r genoGOE3, message = FALSE, results = "hide", out.width='100%', fig.width = 9, fig.height = 6, pngquant = pngquant}
 genoGOE_3()
+```
+
+**Data sources:** Thioredoxin [@PIZ+11], IPMDH [@CDY+25], Rubisco [@KHAB17], nitrogenase [@GMKK20].
+
+## Evolutionary oxidation of ancestral Rubiscos and thermodynamic prediction of redox boundaries around the GOE (Figure 4)
+```{r genoGOE4, message = FALSE, results = "hide", out.width='100%', fig.width = 9, fig.height = 11, pngquant = pngquant}
+genoGOE_4()
 ```
 
 **Data sources:** Reconstructed ancestral sequences of Rubisco [@KHAB17] and lists of methanogen [@LL18] and Nitrososphaeria [@RFH+19] genomes.
 
-## Evolutionary oxidation and relative stabilities for genomes with S-cycling genes (Figure 4)
-```{r genoGOE4, message = FALSE, results = "hide", out.width='100%', fig.width = 6.5, fig.height = 10, pngquant = pngquant}
-genoGOE_4()
-```
-
-**Data sources:** Genomes with different S-cycling genes [@MCK+23].
-
-## Carbon oxidation state of ancestral and extant nitrogenases (Figure 5)
-```{r genoGOE5, message = FALSE, results = "hide", out.width='100%', fig.width = 7, fig.height = 5.5, pngquant = pngquant}
+## Evolutionary oxidation and relative stabilities for genomes with S-cycling genes (Figure 5)
+```{r genoGOE5, message = FALSE, results = "hide", out.width='100%', fig.width = 6.5, fig.height = 10, pngquant = pngquant}
 genoGOE_5()
 ```
 
-**Data source:** @GMKK20.
+**Data sources:** Genomes with different S-cycling genes [@MCK+23].
 
 ## Composition reaction for ancestral Rubisco I/II/III (Reaction 1)
 

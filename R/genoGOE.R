@@ -1,11 +1,12 @@
 # JMDplots/genoGEO.R
-# Make plots for paper:
-# Genomes record the Great Oxidation Event
-# 20231206 jmd first version
-# 20240328 Moved to JMDplots
+# Make plots for "Evolutionary oxidation of proteins" paper
+# 20240328 First JMDplots commit: eukaryotic gene age groups
 # 20240409 Add Rubisco plots
 # 20240528 Analyze methanogen genomes
-# 20240803 Compare Rubisco proteins and unrelated genomes (Fig. 3C)
+# 20240803 Compare Rubisco proteins and unrelated genomes (stability_comparison)
+# 20241224 Add Zc and stability diagram for S-cycling genomes
+# 20250325 Add ancestral nitrogenase
+# 20250626 Put all ancestral proteins in one plot and add thioredoxin and IPMDH
 
 # Figure 1: Genome-wide differences of oxidation state between two lineages of methanogens
 genoGOE_1 <- function(pdf = FALSE, panel = NULL) {
@@ -350,11 +351,161 @@ genoGOE_2 <- function(pdf = FALSE, metric = "Zc") {
 
 }
 
-# Figure 3: Evolutionary oxidation of ancestral Rubiscos and thermodynamic prediction of redox boundaries around the GOE
-genoGOE_3 <- function(pdf = FALSE, panel = NULL) {
+# Figure 3: Carbon oxidation state of reconstructed ancestral sequences and extant proteins 20250625
+genoGOE_3 <- function(pdf = FALSE) {
+
+  # Function to add Zc labels with red/blue colors 20250625
+  label_y_axis <- function() {
+    # Add tick labels with red/blue colors 20250625
+    axis(2, at = seq(-0.18, -0.12, 0.02), col.axis = 4)
+    axis(2, at = -0.20)
+    axis(2, at = seq(-0.28, -0.22, 0.02), col.axis = 2)
+    # Add axis label
+    mtext(cplab$Zc, side = 2, line = 3.5, las = 0, cex = par("cex"))
+  }
+
+  # Plot Zc of rubisco from Kacar et al. (2017)  20240407
+  plot_Rubisco <- function(ylim = c(-0.20, -0.12)) {
+    # Read amino acid compositions
+    fasta_file <- system.file("extdata/fasta/KHAB17.fasta", package = "canprot")
+    aa <- read_fasta(fasta_file)
+    # Assign protein names
+    aa$protein <- sapply(strsplit(aa$protein, "_"), "[", 2)
+
+    # Get point locations
+    xs <- 1:6
+    ys <- Zc(aa)
+    # Start plot
+    xlab <- "Ancestral sequences (older to younger)"
+    plot(xs, ys, type = "n", xaxt = "n", xlab = xlab, ylab = "", ylim = ylim, yaxt = "n")
+    label_y_axis()
+    # Plot main branch (excluding Anc I/III')
+    lines(xs[-3], ys[-3], type = "b", pch = 19)
+    # Add point for Anc I/III'
+    points(xs[3], ys[3], pch = 19, col = 8)
+    axis(1, at = 1:6, aa$protein)
+    abline(v = 3.5, lty = 2, lwd = 2)
+    text(2.9, -0.13, "GOE\n(estimated)")
+  }
+
+  # Plot Zc of ancestral and extant nitrogenases from Garcia et al. (2020)  20250325
+  plot_nitrogenase <- function(ylim = c(-0.20, -0.12)) {
+
+    ## Read FASTA file of ancient and extant sequences,
+    ## downloaded from https://github.com/kacarlab/AncientNitrogenase.git
+    #aa <- canprot::read_fasta("GMKK20/Extant-MLAnc_Align.fasta")
+    # Get amino acid sequences precomputed from Extant-MLAnc_Align.fasta
+    aa <- read.csv(system.file("extdata/genoGOE/GMKK20/nitrogenase_aa.csv", package = "JMDplots"))
+
+    # List forms of nitrogenase and their ancestors
+    form_to_anc <- list(
+      "Clfx" = "D",
+      "F-Mc" = "C",
+      "Mb-Mc" = "B",
+      "Anf" = "A",
+      "Vnf" = "A",
+      "Nif-II" = "E",
+      "Nif-I" = "E"
+    )
+
+    # Start plot
+    plot(extendrange(c(1, 7)), c(-0.20, -0.12), xlab = "Form of nitrogenase", ylab = "", type = "n", axes = FALSE, ylim = ylim)
+    axis(side = 1, at = seq_along(form_to_anc), labels = hyphen.in.pdf(names(form_to_anc)), gap.axis = 0)
+    label_y_axis()
+    box()
+
+    # Loop over nitrogenase forms
+    set.seed(42)
+    for(iform in seq_along(form_to_anc)) {
+
+      # Calculate Zc of the ancestral proteins
+      node <- form_to_anc[[iform]]
+      ianc <- grepl(paste0("^Anc", node), aa$protein)
+      Zc_anc <- Zc(aa[ianc, ])
+      # Plot points with jitter
+      xvals <- jitter(rep(iform, length(Zc_anc)), amount = 0.1)
+      points(xvals, Zc_anc, pch = 19)
+
+      # Calculate Zc of the extant proteins
+      form <- names(form_to_anc[iform])
+      iext <- which(aa$ref == form)
+      Zc_ext <- Zc(aa[iext, ])
+      xvals <- jitter(rep(iform, length(Zc_ext)), amount = 0.1)
+      points(xvals, Zc_ext)
+
+    }
+
+    # Add legend and title
+    legend("bottomright", c("Extant", "Ancestral"), pch = c(1, 19), bty = "n")
+
+  }
+
+  # Plot Zc of IPMDH from Cui et al. (2025)  20250407
+  plot_IPMDH <- function(ylim = c(-0.20, -0.12)) {
+    aa <- read_fasta(system.file("extdata/genoGOE/CDY+25/IPMDH.fasta", package = "JMDplots"))
+    Zc <- Zc(aa)
+    # Ages from Table 1 of Cui et al., 2025
+    ages <- c(
+      2980, 2960, 2910, 2590,
+      2360, 2160, 2140, 1570,
+      1200, 932, 624, 0
+    )
+    pch <- rep(19, length(Zc))
+    pch[length(pch)] <- 1
+    plot(ages / 1000, Zc, xlim = c(3, 0), xlab = "Age (Ga)", ylab = "", type = "b", ylim = ylim, yaxt = "n", pch = pch)
+    label_y_axis()
+  }
+
+  # Plot Zc for ancestral thioredoxins from Perez-Jimenez et al. (2011)  20250625
+  plot_thioredoxin <- function(ylim = c(-0.28, -0.18)) {
+    # Read data file with ages and PDB IDs from Del Galdo et al. (2019)
+    dat <- read.csv(system.file("extdata/genoGOE/PIZ+11/DAAD19.csv", package = "JMDplots"))
+    # Read amino acid compositions
+    aa <- read_fasta(system.file("extdata/genoGOE/PIZ+11/thioredoxin.fasta", package = "JMDplots"))
+    # Calculate Zc
+    Zc <- Zc(aa)
+    # Setup plot
+    xlim <- c(4.2, 0)
+    plot(xlim, range(Zc), xlim = xlim, xlab = "Age (Ga)", ylab = "", type = "n", ylim = ylim, yaxt = "n")
+    label_y_axis()
+    # Add separate lines for each lineage
+    iBac <- dat$Lineage == "Bacteria"
+    pch <- rep(19, sum(iBac))
+    pch[length(pch)] <- 1
+    lines(dat$Age[iBac], Zc[iBac], type = "b", pch = pch)
+    text(3, -0.22, "Bacteria")
+    iArcEuk <- dat$Lineage == "Arc-Euk"
+    pch <- rep(15, sum(iArcEuk))
+    pch[length(pch)] <- 0
+    lines(dat$Age[iArcEuk], Zc[iArcEuk], type = "b", pch = pch)
+    text(3, -0.265, "Archaea+Eukaryota")
+  }
+
+  if(pdf) pdf("Figure_3.pdf", width = 9, height = 6)
+  par(mfrow = c(2, 2))
+  par(las = 1)
+  par(mar = c(4.0, 5.0, 2.5, 1.0), mgp = c(2.5, 1, 0))
+  plot_thioredoxin()
+  title("Thioredoxin")
+  label.figure("A", font = 2, cex = 1.5)
+  plot_IPMDH()
+  title("IPMDH")
+  label.figure("B", font = 2, cex = 1.5)
+  plot_Rubisco()
+  title("Rubisco")
+  label.figure("C", font = 2, cex = 1.5)
+  plot_nitrogenase()
+  title("Nitrogenase")
+  label.figure("D", font = 2, cex = 1.5)
+  if(pdf) dev.off()
+
+}
+
+# Figure 4: Evolutionary oxidation of ancestral Rubiscos and thermodynamic prediction of redox boundaries around the GOE
+genoGOE_4 <- function(pdf = FALSE, panel = NULL) {
 
   if(is.null(panel)) {
-    if(pdf) pdf("Figure_3.pdf", width = 9, height = 11)
+    if(pdf) pdf("Figure_4.pdf", width = 9, height = 11)
     layout(matrix(c(0,1,1,0, 2,2,3,3, 4,4,5,5), nrow = 3, byrow = TRUE))
     par(cex = 1)
   }
@@ -459,7 +610,7 @@ genoGOE_3 <- function(pdf = FALSE, panel = NULL) {
 
     # Panel D: Comparison between Rubiscos and methanogen and Nitrososphaeria genomes
     yvar <- "O2"
-    genoGOE_3D(yvar, res)
+    stability_comparison(yvar, res)
 
     # Label lines
     if(yvar == "Eh") {
@@ -523,9 +674,8 @@ genoGOE_3 <- function(pdf = FALSE, panel = NULL) {
 }
 
 
-# Code for Figure 3D
-# Comparison of Rubiscos and methanogen and Nitrososphaeria genomes
-genoGOE_3D <- function(yvar = "Eh", res = 400, add = FALSE, lwd = 2, pHlim = c(4, 10), Ehlim = c(-0.3, 0.1), O2lim = c(-72.5, -58), alpha.f = 1, Eh7_las = 1, datasets = 1:3) {
+# Comparison of Rubiscos and methanogen and Nitrososphaeria genomes (for Figure 4D)
+stability_comparison <- function(yvar = "Eh", res = 400, add = FALSE, lwd = 2, pHlim = c(4, 10), Ehlim = c(-0.3, 0.1), O2lim = c(-72.5, -58), alpha.f = 1, Eh7_las = 1, datasets = 1:3) {
 
   # Setup basis species
   basis("QEC+")
@@ -610,7 +760,7 @@ genoGOE_3D <- function(yvar = "Eh", res = 400, add = FALSE, lwd = 2, pHlim = c(4
 }
 
 # Evolutionary oxidation and relative stabilities for genomes with S-cycling genes 20241211
-genoGOE_4 <- function(pdf = FALSE, panel = NULL) {
+genoGOE_5 <- function(pdf = FALSE, panel = NULL) {
   # genoGOE/sulfur_genomes.R
   # 20241211 add Eh-pH affinity ranking
   # 20241223 convert to logfO2-pH
@@ -704,7 +854,7 @@ genoGOE_4 <- function(pdf = FALSE, panel = NULL) {
   }
 
   if(is.null(panel)) {
-    if(pdf) pdf("Figure_4.pdf", width = 6.5, height = 10)
+    if(pdf) pdf("Figure_5.pdf", width = 6.5, height = 10)
     layout(matrix(1:2), heights = c(5, 7))
   }
   panels <- if(is.null(panel)) LETTERS[1:4] else panel
@@ -717,77 +867,15 @@ genoGOE_4 <- function(pdf = FALSE, panel = NULL) {
     sulfur_affinity(panel)
     if(is.null(panel)) {
       # Overlay stability boundaries for other genomes
-      genoGOE_3D("O2", add = TRUE, lwd = 4, pHlim = c(3, 10), alpha.f = 0.7, Eh7_las = 0)
+      stability_comparison("O2", add = TRUE, lwd = 4, pHlim = c(3, 10), alpha.f = 0.7, Eh7_las = 0)
       title(main = hyphen.in.pdf("Groupwise relative stabilities of proteins in\ngenomes with different S-cycling genes"), font.main = 1)
       label.figure("B", font = 2, cex = 1.6)
     } else {
       # Only add Eh7 axis
-      genoGOE_3D("O2", add = TRUE, Eh7_las = 0, datasets = numeric())
+      stability_comparison("O2", add = TRUE, Eh7_las = 0, datasets = numeric())
     }
   }
   if(pdf & is.null(panel)) dev.off()
 
 }
 
-# Carbon oxidation state of ancestral and extant nitrogenases
-# 20240216 first version
-# 20250325 added to JMDplots
-# 20250327 use more representative extant nitrogenases (Garcia et al. Fig. 6)
-genoGOE_5 <- function(pdf = FALSE, panel = NULL) {
-
-  if(pdf & is.null(panel)) pdf("Figure_5.pdf", width = 7, height = 5.5)
-
-  ## Read FASTA file of ancient and extant sequences,
-  ## downloaded from https://github.com/kacarlab/AncientNitrogenase.git
-  #aa <- canprot::read_fasta("GMKK20/Extant-MLAnc_Align.fasta")
-  # Get amino acid sequences precomputed from Extant-MLAnc_Align.fasta
-  aa <- read.csv(system.file("extdata/genoGOE/GMKK20/nitrogenase_aa.csv", package = "JMDplots"))
-
-  # List forms of nitrogenase and their ancestors
-  form_to_anc <- list(
-    "Clfx" = "D",
-    "F-Mc" = "C",
-    "Mb-Mc" = "B",
-    "Anf" = "A",
-    "Vnf" = "A",
-    "Nif-II" = "E",
-    "Nif-I" = "E"
-  )
-  # Use colors from Garcia et al. (2020) Fig. 2
-  cols <- c(A = "#df674f", B = "#b779dc", C = "#27a08d", D = "#e8c44c", E = "#759dce")
-  pt_cols <- adjustcolor(cols, alpha.f = 0.75)
-  names(pt_cols) <- names(cols)
-
-  # Start plot
-  plot(extendrange(c(1, 7)), c(-0.20, -0.12), xlab = "Form of nitrogenase", ylab = axis.label("ZC"), type = "n", axes = FALSE)
-  axis(side = 1, at = seq_along(form_to_anc), labels = hyphen.in.pdf(names(form_to_anc)), gap.axis = 0)
-  axis(side = 2)
-  box()
-
-  # Loop over nitrogenase forms
-  for(iform in seq_along(form_to_anc)) {
-
-    # Calculate Zc of the ancestral proteins
-    node <- form_to_anc[[iform]]
-    ianc <- grepl(paste0("^Anc", node), aa$protein)
-    Zc_anc <- Zc(aa[ianc, ])
-
-    # Plot lines for ancestral proteins
-    dx <- 0.25
-    for(Zc in Zc_anc) lines(c(iform-dx, iform+dx), c(Zc, Zc), col = cols[node])
-
-    # Calculate Zc of the extant proteins
-    form <- names(form_to_anc[iform])
-    iext <- which(aa$ref == form)
-    Zc_ext <- Zc(aa[iext, ])
-    points(rep(iform, length(Zc_ext)), Zc_ext, pch = 19, col = pt_cols[node])
-
-  }
-
-  # Add legend and title
-  legend("bottomright", c("Extant", "Ancestral"), lty = c(NA, 1), pch = c(19, NA), bty = "n")
-  if(is.null(panel)) title("Carbon oxidation state of nitrogenase sequences", font.main = 1)
-
-  if(pdf & is.null(panel)) dev.off()
-
-}
