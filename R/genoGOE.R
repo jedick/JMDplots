@@ -8,6 +8,7 @@
 # 20250325 Add ancestral nitrogenase
 # 20250625 Put all ancestral proteins in one plot and add thioredoxin and IPMDH
 # 20250626 Put stability diagrams in one plot
+# 20250627 Use average affinity instead of average rank of affinity
 
 # Figure 1: Genome-wide differences of oxidation state between two lineages of methanogens
 genoGOE_1 <- function(pdf = FALSE, panel = NULL) {
@@ -524,8 +525,8 @@ genoGOE_4 <- function(pdf = FALSE, panel = NULL) {
   # Setup basis species and swap O2 for e- to make Eh-pH diagram
   basis("QEC+")
   swap.basis("O2", "e-")
-  # Set resolution
-  res <- 200
+  # Set plot resolution
+  res <- 300
   
   # Panel A: Pairwise stability boundaries for Rubisco
 
@@ -554,8 +555,8 @@ genoGOE_4 <- function(pdf = FALSE, panel = NULL) {
       }
     }
 
-    text(5.5, 0.64, hyphen.in.pdf("Higher AFFINITY\nfor post-GOE protein\nin each pair"), cex = 0.8)
-    text(4.8, -0.15, hyphen.in.pdf("Higher AFFINITY for\npre-GOE protein in each pair"), cex = 0.8, srt = -37)
+    text(5.5, 0.67, hyphen.in.pdf("Higher affinity\nfor post-GOE protein\nin each pair"), cex = 0.8)
+    text(4.8, -0.15, hyphen.in.pdf("Higher affinity for\npre-GOE protein in each pair"), cex = 0.8, srt = -37)
     title("Pairwise Rubiscos", font.main = 1)
     if(is.null(panel)) label.figure("A", cex = 1.5, font = 2, yfrac = 0.936)
 
@@ -570,10 +571,10 @@ genoGOE_4 <- function(pdf = FALSE, panel = NULL) {
     # Set up groups for affinity ranking:
     # 3 pre-GOE and 3 post-GOE proteins
     groups <- list(pre = c(TRUE, TRUE, TRUE, FALSE, FALSE, FALSE), post = c(FALSE, FALSE, FALSE, TRUE, TRUE, TRUE))
-    arank <- rank.affinity(aout, groups = groups)
-    diagram(arank, lwd = 2, col = 4, names = "", xlab = "pH", ylab = axis.label("Eh"))
-    text(6, -0.17, hyphen.in.pdf("Higher affinity RANKING\nfor pre-GOE proteins"), col = 4, font = 2, cex = 0.8, srt = -35)
-    text(6.5, 0.1, hyphen.in.pdf("Higher affinity RANKING\nfor post-GOE proteins"), col = 4, font = 2, cex = 0.8, srt = -35)
+    amean <- agg.affinity(aout, groups = groups)
+    diagram(amean, lwd = 2, col = 4, names = "", xlab = "pH", ylab = axis.label("Eh"), balance = 1)
+    text(6, -0.17, hyphen.in.pdf("Higher mean affinity\nfor pre-GOE proteins"), col = 4, font = 2, cex = 0.8, srt = -33)
+    text(6.5, 0.1, hyphen.in.pdf("Higher mean affinity\nfor post-GOE proteins"), col = 4, font = 2, cex = 0.8, srt = -33)
     title("Groupwise Rubiscos", font.main = 1)
     if(is.null(panel)) label.figure("B", cex = 1.5, font = 2, yfrac = 0.936)
 
@@ -585,17 +586,17 @@ genoGOE_4 <- function(pdf = FALSE, panel = NULL) {
     stability_comparison(res = res)
 
     # Label lines
-    text(7, -61, " Rubiscos", cex = 0.8, adj = 0)
-    text(7, -61, hyphen.in.pdf("Pre-GOE "), cex = 0.75, adj = 1, srt = 30)
-    text(7, -59.8, hyphen.in.pdf("Post-GOE "), cex = 0.75, adj = 1, srt = 30)
+    text(6.8, -61.4, "Rubiscos", cex = 0.8, adj = 0)
+    text(6.5, -61.8, hyphen.in.pdf("Pre-GOE"), cex = 0.75, adj = 1, srt = 30)
+    text(6.5, -60.7, hyphen.in.pdf("Post-GOE"), cex = 0.75, adj = 1, srt = 30)
 
-    text(7, -67, " Methanogens", cex = 0.8, adj = 0)
-    text(6.5, -67.8, "Class I ", cex = 0.75)
-    text(6.5, -66.7, "Class II ", cex = 0.75)
+    text(6.8, -67, "Methanogens", cex = 0.8, adj = 0)
+    text(6, -67.6, "Class I", cex = 0.75)
+    text(6, -66.7, "Class II", cex = 0.75)
 
-    text(7.2, -69.2, " Nitrososphaeria", cex = 0.8, adj = 0)
-    text(6.5, -70.2, "Basal ", cex = 0.75)
-    text(6.5, -69.2, "Terrestrial ", cex = 0.75)
+    text(6.8, -69.4, "Nitrososphaeria", cex = 0.8, adj = 0, font = 3)
+    text(6, -70.2, "Basal", cex = 0.75)
+    text(6, -69.4, "Terrestrial", cex = 0.75)
 
     if(is.null(panel)) {
       title("Rubiscos and genomes", font.main = 1)
@@ -609,11 +610,11 @@ genoGOE_4 <- function(pdf = FALSE, panel = NULL) {
     # Add more arrows 20240812
     plot.new()
     opar <- par(xpd = NA)
-    arrows(-0.3, 0.12, -0.3, 0.32, length = 0.2, lwd = 2, col = 7)
-    arrows(-0.1, 0.18, -0.1, 0.38, length = 0.2, lwd = 2, col = 2)
-    arrows(-0.3, 0.7, -0.3, 0.9, length = 0.2, lwd = 2, col = 4)
+    arrows(-0.3, 0.08, -0.3, 0.28, length = 0.2, lwd = 2, col = 2)
+    arrows(-0.1, 0.22, -0.1, 0.42, length = 0.2, lwd = 2, col = 7)
+    arrows(-0.3, 0.65, -0.3, 0.85, length = 0.2, lwd = 2, col = 4)
     text(0.05, 0.25, "Oxidation in\nmany lineages\naround GOE", adj =0)
-    text(-0.2, 0.8, hyphen.in.pdf("Higher redox\npotential for Rubisco\nthan genomes"), adj = 0)
+    text(-0.15, 0.75, hyphen.in.pdf("Rubisco transitions\nat more oxidizing\nconditions"), adj = 0)
     par(opar)
 
   }
@@ -670,7 +671,7 @@ genoGOE_4 <- function(pdf = FALSE, panel = NULL) {
     n <- length(Zclist)
     boxplot(Zclist, col = col, names = character(n), xlab = "Age of earliest gene event (Ga)", ylab = "Zc of all proteins in genome", ylim = c(-0.25, -0.08))
     text(2.1, -0.24, hyphen.in.pdf("Sulfate-sulfite-sulfide"), col = dsr)
-    text(2.8, -0.12, hyphen.in.pdf("Sulfate-\nthiosulfate"), col = sox)
+    text(2.8, -0.115, hyphen.in.pdf("Sulfate-\nthiosulfate"), col = sox)
     text(6.2, -0.22, "Organic sulfur", col = mdd)
     # Ages from Table 2 of Mateos et al.
     ages <- c("3.3-3.35  ", "  2.65-2.88", "2.6", "2.33-2.47", "2.28", "1.77", "0-2.38")
@@ -695,20 +696,21 @@ genoGOE_4 <- function(pdf = FALSE, panel = NULL) {
     myaa <- aa[aa$organism %in% unlist(genomes), ]
     # Load proteins for each genome
     ip <- add.protein(myaa, as.residue = TRUE)
-    # Set resolution
-    res <- 150
     # Calculate affinity of composition reactions as a function of Eh and pH
     a <- affinity(pH = c(3, 10, res), O2 = c(-72.5, -58, res), iprotein = ip)
     # Group genomes according to presence of sulfur-cycling genes
     groups <- sapply(genomes, function(genome) match(genome, myaa$organism))
     # Calculate normalized sum of ranks for each group and make diagram
-    arank <- rank.affinity(a, groups)
+    amean <- agg.affinity(a, groups)
     # Lighten colors
     fill <- adjustcolor(col, alpha.f = 0.3)
     # Adjust labels
     names <- names(genomes)
-    dy <- rep(0, length(names))
-    diagram(arank, fill = fill, lty = 1, lwd = 1.5, font = 3, names = names, cex.names = 0.8, dy = dy, col = "gray40")
+    dx <- dy <- rep(0, length(names))
+    dx[names == "soxABXYZ"] <- 1
+    dy[names == "soxABXYZ"] <- -0.2
+    # We need balance = 1 here to balance on residues 20250627
+    diagram(amean, fill = fill, lty = 1, lwd = 2, font = 3, names = names, cex.names = 0.8, dx = dx, dy = dy, col = "gray20", balance = 1)
   }
 
   if("E" %in% panels) {
@@ -719,8 +721,8 @@ genoGOE_4 <- function(pdf = FALSE, panel = NULL) {
     sulfur_affinity(panel)
     if(is.null(panel)) {
       # Overlay stability boundaries for other genomes
-      stability_comparison(res = res, add = TRUE, lty = 2, pHlim = c(3, 10), alpha.f = 0.7, Eh7_las = 0)
-      title(main = hyphen.in.pdf("Groupwise relative stabilities"), font.main = 1)
+      stability_comparison(res = res, add = TRUE, pHlim = c(3, 10), alpha.f = 0.8, Eh7_las = 0)
+      title(main = hyphen.in.pdf("Sulfur genomes compared to Rubiscos and other genomes"), font.main = 1)
       label.figure("E", font = 2, cex = 1.6)
     } else {
       # Only add Eh7 axis
@@ -732,9 +734,8 @@ genoGOE_4 <- function(pdf = FALSE, panel = NULL) {
 
 }
 
-
 # Comparison of Rubiscos and methanogen and Nitrososphaeria genomes
-stability_comparison <- function(res = 400, add = FALSE, lwd = 2, lty = 1, pHlim = c(4, 10), Ehlim = c(-0.3, 0.1), O2lim = c(-72.5, -58), alpha.f = 1, Eh7_las = 1, datasets = 1:3) {
+stability_comparison <- function(res = 400, add = FALSE, lwd = 2, lty = 1, pHlim = c(4, 10), O2lim = c(-72.5, -58), alpha.f = 1, Eh7_las = 1, datasets = 1:3) {
 
   # Setup basis species
   basis("QEC+")
@@ -750,12 +751,12 @@ stability_comparison <- function(res = 400, add = FALSE, lwd = 2, lty = 1, pHlim
       iII <- 1:19
       # Get the species in each group
       groups <- list("Class I" = iI, "Class II" = iII)
-      col <- 2
+      col <- 7
       add <- add
     }
 
     if(i == 2) {
-      # Thaumarchaeota 20220414
+      # Thaumarchaeota (now Nitrososphaeria) 20220414
       # Amino acid compositions of predicted (Glimmer) and database (NCBI or IMG) proteomes
       predicted <- read.csv(system.file("extdata/utogig/Thaumarchaeota_predicted_AA.csv", package = "JMDplots"))
       database <- read.csv(system.file("extdata/utogig/Thaumarchaeota_database_AA.csv", package = "JMDplots"))
@@ -767,7 +768,7 @@ stability_comparison <- function(res = 400, add = FALSE, lwd = 2, lty = 1, pHlim
       groups <- sapply(groupnames, function(group) aa$protein == group, simplify = FALSE)
       # Compare Basal to Terrestrial 20240802
       groups <- groups[1:2]
-      col <- 7
+      col <- 2
       add <- TRUE
     }
 
@@ -790,8 +791,8 @@ stability_comparison <- function(res = 400, add = FALSE, lwd = 2, lty = 1, pHlim
     ip <- add.protein(aa, as.residue = TRUE)
     aout <- affinity(pH = c(pHlim, res), O2 = c(O2lim, res), iprotein = ip)
     # Calculate average ranking for each group and make diagram
-    arank <- rank.affinity(aout, groups)
-    diagram(arank, col = adjustcolor(col, alpha.f = alpha.f), lwd = lwd, lty = lty, add = add, names = "")
+    amean <- agg.affinity(aout, groups)
+    diagram(amean, col = adjustcolor(col, alpha.f = alpha.f), lwd = lwd, lty = lty, add = add, names = "", balance = 1)
 
   }
 
@@ -813,3 +814,59 @@ stability_comparison <- function(res = 400, add = FALSE, lwd = 2, lty = 1, pHlim
 
 }
 
+# Calculate average affinities for species in different groups
+# 20220416 jmd first version (rank.affinity)
+# 20250626 use aggregate function (mean or median) instead of average rank
+agg.affinity <- function(aout, groups, fun = "mean") {
+
+  # Put the affinities into matrix form
+  amat <- sapply(aout$values, as.numeric)
+  # Keep track of empty groups
+  is_empty_group <- logical()
+
+  # Get the average affinity for species in each group
+  agg_values <- sapply(groups, function(group) {
+
+    # Get number of species in this group
+    if(inherits(group, "logical")) n <- sum(group)
+    if(inherits(group, "integer")) n <- length(group)
+    # Also handle indices classed as numeric 20250522
+    if(inherits(group, "numeric")) n <- length(group)
+    # Aggregate affinities
+    group_values <- apply(amat[, group, drop = FALSE], 1, fun)
+
+    # Remember empty group 20250527
+    if(n == 0) {
+      is_empty_group <<- c(is_empty_group, TRUE)
+    } else {
+      is_empty_group <<- c(is_empty_group, FALSE)
+    }
+    group_values
+
+  })
+
+  # Remove empty groups 20250527
+  if(any(is_empty_group)) {
+    agg_values <- agg_values[, !is_empty_group, drop = FALSE]
+    empty_groups <- names(groups)[is_empty_group]
+    message(paste("aggregate.affinity: removing empty groups:", paste(empty_groups, collapse = ", ")))
+    groups <- groups[!is_empty_group, drop = FALSE]
+  }
+
+  # Restore dims
+  dims <- dim(aout$values[[1]])
+  if(getRversion() < "4.1.0") {
+    # Using 'simplify = FALSE' in R < 4.1.0 caused error: 3 arguments passed to 'dim<-' which requires 2
+    alist <- lapply(lapply(apply(agg_values, 2, list), "[[", 1), "dim<-", dims)
+  } else {
+    # apply() got 'simplify' argument in R 4.1.0 20230313
+    alist <- apply(agg_values, 2, "dim<-", dims, simplify = FALSE)
+  }
+  aout$values <- alist
+
+  # Rename species to group names (for use by diagram())
+  aout$species <- aout$species[1:length(groups), ]
+  aout$species$name <- names(groups)
+  aout
+
+}
