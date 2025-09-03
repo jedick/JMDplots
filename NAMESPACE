@@ -105,8 +105,8 @@ export(
   "check_IDs", "cleanup", "get_comptab", "diffplot", "qdist",
   "xsummary", "xsummary2", "xsummary3",
 
-  # genoGOE paper 20240328, 20240409/20250626, 20240602, 20250625
-  "genoGOE_2", "genoGOE_4", "genoGOE_1", "genoGOE_3",
+  # genoGOE paper 20240328, 20240409/20250626, 20240602, 20250625, 20250903
+  "genoGOE_3", "genoGOE_5", "genoGOE_2", "genoGOE_4", "genoGOE_1",
 
   # Moved from CHNOSZ 20250511
   "protein.equil"
@@ -201,6 +201,7 @@ importFrom("ape", "read.tree", "plot.phylo", "rotateConstr")
 importFrom("multcompView", "multcompLetters4")
 importFrom("beanplot", "beanplot")
 importFrom("effsize", "cohen.d")
+importFrom("plotrix", "smoothColors", "gradient.rect")
 
 # We need a method provided by the package, not an exported function, so import the whole package 20211230
 import("plot.matrix")

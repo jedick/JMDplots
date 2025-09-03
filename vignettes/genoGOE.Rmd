@@ -87,30 +87,35 @@ This vignette was compiled on `r Sys.Date()` with
 library(JMDplots)
 ```
 
-## Genome-wide differences of oxidation state between two lineages of methanogens (Figure 1)
-```{r genoGOE1, message = FALSE, results = "hide", out.width='100%', fig.width = 8, fig.height = 6, pngquant = pngquant}
+## Ranges of carbon oxidation state for organic compounds, amino acids, and proteins (Figure 1)
+```{r genoGOE1, message = FALSE, results = "hide", out.width='100%', fig.width = 11, fig.height = 6, pngquant = pngquant}
 genoGOE_1()
+```
+
+## Genome-wide differences of oxidation state between two lineages of methanogens (Figure 2)
+```{r genoGOE2, message = FALSE, results = "hide", out.width='100%', fig.width = 8, fig.height = 6, pngquant = pngquant}
+genoGOE_2()
 ```
 
 **Data sources:** List of Class I and II methanogen species [@LL18], archaeal marker genes used in GTDB [@RCM+21], and protein abundance in *Methanococcus maripaludis* [@XHZ+06].
 
-## Carbon oxidation state of proteins in eukaryotic gene age groups (Figure 2)
-```{r genoGOE2, message = FALSE, results = "hide", out.width='100%', fig.width = 7, fig.height = 6, pngquant = pngquant}
-genoGOE_2()
+## Carbon oxidation state of proteins in eukaryotic gene age groups (Figure 3)
+```{r genoGOE3, message = FALSE, results = "hide", out.width='100%', fig.width = 7, fig.height = 6, pngquant = pngquant}
+genoGOE_3()
 ```
 
 **Data sources:** Consensus gene ages [@LMM16], protein sequences [@Uni23], and divergence times [@KSC+22].
 
-## Carbon oxidation state of ancestral reconstructed sequences and extant proteins (Figure 3)
-```{r genoGOE3, message = FALSE, results = "hide", out.width='100%', fig.width = 9, fig.height = 6, pngquant = pngquant}
-genoGOE_3()
+## Carbon oxidation state of ancestral reconstructed sequences and extant proteins (Figure 4)
+```{r genoGOE4, message = FALSE, results = "hide", out.width='100%', fig.width = 9, fig.height = 6, pngquant = pngquant}
+genoGOE_4()
 ```
 
 **Data sources:** Thioredoxin [@PIZ+11], IPMDH [@CDY+25], Rubisco [@KHAB17], nitrogenase [@GMKK20].
 
-## From carbon oxidation state to relative stability diagrams (Figure 4)
-```{r genoGOE4, message = FALSE, results = "hide", out.width='100%', fig.width = 12, fig.height = 8, pngquant = pngquant}
-genoGOE_4()
+## From carbon oxidation state to relative stability diagrams (Figure 5)
+```{r genoGOE5, message = FALSE, results = "hide", out.width='100%', fig.width = 12, fig.height = 8, pngquant = pngquant}
+genoGOE_5()
 ```
 
 **Data sources:** Ancestral sequences of Rubisco [@KHAB17]; genome IDs for methanogens [@LL18], *Nitrososphaeria* [@RFH+19], and S-cycling organisms [@MCK+23].

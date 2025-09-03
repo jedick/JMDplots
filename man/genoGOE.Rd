@@ -12,10 +12,11 @@ Plots from the manuscript by Dick et al. (2025).
 }
 
 \usage{
-  genoGOE_1(pdf = FALSE, panel = NULL)
-  genoGOE_2(pdf = FALSE, metric = "Zc")
-  genoGOE_3(pdf = FALSE)
-  genoGOE_4(pdf = FALSE, panel = NULL)
+  genoGOE_1(pdf = FALSE)
+  genoGOE_2(pdf = FALSE, panel = NULL)
+  genoGOE_3(pdf = FALSE, metric = "Zc")
+  genoGOE_4(pdf = FALSE)
+  genoGOE_5(pdf = FALSE, panel = NULL)
 }
 
 \arguments{
@@ -27,10 +28,11 @@ Plots from the manuscript by Dick et al. (2025).
 \details{
 
 \tabular{ll}{
-  \code{genoGOE_1} \tab Genome-wide differences of oxidation state between two lineages of methanogens \cr
-  \code{genoGOE_2} \tab Carbon oxidation state of proteins in eukaryotic gene age groups \cr
-  \code{genoGOE_3} \tab Carbon oxidation state of reconstructed ancestral sequences and extant proteins \cr
-  \code{genoGOE_4} \tab From carbon oxidation state to relative stability diagrams \cr
+  \code{genoGOE_1} \tab Ranges of carbon oxidation state for organic compounds, amino acids, and proteins \cr
+  \code{genoGOE_2} \tab Genome-wide differences of oxidation state between two lineages of methanogens \cr
+  \code{genoGOE_3} \tab Carbon oxidation state of proteins in eukaryotic gene age groups \cr
+  \code{genoGOE_4} \tab Carbon oxidation state of reconstructed ancestral sequences and extant proteins \cr
+  \code{genoGOE_5} \tab From carbon oxidation state to relative stability diagrams \cr
 }
 }
 
@@ -39,5 +41,5 @@ Dick JM et al. (2025) Manuscript in preparation.
 }
 
 \examples{
-genoGOE_2()
+genoGOE_3()
 }

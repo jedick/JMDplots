@@ -8,13 +8,87 @@
 # 20250325 Add ancestral nitrogenase
 # 20250625 Put all ancestral proteins in one plot and add thioredoxin and IPMDH
 # 20250626 Put stability diagrams in one plot
-# 20250627 Use average affinity instead of average rank of affinity
+# 20250627 Use average affinity instead of average rank of affinity for groupwise relative stability
+# 20250903 Add Zc range diagram
 
-# Figure 1: Genome-wide differences of oxidation state between two lineages of methanogens
-genoGOE_1 <- function(pdf = FALSE, panel = NULL) {
+# Figure 1: Ranges of carbon oxidation state for organic compounds, amino acids, and proteins
+genoGOE_1 <- function(pdf = FALSE) {
+
+  if(pdf) pdf("Figure_1.pdf", width = 11, height = 6)
+  par(mar = c(0, 0, 0, 0))
+
+  # Start with an empty plot
+  plot(c(0, 10), c(0, 10), type = "n", axes = FALSE, xlab = "", ylab = "")
+  # y-limits
+  ybottom <- 0.5
+  ytop <- 9.5
+  # Get gradient colors
+  col <- smoothColors("2", 100, "4")
+  # Loop over x-left values
+  xs <- c(0, 3, 6)
+  for(xleft in xs) {
+    # Draw a smooth gradient across the bar
+    gradient.rect(xleft, ybottom, xleft + 0.5, ytop, col = col, border = NA, gradient = "y")
+  }
+
+  # Read protein data
+  aa <- read.csv(system.file("RefDB/organisms/UP000000625_83333.csv.xz", package = "JMDplots"))
+  Zc <- Zc(aa)
+
+  # Get 90% interval
+  q90 <- quantile(Zc, probs = c(0.05, 0.95))
+  # Get elemental formulas for reduced and oxidized proteins
+  ilow <- which.min(abs(Zc - q90[1]))
+  pf_low <- as.chemical.formula(protein.formula(aa[ilow, ]))
+  ihigh <- which.min(abs(Zc - q90[2]))
+  pf_high <- as.chemical.formula(protein.formula(aa[ihigh, ]))
+
+  # Add labels
+
+  text(xs[1], ybottom, "-4", cex = 2, font = 2, adj = c(0, 1.5))
+  text(xs[1], ytop, "+4", cex = 2, font = 2, adj = c(0, -0.5))
+  text(xs[1] + 0.6, ybottom, expr.species("CH4"), cex = 2, adj = 0)
+  text(xs[1] + 0.6, ytop, expr.species("CO2"), cex = 2, adj = 0)
+
+  text(xs[2], ybottom, "-1", cex = 2, font = 2, adj = c(0, 1.5))
+  text(xs[2], ytop, "+1", cex = 2, font = 2, adj = c(0, -0.5))
+  text(xs[2] + 0.6, ybottom, expr.species(info(info("leucine"))$formula), cex = 2, adj = 0)
+  text(xs[2] + 0.6, ybottom + 0.8, "Leucine", cex = 2, adj = 0)
+  text(xs[2] + 0.6, ytop, expr.species(info(info("aspartic acid"))$formula), cex = 2, adj = 0)
+  text(xs[2] + 0.6, ytop - 1, "Aspartic\nacid", cex = 2, adj = 0)
+
+  text(xs[3], ybottom, round(q90[1], 3), cex = 2, font = 2, adj = c(0, 1.5))
+  text(xs[3], ytop, round(q90[2], 3), cex = 2, font = 2, adj = c(0, -0.5))
+  text(xs[3] + 1.1, ybottom, expr.species(pf_low), cex = 2, adj = 0)
+  text(xs[3] + 1.1, ytop, expr.species(pf_high), cex = 2, adj = 0)
+
+  # Add lines
+
+  # Figure out y positions for amino acids range
+  aa_range <- predict(lm(data.frame(y = c(ybottom, ytop), x = c(-4, 4))), data.frame(x = c(-1, 1)))
+  lines(c(xs[1] + 0.53, xs[2] - 0.03), c(aa_range[1], ybottom + 0.02), lwd = 3, col = 2)
+  lines(c(xs[1] + 0.53, xs[2] - 0.03), c(aa_range[2], ytop - 0.02), lwd = 3, col = 4)
+
+  # Figure out y positions for protein range
+  p_range <- predict(lm(data.frame(y = c(ybottom, ytop), x = c(-1, 1))), data.frame(x = c(q90[1], q90[2])))
+  lines(c(xs[2] + 0.53, xs[3] - 0.03), c(p_range[1], ybottom + 0.02), lwd = 3, col = 2)
+  lines(c(xs[2] + 0.53, xs[3] - 0.03), c(p_range[2], ytop - 0.02), lwd = 3, col = 4)
+
+  # Add arrows and text for E. coli
+  arrows(xs[3] + 0.7, ybottom + 0.02, xs[3] + 0.7, ytop - 0.02, code = 3, length = 0.2, angle = 35, lwd = 3)
+  range_txt <- "90% of\nproteins\nin\nare in this\nrange"
+  text(xs[3] + 1.1, mean(c(ybottom, ytop)), range_txt, cex = 2, adj = 0)
+  E_coli_txt <- "    E. coli"
+  text(xs[3] + 1.1, mean(c(ybottom, ytop)), E_coli_txt, cex = 2, adj = 0, font = 3)
+
+  if(pdf) dev.off()
+}
+
+# Figure 2: Genome-wide differences of oxidation state between two lineages of methanogens
+genoGOE_2 <- function(pdf = FALSE, panel = NULL) {
 
   if(is.null(panel)) {
-    if(pdf) pdf("Figure_1.pdf", width = 8, height = 6)
+    if(pdf) pdf("Figure_2.pdf", width = 8, height = 6)
     mat <- matrix(c(1,2,3, 1,2,4, 5,5,5), nrow = 3, byrow = TRUE)
     layout(mat, heights = c(1, 1, 2))
   }
@@ -232,10 +306,10 @@ genoGOE_1 <- function(pdf = FALSE, panel = NULL) {
 
 }
 
-# Figure 2: Carbon oxidation state of proteins in eukaryotic gene age groups
-genoGOE_2 <- function(pdf = FALSE, metric = "Zc") {
+# Figure 3: Carbon oxidation state of proteins in eukaryotic gene age groups
+genoGOE_3 <- function(pdf = FALSE, metric = "Zc") {
 
-  if(pdf) pdf("Figure_2.pdf", width = 7, height = 6)
+  if(pdf) pdf("Figure_3.pdf", width = 7, height = 6)
   layout(matrix(1:2), heights = c(1.2, 1.7))
 
   # Gene ages from Liebeskind et al. (2016)
@@ -353,8 +427,8 @@ genoGOE_2 <- function(pdf = FALSE, metric = "Zc") {
 
 }
 
-# Figure 3: Carbon oxidation state of reconstructed ancestral sequences and extant proteins 20250625
-genoGOE_3 <- function(pdf = FALSE) {
+# Figure 4: Carbon oxidation state of reconstructed ancestral sequences and extant proteins 20250625
+genoGOE_4 <- function(pdf = FALSE) {
 
   # Function to add Zc labels with red/blue colors 20250625
   label_y_axis <- function() {
@@ -483,7 +557,7 @@ genoGOE_3 <- function(pdf = FALSE) {
     text(3, -0.265, "Archaea+Eukaryota")
   }
 
-  if(pdf) pdf("Figure_3.pdf", width = 9, height = 6)
+  if(pdf) pdf("Figure_4.pdf", width = 9, height = 6)
   par(mfrow = c(2, 2))
   par(las = 1)
   par(mar = c(4.0, 5.0, 2.5, 1.0), mgp = c(2.5, 1, 0))
@@ -503,11 +577,11 @@ genoGOE_3 <- function(pdf = FALSE) {
 
 }
 
-# Figure 4: From carbon oxidation state to relative stability diagrams
-genoGOE_4 <- function(pdf = FALSE, panel = NULL) {
+# Figure 5: From carbon oxidation state to relative stability diagrams
+genoGOE_5 <- function(pdf = FALSE, panel = NULL) {
 
   if(is.null(panel)) {
-    if(pdf) pdf("Figure_4.pdf", width = 12, height = 8)
+    if(pdf) pdf("Figure_5.pdf", width = 12, height = 8)
     layout(matrix(c(1,1,1,1,1, 2,2,2,2,2, 3,3,3,3,3, 4,4,4,
                     rep(5, 9), rep(6, 9)), nrow = 2, byrow = TRUE))
     par(cex = 1)
