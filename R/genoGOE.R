@@ -673,7 +673,7 @@ genoGOE_5 <- function(pdf = FALSE, panel = NULL) {
     text(6, -69.4, "Terrestrial", cex = 0.75)
 
     if(is.null(panel)) {
-      title("Rubiscos and genomes", font.main = 1)
+      title("   Rubiscos and all proteins in genomes", font.main = 1, xpd = NA)
       label.figure("C", cex = 1.5, font = 2, yfrac = 0.936)
     }
 
@@ -787,16 +787,16 @@ genoGOE_5 <- function(pdf = FALSE, panel = NULL) {
     diagram(amean, fill = fill, lty = 1, lwd = 2, font = 3, names = names, cex.names = 0.8, dx = dx, dy = dy, col = "gray20", balance = 1)
   }
 
-  if("E" %in% panels) {
+  if("D" %in% panels) {
     sulfur_Zc()
     if(is.null(panel)) label.figure("D", font = 2, cex = 1.6)
   }
-  if("F" %in% panels) {
+  if("E" %in% panels) {
     sulfur_affinity(panel)
     if(is.null(panel)) {
-      # Overlay stability boundaries for other genomes
-      stability_comparison(res = res, add = TRUE, pHlim = c(3, 10), alpha.f = 0.8, Eh7_las = 0)
-      title(main = hyphen.in.pdf("Sulfur genomes compared to Rubiscos and other genomes"), font.main = 1)
+      ## Overlay stability boundaries for other genomes
+      #stability_comparison(res = res, add = TRUE, pHlim = c(3, 10), alpha.f = 0.8, Eh7_las = 0)
+      title(main = hyphen.in.pdf("All proteins in genomes with specific S-cycling genes"), font.main = 1)
       label.figure("E", font = 2, cex = 1.6)
     } else {
       # Only add Eh7 axis
