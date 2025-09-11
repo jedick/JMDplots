@@ -32,7 +32,7 @@ Plots from the manuscript by Dick et al. (2025).
   \code{genoGOE_2} \tab Genome-wide differences of oxidation state between two lineages of methanogens \cr
   \code{genoGOE_3} \tab Carbon oxidation state of proteins in eukaryotic gene age groups \cr
   \code{genoGOE_4} \tab Carbon oxidation state of reconstructed ancestral sequences and extant proteins \cr
-  \code{genoGOE_5} \tab From carbon oxidation state to relative stability diagrams \cr
+  \code{genoGOE_5} \tab Relative stabilities of proteins as a function of environmental variables \cr
 }
 }
 

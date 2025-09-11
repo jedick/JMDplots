@@ -113,7 +113,7 @@ genoGOE_4()
 
 **Data sources:** Thioredoxin [@PIZ+11], IPMDH [@CDY+25], Rubisco [@KHAB17], nitrogenase [@GMKK20].
 
-## From carbon oxidation state to relative stability diagrams (Figure 5)
+## Relative stabilities of proteins as a function of environmental variables (Figure 5)
 ```{r genoGOE5, message = FALSE, results = "hide", out.width='100%', fig.width = 12, fig.height = 8, pngquant = pngquant}
 genoGOE_5()
 ```

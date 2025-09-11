@@ -577,7 +577,7 @@ genoGOE_4 <- function(pdf = FALSE) {
 
 }
 
-# Figure 5: From carbon oxidation state to relative stability diagrams
+# Figure 5: Relative stabilities of proteins as a function of environmental variables
 genoGOE_5 <- function(pdf = FALSE, panel = NULL) {
 
   if(is.null(panel)) {
@@ -794,8 +794,8 @@ genoGOE_5 <- function(pdf = FALSE, panel = NULL) {
   if("E" %in% panels) {
     sulfur_affinity(panel)
     if(is.null(panel)) {
-      ## Overlay stability boundaries for other genomes
-      #stability_comparison(res = res, add = TRUE, pHlim = c(3, 10), alpha.f = 0.8, Eh7_las = 0)
+      # Add Eh7 axis
+      stability_comparison(add = TRUE, pHlim = c(3, 10), Eh7_las = 0, datasets = numeric())
       title(main = hyphen.in.pdf("All proteins in genomes with specific S-cycling genes"), font.main = 1)
       label.figure("E", font = 2, cex = 1.6)
     } else {
