@@ -34,6 +34,8 @@ genoGOE_1 <- function(pdf = FALSE) {
   # Read protein data
   aa <- read.csv(system.file("RefDB/organisms/UP000000625_83333.csv.xz", package = "JMDplots"))
   Zc <- Zc(aa)
+  # Print median Zc
+  print(paste("Median Zc for E. coli proteins:", round(median(Zc), 3)))
 
   # Get 90% interval
   q90 <- quantile(Zc, probs = c(0.05, 0.95))
@@ -433,9 +435,9 @@ genoGOE_4 <- function(pdf = FALSE) {
   # Function to add Zc labels with red/blue colors 20250625
   label_y_axis <- function() {
     # Add tick labels with red/blue colors 20250625
-    axis(2, at = seq(-0.18, -0.12, 0.02), col.axis = 4)
-    axis(2, at = -0.20)
-    axis(2, at = seq(-0.28, -0.22, 0.02), col.axis = 2)
+    axis(2, at = seq(-0.14, -0.12, 0.02), col.axis = 4)
+    axis(2, at = -0.16)
+    axis(2, at = seq(-0.28, -0.18, 0.02), col.axis = 2)
     # Add axis label
     mtext(cplab$Zc, side = 2, line = 3.5, las = 0, cex = par("cex"))
   }
