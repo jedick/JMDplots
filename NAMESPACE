@@ -69,8 +69,6 @@ export(
   "orp16S_T1", "orp16S_S2",
   # utogig paper 20220602, 20220605
   "utogig4", "utogigS1",
-  # utilities 20220930
-  "hyphen.in.pdf",
   # orp16S paper 20221001
   "orp16S_D3",
   # orp16S paper 20221230
@@ -145,7 +143,9 @@ importFrom("CHNOSZ",
   "T.units", "check.GHS", "retrieve", "stack_mosaic",
   "lT", "lP", "lNaCl", "lS", "lex",
   # for protein.equil() 20250511
-  "basis.elements"
+  "basis.elements",
+  # Added to JMDplots on 20220930; moved to CHNOSZ on 20251208
+  "hyphen.in.pdf"
 )
 
 # Imports from canprot
