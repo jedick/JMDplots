@@ -358,7 +358,7 @@ carrollite_5 <- function(res = 500, pdf = FALSE) {
     lNaCl(mNaCl),
     lS(Stot)
   )
-  legend("topleft", legend = lex(l), bty = "n", cex = 1.2, xpd = NA)
+  legend("topleft", legend = l, bty = "n", cex = 1.2, xpd = NA)
   legend <- as.expression(c("Cu solubility", "Co solubility", quote(H[2]*O~"stability limit")))
   legend("bottomleft", legend = legend, col = c(2, "blue2", 1), lty = c(1, 1, 3), lwd = 1.2, bty = "n", cex = 1.2, xpd = NA)
   #legend("left", "Formation of linnaeite\nis NOT suppressed", text.font = 3, bty = "n")
@@ -515,7 +515,7 @@ carrollite_8 <- function(res, pdf = FALSE) {
     lNaCl(mNaCl),
     lS(Stot)
   )
-  legend("topright", legend = lex(l), bty = "n", cex = 1.4, xpd = NA)
+  legend("topright", legend = l, bty = "n", cex = 1.4, xpd = NA)
 
   legend <- as.expression(c("Bn-Cct", "Ccp-Bn", quote(H[2]*O~"stability limit")))
   legend("bottomleft", legend = legend, col = c(4, 3, 1), lty = c(1, 1, 3), lwd = 1.5, bty = "n", cex = 1.4, xpd = NA)
@@ -795,7 +795,7 @@ carrollite_S6 <- function(res = 500, pdf = FALSE) {
     lNaCl(Co$mNaCl),
     lS(Co$Stot)
   )
-  legend("topleft", legend = lex(l), bty = "n")
+  legend("topleft", legend = l, bty = "n")
   legend("left", c("Co minerals only", "Cu minerals only", "Co or Cu minerals incl. carrollite"),
     lty = c(1, 1, 1), col = c(4, 2, 1), bty = "n")
 

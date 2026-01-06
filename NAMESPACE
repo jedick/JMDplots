@@ -141,7 +141,7 @@ importFrom("CHNOSZ",
   # carrollite
   # NOTE: add import of "logB.to.OBIGT" after CHNOSZ 2.2.0 is released 20250122
   "T.units", "check.GHS", "retrieve", "stack_mosaic",
-  "lT", "lP", "lNaCl", "lS", "lex",
+  "lT", "lP", "lNaCl", "lS",
   # for protein.equil() 20250511
   "basis.elements",
   # Added to JMDplots on 20220930; moved to CHNOSZ on 20251208
