@@ -93,7 +93,7 @@ chnosz104 <- function(pdf = FALSE) {
   basis("H2S", -6)
   basis("Cl-", -0.7)
   species(c("copper", "cuprite", "tenorite", "chalcocite", "covellite"))
-  sargs <- list(species = c("CuCl", "CuCl2-", "CuCl3-2", "CuCl+", "CuCl2", "CuCl3-", "CuCl4-2"), add = TRUE)
+  sargs <- list(species = c("CuCl", "CuCl2-", "CuCl+", "CuCl2", "CuCl3-", "CuCl4-2"), add = TRUE)
   do.call(species, sargs)
   T <- 200
   res <- 500
@@ -269,17 +269,17 @@ chnosz107 <- function(pdf = FALSE) {
   basis(delete = TRUE)
   ## first calculation: as in SUPCRT92
   add.OBIGT("SUPCRT92") # gets kaolinite and boehmite from HDNB78
-  r1 <- subcrt(c("boehmite", "H2O", "SiO2", "kaolinite"), c(-1, -0.5, -1, 0.5), T = T, P = 1000, exceed.Ttr = TRUE) 
-  # we need exceed.Ttr = TRUE because the T limit for boehmite is 500 K (Helgeson et al., 1978)
+  r1 <- subcrt(c("boehmite", "H2O", "SiO2", "kaolinite"), c(-1, -0.5, -1, 0.5), T = T, P = 1000) 
+  # we need warn.Ttr = TRUE because the T limit for boehmite is 500 K (Helgeson et al., 1978)
   ## second calculation: CHNOSZ default
   # kaolinite from Berman, 1988
   # boehmite from Hemingway et al., 1991
   # SiO2 from Apps and Spycher, 2004
   reset()
-  r2 <- subcrt(c("boehmite", "H2O", "SiO2", "kaolinite"), c(-1, -0.5, -1, 0.5), T = T, P = 1000, exceed.Ttr = TRUE) 
+  r2 <- subcrt(c("boehmite", "H2O", "SiO2", "kaolinite"), c(-1, -0.5, -1, 0.5), T = T, P = 1000) 
   ## third calculation: get SiO2(aq) from SHS89
   add.OBIGT("SiO2")
-  r3 <- subcrt(c("boehmite", "H2O", "SiO2", "kaolinite"), c(-1, -0.5, -1, 0.5), T = T, P = 1000, exceed.Ttr = TRUE) 
+  r3 <- subcrt(c("boehmite", "H2O", "SiO2", "kaolinite"), c(-1, -0.5, -1, 0.5), T = T, P = 1000) 
   ## log activity of SiO2 is -ve logK
   lines(T, -r1$out$logK, col = "blue1", lty = 2)
   lines(T, -r2$out$logK, lwd = 1.5)
@@ -529,7 +529,7 @@ chnosz10S3 <- function(pdf = FALSE) {
   # set logact to -1 so total activity is 1 (total number of C is 10)
   species(1:4, -1)
   # calculate equilibrium assemblages over a range of logaH2
-  a <- affinity(H2 = c(-10, -6, 101), exceed.Ttr = TRUE)
+  a <- affinity(H2 = c(-10, -6, 101))
   e <- equilibrate(a)
   # plot the equilibrium values and reference state
   diagram(e, names = "")

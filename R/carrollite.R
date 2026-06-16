@@ -265,7 +265,7 @@ carrollite_5 <- function(res = 500, pdf = FALSE) {
     species(icr)
     sout <- solubility(iaq, bases = bases, pH = pH, O2 = O2, T = T, P = P, IS = NaCl$IS, in.terms.of = metal)
     # Convert to ppm
-    sout <- convert(sout, "ppm")
+    sout <- convert(sout$aqueous, "ppm")
     # Specify contour levels
     levels <- c(1, 10, 100)
     # Color for solubility contours
@@ -762,7 +762,7 @@ carrollite_S6 <- function(res = 500, pdf = FALSE) {
 
     species(icr)
     sout <- solubility(iaq, bases = bases, pH = pH, O2 = O2, T = T, P = P, IS = NaCl$IS, in.terms.of = metal)
-    diagram(sout, add = TRUE, col = col, levels = logm_metal)
+    diagram(sout$aqueous, add = TRUE, col = col, levels = logm_metal)
 
   }
 
